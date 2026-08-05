@@ -1,0 +1,197 @@
+{
+  "deck_id": "mats-mechanics-of-materials-stress-and-strain",
+  "subject": "mats",
+  "track": "mechanics-of-materials",
+  "module": "stress-and-strain",
+  "card_type": "knowledge",
+  "sources": ["ee-stress-strain-2020"],
+  "cards": [
+    {
+      "id": "stress",
+      "title": "Stress",
+      "front": "What is stress in mechanics of materials?",
+      "difficulty": 1,
+      "prerequisites": [],
+      "layers": {
+        "direct_answer": "Stress is internal force distributed over an area within a loaded body.",
+        "concept_expansion": "External loads create internal forces that maintain equilibrium. Stress describes how those internal forces are distributed over an imagined internal surface and has SI units of Pa = N/m².",
+        "worked_or_physical_example": "Pulling a straight bar creates internal forces across each cross-section; force divided by cross-sectional area gives the average normal stress.",
+        "boundaries_and_misconceptions": "Stress is not the same as applied force. The same force can create different stress when area changes.",
+        "connections_and_memory": "Load → internal force → force distribution → stress.",
+        "transfer_prompt": "Two bars carry the same axial force but one has half the area. Compare their average stresses.",
+        "mastery_evidence": "Define stress, explain why area matters, and apply the idea to a new loaded member.",
+        "sources": ["ee-stress-strain-2020"]
+      }
+    },
+    {
+      "id": "normal-stress",
+      "title": "Normal Stress",
+      "front": "What is normal stress, and how is average normal stress calculated?",
+      "difficulty": 1,
+      "prerequisites": ["stress"],
+      "layers": {
+        "direct_answer": "Normal stress acts perpendicular to a surface; for uniform axial loading, σ = F/A.",
+        "concept_expansion": "Normal stress can be tensile or compressive. Sigma (σ) denotes normal stress.",
+        "worked_or_physical_example": "A centered tensile force on a prismatic bar produces approximately uniform tensile normal stress over a section away from load-introduction regions.",
+        "boundaries_and_misconceptions": "F/A is an average-stress relation; local stress can be nonuniform.",
+        "connections_and_memory": "Perpendicular → normal; parallel → shear.",
+        "transfer_prompt": "If a circular bar's diameter doubles under the same axial force, how does average normal stress change?",
+        "mastery_evidence": "Identify tensile vs compressive normal stress, write σ = F/A, and reason correctly about area changes.",
+        "sources": ["ee-stress-strain-2020"]
+      }
+    },
+    {
+      "id": "shear-stress",
+      "title": "Shear Stress",
+      "front": "What is shear stress?",
+      "difficulty": 1,
+      "prerequisites": ["stress"],
+      "layers": {
+        "direct_answer": "Shear stress is stress whose force component acts parallel to the surface of interest; average direct shear is often τ = F/A.",
+        "concept_expansion": "Tau (τ) denotes shear stress and describes tangential internal-force distribution.",
+        "worked_or_physical_example": "A force trying to slide one face of a block relative to another produces shear stress.",
+        "boundaries_and_misconceptions": "Shear-stress fields are not always uniform, so τ = F/A may be only an average.",
+        "connections_and_memory": "Parallel → shear; it pairs with shear strain and shear modulus.",
+        "transfer_prompt": "Why does a pin in double shear have a different effective shear area from a pin in single shear?",
+        "mastery_evidence": "Recognize shear loading and distinguish it from normal loading.",
+        "sources": ["ee-stress-strain-2020"]
+      }
+    },
+    {
+      "id": "strain",
+      "title": "Strain",
+      "front": "What is strain?",
+      "difficulty": 1,
+      "prerequisites": [],
+      "layers": {
+        "direct_answer": "Strain measures deformation relative to the body's original dimensions.",
+        "concept_expansion": "Normal strain measures relative length change; shear strain measures angular distortion. Strain is dimensionless.",
+        "worked_or_physical_example": "A 1 m bar that elongates 1 mm has normal strain 0.001.",
+        "boundaries_and_misconceptions": "Strain is not displacement; the same displacement can represent different strain for different original sizes.",
+        "connections_and_memory": "Stress describes internal loading; strain describes deformation.",
+        "transfer_prompt": "Two bars each elongate 1 mm, but one is twice as long. Which has greater strain?",
+        "mastery_evidence": "Explain why strain is normalized deformation and why it is dimensionless.",
+        "sources": ["ee-stress-strain-2020"]
+      }
+    },
+    {
+      "id": "normal-strain",
+      "title": "Normal Strain",
+      "front": "How is normal strain defined?",
+      "difficulty": 1,
+      "prerequisites": ["strain"],
+      "layers": {
+        "direct_answer": "Normal strain is ε = ΔL/L₀.",
+        "concept_expansion": "Epsilon (ε) measures extension or contraction relative to original length.",
+        "worked_or_physical_example": "A 500 mm specimen extending by 0.5 mm has ε = 0.001 = 0.1%.",
+        "boundaries_and_misconceptions": "Engineering strain uses the original length; true strain is a different large-deformation measure.",
+        "connections_and_memory": "Normal strain pairs with normal stress in Hooke's law.",
+        "transfer_prompt": "A 2 m member shortens by 2 mm. Determine the strain magnitude.",
+        "mastery_evidence": "Compute ε from ΔL and L₀ and interpret its meaning.",
+        "sources": ["ee-stress-strain-2020"]
+      }
+    },
+    {
+      "id": "shear-strain",
+      "title": "Shear Strain",
+      "front": "What does shear strain measure?",
+      "difficulty": 1,
+      "prerequisites": ["strain"],
+      "layers": {
+        "direct_answer": "Shear strain measures angular distortion: change in angle between material lines that were initially perpendicular.",
+        "concept_expansion": "Gamma (γ) is dimensionless and for small deformation can be related to lateral displacement divided by height.",
+        "worked_or_physical_example": "The top of a rectangular block shifts sideways while the bottom stays fixed, skewing its right angles.",
+        "boundaries_and_misconceptions": "Shear strain is deformation, not shear stress; small-angle formulas are approximations.",
+        "connections_and_memory": "Shear stress τ causes shear strain γ; linear elastic shear uses τ = Gγ.",
+        "transfer_prompt": "Two blocks have equal lateral top displacement but one is twice as tall. Which has greater small-angle shear strain?",
+        "mastery_evidence": "Describe shear strain geometrically and distinguish γ from τ.",
+        "sources": ["ee-stress-strain-2020"]
+      }
+    },
+    {
+      "id": "stress-strain-curve",
+      "title": "Stress–Strain Curve",
+      "front": "What does a stress–strain curve represent?",
+      "difficulty": 2,
+      "prerequisites": ["stress", "strain"],
+      "layers": {
+        "direct_answer": "A stress–strain curve shows how a material's stress relates to its strain during a mechanical test.",
+        "concept_expansion": "It can reveal stiffness, elastic behavior, yielding/plasticity, strength, ductility, and toughness depending on material and test.",
+        "worked_or_physical_example": "A tensile test records load and elongation, converts them to stress and strain, and plots the result.",
+        "boundaries_and_misconceptions": "Different materials and test definitions produce different curves.",
+        "connections_and_memory": "Initial slope leads to Young's modulus; later regions lead to strength, ductility, toughness, and failure.",
+        "transfer_prompt": "Given two curves with different initial slopes and failure strains, compare stiffness and ductility qualitatively.",
+        "mastery_evidence": "Explain both axes and extract at least two material behaviors from a curve.",
+        "sources": ["ee-stress-strain-2020"]
+      }
+    },
+    {
+      "id": "elastic-vs-plastic-deformation",
+      "title": "Elastic vs Plastic Deformation",
+      "front": "What is the difference between elastic and plastic deformation?",
+      "difficulty": 2,
+      "prerequisites": ["stress-strain-curve"],
+      "layers": {
+        "direct_answer": "Elastic deformation is recoverable after unloading; plastic deformation leaves permanent deformation.",
+        "concept_expansion": "A material may respond elastically at lower stress and accumulate permanent strain after its elastic range is exceeded.",
+        "worked_or_physical_example": "A lightly stretched spring returns to shape; a paper clip bent far enough remains bent.",
+        "boundaries_and_misconceptions": "Plastic deformation does not mean the material is literally a plastic/polymer.",
+        "connections_and_memory": "The distinction underlies yielding, springback, and permanent forming.",
+        "transfer_prompt": "A specimen unloads to zero stress but retains nonzero strain. What occurred?",
+        "mastery_evidence": "Use unloading behavior to distinguish elastic from plastic response.",
+        "sources": ["ee-stress-strain-2020"]
+      }
+    },
+    {
+      "id": "hookes-law",
+      "title": "Hooke's Law",
+      "front": "What does Hooke's law state for uniaxial linear elasticity?",
+      "difficulty": 2,
+      "prerequisites": ["normal-stress", "normal-strain", "stress-strain-curve"],
+      "layers": {
+        "direct_answer": "Within the linear elastic range, σ = Eε.",
+        "concept_expansion": "E is Young's modulus, the proportionality constant and slope of the linear elastic stress–strain curve.",
+        "worked_or_physical_example": "If E = 200 GPa and ε = 0.001, then σ = 200 MPa while the response remains linear elastic.",
+        "boundaries_and_misconceptions": "Hooke's law is not valid through arbitrary plastic or nonlinear deformation.",
+        "connections_and_memory": "It connects stress and strain through material stiffness.",
+        "transfer_prompt": "If strain doubles while behavior stays linear elastic, what happens to stress?",
+        "mastery_evidence": "State the equation, define its symbols, and identify when it should not be used.",
+        "sources": ["ee-stress-strain-2020"]
+      }
+    },
+    {
+      "id": "shear-modulus",
+      "title": "Shear Modulus",
+      "front": "What is the shear modulus?",
+      "difficulty": 2,
+      "prerequisites": ["shear-stress", "shear-strain"],
+      "layers": {
+        "direct_answer": "Shear modulus G measures stiffness in shear; for linear elastic shear, τ = Gγ.",
+        "concept_expansion": "A larger G means more shear stress is required for the same shear strain.",
+        "worked_or_physical_example": "Under equal τ, a material with larger G experiences less γ.",
+        "boundaries_and_misconceptions": "Shear modulus is stiffness, not shear strength.",
+        "connections_and_memory": "G is the shear analogue of Young's modulus E.",
+        "transfer_prompt": "Material A has twice the G of B under equal τ. Compare their shear strains.",
+        "mastery_evidence": "Explain what increasing G means physically and use τ = Gγ qualitatively.",
+        "sources": ["ee-stress-strain-2020"]
+      }
+    },
+    {
+      "id": "stress-state",
+      "title": "Stress State",
+      "front": "What is a stress state at a point?",
+      "difficulty": 3,
+      "prerequisites": ["normal-stress", "shear-stress"],
+      "layers": {
+        "direct_answer": "A stress state is the complete set of normal and shear stress components acting at a point.",
+        "concept_expansion": "The components observed on a plane depend on plane orientation; in 3D the state is represented by a second-order stress tensor.",
+        "worked_or_physical_example": "An inclined cut through an axially loaded bar generally has both normal and shear components.",
+        "boundaries_and_misconceptions": "Changing plane orientation changes the components used to describe the same physical stress state; it does not create new loading.",
+        "connections_and_memory": "Foundation for stress transformation, principal stresses, Mohr's circle, and failure theories.",
+        "transfer_prompt": "Why can an axially loaded bar show shear stress on an inclined plane without an externally applied shear force?",
+        "mastery_evidence": "Explain orientation dependence of stress components while preserving the idea of one underlying stress state.",
+        "sources": ["ee-stress-strain-2020"]
+      }
+    }
+  ]
+}
