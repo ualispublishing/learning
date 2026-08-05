@@ -1,0 +1,61 @@
+{
+  "deck_id": "mats-mechanics-of-materials-youngs-modulus",
+  "subject": "mats",
+  "track": "mechanics-of-materials",
+  "module": "youngs-modulus",
+  "card_type": "knowledge",
+  "sources": ["ee-youngs-modulus-2019", "ee-stress-strain-2020"],
+  "cards": [
+    {
+      "id": "youngs-modulus",
+      "title": "Young's Modulus",
+      "front": "What is Young's modulus?",
+      "difficulty": 2,
+      "prerequisites": ["stress", "normal-stress", "strain", "normal-strain", "hookes-law"],
+      "layers": {
+        "direct_answer": "Young's modulus E measures tensile/compressive stiffness; in uniaxial linear elasticity, E = σ/ε, so σ = Eε.",
+        "concept_expansion": "E is the slope of the stress–strain curve in its linear elastic region. Because strain is dimensionless, E has the same units as stress, usually Pa or GPa.",
+        "worked_or_physical_example": "Steel has a much larger E than polystyrene, so under the same elastic stress steel strains much less.",
+        "boundaries_and_misconceptions": "Young's modulus measures stiffness, not strength. High E does not imply high yield or fracture strength.",
+        "connections_and_memory": "Steeper initial stress–strain slope → larger E → less elastic strain for a given stress.",
+        "transfer_prompt": "Two equal-geometry bars experience the same elastic stress. If one material has twice E, compare their strains.",
+        "mastery_evidence": "Define E, identify it from a stress–strain curve, state its units, and use it to compare elastic deformation.",
+        "sources": ["ee-youngs-modulus-2019", "ee-stress-strain-2020"]
+      }
+    },
+    {
+      "id": "stiffness-vs-strength",
+      "title": "Stiffness vs Strength",
+      "front": "How are stiffness and strength different?",
+      "difficulty": 2,
+      "prerequisites": ["youngs-modulus", "stress-strain-curve"],
+      "layers": {
+        "direct_answer": "Stiffness is resistance to elastic deformation; strength is the stress a material can withstand before a specified failure such as yielding or fracture.",
+        "concept_expansion": "Young's modulus quantifies elastic stiffness, while yield and ultimate strengths describe stress limits. They are distinct material properties.",
+        "worked_or_physical_example": "A material can have a steep elastic slope but fail at a comparatively low stress, while another can be less stiff yet survive higher stress.",
+        "boundaries_and_misconceptions": "A stronger material is not automatically stiffer, and a high Young's modulus does not tell you its yield strength.",
+        "connections_and_memory": "Stiffness asks 'how much will it deform?'; strength asks 'how much stress can it survive?'.",
+        "transfer_prompt": "A design already has ample failure margin but must deflect less. Which property should you prioritize?",
+        "mastery_evidence": "Choose correctly between modulus and strength for deformation-limited versus failure-limited design requirements.",
+        "sources": ["ee-youngs-modulus-2019"]
+      }
+    },
+    {
+      "id": "atomic-origin-of-youngs-modulus",
+      "title": "Atomic Origin of Young's Modulus",
+      "front": "What controls Young's modulus at the atomic scale?",
+      "difficulty": 3,
+      "prerequisites": ["youngs-modulus"],
+      "layers": {
+        "direct_answer": "Young's modulus is governed primarily by how strongly interatomic bonds resist small changes in atomic spacing.",
+        "concept_expansion": "Near equilibrium spacing, stretching or compressing bonds requires force. The local stiffness of the interatomic potential appears macroscopically as elastic modulus.",
+        "worked_or_physical_example": "Materials whose bonds resist small spacing changes strongly generally require more stress to produce the same small elastic strain.",
+        "boundaries_and_misconceptions": "Young's modulus is a material property, not a specimen-geometry property. Geometry affects structural stiffness, which is different.",
+        "connections_and_memory": "Atomic bond stiffness → material modulus E → component deformation together with loading and geometry.",
+        "transfer_prompt": "Why can two same-sized bars have different elastic elongations under the same force even before either yields?",
+        "mastery_evidence": "Connect microscopic bond response to macroscopic elastic stiffness and distinguish material modulus from structural stiffness.",
+        "sources": ["ee-youngs-modulus-2019"]
+      }
+    }
+  ]
+}
