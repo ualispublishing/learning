@@ -3,119 +3,143 @@
 This file is mandatory reading for agents working on the Arabic track.
 
 ## Goal
-Build the user from their current Arabic foundation to functional CEFR C2 mastery, with Modern Standard Arabic (MSA) as the core. The system is audio-first, but not audio-only.
+Build from the current Arabic foundation toward functional CEFR C2 mastery, with Modern Standard Arabic (MSA) as the core. The system is audio-first, source-diverse, checkpoint-based, and flashcard-integrated.
+
+The active few-month program is **not a promise of C2**. It is an intensive, complete beginner-to-independent foundation intended to reach roughly strong A2 / early B1 if the learner passes the checkpoints. Continue from that state toward B2, C1 and C2 based on demonstrated proficiency rather than calendar time.
 
 ## Active-track commands
 When Arabic is active:
-- `complete` = mark the current lesson complete, process its learning content, generate/deepen cards, update spaced reinforcement, and advance to the next item.
+- `complete` = mark the exact current media item complete, process its content into the learning system, update spaced reinforcement, and advance to the next active free item.
 - `finished` = same as `complete`.
-- `what's next` = read repo state and return the exact next lesson.
+- `what's next` = read repo state and return the exact next media/lesson.
 Never infer completion from chat memory when repo state is available.
 
-## Course staging
-Do not treat all Arabic sources as one flat playlist.
+## Active course
+`playlists/audio/arabic/courses/free-intensive-20-week/`
 
-### Course 1 — active beginner foundation
-`playlists/audio/arabic/courses/gateway-to-arabic-book-2/playlist.json`
+Files:
+- `plan.json` — 20-week intensive curriculum and checkpoints.
+- `playlist.json` — ordered media queue; extend/resolve exact URLs as items become due.
 
-Use **Gateway to Arabic Book 2** as the coherent English-supported MSA foundation. It is designed for learners in a non-Arabic-speaking environment and introduces vocabulary/grammar with short, simple explanations before immersion.
+### Active free source stack
+1. **ANU Press — Marhaba!**: primary 23-lesson MSA curriculum spine with multimedia/audio and four-skill development.
+2. **University of Wisconsin–Madison MSA resources**: audio-first retrieval, alternate speakers and targeted reinforcement.
+3. **Michigan State University Elementary Arabic I/II OER**: structured vocabulary, grammar, reading, writing, audio and interactive practice.
+4. **LQToronto / Madina Books**: parallel English-supported grammar clinic and Quranic/Classical bridge; do not let it replace communicative MSA input/output.
+5. **DLI GLOSS Arabic-MSA**: activate after beginner foundations for graded listening/reading transfer toward intermediate and advanced comprehension.
 
-The user already has basic script familiarity, so begin at Book 2 rather than automatically restarting the alphabet. Insert targeted reading/pronunciation repair only when evidence shows it is needed.
+All active sources must remain free/public/open unless the user explicitly asks to add paid material.
 
-### Course 2 — deferred immersion
-`playlists/audio/arabic/courses/al-jazeera-immersion/playlist.json`
+## Deferred/optional area
+Gateway to Arabic and Al Jazeera are intentionally outside the active course:
+- `playlists/audio/arabic/deferred/gateway-to-arabic-book-2/playlist.json`
+- `playlists/audio/arabic/deferred/al-jazeera-immersion/playlist.json`
+- source metadata: `sources/arabic-deferred.json`
 
-Al Jazeera Learning Arabic is **not** an introductory source. Treat it as a separate Arabic-first immersion course after Course 1.
+Do not surface either course as `next` unless the user explicitly restores it.
 
-Do not surface Al Jazeera as `next`, do not use it for required beginner reinforcement, and do not rely on previously saved Al Jazeera media URLs while Course 1 is active.
+Al Jazeera remains useful later as Arabic-first immersion, but its media must be re-searched and verified before reuse because previously stored media may be unavailable.
 
-Unlock Course 2 only when:
-1. Gateway Book 2 foundation is complete; and
-2. the learner passes an A1 readiness checkpoint showing they can follow simple fully-Arabic instructions/dialogues without constant English translation.
+### ArabicPod101 exclusion
+Do **not** use ArabicPod101 or ArabicPod101-branded websites, YouTube videos, audio, transcripts, playlists, or derived source IDs unless the user explicitly asks to restore that source family.
 
-At activation, re-search and verify every Al Jazeera media item because previously saved media may be missing/unavailable. If the media remains unavailable, substitute another graded Arabic-first MSA source while preserving the immersion-course role.
+## MSA vs dialect
+MSA is the active backbone.
 
-## Media-source policy
-During Course 1, prefer beginner-friendly, directly consumable media with English support:
-1. the verified Gateway to Arabic Book 2 YouTube series;
-2. free public video/audio from educational institutions;
-3. university/open educational resources with audio;
-4. simple public YouTube MSA explanations for reinforcement.
+MSU contains some Egyptian Arabic conversation modules. These must be:
+- skipped in the required MSA core, or
+- intentionally used as optional dialect exposure with `variety: egyptian`.
 
-Once the immersion gate is passed, gradually increase Arabic-only graded media.
-
-### Temporarily excluded source family
-Do **not** use ArabicPod101 or any ArabicPod101-branded website, YouTube channel, video, audio, transcript, lesson, playlist, or derived source ID anywhere in the active Arabic curriculum, source registry, progress state, review queue, or flashcard citations. This exclusion remains in force until the user explicitly asks to restore that source family.
-
-The first two completed lessons are preserved as concept milestones rather than provider-specific completions.
-
-## Variants
-Keep these distinct:
-1. MSA — primary backbone for formal speech, media, reading, writing, cross-region communication.
-2. Conversational dialect — add as a parallel branch after a stable A2/B1 MSA base. Do not silently substitute dialect content for MSA.
-3. Quranic/Classical Arabic — light exposure may begin early; systematic grammar/lexicon becomes a parallel branch from A2/B1 onward.
-
-Every lesson/card/source must record variety: `msa`, `classical`, `quranic`, or a named dialect.
+Never merge Egyptian forms into MSA cards without labeling them.
 
 ## Audio-first standard
-Target roughly 70–85% of consumption time as audio-capable material.
-Each media item records `visual_dependency`: none/helpful/periodic/high.
+Target approximately 75–120 minutes of audio-capable work on full study days within the active intensive plan.
 
-For an audio/video lesson:
-1. first pass — listen before relying on text when feasible;
+For audio/video lessons:
+1. listen before leaning heavily on text when feasible;
 2. retrieve what was understood;
-3. second pass — shadow/repeat;
-4. inspect Arabic text/visuals and English explanation as needed;
-5. final pass — listen again with less support.
+3. replay and shadow/repeat;
+4. inspect Arabic text and English explanation as needed;
+5. produce a response, transformation, summary, or example;
+6. finish with another less-supported listen.
 
-Do not force blind Arabic-only listening at the beginning when it prevents comprehension. Reduce English scaffolding progressively instead.
+Do not make beginner comprehension artificially difficult by hiding all support. English scaffolding should decrease gradually as proficiency rises.
 
-At B1+, authentic listening must grow steadily. At C1/C2, learner-targeted English explanations become supplemental rather than the core.
+## Daily intensive template
+Default full study day:
+- 45–60 min core curriculum;
+- 30–45 min listening/shadowing;
+- 25–35 min spaced flashcards;
+- 25–40 min speaking/writing production;
+- 20–30 min grammar clinic on selected days.
 
-## CEFR advancement
-Do not equate playlist completion with CEFR mastery. A level is passed only when the learner can demonstrate reception, production, interaction, and mediation consistent with CEFR descriptors.
+Study six days per week by default. One lighter day may use only spaced review and passive/graded listening.
 
-### A1
-Understand and use highly frequent expressions, identify basic personal information, produce short rehearsed exchanges.
+## Spaced media reinforcement
+Use `docs/SPACED_REINFORCEMENT_STANDARD.md`.
 
-### A2
-Handle routine exchanges, describe immediate environment and past/routine events in simple connected language.
+Do not study one topic once and abandon it. Important concepts should recur through:
+1. primary explanation;
+2. near-transfer;
+3. alternate speaker/source;
+4. delayed listening/reading encounter;
+5. mixed synthesis with newer material.
 
-### B1
-Understand main points of clear standard Arabic, narrate experiences, explain simple reasons, follow ordinary news/topics with support.
-
-### B2
-Follow extended standard discourse, interact with reasonable fluency, discuss abstract topics, produce clear detailed explanations.
-
-### C1
-Understand demanding extended discourse and implicit meaning, use Arabic flexibly for academic/professional/social purposes, produce well-structured extended speech and writing.
-
-### C2
-Understand virtually all forms of speech/text with minimal strain, including specialized and implicit content; synthesize and reformulate sources; express subtle distinctions spontaneously, precisely, and appropriately across registers.
+Early rolling target: roughly 70% new material / 30% reinforcement, moving toward 60/40 as input becomes more authentic.
 
 ## Completion processing
-For every completed lesson:
-1. Read `progress/current.json` and the active course file.
-2. Verify the exact media actually completed.
-3. Extract main ideas.
+For every completed lesson/media item:
+1. Read `progress/current.json`, the active course playlist, and review queue.
+2. Verify the exact media completed.
+3. Extract only the main/high-utility concepts.
 4. Search existing Arabic cards for semantic overlap.
-5. Add only high-utility new vocabulary, grammar, phrase, pronunciation, or listening distinctions.
-6. Deepen existing cards when the concept already exists.
-7. Keep Arabic-script-only fronts and complete eight-layer backs.
-8. Store public/open source IDs.
-9. Update active-course progress and spaced-reinforcement exposure counts.
-10. Check whether a beginner-appropriate spaced review item is due.
-11. Otherwise advance to the next Gateway course video.
-12. Do not select Al Jazeera while Course 1 is active.
-13. Update `resolved_media.json`, `progress/tracks/arabic-msa-to-c2.json`, `progress/current.json`, `progress/review_queue.json`, and `NEXT.md`.
-14. Keep paused MATS progress untouched.
+5. Add only useful new vocabulary, grammar, phrase, pronunciation, or listening distinctions.
+6. Deepen existing cards when a concept already exists.
+7. Keep **Arabic-script-only fronts** and complete eight-layer backs.
+8. Record free/open source IDs.
+9. Update concept exposure counts and review due-state.
+10. If a spaced reinforcement item is due, select it when pedagogically appropriate.
+11. Otherwise advance to the next item in the active free intensive playlist/plan.
+12. Update `resolved_media.json`, `progress/tracks/arabic-msa-to-c2.json`, `progress/current.json`, `progress/review_queue.json`, and `NEXT.md`.
+13. Keep paused MATS progress untouched.
 
-## Arabic flashcards
-Use `docs/ARABIC_FLASHCARD_STANDARD.md`. Do not dump every lesson word into cards. Prefer high-frequency, generative language. Arabic review-card fronts remain Arabic-script-only; all translations, definitions, examples, metadata, and eight layers belong on the back.
+## Flashcards
+Use `docs/ARABIC_FLASHCARD_STANDARD.md`.
 
-## Roadmap
-Canonical long-range path:
-`playlists/audio/arabic/msa-to-c2/roadmap.json`
+Front:
+- Arabic script only.
 
-A1 course manifest:
-`playlists/audio/arabic/msa-to-c2/a1-foundations/playlist.json`
+Back:
+- English/Urdu/French translation where applicable;
+- Arabic definition;
+- English definition;
+- root/pattern when useful and reliable;
+- synonyms where useful;
+- Arabic/English example;
+- grammar/register/variety metadata;
+- prerequisites/tags/source IDs;
+- all eight Knowledge Atlas layers.
+
+Do not generate a card merely because a word appeared once. Prefer high-frequency, generative, repeatedly useful language.
+
+## Checkpoints
+Playlist completion does not equal CEFR mastery.
+
+### A1 exit
+Can handle routine personal information and simple exchanges, form basic questions/statements, understand familiar slow/clear MSA, and read/write short vocalized material.
+
+### A2 exit
+Can understand the main point of familiar clear MSA, describe self/family/study/routine, narrate simple past events, and write connected short paragraphs.
+
+### B1 bridge
+Can follow clear standard speech on familiar subjects and produce connected summaries, descriptions and opinions without heavy scripting.
+
+### B2/C1/C2
+Progressively increase DLI GLOSS difficulty and authentic MSA sources. C2 requires near-complete comprehension across registers and precise spontaneous production/synthesis; it is not unlocked by a fixed number of weeks.
+
+## Repository pointers
+- Long-range roadmap: `playlists/audio/arabic/msa-to-c2/roadmap.json`
+- Active course: `playlists/audio/arabic/courses/free-intensive-20-week/`
+- Active source registry: `sources/arabic.json`
+- Deferred source registry: `sources/arabic-deferred.json`
+- Active progress: `progress/tracks/arabic-msa-to-c2.json`
