@@ -1,37 +1,39 @@
 {
-  "version": 4,
+  "version": 5,
   "purpose": "Cross-track spaced reinforcement queue. Review events reference canonical concepts; they do not duplicate cards.",
   "active_subject": "arabic",
   "policy": "docs/SPACED_REINFORCEMENT_STANDARD.md",
   "arabic": {
     "track_id": "arabic-msa-to-c2",
+    "active_course_id": "arabic-foundation-gateway-book-2",
     "due": [],
     "scheduled": [
       {
         "review_id": "ar-a1-greetings-r1",
         "concepts": ["greetings", "how-are-you", "time-specific-greetings", "thank-you"],
-        "after_completed_playlist_order": 3,
-        "target_playlist_order": 4,
-        "representation": "different-speaker video + retrieval before listening",
-        "media_title": "أَهْلًا بِكُمْ في مَقْهَى الجَزِيرَة (الحلقة 1)",
+        "after_completed_active_course_order": 3,
+        "representation": "different-speaker beginner dialogue + retrieval before listening",
+        "media_title": "Common Greetings in Arabic",
+        "provider": "University of Wisconsin–Madison",
+        "url": "https://www.youtube.com/watch?v=WMfXLzmHYbQ",
         "status": "scheduled"
       },
       {
-        "review_id": "ar-a1-number-address-near-transfer",
-        "concepts": ["dual-address", "plural-address", "we-pronoun"],
-        "after_completed_playlist_order": 4,
-        "target_playlist_order": 5,
-        "representation": "pronoun-system explanation with pronunciation",
-        "media_title": "Arabic Pronouns: I, You, He, She, etc.",
+        "review_id": "ar-a1-pronouns-r1",
+        "concepts": ["singular-address", "dual-address", "plural-address", "we-pronoun"],
+        "after_completed_active_course_order": 8,
+        "representation": "beginner English-supported pronoun explanation",
+        "media_title": "Arabic Pronouns: Learn How to Say I, You, He, She, etc.",
+        "provider": "The New Arabic",
+        "url": "https://www.youtube.com/watch?v=6Nc4eZl5120",
         "status": "scheduled"
-      },
+      }
+    ],
+    "deferred_reinforcement": [
       {
-        "review_id": "ar-a1-greetings-r2",
-        "concepts": ["greetings", "introductions", "origin", "gender-address"],
-        "target_playlist_order": 6,
-        "representation": "contextual dialogue",
-        "media_title": "تَشَرَّفْنَا — Nice to meet you",
-        "status": "scheduled"
+        "course_id": "arabic-al-jazeera-immersion",
+        "status": "locked until Gateway foundation completion + readiness checkpoint",
+        "purpose": "Use Arabic-only re-presentations as later transfer/immersion, not beginner first exposure."
       }
     ],
     "exposure_counts": {
@@ -52,7 +54,8 @@
       "failed_retrieval": "move concept to an earlier review opportunity",
       "successful_transfer": "lengthen interval and vary representation",
       "same_source_back_to_back": false,
-      "prefer_different_representation": true
+      "prefer_different_representation": true,
+      "no_arabic_only_immersion_during_foundation": true
     }
   },
   "mats": {
