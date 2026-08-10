@@ -1,39 +1,48 @@
 {
-  "version": 5,
+  "version": 6,
   "purpose": "Cross-track spaced reinforcement queue. Review events reference canonical concepts; they do not duplicate cards.",
   "active_subject": "arabic",
   "policy": "docs/SPACED_REINFORCEMENT_STANDARD.md",
   "arabic": {
     "track_id": "arabic-msa-to-c2",
-    "active_course_id": "arabic-foundation-gateway-book-2",
+    "active_course_id": "arabic-free-intensive-20-week",
     "due": [],
     "scheduled": [
       {
         "review_id": "ar-a1-greetings-r1",
         "concepts": ["greetings", "how-are-you", "time-specific-greetings", "thank-you"],
-        "after_completed_active_course_order": 3,
-        "representation": "different-speaker beginner dialogue + retrieval before listening",
-        "media_title": "Common Greetings in Arabic",
+        "after_completed_active_course_order": 5,
+        "target_course_order": 6,
+        "representation": "different-speaker dialogue + retrieval before viewing",
+        "media_title": "Common Greetings in Arabic — delayed revisit",
         "provider": "University of Wisconsin–Madison",
-        "url": "https://www.youtube.com/watch?v=WMfXLzmHYbQ",
+        "url": "https://wisc.pb.unizin.org/lctlresources/chapter/common-greetings-in-arabic/",
+        "youtube_url": "https://www.youtube.com/watch?v=WMfXLzmHYbQ",
         "status": "scheduled"
       },
       {
-        "review_id": "ar-a1-pronouns-r1",
-        "concepts": ["singular-address", "dual-address", "plural-address", "we-pronoun"],
-        "after_completed_active_course_order": 8,
-        "representation": "beginner English-supported pronoun explanation",
-        "media_title": "Arabic Pronouns: Learn How to Say I, You, He, She, etc.",
-        "provider": "The New Arabic",
-        "url": "https://www.youtube.com/watch?v=6Nc4eZl5120",
-        "status": "scheduled"
+        "review_id": "ar-a1-gender-possession-r1",
+        "concepts": ["masculine-feminine", "possessives", "family-vocabulary"],
+        "trigger": "after 4-6 later active-course items following first mastery",
+        "representation": "alternate explanation or production task from ANU/Wisconsin/MSU",
+        "status": "dynamic"
+      },
+      {
+        "review_id": "ar-a1-introduction-r1",
+        "concepts": ["self-introduction", "name", "origin"],
+        "trigger": "after 2-5 later items following Wisconsin introduction lesson",
+        "representation": "new recording/output prompt from MSU/ANU rather than immediate replay",
+        "status": "dynamic"
       }
     ],
     "deferred_reinforcement": [
       {
-        "course_id": "arabic-al-jazeera-immersion",
-        "status": "locked until Gateway foundation completion + readiness checkpoint",
-        "purpose": "Use Arabic-only re-presentations as later transfer/immersion, not beginner first exposure."
+        "path": "playlists/audio/arabic/deferred/gateway-to-arabic-book-2/playlist.json",
+        "status": "do not schedule automatically"
+      },
+      {
+        "path": "playlists/audio/arabic/deferred/al-jazeera-immersion/playlist.json",
+        "status": "do not schedule automatically"
       }
     ],
     "exposure_counts": {
@@ -55,7 +64,8 @@
       "successful_transfer": "lengthen interval and vary representation",
       "same_source_back_to_back": false,
       "prefer_different_representation": true,
-      "no_arabic_only_immersion_during_foundation": true
+      "active_sources_must_be_free_open": true,
+      "deferred_courses_are_never_auto_selected": true
     }
   },
   "mats": {
