@@ -6,7 +6,7 @@
   "current_stage": "A1",
   "playlist": "playlists/audio/arabic/msa-to-c2/a1-foundations/playlist.json",
   "resolved_media": "playlists/audio/arabic/msa-to-c2/resolved_media.json",
-  "source_preference": "YouTube/public audio-video first",
+  "source_preference": "public/open, source-diverse, audio-first",
   "active_flashcards": [
     "subjects/arabic/a1-foundations/greetings/knowledge.json",
     "subjects/arabic/a1-foundations/greetings-and-plural-address/knowledge.json"
@@ -19,30 +19,27 @@
   "completed_lessons": [
     {
       "order": 1,
-      "title": "Hello. How Are You?",
-      "provider": "ArabicPod101",
-      "url": "https://www.arabicpod101.com/lesson/newbie-1-hello-how-are-you?lp=189",
+      "title": "Greetings / How are you? — concept milestone",
       "completed_on": "2026-08-10",
+      "source_status": "prior source retired; replacement validation sources registered",
       "flashcards": "subjects/arabic/a1-foundations/greetings/knowledge.json"
     },
     {
       "order": 2,
-      "title": "Good Morning, How Are You All?",
-      "provider": "ArabicPod101",
-      "url": "https://www.arabicpod101.com/lesson/newbie-2-good-morning-how-are-you-all?lp=189",
+      "title": "Morning/evening greetings + dual/plural address — concept milestone",
       "completed_on": "2026-08-10",
+      "source_status": "prior source retired; replacement validation sources registered",
       "flashcards": "subjects/arabic/a1-foundations/greetings-and-plural-address/knowledge.json"
     }
   ],
   "next": {
     "order": 3,
-    "title": "Learn Arabic - How to Introduce Yourself in Arabic",
-    "provider": "Learn Arabic with ArabicPod101.com",
-    "platform": "youtube",
-    "url": "https://www.youtube.com/watch?v=ityVW2gR0Rs",
+    "title": "في مَرْكَزِ تَعْلِيمِ اللُّغَةِ العَرَبِيَّةِ — At the Arabic language teaching center",
+    "provider": "Al Jazeera Learning Arabic",
+    "platform": "web video",
+    "url": "https://learning.aljazeera.net/en/generallanguage/%D9%81%D9%8A-%D9%85%D8%B1%D9%83%D8%B2-%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A7%D9%84%D9%84%D8%BA%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9",
     "role": "core",
-    "curriculum_goal": "introductions and stating one's name",
-    "coverage_gap_to_preserve": "asking another person's name if not covered in this video"
+    "curriculum_goal": "introductions, names, occupations, countries, masculine/feminine forms"
   },
   "reinforcement": {
     "policy": "docs/SPACED_REINFORCEMENT_STANDARD.md",
@@ -61,15 +58,13 @@
     },
     "next_media_reinforcement": {
       "playlist_order": 4,
-      "title": "Top 25 Arabic Phrases",
-      "reinforces": ["greetings", "how-are-you", "introductions", "thank-you"],
-      "note": "Resolve to a verified YouTube/public-media version before presenting it."
+      "title": "أَهْلًا بِكُمْ في مَقْهَى الجَزِيرَة (الحلقة 1)",
+      "reinforces": ["greetings", "morning-greetings", "nice-to-meet-you"]
     },
     "near_transfer": {
       "playlist_order": 5,
-      "title": "Who Are You All?",
-      "reinforces": ["plural-address", "plural-pronouns"],
-      "note": "Resolve to a verified YouTube/public-media source before presenting it."
+      "title": "Arabic Pronouns: I, You, He, She, etc.",
+      "reinforces": ["dual-address", "plural-address", "pronoun-system"]
     }
   }
 }
