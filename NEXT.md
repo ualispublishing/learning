@@ -1,48 +1,45 @@
 # Next Lesson
 
-## ACTIVE — Arabic: Free Intensive MSA Foundation
+## ACTIVE — ArabicPod101 Newbie Season 1
 
-Current course: **Arabic MSA — Free Intensive 20-Week Course**
-
-Completed prior concept milestones:
-1. ✅ Greetings / How are you?
-2. ✅ Morning/evening greetings + dual/plural address
+Completed:
+1. ✅ **Hello. How Are You?**
+2. ✅ **Good Morning, How Are You All?**
 
 ## Next
-▶ **Greeting and Self Introduction in Arabic — Learning Arabic with Angela**
+3. ▶ **What’s Your Name? — ArabicPod101**
 
-- Direct video: https://www.youtube.com/watch?v=nks7OnPPpBQ
-- Reference page: https://www.learningarabicwithangela.com/post/greeting-and-self-introduction-in-arabic
-- Medium: direct YouTube video/audio lesson
-- Instruction: spoken Arabic with English translation/subtitles and pronunciation support
-- Role: core beginner listening + production
-- Goal: reinforce greetings, introduce yourself, practice basic questions/answers, and produce the phrases aloud.
+- URL: https://www.arabicpod101.com/lesson/newbie-3-whats-your-name
+- Medium: short audio lesson with dialogue, English explanation and transcript
+- Variety: Standard Arabic
+- Goal: ask someone's name and answer with your own name
 
-The previous Wisconsin link was incorrectly classified as a primary lesson. It is an interactive flashcard page with recordings, so it is now treated only as optional reinforcement rather than the next lesson.
+Key new forms:
+- **مَا اسْمُكَ؟** — What's your name? (to a man)
+- **مَا اسْمُكِ؟** — What's your name? (to a woman)
+- **اِسْمِي ...** — My name is ...
+- **ـكَ / ـكِ** — masculine/feminine second-person possessive contrast
 
-### Before watching
-Retrieve from memory:
-- مَرْحَبًا
-- كَيْفَ حَالُكَ؟ / كَيْفَ حَالُكِ؟
-- صَبَاحُ الْخَيْر / مَسَاءُ الْخَيْر
-- بِخَيْر، الْحَمْدُ لله
+### Before listening
+Retrieve aloud from the first two lessons:
+**مَرْحَبًا → كَيْفَ حَالُكَ؟ / كَيْفَ حَالُكِ؟ → بِخَيْر، الْحَمْدُ لله → صَبَاحُ الْخَيْر → كَيْفَ حَالُكُمَا؟ / كَيْفَ حَالُكُمْ؟ → شُكْرًا**
 
-Then attempt **اِسْمِي ...** before the video.
+### Listening protocol
+1. Listen to the dialogue once without trying to memorize everything.
+2. Replay and shadow the Arabic.
+3. Pause before the English explanation when useful and retrieve the meaning yourself.
+4. Use the transcript/grammar explanation to clarify the suffix difference.
+5. Say your own name with **اِسْمِي ...** and practice asking both masculine and feminine forms.
+6. Finish with one final listen.
 
-### Learning protocol
-1. Listen/watch once for the overall lesson.
-2. Replay and repeat the Arabic aloud.
-3. Pause before translations and retrieve meaning yourself.
-4. Personalize the introduction with your own information.
-5. End with a 30–60 second introduction without reading.
+When you say **complete** or **finished**:
+- process this exact ArabicPod101 lesson;
+- add/deepen useful Arabic cards only, with Arabic-only fronts and complete eight-layer backs;
+- update the pleasant audio-review companion;
+- update spaced reinforcement;
+- live-verify and advance to ArabicPod101 lesson 4.
 
-### Media-quality rule
-Primary `next` items must be actual audio/video/multimedia lessons that are comfortable to consume. Flashcard pages and quiz-style pages may be used as reinforcement, but should not be surfaced as primary lessons unless explicitly requested.
-
-When you say **complete** or **finished**, process this exact video, update/deepen the Arabic flashcards and their audio-review scripts, update spaced review, and advance to the next free active-course item.
-
-### Deferred area
-Gateway and Al Jazeera remain outside the active sequence and are not auto-selected.
+The free/open 20-week course remains preserved as secondary reinforcement and later expansion material. Gateway and Al Jazeera remain deferred unless explicitly restored.
 
 ### Paused track
 MATS / Efficient Engineer remains preserved and resumes at **Understanding Poisson's Ratio**.
