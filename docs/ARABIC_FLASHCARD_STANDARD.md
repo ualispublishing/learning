@@ -5,6 +5,16 @@ Arabic cards extend the repository's general layered-card standard with language
 ## Core principle
 Cards must train retrieval and production, not passive recognition alone. Prefer a smaller set of high-utility cards that generalize to many sentences.
 
+## Front/back display contract
+For active Arabic review cards:
+- `front` must contain Arabic script only.
+- No English question, translation, transliteration, definition, hint, or explanatory label belongs on the front.
+- Tashkeel is allowed and encouraged at A1/A2 when it helps pronunciation.
+- Contrast cards may place two or more Arabic forms on the front, e.g. `أَنْتَ / أَنْتِ` or `كَيْفَ حَالُكُمَا؟ / كَيْفَ حَالُكُمْ؟`.
+- All translations, explanations, definitions, roots, grammar/register notes, examples, metadata, and layered learning material belong on the back.
+
+The default retrieval direction is Arabic -> meaning/use. Alternate directions such as meaning -> Arabic production, audio recognition, cloze, dictation, and sentence production are scheduled as review representations rather than replacing the canonical front.
+
 ## Card classes
 
 ### 1. Lexeme cards
@@ -12,6 +22,7 @@ Use for high-frequency words or words central to the lesson.
 
 Recommended fields:
 - `id`
+- `front`
 - `lemma_ar`
 - `vocalized_ar`
 - `part_of_speech`
@@ -33,27 +44,19 @@ Recommended fields:
 Do not force a root/pattern onto loanwords or forms where it adds little value.
 
 ### 2. Grammar cards
-Front should prompt a single rule, contrast, transformation, or production task.
+The front should be the Arabic contrast or Arabic form being retrieved, not an English instruction.
 Examples:
-- How do you attach “my” to a singular noun?
-- Contrast `أنتَ` and `أنتِ`.
-- Turn a statement into a formal yes/no question with `هل`.
+- `أَنْتَ / أَنْتِ`
+- `ـكَ / ـكِ`
+- `كَيْفَ حَالُكُمَا؟ / كَيْفَ حَالُكُمْ؟`
 
-Include:
-- shortest rule;
-- one clean example;
-- one contrasting example where valuable;
-- common error;
-- transfer prompt.
+The back should explain the rule, include one clean example, a contrast where valuable, a common error, and a transfer prompt.
 
 ### 3. Phrase / chunk cards
-Use for expressions best learned as units, especially greetings, discourse markers, collocations, formulaic religious/cultural expressions, and high-frequency frames.
-Store register and variety.
+Use for expressions best learned as units, especially greetings, discourse markers, collocations, formulaic religious/cultural expressions, and high-frequency frames. Store register and variety.
 
 ### 4. Pronunciation/listening cards
-Use sparingly for contrasts that repeatedly cause comprehension or production errors.
-Prefer minimal-pair or listen-and-identify prompts.
-Record phoneme/feature and an audio source.
+Use sparingly for contrasts that repeatedly cause comprehension or production errors. Prefer minimal-pair or listen-and-identify prompts. Record phoneme/feature and an audio source.
 
 ### 5. Practice cards
 Put sentence transformation, dictation, cloze production, parsing, and extended response tasks in `practice.json`, not `knowledge.json`.
@@ -81,7 +84,7 @@ Create a card if the item is:
 Do not create a card merely because a word appears once.
 
 ## Transliteration
-Arabic script is canonical. Transliteration may exist as a temporary pronunciation aid at A1/A2, but should not be the primary front after the learner can read the script.
+Arabic script is canonical. Transliteration may exist as temporary backside pronunciation support at A1/A2, but never as the canonical front.
 
 ## Tashkeel
 Early cards should preserve enough tashkeel to support correct pronunciation. Gradually reduce nonessential tashkeel at B1+ while retaining it where ambiguity matters.
