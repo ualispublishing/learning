@@ -6,19 +6,22 @@ Current stage: **A1 Foundations**
 
 Completed:
 1. ✅ **Hello. How Are You?** — ArabicPod101
+2. ✅ **Good Morning, How Are You All?** — ArabicPod101
 
 Next:
-2. ▶ **Good Morning, How Are You All?** — ArabicPod101
-   - https://www.arabicpod101.com/lesson/newbie-2-good-morning-how-are-you-all?lp=189
+3. ▶ **What’s Your Name?** — ArabicPod101
+   - https://www.arabicpod101.com/lesson/newbie-3-whats-your-name
    - Medium: audio lesson
-   - Variety: Standard Arabic / MSA learning track
-   - Role: core + near-transfer from lesson 1
+   - Variety: Standard Arabic learning dialogue
+   - Role: core + introduction/self-identification
 
 Before listening, retrieve aloud without notes:
-- مَرْحَبًا
-- كَيْفَ حالُكَ؟ / كَيْفَ حالُكِ؟
-- بِخَيْر، الْحَمْدُ لله
-- وَأَنْتَ؟ / وَأَنْتِ؟
+- صَبَاحُ الْخَيْر / مَسَاءُ الْخَيْر
+- كَيْفَ حَالُكَ؟ / كَيْفَ حَالُكِ؟
+- كَيْفَ حَالُكُمَا؟ / كَيْفَ حَالُكُمْ؟
+- نَحْنُ بِخَيْر
+- كُلُّ شَيْءٍ بِخَيْر
+- شُكْرًا
 
 Listening protocol:
 1. First pass: audio without transcript.
@@ -28,13 +31,12 @@ Listening protocol:
 5. Final pass: audio again without English.
 
 When the user says **complete** or **finished**:
-- read `ARABIC.md` and the Arabic review contract;
-- mark lesson 2 complete;
+- mark lesson 3 complete;
 - extract only genuinely useful new concepts;
-- create/deepen active cards with **Arabic-script-only `front` fields** and the complete layered information on the back;
+- create/deepen active cards with Arabic-script-only `front` fields and complete eight-layer backs;
 - update sources and spaced-reinforcement exposure counts;
-- select the next core or due reinforcement item;
-- update playlist, `progress/tracks/arabic-msa-to-c2.json`, `progress/current.json`, `progress/review_queue.json`, and this file;
+- because lesson 3 completes the first spacing gap, evaluate/select the scheduled reinforcement item at playlist order 4;
+- update playlist, progress files, review queue, and this file;
 - return the exact next media URL.
 
 ### Paused track
