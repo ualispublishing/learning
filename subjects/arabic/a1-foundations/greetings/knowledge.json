@@ -12,13 +12,10 @@
     "retrieval_direction": "Arabic -> meaning/use first; alternate representations are scheduled separately."
   },
   "lesson_status": "completed",
-  "source_lesson": {
-    "id": "arabicpod101-newbie-1-hello-how-are-you",
-    "title": "Hello. How Are You?",
-    "provider": "ArabicPod101",
-    "url": "https://www.arabicpod101.com/lesson/newbie-1-hello-how-are-you?lp=189",
-    "variety": "msa",
-    "cefr": "A1"
+  "source_basis": {
+    "type": "replacement-validation",
+    "sources": ["uw-msa-greetings-listening", "uw-common-greetings", "aj-arabic-center"],
+    "note": "Concepts were learned before the public-source migration; these public/open sources validate and reinforce the same material."
   },
   "cards": [
     {
@@ -31,7 +28,7 @@
       "lemma_ar": "مرحبا",
       "vocalized_ar": "مَرْحَبًا",
       "part_of_speech": "greeting/interjection",
-      "variety": "msa",
+      "variety": "msa/common",
       "cefr_estimate": "A1",
       "translations": {"en": "hello; hi", "ur": "سلام؛ ہیلو", "fr": "bonjour ; salut"},
       "definition_ar": "تَحِيَّةٌ عامَّةٌ تُقالُ عِندَ لِقاءِ شَخصٍ.",
@@ -44,16 +41,16 @@
       "difficulty": 1,
       "prerequisites": [],
       "tags": ["greeting", "high-frequency", "msa"],
-      "sources": ["arabicpod101-newbie-1-hello-how-are-you"],
+      "sources": ["uw-msa-greetings-listening", "uw-common-greetings", "aj-arabic-center"],
       "layers": {
         "direct_answer": "مَرْحَبًا = hello/hi.",
-        "concept_expansion": "A common Standard Arabic greeting not tied to a specific time of day.",
+        "concept_expansion": "A common, time-neutral greeting used across Arabic-speaking contexts.",
         "worked_or_physical_example": "مَرْحَبًا يا لَيْلَى. — Hello, Layla.",
-        "boundaries_and_misconceptions": "By itself مرحبا commonly functions as ‘hello’; do not restrict it to the English sense of ‘welcome.’",
-        "connections_and_memory": "Connect it with أَهْلًا and السَّلَامُ عَلَيْكُمْ as other greeting choices.",
-        "transfer_prompt": "Enter an evening study group and greet everyone with a time-neutral MSA greeting.",
-        "mastery_evidence": "Recognize مَرْحَبًا in audio, give its meaning, and use it naturally in a new greeting.",
-        "sources": ["arabicpod101-newbie-1-hello-how-are-you"]
+        "boundaries_and_misconceptions": "Do not restrict مرحبا to the English sense of ‘welcome’; alone it commonly means ‘hello.’",
+        "connections_and_memory": "Connect it with أَهْلًا and السَّلَامُ عَلَيْكُمْ as alternate greetings.",
+        "transfer_prompt": "Enter an evening study group and greet everyone with a time-neutral Arabic greeting.",
+        "mastery_evidence": "Recognize مَرْحَبًا in audio, give its meaning, and use it naturally without translation support.",
+        "sources": ["uw-msa-greetings-listening", "uw-common-greetings", "aj-arabic-center"]
       }
     },
     {
@@ -70,7 +67,7 @@
       "cefr_estimate": "A1",
       "translations": {"en": "how", "ur": "کیسے / کیسی", "fr": "comment"},
       "definition_ar": "اسْمُ اسْتِفْهامٍ يُسْتَعْمَلُ لِلسُّؤالِ عَنِ الحالِ أَوِ الطَّريقَةِ.",
-      "definition_en": "An interrogative word used to ask about condition or manner: ‘how.’",
+      "definition_en": "An interrogative used to ask about condition or manner: ‘how.’",
       "root": null,
       "pattern": null,
       "synonyms_ar": [],
@@ -79,16 +76,16 @@
       "difficulty": 1,
       "prerequisites": [],
       "tags": ["question-word", "high-frequency", "msa"],
-      "sources": ["arabicpod101-newbie-1-hello-how-are-you"],
+      "sources": ["uw-msa-greetings-listening", "uw-common-greetings"],
       "layers": {
         "direct_answer": "كَيْفَ = how.",
-        "concept_expansion": "It is a high-frequency interrogative. In كَيْفَ حالُكَ؟ it asks about a person’s state or condition.",
+        "concept_expansion": "A high-frequency question word used for manner or condition.",
         "worked_or_physical_example": "كَيْفَ حالُكِ؟ — How are you? (to a woman)",
-        "boundaries_and_misconceptions": "Do not force a word-for-word English translation onto every Arabic expression; كيف حالك is idiomatically ‘How are you?’",
-        "connections_and_memory": "Question word → كَيْفَ; condition/state → حال.",
-        "transfer_prompt": "Use كَيْفَ to ask how someone is, then form one other simple ‘how’ question.",
-        "mastery_evidence": "Recognize كَيْفَ in speech and use it productively rather than only translating it.",
-        "sources": ["arabicpod101-newbie-1-hello-how-are-you"]
+        "boundaries_and_misconceptions": "Arabic expressions need not map word-for-word to English; كيف حالك is idiomatically ‘How are you?’",
+        "connections_and_memory": "كَيْفَ asks ‘how’; حال refers to state or condition.",
+        "transfer_prompt": "Use كَيْفَ in a greeting question, then make one other simple ‘how’ question.",
+        "mastery_evidence": "Recognize كَيْفَ in connected speech and use it productively.",
+        "sources": ["uw-msa-greetings-listening", "uw-common-greetings"]
       }
     },
     {
@@ -104,7 +101,7 @@
       "variety": "msa",
       "cefr_estimate": "A1",
       "translations": {"en": "you (masculine singular) / you (feminine singular)", "ur": "تم / آپ (مذکر)؛ تم / آپ (مونث)", "fr": "tu/vous (masc. sing.) / tu/vous (fém. sing.)"},
-      "definition_ar": "أَنْتَ ضَميرُ المُخاطَبِ المُفْرَدِ المُذَكَّرِ، وأَنْتِ ضَميرُ المُخاطَبَةِ المُفْرَدَةِ المُؤَنَّثَةِ.",
+      "definition_ar": "أَنْتَ لِلْمُخاطَبِ المُفْرَدِ المُذَكَّرِ، وَأَنْتِ لِلْمُخاطَبَةِ المُفْرَدَةِ المُؤَنَّثَةِ.",
       "definition_en": "أنتَ addresses one male; أنتِ addresses one female.",
       "root": null,
       "pattern": null,
@@ -114,16 +111,16 @@
       "difficulty": 1,
       "prerequisites": [],
       "tags": ["pronoun", "gender", "msa"],
-      "sources": ["arabicpod101-newbie-1-hello-how-are-you"],
+      "sources": ["uw-common-greetings"],
       "layers": {
-        "direct_answer": "أَنْتَ = singular masculine ‘you’; أَنْتِ = singular feminine ‘you.’",
-        "concept_expansion": "MSA marks the gender of a singular addressee in the second-person pronoun; the final vowel distinguishes the forms.",
+        "direct_answer": "أَنْتَ = masculine singular ‘you’; أَنْتِ = feminine singular ‘you.’",
+        "concept_expansion": "MSA explicitly marks the gender of a singular addressee; the final vowel distinguishes these forms.",
         "worked_or_physical_example": "وَأَنْتَ؟ to a man; وَأَنْتِ؟ to a woman.",
-        "boundaries_and_misconceptions": "English/Urdu/French translation can hide the Arabic gender distinction, so retrieve the Arabic form directly.",
-        "connections_and_memory": "The same contrast reappears in attached suffixes such as ـكَ / ـكِ.",
+        "boundaries_and_misconceptions": "Translations can hide this gender distinction, so learn the Arabic contrast directly.",
+        "connections_and_memory": "The same distinction appears in attached suffixes ـكَ / ـكِ.",
         "transfer_prompt": "Say ‘And you?’ first to one man and then to one woman.",
-        "mastery_evidence": "Produce and recognize both forms without relying on translation.",
-        "sources": ["arabicpod101-newbie-1-hello-how-are-you"]
+        "mastery_evidence": "Produce and recognize both forms automatically and choose by addressee gender.",
+        "sources": ["uw-common-greetings"]
       }
     },
     {
@@ -139,8 +136,8 @@
       "variety": "msa",
       "cefr_estimate": "A1",
       "translations": {"en": "How are you? (man / woman)", "ur": "آپ کیسے ہیں؟ / آپ کیسی ہیں؟", "fr": "Comment vas-tu ? / Comment allez-vous ?"},
-      "definition_ar": "سُؤالٌ عَنِ الحالِ؛ تُسْتَعْمَلُ ـكَ لِلمُذَكَّرِ وَـكِ لِلمُؤَنَّثِ.",
-      "definition_en": "A question about someone's condition; use -ka for a male addressee and -ki for a female addressee.",
+      "definition_ar": "سُؤالٌ عَنِ الحالِ؛ ـكَ لِلْمُذَكَّرِ وَـكِ لِلْمُؤَنَّثِ.",
+      "definition_en": "A question about condition; use -ka for a male addressee and -ki for a female addressee.",
       "root": "ح-و-ل",
       "pattern": null,
       "synonyms_ar": ["كَيْفَ أَنْتَ؟", "كَيْفَ أَنْتِ؟"],
@@ -149,16 +146,16 @@
       "difficulty": 1,
       "prerequisites": ["ar-a1-kayfa", "ar-a1-anta-anti"],
       "tags": ["greeting", "gender", "possessive-suffix", "msa"],
-      "sources": ["arabicpod101-newbie-1-hello-how-are-you"],
+      "sources": ["uw-msa-greetings-listening", "uw-common-greetings"],
       "layers": {
         "direct_answer": "To a man: كَيْفَ حالُكَ؟ To a woman: كَيْفَ حالُكِ؟",
-        "concept_expansion": "حال means state/condition. The attached suffix means ‘your’: ـكَ masculine singular, ـكِ feminine singular.",
+        "concept_expansion": "حال means state/condition; the attached suffix means ‘your’: ـكَ masculine and ـكِ feminine.",
         "worked_or_physical_example": "كَيْفَ حالُكَ يا مُحَمَّد؟ / كَيْفَ حالُكِ يا مَرْيَم؟",
-        "boundaries_and_misconceptions": "Without full vowel marks, كيف حالك can look identical in writing; pronunciation depends on the addressee.",
-        "connections_and_memory": "أَنْتَ/أَنْتِ and ـكَ/ـكِ encode the same masculine/feminine addressee contrast.",
-        "transfer_prompt": "Ask an imagined man and woman how they are, changing only what gender requires.",
-        "mastery_evidence": "Produce both forms with the correct ending and explain why they differ.",
-        "sources": ["arabicpod101-newbie-1-hello-how-are-you"]
+        "boundaries_and_misconceptions": "Without tashkeel the written forms may look identical; pronunciation still changes with the addressee.",
+        "connections_and_memory": "أَنْتَ/أَنْتِ and ـكَ/ـكِ encode the same gender contrast.",
+        "transfer_prompt": "Ask an imagined man and woman how they are, changing the suffix correctly.",
+        "mastery_evidence": "Produce both forms correctly and explain the suffix contrast.",
+        "sources": ["uw-msa-greetings-listening", "uw-common-greetings"]
       }
     },
     {
@@ -171,11 +168,11 @@
       "lemma_ar": "بخير",
       "vocalized_ar": "بِخَيْر",
       "part_of_speech": "prepositional phrase",
-      "variety": "msa",
+      "variety": "msa/common",
       "cefr_estimate": "A1",
       "translations": {"en": "fine; well", "ur": "ٹھیک؛ بخیریت", "fr": "bien"},
-      "definition_ar": "تَعْبيرٌ يَعْني أَنَّ الشَّخْصَ في حالٍ جَيِّدَةٍ.",
-      "definition_en": "An expression meaning that someone is doing well or is in a good condition.",
+      "definition_ar": "تَعْبيرٌ يَدُلُّ عَلَى أَنَّ الشَّخْصَ في حالٍ جَيِّدَةٍ.",
+      "definition_en": "An expression meaning that someone is doing well.",
       "root": "خ-ي-ر",
       "pattern": null,
       "synonyms_ar": ["جَيِّد", "بِصِحَّةٍ جَيِّدَةٍ"],
@@ -183,17 +180,17 @@
       "example_en": "I'm fine.",
       "difficulty": 1,
       "prerequisites": ["ar-a1-kayfa-haluka-haluki"],
-      "tags": ["response", "condition", "high-frequency", "msa"],
-      "sources": ["arabicpod101-newbie-1-hello-how-are-you"],
+      "tags": ["response", "condition", "high-frequency"],
+      "sources": ["uw-msa-greetings-listening", "uw-common-greetings"],
       "layers": {
         "direct_answer": "بِخَيْر = fine/well.",
-        "concept_expansion": "It expresses being in a good state and can stand as a concise response without an explicit pronoun.",
+        "concept_expansion": "A concise response indicating a good state or condition.",
         "worked_or_physical_example": "كَيْفَ حالُكِ؟ — بِخَيْر، الْحَمْدُ لله.",
-        "boundaries_and_misconceptions": "Do not require an explicit أنا every time; Arabic can answer simply بِخَيْر.",
-        "connections_and_memory": "The root خ-ي-ر carries ideas of goodness and well-being.",
-        "transfer_prompt": "Someone asks how you are; answer naturally without copying English full-sentence structure.",
-        "mastery_evidence": "Recognize بِخَيْر instantly in audio and use it as a natural response.",
-        "sources": ["arabicpod101-newbie-1-hello-how-are-you"]
+        "boundaries_and_misconceptions": "An explicit أنا is not required in a short answer; بِخَيْر can stand alone.",
+        "connections_and_memory": "The root خ-ي-ر carries the sense of goodness/well-being.",
+        "transfer_prompt": "Answer ‘How are you?’ naturally with a short Arabic response.",
+        "mastery_evidence": "Recognize بِخَيْر at natural speed and use it without translating first.",
+        "sources": ["uw-msa-greetings-listening", "uw-common-greetings"]
       }
     },
     {
@@ -206,29 +203,29 @@
       "lemma_ar": "الحمد لله",
       "vocalized_ar": "الْحَمْدُ لله",
       "part_of_speech": "formulaic phrase",
-      "variety": "msa",
+      "variety": "msa/common",
       "cefr_estimate": "A1",
       "translations": {"en": "praise be to God; thank God", "ur": "اللہ کا شکر ہے", "fr": "Dieu soit loué ; grâce à Dieu"},
-      "definition_ar": "عِبارَةُ حَمْدٍ وَشُكْرٍ لله، وتُسْتَعْمَلُ كَثيرًا لِلتَّعْبيرِ عَنِ الامْتِنانِ.",
-      "definition_en": "A formula of praise and thanks to God, commonly used to express gratitude.",
+      "definition_ar": "عِبارَةُ حَمْدٍ وَشُكْرٍ لله، تُسْتَعْمَلُ كَثيرًا في الحَياةِ اليَوْمِيَّةِ.",
+      "definition_en": "A phrase of praise and thanks to God, frequent in everyday Arabic.",
       "root": "ح-م-د",
       "pattern": null,
-      "synonyms_ar": ["شُكْرًا لله", "الحَمْدُ لله رَبِّ العالَمينَ"],
-      "example_ar": "بِخَيْر، الْحَمْدُ لله.",
+      "synonyms_ar": ["شُكْرًا لله"],
+      "example_ar": "أَنا بِخَيْر، الْحَمْدُ لله.",
       "example_en": "I'm fine, thank God.",
       "difficulty": 1,
       "prerequisites": [],
-      "tags": ["religious-expression", "culture", "high-frequency", "msa"],
-      "sources": ["arabicpod101-newbie-1-hello-how-are-you"],
+      "tags": ["religious-expression", "culture", "high-frequency"],
+      "sources": ["uw-msa-greetings-listening"],
       "layers": {
         "direct_answer": "الْحَمْدُ لله = praise be to God / thank God.",
-        "concept_expansion": "In this lesson it follows بِخَيْر as a common expression of gratitude for well-being; it is used in many other everyday and religious contexts.",
+        "concept_expansion": "It expresses praise and gratitude to God and occurs naturally in many everyday responses.",
         "worked_or_physical_example": "بِخَيْر، الْحَمْدُ لله. — Fine, thank God.",
-        "boundaries_and_misconceptions": "It is not merely a generic equivalent of English ‘thanks’; the praise/thanks is directed to God.",
-        "connections_and_memory": "Root ح-م-د links حَمْد and names such as مُحَمَّد and أَحْمَد.",
-        "transfer_prompt": "Use الْحَمْدُ لله after answering how you are, then think of another natural context for it.",
-        "mastery_evidence": "Understand it in audio, explain its meaning, and use it appropriately rather than as a generic filler.",
-        "sources": ["arabicpod101-newbie-1-hello-how-are-you"]
+        "boundaries_and_misconceptions": "It is not merely a generic equivalent of ‘thanks’; the praise/thanks is directed to God.",
+        "connections_and_memory": "The root ح-م-د connects to حَمْد and names such as مُحَمَّد and أَحْمَد.",
+        "transfer_prompt": "Use الْحَمْدُ لله after stating that you are well.",
+        "mastery_evidence": "Understand it immediately in audio and use it appropriately in a new context.",
+        "sources": ["uw-msa-greetings-listening"]
       }
     },
     {
@@ -244,8 +241,8 @@
       "variety": "msa",
       "cefr_estimate": "A1",
       "translations": {"en": "And you? (man / woman)", "ur": "اور آپ؟", "fr": "Et toi ? / Et vous ?"},
-      "definition_ar": "سُؤالٌ قَصيرٌ يُعيدُ السُّؤالَ إلى المُخاطَبِ؛ أَنْتَ لِلْمُذَكَّرِ وَأَنْتِ لِلْمُؤَنَّثِ.",
-      "definition_en": "A short phrase that returns the question to the other person; أنتَ is masculine and أنتِ feminine.",
+      "definition_ar": "سُؤالٌ قَصيرٌ يُعيدُ السُّؤالَ إِلى المُخاطَبِ.",
+      "definition_en": "A short phrase that returns a question to the other person.",
       "root": null,
       "pattern": null,
       "synonyms_ar": [],
@@ -254,16 +251,16 @@
       "difficulty": 1,
       "prerequisites": ["ar-a1-anta-anti", "ar-a1-bikhayr"],
       "tags": ["conversation", "pronoun", "gender", "msa"],
-      "sources": ["arabicpod101-newbie-1-hello-how-are-you"],
+      "sources": ["uw-common-greetings"],
       "layers": {
         "direct_answer": "To a man: وَأَنْتَ؟ To a woman: وَأَنْتِ؟",
-        "concept_expansion": "وَ means ‘and,’ followed by the gendered second-person singular pronoun.",
+        "concept_expansion": "وَ means ‘and’; the pronoun changes with the addressee’s gender.",
         "worked_or_physical_example": "بِخَيْر، الْحَمْدُ لله. وَأَنْتَ؟",
-        "boundaries_and_misconceptions": "Do not pronounce both forms the same; the final vowel marks the addressee’s gender in MSA.",
-        "connections_and_memory": "This reinforces the same أَنْتَ/أَنْتِ distinction used throughout second-person grammar.",
-        "transfer_prompt": "Answer ‘I'm fine, thank God, and you?’ first to a man and then to a woman.",
-        "mastery_evidence": "Produce both versions smoothly as part of a greeting exchange.",
-        "sources": ["arabicpod101-newbie-1-hello-how-are-you"]
+        "boundaries_and_misconceptions": "The two forms are not pronounced identically; the final vowel matters in MSA.",
+        "connections_and_memory": "This reuses the same أَنْتَ / أَنْتِ contrast found in second-person grammar.",
+        "transfer_prompt": "Answer ‘I’m fine, and you?’ first to a man and then to a woman.",
+        "mastery_evidence": "Produce both versions smoothly inside a greeting exchange.",
+        "sources": ["uw-common-greetings"]
       }
     },
     {
@@ -271,34 +268,34 @@
       "card_class": "phrase",
       "topic": "arabic",
       "subtopic": "a1-greetings",
-      "title": "السَّلَامُ عَلَيْكُمْ ↔ وَعَلَيْكُمُ السَّلَام",
+      "title": "السَّلَامُ عَلَيْكُمْ / وَعَلَيْكُمُ السَّلَام",
       "front": "السَّلَامُ عَلَيْكُمْ / وَعَلَيْكُمُ السَّلَام",
       "lemma_ar": "السلام عليكم",
       "vocalized_ar": "السَّلَامُ عَلَيْكُمْ / وَعَلَيْكُمُ السَّلَام",
       "part_of_speech": "greeting formula",
-      "variety": "msa",
+      "variety": "msa/common",
       "cefr_estimate": "A1",
       "translations": {"en": "Peace be upon you / And upon you be peace", "ur": "السلام علیکم / وعلیکم السلام", "fr": "Que la paix soit sur vous / Et sur vous la paix"},
       "definition_ar": "تَحِيَّةٌ شائِعَةٌ، وَجَوابُها المَأْلوفُ وَعَلَيْكُمُ السَّلَام.",
-      "definition_en": "A very common greeting meaning ‘Peace be upon you,’ with the conventional reply ‘And upon you be peace.’",
+      "definition_en": "A common greeting meaning ‘Peace be upon you,’ with the conventional response ‘And upon you be peace.’",
       "root": "س-ل-م",
       "pattern": null,
       "synonyms_ar": ["مَرْحَبًا", "أَهْلًا"],
       "example_ar": "السَّلَامُ عَلَيْكُمْ. — وَعَلَيْكُمُ السَّلَام.",
       "example_en": "Peace be upon you. — And upon you be peace.",
       "difficulty": 1,
-      "prerequisites": ["ar-a1-marhaban"],
-      "tags": ["greeting", "religious-cultural", "formula", "msa"],
-      "sources": ["arabicpod101-newbie-1-hello-how-are-you"],
+      "prerequisites": [],
+      "tags": ["greeting", "formula", "high-frequency"],
+      "sources": ["uw-msa-greetings-listening", "uw-common-greetings", "aj-arabic-center"],
       "layers": {
-        "direct_answer": "Greeting: السَّلَامُ عَلَيْكُمْ. Conventional reply: وَعَلَيْكُمُ السَّلَام.",
-        "concept_expansion": "It is an all-purpose greeting used widely in Arabic-speaking and Muslim contexts.",
+        "direct_answer": "Greeting: السَّلَامُ عَلَيْكُمْ. Response: وَعَلَيْكُمُ السَّلَام.",
+        "concept_expansion": "A highly common greeting-response pair used across formal and everyday settings.",
         "worked_or_physical_example": "السَّلَامُ عَلَيْكُمْ. — وَعَلَيْكُمُ السَّلَام.",
-        "boundaries_and_misconceptions": "The conventional response begins وَعَلَيْكُمُ and reverses the order rather than merely repeating the greeting.",
-        "connections_and_memory": "Root س-ل-م connects ideas of peace and safety and words such as سَلام.",
-        "transfer_prompt": "Hear the greeting unexpectedly and give the conventional response immediately.",
-        "mastery_evidence": "Recognize the greeting at natural speed and produce the response automatically.",
-        "sources": ["arabicpod101-newbie-1-hello-how-are-you"]
+        "boundaries_and_misconceptions": "The conventional answer begins وَعَلَيْكُمُ; do not simply echo the greeting unchanged.",
+        "connections_and_memory": "Root س-ل-م connects the greeting with سَلام ‘peace.’",
+        "transfer_prompt": "Hear the greeting unexpectedly and give its conventional response immediately.",
+        "mastery_evidence": "Recognize the greeting at natural speed and produce the reply automatically.",
+        "sources": ["uw-msa-greetings-listening", "uw-common-greetings", "aj-arabic-center"]
       }
     }
   ]
