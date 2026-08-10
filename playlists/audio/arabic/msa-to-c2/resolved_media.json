@@ -1,25 +1,26 @@
 {
-  "policy": "Resolve each next item from the active free intensive course. Primary next lessons must be actual audio/video/multimedia lessons, not flashcard pages. Prefer direct free/open MSA-oriented media; do not auto-select deferred Gateway/Al Jazeera material.",
+  "policy": "ArabicPod101 Newbie Season 1 is the active beginner sequence. Verify each lesson live before presenting it. Alternate sources are reinforcement/secondary material.",
   "current_stage": "A1 foundation",
-  "active_course": "arabic-free-intensive-20-week",
+  "active_course": "arabicpod101-newbie-season-1-standard-arabic",
   "resolved": [
     {
-      "course_order": 1,
-      "curriculum_goal": "self-introduction, stating one's name, and practicing basic greeting/introduction questions and answers",
-      "title": "Greeting and Self Introduction in Arabic",
-      "provider": "Learning Arabic with Angela",
-      "platform": "YouTube",
-      "url": "https://www.youtube.com/watch?v=nks7OnPPpBQ",
-      "reference_url": "https://www.learningarabicwithangela.com/post/greeting-and-self-introduction-in-arabic",
+      "course_order": 3,
+      "curriculum_goal": "ask and answer a person's name; learn second-person possessive gender contrast in اسْمُكَ / اسْمُكِ",
+      "title": "What’s Your Name?",
+      "provider": "ArabicPod101",
+      "platform": "web audio lesson",
+      "url": "https://www.arabicpod101.com/lesson/newbie-3-whats-your-name",
       "role": "core",
       "audio_suitability": 5,
-      "visual_dependency": "helpful",
+      "visual_dependency": "none/helpful",
       "verified": true,
-      "source_id": "angela-greeting-self-introduction",
-      "covers": ["greetings", "self-introduction", "name", "basic questions and answers", "pronunciation"],
+      "verified_on": "2026-08-10",
+      "source_id": "arabicpod101-newbie-3-whats-your-name",
+      "covers": ["مَا اسْمُكَ؟", "مَا اسْمُكِ؟", "اِسْمِي", "name", "self-introduction", "ـكَ / ـكِ"],
       "status": "next"
     }
   ],
+  "secondary_course": "playlists/audio/arabic/courses/free-intensive-20-week/plan.json",
   "deferred_courses": [
     {"path": "playlists/audio/arabic/deferred/gateway-to-arabic-book-2/playlist.json", "status": "deferred/optional"},
     {"path": "playlists/audio/arabic/deferred/al-jazeera-immersion/playlist.json", "status": "deferred/immersion"}
