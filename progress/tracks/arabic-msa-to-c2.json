@@ -5,9 +5,10 @@
   "cefr_goal": "C2",
   "current_stage": "A1 foundation",
   "course_manifest": "playlists/audio/arabic/msa-to-c2/a1-foundations/playlist.json",
-  "active_course": "playlists/audio/arabic/courses/gateway-to-arabic-book-2/playlist.json",
+  "active_course": "playlists/audio/arabic/courses/free-intensive-20-week/playlist.json",
+  "active_plan": "playlists/audio/arabic/courses/free-intensive-20-week/plan.json",
   "resolved_media": "playlists/audio/arabic/msa-to-c2/resolved_media.json",
-  "source_preference": "English-supported public MSA foundation first; Arabic-only immersion afterward",
+  "source_preference": "free/open, MSA-focused, audio-first, source-diverse",
   "active_flashcards": [
     "subjects/arabic/a1-foundations/greetings/knowledge.json",
     "subjects/arabic/a1-foundations/greetings-and-plural-address/knowledge.json"
@@ -25,23 +26,29 @@
     }
   ],
   "active_course_progress": {
-    "course_id": "arabic-foundation-gateway-book-2",
+    "course_id": "arabic-free-intensive-20-week",
     "completed_orders": [],
+    "current_week": 1,
     "next": {
       "course_order": 1,
-      "title": "Gateway to Arabic Book 2 — Lesson 1: Gender",
-      "provider": "Gateway to Arabic / Dr. Imran Hamza Alawiye",
-      "url": "https://www.youtube.com/playlist?list=PLDGAumsXqBwHnp1Xkgi1Tl2oEinV4EkNb",
-      "url_type": "playlist start / first uncompleted lesson",
-      "fallback_url": "https://www.mclportal.com/courses/gateway-to-arabic-level-2"
+      "title": "Introduce Yourself in Arabic",
+      "provider": "University of Wisconsin–Madison",
+      "url": "https://wisc.pb.unizin.org/lctlresources/chapter/introduce-yourself-in-arabic/",
+      "source_id": "uw-introduce-yourself"
     }
   },
-  "deferred_course": {
-    "course_id": "arabic-al-jazeera-immersion",
-    "path": "playlists/audio/arabic/courses/al-jazeera-immersion/playlist.json",
-    "status": "locked",
-    "unlock_condition": "Complete Gateway Book 2 foundation and pass the A1 readiness checkpoint. Reverify Al Jazeera media before use."
-  },
+  "deferred_courses": [
+    {
+      "course_id": "arabic-foundation-gateway-book-2",
+      "path": "playlists/audio/arabic/deferred/gateway-to-arabic-book-2/playlist.json",
+      "status": "deferred/optional"
+    },
+    {
+      "course_id": "arabic-al-jazeera-immersion",
+      "path": "playlists/audio/arabic/deferred/al-jazeera-immersion/playlist.json",
+      "status": "deferred/immersion"
+    }
+  ],
   "reinforcement": {
     "policy": "docs/SPACED_REINFORCEMENT_STANDARD.md",
     "due_concepts": [],
@@ -57,6 +64,7 @@
       "we-pronoun": 1,
       "condition-expressions": 1
     },
-    "rule": "During Gateway foundation, use only beginner-appropriate English-supported/public reinforcement. Do not schedule Al Jazeera immersion media yet."
-  }
+    "rule": "Use due alternate-source free reinforcement according to the active course plan; never surface deferred Gateway/Al Jazeera automatically."
+  },
+  "proficiency_rule": "20 weeks is an intensive foundation/independent bridge, not automatic C2. Advance CEFR stages only after checkpoints."
 }
