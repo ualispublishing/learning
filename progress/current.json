@@ -1,15 +1,23 @@
 {
-  "active_track": "playlists/audio/mats/efficient-engineer-mechanics-of-materials/playlist.json",
-  "subject": "mats",
-  "completed_through_order": 2,
-  "completed": [
-    "https://www.youtube.com/watch?v=aQf6Q8t1FQE",
-    "https://www.youtube.com/watch?v=DLE-ieOVFjI"
-  ],
+  "active_track_id": "arabic-msa-to-c2",
+  "active_track": "playlists/audio/arabic/msa-to-c2/a1-foundations/playlist.json",
+  "track_progress": "progress/tracks/arabic-msa-to-c2.json",
+  "subject": "arabic",
+  "goal": "CEFR C2",
+  "current_stage": "A1",
+  "command_protocol": {
+    "complete": "mark current item complete, process cards/sources/reinforcement, then advance",
+    "finished": "same as complete",
+    "whats_next": "return next item from active track state"
+  },
   "next": {
-    "order": 3,
-    "title": "Understanding Poisson's Ratio",
-    "channel": "The Efficient Engineer",
-    "url": "https://www.youtube.com/watch?v=tuOlM3P7ygA"
-  }
+    "order": 1,
+    "title": "Hello. How Are You?",
+    "provider": "ArabicPod101",
+    "url": "https://www.arabicpod101.com/lesson/newbie-1-hello-how-are-you?lp=189",
+    "medium": "audio lesson"
+  },
+  "paused_tracks": [
+    "progress/tracks/mats-efficient-engineer.json"
+  ]
 }
