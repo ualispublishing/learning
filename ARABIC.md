@@ -96,12 +96,14 @@ For every completed lesson/media item:
 5. Add only useful new vocabulary, grammar, phrase, pronunciation, or listening distinctions.
 6. Deepen existing cards when a concept already exists.
 7. Keep **Arabic-script-only fronts** and complete eight-layer backs.
-8. Record free/open source IDs.
-9. Update concept exposure counts and review due-state.
-10. If a spaced reinforcement item is due, select it when pedagogically appropriate.
-11. Otherwise advance to the next item in the active free intensive playlist/plan.
-12. Update `resolved_media.json`, `progress/tracks/arabic-msa-to-c2.json`, `progress/current.json`, `progress/review_queue.json`, and `NEXT.md`.
-13. Keep paused MATS progress untouched.
+8. For each active knowledge card added or materially changed, create/update a **pleasant short audio digest** following `docs/ARABIC_FLASHCARD_STANDARD.md`. Keep it TTS-ready, Arabic-first, concise, and under roughly 30 seconds instead of reading the entire layered back aloud.
+9. Store/update audio-review companions under `subjects/arabic/audio-review/`; the current combined companion is `subjects/arabic/audio-review/current.json`.
+10. Record free/open source IDs.
+11. Update concept exposure counts and review due-state.
+12. If a spaced reinforcement item is due, select it when pedagogically appropriate.
+13. Otherwise advance to the next item in the active free intensive playlist/plan.
+14. Update `resolved_media.json`, `progress/tracks/arabic-msa-to-c2.json`, `progress/current.json`, `progress/review_queue.json`, and `NEXT.md`.
+15. Keep paused MATS progress untouched.
 
 ## Flashcards
 Use `docs/ARABIC_FLASHCARD_STANDARD.md`.
@@ -119,6 +121,14 @@ Back:
 - grammar/register/variety metadata;
 - prerequisites/tags/source IDs;
 - all eight Knowledge Atlas layers.
+
+Audio companion:
+- speak the Arabic front first;
+- pause for recall;
+- give one concise natural meaning/rule;
+- add one short Arabic example when useful;
+- repeat the Arabic form at A1/A2;
+- never read metadata, URLs, layer labels, or the full long backside aloud.
 
 Do not generate a card merely because a word appeared once. Prefer high-frequency, generative, repeatedly useful language.
 
@@ -143,3 +153,4 @@ Progressively increase DLI GLOSS difficulty and authentic MSA sources. C2 requir
 - Active source registry: `sources/arabic.json`
 - Deferred source registry: `sources/arabic-deferred.json`
 - Active progress: `progress/tracks/arabic-msa-to-c2.json`
+- Audio flashcard companion: `subjects/arabic/audio-review/current.json`
