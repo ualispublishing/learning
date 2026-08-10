@@ -1,6 +1,7 @@
 {
   "active_track_id": "arabic-msa-to-c2",
   "active_track": "playlists/audio/arabic/msa-to-c2/a1-foundations/playlist.json",
+  "resolved_media": "playlists/audio/arabic/msa-to-c2/resolved_media.json",
   "track_progress": "progress/tracks/arabic-msa-to-c2.json",
   "active_flashcards": "subjects/arabic/",
   "flashcard_review_scope": "docs/ACTIVE_REVIEW_SCOPE.md",
@@ -9,17 +10,20 @@
   "goal": "CEFR C2",
   "current_stage": "A1",
   "completed_through_order": 2,
+  "source_preference": "YouTube/public audio-video first; provider pages as references/fallbacks",
   "command_protocol": {
-    "complete": "mark current item complete, process cards/sources/reinforcement, then advance",
+    "complete": "mark current resolved media complete, process cards/sources/reinforcement, then resolve the next item to YouTube/public media and advance",
     "finished": "same as complete",
-    "whats_next": "return next item from active track state"
+    "whats_next": "return exact resolved media from repo state"
   },
   "next": {
     "order": 3,
-    "title": "What’s Your Name?",
-    "provider": "ArabicPod101",
-    "url": "https://www.arabicpod101.com/lesson/newbie-3-whats-your-name?lp=189",
-    "medium": "audio lesson"
+    "title": "Learn Arabic - How to Introduce Yourself in Arabic",
+    "provider": "Learn Arabic with ArabicPod101.com",
+    "platform": "youtube",
+    "url": "https://www.youtube.com/watch?v=ityVW2gR0Rs",
+    "medium": "video/audio",
+    "curriculum_goal": "introductions and stating one's name"
   },
   "paused_tracks": [
     "progress/tracks/mats-efficient-engineer.json"
