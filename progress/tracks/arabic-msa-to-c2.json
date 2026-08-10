@@ -8,22 +8,14 @@
   "active_course": "playlists/audio/arabic/courses/free-intensive-20-week/playlist.json",
   "active_plan": "playlists/audio/arabic/courses/free-intensive-20-week/plan.json",
   "resolved_media": "playlists/audio/arabic/msa-to-c2/resolved_media.json",
-  "source_preference": "free/open, MSA-focused, audio-first, source-diverse",
+  "source_preference": "free/open, MSA-focused, audio-first, source-diverse; next lessons must be actual audio/video/multimedia, not flashcard pages",
   "active_flashcards": [
     "subjects/arabic/a1-foundations/greetings/knowledge.json",
     "subjects/arabic/a1-foundations/greetings-and-plural-address/knowledge.json"
   ],
   "completed_prior_concept_milestones": [
-    {
-      "order": 1,
-      "title": "Greetings / How are you? — concept milestone",
-      "completed_on": "2026-08-10"
-    },
-    {
-      "order": 2,
-      "title": "Morning/evening greetings + dual/plural address — concept milestone",
-      "completed_on": "2026-08-10"
-    }
+    {"order": 1, "title": "Greetings / How are you? — concept milestone", "completed_on": "2026-08-10"},
+    {"order": 2, "title": "Morning/evening greetings + dual/plural address — concept milestone", "completed_on": "2026-08-10"}
   ],
   "active_course_progress": {
     "course_id": "arabic-free-intensive-20-week",
@@ -31,23 +23,15 @@
     "current_week": 1,
     "next": {
       "course_order": 1,
-      "title": "Introduce Yourself in Arabic",
-      "provider": "University of Wisconsin–Madison",
-      "url": "https://wisc.pb.unizin.org/lctlresources/chapter/introduce-yourself-in-arabic/",
-      "source_id": "uw-introduce-yourself"
+      "title": "Greeting and Self Introduction in Arabic",
+      "provider": "Learning Arabic with Angela",
+      "url": "https://www.youtube.com/watch?v=nks7OnPPpBQ",
+      "source_id": "angela-greeting-self-introduction"
     }
   },
   "deferred_courses": [
-    {
-      "course_id": "arabic-foundation-gateway-book-2",
-      "path": "playlists/audio/arabic/deferred/gateway-to-arabic-book-2/playlist.json",
-      "status": "deferred/optional"
-    },
-    {
-      "course_id": "arabic-al-jazeera-immersion",
-      "path": "playlists/audio/arabic/deferred/al-jazeera-immersion/playlist.json",
-      "status": "deferred/immersion"
-    }
+    {"course_id": "arabic-foundation-gateway-book-2", "path": "playlists/audio/arabic/deferred/gateway-to-arabic-book-2/playlist.json", "status": "deferred/optional"},
+    {"course_id": "arabic-al-jazeera-immersion", "path": "playlists/audio/arabic/deferred/al-jazeera-immersion/playlist.json", "status": "deferred/immersion"}
   ],
   "reinforcement": {
     "policy": "docs/SPACED_REINFORCEMENT_STANDARD.md",
@@ -64,7 +48,7 @@
       "we-pronoun": 1,
       "condition-expressions": 1
     },
-    "rule": "Use due alternate-source free reinforcement according to the active course plan; never surface deferred Gateway/Al Jazeera automatically."
+    "rule": "Use due alternate-source free reinforcement according to the active course plan; flashcard-style pages are reinforcement only; never surface deferred Gateway/Al Jazeera automatically."
   },
   "proficiency_rule": "20 weeks is an intensive foundation/independent bridge, not automatic C2. Advance CEFR stages only after checkpoints."
 }
