@@ -1,21 +1,31 @@
 {
-  "policy": "Resolve each curriculum item to a verified public/open source. Prefer YouTube or audio/video; use interactive text when it uniquely adds writing/reading practice.",
-  "current_stage": "A1",
+  "policy": "Use the active course's media policy. During beginner foundation, prefer English-supported MSA video/audio. Arabic-only immersion sources are deferred until the foundation gate is passed.",
+  "current_stage": "A1 foundation",
+  "active_course": "arabic-foundation-gateway-book-2",
   "resolved": [
     {
-      "curriculum_order": 3,
-      "curriculum_goal": "introductions, saying one's name, occupations, countries, and masculine/feminine forms",
-      "title": "في مَرْكَزِ تَعْلِيمِ اللُّغَةِ العَرَبِيَّةِ — At the Arabic language teaching center",
-      "provider": "Al Jazeera Learning Arabic",
-      "platform": "web video",
-      "url": "https://learning.aljazeera.net/en/generallanguage/%D9%81%D9%8A-%D9%85%D8%B1%D9%83%D8%B2-%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A7%D9%84%D9%84%D8%BA%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9",
+      "course_order": 1,
+      "curriculum_goal": "gender of nouns, taa marbuta recognition, basic classroom/home vocabulary",
+      "title": "Gateway to Arabic Book 2 — Lesson 1: Gender",
+      "provider": "Gateway to Arabic / Dr. Imran Hamza Alawiye",
+      "platform": "YouTube course playlist",
+      "url": "https://www.youtube.com/playlist?list=PLDGAumsXqBwHnp1Xkgi1Tl2oEinV4EkNb",
+      "url_type": "playlist start / first uncompleted lesson",
+      "fallback_url": "https://www.mclportal.com/courses/gateway-to-arabic-level-2",
       "role": "core",
-      "audio_suitability": 5,
+      "audio_suitability": 4,
       "visual_dependency": "helpful",
-      "verified": true,
-      "source_id": "aj-arabic-center",
-      "covers": ["السلام عليكم", "أهلا وسهلا بكم", "اسمي", "أنا", "أنا من", "طالب/طالبة", "مهن", "بلدان"],
+      "verified_course": true,
+      "source_id": "gateway-book2-youtube-course",
+      "covers": ["grammatical gender", "taa marbuta", "masculine/feminine vocabulary"],
       "status": "next"
+    }
+  ],
+  "deferred_courses": [
+    {
+      "course_id": "arabic-al-jazeera-immersion",
+      "path": "playlists/audio/arabic/courses/al-jazeera-immersion/playlist.json",
+      "status": "deferred until foundation completion and A1 readiness checkpoint"
     }
   ]
 }
