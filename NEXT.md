@@ -9,11 +9,18 @@ Completed:
 2. ✅ **Good Morning, How Are You All?** — ArabicPod101
 
 Next:
-3. ▶ **What’s Your Name?** — ArabicPod101
-   - https://www.arabicpod101.com/lesson/newbie-3-whats-your-name
-   - Medium: audio lesson
-   - Variety: Standard Arabic learning dialogue
-   - Role: core + introduction/self-identification
+3. ▶ **Learn Arabic - How to Introduce Yourself in Arabic** — Learn Arabic with ArabicPod101.com
+   - https://www.youtube.com/watch?v=ityVW2gR0Rs
+   - Platform: YouTube
+   - Medium: video/audio; suitable for audio-first use
+   - Role: core introduction/self-identification
+   - Curriculum goal: introduce yourself and state your name
+
+Source policy from this point forward:
+- prefer verified YouTube lessons;
+- otherwise use free public podcasts/audio/video or university/open resources;
+- use provider lesson pages mainly as transcripts/references or when no good public-media equivalent exists;
+- preserve uncovered curriculum concepts and teach them later rather than dropping them when changing sources.
 
 Before listening, retrieve aloud without notes:
 - صَبَاحُ الْخَيْر / مَسَاءُ الْخَيْر
@@ -24,19 +31,19 @@ Before listening, retrieve aloud without notes:
 - شُكْرًا
 
 Listening protocol:
-1. First pass: audio without transcript.
+1. First pass: audio without transcript/subtitles.
 2. Retrieve/repeat what you understood.
-3. Second pass: shadow the Arabic dialogue.
-4. Use transcript/translation only if needed.
+3. Second pass: shadow the Arabic.
+4. Use visuals/transcript only if needed.
 5. Final pass: audio again without English.
 
 When the user says **complete** or **finished**:
-- mark lesson 3 complete;
-- extract only genuinely useful new concepts;
-- create/deepen active cards with Arabic-script-only `front` fields and complete eight-layer backs;
-- update sources and spaced-reinforcement exposure counts;
-- because lesson 3 completes the first spacing gap, evaluate/select the scheduled reinforcement item at playlist order 4;
-- update playlist, progress files, review queue, and this file;
+- process the exact YouTube/public media completed;
+- create/deepen Arabic-script-front, eight-layer-back flashcards;
+- preserve any planned concept not actually covered by the media;
+- update spaced-reinforcement state;
+- resolve the next curriculum item to a verified YouTube/public-media source;
+- update `resolved_media.json`, progress files, and this file;
 - return the exact next media URL.
 
 ### Paused track
