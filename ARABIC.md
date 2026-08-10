@@ -12,18 +12,22 @@ When Arabic is active:
 - `what's next` = read repo state and return the exact next lesson.
 Never infer completion from chat memory when repo state is available.
 
-## Media-source priority
-The user prefers YouTube or other directly consumable public media rather than provider lesson pages.
+## Media-source policy
+Use public/open, directly consumable learning media and rotate sources so the learner hears different speakers and explanations.
 
-When resolving the next lesson, use this order:
+Preferred order:
 1. verified YouTube video from a high-quality educator/institution;
-2. free public podcast/audio/video lesson;
+2. free public video/audio from an educational institution;
 3. university/open educational resource with audio;
-4. provider lesson page only as a transcript/reference or when no suitable public-media equivalent exists.
+4. graded authentic MSA media, podcasts, interviews, or documentaries appropriate to the learner's level;
+5. interactive reading/writing material when it serves a skill that audio cannot replace.
 
-Do not sacrifice curriculum coverage merely to use YouTube. If a replacement video covers only part of a planned lesson, preserve the uncovered concept and schedule another public source later. Record the resolved media in `playlists/audio/arabic/msa-to-c2/resolved_media.json`.
+### Temporarily excluded source family
+Do **not** use ArabicPod101 or any ArabicPod101-branded website, YouTube channel, video, audio, transcript, lesson, playlist, or derived source ID anywhere in the active Arabic curriculum, source registry, progress state, review queue, or flashcard citations. This exclusion remains in force until the user explicitly asks to restore that source family.
 
-Prefer audio-capable videos. Search across multiple teachers/sources rather than keeping the track tied to one provider. This also supports spaced reinforcement through different voices and explanations.
+The first two completed lessons are preserved as concept milestones rather than as provider-specific completions. Public/open sources now validate and reinforce those concepts.
+
+Do not sacrifice curriculum coverage merely to change sources. If one source covers only part of a planned concept cluster, retain the uncovered concept and schedule another public/open source later.
 
 ## Variants
 Keep these distinct:
@@ -36,11 +40,12 @@ Every lesson/card/source must record variety: `msa`, `classical`, `quranic`, or 
 ## Audio-first standard
 Target roughly 70–85% of consumption time as audio-capable material.
 Each media item records `visual_dependency`: none/helpful/periodic/high.
-For an audio lesson:
-1. first pass — listen without transcript;
-2. second pass — listen and shadow/repeat;
-3. third pass only if needed — inspect Arabic transcript and grammar;
-4. final pass — listen again without English.
+For an audio/video lesson:
+1. first pass — listen without transcript/subtitles when feasible;
+2. retrieve what was understood;
+3. second pass — shadow/repeat;
+4. inspect Arabic transcript/visuals only if needed;
+5. final pass — listen again without English support.
 
 At B1+, authentic listening must grow steadily. At C1/C2, learner-targeted English explanations become supplemental rather than the core.
 
@@ -72,18 +77,19 @@ For every completed lesson:
 3. Search existing Arabic cards for semantic overlap.
 4. Add only high-utility new vocabulary, grammar, phrase, pronunciation, or listening distinctions.
 5. Deepen existing cards when the concept already exists.
-6. Store source ID(s).
+6. Store public/open source ID(s).
 7. Update playlist/progress item to completed.
-8. Resolve the next lesson to a verified YouTube/public-media URL using the media-source priority above.
-9. Preserve any curriculum concepts not covered by the replacement media.
-10. Update `playlists/audio/arabic/msa-to-c2/resolved_media.json`.
-11. Update `progress/tracks/arabic-msa-to-c2.json`.
-12. Update `progress/current.json`.
-13. Update `NEXT.md`.
-14. Keep paused MATS progress untouched.
+8. Update spaced-reinforcement exposure counts and due reviews.
+9. Resolve the next lesson to a verified public/open source using the media-source policy above.
+10. Preserve planned concepts not covered by the selected media.
+11. Update `playlists/audio/arabic/msa-to-c2/resolved_media.json`.
+12. Update `progress/tracks/arabic-msa-to-c2.json`.
+13. Update `progress/current.json`.
+14. Update `progress/review_queue.json` and `NEXT.md`.
+15. Keep paused MATS progress untouched.
 
 ## Arabic flashcards
-Use `docs/ARABIC_FLASHCARD_STANDARD.md`. Do not dump every lesson word into cards. Prefer high-frequency, generative language.
+Use `docs/ARABIC_FLASHCARD_STANDARD.md`. Do not dump every lesson word into cards. Prefer high-frequency, generative language. Arabic review-card fronts remain Arabic-script-only; all translations, definitions, examples, metadata, and eight layers belong on the back.
 
 ## Roadmap
 Canonical long-range path:
