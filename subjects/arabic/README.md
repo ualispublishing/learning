@@ -8,6 +8,18 @@ The external periodic-review app reads the repository's `subjects/` tree. Arabic
 
 See `docs/ACTIVE_REVIEW_SCOPE.md`.
 
+## Arabic card display contract
+
+For every active Arabic knowledge card:
+
+- `front` MUST be Arabic script only. Do not put an English question, translation, transliteration, hint, or definition on the front.
+- Use vocalized Arabic at A1/A2 when it materially helps pronunciation; progressively reduce nonessential tashkeel later.
+- The reverse side contains the complete learning payload: English/Urdu/French translations when applicable, Arabic and English definitions, root/pattern when useful, synonyms, Arabic/English examples, grammatical/register notes, prerequisites, tags, source IDs, and all eight layered fields.
+- The eight required layers remain: `direct_answer`, `concept_expansion`, `worked_or_physical_example`, `boundaries_and_misconceptions`, `connections_and_memory`, `transfer_prompt`, `mastery_evidence`, and `sources`.
+- Multiple retrieval representations (audio recognition, cloze, production, discrimination) should reference the same canonical card rather than weakening the Arabic-only knowledge-card front.
+
+This contract applies automatically to cards generated when the user says `complete` or `finished`.
+
 ## Canonical subject structure
 
 Arabic knowledge should grow under the smallest meaningful hierarchy, including:
