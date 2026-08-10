@@ -1,100 +1,119 @@
 {
+  "policy": "Active Arabic sources must be free/public/open and appropriate to the current foundation-to-intermediate path. Gateway and Al Jazeera are stored separately under deferred sources.",
   "sources": [
     {
-      "id": "gateway-book2-youtube-course",
-      "provider": "Gateway to Arabic / Dr. Imran Hamza Alawiye",
-      "title": "Gateway to Arabic Book 2 Lessons",
+      "id": "anu-marhaba",
+      "provider": "Australian National University Press",
+      "title": "Marhaba! An Introduction to Modern Standard Arabic",
       "variety": "msa",
-      "cefr": "A1 foundation",
-      "medium": "YouTube video course",
-      "instruction_language": "English-supported",
-      "url": "https://www.youtube.com/playlist?list=PLDGAumsXqBwHnp1Xkgi1Tl2oEinV4EkNb",
-      "role": "active primary foundation course"
-    },
-    {
-      "id": "gateway-book2-reference",
-      "provider": "Gateway to Arabic",
-      "title": "Gateway to Arabic Book Two",
-      "variety": "msa",
-      "cefr": "A1 foundation",
-      "medium": "course reference",
-      "url": "https://www.gatewaytoarabic.com/products/gateway-to-arabic-books-2",
-      "role": "curriculum/reference",
-      "coverage": ["gender", "demonstratives", "adjectives", "questions", "definite article", "pronouns", "attached pronouns", "prepositions", "dual", "plurals", "numbers 1-10", "countries and nationalities"]
-    },
-    {
-      "id": "madinah-college-gateway-level2",
-      "provider": "Madinah College Portal",
-      "title": "Gateway to Arabic Level 2",
-      "variety": "msa",
-      "cefr": "A1 foundation",
-      "medium": "free video course with login",
-      "instruction_language": "English-supported",
-      "url": "https://www.mclportal.com/courses/gateway-to-arabic-level-2",
-      "role": "fallback and course-outline verification"
+      "level": "introductory",
+      "medium": "multimedia EPUB with audio and interactive tasks",
+      "free": true,
+      "url": "https://press.anu.edu.au/publications/textbooks/marhaba-introduction-modern-standard-arabic",
+      "role": "primary curriculum spine",
+      "coverage": "23 lessons developing reading, listening, speaking and writing"
     },
     {
       "id": "uw-msa-greetings-listening",
       "provider": "University of Wisconsin–Madison",
       "title": "Arabic Intro Lesson: Greetings in MSA",
       "variety": "msa",
-      "cefr": "A1",
+      "level": "beginner",
       "medium": "audio-first lesson",
+      "free": true,
       "url": "https://wisc.pb.unizin.org/lctlresources/chapter/arabic-intro-lesson-greetings-in-msa/",
-      "role": "beginner reinforcement"
+      "role": "spaced listening reinforcement"
+    },
+    {
+      "id": "uw-introduce-yourself",
+      "provider": "University of Wisconsin–Madison",
+      "title": "Introduce Yourself in Arabic",
+      "variety": "msa",
+      "level": "beginner",
+      "medium": "recorded interactive lesson",
+      "free": true,
+      "url": "https://wisc.pb.unizin.org/lctlresources/chapter/introduce-yourself-in-arabic/",
+      "role": "current core listening/production lesson"
     },
     {
       "id": "uw-common-greetings",
       "provider": "University of Wisconsin–Madison",
       "title": "Common Greetings in Arabic",
       "variety": "msa",
-      "cefr": "A1",
-      "medium": "lesson + embedded YouTube dialogue",
+      "level": "beginner",
+      "medium": "lesson + public dialogue video",
+      "free": true,
       "url": "https://wisc.pb.unizin.org/lctlresources/chapter/common-greetings-in-arabic/",
       "youtube_url": "https://www.youtube.com/watch?v=WMfXLzmHYbQ",
-      "role": "spaced reinforcement"
+      "role": "delayed alternate-presentation reinforcement"
     },
     {
-      "id": "youtube-new-arabic-pronouns",
-      "provider": "The New Arabic",
-      "title": "Arabic Pronouns: Learn How to Say I, You, He, She, etc.",
+      "id": "uw-basic-travel-phrases",
+      "provider": "University of Wisconsin–Madison",
+      "title": "Basic Travel Phrases",
       "variety": "msa",
-      "cefr": "A1",
-      "medium": "YouTube video",
-      "url": "https://www.youtube.com/watch?v=6Nc4eZl5120",
-      "role": "spaced pronoun reinforcement"
+      "level": "beginner",
+      "medium": "public lesson",
+      "free": true,
+      "url": "https://wisc.pb.unizin.org/lctlresources/chapter/basic-travel-phrases/",
+      "role": "near-transfer phrase and question practice"
     },
     {
-      "id": "msu-family-audio",
-      "provider": "Michigan State University Open Textbook",
-      "title": "Elementary Arabic II — Vocabulary on Family",
-      "variety": "msa",
-      "cefr": "A1-A2",
-      "medium": "audio + open textbook",
-      "url": "https://openbooks.lib.msu.edu/elemarabicll/chapter/vocabulary-2/",
-      "role": "future reinforcement"
+      "id": "msu-elementary-arabic-i",
+      "provider": "Michigan State University Libraries",
+      "title": "Elementary Arabic I",
+      "variety": "standard-arabic-core-with-some-egyptian-sections",
+      "level": "first-semester beginner",
+      "medium": "open textbook + embedded audio + quizzes",
+      "free": true,
+      "url": "https://openbooks.lib.msu.edu/arb101/",
+      "role": "structured practice and output",
+      "usage_rule": "Use Standard-Arabic vocabulary/grammar/reading/writing sections in the MSA core. Skip or separately label Egyptian-only speaking material."
     },
     {
-      "id": "lingualism-msa-family",
-      "provider": "Lingualism",
-      "title": "Modern Standard Arabic Elementary Mini-Lesson: Navigating Family Connections",
-      "variety": "msa",
-      "cefr": "A1-A2",
-      "medium": "audio + text",
-      "url": "https://resources.lingualism.com/modern-standard-arabic/modern-standard-arabic-elementary-mini-lesson-navigating-family-connections/",
-      "role": "future reinforcement"
+      "id": "msu-elementary-arabic-ii",
+      "provider": "Michigan State University Libraries",
+      "title": "Elementary Arabic II",
+      "variety": "standard-arabic-core-with-egyptian-conversation-sections",
+      "level": "second-semester elementary",
+      "medium": "open textbook + audio + interactive activities",
+      "free": true,
+      "url": "https://openbooks.lib.msu.edu/elemarabicll/",
+      "role": "A2-building structured practice",
+      "usage_rule": "Prioritize Standard-Arabic sections; Egyptian modules are optional and dialect-tagged, never silently merged into MSA cards."
     },
     {
-      "id": "al-jazeera-learning-arabic-immersion-course",
-      "provider": "Al Jazeera Learning Arabic",
-      "title": "Al Jazeera Learning Arabic — deferred immersion source family",
+      "id": "lqtoronto-madina-book1-english-audio",
+      "provider": "LQToronto",
+      "title": "Madina Arabic Book 1 — English Audio Lessons",
+      "variety": "formal-arabic-grammar/quranic-bridge",
+      "level": "beginner grammar",
+      "medium": "downloadable MP3 lessons",
+      "free": true,
+      "url": "https://www.lqtoronto.com/audio.html",
+      "role": "parallel grammar-depth clinic"
+    },
+    {
+      "id": "lqtoronto-madina-texts",
+      "provider": "LQToronto",
+      "title": "Madina Books — Arabic with English Key and Solutions",
+      "variety": "formal-arabic-grammar/quranic-bridge",
+      "level": "beginner onward",
+      "medium": "PDF textbooks and keys",
+      "free": true,
+      "url": "https://www.lqtoronto.com/madinaarabic.html",
+      "role": "grammar reference and exercises"
+    },
+    {
+      "id": "dli-gloss-arabic-msa",
+      "provider": "Defense Language Institute Foreign Language Center",
+      "title": "GLOSS — Arabic-MSA",
       "variety": "msa",
-      "cefr": "post-foundation A1 through advanced",
-      "medium": "Arabic-first mixed media",
-      "url": "https://learning.aljazeera.net/en/",
-      "role": "deferred immersion course only",
-      "status": "locked until Gateway foundation completion and readiness checkpoint",
-      "media_note": "Previously saved individual media may be missing. Re-search and verify every item at activation; do not use stale individual URLs as current lessons."
+      "level": "graded; use after beginner foundation",
+      "medium": "listening/reading lessons, video options, quizzes and downloads",
+      "free": true,
+      "url": "https://gloss.dliflc.edu/",
+      "role": "A2/B1 and later transfer toward advanced comprehension"
     }
   ]
 }
