@@ -12,17 +12,37 @@
     "archive/flashcards/mats/mechanics-of-materials/stress-and-strain/knowledge.json",
     "archive/flashcards/mats/mechanics-of-materials/youngs-modulus/knowledge.json"
   ],
-  "completed_orders": [],
+  "completed_orders": [1],
+  "completed_lessons": [
+    {
+      "order": 1,
+      "title": "Hello. How Are You?",
+      "provider": "ArabicPod101",
+      "url": "https://www.arabicpod101.com/lesson/newbie-1-hello-how-are-you?lp=189",
+      "completed_on": "2026-08-10",
+      "flashcards": "subjects/arabic/a1-foundations/greetings/knowledge.json"
+    }
+  ],
   "next": {
-    "order": 1,
-    "title": "Hello. How Are You?",
+    "order": 2,
+    "title": "Good Morning, How Are You All?",
     "provider": "ArabicPod101",
-    "url": "https://www.arabicpod101.com/lesson/newbie-1-hello-how-are-you?lp=189",
+    "url": "https://www.arabicpod101.com/lesson/newbie-2-good-morning-how-are-you-all?lp=189",
     "role": "core"
   },
   "reinforcement": {
     "policy": "docs/SPACED_REINFORCEMENT_STANDARD.md",
     "due_concepts": [],
-    "exposure_counts": {}
+    "exposure_counts": {
+      "greetings": 1,
+      "how-are-you": 1,
+      "masculine-feminine-address": 1,
+      "alhamdulillah": 1
+    },
+    "next_media_reinforcement": {
+      "playlist_order": 4,
+      "title": "Top 25 Arabic Phrases",
+      "reinforces": ["greetings", "how-are-you", "introductions"]
+    }
   }
 }
