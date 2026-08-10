@@ -12,6 +12,19 @@ When Arabic is active:
 - `what's next` = read repo state and return the exact next lesson.
 Never infer completion from chat memory when repo state is available.
 
+## Media-source priority
+The user prefers YouTube or other directly consumable public media rather than provider lesson pages.
+
+When resolving the next lesson, use this order:
+1. verified YouTube video from a high-quality educator/institution;
+2. free public podcast/audio/video lesson;
+3. university/open educational resource with audio;
+4. provider lesson page only as a transcript/reference or when no suitable public-media equivalent exists.
+
+Do not sacrifice curriculum coverage merely to use YouTube. If a replacement video covers only part of a planned lesson, preserve the uncovered concept and schedule another public source later. Record the resolved media in `playlists/audio/arabic/msa-to-c2/resolved_media.json`.
+
+Prefer audio-capable videos. Search across multiple teachers/sources rather than keeping the track tied to one provider. This also supports spaced reinforcement through different voices and explanations.
+
 ## Variants
 Keep these distinct:
 1. MSA — primary backbone for formal speech, media, reading, writing, cross-region communication.
@@ -54,18 +67,20 @@ Understand virtually all forms of speech/text with minimal strain, including spe
 
 ## Completion processing
 For every completed lesson:
-1. Verify the exact lesson source.
+1. Verify the exact media actually completed.
 2. Extract main ideas.
 3. Search existing Arabic cards for semantic overlap.
 4. Add only high-utility new vocabulary, grammar, phrase, pronunciation, or listening distinctions.
 5. Deepen existing cards when the concept already exists.
 6. Store source ID(s).
-7. Update playlist item to completed.
-8. Advance the next item and resolve its exact URL if needed.
-9. Update `progress/tracks/arabic-msa-to-c2.json`.
-10. Update `progress/current.json`.
-11. Update `NEXT.md`.
-12. Keep paused MATS progress untouched.
+7. Update playlist/progress item to completed.
+8. Resolve the next lesson to a verified YouTube/public-media URL using the media-source priority above.
+9. Preserve any curriculum concepts not covered by the replacement media.
+10. Update `playlists/audio/arabic/msa-to-c2/resolved_media.json`.
+11. Update `progress/tracks/arabic-msa-to-c2.json`.
+12. Update `progress/current.json`.
+13. Update `NEXT.md`.
+14. Keep paused MATS progress untouched.
 
 ## Arabic flashcards
 Use `docs/ARABIC_FLASHCARD_STANDARD.md`. Do not dump every lesson word into cards. Prefer high-frequency, generative language.
@@ -75,4 +90,4 @@ Canonical long-range path:
 `playlists/audio/arabic/msa-to-c2/roadmap.json`
 
 Current stage playlist:
-`playlists/audio/arabic/msa-to-c2/foundation-level-2-standard-arabic/playlist.json`
+`playlists/audio/arabic/msa-to-c2/a1-foundations/playlist.json`
