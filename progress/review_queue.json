@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "purpose": "Cross-track spaced reinforcement queue. Review events reference canonical concepts; they do not duplicate cards.",
   "active_subject": "arabic",
   "policy": "docs/SPACED_REINFORCEMENT_STANDARD.md",
@@ -9,11 +9,11 @@
     "scheduled": [
       {
         "review_id": "ar-a1-greetings-r1",
-        "concepts": ["greetings", "how-are-you", "masculine-feminine-address", "time-specific-greetings", "thank-you"],
+        "concepts": ["greetings", "how-are-you", "time-specific-greetings", "thank-you"],
         "after_completed_playlist_order": 3,
         "target_playlist_order": 4,
-        "representation": "alternate phrase presentation + retrieval before listening",
-        "media_title": "Top 25 Arabic Phrases",
+        "representation": "different-speaker video + retrieval before listening",
+        "media_title": "أَهْلًا بِكُمْ في مَقْهَى الجَزِيرَة (الحلقة 1)",
         "status": "scheduled"
       },
       {
@@ -21,15 +21,15 @@
         "concepts": ["dual-address", "plural-address", "we-pronoun"],
         "after_completed_playlist_order": 4,
         "target_playlist_order": 5,
-        "representation": "new dialogue that reuses plural-person grammar",
-        "media_title": "Who Are You All?",
+        "representation": "pronoun-system explanation with pronunciation",
+        "media_title": "Arabic Pronouns: I, You, He, She, etc.",
         "status": "scheduled"
       },
       {
         "review_id": "ar-a1-greetings-r2",
-        "concepts": ["greetings", "how-are-you", "masculine-feminine-address"],
-        "target_playlist_order": 7,
-        "representation": "different-speaker contextual dialogue",
+        "concepts": ["greetings", "introductions", "origin", "gender-address"],
+        "target_playlist_order": 6,
+        "representation": "contextual dialogue",
         "media_title": "تَشَرَّفْنَا — Nice to meet you",
         "status": "scheduled"
       }
