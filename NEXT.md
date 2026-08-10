@@ -1,49 +1,50 @@
 # Next Lesson
 
-## ACTIVE — Arabic: Public Audio/Video MSA to C2
+## ACTIVE — Arabic: English-Supported MSA Foundation
 
-Current stage: **A1 Foundations**
+Current course: **Gateway to Arabic Book 2**
 
-Completed concept milestones:
+Completed prior concept milestones:
 1. ✅ Greetings / How are you?
 2. ✅ Morning/evening greetings + dual/plural address
 
+These milestones are retained, but the structured beginner course now starts from its own Lesson 1 so the foundation is coherent.
+
 ## Next
-3. ▶ **في مَرْكَزِ تَعْلِيمِ اللُّغَةِ العَرَبِيَّةِ — At the Arabic language teaching center** — Al Jazeera Learning Arabic
+▶ **Gateway to Arabic Book 2 — Lesson 1: Gender**
 
-- Medium: video/audio + transcript
+- Teacher/course: Dr. Imran Hamza Alawiye / Gateway to Arabic
+- Platform: YouTube
+- Course playlist: https://www.youtube.com/playlist?list=PLDGAumsXqBwHnp1Xkgi1Tl2oEinV4EkNb
+- Action: open the playlist and play the **first uncompleted lesson** (Gender)
+- Fallback/free course outline: https://www.mclportal.com/courses/gateway-to-arabic-level-2
 - Variety: Modern Standard Arabic
-- Role: core introductions + near transfer
-- URL: https://learning.aljazeera.net/en/generallanguage/%D9%81%D9%8A-%D9%85%D8%B1%D9%83%D8%B2-%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A7%D9%84%D9%84%D8%BA%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9
+- Instruction: beginner-friendly English support + vocalized Arabic
+- Role: core foundation
 
-This lesson uses greetings you already know, then adds:
-- اِسْمِي ... — my name is ...
-- أَنَا ... — I am ...
-- أَنَا مِنْ ... — I am from ...
-- occupations such as مُدَرِّس، مُحاسِب، طَبِيب/طَبِيبَة، مُهَنْدِس
-- masculine/feminine pairs such as طَالِب / طَالِبَة
+This opening unit teaches grammatical gender, recognition of feminine forms such as the taa marbuta ending, and basic home/classroom vocabulary. It leads directly into هذا / هذه, adjectives, questions, pronouns, possession, prepositions, dual/plural forms, numbers, countries and nationalities.
 
-Before listening, retrieve aloud:
-- السَّلَامُ عَلَيْكُمْ / وَعَلَيْكُمُ السَّلَام
-- صَبَاحُ الْخَيْر
-- كَيْفَ حالُكَ؟ / كَيْفَ حالُكِ؟
-- كَيْفَ حالُكُمَا؟ / كَيْفَ حالُكُمْ؟
-- نَحْنُ بِخَيْر
-- شُكْرًا
+### Listening/learning protocol
+1. Listen to the teacher's explanation without trying to memorize every word.
+2. Repeat the Arabic examples aloud.
+3. Retrieve the main rule and key words before replaying.
+4. Use the visuals/text when needed; this is **not** an Arabic-only immersion stage.
+5. End with one short self-test from memory.
 
-Listening protocol:
-1. First pass with the transcript hidden.
-2. Say what you understood from memory.
-3. Replay and shadow the speakers.
-4. Inspect the Arabic transcript only after retrieval.
-5. Final pass with the transcript hidden again.
+## Later course — locked for now
+**Al Jazeera Learning Arabic — Immersion Course** is stored separately at:
+`playlists/audio/arabic/courses/al-jazeera-immersion/playlist.json`
+
+It activates only after the Gateway foundation course is complete and an A1 readiness checkpoint is passed. Its individual media must be reverified at that time because some previously saved media is missing.
 
 When the user says **complete** or **finished**:
-- mark this media item complete;
-- add/deepen only useful Arabic cards with Arabic-script-only fronts and complete eight-layer backs;
-- update spaced-reinforcement exposures;
-- resolve the next item to a verified public/open source;
-- update playlist, progress, review queue, and this file.
+- mark the current Gateway lesson complete;
+- extract/deepen only useful Arabic cards with Arabic-script-only fronts and complete eight-layer backs;
+- update spaced-review exposures;
+- insert a beginner-friendly reinforcement item only if due;
+- otherwise advance to the next Gateway lesson/video;
+- do not surface Al Jazeera during the foundation course;
+- update the active course, progress files, review queue, resolved media, and this file.
 
 ### Paused track
 MATS / Efficient Engineer remains preserved and resumes at **Understanding Poisson's Ratio**.
