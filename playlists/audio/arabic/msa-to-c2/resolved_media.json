@@ -1,32 +1,27 @@
 {
-  "policy": "Resolve each next item from the active free intensive course. Prefer direct free/open MSA audio/video or multimedia lessons. Do not auto-select deferred Gateway/Al Jazeera material.",
+  "policy": "Resolve each next item from the active free intensive course. Primary next lessons must be actual audio/video/multimedia lessons, not flashcard pages. Prefer direct free/open MSA-oriented media; do not auto-select deferred Gateway/Al Jazeera material.",
   "current_stage": "A1 foundation",
   "active_course": "arabic-free-intensive-20-week",
   "resolved": [
     {
       "course_order": 1,
-      "curriculum_goal": "self-introduction, stating name/origin, and asking another person the same information",
-      "title": "Introduce Yourself in Arabic",
-      "provider": "University of Wisconsin–Madison",
-      "platform": "open educational web lesson",
-      "url": "https://wisc.pb.unizin.org/lctlresources/chapter/introduce-yourself-in-arabic/",
+      "curriculum_goal": "self-introduction, stating one's name, and practicing basic greeting/introduction questions and answers",
+      "title": "Greeting and Self Introduction in Arabic",
+      "provider": "Learning Arabic with Angela",
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/watch?v=nks7OnPPpBQ",
+      "reference_url": "https://www.learningarabicwithangela.com/post/greeting-and-self-introduction-in-arabic",
       "role": "core",
       "audio_suitability": 5,
       "visual_dependency": "helpful",
       "verified": true,
-      "source_id": "uw-introduce-yourself",
-      "covers": ["hello", "my name is", "where I am from", "asking name", "asking origin"],
+      "source_id": "angela-greeting-self-introduction",
+      "covers": ["greetings", "self-introduction", "name", "basic questions and answers", "pronunciation"],
       "status": "next"
     }
   ],
   "deferred_courses": [
-    {
-      "path": "playlists/audio/arabic/deferred/gateway-to-arabic-book-2/playlist.json",
-      "status": "deferred/optional"
-    },
-    {
-      "path": "playlists/audio/arabic/deferred/al-jazeera-immersion/playlist.json",
-      "status": "deferred/immersion"
-    }
+    {"path": "playlists/audio/arabic/deferred/gateway-to-arabic-book-2/playlist.json", "status": "deferred/optional"},
+    {"path": "playlists/audio/arabic/deferred/al-jazeera-immersion/playlist.json", "status": "deferred/immersion"}
   ]
 }
