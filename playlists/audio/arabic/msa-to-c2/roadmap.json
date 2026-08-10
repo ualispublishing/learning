@@ -5,29 +5,49 @@
   "goal": "CEFR C2",
   "medium": "audio-first",
   "audio_time_target_percent": [70, 85],
-  "source_policy": "Use a source-diverse mix of public/open YouTube, university audio, Al Jazeera Learning Arabic, graded media, podcasts, and authentic MSA.",
+  "source_policy": "Begin with English-supported structured MSA; progressively reduce scaffolding; use Arabic-only immersion after a readiness gate; rotate public/open sources for reinforcement.",
   "spaced_reinforcement_standard": "docs/SPACED_REINFORCEMENT_STANDARD.md",
+  "course_sequence": [
+    {
+      "order": 1,
+      "course_id": "arabic-foundation-gateway-book-2",
+      "title": "Gateway to Arabic Book 2 — English-Supported MSA Foundation",
+      "cefr": "A1 foundation",
+      "path": "playlists/audio/arabic/courses/gateway-to-arabic-book-2/playlist.json",
+      "status": "active"
+    },
+    {
+      "order": 2,
+      "course_id": "arabic-al-jazeera-immersion",
+      "title": "Al Jazeera Learning Arabic — Immersion Course",
+      "cefr": "post-foundation A1/A2 bridge",
+      "path": "playlists/audio/arabic/courses/al-jazeera-immersion/playlist.json",
+      "status": "deferred",
+      "unlock": "Complete Gateway foundation + pass Arabic-only comprehension readiness checkpoint; reverify media on activation."
+    }
+  ],
   "stages": [
     {
       "cefr": "A1",
-      "goal": "Core pronunciation, greetings, identity, family, daily needs, basic nominal/verbal patterns, high-frequency vocabulary and short exchanges.",
-      "primary": ["Al Jazeera Learning Arabic beginner video dialogues", "University of Wisconsin MSA listening lessons", "public MSA grammar/pronunciation videos", "open university audio resources"],
-      "reinforcement": ["different-speaker Al Jazeera media clips", "University/open-source dialogues", "delayed YouTube/audio revisits", "short authentic MSA encounters"],
-      "output": ["shadow short dialogues", "30-60 second self-introductions", "short dictation", "basic sentence production"],
-      "exit": "Demonstrate A1 reception, production, interaction, and mediation; do not advance based only on lesson count."
+      "goal": "Core pronunciation, gender/agreement, demonstratives, questions, pronouns, possession, prepositions, family, numbers, nationality, high-frequency vocabulary and simple exchanges.",
+      "primary": ["Gateway to Arabic Book 2 public YouTube course"],
+      "reinforcement": ["University of Wisconsin MSA listening", "simple public MSA YouTube explanations", "open university audio"],
+      "immersion_policy": "Do not use strict Arabic-only material as the primary teaching source yet.",
+      "output": ["shadow short phrases", "build simple nominal sentences", "ask/answer basic questions", "30-60 second guided self-description", "short dictation"],
+      "exit": "Demonstrate A1 reception, production and interaction plus sufficient Arabic-only comprehension to unlock the immersion course."
     },
     {
       "cefr": "A2",
       "goal": "Routine transactions, connected descriptions of daily life and past/routine events, core tense/aspect patterns, larger high-frequency lexicon.",
-      "primary": ["Al Jazeera Learning Arabic elementary/A2 material", "open university MSA audio", "curated public video/audio lessons"],
+      "primary": ["graded Arabic-first immersion course after foundation", "open/public MSA audio-video lessons"],
       "reinforcement": ["alternate dialogues on shopping, travel, health, routines and family", "graded audio stories", "different-source presentations of older grammar"],
       "output": ["1-2 minute monologues", "guided conversation", "dictation", "short summaries"],
-      "exit": "Handle routine exchanges and understand clear learner-targeted MSA without English scaffolding most of the time."
+      "exit": "Handle routine exchanges and understand clear learner-targeted MSA with sharply reduced English scaffolding."
     },
     {
       "cefr": "B1",
       "goal": "Independent comprehension of clear standard speech, narrative ability, reasons/opinions, transition toward native-speed graded media.",
-      "primary": ["Al Jazeera Learning Arabic B1/intermediate general and media language", "graded public MSA audio/video"],
+      "primary": ["graded public MSA audio/video", "verified Arabic-first learning media", "beginner news/documentary segments"],
       "reinforcement": ["graded news/audio", "second explanations of core morphology and syntax", "topic spirals from A1-A2"],
       "output": ["2-4 minute summaries", "retellings", "opinion responses", "regular dictation and shadowing"],
       "exit": "Follow main points of clear standard media and sustain connected speech on familiar topics."
@@ -35,7 +55,7 @@
     {
       "cefr": "B2",
       "goal": "Extended standard discourse, abstract topics, natural-speed media, flexible grammar and broad productive vocabulary.",
-      "primary": ["Al Jazeera Learning Arabic B2/upper-intermediate", "curated native MSA news/documentary/podcast segments"],
+      "primary": ["curated native MSA news/documentary/podcast segments", "advanced graded media"],
       "reinforcement": ["same issues covered by multiple speakers/sources", "contrastive register and paraphrase tasks"],
       "output": ["5-8 minute explanations", "debate-style responses", "source summaries", "translation/reformulation"],
       "exit": "Understand extended standard discourse and interact with reasonable fluency on concrete and abstract subjects."
@@ -43,7 +63,7 @@
     {
       "cefr": "C1",
       "goal": "Implicit meaning, academic/professional register, dense native media, stylistic control and sustained spontaneous expression.",
-      "primary": ["Al Jazeera Learning Arabic C1/advanced", "native lectures, interviews, documentaries, long-form MSA audio"],
+      "primary": ["native lectures, interviews, documentaries, long-form MSA audio"],
       "reinforcement": ["multi-source treatment of the same issue", "rhetorical and near-synonym contrasts", "older grammar reappearing inside authentic discourse"],
       "output": ["10+ minute synthesis", "structured argument", "oral précis", "advanced dictation", "register shifts"],
       "exit": "Use Arabic flexibly and understand demanding extended discourse with limited support."
@@ -51,7 +71,7 @@
     {
       "cefr": "C2",
       "goal": "Near-complete comprehension across speed/register, precise nuance, synthesis across sources, specialized vocabulary and effortless reformulation.",
-      "primary": ["Al Jazeera Learning Arabic C2/proficiency", "native specialist lectures, debates, literature/audio books, formal interviews and documentaries"],
+      "primary": ["native specialist lectures, debates, literature/audio books, formal interviews and documentaries"],
       "reinforcement": ["cross-domain synthesis", "multiple viewpoints/speakers on one subject", "dialect-aware listening without replacing MSA production"],
       "output": ["unscripted synthesis of multiple sources", "precise reformulation", "teaching/explaining nuanced distinctions", "professional/academic speaking and writing"],
       "exit": "Meet C2 descriptors across listening, reading, speaking, writing, interaction and mediation; playlist completion alone is insufficient."
