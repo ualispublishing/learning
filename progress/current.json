@@ -1,6 +1,7 @@
 {
   "active_track_id": "arabic-msa-to-c2",
   "active_track": "playlists/audio/arabic/msa-to-c2/a1-foundations/playlist.json",
+  "active_course": "playlists/audio/arabic/courses/gateway-to-arabic-book-2/playlist.json",
   "resolved_media": "playlists/audio/arabic/msa-to-c2/resolved_media.json",
   "track_progress": "progress/tracks/arabic-msa-to-c2.json",
   "active_flashcards": "subjects/arabic/",
@@ -8,23 +9,28 @@
   "archived_flashcards": "archive/flashcards/",
   "subject": "arabic",
   "goal": "CEFR C2",
-  "current_stage": "A1",
-  "completed_through_order": 2,
-  "source_preference": "public/open YouTube, audio, video, and educational sources; source-diverse and audio-first",
+  "current_stage": "A1 foundation",
+  "completed_prior_concept_milestones": 2,
+  "active_course_progress": 0,
+  "source_preference": "English-supported public MSA video/audio for the foundation; Arabic-only immersion later",
   "command_protocol": {
-    "complete": "mark current resolved media complete, process cards/sources/reinforcement, resolve next public source, and advance",
+    "complete": "mark the current Gateway course lesson complete, process cards and spaced review, then advance to the next Gateway video or due non-immersion reinforcement item",
     "finished": "same as complete",
-    "whats_next": "return exact resolved media from repo state"
+    "whats_next": "return exact current Gateway/public foundation media from repo state"
   },
   "next": {
-    "order": 3,
-    "title": "في مَرْكَزِ تَعْلِيمِ اللُّغَةِ العَرَبِيَّةِ — At the Arabic language teaching center",
-    "provider": "Al Jazeera Learning Arabic",
-    "platform": "web video",
-    "url": "https://learning.aljazeera.net/en/generallanguage/%D9%81%D9%8A-%D9%85%D8%B1%D9%83%D8%B2-%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A7%D9%84%D9%84%D8%BA%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9",
-    "medium": "video/audio",
-    "curriculum_goal": "introductions, names, occupations, countries, masculine/feminine forms"
+    "course_order": 1,
+    "title": "Gateway to Arabic Book 2 — Lesson 1: Gender",
+    "provider": "Gateway to Arabic / Dr. Imran Hamza Alawiye",
+    "platform": "YouTube",
+    "url": "https://www.youtube.com/playlist?list=PLDGAumsXqBwHnp1Xkgi1Tl2oEinV4EkNb",
+    "url_type": "open playlist and play the first uncompleted lesson",
+    "fallback_url": "https://www.mclportal.com/courses/gateway-to-arabic-level-2",
+    "medium": "video/audio"
   },
+  "deferred_courses": [
+    "playlists/audio/arabic/courses/al-jazeera-immersion/playlist.json"
+  ],
   "paused_tracks": [
     "progress/tracks/mats-efficient-engineer.json"
   ]
