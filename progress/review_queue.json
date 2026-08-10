@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "purpose": "Cross-track spaced reinforcement queue. Review events reference canonical concepts; they do not duplicate cards.",
   "active_subject": "arabic",
   "policy": "docs/SPACED_REINFORCEMENT_STANDARD.md",
@@ -9,11 +9,20 @@
     "scheduled": [
       {
         "review_id": "ar-a1-greetings-r1",
-        "concepts": ["greetings", "how-are-you", "masculine-feminine-address", "alhamdulillah"],
+        "concepts": ["greetings", "how-are-you", "masculine-feminine-address", "time-specific-greetings", "thank-you"],
         "after_completed_playlist_order": 3,
         "target_playlist_order": 4,
         "representation": "alternate phrase presentation + retrieval before listening",
         "media_title": "Top 25 Arabic Phrases",
+        "status": "scheduled"
+      },
+      {
+        "review_id": "ar-a1-number-address-near-transfer",
+        "concepts": ["dual-address", "plural-address", "we-pronoun"],
+        "after_completed_playlist_order": 4,
+        "target_playlist_order": 5,
+        "representation": "new dialogue that reuses plural-person grammar",
+        "media_title": "Who Are You All?",
         "status": "scheduled"
       },
       {
@@ -26,10 +35,16 @@
       }
     ],
     "exposure_counts": {
-      "greetings": 1,
-      "how-are-you": 1,
-      "masculine-feminine-address": 1,
-      "alhamdulillah": 1
+      "greetings": 2,
+      "how-are-you": 2,
+      "masculine-feminine-address": 2,
+      "alhamdulillah": 1,
+      "time-specific-greetings": 1,
+      "dual-address": 1,
+      "plural-address": 1,
+      "thank-you": 1,
+      "we-pronoun": 1,
+      "condition-expressions": 1
     },
     "rules": {
       "initial_review_gaps_in_playlist_items": [2, 5, 12, 30],
