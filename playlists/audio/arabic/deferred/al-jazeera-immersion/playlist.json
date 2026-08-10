@@ -1,25 +1,26 @@
 {
   "course_id": "arabic-al-jazeera-immersion",
-  "title": "Al Jazeera Learning Arabic — Immersion Course",
+  "title": "Al Jazeera Learning Arabic — Deferred Immersion Course",
   "status": "deferred",
+  "auto_select": false,
   "variety": "msa",
   "instruction_language": "Arabic-first / immersion",
-  "position_in_path": "after the English-supported beginner foundation course",
+  "position_in_path": "optional later immersion after a strong free/open MSA foundation",
   "activation_gate": {
-    "depends_on": "arabic-foundation-gateway-book-2",
-    "require_course_completion": true,
+    "depends_on": "arabic-free-intensive-20-week",
     "require_checkpoint": true,
-    "checkpoint_goal": "Learner can follow simple fully-Arabic instructions/dialogues without needing constant English translation and can handle basic A1 grammar/vocabulary productively."
+    "checkpoint_goal": "Learner can follow simple fully-Arabic instructions/dialogues without constant English translation and has at least a stable A2-like foundation.",
+    "explicit_user_restore_required": true
   },
-  "reason_deferred": "The current Al Jazeera materials are too strict an Arabic-only approach for the active beginner phase, and some previously saved media links were missing/unavailable. Use it later as an immersion transition rather than as the introductory spine.",
+  "reason_deferred": "The source uses a strict Arabic-first approach, and some previously saved media was missing/unavailable. Keep it separate from the active beginner curriculum.",
   "media_policy": {
     "saved_old_urls_are_not_trusted": true,
-    "on_activation": "Re-search and verify every individual Al Jazeera media item before presenting it. Do not assume previously stored video/audio is still present.",
-    "fallback": "If Al Jazeera media remains unavailable at activation, replace that lesson with another Arabic-first graded MSA source while preserving the immersion-course role."
+    "on_activation": "Re-search and verify every individual Al Jazeera media item before presenting it.",
+    "fallback": "If media remains unavailable, use another verified graded Arabic-first MSA source for the same immersion role."
   },
   "planned_concept_clusters": [
     "greetings and introductions in Arabic-only context",
-    "name, nationality, profession, and personal information",
+    "name, nationality, profession and personal information",
     "family and descriptions",
     "daily routine and time",
     "restaurant and food interactions",
@@ -27,5 +28,6 @@
     "forms and personal-information reading/writing",
     "longer multi-speaker listening and media-language transition"
   ],
-  "spaced_reinforcement_role": "Re-present beginner concepts through Arabic-only input after they are already familiar, creating desirable difficulty and transfer rather than first exposure."
+  "spaced_reinforcement_role": "Optional later re-presentation of already learned concepts through Arabic-only input.",
+  "source_registry": "sources/arabic-deferred.json"
 }
