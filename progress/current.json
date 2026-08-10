@@ -1,31 +1,33 @@
 {
   "active_track_id": "arabic-msa-to-c2",
   "active_track": "playlists/audio/arabic/msa-to-c2/a1-foundations/playlist.json",
-  "active_course": "playlists/audio/arabic/courses/free-intensive-20-week/playlist.json",
-  "active_plan": "playlists/audio/arabic/courses/free-intensive-20-week/plan.json",
+  "active_course": "playlists/audio/arabic/courses/arabicpod101-newbie-season-1/playlist.json",
+  "secondary_course": "playlists/audio/arabic/courses/free-intensive-20-week/plan.json",
   "resolved_media": "playlists/audio/arabic/msa-to-c2/resolved_media.json",
   "track_progress": "progress/tracks/arabic-msa-to-c2.json",
   "active_flashcards": "subjects/arabic/",
   "subject": "arabic",
-  "goal": "CEFR C2 long term; free intensive foundation first",
+  "goal": "CEFR C2 long term; ArabicPod101 beginner audio sequence active now",
   "current_stage": "A1 foundation",
-  "completed_prior_concept_milestones": 2,
-  "active_course_progress": 0,
-  "source_preference": "free/open, audio-first, MSA-focused, source-diverse; primary lessons must be actual listenable media",
+  "completed_through_order": 2,
+  "source_preference": "ArabicPod101 primary audio sequence; free/open sources retained for reinforcement and later expansion",
   "command_protocol": {
-    "complete": "mark the exact current free-course media completed, process/deepen Arabic layered cards, update spaced reinforcement, then advance to the next active free item",
+    "complete": "mark current ArabicPod101 lesson complete, process cards/audio review/spaced reinforcement, live-resolve the next ArabicPod101 lesson and advance",
     "finished": "same as complete",
-    "whats_next": "return exact current free-course media from repo state"
+    "whats_next": "return exact current ArabicPod101 lesson from repo state"
   },
   "next": {
-    "course_order": 1,
-    "title": "Greeting and Self Introduction in Arabic",
-    "provider": "Learning Arabic with Angela",
-    "platform": "YouTube",
-    "url": "https://www.youtube.com/watch?v=nks7OnPPpBQ",
-    "medium": "direct beginner video/audio lesson",
-    "curriculum_goal": "practice greeting and self-introduction with spoken Arabic, pronunciation, English support, and examples"
+    "order": 3,
+    "title": "What’s Your Name?",
+    "provider": "ArabicPod101",
+    "platform": "web audio lesson",
+    "url": "https://www.arabicpod101.com/lesson/newbie-3-whats-your-name",
+    "medium": "short audio lesson with dialogue, English explanation and transcript",
+    "curriculum_goal": "ask and answer a person's name; learn مَا اسْمُكَ؟ / مَا اسْمُكِ؟ and اِسْمِي ..."
   },
+  "secondary_courses": [
+    "playlists/audio/arabic/courses/free-intensive-20-week/plan.json"
+  ],
   "deferred_courses": [
     "playlists/audio/arabic/deferred/gateway-to-arabic-book-2/playlist.json",
     "playlists/audio/arabic/deferred/al-jazeera-immersion/playlist.json"
