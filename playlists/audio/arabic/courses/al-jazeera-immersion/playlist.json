@@ -1,0 +1,31 @@
+{
+  "course_id": "arabic-al-jazeera-immersion",
+  "title": "Al Jazeera Learning Arabic — Immersion Course",
+  "status": "deferred",
+  "variety": "msa",
+  "instruction_language": "Arabic-first / immersion",
+  "position_in_path": "after the English-supported beginner foundation course",
+  "activation_gate": {
+    "depends_on": "arabic-foundation-gateway-book-2",
+    "require_course_completion": true,
+    "require_checkpoint": true,
+    "checkpoint_goal": "Learner can follow simple fully-Arabic instructions/dialogues without needing constant English translation and can handle basic A1 grammar/vocabulary productively."
+  },
+  "reason_deferred": "The current Al Jazeera materials are too strict an Arabic-only approach for the active beginner phase, and some previously saved media links were missing/unavailable. Use it later as an immersion transition rather than as the introductory spine.",
+  "media_policy": {
+    "saved_old_urls_are_not_trusted": true,
+    "on_activation": "Re-search and verify every individual Al Jazeera media item before presenting it. Do not assume previously stored video/audio is still present.",
+    "fallback": "If Al Jazeera media remains unavailable at activation, replace that lesson with another Arabic-first graded MSA source while preserving the immersion-course role."
+  },
+  "planned_concept_clusters": [
+    "greetings and introductions in Arabic-only context",
+    "name, nationality, profession, and personal information",
+    "family and descriptions",
+    "daily routine and time",
+    "restaurant and food interactions",
+    "appointments and phone language",
+    "forms and personal-information reading/writing",
+    "longer multi-speaker listening and media-language transition"
+  ],
+  "spaced_reinforcement_role": "Re-present beginner concepts through Arabic-only input after they are already familiar, creating desirable difficulty and transfer rather than first exposure."
+}
