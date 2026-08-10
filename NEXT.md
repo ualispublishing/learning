@@ -4,12 +4,21 @@
 
 Current stage: **A1 Foundations**
 
+Completed:
+1. ✅ **Hello. How Are You?** — ArabicPod101
+
 Next:
-1. **Hello. How Are You?** — ArabicPod101
-   - https://www.arabicpod101.com/lesson/newbie-1-hello-how-are-you?lp=189
+2. ▶ **Good Morning, How Are You All?** — ArabicPod101
+   - https://www.arabicpod101.com/lesson/newbie-2-good-morning-how-are-you-all?lp=189
    - Medium: audio lesson
-   - Variety: Modern Standard Arabic
-   - Role: core introduction
+   - Variety: Standard Arabic / MSA learning track
+   - Role: core + near-transfer from lesson 1
+
+Before listening, retrieve aloud without notes:
+- مَرْحَبًا
+- كَيْفَ حالُكَ؟ / كَيْفَ حالُكِ؟
+- بِخَيْر، الْحَمْدُ لله
+- وَأَنْتَ؟ / وَأَنْتِ؟
 
 Listening protocol:
 1. First pass: audio without transcript.
@@ -19,15 +28,14 @@ Listening protocol:
 5. Final pass: audio again without English.
 
 When the user says **complete** or **finished**:
-- read `ARABIC.md`;
-- read `docs/SPACED_REINFORCEMENT_STANDARD.md`;
-- process the current lesson into canonical layered Arabic flashcards;
-- update sources and concept exposure counts;
-- mark the item complete;
-- choose the next queued/reinforcement item according to the spiral schedule;
-- update `progress/tracks/arabic-msa-to-c2.json` and `progress/current.json`;
-- replace this file with the new next lesson;
-- return the exact next media URL to the user.
+- read `ARABIC.md` and the Arabic review contract;
+- mark lesson 2 complete;
+- extract only genuinely useful new concepts;
+- create/deepen active cards with **Arabic-script-only `front` fields** and the complete layered information on the back;
+- update sources and spaced-reinforcement exposure counts;
+- select the next core or due reinforcement item;
+- update playlist, `progress/tracks/arabic-msa-to-c2.json`, `progress/current.json`, `progress/review_queue.json`, and this file;
+- return the exact next media URL.
 
 ### Paused track
-MATS / Efficient Engineer is preserved at `progress/tracks/mats-efficient-engineer.json` and resumes at **Understanding Poisson's Ratio**.
+MATS / Efficient Engineer remains preserved at `progress/tracks/mats-efficient-engineer.json` and resumes at **Understanding Poisson's Ratio**.
