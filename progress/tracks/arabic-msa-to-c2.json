@@ -3,43 +3,44 @@
   "subject": "arabic",
   "status": "active",
   "cefr_goal": "C2",
-  "current_stage": "A1",
-  "playlist": "playlists/audio/arabic/msa-to-c2/a1-foundations/playlist.json",
+  "current_stage": "A1 foundation",
+  "course_manifest": "playlists/audio/arabic/msa-to-c2/a1-foundations/playlist.json",
+  "active_course": "playlists/audio/arabic/courses/gateway-to-arabic-book-2/playlist.json",
   "resolved_media": "playlists/audio/arabic/msa-to-c2/resolved_media.json",
-  "source_preference": "public/open, source-diverse, audio-first",
+  "source_preference": "English-supported public MSA foundation first; Arabic-only immersion afterward",
   "active_flashcards": [
     "subjects/arabic/a1-foundations/greetings/knowledge.json",
     "subjects/arabic/a1-foundations/greetings-and-plural-address/knowledge.json"
   ],
-  "archived_previous_subject_flashcards": [
-    "archive/flashcards/mats/mechanics-of-materials/stress-and-strain/knowledge.json",
-    "archive/flashcards/mats/mechanics-of-materials/youngs-modulus/knowledge.json"
-  ],
-  "completed_orders": [1, 2],
-  "completed_lessons": [
+  "completed_prior_concept_milestones": [
     {
       "order": 1,
       "title": "Greetings / How are you? — concept milestone",
-      "completed_on": "2026-08-10",
-      "source_status": "prior source retired; replacement validation sources registered",
-      "flashcards": "subjects/arabic/a1-foundations/greetings/knowledge.json"
+      "completed_on": "2026-08-10"
     },
     {
       "order": 2,
       "title": "Morning/evening greetings + dual/plural address — concept milestone",
-      "completed_on": "2026-08-10",
-      "source_status": "prior source retired; replacement validation sources registered",
-      "flashcards": "subjects/arabic/a1-foundations/greetings-and-plural-address/knowledge.json"
+      "completed_on": "2026-08-10"
     }
   ],
-  "next": {
-    "order": 3,
-    "title": "في مَرْكَزِ تَعْلِيمِ اللُّغَةِ العَرَبِيَّةِ — At the Arabic language teaching center",
-    "provider": "Al Jazeera Learning Arabic",
-    "platform": "web video",
-    "url": "https://learning.aljazeera.net/en/generallanguage/%D9%81%D9%8A-%D9%85%D8%B1%D9%83%D8%B2-%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A7%D9%84%D9%84%D8%BA%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9",
-    "role": "core",
-    "curriculum_goal": "introductions, names, occupations, countries, masculine/feminine forms"
+  "active_course_progress": {
+    "course_id": "arabic-foundation-gateway-book-2",
+    "completed_orders": [],
+    "next": {
+      "course_order": 1,
+      "title": "Gateway to Arabic Book 2 — Lesson 1: Gender",
+      "provider": "Gateway to Arabic / Dr. Imran Hamza Alawiye",
+      "url": "https://www.youtube.com/playlist?list=PLDGAumsXqBwHnp1Xkgi1Tl2oEinV4EkNb",
+      "url_type": "playlist start / first uncompleted lesson",
+      "fallback_url": "https://www.mclportal.com/courses/gateway-to-arabic-level-2"
+    }
+  },
+  "deferred_course": {
+    "course_id": "arabic-al-jazeera-immersion",
+    "path": "playlists/audio/arabic/courses/al-jazeera-immersion/playlist.json",
+    "status": "locked",
+    "unlock_condition": "Complete Gateway Book 2 foundation and pass the A1 readiness checkpoint. Reverify Al Jazeera media before use."
   },
   "reinforcement": {
     "policy": "docs/SPACED_REINFORCEMENT_STANDARD.md",
@@ -56,15 +57,6 @@
       "we-pronoun": 1,
       "condition-expressions": 1
     },
-    "next_media_reinforcement": {
-      "playlist_order": 4,
-      "title": "أَهْلًا بِكُمْ في مَقْهَى الجَزِيرَة (الحلقة 1)",
-      "reinforces": ["greetings", "morning-greetings", "nice-to-meet-you"]
-    },
-    "near_transfer": {
-      "playlist_order": 5,
-      "title": "Arabic Pronouns: I, You, He, She, etc.",
-      "reinforces": ["dual-address", "plural-address", "pronoun-system"]
-    }
+    "rule": "During Gateway foundation, use only beginner-appropriate English-supported/public reinforcement. Do not schedule Al Jazeera immersion media yet."
   }
 }
