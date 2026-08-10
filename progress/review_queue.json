@@ -1,12 +1,36 @@
 {
-  "version": 1,
+  "version": 2,
   "purpose": "Cross-track spaced reinforcement queue. Review events reference canonical concepts; they do not duplicate cards.",
   "active_subject": "arabic",
   "policy": "docs/SPACED_REINFORCEMENT_STANDARD.md",
   "arabic": {
     "track_id": "arabic-msa-to-c2",
     "due": [],
-    "scheduled": [],
+    "scheduled": [
+      {
+        "review_id": "ar-a1-greetings-r1",
+        "concepts": ["greetings", "how-are-you", "masculine-feminine-address", "alhamdulillah"],
+        "after_completed_playlist_order": 3,
+        "target_playlist_order": 4,
+        "representation": "alternate phrase presentation + retrieval before listening",
+        "media_title": "Top 25 Arabic Phrases",
+        "status": "scheduled"
+      },
+      {
+        "review_id": "ar-a1-greetings-r2",
+        "concepts": ["greetings", "how-are-you", "masculine-feminine-address"],
+        "target_playlist_order": 7,
+        "representation": "different-speaker contextual dialogue",
+        "media_title": "تَشَرَّفْنَا — Nice to meet you",
+        "status": "scheduled"
+      }
+    ],
+    "exposure_counts": {
+      "greetings": 1,
+      "how-are-you": 1,
+      "masculine-feminine-address": 1,
+      "alhamdulillah": 1
+    },
     "rules": {
       "initial_review_gaps_in_playlist_items": [2, 5, 12, 30],
       "stage_bridge_review": true,
