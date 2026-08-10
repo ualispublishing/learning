@@ -4,82 +4,76 @@
   "primary_variety": "msa",
   "goal": "CEFR C2",
   "medium": "audio-first",
-  "audio_time_target_percent": [70, 85],
-  "source_policy": "Begin with English-supported structured MSA; progressively reduce scaffolding; use Arabic-only immersion after a readiness gate; rotate public/open sources for reinforcement.",
+  "source_policy": "Active foundation/intermediate curriculum uses free/open sources: ANU Marhaba, Wisconsin, MSU OER, LQToronto/Madina and DLI GLOSS. Gateway and Al Jazeera are deferred outside the active path.",
   "spaced_reinforcement_standard": "docs/SPACED_REINFORCEMENT_STANDARD.md",
   "course_sequence": [
     {
       "order": 1,
-      "course_id": "arabic-foundation-gateway-book-2",
-      "title": "Gateway to Arabic Book 2 — English-Supported MSA Foundation",
-      "cefr": "A1 foundation",
-      "path": "playlists/audio/arabic/courses/gateway-to-arabic-book-2/playlist.json",
+      "course_id": "arabic-free-intensive-20-week",
+      "title": "Free Intensive MSA Foundation to Independent Bridge",
+      "target": "strong A2 / early B1 bridge if checkpoints are passed",
+      "path": "playlists/audio/arabic/courses/free-intensive-20-week/plan.json",
       "status": "active"
     },
     {
       "order": 2,
-      "course_id": "arabic-al-jazeera-immersion",
-      "title": "Al Jazeera Learning Arabic — Immersion Course",
-      "cefr": "post-foundation A1/A2 bridge",
-      "path": "playlists/audio/arabic/courses/al-jazeera-immersion/playlist.json",
-      "status": "deferred",
-      "unlock": "Complete Gateway foundation + pass Arabic-only comprehension readiness checkpoint; reverify media on activation."
+      "course_id": "arabic-post-foundation-b1-b2",
+      "title": "B1–B2 Graded MSA Expansion",
+      "status": "planned",
+      "primary": ["DLI GLOSS Arabic-MSA", "open university MSA material", "graded public audio/video"],
+      "activation": "After strong A2/early-B1 checkpoint"
+    },
+    {
+      "order": 3,
+      "course_id": "arabic-advanced-c1-c2",
+      "title": "C1–C2 Authentic MSA Synthesis",
+      "status": "planned",
+      "primary": ["DLI GLOSS higher-level MSA", "native lectures", "interviews", "documentaries", "news analysis", "audiobooks/literature"],
+      "activation": "Checkpoint-based; not time-based"
     }
   ],
+  "deferred_optional": [
+    "playlists/audio/arabic/deferred/gateway-to-arabic-book-2/playlist.json",
+    "playlists/audio/arabic/deferred/al-jazeera-immersion/playlist.json"
+  ],
+  "reality_rule": "Do not promise C2 in a few months. The 20-week program is an intensive complete foundation/independent bridge; continue toward B2/C1/C2 based on demonstrated proficiency.",
   "stages": [
     {
       "cefr": "A1",
-      "goal": "Core pronunciation, gender/agreement, demonstratives, questions, pronouns, possession, prepositions, family, numbers, nationality, high-frequency vocabulary and simple exchanges.",
-      "primary": ["Gateway to Arabic Book 2 public YouTube course"],
-      "reinforcement": ["University of Wisconsin MSA listening", "simple public MSA YouTube explanations", "open university audio"],
-      "immersion_policy": "Do not use strict Arabic-only material as the primary teaching source yet.",
-      "output": ["shadow short phrases", "build simple nominal sentences", "ask/answer basic questions", "30-60 second guided self-description", "short dictation"],
-      "exit": "Demonstrate A1 reception, production and interaction plus sufficient Arabic-only comprehension to unlock the immersion course."
+      "active_sources": ["ANU Marhaba", "Wisconsin MSA", "MSU Elementary Arabic I", "LQToronto/Madina Book 1"],
+      "goal": "Greetings, identity, family, gender/agreement, questions, pronouns, possession, prepositions, numbers, core present tense, nominal/verbal sentences and high-frequency vocabulary.",
+      "exit": "Produce and understand basic exchanges and short connected MSA without relying on memorized scripts."
     },
     {
       "cefr": "A2",
-      "goal": "Routine transactions, connected descriptions of daily life and past/routine events, core tense/aspect patterns, larger high-frequency lexicon.",
-      "primary": ["graded Arabic-first immersion course after foundation", "open/public MSA audio-video lessons"],
-      "reinforcement": ["alternate dialogues on shopping, travel, health, routines and family", "graded audio stories", "different-source presentations of older grammar"],
-      "output": ["1-2 minute monologues", "guided conversation", "dictation", "short summaries"],
-      "exit": "Handle routine exchanges and understand clear learner-targeted MSA with sharply reduced English scaffolding."
+      "active_sources": ["ANU Marhaba completion", "MSU Elementary Arabic II Standard-Arabic sections", "LQToronto/Madina grammar", "introductory DLI GLOSS Arabic-MSA"],
+      "goal": "Connected descriptions, routine exchanges, present/past/future basics, idafa, plurals, time, routine, hobbies, weather, city descriptions and short narratives.",
+      "exit": "Understand clear familiar MSA, write connected short paragraphs and sustain 2–5 minute prepared-to-semi-spontaneous speech."
     },
     {
       "cefr": "B1",
-      "goal": "Independent comprehension of clear standard speech, narrative ability, reasons/opinions, transition toward native-speed graded media.",
-      "primary": ["graded public MSA audio/video", "verified Arabic-first learning media", "beginner news/documentary segments"],
-      "reinforcement": ["graded news/audio", "second explanations of core morphology and syntax", "topic spirals from A1-A2"],
-      "output": ["2-4 minute summaries", "retellings", "opinion responses", "regular dictation and shadowing"],
-      "exit": "Follow main points of clear standard media and sustain connected speech on familiar topics."
+      "active_sources": ["DLI GLOSS Arabic-MSA", "MSU II completion/review", "graded public MSA audio/video"],
+      "goal": "Independent comprehension of clear standard speech, narratives, explanations and reasons/opinions.",
+      "exit": "Follow main points of standard media on familiar topics and produce connected summaries/opinions."
     },
     {
       "cefr": "B2",
-      "goal": "Extended standard discourse, abstract topics, natural-speed media, flexible grammar and broad productive vocabulary.",
-      "primary": ["curated native MSA news/documentary/podcast segments", "advanced graded media"],
-      "reinforcement": ["same issues covered by multiple speakers/sources", "contrastive register and paraphrase tasks"],
-      "output": ["5-8 minute explanations", "debate-style responses", "source summaries", "translation/reformulation"],
-      "exit": "Understand extended standard discourse and interact with reasonable fluency on concrete and abstract subjects."
+      "active_sources": ["DLI GLOSS higher levels", "native MSA podcasts/news/documentaries", "open lectures"],
+      "goal": "Extended discourse, abstract topics, natural speed, flexible grammar and broad productive vocabulary."
     },
     {
       "cefr": "C1",
-      "goal": "Implicit meaning, academic/professional register, dense native media, stylistic control and sustained spontaneous expression.",
-      "primary": ["native lectures, interviews, documentaries, long-form MSA audio"],
-      "reinforcement": ["multi-source treatment of the same issue", "rhetorical and near-synonym contrasts", "older grammar reappearing inside authentic discourse"],
-      "output": ["10+ minute synthesis", "structured argument", "oral précis", "advanced dictation", "register shifts"],
-      "exit": "Use Arabic flexibly and understand demanding extended discourse with limited support."
+      "goal": "Implicit meaning, academic/professional register, dense native media, stylistic control and sustained spontaneous expression."
     },
     {
       "cefr": "C2",
-      "goal": "Near-complete comprehension across speed/register, precise nuance, synthesis across sources, specialized vocabulary and effortless reformulation.",
-      "primary": ["native specialist lectures, debates, literature/audio books, formal interviews and documentaries"],
-      "reinforcement": ["cross-domain synthesis", "multiple viewpoints/speakers on one subject", "dialect-aware listening without replacing MSA production"],
-      "output": ["unscripted synthesis of multiple sources", "precise reformulation", "teaching/explaining nuanced distinctions", "professional/academic speaking and writing"],
+      "goal": "Near-complete comprehension across registers; precise nuance; multi-source synthesis; specialized vocabulary and effortless reformulation.",
       "exit": "Meet C2 descriptors across listening, reading, speaking, writing, interaction and mediation; playlist completion alone is insufficient."
     }
   ],
   "parallel_branches": {
-    "quranic_classical": "light exposure early; systematic parallel branch from A2/B1",
-    "dialect": "add a clearly labeled conversational dialect branch after stable A2/B1 MSA",
-    "pronunciation": "continuous corrective shadowing and targeted sound work throughout"
+    "quranic_classical": "Use Madina/LQ as an early grammar bridge; deepen systematically after the MSA foundation.",
+    "dialect": "Keep MSU Egyptian conversation modules optional and explicitly tagged; add a chosen dialect intentionally after stable MSA foundations.",
+    "pronunciation": "Continuous audio shadowing and targeted Wisconsin/MSU sound review."
   }
 }
