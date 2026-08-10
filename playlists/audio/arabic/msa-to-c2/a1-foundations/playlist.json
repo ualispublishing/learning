@@ -1,25 +1,28 @@
 {
   "track_id": "arabic-msa-to-c2-a1-foundations",
-  "title": "Arabic A1 Foundations — Course Sequence",
+  "title": "Arabic A1–B1 Foundation — Free Intensive Course Manifest",
   "status": "active-manifest",
-  "purpose": "Sequence beginner courses without mixing English-supported foundation and Arabic-only immersion too early.",
-  "course_sequence": [
+  "purpose": "Use a source-diverse free/open MSA curriculum for the intensive foundation. Keep Gateway and Al Jazeera outside the active sequence.",
+  "active_course": {
+    "course_id": "arabic-free-intensive-20-week",
+    "path": "playlists/audio/arabic/courses/free-intensive-20-week/playlist.json",
+    "plan": "playlists/audio/arabic/courses/free-intensive-20-week/plan.json",
+    "title": "Arabic MSA — Free Intensive Foundation to Independent Bridge",
+    "duration_weeks": 20,
+    "instruction_language": "English-supported initially; progressively more Arabic",
+    "sources": ["ANU Marhaba", "University of Wisconsin–Madison", "Michigan State University OER", "LQToronto/Madina grammar", "DLI GLOSS"]
+  },
+  "deferred_courses": [
     {
-      "order": 1,
       "course_id": "arabic-foundation-gateway-book-2",
-      "path": "playlists/audio/arabic/courses/gateway-to-arabic-book-2/playlist.json",
-      "title": "Gateway to Arabic Book 2 — English-Supported MSA Foundation",
-      "status": "active",
-      "instruction_language": "English-supported"
+      "path": "playlists/audio/arabic/deferred/gateway-to-arabic-book-2/playlist.json",
+      "status": "deferred/optional"
     },
     {
-      "order": 2,
       "course_id": "arabic-al-jazeera-immersion",
-      "path": "playlists/audio/arabic/courses/al-jazeera-immersion/playlist.json",
-      "title": "Al Jazeera Learning Arabic — Immersion Course",
-      "status": "deferred",
-      "instruction_language": "Arabic-first",
-      "activation_gate": "Complete Gateway foundation and pass A1 readiness checkpoint first. Reverify all Al Jazeera media on activation."
+      "path": "playlists/audio/arabic/deferred/al-jazeera-immersion/playlist.json",
+      "status": "deferred/immersion",
+      "activation_rule": "Only reconsider after a strong foundation; reverify media first."
     }
   ],
   "completed_prior_concept_milestones": [
@@ -28,5 +31,5 @@
     "singular/dual/plural address basics",
     "basic responses and thanks"
   ],
-  "rule": "Do not surface Al Jazeera as a next lesson while the Gateway foundation course is active."
+  "rule": "When the user says complete, advance within the free intensive course and its due spaced-reinforcement items. Do not surface Gateway or Al Jazeera unless the user explicitly restores them."
 }
