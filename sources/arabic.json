@@ -1,5 +1,5 @@
 {
-  "policy": "Active Arabic sources must be free/public/open and appropriate to the current foundation-to-intermediate path. Gateway and Al Jazeera are stored separately under deferred sources.",
+  "policy": "Active Arabic sources must be free/public/open and appropriate to the current foundation-to-intermediate path. Primary next lessons must be actual audio/video/multimedia lessons; flashcard pages are reinforcement only. Gateway and Al Jazeera are stored separately under deferred sources.",
   "sources": [
     {
       "id": "anu-marhaba",
@@ -12,6 +12,20 @@
       "url": "https://press.anu.edu.au/publications/textbooks/marhaba-introduction-modern-standard-arabic",
       "role": "primary curriculum spine",
       "coverage": "23 lessons developing reading, listening, speaking and writing"
+    },
+    {
+      "id": "angela-greeting-self-introduction",
+      "provider": "Learning Arabic with Angela",
+      "title": "Greeting and Self Introduction in Arabic",
+      "variety": "standard-arabic-oriented beginner lesson",
+      "level": "beginner",
+      "medium": "YouTube video/audio lesson",
+      "instruction_language": "English-supported",
+      "free": true,
+      "url": "https://www.youtube.com/watch?v=nks7OnPPpBQ",
+      "reference_url": "https://www.learningarabicwithangela.com/post/greeting-and-self-introduction-in-arabic",
+      "role": "current core listening/production lesson",
+      "coverage": ["greetings", "self-introduction", "basic questions and answers", "pronunciation"]
     },
     {
       "id": "uw-msa-greetings-listening",
@@ -30,10 +44,11 @@
       "title": "Introduce Yourself in Arabic",
       "variety": "msa",
       "level": "beginner",
-      "medium": "recorded interactive lesson",
+      "medium": "interactive flashcards with recordings + quiz",
       "free": true,
       "url": "https://wisc.pb.unizin.org/lctlresources/chapter/introduce-yourself-in-arabic/",
-      "role": "current core listening/production lesson"
+      "role": "optional reinforcement only",
+      "usage_rule": "Do not surface as a primary next lesson; it is a flashcard-style activity rather than a standalone listenable lesson."
     },
     {
       "id": "uw-common-greetings",
