@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "purpose": "Cross-track spaced reinforcement queue. Review events reference canonical concepts; they do not duplicate cards.",
+  "active_subject": "arabic",
+  "policy": "docs/SPACED_REINFORCEMENT_STANDARD.md",
+  "arabic": {
+    "track_id": "arabic-msa-to-c2",
+    "due": [],
+    "scheduled": [],
+    "rules": {
+      "initial_review_gaps_in_playlist_items": [2, 5, 12, 30],
+      "stage_bridge_review": true,
+      "failed_retrieval": "move concept to an earlier review opportunity",
+      "successful_transfer": "lengthen interval and vary representation",
+      "same_source_back_to_back": false,
+      "prefer_different_representation": true
+    }
+  },
+  "mats": {
+    "track_id": "mats-efficient-engineer-mechanics-of-materials",
+    "status": "paused",
+    "due": [],
+    "scheduled": []
+  }
+}
