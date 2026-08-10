@@ -5,6 +5,8 @@
   "cefr_goal": "C2",
   "current_stage": "A1",
   "playlist": "playlists/audio/arabic/msa-to-c2/a1-foundations/playlist.json",
+  "resolved_media": "playlists/audio/arabic/msa-to-c2/resolved_media.json",
+  "source_preference": "YouTube/public audio-video first",
   "active_flashcards": [
     "subjects/arabic/a1-foundations/greetings/knowledge.json",
     "subjects/arabic/a1-foundations/greetings-and-plural-address/knowledge.json"
@@ -34,10 +36,13 @@
   ],
   "next": {
     "order": 3,
-    "title": "What’s Your Name?",
-    "provider": "ArabicPod101",
-    "url": "https://www.arabicpod101.com/lesson/newbie-3-whats-your-name?lp=189",
-    "role": "core"
+    "title": "Learn Arabic - How to Introduce Yourself in Arabic",
+    "provider": "Learn Arabic with ArabicPod101.com",
+    "platform": "youtube",
+    "url": "https://www.youtube.com/watch?v=ityVW2gR0Rs",
+    "role": "core",
+    "curriculum_goal": "introductions and stating one's name",
+    "coverage_gap_to_preserve": "asking another person's name if not covered in this video"
   },
   "reinforcement": {
     "policy": "docs/SPACED_REINFORCEMENT_STANDARD.md",
@@ -57,12 +62,14 @@
     "next_media_reinforcement": {
       "playlist_order": 4,
       "title": "Top 25 Arabic Phrases",
-      "reinforces": ["greetings", "how-are-you", "introductions", "thank-you"]
+      "reinforces": ["greetings", "how-are-you", "introductions", "thank-you"],
+      "note": "Resolve to a verified YouTube/public-media version before presenting it."
     },
     "near_transfer": {
       "playlist_order": 5,
       "title": "Who Are You All?",
-      "reinforces": ["plural-address", "plural-pronouns"]
+      "reinforces": ["plural-address", "plural-pronouns"],
+      "note": "Resolve to a verified YouTube/public-media source before presenting it."
     }
   }
 }
