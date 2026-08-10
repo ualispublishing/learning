@@ -1,50 +1,49 @@
 # Next Lesson
 
-## ACTIVE — Arabic: Audio-First MSA to C2
+## ACTIVE — Arabic: Public Audio/Video MSA to C2
 
 Current stage: **A1 Foundations**
 
-Completed:
-1. ✅ **Hello. How Are You?** — ArabicPod101
-2. ✅ **Good Morning, How Are You All?** — ArabicPod101
+Completed concept milestones:
+1. ✅ Greetings / How are you?
+2. ✅ Morning/evening greetings + dual/plural address
 
-Next:
-3. ▶ **Learn Arabic - How to Introduce Yourself in Arabic** — Learn Arabic with ArabicPod101.com
-   - https://www.youtube.com/watch?v=ityVW2gR0Rs
-   - Platform: YouTube
-   - Medium: video/audio; suitable for audio-first use
-   - Role: core introduction/self-identification
-   - Curriculum goal: introduce yourself and state your name
+## Next
+3. ▶ **في مَرْكَزِ تَعْلِيمِ اللُّغَةِ العَرَبِيَّةِ — At the Arabic language teaching center** — Al Jazeera Learning Arabic
 
-Source policy from this point forward:
-- prefer verified YouTube lessons;
-- otherwise use free public podcasts/audio/video or university/open resources;
-- use provider lesson pages mainly as transcripts/references or when no good public-media equivalent exists;
-- preserve uncovered curriculum concepts and teach them later rather than dropping them when changing sources.
+- Medium: video/audio + transcript
+- Variety: Modern Standard Arabic
+- Role: core introductions + near transfer
+- URL: https://learning.aljazeera.net/en/generallanguage/%D9%81%D9%8A-%D9%85%D8%B1%D9%83%D8%B2-%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A7%D9%84%D9%84%D8%BA%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9
 
-Before listening, retrieve aloud without notes:
-- صَبَاحُ الْخَيْر / مَسَاءُ الْخَيْر
-- كَيْفَ حَالُكَ؟ / كَيْفَ حَالُكِ؟
-- كَيْفَ حَالُكُمَا؟ / كَيْفَ حَالُكُمْ؟
+This lesson uses greetings you already know, then adds:
+- اِسْمِي ... — my name is ...
+- أَنَا ... — I am ...
+- أَنَا مِنْ ... — I am from ...
+- occupations such as مُدَرِّس، مُحاسِب، طَبِيب/طَبِيبَة، مُهَنْدِس
+- masculine/feminine pairs such as طَالِب / طَالِبَة
+
+Before listening, retrieve aloud:
+- السَّلَامُ عَلَيْكُمْ / وَعَلَيْكُمُ السَّلَام
+- صَبَاحُ الْخَيْر
+- كَيْفَ حالُكَ؟ / كَيْفَ حالُكِ؟
+- كَيْفَ حالُكُمَا؟ / كَيْفَ حالُكُمْ؟
 - نَحْنُ بِخَيْر
-- كُلُّ شَيْءٍ بِخَيْر
 - شُكْرًا
 
 Listening protocol:
-1. First pass: audio without transcript/subtitles.
-2. Retrieve/repeat what you understood.
-3. Second pass: shadow the Arabic.
-4. Use visuals/transcript only if needed.
-5. Final pass: audio again without English.
+1. First pass with the transcript hidden.
+2. Say what you understood from memory.
+3. Replay and shadow the speakers.
+4. Inspect the Arabic transcript only after retrieval.
+5. Final pass with the transcript hidden again.
 
 When the user says **complete** or **finished**:
-- process the exact YouTube/public media completed;
-- create/deepen Arabic-script-front, eight-layer-back flashcards;
-- preserve any planned concept not actually covered by the media;
-- update spaced-reinforcement state;
-- resolve the next curriculum item to a verified YouTube/public-media source;
-- update `resolved_media.json`, progress files, and this file;
-- return the exact next media URL.
+- mark this media item complete;
+- add/deepen only useful Arabic cards with Arabic-script-only fronts and complete eight-layer backs;
+- update spaced-reinforcement exposures;
+- resolve the next item to a verified public/open source;
+- update playlist, progress, review queue, and this file.
 
 ### Paused track
-MATS / Efficient Engineer remains preserved at `progress/tracks/mats-efficient-engineer.json` and resumes at **Understanding Poisson's Ratio**.
+MATS / Efficient Engineer remains preserved and resumes at **Understanding Poisson's Ratio**.
