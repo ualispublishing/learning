@@ -1,0 +1,112 @@
+{
+  "course_id": "arabic-free-intensive-20-week",
+  "title": "Arabic MSA — Free Intensive Foundation to Independent Bridge",
+  "status": "active",
+  "duration_weeks": 20,
+  "target": {
+    "few_month_goal": "Complete a strong beginner-to-independent MSA foundation, roughly strong A2 / early B1 if checkpoints are passed.",
+    "long_term_goal": "Continue from the same system toward B2, C1 and C2; do not label the learner C2 based on time or playlist completion.",
+    "reality_note": "Arabic C2 is not a credible few-month promise. Advancement is checkpoint-based."
+  },
+  "study_load": {
+    "days_per_week": 6,
+    "daily_minutes_range": [150, 210],
+    "audio_first_minutes_target": [75, 120],
+    "blocks": [
+      "45–60 min core curriculum",
+      "30–45 min listening/shadowing",
+      "25–35 min spaced flashcards",
+      "25–40 min speaking/writing production",
+      "20–30 min grammar clinic on selected days"
+    ]
+  },
+  "source_roles": {
+    "anu_marhaba": "Primary curriculum spine: 23 MSA lessons, four skills, multimedia EPUB.",
+    "wisconsin": "Audio-first and alternate-speaker reinforcement; introductions, greetings, pronunciation, travel and targeted listening.",
+    "msu_i": "Semester-1 structured practice: vocabulary, grammar, reading, writing, embedded audio. Use Standard-Arabic sections; tag/skip Egyptian-only sections in the MSA core.",
+    "msu_ii": "Semester-2 structured A2-building practice with audio, quizzes, writing and speaking. Use Standard-Arabic sections; Egyptian modules remain optional/dialect-tagged.",
+    "madinah_lq": "Parallel grammar-depth clinic with English audio; 2–3 sessions weekly, not the communicative spine.",
+    "dli_gloss": "Later transfer source for graded MSA listening/reading once beginner material is stable."
+  },
+  "completed_prior_milestones": [
+    "greetings / how are you",
+    "morning-evening greetings",
+    "singular, dual and plural address basics",
+    "basic well-being responses and thanks"
+  ],
+  "phases": [
+    {
+      "weeks": "1-4",
+      "name": "Foundation and self-introduction",
+      "anu": "Marhaba lessons 1–5; move quickly through material already mastered.",
+      "wisconsin": ["Introduce Yourself in Arabic", "Arabic Intro Lesson: Greetings in MSA", "Common Greetings in Arabic — delayed review"],
+      "msu": ["Elementary Arabic I: selected Unit I review", "Unit II 2.2 masculine/feminine + possessives", "Unit II 2.3 numbers/exchanging information"],
+      "madinah_lq": "Book 1 lessons 1–4, 2 sessions/week",
+      "outputs": ["60-second self-introduction", "ask/answer name and origin", "describe 3 family relationships", "numbers/contact-information drill"],
+      "checkpoint": "A1-start: understand and produce a short greeting/introduction exchange without English prompts."
+    },
+    {
+      "weeks": "5-8",
+      "name": "Core sentence system",
+      "anu": "Marhaba lessons 6–10",
+      "wisconsin": ["Basic Travel Phrases", "targeted pronunciation/listening resources"],
+      "msu": ["Elementary Arabic I 3.2 present tense with food vocabulary", "4.2 nominal and verbal sentences", "4.3 adjectives", "4.4 self-description"],
+      "madinah_lq": "Book 1 lessons 5–10, 2–3 sessions/week",
+      "outputs": ["90-second description of self/home", "simple present-tense routine", "picture description", "formal MSA food/request phrases"],
+      "checkpoint": "Build new nominal and simple verbal sentences rather than reciting memorized phrases."
+    },
+    {
+      "weeks": "9-12",
+      "name": "Finish introductory MSA",
+      "anu": "Marhaba lessons 11–17",
+      "msu": ["Elementary Arabic I 5.2 vocabulary", "5.3 definite article", "5.4 reading/writing", "Unit VI days/body/clothes/seasons/animals"],
+      "madinah_lq": "Book 1 lessons 11–17",
+      "reinforcement": "Wisconsin old-topic retrieval after 5–12 item gaps; no same-topic back-to-back review.",
+      "outputs": ["2-minute connected monologue", "short paragraph with adjective agreement", "dictation from familiar audio", "read short vocalized text aloud"],
+      "checkpoint": "A1 exit / A2 entry: routine personal information, basic description, present-tense statements/questions, usable reading of short MSA text."
+    },
+    {
+      "weeks": "13-16",
+      "name": "A2 expansion",
+      "anu": "Marhaba lessons 18–23; complete the full Marhaba course.",
+      "msu": ["Elementary Arabic II Units I–III: Standard-Arabic vocabulary/grammar/reading/writing", "skip or separately tag Egyptian-only speaking sections"],
+      "madinah_lq": "Book 1 lessons 18–23; finish Book 1 grammar clinic",
+      "dli_gloss": "Begin easy Arabic-MSA Level 1/1+ listening/reading items, 2 per week.",
+      "outputs": ["self-introduction paragraph + oral version", "family description", "study/work description", "short past/present contrast where taught"],
+      "checkpoint": "A2 core: understand the main point of clear familiar MSA, describe self/family/study, and write connected short paragraphs."
+    },
+    {
+      "weeks": "17-20",
+      "name": "Independent-language bridge",
+      "msu": ["Elementary Arabic II Units IV–VIII, prioritizing Standard-Arabic vocabulary/grammar/reading/writing", "weather", "hobbies", "stories/past tense", "daily routine/time", "city descriptions/relative clauses"],
+      "dli_gloss": "Arabic-MSA Level 1+ then selected Level 2 items as comprehension allows, 3–4 items/week.",
+      "madinah_lq": "Begin Book 2 selectively for grammar gaps only; do not let grammar replace listening/output.",
+      "outputs": ["3–5 minute unscripted MSA monologue", "150–250 word writing", "oral summary of a short recording", "retell a past event", "describe hometown/routine/opinions"],
+      "checkpoint": "Strong A2 / early-B1 bridge if the learner can understand clear standard speech on familiar subjects and produce connected MSA without heavy scripting."
+    }
+  ],
+  "spaced_media_rule": {
+    "rolling_ratio": "roughly 70% new / 30% reinforcement early, moving toward 60/40",
+    "sequence": ["primary explanation", "near-transfer", "alternate speaker/source", "delayed authentic/graded encounter", "mixed synthesis"],
+    "retrieval_before_replay": true,
+    "same_source_back_to_back": false
+  },
+  "completion_protocol": {
+    "command": ["complete", "finished"],
+    "actions": [
+      "read current repo state",
+      "mark exact current media completed",
+      "extract only useful new concepts",
+      "deduplicate/deepen Arabic layered cards",
+      "keep Arabic-script-only card fronts and eight-layer backs",
+      "update exposure/review queue",
+      "select due reinforcement if appropriate",
+      "otherwise advance to next free active-course media",
+      "update progress/current.json and NEXT.md"
+    ]
+  },
+  "deferred": [
+    "playlists/audio/arabic/deferred/gateway-to-arabic-book-2/playlist.json",
+    "playlists/audio/arabic/deferred/al-jazeera-immersion/playlist.json"
+  ]
+}
