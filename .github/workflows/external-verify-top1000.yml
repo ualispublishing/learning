@@ -34,33 +34,50 @@ jobs:
       - name: Install corpus attestation dependency
         run: python -m pip install wordfreq
 
-      - name: Download Arabic WordNet 4.0
+      - name: Download independent lexical resources
         run: |
           curl -L --fail --retry 5 --retry-all-errors \
             'https://github.com/Salah-Sal/arabic-wordnet-v4/releases/download/v4.0.0/awn4.xml.gz' \
             -o /tmp/awn4.xml.gz
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://kaikki.org/dictionary/Arabic/kaikki.org-dictionary-Arabic.jsonl' \
+            -o /tmp/kaikki-arabic.jsonl
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://kaikki.org/dictionary/French/kaikki.org-dictionary-French.jsonl' \
+            -o /tmp/kaikki-french.jsonl
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://kaikki.org/dictionary/Urdu/kaikki.org-dictionary-Urdu.jsonl' \
+            -o /tmp/kaikki-urdu.jsonl
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://www.lexique.org/databases/Lexique400/Lexique400.tsv' \
+            -o /tmp/Lexique400.tsv
+          git clone --depth 1 \
+            'https://github.com/UniversalDependencies/UD_Urdu-UDTB.git' \
+            /tmp/ud_urdu
 
       - name: Verify Arabic 1000 externally
         run: |
           python scripts/verify_top1000_external.py \
             --language arabic \
             --input arabic_top1000.csv \
-            --arabic-wordnet /tmp/awn4.xml.gz \
-            --workers 6
+            --kaikki-jsonl /tmp/kaikki-arabic.jsonl \
+            --arabic-wordnet /tmp/awn4.xml.gz
 
-      - name: Verify French 1000 externally
+      - name: Verify French deck externally
         run: |
           python scripts/verify_top1000_external.py \
             --language french \
             --input french_top1000.csv \
-            --workers 6
+            --kaikki-jsonl /tmp/kaikki-french.jsonl \
+            --lexique-tsv /tmp/Lexique400.tsv
 
-      - name: Verify Urdu 1000 externally
+      - name: Verify Urdu deck externally
         run: |
           python scripts/verify_top1000_external.py \
             --language urdu \
             --input urdu_top1000.csv \
-            --workers 6
+            --kaikki-jsonl /tmp/kaikki-urdu.jsonl \
+            --urdu-ud-dir /tmp/ud_urdu
 
       - name: Commit verification evidence
         run: |
