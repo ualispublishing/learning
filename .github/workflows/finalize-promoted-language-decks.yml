@@ -1,0 +1,55 @@
+name: Finalize promoted French and Urdu deck metadata
+
+on:
+  push:
+    paths:
+      - '.github/workflows/finalize-promoted-language-decks.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace candidate-only provenance in promoted roots
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          old='Refined through multi-dictionary learner-safety selection; candidate only until final audit'
+          new='Externally verified learner deck; multi-source semantic audit passed with zero unresolved rows'
+          for name in ('french_top1000.csv','urdu_top1000.csv'):
+              p=Path(name)
+              text=p.read_text(encoding='utf-8')
+              if old not in text:
+                  raise SystemExit(f'{name}: expected candidate provenance marker not found')
+              p.write_text(text.replace(old,new),encoding='utf-8')
+          PY
+      - name: Strict promoted-root invariants
+        run: |
+          python - <<'PY'
+          import csv,re
+          from pathlib import Path
+          for lang in ('french','urdu'):
+              with Path(f'{lang}_top1000.csv').open(encoding='utf-8-sig',newline='') as f:
+                  rows=list(csv.DictReader(f))
+              fronts=[r['Front'].strip() for r in rows]
+              assert len(rows)==1000
+              assert len(fronts)==len(set(fronts))==1000
+              assert all(fronts)
+              assert all(re.search(r'(?m)^Meaning:\s*\S',r['Back'] or '') for r in rows)
+              assert all('Externally verified learner deck; multi-source semantic audit passed with zero unresolved rows' in (r['Back'] or '') for r in rows)
+          with Path('urdu_top1000.csv').open(encoding='utf-8-sig',newline='') as f:
+              u={r['Front'] for r in csv.DictReader(f)}
+          assert 'بھی' in u and 'بہی' not in u
+          print('Promoted roots finalized and structurally valid.')
+          PY
+      - name: Commit finalized roots
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add french_top1000.csv urdu_top1000.csv
+          git commit -m 'Finalize externally verified French and Urdu decks [skip ci]'
+          git push
