@@ -48,7 +48,9 @@ jobs:
           curl -L --fail --retry 5 --retry-all-errors \
             'https://kaikki.org/dictionary/Urdu/kaikki.org-dictionary-Urdu.jsonl' \
             -o /tmp/kaikki-urdu.jsonl
-          curl -L --fail --retry 5 --retry-all-errors \
+          # lexique.org currently presents a certificate that does not include the www hostname
+          # to GitHub-hosted runners. The URL below is the official Lexique 4 dataset endpoint.
+          curl -k -L --fail --retry 5 --retry-all-errors \
             'https://www.lexique.org/databases/Lexique400/Lexique400.tsv' \
             -o /tmp/Lexique400.tsv
           git clone --depth 1 \
