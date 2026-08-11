@@ -1,0 +1,23 @@
+{
+  "source": "arabic_top1000.csv",
+  "row_count": 1000,
+  "rank_inventory_matches": 1000,
+  "distinct_front_spellings": 999,
+  "intentional_duplicate_fronts": {
+    "ما": [
+      10,
+      347
+    ]
+  },
+  "camel_rows_with_analysis": 996,
+  "learner_meaning_rows": 1000,
+  "flag_counts": {},
+  "blocking_problem_count": 0,
+  "learner_safety_policy": [
+    "No raw CALIMA gloss or morphology markup is learner-facing.",
+    "Every row has a concise English learner meaning.",
+    "High-risk function words and homographs have explicit rank-specific meanings.",
+    "Known prior semantic failures have dedicated tripwire tests.",
+    "Existing 1,000 rank/order is preserved exactly."
+  ]
+}
