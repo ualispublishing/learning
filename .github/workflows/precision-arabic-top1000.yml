@@ -8,6 +8,10 @@ on:
       - '.github/workflows/precision-arabic-top1000.yml'
   workflow_dispatch:
 
+concurrency:
+  group: precision-arabic-top1000-main
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
@@ -57,4 +61,6 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add audit/
           git commit -m 'Build Arabic MSA lexical-core audit [skip ci]'
-          git push
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
