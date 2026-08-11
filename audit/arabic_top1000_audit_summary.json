@@ -5,24 +5,22 @@
     "Front",
     "Back"
   ],
-  "unique_normalized_fronts": 1000,
-  "duplicate_front_groups": 0,
-  "camel_single_word_analyzed": 1000,
-  "camel_single_word_no_analysis": 0,
-  "flag_counts": {
-    "camel_nonroot_function_word": 4,
-    "closed_class_no_productive_root": 44,
-    "missing_definition": 1000,
-    "missing_en": 1000,
-    "missing_example": 1000,
-    "missing_fr": 1000,
-    "missing_translation": 1000,
-    "missing_ur": 1000,
-    "missing_valid_root": 965
+  "distinct_front_spellings": 999,
+  "intentional_duplicate_fronts": {
+    "ما": [
+      10,
+      347
+    ]
   },
+  "rank_inventory_matches": 1000,
+  "camel_rows_analyzed": 996,
+  "human_resolved_rows": 62,
+  "flag_counts": {},
+  "blocking_problem_count": 0,
   "principles": {
-    "root_policy": "Use a lexical root only when supported by MSA morphology; do not invent roots for non-root function words.",
-    "phrase_policy": "A multiword expression has no single lexical root; analyze constituent content words separately if needed.",
-    "ambiguity_policy": "Automated morphology is evidence, not authority; disagreements are flagged for review rather than silently overwritten."
+    "ranking": "Existing 1,000-item rank/order is preserved exactly.",
+    "orthography": "Clear source extraction defects are repaired without moving ranks.",
+    "morphology": "CALIMA-MSA r13 validates ordinary rows; explicit human review resolves analyzer/source exceptions.",
+    "roots": "No invented root for closed-class/function words or uncertain cases."
   }
 }
