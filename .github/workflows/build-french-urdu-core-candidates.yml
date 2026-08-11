@@ -3,7 +3,7 @@ name: Build French and Urdu core candidates
 on:
   push:
     paths:
-      - 'scripts/build_french_urdu_core_candidates.py'
+      - 'scripts/build_french_urdu_core_candidates_v2.py'
       - '.github/workflows/build-french-urdu-core-candidates.yml'
   workflow_dispatch:
 
@@ -59,14 +59,15 @@ jobs:
 
       - name: Build French candidate
         run: |
-          python scripts/build_french_urdu_core_candidates.py \
+          python scripts/build_french_urdu_core_candidates_v2.py \
             --language french \
             --lexique /tmp/Lexique400.tsv \
-            --kaikki /tmp/kaikki-french.jsonl
+            --kaikki /tmp/kaikki-french.jsonl \
+            --legacy-french french_top1000.csv
 
       - name: Build Urdu candidate
         run: |
-          python scripts/build_french_urdu_core_candidates.py \
+          python scripts/build_french_urdu_core_candidates_v2.py \
             --language urdu \
             --kaikki /tmp/kaikki-urdu.jsonl \
             --urdu-freq-text /tmp/urdu-frequency.txt \
@@ -86,7 +87,7 @@ jobs:
                   audit/urdu_top1000_candidate.csv \
                   audit/urdu_core_candidate_rejections.csv \
                   audit/urdu_core1000_candidate_summary.json
-          git commit -m 'Build French and Urdu core1000 candidates [skip ci]'
+          git commit -m 'Build normalized French and Urdu core1000 candidates [skip ci]'
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
