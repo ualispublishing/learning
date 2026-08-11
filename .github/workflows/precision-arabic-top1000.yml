@@ -14,6 +14,7 @@ on:
       - 'scripts/report_arabic_top1000_manual_coverage.py'
       - 'scripts/promote_arabic_top1000_learner_safe.py'
       - 'scripts/audit_arabic_top1000_learner_safe.py'
+      - 'scripts/audit_arabic_top1000_learner_safe_v2.py'
       - '.github/workflows/precision-arabic-top1000.yml'
   workflow_dispatch:
 
@@ -70,7 +71,7 @@ jobs:
         run: python scripts/promote_arabic_top1000_learner_safe.py
 
       - name: Independent learner-safety audit
-        run: python scripts/audit_arabic_top1000_learner_safe.py
+        run: python scripts/audit_arabic_top1000_learner_safe_v2.py
 
       - name: Commit validated deck and audit evidence
         if: success()
