@@ -11,17 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Resolve official embedded PDF URL
+      - name: Download official CC BY 4.0 article PDF
         run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
           curl --http1.1 -k -L --fail --retry 5 --retry-all-errors \
-            'https://revistaseug.ugr.es/index.php/meaharabe/article/view/23634/25105' \
-            -o /tmp/view.html
-          echo '=== EMBEDDED URL CANDIDATES ==='
-          python - <<'PY'
-          import html, re
-          t=open('/tmp/view.html',encoding='utf-8',errors='ignore').read()
-          print(t)
-          print('\n=== URLS ===')
-          for u in re.findall(r'(?:href|src|data)=["\']([^"\']+)', t, re.I):
-              print(html.unescape(u))
-          PY
+            'https://revistaseug.ugr.es/index.php/meaharabe/article/download/23634/25105/99973' \
+            -o /tmp/al_said_2023.pdf
+          pdfinfo /tmp/al_said_2023.pdf | head -n 25
+          pdftotext -layout -f 19 -l 62 /tmp/al_said_2023.pdf /tmp/al_said_list.txt
+          echo '=== TABLE TEXT LINE COUNT ==='
+          wc -l /tmp/al_said_list.txt
+          echo '=== TABLE START ==='
+          head -n 160 /tmp/al_said_list.txt
+          echo '=== TABLE END ==='
+          tail -n 180 /tmp/al_said_list.txt
