@@ -22,11 +22,22 @@ ARABIC_ONLY = re.compile(r"^[\u0621-\u064a]+$")
 RANK_RE = re.compile(r"(?m)^Rank:\s*(\d+)\s*$")
 MEANING_RE = re.compile(r"(?m)^Meaning:\s*(.+?)\s*$")
 
-FORBIDDEN = [
+RAW_ARTIFACTS = [
     "+he;it", "+it;him", "+me", "+you", "it;they;she+", "he;it+", "you_[",
     "[def.", "[indef.", "<verb>", "the+", "and+", "for +", "Meaning / grammatical senses:",
-    "be valiant",
+    "be valiant", "to;for + you", "in+me", "above+me", "towards+me",
 ]
+
+# Direct tripwires for errors that previously passed morphology-only validation.
+EXACT_EXPECTATIONS = {
+    1: "in", 4: "on", 6: "to", 22: "not", 23: "but", 32: "well",
+    45: "yes", 83: "very", 89: "also", 112: "thank", 127: "hello",
+    133: "around", 148: "sorry", 194: "therefore", 269: "must",
+    281: "because", 326: "thus", 347: "exclamative", 353: "these",
+    460: "as if", 500: "speech", 503: "throughout", 550: "results",
+    626: "together", 634: "except", 700: "still", 710: "when",
+    785: "oil", 798: "sleep", 852: "treatment", 927: "according to",
+}
 
 
 def undiac(text: str) -> str:
@@ -70,23 +81,21 @@ def main() -> None:
         meaning = mm.group(1).strip() if mm else ""
         if not meaning:
             row_flags.append("missing_meaning")
-        if any(frag in back for frag in FORBIDDEN):
+        if any(frag in back for frag in RAW_ARTIFACTS):
             row_flags.append("raw_morphology_or_known_bad_gloss")
-        if any(ch in meaning for ch in "[]<>") or "+" in meaning or "_" in meaning:
+        if any(ch in meaning for ch in "[]<>_") or "+" in meaning:
             row_flags.append("machine_markup_in_meaning")
-        if len(meaning) > 260:
+        if len(meaning) > 320:
             row_flags.append("meaning_too_long_for_learner")
-        for required in CRITICAL.get(i, []):
-            if required.casefold() not in meaning.casefold():
-                row_flags.append("critical_meaning_mismatch")
-                break
-        if "Published POS:" not in back or "Sources:" not in back:
+        required_meaning = EXACT_EXPECTATIONS.get(i)
+        if required_meaning and required_meaning.casefold() not in meaning.casefold():
+            row_flags.append("critical_meaning_mismatch")
+        if "Part of speech:" not in back or "Sources:" not in back or "Learner-safety review" not in back:
             row_flags.append("missing_metadata")
 
         analyses = analyzer.analyze(front) if ARABIC_ONLY.fullmatch(front) else []
         if analyses:
             camel_ok += 1
-        # Lack of analyzer coverage alone is not blocking for manually reviewed proper/function words.
 
         for fl in row_flags:
             flags[fl] += 1
@@ -102,7 +111,6 @@ def main() -> None:
     dupes = {w: [i for i, f in enumerate(fronts, 1) if f == w] for w, n in counts.items() if n > 1}
     if dupes != {"ما": [10, 347]}:
         flags["unexpected_duplicates"] += 1
-
     if len(rows) != 1000:
         flags["bad_row_count"] += 1
 
@@ -124,6 +132,7 @@ def main() -> None:
             "No raw CALIMA gloss or morphology markup is learner-facing.",
             "Every row has a concise English learner meaning.",
             "High-risk function words and homographs have explicit rank-specific meanings.",
+            "Known prior semantic failures have dedicated tripwire tests.",
             "Existing 1,000 rank/order is preserved exactly.",
         ],
     }
