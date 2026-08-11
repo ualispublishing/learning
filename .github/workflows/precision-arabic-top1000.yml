@@ -7,7 +7,9 @@ on:
       - 'scripts/build_arabic_core_candidates.py'
       - 'scripts/build_arabic_top1000_precision.py'
       - 'scripts/finalize_arabic_top1000_precision.py'
-      - 'scripts/promote_arabic_top1000_precision.py'
+      - 'scripts/rebuild_arabic_top1000_learner_safe.py'
+      - 'scripts/promote_arabic_top1000_learner_safe.py'
+      - 'scripts/audit_arabic_top1000_learner_safe.py'
       - '.github/workflows/precision-arabic-top1000.yml'
   workflow_dispatch:
 
@@ -54,11 +56,14 @@ jobs:
       - name: Build and human-resolve precision 1,000-card deck
         run: python scripts/finalize_arabic_top1000_precision.py
 
-      - name: Promote only after strict validation
-        run: python scripts/promote_arabic_top1000_precision.py
+      - name: Rebuild clean learner-facing meanings
+        run: python scripts/rebuild_arabic_top1000_learner_safe.py
 
-      - name: Audit promoted Arabic deck
-        run: python scripts/precision_arabic_top1000.py --audit-only
+      - name: Promote only after learner-safety validation
+        run: python scripts/promote_arabic_top1000_learner_safe.py
+
+      - name: Independent learner-safety audit
+        run: python scripts/audit_arabic_top1000_learner_safe.py
 
       - name: Commit precision deck and audit evidence
         if: always()
@@ -70,7 +75,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add arabic_top1000.csv audit/
-          git commit -m 'Promote precision-grade Arabic top 1000 [skip ci]'
+          git commit -m 'Promote learner-safe Arabic top 1000 [skip ci]'
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
