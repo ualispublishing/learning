@@ -3,13 +3,22 @@
   "title": "Arabic A1 Foundations — Active Course Manifest",
   "status": "active-manifest",
   "active_course": {
-    "course_id": "arabicpod101-newbie-season-1-standard-arabic",
-    "path": "playlists/audio/arabic/courses/arabicpod101-newbie-season-1/playlist.json",
-    "title": "ArabicPod101 — Newbie Season 1 (Standard Arabic)",
-    "instruction_language": "English-supported with Arabic dialogue/audio",
-    "completed_orders": [1, 2, 3],
-    "next_order": 4
+    "course_id": "alifbee-msa-audio",
+    "path": "playlists/audio/arabic/courses/alifbee-msa-audio/playlist.json",
+    "title": "AlifBee — Curated MSA Audio-First Path",
+    "instruction_language": "English-supported with MSA podcast/audio",
+    "completed_orders": [],
+    "next_order": 1
   },
+  "completed_prior_concept_milestones": [
+    "greetings / how are you",
+    "morning/evening greetings",
+    "singular/dual/plural address basics",
+    "basic responses and thanks",
+    "name question and self-introduction",
+    "first-person singular and student gender pair",
+    "basic nominal sentences without an explicit present-tense copula"
+  ],
   "secondary_course": {
     "course_id": "arabic-free-intensive-20-week",
     "path": "playlists/audio/arabic/courses/free-intensive-20-week/playlist.json",
@@ -21,14 +30,5 @@
     {"course_id":"arabic-foundation-gateway-book-2","path":"playlists/audio/arabic/deferred/gateway-to-arabic-book-2/playlist.json","status":"deferred/optional"},
     {"course_id":"arabic-al-jazeera-immersion","path":"playlists/audio/arabic/deferred/al-jazeera-immersion/playlist.json","status":"deferred/immersion"}
   ],
-  "completed_prior_concept_milestones": [
-    "greetings / how are you",
-    "morning/evening greetings",
-    "singular/dual/plural address basics",
-    "basic responses and thanks",
-    "name question and self-introduction",
-    "first-person singular and student gender pair",
-    "basic nominal sentences without an explicit present-tense copula"
-  ],
-  "rule": "When the user says complete, advance through ArabicPod101 Newbie Season 1 after processing cards and any genuinely due spaced review. Live-verify the next lesson URL before returning it."
+  "rule": "When the user says complete, process the exact current audio item, update cards/audio review/spaced reinforcement, and advance through the curated audio-first path. Resolve live URLs before presenting unresolved items."
 }
