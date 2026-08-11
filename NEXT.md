@@ -2,42 +2,31 @@
 
 ## ACTIVE — Arabic MSA Audio-First Path
 
-Completed concept milestones:
-1. ✅ Greetings / how are you
-2. ✅ Morning/evening greetings + dual/plural address
-3. ✅ Names and self-introduction
-
-The learned vocabulary and flashcards from these milestones remain active. Provider-specific history has been removed from the current learning scheme.
+**Fresh start:** the previous Arabic vocabulary decks, audio-review items, exposure counts, and completion credit have been removed. The active course starts from lesson 1 with no inherited mastery assumptions.
 
 ## Next
-▶ **Arabic Basics for Beginners: 10 Must-Know Essentials to Start Learning — AlifBee**
+1. ▶ **Arabic Basics for Beginners: 10 Must-Know Essentials to Start Learning — AlifBee**
 
 - Direct audio: https://podcast.alifbee.com/1979812/episodes/17687648-arabic-basics-for-beginners-10-must-know-essentials-to-start-learning?t=0
 - Duration: 24:50
 - Medium: continuous podcast/audio lesson
 - Variety: Modern Standard Arabic-focused beginner instruction
-- Role: transition into the new audio-first course
-
-This episode is used as a transition/checkpoint rather than a restart. Move quickly through anything already mastered and focus on genuinely new pronunciation, grammar, vocabulary, or learning gaps.
-
-### Before listening
-Retrieve aloud:
-**مَرْحَبًا → كَيْفَ حَالُكَ؟ / كَيْفَ حَالُكِ؟ → صَبَاحُ الْخَيْر → كَيْفَ حَالُكُمَا؟ / كَيْفَ حَالُكُمْ؟ → مَا اسْمُكَ؟ / مَا اسْمُكِ؟ → اِسْمِي ... → أَنَا → طَالِب / طَالِبَة**
+- Role: true course lesson 1
 
 ### Listening protocol
-1. Listen continuously once for the overall lesson.
-2. On the second pass, repeat/shadow useful Arabic aloud.
-3. Skip active memorization of material you already retrieve easily.
-4. Pause for genuinely new concepts and attempt them before hearing the explanation again.
-5. Finish by recalling the three most useful new things without looking.
+1. Listen once continuously for the overall lesson.
+2. Replay and repeat/shadow useful Arabic aloud.
+3. Treat the material as new course content; do not skip vocabulary because it appeared in a removed deck.
+4. Pause before explanations when useful and try to retrieve or infer the answer.
+5. Finish by recalling the most useful new words, phrases, pronunciation points, and rules without looking.
 
 When you say **complete** or **finished**:
 - process this exact audio episode;
-- deduplicate against the existing Arabic deck;
-- add only useful new/deepened vocabulary and grammar cards;
+- create the first active Arabic flashcards for this restarted course;
+- add useful vocabulary and grammar actually taught in the episode;
 - keep Arabic-only fronts and complete eight-layer backs;
-- update the short pleasant audio-review companion;
-- update spaced reinforcement;
+- create the short pleasant audio-review companion from those new cards;
+- start the spaced-reinforcement queue from this lesson;
 - advance to the next appropriate item in the curated MSA audio path.
 
 ### Supporting curriculum
