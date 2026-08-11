@@ -3,7 +3,7 @@ name: Extract Arabic common-word source
 on:
   push:
     paths:
-      - 'scripts/extract_al_said_msa1000.py'
+      - 'scripts/extract_al_said_layout.py'
       - '.github/workflows/extract-arabic-common-list.yml'
   workflow_dispatch:
 
@@ -30,16 +30,10 @@ jobs:
             'https://revistaseug.ugr.es/index.php/meaharabe/article/download/23634/25105/99973' \
             -o /tmp/al_said_2023.pdf
           pdfinfo /tmp/al_said_2023.pdf | head -n 25
-          pdftotext -tsv -f 19 -l 62 /tmp/al_said_2023.pdf /tmp/al_said_list.tsv
+          pdftotext -layout -f 19 -l 62 /tmp/al_said_2023.pdf /tmp/al_said_list.txt
 
       - name: Extract ranks 1 through 1000
-        run: |
-          # A single published row (rank 530) has one percentage token displaced from
-          # the baseline in Poppler's TSV. One percentage + the frequency integer is
-          # sufficient because rank-column geometry and strict monotonicity independently
-          # reject page numbers/prose integers.
-          sed -i 's/return decimals >= 2 and bigints >= 1/return decimals >= 1 and bigints >= 1/' scripts/extract_al_said_msa1000.py
-          python scripts/extract_al_said_msa1000.py --tsv /tmp/al_said_list.tsv
+        run: python scripts/extract_al_said_layout.py --text /tmp/al_said_list.txt
 
       - name: Commit extracted source evidence
         run: |
