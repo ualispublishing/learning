@@ -1,0 +1,77 @@
+name: External verify top 1000 decks
+
+on:
+  push:
+    paths:
+      - 'scripts/verify_top1000_external.py'
+      - 'arabic_top1000.csv'
+      - 'french_top1000.csv'
+      - 'urdu_top1000.csv'
+      - '.github/workflows/external-verify-top1000.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: external-verify-top1000-main
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install corpus attestation dependency
+        run: python -m pip install wordfreq
+
+      - name: Download Arabic WordNet 4.0
+        run: |
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://github.com/Salah-Sal/arabic-wordnet-v4/releases/download/v4.0.0/awn4.xml.gz' \
+            -o /tmp/awn4.xml.gz
+
+      - name: Verify Arabic 1000 externally
+        run: |
+          python scripts/verify_top1000_external.py \
+            --language arabic \
+            --input arabic_top1000.csv \
+            --arabic-wordnet /tmp/awn4.xml.gz \
+            --workers 6
+
+      - name: Verify French 1000 externally
+        run: |
+          python scripts/verify_top1000_external.py \
+            --language french \
+            --input french_top1000.csv \
+            --workers 6
+
+      - name: Verify Urdu 1000 externally
+        run: |
+          python scripts/verify_top1000_external.py \
+            --language urdu \
+            --input urdu_top1000.csv \
+            --workers 6
+
+      - name: Commit verification evidence
+        run: |
+          if [ -z "$(git status --porcelain -- audit/)" ]; then
+            echo 'No verification changes to commit.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/
+          git commit -m 'Record external top1000 verification evidence [skip ci]'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
