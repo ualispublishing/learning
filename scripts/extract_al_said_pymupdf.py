@@ -4,20 +4,19 @@
 Source: Almoataz B. Al-Said (2023), "A New List of Common Words in Modern
 Standard Arabic", MEAH Sección Árabe-Islam 72, pp. 287-351, Table 4, CC BY 4.0.
 
-The PDF is RTL and PyMuPDF can split one Arabic word into visual fragments. The
-published table also intentionally groups some vocalized/shape variants under one
-rank. This extractor therefore preserves the *rank* as the authoritative unit:
+PyMuPDF can split RTL Arabic words into several text objects and can assign a final
+letter to another internal line even though it is on the same visual baseline. This
+extractor therefore trusts table geometry, not PDF line labels:
 
-1. recover ranks 1..1000 from the stable rank column in strict visual order;
-2. reconstruct each Arabic variant using PyMuPDF's page/block/line grouping and
-   right-to-left fragment order;
-3. attach each variant and POS code to its nearest rank baseline;
-4. preserve distinct published orthographic variants on one Arabic-only front;
-5. fail closed unless every rank has a front and the 1000 rank-front records are
-   distinct as records.
+1. recover ranks 1..1000 from the stable rank column;
+2. collect every Arabic fragment in the word-cell horizontal band;
+3. attach fragments to the nearest rank baseline;
+4. cluster same-rank fragments by visual y baseline (2.25pt tolerance), then join
+   each cluster right-to-left;
+5. preserve distinct published shape/vocalization variants on one Arabic-only front;
+6. fail closed unless all 1000 rank records are nonempty.
 
-This extracts inventory evidence only. It never invents translations, roots,
-examples, or synonyms.
+This is source extraction only. It never invents meanings, roots, examples or synonyms.
 """
 from __future__ import annotations
 
@@ -61,8 +60,23 @@ def nearest_rank(anchor_gys: list[float], gy: float) -> tuple[int, float]:
         opts.append((abs(anchor_gys[j - 1] - gy), j))
     if not opts:
         raise RuntimeError("No rank anchors")
-    dist, rank = min(opts, key=lambda x: (x[0], x[1]))
-    return rank, dist
+    return min(opts, key=lambda x: (x[0], x[1]))[1], min(opts, key=lambda x: (x[0], x[1]))[0]
+
+
+def cluster_by_y(items: list[dict], tolerance: float = 2.25) -> list[list[dict]]:
+    """Cluster tokens that occupy the same visual Arabic variant baseline."""
+    if not items:
+        return []
+    ordered = sorted(items, key=lambda t: t["cy"])
+    clusters: list[list[dict]] = [[ordered[0]]]
+    for t in ordered[1:]:
+        current = clusters[-1]
+        mean_y = sum(x["cy"] for x in current) / len(current)
+        if abs(t["cy"] - mean_y) <= tolerance:
+            current.append(t)
+        else:
+            clusters.append([t])
+    return clusters
 
 
 def main() -> None:
@@ -76,7 +90,7 @@ def main() -> None:
 
     doc = pymupdf.open(args.pdf)
     tokens: list[dict] = []
-    for pno in range(18, 62):  # PDF pages 19..62, 1-based
+    for pno in range(18, 62):
         page = doc[pno]
         for x0, y0, x1, y1, text, block, line, wordno in page.get_text("words", sort=False):
             text = clean(text)
@@ -89,15 +103,13 @@ def main() -> None:
                 "text": text, "block": int(block), "line": int(line), "word": int(wordno),
             })
 
-    # Rank anchors: stable rightmost numeric column. Strict visual progression rejects
-    # article page numbers that happen to equal a vocabulary rank.
+    # Stable far-right rank column. Strict 1..1000 visual progression excludes page numbers.
     by_rank: dict[int, list[dict]] = defaultdict(list)
     for t in tokens:
-        if not INT_RE.fullmatch(t["text"]):
-            continue
-        n = int(t["text"])
-        if 1 <= n <= 1000 and 445.0 <= t["x0"] <= 466.5 and 165.0 <= t["cy"] <= 665.0:
-            by_rank[n].append(t)
+        if INT_RE.fullmatch(t["text"]):
+            n = int(t["text"])
+            if 1 <= n <= 1000 and 445.0 <= t["x0"] <= 466.5 and 165.0 <= t["cy"] <= 665.0:
+                by_rank[n].append(t)
 
     anchors: dict[int, dict] = {}
     prev_gy = -1.0
@@ -111,98 +123,70 @@ def main() -> None:
         prev_gy = global_y(viable[0])
 
     anchor_gys = [global_y(anchors[n]) for n in range(1, 1001)]
-    if any(b <= a for a, b in zip(anchor_gys, anchor_gys[1:])):
-        raise SystemExit("Rank anchors are not strictly monotonic")
 
-    # Arabic word-cell fragments. Widen the right boundary enough to include initial
-    # letters such as ن in نَفَس / نَشَر / نَحْنُ, which extend beyond x=435 in this PDF.
-    # Grouping by PyMuPDF page/block/line is more robust than y quantization: detached
-    # suffix glyphs such as ة / ت / ية remain members of the same logical word line.
-    fragments: list[dict] = []
+    # Word-cell band contains no other Arabic data columns. Long words can extend well left,
+    # so allow x0 down to 300 and do not impose a lower bound on x1. The nearest-rank y gate
+    # excludes running prose and headers.
+    fragments_by_rank: dict[int, list[dict]] = defaultdict(list)
+    fragment_count = 0
     for t in tokens:
         if not AR.search(t["text"]):
             continue
-        if not (345.0 <= t["x0"] <= 443.5 and 404.0 <= t["x1"] <= 446.5):
+        if not (300.0 <= t["x0"] <= 444.5 and t["x1"] <= 447.5):
             continue
         if not (165.0 <= t["cy"] <= 665.0):
             continue
-        fragments.append(t)
+        rank, dist = nearest_rank(anchor_gys, global_y(t))
+        if dist <= 7.75:
+            fragments_by_rank[rank].append(t)
+            fragment_count += 1
 
-    line_groups: dict[tuple[int, int, int], list[dict]] = defaultdict(list)
-    for t in fragments:
-        line_groups[(t["page"], t["block"], t["line"])].append(t)
-
-    reconstructed = []
-    for group in line_groups.values():
-        ordered = sorted(group, key=lambda t: (t["x0"], t["word"]), reverse=True)
-        k = "".join(arabic_letters(t["text"]) for t in ordered)
-        if not k:
-            continue
-        gy = sum(global_y(t) for t in group) / len(group)
-        rank, dist = nearest_rank(anchor_gys, gy)
-        if dist > 7.75:
-            continue
-        reconstructed.append({
-            "rank": rank,
-            "gy": gy,
-            "key": k,
-            "raw": " + ".join(t["text"] for t in ordered),
-        })
-
-    lines_by_rank: dict[int, list[dict]] = defaultdict(list)
-    for line in reconstructed:
-        lines_by_rank[line["rank"]].append(line)
+    variants_by_rank: dict[int, list[dict]] = defaultdict(list)
+    for rank in range(1, 1001):
+        # Pages never mix inside one rank; cluster in page-local y coordinates.
+        for cluster in cluster_by_y(fragments_by_rank.get(rank, []), tolerance=2.25):
+            ordered = sorted(cluster, key=lambda t: (t["x0"], t["word"]), reverse=True)
+            k = "".join(arabic_letters(t["text"]) for t in ordered)
+            if not k:
+                continue
+            variants_by_rank[rank].append({
+                "key": k,
+                "cy": sum(t["cy"] for t in cluster) / len(cluster),
+                "raw": " + ".join(t["text"] for t in ordered),
+            })
 
     pos_by_rank: dict[int, list[str]] = defaultdict(list)
     for t in tokens:
-        if not POS_RE.fullmatch(t["text"]):
-            continue
-        rank, dist = nearest_rank(anchor_gys, global_y(t))
-        if dist <= 7.75 and t["text"] not in pos_by_rank[rank]:
-            pos_by_rank[rank].append(t["text"])
+        if POS_RE.fullmatch(t["text"]):
+            rank, dist = nearest_rank(anchor_gys, global_y(t))
+            if dist <= 7.75 and t["text"] not in pos_by_rank[rank]:
+                pos_by_rank[rank].append(t["text"])
 
     rows = []
     problems = []
-    front_records = set()
+    duplicate_fronts: dict[str, list[int]] = defaultdict(list)
 
     for rank in range(1, 1001):
-        group = sorted(lines_by_rank.get(rank, []), key=lambda x: x["gy"])
-        if not group:
+        variants = sorted(variants_by_rank.get(rank, []), key=lambda x: x["cy"])
+        if not variants:
             problems.append(f"rank={rank}: no Arabic word-cell variant")
             rows.append({"rank": rank, "front": "", "variants_raw": "", "pos_codes": "", "source": "Al-Said 2023 Table 4"})
             continue
 
         keys = []
         traces = []
-        for line in group:
-            if line["key"] not in keys:
-                keys.append(line["key"])
-            if line["raw"] not in traces:
-                traces.append(line["raw"])
+        for v in variants:
+            if v["key"] not in keys:
+                keys.append(v["key"])
+            if v["raw"] not in traces:
+                traces.append(v["raw"])
 
-        # PDF extraction can occasionally produce a truncated duplicate variant (e.g.
-        # فس beside نفس). If one form is a strict substring of another, discard only the
-        # shorter extraction artifact. Genuine shape variants such as مؤكد / مؤكدا remain.
-        cleaned_keys = []
-        for k in keys:
-            if any(k != other and k in other for other in keys):
-                continue
-            if k not in cleaned_keys:
-                cleaned_keys.append(k)
-        if not cleaned_keys:
-            cleaned_keys = keys
-
-        front = " / ".join(cleaned_keys)
-        if not front:
-            problems.append(f"rank={rank}: empty reconstructed front")
-
-        # The rank is part of record identity because the paper may deliberately group or
-        # repeat related surface spellings. We still surface exact duplicate front strings
-        # later for manual lexical validation rather than rejecting source extraction.
-        record_id = (rank, front)
-        if record_id in front_records:
-            problems.append(f"rank={rank}: duplicate record identity")
-        front_records.add(record_id)
+        # Drop only obvious extraction truncations when an extracted key is wholly contained
+        # in another variant from the same rank. Preserve genuine source shape variants.
+        cleaned = [k for k in keys if not any(k != other and k in other for other in keys)]
+        cleaned = cleaned or keys
+        front = " / ".join(dict.fromkeys(cleaned))
+        duplicate_fronts[front].append(rank)
 
         rows.append({
             "rank": rank,
@@ -212,34 +196,26 @@ def main() -> None:
             "source": "Al-Said 2023 Table 4",
         })
 
+    duplicate_fronts = {k: v for k, v in duplicate_fronts.items() if k and len(v) > 1}
     nonempty = sum(bool(r["front"]) for r in rows)
-    duplicate_fronts: dict[str, list[int]] = defaultdict(list)
-    for r in rows:
-        if r["front"]:
-            duplicate_fronts[r["front"]].append(int(r["rank"]))
-    duplicate_fronts = {k: v for k, v in duplicate_fronts.items() if len(v) > 1}
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()), lineterminator="\n")
-        writer.writeheader(); writer.writerows(rows)
+        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()), lineterminator="\n")
+        w.writeheader(); w.writerows(rows)
 
-    debug_lines = [
-        f"tokens={len(tokens)}",
-        "rank_anchors=1000",
-        f"arabic_fragments={len(fragments)}",
-        f"reconstructed_variant_lines={len(reconstructed)}",
-        f"nonempty_rows={nonempty}",
-        f"pos_rows={sum(bool(pos_by_rank.get(n)) for n in range(1,1001))}",
-        f"duplicate_front_groups_for_review={len(duplicate_fronts)}",
-        f"problems={len(problems)}",
+    debug = [
+        f"tokens={len(tokens)}", "rank_anchors=1000", f"assigned_arabic_fragments={fragment_count}",
+        f"reconstructed_variant_lines={sum(len(v) for v in variants_by_rank.values())}",
+        f"nonempty_rows={nonempty}", f"pos_rows={sum(bool(pos_by_rank.get(n)) for n in range(1,1001))}",
+        f"duplicate_front_groups_for_review={len(duplicate_fronts)}", f"problems={len(problems)}",
     ]
     if duplicate_fronts:
-        debug_lines.append("duplicate_fronts_for_review=" + repr(duplicate_fronts))
-    debug_lines.extend(problems)
-    args.debug.write_text("\n".join(debug_lines) + "\n", encoding="utf-8")
+        debug.append("duplicate_fronts_for_review=" + repr(duplicate_fronts))
+    debug.extend(problems)
+    args.debug.write_text("\n".join(debug) + "\n", encoding="utf-8")
 
-    if nonempty != 1000 or len(rows) != 1000 or problems:
+    if len(rows) != 1000 or nonempty != 1000 or problems:
         raise SystemExit(f"Published-list extraction failed closed; see {args.debug}")
     print(args.debug.read_text(encoding="utf-8"))
 
