@@ -5,18 +5,14 @@ This file is mandatory reading for agents working on the Arabic track.
 ## Goal
 Build from the current Arabic foundation toward functional CEFR C2 mastery, with Modern Standard Arabic (MSA) as the core. The system is audio-first, flashcard-integrated, spaced, source-diverse, and checkpoint-based.
 
-## ArabicPod exclusion
-ArabicPod101 is excluded from the current repository learning scheme.
-
-Do **not** use ArabicPod101 websites, lessons, audio, transcripts, playlists, source IDs, or derived lesson metadata in active curriculum, progress, sources, or flashcard provenance unless the user explicitly reverses this instruction later.
-
-Previously learned concepts remain learned; remove provider provenance rather than deleting the knowledge itself.
+## Source hygiene
+The previously removed lesson provider must not be restored to active curriculum, progress, source metadata, or flashcard provenance unless the user explicitly requests it in a later turn. Previously learned concepts remain learned; provider provenance is not required to preserve knowledge.
 
 ## Active audio-first course
 Primary course:
 `playlists/audio/arabic/courses/alifbee-msa-audio/playlist.json`
 
-Use the curated **AlifBee MSA audio-first path** as the current beginner listening spine. AlifBee's podcast is directly playable, beginner-oriented, English-supported, and explicitly teaches Modern Standard Arabic.
+Use the curated **AlifBee MSA audio-first path** as the current beginner listening spine. The podcast is directly playable, beginner-oriented, English-supported, and focused on Modern Standard Arabic.
 
 Current next item is stored in `progress/current.json` and `NEXT.md`.
 
@@ -83,7 +79,7 @@ For every completed lesson/media item:
 5. Add new cards only when high-frequency, generative, or essential.
 6. Keep Arabic-only fronts and complete eight-layer backs.
 7. Create/update pleasant audio-review scripts for changed/new cards.
-8. Record only sources genuinely used; do not restore excluded source IDs.
+8. Record only sources genuinely used; do not restore removed source IDs.
 9. Update exposure counts and spaced-review due state.
 10. Advance to the next audio-first item, resolving exact URLs live when needed.
 11. Update playlist, `resolved_media.json`, track progress, `progress/current.json`, review queue and `NEXT.md`.
