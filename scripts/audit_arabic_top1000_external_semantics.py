@@ -3,17 +3,18 @@
 
 Signals:
 - Kaikki/Wiktextract English-Wiktionary senses
-- Arabic WordNet (OMW `omw-arb:2.0`) translated through the shared English synsets
+- Arabic WordNet (OMW `omw-arb:2.0`) translated through shared English synsets
 - wordfreq corpus attestation
 - existing CALIMA morphology coverage
 
-This audit does not rewrite cards. It uses function-word-aware sense comparison so
+This audit never rewrites cards. It uses function-word-aware sense comparison so
 short meanings such as `in`, `from`, `and`, `to be`, etc. are not discarded as
-English stopwords. Rows lacking direct independent semantic agreement remain
-explicit-review rows rather than being guessed.
+English stopwords. Rows without direct semantic agreement stay explicit-review
+items rather than receiving guessed corrections.
 """
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import re
@@ -26,7 +27,6 @@ from wordfreq import zipf_frequency
 ROOT = Path(__file__).resolve().parents[1]
 AUDIT = ROOT / "audit"
 TARGET = ROOT / "arabic_top1000.csv"
-KAikki = AUDIT / "arabic_top1000_external_verification.csv"
 CALIMA = AUDIT / "arabic_top1000_learner_safety_audit.csv"
 
 AR_DIAC = re.compile(r"[\u0610-\u061a\u064b-\u065f\u0670\u06d6-\u06ed]")
@@ -43,7 +43,7 @@ def norm_ar(s: str) -> str:
     return AR_DIAC.sub("", unicodedata.normalize("NFKC", s or "").replace("ـ", "")).strip()
 
 
-def meaning(back: str) -> str:
+def learner_meaning(back: str) -> str:
     m = re.search(r"(?m)^Meaning:\s*(.+?)\s*$", back or "")
     return m.group(1).strip() if m else ""
 
@@ -86,28 +86,32 @@ def agrees(a: str, b: str) -> tuple[bool, str]:
     overlap = sorted(content_tokens(a) & content_tokens(b))
     if overlap:
         return True, "|".join(overlap[:12])
-    s = sorted(canonical_senses(a) & canonical_senses(b))
-    if s:
-        return True, "|".join(s[:12])
-    # Permit exact single semantic atoms (including function words) only when they
-    # are complete short senses, not incidental words inside long definitions.
+    exact = sorted(canonical_senses(a) & canonical_senses(b))
+    if exact:
+        return True, "|".join(exact[:12])
     aa = {x for x in canonical_senses(a) if len(x.split()) == 1}
     bb = {x for x in canonical_senses(b) if len(x.split()) == 1}
-    atom = sorted(aa & bb)
-    return (bool(atom), "|".join(atom[:12]))
+    atoms = sorted(aa & bb)
+    return bool(atoms), "|".join(atoms[:12])
 
 
-def load_kaikki_evidence() -> dict[str, str]:
-    # The external verifier stores only overlap tokens, not raw glosses. Reconstructing
-    # raw gloss evidence is handled directly from OMW here; Kaikki agreement from the
-    # external verifier is retained as an independent boolean signal.
-    if not KAikki.exists():
-        return {}
-    out = {}
-    with KAikki.open(encoding="utf-8", newline="") as f:
-        for r in csv.DictReader(f):
-            out[norm_ar(r.get("front", ""))] = r.get("semantic_overlap", "").strip().lower() == "true"
-    return out
+def load_kaikki(path: Path, targets: set[str]) -> dict[str, str]:
+    values: dict[str, list[str]] = {t: [] for t in targets}
+    with path.open(encoding="utf-8", errors="replace") as f:
+        for line in f:
+            try:
+                obj = json.loads(line)
+            except Exception:
+                continue
+            word = norm_ar(str(obj.get("word", "")))
+            if word not in targets:
+                continue
+            for sense in obj.get("senses") or []:
+                for gloss in sense.get("glosses") or []:
+                    g = re.sub(r"\s+", " ", str(gloss or "")).strip()
+                    if g and g not in values[word]:
+                        values[word].append(g)
+    return {w: "; ".join(gs)[:7000] for w, gs in values.items() if gs}
 
 
 def load_calima() -> set[str]:
@@ -124,50 +128,51 @@ def load_calima() -> set[str]:
     return out
 
 
-def omw_evidence(front: str, ar_wn, en_wn) -> str:
+def omw_evidence(front: str, ar_wn) -> str:
     values = []
-    # Exact lemma first. OMW Arabic WordNet also exposes alternative forms in the
-    # current release, so Wn may resolve some orthographic variants automatically.
     try:
         synsets = ar_wn.synsets(front)
     except Exception:
         synsets = []
     for ss in synsets:
-        translated = []
-        for lex_id in ("omw-en:2.0",):
-            try:
-                translated.extend(ss.translate(lexicon=lex_id))
-            except Exception:
-                pass
+        try:
+            translated = ss.translate(lexicon="omw-en:2.0")
+        except Exception:
+            translated = []
         for ens in translated:
             try:
                 values.extend(ens.lemmas())
-                d = ens.definition()
-                if d:
-                    values.append(d)
+                definition = ens.definition()
+                if definition:
+                    values.append(definition)
             except Exception:
                 pass
-    return "; ".join(dict.fromkeys(values))[:5000]
+    return "; ".join(dict.fromkeys(values))[:7000]
 
 
 def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--kaikki-jsonl", required=True)
+    args = ap.parse_args()
+
     with TARGET.open(encoding="utf-8-sig", newline="") as f:
         rows = list(csv.DictReader(f))
     if len(rows) != 1000:
         raise SystemExit(f"Expected 1000 Arabic rows, found {len(rows)}")
 
-    ar_wn = wn.Wordnet("omw-arb:2.0")
-    en_wn = wn.Wordnet("omw-en:2.0")
-    kaikki_agreement = load_kaikki_evidence()
+    fronts = [norm_ar(r.get("Front", "")) for r in rows]
+    kaikki = load_kaikki(Path(args.kaikki_jsonl), set(fronts))
     calima = load_calima()
+    ar_wn = wn.Wordnet("omw-arb:2.0")
 
     results = []
     for rank, row in enumerate(rows, 1):
-        front = norm_ar(row.get("Front", ""))
-        m = meaning(row.get("Back", ""))
-        omw = omw_evidence(front, ar_wn, en_wn)
-        omw_ok, terms = agrees(m, omw) if omw else (False, "")
-        kaikki_ok = kaikki_agreement.get(front, False)
+        front = fronts[rank - 1]
+        meaning = learner_meaning(row.get("Back", ""))
+        kg = kaikki.get(front, "")
+        ow = omw_evidence(front, ar_wn)
+        kaikki_ok, kterms = agrees(meaning, kg) if kg else (False, "")
+        omw_ok, oterms = agrees(meaning, ow) if ow else (False, "")
         corpus = zipf_frequency(front, "ar") > 0
         morph = front in calima
 
@@ -182,10 +187,13 @@ def main() -> None:
         results.append({
             "rank": rank,
             "front": front,
-            "meaning": m,
+            "meaning": meaning,
+            "kaikki_entry": bool(kg),
             "kaikki_semantic_agreement": kaikki_ok,
+            "kaikki_overlap_terms": kterms,
+            "omw_entry": bool(ow),
             "omw_semantic_agreement": omw_ok,
-            "omw_overlap_terms": terms,
+            "omw_overlap_terms": oterms,
             "wordfreq_attested": corpus,
             "calima_analysis": morph,
             "status": status,
@@ -204,7 +212,9 @@ def main() -> None:
     summary = {
         "rows": len(results),
         "status_counts": counts,
+        "kaikki_entry_coverage": sum(r["kaikki_entry"] for r in results),
         "kaikki_semantic_agreement": sum(r["kaikki_semantic_agreement"] for r in results),
+        "omw_entry_coverage": sum(r["omw_entry"] for r in results),
         "omw_semantic_agreement": sum(r["omw_semantic_agreement"] for r in results),
         "wordfreq_attested": sum(r["wordfreq_attested"] for r in results),
         "calima_analysis": sum(r["calima_analysis"] for r in results),
