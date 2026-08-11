@@ -1,0 +1,24 @@
+name: Extract Arabic common-word source
+
+on:
+  push:
+    paths:
+      - '.github/workflows/extract-arabic-common-list.yml'
+  workflow_dispatch:
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and inspect CC BY 4.0 source
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
+          curl -L --fail --retry 3 \
+            'https://digibug.ugr.es/bitstream/handle/10481/80090/23634-Galerada%20publicada%20%28PDF%29-99973-2-10-20230201.pdf?isAllowed=y&sequence=1' \
+            -o /tmp/al_said_2023.pdf
+          pdfinfo /tmp/al_said_2023.pdf | head -n 20
+          pdftotext -layout /tmp/al_said_2023.pdf /tmp/al_said_2023.txt
+          echo '=== LAST 1800 LINES ==='
+          tail -n 1800 /tmp/al_said_2023.txt
