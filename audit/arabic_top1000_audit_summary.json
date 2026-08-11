@@ -1,24 +1,25 @@
 {
   "source": "arabic_top1000.csv",
-  "row_count": 1889,
+  "row_count": 1000,
   "schema": [
     "Front",
     "Back"
   ],
-  "unique_normalized_fronts": 1514,
-  "duplicate_front_groups": 204,
-  "camel_single_word_analyzed": 118,
+  "unique_normalized_fronts": 998,
+  "duplicate_front_groups": 1,
+  "camel_single_word_analyzed": 1000,
   "camel_single_word_no_analysis": 0,
   "flag_counts": {
-    "camel_nonroot_function_word": 8,
-    "closed_class_no_productive_root": 48,
-    "duplicate_front": 579,
-    "example_pronoun_gender_mismatch": 1,
-    "invented_root_on_function_word": 9,
-    "multiword_no_single_root": 1771,
-    "phrase_has_single_root_claim": 1771,
-    "root_disagrees_with_camel": 75,
-    "self_translation_artifact": 1
+    "camel_nonroot_function_word": 4,
+    "closed_class_no_productive_root": 45,
+    "duplicate_front": 3,
+    "missing_definition": 1000,
+    "missing_en": 1000,
+    "missing_example": 1000,
+    "missing_fr": 1000,
+    "missing_translation": 1000,
+    "missing_ur": 1000,
+    "missing_valid_root": 965
   },
   "principles": {
     "root_policy": "Use a lexical root only when supported by MSA morphology; do not invent roots for non-root function words.",
