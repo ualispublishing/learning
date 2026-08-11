@@ -1,0 +1,41 @@
+name: Extract Arabic common-word source with PyMuPDF
+
+on:
+  push:
+    paths:
+      - 'scripts/extract_al_said_pymupdf.py'
+      - '.github/workflows/extract-arabic-pymupdf.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PyMuPDF
+        run: python -m pip install --quiet pymupdf
+      - name: Download source PDF
+        run: |
+          curl --http1.1 -k -L --fail --retry 5 --retry-all-errors \
+            'https://revistaseug.ugr.es/index.php/meaharabe/article/download/23634/25105/99973' \
+            -o /tmp/al_said_2023.pdf
+      - name: Extract and validate ranks
+        run: python scripts/extract_al_said_pymupdf.py --pdf /tmp/al_said_2023.pdf
+      - name: Commit extraction
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/al_said_2023_msa1000.csv audit/al_said_2023_msa1000_debug.txt
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Extract published MSA 1000 with PyMuPDF [skip ci]'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
