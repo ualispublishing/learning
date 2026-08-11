@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Audit and precision-clean arabic_top1000.csv.
+"""Independent audit for the precision Arabic Top-1000 deck.
 
-The first phase is intentionally conservative: it produces a complete, machine-readable
-morphology/structure audit without changing study content. A later --apply pass uses
-reviewed rules/overrides so uncertain linguistic claims are never silently invented.
+The audit checks the final learner-facing CSV against the repaired Al-Said rank inventory
+and CALIMA-MSA coverage. It deliberately preserves Arabic orthographic distinctions:
+أ / إ / آ / ا and ى / ي are not duplicate-normalized into one word.
 """
-
 from __future__ import annotations
 
 import argparse
@@ -13,248 +12,140 @@ import csv
 import json
 import re
 import unicodedata
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
+
+from build_arabic_top1000_precision import SOURCE_REPAIRS
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "arabic_top1000.csv"
+RANK_SOURCE = ROOT / "audit" / "al_said_2023_msa1000.csv"
 AUDIT_DIR = ROOT / "audit"
 AUDIT_CSV = AUDIT_DIR / "arabic_top1000_morphology_audit.csv"
 AUDIT_JSON = AUDIT_DIR / "arabic_top1000_audit_summary.json"
-
-ARABIC_DIACRITICS = re.compile(r"[\u0610-\u061a\u064b-\u065f\u0670\u06d6-\u06ed]")
-ARABIC_LETTER = re.compile(r"[\u0621-\u063a\u0641-\u064a]")
-ROOT_LINE = re.compile(r"(?m)^Root Word:\s*(.*)$")
-FIELD_LINE = {
-    "en": re.compile(r"(?m)^EN:\s*(.*)$"),
-    "fr": re.compile(r"(?m)^FR:\s*(.*)$"),
-    "ur": re.compile(r"(?m)^UR:\s*(.*)$"),
-    "definition": re.compile(r"(?ms)^Definition:\s*\n\(EN\)\s*(.*?)(?:\n\nExample:|\Z)"),
-    "example": re.compile(r"(?m)^Example:\s*(.*)$"),
-    "translation": re.compile(r"(?m)^Translation:\s*(.*)$"),
-    "synonyms": re.compile(r"(?m)^Synonyms:\s*(.*)$"),
-}
-
-# Closed-class and solid-stem items that should not be forced into the productive
-# root-and-pattern model. CAMeL morphology is the main authority; this set is a
-# conservative backstop for diacritized spellings/coverage gaps.
-NON_DERIVED_OR_CLOSED_CLASS = {
-    "في", "من", "على", "أن", "إن", "إلى", "هذا", "هذه", "هؤلاء", "ذلك", "تلك",
-    "لم", "لن", "لا", "ما", "ماذا", "يا", "هو", "هي", "هم", "هن", "هما", "نحن",
-    "أنا", "أنت", "أنتم", "أنتن", "أنتما", "الذي", "التي", "الذين", "اللاتي", "اللواتي",
-    "أو", "أم", "و", "ف", "ثم", "بل", "لكن", "لعل", "ليت", "كأن", "قد", "سوف",
-    "حيث", "إذا", "إذ", "لو", "كي", "حتى", "عن", "مع", "هل", "أي", "أين", "متى",
-    "كيف", "كم", "لماذا", "هنا", "هناك", "كلما", "كما", "إما", "إلا", "غير",
-}
-
-POS_WITHOUT_PRODUCTIVE_ROOT = {
-    "prep", "conj", "pron", "pron_dem", "pron_rel", "adv_interrog", "pron_interrog",
-    "part", "part_neg", "part_verb", "part_focus", "part_interrog", "part_voc",
-    "part_fut", "part_restrict", "part_exhort", "part_det", "part_rc", "part_verb_like",
-}
-
-
-def nfc(text: str) -> str:
-    return unicodedata.normalize("NFC", text or "")
+DIAC = re.compile(r"[\u0610-\u061a\u064b-\u065f\u0670\u06d6-\u06ed]")
+ARABIC_ONLY = re.compile(r"^[\u0621-\u064a]+$")
+RANK_RE = re.compile(r"(?m)^Rank:\s*(\d+)\s*$")
+ROOT_RE = re.compile(r"(?m)^\s*Root:\s*(.*)$")
 
 
 def undiac(text: str) -> str:
-    text = nfc(text).replace("ـ", "")
-    return ARABIC_DIACRITICS.sub("", text)
+    return DIAC.sub("", unicodedata.normalize("NFC", text or "").replace("ـ", "")).strip()
 
 
-def canonical_key(text: str) -> str:
-    text = undiac(text).strip()
-    text = re.sub(r"[\s\u00a0]+", " ", text)
-    # Normalize presentation-level alif variants for duplicate detection only.
-    return text.translate(str.maketrans({"أ": "ا", "إ": "ا", "آ": "ا", "ٱ": "ا", "ى": "ي"}))
-
-
-def extract(pattern: re.Pattern[str], back: str) -> str:
-    m = pattern.search(back or "")
-    return m.group(1).strip() if m else ""
-
-
-def current_root_arabic(back: str) -> str:
-    value = extract(ROOT_LINE, back)
-    if not value:
-        return ""
-    # Prefer Arabic text in parentheses, else Arabic letters anywhere in value.
-    parens = re.findall(r"\(([^()]*)\)", value)
-    candidate = parens[-1] if parens else value
-    letters = ARABIC_LETTER.findall(undiac(candidate))
-    return ".".join(letters)
-
-
-def normalize_camel_root(value: str | None) -> str:
-    if not value or value in {"0", "na", "#", "-"}:
-        return ""
-    value = undiac(value).replace("_", ".").replace("-", ".")
-    letters = ARABIC_LETTER.findall(value)
-    return ".".join(letters)
-
-
-def english_terms(text: str) -> set[str]:
-    words = re.findall(r"[a-zA-Z]+", (text or "").lower())
-    stop = {"a", "an", "the", "to", "of", "and", "or", "in", "on", "at", "is", "be", "that", "which", "for", "with"}
-    return {w for w in words if len(w) > 1 and w not in stop}
-
-
-def choose_analysis(analyses: list[dict], en: str, definition: str) -> dict:
-    if not analyses:
-        return {}
-    target = english_terms(en) | english_terms(definition)
-
-    def score(a: dict) -> tuple[float, float, float]:
-        gloss = english_terms(str(a.get("gloss", "")).replace(";", " ").replace("_", " "))
-        overlap = len(target & gloss)
-        poslex = float(a.get("pos_lex_logprob") or -99.0)
-        lexprob = float(a.get("lex_logprob") or -99.0)
-        # Semantic overlap dominates; probabilities break ties.
-        return (overlap, poslex, lexprob)
-
-    return max(analyses, key=score)
+def expected_inventory() -> list[str]:
+    with RANK_SOURCE.open(encoding="utf-8", newline="") as f:
+        src = list(csv.DictReader(f))
+    out = []
+    for row in src:
+        rank = int(row["rank"])
+        out.append(SOURCE_REPAIRS.get(rank, undiac(row["front"])))
+    return out
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--audit-only", action="store_true", help="Generate audit files only")
+    parser.add_argument("--audit-only", action="store_true")
     args = parser.parse_args()
 
-    try:
-        from camel_tools.morphology.analyzer import Analyzer
-        from camel_tools.morphology.database import MorphologyDB
-    except ImportError as exc:
-        raise SystemExit("camel-tools is required for the precision audit") from exc
+    from camel_tools.morphology.analyzer import Analyzer
+    from camel_tools.morphology.database import MorphologyDB
 
-    db = MorphologyDB.builtin_db("calima-msa-r13", flags="a")
-    analyzer = Analyzer(db, backoff="NONE", cache_size=5000)
-
-    with SOURCE.open("r", encoding="utf-8-sig", newline="") as f:
+    with SOURCE.open(encoding="utf-8-sig", newline="") as f:
         reader = csv.DictReader(f)
-        if reader.fieldnames != ["Front", "Back"]:
-            raise SystemExit(f"Unexpected CSV schema: {reader.fieldnames!r}")
+        schema = reader.fieldnames
         rows = list(reader)
 
-    key_to_indices: dict[str, list[int]] = defaultdict(list)
-    for i, row in enumerate(rows, start=1):
-        key_to_indices[canonical_key(row["Front"])].append(i)
+    expected = expected_inventory()
+    db = MorphologyDB.builtin_db("calima-msa-r13", flags="a")
+    analyzer = Analyzer(db, backoff="NONE", cache_size=10000)
 
-    audit_rows: list[dict[str, str | int]] = []
-    flag_counts: Counter[str] = Counter()
-    analyzed_count = 0
-    no_analysis_count = 0
+    flags = Counter()
+    audit_rows = []
+    fronts = [undiac(r.get("Front", "")) for r in rows]
 
-    for idx, row in enumerate(rows, start=1):
-        front = nfc(row.get("Front", "")).strip()
-        back = nfc(row.get("Back", ""))
-        en = extract(FIELD_LINE["en"], back)
-        fr = extract(FIELD_LINE["fr"], back)
-        ur = extract(FIELD_LINE["ur"], back)
-        definition = extract(FIELD_LINE["definition"], back)
-        example = extract(FIELD_LINE["example"], back)
-        translation = extract(FIELD_LINE["translation"], back)
-        synonyms = extract(FIELD_LINE["synonyms"], back)
-        root_raw = extract(ROOT_LINE, back)
-        root_now = current_root_arabic(back)
+    if schema != ["Front", "Back"]:
+        flags["bad_schema"] += 1
+    if len(rows) != 1000:
+        flags["bad_row_count"] += 1
+    if len(set(fronts)) != len(fronts):
+        flags["duplicate_exact_front"] += len(fronts) - len(set(fronts))
 
-        key = canonical_key(front)
-        tokens = [t for t in re.split(r"\s+", undiac(front)) if t]
-        multiword = len(tokens) != 1
-        flags: list[str] = []
+    for i, row in enumerate(rows, 1):
+        front = undiac(row.get("Front", ""))
+        back = row.get("Back", "") or ""
+        row_flags = []
 
-        for name, value in (("EN", en), ("FR", fr), ("UR", ur), ("definition", definition),
-                            ("example", example), ("translation", translation)):
-            if not value:
-                flags.append(f"missing_{name.lower()}")
+        if not ARABIC_ONLY.fullmatch(front):
+            row_flags.append("non_arabic_or_multiword_front")
+        if i <= len(expected) and front != expected[i - 1]:
+            row_flags.append("rank_inventory_mismatch")
 
-        if len(key_to_indices[key]) > 1:
-            flags.append("duplicate_front")
-        if "AR: (self)" in back:
-            flags.append("self_translation_artifact")
-        if synonyms and canonical_key(front) in {canonical_key(x.strip()) for x in re.split(r"[,،]", synonyms)}:
-            flags.append("self_listed_as_synonym")
+        m = RANK_RE.search(back)
+        if not m or int(m.group(1)) != i:
+            row_flags.append("back_rank_mismatch")
 
-        camel_pos = camel_lex = camel_root = camel_gloss = ""
-        if multiword:
-            flags.append("multiword_no_single_root")
-            if root_raw and root_now:
-                flags.append("phrase_has_single_root_claim")
-        else:
-            surface = undiac(front)
-            analyses = analyzer.analyze(surface)
-            if analyses:
-                analyzed_count += 1
-                best = choose_analysis(analyses, en, definition)
-                camel_pos = str(best.get("pos", ""))
-                camel_lex = str(best.get("lex", "")).replace("_1", "").replace("_2", "")
-                camel_root = normalize_camel_root(best.get("root"))
-                camel_gloss = str(best.get("gloss", ""))
-            else:
-                no_analysis_count += 1
-                flags.append("camel_no_analysis")
+        required = ["Meaning / grammatical senses:", "Published POS:", "Sources:",
+                    "Al-Said (2023), Table 4", "CALIMA-MSA r13"]
+        if any(x not in back for x in required):
+            row_flags.append("missing_precision_metadata")
+        if any(x in back for x in ["Root Word:", "Synonyms:", "Example:", "AR: (self)"]):
+            row_flags.append("legacy_generated_field_present")
+        if "Orthographic variants encountered" in back:
+            row_flags.append("orthographic_lexemes_merged")
 
-            if surface in NON_DERIVED_OR_CLOSED_CLASS:
-                flags.append("closed_class_no_productive_root")
-            if camel_pos in POS_WITHOUT_PRODUCTIVE_ROOT and not camel_root:
-                flags.append("camel_nonroot_function_word")
+        analyses = analyzer.analyze(front) if ARABIC_ONLY.fullmatch(front) else []
+        if not analyses:
+            row_flags.append("camel_no_analysis")
 
-            if root_now and not camel_root and (surface in NON_DERIVED_OR_CLOSED_CLASS or camel_pos in POS_WITHOUT_PRODUCTIVE_ROOT):
-                flags.append("invented_root_on_function_word")
-            elif root_now and camel_root and root_now != camel_root:
-                flags.append("root_disagrees_with_camel")
-            elif not root_now and camel_root:
-                flags.append("missing_valid_root")
+        root_lines = ROOT_RE.findall(back)
+        if "closed-class/function word" in back:
+            if any(value.strip() != "— (closed-class/function word; no productive lexical root asserted)"
+                   for value in root_lines if "closed-class/function word" in back and value.strip().startswith("—") is False):
+                row_flags.append("function_word_root_policy_violation")
 
-        # Known high-confidence grammar problem discovered in manual review.
-        if front == "مِنَ الصَّعْبِ تَصَدِّيقُهُ" or front == "مِنَ الصَّعْبِ تَصْدِيقُهُ":
-            if "هَذِهِ القِصَّةُ" in example and ("تَصْدِيقُهُ" in example or "تَصَدِّيقُهُ" in example):
-                flags.append("example_pronoun_gender_mismatch")
-
-        for flag in flags:
-            flag_counts[flag] += 1
-
+        for fl in row_flags:
+            flags[fl] += 1
         audit_rows.append({
-            "index": idx,
+            "rank": i,
             "front": front,
-            "english": en,
-            "current_root_raw": root_raw,
-            "current_root_ar": root_now,
-            "camel_pos": camel_pos,
-            "camel_lemma": camel_lex,
-            "camel_root": camel_root,
-            "camel_gloss": camel_gloss,
-            "token_count": len(tokens),
-            "flags": "|".join(flags),
+            "expected_front": expected[i - 1] if i <= len(expected) else "",
+            "camel_analysis_count": len(analyses),
+            "flags": "|".join(row_flags),
         })
 
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
     with AUDIT_CSV.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=list(audit_rows[0].keys()))
-        writer.writeheader()
-        writer.writerows(audit_rows)
+        w = csv.DictWriter(f, fieldnames=["rank", "front", "expected_front", "camel_analysis_count", "flags"])
+        w.writeheader(); w.writerows(audit_rows)
 
+    blocking = {
+        k: v for k, v in flags.items()
+        if k not in {""}
+    }
     summary = {
-        "source": str(SOURCE.relative_to(ROOT)),
+        "source": "arabic_top1000.csv",
         "row_count": len(rows),
-        "schema": ["Front", "Back"],
-        "unique_normalized_fronts": len(key_to_indices),
-        "duplicate_front_groups": sum(1 for v in key_to_indices.values() if len(v) > 1),
-        "camel_single_word_analyzed": analyzed_count,
-        "camel_single_word_no_analysis": no_analysis_count,
-        "flag_counts": dict(sorted(flag_counts.items())),
+        "schema": schema,
+        "unique_exact_fronts": len(set(fronts)),
+        "rank_inventory_matches": sum(1 for i, x in enumerate(fronts) if i < len(expected) and x == expected[i]),
+        "camel_rows_analyzed": sum(1 for r in audit_rows if int(r["camel_analysis_count"]) > 0),
+        "flag_counts": dict(sorted(flags.items())),
+        "blocking_problem_count": sum(blocking.values()),
         "principles": {
-            "root_policy": "Use a lexical root only when supported by MSA morphology; do not invent roots for non-root function words.",
-            "phrase_policy": "A multiword expression has no single lexical root; analyze constituent content words separately if needed.",
-            "ambiguity_policy": "Automated morphology is evidence, not authority; disagreements are flagged for review rather than silently overwritten.",
+            "ranking": "Al-Said 2023 Table 4 controls the 1,000-item order.",
+            "orthography": "Distinct Arabic spellings are preserved; hamza/alif variants are not collapsed.",
+            "morphology": "CALIMA-MSA r13 validates morphology; it does not replace the ranked inventory.",
+            "roots": "No invented root for closed-class/function words.",
         },
     }
     AUDIT_JSON.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
     print(json.dumps(summary, ensure_ascii=False, indent=2))
 
+    if blocking:
+        raise SystemExit("Arabic precision audit found blocking problems")
     if not args.audit_only:
-        raise SystemExit("Apply mode is intentionally disabled until audit discrepancies are reviewed.")
+        raise SystemExit("Use --audit-only; mutation is handled by the builder/promotion gate")
 
 
 if __name__ == "__main__":
