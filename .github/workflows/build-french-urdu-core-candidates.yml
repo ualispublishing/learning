@@ -1,0 +1,92 @@
+name: Build French and Urdu core candidates
+
+on:
+  push:
+    paths:
+      - 'scripts/build_french_urdu_core_candidates.py'
+      - '.github/workflows/build-french-urdu-core-candidates.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: build-french-urdu-core-candidates
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install PDF text extraction
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
+
+      - name: Download French lexical sources
+        run: |
+          curl -k -L --fail --retry 5 --retry-all-errors \
+            'https://www.lexique.org/databases/Lexique400/Lexique400.tsv' \
+            -o /tmp/Lexique400.tsv
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://kaikki.org/dictionary/French/kaikki.org-dictionary-French.jsonl' \
+            -o /tmp/kaikki-french.jsonl
+
+      - name: Download Urdu lexical sources
+        run: |
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://www.cle.org.pk/Downloads/ling_resources/wordlists/UrduHighFreqWords%285000%29.pdf' \
+            -o /tmp/urdu-frequency.pdf
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://www.cle.org.pk/Downloads/ling_resources/wordlists/Urdu%20WordNet%201.0%20Wordlist.pdf' \
+            -o /tmp/urdu-wordnet.pdf
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://www.cle.org.pk/Downloads/ling_resources/wordlists/Closed%20Class%20Word%20List%20v1.1.pdf' \
+            -o /tmp/urdu-closed.pdf
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://raw.githubusercontent.com/rohan-c0de/ReadUrdu-Devanagari-English/main/data/dictionary.json' \
+            -o /tmp/readurdu-dictionary.json
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://kaikki.org/dictionary/Urdu/kaikki.org-dictionary-Urdu.jsonl' \
+            -o /tmp/kaikki-urdu.jsonl
+          pdftotext -layout /tmp/urdu-frequency.pdf /tmp/urdu-frequency.txt
+          pdftotext -layout /tmp/urdu-wordnet.pdf /tmp/urdu-wordnet.txt
+          pdftotext -layout /tmp/urdu-closed.pdf /tmp/urdu-closed.txt
+
+      - name: Build French candidate
+        run: |
+          python scripts/build_french_urdu_core_candidates.py \
+            --language french \
+            --lexique /tmp/Lexique400.tsv \
+            --kaikki /tmp/kaikki-french.jsonl
+
+      - name: Build Urdu candidate
+        run: |
+          python scripts/build_french_urdu_core_candidates.py \
+            --language urdu \
+            --kaikki /tmp/kaikki-urdu.jsonl \
+            --urdu-freq-text /tmp/urdu-frequency.txt \
+            --urdu-wordnet-text /tmp/urdu-wordnet.txt \
+            --urdu-closed-text /tmp/urdu-closed.txt \
+            --readurdu /tmp/readurdu-dictionary.json
+
+      - name: Commit candidate evidence only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/french_core1000_candidate_evidence.csv \
+                  audit/french_top1000_candidate.csv \
+                  audit/french_core_candidate_rejections.csv \
+                  audit/french_core1000_candidate_summary.json \
+                  audit/urdu_core1000_candidate_evidence.csv \
+                  audit/urdu_top1000_candidate.csv \
+                  audit/urdu_core_candidate_rejections.csv \
+                  audit/urdu_core1000_candidate_summary.json
+          git commit -m 'Build French and Urdu core1000 candidates [skip ci]'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
