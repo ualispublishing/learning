@@ -1,0 +1,49 @@
+name: Inspect French and Urdu deck structure
+
+on:
+  push:
+    paths:
+      - '.github/workflows/inspect-french-urdu-decks.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect CSV structure
+        run: |
+          python - <<'PY'
+          import csv, json
+          from collections import Counter
+          from pathlib import Path
+          out = {}
+          for lang in ('french','urdu'):
+              p = Path(f'{lang}_top1000.csv')
+              with p.open(encoding='utf-8-sig', newline='') as f:
+                  r = csv.DictReader(f)
+                  rows = list(r)
+              fronts = [(x.get('Front') or '').strip() for x in rows]
+              counts = Counter(fronts)
+              out[lang] = {
+                  'headers': r.fieldnames,
+                  'parsed_rows': len(rows),
+                  'blank_fronts': sum(not x for x in fronts),
+                  'distinct_fronts': len(set(fronts)),
+                  'duplicate_fronts': {k:v for k,v in counts.items() if k and v>1},
+                  'first_20_fronts': fronts[:20],
+                  'last_20_fronts': fronts[-20:],
+              }
+          Path('audit/french_urdu_structure.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(out,ensure_ascii=False,indent=2))
+          PY
+      - name: Commit evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/french_urdu_structure.json
+          git commit -m 'Record French and Urdu deck structure [skip ci]'
+          git push
