@@ -5,6 +5,7 @@ on:
     paths:
       - 'scripts/build_french_urdu_core_candidates_v2.py'
       - 'scripts/refine_french_urdu_candidate_meanings.py'
+      - 'scripts/audit_french_urdu_core_candidates.py'
       - '.github/workflows/build-french-urdu-core-candidates.yml'
   workflow_dispatch:
 
@@ -23,10 +24,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install PDF text extraction
+      - name: Install verification tooling
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq poppler-utils
+          python -m pip install --upgrade pip
+          python -m pip install wordfreq wn
+          python - <<'PY'
+          import wn
+          wn.download('omw-en:2.0')
+          wn.download('omw-fr:2.0')
+          PY
 
       - name: Download French lexical sources
         run: |
@@ -39,6 +47,9 @@ jobs:
           curl -L --fail --retry 5 --retry-all-errors \
             'https://raw.githubusercontent.com/freedict/fd-dictionaries/master/fra-eng/fra-eng.tei' \
             -o /tmp/fra-eng.tei
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://raw.githubusercontent.com/omwn/tufs/master/tufs-vocab.tsv' \
+            -o /tmp/tufs-vocab.tsv
 
       - name: Download Urdu lexical sources
         run: |
@@ -77,6 +88,13 @@ jobs:
             --kaikki /tmp/kaikki-french.jsonl \
             --freedict /tmp/fra-eng.tei
 
+      - name: Audit French meanings independently
+        run: |
+          python scripts/audit_french_urdu_core_candidates.py \
+            --language french \
+            --evidence audit/french_core1000_candidate_evidence.csv \
+            --tufs-vocab /tmp/tufs-vocab.tsv
+
       - name: Build Urdu candidate
         run: |
           python scripts/build_french_urdu_core_candidates_v2.py \
@@ -94,7 +112,15 @@ jobs:
             --legacy urdu_top1000.csv \
             --kaikki /tmp/kaikki-urdu.jsonl
 
-      - name: Commit candidate evidence only
+      - name: Audit Urdu meanings independently
+        run: |
+          python scripts/audit_french_urdu_core_candidates.py \
+            --language urdu \
+            --evidence audit/urdu_core1000_candidate_evidence.csv \
+            --readurdu /tmp/readurdu-dictionary.json \
+            --tufs-vocab /tmp/tufs-vocab.tsv
+
+      - name: Commit candidate and audit evidence only
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -103,12 +129,18 @@ jobs:
                   audit/french_core_candidate_rejections.csv \
                   audit/french_core1000_candidate_summary.json \
                   audit/french_meaning_refinement_summary.json \
+                  audit/french_core1000_semantic_audit.csv \
+                  audit/french_core1000_semantic_review_queue.csv \
+                  audit/french_core1000_semantic_audit_summary.json \
                   audit/urdu_core1000_candidate_evidence.csv \
                   audit/urdu_top1000_candidate.csv \
                   audit/urdu_core_candidate_rejections.csv \
                   audit/urdu_core1000_candidate_summary.json \
-                  audit/urdu_meaning_refinement_summary.json
-          git commit -m 'Refine French and Urdu core1000 candidates [skip ci]'
+                  audit/urdu_meaning_refinement_summary.json \
+                  audit/urdu_core1000_semantic_audit.csv \
+                  audit/urdu_core1000_semantic_review_queue.csv \
+                  audit/urdu_core1000_semantic_audit_summary.json
+          git commit -m 'Audit French and Urdu core1000 candidates [skip ci]'
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
