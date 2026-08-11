@@ -11,14 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download and inspect CC BY 4.0 source
+      - name: Resolve journal PDF and inspect CC BY source
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq poppler-utils
           curl --http1.1 -L --fail --retry 5 --retry-all-errors \
-            'https://digibug.ugr.es/bitstream/handle/10481/80090/23634-Galerada%20publicada%20%28PDF%29-99973-2-10-20230201.pdf?isAllowed=y&sequence=1' \
-            -o /tmp/al_said_2023.pdf
-          pdfinfo /tmp/al_said_2023.pdf | head -n 20
-          pdftotext -layout /tmp/al_said_2023.pdf /tmp/al_said_2023.txt
-          echo '=== LAST 1800 LINES ==='
-          tail -n 1800 /tmp/al_said_2023.txt
+            'https://revistaseug.ugr.es/index.php/meaharabe/article/view/23634' \
+            -o /tmp/article.html
+          echo '=== PDF LINKS ==='
+          grep -Eo 'https?[^" ]+|/index.php/meaharabe/article/(download|view)/23634/[^" ]+' /tmp/article.html | grep -Ei '23634|pdf' | head -n 40 || true
+          python - <<'PY'
+          import re, html
+          t=open('/tmp/article.html',encoding='utf-8',errors='ignore').read()
+          for m in re.findall(r'href="([^"]+)"', t):
+              u=html.unescape(m)
+              if '23634' in u and ('download' in u or '/view/' in u): print(u)
+          PY
