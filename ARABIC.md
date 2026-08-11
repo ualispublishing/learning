@@ -3,10 +3,18 @@
 This file is mandatory reading for agents working on the Arabic track.
 
 ## Goal
-Build from the current Arabic foundation toward functional CEFR C2 mastery, with Modern Standard Arabic (MSA) as the core. The system is audio-first, flashcard-integrated, spaced, source-diverse, and checkpoint-based.
+Build from the beginning toward functional CEFR C2 mastery, with Modern Standard Arabic (MSA) as the core. The system is audio-first, flashcard-integrated, spaced, source-diverse, and checkpoint-based.
+
+## Fresh-start rule
+The Arabic track was reset on 2026-08-11.
+
+- No vocabulary, flashcards, audio-review items, exposure counts, spaced-review events, or completion credit from the removed prior course carry into the active course.
+- Do not infer mastery from deleted decks or old provider history.
+- The new active course begins at lesson 1 and may legitimately teach vocabulary that existed in a removed deck; create those cards again when they are actually reached in the new course.
+- Git history may retain old commits, but the current learning state must not use them as active knowledge or progress.
 
 ## Source hygiene
-The previously removed lesson provider must not be restored to active curriculum, progress, source metadata, or flashcard provenance unless the user explicitly requests it in a later turn. Previously learned concepts remain learned; provider provenance is not required to preserve knowledge.
+The previously removed lesson provider must not be restored to active curriculum, progress, source metadata, or flashcard provenance unless the user explicitly requests it in a later turn.
 
 ## Active audio-first course
 Primary course:
@@ -40,8 +48,6 @@ Al Jazeera remains a later Arabic-first immersion option and its media must be r
 - `complete` / `finished`: verify the exact current audio item, mark it complete, extract/deepen useful cards, update audio-review scripts and spaced review, then advance to the next appropriate audio lesson.
 - `what's next`: read repo state and return the exact current audio lesson.
 
-Do not restart mastered concepts except as intentionally spaced reinforcement.
-
 ## Audio-first lesson protocol
 1. Listen once for the overall meaning.
 2. Replay and shadow the Arabic.
@@ -74,13 +80,13 @@ Current audio companion:
 For every completed lesson/media item:
 1. Read `progress/current.json`, the active AlifBee playlist, track progress and review queue.
 2. Verify the live audio episode/source.
-3. Extract only main/high-utility concepts.
-4. Search existing cards for overlap and deepen rather than duplicate.
-5. Add new cards only when high-frequency, generative, or essential.
+3. Extract main/high-utility concepts taught in the current course.
+4. Search existing active cards for overlap and deepen rather than duplicate; after the reset, deleted prior-course cards do not count as existing active cards.
+5. Add new cards when high-frequency, generative, essential, or useful for the current lesson.
 6. Keep Arabic-only fronts and complete eight-layer backs.
 7. Create/update pleasant audio-review scripts for changed/new cards.
 8. Record only sources genuinely used; do not restore removed source IDs.
-9. Update exposure counts and spaced-review due state.
+9. Build exposure counts and spaced-review state from the restarted course only.
 10. Advance to the next audio-first item, resolving exact URLs live when needed.
 11. Update playlist, `resolved_media.json`, track progress, `progress/current.json`, review queue and `NEXT.md`.
 12. Keep paused MATS progress untouched.
