@@ -1,55 +1,49 @@
 # Next Lesson
 
-## ACTIVE — ArabicPod101 Newbie Season 1
+## ACTIVE — Arabic MSA Audio-First Path
 
-Completed:
-1. ✅ **Hello. How Are You?**
-2. ✅ **Good Morning, How Are You All?**
-3. ✅ **What’s Your Name?**
+Completed concept milestones:
+1. ✅ Greetings / how are you
+2. ✅ Morning/evening greetings + dual/plural address
+3. ✅ Names and self-introduction
 
-Lesson 3 added six new Arabic knowledge cards plus audio-review versions: **أَنَا**, **مَا اسْمُكَ؟ / مَا اسْمُكِ؟**, **اِسْمِي**, **طَالِب / طَالِبَة**, **أَنَا أَيْضًا**, and **حَقًّا**. **مَرْحَبًا** was reinforced rather than duplicated.
+The learned vocabulary and flashcards from these milestones remain active. Provider-specific history has been removed from the current learning scheme.
 
 ## Next
-4. ▶ **Who Are You All? — ArabicPod101**
+▶ **Arabic Basics for Beginners: 10 Must-Know Essentials to Start Learning — AlifBee**
 
-- URL: https://www.arabicpod101.com/lesson/newbie-4-who-are-you-all
-- Medium: short audio lesson with dialogue, English explanation and transcript
-- Provider register note: the sample dialogue is explicitly described as **casual Arabic**; retain that label instead of silently treating every form as formal MSA.
-- Goal: ask who a group is and say that you are looking for someone or something.
+- Direct audio: https://podcast.alifbee.com/1979812/episodes/17687648-arabic-basics-for-beginners-10-must-know-essentials-to-start-learning?t=0
+- Duration: 24:50
+- Medium: continuous podcast/audio lesson
+- Variety: Modern Standard Arabic-focused beginner instruction
+- Role: transition into the new audio-first course
 
-Key forms previewed by the verified lesson:
-- **عَفْوًا** — excuse me / sorry
-- **نَحْنُ** — we (reinforcement)
-- **أَنْتُمْ** — you all
-- **مَنْ أَنْتُمْ؟** — who are you all?
-- **نَبْحَثُ عَنْ ...** — we are looking for ...
-- **أَبْحَثُ عَنْ ...** — I am looking for ...
-- **هُنَاكَ** — there / over there
-- **مِنْ ...** — from ...
+This episode is used as a transition/checkpoint rather than a restart. Move quickly through anything already mastered and focus on genuinely new pronunciation, grammar, vocabulary, or learning gaps.
 
 ### Before listening
 Retrieve aloud:
-**أَنَا → مَا اسْمُكَ؟ / مَا اسْمُكِ؟ → اِسْمِي ... → طَالِب / طَالِبَة → أَنَا أَيْضًا → حَقًّا**
-
-Then try to say **“Who are you all?”** before hearing the lesson.
+**مَرْحَبًا → كَيْفَ حَالُكَ؟ / كَيْفَ حَالُكِ؟ → صَبَاحُ الْخَيْر → كَيْفَ حَالُكُمَا؟ / كَيْفَ حَالُكُمْ؟ → مَا اسْمُكَ؟ / مَا اسْمُكِ؟ → اِسْمِي ... → أَنَا → طَالِب / طَالِبَة**
 
 ### Listening protocol
-1. Listen once for the dialogue and overall meaning.
-2. Replay and shadow the Arabic.
-3. Pause before explanations and retrieve known pronouns/forms yourself.
-4. Pay attention to the lesson’s casual-register note.
-5. Produce one sentence with **أَبْحَثُ عَنْ ...** and one with **نَبْحَثُ عَنْ ...**.
-6. Finish with another less-supported listen.
+1. Listen continuously once for the overall lesson.
+2. On the second pass, repeat/shadow useful Arabic aloud.
+3. Skip active memorization of material you already retrieve easily.
+4. Pause for genuinely new concepts and attempt them before hearing the explanation again.
+5. Finish by recalling the three most useful new things without looking.
 
 When you say **complete** or **finished**:
-- process this exact ArabicPod101 lesson;
-- add/deepen useful Arabic vocabulary and grammar cards, deduplicating existing forms such as **نَحْنُ**;
+- process this exact audio episode;
+- deduplicate against the existing Arabic deck;
+- add only useful new/deepened vocabulary and grammar cards;
 - keep Arabic-only fronts and complete eight-layer backs;
-- update the pleasant audio-review companion;
+- update the short pleasant audio-review companion;
 - update spaced reinforcement;
-- live-verify and advance to ArabicPod101 lesson 5.
+- advance to the next appropriate item in the curated MSA audio path.
 
-The free/open 20-week course remains preserved as secondary reinforcement and later expansion material. Gateway and Al Jazeera remain deferred unless explicitly restored.
+### Supporting curriculum
+The broader free/open intensive plan remains available as secondary scaffolding, including ANU Marhaba, Wisconsin, MSU, LQToronto/Madina, and later DLI GLOSS.
+
+Gateway remains optional/deferred. Al Jazeera remains a separate later Arabic-first immersion course.
 
 ### Paused track
 MATS / Efficient Engineer remains preserved and resumes at **Understanding Poisson's Ratio**.
