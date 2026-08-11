@@ -11,34 +11,45 @@
   "source_preference": "ArabicPod101 primary; source-diverse reinforcement retained",
   "active_flashcards": [
     "subjects/arabic/a1-foundations/greetings/knowledge.json",
-    "subjects/arabic/a1-foundations/greetings-and-plural-address/knowledge.json"
+    "subjects/arabic/a1-foundations/greetings-and-plural-address/knowledge.json",
+    "subjects/arabic/a1-foundations/self-introduction/knowledge.json"
   ],
-  "completed_orders": [1, 2],
+  "completed_orders": [1, 2, 3],
   "completed_lessons": [
     {"order": 1, "title": "Hello. How Are You?", "provider": "ArabicPod101", "completed_on": "2026-08-10"},
-    {"order": 2, "title": "Good Morning, How Are You All?", "provider": "ArabicPod101", "completed_on": "2026-08-10"}
+    {"order": 2, "title": "Good Morning, How Are You All?", "provider": "ArabicPod101", "completed_on": "2026-08-10"},
+    {"order": 3, "title": "What’s Your Name?", "provider": "ArabicPod101", "completed_on": "2026-08-11", "cards_added": 6, "existing_cards_reinforced": ["ar-a1-marhaban"]}
   ],
   "next": {
-    "order": 3,
-    "title": "What’s Your Name?",
+    "order": 4,
+    "title": "Who Are You All?",
     "provider": "ArabicPod101",
-    "url": "https://www.arabicpod101.com/lesson/newbie-3-whats-your-name",
-    "source_id": "arabicpod101-newbie-3-whats-your-name"
+    "url": "https://www.arabicpod101.com/lesson/newbie-4-who-are-you-all",
+    "source_id": "arabicpod101-newbie-4-who-are-you-all",
+    "register_note": "Dialogue is explicitly described by the provider as casual Arabic; extract broadly useful forms with register labels."
   },
   "reinforcement": {
     "policy": "docs/SPACED_REINFORCEMENT_STANDARD.md",
     "due_concepts": [],
     "exposure_counts": {
-      "greetings": 2,
+      "greetings": 3,
       "how-are-you": 2,
-      "masculine-feminine-address": 2,
+      "masculine-feminine-address": 3,
       "alhamdulillah": 1,
       "time-specific-greetings": 1,
       "dual-address": 1,
       "plural-address": 1,
       "thank-you": 1,
       "we-pronoun": 1,
-      "condition-expressions": 1
+      "condition-expressions": 1,
+      "self-introduction": 1,
+      "name-question": 1,
+      "first-person-singular": 1,
+      "attached-possessive-suffix": 1,
+      "student-gender-pair": 1,
+      "nominal-sentence-no-copula": 1,
+      "also-too": 1,
+      "discourse-really": 1
     },
     "rule": "ArabicPod101 drives the core sequence; use alternate-source review only when due and avoid unnecessary interruption of course order."
   },
