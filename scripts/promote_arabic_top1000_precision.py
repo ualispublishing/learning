@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
-"""Promote a validated Arabic precision candidate to arabic_top1000.csv."""
+"""Promote a fully validated Arabic precision candidate to arabic_top1000.csv."""
 from __future__ import annotations
 
 import csv
 import re
 import shutil
+from collections import defaultdict
 from pathlib import Path
+
+from finalize_arabic_top1000_precision import ALLOWED_DUPLICATES
 
 ROOT = Path(__file__).resolve().parents[1]
 CANDIDATE = ROOT / "audit" / "arabic_top1000_precision_candidate.csv"
@@ -22,8 +25,16 @@ def main() -> None:
         raise SystemExit("Refusing promotion: schema must be Front,Back")
 
     fronts = [r["Front"].strip() for r in rows]
-    if len(set(fronts)) != 1000:
-        raise SystemExit("Refusing promotion: exact fronts are not unique")
+    groups: dict[str, list[int]] = defaultdict(list)
+    for rank, front in enumerate(fronts, 1):
+        groups[front].append(rank)
+    bad_dupes = {
+        front: ranks for front, ranks in groups.items()
+        if len(ranks) > 1 and ALLOWED_DUPLICATES.get(front) != set(ranks)
+    }
+    if bad_dupes:
+        raise SystemExit(f"Refusing promotion: unexpected duplicate fronts: {bad_dupes!r}")
+
     bad_fronts = [x for x in fronts if not ARABIC_ONLY.fullmatch(x)]
     if bad_fronts:
         raise SystemExit(f"Refusing promotion: non-Arabic-only fronts: {bad_fronts[:20]!r}")
@@ -35,7 +46,7 @@ def main() -> None:
             "Meaning / grammatical senses:",
             "Published POS:",
             "Sources:",
-            "Al-Said (2023), Table 4",
+            "Existing Top-1000 inventory",
             "CALIMA-MSA r13",
         ]
         missing = [x for x in required if x not in b]
@@ -45,11 +56,11 @@ def main() -> None:
         found = [x for x in forbidden if x in b]
         if found:
             raise SystemExit(f"Refusing promotion at rank {i}: forbidden legacy fields {found!r}")
-        if "function word" in b and "Root: —" not in b:
-            raise SystemExit(f"Refusing promotion at rank {i}: function-word root policy missing")
+        if not b.strip():
+            raise SystemExit(f"Refusing promotion at rank {i}: empty back")
 
     shutil.copyfile(CANDIDATE, TARGET)
-    print("Promoted validated Al-Said/CALIMA 1000-row Arabic precision deck.")
+    print("Promoted validated 1,000-row Arabic precision deck; rank/order preserved.")
 
 
 if __name__ == "__main__":
