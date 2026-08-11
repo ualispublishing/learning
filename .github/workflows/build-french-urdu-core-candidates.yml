@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'scripts/build_french_urdu_core_candidates_v2.py'
+      - 'scripts/build_french_urdu_core_candidates_v3.py'
       - 'scripts/refine_french_urdu_candidate_meanings.py'
       - 'scripts/audit_french_urdu_core_candidates.py'
       - 'scripts/audit_french_urdu_core_candidates_v2.py'
@@ -75,7 +76,7 @@ jobs:
 
       - name: Build French candidate
         run: |
-          python scripts/build_french_urdu_core_candidates_v2.py \
+          python scripts/build_french_urdu_core_candidates_v3.py \
             --language french \
             --lexique /tmp/Lexique400.tsv \
             --kaikki /tmp/kaikki-french.jsonl \
@@ -98,7 +99,7 @@ jobs:
 
       - name: Build Urdu candidate
         run: |
-          python scripts/build_french_urdu_core_candidates_v2.py \
+          python scripts/build_french_urdu_core_candidates_v3.py \
             --language urdu \
             --kaikki /tmp/kaikki-urdu.jsonl \
             --urdu-freq-text /tmp/urdu-frequency.txt \
@@ -141,7 +142,7 @@ jobs:
                   audit/urdu_core1000_semantic_audit.csv \
                   audit/urdu_core1000_semantic_review_queue.csv \
                   audit/urdu_core1000_semantic_audit_summary.json
-          git commit -m 'Audit French and Urdu core1000 candidates [skip ci]'
+          git commit -m 'Audit normalized French and Urdu core1000 candidates [skip ci]'
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
