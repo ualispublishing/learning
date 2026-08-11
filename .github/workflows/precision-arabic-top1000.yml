@@ -6,6 +6,7 @@ on:
       - 'scripts/precision_arabic_top1000.py'
       - 'scripts/build_arabic_core_candidates.py'
       - 'scripts/build_arabic_top1000_precision.py'
+      - 'scripts/finalize_arabic_top1000_precision.py'
       - 'scripts/promote_arabic_top1000_precision.py'
       - '.github/workflows/precision-arabic-top1000.yml'
   workflow_dispatch:
@@ -50,8 +51,8 @@ jobs:
             --frequency-zip /tmp/MSA_freq_lists.tsv.zip \
             --candidate-count 10000
 
-      - name: Build precision 1,000-card deck
-        run: python scripts/build_arabic_top1000_precision.py
+      - name: Build and human-resolve precision 1,000-card deck
+        run: python scripts/finalize_arabic_top1000_precision.py
 
       - name: Promote only after strict validation
         run: python scripts/promote_arabic_top1000_precision.py
