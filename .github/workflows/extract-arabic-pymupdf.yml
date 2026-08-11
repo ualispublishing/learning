@@ -27,6 +27,19 @@ jobs:
           curl --http1.1 -k -L --fail --retry 5 --retry-all-errors \
             'https://revistaseug.ugr.es/index.php/meaharabe/article/download/23634/25105/99973' \
             -o /tmp/al_said_2023.pdf
+      - name: Inspect first table page token geometry
+        run: |
+          python - <<'PY'
+          import pymupdf, re
+          doc=pymupdf.open('/tmp/al_said_2023.pdf')
+          ar=re.compile(r'[\u0621-\u064a]')
+          for pno in (18,19):
+              print('=== PDF PAGE',pno+1,'===')
+              for w in doc[pno].get_text('words', sort=False):
+                  x0,y0,x1,y1,text,block,line,word=w
+                  if ar.search(text) or re.fullmatch(r'[0-9.]+',text):
+                      print(f'{x0:.1f}\t{y0:.1f}\t{x1:.1f}\t{y1:.1f}\tb{block}l{line}\t{text!r}')
+          PY
       - name: Extract and validate ranks
         run: python scripts/extract_al_said_pymupdf.py --pdf /tmp/al_said_2023.pdf
       - name: Commit extraction
