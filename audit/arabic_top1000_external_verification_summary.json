@@ -1,0 +1,35 @@
+{
+  "language": "arabic",
+  "input": "arabic_top1000.csv",
+  "rows": 1000,
+  "expected_rows": 1000,
+  "row_count_problem": false,
+  "blank_front_rows": 0,
+  "duplicate_front_spellings": [
+    "ما"
+  ],
+  "confidence_counts": {
+    "semantic_review": 135,
+    "strong": 719,
+    "form_only": 142,
+    "weak": 4
+  },
+  "kaikki_coverage": 975,
+  "kaikki_rows_with_english_gloss": 854,
+  "wordfreq_attested": 996,
+  "arabic_wordnet_coverage": 804,
+  "camel_analysis_coverage": 996,
+  "lexique4_coverage": 0,
+  "urdu_ud_coverage": 0,
+  "semantic_overlap_rows": 719,
+  "review_queue_rows": 281,
+  "source_load_problems": [],
+  "policy": [
+    "External sources never silently rewrite learner cards.",
+    "Kaikki/Wiktextract English gloss overlap is a verification and triage signal, not an oracle.",
+    "wordfreq is used only as independent corpus attestation, never as a meaning authority.",
+    "Arabic WordNet, CALIMA, Lexique4, and Urdu UD are independent language-specific support signals.",
+    "Missing coverage is not treated as proof that a learner entry is wrong.",
+    "Rows with weak or non-overlapping semantic support are queued for explicit review."
+  ]
+}
