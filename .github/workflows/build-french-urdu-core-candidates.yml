@@ -6,6 +6,7 @@ on:
       - 'scripts/build_french_urdu_core_candidates_v2.py'
       - 'scripts/refine_french_urdu_candidate_meanings.py'
       - 'scripts/audit_french_urdu_core_candidates.py'
+      - 'scripts/audit_french_urdu_core_candidates_v2.py'
       - '.github/workflows/build-french-urdu-core-candidates.yml'
   workflow_dispatch:
 
@@ -90,7 +91,7 @@ jobs:
 
       - name: Audit French meanings independently
         run: |
-          python scripts/audit_french_urdu_core_candidates.py \
+          python scripts/audit_french_urdu_core_candidates_v2.py \
             --language french \
             --evidence audit/french_core1000_candidate_evidence.csv \
             --tufs-vocab /tmp/tufs-vocab.tsv
@@ -114,7 +115,7 @@ jobs:
 
       - name: Audit Urdu meanings independently
         run: |
-          python scripts/audit_french_urdu_core_candidates.py \
+          python scripts/audit_french_urdu_core_candidates_v2.py \
             --language urdu \
             --evidence audit/urdu_core1000_candidate_evidence.csv \
             --readurdu /tmp/readurdu-dictionary.json \
