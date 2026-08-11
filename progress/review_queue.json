@@ -1,31 +1,31 @@
 {
-  "version": 8,
+  "version": 9,
   "purpose": "Cross-track spaced reinforcement queue. Review events reference canonical concepts; they do not duplicate cards.",
   "active_subject": "arabic",
   "policy": "docs/SPACED_REINFORCEMENT_STANDARD.md",
   "arabic": {
     "track_id": "arabic-msa-to-c2",
-    "active_course_id": "arabicpod101-newbie-season-1-standard-arabic",
+    "active_course_id": "alifbee-msa-audio",
     "due": [],
     "scheduled": [
       {
         "review_id": "ar-a1-greetings-r1",
         "concepts": ["greetings", "how-are-you", "time-specific-greetings", "thank-you"],
-        "trigger": "after 1-4 more ArabicPod101 lessons",
-        "representation": "alternate-source listening or audio flashcard retrieval",
+        "trigger": "after 1-4 additional active audio lessons",
+        "representation": "alternate-speaker listening or audio flashcard retrieval",
         "status": "dynamic"
       },
       {
         "review_id": "ar-a1-address-system-r1",
         "concepts": ["masculine-feminine-address", "dual-address", "plural-address", "we-pronoun", "attached-possessive-suffix"],
-        "trigger": "after enough spacing from lessons 1-3 or after a relevant later ArabicPod101 grammar encounter",
+        "trigger": "after enough spacing or after a relevant later grammar encounter",
         "representation": "contrast retrieval + spoken production",
         "status": "dynamic"
       },
       {
         "review_id": "ar-a1-self-introduction-r1",
         "concepts": ["self-introduction", "name-question", "first-person-singular", "student-gender-pair", "nominal-sentence-no-copula"],
-        "trigger": "after 2-5 later ArabicPod101 lessons",
+        "trigger": "after 2-5 later active audio items",
         "representation": "different-speaker introduction + production from memory",
         "status": "scheduled"
       }
@@ -62,8 +62,9 @@
       "successful_transfer": "lengthen interval and vary representation",
       "same_source_back_to_back": false,
       "prefer_different_representation": true,
-      "core_course_sequence": "ArabicPod101 Newbie Season 1",
-      "secondary_sources_may_reinforce": true
+      "core_course_sequence": "AlifBee curated MSA audio path",
+      "secondary_sources_may_reinforce": true,
+      "primary_media_must_be_continuous_audio_or_video": true
     }
   },
   "mats": {
