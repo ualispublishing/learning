@@ -1,5 +1,5 @@
 {
-  "version": 9,
+  "version": 10,
   "purpose": "Cross-track spaced reinforcement queue. Review events reference canonical concepts; they do not duplicate cards.",
   "active_subject": "arabic",
   "policy": "docs/SPACED_REINFORCEMENT_STANDARD.md",
@@ -7,54 +7,13 @@
     "track_id": "arabic-msa-to-c2",
     "active_course_id": "alifbee-msa-audio",
     "due": [],
-    "scheduled": [
-      {
-        "review_id": "ar-a1-greetings-r1",
-        "concepts": ["greetings", "how-are-you", "time-specific-greetings", "thank-you"],
-        "trigger": "after 1-4 additional active audio lessons",
-        "representation": "alternate-speaker listening or audio flashcard retrieval",
-        "status": "dynamic"
-      },
-      {
-        "review_id": "ar-a1-address-system-r1",
-        "concepts": ["masculine-feminine-address", "dual-address", "plural-address", "we-pronoun", "attached-possessive-suffix"],
-        "trigger": "after enough spacing or after a relevant later grammar encounter",
-        "representation": "contrast retrieval + spoken production",
-        "status": "dynamic"
-      },
-      {
-        "review_id": "ar-a1-self-introduction-r1",
-        "concepts": ["self-introduction", "name-question", "first-person-singular", "student-gender-pair", "nominal-sentence-no-copula"],
-        "trigger": "after 2-5 later active audio items",
-        "representation": "different-speaker introduction + production from memory",
-        "status": "scheduled"
-      }
-    ],
+    "scheduled": [],
     "secondary_reinforcement_source": "playlists/audio/arabic/courses/free-intensive-20-week/plan.json",
     "deferred_reinforcement": [
       {"path":"playlists/audio/arabic/deferred/gateway-to-arabic-book-2/playlist.json","status":"do not schedule automatically"},
       {"path":"playlists/audio/arabic/deferred/al-jazeera-immersion/playlist.json","status":"do not schedule automatically"}
     ],
-    "exposure_counts": {
-      "greetings": 3,
-      "how-are-you": 2,
-      "masculine-feminine-address": 3,
-      "alhamdulillah": 1,
-      "time-specific-greetings": 1,
-      "dual-address": 1,
-      "plural-address": 1,
-      "thank-you": 1,
-      "we-pronoun": 1,
-      "condition-expressions": 1,
-      "self-introduction": 1,
-      "name-question": 1,
-      "first-person-singular": 1,
-      "attached-possessive-suffix": 1,
-      "student-gender-pair": 1,
-      "nominal-sentence-no-copula": 1,
-      "also-too": 1,
-      "discourse-really": 1
-    },
+    "exposure_counts": {},
     "rules": {
       "initial_review_gaps_in_playlist_items": [2,5,12,30],
       "stage_bridge_review": true,
@@ -64,7 +23,8 @@
       "prefer_different_representation": true,
       "core_course_sequence": "AlifBee curated MSA audio path",
       "secondary_sources_may_reinforce": true,
-      "primary_media_must_be_continuous_audio_or_video": true
+      "primary_media_must_be_continuous_audio_or_video": true,
+      "restart_rule": "No review items or exposure credit carry over from the removed prior course. Build the queue only from the restarted course."
     }
   },
   "mats": {
