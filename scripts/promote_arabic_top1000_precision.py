@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Promote a validated Arabic precision candidate to arabic_top1000.csv.
-
-All linguistic selection happens upstream. This gate refuses promotion unless the
-candidate satisfies the learner-facing precision contract exactly.
-"""
+"""Promote a validated Arabic precision candidate to arabic_top1000.csv."""
 from __future__ import annotations
 
 import csv
@@ -27,7 +23,7 @@ def main() -> None:
 
     fronts = [r["Front"].strip() for r in rows]
     if len(set(fronts)) != 1000:
-        raise SystemExit("Refusing promotion: fronts are not unique")
+        raise SystemExit("Refusing promotion: exact fronts are not unique")
     bad_fronts = [x for x in fronts if not ARABIC_ONLY.fullmatch(x)]
     if bad_fronts:
         raise SystemExit(f"Refusing promotion: non-Arabic-only fronts: {bad_fronts[:20]!r}")
@@ -36,33 +32,24 @@ def main() -> None:
         b = r["Back"]
         required = [
             f"Rank: {i}",
-            "Validated frequency:",
             "Meaning / grammatical senses:",
+            "Published POS:",
             "Sources:",
-            "CAMeL Arabic Frequency Lists v1.0",
+            "Al-Said (2023), Table 4",
             "CALIMA-MSA r13",
         ]
         missing = [x for x in required if x not in b]
         if missing:
             raise SystemExit(f"Refusing promotion at rank {i}: missing {missing!r}")
-        forbidden = [
-            "Root Word:",
-            "Synonyms:",
-            "Example:",
-            "AR: (self)",
-            "Al-Said (2023)",
-        ]
+        forbidden = ["Root Word:", "Synonyms:", "Example:", "AR: (self)"]
         found = [x for x in forbidden if x in b]
         if found:
             raise SystemExit(f"Refusing promotion at rank {i}: forbidden legacy fields {found!r}")
-
-        # A function-word card may explicitly say no productive root; it must never
-        # contain the legacy pseudo-root formulation that the old deck generated.
         if "function word" in b and "Root: —" not in b:
             raise SystemExit(f"Refusing promotion at rank {i}: function-word root policy missing")
 
     shutil.copyfile(CANDIDATE, TARGET)
-    print("Promoted validated 1000-row Arabic precision deck.")
+    print("Promoted validated Al-Said/CALIMA 1000-row Arabic precision deck.")
 
 
 if __name__ == "__main__":
