@@ -5,6 +5,7 @@ on:
     paths:
       - 'scripts/precision_arabic_top1000.py'
       - 'scripts/build_arabic_core_candidates.py'
+      - 'scripts/reconcile_arabic_msa1000.py'
       - '.github/workflows/precision-arabic-top1000.yml'
   workflow_dispatch:
 
@@ -48,10 +49,14 @@ jobs:
             --frequency-zip /tmp/MSA_freq_lists.tsv.zip \
             --candidate-count 10000
 
+      - name: Reconcile published 1,000 ranks
+        run: python scripts/reconcile_arabic_msa1000.py
+
       - name: Audit existing Arabic deck
         run: python scripts/precision_arabic_top1000.py --audit-only
 
       - name: Commit audit evidence
+        if: always()
         run: |
           if [ -z "$(git status --porcelain -- audit/)" ]; then
             echo 'No audit changes to commit.'
@@ -60,7 +65,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add audit/
-          git commit -m 'Expand Arabic MSA lexical validation audit [skip ci]'
+          git commit -m 'Reconcile Arabic MSA 1000 validation evidence [skip ci]'
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
