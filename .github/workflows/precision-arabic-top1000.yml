@@ -10,6 +10,7 @@ on:
       - 'scripts/rebuild_arabic_top1000_learner_safe.py'
       - 'scripts/rebuild_arabic_top1000_learner_safe_v2.py'
       - 'scripts/rebuild_arabic_top1000_learner_safe_v3.py'
+      - 'scripts/rebuild_arabic_top1000_learner_safe_v4.py'
       - 'scripts/report_arabic_top1000_manual_coverage.py'
       - 'scripts/promote_arabic_top1000_learner_safe.py'
       - 'scripts/audit_arabic_top1000_learner_safe.py'
@@ -59,10 +60,10 @@ jobs:
       - name: Repair source extraction and morphology exceptions
         run: python scripts/finalize_arabic_top1000_precision.py
 
-      - name: Build learner-safe meanings with explicit exceptions
-        run: python scripts/rebuild_arabic_top1000_learner_safe_v3.py
+      - name: Build fully explicit learner-safe meanings
+        run: python scripts/rebuild_arabic_top1000_learner_safe_v4.py
 
-      - name: Report remaining automatic semantic coverage
+      - name: Require full explicit semantic coverage
         run: python scripts/report_arabic_top1000_manual_coverage.py
 
       - name: Promote only after learner-safety validation
@@ -79,7 +80,7 @@ jobs:
             exit 0
           fi
           git config user.name 'github-actions[bot]'
-          git config user.email '4189828+github-actions[bot]@users.noreply.github.com'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add arabic_top1000.csv audit/
           git commit -m 'Promote learner-safe Arabic top 1000 [skip ci]'
           git fetch origin main
