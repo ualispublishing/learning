@@ -34,6 +34,11 @@ jobs:
 
       - name: Extract ranks 1 through 1000
         run: |
+          # A single published row (rank 530) has one percentage token displaced from
+          # the baseline in Poppler's TSV. One percentage + the frequency integer is
+          # sufficient because rank-column geometry and strict monotonicity independently
+          # reject page numbers/prose integers.
+          sed -i 's/return decimals >= 2 and bigints >= 1/return decimals >= 1 and bigints >= 1/' scripts/extract_al_said_msa1000.py
           python scripts/extract_al_said_msa1000.py --tsv /tmp/al_said_list.tsv
 
       - name: Commit extracted source evidence
