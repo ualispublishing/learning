@@ -5,8 +5,8 @@ on:
     paths:
       - 'scripts/precision_arabic_top1000.py'
       - 'scripts/build_arabic_core_candidates.py'
-      - 'scripts/reconcile_arabic_msa1000.py'
       - 'scripts/build_arabic_top1000_precision.py'
+      - 'scripts/promote_arabic_top1000_precision.py'
       - '.github/workflows/precision-arabic-top1000.yml'
   workflow_dispatch:
 
@@ -44,32 +44,32 @@ jobs:
             'https://github.com/CAMeL-Lab/Camel_Arabic_Frequency_Lists/releases/download/v1.0/MSA_freq_lists.tsv.zip' \
             -o /tmp/MSA_freq_lists.tsv.zip
 
-      - name: Build broad lexical validation candidates
+      - name: Build broad validated MSA candidate inventory
         run: |
           python scripts/build_arabic_core_candidates.py \
             --frequency-zip /tmp/MSA_freq_lists.tsv.zip \
             --candidate-count 10000
 
-      - name: Reconcile published 1,000 ranks
-        run: python scripts/reconcile_arabic_msa1000.py
-
-      - name: Build precision candidate deck
+      - name: Build precision 1,000-card deck
         run: python scripts/build_arabic_top1000_precision.py
 
-      - name: Audit existing Arabic deck
+      - name: Promote only after strict validation
+        run: python scripts/promote_arabic_top1000_precision.py
+
+      - name: Audit promoted Arabic deck
         run: python scripts/precision_arabic_top1000.py --audit-only
 
-      - name: Commit audit evidence
+      - name: Commit precision deck and audit evidence
         if: always()
         run: |
-          if [ -z "$(git status --porcelain -- audit/)" ]; then
-            echo 'No audit changes to commit.'
+          if [ -z "$(git status --porcelain -- arabic_top1000.csv audit/)" ]; then
+            echo 'No precision changes to commit.'
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add audit/
-          git commit -m 'Build Arabic top-1000 precision candidate [skip ci]'
+          git add arabic_top1000.csv audit/
+          git commit -m 'Promote precision-grade Arabic top 1000 [skip ci]'
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
