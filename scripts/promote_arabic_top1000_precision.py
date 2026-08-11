@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Promote a validated Arabic precision candidate to arabic_top1000.csv.
 
-This step is intentionally boring: all linguistic decisions happen upstream. Promotion is
-allowed only when the candidate independently satisfies the final file contract.
+All linguistic selection happens upstream. This gate refuses promotion unless the
+candidate satisfies the learner-facing precision contract exactly.
 """
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ def main() -> None:
         rows = list(csv.DictReader(f))
     if len(rows) != 1000:
         raise SystemExit(f"Refusing promotion: expected 1000 rows, got {len(rows)}")
-    if list(rows[0].keys()) != ["Front", "Back"]:
+    if not rows or list(rows[0].keys()) != ["Front", "Back"]:
         raise SystemExit("Refusing promotion: schema must be Front,Back")
 
     fronts = [r["Front"].strip() for r in rows]
@@ -34,14 +34,32 @@ def main() -> None:
 
     for i, r in enumerate(rows, start=1):
         b = r["Back"]
-        required = [f"Rank: {i}", "Meaning / grammatical senses:", "Published POS:", "Sources:", "Al-Said (2023)", "CALIMA-MSA r13"]
+        required = [
+            f"Rank: {i}",
+            "Validated frequency:",
+            "Meaning / grammatical senses:",
+            "Sources:",
+            "CAMeL Arabic Frequency Lists v1.0",
+            "CALIMA-MSA r13",
+        ]
         missing = [x for x in required if x not in b]
         if missing:
             raise SystemExit(f"Refusing promotion at rank {i}: missing {missing!r}")
-        forbidden = ["Root Word:", "Synonyms:", "Example:", "AR: (self)"]
+        forbidden = [
+            "Root Word:",
+            "Synonyms:",
+            "Example:",
+            "AR: (self)",
+            "Al-Said (2023)",
+        ]
         found = [x for x in forbidden if x in b]
         if found:
             raise SystemExit(f"Refusing promotion at rank {i}: forbidden legacy fields {found!r}")
+
+        # A function-word card may explicitly say no productive root; it must never
+        # contain the legacy pseudo-root formulation that the old deck generated.
+        if "function word" in b and "Root: —" not in b:
+            raise SystemExit(f"Refusing promotion at rank {i}: function-word root policy missing")
 
     shutil.copyfile(CANDIDATE, TARGET)
     print("Promoted validated 1000-row Arabic precision deck.")
