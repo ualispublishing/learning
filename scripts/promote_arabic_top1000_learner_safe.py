@@ -14,9 +14,10 @@ ARABIC_ONLY = re.compile(r"^[\u0621-\u064a]+$")
 RANK_RE = re.compile(r"(?m)^Rank:\s*(\d+)\s*$")
 MEANING_RE = re.compile(r"(?m)^Meaning:\s*(.+?)\s*$")
 
-FORBIDDEN = [
+RAW_ARTIFACTS = [
     "+he;it", "+it;him", "+me", "+you", "it;they;she+", "he;it+", "you_[",
     "[def.", "[indef.", "<verb>", "the+", "and+", "for +", "Meaning / grammatical senses:",
+    "be valiant",
 ]
 
 
@@ -39,14 +40,17 @@ def main() -> None:
         meaning = MEANING_RE.search(back)
         if not meaning or not meaning.group(1).strip():
             raise SystemExit(f"Refusing promotion rank {i}: missing learner meaning")
-        required = ["Published POS:", "Sources:", "Al-Said (2023), Table 4", "CALIMA-MSA r13"]
+        learner_meaning = meaning.group(1).strip()
+        required = ["Part of speech:", "Sources:", "Al-Said (2023), Table 4", "CALIMA-MSA r13", "Learner-safety review"]
         if any(x not in back for x in required):
-            raise SystemExit(f"Refusing promotion rank {i}: missing provenance/grammar metadata")
-        for frag in FORBIDDEN:
+            raise SystemExit(f"Refusing promotion rank {i}: missing learner/provenance metadata")
+        for frag in RAW_ARTIFACTS:
             if frag in back:
-                raise SystemExit(f"Refusing promotion rank {i}: raw morphology artifact {frag!r}")
-        if any(ch in meaning.group(1) for ch in "[]<>") or "+" in meaning.group(1):
-            raise SystemExit(f"Refusing promotion rank {i}: markup in learner meaning")
+                raise SystemExit(f"Refusing promotion rank {i}: raw morphology/bad-gloss artifact {frag!r}")
+        if any(ch in learner_meaning for ch in "[]<>_") or "+" in learner_meaning:
+            raise SystemExit(f"Refusing promotion rank {i}: machine markup in learner meaning {learner_meaning!r}")
+        if len(learner_meaning) > 320:
+            raise SystemExit(f"Refusing promotion rank {i}: learner meaning is excessively long")
 
     dupes = {w: ranks for w, ranks in seen.items() if len(ranks) > 1}
     if dupes != {"ما": [10, 347]}:
