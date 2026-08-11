@@ -30,6 +30,17 @@ jobs:
           python -m pip install camel-tools
           camel_data -i morphology-db-msa-r13
 
+      - name: Inspect Al-Said 2023 open MSA list
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
+          curl -L --fail --retry 3 \
+            'https://digibug.ugr.es/bitstream/handle/10481/80090/23634-Galerada%20publicada%20%28PDF%29-99973-2-10-20230201.pdf?isAllowed=y&sequence=1' \
+            -o /tmp/al_said_2023.pdf
+          pdftotext -layout /tmp/al_said_2023.pdf /tmp/al_said_2023.txt
+          echo '=== LAST 1400 LINES OF OPEN-ACCESS SOURCE ==='
+          tail -n 1400 /tmp/al_said_2023.txt
+
       - name: Audit all Arabic top-1000 rows
         run: python scripts/precision_arabic_top1000.py --audit-only
 
