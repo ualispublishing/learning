@@ -1,0 +1,92 @@
+name: Promote verified French and Urdu decks
+
+on:
+  push:
+    paths:
+      - 'audit/promote_french_urdu.request'
+      - '.github/workflows/promote-verified-language-decks.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: promote-verified-language-decks
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Enforce zero-review promotion gate
+        run: |
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+
+          for lang in ('french','urdu'):
+              summary = json.loads(Path(f'audit/{lang}_core1000_semantic_audit_summary.json').read_text(encoding='utf-8'))
+              structural = json.loads(Path(f'audit/{lang}_core1000_candidate_summary.json').read_text(encoding='utf-8'))
+              if summary.get('rows') != 1000 or summary.get('review_rows') != 0 or summary.get('promotion_gate') != 'PASS':
+                  raise SystemExit(f'{lang}: semantic gate failed: {summary}')
+              if structural.get('candidate_rows') != 1000 or structural.get('distinct_fronts') != 1000 or structural.get('duplicates') != [] or structural.get('meaning_rows') != 1000:
+                  raise SystemExit(f'{lang}: structural gate failed: {structural}')
+              with Path(f'audit/{lang}_top1000_candidate.csv').open(encoding='utf-8-sig', newline='') as f:
+                  rows=list(csv.DictReader(f))
+              if len(rows) != 1000 or len({r['Front'].strip() for r in rows}) != 1000 or any(not r['Front'].strip() or 'Meaning:' not in (r['Back'] or '') for r in rows):
+                  raise SystemExit(f'{lang}: candidate CSV invariant failed')
+
+          urdu = json.loads(Path('audit/urdu_core1000_candidate_summary.json').read_text(encoding='utf-8'))
+          trip = urdu.get('tripwires_present', {})
+          if not trip.get('بھی') or not trip.get('malformed_بہی_absent'):
+              raise SystemExit(f'Urdu Unicode tripwire failed: {trip}')
+          print('All French/Urdu promotion gates passed.')
+          PY
+
+      - name: Archive legacy decks and promote verified candidates
+        run: |
+          mkdir -p archive/legacy_language_decks
+          if [ ! -f archive/legacy_language_decks/french_top1000_preverified_2026-08-11.csv ]; then
+            cp french_top1000.csv archive/legacy_language_decks/french_top1000_preverified_2026-08-11.csv
+          fi
+          if [ ! -f archive/legacy_language_decks/urdu_top1000_preverified_2026-08-11.csv ]; then
+            cp urdu_top1000.csv archive/legacy_language_decks/urdu_top1000_preverified_2026-08-11.csv
+          fi
+          cp audit/french_top1000_candidate.csv french_top1000.csv
+          cp audit/urdu_top1000_candidate.csv urdu_top1000.csv
+
+      - name: Re-validate promoted root decks
+        run: |
+          python - <<'PY'
+          import csv, re
+          from pathlib import Path
+          for lang in ('french','urdu'):
+              with Path(f'{lang}_top1000.csv').open(encoding='utf-8-sig', newline='') as f:
+                  rows=list(csv.DictReader(f))
+              fronts=[r['Front'].strip() for r in rows]
+              assert len(rows)==1000, (lang,len(rows))
+              assert len(set(fronts))==1000, (lang,'duplicates')
+              assert all(fronts), (lang,'blank front')
+              assert all(re.search(r'(?m)^Meaning:\s*\S', r['Back'] or '') for r in rows), (lang,'missing meaning')
+          assert 'بھی' in {r['Front'] for r in csv.DictReader(open('urdu_top1000.csv', encoding='utf-8-sig'))}
+          assert 'بہی' not in {r['Front'] for r in csv.DictReader(open('urdu_top1000.csv', encoding='utf-8-sig'))}
+          print('Promoted root decks pass structural learner checks.')
+          PY
+
+      - name: Commit archived legacy decks and verified replacements
+        run: |
+          if [ -z "$(git status --porcelain -- french_top1000.csv urdu_top1000.csv archive/legacy_language_decks/)" ]; then
+            echo 'Nothing to promote.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add french_top1000.csv urdu_top1000.csv archive/legacy_language_decks/
+          git commit -m 'Promote externally verified French and Urdu top 1000 [skip ci]'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
