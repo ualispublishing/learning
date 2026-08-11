@@ -27,15 +27,32 @@ jobs:
                   r = csv.DictReader(f)
                   rows = list(r)
               fronts = [(x.get('Front') or '').strip() for x in rows]
+              core = fronts[:1000]
+              tail = fronts[1000:]
               counts = Counter(fronts)
+              core_counts = Counter(core)
+              tail_counts = Counter(tail)
               out[lang] = {
                   'headers': r.fieldnames,
                   'parsed_rows': len(rows),
                   'blank_fronts': sum(not x for x in fronts),
                   'distinct_fronts': len(set(fronts)),
-                  'duplicate_fronts': {k:v for k,v in counts.items() if k and v>1},
+                  'duplicate_fronts_total_count': sum(1 for k,v in counts.items() if k and v>1),
+                  'core_1000': {
+                      'rows': len(core),
+                      'distinct_fronts': len(set(core)),
+                      'duplicate_fronts': {k:v for k,v in core_counts.items() if k and v>1},
+                      'last_30_fronts': core[-30:],
+                  },
+                  'appended_tail': {
+                      'rows': len(tail),
+                      'distinct_fronts': len(set(tail)),
+                      'fronts_already_in_core': sum(1 for x in tail if x in set(core)),
+                      'distinct_fronts_already_in_core': len(set(tail) & set(core)),
+                      'first_30_fronts': tail[:30],
+                      'last_20_fronts': tail[-20:],
+                  },
                   'first_20_fronts': fronts[:20],
-                  'last_20_fronts': fronts[-20:],
               }
           Path('audit/french_urdu_structure.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           print(json.dumps(out,ensure_ascii=False,indent=2))
