@@ -1,0 +1,28 @@
+{
+  "source": "arabic_top1000.csv",
+  "row_count": 1889,
+  "schema": [
+    "Front",
+    "Back"
+  ],
+  "unique_normalized_fronts": 1514,
+  "duplicate_front_groups": 204,
+  "camel_single_word_analyzed": 118,
+  "camel_single_word_no_analysis": 0,
+  "flag_counts": {
+    "camel_nonroot_function_word": 8,
+    "closed_class_no_productive_root": 48,
+    "duplicate_front": 579,
+    "example_pronoun_gender_mismatch": 1,
+    "invented_root_on_function_word": 9,
+    "multiword_no_single_root": 1771,
+    "phrase_has_single_root_claim": 1771,
+    "root_disagrees_with_camel": 75,
+    "self_translation_artifact": 1
+  },
+  "principles": {
+    "root_policy": "Use a lexical root only when supported by MSA morphology; do not invent roots for non-root function words.",
+    "phrase_policy": "A multiword expression has no single lexical root; analyze constituent content words separately if needed.",
+    "ambiguity_policy": "Automated morphology is evidence, not authority; disagreements are flagged for review rather than silently overwritten."
+  }
+}
