@@ -207,7 +207,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 206,يظن,thinks; supposes,True,verb,False,False,,True,4.39,False,True,False,,False,,3,form_only
 207,فترة,period; interval,True,noun,True,True,interval|period,True,5.41,True,True,False,,False,,4,strong
 208,رجال,men,True,noun,True,False,,True,5.34,False,True,False,,False,,3,semantic_review
-209,نسوات,women,False,,False,False,,False,0.00,False,False,False,,False,,0,weak
+209,نسوة,women; group of women,True,noun,True,False,,True,3.20,False,True,False,,False,,3,semantic_review
 210,أعمال,works; businesses; actions,True,noun,True,False,,True,5.23,True,True,False,,False,,4,semantic_review
 211,مشكلة,problem; issue,True,noun,True,True,problem,True,5.17,True,True,False,,False,,4,strong
 212,حالة,state; condition; case,True,noun|prep,True,True,condition|state,True,5.59,True,True,False,,False,,4,strong
@@ -290,7 +290,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 289,أمور,matters; affairs; things,True,noun,True,False,,True,4.69,True,True,False,,False,,4,semantic_review
 290,فوز,victory; winning,True,noun,True,True,victory,True,4.63,True,True,False,,False,,4,strong
 291,أقل,less; least; fewer,True,adj|verb,True,True,fewer|least|less,True,5.37,True,True,False,,False,,4,strong
-292,أال,attention/emphasis particle أَلَا; or أَلَّا = that not,False,,False,False,,False,0.00,False,False,False,,False,,0,weak
+292,ألا,attention/emphasis particle; also unvocalized form of أَلَّا 'that not',True,conj|particle|verb,True,True,not,True,5.28,False,True,False,,False,,3,strong
 293,شباب,youth; young people,True,adj|noun,True,True,youth,True,5.02,True,True,False,,False,,4,strong
 294,حقيقي,real; genuine; true,True,adj,True,True,real|true,True,4.83,True,True,False,,False,,4,strong
 295,كامل,complete; full; entire,True,adj|name,True,True,complete|entire|full,True,5.27,True,True,False,,False,,4,strong
@@ -387,7 +387,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 386,لما,when (لَمَّا); not yet / when used with negation; for what/to what (لِمَا),True,adv|conj|name|particle,True,True,not|what|when|yet,True,5.68,False,True,False,,False,,3,strong
 387,أعضاء,members,True,noun,False,False,,True,5.30,False,True,False,,False,,3,form_only
 388,عمر,age; lifetime,True,name|noun|verb,True,True,age|lifetime,True,5.47,True,True,False,,False,,4,strong
-389,إسالمي,Islamic,False,,False,False,,False,0.00,False,False,False,,False,,0,weak
+389,إسلامي,Islamic,True,adj,True,True,islamic,True,4.18,True,True,False,,False,,4,strong
 390,مرحلة,stage; phase,True,noun,True,True,phase|stage,True,5.00,True,True,False,,False,,4,strong
 391,بعيد,far; distant,True,adj|prep,True,True,distant|far,True,5.08,True,True,False,,False,,4,strong
 392,يخبر,tells; informs,True,verb,False,False,,True,3.90,False,True,False,,False,,3,form_only
@@ -644,7 +644,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 643,بأس,harm; hardship; بأس; often in لا بأس = no problem/not bad,True,noun,True,False,,True,4.37,True,True,False,,False,,4,semantic_review
 644,أشهر,months; more famous/most famous (depending on vocalization),True,adj|noun|verb,True,True,famou|more|most,True,5.30,True,True,False,,False,,4,strong
 645,ملك,angel (مَلَك); unvocalized spelling can also represent king/possession in other contexts,True,adj|noun|verb,True,True,angel|king|possession,True,5.14,True,True,False,,False,,4,strong
-646,قضاء,"judiciary; القضاء; القضاء = القضاء/ القضاء as context determines: judgment, القضاء district, القضاء القضاء",True,noun,True,False,,True,4.69,True,True,False,,False,,4,semantic_review
+646,قضاء,judgment; ruling; judiciary; judicial authority; fulfillment/performance,True,noun,True,False,,True,4.69,True,True,False,,False,,4,semantic_review
 647,دراسة,study,True,noun,True,True,study,True,5.04,True,True,False,,False,,4,strong
 648,متأكد,sure; certain; confident,True,adj,True,True,certain|sure,True,4.34,True,True,False,,False,,4,strong
 649,سياسة,politics; policy,True,noun,True,True,policy|politic,True,4.98,True,True,False,,False,,4,strong
