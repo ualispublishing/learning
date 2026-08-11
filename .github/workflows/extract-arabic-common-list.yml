@@ -3,7 +3,7 @@ name: Extract Arabic common-word source
 on:
   push:
     paths:
-      - 'scripts/extract_al_said_layout.py'
+      - 'scripts/extract_al_said_pymupdf.py'
       - '.github/workflows/extract-arabic-common-list.yml'
   workflow_dispatch:
 
@@ -21,19 +21,21 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install PDF text extractor
+        run: python -m pip install --quiet pymupdf
 
       - name: Download official CC BY 4.0 article PDF
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq poppler-utils
           curl --http1.1 -k -L --fail --retry 5 --retry-all-errors \
             'https://revistaseug.ugr.es/index.php/meaharabe/article/download/23634/25105/99973' \
             -o /tmp/al_said_2023.pdf
-          pdfinfo /tmp/al_said_2023.pdf | head -n 25
-          pdftotext -layout -f 19 -l 62 /tmp/al_said_2023.pdf /tmp/al_said_list.txt
 
       - name: Extract ranks 1 through 1000
-        run: python scripts/extract_al_said_layout.py --text /tmp/al_said_list.txt
+        run: python scripts/extract_al_said_pymupdf.py --pdf /tmp/al_said_2023.pdf
 
       - name: Commit extracted source evidence
         run: |
