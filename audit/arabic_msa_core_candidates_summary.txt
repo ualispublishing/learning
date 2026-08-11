@@ -1,7 +1,8 @@
-archive_members=['MSA_freq_lists.tsv', '__MACOSX/._MSA_freq_lists.tsv']
+archive_members=['MSA_freq_lists.tsv']
 surface_types_loaded=49995
-unique_lemmas=8406
+unique_lemma_pos_lexemes=9358
 candidates_written=1500
-skipped={'excluded_pos': 1700, 'no_analysis': 4182, 'bad_lemma': 2633}
+skipped={'excluded_pos': 7209, 'bad_lemma': 2628}
 source=https://github.com/CAMeL-Lab/Camel_Arabic_Frequency_Lists/releases/tag/v1.0
-method=aggregate high-frequency MSA surface forms by strongest CALIMA-MSA lexical analysis; exclude proper/foreign items
+method=CAMeL MSA frequency surfaces -> pretrained CALIMA-MSA MLE disambiguation -> aggregate by lemma+POS; exclude proper/foreign items
+root_policy=emit only 3/4-radical roots for lexical POS; omit roots for closed-class function words
