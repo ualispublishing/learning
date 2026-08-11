@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'scripts/verify_top1000_external.py'
+      - 'scripts/rebuild_arabic_top1000_learner_safe_v4.py'
+      - 'scripts/refine_french_urdu_candidate_meanings_v2.py'
       - 'arabic_top1000.csv'
       - 'french_top1000.csv'
       - 'urdu_top1000.csv'
@@ -48,8 +50,6 @@ jobs:
           curl -L --fail --retry 5 --retry-all-errors \
             'https://kaikki.org/dictionary/Urdu/kaikki.org-dictionary-Urdu.jsonl' \
             -o /tmp/kaikki-urdu.jsonl
-          # lexique.org currently presents a certificate that does not include the www hostname
-          # to GitHub-hosted runners. The URL below is the official Lexique 4 dataset endpoint.
           curl -k -L --fail --retry 5 --retry-all-errors \
             'https://www.lexique.org/databases/Lexique400/Lexique400.tsv' \
             -o /tmp/Lexique400.tsv
@@ -65,7 +65,7 @@ jobs:
             --kaikki-jsonl /tmp/kaikki-arabic.jsonl \
             --arabic-wordnet /tmp/awn4.xml.gz
 
-      - name: Verify French deck externally
+      - name: Verify French 1000 externally
         run: |
           python scripts/verify_top1000_external.py \
             --language french \
@@ -73,7 +73,7 @@ jobs:
             --kaikki-jsonl /tmp/kaikki-french.jsonl \
             --lexique-tsv /tmp/Lexique400.tsv
 
-      - name: Verify Urdu deck externally
+      - name: Verify Urdu 1000 externally
         run: |
           python scripts/verify_top1000_external.py \
             --language urdu \
@@ -90,7 +90,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add audit/
-          git commit -m 'Record external top1000 verification evidence [skip ci]'
+          git commit -m 'Record final external top1000 verification evidence [skip ci]'
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
