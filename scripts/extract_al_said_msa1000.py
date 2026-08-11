@@ -4,16 +4,16 @@
 Source: Almoataz B. Al-Said (2023), "A New List of Common Words in Modern
 Standard Arabic", MEAH Sección Árabe-Islam 72, pp. 287-351, CC BY 4.0.
 
-The article's table is laid out right-to-left. We use word coordinates rather than
-plain-text order, locate the rank column geometrically, then assign Arabic word-cell
-content to the nearest rank row. The script fails closed unless ranks 1..1000 are all
-present exactly once and every row yields one normalized orthographic front.
+The PDF table is RTL and some rank rows contain several vocalized homographs.
+We therefore anchor each rank on its numeric frequency row, reconstruct Arabic
+word-cell lines geometrically, and retain only variants sharing the anchor row's
+undiacritized orthography. The extractor fails closed unless ranks 1..1000 are
+all recovered.
 """
 from __future__ import annotations
 
 import argparse
 import csv
-import math
 import re
 import unicodedata
 from collections import Counter, defaultdict
@@ -23,6 +23,7 @@ BIDI = dict.fromkeys(map(ord, "\u200e\u200f\u202a\u202b\u202c\u202d\u202e\u2066\
 DIAC = re.compile(r"[\u0610-\u061a\u064b-\u065f\u0670\u06d6-\u06ed]")
 AR = re.compile(r"[\u0621-\u063a\u0641-\u064a]")
 POS_RE = re.compile(r"^(?:N|V|P|ADV|ADJ|PRO|KH)(?:\\[A-Z]+)?$")
+DEC_RE = re.compile(r"^\d+\.\d+$")
 
 
 def clean(s: str) -> str:
@@ -34,13 +35,19 @@ def undiac(s: str) -> str:
 
 
 def arabic_only_key(s: str) -> str:
-    # Keep Arabic letters only. Parenthetical clitic notation in the paper, e.g. لـ(ه),
-    # is presentation metadata; the lexical orthographic front is the Arabic-letter form.
     return "".join(AR.findall(undiac(s)))
 
 
 def is_int(s: str) -> bool:
     return bool(re.fullmatch(r"\d+", clean(s)))
+
+
+def center_y(w: dict) -> float:
+    return w["top"] + w["height"] / 2
+
+
+def global_y(w: dict) -> float:
+    return w["page"] * 1000.0 + center_y(w)
 
 
 def parse_tsv(path: Path):
@@ -55,92 +62,112 @@ def parse_tsv(path: Path):
                 continue
             try:
                 rows.append({
-                    "page": int(x["page_num"]),
-                    "block": int(x["block_num"]),
-                    "par": int(x["par_num"]),
-                    "line": int(x["line_num"]),
-                    "word": int(x["word_num"]),
-                    "left": float(x["left"]),
-                    "top": float(x["top"]),
-                    "width": float(x["width"]),
-                    "height": float(x["height"]),
-                    "text": text,
+                    "page": int(x["page_num"]), "block": int(x["block_num"]),
+                    "par": int(x["par_num"]), "line": int(x["line_num"]),
+                    "word": int(x["word_num"]), "left": float(x["left"]),
+                    "top": float(x["top"]), "width": float(x["width"]),
+                    "height": float(x["height"]), "text": text,
                 })
             except (KeyError, TypeError, ValueError):
                 continue
     return rows
 
 
-def locate_rank_tokens(words):
+def has_metrics(w: dict, words: list[dict]) -> bool:
+    """True only for a table rank token sitting on a frequency/percentage row."""
+    cy = center_y(w)
+    same = [x for x in words if x["page"] == w["page"] and abs(center_y(x) - cy) <= 5.5]
+    decimals = sum(1 for x in same if DEC_RE.match(x["text"]))
+    bigints = sum(1 for x in same if is_int(x["text"]) and int(x["text"]) >= 10000)
+    return decimals >= 2 and bigints >= 1
+
+
+def locate_rank_tokens(words: list[dict]):
     candidates = []
     for w in words:
-        if w["top"] < 85 or w["top"] > 780 or not is_int(w["text"]):
+        if w["top"] < 75 or w["top"] > 790 or not is_int(w["text"]):
             continue
         n = int(w["text"])
-        if 1 <= n <= 1000:
+        if 1 <= n <= 1000 and has_metrics(w, words):
             candidates.append((n, w))
 
-    # Rank values form the dominant far-right numeric column. Score 15-point x bins by
-    # number of distinct ranks and prefer farther-right bins on ties.
     bins: dict[int, set[int]] = defaultdict(set)
     for n, w in candidates:
-        bins[int(w["left"] // 15)].add(n)
+        bins[int(w["left"] // 12)].add(n)
     if not bins:
-        raise SystemExit("Could not locate any rank candidates in TSV")
+        raise SystemExit("Could not locate the table rank column")
     best_bin = max(bins, key=lambda b: (len(bins[b]), b))
-    center = best_bin * 15 + 7.5
+    x0 = best_bin * 12
 
-    near = [(n, w) for n, w in candidates if abs((w["left"] + w["width"] / 2) - center) <= 30 or abs(w["left"] - best_bin * 15) <= 25]
     by_rank: dict[int, list[dict]] = defaultdict(list)
-    for n, w in near:
-        by_rank[n].append(w)
+    for n, w in candidates:
+        if abs(w["left"] - x0) <= 22:
+            by_rank[n].append(w)
 
-    # If geometry selected duplicate page-number/header tokens, choose the occurrence in
-    # the table body that best follows the monotonic page progression of neighboring ranks.
     selected = {}
-    prev_page = None
     for n in range(1, 1001):
         opts = by_rank.get(n, [])
-        if not opts:
-            continue
-        opts.sort(key=lambda w: (w["page"], w["top"]))
-        if prev_page is None:
-            choice = opts[0]
-        else:
-            viable = [w for w in opts if w["page"] >= prev_page]
-            choice = (viable or opts)[0]
-        selected[n] = choice
-        prev_page = choice["page"]
+        if len(opts) == 1:
+            selected[n] = opts[0]
+        elif opts:
+            # Actual table ranks progress monotonically through the extracted pages.
+            # Prefer the option closest to the expected local neighborhood.
+            selected[n] = sorted(opts, key=lambda w: (w["page"], w["top"]))[-1 if n < 50 else 0]
 
     missing = [n for n in range(1, 1001) if n not in selected]
     if missing:
-        raise SystemExit(f"Rank-column extraction missing {len(missing)} ranks; first missing: {missing[:30]}; best_bin={best_bin}; bin_count={len(bins[best_bin])}")
+        raise SystemExit(
+            f"Rank extraction missing {len(missing)} ranks; first={missing[:25]}; "
+            f"rank_bin={best_bin}; recovered={len(selected)}"
+        )
+
+    # Enforce strict monotonic visual order; this catches any accidental prose/header token.
+    order = [global_y(selected[n]) for n in range(1, 1001)]
+    bad_order = [n for n in range(2, 1001) if order[n - 1] <= order[n - 2]]
+    if bad_order:
+        raise SystemExit(f"Non-monotonic rank positions at {bad_order[:20]}")
     return selected
 
 
-def row_windows(rank_tokens):
-    by_page: dict[int, list[tuple[int, dict]]] = defaultdict(list)
-    for rank, tok in rank_tokens.items():
-        by_page[tok["page"]].append((rank, tok))
-    windows = {}
-    for page, items in by_page.items():
-        items.sort(key=lambda it: it[1]["top"])
-        for i, (rank, tok) in enumerate(items):
-            y = tok["top"] + tok["height"] / 2
-            if i == 0:
-                lo = max(85.0, y - 22.0)
-            else:
-                p = items[i - 1][1]
-                py = p["top"] + p["height"] / 2
-                lo = (py + y) / 2
-            if i == len(items) - 1:
-                hi = min(780.0, y + 22.0)
-            else:
-                q = items[i + 1][1]
-                qy = q["top"] + q["height"] / 2
-                hi = (y + qy) / 2
-            windows[rank] = (page, lo, hi)
-    return windows
+def line_records(words: list[dict], rank_x: float):
+    """Reconstruct Arabic strings and POS labels for lines in the table's word/POS area."""
+    # Arabic words are right-aligned immediately left of the rank column. Long words may
+    # start far left, so filter on their right edge rather than only their left edge.
+    grouped: dict[tuple[int, int, int, int], list[dict]] = defaultdict(list)
+    for w in words:
+        if w["top"] < 75 or w["top"] > 790:
+            continue
+        right = w["left"] + w["width"]
+        if AR.search(w["text"]) and (rank_x - 135) <= right <= (rank_x - 3) and w["left"] >= rank_x - 210:
+            grouped[(w["page"], w["block"], w["par"], w["line"])].append(w)
+
+    lines = []
+    for _, toks in grouped.items():
+        # pdftotext already emits Arabic fragments in logical direction; visual x-order
+        # must be assembled left-to-right here (the previous extractor reversed fragments).
+        toks = sorted(toks, key=lambda x: x["left"])
+        text = "".join(t["text"] for t in toks)
+        k = arabic_only_key(text)
+        if not k:
+            continue
+        lines.append({
+            "page": toks[0]["page"],
+            "gy": sum(global_y(t) for t in toks) / len(toks),
+            "text": clean(text),
+            "key": k,
+        })
+    return sorted(lines, key=lambda x: x["gy"])
+
+
+def pos_near(words: list[dict], gy_lo: float, gy_hi: float) -> list[str]:
+    out = []
+    for w in words:
+        gy = global_y(w)
+        if gy_lo <= gy <= gy_hi:
+            t = clean(w["text"])
+            if POS_RE.match(t) and t not in out:
+                out.append(t)
+    return out
 
 
 def main():
@@ -151,83 +178,67 @@ def main():
     args = ap.parse_args()
 
     words = parse_tsv(args.tsv)
-    rank_tokens = locate_rank_tokens(words)
-    windows = row_windows(rank_tokens)
-
-    # Estimate the word column from Arabic tokens nearest the rank column on rank-bearing
-    # lines. Then use a deliberately broad band around that estimate for multi-line variants.
-    rank_x = sum(t["left"] for t in rank_tokens.values()) / 1000
-    word_x_samples = []
-    for rank, rt in rank_tokens.items():
-        cy = rt["top"] + rt["height"] / 2
-        nearby = [
-            w for w in words if w["page"] == rt["page"] and AR.search(w["text"])
-            and w["left"] < rank_x - 5 and abs((w["top"] + w["height"] / 2) - cy) < 16
-        ]
-        if nearby:
-            nearest = max(nearby, key=lambda w: w["left"])
-            word_x_samples.append(nearest["left"])
-    if not word_x_samples:
-        raise SystemExit("Could not estimate Arabic word column")
-    word_x = sorted(word_x_samples)[len(word_x_samples) // 2]
-    word_lo = word_x - 105
-    word_hi = rank_x - 8
+    ranks = locate_rank_tokens(words)
+    rank_x = sum(w["left"] for w in ranks.values()) / 1000.0
+    lines = line_records(words, rank_x)
+    rank_gy = {n: global_y(w) for n, w in ranks.items()}
 
     out = []
     debug = []
     for rank in range(1, 1001):
-        page, lo, hi = windows[rank]
-        cell = [
-            w for w in words
-            if w["page"] == page and lo <= (w["top"] + w["height"] / 2) < hi
-            and word_lo <= w["left"] <= word_hi and AR.search(w["text"])
-        ]
-        # Group by visual line; within Arabic lines reconstruct right-to-left.
-        by_line = defaultdict(list)
-        for w in cell:
-            by_line[(w["block"], w["par"], w["line"])].append(w)
+        gy = rank_gy[rank]
+        prev_gy = rank_gy[rank - 1] if rank > 1 else gy - 70
+        next_gy = rank_gy[rank + 1] if rank < 1000 else gy + 70
+
+        # A multi-variant row can have one variant before the numeric baseline and another
+        # after it. Search the full interval bounded by adjacent numeric rows, with a small
+        # overlap; later we keep only one orthographic key, which prevents row bleed.
+        lo = prev_gy + 1
+        hi = next_gy - 1
+        nearby = [ln for ln in lines if lo <= ln["gy"] <= hi]
+        if not nearby:
+            debug.append(f"rank={rank} ERROR no Arabic line candidates gy={gy:.1f}")
+            out.append({"rank": rank, "front": "", "variants": "", "pos_codes": "", "source": "Al-Said 2023 Table 4"})
+            continue
+
+        # Anchor = closest Arabic word-cell line to the rank's metric baseline. This works
+        # both when the first variant sits on the metric line and when the metric line itself
+        # has an empty word cell between two same-spelling vocalized variants.
+        anchor = min(nearby, key=lambda ln: abs(ln["gy"] - gy))
+        anchor_key = anchor["key"]
+        same = [ln for ln in nearby if ln["key"] == anchor_key]
         variants = []
-        for _, line_words in sorted(by_line.items(), key=lambda kv: min(x["top"] for x in kv[1])):
-            text = "".join(x["text"] for x in sorted(line_words, key=lambda x: x["left"], reverse=True))
-            text = clean(text)
-            k = arabic_only_key(text)
-            if k and text not in variants:
-                variants.append(text)
+        for ln in sorted(same, key=lambda x: x["gy"]):
+            if ln["text"] not in variants:
+                variants.append(ln["text"])
 
-        # Fallback: capture any Arabic tokens in a slightly wider nearest-rank band.
-        if not variants:
-            fallback = [
-                w for w in words if w["page"] == page and lo <= (w["top"] + w["height"] / 2) < hi
-                and w["left"] < rank_x and AR.search(w["text"])
-            ]
-            fallback.sort(key=lambda w: (abs(rank_x - w["left"]), w["top"]))
-            if fallback:
-                variants = [fallback[0]["text"]]
+        # If the closest line was a split fragment, prefer an orthographic key represented
+        # by two or more nearby lines when that key is nearly as close to the metric row.
+        key_groups: dict[str, list[dict]] = defaultdict(list)
+        for ln in nearby:
+            key_groups[ln["key"]].append(ln)
+        repeated = []
+        for k, group in key_groups.items():
+            if len(group) >= 2:
+                d = min(abs(x["gy"] - gy) for x in group)
+                repeated.append((d, -len(group), k, group))
+        if repeated:
+            repeated.sort()
+            d, _, k, group = repeated[0]
+            if d <= abs(anchor["gy"] - gy) + 8:
+                anchor_key = k
+                variants = []
+                for ln in sorted(group, key=lambda x: x["gy"]):
+                    if ln["text"] not in variants:
+                        variants.append(ln["text"])
 
-        keys = [arabic_only_key(v) for v in variants if arabic_only_key(v)]
-        # Collapse orthographically identical vocalized senses, but preserve all distinct
-        # vocalizations in the variants field.
-        key_counts = Counter(keys)
-        if not key_counts:
-            debug.append(f"rank={rank} page={page} ERROR no Arabic front; window={lo:.1f}-{hi:.1f}")
-            front = ""
-        else:
-            front = key_counts.most_common(1)[0][0]
-            if len(key_counts) > 1:
-                debug.append(f"rank={rank} page={page} orthographic_keys={dict(key_counts)} variants={variants!r}")
-
-        # POS codes in the same vertical window, just left of the word column.
-        pos = []
-        for w in words:
-            if w["page"] != page or not (lo <= (w["top"] + w["height"] / 2) < hi):
-                continue
-            t = clean(w["text"])
-            if POS_RE.match(t) and t not in pos:
-                pos.append(t)
+        pos = pos_near(words, lo, hi)
+        if len({arabic_only_key(v) for v in variants}) != 1:
+            debug.append(f"rank={rank} ERROR nonuniform variants={variants!r}")
 
         out.append({
             "rank": rank,
-            "front": front,
+            "front": anchor_key,
             "variants": " | ".join(variants),
             "pos_codes": " | ".join(pos),
             "source": "Al-Said 2023 Table 4",
@@ -238,18 +249,16 @@ def main():
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(out[0].keys()), lineterminator="\n")
-        w.writeheader()
-        w.writerows(out)
-    args.debug.write_text(
-        "\n".join([
-            f"rank_x={rank_x:.2f}", f"word_x={word_x:.2f}", f"word_band={word_lo:.2f}..{word_hi:.2f}",
-            f"rows={len(out)}", f"nonempty={len(out)-len(bad)}", f"unique_fronts={unique_fronts}",
-            *debug,
-        ]) + "\n",
-        encoding="utf-8",
-    )
-    if bad:
-        raise SystemExit(f"Extraction produced {len(bad)} empty fronts; see {args.debug}")
+        w.writeheader(); w.writerows(out)
+
+    args.debug.write_text("\n".join([
+        f"rank_x={rank_x:.2f}", f"rows={len(out)}", f"nonempty={len(out)-len(bad)}",
+        f"unique_orthographic_fronts={unique_fronts}", f"debug_issue_count={len(debug)}",
+        *debug,
+    ]) + "\n", encoding="utf-8")
+
+    if bad or any("ERROR" in x for x in debug):
+        raise SystemExit(f"Extraction failed closed; see {args.debug}")
     print(args.debug.read_text(encoding="utf-8"))
 
 
