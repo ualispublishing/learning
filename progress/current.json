@@ -1,30 +1,40 @@
 {
   "active_track_id": "arabic-msa-to-c2",
   "active_track": "playlists/audio/arabic/msa-to-c2/a1-foundations/playlist.json",
-  "active_course": "playlists/audio/arabic/courses/arabicpod101-newbie-season-1/playlist.json",
+  "active_course": "playlists/audio/arabic/courses/alifbee-msa-audio/playlist.json",
   "secondary_course": "playlists/audio/arabic/courses/free-intensive-20-week/plan.json",
   "resolved_media": "playlists/audio/arabic/msa-to-c2/resolved_media.json",
   "track_progress": "progress/tracks/arabic-msa-to-c2.json",
   "active_flashcards": "subjects/arabic/",
   "subject": "arabic",
-  "goal": "CEFR C2 long term; ArabicPod101 beginner audio sequence active now",
+  "goal": "CEFR C2 long term; MSA audio-first learning active now",
   "current_stage": "A1 foundation",
-  "completed_through_order": 3,
-  "source_preference": "ArabicPod101 primary audio sequence; free/open sources retained for reinforcement and later expansion",
+  "completed_prior_concept_milestones": [
+    "greetings and how-are-you exchanges",
+    "morning/evening greetings",
+    "singular/dual/plural address basics",
+    "basic responses and thanks",
+    "name questions and self-introduction",
+    "first-person singular",
+    "student masculine/feminine pair",
+    "basic nominal sentences without an explicit present-tense copula"
+  ],
+  "active_course_progress": 0,
+  "source_preference": "continuous audio/podcast first; MSA primary; English support at beginner level; text/flashcard pages are reinforcement rather than primary lessons",
   "command_protocol": {
-    "complete": "mark current ArabicPod101 lesson complete, process cards/audio review/spaced reinforcement, live-resolve the next ArabicPod101 lesson and advance",
+    "complete": "mark the exact current audio lesson complete, process cards/audio review/spaced reinforcement, verify the next audio lesson and advance",
     "finished": "same as complete",
-    "whats_next": "return exact current ArabicPod101 lesson from repo state"
+    "whats_next": "return the exact current audio lesson from repo state"
   },
   "next": {
-    "order": 4,
-    "title": "Who Are You All?",
-    "provider": "ArabicPod101",
-    "platform": "web audio lesson",
-    "url": "https://www.arabicpod101.com/lesson/newbie-4-who-are-you-all",
-    "medium": "short audio lesson with dialogue, English explanation and transcript",
-    "curriculum_goal": "ask who a group is and express looking for a person or thing; learn عَفْوًا, مَنْ أَنْتُمْ؟, نَبْحَثُ عَنْ and أَبْحَثُ عَنْ",
-    "register_note": "The provider explicitly describes the dialogue as casual Arabic; preserve this note when generating cards."
+    "order": 1,
+    "title": "Arabic Basics for Beginners: 10 Must-Know Essentials to Start Learning",
+    "provider": "AlifBee",
+    "platform": "podcast",
+    "url": "https://podcast.alifbee.com/1979812/episodes/17687648-arabic-basics-for-beginners-10-must-know-essentials-to-start-learning?t=0",
+    "duration": "24:50",
+    "medium": "continuous beginner MSA audio lesson",
+    "curriculum_goal": "transition into the new audio-first course, reinforce only what is needed, and identify the next foundational gaps without restarting mastered concepts"
   },
   "secondary_courses": ["playlists/audio/arabic/courses/free-intensive-20-week/plan.json"],
   "deferred_courses": [
