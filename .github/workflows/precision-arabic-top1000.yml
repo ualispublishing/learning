@@ -42,11 +42,11 @@ jobs:
             'https://github.com/CAMeL-Lab/Camel_Arabic_Frequency_Lists/releases/download/v1.0/MSA_freq_lists.tsv.zip' \
             -o /tmp/MSA_freq_lists.tsv.zip
 
-      - name: Build ranked lexical candidates
+      - name: Build broad lexical validation candidates
         run: |
           python scripts/build_arabic_core_candidates.py \
             --frequency-zip /tmp/MSA_freq_lists.tsv.zip \
-            --candidate-count 1500
+            --candidate-count 10000
 
       - name: Audit existing Arabic deck
         run: python scripts/precision_arabic_top1000.py --audit-only
@@ -60,7 +60,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add audit/
-          git commit -m 'Build Arabic MSA lexical-core audit [skip ci]'
+          git commit -m 'Expand Arabic MSA lexical validation audit [skip ci]'
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
