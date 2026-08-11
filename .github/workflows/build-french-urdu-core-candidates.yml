@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'scripts/build_french_urdu_core_candidates_v2.py'
+      - 'scripts/refine_french_urdu_candidate_meanings.py'
       - '.github/workflows/build-french-urdu-core-candidates.yml'
   workflow_dispatch:
 
@@ -35,6 +36,9 @@ jobs:
           curl -L --fail --retry 5 --retry-all-errors \
             'https://kaikki.org/dictionary/French/kaikki.org-dictionary-French.jsonl' \
             -o /tmp/kaikki-french.jsonl
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://raw.githubusercontent.com/freedict/fd-dictionaries/master/fra-eng/fra-eng.tei' \
+            -o /tmp/fra-eng.tei
 
       - name: Download Urdu lexical sources
         run: |
@@ -65,6 +69,14 @@ jobs:
             --kaikki /tmp/kaikki-french.jsonl \
             --legacy-french french_top1000.csv
 
+      - name: Refine French meanings
+        run: |
+          python scripts/refine_french_urdu_candidate_meanings.py \
+            --language french \
+            --legacy french_top1000.csv \
+            --kaikki /tmp/kaikki-french.jsonl \
+            --freedict /tmp/fra-eng.tei
+
       - name: Build Urdu candidate
         run: |
           python scripts/build_french_urdu_core_candidates_v2.py \
@@ -75,6 +87,13 @@ jobs:
             --urdu-closed-text /tmp/urdu-closed.txt \
             --readurdu /tmp/readurdu-dictionary.json
 
+      - name: Refine Urdu meanings
+        run: |
+          python scripts/refine_french_urdu_candidate_meanings.py \
+            --language urdu \
+            --legacy urdu_top1000.csv \
+            --kaikki /tmp/kaikki-urdu.jsonl
+
       - name: Commit candidate evidence only
         run: |
           git config user.name 'github-actions[bot]'
@@ -83,11 +102,13 @@ jobs:
                   audit/french_top1000_candidate.csv \
                   audit/french_core_candidate_rejections.csv \
                   audit/french_core1000_candidate_summary.json \
+                  audit/french_meaning_refinement_summary.json \
                   audit/urdu_core1000_candidate_evidence.csv \
                   audit/urdu_top1000_candidate.csv \
                   audit/urdu_core_candidate_rejections.csv \
-                  audit/urdu_core1000_candidate_summary.json
-          git commit -m 'Build normalized French and Urdu core1000 candidates [skip ci]'
+                  audit/urdu_core1000_candidate_summary.json \
+                  audit/urdu_meaning_refinement_summary.json
+          git commit -m 'Refine French and Urdu core1000 candidates [skip ci]'
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
