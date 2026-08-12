@@ -35,9 +35,19 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install wordfreq wn
           python - <<'PY'
-          import wn
-          wn.download('omw-en:2.0')
-          wn.download('omw-fr:2.0')
+          import time, wn
+          for lexicon in ('omw-en:2.0', 'omw-fr:2.0'):
+              last = None
+              for attempt in range(5):
+                  try:
+                      wn.download(lexicon)
+                      break
+                  except Exception as exc:
+                      last = exc
+                      print(f'{lexicon} download attempt {attempt + 1}/5 failed: {exc}')
+                      time.sleep(3 * (attempt + 1))
+              else:
+                  raise SystemExit(f'Could not download {lexicon} after 5 attempts: {last}')
           PY
 
       - name: Download French lexical sources
