@@ -1,12 +1,12 @@
-name: Build Urdu top3000 continuation v6
+name: Build Urdu top3000 continuation v7
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - 'scripts/build_urdu_top3000_v6.py'
+      - 'scripts/build_urdu_top3000_v7.py'
       - '.github/workflows/build-urdu-top3000-v3.yml'
-      - 'audit/run_urdu_top3000_v6.request'
+      - 'audit/run_urdu_top3000_v7.request'
 
 permissions:
   contents: write
@@ -24,7 +24,7 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq poppler-utils
           python -m pip install --upgrade pip
-          python -m pip install pyiwn word2word
+          python -m pip install pyiwn word2word wordfreq
       - name: Download Urdu sources
         run: |
           curl -L --fail --retry 5 --retry-all-errors 'https://www.cle.org.pk/Downloads/ling_resources/wordlists/UrduHighFreqWords%285000%29.pdf' -o /tmp/urdu-frequency.pdf
@@ -32,9 +32,9 @@ jobs:
           curl -L --fail --retry 5 --retry-all-errors 'https://kaikki.org/dictionary/Urdu/kaikki.org-dictionary-Urdu.jsonl' -o /tmp/kaikki-urdu.jsonl
           curl -L --fail --retry 5 --retry-all-errors 'https://raw.githubusercontent.com/cfiltnlp/IWN-En/main/data/english-hindi-urdu-linked.tsv' -o /tmp/iwn-en-urdu.tsv
           pdftotext -layout /tmp/urdu-frequency.pdf /tmp/urdu-frequency.txt
-      - name: Build tiered quality candidate
+      - name: Build final quality candidate
         run: |
-          python scripts/build_urdu_top3000_v6.py \
+          python scripts/build_urdu_top3000_v7.py \
             --iwn-en /tmp/iwn-en-urdu.tsv \
             --kaikki /tmp/kaikki-urdu.jsonl \
             --urdu-freq-text /tmp/urdu-frequency.txt \
@@ -44,9 +44,9 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add audit/urdu_top3000_candidate_v6.csv audit/urdu_top3000_continuation_evidence_v6.csv audit/urdu_top3000_rejections_v6.csv audit/urdu_top3000_candidate_v6_summary.json || true
+          git add audit/urdu_top3000_candidate_v7.csv audit/urdu_top3000_continuation_evidence_v7.csv audit/urdu_top3000_rejections_v7.csv audit/urdu_top3000_candidate_v7_summary.json || true
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Build tiered Urdu top3000 v6 [skip ci]'
+          git commit -m 'Build final Urdu top3000 v7 [skip ci]'
           for n in 1 2 3; do
             git fetch origin main
             git rebase --autostash origin/main
