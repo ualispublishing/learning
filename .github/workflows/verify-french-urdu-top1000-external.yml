@@ -7,6 +7,7 @@ on:
       - 'french_top1000.csv'
       - 'urdu_top1000.csv'
       - 'scripts/verify_french_urdu_top1000_external.py'
+      - 'scripts/audit_french_urdu_top1000_regressions.py'
       - 'audit/run_french_urdu_top1000_external_verify.request'
       - '.github/workflows/verify-french-urdu-top1000-external.yml'
 
@@ -29,6 +30,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Run promoted-deck regression tripwires
+        run: python scripts/audit_french_urdu_top1000_regressions.py
       - name: Install wordnet tooling
         run: |
           python -m pip install --upgrade pip
