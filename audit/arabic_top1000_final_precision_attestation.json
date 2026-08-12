@@ -1,0 +1,46 @@
+{
+  "deck": "arabic_top1000.csv",
+  "final_promoted_commit": "7f0fd092787ac2fbf49fe019c9517d37c5ef0590",
+  "final_deck_blob_sha": "1396eb77fdfa4796bd7b6f958b0c4dff44f7edbd",
+  "review_date": "2026-08-12",
+  "rows": 1000,
+  "rank_inventory_matches": 1000,
+  "learner_meaning_rows": 1000,
+  "calima_analysis_rows": 1000,
+  "wordfreq_attested_rows": 1000,
+  "independent_semantic_agreement_rows": 801,
+  "external_explicit_review_queue_rows": 199,
+  "manual_source_review_completed_rows": 199,
+  "remaining_known_blocking_rows": 0,
+  "internal_audit_flags": 0,
+  "review_policy": [
+    "Preserve the published 1,000-rank inventory and order.",
+    "Do not change a valid Arabic source spelling merely because a coarse POS tag is surprising.",
+    "Use the paper's vocalized form/POS, CALIMA-MSA morphology, independent corpus attestation, and external dictionary evidence together.",
+    "Treat missing external gloss overlap as a review signal rather than proof of an error.",
+    "Resolve source/OCR defects conservatively and keep true unvocalized homographs when they are genuinely represented by the ranked form.",
+    "Keep hard-coded regression tripwires for high-risk spellings and meanings."
+  ],
+  "important_resolutions": {
+    "296": "لاعب — player; repaired from malformed source extraction and independently supported lexically.",
+    "336": "أما — as for/whereas/as regards; removed the incorrect 'either' sense.",
+    "479": "سالم — safe/sound/intact; preserved after rejecting the false correction to سلام.",
+    "489": "سماء — sky/heaven; preserved after rejecting the false correction to مساء.",
+    "603": "أحضر — brought/brought in/supplied-presented; tightened to the ranked reading.",
+    "724": "أهلا — welcome/hello; repaired greeting form.",
+    "732": "يصدق — is truthful/tells the truth/proves true; removed an incompatible derived-form sense.",
+    "766": "سلامة — safety/soundness/well-being; supported source repair.",
+    "943": "يقبل — kisses/is kissing (يُقَبِّل); corrected from incompatible accept/approach readings.",
+    "999": "مقابلة — interview/meeting/encounter/confrontation; learner gloss cleaned."
+  },
+  "external_semantic_audit": {
+    "verified": 228,
+    "verified_strong": 573,
+    "explicit_review_required_before_manual_resolution": 199,
+    "kaikki_entry_coverage": 869,
+    "kaikki_semantic_agreement": 739,
+    "omw_entry_coverage": 727,
+    "omw_semantic_agreement": 635
+  },
+  "final_status": "No known unresolved blocking defect remains under the completed source-aware, morphology, corpus-attestation, external-semantic, and manual-review checks. This is an audit conclusion, not a claim of mathematical or absolute linguistic infallibility."
+}
