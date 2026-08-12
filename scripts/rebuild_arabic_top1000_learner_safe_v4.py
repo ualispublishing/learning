@@ -2,24 +2,24 @@
 """Final learner-semantic lock plus externally verified Arabic corrections."""
 import rebuild_arabic_top1000_learner_safe_v3 as v3
 
-# Preserve rank/order while normalizing learner-facing forms where independent
-# lexical evidence and the published POS/vocalization show the source extraction
-# or form-sense pairing is unsafe.
+# Preserve rank/order while normalizing learner-facing forms only where the
+# published form/POS plus independent lexical evidence establish an extraction
+# defect. Valid source spellings are not changed merely because a coarse POS tag
+# is surprising.
 v3.v2.final.FINAL_REPAIRS.update({
     209: "نسوة",
     292: "ألا",
     296: "لاعب",
     353: "هؤلاء",
     389: "إسلامي",
-    479: "سلام",
-    489: "مساء",
     724: "أهلا",
     766: "سلامة",
 })
 
 v3.v2.MANUAL.update({
-    33: "want; desire; intend",
+    33: "wants; desires; intends",
     209: "women; group of women",
+    243: "counts; enumerates; prepares (depending on vocalization)",
     270: "type; kind; form",
     292: "attention/emphasis particle; also unvocalized form of أَلَّا 'that not'",
     296: "player; sport/game player",
@@ -28,11 +28,14 @@ v3.v2.MANUAL.update({
     389: "Islamic",
     403: "family; people; inhabitants; people of",
     423: "opposite; counterpart; in exchange for; versus",
-    479: "peace; greeting; salutation",
-    489: "evening; in the evening",
+    479: "safe; sound; intact; unharmed",
+    489: "sky; heaven",
     500: "speech; statement; remark; talk; saying",
     506: "control; regulation; adjustment; controlled; adjusted",
+    508: "national; patriotic (feminine adjective)",
     550: "results; consequences",
+    603: "brought; brought in; supplied/presented (depending on vocalization/context)",
+    632: "one; one of (feminine form)",
     643: "harm; hardship; might; strength; often in لا بأس = no problem/not bad",
     646: "judgment; ruling; judiciary; judicial authority; fulfillment/performance",
     660: "success",
@@ -51,6 +54,7 @@ v3.v2.MANUAL.update({
 v3.v2.POS_OVERRIDE.update({
     33: "verb",
     209: "collective noun / plural noun",
+    243: "verb",
     270: "noun",
     292: "particle",
     296: "noun / active participle",
@@ -59,11 +63,14 @@ v3.v2.POS_OVERRIDE.update({
     389: "adjective",
     403: "noun",
     423: "noun / relational expression",
-    479: "noun",
-    489: "adverb / noun used adverbially",
+    479: "adjective / active participle",
+    489: "noun",
     500: "noun",
     506: "noun / verb",
+    508: "adjective",
     550: "noun",
+    603: "verb",
+    632: "numeral / quantifier",
     643: "noun",
     646: "noun / verbal noun",
     660: "noun",
