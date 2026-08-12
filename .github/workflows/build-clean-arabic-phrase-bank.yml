@@ -29,24 +29,23 @@ jobs:
             sleep $((n*4))
           done
           test "$ok" = 1
-      - name: Audit candidate without touching live file
+      - name: Audit candidate without touching live files
         run: |
           cp arabic_phrase_bank.csv /tmp/live_phrase_bank.csv
           cp audit/arabic_phrase_bank_clean_candidate.csv arabic_phrase_bank.csv
           python scripts/audit_arabic_phrase_bank.py
-          mv audit/arabic_phrase_bank_audit.csv audit/arabic_phrase_bank_clean_audit.csv
-          mv audit/arabic_phrase_bank_review_queue.csv audit/arabic_phrase_bank_clean_review_queue.csv
-          mv audit/arabic_phrase_bank_audit_summary.json audit/arabic_phrase_bank_clean_audit_summary.json
+          cp audit/arabic_phrase_bank_audit.csv audit/arabic_phrase_bank_clean_audit.csv
+          cp audit/arabic_phrase_bank_review_queue.csv audit/arabic_phrase_bank_clean_review_queue.csv
+          cp audit/arabic_phrase_bank_audit_summary.json audit/arabic_phrase_bank_clean_audit_summary.json
           cp /tmp/live_phrase_bank.csv arabic_phrase_bank.csv
-          git restore --worktree arabic_phrase_bank.csv
+          git restore --worktree arabic_phrase_bank.csv audit/arabic_phrase_bank_audit.csv audit/arabic_phrase_bank_review_queue.csv audit/arabic_phrase_bank_audit_summary.json
       - name: Commit candidate and evidence
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git restore --worktree arabic_phrase_bank.csv
           git add audit/arabic_phrase_bank_clean_candidate.csv audit/arabic_phrase_bank_clean_rejections.csv audit/arabic_phrase_bank_clean_candidate_summary.json audit/arabic_phrase_bank_clean_audit.csv audit/arabic_phrase_bank_clean_review_queue.csv audit/arabic_phrase_bank_clean_audit_summary.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Build and audit clean Arabic phrase-bank candidate [skip ci]'
           git fetch origin main
-          git rebase origin/main
+          git rebase --autostash origin/main
           git push origin HEAD:main
