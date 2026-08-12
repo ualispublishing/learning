@@ -1,0 +1,55 @@
+name: Audit Arabic top3000 external semantics
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/audit_arabic_top3000_external_semantics.py'
+      - '.github/workflows/audit-arabic-top3000-semantics.yml'
+      - 'audit/run_arabic_top3000_semantics.request'
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install semantic tooling
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install wn wordfreq
+          python - <<'PY'
+          import time, wn
+          for lexicon in ('omw-en:2.0','omw-arb:2.0'):
+              last=None
+              for attempt in range(5):
+                  try:
+                      wn.download(lexicon); break
+                  except Exception as exc:
+                      last=exc; print(exc); time.sleep(3*(attempt+1))
+              else: raise SystemExit(f'Could not download {lexicon}: {last}')
+          PY
+      - name: Download Arabic Wiktionary extract
+        run: |
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://kaikki.org/dictionary/Arabic/kaikki.org-dictionary-Arabic.jsonl' \
+            -o /tmp/kaikki-arabic.jsonl
+      - name: Audit candidate
+        run: python scripts/audit_arabic_top3000_external_semantics.py --kaikki-jsonl /tmp/kaikki-arabic.jsonl
+      - name: Commit evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/arabic_top3000_external_semantic_audit.csv audit/arabic_top3000_external_semantic_review_queue.csv audit/arabic_top3000_external_semantic_audit_summary.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Audit Arabic top3000 with OMW semantics [skip ci]'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
