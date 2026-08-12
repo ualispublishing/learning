@@ -1,0 +1,54 @@
+name: Build Urdu top3000 continuation v8
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/build_urdu_top3000_v8.py'
+      - '.github/workflows/build-urdu-top3000-v8.yml'
+      - 'audit/run_urdu_top3000_v8.request'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install tooling
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
+          python -m pip install --upgrade pip
+          python -m pip install word2word wordfreq
+      - name: Download independent Urdu sources
+        run: |
+          curl -L --fail --retry 5 --retry-all-errors 'https://www.cle.org.pk/Downloads/ling_resources/wordlists/UrduHighFreqWords%285000%29.pdf' -o /tmp/urdu-frequency.pdf
+          curl -L --fail --retry 5 --retry-all-errors 'https://raw.githubusercontent.com/rohan-c0de/ReadUrdu-Devanagari-English/main/data/dictionary.json' -o /tmp/readurdu-dictionary.json
+          curl -L --fail --retry 5 --retry-all-errors 'https://kaikki.org/dictionary/Urdu/kaikki.org-dictionary-Urdu.jsonl' -o /tmp/kaikki-urdu.jsonl
+          pdftotext -layout /tmp/urdu-frequency.pdf /tmp/urdu-frequency.txt
+      - name: Build two-source corroborated candidate
+        run: |
+          python scripts/build_urdu_top3000_v8.py \
+            --kaikki /tmp/kaikki-urdu.jsonl \
+            --urdu-freq-text /tmp/urdu-frequency.txt \
+            --readurdu /tmp/readurdu-dictionary.json
+      - name: Commit candidate evidence
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/urdu_top3000_candidate_v8.csv audit/urdu_top3000_continuation_evidence_v8.csv audit/urdu_top3000_rejections_v8.csv audit/urdu_top3000_candidate_v8_summary.json || true
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Build two-source Urdu top3000 v8 [skip ci]'
+          for n in 1 2 3; do
+            git fetch origin main
+            git rebase --autostash origin/main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((n*3))
+          done
+          exit 1
