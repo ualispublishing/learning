@@ -1,34 +1,21 @@
 {
-  "language": "french",
-  "input": "french_top1000.csv",
-  "rows": 1000,
-  "expected_rows": 1000,
-  "row_count_problem": false,
-  "blank_front_rows": 0,
-  "duplicate_front_spellings": [],
-  "confidence_counts": {
-    "strong": 971,
-    "semantic_review": 21,
-    "form_only": 8
+  "deck": "french_top1000.csv",
+  "rows_checked": 1000,
+  "status_counts": {
+    "confirm": 798,
+    "review_semantics": 23,
+    "strong_confirm": 179
   },
-  "kaikki_coverage": 1000,
-  "kaikki_rows_with_english_gloss": 992,
-  "wordfreq_attested": 1000,
-  "arabic_wordnet_coverage": 0,
-  "camel_analysis_coverage": 0,
-  "lexique4_coverage": 0,
-  "urdu_ud_coverage": 0,
-  "semantic_overlap_rows": 971,
-  "review_queue_rows": 29,
-  "source_load_problems": [
-    "No recognized surface-form column in Lexique4: 1_Mot,2_Phono,3_Phono_IPA,4_Lemme,5_Cgram,6_CgramOrtho,7_Genre,8_Nombre,9_InfoVER,10_FreqMot,11_FreqOrtho,12_FreqLemme,13_CDOrtho,14_IsLem,15_NbLettres,16_NbPhons,17_OLD20,18_PLD20,19_CVOrtho,20_CVPhono,21_VoisOrtho,22_VoisPhono,23_NbHomog,24_NbHomoph,25_SyllPhono,26_SyllNb,27_SyllCV,28_PUOrtho,29_PUPhon,30_MorphoBase"
-  ],
+  "wiktionary_language_sections": 1000,
+  "wiktionary_semantic_support": 950,
+  "omw_entries": 941,
+  "omw_semantic_support": 206,
+  "rows_with_any_external_semantic_support": 977,
+  "rows_requiring_review": 23,
+  "rows_without_external_coverage": 0,
   "policy": [
-    "External sources never silently rewrite learner cards.",
-    "Kaikki/Wiktextract English gloss overlap is a verification and triage signal, not an oracle.",
-    "wordfreq is used only as independent corpus attestation, never as a meaning authority.",
-    "Arabic WordNet, CALIMA, Lexique4, and Urdu UD are independent language-specific support signals.",
-    "Missing coverage is not treated as proof that a learner entry is wrong.",
-    "Rows with weak or non-overlapping semantic support are queued for explicit review."
+    "External sources confirm or flag; they never overwrite learner cards automatically.",
+    "Coverage gaps, including exhausted external-service rate limits, are not treated as lexical errors.",
+    "Rank/order remains untouched."
   ]
 }
