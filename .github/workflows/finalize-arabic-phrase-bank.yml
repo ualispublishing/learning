@@ -42,7 +42,8 @@ jobs:
           s=json.load(open(p,encoding='utf-8'))
           assert s['review_rows']==0, s
           assert s['normalized_duplicate_groups']==0, s
-          assert s['promotion_gate']!='REVIEW_REQUIRED', s
+          assert not s['flag_counts'], s
+          assert s['status_counts']=={'structurally_verified': s['rows']}, s
           print(json.dumps(s,ensure_ascii=False,indent=2))
           PY
           cp audit/arabic_phrase_bank_audit.csv audit/arabic_phrase_bank_final_audit.csv
@@ -58,7 +59,7 @@ jobs:
           python - <<'PY'
           import csv,re
           with open('arabic_phrase_bank.csv',encoding='utf-8-sig',newline='') as f: rows=list(csv.DictReader(f))
-          assert rows
+          assert len(rows)==1078, len(rows)
           assert all(r.get('Front') and r.get('Back') for r in rows)
           assert not any(re.search(r'[A-Za-z]',r['Front']) for r in rows)
           print(f'Promoted {len(rows)} Arabic phrase cards')
