@@ -46,8 +46,14 @@ v3.v2.MANUAL.update({
     785: "petroleum; oil",
     793: "lower; lowest; underneath",
     798: "sleep",
+    809: "handling; eating; taking; consumption; ate/took/dealt with",
+    846: "invitation; call; advocacy; mission",
     852: "medical treatment; therapy; processing",
+    858: "hitting; striking; a strike; hit/struck",
+    916: "badness; harm; poor/bad condition",
+    940: "finding; creation; bringing into existence",
     943: "kisses; is kissing (يُقَبِّل)",
+    967: "separated; divided; dismissed",
     999: "interview; meeting; encounter; confrontation",
 })
 
@@ -81,8 +87,14 @@ v3.v2.POS_OVERRIDE.update({
     785: "noun",
     793: "adjective / adverb",
     798: "noun",
+    809: "noun / verb",
+    846: "noun / verbal noun",
     852: "noun",
+    858: "noun / verb",
+    916: "noun",
+    940: "verbal noun",
     943: "verb",
+    967: "verb",
     999: "noun / verbal noun",
 })
 
