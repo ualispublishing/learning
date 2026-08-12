@@ -294,7 +294,7 @@ rank,front,meaning,kaikki_entry,kaikki_semantic_agreement,kaikki_overlap_terms,o
 293,شباب,youth; young people,True,True,youth,True,True,people|young|youth,True,True,verified_strong
 294,حقيقي,real; genuine; true,True,True,real|true,True,True,real|true,True,True,verified_strong
 295,كامل,complete; full; entire,True,True,complete|entire|full,False,False,,True,True,verified
-296,العب,player,False,False,,False,False,,True,True,explicit_review_required
+296,لاعب,player; sport/game player,True,True,player,True,True,game|player|sport,True,True,verified_strong
 297,انتظر,waited; wait!,True,True,wait,True,True,wait,True,True,verified_strong
 298,شركات,companies,True,False,,False,False,,True,True,explicit_review_required
 299,مما,from/of what; from/of which (a contraction of مِن and ما),True,True,what,False,False,,True,True,verified
@@ -334,7 +334,7 @@ rank,front,meaning,kaikki_entry,kaikki_semantic_agreement,kaikki_overlap_terms,o
 333,تحدث,speaking; conversation; spoke/talked,True,True,speak|talk,True,True,convers|speak|talk,True,True,verified_strong
 334,وصل,arrived; reached; connected,True,True,connect|reach,True,True,arriv|connect|reach,True,True,verified_strong
 335,علم,knowledge; science; flag; taught/instructed (depending on vocalization),True,True,flag|instruct|knowledge|science,True,True,flag|instruct|knowledge|science,True,True,verified_strong
-336,أما,as for; whereas; either (depending on vocalization/context),True,True,as for,False,False,,True,True,verified
+336,أما,as for; whereas; as regards (أَمَّا),True,True,as for,False,False,,True,True,verified
 337,أعلن,announced; declared,True,False,,True,False,,True,True,explicit_review_required
 338,إطلاقا,at all; absolutely,False,False,,False,False,,True,True,explicit_review_required
 339,تماما,completely; entirely; exactly,True,True,completely|exactly,False,False,,True,True,verified
@@ -401,7 +401,7 @@ rank,front,meaning,kaikki_entry,kaikki_semantic_agreement,kaikki_overlap_terms,o
 400,زوجة,wife,True,True,wife,True,True,wife,True,True,verified_strong
 401,جيش,army,True,True,army,True,True,army,True,True,verified_strong
 402,مدة,duration; period,True,True,duration|period,True,True,duration|period,True,True,verified_strong
-403,أهل,family; people; inhabitants; أهل,True,True,family|inhabitant|people,True,True,family|people,True,True,verified_strong
+403,أهل,family; people; inhabitants; people of,True,True,family|inhabitant|people,True,True,family|people,True,True,verified_strong
 404,يعيش,lives; resides,False,False,,False,False,,True,True,explicit_review_required
 405,قول,saying; speech; statement,True,True,saying|speech|state,True,True,saying|speech|state,True,True,verified_strong
 406,رقم,number; figure,True,True,figure|number,True,True,figure|number,True,True,verified_strong
@@ -421,7 +421,7 @@ rank,front,meaning,kaikki_entry,kaikki_semantic_agreement,kaikki_overlap_terms,o
 420,يفهم,understands,False,False,,False,False,,True,True,explicit_review_required
 421,موضوع,subject; topic,True,True,subject|topic,True,True,subject|topic,True,True,verified_strong
 422,واقع,reality; actual situation; occurring/present,True,True,reality,True,True,actual|reality,True,True,verified_strong
-423,مقابل,opposite; مقابل; in exchange for; counterpart,True,True,exchange,True,False,,True,True,verified
+423,مقابل,opposite; counterpart; in exchange for; versus,True,True,exchange,True,False,,True,True,verified
 424,محكمة,court; tribunal,True,True,court,True,True,court|tribunal,True,True,verified_strong
 425,كلمة,word,True,True,word,True,True,word,True,True,verified_strong
 426,يتمنى,wishes; hopes,False,False,,False,False,,True,True,explicit_review_required
@@ -477,7 +477,7 @@ rank,front,meaning,kaikki_entry,kaikki_semantic_agreement,kaikki_overlap_terms,o
 476,تنفيذ,implementation; execution,True,False,,True,True,execution|implement,True,True,verified
 477,يقصد,means; intends; aims,False,False,,False,False,,True,True,explicit_review_required
 478,يذكر,mentions; remembers,False,False,,False,False,,True,True,explicit_review_required
-479,سالم,peace; safety; Salim/Salam as proper-name reading in context,True,True,peace|salim,False,False,,True,True,verified
+479,سلام,peace; greeting; salutation,True,True,greet|peace|salut,True,True,greet|peace|salut,True,True,verified_strong
 480,أصدقاء,friends,True,False,,True,True,friend,True,True,verified
 481,وحدة,unit; unity,True,True,unit|unity,True,True,unit,True,True,verified_strong
 482,قديم,old; ancient,True,True,ancient|old,False,False,,True,True,verified
@@ -487,7 +487,7 @@ rank,front,meaning,kaikki_entry,kaikki_semantic_agreement,kaikki_overlap_terms,o
 486,إمكان,possibility; potential,True,True,possibility,True,True,possibility|potential,True,True,verified_strong
 487,نتيجة,result; outcome,True,True,result,True,True,outcome|result,True,True,verified_strong
 488,موقع,site; location; position,True,True,location|position|site,True,True,location|position|site,True,True,verified_strong
-489,سماء,sky; heaven (سماء); source POS annotation is anomalous,True,True,heaven|sky,True,True,heaven|sky,True,True,verified_strong
+489,مساء,evening; in the evening,True,True,even,True,True,even,True,True,verified_strong
 490,مجال,field; domain; area,True,True,area|domain|field,True,True,area|domain|field,True,True,verified_strong
 491,وسط,middle; center; among,True,True,among|center|middle,True,True,center,True,True,verified_strong
 492,جميعا,all together; altogether; everyone,False,False,,False,False,,True,True,explicit_review_required
@@ -504,7 +504,7 @@ rank,front,meaning,kaikki_entry,kaikki_semantic_agreement,kaikki_overlap_terms,o
 503,طوال,throughout; during; all through,True,True,during|throughout,False,False,,True,True,verified
 504,خطة,plan,True,True,plan,True,True,plan,True,True,verified_strong
 505,متى,when?,True,True,when,True,False,,True,True,verified
-506,ضبط,control; ضبط; ضبط = controlled/adjusted,True,True,adjust,True,True,adjust|control|controll,True,True,verified_strong
+506,ضبط,control; regulation; adjustment; controlled; adjusted,True,True,adjust,True,True,adjust|control|controll|regul,True,True,verified_strong
 507,أثناء,during; while,True,True,during,False,False,,True,True,verified
 508,وطنية,national (feminine); nationality/national character in noun use,True,False,,False,False,,True,True,explicit_review_required
 509,معرفة,knowledge; knowing,True,True,knowledge,True,True,know|knowledge,True,True,verified_strong
@@ -641,7 +641,7 @@ rank,front,meaning,kaikki_entry,kaikki_semantic_agreement,kaikki_overlap_terms,o
 640,طبيب,doctor; physician,True,True,doctor|physician,True,True,doctor|physician,True,True,verified_strong
 641,مباشرة,directly; direct; immediate,True,True,directly,True,True,direct|directly,True,True,verified_strong
 642,جمهورية,republic,True,True,republic,True,True,republic,True,True,verified_strong
-643,بأس,harm; hardship; بأس; often in لا بأس = no problem/not bad,True,False,,True,False,,True,True,explicit_review_required
+643,بأس,harm; hardship; might; strength; often in لا بأس = no problem/not bad,True,True,strength,True,False,,True,True,verified
 644,أشهر,months; more famous/most famous (depending on vocalization),True,True,famou|more|most,True,True,month,True,True,verified_strong
 645,ملك,angel (مَلَك); unvocalized spelling can also represent king/possession in other contexts,True,True,angel|king|possession,True,True,angel|king|other|possession,True,True,verified_strong
 646,قضاء,judgment; ruling; judiciary; judicial authority; fulfillment/performance,True,False,,False,False,,True,True,explicit_review_required
@@ -722,7 +722,7 @@ rank,front,meaning,kaikki_entry,kaikki_semantic_agreement,kaikki_overlap_terms,o
 721,جماعة,group; community,True,True,community|group,True,True,community|group,True,True,verified_strong
 722,مصدر,source,True,True,source,True,True,source,True,True,verified_strong
 723,معظم,most; majority of,True,True,majority|most,True,False,,True,True,verified
-724,أهال,welcome!; hello! (أهلًا),True,False,,True,False,,True,True,explicit_review_required
+724,أهلا,welcome!; hello! (أهلًا),True,True,welcome,False,False,,True,True,verified
 725,قطع,pieces; parts; cut,True,True,cut,True,True,cut|part|piec,True,True,verified_strong
 726,موافقة,approval; agreement; agreeing/suitable (feminine adjective use),True,True,agree|approval,True,True,approval,True,True,verified_strong
 727,أخبار,news; reports,True,False,,True,True,news,True,True,verified
@@ -730,7 +730,7 @@ rank,front,meaning,kaikki_entry,kaikki_semantic_agreement,kaikki_overlap_terms,o
 729,خطر,danger; risk,True,True,danger|risk,True,True,danger|risk,True,True,verified_strong
 730,صندوق,box; fund,True,True,box|fund,True,True,box,True,True,verified_strong
 731,جزيرة,island,True,True,island,True,True,island,True,True,verified_strong
-732,يصدق,believes; confirms; tells the truth (depending on vocalization),False,False,,False,False,,True,True,explicit_review_required
+732,يصدق,is truthful; tells the truth; proves true,False,False,,False,False,,True,True,explicit_review_required
 733,قوى,forces; powers; strengths,True,False,,True,True,power|strength,True,True,verified
 734,دم,blood,True,True,blood,True,True,blood,True,True,verified_strong
 735,جائزة,prize; award,True,True,prize,True,True,award|prize,True,True,verified_strong
@@ -764,7 +764,7 @@ rank,front,meaning,kaikki_entry,kaikki_semantic_agreement,kaikki_overlap_terms,o
 763,حجم,size; volume,True,True,size|volume,True,True,size|volume,True,True,verified_strong
 764,يرغب,wants; desires; wishes,False,False,,False,False,,True,True,explicit_review_required
 765,زمن,time; era,True,True,time,True,True,time,True,True,verified_strong
-766,سالمة,safety; well-being,True,False,,False,False,,True,True,explicit_review_required
+766,سلامة,safety; soundness; well-being,True,True,safety|well-be,True,True,safety,True,True,verified_strong
 767,حي,neighborhood; district; living/alive (depending on vocalization),True,True,alive|district|living,True,True,district|living|neighborhood,True,True,verified_strong
 768,حوالي,around; approximately; about,True,True,approximately|around,False,False,,True,True,verified
 769,طرق,roads; ways; knocked,True,True,knock|road,True,True,knock|road,True,True,verified_strong
@@ -941,7 +941,7 @@ rank,front,meaning,kaikki_entry,kaikki_semantic_agreement,kaikki_overlap_terms,o
 940,إيجاد,finding; creation/bringing into existence (إيجاد),True,True,creation,False,False,,True,True,verified
 941,صفقة,deal; transaction,True,False,,True,True,deal,True,True,verified
 942,يطلق,launches; releases; fires; calls/names (depending on form),False,False,,False,False,,True,True,explicit_review_required
-943,يقبل,approaches/comes forward; accepts (depending on vocalization),False,False,,False,False,,True,True,explicit_review_required
+943,يقبل,kisses; is kissing (يُقَبِّل),False,False,,False,False,,True,True,explicit_review_required
 944,يجمع,collects; gathers,False,False,,False,False,,True,True,explicit_review_required
 945,شديد,severe; strong; intense,True,True,intense|severe|strong,True,True,intense,True,True,verified_strong
 946,أسئلة,questions,True,False,,True,True,question,True,True,verified
@@ -997,5 +997,5 @@ rank,front,meaning,kaikki_entry,kaikki_semantic_agreement,kaikki_overlap_terms,o
 996,يفضل,prefers; is superior/better (depending on vocalization),False,False,,False,False,,True,True,explicit_review_required
 997,استطاع,was able to; could,True,True,able,True,False,,True,True,verified
 998,طبيعة,nature; character,True,True,character|nature,True,True,nature,True,True,verified_strong
-999,مقابلة,interview; meeting; مقابلة = مقابلة/confrontation depending on context,True,True,interview|meet,True,True,meet,True,True,verified_strong
+999,مقابلة,interview; meeting; encounter; confrontation,True,True,encounter|interview|meet,True,True,meet,True,True,verified_strong
 1000,ابتعد,moved away; kept away; move away!,True,True,away|move,True,True,away,True,True,verified_strong
