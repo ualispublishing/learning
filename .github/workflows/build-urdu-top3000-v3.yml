@@ -1,12 +1,12 @@
-name: Build Urdu top3000 continuation v3
+name: Build Urdu top3000 continuation v4
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - 'scripts/build_urdu_top3000_v3.py'
+      - 'scripts/build_urdu_top3000_v4.py'
       - '.github/workflows/build-urdu-top3000-v3.yml'
-      - 'audit/run_urdu_top3000_v3.request'
+      - 'audit/run_urdu_top3000_v4.request'
 
 permissions:
   contents: write
@@ -24,33 +24,27 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq poppler-utils
           python -m pip install --upgrade pip
-          python -m pip install word2word
+          python -m pip install pyiwn word2word
       - name: Download Urdu sources
         run: |
           curl -L --fail --retry 5 --retry-all-errors 'https://www.cle.org.pk/Downloads/ling_resources/wordlists/UrduHighFreqWords%285000%29.pdf' -o /tmp/urdu-frequency.pdf
-          curl -L --fail --retry 5 --retry-all-errors 'https://www.cle.org.pk/Downloads/ling_resources/wordlists/Urdu%20WordNet%201.0%20Wordlist.pdf' -o /tmp/urdu-wordnet.pdf
-          curl -L --fail --retry 5 --retry-all-errors 'https://www.cle.org.pk/Downloads/ling_resources/wordlists/Closed%20Class%20Word%20List%20v1.1.pdf' -o /tmp/urdu-closed.pdf
           curl -L --fail --retry 5 --retry-all-errors 'https://raw.githubusercontent.com/rohan-c0de/ReadUrdu-Devanagari-English/main/data/dictionary.json' -o /tmp/readurdu-dictionary.json
           curl -L --fail --retry 5 --retry-all-errors 'https://kaikki.org/dictionary/Urdu/kaikki.org-dictionary-Urdu.jsonl' -o /tmp/kaikki-urdu.jsonl
           pdftotext -layout /tmp/urdu-frequency.pdf /tmp/urdu-frequency.txt
-          pdftotext -layout /tmp/urdu-wordnet.pdf /tmp/urdu-wordnet.txt
-          pdftotext -layout /tmp/urdu-closed.pdf /tmp/urdu-closed.txt
-      - name: Build quality-first candidate
+      - name: Build quality-first IndoWordNet candidate
         run: |
-          python scripts/build_urdu_top3000_v3.py \
+          python scripts/build_urdu_top3000_v4.py \
             --kaikki /tmp/kaikki-urdu.jsonl \
             --urdu-freq-text /tmp/urdu-frequency.txt \
-            --urdu-wordnet-text /tmp/urdu-wordnet.txt \
-            --urdu-closed-text /tmp/urdu-closed.txt \
             --readurdu /tmp/readurdu-dictionary.json
       - name: Commit candidate evidence
         if: always()
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A audit/urdu_top3000_*_v3.csv audit/urdu_top3000_candidate_v3_summary.json || true
+          git add audit/urdu_top3000_candidate_v4.csv audit/urdu_top3000_continuation_evidence_v4.csv audit/urdu_top3000_rejections_v4.csv audit/urdu_top3000_candidate_v4_summary.json || true
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Build quality-first Urdu top3000 v3 [skip ci]'
+          git commit -m 'Build IndoWordNet-gated Urdu top3000 v4 [skip ci]'
           git fetch origin main
-          git rebase origin/main
+          git rebase --autostash origin/main
           git push origin HEAD:main
