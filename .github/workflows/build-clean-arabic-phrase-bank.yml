@@ -21,7 +21,14 @@ jobs:
       - name: Install morphology tooling
         run: |
           python -m pip install --upgrade pip camel-tools
-          ok=0; for n in 1 2 3 4 5; do if camel_data -i morphology-db-msa-r13; then ok=1; break; fi; sleep $((n*4)); done; test "$ok" = 1
+          DB="$HOME/.camel_tools/data/morphology_db/calima-msa-r13/morphology.db"
+          ok=0
+          for n in 1 2 3 4 5; do
+            camel_data -i morphology-db-msa-r13 || true
+            if test -f "$DB"; then ok=1; break; fi
+            sleep $((n*4))
+          done
+          test "$ok" = 1
       - name: Audit candidate without touching live file
         run: |
           cp arabic_phrase_bank.csv /tmp/live_phrase_bank.csv
