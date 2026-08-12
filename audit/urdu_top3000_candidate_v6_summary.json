@@ -1,0 +1,22 @@
+{
+  "rows": 1938,
+  "expected_rows": 2000,
+  "distinct_fronts": 1938,
+  "rank_range": [
+    1001,
+    2938
+  ],
+  "direct_iwn_en_lemma_count": 27830,
+  "indowordnet_urdu_lexicon_size": 31985,
+  "tier_A_direct_rows": 1920,
+  "tier_B_two_source_fallback_rows": 18,
+  "multi_direct_rows_retaining_all_valid_senses": 294,
+  "rejected_before_target": 2102,
+  "rejection_reason_counts": {
+    "fallback_no_two_source_semantic_agreement": 39,
+    "no_direct_mapping_and_not_indowordnet_lemma": 2063
+  },
+  "structural_gate": "FAIL",
+  "status": "candidate_only_not_promoted",
+  "policy": "Prefer lexicographer-linked IWN-En Direct mappings. If multiple Direct senses cannot be disambiguated, retain all Direct valid senses. Only when no Direct link exists, require IndoWordNet lemma membership plus agreement between two independent bilingual sources."
+}
