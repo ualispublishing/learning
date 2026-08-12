@@ -86,18 +86,14 @@
         "Back"
       ],
       "distinct_normalized_fronts": 2000,
-      "sha256": "506d8eb0e9bc30f5a5e46809f1426f882494e91a663af199add1c8fa8d218b65",
-      "bytes": 272012,
+      "sha256": "ff3a084d363e1fd92b0cfe6494396ad80db04209299568ff32afdf58967a3cef",
+      "bytes": 1465880,
       "rank_range": [
-        -1,
-        -1
+        1001,
+        3000
       ],
-      "problems": [
-        "placeholder_marker",
-        "non_arabic_script_front",
-        "rank_sequence_not_1001_3000"
-      ],
-      "gate": "FAIL"
+      "problems": [],
+      "gate": "PASS"
     },
     "arabic_phrase_bank.csv": {
       "rows": 1078,
@@ -132,10 +128,7 @@
     }
   },
   "problems": [
-    "arabic_top1000.csv: duplicate_normalized_fronts=1",
-    "urdu_top3000.csv: placeholder_marker",
-    "urdu_top3000.csv: non_arabic_script_front",
-    "urdu_top3000.csv: rank_sequence_not_1001_3000"
+    "arabic_top1000.csv: duplicate_normalized_fronts=1"
   ],
   "overall_gate": "FAIL",
   "scope": "Learner-facing root CSVs only; archive/ and audit/ CSVs are evidence, not live decks."
