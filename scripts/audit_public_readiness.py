@@ -73,19 +73,23 @@ def main():
  AUDIT.mkdir(exist_ok=True)
  summary={'files':{},'overall':{},'policy':'Publication-readiness triage. Any block flag prevents public-ready status; review flags require linguistic inspection before claiming publication quality.'}
  queue=[]
+ compact_fields=('file','row','front','rank','meaning','pos','severity','flags','stale_match')
  for name in FILES:
   with (ROOT/name).open(encoding='utf-8-sig',newline='') as f: rows=list(csv.DictReader(f))
-  counts=Counter(); sev=Counter()
+  counts=Counter(); sev=Counter(); file_queue=[]
   for i,row in enumerate(rows,1):
    r=audit_row(name,i,row)
    for fl in r['flags']: counts[fl]+=1
    if r['flags']:
-    sev[r['severity']]+=1; queue.append(r)
+    sev[r['severity']]+=1; queue.append(r); file_queue.append(r)
   summary['files'][name]={
    'rows':len(rows),'flagged_rows':sum(sev.values()),'block_rows':sev['block'],
    'review_rows':sev['review'],'flag_counts':dict(counts),
    'public_ready_by_heuristics':sev['block']==0 and sev['review']==0,
   }
+  compact_file=[{k:r[k] for k in compact_fields} for r in file_queue]
+  stem=name.removesuffix('.csv')
+  (AUDIT/f'public_review_{stem}.json').write_text(json.dumps(compact_file,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
  summary['overall']={
   'rows':sum(v['rows'] for v in summary['files'].values()),
   'flagged_rows':len(queue),
@@ -94,7 +98,7 @@ def main():
   'public_ready_by_heuristics':not queue,
  }
  (AUDIT/'public_readiness_audit.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
- compact=[{k:r[k] for k in ('file','row','front','rank','meaning','pos','severity','flags','stale_match')} for r in queue]
+ compact=[{k:r[k] for k in compact_fields} for r in queue]
  (AUDIT/'public_readiness_review_compact.json').write_text(json.dumps(compact,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
  fields=['file','row','front','rank','meaning','pos','severity','flags','back_preview']
  with (AUDIT/'public_readiness_review_queue.csv').open('w',encoding='utf-8',newline='') as f:
