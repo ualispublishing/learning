@@ -3,7 +3,9 @@
 
 The script never edits learner decks. It triangulates existing English learner
 meanings against English Wiktionary entries and Open Multilingual Wordnet where
-available. Coverage gaps are reported as gaps, not errors.
+available. Coverage gaps are reported as gaps, not errors. External service rate
+limits are retried and, if exhausted, degrade to coverage gaps instead of aborting
+an otherwise valid deck audit.
 """
 from __future__ import annotations
 
@@ -14,6 +16,7 @@ import re
 import time
 from collections import Counter
 from pathlib import Path
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
@@ -89,24 +92,42 @@ def section(raw: str, language: str) -> str:
 def fetch_wiki(titles: list[str]) -> dict[str, str]:
     endpoint = "https://en.wiktionary.org/w/api.php"
     found = {}
-    for start in range(0, len(titles), 50):
-        batch = titles[start:start+50]
+    batch_size = 20
+    for start in range(0, len(titles), batch_size):
+        batch = titles[start:start + batch_size]
         params = {
             "action": "query", "format": "json", "formatversion": "2", "prop": "revisions",
             "rvprop": "content", "rvslots": "main", "titles": "|".join(batch), "redirects": "1",
         }
         req = Request(endpoint + "?" + urlencode(params), headers={
-            "User-Agent": "ualispublishing-learning-verifier/1.1 (educational lexical audit)"
+            "User-Agent": "ualispublishing-learning-verifier/1.2 (educational lexical audit)"
         })
-        with urlopen(req, timeout=45) as r:
-            data = json.load(r)
+        data = None
+        for attempt in range(6):
+            try:
+                with urlopen(req, timeout=45) as r:
+                    data = json.load(r)
+                break
+            except HTTPError as exc:
+                if exc.code != 429 and 500 > exc.code:
+                    raise
+                delay = min(60, 4 * (attempt + 1))
+                print(f"Wiktionary batch {start}-{start+len(batch)-1} attempt {attempt+1}/6: HTTP {exc.code}; retrying in {delay}s")
+                time.sleep(delay)
+            except (URLError, TimeoutError) as exc:
+                delay = min(60, 3 * (attempt + 1))
+                print(f"Wiktionary batch {start}-{start+len(batch)-1} attempt {attempt+1}/6: {exc}; retrying in {delay}s")
+                time.sleep(delay)
+        if data is None:
+            print(f"Wiktionary batch {start}-{start+len(batch)-1}: coverage unavailable after retries")
+            continue
         for page in data.get("query", {}).get("pages", []):
             if page.get("missing"): continue
             revs = page.get("revisions") or []
             if not revs: continue
             content = revs[0].get("slots", {}).get("main", {}).get("content", "")
             found[page.get("title", "")] = content
-        time.sleep(0.15)
+        time.sleep(1.0)
     return found
 
 
@@ -118,7 +139,6 @@ def load_rows(path: Path):
     out = []
     for rank, row in enumerate(rows, 1):
         back = row.get("Back", "") or ""
-        # Older decks used `EN:`; the promoted precision decks use `Meaning:`.
         m = TRANSLATION_RE.search(back) or MEANING_RE.search(back)
         d = DEFINITION_RE.search(back)
         if not m:
@@ -198,7 +218,7 @@ def audit(name: str):
         "rows_without_external_coverage": sum(d["status"] == "no_external_coverage" for d in details),
         "policy": [
             "External sources confirm or flag; they never overwrite learner cards automatically.",
-            "Coverage gaps are not treated as lexical errors.",
+            "Coverage gaps, including exhausted external-service rate limits, are not treated as lexical errors.",
             "Rank/order remains untouched.",
         ],
     }
@@ -208,8 +228,6 @@ def audit(name: str):
 
 def main():
     ROOT.joinpath("audit").mkdir(exist_ok=True)
-    # OMW is optional corroboration. Current Wn/OMW network availability must not
-    # make a Wiktionary-based audit fail before any deck row is examined.
     try:
         wn.download("omw:1.4")
     except Exception as exc:
