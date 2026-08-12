@@ -1,0 +1,74 @@
+name: Finalize and promote Arabic phrase bank
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/finalize_arabic_phrase_bank.py'
+      - '.github/workflows/finalize-arabic-phrase-bank.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Build zero-review final candidate
+        run: python scripts/finalize_arabic_phrase_bank.py
+      - name: Install morphology tooling
+        run: |
+          python -m pip install --upgrade pip camel-tools
+          DB="$HOME/.camel_tools/data/morphology_db/calima-msa-r13/morphology.db"
+          ok=0
+          for n in 1 2 3 4 5; do
+            camel_data -i morphology-db-msa-r13 || true
+            if test -f "$DB"; then ok=1; break; fi
+            sleep $((n*4))
+          done
+          test "$ok" = 1
+      - name: Re-audit exact final candidate
+        run: |
+          cp arabic_phrase_bank.csv /tmp/original_phrase_bank.csv
+          cp audit/arabic_phrase_bank_final_candidate.csv arabic_phrase_bank.csv
+          python scripts/audit_arabic_phrase_bank.py
+          python - <<'PY'
+          import json
+          p='audit/arabic_phrase_bank_audit_summary.json'
+          s=json.load(open(p,encoding='utf-8'))
+          assert s['review_rows']==0, s
+          assert s['normalized_duplicate_groups']==0, s
+          assert s['promotion_gate']!='REVIEW_REQUIRED', s
+          print(json.dumps(s,ensure_ascii=False,indent=2))
+          PY
+          cp audit/arabic_phrase_bank_audit.csv audit/arabic_phrase_bank_final_audit.csv
+          cp audit/arabic_phrase_bank_review_queue.csv audit/arabic_phrase_bank_final_review_queue.csv
+          cp audit/arabic_phrase_bank_audit_summary.json audit/arabic_phrase_bank_final_audit_summary.json
+          cp /tmp/original_phrase_bank.csv arabic_phrase_bank.csv
+          git restore --worktree arabic_phrase_bank.csv audit/arabic_phrase_bank_audit.csv audit/arabic_phrase_bank_review_queue.csv audit/arabic_phrase_bank_audit_summary.json
+      - name: Promote exact audited candidate
+        run: |
+          mkdir -p audit/archive
+          cp arabic_phrase_bank.csv audit/archive/arabic_phrase_bank_preclean_2026-08-12.csv
+          cp audit/arabic_phrase_bank_final_candidate.csv arabic_phrase_bank.csv
+          python - <<'PY'
+          import csv,re
+          with open('arabic_phrase_bank.csv',encoding='utf-8-sig',newline='') as f: rows=list(csv.DictReader(f))
+          assert rows
+          assert all(r.get('Front') and r.get('Back') for r in rows)
+          assert not any(re.search(r'[A-Za-z]',r['Front']) for r in rows)
+          print(f'Promoted {len(rows)} Arabic phrase cards')
+          PY
+      - name: Commit promotion and evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add arabic_phrase_bank.csv audit/archive/arabic_phrase_bank_preclean_2026-08-12.csv audit/arabic_phrase_bank_final_candidate.csv audit/arabic_phrase_bank_final_candidate_summary.json audit/arabic_phrase_bank_final_audit.csv audit/arabic_phrase_bank_final_review_queue.csv audit/arabic_phrase_bank_final_audit_summary.json
+          git commit -m 'Promote zero-review Arabic phrase bank [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
