@@ -1,0 +1,37 @@
+name: Promote verified top3000 continuation
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'audit/promote_top3000.request'
+      - 'scripts/resolve_top3000_manual_reviews.py'
+      - 'scripts/promote_top3000_candidate.py'
+      - '.github/workflows/promote-top3000.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  promote-french:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Resolve audited French false-negative
+        run: python scripts/resolve_top3000_manual_reviews.py --language french
+      - name: Promote French only if gate is PASS
+        run: python scripts/promote_top3000_candidate.py --language french
+      - name: Commit promoted French continuation and evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add french_top3000.csv archive/legacy_language_decks/french_top3000_placeholder_2026-08-12.csv audit/french_top3000_audit.csv audit/french_top3000_review_queue.csv audit/french_top3000_audit_summary.json audit/french_top3000_manual_resolutions.json
+          git commit -m 'Promote verified French top3000 continuation [skip ci]'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
