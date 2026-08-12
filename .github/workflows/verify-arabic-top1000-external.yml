@@ -34,19 +34,27 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install 'wn>=1.1.0'
 
-      - name: Download Arabic WordNet 4
+      - name: Download independent WordNet sources
         run: |
           mkdir -p audit
           curl -L --fail --retry 5 --retry-all-errors \
             'https://raw.githubusercontent.com/Salah-Sal/arabic-wordnet-v4/main/output/awn4.xml.gz' \
             -o audit/awn4.xml.gz
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://en-word.net/static/english-wordnet-2024.xml.gz' \
+            -o audit/oewn2024.xml.gz
+          python - <<'PY'
+          import wn
+          wn.add('audit/oewn2024.xml.gz')
+          print(wn.Wordnet('oewn:2024'))
+          PY
 
       - name: Run independent three-source semantic verification
         run: python scripts/verify_arabic_top1000_external_precision.py
 
-      - name: Remove temporary external lexicon payload
+      - name: Remove temporary external lexicon payloads
         if: always()
-        run: rm -f audit/awn4.xml.gz
+        run: rm -f audit/awn4.xml.gz audit/oewn2024.xml.gz
 
       - name: Commit verification evidence
         if: success()
