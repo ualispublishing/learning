@@ -25,7 +25,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add audit/public_readiness_audit.json audit/public_readiness_review_queue.csv audit/public_readiness_review_compact.json
+          git add audit/public_readiness_audit.json audit/public_readiness_review_queue.csv audit/public_readiness_review_compact.json audit/public_review_*.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Audit publication readiness [skip ci]'
           for n in 1 2 3; do
