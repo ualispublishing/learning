@@ -1,0 +1,42 @@
+name: Build clean Arabic phrase bank candidate
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/build_clean_arabic_phrase_bank.py'
+      - '.github/workflows/build-clean-arabic-phrase-bank.yml'
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Build conservative cleaned candidate
+        run: python scripts/build_clean_arabic_phrase_bank.py
+      - name: Install morphology tooling
+        run: |
+          python -m pip install --upgrade pip camel-tools
+          ok=0; for n in 1 2 3 4 5; do if camel_data -i morphology-db-msa-r13; then ok=1; break; fi; sleep $((n*4)); done; test "$ok" = 1
+      - name: Audit candidate without touching live file
+        run: |
+          cp arabic_phrase_bank.csv /tmp/live_phrase_bank.csv
+          cp audit/arabic_phrase_bank_clean_candidate.csv arabic_phrase_bank.csv
+          python scripts/audit_arabic_phrase_bank.py
+          mv audit/arabic_phrase_bank_audit.csv audit/arabic_phrase_bank_clean_audit.csv
+          mv audit/arabic_phrase_bank_review_queue.csv audit/arabic_phrase_bank_clean_review_queue.csv
+          mv audit/arabic_phrase_bank_audit_summary.json audit/arabic_phrase_bank_clean_audit_summary.json
+          cp /tmp/live_phrase_bank.csv arabic_phrase_bank.csv
+      - name: Commit candidate and evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/arabic_phrase_bank_clean_candidate.csv audit/arabic_phrase_bank_clean_rejections.csv audit/arabic_phrase_bank_clean_candidate_summary.json audit/arabic_phrase_bank_clean_audit.csv audit/arabic_phrase_bank_clean_review_queue.csv audit/arabic_phrase_bank_clean_audit_summary.json
+          git commit -m 'Build and audit clean Arabic phrase-bank candidate [skip ci]' || exit 0
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
