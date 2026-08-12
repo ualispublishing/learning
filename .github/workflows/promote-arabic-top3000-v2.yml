@@ -1,0 +1,44 @@
+name: Promote Arabic top3000 v2
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/validate_arabic_top3000_v2.py'
+      - '.github/workflows/promote-arabic-top3000-v2.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Run hard promotion gate
+        run: python scripts/validate_arabic_top3000_v2.py
+      - name: Promote exact candidate
+        run: |
+          mkdir -p audit/archive
+          cp arabic_top3000.csv audit/archive/arabic_top3000_placeholder_pre_v2_2026-08-12.csv
+          cp audit/arabic_top3000_candidate_v2.csv arabic_top3000.csv
+          python - <<'PY'
+          import csv,re
+          with open('arabic_top3000.csv',encoding='utf-8-sig',newline='') as f: rows=list(csv.DictReader(f))
+          assert len(rows)==2000
+          assert all(r.get('Front') and r.get('Back') for r in rows)
+          assert [int(re.search(r'(?m)^Rank:\s*(\d+)',r['Back']).group(1)) for r in rows]==list(range(1001,3001))
+          print('Promoted Arabic ranks 1001-3000')
+          PY
+      - name: Commit promotion and gate evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add arabic_top3000.csv audit/archive/arabic_top3000_placeholder_pre_v2_2026-08-12.csv audit/arabic_top3000_v2_promotion_gate_summary.json
+          git commit -m 'Promote cross-source Arabic top3000 v2 [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
