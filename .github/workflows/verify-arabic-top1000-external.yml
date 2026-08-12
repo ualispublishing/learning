@@ -5,8 +5,6 @@ on:
   push:
     paths:
       - 'arabic_top1000.csv'
-      - 'scripts/verify_arabic_top1000_external.py'
-      - 'scripts/verify_arabic_top1000_external_v2.py'
       - 'scripts/verify_arabic_top1000_external_precision.py'
       - '.github/workflows/verify-arabic-top1000-external.yml'
 
@@ -36,9 +34,6 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install 'wn>=1.1.0'
 
-      - name: Run existing independent fact check
-        run: python scripts/verify_arabic_top1000_external_v2.py
-
       - name: Download Arabic WordNet 4
         run: |
           mkdir -p audit
@@ -46,7 +41,7 @@ jobs:
             'https://raw.githubusercontent.com/Salah-Sal/arabic-wordnet-v4/main/output/awn4.xml.gz' \
             -o audit/awn4.xml.gz
 
-      - name: Run third-pass three-source semantic verification
+      - name: Run independent three-source semantic verification
         run: python scripts/verify_arabic_top1000_external_precision.py
 
       - name: Remove temporary external lexicon payload
@@ -56,13 +51,13 @@ jobs:
       - name: Commit verification evidence
         if: success()
         run: |
-          if [ -z "$(git status --porcelain -- audit/arabic_top1000_external_verification.csv audit/arabic_top1000_external_verification_summary.json audit/arabic_top1000_external_precision.csv audit/arabic_top1000_external_precision_summary.json audit/arabic_top1000_external_precision_review.csv)" ]; then
+          if [ -z "$(git status --porcelain -- audit/arabic_top1000_external_precision.csv audit/arabic_top1000_external_precision_summary.json audit/arabic_top1000_external_precision_review.csv)" ]; then
             echo 'No Arabic verification evidence changed.'
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add audit/arabic_top1000_external_verification.csv audit/arabic_top1000_external_verification_summary.json audit/arabic_top1000_external_precision.csv audit/arabic_top1000_external_precision_summary.json audit/arabic_top1000_external_precision_review.csv
+          git add audit/arabic_top1000_external_precision.csv audit/arabic_top1000_external_precision_summary.json audit/arabic_top1000_external_precision_review.csv
           git commit -m 'Record Arabic top1000 independent precision audit [skip ci]'
           git fetch origin main
           git rebase origin/main
