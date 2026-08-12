@@ -1,0 +1,98 @@
+{
+  "files": {
+    "arabic_top1000.csv": {
+      "rows": 1000,
+      "flagged_rows": 7,
+      "block_rows": 0,
+      "review_rows": 7,
+      "flag_counts": {
+        "usage_note_mixed_into_meaning": 1,
+        "overbundled_meaning_5plus_senses": 6
+      },
+      "public_ready_by_heuristics": false
+    },
+    "arabic_top3000.csv": {
+      "rows": 2000,
+      "flagged_rows": 2000,
+      "block_rows": 2000,
+      "review_rows": 0,
+      "flag_counts": {
+        "stale_candidate_or_review_label": 2000,
+        "machine_pos_abbreviation": 1
+      },
+      "public_ready_by_heuristics": false
+    },
+    "french_top1000.csv": {
+      "rows": 1000,
+      "flagged_rows": 1000,
+      "block_rows": 1000,
+      "review_rows": 0,
+      "flag_counts": {
+        "stale_candidate_or_review_label": 1000,
+        "usage_note_mixed_into_meaning": 1,
+        "overbundled_meaning_5plus_senses": 20,
+        "raw_dictionary_inflection_gloss": 2,
+        "very_long_meaning": 2
+      },
+      "public_ready_by_heuristics": false
+    },
+    "french_top3000.csv": {
+      "rows": 2000,
+      "flagged_rows": 44,
+      "block_rows": 0,
+      "review_rows": 44,
+      "flag_counts": {
+        "overbundled_meaning_5plus_senses": 28,
+        "very_long_meaning": 13,
+        "raw_dictionary_inflection_gloss": 4
+      },
+      "public_ready_by_heuristics": false
+    },
+    "urdu_top1000.csv": {
+      "rows": 1000,
+      "flagged_rows": 1000,
+      "block_rows": 1000,
+      "review_rows": 0,
+      "flag_counts": {
+        "stale_candidate_or_review_label": 1000,
+        "machine_pos_separator": 176,
+        "machine_pos_abbreviation": 69,
+        "usage_note_mixed_into_meaning": 1,
+        "overbundled_meaning_5plus_senses": 13,
+        "raw_dictionary_inflection_gloss": 31,
+        "very_long_meaning": 2
+      },
+      "public_ready_by_heuristics": false
+    },
+    "urdu_top3000.csv": {
+      "rows": 2000,
+      "flagged_rows": 2000,
+      "block_rows": 2000,
+      "review_rows": 0,
+      "flag_counts": {
+        "stale_candidate_or_review_label": 2000,
+        "overbundled_meaning_5plus_senses": 507,
+        "very_long_meaning": 4
+      },
+      "public_ready_by_heuristics": false
+    },
+    "arabic_phrase_bank.csv": {
+      "rows": 1078,
+      "flagged_rows": 189,
+      "block_rows": 0,
+      "review_rows": 189,
+      "flag_counts": {
+        "generated_phrase_wording_fingerprint": 189
+      },
+      "public_ready_by_heuristics": false
+    }
+  },
+  "overall": {
+    "rows": 10078,
+    "flagged_rows": 6240,
+    "block_rows": 6000,
+    "review_rows": 240,
+    "public_ready_by_heuristics": false
+  },
+  "policy": "Publication-readiness triage. Any block flag prevents public-ready status; review flags require linguistic inspection before claiming publication quality."
+}
