@@ -1,0 +1,137 @@
+name: Build real top3000 continuations
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/build_top3000_continuations.py'
+      - 'scripts/audit_top3000_continuations.py'
+      - '.github/workflows/build-top3000-continuations.yml'
+      - 'audit/run_top3000_build.request'
+
+concurrency:
+  group: build-top3000-continuations-main
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install linguistic tooling
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
+          python -m pip install --upgrade pip
+          python -m pip install wordfreq camel-tools
+          camel_data -i morphology-db-msa-r13
+          camel_data -i disambig-mle-calima-msa-r13
+
+      - name: Download Arabic frequency and dictionary sources
+        run: |
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://github.com/CAMeL-Lab/Camel_Arabic_Frequency_Lists/releases/download/v1.0/MSA_freq_lists.tsv.zip' \
+            -o /tmp/MSA_freq_lists.tsv.zip
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://kaikki.org/dictionary/Arabic/kaikki.org-dictionary-Arabic.jsonl' \
+            -o /tmp/kaikki-arabic.jsonl
+
+      - name: Download French sources
+        run: |
+          curl -k -L --fail --retry 5 --retry-all-errors \
+            'https://www.lexique.org/databases/Lexique400/Lexique400.tsv' \
+            -o /tmp/Lexique400.tsv
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://kaikki.org/dictionary/French/kaikki.org-dictionary-French.jsonl' \
+            -o /tmp/kaikki-french.jsonl
+
+      - name: Download Urdu sources
+        run: |
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://www.cle.org.pk/Downloads/ling_resources/wordlists/UrduHighFreqWords%285000%29.pdf' \
+            -o /tmp/urdu-frequency.pdf
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://www.cle.org.pk/Downloads/ling_resources/wordlists/Urdu%20WordNet%201.0%20Wordlist.pdf' \
+            -o /tmp/urdu-wordnet.pdf
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://www.cle.org.pk/Downloads/ling_resources/wordlists/Closed%20Class%20Word%20List%20v1.1.pdf' \
+            -o /tmp/urdu-closed.pdf
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://raw.githubusercontent.com/rohan-c0de/ReadUrdu-Devanagari-English/main/data/dictionary.json' \
+            -o /tmp/readurdu-dictionary.json
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://kaikki.org/dictionary/Urdu/kaikki.org-dictionary-Urdu.jsonl' \
+            -o /tmp/kaikki-urdu.jsonl
+          pdftotext -layout /tmp/urdu-frequency.pdf /tmp/urdu-frequency.txt
+          pdftotext -layout /tmp/urdu-wordnet.pdf /tmp/urdu-wordnet.txt
+          pdftotext -layout /tmp/urdu-closed.pdf /tmp/urdu-closed.txt
+
+      - name: Build broad Arabic lexical inventory
+        run: |
+          python scripts/build_arabic_core_candidates.py \
+            --frequency-zip /tmp/MSA_freq_lists.tsv.zip \
+            --output audit/arabic_msa_core_candidates_8000.csv \
+            --summary audit/arabic_msa_core_candidates_8000_summary.txt \
+            --candidate-count 8000
+
+      - name: Build Arabic continuation
+        run: |
+          python scripts/build_top3000_continuations.py \
+            --language arabic \
+            --arabic-candidates audit/arabic_msa_core_candidates_8000.csv
+
+      - name: Audit Arabic continuation
+        run: |
+          python scripts/audit_top3000_continuations.py \
+            --language arabic \
+            --kaikki /tmp/kaikki-arabic.jsonl
+
+      - name: Build French continuation
+        run: |
+          python scripts/build_top3000_continuations.py \
+            --language french \
+            --lexique /tmp/Lexique400.tsv \
+            --kaikki /tmp/kaikki-french.jsonl
+
+      - name: Audit French continuation
+        run: |
+          python scripts/audit_top3000_continuations.py \
+            --language french \
+            --kaikki /tmp/kaikki-french.jsonl
+
+      - name: Build Urdu continuation
+        run: |
+          python scripts/build_top3000_continuations.py \
+            --language urdu \
+            --kaikki /tmp/kaikki-urdu.jsonl \
+            --urdu-freq-text /tmp/urdu-frequency.txt \
+            --urdu-wordnet-text /tmp/urdu-wordnet.txt \
+            --urdu-closed-text /tmp/urdu-closed.txt \
+            --readurdu /tmp/readurdu-dictionary.json
+
+      - name: Audit Urdu continuation
+        run: |
+          python scripts/audit_top3000_continuations.py \
+            --language urdu \
+            --kaikki /tmp/kaikki-urdu.jsonl
+
+      - name: Commit candidates and audit evidence
+        if: always()
+        run: |
+          if [ -z "$(git status --porcelain -- audit/)" ]; then
+            echo 'No top3000 audit changes.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/
+          git commit -m 'Build real top3000 continuation candidates [skip ci]'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
