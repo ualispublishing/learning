@@ -1,0 +1,41 @@
+name: Polish public learner glosses
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/polish_public_core_entries.py'
+      - '.github/workflows/polish-public-core.yml'
+      - 'audit/run_polish_public_core.request'
+
+permissions:
+  contents: write
+
+jobs:
+  polish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Apply conservative public-facing glosses
+        run: python scripts/polish_public_core_entries.py
+      - name: Re-run publication audit
+        run: python scripts/audit_public_readiness.py
+      - name: Re-run live integrity attestation
+        run: python scripts/attest_live_csvs.py
+      - name: Commit polished decks and evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add arabic_top1000.csv french_top1000.csv french_top3000.csv urdu_top1000.csv urdu_top3000.csv audit/public_readiness_audit.json audit/public_readiness_review_queue.csv audit/public_readiness_review_compact.json audit/public_review_*.json audit/live_csv_attestation.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Polish learner-facing glosses for publication [skip ci]'
+          for n in 1 2 3; do
+            git fetch origin main
+            git rebase --autostash origin/main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((n*3))
+          done
+          exit 1
