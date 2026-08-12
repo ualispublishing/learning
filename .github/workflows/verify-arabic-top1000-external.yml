@@ -1,4 +1,4 @@
-name: External fact check Arabic top 1000
+name: External precision check Arabic top 1000
 
 on:
   workflow_dispatch:
@@ -7,6 +7,7 @@ on:
       - 'arabic_top1000.csv'
       - 'scripts/verify_arabic_top1000_external.py'
       - 'scripts/verify_arabic_top1000_external_v2.py'
+      - 'scripts/verify_arabic_top1000_external_precision.py'
       - '.github/workflows/verify-arabic-top1000-external.yml'
 
 concurrency:
@@ -30,24 +31,39 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install wordnet tooling
+      - name: Install WordNet tooling
         run: |
           python -m pip install --upgrade pip
-          python -m pip install wn
+          python -m pip install 'wn>=1.1.0'
 
-      - name: Cross-check all 1,000 Arabic cards
+      - name: Run existing independent fact check
         run: python scripts/verify_arabic_top1000_external_v2.py
 
-      - name: Commit verification evidence
+      - name: Download Arabic WordNet 4
         run: |
-          if [ -z "$(git status --porcelain -- audit/arabic_top1000_external_verification.csv audit/arabic_top1000_external_verification_summary.json)" ]; then
-            echo 'No verification evidence changed.'
+          mkdir -p audit
+          curl -L --fail --retry 5 --retry-all-errors \
+            'https://raw.githubusercontent.com/Salah-Sal/arabic-wordnet-v4/main/output/awn4.xml.gz' \
+            -o audit/awn4.xml.gz
+
+      - name: Run third-pass three-source semantic verification
+        run: python scripts/verify_arabic_top1000_external_precision.py
+
+      - name: Remove temporary external lexicon payload
+        if: always()
+        run: rm -f audit/awn4.xml.gz
+
+      - name: Commit verification evidence
+        if: success()
+        run: |
+          if [ -z "$(git status --porcelain -- audit/arabic_top1000_external_verification.csv audit/arabic_top1000_external_verification_summary.json audit/arabic_top1000_external_precision.csv audit/arabic_top1000_external_precision_summary.json audit/arabic_top1000_external_precision_review.csv)" ]; then
+            echo 'No Arabic verification evidence changed.'
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add audit/arabic_top1000_external_verification.csv audit/arabic_top1000_external_verification_summary.json
-          git commit -m 'Record external Arabic top1000 fact check [skip ci]'
+          git add audit/arabic_top1000_external_verification.csv audit/arabic_top1000_external_verification_summary.json audit/arabic_top1000_external_precision.csv audit/arabic_top1000_external_precision_summary.json audit/arabic_top1000_external_precision_review.csv
+          git commit -m 'Record Arabic top1000 independent precision audit [skip ci]'
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
