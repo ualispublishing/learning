@@ -25,7 +25,13 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install camel-tools
-          camel_data -i morphology-db-msa-r13
+          ok=0
+          for attempt in 1 2 3 4 5; do
+            if camel_data -i morphology-db-msa-r13; then ok=1; break; fi
+            echo "CAMeL data download attempt $attempt/5 failed"
+            sleep $((attempt * 4))
+          done
+          test "$ok" = 1
       - name: Audit all phrase-bank rows
         run: python scripts/audit_arabic_phrase_bank.py
       - name: Commit audit evidence
