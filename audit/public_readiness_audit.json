@@ -13,22 +13,18 @@
     },
     "arabic_top3000.csv": {
       "rows": 2000,
-      "flagged_rows": 2000,
-      "block_rows": 2000,
+      "flagged_rows": 0,
+      "block_rows": 0,
       "review_rows": 0,
-      "flag_counts": {
-        "stale_candidate_or_review_label": 2000,
-        "machine_pos_abbreviation": 1
-      },
-      "public_ready_by_heuristics": false
+      "flag_counts": {},
+      "public_ready_by_heuristics": true
     },
     "french_top1000.csv": {
       "rows": 1000,
-      "flagged_rows": 1000,
-      "block_rows": 1000,
-      "review_rows": 0,
+      "flagged_rows": 25,
+      "block_rows": 0,
+      "review_rows": 25,
       "flag_counts": {
-        "stale_candidate_or_review_label": 1000,
         "usage_note_mixed_into_meaning": 1,
         "overbundled_meaning_5plus_senses": 20,
         "raw_dictionary_inflection_gloss": 2,
@@ -50,13 +46,10 @@
     },
     "urdu_top1000.csv": {
       "rows": 1000,
-      "flagged_rows": 1000,
-      "block_rows": 1000,
-      "review_rows": 0,
+      "flagged_rows": 47,
+      "block_rows": 0,
+      "review_rows": 47,
       "flag_counts": {
-        "stale_candidate_or_review_label": 1000,
-        "machine_pos_separator": 176,
-        "machine_pos_abbreviation": 69,
         "usage_note_mixed_into_meaning": 1,
         "overbundled_meaning_5plus_senses": 13,
         "raw_dictionary_inflection_gloss": 31,
@@ -89,9 +82,9 @@
   },
   "overall": {
     "rows": 10078,
-    "flagged_rows": 6240,
-    "block_rows": 6000,
-    "review_rows": 240,
+    "flagged_rows": 2312,
+    "block_rows": 2000,
+    "review_rows": 312,
     "public_ready_by_heuristics": false
   },
   "policy": "Publication-readiness triage. Any block flag prevents public-ready status; review flags require linguistic inspection before claiming publication quality."
