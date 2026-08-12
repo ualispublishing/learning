@@ -1,0 +1,18 @@
+{
+  "rows": 2000,
+  "expected_rows": 2000,
+  "distinct_fronts": 2000,
+  "rank_range": [
+    1001,
+    3000
+  ],
+  "primary_CLE_rows": 1938,
+  "supplemental_wordfreq_rows": 62,
+  "tier_A_direct_rows": 1982,
+  "tier_B_two_source_fallback_rows": 18,
+  "supplemental_non_direct_rows": 0,
+  "supplemental_examined": 1452,
+  "structural_gate": "PASS",
+  "status": "candidate_only_not_promoted",
+  "policy": "Use CLE ordering first. Fill only any remaining slots with wordfreq-ranked Urdu forms that have CFILT IWN-En Direct manual semantic mappings; supplemental rows can never use fallback semantics."
+}
