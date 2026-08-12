@@ -2,14 +2,11 @@
   "files": {
     "arabic_top1000.csv": {
       "rows": 1000,
-      "flagged_rows": 7,
+      "flagged_rows": 0,
       "block_rows": 0,
-      "review_rows": 7,
-      "flag_counts": {
-        "usage_note_mixed_into_meaning": 1,
-        "overbundled_meaning_5plus_senses": 6
-      },
-      "public_ready_by_heuristics": false
+      "review_rows": 0,
+      "flag_counts": {},
+      "public_ready_by_heuristics": true
     },
     "arabic_top3000.csv": {
       "rows": 2000,
@@ -21,49 +18,40 @@
     },
     "french_top1000.csv": {
       "rows": 1000,
-      "flagged_rows": 25,
+      "flagged_rows": 1,
       "block_rows": 0,
-      "review_rows": 25,
+      "review_rows": 1,
       "flag_counts": {
-        "usage_note_mixed_into_meaning": 1,
-        "overbundled_meaning_5plus_senses": 20,
-        "raw_dictionary_inflection_gloss": 2,
-        "very_long_meaning": 2
+        "raw_dictionary_inflection_gloss": 1
       },
       "public_ready_by_heuristics": false
     },
     "french_top3000.csv": {
       "rows": 2000,
-      "flagged_rows": 44,
+      "flagged_rows": 1,
       "block_rows": 0,
-      "review_rows": 44,
+      "review_rows": 1,
       "flag_counts": {
-        "overbundled_meaning_5plus_senses": 28,
-        "very_long_meaning": 13,
-        "raw_dictionary_inflection_gloss": 4
+        "raw_dictionary_inflection_gloss": 1
       },
       "public_ready_by_heuristics": false
     },
     "urdu_top1000.csv": {
       "rows": 1000,
-      "flagged_rows": 47,
+      "flagged_rows": 3,
       "block_rows": 0,
-      "review_rows": 47,
+      "review_rows": 3,
       "flag_counts": {
-        "usage_note_mixed_into_meaning": 1,
-        "overbundled_meaning_5plus_senses": 13,
-        "raw_dictionary_inflection_gloss": 31,
-        "very_long_meaning": 2
+        "raw_dictionary_inflection_gloss": 3
       },
       "public_ready_by_heuristics": false
     },
     "urdu_top3000.csv": {
       "rows": 2000,
-      "flagged_rows": 2000,
-      "block_rows": 2000,
-      "review_rows": 0,
+      "flagged_rows": 507,
+      "block_rows": 0,
+      "review_rows": 507,
       "flag_counts": {
-        "stale_candidate_or_review_label": 2000,
         "overbundled_meaning_5plus_senses": 507,
         "very_long_meaning": 4
       },
@@ -82,9 +70,9 @@
   },
   "overall": {
     "rows": 10078,
-    "flagged_rows": 2312,
-    "block_rows": 2000,
-    "review_rows": 312,
+    "flagged_rows": 701,
+    "block_rows": 0,
+    "review_rows": 701,
     "public_ready_by_heuristics": false
   },
   "policy": "Publication-readiness triage. Any block flag prevents public-ready status; review flags require linguistic inspection before claiming publication quality."
