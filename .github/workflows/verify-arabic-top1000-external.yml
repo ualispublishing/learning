@@ -6,6 +6,7 @@ on:
     paths:
       - 'arabic_top1000.csv'
       - 'scripts/verify_arabic_top1000_external.py'
+      - 'scripts/verify_arabic_top1000_external_v2.py'
       - '.github/workflows/verify-arabic-top1000-external.yml'
 
 concurrency:
@@ -35,7 +36,7 @@ jobs:
           python -m pip install wn
 
       - name: Cross-check all 1,000 Arabic cards
-        run: python scripts/verify_arabic_top1000_external.py
+        run: python scripts/verify_arabic_top1000_external_v2.py
 
       - name: Commit verification evidence
         run: |
