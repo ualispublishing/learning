@@ -43,11 +43,11 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 42,oui,yes,freedict,3111.411,5.80,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""yes"", ""kaikki"": ""yes"", ""omw"": ""yes""}",verified_strong
 43,tout,all; everything; however; no matter how,kaikki,2966.5670000000005,6.44,False,True,False,False,True,True,False,omw,"{""kaikki"": ""all|everyth|how|however|matter|no"", ""omw"": ""all""}",verified
 44,sur,on; upon; about,explicit_high_risk_review,2962.453,6.77,False,False,False,False,False,True,False,,{},verified_explicit_review
-45,ils,they (female); they (male or mixed group),kaikki,2940.297,6.36,False,True,False,False,False,True,False,,"{""kaikki"": ""female|group|male|mixed|they""}",review
+45,ils,they (masculine or mixed group),explicit_high_risk_review,2940.297,6.36,False,True,False,False,False,True,False,kaikki,"{""kaikki"": ""group|mixed|they""}",verified_explicit_review
 46,se,oneself; himself; herself; themselves (reflexive pronoun),explicit_high_risk_review,2685.462,6.56,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""herself|himself""}",verified_explicit_review
 47,venir,come,freedict,2424.0229999999997,5.18,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""come"", ""kaikki"": ""come"", ""omw"": ""come""}",verified_strong
 48,ici,here,kaikki,2272.104,5.71,False,True,False,False,True,True,False,omw,"{""kaikki"": ""here"", ""omw"": ""here""}",verified
-49,toi,"yourself (reflexive object pronoun of imperative verbs); you (informal second-person singular personal pronoun, disjunctive)",kaikki,2202.291,5.86,False,True,False,False,False,False,False,,"{""kaikki"": ""disjunctive|imperative|informal|object|personal|reflexive|second-person|you|yourself""}",review
+49,toi,"you; yourself (informal singular, stressed/disjunctive form)",explicit_high_risk_review,2202.291,5.86,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""disjunctive|informal|you|yourself""}",verified_explicit_review
 50,comme,how; like; such as,kaikki,2187.566,6.41,False,True,False,False,True,False,False,omw,"{""kaikki"": ""how|like|such"", ""omw"": ""such""}",verified
 51,bon,"good; well; OK; sexy, hot, smoking hot",kaikki,2183.892,5.93,False,True,False,False,True,True,False,omw,"{""kaikki"": ""good|hot|ok|sexy|smok|well"", ""omw"": ""good|ok|well""}",verified
 52,lui,him; her; to him; to her,explicit_high_risk_review,2141.63,6.20,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""her|him""}",verified_explicit_review
@@ -66,7 +66,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 65,croire,"to believe (someone); to believe, to have faith; to believe, to accept as true",kaikki,1612.3959999999997,5.15,False,True,False,False,True,False,False,omw,"{""kaikki"": ""accept|believe|faith|have|true"", ""omw"": ""accept|believe|faith|have|true""}",verified
 66,par,by; through; per,explicit_high_risk_review,1610.833,6.72,False,False,False,False,False,False,False,,{},verified_explicit_review
 67,aimer,"to like (often with bien); to love (usually of a person, otherwise the meaning is closer to English like)",kaikki,1601.0780000000004,4.65,False,True,False,False,True,True,False,omw,"{""kaikki"": ""bien|closer|english|like|love|mean|often|otherwise|usually"", ""omw"": ""like|love|often""}",verified
-68,ou,or,kaikki,1554.009,6.46,False,True,False,False,False,False,False,,"{""kaikki"": ""or""}",review
+68,ou,or,explicit_high_risk_review,1554.009,6.46,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""or""}",verified_explicit_review
 69,juste,"correct; perfect; fair, just",kaikki,1527.772,5.80,False,True,False,False,True,True,False,omw,"{""kaikki"": ""correct|fair|just|perfect"", ""omw"": ""fair|just""}",verified
 70,passer,to don; to run; to pass,kaikki,1521.8199999999995,5.45,False,True,False,False,True,True,False,omw,"{""kaikki"": ""don|pass|run"", ""omw"": ""don|pass|run""}",verified
 71,des,of the; from the; some (plural article),explicit_high_risk_review,1510.377,7.15,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""some""}",verified_explicit_review
@@ -85,7 +85,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 84,sa,her; his; its,freedict,1260.06,6.34,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""her|his|its"", ""kaikki"": ""her|his|its"", ""omw"": ""its""}",verified_strong
 85,arriver,"to cope, to manage; to obtain a level of success or fame; to arrive (often followed by a location)",kaikki,1211.2169999999999,4.99,False,True,False,False,True,True,False,omw,"{""kaikki"": ""arrive|cope|fame|follow|level|location|manage|obtain|often|succes"", ""omw"": ""arrive|follow|level|manage|succes""}",verified
 86,maintenant,"now, currently; present participle of maintenir",kaikki,1205.636,5.53,False,True,False,False,True,True,False,omw,"{""kaikki"": ""currently|maintenir|now|participle"", ""omw"": ""currently|now""}",verified
-87,falloir,"to be missing; to take (time); to need, have to, to be necessary (that)",kaikki,1197.753,4.43,False,True,False,False,False,False,False,,"{""kaikki"": ""have|miss|necessary|need|take|time""}",review
+87,falloir,to be necessary; must; have to (impersonal verb),explicit_high_risk_review,1197.753,4.43,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""have|necessary""}",verified_explicit_review
 88,ta,your,freedict,1157.652,5.66,False,True,True,False,False,False,False,kaikki,"{""freedict"": ""your"", ""kaikki"": ""your""}",verified
 89,appeler,call; summon,freedict,1136.328,4.75,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""call|summon"", ""kaikki"": ""call|summon"", ""omw"": ""call|summon""}",verified_strong
 90,donner,"to donate; to come across; to give, to transfer the possession/holding of something to someone else",kaikki,1133.647,5.41,False,True,False,False,True,False,False,omw,"{""kaikki"": ""acros|come|donate|else|give|hold|possession|transfer"", ""omw"": ""come|donate|give|hold|possession|transfer""}",verified
@@ -98,7 +98,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 97,besoin,need,freedict,1070.927,5.51,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""need"", ""kaikki"": ""need"", ""omw"": ""need""}",verified_strong
 98,encore,more; again; still,kaikki,1065.934,6.04,False,True,False,False,True,True,False,omw,"{""kaikki"": ""again|more|still"", ""omw"": ""again|more|still""}",verified
 99,quelque,some (singular),kaikki,1055.835,5.54,False,True,False,False,True,False,False,omw,"{""kaikki"": ""some"", ""omw"": ""some""}",verified
-100,notre,our,kaikki,1052.196,5.90,False,True,False,False,False,False,False,,"{""kaikki"": ""our""}",review
+100,notre,our,explicit_high_risk_review,1052.196,5.90,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""our""}",verified_explicit_review
 101,homme,husband; boyfriend; man (employee),kaikki,1042.62,5.71,False,True,False,False,True,True,False,omw,"{""kaikki"": ""boyfriend|employee|husband|man"", ""omw"": ""boyfriend|husband|man""}",verified
 102,partir,to go; to die; to start,kaikki,1035.4270000000001,5.48,False,True,False,False,True,True,False,omw,"{""kaikki"": ""die|go|start"", ""omw"": ""die|go|start""}",verified
 103,mes,my,freedict,1028.275,5.77,False,True,True,False,False,False,False,kaikki,"{""freedict"": ""my"", ""kaikki"": ""my""}",verified
@@ -121,8 +121,8 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 120,vrai,"true; truth; real, proper",kaikki,853.61,5.57,False,True,False,False,True,False,False,omw,"{""kaikki"": ""proper|real|true|truth"", ""omw"": ""proper|real|true|truth""}",verified
 121,connaître,"to know (sexually); to be knowledgeable (en about); to know, to experience (glory, hunger, problems etc.)",kaikki,845.9820000000003,4.92,False,True,False,False,True,True,False,omw,"{""kaikki"": ""about|en|etc|experience|glory|hunger|know|knowledgeable|problem|sexually"", ""omw"": ""about|experience|know""}",verified
 122,essayer,try; test; attempt,freedict,837.6089999999998,4.94,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""attempt|test|try"", ""kaikki"": ""attempt|test|try"", ""omw"": ""attempt|test|try""}",verified_strong
-123,quelqu'un,some; one (out of several),kaikki,837.544,5.45,False,True,False,False,False,True,False,,"{""kaikki"": ""out|several|some""}",review
-124,mourir,to be dying,kaikki,832.271,4.75,False,True,False,False,False,True,False,,"{""kaikki"": ""dying""}",review
+123,quelqu'un,someone; somebody,explicit_high_risk_review,837.544,5.45,False,False,False,False,True,True,False,omw,"{""omw"": ""somebody""}",verified_explicit_review
+124,mourir,to die,explicit_high_risk_review,832.271,4.75,False,False,False,False,True,True,False,omw,"{""omw"": ""die""}",verified_explicit_review
 125,comprendre,"to comprise, include; to understand, comprehend; to be comprehensible or conceivable",kaikki,830.8640000000003,5.14,False,True,False,False,True,True,False,omw,"{""kaikki"": ""comprehend|comprehensible|comprise|conceivable|include|understand"", ""omw"": ""comprehend|comprise|include|understand""}",verified
 126,avant,before; in front of,freedict,827.1740000000001,5.92,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""before|front"", ""kaikki"": ""before|front"", ""omw"": ""before|front""}",verified_strong
 127,trop,too; too much,freedict,819.801,5.83,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""much|too"", ""kaikki"": ""much|too"", ""omw"": ""much|too""}",verified_strong
@@ -137,10 +137,10 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 136,leur,their; to them,explicit_high_risk_review,733.357,6.17,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""their|them""}",verified_explicit_review
 137,entendre,hear,freedict,709.6529999999999,4.98,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""hear"", ""kaikki"": ""hear"", ""omw"": ""hear""}",verified_strong
 138,mal,bad; evil; pain,kaikki,682.409,5.68,False,True,False,False,True,True,False,omw,"{""kaikki"": ""bad|evil|pain"", ""omw"": ""bad|evil|pain""}",verified
-139,chez,"in the work of (an author or artist); by extension, to, at or in the country of; to, at, in or into the home, office, etc. of",kaikki,669.31,5.80,False,True,False,False,False,False,False,,"{""kaikki"": ""artist|author|country|etc|extension|home|into|office|work""}",review
+139,chez,"at/to the home, place, or business of; among; in the work of",explicit_high_risk_review,669.31,5.80,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""home|work""}",verified_explicit_review
 140,nouveau,new; novel,freedict,665.376,5.63,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""new|novel"", ""kaikki"": ""new|novel"", ""omw"": ""new|novel""}",verified_strong
 141,beaucoup,very,kaikki,665.247,5.75,False,True,False,False,True,True,False,omw,"{""kaikki"": ""very"", ""omw"": ""very""}",verified
-142,depuis,from; for ~; since,kaikki,663.491,5.92,False,True,False,False,False,False,False,,"{""kaikki"": ""since""}",review
+142,depuis,since; for (a duration); from,explicit_high_risk_review,663.491,5.92,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""since""}",verified_explicit_review
 143,déjà,"already, before; for a start, firstly; again (following a question)",kaikki,659.582,5.84,False,True,False,False,True,True,False,omw,"{""kaikki"": ""again|already|before|firstly|follow|question|start"", ""omw"": ""again|already""}",verified
 144,femme,wife; woman,freedict,645.326,5.59,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""wife|woman"", ""kaikki"": ""wife|woman"", ""omw"": ""wife|woman""}",verified_strong
 145,grand,big; tall; grand,kaikki,640.037,5.79,False,True,False,False,True,True,False,omw,"{""kaikki"": ""big|grand|tall"", ""omw"": ""big|grand|tall""}",verified
@@ -155,8 +155,8 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 154,fait,fact; deed; event; done; made,explicit_high_risk_review,601.696,6.43,False,True,False,False,True,False,False,kaikki|omw,"{""kaikki"": ""done|fact"", ""omw"": ""deed|event|fact""}",verified_explicit_review
 155,problème,problem; trouble,freedict,580.329,5.41,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""problem|trouble"", ""kaikki"": ""problem|trouble"", ""omw"": ""problem|trouble""}",verified_strong
 156,revenir,return; come back,freedict,579.6679999999999,4.89,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""back|come|return"", ""kaikki"": ""back|come|return"", ""omw"": ""back|come|return""}",verified_strong
-157,voilà,"it has been, ago; here (it) is, here (it) comes; there (it) is, there (it) comes",kaikki,578.873,5.25,False,True,False,False,False,False,False,,"{""kaikki"": ""ago|come|has|here|it|there""}",review
-158,cela,that; third-person singular past historic of celer,kaikki,578.769,5.72,False,True,False,False,False,True,False,,"{""kaikki"": ""celer|historic|third-person""}",review
+157,voilà,there is/are; there it is; here it is,explicit_high_risk_review,578.873,5.25,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""here|it|there""}",verified_explicit_review
+158,cela,that,explicit_high_risk_review,578.769,5.72,False,True,False,False,False,True,False,kaikki,"{""kaikki"": ""that""}",verified_explicit_review
 159,écouter,listen,freedict,572.2909999999999,4.71,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""listen"", ""kaikki"": ""listen"", ""omw"": ""listen""}",verified_strong
 160,fille,"girl; daughter; prostitute, wench",kaikki,566.775,5.42,False,True,False,False,True,False,False,omw,"{""kaikki"": ""daughter|girl|prostitute|wench"", ""omw"": ""daughter|girl|prostitute|wench""}",verified
 161,soir,evening,freedict,559.133,5.49,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""even"", ""kaikki"": ""even"", ""omw"": ""even""}",verified_strong
@@ -173,7 +173,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 172,dernier,last,freedict,517.076,5.47,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""last"", ""kaikki"": ""last"", ""omw"": ""last""}",verified_strong
 173,commencer,"to begin, commence",kaikki,511.1159999999999,4.93,False,True,False,False,True,True,False,omw,"{""kaikki"": ""begin|commence"", ""omw"": ""begin|commence""}",verified
 174,cet,this; that (masculine singular before a vowel or mute h),explicit_high_risk_review,502.788,5.66,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""this""}",verified_explicit_review
-175,beau,nice; in vain; boyfriend,kaikki,500.47499999999997,5.26,False,True,False,False,False,True,False,,"{""kaikki"": ""boyfriend|nice|vain""}",review
+175,beau,beautiful; handsome; fine; nice,explicit_high_risk_review,500.47499999999997,5.26,False,True,False,False,True,True,False,kaikki|omw,"{""kaikki"": ""nice"", ""omw"": ""beautiful|handsome""}",verified_explicit_review
 176,salut,"hi, hello; salvation; bye, goodbye",kaikki,500.41499999999996,4.79,False,True,False,False,True,False,False,omw,"{""kaikki"": ""bye|goodbye|hello|hi|salv"", ""omw"": ""bye|goodbye|hello|hi|salv""}",verified
 177,rendre,to yield; to render; to call on,kaikki,495.416,5.21,False,True,False,False,True,True,False,omw,"{""kaikki"": ""call|render|yield"", ""omw"": ""render|yield""}",verified
 178,truc,"trick; procedure, technique; thingamajig, thingy, thing",kaikki,492.823,5.28,False,True,False,False,True,False,False,omw,"{""kaikki"": ""procedure|technique|thingamajig|thingy|trick"", ""omw"": ""thingamajig""}",verified
@@ -191,7 +191,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 190,désolé,sorry; saddened; desolate,explicit_high_risk_review,450.608,4.78,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""desolate|sorry""}",verified_explicit_review
 191,gars,"lad, guy; guys (usually all male)",kaikki,444.206,5.19,False,True,False,False,True,False,False,omw,"{""kaikki"": ""all|guy|guys|lad|male|usually"", ""omw"": ""lad|usually""}",verified
 192,famille,family,freedict,442.358,5.52,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""family"", ""kaikki"": ""family"", ""omw"": ""family""}",verified_strong
-193,ah,ah,kaikki,442.294,5.31,False,True,False,False,False,True,False,,"{""kaikki"": ""ah""}",review
+193,ah,ah!,explicit_high_risk_review,442.294,5.31,False,True,False,False,False,True,False,kaikki,"{""kaikki"": ""ah""}",verified_explicit_review
 194,vivre,to live; to experience,kaikki,440.971,5.21,False,True,False,False,True,False,False,omw,"{""kaikki"": ""experience|live"", ""omw"": ""experience|live""}",verified
 195,main,hand,freedict,440.475,5.33,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""hand"", ""kaikki"": ""hand"", ""omw"": ""hand""}",verified_strong
 196,mec,"pimp; guy, fellow, bloke, chap, dude, boyfriend",kaikki,440.149,5.20,False,True,False,False,True,False,False,omw,"{""kaikki"": ""bloke|boyfriend|chap|dude|fellow|guy|pimp"", ""omw"": ""bloke|boyfriend|chap|dude|fellow|guy""}",verified
@@ -226,7 +226,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 225,vite,quickly; quick; fast,kaikki,380.07,5.31,False,True,False,False,True,True,False,omw,"{""kaikki"": ""fast|quick|quickly"", ""omw"": ""fast|quick|quickly""}",verified
 226,tomber,"to fall; to come down; to become, to get",kaikki,373.666,4.91,False,True,False,False,True,False,False,omw,"{""kaikki"": ""become|come|down|fall|get"", ""omw"": ""become|come|down|fall""}",verified
 227,aujourd'hui,today,freedict,369.712,5.62,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""today"", ""kaikki"": ""today"", ""omw"": ""today""}",verified_strong
-228,elles,they (female),kaikki,368.028,5.66,False,True,False,False,False,True,False,,"{""kaikki"": ""female|they""}",review
+228,elles,they (feminine),explicit_high_risk_review,368.028,5.66,False,True,False,False,False,True,False,kaikki,"{""kaikki"": ""they""}",verified_explicit_review
 229,hein,huh?; right?; isn't it?,explicit_high_risk_review,367.028,5.08,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""huh""}",verified_explicit_review
 230,garder,to guard; to be careful (de faire not to do); to keep; to retain; to store; to save,kaikki,363.3230000000001,4.88,False,True,False,False,True,False,False,omw,"{""kaikki"": ""careful|de|do|faire|guard|keep|not|retain|save|store"", ""omw"": ""careful|guard|keep|retain""}",verified
 231,année,year,explicit_high_risk_review,360.683,5.66,False,True,False,False,True,True,False,kaikki|omw,"{""kaikki"": ""year"", ""omw"": ""year""}",verified_explicit_review
@@ -235,7 +235,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 234,combien,how many; how much,freedict,355.297,4.98,False,True,True,False,False,True,False,kaikki,"{""freedict"": ""how|many|much"", ""kaikki"": ""how|many|much""}",verified
 235,histoire,"story; misadventure; lie, fantasy, invention",kaikki,354.952,5.64,False,True,False,False,True,True,False,omw,"{""kaikki"": ""fantasy|invention|lie|misadventure|story"", ""omw"": ""lie|story""}",verified
 236,marcher,to step; to walk; to believe,kaikki,353.702,4.56,False,True,False,False,True,True,False,omw,"{""kaikki"": ""believe|step|walk"", ""omw"": ""step|walk""}",verified
-237,tant,so many; so much; both ... and,kaikki,351.497,5.54,False,True,False,False,False,False,False,,"{""kaikki"": ""both|many|much|so""}",review
+237,tant,so much; so many; as much; as many,explicit_high_risk_review,351.497,5.54,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""many|much|so""}",verified_explicit_review
 238,tirer,"to shoot; to leave a place; to draw, drag, pull",kaikki,349.50800000000004,4.76,False,True,False,False,True,True,False,omw,"{""kaikki"": ""drag|draw|leave|place|pull|shoot"", ""omw"": ""drag|draw|pull|shoot""}",verified
 239,puis,and; then; after; next; first-person singular present indicative of pouvoir,kaikki,344.639,5.67,False,True,False,False,True,True,False,omw,"{""kaikki"": ""after|first-person|indicative|next|pouvoir|then"", ""omw"": ""after|then""}",verified
 240,vieux,old; elderly; old man (noun use),explicit_high_risk_review,342.917,5.11,False,True,False,False,True,True,False,kaikki|omw,"{""kaikki"": ""old"", ""omw"": ""elderly|old""}",verified_explicit_review
@@ -248,7 +248,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 247,frère,brother,freedict,327.889,5.18,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""brother"", ""kaikki"": ""brother"", ""omw"": ""brother""}",verified_strong
 248,tard,late,freedict,326.405,5.34,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""late"", ""kaikki"": ""late"", ""omw"": ""late""}",verified_strong
 249,part,share; newborn; proportion,kaikki,324.183,5.63,False,True,False,False,True,False,False,omw,"{""kaikki"": ""newborn|proportion|share"", ""omw"": ""proportion|share""}",verified
-250,contre,double; in exchange for; against (not in favor of),kaikki,323.551,5.93,False,True,False,False,False,False,False,,"{""kaikki"": ""against|double|exchange|favor|not""}",review
+250,contre,against; versus; in exchange for,explicit_high_risk_review,323.551,5.93,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""against|exchange""}",verified_explicit_review
 251,amour,love; an oblast in far eastern Russia; its administrative centre is Blagoveshchensk,kaikki,322.833,5.30,False,True,False,False,True,False,False,omw,"{""kaikki"": ""administrative|blagoveshchensk|centre|eastern|far|its|love|oblast|russia"", ""omw"": ""love|russia""}",verified
 252,ouvrir,"to open; to begin, to initiate; to turn on, to switch on, to put on (of a device or an appliance)",kaikki,322.41700000000003,4.85,False,True,False,False,True,True,False,omw,"{""kaikki"": ""appliance|begin|device|initiate|open|put|switch|turn"", ""omw"": ""begin|open|switch|turn""}",verified
 253,sang,blood,freedict,321.772,4.98,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""blood"", ""kaikki"": ""blood"", ""omw"": ""blood""}",verified_strong
@@ -265,7 +265,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 264,seulement,only,kaikki,304.196,5.47,False,True,False,False,True,False,False,omw,"{""kaikki"": ""only"", ""omw"": ""only""}",verified
 265,bébé,baby,freedict,302.057,4.81,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""baby"", ""kaikki"": ""baby"", ""omw"": ""baby""}",verified_strong
 266,gagner,to win; to earn; to gain; to obtain,kaikki,301.64,5.00,False,True,False,False,True,False,False,omw,"{""kaikki"": ""earn|gain|obtain|win"", ""omw"": ""earn|gain|obtain|win""}",verified
-267,sous,"money; below, under",kaikki,298.25,5.90,False,True,False,False,False,True,False,,"{""kaikki"": ""below|money|under""}",review
+267,sous,under; below; beneath,explicit_high_risk_review,298.25,5.90,False,True,False,False,False,True,False,kaikki,"{""kaikki"": ""below|under""}",verified_explicit_review
 268,mauvais,"bad; wrong, incorrect",kaikki,297.222,5.03,False,True,False,False,True,True,False,omw,"{""kaikki"": ""bad|incorrect|wrong"", ""omw"": ""bad|wrong""}",verified
 269,sembler,seem; appear; appear to be,freedict,297.18799999999993,3.74,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""appear|seem"", ""kaikki"": ""appear|seem"", ""omw"": ""appear|seem""}",verified_strong
 270,mois,month,freedict,296.063,5.65,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""month"", ""kaikki"": ""month"", ""omw"": ""month""}",verified_strong
@@ -297,7 +297,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 296,dormir,to sleep,kaikki,266.28700000000003,4.65,False,True,False,False,True,False,False,omw,"{""kaikki"": ""sleep"", ""omw"": ""sleep""}",verified
 297,acheter,to purchase; buy,kaikki,266.006,5.02,False,True,False,False,True,True,False,omw,"{""kaikki"": ""buy|purchase"", ""omw"": ""buy|purchase""}",verified
 298,arme,weapon,freedict,261.81600000000003,4.67,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""weapon"", ""kaikki"": ""weapon"", ""omw"": ""weapon""}",verified_strong
-299,dont,"by which; of/from whom/which, whose; whereof; Denotes a part of a set, may be translated as ""including"" or such as in some situations",kaikki,260.551,5.86,False,True,False,False,False,False,False,,"{""kaikki"": ""denot|includ|may|part|set|situation|some|such|translat|whereof|whose""}",review
+299,dont,whose; of whom; of which; including,explicit_high_risk_review,260.551,5.86,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""includ|whose""}",verified_explicit_review
 300,mot,word,freedict,259.28200000000004,5.22,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""word"", ""kaikki"": ""word"", ""omw"": ""word""}",verified_strong
 301,corps,body,freedict,258.307,5.35,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""body"", ""kaikki"": ""body"", ""omw"": ""body""}",verified_strong
 302,attention,vigilance; attention (concern for); attention (interest in),kaikki,257.984,5.13,False,True,False,False,True,False,False,omw,"{""kaikki"": ""attention|concern|interest|vigilance"", ""omw"": ""attention|interest""}",verified
@@ -344,7 +344,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 343,loin,"far, distant",kaikki,229.756,5.39,False,True,False,False,True,True,False,omw,"{""kaikki"": ""distant|far"", ""omw"": ""far""}",verified
 344,prier,to pray,kaikki,228.59,4.07,False,True,False,False,True,False,False,omw,"{""kaikki"": ""pray"", ""omw"": ""pray""}",verified
 345,docteur,doctor; physician,freedict,226.234,4.71,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""doctor|physician"", ""kaikki"": ""doctor|physician"", ""omw"": ""doctor|physician""}",verified_strong
-346,papa,"pops, any man of roughly fatherly age and appearance",kaikki,226.028,4.57,False,True,False,False,False,False,False,,"{""kaikki"": ""age|any|appearance|fatherly|man|pops|roughly""}",review
+346,papa,dad; father,explicit_high_risk_review,226.028,4.57,False,False,False,False,True,False,False,omw,"{""omw"": ""dad|father""}",verified_explicit_review
 347,cause,cause; case (a legal proceeding); second-person singular imperative,kaikki,223.51299999999998,5.40,False,True,False,False,True,False,False,omw,"{""kaikki"": ""case|cause|imperative|legal|proceed|second-person"", ""omw"": ""case|cause|legal|proceed""}",verified
 348,plutôt,"earlier, sooner; rather, instead (indicating preference); rather (introducing a correction or clarification)",kaikki,222.658,5.35,False,True,False,False,True,False,False,omw,"{""kaikki"": ""clarific|correction|earlier|indicat|instead|introduc|preference|rather|sooner"", ""omw"": ""rather|sooner""}",verified
 349,compter,"to count; to matter; to intend, plan",kaikki,221.907,4.80,False,True,False,False,True,False,False,omw,"{""kaikki"": ""count|intend|matter|plan"", ""omw"": ""count|matter""}",verified
@@ -376,7 +376,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 375,amener,bring; fetch,freedict,199.84100000000004,4.34,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""bring|fetch"", ""kaikki"": ""bring|fetch"", ""omw"": ""bring|fetch""}",verified_strong
 376,film,"movie, film",kaikki,199.414,5.36,False,True,False,False,True,True,False,omw,"{""kaikki"": ""film|movie"", ""omw"": ""film|movie""}",verified
 377,parent,parent; related; similar,kaikki,199.096,4.26,False,True,False,False,True,False,False,omw,"{""kaikki"": ""parent|relat|similar"", ""omw"": ""parent|relat|similar""}",verified
-378,dessus,dessus; on (it); upstairs,kaikki,197.057,5.36,False,True,False,False,False,False,False,,"{""kaikki"": ""dessu|it|upstair""}",review
+378,dessus,on top; above; on it; top,explicit_high_risk_review,197.057,5.36,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""it""}",verified_explicit_review
 379,passé,last; past,freedict,196.121,5.42,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""last"", ""kaikki"": ""last"", ""omw"": ""past""}",verified_strong
 380,monter,to edit; to ride (a horse); to mount (a horse),kaikki,195.981,4.70,False,True,False,False,True,True,False,omw,"{""kaikki"": ""edit|horse|mount|ride"", ""omw"": ""mount""}",verified
 381,propre,own; clean; eigen-,kaikki,194.98700000000002,5.21,False,True,False,False,True,False,False,omw,"{""kaikki"": ""clean|eigen|own"", ""omw"": ""clean|own""}",verified
@@ -443,7 +443,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 442,peine,"punishment; effort, trouble; psychological pain, sorrow",kaikki,165.912,5.23,False,True,False,False,True,False,False,omw,"{""kaikki"": ""effort|pain|psychological|punish|sorrow|trouble"", ""omw"": ""effort|pain|psychological|punish|sorrow|trouble""}",verified
 443,détester,dislike,freedict,165.83099999999993,3.72,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""dislike"", ""kaikki"": ""dislike"", ""omw"": ""dislike""}",verified_strong
 444,disparaître,disappear,freedict,165.37400000000005,4.34,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""disappear"", ""kaikki"": ""disappear"", ""omw"": ""disappear""}",verified_strong
-445,ignorer,"to ignore; to be unaware of, to be ignorant of",kaikki,165.257,4.16,False,True,False,False,False,False,False,,"{""kaikki"": ""ignorant|ignore|unaware""}",review
+445,ignorer,to not know; be unaware of; ignore,explicit_high_risk_review,165.257,4.16,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""ignore|unaware""}",verified_explicit_review
 446,autant,"so much; the same, as much; just as well, might as well/may as well",kaikki,165.158,5.42,False,True,False,False,True,False,False,omw,"{""kaikki"": ""just|may|might|much|same|so|well"", ""omw"": ""much""}",verified
 447,carte,map; card; menu,freedict,164.402,5.06,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""card|map|menu"", ""kaikki"": ""card|map|menu"", ""omw"": ""card|map|menu""}",verified_strong
 448,terminer,"to end; to finish; to terminate; to end, to bring to an end, to finish; to end, to finish, to complete, to conclude",kaikki,164.23399999999995,4.38,False,True,False,False,True,False,False,omw,"{""kaikki"": ""bring|complete|conclude|end|finish|terminate"", ""omw"": ""bring|complete|conclude|end|finish|terminate""}",verified
@@ -472,7 +472,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 471,seconde,second,freedict,155.063,5.09,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""second"", ""kaikki"": ""second"", ""omw"": ""second""}",verified_strong
 472,plaisir,Plaisir; pleasure,kaikki,155.013,5.15,False,True,False,False,True,False,False,omw,"{""kaikki"": ""plaisir|pleasure"", ""omw"": ""pleasure""}",verified
 473,pire,worse,freedict,154.71099999999998,5.10,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""worse"", ""kaikki"": ""worse"", ""omw"": ""worse""}",verified_strong
-474,d'abord,primarily; immediately; for one thing,kaikki,154.047,5.18,False,True,False,False,False,False,False,,"{""kaikki"": ""immediately|primarily""}",review
+474,d'abord,first; first of all; initially,explicit_high_risk_review,154.047,5.18,False,False,False,False,True,False,False,omw,"{""omw"": ""all|first|initially""}",verified_explicit_review
 475,état,state; condition,freedict,153.946,5.62,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""condition|state"", ""kaikki"": ""condition|state"", ""omw"": ""condition|state""}",verified_strong
 476,lâcher,to fail; to chicken out; synonym of lâchage,kaikki,153.201,4.20,False,True,False,False,True,False,False,omw,"{""kaikki"": ""chage|chicken|fail|out|synonym"", ""omw"": ""chicken|out""}",verified
 477,réveiller,to awaken; to wake up,kaikki,153.153,4.19,False,True,False,False,True,False,False,omw,"{""kaikki"": ""awaken|up|wake"", ""omw"": ""awaken|up|wake""}",verified
@@ -495,7 +495,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 494,lit,bed,freedict,146.275,5.03,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""bed"", ""kaikki"": ""bed"", ""omw"": ""bed""}",verified_strong
 495,preuve,"evidence, proof",kaikki,146.168,4.95,False,True,False,False,True,False,False,omw,"{""kaikki"": ""evidence|proof"", ""omw"": ""evidence|proof""}",verified
 496,message,message,kaikki,145.819,5.07,False,True,False,False,True,False,False,omw,"{""kaikki"": ""message"", ""omw"": ""message""}",verified
-497,ceci,this,kaikki,145.763,4.94,False,True,False,False,False,True,False,,"{""kaikki"": ""this""}",review
+497,ceci,this,explicit_high_risk_review,145.763,4.94,False,True,False,False,False,True,False,kaikki,"{""kaikki"": ""this""}",verified_explicit_review
 498,pauvre,"poor, pitiable; lacking, scanty; poor person; pauper",kaikki,145.553,4.84,False,True,False,False,True,False,False,omw,"{""kaikki"": ""lack|pauper|pitiable|poor|scanty"", ""omw"": ""lack|pauper|pitiable|poor""}",verified
 499,réussir,succeed,freedict,145.49499999999995,4.51,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""succe"", ""kaikki"": ""succe"", ""omw"": ""succe""}",verified_strong
 500,avocat,"avocado; lawyer, attorney",kaikki,145.454,4.80,False,True,False,False,True,False,False,omw,"{""kaikki"": ""attorney|avocado|lawyer"", ""omw"": ""attorney|avocado|lawyer""}",verified
@@ -512,7 +512,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 511,chemin,road,kaikki,139.073,5.05,False,True,False,False,True,True,False,omw,"{""kaikki"": ""road"", ""omw"": ""road""}",verified
 512,rire,laugh,freedict,139.023,4.79,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""laugh"", ""kaikki"": ""laugh"", ""omw"": ""laugh""}",verified_strong
 513,visage,face,freedict,138.804,4.87,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""face"", ""kaikki"": ""face"", ""omw"": ""face""}",verified_strong
-514,couper,to crack; to traverse; to take away,kaikki,138.46599999999998,4.53,False,True,False,False,False,True,False,,"{""kaikki"": ""away|crack|take|traverse""}",review
+514,couper,to cut; cut off; switch off; interrupt,explicit_high_risk_review,138.46599999999998,4.53,False,False,False,False,True,True,False,omw,"{""omw"": ""cut|off|switch""}",verified_explicit_review
 515,détruire,to destroy; to demolish; to destruct,kaikki,138.20099999999994,4.46,False,True,False,False,True,False,False,omw,"{""kaikki"": ""demolish|destroy|destruct"", ""omw"": ""demolish|destroy|destruct""}",verified
 516,dès,from; as early as; as soon as,explicit_high_risk_review,138.063,5.43,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""early""}",verified_explicit_review
 517,salle,gym; hall; room (in a house),kaikki,137.69,5.08,False,True,False,False,True,True,False,omw,"{""kaikki"": ""gym|hall|house|room"", ""omw"": ""hall|room""}",verified
@@ -558,9 +558,9 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 557,lettre,letter,freedict,123.155,4.92,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""letter"", ""kaikki"": ""letter"", ""omw"": ""letter""}",verified_strong
 558,général,general,freedict,122.90599999999998,5.48,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""general"", ""kaikki"": ""general"", ""omw"": ""general""}",verified_strong
 559,apprécier,to like; to appreciate; to evaluate or measure quantitatively; to appraise,kaikki,122.20800000000001,4.31,False,True,False,False,True,False,False,omw,"{""kaikki"": ""appraise|appreciate|evaluate|like|measure|quantitatively"", ""omw"": ""appraise|appreciate|evaluate|measure""}",verified
-560,tromper,"to mix up; to trick, dupe; to distract oneself from",kaikki,122.207,4.25,False,True,False,False,False,False,False,,"{""kaikki"": ""distract|dupe|mix|oneself|trick|up""}",review
+560,tromper,to deceive; mislead; be mistaken; cheat on,explicit_high_risk_review,122.207,4.25,False,False,False,False,True,False,False,omw,"{""omw"": ""cheat|deceive""}",verified_explicit_review
 561,blesser,hurt; wound,freedict,121.68800000000002,3.92,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""hurt|wound"", ""kaikki"": ""hurt|wound"", ""omw"": ""hurt|wound""}",verified_strong
-562,patron,a pattern; a stencil; a protector,kaikki,121.506,4.69,False,True,False,False,False,False,False,,"{""kaikki"": ""pattern|protector|stencil""}",review
+562,patron,boss; employer; owner/manager; pattern/template,explicit_high_risk_review,121.506,4.69,False,True,False,False,True,False,False,kaikki|omw,"{""kaikki"": ""pattern"", ""omw"": ""boss|manager|owner|template""}",verified_explicit_review
 563,intéresser,to interest; to make interested; to be interested; to have an interest,kaikki,120.74800000000002,4.18,False,True,False,False,True,False,False,omw,"{""kaikki"": ""have|interest|make"", ""omw"": ""interest""}",verified
 564,certain,sure; certain,freedict,120.367,5.07,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""certain|sure"", ""kaikki"": ""certain|sure"", ""omw"": ""certain|sure""}",verified_strong
 565,casser,break,freedict,119.654,4.36,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""break"", ""kaikki"": ""break"", ""omw"": ""break""}",verified_strong
@@ -571,7 +571,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 570,réponse,reply; answer,freedict,118.75,5.08,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""answer|reply"", ""kaikki"": ""answer|reply"", ""omw"": ""answer|reply""}",verified_strong
 571,clé,key,freedict,117.939,4.62,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""key"", ""kaikki"": ""key"", ""omw"": ""key""}",verified_strong
 572,ancien,ex-; old; former,freedict,117.65799999999999,5.23,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""ex|former|old"", ""kaikki"": ""ex|former|old"", ""omw"": ""former|old""}",verified_strong
-573,reprendre,"to start again; to correct oneself; to retake, recapture",kaikki,117.37899999999999,4.70,False,True,False,False,False,False,False,,"{""kaikki"": ""again|correct|oneself|recapture|retake|start""}",review
+573,reprendre,to take back; resume; start again; retake,explicit_high_risk_review,117.37899999999999,4.70,False,True,False,False,True,False,False,kaikki|omw,"{""kaikki"": ""again|retake|start"", ""omw"": ""back|resume|take""}",verified_explicit_review
 574,déranger,to bother; to disrupt; to disarray/disarrange (throw into disorder),kaikki,117.19600000000001,3.79,False,True,False,False,True,False,False,omw,"{""kaikki"": ""bother|disarrange|disarray|disorder|disrupt|into|throw"", ""omw"": ""bother|disarrange|disorder""}",verified
 575,grave,back; solemn; serious,kaikki,116.953,4.94,False,True,False,False,True,True,False,omw,"{""kaikki"": ""back|seriou|solemn"", ""omw"": ""seriou|solemn""}",verified
 576,sinon,otherwise; if not; except,explicit_high_risk_review,116.912,5.12,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""except|if|not|otherwise""}",verified_explicit_review
@@ -596,7 +596,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 595,rouge,red,freedict,112.836,5.13,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""red"", ""kaikki"": ""red"", ""omw"": ""red""}",verified_strong
 596,normal,normal,freedict,112.696,4.90,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""normal"", ""kaikki"": ""normal"", ""omw"": ""normal""}",verified_strong
 597,probablement,probably,freedict,112.668,4.91,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""probably"", ""kaikki"": ""probably"", ""omw"": ""probably""}",verified_strong
-598,cheveu,a headhair,kaikki,112.526,3.48,False,True,False,False,False,False,False,,"{""kaikki"": ""headhair""}",review
+598,cheveu,hair; a single hair,explicit_high_risk_review,112.526,3.48,False,False,False,False,True,False,False,omw,"{""omw"": ""hair""}",verified_explicit_review
 599,relation,relationship; relation; connection; account/report,explicit_high_risk_review,112.506,4.91,False,True,False,False,True,False,False,kaikki|omw,"{""kaikki"": ""relation"", ""omw"": ""connection|relation|relationship""}",verified_explicit_review
 600,pousser,to grow; to push; to utter,kaikki,111.92999999999998,4.44,False,True,False,False,True,True,False,omw,"{""kaikki"": ""grow|push|utter"", ""omw"": ""grow|push""}",verified
 601,pote,friend; buddy; mate (informal),explicit_high_risk_review,111.785,4.56,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""buddy|mate""}",verified_explicit_review
@@ -678,7 +678,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 677,virer,to fire/dismiss; turn; remove; transfer (informal senses vary),explicit_high_risk_review,97.71099999999998,4.10,False,True,False,False,True,False,False,kaikki|omw,"{""kaikki"": ""fire|turn"", ""omw"": ""turn""}",verified_explicit_review
 678,personnel,"personal; staff, members of staff, personnel",kaikki,97.616,4.95,False,True,False,False,True,False,False,omw,"{""kaikki"": ""member|personal|personnel|staff"", ""omw"": ""personal|personnel|staff""}",verified
 679,censé,supposed to; meant to,explicit_high_risk_review,97.554,4.33,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""meant|suppos""}",verified_explicit_review
-680,autour,around; goshawk,kaikki,97.503,5.21,False,True,False,False,False,False,False,,"{""kaikki"": ""around|goshawk""}",review
+680,autour,around; surrounding,explicit_high_risk_review,97.503,5.21,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""around""}",verified_explicit_review
 681,règle,rule; regulation,freedict,97.193,4.72,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""regul|rule"", ""kaikki"": ""regul|rule"", ""omw"": ""regul|rule""}",verified_strong
 682,témoin,witness,freedict,96.971,4.43,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""witnes"", ""kaikki"": ""witnes"", ""omw"": ""witnes""}",verified_strong
 683,absolument,at all costs; absolutely; totally; completely,kaikki,96.896,4.89,False,True,False,False,True,False,False,omw,"{""kaikki"": ""absolutely|all|completely|cost|totally"", ""omw"": ""absolutely|all|completely|totally""}",verified
@@ -758,7 +758,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 757,danger,danger,kaikki,84.554,4.75,False,True,False,False,True,False,False,omw,"{""kaikki"": ""danger"", ""omw"": ""danger""}",verified
 758,bar,bass (fish); bar (counter); bar (establishment),kaikki,84.282,4.64,False,True,False,False,True,False,False,omw,"{""kaikki"": ""bar|bass|counter|establish|fish"", ""omw"": ""bar|counter|establish""}",verified
 759,animal,animal,kaikki,84.257,4.61,False,True,False,False,True,True,False,omw,"{""kaikki"": ""animal"", ""omw"": ""animal""}",verified
-760,selon,according to; whichever applies; depending on,kaikki,84.051,5.56,False,True,False,False,False,False,False,,"{""kaikki"": ""accord|apply|whichever""}",review
+760,selon,according to; depending on; in accordance with,explicit_high_risk_review,84.051,5.56,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""accord""}",verified_explicit_review
 761,remarquer,notice,freedict,84.00700000000002,4.38,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""notice"", ""kaikki"": ""notice"", ""omw"": ""notice""}",verified_strong
 762,bleu,blue; bruise; billiard chalk,kaikki,83.97,4.75,False,True,False,False,True,True,False,omw,"{""kaikki"": ""billiard|blue|bruise|chalk"", ""omw"": ""blue""}",verified
 763,traverser,"to cross, to go across",kaikki,83.95900000000002,4.25,False,True,False,False,True,True,False,omw,"{""kaikki"": ""acros|cros|go"", ""omw"": ""acros|cros|go""}",verified
@@ -858,7 +858,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 857,méchant,"mean, unkind; bad, mediocre; jerk (cruel person)",kaikki,73.576,4.35,False,True,False,False,True,False,False,omw,"{""kaikki"": ""bad|cruel|jerk|mean|mediocre|unkind"", ""omw"": ""bad""}",verified
 858,filer,to spin/thread; slip away; give/pass; tail/follow,explicit_high_risk_review,73.53099999999999,3.95,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""spin|tail""}",verified_explicit_review
 859,milieu,middle ground; middle; center; social circle; milieu,kaikki,73.478,5.17,False,True,False,False,True,False,False,omw,"{""kaikki"": ""center|circle|ground|middle|milieu|social"", ""omw"": ""center|middle|milieu""}",verified
-860,enfuir,to flee; to escape (somewhere),kaikki,73.312,3.70,False,True,False,False,False,False,False,,"{""kaikki"": ""escape|flee|somewhere""}",review
+860,enfuir,to flee; run away; escape (usually s'enfuir),explicit_high_risk_review,73.312,3.70,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""escape|flee""}",verified_explicit_review
 861,cuisine,kitchen,freedict,73.234,4.75,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""kitchen"", ""kaikki"": ""kitchen"", ""omw"": ""kitchen""}",verified_strong
 862,fenêtre,window,freedict,73.067,4.52,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""window"", ""kaikki"": ""window"", ""omw"": ""window""}",verified_strong
 863,construire,to build,kaikki,73.06100000000002,4.69,False,True,False,False,True,False,False,omw,"{""kaikki"": ""build"", ""omw"": ""build""}",verified
@@ -914,9 +914,9 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 913,vin,wine,freedict,68.28500000000001,4.79,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""wine"", ""kaikki"": ""wine"", ""omw"": ""wine""}",verified_strong
 914,trace,trace; track,freedict,68.27199999999999,4.37,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""trace|track"", ""kaikki"": ""trace|track"", ""omw"": ""trace|track""}",verified_strong
 915,regretter,to regret; to miss; to wish something had not happened or occurred,kaikki,68.18199999999997,3.99,False,True,False,False,True,False,False,omw,"{""kaikki"": ""had|happen|miss|not|occurr|regret|wish"", ""omw"": ""regret""}",verified
-916,coincer,to get stuck; to turn a corner; to cause a problem,kaikki,68.14000000000001,3.18,False,True,False,False,False,False,False,,"{""kaikki"": ""cause|corner|get|problem|stuck|turn""}",review
+916,coincer,to jam; get stuck; trap; wedge,explicit_high_risk_review,68.14000000000001,3.18,False,True,False,False,False,False,False,kaikki,"{""kaikki"": ""get|stuck""}",verified_explicit_review
 917,demande,demand; request (act of requesting); second-person singular imperative,kaikki,68.047,5.51,False,True,False,False,True,False,False,omw,"{""kaikki"": ""act|demand|imperative|request|second-person"", ""omw"": ""act|demand|request""}",verified
-918,nul,"lame; a draw; no, none",kaikki,68.003,4.77,False,True,False,False,False,False,False,,"{""kaikki"": ""draw|lame|no|none""}",review
+918,nul,no; none; worthless/lousy; draw/tie,explicit_high_risk_review,68.003,4.77,False,True,False,False,True,False,False,kaikki|omw,"{""kaikki"": ""draw|no|none"", ""omw"": ""worthles""}",verified_explicit_review
 919,laisse,"laisse; foreshore; leash, lead",kaikki,67.95299999999999,5.17,False,True,False,False,True,False,False,omw,"{""kaikki"": ""foreshore|laisse|lead|leash"", ""omw"": ""lead|leash""}",verified
 920,lequel,which one; which (masculine singular),explicit_high_risk_review,67.925,5.08,False,True,False,False,False,True,False,kaikki,"{""kaikki"": ""which one""}",verified_explicit_review
 921,code,code,kaikki,67.842,5.00,False,True,False,False,True,False,False,omw,"{""kaikki"": ""code"", ""omw"": ""code""}",verified
@@ -951,7 +951,7 @@ rank,front,meaning,meaning_selection,frequency,wordfreq_zipf,legacy_agrees,kaikk
 950,briser,to break; snap; to become broken; snap,kaikki,65.311,4.11,False,True,False,False,True,False,False,omw,"{""kaikki"": ""become|break|broken|snap"", ""omw"": ""become|break""}",verified
 951,rapide,"fast, rapid; express (fast train); fast; rapidly; quickly",kaikki,65.306,4.82,False,True,False,False,True,True,False,omw,"{""kaikki"": ""expres|fast|quickly|rapid|rapidly|train"", ""omw"": ""fast|quickly|rapid|rapidly""}",verified
 952,camion,lorry; truck,freedict,65.234,4.27,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""lorry|truck"", ""kaikki"": ""lorry|truck"", ""omw"": ""lorry|truck""}",verified_strong
-953,bande,bend; stripe; cushion,kaikki,65.187,4.96,False,True,False,False,False,False,False,,"{""kaikki"": ""bend|cushion|stripe""}",review
+953,bande,band; group; strip; tape,explicit_high_risk_review,65.187,4.96,False,False,False,False,True,False,False,omw,"{""omw"": ""band|group|strip|tape""}",verified_explicit_review
 954,défendre,defend,freedict,65.17299999999999,4.70,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""defend"", ""kaikki"": ""defend"", ""omw"": ""defend""}",verified_strong
 955,accompagner,accompany,freedict,64.92299999999999,4.29,False,True,True,False,True,False,False,kaikki|omw,"{""freedict"": ""accompany"", ""kaikki"": ""accompany"", ""omw"": ""accompany""}",verified_strong
 956,chaussure,shoe,freedict,64.918,3.91,False,True,True,False,True,True,False,kaikki|omw,"{""freedict"": ""shoe"", ""kaikki"": ""shoe"", ""omw"": ""shoe""}",verified_strong
