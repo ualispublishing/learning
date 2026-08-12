@@ -31,12 +31,28 @@ RAW_ARTIFACTS = [
 # Direct tripwires for errors that previously passed morphology-only validation.
 EXACT_EXPECTATIONS = {
     1: "in", 4: "on", 6: "to", 22: "not", 23: "but", 32: "well",
-    45: "yes", 83: "very", 89: "also", 112: "thank", 127: "hello",
-    133: "around", 148: "sorry", 194: "therefore", 269: "must",
-    281: "because", 326: "thus", 347: "exclamative", 353: "these",
-    460: "as if", 500: "speech", 503: "throughout", 550: "results",
-    626: "together", 634: "except", 700: "still", 710: "when",
-    785: "oil", 798: "sleep", 852: "treatment", 927: "according to",
+    33: "wants", 45: "yes", 83: "very", 89: "also", 112: "thank", 127: "hello",
+    133: "around", 148: "sorry", 194: "therefore", 243: "counts", 269: "must",
+    281: "because", 296: "player", 326: "thus", 336: "as for", 347: "exclamative",
+    353: "these", 389: "Islamic", 460: "as if", 479: "safe", 489: "sky",
+    500: "speech", 503: "throughout", 508: "national", 550: "results", 603: "brought",
+    626: "together", 632: "one", 634: "except", 700: "still", 710: "when",
+    724: "welcome", 732: "truth", 766: "safety", 785: "oil", 798: "sleep",
+    852: "treatment", 927: "according to", 943: "kisses", 999: "interview",
+}
+
+# High-risk source-form assertions. These are deliberately independent of the
+# dynamically loaded repair map so a bad future repair cannot redefine the test.
+EXACT_FRONT_EXPECTATIONS = {
+    209: "نسوة",
+    292: "ألا",
+    296: "لاعب",
+    353: "هؤلاء",
+    389: "إسلامي",
+    479: "سالم",
+    489: "سماء",
+    724: "أهلا",
+    766: "سلامة",
 }
 
 
@@ -74,6 +90,9 @@ def main() -> None:
             row_flags.append("invalid_front")
         if i > len(expected) or front != expected[i-1]:
             row_flags.append("rank_inventory_mismatch")
+        expected_front = EXACT_FRONT_EXPECTATIONS.get(i)
+        if expected_front and front != expected_front:
+            row_flags.append("critical_front_mismatch")
         m = RANK_RE.search(back)
         if not m or int(m.group(1)) != i:
             row_flags.append("rank_metadata_mismatch")
