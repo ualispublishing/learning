@@ -8,6 +8,7 @@ on:
       - 'scripts/refine_french_urdu_candidate_meanings.py'
       - 'scripts/refine_french_urdu_candidate_meanings_v2.py'
       - 'scripts/refine_french_urdu_candidate_meanings_v3.py'
+      - 'scripts/refine_french_urdu_candidate_meanings_v4.py'
       - 'scripts/audit_french_urdu_core_candidates.py'
       - 'scripts/audit_french_urdu_core_candidates_v2.py'
       - '.github/workflows/build-french-urdu-core-candidates.yml'
@@ -96,7 +97,7 @@ jobs:
 
       - name: Refine French meanings with reviewed exceptions
         run: |
-          python scripts/refine_french_urdu_candidate_meanings_v3.py \
+          python scripts/refine_french_urdu_candidate_meanings_v4.py \
             --language french \
             --legacy french_top1000.csv \
             --kaikki /tmp/kaikki-french.jsonl \
@@ -121,7 +122,7 @@ jobs:
 
       - name: Refine Urdu meanings with reviewed exceptions
         run: |
-          python scripts/refine_french_urdu_candidate_meanings_v3.py \
+          python scripts/refine_french_urdu_candidate_meanings_v4.py \
             --language urdu \
             --legacy urdu_top1000.csv \
             --kaikki /tmp/kaikki-urdu.jsonl
