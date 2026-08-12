@@ -9,12 +9,20 @@
   "top1000_overlap_rows": 0,
   "placeholder_rows": 0,
   "status_counts": {
-    "explicit_review_required": 1,
+    "manual_verified": 1,
     "verified_strong": 1999
   },
-  "review_rows": 1,
+  "review_rows": 0,
   "blocking_problems": 0,
   "problems": [],
-  "promotion_gate": "REVIEW_REQUIRED",
-  "policy": "Never auto-promote weak semantic rows; frequency/morphology attestation is not treated as semantic proof."
+  "promotion_gate": "PASS",
+  "policy": "Never auto-promote weak semantic rows; frequency/morphology attestation is not treated as semantic proof.",
+  "manual_resolutions_applied": [
+    {
+      "rank": "1001",
+      "front": "les",
+      "meaning": "the (plural); them",
+      "reason": "explicit human review of conservative semantic-overlap false negative"
+    }
+  ]
 }
