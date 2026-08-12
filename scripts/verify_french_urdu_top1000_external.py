@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Independent semantic/POS fact checks for French and Urdu legacy Top-1000 decks.
+"""Independent semantic/POS fact checks for French and Urdu Top-1000 decks.
 
-The script never edits learner decks. It triangulates existing English glosses
-against English Wiktionary entries and Open Multilingual Wordnet where available.
-Coverage gaps are reported as gaps, not errors.
+The script never edits learner decks. It triangulates existing English learner
+meanings against English Wiktionary entries and Open Multilingual Wordnet where
+available. Coverage gaps are reported as gaps, not errors.
 """
 from __future__ import annotations
 
@@ -21,12 +21,12 @@ import wn
 
 ROOT = Path(__file__).resolve().parents[1]
 TRANSLATION_RE = re.compile(r"(?m)^EN:\s*(.+?)\s*$")
+MEANING_RE = re.compile(r"(?m)^Meaning:\s*(.+?)\s*$")
 DEFINITION_RE = re.compile(r"(?m)^\(EN\)\s*(.+?)\s*$")
 WORD_RE = re.compile(r"[a-z]+(?:'[a-z]+)?")
 TEMPLATE_RE = re.compile(r"\{\{[^{}]*\}\}")
 LINK_RE = re.compile(r"\[\[(?:[^\]|]+\|)?([^\]]+)\]\]")
 TAG_RE = re.compile(r"<[^>]+>")
-HEADING_RE = re.compile(r"(?m)^===+\s*([^=\n]+?)\s*===+\s*$")
 
 STOP = {
     "a", "an", "the", "to", "of", "and", "or", "for", "as", "be", "is", "are",
@@ -44,11 +44,6 @@ CONFIG = {
     "french": {"file": "french_top1000.csv", "lang": "fr", "section": "French"},
     "urdu": {"file": "urdu_top1000.csv", "lang": "ur", "section": "Urdu"},
 }
-
-
-def attr(obj, name):
-    x = getattr(obj, name, None)
-    return x() if callable(x) else x
 
 
 def tokens(text: str) -> set[str]:
@@ -101,7 +96,7 @@ def fetch_wiki(titles: list[str]) -> dict[str, str]:
             "rvprop": "content", "rvslots": "main", "titles": "|".join(batch), "redirects": "1",
         }
         req = Request(endpoint + "?" + urlencode(params), headers={
-            "User-Agent": "ualispublishing-learning-verifier/1.0 (educational lexical audit)"
+            "User-Agent": "ualispublishing-learning-verifier/1.1 (educational lexical audit)"
         })
         with urlopen(req, timeout=45) as r:
             data = json.load(r)
@@ -123,10 +118,11 @@ def load_rows(path: Path):
     out = []
     for rank, row in enumerate(rows, 1):
         back = row.get("Back", "") or ""
-        m = TRANSLATION_RE.search(back)
+        # Older decks used `EN:`; the promoted precision decks use `Meaning:`.
+        m = TRANSLATION_RE.search(back) or MEANING_RE.search(back)
         d = DEFINITION_RE.search(back)
         if not m:
-            raise SystemExit(f"{path.name} rank {rank}: missing EN translation")
+            raise SystemExit(f"{path.name} rank {rank}: missing English learner meaning")
         meaning = m.group(1).strip()
         definition = d.group(1).strip() if d else ""
         out.append({"rank": rank, "front": row.get("Front", "").strip(), "meaning": meaning, "definition": definition})
@@ -134,7 +130,6 @@ def load_rows(path: Path):
 
 
 def wordnet_for(lang: str):
-    # omw:1.4 is the stable indexed collection in current Wn documentation.
     try:
         return wn.Wordnet(lang=lang)
     except Exception:
@@ -144,14 +139,16 @@ def wordnet_for(lang: str):
 def wn_evidence(net, front: str, meaning: str):
     if net is None:
         return False, False, 0.0, "", 0
-    syns = net.synsets(front)
+    try:
+        syns = net.synsets(front)
+    except Exception:
+        return False, False, 0.0, "", 0
     if not syns:
         return False, False, 0.0, "", 0
     parts = []
     for syn in syns:
         definition = syn.definition()
         if definition: parts.append(definition)
-        # Many OMW wordnets contain English definitions or share ILI-linked semantics.
         for lemma in syn.lemmas():
             parts.append(lemma)
     sem, score, hits = overlap(meaning, " ; ".join(parts))
@@ -211,6 +208,8 @@ def audit(name: str):
 
 def main():
     ROOT.joinpath("audit").mkdir(exist_ok=True)
+    # OMW is optional corroboration. Current Wn/OMW network availability must not
+    # make a Wiktionary-based audit fail before any deck row is examined.
     try:
         wn.download("omw:1.4")
     except Exception as exc:
