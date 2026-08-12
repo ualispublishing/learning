@@ -8,7 +8,7 @@ wording, script contamination, and phrase-bank generation fingerprints.
 """
 from __future__ import annotations
 import csv, json, re, unicodedata
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -23,7 +23,6 @@ FIELD_RE={
  'pos':re.compile(r'(?ms)^Part of speech:\s*(.+?)(?=\n\n[A-Z][^\n]*:|\Z)'),
 }
 ARABIC=re.compile(r'[\u0600-\u06ff]')
-LATIN=re.compile(r'[A-Za-z]')
 MACHINE_POS=re.compile(r'(^|[|/\s])(postp|pron|propn|adp|aux|det|part|sconj|cconj|num|intj)([|/\s]|$)',re.I)
 STALE=re.compile(r'candidate only|not promoted|review required|unverified|placeholder',re.I)
 RAW_GLOSS=re.compile(r'\b(verbal noun of|feminine singular of|masculine singular of|plural of|alternative form of|inflection of)\b',re.I)
@@ -43,7 +42,7 @@ def normalized(s):
 
 def audit_row(name,idx,row):
  front=(row.get('Front') or '').strip(); back=(row.get('Back') or '').strip()
- flags=[]; severity='info'
+ flags=[]; severity='info'; stale_match=''
  meaning=extract(back,'meaning'); pos=extract(back,'pos'); rank=extract(back,'rank')
  def flag(code,sev='review'):
   nonlocal severity
@@ -51,7 +50,10 @@ def audit_row(name,idx,row):
   if sev=='block': severity='block'
   elif sev=='review' and severity!='block': severity='review'
 
- if STALE.search(back): flag('stale_candidate_or_review_label','block')
+ m=STALE.search(back)
+ if m:
+  stale_match=back[max(0,m.start()-90):min(len(back),m.end()+140)].replace('\n',' | ')
+  flag('stale_candidate_or_review_label','block')
  if UNDERSCORE.search(meaning): flag('raw_underscore_gloss','review')
  if ODD_SEPARATORS.search(pos): flag('machine_pos_separator','review')
  if MACHINE_POS.search(pos): flag('machine_pos_abbreviation','review')
@@ -63,10 +65,9 @@ def audit_row(name,idx,row):
  if name.startswith('french_') and ARABIC.search(front): flag('wrong_script_front','block')
  if name=='arabic_phrase_bank.csv':
   if GENERATED_PHRASE.search(back): flag('generated_phrase_wording_fingerprint','review')
-  # Phrase fronts should be genuinely multiword or established fixed expressions; single tokens are suspect.
   if len(front.split())<2: flag('phrase_bank_single_token','review')
   if 'Definition:' not in back or 'Example:' not in back or 'Translation:' not in back: flag('phrase_missing_public_fields','block')
- return {'file':name,'row':idx,'front':front,'rank':rank,'meaning':meaning,'pos':pos,'flags':flags,'severity':severity,'back_preview':back[:500].replace('\n',' | ')}
+ return {'file':name,'row':idx,'front':front,'rank':rank,'meaning':meaning,'pos':pos,'flags':flags,'severity':severity,'stale_match':stale_match,'back_preview':back[:500].replace('\n',' | ')}
 
 def main():
  AUDIT.mkdir(exist_ok=True)
@@ -93,6 +94,8 @@ def main():
   'public_ready_by_heuristics':not queue,
  }
  (AUDIT/'public_readiness_audit.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+ compact=[{k:r[k] for k in ('file','row','front','rank','meaning','pos','severity','flags','stale_match')} for r in queue]
+ (AUDIT/'public_readiness_review_compact.json').write_text(json.dumps(compact,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
  fields=['file','row','front','rank','meaning','pos','severity','flags','back_preview']
  with (AUDIT/'public_readiness_review_queue.csv').open('w',encoding='utf-8',newline='') as f:
   w=csv.DictWriter(f,fieldnames=fields); w.writeheader()
