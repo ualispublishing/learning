@@ -1,7 +1,9 @@
 {
   "arabic_top1000": {
     "rows": 1000,
-    "review_rows": 123,
+    "corpus_mismatch_signals": 123,
+    "unresolved_rows": 0,
+    "educator_clearance": "PASS",
     "support_histogram": {
       "current_supported": 873,
       "current_unsupported": 127
@@ -9,18 +11,19 @@
   },
   "arabic_top3000": {
     "rows": 2000,
-    "block_rows": 33,
-    "review_rows": 268,
-    "manual_cleared_rows": 32,
+    "block_rows": 0,
+    "review_rows": 3,
+    "unresolved_rows": 3,
+    "cleared_mismatch_rows": 318,
     "support_histogram": {
-      "current_supported": 1555,
-      "current_unsupported": 445
+      "corpus_supported": 1567,
+      "source_supported": 2000,
+      "corpus_unsupported": 433
     },
     "category_counts": {
-      "review:noun_pos_with_adjectival_public_gloss": 2,
-      "review:published_gloss_lacks_modern_corpus_support": 266,
-      "block:modern_corpus_supports_kaikki_alternative_not_published_gloss": 33,
-      "manual_clear:validated_source_sense_or_homograph_false_positive": 32
+      "review:noun_pos_with_adjectival_public_gloss": 3,
+      "source_clear:current_gloss_independently_supported": 265,
+      "manual_clear:validated_source_sense_or_homograph_false_positive": 53
     }
   },
   "arabic_a1_reader_alignment": {
@@ -408,5 +411,5 @@
       }
     ]
   },
-  "policy": "Corpus evidence is a sense-selector only, never a meaning author. Continuation rows are blocked only when current meaning lacks corpus support while an alternative already in Kaikki matches the corpus signal. Manually adjudicated valid source senses and homograph/POS false positives are recorded separately and excluded from unresolved block totals. Reader targets require live-card sense compatibility and individual second-pass verification or ranks-1-100 educator clearance."
+  "policy": "Corpus evidence is a sense-selector only, never a meaning author. A continuation card remains unresolved only for a competing corpus+Kaikki sense, a POS/form issue, or a corpus mismatch that lacks detectable support from the stored CALIMA/Kaikki evidence. Independently source-supported corpus mismatches and manually adjudicated valid source senses are cleared and retained as audit evidence. Top-1000 corpus mismatches are non-blocking signals because that deck has completed educator/source-tight clearance."
 }
