@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "purpose": "Planning inventory for Arabic, French, and Urdu graded reading passages. Targets guide exposure and comprehension tasks; they are not CEFR certification claims.",
+  "shared_progression": {
+    "A1": {
+      "grammar_functions": ["simple affirmative clauses", "basic negation", "yes-no questions", "basic wh-questions", "pronouns and reference", "basic possession", "present/time-now expressions", "simple coordination with and/but/or", "basic place and direction phrases"],
+      "discourse": ["single clear topic", "local sentence-to-sentence reference", "simple chronological order", "explicit contrast", "explicit cause or result", "restatement/paraphrase", "concrete inference from nearby context"]
+    },
+    "A2": {
+      "grammar_functions": ["past and future reference", "modality and ability", "comparatives", "basic relative clauses", "object reference", "subordination with because/when/if", "simple commands and requests", "frequency and duration"],
+      "discourse": ["short narrative chains", "problem-solution", "cause-effect across sentences", "basic paragraphing", "pronoun/reference chains", "simple viewpoint", "summary of explicit main idea"]
+    },
+    "B1": {
+      "grammar_functions": ["wider tense-aspect contrasts", "conditionals", "reported information", "passive or impersonal constructions", "expanded relative clauses", "clause chaining", "degree and qualification", "basic hypothetical language"],
+      "discourse": ["multi-paragraph cohesion", "motive and reason inference", "main idea versus supporting detail", "sequence with flashback or comparison", "stance markers", "paraphrase across clauses", "summary and near transfer"]
+    },
+    "B2": {
+      "grammar_functions": ["complex subordination", "concession", "advanced modality and hedging", "nominalization", "participial/non-finite compression where natural", "reported speech and attribution", "passive/impersonal variation", "counterfactual and nuanced condition"],
+      "discourse": ["argument and counterargument", "evidence versus claim", "implicit causal links", "paired viewpoints", "cohesive reference over distance", "author stance", "distinguishing fact, inference, and opinion"]
+    },
+    "C1": {
+      "grammar_functions": ["dense clause embedding", "register-sensitive modality", "advanced information structure", "ellipsis and substitution where natural", "rhetorical parallelism", "complex nominal style", "fine-grained tense/aspect choice", "controlled stylistic variation"],
+      "discourse": ["implicit stance", "assumption identification", "rhetorical function", "synthesis across sections", "qualified claims", "genre conventions", "subtle cohesion", "controlled ambiguity and inference"]
+    },
+    "C2": {
+      "grammar_functions": ["full range of standard grammar", "idiomatic and figurative constructions", "marked information structure", "register shifts", "compressed professional/academic syntax", "literary syntactic variation", "scope ambiguity when purposeful", "rhetorical manipulation of syntax"],
+      "discourse": ["reconstructing complex argument", "irony and implicature", "intertextual or allusive meaning when supported", "multi-source synthesis", "rhetorical critique", "fine register distinctions", "competing interpretations", "evaluating evidence and hidden premises"]
+    }
+  },
+  "language_specific": {
+    "arabic": {
+      "default_variety": "Modern Standard Arabic",
+      "A1": ["nominal versus verbal sentences", "basic gender agreement", "singular pronouns", "هذا/هذه", "basic prepositions", "basic possessive constructions", "ليس and simple negation", "هل and common question words"],
+      "A2": ["كان and future reference", "sound/plural agreement patterns in high-frequency contexts", "basic idafa chains", "relative pronouns", "object suffixes in common contexts", "إن/أن in controlled uses"],
+      "B1": ["verb-form families in context", "more varied negation", "relative and subordinate clauses", "active/passive contrasts", "masdar constructions", "agreement with non-human plurals"],
+      "B2": ["concessive and causal connectors", "participles and verbal nouns", "complex idafa/nominal structures", "reported discourse", "formal impersonal/passive style"],
+      "C1_C2": ["register-sensitive connectors", "rhetorical parallelism", "dense nominalization", "fine modality", "classical/literary echoes only when clearly labeled and pedagogically justified"]
+    },
+    "french": {
+      "default_register": "contemporary standard French",
+      "A1": ["articles and gender", "être/avoir", "present tense of common verbs", "ne...pas and everyday negation", "basic adjective agreement", "à/de contractions", "simple questions"],
+      "A2": ["passé composé", "near future and simple future in common use", "reflexive verbs", "direct/indirect object pronouns", "comparatives", "qui/que/où relative clauses"],
+      "B1": ["passé composé versus imparfait", "conditional for politeness/hypothesis", "y/en", "reported speech", "common subjunctive triggers", "expanded relative pronouns"],
+      "B2": ["subjunctive/indicative contrasts", "conditionnel and counterfactual patterns", "passive and pronominal alternatives", "nominalization", "formal connectors and concession"],
+      "C1_C2": ["register shifts", "literary/journalistic tense recognition where useful", "advanced pronoun/reference chains", "idiomatic syntax", "rhetorical and stylistic variation"]
+    },
+    "urdu": {
+      "canonical_script": "Urdu script; no Roman Urdu as canonical text",
+      "A1": ["basic SOV order", "ہے/ہیں", "basic gender agreement", "کا/کی/کے", "میں/پر/سے/کو", "simple negation", "basic pronouns and demonstratives"],
+      "A2": ["common perfective/imperfective patterns", "کرنا/ہونا compounds", "oblique forms with postpositions", "نے in controlled past-transitive contexts", "comparatives", "requests and future reference"],
+      "B1": ["aspect and auxiliary combinations", "relative-correlative constructions", "complex predicates", "reported information", "passive constructions", "honorific agreement"],
+      "B2": ["nominal and verbal subordination", "advanced postpositional phrases", "formal connectors", "hypothetical/counterfactual language", "Perso-Arabic learned vocabulary in transparent context"],
+      "C1_C2": ["formal journalistic/academic style", "idiom and collocation", "register-sensitive Persian/Arabic-derived vocabulary", "rhetorical structures", "literary variation without drifting into archaic learner-hostile prose"]
+    }
+  },
+  "question_progression": {
+    "A1": ["explicit detail", "reference", "sequence", "high-constraint word inference", "simple cloze"],
+    "A2": ["explicit detail", "cause/reason", "reference chain", "word inference", "paraphrase", "cloze transfer"],
+    "B1": ["main idea", "motive", "inference", "summary", "paraphrase", "cloze/transfer"],
+    "B2": ["claim/evidence", "stance", "implication", "compare viewpoints", "lexical nuance", "transfer"],
+    "C1": ["rhetorical function", "assumption", "implicit stance", "synthesis", "register", "evidence evaluation"],
+    "C2": ["argument reconstruction", "implicature/irony", "rhetorical critique", "multiple plausible interpretations", "multi-source synthesis", "precision reformulation"]
+  }
+}
