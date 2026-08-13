@@ -6,6 +6,7 @@ on:
     paths:
       - 'scripts/audit_arabic_modern_sense_risk.py'
       - 'scripts/repair_arabic_second_pass_high_frequency.py'
+      - 'scripts/repair_arabic_second_pass_101_500.py'
       - 'scripts/build_arabic_top100_review_snapshot.py'
       - 'scripts/build_arabic_101_500_review_snapshot.py'
       - '.github/workflows/audit-arabic-modern-sense-risk.yml'
@@ -24,6 +25,8 @@ jobs:
         with: {python-version: '3.12'}
       - name: Apply confirmed second-pass high-frequency repairs
         run: python scripts/repair_arabic_second_pass_high_frequency.py
+      - name: Apply confirmed ranks 101-500 repairs
+        run: python scripts/repair_arabic_second_pass_101_500.py
       - name: Build ranks 1-100 educator review snapshot
         run: python scripts/build_arabic_top100_review_snapshot.py
       - name: Install corpus dictionary tooling
