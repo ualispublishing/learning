@@ -1,0 +1,39 @@
+name: Refine confirmed French glosses
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/refine_confirmed_french_glosses.py'
+      - '.github/workflows/refine-confirmed-french-glosses.yml'
+      - 'audit/run_french_gloss_refinement.request'
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Apply final French learner-gloss refinements
+        run: python scripts/refine_confirmed_french_glosses.py
+      - name: Rebuild reading lexicons
+        run: python reading/tools/build_ledgers.py
+      - name: Re-run public readiness audit
+        run: python scripts/audit_public_readiness.py
+      - name: Re-run live CSV attestation
+        run: python scripts/attest_live_csvs.py
+      - name: Commit refinement and evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add french_top1000.csv audit/confirmed_french_gloss_refinement.json audit/public_readiness_audit.json audit/public_readiness_review_queue.csv audit/public_readiness_review_compact.json audit/public_review_*.json audit/live_csv_attestation.json reading/lexicons reading/ledgers
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Refine confirmed French glosses and re-audit [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
