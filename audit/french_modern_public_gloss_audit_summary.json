@@ -1,0 +1,24 @@
+{
+  "french_top1000.csv": {
+    "rows": 1000,
+    "flagged_rows": 182,
+    "flag_counts": {
+      "no_modern_corpus_overlap": 127,
+      "overbundled_6plus_fragments": 42,
+      "meaning_over_16_words": 26,
+      "dictionary_prose_in_meaning": 9
+    }
+  },
+  "french_top3000.csv": {
+    "rows": 2000,
+    "flagged_rows": 286,
+    "flag_counts": {
+      "no_modern_corpus_overlap": 114,
+      "overbundled_6plus_fragments": 107,
+      "meaning_over_16_words": 89,
+      "dictionary_prose_in_meaning": 34
+    }
+  },
+  "overall_flagged": 468,
+  "policy": "Corpus evidence only selects among already-published sense fragments; it never authors a French meaning. Dictionary prose, very long bundles, and meanings lacking modern-corpus overlap are manual-review signals."
+}
