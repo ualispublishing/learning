@@ -1,104 +1,24 @@
 {
   "project": "Arabic, French, and Urdu graded reading curriculum A1-C2",
-  "version": 1,
   "updated": "2026-08-13",
   "overall_status": "in_progress",
-  "phase": "lexical_and_curriculum_ledger_setup",
-  "canonical_format": "JSONL",
-  "target": {
-    "languages": ["arabic", "french", "urdu"],
-    "cefr_levels": ["A1", "A2", "B1", "B2", "C1", "C2"],
-    "units_per_level": 10,
-    "passages_per_unit": 6,
-    "passages_per_level": 60,
-    "passages_per_language": 360,
-    "total_passages": 1080
-  },
-  "approved_passages": {
-    "total": 0,
-    "arabic": {"total": 0, "A1": 0, "A2": 0, "B1": 0, "B2": 0, "C1": 0, "C2": 0},
-    "french": {"total": 0, "A1": 0, "A2": 0, "B1": 0, "B2": 0, "C1": 0, "C2": 0},
-    "urdu": {"total": 0, "A1": 0, "A2": 0, "B1": 0, "B2": 0, "C1": 0, "C2": 0}
-  },
-  "calibration": {
-    "a1_arabic_unit_01": "not_started",
-    "a1_french_unit_01": "not_started",
-    "a1_urdu_unit_01": "not_started",
-    "a2_arabic_unit_01": "blocked_by_a1_calibration",
-    "a2_french_unit_01": "blocked_by_a1_calibration",
-    "a2_urdu_unit_01": "blocked_by_a1_calibration",
-    "b1_arabic_unit_01": "blocked_by_a2_calibration",
-    "b1_french_unit_01": "blocked_by_a2_calibration",
-    "b1_urdu_unit_01": "blocked_by_a2_calibration"
-  },
-  "completed_artifacts": [
-    "sources/reading-acquisition.json",
-    "docs/READING_PASSAGE_RESEARCH.md",
-    "docs/READING_PASSAGE_STANDARD.md",
-    "reading/README.md",
-    "reading/ROADMAP.md",
-    "reading/TASKS.md",
-    "reading/AGENT_HANDOFF.md",
-    "reading/STATUS.json",
-    "reading/schema/passage.schema.json"
+  "phase": "A1 Unit 01 calibration drafted",
+  "draft_passages": 18,
+  "approved_passages": 0,
+  "completed": [
+    "reading/planning/grammar_discourse_inventory.json",
+    "reading/planning/topic_genre_matrix.json",
+    "reading/overrides/source_lexicon_issues.json",
+    "reading/arabic/a1/passages.jsonl",
+    "reading/french/a1/CALIBRATION_UNIT_01.md",
+    "reading/urdu/a1/calibration/"
   ],
-  "pending_artifacts": [
-    "derived normalized reading lexicons",
-    "reading/ledgers/arabic_lexical_exposure.jsonl",
-    "reading/ledgers/french_lexical_exposure.jsonl",
-    "reading/ledgers/urdu_lexical_exposure.jsonl",
-    "grammar/discourse target inventories",
-    "topic/genre/domain matrix",
-    "A1 Unit 01 passage files for all three languages"
+  "pending": [
+    "derived lexical exposure ledgers",
+    "French and Urdu JSONL normalization",
+    "measured lexical coverage",
+    "deep review of all 18 drafts"
   ],
-  "source_language_data": {
-    "arabic": ["arabic_top1000.csv", "arabic_top3000.csv", "arabic_phrase_bank.csv"],
-    "french": ["french_top1000.csv", "french_top3000.csv"],
-    "urdu": ["urdu_top1000.csv", "urdu_top3000.csv"]
-  },
-  "key_policy": {
-    "validated_3000_is_c2": false,
-    "mutate_validated_root_csvs_for_reading_project": false,
-    "mass_generate_before_calibration": false,
-    "all_passages_original": true,
-    "answers_after_all_questions": true,
-    "speed_requires_comprehension": true,
-    "initial_speed_comprehension_gate": 0.8,
-    "important_target_minimum_meaningful_contacts": 6,
-    "arabic_default_variety": "Modern Standard Arabic",
-    "urdu_canonical_script": "Urdu script, not Roman Urdu",
-    "french_default_register": "contemporary standard French"
-  },
-  "coverage_targets": {
-    "fluency": [0.985, 0.995],
-    "instructional": [0.97, 0.985],
-    "stretch": [0.95, 0.975]
-  },
-  "new_lexical_target_planning_ranges": {
-    "A1": [1, 3],
-    "A2": [2, 4],
-    "B1": [3, 6],
-    "B2": [4, 8],
-    "C1": [6, 10],
-    "C2": [8, 14]
-  },
-  "current_blockers": [],
-  "next_actions": [
-    "Build derived normalized lexical ledgers from the validated root CSVs without modifying the root CSVs",
-    "Create grammar/discourse target inventories and topic/genre/domain matrix",
-    "Produce and audit Arabic A1 Unit 01 (6 passages)",
-    "Produce and audit French A1 Unit 01 (6 passages)",
-    "Produce and audit Urdu A1 Unit 01 (6 passages)",
-    "Review the full 18-passage A1 calibration set before scaling"
-  ],
-  "do_not_scale_before": "All three A1 Unit 01 calibration sets pass linguistic, pedagogical, lexical-load, question-answer, and schema review",
-  "continuity_files": [
-    "reading/STATUS.json",
-    "reading/AGENT_HANDOFF.md",
-    "reading/ROADMAP.md",
-    "reading/TASKS.md",
-    "docs/READING_PASSAGE_STANDARD.md",
-    "docs/READING_PASSAGE_RESEARCH.md",
-    "reading/schema/passage.schema.json"
-  ]
+  "next_action": "Build the derived lexical ledgers, measure coverage, then approve or rewrite all 18 drafts before scaling.",
+  "do_not_scale_before": "All 18 A1 Unit 01 drafts pass every reading-passage quality gate."
 }
