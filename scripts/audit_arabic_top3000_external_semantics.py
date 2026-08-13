@@ -147,3 +147,5 @@ def main():
  s={'rows':2000,'status_counts':counts,'kaikki_entry_coverage':sum(r['kaikki_entry'] for r in results),'kaikki_semantic_agreement':sum(r['kaikki_semantic_agreement'] for r in results),'omw_entry_coverage':sum(r['omw_entry'] for r in results),'omw_semantic_agreement':sum(r['omw_semantic_agreement'] for r in results),'wordfreq_attested':sum(r['wordfreq_attested'] for r in results),'calima_exact':sum(r['calima_exact'] for r in results),'explicit_review_rows':len(review),'promotion_gate':'PASS' if not review else 'REVIEW_REQUIRED','confirmed_live_modern_sense_repairs_applied':applied}
  (AUDIT/'arabic_top3000_external_semantic_audit_summary.json').write_text(json.dumps(s,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');print(json.dumps(s,ensure_ascii=False,indent=2))
 if __name__=='__main__':main()
+
+# Refresh hook: apply the latest confirmed POS/form review data.
