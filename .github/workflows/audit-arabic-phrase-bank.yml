@@ -4,7 +4,9 @@ on:
   workflow_dispatch:
   push:
     paths:
+      - 'scripts/polish_arabic_phrase_examples.py'
       - 'scripts/audit_arabic_phrase_bank.py'
+      - 'scripts/audit_arabic_phrase_naturalness_v2.py'
       - '.github/workflows/audit-arabic-phrase-bank.yml'
       - 'audit/run_phrase_bank_deep_audit.request'
 
@@ -21,15 +23,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Apply confirmed phrase corrections
+        run: python scripts/polish_arabic_phrase_examples.py
+      - name: Re-run phrase naturalness audit
+        run: python scripts/audit_arabic_phrase_naturalness_v2.py
       - name: Audit all current phrase-bank rows
         run: python scripts/audit_arabic_phrase_bank.py
-      - name: Commit audit evidence
+      - name: Commit repaired bank and audit evidence
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add audit/arabic_phrase_bank_audit.csv audit/arabic_phrase_bank_review_queue.csv audit/arabic_phrase_bank_audit_summary.json
+          git add arabic_phrase_bank.csv audit/arabic_phrase_example_polish_summary.json audit/arabic_phrase_naturalness_v2_summary.json audit/arabic_phrase_naturalness_v2_queue.json audit/arabic_phrase_bank_audit.csv audit/arabic_phrase_bank_review_queue.csv audit/arabic_phrase_bank_audit_summary.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Audit Arabic phrase bank deeply [skip ci]'
+          git commit -m 'Repair and audit Arabic phrase bank [skip ci]'
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
