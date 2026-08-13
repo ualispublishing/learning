@@ -5,6 +5,7 @@ The external periodic-review app consumes flashcards from the repository's `subj
 ## Rule
 - `subjects/**/knowledge.json` and `subjects/**/practice.json` = active review material.
 - `archive/flashcards/**` = preserved but excluded from active periodic review.
+- Finished standalone datasets indexed under `completed/` = reusable study/reference material, but **not automatically active review material**.
 
 When the user pivots subjects, do not delete old cards. Move paused decks from `subjects/` to `archive/flashcards/<subject>/...` while preserving the original hierarchy and JSON unchanged.
 
