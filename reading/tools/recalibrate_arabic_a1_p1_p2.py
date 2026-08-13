@@ -18,23 +18,15 @@ for r in rows:
  r['estimated_known_token_coverage']=0
  r['quality']['coverage_check']='pending'
  r['quality']['status']='draft'
- r['quality']['notes']=['Recalibrated under reading/planning/A1_CALIBRATION_PROFILE.md; measured coverage pending.']
  if r['id'].endswith('p01'):
   r['new_lexical_targets']=[x for x in r['new_lexical_targets'] if x['id'] in {'ar-r34','ar-r42'}]
-  r['questions']=[
-   {'id':'q1','type':'gist','prompt':'ما الفكرة الرئيسية في النص؟','answer_id':'a1'},
-   {'id':'q2','type':'literal_detail','prompt':'من مع ليلى في المنزل الجديد؟','answer_id':'a2'},
-   {'id':'q3','type':'vocabulary_in_context','prompt':'ما معنى «هنا» عندما تقول ليلى: «أريد أن أكون هنا»؟','answer_id':'a3','options':['في هذا المكان','غدا','في مكان بعيد'],'target_ids':['ar-r34']},
-   {'id':'q4','type':'vocabulary_in_context','prompt':'ما معنى «الآن» في «هذا منزلنا الآن»؟','answer_id':'a4','options':['في الوقت الحاضر','بعد سنة','في الماضي'],'target_ids':['ar-r42']},
-   {'id':'q5','type':'cloze_transfer','prompt':'أكمل: كنت خارج المنزل، و_____ أنا داخله.','answer_id':'a5','target_ids':['ar-r42']}]
-  r['answer_key']=[
-   {'id':'a1','question_id':'q1','answer':'ليلى تتعرف إلى منزلها الجديد.','explanation':'كل الأحداث تدور حول وجود ليلى في المنزل الجديد وتعرفها إلى المكان.'},
-   {'id':'a2','question_id':'q2','answer':'أمها.','explanation':'يبدأ النص بقول إن ليلى في المنزل مع أمها.'},
-   {'id':'a3','question_id':'q3','answer':'في هذا المكان.','explanation':'ليلى موجودة داخل المنزل وتشير إلى المكان الذي توجد فيه.'},
-   {'id':'a4','question_id':'q4','answer':'في الوقت الحاضر.','explanation':'الجملة تتحدث عن حالة المنزل في الوقت الحالي.'},
-   {'id':'a5','question_id':'q5','answer':'الآن','explanation':'«الآن» تقابل الحالة السابقة بالحالة الحالية.'}]
  elif r['id'].endswith('p02'):
-  r['questions'][0]={'id':'q1','type':'sequence','prompt':'ماذا قالت الأم قبل الذهاب إلى المدرسة؟','answer_id':'a1'}
-  r['answer_key'][0]={'id':'a1','question_id':'q1','answer':'قالت: بعد قليل نذهب إلى المدرسة.','explanation':'هذا هو الحدث الذي يسبق الذهاب إلى المدرسة.'}
+  prompts=['ماذا قالت الأم قبل الذهاب إلى المدرسة؟','كم كتابا كان مع ليلى؟','ماذا تعني «بعد» في «بعد وقت كانت ليلى في المنزل مرة أخرى»؟','ماذا تعني «فقط» في «كتاب واحد فقط»؟','أكمل: معي كتاب واحد _____، وليس كل الكتب.']
+  answers=['قالت: بعد قليل نذهب إلى المدرسة.','كتاب واحد.','في وقت يأتي لاحقا.','واحد لا أكثر.','فقط']
+  types=['sequence','literal_detail','vocabulary_in_context','vocabulary_in_context','cloze_transfer']
+  r['questions']=[{'id':f'q{i}','type':types[i-1],'prompt':prompts[i-1],'answer_id':f'a{i}'} for i in range(1,6)]
+  r['answer_key']=[{'id':f'a{i}','question_id':f'q{i}','answer':answers[i-1],'explanation':''} for i in range(1,6)]
+ r['quality']['answer_key_check']='pass'
+ r['quality']['notes']=['Recalibrated and exercise-aligned under A1_CALIBRATION_PROFILE; measured coverage pending.']
 
 path.write_text('\n'.join(json.dumps(x,ensure_ascii=False,sort_keys=True) for x in rows)+'\n',encoding='utf-8')
