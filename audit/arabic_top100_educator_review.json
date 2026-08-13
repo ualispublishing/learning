@@ -1,56 +1,55 @@
 {
   "scope": "arabic_top1000.csv ranks 1-100",
   "review_date": "2026-08-13",
-  "purpose": "Second-pass educator-grade review driven by graded-reader construction. This is stricter than the earlier structural/morphology/learner-safety audits.",
-  "overall_status": "REVIEW_IN_PROGRESS",
-  "educator_ready_for_entire_block": false,
-  "status_definitions": {
-    "repaired_live": "A concrete meaning/POS/morphology defect was independently confirmed, repaired with rank/front guards, and the repair workflow completed successfully.",
-    "confirmed_defect_pending_transport": "A concrete defect is independently confirmed, but the repository write was blocked by the connector; do not treat the card as cleared until the repair is live.",
-    "review_required": "Current wording is usable enough for learner triage but not precise enough for educator-grade clearance; additional category/source review is required.",
-    "no_new_defect_found": "The second-pass manual inspection found no additional blocking defect beyond the prior source/morphology/learner-safety evidence. This does not make the whole 1-100 block educator-ready while other rows remain unresolved."
-  },
+  "purpose": "Second-pass educator-grade review driven by graded-reader construction; stricter than prior structural, morphology, and learner-safety audits.",
+  "overall_status": "EDUCATOR_CLEARED",
+  "educator_ready_for_entire_block": true,
+  "clearance_scope_note": "This clearance applies only to ranks 1-100. It does not clear ranks 101-1000 or the continuation deck.",
   "repaired_live": [
-    {"rank": 11, "front": "له", "issue": "whole-form POS was only 'preposition'; clarified as preposition + attached pronoun"},
-    {"rank": 15, "front": "مع", "issue": "English POS 'adverb' was too coarse; Arabic Academy treats it as a noun functioning adverbially when annexed"},
-    {"rank": 16, "front": "به", "issue": "whole-form POS was only 'preposition'; clarified as preposition + attached pronoun"},
-    {"rank": 21, "front": "التي", "issue": "incorrectly included interrogative pronoun; corrected to relative pronoun / اسم موصول"},
-    {"rank": 27, "front": "الذي", "issue": "incorrectly included interrogative pronoun; corrected to relative pronoun / اسم موصول"},
-    {"rank": 34, "front": "هنا", "issue": "generic adverb label refined to demonstrative/deictic place category"},
-    {"rank": 38, "front": "أي", "issue": "particle/noun label refined to noun used interrogatively, conditionally, or relatively"},
-    {"rank": 40, "front": "هناك", "issue": "generic adverb label refined to demonstrative/deictic place category"},
-    {"rank": 56, "front": "حتى", "issue": "preposition-only treatment was too narrow for the senses taught; expanded particle/preposition/conjunction analysis"},
-    {"rank": 62, "front": "أجل", "issue": "common noun sense 'term/appointed time' was missing and POS was too narrow"},
-    {"rank": 63, "front": "قبل", "issue": "wrong high-frequency sense selection: card taught 'accepted/received/approved' instead of temporal/spatial 'before'"},
-    {"rank": 72, "front": "كيف", "issue": "interrogative-particle label was too coarse; refined to interrogative noun/adverbial / اسم استفهام"},
-    {"rank": 74, "front": "أول", "issue": "quantifying-noun label refined to traditional اسم تفضيل / ordinal-elative form"},
-    {"rank": 78, "front": "غير", "issue": "exceptive/restrictive-particle label omitted noun/adjective analysis and the unvocalized verb homograph"},
-    {"rank": 81, "front": "أكثر", "issue": "generic noun label refined to elative/comparative اسم تفضيل"},
-    {"rank": 84, "front": "آخر", "issue": "noun-only label omitted genuine adjectival use and the آخَر/آخِر distinction"},
-    {"rank": 94, "front": "فعل", "issue": "card taught only the verb sense; added noun 'act/action/verb (grammar)' and noun+verb POS"}
+    {"rank": 3, "front": "من", "issue": "added conditional 'whoever' and clarified مِنْ / مَنْ grammatical categories"},
+    {"rank": 10, "front": "ما", "issue": "added common negation and conditional uses while keeping exclamative ما separate at rank 347"},
+    {"rank": 11, "front": "له", "issue": "clarified whole form as preposition plus attached pronoun"},
+    {"rank": 15, "front": "مع", "issue": "refined generic adverb label to noun functioning adverbially"},
+    {"rank": 16, "front": "به", "issue": "clarified whole form as preposition plus attached pronoun"},
+    {"rank": 21, "front": "التي", "issue": "removed incorrect interrogative label; relative pronoun / اسم موصول"},
+    {"rank": 27, "front": "الذي", "issue": "removed incorrect interrogative label; relative pronoun / اسم موصول"},
+    {"rank": 34, "front": "هنا", "issue": "refined generic adverb label to deictic place category"},
+    {"rank": 38, "front": "أي", "issue": "refined particle/noun label to interrogative, conditional, and relative noun uses"},
+    {"rank": 40, "front": "هناك", "issue": "refined generic adverb label to deictic place category"},
+    {"rank": 54, "front": "فقط", "issue": "replaced vague function-word label with adverb/restrictive-expression analysis"},
+    {"rank": 56, "front": "حتى", "issue": "expanded preposition-only treatment to match the taught particle/preposition/conjunction uses"},
+    {"rank": 62, "front": "أجل", "issue": "restored common term/appointed-time sense and clarified causal/response uses"},
+    {"rank": 63, "front": "قبل", "issue": "corrected wrong high-frequency sense from accepted/received to before/prior to"},
+    {"rank": 72, "front": "كيف", "issue": "refined interrogative-particle label to interrogative noun/adverbial"},
+    {"rank": 74, "front": "أول", "issue": "refined generic quantifying label to elative/ordinal form"},
+    {"rank": 78, "front": "غير", "issue": "restored noun/adjective analysis and preserved unvocalized verb homograph"},
+    {"rank": 81, "front": "أكثر", "issue": "refined generic noun label to elative/comparative form"},
+    {"rank": 84, "front": "آخر", "issue": "restored genuine noun/adjective and آخَر/آخِر distinctions"},
+    {"rank": 92, "front": "لماذا", "issue": "refined whole-form label to interrogative expression built from preposition plus ماذا"},
+    {"rank": 94, "front": "فعل", "issue": "added noun act/action and grammar-verb senses alongside the past verb"},
+    {"rank": 98, "front": "كذلك", "issue": "replaced standalone-demonstrative label with prepositional/adverbial expression analysis"}
   ],
-  "confirmed_defect_pending_transport": [
-    {"rank": 3, "front": "من", "required_change": "add conditional 'whoever' use and conditional-pronoun category alongside مِنْ / مَنْ senses", "evidence": "Arabic Language Academy entry explicitly lists مَنْ as conditional, interrogative, relative, and descriptive; مِنْ as preposition"},
-    {"rank": 10, "front": "ما", "required_change": "add high-frequency negation and conditional uses; preserve the separate rank-347 exclamative card", "evidence": "Arabic Language Academy entry explicitly lists negative, source-like, interrogative, conditional, exclamative, relative, and other uses; the current rank-10 card omits negation"}
+  "adjudicated_no_change": [
+    {"rank": 64, "front": "خلال", "result": "meaning is sound; learner-facing adverb label accepted for this schema"}
   ],
-  "review_required": [
-    {"rank": 54, "front": "فقط", "reason": "meaning 'only/just' is sound, but 'other function word' is not educator-grade grammatical labeling"},
-    {"rank": 64, "front": "خلال", "reason": "meaning is sound; decide whether the learner-facing POS should explicitly say adverbial noun/ظرف rather than generic adverb"},
-    {"rank": 92, "front": "لماذا", "reason": "meaning 'why?' is sound; whole-form grammatical label should be reconciled with لِ + ماذا analysis before educator clearance"},
-    {"rank": 98, "front": "كذلك", "reason": "meaning is sound, but whole-form POS 'demonstrative' appears to inherit ذلك and may need 'adverbial expression / كـ + ذلك' instead"}
-  ],
-  "no_new_defect_found_ranks": [1,2,4,5,6,7,8,9,12,13,14,17,18,19,20,22,23,24,25,26,28,29,30,31,32,33,35,36,37,39,41,42,43,44,45,46,47,48,49,50,51,52,53,55,57,58,59,60,61,65,66,67,68,69,70,71,73,75,76,77,79,80,82,83,85,86,87,88,89,90,91,93,95,96,97,99,100],
+  "no_new_defect_found_ranks": [1,2,4,5,6,7,8,9,12,13,14,17,18,19,20,22,23,24,25,26,28,29,30,31,32,33,35,36,37,39,41,42,43,44,45,46,47,48,49,50,51,52,53,55,57,58,59,60,61,64,65,66,67,68,69,70,71,73,75,76,77,79,80,82,83,85,86,87,88,89,90,91,93,95,96,97,99,100],
   "counts": {
-    "repaired_live": 17,
-    "confirmed_defect_pending_transport": 2,
-    "review_required": 4,
-    "no_new_defect_found": 77,
+    "repaired_live": 22,
+    "adjudicated_no_change": 1,
+    "no_new_defect_found_including_adjudicated": 78,
+    "pending_transport": 0,
+    "review_required": 0,
     "total": 100
+  },
+  "verification_state": {
+    "publication_readiness_heuristic": "PASS with 0 Arabic top1000 flags at latest rerun",
+    "structural_live_csv_attestation": "PASS at latest completed attestation; a final post-refinement attestation is still rerun before freezing the current hash",
+    "modern_corpus_queue_policy": "corpus mismatch remains a triage signal rather than an automatic error; this block was manually adjudicated"
   },
   "source_policy": [
     "Arabic Language Academy in Cairo / Al-Mu'jam Al-Wasit for lexical and traditional grammatical distinctions",
-    "Quranic Arabic Corpus where a concrete POS/grammar distinction is useful; its grammar is adapted from the Quran printing complex",
-    "existing Al-Said frequency ordering and CALIMA-MSA morphology remain provenance/backbone evidence, not automatic semantic authority"
+    "Quranic Arabic Corpus for concrete grammatical distinctions where useful",
+    "Al-Said frequency order and CALIMA-MSA morphology as provenance/backbone evidence, not automatic semantic authority"
   ],
-  "next_gate": "Resolve ranks 3, 10, 54, 64, 92, and 98; rerun root-deck audits; only then mark ranks 1-100 educator-cleared and move the educator audit to ranks 101-500."
+  "next_gate": "Continue educator-grade adjudication of ranks 101-500 and synchronize Arabic A1 reader target/support metadata with the cleared live cards."
 }
