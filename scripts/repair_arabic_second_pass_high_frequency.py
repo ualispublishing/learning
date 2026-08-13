@@ -8,13 +8,19 @@ TARGET=ROOT/'arabic_top1000.csv'
 RANK_RE=re.compile(r'(?m)^Rank:\s*(\d+)\s*$')
 POS_RE=re.compile(r'(?m)^Part of speech:\s*(.+?)\s*$')
 MEAN_RE=re.compile(r'(?m)^Meaning:\s*(.+?)\s*$')
-SOURCE_LINE='- Arabic Language Academy in Cairo, Al-Mu\u2019jam Al-Wasit / grammar recheck — second-pass educator review (2026-08-13)'
+SOURCE_LINE='- Arabic Language Academy in Cairo, Al-Mu’jam Al-Wasit / grammar recheck — second-pass educator review (2026-08-13)'
 
 REPAIRS={
+  15:{'front':'مع','pos':'noun functioning adverbially (اسم؛ ويكون ظرفًا عند الإضافة)'},
+  21:{'front':'التي','pos':'relative pronoun (اسم موصول)'},
   27:{'front':'الذي','pos':'relative pronoun (اسم موصول)'},
   34:{'front':'هنا','pos':'demonstrative of place / adverbial deictic (اسم إشارة للمكان القريب)'},
   40:{'front':'هناك','pos':'demonstrative of place / adverbial deictic (اسم إشارة للمكان البعيد)'},
   56:{'front':'حتى','meaning':'until; up to; even; so that','pos':'particle / preposition / conjunction'},
+  63:{'front':'قبل','meaning':'before; prior to; earlier','pos':'temporal/spatial adverbial noun (ظرف زمان أو مكان)'},
+  72:{'front':'كيف','pos':'interrogative noun/adverbial (اسم استفهام مبني)'},
+  78:{'front':'غير','pos':'noun / adjective / perfect / past verb (غَيْر / غَيَّر)'},
+  94:{'front':'فعل','meaning':'act; action; verb (grammar); did; performed','pos':'noun / perfect / past verb (فِعْل / فَعَلَ)'},
 }
 
 def replace_field(back,rx,label,value):
