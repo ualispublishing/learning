@@ -2,11 +2,14 @@
   "files": {
     "arabic_top1000.csv": {
       "rows": 1000,
-      "flagged_rows": 0,
+      "flagged_rows": 19,
       "block_rows": 0,
-      "review_rows": 0,
-      "flag_counts": {},
-      "public_ready_by_heuristics": true
+      "review_rows": 19,
+      "flag_counts": {
+        "overbundled_meaning_5plus_senses": 19,
+        "very_long_meaning": 19
+      },
+      "public_ready_by_heuristics": false
     },
     "arabic_top3000.csv": {
       "rows": 2000,
@@ -59,10 +62,10 @@
   },
   "overall": {
     "rows": 9665,
-    "flagged_rows": 0,
+    "flagged_rows": 19,
     "block_rows": 0,
-    "review_rows": 0,
-    "public_ready_by_heuristics": true
+    "review_rows": 19,
+    "public_ready_by_heuristics": false
   },
   "policy": "Publication-readiness triage. Any block flag prevents public-ready status; review flags require linguistic inspection before claiming publication quality."
 }
