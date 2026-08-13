@@ -1,0 +1,28 @@
+name: Apply Arabic 501-1000 round1
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/refine_arabic_501_1000_round1.py'
+      - '.github/workflows/apply-arabic-501-1000-round1.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/refine_arabic_501_1000_round1.py
+      - run: |
+          git config user.name github-actions
+          git config user.email actions@github.com
+          git add arabic_top1000.csv
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Apply Arabic 501-1000 round1 refinements'
+          git pull --rebase origin main
+          git push origin HEAD:main
