@@ -1,6 +1,6 @@
 # Agent Operating Manual — Learning Repository
 
-This repository is the source of truth for the user's long-term self-study system. Agents must preserve its taxonomy, progression state, flashcard quality, and playlist quality rather than treating each conversation as an isolated recommendation task.
+This repository is the source of truth for the user's long-term self-study system. Agents must preserve its taxonomy, progression state, flashcard quality, playlist quality, and long-running curriculum state rather than treating each conversation as an isolated recommendation task.
 
 ## 1. Repository model
 
@@ -9,7 +9,7 @@ Two independent active-learning structures are maintained:
 - `subjects/` = what the actively learned knowledge is.
 - `playlists/` = how the user consumes the active learning material.
 
-Finished standalone datasets are indexed under `completed/`; audit/development evidence belongs under `audit/`; superseded or paused historical material belongs under `archive/`. Do not treat files in `audit/` or `archive/` as current learner material.
+Finished standalone datasets are indexed under `completed/`; long-running graded reading curriculum work lives under `reading/`; audit/development evidence belongs under `audit/`; superseded or paused historical material belongs under `archive/`. Do not treat files in `audit/` or `archive/` as current learner material.
 
 Never store subject knowledge according to its YouTube channel. Never store playlist state inside a flashcard deck.
 
@@ -35,7 +35,7 @@ Current audio-led tracks belong under `playlists/audio/`. A YouTube video may st
 
 ## 2. Progress protocol
 
-`progress/current.json` is the machine-readable current state. `progress/NEXT.md` is the human-readable pointer.
+`progress/current.json` is the machine-readable current study state. `progress/NEXT.md` is the human-readable study pointer.
 
 When the user says a lesson is finished:
 
@@ -192,7 +192,38 @@ Each source should have a stable source ID and canonical URL. Distinguish primar
 
 Do not cite a search-result snippet as if it were the underlying authority when a canonical page is available.
 
-## 7. Definition of done for a completed lesson
+## 7. Graded reading curriculum continuity
+
+The Arabic/French/Urdu A1–C2 graded reading project under `reading/` is a separate long-running content-development workflow.
+
+When a request concerns reading passages, graded readers, the multilingual reading curriculum, comprehension questions, or reading-speed passage data, read these files before acting:
+
+1. `reading/STATUS.json`
+2. `reading/AGENT_HANDOFF.md`
+3. `reading/ROADMAP.md`
+4. `reading/TASKS.md`
+5. `docs/READING_PASSAGE_RESEARCH.md`
+6. `docs/READING_PASSAGE_STANDARD.md`
+7. `reading/schema/passage.schema.json`
+
+`reading/STATUS.json` is the exact machine-readable project state. Do not infer passage counts or completion from chat memory.
+
+Core continuity rules:
+
+- canonical passage data is JSONL;
+- questions come after the passage and answers after all questions in reader-facing rendering;
+- vocabulary is introduced through natural contextual inference, then verified and transferred;
+- important vocabulary is recycled through spaced R1–R5 contacts and varied representations;
+- use supported introduction before aggressive interleaving;
+- reading speed counts only with adequate comprehension;
+- the validated 3,000-word language inventories are a foundation, not a complete C2 lexicon;
+- do not modify the validated root CSVs to make passage generation easier; derive reading ledgers;
+- calibrate small units before scaling;
+- only passages with `quality.status = approved` are publication-ready.
+
+Before a long reading-project session ends, update `reading/STATUS.json`, check off `reading/TASKS.md`, and update `reading/AGENT_HANDOFF.md` whenever a new decision, failure mode, or exception must survive into the next session.
+
+## 8. Definition of done for a completed lesson
 
 A lesson is fully processed when:
 
@@ -205,4 +236,4 @@ A lesson is fully processed when:
 - prerequisites still make sense;
 - the next lesson remains pedagogically appropriate.
 
-This protocol should allow a new agent to continue the learning program solely from repository state even without access to earlier chat context.
+This protocol should allow a new agent to continue the learning program or reading-curriculum project solely from repository state even without access to earlier chat context.
