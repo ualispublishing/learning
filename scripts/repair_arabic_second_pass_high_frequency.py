@@ -5,11 +5,10 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 TARGET=ROOT/'arabic_top1000.csv'
-RANK_RE=re.compile(r'(?m)^Rank:\s*(\d+)\s*$')
-POS_RE=re.compile(r'(?m)^Part of speech:\s*(.+?)\s*$')
-MEAN_RE=re.compile(r'(?m)^Meaning:\s*(.+?)\s*$')
+RANK_RE=re.compile(r'(?m)^Rank:\s*(\d+)')
 ACADEMY_SOURCE='- Arabic Language Academy in Cairo, Al-Mu’jam Al-Wasit / grammar recheck — second-pass educator review (2026-08-13)'
 MIXED_SOURCE='- Arabic Language Academy in Cairo / Quranic Arabic Corpus grammar recheck — second-pass educator review (2026-08-13)'
+FIELDS=re.compile(r'(?s)^\s*Rank:\s*(\d+)\s+Meaning:\s*(.*?)\s+Part of speech:\s*(.*?)\s+Sources:\s*(.*)\s*$')
 
 REPAIRS={
   3:{'front':'من','meaning':'from (مِنْ); who; whom; whoever (مَنْ)','pos':'preposition (مِنْ) / interrogative, relative, or conditional pronoun (مَنْ)','source':'mixed'},
@@ -24,7 +23,7 @@ REPAIRS={
   40:{'front':'هناك','pos':'demonstrative of place / adverbial deictic (اسم إشارة للمكان البعيد)'},
   54:{'front':'فقط','pos':'adverb / restrictive expression','source':'mixed'},
   56:{'front':'حتى','meaning':'until; up to; even; so that','pos':'particle / preposition / conjunction'},
-  62:{'front':'أجل','meaning':'term; appointed time; deadline/lifespan; for the sake of/because of (أَجْل); yes/indeed (أَجَلْ)','pos':'noun / adverbial-causal noun / response particle','source':'mixed'},
+  62:{'front':'أجل','meaning':'term/appointed time; for the sake of/because of (أَجْل); yes/indeed (أَجَلْ)','pos':'noun / adverbial-causal noun / response particle','source':'mixed'},
   63:{'front':'قبل','meaning':'before; prior to; earlier','pos':'temporal/spatial adverbial noun (ظرف زمان أو مكان)'},
   72:{'front':'كيف','pos':'interrogative noun/adverbial (اسم استفهام مبني)'},
   74:{'front':'أول','pos':'elative / ordinal form (اسم تفضيل)','source':'mixed'},
@@ -32,13 +31,15 @@ REPAIRS={
   81:{'front':'أكثر','pos':'elative / comparative form (اسم تفضيل)','source':'mixed'},
   84:{'front':'آخر','pos':'noun / adjective (آخَر / آخِر)','source':'mixed'},
   92:{'front':'لماذا','pos':'interrogative expression (لِ preposition + ماذا “what”)','source':'mixed'},
-  94:{'front':'فعل','meaning':'act; action; verb (grammar); did; performed','pos':'noun / perfect / past verb (فِعْل / فَعَلَ)'},
+  94:{'front':'فعل','meaning':'act/action; verb (grammar); did/performed','pos':'noun / perfect / past verb (فِعْل / فَعَلَ)'},
   98:{'front':'كذلك','pos':'prepositional/adverbial expression (كَ + ذلك)','source':'mixed'},
 }
 
-def replace_field(back,rx,label,value):
-    if not rx.search(back): raise SystemExit(f'missing {label}')
-    return rx.sub(f'{label}: {value}',back,count=1)
+def parse(back):
+    m=FIELDS.match(back or '')
+    if not m: raise SystemExit('cannot parse card fields')
+    rank,meaning,pos,sources=m.groups()
+    return int(rank),re.sub(r'\s+',' ',meaning).strip(),re.sub(r'\s+',' ',pos).strip(),sources.strip()
 
 def main():
     with TARGET.open(encoding='utf-8-sig',newline='') as f: rows=list(csv.DictReader(f))
@@ -47,16 +48,14 @@ def main():
     for rank,spec in REPAIRS.items():
         row=rows[rank-1]
         if row['Front']!=spec['front']: raise SystemExit(f'rank {rank}: expected {spec["front"]}, got {row["Front"]}')
-        back=row['Back']; m=RANK_RE.search(back)
-        if not m or int(m.group(1))!=rank: raise SystemExit(f'rank metadata mismatch at {rank}')
-        old_pos=POS_RE.search(back).group(1).strip(); old_mean=MEAN_RE.search(back).group(1).strip()
-        if 'meaning' in spec: back=replace_field(back,MEAN_RE,'Meaning',spec['meaning'])
-        back=replace_field(back,POS_RE,'Part of speech',spec['pos'])
+        card_rank,old_mean,old_pos,sources=parse(row['Back'])
+        if card_rank!=rank: raise SystemExit(f'rank metadata mismatch at {rank}')
+        meaning=spec.get('meaning',old_mean); pos=spec['pos']
         source=MIXED_SOURCE if spec.get('source')=='mixed' else ACADEMY_SOURCE
-        if source not in back:
-            back=back.rstrip()+"\n"+source
-        row['Back']=back
-        changed.append((rank,row['Front'],old_mean,spec.get('meaning',old_mean),old_pos,spec['pos']))
+        source_lines=[x.rstrip() for x in sources.splitlines() if x.strip()]
+        if source not in source_lines: source_lines.append(source)
+        row['Back']=f'Rank: {rank}\n\nMeaning: {meaning}\n\nPart of speech: {pos}\n\nSources:\n'+"\n".join(source_lines)
+        changed.append((rank,row['Front'],old_mean,meaning,old_pos,pos))
     with TARGET.open('w',encoding='utf-8',newline='') as f:
         w=csv.DictWriter(f,fieldnames=['Front','Back'],lineterminator='\n'); w.writeheader(); w.writerows(rows)
     print('repaired',len(changed),'rows')
