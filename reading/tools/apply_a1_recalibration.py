@@ -19,3 +19,4 @@ for row in rows:
  row['quality']['notes']=['Recalibrated under A1_CALIBRATION_PROFILE; final supported-coverage audit pending.']
  row['speed_training']['benchmark_eligible']=False
 path.write_text('\n'.join(json.dumps(x,ensure_ascii=False,sort_keys=True) for x in rows)+'\n',encoding='utf-8')
+# This file is also the explicit trigger for applying the latest staged configs.
