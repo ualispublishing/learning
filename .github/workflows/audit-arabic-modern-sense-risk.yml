@@ -1,0 +1,39 @@
+name: Audit Arabic modern sense risk
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/audit_arabic_modern_sense_risk.py'
+      - '.github/workflows/audit-arabic-modern-sense-risk.yml'
+      - 'audit/run_arabic_modern_sense_risk.request'
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install corpus dictionary tooling
+        run: python -m pip install word2word
+      - name: Audit both Arabic vocabulary decks
+        run: python scripts/audit_arabic_modern_sense_risk.py
+      - name: Commit audit evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/arabic_modern_sense_risk_summary.json audit/arabic_top3000_modern_sense_risk_queue.json audit/arabic_top1000_modern_sense_review.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Audit Arabic modern sense risk [skip ci]'
+          for n in 1 2 3; do
+            git fetch origin main
+            git rebase --autostash origin/main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((n*3))
+          done
+          exit 1
