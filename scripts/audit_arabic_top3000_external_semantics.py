@@ -14,7 +14,7 @@ from wordfreq import zipf_frequency
 
 ROOT=Path(__file__).resolve().parents[1]; AUDIT=ROOT/'audit'
 TARGET=AUDIT/'arabic_top3000_candidate.csv'; EVID=AUDIT/'arabic_top3000_continuation_evidence.csv'
-LIVE=ROOT/'arabic_top3000.csv'; REPAIR_DATA=AUDIT/'arabic_top3000_confirmed_modern_repairs.json'
+LIVE=ROOT/'arabic_top3000.csv'
 DIAC=re.compile(r'[\u0610-\u061a\u064b-\u065f\u0670\u06d6-\u06ed]'); WORD=re.compile(r"[A-Za-z][A-Za-z'\-]*")
 SPLIT=re.compile(r'\s*(?:;|/|\||,)\s*')
 STOP={'a','an','the','to','of','in','on','at','for','from','by','with','and','or','as','is','are','was','were','be','been','being','one','that','this','which','who','whom','something','someone','used','use','form','forms','person','thing','things','depending','context','noun','verb','adjective','adverb','preposition','conjunction'}
@@ -39,10 +39,10 @@ MODERN_REPAIRS={
 }
 
 def load_review_repairs():
- if not REPAIR_DATA.exists():return
- data=json.loads(REPAIR_DATA.read_text(encoding='utf-8'))
- for r in data.get('repairs',[]):
-  MODERN_REPAIRS[int(r['rank'])]=(r['front'],r['expected'],r['meaning'],r['pos'])
+ for path in sorted(AUDIT.glob('arabic_top3000_confirmed_modern_repairs*.json')):
+  data=json.loads(path.read_text(encoding='utf-8'))
+  for r in data.get('repairs',[]):
+   MODERN_REPAIRS[int(r['rank'])]=(r['front'],r['expected'],r['meaning'],r['pos'])
 
 def norm(s): return DIAC.sub('',unicodedata.normalize('NFKC',s or '').replace('ـ','')).strip()
 def meaning(back):
@@ -147,5 +147,3 @@ def main():
  s={'rows':2000,'status_counts':counts,'kaikki_entry_coverage':sum(r['kaikki_entry'] for r in results),'kaikki_semantic_agreement':sum(r['kaikki_semantic_agreement'] for r in results),'omw_entry_coverage':sum(r['omw_entry'] for r in results),'omw_semantic_agreement':sum(r['omw_semantic_agreement'] for r in results),'wordfreq_attested':sum(r['wordfreq_attested'] for r in results),'calima_exact':sum(r['calima_exact'] for r in results),'explicit_review_rows':len(review),'promotion_gate':'PASS' if not review else 'REVIEW_REQUIRED','confirmed_live_modern_sense_repairs_applied':applied}
  (AUDIT/'arabic_top3000_external_semantic_audit_summary.json').write_text(json.dumps(s,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');print(json.dumps(s,ensure_ascii=False,indent=2))
 if __name__=='__main__':main()
-
-# Refresh hook: apply the expanded educator-reviewed repair ledger.
