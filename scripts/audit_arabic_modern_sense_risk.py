@@ -39,9 +39,15 @@ def extract(rx,s):
 
 def audit_cont(model):
     with EVID.open(encoding='utf-8-sig',newline='') as f:rows=list(csv.DictReader(f))
+    # Always compare corpus signals against the current live learner glosses.
+    live={}
+    with (ROOT/'arabic_top3000.csv').open(encoding='utf-8-sig',newline='') as f:
+        for row in csv.DictReader(f):
+            rank=extract(RANK,row.get('Back',''))
+            if rank:live[rank]=(extract(MEAN,row.get('Back','')),extract(POS,row.get('Back','')))
     q=[];counts=Counter();support=Counter()
     for r in rows:
-        c=corpus(model,r['front']); current=r['meaning']; kaikki=r.get('kaikki_meaning','')
+        rank=r['rank'];current,live_pos=live.get(rank,(r['meaning'],r.get('pos','')));c=corpus(model,r['front']);kaikki=r.get('kaikki_meaning','')
         cur=agree(current,c); alt=bool(c and kaikki and agree(kaikki,c))
         support['current_supported' if cur else 'current_unsupported']+=1
         risk='pass';reason=''
@@ -49,12 +55,12 @@ def audit_cont(model):
             risk='block';reason='modern_corpus_supports_kaikki_alternative_not_published_gloss'
         elif c and not cur:
             risk='review';reason='published_gloss_lacks_modern_corpus_support'
-        pos=(r.get('pos') or '').lower()
+        pos=(live_pos or r.get('pos') or '').lower()
         if pos=='noun' and re.search(r'\b(?:happy|common|united|electronic|financial|scientific|secondary|american|saudi|palestinian|white|human|natural|free)\b',current,re.I):
             if risk=='pass':risk='review';reason='noun_pos_with_adjectival_public_gloss'
         if risk!='pass':
             counts[f'{risk}:{reason}']+=1
-            q.append({'rank':r['rank'],'front':r['front'],'meaning':current,'pos':r.get('pos',''),'risk':risk,'reason':reason,'corpus_signal':c,'kaikki_meaning':kaikki[:400],'calima_raw_meaning':r.get('calima_raw_meaning','')[:300]})
+            q.append({'rank':rank,'front':r['front'],'meaning':current,'pos':live_pos or r.get('pos',''),'risk':risk,'reason':reason,'corpus_signal':c,'kaikki_meaning':kaikki[:400],'calima_raw_meaning':r.get('calima_raw_meaning','')[:300]})
     q.sort(key=lambda x:(0 if x['risk']=='block' else 1,int(x['rank'])))
     return rows,q,counts,support
 
