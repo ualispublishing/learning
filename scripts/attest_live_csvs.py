@@ -71,3 +71,4 @@ def main():
 if __name__=='__main__': main()
 
 # 2026-08-13: refresh attestation after Arabic 501-1000 educator refinements.
+# 2026-08-13: re-attest after source-tight Arabic 501-1000 pass.
