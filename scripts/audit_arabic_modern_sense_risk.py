@@ -135,3 +135,5 @@ def main():
     subprocess.run(['git','add','audit/arabic_top3000_modern_sense_manual_cleared.json'],cwd=ROOT,check=True)
     print(json.dumps({'arabic_top1000':summary['arabic_top1000'],'arabic_top3000':summary['arabic_top3000'],'arabic_a1_reader_alignment':{'passage_count':align['passage_count'],'problem_count':len(align['problems']),'gate':align['gate']}},ensure_ascii=False,indent=2))
 if __name__=='__main__':main()
+
+# 2026-08-13 final refresh after the last three continuation POS corrections.
