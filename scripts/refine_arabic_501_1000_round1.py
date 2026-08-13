@@ -8,6 +8,8 @@ SOURCE='- Arabic Language Academy in Cairo, Al-Mujam Al-Wasit - educator second-
 REPAIRS={
 505:('متى','when?; when/whenever (in conditional use)','temporal adverb (interrogative / conditional)'),
 527:('خلف','behind; at the back of; rear/back; succeeded or followed; came after','adverbial noun / noun / perfect-past verb'),
+553:('فهم','understanding; comprehension; understood (depending on vocalization)','noun / perfect-past verb'),
+558:('سجن','prison; imprisonment/confinement; imprisoned/confined','noun / perfect-past verb'),
 562:('ولد','boy; son; gave birth; was born (depending on vocalization/voice)','noun / perfect-past verb'),
 568:('أمين','trustworthy; honest; faithful; trustee/custodian; secretary or officer entrusted with a responsibility','adjective / noun'),
 619:('مؤكدا','confirmed; certain; confirming/emphasizing (depending on vocalization)','active or passive participle used adjectivally/adverbially'),
