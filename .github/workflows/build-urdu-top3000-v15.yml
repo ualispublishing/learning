@@ -31,12 +31,18 @@ jobs:
           python scripts/build_urdu_top3000_v15.py \
             --kaikki /tmp/kaikki-urdu.jsonl \
             --readurdu /tmp/readurdu-dictionary.json
+      - name: Emit stratified manual-review sample
+        if: always()
+        run: |
+          if test -f audit/urdu_top3000_continuation_evidence_v15.csv; then
+            python scripts/sample_urdu_top3000_v15.py
+          fi
       - name: Commit candidate evidence
         if: always()
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add audit/urdu_top3000_candidate_v15.csv audit/urdu_top3000_continuation_evidence_v15.csv audit/urdu_top3000_rejections_v15.csv audit/urdu_top3000_candidate_v15_summary.json || true
+          git add audit/urdu_top3000_candidate_v15.csv audit/urdu_top3000_continuation_evidence_v15.csv audit/urdu_top3000_rejections_v15.csv audit/urdu_top3000_candidate_v15_summary.json audit/urdu_top3000_v15_stratified_sample.json || true
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Build dual-corpus Urdu top3000 v15 [skip ci]'
           for n in 1 2 3; do
