@@ -2,7 +2,10 @@ import json,re,sys
 from pathlib import Path
 root=Path(__file__).resolve().parents[2]
 lang=sys.argv[1]
-cfg=json.loads((root/'reading'/'recalibration'/f'{lang}_a1_p3_p6.json').read_text(encoding='utf-8'))
+cfg={}
+for file in sorted((root/'reading'/'recalibration').glob(f'{lang}_a1_p*.json')):
+ cfg.update(json.loads(file.read_text(encoding='utf-8')))
+if not cfg: raise SystemExit(f'No recalibration config for {lang}')
 path=root/'reading'/lang/'a1'/'passages.jsonl'
 rows=[json.loads(x) for x in path.read_text(encoding='utf-8').splitlines() if x]
 for row in rows:
