@@ -9,7 +9,7 @@ def x(rx,s):
 def rid(s):
  m=re.fullmatch(r'ar-r(\d+)',s or ''); return int(m.group(1)) if m else None
 def words(s): return {w.lower() for w in re.findall(r'[A-Za-z]+',s or '') if len(w)>1}
-def main():
+def audit():
  ps=[json.loads(z) for z in P.read_text(encoding='utf-8').splitlines() if z.strip()]
  with D.open(encoding='utf-8-sig',newline='') as f: rows=list(csv.DictReader(f))
  cards={}
@@ -28,8 +28,9 @@ def main():
     elif not verified: problems.append(f"{p['id']}:{t.get('id')}:not_second_pass_verified")
     a.append({'group':g,'id':t.get('id'),'rank':n,'form':t.get('form'),'intended_sense':t.get('intended_sense'),'context_pos':t.get('part_of_speech'),'live_meaning':c['meaning'] if c else None,'live_pos':c['pos'] if c else None,'sense_compatible':ok,'second_pass_verified':verified})
   out.append({'id':p['id'],'targets':a})
- data={'passage_count':len(ps),'problems':problems,'gate':'PASS' if not problems else 'REVIEW_REQUIRED','passages':out}
- O.parent.mkdir(parents=True,exist_ok=True); O.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
- print(json.dumps({'passages':len(ps),'problems':len(problems),'gate':data['gate']}))
- if problems: raise SystemExit('alignment review required')
+ return {'passage_count':len(ps),'problems':problems,'gate':'PASS' if not problems else 'REVIEW_REQUIRED','passages':out}
+def main():
+ data=audit(); O.parent.mkdir(parents=True,exist_ok=True); O.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+ print(json.dumps({'passages':data['passage_count'],'problems':len(data['problems']),'gate':data['gate']}))
+ if data['problems']: raise SystemExit('alignment review required')
 if __name__=='__main__': main()
