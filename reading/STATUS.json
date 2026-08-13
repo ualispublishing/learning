@@ -3,7 +3,7 @@
   "version": 1,
   "updated": "2026-08-13",
   "overall_status": "in_progress",
-  "phase": "research_and_specification_complete",
+  "phase": "lexical_and_curriculum_ledger_setup",
   "canonical_format": "JSONL",
   "target": {
     "languages": ["arabic", "french", "urdu"],
@@ -38,10 +38,11 @@
     "reading/README.md",
     "reading/ROADMAP.md",
     "reading/TASKS.md",
-    "reading/AGENT_HANDOFF.md"
+    "reading/AGENT_HANDOFF.md",
+    "reading/STATUS.json",
+    "reading/schema/passage.schema.json"
   ],
   "pending_artifacts": [
-    "reading/schema/passage.schema.json",
     "derived normalized reading lexicons",
     "reading/ledgers/arabic_lexical_exposure.jsonl",
     "reading/ledgers/french_lexical_exposure.jsonl",
@@ -83,7 +84,6 @@
   },
   "current_blockers": [],
   "next_actions": [
-    "Create reading/schema/passage.schema.json",
     "Build derived normalized lexical ledgers from the validated root CSVs without modifying the root CSVs",
     "Create grammar/discourse target inventories and topic/genre/domain matrix",
     "Produce and audit Arabic A1 Unit 01 (6 passages)",
@@ -98,6 +98,7 @@
     "reading/ROADMAP.md",
     "reading/TASKS.md",
     "docs/READING_PASSAGE_STANDARD.md",
-    "docs/READING_PASSAGE_RESEARCH.md"
+    "docs/READING_PASSAGE_RESEARCH.md",
+    "reading/schema/passage.schema.json"
   ]
 }
