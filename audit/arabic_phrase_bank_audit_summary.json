@@ -1,26 +1,17 @@
 {
   "file": "arabic_phrase_bank.csv",
-  "rows": 1405,
-  "distinct_exact_fronts": 1405,
-  "distinct_normalized_fronts": 1317,
-  "normalized_duplicate_groups": 3,
-  "status_counts": {
-    "explicit_review_required": 254,
-    "structurally_verified": 1151
-  },
-  "review_rows": 254,
+  "rows": 665,
+  "expected_rows": 665,
+  "distinct_normalized_fronts": 665,
+  "normalized_duplicate_groups": 0,
+  "verified_rows": 652,
+  "review_rows": 13,
   "flag_counts": {
-    "latin_in_front": 89,
-    "low_calima_example_coverage": 13,
-    "low_calima_front_coverage": 77,
-    "normalized_duplicate_front": 91,
-    "overlong_front": 163,
-    "too_many_front_tokens": 86
+    "english_gloss_not_visible_in_example_translation": 6,
+    "front_not_instantiated_in_example": 9
   },
-  "front_tokens_total": 10798,
-  "front_tokens_calima_analyzed": 9876,
-  "example_tokens_total": 13480,
-  "example_tokens_calima_analyzed": 12618,
+  "front_instantiated_in_example": 656,
+  "english_gloss_example_supported": 659,
   "promotion_gate": "REVIEW_REQUIRED",
-  "policy": "Structural and MSA morphology checks are triage signals; they do not by themselves prove translation or phrase-level semantics."
+  "policy": "Phrase/example and English gloss/example checks are conservative triage signals; flagged rows require manual educator review and are never auto-deleted."
 }
