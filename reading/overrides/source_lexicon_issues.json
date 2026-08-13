@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "status": "active",
+  "purpose": "Learner-facing gloss issues found while selecting reading targets. Passage generation must use the corrected sense and must not propagate a source gloss blindly.",
+  "policy": {
+    "frequency_rank_may_come_from_validated_deck": true,
+    "target_sense_requires_independent_learner_check": true,
+    "source_back_field_is_not_automatic_semantic_authority": true
+  },
+  "issues": [
+    {"language":"urdu","source_file":"urdu_top1000.csv","rank":52,"front":"ہم","corrected_sense":"we; us","severity":"blocking_for_teaching"},
+    {"language":"urdu","source_file":"urdu_top1000.csv","rank":59,"front":"اب","corrected_sense":"now; at present","severity":"blocking_for_teaching"},
+    {"language":"french","source_file":"french_top1000.csv","rank":22,"front":"dire","corrected_sense":"to say; to tell","severity":"blocking_for_teaching"},
+    {"language":"french","source_file":"french_top1000.csv","rank":21,"front":"pouvoir","corrected_sense":"can; to be able to; power/authority as a noun","severity":"blocking_for_teaching"},
+    {"language":"french","source_file":"french_top1000.csv","rank":55,"front":"penser","corrected_sense":"to think; to consider; to think about","severity":"blocking_for_teaching"},
+    {"language":"french","source_file":"french_top1000.csv","rank":51,"front":"bon","corrected_sense":"good; fine; okay","severity":"learner_priority_cleanup"},
+    {"language":"french","source_file":"french_top1000.csv","rank":2,"front":"avoir","corrected_sense":"to have; to possess; to have to; to be [age] in age expressions","severity":"learner_priority_cleanup"}
+  ]
+}
