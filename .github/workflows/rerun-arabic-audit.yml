@@ -1,0 +1,29 @@
+name: Rerun Arabic audit
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/rerun-arabic-audit.yml'
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install word2word
+      - run: python scripts/audit_arabic_modern_sense_risk.py
+      - run: python scripts/build_arabic_101_500_review_snapshot.py
+      - run: |
+          git config user.name github-actions
+          git config user.email actions@github.com
+          git add audit/arabic_modern_sense_risk_summary.json audit/arabic_top3000_modern_sense_risk_queue.json audit/arabic_top1000_modern_sense_review.json audit/arabic_101_500_second_pass_snapshot.json audit/arabic_101_500_priority_review.json audit/arabic_101_500_second_pass_summary.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Rerun Arabic audit evidence'
+          git pull --rebase origin main
+          git push origin HEAD:main
