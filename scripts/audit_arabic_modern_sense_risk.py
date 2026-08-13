@@ -8,6 +8,7 @@ from word2word import Word2word
 
 ROOT=Path(__file__).resolve().parents[1]; AUDIT=ROOT/'audit'
 EVID=AUDIT/'arabic_top3000_continuation_evidence_v2.csv'
+DECISIONS=AUDIT/'arabic_top3000_modern_sense_manual_decisions.json'
 WORD=re.compile(r"[A-Za-z]+(?:'[A-Za-z]+)?")
 STOP={'a','an','the','to','of','and','or','for','as','be','is','are','was','were','with','by','from','that','which','who','this','it','he','she','they','you','i','we','one','ones','someone','something','having','used','use'}
 MEAN=re.compile(r'(?m)^Meaning:\s*(.+?)\s*$'); POS=re.compile(r'(?m)^Part of speech:\s*(.+?)\s*$'); RANK=re.compile(r'(?m)^Rank:\s*(\d+)\s*$')
@@ -37,15 +38,24 @@ def corpus(model,w):
 def extract(rx,s):
     m=rx.search(s or '');return re.sub(r'\s+',' ',m.group(1)).strip() if m else ''
 
+def manual_decisions():
+    if not DECISIONS.exists(): return set(),set(),set()
+    d=json.loads(DECISIONS.read_text(encoding='utf-8'))
+    return (
+        {str(x) for x in d.get('manual_keep_ranks',[])},
+        {str(x) for x in d.get('common_homograph_review_ranks',[])},
+        {str(x) for x in d.get('pos_or_form_review_ranks',[])},
+    )
+
 def audit_cont(model):
     with EVID.open(encoding='utf-8-sig',newline='') as f:rows=list(csv.DictReader(f))
-    # Always compare corpus signals against the current live learner glosses.
+    manual_keep,homograph_review,pos_review=manual_decisions()
     live={}
     with (ROOT/'arabic_top3000.csv').open(encoding='utf-8-sig',newline='') as f:
         for row in csv.DictReader(f):
             rank=extract(RANK,row.get('Back',''))
             if rank:live[rank]=(extract(MEAN,row.get('Back','')),extract(POS,row.get('Back','')))
-    q=[];counts=Counter();support=Counter()
+    q=[];counts=Counter();support=Counter();manual_cleared=[]
     for r in rows:
         rank=r['rank'];current,live_pos=live.get(rank,(r['meaning'],r.get('pos','')));c=corpus(model,r['front']);kaikki=r.get('kaikki_meaning','')
         cur=agree(current,c); alt=bool(c and kaikki and agree(kaikki,c))
@@ -58,11 +68,19 @@ def audit_cont(model):
         pos=(live_pos or r.get('pos') or '').lower()
         if pos=='noun' and re.search(r'\b(?:happy|common|united|electronic|financial|scientific|secondary|american|saudi|palestinian|white|human|natural|free)\b',current,re.I):
             if risk=='pass':risk='review';reason='noun_pos_with_adjectival_public_gloss'
+        if rank in manual_keep and risk!='pass':
+            manual_cleared.append({'rank':rank,'front':r['front'],'meaning':current,'pos':live_pos or r.get('pos',''),'original_risk':risk,'original_reason':reason})
+            counts['manual_clear:validated_source_sense_or_homograph_false_positive']+=1
+            continue
+        if rank in homograph_review and risk=='pass':
+            risk='review';reason='manual_common_homograph_review'
+        if rank in pos_review and risk=='pass':
+            risk='review';reason='manual_pos_or_form_review'
         if risk!='pass':
             counts[f'{risk}:{reason}']+=1
             q.append({'rank':rank,'front':r['front'],'meaning':current,'pos':live_pos or r.get('pos',''),'risk':risk,'reason':reason,'corpus_signal':c,'kaikki_meaning':kaikki[:400],'calima_raw_meaning':r.get('calima_raw_meaning','')[:300]})
     q.sort(key=lambda x:(0 if x['risk']=='block' else 1,int(x['rank'])))
-    return rows,q,counts,support
+    return rows,q,counts,support,manual_cleared
 
 def audit_top1000(model):
     with (ROOT/'arabic_top1000.csv').open(encoding='utf-8-sig',newline='') as f:rows=list(csv.DictReader(f))
@@ -80,16 +98,17 @@ def reader_alignment():
 
 def main():
     model=Word2word('ar','en')
-    cont,cq,counts,cs=audit_cont(model);top,tq,ts=audit_top1000(model)
+    cont,cq,counts,cs,manual_cleared=audit_cont(model);top,tq,ts=audit_top1000(model)
     align=reader_alignment()
     summary={
       'arabic_top1000':{'rows':len(top),'review_rows':len(tq),'support_histogram':dict(ts)},
-      'arabic_top3000':{'rows':len(cont),'block_rows':sum(x['risk']=='block' for x in cq),'review_rows':sum(x['risk']=='review' for x in cq),'support_histogram':dict(cs),'category_counts':dict(counts)},
+      'arabic_top3000':{'rows':len(cont),'block_rows':sum(x['risk']=='block' for x in cq),'review_rows':sum(x['risk']=='review' for x in cq),'manual_cleared_rows':len(manual_cleared),'support_histogram':dict(cs),'category_counts':dict(counts)},
       'arabic_a1_reader_alignment':align,
-      'policy':'Corpus evidence is a sense-selector only, never a meaning author. Continuation rows are blocked only when current meaning lacks corpus support while an alternative already in Kaikki matches the corpus signal. Reader targets require live-card sense compatibility and individual second-pass verification or ranks-1-100 educator clearance.'
+      'policy':'Corpus evidence is a sense-selector only, never a meaning author. Continuation rows are blocked only when current meaning lacks corpus support while an alternative already in Kaikki matches the corpus signal. Manually adjudicated valid source senses and homograph/POS false positives are recorded separately and excluded from unresolved block totals. Reader targets require live-card sense compatibility and individual second-pass verification or ranks-1-100 educator clearance.'
     }
     (AUDIT/'arabic_modern_sense_risk_summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     (AUDIT/'arabic_top3000_modern_sense_risk_queue.json').write_text(json.dumps(cq,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    (AUDIT/'arabic_top3000_modern_sense_manual_cleared.json').write_text(json.dumps(manual_cleared,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     (AUDIT/'arabic_top1000_modern_sense_review.json').write_text(json.dumps(tq,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps({'arabic_top1000':summary['arabic_top1000'],'arabic_top3000':summary['arabic_top3000'],'arabic_a1_reader_alignment':{'passage_count':align['passage_count'],'problem_count':len(align['problems']),'gate':align['gate']}},ensure_ascii=False,indent=2))
 if __name__=='__main__':main()
