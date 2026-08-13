@@ -2,42 +2,47 @@
   "project": "Arabic, French, and Urdu graded reading curriculum A1-C2",
   "updated": "2026-08-13",
   "overall_status": "in_progress",
-  "phase": "A1 Unit 01 recalibration and final lexical-control audit",
+  "active_language": "Arabic",
+  "paused_for_new_curriculum": ["French", "Urdu"],
+  "phase": "Arabic A1 Unit 01 calibration plus Arabic flashcard educator-grade second pass",
   "target_passages": 1080,
   "target_is_quota": false,
   "draft_passages": 18,
   "approved_passages": 0,
-  "canonical_files": [
-    "reading/arabic/a1/passages.jsonl",
-    "reading/french/a1/passages.jsonl",
-    "reading/urdu/a1/passages.jsonl"
+  "arabic_a1": {
+    "passages": 6,
+    "questions_per_passage": 10,
+    "total_questions": 60,
+    "total_answers": 60,
+    "question_schema_gate": "PASS",
+    "approved": 0,
+    "first_deliberate_yurid_introduction": "P3; premature P1-P2 exposure removed"
+  },
+  "flashcard_policy": {
+    "prior_educator_ready_claim": "withdrawn/superseded",
+    "current_description": "working learner datasets with strong prior audit evidence; educator clearance requires the new language-by-language semantic/grammar second pass",
+    "reader_used_sense_must_be_second_pass_verified": true,
+    "frequency_rank_is_not_cefr_level": true
+  },
+  "arabic_second_pass": {
+    "audit_order": ["reader-used A1 cards", "ranks 1-100", "101-500", "501-1000", "1001-2000", "2001-3000", "beyond-base B2-C2 vocabulary"],
+    "top100_linguistic_review": "research pass complete; live repairs plus a small confirmed pending-transport set remain",
+    "continuation_modern_sense_triage": "176 automated blocking-risk signals and 268 review signals; these are triage candidates, not 176 proven errors"
+  },
+  "important_files": [
+    "reading/planning/TEN_QUESTION_STANDARD.md",
+    "reading/planning/ARABIC_FIRST_LANGUAGE_PIPELINE.md",
+    "reading/audit/arabic_a1_question_schema.json",
+    "audit/arabic_top100_educator_review.json",
+    "scripts/repair_arabic_second_pass_high_frequency.py"
   ],
-  "completed": [
-    "research and production standards",
-    "roadmap, tasks, status, and agent handoff",
-    "3000-entry derived lexicon per language",
-    "3000-row zero-assumed-mastery exposure ledger per language",
-    "grammar/discourse and topic/genre planning matrices",
-    "confirmed French and Urdu source-gloss repairs plus repository re-audit",
-    "canonical A1 JSONL conversion for all three languages",
-    "first diagnostic multilingual coverage audit",
-    "revised lexical-coverage policy",
-    "early-A1 length/load calibration profile",
-    "verified A1 pedagogical-support lexicons",
-    "narrow P1-P2 recalibration in all three languages",
-    "narrow P3-P6 recalibration in Arabic and Urdu",
-    "narrow P3-P5 recalibration in French"
-  ],
-  "current_gate": "fresh lexical-control audit is running; no passage is approved yet",
-  "semantic_policy": "frequency rank may seed selection, but deliberately taught senses require learner-oriented verification; supported does not equal mastered",
   "next_actions": [
-    "finish the fresh recalibrated coverage audit",
-    "classify remaining unmatched tokens as grammar/morphology, verified support, deliberate target, or uncontrolled unknown",
-    "rewrite genuine overload only",
-    "narrow French P6 if needed",
-    "deep-review all 18 texts and all 90 question-answer pairs",
-    "enable P6 speed benchmarking only after its final high-support gate passes",
-    "approve passages individually before scaling"
+    "land and verify remaining confirmed top-100 Arabic card repairs",
+    "rerun Arabic root-deck structural/public-readiness audits under the new evidence state",
+    "synchronize Arabic reader target POS/senses with repaired flashcards",
+    "finish Arabic A1 supported-coverage and linguistic review",
+    "approve Arabic A1 passages individually only after their taught cards and questions pass",
+    "then continue Arabic flashcard review through ranks 101-500 before scaling the Arabic curriculum"
   ],
-  "do_not_scale_before": "All 18 A1 Unit 01 drafts pass linguistic, pedagogical, semantic-target, supported-coverage, question-answer, schema, and fluency-checkpoint gates."
+  "do_not_scale_before": "Arabic A1 Unit 01 passes linguistic, pedagogical, semantic-target, supported-coverage, 10-question schema, flashcard-second-pass, and fluency-checkpoint gates."
 }
