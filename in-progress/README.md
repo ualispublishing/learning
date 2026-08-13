@@ -1,10 +1,10 @@
 # In-progress learning
 
-This is the human-readable index for work that is active or paused but not completed.
+This is the human-readable index for work that is active, being developed, or paused but not completed.
 
-Operational state stays in `subjects/`, `playlists/`, and `progress/` because those paths are consumed directly by the learning/review system.
+Operational study state stays in `subjects/`, `playlists/`, and `progress/` because those paths are consumed directly by the learning/review system. Long-form reading curriculum development lives under `reading/`.
 
-## Active
+## Active study
 
 ### Arabic — MSA audio-first path
 
@@ -17,6 +17,23 @@ Operational state stays in `subjects/`, `playlists/`, and `progress/` because th
 - Active flashcards: [`../subjects/arabic/`](../subjects/arabic/).
 
 The finished Arabic CSVs are standalone reference datasets and do not count as mastery or completion credit in this active course.
+
+## Active content development
+
+### Arabic + French + Urdu — graded reading A1 to C2
+
+A separate long-term reading curriculum is being built under [`../reading/`](../reading/). It will use original passages, comprehension/retrieval questions, delayed answer keys, contextual vocabulary inference, cloze transfer, spacing, interleaving, and comprehension-gated fluency work.
+
+Current state:
+
+- research/specification: complete;
+- passage schema and continuity/handoff system: complete;
+- normalized lexical/exposure ledgers: next;
+- approved passages: 0;
+- first production milestone: one six-passage A1 calibration unit for each of Arabic, French, and Urdu.
+
+Exact state: [`../reading/STATUS.json`](../reading/STATUS.json).  
+Full handoff: [`../reading/AGENT_HANDOFF.md`](../reading/AGENT_HANDOFF.md).
 
 ## Paused
 
