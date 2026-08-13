@@ -7,14 +7,13 @@ and OPUS-100. The resulting lexicon is used only as corroborating evidence: publ
 learner glosses must still originate in a dictionary source.
 """
 from __future__ import annotations
-import csv,json,re,requests,zipfile,io,os
+import json,re,requests,zipfile,io
 from pathlib import Path
 from word2word import Word2word
 
 ROOT=Path(__file__).resolve().parents[1]
 AUDIT=ROOT/'audit'; WORK=Path('/tmp/urdu-opus-independent'); WORK.mkdir(parents=True,exist_ok=True)
 PREFIX=WORK/'independent.ur-en'
-# High-value sources with clearly different domains from movie subtitles.
 CORPORA={
  'Anuvaad':'https://object.pouta.csc.fi/OPUS-Anuvaad/v1/moses/en-ur.txt.zip',
  'GlobalVoices':'https://object.pouta.csc.fi/OPUS-GlobalVoices/v2018q4/moses/en-ur.txt.zip',
@@ -30,12 +29,8 @@ CORPORA={
 AR=re.compile(r'[\u0600-\u06ff]')
 
 def pick_pair(z:zipfile.ZipFile):
-    names=z.namelist()
-    en=[n for n in names if n.lower().endswith('.en')]
-    ur=[n for n in names if n.lower().endswith('.ur')]
-    if not en or not ur:
-        # OPUS names normally end in .en/.ur; capture listing for diagnosis.
-        raise RuntimeError(f'parallel files not found; names={names[:20]}')
+    names=z.namelist(); en=[n for n in names if n.lower().endswith('.en')]; ur=[n for n in names if n.lower().endswith('.ur')]
+    if not en or not ur: raise RuntimeError(f'parallel files not found; names={names[:20]}')
     return en[0],ur[0]
 
 def main():
@@ -44,47 +39,29 @@ def main():
         try:
             r=requests.get(url,timeout=120);r.raise_for_status()
             with zipfile.ZipFile(io.BytesIO(r.content)) as z:
-                en_name,ur_name=pick_pair(z)
-                ens=z.read(en_name).decode('utf-8',errors='replace').splitlines()
-                urs=z.read(ur_name).decode('utf-8',errors='replace').splitlines()
+                en_name,ur_name=pick_pair(z);ens=z.read(en_name).decode('utf-8',errors='replace').splitlines();urs=z.read(ur_name).decode('utf-8',errors='replace').splitlines()
             n=min(len(ens),len(urs));kept=0
             for e,u in zip(ens[:n],urs[:n]):
                 e=' '.join(e.split());u=' '.join(u.split())
                 if not e or not u or not AR.search(u):continue
                 all_en.append(e);all_ur.append(u);kept+=1
             stats[name]={'download_bytes':len(r.content),'raw_pairs':n,'kept_pairs':kept,'url':url}
-        except Exception as exc:
-            errors[name]=repr(exc)
-    if len(all_en)<50000: raise SystemExit(f'insufficient independent corpus: {len(all_en)} pairs; errors={errors}')
-    Path(str(PREFIX)+'.en').write_text('\n'.join(all_en)+'\n',encoding='utf-8')
-    Path(str(PREFIX)+'.ur').write_text('\n'.join(all_ur)+'\n',encoding='utf-8')
-    # Build ur -> en. 20k source/target vocabulary comfortably covers the learner deck
-    # while remaining practical on a standard GitHub Actions runner.
-    model=Word2word.make('ur','en',str(PREFIX),n_lines=len(all_en),cutoff=20000,rerank_width=100,n_translations=15,num_workers=2,savedir=str(WORK/'lexicon'))
-    # Export only translations for the current Urdu frequency universe / known risk
-    # forms rather than committing the package's pickle implementation artifact.
+        except Exception as exc:errors[name]=repr(exc)
+    if len(all_en)<50000:raise SystemExit(f'insufficient independent corpus: {len(all_en)} pairs; errors={errors}')
+    Path(str(PREFIX)+'.en').write_text('\n'.join(all_en)+'\n',encoding='utf-8');Path(str(PREFIX)+'.ur').write_text('\n'.join(all_ur)+'\n',encoding='utf-8')
+    # 10k vocabulary is deliberately larger than the learner target while cutting
+    # the expensive co-occurrence calculation by ~75% versus the initial 20k run.
+    model=Word2word.make('ur','en',str(PREFIX),n_lines=len(all_en),cutoff=10000,rerank_width=80,n_translations=15,num_workers=2,savedir=str(WORK/'lexicon'))
     from wordfreq import top_n_list
     words=[];seen=set()
-    for w in top_n_list('ur',50000):
+    for w in top_n_list('ur',20000):
         w=' '.join(w.split())
-        if w and AR.search(w) and ' ' not in w and w not in seen:
-            seen.add(w);words.append(w)
+        if w and AR.search(w) and ' ' not in w and w not in seen:seen.add(w);words.append(w)
     translations={}
     for w in words:
-        try: vals=model(w) or []
-        except Exception: vals=[]
+        try:vals=model(w) or []
+        except Exception:vals=[]
         if vals:translations[w]=[str(x) for x in vals[:15]]
-    out={
-      'method':'word2word custom parallel-corpus lexicon',
-      'direction':'ur->en','excluded_sources':['OpenSubtitles','OPUS-100'],
-      'selected_corpora':stats,'download_errors':errors,
-      'parallel_pairs_total':len(all_en),'queried_urdu_words':len(words),
-      'urdu_words_with_translations':len(translations),
-      'translations':translations,
-      'policy':'Corroboration only. Public glosses must originate in Kaikki/ReadUrdu; this independent OPUS lexicon may confirm but never author the learner meaning.'
-    }
-    (AUDIT/'opus_independent_urdu_lexicon.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    summary={k:v for k,v in out.items() if k!='translations'}
-    (AUDIT/'opus_independent_urdu_lexicon_summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    print(json.dumps(summary,ensure_ascii=False,indent=2))
+    out={'method':'word2word custom parallel-corpus lexicon','direction':'ur->en','excluded_sources':['OpenSubtitles','OPUS-100'],'selected_corpora':stats,'download_errors':errors,'parallel_pairs_total':len(all_en),'word2word_cutoff':10000,'queried_urdu_words':len(words),'urdu_words_with_translations':len(translations),'translations':translations,'policy':'Corroboration only. Public glosses must originate in Kaikki/ReadUrdu; this independent OPUS lexicon may confirm but never author the learner meaning.'}
+    (AUDIT/'opus_independent_urdu_lexicon.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');summary={k:v for k,v in out.items() if k!='translations'};(AUDIT/'opus_independent_urdu_lexicon_summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');print(json.dumps(summary,ensure_ascii=False,indent=2))
 if __name__=='__main__':main()
