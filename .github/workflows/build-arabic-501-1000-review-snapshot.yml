@@ -1,0 +1,28 @@
+name: Build Arabic 501-1000 review snapshot
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/build_arabic_501_1000_review_snapshot.py'
+      - '.github/workflows/build-arabic-501-1000-review-snapshot.yml'
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/build_arabic_501_1000_review_snapshot.py
+      - run: |
+          git config user.name github-actions
+          git config user.email actions@github.com
+          git add audit/arabic_501_1000_second_pass_snapshot.json audit/arabic_501_1000_priority_review.json audit/arabic_501_1000_second_pass_summary.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Build Arabic 501-1000 review snapshot'
+          git pull --rebase origin main
+          git push origin HEAD:main
