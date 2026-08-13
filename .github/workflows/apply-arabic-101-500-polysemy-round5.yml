@@ -1,0 +1,35 @@
+name: Apply Arabic 101-500 polysemy round5
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/refine_arabic_101_500_round5a.py'
+      - 'scripts/refine_arabic_101_500_round5b.py'
+      - 'scripts/refine_arabic_101_500_round5c.py'
+      - '.github/workflows/apply-arabic-101-500-polysemy-round5.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python scripts/refine_arabic_101_500_round5a.py
+      - run: python scripts/refine_arabic_101_500_round5b.py
+      - run: python scripts/refine_arabic_101_500_round5c.py
+      - name: Commit repaired deck
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add arabic_top1000.csv
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Apply Arabic 101-500 polysemy refinements [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
