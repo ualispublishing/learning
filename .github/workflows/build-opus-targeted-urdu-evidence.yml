@@ -1,0 +1,48 @@
+name: Build targeted OPUS Urdu sense evidence
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/build_opus_targeted_urdu_evidence.py'
+      - '.github/workflows/build-opus-targeted-urdu-evidence.yml'
+      - 'audit/run_opus_targeted_urdu_evidence.request'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install tooling
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install word2word wordfreq requests
+      - name: Download dictionary sources
+        run: |
+          curl -L --fail --retry 5 --retry-all-errors 'https://raw.githubusercontent.com/rohan-c0de/ReadUrdu-Devanagari-English/main/data/dictionary.json' -o /tmp/readurdu-dictionary.json
+          curl -L --fail --retry 5 --retry-all-errors 'https://kaikki.org/dictionary/Urdu/kaikki.org-dictionary-Urdu.jsonl' -o /tmp/kaikki-urdu.jsonl
+      - name: Build targeted aligned-sentence evidence
+        run: |
+          python scripts/build_opus_targeted_urdu_evidence.py \
+            --kaikki /tmp/kaikki-urdu.jsonl \
+            --readurdu /tmp/readurdu-dictionary.json
+      - name: Commit evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/opus_targeted_urdu_evidence.json audit/opus_targeted_urdu_evidence_summary.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Build targeted OPUS Urdu evidence [skip ci]'
+          for n in 1 2 3; do
+            git fetch origin main
+            git rebase --autostash origin/main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((n*3))
+          done
+          exit 1
