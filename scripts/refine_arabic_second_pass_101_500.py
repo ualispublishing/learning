@@ -10,7 +10,9 @@ REPAIRS={
 115:{'front':'\u0639\u0646\u062f','meaning':'at; near; with/in the possession of','pos':'temporal/spatial adverbial noun'},
 143:{'front':'\u0623\u064a\u0647\u0627','meaning':'O...! (formal masculine vocative introducer)','pos':'vocative expression'},
 276:{'front':'\u0635\u0628\u0627\u062d','meaning':'morning; in the morning','pos':'noun; adverbial time expression in context'},
+314:{'front':'\u0623\u0643\u0628\u0631','meaning':'bigger; larger; greatest; largest','pos':'elative / comparative-superlative (ism tafdil)'},
 320:{'front':'\u062d\u0633\u0646','meaning':'good/fine; goodness/beauty; became good/beautiful (depending on vocalization)','pos':'adjective / noun / perfect-past verb'},
+351:{'front':'\u0645\u062c\u0631\u062f','meaning':'mere; abstract/bare; simply/once in bi-mujarrad constructions','pos':'adjective / noun; adverbial expression with bi-'},
 354:{'front':'\u0639\u0642\u062f','meaning':'contract/agreement; decade; necklace; held/concluded/tied (depending on vocalization)','pos':'noun / perfect-past verb'},
 }
 def parse(back):
