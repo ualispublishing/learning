@@ -13,6 +13,12 @@ The Arabic track was reset on 2026-08-11.
 - The new active course begins at lesson 1 and may legitimately teach vocabulary that existed in a removed deck; create those cards again when they are actually reached in the new course.
 - Git history may retain old commits, but the current learning state must not use them as active knowledge or progress.
 
+## Completed reference datasets
+
+The publication-ready Arabic datasets at the repository root (`arabic_top1000.csv`, `arabic_top3000.csv`, and `arabic_phrase_bank.csv`) are standalone reference/study assets. They are indexed under `completed/languages/` but are **not** part of the restarted active-course state.
+
+Do not infer mastery, exposure counts, spaced-review credit, or lesson completion from those completed datasets. Add or deepen active cards under `subjects/arabic/` only when the current course actually reaches the material.
+
 ## Source hygiene
 The previously removed lesson provider must not be restored to active curriculum, progress, source metadata, or flashcard provenance unless the user explicitly requests it in a later turn.
 
@@ -22,7 +28,7 @@ Primary course:
 
 Use the curated **AlifBee MSA audio-first path** as the current beginner listening spine. The podcast is directly playable, beginner-oriented, English-supported, and focused on Modern Standard Arabic.
 
-Current next item is stored in `progress/current.json` and `NEXT.md`.
+Current next item is stored in `progress/current.json` and `progress/NEXT.md`.
 
 ### Secondary audio/grammar sources
 Use these when the primary podcast has a curriculum gap or a concept needs another representation:
@@ -88,7 +94,7 @@ For every completed lesson/media item:
 8. Record only sources genuinely used; do not restore removed source IDs.
 9. Build exposure counts and spaced-review state from the restarted course only.
 10. Advance to the next audio-first item, resolving exact URLs live when needed.
-11. Update playlist, `resolved_media.json`, track progress, `progress/current.json`, review queue and `NEXT.md`.
+11. Update playlist, `resolved_media.json`, track progress, `progress/current.json`, review queue and `progress/NEXT.md`.
 12. Keep paused MATS progress untouched.
 
 ## Variety policy
