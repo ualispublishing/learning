@@ -4,7 +4,7 @@
   "overall_status": "in_progress",
   "active_language": "Arabic",
   "paused_for_new_curriculum": ["French", "Urdu"],
-  "phase": "Arabic A1 Unit 01 calibration plus Arabic flashcard educator-grade second pass",
+  "phase": "Arabic flashcard educator-grade second pass: ranks 501-1000; Arabic A1 Unit 01 remains gated on final lexical/coverage review",
   "target_passages": 1080,
   "target_is_quota": false,
   "draft_passages": 18,
@@ -26,23 +26,28 @@
   },
   "arabic_second_pass": {
     "audit_order": ["reader-used A1 cards", "ranks 1-100", "101-500", "501-1000", "1001-2000", "2001-3000", "beyond-base B2-C2 vocabulary"],
-    "top100_linguistic_review": "research pass complete; live repairs plus a small confirmed pending-transport set remain",
-    "continuation_modern_sense_triage": "176 automated blocking-risk signals and 268 review signals; these are triage candidates, not 176 proven errors"
+    "ranks_1_100": "EDUCATOR_CLEARED; zero unresolved ranks",
+    "ranks_101_500": "EDUCATOR_CLEARED; 400/400 manually reviewed, 55 repaired live, zero unresolved ranks",
+    "ranks_1_500": "EDUCATOR_CLEARED under the stricter second-pass standard",
+    "ranks_501_1000": "IN_PROGRESS",
+    "continuation_modern_sense_triage": "176 automated blocking-risk signals and 268 review signals from an earlier triage pass; these are review candidates, not proven error counts"
   },
   "important_files": [
     "reading/planning/TEN_QUESTION_STANDARD.md",
     "reading/planning/ARABIC_FIRST_LANGUAGE_PIPELINE.md",
     "reading/audit/arabic_a1_question_schema.json",
     "audit/arabic_top100_educator_review.json",
+    "audit/arabic_101_500_educator_review.json",
     "scripts/repair_arabic_second_pass_high_frequency.py"
   ],
   "next_actions": [
-    "land and verify remaining confirmed top-100 Arabic card repairs",
-    "rerun Arabic root-deck structural/public-readiness audits under the new evidence state",
-    "synchronize Arabic reader target POS/senses with repaired flashcards",
+    "complete full-block educator review of Arabic ranks 501-1000",
+    "repair only independently confirmed meaning, sense-selection, morphology, register, or grammatical-category defects",
+    "rerun Arabic root-deck structural and semantic evidence after ranks 1-1000 are frozen",
+    "synchronize Arabic A1 reader target POS/senses with the educator-cleared flashcards",
     "finish Arabic A1 supported-coverage and linguistic review",
     "approve Arabic A1 passages individually only after their taught cards and questions pass",
-    "then continue Arabic flashcard review through ranks 101-500 before scaling the Arabic curriculum"
+    "then begin the continuation-deck review at ranks 1001-2000"
   ],
   "do_not_scale_before": "Arabic A1 Unit 01 passes linguistic, pedagogical, semantic-target, supported-coverage, 10-question schema, flashcard-second-pass, and fluency-checkpoint gates."
 }
