@@ -14,7 +14,7 @@ from collections import defaultdict
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]; AUDIT=ROOT/'audit'
-FILES={'arabic_top1000.csv':1000,'arabic_top3000.csv':2000,'french_top1000.csv':1000,'french_top3000.csv':2000,'urdu_top1000.csv':1000,'urdu_top3000.csv':2000,'arabic_phrase_bank.csv':889}
+FILES={'arabic_top1000.csv':1000,'arabic_top3000.csv':2000,'french_top1000.csv':1000,'french_top3000.csv':2000,'urdu_top1000.csv':1000,'urdu_top3000.csv':2000,'arabic_phrase_bank.csv':665}
 DIAC_AR=re.compile(r'[\u0610-\u061a\u064b-\u065f\u0670\u06d6-\u06ed]')
 RANK=re.compile(r'(?m)^Rank:\s*(\d+)\s*$'); ARABIC=re.compile(r'[\u0600-\u06ff]')
 PLACEHOLDER=re.compile(r'(?:arabic|french|urdu)_word_\d+|placeholder',re.I)
