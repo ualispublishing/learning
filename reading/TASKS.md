@@ -29,42 +29,55 @@ This checklist is the operational work queue for the Arabic, French, and Urdu A1
 - [ ] Create `reading/ledgers/urdu_lexical_exposure.jsonl`.
 - [ ] Define initial known-core bands for A1/A2/B1/B2 as coverage heuristics, not CEFR declarations.
 - [ ] Define beyond-3,000 verification workflow for C1/C2.
-- [ ] Create grammar/discourse target inventories per language and level.
-- [ ] Create topic/genre/domain matrix so the curriculum does not overuse one theme.
+- [x] Create grammar/discourse target inventories per language and level (`reading/planning/grammar_discourse_inventory.json`).
+- [x] Create topic/genre/domain matrix so the curriculum does not overuse one theme (`reading/planning/topic_genre_matrix.json`).
+- [x] Establish semantic-safety rule: frequency rank may seed selection, but every deliberately taught sense must be learner-checked rather than inherited blindly from a source Back field.
+- [x] Record currently known source-gloss issues in `reading/overrides/source_lexicon_issues.json`.
+- [ ] Repair or formally supersede the confirmed French/Urdu learner-gloss defects in the canonical source decks.
 
 ## Phase 2 — Calibration batch: A1
 
 ### Arabic
-- [ ] Plan Unit 01 lexical targets and review targets.
-- [ ] Draft `ar-a1-u01-p01` through `p06`.
-- [ ] Check MSA naturalness and tashkeel policy.
-- [ ] Validate contextual inference targets.
-- [ ] Validate question/answer correctness.
-- [ ] Validate lexical coverage and new-word load.
-- [ ] Validate JSONL/schema.
-- [ ] Manually inspect all six passages.
+- [x] Plan Unit 01 lexical targets and review targets.
+- [x] Draft `ar-a1-u01-p01` through `p06` in canonical JSONL.
+- [x] First-pass MSA naturalness review.
+- [x] First-pass contextual inference review.
+- [x] First-pass question/answer correctness review.
+- [ ] Measure lexical coverage and new-word load against the derived learner-path ledger.
+- [x] Validate record structure against the intended schema shape.
+- [ ] Deep manual inspection of all six after measured coverage is available.
 
 ### French
-- [ ] Plan Unit 01 lexical targets and review targets.
-- [ ] Draft `fr-a1-u01-p01` through `p06`.
-- [ ] Check contemporary natural French and contraction/elision.
-- [ ] Run all passage/question/coverage/schema checks.
-- [ ] Manually inspect all six passages.
+- [x] Plan Unit 01 lexical targets and review targets.
+- [x] Draft `fr-a1-u01-p01` through `p06` in `reading/french/a1/CALIBRATION_UNIT_01.md`.
+- [x] First-pass contemporary natural-French/contraction review.
+- [x] First-pass question/answer review.
+- [x] Block known bad source glosses from passage teaching and use corrected ordinary senses for `pouvoir` and other affected entries.
+- [ ] Convert the six staged passages to canonical JSONL.
+- [ ] Measure lexical coverage and new-word load.
+- [ ] Deep manual inspection of all six after measured coverage is available.
 
 ### Urdu
-- [ ] Plan Unit 01 lexical targets and review targets.
-- [ ] Draft `ur-a1-u01-p01` through `p06`.
-- [ ] Check contemporary Urdu, Unicode/Nastaliq rendering, and early decoding load.
-- [ ] Run all passage/question/coverage/schema checks.
-- [ ] Manually inspect all six passages.
+- [x] Plan Unit 01 lexical targets and review targets.
+- [x] Draft `ur-a1-u01-p01` through `p06` under `reading/urdu/a1/calibration/`.
+- [x] First-pass contemporary Urdu/script review.
+- [x] First-pass question/answer review.
+- [x] Block the confirmed bad `ہم` and `اب` source glosses and teach the corrected senses `we/us` and `now`.
+- [ ] Convert the six staged passages to canonical JSONL.
+- [ ] Measure lexical coverage and new-word load.
+- [ ] Deep manual inspection of all six after measured coverage is available.
 
 ### Cross-language calibration
 - [ ] Compare A1 difficulty across languages without forcing identical token counts.
-- [ ] Verify that new words are inferable rather than merely translated by context.
-- [ ] Verify that P6 functions as a true high-coverage fluency/checkpoint passage.
-- [ ] Adjust standard if calibration exposes a systematic issue.
+- [ ] Verify every new target is inferable rather than merely translated by context.
+- [ ] Verify every P6 functions as a true high-coverage fluency/checkpoint passage.
+- [ ] Check that question difficulty is comparable by function, not by literal translation.
+- [ ] Adjust the standard if calibration exposes a systematic issue.
+- [ ] Approve or rewrite each of the 18 passages individually. **Do not count drafts as approved.**
 
 ## Phase 3 — Calibration batch: A2 and B1
+
+Do not begin until the complete 18-passage A1 calibration gate passes.
 
 - [ ] Produce one six-passage A2 unit in Arabic.
 - [ ] Produce one six-passage A2 unit in French.
@@ -165,4 +178,4 @@ For every language/level:
 
 ## Immediate next task
 
-Build the normalized lexical/curriculum ledgers, then produce **A1 Unit 01 (six passages) for Arabic, French, and Urdu** as the calibration batch. Do not mass-generate later levels before inspecting those 18 passages.
+**Do not generate Unit 02 yet.** Build the derived lexical/exposure ledgers (or an equivalent safe non-destructive measurement path), normalize French and Urdu to canonical JSONL, measure lexical coverage for all 18 A1 Unit 01 drafts, then deep-review and either approve or rewrite each passage.
