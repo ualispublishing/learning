@@ -1,0 +1,39 @@
+name: Polish Arabic phrase examples
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/polish_arabic_phrase_examples.py'
+      - '.github/workflows/polish-arabic-phrase-examples.yml'
+      - 'audit/run_polish_arabic_phrase_examples.request'
+
+permissions:
+  contents: write
+
+jobs:
+  polish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Apply targeted example corrections
+        run: python scripts/polish_arabic_phrase_examples.py
+      - name: Re-run phrase naturalness audit
+        run: python scripts/audit_arabic_phrase_naturalness_v2.py
+      - name: Commit correction and evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add arabic_phrase_bank.csv audit/arabic_phrase_example_polish_summary.json audit/arabic_phrase_naturalness_v2_summary.json audit/arabic_phrase_naturalness_v2_queue.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Polish Arabic phrase examples [skip ci]'
+          for n in 1 2 3; do
+            git fetch origin main
+            git rebase --autostash origin/main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((n*3))
+          done
+          exit 1
