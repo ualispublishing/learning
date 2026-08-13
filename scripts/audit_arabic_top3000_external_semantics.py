@@ -14,13 +14,12 @@ from wordfreq import zipf_frequency
 
 ROOT=Path(__file__).resolve().parents[1]; AUDIT=ROOT/'audit'
 TARGET=AUDIT/'arabic_top3000_candidate.csv'; EVID=AUDIT/'arabic_top3000_continuation_evidence.csv'
-LIVE=ROOT/'arabic_top3000.csv'
+LIVE=ROOT/'arabic_top3000.csv'; REPAIR_DATA=AUDIT/'arabic_top3000_confirmed_modern_repairs.json'
 DIAC=re.compile(r'[\u0610-\u061a\u064b-\u065f\u0670\u06d6-\u06ed]'); WORD=re.compile(r"[A-Za-z][A-Za-z'\-]*")
 SPLIT=re.compile(r'\s*(?:;|/|\||,)\s*')
 STOP={'a','an','the','to','of','in','on','at','for','from','by','with','and','or','as','is','are','was','were','be','been','being','one','that','this','which','who','whom','something','someone','used','use','form','forms','person','thing','things','depending','context','noun','verb','adjective','adverb','preposition','conjunction'}
 RANK_RE=re.compile(r'(?m)^Rank:\s*(\d+)\s*$'); MEANING_RE=re.compile(r'(?m)^Meaning:\s*(.+?)\s*$'); POS_RE=re.compile(r'(?m)^Part of speech:\s*(.+?)\s*$')
 SOURCE='- Cairo Arabic Language Academy + CALIMA/Kaikki modern-sense educator review (2026-08-13)'
-# rank: (front, expected current meaning, repaired meaning, repaired POS)
 MODERN_REPAIRS={
  1001:('منتدى','assembly room; gathering place','forum; gathering/meeting place','noun'),
  1031:('خارجي','outer; foreign','external; outer; foreign','adj'),
@@ -38,6 +37,12 @@ MODERN_REPAIRS={
  1436:('تكوين','structure','formation; composition; structure; creation','noun'),
  1453:('ثابت','permanent','fixed; stable; constant; permanent','adj'),
 }
+
+def load_review_repairs():
+ if not REPAIR_DATA.exists():return
+ data=json.loads(REPAIR_DATA.read_text(encoding='utf-8'))
+ for r in data.get('repairs',[]):
+  MODERN_REPAIRS[int(r['rank'])]=(r['front'],r['expected'],r['meaning'],r['pos'])
 
 def norm(s): return DIAC.sub('',unicodedata.normalize('NFKC',s or '').replace('ـ','')).strip()
 def meaning(back):
@@ -93,6 +98,7 @@ def omw(front,net):
  return '; '.join(dict.fromkeys(vals))[:7000]
 
 def apply_confirmed_live_repairs():
+ load_review_repairs()
  with LIVE.open(encoding='utf-8-sig',newline='') as f:rows=list(csv.DictReader(f))
  if len(rows)!=2000:raise SystemExit(f'expected 2000 live continuation rows, found {len(rows)}')
  applied=[]
