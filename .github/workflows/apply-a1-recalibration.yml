@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - 'reading/tools/apply_a1_recalibration.py'
+      - 'reading/tools/expand_arabic_a1_to_ten_questions.py'
       - 'reading/recalibration/*.json'
       - '.github/workflows/apply-a1-recalibration.yml'
 
@@ -19,11 +20,13 @@ jobs:
         with: {fetch-depth: 0}
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
-      - name: Apply Arabic, French, and Urdu configs
+      - name: Apply staged recalibration
         run: |
           python reading/tools/apply_a1_recalibration.py arabic
           python reading/tools/apply_a1_recalibration.py french
           python reading/tools/apply_a1_recalibration.py urdu
+      - name: Expand Arabic A1 to ten questions
+        run: python reading/tools/expand_arabic_a1_to_ten_questions.py
       - name: Commit recalibrated passages
         run: |
           git config user.name 'github-actions[bot]'
