@@ -4,10 +4,12 @@ This repository is the source of truth for the user's long-term self-study syste
 
 ## 1. Repository model
 
-Two independent structures are maintained:
+Two independent active-learning structures are maintained:
 
-- `subjects/` = what the knowledge is.
-- `playlists/` = how the user consumes the learning material.
+- `subjects/` = what the actively learned knowledge is.
+- `playlists/` = how the user consumes the active learning material.
+
+Finished standalone datasets are indexed under `completed/`; audit/development evidence belongs under `audit/`; superseded or paused historical material belongs under `archive/`. Do not treat files in `audit/` or `archive/` as current learner material.
 
 Never store subject knowledge according to its YouTube channel. Never store playlist state inside a flashcard deck.
 
@@ -33,7 +35,7 @@ Current audio-led tracks belong under `playlists/audio/`. A YouTube video may st
 
 ## 2. Progress protocol
 
-`progress/current.json` is the machine-readable current state. `NEXT.md` is the human-readable pointer.
+`progress/current.json` is the machine-readable current state. `progress/NEXT.md` is the human-readable pointer.
 
 When the user says a lesson is finished:
 
@@ -41,7 +43,7 @@ When the user says a lesson is finished:
 2. Mark that item `completed`.
 3. Change the next prerequisite-appropriate item to `next`.
 4. Update `progress/current.json`.
-5. Update `NEXT.md`.
+5. Update `progress/NEXT.md`.
 6. Extract the completed lesson's main ideas.
 7. Add only new or meaningfully deepened flashcards to the correct subject module.
 8. Do not duplicate cards merely because the same concept appears in another source.
@@ -195,7 +197,7 @@ Do not cite a search-result snippet as if it were the underlying authority when 
 A lesson is fully processed when:
 
 - playlist status is updated;
-- progress/current and NEXT agree;
+- `progress/current.json` and `progress/NEXT.md` agree;
 - main ideas are identified;
 - existing cards are checked for overlap;
 - new/deepened cards are stored in the correct subject module;
