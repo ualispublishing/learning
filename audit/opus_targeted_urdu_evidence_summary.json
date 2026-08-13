@@ -1,0 +1,60 @@
+{
+  "method": "targeted aligned-sentence dictionary-sense corroboration",
+  "selected_corpora": {
+    "Anuvaad": {
+      "raw_pairs": 162051,
+      "target_word_pairs": 161376,
+      "url": "https://object.pouta.csc.fi/OPUS-Anuvaad/v1/moses/en-ur.txt.zip"
+    },
+    "GlobalVoices": {
+      "raw_pairs": 4103,
+      "target_word_pairs": 3828,
+      "url": "https://object.pouta.csc.fi/OPUS-GlobalVoices/v2018q4/moses/en-ur.txt.zip"
+    },
+    "QED": {
+      "raw_pairs": 19053,
+      "target_word_pairs": 15117,
+      "url": "https://object.pouta.csc.fi/OPUS-QED/v2.0a/moses/en-ur.txt.zip"
+    },
+    "TED2020": {
+      "raw_pairs": 15755,
+      "target_word_pairs": 15330,
+      "url": "https://object.pouta.csc.fi/OPUS-TED2020/v1/moses/en-ur.txt.zip"
+    },
+    "Tatoeba": {
+      "raw_pairs": 1742,
+      "target_word_pairs": 1722,
+      "url": "https://object.pouta.csc.fi/OPUS-Tatoeba/v2026-07-08/moses/en-ur.txt.zip"
+    },
+    "pmindia": {
+      "raw_pairs": 11167,
+      "target_word_pairs": 11145,
+      "url": "https://object.pouta.csc.fi/OPUS-pmindia/v1b/moses/en-ur.txt.zip"
+    },
+    "tico-19": {
+      "raw_pairs": 3071,
+      "target_word_pairs": 3070,
+      "url": "https://object.pouta.csc.fi/OPUS-tico-19/v2020-10-28/moses/en-ur.txt.zip"
+    },
+    "translatewiki": {
+      "raw_pairs": 17915,
+      "target_word_pairs": 16382,
+      "url": "https://object.pouta.csc.fi/OPUS-translatewiki/v2026-07-01/moses/en-ur.txt.zip"
+    },
+    "GNOME": {
+      "raw_pairs": 11535,
+      "target_word_pairs": 5501,
+      "url": "https://object.pouta.csc.fi/OPUS-GNOME/v1/moses/en-ur.txt.zip"
+    },
+    "NeuLab-TedTalks": {
+      "raw_pairs": 6634,
+      "target_word_pairs": 6452,
+      "url": "https://object.pouta.csc.fi/OPUS-NeuLab-TedTalks/v1/moses/en-ur.txt.zip"
+    }
+  },
+  "errors": {},
+  "aligned_sentences_with_target_words": 239923,
+  "candidate_words_with_dictionary_atoms": 9014,
+  "words_with_independent_opus_support": 4012,
+  "policy": "Evidence only: each supported English token must come from an existing Kaikki/ReadUrdu sense and independently recur in aligned non-subtitle OPUS translations with minimum count, rate, and lift. No meaning is generated from the corpus."
+}
