@@ -1,0 +1,50 @@
+name: Promote publication-quality Urdu top3000 v8
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/validate_urdu_top3000_public_v8.py'
+      - '.github/workflows/promote-urdu-top3000-public-v8.yml'
+      - 'audit/run_urdu_public_v8_promotion.request'
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Run hard publication gate
+        run: python scripts/validate_urdu_top3000_public_v8.py
+      - name: Promote exact gated candidate
+        run: |
+          mkdir -p audit/archive
+          cp urdu_top3000.csv audit/archive/urdu_top3000_pre_public_v8_2026-08-12.csv
+          cp audit/urdu_top3000_public_candidate_v8.csv urdu_top3000.csv
+          python - <<'PY'
+          import csv,re
+          with open('urdu_top3000.csv',encoding='utf-8-sig',newline='') as f: rows=list(csv.DictReader(f))
+          assert len(rows)==2000
+          assert len({r['Front'] for r in rows})==2000
+          ranks=[int(re.search(r'(?m)^Rank:\s*(\d+)',r['Back']).group(1)) for r in rows]
+          assert ranks==list(range(1001,3001))
+          print('Promoted publication-quality Urdu ranks 1001-3000')
+          PY
+      - name: Commit promotion and evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add urdu_top3000.csv audit/archive/urdu_top3000_pre_public_v8_2026-08-12.csv audit/urdu_top3000_public_v8_promotion_gate_summary.json
+          git commit -m 'Promote publication-quality Urdu top3000 v8 [skip ci]'
+          for n in 1 2 3; do
+            git fetch origin main
+            git rebase --autostash origin/main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((n*3))
+          done
+          exit 1
