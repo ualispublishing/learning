@@ -9,6 +9,7 @@ on:
       - 'scripts/repair_arabic_second_pass_101_500.py'
       - 'scripts/refine_arabic_second_pass_101_500.py'
       - 'scripts/refine_arabic_101_500_round2.py'
+      - 'scripts/refine_arabic_101_500_round3.py'
       - 'scripts/normalize_arabic_repaired_card_layout.py'
       - 'scripts/build_arabic_top100_review_snapshot.py'
       - 'scripts/build_arabic_101_500_review_snapshot.py'
@@ -37,6 +38,8 @@ jobs:
         run: python scripts/refine_arabic_second_pass_101_500.py
       - name: Apply ranks 101-500 round-two refinements
         run: python scripts/refine_arabic_101_500_round2.py
+      - name: Apply ranks 101-500 round-three refinements
+        run: python scripts/refine_arabic_101_500_round3.py
       - name: Normalize repaired-card field layout
         run: python scripts/normalize_arabic_repaired_card_layout.py
       - name: Synchronize Arabic A1 target metadata
