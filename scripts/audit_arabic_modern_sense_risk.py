@@ -1,15 +1,7 @@
 #!/usr/bin/env python3
-"""Modern-sense risk audit for both live Arabic vocabulary decks.
-
-The existing Arabic gates proved lexical/morphological validity. This audit asks a
-stricter publication question: when a high-frequency undiacritized surface form has
-multiple valid senses, does the exposed learner gloss match a modern corpus-derived
-Arabic->English signal? For the continuation, a row is BLOCKED when the current gloss
-lacks corpus support but an alternative sense already present in Kaikki does have it.
-No corpus translation is copied into the deck; it is only an independent selector.
-"""
+"""Modern-sense risk audit for both live Arabic vocabulary decks."""
 from __future__ import annotations
-import csv,json,re
+import csv,json,re,runpy
 from pathlib import Path
 from collections import Counter
 from word2word import Word2word
@@ -57,7 +49,6 @@ def audit_cont(model):
             risk='block';reason='modern_corpus_supports_kaikki_alternative_not_published_gloss'
         elif c and not cur:
             risk='review';reason='published_gloss_lacks_modern_corpus_support'
-        # POS/gloss mismatch heuristics for exposed English morphology.
         pos=(r.get('pos') or '').lower()
         if pos=='noun' and re.search(r'\b(?:happy|common|united|electronic|financial|scientific|secondary|american|saudi|palestinian|white|human|natural|free)\b',current,re.I):
             if risk=='pass':risk='review';reason='noun_pos_with_adjectival_public_gloss'
@@ -73,22 +64,26 @@ def audit_top1000(model):
     for i,r in enumerate(rows,1):
         back=r.get('Back','');meaning=extract(MEAN,back);pos=extract(POS,back);rank=extract(RANK,back) or str(i);c=corpus(model,r.get('Front',''))
         cur=agree(meaning,c);support['current_supported' if cur else 'current_unsupported']+=1
-        # Top1000 was manually reviewed and often intentionally broad. Lack of corpus
-        # support is only a REVIEW signal, never a block without a known alternative.
         if c and not cur:
             q.append({'rank':rank,'front':r.get('Front',''),'meaning':meaning,'pos':pos,'risk':'review','reason':'published_gloss_lacks_modern_corpus_support','corpus_signal':c})
     return rows,q,support
 
+def reader_alignment():
+    ns=runpy.run_path(str(ROOT/'reading/tools/audit_arabic_a1_flashcard_alignment.py'))
+    return ns['audit']()
+
 def main():
     model=Word2word('ar','en')
     cont,cq,counts,cs=audit_cont(model);top,tq,ts=audit_top1000(model)
+    align=reader_alignment()
     summary={
       'arabic_top1000':{'rows':len(top),'review_rows':len(tq),'support_histogram':dict(ts)},
       'arabic_top3000':{'rows':len(cont),'block_rows':sum(x['risk']=='block' for x in cq),'review_rows':sum(x['risk']=='review' for x in cq),'support_histogram':dict(cs),'category_counts':dict(counts)},
-      'policy':'Corpus evidence is a sense-selector only, never a meaning author. Continuation rows are blocked only when current meaning lacks corpus support while an alternative already in Kaikki matches the corpus signal.'
+      'arabic_a1_reader_alignment':align,
+      'policy':'Corpus evidence is a sense-selector only, never a meaning author. Continuation rows are blocked only when current meaning lacks corpus support while an alternative already in Kaikki matches the corpus signal. Reader targets require live-card sense compatibility and individual second-pass verification or ranks-1-100 educator clearance.'
     }
     (AUDIT/'arabic_modern_sense_risk_summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     (AUDIT/'arabic_top3000_modern_sense_risk_queue.json').write_text(json.dumps(cq,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     (AUDIT/'arabic_top1000_modern_sense_review.json').write_text(json.dumps(tq,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    print(json.dumps(summary,ensure_ascii=False,indent=2))
+    print(json.dumps({'arabic_top1000':summary['arabic_top1000'],'arabic_top3000':summary['arabic_top3000'],'arabic_a1_reader_alignment':{'passage_count':align['passage_count'],'problem_count':len(align['problems']),'gate':align['gate']}},ensure_ascii=False,indent=2))
 if __name__=='__main__':main()
