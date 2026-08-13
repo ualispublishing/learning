@@ -3,12 +3,34 @@
   "evidence_rows": 2000,
   "distinct_fronts": 2000,
   "top1000_overlap_rows": 0,
-  "rank_range": [
-    1001,
-    3000
-  ],
+  "rank_range": [1001, 3000],
   "known_bad_sense_regressions": [],
   "problems": [],
   "promotion_gate": "PASS",
-  "policy": "2000 unique Arabic-script continuation cards, no top1000 overlap/placeholders, exact CALIMA+Kaikki semantic basis for every row, and hard regression checks for previously observed bad senses."
+  "educator_clearance": {
+    "status": "EDUCATOR_CLEARED_MODERN_SENSE",
+    "review_date": "2026-08-13",
+    "source_aware_unresolved_rows": 0,
+    "block_rows": 0,
+    "review_rows": 0,
+    "source_supported_rows": 2000,
+    "corpus_supported_rows": 1567,
+    "cleared_corpus_mismatch_rows": 319,
+    "manual_block_review_closed": true,
+    "live_sha256": "05d46a276189f9ccc018b20002a775c3112069ee873b0be132cf6d67bda328a9",
+    "live_attestation_gate": "PASS",
+    "arabic_a1_reader_alignment": "PASS",
+    "unresolved_ranks": []
+  },
+  "evidence": [
+    "audit/arabic_modern_sense_risk_summary.json",
+    "audit/arabic_top3000_modern_sense_risk_queue.json",
+    "audit/arabic_top3000_modern_sense_manual_cleared.json",
+    "audit/arabic_top3000_modern_sense_manual_decisions.json",
+    "audit/arabic_top3000_confirmed_modern_repairs.json",
+    "audit/arabic_top3000_confirmed_modern_repairs_round3.json",
+    "audit/arabic_top3000_confirmed_modern_repairs_final_pos.json",
+    "audit/live_csv_attestation.json"
+  ],
+  "policy": "The 2000 unique Arabic-script continuation cards retain the promoted v2 CALIMA+Kaikki semantic baseline. Modern corpus evidence is used as a sense-selection/review signal rather than a meaning authority. Source-supported or manually adjudicated corpus mismatches are non-blocking; materially useful common modern senses and misleading POS labels were repaired through guarded rank/front checks until no block or review rows remained."
 }
