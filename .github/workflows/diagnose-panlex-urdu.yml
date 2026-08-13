@@ -1,0 +1,39 @@
+name: Diagnose PanLex Urdu coverage
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/diagnose_panlex_urdu.py'
+      - '.github/workflows/diagnose-panlex-urdu.yml'
+      - 'audit/run_panlex_urdu_diagnostic.request'
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install requests
+      - name: Probe source-attributed PanLex translations
+        run: python scripts/diagnose_panlex_urdu.py
+      - name: Commit diagnostic evidence
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/panlex_urdu_diagnostic.json || true
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Probe PanLex Urdu evidence [skip ci]'
+          for n in 1 2 3; do
+            git fetch origin main
+            git rebase --autostash origin/main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((n*3))
+          done
+          exit 1
