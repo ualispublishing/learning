@@ -22,7 +22,7 @@ jobs:
       - name: Install tooling
         run: |
           python -m pip install --upgrade pip
-          python -m pip install word2word wordfreq requests
+          python -m pip install word2word wordfreq requests nltk
       - name: Build independent non-subtitle lexicon
         run: python scripts/build_opus_independent_urdu_lexicon.py
       - name: Commit lexicon evidence
