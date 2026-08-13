@@ -12,6 +12,8 @@ ACADEMY_SOURCE='- Arabic Language Academy in Cairo, Al-Mu’jam Al-Wasit / gramm
 MIXED_SOURCE='- Arabic Language Academy in Cairo / Quranic Arabic Corpus grammar recheck — second-pass educator review (2026-08-13)'
 
 REPAIRS={
+  3:{'front':'من','meaning':'from (مِنْ); who; whom; whoever (مَنْ)','pos':'preposition (مِنْ) / interrogative, relative, or conditional pronoun (مَنْ)','source':'mixed'},
+  10:{'front':'ما','meaning':'not; what; that which; whatever (conditional)','pos':'negative particle / interrogative, relative, or conditional pronoun / subordinating particle (ما المصدرية), depending on use','source':'mixed'},
   11:{'front':'له','pos':'preposition + attached pronoun (لِ + هُ)','source':'mixed'},
   15:{'front':'مع','pos':'noun functioning adverbially (اسم؛ ويكون ظرفًا عند الإضافة)'},
   16:{'front':'به','pos':'preposition + attached pronoun (بِ + هِ)','source':'mixed'},
@@ -20,6 +22,7 @@ REPAIRS={
   34:{'front':'هنا','pos':'demonstrative of place / adverbial deictic (اسم إشارة للمكان القريب)'},
   38:{'front':'أي','pos':'noun used interrogatively / conditionally / relatively (أَيٌّ)','source':'mixed'},
   40:{'front':'هناك','pos':'demonstrative of place / adverbial deictic (اسم إشارة للمكان البعيد)'},
+  54:{'front':'فقط','pos':'adverb / restrictive expression','source':'mixed'},
   56:{'front':'حتى','meaning':'until; up to; even; so that','pos':'particle / preposition / conjunction'},
   62:{'front':'أجل','meaning':'term; appointed time; deadline/lifespan; for the sake of/because of (أَجْل); yes/indeed (أَجَلْ)','pos':'noun / adverbial-causal noun / response particle','source':'mixed'},
   63:{'front':'قبل','meaning':'before; prior to; earlier','pos':'temporal/spatial adverbial noun (ظرف زمان أو مكان)'},
@@ -28,7 +31,9 @@ REPAIRS={
   78:{'front':'غير','pos':'noun / adjective / perfect / past verb (غَيْر / غَيَّر)'},
   81:{'front':'أكثر','pos':'elative / comparative form (اسم تفضيل)','source':'mixed'},
   84:{'front':'آخر','pos':'noun / adjective (آخَر / آخِر)','source':'mixed'},
+  92:{'front':'لماذا','pos':'interrogative expression (لِ preposition + ماذا “what”)','source':'mixed'},
   94:{'front':'فعل','meaning':'act; action; verb (grammar); did; performed','pos':'noun / perfect / past verb (فِعْل / فَعَلَ)'},
+  98:{'front':'كذلك','pos':'prepositional/adverbial expression (كَ + ذلك)','source':'mixed'},
 }
 
 def replace_field(back,rx,label,value):
