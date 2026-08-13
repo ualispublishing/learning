@@ -7,6 +7,7 @@ on:
       - 'scripts/audit_arabic_modern_sense_risk.py'
       - 'scripts/repair_arabic_second_pass_high_frequency.py'
       - 'scripts/build_arabic_top100_review_snapshot.py'
+      - 'scripts/build_arabic_101_500_review_snapshot.py'
       - '.github/workflows/audit-arabic-modern-sense-risk.yml'
       - 'audit/run_arabic_modern_sense_risk.request'
 
@@ -29,11 +30,13 @@ jobs:
         run: python -m pip install word2word
       - name: Audit both Arabic vocabulary decks
         run: python scripts/audit_arabic_modern_sense_risk.py
+      - name: Build ranks 101-500 educator priority snapshot
+        run: python scripts/build_arabic_101_500_review_snapshot.py
       - name: Commit repaired deck and audit evidence
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add arabic_top1000.csv audit/arabic_top100_second_pass_snapshot.json audit/arabic_modern_sense_risk_summary.json audit/arabic_top3000_modern_sense_risk_queue.json audit/arabic_top1000_modern_sense_review.json
+          git add arabic_top1000.csv audit/arabic_top100_second_pass_snapshot.json audit/arabic_101_500_second_pass_snapshot.json audit/arabic_101_500_priority_review.json audit/arabic_101_500_second_pass_summary.json audit/arabic_modern_sense_risk_summary.json audit/arabic_top3000_modern_sense_risk_queue.json audit/arabic_top1000_modern_sense_review.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Repair and re-audit Arabic high-frequency cards [skip ci]'
           for n in 1 2 3; do
