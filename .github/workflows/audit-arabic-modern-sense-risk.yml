@@ -7,6 +7,7 @@ on:
       - 'scripts/audit_arabic_modern_sense_risk.py'
       - 'scripts/repair_arabic_second_pass_high_frequency.py'
       - 'scripts/repair_arabic_second_pass_101_500.py'
+      - 'scripts/refine_arabic_second_pass_101_500.py'
       - 'scripts/normalize_arabic_repaired_card_layout.py'
       - 'scripts/build_arabic_top100_review_snapshot.py'
       - 'scripts/build_arabic_101_500_review_snapshot.py'
@@ -28,6 +29,8 @@ jobs:
         run: python scripts/repair_arabic_second_pass_high_frequency.py
       - name: Apply confirmed ranks 101-500 repairs
         run: python scripts/repair_arabic_second_pass_101_500.py
+      - name: Apply ranks 101-500 refinement layer
+        run: python scripts/refine_arabic_second_pass_101_500.py
       - name: Normalize repaired-card field layout
         run: python scripts/normalize_arabic_repaired_card_layout.py
       - name: Build ranks 1-100 educator review snapshot
