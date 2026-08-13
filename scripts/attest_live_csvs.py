@@ -69,3 +69,5 @@ def main():
  print(json.dumps(report,ensure_ascii=False,indent=2))
  if report['overall_gate']!='PASS': raise SystemExit('live CSV attestation failed')
 if __name__=='__main__': main()
+
+# 2026-08-13: refresh attestation after Arabic 501-1000 educator refinements.
