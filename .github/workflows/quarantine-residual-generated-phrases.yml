@@ -1,0 +1,41 @@
+name: Quarantine residual generated Arabic phrases
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/quarantine_residual_generated_phrases.py'
+      - '.github/workflows/quarantine-residual-generated-phrases.yml'
+      - 'audit/run_quarantine_residual_generated_phrases.request'
+
+permissions:
+  contents: write
+
+jobs:
+  quarantine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Quarantine residual generated phrase structures
+        run: python scripts/quarantine_residual_generated_phrases.py
+      - name: Re-run publication audit
+        run: python scripts/audit_public_readiness.py
+      - name: Re-run phrase naturalness audit
+        run: python scripts/audit_arabic_phrase_naturalness_v2.py
+      - name: Commit cleaned live bank and evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add arabic_phrase_bank.csv audit/archive/arabic_phrase_bank_residual_generated_quarantine_2026-08-12.csv audit/arabic_phrase_bank_residual_quarantine_summary.json audit/public_readiness_audit.json audit/public_readiness_review_queue.csv audit/public_readiness_review_compact.json audit/public_review_*.json audit/arabic_phrase_naturalness_v2_summary.json audit/arabic_phrase_naturalness_v2_queue.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Quarantine residual generated Arabic phrases [skip ci]'
+          for n in 1 2 3; do
+            git fetch origin main
+            git rebase --autostash origin/main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((n*3))
+          done
+          exit 1
