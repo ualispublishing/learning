@@ -1,0 +1,36 @@
+name: Generate Arabic B1 Unit 02
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/generate_arabic_b1_unit02.py'
+      - '.github/workflows/generate-arabic-b1-unit02.yml'
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Correct generation-time agreement typo
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('reading/tools/generate_arabic_b1_unit02.py')
+          s=p.read_text(encoding='utf-8').replace('لهذا لا يقترح هذا الوحدة','لهذا لا تقترح هذه الوحدة')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - run: python reading/tools/generate_arabic_b1_unit02.py
+      - name: Commit generated B1 passages and corrected generator
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/tools/generate_arabic_b1_unit02.py reading/arabic/b1/passages.jsonl
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Generate Arabic B1 Unit 02 [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
