@@ -17,28 +17,38 @@
       ],
       "status": "PASS_AFTER_REPAIR"
     },
-    "a2": {"passages_reviewed": 0, "passages_total": 60, "review_complete": false, "status": "PENDING"},
-    "b1": {"passages_reviewed": 0, "passages_total": 60, "review_complete": false, "status": "PENDING"},
+    "a2": {
+      "passages_reviewed": 60,
+      "passages_total": 60,
+      "review_complete": true,
+      "high_confidence_repairs_applied": 7,
+      "passages_touched": 7,
+      "repair_sources": [
+        "reading/tools/repair_final_arabic_pass11_a2_naturalness_batch.py"
+      ],
+      "status": "PASS_AFTER_REPAIR"
+    },
+    "b1": {"passages_reviewed": 0, "passages_total": 60, "review_complete": false, "status": "PENDING_AFTER_LENGTH_RECALIBRATION"},
     "b2": {
       "passages_reviewed": 1,
       "passages_total": 60,
       "review_complete": false,
-      "status": "PENDING",
-      "note": "One independently detected comparative-naturalness defect in ar-b2-u04-p06 was already repaired; full level manual pass remains pending."
+      "status": "PENDING_AFTER_LENGTH_RECALIBRATION",
+      "note": "One independently detected comparative-naturalness defect in ar-b2-u04-p06 was already repaired; full level manual pass should follow the major Pass-07 length recalibration so expanded prose is reviewed, not just the shorter draft."
     },
-    "c1": {"passages_reviewed": 0, "passages_total": 60, "review_complete": false, "status": "PENDING"},
+    "c1": {"passages_reviewed": 0, "passages_total": 60, "review_complete": false, "status": "PENDING_AFTER_LENGTH_RECALIBRATION"},
     "c2": {
       "passages_reviewed": 1,
       "passages_total": 60,
       "review_complete": false,
-      "status": "PENDING",
-      "note": "ar-c2-u01-p03 received a separate lexical-sense/naturalness normalization for مبرر; full level manual pass remains pending."
+      "status": "PENDING_AFTER_LENGTH_RECALIBRATION",
+      "note": "ar-c2-u01-p03 received a separate lexical-sense/naturalness normalization for مبرر; full level manual pass should follow the major Pass-07 length recalibration."
     }
   },
   "totals": {
-    "passages_fully_reviewed_in_completed_levels": 60,
-    "levels_complete": 1,
-    "levels_pending": 5
+    "passages_fully_reviewed_in_completed_levels": 120,
+    "levels_complete": 2,
+    "levels_pending": 4
   },
   "status": "IN_PROGRESS",
   "final_approval_claim": false
