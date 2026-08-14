@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'reading/tools/final_audit_arabic_pass06_lexical_source_identity.py'
+      - 'reading/arabic/**/passages.jsonl'
       - '.github/workflows/final-audit-arabic-pass06-lexical-source-identity.yml'
 permissions:
   contents: write
@@ -15,6 +16,7 @@ jobs:
         with: {fetch-depth: 0}
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
+      # Explicit rerun after guarded [skip ci] lexical repairs.
       - run: python reading/tools/final_audit_arabic_pass06_lexical_source_identity.py
       - name: Commit audit artifact
         if: always()
