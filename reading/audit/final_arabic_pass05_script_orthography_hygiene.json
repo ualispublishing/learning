@@ -1,0 +1,755 @@
+{
+  "pass": 5,
+  "name": "script_orthography_hygiene",
+  "scope": "Arabic A1-C2 reader-facing title/text/questions/answers",
+  "method": "Unicode/script/punctuation balance and machine-artifact diagnostics",
+  "levels": {
+    "a1": {
+      "passages": 60,
+      "flagged_passages": 4,
+      "flags_by_code": {
+        "tatweel_in_canonical_reader_text": 3,
+        "latin_character_in_reader_facing_arabic": 2
+      }
+    },
+    "a2": {
+      "passages": 60,
+      "flagged_passages": 1,
+      "flags_by_code": {
+        "latin_character_in_reader_facing_arabic": 3
+      }
+    },
+    "b1": {
+      "passages": 60,
+      "flagged_passages": 0,
+      "flags_by_code": {}
+    },
+    "b2": {
+      "passages": 60,
+      "flagged_passages": 2,
+      "flags_by_code": {
+        "adjacent_repeated_arabic_word": 1,
+        "latin_character_in_reader_facing_arabic": 3
+      }
+    },
+    "c1": {
+      "passages": 60,
+      "flagged_passages": 7,
+      "flags_by_code": {
+        "adjacent_repeated_arabic_word": 1,
+        "latin_character_in_reader_facing_arabic": 9
+      }
+    },
+    "c2": {
+      "passages": 60,
+      "flagged_passages": 18,
+      "flags_by_code": {
+        "latin_character_in_reader_facing_arabic": 30
+      }
+    }
+  },
+  "totals": {
+    "flags": 52,
+    "hard_flags": 47
+  },
+  "hard_flags": [
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "a1",
+      "passage_id": "ar-a1-u10-p06",
+      "field": "text",
+      "sample": "في نهاية مستوى A1 تستطيع ليلى أن تقرأ عن أشياء كثيرة من حياتها اليومية. تعرف طريق المدرسة والمكتبة، وتستطيع أن تسأل عن موقع مكان وأن تنتظر صديقتها عند الباب. في الصباح تنظر إلى الوقت والجو وتختار ما تحتاج إليه. في السوق تعرف بعض الطعام الذي"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "a1",
+      "passage_id": "ar-a1-u10-p06",
+      "field": "answer:a1",
+      "sample": "ليلى تستطيع الآن قراءة موضوعات يومية كثيرة وفهمها على مستوى A1."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "a2",
+      "passage_id": "ar-a2-u10-p06",
+      "field": "text",
+      "sample": "بعد إنهاء مستوى A2، تستطيع نور متابعة نصوص يومية أطول من التي قرأتها في البداية، لأنها لم تعد تبحث عن كلمة منفصلة فقط؛ أصبحت تربط المعلومات عبر عدة جمل. تستطيع قراءة إعلان عن خدمة في الحي ثم استخدام هاتفها للتأكد من الموعد أو القسم المناسب."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "a2",
+      "passage_id": "ar-a2-u10-p06",
+      "field": "question:q5",
+      "sample": "لخص أهم مهارات A2 المذكورة."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "a2",
+      "passage_id": "ar-a2-u10-p06",
+      "field": "answer:a1",
+      "sample": "نور أصبحت قادرة على فهم نصوص A2 اليومية بربط المعلومات عبر الجمل والمقارنة بين الأسباب والنتائج والمصادر."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p06",
+      "field": "question:q1",
+      "sample": "ما الذي يجعل نصوص B2 أصعب وفق نور؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p06",
+      "field": "question:q6",
+      "sample": "لماذا يذكر النص أمثلة من كل وحدات B2؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p06",
+      "field": "question:q9",
+      "sample": "اذكر خمس مهارات من capstone."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p01",
+      "field": "question:q10",
+      "sample": "ما مهارة C1 التي يختبرها النص؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p02",
+      "field": "question:q10",
+      "sample": "ما مهارة C1 التي يختبرها النص؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p03",
+      "field": "question:q10",
+      "sample": "ما مهارة C1 التي يختبرها النص؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p04",
+      "field": "question:q10",
+      "sample": "ما مهارة C1 التي يختبرها النص؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p05",
+      "field": "question:q10",
+      "sample": "ما مهارة C1 التي يختبرها النص؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p06",
+      "field": "title",
+      "sample": "اختبار C1: خريطة الحجة قبل الحكم"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p06",
+      "field": "text",
+      "sample": "بعد ستين نصًا في المستوى كتبت سلمى قاعدة مراجعة لا ترتبط بموضوع واحد. عندما تواجه نصًا معقدًا، لا تبدأ بالسؤال هل توافقه. ارسم خريطة حجته أولًا. ما المقياس أو المصدر؟ ما نوعية البيانات؟ ما الذي هو ناتج مباشر وما الذي أضيف كتفسير؟ هل يوجد عا"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p06",
+      "field": "question:q3",
+      "sample": "لماذا لا يعني C1 الشك في كل شيء؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p06",
+      "field": "answer:a10",
+      "sample": "أنه يطلب نقل أدوات C1 بين مجالات متعددة مع حجة مركبة وحكم معاير دون مفردات جديدة متعمدة."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u01-p06",
+      "field": "text",
+      "sample": "في نهاية الوحدة قالت هناء إن فلسفة المفاهيم لا تنجح بكثرة التقسيمات وحدها. نستخدم المنطق لأن الفرق بين شرط لازم وشرط كاف يغير ما الذي يثبته المثال. ونختبر بساطة نظرية بمثال مضاد لأن الصياغة قد تكون باطلًا في عمومها مع بقاء جزء من فكرتها مفي"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u01-p06",
+      "field": "question:q5",
+      "sample": "ماذا يطلب C2 أكثر من قول «المسألة معقدة»؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u04-p06",
+      "field": "answer:a10",
+      "sample": "بناء تفسير اقتصادي يتتبع حلقات feedback والتراكم والاختناق بدل سلسلة خطية واحدة."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p01",
+      "field": "answer:a9",
+      "sample": "edition"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p01",
+      "field": "answer:a10",
+      "sample": "claim; allege"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p02",
+      "field": "answer:a9",
+      "sample": "sample"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p02",
+      "field": "answer:a10",
+      "sample": "tangible"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p03",
+      "field": "answer:a9",
+      "sample": "restoration"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p03",
+      "field": "answer:a10",
+      "sample": "similar; resembling"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p04",
+      "field": "answer:a9",
+      "sample": "observation post; observatory"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p04",
+      "field": "answer:a10",
+      "sample": "obstacle; impediment"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p05",
+      "field": "answer:a9",
+      "sample": "preceded; having precedent"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p05",
+      "field": "answer:a10",
+      "sample": "axis; central pole"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p01",
+      "field": "answer:a9",
+      "sample": "facilitation"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p01",
+      "field": "answer:a10",
+      "sample": "control; dominance"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p02",
+      "field": "answer:a9",
+      "sample": "map"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p02",
+      "field": "answer:a10",
+      "sample": "escalation; increase"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p03",
+      "field": "answer:a9",
+      "sample": "single; acting alone"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p03",
+      "field": "answer:a10",
+      "sample": "perception; recognition"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p04",
+      "field": "answer:a9",
+      "sample": "transmitter; sender"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p04",
+      "field": "answer:a10",
+      "sample": "bring about; cause"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p05",
+      "field": "answer:a9",
+      "sample": "optimism"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p05",
+      "field": "answer:a10",
+      "sample": "extended; long-lasting"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p01",
+      "field": "answer:a2",
+      "sample": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p02",
+      "field": "answer:a2",
+      "sample": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p03",
+      "field": "answer:a2",
+      "sample": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p04",
+      "field": "answer:a2",
+      "sample": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p05",
+      "field": "answer:a2",
+      "sample": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p06",
+      "field": "title",
+      "sample": "C2: إعادة بناء الحجة قبل الحكم عليها"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p06",
+      "field": "answer:a2",
+      "sample": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
+    }
+  ],
+  "flags": [
+    {
+      "code": "tatweel_in_canonical_reader_text",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p01",
+      "field": "question:q6",
+      "sample": "ما التصنيف النحوي الأدق لـ«هنا» في الاستعمال المكاني؟"
+    },
+    {
+      "code": "tatweel_in_canonical_reader_text",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p03",
+      "field": "question:q6",
+      "sample": "ما التصنيف النحوي الأدق لـ«هناك» في الاستعمال المكاني؟"
+    },
+    {
+      "code": "tatweel_in_canonical_reader_text",
+      "level": "a1",
+      "passage_id": "ar-a1-u07-p03",
+      "field": "text",
+      "sample": "تريد ليلى ومريم الذهاب إلى الحديقة في اليوم القادم. تنظران إلى توقع الطقس. تقول مريم: غدًا قادم بجو أدفأ، لكن ربما يكون هناك مطر في المساء. تقول ليلى: إذن نذهب بعد الظهر ولا نبقى حتى وقت متأخر. تسأل مريم: هل نأخذ مظلة؟ تقول ليلى: ربما، من ا"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "a1",
+      "passage_id": "ar-a1-u10-p06",
+      "field": "text",
+      "sample": "في نهاية مستوى A1 تستطيع ليلى أن تقرأ عن أشياء كثيرة من حياتها اليومية. تعرف طريق المدرسة والمكتبة، وتستطيع أن تسأل عن موقع مكان وأن تنتظر صديقتها عند الباب. في الصباح تنظر إلى الوقت والجو وتختار ما تحتاج إليه. في السوق تعرف بعض الطعام الذي"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "a1",
+      "passage_id": "ar-a1-u10-p06",
+      "field": "answer:a1",
+      "sample": "ليلى تستطيع الآن قراءة موضوعات يومية كثيرة وفهمها على مستوى A1."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "a2",
+      "passage_id": "ar-a2-u10-p06",
+      "field": "text",
+      "sample": "بعد إنهاء مستوى A2، تستطيع نور متابعة نصوص يومية أطول من التي قرأتها في البداية، لأنها لم تعد تبحث عن كلمة منفصلة فقط؛ أصبحت تربط المعلومات عبر عدة جمل. تستطيع قراءة إعلان عن خدمة في الحي ثم استخدام هاتفها للتأكد من الموعد أو القسم المناسب."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "a2",
+      "passage_id": "ar-a2-u10-p06",
+      "field": "question:q5",
+      "sample": "لخص أهم مهارات A2 المذكورة."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "a2",
+      "passage_id": "ar-a2-u10-p06",
+      "field": "answer:a1",
+      "sample": "نور أصبحت قادرة على فهم نصوص A2 اليومية بربط المعلومات عبر الجمل والمقارنة بين الأسباب والنتائج والمصادر."
+    },
+    {
+      "code": "adjacent_repeated_arabic_word",
+      "level": "b2",
+      "passage_id": "ar-b2-u04-p06",
+      "field": "text",
+      "word": "من",
+      "sample": "بعد أمثلة الوحدة بدأت نور ترى التصميم كنوع من الحجة الصامتة. المسار الذي يستخدم الدرج يقول ضمنيًا إن المستخدم النموذجي قادر على صعوده. والميدان الذي يقيس نجاحه بعدد الزوار يضع وزنًا أكبر على من يأتي أحيانًا من من يعيش مع أثر المكان كل يوم. "
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p06",
+      "field": "question:q1",
+      "sample": "ما الذي يجعل نصوص B2 أصعب وفق نور؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p06",
+      "field": "question:q6",
+      "sample": "لماذا يذكر النص أمثلة من كل وحدات B2؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p06",
+      "field": "question:q9",
+      "sample": "اذكر خمس مهارات من capstone."
+    },
+    {
+      "code": "adjacent_repeated_arabic_word",
+      "level": "c1",
+      "passage_id": "ar-c1-u01-p03",
+      "field": "text",
+      "word": "خطوة",
+      "sample": "وجد تحليل خيالي أن الموظفين الذين يرسلون رسائل أكثر داخل نظام العمل ينجزون عددًا أكبر من المشروعات في السنة نفسها. كتب قارئ متحمس أن «زيادة الرسائل ترفع الإنتاج»، لكن الباحث يوسف رأى أن الانتقال من العلاقة إلى السبب أسرع من الأدلة. قد تكون "
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p01",
+      "field": "question:q10",
+      "sample": "ما مهارة C1 التي يختبرها النص؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p02",
+      "field": "question:q10",
+      "sample": "ما مهارة C1 التي يختبرها النص؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p03",
+      "field": "question:q10",
+      "sample": "ما مهارة C1 التي يختبرها النص؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p04",
+      "field": "question:q10",
+      "sample": "ما مهارة C1 التي يختبرها النص؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p05",
+      "field": "question:q10",
+      "sample": "ما مهارة C1 التي يختبرها النص؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p06",
+      "field": "title",
+      "sample": "اختبار C1: خريطة الحجة قبل الحكم"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p06",
+      "field": "text",
+      "sample": "بعد ستين نصًا في المستوى كتبت سلمى قاعدة مراجعة لا ترتبط بموضوع واحد. عندما تواجه نصًا معقدًا، لا تبدأ بالسؤال هل توافقه. ارسم خريطة حجته أولًا. ما المقياس أو المصدر؟ ما نوعية البيانات؟ ما الذي هو ناتج مباشر وما الذي أضيف كتفسير؟ هل يوجد عا"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p06",
+      "field": "question:q3",
+      "sample": "لماذا لا يعني C1 الشك في كل شيء؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p06",
+      "field": "answer:a10",
+      "sample": "أنه يطلب نقل أدوات C1 بين مجالات متعددة مع حجة مركبة وحكم معاير دون مفردات جديدة متعمدة."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u01-p06",
+      "field": "text",
+      "sample": "في نهاية الوحدة قالت هناء إن فلسفة المفاهيم لا تنجح بكثرة التقسيمات وحدها. نستخدم المنطق لأن الفرق بين شرط لازم وشرط كاف يغير ما الذي يثبته المثال. ونختبر بساطة نظرية بمثال مضاد لأن الصياغة قد تكون باطلًا في عمومها مع بقاء جزء من فكرتها مفي"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u01-p06",
+      "field": "question:q5",
+      "sample": "ماذا يطلب C2 أكثر من قول «المسألة معقدة»؟"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u04-p06",
+      "field": "answer:a10",
+      "sample": "بناء تفسير اقتصادي يتتبع حلقات feedback والتراكم والاختناق بدل سلسلة خطية واحدة."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p01",
+      "field": "answer:a9",
+      "sample": "edition"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p01",
+      "field": "answer:a10",
+      "sample": "claim; allege"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p02",
+      "field": "answer:a9",
+      "sample": "sample"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p02",
+      "field": "answer:a10",
+      "sample": "tangible"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p03",
+      "field": "answer:a9",
+      "sample": "restoration"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p03",
+      "field": "answer:a10",
+      "sample": "similar; resembling"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p04",
+      "field": "answer:a9",
+      "sample": "observation post; observatory"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p04",
+      "field": "answer:a10",
+      "sample": "obstacle; impediment"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p05",
+      "field": "answer:a9",
+      "sample": "preceded; having precedent"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p05",
+      "field": "answer:a10",
+      "sample": "axis; central pole"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p01",
+      "field": "answer:a9",
+      "sample": "facilitation"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p01",
+      "field": "answer:a10",
+      "sample": "control; dominance"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p02",
+      "field": "answer:a9",
+      "sample": "map"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p02",
+      "field": "answer:a10",
+      "sample": "escalation; increase"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p03",
+      "field": "answer:a9",
+      "sample": "single; acting alone"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p03",
+      "field": "answer:a10",
+      "sample": "perception; recognition"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p04",
+      "field": "answer:a9",
+      "sample": "transmitter; sender"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p04",
+      "field": "answer:a10",
+      "sample": "bring about; cause"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p05",
+      "field": "answer:a9",
+      "sample": "optimism"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p05",
+      "field": "answer:a10",
+      "sample": "extended; long-lasting"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p01",
+      "field": "answer:a2",
+      "sample": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p02",
+      "field": "answer:a2",
+      "sample": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p03",
+      "field": "answer:a2",
+      "sample": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p04",
+      "field": "answer:a2",
+      "sample": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p05",
+      "field": "answer:a2",
+      "sample": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p06",
+      "field": "title",
+      "sample": "C2: إعادة بناء الحجة قبل الحكم عليها"
+    },
+    {
+      "code": "latin_character_in_reader_facing_arabic",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p06",
+      "field": "answer:a2",
+      "sample": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
+    }
+  ],
+  "status": "FAIL"
+}
