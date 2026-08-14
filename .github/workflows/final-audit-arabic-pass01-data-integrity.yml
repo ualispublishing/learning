@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'reading/tools/final_audit_arabic_pass01_data_integrity.py'
+      - 'reading/schema/passage.schema.json'
+      - 'reading/arabic/**/passages.jsonl'
       - '.github/workflows/final-audit-arabic-pass01-data-integrity.yml'
 permissions:
   contents: write
