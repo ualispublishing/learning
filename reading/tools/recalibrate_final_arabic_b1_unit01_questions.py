@@ -2,9 +2,9 @@
 """Final-review remediation for B1 Unit 01 question composition.
 
 Preserves the strongest comprehension/inference and synthesis questions while
-using three slots per passage for two passage-specific lexical items and one
-explicit grammar-in-context/function item. This meets the documented B1 default
-mix without mechanical quota-only rewriting.
+using passage-specific lexical and grammar-in-context slots. Every passage keeps
+at least four comprehension/inference questions, gains at least two lexical
+questions, at least two grammar/style questions, and at least one synthesis item.
 """
 from __future__ import annotations
 import json
@@ -15,6 +15,7 @@ UPDATES={
 'ar-b1-u01-p01':{
  'q5':('vocabulary_in_context','ماذا يعني «قرار» في هذا النص؟',['ar-r223'],'اختيار يُحسم بعد مقارنة بدائل ومعلومات وآثار محتملة.'),
  'q6':('single_word_definition','ما معنى «أولوية» في سياق جدول نور؟',['ar-r2543'],'شيء يُعطى أهمية أو تقدّمًا على أشياء أخرى في الوقت الحالي.'),
+ 'q7':('grammar_in_context','ما دلالة «حتى إن» في «حتى إن كانت الإجابة لا الآن»؟',[],'تفيد أن وضوح القرار يظل مهمًا حتى في الحالة التي تكون فيها النتيجة عدم التسجيل الآن.'),
  'q8':('grammar_function','ما وظيفة «إذا» في «إذا كانت الأولوية واضحة، يصبح قول ليس الآن أسهل»؟',[],'تقدم شرطًا ثم تربط به نتيجة مترتبة عليه.'),
 },
 'ar-b1-u01-p02':{
@@ -25,6 +26,7 @@ UPDATES={
 'ar-b1-u01-p03':{
  'q5':('vocabulary_in_context','ماذا تعني «مهارة» في هذا النص؟',['ar-r1481'],'قدرة يمكن إظهارها من خلال فعل أو أداء في موقف حقيقي.'),
  'q6':('vocabulary_in_context','كيف يُفهم معنى «خبرة» في سؤال نور للمعلمة؟',['ar-r1190'],'تجربة أو ممارسة سابقة يتعلم منها الشخص ويستطيع الاستدلال بها على ما فعله.'),
+ 'q7':('grammar_in_context','ما وظيفة «حتى» في «لا تحتاج دائمًا إلى كتابة أمثلة طويلة حتى تكون واضحة»؟',[],'تربط طول الأمثلة بالغاية المطلوبة، وهي الوضوح، ثم ينفي النص أن الطول شرط دائم لتحقيقها.'),
  'q8':('grammar_function','ما وظيفة «بدل» في «بدل أن يكتب كلمة عامة...» وفي الأمثلة التي بعدها؟',[],'تقدم بديلًا أو صياغة أقوى تحل محل الادعاء العام.'),
 },
 'ar-b1-u01-p04':{
@@ -49,7 +51,7 @@ for pid,items in UPDATES.items():
  for qid,(typ,prompt,tids,answer) in items.items():
   q=qmap[qid];a=amap[qid]
   # Guard that these slots have not already been repurposed by another review.
-  assert q.get('type') not in {'vocabulary_in_context','single_word_definition','grammar_function'},(pid,qid,q)
+  assert q.get('type') not in {'vocabulary_in_context','single_word_definition','grammar_function','grammar_in_context'},(pid,qid,q)
   old={'type':q.get('type'),'prompt':q.get('prompt'),'target_ids':q.get('target_ids',[]),'answer':a.get('answer')}
   q['type']=typ;q['prompt']=prompt;q['target_ids']=tids;a['answer']=answer
   changes.append({'passage_id':pid,'question_id':qid,'old':old,'new':{'type':typ,'prompt':prompt,'target_ids':tids,'answer':answer}})
@@ -67,6 +69,6 @@ for pid in UPDATES:
  c={'comprehension_inference':sum(t in COMP for t in types),'lexical':sum(t in LEX for t in types),'grammar_style':sum(t in GRAM for t in types),'synthesis':sum(t in SYN for t in types)}
  assert c['comprehension_inference']>=4 and c['lexical']>=2 and c['grammar_style']>=2 and c['synthesis']>=1,(pid,types,c)
  mix[pid]=c
-assert len(changes)==18,len(changes)
+assert len(changes)==20,len(changes)
 PATH.write_text('\n'.join(json.dumps(r,ensure_ascii=False,sort_keys=True) for r in rows)+'\n',encoding='utf-8')
 print(json.dumps({'level':'B1','unit':1,'question_changes':len(changes),'mix':mix},ensure_ascii=False))
