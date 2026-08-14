@@ -18,8 +18,16 @@ jobs:
         with: {fetch-depth: 0}
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
-      - name: Remove obvious typography artifact
-        run: sed -i 's/يراهـا/يراها/g' reading/tools/generate_arabic_b1_unit03.py
+      - name: Normalize obvious source-text artifacts before generation
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('reading/tools/generate_arabic_b1_unit03.py')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('يراهـا','يراها')
+          s=s.replace('وما المعلومات التي طلبها قبل أن يعطي نصيحته؟\n",','وما المعلومات التي طلبها قبل أن يعطي نصيحته؟",')
+          p.write_text(s,encoding='utf-8')
+          PY
       - run: python reading/tools/generate_arabic_b1_unit03.py
       - name: Commit generated B1 passages and generator cleanup
         run: |
