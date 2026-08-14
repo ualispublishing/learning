@@ -42,11 +42,21 @@ def parse_label(label,lang,cfg):
     vals|={morph[x] for x in list(vals) if x in morph}
     return {x for x in vals if x}
 
+def classify(forms,count,current_alias,active_alias,proper,func,sup,lex,used_support,controlled,bad,label,prefix):
+    if forms&proper: controlled['proper_name']+=count
+    elif forms&current_alias: controlled['deliberate_target']+=count
+    elif forms&active_alias: controlled['previous_target']+=count
+    elif any(lex.get(x,10**9)<=500 for x in forms): controlled['prerequisite_core_morphology']+=count
+    elif forms&set(sup):
+        hits={sup[x] for x in forms if x in sup}; used_support|=hits; controlled['verified_support']+=count
+    elif forms&func: controlled['grammar_function']+=count
+    else: bad[prefix+label]+=count
+
 def main():
     raw=json.loads((AUD/'a1_unit01_coverage_audit.json').read_text(encoding='utf-8'))
     aliases=json.loads((RD/'planning'/'a1_target_aliases.json').read_text(encoding='utf-8'))
     functions=json.loads((RD/'planning'/'a1_function_support.json').read_text(encoding='utf-8'))
-    out={'version':2,'source_audit':'reading/audit/a1_unit01_coverage_audit.json','policy':'Unit-01 rank 1-500 prerequisite band; tail/outside items require target, verified support, transparent morphology resolving to prerequisite core, grammar/function, or proper-name status','languages':{},'overall_gate':'PASS'}
+    out={'version':3,'source_audit':'reading/audit/a1_unit01_coverage_audit.json','policy':'Unit-01 rank 1-500 prerequisite band; tail/outside items require target, transparent morphology resolving to prerequisite core, verified support, grammar/function, or proper-name status','languages':{},'overall_gate':'PASS'}
     for lang,block in raw['languages'].items():
         pmap={p['id']:p for p in passage_rows(lang)}; sup=support_map(lang); cfg=functions[lang]; lex=ranked_lexicon(lang)
         func={norm(x,lang) for x in cfg.get('function_forms',[])}; proper={norm(x,lang) for x in cfg.get('proper_names',[])}
@@ -61,24 +71,10 @@ def main():
             tail_listed=outside_listed=0
             for label,count in diag['top_rank_gt_500_tokens']:
                 tail_listed+=count; forms=parse_label(label,lang,cfg)
-                if forms&proper: controlled['proper_name']+=count
-                elif forms&current_alias: controlled['deliberate_target']+=count
-                elif forms&active_alias: controlled['previous_target']+=count
-                elif forms&set(sup):
-                    hits={sup[x] for x in forms if x in sup}; used_support|=hits; controlled['verified_support']+=count
-                elif any(lex.get(x,10**9)<=500 for x in forms): controlled['prerequisite_core_morphology']+=count
-                elif forms&func: controlled['grammar_function']+=count
-                else: bad['ranked_tail: '+label]+=count
+                classify(forms,count,current_alias,active_alias,proper,func,sup,lex,used_support,controlled,bad,label,'ranked_tail: ')
             for label,count in diag['top_outside_3000_tokens']:
                 outside_listed+=count; forms=parse_label(label,lang,cfg)
-                if forms&proper: controlled['proper_name']+=count
-                elif forms&current_alias: controlled['deliberate_target']+=count
-                elif forms&active_alias: controlled['previous_target']+=count
-                elif forms&set(sup):
-                    hits={sup[x] for x in forms if x in sup}; used_support|=hits; controlled['verified_support']+=count
-                elif any(lex.get(x,10**9)<=500 for x in forms): controlled['prerequisite_core_morphology']+=count
-                elif forms&func: controlled['grammar_function']+=count
-                else: bad['outside: '+label]+=count
+                classify(forms,count,current_alias,active_alias,proper,func,sup,lex,used_support,controlled,bad,label,'outside: ')
             if tail_total>tail_listed: bad['unlisted ranked-tail diagnostic tokens']+=tail_total-tail_listed
             if outside_total>outside_listed: bad['unlisted outside-backbone diagnostic tokens']+=outside_total-outside_listed
             new_support=used_support-seen_support; max_support=2 if p['sequence']<=2 else 3 if p['sequence']<=5 else 0
