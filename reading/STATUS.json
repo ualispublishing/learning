@@ -7,10 +7,10 @@
     "French",
     "Urdu"
   ],
-  "phase": "Generation-first passage production. Completed Arabic generation levels: A1, A2, B1, B2, C1. Arabic C2 generation is next. Formal audits remain deferred to the final 10+ pass review phase.",
+  "phase": "Generation-first Arabic A1-C2 passage production is complete. Formal audits remain deferred to the final 10+ pass review phase.",
   "target_passages": 1080,
   "target_is_quota": false,
-  "draft_passages": 312,
+  "draft_passages": 372,
   "approved_passages": 0,
   "production_policy": {
     "mode": "GENERATE_FIRST_AUDIT_FINAL",
@@ -140,13 +140,12 @@
     "reading/arabic/b1/passages.jsonl",
     "reading/tools/update_generation_status.py",
     "reading/arabic/b2/passages.jsonl",
-    "reading/arabic/c1/passages.jsonl"
+    "reading/arabic/c1/passages.jsonl",
+    "reading/arabic/c2/passages.jsonl"
   ],
   "next_actions": [
-    "begin Arabic C2 Unit 01 generation using the roadmap's increasing discourse, inference, genre, and reference-chain demands",
-    "continue generation unit by unit without routine mid-generation audits; fix only obvious severe or propagation-prone defects immediately",
-    "keep ten questions and ten answers per canonical passage, with generation-stage formal quality fields pending",
-    "after the designated generation corpus is complete, run at least 10 distinct final audit passes using different linguistic, pedagogical, lexical, structural, and adversarial approaches"
+    "begin the planned final 10+ pass audit phase only after confirming the full designated generation corpus is complete",
+    "keep audit passes independent and use different linguistic, pedagogical, lexical, structural, factual, continuity, and adversarial approaches"
   ],
   "generation_guardrail": "Preserve the roadmap architecture, spaced-reinforcement intent, language-specific naturalness, and ten-question standard while prioritizing passage production. Earlier conservative audit-before-scaling gates are superseded in ordering by GENERATION_FIRST_FINAL_AUDIT_POLICY.md; their quality criteria remain mandatory at final review.",
   "arabic_b1": {
@@ -210,13 +209,23 @@
     "formal_final_approval": "DEFERRED; final corpus approval occurs in the later 10+ pass audit phase"
   },
   "arabic_c2": {
-    "passages": 0,
-    "units_generated": [],
+    "passages": 60,
+    "units_generated": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
     "questions_per_passage": 10,
-    "total_questions": 0,
-    "total_answers": 0,
-    "generation_state": "NEXT",
-    "formal_final_approval": "DEFERRED; final corpus approval occurs in the later 10+ pass audit phase",
-    "next_unit": 1
+    "total_questions": 600,
+    "total_answers": 600,
+    "generation_state": "COMPLETE",
+    "formal_final_approval": "DEFERRED; final corpus approval occurs in the later 10+ pass audit phase"
   }
 }
