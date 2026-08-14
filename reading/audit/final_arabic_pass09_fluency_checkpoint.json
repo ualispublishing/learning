@@ -2,7 +2,10 @@
   "pass": 9,
   "name": "fluency_checkpoint_suitability",
   "scope": "Arabic A1-C2 P6 passages",
-  "method": "unit-role, zero-new-target, timing, comprehension-gate, benchmark-conservatism, and explicit-review diagnostics",
+  "method": "unit-role, zero-new-target, timing, comprehension-gate, benchmark-conservatism, explicit-review diagnostics, and one source-evidenced final-capstone exception",
+  "supporting_evidence": [
+    "reading/audit/final_arabic_c2_capstone_prior_target_matches.json"
+  ],
   "not_claimed": [
     "actual learner fluency",
     "known-token coverage",
@@ -37,23 +40,24 @@
     "c2": {
       "p6_passages": 10,
       "flags_by_code": {
-        "p6_has_no_explicit_review_targets": 1
+        "accepted_empty_review_final_capstone": 1
       },
       "all_p6_zero_new_targets": true
     }
   },
+  "accepted_exceptions": [
+    {
+      "passage_id": "ar-c2-u10-p06",
+      "reason": "final cross-domain C2 capstone is explicitly zero-new, timed, and depends on Units 01-09; exact prior-target surface/lemma inspector found no honest lexical review item to add"
+    }
+  ],
   "totals": {
     "p6_passages": 60,
     "hard_issues": 0,
-    "review_flags": 1
+    "review_flags": 0,
+    "accepted_exceptions": 1
   },
   "hard_issues": [],
-  "flags": [
-    {
-      "code": "p6_has_no_explicit_review_targets",
-      "level": "c2",
-      "passage_id": "ar-c2-u10-p06"
-    }
-  ],
-  "status": "REVIEW_REQUIRED"
+  "flags": [],
+  "status": "PASS"
 }
