@@ -3,11 +3,14 @@
   "updated": "2026-08-13",
   "overall_status": "in_progress",
   "active_language": "Arabic",
-  "paused_for_new_curriculum": ["French", "Urdu"],
-  "phase": "Generation-first passage production. Arabic A1 generation is complete at 60 canonical passages across 10 six-passage units. Formal validity/correctness/coverage audits remain deferred to the final multi-pass review phase. Arabic A2 generation is next.",
+  "paused_for_new_curriculum": [
+    "French",
+    "Urdu"
+  ],
+  "phase": "Generation-first passage production. Arabic A1 and A2 generation are complete at 60 and 60 canonical passages; Arabic B1 generation is underway at 12 passages across units [1, 2]. Formal audits remain deferred to the final 10+ pass review phase.",
   "target_passages": 1080,
   "target_is_quota": false,
-  "draft_passages": 72,
+  "draft_passages": 144,
   "approved_passages": 0,
   "production_policy": {
     "mode": "GENERATE_FIRST_AUDIT_FINAL",
@@ -20,11 +23,22 @@
   },
   "arabic_a1": {
     "passages": 60,
-    "units_generated": [1,2,3,4,5,6,7,8,9,10],
+    "units_generated": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
     "questions_per_passage": 10,
     "total_questions": 600,
     "total_answers": 600,
-    "generation_state": "COMPLETE; all ten planned A1 units are present in reading/arabic/a1/passages.jsonl. Generation-stage records intentionally retain pending formal quality fields except for earlier Unit-01 review evidence.",
+    "generation_state": "COMPLETE",
     "themes": [
       "people, place, and daily orientation",
       "daily routine and time",
@@ -46,13 +60,27 @@
       "supported_control_gate": "PASS; 6/6 passages, zero uncontrolled tokens under the documented curriculum-control definition; not a learner-mastery claim",
       "exposure_ledger_gate": "PASS; 10 Unit-01 ranked targets recorded without assuming learner mastery"
     },
-    "formal_final_approval": "DEFERRED; final A1 corpus approval will occur in the later 10+ pass audit phase"
+    "formal_final_approval": "DEFERRED; final corpus approval occurs in the later 10+ pass audit phase"
   },
   "arabic_a2": {
-    "passages": 0,
-    "units_generated": [],
-    "next_unit": 1,
-    "generation_state": "NEXT"
+    "passages": 60,
+    "units_generated": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "questions_per_passage": 10,
+    "total_questions": 600,
+    "total_answers": 600,
+    "generation_state": "COMPLETE",
+    "formal_final_approval": "DEFERRED; final corpus approval occurs in the later 10+ pass audit phase"
   },
   "cross_language_a1": {
     "arabic_canonical_passages": 60,
@@ -72,8 +100,14 @@
     "a1_eligible": 2,
     "not_a1_current_review": 24,
     "unreviewed": 639,
-    "a1_eligible_ids": ["ar-p009", "ar-p011"],
-    "a1_eligible_fronts": ["لَا بَأْسَ", "لَيْسَ هُنَاكَ"],
+    "a1_eligible_ids": [
+      "ar-p009",
+      "ar-p011"
+    ],
+    "a1_eligible_fronts": [
+      "لَا بَأْسَ",
+      "لَيْسَ هُنَاكَ"
+    ],
     "learner_success_assumed": false,
     "policy": "Phrase-bank row order is not a CEFR ranking. Only exact phrases explicitly reviewed for the relevant learner level may be deliberately introduced as phrase targets."
   },
@@ -101,14 +135,29 @@
     "reading/planning/grammar_discourse_inventory.json",
     "reading/arabic/a1/passages.jsonl",
     "reading/french/a1/passages.jsonl",
-    "reading/urdu/a1/passages.jsonl"
+    "reading/urdu/a1/passages.jsonl",
+    "reading/arabic/a2/passages.jsonl",
+    "reading/arabic/b1/passages.jsonl",
+    "reading/tools/update_generation_status.py"
   ],
   "next_actions": [
-    "begin Arabic A2 Unit 01 generation using the six-passage cycle and longer/more connected A2 texts",
-    "continue Arabic A2 generation unit by unit without routine mid-generation audits",
-    "keep canonical generation-stage passages at ten questions/ten answers and formal quality fields pending",
-    "use the educator-cleared 1-3000 backbone according to actual communicative usefulness and difficulty rather than rank alone",
-    "after the designated generation phase, run at least 10 distinct final audit passes covering naturalness, grammar, lexical sense/register, CEFR/load, inferability, question/answer correctness, evidence alignment, spacing/interleaving, fluency, schema/data integrity, continuity/balance, and adversarial error seeking"
+    "continue Arabic B1 generation from Unit 03 using longer multi-sentence inference, motive/reason, evidence, and wider reference chains",
+    "continue generation unit by unit without routine mid-generation audits; fix only obvious severe or propagation-prone defects immediately",
+    "keep ten questions and ten answers per canonical passage, with generation-stage formal quality fields pending",
+    "after the designated generation corpus is complete, run at least 10 distinct final audit passes using different linguistic, pedagogical, lexical, structural, and adversarial approaches"
   ],
-  "generation_guardrail": "Preserve the roadmap architecture, spaced-reinforcement intent, language-specific naturalness, and ten-question standard while prioritizing passage production. Earlier conservative audit-before-scaling gates are superseded in ordering by GENERATION_FIRST_FINAL_AUDIT_POLICY.md; their quality criteria remain mandatory at final review."
+  "generation_guardrail": "Preserve the roadmap architecture, spaced-reinforcement intent, language-specific naturalness, and ten-question standard while prioritizing passage production. Earlier conservative audit-before-scaling gates are superseded in ordering by GENERATION_FIRST_FINAL_AUDIT_POLICY.md; their quality criteria remain mandatory at final review.",
+  "arabic_b1": {
+    "passages": 12,
+    "units_generated": [
+      1,
+      2
+    ],
+    "questions_per_passage": 10,
+    "total_questions": 120,
+    "total_answers": 120,
+    "next_unit": 3,
+    "generation_state": "IN_PROGRESS",
+    "formal_final_approval": "DEFERRED; final corpus approval occurs in the later 10+ pass audit phase"
+  }
 }
