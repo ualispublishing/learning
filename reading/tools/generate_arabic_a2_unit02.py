@@ -7,6 +7,7 @@ ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/"reading"/"arabic"/"a2"/"passages.jsonl"
 LEX=ROOT/"reading"/"lexicons"/"arabic.jsonl"
 T={
+621:("حالي","current; present",["contrast","scenario_resolution"]),
 691:("موعد","appointment; date; scheduled time",["scenario_resolution"]),
 663:("رد","reply; response",["behavior_interpretation"]),
 648:("متأكد","sure; certain",["behavior_interpretation"]),
