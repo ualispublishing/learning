@@ -4,7 +4,7 @@
   "overall_status": "in_progress",
   "active_language": "Arabic",
   "paused_for_new_curriculum": ["French", "Urdu"],
-  "phase": "Arabic ranks 1-3000 and phrase bank educator-cleared; Arabic A1 Unit 01 has passed schema, linguistic/pedagogical, and exposure-ledger gates and remains gated only on persisting final supported-coverage/approval fields",
+  "phase": "Arabic ranks 1-3000 and phrase bank educator-cleared; Arabic A1 Unit 01 has passed schema, linguistic/pedagogical, supported-control, and exposure-ledger gates and remains gated only on persisting final canonical passage approval fields",
   "target_passages": 1080,
   "target_is_quota": false,
   "draft_passages": 18,
@@ -19,8 +19,9 @@
     "linguistic_review": "PASS in canonical passage records",
     "pedagogical_review": "PASS in canonical passage records",
     "answer_key_check": "PASS in canonical passage records",
+    "supported_control_gate": "PASS; 6/6 passages, zero uncontrolled tokens under the documented curriculum-control definition; not a learner-mastery claim",
     "exposure_ledger_gate": "PASS; 10 Unit-01 targets recorded without assuming learner mastery",
-    "coverage_state": "supported-control review completed; canonical passage coverage_check fields still pending and must be persisted before approval",
+    "coverage_state": "formal supported-control audit PASS; canonical passage coverage_check/status fields still need persistence before approval",
     "approved": 0,
     "first_deliberate_yurid_introduction": "P3; premature P1-P2 exposure removed"
   },
@@ -45,6 +46,7 @@
     "reading/planning/ARABIC_FIRST_LANGUAGE_PIPELINE.md",
     "reading/audit/arabic_a1_question_schema.json",
     "reading/audit/a1_unit01_coverage_compact.json",
+    "reading/audit/arabic_a1_supported_coverage.json",
     "reading/ledgers/build_summary.json",
     "reading/ledgers/arabic_unit01_exposure_summary.json",
     "audit/arabic_top100_educator_review.json",
@@ -54,9 +56,9 @@
     "audit/arabic_phrase_bank_audit_summary.json"
   ],
   "next_actions": [
-    "persist the final Arabic A1 supported-coverage result into the six canonical passage quality fields without treating raw analyzer misses as learner unknowns",
+    "persist the PASS result from reading/audit/arabic_a1_supported_coverage.json into the six canonical passage quality/coverage fields",
     "approve or rewrite each Arabic A1 Unit-01 passage individually only after its canonical coverage/status fields are synchronized",
-    "keep P6 zero-new-material and benchmark-eligible only after the final coverage/approval state is persisted",
+    "keep P6 zero-new-material and mark benchmark eligibility only when the final canonical approval state is persisted",
     "then normalize French and Urdu A1 Unit-01 drafts to canonical JSONL, measure coverage, and deep-review them before any Unit-02 generation"
   ],
   "do_not_scale_before": "The complete 18-passage A1 calibration batch passes its language-specific linguistic, pedagogical, semantic-target, supported-coverage, schema, exposure-spacing, and fluency-checkpoint gates."
