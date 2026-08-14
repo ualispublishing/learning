@@ -1,0 +1,6886 @@
+{
+  "pass": 7,
+  "name": "cefr_difficulty_calibration_against_production_standard",
+  "scope": "Arabic A1-C2 canonical reading corpus",
+  "reference": "docs/READING_PASSAGE_STANDARD.md sections 6,7,19",
+  "interpretation": "length and lexical-load bands are planning diagnostics, not sufficient CEFR classifiers",
+  "levels": {
+    "a1": {
+      "passages": 60,
+      "word_count_mean": 89.35,
+      "word_count_median": 90.0,
+      "word_count_min": 59,
+      "word_count_max": 126,
+      "length_zones": {
+        "below_standard_min": 28,
+        "standard": 32
+      },
+      "stored_word_count_mismatches_gt2": 0,
+      "new_target_mean": 1.67,
+      "new_target_max": 2,
+      "passages_above_new_target_max": 0,
+      "coverage_state": {
+        "missing_or_placeholder": 60
+      },
+      "flagged_passages": 60
+    },
+    "a2": {
+      "passages": 60,
+      "word_count_mean": 137.7,
+      "word_count_median": 135.5,
+      "word_count_min": 123,
+      "word_count_max": 177,
+      "length_zones": {
+        "below_standard_min": 38,
+        "standard": 22
+      },
+      "stored_word_count_mismatches_gt2": 0,
+      "new_target_mean": 1.32,
+      "new_target_max": 2,
+      "passages_above_new_target_max": 0,
+      "coverage_state": {
+        "missing_or_placeholder": 60
+      },
+      "flagged_passages": 60
+    },
+    "b1": {
+      "passages": 60,
+      "word_count_mean": 164.88,
+      "word_count_median": 163.5,
+      "word_count_min": 140,
+      "word_count_max": 209,
+      "length_zones": {
+        "below_standard_min": 60
+      },
+      "stored_word_count_mismatches_gt2": 0,
+      "new_target_mean": 1.37,
+      "new_target_max": 2,
+      "passages_above_new_target_max": 0,
+      "coverage_state": {
+        "missing_or_placeholder": 60
+      },
+      "flagged_passages": 60
+    },
+    "b2": {
+      "passages": 60,
+      "word_count_mean": 167.83,
+      "word_count_median": 166.5,
+      "word_count_min": 144,
+      "word_count_max": 202,
+      "length_zones": {
+        "below_standard_min": 60
+      },
+      "stored_word_count_mismatches_gt2": 0,
+      "new_target_mean": 1.5,
+      "new_target_max": 3,
+      "passages_above_new_target_max": 0,
+      "coverage_state": {
+        "missing_or_placeholder": 60
+      },
+      "flagged_passages": 60
+    },
+    "c1": {
+      "passages": 60,
+      "word_count_mean": 183.32,
+      "word_count_median": 183.0,
+      "word_count_min": 129,
+      "word_count_max": 236,
+      "length_zones": {
+        "below_standard_min": 60
+      },
+      "stored_word_count_mismatches_gt2": 0,
+      "new_target_mean": 1.4,
+      "new_target_max": 2,
+      "passages_above_new_target_max": 0,
+      "coverage_state": {
+        "missing_or_placeholder": 60
+      },
+      "flagged_passages": 60
+    },
+    "c2": {
+      "passages": 60,
+      "word_count_mean": 156.5,
+      "word_count_median": 166.0,
+      "word_count_min": 98,
+      "word_count_max": 197,
+      "length_zones": {
+        "below_standard_min": 60
+      },
+      "stored_word_count_mismatches_gt2": 0,
+      "new_target_mean": 1.5,
+      "new_target_max": 2,
+      "passages_above_new_target_max": 0,
+      "coverage_state": {
+        "missing_or_placeholder": 60
+      },
+      "flagged_passages": 60
+    }
+  },
+  "cross_level": {
+    "mean_word_count_non_decreasing": false,
+    "mean_word_counts": {
+      "a1": 89.35,
+      "a2": 137.7,
+      "b1": 164.88,
+      "b2": 167.83,
+      "c1": 183.32,
+      "c2": 156.5
+    }
+  },
+  "totals": {
+    "review_flags": 666
+  },
+  "flags": [
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p01",
+      "word_count": 59,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p02",
+      "word_count": 76,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p03",
+      "word_count": 78,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p04",
+      "word_count": 83,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p05",
+      "word_count": 85,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u02-p01",
+      "word_count": 76,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u02-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u02-p02",
+      "word_count": 85,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u02-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u02-p03",
+      "word_count": 88,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u02-p03",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u02-p04",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u02-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u02-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u03-p01",
+      "word_count": 88,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u03-p01",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u03-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u03-p03",
+      "word_count": 84,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u03-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u03-p04",
+      "word_count": 88,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u03-p04",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u03-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u03-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u04-p01",
+      "word_count": 84,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u04-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u04-p02",
+      "word_count": 89,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u04-p02",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u04-p03",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u04-p04",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u04-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u04-p06",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u05-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u05-p02",
+      "word_count": 83,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u05-p02",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u05-p03",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u05-p04",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u05-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u05-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u06-p01",
+      "word_count": 77,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u06-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u06-p02",
+      "word_count": 81,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u06-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u06-p03",
+      "word_count": 83,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u06-p03",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u06-p04",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u06-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u06-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u07-p01",
+      "word_count": 77,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u07-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u07-p02",
+      "word_count": 81,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u07-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u07-p03",
+      "word_count": 83,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u07-p03",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u07-p04",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u07-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u07-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u08-p01",
+      "word_count": 75,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u08-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u08-p02",
+      "word_count": 86,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u08-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u08-p03",
+      "word_count": 80,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u08-p03",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u08-p04",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u08-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u08-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u09-p01",
+      "word_count": 87,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u09-p01",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u09-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u09-p03",
+      "word_count": 85,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u09-p03",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u09-p04",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u09-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u09-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u10-p01",
+      "word_count": 89,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u10-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u10-p02",
+      "word_count": 87,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u10-p02",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u10-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a1",
+      "passage_id": "ar-a1-u10-p04",
+      "word_count": 89,
+      "zone": "below_standard_min",
+      "standard": [
+        90,
+        140
+      ],
+      "extended": [
+        160,
+        220
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u10-p04",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u10-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a1",
+      "passage_id": "ar-a1-u10-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u01-p01",
+      "word_count": 137,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u01-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u01-p02",
+      "word_count": 129,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u01-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u01-p03",
+      "word_count": 123,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u01-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u01-p04",
+      "word_count": 129,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u01-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u01-p05",
+      "word_count": 132,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u01-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u01-p06",
+      "word_count": 130,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u01-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u02-p01",
+      "word_count": 129,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u02-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u02-p02",
+      "word_count": 129,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u02-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u02-p03",
+      "word_count": 127,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u02-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u02-p04",
+      "word_count": 134,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u02-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u02-p05",
+      "word_count": 138,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u02-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u02-p06",
+      "word_count": 130,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u02-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u03-p01",
+      "word_count": 127,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u03-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u03-p02",
+      "word_count": 134,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u03-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u03-p03",
+      "word_count": 134,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u03-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u03-p04",
+      "word_count": 133,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u03-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u03-p05",
+      "word_count": 136,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u03-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u03-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u04-p01",
+      "word_count": 125,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u04-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u04-p02",
+      "word_count": 135,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u04-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u04-p03",
+      "word_count": 123,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u04-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u04-p04",
+      "word_count": 126,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u04-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u04-p05",
+      "word_count": 129,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u04-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u04-p06",
+      "word_count": 134,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u04-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u05-p01",
+      "word_count": 138,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u05-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u05-p02",
+      "word_count": 135,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u05-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u05-p03",
+      "word_count": 136,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u05-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u05-p04",
+      "word_count": 133,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u05-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u05-p05",
+      "word_count": 134,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u05-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u05-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u06-p01",
+      "word_count": 130,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u06-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u06-p02",
+      "word_count": 130,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u06-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u06-p03",
+      "word_count": 136,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u06-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u06-p04",
+      "word_count": 131,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u06-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u06-p05",
+      "word_count": 129,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u06-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u06-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u07-p01",
+      "word_count": 128,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u07-p01",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u07-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u07-p03",
+      "word_count": 138,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u07-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u07-p04",
+      "word_count": 134,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u07-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u07-p05",
+      "word_count": 136,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u07-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u07-p06",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u08-p01",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u08-p02",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u08-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "a2",
+      "passage_id": "ar-a2-u08-p04",
+      "word_count": 133,
+      "zone": "below_standard_min",
+      "standard": [
+        140,
+        220
+      ],
+      "extended": [
+        250,
+        350
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u08-p04",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u08-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u08-p06",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u09-p01",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u09-p02",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u09-p03",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u09-p04",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u09-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u09-p06",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u10-p01",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u10-p02",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u10-p03",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u10-p04",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u10-p05",
+      "value": 0
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "a2",
+      "passage_id": "ar-a2-u10-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u01-p01",
+      "word_count": 191,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u01-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u01-p02",
+      "word_count": 209,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u01-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u01-p03",
+      "word_count": 187,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u01-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u01-p04",
+      "word_count": 171,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u01-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u01-p05",
+      "word_count": 185,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u01-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u01-p06",
+      "word_count": 186,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u01-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u02-p01",
+      "word_count": 181,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u02-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u02-p02",
+      "word_count": 173,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u02-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u02-p03",
+      "word_count": 169,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u02-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u02-p04",
+      "word_count": 188,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u02-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u02-p05",
+      "word_count": 187,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u02-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u02-p06",
+      "word_count": 198,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u02-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u03-p01",
+      "word_count": 168,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u03-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u03-p02",
+      "word_count": 161,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u03-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u03-p03",
+      "word_count": 170,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u03-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u03-p04",
+      "word_count": 184,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u03-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u03-p05",
+      "word_count": 166,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u03-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u03-p06",
+      "word_count": 186,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u03-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u04-p01",
+      "word_count": 168,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u04-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u04-p02",
+      "word_count": 164,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u04-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u04-p03",
+      "word_count": 163,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u04-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u04-p04",
+      "word_count": 167,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u04-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u04-p05",
+      "word_count": 158,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u04-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u04-p06",
+      "word_count": 174,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u04-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u05-p01",
+      "word_count": 171,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u05-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u05-p02",
+      "word_count": 157,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u05-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u05-p03",
+      "word_count": 159,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u05-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u05-p04",
+      "word_count": 152,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u05-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u05-p05",
+      "word_count": 170,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u05-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u05-p06",
+      "word_count": 167,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u05-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u06-p01",
+      "word_count": 150,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u06-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u06-p02",
+      "word_count": 140,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u06-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u06-p03",
+      "word_count": 150,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u06-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u06-p04",
+      "word_count": 150,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u06-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u06-p05",
+      "word_count": 167,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u06-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u06-p06",
+      "word_count": 171,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u06-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u07-p01",
+      "word_count": 156,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u07-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u07-p02",
+      "word_count": 150,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u07-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u07-p03",
+      "word_count": 152,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u07-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u07-p04",
+      "word_count": 161,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u07-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u07-p05",
+      "word_count": 155,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u07-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u07-p06",
+      "word_count": 182,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u07-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u08-p01",
+      "word_count": 160,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u08-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u08-p02",
+      "word_count": 150,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u08-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u08-p03",
+      "word_count": 141,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u08-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u08-p04",
+      "word_count": 148,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u08-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u08-p05",
+      "word_count": 140,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u08-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u08-p06",
+      "word_count": 170,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u08-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u09-p01",
+      "word_count": 151,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u09-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u09-p02",
+      "word_count": 156,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u09-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u09-p03",
+      "word_count": 143,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u09-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u09-p04",
+      "word_count": 148,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u09-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u09-p05",
+      "word_count": 158,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u09-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u09-p06",
+      "word_count": 151,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u09-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u10-p01",
+      "word_count": 166,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u10-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u10-p02",
+      "word_count": 162,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u10-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u10-p03",
+      "word_count": 156,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u10-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u10-p04",
+      "word_count": 148,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u10-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u10-p05",
+      "word_count": 162,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u10-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b1",
+      "passage_id": "ar-b1-u10-p06",
+      "word_count": 169,
+      "zone": "below_standard_min",
+      "standard": [
+        220,
+        350
+      ],
+      "extended": [
+        400,
+        550
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b1",
+      "passage_id": "ar-b1-u10-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u01-p01",
+      "word_count": 186,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u01-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u01-p02",
+      "word_count": 170,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u01-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u01-p03",
+      "word_count": 176,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u01-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u01-p04",
+      "word_count": 173,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u01-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u01-p05",
+      "word_count": 178,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u01-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u01-p06",
+      "word_count": 185,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u01-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u02-p01",
+      "word_count": 172,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u02-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u02-p02",
+      "word_count": 170,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u02-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u02-p03",
+      "word_count": 177,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u02-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u02-p04",
+      "word_count": 152,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u02-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u02-p05",
+      "word_count": 169,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u02-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u02-p06",
+      "word_count": 178,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u02-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u03-p01",
+      "word_count": 184,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u03-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u03-p02",
+      "word_count": 190,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u03-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u03-p03",
+      "word_count": 186,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u03-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u03-p04",
+      "word_count": 179,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u03-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u03-p05",
+      "word_count": 174,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u03-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u03-p06",
+      "word_count": 180,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u03-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u04-p01",
+      "word_count": 151,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u04-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u04-p02",
+      "word_count": 146,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u04-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u04-p03",
+      "word_count": 150,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u04-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u04-p04",
+      "word_count": 163,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u04-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u04-p05",
+      "word_count": 164,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u04-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u04-p06",
+      "word_count": 177,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u04-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u05-p01",
+      "word_count": 157,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u05-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u05-p02",
+      "word_count": 159,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u05-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u05-p03",
+      "word_count": 165,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u05-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u05-p04",
+      "word_count": 158,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u05-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u05-p05",
+      "word_count": 158,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u05-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u05-p06",
+      "word_count": 166,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u05-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u06-p01",
+      "word_count": 163,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u06-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u06-p02",
+      "word_count": 154,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u06-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u06-p03",
+      "word_count": 173,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u06-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u06-p04",
+      "word_count": 148,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u06-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u06-p05",
+      "word_count": 156,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u06-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u06-p06",
+      "word_count": 167,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u06-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u07-p01",
+      "word_count": 153,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u07-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u07-p02",
+      "word_count": 153,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u07-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u07-p03",
+      "word_count": 160,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u07-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u07-p04",
+      "word_count": 176,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u07-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u07-p05",
+      "word_count": 158,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u07-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u07-p06",
+      "word_count": 169,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u07-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u08-p01",
+      "word_count": 157,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u08-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u08-p02",
+      "word_count": 155,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u08-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u08-p03",
+      "word_count": 144,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u08-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u08-p04",
+      "word_count": 163,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u08-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u08-p05",
+      "word_count": 159,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u08-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u08-p06",
+      "word_count": 184,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u08-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u09-p01",
+      "word_count": 176,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u09-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u09-p02",
+      "word_count": 178,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u09-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u09-p03",
+      "word_count": 158,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u09-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u09-p04",
+      "word_count": 167,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u09-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u09-p05",
+      "word_count": 188,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u09-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u09-p06",
+      "word_count": 180,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u09-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p01",
+      "word_count": 183,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p02",
+      "word_count": 165,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p03",
+      "word_count": 162,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p04",
+      "word_count": 162,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p05",
+      "word_count": 164,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p06",
+      "word_count": 202,
+      "zone": "below_standard_min",
+      "standard": [
+        350,
+        550
+      ],
+      "extended": [
+        600,
+        900
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "b2",
+      "passage_id": "ar-b2-u10-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u01-p01",
+      "word_count": 205,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u01-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u01-p02",
+      "word_count": 211,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u01-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u01-p03",
+      "word_count": 218,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u01-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u01-p04",
+      "word_count": 219,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u01-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u01-p05",
+      "word_count": 236,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u01-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u01-p06",
+      "word_count": 216,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u01-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u02-p01",
+      "word_count": 199,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u02-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u02-p02",
+      "word_count": 199,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u02-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u02-p03",
+      "word_count": 197,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u02-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u02-p04",
+      "word_count": 203,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u02-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u02-p05",
+      "word_count": 205,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u02-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u02-p06",
+      "word_count": 188,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u02-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u03-p01",
+      "word_count": 192,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u03-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u03-p02",
+      "word_count": 198,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u03-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u03-p03",
+      "word_count": 195,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u03-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u03-p04",
+      "word_count": 183,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u03-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u03-p05",
+      "word_count": 206,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u03-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u03-p06",
+      "word_count": 210,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u03-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u04-p01",
+      "word_count": 185,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u04-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u04-p02",
+      "word_count": 184,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u04-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u04-p03",
+      "word_count": 180,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u04-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u04-p04",
+      "word_count": 174,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u04-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u04-p05",
+      "word_count": 165,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u04-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u04-p06",
+      "word_count": 200,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u04-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u05-p01",
+      "word_count": 177,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u05-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u05-p02",
+      "word_count": 172,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u05-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u05-p03",
+      "word_count": 168,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u05-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u05-p04",
+      "word_count": 179,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u05-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u05-p05",
+      "word_count": 180,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u05-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u05-p06",
+      "word_count": 194,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u05-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u06-p01",
+      "word_count": 183,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u06-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u06-p02",
+      "word_count": 191,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u06-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u06-p03",
+      "word_count": 185,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u06-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u06-p04",
+      "word_count": 189,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u06-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u06-p05",
+      "word_count": 180,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u06-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u06-p06",
+      "word_count": 193,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u06-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u07-p01",
+      "word_count": 189,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u07-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u07-p02",
+      "word_count": 164,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u07-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u07-p03",
+      "word_count": 174,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u07-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u07-p04",
+      "word_count": 155,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u07-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u07-p05",
+      "word_count": 170,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u07-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u07-p06",
+      "word_count": 186,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u07-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u08-p01",
+      "word_count": 173,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u08-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u08-p02",
+      "word_count": 180,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u08-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u08-p03",
+      "word_count": 176,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u08-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u08-p04",
+      "word_count": 160,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u08-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u08-p05",
+      "word_count": 176,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u08-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u08-p06",
+      "word_count": 187,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u08-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u09-p01",
+      "word_count": 173,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u09-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u09-p02",
+      "word_count": 173,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u09-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u09-p03",
+      "word_count": 160,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u09-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u09-p04",
+      "word_count": 164,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u09-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u09-p05",
+      "word_count": 166,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u09-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u09-p06",
+      "word_count": 176,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u09-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p01",
+      "word_count": 180,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p02",
+      "word_count": 141,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p03",
+      "word_count": 129,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p04",
+      "word_count": 147,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p05",
+      "word_count": 143,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p06",
+      "word_count": 198,
+      "zone": "below_standard_min",
+      "standard": [
+        500,
+        800
+      ],
+      "extended": [
+        900,
+        1400
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c1",
+      "passage_id": "ar-c1-u10-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u01-p01",
+      "word_count": 197,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u01-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u01-p02",
+      "word_count": 190,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u01-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u01-p03",
+      "word_count": 185,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u01-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u01-p04",
+      "word_count": 186,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u01-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u01-p05",
+      "word_count": 174,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u01-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u01-p06",
+      "word_count": 187,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u01-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u02-p01",
+      "word_count": 193,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u02-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u02-p02",
+      "word_count": 183,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u02-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u02-p03",
+      "word_count": 193,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u02-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u02-p04",
+      "word_count": 165,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u02-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u02-p05",
+      "word_count": 184,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u02-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u02-p06",
+      "word_count": 182,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u02-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u03-p01",
+      "word_count": 193,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u03-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u03-p02",
+      "word_count": 186,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u03-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u03-p03",
+      "word_count": 185,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u03-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u03-p04",
+      "word_count": 181,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u03-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u03-p05",
+      "word_count": 175,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u03-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u03-p06",
+      "word_count": 193,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u03-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u04-p01",
+      "word_count": 178,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u04-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u04-p02",
+      "word_count": 174,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u04-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u04-p03",
+      "word_count": 161,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u04-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u04-p04",
+      "word_count": 167,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u04-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u04-p05",
+      "word_count": 180,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u04-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u04-p06",
+      "word_count": 159,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u04-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u05-p01",
+      "word_count": 172,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u05-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u05-p02",
+      "word_count": 170,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u05-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u05-p03",
+      "word_count": 170,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u05-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u05-p04",
+      "word_count": 184,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u05-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u05-p05",
+      "word_count": 162,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u05-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u05-p06",
+      "word_count": 168,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u05-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u06-p01",
+      "word_count": 189,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u06-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u06-p02",
+      "word_count": 157,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u06-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u06-p03",
+      "word_count": 163,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u06-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u06-p04",
+      "word_count": 168,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u06-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u06-p05",
+      "word_count": 181,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u06-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u06-p06",
+      "word_count": 181,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u06-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u07-p01",
+      "word_count": 127,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u07-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u07-p02",
+      "word_count": 125,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u07-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u07-p03",
+      "word_count": 132,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u07-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u07-p04",
+      "word_count": 127,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u07-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u07-p05",
+      "word_count": 136,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u07-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u07-p06",
+      "word_count": 133,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u07-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p01",
+      "word_count": 123,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p02",
+      "word_count": 110,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p03",
+      "word_count": 98,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p04",
+      "word_count": 103,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p05",
+      "word_count": 115,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p06",
+      "word_count": 115,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p01",
+      "word_count": 125,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p02",
+      "word_count": 110,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p03",
+      "word_count": 114,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p04",
+      "word_count": 109,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p05",
+      "word_count": 150,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p06",
+      "word_count": 120,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p06",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p01",
+      "word_count": 143,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p01",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p02",
+      "word_count": 119,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p02",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p03",
+      "word_count": 133,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p03",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p04",
+      "word_count": 127,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p04",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p05",
+      "word_count": 134,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p05",
+      "value": 0
+    },
+    {
+      "code": "length_outside_calibration_bands",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p06",
+      "word_count": 146,
+      "zone": "below_standard_min",
+      "standard": [
+        700,
+        1200
+      ],
+      "extended": [
+        1300,
+        2200
+      ]
+    },
+    {
+      "code": "known_token_coverage_unmeasured",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p06",
+      "value": 0
+    }
+  ],
+  "status": "REVIEW_REQUIRED"
+}
