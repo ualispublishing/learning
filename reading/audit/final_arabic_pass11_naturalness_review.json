@@ -1,0 +1,45 @@
+{
+  "pass": 11,
+  "name": "manual_arabic_naturalness_grammar_review",
+  "scope": "Arabic A1-C2 canonical reading corpus",
+  "method": "manual prose read of compact title/text snapshots; only high-confidence MSA grammar, case-form, idiom, and naturalness defects are repaired; stylistic preferences alone are not edits",
+  "levels": {
+    "a1": {
+      "passages_reviewed": 60,
+      "passages_total": 60,
+      "review_complete": true,
+      "high_confidence_repairs_applied": 28,
+      "passages_touched": 26,
+      "repair_sources": [
+        "reading/tools/repair_final_arabic_a1_u07_p03_tatweel_typo.py",
+        "reading/tools/repair_final_arabic_a1_u07_p03_forecast_naturalness.py",
+        "reading/tools/repair_final_arabic_pass11_a1_naturalness_batch.py"
+      ],
+      "status": "PASS_AFTER_REPAIR"
+    },
+    "a2": {"passages_reviewed": 0, "passages_total": 60, "review_complete": false, "status": "PENDING"},
+    "b1": {"passages_reviewed": 0, "passages_total": 60, "review_complete": false, "status": "PENDING"},
+    "b2": {
+      "passages_reviewed": 1,
+      "passages_total": 60,
+      "review_complete": false,
+      "status": "PENDING",
+      "note": "One independently detected comparative-naturalness defect in ar-b2-u04-p06 was already repaired; full level manual pass remains pending."
+    },
+    "c1": {"passages_reviewed": 0, "passages_total": 60, "review_complete": false, "status": "PENDING"},
+    "c2": {
+      "passages_reviewed": 1,
+      "passages_total": 60,
+      "review_complete": false,
+      "status": "PENDING",
+      "note": "ar-c2-u01-p03 received a separate lexical-sense/naturalness normalization for مبرر; full level manual pass remains pending."
+    }
+  },
+  "totals": {
+    "passages_fully_reviewed_in_completed_levels": 60,
+    "levels_complete": 1,
+    "levels_pending": 5
+  },
+  "status": "IN_PROGRESS",
+  "final_approval_claim": false
+}
