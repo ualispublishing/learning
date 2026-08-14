@@ -1,0 +1,28 @@
+name: Refresh active generation plan
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/refresh-active-generation-plan.yml'
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python reading/tools/update_generation_status.py
+      - run: python reading/tools/extract_active_generation_plan.py
+      - name: Commit synchronized status and exact active plan
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/STATUS.json reading/planning/ACTIVE_GENERATION_PLAN.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Refresh active generation handoff [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
