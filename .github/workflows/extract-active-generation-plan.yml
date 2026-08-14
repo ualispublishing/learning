@@ -1,0 +1,30 @@
+name: Extract active generation plan
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/extract_active_generation_plan.py'
+      - 'reading/STATUS.json'
+      - 'reading/planning/topic_genre_matrix.json'
+      - '.github/workflows/extract-active-generation-plan.yml'
+permissions:
+  contents: write
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python reading/tools/extract_active_generation_plan.py
+      - name: Commit derived active plan
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/planning/ACTIVE_GENERATION_PLAN.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Derive active generation roadmap [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
