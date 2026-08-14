@@ -34,152 +34,445 @@
       "type": "string",
       "pattern": "^(ar|fr|ur)-(a1|a2|b1|b2|c1|c2)-u[0-9]{2}-p[0-9]{2}$"
     },
-    "language": {"type": "string", "enum": ["ar", "fr", "ur"]},
-    "cefr": {"type": "string", "enum": ["A1", "A2", "B1", "B2", "C1", "C2"]},
-    "unit": {"type": "integer", "minimum": 1, "maximum": 99},
-    "sequence": {"type": "integer", "minimum": 1},
-    "revision": {"type": "integer", "minimum": 1},
-    "title": {"type": "string", "minLength": 1},
+    "language": {
+      "type": "string",
+      "enum": [
+        "ar",
+        "fr",
+        "ur"
+      ]
+    },
+    "cefr": {
+      "type": "string",
+      "enum": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ]
+    },
+    "unit": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
     "passage_type": {
       "type": "string",
-      "enum": ["instructional", "reinforcement", "transfer", "interleaved", "fluency", "stretch", "checkpoint", "paired"]
+      "enum": [
+        "instructional",
+        "reinforcement",
+        "transfer",
+        "interleaved",
+        "fluency",
+        "stretch",
+        "checkpoint",
+        "paired",
+        "integration"
+      ]
     },
-    "genre": {"type": "string", "minLength": 1},
+    "genre": {
+      "type": "string",
+      "minLength": 1
+    },
     "domains": {
       "type": "array",
-      "items": {"type": "string", "enum": ["personal", "public", "educational", "professional"]},
+      "items": {
+        "type": "string",
+        "enum": [
+          "personal",
+          "public",
+          "educational",
+          "professional"
+        ]
+      },
       "minItems": 1,
       "uniqueItems": true
     },
     "topics": {
       "type": "array",
-      "items": {"type": "string", "minLength": 1},
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
       "minItems": 1,
       "uniqueItems": true
     },
-    "text": {"type": "string", "minLength": 1},
-    "word_count": {"type": "integer", "minimum": 1},
-    "sentence_count": {"type": "integer", "minimum": 1},
-    "estimated_known_token_coverage": {"type": "number", "minimum": 0, "maximum": 1},
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "word_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "sentence_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "estimated_known_token_coverage": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
     "new_lexical_targets": {
       "type": "array",
-      "items": {"$ref": "#/$defs/newLexicalTarget"}
+      "items": {
+        "$ref": "#/$defs/newLexicalTarget"
+      }
     },
     "review_lexical_targets": {
       "type": "array",
-      "items": {"$ref": "#/$defs/reviewLexicalTarget"}
+      "items": {
+        "$ref": "#/$defs/reviewLexicalTarget"
+      }
     },
     "grammar_targets": {
       "type": "array",
-      "items": {"$ref": "#/$defs/targetReference"}
+      "items": {
+        "$ref": "#/$defs/targetReference"
+      }
     },
     "discourse_targets": {
       "type": "array",
-      "items": {"$ref": "#/$defs/targetReference"}
+      "items": {
+        "$ref": "#/$defs/targetReference"
+      }
     },
     "questions": {
       "type": "array",
-      "items": {"$ref": "#/$defs/question"},
+      "items": {
+        "$ref": "#/$defs/question"
+      },
       "minItems": 1
     },
     "answer_key": {
       "type": "array",
-      "items": {"$ref": "#/$defs/answer"},
+      "items": {
+        "$ref": "#/$defs/answer"
+      },
       "minItems": 1
     },
-    "speed_training": {"$ref": "#/$defs/speedTraining"},
-    "quality": {"$ref": "#/$defs/quality"},
+    "speed_training": {
+      "$ref": "#/$defs/speedTraining"
+    },
+    "quality": {
+      "$ref": "#/$defs/quality"
+    },
     "source_facts": {
       "type": "array",
-      "items": {"$ref": "#/$defs/sourceFact"}
+      "items": {
+        "$ref": "#/$defs/sourceFact"
+      }
     },
     "cultural_notes_internal": {
       "type": "array",
-      "items": {"type": "string"}
+      "items": {
+        "type": "string"
+      }
     },
-    "paired_text_group": {"type": ["string", "null"]},
+    "paired_text_group": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "prerequisites": {
       "type": "array",
-      "items": {"type": "string"},
+      "items": {
+        "type": "string"
+      },
       "uniqueItems": true
     },
-    "difficulty_notes_internal": {"type": ["string", "null"]},
+    "difficulty_notes_internal": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "reader_tags": {
       "type": "array",
-      "items": {"type": "string"},
+      "items": {
+        "type": "string"
+      },
       "uniqueItems": true
     },
-    "complexity_profile": {"$ref": "#/$defs/complexityProfile"}
+    "complexity_profile": {
+      "$ref": "#/$defs/complexityProfile"
+    }
   },
   "$defs": {
     "newLexicalTarget": {
       "type": "object",
-      "required": ["id", "form", "lemma", "intended_sense", "context_strategy", "first_introduced", "exposures_in_text"],
+      "required": [
+        "id",
+        "form",
+        "lemma",
+        "intended_sense",
+        "context_strategy",
+        "first_introduced",
+        "exposures_in_text"
+      ],
       "properties": {
-        "id": {"type": "string", "minLength": 1},
-        "form": {"type": "string", "minLength": 1},
-        "lemma": {"type": "string", "minLength": 1},
-        "part_of_speech": {"type": ["string", "null"]},
-        "intended_sense": {"type": "string", "minLength": 1},
-        "register": {"type": ["string", "null"]},
-        "variety": {"type": ["string", "null"]},
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "form": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lemma": {
+          "type": "string",
+          "minLength": 1
+        },
+        "part_of_speech": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "intended_sense": {
+          "type": "string",
+          "minLength": 1
+        },
+        "register": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "variety": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "context_strategy": {
           "type": "array",
           "items": {
             "type": "string",
             "enum": [
-              "contrast",
-              "cause_consequence",
+              "argument_reconstruction",
+              "audience_register",
               "behavior_interpretation",
-              "example_instance",
-              "restatement",
-              "parallel_structure",
+              "category_reflection",
               "category_relation",
+              "causal_comparison",
+              "causal_explanation",
+              "cause_consequence",
+              "close_reading",
+              "communication_scope",
+              "comparative_reading",
+              "competing_interpretations",
+              "complex_system",
+              "conceptual_distinction",
+              "conditional_assumption",
+              "contrast",
+              "counterargument",
+              "counterexample",
+              "counterfactual",
+              "counterreading",
+              "cultural_interpretation",
+              "decision_tradeoff",
+              "design_tradeoff",
+              "distributional_effect",
+              "epistemic_distinction",
+              "ethical_tradeoff",
+              "evidence_interpretation",
+              "evidence_qualification",
+              "evidence_strength",
+              "example_instance",
+              "exception_case",
+              "fairness_comparison",
+              "feedback_loop",
+              "fictional_archive",
+              "fictional_charter",
+              "fictional_legal_system",
+              "fictional_science",
+              "form_function",
+              "formal_evidence",
+              "future_scenario",
+              "historical_narrative",
+              "historiographical_reconstruction",
+              "identity_interpretation",
+              "implementation_gap",
+              "implementation_tradeoff",
+              "inference_chain",
+              "inference_risk",
+              "institutional_case",
+              "institutional_incentive",
+              "interpretive_contrast",
+              "interpretive_evidence",
+              "language_variation",
+              "metric_response",
+              "model_limit",
+              "morphological_support",
+              "parallel_structure",
+              "perspective_shift",
+              "policy_tradeoff",
+              "privacy_boundary",
+              "procedural_reasoning",
+              "professional_judgment",
+              "recommendation_scope",
+              "research_method",
+              "restatement",
+              "rhetorical_effect",
+              "rights_interpretation",
+              "risk_distribution",
+              "rule_adaptation",
+              "scenario_comparison",
+              "scenario_forecast",
               "scenario_resolution",
-              "morphological_support"
+              "source_comparison",
+              "source_criticism",
+              "source_critique",
+              "source_selection",
+              "stock_flow",
+              "structural_relation",
+              "style_analysis",
+              "tradeoff",
+              "translation_choice",
+              "uncertainty",
+              "uncertainty_analysis",
+              "uncertainty_calibration",
+              "user_perspective",
+              "value_conflict"
             ]
           },
           "minItems": 1,
           "uniqueItems": true
         },
-        "first_introduced": {"type": "boolean"},
-        "exposures_in_text": {"type": "integer", "minimum": 1},
-        "source_lexicon": {"type": ["string", "null"]},
-        "source_rank": {"type": ["integer", "null"], "minimum": 1},
-        "beyond_base": {"type": "boolean"}
+        "first_introduced": {
+          "type": "boolean"
+        },
+        "exposures_in_text": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "source_lexicon": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_rank": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "beyond_base": {
+          "type": "boolean"
+        }
       },
       "additionalProperties": true
     },
     "reviewLexicalTarget": {
       "type": "object",
-      "required": ["id", "form", "review_stage", "representation"],
+      "required": [
+        "id",
+        "form",
+        "review_stage",
+        "representation"
+      ],
       "properties": {
-        "id": {"type": "string", "minLength": 1},
-        "form": {"type": "string", "minLength": 1},
-        "review_stage": {"type": "string", "enum": ["R1", "R2", "R3", "R4", "R5", "long_term"]},
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "form": {
+          "type": "string",
+          "minLength": 1
+        },
+        "review_stage": {
+          "type": "string",
+          "enum": [
+            "R1",
+            "R2",
+            "R3",
+            "R4",
+            "R5",
+            "long_term"
+          ]
+        },
         "representation": {
           "type": "string",
-          "enum": ["running_text", "vocabulary_in_context", "cloze", "contrast", "paraphrase", "summary", "production", "reference", "other"]
+          "enum": [
+            "running_text",
+            "vocabulary_in_context",
+            "cloze",
+            "contrast",
+            "paraphrase",
+            "summary",
+            "production",
+            "reference",
+            "other"
+          ]
         },
-        "expected_exposure_number": {"type": ["integer", "null"], "minimum": 1}
+        "expected_exposure_number": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
       },
       "additionalProperties": true
     },
     "targetReference": {
       "type": "object",
-      "required": ["id", "role"],
+      "required": [
+        "id",
+        "role"
+      ],
       "properties": {
-        "id": {"type": "string", "minLength": 1},
-        "role": {"type": "string", "enum": ["new", "review", "contrast", "integration"]},
-        "description": {"type": "string"}
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "new",
+            "review",
+            "contrast",
+            "integration"
+          ]
+        },
+        "description": {
+          "type": "string"
+        }
       },
       "additionalProperties": true
     },
     "question": {
       "type": "object",
-      "required": ["id", "type", "prompt", "answer_id"],
+      "required": [
+        "id",
+        "type",
+        "prompt",
+        "answer_id"
+      ],
       "properties": {
-        "id": {"type": "string", "minLength": 1},
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -214,80 +507,306 @@
             "register_style"
           ]
         },
-        "prompt": {"type": "string", "minLength": 1},
-        "target_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
-        "answer_id": {"type": "string", "minLength": 1},
-        "options": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 2},
-        "skill": {"type": "string"},
-        "difficulty": {"type": ["integer", "number", "string", "null"]}
+        "prompt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "answer_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 2
+        },
+        "skill": {
+          "type": "string"
+        },
+        "difficulty": {
+          "type": [
+            "integer",
+            "number",
+            "string",
+            "null"
+          ]
+        }
       },
       "additionalProperties": true
     },
     "answer": {
       "type": "object",
-      "required": ["id", "question_id", "answer", "explanation"],
+      "required": [
+        "id",
+        "question_id",
+        "answer",
+        "explanation"
+      ],
       "properties": {
-        "id": {"type": "string", "minLength": 1},
-        "question_id": {"type": "string", "minLength": 1},
-        "answer": {"type": "string", "minLength": 1},
-        "explanation": {"type": "string"},
-        "evidence_span": {"type": ["string", "null"]},
-        "acceptable_variants": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "question_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "answer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "explanation": {
+          "type": "string"
+        },
+        "evidence_span": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "acceptable_variants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
       },
       "additionalProperties": true
     },
     "speedTraining": {
       "type": "object",
-      "required": ["timed", "benchmark_eligible", "comprehension_gate", "new_word_policy"],
+      "required": [
+        "timed",
+        "benchmark_eligible",
+        "comprehension_gate",
+        "new_word_policy"
+      ],
       "properties": {
-        "timed": {"type": "boolean"},
-        "benchmark_eligible": {"type": "boolean"},
-        "comprehension_gate": {"type": "number", "minimum": 0, "maximum": 1},
-        "new_word_policy": {"type": "string", "enum": ["none", "minimal", "controlled"]},
-        "notes": {"type": "string"}
+        "timed": {
+          "type": "boolean"
+        },
+        "benchmark_eligible": {
+          "type": "boolean"
+        },
+        "comprehension_gate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "new_word_policy": {
+          "type": "string",
+          "enum": [
+            "none",
+            "minimal",
+            "controlled"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
       },
       "additionalProperties": true
     },
     "quality": {
       "type": "object",
-      "required": ["status", "linguistic_review", "pedagogical_review", "coverage_check", "answer_key_check"],
+      "required": [
+        "status",
+        "linguistic_review",
+        "pedagogical_review",
+        "coverage_check",
+        "answer_key_check"
+      ],
       "properties": {
-        "status": {"type": "string", "enum": ["draft", "linguistic_review", "pedagogical_review", "calibrated", "approved", "retired"]},
-        "linguistic_review": {"type": "string", "enum": ["pending", "pass", "review_required", "fail"]},
-        "pedagogical_review": {"type": "string", "enum": ["pending", "pass", "review_required", "fail"]},
-        "coverage_check": {"type": "string", "enum": ["pending", "pass", "review_required", "fail"]},
-        "answer_key_check": {"type": "string", "enum": ["pending", "pass", "review_required", "fail"]},
-        "schema_check": {"type": "string", "enum": ["pending", "pass", "fail"]},
-        "fact_check": {"type": "string", "enum": ["not_required", "pending", "pass", "review_required", "fail"]},
-        "notes": {"type": "array", "items": {"type": "string"}}
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "linguistic_review",
+            "pedagogical_review",
+            "calibrated",
+            "approved",
+            "retired"
+          ]
+        },
+        "linguistic_review": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "pass",
+            "review_required",
+            "fail"
+          ]
+        },
+        "pedagogical_review": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "pass",
+            "review_required",
+            "fail"
+          ]
+        },
+        "coverage_check": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "pass",
+            "review_required",
+            "fail"
+          ]
+        },
+        "answer_key_check": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "pass",
+            "review_required",
+            "fail"
+          ]
+        },
+        "schema_check": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "pass",
+            "fail"
+          ]
+        },
+        "fact_check": {
+          "type": "string",
+          "enum": [
+            "not_required",
+            "pending",
+            "pass",
+            "review_required",
+            "fail"
+          ]
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       },
       "additionalProperties": true
     },
     "sourceFact": {
       "type": "object",
-      "required": ["claim", "source_id"],
+      "required": [
+        "claim",
+        "source_id"
+      ],
       "properties": {
-        "claim": {"type": "string", "minLength": 1},
-        "source_id": {"type": "string", "minLength": 1},
-        "url": {"type": ["string", "null"], "format": "uri"},
-        "checked": {"type": "boolean"}
+        "claim": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "checked": {
+          "type": "boolean"
+        }
       },
       "additionalProperties": true
     },
     "complexityProfile": {
       "type": "object",
       "properties": {
-        "mean_sentence_length": {"type": ["number", "null"], "minimum": 0},
-        "median_sentence_length": {"type": ["number", "null"], "minimum": 0},
-        "clause_count": {"type": ["integer", "null"], "minimum": 0},
-        "subordination_count": {"type": ["integer", "null"], "minimum": 0},
-        "coordination_count": {"type": ["integer", "null"], "minimum": 0},
-        "connective_diversity": {"type": ["number", "null"], "minimum": 0},
-        "lexical_diversity": {"type": ["number", "null"], "minimum": 0},
-        "reference_chain_max_distance": {"type": ["integer", "null"], "minimum": 0},
-        "multiword_expression_count": {"type": ["integer", "null"], "minimum": 0},
-        "morphology_notes": {"type": "string"},
-        "inference_depth": {"type": ["string", "number", "integer", "null"]}
+        "mean_sentence_length": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "median_sentence_length": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "clause_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "subordination_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "coordination_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "connective_diversity": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "lexical_diversity": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "reference_chain_max_distance": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "multiword_expression_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "morphology_notes": {
+          "type": "string"
+        },
+        "inference_depth": {
+          "type": [
+            "string",
+            "number",
+            "integer",
+            "null"
+          ]
+        }
       },
       "additionalProperties": true
     }
