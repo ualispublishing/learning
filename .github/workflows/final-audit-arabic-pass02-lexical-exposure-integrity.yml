@@ -16,8 +16,8 @@ jobs:
         with: {fetch-depth: 0}
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
-      # This workflow is also intentionally touched after guarded canonical
-      # lexical repairs because generated [skip ci] commits do not retrigger it.
+      # Explicitly touched after the final source/sense repairs because canonical
+      # repair commits use [skip ci].
       - name: Run final review pass 02
         run: python reading/tools/final_audit_arabic_pass02_lexical_exposure_integrity.py
       - name: Commit audit artifact
