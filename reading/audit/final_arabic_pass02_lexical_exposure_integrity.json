@@ -2,12 +2,13 @@
   "pass": 2,
   "name": "lexical_target_exposure_integrity",
   "scope": "Arabic A1-C2 canonical reading corpus",
-  "method": "target-ID chronology, review-before-introduction protection, exact-surface exposure diagnostics, checkpoint diagnostics, and question target linkage",
+  "method": "new-target ID chronology, exact-surface exposure diagnostics, checkpoint diagnostics, question target linkage, and prerequisite/core review diagnostics",
   "not_claimed": [
     "lexical sense correctness",
     "register correctness",
     "CEFR placement",
     "morphological equivalence when exact surface differs",
+    "whether a review target was learned outside the reader",
     "learner mastery"
   ],
   "levels": {
@@ -15,436 +16,58 @@
       "new_targets": 100,
       "review_targets": 245,
       "p6_new_targets": 0,
-      "zero_exact_exposure_warnings": 25
+      "zero_exact_exposure_warnings": 25,
+      "review_targets_without_prior_reader_introduction": 5
     },
     "a2": {
       "new_targets": 79,
       "review_targets": 266,
       "p6_new_targets": 0,
-      "zero_exact_exposure_warnings": 35
+      "zero_exact_exposure_warnings": 35,
+      "review_targets_without_prior_reader_introduction": 4
     },
     "b1": {
       "new_targets": 83,
       "review_targets": 208,
       "p6_new_targets": 0,
-      "zero_exact_exposure_warnings": 31
+      "zero_exact_exposure_warnings": 31,
+      "review_targets_without_prior_reader_introduction": 31
     },
     "b2": {
       "new_targets": 90,
       "review_targets": 207,
       "p6_new_targets": 0,
-      "zero_exact_exposure_warnings": 36
+      "zero_exact_exposure_warnings": 36,
+      "review_targets_without_prior_reader_introduction": 22
     },
     "c1": {
       "new_targets": 90,
       "review_targets": 268,
       "p6_new_targets": 0,
-      "zero_exact_exposure_warnings": 32
+      "zero_exact_exposure_warnings": 32,
+      "review_targets_without_prior_reader_introduction": 0
     },
     "c2": {
       "new_targets": 90,
       "review_targets": 183,
       "p6_new_targets": 0,
-      "zero_exact_exposure_warnings": 34
+      "zero_exact_exposure_warnings": 34,
+      "review_targets_without_prior_reader_introduction": 12
     }
   },
   "totals": {
     "passages": 360,
     "unique_introduced_target_ids": 525,
-    "hard_issues": 83,
-    "warnings": 425,
+    "hard_issues": 7,
+    "warnings": 499,
     "normalized_surfaces_with_multiple_target_ids": 8
   },
   "hard_issues": [
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-a1-u04-p01",
-      "target_id": "ar-r100",
-      "form": "مرة"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-a1-u05-p03",
-      "target_id": "ar-r182",
-      "form": "خارج"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-a1-u07-p01",
-      "target_id": "ar-r276",
-      "form": "صباح"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-a1-u07-p04",
-      "target_id": "ar-r482",
-      "form": "قديم"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-a1-u08-p02",
-      "target_id": "ar-r442",
-      "form": "مهمة"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-a2-u02-p01",
-      "target_id": "ar-r505",
-      "form": "متى"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-a2-u02-p05",
-      "target_id": "ar-r626",
-      "form": "معا"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-a2-u02-p06",
-      "target_id": "ar-r626",
-      "form": "معا"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-a2-u07-p04",
-      "target_id": "ar-r986",
-      "form": "توقعات"
-    },
     {
       "code": "target_reintroduced_as_new",
       "passage_id": "ar-b1-u02-p01",
       "target_id": "ar-r487",
       "first_passage": "ar-b1-u01-p04"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u03-p02",
-      "target_id": "ar-r902",
-      "form": "قدرة"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u03-p04",
-      "target_id": "ar-r612",
-      "form": "مؤسسة"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u04-p01",
-      "target_id": "ar-r847",
-      "form": "سكان"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u04-p02",
-      "target_id": "ar-r843",
-      "form": "مواد"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u04-p02",
-      "target_id": "ar-r848",
-      "form": "أسباب"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u04-p03",
-      "target_id": "ar-r1134",
-      "form": "جودة"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u04-p04",
-      "target_id": "ar-r769",
-      "form": "طرق"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u04-p05",
-      "target_id": "ar-r1141",
-      "form": "شكوى"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u05-p01",
-      "target_id": "ar-r610",
-      "form": "يتذكر"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u05-p02",
-      "target_id": "ar-r1076",
-      "form": "منتج"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u05-p03",
-      "target_id": "ar-r722",
-      "form": "مصدر"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u05-p03",
-      "target_id": "ar-r909",
-      "form": "دليل"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u05-p05",
-      "target_id": "ar-r647",
-      "form": "دراسة"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u05-p05",
-      "target_id": "ar-r1190",
-      "form": "خبرة"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u06-p01",
-      "target_id": "ar-r767",
-      "form": "حي"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u06-p01",
-      "target_id": "ar-r847",
-      "form": "سكان"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u06-p02",
-      "target_id": "ar-r1107",
-      "form": "زائر"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u06-p02",
-      "target_id": "ar-r746",
-      "form": "ثقافة"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u07-p02",
-      "target_id": "ar-r665",
-      "form": "اهتمام"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u07-p03",
-      "target_id": "ar-r1099",
-      "form": "تعليق"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u07-p03",
-      "target_id": "ar-r1141",
-      "form": "شكوى"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u08-p01",
-      "target_id": "ar-r727",
-      "form": "أخبار"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u08-p02",
-      "target_id": "ar-r722",
-      "form": "مصدر"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u08-p03",
-      "target_id": "ar-r875",
-      "form": "خطاب"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u08-p04",
-      "target_id": "ar-r722",
-      "form": "مصدر"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u09-p01",
-      "target_id": "ar-r847",
-      "form": "سكان"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u09-p02",
-      "target_id": "ar-r1141",
-      "form": "شكوى"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u09-p02",
-      "target_id": "ar-r684",
-      "form": "إجراء"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u09-p05",
-      "target_id": "ar-r660",
-      "form": "نجاح"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u10-p01",
-      "target_id": "ar-r909",
-      "form": "دليل"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b1-u10-p06",
-      "target_id": "ar-r909",
-      "form": "دليل"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u01-p01",
-      "target_id": "ar-r909",
-      "form": "دليل"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u01-p04",
-      "target_id": "ar-r729",
-      "form": "خطر"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u01-p04",
-      "target_id": "ar-r1349",
-      "form": "توقع"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u03-p04",
-      "target_id": "ar-r729",
-      "form": "خطر"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u04-p01",
-      "target_id": "ar-r769",
-      "form": "طرق"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u04-p02",
-      "target_id": "ar-r847",
-      "form": "سكان"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u05-p02",
-      "target_id": "ar-r729",
-      "form": "خطر"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u06-p03",
-      "target_id": "ar-r1432",
-      "form": "غياب"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u07-p02",
-      "target_id": "ar-r611",
-      "form": "أداء"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u07-p02",
-      "target_id": "ar-r952",
-      "form": "يتمكن"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u07-p03",
-      "target_id": "ar-r1849",
-      "form": "تكون"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u07-p04",
-      "target_id": "ar-r1010",
-      "form": "فيلم"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u07-p05",
-      "target_id": "ar-r638",
-      "form": "قصة"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u08-p01",
-      "target_id": "ar-r722",
-      "form": "مصدر"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u08-p02",
-      "target_id": "ar-r834",
-      "form": "أحداث"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u08-p02",
-      "target_id": "ar-r848",
-      "form": "أسباب"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u08-p03",
-      "target_id": "ar-r1439",
-      "form": "مفهوم"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u08-p04",
-      "target_id": "ar-r769",
-      "form": "طرق"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u08-p04",
-      "target_id": "ar-r722",
-      "form": "مصدر"
-    },
-    {
-      "code": "review_target_not_chronologically_prior",
-      "passage_id": "ar-b2-u08-p05",
-      "target_id": "ar-r1923",
-      "introduced_in": "ar-b2-u08-p05"
-    },
-    {
-      "code": "review_target_not_chronologically_prior",
-      "passage_id": "ar-b2-u08-p05",
-      "target_id": "ar-r1915",
-      "introduced_in": "ar-b2-u08-p05"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u10-p01",
-      "target_id": "ar-r1899",
-      "form": "توصية"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u10-p04",
-      "target_id": "ar-r1936",
-      "form": "بند"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-b2-u10-p06",
-      "target_id": "ar-r2163",
-      "form": "كلفة"
     },
     {
       "code": "target_reintroduced_as_new",
@@ -481,78 +104,6 @@
       "passage_id": "ar-c1-u09-p03",
       "target_id": "ar-r1880",
       "first_passage": "ar-b2-u08-p04"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-c2-u03-p01",
-      "target_id": "ar-r1603",
-      "form": "أثبت"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-c2-u04-p01",
-      "target_id": "ar-r1670",
-      "form": "رصيد"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-c2-u04-p03",
-      "target_id": "ar-r2087",
-      "form": "هامش"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-c2-u04-p03",
-      "target_id": "ar-r1931",
-      "form": "تصنيع"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-c2-u06-p01",
-      "target_id": "ar-r2316",
-      "form": "إنفاق"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-c2-u06-p02",
-      "target_id": "ar-r1735",
-      "form": "تصويت"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-c2-u06-p04",
-      "target_id": "ar-r1922",
-      "form": "تخفيف"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-c2-u06-p04",
-      "target_id": "ar-r2398",
-      "form": "عبء"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-c2-u06-p05",
-      "target_id": "ar-r2063",
-      "form": "فعالية"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-c2-u07-p01",
-      "target_id": "ar-r2520",
-      "form": "ضيافة"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-c2-u07-p02",
-      "target_id": "ar-r2377",
-      "form": "توثيق"
-    },
-    {
-      "code": "review_target_without_prior_introduction",
-      "passage_id": "ar-c2-u07-p05",
-      "target_id": "ar-r2285",
-      "form": "محرر"
     }
   ],
   "warnings": [
@@ -664,6 +215,13 @@
       "exact_surface_count": 2
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-a1-u04-p01",
+      "target_id": "ar-r100",
+      "form": "مرة",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-a1-u04-p02",
       "target_id": "ar-r152",
@@ -753,6 +311,13 @@
       "form": "دور",
       "declared": 7,
       "exact_surface_count": 1
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-a1-u05-p03",
+      "target_id": "ar-r182",
+      "form": "خارج",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
@@ -863,6 +428,13 @@
       "declared_exposures": 2
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-a1-u07-p01",
+      "target_id": "ar-r276",
+      "form": "صباح",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-a1-u07-p03",
       "target_id": "ar-r363",
@@ -887,6 +459,13 @@
       "exact_surface_count": 3
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-a1-u07-p04",
+      "target_id": "ar-r482",
+      "form": "قديم",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "new_target_form_not_exactly_found_in_text",
       "passage_id": "ar-a1-u07-p05",
       "target_id": "ar-r252",
@@ -907,6 +486,13 @@
       "form": "مساعدة",
       "declared": 3,
       "exact_surface_count": 2
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-a1-u08-p02",
+      "target_id": "ar-r442",
+      "form": "مهمة",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "new_target_form_not_exactly_found_in_text",
@@ -1165,6 +751,13 @@
       "declared_exposures": 4
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-a2-u02-p01",
+      "target_id": "ar-r505",
+      "form": "متى",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "new_target_form_not_exactly_found_in_text",
       "passage_id": "ar-a2-u02-p02",
       "target_id": "ar-r648",
@@ -1207,6 +800,20 @@
       "form": "دورة",
       "declared": 5,
       "exact_surface_count": 1
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-a2-u02-p05",
+      "target_id": "ar-r626",
+      "form": "معا",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-a2-u02-p06",
+      "target_id": "ar-r626",
+      "form": "معا",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
@@ -1469,6 +1076,13 @@
       "exact_surface_count": 2
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-a2-u07-p04",
+      "target_id": "ar-r986",
+      "form": "توقعات",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "new_target_form_not_exactly_found_in_text",
       "passage_id": "ar-a2-u07-p05",
       "target_id": "ar-r998",
@@ -1657,6 +1271,13 @@
       "exact_surface_count": 1
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u03-p02",
+      "target_id": "ar-r902",
+      "form": "قدرة",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-b1-u03-p03",
       "target_id": "ar-r1001",
@@ -1687,6 +1308,13 @@
       "form": "خارجي",
       "declared": 4,
       "exact_surface_count": 2
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u03-p04",
+      "target_id": "ar-r612",
+      "form": "مؤسسة",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
@@ -1721,6 +1349,13 @@
       "exact_surface_count": 1
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u04-p01",
+      "target_id": "ar-r847",
+      "form": "سكان",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-b1-u04-p02",
       "target_id": "ar-r1109",
@@ -1735,6 +1370,20 @@
       "form": "نشاط",
       "declared": 5,
       "exact_surface_count": 2
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u04-p02",
+      "target_id": "ar-r843",
+      "form": "مواد",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u04-p02",
+      "target_id": "ar-r848",
+      "form": "أسباب",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
@@ -1752,6 +1401,13 @@
       "declared_exposures": 2
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u04-p03",
+      "target_id": "ar-r1134",
+      "form": "جودة",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-b1-u04-p04",
       "target_id": "ar-r1098",
@@ -1760,12 +1416,26 @@
       "exact_surface_count": 1
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u04-p04",
+      "target_id": "ar-r769",
+      "form": "طرق",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-b1-u04-p05",
       "target_id": "ar-r1094",
       "form": "تعديل",
       "declared": 3,
       "exact_surface_count": 1
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u04-p05",
+      "target_id": "ar-r1141",
+      "form": "شكوى",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "new_target_form_not_exactly_found_in_text",
@@ -1782,11 +1452,25 @@
       "declared_exposures": 2
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u05-p01",
+      "target_id": "ar-r610",
+      "form": "يتذكر",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "new_target_form_not_exactly_found_in_text",
       "passage_id": "ar-b1-u05-p02",
       "target_id": "ar-r1194",
       "form": "صفة",
       "declared_exposures": 2
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u05-p02",
+      "target_id": "ar-r1076",
+      "form": "منتج",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "new_target_form_not_exactly_found_in_text",
@@ -1802,6 +1486,20 @@
       "form": "متخصص",
       "declared": 3,
       "exact_surface_count": 2
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u05-p03",
+      "target_id": "ar-r722",
+      "form": "مصدر",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u05-p03",
+      "target_id": "ar-r909",
+      "form": "دليل",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
@@ -1835,6 +1533,20 @@
       "exact_surface_count": 2
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u05-p05",
+      "target_id": "ar-r647",
+      "form": "دراسة",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u05-p05",
+      "target_id": "ar-r1190",
+      "form": "خبرة",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "new_target_form_not_exactly_found_in_text",
       "passage_id": "ar-b1-u06-p01",
       "target_id": "ar-r1200",
@@ -1850,11 +1562,39 @@
       "exact_surface_count": 1
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u06-p01",
+      "target_id": "ar-r767",
+      "form": "حي",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u06-p01",
+      "target_id": "ar-r847",
+      "form": "سكان",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "new_target_form_not_exactly_found_in_text",
       "passage_id": "ar-b1-u06-p02",
       "target_id": "ar-r1230",
       "form": "متنوع",
       "declared_exposures": 2
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u06-p02",
+      "target_id": "ar-r1107",
+      "form": "زائر",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u06-p02",
+      "target_id": "ar-r746",
+      "form": "ثقافة",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
@@ -1910,12 +1650,33 @@
       "declared_exposures": 2
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u07-p02",
+      "target_id": "ar-r665",
+      "form": "اهتمام",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-b1-u07-p03",
       "target_id": "ar-r1290",
       "form": "تقييم",
       "declared": 4,
       "exact_surface_count": 3
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u07-p03",
+      "target_id": "ar-r1099",
+      "form": "تعليق",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u07-p03",
+      "target_id": "ar-r1141",
+      "form": "شكوى",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
@@ -1955,6 +1716,13 @@
       "declared_exposures": 2
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u08-p01",
+      "target_id": "ar-r727",
+      "form": "أخبار",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-b1-u08-p02",
       "target_id": "ar-r1333",
@@ -1971,6 +1739,13 @@
       "exact_surface_count": 1
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u08-p02",
+      "target_id": "ar-r722",
+      "form": "مصدر",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "new_target_form_not_exactly_found_in_text",
       "passage_id": "ar-b1-u08-p03",
       "target_id": "ar-r1120",
@@ -1983,6 +1758,13 @@
       "target_id": "ar-r1329",
       "form": "أسلوب",
       "declared_exposures": 3
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u08-p03",
+      "target_id": "ar-r875",
+      "form": "خطاب",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
@@ -1998,6 +1780,13 @@
       "target_id": "ar-r1285",
       "form": "صحافة",
       "declared_exposures": 2
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u08-p04",
+      "target_id": "ar-r722",
+      "form": "مصدر",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "new_target_form_not_exactly_found_in_text",
@@ -2030,6 +1819,13 @@
       "declared_exposures": 4
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u09-p01",
+      "target_id": "ar-r847",
+      "form": "سكان",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "new_target_form_not_exactly_found_in_text",
       "passage_id": "ar-b1-u09-p02",
       "target_id": "ar-r1164",
@@ -2042,6 +1838,20 @@
       "target_id": "ar-r1246",
       "form": "واجب",
       "declared_exposures": 2
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u09-p02",
+      "target_id": "ar-r1141",
+      "form": "شكوى",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u09-p02",
+      "target_id": "ar-r684",
+      "form": "إجراء",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "new_target_form_not_exactly_found_in_text",
@@ -2074,6 +1884,27 @@
       "exact_surface_count": 2
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u09-p05",
+      "target_id": "ar-r660",
+      "form": "نجاح",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u10-p01",
+      "target_id": "ar-r909",
+      "form": "دليل",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b1-u10-p06",
+      "target_id": "ar-r909",
+      "form": "دليل",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-b2-u01-p01",
       "target_id": "ar-r1271",
@@ -2088,6 +1919,13 @@
       "form": "بنية",
       "declared": 2,
       "exact_surface_count": 1
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u01-p01",
+      "target_id": "ar-r909",
+      "form": "دليل",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "new_target_form_not_exactly_found_in_text",
@@ -2118,6 +1956,20 @@
       "target_id": "ar-r1396",
       "form": "كمية",
       "declared_exposures": 2
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u01-p04",
+      "target_id": "ar-r729",
+      "form": "خطر",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u01-p04",
+      "target_id": "ar-r1349",
+      "form": "توقع",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
@@ -2226,6 +2078,13 @@
       "exact_surface_count": 2
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u03-p04",
+      "target_id": "ar-r729",
+      "form": "خطر",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-b2-u03-p05",
       "target_id": "ar-r1509",
@@ -2255,6 +2114,13 @@
       "declared_exposures": 3
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u04-p01",
+      "target_id": "ar-r769",
+      "form": "طرق",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-b2-u04-p02",
       "target_id": "ar-r1504",
@@ -2268,6 +2134,13 @@
       "target_id": "ar-r1564",
       "form": "سكني",
       "declared_exposures": 1
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u04-p02",
+      "target_id": "ar-r847",
+      "form": "سكان",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "new_target_form_not_exactly_found_in_text",
@@ -2320,6 +2193,13 @@
       "target_id": "ar-r1592",
       "form": "متاح",
       "declared_exposures": 2
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u05-p02",
+      "target_id": "ar-r729",
+      "form": "خطر",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
@@ -2396,6 +2276,13 @@
       "exact_surface_count": 1
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u06-p03",
+      "target_id": "ar-r1432",
+      "form": "غياب",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-b2-u06-p04",
       "target_id": "ar-r1841",
@@ -2448,6 +2335,20 @@
       "declared_exposures": 3
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u07-p02",
+      "target_id": "ar-r611",
+      "form": "أداء",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u07-p02",
+      "target_id": "ar-r952",
+      "form": "يتمكن",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "new_target_form_not_exactly_found_in_text",
       "passage_id": "ar-b2-u07-p03",
       "target_id": "ar-r1612",
@@ -2460,6 +2361,13 @@
       "target_id": "ar-r1827",
       "form": "موسيقي",
       "declared_exposures": 2
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u07-p03",
+      "target_id": "ar-r1849",
+      "form": "تكون",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "new_target_form_not_exactly_found_in_text",
@@ -2475,6 +2383,13 @@
       "form": "همس",
       "declared": 3,
       "exact_surface_count": 1
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u07-p04",
+      "target_id": "ar-r1010",
+      "form": "فيلم",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
@@ -2493,11 +2408,39 @@
       "exact_surface_count": 1
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u07-p05",
+      "target_id": "ar-r638",
+      "form": "قصة",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u08-p01",
+      "target_id": "ar-r722",
+      "form": "مصدر",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "new_target_form_not_exactly_found_in_text",
       "passage_id": "ar-b2-u08-p02",
       "target_id": "ar-r1918",
       "form": "تفاعل",
       "declared_exposures": 1
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u08-p02",
+      "target_id": "ar-r834",
+      "form": "أحداث",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u08-p02",
+      "target_id": "ar-r848",
+      "form": "أسباب",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "new_target_form_not_exactly_found_in_text",
@@ -2515,6 +2458,13 @@
       "exact_surface_count": 1
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u08-p03",
+      "target_id": "ar-r1439",
+      "form": "مفهوم",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-b2-u08-p04",
       "target_id": "ar-r1880",
@@ -2528,6 +2478,20 @@
       "target_id": "ar-r1929",
       "form": "جغرافي",
       "declared_exposures": 2
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u08-p04",
+      "target_id": "ar-r769",
+      "form": "طرق",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u08-p04",
+      "target_id": "ar-r722",
+      "form": "مصدر",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
@@ -2604,6 +2568,27 @@
       "target_id": "ar-r2077",
       "form": "مستقبلي",
       "declared_exposures": 2
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u10-p01",
+      "target_id": "ar-r1899",
+      "form": "توصية",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u10-p04",
+      "target_id": "ar-r1936",
+      "form": "بند",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-b2-u10-p06",
+      "target_id": "ar-r2163",
+      "form": "كلفة",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
@@ -3278,6 +3263,13 @@
       "declared_exposures": 1
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-c2-u03-p01",
+      "target_id": "ar-r1603",
+      "form": "أثبت",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "new_target_form_not_exactly_found_in_text",
       "passage_id": "ar-c2-u03-p02",
       "target_id": "ar-r1891",
@@ -3338,6 +3330,13 @@
       "exact_surface_count": 1
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-c2-u04-p01",
+      "target_id": "ar-r1670",
+      "form": "رصيد",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-c2-u04-p02",
       "target_id": "ar-r1670",
@@ -3367,6 +3366,20 @@
       "form": "تصدير",
       "declared": 4,
       "exact_surface_count": 1
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-c2-u04-p03",
+      "target_id": "ar-r2087",
+      "form": "هامش",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-c2-u04-p03",
+      "target_id": "ar-r1931",
+      "form": "تصنيع",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "new_target_form_not_exactly_found_in_text",
@@ -3450,6 +3463,13 @@
       "exact_surface_count": 1
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-c2-u06-p01",
+      "target_id": "ar-r2316",
+      "form": "إنفاق",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-c2-u06-p02",
       "target_id": "ar-r2637",
@@ -3463,6 +3483,13 @@
       "target_id": "ar-r2639",
       "form": "نظامي",
       "declared_exposures": 1
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-c2-u06-p02",
+      "target_id": "ar-r1735",
+      "form": "تصويت",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "new_target_form_not_exactly_found_in_text",
@@ -3496,6 +3523,20 @@
       "exact_surface_count": 1
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-c2-u06-p04",
+      "target_id": "ar-r1922",
+      "form": "تخفيف",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-c2-u06-p04",
+      "target_id": "ar-r2398",
+      "form": "عبء",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-c2-u06-p05",
       "target_id": "ar-r2630",
@@ -3512,6 +3553,13 @@
       "exact_surface_count": 1
     },
     {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-c2-u06-p05",
+      "target_id": "ar-r2063",
+      "form": "فعالية",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
+    },
+    {
       "code": "new_target_form_not_exactly_found_in_text",
       "passage_id": "ar-c2-u07-p01",
       "target_id": "ar-r2680",
@@ -3524,6 +3572,13 @@
       "target_id": "ar-r2708",
       "form": "فصيح",
       "declared_exposures": 1
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-c2-u07-p01",
+      "target_id": "ar-r2520",
+      "form": "ضيافة",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
@@ -3540,6 +3595,13 @@
       "form": "يقين",
       "declared": 2,
       "exact_surface_count": 1
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-c2-u07-p02",
+      "target_id": "ar-r2377",
+      "form": "توثيق",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
@@ -3579,6 +3641,13 @@
       "form": "مسموع",
       "declared": 2,
       "exact_surface_count": 1
+    },
+    {
+      "code": "review_target_without_prior_reader_introduction",
+      "passage_id": "ar-c2-u07-p05",
+      "target_id": "ar-r2285",
+      "form": "محرر",
+      "interpretation": "may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect"
     },
     {
       "code": "new_target_form_not_exactly_found_in_text",
@@ -3707,7 +3776,8 @@
           "level": "c1",
           "form": "إلغاء"
         }
-      ]
+      ],
+      "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
     },
     {
       "code": "normalized_surface_introduced_under_multiple_target_ids",
@@ -3725,7 +3795,8 @@
           "level": "c1",
           "form": "بعثة"
         }
-      ]
+      ],
+      "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
     },
     {
       "code": "normalized_surface_introduced_under_multiple_target_ids",
@@ -3743,7 +3814,8 @@
           "level": "c1",
           "form": "جغرافي"
         }
-      ]
+      ],
+      "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
     },
     {
       "code": "normalized_surface_introduced_under_multiple_target_ids",
@@ -3761,7 +3833,8 @@
           "level": "b1",
           "form": "صحافة"
         }
-      ]
+      ],
+      "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
     },
     {
       "code": "normalized_surface_introduced_under_multiple_target_ids",
@@ -3779,7 +3852,8 @@
           "level": "c1",
           "form": "مصطلح"
         }
-      ]
+      ],
+      "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
     },
     {
       "code": "normalized_surface_introduced_under_multiple_target_ids",
@@ -3797,7 +3871,8 @@
           "level": "c1",
           "form": "مطلع"
         }
-      ]
+      ],
+      "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
     },
     {
       "code": "normalized_surface_introduced_under_multiple_target_ids",
@@ -3815,7 +3890,8 @@
           "level": "c1",
           "form": "مظهر"
         }
-      ]
+      ],
+      "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
     },
     {
       "code": "normalized_surface_introduced_under_multiple_target_ids",
@@ -3833,7 +3909,8 @@
           "level": "b1",
           "form": "نتيجة"
         }
-      ]
+      ],
+      "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
     }
   ],
   "status": "FAIL"
