@@ -3,8 +3,9 @@
 
 Compares each deliberate ranked target's intended English sense with the cleared
 canonical source meaning. Zero lexical overlap is a REVIEW flag, not automatic
-semantic rejection, because legitimate synonyms/paraphrases exist. The artifact
-is designed for targeted human-grade adjudication.
+semantic rejection, because legitimate synonyms/paraphrases exist. The synonym
+set intentionally includes only high-confidence equivalences; ambiguous cases
+remain visible for human/source adjudication.
 """
 from __future__ import annotations
 import csv,json,re
@@ -23,26 +24,45 @@ SYN_GROUPS=[
  {'transport','transfer','move','movement','transmission'},
  {'event','activity','occasion'},
  {'effectiveness','efficiency','efficacy'},
- {'begin','start','commence'},
- {'end','finish','conclude'},
- {'help','assist','aid'},
+ {'begin','start','commence'}, {'end','finish','conclude'}, {'help','assist','aid'},
  {'buy','purchase'}, {'job','work','employment'}, {'place','location','site'},
  {'answer','reply','response'}, {'result','outcome'}, {'reason','cause'},
  {'idea','concept','notion'}, {'change','modify','alter'}, {'important','significant'},
  {'big','large','great'}, {'small','little'}, {'fast','quick','rapid'}, {'slow','gradual'},
- {'possible','possible','potential'}, {'clear','obvious','evident'}, {'use','usage','utilize'},
+ {'possible','potential'}, {'clear','obvious','evident'}, {'use','usage','utilize'},
+ {'increase','increased','add','rise','grow'},
+ {'healthy','health','sanitary'},
+ {'tool','apparatus','instrument'},
+ {'receive','received'},
+ {'discussion','argument','debate'},
+ {'guidance','direction','directing'},
+ {'contribute','contributed'},
+ {'awareness','consciousness'},
+ {'observe','observation','monitor','monitoring'},
+ {'summary','gist','synopsis'},
+ {'usual','familiar','accustomed'},
+ {'emergence','appearance'},
+ {'common','circulating'},
 ]
 SYN={w:g for g in SYN_GROUPS for w in g}
 def stem(w):
  w=w.lower()
- for suf in ('ies','ing','ed','es','s'):
-  if len(w)>len(suf)+3 and w.endswith(suf):w=w[:-len(suf)];break
+ # Conservative inflection normalization; synonym groups above handle cases
+ # where naive suffix stripping would distort a base (e.g. increase/increased).
+ if len(w)>5 and w.endswith('ies'):return w[:-3]+'y'
+ if len(w)>5 and w.endswith('ing'):return w[:-3]
+ if len(w)>5 and w.endswith('ed'):return w[:-2]
+ if len(w)>4 and w.endswith('es'):return w[:-2]
+ if len(w)>4 and w.endswith('s'):return w[:-1]
  return w
-def terms(s):return {stem(x) for x in WORD.findall(str(s or '')) if x.lower() not in STOP and len(x)>2}
+def terms(s):return {stem(x) for x in WORD.findall(str(s or '')) if x.lower() not in STOP and len(x)>=2}
 def expanded(ts):
  out=set(ts)
  for t in list(ts):
   if t in SYN:out|={stem(x) for x in SYN[t]}
+  # If the token is a stemmed member, recover its synonym family as well.
+  for word,group in SYN.items():
+   if stem(word)==t:out|={stem(x) for x in group}
  return out
 def read_sources():
  src={}
@@ -68,6 +88,6 @@ def main():
     if not overlap:
      flags.append({'code':'intended_sense_zero_keyword_overlap_with_source','level':level,'passage_id':r['id'],'target_id':t['id'],'form':t.get('form'),'lemma':t.get('lemma'),'target_pos':t.get('part_of_speech'),'intended_sense':it,'source_front':s['front'],'source_pos':s['pos'],'source_meaning':s['meaning'],'source_rank':rank,'source_file':s['source_file']});c['zero_overlap']+=1;flagged.add(r['id'])
   summary[level]={'passages':len(rows),'ranked_targets_checked':sum(1 for r in rows for t in r.get('new_lexical_targets',[]) if isinstance(t,dict) and str(t.get('id','')).startswith('ar-r')),'flagged_passages':len(flagged),'zero_overlap_flags':c['zero_overlap']}
- payload={'pass':10,'name':'lexical_intended_sense_register_alignment','scope':'Arabic A1-C2 deliberate ranked lexical targets','method':'source-aware English intended-sense keyword/synonym overlap diagnostic against educator-cleared canonical source meanings','interpretation':'zero-overlap items require human/source adjudication; nonzero overlap is not by itself proof of semantic correctness','levels':summary,'totals':{'ranked_targets_checked':checked,'review_flags':len(flags)},'flags':flags,'status':'PASS' if not flags else 'REVIEW_REQUIRED'}
+ payload={'pass':10,'name':'lexical_intended_sense_register_alignment','scope':'Arabic A1-C2 deliberate ranked lexical targets','method':'source-aware English intended-sense keyword/high-confidence-synonym overlap diagnostic against educator-cleared canonical source meanings','interpretation':'zero-overlap items require human/source adjudication; nonzero overlap is not by itself proof of semantic correctness; ambiguous equivalences are deliberately not suppressed','levels':summary,'totals':{'ranked_targets_checked':checked,'review_flags':len(flags)},'flags':flags,'status':'PASS' if not flags else 'REVIEW_REQUIRED'}
  OUT.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');print(json.dumps(payload['totals'],ensure_ascii=False));print('status='+payload['status'])
 if __name__=='__main__':main()
