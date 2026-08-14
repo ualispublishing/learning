@@ -1,0 +1,28 @@
+name: Recalibrate final Arabic B1 Unit01 length
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/recalibrate_final_arabic_b1_unit01_length.py'
+      - '.github/workflows/recalibrate-final-arabic-b1-unit01-length.yml'
+permissions:
+  contents: write
+jobs:
+  recalibrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python reading/tools/recalibrate_final_arabic_b1_unit01_length.py
+      - name: Commit B1 Unit01 recalibration
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/arabic/b1/passages.jsonl
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Recalibrate Arabic B1 Unit01 length and discourse [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
