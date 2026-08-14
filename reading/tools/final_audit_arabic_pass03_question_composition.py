@@ -9,7 +9,7 @@ answers; that is handled separately.
 from __future__ import annotations
 
 import json
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -24,7 +24,7 @@ DISCOURSE = {"main_claim", "argument_relation", "stance", "tone", "rhetorical_fu
 SYNTHESIS = {"paraphrase", "summary", "synthesis", "cross_text_synthesis"}
 PASSAGE_CENTERED = COMPREHENSION | INFERENCE | DISCOURSE | SYNTHESIS
 
-# These are deliberately broad minima derived from the standard, not exact quotas.
+# Deliberately broad minima derived from the standard, not exact quotas.
 MINIMA = {
     "a1": {"passage_centered": 3, "lexical": 2, "grammar_style": 2},
     "a2": {"passage_centered": 4, "lexical": 2, "grammar_style": 2},
@@ -37,8 +37,6 @@ MINIMA = {
 
 def counts(types: list[str]) -> dict[str, int]:
     s = set(types)
-    # Counts are per question, not merely presence; overlapping categories are
-    # intentional because e.g. register_style serves both lexical and style aims.
     return {
         "passage_centered": sum(t in PASSAGE_CENTERED for t in types),
         "comprehension": sum(t in COMPREHENSION for t in types),
@@ -79,7 +77,7 @@ def main() -> None:
             }
             if deficits:
                 flagged_passages += 1
-                deficiency_counter.update(deficits)
+                deficiency_counter.update(deficits.keys())
                 flags.append({
                     "code": "default_distribution_deficit",
                     "level": level,
