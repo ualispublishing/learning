@@ -2,38 +2,38 @@
   "pass": 10,
   "name": "lexical_intended_sense_register_alignment",
   "scope": "Arabic A1-C2 deliberate ranked lexical targets",
-  "method": "source-aware English intended-sense keyword/synonym overlap diagnostic against educator-cleared canonical source meanings",
-  "interpretation": "zero-overlap items require human/source adjudication; nonzero overlap is not by itself proof of semantic correctness",
+  "method": "source-aware English intended-sense keyword/high-confidence-synonym overlap diagnostic against educator-cleared canonical source meanings",
+  "interpretation": "zero-overlap items require human/source adjudication; nonzero overlap is not by itself proof of semantic correctness; ambiguous equivalences are deliberately not suppressed",
   "levels": {
     "a1": {
       "passages": 60,
       "ranked_targets_checked": 100,
-      "flagged_passages": 2,
-      "zero_overlap_flags": 2
+      "flagged_passages": 0,
+      "zero_overlap_flags": 0
     },
     "a2": {
       "passages": 60,
       "ranked_targets_checked": 79,
-      "flagged_passages": 1,
-      "zero_overlap_flags": 1
+      "flagged_passages": 0,
+      "zero_overlap_flags": 0
     },
     "b1": {
       "passages": 60,
       "ranked_targets_checked": 81,
-      "flagged_passages": 6,
-      "zero_overlap_flags": 6
+      "flagged_passages": 0,
+      "zero_overlap_flags": 0
     },
     "b2": {
       "passages": 60,
       "ranked_targets_checked": 90,
-      "flagged_passages": 5,
-      "zero_overlap_flags": 5
+      "flagged_passages": 2,
+      "zero_overlap_flags": 2
     },
     "c1": {
       "passages": 60,
       "ranked_targets_checked": 84,
-      "flagged_passages": 4,
-      "zero_overlap_flags": 5
+      "flagged_passages": 1,
+      "zero_overlap_flags": 1
     },
     "c2": {
       "passages": 60,
@@ -44,144 +44,9 @@
   },
   "totals": {
     "ranked_targets_checked": 524,
-    "review_flags": 23
+    "review_flags": 7
   },
   "flags": [
-    {
-      "code": "intended_sense_zero_keyword_overlap_with_source",
-      "level": "a1",
-      "passage_id": "ar-a1-u02-p05",
-      "target_id": "ar-r73",
-      "form": "نحن",
-      "lemma": "نحن",
-      "target_pos": "pronoun",
-      "intended_sense": "we",
-      "source_front": "نحن",
-      "source_pos": "pronoun",
-      "source_meaning": "we",
-      "source_rank": 73,
-      "source_file": "arabic_top1000.csv"
-    },
-    {
-      "code": "intended_sense_zero_keyword_overlap_with_source",
-      "level": "a1",
-      "passage_id": "ar-a1-u06-p04",
-      "target_id": "ar-r361",
-      "form": "اذهب",
-      "lemma": "اذهب",
-      "target_pos": "imperative verb",
-      "intended_sense": "go!",
-      "source_front": "اذهب",
-      "source_pos": "imperative verb",
-      "source_meaning": "go!",
-      "source_rank": 361,
-      "source_file": "arabic_top1000.csv"
-    },
-    {
-      "code": "intended_sense_zero_keyword_overlap_with_source",
-      "level": "a2",
-      "passage_id": "ar-a2-u07-p01",
-      "target_id": "ar-r2063",
-      "form": "فعالية",
-      "lemma": "فعالية",
-      "target_pos": "noun",
-      "intended_sense": "event; activity",
-      "source_front": "فعالية",
-      "source_pos": "noun",
-      "source_meaning": "effectiveness; efficiency",
-      "source_rank": 2063,
-      "source_file": "arabic_top3000.csv"
-    },
-    {
-      "code": "intended_sense_zero_keyword_overlap_with_source",
-      "level": "b1",
-      "passage_id": "ar-b1-u04-p04",
-      "target_id": "ar-r1117",
-      "form": "زاد",
-      "lemma": "زاد",
-      "target_pos": "verb",
-      "intended_sense": "increased",
-      "source_front": "زاد",
-      "source_pos": "verb",
-      "source_meaning": "increase; add",
-      "source_rank": 1117,
-      "source_file": "arabic_top3000.csv"
-    },
-    {
-      "code": "intended_sense_zero_keyword_overlap_with_source",
-      "level": "b1",
-      "passage_id": "ar-b1-u05-p02",
-      "target_id": "ar-r1077",
-      "form": "صحي",
-      "lemma": "صحي",
-      "target_pos": "adj",
-      "intended_sense": "healthy; health-related",
-      "source_front": "صحي",
-      "source_pos": "adj",
-      "source_meaning": "sanitary",
-      "source_rank": 1077,
-      "source_file": "arabic_top3000.csv"
-    },
-    {
-      "code": "intended_sense_zero_keyword_overlap_with_source",
-      "level": "b1",
-      "passage_id": "ar-b1-u06-p03",
-      "target_id": "ar-r1216",
-      "form": "أداة",
-      "lemma": "أداة",
-      "target_pos": "noun",
-      "intended_sense": "tool",
-      "source_front": "أداة",
-      "source_pos": "noun",
-      "source_meaning": "apparatus",
-      "source_rank": 1216,
-      "source_file": "arabic_top3000.csv"
-    },
-    {
-      "code": "intended_sense_zero_keyword_overlap_with_source",
-      "level": "b1",
-      "passage_id": "ar-b1-u07-p03",
-      "target_id": "ar-r1320",
-      "form": "تلقى",
-      "lemma": "تلقى",
-      "target_pos": "verb",
-      "intended_sense": "received",
-      "source_front": "تلقى",
-      "source_pos": "verb",
-      "source_meaning": "receive",
-      "source_rank": 1320,
-      "source_file": "arabic_top3000.csv"
-    },
-    {
-      "code": "intended_sense_zero_keyword_overlap_with_source",
-      "level": "b1",
-      "passage_id": "ar-b1-u07-p04",
-      "target_id": "ar-r1303",
-      "form": "مناقشة",
-      "lemma": "مناقشة",
-      "target_pos": "noun",
-      "intended_sense": "discussion",
-      "source_front": "مناقشة",
-      "source_pos": "noun",
-      "source_meaning": "argument; debate",
-      "source_rank": 1303,
-      "source_file": "arabic_top3000.csv"
-    },
-    {
-      "code": "intended_sense_zero_keyword_overlap_with_source",
-      "level": "b1",
-      "passage_id": "ar-b1-u09-p05",
-      "target_id": "ar-r1327",
-      "form": "توجيه",
-      "lemma": "توجيه",
-      "target_pos": "noun",
-      "intended_sense": "guidance; direction",
-      "source_front": "توجيه",
-      "source_pos": "noun",
-      "source_meaning": "directing",
-      "source_rank": 1327,
-      "source_file": "arabic_top3000.csv"
-    },
     {
       "code": "intended_sense_zero_keyword_overlap_with_source",
       "level": "b2",
@@ -195,36 +60,6 @@
       "source_pos": "noun",
       "source_meaning": "principles",
       "source_rank": 1387,
-      "source_file": "arabic_top3000.csv"
-    },
-    {
-      "code": "intended_sense_zero_keyword_overlap_with_source",
-      "level": "b2",
-      "passage_id": "ar-b2-u02-p04",
-      "target_id": "ar-r1440",
-      "form": "ساهم",
-      "lemma": "ساهم",
-      "target_pos": "verb",
-      "intended_sense": "contributed",
-      "source_front": "ساهم",
-      "source_pos": "verb",
-      "source_meaning": "contribute",
-      "source_rank": 1440,
-      "source_file": "arabic_top3000.csv"
-    },
-    {
-      "code": "intended_sense_zero_keyword_overlap_with_source",
-      "level": "b2",
-      "passage_id": "ar-b2-u06-p02",
-      "target_id": "ar-r1720",
-      "form": "وعي",
-      "lemma": "وعي",
-      "target_pos": "noun",
-      "intended_sense": "awareness",
-      "source_front": "وعي",
-      "source_pos": "noun",
-      "source_meaning": "consciousness",
-      "source_rank": 1720,
       "source_file": "arabic_top3000.csv"
     },
     {
@@ -244,21 +79,6 @@
     },
     {
       "code": "intended_sense_zero_keyword_overlap_with_source",
-      "level": "b2",
-      "passage_id": "ar-b2-u09-p03",
-      "target_id": "ar-r2144",
-      "form": "رصد",
-      "lemma": "رصد",
-      "target_pos": "verb",
-      "intended_sense": "observation; monitoring",
-      "source_front": "رصد",
-      "source_pos": "verb",
-      "source_meaning": "observe",
-      "source_rank": 2144,
-      "source_file": "arabic_top3000.csv"
-    },
-    {
-      "code": "intended_sense_zero_keyword_overlap_with_source",
       "level": "c1",
       "passage_id": "ar-c1-u02-p05",
       "target_id": "ar-r2614",
@@ -270,66 +90,6 @@
       "source_pos": "noun",
       "source_meaning": "exemplary; ideal",
       "source_rank": 2614,
-      "source_file": "arabic_top3000.csv"
-    },
-    {
-      "code": "intended_sense_zero_keyword_overlap_with_source",
-      "level": "c1",
-      "passage_id": "ar-c1-u03-p05",
-      "target_id": "ar-r2957",
-      "form": "خلاصة",
-      "lemma": "خلاصة",
-      "target_pos": "noun",
-      "intended_sense": "summary; distilled conclusion",
-      "source_front": "خلاصة",
-      "source_pos": "noun",
-      "source_meaning": "gist; synopsis",
-      "source_rank": 2957,
-      "source_file": "arabic_top3000.csv"
-    },
-    {
-      "code": "intended_sense_zero_keyword_overlap_with_source",
-      "level": "c1",
-      "passage_id": "ar-c1-u05-p05",
-      "target_id": "ar-r2987",
-      "form": "معتاد",
-      "lemma": "معتاد",
-      "target_pos": "adj",
-      "intended_sense": "usual; familiar",
-      "source_front": "معتاد",
-      "source_pos": "adj",
-      "source_meaning": "accustomed",
-      "source_rank": 2987,
-      "source_file": "arabic_top3000.csv"
-    },
-    {
-      "code": "intended_sense_zero_keyword_overlap_with_source",
-      "level": "c1",
-      "passage_id": "ar-c1-u05-p05",
-      "target_id": "ar-r2975",
-      "form": "بروز",
-      "lemma": "بروز",
-      "target_pos": "noun",
-      "intended_sense": "emergence; becoming visible",
-      "source_front": "بروز",
-      "source_pos": "noun",
-      "source_meaning": "appearance",
-      "source_rank": 2975,
-      "source_file": "arabic_top3000.csv"
-    },
-    {
-      "code": "intended_sense_zero_keyword_overlap_with_source",
-      "level": "c1",
-      "passage_id": "ar-c1-u07-p04",
-      "target_id": "ar-r2000",
-      "form": "متداول",
-      "lemma": "متداول",
-      "target_pos": "adjective / participle",
-      "intended_sense": "commonly circulating",
-      "source_front": "متداول",
-      "source_pos": "adjective / participle",
-      "source_meaning": "common",
-      "source_rank": 2000,
       "source_file": "arabic_top3000.csv"
     },
     {
