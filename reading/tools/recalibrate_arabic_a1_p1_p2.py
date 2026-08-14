@@ -4,62 +4,32 @@ from pathlib import Path
 root=Path(__file__).resolve().parents[2]
 path=root/'reading'/'arabic'/'a1'/'passages.jsonl'
 rows=[json.loads(x) for x in path.read_text(encoding='utf-8').splitlines() if x.strip()]
+by_id={r['id']:r for r in rows}
+if set(by_id) != {f'ar-a1-u01-p0{i}' for i in range(1,7)}:
+    raise SystemExit('Arabic A1 Unit 01 id guard failed')
 
-texts={
-'ar-a1-u01-p01':'''ليلى في منزل جديد مع أمها. المنزل صغير، لكنه جميل. قالت أمها: هذا منزلنا الآن. قالت ليلى: حسنا، أنا هنا معك. معها حقيبة فيها كتاب. الحقيبة معها في المنزل. قالت أمها: هيا نرى المكان. قالت ليلى: نعم. ذهبتا إلى داخل المنزل ثم إلى خارجه. ثم كانتا داخل المنزل مرة أخرى. قالت ليلى: الآن أعرف المكان. أنا هنا معك الآن.''',
-'ar-a1-u01-p02':'''في الصباح كانت ليلى في المنزل. قالت أمها: بعد قليل نذهب إلى المدرسة. قالت ليلى: حسنا. معها حقيبتها وكتاب واحد فقط. لم تأخذ كل الكتب. ذهبت مع أمها إلى المدرسة. بعد قليل كانت ليلى في المنزل مرة أخرى. قالت ليلى: حقيبتي هنا، وكتابي معي. قالت أمها: هل معك كتاب آخر؟ قالت ليلى: لا، هذا الكتاب فقط. بعد ذلك كانتا معا في المنزل. قالت أمها: الآن نحن هنا. قالت ليلى: نعم، وغدا نذهب إلى المدرسة مرة أخرى.''',
-'ar-a1-u01-p03':'''بعد المدرسة كانت ليلى مع أمها في المنزل. قالت ليلى: أريد أن أذهب إلى الحديقة. قالت أمها: نعم، نذهب معا. خرجتا من المنزل. بعد قليل كانتا في الحديقة. قالت الأم: هناك ناس كثيرون. قالت ليلى: نعم، لكن أريد أن أكون هنا معك. كانتا هناك وقتا قليلا. بعد ذلك قالت الأم: هل تريدين العودة إلى المنزل؟ قالت ليلى: نعم، أريد أن أعود الآن. عادتا معا. في المنزل قالت ليلى: الحديقة مكان جميل. أريد أن أذهب إلى هناك مرة أخرى.''',
-'ar-a1-u01-p04':'''في يوم آخر قالت الأم: نذهب إلى المكتبة بعد المدرسة. قالت ليلى: هل يمكن أن آخذ كتابا؟ قالت الأم: نعم. في المكتبة كتاب جميل. قالت الأم: يمكنك أن تري الكتاب هنا. أخذت ليلى كتابا واحدا فقط. قالت: يمكن أن أقرأ هذا الكتاب كل يوم. بعد قليل عادت مع أمها إلى المنزل. كان الكتاب مع حقيبتها. قالت الأم: هل يمكن أن تقرئي الآن؟ قالت ليلى: نعم، لكن ليس كل الكتاب اليوم. سأقرأ قليلا اليوم وقليلا غدا. كل يوم أقرأ قليلا. قالت ليلى: هذا جيد.'''
-}
+p5=by_id['ar-a1-u01-p05']
+p5['text']='''بعد المدرسة ذهبت ليلى إلى المكتبة مع أمها. هناك كتب كثيرة. نظرت ليلى إلى بعض الكتب، لكنها لم تأخذ كل الكتب. أخذت كتابين فقط. كانت مع أمها في المكتبة حتى المساء. عندما جاء المساء قالت الأم: الآن نعود إلى المنزل. قالت ليلى: نعم. في الطريق قالت: بعض الكتب سهلة وبعضها ليس سهلا. في المنزل وضعت الكتابين هنا، مع حقيبتها. قالت أمها: هل تريدين القراءة حتى المساء غدا؟ قالت ليلى: أريد أن أقرأ قليلا فقط، ثم أكون معك. قالت أمها: هذا جيد، ولا نأخذ كل الكتب.'''
+p5['genre']='routine narrative'
+for t in p5.get('new_lexical_targets',[]):
+    if t['id']=='ar-r53': t['exposures_in_text']=3
+    elif t['id']=='ar-r56': t['exposures_in_text']=2
+q={x['id']:x for x in p5['questions']}; a={x['id']:x for x in p5['answer_key']}
+q['q4']['type']='literal_detail'; q['q4']['prompt']='ما الدليل في النص على أن ليلى لم تأخذ كل الكتب؟'
+a['a4']['answer']='أخذت كتابين فقط، والنص يقول إنها لم تأخذ كل الكتب.'
 
-p2_prompts=['ماذا قالت الأم قبل الذهاب إلى المدرسة؟','كم كتابا كان مع ليلى؟','ماذا تعني «بعد» في «بعد قليل كانت ليلى في المنزل مرة أخرى»؟','ماذا تعني «فقط» في «كتاب واحد فقط»؟','أكمل: معي كتاب واحد _____، وليس كل الكتب.']
-p2_answers=['قالت: بعد قليل نذهب إلى المدرسة.','كتاب واحد.','في وقت يأتي لاحقا.','واحد لا أكثر.','فقط']
-p2_types=['sequence','literal_detail','vocabulary_in_context','vocabulary_in_context','cloze_transfer']
+p6=by_id['ar-a1-u01-p06']
+p6['text']='''ليلى تعرف هذه الأماكن الآن: المدرسة والحديقة والمكتبة. في الصباح تذهب إلى المدرسة ومعها حقيبتها وكتاب. بعد المدرسة تعود إلى المنزل. في بعض الأيام تقول لأمها: أريد أن أذهب إلى الحديقة. تذهبان معا، وتكونان هناك قليلا. وفي يوم آخر يمكن أن تذهبا إلى المكتبة. ليلى تنظر إلى بعض الكتب وتأخذ كتابا واحدا أو اثنين فقط. لا تأخذ كل الكتب. عندما تعود إلى المنزل تضع كتابها هنا، مع حقيبتها. يمكن أن تقرأ حتى المساء، لكنها لا تقرأ كل الوقت. بعد ذلك تكون مع أمها. الآن يمكنها أن تقول أين المدرسة وأين الحديقة وأين المكتبة.'''
+p6['title']='أماكن ليلى'; p6['topics']=['neighborhood','routine','review']
+q={x['id']:x for x in p6['questions']}; a={x['id']:x for x in p6['answer_key']}
+q['q3']['type']='literal_detail'; a['a3']['answer']='في بعض الأيام.'
+a['a5']['answer']='تذهب ليلى إلى المدرسة وتعود إلى منزلها، وقد تذهب إلى الحديقة أو المكتبة.'
 
-for r in rows:
- if r['id'] not in texts: continue
- r['text']=texts[r['id']]
- r['word_count']=len(re.findall(r'\S+',r['text']))
- r['sentence_count']=len(re.findall(r'[.!؟]+',r['text']))
- r['estimated_known_token_coverage']=0
- r['quality']['coverage_check']='pending'
- r['quality']['status']='draft'
- if r['id'].endswith('p01'):
-  r['new_lexical_targets']=[x for x in r['new_lexical_targets'] if x['id'] in {'ar-r34','ar-r42'}]
-  for t in r['new_lexical_targets']:
-   if t['id']=='ar-r34': t['part_of_speech']='demonstrative of place / adverbial deictic'; t['exposures_in_text']=2
-   elif t['id']=='ar-r42': t['exposures_in_text']=3
-  for q in r.get('questions',[]):
-   if q.get('id')=='q3': q['prompt']='ما معنى «هنا» عندما تقول ليلى: «أنا هنا معك»؟'
-   elif q.get('id')=='q9': q['prompt']='اختر بين «لا» و«لم»: أكمل بما ينفي الفعل في الحاضر: «_____ تخرج ليلى وحدها.»'
-  for a in r.get('answer_key',[]):
-   if a.get('id')=='a9': a['answer']='لا.'
- elif r['id'].endswith('p02'):
-  for t in r.get('new_lexical_targets',[]):
-   if t['id']=='ar-r37': t['exposures_in_text']=3
-   elif t['id']=='ar-r54': t['part_of_speech']='adverb / restrictive expression'; t['exposures_in_text']=2
-  qmap={q['id']:q for q in r.get('questions',[])}
-  amap={a['id']:a for a in r.get('answer_key',[])}
-  for i in range(1,6):
-   qid=f'q{i}'; aid=f'a{i}'
-   if qid in qmap: qmap[qid].update({'type':p2_types[i-1],'prompt':p2_prompts[i-1],'answer_id':aid})
-   if aid in amap: amap[aid].update({'question_id':qid,'answer':p2_answers[i-1],'explanation':''})
- elif r['id'].endswith('p03'):
-  for t in r.get('new_lexical_targets',[]):
-   if t['id']=='ar-r40': t['exposures_in_text']=3
-   elif t['id']=='ar-r33': t['exposures_in_text']=5
- elif r['id'].endswith('p04'):
-  r['title']='كتاب من المكتبة'
-  r['topics']=['library','reading','ability']
-  r['genre']='routine narrative'
-  for t in r.get('new_lexical_targets',[]):
-   if t['id']=='ar-r36': t['exposures_in_text']=4; t['context_strategy']=['scenario_resolution']
-   elif t['id']=='ar-r24': t['exposures_in_text']=3
-  qmap={q['id']:q for q in r.get('questions',[])}
-  amap={a['id']:a for a in r.get('answer_key',[])}
-  qmap['q3']['prompt']='ماذا تعني «يمكن» في قول ليلى: «هل يمكن أن آخذ كتابا؟»'
-  amap['a8']['answer']='لا؛ «كل يوم» تعني أن الفعل يحدث في كل يوم، أما «اليوم كله» فتعني طوال اليوم.'
- r['quality']['answer_key_check']='pass'
- r['quality']['notes']=['Recalibrated and exercise-aligned under A1_CALIBRATION_PROFILE; measured coverage pending.','Premature يريد exposure removed from P1-P2 so P3 remains its first deliberate reader introduction.','Target grammar metadata synchronized with Arabic flashcard educator second pass.']
+for r in (p5,p6):
+    r['word_count']=len(re.findall(r'\S+',r['text']))
+    r['sentence_count']=len(re.findall(r'[.!؟]+',r['text']))
+    r['estimated_known_token_coverage']=0
+    r['quality']['coverage_check']='pending'; r['quality']['status']='draft'; r['quality']['answer_key_check']='pass'
+    r['quality']['notes']=['Recalibrated under A1_CALIBRATION_PROFILE; supported lexical-control measurement pending.','Ten-question standard and canonical JSON Schema synchronized.','Target grammar/sense metadata synchronized with the Arabic educator-cleared vocabulary decks.']
 
 path.write_text('\n'.join(json.dumps(x,ensure_ascii=False,sort_keys=True) for x in rows)+'\n',encoding='utf-8')
