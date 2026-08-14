@@ -6,6 +6,7 @@ on:
     paths:
       - 'reading/tools/recalibrate_arabic_a1_p1_p2.py'
       - 'reading/tools/audit_arabic_a1_question_schema.py'
+      - 'reading/requirements-audit.txt'
       - '.github/workflows/recalibrate-arabic-a1-p1-p2.yml'
 
 permissions:
@@ -19,6 +20,8 @@ jobs:
         with: {fetch-depth: 0}
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
+      - name: Install reading-audit dependencies
+        run: python -m pip install -r reading/requirements-audit.txt
       - run: python reading/tools/recalibrate_arabic_a1_p1_p2.py
       - run: python reading/tools/audit_arabic_a1_question_schema.py
       - name: Commit recalibrated passages and question audit
