@@ -2,15 +2,24 @@
   "status": "PASS",
   "language": "ar",
   "source": "arabic_phrase_bank.csv",
+  "review_source": "reading/planning/arabic_phrase_a1_review.json",
   "source_rows": 665,
   "ledger_rows": 665,
   "unique_fronts": 665,
   "id_namespace": "ar-pNNN",
-  "cefr_policy": "neutral; source order does not imply learner level",
+  "cefr_policy": "source order does not imply learner level; only explicit review decisions are applied",
+  "eligibility_counts": {
+    "unreviewed": 639,
+    "not_A1_current_review": 24,
+    "A1_eligible": 2
+  },
+  "reviewed_rows": 26,
   "learner_success_assumed": false,
   "notes": [
     "The canonical phrase bank is not modified by this build.",
-    "All phrase CEFR eligibility begins unreviewed and must be assigned by an explicit pedagogical review layer.",
+    "Unlisted phrase IDs remain unreviewed.",
+    "A1_eligible is permission for deliberate beginner use, not a learner-mastery claim.",
+    "not_A1_current_review is not a precise later-CEFR assignment.",
     "Phrase exposure is kept separate from the ranked ar-rNN single-word ledger."
   ]
 }
