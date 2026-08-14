@@ -6,6 +6,7 @@ on:
     paths:
       - 'reading/tools/generate_arabic_c2_unit05.py'
       - 'reading/tools/generate_arabic_c2_unit05_v2.py'
+      - 'reading/tools/generate_arabic_c2_unit05_v3.py'
       - '.github/workflows/generate-arabic-c2-unit05.yml'
 permissions:
   contents: write
@@ -20,7 +21,7 @@ jobs:
         with: {fetch-depth: 0}
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
-      - run: python reading/tools/generate_arabic_c2_unit05_v2.py
+      - run: python reading/tools/generate_arabic_c2_unit05_v3.py
       - name: Commit generated C2 passages
         run: |
           git config user.name 'github-actions[bot]'
