@@ -1,0 +1,550 @@
+{
+  "pass": 4,
+  "name": "answer_evidence_alignment_diagnostics",
+  "scope": "Arabic A1-C2 canonical reading corpus",
+  "method": "conservative surface diagnostics for direct-evidence answers, answer length, contrast-option alignment, cloze targeting, and within-passage duplicates",
+  "not_claimed": [
+    "semantic incorrectness from zero lexical overlap",
+    "morphological equivalence",
+    "full answer-key correctness"
+  ],
+  "levels": {
+    "a1": {
+      "passages": 60,
+      "flagged_passages": 14,
+      "flags_by_code": {
+        "cloze_without_target_id": 4,
+        "duplicate_answer_text_within_passage": 1,
+        "direct_answer_zero_content_overlap_with_passage": 11
+      }
+    },
+    "a2": {
+      "passages": 60,
+      "flagged_passages": 6,
+      "flags_by_code": {
+        "direct_answer_zero_content_overlap_with_passage": 5,
+        "contrast_answer_not_surface_aligned_to_quoted_options": 2
+      }
+    },
+    "b1": {
+      "passages": 60,
+      "flagged_passages": 9,
+      "flags_by_code": {
+        "contrast_answer_not_surface_aligned_to_quoted_options": 5,
+        "direct_answer_zero_content_overlap_with_passage": 4
+      }
+    },
+    "b2": {
+      "passages": 60,
+      "flagged_passages": 3,
+      "flags_by_code": {
+        "direct_answer_zero_content_overlap_with_passage": 3
+      }
+    },
+    "c1": {
+      "passages": 60,
+      "flagged_passages": 3,
+      "flags_by_code": {
+        "direct_answer_zero_content_overlap_with_passage": 3
+      }
+    },
+    "c2": {
+      "passages": 60,
+      "flagged_passages": 14,
+      "flags_by_code": {
+        "direct_answer_zero_content_overlap_with_passage": 14
+      }
+    }
+  },
+  "totals": {
+    "questions": 3600,
+    "review_flags": 52
+  },
+  "flags": [
+    {
+      "code": "cloze_without_target_id",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p02",
+      "question_id": "q5",
+      "prompt": "أكمل: معي كتاب واحد _____، وليس كل الكتب.",
+      "answer": "فقط"
+    },
+    {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p02",
+      "answers": [
+        "كتاب واحد."
+      ]
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p03",
+      "question_id": "q1",
+      "type": "cause_effect",
+      "prompt": "لماذا ذهبت ليلى إلى الحديقة؟",
+      "answer": "لأنها أرادت أن تذهب إليها."
+    },
+    {
+      "code": "cloze_without_target_id",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p03",
+      "question_id": "q5",
+      "prompt": "أكمل: الكتاب على الطاولة البعيدة _____.",
+      "answer": "هناك"
+    },
+    {
+      "code": "cloze_without_target_id",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p04",
+      "question_id": "q5",
+      "prompt": "أكمل: الباب مفتوح، لذلك _____ أن ندخل.",
+      "answer": "يمكن"
+    },
+    {
+      "code": "cloze_without_target_id",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p05",
+      "question_id": "q5",
+      "prompt": "أكمل: بقيت في المكتبة _____ المساء.",
+      "answer": "حتى"
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "a1",
+      "passage_id": "ar-a1-u02-p01",
+      "question_id": "q5",
+      "type": "sequence",
+      "prompt": "ماذا تفعل ليلى قبل أن تلبس حذاءها: تجهز حقيبتها أم تخرج من المنزل؟",
+      "answer": "تجهز حقيبتها."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "a1",
+      "passage_id": "ar-a1-u02-p05",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ماذا ستجهز ليلى للغد؟",
+      "answer": "حقيبتها."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "a1",
+      "passage_id": "ar-a1-u02-p06",
+      "question_id": "q8",
+      "type": "reference_resolution",
+      "prompt": "إلى من تشير «نحن» في كلام الأم؟",
+      "answer": "إلى الأم وليلى."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "a1",
+      "passage_id": "ar-a1-u03-p02",
+      "question_id": "q5",
+      "type": "reference_resolution",
+      "prompt": "إلى ماذا تشير «إليه» في «هل نحتاج إليه اليوم»؟",
+      "answer": "إلى التفاح."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "a1",
+      "passage_id": "ar-a1-u06-p06",
+      "question_id": "q4",
+      "type": "reference_resolution",
+      "prompt": "إلى ماذا يعود «تحته» عند ذكر الجسر؟",
+      "answer": "إلى الجسر."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "a1",
+      "passage_id": "ar-a1-u08-p01",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ماذا تشرب ليلى؟",
+      "answer": "الماء."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "a1",
+      "passage_id": "ar-a1-u09-p05",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "كم هدفًا يسجل فريق ليلى في النص؟",
+      "answer": "هدفين."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "a1",
+      "passage_id": "ar-a1-u09-p06",
+      "question_id": "q4",
+      "type": "cause_effect",
+      "prompt": "لماذا يمكن أن تكون ليلى سعيدة من دون فوز؟",
+      "answer": "لأنها تستمتع بالأصدقاء والتجربة والوقت نفسه."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "a1",
+      "passage_id": "ar-a1-u10-p03",
+      "question_id": "q5",
+      "type": "cause_effect",
+      "prompt": "لماذا يجلس الطلاب في مجموعة؟",
+      "answer": "ليسمعوا ما تعلمه الآخرون ويتبادلوا الأفكار."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "a1",
+      "passage_id": "ar-a1-u10-p06",
+      "question_id": "q4",
+      "type": "reference_resolution",
+      "prompt": "إلى ماذا تشير «هذه الموضوعات» في النهاية؟",
+      "answer": "إلى موضوعات الطريق والوقت والطعام والمدرسة والصحة والفراغ وغيرها."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u01-p06",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "كيف يمكن للأسرة معرفة معلومات البنك قبل الذهاب؟",
+      "answer": "بالاتصال عبر الهاتف."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u01-p06",
+      "question_id": "q8",
+      "type": "reference_resolution",
+      "prompt": "إلى ماذا تشير «لم يره» في الحديث عن الجار؟",
+      "answer": "إلى الإعلان."
+    },
+    {
+      "code": "contrast_answer_not_surface_aligned_to_quoted_options",
+      "level": "a2",
+      "passage_id": "ar-a2-u03-p04",
+      "question_id": "q8",
+      "prompt": "هل «معظم» تعني «جميع» دائمًا؟",
+      "answer": "لا، تعني الأغلبية لا المجموعة كلها بالضرورة.",
+      "quoted_options": [
+        "معظم",
+        "جميع"
+      ]
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u03-p06",
+      "question_id": "q8",
+      "type": "reference_resolution",
+      "prompt": "إلى ماذا تشير «كل مصدر» في الجملة الأخيرة؟",
+      "answer": "إلى الذاكرة الشخصية وكلام الآخرين والصور والتسجيلات والأشياء المرتبطة بالماضي."
+    },
+    {
+      "code": "contrast_answer_not_surface_aligned_to_quoted_options",
+      "level": "a2",
+      "passage_id": "ar-a2-u09-p05",
+      "question_id": "q5",
+      "prompt": "لماذا قد تكون عبارة «بعض الأسر» أدق من «الجميع»؟",
+      "answer": "لأن السلوك لا يشمل بالضرورة كل أفراد المجتمع.",
+      "quoted_options": [
+        "بعض الأسر",
+        "الجميع"
+      ]
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u10-p05",
+      "question_id": "q3",
+      "type": "literal_detail",
+      "prompt": "كيف يشارك من لا يستطيع الحضور؟",
+      "answer": "من خلال الصور والرسائل."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u10-p06",
+      "question_id": "q7",
+      "type": "reference_resolution",
+      "prompt": "إلى ماذا تشير «هذه المهارات» في الجملة الأخيرة؟",
+      "answer": "إلى مجموعة مهارات القراءة العملية المذكورة في الخدمات والخطط والذاكرة والشراء والتعلم والسفر والأخبار والبيئة والثقافة."
+    },
+    {
+      "code": "contrast_answer_not_surface_aligned_to_quoted_options",
+      "level": "b1",
+      "passage_id": "ar-b1-u01-p01",
+      "question_id": "q8",
+      "prompt": "ما الفرق بين «ليس الآن» و«لا أريد هذا أبدًا» في النص؟",
+      "answer": "الأول يؤجل فرصة مناسبة إلى وقت أفضل، والثاني يرفضها نهائيًا.",
+      "quoted_options": [
+        "ليس الآن",
+        "لا أريد هذا أبدًا"
+      ]
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "b1",
+      "passage_id": "ar-b1-u01-p02",
+      "question_id": "q8",
+      "type": "reference_resolution",
+      "prompt": "إلى ماذا تشير «ذلك» في فكرة أن سامر لم يرد استخدامه عذرًا؟",
+      "answer": "إلى التزامه العائلي الذي يؤثر في وقته."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "b1",
+      "passage_id": "ar-b1-u04-p03",
+      "question_id": "q4",
+      "type": "cause_effect",
+      "prompt": "كيف تغير ملاحظة المعلمة التقرير؟",
+      "answer": "يتحول من رقم عام واحد إلى عرض للمتوسط وحدوده وتقسيمات إضافية."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "b1",
+      "passage_id": "ar-b1-u04-p06",
+      "question_id": "q8",
+      "type": "reference_resolution",
+      "prompt": "إلى ماذا تشير «هذه الأمثلة»؟",
+      "answer": "إلى الحالات الخمس السابقة المتعلقة بالساحة والتنظيف والماء والشارع والقاعة."
+    },
+    {
+      "code": "contrast_answer_not_surface_aligned_to_quoted_options",
+      "level": "b1",
+      "passage_id": "ar-b1-u06-p02",
+      "question_id": "q7",
+      "prompt": "ما الفرق بين «العائلة التي زرتها» و«الناس هنا»؟",
+      "answer": "الأولى تصف حالة محددة، والثانية تدعي نمطًا عامًا يحتاج إلى دليل أوسع.",
+      "quoted_options": [
+        "العائلة التي زرتها",
+        "الناس هنا"
+      ]
+    },
+    {
+      "code": "contrast_answer_not_surface_aligned_to_quoted_options",
+      "level": "b1",
+      "passage_id": "ar-b1-u06-p06",
+      "question_id": "q7",
+      "prompt": "ما الفرق بين «هذا ما حدث لي» و«هكذا يفعل الجميع»؟",
+      "answer": "الأولى تصف تجربة محددة، والثانية تعممها على مجموعة كاملة.",
+      "quoted_options": [
+        "هذا ما حدث لي",
+        "هكذا يفعل الجميع"
+      ]
+    },
+    {
+      "code": "contrast_answer_not_surface_aligned_to_quoted_options",
+      "level": "b1",
+      "passage_id": "ar-b1-u08-p02",
+      "question_id": "q7",
+      "prompt": "ما الفرق بين «معلق» و«ملغي نهائيًا»؟",
+      "answer": "التعليق يترك أكثر من نتيجة مستقبلية ممكنة، أما الإلغاء النهائي فيقرر نهاية المشروع.",
+      "quoted_options": [
+        "معلق",
+        "ملغي نهائيًا"
+      ]
+    },
+    {
+      "code": "contrast_answer_not_surface_aligned_to_quoted_options",
+      "level": "b1",
+      "passage_id": "ar-b1-u08-p05",
+      "question_id": "q7",
+      "prompt": "ما الفرق بين «ماذا تغير؟» و«لماذا تغير؟»؟",
+      "answer": "الأول سؤال وصفي يمكن أن يجيب عنه المؤشر، والثاني سببي يحتاج أدلة إضافية.",
+      "quoted_options": [
+        "ماذا تغير؟",
+        "لماذا تغير؟"
+      ]
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "b1",
+      "passage_id": "ar-b1-u10-p04",
+      "question_id": "q4",
+      "type": "cause_effect",
+      "prompt": "كيف تؤثر مراجعة الأدلة في التقرير؟",
+      "answer": "تستبدل لغة سببية بلغة ارتباط وتذكر التفسيرات البديلة."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "b2",
+      "passage_id": "ar-b2-u01-p03",
+      "question_id": "q8",
+      "type": "reference_resolution",
+      "prompt": "إلى ماذا تشير «ذلك» في «أدى ذلك إلى بقاء الخلاف»؟",
+      "answer": "إلى اعتماد المعايير وطلب تفسير الدرجات بدل الأرقام وحدها."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "b2",
+      "passage_id": "ar-b2-u06-p06",
+      "question_id": "q4",
+      "type": "cause_effect",
+      "prompt": "كيف يؤثر ربط البيانات في حدود الخصوصية؟",
+      "answer": "يخلق استنتاجات واستخدامات جديدة لم تكن ظاهرة في السجل المنفرد."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "b2",
+      "passage_id": "ar-b2-u07-p04",
+      "question_id": "q8",
+      "type": "reference_resolution",
+      "prompt": "إلى ماذا تشير «كانت صحيحة»؟",
+      "answer": "إلى القراءة أو التفسير الذي نفترضه للمشهد."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c1",
+      "passage_id": "ar-c1-u07-p01",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "كم مرة يظهر المفتاح؟",
+      "answer": "أربع مرات."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c1",
+      "passage_id": "ar-c1-u09-p05",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ما الذي يضاف إلى النسخة التعليمية؟",
+      "answer": "خط زمني وشهادتان من توقيتين مختلفين للرحيل."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c1",
+      "passage_id": "ar-c1-u09-p06",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ما العوامل التي يذكر النص أنها تؤثر في ما بقي من الماضي؟",
+      "answer": "الاختيار والصيانة والفقد والصمت."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p01",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ما نوع الدليل الذي يفحصه النص؟",
+      "answer": "مصادر أو آثار من الأرشيف الخيالي."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p03",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ما نوع الدليل الذي يفحصه النص؟",
+      "answer": "مصادر أو آثار من الأرشيف الخيالي."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p04",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ما نوع الدليل الذي يفحصه النص؟",
+      "answer": "مصادر أو آثار من الأرشيف الخيالي."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p05",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ما نوع الدليل الذي يفحصه النص؟",
+      "answer": "مصادر أو آثار من الأرشيف الخيالي."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c2",
+      "passage_id": "ar-c2-u08-p06",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ما نوع الدليل الذي يفحصه النص؟",
+      "answer": "مصادر أو آثار من الأرشيف الخيالي."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p01",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ما المفاضلة التي يعرضها النص؟",
+      "answer": "فائدة تشغيلية تقابلها مخاطرة أو قيد أو فقدان خيار."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p02",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ما المفاضلة التي يعرضها النص؟",
+      "answer": "فائدة تشغيلية تقابلها مخاطرة أو قيد أو فقدان خيار."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p03",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ما المفاضلة التي يعرضها النص؟",
+      "answer": "فائدة تشغيلية تقابلها مخاطرة أو قيد أو فقدان خيار."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p04",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ما المفاضلة التي يعرضها النص؟",
+      "answer": "فائدة تشغيلية تقابلها مخاطرة أو قيد أو فقدان خيار."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p05",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ما المفاضلة التي يعرضها النص؟",
+      "answer": "فائدة تشغيلية تقابلها مخاطرة أو قيد أو فقدان خيار."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c2",
+      "passage_id": "ar-c2-u09-p06",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ما المفاضلة التي يعرضها النص؟",
+      "answer": "فائدة تشغيلية تقابلها مخاطرة أو قيد أو فقدان خيار."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p01",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ما نوعان من الأدلة أو الطبقات اللذان يقارنهما النص؟",
+      "answer": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p02",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ما نوعان من الأدلة أو الطبقات اللذان يقارنهما النص؟",
+      "answer": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
+    },
+    {
+      "code": "direct_answer_zero_content_overlap_with_passage",
+      "level": "c2",
+      "passage_id": "ar-c2-u10-p04",
+      "question_id": "q2",
+      "type": "literal_detail",
+      "prompt": "ما نوعان من الأدلة أو الطبقات اللذان يقارنهما النص؟",
+      "answer": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
+    }
+  ],
+  "status": "REVIEW_REQUIRED"
+}
