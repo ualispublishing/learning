@@ -22,6 +22,14 @@ def support_map(lang):
             if v: out[norm(v,lang)]=item['id']
     return out
 
+def ranked_lexicon(lang):
+    out={}
+    for line in (RD/'lexicons'/f'{lang}.jsonl').read_text(encoding='utf-8').splitlines():
+        if not line.strip(): continue
+        row=json.loads(line); key=norm(row.get('match_form',''),lang)
+        if key: out[key]=min(out.get(key,10**9),int(row['rank']))
+    return out
+
 def parse_label(label,lang,cfg):
     parts=[x.strip() for x in label.split('|')]
     vals={norm(parts[0],lang)}
@@ -30,15 +38,17 @@ def parse_label(label,lang,cfg):
             lemma=part[6:].strip()
             lemma=cfg.get('lemma_aliases',{}).get(lemma,lemma)
             vals.add(norm(lemma,lang))
+    morph={norm(k,lang):norm(v,lang) for k,v in cfg.get('morphology_aliases',{}).items()}
+    vals|={morph[x] for x in list(vals) if x in morph}
     return {x for x in vals if x}
 
 def main():
     raw=json.loads((AUD/'a1_unit01_coverage_audit.json').read_text(encoding='utf-8'))
     aliases=json.loads((RD/'planning'/'a1_target_aliases.json').read_text(encoding='utf-8'))
     functions=json.loads((RD/'planning'/'a1_function_support.json').read_text(encoding='utf-8'))
-    out={'version':1,'source_audit':'reading/audit/a1_unit01_coverage_audit.json','policy':'Unit-01 rank 1-500 prerequisite band; tail/outside items require target, verified support, grammar/function, or proper-name status','languages':{},'overall_gate':'PASS'}
+    out={'version':2,'source_audit':'reading/audit/a1_unit01_coverage_audit.json','policy':'Unit-01 rank 1-500 prerequisite band; tail/outside items require target, verified support, transparent morphology resolving to prerequisite core, grammar/function, or proper-name status','languages':{},'overall_gate':'PASS'}
     for lang,block in raw['languages'].items():
-        pmap={p['id']:p for p in passage_rows(lang)}; sup=support_map(lang); cfg=functions[lang]
+        pmap={p['id']:p for p in passage_rows(lang)}; sup=support_map(lang); cfg=functions[lang]; lex=ranked_lexicon(lang)
         func={norm(x,lang) for x in cfg.get('function_forms',[])}; proper={norm(x,lang) for x in cfg.get('proper_names',[])}
         seen_targets=set(); seen_support=set(); rows=[]; allbad=Counter()
         for diag in sorted(block['passages'],key=lambda x:x['sequence']):
@@ -56,6 +66,7 @@ def main():
                 elif forms&active_alias: controlled['previous_target']+=count
                 elif forms&set(sup):
                     hits={sup[x] for x in forms if x in sup}; used_support|=hits; controlled['verified_support']+=count
+                elif any(lex.get(x,10**9)<=500 for x in forms): controlled['prerequisite_core_morphology']+=count
                 elif forms&func: controlled['grammar_function']+=count
                 else: bad['ranked_tail: '+label]+=count
             for label,count in diag['top_outside_3000_tokens']:
@@ -65,6 +76,7 @@ def main():
                 elif forms&active_alias: controlled['previous_target']+=count
                 elif forms&set(sup):
                     hits={sup[x] for x in forms if x in sup}; used_support|=hits; controlled['verified_support']+=count
+                elif any(lex.get(x,10**9)<=500 for x in forms): controlled['prerequisite_core_morphology']+=count
                 elif forms&func: controlled['grammar_function']+=count
                 else: bad['outside: '+label]+=count
             if tail_total>tail_listed: bad['unlisted ranked-tail diagnostic tokens']+=tail_total-tail_listed
