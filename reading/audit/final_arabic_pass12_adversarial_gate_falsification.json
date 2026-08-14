@@ -1,0 +1,54 @@
+{
+  "pass": 12,
+  "name": "adversarial_cross_gate_falsification",
+  "scope": "Arabic A1-C2 canonical reading corpus",
+  "method": "directly re-check clean mechanical claims and deliberately refuse final approval while any independent substantive gate is unresolved",
+  "direct_checks": {
+    "passages": 360,
+    "unique_ids": 360,
+    "latin_reader_passages": 0,
+    "known_bad_id_hits": 3,
+    "p6_with_new_targets": 0
+  },
+  "hard_regressions": [
+    {
+      "code": "known_bad_lexical_ids_reappeared",
+      "hits": [
+        {
+          "passage_id": "ar-b1-u02-p05",
+          "where": "lexical",
+          "target_id": "ar-r2063"
+        },
+        {
+          "passage_id": "ar-b1-u02-p06",
+          "where": "lexical",
+          "target_id": "ar-r2063"
+        },
+        {
+          "passage_id": "ar-c2-u06-p05",
+          "where": "lexical",
+          "target_id": "ar-r2063"
+        }
+      ]
+    }
+  ],
+  "final_approval_blockers": [
+    {
+      "gate": "pass03_question_composition",
+      "status": "REVIEW_REQUIRED",
+      "reason": "documented question-distribution defaults remain underrepresented, especially B1-C2 grammar/style and synthesis"
+    },
+    {
+      "gate": "pass07_cefr_difficulty",
+      "status": "REVIEW_REQUIRED",
+      "reason": "length calibration and known-token coverage remain unresolved; B1-C2 are materially below written production bands"
+    },
+    {
+      "gate": "pass11_manual_naturalness",
+      "status": "IN_PROGRESS",
+      "reason": "manual naturalness review is complete only for A1; A2-C2 remain pending"
+    }
+  ],
+  "status": "FAIL_REGRESSION",
+  "final_approval": false
+}
