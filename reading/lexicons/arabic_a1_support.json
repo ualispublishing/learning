@@ -1,8 +1,8 @@
 {
   "language": "ar",
   "level": "A1",
-  "version": 1,
-  "policy": "Small pedagogical supplement for natural beginner reading; does not modify or replace the canonical ranked frequency decks.",
+  "version": 2,
+  "policy": "Small pedagogical supplement for natural beginner reading; does not modify or replace the canonical ranked frequency decks. Recurring support may draw on educator-cleared ranked cards outside the Unit-01 rank<=500 prerequisite band when the exact learner sense is verified and introduction limits are respected.",
   "items": [
     {
       "id": "ar-a1-sup-001",
@@ -54,6 +54,86 @@
       "source": {"name": "Cambridge English–Arabic Dictionary", "url": "https://dictionary.cambridge.org/dictionary/english-arabic/library", "source_level": "A2"},
       "verified": true,
       "note": "Cambridge labels the English headword A2; inclusion here is a deliberate narrow-support choice, not a CEFR certification claim."
+    },
+    {
+      "id": "ar-a1-sup-006",
+      "lemma": "عَرَفَ",
+      "forms": ["عرف", "أعرف", "تعرف", "يعرف"],
+      "part_of_speech": "verb",
+      "intended_sense_en": "know; recognize",
+      "reason": "Needed from P1 onward for the recurring orientation/knowledge frame.",
+      "source": {"name": "Educator-cleared Arabic ranked deck + Arabic Language Academy in Cairo, Al-Mu'jam Al-Wasit", "source_file": "arabic_top1000.csv", "source_rank": 578},
+      "verified": true
+    },
+    {
+      "id": "ar-a1-sup-007",
+      "lemma": "مَعًا",
+      "forms": ["معا", "معًا"],
+      "part_of_speech": "adverb",
+      "intended_sense_en": "together",
+      "reason": "Recurring family/routine relation expressed naturally in early passages.",
+      "source": {"name": "Educator-cleared Arabic ranked deck", "source_file": "arabic_top1000.csv", "source_rank": 626},
+      "verified": true
+    },
+    {
+      "id": "ar-a1-sup-008",
+      "lemma": "غَد",
+      "forms": ["غد", "غدا", "غدًا"],
+      "part_of_speech": "temporal noun/adverbial expression",
+      "intended_sense_en": "tomorrow",
+      "reason": "High-utility time anchor used in the Unit-01 routine sequence.",
+      "source": {"name": "Educator-cleared Arabic ranked deck", "source_file": "arabic_top1000.csv", "source_rank": 521},
+      "verified": true
+    },
+    {
+      "id": "ar-a1-sup-009",
+      "lemma": "خَرَجَ",
+      "forms": ["خرج", "خرجت", "خرجتا", "يخرج", "تخرج"],
+      "part_of_speech": "verb",
+      "intended_sense_en": "go out; leave",
+      "reason": "Concrete movement verb required for the home-to-park transition.",
+      "source": {"name": "Educator-cleared Arabic ranked deck", "source_file": "arabic_top1000.csv", "source_rank": 815},
+      "verified": true
+    },
+    {
+      "id": "ar-a1-sup-010",
+      "lemma": "عَادَ",
+      "forms": ["عاد", "عادت", "عادتا", "أعود", "تعود", "نعود", "يعود"],
+      "part_of_speech": "verb",
+      "intended_sense_en": "return; come/go back",
+      "reason": "Recurring movement-back relation needed across the narrow-reading sequence.",
+      "source": {"name": "Educator-cleared Arabic ranked deck", "source_file": "arabic_top1000.csv", "source_rank": 526},
+      "verified": true
+    },
+    {
+      "id": "ar-a1-sup-011",
+      "lemma": "قَرَأَ",
+      "forms": ["قرأ", "أقرأ", "تقرأ", "تقرئي", "يقرأ", "القراءة", "قراءة"],
+      "part_of_speech": "verb / closely linked verbal noun",
+      "intended_sense_en": "read; reading",
+      "reason": "Core action for the library/reading context introduced in P4 and recycled thereafter.",
+      "source": {"name": "Arabic Language Academy in Cairo, Al-Mu'jam Al-Wasit + educator review", "root": "قرأ"},
+      "verified": true
+    },
+    {
+      "id": "ar-a1-sup-012",
+      "lemma": "مَسَاء",
+      "forms": ["مساء", "المساء"],
+      "part_of_speech": "noun / temporal expression",
+      "intended_sense_en": "evening",
+      "reason": "Concrete time-of-day endpoint used for حتى in P5 and recycled in P6.",
+      "source": {"name": "Educator-cleared Arabic continuation deck", "source_file": "arabic_top3000.csv", "source_rank": 1091},
+      "verified": true
+    },
+    {
+      "id": "ar-a1-sup-013",
+      "lemma": "سَهْل",
+      "forms": ["سهل", "سهلة", "سهلا", "سهلاً"],
+      "part_of_speech": "adjective",
+      "intended_sense_en": "easy",
+      "reason": "Concrete evaluative adjective used in the P5 book contrast.",
+      "source": {"name": "Educator-cleared Arabic continuation deck", "source_file": "arabic_top3000.csv", "source_rank": 1166},
+      "verified": true
     }
   ]
 }
