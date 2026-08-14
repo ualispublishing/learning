@@ -7,31 +7,10 @@
     "passages": 360,
     "unique_ids": 360,
     "latin_reader_passages": 0,
-    "known_bad_id_hits": 3,
+    "known_bad_id_hits": 0,
     "p6_with_new_targets": 0
   },
-  "hard_regressions": [
-    {
-      "code": "known_bad_lexical_ids_reappeared",
-      "hits": [
-        {
-          "passage_id": "ar-b1-u02-p05",
-          "where": "lexical",
-          "target_id": "ar-r2063"
-        },
-        {
-          "passage_id": "ar-b1-u02-p06",
-          "where": "lexical",
-          "target_id": "ar-r2063"
-        },
-        {
-          "passage_id": "ar-c2-u06-p05",
-          "where": "lexical",
-          "target_id": "ar-r2063"
-        }
-      ]
-    }
-  ],
+  "hard_regressions": [],
   "final_approval_blockers": [
     {
       "gate": "pass03_question_composition",
@@ -49,6 +28,6 @@
       "reason": "manual naturalness review is complete only for A1; A2-C2 remain pending"
     }
   ],
-  "status": "FAIL_REGRESSION",
+  "status": "BLOCKED",
   "final_approval": false
 }
