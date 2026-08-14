@@ -27,10 +27,10 @@
       "review_targets_without_prior_reader_introduction": 4
     },
     "b1": {
-      "new_targets": 83,
-      "review_targets": 208,
+      "new_targets": 82,
+      "review_targets": 209,
       "p6_new_targets": 0,
-      "zero_exact_exposure_warnings": 31,
+      "zero_exact_exposure_warnings": 30,
       "review_targets_without_prior_reader_introduction": 31
     },
     "b2": {
@@ -58,17 +58,11 @@
   "totals": {
     "passages": 360,
     "unique_introduced_target_ids": 525,
-    "hard_issues": 7,
-    "warnings": 499,
-    "normalized_surfaces_with_multiple_target_ids": 8
+    "hard_issues": 6,
+    "warnings": 497,
+    "normalized_surfaces_with_multiple_target_ids": 7
   },
   "hard_issues": [
-    {
-      "code": "target_reintroduced_as_new",
-      "passage_id": "ar-b1-u02-p01",
-      "target_id": "ar-r487",
-      "first_passage": "ar-b1-u01-p04"
-    },
     {
       "code": "target_reintroduced_as_new",
       "passage_id": "ar-c1-u04-p01",
@@ -1209,13 +1203,6 @@
       "target_id": "ar-r113",
       "form": "سبب",
       "declared_exposures": 3
-    },
-    {
-      "code": "new_target_form_not_exactly_found_in_text",
-      "passage_id": "ar-b1-u02-p01",
-      "target_id": "ar-r487",
-      "form": "نتيجة",
-      "declared_exposures": 1
     },
     {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
@@ -3889,25 +3876,6 @@
           "passage_id": "ar-c1-u07-p03",
           "level": "c1",
           "form": "مظهر"
-        }
-      ],
-      "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
-    },
-    {
-      "code": "normalized_surface_introduced_under_multiple_target_ids",
-      "normalized_form": "نتيجة",
-      "introductions": [
-        {
-          "target_id": "ar-r487",
-          "passage_id": "ar-b1-u01-p04",
-          "level": "b1",
-          "form": "نتيجة"
-        },
-        {
-          "target_id": "ar-r487",
-          "passage_id": "ar-b1-u02-p01",
-          "level": "b1",
-          "form": "نتيجة"
         }
       ],
       "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
