@@ -1,16 +1,16 @@
 {
   "project": "Arabic, French, and Urdu graded reading curriculum A1-C2",
-  "updated": "2026-08-13",
+  "updated": "2026-08-14",
   "overall_status": "in_progress",
   "active_language": "Arabic",
   "paused_for_new_curriculum": [
     "French",
     "Urdu"
   ],
-  "phase": "Generation-first passage production. Arabic A1 and A2 generation are complete at 60 and 60 canonical passages; Arabic B1 generation is underway at 12 passages across units [1, 2]. Formal audits remain deferred to the final 10+ pass review phase.",
+  "phase": "Generation-first passage production. Completed Arabic generation levels: A1, A2, B1. Arabic B2 generation is next. Formal audits remain deferred to the final 10+ pass review phase.",
   "target_passages": 1080,
   "target_is_quota": false,
-  "draft_passages": 144,
+  "draft_passages": 192,
   "approved_passages": 0,
   "production_policy": {
     "mode": "GENERATE_FIRST_AUDIT_FINAL",
@@ -141,23 +141,58 @@
     "reading/tools/update_generation_status.py"
   ],
   "next_actions": [
-    "continue Arabic B1 generation from Unit 03 using longer multi-sentence inference, motive/reason, evidence, and wider reference chains",
+    "begin Arabic B2 Unit 01 generation using the roadmap's increasing discourse, inference, genre, and reference-chain demands",
     "continue generation unit by unit without routine mid-generation audits; fix only obvious severe or propagation-prone defects immediately",
     "keep ten questions and ten answers per canonical passage, with generation-stage formal quality fields pending",
     "after the designated generation corpus is complete, run at least 10 distinct final audit passes using different linguistic, pedagogical, lexical, structural, and adversarial approaches"
   ],
   "generation_guardrail": "Preserve the roadmap architecture, spaced-reinforcement intent, language-specific naturalness, and ten-question standard while prioritizing passage production. Earlier conservative audit-before-scaling gates are superseded in ordering by GENERATION_FIRST_FINAL_AUDIT_POLICY.md; their quality criteria remain mandatory at final review.",
   "arabic_b1": {
-    "passages": 12,
+    "passages": 60,
     "units_generated": [
       1,
-      2
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
     ],
     "questions_per_passage": 10,
-    "total_questions": 120,
-    "total_answers": 120,
-    "next_unit": 3,
-    "generation_state": "IN_PROGRESS",
+    "total_questions": 600,
+    "total_answers": 600,
+    "generation_state": "COMPLETE",
+    "formal_final_approval": "DEFERRED; final corpus approval occurs in the later 10+ pass audit phase"
+  },
+  "arabic_b2": {
+    "passages": 0,
+    "units_generated": [],
+    "questions_per_passage": 10,
+    "total_questions": 0,
+    "total_answers": 0,
+    "generation_state": "NEXT",
+    "formal_final_approval": "DEFERRED; final corpus approval occurs in the later 10+ pass audit phase",
+    "next_unit": 1
+  },
+  "arabic_c1": {
+    "passages": 0,
+    "units_generated": [],
+    "questions_per_passage": 10,
+    "total_questions": 0,
+    "total_answers": 0,
+    "generation_state": "NEXT",
+    "formal_final_approval": "DEFERRED; final corpus approval occurs in the later 10+ pass audit phase"
+  },
+  "arabic_c2": {
+    "passages": 0,
+    "units_generated": [],
+    "questions_per_passage": 10,
+    "total_questions": 0,
+    "total_answers": 0,
+    "generation_state": "NEXT",
     "formal_final_approval": "DEFERRED; final corpus approval occurs in the later 10+ pass audit phase"
   }
 }
