@@ -1,0 +1,28 @@
+name: Inventory Arabic schema contract values
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/inventory_arabic_schema_contract_values.py'
+      - '.github/workflows/inventory-arabic-schema-contract-values.yml'
+permissions:
+  contents: write
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python reading/tools/inventory_arabic_schema_contract_values.py
+      - name: Commit inventory
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/final_arabic_schema_contract_value_inventory.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Inventory Arabic schema contract values [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
