@@ -1,0 +1,32 @@
+{
+  "language": "ar",
+  "level": "A1",
+  "unit": 1,
+  "review_date": "2026-08-13",
+  "scope": "ar-a1-u01-p01 through ar-a1-u01-p06",
+  "metric": "curriculum-supported lexical control",
+  "metric_definition": "A token is controlled when it resolves to the educator-cleared prerequisite core, an explicitly taught Unit-01 target, a verified A1 pedagogical support item, a transparent clitic/inflection alias resolving to one of those categories, or an allowed proper name. This metric is not a learner-mastery estimate.",
+  "raw_analyzer_policy": "Stanza inventory/rank diagnostics are retained as conservative diagnostics only. Arabic tokenization, clitic segmentation, and inflection/lemmatization misses are not counted as uncontrolled vocabulary when the surface is independently resolved to a verified controlled base.",
+  "evidence": [
+    "reading/audit/a1_unit01_coverage_compact.json",
+    "reading/lexicons/arabic_a1_support.json",
+    "reading/planning/a1_function_support.json",
+    "reading/ledgers/build_summary.json",
+    "reading/ledgers/arabic_unit01_exposure_summary.json",
+    "reading/audit/arabic_a1_question_schema.json",
+    "audit/arabic_501_1000_educator_review.json",
+    "audit/arabic_top3000_v2_promotion_gate_summary.json"
+  ],
+  "passages": [
+    {"id": "ar-a1-u01-p01", "supported_control_coverage": 1.0, "uncontrolled_tokens": [], "gate": "PASS"},
+    {"id": "ar-a1-u01-p02", "supported_control_coverage": 1.0, "uncontrolled_tokens": [], "gate": "PASS"},
+    {"id": "ar-a1-u01-p03", "supported_control_coverage": 1.0, "uncontrolled_tokens": [], "gate": "PASS"},
+    {"id": "ar-a1-u01-p04", "supported_control_coverage": 1.0, "uncontrolled_tokens": [], "gate": "PASS"},
+    {"id": "ar-a1-u01-p05", "supported_control_coverage": 1.0, "uncontrolled_tokens": [], "gate": "PASS"},
+    {"id": "ar-a1-u01-p06", "supported_control_coverage": 1.0, "uncontrolled_tokens": [], "new_deliberate_targets": 0, "fluency_control_gate": "PASS", "gate": "PASS"}
+  ],
+  "unit_uncontrolled_tokens": [],
+  "learner_mastery_assumed": false,
+  "gate": "PASS",
+  "approval_note": "Supported lexical control is cleared for all six Arabic A1 Unit-01 passages. Canonical passage quality/status fields remain a separate persistence step and must not be inferred from this audit alone."
+}
