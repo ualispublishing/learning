@@ -41,10 +41,10 @@
       "review_targets_without_prior_reader_introduction": 22
     },
     "c1": {
-      "new_targets": 90,
-      "review_targets": 268,
+      "new_targets": 84,
+      "review_targets": 274,
       "p6_new_targets": 0,
-      "zero_exact_exposure_warnings": 32,
+      "zero_exact_exposure_warnings": 30,
       "review_targets_without_prior_reader_introduction": 0
     },
     "c2": {
@@ -58,48 +58,11 @@
   "totals": {
     "passages": 360,
     "unique_introduced_target_ids": 525,
-    "hard_issues": 6,
-    "warnings": 497,
-    "normalized_surfaces_with_multiple_target_ids": 7
+    "hard_issues": 0,
+    "warnings": 486,
+    "normalized_surfaces_with_multiple_target_ids": 1
   },
-  "hard_issues": [
-    {
-      "code": "target_reintroduced_as_new",
-      "passage_id": "ar-c1-u04-p01",
-      "target_id": "ar-r1940",
-      "first_passage": "ar-b2-u08-p03"
-    },
-    {
-      "code": "target_reintroduced_as_new",
-      "passage_id": "ar-c1-u06-p04",
-      "target_id": "ar-r1469",
-      "first_passage": "ar-b2-u03-p04"
-    },
-    {
-      "code": "target_reintroduced_as_new",
-      "passage_id": "ar-c1-u07-p02",
-      "target_id": "ar-r1916",
-      "first_passage": "ar-b2-u08-p02"
-    },
-    {
-      "code": "target_reintroduced_as_new",
-      "passage_id": "ar-c1-u07-p03",
-      "target_id": "ar-r1879",
-      "first_passage": "ar-b2-u07-p01"
-    },
-    {
-      "code": "target_reintroduced_as_new",
-      "passage_id": "ar-c1-u09-p03",
-      "target_id": "ar-r1929",
-      "first_passage": "ar-b2-u08-p04"
-    },
-    {
-      "code": "target_reintroduced_as_new",
-      "passage_id": "ar-c1-u09-p03",
-      "target_id": "ar-r1880",
-      "first_passage": "ar-b2-u08-p04"
-    }
-  ],
+  "hard_issues": [],
   "warnings": [
     {
       "code": "new_target_form_not_exactly_found_in_text",
@@ -2731,14 +2694,6 @@
       "declared_exposures": 1
     },
     {
-      "code": "declared_exposure_count_differs_from_exact_surface_count",
-      "passage_id": "ar-c1-u04-p01",
-      "target_id": "ar-r1940",
-      "form": "مصطلح",
-      "declared": 2,
-      "exact_surface_count": 1
-    },
-    {
       "code": "new_target_form_not_exactly_found_in_text",
       "passage_id": "ar-c1-u04-p01",
       "target_id": "ar-r2488",
@@ -2936,13 +2891,6 @@
       "exact_surface_count": 1
     },
     {
-      "code": "new_target_form_not_exactly_found_in_text",
-      "passage_id": "ar-c1-u07-p02",
-      "target_id": "ar-r1916",
-      "form": "مطلع",
-      "declared_exposures": 2
-    },
-    {
       "code": "declared_exposure_count_differs_from_exact_surface_count",
       "passage_id": "ar-c1-u07-p02",
       "target_id": "ar-r2090",
@@ -2956,14 +2904,6 @@
       "target_id": "ar-r2747",
       "form": "أليف",
       "declared": 2,
-      "exact_surface_count": 1
-    },
-    {
-      "code": "declared_exposure_count_differs_from_exact_surface_count",
-      "passage_id": "ar-c1-u07-p03",
-      "target_id": "ar-r1879",
-      "form": "مظهر",
-      "declared": 3,
       "exact_surface_count": 1
     },
     {
@@ -3097,21 +3037,6 @@
       "target_id": "ar-r2598",
       "form": "مؤرخ",
       "declared": 4,
-      "exact_surface_count": 1
-    },
-    {
-      "code": "new_target_form_not_exactly_found_in_text",
-      "passage_id": "ar-c1-u09-p03",
-      "target_id": "ar-r1929",
-      "form": "جغرافي",
-      "declared_exposures": 2
-    },
-    {
-      "code": "declared_exposure_count_differs_from_exact_surface_count",
-      "passage_id": "ar-c1-u09-p03",
-      "target_id": "ar-r1880",
-      "form": "بعثة",
-      "declared": 3,
       "exact_surface_count": 1
     },
     {
@@ -3749,63 +3674,6 @@
     },
     {
       "code": "normalized_surface_introduced_under_multiple_target_ids",
-      "normalized_form": "إلغاء",
-      "introductions": [
-        {
-          "target_id": "ar-r1469",
-          "passage_id": "ar-b2-u03-p04",
-          "level": "b2",
-          "form": "إلغاء"
-        },
-        {
-          "target_id": "ar-r1469",
-          "passage_id": "ar-c1-u06-p04",
-          "level": "c1",
-          "form": "إلغاء"
-        }
-      ],
-      "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
-    },
-    {
-      "code": "normalized_surface_introduced_under_multiple_target_ids",
-      "normalized_form": "بعثة",
-      "introductions": [
-        {
-          "target_id": "ar-r1880",
-          "passage_id": "ar-b2-u08-p04",
-          "level": "b2",
-          "form": "بعثة"
-        },
-        {
-          "target_id": "ar-r1880",
-          "passage_id": "ar-c1-u09-p03",
-          "level": "c1",
-          "form": "بعثة"
-        }
-      ],
-      "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
-    },
-    {
-      "code": "normalized_surface_introduced_under_multiple_target_ids",
-      "normalized_form": "جغرافي",
-      "introductions": [
-        {
-          "target_id": "ar-r1929",
-          "passage_id": "ar-b2-u08-p04",
-          "level": "b2",
-          "form": "جغرافي"
-        },
-        {
-          "target_id": "ar-r1929",
-          "passage_id": "ar-c1-u09-p03",
-          "level": "c1",
-          "form": "جغرافي"
-        }
-      ],
-      "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
-    },
-    {
-      "code": "normalized_surface_introduced_under_multiple_target_ids",
       "normalized_form": "صحافة",
       "introductions": [
         {
@@ -3822,64 +3690,7 @@
         }
       ],
       "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
-    },
-    {
-      "code": "normalized_surface_introduced_under_multiple_target_ids",
-      "normalized_form": "مصطلح",
-      "introductions": [
-        {
-          "target_id": "ar-r1940",
-          "passage_id": "ar-b2-u08-p03",
-          "level": "b2",
-          "form": "مصطلح"
-        },
-        {
-          "target_id": "ar-r1940",
-          "passage_id": "ar-c1-u04-p01",
-          "level": "c1",
-          "form": "مصطلح"
-        }
-      ],
-      "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
-    },
-    {
-      "code": "normalized_surface_introduced_under_multiple_target_ids",
-      "normalized_form": "مطلع",
-      "introductions": [
-        {
-          "target_id": "ar-r1916",
-          "passage_id": "ar-b2-u08-p02",
-          "level": "b2",
-          "form": "مطلع"
-        },
-        {
-          "target_id": "ar-r1916",
-          "passage_id": "ar-c1-u07-p02",
-          "level": "c1",
-          "form": "مطلع"
-        }
-      ],
-      "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
-    },
-    {
-      "code": "normalized_surface_introduced_under_multiple_target_ids",
-      "normalized_form": "مظهر",
-      "introductions": [
-        {
-          "target_id": "ar-r1879",
-          "passage_id": "ar-b2-u07-p01",
-          "level": "b2",
-          "form": "مظهر"
-        },
-        {
-          "target_id": "ar-r1879",
-          "passage_id": "ar-c1-u07-p03",
-          "level": "c1",
-          "form": "مظهر"
-        }
-      ],
-      "interpretation": "may be legitimate homography/POS/sense distinction; send to lexical-sense pass"
     }
   ],
-  "status": "FAIL"
+  "status": "PASS"
 }
