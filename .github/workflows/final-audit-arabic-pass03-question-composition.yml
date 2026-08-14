@@ -16,7 +16,7 @@ jobs:
         with: {fetch-depth: 0}
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
-      # Explicit rerun after guarded B1 Unit01-02 question-composition repairs.
+      # Explicit refresh of the current canonical question sets.
       - name: Run final review pass 03
         run: python reading/tools/final_audit_arabic_pass03_question_composition.py
       - name: Commit audit artifact
