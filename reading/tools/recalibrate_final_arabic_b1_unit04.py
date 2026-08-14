@@ -85,7 +85,10 @@ for pid, addition in ADD.items():
         changes.append({'passage_id': pid, 'question_id': qid, 'old_type': q['type'], 'new_type': typ})
         q['type'] = typ
         q['prompt'] = prompt
-        q['target_ids'] = tids
+        if tids:
+            q['target_ids'] = tids
+        else:
+            q.pop('target_ids', None)
         a['answer'] = answer
 
     r['revision'] = int(r.get('revision', 1)) + 1
