@@ -20,14 +20,15 @@ This checklist is the operational work queue for the Arabic, French, and Urdu A1
 
 ## Phase 1 — Build lexical and curriculum ledgers
 
-- [ ] Parse each language's validated top-1,000 + ranks 1001–3000 into a normalized reading lexicon.
-- [ ] Keep original validated CSVs unchanged; build derived ledgers only.
-- [ ] Arabic: add level-appropriate phrase-bank chunks as separate multiword targets.
-- [ ] Add normalized lemma/form/POS/rank/meaning fields for reading selection.
-- [ ] Create `reading/ledgers/arabic_lexical_exposure.jsonl`.
-- [ ] Create `reading/ledgers/french_lexical_exposure.jsonl`.
-- [ ] Create `reading/ledgers/urdu_lexical_exposure.jsonl`.
-- [ ] Define initial known-core bands for A1/A2/B1/B2 as coverage heuristics, not CEFR declarations.
+- [x] Parse each language's validated top-1,000 + ranks 1001–3000 into a normalized reading lexicon.
+- [x] Keep original validated CSVs unchanged; build derived ledgers only.
+- [x] Arabic: create a separate 665-row phrase exposure ledger with stable `ar-pNNN` IDs and explicit-review-only A1 eligibility.
+- [ ] Arabic: continue pedagogical A1 review beyond the current 26 targeted phrase candidates; do not infer level from phrase-bank order.
+- [x] Add normalized form/match-form/POS/rank/meaning fields for ranked reading selection.
+- [x] Create `reading/ledgers/arabic_lexical_exposure.jsonl`.
+- [x] Create `reading/ledgers/french_lexical_exposure.jsonl`.
+- [x] Create `reading/ledgers/urdu_lexical_exposure.jsonl`.
+- [x] Define initial known-core planning bands for A1/A2/B1/B2 as coverage heuristics, not CEFR declarations.
 - [ ] Define beyond-3,000 verification workflow for C1/C2.
 - [x] Create grammar/discourse target inventories per language and level (`reading/planning/grammar_discourse_inventory.json`).
 - [x] Create topic/genre/domain matrix so the curriculum does not overuse one theme (`reading/planning/topic_genre_matrix.json`).
@@ -43,9 +44,10 @@ This checklist is the operational work queue for the Arabic, French, and Urdu A1
 - [x] First-pass MSA naturalness review.
 - [x] First-pass contextual inference review.
 - [x] First-pass question/answer correctness review.
-- [ ] Measure lexical coverage and new-word load against the derived learner-path ledger.
-- [x] Validate record structure against the intended schema shape.
-- [ ] Deep manual inspection of all six after measured coverage is available.
+- [x] Measure lexical coverage and new-word load against the derived learner path using the documented supported-control definition.
+- [x] Validate all six records against the canonical JSON Schema and ten-question contract.
+- [x] Deep manual inspection of all six after measured coverage; supported-control audit is 6/6 PASS with zero uncontrolled tokens.
+- [ ] Persist final supported-coverage/approval fields in all six canonical passage records; P6 benchmark eligibility must remain false until this write is complete.
 
 ### French
 - [x] Plan Unit 01 lexical targets and review targets.
@@ -178,4 +180,4 @@ For every language/level:
 
 ## Immediate next task
 
-**Do not generate Unit 02 yet.** Build the derived lexical/exposure ledgers (or an equivalent safe non-destructive measurement path), normalize French and Urdu to canonical JSONL, measure lexical coverage for all 18 A1 Unit 01 drafts, then deep-review and either approve or rewrite each passage.
+**Do not generate Unit 02 yet.** Arabic Unit 01 has completed schema, supported-control, deep-review, and exposure-ledger gates; the immediate Arabic blocker is to persist those PASS results into the six canonical passage coverage/status fields and verify the resulting records. Continue conservative Arabic phrase A1 review in parallel without treating phrase-bank order as level. After Arabic canonical approval is synchronized, normalize French and Urdu to canonical JSONL, measure coverage, deep-review them, and then complete the cross-language A1 calibration gate.
