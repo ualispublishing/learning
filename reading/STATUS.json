@@ -4,26 +4,48 @@
   "overall_status": "in_progress",
   "active_language": "Arabic",
   "paused_for_new_curriculum": ["French", "Urdu"],
-  "phase": "Arabic ranks 1-3000 and phrase bank educator-cleared; Arabic A1 Unit 01 has passed schema, linguistic/pedagogical, supported-control, and exposure-ledger gates. A separate 665-row phrase exposure ledger is live with explicit-review-only A1 eligibility. Unit 01 remains gated only on persisting final canonical passage approval fields.",
+  "phase": "Generation-first passage production. Arabic A1 Units 01-04 are now in canonical passage data; French and Urdu A1 Unit 01 are also canonical. Formal validity/correctness/coverage audits are deferred to the final multi-pass review phase while generation continues.",
   "target_passages": 1080,
   "target_is_quota": false,
-  "draft_passages": 18,
+  "draft_passages": 36,
   "approved_passages": 0,
+  "production_policy": {
+    "mode": "GENERATE_FIRST_AUDIT_FINAL",
+    "source": "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
+    "write_high_quality_initial_drafts": true,
+    "interrupt_generation_for_routine_audits": false,
+    "fix_obvious_severe_defects_during_generation": true,
+    "formal_audit_timing": "final review phase after the designated generation corpus/batch is complete",
+    "minimum_distinct_final_review_passes": 10
+  },
   "arabic_a1": {
-    "passages": 6,
+    "passages": 24,
+    "units_generated": [1, 2, 3, 4],
     "questions_per_passage": 10,
-    "total_questions": 60,
-    "total_answers": 60,
-    "json_schema_valid_passages": 6,
-    "question_schema_gate": "PASS",
-    "linguistic_review": "PASS in canonical passage records",
-    "pedagogical_review": "PASS in canonical passage records",
-    "answer_key_check": "PASS in canonical passage records",
-    "supported_control_gate": "PASS; 6/6 passages, zero uncontrolled tokens under the documented curriculum-control definition; not a learner-mastery claim",
-    "exposure_ledger_gate": "PASS; 10 Unit-01 ranked targets recorded without assuming learner mastery",
-    "coverage_state": "formal supported-control audit PASS; canonical passage coverage_check/status fields still need persistence before approval",
-    "approved": 0,
-    "first_deliberate_yurid_introduction": "P3; premature P1-P2 exposure removed"
+    "total_questions": 240,
+    "total_answers": 240,
+    "generation_state": "Units 01-04 present in reading/arabic/a1/passages.jsonl; Units 02-04 intentionally remain generation-stage drafts with formal quality fields pending",
+    "next_unit": 5,
+    "next_theme": "school and basic work",
+    "unit01_prior_audit_evidence": {
+      "json_schema_valid_passages": 6,
+      "question_schema_gate": "PASS",
+      "linguistic_review": "PASS in the earlier Unit-01 review cycle",
+      "pedagogical_review": "PASS in the earlier Unit-01 review cycle",
+      "answer_key_check": "PASS in the earlier Unit-01 review cycle",
+      "supported_control_gate": "PASS; 6/6 passages, zero uncontrolled tokens under the documented curriculum-control definition; not a learner-mastery claim",
+      "exposure_ledger_gate": "PASS; 10 Unit-01 ranked targets recorded without assuming learner mastery"
+    },
+    "formal_final_approval": "DEFERRED; earlier Unit-01 audit evidence is retained, but final corpus approval will occur in the later multi-pass audit phase"
+  },
+  "cross_language_a1_calibration": {
+    "arabic_canonical_passages": 24,
+    "french_canonical_passages": 6,
+    "urdu_canonical_passages": 6,
+    "french_questions_answers": "60/60",
+    "urdu_questions_answers": "60/60",
+    "generation_gate": "PASS for canonical file production",
+    "formal_audit_state": "DEFERRED_UNTIL_GENERATION_PHASE_COMPLETE"
   },
   "arabic_phrase_exposure": {
     "source_rows": 665,
@@ -42,44 +64,40 @@
   },
   "flashcard_policy": {
     "prior_educator_ready_claim": "withdrawn/superseded by language-specific second-pass evidence",
-    "current_description": "Arabic ranked vocabulary 1-3000 is educator-cleared under the stricter source-aware second pass; Arabic phrase bank is semantically cleared 665/665. Phrase semantic clearance does not imply A1 eligibility: phrase-level curriculum placement is reviewed separately. French and Urdu remain separate working datasets pending their own curriculum repair/review path.",
+    "current_description": "Arabic ranked vocabulary 1-3000 is educator-cleared under the stricter source-aware second pass; Arabic phrase bank is semantically cleared 665/665. Phrase semantic clearance does not imply A1 eligibility: phrase-level curriculum placement is reviewed separately. French and Urdu remain separate working datasets pending their own later final review path.",
     "reader_used_sense_must_be_second_pass_verified": true,
     "frequency_rank_is_not_cefr_level": true
   },
   "arabic_second_pass": {
-    "audit_order": ["reader-used A1 cards", "ranks 1-100", "101-500", "501-1000", "1001-3000", "beyond-base B2-C2 vocabulary"],
     "ranks_1_100": "EDUCATOR_CLEARED; zero unresolved ranks",
     "ranks_101_500": "EDUCATOR_CLEARED; 400/400 manually reviewed, 55 repaired live, zero unresolved ranks",
     "ranks_501_1000": "EDUCATOR_CLEARED_SOURCE_TIGHT; 500/500 full-block manual review complete; zero unresolved ranks; live attestation PASS",
     "ranks_1001_3000": "EDUCATOR_CLEARED_MODERN_SENSE; 2000/2000 source-supported rows; zero block/review rows; live attestation PASS; Arabic A1 reader alignment PASS",
     "ranks_1_3000": "EDUCATOR_CLEARED under the stricter source-aware second-pass standard",
-    "phrase_bank": "PASS; 665/665 semantically verified after manual adjudication of four heuristic false positives; zero unresolved semantic/example-fidelity rows. Curriculum-level CEFR placement remains a separate explicit review layer.",
-    "continuation_modern_sense_triage": "SUPERSEDED by final educator clearance and zero-unresolved promotion gate"
+    "phrase_bank": "PASS; 665/665 semantically verified after manual adjudication of four heuristic false positives; zero unresolved semantic/example-fidelity rows. Curriculum-level CEFR placement remains a separate explicit review layer."
   },
   "important_files": [
+    "reading/AGENT_HANDOFF.md",
+    "reading/ROADMAP.md",
+    "reading/TASKS.md",
+    "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
     "reading/planning/TEN_QUESTION_STANDARD.md",
     "reading/planning/ARABIC_FIRST_LANGUAGE_PIPELINE.md",
-    "reading/planning/ARABIC_PHRASE_EXPOSURE_POLICY.md",
-    "reading/planning/arabic_phrase_a1_review.json",
-    "reading/audit/arabic_a1_question_schema.json",
-    "reading/audit/a1_unit01_coverage_compact.json",
+    "reading/planning/topic_genre_matrix.json",
+    "reading/planning/grammar_discourse_inventory.json",
+    "reading/arabic/a1/passages.jsonl",
+    "reading/french/a1/passages.jsonl",
+    "reading/urdu/a1/passages.jsonl",
     "reading/audit/arabic_a1_supported_coverage.json",
-    "reading/ledgers/build_summary.json",
     "reading/ledgers/arabic_unit01_exposure_summary.json",
-    "reading/ledgers/arabic_phrase_exposure.jsonl",
-    "reading/ledgers/arabic_phrase_exposure_summary.json",
-    "audit/arabic_top100_educator_review.json",
-    "audit/arabic_101_500_educator_review.json",
-    "audit/arabic_501_1000_educator_review.json",
-    "audit/arabic_top3000_v2_promotion_gate_summary.json",
-    "audit/arabic_phrase_bank_audit_summary.json"
+    "audit/arabic_top3000_v2_promotion_gate_summary.json"
   ],
   "next_actions": [
-    "persist the PASS result from reading/audit/arabic_a1_supported_coverage.json into the six canonical passage quality/coverage fields",
-    "approve or rewrite each Arabic A1 Unit-01 passage individually only after its canonical coverage/status fields are synchronized",
-    "keep P6 zero-new-material and mark benchmark eligibility only when the final canonical approval state is persisted",
-    "continue conservative phrase A1 review in parallel; only explicit A1_eligible phrases may enter beginner curriculum and the remaining 639 phrases must not be treated as level-assigned",
-    "then normalize French and Urdu A1 Unit-01 drafts to canonical JSONL, measure coverage, and deep-review them before any Unit-02 generation"
+    "continue Arabic A1 passage generation with Unit 05: school and basic work",
+    "continue through Arabic A1 Units 06-10 using the topic/genre matrix and six-passage unit cycle",
+    "keep every canonical generation-stage passage at ten questions/ten answers and leave formal audit fields pending",
+    "do not restart routine audit infrastructure during passage production; only fix obvious severe defects that would knowingly propagate",
+    "after the designated generation phase, run at least 10 distinct final audit passes covering naturalness, grammar, lexical sense/register, CEFR/load, inferability, question/answer correctness, evidence alignment, spacing/interleaving, fluency, schema/data integrity, continuity/balance, and adversarial error seeking"
   ],
-  "do_not_scale_before": "The complete 18-passage A1 calibration batch passes its language-specific linguistic, pedagogical, semantic-target, supported-coverage, schema, exposure-spacing, and fluency-checkpoint gates."
+  "generation_guardrail": "Preserve the roadmap architecture, spaced-reinforcement intent, language-specific naturalness, and ten-question standard while prioritizing passage production. Earlier conservative audit-before-scaling gates are superseded in ordering by GENERATION_FIRST_FINAL_AUDIT_POLICY.md; their quality criteria remain mandatory at final review."
 }
