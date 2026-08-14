@@ -1,0 +1,155 @@
+{
+  "source": "reading/audit/final_arabic_pass01_data_integrity.json",
+  "hard_issue_total": 1390,
+  "by_code": {
+    "json_schema": 1390
+  },
+  "by_level": {
+    "b1": 127,
+    "b2": 400,
+    "c1": 449,
+    "c2": 414
+  },
+  "by_normalized_schema_path": {
+    "new_lexical_targets/*/context_strategy/*": 850,
+    "domains/*": 496,
+    "passage_type": 38,
+    "review_lexical_targets/*/review_stage": 6
+  },
+  "normalized_message_families": {
+    "<VALUE> is not one of ['contrast', 'cause_consequence', 'behavior_interpretation', 'example_instance', 'restatement', 'parallel_structure', 'category_relation', 'scenario_resolution', 'morphological_support']": 850,
+    "<VALUE> is not one of ['personal', 'public', 'educational', 'professional']": 496,
+    "<VALUE> is not one of ['instructional', 'reinforcement', 'transfer', 'interleaved', 'fluency', 'stretch', 'checkpoint', 'paired']": 38,
+    "<VALUE> is not one of ['R1', 'R2', 'R3', 'R4', 'R5', 'long_term']": 6
+  },
+  "path_examples": {
+    "domains/*": [
+      {
+        "level": "b1",
+        "passage_id": "ar-b1-u03-p03",
+        "path": "domains/1",
+        "message": "'social' is not one of ['personal', 'public', 'educational', 'professional']"
+      },
+      {
+        "level": "b1",
+        "passage_id": "ar-b1-u03-p04",
+        "path": "domains/0",
+        "message": "'work' is not one of ['personal', 'public', 'educational', 'professional']"
+      },
+      {
+        "level": "b1",
+        "passage_id": "ar-b1-u03-p06",
+        "path": "domains/2",
+        "message": "'work' is not one of ['personal', 'public', 'educational', 'professional']"
+      },
+      {
+        "level": "b1",
+        "passage_id": "ar-b1-u04-p01",
+        "path": "domains/1",
+        "message": "'community' is not one of ['personal', 'public', 'educational', 'professional']"
+      },
+      {
+        "level": "b1",
+        "passage_id": "ar-b1-u04-p02",
+        "path": "domains/0",
+        "message": "'community' is not one of ['personal', 'public', 'educational', 'professional']"
+      }
+    ],
+    "passage_type": [
+      {
+        "level": "b1",
+        "passage_id": "ar-b1-u03-p05",
+        "path": "passage_type",
+        "message": "'integration' is not one of ['instructional', 'reinforcement', 'transfer', 'interleaved', 'fluency', 'stretch', 'checkpoint', 'paired']"
+      },
+      {
+        "level": "b1",
+        "passage_id": "ar-b1-u04-p05",
+        "path": "passage_type",
+        "message": "'integration' is not one of ['instructional', 'reinforcement', 'transfer', 'interleaved', 'fluency', 'stretch', 'checkpoint', 'paired']"
+      },
+      {
+        "level": "b1",
+        "passage_id": "ar-b1-u05-p05",
+        "path": "passage_type",
+        "message": "'integration' is not one of ['instructional', 'reinforcement', 'transfer', 'interleaved', 'fluency', 'stretch', 'checkpoint', 'paired']"
+      },
+      {
+        "level": "b1",
+        "passage_id": "ar-b1-u06-p05",
+        "path": "passage_type",
+        "message": "'integration' is not one of ['instructional', 'reinforcement', 'transfer', 'interleaved', 'fluency', 'stretch', 'checkpoint', 'paired']"
+      },
+      {
+        "level": "b1",
+        "passage_id": "ar-b1-u07-p05",
+        "path": "passage_type",
+        "message": "'integration' is not one of ['instructional', 'reinforcement', 'transfer', 'interleaved', 'fluency', 'stretch', 'checkpoint', 'paired']"
+      }
+    ],
+    "new_lexical_targets/*/context_strategy/*": [
+      {
+        "level": "b1",
+        "passage_id": "ar-b1-u05-p01",
+        "path": "new_lexical_targets/0/context_strategy/1",
+        "message": "'evidence_interpretation' is not one of ['contrast', 'cause_consequence', 'behavior_interpretation', 'example_instance', 'restatement', 'parallel_structure', 'category_relation', 'scenario_resolution', 'morphological_support']"
+      },
+      {
+        "level": "b1",
+        "passage_id": "ar-b1-u05-p01",
+        "path": "new_lexical_targets/1/context_strategy/1",
+        "message": "'evidence_interpretation' is not one of ['contrast', 'cause_consequence', 'behavior_interpretation', 'example_instance', 'restatement', 'parallel_structure', 'category_relation', 'scenario_resolution', 'morphological_support']"
+      },
+      {
+        "level": "b1",
+        "passage_id": "ar-b1-u05-p02",
+        "path": "new_lexical_targets/0/context_strategy/1",
+        "message": "'evidence_interpretation' is not one of ['contrast', 'cause_consequence', 'behavior_interpretation', 'example_instance', 'restatement', 'parallel_structure', 'category_relation', 'scenario_resolution', 'morphological_support']"
+      },
+      {
+        "level": "b1",
+        "passage_id": "ar-b1-u05-p02",
+        "path": "new_lexical_targets/1/context_strategy/1",
+        "message": "'evidence_interpretation' is not one of ['contrast', 'cause_consequence', 'behavior_interpretation', 'example_instance', 'restatement', 'parallel_structure', 'category_relation', 'scenario_resolution', 'morphological_support']"
+      },
+      {
+        "level": "b1",
+        "passage_id": "ar-b1-u05-p03",
+        "path": "new_lexical_targets/0/context_strategy/1",
+        "message": "'evidence_interpretation' is not one of ['contrast', 'cause_consequence', 'behavior_interpretation', 'example_instance', 'restatement', 'parallel_structure', 'category_relation', 'scenario_resolution', 'morphological_support']"
+      }
+    ],
+    "review_lexical_targets/*/review_stage": [
+      {
+        "level": "c1",
+        "passage_id": "ar-c1-u07-p01",
+        "path": "review_lexical_targets/0/review_stage",
+        "message": "'R0' is not one of ['R1', 'R2', 'R3', 'R4', 'R5', 'long_term']"
+      },
+      {
+        "level": "c2",
+        "passage_id": "ar-c2-u03-p01",
+        "path": "review_lexical_targets/2/review_stage",
+        "message": "'R0' is not one of ['R1', 'R2', 'R3', 'R4', 'R5', 'long_term']"
+      },
+      {
+        "level": "c2",
+        "passage_id": "ar-c2-u03-p02",
+        "path": "review_lexical_targets/0/review_stage",
+        "message": "'R0' is not one of ['R1', 'R2', 'R3', 'R4', 'R5', 'long_term']"
+      },
+      {
+        "level": "c2",
+        "passage_id": "ar-c2-u04-p01",
+        "path": "review_lexical_targets/1/review_stage",
+        "message": "'R0' is not one of ['R1', 'R2', 'R3', 'R4', 'R5', 'long_term']"
+      },
+      {
+        "level": "c2",
+        "passage_id": "ar-c2-u04-p03",
+        "path": "review_lexical_targets/0/review_stage",
+        "message": "'R0' is not one of ['R1', 'R2', 'R3', 'R4', 'R5', 'long_term']"
+      }
+    ]
+  }
+}
