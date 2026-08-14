@@ -1,0 +1,82 @@
+{
+  "pass": 10,
+  "artifact_role": "human/source adjudication of the residual zero-keyword-overlap queue; does not weaken the raw detector",
+  "raw_artifact": "reading/audit/final_arabic_pass10_lexical_sense_alignment.json",
+  "adjudications": [
+    {
+      "target_id": "ar-r1387",
+      "form": "مبدأ",
+      "passage_id": "ar-b2-u01-p05",
+      "raw_intended_sense": "principle",
+      "raw_source_meaning": "principles",
+      "decision": "ACCEPT",
+      "reason": "singular/plural normalization of the same noun lexeme; no semantic divergence"
+    },
+    {
+      "target_id": "ar-r1929",
+      "form": "جغرافي",
+      "passage_id": "ar-b2-u08-p04",
+      "raw_intended_sense": "geographic",
+      "raw_source_meaning": "geographer",
+      "decision": "ACCEPT_SOURCE_GLOSS_LIMITATION",
+      "reason": "Cairo Arabic Academy terminology uses جغرافيّ adjectivally in expressions corresponding to geographical/geographic, including ميل جغرافي and الموقع الجغرافي.",
+      "evidence_url": "https://www.arabicacademy.gov.eg/ar/%D9%85%D8%AD%D8%B1%D9%83-%D8%A7%D9%84%D8%A8%D8%AD%D8%AB/geographical%2Bmile"
+    },
+    {
+      "target_id": "ar-r2614",
+      "form": "أمثل",
+      "passage_id": "ar-c1-u02-p05",
+      "raw_intended_sense": "optimal; most suitable",
+      "raw_source_meaning": "exemplary; ideal",
+      "decision": "ACCEPT_SOURCE_GLOSS_LIMITATION",
+      "reason": "Cairo Arabic Academy, al-Wasit: الأَمْثَلُ = الأَفْضَلُ; this directly supports the reader's optimal/best sense.",
+      "evidence_url": "https://www.arabicacademy.gov.eg/ar/%D9%85%D8%AD%D8%B1%D9%83-%D8%A7%D9%84%D8%A8%D8%AD%D8%AB/%D9%85%D8%B9%D8%AC%D9%85/dic-19/%D8%A7%D9%84%D8%A3%D9%85%D8%AB%D9%84"
+    },
+    {
+      "target_id": "ar-r2401",
+      "form": "مبرر",
+      "passage_id": "ar-c2-u01-p03",
+      "raw_intended_sense_before_repair": "justified; having a justification",
+      "current_intended_sense_after_repair": "justification; reason that justifies a belief or action",
+      "raw_source_meaning": "justifying",
+      "decision": "ACCEPT_AFTER_CANONICAL_REPAIR",
+      "reason": "The passage was normalized to the noun sense only. Cairo Arabic Academy uses the noun in لا مبرر لها, supporting justification/reason. The previous adjective/noun mixing was removed by a guarded canonical repair.",
+      "evidence_url": "https://www.arabicacademy.gov.eg/ar/%D9%85%D8%AD%D8%B1%D9%83-%D8%A7%D9%84%D8%A8%D8%AD%D8%AB/%D8%A7%D9%81%D9%92%D8%AA%D9%8E%D8%B9%D9%8E%D9%84%D9%8E?exact_search=true"
+    },
+    {
+      "target_id": "ar-r1634",
+      "form": "كتلة",
+      "passage_id": "ar-c2-u04-p01",
+      "raw_intended_sense": "mass; block; aggregate stock",
+      "raw_source_meaning": "blocs",
+      "decision": "ACCEPT_SOURCE_GLOSS_LIMITATION",
+      "reason": "Cairo Arabic Academy, al-Wasit defines الكتلة as a gathered piece of a thing and as the amount of matter contained in a body; the technical dictionaries also use mass senses. This supports mass/block/aggregate usage beyond the CSV's narrow blocs gloss.",
+      "evidence_url": "https://www.arabicacademy.gov.eg/ar/%D9%85%D8%AD%D8%B1%D9%83-%D8%A7%D9%84%D8%A8%D8%AD%D8%AB/%D8%A7%D9%84%D9%83%D9%8F%D8%AA%D9%92%D9%84%D9%8E%D8%A9%D9%8F?exact_search=true"
+    },
+    {
+      "target_id": "ar-r1670",
+      "form": "رصيد",
+      "passage_id": "ar-c2-u04-p02",
+      "raw_intended_sense": "balance; stock on hand",
+      "raw_source_meaning": "funds",
+      "decision": "ACCEPT_SOURCE_GLOSS_LIMITATION",
+      "reason": "Cairo Arabic Academy, al-Wasit gives banking balance and gold reserve senses for الرصيد, supporting balance/reserve/stock-family use beyond the CSV's narrow funds gloss.",
+      "evidence_url": "https://www.arabicacademy.gov.eg/ar/%D9%85%D8%AD%D8%B1%D9%83-%D8%A7%D9%84%D8%A8%D8%AD%D8%AB/%D8%A7%D9%84%D8%B1%D8%B5%D9%8A%D8%AF"
+    },
+    {
+      "target_id": "ar-r2871",
+      "form": "إدراك",
+      "passage_id": "ar-c2-u09-p03",
+      "raw_intended_sense": "perception; recognition",
+      "raw_source_meaning": "attainment",
+      "decision": "ACCEPT_SOURCE_GLOSS_LIMITATION",
+      "reason": "Cairo Arabic Academy explicitly defines الإدراك in philosophy as knowledge in its broad sense, including sensory, mental, and internal perception. The CSV gloss is incomplete for this reader sense.",
+      "evidence_url": "https://www.arabicacademy.gov.eg/ar/%D9%85%D8%AD%D8%B1%D9%83-%D8%A7%D9%84%D8%A8%D8%AD%D8%AB/%D9%85%D8%B9%D8%AC%D9%85/dic-19/%D8%A7%D9%84%D8%A5%D8%AF%D8%B1%D8%A7%D9%83"
+    }
+  ],
+  "raw_flag_count": 7,
+  "accepted_without_canonical_text_change": 6,
+  "accepted_after_canonical_text_and_sense_normalization": 1,
+  "unresolved": [],
+  "status": "PASS_WITH_SOURCE_ADJUDICATION"
+}
