@@ -15,6 +15,8 @@ jobs:
         with: {fetch-depth: 0}
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
+      # Explicit rerun after the adversarial pass itself exposed and repaired
+      # three stale lexical-review entries.
       - run: python reading/tools/final_audit_arabic_pass12_adversarial_gate_falsification.py
       - name: Commit audit artifact
         if: always()
