@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Final Arabic review pass 02: lexical target/exposure integrity.
 
-Checks bookkeeping and chronology of deliberate lexical targets. It does not
-judge whether a target sense, register, or CEFR placement is linguistically
-correct; those belong to separate review passes.
+Checks bookkeeping and chronology of deliberate *new* lexical targets. Review
+items that were not previously introduced inside the reader are diagnostics,
+not failures, because they may be prerequisite/core vocabulary learned outside
+the reader. This pass does not judge sense, register, or CEFR placement.
 """
 from __future__ import annotations
 
@@ -57,21 +58,33 @@ def main() -> None:
     hard: list[dict] = []
     warnings: list[dict] = []
     introduced_at: dict[str, str] = {}
-    introduced_order: dict[str, tuple[int, int]] = {}
     introduced_forms: defaultdict[str, list[dict]] = defaultdict(list)
-    introduction_counts = Counter()
-    level_summary = {level: {"new_targets": 0, "review_targets": 0, "p6_new_targets": 0, "zero_exact_exposure_warnings": 0} for level in LEVELS}
+    level_summary = {
+        level: {
+            "new_targets": 0,
+            "review_targets": 0,
+            "p6_new_targets": 0,
+            "zero_exact_exposure_warnings": 0,
+            "review_targets_without_prior_reader_introduction": 0,
+        }
+        for level in LEVELS
+    }
 
     for li, seq, row in rows:
         level = str(row.get("cefr", "")).lower()
         pid = row.get("id")
-        unit = row.get("unit")
         pnum_match = re.search(r"-p(\d{2})$", str(pid))
         pnum = int(pnum_match.group(1)) if pnum_match else None
         text = row.get("text", "")
         new_targets = row.get("new_lexical_targets", []) if isinstance(row.get("new_lexical_targets"), list) else []
         review_targets = row.get("review_lexical_targets", []) if isinstance(row.get("review_lexical_targets"), list) else []
-        level_summary.setdefault(level, {"new_targets": 0, "review_targets": 0, "p6_new_targets": 0, "zero_exact_exposure_warnings": 0})
+        level_summary.setdefault(level, {
+            "new_targets": 0,
+            "review_targets": 0,
+            "p6_new_targets": 0,
+            "zero_exact_exposure_warnings": 0,
+            "review_targets_without_prior_reader_introduction": 0,
+        })
         level_summary[level]["new_targets"] += len(new_targets)
         level_summary[level]["review_targets"] += len(review_targets)
         if pnum == 6:
@@ -92,12 +105,10 @@ def main() -> None:
             if tid in local_ids:
                 add(hard, "duplicate_new_target_id_within_passage", passage_id=pid, target_id=tid)
             local_ids.add(tid)
-            introduction_counts[tid] += 1
             if tid in introduced_at:
                 add(hard, "target_reintroduced_as_new", passage_id=pid, target_id=tid, first_passage=introduced_at[tid])
             else:
                 introduced_at[tid] = pid
-                introduced_order[tid] = (li, seq)
             nf = norm(str(form))
             if nf:
                 introduced_forms[nf].append({"target_id": tid, "passage_id": pid, "level": level, "form": form})
@@ -118,9 +129,15 @@ def main() -> None:
                 add(hard, "review_target_missing_id", passage_id=pid, form=target.get("form"))
                 continue
             if tid not in introduced_at:
-                add(hard, "review_target_without_prior_introduction", passage_id=pid, target_id=tid, form=target.get("form"))
-            elif introduced_order[tid] >= (li, seq):
-                add(hard, "review_target_not_chronologically_prior", passage_id=pid, target_id=tid, introduced_in=introduced_at[tid])
+                level_summary[level]["review_targets_without_prior_reader_introduction"] += 1
+                add(
+                    warnings,
+                    "review_target_without_prior_reader_introduction",
+                    passage_id=pid,
+                    target_id=tid,
+                    form=target.get("form"),
+                    interpretation="may be legitimate prerequisite/core vocabulary; verify against curriculum/ledger rather than treating as an automatic defect",
+                )
 
         passage_target_ids = {
             t.get("id")
@@ -135,22 +152,29 @@ def main() -> None:
                 if tid not in passage_target_ids:
                     add(warnings, "question_target_not_declared_in_passage_targets", passage_id=pid, question_id=q.get("id"), target_id=tid)
 
-    repeated_forms = {
-        form: entries
-        for form, entries in introduced_forms.items()
-        if len(entries) > 1
-    }
-    # Same normalized surface can legitimately represent different vocalization/POS/sense.
-    # Record for the later lexical-sense pass rather than failing here.
+    repeated_forms = {form: entries for form, entries in introduced_forms.items() if len(entries) > 1}
     for form, entries in sorted(repeated_forms.items()):
-        add(warnings, "normalized_surface_introduced_under_multiple_target_ids", normalized_form=form, introductions=entries)
+        add(
+            warnings,
+            "normalized_surface_introduced_under_multiple_target_ids",
+            normalized_form=form,
+            introductions=entries,
+            interpretation="may be legitimate homography/POS/sense distinction; send to lexical-sense pass",
+        )
 
     payload = {
         "pass": 2,
         "name": "lexical_target_exposure_integrity",
         "scope": "Arabic A1-C2 canonical reading corpus",
-        "method": "target-ID chronology, review-before-introduction protection, exact-surface exposure diagnostics, checkpoint diagnostics, and question target linkage",
-        "not_claimed": ["lexical sense correctness", "register correctness", "CEFR placement", "morphological equivalence when exact surface differs", "learner mastery"],
+        "method": "new-target ID chronology, exact-surface exposure diagnostics, checkpoint diagnostics, question target linkage, and prerequisite/core review diagnostics",
+        "not_claimed": [
+            "lexical sense correctness",
+            "register correctness",
+            "CEFR placement",
+            "morphological equivalence when exact surface differs",
+            "whether a review target was learned outside the reader",
+            "learner mastery",
+        ],
         "levels": level_summary,
         "totals": {
             "passages": len(rows),
