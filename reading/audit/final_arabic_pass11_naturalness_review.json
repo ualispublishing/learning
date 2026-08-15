@@ -68,18 +68,26 @@
       "note": "Full C1 manual prose read was performed only after all 60 C1 passages had completed Pass-03/07 length and assessment recalibration. The repair batch applied 29 exact high-confidence MSA grammar/idiom/collocation repairs across 23 passages; assessment, new-target, review-target, and literal new-target occurrence contracts were assertion-guarded. Stylistic-only alternatives were intentionally left unchanged."
     },
     "c2": {
-      "passages_reviewed": 1,
+      "passages_reviewed": 60,
       "passages_total": 60,
-      "review_complete": false,
-      "status": "PENDING_AFTER_LENGTH_RECALIBRATION",
-      "note": "ar-c2-u01-p03 received a separate lexical-sense/naturalness normalization for مبرر; full level manual pass should follow the major Pass-07 length recalibration."
+      "review_complete": true,
+      "high_confidence_repairs_applied": 66,
+      "passages_touched": 43,
+      "repair_sources": [
+        "reading/audit/final_arabic_pass11_c2_snapshot.jsonl",
+        "reading/tools/repair_final_arabic_pass11_c2_naturalness_batch.py",
+        "reading/tools/repair_final_arabic_c2_u01_p02_latin_intrusion.py",
+        "reading/tools/repair_final_arabic_c2_u01_p03_mubarrir_sense.py"
+      ],
+      "status": "PASS_AFTER_REPAIR",
+      "note": "Full C2 manual prose read was performed only after all 60 C2 passages had completed structural/length and assessment recalibration. The full manual batch applied 64 exact high-confidence MSA grammar/idiom/collocation repairs across 42 passages. The total also includes the earlier guarded مبرر lexical-sense normalization in ar-c2-u01-p03 and the pre-snapshot removal of a residual Latin-script intrusion in ar-c2-u01-p02, for 66 repairs across 43 unique passages. The batch assertion-guarded assessments, speed-training metadata, new/review target metadata, literal target occurrence counts, the 700–1200-word band, and Arabic-only reader-facing title/text. A fresh post-repair snapshot revalidated all 60 passages at 709–977 words. Stylistic-only alternatives were intentionally left unchanged."
     }
   },
   "totals": {
-    "passages_fully_reviewed_in_completed_levels": 300,
-    "levels_complete": 5,
-    "levels_pending": 1
+    "passages_fully_reviewed_in_completed_levels": 360,
+    "levels_complete": 6,
+    "levels_pending": 0
   },
-  "status": "IN_PROGRESS",
+  "status": "COMPLETE",
   "final_approval_claim": false
 }
