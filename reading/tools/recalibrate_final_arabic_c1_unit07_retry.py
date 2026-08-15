@@ -13,5 +13,7 @@ patches={
 }
 for old,new in patches.items():
     assert text.count(old)==1, f'expected one retry insertion point: {old[:40]!r}'
+    if old.endswith("''',"):
+        new += "''',"
     text=text.replace(old,new)
 exec(compile(text,str(SOURCE),'exec'),{'__name__':'__main__','__file__':str(SOURCE)})
