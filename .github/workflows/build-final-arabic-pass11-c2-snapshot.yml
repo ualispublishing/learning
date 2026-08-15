@@ -3,6 +3,7 @@ on:
   workflow_dispatch:
   push:
     paths:
+      - reading/arabic/c2/passages.jsonl
       - reading/tools/build_final_arabic_pass11_c2_snapshot.py
       - .github/workflows/build-final-arabic-pass11-c2-snapshot.yml
 permissions:
