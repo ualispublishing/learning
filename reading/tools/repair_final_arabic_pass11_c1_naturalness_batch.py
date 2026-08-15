@@ -45,7 +45,8 @@ for pid,pairs in REPAIRS.items():
     for old,new in pairs:
         count=text.count(old)
         if count!=1: raise RuntimeError(f'{pid}: expected one occurrence of {old!r}, got {count}')
-        if new in text: raise RuntimeError(f'{pid}: replacement already present: {new!r}')
+        remainder=text.replace(old,'',1)
+        if new in remainder: raise RuntimeError(f'{pid}: replacement already present outside target occurrence: {new!r}')
         text=text.replace(old,new,1); applied+=1
     r['text']=text
     r['word_count']=len(text.split())
