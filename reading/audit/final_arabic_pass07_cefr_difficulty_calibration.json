@@ -45,7 +45,7 @@
     },
     "b1": {
       "passages": 60,
-      "word_count_mean": 254.48,
+      "word_count_mean": 254.78,
       "word_count_median": 249.5,
       "word_count_min": 225,
       "word_count_max": 293,
@@ -63,12 +63,12 @@
     },
     "b2": {
       "passages": 60,
-      "word_count_mean": 167.82,
-      "word_count_median": 166.5,
-      "word_count_min": 144,
-      "word_count_max": 202,
+      "word_count_mean": 374.73,
+      "word_count_median": 371.5,
+      "word_count_min": 350,
+      "word_count_max": 419,
       "length_zones": {
-        "below_standard_min": 60
+        "standard": 60
       },
       "stored_word_count_mismatches_gt2": 0,
       "new_target_mean": 1.5,
@@ -81,12 +81,12 @@
     },
     "c1": {
       "passages": 60,
-      "word_count_mean": 183.35,
-      "word_count_median": 183.0,
-      "word_count_min": 129,
-      "word_count_max": 236,
+      "word_count_mean": 538.25,
+      "word_count_median": 535.0,
+      "word_count_min": 501,
+      "word_count_max": 647,
       "length_zones": {
-        "below_standard_min": 60
+        "standard": 60
       },
       "stored_word_count_mismatches_gt2": 0,
       "new_target_mean": 1.4,
@@ -99,12 +99,12 @@
     },
     "c2": {
       "passages": 60,
-      "word_count_mean": 156.53,
-      "word_count_median": 166.0,
-      "word_count_min": 98,
-      "word_count_max": 197,
+      "word_count_mean": 797.03,
+      "word_count_median": 780.0,
+      "word_count_min": 709,
+      "word_count_max": 977,
       "length_zones": {
-        "below_standard_min": 60
+        "standard": 60
       },
       "stored_word_count_mismatches_gt2": 0,
       "new_target_mean": 1.5,
@@ -117,18 +117,18 @@
     }
   },
   "cross_level": {
-    "mean_word_count_non_decreasing": false,
+    "mean_word_count_non_decreasing": true,
     "mean_word_counts": {
       "a1": 89.52,
       "a2": 137.83,
-      "b1": 254.48,
-      "b2": 167.82,
-      "c1": 183.35,
-      "c2": 156.53
+      "b1": 254.78,
+      "b2": 374.73,
+      "c1": 538.25,
+      "c2": 797.03
     }
   },
   "totals": {
-    "review_flags": 606
+    "review_flags": 426
   },
   "flags": [
     {
@@ -2202,40 +2202,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u01-p01",
-      "word_count": 186,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u01-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u01-p02",
-      "word_count": 170,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2244,40 +2214,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u01-p03",
-      "word_count": 176,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u01-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u01-p04",
-      "word_count": 173,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2286,40 +2226,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u01-p05",
-      "word_count": 178,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u01-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u01-p06",
-      "word_count": 185,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2328,40 +2238,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u02-p01",
-      "word_count": 172,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u02-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u02-p02",
-      "word_count": 170,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2370,40 +2250,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u02-p03",
-      "word_count": 177,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u02-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u02-p04",
-      "word_count": 152,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2412,40 +2262,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u02-p05",
-      "word_count": 169,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u02-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u02-p06",
-      "word_count": 178,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2454,40 +2274,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u03-p01",
-      "word_count": 184,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u03-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u03-p02",
-      "word_count": 190,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2496,40 +2286,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u03-p03",
-      "word_count": 186,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u03-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u03-p04",
-      "word_count": 179,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2538,40 +2298,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u03-p05",
-      "word_count": 174,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u03-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u03-p06",
-      "word_count": 180,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2580,40 +2310,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u04-p01",
-      "word_count": 151,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u04-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u04-p02",
-      "word_count": 146,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2622,40 +2322,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u04-p03",
-      "word_count": 150,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u04-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u04-p04",
-      "word_count": 163,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2664,40 +2334,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u04-p05",
-      "word_count": 164,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u04-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u04-p06",
-      "word_count": 176,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2706,40 +2346,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u05-p01",
-      "word_count": 157,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u05-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u05-p02",
-      "word_count": 159,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2748,40 +2358,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u05-p03",
-      "word_count": 165,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u05-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u05-p04",
-      "word_count": 158,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2790,40 +2370,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u05-p05",
-      "word_count": 158,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u05-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u05-p06",
-      "word_count": 166,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2832,40 +2382,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u06-p01",
-      "word_count": 163,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u06-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u06-p02",
-      "word_count": 154,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2874,40 +2394,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u06-p03",
-      "word_count": 173,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u06-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u06-p04",
-      "word_count": 148,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2916,40 +2406,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u06-p05",
-      "word_count": 156,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u06-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u06-p06",
-      "word_count": 167,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -2958,40 +2418,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u07-p01",
-      "word_count": 153,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u07-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u07-p02",
-      "word_count": 153,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3000,40 +2430,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u07-p03",
-      "word_count": 160,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u07-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u07-p04",
-      "word_count": 176,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3042,40 +2442,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u07-p05",
-      "word_count": 158,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u07-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u07-p06",
-      "word_count": 169,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3084,40 +2454,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u08-p01",
-      "word_count": 157,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u08-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u08-p02",
-      "word_count": 155,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3126,40 +2466,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u08-p03",
-      "word_count": 144,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u08-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u08-p04",
-      "word_count": 163,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3168,40 +2478,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u08-p05",
-      "word_count": 159,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u08-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u08-p06",
-      "word_count": 184,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3210,40 +2490,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u09-p01",
-      "word_count": 176,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u09-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u09-p02",
-      "word_count": 178,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3252,40 +2502,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u09-p03",
-      "word_count": 158,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u09-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u09-p04",
-      "word_count": 167,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3294,40 +2514,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u09-p05",
-      "word_count": 188,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u09-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u09-p06",
-      "word_count": 180,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3336,40 +2526,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u10-p01",
-      "word_count": 183,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u10-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u10-p02",
-      "word_count": 165,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3378,40 +2538,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u10-p03",
-      "word_count": 162,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u10-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u10-p04",
-      "word_count": 162,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3420,40 +2550,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u10-p05",
-      "word_count": 164,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "b2",
       "passage_id": "ar-b2-u10-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "b2",
-      "passage_id": "ar-b2-u10-p06",
-      "word_count": 202,
-      "zone": "below_standard_min",
-      "standard": [
-        350,
-        550
-      ],
-      "extended": [
-        600,
-        900
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3462,40 +2562,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u01-p01",
-      "word_count": 205,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u01-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u01-p02",
-      "word_count": 211,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3504,40 +2574,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u01-p03",
-      "word_count": 218,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u01-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u01-p04",
-      "word_count": 219,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3546,40 +2586,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u01-p05",
-      "word_count": 236,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u01-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u01-p06",
-      "word_count": 216,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3588,40 +2598,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u02-p01",
-      "word_count": 199,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u02-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u02-p02",
-      "word_count": 199,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3630,40 +2610,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u02-p03",
-      "word_count": 197,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u02-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u02-p04",
-      "word_count": 203,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3672,40 +2622,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u02-p05",
-      "word_count": 205,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u02-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u02-p06",
-      "word_count": 188,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3714,40 +2634,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u03-p01",
-      "word_count": 192,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u03-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u03-p02",
-      "word_count": 198,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3756,40 +2646,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u03-p03",
-      "word_count": 195,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u03-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u03-p04",
-      "word_count": 183,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3798,40 +2658,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u03-p05",
-      "word_count": 206,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u03-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u03-p06",
-      "word_count": 210,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3840,40 +2670,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u04-p01",
-      "word_count": 185,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u04-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u04-p02",
-      "word_count": 184,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3882,40 +2682,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u04-p03",
-      "word_count": 180,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u04-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u04-p04",
-      "word_count": 174,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3924,40 +2694,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u04-p05",
-      "word_count": 165,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u04-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u04-p06",
-      "word_count": 200,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -3966,40 +2706,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u05-p01",
-      "word_count": 177,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u05-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u05-p02",
-      "word_count": 172,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4008,40 +2718,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u05-p03",
-      "word_count": 168,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u05-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u05-p04",
-      "word_count": 179,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4050,40 +2730,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u05-p05",
-      "word_count": 180,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u05-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u05-p06",
-      "word_count": 194,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4092,40 +2742,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u06-p01",
-      "word_count": 183,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u06-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u06-p02",
-      "word_count": 191,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4134,40 +2754,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u06-p03",
-      "word_count": 185,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u06-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u06-p04",
-      "word_count": 189,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4176,40 +2766,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u06-p05",
-      "word_count": 180,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u06-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u06-p06",
-      "word_count": 193,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4218,40 +2778,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u07-p01",
-      "word_count": 189,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u07-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u07-p02",
-      "word_count": 164,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4260,40 +2790,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u07-p03",
-      "word_count": 174,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u07-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u07-p04",
-      "word_count": 155,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4302,40 +2802,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u07-p05",
-      "word_count": 170,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u07-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u07-p06",
-      "word_count": 186,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4344,40 +2814,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u08-p01",
-      "word_count": 173,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u08-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u08-p02",
-      "word_count": 180,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4386,40 +2826,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u08-p03",
-      "word_count": 176,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u08-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u08-p04",
-      "word_count": 160,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4428,40 +2838,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u08-p05",
-      "word_count": 176,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u08-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u08-p06",
-      "word_count": 187,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4470,40 +2850,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u09-p01",
-      "word_count": 173,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u09-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u09-p02",
-      "word_count": 173,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4512,40 +2862,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u09-p03",
-      "word_count": 160,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u09-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u09-p04",
-      "word_count": 164,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4554,40 +2874,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u09-p05",
-      "word_count": 166,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u09-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u09-p06",
-      "word_count": 176,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4596,40 +2886,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u10-p01",
-      "word_count": 180,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u10-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u10-p02",
-      "word_count": 141,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4638,40 +2898,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u10-p03",
-      "word_count": 129,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u10-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u10-p04",
-      "word_count": 147,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4680,40 +2910,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u10-p05",
-      "word_count": 143,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c1",
       "passage_id": "ar-c1-u10-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c1",
-      "passage_id": "ar-c1-u10-p06",
-      "word_count": 200,
-      "zone": "below_standard_min",
-      "standard": [
-        500,
-        800
-      ],
-      "extended": [
-        900,
-        1400
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4722,40 +2922,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u01-p01",
-      "word_count": 197,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u01-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u01-p02",
-      "word_count": 190,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4764,40 +2934,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u01-p03",
-      "word_count": 185,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u01-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u01-p04",
-      "word_count": 186,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4806,40 +2946,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u01-p05",
-      "word_count": 174,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u01-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u01-p06",
-      "word_count": 189,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4848,40 +2958,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u02-p01",
-      "word_count": 193,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u02-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u02-p02",
-      "word_count": 183,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4890,40 +2970,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u02-p03",
-      "word_count": 193,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u02-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u02-p04",
-      "word_count": 165,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4932,40 +2982,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u02-p05",
-      "word_count": 184,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u02-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u02-p06",
-      "word_count": 182,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -4974,40 +2994,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u03-p01",
-      "word_count": 193,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u03-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u03-p02",
-      "word_count": 186,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5016,40 +3006,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u03-p03",
-      "word_count": 185,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u03-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u03-p04",
-      "word_count": 181,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5058,40 +3018,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u03-p05",
-      "word_count": 175,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u03-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u03-p06",
-      "word_count": 193,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5100,40 +3030,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u04-p01",
-      "word_count": 178,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u04-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u04-p02",
-      "word_count": 174,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5142,40 +3042,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u04-p03",
-      "word_count": 161,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u04-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u04-p04",
-      "word_count": 167,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5184,40 +3054,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u04-p05",
-      "word_count": 180,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u04-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u04-p06",
-      "word_count": 159,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5226,40 +3066,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u05-p01",
-      "word_count": 172,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u05-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u05-p02",
-      "word_count": 170,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5268,40 +3078,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u05-p03",
-      "word_count": 170,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u05-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u05-p04",
-      "word_count": 184,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5310,40 +3090,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u05-p05",
-      "word_count": 162,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u05-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u05-p06",
-      "word_count": 168,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5352,40 +3102,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u06-p01",
-      "word_count": 189,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u06-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u06-p02",
-      "word_count": 157,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5394,40 +3114,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u06-p03",
-      "word_count": 163,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u06-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u06-p04",
-      "word_count": 168,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5436,40 +3126,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u06-p05",
-      "word_count": 181,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u06-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u06-p06",
-      "word_count": 181,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5478,40 +3138,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u07-p01",
-      "word_count": 127,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u07-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u07-p02",
-      "word_count": 125,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5520,40 +3150,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u07-p03",
-      "word_count": 132,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u07-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u07-p04",
-      "word_count": 127,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5562,40 +3162,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u07-p05",
-      "word_count": 136,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u07-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u07-p06",
-      "word_count": 133,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5604,40 +3174,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u08-p01",
-      "word_count": 123,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u08-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u08-p02",
-      "word_count": 110,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5646,40 +3186,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u08-p03",
-      "word_count": 98,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u08-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u08-p04",
-      "word_count": 103,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5688,40 +3198,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u08-p05",
-      "word_count": 115,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u08-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u08-p06",
-      "word_count": 115,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5730,40 +3210,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u09-p01",
-      "word_count": 125,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u09-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u09-p02",
-      "word_count": 110,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5772,40 +3222,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u09-p03",
-      "word_count": 114,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u09-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u09-p04",
-      "word_count": 109,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5814,40 +3234,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u09-p05",
-      "word_count": 150,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u09-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u09-p06",
-      "word_count": 120,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5856,40 +3246,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u10-p01",
-      "word_count": 143,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u10-p01",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u10-p02",
-      "word_count": 119,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5898,40 +3258,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u10-p03",
-      "word_count": 133,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u10-p03",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u10-p04",
-      "word_count": 127,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
@@ -5940,40 +3270,10 @@
       "value": 0
     },
     {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u10-p05",
-      "word_count": 134,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
-    },
-    {
       "code": "known_token_coverage_unmeasured",
       "level": "c2",
       "passage_id": "ar-c2-u10-p05",
       "value": 0
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "c2",
-      "passage_id": "ar-c2-u10-p06",
-      "word_count": 146,
-      "zone": "below_standard_min",
-      "standard": [
-        700,
-        1200
-      ],
-      "extended": [
-        1300,
-        2200
-      ]
     },
     {
       "code": "known_token_coverage_unmeasured",
