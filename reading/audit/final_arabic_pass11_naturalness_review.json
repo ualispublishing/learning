@@ -28,7 +28,19 @@
       ],
       "status": "PASS_AFTER_REPAIR"
     },
-    "b1": {"passages_reviewed": 0, "passages_total": 60, "review_complete": false, "status": "PENDING_AFTER_LENGTH_RECALIBRATION"},
+    "b1": {
+      "passages_reviewed": 60,
+      "passages_total": 60,
+      "review_complete": true,
+      "high_confidence_repairs_applied": 44,
+      "passages_touched": 35,
+      "repair_sources": [
+        "reading/audit/final_arabic_pass11_b1_snapshot.jsonl",
+        "reading/tools/repair_final_arabic_pass11_b1_naturalness_batch.py"
+      ],
+      "status": "PASS_AFTER_REPAIR",
+      "note": "Full B1 manual prose read was performed only after all 60 B1 passages had completed Pass-03/07 length and assessment recalibration. Exact passage-scoped repairs were assertion-guarded; stylistic-only alternatives were intentionally left unchanged."
+    },
     "b2": {
       "passages_reviewed": 1,
       "passages_total": 60,
@@ -36,7 +48,12 @@
       "status": "PENDING_AFTER_LENGTH_RECALIBRATION",
       "note": "One independently detected comparative-naturalness defect in ar-b2-u04-p06 was already repaired; full level manual pass should follow the major Pass-07 length recalibration so expanded prose is reviewed, not just the shorter draft."
     },
-    "c1": {"passages_reviewed": 0, "passages_total": 60, "review_complete": false, "status": "PENDING_AFTER_LENGTH_RECALIBRATION"},
+    "c1": {
+      "passages_reviewed": 0,
+      "passages_total": 60,
+      "review_complete": false,
+      "status": "PENDING_AFTER_LENGTH_RECALIBRATION"
+    },
     "c2": {
       "passages_reviewed": 1,
       "passages_total": 60,
@@ -46,9 +63,9 @@
     }
   },
   "totals": {
-    "passages_fully_reviewed_in_completed_levels": 120,
-    "levels_complete": 2,
-    "levels_pending": 4
+    "passages_fully_reviewed_in_completed_levels": 180,
+    "levels_complete": 3,
+    "levels_pending": 3
   },
   "status": "IN_PROGRESS",
   "final_approval_claim": false
