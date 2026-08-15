@@ -3,8 +3,8 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - reading/tools/recalibrate_final_arabic-c2-unit06.py
       - reading/tools/recalibrate_final_arabic_c2_unit06.py
+      - reading/tools/recalibrate_final_arabic_c2_unit06_retry.py
       - .github/workflows/recalibrate-final-arabic-c2-unit06.yml
 permissions:
   contents: write
@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python reading/tools/recalibrate_final_arabic_c2_unit06.py
+      - run: python reading/tools/recalibrate_final_arabic_c2_unit06_retry.py
       - name: Commit C2 Unit06 recalibration
         run: |
           git config user.name 'github-actions[bot]'
