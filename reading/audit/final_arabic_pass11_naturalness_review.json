@@ -42,11 +42,17 @@
       "note": "Full B1 manual prose read was performed only after all 60 B1 passages had completed Pass-03/07 length and assessment recalibration. Exact passage-scoped repairs were assertion-guarded; stylistic-only alternatives were intentionally left unchanged."
     },
     "b2": {
-      "passages_reviewed": 1,
+      "passages_reviewed": 60,
       "passages_total": 60,
-      "review_complete": false,
-      "status": "PENDING_AFTER_LENGTH_RECALIBRATION",
-      "note": "One independently detected comparative-naturalness defect in ar-b2-u04-p06 was already repaired; full level manual pass should follow the major Pass-07 length recalibration so expanded prose is reviewed, not just the shorter draft."
+      "review_complete": true,
+      "high_confidence_repairs_applied": 22,
+      "passages_touched": 20,
+      "repair_sources": [
+        "reading/audit/final_arabic_pass11_b2_snapshot.jsonl",
+        "reading/tools/repair_final_arabic_pass11_b2_naturalness_batch.py"
+      ],
+      "status": "PASS_AFTER_REPAIR",
+      "note": "Full B2 manual prose read was performed only after all 60 B2 passages had completed Pass-03/07 length and assessment recalibration. The full pass applied 21 exact assertion-guarded repairs across 20 passages; the total also includes one earlier independently detected comparative-naturalness repair in ar-b2-u04-p06, which was subsequently reviewed again in the full pass. Stylistic-only alternatives were intentionally left unchanged."
     },
     "c1": {
       "passages_reviewed": 0,
@@ -63,9 +69,9 @@
     }
   },
   "totals": {
-    "passages_fully_reviewed_in_completed_levels": 180,
-    "levels_complete": 3,
-    "levels_pending": 3
+    "passages_fully_reviewed_in_completed_levels": 240,
+    "levels_complete": 4,
+    "levels_pending": 2
   },
   "status": "IN_PROGRESS",
   "final_approval_claim": false
