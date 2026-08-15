@@ -3,7 +3,7 @@
 from pathlib import Path
 SOURCE=Path(__file__).with_name('recalibrate_final_arabic_c1_unit07.py')
 RETRY=Path(__file__).with_name('recalibrate_final_arabic_c1_unit07_retry.py')
-ns={}
+ns={'__file__':str(RETRY)}
 prefix=RETRY.read_text(encoding='utf-8').split('for old,new in patches.items():',1)[0]
 exec(prefix,ns)
 text=SOURCE.read_text(encoding='utf-8')
