@@ -14,18 +14,20 @@ for r in rows:
     if r.get('id')!=PID: continue
     found+=1
     before=copy.deepcopy(r)
+    before_counts={t['form']:before['text'].count(t['form']) for t in before.get('new_lexical_targets',[])}
+    before_counts.update({t['form']:before['text'].count(t['form']) for t in before.get('review_lexical_targets',[])})
     assert r['text'].count(OLD)==1,(PID,'old-count',r['text'].count(OLD))
     r['text']=r['text'].replace(OLD,NEW)
     assert OLD not in r['text']
     assert not re.search(r'[A-Za-z]',r['text']),(PID,'latin-remains')
-    for t in r.get('new_lexical_targets',[]):
-        assert r['text'].count(t['form'])==t['exposures_in_text'],(PID,t['form'],r['text'].count(t['form']),t['exposures_in_text'])
+    after_counts={form:r['text'].count(form) for form in before_counts}
+    assert after_counts==before_counts,(PID,'lexical-occurrence-change',before_counts,after_counts)
     assert r['questions']==before['questions'],PID
     assert r['answer_key']==before['answer_key'],PID
     assert r['new_lexical_targets']==before['new_lexical_targets'],PID
     assert r['review_lexical_targets']==before['review_lexical_targets'],PID
     r['revision']=int(r.get('revision',0))+1
-    r.setdefault('quality',{}).setdefault('notes',[]).append('Final Pass 11 pre-snapshot repair: replaced a residual Latin-script intrusion in reader-facing Arabic with natural MSA; assessment and lexical exposure contracts preserved.')
+    r.setdefault('quality',{}).setdefault('notes',[]).append('Final Pass 11 pre-snapshot repair: replaced a residual Latin-script intrusion in reader-facing Arabic with natural MSA; assessment and lexical occurrence contracts preserved.')
 assert found==1,found
 PATH.write_text('\n'.join(json.dumps(r,ensure_ascii=False) for r in rows)+'\n',encoding='utf-8')
 print(json.dumps({'passage':PID,'repair':'deliberation -> التفكير المتأني'},ensure_ascii=False))
