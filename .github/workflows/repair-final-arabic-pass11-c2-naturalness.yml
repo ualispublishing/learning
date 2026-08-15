@@ -1,0 +1,30 @@
+name: Repair final Arabic Pass 11 C2 naturalness
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - reading/tools/repair_final_arabic_pass11_c2_naturalness_batch.py
+      - .github/workflows/repair-final-arabic-pass11-c2-naturalness.yml
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python reading/tools/repair_final_arabic_pass11_c2_naturalness_batch.py
+      - name: Commit C2 Pass 11 repairs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/arabic/c2/passages.jsonl
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Repair C2 Pass 11 naturalness [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
