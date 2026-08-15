@@ -6,6 +6,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 SOURCE=ROOT/'reading/arabic/c2/passages.jsonl'
 OUT=ROOT/'reading/audit/final_arabic_pass11_c2_snapshot.jsonl'
+# This builder is intentionally rerun after naturalness repairs to validate the final canonical corpus.
 rows=[json.loads(x) for x in SOURCE.read_text(encoding='utf-8').splitlines() if x.strip()]
 assert len(rows)==60,len(rows)
 rows=sorted(rows,key=lambda r:r['sequence'])
