@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - reading/tools/recalibrate_final_arabic_c1_unit03.py
+      - reading/tools/recalibrate_final_arabic_c1_unit03_retry.py
       - .github/workflows/recalibrate-final-arabic-c1-unit03.yml
 permissions:
   contents: write
@@ -17,7 +18,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python reading/tools/recalibrate_final_arabic_c1_unit03.py
+      - run: python reading/tools/recalibrate_final_arabic_c1_unit03_retry.py
       - name: Commit C1 Unit03 recalibration
         run: |
           git config user.name 'github-actions[bot]'
