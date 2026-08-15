@@ -5,6 +5,7 @@ on:
     paths:
       - 'reading/tools/final_audit_arabic_pass03_question_composition.py'
       - 'reading/arabic/**/passages.jsonl'
+      - 'reading/audit/final_review_refresh.request'
       - '.github/workflows/final-audit-arabic-pass03-question-composition.yml'
 permissions:
   contents: write
@@ -16,7 +17,6 @@ jobs:
         with: {fetch-depth: 0}
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
-      # Explicit refresh of the current canonical question sets.
       - name: Run final review pass 03
         run: python reading/tools/final_audit_arabic_pass03_question_composition.py
       - name: Commit audit artifact
