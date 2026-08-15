@@ -40,6 +40,7 @@ for pid,pairs in REPAIRS.items():
     r=by[pid]
     before_q=copy.deepcopy(r['questions']); before_a=copy.deepcopy(r['answer_key'])
     before_new=copy.deepcopy(r.get('new_lexical_targets',[])); before_review=copy.deepcopy(r.get('review_lexical_targets',[]))
+    before_occ={t['id']:r['text'].count(t['form']) for t in r.get('new_lexical_targets',[])}
     text=r['text']
     for old,new in pairs:
         count=text.count(old)
@@ -58,7 +59,7 @@ for pid,pairs in REPAIRS.items():
     if r.get('review_lexical_targets',[])!=before_review:raise RuntimeError(f'{pid}: review-target metadata drift')
     if not 500<=r['word_count']<=800:raise RuntimeError(f'{pid}: post-repair word count {r["word_count"]}')
     for t in r.get('new_lexical_targets',[]):
-        if t['form'] not in r['text']:raise RuntimeError(f'{pid}: lost new target {t["form"]}')
+        if r['text'].count(t['form'])!=before_occ[t['id']]:raise RuntimeError(f'{pid}: target occurrence drift for {t["form"]}: {before_occ[t["id"]]} -> {r["text"].count(t["form"])}')
     touched.append(pid)
 if applied!=expected_repairs:raise RuntimeError((applied,expected_repairs))
 PATH.write_text('\n'.join(json.dumps(r,ensure_ascii=False,sort_keys=True) for r in rows)+'\n',encoding='utf-8')
