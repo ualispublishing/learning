@@ -3,9 +3,14 @@
 from pathlib import Path
 SOURCE=Path(__file__).with_name('recalibrate_final_arabic_c2_unit03.py')
 text=SOURCE.read_text(encoding='utf-8')
-old_latin='بعد perturbation'
-assert text.count(old_latin)==1
-text=text.replace(old_latin,'بعد إزالة الاضطراب',1)
+replacements={
+    'بعد perturbation':'بعد إزالة الاضطراب',
+    'القيم الداخلية لا تعكس عمليات مستقلة':'القيم داخل النموذج لا تعكس عمليات مستقلة',
+    'استخدم الفريق تجارب تدخلية تقيد بعض المعاملات':'استخدم الفريق تجارب تعتمد تغييرًا مقصودًا لتقييد بعض المعاملات',
+}
+for old,new in replacements.items():
+    assert text.count(old)==1, old
+    text=text.replace(old,new,1)
 marker='UPDATES={'
 assert text.count(marker)==1
 EXTRA={
