@@ -1,0 +1,30 @@
+name: Recalibrate final Arabic C2 Unit02
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - reading/tools/recalibrate_final_arabic_c2_unit02.py
+      - .github/workflows/recalibrate-final-arabic-c2-unit02.yml
+permissions:
+  contents: write
+jobs:
+  recalibrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python reading/tools/recalibrate_final_arabic_c2_unit02.py
+      - name: Commit C2 Unit02 recalibration
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/arabic/c2/passages.jsonl
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Recalibrate Arabic C2 Unit02 [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
