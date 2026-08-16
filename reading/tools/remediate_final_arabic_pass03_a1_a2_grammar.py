@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Guarded remediation of genuine A1/A2 Pass 03 grammar/form deficits.
 
-For each currently grammar-light A1/A2 passage, repurpose exactly one redundant
-single-word-definition item as a genuine grammatical-category question. The
-lexical target must still be assessed by another lexical item in the same set,
-and its stored POS metadata must support an unambiguous Arabic answer.
+For each currently grammar-light A1/A2 passage, repurpose the minimum number of
+redundant single-word-definition items needed to reach two genuine grammar/form
+questions. Every converted lexical target must remain assessed by another
+unconverted lexical item in the same set, and its POS metadata must support an
+unambiguous Arabic category answer.
 
 Passage prose, lexical scheduling metadata, question IDs, target IDs and all
 unselected questions are preserved. Fail closed on any unexpected schema or
@@ -13,6 +14,7 @@ pedagogical drift.
 from __future__ import annotations
 
 import copy
+import itertools
 import json
 from pathlib import Path
 
@@ -32,6 +34,11 @@ def lexical_role(q: dict) -> bool:
     return t == "contrast" and any(str(tid).startswith("ar-r") for tid in tids)
 
 
+def q_target_ids(q: dict) -> list[str]:
+    raw = q.get("target_ids", [])
+    return [str(x) for x in raw] if isinstance(raw, list) else []
+
+
 def pos_answer(raw: object) -> str | None:
     """Map only high-confidence POS metadata to an Arabic category answer.
 
@@ -45,7 +52,6 @@ def pos_answer(raw: object) -> str | None:
         return None
     p = raw.strip().lower()
 
-    # Equivalent/synonymous labels that name one grammatical category.
     if "elative" in p or "comparative-superlative" in p:
         return "اسم تفضيل"
     if "imperfect" in p or "present verb" in p:
@@ -53,7 +59,6 @@ def pos_answer(raw: object) -> str | None:
     if "perfect verb" in p or "past verb" in p:
         return "فعل ماضٍ"
 
-    # Any remaining slash/or expression is treated as genuinely ambiguous.
     if " / " in p or " or " in p:
         return None
     if "interrogative" in p:
@@ -104,15 +109,15 @@ def answer_entry(row: dict, qid: str) -> dict:
     return hits[0]
 
 
-def immutable_projection(row: dict, changed_qid: str) -> dict:
+def immutable_projection(row: dict, changed_qids: set[str]) -> dict:
     """Projection that removes only fields this remediation may change."""
     x = copy.deepcopy(row)
     for q in x.get("questions", []):
-        if q.get("id") == changed_qid:
+        if str(q.get("id")) in changed_qids:
             q.pop("type", None)
             q.pop("prompt", None)
     for a in x.get("answer_key", []):
-        if a.get("question_id") == changed_qid:
+        if str(a.get("question_id")) in changed_qids:
             a.pop("answer", None)
     quality = x.get("quality")
     if isinstance(quality, dict):
@@ -120,94 +125,164 @@ def immutable_projection(row: dict, changed_qid: str) -> dict:
     return x
 
 
+def candidate_inventory(qs: list[dict], meta: dict[str, dict]) -> list[dict]:
+    candidates: list[dict] = []
+    for q in qs:
+        if q.get("type") != "single_word_definition":
+            continue
+        tids = q_target_ids(q)
+        if len(tids) != 1:
+            continue
+        tid = tids[0]
+        item = meta.get(tid, {})
+        answer = pos_answer(item.get("part_of_speech"))
+        form = item.get("form") or item.get("lemma")
+        if not answer or not isinstance(form, str) or not form.strip():
+            continue
+        support_ids = [
+            str(other.get("id"))
+            for other in qs
+            if other.get("id") != q.get("id") and lexical_role(other) and tid in q_target_ids(other)
+        ]
+        if support_ids:
+            candidates.append({
+                "q": q,
+                "qid": str(q.get("id")),
+                "tid": tid,
+                "form": form.strip(),
+                "answer": answer,
+                "support_ids": support_ids,
+                "part_of_speech": item.get("part_of_speech"),
+            })
+    return candidates
+
+
+def choose_candidates(qs: list[dict], candidates: list[dict], needed: int) -> list[dict] | None:
+    """Choose a conversion set whose lexical supports remain after conversion."""
+    lexical_before = sum(lexical_role(q) for q in qs)
+    for combo in itertools.combinations(candidates, needed):
+        selected_ids = {c["qid"] for c in combo}
+        if lexical_before - needed < MIN_LEXICAL:
+            continue
+        # Each converted target must retain a lexical test not itself converted.
+        if any(not any(sid not in selected_ids for sid in c["support_ids"]) for c in combo):
+            continue
+        return list(combo)
+    return None
+
+
 def main() -> None:
-    changed_total = 0
-    by_level = {}
+    changed_passages = 0
+    changed_questions = 0
+    by_level: dict[str, dict[str, int]] = {}
+
     for level in LEVELS:
         path = ROOT / f"reading/arabic/{level}/passages.jsonl"
         rows = read_rows(path)
         if len(rows) != 60:
             raise AssertionError(f"{level}: expected 60 passages, got {len(rows)}")
         before = copy.deepcopy(rows)
-        changed_ids: dict[str, str] = {}
+        changed_ids: dict[str, set[str]] = {}
+        level_passages = 0
+        level_questions = 0
 
         for row in rows:
             qs = row.get("questions", [])
             if len(qs) != 10 or len(row.get("answer_key", [])) != 10:
                 raise AssertionError(f"{row.get('id')}: expected 10 questions and 10 answers")
+
             grammar_before = sum(str(q.get("type", "")) in GRAMMAR_TYPES for q in qs)
             if grammar_before >= MIN_GRAMMAR:
                 continue
-            if grammar_before != 1:
+            if grammar_before < 0 or grammar_before > 1:
                 raise AssertionError(f"{row.get('id')}: unexpected grammar count {grammar_before}")
+            needed = MIN_GRAMMAR - grammar_before
             lexical_before = sum(lexical_role(q) for q in qs)
-            if lexical_before < 3:
-                raise AssertionError(f"{row.get('id')}: only {lexical_before} lexical-role items; cannot safely repurpose one")
+            if lexical_before - needed < MIN_LEXICAL:
+                raise AssertionError(
+                    f"{row.get('id')}: grammar={grammar_before}, lexical={lexical_before}, "
+                    f"need {needed} conversions but would fall below lexical minimum {MIN_LEXICAL}"
+                )
 
-            meta = {}
+            meta: dict[str, dict] = {}
             for item in row.get("new_lexical_targets", []) + row.get("review_lexical_targets", []):
                 if isinstance(item, dict) and item.get("id"):
                     meta[str(item["id"])] = item
 
-            candidates = []
-            for q in qs:
-                if q.get("type") != "single_word_definition":
-                    continue
-                tids = q.get("target_ids", []) if isinstance(q.get("target_ids"), list) else []
-                if len(tids) != 1:
-                    continue
-                tid = str(tids[0])
-                other_lexical = [other for other in qs if other.get("id") != q.get("id") and lexical_role(other) and tid in [str(x) for x in (other.get("target_ids", []) if isinstance(other.get("target_ids"), list) else [])]]
-                if not other_lexical:
-                    continue
-                item = meta.get(tid, {})
-                answer = pos_answer(item.get("part_of_speech"))
-                form = item.get("form") or item.get("lemma")
-                if answer and isinstance(form, str) and form.strip():
-                    candidates.append((q, tid, form.strip(), answer))
-
-            if not candidates:
-                all_defs = [
-                    {
+            candidates = candidate_inventory(qs, meta)
+            selected = choose_candidates(qs, candidates, needed)
+            if selected is None:
+                definitions = []
+                for q in qs:
+                    if q.get("type") != "single_word_definition":
+                        continue
+                    tids = q_target_ids(q)
+                    item = meta.get(tids[0], {}) if len(tids) == 1 else {}
+                    definitions.append({
                         "question_id": q.get("id"),
-                        "target_ids": q.get("target_ids"),
-                        "part_of_speech": meta.get(str((q.get("target_ids") or [""])[0]), {}).get("part_of_speech") if isinstance(q.get("target_ids"), list) and len(q.get("target_ids")) == 1 else None,
-                    }
-                    for q in qs if q.get("type") == "single_word_definition"
-                ]
-                raise AssertionError(f"{row.get('id')}: no unambiguous redundant definition candidate; definitions={all_defs}")
+                        "target_ids": tids,
+                        "part_of_speech": item.get("part_of_speech"),
+                        "mapped_answer": pos_answer(item.get("part_of_speech")),
+                        "support_ids": [
+                            str(other.get("id")) for other in qs
+                            if other.get("id") != q.get("id") and lexical_role(other)
+                            and len(tids) == 1 and tids[0] in q_target_ids(other)
+                        ],
+                    })
+                raise AssertionError(
+                    f"{row.get('id')}: cannot safely choose {needed} grammar conversions; "
+                    f"grammar={grammar_before}, lexical={lexical_before}, definitions={definitions}"
+                )
 
-            q, tid, form, category_answer = candidates[0]
-            qid = str(q.get("id"))
-            old_answer = copy.deepcopy(answer_entry(row, qid))
-            q["type"] = "grammar_category"
-            q["prompt"] = f"ما التصنيف النحوي لكلمة «{form}» في هذا الاستعمال؟"
-            ans = answer_entry(row, qid)
-            ans["answer"] = category_answer
-            # Preserve linkage and all other answer metadata.
-            if {k: v for k, v in ans.items() if k != "answer"} != {k: v for k, v in old_answer.items() if k != "answer"}:
-                raise AssertionError(f"{row.get('id')} {qid}: answer metadata drift")
+            selected_ids = {c["qid"] for c in selected}
+            for c in selected:
+                q = c["q"]
+                qid = c["qid"]
+                old_answer = copy.deepcopy(answer_entry(row, qid))
+                q["type"] = "grammar_category"
+                q["prompt"] = f"ما التصنيف النحوي لكلمة «{c['form']}» في هذا الاستعمال؟"
+                ans = answer_entry(row, qid)
+                ans["answer"] = c["answer"]
+                if {k: v for k, v in ans.items() if k != "answer"} != {k: v for k, v in old_answer.items() if k != "answer"}:
+                    raise AssertionError(f"{row.get('id')} {qid}: answer metadata drift")
 
-            grammar_after = sum(str(x.get("type", "")) in GRAMMAR_TYPES for x in qs)
-            lexical_after = sum(lexical_role(x) for x in qs)
+                note = (
+                    f"Final Pass 03 remediation: {qid} repurposed from redundant lexical definition "
+                    f"to grammatical-category retrieval for {c['tid']}; another lexical item still tests the target."
+                )
+                notes = row.setdefault("quality", {}).setdefault("notes", [])
+                if note not in notes:
+                    notes.append(note)
+
+            grammar_after = sum(str(q.get("type", "")) in GRAMMAR_TYPES for q in qs)
+            lexical_after = sum(lexical_role(q) for q in qs)
             if grammar_after < MIN_GRAMMAR or lexical_after < MIN_LEXICAL:
-                raise AssertionError(f"{row.get('id')}: postcondition roles grammar={grammar_after}, lexical={lexical_after}")
+                raise AssertionError(
+                    f"{row.get('id')}: postcondition roles grammar={grammar_after}, lexical={lexical_after}"
+                )
+            for c in selected:
+                if not any(
+                    str(other.get("id")) not in selected_ids
+                    and lexical_role(other)
+                    and c["tid"] in q_target_ids(other)
+                    for other in qs
+                ):
+                    raise AssertionError(f"{row.get('id')} {c['qid']}: converted target lost independent lexical assessment")
 
-            note = f"Final Pass 03 remediation: {qid} repurposed from redundant lexical definition to grammatical-category retrieval for {tid}; another lexical item still tests the target."
-            notes = row.setdefault("quality", {}).setdefault("notes", [])
-            if note not in notes:
-                notes.append(note)
-            changed_ids[str(row.get("id"))] = qid
-            changed_total += 1
+            pid = str(row.get("id"))
+            changed_ids[pid] = selected_ids
+            changed_passages += 1
+            changed_questions += len(selected)
+            level_passages += 1
+            level_questions += len(selected)
 
-        # Guard every changed and unchanged row against unintended mutation.
         for old, new in zip(before, rows):
             pid = str(old.get("id"))
             if old.get("id") != new.get("id"):
                 raise AssertionError("row identity/order drift")
             if pid in changed_ids:
-                qid = changed_ids[pid]
-                if immutable_projection(old, qid) != immutable_projection(new, qid):
+                qids = changed_ids[pid]
+                if immutable_projection(old, qids) != immutable_projection(new, qids):
                     raise AssertionError(f"{pid}: mutation outside approved question/answer fields")
                 if old.get("text") != new.get("text"):
                     raise AssertionError(f"{pid}: passage prose changed")
@@ -217,11 +292,23 @@ def main() -> None:
                 raise AssertionError(f"{pid}: unselected passage changed")
 
         write_rows(path, rows)
-        by_level[level] = len(changed_ids)
+        by_level[level] = {"passages": level_passages, "questions": level_questions}
 
-    if by_level != {"a1": 39, "a2": 42} or changed_total != 81:
-        raise AssertionError(f"expected A1=39, A2=42, total=81; got {by_level}, total={changed_total}")
-    print(json.dumps({"changed": changed_total, "by_level": by_level}, ensure_ascii=False))
+    expected_passages = {"a1": 39, "a2": 42}
+    actual_passages = {level: stats["passages"] for level, stats in by_level.items()}
+    if actual_passages != expected_passages or changed_passages != 81:
+        raise AssertionError(
+            f"expected grammar-deficit passages A1=39/A2=42/total=81; "
+            f"got {by_level}, total_passages={changed_passages}"
+        )
+    if changed_questions < changed_passages:
+        raise AssertionError("question-change count cannot be smaller than changed passage count")
+
+    print(json.dumps({
+        "changed_passages": changed_passages,
+        "changed_questions": changed_questions,
+        "by_level": by_level,
+    }, ensure_ascii=False))
 
 
 if __name__ == "__main__":
