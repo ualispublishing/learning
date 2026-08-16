@@ -6,7 +6,7 @@
   "paused_languages": [
     "Urdu"
   ],
-  "phase": "Arabic A1-C2 is formally approved. French is the active generation language; French A1 is at 24/60 canonical passages after guarded Units 02-04.",
+  "phase": "Arabic A1-C2 is formally approved. French A1 generation is complete at 60/60 canonical passages; French now advances generation-first into A2.",
   "target_passages": 1080,
   "target_is_quota": false,
   "approved_passages": 360,
@@ -68,36 +68,54 @@
   },
   "french": {
     "state": "ACTIVE_GENERATION",
-    "canonical_passages": 24,
+    "canonical_passages": 60,
     "levels": {
-      "a1": 24,
+      "a1": 60,
       "a2": 0,
       "b1": 0,
       "b2": 0,
       "c1": 0,
       "c2": 0
     },
-    "questions": 240,
-    "answers": 240,
-    "completed_units": [1, 2, 3, 4],
+    "questions": 600,
+    "answers": 600,
+    "completed_units": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     "current_files": [
       "reading/french/a1/passages.jsonl",
       "reading/french/a1/CALIBRATION_UNIT_01.md",
       "reading/tools/generate_french_a1_unit02.py",
       "reading/tools/generate_french_a1_unit03.py",
-      "reading/tools/generate_french_a1_unit04.py"
+      "reading/tools/generate_french_a1_unit04.py",
+      "reading/tools/generate_french_a1_unit05.py",
+      "reading/tools/generate_french_a1_unit06.py",
+      "reading/tools/generate_french_a1_unit07.py",
+      "reading/tools/generate_french_a1_unit08.py",
+      "reading/tools/generate_french_a1_unit09.py",
+      "reading/tools/generate_french_a1_unit10.py",
+      "reading/tools/generate_french_a1_unit10_retry.py"
     ],
-    "latest_canonical_commit": "d516c973749bc85a43f00d704e9ea8a97afcb488",
-    "latest_canonical_blob": "53778d358071b94472bb8d8210ebd888810938ca",
+    "latest_canonical_commit": "be08abb2de79287e3c366e5a3a7ce25be184fa6f",
+    "latest_canonical_blob": "b6c15291b7871e196cac8f7b5920923f2a3a95a9",
     "generation_invariants": {
       "ten_questions_and_answers_per_passage": true,
-      "a1_word_band_90_140_enforced_for_new_units": true,
+      "a1_word_band_90_140_enforced_for_generated_units": true,
       "question_targets_must_be_locally_declared": true,
       "validated_lexicon_rank_identity_enforced": true,
       "unit_p06_zero_new_targets": true,
       "source_blob_collision_guards": true
     },
-    "next_target": "Generate French A1 Unit 05 as sequences 25-30 from live 24-passage canonical state; do not overwrite or regenerate sequences 1-24."
+    "a1_completion": {
+      "state": "GENERATED_NOT_FINAL_AUDITED",
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "units": 10,
+      "last_sequence": 60,
+      "unit10_retry_workflow": "PASS",
+      "unit10_targets": ["ciel", "soleil", "froid", "chaud", "acheter", "prix", "argent", "vêtement", "sac", "chaussure"],
+      "all_unit_checkpoints_zero_new_targets": true
+    },
+    "next_target": "Begin French A2 with Unit 01 / sequences 1-6 as one guarded batch after verifying the live A2 starting state and A2 planning constraints; do not reopen or regenerate French A1."
   },
   "urdu": {
     "state": "QUEUED",
@@ -117,11 +135,11 @@
     "next_target": "Resume after French unless explicitly reprioritized; preserve the six live A1 calibration passages as starting state."
   },
   "next_actions": [
-    "verify live main and the French A1 canonical blob before each new unit batch",
-    "generate French A1 Unit 05 as sequences 25-30 using validated French lexical sources and explicit spaced review",
-    "continue Unit 06 onward in large guarded unit batches until French A1 reaches 60",
-    "keep French audits lightweight during generation and reserve the full multi-pass audit for the completed generated corpus",
-    "keep Urdu unchanged while French is active unless explicitly reprioritized"
+    "treat French A1 sequences 1-60 as generated and closed to routine regeneration",
+    "verify live main and the French A2 starting state before the first A2 write batch",
+    "generate French A2 Unit 01 as a full six-passage guarded batch using independently designed contemporary French and validated lexical sources",
+    "continue French generation-first through A2-C2 before the expensive final multi-pass French audit unless current policy explicitly changes",
+    "keep Arabic sealed and Urdu unchanged while French is active unless explicitly reprioritized"
   ],
   "important_files": [
     "reading/AGENT_HANDOFF.md",
