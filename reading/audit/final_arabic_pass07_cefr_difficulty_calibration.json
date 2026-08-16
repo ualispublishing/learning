@@ -14,13 +14,13 @@
   "levels": {
     "a1": {
       "passages": 60,
-      "word_count_mean": 93.4,
-      "word_count_median": 92.0,
+      "word_count_mean": 94.75,
+      "word_count_median": 93.0,
       "word_count_min": 76,
       "word_count_max": 127,
       "length_zones": {
-        "standard": 45,
-        "below_standard_min": 15
+        "standard": 49,
+        "below_standard_min": 11
       },
       "stored_word_count_mismatches_gt2": 0,
       "new_target_mean": 1.67,
@@ -30,7 +30,7 @@
         "unmeasured": 60
       },
       "coverage_metric_status": "UNMEASURED",
-      "flagged_passages": 15
+      "flagged_passages": 11
     },
     "a2": {
       "passages": 60,
@@ -132,7 +132,7 @@
   "cross_level": {
     "mean_word_count_non_decreasing": true,
     "mean_word_counts": {
-      "a1": 93.4,
+      "a1": 94.75,
       "a2": 137.83,
       "b1": 254.78,
       "b2": 374.73,
@@ -141,70 +141,10 @@
     }
   },
   "totals": {
-    "review_flags": 53,
+    "review_flags": 49,
     "coverage_unmeasured": 360
   },
   "flags": [
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "a1",
-      "passage_id": "ar-a1-u05-p02",
-      "word_count": 83,
-      "zone": "below_standard_min",
-      "standard": [
-        90,
-        140
-      ],
-      "extended": [
-        160,
-        220
-      ]
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "a1",
-      "passage_id": "ar-a1-u06-p01",
-      "word_count": 77,
-      "zone": "below_standard_min",
-      "standard": [
-        90,
-        140
-      ],
-      "extended": [
-        160,
-        220
-      ]
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "a1",
-      "passage_id": "ar-a1-u06-p02",
-      "word_count": 81,
-      "zone": "below_standard_min",
-      "standard": [
-        90,
-        140
-      ],
-      "extended": [
-        160,
-        220
-      ]
-    },
-    {
-      "code": "length_outside_calibration_bands",
-      "level": "a1",
-      "passage_id": "ar-a1-u06-p03",
-      "word_count": 83,
-      "zone": "below_standard_min",
-      "standard": [
-        90,
-        140
-      ],
-      "extended": [
-        160,
-        220
-      ]
-    },
     {
       "code": "length_outside_calibration_bands",
       "level": "a1",
