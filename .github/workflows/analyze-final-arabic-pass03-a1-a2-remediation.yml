@@ -19,11 +19,11 @@ jobs:
         with: {python-version: '3.12'}
       - name: Build guarded remediation map
         run: python reading/tools/analyze_final_arabic_pass03_a1_a2_remediation.py
-      - name: Commit analysis artifact
+      - name: Commit analysis artifacts
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/audit/final_arabic_pass03_a1_a2_remediation_map.json
+          git add reading/audit/final_arabic_pass03_a1_a2_remediation_map.json reading/audit/final_arabic_pass03_a1_a2_remediation_summary.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Map remaining A1-A2 Pass 03 remediation [skip ci]'
           git fetch origin main
