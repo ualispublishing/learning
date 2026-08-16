@@ -1,0 +1,68 @@
+name: Repair French B1 Unit 01 Calibration
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/repair_french_b1_unit01_calibration.py'
+      - '.github/workflows/repair-french-b1-unit01-calibration.yml'
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install validation dependency
+        run: python -m pip install --quiet jsonschema
+      - name: Apply post-calibration precision repair
+        run: python reading/tools/repair_french_b1_unit01_calibration.py
+      - name: Independently verify repaired calibration
+        run: |
+          python - <<'PY'
+          import json,re
+          from pathlib import Path
+          corpus=Path('reading/french/b1/passages.jsonl')
+          audit_path=Path('reading/audit/french_b1_unit01_calibration_review.json')
+          rows=[json.loads(x) for x in corpus.read_text(encoding='utf-8').splitlines() if x.strip()]
+          audit=json.loads(audit_path.read_text(encoding='utf-8'))
+          assert audit['status']=='PASS' and audit['mechanical_validation']=='PASS'
+          assert len(rows)==6 and [r['sequence'] for r in rows]==list(range(1,7))
+          assert [r['id'] for r in rows]==[f'fr-b1-u01-p{i:02d}' for i in range(1,7)]
+          assert all(220<=r['word_count']<=350 for r in rows)
+          assert all(r['word_count']==len(r['text'].split()) for r in rows)
+          assert all(len(r['questions'])==10 and len(r['answer_key'])==10 for r in rows)
+          new=[t for r in rows for t in r.get('new_lexical_targets',[])]
+          assert len(new)==15 and len({t['id'] for t in new})==15 and len({t['form'] for t in new})==15
+          assert rows[-1]['new_lexical_targets']==[]
+          p2=rows[1]
+          assert 'pourrait impliquer des travaux supplémentaires' in p2['text']
+          impl=next(t for t in p2['new_lexical_targets'] if t['form']=='impliquer')
+          assert 'imply' in impl['intended_sense']
+          q5=next(q for q in p2['questions'] if q['id']=='q5')
+          a5=next(a for a in p2['answer_key'] if a['question_id']=='q5')
+          assert q5['target_ids']==[impl['id']]
+          assert 'conséquence' in a5['answer']
+          for r in rows:
+              for t in r.get('review_lexical_targets',[]):
+                  if t.get('representation') in {'running_text','summary'}:
+                      assert re.search(r'(?<!\w)'+re.escape(t['form'])+r'(?!\w)', r['text'], flags=re.IGNORECASE), (r['id'],t['form'])
+          print({'status':'PASS','b1_unit01_passages':6,'new_targets':15,'post_blob':audit['post_repair_blob']})
+          PY
+      - name: Commit repaired calibration and audit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/french/b1/passages.jsonl reading/audit/french_b1_unit01_calibration_review.json
+          if git diff --cached --quiet; then
+            echo 'No calibration changes to commit'
+            exit 0
+          fi
+          git commit -m 'Tighten French B1 Unit 01 calibration [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
