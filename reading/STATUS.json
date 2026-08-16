@@ -3,10 +3,8 @@
   "updated": "2026-08-16",
   "overall_status": "in_progress",
   "active_language": "French",
-  "paused_languages": [
-    "Urdu"
-  ],
-  "phase": "Arabic A1-C2 is formally approved. French A1 generation is complete at 60/60 canonical passages; French now advances generation-first into A2.",
+  "paused_languages": ["Urdu"],
+  "phase": "Arabic A1-C2 is formally approved. French A1 is generated at 60/60 and has passed its generation-integrity closeout; French A2 Unit 01 is now canonical and generation continues with A2 Unit 02.",
   "target_passages": 1080,
   "target_is_quota": false,
   "approved_passages": 360,
@@ -30,14 +28,7 @@
   "arabic": {
     "state": "APPROVED",
     "canonical_passages": 360,
-    "levels": {
-      "a1": 60,
-      "a2": 60,
-      "b1": 60,
-      "b2": 60,
-      "c1": 60,
-      "c2": 60
-    },
+    "levels": {"a1": 60, "a2": 60, "b1": 60, "b2": 60, "c1": 60, "c2": 60},
     "questions": 3600,
     "answers": 3600,
     "formal_final_approval": true,
@@ -68,78 +59,75 @@
   },
   "french": {
     "state": "ACTIVE_GENERATION",
-    "canonical_passages": 60,
-    "levels": {
-      "a1": 60,
-      "a2": 0,
-      "b1": 0,
-      "b2": 0,
-      "c1": 0,
-      "c2": 0
-    },
-    "questions": 600,
-    "answers": 600,
-    "completed_units": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "canonical_passages": 66,
+    "levels": {"a1": 60, "a2": 6, "b1": 0, "b2": 0, "c1": 0, "c2": 0},
+    "questions": 660,
+    "answers": 660,
+    "completed_units": [1,2,3,4,5,6,7,8,9,10],
+    "a2_completed_units": [1],
     "current_files": [
       "reading/french/a1/passages.jsonl",
-      "reading/french/a1/CALIBRATION_UNIT_01.md",
-      "reading/tools/generate_french_a1_unit02.py",
-      "reading/tools/generate_french_a1_unit03.py",
-      "reading/tools/generate_french_a1_unit04.py",
-      "reading/tools/generate_french_a1_unit05.py",
-      "reading/tools/generate_french_a1_unit06.py",
-      "reading/tools/generate_french_a1_unit07.py",
-      "reading/tools/generate_french_a1_unit08.py",
-      "reading/tools/generate_french_a1_unit09.py",
-      "reading/tools/generate_french_a1_unit10.py",
-      "reading/tools/generate_french_a1_unit10_retry.py"
+      "reading/french/a2/passages.jsonl",
+      "reading/audit/french_a1_generation_integrity.json",
+      "reading/tools/generate_french_a2_unit01.py",
+      "reading/tools/generate_french_a2_unit01_retry.py",
+      "reading/tools/generate_french_a2_unit01_retry3.py",
+      "reading/tools/generate_french_a2_unit01_retry4.py"
     ],
-    "latest_canonical_commit": "be08abb2de79287e3c366e5a3a7ce25be184fa6f",
-    "latest_canonical_blob": "b6c15291b7871e196cac8f7b5920923f2a3a95a9",
+    "latest_canonical_commit": "1e21c5f58dfb62777c7ae60fdf1bc06ccfb53fb9",
+    "latest_canonical_blob": "26b18ab417f19597cf12d7d45b8932c5654292fd",
     "generation_invariants": {
       "ten_questions_and_answers_per_passage": true,
       "a1_word_band_90_140_enforced_for_generated_units": true,
+      "a2_word_band_140_220_enforced_for_generated_units": true,
       "question_targets_must_be_locally_declared": true,
       "validated_lexicon_rank_identity_enforced": true,
       "unit_p06_zero_new_targets": true,
-      "source_blob_collision_guards": true
+      "source_blob_collision_guards": true,
+      "deliberate_running_text_reviews_must_be_exactly_visible": true
     },
     "a1_completion": {
-      "state": "GENERATED_NOT_FINAL_AUDITED",
+      "state": "GENERATED_INTEGRITY_PASS_NOT_FINAL_AUDITED",
       "passages": 60,
       "questions": 600,
       "answers": 600,
       "units": 10,
       "last_sequence": 60,
-      "unit10_retry_workflow": "PASS",
-      "unit10_targets": ["ciel", "soleil", "froid", "chaud", "acheter", "prix", "argent", "vêtement", "sac", "chaussure"],
+      "canonical_blob": "0493a2fa13e51b5997db05e91cdea4d8dc5e647b",
+      "generation_integrity": "PASS",
+      "generation_integrity_artifact": "reading/audit/french_a1_generation_integrity.json",
+      "generation_integrity_targets": 100,
+      "verified_sense_overrides": 4,
       "all_unit_checkpoints_zero_new_targets": true
     },
-    "next_target": "Begin French A2 with Unit 01 / sequences 1-6 as one guarded batch after verifying the live A2 starting state and A2 planning constraints; do not reopen or regenerate French A1."
+    "a2_generation": {
+      "state": "ACTIVE",
+      "passages": 6,
+      "questions": 60,
+      "answers": 60,
+      "completed_units": [1],
+      "last_sequence": 6,
+      "canonical_blob": "26b18ab417f19597cf12d7d45b8932c5654292fd",
+      "unit01_targets": ["retard","conseil","erreur","expliquer","essayer","possible","réparer","éviter","rendez-vous","découvrir"],
+      "unit01_word_counts": [142,147,140,143,151,143],
+      "unit01_checkpoint_new_targets": 0,
+      "a1_bridge_review_stage": "R5"
+    },
+    "next_target": "Generate French A2 Unit 02 / sequences 7-12 as one guarded batch against the live six-passage A2 blob; review Unit 01 targets and preserve the A2 140-220 band and zero-new P06 checkpoint."
   },
   "urdu": {
     "state": "QUEUED",
     "canonical_passages": 6,
-    "levels": {
-      "a1": 6,
-      "a2": 0,
-      "b1": 0,
-      "b2": 0,
-      "c1": 0,
-      "c2": 0
-    },
-    "current_files": [
-      "reading/urdu/a1/passages.jsonl",
-      "reading/urdu/a1/calibration"
-    ],
+    "levels": {"a1": 6, "a2": 0, "b1": 0, "b2": 0, "c1": 0, "c2": 0},
+    "current_files": ["reading/urdu/a1/passages.jsonl", "reading/urdu/a1/calibration"],
     "next_target": "Resume after French unless explicitly reprioritized; preserve the six live A1 calibration passages as starting state."
   },
   "next_actions": [
-    "treat French A1 sequences 1-60 as generated and closed to routine regeneration",
-    "verify live main and the French A2 starting state before the first A2 write batch",
-    "generate French A2 Unit 01 as a full six-passage guarded batch using independently designed contemporary French and validated lexical sources",
+    "keep Arabic sealed and approved unless canonical Arabic content deliberately changes",
+    "treat French A1 sequences 1-60 as generated and generation-integrity PASS; do not broadly regenerate them",
+    "generate French A2 Unit 02 / sequences 7-12 against the live A2 blob with strict collision/source/linkage/review-visibility guards",
     "continue French generation-first through A2-C2 before the expensive final multi-pass French audit unless current policy explicitly changes",
-    "keep Arabic sealed and Urdu unchanged while French is active unless explicitly reprioritized"
+    "keep Urdu unchanged while French is active unless explicitly reprioritized"
   ],
   "important_files": [
     "reading/AGENT_HANDOFF.md",
@@ -150,6 +138,7 @@
     "reading/schema/passage.schema.json",
     "docs/READING_PASSAGE_STANDARD.md",
     "reading/ROADMAP.md",
+    "reading/audit/french_a1_generation_integrity.json",
     "reading/audit/final_arabic_pass12_adversarial_gate_falsification.json"
   ],
   "parallel_agent_rules": {
@@ -163,20 +152,7 @@
     "phase": "APPROVED",
     "minimum_distinct_passes_required": 10,
     "distinct_passes_recorded": 12,
-    "pass_status": {
-      "pass01": "PASS",
-      "pass02": "PASS",
-      "pass03": "PASS",
-      "pass04": "PASS",
-      "pass05": "PASS",
-      "pass06": "PASS",
-      "pass07": "PASS",
-      "pass08": "PASS",
-      "pass09": "PASS",
-      "pass10": "PASS_WITH_SOURCE_ADJUDICATION",
-      "pass11": "COMPLETE",
-      "pass12": "PASS"
-    },
+    "pass_status": {"pass01":"PASS","pass02":"PASS","pass03":"PASS","pass04":"PASS","pass05":"PASS","pass06":"PASS","pass07":"PASS","pass08":"PASS","pass09":"PASS","pass10":"PASS_WITH_SOURCE_ADJUDICATION","pass11":"COMPLETE","pass12":"PASS"},
     "current_upstream_blockers": [],
     "pass12_freshness": "CURRENT_OR_NOT_PROVEN_STALE",
     "pass12_hard_regressions": [],
