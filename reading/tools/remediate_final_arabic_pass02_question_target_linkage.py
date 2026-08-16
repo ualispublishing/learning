@@ -52,7 +52,7 @@ B1_TARGET_FIXES = {
         "form": "نسخة",
     },
     ("ar-b1-u02-p02", "q5"): {
-        "prompt": "ما الحل الذي يطبق أولاً؟",
+        "prompt": "ماذا يعني «حل» في هذا النص؟",
         "old": ["ar-r867"],
         "new": ["ar-r412"],
         "form": "حل",
@@ -125,7 +125,6 @@ def main() -> None:
     a1_by_id = {str(r.get("id")): r for r in a1}
     b1_by_id = {str(r.get("id")): r for r in b1}
 
-    # A1: declare existing earlier vocabulary in the local review schedule.
     prior_evidence = {}
     for pid, spec in A1_REVIEW_ADDITIONS.items():
         row = a1_by_id.get(pid)
@@ -133,10 +132,6 @@ def main() -> None:
             raise AssertionError(f"missing {pid}")
         if int(row.get("sequence")) != spec["expected_sequence"]:
             raise AssertionError(f"{pid}: sequence drift {row.get('sequence')} != {spec['expected_sequence']}")
-        if row.get("new_lexical_targets"):
-            # Some target passages are checkpoints with local new words; this is
-            # allowed. We only require the added item itself to be an earlier intro.
-            pass
         current_reviews = row.get("review_lexical_targets", [])
         if not isinstance(current_reviews, list):
             raise AssertionError(f"{pid}: review_lexical_targets is not a list")
@@ -156,8 +151,6 @@ def main() -> None:
             "review_stage": spec["review_stage"],
         })
 
-    # B1: replace three unrelated IDs with the locally declared lexical IDs
-    # matching the exact prompt word.
     changed_b1: dict[str, set[str]] = {}
     for (pid, qid), spec in B1_TARGET_FIXES.items():
         row = b1_by_id.get(pid)
@@ -184,7 +177,6 @@ def main() -> None:
         q["target_ids"] = list(spec["new"])
         changed_b1.setdefault(pid, set()).add(qid)
 
-    # Mutation boundaries.
     a1_before_by_id = {str(r.get("id")): r for r in a1_before}
     for pid, new in a1_by_id.items():
         old = a1_before_by_id[pid]
