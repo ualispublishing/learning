@@ -93,7 +93,8 @@ jobs:
           if p11.get('status') not in {'PASS','COMPLETE'}:
             raise SystemExit(f'Pass11 completion state invalid: {p11.get("status")}')
           t11=p11.get('totals',{})
-          if t11.get('levels_pending') != 0 or t11.get('passages_fully_reviewed') != 360:
+          reviewed=t11.get('passages_fully_reviewed_in_completed_levels', t11.get('passages_fully_reviewed'))
+          if t11.get('levels_pending') != 0 or t11.get('levels_complete') != 6 or reviewed != 360:
             raise SystemExit(f'Pass11 incomplete: {t11}')
 
           print(json.dumps({
@@ -104,6 +105,7 @@ jobs:
             'pass10_adjudication': adj10.get('status'),
             'pass10_historical_repaired': len(historical),
             'pass11': p11.get('status'),
+            'pass11_reviewed': reviewed,
           }, ensure_ascii=False))
           PY
       - name: Synchronize final-review status before Pass 12
