@@ -3,20 +3,19 @@
   "name": "question_composition_against_ten_question_standard",
   "scope": "Arabic A1-C2 canonical reading corpus",
   "reference": "reading/planning/TEN_QUESTION_STANDARD.md",
-  "interpretation": "diagnostic only: documented distributions are defaults; overlapping pedagogical roles are counted where the question type genuinely encodes both roles",
+  "interpretation": "diagnostic only: documented distributions are defaults; overlapping pedagogical roles are counted where question semantics/schema metadata genuinely encode both roles",
   "classification_notes": {
     "vocabulary_in_context": "counts as lexical and passage-centred",
     "grammar_function": "counts as grammar/style and discourse because it tests connective/structural function",
-    "contrast": "counts as grammar/style and discourse because it tests an explicit contrast relation"
+    "contrast": "counts as grammar/style and discourse; additionally counts as lexical only when explicit ar-r lexical target IDs make it a scheduled semantic-discrimination task"
   },
   "levels": {
     "a1": {
       "passages": 60,
-      "flagged_for_default_distribution": 41,
+      "flagged_for_default_distribution": 39,
       "low_type_diversity": 0,
       "advanced_definition_heavy": 0,
       "deficiency_categories": {
-        "lexical": 2,
         "grammar_style": 39
       },
       "question_type_totals": {
@@ -39,12 +38,12 @@
     },
     "a2": {
       "passages": 60,
-      "flagged_for_default_distribution": 55,
+      "flagged_for_default_distribution": 50,
       "low_type_diversity": 0,
       "advanced_definition_heavy": 0,
       "deficiency_categories": {
         "grammar_style": 42,
-        "lexical": 13
+        "lexical": 8
       },
       "question_type_totals": {
         "cause_effect": 35,
@@ -147,43 +146,9 @@
   },
   "totals": {
     "passages": 360,
-    "review_flags": 96
+    "review_flags": 89
   },
   "flags": [
-    {
-      "code": "default_distribution_deficit",
-      "level": "a1",
-      "passage_id": "ar-a1-u01-p06",
-      "question_types": [
-        "gist",
-        "sequence",
-        "literal_detail",
-        "reference_resolution",
-        "summary",
-        "contrast",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "grammar_function"
-      ],
-      "category_counts": {
-        "passage_centered": 9,
-        "comprehension": 4,
-        "inference": 0,
-        "comprehension_inference": 4,
-        "lexical": 1,
-        "grammar_style": 4,
-        "discourse": 5,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "lexical": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
     {
       "code": "default_distribution_deficit",
       "level": "a1",
@@ -205,7 +170,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -213,40 +178,6 @@
       },
       "deficits": {
         "grammar_style": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "a1",
-      "passage_id": "ar-a1-u02-p06",
-      "question_types": [
-        "gist",
-        "sequence",
-        "cause_effect",
-        "literal_detail",
-        "summary",
-        "single_word_definition",
-        "contrast",
-        "reference_resolution",
-        "grammar_function",
-        "contrast"
-      ],
-      "category_counts": {
-        "passage_centered": 9,
-        "comprehension": 5,
-        "inference": 0,
-        "comprehension_inference": 5,
-        "lexical": 1,
-        "grammar_style": 3,
-        "discourse": 4,
-        "synthesis": 1,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "lexical": {
           "minimum": 2,
           "actual": 1
         }
@@ -273,7 +204,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -307,7 +238,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 2,
         "synthesis": 0,
@@ -341,7 +272,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -409,7 +340,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 2,
         "synthesis": 0,
@@ -511,7 +442,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -545,7 +476,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 2,
         "synthesis": 0,
@@ -579,7 +510,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -613,7 +544,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -647,7 +578,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -681,7 +612,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -715,7 +646,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -749,7 +680,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -783,7 +714,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -817,7 +748,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -851,7 +782,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -885,7 +816,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -919,7 +850,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -953,7 +884,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -987,7 +918,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1021,7 +952,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1055,7 +986,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1089,7 +1020,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1123,7 +1054,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1157,7 +1088,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1191,7 +1122,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1225,7 +1156,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1259,7 +1190,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1293,7 +1224,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1327,7 +1258,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1361,7 +1292,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1395,7 +1326,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1429,7 +1360,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1463,7 +1394,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1497,7 +1428,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1531,7 +1462,7 @@
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -1717,40 +1648,6 @@
     {
       "code": "default_distribution_deficit",
       "level": "a2",
-      "passage_id": "ar-a2-u01-p06",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "literal_detail",
-        "inference",
-        "summary",
-        "single_word_definition",
-        "contrast",
-        "reference_resolution",
-        "grammar_function",
-        "contrast"
-      ],
-      "category_counts": {
-        "passage_centered": 9,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 1,
-        "grammar_style": 3,
-        "discourse": 4,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "lexical": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "a2",
       "passage_id": "ar-a2-u02-p01",
       "question_types": [
         "gist",
@@ -1921,40 +1818,6 @@
     {
       "code": "default_distribution_deficit",
       "level": "a2",
-      "passage_id": "ar-a2-u02-p06",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "literal_detail",
-        "inference",
-        "summary",
-        "single_word_definition",
-        "contrast",
-        "reference_resolution",
-        "grammar_function",
-        "contrast"
-      ],
-      "category_counts": {
-        "passage_centered": 9,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 1,
-        "grammar_style": 3,
-        "discourse": 4,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "lexical": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "a2",
       "passage_id": "ar-a2-u03-p01",
       "question_types": [
         "gist",
@@ -2075,7 +1938,7 @@
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -2143,7 +2006,7 @@
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -2177,7 +2040,7 @@
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -2289,40 +2152,6 @@
         "grammar_style": {
           "minimum": 2,
           "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "a2",
-      "passage_id": "ar-a2-u04-p06",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "literal_detail",
-        "inference",
-        "summary",
-        "single_word_definition",
-        "contrast",
-        "reference_resolution",
-        "grammar_function",
-        "contrast"
-      ],
-      "category_counts": {
-        "passage_centered": 9,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 1,
-        "grammar_style": 3,
-        "discourse": 4,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "lexical": {
-          "minimum": 2,
-          "actual": 1
         }
       }
     },
@@ -2551,7 +2380,7 @@
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -2669,40 +2498,6 @@
     {
       "code": "default_distribution_deficit",
       "level": "a2",
-      "passage_id": "ar-a2-u06-p06",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "literal_detail",
-        "inference",
-        "summary",
-        "single_word_definition",
-        "contrast",
-        "reference_resolution",
-        "grammar_function",
-        "contrast"
-      ],
-      "category_counts": {
-        "passage_centered": 9,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 1,
-        "grammar_style": 3,
-        "discourse": 4,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "lexical": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "a2",
       "passage_id": "ar-a2-u07-p01",
       "question_types": [
         "gist",
@@ -2721,7 +2516,7 @@
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
-        "lexical": 6,
+        "lexical": 7,
         "grammar_style": 1,
         "discourse": 1,
         "synthesis": 0,
@@ -2959,7 +2754,7 @@
         "comprehension": 4,
         "inference": 2,
         "comprehension_inference": 6,
-        "lexical": 3,
+        "lexical": 4,
         "grammar_style": 1,
         "discourse": 2,
         "synthesis": 0,
@@ -3095,7 +2890,7 @@
         "comprehension": 4,
         "inference": 2,
         "comprehension_inference": 6,
-        "lexical": 3,
+        "lexical": 4,
         "grammar_style": 1,
         "discourse": 2,
         "synthesis": 0,
@@ -3157,40 +2952,6 @@
         "inference",
         "contrast",
         "summary"
-      ],
-      "category_counts": {
-        "passage_centered": 9,
-        "comprehension": 4,
-        "inference": 2,
-        "comprehension_inference": 6,
-        "lexical": 1,
-        "grammar_style": 2,
-        "discourse": 3,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "lexical": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "a2",
-      "passage_id": "ar-a2-u09-p05",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "contrast",
-        "reference_resolution",
-        "single_word_definition",
-        "inference",
-        "summary",
-        "contrast"
       ],
       "category_counts": {
         "passage_centered": 9,
@@ -3333,7 +3094,7 @@
         "comprehension": 4,
         "inference": 2,
         "comprehension_inference": 6,
-        "lexical": 0,
+        "lexical": 1,
         "grammar_style": 3,
         "discourse": 4,
         "synthesis": 1,
@@ -3342,7 +3103,7 @@
       "deficits": {
         "lexical": {
           "minimum": 2,
-          "actual": 0
+          "actual": 1
         }
       }
     },
@@ -3367,7 +3128,7 @@
         "comprehension": 5,
         "inference": 2,
         "comprehension_inference": 7,
-        "lexical": 0,
+        "lexical": 1,
         "grammar_style": 2,
         "discourse": 3,
         "synthesis": 1,
@@ -3376,7 +3137,7 @@
       "deficits": {
         "lexical": {
           "minimum": 2,
-          "actual": 0
+          "actual": 1
         }
       }
     },
@@ -3401,7 +3162,7 @@
         "comprehension": 4,
         "inference": 2,
         "comprehension_inference": 6,
-        "lexical": 0,
+        "lexical": 1,
         "grammar_style": 2,
         "discourse": 3,
         "synthesis": 2,
@@ -3410,7 +3171,7 @@
       "deficits": {
         "lexical": {
           "minimum": 2,
-          "actual": 0
+          "actual": 1
         }
       }
     }
