@@ -3,7 +3,9 @@
   "updated": "2026-08-16",
   "overall_status": "in_progress",
   "active_language": "French",
-  "paused_languages": ["Urdu"],
+  "paused_languages": [
+    "Urdu"
+  ],
   "phase": "Arabic A1-C2 is formally approved. French is now the active generation language; Urdu is queued after French unless explicitly reprioritized.",
   "target_passages": 1080,
   "target_is_quota": false,
@@ -28,7 +30,14 @@
   "arabic": {
     "state": "APPROVED",
     "canonical_passages": 360,
-    "levels": {"a1": 60, "a2": 60, "b1": 60, "b2": 60, "c1": 60, "c2": 60},
+    "levels": {
+      "a1": 60,
+      "a2": 60,
+      "b1": 60,
+      "b2": 60,
+      "c1": 60,
+      "c2": 60
+    },
     "questions": 3600,
     "answers": 3600,
     "formal_final_approval": true,
@@ -60,15 +69,35 @@
   "french": {
     "state": "ACTIVE_GENERATION",
     "canonical_passages": 6,
-    "levels": {"a1": 6, "a2": 0, "b1": 0, "b2": 0, "c1": 0, "c2": 0},
-    "current_files": ["reading/french/a1/passages.jsonl", "reading/french/a1/CALIBRATION_UNIT_01.md"],
+    "levels": {
+      "a1": 6,
+      "a2": 0,
+      "b1": 0,
+      "b2": 0,
+      "c1": 0,
+      "c2": 0
+    },
+    "current_files": [
+      "reading/french/a1/passages.jsonl",
+      "reading/french/a1/CALIBRATION_UNIT_01.md"
+    ],
     "next_target": "Continue from the six live A1 calibration passages to 60 A1 passages under the current generation-first/ten-question contract; do not restart calibration from scratch."
   },
   "urdu": {
     "state": "QUEUED",
     "canonical_passages": 6,
-    "levels": {"a1": 6, "a2": 0, "b1": 0, "b2": 0, "c1": 0, "c2": 0},
-    "current_files": ["reading/urdu/a1/passages.jsonl", "reading/urdu/a1/calibration"],
+    "levels": {
+      "a1": 6,
+      "a2": 0,
+      "b1": 0,
+      "b2": 0,
+      "c1": 0,
+      "c2": 0
+    },
+    "current_files": [
+      "reading/urdu/a1/passages.jsonl",
+      "reading/urdu/a1/calibration"
+    ],
     "next_target": "Resume after French unless explicitly reprioritized; preserve the six live A1 calibration passages as starting state."
   },
   "next_actions": [
@@ -94,5 +123,28 @@
     "source_state_assertions_required_for_large_mutations": true,
     "serialize_workflows_that_push_the_same_artifact": true,
     "do_not_rely_on_recursive_GITHUB_TOKEN_workflow_triggers": true
+  },
+  "arabic_final_review": {
+    "phase": "APPROVED",
+    "minimum_distinct_passes_required": 10,
+    "distinct_passes_recorded": 12,
+    "pass_status": {
+      "pass01": "PASS",
+      "pass02": "PASS",
+      "pass03": "PASS",
+      "pass04": "PASS",
+      "pass05": "PASS",
+      "pass06": "PASS",
+      "pass07": "PASS",
+      "pass08": "PASS",
+      "pass09": "PASS",
+      "pass10": "PASS_WITH_SOURCE_ADJUDICATION",
+      "pass11": "COMPLETE",
+      "pass12": "PASS"
+    },
+    "current_upstream_blockers": [],
+    "pass12_freshness": "CURRENT_OR_NOT_PROVEN_STALE",
+    "pass12_hard_regressions": [],
+    "final_approval": true
   }
 }
