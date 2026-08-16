@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a compact review snapshot of currently below-band A2 passages."""
+"""Build a compact snapshot of any currently below-band A2 passages."""
 from __future__ import annotations
 import json,re
 from pathlib import Path
@@ -23,7 +23,5 @@ for r in rows:
             'new_target_ids':[t.get('id','') for t in r.get('new_lexical_targets',[])],
             'p06_zero_new_word': bool(str(r['id']).endswith('-p06') and r.get('new_lexical_targets')==[] and r.get('speed_training',{}).get('new_word_policy')=='none'),
         })
-if len(short)!=21:
-    raise SystemExit(f'expected 21 remaining below-band A2 passages, found {len(short)}')
-OUT.write_text('\n'.join(json.dumps(r,ensure_ascii=False) for r in short)+'\n',encoding='utf-8')
+OUT.write_text(('\n'.join(json.dumps(r,ensure_ascii=False) for r in short)+'\n') if short else '',encoding='utf-8')
 print(json.dumps({'short_passages':len(short),'by_unit':{str(u):sum(1 for r in short if r['unit']==u) for u in sorted({r['unit'] for r in short})}},ensure_ascii=False))
