@@ -25,6 +25,13 @@ GRAMMAR_TYPES = {"grammar_in_context", "grammar_category", "grammar_choice", "gr
 MIN_GRAMMAR = 2
 MIN_LEXICAL = 2
 
+# Explicit contextual adjudications for lexicon entries whose global POS field
+# allows more than one use but whose role in this exact canonical passage is
+# unambiguous. Never generalize these answers to the same lemma elsewhere.
+USAGE_POS_OVERRIDES = {
+    ("ar-a2-u05-p04", "q6"): "اسم",  # عادة in «عادة أصغر» / «العادة الجيدة»
+}
+
 
 def lexical_role(q: dict) -> bool:
     t = str(q.get("type", ""))
@@ -40,14 +47,7 @@ def q_target_ids(q: dict) -> list[str]:
 
 
 def pos_answer(raw: object) -> str | None:
-    """Map only high-confidence POS metadata to an Arabic category answer.
-
-    Slash-delimited labels are not automatically ambiguous: the lexical ledger
-    sometimes records two equivalent descriptive labels for one grammatical
-    category (for example ``imperfect / present verb``). Recognized equivalent
-    pairs are mapped before the mixed-category rejection. Truly different
-    categories such as ``noun / adjective`` remain fail-closed.
-    """
+    """Map only high-confidence POS metadata to an Arabic category answer."""
     if not isinstance(raw, str) or not raw.strip():
         return None
     p = raw.strip().lower()
@@ -125,17 +125,18 @@ def immutable_projection(row: dict, changed_qids: set[str]) -> dict:
     return x
 
 
-def candidate_inventory(qs: list[dict], meta: dict[str, dict]) -> list[dict]:
+def candidate_inventory(pid: str, qs: list[dict], meta: dict[str, dict]) -> list[dict]:
     candidates: list[dict] = []
     for q in qs:
         if q.get("type") != "single_word_definition":
             continue
+        qid = str(q.get("id"))
         tids = q_target_ids(q)
         if len(tids) != 1:
             continue
         tid = tids[0]
         item = meta.get(tid, {})
-        answer = pos_answer(item.get("part_of_speech"))
+        answer = USAGE_POS_OVERRIDES.get((pid, qid)) or pos_answer(item.get("part_of_speech"))
         form = item.get("form") or item.get("lemma")
         if not answer or not isinstance(form, str) or not form.strip():
             continue
@@ -147,12 +148,13 @@ def candidate_inventory(qs: list[dict], meta: dict[str, dict]) -> list[dict]:
         if support_ids:
             candidates.append({
                 "q": q,
-                "qid": str(q.get("id")),
+                "qid": qid,
                 "tid": tid,
                 "form": form.strip(),
                 "answer": answer,
                 "support_ids": support_ids,
                 "part_of_speech": item.get("part_of_speech"),
+                "contextual_override": (pid, qid) in USAGE_POS_OVERRIDES,
             })
     return candidates
 
@@ -164,7 +166,6 @@ def choose_candidates(qs: list[dict], candidates: list[dict], needed: int) -> li
         selected_ids = {c["qid"] for c in combo}
         if lexical_before - needed < MIN_LEXICAL:
             continue
-        # Each converted target must retain a lexical test not itself converted.
         if any(not any(sid not in selected_ids for sid in c["support_ids"]) for c in combo):
             continue
         return list(combo)
@@ -187,20 +188,21 @@ def main() -> None:
         level_questions = 0
 
         for row in rows:
+            pid = str(row.get("id"))
             qs = row.get("questions", [])
             if len(qs) != 10 or len(row.get("answer_key", [])) != 10:
-                raise AssertionError(f"{row.get('id')}: expected 10 questions and 10 answers")
+                raise AssertionError(f"{pid}: expected 10 questions and 10 answers")
 
             grammar_before = sum(str(q.get("type", "")) in GRAMMAR_TYPES for q in qs)
             if grammar_before >= MIN_GRAMMAR:
                 continue
             if grammar_before < 0 or grammar_before > 1:
-                raise AssertionError(f"{row.get('id')}: unexpected grammar count {grammar_before}")
+                raise AssertionError(f"{pid}: unexpected grammar count {grammar_before}")
             needed = MIN_GRAMMAR - grammar_before
             lexical_before = sum(lexical_role(q) for q in qs)
             if lexical_before - needed < MIN_LEXICAL:
                 raise AssertionError(
-                    f"{row.get('id')}: grammar={grammar_before}, lexical={lexical_before}, "
+                    f"{pid}: grammar={grammar_before}, lexical={lexical_before}, "
                     f"need {needed} conversions but would fall below lexical minimum {MIN_LEXICAL}"
                 )
 
@@ -209,20 +211,21 @@ def main() -> None:
                 if isinstance(item, dict) and item.get("id"):
                     meta[str(item["id"])] = item
 
-            candidates = candidate_inventory(qs, meta)
+            candidates = candidate_inventory(pid, qs, meta)
             selected = choose_candidates(qs, candidates, needed)
             if selected is None:
                 definitions = []
                 for q in qs:
                     if q.get("type") != "single_word_definition":
                         continue
+                    qid = str(q.get("id"))
                     tids = q_target_ids(q)
                     item = meta.get(tids[0], {}) if len(tids) == 1 else {}
                     definitions.append({
-                        "question_id": q.get("id"),
+                        "question_id": qid,
                         "target_ids": tids,
                         "part_of_speech": item.get("part_of_speech"),
-                        "mapped_answer": pos_answer(item.get("part_of_speech")),
+                        "mapped_answer": USAGE_POS_OVERRIDES.get((pid, qid)) or pos_answer(item.get("part_of_speech")),
                         "support_ids": [
                             str(other.get("id")) for other in qs
                             if other.get("id") != q.get("id") and lexical_role(other)
@@ -230,7 +233,7 @@ def main() -> None:
                         ],
                     })
                 raise AssertionError(
-                    f"{row.get('id')}: cannot safely choose {needed} grammar conversions; "
+                    f"{pid}: cannot safely choose {needed} grammar conversions; "
                     f"grammar={grammar_before}, lexical={lexical_before}, definitions={definitions}"
                 )
 
@@ -244,12 +247,14 @@ def main() -> None:
                 ans = answer_entry(row, qid)
                 ans["answer"] = c["answer"]
                 if {k: v for k, v in ans.items() if k != "answer"} != {k: v for k, v in old_answer.items() if k != "answer"}:
-                    raise AssertionError(f"{row.get('id')} {qid}: answer metadata drift")
+                    raise AssertionError(f"{pid} {qid}: answer metadata drift")
 
                 note = (
                     f"Final Pass 03 remediation: {qid} repurposed from redundant lexical definition "
                     f"to grammatical-category retrieval for {c['tid']}; another lexical item still tests the target."
                 )
+                if c["contextual_override"]:
+                    note += " POS answer adjudicated from this passage's explicit syntactic use."
                 notes = row.setdefault("quality", {}).setdefault("notes", [])
                 if note not in notes:
                     notes.append(note)
@@ -257,9 +262,7 @@ def main() -> None:
             grammar_after = sum(str(q.get("type", "")) in GRAMMAR_TYPES for q in qs)
             lexical_after = sum(lexical_role(q) for q in qs)
             if grammar_after < MIN_GRAMMAR or lexical_after < MIN_LEXICAL:
-                raise AssertionError(
-                    f"{row.get('id')}: postcondition roles grammar={grammar_after}, lexical={lexical_after}"
-                )
+                raise AssertionError(f"{pid}: postcondition roles grammar={grammar_after}, lexical={lexical_after}")
             for c in selected:
                 if not any(
                     str(other.get("id")) not in selected_ids
@@ -267,9 +270,8 @@ def main() -> None:
                     and c["tid"] in q_target_ids(other)
                     for other in qs
                 ):
-                    raise AssertionError(f"{row.get('id')} {c['qid']}: converted target lost independent lexical assessment")
+                    raise AssertionError(f"{pid} {c['qid']}: converted target lost independent lexical assessment")
 
-            pid = str(row.get("id"))
             changed_ids[pid] = selected_ids
             changed_passages += 1
             changed_questions += len(selected)
@@ -308,6 +310,7 @@ def main() -> None:
         "changed_passages": changed_passages,
         "changed_questions": changed_questions,
         "by_level": by_level,
+        "contextual_pos_overrides": len(USAGE_POS_OVERRIDES),
     }, ensure_ascii=False))
 
 
