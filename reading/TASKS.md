@@ -26,14 +26,14 @@ A1 has not yet gone through the final language-wide multi-pass French approval a
 
 - [x] Unit 01 / sequences 1–6: 6 passages / 60 Q / 60 A / 10 new targets / zero-new P06.
 - [x] Unit 02 / sequences 7–12: 6 passages / 60 Q / 60 A / 10 new targets / zero-new P06.
-- [x] Unit 02 workflow completed successfully after word-band and exact-review-visibility repairs.
-- [x] Unit 02 target set was independently checked against A1 after generation: no A1 deliberate-target collisions.
 - [x] Unit 03 / sequences 13–18: 6 passages / 60 Q / 60 A / 10 new targets / zero-new P06.
-- [x] Unit 03 generator enforces new-target freshness against **A1 plus all prior A2**, not only the immediately previous unit.
-- [x] Current A2 canonical blob after Unit 03: `488fa3f0638df94624900a155d9f2ed22dbe09a6`.
-- [ ] Unit 04 / sequences 19–24: generate as one guarded batch against the live Unit-03 blob.
-- [ ] Review Unit-03 targets one pair per P01–P05 where natural; keep P06 zero-new-target.
-- [ ] Check every proposed Unit-04 new target against both A1 and all prior A2 deliberate targets before writing.
+- [x] Unit 04 / sequences 19–24: 6 passages / 60 Q / 60 A / 10 new targets / zero-new P06.
+- [x] Unit 04 first run failed closed because `perdre` was represented only by `perdu`; exact infinitive visibility was added and the retry passed without weakening the guard.
+- [x] Unit 05 / sequences 25–30: 6 passages / 60 Q / 60 A / 10 new targets / zero-new P06; workflow passed first run.
+- [x] Current A2 canonical blob after Unit 05: `236c94a3493c83e0e55c56fc3cd34e52ec258cae`.
+- [ ] Unit 06 / sequences 31–36: generate as one guarded batch against the live Unit-05 blob.
+- [ ] Review Unit-05 targets one pair per P01–P05 where natural; keep P06 zero-new-target.
+- [ ] Check every proposed Unit-06 new target against A1 and all prior A2 deliberate targets before writing.
 - [ ] Continue A2 in coherent six-passage guarded batches to 60 passages.
 
 A2 Unit 01 targets:
@@ -45,9 +45,15 @@ A2 Unit 02 targets:
 A2 Unit 03 targets:
 `oublier`, `clé`, `perdre`, `retrouver`, `recevoir`, `envoyer`, `vérifier`, `payer`, `numéro`, `carte`.
 
+A2 Unit 04 targets:
+`projet`, `équipe`, `réunion`, `responsable`, `programme`, `dossier`, `demande`, `réponse`, `service`, `contact`.
+
+A2 Unit 05 targets:
+`médecin`, `patient`, `douleur`, `santé`, `hôpital`, `accident`, `soin`, `urgence`, `risque`, `danger`.
+
 Remaining French levels:
 
-- [ ] A2: 42 passages remain after Unit 03.
+- [ ] A2: 30 passages remain after Unit 05.
 - [ ] B1: 60 passages.
 - [ ] B2: 60 passages.
 - [ ] C1: 60 passages.
@@ -78,4 +84,4 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 
 ## Immediate next task
 
-**Generate French A2 Unit 04 / sequences 19–24 against canonical A2 blob `488fa3f0638df94624900a155d9f2ed22dbe09a6`. Keep Arabic sealed.**
+**Generate French A2 Unit 06 / sequences 31–36 against canonical A2 blob `236c94a3493c83e0e55c56fc3cd34e52ec258cae`. Keep Arabic sealed.**
