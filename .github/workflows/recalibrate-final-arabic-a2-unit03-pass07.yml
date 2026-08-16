@@ -1,0 +1,54 @@
+name: Recalibrate final Arabic A2 Unit03 Pass07
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/recalibrate_final_arabic_a2_unit03_pass07.py'
+      - '.github/workflows/recalibrate-final-arabic-a2-unit03-pass07.yml'
+permissions:
+  contents: write
+jobs:
+  recalibrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply guarded A2 Unit03 remediation
+        run: python reading/tools/recalibrate_final_arabic_a2_unit03_pass07.py
+      - name: Refresh Pass 07 against remediated corpus
+        run: python reading/tools/final_audit_arabic_pass07_cefr_difficulty_calibration.py
+      - name: Validate canonical A2 file and audit
+        run: |
+          python - <<'PY'
+          import json,re
+          from pathlib import Path
+          rows=[json.loads(x) for x in Path('reading/arabic/a2/passages.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]
+          assert len(rows)==60 and len({r['id'] for r in rows})==60
+          for r in rows:
+              assert len(re.findall(r'\S+',str(r.get('text',''))))==int(r.get('word_count',0)), r['id']
+          for r in rows[12:18]: assert 140 <= r['word_count'] <= 220, (r['id'],r['word_count'])
+          p06=rows[17]
+          assert p06['word_count']==145 and p06['new_lexical_targets']==[] and p06['speed_training']['new_word_policy']=='none'
+          audit=json.loads(Path('reading/audit/final_arabic_pass07_cefr_difficulty_calibration.json').read_text(encoding='utf-8'))
+          assert audit['coverage_metric']['missing_value_semantics']=='UNMEASURED_NOT_FAILURE'
+          assert audit['levels']['a1']['flagged_passages']==0
+          assert audit['levels']['a2']['flagged_passages']==21, audit['levels']['a2']
+          for level in ('b1','b2','c1','c2'): assert audit['levels'][level]['flagged_passages']==0
+          assert audit['totals']['review_flags']==21, audit['totals']
+          print([(r['id'],r['word_count']) for r in rows[12:18]])
+          print({'a2_flags':21,'total_flags':audit['totals']['review_flags']})
+          PY
+      - name: Commit canonical corpus and refreshed audit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/arabic/a2/passages.jsonl reading/audit/final_arabic_pass07_cefr_difficulty_calibration.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Recalibrate Arabic A2 Unit03 Pass07 [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
