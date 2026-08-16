@@ -1,0 +1,55 @@
+name: Repair final Arabic post-Pass07 A1 naturalness
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/repair_final_arabic_post_pass07_a1_naturalness.py'
+      - '.github/workflows/repair-final-arabic-post-pass07-a1-naturalness.yml'
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply guarded post-Pass07 A1 naturalness repairs
+        run: python reading/tools/repair_final_arabic_post_pass07_a1_naturalness.py
+      - name: Refresh Pass 07
+        run: python reading/tools/final_audit_arabic_pass07_cefr_difficulty_calibration.py
+      - name: Refresh post-Pass07 A1-A2 naturalness snapshot
+        run: python reading/tools/build_final_arabic_post_pass07_a1_a2_naturalness_snapshot.py
+      - name: Validate current corpus and audits
+        run: |
+          python - <<'PY'
+          import json,re
+          from pathlib import Path
+          a1=[json.loads(x) for x in Path('reading/arabic/a1/passages.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]
+          assert len(a1)==60 and len({r['id'] for r in a1})==60
+          for r in a1:
+              actual=len(re.findall(r'\S+',str(r.get('text',''))))
+              assert actual==r['word_count'], (r['id'],actual,r['word_count'])
+              assert 90<=r['word_count']<=140, (r['id'],r['word_count'])
+          audit=json.loads(Path('reading/audit/final_arabic_pass07_cefr_difficulty_calibration.json').read_text(encoding='utf-8'))
+          assert audit['status']=='PASS' and audit['totals']['review_flags']==0
+          assert audit['coverage_metric']['missing_value_semantics']=='UNMEASURED_NOT_FAILURE'
+          snap=[json.loads(x) for x in Path('reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]
+          assert len(snap)==66
+          assert sum(r['cefr']=='A1' for r in snap)==28
+          assert sum(r['cefr']=='A2' for r in snap)==38
+          print({'a1_min':min(r['word_count'] for r in a1),'a1_max':max(r['word_count'] for r in a1),'pass07_flags':0,'snapshot':len(snap)})
+          PY
+      - name: Commit repaired corpus and refreshed audit evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/arabic/a1/passages.jsonl reading/audit/final_arabic_pass07_cefr_difficulty_calibration.json reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Repair post-Pass07 A1 naturalness [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
