@@ -30,11 +30,12 @@ A1 has not yet gone through the final language-wide multi-pass French approval a
 - [x] Unit 04 / sequences 19–24; first run failed closed on exact `perdre` visibility, then passed after a natural exact-form repair.
 - [x] Unit 05 / sequences 25–30; passed all guards first run.
 - [x] Unit 06 / sequences 31–36; first run rejected duplicate target `place`, then passed with fresh `visite` replacing it.
+- [x] Unit 07 / sequences 37–42; first run rejected duplicate target `gauche`, then passed with fresh `tenter` replacing it.
 - [x] All completed A2 units: 6 passages / 60 Q / 60 A / 10 new targets / zero-new P06 each.
-- [x] Current A2 canonical blob after Unit 06: `9abd3006e264234e6b5ff2f7c9d37e56cf807fa9`.
-- [ ] Unit 07 / sequences 37–42: generate as one guarded batch against the live Unit-06 blob.
-- [ ] Review Unit-06 targets one pair per P01–P05 where natural; keep P06 zero-new-target.
-- [ ] Check every proposed Unit-07 new target against A1 and all prior A2 deliberate targets before writing.
+- [x] Current A2 canonical blob after Unit 07: `423be512ea3675939ad174e188791259035d6656`.
+- [ ] Unit 08 / sequences 43–48: generate as one guarded batch against the live Unit-07 blob.
+- [ ] Review Unit-07 targets one pair per P01–P05 where natural; keep P06 zero-new-target.
+- [ ] Check every proposed Unit-08 new target against A1 and all prior A2 deliberate targets before writing.
 - [ ] Continue A2 in coherent six-passage guarded batches to 60 passages.
 
 A2 Unit 01 targets: `retard`, `conseil`, `erreur`, `expliquer`, `essayer`, `possible`, `réparer`, `éviter`, `rendez-vous`, `découvrir`.
@@ -49,9 +50,11 @@ A2 Unit 05 targets: `médecin`, `patient`, `douleur`, `santé`, `hôpital`, `acc
 
 A2 Unit 06 targets: `voyage`, `train`, `route`, `départ`, `hôtel`, `chambre`, `retour`, `visite`, `plan`, `avion`.
 
+A2 Unit 07 targets: `tenter`, `tranquille`, `déjeuner`, `partager`, `vue`, `avancer`, `marché`, `poste`, `intérêt`, `mur`.
+
 Remaining French levels:
 
-- [ ] A2: 24 passages remain after Unit 06.
+- [ ] A2: 18 passages remain after Unit 07.
 - [ ] B1: 60 passages.
 - [ ] B2: 60 passages.
 - [ ] C1: 60 passages.
@@ -82,4 +85,4 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 
 ## Immediate next task
 
-**Generate French A2 Unit 07 / sequences 37–42 against canonical A2 blob `9abd3006e264234e6b5ff2f7c9d37e56cf807fa9`. Keep Arabic sealed.**
+**Generate French A2 Unit 08 / sequences 43–48 against canonical A2 blob `423be512ea3675939ad174e188791259035d6656`. Keep Arabic sealed.**
