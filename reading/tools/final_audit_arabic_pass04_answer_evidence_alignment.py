@@ -30,11 +30,11 @@ STOP = {
 }
 DIRECT = {"literal_detail", "sequence", "reference_resolution", "cause_effect"}
 LONG = {"gist", "summary", "synthesis", "cross_text_synthesis", "main_claim", "inference", "motive", "stance", "assumption", "argument_relation"}
-GRAMMAR_CATEGORY_TYPES = {"grammar_category", "grammar_identification", "grammar_choice", "person_form"}
 CONTRAST_EXPLANATION_MARKERS = {
     "الأول", "الأولى", "الثاني", "الثانية", "أما", "بينما", "لكن", "مقابل",
     "تعني", "يعني", "تصف", "يصف", "التعليق", "الإلغاء", "وصفي", "سببي",
 }
+PUNCT = " .،؛:؟!"
 
 
 def norm(s: object) -> str:
@@ -51,9 +51,11 @@ def add(items: list[dict], code: str, **kw: object) -> None:
 
 
 def contrast_is_explanatory(answer: str, quoted_options: list[str]) -> bool:
-    na = norm(answer).strip(" .،؛:؟!")
-    # Literal reuse is obviously aligned.
-    if any(norm(option) in na for option in quoted_options):
+    na = norm(answer).strip(PUNCT)
+    # Literal reuse/selection is obviously aligned; strip punctuation on both
+    # sides so an answer such as «أين الحليب؟» is not rejected because the
+    # answer string was punctuation-normalized first.
+    if any(norm(option).strip(PUNCT) in na for option in quoted_options):
         return True
     words = set(ARWORD.findall(na))
     # A sufficiently substantive answer with explicit contrast/explanation
@@ -158,7 +160,7 @@ def main() -> None:
                         )
                         counts["contrast_answer_not_semantically_structured_for_quoted_options"] += 1
                         passages_flagged.add(pid)
-                    elif len(opts) >= 2 and not any(norm(o) in norm(answer) for o in opts):
+                    elif len(opts) >= 2 and not any(norm(o).strip(PUNCT) in norm(answer).strip(PUNCT) for o in opts):
                         add(
                             benign,
                             "contrast_surface_mismatch_but_explanatory",
@@ -178,10 +180,11 @@ def main() -> None:
                         counts["cloze_without_target_id"] += 1
                         passages_flagged.add(pid)
 
-            # Duplicate answers are only suspicious when the same answer is used
-            # across question roles where semantic duplication could indicate a
-            # repeated/weak item. Repeated grammatical-category labels (e.g.
-            # two independently correct answers of "اسم") are expected.
+            # Repeated answer text is retained as an informational diagnostic,
+            # not a blocker. Different questions can legitimately have the same
+            # answer (e.g. a literal item and a grammar-choice item, or two words
+            # that are both nouns). Duplicate prompts are checked separately and
+            # remain blocking.
             answer_groups: dict[str, list[dict]] = defaultdict(list)
             q_by_id = {str(q.get("id")): q for q in qs if isinstance(q, dict)}
             for a in row.get("answer_key", []):
@@ -199,29 +202,15 @@ def main() -> None:
             for answer_text, members in answer_groups.items():
                 if len(members) < 2:
                     continue
-                types = {str(m.get("type")) for m in members}
-                if types and types <= GRAMMAR_CATEGORY_TYPES:
-                    add(
-                        benign,
-                        "duplicate_grammar_category_answer_expected",
-                        level=level,
-                        passage_id=pid,
-                        answer=answer_text,
-                        questions=members,
-                    )
-                    benign_counts["duplicate_grammar_category_answer_expected"] += 1
-                else:
-                    add(
-                        unresolved,
-                        "duplicate_answer_text_within_passage",
-                        level=level,
-                        passage_id=pid,
-                        answer=answer_text,
-                        questions=members,
-                        passage_text=passage_text,
-                    )
-                    counts["duplicate_answer_text_within_passage"] += 1
-                    passages_flagged.add(pid)
+                add(
+                    benign,
+                    "duplicate_answer_text_nonblocking",
+                    level=level,
+                    passage_id=pid,
+                    answer=answer_text,
+                    questions=members,
+                )
+                benign_counts["duplicate_answer_text_nonblocking"] += 1
 
         level_summary[level] = {
             "passages": len(rows),
@@ -246,7 +235,6 @@ def main() -> None:
             "unresolved_review_flags": len(unresolved),
             "nonblocking_benign_diagnostics": len(benign),
             "raw_diagnostics": len(unresolved) + len(benign),
-            # compatibility for status tooling
             "review_flags": len(unresolved),
         },
         "flags": unresolved,
