@@ -1,0 +1,43 @@
+name: Remediate final Arabic Pass 03 C1-C2 synthesis
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/remediate_final_arabic_pass03_c1_c2_synthesis.py'
+      - '.github/workflows/remediate-final-arabic-pass03-c1-c2-synthesis.yml'
+permissions:
+  contents: write
+jobs:
+  remediate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Apply guarded C1-C2 synthesis remediation
+        run: python reading/tools/remediate_final_arabic_pass03_c1_c2_synthesis.py
+      - name: Re-run Pass 03 locally as a fail-closed postcondition
+        run: python reading/tools/final_audit_arabic_pass03_question_composition.py
+      - name: Assert C1 and C2 synthesis debt is zero
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path('reading/audit/final_arabic_pass03_question_composition.json').read_text(encoding='utf-8'))
+          for level in ('c1','c2'):
+              s=p['levels'][level]
+              if s['flagged_for_default_distribution'] != 0 or s['deficiency_categories'].get('synthesis',0) != 0:
+                  raise SystemExit(f'{level} Pass03 debt remains: {s}')
+          print('C1/C2 Pass03 synthesis postcondition: PASS')
+          PY
+      - name: Commit canonical remediation and refreshed Pass 03 artifact
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/arabic/c1/passages.jsonl reading/arabic/c2/passages.jsonl reading/audit/final_arabic_pass03_question_composition.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Remediate C1-C2 Pass 03 synthesis distribution [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
