@@ -1,243 +1,59 @@
 {
   "project": "Arabic, French, and Urdu graded reading curriculum A1-C2",
-  "updated": "2026-08-14",
+  "updated": "2026-08-16",
   "overall_status": "in_progress",
   "active_language": "Arabic",
-  "paused_for_new_curriculum": [
+  "paused_languages": [
     "French",
     "Urdu"
   ],
-  "phase": "Arabic A1-C2 generation is complete. Final multi-pass Arabic review is in progress; final approval remains blocked by question-composition, CEFR/length-and-coverage calibration, and unfinished A2-C2 manual naturalness review.",
+  "phase": "Arabic A1-C2 generation is complete. Arabic final multi-pass review is in the closing machine-gate phase; final approval remains false until fresh Pass 12 succeeds.",
   "target_passages": 1080,
   "target_is_quota": false,
-  "draft_passages": 372,
   "approved_passages": 0,
+  "source_of_truth_precedence": [
+    "live canonical JSONL on main",
+    "freshly regenerated audit artifacts",
+    "reading/STATUS.json",
+    "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md",
+    "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
+    "reading/planning/TEN_QUESTION_STANDARD.md and reading/schema/passage.schema.json",
+    "durable standards and roadmap",
+    "historical calibration instructions/artifacts"
+  ],
   "production_policy": {
     "mode": "GENERATE_FIRST_AUDIT_FINAL",
     "source": "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
-    "write_high_quality_initial_drafts": true,
-    "interrupt_generation_for_routine_audits": false,
-    "fix_obvious_severe_defects_during_generation": true,
-    "formal_audit_timing": "final review phase after the designated generation corpus/batch is complete",
-    "minimum_distinct_final_review_passes": 10
+    "current_execution_protocol": "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md",
+    "minimum_distinct_final_review_passes": 10,
+    "final_approval_fail_closed": true
   },
-  "arabic_a1": {
-    "passages": 60,
-    "units_generated": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-    ],
-    "questions_per_passage": 10,
-    "total_questions": 600,
-    "total_answers": 600,
-    "generation_state": "COMPLETE",
-    "themes": [
-      "people, place, and daily orientation",
-      "daily routine and time",
-      "food and simple choices",
-      "family and friends",
-      "school and basic work",
-      "directions and local travel",
-      "weather, clothes, and plans",
-      "health and basic needs",
-      "leisure and simple preferences",
-      "A1 cumulative mixed life"
-    ],
-    "unit01_prior_audit_evidence": {
-      "json_schema_valid_passages": 6,
-      "question_schema_gate": "PASS",
-      "linguistic_review": "PASS in the earlier Unit-01 review cycle",
-      "pedagogical_review": "PASS in the earlier Unit-01 review cycle",
-      "answer_key_check": "PASS in the earlier Unit-01 review cycle",
-      "supported_control_gate": "PASS; 6/6 passages, zero uncontrolled tokens under the documented curriculum-control definition; not a learner-mastery claim",
-      "exposure_ledger_gate": "PASS; 10 Unit-01 ranked targets recorded without assuming learner mastery"
+  "arabic": {
+    "canonical_passages": 360,
+    "levels": {
+      "a1": 60,
+      "a2": 60,
+      "b1": 60,
+      "b2": 60,
+      "c1": 60,
+      "c2": 60
     },
-    "formal_final_approval": "DEFERRED; final corpus approval occurs in the later 10+ pass audit phase"
-  },
-  "arabic_a2": {
-    "passages": 60,
-    "units_generated": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-    ],
-    "questions_per_passage": 10,
-    "total_questions": 600,
-    "total_answers": 600,
     "generation_state": "COMPLETE",
-    "formal_final_approval": "DEFERRED; final corpus approval occurs in the later 10+ pass audit phase"
-  },
-  "cross_language_a1": {
-    "arabic_canonical_passages": 60,
-    "french_canonical_passages": 6,
-    "urdu_canonical_passages": 6,
-    "french_questions_answers": "60/60",
-    "urdu_questions_answers": "60/60",
-    "formal_audit_state": "DEFERRED_UNTIL_GENERATION_PHASE_COMPLETE"
-  },
-  "arabic_phrase_exposure": {
-    "source_rows": 665,
-    "ledger_rows": 665,
-    "unique_fronts": 665,
-    "id_namespace": "ar-pNNN",
-    "build_gate": "PASS",
-    "reviewed_for_a1": 26,
-    "a1_eligible": 2,
-    "not_a1_current_review": 24,
-    "unreviewed": 639,
-    "a1_eligible_ids": [
-      "ar-p009",
-      "ar-p011"
-    ],
-    "a1_eligible_fronts": [
-      "لَا بَأْسَ",
-      "لَيْسَ هُنَاكَ"
-    ],
-    "learner_success_assumed": false,
-    "policy": "Phrase-bank row order is not a CEFR ranking. Only exact phrases explicitly reviewed for the relevant learner level may be deliberately introduced as phrase targets."
-  },
-  "flashcard_policy": {
-    "current_description": "Arabic ranked vocabulary 1-3000 is educator-cleared under the stricter source-aware second pass; Arabic phrase bank is semantically cleared 665/665. Frequency rank is a selection aid, not a CEFR assignment.",
-    "reader_used_sense_must_be_second_pass_verified": true,
-    "frequency_rank_is_not_cefr_level": true
-  },
-  "arabic_second_pass": {
-    "ranks_1_100": "EDUCATOR_CLEARED; zero unresolved ranks",
-    "ranks_101_500": "EDUCATOR_CLEARED; 400/400 manually reviewed, zero unresolved ranks",
-    "ranks_501_1000": "EDUCATOR_CLEARED_SOURCE_TIGHT; zero unresolved ranks; live attestation PASS",
-    "ranks_1001_3000": "EDUCATOR_CLEARED_MODERN_SENSE; zero block/review rows; live attestation PASS",
-    "ranks_1_3000": "EDUCATOR_CLEARED under the stricter source-aware second-pass standard",
-    "phrase_bank": "PASS semantically; curriculum-level CEFR placement remains a separate explicit review layer"
-  },
-  "important_files": [
-    "reading/AGENT_HANDOFF.md",
-    "reading/ROADMAP.md",
-    "reading/TASKS.md",
-    "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
-    "reading/planning/TEN_QUESTION_STANDARD.md",
-    "reading/planning/ARABIC_FIRST_LANGUAGE_PIPELINE.md",
-    "reading/planning/topic_genre_matrix.json",
-    "reading/planning/grammar_discourse_inventory.json",
-    "reading/arabic/a1/passages.jsonl",
-    "reading/french/a1/passages.jsonl",
-    "reading/urdu/a1/passages.jsonl",
-    "reading/arabic/a2/passages.jsonl",
-    "reading/arabic/b1/passages.jsonl",
-    "reading/tools/update_generation_status.py",
-    "reading/arabic/b2/passages.jsonl",
-    "reading/arabic/c1/passages.jsonl",
-    "reading/arabic/c2/passages.jsonl",
-    "reading/audit/final_arabic_pass12_adversarial_gate_falsification.json",
-    "reading/audit/final_arabic_pass11_naturalness_review.json",
-    "reading/audit/final_arabic_pass07_cefr_difficulty_calibration.json",
-    "reading/audit/final_arabic_pass03_question_composition.json",
-    "reading/audit/final_arabic_pass10_adjudication.json",
-    "reading/tools/update_arabic_final_review_status.py"
-  ],
-  "next_actions": [
-    "continue Pass 11 manual Arabic naturalness review from A2 through C2, recording and repairing only high-confidence defects",
-    "resolve Pass 07 by recalibrating passage lengths to the documented CEFR production bands and measuring known-token coverage after text stabilization",
-    "resolve Pass 03 with passage-specific question-set revisions where documented grammar/style or synthesis coverage is pedagogically weak; do not mass-template questions merely to satisfy quotas",
-    "rerun dependent mechanical, lexical, evidence, and adversarial gates after substantive text/question revisions; do not grant final approval until Pass 12 has no blockers"
-  ],
-  "generation_guardrail": "Preserve the roadmap architecture, spaced-reinforcement intent, language-specific naturalness, and ten-question standard while prioritizing passage production. Earlier conservative audit-before-scaling gates are superseded in ordering by GENERATION_FIRST_FINAL_AUDIT_POLICY.md; their quality criteria remain mandatory at final review.",
-  "arabic_b1": {
-    "passages": 60,
-    "units_generated": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-    ],
     "questions_per_passage": 10,
-    "total_questions": 600,
-    "total_answers": 600,
-    "generation_state": "COMPLETE",
-    "formal_final_approval": "DEFERRED; final corpus approval occurs in the later 10+ pass audit phase"
+    "total_questions": 3600,
+    "total_answers": 3600,
+    "formal_final_approval": false
   },
-  "arabic_b2": {
-    "passages": 60,
-    "units_generated": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-    ],
-    "questions_per_passage": 10,
-    "total_questions": 600,
-    "total_answers": 600,
-    "generation_state": "COMPLETE",
-    "formal_final_approval": "DEFERRED; final corpus approval occurs in the later 10+ pass audit phase"
-  },
-  "arabic_c1": {
-    "passages": 60,
-    "units_generated": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-    ],
-    "questions_per_passage": 10,
-    "total_questions": 600,
-    "total_answers": 600,
-    "generation_state": "COMPLETE",
-    "formal_final_approval": "DEFERRED; final corpus approval occurs in the later 10+ pass audit phase"
-  },
-  "arabic_c2": {
-    "passages": 60,
-    "units_generated": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-    ],
-    "questions_per_passage": 10,
-    "total_questions": 600,
-    "total_answers": 600,
-    "generation_state": "COMPLETE",
-    "formal_final_approval": "DEFERRED; final corpus approval occurs in the later 10+ pass audit phase"
+  "other_languages": {
+    "french": {
+      "state": "PAUSED_WHILE_ARABIC_FINAL_REVIEW_CLOSES"
+    },
+    "urdu": {
+      "state": "PAUSED_WHILE_ARABIC_FINAL_REVIEW_CLOSES"
+    }
   },
   "arabic_final_review": {
-    "phase": "IN_PROGRESS",
+    "phase": "CLOSING_MACHINE_GATES",
     "minimum_distinct_passes_required": 10,
     "distinct_passes_recorded": 12,
     "pass_status": {
@@ -247,88 +63,96 @@
       "pass04": "REVIEW_REQUIRED",
       "pass05": "PASS",
       "pass06": "PASS",
-      "pass07": "REVIEW_REQUIRED",
+      "pass07": "PASS",
       "pass08": "PASS",
       "pass09": "PASS",
       "pass10": "PASS_WITH_SOURCE_ADJUDICATION",
-      "pass11": "IN_PROGRESS",
+      "pass11": "COMPLETE",
       "pass12": "BLOCKED"
     },
-    "hard_regressions": [],
-    "approval_blockers": [
-      {
-        "gate": "pass03_question_composition",
-        "status": "REVIEW_REQUIRED",
-        "reason": "documented question-distribution defaults remain underrepresented, especially B1-C2 grammar/style and synthesis"
+    "current_actionable_state": {
+      "pass03": {
+        "review_flags": 8,
+        "scope": "A2 only",
+        "deficit": "lexical question-composition minimum",
+        "note": "All A1 and B1-C2 Pass 03 composition debt is closed. The remaining eight cases are late-A2 transfer/cumulative passages."
       },
-      {
-        "gate": "pass07_cefr_difficulty",
-        "status": "REVIEW_REQUIRED",
-        "reason": "length calibration and known-token coverage remain unresolved; B1-C2 are materially below written production bands"
+      "pass04": {
+        "review_flags": 52,
+        "kind": "conservative diagnostics",
+        "note": "Many flags are expected classifier false-positive candidates, especially repeated grammatical-category answers and surface-overlap heuristics. Adjudicate the diagnostic before changing content."
       },
-      {
-        "gate": "pass11_manual_naturalness",
-        "status": "IN_PROGRESS",
-        "reason": "manual naturalness review is complete only for A1; A2-C2 remain pending"
-      }
-    ],
-    "manual_naturalness_progress": {
-      "a1": {
-        "passages_reviewed": 60,
-        "passages_total": 60,
-        "review_complete": true,
-        "high_confidence_repairs_applied": 28,
-        "passages_touched": 26,
-        "repair_sources": [
-          "reading/tools/repair_final_arabic_a1_u07_p03_tatweel_typo.py",
-          "reading/tools/repair_final_arabic_a1_u07_p03_forecast_naturalness.py",
-          "reading/tools/repair_final_arabic_pass11_a1_naturalness_batch.py"
-        ],
-        "status": "PASS_AFTER_REPAIR"
+      "pass07": {
+        "review_flags": 0,
+        "status": "PASS",
+        "coverage_metric": "UNMEASURED_NOT_FAILURE",
+        "coverage_unmeasured_passages": 360
       },
-      "a2": {
-        "passages_reviewed": 0,
-        "passages_total": 60,
-        "review_complete": false,
-        "status": "PENDING"
+      "pass11": {
+        "status": "COMPLETE",
+        "passages_reviewed": 360,
+        "levels_complete": 6
       },
-      "b1": {
-        "passages_reviewed": 0,
-        "passages_total": 60,
-        "review_complete": false,
-        "status": "PENDING"
-      },
-      "b2": {
-        "passages_reviewed": 1,
-        "passages_total": 60,
-        "review_complete": false,
-        "status": "PENDING",
-        "note": "One independently detected comparative-naturalness defect in ar-b2-u04-p06 was already repaired; full level manual pass remains pending."
-      },
-      "c1": {
-        "passages_reviewed": 0,
-        "passages_total": 60,
-        "review_complete": false,
-        "status": "PENDING"
-      },
-      "c2": {
-        "passages_reviewed": 1,
-        "passages_total": 60,
-        "review_complete": false,
-        "status": "PENDING",
-        "note": "ar-c2-u01-p03 received a separate lexical-sense/naturalness normalization for مبرر; full level manual pass remains pending."
+      "pass12": {
+        "status": "BLOCKED",
+        "freshness": "STALE_RELATIVE_TO_CURRENT_UPSTREAM_STATE",
+        "note": "Persisted blocker text still refers to obsolete Pass 07 and Pass 11 states. Pass 12 must be repaired/refreshed last."
       }
     },
-    "final_approval": false,
-    "adversarial_gate": "BLOCKED_WITHOUT_HARD_REGRESSION",
-    "key_clean_gates": [
+    "final_refresh_required_before_approval": [
       "pass01",
       "pass02",
+      "pass03",
+      "pass04",
       "pass05",
       "pass06",
+      "pass07",
       "pass08",
-      "pass09"
+      "pass09",
+      "pass10",
+      "pass11",
+      "pass12"
     ],
-    "source_adjudicated_gate": "pass10"
+    "final_approval": false
+  },
+  "manual_naturalness": {
+    "status": "COMPLETE",
+    "passages_reviewed": 360,
+    "levels_complete": 6,
+    "post_pass07_a1_a2_recheck_passages": 66
+  },
+  "coverage_metric": {
+    "status": "UNMEASURED",
+    "passages_unmeasured": 360,
+    "interpretation": "The current zero field values are placeholders and must not be treated as measured 0% coverage."
+  },
+  "next_actions": [
+    "resolve the eight residual A2 Pass 03 lexical-composition cases using already scheduled review vocabulary; do not invent new lexical targets",
+    "adjudicate and repair the Pass 04 diagnostic logic before editing answers; separate false positives from genuine evidence/alignment defects",
+    "remediate any genuine Pass 04 defects in one guarded batch",
+    "regenerate all final audit artifacts sequentially from current canonical data",
+    "repair Pass 12 so it includes Pass 04, accepts Pass 11 COMPLETE, and derives blocker reasons from live upstream artifacts",
+    "grant final approval only if fresh Pass 12 returns PASS"
+  ],
+  "important_files": [
+    "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md",
+    "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
+    "reading/planning/TEN_QUESTION_STANDARD.md",
+    "reading/AGENT_HANDOFF.md",
+    "reading/TASKS.md",
+    "docs/READING_PASSAGE_STANDARD.md",
+    "reading/schema/passage.schema.json",
+    "reading/audit/final_arabic_pass03_question_composition.json",
+    "reading/audit/final_arabic_pass04_answer_evidence_alignment.json",
+    "reading/audit/final_arabic_pass07_cefr_difficulty_calibration.json",
+    "reading/audit/final_arabic_pass11_naturalness_review.json",
+    "reading/audit/final_arabic_pass12_adversarial_gate_falsification.json"
+  ],
+  "parallel_agent_rules": {
+    "verify_live_main_before_write_batch": true,
+    "prefer_non_overlapping_units_or_files": true,
+    "source_state_assertions_required_for_large_mutations": true,
+    "serialize_workflows_that_push_the_same_audit_artifact": true,
+    "do_not_rely_on_recursive_GITHUB_TOKEN_workflow_triggers": true
   }
 }
