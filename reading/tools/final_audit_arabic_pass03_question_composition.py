@@ -4,9 +4,8 @@
 Compares question-role mixes with the documented Ten-Question Standard. The
 standard describes default distributions, so deviations are REVIEW flags rather
 than automatic failures. A single well-designed question may legitimately serve
-more than one pedagogical role (for example, a connective-function question is
-both grammar/style and discourse analysis). This pass does not judge individual
-answer correctness; that is handled separately by Pass 04.
+more than one pedagogical role. This pass does not judge individual answer
+correctness; that is handled separately by Pass 04.
 """
 from __future__ import annotations
 
@@ -22,24 +21,14 @@ COMPREHENSION = {"gist", "literal_detail", "sequence", "cause_effect", "referenc
 INFERENCE = {"inference", "motive", "stance", "assumption", "ambiguity_resolution", "argument_relation"}
 LEXICAL = {"vocabulary_in_context", "single_word_definition", "cloze_transfer", "register_style"}
 GRAMMAR_STYLE = {"grammar_in_context", "grammar_category", "grammar_choice", "grammar_identification", "grammar_function", "person_form", "contrast", "register_style"}
-# Multi-role classification is intentional. Questions about the function of a
-# connective or an explicit contrast can test grammar/form while also testing
-# cohesion, discourse relation, or rhetorical organization. Excluding those
-# labels from discourse produced false deficits in otherwise valid B2-C2 sets.
 DISCOURSE = {
     "main_claim", "argument_relation", "stance", "tone", "rhetorical_function",
     "assumption", "ambiguity_resolution", "reference_resolution", "register_style",
     "grammar_function", "contrast",
 }
 SYNTHESIS = {"paraphrase", "summary", "synthesis", "cross_text_synthesis"}
-# vocabulary_in_context is passage-linked by schema/standard definition and is
-# therefore passage-centred as well as lexical. Generic single-word definition
-# and transfer cloze items remain outside this set.
 PASSAGE_CENTERED = COMPREHENSION | INFERENCE | DISCOURSE | SYNTHESIS | {"vocabulary_in_context"}
 
-# Broad minima derived from the documented default distributions. They are
-# intentionally not exact quotas: Pass 03 flags pedagogically material gaps
-# without rejecting legitimate alternate mixes.
 MINIMA = {
     "a1": {"passage_centered": 3, "lexical": 2, "grammar_style": 2},
     "a2": {"passage_centered": 4, "lexical": 2, "grammar_style": 2},
@@ -50,14 +39,35 @@ MINIMA = {
 }
 
 
-def counts(types: list[str]) -> dict[str, int]:
+def target_ids(q: dict) -> list[str]:
+    raw = q.get("target_ids", [])
+    return [str(x) for x in raw] if isinstance(raw, list) else []
+
+
+def is_lexical_role(q: dict) -> bool:
+    """Return whether a question genuinely tests a lexical role.
+
+    Most lexical roles are encoded directly by type. A contrast item is also
+    lexical when it explicitly binds lexical review/target IDs (ar-r...), e.g.
+    choosing which of two scheduled words means 'part of a group'. This avoids
+    treating semantic discrimination as non-lexical merely because the schema
+    has one primary type field.
+    """
+    t = str(q.get("type", ""))
+    if t in LEXICAL:
+        return True
+    return t == "contrast" and any(tid.startswith("ar-r") for tid in target_ids(q))
+
+
+def counts(qs: list[dict]) -> dict[str, int]:
+    types = [str(q.get("type", "")) for q in qs]
     s = set(types)
     return {
         "passage_centered": sum(t in PASSAGE_CENTERED for t in types),
         "comprehension": sum(t in COMPREHENSION for t in types),
         "inference": sum(t in INFERENCE for t in types),
         "comprehension_inference": sum(t in (COMPREHENSION | INFERENCE) for t in types),
-        "lexical": sum(t in LEXICAL for t in types),
+        "lexical": sum(is_lexical_role(q) for q in qs),
         "grammar_style": sum(t in GRAMMAR_STYLE for t in types),
         "discourse": sum(t in DISCOURSE for t in types),
         "synthesis": sum(t in SYNTHESIS for t in types),
@@ -81,10 +91,10 @@ def main() -> None:
         lexical_quiz_heavy = 0
 
         for row in rows:
-            qs = row.get("questions", [])
-            types = [str(q.get("type", "")) for q in qs if isinstance(q, dict)]
+            qs = [q for q in row.get("questions", []) if isinstance(q, dict)]
+            types = [str(q.get("type", "")) for q in qs]
             type_counter.update(types)
-            c = counts(types)
+            c = counts(qs)
             deficits = {
                 category: {"minimum": minimum, "actual": c.get(category, 0)}
                 for category, minimum in MINIMA[level].items()
@@ -134,11 +144,11 @@ def main() -> None:
         "name": "question_composition_against_ten_question_standard",
         "scope": "Arabic A1-C2 canonical reading corpus",
         "reference": "reading/planning/TEN_QUESTION_STANDARD.md",
-        "interpretation": "diagnostic only: documented distributions are defaults; overlapping pedagogical roles are counted where the question type genuinely encodes both roles",
+        "interpretation": "diagnostic only: documented distributions are defaults; overlapping pedagogical roles are counted where question semantics/schema metadata genuinely encode both roles",
         "classification_notes": {
             "vocabulary_in_context": "counts as lexical and passage-centred",
             "grammar_function": "counts as grammar/style and discourse because it tests connective/structural function",
-            "contrast": "counts as grammar/style and discourse because it tests an explicit contrast relation",
+            "contrast": "counts as grammar/style and discourse; additionally counts as lexical only when explicit ar-r lexical target IDs make it a scheduled semantic-discrimination task",
         },
         "levels": level_summaries,
         "totals": {"passages": total_passages, "review_flags": len(flags)},
