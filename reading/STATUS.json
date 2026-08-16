@@ -59,7 +59,7 @@
     "pass_status": {
       "pass01": "PASS",
       "pass02": "PASS",
-      "pass03": "REVIEW_REQUIRED",
+      "pass03": "PASS",
       "pass04": "REVIEW_REQUIRED",
       "pass05": "PASS",
       "pass06": "PASS",
@@ -71,11 +71,6 @@
       "pass12": "BLOCKED"
     },
     "current_upstream_blockers": [
-      {
-        "gate": "pass03_question_composition",
-        "status": "REVIEW_REQUIRED",
-        "reason": "question-composition audit still has 8 review flags"
-      },
       {
         "gate": "pass04_answer_evidence_alignment",
         "status": "REVIEW_REQUIRED",
@@ -200,7 +195,6 @@
     "interpretation": "The current zero field values are placeholders and must not be treated as measured 0% coverage."
   },
   "next_actions": [
-    "resolve current Pass 03 question-composition flags in one guarded batch and rerun Pass 03 + Pass 04",
     "adjudicate Pass 04 diagnostics before editing content; repair only genuine answer/evidence defects",
     "repair/refresh Pass 12 after upstream gates close; Pass 12 must include Pass 04 and accept Pass 11 COMPLETE",
     "regenerate the full final audit suite sequentially immediately before the final Pass 12 attempt"
