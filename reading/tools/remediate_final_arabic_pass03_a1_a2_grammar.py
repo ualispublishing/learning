@@ -33,15 +33,29 @@ def lexical_role(q: dict) -> bool:
 
 
 def pos_answer(raw: object) -> str | None:
-    """Map only high-confidence POS metadata to an Arabic category answer."""
+    """Map only high-confidence POS metadata to an Arabic category answer.
+
+    Slash-delimited labels are not automatically ambiguous: the lexical ledger
+    sometimes records two equivalent descriptive labels for one grammatical
+    category (for example ``imperfect / present verb``). Recognized equivalent
+    pairs are mapped before the mixed-category rejection. Truly different
+    categories such as ``noun / adjective`` remain fail-closed.
+    """
     if not isinstance(raw, str) or not raw.strip():
         return None
     p = raw.strip().lower()
-    # Reject explicitly mixed alternatives; another candidate may be available.
-    if " / " in p or " or " in p:
-        return None
+
+    # Equivalent/synonymous labels that name one grammatical category.
     if "elative" in p or "comparative-superlative" in p:
         return "اسم تفضيل"
+    if "imperfect" in p or "present verb" in p:
+        return "فعل مضارع"
+    if "perfect verb" in p or "past verb" in p:
+        return "فعل ماضٍ"
+
+    # Any remaining slash/or expression is treated as genuinely ambiguous.
+    if " / " in p or " or " in p:
+        return None
     if "interrogative" in p:
         return "أداة استفهام"
     if "relative pronoun" in p:
@@ -60,10 +74,6 @@ def pos_answer(raw: object) -> str | None:
         return "ظرف زمان"
     if "adverb" in p:
         return "ظرف"
-    if "imperfect" in p or "present verb" in p:
-        return "فعل مضارع"
-    if "perfect verb" in p or "past verb" in p:
-        return "فعل ماضٍ"
     if "imperative" in p:
         return "فعل أمر"
     if "verb" in p:
@@ -157,7 +167,14 @@ def main() -> None:
                     candidates.append((q, tid, form.strip(), answer))
 
             if not candidates:
-                all_defs = [(q.get("id"), q.get("target_ids")) for q in qs if q.get("type") == "single_word_definition"]
+                all_defs = [
+                    {
+                        "question_id": q.get("id"),
+                        "target_ids": q.get("target_ids"),
+                        "part_of_speech": meta.get(str((q.get("target_ids") or [""])[0]), {}).get("part_of_speech") if isinstance(q.get("target_ids"), list) and len(q.get("target_ids")) == 1 else None,
+                    }
+                    for q in qs if q.get("type") == "single_word_definition"
+                ]
                 raise AssertionError(f"{row.get('id')}: no unambiguous redundant definition candidate; definitions={all_defs}")
 
             q, tid, form, category_answer = candidates[0]
