@@ -76,11 +76,18 @@ jobs:
           if adj10.get('status') != 'PASS_WITH_SOURCE_ADJUDICATION' or adj10.get('unresolved'):
             raise SystemExit(f'Pass10 adjudication not closed: {adj10}')
           raw_keys={(str(x.get('passage_id')),str(x.get('target_id'))) for x in raw10.get('flags',[]) if isinstance(x,dict)}
-          adj_keys={(str(x.get('passage_id')),str(x.get('target_id'))) for x in adj10.get('adjudications',[]) if isinstance(x,dict)}
+          active_adj=adj10.get('current_raw_adjudications',[])
+          adj_keys={(str(x.get('passage_id')),str(x.get('target_id'))) for x in active_adj if isinstance(x,dict)}
           if raw_keys != adj_keys:
-            raise SystemExit(f'Pass10 raw/adjudication drift: raw_only={sorted(raw_keys-adj_keys)} adjudication_only={sorted(adj_keys-raw_keys)}')
-          if raw10.get('totals',{}).get('review_flags') != len(raw_keys):
-            raise SystemExit(f'Pass10 raw total/key mismatch: {raw10.get("totals")} keys={len(raw_keys)}')
+            raise SystemExit(f'Pass10 current raw/adjudication drift: raw_only={sorted(raw_keys-adj_keys)} adjudication_only={sorted(adj_keys-raw_keys)}')
+          if raw10.get('totals',{}).get('review_flags') != len(raw_keys) or adj10.get('current_raw_flag_count') != len(raw_keys):
+            raise SystemExit(f'Pass10 raw/adjudication count mismatch: raw={raw10.get("totals")} ledger={adj10.get("current_raw_flag_count")} keys={len(raw_keys)}')
+          historical=adj10.get('historical_resolved_after_canonical_repair',[])
+          if len(historical) != 1 or historical[0].get('decision') != 'ACCEPT_AFTER_CANONICAL_REPAIR' or historical[0].get('current_raw_detector_state') != 'NO_LONGER_FLAGGED':
+            raise SystemExit(f'Pass10 repaired historical entry malformed: {historical}')
+          hist_key=(str(historical[0].get('passage_id')),str(historical[0].get('target_id')))
+          if hist_key in raw_keys:
+            raise SystemExit(f'Pass10 historically repaired item reappeared in raw queue: {hist_key}')
 
           p11=json.loads((root/'final_arabic_pass11_naturalness_review.json').read_text(encoding='utf-8'))
           if p11.get('status') not in {'PASS','COMPLETE'}:
@@ -95,6 +102,7 @@ jobs:
             'pass07': p7.get('totals'),
             'pass10_raw_flags': len(raw_keys),
             'pass10_adjudication': adj10.get('status'),
+            'pass10_historical_repaired': len(historical),
             'pass11': p11.get('status'),
           }, ensure_ascii=False))
           PY
