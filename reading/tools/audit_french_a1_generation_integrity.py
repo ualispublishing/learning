@@ -50,6 +50,11 @@ def main():
  if ovs!=OV:bad.append(f'override set {sorted(ovs)}')
  units={str(u):{'passages':sum(r['unit']==u for r in rows),'new_targets':sum(len(r.get('new_lexical_targets',[])) for r in rows if r['unit']==u)} for u in range(1,11)}
  payload={'status':'PASS' if not bad else 'FAIL','scope':'French A1 generation milestone','passages':len(rows),'questions':sum(len(r['questions']) for r in rows),'answers':sum(len(r['answer_key']) for r in rows),'new_targets':len(seen),'verified_sense_overrides':[{'passage_id':p,'form':f} for p,f in sorted(ovs)],'units':units,'failures':bad,'coverage_note':'estimated_known_token_coverage remains unmeasured placeholder data; no percentage is inferred','full_final_audit_deferred':True}
- OUT.parent.mkdir(parents=True,exist_ok=True);OUT.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');print(json.dumps({'status':payload['status'],'failures':len(bad)},ensure_ascii=False))
- if bad:raise SystemExit(1)
+ OUT.parent.mkdir(parents=True,exist_ok=True);OUT.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+ print(json.dumps({'status':payload['status'],'failures':len(bad)},ensure_ascii=False))
+ if bad:
+  print('FRENCH_A1_INTEGRITY_FAILURES_BEGIN')
+  for i,item in enumerate(bad,1): print(f'{i:02d}. {item}')
+  print('FRENCH_A1_INTEGRITY_FAILURES_END')
+  raise SystemExit(1)
 if __name__=='__main__':main()
