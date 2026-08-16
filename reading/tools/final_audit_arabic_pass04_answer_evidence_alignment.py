@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Final Arabic review pass 04: answer/evidence alignment diagnostics.
 
-This pass is deliberately two-stage:
-1. conservative heuristics identify review candidates;
-2. classifier-safe benign cases are retained as non-blocking diagnostics while
-   unresolved semantic/evidence candidates remain blocking.
+Two-stage/fail-closed model:
+1. conservative heuristics generate candidates;
+2. classifier-safe benign cases and explicit reviewed adjudications are retained
+   as non-blocking evidence, while unresolved candidates remain blocking.
 
 A surface mismatch is never, by itself, a claim that an answer is wrong.
 """
@@ -19,6 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 LEVELS = ("a1", "a2", "b1", "b2", "c1", "c2")
 OUT = ROOT / "reading/audit/final_arabic_pass04_answer_evidence_alignment.json"
+ADJ = ROOT / "reading/audit/final_arabic_pass04_adjudications.json"
 DIAC = re.compile(r"[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED]")
 ARWORD = re.compile(r"[\u0621-\u064A]+")
 QUOTED = re.compile(r"«([^»]+)»")
@@ -50,31 +51,33 @@ def add(items: list[dict], code: str, **kw: object) -> None:
     items.append({"code": code, **kw})
 
 
+def candidate_key(item: dict) -> str:
+    return "|".join([
+        str(item.get("code", "")),
+        str(item.get("level", "")),
+        str(item.get("passage_id", "")),
+        str(item.get("question_id", "")),
+    ])
+
+
 def contrast_is_explanatory(answer: str, quoted_options: list[str]) -> bool:
     na = norm(answer).strip(PUNCT)
-    # Literal reuse/selection is obviously aligned; strip punctuation on both
-    # sides so an answer such as «أين الحليب؟» is not rejected because the
-    # answer string was punctuation-normalized first.
     if any(norm(option).strip(PUNCT) in na for option in quoted_options):
         return True
     words = set(ARWORD.findall(na))
-    # A sufficiently substantive answer with explicit contrast/explanation
-    # structure is not suspicious merely because it paraphrases the options.
     return len(toks(answer)) >= 3 and bool(words & CONTRAST_EXPLANATION_MARKERS or na.startswith("لا"))
 
 
 def main() -> None:
-    unresolved: list[dict] = []
+    raw_unresolved: list[dict] = []
     benign: list[dict] = []
-    level_summary: dict[str, dict] = {}
     total_q = 0
+    passage_counts: dict[str, int] = {}
 
     for level in LEVELS:
         path = ROOT / f"reading/arabic/{level}/passages.jsonl"
         rows = [json.loads(x) for x in path.read_text(encoding="utf-8").splitlines() if x.strip()]
-        counts = Counter()
-        benign_counts = Counter()
-        passages_flagged: set[str] = set()
+        passage_counts[level] = len(rows)
 
         for row in rows:
             pid = str(row["id"])
@@ -98,26 +101,20 @@ def main() -> None:
                 np = " ".join(norm(prompt).split())
 
                 if np in seen_prompts:
-                    add(unresolved, "duplicate_prompt_within_passage", level=level, passage_id=pid, question_id=qid, prompt=prompt)
-                    counts["duplicate_prompt_within_passage"] += 1
-                    passages_flagged.add(pid)
+                    add(raw_unresolved, "duplicate_prompt_within_passage", level=level, passage_id=pid, question_id=qid, prompt=prompt)
                 seen_prompts.add(np)
 
                 if not answer.strip():
-                    add(unresolved, "empty_answer", level=level, passage_id=pid, question_id=qid)
-                    counts["empty_answer"] += 1
-                    passages_flagged.add(pid)
+                    add(raw_unresolved, "empty_answer", level=level, passage_id=pid, question_id=qid)
                     continue
 
                 if " ".join(norm(answer).split()) == np:
-                    add(unresolved, "answer_equals_prompt", level=level, passage_id=pid, question_id=qid)
-                    counts["answer_equals_prompt"] += 1
-                    passages_flagged.add(pid)
+                    add(raw_unresolved, "answer_equals_prompt", level=level, passage_id=pid, question_id=qid)
 
                 at = toks(answer)
                 if typ in DIRECT and at and text_tokens and not (set(at) & text_tokens):
                     add(
-                        unresolved,
+                        raw_unresolved,
                         "direct_answer_zero_content_overlap_with_passage",
                         level=level,
                         passage_id=pid,
@@ -127,12 +124,10 @@ def main() -> None:
                         answer=answer,
                         passage_text=passage_text,
                     )
-                    counts["direct_answer_zero_content_overlap_with_passage"] += 1
-                    passages_flagged.add(pid)
 
                 if typ in LONG and len(at) < 2:
                     add(
-                        unresolved,
+                        raw_unresolved,
                         "high_level_answer_extremely_short",
                         level=level,
                         passage_id=pid,
@@ -142,14 +137,12 @@ def main() -> None:
                         answer=answer,
                         content_tokens=at,
                     )
-                    counts["high_level_answer_extremely_short"] += 1
-                    passages_flagged.add(pid)
 
                 if typ == "contrast":
                     opts = QUOTED.findall(prompt)
                     if len(opts) >= 2 and not contrast_is_explanatory(answer, opts):
                         add(
-                            unresolved,
+                            raw_unresolved,
                             "contrast_answer_not_semantically_structured_for_quoted_options",
                             level=level,
                             passage_id=pid,
@@ -158,8 +151,6 @@ def main() -> None:
                             answer=answer,
                             quoted_options=opts,
                         )
-                        counts["contrast_answer_not_semantically_structured_for_quoted_options"] += 1
-                        passages_flagged.add(pid)
                     elif len(opts) >= 2 and not any(norm(o).strip(PUNCT) in norm(answer).strip(PUNCT) for o in opts):
                         add(
                             benign,
@@ -170,21 +161,16 @@ def main() -> None:
                             prompt=prompt,
                             answer=answer,
                             quoted_options=opts,
+                            resolution="AUTO_BENIGN_EXPLANATORY_CONTRAST",
                         )
-                        benign_counts["contrast_surface_mismatch_but_explanatory"] += 1
 
                 if typ == "cloze_transfer":
                     tids = q.get("target_ids", []) if isinstance(q.get("target_ids"), list) else []
                     if not tids:
-                        add(unresolved, "cloze_without_target_id", level=level, passage_id=pid, question_id=qid, prompt=prompt, answer=answer)
-                        counts["cloze_without_target_id"] += 1
-                        passages_flagged.add(pid)
+                        add(raw_unresolved, "cloze_without_target_id", level=level, passage_id=pid, question_id=qid, prompt=prompt, answer=answer)
 
-            # Repeated answer text is retained as an informational diagnostic,
-            # not a blocker. Different questions can legitimately have the same
-            # answer (e.g. a literal item and a grammar-choice item, or two words
-            # that are both nouns). Duplicate prompts are checked separately and
-            # remain blocking.
+            # Duplicate answer text alone is nonblocking. Duplicate prompts are
+            # independently detected above and remain blocking.
             answer_groups: dict[str, list[dict]] = defaultdict(list)
             q_by_id = {str(q.get("id")): q for q in qs if isinstance(q, dict)}
             for a in row.get("answer_key", []):
@@ -209,36 +195,70 @@ def main() -> None:
                     passage_id=pid,
                     answer=answer_text,
                     questions=members,
+                    resolution="AUTO_BENIGN_DUPLICATE_ANSWER_ONLY",
                 )
-                benign_counts["duplicate_answer_text_nonblocking"] += 1
 
+    adj_payload = json.loads(ADJ.read_text(encoding="utf-8")) if ADJ.exists() else {"adjudications": {}}
+    adjudications = adj_payload.get("adjudications", {})
+    if not isinstance(adjudications, dict):
+        raise AssertionError("Pass 04 adjudications must be an object keyed by candidate id")
+
+    unresolved: list[dict] = []
+    matched_adjudications: set[str] = set()
+    for item in raw_unresolved:
+        key = candidate_key(item)
+        decision = adjudications.get(key)
+        if isinstance(decision, dict) and decision.get("resolution") == "PASS_SUPPORTED":
+            matched_adjudications.add(key)
+            benign.append({
+                **item,
+                "code": "manually_adjudicated_surface_candidate",
+                "original_code": item.get("code"),
+                "candidate_key": key,
+                "resolution": "MANUAL_PASS_SUPPORTED",
+                "adjudication_reason": decision.get("reason", ""),
+            })
+        else:
+            unresolved.append(item)
+
+    stale_adjudications = sorted(set(adjudications) - matched_adjudications)
+
+    level_summary: dict[str, dict] = {}
+    for level in LEVELS:
+        u = [x for x in unresolved if x.get("level") == level]
+        b = [x for x in benign if x.get("level") == level]
         level_summary[level] = {
-            "passages": len(rows),
-            "flagged_passages": len(passages_flagged),
-            "unresolved_by_code": dict(counts),
-            "nonblocking_benign_by_code": dict(benign_counts),
+            "passages": passage_counts[level],
+            "flagged_passages": len({str(x.get("passage_id")) for x in u}),
+            "unresolved_by_code": dict(Counter(str(x.get("code")) for x in u)),
+            "nonblocking_benign_by_code": dict(Counter(str(x.get("code")) for x in b)),
         }
 
     payload = {
         "pass": 4,
         "name": "answer_evidence_alignment_diagnostics",
         "scope": "Arabic A1-C2 canonical reading corpus",
-        "method": "conservative candidate detection with nonblocking classifier-safe benign classes; unresolved surface candidates retain passage context for explicit semantic adjudication",
+        "method": "conservative candidate detection plus explicit manual adjudication; classifier-safe benign diagnostics remain visible and only unresolved semantic/evidence candidates block",
         "not_claimed": [
             "semantic incorrectness from zero lexical overlap",
             "morphological equivalence from raw token overlap",
             "full answer-key correctness without adjudication",
         ],
+        "adjudication_source": "reading/audit/final_arabic_pass04_adjudications.json",
         "levels": level_summary,
         "totals": {
             "questions": total_q,
+            "raw_blocking_candidates_before_adjudication": len(raw_unresolved),
+            "manual_adjudications_applied": len(matched_adjudications),
+            "stale_adjudications": len(stale_adjudications),
             "unresolved_review_flags": len(unresolved),
             "nonblocking_benign_diagnostics": len(benign),
-            "raw_diagnostics": len(unresolved) + len(benign),
+            "raw_diagnostics": len(raw_unresolved) + len([x for x in benign if x.get("resolution", "").startswith("AUTO_")]),
             "review_flags": len(unresolved),
         },
         "flags": unresolved,
         "nonblocking_benign_diagnostics": benign,
+        "stale_adjudication_keys": stale_adjudications,
         "status": "PASS" if not unresolved else "REVIEW_REQUIRED",
     }
     OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
