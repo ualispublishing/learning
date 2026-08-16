@@ -1,0 +1,95 @@
+{
+  "pass": 4,
+  "name": "answer_evidence_alignment_manual_adjudications",
+  "scope": "Arabic A1-C2 Pass 04 surface candidates",
+  "reviewed": "2026-08-16",
+  "policy": "A raw zero-token-overlap or contrast-surface diagnostic may be cleared only after reading the canonical passage, prompt, and keyed answer and confirming that the answer is supported by the passage. These entries do not waive semantic correctness; they record explicit human adjudication of known surface false positives.",
+  "adjudications": {
+    "direct_answer_zero_content_overlap_with_passage|a1|ar-a1-u01-p03|q1": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "The passage explicitly states that Laila says she wants to go to the park; the keyed causal answer paraphrases that stated intention."
+    },
+    "direct_answer_zero_content_overlap_with_passage|a1|ar-a1-u02-p01|q5": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "Before putting on her shoes, Laila puts her book and notebook in the bag. 'Prepares her bag' is a supported summary of that sequence; the token mismatch is inflection/wording."
+    },
+    "direct_answer_zero_content_overlap_with_passage|a1|ar-a1-u02-p05|q2": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "The passage says 'سوف أجهز حقيبتي للغد'; the answer 'حقيبتها' names the same object with a different person suffix."
+    },
+    "direct_answer_zero_content_overlap_with_passage|a1|ar-a1-u02-p06|q8": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "The quoted 'نحن' is spoken by the mother to Laila in a two-person exchange, so its antecedent is the mother and Laila."
+    },
+    "direct_answer_zero_content_overlap_with_passage|a1|ar-a1-u03-p02|q5": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "The pronoun in 'هل نحتاج إليه اليوم؟' directly follows the proposal to buy apples, so 'التفاح' is the correct antecedent."
+    },
+    "direct_answer_zero_content_overlap_with_passage|a1|ar-a1-u06-p06|q4": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "The phrase 'الطريق قد يمر تحته' immediately follows 'عندما ترى جسرًا'; 'تحته' refers to the bridge."
+    },
+    "direct_answer_zero_content_overlap_with_passage|a1|ar-a1-u09-p05|q2": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "The passage records one goal by Laila's team and then another later goal, so the count of two is directly recoverable despite number morphology."
+    },
+    "direct_answer_zero_content_overlap_with_passage|a1|ar-a1-u09-p06|q4": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "The passage explicitly says Laila enjoys being with friends, trying different things, and spending a pleasant time even when winning is not the only goal."
+    },
+    "direct_answer_zero_content_overlap_with_passage|a1|ar-a1-u10-p03|q5": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "The teacher asks the group to share what each learned, and the passage states that students hear different things from different people; the answer accurately states the purpose."
+    },
+    "direct_answer_zero_content_overlap_with_passage|a1|ar-a1-u10-p06|q4": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "'هذه الموضوعات' refers to the preceding set of daily-life topics (routes, time, food, school, health/help, leisure and related material); the keyed answer summarizes that antecedent set."
+    },
+    "direct_answer_zero_content_overlap_with_passage|a2|ar-a2-u01-p06|q2": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "The passage explicitly says the father can 'الاتصال بالهاتف قبل الذهاب'; 'بالاتصال عبر الهاتف' is the same method."
+    },
+    "direct_answer_zero_content_overlap_with_passage|a2|ar-a2-u01-p06|q8": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "In the sentence about a neighbor who did not see it, the immediately preceding object is the posted announcement; 'الإعلان' is the correct antecedent."
+    },
+    "direct_answer_zero_content_overlap_with_passage|a2|ar-a2-u03-p06|q8": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "The sentence before 'كل مصدر' explicitly enumerates personal memory, other people's accounts, photos, recordings, and objects; the keyed answer reproduces that referent set."
+    },
+    "contrast_answer_not_semantically_structured_for_quoted_options|a2|ar-a2-u09-p05|q5": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "The answer explains exactly why 'بعض الأسر' is more precise than 'الجميع': the behavior does not necessarily include every member of the community. Literal repetition of the quoted options is unnecessary."
+    },
+    "direct_answer_zero_content_overlap_with_passage|a2|ar-a2-u10-p05|q3": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "The passage states that the family will send 'صورًا ورسائل' to those who cannot attend; the answer uses the definite forms 'الصور والرسائل'."
+    },
+    "direct_answer_zero_content_overlap_with_passage|b1|ar-b1-u04-p03|q4": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "After the teacher's objection, the report keeps the average as a starting point, adds its limits, and divides the data by family size and time period. The answer accurately summarizes those changes."
+    },
+    "direct_answer_zero_content_overlap_with_passage|b1|ar-b1-u04-p06|q8": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "'هذه الأمثلة' follows the synthesis of the five unit cases: square, cleanup, water report, street project, and school hall. The keyed antecedent list is correct."
+    },
+    "direct_answer_zero_content_overlap_with_passage|b2|ar-b2-u06-p06|q4": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "The passage explains that linking one report to another attendance record changes the possible parties, capabilities, and inferences. The answer correctly states that linkage creates new inferences/uses not visible in an isolated record."
+    },
+    "direct_answer_zero_content_overlap_with_passage|c1|ar-c1-u07-p01|q2": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "The first paragraph explicitly enumerates four appearances of the key, and later asks interpretations to explain 'المواضع الأربعة'; the keyed count is correct."
+    },
+    "direct_answer_zero_content_overlap_with_passage|c1|ar-c1-u09-p05|q2": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "The educational recut explicitly adds a short timeline and places testimony from an early leaver beside testimony from someone who stayed to the end. The answer is a faithful literal summary."
+    },
+    "direct_answer_zero_content_overlap_with_passage|c1|ar-c1-u09-p06|q2": {
+      "resolution": "PASS_SUPPORTED",
+      "reason": "The passage explicitly says what remains from the past is the product of 'اختيار وصيانة وفقد وصمت'; the answer names those four factors exactly in uninflected form."
+    }
+  },
+  "reviewed_candidates": 21,
+  "unresolved_in_this_ledger": 0
+}
