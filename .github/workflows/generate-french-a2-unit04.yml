@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'reading/tools/generate_french_a2_unit04.py'
+      - 'reading/tools/generate_french_a2_unit04_retry.py'
       - '.github/workflows/generate-french-a2-unit04.yml'
 permissions:
   contents: write
@@ -20,7 +21,7 @@ jobs:
       - name: Install validation dependency
         run: python -m pip install --quiet jsonschema
       - name: Append and validate Unit 04
-        run: python reading/tools/generate_french_a2_unit04.py
+        run: python reading/tools/generate_french_a2_unit04_retry.py
       - name: Independent Unit 04 checks
         run: |
           python - <<'PY'
@@ -42,6 +43,8 @@ jobs:
           expected={'projet','équipe','réunion','responsable','programme','dossier','demande','réponse','service','contact'}
           actual={t['form'] for r in u4[:5] for t in r['new_lexical_targets']}
           assert actual==expected, (actual, expected)
+          p02=next(r for r in u4 if r['id']=='fr-a2-u04-p02')
+          assert 'perdre' in p02['text']
           for r in u4:
               local={str(t['id']) for f in ('new_lexical_targets','review_lexical_targets') for t in r.get(f,[]) if isinstance(t,dict) and t.get('id')}
               amap={a['question_id']:a['id'] for a in r['answer_key']}
