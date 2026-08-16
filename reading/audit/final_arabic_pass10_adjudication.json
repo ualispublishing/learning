@@ -2,7 +2,8 @@
   "pass": 10,
   "artifact_role": "human/source adjudication of the residual zero-keyword-overlap queue; does not weaken the raw detector",
   "raw_artifact": "reading/audit/final_arabic_pass10_lexical_sense_alignment.json",
-  "adjudications": [
+  "current_raw_flag_count": 6,
+  "current_raw_adjudications": [
     {
       "target_id": "ar-r1387",
       "form": "مبدأ",
@@ -31,17 +32,6 @@
       "decision": "ACCEPT_SOURCE_GLOSS_LIMITATION",
       "reason": "Cairo Arabic Academy, al-Wasit: الأَمْثَلُ = الأَفْضَلُ; this directly supports the reader's optimal/best sense.",
       "evidence_url": "https://www.arabicacademy.gov.eg/ar/%D9%85%D8%AD%D8%B1%D9%83-%D8%A7%D9%84%D8%A8%D8%AD%D8%AB/%D9%85%D8%B9%D8%AC%D9%85/dic-19/%D8%A7%D9%84%D8%A3%D9%85%D8%AB%D9%84"
-    },
-    {
-      "target_id": "ar-r2401",
-      "form": "مبرر",
-      "passage_id": "ar-c2-u01-p03",
-      "raw_intended_sense_before_repair": "justified; having a justification",
-      "current_intended_sense_after_repair": "justification; reason that justifies a belief or action",
-      "raw_source_meaning": "justifying",
-      "decision": "ACCEPT_AFTER_CANONICAL_REPAIR",
-      "reason": "The passage was normalized to the noun sense only. Cairo Arabic Academy uses the noun in لا مبرر لها, supporting justification/reason. The previous adjective/noun mixing was removed by a guarded canonical repair.",
-      "evidence_url": "https://www.arabicacademy.gov.eg/ar/%D9%85%D8%AD%D8%B1%D9%83-%D8%A7%D9%84%D8%A8%D8%AD%D8%AB/%D8%A7%D9%81%D9%92%D8%AA%D9%8E%D8%B9%D9%8E%D9%84%D9%8E?exact_search=true"
     },
     {
       "target_id": "ar-r1634",
@@ -74,9 +64,22 @@
       "evidence_url": "https://www.arabicacademy.gov.eg/ar/%D9%85%D8%AD%D8%B1%D9%83-%D8%A7%D9%84%D8%A8%D8%AD%D8%AB/%D9%85%D8%B9%D8%AC%D9%85/dic-19/%D8%A7%D9%84%D8%A5%D8%AF%D8%B1%D8%A7%D9%83"
     }
   ],
-  "raw_flag_count": 7,
-  "accepted_without_canonical_text_change": 6,
-  "accepted_after_canonical_text_and_sense_normalization": 1,
+  "historical_resolved_after_canonical_repair": [
+    {
+      "target_id": "ar-r2401",
+      "form": "مبرر",
+      "passage_id": "ar-c2-u01-p03",
+      "raw_intended_sense_before_repair": "justified; having a justification",
+      "current_intended_sense_after_repair": "justification; reason that justifies a belief or action",
+      "raw_source_meaning": "justifying",
+      "decision": "ACCEPT_AFTER_CANONICAL_REPAIR",
+      "current_raw_detector_state": "NO_LONGER_FLAGGED",
+      "reason": "The passage was normalized to the noun sense only. Cairo Arabic Academy uses the noun in لا مبرر لها, supporting justification/reason. The previous adjective/noun mixing was removed by a guarded canonical repair; the fresh Pass 10 detector now confirms the item no longer produces a zero-overlap flag.",
+      "evidence_url": "https://www.arabicacademy.gov.eg/ar/%D9%85%D8%AD%D8%B1%D9%83-%D8%A7%D9%84%D8%A8%D8%AD%D8%AB/%D8%A7%D9%81%D9%92%D8%AA%D9%8E%D8%B9%D9%8E%D9%84%D9%8E?exact_search=true"
+    }
+  ],
+  "accepted_current_raw_without_canonical_text_change": 6,
+  "historical_resolved_after_canonical_text_and_sense_normalization": 1,
   "unresolved": [],
   "status": "PASS_WITH_SOURCE_ADJUDICATION"
 }
