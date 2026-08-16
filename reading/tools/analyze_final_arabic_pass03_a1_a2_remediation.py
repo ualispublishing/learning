@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a compact, fail-closed remediation map for remaining A1/A2 Pass 03 debt.
+"""Build a fail-closed remediation map for remaining A1/A2 Pass 03 debt.
 
 This tool does not change canonical passages. It identifies whether a grammar-
 light passage contains a redundant lexical-definition question that can safely
@@ -15,6 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "reading/audit/final_arabic_pass03_a1_a2_remediation_map.json"
+SUMMARY = ROOT / "reading/audit/final_arabic_pass03_a1_a2_remediation_summary.json"
 LEVELS = ("a1", "a2")
 
 COMPREHENSION = {"gist", "literal_detail", "sequence", "cause_effect", "reference_resolution", "main_claim"}
@@ -41,12 +42,14 @@ def counts(types: list[str]) -> dict[str, int]:
 def main() -> None:
     result = {"scope": "remaining A1/A2 Pass 03 remediation planning", "levels": {}, "totals": {}}
     totals = Counter()
+    level_summary = {}
     for level in LEVELS:
         path = ROOT / f"reading/arabic/{level}/passages.jsonl"
         rows = [json.loads(x) for x in path.read_text(encoding="utf-8").splitlines() if x.strip()]
         if len(rows) != 60:
             raise AssertionError(f"{level}: expected 60 passages, got {len(rows)}")
         flagged = []
+        level_counts = Counter()
         for row in rows:
             qs = row.get("questions", [])
             if len(qs) != 10 or len(row.get("answer_key", [])) != 10:
@@ -110,22 +113,23 @@ def main() -> None:
                 "lexical_context": lexical_context,
             })
             totals["flagged_passages"] += 1
+            level_counts["flagged_passages"] += 1
             for d in deficits:
                 totals[d + "_deficits"] += 1
+                level_counts[d + "_deficits"] += 1
             if "grammar_style" in deficits:
-                if grammar_candidates:
-                    totals["grammar_deficits_with_safe_definition_candidate"] += 1
-                else:
-                    totals["grammar_deficits_without_candidate"] += 1
+                key = "grammar_deficits_with_safe_definition_candidate" if grammar_candidates else "grammar_deficits_without_candidate"
+                totals[key] += 1
+                level_counts[key] += 1
 
-        result["levels"][level] = {
-            "flagged_passages": len(flagged),
-            "items": flagged,
-        }
+        result["levels"][level] = {"flagged_passages": len(flagged), "items": flagged}
+        level_summary[level] = dict(level_counts)
     result["totals"] = dict(totals)
+    summary = {"scope": result["scope"], "levels": level_summary, "totals": dict(totals)}
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps(result["totals"], ensure_ascii=False))
+    SUMMARY.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(summary, ensure_ascii=False))
 
 
 if __name__ == "__main__":
