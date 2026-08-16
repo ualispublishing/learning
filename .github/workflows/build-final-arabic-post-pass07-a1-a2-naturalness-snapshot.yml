@@ -1,0 +1,31 @@
+name: Build final Arabic post-Pass07 A1-A2 naturalness snapshot
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/build_final_arabic_post_pass07_a1_a2_naturalness_snapshot.py'
+      - '.github/workflows/build-final-arabic-post-pass07-a1-a2-naturalness-snapshot.yml'
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build current-text re-review snapshot
+        run: python reading/tools/build_final_arabic_post_pass07_a1_a2_naturalness_snapshot.py
+      - name: Commit snapshot
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Build post-Pass07 A1-A2 naturalness snapshot [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
