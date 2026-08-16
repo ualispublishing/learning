@@ -14,84 +14,81 @@ Current-state precedence:
 
 Arabic A1–C2 is complete and formally approved: 360 canonical passages, 3,600 questions, 3,600 linked answers, final Pass 12 `PASS`, formal final approval `true`, and zero current hard regressions/final-approval blockers.
 
-Final evidence: `reading/audit/final_arabic_pass12_adversarial_gate_falsification.json`.
-
 **Do not reopen Arabic unless canonical Arabic data is deliberately changed.**
 
-## 3. French A1 — GENERATED / INTEGRITY PASS
+## 3. French A1 + A2 — GENERATED / GENERATION-INTEGRITY PASS
 
-French A1 is complete at 60 passages / 600 questions / 600 answers.
+French A1 and A2 are each complete at 60 passages / 600 questions / 600 answers.
 
-- canonical file: `reading/french/a1/passages.jsonl`;
-- accepted blob: `0493a2fa13e51b5997db05e91cdea4d8dc5e647b`;
-- generation-integrity closeout: `PASS` at `reading/audit/french_a1_generation_integrity.json`;
-- 100 deliberate targets;
-- all Unit P06 checkpoints have zero deliberately new targets.
+- A1 accepted blob: `0493a2fa13e51b5997db05e91cdea4d8dc5e647b`;
+- A1 integrity: `reading/audit/french_a1_generation_integrity.json` = `PASS`;
+- A2 accepted blob: `d0a80b8866071f426019aa0ad143e1d270dba4de`;
+- A2 integrity: `reading/audit/french_a2_generation_integrity.json` = `PASS`;
+- A2 has 100 unique deliberate targets and zero A1↔A2 deliberate-target collisions by validated source ID or visible form;
+- every A1/A2 P06 checkpoint has zero deliberately new targets.
 
-A1 is closed to routine regeneration but has not yet gone through the final language-wide French multi-pass approval audit.
+Do not broadly regenerate A1/A2. The final expensive French multi-pass approval audit remains deferred until French A1–C2 generation is complete.
 
-## 4. French A2 — GENERATED / INTEGRITY PASS
+## 4. French B1 Unit 01 — ACCEPTED CALIBRATION
 
-French A2 is complete at 60 passages / 600 questions / 600 answers.
+Canonical file: `reading/french/b1/passages.jsonl`.
 
-- canonical file: `reading/french/a2/passages.jsonl`;
-- accepted blob: `d0a80b8866071f426019aa0ad143e1d270dba4de`;
-- canonical completion commit: `b529f730e743e3a3b077750f31be31632b8b9afc`;
-- generation-integrity closeout: `PASS` at `reading/audit/french_a2_generation_integrity.json`;
-- 100 unique deliberate A2 targets;
-- zero A1↔A2 deliberate-target collisions by validated source ID or visible form;
-- all 10 Unit P06 checkpoints have zero deliberately new targets.
+Accepted current frontier:
 
-Important later-unit target history:
+- sequences 1–6 / Unit 01;
+- 6 passages / 60 questions / 60 linked answers;
+- 15 fresh deliberate targets, exactly 3 in each P01–P05;
+- P06 zero new targets and timed/benchmark eligible;
+- word counts: 246, 254, 250, 250, 276, 271;
+- accepted B1 blob: `beed8c8337be567325a4b329b79c7d070511f3b1`;
+- accepted calibration commit: `ccdf4743c5b359c085387dd66653f01d368e5c07`;
+- post-calibration audit: `reading/audit/french_b1_unit01_calibration_review.json` = `PASS`.
 
-- Unit 06: `voyage`, `train`, `route`, `départ`, `hôtel`, `chambre`, `retour`, `visite`, `plan`, `avion`.
-- Unit 07: `tenter`, `tranquille`, `déjeuner`, `partager`, `vue`, `avancer`, `marché`, `poste`, `intérêt`, `mur`.
-- Unit 08: `étrange`, `répéter`, `appartenir`, `signe`, `plusieurs`, `compagnie`, `douter`, `test`, `but`, `parole`.
-- Unit 09: `excuse`, `surprise`, `bruit`, `fonctionner`, `moitié`, `rater`, `cerveau`, `respirer`, `chacun`, `pourtant`.
-- Unit 10: `habiter`, `milieu`, `cuisine`, `fenêtre`, `vidéo`, `caméra`, `retenir`, `image`, `proposer`, `gérer`.
+Unit 01 targets:
 
-Guard history worth preserving:
+`poursuivre`, `époque`, `trace`, `convaincre`, `position`, `impliquer`, `machine`, `code`, `recommencer`, `étranger`, `peuple`, `futur`, `regretter`, `profiter`, `ennui`.
 
-- Unit 04 failed closed on invisible exact `perdre`; repaired naturally without weakening the guard.
-- Unit 06 rejected duplicate candidate `place`; replaced with fresh `visite`.
-- Unit 07 rejected duplicate candidate `gauche`; replaced with fresh `tenter`.
-- Unit 08 failed closed on checkpoint exact-form `douter`; repaired with an exact infinitive occurrence.
-- Unit 09 failed closed on an invalid grammar-role enum; metadata role was corrected to schema-approved `review`, lexical content unchanged.
-- Unit 10 passed first run.
+Calibration guard history:
 
-Do not broadly regenerate A2. The final expensive French multi-pass approval audit remains deferred until French A1–C2 generation is complete.
+1. initial workflow path pointed one directory too high; corrected before any canonical write;
+2. P01 initially measured 215 words; expanded naturally into the unchanged B1 220–350 band;
+3. P05 review `proposer` appeared only conjugated; added a natural exact infinitive occurrence without weakening the review guard;
+4. stricter post-calibration review found `impliquer` was being used in a broader participation sense while the validated root gloss directly supports entail/imply; the passage was reframed to teach the consequence/entail sense instead of mutating the root CSV or adding a sense override;
+5. minor `peuple` / `ennui` phrasing was polished while preserving target visibility, linkage and B1 length.
 
-## 5. French B1 — IMMEDIATE FRONTIER
+Treat Unit 01 as the accepted calibration template for later B1 units.
 
-No canonical B1 passages are accepted yet. Start with **B1 Unit 01 / sequences 1–6 as a calibration unit**.
-
-B1 production profile from the durable standard/roadmap:
+## 5. French B1 production profile
 
 - standard length band: **220–350 words**;
-- new lexical planning range: **3–6 types per standard passage**, a ceiling/range rather than a quota;
-- connected narratives/explanations and clearer paragraph structure;
+- calibrated default deliberate load: **3 fresh new lexical types in P01–P05**, still within the durable 3–6 planning range; do not treat 3 as a permanent hard quota if pedagogy later warrants another value;
+- connected multi-paragraph narratives/explanations;
 - paragraph-level main ideas and multi-sentence inference;
-- motives, decisions, consequences and summaries;
-- grammar review increasingly embedded rather than announced;
-- move due vocabulary across related but non-identical topics/genres;
-- 10 questions + 10 linked answers per canonical passage under the project-wide ten-question override;
-- P06 checkpoint has zero deliberately new lexical targets and should be high-coverage/timed-reading friendly.
+- motives, decisions, consequences, summaries and grammar-in-context;
+- move older vocabulary across related but non-identical topics/genres;
+- 10 questions + 10 linked answers per canonical passage;
+- P06 checkpoint has zero deliberately new lexical targets and should be high-coverage/timed-reading friendly where appropriate;
+- root validated lexical CSV is read-only curriculum input.
 
-### B1 Unit 01 guard requirements
+## 6. IMMEDIATE FRONTIER — B1 Unit 02
 
-1. verify live `main`, confirm `reading/french/b1/passages.jsonl` state, and ensure no parallel writer has claimed Unit 01;
-2. check every proposed new B1 target against **all deliberate French A1 + A2 new targets** before canonical write;
-3. preserve validated `french_top1000.csv` source rank/ID identity and exact source-state locks;
-4. make every deliberate running-text/summary review exactly visible;
-5. validate schema, 220–350 word band, immutable IDs/sequences, local question-target declarations and one-to-one answer linkage;
-6. keep contextual introductions inferable rather than dictionary-like;
-7. include B1-appropriate question demand: multi-sentence inference, motive/reason, summary and grammar-in-context where natural;
-8. keep P06 zero-new; fail closed on any collision or drift;
-9. treat this first B1 unit as calibration: inspect the generated unit before scaling later B1 units.
+Generate **French B1 Unit 02 / sequences 7–12** as one guarded batch.
 
-## 6. Immediate next action
+Required source lock:
 
-**Generate and validate French B1 Unit 01 / sequences 1–6 as one guarded calibration batch, fresh against all completed A1+A2 deliberate targets.**
+`reading/french/b1/passages.jsonl` blob = `beed8c8337be567325a4b329b79c7d070511f3b1`.
+
+Unit 02 guard requirements:
+
+1. verify live main and exact Unit01 blob before write;
+2. check every proposed new B1 target against **all deliberate French A1 + A2 + B1 Unit01 targets** before canonical write;
+3. preserve validated `french_top1000.csv` source rank/ID identity and intended-sense discipline; avoid unsupported sense extensions when a directly source-supported context is available;
+4. default to 3 new targets in each P01–P05; P06 zero new;
+5. naturally review Unit01 targets across P01–P05, with every deliberate running-text/summary review exactly visible;
+6. validate schema, 220–350 word band, immutable IDs/sequences, local question-target declarations and one-to-one answer linkage;
+7. include multi-sentence inference, motive/reason, summary and grammar-in-context where natural;
+8. choose related-but-not-identical domains/genres to force transfer rather than copying Unit01’s community-project frame;
+9. fail closed on collision, drift or quality invariant failure and repair the batch rather than weakening the guard.
 
 ## 7. Urdu — QUEUED
 
