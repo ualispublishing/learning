@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'reading/tools/generate_french_a2_unit01_retry.py'
+      - 'reading/tools/generate_french_a2_unit01_retry2.py'
       - '.github/workflows/generate-french-a2-unit01-retry.yml'
 permissions:
   contents: write
@@ -20,7 +21,7 @@ jobs:
       - name: Install validation dependency
         run: python -m pip install --quiet jsonschema
       - name: Generate and validate hardened French A2 Unit 01
-        run: python reading/tools/generate_french_a2_unit01_retry.py
+        run: python reading/tools/generate_french_a2_unit01_retry2.py
       - name: Independent A2 Unit 01 checks
         run: |
           python - <<'PY'
