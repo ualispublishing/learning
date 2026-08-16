@@ -12,49 +12,48 @@ Do not reopen Arabic unless canonical Arabic content is deliberately changed.
 
 ## French — ACTIVE
 
-### A1 — GENERATED / INTEGRITY PASS / CLOSED TO ROUTINE REGENERATION
+### A1 — GENERATED / GENERATION-INTEGRITY PASS
 
 - [x] Units 01–10 / sequences 1–60 generated.
 - [x] 60 passages / 600 questions / 600 linked answers.
+- [x] 100 deliberate lexical targets.
 - [x] Every Unit P06 checkpoint has zero deliberately new lexical targets.
-- [x] Generation-integrity closeout = `PASS` with 100 deliberate targets and no remaining integrity failures.
-- [x] Current A1 canonical blob: `0493a2fa13e51b5997db05e91cdea4d8dc5e647b`.
+- [x] Generation-integrity artifact: `reading/audit/french_a1_generation_integrity.json` = `PASS`.
+- [x] Canonical blob: `0493a2fa13e51b5997db05e91cdea4d8dc5e647b`.
 
-A1 has not yet gone through the final language-wide multi-pass French approval audit; do not broadly regenerate it.
+### A2 — GENERATED / GENERATION-INTEGRITY PASS
 
-### A2 — ACTIVE
+- [x] Units 01–10 / sequences 1–60 generated.
+- [x] 60 passages / 600 questions / 600 linked answers.
+- [x] 100 unique deliberate lexical targets.
+- [x] Zero A1↔A2 deliberate-target collisions by source ID or visible form.
+- [x] Every Unit P06 checkpoint has zero deliberately new lexical targets.
+- [x] Generation-integrity artifact: `reading/audit/french_a2_generation_integrity.json` = `PASS` with no failures.
+- [x] Canonical blob: `d0a80b8866071f426019aa0ad143e1d270dba4de`.
+- [x] Canonical completion commit: `b529f730e743e3a3b077750f31be31632b8b9afc`.
 
-- [x] Unit 01 / sequences 1–6.
-- [x] Unit 02 / sequences 7–12.
-- [x] Unit 03 / sequences 13–18.
-- [x] Unit 04 / sequences 19–24; first run failed closed on exact `perdre` visibility, then passed after a natural exact-form repair.
-- [x] Unit 05 / sequences 25–30; passed all guards first run.
-- [x] Unit 06 / sequences 31–36; first run rejected duplicate target `place`, then passed with fresh `visite` replacing it.
-- [x] Unit 07 / sequences 37–42; first run rejected duplicate target `gauche`, then passed with fresh `tenter` replacing it.
-- [x] All completed A2 units: 6 passages / 60 Q / 60 A / 10 new targets / zero-new P06 each.
-- [x] Current A2 canonical blob after Unit 07: `423be512ea3675939ad174e188791259035d6656`.
-- [ ] Unit 08 / sequences 43–48: generate as one guarded batch against the live Unit-07 blob.
-- [ ] Review Unit-07 targets one pair per P01–P05 where natural; keep P06 zero-new-target.
-- [ ] Check every proposed Unit-08 new target against A1 and all prior A2 deliberate targets before writing.
-- [ ] Continue A2 in coherent six-passage guarded batches to 60 passages.
+A2 Unit 08 targets: `étrange`, `répéter`, `appartenir`, `signe`, `plusieurs`, `compagnie`, `douter`, `test`, `but`, `parole`.
 
-A2 Unit 01 targets: `retard`, `conseil`, `erreur`, `expliquer`, `essayer`, `possible`, `réparer`, `éviter`, `rendez-vous`, `découvrir`.
+A2 Unit 09 targets: `excuse`, `surprise`, `bruit`, `fonctionner`, `moitié`, `rater`, `cerveau`, `respirer`, `chacun`, `pourtant`.
 
-A2 Unit 02 targets: `raison`, `résultat`, `décision`, `information`, `important`, `différent`, `habitude`, `expérience`, `choix`, `idée`.
+A2 Unit 10 targets: `habiter`, `milieu`, `cuisine`, `fenêtre`, `vidéo`, `caméra`, `retenir`, `image`, `proposer`, `gérer`.
 
-A2 Unit 03 targets: `oublier`, `clé`, `perdre`, `retrouver`, `recevoir`, `envoyer`, `vérifier`, `payer`, `numéro`, `carte`.
+A1 and A2 have not yet gone through the final language-wide multi-pass French approval audit; do not broadly regenerate them.
 
-A2 Unit 04 targets: `projet`, `équipe`, `réunion`, `responsable`, `programme`, `dossier`, `demande`, `réponse`, `service`, `contact`.
+### B1 — NEXT / CALIBRATION UNIT
 
-A2 Unit 05 targets: `médecin`, `patient`, `douleur`, `santé`, `hôpital`, `accident`, `soin`, `urgence`, `risque`, `danger`.
+- [ ] Unit 01 / sequences 1–6: generate as one guarded calibration unit.
+- [ ] Use the standard B1 220–350-word band.
+- [ ] Use the B1 3–6 new lexical types per standard passage as a planning range, not a quota; keep the unit’s deliberate lexical load controlled.
+- [ ] Use 10 questions + 10 linked answers per passage under the project-wide ten-question standard.
+- [ ] Add multi-sentence inference, motive/reason, summary, and grammar-in-context while preserving answer support in the passage.
+- [ ] Move older vocabulary across related but non-identical topics/genres rather than merely repeating A2 narrow-reading settings.
+- [ ] Check every new B1 deliberate target against all deliberate French A1+A2 targets before any canonical write.
+- [ ] P06 checkpoint: zero deliberately new lexical targets, high known-vocabulary emphasis, timed-reading eligible where appropriate.
+- [ ] Fail closed on source blob drift, source identity, cross-level duplication, schema/linkage errors, exact deliberate-review visibility, word band, or sequence collision.
 
-A2 Unit 06 targets: `voyage`, `train`, `route`, `départ`, `hôtel`, `chambre`, `retour`, `visite`, `plan`, `avion`.
+Remaining French levels after A2:
 
-A2 Unit 07 targets: `tenter`, `tranquille`, `déjeuner`, `partager`, `vue`, `avancer`, `marché`, `poste`, `intérêt`, `mur`.
-
-Remaining French levels:
-
-- [ ] A2: 18 passages remain after Unit 07.
 - [ ] B1: 60 passages.
 - [ ] B2: 60 passages.
 - [ ] C1: 60 passages.
@@ -62,10 +61,11 @@ Remaining French levels:
 
 Production policy:
 
-- generation-first, full multi-pass audit at the completed French corpus milestone;
-- A2 standard passages use the 140–220-word planning band and controlled lexical load;
+- generation-first; full multi-pass French audit remains deferred until the completed French A1–C2 corpus milestone;
+- standard bands: B1 220–350, B2 350–550, C1 500–800, C2 700–1,200 words;
+- B1 starts broader context transfer and paragraph/multi-sentence inference;
 - fail closed on lexical-source drift, cross-level target duplication, canonical blob drift, schema failure, linkage failure, invisible deliberate review, reader-facing contamination, or sequence collision;
-- do not mutate the root validated lexical CSV merely to simplify passage production.
+- do not mutate the validated root lexical CSV merely to simplify passage production.
 
 ## Urdu — QUEUED
 
@@ -85,4 +85,4 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 
 ## Immediate next task
 
-**Generate French A2 Unit 08 / sequences 43–48 against canonical A2 blob `423be512ea3675939ad174e188791259035d6656`. Keep Arabic sealed.**
+**Generate French B1 Unit 01 / sequences 1–6 as the B1 calibration unit, fresh against completed A1+A2. Keep Arabic sealed.**
