@@ -11,11 +11,10 @@
   "levels": {
     "a1": {
       "passages": 60,
-      "flagged_passages": 14,
+      "flagged_passages": 11,
       "flags_by_code": {
-        "cloze_without_target_id": 4,
         "duplicate_answer_text_within_passage": 1,
-        "direct_answer_zero_content_overlap_with_passage": 11
+        "direct_answer_zero_content_overlap_with_passage": 10
       }
     },
     "a2": {
@@ -28,17 +27,17 @@
     },
     "b1": {
       "passages": 60,
-      "flagged_passages": 9,
+      "flagged_passages": 6,
       "flags_by_code": {
-        "contrast_answer_not_surface_aligned_to_quoted_options": 5,
-        "direct_answer_zero_content_overlap_with_passage": 4
+        "direct_answer_zero_content_overlap_with_passage": 2,
+        "contrast_answer_not_surface_aligned_to_quoted_options": 4
       }
     },
     "b2": {
       "passages": 60,
-      "flagged_passages": 3,
+      "flagged_passages": 1,
       "flags_by_code": {
-        "direct_answer_zero_content_overlap_with_passage": 3
+        "direct_answer_zero_content_overlap_with_passage": 1
       }
     },
     "c1": {
@@ -50,25 +49,17 @@
     },
     "c2": {
       "passages": 60,
-      "flagged_passages": 14,
+      "flagged_passages": 8,
       "flags_by_code": {
-        "direct_answer_zero_content_overlap_with_passage": 14
+        "direct_answer_zero_content_overlap_with_passage": 8
       }
     }
   },
   "totals": {
     "questions": 3600,
-    "review_flags": 52
+    "review_flags": 36
   },
   "flags": [
-    {
-      "code": "cloze_without_target_id",
-      "level": "a1",
-      "passage_id": "ar-a1-u01-p02",
-      "question_id": "q5",
-      "prompt": "أكمل: معي كتاب واحد _____، وليس كل الكتب.",
-      "answer": "فقط"
-    },
     {
       "code": "duplicate_answer_text_within_passage",
       "level": "a1",
@@ -85,30 +76,6 @@
       "type": "cause_effect",
       "prompt": "لماذا ذهبت ليلى إلى الحديقة؟",
       "answer": "لأنها أرادت أن تذهب إليها."
-    },
-    {
-      "code": "cloze_without_target_id",
-      "level": "a1",
-      "passage_id": "ar-a1-u01-p03",
-      "question_id": "q5",
-      "prompt": "أكمل: الكتاب على الطاولة البعيدة _____.",
-      "answer": "هناك"
-    },
-    {
-      "code": "cloze_without_target_id",
-      "level": "a1",
-      "passage_id": "ar-a1-u01-p04",
-      "question_id": "q5",
-      "prompt": "أكمل: الباب مفتوح، لذلك _____ أن ندخل.",
-      "answer": "يمكن"
-    },
-    {
-      "code": "cloze_without_target_id",
-      "level": "a1",
-      "passage_id": "ar-a1-u01-p05",
-      "question_id": "q5",
-      "prompt": "أكمل: بقيت في المكتبة _____ المساء.",
-      "answer": "حتى"
     },
     {
       "code": "direct_answer_zero_content_overlap_with_passage",
@@ -154,15 +121,6 @@
       "type": "reference_resolution",
       "prompt": "إلى ماذا يعود «تحته» عند ذكر الجسر؟",
       "answer": "إلى الجسر."
-    },
-    {
-      "code": "direct_answer_zero_content_overlap_with_passage",
-      "level": "a1",
-      "passage_id": "ar-a1-u08-p01",
-      "question_id": "q2",
-      "type": "literal_detail",
-      "prompt": "ماذا تشرب ليلى؟",
-      "answer": "الماء."
     },
     {
       "code": "direct_answer_zero_content_overlap_with_passage",
@@ -270,27 +228,6 @@
       "answer": "إلى مجموعة مهارات القراءة العملية المذكورة في الخدمات والخطط والذاكرة والشراء والتعلم والسفر والأخبار والبيئة والثقافة."
     },
     {
-      "code": "contrast_answer_not_surface_aligned_to_quoted_options",
-      "level": "b1",
-      "passage_id": "ar-b1-u01-p01",
-      "question_id": "q8",
-      "prompt": "ما الفرق بين «ليس الآن» و«لا أريد هذا أبدًا» في النص؟",
-      "answer": "الأول يؤجل فرصة مناسبة إلى وقت أفضل، والثاني يرفضها نهائيًا.",
-      "quoted_options": [
-        "ليس الآن",
-        "لا أريد هذا أبدًا"
-      ]
-    },
-    {
-      "code": "direct_answer_zero_content_overlap_with_passage",
-      "level": "b1",
-      "passage_id": "ar-b1-u01-p02",
-      "question_id": "q8",
-      "type": "reference_resolution",
-      "prompt": "إلى ماذا تشير «ذلك» في فكرة أن سامر لم يرد استخدامه عذرًا؟",
-      "answer": "إلى التزامه العائلي الذي يؤثر في وقته."
-    },
-    {
       "code": "direct_answer_zero_content_overlap_with_passage",
       "level": "b1",
       "passage_id": "ar-b1-u04-p03",
@@ -358,39 +295,12 @@
     },
     {
       "code": "direct_answer_zero_content_overlap_with_passage",
-      "level": "b1",
-      "passage_id": "ar-b1-u10-p04",
-      "question_id": "q4",
-      "type": "cause_effect",
-      "prompt": "كيف تؤثر مراجعة الأدلة في التقرير؟",
-      "answer": "تستبدل لغة سببية بلغة ارتباط وتذكر التفسيرات البديلة."
-    },
-    {
-      "code": "direct_answer_zero_content_overlap_with_passage",
-      "level": "b2",
-      "passage_id": "ar-b2-u01-p03",
-      "question_id": "q8",
-      "type": "reference_resolution",
-      "prompt": "إلى ماذا تشير «ذلك» في «أدى ذلك إلى بقاء الخلاف»؟",
-      "answer": "إلى اعتماد المعايير وطلب تفسير الدرجات بدل الأرقام وحدها."
-    },
-    {
-      "code": "direct_answer_zero_content_overlap_with_passage",
       "level": "b2",
       "passage_id": "ar-b2-u06-p06",
       "question_id": "q4",
       "type": "cause_effect",
       "prompt": "كيف يؤثر ربط البيانات في حدود الخصوصية؟",
       "answer": "يخلق استنتاجات واستخدامات جديدة لم تكن ظاهرة في السجل المنفرد."
-    },
-    {
-      "code": "direct_answer_zero_content_overlap_with_passage",
-      "level": "b2",
-      "passage_id": "ar-b2-u07-p04",
-      "question_id": "q8",
-      "type": "reference_resolution",
-      "prompt": "إلى ماذا تشير «كانت صحيحة»؟",
-      "answer": "إلى القراءة أو التفسير الذي نفترضه للمشهد."
     },
     {
       "code": "direct_answer_zero_content_overlap_with_passage",
@@ -422,25 +332,7 @@
     {
       "code": "direct_answer_zero_content_overlap_with_passage",
       "level": "c2",
-      "passage_id": "ar-c2-u08-p01",
-      "question_id": "q2",
-      "type": "literal_detail",
-      "prompt": "ما نوع الدليل الذي يفحصه النص؟",
-      "answer": "مصادر أو آثار من الأرشيف الخيالي."
-    },
-    {
-      "code": "direct_answer_zero_content_overlap_with_passage",
-      "level": "c2",
       "passage_id": "ar-c2-u08-p03",
-      "question_id": "q2",
-      "type": "literal_detail",
-      "prompt": "ما نوع الدليل الذي يفحصه النص؟",
-      "answer": "مصادر أو آثار من الأرشيف الخيالي."
-    },
-    {
-      "code": "direct_answer_zero_content_overlap_with_passage",
-      "level": "c2",
-      "passage_id": "ar-c2-u08-p04",
       "question_id": "q2",
       "type": "literal_detail",
       "prompt": "ما نوع الدليل الذي يفحصه النص؟",
@@ -468,15 +360,6 @@
       "code": "direct_answer_zero_content_overlap_with_passage",
       "level": "c2",
       "passage_id": "ar-c2-u09-p01",
-      "question_id": "q2",
-      "type": "literal_detail",
-      "prompt": "ما المفاضلة التي يعرضها النص؟",
-      "answer": "فائدة تشغيلية تقابلها مخاطرة أو قيد أو فقدان خيار."
-    },
-    {
-      "code": "direct_answer_zero_content_overlap_with_passage",
-      "level": "c2",
-      "passage_id": "ar-c2-u09-p02",
       "question_id": "q2",
       "type": "literal_detail",
       "prompt": "ما المفاضلة التي يعرضها النص؟",
@@ -517,33 +400,6 @@
       "type": "literal_detail",
       "prompt": "ما المفاضلة التي يعرضها النص؟",
       "answer": "فائدة تشغيلية تقابلها مخاطرة أو قيد أو فقدان خيار."
-    },
-    {
-      "code": "direct_answer_zero_content_overlap_with_passage",
-      "level": "c2",
-      "passage_id": "ar-c2-u10-p01",
-      "question_id": "q2",
-      "type": "literal_detail",
-      "prompt": "ما نوعان من الأدلة أو الطبقات اللذان يقارنهما النص؟",
-      "answer": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
-    },
-    {
-      "code": "direct_answer_zero_content_overlap_with_passage",
-      "level": "c2",
-      "passage_id": "ar-c2-u10-p02",
-      "question_id": "q2",
-      "type": "literal_detail",
-      "prompt": "ما نوعان من الأدلة أو الطبقات اللذان يقارنهما النص؟",
-      "answer": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
-    },
-    {
-      "code": "direct_answer_zero_content_overlap_with_passage",
-      "level": "c2",
-      "passage_id": "ar-c2-u10-p04",
-      "question_id": "q2",
-      "type": "literal_detail",
-      "prompt": "ما نوعان من الأدلة أو الطبقات اللذان يقارنهما النص؟",
-      "answer": "يقارن بين مصادر أو قواعد أو نماذج أو آليات مختلفة بحسب passage."
     }
   ],
   "status": "REVIEW_REQUIRED"
