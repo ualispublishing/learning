@@ -25,56 +25,76 @@ Arabic A1–C2 is complete and formally approved:
 - 360 canonical passages;
 - 60 at each A1/A2/B1/B2/C1/C2;
 - 3,600 questions and 3,600 linked answers;
-- Passes 01–09 fresh `PASS`;
-- Pass 10 `PASS_WITH_SOURCE_ADJUDICATION` with six current source adjudications and one historical repaired item;
+- Passes 01–09 `PASS`;
+- Pass 10 `PASS_WITH_SOURCE_ADJUDICATION`;
 - Pass 11 `COMPLETE`, 360/360 manual naturalness review;
 - Pass 12 `PASS`, `final_approval=true`;
-- zero Pass 12 hard regressions or approval blockers;
-- direct Pass 12 checks: 360 unique IDs, valid sequences, zero question-answer linkage failures, zero undeclared question-target links, zero word-band failures, zero stored-word-count mismatches, zero Latin-script reader hits, and zero P6 new-target regressions.
+- zero hard regressions or final-approval blockers.
 
 Final evidence:
 `reading/audit/final_arabic_pass12_adversarial_gate_falsification.json`
 
-**Do not reopen Arabic generation/recalibration/review unless new canonical Arabic data is deliberately changed.** Historical Arabic warnings/checklists do not override the approved current artifact chain.
+**Do not reopen Arabic generation/recalibration/review unless canonical Arabic data is deliberately changed.**
 
-Arabic coverage remains intentionally unmeasured. Existing zero coverage values are placeholders, not measured 0%; no percentage was fabricated to obtain approval.
+Arabic known-token coverage remains intentionally unmeasured; existing zero values are placeholders, not measured 0%.
 
 ## 3. Current production state
 
 ### French — ACTIVE
 
-Live repo state:
+Live French A1 state is now **24/60 canonical passages**:
 
-- `reading/french/a1/passages.jsonl`: 6 canonical A1 calibration passages;
-- `reading/french/a1/CALIBRATION_UNIT_01.md` exists;
-- no French A2–C2 canonical corpus exists yet.
+- Unit 01 / sequences 1–6: original calibration cycle preserved;
+- Unit 02 / sequences 7–12: generated and validated;
+- Unit 03 / sequences 13–18: generated and validated;
+- Unit 04 / sequences 19–24: generated and validated;
+- next frontier: **Unit 05 / sequences 25–30**.
 
-The six live A1 passages are the starting state. **Do not restart calibration from zero.** Continue A1 from sequence 7 toward 60 using the generation-first policy and current ten-question/schema contract.
+Current French A1 totals:
+
+- 24 passages;
+- 240 questions;
+- 240 linked answers.
+
+Units 02–04 were generated as full six-passage guarded batches, not passage-by-passage. Each batch enforced:
+
+- an exact canonical source-blob collision guard;
+- sequence and ID continuity;
+- canonical JSON schema validation;
+- A1 90–140-word planning band;
+- exactly 10 questions and 10 one-to-one linked answers per passage;
+- all question target IDs locally declared as new/review vocabulary;
+- source-rank identity against `french_top1000.csv`;
+- no reintroduction of already scheduled lexical IDs;
+- Unit P06 zero deliberately new lexical targets.
+
+Do not regenerate Units 01–04. Verify live `main` before taking Unit 05.
+
+French remains generation-first: perform lightweight structural/source/linkage checks during generation and reserve the expensive multi-pass linguistic/pedagogical final audit for the completed generated corpus.
+
+Do not translate Arabic passages into French. French scenarios, collocations, grammar progression, and lexical scheduling must remain independently designed and natural.
 
 ### Urdu — QUEUED
 
-Live repo state:
+Urdu remains unchanged:
 
-- `reading/urdu/a1/passages.jsonl`: 6 canonical A1 calibration passages;
-- `reading/urdu/a1/calibration/` exists;
-- no Urdu A2–C2 canonical corpus exists yet.
+- six A1 calibration passages exist;
+- A2–C2 canonical corpus does not yet exist.
 
 Keep Urdu unchanged while French is active unless the user explicitly reprioritizes it.
 
 ## 4. Immediate next action
 
-**Continue French A1 from the existing six passages.**
+**Generate French A1 Unit 05 as sequences 25–30 from the live 24-passage corpus.**
 
-Before writing the first new French batch:
+Before writing:
 
-1. verify live `main`;
-2. read the six current French A1 passages and calibration note;
-3. inspect the French validated lexical sources/any French-specific ledgers needed for target identity;
-4. establish the continuation schedule from sequence 7 without rewriting sequences 1–6;
-5. generate in large unit-sized guarded batches under the ten-question standard;
-6. perform structural/source/linkage checks needed for safe generation, but reserve the expensive full multi-pass final audit for the completed generated corpus.
-
-Do not translate Arabic passages into French. French must have natural French scenarios, collocations, grammar progression, and independent lexical scheduling.
+1. verify live `main` and the French A1 canonical blob;
+2. select new lexical targets from the validated French source while excluding already scheduled target IDs;
+3. explicitly schedule spaced review from earlier units;
+4. generate P01–P05 with controlled new targets and P06 as a zero-new-target checkpoint;
+5. run the same schema/source/linkage/word-band/collision guards;
+6. commit the entire unit as one batch.
 
 ## 5. Speed / unthrottled execution contract
 
