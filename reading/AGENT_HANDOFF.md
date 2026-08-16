@@ -1,136 +1,126 @@
 # Agent Handoff — Graded Reading Curriculum
 
-**Purpose:** let a new agent resume the Arabic/French/Urdu graded-reading project from repository state without reconstructing old chat history or restarting completed phases.
+**Purpose:** resume the Arabic/French/Urdu graded-reading project from live repository state without replaying old chat history or restarting completed phases.
 
-## 1. Read this order before acting
+## 1. Read order
 
-1. `reading/STATUS.json` — exact current phase and actionable queue.
-2. `reading/AGENT_HANDOFF.md` — this concise continuity contract.
-3. `reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md` — current batching, freshness, concurrency, and final-gate rules.
-4. `reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md` — current order-of-operations policy.
-5. `reading/planning/TEN_QUESTION_STANDARD.md` — active ten-question distribution contract.
-6. `reading/schema/passage.schema.json` — authoritative canonical schema/type enum.
-7. `docs/READING_PASSAGE_STANDARD.md` — durable passage-quality standard.
-8. `reading/ROADMAP.md` — durable curriculum architecture.
-9. `reading/TASKS.md` — active operational queue.
-10. lexical/source ledgers only when the task actually concerns lexical identity, coverage, or exposure.
+1. `reading/STATUS.json` — exact current state and active language.
+2. `reading/AGENT_HANDOFF.md` — this continuity contract.
+3. `reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md` — production order.
+4. `reading/planning/TEN_QUESTION_STANDARD.md` — ten-question contract.
+5. `reading/schema/passage.schema.json` — canonical schema/type enum.
+6. `docs/READING_PASSAGE_STANDARD.md` — durable quality standard.
+7. `reading/ROADMAP.md` — curriculum architecture.
+8. `reading/TASKS.md` — operational queue.
+9. `reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md` — final-review batching/freshness rules when a language reaches final audit.
 
-### Precedence
+Current-state precedence:
 
-For current-state conflicts, use:
+**live canonical JSONL > fresh audit artifacts > STATUS > handoff/current policy > Ten-Question Standard + schema > durable standards/roadmap > historical calibration instructions/artifacts.**
 
-**live canonical JSONL > fresh audit artifacts > STATUS > final-review execution/policy docs > Ten-Question Standard + schema > durable standards/roadmap > historical calibration instructions/artifacts.**
+## 2. Arabic is closed and approved
 
-Later final-review policy supersedes older calibration text only on **workflow ordering**. It does not weaken quality criteria.
+Arabic A1–C2 is complete and formally approved:
 
-## 2. Current state — 2026-08-16
+- 360 canonical passages;
+- 60 at each A1/A2/B1/B2/C1/C2;
+- 3,600 questions and 3,600 linked answers;
+- Passes 01–09 fresh `PASS`;
+- Pass 10 `PASS_WITH_SOURCE_ADJUDICATION` with six current source adjudications and one historical repaired item;
+- Pass 11 `COMPLETE`, 360/360 manual naturalness review;
+- Pass 12 `PASS`, `final_approval=true`;
+- zero Pass 12 hard regressions or approval blockers;
+- direct Pass 12 checks: 360 unique IDs, valid sequences, zero question-answer linkage failures, zero undeclared question-target links, zero word-band failures, zero stored-word-count mismatches, zero Latin-script reader hits, and zero P6 new-target regressions.
 
-Arabic A1–C2 generation is complete:
+Final evidence:
+`reading/audit/final_arabic_pass12_adversarial_gate_falsification.json`
 
-- 360 canonical Arabic passages;
-- 60 passages at each A1, A2, B1, B2, C1, C2;
-- 10 questions and 10 linked answers per passage;
-- Arabic is in the closing final-review phase;
-- French and Urdu are paused until Arabic final review closes;
-- final Arabic approval remains **false** until fresh Pass 12 succeeds.
+**Do not reopen Arabic generation/recalibration/review unless new canonical Arabic data is deliberately changed.** Historical Arabic warnings/checklists do not override the approved current artifact chain.
 
-Do **not** restart Arabic generation, A1 calibration, or early unit production.
+Arabic coverage remains intentionally unmeasured. Existing zero coverage values are placeholders, not measured 0%; no percentage was fabricated to obtain approval.
 
-Current important audit state:
+## 3. Current production state
 
-- Pass 03 — `REVIEW_REQUIRED`: 8 residual A2 lexical-composition flags only.
-- Pass 04 — `REVIEW_REQUIRED`: 52 conservative diagnostic flags; many are likely classifier false positives and must be adjudicated before content changes.
-- Pass 07 — `PASS`: 0 actionable flags; all 360 length-band checks are clean. Coverage is still unmeasured, not a measured failure.
-- Pass 11 — `COMPLETE`: 360/360 passages covered by manual naturalness review evidence.
-- Pass 12 — persisted artifact is stale and blocked; its old Pass 07/Pass 11 blocker prose is not current truth.
+### French — ACTIVE
 
-Exact current details belong in `reading/STATUS.json`, not in chat memory.
+Live repo state:
 
-## 3. Immediate Arabic work queue
+- `reading/french/a1/passages.jsonl`: 6 canonical A1 calibration passages;
+- `reading/french/a1/CALIBRATION_UNIT_01.md` exists;
+- no French A2–C2 canonical corpus exists yet.
 
-1. Clear the eight residual A2 Pass 03 lexical-composition cases using already scheduled review vocabulary only.
-2. Adjudicate Pass 04's diagnostics before editing answers or passages.
-3. Repair only genuine Pass 04 answer/evidence defects in one guarded batch.
-4. Regenerate final audit artifacts sequentially from the current corpus.
-5. Repair Pass 12 dependency logic so it:
-   - includes Pass 04;
-   - accepts Pass 11 `COMPLETE` as completion;
-   - derives blocker text from current upstream artifacts rather than hard-coded historical reasons.
-6. Run Pass 12 last.
-7. Grant final approval only if fresh Pass 12 genuinely returns `PASS`.
+The six live A1 passages are the starting state. **Do not restart calibration from zero.** Continue A1 from sequence 7 toward 60 using the generation-first policy and current ten-question/schema contract.
 
-Do not invent Pass 13 merely because Pass 12 needed repair/re-execution.
+### Urdu — QUEUED
 
-## 4. Speed / execution contract
+Live repo state:
 
-The final review should be fast **without weakening safeguards**.
+- `reading/urdu/a1/passages.jsonl`: 6 canonical A1 calibration passages;
+- `reading/urdu/a1/calibration/` exists;
+- no Urdu A2–C2 canonical corpus exists yet.
 
-Use one large evidence-bounded batch per defect class:
+Keep Urdu unchanged while French is active unless the user explicitly reprioritizes it.
 
-- one live-head/collision check;
-- one compact snapshot/worklist;
-- review/classify the whole set;
-- one guarded mutation script;
-- one workflow execution for that batch;
-- rerun only audits materially affected by those fields;
-- one status/handoff update at the end of the completed batch.
+## 4. Immediate next action
 
-Do not create a separate workflow for every passage or every small edge case. If a guard exposes a new metadata pattern, update the same batch script and rerun unless human passage-specific adjudication is actually required.
+**Continue French A1 from the existing six passages.**
 
-Question-only changes normally require Pass 03 + Pass 04, not Pass 07 or another full prose naturalness read. Prose changes require targeted prose/length/script/evidence revalidation. Lexical metadata changes require the lexical/source/exposure gates.
+Before writing the first new French batch:
 
-The full gate suite is regenerated once at the final approval attempt.
+1. verify live `main`;
+2. read the six current French A1 passages and calibration note;
+3. inspect the French validated lexical sources/any French-specific ledgers needed for target identity;
+4. establish the continuation schedule from sequence 7 without rewriting sequences 1–6;
+5. generate in large unit-sized guarded batches under the ten-question standard;
+6. perform structural/source/linkage checks needed for safe generation, but reserve the expensive full multi-pass final audit for the completed generated corpus.
 
-## 5. Parallel-agent safety
+Do not translate Arabic passages into French. French must have natural French scenarios, collocations, grammar progression, and independent lexical scheduling.
 
-Multiple Arabic agents/chats may work at once.
+## 5. Speed / unthrottled execution contract
 
-Before any write batch:
+Use large evidence-bounded batches rather than micro-workflows:
 
-- verify live `main` and the affected records;
-- prefer non-overlapping levels/units/files;
-- encode expected source state in the remediation script;
+- one live-head/collision check per batch;
+- one compact source/worklist read;
+- one guarded mutation script per coherent batch;
+- one workflow run for that batch;
+- rerun only checks materially affected by the write;
+- update STATUS/TASKS/handoff at meaningful milestones, not per passage.
+
+A failed guard should normally improve the same batch script and rerun it. Create a separate workflow only when the failure proves a genuinely different human-adjudication problem.
+
+This removes self-imposed throttling without removing quality controls.
+
+## 6. Parallel-agent safety
+
+Multiple agents/chats may work in the repo.
+
+- verify live `main` before each write batch;
+- prefer non-overlapping languages/levels/units/files;
+- encode expected source state in large mutation scripts;
 - fail closed on source drift;
 - fetch/rebase before Actions pushes;
-- never overwrite a conflict merely to finish the batch.
+- serialize workflows that write the same canonical/audit artifact;
+- do not rely on recursive `GITHUB_TOKEN` workflow triggers.
 
-Serialize workflows that write the same audit artifact. GitHub Actions `GITHUB_TOKEN` bot commits may not recursively trigger dependent workflows, so explicitly run required dependent audits in the same workflow or via deliberate dispatch.
+## 7. Core pedagogical non-negotiables
 
-## 6. Core pedagogical non-negotiables
-
-- Canonical data is `reading/<language>/<level>/passages.jsonl`.
-- Reader order is passage → all questions → answers/reveal.
-- Arabic default is natural contemporary MSA; do not silently introduce dialect.
-- Vocabulary follows infer → verify → transfer and spaced reinforcement.
-- Root validated CSVs are foundations and must not be mutated merely to make passages easier.
+- Canonical data: `reading/<language>/<level>/passages.jsonl`.
+- Reader order: passage → all questions → answers/reveal.
+- Ten questions / ten linked answers per canonical passage.
+- Vocabulary uses infer → verify → transfer plus spaced review.
+- Root validated CSVs are lexical foundations and are not mutated merely to simplify passage production.
 - Frequency rank is not a CEFR label.
-- 3,000 validated items are not a complete C2 lexicon.
-- Reading-speed gains count only with adequate comprehension.
-- Passage difficulty is multidimensional; word count is a planning band, not a CEFR classifier.
-- Questions are learning tasks, not merely recall checks.
-- Only high-confidence naturalness/grammar/idiom defects are repaired during manual linguistic review; stylistic preference alone is not a defect.
-- Final approval is fail-closed and cannot be obtained by hand-editing audit statuses.
+- Passage difficulty is multidimensional; word bands are planning bands, not sole CEFR classifiers.
+- Questions are learning tasks, not just recall checks.
+- Final approval for each language is fail-closed and cannot be achieved by hand-editing status fields.
 
-## 7. Coverage note
+## 8. End-of-session procedure
 
-The current Arabic canonical field `estimated_known_token_coverage` is unmeasured. Existing zeros are placeholders. Pass 07 correctly records 360 passages as `UNMEASURED_NOT_FAILURE`.
+Before ending a substantial session:
 
-Do not fabricate coverage percentages and do not interpret zero as 0% learner knowledge. A future coverage implementation must calculate from a defensible curriculum-known ledger and documented morphology/token policy.
-
-## 8. Question contract note
-
-`TEN_QUESTION_STANDARD.md` and the schema are authoritative for the current ten-question corpus. Some older prose in `READING_PASSAGE_STANDARD.md` predates the ten-question expansion and lists fewer question types / lower question counts. Treat that older text as historical where it conflicts with the active Ten-Question Standard or schema.
-
-Role overlap is allowed only when semantics and metadata genuinely support it. Do not relabel unrelated questions to satisfy numeric gates.
-
-## 9. End-of-session procedure
-
-Before ending a substantial reading-project session:
-
-1. update `reading/STATUS.json` with the exact live state;
+1. synchronize `reading/STATUS.json` with live canonical state;
 2. update `reading/TASKS.md` if the operational queue changed;
-3. update this handoff only when a new durable decision, failure mode, precedence rule, or exception needs to survive;
-4. keep historical details in audit artifacts / git history rather than bloating this handoff;
+3. update this handoff only for durable phase/precedence/failure-mode changes;
+4. leave detailed audit history in `reading/audit/` and git history instead of bloating this file;
 5. leave one exact immediate next action.
-
-The handoff should stay concise. Durable pedagogy belongs in standards/roadmap; exact state belongs in `STATUS.json`; audit evidence belongs in `reading/audit/`.
