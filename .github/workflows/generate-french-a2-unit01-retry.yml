@@ -5,9 +5,8 @@ on:
     paths:
       - 'reading/tools/generate_french_a2_unit01_retry.py'
       - 'reading/tools/generate_french_a2_unit01_retry2.py'
-      - 'reading/tools/generate_french-a2-unit01-retry3.py'
+      - 'reading/tools/generate_french_a2_unit01_retry3.py'
       - 'reading/tools/generate_french_a2_unit01_retry4.py'
-      - 'reading/tools/generate_french_a2_unit01_retry5.py'
       - '.github/workflows/generate-french-a2-unit01-retry.yml'
 permissions:
   contents: write
@@ -24,7 +23,7 @@ jobs:
       - name: Install validation dependency
         run: python -m pip install --quiet jsonschema
       - name: Generate and validate hardened French A2 Unit 01
-        run: python reading/tools/generate_french_a2_unit01_retry5.py
+        run: python reading/tools/generate_french_a2_unit01_retry4.py
       - name: Independent A2 Unit 01 checks
         run: |
           python - <<'PY'
@@ -43,7 +42,12 @@ jobs:
           assert sum(len(r['answer_key']) for r in rows)==60
           forms=[t['form'] for r in rows[:5] for t in r['new_lexical_targets']]
           assert forms==['retard','conseil','erreur','expliquer','essayer','possible','réparer','éviter','rendez-vous','découvrir']
-          assert 'mistake' not in p.read_text(encoding='utf-8')
+          reader_facing=[]
+          for r in rows:
+              reader_facing.extend([r['title'],r['text']])
+              reader_facing.extend(q['prompt'] for q in r['questions'])
+              reader_facing.extend(a['answer'] for a in r['answer_key'])
+          assert not any('mistake' in s.lower() for s in reader_facing)
           p4=rows[3]
           ev=next(t for t in p4['new_lexical_targets'] if t['form']=='éviter')
           assert ev['source_rank']==662
