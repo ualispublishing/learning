@@ -1,0 +1,48 @@
+name: Remediate final Arabic Pass 03 A1-A2 grammar
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/remediate_final_arabic_pass03_a1_a2_grammar.py'
+      - '.github/workflows/remediate-final-arabic-pass03-a1-a2-grammar.yml'
+permissions:
+  contents: write
+jobs:
+  remediate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Apply guarded A1-A2 grammar remediation
+        run: python reading/tools/remediate_final_arabic_pass03_a1_a2_grammar.py
+      - name: Recompute Pass 03 from remediated canonical data
+        run: python reading/tools/final_audit_arabic_pass03_question_composition.py
+      - name: Assert all grammar-style composition debt is gone
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path('reading/audit/final_arabic_pass03_question_composition.json').read_text(encoding='utf-8'))
+          for level, s in p['levels'].items():
+              if s['deficiency_categories'].get('grammar_style', 0):
+                  raise SystemExit(f'{level}: grammar_style debt remains: {s}')
+          for f in p['flags']:
+              deficits=set(f.get('deficits',{}))
+              if f.get('level') != 'a2' or not deficits or not deficits <= {'lexical'}:
+                  raise SystemExit(f'unexpected residual Pass03 flag: {f}')
+          print(f"residual_pass03_flags={p['totals']['review_flags']} (lexical-only A2)")
+          PY
+      - name: Recompute Pass 04 after answer-key changes
+        run: python reading/tools/final_audit_arabic_pass04_answer_evidence_alignment.py
+      - name: Commit canonical remediation and refreshed audits
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/arabic/a1/passages.jsonl reading/arabic/a2/passages.jsonl reading/audit/final_arabic_pass03_question_composition.json reading/audit/final_arabic_pass04_answer_evidence_alignment.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Remediate A1-A2 Pass 03 grammar distribution [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
