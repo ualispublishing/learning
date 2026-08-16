@@ -70,49 +70,122 @@
       "pass11": "COMPLETE",
       "pass12": "BLOCKED"
     },
-    "current_actionable_state": {
-      "pass03": {
-        "review_flags": 8,
-        "scope": "A2 only",
-        "deficit": "lexical question-composition minimum",
-        "note": "All A1 and B1-C2 Pass 03 composition debt is closed. The remaining eight cases are late-A2 transfer/cumulative passages."
+    "current_upstream_blockers": [
+      {
+        "gate": "pass03_question_composition",
+        "status": "REVIEW_REQUIRED",
+        "reason": "question-composition audit still has 8 review flags"
       },
-      "pass04": {
-        "review_flags": 52,
-        "kind": "conservative diagnostics",
-        "note": "Many flags are expected classifier false-positive candidates, especially repeated grammatical-category answers and surface-overlap heuristics. Adjudicate the diagnostic before changing content."
+      {
+        "gate": "pass04_answer_evidence_alignment",
+        "status": "REVIEW_REQUIRED",
+        "reason": "answer/evidence diagnostic still has 52 review flags requiring adjudication/remediation"
+      }
+    ],
+    "pass12_freshness": "STALE_RELATIVE_TO_CURRENT_UPSTREAM_STATE",
+    "pass12_hard_regressions": [],
+    "manual_naturalness_progress": {
+      "a1": {
+        "passages_reviewed": 60,
+        "passages_total": 60,
+        "review_complete": true,
+        "high_confidence_repairs_applied": 37,
+        "passages_touched": 31,
+        "repair_sources": [
+          "reading/tools/repair_final_arabic_a1_u07_p03_tatweel_typo.py",
+          "reading/tools/repair_final_arabic_a1_u07_p03_forecast_naturalness.py",
+          "reading/tools/repair_final_arabic_pass11_a1_naturalness_batch.py",
+          "reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl",
+          "reading/tools/repair_final_arabic_post_pass07_a1_naturalness.py"
+        ],
+        "status": "PASS_AFTER_REPAIR",
+        "post_pass07_recheck": {
+          "passages_rechecked": 28,
+          "high_confidence_repairs_applied": 9,
+          "passages_touched": 9,
+          "status": "PASS_AFTER_REPAIR",
+          "snapshot": "reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl",
+          "repair_source": "reading/tools/repair_final_arabic_post_pass07_a1_naturalness.py",
+          "note": "All 28 A1 passages expanded after the original Pass11 read were re-read in current ending context. Nine high-confidence tense, event-order, logic, or MSA-idiom defects introduced by the Pass07 append-only expansions were repaired with literal-source, metadata, lexical-occurrence, and band guards; Pass07 remained at zero review flags after repair."
+        },
+        "note": "Original full A1 Pass11 review plus targeted post-Pass07 current-text recheck are complete; current canonical A1 prose is covered by naturalness review evidence."
       },
-      "pass07": {
-        "review_flags": 0,
-        "status": "PASS",
-        "coverage_metric": "UNMEASURED_NOT_FAILURE",
-        "coverage_unmeasured_passages": 360
+      "a2": {
+        "passages_reviewed": 60,
+        "passages_total": 60,
+        "review_complete": true,
+        "high_confidence_repairs_applied": 7,
+        "passages_touched": 7,
+        "repair_sources": [
+          "reading/tools/repair_final_arabic_pass11_a2_naturalness_batch.py",
+          "reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl"
+        ],
+        "status": "PASS_AFTER_REPAIR",
+        "post_pass07_recheck": {
+          "passages_rechecked": 38,
+          "high_confidence_repairs_applied": 0,
+          "passages_touched": 0,
+          "status": "PASS_NO_ADDITIONAL_REPAIR",
+          "snapshot": "reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl",
+          "note": "All 38 A2 passages expanded after the original Pass11 read were re-read in current ending context. No additional high-confidence grammar, idiom, tense-continuity, event-order, or naturalness defect was found; stylistic-only alternatives were left unchanged."
+        },
+        "note": "Original full A2 Pass11 review plus targeted post-Pass07 current-text recheck are complete; current canonical A2 prose is covered by naturalness review evidence."
       },
-      "pass11": {
-        "status": "COMPLETE",
-        "passages_reviewed": 360,
-        "levels_complete": 6
+      "b1": {
+        "passages_reviewed": 60,
+        "passages_total": 60,
+        "review_complete": true,
+        "high_confidence_repairs_applied": 44,
+        "passages_touched": 35,
+        "repair_sources": [
+          "reading/audit/final_arabic_pass11_b1_snapshot.jsonl",
+          "reading/tools/repair_final_arabic_pass11_b1_naturalness_batch.py"
+        ],
+        "status": "PASS_AFTER_REPAIR",
+        "note": "Full B1 manual prose read was performed only after all 60 B1 passages had completed Pass-03/07 length and assessment recalibration. Exact passage-scoped repairs were assertion-guarded; stylistic-only alternatives were intentionally left unchanged."
       },
-      "pass12": {
-        "status": "BLOCKED",
-        "freshness": "STALE_RELATIVE_TO_CURRENT_UPSTREAM_STATE",
-        "note": "Persisted blocker text still refers to obsolete Pass 07 and Pass 11 states. Pass 12 must be repaired/refreshed last."
+      "b2": {
+        "passages_reviewed": 60,
+        "passages_total": 60,
+        "review_complete": true,
+        "high_confidence_repairs_applied": 22,
+        "passages_touched": 20,
+        "repair_sources": [
+          "reading/audit/final_arabic_pass11_b2_snapshot.jsonl",
+          "reading/tools/repair_final_arabic_pass11_b2_naturalness_batch.py"
+        ],
+        "status": "PASS_AFTER_REPAIR",
+        "note": "Full B2 manual prose read was performed only after all 60 B2 passages had completed Pass-03/07 length and assessment recalibration. The full pass applied 21 exact assertion-guarded repairs across 20 passages; the total also includes one earlier independently detected comparative-naturalness repair in ar-b2-u04-p06, which was subsequently reviewed again in the full pass. Stylistic-only alternatives were intentionally left unchanged."
+      },
+      "c1": {
+        "passages_reviewed": 60,
+        "passages_total": 60,
+        "review_complete": true,
+        "high_confidence_repairs_applied": 29,
+        "passages_touched": 23,
+        "repair_sources": [
+          "reading/audit/final_arabic_pass11_c1_snapshot.jsonl",
+          "reading/tools/repair_final_arabic_pass11_c1_naturalness_batch.py"
+        ],
+        "status": "PASS_AFTER_REPAIR",
+        "note": "Full C1 manual prose read was performed only after all 60 C1 passages had completed Pass-03/07 length and assessment recalibration. The repair batch applied 29 exact high-confidence MSA grammar/idiom/collocation repairs across 23 passages; assessment, new-target, review-target, and literal new-target occurrence contracts were assertion-guarded. Stylistic-only alternatives were intentionally left unchanged."
+      },
+      "c2": {
+        "passages_reviewed": 60,
+        "passages_total": 60,
+        "review_complete": true,
+        "high_confidence_repairs_applied": 66,
+        "passages_touched": 43,
+        "repair_sources": [
+          "reading/audit/final_arabic_pass11_c2_snapshot.jsonl",
+          "reading/tools/repair_final_arabic_pass11_c2_naturalness_batch.py",
+          "reading/tools/repair_final_arabic_c2_u01_p02_latin_intrusion.py",
+          "reading/tools/repair_final_arabic_c2_u01_p03_mubarrir_sense.py"
+        ],
+        "status": "PASS_AFTER_REPAIR",
+        "note": "Full C2 manual prose read was performed only after all 60 C2 passages had completed structural/length and assessment recalibration. The full manual batch applied 64 exact high-confidence MSA grammar/idiom/collocation repairs across 42 passages. The total also includes the earlier guarded مبرر lexical-sense normalization in ar-c2-u01-p03 and the pre-snapshot removal of a residual Latin-script intrusion in ar-c2-u01-p02, for 66 repairs across 43 unique passages. The batch assertion-guarded assessments, speed-training metadata, new/review target metadata, literal target occurrence counts, the 700–1200-word band, and Arabic-only reader-facing title/text. A fresh post-repair snapshot revalidated all 60 passages at 709–977 words. Stylistic-only alternatives were intentionally left unchanged."
       }
     },
-    "final_refresh_required_before_approval": [
-      "pass01",
-      "pass02",
-      "pass03",
-      "pass04",
-      "pass05",
-      "pass06",
-      "pass07",
-      "pass08",
-      "pass09",
-      "pass10",
-      "pass11",
-      "pass12"
-    ],
     "final_approval": false
   },
   "manual_naturalness": {
@@ -127,12 +200,10 @@
     "interpretation": "The current zero field values are placeholders and must not be treated as measured 0% coverage."
   },
   "next_actions": [
-    "resolve the eight residual A2 Pass 03 lexical-composition cases using already scheduled review vocabulary; do not invent new lexical targets",
-    "adjudicate and repair the Pass 04 diagnostic logic before editing answers; separate false positives from genuine evidence/alignment defects",
-    "remediate any genuine Pass 04 defects in one guarded batch",
-    "regenerate all final audit artifacts sequentially from current canonical data",
-    "repair Pass 12 so it includes Pass 04, accepts Pass 11 COMPLETE, and derives blocker reasons from live upstream artifacts",
-    "grant final approval only if fresh Pass 12 returns PASS"
+    "resolve current Pass 03 question-composition flags in one guarded batch and rerun Pass 03 + Pass 04",
+    "adjudicate Pass 04 diagnostics before editing content; repair only genuine answer/evidence defects",
+    "repair/refresh Pass 12 after upstream gates close; Pass 12 must include Pass 04 and accept Pass 11 COMPLETE",
+    "regenerate the full final audit suite sequentially immediately before the final Pass 12 attempt"
   ],
   "important_files": [
     "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md",
