@@ -1,0 +1,106 @@
+name: Remediate final Arabic Pass 02 question target linkage
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/remediate_final_arabic_pass02_question_target_linkage.py'
+      - '.github/workflows/remediate-final-arabic-pass02-question-target-linkage.yml'
+permissions:
+  contents: write
+jobs:
+  remediate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install audit dependencies
+        run: python -m pip install --quiet jsonschema
+      - name: Apply seven linkage repairs
+        run: python reading/tools/remediate_final_arabic_pass02_question_target_linkage.py
+      - name: Recompute Pass 01
+        run: python reading/tools/final_audit_arabic_pass01_data_integrity.py
+      - name: Recompute Pass 02
+        run: python reading/tools/final_audit_arabic_pass02_lexical_exposure_integrity.py
+      - name: Require zero undeclared question targets
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path('reading/audit/final_arabic_pass02_lexical_exposure_integrity.json').read_text(encoding='utf-8'))
+          bad=[w for w in p.get('warnings',[]) if isinstance(w,dict) and w.get('code')=='question_target_not_declared_in_passage_targets']
+          if bad:
+              raise SystemExit(f'undeclared question targets remain: {bad}')
+          if p.get('status') != 'PASS' or p.get('totals',{}).get('hard_issues') != 0:
+              raise SystemExit(f'Pass02 hard regression: status={p.get("status")} totals={p.get("totals")}')
+          print(f"pass02=PASS undeclared_question_targets=0 warnings={p.get('totals',{}).get('warnings')}")
+          PY
+      - name: Recompute Pass 03
+        run: python reading/tools/final_audit_arabic_pass03_question_composition.py
+      - name: Recompute Pass 04
+        run: python reading/tools/final_audit_arabic_pass04_answer_evidence_alignment.py
+      - name: Recompute Pass 06
+        run: python reading/tools/final_audit_arabic_pass06_lexical_source_identity.py
+      - name: Recompute Pass 08
+        run: python reading/tools/final_audit_arabic_pass08_continuity_duplicate_balance.py
+      - name: Validate affected gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          base=Path('reading/audit')
+          paths={
+            'pass01':base/'final_arabic_pass01_data_integrity.json',
+            'pass03':base/'final_arabic_pass03_question_composition.json',
+            'pass04':base/'final_arabic_pass04_answer_evidence_alignment.json',
+            'pass06':base/'final_arabic_pass06_lexical_source_identity.json',
+            'pass08':base/'final_arabic_pass08_continuity_duplicate_balance.json',
+          }
+          for name,path in paths.items():
+              p=json.loads(path.read_text(encoding='utf-8'))
+              if p.get('status') != 'PASS':
+                  raise SystemExit(f'{name} not PASS: status={p.get("status")} totals={p.get("totals")}')
+          p1=json.loads(paths['pass01'].read_text(encoding='utf-8'))
+          if p1.get('totals',{}).get('hard_issues') != 0:
+              raise SystemExit(f'Pass01 hard issues: {p1.get("totals")}')
+          p3=json.loads(paths['pass03'].read_text(encoding='utf-8'))
+          if p3.get('totals',{}).get('review_flags') != 0:
+              raise SystemExit(f'Pass03 flags: {p3.get("totals")}')
+          p4=json.loads(paths['pass04'].read_text(encoding='utf-8'))
+          if p4.get('totals',{}).get('review_flags') != 0 or p4.get('totals',{}).get('stale_adjudications') != 0:
+              raise SystemExit(f'Pass04 regression: {p4.get("totals")}')
+          p6=json.loads(paths['pass06'].read_text(encoding='utf-8'))
+          if p6.get('totals',{}).get('hard_issues') != 0:
+              raise SystemExit(f'Pass06 hard issues: {p6.get("totals")}')
+          p8=json.loads(paths['pass08'].read_text(encoding='utf-8'))
+          if p8.get('totals',{}).get('hard_issues') != 0 or p8.get('totals',{}).get('review_flags') != 0:
+              raise SystemExit(f'Pass08 regression: {p8.get("totals")}')
+          print('affected_gates=PASS')
+          PY
+      - name: Synchronize current status
+        run: python reading/tools/update_arabic_final_review_status.py
+      - name: Commit linkage remediation and affected audits
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            reading/arabic/a1/passages.jsonl \
+            reading/arabic/b1/passages.jsonl \
+            reading/audit/final_arabic_pass01_data_integrity.json \
+            reading/audit/final_arabic_pass02_lexical_exposure_integrity.json \
+            reading/audit/final_arabic_pass03_question_composition.json \
+            reading/audit/final_arabic_pass04_answer_evidence_alignment.json \
+            reading/audit/final_arabic_pass06_lexical_source_identity.json \
+            reading/audit/final_arabic_pass08_continuity_duplicate_balance.json \
+            reading/STATUS.json
+          if git diff --cached --quiet; then
+            echo 'No changes to commit'
+            exit 0
+          fi
+          git commit -m 'Repair final Arabic question-target linkage [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
