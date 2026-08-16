@@ -23,76 +23,81 @@ Final evidence: `reading/audit/final_arabic_pass12_adversarial_gate_falsificatio
 French A1 is complete at 60 passages / 600 questions / 600 answers.
 
 - canonical file: `reading/french/a1/passages.jsonl`;
-- accepted A1 blob: `0493a2fa13e51b5997db05e91cdea4d8dc5e647b`;
-- generation-integrity closeout = `PASS`;
-- 100 deliberate A1 targets;
-- all A1 Unit P06 checkpoints have zero deliberately new targets.
+- accepted blob: `0493a2fa13e51b5997db05e91cdea4d8dc5e647b`;
+- generation-integrity closeout: `PASS` at `reading/audit/french_a1_generation_integrity.json`;
+- 100 deliberate targets;
+- all Unit P06 checkpoints have zero deliberately new targets.
 
-A1 is closed to routine regeneration but has not yet gone through the final language-wide French multi-pass approval audit. Continue generation-first through A2–C2 first unless governing policy changes.
+A1 is closed to routine regeneration but has not yet gone through the final language-wide French multi-pass approval audit.
 
-## 4. French A2 — ACTIVE
+## 4. French A2 — GENERATED / INTEGRITY PASS
 
-Canonical file: `reading/french/a2/passages.jsonl`.
+French A2 is complete at 60 passages / 600 questions / 600 answers.
 
-Current accepted frontier:
+- canonical file: `reading/french/a2/passages.jsonl`;
+- accepted blob: `d0a80b8866071f426019aa0ad143e1d270dba4de`;
+- canonical completion commit: `b529f730e743e3a3b077750f31be31632b8b9afc`;
+- generation-integrity closeout: `PASS` at `reading/audit/french_a2_generation_integrity.json`;
+- 100 unique deliberate A2 targets;
+- zero A1↔A2 deliberate-target collisions by validated source ID or visible form;
+- all 10 Unit P06 checkpoints have zero deliberately new targets.
 
-- Units 01–05 / sequences 1–30: complete;
-- total A2 passages: 30;
-- total A2 questions/answers: 300 / 300;
-- latest sequence: `fr-a2-u05-p06`, sequence 30;
-- current canonical A2 blob: `236c94a3493c83e0e55c56fc3cd34e52ec258cae`;
-- latest canonical A2 commit: `eab60b077540974428f1f634630a503aa59857fc`;
-- every completed A2 Unit P06 has zero deliberately new lexical targets.
+Important later-unit target history:
 
-A2 planning band remains **140–220 words** for standard passages, with controlled lexical load, more reference chains, subordinate clauses, motives/cause-effect, tense/aspect flexibility, and transfer questions.
+- Unit 06: `voyage`, `train`, `route`, `départ`, `hôtel`, `chambre`, `retour`, `visite`, `plan`, `avion`.
+- Unit 07: `tenter`, `tranquille`, `déjeuner`, `partager`, `vue`, `avancer`, `marché`, `poste`, `intérêt`, `mur`.
+- Unit 08: `étrange`, `répéter`, `appartenir`, `signe`, `plusieurs`, `compagnie`, `douter`, `test`, `but`, `parole`.
+- Unit 09: `excuse`, `surprise`, `bruit`, `fonctionner`, `moitié`, `rater`, `cerveau`, `respirer`, `chacun`, `pourtant`.
+- Unit 10: `habiter`, `milieu`, `cuisine`, `fenêtre`, `vidéo`, `caméra`, `retenir`, `image`, `proposer`, `gérer`.
 
-### A2 target history
+Guard history worth preserving:
 
-Unit 01:
-`retard`, `conseil`, `erreur`, `expliquer`, `essayer`, `possible`, `réparer`, `éviter`, `rendez-vous`, `découvrir`.
+- Unit 04 failed closed on invisible exact `perdre`; repaired naturally without weakening the guard.
+- Unit 06 rejected duplicate candidate `place`; replaced with fresh `visite`.
+- Unit 07 rejected duplicate candidate `gauche`; replaced with fresh `tenter`.
+- Unit 08 failed closed on checkpoint exact-form `douter`; repaired with an exact infinitive occurrence.
+- Unit 09 failed closed on an invalid grammar-role enum; metadata role was corrected to schema-approved `review`, lexical content unchanged.
+- Unit 10 passed first run.
 
-Unit 02:
-`raison`, `résultat`, `décision`, `information`, `important`, `différent`, `habitude`, `expérience`, `choix`, `idée`.
+Do not broadly regenerate A2. The final expensive French multi-pass approval audit remains deferred until French A1–C2 generation is complete.
 
-Unit 03:
-`oublier`, `clé`, `perdre`, `retrouver`, `recevoir`, `envoyer`, `vérifier`, `payer`, `numéro`, `carte`.
+## 5. French B1 — IMMEDIATE FRONTIER
 
-Unit 04:
-`projet`, `équipe`, `réunion`, `responsable`, `programme`, `dossier`, `demande`, `réponse`, `service`, `contact`.
+No canonical B1 passages are accepted yet. Start with **B1 Unit 01 / sequences 1–6 as a calibration unit**.
 
-Unit 05:
-`médecin`, `patient`, `douleur`, `santé`, `hôpital`, `accident`, `soin`, `urgence`, `risque`, `danger`.
+B1 production profile from the durable standard/roadmap:
 
-### Guard history and durable rules
+- standard length band: **220–350 words**;
+- new lexical planning range: **3–6 types per standard passage**, a ceiling/range rather than a quota;
+- connected narratives/explanations and clearer paragraph structure;
+- paragraph-level main ideas and multi-sentence inference;
+- motives, decisions, consequences and summaries;
+- grammar review increasingly embedded rather than announced;
+- move due vocabulary across related but non-identical topics/genres;
+- 10 questions + 10 linked answers per canonical passage under the project-wide ten-question override;
+- P06 checkpoint has zero deliberately new lexical targets and should be high-coverage/timed-reading friendly.
 
-From Unit 03 onward, every A2 generator checks proposed new targets against **A1 plus all prior A2 deliberate targets** before canonical write. Every batch also enforces exact source-blob lock, validated `french_top1000.csv` rank/ID identity, A2 word band, 10 one-to-one Q/A per passage, local question-target declaration, exact-form visibility for deliberate running-text/summary reviews, sequence/ID continuity, exactly ten new targets across P01–P05, zero-new P06, and independent post-generation checks before commit.
+### B1 Unit 01 guard requirements
 
-Unit 04 first run correctly failed closed because the review target `perdre` appeared only as the inflected form `perdu`. A natural exact infinitive occurrence was added; the retry passed without weakening the visibility guard.
+1. verify live `main`, confirm `reading/french/b1/passages.jsonl` state, and ensure no parallel writer has claimed Unit 01;
+2. check every proposed new B1 target against **all deliberate French A1 + A2 new targets** before canonical write;
+3. preserve validated `french_top1000.csv` source rank/ID identity and exact source-state locks;
+4. make every deliberate running-text/summary review exactly visible;
+5. validate schema, 220–350 word band, immutable IDs/sequences, local question-target declarations and one-to-one answer linkage;
+6. keep contextual introductions inferable rather than dictionary-like;
+7. include B1-appropriate question demand: multi-sentence inference, motive/reason, summary and grammar-in-context where natural;
+8. keep P06 zero-new; fail closed on any collision or drift;
+9. treat this first B1 unit as calibration: inspect the generated unit before scaling later B1 units.
 
-Unit 05 used general, non-diagnostic health/safety language and passed all guards on its first workflow run.
+## 6. Immediate next action
 
-Do not translate Arabic passages into French; keep French scenarios and collocations independently natural.
+**Generate and validate French B1 Unit 01 / sequences 1–6 as one guarded calibration batch, fresh against all completed A1+A2 deliberate targets.**
 
-## 5. Immediate next action
-
-**Generate French A2 Unit 06 / sequences 31–36 as one guarded six-passage batch against exact canonical A2 blob `236c94a3493c83e0e55c56fc3cd34e52ec258cae`.**
-
-Requirements:
-
-1. verify live `main` and ensure no parallel agent has claimed Unit 06;
-2. review Unit-05 targets one pair per P01–P05 where natural: `médecin/patient`, `douleur/santé`, `hôpital/accident`, `soin/urgence`, `risque/danger`;
-3. choose ten source-backed new targets and reject anything already deliberate in A1 or A2 Units 01–05;
-4. keep standard passages in the 140–220 band;
-5. preserve exact local target declarations and one-to-one answer linkage;
-6. make deliberate running-text reviews exactly visible;
-7. keep P06 zero-new and timed-reading friendly;
-8. lock the generator to the exact 30-passage source state so parallel work fails closed on drift.
-
-## 6. Urdu — QUEUED
+## 7. Urdu — QUEUED
 
 Urdu remains unchanged at six A1 calibration passages. Keep it paused while French is active unless explicitly reprioritized.
 
-## 7. Throughput / parallel-agent rules
+## 8. Throughput / parallel-agent rules
 
 - use coherent six-passage unit batches, not passage-by-passage workflows;
 - verify live main before each write batch;
@@ -103,7 +108,7 @@ Urdu remains unchanged at six A1 calibration passages. Keep it paused while Fren
 - do not rely on recursive `GITHUB_TOKEN` workflow triggers;
 - update STATUS/TASKS/handoff at meaningful milestones, not after every passage.
 
-## 8. Core pedagogical non-negotiables
+## 9. Core pedagogical non-negotiables
 
 - canonical data: `reading/<language>/<level>/passages.jsonl`;
 - passage → all questions → answers/reveal;
