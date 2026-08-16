@@ -16,50 +16,38 @@ This is the **active operational queue**. Historical calibration/review work bel
 - [x] Pass 12 `PASS`, zero hard regressions, zero final-approval blockers.
 - [x] Arabic formal final approval = `true`.
 
-Final Arabic evidence:
-`reading/audit/final_arabic_pass12_adversarial_gate_falsification.json`
-
 Do not reopen Arabic unless canonical Arabic content is deliberately changed.
 
 ## French — ACTIVE
 
-### A1 — GENERATED / CLOSED TO ROUTINE REGENERATION
+### A1 — GENERATED / INTEGRITY PASS / CLOSED TO ROUTINE REGENERATION
 
-- [x] Unit 01 / sequences 1–6 preserved from calibration.
-- [x] Unit 02 / sequences 7–12 generated as one guarded batch.
-- [x] Unit 03 / sequences 13–18 generated as one guarded batch.
-- [x] Unit 04 / sequences 19–24 generated as one guarded batch.
-- [x] Unit 05 / sequences 25–30 generated as one guarded batch.
-- [x] Unit 06 / sequences 31–36 generated as one guarded batch; exact-form review failure repaired without weakening the visibility guard.
-- [x] Unit 07 / sequences 37–42 generated as one guarded batch; validated lemma/surface-form issue resolved before canonical write.
-- [x] Unit 08 / sequences 43–48 generated as one guarded batch.
-- [x] Unit 09 / sequences 49–54 generated as one guarded batch.
-- [x] Unit 10 / sequences 55–60 generated as one guarded batch; unsupported `pluie`/`manteau` targets were rejected by the source guard and replaced by validated `ciel`/`sac` before the successful retry.
+- [x] Units 01–10 / sequences 1–60 generated.
+- [x] 60 passages / 600 questions / 600 linked answers.
+- [x] Every Unit P06 checkpoint has zero deliberately new lexical targets.
+- [x] Generation-integrity closeout = `PASS` with 100 deliberate targets, four verified sense overrides, documented morphology/polysemy exceptions, and no remaining integrity failures.
+- [x] Current A1 canonical blob: `0493a2fa13e51b5997db05e91cdea4d8dc5e647b`.
 
-French A1 generated totals:
+A1 is still part of the generation-first French corpus and has **not** gone through the final language-wide multi-pass approval audit. Do not broadly regenerate it.
 
-- 60 canonical passages;
-- 600 questions;
-- 600 linked answers;
-- 10 complete six-passage units;
-- each Unit P06 checkpoint has zero deliberately new lexical targets;
-- generated passages preserve source-rank identity, local target declaration, question-answer linkage, sequence/ID continuity, and collision guards;
-- A1 generated units use the 90–140-word planning band;
-- A1 is generated but **not yet the final audited/approved French language corpus**; the expensive multi-pass review remains deferred under generation-first policy.
+### A2 — ACTIVE
 
-### A2 — NEXT
+- [x] Verify live A2 start state and A2 140–220-word planning band.
+- [x] Unit 01 / sequences 1–6 generated and committed as one guarded batch.
+- [x] Unit 01: 60 questions / 60 linked answers / 10 new targets / zero-new P06.
+- [x] Unit 01 bridge reviews from A1 are explicitly visible and locally declared.
+- [x] Unit 01 source, linkage, word-band, sequence, reader-facing-language, and collision checks passed independently.
+- [x] Current A2 canonical blob after Unit 01: `26b18ab417f19597cf12d7d45b8932c5654292fd`.
+- [ ] Unit 02 / sequences 7–12: generate as one guarded batch against the live Unit-01 blob.
+- [ ] Review Unit-01 targets one pair per P01–P05 where natural; keep P06 zero-new-target.
+- [ ] Continue A2 in coherent six-passage guarded batches to 60 passages.
 
-- [ ] Verify live `main`, whether `reading/french/a2/passages.jsonl` exists, and the exact A2 starting state.
-- [ ] Confirm A2 planning constraints from the roadmap/standards before writing.
-- [ ] Generate A2 Unit 01 / sequences 1–6 as one guarded batch.
-- [ ] Use natural contemporary French and independently designed A2 scenarios; do not translate Arabic passages or recycle A1 passages mechanically.
-- [ ] Schedule bridge/review material from A1 where pedagogically useful while keeping all question target IDs locally declared.
-- [ ] Keep Unit P06 zero-new-target and timed-reading friendly.
-- [ ] Continue A2 in coherent guarded unit batches to 60 passages.
+A2 Unit 01 target set:
+`retard`, `conseil`, `erreur`, `expliquer`, `essayer`, `possible`, `réparer`, `éviter`, `rendez-vous`, `découvrir`.
 
 Remaining French levels:
 
-- [ ] A2: 60 passages.
+- [ ] A2: 54 passages remain after Unit 01.
 - [ ] B1: 60 passages.
 - [ ] B2: 60 passages.
 - [ ] C1: 60 passages.
@@ -68,13 +56,12 @@ Remaining French levels:
 Production policy:
 
 - generation-first, full multi-pass audit at completed French corpus milestone;
+- A2 standard passages use the 140–220-word planning band and controlled lexical load;
 - lightweight structural/source/linkage validation during generation;
-- fail closed on lexical-source drift, canonical blob drift, schema failure, linkage failure, invisible deliberate review, or sequence collision;
+- fail closed on lexical-source drift, canonical blob drift, schema failure, linkage failure, invisible deliberate review, reader-facing contamination, or sequence collision;
 - do not mutate the root validated lexical CSV merely to simplify passage production.
 
 ## Urdu — QUEUED
-
-Live starting state:
 
 - [x] A1 sequences 1–6 exist in `reading/urdu/a1/passages.jsonl`.
 - [x] `reading/urdu/a1/calibration/` exists.
@@ -86,23 +73,12 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 ## Throughput rules
 
 - Work in coherent unit/batch scopes, not passage-by-passage workflows.
-- One collision check + one guarded script + one relevant validation run per batch.
+- One live-state/collision check + one guarded script + one relevant validation run per batch.
 - Rerun only checks affected by the fields changed.
 - Full multi-pass audit is a final-stage operation, not a per-generation-batch tax.
 - Fail closed on source drift or invariant failure, then fix the same batch script unless the issue truly requires separate adjudication.
 - Serialize writers to the same canonical/audit artifact.
 
-## Reader integration / telemetry
-
-After the language corpus work reaches the appropriate stable state:
-
-- [ ] confirm reader import contract;
-- [ ] keep JSONL canonical regardless of export format;
-- [ ] create adapters as needed;
-- [ ] preserve passage → questions → reveal ordering;
-- [ ] integrate timing/comprehension telemetry where available;
-- [ ] never count speed gains below the comprehension gate.
-
 ## Immediate next task
 
-**Begin French A2 Unit 01 / sequences 1–6 from the verified live A2 starting state. Do not reopen or regenerate French A1.**
+**Generate French A2 Unit 02 / sequences 7–12 against canonical A2 blob `26b18ab417f19597cf12d7d45b8932c5654292fd`. Keep Arabic sealed.**
