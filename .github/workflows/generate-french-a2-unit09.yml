@@ -21,7 +21,7 @@ jobs:
       - name: Install validation dependency
         run: python -m pip install --quiet jsonschema
       - name: Append and validate Unit 09
-        run: python reading/tools/generate_french_a2_unit09.py
+        run: python reading/tools/generate_french_a2_unit09_retry.py
       - name: Independent Unit 09 checks
         run: |
           python - <<'PY'
