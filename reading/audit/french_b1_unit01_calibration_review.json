@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "scope": "French B1 Unit 01 post-calibration review",
+  "pre_repair_blob": "43352e6babf1851bc05bbecbc2346cfc3117e76b",
+  "post_repair_blob": "beed8c8337be567325a4b329b79c7d070511f3b1",
+  "passages": 6,
+  "questions": 60,
+  "answers": 60,
+  "new_targets": 15,
+  "checkpoint_zero_new": true,
+  "word_counts": {
+    "fr-b1-u01-p01": 246,
+    "fr-b1-u01-p02": 254,
+    "fr-b1-u01-p03": 250,
+    "fr-b1-u01-p04": 250,
+    "fr-b1-u01-p05": 276,
+    "fr-b1-u01-p06": 271
+  },
+  "calibration_findings": [
+    {
+      "type": "workflow_path",
+      "resolution": "corrected repository-relative B1 paths before any canonical write"
+    },
+    {
+      "type": "word_band",
+      "passage_id": "fr-b1-u01-p01",
+      "resolution": "expanded naturally from 215 words to within the 220-350 B1 band; threshold unchanged"
+    },
+    {
+      "type": "review_visibility",
+      "passage_id": "fr-b1-u01-p05",
+      "form": "proposer",
+      "resolution": "added a natural exact infinitive occurrence; exact-form guard unchanged"
+    },
+    {
+      "type": "lexical_sense_precision",
+      "passage_id": "fr-b1-u01-p02",
+      "form": "impliquer",
+      "root_gloss": "imply",
+      "resolution": "reframed the deliberate teaching use to the consequence/entail sense supported directly by the validated root gloss; no root CSV mutation or sense override used"
+    },
+    {
+      "type": "linguistic_polish",
+      "passage_ids": [
+        "fr-b1-u01-p04",
+        "fr-b1-u01-p05",
+        "fr-b1-u01-p06"
+      ],
+      "resolution": "smoothed peuple/ennui phrasing while preserving target visibility and assessment linkage"
+    }
+  ],
+  "mechanical_validation": "PASS",
+  "final_language_wide_audit_deferred": true,
+  "notes": [
+    "This calibration review is intentionally stricter than the generation workflow before scaling B1.",
+    "The validated root lexical CSV remains unchanged."
+  ]
+}
