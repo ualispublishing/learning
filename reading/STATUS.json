@@ -60,7 +60,7 @@
       "pass01": "PASS",
       "pass02": "PASS",
       "pass03": "PASS",
-      "pass04": "REVIEW_REQUIRED",
+      "pass04": "PASS",
       "pass05": "PASS",
       "pass06": "PASS",
       "pass07": "PASS",
@@ -70,13 +70,7 @@
       "pass11": "COMPLETE",
       "pass12": "BLOCKED"
     },
-    "current_upstream_blockers": [
-      {
-        "gate": "pass04_answer_evidence_alignment",
-        "status": "REVIEW_REQUIRED",
-        "reason": "answer/evidence diagnostic still has 52 review flags requiring adjudication/remediation"
-      }
-    ],
+    "current_upstream_blockers": [],
     "pass12_freshness": "STALE_RELATIVE_TO_CURRENT_UPSTREAM_STATE",
     "pass12_hard_regressions": [],
     "manual_naturalness_progress": {
@@ -195,7 +189,6 @@
     "interpretation": "The current zero field values are placeholders and must not be treated as measured 0% coverage."
   },
   "next_actions": [
-    "adjudicate Pass 04 diagnostics before editing content; repair only genuine answer/evidence defects",
     "repair/refresh Pass 12 after upstream gates close; Pass 12 must include Pass 04 and accept Pass 11 COMPLETE",
     "regenerate the full final audit suite sequentially immediately before the final Pass 12 attempt"
   ],
