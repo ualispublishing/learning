@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'reading/tools/generate_french_a1_unit07.py'
+      - 'reading/tools/generate_french_a1_unit07_retry.py'
       - '.github/workflows/generate-french-a1-unit07.yml'
 permissions:
   contents: write
@@ -20,7 +21,7 @@ jobs:
       - name: Install validation dependency
         run: python -m pip install --quiet jsonschema
       - name: Append and validate Unit 07
-        run: python reading/tools/generate_french_a1_unit07.py
+        run: python reading/tools/generate_french_a1_unit07_retry.py
       - name: Independent Unit 07 checks
         run: |
           python - <<'PY'
@@ -37,6 +38,7 @@ jobs:
           assert u[-1]['new_lexical_targets']==[]
           assert sum(len(r['questions']) for r in u)==60
           assert sum(len(r['answer_key']) for r in u)==60
+          droit=[]
           for r in u:
               local={str(t['id']) for f in ('new_lexical_targets','review_lexical_targets') for t in r.get(f,[]) if isinstance(t,dict) and t.get('id')}
               amap={a['question_id']:a['id'] for a in r['answer_key']}
@@ -44,7 +46,9 @@ jobs:
               for q in r['questions']:
                   assert amap[q['id']]==q['answer_id']
                   assert all(tid in local for tid in q.get('target_ids',[]))
-          print({'status':'PASS','french_a1_passages':42,'unit07_questions':60,'unit07_answers':60,'unit07_new_targets':10})
+              droit += [t for t in r.get('new_lexical_targets',[]) if t.get('form')=='droite']
+          assert len(droit)==1 and droit[0].get('lemma')=='droit' and droit[0].get('source_lookup_form')=='droit'
+          print({'status':'PASS','french_a1_passages':42,'unit07_questions':60,'unit07_answers':60,'unit07_new_targets':10,'droite_source_lemma':'droit'})
           PY
       - name: Commit canonical French Unit 07
         run: |
