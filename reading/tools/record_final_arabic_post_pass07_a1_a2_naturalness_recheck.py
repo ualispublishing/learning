@@ -3,6 +3,8 @@
 from __future__ import annotations
 import json
 from pathlib import Path
+
+# Workflow trigger touch: source-state assertions below remain authoritative.
 ROOT=Path(__file__).resolve().parents[2]
 PATH=ROOT/'reading/audit/final_arabic_pass11_naturalness_review.json'
 SNAP='reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl'
