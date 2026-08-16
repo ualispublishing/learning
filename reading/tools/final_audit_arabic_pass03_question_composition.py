@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Final Arabic review pass 03: pedagogical question-composition diagnostic.
 
-Compares question-type mixes with the documented Ten-Question Standard. The
+Compares question-role mixes with the documented Ten-Question Standard. The
 standard describes default distributions, so deviations are REVIEW flags rather
-than automatic failures. This pass does not judge the correctness of individual
-answers; that is handled separately.
+than automatic failures. A single well-designed question may legitimately serve
+more than one pedagogical role (for example, a connective-function question is
+both grammar/style and discourse analysis). This pass does not judge individual
+answer correctness; that is handled separately by Pass 04.
 """
 from __future__ import annotations
 
@@ -20,11 +22,24 @@ COMPREHENSION = {"gist", "literal_detail", "sequence", "cause_effect", "referenc
 INFERENCE = {"inference", "motive", "stance", "assumption", "ambiguity_resolution", "argument_relation"}
 LEXICAL = {"vocabulary_in_context", "single_word_definition", "cloze_transfer", "register_style"}
 GRAMMAR_STYLE = {"grammar_in_context", "grammar_category", "grammar_choice", "grammar_identification", "grammar_function", "person_form", "contrast", "register_style"}
-DISCOURSE = {"main_claim", "argument_relation", "stance", "tone", "rhetorical_function", "assumption", "ambiguity_resolution", "reference_resolution", "register_style"}
+# Multi-role classification is intentional. Questions about the function of a
+# connective or an explicit contrast can test grammar/form while also testing
+# cohesion, discourse relation, or rhetorical organization. Excluding those
+# labels from discourse produced false deficits in otherwise valid B2-C2 sets.
+DISCOURSE = {
+    "main_claim", "argument_relation", "stance", "tone", "rhetorical_function",
+    "assumption", "ambiguity_resolution", "reference_resolution", "register_style",
+    "grammar_function", "contrast",
+}
 SYNTHESIS = {"paraphrase", "summary", "synthesis", "cross_text_synthesis"}
-PASSAGE_CENTERED = COMPREHENSION | INFERENCE | DISCOURSE | SYNTHESIS
+# vocabulary_in_context is passage-linked by schema/standard definition and is
+# therefore passage-centred as well as lexical. Generic single-word definition
+# and transfer cloze items remain outside this set.
+PASSAGE_CENTERED = COMPREHENSION | INFERENCE | DISCOURSE | SYNTHESIS | {"vocabulary_in_context"}
 
-# Deliberately broad minima derived from the standard, not exact quotas.
+# Broad minima derived from the documented default distributions. They are
+# intentionally not exact quotas: Pass 03 flags pedagogically material gaps
+# without rejecting legitimate alternate mixes.
 MINIMA = {
     "a1": {"passage_centered": 3, "lexical": 2, "grammar_style": 2},
     "a2": {"passage_centered": 4, "lexical": 2, "grammar_style": 2},
@@ -119,7 +134,12 @@ def main() -> None:
         "name": "question_composition_against_ten_question_standard",
         "scope": "Arabic A1-C2 canonical reading corpus",
         "reference": "reading/planning/TEN_QUESTION_STANDARD.md",
-        "interpretation": "diagnostic only: documented distributions are defaults, so deviations require pedagogical review rather than automatic rejection",
+        "interpretation": "diagnostic only: documented distributions are defaults; overlapping pedagogical roles are counted where the question type genuinely encodes both roles",
+        "classification_notes": {
+            "vocabulary_in_context": "counts as lexical and passage-centred",
+            "grammar_function": "counts as grammar/style and discourse because it tests connective/structural function",
+            "contrast": "counts as grammar/style and discourse because it tests an explicit contrast relation",
+        },
         "levels": level_summaries,
         "totals": {"passages": total_passages, "review_flags": len(flags)},
         "flags": flags,
