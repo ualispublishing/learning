@@ -42,23 +42,21 @@ Arabic known-token coverage remains intentionally unmeasured; existing zero valu
 
 ### French — ACTIVE
 
-Live French A1 state is now **24/60 canonical passages**:
+French A1 generation is complete at **60/60 canonical passages**:
 
 - Unit 01 / sequences 1–6: original calibration cycle preserved;
-- Unit 02 / sequences 7–12: generated and validated;
-- Unit 03 / sequences 13–18: generated and validated;
-- Unit 04 / sequences 19–24: generated and validated;
-- next frontier: **Unit 05 / sequences 25–30**.
+- Units 02–10 / sequences 7–60: generated in guarded six-passage batches;
+- 600 questions and 600 linked answers;
+- every Unit P06 checkpoint has zero deliberately new lexical targets;
+- live A1 canonical file: `reading/french/a1/passages.jsonl`;
+- latest accepted A1 sequence: `fr-a1-u10-p06`, sequence 60;
+- latest A1 canonical blob at the completion milestone: `b6c15291b7871e196cac8f7b5920923f2a3a95a9`.
 
-Current French A1 totals:
+A1 generation is **closed to routine regeneration**. It is generated, not yet the final audited/approved French language corpus. Under the generation-first policy, continue French through A2–C2 before the expensive multi-pass final French audit unless the governing policy is explicitly changed.
 
-- 24 passages;
-- 240 questions;
-- 240 linked answers.
+The A1 batch guards established and retained the following failure-closed behavior:
 
-Units 02–04 were generated as full six-passage guarded batches, not passage-by-passage. Each batch enforced:
-
-- an exact canonical source-blob collision guard;
+- exact canonical source-blob collision guards;
 - sequence and ID continuity;
 - canonical JSON schema validation;
 - A1 90–140-word planning band;
@@ -66,13 +64,32 @@ Units 02–04 were generated as full six-passage guarded batches, not passage-by
 - all question target IDs locally declared as new/review vocabulary;
 - source-rank identity against `french_top1000.csv`;
 - no reintroduction of already scheduled lexical IDs;
+- visible exact-form checks for deliberate running-text/summary reviews;
 - Unit P06 zero deliberately new lexical targets.
 
-Do not regenerate Units 01–04. Verify live `main` before taking Unit 05.
+Important A1 failure modes already encountered and resolved without weakening guards:
 
-French remains generation-first: perform lightweight structural/source/linkage checks during generation and reserve the expensive multi-pass linguistic/pedagogical final audit for the completed generated corpus.
+- Unit 06: a declared `enfant` review appeared only as plural `enfants`; exact-form visibility correctly blocked the write until a natural singular occurrence was added.
+- Unit 07: a surface/lemma mismatch involving `droite`/`droit` was resolved against the validated lexical source before canonical commit.
+- Unit 10: `pluie` and `manteau` were not direct validated `french_top1000.csv` targets; the source guard blocked the first run. The successful retry used validated `ciel` and `sac` instead, while preserving the rest of the guarded target cycle. The retry workflow passed and the canonical sequence 60 commit landed.
 
 Do not translate Arabic passages into French. French scenarios, collocations, grammar progression, and lexical scheduling must remain independently designed and natural.
+
+### French A2 — NEXT FRONTIER
+
+The immediate production frontier is **A2 Unit 01 / sequences 1–6**.
+
+Before writing A2:
+
+1. verify live `main` again;
+2. determine whether `reading/french/a2/passages.jsonl` already exists and treat its live contents as authoritative;
+3. confirm A2 planning constraints from the roadmap and durable reading standards rather than copying the A1 word band blindly;
+4. preserve the ten-question contract and P06 zero-new-target checkpoint pattern;
+5. use validated French lexical sources and explicit A1→A2 bridge/review scheduling where pedagogically useful;
+6. encode the exact A2 starting state in the generator so parallel work fails closed on drift;
+7. generate a complete six-passage Unit 01 batch, not passage-by-passage.
+
+A2 progression should follow the roadmap focus: routine problems and solutions, short stories/practical information, pronoun/reference chains, common subordinate clauses, more flexible tense/aspect, simple motives/cause-effect, and more cloze transfer.
 
 ### Urdu — QUEUED
 
@@ -85,16 +102,7 @@ Keep Urdu unchanged while French is active unless the user explicitly reprioriti
 
 ## 4. Immediate next action
 
-**Generate French A1 Unit 05 as sequences 25–30 from the live 24-passage corpus.**
-
-Before writing:
-
-1. verify live `main` and the French A1 canonical blob;
-2. select new lexical targets from the validated French source while excluding already scheduled target IDs;
-3. explicitly schedule spaced review from earlier units;
-4. generate P01–P05 with controlled new targets and P06 as a zero-new-target checkpoint;
-5. run the same schema/source/linkage/word-band/collision guards;
-6. commit the entire unit as one batch.
+**Verify the live French A2 starting state and generate French A2 Unit 01 / sequences 1–6 as one guarded batch. Do not reopen French A1 or Arabic.**
 
 ## 5. Speed / unthrottled execution contract
 
