@@ -1,0 +1,126 @@
+name: Final refresh Arabic audit suite
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/final-refresh-arabic-audit-suite.yml'
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install audit dependencies
+        run: python -m pip install --quiet jsonschema
+      - name: Refresh Pass 01
+        run: python reading/tools/final_audit_arabic_pass01_data_integrity.py
+      - name: Refresh Pass 02
+        run: python reading/tools/final_audit_arabic_pass02_lexical_exposure_integrity.py
+      - name: Refresh Pass 03
+        run: python reading/tools/final_audit_arabic_pass03_question_composition.py
+      - name: Refresh Pass 04
+        run: python reading/tools/final_audit_arabic_pass04_answer_evidence_alignment.py
+      - name: Refresh Pass 05
+        run: python reading/tools/final_audit_arabic_pass05_script_orthography_hygiene.py
+      - name: Refresh Pass 06
+        run: python reading/tools/final_audit_arabic_pass06_lexical_source_identity.py
+      - name: Refresh Pass 07
+        run: python reading/tools/final_audit_arabic_pass07_cefr_difficulty_calibration.py
+      - name: Refresh Pass 08
+        run: python reading/tools/final_audit_arabic_pass08_continuity_duplicate_balance.py
+      - name: Refresh Pass 09
+        run: python reading/tools/final_audit_arabic_pass09_fluency_checkpoint.py
+      - name: Refresh raw Pass 10 lexical-sense detector
+        run: python reading/tools/final_audit_arabic_pass10_lexical_sense_alignment.py
+      - name: Validate all generated upstream gates and Pass 10 adjudication
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root=Path('reading/audit')
+          generated={
+            'pass01': root/'final_arabic_pass01_data_integrity.json',
+            'pass02': root/'final_arabic_pass02_lexical_exposure_integrity.json',
+            'pass03': root/'final_arabic_pass03_question_composition.json',
+            'pass04': root/'final_arabic_pass04_answer_evidence_alignment.json',
+            'pass05': root/'final_arabic_pass05_script_orthography_hygiene.json',
+            'pass06': root/'final_arabic_pass06_lexical_source_identity.json',
+            'pass07': root/'final_arabic_pass07_cefr_difficulty_calibration.json',
+            'pass08': root/'final_arabic_pass08_continuity_duplicate_balance.json',
+            'pass09': root/'final_arabic_pass09_fluency_checkpoint.json',
+          }
+          statuses={}
+          for gate,path in generated.items():
+            p=json.loads(path.read_text(encoding='utf-8'))
+            statuses[gate]=p.get('status')
+            if p.get('status') != 'PASS':
+              raise SystemExit(f'{gate} not PASS: status={p.get("status")} totals={p.get("totals")}')
+
+          p4=json.loads(generated['pass04'].read_text(encoding='utf-8'))
+          if p4.get('totals',{}).get('review_flags') != 0 or p4.get('totals',{}).get('stale_adjudications') != 0:
+            raise SystemExit(f'Pass04 unresolved/stale adjudication state: {p4.get("totals")}')
+
+          p7=json.loads(generated['pass07'].read_text(encoding='utf-8'))
+          if p7.get('totals',{}).get('review_flags') != 0:
+            raise SystemExit(f'Pass07 actionable flags remain: {p7.get("totals")}')
+
+          raw10=json.loads((root/'final_arabic_pass10_lexical_sense_alignment.json').read_text(encoding='utf-8'))
+          adj10=json.loads((root/'final_arabic_pass10_adjudication.json').read_text(encoding='utf-8'))
+          if adj10.get('status') != 'PASS_WITH_SOURCE_ADJUDICATION' or adj10.get('unresolved'):
+            raise SystemExit(f'Pass10 adjudication not closed: {adj10}')
+          raw_keys={(str(x.get('passage_id')),str(x.get('target_id'))) for x in raw10.get('flags',[]) if isinstance(x,dict)}
+          adj_keys={(str(x.get('passage_id')),str(x.get('target_id'))) for x in adj10.get('adjudications',[]) if isinstance(x,dict)}
+          if raw_keys != adj_keys:
+            raise SystemExit(f'Pass10 raw/adjudication drift: raw_only={sorted(raw_keys-adj_keys)} adjudication_only={sorted(adj_keys-raw_keys)}')
+          if raw10.get('totals',{}).get('review_flags') != len(raw_keys):
+            raise SystemExit(f'Pass10 raw total/key mismatch: {raw10.get("totals")} keys={len(raw_keys)}')
+
+          p11=json.loads((root/'final_arabic_pass11_naturalness_review.json').read_text(encoding='utf-8'))
+          if p11.get('status') not in {'PASS','COMPLETE'}:
+            raise SystemExit(f'Pass11 completion state invalid: {p11.get("status")}')
+          t11=p11.get('totals',{})
+          if t11.get('levels_pending') != 0 or t11.get('passages_fully_reviewed') != 360:
+            raise SystemExit(f'Pass11 incomplete: {t11}')
+
+          print(json.dumps({
+            'generated_statuses': statuses,
+            'pass04': p4.get('totals'),
+            'pass07': p7.get('totals'),
+            'pass10_raw_flags': len(raw_keys),
+            'pass10_adjudication': adj10.get('status'),
+            'pass11': p11.get('status'),
+          }, ensure_ascii=False))
+          PY
+      - name: Synchronize final-review status before Pass 12
+        run: python reading/tools/update_arabic_final_review_status.py
+      - name: Commit refreshed upstream audit evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            reading/audit/final_arabic_pass01_data_integrity.json \
+            reading/audit/final_arabic_pass02_lexical_exposure_integrity.json \
+            reading/audit/final_arabic_pass03_question_composition.json \
+            reading/audit/final_arabic_pass04_answer_evidence_alignment.json \
+            reading/audit/final_arabic_pass05_script_orthography_hygiene.json \
+            reading/audit/final_arabic_pass06_lexical_source_identity.json \
+            reading/audit/final_arabic_pass07_cefr_difficulty_calibration.json \
+            reading/audit/final_arabic_pass08_continuity_duplicate_balance.json \
+            reading/audit/final_arabic_pass09_fluency_checkpoint.json \
+            reading/audit/final_arabic_pass10_lexical_sense_alignment.json \
+            reading/STATUS.json
+          if git diff --cached --quiet; then
+            echo 'No refreshed evidence changed'
+            exit 0
+          fi
+          git commit -m 'Refresh final Arabic upstream audit suite [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
