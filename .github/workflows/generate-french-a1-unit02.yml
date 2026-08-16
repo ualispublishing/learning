@@ -1,0 +1,64 @@
+name: Generate French A1 Unit 02
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/generate_french_a1_unit02.py'
+      - '.github/workflows/generate-french-a1-unit02.yml'
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install validation dependency
+        run: python -m pip install --quiet jsonschema
+      - name: Append and validate complete Unit 02 batch
+        run: python reading/tools/generate_french_a1_unit02.py
+      - name: Independent lightweight post-generation checks
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('reading/french/a1/passages.jsonl')
+          rows=[json.loads(x) for x in p.read_text(encoding='utf-8').splitlines() if x.strip()]
+          assert len(rows)==12, len(rows)
+          assert [r['sequence'] for r in rows]==list(range(1,13))
+          assert len({r['id'] for r in rows})==12
+          u2=rows[6:]
+          assert [r['id'] for r in u2]==[f'fr-a1-u02-p{i:02d}' for i in range(1,7)]
+          assert all(90 <= r['word_count'] <= 140 for r in u2)
+          assert all(len(r['questions'])==10 and len(r['answer_key'])==10 for r in u2)
+          assert sum(len(r['questions']) for r in u2)==60
+          assert sum(len(r['answer_key']) for r in u2)==60
+          assert sum(len(r['new_lexical_targets']) for r in u2[:5])==10
+          assert u2[-1]['new_lexical_targets']==[]
+          for r in u2:
+              declared={str(t['id']) for field in ('new_lexical_targets','review_lexical_targets') for t in r.get(field,[]) if isinstance(t,dict) and t.get('id')}
+              amap={a['question_id']:a['id'] for a in r['answer_key']}
+              assert len(amap)==10
+              for q in r['questions']:
+                  assert amap[q['id']]==q['answer_id']
+                  for tid in q.get('target_ids',[]):
+                      assert tid in declared, (r['id'],q['id'],tid)
+          print({'status':'PASS','french_a1_passages':12,'unit02_questions':60,'unit02_answers':60,'unit02_new_targets':10})
+          PY
+      - name: Commit canonical French Unit 02
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/french/a1/passages.jsonl
+          if git diff --cached --quiet; then
+            echo 'No canonical changes to commit'
+            exit 0
+          fi
+          git commit -m 'Generate French A1 Unit 02 [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
