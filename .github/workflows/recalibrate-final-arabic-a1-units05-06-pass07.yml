@@ -1,0 +1,50 @@
+name: Recalibrate final Arabic A1 Units05-06 Pass07
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/recalibrate_final_arabic_a1_units05_06_pass07.py'
+      - '.github/workflows/recalibrate-final-arabic-a1-units05-06-pass07.yml'
+permissions:
+  contents: write
+jobs:
+  recalibrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply guarded A1 Units05-06 remediation
+        run: python reading/tools/recalibrate_final_arabic_a1_units05_06_pass07.py
+      - name: Refresh Pass 07 against remediated corpus
+        run: python reading/tools/final_audit_arabic_pass07_cefr_difficulty_calibration.py
+      - name: Validate canonical A1 file and audit
+        run: |
+          python - <<'PY'
+          import json,re
+          from pathlib import Path
+          rows=[json.loads(x) for x in Path('reading/arabic/a1/passages.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]
+          assert len(rows)==60 and len({r['id'] for r in rows})==60
+          for r in rows:
+              assert len(re.findall(r'\S+',str(r.get('text',''))))==int(r.get('word_count',0)), r['id']
+          for r in rows[24:36]:
+              assert 90 <= r['word_count'] <= 140, (r['id'],r['word_count'])
+          audit=json.loads(Path('reading/audit/final_arabic_pass07_cefr_difficulty_calibration.json').read_text(encoding='utf-8'))
+          assert audit['coverage_metric']['missing_value_semantics']=='UNMEASURED_NOT_FAILURE'
+          for level in ('b1','b2','c1','c2'): assert audit['levels'][level]['flagged_passages']==0
+          print([(r['id'],r['word_count']) for r in rows[24:36]])
+          print({'a1_flags':audit['levels']['a1']['flagged_passages'],'a2_flags':audit['levels']['a2']['flagged_passages'],'total_flags':audit['totals']['review_flags']})
+          PY
+      - name: Commit canonical corpus and refreshed audit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/arabic/a1/passages.jsonl reading/audit/final_arabic_pass07_cefr_difficulty_calibration.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Recalibrate Arabic A1 Units05-06 Pass07 [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
