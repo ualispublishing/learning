@@ -5,6 +5,9 @@ The synchronizer is artifact-driven and fail-closed. It does not hard-code old
 blocker prose, does not require Pass 11 to use a fictitious PASS string, and can
 record final approval only when a fresh Pass 12 says PASS/final_approval=true and
 all required upstream gates are currently closed.
+
+Once another language has become active after Arabic approval, a routine Arabic
+audit rerun must not rewind the project phase/next-actions back to Arabic.
 """
 from __future__ import annotations
 
@@ -52,33 +55,26 @@ def main() -> None:
     current_blockers: list[dict] = []
     if audits["pass03"].get("status") != "PASS":
         current_blockers.append(blocker(
-            "pass03_question_composition",
-            audits["pass03"],
+            "pass03_question_composition", audits["pass03"],
             f"question-composition audit still has {audits['pass03'].get('totals', {}).get('review_flags', 'unknown')} review flags",
         ))
     if audits["pass04"].get("status") != "PASS":
         current_blockers.append(blocker(
-            "pass04_answer_evidence_alignment",
-            audits["pass04"],
+            "pass04_answer_evidence_alignment", audits["pass04"],
             f"answer/evidence diagnostic still has {audits['pass04'].get('totals', {}).get('review_flags', 'unknown')} review flags requiring adjudication/remediation",
         ))
     if audits["pass07"].get("status") != "PASS":
         current_blockers.append(blocker(
-            "pass07_cefr_difficulty",
-            audits["pass07"],
-            "CEFR/length diagnostic is not currently PASS",
+            "pass07_cefr_difficulty", audits["pass07"], "CEFR/length diagnostic is not currently PASS",
         ))
     if not pass11_complete(audits["pass11"]):
         current_blockers.append(blocker(
-            "pass11_manual_naturalness",
-            audits["pass11"],
+            "pass11_manual_naturalness", audits["pass11"],
             "manual naturalness review is not complete across all six Arabic levels",
         ))
     if audits["pass10"].get("status") != "PASS_WITH_SOURCE_ADJUDICATION" or audits["pass10"].get("unresolved"):
         current_blockers.append(blocker(
-            "pass10_source_adjudication",
-            audits["pass10"],
-            "source adjudication is not closed",
+            "pass10_source_adjudication", audits["pass10"], "source adjudication is not closed",
         ))
 
     p12 = audits["pass12"]
@@ -104,13 +100,17 @@ def main() -> None:
 
     pass_status = {key: artifact.get("status", "MISSING") for key, artifact in audits.items()}
     status["updated"] = date.today().isoformat()
-    status["phase"] = (
-        "Arabic A1-C2 final review is approved; proceed to the next language/project phase."
-        if final_approval
-        else "Arabic A1-C2 generation is complete. Arabic final multi-pass review is in the closing machine-gate phase; final approval remains false until fresh Pass 12 succeeds."
-    )
-    status["approved_passages"] = 360 if final_approval else 0
+    downstream_active = status.get("active_language") not in {None, "", "Arabic"}
 
+    # Preserve a later language's active phase once Arabic is approved. If
+    # Arabic ever loses approval, surface that regression regardless of the
+    # downstream phase so it cannot be hidden.
+    if not final_approval:
+        status["phase"] = "Arabic A1-C2 final approval is no longer closed; resolve the current Arabic final-review regression before relying on approval."
+    elif not downstream_active:
+        status["phase"] = "Arabic A1-C2 final review is approved; proceed to the next language/project phase."
+
+    status["approved_passages"] = 360 if final_approval else 0
     status["arabic_final_review"] = {
         "phase": "APPROVED" if final_approval else "CLOSING_MACHINE_GATES",
         "minimum_distinct_passes_required": 10,
@@ -119,25 +119,26 @@ def main() -> None:
         "current_upstream_blockers": current_blockers,
         "pass12_freshness": "STALE_RELATIVE_TO_CURRENT_UPSTREAM_STATE" if pass12_stale else "CURRENT_OR_NOT_PROVEN_STALE",
         "pass12_hard_regressions": p12.get("hard_regressions", []),
-        "manual_naturalness_progress": audits["pass11"].get("levels", {}),
         "final_approval": final_approval,
     }
 
-    if final_approval:
-        status["next_actions"] = [
-            "record/archive the completed Arabic final-review evidence",
-            "determine the live French/Urdu canonical state before resuming their curriculum work",
-        ]
-    else:
+    if not final_approval:
         actions = []
         if audits["pass03"].get("status") != "PASS":
             actions.append("resolve current Pass 03 question-composition flags in one guarded batch and rerun Pass 03 + Pass 04")
         if audits["pass04"].get("status") != "PASS":
             actions.append("adjudicate Pass 04 diagnostics before editing content; repair only genuine answer/evidence defects")
         if pass12_stale:
-            actions.append("repair/refresh Pass 12 after upstream gates close; Pass 12 must include Pass 04 and accept Pass 11 COMPLETE")
+            actions.append("repair/refresh Pass 12 after upstream gates close")
         actions.append("regenerate the full final audit suite sequentially immediately before the final Pass 12 attempt")
         status["next_actions"] = actions
+    elif not downstream_active:
+        status["next_actions"] = [
+            "record/archive the completed Arabic final-review evidence",
+            "determine the live French/Urdu canonical state before resuming their curriculum work",
+        ]
+    # If a downstream language is already active and Arabic remains approved,
+    # leave that language's phase and next-actions untouched.
 
     arabic = status.setdefault("arabic", {})
     arabic["formal_final_approval"] = final_approval
@@ -148,6 +149,7 @@ def main() -> None:
         "pass12_stale": pass12_stale,
         "pass11_complete": pass11_complete(audits["pass11"]),
         "final_approval": final_approval,
+        "downstream_active": downstream_active,
     }, ensure_ascii=False))
 
 
