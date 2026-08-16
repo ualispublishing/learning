@@ -1,0 +1,42 @@
+name: Record Arabic A1-A2 naturalness recheck
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - reading/tools/record_final_arabic_post_pass07_a1_a2_naturalness_recheck.py
+permissions:
+  contents: write
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python reading/tools/record_final_arabic_post_pass07_a1_a2_naturalness_recheck.py
+      - run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path('reading/audit/final_arabic_pass11_naturalness_review.json').read_text())
+          assert x['post_pass07_revalidation']['passages_rechecked']==66
+          assert x['post_pass07_revalidation']['repairs_applied']==9
+          assert x['levels']['a1']['post_pass07_recheck']['passages_rechecked']==28
+          assert x['levels']['a2']['post_pass07_recheck']['passages_rechecked']==38
+          assert x['status']=='COMPLETE' and x['final_approval_claim'] is False
+          p=json.loads(Path('reading/audit/final_arabic_pass07_cefr_difficulty_calibration.json').read_text())
+          assert p['status']=='PASS' and p['totals']['review_flags']==0
+          print('validated')
+          PY
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/final_arabic_pass11_naturalness_review.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Record A1-A2 post-Pass07 naturalness recheck [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
