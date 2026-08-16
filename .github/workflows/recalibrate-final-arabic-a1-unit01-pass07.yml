@@ -1,0 +1,48 @@
+name: Recalibrate final Arabic A1 Unit01 Pass07
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/recalibrate_final_arabic_a1_unit01_pass07.py'
+      - '.github/workflows/recalibrate-final-arabic-a1-unit01-pass07.yml'
+permissions:
+  contents: write
+jobs:
+  recalibrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply guarded A1 Unit01 remediation
+        run: python reading/tools/recalibrate_final_arabic_a1_unit01_pass07.py
+      - name: Validate canonical A1 file
+        run: |
+          python - <<'PY'
+          import json,re
+          from pathlib import Path
+          p=Path('reading/arabic/a1/passages.jsonl')
+          rows=[json.loads(x) for x in p.read_text(encoding='utf-8').splitlines() if x.strip()]
+          assert len(rows)==60
+          ids=[r['id'] for r in rows]
+          assert len(ids)==len(set(ids))
+          for r in rows:
+              actual=len(re.findall(r'\S+',str(r.get('text',''))))
+              assert actual==int(r.get('word_count',0)), (r['id'],actual,r.get('word_count'))
+          for r in rows[:6]:
+              assert 90 <= r['word_count'] <= 140, (r['id'],r['word_count'])
+          print([(r['id'],r['word_count']) for r in rows[:6]])
+          PY
+      - name: Commit canonical corpus change
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/arabic/a1/passages.jsonl
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Recalibrate Arabic A1 Unit01 Pass07 [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
