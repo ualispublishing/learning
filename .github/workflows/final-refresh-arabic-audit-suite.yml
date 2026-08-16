@@ -57,17 +57,27 @@ jobs:
             'pass09': root/'final_arabic_pass09_fluency_checkpoint.json',
           }
           statuses={}
+          payloads={}
           for gate,path in generated.items():
             p=json.loads(path.read_text(encoding='utf-8'))
+            payloads[gate]=p
             statuses[gate]=p.get('status')
             if p.get('status') != 'PASS':
               raise SystemExit(f'{gate} not PASS: status={p.get("status")} totals={p.get("totals")}')
 
-          p4=json.loads(generated['pass04'].read_text(encoding='utf-8'))
+          p2=payloads['pass02']
+          undeclared=[
+            w for w in p2.get('warnings',[])
+            if isinstance(w,dict) and w.get('code')=='question_target_not_declared_in_passage_targets'
+          ]
+          if undeclared:
+            raise SystemExit(f'Pass02 undeclared question targets remain: {undeclared}')
+
+          p4=payloads['pass04']
           if p4.get('totals',{}).get('review_flags') != 0 or p4.get('totals',{}).get('stale_adjudications') != 0:
             raise SystemExit(f'Pass04 unresolved/stale adjudication state: {p4.get("totals")}')
 
-          p7=json.loads(generated['pass07'].read_text(encoding='utf-8'))
+          p7=payloads['pass07']
           if p7.get('totals',{}).get('review_flags') != 0:
             raise SystemExit(f'Pass07 actionable flags remain: {p7.get("totals")}')
 
@@ -99,6 +109,7 @@ jobs:
 
           print(json.dumps({
             'generated_statuses': statuses,
+            'pass02_undeclared_question_targets': len(undeclared),
             'pass04': p4.get('totals'),
             'pass07': p7.get('totals'),
             'pass10_raw_flags': len(raw_keys),
