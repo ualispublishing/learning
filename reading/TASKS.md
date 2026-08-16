@@ -24,36 +24,34 @@ A1 has not yet gone through the final language-wide multi-pass French approval a
 
 ### A2 — ACTIVE
 
-- [x] Unit 01 / sequences 1–6: 6 passages / 60 Q / 60 A / 10 new targets / zero-new P06.
-- [x] Unit 02 / sequences 7–12: 6 passages / 60 Q / 60 A / 10 new targets / zero-new P06.
-- [x] Unit 03 / sequences 13–18: 6 passages / 60 Q / 60 A / 10 new targets / zero-new P06.
-- [x] Unit 04 / sequences 19–24: 6 passages / 60 Q / 60 A / 10 new targets / zero-new P06.
-- [x] Unit 04 first run failed closed because `perdre` was represented only by `perdu`; exact infinitive visibility was added and the retry passed without weakening the guard.
-- [x] Unit 05 / sequences 25–30: 6 passages / 60 Q / 60 A / 10 new targets / zero-new P06; workflow passed first run.
-- [x] Current A2 canonical blob after Unit 05: `236c94a3493c83e0e55c56fc3cd34e52ec258cae`.
-- [ ] Unit 06 / sequences 31–36: generate as one guarded batch against the live Unit-05 blob.
-- [ ] Review Unit-05 targets one pair per P01–P05 where natural; keep P06 zero-new-target.
-- [ ] Check every proposed Unit-06 new target against A1 and all prior A2 deliberate targets before writing.
+- [x] Unit 01 / sequences 1–6.
+- [x] Unit 02 / sequences 7–12.
+- [x] Unit 03 / sequences 13–18.
+- [x] Unit 04 / sequences 19–24; first run failed closed on exact `perdre` visibility, then passed after a natural exact-form repair.
+- [x] Unit 05 / sequences 25–30; passed all guards first run.
+- [x] Unit 06 / sequences 31–36; first run rejected duplicate target `place`, then passed with fresh `visite` replacing it.
+- [x] All completed A2 units: 6 passages / 60 Q / 60 A / 10 new targets / zero-new P06 each.
+- [x] Current A2 canonical blob after Unit 06: `9abd3006e264234e6b5ff2f7c9d37e56cf807fa9`.
+- [ ] Unit 07 / sequences 37–42: generate as one guarded batch against the live Unit-06 blob.
+- [ ] Review Unit-06 targets one pair per P01–P05 where natural; keep P06 zero-new-target.
+- [ ] Check every proposed Unit-07 new target against A1 and all prior A2 deliberate targets before writing.
 - [ ] Continue A2 in coherent six-passage guarded batches to 60 passages.
 
-A2 Unit 01 targets:
-`retard`, `conseil`, `erreur`, `expliquer`, `essayer`, `possible`, `réparer`, `éviter`, `rendez-vous`, `découvrir`.
+A2 Unit 01 targets: `retard`, `conseil`, `erreur`, `expliquer`, `essayer`, `possible`, `réparer`, `éviter`, `rendez-vous`, `découvrir`.
 
-A2 Unit 02 targets:
-`raison`, `résultat`, `décision`, `information`, `important`, `différent`, `habitude`, `expérience`, `choix`, `idée`.
+A2 Unit 02 targets: `raison`, `résultat`, `décision`, `information`, `important`, `différent`, `habitude`, `expérience`, `choix`, `idée`.
 
-A2 Unit 03 targets:
-`oublier`, `clé`, `perdre`, `retrouver`, `recevoir`, `envoyer`, `vérifier`, `payer`, `numéro`, `carte`.
+A2 Unit 03 targets: `oublier`, `clé`, `perdre`, `retrouver`, `recevoir`, `envoyer`, `vérifier`, `payer`, `numéro`, `carte`.
 
-A2 Unit 04 targets:
-`projet`, `équipe`, `réunion`, `responsable`, `programme`, `dossier`, `demande`, `réponse`, `service`, `contact`.
+A2 Unit 04 targets: `projet`, `équipe`, `réunion`, `responsable`, `programme`, `dossier`, `demande`, `réponse`, `service`, `contact`.
 
-A2 Unit 05 targets:
-`médecin`, `patient`, `douleur`, `santé`, `hôpital`, `accident`, `soin`, `urgence`, `risque`, `danger`.
+A2 Unit 05 targets: `médecin`, `patient`, `douleur`, `santé`, `hôpital`, `accident`, `soin`, `urgence`, `risque`, `danger`.
+
+A2 Unit 06 targets: `voyage`, `train`, `route`, `départ`, `hôtel`, `chambre`, `retour`, `visite`, `plan`, `avion`.
 
 Remaining French levels:
 
-- [ ] A2: 30 passages remain after Unit 05.
+- [ ] A2: 24 passages remain after Unit 06.
 - [ ] B1: 60 passages.
 - [ ] B2: 60 passages.
 - [ ] C1: 60 passages.
@@ -84,4 +82,4 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 
 ## Immediate next task
 
-**Generate French A2 Unit 06 / sequences 31–36 against canonical A2 blob `236c94a3493c83e0e55c56fc3cd34e52ec258cae`. Keep Arabic sealed.**
+**Generate French A2 Unit 07 / sequences 37–42 against canonical A2 blob `9abd3006e264234e6b5ff2f7c9d37e56cf807fa9`. Keep Arabic sealed.**
