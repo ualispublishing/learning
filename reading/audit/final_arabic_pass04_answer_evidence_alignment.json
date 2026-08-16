@@ -11,13 +11,13 @@
   "levels": {
     "a1": {
       "passages": 60,
-      "flagged_passages": 13,
+      "flagged_passages": 10,
       "unresolved_by_code": {
-        "duplicate_answer_text_within_passage": 2,
-        "direct_answer_zero_content_overlap_with_passage": 10,
-        "contrast_answer_not_semantically_structured_for_quoted_options": 1
+        "direct_answer_zero_content_overlap_with_passage": 10
       },
-      "nonblocking_benign_by_code": {}
+      "nonblocking_benign_by_code": {
+        "duplicate_answer_text_nonblocking": 2
+      }
     },
     "a2": {
       "passages": 60,
@@ -27,7 +27,7 @@
         "contrast_answer_not_semantically_structured_for_quoted_options": 1
       },
       "nonblocking_benign_by_code": {
-        "duplicate_grammar_category_answer_expected": 15,
+        "duplicate_answer_text_nonblocking": 15,
         "contrast_surface_mismatch_but_explanatory": 1
       }
     },
@@ -68,31 +68,12 @@
   },
   "totals": {
     "questions": 3600,
-    "unresolved_review_flags": 33,
-    "nonblocking_benign_diagnostics": 20,
-    "raw_diagnostics": 53,
-    "review_flags": 33
+    "unresolved_review_flags": 30,
+    "nonblocking_benign_diagnostics": 22,
+    "raw_diagnostics": 52,
+    "review_flags": 30
   },
   "flags": [
-    {
-      "code": "duplicate_answer_text_within_passage",
-      "level": "a1",
-      "passage_id": "ar-a1-u01-p02",
-      "answer": "كتاب واحد.",
-      "questions": [
-        {
-          "question_id": "q2",
-          "type": "literal_detail",
-          "prompt": "كم كتابا كان مع ليلى؟"
-        },
-        {
-          "question_id": "q8",
-          "type": "grammar_choice",
-          "prompt": "اختر الصحيح: «كتاب واحد» أم «كتاب واحدة»؟"
-        }
-      ],
-      "passage_text": "في الصباح كانت ليلى في المنزل. قالت أمها: بعد قليل نذهب إلى المدرسة. قالت ليلى: حسنا. معها حقيبتها وكتاب واحد فقط. لم تأخذ كل الكتب. ذهبت مع أمها إلى المدرسة. بعد قليل كانت ليلى في المنزل مرة أخرى. قالت ليلى: حقيبتي هنا، وكتابي معي. قالت أمها: هل معك كتاب آخر؟ قالت ليلى: لا، هذا الكتاب فقط. بعد ذلك كانتا معا في المنزل. قالت أمها: الآن نحن هنا. قالت ليلى: نعم، وغدا نذهب إلى المدرسة مرة أخرى. في المساء جهزت ليلى حقيبتها للغد، ووضعت الكتاب بجانبها في غرفتها قبل أن تنام بهدوء."
-    },
     {
       "code": "direct_answer_zero_content_overlap_with_passage",
       "level": "a1",
@@ -142,37 +123,6 @@
       "prompt": "إلى ماذا تشير «إليه» في «هل نحتاج إليه اليوم»؟",
       "answer": "إلى التفاح.",
       "passage_text": "قبل أن تذهب ليلى وأمها إلى السوق تنظر الأم إلى المطبخ. تقول: نحتاج إلى بعض الأشياء للعشاء. تكتب في ورقة: خبز، أرز، طماطم، وحليب. تسأل ليلى: كم عدد الطماطم التي نحتاج إليها؟ تقول الأم: نحتاج إلى أربع طماطم فقط. في السوق ترى ليلى أنواعًا كثيرة من الفاكهة. تريد أن تشتري تفاحًا أيضًا، لكن أمها تسأل: هل نحتاج إليه اليوم؟ تنظر ليلى إلى القائمة وتقول: لا، عندنا تفاح في المنزل. تقول الأم: جيد، نشتري ما نحتاج إليه فقط. في النهاية يكون عدد الأشياء في الحقيبة قليلًا، وكل شيء فيها له مكان في عشاء اليوم."
-    },
-    {
-      "code": "contrast_answer_not_semantically_structured_for_quoted_options",
-      "level": "a1",
-      "passage_id": "ar-a1-u03-p03",
-      "question_id": "q8",
-      "prompt": "أي سؤال مناسب للمكان: «أين الحليب؟» أم «متى الحليب؟»؟",
-      "answer": "أين الحليب؟",
-      "quoted_options": [
-        "أين الحليب؟",
-        "متى الحليب؟"
-      ]
-    },
-    {
-      "code": "duplicate_answer_text_within_passage",
-      "level": "a1",
-      "passage_id": "ar-a1-u04-p02",
-      "answer": "اسم",
-      "questions": [
-        {
-          "question_id": "q6",
-          "type": "grammar_category",
-          "prompt": "ما التصنيف النحوي لكلمة «اسم» في هذا الاستعمال؟"
-        },
-        {
-          "question_id": "q9",
-          "type": "cloze_transfer",
-          "prompt": "أكمل: _____ي عمر."
-        }
-      ],
-      "passage_text": "في المدرسة ترى ليلى طالبة جديدة تجلس وحدها. تذهب إليها وتقول: مرحبًا، أنا ليلى. ما اسمك؟ تقول الطالبة: اسمي نور. تسأل ليلى: هل تعرفين أحدًا هنا؟ تقول نور: لا، أنت أول شخص أتحدث معه اليوم. تقول ليلى: لا بأس، سأريك الصف والساحة. تمشيان معًا، وتخبر ليلى نور بأسماء بعض الطلاب والمعلمين. بعد قليل تأتي مريم. تقول ليلى: هذه نور، وهي شخص جديد في صفنا. تقول مريم: مرحبًا يا نور. تبتسم نور وتقول: شكرًا، الآن أعرف اسم شخصين على الأقل. في وقت الاستراحة تجلس الفتيات معًا، ولا تبقى نور وحدها. بعد الاستراحة تذهب نور مع ليلى إلى المكتبة الصغيرة في المدرسة. تختاران كتابًا قصيرًا، ثم تعودان إلى الصف قبل بدء الدرس."
     },
     {
       "code": "direct_answer_zero_content_overlap_with_passage",
@@ -429,7 +379,43 @@
   ],
   "nonblocking_benign_diagnostics": [
     {
-      "code": "duplicate_grammar_category_answer_expected",
+      "code": "duplicate_answer_text_nonblocking",
+      "level": "a1",
+      "passage_id": "ar-a1-u01-p02",
+      "answer": "كتاب واحد.",
+      "questions": [
+        {
+          "question_id": "q2",
+          "type": "literal_detail",
+          "prompt": "كم كتابا كان مع ليلى؟"
+        },
+        {
+          "question_id": "q8",
+          "type": "grammar_choice",
+          "prompt": "اختر الصحيح: «كتاب واحد» أم «كتاب واحدة»؟"
+        }
+      ]
+    },
+    {
+      "code": "duplicate_answer_text_nonblocking",
+      "level": "a1",
+      "passage_id": "ar-a1-u04-p02",
+      "answer": "اسم",
+      "questions": [
+        {
+          "question_id": "q6",
+          "type": "grammar_category",
+          "prompt": "ما التصنيف النحوي لكلمة «اسم» في هذا الاستعمال؟"
+        },
+        {
+          "question_id": "q9",
+          "type": "cloze_transfer",
+          "prompt": "أكمل: _____ي عمر."
+        }
+      ]
+    },
+    {
+      "code": "duplicate_answer_text_nonblocking",
       "level": "a2",
       "passage_id": "ar-a2-u01-p01",
       "answer": "اسم",
@@ -447,7 +433,7 @@
       ]
     },
     {
-      "code": "duplicate_grammar_category_answer_expected",
+      "code": "duplicate_answer_text_nonblocking",
       "level": "a2",
       "passage_id": "ar-a2-u02-p02",
       "answer": "صفة",
@@ -465,7 +451,7 @@
       ]
     },
     {
-      "code": "duplicate_grammar_category_answer_expected",
+      "code": "duplicate_answer_text_nonblocking",
       "level": "a2",
       "passage_id": "ar-a2-u02-p03",
       "answer": "فعل ماض",
@@ -483,7 +469,7 @@
       ]
     },
     {
-      "code": "duplicate_grammar_category_answer_expected",
+      "code": "duplicate_answer_text_nonblocking",
       "level": "a2",
       "passage_id": "ar-a2-u02-p05",
       "answer": "اسم",
@@ -501,7 +487,7 @@
       ]
     },
     {
-      "code": "duplicate_grammar_category_answer_expected",
+      "code": "duplicate_answer_text_nonblocking",
       "level": "a2",
       "passage_id": "ar-a2-u03-p01",
       "answer": "ظرف",
@@ -519,7 +505,7 @@
       ]
     },
     {
-      "code": "duplicate_grammar_category_answer_expected",
+      "code": "duplicate_answer_text_nonblocking",
       "level": "a2",
       "passage_id": "ar-a2-u03-p02",
       "answer": "اسم",
@@ -549,7 +535,7 @@
       ]
     },
     {
-      "code": "duplicate_grammar_category_answer_expected",
+      "code": "duplicate_answer_text_nonblocking",
       "level": "a2",
       "passage_id": "ar-a2-u03-p05",
       "answer": "فعل ماض",
@@ -567,7 +553,7 @@
       ]
     },
     {
-      "code": "duplicate_grammar_category_answer_expected",
+      "code": "duplicate_answer_text_nonblocking",
       "level": "a2",
       "passage_id": "ar-a2-u04-p05",
       "answer": "اسم",
@@ -585,7 +571,7 @@
       ]
     },
     {
-      "code": "duplicate_grammar_category_answer_expected",
+      "code": "duplicate_answer_text_nonblocking",
       "level": "a2",
       "passage_id": "ar-a2-u05-p01",
       "answer": "اسم",
@@ -603,7 +589,7 @@
       ]
     },
     {
-      "code": "duplicate_grammar_category_answer_expected",
+      "code": "duplicate_answer_text_nonblocking",
       "level": "a2",
       "passage_id": "ar-a2-u05-p02",
       "answer": "اسم",
@@ -621,7 +607,7 @@
       ]
     },
     {
-      "code": "duplicate_grammar_category_answer_expected",
+      "code": "duplicate_answer_text_nonblocking",
       "level": "a2",
       "passage_id": "ar-a2-u05-p03",
       "answer": "اسم",
@@ -639,7 +625,7 @@
       ]
     },
     {
-      "code": "duplicate_grammar_category_answer_expected",
+      "code": "duplicate_answer_text_nonblocking",
       "level": "a2",
       "passage_id": "ar-a2-u06-p01",
       "answer": "اسم",
@@ -657,7 +643,7 @@
       ]
     },
     {
-      "code": "duplicate_grammar_category_answer_expected",
+      "code": "duplicate_answer_text_nonblocking",
       "level": "a2",
       "passage_id": "ar-a2-u06-p03",
       "answer": "اسم",
@@ -675,7 +661,7 @@
       ]
     },
     {
-      "code": "duplicate_grammar_category_answer_expected",
+      "code": "duplicate_answer_text_nonblocking",
       "level": "a2",
       "passage_id": "ar-a2-u07-p03",
       "answer": "اسم",
@@ -693,7 +679,7 @@
       ]
     },
     {
-      "code": "duplicate_grammar_category_answer_expected",
+      "code": "duplicate_answer_text_nonblocking",
       "level": "a2",
       "passage_id": "ar-a2-u08-p01",
       "answer": "اسم",
