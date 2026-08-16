@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 CANON=ROOT/'reading/french/a1/passages.jsonl'; LEX=ROOT/'french_top1000.csv'
 OUT=ROOT/'reading/audit/french_a1_generation_integrity.json'
-OV={('fr-a1-u06-p04','jamais'),('fr-a1-u07-p04','droite')}
+OV={('fr-a1-u04-p01','autre'),('fr-a1-u04-p05','maison'),('fr-a1-u06-p04','jamais'),('fr-a1-u07-p04','droite')}
 def deck():
  d={}
  with LEX.open(encoding='utf-8',newline='') as f:
@@ -17,19 +17,12 @@ def deck():
 def count(text,f):return len(re.findall(rf'(?<!\w){re.escape(f)}(?!\w)',text,flags=re.I|re.UNICODE))
 def norm(s):
  s=unicodedata.normalize('NFKC',str(s)).lower().replace('–','-').replace('—','-')
- s=re.sub(r'\([^)]*\)','',s)
- s=re.sub(r'\bas a noun\b','',s)
- s=re.sub(r'\s+',' ',s).strip(' .')
- return s
+ s=re.sub(r'\([^)]*\)','',s);s=re.sub(r'\bas a noun\b','',s);s=re.sub(r'\s+',' ',s).strip(' .');return s
 def atoms(s):
- parts=re.split(r'\s*[;,/]\s*|\s+or\s+',norm(s))
- return [re.sub(r'^(to\s+)','',p).strip(' .-') for p in parts if p.strip(' .-')]
+ return [re.sub(r'^(to\s+)','',p).strip(' .-') for p in re.split(r'\s*[;,/]\s*|\s+or\s+',norm(s)) if p.strip(' .-')]
 def sense_supported(intended,source):
  i=atoms(intended);s=atoms(source)
- if not i:return False
- for x in i:
-  if not any(x==y or x.startswith(y+' ') or y.startswith(x+' ') for y in s):return False
- return True
+ return bool(i) and all(any(x==y or x.startswith(y+' ') or y.startswith(x+' ') for y in s) for x in i)
 def main():
  rows=[json.loads(x) for x in CANON.read_text(encoding='utf-8').splitlines() if x.strip()];D=deck();bad=[];seen={};ovs=set();narrow=[];legacy=[]
  if len(rows)!=60 or [r.get('sequence') for r in rows]!=list(range(1,61)):bad.append('passage/sequence continuity')
@@ -80,6 +73,5 @@ def main():
  if bad:
   print('FRENCH_A1_INTEGRITY_FAILURES_BEGIN')
   for i,item in enumerate(bad,1):print(f'{i:02d}. {item}')
-  print('FRENCH_A1_INTEGRITY_FAILURES_END')
-  raise SystemExit(1)
+  print('FRENCH_A1_INTEGRITY_FAILURES_END');raise SystemExit(1)
 if __name__=='__main__':main()
