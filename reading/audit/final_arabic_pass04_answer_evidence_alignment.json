@@ -11,16 +11,17 @@
   "levels": {
     "a1": {
       "passages": 60,
-      "flagged_passages": 11,
+      "flagged_passages": 12,
       "flags_by_code": {
-        "duplicate_answer_text_within_passage": 1,
+        "duplicate_answer_text_within_passage": 2,
         "direct_answer_zero_content_overlap_with_passage": 10
       }
     },
     "a2": {
       "passages": 60,
-      "flagged_passages": 6,
+      "flagged_passages": 21,
       "flags_by_code": {
+        "duplicate_answer_text_within_passage": 15,
         "direct_answer_zero_content_overlap_with_passage": 5,
         "contrast_answer_not_surface_aligned_to_quoted_options": 2
       }
@@ -57,7 +58,7 @@
   },
   "totals": {
     "questions": 3600,
-    "review_flags": 36
+    "review_flags": 52
   },
   "flags": [
     {
@@ -114,6 +115,14 @@
       "answer": "إلى التفاح."
     },
     {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a1",
+      "passage_id": "ar-a1-u04-p02",
+      "answers": [
+        "اسم"
+      ]
+    },
+    {
       "code": "direct_answer_zero_content_overlap_with_passage",
       "level": "a1",
       "passage_id": "ar-a1-u06-p06",
@@ -159,6 +168,14 @@
       "answer": "إلى موضوعات الطريق والوقت والطعام والمدرسة والصحة والفراغ وغيرها."
     },
     {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u01-p01",
+      "answers": [
+        "اسم"
+      ]
+    },
+    {
       "code": "direct_answer_zero_content_overlap_with_passage",
       "level": "a2",
       "passage_id": "ar-a2-u01-p06",
@@ -177,6 +194,46 @@
       "answer": "إلى الإعلان."
     },
     {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u02-p02",
+      "answers": [
+        "صفة"
+      ]
+    },
+    {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u02-p03",
+      "answers": [
+        "فعل ماض"
+      ]
+    },
+    {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u02-p05",
+      "answers": [
+        "اسم"
+      ]
+    },
+    {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u03-p01",
+      "answers": [
+        "ظرف"
+      ]
+    },
+    {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u03-p02",
+      "answers": [
+        "اسم"
+      ]
+    },
+    {
       "code": "contrast_answer_not_surface_aligned_to_quoted_options",
       "level": "a2",
       "passage_id": "ar-a2-u03-p04",
@@ -189,6 +246,14 @@
       ]
     },
     {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u03-p05",
+      "answers": [
+        "فعل ماض"
+      ]
+    },
+    {
       "code": "direct_answer_zero_content_overlap_with_passage",
       "level": "a2",
       "passage_id": "ar-a2-u03-p06",
@@ -196,6 +261,70 @@
       "type": "reference_resolution",
       "prompt": "إلى ماذا تشير «كل مصدر» في الجملة الأخيرة؟",
       "answer": "إلى الذاكرة الشخصية وكلام الآخرين والصور والتسجيلات والأشياء المرتبطة بالماضي."
+    },
+    {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u04-p05",
+      "answers": [
+        "اسم"
+      ]
+    },
+    {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u05-p01",
+      "answers": [
+        "اسم"
+      ]
+    },
+    {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u05-p02",
+      "answers": [
+        "اسم"
+      ]
+    },
+    {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u05-p03",
+      "answers": [
+        "اسم"
+      ]
+    },
+    {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u06-p01",
+      "answers": [
+        "اسم"
+      ]
+    },
+    {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u06-p03",
+      "answers": [
+        "اسم"
+      ]
+    },
+    {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u07-p03",
+      "answers": [
+        "اسم"
+      ]
+    },
+    {
+      "code": "duplicate_answer_text_within_passage",
+      "level": "a2",
+      "passage_id": "ar-a2-u08-p01",
+      "answers": [
+        "اسم"
+      ]
     },
     {
       "code": "contrast_answer_not_surface_aligned_to_quoted_options",
