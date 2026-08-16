@@ -2,12 +2,9 @@
   "project": "Arabic, French, and Urdu graded reading curriculum A1-C2",
   "updated": "2026-08-16",
   "overall_status": "in_progress",
-  "active_language": "Arabic",
-  "paused_languages": [
-    "French",
-    "Urdu"
-  ],
-  "phase": "Arabic A1-C2 final review is approved; proceed to the next language/project phase.",
+  "active_language": "French",
+  "paused_languages": ["Urdu"],
+  "phase": "Arabic A1-C2 is formally approved. French is now the active generation language; Urdu is queued after French unless explicitly reprioritized.",
   "target_passages": 1080,
   "target_is_quota": false,
   "approved_passages": 360,
@@ -15,8 +12,7 @@
     "live canonical JSONL on main",
     "freshly regenerated audit artifacts",
     "reading/STATUS.json",
-    "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md",
-    "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
+    "reading/AGENT_HANDOFF.md and current execution policy",
     "reading/planning/TEN_QUESTION_STANDARD.md and reading/schema/passage.schema.json",
     "durable standards and roadmap",
     "historical calibration instructions/artifacts"
@@ -24,193 +20,79 @@
   "production_policy": {
     "mode": "GENERATE_FIRST_AUDIT_FINAL",
     "source": "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
-    "current_execution_protocol": "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md",
+    "final_review_protocol": "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md",
     "minimum_distinct_final_review_passes": 10,
-    "final_approval_fail_closed": true
+    "final_approval_fail_closed": true,
+    "batching": "large evidence-bounded guarded batches; avoid passage-by-passage workflow churn"
   },
   "arabic": {
+    "state": "APPROVED",
     "canonical_passages": 360,
-    "levels": {
-      "a1": 60,
-      "a2": 60,
-      "b1": 60,
-      "b2": 60,
-      "c1": 60,
-      "c2": 60
+    "levels": {"a1": 60, "a2": 60, "b1": 60, "b2": 60, "c1": 60, "c2": 60},
+    "questions": 3600,
+    "answers": 3600,
+    "formal_final_approval": true,
+    "final_gate": {
+      "pass12_status": "PASS",
+      "hard_regressions": 0,
+      "final_approval_blockers": 0,
+      "direct_passages": 360,
+      "unique_ids": 360,
+      "question_answer_linkage_failures": 0,
+      "undeclared_question_target_hits": 0,
+      "word_band_failures": 0,
+      "stored_word_count_failures": 0,
+      "latin_reader_hits": 0,
+      "p6_with_new_targets": 0
     },
-    "generation_state": "COMPLETE",
-    "questions_per_passage": 10,
-    "total_questions": 3600,
-    "total_answers": 3600,
-    "formal_final_approval": true
-  },
-  "other_languages": {
-    "french": {
-      "state": "PAUSED_WHILE_ARABIC_FINAL_REVIEW_CLOSES"
+    "audit_evidence": {
+      "pass01_to_pass09": "PASS",
+      "pass10": "PASS_WITH_SOURCE_ADJUDICATION",
+      "pass11": "COMPLETE_360_OF_360",
+      "pass12": "PASS_FINAL_APPROVAL_TRUE",
+      "pass12_artifact": "reading/audit/final_arabic_pass12_adversarial_gate_falsification.json"
     },
-    "urdu": {
-      "state": "PAUSED_WHILE_ARABIC_FINAL_REVIEW_CLOSES"
+    "coverage_metric": {
+      "status": "UNMEASURED_NOT_FAILURE",
+      "note": "Existing zero values are placeholders, not measured 0%; no percentage was fabricated for approval."
     }
   },
-  "arabic_final_review": {
-    "phase": "APPROVED",
-    "minimum_distinct_passes_required": 10,
-    "distinct_passes_recorded": 12,
-    "pass_status": {
-      "pass01": "PASS",
-      "pass02": "PASS",
-      "pass03": "PASS",
-      "pass04": "PASS",
-      "pass05": "PASS",
-      "pass06": "PASS",
-      "pass07": "PASS",
-      "pass08": "PASS",
-      "pass09": "PASS",
-      "pass10": "PASS_WITH_SOURCE_ADJUDICATION",
-      "pass11": "COMPLETE",
-      "pass12": "PASS"
-    },
-    "current_upstream_blockers": [],
-    "pass12_freshness": "CURRENT_OR_NOT_PROVEN_STALE",
-    "pass12_hard_regressions": [],
-    "manual_naturalness_progress": {
-      "a1": {
-        "passages_reviewed": 60,
-        "passages_total": 60,
-        "review_complete": true,
-        "high_confidence_repairs_applied": 37,
-        "passages_touched": 31,
-        "repair_sources": [
-          "reading/tools/repair_final_arabic_a1_u07_p03_tatweel_typo.py",
-          "reading/tools/repair_final_arabic_a1_u07_p03_forecast_naturalness.py",
-          "reading/tools/repair_final_arabic_pass11_a1_naturalness_batch.py",
-          "reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl",
-          "reading/tools/repair_final_arabic_post_pass07_a1_naturalness.py"
-        ],
-        "status": "PASS_AFTER_REPAIR",
-        "post_pass07_recheck": {
-          "passages_rechecked": 28,
-          "high_confidence_repairs_applied": 9,
-          "passages_touched": 9,
-          "status": "PASS_AFTER_REPAIR",
-          "snapshot": "reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl",
-          "repair_source": "reading/tools/repair_final_arabic_post_pass07_a1_naturalness.py",
-          "note": "All 28 A1 passages expanded after the original Pass11 read were re-read in current ending context. Nine high-confidence tense, event-order, logic, or MSA-idiom defects introduced by the Pass07 append-only expansions were repaired with literal-source, metadata, lexical-occurrence, and band guards; Pass07 remained at zero review flags after repair."
-        },
-        "note": "Original full A1 Pass11 review plus targeted post-Pass07 current-text recheck are complete; current canonical A1 prose is covered by naturalness review evidence."
-      },
-      "a2": {
-        "passages_reviewed": 60,
-        "passages_total": 60,
-        "review_complete": true,
-        "high_confidence_repairs_applied": 7,
-        "passages_touched": 7,
-        "repair_sources": [
-          "reading/tools/repair_final_arabic_pass11_a2_naturalness_batch.py",
-          "reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl"
-        ],
-        "status": "PASS_AFTER_REPAIR",
-        "post_pass07_recheck": {
-          "passages_rechecked": 38,
-          "high_confidence_repairs_applied": 0,
-          "passages_touched": 0,
-          "status": "PASS_NO_ADDITIONAL_REPAIR",
-          "snapshot": "reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl",
-          "note": "All 38 A2 passages expanded after the original Pass11 read were re-read in current ending context. No additional high-confidence grammar, idiom, tense-continuity, event-order, or naturalness defect was found; stylistic-only alternatives were left unchanged."
-        },
-        "note": "Original full A2 Pass11 review plus targeted post-Pass07 current-text recheck are complete; current canonical A2 prose is covered by naturalness review evidence."
-      },
-      "b1": {
-        "passages_reviewed": 60,
-        "passages_total": 60,
-        "review_complete": true,
-        "high_confidence_repairs_applied": 44,
-        "passages_touched": 35,
-        "repair_sources": [
-          "reading/audit/final_arabic_pass11_b1_snapshot.jsonl",
-          "reading/tools/repair_final_arabic_pass11_b1_naturalness_batch.py"
-        ],
-        "status": "PASS_AFTER_REPAIR",
-        "note": "Full B1 manual prose read was performed only after all 60 B1 passages had completed Pass-03/07 length and assessment recalibration. Exact passage-scoped repairs were assertion-guarded; stylistic-only alternatives were intentionally left unchanged."
-      },
-      "b2": {
-        "passages_reviewed": 60,
-        "passages_total": 60,
-        "review_complete": true,
-        "high_confidence_repairs_applied": 22,
-        "passages_touched": 20,
-        "repair_sources": [
-          "reading/audit/final_arabic_pass11_b2_snapshot.jsonl",
-          "reading/tools/repair_final_arabic_pass11_b2_naturalness_batch.py"
-        ],
-        "status": "PASS_AFTER_REPAIR",
-        "note": "Full B2 manual prose read was performed only after all 60 B2 passages had completed Pass-03/07 length and assessment recalibration. The full pass applied 21 exact assertion-guarded repairs across 20 passages; the total also includes one earlier independently detected comparative-naturalness repair in ar-b2-u04-p06, which was subsequently reviewed again in the full pass. Stylistic-only alternatives were intentionally left unchanged."
-      },
-      "c1": {
-        "passages_reviewed": 60,
-        "passages_total": 60,
-        "review_complete": true,
-        "high_confidence_repairs_applied": 29,
-        "passages_touched": 23,
-        "repair_sources": [
-          "reading/audit/final_arabic_pass11_c1_snapshot.jsonl",
-          "reading/tools/repair_final_arabic_pass11_c1_naturalness_batch.py"
-        ],
-        "status": "PASS_AFTER_REPAIR",
-        "note": "Full C1 manual prose read was performed only after all 60 C1 passages had completed Pass-03/07 length and assessment recalibration. The repair batch applied 29 exact high-confidence MSA grammar/idiom/collocation repairs across 23 passages; assessment, new-target, review-target, and literal new-target occurrence contracts were assertion-guarded. Stylistic-only alternatives were intentionally left unchanged."
-      },
-      "c2": {
-        "passages_reviewed": 60,
-        "passages_total": 60,
-        "review_complete": true,
-        "high_confidence_repairs_applied": 66,
-        "passages_touched": 43,
-        "repair_sources": [
-          "reading/audit/final_arabic_pass11_c2_snapshot.jsonl",
-          "reading/tools/repair_final_arabic_pass11_c2_naturalness_batch.py",
-          "reading/tools/repair_final_arabic_c2_u01_p02_latin_intrusion.py",
-          "reading/tools/repair_final_arabic_c2_u01_p03_mubarrir_sense.py"
-        ],
-        "status": "PASS_AFTER_REPAIR",
-        "note": "Full C2 manual prose read was performed only after all 60 C2 passages had completed structural/length and assessment recalibration. The full manual batch applied 64 exact high-confidence MSA grammar/idiom/collocation repairs across 42 passages. The total also includes the earlier guarded مبرر lexical-sense normalization in ar-c2-u01-p03 and the pre-snapshot removal of a residual Latin-script intrusion in ar-c2-u01-p02, for 66 repairs across 43 unique passages. The batch assertion-guarded assessments, speed-training metadata, new/review target metadata, literal target occurrence counts, the 700–1200-word band, and Arabic-only reader-facing title/text. A fresh post-repair snapshot revalidated all 60 passages at 709–977 words. Stylistic-only alternatives were intentionally left unchanged."
-      }
-    },
-    "final_approval": true
+  "french": {
+    "state": "ACTIVE_GENERATION",
+    "canonical_passages": 6,
+    "levels": {"a1": 6, "a2": 0, "b1": 0, "b2": 0, "c1": 0, "c2": 0},
+    "current_files": ["reading/french/a1/passages.jsonl", "reading/french/a1/CALIBRATION_UNIT_01.md"],
+    "next_target": "Continue from the six live A1 calibration passages to 60 A1 passages under the current generation-first/ten-question contract; do not restart calibration from scratch."
   },
-  "manual_naturalness": {
-    "status": "COMPLETE",
-    "passages_reviewed": 360,
-    "levels_complete": 6,
-    "post_pass07_a1_a2_recheck_passages": 66
-  },
-  "coverage_metric": {
-    "status": "UNMEASURED",
-    "passages_unmeasured": 360,
-    "interpretation": "The current zero field values are placeholders and must not be treated as measured 0% coverage."
+  "urdu": {
+    "state": "QUEUED",
+    "canonical_passages": 6,
+    "levels": {"a1": 6, "a2": 0, "b1": 0, "b2": 0, "c1": 0, "c2": 0},
+    "current_files": ["reading/urdu/a1/passages.jsonl", "reading/urdu/a1/calibration"],
+    "next_target": "Resume after French unless explicitly reprioritized; preserve the six live A1 calibration passages as starting state."
   },
   "next_actions": [
-    "record/archive the completed Arabic final-review evidence",
-    "determine the live French/Urdu canonical state before resuming their curriculum work"
+    "inspect the six live French A1 passages and French lexical/source planning only enough to establish the continuation contract",
+    "generate the remaining French A1 corpus in large guarded unit batches under the ten-question standard; do not translate Arabic passages",
+    "keep French audits lightweight during generation and reserve the full multi-pass audit for completion of the generated corpus",
+    "keep Urdu unchanged while French is active unless explicitly reprioritized"
   ],
   "important_files": [
-    "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md",
-    "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
-    "reading/planning/TEN_QUESTION_STANDARD.md",
     "reading/AGENT_HANDOFF.md",
     "reading/TASKS.md",
-    "docs/READING_PASSAGE_STANDARD.md",
+    "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
+    "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md",
+    "reading/planning/TEN_QUESTION_STANDARD.md",
     "reading/schema/passage.schema.json",
-    "reading/audit/final_arabic_pass03_question_composition.json",
-    "reading/audit/final_arabic_pass04_answer_evidence_alignment.json",
-    "reading/audit/final_arabic_pass07_cefr_difficulty_calibration.json",
-    "reading/audit/final_arabic_pass11_naturalness_review.json",
+    "docs/READING_PASSAGE_STANDARD.md",
+    "reading/ROADMAP.md",
     "reading/audit/final_arabic_pass12_adversarial_gate_falsification.json"
   ],
   "parallel_agent_rules": {
     "verify_live_main_before_write_batch": true,
     "prefer_non_overlapping_units_or_files": true,
     "source_state_assertions_required_for_large_mutations": true,
-    "serialize_workflows_that_push_the_same_audit_artifact": true,
+    "serialize_workflows_that_push_the_same_artifact": true,
     "do_not_rely_on_recursive_GITHUB_TOKEN_workflow_triggers": true
   }
 }
