@@ -8,14 +8,26 @@
       "passages_reviewed": 60,
       "passages_total": 60,
       "review_complete": true,
-      "high_confidence_repairs_applied": 28,
-      "passages_touched": 26,
+      "high_confidence_repairs_applied": 37,
+      "passages_touched": 31,
       "repair_sources": [
         "reading/tools/repair_final_arabic_a1_u07_p03_tatweel_typo.py",
         "reading/tools/repair_final_arabic_a1_u07_p03_forecast_naturalness.py",
-        "reading/tools/repair_final_arabic_pass11_a1_naturalness_batch.py"
+        "reading/tools/repair_final_arabic_pass11_a1_naturalness_batch.py",
+        "reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl",
+        "reading/tools/repair_final_arabic_post_pass07_a1_naturalness.py"
       ],
-      "status": "PASS_AFTER_REPAIR"
+      "status": "PASS_AFTER_REPAIR",
+      "post_pass07_recheck": {
+        "passages_rechecked": 28,
+        "high_confidence_repairs_applied": 9,
+        "passages_touched": 9,
+        "status": "PASS_AFTER_REPAIR",
+        "snapshot": "reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl",
+        "repair_source": "reading/tools/repair_final_arabic_post_pass07_a1_naturalness.py",
+        "note": "All 28 A1 passages expanded after the original Pass11 read were re-read in current ending context. Nine high-confidence tense, event-order, logic, or MSA-idiom defects introduced by the Pass07 append-only expansions were repaired with literal-source, metadata, lexical-occurrence, and band guards; Pass07 remained at zero review flags after repair."
+      },
+      "note": "Original full A1 Pass11 review plus targeted post-Pass07 current-text recheck are complete; current canonical A1 prose is covered by naturalness review evidence."
     },
     "a2": {
       "passages_reviewed": 60,
@@ -24,9 +36,19 @@
       "high_confidence_repairs_applied": 7,
       "passages_touched": 7,
       "repair_sources": [
-        "reading/tools/repair_final_arabic_pass11_a2_naturalness_batch.py"
+        "reading/tools/repair_final_arabic_pass11_a2_naturalness_batch.py",
+        "reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl"
       ],
-      "status": "PASS_AFTER_REPAIR"
+      "status": "PASS_AFTER_REPAIR",
+      "post_pass07_recheck": {
+        "passages_rechecked": 38,
+        "high_confidence_repairs_applied": 0,
+        "passages_touched": 0,
+        "status": "PASS_NO_ADDITIONAL_REPAIR",
+        "snapshot": "reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl",
+        "note": "All 38 A2 passages expanded after the original Pass11 read were re-read in current ending context. No additional high-confidence grammar, idiom, tense-continuity, event-order, or naturalness defect was found; stylistic-only alternatives were left unchanged."
+      },
+      "note": "Original full A2 Pass11 review plus targeted post-Pass07 current-text recheck are complete; current canonical A2 prose is covered by naturalness review evidence."
     },
     "b1": {
       "passages_reviewed": 60,
@@ -89,5 +111,19 @@
     "levels_pending": 0
   },
   "status": "COMPLETE",
-  "final_approval_claim": false
+  "final_approval_claim": false,
+  "post_pass07_revalidation": {
+    "levels": [
+      "A1",
+      "A2"
+    ],
+    "passages_rechecked": 66,
+    "a1_passages": 28,
+    "a2_passages": 38,
+    "repairs_applied": 9,
+    "status": "COMPLETE",
+    "snapshot": "reading/audit/final_arabic_post_pass07_a1_a2_naturalness_snapshot.jsonl",
+    "pass07_review_flags_after_repair": 0,
+    "coverage_metric_note": "Pass07 lexical coverage remains UNMEASURED, reported separately from actionable review flags."
+  }
 }
