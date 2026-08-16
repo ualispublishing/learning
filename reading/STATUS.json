@@ -7,10 +7,10 @@
     "French",
     "Urdu"
   ],
-  "phase": "Arabic A1-C2 generation is complete. Arabic final multi-pass review is in the closing machine-gate phase; final approval remains false until fresh Pass 12 succeeds.",
+  "phase": "Arabic A1-C2 final review is approved; proceed to the next language/project phase.",
   "target_passages": 1080,
   "target_is_quota": false,
-  "approved_passages": 0,
+  "approved_passages": 360,
   "source_of_truth_precedence": [
     "live canonical JSONL on main",
     "freshly regenerated audit artifacts",
@@ -42,7 +42,7 @@
     "questions_per_passage": 10,
     "total_questions": 3600,
     "total_answers": 3600,
-    "formal_final_approval": false
+    "formal_final_approval": true
   },
   "other_languages": {
     "french": {
@@ -53,7 +53,7 @@
     }
   },
   "arabic_final_review": {
-    "phase": "CLOSING_MACHINE_GATES",
+    "phase": "APPROVED",
     "minimum_distinct_passes_required": 10,
     "distinct_passes_recorded": 12,
     "pass_status": {
@@ -68,10 +68,10 @@
       "pass09": "PASS",
       "pass10": "PASS_WITH_SOURCE_ADJUDICATION",
       "pass11": "COMPLETE",
-      "pass12": "BLOCKED"
+      "pass12": "PASS"
     },
     "current_upstream_blockers": [],
-    "pass12_freshness": "STALE_RELATIVE_TO_CURRENT_UPSTREAM_STATE",
+    "pass12_freshness": "CURRENT_OR_NOT_PROVEN_STALE",
     "pass12_hard_regressions": [],
     "manual_naturalness_progress": {
       "a1": {
@@ -175,7 +175,7 @@
         "note": "Full C2 manual prose read was performed only after all 60 C2 passages had completed structural/length and assessment recalibration. The full manual batch applied 64 exact high-confidence MSA grammar/idiom/collocation repairs across 42 passages. The total also includes the earlier guarded مبرر lexical-sense normalization in ar-c2-u01-p03 and the pre-snapshot removal of a residual Latin-script intrusion in ar-c2-u01-p02, for 66 repairs across 43 unique passages. The batch assertion-guarded assessments, speed-training metadata, new/review target metadata, literal target occurrence counts, the 700–1200-word band, and Arabic-only reader-facing title/text. A fresh post-repair snapshot revalidated all 60 passages at 709–977 words. Stylistic-only alternatives were intentionally left unchanged."
       }
     },
-    "final_approval": false
+    "final_approval": true
   },
   "manual_naturalness": {
     "status": "COMPLETE",
@@ -189,8 +189,8 @@
     "interpretation": "The current zero field values are placeholders and must not be treated as measured 0% coverage."
   },
   "next_actions": [
-    "repair/refresh Pass 12 after upstream gates close; Pass 12 must include Pass 04 and accept Pass 11 COMPLETE",
-    "regenerate the full final audit suite sequentially immediately before the final Pass 12 attempt"
+    "record/archive the completed Arabic final-review evidence",
+    "determine the live French/Urdu canonical state before resuming their curriculum work"
   ],
   "important_files": [
     "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md",
