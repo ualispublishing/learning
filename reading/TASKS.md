@@ -25,47 +25,52 @@ Do not reopen Arabic unless canonical Arabic content is deliberately changed.
 
 - [x] Units 01–10 / sequences 1–60 generated.
 - [x] 60 passages / 600 questions / 600 linked answers.
-- [x] 100 unique deliberate lexical targets.
-- [x] Zero A1↔A2 deliberate-target collisions by source ID or visible form.
+- [x] 100 unique deliberate lexical targets; zero A1↔A2 deliberate-target collisions.
 - [x] Every Unit P06 checkpoint has zero deliberately new lexical targets.
-- [x] Generation-integrity artifact: `reading/audit/french_a2_generation_integrity.json` = `PASS` with no failures.
+- [x] Generation-integrity artifact: `reading/audit/french_a2_generation_integrity.json` = `PASS`.
 - [x] Canonical blob: `d0a80b8866071f426019aa0ad143e1d270dba4de`.
-- [x] Canonical completion commit: `b529f730e743e3a3b077750f31be31632b8b9afc`.
-
-A2 Unit 08 targets: `étrange`, `répéter`, `appartenir`, `signe`, `plusieurs`, `compagnie`, `douter`, `test`, `but`, `parole`.
-
-A2 Unit 09 targets: `excuse`, `surprise`, `bruit`, `fonctionner`, `moitié`, `rater`, `cerveau`, `respirer`, `chacun`, `pourtant`.
-
-A2 Unit 10 targets: `habiter`, `milieu`, `cuisine`, `fenêtre`, `vidéo`, `caméra`, `retenir`, `image`, `proposer`, `gérer`.
 
 A1 and A2 have not yet gone through the final language-wide multi-pass French approval audit; do not broadly regenerate them.
 
-### B1 — NEXT / CALIBRATION UNIT
+### B1 — ACTIVE
 
-- [ ] Unit 01 / sequences 1–6: generate as one guarded calibration unit.
-- [ ] Use the standard B1 220–350-word band.
-- [ ] Use the B1 3–6 new lexical types per standard passage as a planning range, not a quota; keep the unit’s deliberate lexical load controlled.
-- [ ] Use 10 questions + 10 linked answers per passage under the project-wide ten-question standard.
-- [ ] Add multi-sentence inference, motive/reason, summary, and grammar-in-context while preserving answer support in the passage.
-- [ ] Move older vocabulary across related but non-identical topics/genres rather than merely repeating A2 narrow-reading settings.
-- [ ] Check every new B1 deliberate target against all deliberate French A1+A2 targets before any canonical write.
-- [ ] P06 checkpoint: zero deliberately new lexical targets, high known-vocabulary emphasis, timed-reading eligible where appropriate.
-- [ ] Fail closed on source blob drift, source identity, cross-level duplication, schema/linkage errors, exact deliberate-review visibility, word band, or sequence collision.
+#### Unit 01 — ACCEPTED CALIBRATION
 
-Remaining French levels after A2:
+- [x] Sequences 1–6 generated and guarded.
+- [x] 6 passages / 60 questions / 60 linked answers.
+- [x] 15 fresh deliberate targets, three each in P01–P05; P06 has zero new targets.
+- [x] All passage lengths in B1 220–350 band: 246, 254, 250, 250, 276, 271.
+- [x] Post-calibration precision review = `PASS`: `reading/audit/french_b1_unit01_calibration_review.json`.
+- [x] Accepted canonical B1 blob after calibration repair: `beed8c8337be567325a4b329b79c7d070511f3b1`.
+- [x] Calibration commit: `ccdf4743c5b359c085387dd66653f01d368e5c07`.
+- [x] Root lexical CSV remained unchanged; `impliquer` was tightened to the directly supported entail/consequence sense rather than adding a sense override.
 
-- [ ] B1: 60 passages.
+Unit 01 targets: `poursuivre`, `époque`, `trace`, `convaincre`, `position`, `impliquer`, `machine`, `code`, `recommencer`, `étranger`, `peuple`, `futur`, `regretter`, `profiter`, `ennui`.
+
+#### Unit 02 — IMMEDIATE NEXT
+
+- [ ] Generate sequences 7–12 as one guarded batch against B1 blob `beed8c8337be567325a4b329b79c7d070511f3b1`.
+- [ ] Use the calibrated default of 3 new deliberate lexical types in each P01–P05; P06 zero new.
+- [ ] Check every new target against all deliberate A1+A2+B1 Unit01 targets before canonical write.
+- [ ] Keep every passage in the B1 220–350-word band.
+- [ ] Use 10 questions + 10 linked answers per passage.
+- [ ] Make deliberate reviews exactly visible; naturally distribute Unit01 reviews across P01–P05.
+- [ ] Preserve B1 demand: paragraph-level main ideas, multi-sentence inference, motive/reason, summary, grammar-in-context, and transfer across related but non-identical genres.
+- [ ] Fail closed on source/blob drift, source identity, cross-level duplication, schema/linkage errors, exact review visibility, word band, or sequence collision.
+
+Remaining French after accepted B1 Unit01:
+
+- [ ] B1: 54 passages.
 - [ ] B2: 60 passages.
 - [ ] C1: 60 passages.
 - [ ] C2: 60 passages.
 
 Production policy:
 
-- generation-first; full multi-pass French audit remains deferred until the completed French A1–C2 corpus milestone;
+- generation-first; full multi-pass French audit remains deferred until completed French A1–C2 generation;
 - standard bands: B1 220–350, B2 350–550, C1 500–800, C2 700–1,200 words;
-- B1 starts broader context transfer and paragraph/multi-sentence inference;
-- fail closed on lexical-source drift, cross-level target duplication, canonical blob drift, schema failure, linkage failure, invisible deliberate review, reader-facing contamination, or sequence collision;
-- do not mutate the validated root lexical CSV merely to simplify passage production.
+- root validated lexical CSV remains read-only;
+- fix failed guards rather than weakening them.
 
 ## Urdu — QUEUED
 
@@ -85,4 +90,4 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 
 ## Immediate next task
 
-**Generate French B1 Unit 01 / sequences 1–6 as the B1 calibration unit, fresh against completed A1+A2. Keep Arabic sealed.**
+**Generate French B1 Unit 02 / sequences 7–12 against canonical B1 blob `beed8c8337be567325a4b329b79c7d070511f3b1`. Keep Arabic sealed.**
