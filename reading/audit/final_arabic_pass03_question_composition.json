@@ -3,15 +3,19 @@
   "name": "question_composition_against_ten_question_standard",
   "scope": "Arabic A1-C2 canonical reading corpus",
   "reference": "reading/planning/TEN_QUESTION_STANDARD.md",
-  "interpretation": "diagnostic only: documented distributions are defaults, so deviations require pedagogical review rather than automatic rejection",
+  "interpretation": "diagnostic only: documented distributions are defaults; overlapping pedagogical roles are counted where the question type genuinely encodes both roles",
+  "classification_notes": {
+    "vocabulary_in_context": "counts as lexical and passage-centred",
+    "grammar_function": "counts as grammar/style and discourse because it tests connective/structural function",
+    "contrast": "counts as grammar/style and discourse because it tests an explicit contrast relation"
+  },
   "levels": {
     "a1": {
       "passages": 60,
-      "flagged_for_default_distribution": 46,
+      "flagged_for_default_distribution": 41,
       "low_type_diversity": 0,
       "advanced_definition_heavy": 0,
       "deficiency_categories": {
-        "passage_centered": 5,
         "lexical": 2,
         "grammar_style": 39
       },
@@ -40,7 +44,6 @@
       "advanced_definition_heavy": 0,
       "deficiency_categories": {
         "grammar_style": 42,
-        "passage_centered": 13,
         "lexical": 13
       },
       "question_type_totals": {
@@ -85,12 +88,10 @@
     },
     "b2": {
       "passages": 60,
-      "flagged_for_default_distribution": 60,
+      "flagged_for_default_distribution": 0,
       "low_type_diversity": 0,
       "advanced_definition_heavy": 0,
-      "deficiency_categories": {
-        "discourse": 60
-      },
+      "deficiency_categories": {},
       "question_type_totals": {
         "cause_effect": 60,
         "contrast": 60,
@@ -112,7 +113,6 @@
       "low_type_diversity": 0,
       "advanced_definition_heavy": 0,
       "deficiency_categories": {
-        "discourse": 60,
         "synthesis": 60
       },
       "question_type_totals": {
@@ -133,7 +133,6 @@
       "low_type_diversity": 0,
       "advanced_definition_heavy": 0,
       "deficiency_categories": {
-        "discourse": 54,
         "synthesis": 60
       },
       "question_type_totals": {
@@ -152,145 +151,9 @@
   },
   "totals": {
     "passages": 360,
-    "review_flags": 281
+    "review_flags": 216
   },
   "flags": [
-    {
-      "code": "default_distribution_deficit",
-      "level": "a1",
-      "passage_id": "ar-a1-u01-p02",
-      "question_types": [
-        "sequence",
-        "literal_detail",
-        "vocabulary_in_context",
-        "vocabulary_in_context",
-        "cloze_transfer",
-        "single_word_definition",
-        "grammar_category",
-        "grammar_choice",
-        "grammar_identification",
-        "cloze_transfer"
-      ],
-      "category_counts": {
-        "passage_centered": 2,
-        "comprehension": 2,
-        "inference": 0,
-        "comprehension_inference": 2,
-        "lexical": 5,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 0,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "passage_centered": {
-          "minimum": 3,
-          "actual": 2
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "a1",
-      "passage_id": "ar-a1-u01-p03",
-      "question_types": [
-        "cause_effect",
-        "literal_detail",
-        "vocabulary_in_context",
-        "vocabulary_in_context",
-        "cloze_transfer",
-        "grammar_category",
-        "single_word_definition",
-        "contrast",
-        "grammar_choice",
-        "person_form"
-      ],
-      "category_counts": {
-        "passage_centered": 2,
-        "comprehension": 2,
-        "inference": 0,
-        "comprehension_inference": 2,
-        "lexical": 4,
-        "grammar_style": 4,
-        "discourse": 0,
-        "synthesis": 0,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "passage_centered": {
-          "minimum": 3,
-          "actual": 2
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "a1",
-      "passage_id": "ar-a1-u01-p04",
-      "question_types": [
-        "literal_detail",
-        "literal_detail",
-        "vocabulary_in_context",
-        "vocabulary_in_context",
-        "cloze_transfer",
-        "single_word_definition",
-        "single_word_definition",
-        "contrast",
-        "grammar_choice",
-        "cloze_transfer"
-      ],
-      "category_counts": {
-        "passage_centered": 2,
-        "comprehension": 2,
-        "inference": 0,
-        "comprehension_inference": 2,
-        "lexical": 6,
-        "grammar_style": 2,
-        "discourse": 0,
-        "synthesis": 0,
-        "distinct_types": 6
-      },
-      "deficits": {
-        "passage_centered": {
-          "minimum": 3,
-          "actual": 2
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "a1",
-      "passage_id": "ar-a1-u01-p05",
-      "question_types": [
-        "literal_detail",
-        "vocabulary_in_context",
-        "vocabulary_in_context",
-        "literal_detail",
-        "cloze_transfer",
-        "single_word_definition",
-        "grammar_function",
-        "contrast",
-        "grammar_identification",
-        "cloze_transfer"
-      ],
-      "category_counts": {
-        "passage_centered": 2,
-        "comprehension": 2,
-        "inference": 0,
-        "comprehension_inference": 2,
-        "lexical": 5,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 0,
-        "distinct_types": 7
-      },
-      "deficits": {
-        "passage_centered": {
-          "minimum": 3,
-          "actual": 2
-        }
-      }
-    },
     {
       "code": "default_distribution_deficit",
       "level": "a1",
@@ -308,13 +171,13 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 5,
+        "passage_centered": 9,
         "comprehension": 4,
         "inference": 0,
         "comprehension_inference": 4,
         "lexical": 1,
         "grammar_style": 4,
-        "discourse": 1,
+        "discourse": 5,
         "synthesis": 1,
         "distinct_types": 8
       },
@@ -342,13 +205,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 6
       },
@@ -376,13 +239,13 @@
         "contrast"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 9,
         "comprehension": 5,
         "inference": 0,
         "comprehension_inference": 5,
         "lexical": 1,
         "grammar_style": 3,
-        "discourse": 1,
+        "discourse": 4,
         "synthesis": 1,
         "distinct_types": 9
       },
@@ -410,13 +273,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -444,13 +307,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 1,
+        "discourse": 2,
         "synthesis": 0,
         "distinct_types": 6
       },
@@ -478,13 +341,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 6
       },
@@ -512,7 +375,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 5,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
@@ -546,13 +409,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 1,
+        "discourse": 2,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -580,7 +443,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 5,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
@@ -614,7 +477,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 5,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
@@ -648,13 +511,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 6
       },
@@ -682,13 +545,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 1,
+        "discourse": 2,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -716,13 +579,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -750,13 +613,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 6
       },
@@ -784,13 +647,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -818,13 +681,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -852,13 +715,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 6
       },
@@ -886,13 +749,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -920,13 +783,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 6
       },
@@ -954,13 +817,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 6
       },
@@ -988,13 +851,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 6
       },
@@ -1022,13 +885,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -1056,13 +919,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -1090,13 +953,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 6
       },
@@ -1124,13 +987,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -1158,13 +1021,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -1192,13 +1055,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 6
       },
@@ -1226,13 +1089,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -1260,13 +1123,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 6
       },
@@ -1294,13 +1157,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 6
       },
@@ -1328,13 +1191,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -1362,13 +1225,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -1396,13 +1259,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -1430,13 +1293,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 6
       },
@@ -1464,13 +1327,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -1478,40 +1341,6 @@
         "grammar_style": {
           "minimum": 2,
           "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "a1",
-      "passage_id": "ar-a1-u09-p04",
-      "question_types": [
-        "literal_detail",
-        "literal_detail",
-        "vocabulary_in_context",
-        "vocabulary_in_context",
-        "contrast",
-        "single_word_definition",
-        "single_word_definition",
-        "contrast",
-        "cloze_transfer",
-        "cloze_transfer"
-      ],
-      "category_counts": {
-        "passage_centered": 2,
-        "comprehension": 2,
-        "inference": 0,
-        "comprehension_inference": 2,
-        "lexical": 6,
-        "grammar_style": 2,
-        "discourse": 0,
-        "synthesis": 0,
-        "distinct_types": 5
-      },
-      "deficits": {
-        "passage_centered": {
-          "minimum": 3,
-          "actual": 2
         }
       }
     },
@@ -1532,13 +1361,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -1566,13 +1395,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -1600,13 +1429,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -1634,13 +1463,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 6
       },
@@ -1668,13 +1497,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
@@ -1702,13 +1531,13 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 0,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 6
       },
@@ -1736,7 +1565,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -1770,7 +1599,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -1804,21 +1633,17 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 6
       },
       "deficits": {
-        "passage_centered": {
-          "minimum": 4,
-          "actual": 3
-        },
         "grammar_style": {
           "minimum": 2,
           "actual": 1
@@ -1842,7 +1667,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -1876,7 +1701,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -1910,13 +1735,13 @@
         "contrast"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 9,
         "comprehension": 4,
         "inference": 1,
         "comprehension_inference": 5,
         "lexical": 1,
         "grammar_style": 3,
-        "discourse": 1,
+        "discourse": 4,
         "synthesis": 1,
         "distinct_types": 8
       },
@@ -1944,7 +1769,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -1978,7 +1803,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -2012,7 +1837,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -2046,7 +1871,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -2080,7 +1905,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -2114,13 +1939,13 @@
         "contrast"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 9,
         "comprehension": 4,
         "inference": 1,
         "comprehension_inference": 5,
         "lexical": 1,
         "grammar_style": 3,
-        "discourse": 1,
+        "discourse": 4,
         "synthesis": 1,
         "distinct_types": 8
       },
@@ -2148,7 +1973,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -2182,7 +2007,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -2216,21 +2041,17 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
       "deficits": {
-        "passage_centered": {
-          "minimum": 4,
-          "actual": 3
-        },
         "grammar_style": {
           "minimum": 2,
           "actual": 1
@@ -2254,21 +2075,17 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
       "deficits": {
-        "passage_centered": {
-          "minimum": 4,
-          "actual": 3
-        },
         "grammar_style": {
           "minimum": 2,
           "actual": 1
@@ -2292,7 +2109,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -2326,21 +2143,17 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
       "deficits": {
-        "passage_centered": {
-          "minimum": 4,
-          "actual": 3
-        },
         "grammar_style": {
           "minimum": 2,
           "actual": 1
@@ -2364,21 +2177,17 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
       "deficits": {
-        "passage_centered": {
-          "minimum": 4,
-          "actual": 3
-        },
         "grammar_style": {
           "minimum": 2,
           "actual": 1
@@ -2402,7 +2211,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -2436,7 +2245,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -2470,7 +2279,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -2504,13 +2313,13 @@
         "contrast"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 9,
         "comprehension": 4,
         "inference": 1,
         "comprehension_inference": 5,
         "lexical": 1,
         "grammar_style": 3,
-        "discourse": 1,
+        "discourse": 4,
         "synthesis": 1,
         "distinct_types": 8
       },
@@ -2538,7 +2347,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -2572,7 +2381,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -2606,7 +2415,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -2640,7 +2449,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -2674,21 +2483,17 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
       "deficits": {
-        "passage_centered": {
-          "minimum": 4,
-          "actual": 3
-        },
         "grammar_style": {
           "minimum": 2,
           "actual": 1
@@ -2712,7 +2517,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -2746,21 +2551,17 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
       "deficits": {
-        "passage_centered": {
-          "minimum": 4,
-          "actual": 3
-        },
         "grammar_style": {
           "minimum": 2,
           "actual": 1
@@ -2784,7 +2585,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -2818,21 +2619,17 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
       "deficits": {
-        "passage_centered": {
-          "minimum": 4,
-          "actual": 3
-        },
         "grammar_style": {
           "minimum": 2,
           "actual": 1
@@ -2856,21 +2653,17 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
       "deficits": {
-        "passage_centered": {
-          "minimum": 4,
-          "actual": 3
-        },
         "grammar_style": {
           "minimum": 2,
           "actual": 1
@@ -2894,13 +2687,13 @@
         "contrast"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 9,
         "comprehension": 4,
         "inference": 1,
         "comprehension_inference": 5,
         "lexical": 1,
         "grammar_style": 3,
-        "discourse": 1,
+        "discourse": 4,
         "synthesis": 1,
         "distinct_types": 8
       },
@@ -2928,21 +2721,17 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
       "deficits": {
-        "passage_centered": {
-          "minimum": 4,
-          "actual": 3
-        },
         "grammar_style": {
           "minimum": 2,
           "actual": 1
@@ -2966,21 +2755,17 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
       "deficits": {
-        "passage_centered": {
-          "minimum": 4,
-          "actual": 3
-        },
         "grammar_style": {
           "minimum": 2,
           "actual": 1
@@ -3004,7 +2789,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -3038,21 +2823,17 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
       "deficits": {
-        "passage_centered": {
-          "minimum": 4,
-          "actual": 3
-        },
         "grammar_style": {
           "minimum": 2,
           "actual": 1
@@ -3076,21 +2857,17 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 3,
+        "passage_centered": 6,
         "comprehension": 2,
         "inference": 1,
         "comprehension_inference": 3,
         "lexical": 6,
         "grammar_style": 1,
-        "discourse": 0,
+        "discourse": 1,
         "synthesis": 0,
         "distinct_types": 7
       },
       "deficits": {
-        "passage_centered": {
-          "minimum": 4,
-          "actual": 3
-        },
         "grammar_style": {
           "minimum": 2,
           "actual": 1
@@ -3114,7 +2891,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -3148,7 +2925,7 @@
         "cloze_transfer"
       ],
       "category_counts": {
-        "passage_centered": 4,
+        "passage_centered": 6,
         "comprehension": 3,
         "inference": 1,
         "comprehension_inference": 4,
@@ -3182,13 +2959,13 @@
         "inference"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 4,
         "inference": 2,
         "comprehension_inference": 6,
         "lexical": 3,
         "grammar_style": 1,
-        "discourse": 1,
+        "discourse": 2,
         "synthesis": 0,
         "distinct_types": 9
       },
@@ -3216,13 +2993,13 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 7,
+        "passage_centered": 9,
         "comprehension": 4,
         "inference": 2,
         "comprehension_inference": 6,
         "lexical": 1,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 9
       },
@@ -3250,13 +3027,13 @@
         "contrast"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 4,
         "inference": 2,
         "comprehension_inference": 6,
         "lexical": 3,
         "grammar_style": 1,
-        "discourse": 1,
+        "discourse": 2,
         "synthesis": 0,
         "distinct_types": 9
       },
@@ -3284,13 +3061,13 @@
         "inference"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 4,
         "inference": 2,
         "comprehension_inference": 6,
         "lexical": 3,
         "grammar_style": 1,
-        "discourse": 1,
+        "discourse": 2,
         "synthesis": 0,
         "distinct_types": 9
       },
@@ -3318,13 +3095,13 @@
         "inference"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 4,
         "inference": 2,
         "comprehension_inference": 6,
         "lexical": 3,
         "grammar_style": 1,
-        "discourse": 1,
+        "discourse": 2,
         "synthesis": 0,
         "distinct_types": 9
       },
@@ -3352,13 +3129,13 @@
         "inference"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 4,
         "inference": 2,
         "comprehension_inference": 6,
         "lexical": 3,
         "grammar_style": 1,
-        "discourse": 1,
+        "discourse": 2,
         "synthesis": 0,
         "distinct_types": 9
       },
@@ -3386,13 +3163,13 @@
         "summary"
       ],
       "category_counts": {
-        "passage_centered": 7,
+        "passage_centered": 9,
         "comprehension": 4,
         "inference": 2,
         "comprehension_inference": 6,
         "lexical": 1,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
@@ -3420,13 +3197,13 @@
         "contrast"
       ],
       "category_counts": {
-        "passage_centered": 7,
+        "passage_centered": 9,
         "comprehension": 4,
         "inference": 2,
         "comprehension_inference": 6,
         "lexical": 1,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
@@ -3454,13 +3231,13 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 8,
+        "passage_centered": 10,
         "comprehension": 5,
         "inference": 2,
         "comprehension_inference": 7,
         "lexical": 0,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
@@ -3488,13 +3265,13 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 7,
+        "passage_centered": 9,
         "comprehension": 4,
         "inference": 2,
         "comprehension_inference": 6,
         "lexical": 1,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 9
       },
@@ -3522,13 +3299,13 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 8,
+        "passage_centered": 10,
         "comprehension": 5,
         "inference": 2,
         "comprehension_inference": 7,
         "lexical": 0,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
@@ -3556,13 +3333,13 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 7,
+        "passage_centered": 10,
         "comprehension": 4,
         "inference": 2,
         "comprehension_inference": 6,
         "lexical": 0,
         "grammar_style": 3,
-        "discourse": 1,
+        "discourse": 4,
         "synthesis": 1,
         "distinct_types": 8
       },
@@ -3590,13 +3367,13 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 8,
+        "passage_centered": 10,
         "comprehension": 5,
         "inference": 2,
         "comprehension_inference": 7,
         "lexical": 0,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
@@ -3624,13 +3401,13 @@
         "synthesis"
       ],
       "category_counts": {
-        "passage_centered": 8,
+        "passage_centered": 10,
         "comprehension": 4,
         "inference": 2,
         "comprehension_inference": 6,
         "lexical": 0,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 2,
         "distinct_types": 8
       },
@@ -3638,2046 +3415,6 @@
         "lexical": {
           "minimum": 2,
           "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u01-p01",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u01-p02",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u01-p03",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u01-p04",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u01-p05",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "reference_resolution",
-        "single_word_definition",
-        "vocabulary_in_context"
-      ],
-      "category_counts": {
-        "passage_centered": 6,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 2,
-        "grammar_style": 2,
-        "discourse": 1,
-        "synthesis": 1,
-        "distinct_types": 10
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u01-p06",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "vocabulary_in_context",
-        "cause_effect",
-        "main_claim",
-        "vocabulary_in_context",
-        "contrast",
-        "grammar_function",
-        "summary",
-        "inference"
-      ],
-      "category_counts": {
-        "passage_centered": 6,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 2,
-        "grammar_style": 2,
-        "discourse": 1,
-        "synthesis": 1,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u02-p01",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u02-p02",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u02-p03",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u02-p04",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u02-p05",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u02-p06",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "vocabulary_in_context",
-        "cause_effect",
-        "main_claim",
-        "vocabulary_in_context",
-        "contrast",
-        "grammar_function",
-        "summary",
-        "inference"
-      ],
-      "category_counts": {
-        "passage_centered": 6,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 2,
-        "grammar_style": 2,
-        "discourse": 1,
-        "synthesis": 1,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u03-p01",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u03-p02",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u03-p03",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u03-p04",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u03-p05",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u03-p06",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "vocabulary_in_context",
-        "cause_effect",
-        "main_claim",
-        "vocabulary_in_context",
-        "contrast",
-        "grammar_function",
-        "summary",
-        "inference"
-      ],
-      "category_counts": {
-        "passage_centered": 6,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 2,
-        "grammar_style": 2,
-        "discourse": 1,
-        "synthesis": 1,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u04-p01",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u04-p02",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u04-p03",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u04-p04",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u04-p05",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u04-p06",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "vocabulary_in_context",
-        "cause_effect",
-        "main_claim",
-        "vocabulary_in_context",
-        "contrast",
-        "grammar_function",
-        "summary",
-        "inference"
-      ],
-      "category_counts": {
-        "passage_centered": 6,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 2,
-        "grammar_style": 2,
-        "discourse": 1,
-        "synthesis": 1,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u05-p01",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u05-p02",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u05-p03",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u05-p04",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u05-p05",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u05-p06",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "vocabulary_in_context",
-        "cause_effect",
-        "main_claim",
-        "vocabulary_in_context",
-        "contrast",
-        "grammar_function",
-        "summary",
-        "inference"
-      ],
-      "category_counts": {
-        "passage_centered": 6,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 2,
-        "grammar_style": 2,
-        "discourse": 1,
-        "synthesis": 1,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u06-p01",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u06-p02",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u06-p03",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u06-p04",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u06-p05",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u06-p06",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "vocabulary_in_context",
-        "cause_effect",
-        "main_claim",
-        "vocabulary_in_context",
-        "contrast",
-        "grammar_function",
-        "summary",
-        "inference"
-      ],
-      "category_counts": {
-        "passage_centered": 6,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 2,
-        "grammar_style": 2,
-        "discourse": 1,
-        "synthesis": 1,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u07-p01",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u07-p02",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u07-p03",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u07-p04",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u07-p05",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u07-p06",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "vocabulary_in_context",
-        "cause_effect",
-        "main_claim",
-        "vocabulary_in_context",
-        "contrast",
-        "grammar_function",
-        "summary",
-        "inference"
-      ],
-      "category_counts": {
-        "passage_centered": 6,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 2,
-        "grammar_style": 2,
-        "discourse": 1,
-        "synthesis": 1,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u08-p01",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u08-p02",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u08-p03",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u08-p04",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u08-p05",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u08-p06",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "vocabulary_in_context",
-        "cause_effect",
-        "main_claim",
-        "vocabulary_in_context",
-        "contrast",
-        "grammar_function",
-        "summary",
-        "inference"
-      ],
-      "category_counts": {
-        "passage_centered": 6,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 2,
-        "grammar_style": 2,
-        "discourse": 1,
-        "synthesis": 1,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u09-p01",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u09-p02",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u09-p03",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u09-p04",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u09-p05",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "inference",
-        "cause_effect",
-        "synthesis",
-        "grammar_function",
-        "contrast",
-        "grammar_function",
-        "single_word_definition",
-        "single_word_definition"
-      ],
-      "category_counts": {
-        "passage_centered": 5,
-        "comprehension": 3,
-        "inference": 1,
-        "comprehension_inference": 4,
-        "lexical": 2,
-        "grammar_style": 3,
-        "discourse": 0,
-        "synthesis": 1,
-        "distinct_types": 8
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 0
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u09-p06",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "vocabulary_in_context",
-        "cause_effect",
-        "main_claim",
-        "vocabulary_in_context",
-        "contrast",
-        "grammar_function",
-        "summary",
-        "inference"
-      ],
-      "category_counts": {
-        "passage_centered": 6,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 2,
-        "grammar_style": 2,
-        "discourse": 1,
-        "synthesis": 1,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u10-p01",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "vocabulary_in_context",
-        "cause_effect",
-        "main_claim",
-        "vocabulary_in_context",
-        "contrast",
-        "grammar_function",
-        "summary",
-        "inference"
-      ],
-      "category_counts": {
-        "passage_centered": 6,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 2,
-        "grammar_style": 2,
-        "discourse": 1,
-        "synthesis": 1,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u10-p02",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "vocabulary_in_context",
-        "cause_effect",
-        "main_claim",
-        "vocabulary_in_context",
-        "contrast",
-        "grammar_function",
-        "summary",
-        "inference"
-      ],
-      "category_counts": {
-        "passage_centered": 6,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 2,
-        "grammar_style": 2,
-        "discourse": 1,
-        "synthesis": 1,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u10-p03",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "vocabulary_in_context",
-        "cause_effect",
-        "main_claim",
-        "vocabulary_in_context",
-        "contrast",
-        "grammar_function",
-        "summary",
-        "inference"
-      ],
-      "category_counts": {
-        "passage_centered": 6,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 2,
-        "grammar_style": 2,
-        "discourse": 1,
-        "synthesis": 1,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u10-p04",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "vocabulary_in_context",
-        "cause_effect",
-        "main_claim",
-        "vocabulary_in_context",
-        "contrast",
-        "grammar_function",
-        "summary",
-        "inference"
-      ],
-      "category_counts": {
-        "passage_centered": 6,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 2,
-        "grammar_style": 2,
-        "discourse": 1,
-        "synthesis": 1,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u10-p05",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "vocabulary_in_context",
-        "cause_effect",
-        "main_claim",
-        "vocabulary_in_context",
-        "contrast",
-        "grammar_function",
-        "summary",
-        "inference"
-      ],
-      "category_counts": {
-        "passage_centered": 6,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 2,
-        "grammar_style": 2,
-        "discourse": 1,
-        "synthesis": 1,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        }
-      }
-    },
-    {
-      "code": "default_distribution_deficit",
-      "level": "b2",
-      "passage_id": "ar-b2-u10-p06",
-      "question_types": [
-        "gist",
-        "literal_detail",
-        "vocabulary_in_context",
-        "cause_effect",
-        "main_claim",
-        "vocabulary_in_context",
-        "contrast",
-        "grammar_function",
-        "summary",
-        "inference"
-      ],
-      "category_counts": {
-        "passage_centered": 6,
-        "comprehension": 4,
-        "inference": 1,
-        "comprehension_inference": 5,
-        "lexical": 2,
-        "grammar_style": 2,
-        "discourse": 1,
-        "synthesis": 1,
-        "distinct_types": 9
-      },
-      "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
         }
       }
     },
@@ -5698,21 +3435,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -5736,21 +3469,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -5774,21 +3503,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -5812,21 +3537,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -5850,21 +3571,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -5888,21 +3605,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -5926,21 +3639,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -5964,21 +3673,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6002,21 +3707,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6040,21 +3741,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6078,21 +3775,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6116,21 +3809,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6154,21 +3843,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6192,21 +3877,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6230,21 +3911,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6268,21 +3945,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6306,21 +3979,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6344,21 +4013,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6382,21 +4047,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6420,21 +4081,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6458,21 +4115,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6496,21 +4149,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6534,21 +4183,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6572,21 +4217,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6610,21 +4251,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6648,21 +4285,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6686,21 +4319,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6724,21 +4353,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6762,21 +4387,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6800,21 +4421,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6838,21 +4455,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6876,21 +4489,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6914,21 +4523,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6952,21 +4557,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -6990,21 +4591,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7028,21 +4625,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7066,21 +4659,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7104,21 +4693,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7142,21 +4727,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7180,21 +4761,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7218,21 +4795,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7256,21 +4829,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7294,21 +4863,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7332,21 +4897,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7370,21 +4931,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7408,21 +4965,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7446,21 +4999,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7484,21 +5033,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7522,21 +5067,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7560,21 +5101,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7598,21 +5135,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7636,21 +5169,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7674,21 +5203,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7712,21 +5237,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7750,21 +5271,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7788,21 +5305,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7826,21 +5339,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7864,21 +5373,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7902,21 +5407,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7940,21 +5441,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -7978,21 +5475,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8016,21 +5509,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8054,21 +5543,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8092,21 +5577,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8130,21 +5611,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8168,21 +5645,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8206,21 +5679,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8244,21 +5713,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8282,21 +5747,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8320,21 +5781,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8358,21 +5815,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8396,21 +5849,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8434,21 +5883,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8472,21 +5917,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8510,21 +5951,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8548,21 +5985,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8586,21 +6019,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8624,21 +6053,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8662,21 +6087,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8700,21 +6121,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8738,21 +6155,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8776,21 +6189,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8814,21 +6223,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8852,21 +6257,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8890,21 +6291,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8928,21 +6325,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -8966,21 +6359,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9004,21 +6393,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9042,21 +6427,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9080,21 +6461,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9118,21 +6495,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9156,21 +6529,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9194,21 +6563,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9232,21 +6597,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9270,21 +6631,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9308,21 +6665,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9346,21 +6699,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9384,21 +6733,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9422,21 +6767,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9460,21 +6801,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9498,21 +6835,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9536,21 +6869,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9574,21 +6903,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9612,21 +6937,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9650,21 +6971,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9688,21 +7005,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9726,21 +7039,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9764,21 +7073,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9802,21 +7107,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9840,21 +7141,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9878,21 +7175,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9916,21 +7209,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9954,21 +7243,17 @@
         "single_word_definition"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 8,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 8
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -9992,21 +7277,17 @@
         "grammar_function"
       ],
       "category_counts": {
-        "passage_centered": 6,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 3,
         "comprehension_inference": 5,
         "lexical": 2,
         "grammar_style": 2,
-        "discourse": 1,
+        "discourse": 3,
         "synthesis": 1,
         "distinct_types": 7
       },
       "deficits": {
-        "discourse": {
-          "minimum": 2,
-          "actual": 1
-        },
         "synthesis": {
           "minimum": 2,
           "actual": 1
@@ -10030,13 +7311,13 @@
         "inference"
       ],
       "category_counts": {
-        "passage_centered": 9,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 4,
         "comprehension_inference": 6,
         "lexical": 2,
         "grammar_style": 3,
-        "discourse": 3,
+        "discourse": 4,
         "synthesis": 1,
         "distinct_types": 7
       },
@@ -10064,13 +7345,13 @@
         "inference"
       ],
       "category_counts": {
-        "passage_centered": 9,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 4,
         "comprehension_inference": 6,
         "lexical": 2,
         "grammar_style": 3,
-        "discourse": 3,
+        "discourse": 4,
         "synthesis": 1,
         "distinct_types": 7
       },
@@ -10098,13 +7379,13 @@
         "inference"
       ],
       "category_counts": {
-        "passage_centered": 9,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 4,
         "comprehension_inference": 6,
         "lexical": 2,
         "grammar_style": 3,
-        "discourse": 3,
+        "discourse": 4,
         "synthesis": 1,
         "distinct_types": 7
       },
@@ -10132,13 +7413,13 @@
         "inference"
       ],
       "category_counts": {
-        "passage_centered": 9,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 4,
         "comprehension_inference": 6,
         "lexical": 2,
         "grammar_style": 3,
-        "discourse": 3,
+        "discourse": 4,
         "synthesis": 1,
         "distinct_types": 7
       },
@@ -10166,13 +7447,13 @@
         "inference"
       ],
       "category_counts": {
-        "passage_centered": 9,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 4,
         "comprehension_inference": 6,
         "lexical": 2,
         "grammar_style": 3,
-        "discourse": 3,
+        "discourse": 4,
         "synthesis": 1,
         "distinct_types": 7
       },
@@ -10200,13 +7481,13 @@
         "inference"
       ],
       "category_counts": {
-        "passage_centered": 9,
+        "passage_centered": 10,
         "comprehension": 2,
         "inference": 4,
         "comprehension_inference": 6,
         "lexical": 2,
         "grammar_style": 3,
-        "discourse": 3,
+        "discourse": 4,
         "synthesis": 1,
         "distinct_types": 7
       },
