@@ -1,0 +1,50 @@
+name: Select French B2 Unit 09 Targets
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/select_french_b2_unit09_targets.py'
+      - '.github/workflows/select-french-b2-unit09-targets.yml'
+permissions:
+  contents: write
+jobs:
+  select:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Select Unit 09 targets from persisted fresh probe
+        id: select
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python reading/tools/select_french_b2_unit09_targets.py 2>&1 | tee /tmp/french_b2_u09_select.log
+      - name: Persist selection failure diagnostic
+        if: steps.select.outcome != 'success'
+        run: |
+          mkdir -p reading/audit
+          cp /tmp/french_b2_u09_select.log reading/audit/french_b2_unit09_selection_failure.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_b2_unit09_selection_failure.txt
+          git commit -m 'Record French B2 Unit 09 selection failure [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
+      - name: Stop after failed selection
+        if: steps.select.outcome != 'success'
+        run: exit 1
+      - name: Commit auditable Unit 09 target selection
+        if: steps.select.outcome == 'success'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_b2_unit09_target_selection.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'Select French B2 Unit 09 targets [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
