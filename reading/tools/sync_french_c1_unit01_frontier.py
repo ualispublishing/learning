@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+"""Advance durable state to French C1 Unit02 after calibrated Unit01 lock."""
+from __future__ import annotations
+import json,subprocess,re
+from pathlib import Path
+R=Path(__file__).resolve().parents[2];C1=R/'reading/french/c1/passages.jsonl';B2=R/'reading/french/b2/passages.jsonl';LOCK=R/'reading/audit/french_c1_unit01_frontier_lock.json';PLAN2=R/'reading/audit/french_c1_unit02_plan.json';PROBE2=R/'reading/audit/french_c1_unit02_target_probe.json';STATUS=R/'reading/STATUS.json';TASKS=R/'reading/TASKS.md';HANDOFF=R/'reading/AGENT_HANDOFF.md'
+def show(v):
+ if isinstance(v,str):return v
+ return json.dumps(v,ensure_ascii=False,sort_keys=True)
+def main():
+ lock=json.loads(LOCK.read_text(encoding='utf-8'));plan=json.loads(PLAN2.read_text(encoding='utf-8'));probe=json.loads(PROBE2.read_text(encoding='utf-8'));c1blob=subprocess.check_output(['git','hash-object',str(C1)],text=True).strip();b2blob=subprocess.check_output(['git','hash-object',str(B2)],text=True).strip()
+ if lock.get('status')!='PASS' or lock.get('c1_canonical_blob')!=c1blob or lock.get('b2_canonical_blob')!=b2blob or lock.get('last_sequence')!=6:raise AssertionError('C1 Unit01 lock/live mismatch')
+ if plan.get('status')!='PASS' or plan.get('c1_source_blob')!=c1blob or probe.get('status')!='PASS' or probe.get('c1_source_blob')!=c1blob:raise AssertionError('C1 Unit02 plan/probe missing or stale')
+ theme=show(plan.get('theme'));genres=show(plan.get('genres'));default=lock['accepted_c1_default_new_targets_per_standard_passage']
+ s=json.loads(STATUS.read_text(encoding='utf-8'));fr=s['french'];fr['canonical_passages']=246;fr['questions']=2460;fr['answers']=2460;fr.setdefault('levels',{})['c1']=6
+ c=fr.setdefault('c1_generation',{});c.update({'status':'calibrated_unit01_pass','passages':6,'questions':60,'answers':60,'completed_units':[1],'last_sequence':6,'canonical_blob':c1blob,'unit01_theme':lock.get('unit01_theme'),'unit01_genres':lock.get('unit01_genres'),'unit01_word_band':lock.get('unit01_word_band'),'unit01_word_counts':lock.get('unit01_word_counts'),'unit01_frontier_lock':'reading/audit/french_c1_unit01_frontier_lock.json','unit01_calibration_review':'reading/audit/french_c1_unit01_calibration_review.json','accepted_default_new_targets_per_standard_passage':default,'accepted_default_is_hard_quota':False,'unit02_plan':'reading/audit/french_c1_unit02_plan.json','unit02_target_probe':'reading/audit/french_c1_unit02_target_probe.json'})
+ fr['next_target']=f'Generate French C1 Unit 02 / sequences 7-12 against exact C1 blob {c1blob}. Canonical theme: {theme}; genres: {genres}. Use accepted conservative default {default} fresh source-backed new targets per P01-P05 unless canonical policy/discourse load supports more; P06 zero-new. Preserve exact C1 word band {plan["c1_word_min"]}-{plan["c1_word_max"]}, 10 linked Q/A, exact reviews, source identity/exposures, competing perspectives, scope, source-method critique, normative bridge, counterargument and revision criteria.'
+ s['phase']='Arabic A1-C2 remains formally approved. French A1-B2 generation layers are sealed for generation integrity; French C1 Unit01 calibration PASS. C1 Unit02 is the immediate generation frontier.';s['updated']='2026-08-17';s['next_actions']=['keep Arabic sealed unless canonical Arabic changes','do not broadly regenerate French A1-B2','generate French C1 Unit02 against the exact calibrated Unit01 lock','continue C1 generation-first using the calibrated conservative default as a default, not quota','defer final whole-French multi-pass audit until C2 generation completes','keep Urdu unchanged while French is active unless explicitly reprioritized']
+ for p in ['reading/audit/french_c1_unit01_calibration_review.json','reading/audit/french_c1_unit01_frontier_lock.json','reading/audit/french_c1_unit02_plan.json','reading/audit/french_c1_unit02_target_probe.json']:
+  if p not in s.setdefault('important_files',[]):s['important_files'].append(p)
+ STATUS.write_text(json.dumps(s,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+ t=TASKS.read_text(encoding='utf-8')
+ block=f'''\n\n#### C1 Unit 01 — COMPLETE / CALIBRATION PASS\n- [x] Sequences 1–6 canonical; 6 passages / 60 Q / 60 A.\n- [x] Strict post-calibration review PASS.\n- [x] Exact C1 word band: `{plan['c1_word_min']}–{plan['c1_word_max']}`.\n- [x] 20 unique fresh targets; P06 zero-new.\n- [x] Conservative C1 production default accepted: `{default}` new targets per standard passage, **not a hard quota**.\n- [x] C1 Unit01 lock: `reading/audit/french_c1_unit01_frontier_lock.json`.\n\n#### C1 Unit 02 — IMMEDIATE NEXT\n- Theme: **{theme}**.\n- Genres: **{genres}**.\n- [ ] Generate sequences 7–12 against exact C1 blob `{c1blob}`.\n- [ ] Use default `{default}` fresh targets in P01–P05 unless the discourse load supports more; P06 zero-new.\n- [ ] Keep word band `{plan['c1_word_min']}–{plan['c1_word_max']}`, 10 linked Q/A, exact review forms and source/exposure identity.\n- [ ] Require C1-level scope, implicit assumptions, competing perspectives, source-method critique, normative bridge, counterargument and revision conditions.\n- [ ] Fail closed on lock drift, freshness/collision, schema/linkage, word band, reviews or source identity.\n'''
+ if '#### C1 Unit 01 — COMPLETE / CALIBRATION PASS' not in t:
+  marker='## Urdu — QUEUED'
+  if marker in t:t=t.replace('\n'+marker,block+'\n'+marker,1)
+  else:t+=block
+ t=re.sub(r'\*\*Calibrate French C1 Unit 01[^\n]*\*\*',f'**Generate French C1 Unit 02 / sequences 7–12 for `{theme}` against C1 blob `{c1blob}`. Keep Arabic sealed.**',t,count=1)
+ TASKS.write_text(t,encoding='utf-8')
+ h=HANDOFF.read_text(encoding='utf-8')
+ if '## French C1 Unit 01 — CALIBRATION PASS / CURRENT LOCK' not in h:
+  h+=f'''\n\n## French C1 Unit 01 — CALIBRATION PASS / CURRENT LOCK\n\n- Canonical C1 blob `{c1blob}`.\n- 6 passages / 60 questions / 60 answers.\n- C1 word band `{plan['c1_word_min']}–{plan['c1_word_max']}`.\n- 20 fresh Unit01 targets; P06 zero-new.\n- strict review `reading/audit/french_c1_unit01_calibration_review.json` = PASS.\n- frontier lock `reading/audit/french_c1_unit01_frontier_lock.json` = PASS.\n- accepted conservative C1 default: `{default}` new targets per standard passage, not a hard quota.\n\n### Immediate frontier — French C1 Unit 02\n\nTheme: **{theme}**. Genres: **{genres}**. Generate sequences 7–12 against exact C1 blob `{c1blob}`. Use the calibrated default `{default}` fresh targets per P01–P05 unless canonical policy/discourse load supports more; P06 zero-new. Preserve `{plan['c1_word_min']}–{plan['c1_word_max']}` words, 10 linked Q/A, source identity/exposures, exact reviews, competing perspectives, scope, source-method critique, normative bridge, counterargument and revision conditions. Fail closed.\n'''
+ HANDOFF.write_text(h,encoding='utf-8')
+ print(json.dumps({'status':'PASS','french_passages':246,'french_questions':2460,'c1_passages':6,'c1_blob':c1blob,'next':'C1 Unit02','theme':theme,'genres':genres,'fresh_remaining':probe.get('fresh_count')},ensure_ascii=False))
+if __name__=='__main__':main()
