@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'reading/tools/generate_french_b2_unit02_retry2.py'
+      - 'reading/tools/generate_french_b2_unit02_retry3.py'
       - '.github/workflows/generate-french-b2-unit02-retry.yml'
 permissions:
   contents: write
@@ -16,8 +16,8 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - run: python -m pip install --quiet jsonschema
-      - name: Generate and validate repaired B2 Unit 02
-        run: python reading/tools/generate_french_b2_unit02_retry2.py
+      - name: Generate and validate corrected B2 Unit 02
+        run: python reading/tools/generate_french_b2_unit02_retry3.py
       - name: Independent B2 Unit 02 checks
         run: |
           python - <<'PY'
@@ -30,7 +30,7 @@ jobs:
           assert all(350<=r['word_count']<=550 and r['word_count']==len(r['text'].split()) for r in u)
           assert all(len(r['questions'])==10 and len(r['answer_key'])==10 for r in u)
           assert all(len(r['new_lexical_targets'])==4 for r in u[:5]) and not u[-1]['new_lexical_targets']
-          expected={'promettre','avenir','attendre','confiance','grave','calmer','solution','responsabilité','partager','opinion','secret','surtout','ordre','lieu','coût','préférer','ramener','pareil','lumière','pousser'}
+          expected={'promettre','décider','attendre','confiance','grave','calmer','choisir','problème','maintenir','simplement','secret','surtout','ordre','lieu','doute','préférer','ramener','pareil','lumière','pousser'}
           new=[t for r in u[:5] for t in r['new_lexical_targets']]
           assert len(new)==20 and {t['form'] for t in new}==expected and len({t['id'] for t in new})==20
           prior_ids={t['id'] for r in rows[:6] for t in r.get('new_lexical_targets',[])}
