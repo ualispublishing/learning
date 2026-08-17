@@ -1,0 +1,51 @@
+name: Generate French B1 Unit 08
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/generate_french_b1_unit08.py'
+      - 'reading/tools/generate_french_b1_unit08_retry.py'
+      - '.github/workflows/generate-french-b1-unit08.yml'
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet jsonschema
+      - name: Generate and validate B1 Unit 08
+        run: python reading/tools/generate_french_b1_unit08.py
+      - name: Independent B1 Unit 08 checks
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[json.loads(x) for x in Path('reading/french/b1/passages.jsonl').read_text().splitlines() if x.strip()]
+          assert len(rows)==48 and [r['sequence'] for r in rows]==list(range(1,49))
+          u=rows[42:]; assert [r['id'] for r in u]==[f'fr-b1-u08-p{i:02d}' for i in range(1,7)]
+          assert all(220<=r['word_count']<=350 and r['word_count']==len(r['text'].split()) for r in u)
+          assert all(len(r['questions'])==10 and len(r['answer_key'])==10 for r in u)
+          assert all(len(r['new_lexical_targets'])==3 for r in u[:5]) and not u[-1]['new_lexical_targets']
+          expected={'régler','contrôle','capable','diriger','traverser','selon','crier','sentiment','remarquer','couvrir','trou','forme','échapper','souffrir','compris'}
+          new=[t for r in u[:5] for t in r['new_lexical_targets']]; assert {t['form'] for t in new}==expected and len({t['id'] for t in new})==15
+          prior_ids={t['id'] for r in rows[:42] for t in r.get('new_lexical_targets',[])}; prior_forms={t['form'] for r in rows[:42] for t in r.get('new_lexical_targets',[])}
+          assert not prior_ids & {t['id'] for t in new} and not prior_forms & {t['form'] for t in new}
+          for r in u:
+            local={t['id'] for f in ('new_lexical_targets','review_lexical_targets') for t in r.get(f,[])}; amap={a['question_id']:a['id'] for a in r['answer_key']}
+            for q in r['questions']: assert amap[q['id']]==q['answer_id'] and all(x in local for x in q.get('target_ids',[]))
+          print({'status':'PASS','b1_passages':48,'unit08_new_targets':15})
+          PY
+      - name: Commit canonical French B1 Unit 08
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/french/b1/passages.jsonl
+          git diff --cached --quiet && exit 0
+          git commit -m 'Generate French B1 Unit 08 [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
