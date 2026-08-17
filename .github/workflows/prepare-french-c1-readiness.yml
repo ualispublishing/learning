@@ -1,0 +1,50 @@
+name: Prepare French C1 Readiness
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/prepare_french_c1_readiness.py'
+      - '.github/workflows/prepare-french-c1-readiness.yml'
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Extract sealed C1 constraints
+        id: prepare
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python reading/tools/prepare_french_c1_readiness.py 2>&1 | tee /tmp/french_c1_readiness.log
+      - name: Persist readiness failure diagnostic
+        if: steps.prepare.outcome != 'success'
+        run: |
+          mkdir -p reading/audit
+          cp /tmp/french_c1_readiness.log reading/audit/french_c1_readiness_failure.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_c1_readiness_failure.txt
+          git commit -m 'Record French C1 readiness failure [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
+      - name: Stop after failed readiness
+        if: steps.prepare.outcome != 'success'
+        run: exit 1
+      - name: Commit C1 readiness artifact
+        if: steps.prepare.outcome == 'success'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_c1_readiness.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'Prepare French C1 calibration readiness [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
