@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_b2_unit10_retry.py", line 19, in <module>
+    run_module('probe_french_b2_unit10_targets.py','unit10_probe')
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_b2_unit10_retry.py", line 15, in run_module
+    exec(compile(p.read_text(encoding='utf-8'),str(p),'exec'),ns);ns['main']()
+                                                                  ^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/probe_french_b2_unit10_targets.py", line 16, in main
+    if not LOCK.exists():raise AssertionError('Unit09 frontier lock missing; Unit10 probe must not run early')
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Unit09 frontier lock missing; Unit10 probe must not run early
