@@ -1,0 +1,16 @@
+name: Probe French B2 Unit 01 Targets
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/probe_french_b2_unit01_targets.py'
+      - '.github/workflows/probe-french-b2-unit01-targets.yml'
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Probe validated source and all-prior-French freshness
+        run: python reading/tools/probe_french_b2_unit01_targets.py
