@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Validate canonical French B2 Unit06 and record its exact frontier blob."""
+"""Validate canonical French B2 Unit06 and record its exact frontier blob.
+
+Authoritative Unit06 lock trigger; this is a continuation lock, not final French approval.
+"""
 from __future__ import annotations
 import json,subprocess
 from pathlib import Path
