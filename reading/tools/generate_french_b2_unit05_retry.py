@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Fail-closed repair wrapper for French B2 Unit05.
 
-Repairs one non-local assessment tag, exact visibility of one Unit04 review form,
-and two learner-facing passé-composé typos while preserving the verified target
-pool and all base guards. This file is the authoritative Unit05 retry trigger.
+Repairs local linkage, exact target/review visibility and learner-facing French
+while preserving the verified target pool and every base generation guard.
 """
 from pathlib import Path
 
@@ -24,18 +23,38 @@ for typ,prompt,answer,targets in p1['items']:
     fixed.append((typ,prompt,answer,targets))
 if seen != 1: raise AssertionError(f'expected one P01 linkage repair, found {seen}')
 p1['items']=fixed
+# Keep exact review `côté` but remove the awkward phrase "côté du temps disponible".
+p1['paragraphs'][1] += " De l’autre côté de la comparaison, les variations nocturnes peuvent raconter une histoire différente."
+p1['paragraphs'][3]=p1['paragraphs'][3].replace(
+    "comparer chaque côté du temps disponible aide à savoir jusqu’où on peut généraliser.",
+    "comparer plusieurs périodes disponibles aide à savoir jusqu’où on peut généraliser."
+)
 
-# P02: standard French participle in learner-facing prose and answer, while
-# retaining several exact infinitive `changer` exposures elsewhere.
+# P02: standard French participle, exact `proche` review and exact masculine
+# lemma `long` for the newly deliberate lexical target.
 p2=specs[1]
 p2['paragraphs']=[x.replace('ce qui a changer', 'ce qui a changé') for x in p2['paragraphs']]
+p2['paragraphs'][0] += " Un intervalle long permet davantage de comparaisons, sans transformer une tendance en certitude."
+p2['paragraphs'][2] += " Dans cet exemple, un accès proche de l’école reste pertinent seulement s’il répond à un besoin défini."
 fixed=[]
 for typ,prompt,answer,targets in p2['items']:
     answer=answer.replace('ce qui a changer', 'ce qui a changé')
     fixed.append((typ,prompt,answer,targets))
 p2['items']=fixed
-# Exact Unit04 review form `proche` must be visible in running text.
-p2['paragraphs'][2] += " Dans cet exemple, un accès proche de l’école reste pertinent seulement s’il répond à un besoin défini."
+
+# P03: correct subject agreement in the main-claim answer.
+p3=specs[2]
+fixed=[]
+for typ,prompt,answer,targets in p3['items']:
+    if prompt == 'Quelle distinction centrale organise le rapport ?':
+        answer=answer.replace('Compter et montrer un signal décrit sa robustesse', 'Compter et montrer un signal décrivent sa robustesse')
+    fixed.append((typ,prompt,answer,targets))
+p3['items']=fixed
+
+# P04: adjective agreement; exact review lemmas `haut`/`bas` remain visible in
+# the later phrase "du haut vers le bas" and `monter`/`descendre` remain exact.
+p4=specs[3]
+p4['paragraphs']=[x.replace('une valeur moyenne plus haut sur le graphique', 'une valeur moyenne plus haute sur le graphique').replace('une valeur plus bas ne signifie', 'une valeur plus basse ne signifie') for x in p4['paragraphs']]
 
 # P06: same passé-composé repair; exact `changer` remains in "faire changer".
 cp['paragraphs']=[x.replace('ce qui a changer', 'ce qui a changé') for x in cp['paragraphs']]
