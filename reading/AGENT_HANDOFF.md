@@ -85,17 +85,25 @@ Theme: **ethics and competing values**. Genres: argument / case / response. Sequ
 - frontier lock: `reading/audit/french_b2_unit03_frontier_lock.json` = PASS;
 - Unit03 targets: `juste`, `chance`, `groupe`, `réussir`, `permettre`, `refuser`, `accord`, `obliger`, `vérité`, `vrai`, `faux`, `mentir`, `victime`, `dommage`, `aider`, `difficile`, `garder`, `donner`, `loi`, `guerre`.
 
-## 8. IMMEDIATE FRONTIER — B2 Unit 04
+## 8. B2 Unit 04 — COMPLETE / CURRENT LOCK
 
-Canonical topic-matrix theme: **cities and design**. Genres: **report / proposal / critique**.
+Theme: **cities and design**. Genres: report / proposal / critique. Sequences 19–24.
 
-Generate sequences **19–24** against exact B2 blob `e97d0929a5ea7aa09a7306a82f9159194ff954da`. Require the Unit03 lock before target selection or append; use the accepted four-target default in P01–P05 and zero new in P06; preserve source freshness/rank identity, exact reviews, 350–550 words, 10 linked Q/A, and B2 report/proposal/critique reasoning with urban-design trade-offs, stakeholders, assumptions, counterargument, position and synthesis. Fail closed and repair rather than weaken guards.
+- 6 passages / 60 questions / 60 answers;
+- 20 fresh targets, four in P01–P05; P06 zero new;
+- canonical B2 blob `125d8c87641ee5a0fbd958a415ede82f95c40eff`;
+- frontier lock `reading/audit/french_b2_unit04_frontier_lock.json` = PASS;
+- Unit04 targets: `coin`, `côté`, `arbre`, `air`, `voiture`, `proche`, `besoin`, `simple`, `construire`, `ouvrir`, `fermer`, `utiliser`, `haut`, `bas`, `monter`, `descendre`, `entrer`, `sortir`, `servir`, `nouveau`.
 
-## 9. Urdu — QUEUED
+## 9. IMMEDIATE FRONTIER — B2 Unit 05
+
+Canonical theme: **climate and uncertainty**. Genres: **evidence summary / news analysis / argument**. Generate sequences **25–30** against exact blob `125d8c87641ee5a0fbd958a415ede82f95c40eff`. Require the Unit04 lock; use four fresh targets by default in P01–P05 and zero new in P06; preserve source freshness/rank identity, exact reviews, 350–550 words, 10 linked Q/A, and explicit reasoning about evidence strength, uncertainty, competing explanations, limitations, counterargument and synthesis. Fail closed and repair instead of weakening guards.
+
+## 10. Urdu — QUEUED
 
 Urdu remains unchanged at six A1 calibration passages. Keep it paused while French is active unless explicitly reprioritized.
 
-## 10. Throughput / parallel rules
+## 11. Throughput / parallel rules
 
 - coherent six-passage units;
 - verify live main before each write batch;
@@ -106,7 +114,7 @@ Urdu remains unchanged at six A1 calibration passages. Keep it paused while Fren
 - update STATUS/TASKS/handoff at meaningful milestones;
 - final French multi-pass approval audit remains deferred until A1–C2 generation is complete.
 
-## 11. Core non-negotiables
+## 12. Core non-negotiables
 
 - canonical data: `reading/<language>/<level>/passages.jsonl`;
 - passage → all questions → answers/reveal;

@@ -72,18 +72,28 @@ Unit 02 targets: `promettre`, `décider`, `attendre`, `confiance`, `grave`, `cal
 
 Unit 03 targets: `juste`, `chance`, `groupe`, `réussir`, `permettre`, `refuser`, `accord`, `obliger`, `vérité`, `vrai`, `faux`, `mentir`, `victime`, `dommage`, `aider`, `difficile`, `garder`, `donner`, `loi`, `guerre`.
 
-#### Unit 04 — IMMEDIATE NEXT
-Canonical topic-matrix theme: **cities and design**. Genres: **report / proposal / critique**.
+#### Unit 04 — COMPLETE
+- [x] Sequences 19–24 canonical.
+- [x] 6 passages / 60 Q / 60 A.
+- [x] 20 fresh source-backed targets, four in P01–P05; P06 zero new.
+- [x] Theme: `cities and design`; genres: report / proposal / critique.
+- [x] Canonical B2 blob after Unit04: `125d8c87641ee5a0fbd958a415ede82f95c40eff`.
+- [x] Frontier lock `reading/audit/french_b2_unit04_frontier_lock.json` = PASS.
 
-- [ ] Generate sequences 19–24 against locked B2 blob `e97d0929a5ea7aa09a7306a82f9159194ff954da`.
-- [ ] Use accepted default 4 fresh targets per P01–P05; P06 zero new.
-- [ ] Check candidates against every deliberate French target across A1–B2 Unit03.
-- [ ] Keep 350–550 words, 10 linked Q/A, exact reviews, source rank/ID identity and local target declarations.
-- [ ] Require urban-design trade-offs, stakeholder impacts, evidence/assumptions, counterargument, author position, critique and synthesis.
+Unit 04 targets: `coin`, `côté`, `arbre`, `air`, `voiture`, `proche`, `besoin`, `simple`, `construire`, `ouvrir`, `fermer`, `utiliser`, `haut`, `bas`, `monter`, `descendre`, `entrer`, `sortir`, `servir`, `nouveau`.
+
+#### Unit 05 — IMMEDIATE NEXT
+Canonical topic-matrix theme: **climate and uncertainty**. Genres: **evidence summary / news analysis / argument**.
+
+- [ ] Generate sequences 25–30 against locked B2 blob `125d8c87641ee5a0fbd958a415ede82f95c40eff`.
+- [ ] Accepted default 4 fresh targets per P01–P05; P06 zero new.
+- [ ] Check every candidate against all prior deliberate French A1–B2 targets.
+- [ ] Preserve 350–550 words, 10 linked Q/A, source identity, exact reviews and local target declarations.
+- [ ] Require evidence-strength, uncertainty, competing explanations, probability/limitations, counterargument, author position and synthesis.
 - [ ] Fail closed on lock/source drift, collision, schema/linkage, word band or review visibility.
 
-Remaining after Unit03:
-- [ ] B2: 42 passages.
+Remaining after Unit04:
+- [ ] B2: 36 passages.
 - [ ] C1: 60 passages.
 - [ ] C2: 60 passages.
 
@@ -104,4 +114,4 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 
 ## Immediate next task
 
-**Generate French B2 Unit 04 / sequences 19–24 for `cities and design` against blob `e97d0929a5ea7aa09a7306a82f9159194ff954da`. Keep Arabic sealed.**
+**Generate French B2 Unit 05 / sequences 25–30 for `climate and uncertainty` against blob `125d8c87641ee5a0fbd958a415ede82f95c40eff`. Keep Arabic sealed.**
