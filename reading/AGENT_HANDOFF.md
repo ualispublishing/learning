@@ -75,26 +75,27 @@ Theme used: **decision under uncertainty**. Sequences 7–12.
 
 Guard repairs preserved rather than weakened freshness, local-linkage and exact-form checks.
 
-## 7. IMMEDIATE FRONTIER — B2 Unit 03
+## 7. B2 Unit 03 — COMPLETE / CURRENT LOCK
 
-Canonical topic-matrix theme: **ethics and competing values**. Genres: **argument / case / response**.
+Theme: **ethics and competing values**. Genres: argument / case / response. Sequences 13–18.
 
-Generate **sequences 13–18** against exact B2 blob `ff94113359f90b68032b2e2f92aaa1bf2b3ea923`.
+- 6 passages / 60 questions / 60 answers;
+- 20 fresh deliberate targets, four in P01–P05; P06 zero new;
+- canonical B2 blob after Unit03: `e97d0929a5ea7aa09a7306a82f9159194ff954da`;
+- frontier lock: `reading/audit/french_b2_unit03_frontier_lock.json` = PASS;
+- Unit03 targets: `juste`, `chance`, `groupe`, `réussir`, `permettre`, `refuser`, `accord`, `obliger`, `vérité`, `vrai`, `faux`, `mentir`, `victime`, `dommage`, `aider`, `difficile`, `garder`, `donner`, `loi`, `guerre`.
 
-Requirements:
-1. require the Unit02 frontier lock and verify the live B2 blob before target selection or append;
-2. use accepted default 4 fresh targets per P01–P05 unless discourse load clearly justifies another value within 4–8; P06 zero new;
-3. check every candidate against all deliberate French A1+A2+B1+B2 Units01–02 targets;
-4. preserve source rank/ID/intended sense and exact target/review exposure;
-5. build natural argument/case/response passages around competing values, stakeholder claims, scope, exceptions, fairness/obligation trade-offs and counterarguments;
-6. preserve 350–550 words, 10 linked Q/A, B2 author-position/argument/inference/reference/synthesis demand;
-7. fail closed and repair instead of weakening guards.
+## 8. IMMEDIATE FRONTIER — B2 Unit 04
 
-## 8. Urdu — QUEUED
+Canonical topic-matrix theme: **cities and design**. Genres: **report / proposal / critique**.
+
+Generate sequences **19–24** against exact B2 blob `e97d0929a5ea7aa09a7306a82f9159194ff954da`. Require the Unit03 lock before target selection or append; use the accepted four-target default in P01–P05 and zero new in P06; preserve source freshness/rank identity, exact reviews, 350–550 words, 10 linked Q/A, and B2 report/proposal/critique reasoning with urban-design trade-offs, stakeholders, assumptions, counterargument, position and synthesis. Fail closed and repair rather than weaken guards.
+
+## 9. Urdu — QUEUED
 
 Urdu remains unchanged at six A1 calibration passages. Keep it paused while French is active unless explicitly reprioritized.
 
-## 9. Throughput / parallel rules
+## 10. Throughput / parallel rules
 
 - coherent six-passage units;
 - verify live main before each write batch;
@@ -105,7 +106,7 @@ Urdu remains unchanged at six A1 calibration passages. Keep it paused while Fren
 - update STATUS/TASKS/handoff at meaningful milestones;
 - final French multi-pass approval audit remains deferred until A1–C2 generation is complete.
 
-## 10. Core non-negotiables
+## 11. Core non-negotiables
 
 - canonical data: `reading/<language>/<level>/passages.jsonl`;
 - passage → all questions → answers/reveal;

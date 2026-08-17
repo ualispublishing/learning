@@ -62,19 +62,28 @@ Unit 01 targets: `supposer`, `cause`, `effet`, `preuve`, `sécurité`, `protége
 
 Unit 02 targets: `promettre`, `décider`, `attendre`, `confiance`, `grave`, `calmer`, `choisir`, `problème`, `maintenir`, `simplement`, `secret`, `surtout`, `ordre`, `lieu`, `doute`, `préférer`, `ramener`, `pareil`, `lumière`, `pousser`.
 
-#### Unit 03 — IMMEDIATE NEXT
-Roadmap theme: **ethics and competing values**. Genres: **argument / case / response**.
+#### Unit 03 — COMPLETE
+- [x] Sequences 13–18 canonical.
+- [x] 6 passages / 60 Q / 60 A.
+- [x] 20 fresh source-backed targets, four in P01–P05; P06 zero new.
+- [x] Theme: `ethics and competing values`; genres: argument / case / response.
+- [x] Canonical B2 blob after Unit03: `e97d0929a5ea7aa09a7306a82f9159194ff954da`.
+- [x] Frontier lock `reading/audit/french_b2_unit03_frontier_lock.json` = PASS.
 
-- [ ] Generate sequences 13–18 against locked B2 blob `ff94113359f90b68032b2e2f92aaa1bf2b3ea923`.
+Unit 03 targets: `juste`, `chance`, `groupe`, `réussir`, `permettre`, `refuser`, `accord`, `obliger`, `vérité`, `vrai`, `faux`, `mentir`, `victime`, `dommage`, `aider`, `difficile`, `garder`, `donner`, `loi`, `guerre`.
+
+#### Unit 04 — IMMEDIATE NEXT
+Canonical topic-matrix theme: **cities and design**. Genres: **report / proposal / critique**.
+
+- [ ] Generate sequences 19–24 against locked B2 blob `e97d0929a5ea7aa09a7306a82f9159194ff954da`.
 - [ ] Use accepted default 4 fresh targets per P01–P05; P06 zero new.
-- [ ] Check every candidate against all prior deliberate French A1+A2+B1+B2 targets.
-- [ ] Preserve 350–550 words, 10 linked Q/A, exact review visibility, source rank/ID identity and local target declarations.
-- [ ] Require competing-value analysis, stakeholder claims, scope and exceptions, justified counterargument, author position, inference/reference and synthesis.
-- [ ] Vary argument, case and response genres according to the canonical topic matrix.
+- [ ] Check candidates against every deliberate French target across A1–B2 Unit03.
+- [ ] Keep 350–550 words, 10 linked Q/A, exact reviews, source rank/ID identity and local target declarations.
+- [ ] Require urban-design trade-offs, stakeholder impacts, evidence/assumptions, counterargument, author position, critique and synthesis.
 - [ ] Fail closed on lock/source drift, collision, schema/linkage, word band or review visibility.
 
-Remaining after Unit02:
-- [ ] B2: 48 passages.
+Remaining after Unit03:
+- [ ] B2: 42 passages.
 - [ ] C1: 60 passages.
 - [ ] C2: 60 passages.
 
@@ -95,4 +104,4 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 
 ## Immediate next task
 
-**Generate French B2 Unit 03 / sequences 13–18 for `ethics and competing values` against blob `ff94113359f90b68032b2e2f92aaa1bf2b3ea923`. Keep Arabic sealed.**
+**Generate French B2 Unit 04 / sequences 19–24 for `cities and design` against blob `e97d0929a5ea7aa09a7306a82f9159194ff954da`. Keep Arabic sealed.**

@@ -6,7 +6,7 @@
   "paused_languages": [
     "Urdu"
   ],
-  "phase": "Arabic A1-C2 is formally approved. French A1, A2, and B1 are generated and generation-integrity PASS. French B2 Units 01-02 are canonical; Unit 03 / sequences 13-18 is next.",
+  "phase": "Arabic A1-C2 is formally approved. French A1, A2, and B1 are generated and generation-integrity PASS. French B2 Units 01-03 are canonical; Unit 04 / sequences 19-24 is next.",
   "target_passages": 1080,
   "target_is_quota": false,
   "approved_passages": 360,
@@ -49,17 +49,17 @@
   },
   "french": {
     "state": "ACTIVE_GENERATION",
-    "canonical_passages": 192,
+    "canonical_passages": 198,
     "levels": {
       "a1": 60,
       "a2": 60,
       "b1": 60,
-      "b2": 12,
+      "b2": 18,
       "c1": 0,
       "c2": 0
     },
-    "questions": 1920,
-    "answers": 1920,
+    "questions": 1980,
+    "answers": 1980,
     "latest_audit_commit": "a784e4594b1bb487c51c882cf8b704c99331cd96",
     "generation_invariants": {
       "ten_questions_and_answers_per_passage": true,
@@ -106,15 +106,16 @@
     },
     "b2_generation": {
       "state": "ACTIVE",
-      "passages": 12,
-      "questions": 120,
-      "answers": 120,
+      "passages": 18,
+      "questions": 180,
+      "answers": 180,
       "completed_units": [
         1,
-        2
+        2,
+        3
       ],
-      "last_sequence": 12,
-      "canonical_blob": "ff94113359f90b68032b2e2f92aaa1bf2b3ea923",
+      "last_sequence": 18,
+      "canonical_blob": "e97d0929a5ea7aa09a7306a82f9159194ff954da",
       "planning_band_words": [
         350,
         550
@@ -199,9 +200,41 @@
         403,
         477
       ],
-      "unit02_frontier_lock": "reading/audit/french_b2_unit02_frontier_lock.json"
+      "unit02_frontier_lock": "reading/audit/french_b2_unit02_frontier_lock.json",
+      "unit03_theme": "ethics and competing values",
+      "unit03_targets": [
+        "juste",
+        "chance",
+        "groupe",
+        "réussir",
+        "permettre",
+        "refuser",
+        "accord",
+        "obliger",
+        "vérité",
+        "vrai",
+        "faux",
+        "mentir",
+        "victime",
+        "dommage",
+        "aider",
+        "difficile",
+        "garder",
+        "donner",
+        "loi",
+        "guerre"
+      ],
+      "unit03_word_counts": [
+        406,
+        397,
+        424,
+        422,
+        420,
+        402
+      ],
+      "unit03_frontier_lock": "reading/audit/french_b2_unit03_frontier_lock.json"
     },
-    "next_target": "Generate French B2 Unit 03 / sequences 13-18 against B2 blob ff94113359f90b68032b2e2f92aaa1bf2b3ea923. Roadmap theme: ethics and competing values; genres: argument / case / response. Use accepted default 4 fresh targets per P01-P05, P06 zero new, 350-550 words, 10 Q/A, competing-value reasoning, stakeholder claims, scope/exceptions, counterargument and author-position demand, exact reviews, and freshness checks against all prior French targets."
+    "next_target": "Generate French B2 Unit 04 / sequences 19-24 against B2 blob e97d0929a5ea7aa09a7306a82f9159194ff954da. Canonical topic-matrix theme: cities and design; genres: report / proposal / critique. Use accepted default 4 fresh targets per P01-P05, P06 zero new, 350-550 words, 10 Q/A, report/proposal/critique reasoning, design trade-offs, stakeholder impacts, counterargument, author position and synthesis, exact reviews, and freshness checks against all prior French targets."
   },
   "urdu": {
     "state": "QUEUED",
@@ -219,7 +252,7 @@
   "next_actions": [
     "keep Arabic sealed unless canonical Arabic changes",
     "do not broadly regenerate French A1/A2/B1",
-    "generate French B2 Unit03 against the locked Unit02 blob and canonical topic matrix",
+    "generate French B2 Unit04 against the locked Unit03 blob and canonical topic matrix",
     "continue French generation-first through B2-C2 before final French multi-pass audit",
     "keep Urdu unchanged while French is active unless explicitly reprioritized"
   ],
@@ -232,7 +265,8 @@
     "docs/READING_PASSAGE_STANDARD.md",
     "reading/audit/french_b1_generation_integrity.json",
     "reading/audit/french_b2_unit01_calibration_review.json",
-    "reading/audit/french_b2_unit02_frontier_lock.json"
+    "reading/audit/french_b2_unit02_frontier_lock.json",
+    "reading/audit/french_b2_unit03_frontier_lock.json"
   ],
   "parallel_agent_rules": {
     "verify_live_main_before_write_batch": true,
