@@ -6,6 +6,14 @@ ns={'__name__':'unit07_base','__file__':str(p),'__package__':None}
 exec(compile(p.read_text(encoding='utf-8'),str(p),'exec'),ns)
 specs=ns['SPECS'];cp=ns['CHECKPOINT']
 if [s['id'] for s in specs] != [f'fr-b2-u07-p{i:02d}' for i in range(1,6)]:raise AssertionError('unexpected Unit07 structure')
+fixed=[];repaired=0
+for typ,prompt,answer,targets in cp['items']:
+ if prompt == 'Pourquoi le fait de vendre une création ne décide-t-il pas de sa valeur critique ?':
+  if targets != ['vendre','sujet']:raise AssertionError(f'unexpected P06 market-context targets: {targets}')
+  targets=['avis','sujet'];repaired+=1
+ fixed.append((typ,prompt,answer,targets))
+if repaired!=1:raise AssertionError(f'expected one Unit07 checkpoint repair, found {repaired}')
+cp['items']=fixed
 off=[]
 for s in specs:
  local=set(s['forms'])|set(s['reviews'])
