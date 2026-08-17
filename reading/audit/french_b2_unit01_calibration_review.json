@@ -1,0 +1,89 @@
+{
+  "status": "PASS",
+  "scope": "French B2 Unit 01 post-calibration review",
+  "canonical_blob": "1ba43c900ad64ff9359264e743470138ce25a9c5",
+  "passages": 6,
+  "questions": 60,
+  "answers": 60,
+  "word_counts": {
+    "fr-b2-u01-p01": 411,
+    "fr-b2-u01-p02": 406,
+    "fr-b2-u01-p03": 368,
+    "fr-b2-u01-p04": 378,
+    "fr-b2-u01-p05": 373,
+    "fr-b2-u01-p06": 396
+  },
+  "paragraph_counts": {
+    "fr-b2-u01-p01": 4,
+    "fr-b2-u01-p02": 4,
+    "fr-b2-u01-p03": 4,
+    "fr-b2-u01-p04": 4,
+    "fr-b2-u01-p05": 4,
+    "fr-b2-u01-p06": 4
+  },
+  "standard_passage_mean_words": 387.2,
+  "new_targets": 20,
+  "unique_new_target_ids": 20,
+  "unique_new_target_forms": 20,
+  "prior_level_target_id_collisions": 0,
+  "prior_level_target_form_collisions": 0,
+  "paired_viewpoints": {
+    "group": "fr-b2-u01-citizen-science-access",
+    "p03": "viewpoint A: structured openness",
+    "p04": "viewpoint B: sampling/representativeness counterargument",
+    "text_similarity_ratio": 0.0314,
+    "materially_distinct": true
+  },
+  "question_type_counts": {
+    "argument_relation": 9,
+    "assumption": 4,
+    "cause_effect": 2,
+    "cross_text_synthesis": 2,
+    "inference": 5,
+    "literal_detail": 5,
+    "main_claim": 6,
+    "reference_resolution": 3,
+    "stance": 6,
+    "summary": 6,
+    "synthesis": 1,
+    "vocabulary_in_context": 11
+  },
+  "required_b2_question_types_present": true,
+  "schema_failures": [],
+  "linkage_failures": [],
+  "source_or_exposure_failures": [],
+  "invisible_exact_reviews": [],
+  "language_review": {
+    "status": "PASS",
+    "repairs_applied": [
+      "P03: replaced awkward “faits hors de sa portée” with standard phrasing about following the reasoning.",
+      "P04: clarified the ressembler/representativeness sentence while preserving exact target exposure.",
+      "P06/question q7: replaced learner-facing Anglicism “stance” with standard French “position”."
+    ],
+    "learner_facing_stance_anglicism_remaining": false
+  },
+  "pedagogical_review": {
+    "status": "PASS",
+    "argument_counterargument": true,
+    "author_position_and_scope": true,
+    "denser_cohesion_and_reference": true,
+    "paired_viewpoint_transfer": true,
+    "abstract_lexical_nuance": true,
+    "cross_text_synthesis": true,
+    "four_target_load_assessment": "appropriate conservative B2 default for this discourse density"
+  },
+  "accepted_b2_default_new_targets_per_standard_passage": 4,
+  "durable_planning_range_remains": [
+    4,
+    8
+  ],
+  "default_is_hard_quota": false,
+  "checkpoint_zero_new": true,
+  "full_final_french_audit_deferred": true,
+  "failures": [],
+  "notes": [
+    "Mechanical calibration passed before this review.",
+    "The post-calibration review accepts four fresh targets per standard passage as the B2 production default, not a permanent hard quota; increase within 4-8 only when discourse/grammar load and clarity support it.",
+    "B2 Unit 01 is accepted as the production template after the narrow language repair."
+  ]
+}
