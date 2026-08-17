@@ -82,18 +82,28 @@ Unit 03 targets: `juste`, `chance`, `groupe`, `réussir`, `permettre`, `refuser`
 
 Unit 04 targets: `coin`, `côté`, `arbre`, `air`, `voiture`, `proche`, `besoin`, `simple`, `construire`, `ouvrir`, `fermer`, `utiliser`, `haut`, `bas`, `monter`, `descendre`, `entrer`, `sortir`, `servir`, `nouveau`.
 
-#### Unit 05 — IMMEDIATE NEXT
-Canonical topic-matrix theme: **climate and uncertainty**. Genres: **evidence summary / news analysis / argument**.
+#### Unit 05 — COMPLETE
+- [x] Sequences 25–30 canonical.
+- [x] 6 passages / 60 Q / 60 A.
+- [x] 20 fresh source-backed targets, four in P01–P05; P06 zero new.
+- [x] Theme: `climate and uncertainty`; genres: evidence summary / news analysis / argument.
+- [x] Canonical B2 blob after Unit05: `bada023bdbbe9830ec324ed5924862d5b153e214`.
+- [x] Frontier lock `reading/audit/french_b2_unit05_frontier_lock.json` = PASS.
 
-- [ ] Generate sequences 25–30 against locked B2 blob `125d8c87641ee5a0fbd958a415ede82f95c40eff`.
+Unit 05 targets: `été`, `année`, `mois`, `nuit`, `passé`, `long`, `changer`, `continuer`, `rester`, `devenir`, `compter`, `montrer`, `croire`, `penser`, `sembler`, `comprendre`, `préparer`, `action`, `mer`, `terre`.
+
+#### Unit 06 — IMMEDIATE NEXT
+Canonical topic-matrix theme: **digital life and privacy**. Genres: **analysis / policy-style summary / paired opinions**.
+
+- [ ] Generate sequences 31–36 against locked B2 blob `bada023bdbbe9830ec324ed5924862d5b153e214`.
 - [ ] Accepted default 4 fresh targets per P01–P05; P06 zero new.
 - [ ] Check every candidate against all prior deliberate French A1–B2 targets.
 - [ ] Preserve 350–550 words, 10 linked Q/A, source identity, exact reviews and local target declarations.
-- [ ] Require evidence-strength, uncertainty, competing explanations, probability/limitations, counterargument, author position and synthesis.
+- [ ] Require privacy/data-use trade-offs, policy scope and exceptions, consent/control, paired opinions, counterargument, author position and synthesis.
 - [ ] Fail closed on lock/source drift, collision, schema/linkage, word band or review visibility.
 
-Remaining after Unit04:
-- [ ] B2: 36 passages.
+Remaining after Unit05:
+- [ ] B2: 30 passages.
 - [ ] C1: 60 passages.
 - [ ] C2: 60 passages.
 
@@ -114,4 +124,4 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 
 ## Immediate next task
 
-**Generate French B2 Unit 05 / sequences 25–30 for `climate and uncertainty` against blob `125d8c87641ee5a0fbd958a415ede82f95c40eff`. Keep Arabic sealed.**
+**Generate French B2 Unit 06 / sequences 31–36 for `digital life and privacy` against blob `bada023bdbbe9830ec324ed5924862d5b153e214`. Keep Arabic sealed.**

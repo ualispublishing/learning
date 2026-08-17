@@ -95,15 +95,27 @@ Theme: **cities and design**. Genres: report / proposal / critique. Sequences 19
 - frontier lock `reading/audit/french_b2_unit04_frontier_lock.json` = PASS;
 - Unit04 targets: `coin`, `côté`, `arbre`, `air`, `voiture`, `proche`, `besoin`, `simple`, `construire`, `ouvrir`, `fermer`, `utiliser`, `haut`, `bas`, `monter`, `descendre`, `entrer`, `sortir`, `servir`, `nouveau`.
 
-## 9. IMMEDIATE FRONTIER — B2 Unit 05
+## 9. B2 Unit 05 — COMPLETE / CURRENT LOCK
 
-Canonical theme: **climate and uncertainty**. Genres: **evidence summary / news analysis / argument**. Generate sequences **25–30** against exact blob `125d8c87641ee5a0fbd958a415ede82f95c40eff`. Require the Unit04 lock; use four fresh targets by default in P01–P05 and zero new in P06; preserve source freshness/rank identity, exact reviews, 350–550 words, 10 linked Q/A, and explicit reasoning about evidence strength, uncertainty, competing explanations, limitations, counterargument and synthesis. Fail closed and repair instead of weakening guards.
+Theme: **climate and uncertainty**. Genres: evidence summary / news analysis / argument. Sequences 25–30.
 
-## 10. Urdu — QUEUED
+- 6 passages / 60 questions / 60 answers;
+- 20 fresh targets, four in P01–P05; P06 zero new;
+- canonical B2 blob `bada023bdbbe9830ec324ed5924862d5b153e214`;
+- frontier lock `reading/audit/french_b2_unit05_frontier_lock.json` = PASS;
+- Unit05 targets: `été`, `année`, `mois`, `nuit`, `passé`, `long`, `changer`, `continuer`, `rester`, `devenir`, `compter`, `montrer`, `croire`, `penser`, `sembler`, `comprendre`, `préparer`, `action`, `mer`, `terre`.
+
+Guard history: repaired one non-local assessment tag, exact-form visibility (`proche`, `long`), two learner-facing participle/adjective issues, checkpoint length, and exact checkpoint review `long`; guards were preserved rather than weakened.
+
+## 10. IMMEDIATE FRONTIER — B2 Unit 06
+
+Canonical theme: **digital life and privacy**. Genres: **analysis / policy-style summary / paired opinions**. Generate sequences **31–36** against exact blob `bada023bdbbe9830ec324ed5924862d5b153e214`. Require the Unit05 lock; use four fresh targets by default in P01–P05 and zero new in P06; preserve source freshness/rank identity, exact reviews, 350–550 words, 10 linked Q/A, and B2 reasoning about privacy/data-use trade-offs, policy scope/exceptions, consent/control, paired opinions, counterargument, position and synthesis. Fail closed and repair instead of weakening guards.
+
+## 11. Urdu — QUEUED
 
 Urdu remains unchanged at six A1 calibration passages. Keep it paused while French is active unless explicitly reprioritized.
 
-## 11. Throughput / parallel rules
+## 12. Throughput / parallel rules
 
 - coherent six-passage units;
 - verify live main before each write batch;
@@ -114,7 +126,7 @@ Urdu remains unchanged at six A1 calibration passages. Keep it paused while Fren
 - update STATUS/TASKS/handoff at meaningful milestones;
 - final French multi-pass approval audit remains deferred until A1–C2 generation is complete.
 
-## 12. Core non-negotiables
+## 13. Core non-negotiables
 
 - canonical data: `reading/<language>/<level>/passages.jsonl`;
 - passage → all questions → answers/reveal;
