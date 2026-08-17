@@ -1,0 +1,18 @@
+name: Probe French B2 Unit 03 Targets
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/probe_french_b2_unit03_targets.py'
+      - '.github/workflows/probe-french-b2-unit03-targets.yml'
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet jsonschema
+      - name: Require Unit 02 frontier lock and probe Unit 03 candidates
+        run: python reading/tools/probe_french_b2_unit03_targets.py
