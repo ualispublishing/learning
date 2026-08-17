@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """Fail-closed preflight wrapper for French B2 Unit06.
 
-Executes the staged Unit06 generator definitions without its main entry point,
-verifies all assessment target forms are locally declared and the paired-opinion
-link is intact, then delegates to the original guarded main(). This file is the
-authoritative Unit06 workflow trigger.
+Repairs stale checkpoint target tags, verifies all assessment target forms are
+locally declared and the paired-opinion link is intact, then delegates to the
+original guarded main(). This is the authoritative Unit06 workflow trigger.
 """
 from pathlib import Path
 
@@ -19,6 +18,34 @@ if specs[2].get('pair') != pair or specs[3].get('pair') != pair:
 if any(specs[i].get('pair') is not None for i in (0,1,4)) or cp.get('pair') is not None:
     raise AssertionError('unexpected paired-text membership outside P03/P04')
 
+# P06 is a zero-new checkpoint whose declared review set is the 20 Unit06
+# forms. Three questions accidentally retained Unit05 target tags; remap them
+# to the Unit06 concepts actually assessed by the prompts/answers.
+fixed=[]; repaired=0
+for typ,prompt,answer,targets in cp['items']:
+    if prompt == 'Quelle position la synthèse adopte-t-elle envers une formule générale de confidentialité ?':
+        if targets != ['croire','comprendre']:
+            raise AssertionError(f'unexpected P06 q7 targets: {targets}')
+        targets=['client','bureau']; repaired+=1
+    elif prompt == 'Pourquoi « cacher » et « montrer » sont-ils opposés ?':
+        if targets != ['cacher','montrer']:
+            raise AssertionError(f'unexpected P06 q8 targets: {targets}')
+        targets=['cacher','connaître']; repaired+=1
+    elif prompt == 'Comment le temps intervient-il dans la confidentialité ?':
+        if targets != ['rester','devenir','continuer']:
+            raise AssertionError(f'unexpected P06 q9 targets: {targets}')
+        targets=['suivre','connaître']; repaired+=1
+    fixed.append((typ,prompt,answer,targets))
+if repaired != 3:
+    raise AssertionError(f'expected three checkpoint linkage repairs, found {repaired}')
+cp['items']=fixed
+
+# Narrow learner-facing wording cleanup without changing target semantics.
+specs[1]['paragraphs'][1]=specs[1]['paragraphs'][1].replace(
+    'Une personne peut changer de situation, de nom ou de préférence;',
+    'La situation, le nom utilisé publiquement ou les préférences d’une personne peuvent changer;'
+)
+
 offenders=[]
 for s in specs:
     local=set(s['forms'])|set(s['reviews'])
@@ -31,10 +58,5 @@ for i,item in enumerate(cp['items'],1):
     if bad: offenders.append((cp['id'],i,bad))
 if offenders:
     raise AssertionError(f'Unit06 preflight non-local target forms: {offenders}')
-
-specs[1]['paragraphs'][1]=specs[1]['paragraphs'][1].replace(
-    'Une personne peut changer de situation, de nom ou de préférence;',
-    'La situation, le nom utilisé publiquement ou les préférences d’une personne peuvent changer;'
-)
 
 ns['main']()
