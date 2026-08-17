@@ -1,0 +1,50 @@
+name: Sync French B2 Unit 08 Frontier
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/sync_french_b2_unit08_frontier.py'
+      - '.github/workflows/sync-french-b2-unit08-frontier.yml'
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Advance from matching Unit 08 lock
+        id: sync
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python reading/tools/sync_french_b2_unit08_frontier.py 2>&1 | tee /tmp/french_b2_u08_sync.log
+      - name: Persist sync failure diagnostic
+        if: steps.sync.outcome != 'success'
+        run: |
+          mkdir -p reading/audit
+          cp /tmp/french_b2_u08_sync.log reading/audit/french_b2_unit08_sync_failure.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_b2_unit08_sync_failure.txt
+          git commit -m 'Record French B2 Unit 08 sync failure [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
+      - name: Stop after failed sync
+        if: steps.sync.outcome != 'success'
+        run: exit 1
+      - name: Commit synchronized frontier files
+        if: steps.sync.outcome == 'success'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/STATUS.json reading/TASKS.md reading/AGENT_HANDOFF.md
+          git diff --cached --quiet && exit 0
+          git commit -m 'Advance French B2 frontier to Unit 09 [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
