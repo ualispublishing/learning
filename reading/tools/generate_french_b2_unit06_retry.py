@@ -3,7 +3,8 @@
 
 Executes the staged Unit06 generator definitions without its main entry point,
 verifies all assessment target forms are locally declared and the paired-opinion
-link is intact, then delegates to the original guarded main().
+link is intact, then delegates to the original guarded main(). This file is the
+authoritative Unit06 workflow trigger.
 """
 from pathlib import Path
 
@@ -31,9 +32,6 @@ for i,item in enumerate(cp['items'],1):
 if offenders:
     raise AssertionError(f'Unit06 preflight non-local target forms: {offenders}')
 
-# Narrow learner-facing wording cleanup without changing target/load semantics.
-# "Une personne peut changer de ... nom" is legal but awkward here; preserve
-# exact target `nom` elsewhere and use the more natural phrase below.
 specs[1]['paragraphs'][1]=specs[1]['paragraphs'][1].replace(
     'Une personne peut changer de situation, de nom ou de préférence;',
     'La situation, le nom utilisé publiquement ou les préférences d’une personne peuvent changer;'
