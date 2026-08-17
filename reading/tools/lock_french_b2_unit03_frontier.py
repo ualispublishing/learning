@@ -9,11 +9,14 @@ import json,subprocess
 from pathlib import Path
 REPO=Path(__file__).resolve().parents[2]
 B2=REPO/'reading/french/b2/passages.jsonl'; OUT=REPO/'reading/audit/french_b2_unit03_frontier_lock.json'
+EXPECTED_B2='e97d0929a5ea7aa09a7306a82f9159194ff954da'
 U1={'supposer','cause','effet','preuve','sécurité','protéger','suffire','moyen','public','apporter','libre','accepter','tromper','certain','général','ressembler','apprécier','ainsi','valoir','intéresser'}
 U2={'promettre','décider','attendre','confiance','grave','calmer','choisir','problème','maintenir','simplement','secret','surtout','ordre','lieu','doute','préférer','ramener','pareil','lumière','pousser'}
 U3={'juste','chance','groupe','réussir','permettre','refuser','accord','obliger','vérité','vrai','faux','mentir','victime','dommage','aider','difficile','garder','donner','loi','guerre'}
 
 def main():
+ blob=subprocess.check_output(['git','hash-object',str(B2)],text=True).strip()
+ if blob!=EXPECTED_B2: raise AssertionError(f'B2 Unit03 blob drift: {blob} != {EXPECTED_B2}')
  rows=[json.loads(x) for x in B2.read_text(encoding='utf-8').splitlines() if x.strip()]
  if len(rows)!=18 or [r['sequence'] for r in rows]!=list(range(1,19)) or rows[-1]['id']!='fr-b2-u03-p06': raise AssertionError('B2 Unit03 frontier not canonical')
  if any(not 350<=r['word_count']<=550 or r['word_count']!=len(r['text'].split()) for r in rows): raise AssertionError('B2 word-band/count failure')
@@ -33,7 +36,6 @@ def main():
   amap={a['question_id']:a['id'] for a in r['answer_key']}
   for q in r['questions']:
    if amap.get(q['id'])!=q['answer_id'] or any(x not in local for x in q.get('target_ids',[])): raise AssertionError(f"{r['id']} linkage failure")
- blob=subprocess.check_output(['git','hash-object',str(B2)],text=True).strip()
  out={'status':'PASS','scope':'French B2 Unit 03 frontier lock','canonical_blob':blob,'passages':18,'questions':180,'answers':180,'completed_units':[1,2,3],'last_sequence':18,'targets_per_completed_unit':20,'total_b2_deliberate_targets':60,'checkpoint_sequences_zero_new':[6,12,18],'unit03_target_forms':sorted(U3),'unit03_word_counts':[r['word_count'] for r in rows[12:18]],'note':'Lightweight source frontier lock for safe B2 Unit04 continuation; not final French approval.'}
  OUT.parent.mkdir(parents=True,exist_ok=True);OUT.write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
  print(json.dumps(out,ensure_ascii=False))
