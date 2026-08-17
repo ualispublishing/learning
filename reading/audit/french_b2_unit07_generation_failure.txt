@@ -1,5 +1,7 @@
 Traceback (most recent call last):
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_b2_unit07_retry.py", line 19, in <module>
-    if off:raise AssertionError(f'Unit07 preflight non-local target forms: {off}')
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: Unit07 preflight non-local target forms: [('fr-b2-u07-p06', 5, ['vendre'])]
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_b2_unit07_retry.py", line 28, in <module>
+    ns['main']()
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_b2_unit07.py", line 151, in main
+    if not 350<=r['word_count']<=550:raise AssertionError(f"{r['id']}: word band {r['word_count']}")
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: fr-b2-u07-p03: word band 345
