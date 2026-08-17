@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Retry B1 Unit 10 after `vêtement` was rejected as already deliberate.
+"""Retry B1 Unit 10 after fail-closed freshness/checkpoint findings.
 
-Only that target is replaced with source-backed `dent` (rank 968), with P04 and
-P06 rewritten as needed for a natural exact-form context. All guards remain.
+`vêtement` is replaced with source-backed `dent` (rank 968), and the B1 final
+checkpoint declares only Unit 10 summary vocabulary. All guards remain intact.
 """
 import generate_french_b1_unit10 as base
 
@@ -20,10 +20,9 @@ p4['paragraphs']=[
 p4['items']=base.qa(p4['forms'],p4['reviews'],'biology')
 
 cp=base.CHECKPOINT
-cp['paragraphs'][1]=cp['paragraphs'][1].replace('peau, nez et vêtement', 'peau, nez et dent').replace('liés au froid', 'des parties du corps').replace('couleur ou un titre énorme', 'couleur ou un titre énorme')
-# Rebuild the affected checkpoint questions cleanly around `dent`.
+cp['paragraphs'][1]=cp['paragraphs'][1].replace('peau, nez et vêtement', 'peau, nez et dent').replace('liés au froid', 'des parties du corps')
 cp['items']=[
-('gist','Quelle méthode clôt le niveau B1 ?','Définir le problème, observer les indices, vérifier le sens, comparer les explications et limiter la conclusion.',['vide','exemple']),
+('gist','Quelle méthode clôt le niveau B1 ?','Définir le problème, observer les indices, vérifier le sens, comparer les explications et limiter la conclusion.',['vide']),
 ('literal_detail','Quels mots appartiennent au récit ?','monstre, ridicule et innocent',['monstre','ridicule','innocent']),
 ('cause_effect','Pourquoi créer un espace vide ?','Pour se débarrasser du désordre et rendre le centre de la réserve accessible.',['vide','débarrasser','centre']),
 ('vocabulary_in_context','Quels mots décrivent la conservation d’eau ?','bain, toilette et baisser',['bain','toilette','baisser']),
