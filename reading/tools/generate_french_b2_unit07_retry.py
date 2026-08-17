@@ -14,6 +14,9 @@ for typ,prompt,answer,targets in cp['items']:
  fixed.append((typ,prompt,answer,targets))
 if repaired!=1:raise AssertionError(f'expected one Unit07 checkpoint repair, found {repaired}')
 cp['items']=fixed
+# P03 was five words below the B2 minimum. Add substantive revision logic:
+# a rigorous interpretation should identify evidence that could weaken it.
+specs[2]['paragraphs'][3] += " Une lecture rigoureuse indique aussi quel indice contraire pourrait l’obliger à revoir son interprétation au lieu de protéger sa première impression."
 off=[]
 for s in specs:
  local=set(s['forms'])|set(s['reviews'])
