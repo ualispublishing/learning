@@ -6,7 +6,7 @@
   "paused_languages": [
     "Urdu"
   ],
-  "phase": "Arabic A1-C2 is formally approved. French A1, A2, and B1 are generated and generation-integrity PASS. French B2 Units 01-06 are canonical; Unit 07 / sequences 37-42 is next.",
+  "phase": "Arabic A1-C2 is formally approved. French A1, A2, and B1 are generated and generation-integrity PASS. French B2 Units 01-07 are canonical; Unit 08 / sequences 43-48 is next.",
   "target_passages": 1080,
   "target_is_quota": false,
   "approved_passages": 360,
@@ -49,17 +49,17 @@
   },
   "french": {
     "state": "ACTIVE_GENERATION",
-    "canonical_passages": 216,
+    "canonical_passages": 222,
     "levels": {
       "a1": 60,
       "a2": 60,
       "b1": 60,
-      "b2": 36,
+      "b2": 42,
       "c1": 0,
       "c2": 0
     },
-    "questions": 2160,
-    "answers": 2160,
+    "questions": 2220,
+    "answers": 2220,
     "latest_audit_commit": "a784e4594b1bb487c51c882cf8b704c99331cd96",
     "generation_invariants": {
       "ten_questions_and_answers_per_passage": true,
@@ -106,19 +106,20 @@
     },
     "b2_generation": {
       "state": "ACTIVE",
-      "passages": 36,
-      "questions": 360,
-      "answers": 360,
+      "passages": 42,
+      "questions": 420,
+      "answers": 420,
       "completed_units": [
         1,
         2,
         3,
         4,
         5,
-        6
+        6,
+        7
       ],
-      "last_sequence": 36,
-      "canonical_blob": "939ec4d433c8b5a8893093eca6f8e8a90ff2c1d4",
+      "last_sequence": 42,
+      "canonical_blob": "5ff899452326f679b7c16b0ff33d8f38fa99719a",
       "planning_band_words": [
         350,
         550
@@ -332,9 +333,41 @@
         372
       ],
       "unit06_frontier_lock": "reading/audit/french_b2_unit06_frontier_lock.json",
-      "unit06_paired_text_group": "fr-b2-u06-data-control-opinions"
+      "unit06_paired_text_group": "fr-b2-u06-data-control-opinions",
+      "unit07_theme": "arts and interpretation",
+      "unit07_targets": [
+        "film",
+        "musique",
+        "chanson",
+        "jouer",
+        "histoire",
+        "lire",
+        "écrire",
+        "mot",
+        "ton",
+        "sens",
+        "sujet",
+        "imaginer",
+        "avis",
+        "aimer",
+        "beau",
+        "drôle",
+        "vie",
+        "présent",
+        "société",
+        "politique"
+      ],
+      "unit07_word_counts": [
+        376,
+        353,
+        366,
+        357,
+        361,
+        379
+      ],
+      "unit07_frontier_lock": "reading/audit/french_b2_unit07_frontier_lock.json"
     },
-    "next_target": "Generate French B2 Unit 07 / sequences 37-42 against B2 blob 939ec4d433c8b5a8893093eca6f8e8a90ff2c1d4. Canonical topic-matrix theme: arts and interpretation; genres: review / profile / critical comparison. Use accepted default 4 fresh targets per P01-P05, P06 zero new, 350-550 words, 10 Q/A, interpretation/evidence distinctions, critic perspective, artist/profile context, comparison of readings, counterargument, author position and synthesis, exact reviews, and freshness checks against all prior French targets."
+    "next_target": "Generate French B2 Unit 08 / sequences 43-48 against B2 blob 5ff899452326f679b7c16b0ff33d8f38fa99719a. Canonical topic-matrix theme: history and explanation; genres: historical account / causal analysis / source comparison. Use accepted default 4 fresh targets per P01-P05, P06 zero new, 350-550 words, 10 Q/A, source distinction, causal chains, chronology, competing historical explanations, source perspective, counterargument, author position and synthesis, exact reviews, and freshness checks against all prior French targets."
   },
   "urdu": {
     "state": "QUEUED",
@@ -352,7 +385,7 @@
   "next_actions": [
     "keep Arabic sealed unless canonical Arabic changes",
     "do not broadly regenerate French A1/A2/B1",
-    "generate French B2 Unit07 against the locked Unit06 blob and canonical topic matrix",
+    "generate French B2 Unit08 against the locked Unit07 blob and canonical topic matrix",
     "continue French generation-first through B2-C2 before final French multi-pass audit",
     "keep Urdu unchanged while French is active unless explicitly reprioritized"
   ],
@@ -369,7 +402,8 @@
     "reading/audit/french_b2_unit03_frontier_lock.json",
     "reading/audit/french_b2_unit04_frontier_lock.json",
     "reading/audit/french_b2_unit05_frontier_lock.json",
-    "reading/audit/french_b2_unit06_frontier_lock.json"
+    "reading/audit/french_b2_unit06_frontier_lock.json",
+    "reading/audit/french_b2_unit07_frontier_lock.json"
   ],
   "parallel_agent_rules": {
     "verify_live_main_before_write_batch": true,

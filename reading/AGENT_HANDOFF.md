@@ -120,15 +120,27 @@ Theme: **digital life and privacy**. Genres: analysis / policy-style summary / p
 
 Guard history: checkpoint retained three stale Unit05 target tags; they were remapped to locally declared Unit06 concepts before canonicalization. No guard was weakened.
 
-## 11. IMMEDIATE FRONTIER — B2 Unit 07
+## 11. B2 Unit 07 — COMPLETE / CURRENT LOCK
 
-Canonical theme: **arts and interpretation**. Genres: **review / profile / critical comparison**. Generate sequences **37–42** against exact blob `939ec4d433c8b5a8893093eca6f8e8a90ff2c1d4`. Require the Unit06 lock; use four fresh targets by default in P01–P05 and zero new in P06; preserve source freshness/rank identity, exact reviews, 350–550 words, 10 linked Q/A, and B2 reasoning about interpretation vs evidence, critic/artist perspective, contextual profile, competing readings, counterargument, position and synthesis. Fail closed and repair rather than weakening guards.
+Theme: **arts and interpretation**. Genres: review / profile / critical comparison. Sequences 37–42.
 
-## 12. Urdu — QUEUED
+- 6 passages / 60 questions / 60 answers;
+- 20 fresh targets, four in P01–P05; P06 zero new;
+- canonical B2 blob `5ff899452326f679b7c16b0ff33d8f38fa99719a`;
+- frontier lock `reading/audit/french_b2_unit07_frontier_lock.json` = PASS;
+- Unit07 targets: `film`, `musique`, `chanson`, `jouer`, `histoire`, `lire`, `écrire`, `mot`, `ton`, `sens`, `sujet`, `imaginer`, `avis`, `aimer`, `beau`, `drôle`, `vie`, `présent`, `société`, `politique`.
+
+Guard history: repaired one stale checkpoint tag, brought P03 into the B2 word band with substantive counterevidence logic, and exposed exact checkpoint lemma `beau`; no guard was weakened.
+
+## 12. IMMEDIATE FRONTIER — B2 Unit 08
+
+Canonical theme: **history and explanation**. Genres: **historical account / causal analysis / source comparison**. Generate sequences **43–48** against exact blob `5ff899452326f679b7c16b0ff33d8f38fa99719a`. Require the Unit07 lock; use four fresh targets by default in P01–P05 and zero new in P06; preserve source freshness/rank identity, exact reviews, 350–550 words, 10 linked Q/A, and B2 historical reasoning about chronology, causal chains, competing explanations, source perspective/comparison, counterargument, position and synthesis. Fail closed and repair rather than weakening guards.
+
+## 13. Urdu — QUEUED
 
 Urdu remains unchanged at six A1 calibration passages. Keep it paused while French is active unless explicitly reprioritized.
 
-## 13. Throughput / parallel rules
+## 14. Throughput / parallel rules
 
 - coherent six-passage units;
 - verify live main before each write batch;
@@ -139,7 +151,7 @@ Urdu remains unchanged at six A1 calibration passages. Keep it paused while Fren
 - update STATUS/TASKS/handoff at meaningful milestones;
 - final French multi-pass approval audit remains deferred until A1–C2 generation is complete.
 
-## 14. Core non-negotiables
+## 15. Core non-negotiables
 
 - canonical data: `reading/<language>/<level>/passages.jsonl`;
 - passage → all questions → answers/reveal;
