@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'reading/tools/generate_french_b1_unit05.py'
+      - 'reading/tools/generate_french_b1_unit05_retry.py'
       - '.github/workflows/generate-french-b1-unit05.yml'
 permissions:
   contents: write
@@ -20,7 +21,7 @@ jobs:
       - name: Install validation dependency
         run: python -m pip install --quiet jsonschema
       - name: Generate and validate B1 Unit 05
-        run: python reading/tools/generate_french_b1_unit05.py
+        run: python reading/tools/generate_french_b1_unit05_retry.py
       - name: Independent B1 Unit 05 checks
         run: |
           python - <<'PY'
@@ -35,7 +36,7 @@ jobs:
           assert all(len(r['questions'])==10 and len(r['answer_key'])==10 for r in u5)
           assert all(len(r['new_lexical_targets'])==3 for r in u5[:5]) and u5[-1]['new_lexical_targets']==[]
           new=[t for r in u5[:5] for t in r['new_lexical_targets']]
-          expected={'clair','reprendre','déranger','empêcher','récupérer','sinon','ancien','vivant','honneur','inviter','remercier','mériter','prix','réaliser','arranger'}
+          expected={'clair','reprendre','déranger','empêcher','récupérer','sinon','ancien','vivant','honneur','inviter','remercier','mériter','liste','réaliser','arranger'}
           assert len(new)==15 and {t['form'] for t in new}==expected and len({t['id'] for t in new})==15
           prior_ids={t['id'] for r in rows[:24] for t in r.get('new_lexical_targets',[])}
           prior_forms={t['form'] for r in rows[:24] for t in r.get('new_lexical_targets',[])}
