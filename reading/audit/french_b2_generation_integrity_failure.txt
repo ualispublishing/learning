@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/runner/work/learning/learning/reading/tools/audit_french_b2_generation_integrity.py", line 66, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/audit_french_b2_generation_integrity.py", line 24, in main
+    if len(rows)!=60 or [r.get('sequence') for r in rows]!=list(range(1,61)):raise AssertionError('B2 must contain exact sequences 1-60')
+                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: B2 must contain exact sequences 1-60
