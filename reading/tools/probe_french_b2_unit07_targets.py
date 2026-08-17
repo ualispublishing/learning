@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Persist source/freshness probe for B2 Unit07: arts and interpretation."""
+"""Persist source/freshness probe for B2 Unit07: arts and interpretation.
+
+Authoritative Unit07 probe trigger. Read-only against canonical passage data.
+"""
 from __future__ import annotations
 import json,subprocess
 from pathlib import Path
