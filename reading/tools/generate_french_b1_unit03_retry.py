@@ -1,25 +1,27 @@
 #!/usr/bin/env python3
-"""Retry B1 Unit 03 with source-backed `rôle` replacing missing-lexicon `existence`.
+"""Retry B1 Unit 03 with source-backed `rôle` and intact B1 guards.
 
-The initial run failed closed before canonical mutation because `existence` is
-not present in the validated lexical deck. This retry changes only that target
-and the passages/questions needed to teach it naturally in the source-supported
-sense `role; character`.
+Repairs are narrow and pre-canonical: replace missing-lexicon `existence` with
+source-backed `rôle`, then expand P02 naturally above the unchanged 220-word B1
+floor. No source, freshness, linkage, review-visibility, or checkpoint guard is
+weakened.
 """
 from __future__ import annotations
 import generate_french_b1_unit03 as base
 
 base.FORMS=('zone','séparer','morceau','causer','rapide','agir','espoir','oser','liberté','nourriture','accompagner','sonner','art','paix','rôle')
 
+p2=next(s for s in base.SPECS if s['id']=='fr-b1-u03-p02')
+p2['paragraphs'][-1]+=" Sami ajoute aussi que cette chronologie permettra au support de comparer rapidement un prochain incident avec celui-ci, sans confondre une hypothèse initiale avec la cause finalement confirmée."
+
 p5=next(s for s in base.SPECS if s['id']=='fr-b1-u03-p05')
 p5['forms']=['art','paix','rôle']
 p5['title']='Le rôle de l’art dans un message de paix'
-p5['text_override']="""Lors d’une visite au musée, Camille participe à une conversation sur une affiche créée après une guerre. L’œuvre utilise l’art pour représenter le retour de la paix : deux personnes se serrent la main devant une ville reconstruite. Un premier panneau affirme que l’image « montre l’unité complète de la population ». Une historienne demande toutefois au groupe d’admettre que cette phrase va plus loin que ce que l’affiche peut prouver.
+p5['paragraphs']="""Lors d’une visite au musée, Camille participe à une conversation sur une affiche créée après une guerre. L’œuvre utilise l’art pour représenter le retour de la paix : deux personnes se serrent la main devant une ville reconstruite. Un premier panneau affirme que l’image « montre l’unité complète de la population ». Une historienne demande toutefois au groupe d’admettre que cette phrase va plus loin que ce que l’affiche peut prouver.
 
 Elle explique que le rôle d’une affiche en faveur de la paix peut être de défendre un idéal ou d’encourager une vision du futur. Cela ne signifie pas que tout le monde partageait ce message. Certains documents de la même période révèlent encore des conflits et des désaccords. L’historienne ne qualifie pas l’œuvre de mensonge. Elle distingue l’art, qui peut exprimer un espoir ou une position, d’une enquête historique qui cherche à décrire l’ensemble de la société. Cette différence ouvre une conversation plus riche sur le rôle de l’image.
 
-Camille comprend alors pourquoi le rôle du panneau explicatif est important. Une œuvre d’art peut défendre la paix sans devenir une mesure précise de l’opinion publique. Le musée décide de modifier le panneau : au lieu d’affirmer une unité complète, il expliquera que l’affiche présente un idéal de paix promu par certains acteurs. Admettre cette limite ne diminue pas l’intérêt de l’œuvre. Au contraire, cela évite de transformer une interprétation trop large en mensonge présenté comme un fait."""
-p5['paragraphs']=p5['text_override'].split('\n\n')
+Camille comprend alors pourquoi le rôle du panneau explicatif est important. Une œuvre d’art peut défendre la paix sans devenir une mesure précise de l’opinion publique. Le musée décide de modifier le panneau : au lieu d’affirmer une unité complète, il expliquera que l’affiche présente un idéal de paix promu par certains acteurs. Admettre cette limite ne diminue pas l’intérêt de l’œuvre. Au contraire, cela évite de transformer une interprétation trop large en mensonge présenté comme un fait.""".split('\n\n')
 p5['items']=[
 ('gist','Quelle distinction l’historienne demande-t-elle de faire ?','Distinguer le message de paix porté par l’art d’une preuve que toute la population partageait ce message.',['art','paix']),
 ('literal_detail','Que représentent les deux personnes sur l’affiche ?','Elles se serrent la main devant une ville reconstruite.',['paix']),
