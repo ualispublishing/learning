@@ -4,7 +4,8 @@
 Repairs accumulated before canonical mutation:
 - keep the three fresh source-backed replacements from retry1;
 - map the theatre passage to schema-approved domains;
-- keep P05 and P06 safely above the unchanged 220-word B1 floor.
+- keep P05 and P06 safely above the unchanged 220-word B1 floor;
+- make deliberate checkpoint review `sérieux` exactly visible.
 No lexical, freshness, linkage, review-visibility, or checkpoint guard is weakened.
 """
 from pathlib import Path
@@ -21,6 +22,9 @@ p2["domains"]=["educational","public"]
 p5=next(s for s in base.SPECS if s["id"]=="fr-b1-u04-p05")
 p5["paragraphs"][-1] += " Elle note enfin deux interprétations dans son carnet et indique pour chacune le contexte qui la rend plausible. Cette comparaison l’aide à expliquer la relation sans transformer une préférence actuelle en vérité historique."
 base.CHECKPOINT["paragraphs"][-1] += " Cette méthode lui permet aussi de revenir sur une première lecture lorsque de nouvelles informations rendent une autre interprétation plus solide."
+
+# Exact-form review visibility: use the deliberate lemma `sérieux`, not only inflected `sérieuse`.
+base.CHECKPOINT["paragraphs"][0]=base.CHECKPOINT["paragraphs"][0].replace("Dans une étude sérieuse,", "Dans un travail sérieux,")
 
 base.main()
 '''
