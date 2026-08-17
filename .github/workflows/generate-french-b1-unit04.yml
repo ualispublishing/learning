@@ -6,6 +6,7 @@ on:
       - 'reading/tools/generate_french_b1_unit04.py'
       - 'reading/tools/generate_french_b1_unit04_retry.py'
       - 'reading/tools/generate_french_b1_unit04_retry2.py'
+      - 'reading/tools/generate_french_b1_unit04_retry3.py'
       - '.github/workflows/generate-french-b1-unit04.yml'
 permissions:
   contents: write
@@ -22,7 +23,7 @@ jobs:
       - name: Install validation dependency
         run: python -m pip install --quiet jsonschema
       - name: Generate and validate B1 Unit 04
-        run: python reading/tools/generate_french_b1_unit04_retry2.py
+        run: python reading/tools/generate_french_b1_unit04_retry3.py
       - name: Independent B1 Unit 04 checks
         run: |
           python - <<'PY'
@@ -33,6 +34,7 @@ jobs:
           u4=rows[18:]
           assert [r['id'] for r in u4]==[f'fr-b1-u04-p{i:02d}' for i in range(1,7)]
           assert all(r['language']=='fr' and r['cefr']=='B1' and r['unit']==4 for r in u4)
+          assert all(set(r['domains']).issubset({'personal','public','educational','professional'}) for r in u4)
           assert all(220<=r['word_count']<=350 and r['word_count']==len(r['text'].split()) for r in u4)
           assert all(len(r['questions'])==10 and len(r['answer_key'])==10 for r in u4)
           assert all(len(r['new_lexical_targets'])==3 for r in u4[:5]) and u4[-1]['new_lexical_targets']==[]
