@@ -1,0 +1,49 @@
+name: Audit French B2 Unit 01 Calibration
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/audit_french_b2_unit01_calibration.py'
+      - '.github/workflows/audit-french-b2-unit01-calibration.yml'
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet jsonschema
+      - name: Run strict B2 Unit 01 post-calibration review
+        run: python reading/tools/audit_french_b2_unit01_calibration.py
+      - name: Independent calibration artifact checks
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          a=json.loads(Path('reading/audit/french_b2_unit01_calibration_review.json').read_text())
+          assert a['status']=='PASS'
+          assert a['canonical_blob']=='1ba43c900ad64ff9359264e743470138ce25a9c5'
+          assert (a['passages'],a['questions'],a['answers'],a['new_targets'])==(6,60,60,20)
+          assert a['unique_new_target_ids']==20 and a['unique_new_target_forms']==20
+          assert a['prior_level_target_id_collisions']==0 and a['prior_level_target_form_collisions']==0
+          assert a['paired_viewpoints']['materially_distinct'] is True
+          assert a['required_b2_question_types_present'] is True
+          assert a['language_review']['status']=='PASS' and a['pedagogical_review']['status']=='PASS'
+          assert a['accepted_b2_default_new_targets_per_standard_passage']==4
+          assert a['durable_planning_range_remains']==[4,8] and a['default_is_hard_quota'] is False
+          assert a['checkpoint_zero_new'] is True and not a['failures']
+          print({'status':'PASS','artifact':'reading/audit/french_b2_unit01_calibration_review.json','accepted_default':4})
+          PY
+      - name: Commit B2 calibration review artifact
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_b2_unit01_calibration_review.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'Audit French B2 Unit 01 calibration [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
