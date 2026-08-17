@@ -5,6 +5,7 @@ on:
     paths:
       - 'reading/tools/generate_french_b1_unit03.py'
       - 'reading/tools/generate_french_b1_unit03_retry.py'
+      - 'reading/tools/generate_french_b1_unit03_retry2.py'
       - '.github/workflows/generate-french-b1-unit03.yml'
 permissions:
   contents: write
@@ -21,7 +22,7 @@ jobs:
       - name: Install validation dependency
         run: python -m pip install --quiet jsonschema
       - name: Generate and validate B1 Unit 03
-        run: python reading/tools/generate_french_b1_unit03_retry.py
+        run: python reading/tools/generate_french_b1_unit03_retry2.py
       - name: Independent B1 Unit 03 checks
         run: |
           python - <<'PY'
