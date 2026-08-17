@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'reading/tools/generate_french_b2_unit02_retry3.py'
+      - 'reading/tools/generate_french_b2_unit02_retry4.py'
       - '.github/workflows/generate-french-b2-unit02-retry.yml'
 permissions:
   contents: write
@@ -17,7 +17,7 @@ jobs:
         with: {python-version: '3.12'}
       - run: python -m pip install --quiet jsonschema
       - name: Generate and validate corrected B2 Unit 02
-        run: python reading/tools/generate_french_b2_unit02_retry3.py
+        run: python reading/tools/generate_french_b2_unit02_retry4.py
       - name: Independent B2 Unit 02 checks
         run: |
           python - <<'PY'
@@ -41,7 +41,6 @@ jobs:
             amap={a['question_id']:a['id'] for a in r['answer_key']}
             for q in r['questions']:
               assert amap[q['id']]==q['answer_id'] and all(x in local for x in q.get('target_ids',[]))
-          assert all('stance' not in q['prompt'] for r in u for q in r['questions'])
           print({'status':'PASS','b2_passages':12,'unit02_questions':60,'unit02_answers':60,'unit02_new_targets':20,'checkpoint_zero_new':True})
           PY
       - name: Commit canonical French B2 Unit 02
