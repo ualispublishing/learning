@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Exact-form retry for French B1 Unit 05.
 
-The revised 15-target pool already passed freshness. This wrapper changes only
-P04 running text so deliberate lemma `mériter` and review lemma `normal` are
-exactly visible before the unchanged generator validation runs.
+The revised 15-target pool already passed freshness. This wrapper makes the
+required P04 and checkpoint lemmas exactly visible before the unchanged
+validator runs. No lexical, freshness, word-band, linkage, or checkpoint guard
+is weakened.
 """
 from pathlib import Path
 
@@ -17,6 +18,12 @@ p4=next(s for s in base.SPECS if s["id"]=="fr-b1-u05-p04")
 p4["paragraphs"][-1] += " Une amélioration peut mériter du temps même lorsqu’elle n’est pas urgente, si elle rend la participation plus claire et plus fiable."
 # Exact-form review exposure: `normalement` is not the deliberate lemma `normal`.
 p4["paragraphs"][0] += " Camille vérifie que le fonctionnement normal du système est revenu avant de poursuivre."
+
+# P06 summary reviews are exact-form too: use `clair` and `mériter`, not only
+# feminine/conjugated forms.
+base.CHECKPOINT["paragraphs"][0]=base.CHECKPOINT["paragraphs"][0].replace("une structure claire", "un message clair")
+base.CHECKPOINT["paragraphs"][1]=base.CHECKPOINT["paragraphs"][1].replace("décider ce qui mérite du temps", "décider ce qui peut mériter du temps")
+base.CHECKPOINT["paragraphs"][2]=base.CHECKPOINT["paragraphs"][2].replace("une information claire", "un message clair")
 
 base.main()
 '''
