@@ -56,8 +56,10 @@ p3['items']=fixed
 p4=specs[3]
 p4['paragraphs']=[x.replace('une valeur moyenne plus haut sur le graphique', 'une valeur moyenne plus haute sur le graphique').replace('une valeur plus bas ne signifie', 'une valeur plus basse ne signifie') for x in p4['paragraphs']]
 
-# P06: same passé-composé repair; exact `changer` remains in "faire changer".
+# P06: repair passé composé and add substantive evidence-to-revision reasoning
+# so the checkpoint clears the durable 350-word B2 minimum without filler.
 cp['paragraphs']=[x.replace('ce qui a changer', 'ce qui a changé') for x in cp['paragraphs']]
+cp['paragraphs'][3] += " Cette discipline exige aussi de dire à l’avance quelles observations feraient changer la conclusion. Une décision devient ainsi vérifiable : on sait ce qui la soutient aujourd’hui, quels seuils la feraient évoluer et pourquoi une révision future resterait cohérente avec le raisonnement initial."
 fixed=[]
 for typ,prompt,answer,targets in cp['items']:
     answer=answer.replace('ce qui a changer', 'ce qui a changé')
