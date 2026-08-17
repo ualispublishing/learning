@@ -18,7 +18,7 @@ jobs:
         with: {python-version: '3.12'}
       - run: python -m pip install --quiet jsonschema
       - name: Generate and validate B1 Unit 08
-        run: python reading/tools/generate_french_b1_unit08.py
+        run: python reading/tools/generate_french_b1_unit08_retry.py
       - name: Independent B1 Unit 08 checks
         run: |
           python - <<'PY'
