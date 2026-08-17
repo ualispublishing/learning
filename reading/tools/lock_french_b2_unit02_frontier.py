@@ -9,7 +9,7 @@ from pathlib import Path
 REPO=Path(__file__).resolve().parents[2]
 B2=REPO/'reading/french/b2/passages.jsonl'; OUT=REPO/'reading/audit/french_b2_unit02_frontier_lock.json'
 EXPECTED_U1={'supposer','cause','effet','preuve','sécurité','protéger','suffire','moyen','public','apporter','libre','accepter','tromper','certain','général','ressembler','apprécier','ainsi','valoir','intéresser'}
-EXPECTED_U2={'promettre','avenir','attendre','confiance','grave','calmer','solution','responsabilité','partager','opinion','secret','surtout','ordre','lieu','coût','préférer','ramener','pareil','lumière','pousser'}
+EXPECTED_U2={'promettre','décider','attendre','confiance','grave','calmer','choisir','problème','maintenir','simplement','secret','surtout','ordre','lieu','doute','préférer','ramener','pareil','lumière','pousser'}
 
 def main():
  rows=[json.loads(x) for x in B2.read_text(encoding='utf-8').splitlines() if x.strip()]
@@ -27,7 +27,7 @@ def main():
   for q in r['questions']:
    if amap.get(q['id'])!=q['answer_id'] or any(x not in local for x in q.get('target_ids',[])): raise AssertionError(f"{r['id']} linkage failure")
  blob=subprocess.check_output(['git','hash-object',str(B2)],text=True).strip()
- out={'status':'PASS','scope':'French B2 Unit 02 frontier lock','canonical_blob':blob,'passages':12,'questions':120,'answers':120,'completed_units':[1,2],'last_sequence':12,'unit01_targets':20,'unit02_targets':20,'unit02_checkpoint_zero_new':True,'note':'Lightweight source frontier lock for the next guarded B2 unit; not final French approval.'}
+ out={'status':'PASS','scope':'French B2 Unit 02 frontier lock','canonical_blob':blob,'passages':12,'questions':120,'answers':120,'completed_units':[1,2],'last_sequence':12,'unit01_targets':20,'unit02_targets':20,'unit02_checkpoint_zero_new':True,'unit02_target_forms':sorted(EXPECTED_U2),'note':'Lightweight source frontier lock for the next guarded B2 unit; not final French approval.'}
  OUT.parent.mkdir(parents=True,exist_ok=True); OUT.write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
  print(json.dumps(out,ensure_ascii=False))
 if __name__=='__main__':main()
