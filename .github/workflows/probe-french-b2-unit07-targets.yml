@@ -1,0 +1,30 @@
+name: Probe French B2 Unit 07 Targets
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/probe_french_b2_unit07_targets.py'
+      - '.github/workflows/probe-french-b2-unit07-targets.yml'
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet jsonschema
+      - name: Require Unit 06 lock and probe Unit 07 targets
+        run: python reading/tools/probe_french_b2_unit07_targets.py
+      - name: Commit auditable Unit 07 target probe
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_b2_unit07_target_probe.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'Record French B2 Unit 07 target probe [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
