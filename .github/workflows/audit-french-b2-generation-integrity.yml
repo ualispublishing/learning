@@ -1,0 +1,51 @@
+name: Audit French B2 Generation Integrity
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/audit_french_b2_generation_integrity.py'
+      - '.github/workflows/audit-french-b2-generation-integrity.yml'
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet jsonschema
+      - name: Audit complete B2 generation layer
+        id: audit
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python reading/tools/audit_french_b2_generation_integrity.py 2>&1 | tee /tmp/french_b2_integrity.log
+      - name: Persist audit failure diagnostic
+        if: steps.audit.outcome != 'success'
+        run: |
+          mkdir -p reading/audit
+          cp /tmp/french_b2_integrity.log reading/audit/french_b2_generation_integrity_failure.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_b2_generation_integrity_failure.txt
+          git commit -m 'Record French B2 integrity failure [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
+      - name: Stop after failed audit
+        if: steps.audit.outcome != 'success'
+        run: exit 1
+      - name: Commit B2 integrity seal
+        if: steps.audit.outcome == 'success'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_b2_generation_integrity.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'Seal French B2 generation integrity [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
