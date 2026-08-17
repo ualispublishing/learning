@@ -18,7 +18,7 @@ jobs:
         with: {python-version: '3.12'}
       - run: python -m pip install --quiet jsonschema
       - name: Generate and validate B2 Unit 01 calibration
-        run: python reading/tools/generate_french_b2_unit01.py
+        run: python reading/tools/generate_french_b2_unit01_retry.py
       - name: Independent B2 calibration checks
         run: |
           python - <<'PY'
