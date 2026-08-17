@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed preflight wrapper for French B2 Unit07; authoritative workflow trigger."""
+"""Fail-closed preflight wrapper for French B2 Unit07; repaired canonical workflow trigger."""
 from pathlib import Path
 p=Path(__file__).with_name('generate_french_b2_unit07.py')
 ns={'__name__':'unit07_base','__file__':str(p),'__package__':None}
