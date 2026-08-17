@@ -1,0 +1,51 @@
+name: Probe French B2 Unit 09 Targets
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/probe_french_b2_unit09_targets.py'
+      - '.github/workflows/probe-french-b2-unit09-targets.yml'
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet jsonschema
+      - name: Require Unit 08 lock and probe Unit 09 targets
+        id: probe
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python reading/tools/probe_french_b2_unit09_targets.py 2>&1 | tee /tmp/french_b2_u09_probe.log
+      - name: Persist probe failure diagnostic
+        if: steps.probe.outcome != 'success'
+        run: |
+          mkdir -p reading/audit
+          cp /tmp/french_b2_u09_probe.log reading/audit/french_b2_unit09_probe_failure.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_b2_unit09_probe_failure.txt
+          git commit -m 'Record French B2 Unit 09 probe failure [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
+      - name: Stop after failed probe
+        if: steps.probe.outcome != 'success'
+        run: exit 1
+      - name: Commit auditable Unit 09 target probe
+        if: steps.probe.outcome == 'success'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_b2_unit09_target_probe.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'Record French B2 Unit 09 target probe [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
