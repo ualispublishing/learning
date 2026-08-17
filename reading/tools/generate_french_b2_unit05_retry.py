@@ -3,7 +3,7 @@
 
 Repairs one non-local assessment tag, exact visibility of one Unit04 review form,
 and two learner-facing passé-composé typos while preserving the verified target
-pool and all base guards.
+pool and all base guards. This file is the authoritative Unit05 retry trigger.
 """
 from pathlib import Path
 
