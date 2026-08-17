@@ -63,36 +63,38 @@ Guard history:
 5. P06 exact `général` repaired;
 6. post-calibration language review replaced learner-facing Anglicism `stance` and polished two paired-viewpoint phrases.
 
-## 6. IMMEDIATE FRONTIER — B2 Unit 02
+## 6. B2 Unit 02 — COMPLETE / CURRENT LOCK
 
-Roadmap theme: **decision under uncertainty**.
+Theme used: **decision under uncertainty**. Sequences 7–12.
 
-Generate **sequences 7–12** against exact B2 blob:
-`1ba43c900ad64ff9359264e743470138ce25a9c5`.
+- 6 passages / 60 questions / 60 answers;
+- 20 fresh deliberate targets, four in P01–P05; P06 zero new;
+- canonical B2 blob after Unit02: `ff94113359f90b68032b2e2f92aaa1bf2b3ea923`;
+- frontier lock artifact: `reading/audit/french_b2_unit02_frontier_lock.json` = PASS;
+- Unit02 targets: `promettre`, `décider`, `attendre`, `confiance`, `grave`, `calmer`, `choisir`, `problème`, `maintenir`, `simplement`, `secret`, `surtout`, `ordre`, `lieu`, `doute`, `préférer`, `ramener`, `pareil`, `lumière`, `pousser`.
+
+Guard repairs preserved rather than weakened freshness, local-linkage and exact-form checks.
+
+## 7. IMMEDIATE FRONTIER — B2 Unit 03
+
+Canonical topic-matrix theme: **ethics and competing values**. Genres: **argument / case / response**.
+
+Generate **sequences 13–18** against exact B2 blob `ff94113359f90b68032b2e2f92aaa1bf2b3ea923`.
 
 Requirements:
-1. verify live main and exact B2 Unit01 blob before write;
-2. choose 20 candidate targets for the accepted default 4-per-standard-passage load; check them against all deliberate A1+A2+B1+B2 Unit01 targets before append;
-3. preserve source rank/ID/intended-sense discipline and exact text exposure;
-4. naturally review Unit01 target groups across P01–P05, but move them into new semantic environments rather than repeating science/society passages;
-5. P06 zero new and high-coverage/timed friendly;
-6. keep 350–550 words, 10 Q/A linkage, schema, local target declarations and exact reviews;
-7. require reasoning under uncertainty: competing scenarios, expected consequences, thresholds, reversibility, evidence quality, argument relation, author position, inference, reference tracking and synthesis;
-8. use a coherent but varied genre cycle; paired viewpoints are welcome when pedagogically useful but are not mandatory every unit;
-9. fail closed and repair rather than weakening guards.
+1. require the Unit02 frontier lock and verify the live B2 blob before target selection or append;
+2. use accepted default 4 fresh targets per P01–P05 unless discourse load clearly justifies another value within 4–8; P06 zero new;
+3. check every candidate against all deliberate French A1+A2+B1+B2 Units01–02 targets;
+4. preserve source rank/ID/intended sense and exact target/review exposure;
+5. build natural argument/case/response passages around competing values, stakeholder claims, scope, exceptions, fairness/obligation trade-offs and counterarguments;
+6. preserve 350–550 words, 10 linked Q/A, B2 author-position/argument/inference/reference/synthesis demand;
+7. fail closed and repair instead of weakening guards.
 
-Suggested Unit01 review quartets for Unit02:
-- P01: `supposer`, `cause`, `effet`, `preuve`
-- P02: `sécurité`, `protéger`, `suffire`, `moyen`
-- P03: `public`, `apporter`, `libre`, `accepter`
-- P04: `tromper`, `certain`, `général`, `ressembler`
-- P05: `apprécier`, `ainsi`, `valoir`, `intéresser`
-
-## 7. Urdu — QUEUED
+## 8. Urdu — QUEUED
 
 Urdu remains unchanged at six A1 calibration passages. Keep it paused while French is active unless explicitly reprioritized.
 
-## 8. Throughput / parallel rules
+## 9. Throughput / parallel rules
 
 - coherent six-passage units;
 - verify live main before each write batch;
@@ -103,7 +105,7 @@ Urdu remains unchanged at six A1 calibration passages. Keep it paused while Fren
 - update STATUS/TASKS/handoff at meaningful milestones;
 - final French multi-pass approval audit remains deferred until A1–C2 generation is complete.
 
-## 9. Core non-negotiables
+## 10. Core non-negotiables
 
 - canonical data: `reading/<language>/<level>/passages.jsonl`;
 - passage → all questions → answers/reveal;

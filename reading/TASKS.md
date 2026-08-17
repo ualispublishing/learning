@@ -52,20 +52,29 @@ Durable profile:
 
 Unit 01 targets: `supposer`, `cause`, `effet`, `preuve`, `sécurité`, `protéger`, `suffire`, `moyen`, `public`, `apporter`, `libre`, `accepter`, `tromper`, `certain`, `général`, `ressembler`, `apprécier`, `ainsi`, `valoir`, `intéresser`.
 
-#### Unit 02 — IMMEDIATE NEXT
-Theme: **decision under uncertainty**.
+#### Unit 02 — COMPLETE
+- [x] Sequences 7–12 canonical.
+- [x] 6 passages / 60 Q / 60 A.
+- [x] 20 fresh source-backed targets, four in P01–P05; P06 zero new.
+- [x] Theme used: `decision under uncertainty`.
+- [x] Canonical B2 blob after Unit02: `ff94113359f90b68032b2e2f92aaa1bf2b3ea923`.
+- [x] Frontier lock `reading/audit/french_b2_unit02_frontier_lock.json` = PASS.
 
-- [ ] Generate sequences 7–12 against B2 blob `1ba43c900ad64ff9359264e743470138ce25a9c5`.
-- [ ] Use accepted default 4 fresh new targets in P01–P05 unless discourse/grammar load clearly justifies another value inside 4–8; P06 zero new.
-- [ ] Check every candidate against all deliberate French A1+A2+B1+B2 Unit01 targets before canonical append.
-- [ ] Preserve source rank/ID/intended-sense discipline and exact target/review visibility.
-- [ ] Naturally bridge Unit01 targets into new semantic environments rather than repeating science/society frames.
-- [ ] Keep every passage 350–550 words and 10 Q/A linkage exact.
-- [ ] Require uncertainty reasoning, alternatives/trade-offs, argument relation, author position, inference, reference tracking, and synthesis.
-- [ ] Fail closed on blob/source drift, collisions, schema/linkage, word band, exact review visibility, or sequence/ID errors.
+Unit 02 targets: `promettre`, `décider`, `attendre`, `confiance`, `grave`, `calmer`, `choisir`, `problème`, `maintenir`, `simplement`, `secret`, `surtout`, `ordre`, `lieu`, `doute`, `préférer`, `ramener`, `pareil`, `lumière`, `pousser`.
 
-Remaining after Unit01:
-- [ ] B2: 54 passages.
+#### Unit 03 — IMMEDIATE NEXT
+Roadmap theme: **ethics and competing values**. Genres: **argument / case / response**.
+
+- [ ] Generate sequences 13–18 against locked B2 blob `ff94113359f90b68032b2e2f92aaa1bf2b3ea923`.
+- [ ] Use accepted default 4 fresh targets per P01–P05; P06 zero new.
+- [ ] Check every candidate against all prior deliberate French A1+A2+B1+B2 targets.
+- [ ] Preserve 350–550 words, 10 linked Q/A, exact review visibility, source rank/ID identity and local target declarations.
+- [ ] Require competing-value analysis, stakeholder claims, scope and exceptions, justified counterargument, author position, inference/reference and synthesis.
+- [ ] Vary argument, case and response genres according to the canonical topic matrix.
+- [ ] Fail closed on lock/source drift, collision, schema/linkage, word band or review visibility.
+
+Remaining after Unit02:
+- [ ] B2: 48 passages.
 - [ ] C1: 60 passages.
 - [ ] C2: 60 passages.
 
@@ -86,4 +95,4 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 
 ## Immediate next task
 
-**Generate French B2 Unit 02 / sequences 7–12 for `decision under uncertainty` against blob `1ba43c900ad64ff9359264e743470138ce25a9c5`. Keep Arabic sealed.**
+**Generate French B2 Unit 03 / sequences 13–18 for `ethics and competing values` against blob `ff94113359f90b68032b2e2f92aaa1bf2b3ea923`. Keep Arabic sealed.**
