@@ -16,8 +16,6 @@ Do not reopen Arabic unless canonical Arabic content is deliberately changed.
 
 - [x] Units 01–10 / sequences 1–60 generated.
 - [x] 60 passages / 600 questions / 600 linked answers.
-- [x] 100 deliberate lexical targets.
-- [x] Every Unit P06 checkpoint has zero deliberately new lexical targets.
 - [x] Generation-integrity artifact: `reading/audit/french_a1_generation_integrity.json` = `PASS`.
 - [x] Canonical blob: `0493a2fa13e51b5997db05e91cdea4d8dc5e647b`.
 
@@ -25,49 +23,64 @@ Do not reopen Arabic unless canonical Arabic content is deliberately changed.
 
 - [x] Units 01–10 / sequences 1–60 generated.
 - [x] 60 passages / 600 questions / 600 linked answers.
-- [x] 100 unique deliberate lexical targets; zero A1↔A2 deliberate-target collisions.
-- [x] Every Unit P06 checkpoint has zero deliberately new lexical targets.
+- [x] 100 unique deliberate targets; zero A1↔A2 deliberate-target collisions.
 - [x] Generation-integrity artifact: `reading/audit/french_a2_generation_integrity.json` = `PASS`.
 - [x] Canonical blob: `d0a80b8866071f426019aa0ad143e1d270dba4de`.
 
-A1 and A2 have not yet gone through the final language-wide multi-pass French approval audit; do not broadly regenerate them.
+A1 and A2 remain closed to broad regeneration until the final French language-wide audit.
 
 ### B1 — ACTIVE
 
 #### Unit 01 — ACCEPTED CALIBRATION
 
-- [x] Sequences 1–6 generated and guarded.
-- [x] 6 passages / 60 questions / 60 linked answers.
-- [x] 15 fresh deliberate targets, three each in P01–P05; P06 has zero new targets.
-- [x] All passage lengths in B1 220–350 band: 246, 254, 250, 250, 276, 271.
-- [x] Post-calibration precision review = `PASS`: `reading/audit/french_b1_unit01_calibration_review.json`.
-- [x] Accepted canonical B1 blob after calibration repair: `beed8c8337be567325a4b329b79c7d070511f3b1`.
-- [x] Calibration commit: `ccdf4743c5b359c085387dd66653f01d368e5c07`.
-- [x] Root lexical CSV remained unchanged; `impliquer` was tightened to the directly supported entail/consequence sense rather than adding a sense override.
+- [x] Sequences 1–6; 6 passages / 60 Q / 60 A.
+- [x] 15 fresh targets, 3 in P01–P05; P06 zero new.
+- [x] Post-calibration precision review PASS: `reading/audit/french_b1_unit01_calibration_review.json`.
+- [x] Accepted calibration blob: `beed8c8337be567325a4b329b79c7d070511f3b1`.
 
-Unit 01 targets: `poursuivre`, `époque`, `trace`, `convaincre`, `position`, `impliquer`, `machine`, `code`, `recommencer`, `étranger`, `peuple`, `futur`, `regretter`, `profiter`, `ennui`.
+Targets: `poursuivre`, `époque`, `trace`, `convaincre`, `position`, `impliquer`, `machine`, `code`, `recommencer`, `étranger`, `peuple`, `futur`, `regretter`, `profiter`, `ennui`.
 
-#### Unit 02 — IMMEDIATE NEXT
+#### Unit 02 — COMPLETE
 
-- [ ] Generate sequences 7–12 as one guarded batch against B1 blob `beed8c8337be567325a4b329b79c7d070511f3b1`.
-- [ ] Use the calibrated default of 3 new deliberate lexical types in each P01–P05; P06 zero new.
-- [ ] Check every new target against all deliberate A1+A2+B1 Unit01 targets before canonical write.
-- [ ] Keep every passage in the B1 220–350-word band.
+- [x] Sequences 7–12; 6 passages / 60 Q / 60 A.
+- [x] 15 fresh targets; P06 zero new.
+- [x] Generator bracket typo failed before canonical mutation and was narrowly repaired.
+- [x] Checkpoint stale prior-unit target tag was removed rather than expanding P06’s declarations.
+
+Targets: `apparemment`, `détail`, `honnête`, `ordinateur`, `installer`, `remplir`, `planète`, `attirer`, `durer`, `coûter`, `respecter`, `inutile`, `admettre`, `mensonge`, `conversation`.
+
+#### Unit 03 — COMPLETE
+
+- [x] Sequences 13–18; 6 passages / 60 Q / 60 A.
+- [x] 15 fresh targets; P06 zero new.
+- [x] Candidate `existence` failed closed because it is absent from the validated deck; replaced by fresh source-backed `rôle` (rank 932).
+- [x] P02/P06 were expanded naturally to satisfy the unchanged 220–350 B1 word band.
+- [x] Canonical completion commit: `551d44b649486495ce47fcfdc0d5569c8bc61c2f`.
+- [x] Current B1 blob: `8dfb17e274d33227c356b16bad00624f3779342f`.
+
+Targets: `zone`, `séparer`, `morceau`, `causer`, `rapide`, `agir`, `espoir`, `oser`, `liberté`, `nourriture`, `accompagner`, `sonner`, `art`, `paix`, `rôle`.
+
+#### Unit 04 — IMMEDIATE NEXT
+
+- [ ] Generate sequences 19–24 against B1 blob `8dfb17e274d33227c356b16bad00624f3779342f`.
+- [ ] Use calibrated default: 3 fresh deliberate lexical targets in each P01–P05; P06 zero new.
+- [ ] Check every new target against all deliberate French A1+A2+B1 Units01–03 targets before canonical write.
+- [ ] Naturally review Unit03 targets across P01–P05 with exact visible forms.
+- [ ] Keep every passage in the 220–350-word B1 band.
 - [ ] Use 10 questions + 10 linked answers per passage.
-- [ ] Make deliberate reviews exactly visible; naturally distribute Unit01 reviews across P01–P05.
-- [ ] Preserve B1 demand: paragraph-level main ideas, multi-sentence inference, motive/reason, summary, grammar-in-context, and transfer across related but non-identical genres.
-- [ ] Fail closed on source/blob drift, source identity, cross-level duplication, schema/linkage errors, exact review visibility, word band, or sequence collision.
+- [ ] Preserve paragraph-level inference, motive/reason, summary, grammar-in-context, and cross-domain transfer.
+- [ ] Fail closed on blob/source drift, source identity, duplication, schema/linkage, review visibility, word band, or sequence collision.
 
-Remaining French after accepted B1 Unit01:
+Remaining French after Unit03:
 
-- [ ] B1: 54 passages.
+- [ ] B1: 42 passages.
 - [ ] B2: 60 passages.
 - [ ] C1: 60 passages.
 - [ ] C2: 60 passages.
 
 Production policy:
 
-- generation-first; full multi-pass French audit remains deferred until completed French A1–C2 generation;
+- generation-first; final multi-pass French audit remains deferred until A1–C2 generation is complete;
 - standard bands: B1 220–350, B2 350–550, C1 500–800, C2 700–1,200 words;
 - root validated lexical CSV remains read-only;
 - fix failed guards rather than weakening them.
@@ -83,11 +96,11 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 ## Throughput rules
 
 - Work in coherent unit/batch scopes, not passage-by-passage workflows.
-- One live-state/collision check + one guarded script + one relevant validation run per batch.
+- Verify live canonical/source locks before each batch.
 - Full multi-pass audit is a final-stage operation, not a per-generation-batch tax.
-- Fail closed on source drift or invariant failure, then repair the same batch rather than weakening the guard.
-- Serialize writers to the same canonical/audit artifact.
+- Fail closed and repair the same batch instead of weakening invariants.
+- Serialize writers to the same canonical artifact.
 
 ## Immediate next task
 
-**Generate French B1 Unit 02 / sequences 7–12 against canonical B1 blob `beed8c8337be567325a4b329b79c7d070511f3b1`. Keep Arabic sealed.**
+**Generate French B1 Unit 04 / sequences 19–24 against canonical B1 blob `8dfb17e274d33227c356b16bad00624f3779342f`. Keep Arabic sealed.**
