@@ -1,19 +1,16 @@
 {
-  "status": "B2_PASS_C1_UNIT01_PENDING",
+  "status": "DEPENDENCY_PASS",
   "date": "2026-08-17",
   "starting_c1_passages": 12,
   "ending_c1_passages": 12,
   "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
   "c1_blob": "3dd6fc869920ed96cff6861d7498afe59e433947",
-  "b2_generation_integrity_pass": true,
-  "c1_unit01_calibration_pass": false,
-  "c1_unit02_frontier_prepared": false,
+  "c1_unit01_prefix_blob": "6ca488f81788cefa49ef2e303bf6966cb4862a4c",
+  "c1_unit01_calibration_pass": true,
   "completed_stages": [
-    "complete_or_verify_b2_to_c1_prep",
-    "prepare_french_c1_readiness",
-    "resolve_french_c1_unit01_plan",
-    "probe_french_c1_unit01_targets",
-    "select_french_c1_unit01_calibration_targets"
+    "verify_existing_sealed_c1_unit01_prefix"
   ],
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py\", line 32, in main\n    else:raise AssertionError(f'C1 canonical frontier unsupported for Unit01 calibration: {len(current)} rows')\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: C1 canonical frontier unsupported for Unit01 calibration: 12 rows\n"
+  "accepted_c1_default": 4,
+  "accepted_default_is_hard_quota": false,
+  "error": null
 }
