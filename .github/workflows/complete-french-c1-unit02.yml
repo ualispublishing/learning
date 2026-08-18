@@ -4,6 +4,10 @@ on:
   push:
     paths:
       - 'reading/tools/complete_french_c1_unit02.py'
+      - 'reading/tools/select_french_c1_unit02_targets.py'
+      - 'reading/tools/generate_french_c1_unit02.py'
+      - 'reading/tools/generate_french_c1_unit02_retry.py'
+      - 'reading/tools/audit_french_c1_unit02_generation.py'
       - '.github/workflows/complete-french-c1-unit02.yml'
 concurrency:
   group: french-c1-canonical-writer
