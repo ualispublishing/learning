@@ -6,7 +6,7 @@
   "paused_languages": [
     "Urdu"
   ],
-  "phase": "Arabic A1-C2 is formally approved. French A1, A2, B1 and B2 are generated; B1 and B2 generation-integrity are PASS. French C1 Unit 01 calibration is next.",
+  "phase": "Arabic A1-C2 remains formally approved. French A1-B2 generation layers are sealed for generation integrity; French C1 Unit01 calibration PASS. C1 Unit02 is the immediate generation frontier.",
   "target_passages": 1080,
   "target_is_quota": false,
   "approved_passages": 360,
@@ -49,17 +49,17 @@
   },
   "french": {
     "state": "ACTIVE_GENERATION",
-    "canonical_passages": 240,
+    "canonical_passages": 246,
     "levels": {
       "a1": 60,
       "a2": 60,
       "b1": 60,
       "b2": 60,
-      "c1": 0,
+      "c1": 6,
       "c2": 0
     },
-    "questions": 2400,
-    "answers": 2400,
+    "questions": 2460,
+    "answers": 2460,
     "latest_audit_commit": "a784e4594b1bb487c51c882cf8b704c99331cd96",
     "generation_invariants": {
       "ten_questions_and_answers_per_passage": true,
@@ -385,7 +385,42 @@
         60
       ]
     },
-    "next_target": "Calibrate French C1 Unit 01 / sequences 1-6 from the canonical C1 passage standard and topic/genre matrix. Derive the exact C1 word band and planning constraints from repository policy first; probe all remaining source vocabulary against A1-B2; choose a conservative fresh target load; generate P01-P05 plus zero-new P06; run a strict post-calibration review before setting a C1 production default."
+    "next_target": "Generate French C1 Unit 02 / sequences 7-12 against exact C1 blob 6ca488f81788cefa49ef2e303bf6966cb4862a4c. Canonical theme: professional judgment; genres: [\"briefing\", \"case analysis\", \"recommendation\"]. Use accepted conservative default 4 fresh source-backed new targets per P01-P05 unless canonical policy/discourse load supports more; P06 zero-new. Preserve exact C1 word band 500-800, 10 linked Q/A, exact reviews, source identity/exposures, competing perspectives, scope, source-method critique, normative bridge, counterargument and revision criteria.",
+    "c1_generation": {
+      "status": "calibrated_unit01_pass",
+      "passages": 6,
+      "questions": 60,
+      "answers": 60,
+      "completed_units": [
+        1
+      ],
+      "last_sequence": 6,
+      "canonical_blob": "6ca488f81788cefa49ef2e303bf6966cb4862a4c",
+      "unit01_theme": "research and evidence",
+      "unit01_genres": [
+        "academic-style synthesis",
+        "methods explanation",
+        "critique"
+      ],
+      "unit01_word_band": [
+        500,
+        800
+      ],
+      "unit01_word_counts": [
+        508,
+        529,
+        524,
+        567,
+        510,
+        534
+      ],
+      "unit01_frontier_lock": "reading/audit/french_c1_unit01_frontier_lock.json",
+      "unit01_calibration_review": "reading/audit/french_c1_unit01_calibration_review.json",
+      "accepted_default_new_targets_per_standard_passage": 4,
+      "accepted_default_is_hard_quota": false,
+      "unit02_plan": "reading/audit/french_c1_unit02_plan.json",
+      "unit02_target_probe": "reading/audit/french_c1_unit02_target_probe.json"
+    }
   },
   "urdu": {
     "state": "QUEUED",
@@ -403,9 +438,9 @@
   "next_actions": [
     "keep Arabic sealed unless canonical Arabic changes",
     "do not broadly regenerate French A1-B2",
-    "extract/validate canonical C1 standards and topic matrix after the B2 integrity seal",
-    "calibrate French C1 Unit01 before setting the C1 production default",
-    "continue generation-first through C1-C2 before the final whole-French multi-pass audit",
+    "generate French C1 Unit02 against the exact calibrated Unit01 lock",
+    "continue C1 generation-first using the calibrated conservative default as a default, not quota",
+    "defer final whole-French multi-pass audit until C2 generation completes",
     "keep Urdu unchanged while French is active unless explicitly reprioritized"
   ],
   "important_files": [
@@ -424,7 +459,11 @@
     "reading/audit/french_b2_unit06_frontier_lock.json",
     "reading/audit/french_b2_unit07_frontier_lock.json",
     "reading/audit/french_b2_generation_integrity.json",
-    "reading/audit/french_c1_readiness.json"
+    "reading/audit/french_c1_readiness.json",
+    "reading/audit/french_c1_unit01_calibration_review.json",
+    "reading/audit/french_c1_unit01_frontier_lock.json",
+    "reading/audit/french_c1_unit02_plan.json",
+    "reading/audit/french_c1_unit02_target_probe.json"
   ],
   "parallel_agent_rules": {
     "verify_live_main_before_write_batch": true,

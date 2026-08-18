@@ -1,12 +1,13 @@
 {
-  "status": "B2_PASS_C1_UNIT01_PENDING",
+  "status": "PASS_TO_C1_UNIT02",
   "date": "2026-08-17",
   "starting_c1_passages": 0,
-  "ending_c1_passages": 0,
+  "ending_c1_passages": 6,
   "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
-  "c1_blob": null,
+  "c1_blob": "6ca488f81788cefa49ef2e303bf6966cb4862a4c",
   "b2_generation_integrity_pass": true,
-  "c1_unit01_calibration_pass": false,
+  "c1_unit01_calibration_pass": true,
+  "c1_unit02_frontier_prepared": true,
   "completed_stages": [
     "complete_or_verify_b2_to_c1_prep",
     "prepare_french_c1_readiness",
@@ -16,7 +17,22 @@
     "generate_c1_unit01_calibration_preflight",
     "audit_c1_unit01_calibration",
     "lock_c1_unit01",
-    "restore_precalibration_c1_after_strict_failure"
+    "resolve_c1_unit02_plan",
+    "probe_c1_unit02_targets",
+    "sync_c1_unit01_to_unit02"
   ],
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py\", line 38, in main\n    run('resolve_french_c1_unit02_plan.py');stages.append('resolve_c1_unit02_plan')\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py\", line 12, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit02_plan.py\", line 47, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit02_plan.py\", line 42, in main\n    if conf:raise AssertionError(f'Ambiguous C1 Unit02 planning nodes: {[x[\"path\"] for x in top[:8]]}')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Ambiguous C1 Unit02 planning nodes: ['$.levels.B1[1]', '$.levels.C1[1]', '$.levels.A2[1]', '$.levels.B2[1]', '$.levels.C2[1]', '$.levels.A1[1]']\n"
+  "error": null,
+  "c1_word_band": [
+    500,
+    800
+  ],
+  "accepted_c1_default": 4,
+  "accepted_default_is_hard_quota": false,
+  "unit02_theme": "professional judgment",
+  "unit02_genres": [
+    "briefing",
+    "case analysis",
+    "recommendation"
+  ],
+  "remaining_fresh_source_terms": 430
 }

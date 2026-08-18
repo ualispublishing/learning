@@ -132,6 +132,24 @@ Remaining French generation:
 - [ ] C1: 60 passages.
 - [ ] C2: 60 passages.
 
+
+#### C1 Unit 01 — COMPLETE / CALIBRATION PASS
+- [x] Sequences 1–6 canonical; 6 passages / 60 Q / 60 A.
+- [x] Strict post-calibration review PASS.
+- [x] Exact C1 word band: `500–800`.
+- [x] 20 unique fresh targets; P06 zero-new.
+- [x] Conservative C1 production default accepted: `4` new targets per standard passage, **not a hard quota**.
+- [x] C1 Unit01 lock: `reading/audit/french_c1_unit01_frontier_lock.json`.
+
+#### C1 Unit 02 — IMMEDIATE NEXT
+- Theme: **professional judgment**.
+- Genres: **["briefing", "case analysis", "recommendation"]**.
+- [ ] Generate sequences 7–12 against exact C1 blob `6ca488f81788cefa49ef2e303bf6966cb4862a4c`.
+- [ ] Use default `4` fresh targets in P01–P05 unless the discourse load supports more; P06 zero-new.
+- [ ] Keep word band `500–800`, 10 linked Q/A, exact review forms and source/exposure identity.
+- [ ] Require C1-level scope, implicit assumptions, competing perspectives, source-method critique, normative bridge, counterargument and revision conditions.
+- [ ] Fail closed on lock drift, freshness/collision, schema/linkage, word band, reviews or source identity.
+
 ## Urdu — QUEUED
 - [x] A1 sequences 1–6 exist.
 - [ ] A1 sequences 7–60.
@@ -149,4 +167,4 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 
 ## Immediate next task
 
-**Calibrate French C1 Unit 01 from the canonical C1 standard and topic matrix after the B2 generation-integrity seal. Keep Arabic sealed.**
+**Generate French C1 Unit 02 / sequences 7–12 for `professional judgment` against C1 blob `6ca488f81788cefa49ef2e303bf6966cb4862a4c`. Keep Arabic sealed.**

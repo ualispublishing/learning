@@ -174,3 +174,18 @@ Urdu remains unchanged at six A1 calibration passages. Keep it paused while Fren
 ### Immediate frontier — French C1 Unit 01 calibration
 
 Read the canonical C1 passage standard and topic/genre matrix first. Derive the exact word band and production constraints; run an exhaustive freshness probe against all A1–B2 deliberate targets; choose a conservative calibration lexical load rather than copying B2 by assumption; generate sequences 1–6 with P06 zero-new and 10 linked Q/A; then run a strict post-calibration language/pedagogy/integrity review before setting the C1 production default.
+
+
+## French C1 Unit 01 — CALIBRATION PASS / CURRENT LOCK
+
+- Canonical C1 blob `6ca488f81788cefa49ef2e303bf6966cb4862a4c`.
+- 6 passages / 60 questions / 60 answers.
+- C1 word band `500–800`.
+- 20 fresh Unit01 targets; P06 zero-new.
+- strict review `reading/audit/french_c1_unit01_calibration_review.json` = PASS.
+- frontier lock `reading/audit/french_c1_unit01_frontier_lock.json` = PASS.
+- accepted conservative C1 default: `4` new targets per standard passage, not a hard quota.
+
+### Immediate frontier — French C1 Unit 02
+
+Theme: **professional judgment**. Genres: **["briefing", "case analysis", "recommendation"]**. Generate sequences 7–12 against exact C1 blob `6ca488f81788cefa49ef2e303bf6966cb4862a4c`. Use the calibrated default `4` fresh targets per P01–P05 unless canonical policy/discourse load supports more; P06 zero-new. Preserve `500–800` words, 10 linked Q/A, source identity/exposures, exact reviews, competing perspectives, scope, source-method critique, normative bridge, counterargument and revision conditions. Fail closed.
