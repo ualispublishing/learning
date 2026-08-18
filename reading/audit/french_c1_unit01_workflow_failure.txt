@@ -132,6 +132,10 @@
 === RUN prepare_french_c1_readiness.py ===
 {"status": "PASS", "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d", "c1_word_band": [500, 800], "matrix_matches": 3}
 === RUN resolve_french_c1_unit01_plan.py ===
+{"status": "PASS", "path": "$.levels.C1[0]", "theme": "research and evidence", "genres": ["academic-style synthesis", "methods explanation", "critique"], "word_band": [500, 800]}
+=== RUN probe_french_c1_unit01_targets.py ===
+{"status": "PASS", "fresh_count": 450, "prior_deliberate_targets": 550, "theme": "research and evidence", "word_band": [500, 800]}
+=== RUN select_french_c1_unit01_calibration_targets.py ===
 Traceback (most recent call last):
   File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py", line 26, in main
     run(name);stages.append(name.removesuffix('.py'))
@@ -142,13 +146,13 @@ Traceback (most recent call last):
   File "<frozen runpy>", line 287, in run_path
   File "<frozen runpy>", line 98, in _run_module_code
   File "<frozen runpy>", line 88, in _run_code
-  File "/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit01_plan.py", line 57, in <module>
+  File "/home/runner/work/learning/learning/reading/tools/select_french_c1_unit01_calibration_targets.py", line 55, in <module>
     if __name__=='__main__':main()
                             ^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit01_plan.py", line 52, in main
-    if conflicts:raise AssertionError(f'Ambiguous C1 Unit01 planning nodes at score {best}: {[x["path"] for x in top[:8]]}')
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: Ambiguous C1 Unit01 planning nodes at score 20: ['$.levels.B1[0]', '$.levels.A2[0]', '$.levels.B2[0]', '$.levels.C1[0]', '$.levels.C2[0]', '$.levels.A1[0]']
+  File "/home/runner/work/learning/learning/reading/tools/select_french_c1_unit01_calibration_targets.py", line 40, in main
+    if mins and max(mins)>4:raise AssertionError(f'Canonical C1 standard appears to require >4 new lexical targets per passage: {hints}; calibration load must be reviewed explicitly')
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Canonical C1 standard appears to require >4 new lexical targets per passage: [(7, 9, 'vocabulary nuance.\n\n### C1 — usually 7–9'), (6, 8, '6–8\nAdd stance, paragraph relation, cohesion, abstract vocabulary')]; calibration load must be reviewed explicitly
 
 {
   "status": "B2_PASS_C1_UNIT01_PENDING",
@@ -161,7 +165,9 @@ AssertionError: Ambiguous C1 Unit01 planning nodes at score 20: ['$.levels.B1[0]
   "c1_unit01_calibration_pass": false,
   "completed_stages": [
     "complete_or_verify_b2_to_c1_prep",
-    "prepare_french_c1_readiness"
+    "prepare_french_c1_readiness",
+    "resolve_french_c1_unit01_plan",
+    "probe_french_c1_unit01_targets"
   ],
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py\", line 26, in main\n    run(name);stages.append(name.removesuffix('.py'))\n    ^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py\", line 12, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit01_plan.py\", line 57, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit01_plan.py\", line 52, in main\n    if conflicts:raise AssertionError(f'Ambiguous C1 Unit01 planning nodes at score {best}: {[x[\"path\"] for x in top[:8]]}')\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Ambiguous C1 Unit01 planning nodes at score 20: ['$.levels.B1[0]', '$.levels.A2[0]', '$.levels.B2[0]', '$.levels.C1[0]', '$.levels.C2[0]', '$.levels.A1[0]']\n"
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py\", line 26, in main\n    run(name);stages.append(name.removesuffix('.py'))\n    ^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py\", line 12, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/select_french_c1_unit01_calibration_targets.py\", line 55, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/select_french_c1_unit01_calibration_targets.py\", line 40, in main\n    if mins and max(mins)>4:raise AssertionError(f'Canonical C1 standard appears to require >4 new lexical targets per passage: {hints}; calibration load must be reviewed explicitly')\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Canonical C1 standard appears to require >4 new lexical targets per passage: [(7, 9, 'vocabulary nuance.\\n\\n### C1 — usually 7–9'), (6, 8, '6–8\\nAdd stance, paragraph relation, cohesion, abstract vocabulary')]; calibration load must be reviewed explicitly\n"
 }

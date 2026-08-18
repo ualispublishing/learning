@@ -8,10 +8,10 @@ Traceback (most recent call last):
   File "<frozen runpy>", line 287, in run_path
   File "<frozen runpy>", line 98, in _run_module_code
   File "<frozen runpy>", line 88, in _run_code
-  File "/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit01_plan.py", line 57, in <module>
+  File "/home/runner/work/learning/learning/reading/tools/select_french_c1_unit01_calibration_targets.py", line 55, in <module>
     if __name__=='__main__':main()
                             ^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit01_plan.py", line 52, in main
-    if conflicts:raise AssertionError(f'Ambiguous C1 Unit01 planning nodes at score {best}: {[x["path"] for x in top[:8]]}')
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: Ambiguous C1 Unit01 planning nodes at score 20: ['$.levels.B1[0]', '$.levels.A2[0]', '$.levels.B2[0]', '$.levels.C1[0]', '$.levels.C2[0]', '$.levels.A1[0]']
+  File "/home/runner/work/learning/learning/reading/tools/select_french_c1_unit01_calibration_targets.py", line 40, in main
+    if mins and max(mins)>4:raise AssertionError(f'Canonical C1 standard appears to require >4 new lexical targets per passage: {hints}; calibration load must be reviewed explicitly')
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Canonical C1 standard appears to require >4 new lexical targets per passage: [(7, 9, 'vocabulary nuance.\n\n### C1 — usually 7–9'), (6, 8, '6–8\nAdd stance, paragraph relation, cohesion, abstract vocabulary')]; calibration load must be reviewed explicitly
