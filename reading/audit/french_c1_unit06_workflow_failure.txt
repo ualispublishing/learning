@@ -4,30 +4,32 @@
 {"status": "PASS", "unit": 6, "fresh_count": 350, "theme": "law, rights, and interpretation"}
 === RUN select_french_c1_unit06_targets.py ===
 {"status": "PASS", "groups": {"p01": ["agent", "présenter", "faute", "ignorer"], "p02": ["crime", "meurtre", "coupable", "jurer"], "p03": ["prison", "peine", "libérer", "vol"], "p04": ["enlever", "frapper", "flic", "attraper"], "p05": ["tenir", "lever", "remettre", "hors"]}}
-=== RUN generate_french_c1_unit06.py ===
+=== RUN generate_french_c1_unit06_retry.py ===
+{"status": "PASS", "c1_passages": 36, "word_counts": {"fr-c1-u06-p01": 534, "fr-c1-u06-p02": 509, "fr-c1-u06-p03": 544, "fr-c1-u06-p04": 510, "fr-c1-u06-p05": 518, "fr-c1-u06-p06": 525}}
+=== RUN audit_french_c1_unit_generation.py ===
 Traceback (most recent call last):
-  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06.py", line 36, in main
-    run_env('resolve_french_c1_unit_plan.py',6);stages.append('resolve_c1_unit06_plan');run_env('probe_french_c1_unit_targets.py',6);stages.append('probe_c1_unit06_targets');run('select_french_c1_unit06_targets.py');stages.append('select_c1_unit06_targets');run('generate_french_c1_unit06.py');generated=True;stages.append('generate_c1_unit06')
-                                                                                                                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06.py", line 37, in main
+    run_env('audit_french_c1_unit_generation.py',6);stages.append('audit_c1_unit06_generation');review=json.loads((AUD/'french_c1_unit06_generation_review.json').read_text())
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06.py", line 10, in run_env
+    try:run(name)
+        ^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06_retry.py", line 9, in run
+    return orig(name)
+           ^^^^^^^^^^
   File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06.py", line 7, in run
     def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')
                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<frozen runpy>", line 287, in run_path
   File "<frozen runpy>", line 98, in _run_module_code
   File "<frozen runpy>", line 88, in _run_code
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit06.py", line 81, in <module>
+  File "/home/runner/work/learning/learning/reading/tools/audit_french_c1_unit_generation.py", line 70, in <module>
     if __name__=='__main__':main()
                             ^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit06.py", line 75, in main
-    for s in specs():unit.append(mk(s,groups[s['id'][-3:]],reviews[s['id'][-3:]],rows,deck,lo,hi,plan['theme']))
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit06.py", line 53, in mk
-    paras=list(s['paras']);paras[1]+=' '+' '.join(USE[f] for f in forms);paras[2]+=' '+review_bridge(reviews);paras,text=fit(paras,lo,hi);P=base.prior(prior);new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,P) for f in reviews];ids={t['form']:t['id'] for t in new+rev};q,a=base.qa(qa_items(s,forms),ids)
-                                                                                                                         ^^^^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit06.py", line 43, in fit
-    if len(text.split())<lo:raise AssertionError(f'Unit06 below C1 minimum {len(text.split())} < {lo}')
-                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: Unit06 below C1 minimum 492 < 500
+  File "/home/runner/work/learning/learning/reading/tools/audit_french_c1_unit_generation.py", line 30, in main
+    if lock.get('status')!='PASS' or lock.get('last_sequence')!=prefix_n or lock.get('c1_canonical_blob')!=prefix_blob or lock.get('b2_canonical_blob')!=b2blob:raise AssertionError(f'previous C1 lock/prefix drift for Unit{U:02d}')
+                                                                                                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: previous C1 lock/prefix drift for Unit06
 
 {
   "status": "C1_UNIT06_PENDING",
@@ -41,7 +43,9 @@ AssertionError: Unit06 below C1 minimum 492 < 500
   "completed_stages": [
     "resolve_c1_unit06_plan",
     "probe_c1_unit06_targets",
-    "select_c1_unit06_targets"
+    "select_c1_unit06_targets",
+    "generate_c1_unit06",
+    "restore_preunit06_after_strict_failure"
   ],
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06.py\", line 36, in main\n    run_env('resolve_french_c1_unit_plan.py',6);stages.append('resolve_c1_unit06_plan');run_env('probe_french_c1_unit_targets.py',6);stages.append('probe_c1_unit06_targets');run('select_french_c1_unit06_targets.py');stages.append('select_c1_unit06_targets');run('generate_french_c1_unit06.py');generated=True;stages.append('generate_c1_unit06')\n                                                                                                                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06.py\", line 7, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit06.py\", line 81, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit06.py\", line 75, in main\n    for s in specs():unit.append(mk(s,groups[s['id'][-3:]],reviews[s['id'][-3:]],rows,deck,lo,hi,plan['theme']))\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit06.py\", line 53, in mk\n    paras=list(s['paras']);paras[1]+=' '+' '.join(USE[f] for f in forms);paras[2]+=' '+review_bridge(reviews);paras,text=fit(paras,lo,hi);P=base.prior(prior);new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,P) for f in reviews];ids={t['form']:t['id'] for t in new+rev};q,a=base.qa(qa_items(s,forms),ids)\n                                                                                                                         ^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit06.py\", line 43, in fit\n    if len(text.split())<lo:raise AssertionError(f'Unit06 below C1 minimum {len(text.split())} < {lo}')\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Unit06 below C1 minimum 492 < 500\n"
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06.py\", line 37, in main\n    run_env('audit_french_c1_unit_generation.py',6);stages.append('audit_c1_unit06_generation');review=json.loads((AUD/'french_c1_unit06_generation_review.json').read_text())\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06.py\", line 10, in run_env\n    try:run(name)\n        ^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06_retry.py\", line 9, in run\n    return orig(name)\n           ^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06.py\", line 7, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/audit_french_c1_unit_generation.py\", line 70, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/audit_french_c1_unit_generation.py\", line 30, in main\n    if lock.get('status')!='PASS' or lock.get('last_sequence')!=prefix_n or lock.get('c1_canonical_blob')!=prefix_blob or lock.get('b2_canonical_blob')!=b2blob:raise AssertionError(f'previous C1 lock/prefix drift for Unit{U:02d}')\n                                                                                                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: previous C1 lock/prefix drift for Unit06\n"
 }
