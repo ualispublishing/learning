@@ -1,47 +1,245 @@
-=== SERIAL C1 RUN complete_french_c1_unit08.py ===
+=== SERIAL C1 RUN complete_french_c1_unit08_retry.py ===
 === RUN resolve_french_c1_unit_plan.py ===
 {"status": "PASS", "unit": 8, "path": "$.levels.C1[7]", "theme": "economics, risk, and forecasting", "genres": ["analysis", "briefing", "scenario comparison"]}
 === RUN probe_french_c1_unit_targets.py ===
 {"status": "PASS", "unit": 8, "fresh_count": 310, "theme": "economics, risk, and forecasting"}
 === RUN select_french_c1_unit08_targets.py ===
-=== RUN generate_french_c1_unit08.py ===
+=== RUN generate_french_c1_unit08_retry.py ===
+{"status": "PASS", "c1_passages": 48, "word_counts": {"fr-c1-u08-p01": 526, "fr-c1-u08-p02": 518, "fr-c1-u08-p03": 511, "fr-c1-u08-p04": 505, "fr-c1-u08-p05": 529, "fr-c1-u08-p06": 533}}
+=== RUN audit_french_c1_unit_generation.py ===
+{
+  "status": "PASS",
+  "scope": "French C1 Unit 08 generation review",
+  "c1_source_prefix_blob": "2a5671b611d15547af51c99e19242460757ee7c6",
+  "c1_canonical_blob": "db848d9447849c178e6dae39f4474c905b974503",
+  "b2_canonical_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "theme": "economics, risk, and forecasting",
+  "genres": [
+    "analysis",
+    "briefing",
+    "scenario comparison"
+  ],
+  "word_band": [
+    500,
+    800
+  ],
+  "word_counts": [
+    526,
+    518,
+    511,
+    505,
+    529,
+    533
+  ],
+  "passages": 6,
+  "questions": 60,
+  "answers": 60,
+  "unique_new_target_ids": 20,
+  "unique_new_target_forms": 20,
+  "prior_collisions": 0,
+  "checkpoint_zero_new": true,
+  "question_type_counts": {
+    "argument_relation": 6,
+    "assumption": 6,
+    "cross_text_synthesis": 1,
+    "inference": 6,
+    "main_claim": 6,
+    "stance": 6,
+    "summary": 5,
+    "synthesis": 1,
+    "vocabulary_in_context": 23
+  },
+  "paired_groups": {
+    "fr-c1-u08-forecast-decision-viewpoints": 0.0632
+  },
+  "language_review": "PASS",
+  "pedagogical_review": "PASS",
+  "source_identity": "PASS",
+  "exposure_counts": "PASS",
+  "exact_reviews": "PASS",
+  "schema": "PASS",
+  "linkage": "PASS",
+  "accepted_c1_default_new_targets_per_standard_passage": 4,
+  "accepted_default_is_hard_quota": false,
+  "final_french_audit": "DEFERRED_UNTIL_C2_COMPLETE"
+}
+=== RUN lock_french_c1_unit_frontier.py ===
+{
+  "status": "PASS",
+  "scope": "French C1 Unit 08 frontier lock",
+  "b2_canonical_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "c1_canonical_blob": "db848d9447849c178e6dae39f4474c905b974503",
+  "passages": 48,
+  "questions": 480,
+  "answers": 480,
+  "completed_units": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "last_sequence": 48,
+  "unit08_theme": "economics, risk, and forecasting",
+  "unit08_genres": [
+    "analysis",
+    "briefing",
+    "scenario comparison"
+  ],
+  "unit08_word_band": [
+    500,
+    800
+  ],
+  "unit08_word_counts": [
+    526,
+    518,
+    511,
+    505,
+    529,
+    533
+  ],
+  "unit08_target_forms": [
+    "aujourd'hui",
+    "boulot",
+    "cher",
+    "combien",
+    "demain",
+    "dollar",
+    "espérer",
+    "jeu",
+    "mauvais",
+    "parier",
+    "pire",
+    "plein",
+    "presque",
+    "reste",
+    "seulement",
+    "tant",
+    "tard",
+    "tomber",
+    "toucher",
+    "vite"
+  ],
+  "unit08_target_groups": {
+    "p01": [
+      "aujourd'hui",
+      "demain",
+      "tard",
+      "vite"
+    ],
+    "p02": [
+      "combien",
+      "tant",
+      "seulement",
+      "presque"
+    ],
+    "p03": [
+      "cher",
+      "dollar",
+      "boulot",
+      "toucher"
+    ],
+    "p04": [
+      "jeu",
+      "parier",
+      "pire",
+      "espérer"
+    ],
+    "p05": [
+      "reste",
+      "tomber",
+      "plein",
+      "mauvais"
+    ]
+  },
+  "unit08_checkpoint_zero_new": true,
+  "accepted_c1_default_new_targets_per_standard_passage": 4,
+  "accepted_default_is_hard_quota": false,
+  "unit08_review_artifact": "reading/audit/french_c1_unit08_generation_review.json",
+  "note": "Safe continuation lock after C1 Unit08; not final French approval."
+}
+=== RUN resolve_french_c1_unit_plan.py ===
+{"status": "PASS", "unit": 9, "path": "$.levels.C1[8]", "theme": "history, memory, and narrative", "genres": ["historiographical essay", "source comparison", "reflection"]}
+=== RUN probe_french_c1_unit_targets.py ===
+{"status": "PASS", "unit": 9, "fresh_count": 290, "theme": "history, memory, and narrative"}
+=== RUN sync_french_c1_unit_frontier.py ===
+{"status": "PASS", "completed_unit": 8, "c1_passages": 48, "c1_blob": "db848d9447849c178e6dae39f4474c905b974503", "next_unit": 9, "next_theme": "history, memory, and narrative", "fresh_remaining": 290}
+{
+  "status": "PASS_TO_C1_UNIT09",
+  "date": "2026-08-17",
+  "starting_c1_passages": 42,
+  "ending_c1_passages": 48,
+  "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "c1_blob": "db848d9447849c178e6dae39f4474c905b974503",
+  "c1_unit08_pass": true,
+  "c1_unit09_frontier_prepared": true,
+  "completed_stages": [
+    "resolve_c1_unit08_plan",
+    "probe_c1_unit08_targets",
+    "select_c1_unit08_targets",
+    "generate_c1_unit08",
+    "audit_c1_unit08_generation",
+    "lock_c1_unit08",
+    "resolve_c1_unit09_plan",
+    "probe_c1_unit09_targets",
+    "sync_c1_unit08_to_unit09"
+  ],
+  "error": null,
+  "unit09_theme": "history, memory, and narrative",
+  "unit09_genres": [
+    "historiographical essay",
+    "source comparison",
+    "reflection"
+  ],
+  "remaining_fresh_source_terms": 290
+}
+=== SERIAL C1 RUN complete_french_c1_unit09.py ===
+=== RUN resolve_french_c1_unit_plan.py ===
+{"status": "PASS", "unit": 9, "path": "$.levels.C1[8]", "theme": "history, memory, and narrative", "genres": ["historiographical essay", "source comparison", "reflection"]}
+=== RUN probe_french_c1_unit_targets.py ===
+{"status": "PASS", "unit": 9, "fresh_count": 290, "theme": "history, memory, and narrative"}
+=== RUN select_french_c1_unit09_targets.py ===
+=== RUN generate_french_c1_unit09.py ===
 Traceback (most recent call last):
-  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit08.py", line 32, in main
-    env('resolve_french_c1_unit_plan.py',8);st.append('resolve_c1_unit08_plan');env('probe_french_c1_unit_targets.py',8);st.append('probe_c1_unit08_targets');run('select_french_c1_unit08_targets.py');st.append('select_c1_unit08_targets');run('generate_french_c1_unit08.py');gen=True;st.append('generate_c1_unit08');env('audit_french_c1_unit_generation.py',8);st.append('audit_c1_unit08_generation');env('lock_french_c1_unit_frontier.py',8);st.append('lock_c1_unit08');verify(h(C1));seal=True;prep(st);front=True
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit09.py", line 32, in main
+    env('resolve_french_c1_unit_plan.py',9);st.append('resolve_c1_unit09_plan');env('probe_french_c1_unit_targets.py',9);st.append('probe_c1_unit09_targets');run('select_french_c1_unit09_targets.py');st.append('select_c1_unit09_targets');run('generate_french_c1_unit09.py');gen=True;st.append('generate_c1_unit09');env('audit_french_c1_unit_generation.py',9);st.append('audit_c1_unit09_generation');env('lock_french_c1_unit_frontier.py',9);st.append('lock_c1_unit09');verify(h(C1));seal=True;prep(st);front=True
                                                                                                                                                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit08.py", line 7, in run
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit09.py", line 7, in run
     def run(n):print('=== RUN',n,'===');runpy.run_path(str(T/n),run_name='__main__')
                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<frozen runpy>", line 287, in run_path
   File "<frozen runpy>", line 98, in _run_module_code
   File "<frozen runpy>", line 88, in _run_code
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit08.py", line 47, in <module>
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit09.py", line 47, in <module>
     if __name__=='__main__':main()
                             ^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit08.py", line 42, in main
-    groups=s['passage_groups'];r=l['unit07_target_groups'];reviews={k:r[k] for k in ['p01','p02','p03','p04','p05']};deck=base.deck();lo,hi=s['word_band'];unit=[mk(x,groups[x['id'][-3:]],reviews[x['id'][-3:]],rows,deck,lo,hi,p['theme']) for x in specs()];unit.append(checkpoint(groups,deck,lo,hi,p['theme'],rows+unit));V=Draft202012Validator(json.loads(SCHEMA.read_text()))
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit09.py", line 42, in main
+    groups=s['passage_groups'];r=l['unit08_target_groups'];reviews={k:r[k] for k in ['p01','p02','p03','p04','p05']};deck=base.deck();lo,hi=s['word_band'];unit=[mk(x,groups[x['id'][-3:]],reviews[x['id'][-3:]],rows,deck,lo,hi,p['theme']) for x in specs()];unit.append(checkpoint(groups,deck,lo,hi,p['theme'],rows+unit));V=Draft202012Validator(json.loads(SCHEMA.read_text()))
                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit08.py", line 27, in mk
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit09.py", line 27, in mk
     ps=list(s['paras']);ps[1]+=' '+' '.join(USE[f] for f in forms);ps[2]+=' '+bridge(reviews);ps,text=fit(ps,lo,hi);P=base.prior(prior);new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,P) for f in reviews];ids={t['form']:t['id'] for t in new+rev};q,a=base.qa(qs(s,forms),ids)
                                                                                                       ^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit08.py", line 20, in fit
-    if not lo<=len(t.split())<=hi:raise AssertionError(f'Unit08 word band {len(t.split())} not {lo}-{hi}')
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit09.py", line 20, in fit
+    if not lo<=len(t.split())<=hi:raise AssertionError(f'Unit09 word band {len(t.split())} not {lo}-{hi}')
                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: Unit08 word band 461 not 500-800
+AssertionError: Unit09 word band 491 not 500-800
 
 {
-  "status": "C1_UNIT08_PENDING",
+  "status": "C1_UNIT09_PENDING",
   "date": "2026-08-17",
-  "starting_c1_passages": 42,
-  "ending_c1_passages": 42,
+  "starting_c1_passages": 48,
+  "ending_c1_passages": 48,
   "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
-  "c1_blob": "2a5671b611d15547af51c99e19242460757ee7c6",
-  "c1_unit08_pass": false,
-  "c1_unit09_frontier_prepared": false,
+  "c1_blob": "db848d9447849c178e6dae39f4474c905b974503",
+  "c1_unit09_pass": false,
+  "c1_unit10_frontier_prepared": false,
   "completed_stages": [
-    "resolve_c1_unit08_plan",
-    "probe_c1_unit08_targets",
-    "select_c1_unit08_targets"
+    "resolve_c1_unit09_plan",
+    "probe_c1_unit09_targets",
+    "select_c1_unit09_targets"
   ],
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit08.py\", line 32, in main\n    env('resolve_french_c1_unit_plan.py',8);st.append('resolve_c1_unit08_plan');env('probe_french_c1_unit_targets.py',8);st.append('probe_c1_unit08_targets');run('select_french_c1_unit08_targets.py');st.append('select_c1_unit08_targets');run('generate_french_c1_unit08.py');gen=True;st.append('generate_c1_unit08');env('audit_french_c1_unit_generation.py',8);st.append('audit_c1_unit08_generation');env('lock_french_c1_unit_frontier.py',8);st.append('lock_c1_unit08');verify(h(C1));seal=True;prep(st);front=True\n                                                                                                                                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit08.py\", line 7, in run\n    def run(n):print('=== RUN',n,'===');runpy.run_path(str(T/n),run_name='__main__')\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit08.py\", line 47, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit08.py\", line 42, in main\n    groups=s['passage_groups'];r=l['unit07_target_groups'];reviews={k:r[k] for k in ['p01','p02','p03','p04','p05']};deck=base.deck();lo,hi=s['word_band'];unit=[mk(x,groups[x['id'][-3:]],reviews[x['id'][-3:]],rows,deck,lo,hi,p['theme']) for x in specs()];unit.append(checkpoint(groups,deck,lo,hi,p['theme'],rows+unit));V=Draft202012Validator(json.loads(SCHEMA.read_text()))\n                                                                                                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit08.py\", line 27, in mk\n    ps=list(s['paras']);ps[1]+=' '+' '.join(USE[f] for f in forms);ps[2]+=' '+bridge(reviews);ps,text=fit(ps,lo,hi);P=base.prior(prior);new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,P) for f in reviews];ids={t['form']:t['id'] for t in new+rev};q,a=base.qa(qs(s,forms),ids)\n                                                                                                      ^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit08.py\", line 20, in fit\n    if not lo<=len(t.split())<=hi:raise AssertionError(f'Unit08 word band {len(t.split())} not {lo}-{hi}')\n                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Unit08 word band 461 not 500-800\n"
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit09.py\", line 32, in main\n    env('resolve_french_c1_unit_plan.py',9);st.append('resolve_c1_unit09_plan');env('probe_french_c1_unit_targets.py',9);st.append('probe_c1_unit09_targets');run('select_french_c1_unit09_targets.py');st.append('select_c1_unit09_targets');run('generate_french_c1_unit09.py');gen=True;st.append('generate_c1_unit09');env('audit_french_c1_unit_generation.py',9);st.append('audit_c1_unit09_generation');env('lock_french_c1_unit_frontier.py',9);st.append('lock_c1_unit09');verify(h(C1));seal=True;prep(st);front=True\n                                                                                                                                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit09.py\", line 7, in run\n    def run(n):print('=== RUN',n,'===');runpy.run_path(str(T/n),run_name='__main__')\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit09.py\", line 47, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit09.py\", line 42, in main\n    groups=s['passage_groups'];r=l['unit08_target_groups'];reviews={k:r[k] for k in ['p01','p02','p03','p04','p05']};deck=base.deck();lo,hi=s['word_band'];unit=[mk(x,groups[x['id'][-3:]],reviews[x['id'][-3:]],rows,deck,lo,hi,p['theme']) for x in specs()];unit.append(checkpoint(groups,deck,lo,hi,p['theme'],rows+unit));V=Draft202012Validator(json.loads(SCHEMA.read_text()))\n                                                                                                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit09.py\", line 27, in mk\n    ps=list(s['paras']);ps[1]+=' '+' '.join(USE[f] for f in forms);ps[2]+=' '+bridge(reviews);ps,text=fit(ps,lo,hi);P=base.prior(prior);new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,P) for f in reviews];ids={t['form']:t['id'] for t in new+rev};q,a=base.qa(qs(s,forms),ids)\n                                                                                                      ^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit09.py\", line 20, in fit\n    if not lo<=len(t.split())<=hi:raise AssertionError(f'Unit09 word band {len(t.split())} not {lo}-{hi}')\n                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Unit09 word band 491 not 500-800\n"
 }

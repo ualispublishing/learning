@@ -250,3 +250,13 @@ Theme: **literature and cultural criticism**. Genres: **["critical essay", "revi
 
 ### Immediate frontier — French C1 Unit 08
 Theme: **economics, risk, and forecasting**. Genres: **["analysis", "briefing", "scenario comparison"]**. Generate sequences 43–48 against `2a5671b611d15547af51c99e19242460757ee7c6` with `500–800` words, 10 linked Q/A, exact source/review guards and C1 reasoning requirements.
+
+
+## French C1 Unit 08 — COMPLETE / CURRENT LOCK
+
+- Canonical C1 blob `db848d9447849c178e6dae39f4474c905b974503`; 48 C1 passages / 480 Q / 480 A.
+- Unit08 strict review and frontier lock PASS.
+- calibrated default remains `4`, not a hard quota.
+
+### Immediate frontier — French C1 Unit 09
+Theme: **history, memory, and narrative**. Genres: **["historiographical essay", "source comparison", "reflection"]**. Generate sequences 49–54 against `db848d9447849c178e6dae39f4474c905b974503` with `500–800` words, 10 linked Q/A, exact source/review guards and C1 reasoning requirements.

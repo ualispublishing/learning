@@ -230,6 +230,19 @@ Remaining French generation:
 - [ ] Default `4` fresh targets in P01–P05, not a hard quota; P06 zero-new.
 - [ ] Preserve `500–800` words, 10 linked Q/A and all source/review/C1-quality guards.
 
+
+#### C1 Unit 08 — COMPLETE / GENERATION PASS
+- [x] Sequences 43–48 canonical; 6 passages / 60 Q / 60 A.
+- [x] Strict generation review and frontier lock PASS.
+- [x] Canonical C1 blob `db848d9447849c178e6dae39f4474c905b974503`.
+
+#### C1 Unit 09 — IMMEDIATE NEXT
+- Theme: **history, memory, and narrative**.
+- Genres: **["historiographical essay", "source comparison", "reflection"]**.
+- [ ] Generate sequences 49–54 against `db848d9447849c178e6dae39f4474c905b974503`.
+- [ ] Default `4` fresh targets in P01–P05, not a hard quota; P06 zero-new.
+- [ ] Preserve `500–800` words, 10 linked Q/A and all source/review/C1-quality guards.
+
 ## Urdu — QUEUED
 - [x] A1 sequences 1–6 exist.
 - [ ] A1 sequences 7–60.
