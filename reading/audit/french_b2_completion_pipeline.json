@@ -1,12 +1,12 @@
 {
   "status": "PARTIAL",
   "date": "2026-08-17",
-  "starting_b2_passages": 42,
-  "ending_b2_passages": 42,
-  "b2_blob": "5ff899452326f679b7c16b0ff33d8f38fa99719a",
+  "starting_b2_passages": 48,
+  "ending_b2_passages": 48,
+  "b2_blob": "7f4498a3766fb442d47e96bb430cb865a6c4b835",
   "completed_stages": [],
   "b2_generation_integrity_pass": false,
   "c1_readiness_pass": false,
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_b2_to_c1_frontier.py\", line 83, in main\n    run('generate_french_b2_unit08_retry.py');n=len(rows());assert n==48;stages.append('generate_unit08');ensure_lock(8);stages.append('lock_unit08')\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_b2_to_c1_frontier.py\", line 23, in run\n    print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_b2_unit08_retry.py\", line 60, in <module>\n    groups=ns['load_selection']()\n           ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_b2_unit08.py\", line 138, in load_selection\n    s=json.loads(SELECT.read_text(encoding='utf-8'))\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/pathlib.py\", line 1027, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/pathlib.py\", line 1013, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/learning/learning/reading/audit/french_b2_unit08_target_selection.json'\n",
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_b2_to_c1_frontier.py\", line 86, in main\n    run('generate_french_b2_unit09_retry.py');n=len(rows());assert n==54;stages.append('generate_unit09');ensure_lock(9);stages.append('lock_unit09')\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_b2_to_c1_frontier.py\", line 23, in run\n    print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 286, in run_path\n  File \"<frozen runpy>\", line 259, in _get_code_from_file\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_b2_unit09_retry.py\", line 43\n    row['word_count']=len(row['text'].split());row['sentence_count']=max(1,len(re.findall(r'[.!?](?:[»”\"])?',row['text']))\n                                                                        ^\nSyntaxError: '(' was never closed\n",
   "c1_error": null
 }
