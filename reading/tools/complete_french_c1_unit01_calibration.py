@@ -21,12 +21,11 @@ def main():
   b2audit=json.loads((AUD/'french_b2_generation_integrity.json').read_text(encoding='utf-8'));b2blob=hash_file(B2)
   if b2audit.get('status')!='PASS' or b2audit.get('canonical_blob')!=b2blob or b2audit.get('passages')!=60:raise AssertionError('B2 not sealed after completion orchestrator')
   b2_pass=True
-  # Re-run C1 prep in this checkout so no workflow-order timing is assumed.
   for name in ('prepare_french_c1_readiness.py','resolve_french_c1_unit01_plan.py','probe_french_c1_unit01_targets.py','select_french_c1_unit01_calibration_targets.py'):
    run(name);stages.append(name.removesuffix('.py'))
   current=load_rows(C1)
   if not current:
-   run('generate_french_c1_unit01_calibration.py');generated_here=True;stages.append('generate_c1_unit01_calibration')
+   run('generate_french_c1_unit01_calibration_retry.py');generated_here=True;stages.append('generate_c1_unit01_calibration_preflight')
   elif len(current)==6 and [r.get('id') for r in current]==[f'fr-c1-u01-p{i:02d}' for i in range(1,7)]:
    stages.append('reuse_existing_c1_unit01_for_strict_review')
   else:raise AssertionError(f'C1 canonical frontier unsupported for Unit01 calibration: {len(current)} rows')
@@ -42,13 +41,11 @@ def main():
   c1_pass=True
  except Exception:
   error=traceback.format_exc();print(error)
-  # A fresh calibration batch is not canonical unless the strict audit passed.
   if generated_here and not c1_pass:
    if before_exists:C1.write_bytes(before_bytes)
    elif C1.exists():C1.unlink()
    stages.append('restore_precalibration_c1_after_strict_failure')
   fail=AUD/'french_c1_unit01_pipeline_failure.txt';fail.write_text(error,encoding='utf-8')
- # Clean only diagnostics whose corresponding stage is truly sealed.
  if c1_pass:
   for pat in ('french_c1_*failure.txt','french_c1_unit01_pipeline_failure.txt'):
    for p in AUD.glob(pat):p.unlink(missing_ok=True)
