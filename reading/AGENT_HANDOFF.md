@@ -279,3 +279,10 @@ Theme: **C1 synthesis**. Genres: **["multi-section essay", "paired perspectives"
 
 ### Immediate frontier — French C2 Unit 01
 Resolve C2 standards and exact matrix node from canonical policy, then calibrate against the sealed C1 blob. Prefer validated top-3000 continuation over leftover top-1000 grammar/interjection tokens.
+
+
+### French C2 Unit 02 frontier
+- Unit 01 sealed; canonical C2 blob `3ad7e1ec6219ac4d2d41b283f976beb219836ad1`.
+- Next canonical matrix theme: **law and competing interpretations**; genres: dense analysis, case commentary, position comparison.
+- Fresh rank-1001+ continuation terms: 1974.
+- Do not weaken C2 word-band, source, exposure, review, linkage, reasoning, or zero-new checkpoint guards.

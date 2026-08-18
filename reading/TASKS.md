@@ -287,3 +287,10 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 ## Immediate next task
 
 **Generate French C1 Unit 02 / sequences 7–12 for `professional judgment` against C1 blob `6ca488f81788cefa49ef2e303bf6966cb4862a4c`. Keep Arabic sealed.**
+
+
+#### French C2 Unit 02 — IMMEDIATE NEXT
+- [x] Unit 01 sealed on `3ad7e1ec6219ac4d2d41b283f976beb219836ad1`.
+- [ ] Theme: **law and competing interpretations**; genres: dense analysis, case commentary, position comparison.
+- [ ] Select source-backed rank-1001+ targets from `1974` fresh continuation terms.
+- [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.
