@@ -270,3 +270,12 @@ Theme: **history, memory, and narrative**. Genres: **["historiographical essay",
 
 ### Immediate frontier — French C1 Unit 10
 Theme: **C1 synthesis**. Genres: **["multi-section essay", "paired perspectives", "checkpoint"]**. Generate sequences 55–60 against `76e43c57fdbd2f8e30c90263451ae2c23f50af55` with `500–800` words, 10 linked Q/A, exact source/review guards and C1 reasoning requirements.
+
+
+## French C1 — COMPLETE / GENERATION INTEGRITY LOCK
+- 60 C1 passages / 600 Q / 600 A; canonical blob `6f5bd912dfb550c064b54c8f7de4027bebf3786d`.
+- Full C1 generation-integrity artifact PASS with 200 unique new targets and ten zero-new checkpoints.
+- This is not final French approval; final language-wide review waits for C2.
+
+### Immediate frontier — French C2 Unit 01
+Resolve C2 standards and exact matrix node from canonical policy, then calibrate against the sealed C1 blob. Prefer validated top-3000 continuation over leftover top-1000 grammar/interjection tokens.

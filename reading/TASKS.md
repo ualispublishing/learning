@@ -256,6 +256,19 @@ Remaining French generation:
 - [ ] Default `4` fresh targets in P01–P05, not a hard quota; P06 zero-new.
 - [ ] Preserve `500–800` words, 10 linked Q/A and all source/review/C1-quality guards.
 
+
+#### French C1 — COMPLETE / GENERATION INTEGRITY PASS
+- [x] 60 passages / 600 Q / 600 A canonical.
+- [x] 200 unique deliberate C1 targets; zero prior-level collisions.
+- [x] All ten P06 checkpoints zero-new; schema/linkage/source/exposure/review/word-band integrity PASS.
+- [x] Canonical C1 blob `6f5bd912dfb550c064b54c8f7de4027bebf3786d`.
+- [ ] Final whole-French multi-pass audit remains deferred through C2 generation.
+
+#### French C2 Unit 01 — IMMEDIATE NEXT
+- [ ] Resolve exact C2 standard + `levels.C2[0]` matrix node against sealed C1.
+- [ ] Probe validated top-3000 continuation and calibrate C2 lexical load conservatively.
+- [ ] Preserve 10 linked Q/A, exact source/exposure/review guards, advanced C2 discourse, and zero-new P06.
+
 ## Urdu — QUEUED
 - [x] A1 sequences 1–6 exist.
 - [ ] A1 sequences 7–60.
