@@ -6,7 +6,7 @@
   "paused_languages": [
     "Urdu"
   ],
-  "phase": "Arabic remains sealed. French A1-B2 generation integrity is sealed; C1 Units 01-02 are canonical and guarded. C1 Unit03 is next.",
+  "phase": "Arabic remains sealed. French A1-B2 generation integrity is sealed; French C1 Units 01-03 are canonical and guarded. C1 Unit 04 is next.",
   "target_passages": 1080,
   "target_is_quota": false,
   "approved_passages": 360,
@@ -49,17 +49,17 @@
   },
   "french": {
     "state": "ACTIVE_GENERATION",
-    "canonical_passages": 252,
+    "canonical_passages": 258,
     "levels": {
       "a1": 60,
       "a2": 60,
       "b1": 60,
       "b2": 60,
-      "c1": 12,
+      "c1": 18,
       "c2": 0
     },
-    "questions": 2520,
-    "answers": 2520,
+    "questions": 2580,
+    "answers": 2580,
     "latest_audit_commit": "a784e4594b1bb487c51c882cf8b704c99331cd96",
     "generation_invariants": {
       "ten_questions_and_answers_per_passage": true,
@@ -385,18 +385,19 @@
         60
       ]
     },
-    "next_target": "Generate French C1 Unit 03 / sequences 13-18 against exact C1 blob 3dd6fc869920ed96cff6861d7498afe59e433947. Canonical theme: institutions and incentives; genres: [\"analysis\", \"commentary\", \"policy note\"]. Use calibrated default 4 fresh targets per P01-P05 unless canonical policy/discourse load supports more; P06 zero-new. Preserve word band 500-800, 10 linked Q/A, exact review forms, source identity/exposures and C1 reasoning.",
+    "next_target": "Generate French C1 Unit 04 / sequences 19-24 against exact C1 blob 826de7eb5a241ca1c95d54281696abd65dbc22a4. Canonical theme: language, identity, and society; genres: [\"essay\", \"analysis\", \"paired viewpoints\"]. Default 4 fresh targets per P01-P05, not a hard quota; P06 zero-new. Preserve word band 500-800, 10 linked Q/A, source/exposure identity, exact reviews and C1 reasoning quality.",
     "c1_generation": {
-      "status": "unit02_generation_pass",
-      "passages": 12,
-      "questions": 120,
-      "answers": 120,
+      "status": "unit03_generation_pass",
+      "passages": 18,
+      "questions": 180,
+      "answers": 180,
       "completed_units": [
         1,
-        2
+        2,
+        3
       ],
-      "last_sequence": 12,
-      "canonical_blob": "3dd6fc869920ed96cff6861d7498afe59e433947",
+      "last_sequence": 18,
+      "canonical_blob": "826de7eb5a241ca1c95d54281696abd65dbc22a4",
       "unit01_theme": "research and evidence",
       "unit01_genres": [
         "academic-style synthesis",
@@ -442,7 +443,11 @@
       "unit02_frontier_lock": "reading/audit/french_c1_unit02_frontier_lock.json",
       "unit02_generation_review": "reading/audit/french_c1_unit02_generation_review.json",
       "unit03_plan": "reading/audit/french_c1_unit03_plan.json",
-      "unit03_target_probe": "reading/audit/french_c1_unit03_target_probe.json"
+      "unit03_target_probe": "reading/audit/french_c1_unit03_target_probe.json",
+      "unit03_frontier_lock": "reading/audit/french_c1_unit03_frontier_lock.json",
+      "unit03_generation_review": "reading/audit/french_c1_unit03_generation_review.json",
+      "unit04_plan": "reading/audit/french_c1_unit04_plan.json",
+      "unit04_target_probe": "reading/audit/french_c1_unit04_target_probe.json"
     }
   },
   "urdu": {
@@ -460,9 +465,9 @@
   },
   "next_actions": [
     "keep Arabic sealed unless canonical Arabic changes",
-    "generate French C1 Unit03 against exact Unit02 frontier lock",
-    "preserve calibrated C1 default as a default, not quota",
-    "continue C1 generation-first through Unit10, then C2",
+    "generate French C1 Unit 04 against exact Unit03 frontier lock",
+    "preserve the calibrated C1 default as a default, not quota",
+    "continue C1 generation-first through Unit10",
     "defer final whole-French multi-pass audit until C2 generation completes"
   ],
   "important_files": [
@@ -489,7 +494,11 @@
     "reading/audit/french_c1_unit02_generation_review.json",
     "reading/audit/french_c1_unit02_frontier_lock.json",
     "reading/audit/french_c1_unit03_plan.json",
-    "reading/audit/french_c1_unit03_target_probe.json"
+    "reading/audit/french_c1_unit03_target_probe.json",
+    "reading/audit/french_c1_unit03_generation_review.json",
+    "reading/audit/french_c1_unit03_frontier_lock.json",
+    "reading/audit/french_c1_unit04_plan.json",
+    "reading/audit/french_c1_unit04_target_probe.json"
   ],
   "parallel_agent_rules": {
     "verify_live_main_before_write_batch": true,

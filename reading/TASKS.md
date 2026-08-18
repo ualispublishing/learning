@@ -165,6 +165,19 @@ Remaining French generation:
 - [ ] Preserve `500–800` words and 10 linked Q/A per passage.
 - [ ] Fail closed on source/blob drift, target collisions, source/exposure identity, exact reviews, schema/linkage or C1 reasoning quality.
 
+
+#### C1 Unit 03 — COMPLETE / GENERATION PASS
+- [x] Sequences 13–18 canonical; 6 passages / 60 Q / 60 A.
+- [x] Strict generation review and frontier lock PASS.
+- [x] Canonical C1 blob `826de7eb5a241ca1c95d54281696abd65dbc22a4`.
+
+#### C1 Unit 04 — IMMEDIATE NEXT
+- Theme: **language, identity, and society**.
+- Genres: **["essay", "analysis", "paired viewpoints"]**.
+- [ ] Generate sequences 19–24 against `826de7eb5a241ca1c95d54281696abd65dbc22a4`.
+- [ ] Default `4` fresh targets in P01–P05, not a hard quota; P06 zero-new.
+- [ ] Preserve `500–800` words, 10 linked Q/A and all source/review/C1-quality guards.
+
 ## Urdu — QUEUED
 - [x] A1 sequences 1–6 exist.
 - [ ] A1 sequences 7–60.

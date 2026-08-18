@@ -200,3 +200,13 @@ Theme: **professional judgment**. Genres: **["briefing", "case analysis", "recom
 
 ### Immediate frontier — French C1 Unit 03
 Theme: **institutions and incentives**. Genres: **["analysis", "commentary", "policy note"]**. Generate sequences 13–18 against `3dd6fc869920ed96cff6861d7498afe59e433947` with `500–800` words, 10 linked Q/A, exact source/review guards, P06 zero-new and full C1 reasoning requirements.
+
+
+## French C1 Unit 03 — COMPLETE / CURRENT LOCK
+
+- Canonical C1 blob `826de7eb5a241ca1c95d54281696abd65dbc22a4`; 18 C1 passages / 180 Q / 180 A.
+- Unit03 strict review and frontier lock PASS.
+- calibrated default remains `4`, not a hard quota.
+
+### Immediate frontier — French C1 Unit 04
+Theme: **language, identity, and society**. Genres: **["essay", "analysis", "paired viewpoints"]**. Generate sequences 19–24 against `826de7eb5a241ca1c95d54281696abd65dbc22a4` with `500–800` words, 10 linked Q/A, exact source/review guards and C1 reasoning requirements.
