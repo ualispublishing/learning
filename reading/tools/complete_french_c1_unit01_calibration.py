@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Serialize B2 seal -> C1 Unit01 calibration -> calibrated Unit02 frontier.
 
-A newly generated C1 Unit01 is restored only if its own strict post-calibration
-audit/frontier lock fails. Once that lock passes, Unit01 is canonical and is
-preserved even if downstream Unit02 plan/probe/sync preparation later fails.
+When later C1 units already exist, this script becomes a read-only dependency
+verifier for the sealed first-six-passage prefix and exits without rewinding
+STATUS/TASKS/HANDOFF. A newly generated Unit01 is restored only if its own strict
+audit/frontier lock fails.
 """
 from __future__ import annotations
 import json,runpy,subprocess,sys,traceback
@@ -15,8 +16,19 @@ def load_rows(path):
  if not path.exists():return []
  return [json.loads(x) for x in path.read_text(encoding='utf-8').splitlines() if x.strip()]
 def hash_file(path):return subprocess.check_output(['git','hash-object',str(path)],text=True).strip() if path.exists() else None
+def prefix_blob(path,n):
+ lines=[x for x in path.read_text(encoding='utf-8').splitlines() if x.strip()]
+ text='\n'.join(lines[:n])+'\n'
+ return subprocess.check_output(['git','hash-object','--stdin'],input=text,text=True).strip()
 def main():
  AUD.mkdir(parents=True,exist_ok=True);before_exists=C1.exists();before_bytes=C1.read_bytes() if before_exists else None;before_rows=len(load_rows(C1));stages=[];generated_here=False;b2_pass=False;unit01_sealed=False;frontier_pass=False;error=None
+ # Later-unit dependency mode: verify the sealed Unit01 prefix and do nothing else.
+ if before_rows>6:
+  lock=json.loads((AUD/'french_c1_unit01_frontier_lock.json').read_text(encoding='utf-8'));review=json.loads((AUD/'french_c1_unit01_calibration_review.json').read_text(encoding='utf-8'));b2blob=hash_file(B2);pblob=prefix_blob(C1,6)
+  if lock.get('status')!='PASS' or lock.get('last_sequence')!=6 or lock.get('c1_canonical_blob')!=pblob or lock.get('b2_canonical_blob')!=b2blob:raise AssertionError('sealed C1 Unit01 prefix/lock mismatch in dependency mode')
+  if review.get('status')!='PASS' or review.get('c1_canonical_blob')!=pblob:raise AssertionError('C1 Unit01 calibration review/prefix mismatch in dependency mode')
+  result={'status':'DEPENDENCY_PASS','date':'2026-08-17','starting_c1_passages':before_rows,'ending_c1_passages':before_rows,'b2_blob':b2blob,'c1_blob':hash_file(C1),'c1_unit01_prefix_blob':pblob,'c1_unit01_calibration_pass':True,'completed_stages':['verify_existing_sealed_c1_unit01_prefix'],'accepted_c1_default':lock['accepted_c1_default_new_targets_per_standard_passage'],'accepted_default_is_hard_quota':False,'error':None}
+  OUT.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');print(json.dumps(result,ensure_ascii=False,indent=2));return
  try:
   run('complete_french_b2_to_c1_frontier.py');stages.append('complete_or_verify_b2_to_c1_prep')
   b2audit=json.loads((AUD/'french_b2_generation_integrity.json').read_text(encoding='utf-8'));b2blob=hash_file(B2)
@@ -27,8 +39,7 @@ def main():
   current=load_rows(C1)
   if not current:
    run('generate_french_c1_unit01_calibration_retry.py');generated_here=True;stages.append('generate_c1_unit01_calibration_preflight')
-  elif len(current)==6 and [r.get('id') for r in current]==[f'fr-c1-u01-p{i:02d}' for i in range(1,7)]:
-   stages.append('reuse_existing_c1_unit01_for_strict_review')
+  elif len(current)==6 and [r.get('id') for r in current]==[f'fr-c1-u01-p{i:02d}' for i in range(1,7)]:stages.append('reuse_existing_c1_unit01_for_strict_review')
   else:raise AssertionError(f'C1 canonical frontier unsupported for Unit01 calibration: {len(current)} rows')
   run('audit_french_c1_unit01_calibration.py');stages.append('audit_c1_unit01_calibration')
   review=json.loads((AUD/'french_c1_unit01_calibration_review.json').read_text(encoding='utf-8'));c1blob=hash_file(C1)
@@ -37,27 +48,19 @@ def main():
   lock=json.loads((AUD/'french_c1_unit01_frontier_lock.json').read_text(encoding='utf-8'))
   if lock.get('status')!='PASS' or lock.get('c1_canonical_blob')!=c1blob:raise AssertionError('C1 Unit01 lock/live mismatch')
   unit01_sealed=True
-  run('resolve_french_c1_unit02_plan.py');stages.append('resolve_c1_unit02_plan')
-  run('probe_french_c1_unit02_targets.py');stages.append('probe_c1_unit02_targets')
-  run('sync_french_c1_unit01_frontier.py');stages.append('sync_c1_unit01_to_unit02')
-  frontier_pass=True
+  run('resolve_french_c1_unit02_plan.py');stages.append('resolve_c1_unit02_plan');run('probe_french_c1_unit02_targets.py');stages.append('probe_c1_unit02_targets');run('sync_french_c1_unit01_frontier.py');stages.append('sync_c1_unit01_to_unit02');frontier_pass=True
  except Exception:
   error=traceback.format_exc();print(error)
-  # Roll back only if Unit01 itself never achieved a verified strict lock.
   if generated_here and not unit01_sealed:
    if before_exists:C1.write_bytes(before_bytes)
    elif C1.exists():C1.unlink()
    stages.append('restore_precalibration_c1_after_strict_failure')
-  elif unit01_sealed:
-   stages.append('preserve_sealed_c1_unit01_despite_downstream_prep_failure')
-  fail=AUD/'french_c1_unit01_pipeline_failure.txt';fail.write_text(error,encoding='utf-8')
+  elif unit01_sealed:stages.append('preserve_sealed_c1_unit01_despite_downstream_prep_failure')
+  (AUD/'french_c1_unit01_pipeline_failure.txt').write_text(error,encoding='utf-8')
  if frontier_pass:
   for pat in ('french_c1_*failure.txt','french_c1_unit01_pipeline_failure.txt'):
    for p in AUD.glob(pat):p.unlink(missing_ok=True)
- if frontier_pass:status='PASS_TO_C1_UNIT02'
- elif unit01_sealed:status='C1_UNIT01_PASS_UNIT02_PREP_PENDING'
- elif b2_pass:status='B2_PASS_C1_UNIT01_PENDING'
- else:status='PARTIAL'
+ status='PASS_TO_C1_UNIT02' if frontier_pass else ('C1_UNIT01_PASS_UNIT02_PREP_PENDING' if unit01_sealed else ('B2_PASS_C1_UNIT01_PENDING' if b2_pass else 'PARTIAL'))
  result={'status':status,'date':'2026-08-17','starting_c1_passages':before_rows,'ending_c1_passages':len(load_rows(C1)),'b2_blob':hash_file(B2),'c1_blob':hash_file(C1),'b2_generation_integrity_pass':b2_pass,'c1_unit01_calibration_pass':unit01_sealed,'c1_unit02_frontier_prepared':frontier_pass,'completed_stages':stages,'error':error}
  if unit01_sealed:
   review=json.loads((AUD/'french_c1_unit01_calibration_review.json').read_text(encoding='utf-8'));result.update({'c1_word_band':review['word_band'],'accepted_c1_default':review['accepted_c1_default_new_targets_per_standard_passage'],'accepted_default_is_hard_quota':review['accepted_default_is_hard_quota']})
