@@ -12,7 +12,9 @@ def main():
  fresh={x['form']:x for x in probe['fresh']};selected=[];used=set()
  for slot,form in SELECTION:
   if form not in fresh:raise AssertionError(f'Unit07 curated target not fresh/source-backed: {form}')
-  if form in used:raise AssertionError('duplicate Unit07 target');used.add(form);x=dict(fresh[form]);x.update({'slot':slot,'semantic_fallback':False,'pedagogical_content_word':True});selected.append(x)
+  if form in used:raise AssertionError('duplicate Unit07 target')
+  used.add(form)
+  x=dict(fresh[form]);x.update({'slot':slot,'semantic_fallback':False,'pedagogical_content_word':True});selected.append(x)
  groups={k:[x['form'] for x in selected if x['slot'].startswith(k+'_')] for k in ['p01','p02','p03','p04','p05']}
  if len(selected)!=20 or any(len(v)!=4 for v in groups.values()):raise AssertionError('Unit07 target structure failure')
  OUT.write_text(json.dumps({'status':'PASS','scope':'French C1 Unit07 pedagogical target selection','b2_canonical_blob':b2,'c1_source_blob':c1,'theme':plan['theme'],'genres':plan['genres'],'word_band':[plan['c1_word_min'],plan['c1_word_max']],'new_targets_per_standard_passage':4,'default_is_hard_quota':False,'selected_count':20,'selected':selected,'passage_groups':groups,'semantic_fallback_count':0,'pedagogical_filter':'literary memory/interiority, tone, historical-symbolic figures, performance culture, and close-reading spatial/form vocabulary'},ensure_ascii=False,indent=2)+'\n');print(json.dumps({'status':'PASS','groups':groups},ensure_ascii=False))
