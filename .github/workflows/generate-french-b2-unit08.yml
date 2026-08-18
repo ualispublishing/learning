@@ -5,6 +5,8 @@ on:
     paths:
       - 'reading/tools/generate_french_b2_unit08.py'
       - 'reading/tools/generate_french_b2_unit08_retry.py'
+      - 'reading/tools/probe_french_b2_unit08_targets.py'
+      - 'reading/tools/select_french_b2_unit08_targets.py'
       - '.github/workflows/generate-french-b2-unit08.yml'
 permissions:
   contents: write
@@ -72,7 +74,8 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/french/b2/passages.jsonl
+          git add reading/french/b2/passages.jsonl reading/audit/french_b2_unit08_target_probe.json reading/audit/french_b2_unit08_target_selection.json
+          git rm -f reading/audit/french_b2_unit08_generation_failure.txt 2>/dev/null || true
           git diff --cached --quiet && exit 0
           git commit -m 'Generate French B2 Unit 08 [skip ci]'
           git fetch origin main
