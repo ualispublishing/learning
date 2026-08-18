@@ -36,7 +36,7 @@ def main():
    if lock3.get('status')!='PASS' or lock3.get('last_sequence')!=18 or lock3.get('c1_canonical_blob')!=h(C1):raise AssertionError('Unit03 dependency not sealed')
    run_env('resolve_french_c1_unit_plan.py',4);stages.append('resolve_c1_unit04_plan');run_env('probe_french_c1_unit_targets.py',4);stages.append('probe_c1_unit04_targets');run('select_french_c1_unit04_targets.py');stages.append('select_c1_unit04_targets')
    if len(rows())!=18:raise AssertionError('Unit04 generation requires 18-row C1 frontier')
-   run('generate_french_c1_unit04.py');generated=True;stages.append('generate_c1_unit04')
+   run('generate_french_c1_unit04_retry.py');generated=True;stages.append('generate_c1_unit04_quality_preflight')
    run_env('audit_french_c1_unit_generation.py',4);stages.append('audit_c1_unit04_generation');review=json.loads((AUD/'french_c1_unit04_generation_review.json').read_text(encoding='utf-8'))
    if review.get('status')!='PASS' or review.get('c1_canonical_blob')!=h(C1):raise AssertionError('Unit04 audit/live mismatch')
    run_env('lock_french_c1_unit_frontier.py',4);stages.append('lock_c1_unit04');lock4=json.loads((AUD/'french_c1_unit04_frontier_lock.json').read_text(encoding='utf-8'))
