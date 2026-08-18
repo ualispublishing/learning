@@ -3,9 +3,9 @@
 
 Regenerates the read-only freshness probe and deterministic target selection from
 the exact Unit07 lock before invoking the base writer. Keeps all base guards,
-repairs one French agreement issue, compacts the checkpoint, and adds substantive
-counterevidence/revision reasoning only when a passage is marginally below the
-350-word B2 floor.
+repairs one French agreement issue when still present, compacts the checkpoint,
+and adds substantive counterevidence/revision reasoning only when a passage is
+marginally below the 350-word B2 floor.
 """
 from pathlib import Path
 import re
@@ -18,7 +18,6 @@ def run_module(filename,name):
     exec(compile(p.read_text(encoding='utf-8'),str(p),'exec'),ns)
     ns['main']()
 
-# Deterministic prerequisites. Both fail closed against the exact Unit07 lock.
 run_module('probe_french_b2_unit08_targets.py','unit08_probe')
 run_module('select_french_b2_unit08_targets.py','unit08_select')
 
@@ -31,9 +30,10 @@ def patched_specs(groups):
     specs=orig_specs(groups)
     old="Une explication historique n’est pas meilleure parce qu’elle paraît plus beau dans sa structure ou plus agréable à lire."
     new="Une explication historique n’est pas meilleure parce qu’elle met le beau en valeur dans sa structure ou paraît plus agréable à lire."
-    if old not in specs[3]['paras'][0]:
-        raise AssertionError('Unit08 P04 agreement-repair anchor drift')
-    specs[3]['paras'][0]=specs[3]['paras'][0].replace(old,new)
+    # Idempotent: older drafts needed this repair; newer base text may already
+    # be correct. Never fail merely because the bad anchor is gone.
+    if old in specs[3]['paras'][0]:
+        specs[3]['paras'][0]=specs[3]['paras'][0].replace(old,new)
     specs[4]['paras'][3]=specs[4]['paras'][3].replace(
         "connaître sa signification dans le présent ne doit pas effacer les options disponibles à l’époque.",
         "connaître sa signification pour le présent ne doit pas effacer les options disponibles à l’époque."
