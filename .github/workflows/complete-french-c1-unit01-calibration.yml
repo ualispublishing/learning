@@ -3,7 +3,13 @@ on:
   workflow_dispatch:
   push:
     paths:
+      - 'reading/audit/french_c1_readiness.json'
       - 'reading/tools/complete_french_c1_unit01_calibration.py'
+      - 'reading/tools/resolve_french_c1_unit01_plan.py'
+      - 'reading/tools/probe_french_c1_unit01_targets.py'
+      - 'reading/tools/select_french_c1_unit01_calibration_targets.py'
+      - 'reading/tools/generate_french_c1_unit01_calibration.py'
+      - 'reading/tools/audit_french_c1_unit01_calibration.py'
       - '.github/workflows/complete-french-c1-unit01-calibration.yml'
 concurrency:
   group: french-c1-canonical-writer
@@ -36,7 +42,8 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/french/b2/passages.jsonl reading/french/c1/passages.jsonl reading/audit reading/STATUS.json reading/TASKS.md reading/AGENT_HANDOFF.md
+          git add reading/french/b2/passages.jsonl reading/audit reading/STATUS.json reading/TASKS.md reading/AGENT_HANDOFF.md
+          [ -f reading/french/c1/passages.jsonl ] && git add reading/french/c1/passages.jsonl || true
           git diff --cached --quiet && exit 0
           git commit -m 'Complete guarded French C1 Unit 01 calibration pipeline [skip ci]'
           git fetch origin main
