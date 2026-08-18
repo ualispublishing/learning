@@ -3,6 +3,7 @@ on:
   workflow_dispatch:
   push:
     paths:
+      - 'reading/french/b2/passages.jsonl'
       - 'reading/tools/audit_french_b2_generation_integrity.py'
       - '.github/workflows/audit-french-b2-generation-integrity.yml'
 permissions:
@@ -44,6 +45,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add reading/audit/french_b2_generation_integrity.json
+          git rm -f reading/audit/french_b2_generation_integrity_failure.txt 2>/dev/null || true
           git diff --cached --quiet && exit 0
           git commit -m 'Seal French B2 generation integrity [skip ci]'
           git fetch origin main
