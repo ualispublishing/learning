@@ -1,0 +1,16 @@
+{
+  "status": "C1_UNIT06_PENDING",
+  "date": "2026-08-17",
+  "starting_c1_passages": 30,
+  "ending_c1_passages": 30,
+  "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "c1_blob": "26c09727e67f88bc5fcaf17440ce145df48b4d4b",
+  "c1_unit06_pass": false,
+  "c1_unit07_frontier_prepared": false,
+  "completed_stages": [
+    "resolve_c1_unit06_plan",
+    "probe_c1_unit06_targets",
+    "select_c1_unit06_targets"
+  ],
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06.py\", line 36, in main\n    run_env('resolve_french_c1_unit_plan.py',6);stages.append('resolve_c1_unit06_plan');run_env('probe_french_c1_unit_targets.py',6);stages.append('probe_c1_unit06_targets');run('select_french_c1_unit06_targets.py');stages.append('select_c1_unit06_targets');run('generate_french_c1_unit06.py');generated=True;stages.append('generate_c1_unit06')\n                                                                                                                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06.py\", line 7, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit06.py\", line 81, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit06.py\", line 75, in main\n    for s in specs():unit.append(mk(s,groups[s['id'][-3:]],reviews[s['id'][-3:]],rows,deck,lo,hi,plan['theme']))\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit06.py\", line 53, in mk\n    paras=list(s['paras']);paras[1]+=' '+' '.join(USE[f] for f in forms);paras[2]+=' '+review_bridge(reviews);paras,text=fit(paras,lo,hi);P=base.prior(prior);new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,P) for f in reviews];ids={t['form']:t['id'] for t in new+rev};q,a=base.qa(qa_items(s,forms),ids)\n                                                                                                                         ^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit06.py\", line 43, in fit\n    if len(text.split())<lo:raise AssertionError(f'Unit06 below C1 minimum {len(text.split())} < {lo}')\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Unit06 below C1 minimum 492 < 500\n"
+}
