@@ -3,6 +3,7 @@ on:
   workflow_dispatch:
   push:
     paths:
+      - 'reading/audit/french_b2_generation_integrity.json'
       - 'reading/tools/complete_french_b2_to_c1_frontier.py'
       - '.github/workflows/complete-french-b2-to-c1-frontier.yml'
 concurrency:
@@ -23,8 +24,8 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          # Retry from the exact live canonical frontier; the Python orchestrator
-          # decides whether Unit08, Unit09, Unit10, or only sealing work remains.
+          # At a 60-passage sealed frontier this verifies the existing B2 seal,
+          # extracts C1 policy/readiness, and synchronizes durable state.
           python reading/tools/complete_french_b2_to_c1_frontier.py 2>&1 | tee /tmp/french_b2_completion_pipeline.log
       - name: Preserve unexpected orchestrator stderr
         if: failure()
