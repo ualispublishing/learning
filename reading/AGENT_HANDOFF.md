@@ -240,3 +240,13 @@ Theme: **law, rights, and interpretation**. Genres: **["case-style explanation",
 
 ### Immediate frontier — French C1 Unit 07
 Theme: **literature and cultural criticism**. Genres: **["critical essay", "review", "close-reading style prose"]**. Generate sequences 37–42 against `c3aee049cf6bdbdadf6639d132fcfc061481a3c9` with `500–800` words, 10 linked Q/A, exact source/review guards and C1 reasoning requirements.
+
+
+## French C1 Unit 07 — COMPLETE / CURRENT LOCK
+
+- Canonical C1 blob `2a5671b611d15547af51c99e19242460757ee7c6`; 42 C1 passages / 420 Q / 420 A.
+- Unit07 strict review and frontier lock PASS.
+- calibrated default remains `4`, not a hard quota.
+
+### Immediate frontier — French C1 Unit 08
+Theme: **economics, risk, and forecasting**. Genres: **["analysis", "briefing", "scenario comparison"]**. Generate sequences 43–48 against `2a5671b611d15547af51c99e19242460757ee7c6` with `500–800` words, 10 linked Q/A, exact source/review guards and C1 reasoning requirements.

@@ -217,6 +217,19 @@ Remaining French generation:
 - [ ] Default `4` fresh targets in P01–P05, not a hard quota; P06 zero-new.
 - [ ] Preserve `500–800` words, 10 linked Q/A and all source/review/C1-quality guards.
 
+
+#### C1 Unit 07 — COMPLETE / GENERATION PASS
+- [x] Sequences 37–42 canonical; 6 passages / 60 Q / 60 A.
+- [x] Strict generation review and frontier lock PASS.
+- [x] Canonical C1 blob `2a5671b611d15547af51c99e19242460757ee7c6`.
+
+#### C1 Unit 08 — IMMEDIATE NEXT
+- Theme: **economics, risk, and forecasting**.
+- Genres: **["analysis", "briefing", "scenario comparison"]**.
+- [ ] Generate sequences 43–48 against `2a5671b611d15547af51c99e19242460757ee7c6`.
+- [ ] Default `4` fresh targets in P01–P05, not a hard quota; P06 zero-new.
+- [ ] Preserve `500–800` words, 10 linked Q/A and all source/review/C1-quality guards.
+
 ## Urdu — QUEUED
 - [x] A1 sequences 1–6 exist.
 - [ ] A1 sequences 7–60.
