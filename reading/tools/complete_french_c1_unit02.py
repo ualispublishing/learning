@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Serialize calibrated Unit01 -> guarded C1 Unit02 -> Unit03 frontier.
 
-A freshly generated Unit02 is restored only if its own strict review/frontier lock
-fails. Once Unit02 is locked it remains canonical even if Unit03 preparation
-later fails.
+When later C1 units already exist, verify the sealed first-twelve-passage prefix
+and exit without replaying earlier units or rewinding durable state. A freshly
+generated Unit02 is restored only if its own strict review/frontier lock fails.
 """
 from __future__ import annotations
 import json,runpy,subprocess,sys,traceback
@@ -14,8 +14,16 @@ def rows():
  if not C1.exists():return []
  return [json.loads(x) for x in C1.read_text(encoding='utf-8').splitlines() if x.strip()]
 def h(p):return subprocess.check_output(['git','hash-object',str(p)],text=True).strip() if p.exists() else None
+def prefix_blob(n):
+ lines=[x for x in C1.read_text(encoding='utf-8').splitlines() if x.strip()];text='\n'.join(lines[:n])+'\n'
+ return subprocess.check_output(['git','hash-object','--stdin'],input=text,text=True).strip()
 def main():
  AUD.mkdir(parents=True,exist_ok=True);before=C1.read_bytes() if C1.exists() else None;before_exists=C1.exists();before_n=len(rows());generated=False;unit02_sealed=False;frontier_pass=False;error=None;stages=[]
+ if before_n>12:
+  lock=json.loads((AUD/'french_c1_unit02_frontier_lock.json').read_text(encoding='utf-8'));review=json.loads((AUD/'french_c1_unit02_generation_review.json').read_text(encoding='utf-8'));pblob=prefix_blob(12);b2blob=h(B2)
+  if lock.get('status')!='PASS' or lock.get('last_sequence')!=12 or lock.get('c1_canonical_blob')!=pblob or lock.get('b2_canonical_blob')!=b2blob:raise AssertionError('sealed C1 Unit02 prefix/lock mismatch in dependency mode')
+  if review.get('status')!='PASS' or review.get('c1_canonical_blob')!=pblob:raise AssertionError('C1 Unit02 review/prefix mismatch in dependency mode')
+  result={'status':'DEPENDENCY_PASS','date':'2026-08-17','starting_c1_passages':before_n,'ending_c1_passages':before_n,'b2_blob':b2blob,'c1_blob':h(C1),'c1_unit02_prefix_blob':pblob,'c1_unit02_pass':True,'completed_stages':['verify_existing_sealed_c1_unit02_prefix'],'accepted_c1_default':lock['accepted_c1_default_new_targets_per_standard_passage'],'default_is_hard_quota':False,'error':None};OUT.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');print(json.dumps(result,ensure_ascii=False,indent=2));return
  try:
   run('complete_french_c1_unit01_calibration.py');stages.append('complete_or_verify_c1_unit01')
   lock1=json.loads((AUD/'french_c1_unit01_frontier_lock.json').read_text(encoding='utf-8'))
@@ -34,9 +42,7 @@ def main():
   lock2=json.loads((AUD/'french_c1_unit02_frontier_lock.json').read_text(encoding='utf-8'))
   if lock2.get('status')!='PASS' or lock2.get('c1_canonical_blob')!=h(C1):raise AssertionError('Unit02 lock/live mismatch')
   unit02_sealed=True
-  run('resolve_french_c1_unit03_plan.py');stages.append('resolve_c1_unit03_plan')
-  run('probe_french_c1_unit03_targets.py');stages.append('probe_c1_unit03_targets')
-  run('sync_french_c1_unit02_frontier.py');stages.append('sync_c1_unit02_to_unit03');frontier_pass=True
+  run('resolve_french_c1_unit03_plan.py');stages.append('resolve_c1_unit03_plan');run('probe_french_c1_unit03_targets.py');stages.append('probe_c1_unit03_targets');run('sync_french_c1_unit02_frontier.py');stages.append('sync_c1_unit02_to_unit03');frontier_pass=True
  except Exception:
   error=traceback.format_exc();print(error)
   if generated and not unit02_sealed:
