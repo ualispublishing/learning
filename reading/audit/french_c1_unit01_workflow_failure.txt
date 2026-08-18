@@ -1,0 +1,167 @@
+=== RUN complete_french_b2_to_c1_frontier.py ===
+=== RUN audit_french_b2_generation_integrity.py ===
+{
+  "status": "PASS",
+  "scope": "French B2 generation integrity",
+  "canonical_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "passages": 60,
+  "questions": 600,
+  "answers": 600,
+  "units": 10,
+  "unique_new_target_ids": 200,
+  "unique_new_target_forms": 200,
+  "prior_level_collisions": 0,
+  "checkpoint_sequences_zero_new": [
+    6,
+    12,
+    18,
+    24,
+    30,
+    36,
+    42,
+    48,
+    54,
+    60
+  ],
+  "unit_structure": {
+    "1": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "2": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "3": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "4": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "5": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "6": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "7": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "8": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "9": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "10": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    }
+  },
+  "word_count_min": 351,
+  "word_count_max": 540,
+  "question_type_counts": {
+    "argument_relation": 63,
+    "assumption": 57,
+    "cause_effect": 3,
+    "cross_text_synthesis": 10,
+    "inference": 55,
+    "literal_detail": 50,
+    "main_claim": 60,
+    "reference_resolution": 47,
+    "stance": 55,
+    "summary": 50,
+    "synthesis": 10,
+    "vocabulary_in_context": 140
+  },
+  "paired_text_groups": {
+    "fr-b2-u01-citizen-science-access": 2,
+    "fr-b2-u06-data-control-opinions": 2,
+    "fr-b2-u10-evidence-action-viewpoints": 2
+  },
+  "source_identity": "PASS",
+  "exposure_counts": "PASS",
+  "exact_reviews": "PASS",
+  "schema": "PASS",
+  "linkage": "PASS",
+  "word_band": "PASS",
+  "note": "Generation-integrity seal only. Full final French language-wide multi-pass audit remains deferred until C1-C2 generation is complete."
+}
+=== RUN prepare_french_c1_readiness.py ===
+{"status": "PASS", "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d", "c1_word_band": [500, 800], "matrix_matches": 3}
+=== RUN sync_french_b2_complete.py ===
+{"status": "PASS", "french_passages": 240, "french_questions": 2400, "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d", "next": "C1 Unit01 calibration"}
+{
+  "status": "PASS_TO_C1",
+  "date": "2026-08-17",
+  "starting_b2_passages": 60,
+  "ending_b2_passages": 60,
+  "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "completed_stages": [
+    "audit_b2_generation_integrity",
+    "prepare_c1_readiness",
+    "sync_b2_complete_to_c1"
+  ],
+  "b2_generation_integrity_pass": true,
+  "c1_readiness_pass": true,
+  "error": null,
+  "c1_error": null,
+  "c1_word_band": [
+    500,
+    800
+  ],
+  "c1_matrix_matches": 3
+}
+=== RUN prepare_french_c1_readiness.py ===
+{"status": "PASS", "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d", "c1_word_band": [500, 800], "matrix_matches": 3}
+=== RUN resolve_french_c1_unit01_plan.py ===
+Traceback (most recent call last):
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py", line 26, in main
+    run(name);stages.append(name.removesuffix('.py'))
+    ^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py", line 12, in run
+    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit01_plan.py", line 57, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit01_plan.py", line 52, in main
+    if conflicts:raise AssertionError(f'Ambiguous C1 Unit01 planning nodes at score {best}: {[x["path"] for x in top[:8]]}')
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Ambiguous C1 Unit01 planning nodes at score 20: ['$.levels.B1[0]', '$.levels.A2[0]', '$.levels.B2[0]', '$.levels.C1[0]', '$.levels.C2[0]', '$.levels.A1[0]']
+
+{
+  "status": "B2_PASS_C1_UNIT01_PENDING",
+  "date": "2026-08-17",
+  "starting_c1_passages": 0,
+  "ending_c1_passages": 0,
+  "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "c1_blob": null,
+  "b2_generation_integrity_pass": true,
+  "c1_unit01_calibration_pass": false,
+  "completed_stages": [
+    "complete_or_verify_b2_to_c1_prep",
+    "prepare_french_c1_readiness"
+  ],
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py\", line 26, in main\n    run(name);stages.append(name.removesuffix('.py'))\n    ^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py\", line 12, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit01_plan.py\", line 57, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit01_plan.py\", line 52, in main\n    if conflicts:raise AssertionError(f'Ambiguous C1 Unit01 planning nodes at score {best}: {[x[\"path\"] for x in top[:8]]}')\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Ambiguous C1 Unit01 planning nodes at score 20: ['$.levels.B1[0]', '$.levels.A2[0]', '$.levels.B2[0]', '$.levels.C1[0]', '$.levels.C2[0]', '$.levels.A1[0]']\n"
+}
