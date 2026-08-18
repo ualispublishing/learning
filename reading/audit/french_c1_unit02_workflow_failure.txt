@@ -1,0 +1,388 @@
+=== RUN complete_french_c1_unit01_calibration.py ===
+=== RUN complete_french_b2_to_c1_frontier.py ===
+=== RUN audit_french_b2_generation_integrity.py ===
+{
+  "status": "PASS",
+  "scope": "French B2 generation integrity",
+  "canonical_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "passages": 60,
+  "questions": 600,
+  "answers": 600,
+  "units": 10,
+  "unique_new_target_ids": 200,
+  "unique_new_target_forms": 200,
+  "prior_level_collisions": 0,
+  "checkpoint_sequences_zero_new": [
+    6,
+    12,
+    18,
+    24,
+    30,
+    36,
+    42,
+    48,
+    54,
+    60
+  ],
+  "unit_structure": {
+    "1": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "2": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "3": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "4": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "5": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "6": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "7": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "8": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "9": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    },
+    "10": {
+      "passages": 6,
+      "new_targets": 20,
+      "checkpoint_zero_new": true
+    }
+  },
+  "word_count_min": 351,
+  "word_count_max": 540,
+  "question_type_counts": {
+    "argument_relation": 63,
+    "assumption": 57,
+    "cause_effect": 3,
+    "cross_text_synthesis": 10,
+    "inference": 55,
+    "literal_detail": 50,
+    "main_claim": 60,
+    "reference_resolution": 47,
+    "stance": 55,
+    "summary": 50,
+    "synthesis": 10,
+    "vocabulary_in_context": 140
+  },
+  "paired_text_groups": {
+    "fr-b2-u01-citizen-science-access": 2,
+    "fr-b2-u06-data-control-opinions": 2,
+    "fr-b2-u10-evidence-action-viewpoints": 2
+  },
+  "source_identity": "PASS",
+  "exposure_counts": "PASS",
+  "exact_reviews": "PASS",
+  "schema": "PASS",
+  "linkage": "PASS",
+  "word_band": "PASS",
+  "note": "Generation-integrity seal only. Full final French language-wide multi-pass audit remains deferred until C1-C2 generation is complete."
+}
+=== RUN prepare_french_c1_readiness.py ===
+{"status": "PASS", "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d", "c1_word_band": [500, 800], "matrix_matches": 3}
+=== RUN sync_french_b2_complete.py ===
+{"status": "PASS", "french_passages": 240, "french_questions": 2400, "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d", "next": "C1 Unit01 calibration"}
+{
+  "status": "PASS_TO_C1",
+  "date": "2026-08-17",
+  "starting_b2_passages": 60,
+  "ending_b2_passages": 60,
+  "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "completed_stages": [
+    "audit_b2_generation_integrity",
+    "prepare_c1_readiness",
+    "sync_b2_complete_to_c1"
+  ],
+  "b2_generation_integrity_pass": true,
+  "c1_readiness_pass": true,
+  "error": null,
+  "c1_error": null,
+  "c1_word_band": [
+    500,
+    800
+  ],
+  "c1_matrix_matches": 3
+}
+=== RUN prepare_french_c1_readiness.py ===
+{"status": "PASS", "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d", "c1_word_band": [500, 800], "matrix_matches": 3}
+=== RUN resolve_french_c1_unit01_plan.py ===
+{"status": "PASS", "path": "$.levels.C1[0]", "theme": "research and evidence", "genres": ["academic-style synthesis", "methods explanation", "critique"], "word_band": [500, 800]}
+=== RUN probe_french_c1_unit01_targets.py ===
+{"status": "PASS", "fresh_count": 450, "prior_deliberate_targets": 550, "theme": "research and evidence", "word_band": [500, 800]}
+=== RUN select_french_c1_unit01_calibration_targets.py ===
+{"status": "PASS", "calibration_load": 4, "canonical_planning_band": [6, 10], "band_is_quota": false, "selected_count": 20, "fallbacks": 20, "groups": {"p01": ["enquête", "base", "suspect", "environ"], "p02": ["courant", "intérieur", "exister", "âge"], "p03": ["traiter", "mener", "ailleurs", "complètement"], "p04": ["approcher", "engager", "juge", "avocat"], "p05": ["directeur", "animal", "drogue", "banque"]}}
+=== RUN audit_french_c1_unit01_calibration.py ===
+{
+  "status": "PASS",
+  "scope": "French C1 Unit 01 calibration review",
+  "b2_canonical_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "c1_canonical_blob": "6ca488f81788cefa49ef2e303bf6966cb4862a4c",
+  "theme": "research and evidence",
+  "genres": [
+    "academic-style synthesis",
+    "methods explanation",
+    "critique"
+  ],
+  "word_band": [
+    500,
+    800
+  ],
+  "word_counts": [
+    508,
+    529,
+    524,
+    567,
+    510,
+    534
+  ],
+  "paragraph_counts": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    5
+  ],
+  "passages": 6,
+  "questions": 60,
+  "answers": 60,
+  "unique_new_target_ids": 20,
+  "unique_new_target_forms": 20,
+  "prior_level_collisions": 0,
+  "checkpoint_zero_new": true,
+  "question_type_counts": {
+    "argument_relation": 6,
+    "assumption": 6,
+    "cross_text_synthesis": 2,
+    "inference": 6,
+    "main_claim": 6,
+    "reference_resolution": 1,
+    "stance": 5,
+    "summary": 6,
+    "synthesis": 1,
+    "vocabulary_in_context": 21
+  },
+  "paired_group": "fr-c1-u01-action-under-uncertainty-viewpoints",
+  "paired_similarity_ratio": 0.0879,
+  "language_review": "PASS",
+  "pedagogical_review": "PASS",
+  "source_identity": "PASS",
+  "exposure_counts": "PASS",
+  "exact_reviews": "PASS",
+  "schema": "PASS",
+  "linkage": "PASS",
+  "accepted_c1_default_new_targets_per_standard_passage": 4,
+  "accepted_default_is_hard_quota": false,
+  "planning_note": "Four new targets per standard passage is accepted as a conservative C1 production default after calibration, not a hard quota. Increase only when canonical policy and discourse load support it; never drop below an explicit standard minimum.",
+  "final_french_audit": "DEFERRED_UNTIL_C2_COMPLETE"
+}
+=== RUN lock_french_c1_unit01_frontier.py ===
+{
+  "status": "PASS",
+  "scope": "French C1 Unit 01 calibrated frontier lock",
+  "b2_canonical_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "c1_canonical_blob": "6ca488f81788cefa49ef2e303bf6966cb4862a4c",
+  "passages": 6,
+  "questions": 60,
+  "answers": 60,
+  "completed_units": [
+    1
+  ],
+  "last_sequence": 6,
+  "unit01_theme": "research and evidence",
+  "unit01_genres": [
+    "academic-style synthesis",
+    "methods explanation",
+    "critique"
+  ],
+  "unit01_word_band": [
+    500,
+    800
+  ],
+  "unit01_word_counts": [
+    508,
+    529,
+    524,
+    567,
+    510,
+    534
+  ],
+  "unit01_target_forms": [
+    "ailleurs",
+    "animal",
+    "approcher",
+    "avocat",
+    "banque",
+    "base",
+    "complètement",
+    "courant",
+    "directeur",
+    "drogue",
+    "engager",
+    "enquête",
+    "environ",
+    "exister",
+    "intérieur",
+    "juge",
+    "mener",
+    "suspect",
+    "traiter",
+    "âge"
+  ],
+  "unit01_target_groups": {
+    "p01": [
+      "enquête",
+      "base",
+      "suspect",
+      "environ"
+    ],
+    "p02": [
+      "courant",
+      "intérieur",
+      "exister",
+      "âge"
+    ],
+    "p03": [
+      "traiter",
+      "mener",
+      "ailleurs",
+      "complètement"
+    ],
+    "p04": [
+      "approcher",
+      "engager",
+      "juge",
+      "avocat"
+    ],
+    "p05": [
+      "directeur",
+      "animal",
+      "drogue",
+      "banque"
+    ]
+  },
+  "unit01_new_targets_per_standard_passage": 4,
+  "unit01_checkpoint_zero_new": true,
+  "accepted_c1_default_new_targets_per_standard_passage": 4,
+  "accepted_default_is_hard_quota": false,
+  "calibration_review_artifact": "reading/audit/french_c1_unit01_calibration_review.json",
+  "note": "Safe continuation lock for C1 Unit02. This is not final French approval."
+}
+=== RUN resolve_french_c1_unit02_plan.py ===
+{"status": "PASS", "path": "$.levels.C1[1]", "theme": "professional judgment", "genres": ["briefing", "case analysis", "recommendation"], "word_band": [500, 800]}
+=== RUN probe_french_c1_unit02_targets.py ===
+{"status": "PASS", "fresh_count": 430, "prior_deliberate_targets": 570, "theme": "professional judgment"}
+=== RUN sync_french_c1_unit01_frontier.py ===
+{"status": "PASS", "french_passages": 246, "french_questions": 2460, "c1_passages": 6, "c1_blob": "6ca488f81788cefa49ef2e303bf6966cb4862a4c", "next": "C1 Unit02", "theme": "professional judgment", "genres": "[\"briefing\", \"case analysis\", \"recommendation\"]", "fresh_remaining": 430}
+{
+  "status": "PASS_TO_C1_UNIT02",
+  "date": "2026-08-17",
+  "starting_c1_passages": 6,
+  "ending_c1_passages": 6,
+  "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "c1_blob": "6ca488f81788cefa49ef2e303bf6966cb4862a4c",
+  "b2_generation_integrity_pass": true,
+  "c1_unit01_calibration_pass": true,
+  "c1_unit02_frontier_prepared": true,
+  "completed_stages": [
+    "complete_or_verify_b2_to_c1_prep",
+    "prepare_french_c1_readiness",
+    "resolve_french_c1_unit01_plan",
+    "probe_french_c1_unit01_targets",
+    "select_french_c1_unit01_calibration_targets",
+    "reuse_existing_c1_unit01_for_strict_review",
+    "audit_c1_unit01_calibration",
+    "lock_c1_unit01",
+    "resolve_c1_unit02_plan",
+    "probe_c1_unit02_targets",
+    "sync_c1_unit01_to_unit02"
+  ],
+  "error": null,
+  "c1_word_band": [
+    500,
+    800
+  ],
+  "accepted_c1_default": 4,
+  "accepted_default_is_hard_quota": false,
+  "unit02_theme": "professional judgment",
+  "unit02_genres": [
+    "briefing",
+    "case analysis",
+    "recommendation"
+  ],
+  "remaining_fresh_source_terms": 430
+}
+=== RUN resolve_french_c1_unit02_plan.py ===
+{"status": "PASS", "path": "$.levels.C1[1]", "theme": "professional judgment", "genres": ["briefing", "case analysis", "recommendation"], "word_band": [500, 800]}
+=== RUN probe_french_c1_unit02_targets.py ===
+{"status": "PASS", "fresh_count": 430, "prior_deliberate_targets": 570, "theme": "professional judgment"}
+=== RUN select_french_c1_unit02_targets.py ===
+{"status": "PASS", "selected_count": 20, "groups": {"p01": ["sûr", "falloir", "vraiment", "seul"], "p02": ["regarder", "entendre", "parler", "passer"], "p03": ["homme", "femme", "gens", "peut-être"], "p04": ["arriver", "partir", "laisser", "arrêter"], "p05": ["petit", "grand", "mourir", "appeler"]}}
+=== RUN generate_french_c1_unit02_retry.py ===
+Traceback (most recent call last):
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit02.py", line 27, in main
+    run('generate_french_c1_unit02_retry.py');generated=True;stages.append('generate_c1_unit02_quality_preflight')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit02.py", line 12, in run
+    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit02_retry.py", line 33, in <module>
+    ns['main']()
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit02.py", line 102, in main
+    for s in spec(theme,gs):unit.append(make(s,groups[s['prefix']],review_groups[s['prefix']],details,prior,deck,lo,hi,theme))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit02.py", line 86, in make
+    paras=list(s['paras']);paras[1]+=' '+' '.join(lexical(f) for f in forms);paras[2]+=' '+review_bridge(reviews);paras,text=fit(paras,lo,hi);new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,prior) for f in reviews];ids={t['form']:t['id'] for t in new+rev};raw=core(s['sequence'],theme);items=[]
+                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_a2_unit03.py", line 35, in nt
+    if n<1:raise AssertionError(f'{f}: no exact new-target exposure')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: passer: no exact new-target exposure
+
+{
+  "status": "C1_UNIT02_PENDING",
+  "date": "2026-08-17",
+  "starting_c1_passages": 6,
+  "ending_c1_passages": 6,
+  "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "c1_blob": "6ca488f81788cefa49ef2e303bf6966cb4862a4c",
+  "c1_unit02_pass": false,
+  "c1_unit03_frontier_prepared": false,
+  "completed_stages": [
+    "complete_or_verify_c1_unit01",
+    "resolve_french_c1_unit02_plan",
+    "probe_french_c1_unit02_targets",
+    "select_french_c1_unit02_targets"
+  ],
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit02.py\", line 27, in main\n    run('generate_french_c1_unit02_retry.py');generated=True;stages.append('generate_c1_unit02_quality_preflight')\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit02.py\", line 12, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit02_retry.py\", line 33, in <module>\n    ns['main']()\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit02.py\", line 102, in main\n    for s in spec(theme,gs):unit.append(make(s,groups[s['prefix']],review_groups[s['prefix']],details,prior,deck,lo,hi,theme))\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit02.py\", line 86, in make\n    paras=list(s['paras']);paras[1]+=' '+' '.join(lexical(f) for f in forms);paras[2]+=' '+review_bridge(reviews);paras,text=fit(paras,lo,hi);new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,prior) for f in reviews];ids={t['form']:t['id'] for t in new+rev};raw=core(s['sequence'],theme);items=[]\n                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_a2_unit03.py\", line 35, in nt\n    if n<1:raise AssertionError(f'{f}: no exact new-target exposure')\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: passer: no exact new-target exposure\n"
+}

@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit02.py", line 27, in main
+    run('generate_french_c1_unit02_retry.py');generated=True;stages.append('generate_c1_unit02_quality_preflight')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit02.py", line 12, in run
+    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit02_retry.py", line 33, in <module>
+    ns['main']()
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit02.py", line 102, in main
+    for s in spec(theme,gs):unit.append(make(s,groups[s['prefix']],review_groups[s['prefix']],details,prior,deck,lo,hi,theme))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit02.py", line 86, in make
+    paras=list(s['paras']);paras[1]+=' '+' '.join(lexical(f) for f in forms);paras[2]+=' '+review_bridge(reviews);paras,text=fit(paras,lo,hi);new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,prior) for f in reviews];ids={t['form']:t['id'] for t in new+rev};raw=core(s['sequence'],theme);items=[]
+                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_a2_unit03.py", line 35, in nt
+    if n<1:raise AssertionError(f'{f}: no exact new-target exposure')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: passer: no exact new-target exposure
