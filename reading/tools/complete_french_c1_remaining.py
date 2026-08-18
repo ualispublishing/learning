@@ -15,7 +15,7 @@ def main():
   if n<42:run('complete_french_c1_unit07_retry.py');stages.append('unit07_transaction');n=len(rows())
   if n<48:run('complete_french_c1_unit08_retry.py');stages.append('unit08_transaction');n=len(rows())
   if n<54:run('complete_french_c1_unit09_retry.py');stages.append('unit09_transaction');n=len(rows())
-  if n<60:run('complete_french_c1_unit10.py');stages.append('unit10_integrity_c2_readiness_transaction');n=len(rows())
+  if n<60:run('complete_french_c1_unit10_retry.py');stages.append('unit10_integrity_c2_readiness_transaction');n=len(rows())
   elif n==60:
    run('complete_french_c1_unit10.py');stages.append('verify_unit10_integrity_c2_readiness')
   else:raise AssertionError(f'unsupported C1 row count {n}')
