@@ -5,6 +5,8 @@ on:
     paths:
       - 'reading/tools/generate_french_b2_unit10.py'
       - 'reading/tools/generate_french_b2_unit10_retry.py'
+      - 'reading/tools/probe_french_b2_unit10_targets.py'
+      - 'reading/tools/select_french_b2_unit10_targets.py'
       - '.github/workflows/generate-french-b2-unit10.yml'
 permissions:
   contents: write
@@ -55,6 +57,8 @@ jobs:
           sel=json.loads(Path('reading/audit/french_b2_unit10_target_selection.json').read_text())
           expected={x['form'] for x in sel['selected']};new=[t for r in u[:5] for t in r['new_lexical_targets']]
           assert len(new)==20 and len({t['id'] for t in new})==20 and {t['form'] for t in new}==expected
+          banned={'être','avoir','de','je','pas','le','que','vous','tu','et','il','un','en','ça','on','une','elle','me','du','te','se','toi','lui','votre','cette','son','par','ou','des'}
+          assert not expected & banned
           prior_ids={t['id'] for r in rows[:54] for t in r.get('new_lexical_targets',[])};prior_forms={t['form'] for r in rows[:54] for t in r.get('new_lexical_targets',[])}
           assert not prior_ids & {t['id'] for t in new} and not prior_forms & {t['form'] for t in new}
           pair='fr-b2-u10-evidence-action-viewpoints'
@@ -70,6 +74,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add reading/french/b2/passages.jsonl reading/audit/french_b2_unit10_target_probe.json reading/audit/french_b2_unit10_target_selection.json
+          git rm -f reading/audit/french_b2_unit10_generation_failure.txt 2>/dev/null || true
           git diff --cached --quiet && exit 0
           git commit -m 'Generate French B2 Unit 10 [skip ci]'
           git fetch origin main
