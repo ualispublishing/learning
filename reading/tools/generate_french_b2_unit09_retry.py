@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Fail-closed preflight wrapper for French B2 Unit09.
 
-Refreshes the read-only Unit09 probe/selection under the exact Unit08 lock,
-removes audit jargon from learner-facing fallback wording, verifies local target
-tags, and adds substantive reasoning only if a standard passage is marginally
-below the B2 word floor. The base generator's full guards remain authoritative.
+Refreshes the exhaustive Unit09 probe and pedagogical content-word selection under
+the exact Unit08 lock, aligns each selected word with its actual policy reasoning
+role, verifies local target tags, and adds substantive reasoning only if a
+standard passage is marginally below the B2 word floor.
 """
 from pathlib import Path
 import re
@@ -20,11 +20,34 @@ run_module('select_french_b2_unit09_targets.py','unit09_select')
 p=HERE/'generate_french_b2_unit09.py';ns={'__name__':'unit09_base','__file__':str(p),'__package__':None}
 exec(compile(p.read_text(encoding='utf-8'),str(p),'exec'),ns)
 
+# These definitions match the curated content words selected for each reasoning
+# slot, so vocabulary questions teach the word in a genuine policy context.
+ns['SLOT_MEANING'].update({
+ 'p01_budget':'la situation de départ qui détermine les ressources et contraintes du choix public',
+ 'p01_priority':'le cas concret auquel une règle ou priorité doit s’appliquer',
+ 'p01_cost':'la part de ressources, de coût ou d’effort attribuée à une option',
+ 'p01_value':'le critère comparatif utilisé pour identifier une option meilleure sans prétendre qu’elle est parfaite',
+ 'p02_income':'la catégorie riche dont l’effet d’une mesure peut différer de celui d’autres ménages',
+ 'p02_access':'la catégorie pauvre pour laquelle prix, distance ou procédure peuvent créer des obstacles particuliers',
+ 'p02_support':'l’aide effectivement disponible, et non seulement annoncée',
+ 'p02_people':'le groupe jeune dont l’usage ou les contraintes doivent être mesurés séparément',
+ 'p03_program':'l’action d’assurer qu’un service annoncé existe réellement dans les conditions prévues',
+ 'p03_apply':'l’action d’obtenir un résultat observable entre la règle écrite et l’usage réel',
+ 'p03_improve':'ce que la politique cherche à offrir concrètement aux personnes concernées',
+ 'p03_decision':'le rôle du président ou d’une autorité formelle au point de décision',
+ 'p04_benefit':'la position contre laquelle l’argument favorable doit répondre sans caricature',
+ 'p04_opposition':'la dimension humaine qu’un calcul de bénéfice ou de coût ne doit pas effacer',
+ 'p04_justify':'l’appel à une raison, une donnée ou un principe qui doit être évalué plutôt que simplement invoqué',
+ 'p04_trade':'les propos réellement avancés par une partie, qu’il faut représenter fidèlement avant d’y répondre',
+ 'p05_effective':'la recherche de données qui permet de vérifier l’effet au lieu de présumer la réussite',
+ 'p05_time':'l’action de réfléchir aux conséquences, aux alternatives et à la portée de la conclusion',
+ 'p05_estimate':'l’action de revoir les résultats avec les mêmes critères après la mise en œuvre',
+ 'p05_revision':'la force d’une conclusion, qui doit augmenter ou diminuer selon les nouvelles preuves'
+})
+
 def clean_lexical_sentence(slot,form,detail):
     meaning=ns['SLOT_MEANING'][slot]
-    if detail.get('semantic_fallback'):
-        return f"Dans ce dossier, le terme « {form} » est employé comme repère complémentaire de l’analyse; le contexte précise sa fonction dans l’arbitrage au lieu de lui attribuer une portée automatique."
-    return f"Dans ce briefing, le terme « {form} » sert à nommer {meaning}; il est donc relié à une décision observable plutôt qu’utilisé comme simple étiquette."
+    return f"Dans ce dossier, le terme « {form} » sert à préciser {meaning}; il est relié à un élément observable de l’arbitrage plutôt qu’utilisé comme simple étiquette."
 ns['lexical_sentence']=clean_lexical_sentence
 
 orig_make=ns['make']
