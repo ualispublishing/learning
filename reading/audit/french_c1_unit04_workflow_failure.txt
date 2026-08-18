@@ -37,30 +37,40 @@
 {"status": "PASS", "unit": 4, "fresh_count": 390, "theme": "language, identity, and society"}
 === RUN select_french_c1_unit04_targets.py ===
 {"status": "PASS", "groups": {"p01": ["monsieur", "madame", "gars", "mec"], "p02": ["fille", "garçon", "fils", "frère"], "p03": ["copain", "copine", "mari", "bande"], "p04": ["écouter", "anglais", "pardon", "genre"], "p05": ["maman", "papa", "lycée", "grandir"]}}
-=== RUN generate_french_c1_unit04.py ===
+=== RUN generate_french_c1_unit04_retry.py ===
+Traceback (most recent call last):
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04_retry.py", line 17, in fit
+    try:return orig_fit(paras,lo,hi)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 50, in fit
+    if len(text.split())<lo:raise AssertionError(f'Unit04 below C1 minimum {len(text.split())} < {lo}')
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Unit04 below C1 minimum 398 < 500
+
+During handling of the above exception, another exception occurred:
+
 Traceback (most recent call last):
   File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit04.py", line 39, in main
-    run('generate_french_c1_unit04.py');generated=True;stages.append('generate_c1_unit04')
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    run('generate_french_c1_unit04_retry.py');generated=True;stages.append('generate_c1_unit04_quality_preflight')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit04.py", line 7, in run
     def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')
                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<frozen runpy>", line 287, in run_path
   File "<frozen runpy>", line 98, in _run_module_code
   File "<frozen runpy>", line 88, in _run_code
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 106, in <module>
-    if __name__=='__main__':main()
-                            ^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04_retry.py", line 27, in <module>
+    ns['main']()
   File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 86, in main
     unit.append(checkpoint(groups,deck,lo,hi,theme))
                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 74, in checkpoint
     paras,text=fit(paras,lo,hi)
                ^^^^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 50, in fit
-    if len(text.split())<lo:raise AssertionError(f'Unit04 below C1 minimum {len(text.split())} < {lo}')
-                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: Unit04 below C1 minimum 398 < 500
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04_retry.py", line 23, in fit
+    if len(text.split())<lo:raise AssertionError(f'Unit04 below C1 minimum after substantive social-language expansion: {len(text.split())} < {lo}')
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Unit04 below C1 minimum after substantive social-language expansion: 471 < 500
 
 {
   "status": "C1_UNIT04_PENDING",
@@ -77,5 +87,5 @@ AssertionError: Unit04 below C1 minimum 398 < 500
     "probe_c1_unit04_targets",
     "select_c1_unit04_targets"
   ],
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit04.py\", line 39, in main\n    run('generate_french_c1_unit04.py');generated=True;stages.append('generate_c1_unit04')\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit04.py\", line 7, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py\", line 106, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py\", line 86, in main\n    unit.append(checkpoint(groups,deck,lo,hi,theme))\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py\", line 74, in checkpoint\n    paras,text=fit(paras,lo,hi)\n               ^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py\", line 50, in fit\n    if len(text.split())<lo:raise AssertionError(f'Unit04 below C1 minimum {len(text.split())} < {lo}')\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Unit04 below C1 minimum 398 < 500\n"
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04_retry.py\", line 17, in fit\n    try:return orig_fit(paras,lo,hi)\n               ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py\", line 50, in fit\n    if len(text.split())<lo:raise AssertionError(f'Unit04 below C1 minimum {len(text.split())} < {lo}')\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Unit04 below C1 minimum 398 < 500\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit04.py\", line 39, in main\n    run('generate_french_c1_unit04_retry.py');generated=True;stages.append('generate_c1_unit04_quality_preflight')\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit04.py\", line 7, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04_retry.py\", line 27, in <module>\n    ns['main']()\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py\", line 86, in main\n    unit.append(checkpoint(groups,deck,lo,hi,theme))\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py\", line 74, in checkpoint\n    paras,text=fit(paras,lo,hi)\n               ^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04_retry.py\", line 23, in fit\n    if len(text.split())<lo:raise AssertionError(f'Unit04 below C1 minimum after substantive social-language expansion: {len(text.split())} < {lo}')\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Unit04 below C1 minimum after substantive social-language expansion: 471 < 500\n"
 }
