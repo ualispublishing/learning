@@ -42,7 +42,6 @@ EXTRA=[
 "La portée de la conclusion reste limitée aux interactions documentées. Le texte indique quelles formes pourraient changer de valeur dans une autre région, une autre génération ou un autre cadre institutionnel. Cette limite protège l’analyse contre la tentation de présenter une pratique locale comme règle générale.",
 "Enfin, la révision est prévue : si de nouveaux exemples montrent qu’une forme circule entre des groupes auparavant séparés, la catégorie analytique doit être modifiée. L’identité linguistique devient ainsi une hypothèse sur des pratiques observables, non une étiquette figée attribuée aux locuteurs."
 ]
-
 def h(p):return subprocess.check_output(['git','hash-object',str(p)],text=True).strip()
 def bridge(forms):return 'Révision explicite : '+', '.join(f'« {x} »' for x in forms)+'. Ces formes servent à relier ce texte au travail institutionnel précédent sans confondre les deux thèmes.'
 def fit(paras,lo,hi):
@@ -53,18 +52,11 @@ def fit(paras,lo,hi):
  return p,text
 
 def items_for(spec,forms):
- return [
- ('main_claim',spec['qclaim'],spec['aclaim'],[forms[0]]),
- ('inference','Quelle inférence le texte refuse-t-il de faire automatiquement ?',spec['ainfer'],[forms[1]]),
- ('assumption','Quelle hypothèse doit être vérifiée avant de généraliser ?',spec['aassume'],[forms[2]]),
- ('argument_relation','Comment le texte traite-t-il une explication concurrente ?',spec['arelation'],[forms[3]]),
- ('scope','Quelle limite de portée est explicitement importante ?',spec['ascope'],[forms[0],forms[3]]),
- ('stance','Quelle position méthodologique l’auteur adopte-t-il ?',spec['astance'],[forms[1]]),
- ]+[( 'vocabulary_in_context',f'Quel rôle joue « {f} » dans ce passage ?',USE[f],[f]) for f in forms]
+ return [('main_claim',spec['qclaim'],spec['aclaim'],[forms[0]]),('inference','Quelle inférence le texte refuse-t-il de faire automatiquement ?',spec['ainfer'],[forms[1]]),('assumption','Quelle hypothèse doit être vérifiée avant de généraliser ?',spec['aassume'],[forms[2]]),('argument_relation','Comment le texte traite-t-il une explication concurrente ?',spec['arelation'],[forms[3]]),('scope','Quelle limite de portée est explicitement importante ?',spec['ascope'],[forms[0],forms[3]]),('stance','Quelle position méthodologique l’auteur adopte-t-il ?',spec['astance'],[forms[1]])]+[('vocabulary_in_context',f'Quel rôle joue « {f} » dans ce passage ?',USE[f],[f]) for f in forms]
 
-def make(spec,forms,reviews,prior,deck,lo,hi,theme):
+def make(spec,forms,reviews,prior_rows,deck,lo,hi,theme):
  paras=list(spec['paras']);paras[1]+=' '+' '.join(USE[f] for f in forms);paras[2]+=' '+bridge(reviews);paras,text=fit(paras,lo,hi)
- new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,prior) for f in reviews];ids={t['form']:t['id'] for t in new+rev};q,a=base.qa(items_for(spec,forms),ids)
+ P=base.prior(prior_rows);new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,P) for f in reviews];ids={t['form']:t['id'] for t in new+rev};q,a=base.qa(items_for(spec,forms),ids)
  return {'id':spec['id'],'language':'fr','cefr':'C1','unit':4,'sequence':spec['seq'],'revision':1,'title':spec['title'],'passage_type':'standard','genre':spec['genre'],'domains':spec['domains'],'topics':[theme]+spec['topics'],'text':text,'word_count':len(text.split()),'sentence_count':max(1,len(re.findall(r'[.!?](?:[»”\"])?',text))),'estimated_known_token_coverage':0,'new_lexical_targets':new,'review_lexical_targets':rev,'grammar_targets':[{'id':spec['id']+'-g1','role':'target','description':'qualify social and linguistic categories through context, register and scope'}],'discourse_targets':[{'id':spec['id']+'-d1','role':'target','description':'evaluate social labels, competing explanations and identity claims without essentializing speakers'}],'questions':q,'answer_key':a,'speed_training':{'timed':True,'benchmark_eligible':True,'comprehension_gate':0.8,'new_word_policy':'standard','notes':'C1 Unit04 language/identity analysis.'},'quality':{'status':'draft','schema_check':'pending','linguistic_review':'pending','pedagogical_review':'pending','answer_key_check':'pending','coverage_check':'pending','fact_check':'not_required','notes':['Generated against exact Unit03 lock; contextual social-label analysis.']},'paired_text_group':spec.get('pair'),'prerequisites':['French C1 Unit03'],'difficulty_notes_internal':'C1 contextual identity/register analysis.','reader_tags':['unit_role:standard','generation_batch','french_c1_u04']}
 
 def specs(theme):
