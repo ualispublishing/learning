@@ -210,3 +210,13 @@ Theme: **institutions and incentives**. Genres: **["analysis", "commentary", "po
 
 ### Immediate frontier — French C1 Unit 04
 Theme: **language, identity, and society**. Genres: **["essay", "analysis", "paired viewpoints"]**. Generate sequences 19–24 against `826de7eb5a241ca1c95d54281696abd65dbc22a4` with `500–800` words, 10 linked Q/A, exact source/review guards and C1 reasoning requirements.
+
+
+## French C1 Unit 04 — COMPLETE / CURRENT LOCK
+
+- Canonical C1 blob `3631f63f3a6c0dc8a2640a6d43d8ef05df5dd9ef`; 24 C1 passages / 240 Q / 240 A.
+- Unit04 strict review and frontier lock PASS.
+- calibrated default remains `4`, not a hard quota.
+
+### Immediate frontier — French C1 Unit 05
+Theme: **scientific uncertainty and communication**. Genres: **["research summary", "journalistic analysis", "critique"]**. Generate sequences 25–30 against `3631f63f3a6c0dc8a2640a6d43d8ef05df5dd9ef` with `500–800` words, 10 linked Q/A, exact source/review guards and C1 reasoning requirements.

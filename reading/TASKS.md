@@ -178,6 +178,19 @@ Remaining French generation:
 - [ ] Default `4` fresh targets in P01–P05, not a hard quota; P06 zero-new.
 - [ ] Preserve `500–800` words, 10 linked Q/A and all source/review/C1-quality guards.
 
+
+#### C1 Unit 04 — COMPLETE / GENERATION PASS
+- [x] Sequences 19–24 canonical; 6 passages / 60 Q / 60 A.
+- [x] Strict generation review and frontier lock PASS.
+- [x] Canonical C1 blob `3631f63f3a6c0dc8a2640a6d43d8ef05df5dd9ef`.
+
+#### C1 Unit 05 — IMMEDIATE NEXT
+- Theme: **scientific uncertainty and communication**.
+- Genres: **["research summary", "journalistic analysis", "critique"]**.
+- [ ] Generate sequences 25–30 against `3631f63f3a6c0dc8a2640a6d43d8ef05df5dd9ef`.
+- [ ] Default `4` fresh targets in P01–P05, not a hard quota; P06 zero-new.
+- [ ] Preserve `500–800` words, 10 linked Q/A and all source/review/C1-quality guards.
+
 ## Urdu — QUEUED
 - [x] A1 sequences 1–6 exist.
 - [ ] A1 sequences 7–60.
