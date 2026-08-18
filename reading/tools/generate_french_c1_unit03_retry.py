@@ -13,7 +13,7 @@ USE={
 'inspecteur':'Un « inspecteur » observe la conformité, mais sa présence peut aussi modifier le comportement observé; le contrôle doit donc distinguer conformité durable et réponse temporaire à la surveillance.',
 'garde':'La « garde » illustre une fonction de contrôle dont l’efficacité dépend des informations disponibles, de l’autorité réelle et des conséquences attachées à une intervention.',
 'rappeler':'« Rappeler » une règle peut corriger un oubli sans traiter une incitation contraire; l’analyse distingue donc manque d’information et intérêt à ne pas respecter la règle.',
-'exact':'Une mesure « exacte » décrit précisément ce qu’elle compte, mais cette exactitude ne garantit pas que l’indicateur représente le comportement ou l’objectif institutionnel pertinent.',
+'exact':'L’adjectif « exact » peut qualifier une mesure très précise; une mesure exacte décrit précisément ce qu’elle compte, mais cette exactitude ne garantit pas que l’indicateur représente le comportement ou l’objectif institutionnel pertinent.',
 'maître':'Le terme « maître » sert à examiner une relation d’autorité forte : la capacité de donner un ordre ne prouve pas que l’exécution produira l’effet recherché ni qu’elle sera légitime.',
 'professeur':'Un « professeur » combine expertise, évaluation et relation avec les personnes concernées; ces rôles peuvent créer des incitations différentes lorsqu’un même indicateur sert à enseigner et à sanctionner.',
 'club':'Un « club » montre comment l’adhésion volontaire, les normes internes et la possibilité de sortie peuvent produire une discipline différente de celle d’une institution obligatoire.',
