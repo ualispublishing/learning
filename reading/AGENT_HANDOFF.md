@@ -189,3 +189,14 @@ Read the canonical C1 passage standard and topic/genre matrix first. Derive the 
 ### Immediate frontier — French C1 Unit 02
 
 Theme: **professional judgment**. Genres: **["briefing", "case analysis", "recommendation"]**. Generate sequences 7–12 against exact C1 blob `6ca488f81788cefa49ef2e303bf6966cb4862a4c`. Use the calibrated default `4` fresh targets per P01–P05 unless canonical policy/discourse load supports more; P06 zero-new. Preserve `500–800` words, 10 linked Q/A, source identity/exposures, exact reviews, competing perspectives, scope, source-method critique, normative bridge, counterargument and revision conditions. Fail closed.
+
+
+## French C1 Unit 02 — COMPLETE / CURRENT LOCK
+
+- Canonical C1 blob `3dd6fc869920ed96cff6861d7498afe59e433947`.
+- 12 total C1 passages / 120 questions / 120 answers.
+- Unit02 strict review and frontier lock PASS.
+- calibrated default remains `4` new targets per standard passage, not a hard quota.
+
+### Immediate frontier — French C1 Unit 03
+Theme: **institutions and incentives**. Genres: **["analysis", "commentary", "policy note"]**. Generate sequences 13–18 against `3dd6fc869920ed96cff6861d7498afe59e433947` with `500–800` words, 10 linked Q/A, exact source/review guards, P06 zero-new and full C1 reasoning requirements.

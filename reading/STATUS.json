@@ -6,7 +6,7 @@
   "paused_languages": [
     "Urdu"
   ],
-  "phase": "Arabic A1-C2 remains formally approved. French A1-B2 generation layers are sealed for generation integrity; French C1 Unit01 calibration PASS. C1 Unit02 is the immediate generation frontier.",
+  "phase": "Arabic remains sealed. French A1-B2 generation integrity is sealed; C1 Units 01-02 are canonical and guarded. C1 Unit03 is next.",
   "target_passages": 1080,
   "target_is_quota": false,
   "approved_passages": 360,
@@ -49,17 +49,17 @@
   },
   "french": {
     "state": "ACTIVE_GENERATION",
-    "canonical_passages": 246,
+    "canonical_passages": 252,
     "levels": {
       "a1": 60,
       "a2": 60,
       "b1": 60,
       "b2": 60,
-      "c1": 6,
+      "c1": 12,
       "c2": 0
     },
-    "questions": 2460,
-    "answers": 2460,
+    "questions": 2520,
+    "answers": 2520,
     "latest_audit_commit": "a784e4594b1bb487c51c882cf8b704c99331cd96",
     "generation_invariants": {
       "ten_questions_and_answers_per_passage": true,
@@ -385,17 +385,18 @@
         60
       ]
     },
-    "next_target": "Generate French C1 Unit 02 / sequences 7-12 against exact C1 blob 6ca488f81788cefa49ef2e303bf6966cb4862a4c. Canonical theme: professional judgment; genres: [\"briefing\", \"case analysis\", \"recommendation\"]. Use accepted conservative default 4 fresh source-backed new targets per P01-P05 unless canonical policy/discourse load supports more; P06 zero-new. Preserve exact C1 word band 500-800, 10 linked Q/A, exact reviews, source identity/exposures, competing perspectives, scope, source-method critique, normative bridge, counterargument and revision criteria.",
+    "next_target": "Generate French C1 Unit 03 / sequences 13-18 against exact C1 blob 3dd6fc869920ed96cff6861d7498afe59e433947. Canonical theme: institutions and incentives; genres: [\"analysis\", \"commentary\", \"policy note\"]. Use calibrated default 4 fresh targets per P01-P05 unless canonical policy/discourse load supports more; P06 zero-new. Preserve word band 500-800, 10 linked Q/A, exact review forms, source identity/exposures and C1 reasoning.",
     "c1_generation": {
-      "status": "calibrated_unit01_pass",
-      "passages": 6,
-      "questions": 60,
-      "answers": 60,
+      "status": "unit02_generation_pass",
+      "passages": 12,
+      "questions": 120,
+      "answers": 120,
       "completed_units": [
-        1
+        1,
+        2
       ],
-      "last_sequence": 6,
-      "canonical_blob": "6ca488f81788cefa49ef2e303bf6966cb4862a4c",
+      "last_sequence": 12,
+      "canonical_blob": "3dd6fc869920ed96cff6861d7498afe59e433947",
       "unit01_theme": "research and evidence",
       "unit01_genres": [
         "academic-style synthesis",
@@ -419,7 +420,29 @@
       "accepted_default_new_targets_per_standard_passage": 4,
       "accepted_default_is_hard_quota": false,
       "unit02_plan": "reading/audit/french_c1_unit02_plan.json",
-      "unit02_target_probe": "reading/audit/french_c1_unit02_target_probe.json"
+      "unit02_target_probe": "reading/audit/french_c1_unit02_target_probe.json",
+      "unit02_theme": "professional judgment",
+      "unit02_genres": [
+        "briefing",
+        "case analysis",
+        "recommendation"
+      ],
+      "unit02_word_band": [
+        500,
+        800
+      ],
+      "unit02_word_counts": [
+        500,
+        538,
+        500,
+        526,
+        521,
+        511
+      ],
+      "unit02_frontier_lock": "reading/audit/french_c1_unit02_frontier_lock.json",
+      "unit02_generation_review": "reading/audit/french_c1_unit02_generation_review.json",
+      "unit03_plan": "reading/audit/french_c1_unit03_plan.json",
+      "unit03_target_probe": "reading/audit/french_c1_unit03_target_probe.json"
     }
   },
   "urdu": {
@@ -437,11 +460,10 @@
   },
   "next_actions": [
     "keep Arabic sealed unless canonical Arabic changes",
-    "do not broadly regenerate French A1-B2",
-    "generate French C1 Unit02 against the exact calibrated Unit01 lock",
-    "continue C1 generation-first using the calibrated conservative default as a default, not quota",
-    "defer final whole-French multi-pass audit until C2 generation completes",
-    "keep Urdu unchanged while French is active unless explicitly reprioritized"
+    "generate French C1 Unit03 against exact Unit02 frontier lock",
+    "preserve calibrated C1 default as a default, not quota",
+    "continue C1 generation-first through Unit10, then C2",
+    "defer final whole-French multi-pass audit until C2 generation completes"
   ],
   "important_files": [
     "reading/AGENT_HANDOFF.md",
@@ -463,7 +485,11 @@
     "reading/audit/french_c1_unit01_calibration_review.json",
     "reading/audit/french_c1_unit01_frontier_lock.json",
     "reading/audit/french_c1_unit02_plan.json",
-    "reading/audit/french_c1_unit02_target_probe.json"
+    "reading/audit/french_c1_unit02_target_probe.json",
+    "reading/audit/french_c1_unit02_generation_review.json",
+    "reading/audit/french_c1_unit02_frontier_lock.json",
+    "reading/audit/french_c1_unit03_plan.json",
+    "reading/audit/french_c1_unit03_target_probe.json"
   ],
   "parallel_agent_rules": {
     "verify_live_main_before_write_batch": true,

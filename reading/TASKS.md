@@ -150,6 +150,21 @@ Remaining French generation:
 - [ ] Require C1-level scope, implicit assumptions, competing perspectives, source-method critique, normative bridge, counterargument and revision conditions.
 - [ ] Fail closed on lock drift, freshness/collision, schema/linkage, word band, reviews or source identity.
 
+
+#### C1 Unit 02 — COMPLETE / GENERATION PASS
+- [x] Sequences 7–12 canonical; 6 passages / 60 Q / 60 A.
+- [x] Strict Unit02 generation review PASS; P06 zero-new.
+- [x] Canonical C1 blob after Unit02: `3dd6fc869920ed96cff6861d7498afe59e433947`.
+- [x] Frontier lock `reading/audit/french_c1_unit02_frontier_lock.json` = PASS.
+
+#### C1 Unit 03 — IMMEDIATE NEXT
+- Theme: **institutions and incentives**.
+- Genres: **["analysis", "commentary", "policy note"]**.
+- [ ] Generate sequences 13–18 against exact C1 blob `3dd6fc869920ed96cff6861d7498afe59e433947`.
+- [ ] Default `4` fresh targets per P01–P05, not a hard quota; P06 zero-new.
+- [ ] Preserve `500–800` words and 10 linked Q/A per passage.
+- [ ] Fail closed on source/blob drift, target collisions, source/exposure identity, exact reviews, schema/linkage or C1 reasoning quality.
+
 ## Urdu — QUEUED
 - [x] A1 sequences 1–6 exist.
 - [ ] A1 sequences 7–60.
