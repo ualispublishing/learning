@@ -4,8 +4,10 @@ on:
   push:
     paths:
       - 'reading/tools/complete_french_c1_unit07.py'
+      - 'reading/tools/complete_french_c1_unit07_retry.py'
       - 'reading/tools/select_french_c1_unit07_targets.py'
       - 'reading/tools/generate_french_c1_unit07.py'
+      - 'reading/tools/generate_french_c1_unit07_retry.py'
       - '.github/workflows/complete-french-c1-unit07.yml'
 concurrency:
   group: french-c1-canonical-writer
@@ -23,7 +25,7 @@ jobs:
       - name: Run Unit07 transaction
         id: run
         continue-on-error: true
-        run: python reading/tools/complete_french_c1_unit07.py 2>&1 | tee /tmp/c1u07.log
+        run: python reading/tools/complete_french_c1_unit07_retry.py 2>&1 | tee /tmp/c1u07.log
       - name: Preserve failure log
         if: steps.run.outcome != 'success'
         run: mkdir -p reading/audit && cp /tmp/c1u07.log reading/audit/french_c1_unit07_workflow_failure.txt || true
