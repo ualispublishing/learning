@@ -8,16 +8,16 @@ Traceback (most recent call last):
   File "<frozen runpy>", line 287, in run_path
   File "<frozen runpy>", line 98, in _run_module_code
   File "<frozen runpy>", line 88, in _run_code
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 114, in <module>
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 106, in <module>
     if __name__=='__main__':main()
                             ^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 93, in main
-    for s in specs(theme):unit.append(make(s,groups[s['id'][-3:]],review[s['id'][-3:]],rows,deck,lo,hi,theme))
-                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 67, in make
-    new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,prior) for f in reviews];ids={t['form']:t['id'] for t in new+rev};q,a=base.qa(items_for(spec,forms),ids)
-                                                   ^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_a2_unit03.py", line 38, in rev
-    h=P.get(f,[])
-      ^^^^^
-AttributeError: 'list' object has no attribute 'get'
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 86, in main
+    unit.append(checkpoint(groups,deck,lo,hi,theme))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 74, in checkpoint
+    paras,text=fit(paras,lo,hi)
+               ^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 50, in fit
+    if len(text.split())<lo:raise AssertionError(f'Unit04 below C1 minimum {len(text.split())} < {lo}')
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Unit04 below C1 minimum 398 < 500

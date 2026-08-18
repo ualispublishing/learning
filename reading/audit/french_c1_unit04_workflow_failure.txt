@@ -48,19 +48,19 @@ Traceback (most recent call last):
   File "<frozen runpy>", line 287, in run_path
   File "<frozen runpy>", line 98, in _run_module_code
   File "<frozen runpy>", line 88, in _run_code
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 114, in <module>
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 106, in <module>
     if __name__=='__main__':main()
                             ^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 93, in main
-    for s in specs(theme):unit.append(make(s,groups[s['id'][-3:]],review[s['id'][-3:]],rows,deck,lo,hi,theme))
-                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 67, in make
-    new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,prior) for f in reviews];ids={t['form']:t['id'] for t in new+rev};q,a=base.qa(items_for(spec,forms),ids)
-                                                   ^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_a2_unit03.py", line 38, in rev
-    h=P.get(f,[])
-      ^^^^^
-AttributeError: 'list' object has no attribute 'get'
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 86, in main
+    unit.append(checkpoint(groups,deck,lo,hi,theme))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 74, in checkpoint
+    paras,text=fit(paras,lo,hi)
+               ^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 50, in fit
+    if len(text.split())<lo:raise AssertionError(f'Unit04 below C1 minimum {len(text.split())} < {lo}')
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Unit04 below C1 minimum 398 < 500
 
 {
   "status": "C1_UNIT04_PENDING",
@@ -77,5 +77,5 @@ AttributeError: 'list' object has no attribute 'get'
     "probe_c1_unit04_targets",
     "select_c1_unit04_targets"
   ],
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit04.py\", line 39, in main\n    run('generate_french_c1_unit04.py');generated=True;stages.append('generate_c1_unit04')\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit04.py\", line 7, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py\", line 114, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py\", line 93, in main\n    for s in specs(theme):unit.append(make(s,groups[s['id'][-3:]],review[s['id'][-3:]],rows,deck,lo,hi,theme))\n                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py\", line 67, in make\n    new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,prior) for f in reviews];ids={t['form']:t['id'] for t in new+rev};q,a=base.qa(items_for(spec,forms),ids)\n                                                   ^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_a2_unit03.py\", line 38, in rev\n    h=P.get(f,[])\n      ^^^^^\nAttributeError: 'list' object has no attribute 'get'\n"
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit04.py\", line 39, in main\n    run('generate_french_c1_unit04.py');generated=True;stages.append('generate_c1_unit04')\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit04.py\", line 7, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py\", line 106, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py\", line 86, in main\n    unit.append(checkpoint(groups,deck,lo,hi,theme))\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py\", line 74, in checkpoint\n    paras,text=fit(paras,lo,hi)\n               ^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py\", line 50, in fit\n    if len(text.split())<lo:raise AssertionError(f'Unit04 below C1 minimum {len(text.split())} < {lo}')\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Unit04 below C1 minimum 398 < 500\n"
 }
