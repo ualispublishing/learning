@@ -1,23 +1,17 @@
 Traceback (most recent call last):
-  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py", line 29, in main
-    run('generate_french_c1_unit01_calibration.py');generated_here=True;stages.append('generate_c1_unit01_calibration')
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py", line 32, in main
+    run('audit_french_c1_unit01_calibration.py');stages.append('audit_c1_unit01_calibration')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py", line 12, in run
     def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')
                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<frozen runpy>", line 287, in run_path
   File "<frozen runpy>", line 98, in _run_module_code
   File "<frozen runpy>", line 88, in _run_code
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit01_calibration.py", line 253, in <module>
+  File "/home/runner/work/learning/learning/reading/tools/audit_french_c1_unit01_calibration.py", line 93, in <module>
     if __name__=='__main__':main()
                             ^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit01_calibration.py", line 231, in main
-    checkpoint_genre=(genres[0] if genres else 'C1 cumulative synthesis');unit.append(checkpoint(groups,deck,lo,hi,theme,checkpoint_genre));V=Draft202012Validator(json.loads(SCHEMA.read_text(encoding='utf-8')));newids=[];newforms=[];selected={x['form'] for x in sel['selected']}
-                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit01_calibration.py", line 200, in checkpoint
-    ];paras,text=fit(paras,lo,hi,extras)
-                 ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit01_calibration.py", line 97, in fit
-    if len(text.split())<lo:raise AssertionError(f'C1 draft below word minimum after substantive expansion: {len(text.split())} < {lo}')
-                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: C1 draft below word minimum after substantive expansion: 440 < 500
+  File "/home/runner/work/learning/learning/reading/tools/audit_french_c1_unit01_calibration.py", line 77, in main
+    if r['sequence']<=5 and sum(checks.values())<3:raise AssertionError(f"{r['id']}: insufficient C1 reasoning-function density {checks}")
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: fr-c1-u01-p04: insufficient C1 reasoning-function density {'scope': False, 'counterargument': False, 'uncertainty_or_revision': False, 'source_method': True, 'normative_bridge': True}
