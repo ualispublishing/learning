@@ -4,8 +4,10 @@ on:
   push:
     paths:
       - 'reading/tools/complete_french_c1_unit05.py'
+      - 'reading/tools/complete_french_c1_unit05_retry.py'
       - 'reading/tools/select_french_c1_unit05_targets.py'
       - 'reading/tools/generate_french_c1_unit05.py'
+      - 'reading/tools/generate_french_c1_unit05_retry.py'
       - 'reading/tools/audit_french_c1_unit_generation.py'
       - 'reading/tools/resolve_french_c1_unit_plan.py'
       - '.github/workflows/complete-french-c1-unit05.yml'
@@ -29,7 +31,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          python reading/tools/complete_french_c1_unit05.py 2>&1 | tee /tmp/french_c1_u05_pipeline.log
+          python reading/tools/complete_french_c1_unit05_retry.py 2>&1 | tee /tmp/french_c1_u05_pipeline.log
       - name: Preserve failure log
         if: steps.run.outcome != 'success'
         run: |
