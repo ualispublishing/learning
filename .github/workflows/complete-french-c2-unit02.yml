@@ -6,9 +6,11 @@ on:
     paths:
       - 'reading/tools/select_french_c2_unit02_targets.py'
       - 'reading/tools/generate_french_c2_unit02.py'
+      - 'reading/tools/generate_french_c2_unit02_retry.py'
+      - 'reading/tools/complete_french_c2_unit02.py'
+      - 'reading/tools/complete_french_c2_unit02_retry.py'
       - 'reading/tools/audit_french_c2_unit_generation.py'
       - 'reading/tools/lock_french_c2_unit_frontier.py'
-      - 'reading/tools/complete_french_c2_unit02.py'
       - '.github/workflows/complete-french-c2-unit02.yml'
 concurrency:
   group: french-c2-canonical-writer
@@ -29,7 +31,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          python reading/tools/complete_french_c2_unit02.py 2>&1 | tee /tmp/c2u02.log
+          python reading/tools/complete_french_c2_unit02_retry.py 2>&1 | tee /tmp/c2u02.log
       - name: Preserve failure log
         if: steps.run.outcome != 'success'
         run: mkdir -p reading/audit && cp /tmp/c2u02.log reading/audit/french_c2_unit02_workflow_failure.txt || true
