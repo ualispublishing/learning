@@ -294,3 +294,10 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 - [ ] Theme: **law and competing interpretations**; genres: dense analysis, case commentary, position comparison.
 - [ ] Select source-backed rank-1001+ targets from `1974` fresh continuation terms.
 - [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.
+
+
+#### French C2 Unit 03 — IMMEDIATE NEXT
+- [x] Unit 02 sealed on `58ce1ad95c3ba4e738df93057d7b9a3867cbf4fe`.
+- [ ] Theme: **science, models, and epistemic limits**; genres: advanced synthesis, critique, research commentary.
+- [ ] Select source-backed rank-1001+ targets from `1949` fresh continuation terms.
+- [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.

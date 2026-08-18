@@ -286,3 +286,10 @@ Resolve C2 standards and exact matrix node from canonical policy, then calibrate
 - Next canonical matrix theme: **law and competing interpretations**; genres: dense analysis, case commentary, position comparison.
 - Fresh rank-1001+ continuation terms: 1974.
 - Do not weaken C2 word-band, source, exposure, review, linkage, reasoning, or zero-new checkpoint guards.
+
+
+### French C2 Unit 03 frontier
+- Unit 02 sealed; canonical C2 blob `58ce1ad95c3ba4e738df93057d7b9a3867cbf4fe`.
+- Next canonical matrix theme: **science, models, and epistemic limits**; genres: advanced synthesis, critique, research commentary.
+- Fresh rank-1001+ continuation terms: 1949.
+- Do not weaken C2 word-band, source, exposure, review, linkage, reasoning, or zero-new checkpoint guards.
