@@ -1,17 +1,32 @@
 {
-  "status": "C1_UNIT05_PENDING",
+  "status": "PASS_TO_C1_UNIT06",
   "date": "2026-08-17",
   "starting_c1_passages": 24,
-  "ending_c1_passages": 24,
+  "ending_c1_passages": 30,
   "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
-  "c1_blob": "3631f63f3a6c0dc8a2640a6d43d8ef05df5dd9ef",
-  "c1_unit05_pass": false,
-  "c1_unit06_frontier_prepared": false,
+  "c1_blob": "26c09727e67f88bc5fcaf17440ce145df48b4d4b",
+  "c1_unit05_pass": true,
+  "c1_unit06_frontier_prepared": true,
   "completed_stages": [
     "complete_or_verify_c1_unit04",
     "resolve_c1_unit05_plan",
     "probe_c1_unit05_targets",
-    "select_c1_unit05_targets"
+    "select_c1_unit05_targets",
+    "generate_c1_unit05",
+    "audit_c1_unit05_generation",
+    "lock_c1_unit05",
+    "resolve_c1_unit06_plan",
+    "probe_c1_unit06_targets",
+    "sync_c1_unit05_to_unit06"
   ],
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit05_retry.py\", line 14, in fit\n    try:return orig_fit(paras,lo,hi)\n               ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit05.py\", line 42, in fit\n    if len(text.split())<lo:raise AssertionError(f'Unit05 below C1 minimum {len(text.split())} < {lo}')\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Unit05 below C1 minimum 485 < 500\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit05.py\", line 39, in main\n    run('generate_french_c1_unit05.py');generated=True;stages.append('generate_c1_unit05')\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit05_retry.py\", line 11, in run\n    return orig_run('generate_french_c1_unit05_retry.py')\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit05.py\", line 7, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit05_retry.py\", line 24, in <module>\n    ns['main']()\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit05.py\", line 72, in main\n    for s in specs():unit.append(row(s,groups[s['id'][-3:]],reviews[s['id'][-3:]],prior,deck,lo,hi,theme))\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit05.py\", line 49, in row\n    paras=list(spec['paras']);paras[1]+=' '+' '.join(USE[f] for f in forms);paras[2]+=' '+review_bridge(reviews);paras,text=fit(paras,lo,hi);P=base.prior(prior);new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,P) for f in reviews];ids={t['form']:t['id'] for t in new+rev};q,a=base.qa(qa_items(spec,forms),ids)\n                                                                                                                            ^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit05_retry.py\", line 20, in fit\n    if len(text.split())<lo:raise AssertionError(f'Unit05 below C1 minimum after substantive uncertainty expansion: {len(text.split())} < {lo}')\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Unit05 below C1 minimum after substantive uncertainty expansion: 393 < 500\n"
+  "error": null,
+  "accepted_c1_default": 4,
+  "default_is_hard_quota": false,
+  "unit06_theme": "law, rights, and interpretation",
+  "unit06_genres": [
+    "case-style explanation",
+    "argument",
+    "commentary"
+  ],
+  "remaining_fresh_source_terms": 350
 }

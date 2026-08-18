@@ -220,3 +220,13 @@ Theme: **language, identity, and society**. Genres: **["essay", "analysis", "pai
 
 ### Immediate frontier — French C1 Unit 05
 Theme: **scientific uncertainty and communication**. Genres: **["research summary", "journalistic analysis", "critique"]**. Generate sequences 25–30 against `3631f63f3a6c0dc8a2640a6d43d8ef05df5dd9ef` with `500–800` words, 10 linked Q/A, exact source/review guards and C1 reasoning requirements.
+
+
+## French C1 Unit 05 — COMPLETE / CURRENT LOCK
+
+- Canonical C1 blob `26c09727e67f88bc5fcaf17440ce145df48b4d4b`; 30 C1 passages / 300 Q / 300 A.
+- Unit05 strict review and frontier lock PASS.
+- calibrated default remains `4`, not a hard quota.
+
+### Immediate frontier — French C1 Unit 06
+Theme: **law, rights, and interpretation**. Genres: **["case-style explanation", "argument", "commentary"]**. Generate sequences 31–36 against `26c09727e67f88bc5fcaf17440ce145df48b4d4b` with `500–800` words, 10 linked Q/A, exact source/review guards and C1 reasoning requirements.

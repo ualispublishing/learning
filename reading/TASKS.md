@@ -191,6 +191,19 @@ Remaining French generation:
 - [ ] Default `4` fresh targets in P01–P05, not a hard quota; P06 zero-new.
 - [ ] Preserve `500–800` words, 10 linked Q/A and all source/review/C1-quality guards.
 
+
+#### C1 Unit 05 — COMPLETE / GENERATION PASS
+- [x] Sequences 25–30 canonical; 6 passages / 60 Q / 60 A.
+- [x] Strict generation review and frontier lock PASS.
+- [x] Canonical C1 blob `26c09727e67f88bc5fcaf17440ce145df48b4d4b`.
+
+#### C1 Unit 06 — IMMEDIATE NEXT
+- Theme: **law, rights, and interpretation**.
+- Genres: **["case-style explanation", "argument", "commentary"]**.
+- [ ] Generate sequences 31–36 against `26c09727e67f88bc5fcaf17440ce145df48b4d4b`.
+- [ ] Default `4` fresh targets in P01–P05, not a hard quota; P06 zero-new.
+- [ ] Preserve `500–800` words, 10 linked Q/A and all source/review/C1-quality guards.
+
 ## Urdu — QUEUED
 - [x] A1 sequences 1–6 exist.
 - [ ] A1 sequences 7–60.
