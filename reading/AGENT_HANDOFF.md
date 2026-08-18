@@ -160,3 +160,17 @@ Urdu remains unchanged at six A1 calibration passages. Keep it paused while Fren
 - validated root lexical CSV remains read-only;
 - frequency rank is not a CEFR label;
 - final approval is fail-closed and cannot be obtained by editing status fields.
+
+
+## French B2 — COMPLETE / GENERATION-INTEGRITY PASS
+
+- Canonical B2 blob `38976211f13329ba3e2b0b9dbd6868699023d05d`.
+- 60 passages / 600 questions / 600 answers.
+- 200 unique B2 deliberate targets; zero prior-level collisions.
+- checkpoints 6,12,18,24,30,36,42,48,54,60 are zero-new.
+- artifact `reading/audit/french_b2_generation_integrity.json` = PASS.
+- This is a generation seal, not the deferred final whole-French multi-pass audit.
+
+### Immediate frontier — French C1 Unit 01 calibration
+
+Read the canonical C1 passage standard and topic/genre matrix first. Derive the exact word band and production constraints; run an exhaustive freshness probe against all A1–B2 deliberate targets; choose a conservative calibration lexical load rather than copying B2 by assumption; generate sequences 1–6 with P06 zero-new and 10 linked Q/A; then run a strict post-calibration language/pedagogy/integrity review before setting the C1 production default.

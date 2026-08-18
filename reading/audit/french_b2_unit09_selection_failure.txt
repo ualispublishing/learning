@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "/home/runner/work/learning/learning/reading/tools/select_french_b2_unit09_targets.py", line 39, in <module>
-    if __name__=='__main__':main()
-                            ^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/select_french_b2_unit09_targets.py", line 26, in main
-    if lock.get('status')!='PASS' or lock.get('last_sequence')!=48 or blob!=lock.get('canonical_blob'):raise AssertionError('Unit08 lock/live B2 mismatch')
-                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: Unit08 lock/live B2 mismatch

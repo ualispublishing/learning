@@ -1,12 +1,21 @@
 {
-  "status": "PARTIAL",
+  "status": "PASS_TO_C1",
   "date": "2026-08-17",
-  "starting_b2_passages": 48,
-  "ending_b2_passages": 48,
-  "b2_blob": "7f4498a3766fb442d47e96bb430cb865a6c4b835",
-  "completed_stages": [],
-  "b2_generation_integrity_pass": false,
-  "c1_readiness_pass": false,
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_b2_to_c1_frontier.py\", line 86, in main\n    run('generate_french_b2_unit09_retry.py');n=len(rows());assert n==54;stages.append('generate_unit09');ensure_lock(9);stages.append('lock_unit09')\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_b2_to_c1_frontier.py\", line 23, in run\n    print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 286, in run_path\n  File \"<frozen runpy>\", line 259, in _get_code_from_file\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_b2_unit09_retry.py\", line 43\n    row['word_count']=len(row['text'].split());row['sentence_count']=max(1,len(re.findall(r'[.!?](?:[»”\"])?',row['text']))\n                                                                        ^\nSyntaxError: '(' was never closed\n",
-  "c1_error": null
+  "starting_b2_passages": 60,
+  "ending_b2_passages": 60,
+  "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "completed_stages": [
+    "audit_b2_generation_integrity",
+    "prepare_c1_readiness",
+    "sync_b2_complete_to_c1"
+  ],
+  "b2_generation_integrity_pass": true,
+  "c1_readiness_pass": true,
+  "error": null,
+  "c1_error": null,
+  "c1_word_band": [
+    500,
+    800
+  ],
+  "c1_matrix_matches": 3
 }

@@ -113,18 +113,22 @@ Unit 06 targets: `téléphone`, `compte`, `message`, `adresse`, `photo`, `nom`, 
 
 Unit 07 targets: `film`, `musique`, `chanson`, `jouer`, `histoire`, `lire`, `écrire`, `mot`, `ton`, `sens`, `sujet`, `imaginer`, `avis`, `aimer`, `beau`, `drôle`, `vie`, `présent`, `société`, `politique`.
 
-#### Unit 08 — IMMEDIATE NEXT
-Canonical topic-matrix theme: **history and explanation**. Genres: **historical account / causal analysis / source comparison**.
+#### B2 — COMPLETE / GENERATION-INTEGRITY PASS
+- [x] 60 passages / 600 questions / 600 answers.
+- [x] 10 units; P01–P05 use 4 fresh targets each; all ten P06 checkpoints zero-new.
+- [x] 200 unique B2 deliberate target IDs/forms with zero A1–B1 collisions.
+- [x] Full B2 generation-integrity artifact: `reading/audit/french_b2_generation_integrity.json` = PASS.
+- [x] Canonical B2 blob: `38976211f13329ba3e2b0b9dbd6868699023d05d`.
+- [x] Final whole-French multi-pass audit remains deferred until C1–C2 generation is complete.
 
-- [ ] Generate sequences 43–48 against locked B2 blob `5ff899452326f679b7c16b0ff33d8f38fa99719a`.
-- [ ] Accepted default 4 fresh targets per P01–P05; P06 zero new.
-- [ ] Check every candidate against all prior deliberate French A1–B2 targets.
-- [ ] Preserve 350–550 words, 10 linked Q/A, source identity, exact reviews and local target declarations.
-- [ ] Require chronology, causal chains, competing explanations, source perspective/comparison, counterargument, author position and synthesis.
-- [ ] Fail closed on lock/source drift, collision, schema/linkage, word band or review visibility.
+#### C1 Unit 01 — IMMEDIATE NEXT / CALIBRATION
+- [ ] Derive exact C1 word band and discourse/genre constraints from canonical repository policy.
+- [ ] Run an exhaustive remaining-vocabulary freshness probe against A1–B2.
+- [ ] Choose a conservative calibration target load; do not assume the B2 default carries forward.
+- [ ] Generate sequences 1–6 with P06 zero-new and 10 linked Q/A each.
+- [ ] Run strict language, pedagogy, source, exposure and structural review before setting the C1 default.
 
-Remaining after Unit07:
-- [ ] B2: 18 passages.
+Remaining French generation:
 - [ ] C1: 60 passages.
 - [ ] C2: 60 passages.
 
@@ -145,4 +149,4 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 
 ## Immediate next task
 
-**Generate French B2 Unit 08 / sequences 43–48 for `history and explanation` against blob `5ff899452326f679b7c16b0ff33d8f38fa99719a`. Keep Arabic sealed.**
+**Calibrate French C1 Unit 01 from the canonical C1 standard and topic matrix after the B2 generation-integrity seal. Keep Arabic sealed.**
