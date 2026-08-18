@@ -12,7 +12,7 @@ R=Path(__file__).resolve().parents[2];C1=R/'reading/french/c1/passages.jsonl';B2
 SELECTION=[
  ('p01_work','travailler'),('p01_role','occuper'),('p01_exit','quitter'),('p01_employer','patron'),
  ('p02_oversight','inspecteur'),('p02_guard','garde'),('p02_reminder','rappeler'),('p02_accuracy','exact'),
- ('p03_authority','maître'),('p03_profession','professeur'),('p03_membership','club'),('p03_organization','boîte'),
+ ('p03_authority','maître'),('p03_profession','professeur'),('p03_membership','club'),('p03_expected','censé'),
  ('p04_install','mettre'),('p04_withdraw','retirer'),('p04_launch','lancer'),('p04_sanction','virer'),
  ('p05_learning','apprendre'),('p05_burden','porter'),('p05_question','poser'),('p05_method','manière')]
 BANNED={'être','avoir','de','je','pas','le','que','vous','tu','et','il','un','en','ça','on','une','elle','me','du','te','se','toi','lui','votre','cette','son','par','ou','des','sa','ses','leur','mes','tes','cet','dont','ni','aucun','aucune','la'}
