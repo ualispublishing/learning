@@ -13,7 +13,7 @@ USE={
 'regarder':'Regarder signifie ici examiner directement un indicateur, un dossier ou un comportement avant de l’intégrer au jugement professionnel.',
 'entendre':'Entendre un témoignage fournit une information située; le décideur doit distinguer ce que la personne rapporte directement de ce qu’elle interprète.',
 'parler':'Parler d’un problème transforme une expérience en énoncé; l’analyse doit conserver qui parle, à quel titre et avec quel accès aux faits.',
-'passer':'Ce qui se passe avant, pendant et après une décision permet de reconstruire la séquence causale et d’éviter d’attribuer au choix un effet qui l’a précédé.',
+'passer':'Le verbe « passer » sert ici à reconstruire ce qui se passe avant, pendant et après une décision afin de distinguer la séquence causale d’une simple succession temporelle.',
 'homme':'La catégorie « homme » peut révéler un effet de groupe, mais elle ne doit être utilisée que si le sexe ou le genre est réellement pertinent pour le mécanisme examiné.',
 'femme':'La catégorie « femme » rappelle qu’une moyenne globale peut masquer des effets distribués différemment; le jugement doit vérifier si la recommandation reste défendable pour ce groupe.',
 'gens':'Le mot « gens » est trop général pour porter seul une conclusion; l’auteur doit préciser quelles personnes sont incluses, absentes ou particulièrement exposées.',
