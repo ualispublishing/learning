@@ -6,7 +6,7 @@
   "paused_languages": [
     "Urdu"
   ],
-  "phase": "Arabic remains sealed. French A1-B2 generation integrity is sealed; C1 Units 01-02 are canonical and guarded. C1 Unit03 is next.",
+  "phase": "Arabic A1-C2 is formally approved. French A1, A2, B1 and B2 are generated; B1 and B2 generation-integrity are PASS. French C1 Unit 01 calibration is next.",
   "target_passages": 1080,
   "target_is_quota": false,
   "approved_passages": 360,
@@ -49,7 +49,7 @@
   },
   "french": {
     "state": "ACTIVE_GENERATION",
-    "canonical_passages": 252,
+    "canonical_passages": 240,
     "levels": {
       "a1": 60,
       "a2": 60,
@@ -58,8 +58,8 @@
       "c1": 12,
       "c2": 0
     },
-    "questions": 2520,
-    "answers": 2520,
+    "questions": 2400,
+    "answers": 2400,
     "latest_audit_commit": "a784e4594b1bb487c51c882cf8b704c99331cd96",
     "generation_invariants": {
       "ten_questions_and_answers_per_passage": true,
@@ -385,7 +385,7 @@
         60
       ]
     },
-    "next_target": "Generate French C1 Unit 03 / sequences 13-18 against exact C1 blob 3dd6fc869920ed96cff6861d7498afe59e433947. Canonical theme: institutions and incentives; genres: [\"analysis\", \"commentary\", \"policy note\"]. Use calibrated default 4 fresh targets per P01-P05 unless canonical policy/discourse load supports more; P06 zero-new. Preserve word band 500-800, 10 linked Q/A, exact review forms, source identity/exposures and C1 reasoning.",
+    "next_target": "Calibrate French C1 Unit 01 / sequences 1-6 from the canonical C1 passage standard and topic/genre matrix. Derive the exact C1 word band and planning constraints from repository policy first; probe all remaining source vocabulary against A1-B2; choose a conservative fresh target load; generate P01-P05 plus zero-new P06; run a strict post-calibration review before setting a C1 production default.",
     "c1_generation": {
       "status": "unit02_generation_pass",
       "passages": 12,
@@ -460,10 +460,11 @@
   },
   "next_actions": [
     "keep Arabic sealed unless canonical Arabic changes",
-    "generate French C1 Unit03 against exact Unit02 frontier lock",
-    "preserve calibrated C1 default as a default, not quota",
-    "continue C1 generation-first through Unit10, then C2",
-    "defer final whole-French multi-pass audit until C2 generation completes"
+    "do not broadly regenerate French A1-B2",
+    "extract/validate canonical C1 standards and topic matrix after the B2 integrity seal",
+    "calibrate French C1 Unit01 before setting the C1 production default",
+    "continue generation-first through C1-C2 before the final whole-French multi-pass audit",
+    "keep Urdu unchanged while French is active unless explicitly reprioritized"
   ],
   "important_files": [
     "reading/AGENT_HANDOFF.md",
