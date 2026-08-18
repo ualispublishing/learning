@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Quality preflight for C1 Unit04 language, identity, and society."""
+"""Quality/schema preflight for C1 Unit04 language, identity, and society."""
 from pathlib import Path
 HERE=Path(__file__).resolve().parent
 p=HERE/'generate_french_c1_unit04.py'
 ns={'__name__':'c1_u04_base','__file__':str(p),'__package__':None}
 exec(compile(p.read_text(encoding='utf-8'),str(p),'exec'),ns)
+
 orig_fit=ns['fit']
 EXTRA=[
 "Une institution qui s’adresse à plusieurs publics doit distinguer compréhension et simple exposition. Publier la même formulation pour tous ne garantit pas que chacun interprète la consigne de la même manière. L’évaluation observe donc des reformulations, des erreurs de compréhension et les groupes pour lesquels une explication supplémentaire réduit effectivement l’écart.",
@@ -25,4 +26,31 @@ def fit(paras,lo,hi):
         if len(text.split())>hi:raise AssertionError(f'Unit04 above C1 maximum after substantive social-language expansion: {len(text.split())} > {hi}')
         return p,text
 ns['fit']=fit
+
+def normalize(row,checkpoint=False):
+    # Match the schema-valid conventions already used by sealed C1 Units01-03.
+    if not checkpoint:
+        row['passage_type']='instructional'
+        row['reader_tags']=['unit_role:instructional','generation_batch','french_c1_u04']
+    row['domains']=[('public' if d in {'social','cultural'} else d) for d in row.get('domains',[])]
+    # Preserve order while removing duplicate domain values after mapping.
+    row['domains']=list(dict.fromkeys(row['domains']))
+    for t in row.get('grammar_targets',[]):
+        if t.get('role')=='target':t['role']='new'
+    for t in row.get('discourse_targets',[]):
+        if t.get('role')=='target':t['role']='new'
+    for q in row.get('questions',[]):
+        if q.get('type')=='scope':q['type']='inference'
+    row['speed_training']['new_word_policy']='none' if checkpoint else 'controlled'
+    row['speed_training']['benchmark_eligible']=False
+    row['speed_training']['timed']=False
+    return row
+
+orig_make=ns['make']
+def make(*args,**kwargs):return normalize(orig_make(*args,**kwargs),False)
+ns['make']=make
+orig_checkpoint=ns['checkpoint']
+def checkpoint(*args,**kwargs):return normalize(orig_checkpoint(*args,**kwargs),True)
+ns['checkpoint']=checkpoint
+
 ns['main']()
