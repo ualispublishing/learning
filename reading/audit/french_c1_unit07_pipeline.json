@@ -1,12 +1,15 @@
 {
   "status": "C1_UNIT07_PENDING",
   "date": "2026-08-17",
-  "starting_c1_passages": 30,
-  "ending_c1_passages": 30,
+  "starting_c1_passages": 36,
+  "ending_c1_passages": 36,
   "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
-  "c1_blob": "26c09727e67f88bc5fcaf17440ce145df48b4d4b",
+  "c1_blob": "c3aee049cf6bdbdadf6639d132fcfc061481a3c9",
   "c1_unit07_pass": false,
   "c1_unit08_frontier_prepared": false,
-  "completed_stages": [],
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit07.py\", line 29, in main\n    if n!=36:raise AssertionError(f'Unit07 requires 36 rows, got {n}')\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Unit07 requires 36 rows, got 30\n"
+  "completed_stages": [
+    "resolve_c1_unit07_plan",
+    "probe_c1_unit07_targets"
+  ],
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit07.py\", line 32, in main\n    env('resolve_french_c1_unit_plan.py',7);st.append('resolve_c1_unit07_plan');env('probe_french_c1_unit_targets.py',7);st.append('probe_c1_unit07_targets');run('select_french_c1_unit07_targets.py');st.append('select_c1_unit07_targets');run('generate_french_c1_unit07.py');gen=True;st.append('generate_c1_unit07');env('audit_french_c1_unit_generation.py',7);st.append('audit_c1_unit07_generation');env('lock_french_c1_unit_frontier.py',7);st.append('lock_c1_unit07');verify(h(C1));seal=True;prep(st);front=True\n                                                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit07_retry.py\", line 5, in run\n    def run(name):return orig('generate_french_c1_unit07_retry.py' if name=='generate_french_c1_unit07.py' else name)\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit07.py\", line 7, in run\n    def run(n):print('=== RUN',n,'===');runpy.run_path(str(T/n),run_name='__main__')\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/select_french_c1_unit07_targets.py\", line 19, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/select_french_c1_unit07_targets.py\", line 17, in main\n    if len(selected)!=20 or any(len(v)!=4 for v in groups.values()):raise AssertionError('Unit07 target structure failure')\n                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Unit07 target structure failure\n"
 }

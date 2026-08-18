@@ -1,5 +1,20 @@
 Traceback (most recent call last):
-  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit07.py", line 29, in main
-    if n!=36:raise AssertionError(f'Unit07 requires 36 rows, got {n}')
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: Unit07 requires 36 rows, got 30
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit07.py", line 32, in main
+    env('resolve_french_c1_unit_plan.py',7);st.append('resolve_c1_unit07_plan');env('probe_french_c1_unit_targets.py',7);st.append('probe_c1_unit07_targets');run('select_french_c1_unit07_targets.py');st.append('select_c1_unit07_targets');run('generate_french_c1_unit07.py');gen=True;st.append('generate_c1_unit07');env('audit_french_c1_unit_generation.py',7);st.append('audit_c1_unit07_generation');env('lock_french_c1_unit_frontier.py',7);st.append('lock_c1_unit07');verify(h(C1));seal=True;prep(st);front=True
+                                                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit07_retry.py", line 5, in run
+    def run(name):return orig('generate_french_c1_unit07_retry.py' if name=='generate_french_c1_unit07.py' else name)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit07.py", line 7, in run
+    def run(n):print('=== RUN',n,'===');runpy.run_path(str(T/n),run_name='__main__')
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/work/learning/learning/reading/tools/select_french_c1_unit07_targets.py", line 19, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/select_french_c1_unit07_targets.py", line 17, in main
+    if len(selected)!=20 or any(len(v)!=4 for v in groups.values()):raise AssertionError('Unit07 target structure failure')
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Unit07 target structure failure
