@@ -1,0 +1,51 @@
+=== RUN complete_french_c1_unit03.py ===
+=== RUN complete_french_c1_unit02.py ===
+{
+  "status": "DEPENDENCY_PASS",
+  "date": "2026-08-17",
+  "starting_c1_passages": 18,
+  "ending_c1_passages": 18,
+  "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "c1_blob": "826de7eb5a241ca1c95d54281696abd65dbc22a4",
+  "c1_unit02_prefix_blob": "3dd6fc869920ed96cff6861d7498afe59e433947",
+  "c1_unit02_pass": true,
+  "completed_stages": [
+    "verify_existing_sealed_c1_unit02_prefix"
+  ],
+  "accepted_c1_default": 4,
+  "default_is_hard_quota": false,
+  "error": null
+}
+=== RUN resolve_french_c1_unit03_plan.py ===
+Traceback (most recent call last):
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit03.py", line 30, in main
+    run(name);stages.append(name.removesuffix('.py'))
+    ^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit03.py", line 12, in run
+    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit03_plan.py", line 28, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit03_plan.py", line 14, in main
+    if lock.get('status')!='PASS' or lock.get('last_sequence')!=12 or lock.get('c1_canonical_blob')!=c1blob or lock.get('b2_canonical_blob')!=b2blob:raise AssertionError('C1 Unit02 lock/live mismatch')
+                                                                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: C1 Unit02 lock/live mismatch
+
+{
+  "status": "C1_UNIT03_PENDING",
+  "date": "2026-08-17",
+  "starting_c1_passages": 18,
+  "ending_c1_passages": 18,
+  "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "c1_blob": "826de7eb5a241ca1c95d54281696abd65dbc22a4",
+  "c1_unit03_pass": false,
+  "c1_unit04_frontier_prepared": false,
+  "completed_stages": [
+    "complete_or_verify_c1_unit02"
+  ],
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit03.py\", line 30, in main\n    run(name);stages.append(name.removesuffix('.py'))\n    ^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit03.py\", line 12, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit03_plan.py\", line 28, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit03_plan.py\", line 14, in main\n    if lock.get('status')!='PASS' or lock.get('last_sequence')!=12 or lock.get('c1_canonical_blob')!=c1blob or lock.get('b2_canonical_blob')!=b2blob:raise AssertionError('C1 Unit02 lock/live mismatch')\n                                                                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: C1 Unit02 lock/live mismatch\n"
+}

@@ -1,32 +1,14 @@
 {
-  "status": "PASS_TO_C1_UNIT04",
+  "status": "C1_UNIT03_PENDING",
   "date": "2026-08-17",
-  "starting_c1_passages": 12,
+  "starting_c1_passages": 18,
   "ending_c1_passages": 18,
   "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
   "c1_blob": "826de7eb5a241ca1c95d54281696abd65dbc22a4",
-  "c1_unit03_pass": true,
-  "c1_unit04_frontier_prepared": true,
+  "c1_unit03_pass": false,
+  "c1_unit04_frontier_prepared": false,
   "completed_stages": [
-    "complete_or_verify_c1_unit02",
-    "resolve_french_c1_unit03_plan",
-    "probe_french_c1_unit03_targets",
-    "select_french_c1_unit03_targets",
-    "generate_c1_unit03_quality_preflight",
-    "audit_c1_unit03_generation",
-    "lock_c1_unit03",
-    "resolve_c1_unit04_plan",
-    "probe_c1_unit04_targets",
-    "sync_c1_unit03_to_unit04"
+    "complete_or_verify_c1_unit02"
   ],
-  "error": null,
-  "accepted_c1_default": 4,
-  "default_is_hard_quota": false,
-  "unit04_theme": "language, identity, and society",
-  "unit04_genres": [
-    "essay",
-    "analysis",
-    "paired viewpoints"
-  ],
-  "remaining_fresh_source_terms": 390
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit03.py\", line 30, in main\n    run(name);stages.append(name.removesuffix('.py'))\n    ^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit03.py\", line 12, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit03_plan.py\", line 28, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit03_plan.py\", line 14, in main\n    if lock.get('status')!='PASS' or lock.get('last_sequence')!=12 or lock.get('c1_canonical_blob')!=c1blob or lock.get('b2_canonical_blob')!=b2blob:raise AssertionError('C1 Unit02 lock/live mismatch')\n                                                                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: C1 Unit02 lock/live mismatch\n"
 }
