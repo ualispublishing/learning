@@ -23,6 +23,8 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
+          # Retry from the exact live canonical frontier; the Python orchestrator
+          # decides whether Unit08, Unit09, Unit10, or only sealing work remains.
           python reading/tools/complete_french_b2_to_c1_frontier.py 2>&1 | tee /tmp/french_b2_completion_pipeline.log
       - name: Preserve unexpected orchestrator stderr
         if: failure()
