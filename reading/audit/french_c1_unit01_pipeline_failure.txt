@@ -1,17 +1,17 @@
 Traceback (most recent call last):
-  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py", line 32, in main
-    run('audit_french_c1_unit01_calibration.py');stages.append('audit_c1_unit01_calibration')
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py", line 38, in main
+    run('resolve_french_c1_unit02_plan.py');stages.append('resolve_c1_unit02_plan')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py", line 12, in run
     def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')
                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<frozen runpy>", line 287, in run_path
   File "<frozen runpy>", line 98, in _run_module_code
   File "<frozen runpy>", line 88, in _run_code
-  File "/home/runner/work/learning/learning/reading/tools/audit_french_c1_unit01_calibration.py", line 93, in <module>
+  File "/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit02_plan.py", line 47, in <module>
     if __name__=='__main__':main()
                             ^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/audit_french_c1_unit01_calibration.py", line 77, in main
-    if r['sequence']<=5 and sum(checks.values())<3:raise AssertionError(f"{r['id']}: insufficient C1 reasoning-function density {checks}")
-                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: fr-c1-u01-p04: insufficient C1 reasoning-function density {'scope': False, 'counterargument': False, 'uncertainty_or_revision': False, 'source_method': True, 'normative_bridge': True}
+  File "/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit02_plan.py", line 42, in main
+    if conf:raise AssertionError(f'Ambiguous C1 Unit02 planning nodes: {[x["path"] for x in top[:8]]}')
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Ambiguous C1 Unit02 planning nodes: ['$.levels.B1[1]', '$.levels.C1[1]', '$.levels.A2[1]', '$.levels.B2[1]', '$.levels.C2[1]', '$.levels.A1[1]']

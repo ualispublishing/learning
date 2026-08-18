@@ -138,25 +138,182 @@
 === RUN select_french_c1_unit01_calibration_targets.py ===
 {"status": "PASS", "calibration_load": 4, "canonical_planning_band": [6, 10], "band_is_quota": false, "selected_count": 20, "fallbacks": 20, "groups": {"p01": ["enquête", "base", "suspect", "environ"], "p02": ["courant", "intérieur", "exister", "âge"], "p03": ["traiter", "mener", "ailleurs", "complètement"], "p04": ["approcher", "engager", "juge", "avocat"], "p05": ["directeur", "animal", "drogue", "banque"]}}
 === RUN generate_french_c1_unit01_calibration_retry.py ===
-{"status": "PASS", "theme": "research and evidence", "genres": ["academic-style synthesis", "methods explanation", "critique"], "word_band": [500, 800], "passages": 6, "questions": 60, "answers": 60, "new_targets": 20, "paired_group": "fr-c1-u01-action-under-uncertainty-viewpoints", "word_counts": {"fr-c1-u01-p01": 508, "fr-c1-u01-p02": 529, "fr-c1-u01-p03": 524, "fr-c1-u01-p04": 514, "fr-c1-u01-p05": 510, "fr-c1-u01-p06": 534}}
+{"status": "PASS", "theme": "research and evidence", "genres": ["academic-style synthesis", "methods explanation", "critique"], "word_band": [500, 800], "passages": 6, "questions": 60, "answers": 60, "new_targets": 20, "paired_group": "fr-c1-u01-action-under-uncertainty-viewpoints", "word_counts": {"fr-c1-u01-p01": 508, "fr-c1-u01-p02": 529, "fr-c1-u01-p03": 524, "fr-c1-u01-p04": 567, "fr-c1-u01-p05": 510, "fr-c1-u01-p06": 534}}
 === RUN audit_french_c1_unit01_calibration.py ===
+{
+  "status": "PASS",
+  "scope": "French C1 Unit 01 calibration review",
+  "b2_canonical_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "c1_canonical_blob": "6ca488f81788cefa49ef2e303bf6966cb4862a4c",
+  "theme": "research and evidence",
+  "genres": [
+    "academic-style synthesis",
+    "methods explanation",
+    "critique"
+  ],
+  "word_band": [
+    500,
+    800
+  ],
+  "word_counts": [
+    508,
+    529,
+    524,
+    567,
+    510,
+    534
+  ],
+  "paragraph_counts": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    5
+  ],
+  "passages": 6,
+  "questions": 60,
+  "answers": 60,
+  "unique_new_target_ids": 20,
+  "unique_new_target_forms": 20,
+  "prior_level_collisions": 0,
+  "checkpoint_zero_new": true,
+  "question_type_counts": {
+    "argument_relation": 6,
+    "assumption": 6,
+    "cross_text_synthesis": 2,
+    "inference": 6,
+    "main_claim": 6,
+    "reference_resolution": 1,
+    "stance": 5,
+    "summary": 6,
+    "synthesis": 1,
+    "vocabulary_in_context": 21
+  },
+  "paired_group": "fr-c1-u01-action-under-uncertainty-viewpoints",
+  "paired_similarity_ratio": 0.0879,
+  "language_review": "PASS",
+  "pedagogical_review": "PASS",
+  "source_identity": "PASS",
+  "exposure_counts": "PASS",
+  "exact_reviews": "PASS",
+  "schema": "PASS",
+  "linkage": "PASS",
+  "accepted_c1_default_new_targets_per_standard_passage": 4,
+  "accepted_default_is_hard_quota": false,
+  "planning_note": "Four new targets per standard passage is accepted as a conservative C1 production default after calibration, not a hard quota. Increase only when canonical policy and discourse load support it; never drop below an explicit standard minimum.",
+  "final_french_audit": "DEFERRED_UNTIL_C2_COMPLETE"
+}
+=== RUN lock_french_c1_unit01_frontier.py ===
+{
+  "status": "PASS",
+  "scope": "French C1 Unit 01 calibrated frontier lock",
+  "b2_canonical_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "c1_canonical_blob": "6ca488f81788cefa49ef2e303bf6966cb4862a4c",
+  "passages": 6,
+  "questions": 60,
+  "answers": 60,
+  "completed_units": [
+    1
+  ],
+  "last_sequence": 6,
+  "unit01_theme": "research and evidence",
+  "unit01_genres": [
+    "academic-style synthesis",
+    "methods explanation",
+    "critique"
+  ],
+  "unit01_word_band": [
+    500,
+    800
+  ],
+  "unit01_word_counts": [
+    508,
+    529,
+    524,
+    567,
+    510,
+    534
+  ],
+  "unit01_target_forms": [
+    "ailleurs",
+    "animal",
+    "approcher",
+    "avocat",
+    "banque",
+    "base",
+    "complètement",
+    "courant",
+    "directeur",
+    "drogue",
+    "engager",
+    "enquête",
+    "environ",
+    "exister",
+    "intérieur",
+    "juge",
+    "mener",
+    "suspect",
+    "traiter",
+    "âge"
+  ],
+  "unit01_target_groups": {
+    "p01": [
+      "enquête",
+      "base",
+      "suspect",
+      "environ"
+    ],
+    "p02": [
+      "courant",
+      "intérieur",
+      "exister",
+      "âge"
+    ],
+    "p03": [
+      "traiter",
+      "mener",
+      "ailleurs",
+      "complètement"
+    ],
+    "p04": [
+      "approcher",
+      "engager",
+      "juge",
+      "avocat"
+    ],
+    "p05": [
+      "directeur",
+      "animal",
+      "drogue",
+      "banque"
+    ]
+  },
+  "unit01_new_targets_per_standard_passage": 4,
+  "unit01_checkpoint_zero_new": true,
+  "accepted_c1_default_new_targets_per_standard_passage": 4,
+  "accepted_default_is_hard_quota": false,
+  "calibration_review_artifact": "reading/audit/french_c1_unit01_calibration_review.json",
+  "note": "Safe continuation lock for C1 Unit02. This is not final French approval."
+}
+=== RUN resolve_french_c1_unit02_plan.py ===
 Traceback (most recent call last):
-  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py", line 32, in main
-    run('audit_french_c1_unit01_calibration.py');stages.append('audit_c1_unit01_calibration')
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py", line 38, in main
+    run('resolve_french_c1_unit02_plan.py');stages.append('resolve_c1_unit02_plan')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py", line 12, in run
     def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')
                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<frozen runpy>", line 287, in run_path
   File "<frozen runpy>", line 98, in _run_module_code
   File "<frozen runpy>", line 88, in _run_code
-  File "/home/runner/work/learning/learning/reading/tools/audit_french_c1_unit01_calibration.py", line 93, in <module>
+  File "/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit02_plan.py", line 47, in <module>
     if __name__=='__main__':main()
                             ^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/audit_french_c1_unit01_calibration.py", line 77, in main
-    if r['sequence']<=5 and sum(checks.values())<3:raise AssertionError(f"{r['id']}: insufficient C1 reasoning-function density {checks}")
-                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: fr-c1-u01-p04: insufficient C1 reasoning-function density {'scope': False, 'counterargument': False, 'uncertainty_or_revision': False, 'source_method': True, 'normative_bridge': True}
+  File "/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit02_plan.py", line 42, in main
+    if conf:raise AssertionError(f'Ambiguous C1 Unit02 planning nodes: {[x["path"] for x in top[:8]]}')
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Ambiguous C1 Unit02 planning nodes: ['$.levels.B1[1]', '$.levels.C1[1]', '$.levels.A2[1]', '$.levels.B2[1]', '$.levels.C2[1]', '$.levels.A1[1]']
 
 {
   "status": "B2_PASS_C1_UNIT01_PENDING",
@@ -174,7 +331,9 @@ AssertionError: fr-c1-u01-p04: insufficient C1 reasoning-function density {'scop
     "probe_french_c1_unit01_targets",
     "select_french_c1_unit01_calibration_targets",
     "generate_c1_unit01_calibration_preflight",
+    "audit_c1_unit01_calibration",
+    "lock_c1_unit01",
     "restore_precalibration_c1_after_strict_failure"
   ],
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py\", line 32, in main\n    run('audit_french_c1_unit01_calibration.py');stages.append('audit_c1_unit01_calibration')\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py\", line 12, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/audit_french_c1_unit01_calibration.py\", line 93, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/audit_french_c1_unit01_calibration.py\", line 77, in main\n    if r['sequence']<=5 and sum(checks.values())<3:raise AssertionError(f\"{r['id']}: insufficient C1 reasoning-function density {checks}\")\n                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: fr-c1-u01-p04: insufficient C1 reasoning-function density {'scope': False, 'counterargument': False, 'uncertainty_or_revision': False, 'source_method': True, 'normative_bridge': True}\n"
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py\", line 38, in main\n    run('resolve_french_c1_unit02_plan.py');stages.append('resolve_c1_unit02_plan')\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py\", line 12, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit02_plan.py\", line 47, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/resolve_french_c1_unit02_plan.py\", line 42, in main\n    if conf:raise AssertionError(f'Ambiguous C1 Unit02 planning nodes: {[x[\"path\"] for x in top[:8]]}')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Ambiguous C1 Unit02 planning nodes: ['$.levels.B1[1]', '$.levels.C1[1]', '$.levels.A2[1]', '$.levels.B2[1]', '$.levels.C2[1]', '$.levels.A1[1]']\n"
 }
