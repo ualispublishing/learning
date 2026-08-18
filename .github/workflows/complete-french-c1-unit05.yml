@@ -31,6 +31,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
+          # Explicit retrigger after preserving the base Unit05 authored expansions.
           python reading/tools/complete_french_c1_unit05_retry.py 2>&1 | tee /tmp/french_c1_u05_pipeline.log
       - name: Preserve failure log
         if: steps.run.outcome != 'success'
