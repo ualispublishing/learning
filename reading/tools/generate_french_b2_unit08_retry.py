@@ -3,9 +3,9 @@
 
 Regenerates the read-only freshness probe and deterministic target selection from
 the exact Unit07 lock before invoking the base writer. Keeps all base guards,
-repairs one French agreement issue when still present, compacts the checkpoint,
-and adds substantive counterevidence/revision reasoning only when a passage is
-marginally below the 350-word B2 floor.
+guarantees exact selected-lemma exposure, applies idempotent language repairs,
+compacts the checkpoint, and adds substantive reasoning only when needed for the
+350-word B2 floor.
 """
 from pathlib import Path
 import re
@@ -25,13 +25,23 @@ p=HERE/'generate_french_b2_unit08.py'
 ns={'__name__':'unit08_base','__file__':str(p),'__package__':None}
 exec(compile(p.read_text(encoding='utf-8'),str(p),'exec'),ns)
 
+# Some natural usage templates inflect an infinitive (e.g. commencer ->
+# commence), which is pedagogically fine but fails the deliberate exact-lemma
+# exposure invariant. Preserve the natural sentence and add a concise exact-form
+# gloss only when the selected lemma itself is absent.
+orig_usage=ns['usage']
+def exact_usage(form):
+    text=orig_usage(form)
+    if not re.search(r'(?<!\w)'+re.escape(form)+r'(?!\w)',text,flags=re.IGNORECASE):
+        text += f" La forme exacte « {form} » sert ici de repère lexical pour ce mécanisme historique."
+    return text
+ns['usage']=exact_usage
+
 orig_specs=ns['passage_specs']
 def patched_specs(groups):
     specs=orig_specs(groups)
     old="Une explication historique n’est pas meilleure parce qu’elle paraît plus beau dans sa structure ou plus agréable à lire."
     new="Une explication historique n’est pas meilleure parce qu’elle met le beau en valeur dans sa structure ou paraît plus agréable à lire."
-    # Idempotent: older drafts needed this repair; newer base text may already
-    # be correct. Never fail merely because the bad anchor is gone.
     if old in specs[3]['paras'][0]:
         specs[3]['paras'][0]=specs[3]['paras'][0].replace(old,new)
     specs[4]['paras'][3]=specs[4]['paras'][3].replace(
