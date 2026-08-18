@@ -1,0 +1,237 @@
+{
+  "status": "PASS",
+  "scope": "French B2 Unit 08 target selection",
+  "theme": "history and explanation",
+  "b2_source_blob": "5ff899452326f679b7c16b0ff33d8f38fa99719a",
+  "selected_count": 20,
+  "selected": [
+    {
+      "form": "début",
+      "status": "fresh",
+      "rank": 582,
+      "id": "fr-rank-0582",
+      "meaning": null,
+      "slot": "p01_time",
+      "semantic_fallback": false
+    },
+    {
+      "form": "fin",
+      "status": "fresh",
+      "rank": 333,
+      "id": "fr-rank-0333",
+      "meaning": null,
+      "slot": "p01_sequence",
+      "semantic_fallback": false
+    },
+    {
+      "form": "état",
+      "status": "fresh",
+      "rank": 475,
+      "id": "fr-rank-0475",
+      "meaning": null,
+      "slot": "p01_state",
+      "semantic_fallback": false
+    },
+    {
+      "form": "soldat",
+      "status": "fresh",
+      "rank": 723,
+      "id": "fr-rank-0723",
+      "meaning": null,
+      "slot": "p01_conflict",
+      "semantic_fallback": false
+    },
+    {
+      "form": "commencer",
+      "status": "fresh",
+      "rank": 173,
+      "id": "fr-rank-0173",
+      "meaning": null,
+      "slot": "p02_change",
+      "semantic_fallback": false
+    },
+    {
+      "form": "détruire",
+      "status": "fresh",
+      "rank": 515,
+      "id": "fr-rank-0515",
+      "meaning": null,
+      "slot": "p02_pressure",
+      "semantic_fallback": false
+    },
+    {
+      "form": "pays",
+      "status": "fresh",
+      "rank": 429,
+      "id": "fr-rank-0429",
+      "meaning": null,
+      "slot": "p02_economy",
+      "semantic_fallback": false
+    },
+    {
+      "form": "faim",
+      "status": "fresh",
+      "rank": 702,
+      "id": "fr-rank-0702",
+      "meaning": null,
+      "slot": "p02_crisis",
+      "semantic_fallback": false
+    },
+    {
+      "form": "rapport",
+      "status": "fresh",
+      "rank": 486,
+      "id": "fr-rank-0486",
+      "meaning": null,
+      "slot": "p03_document",
+      "semantic_fallback": false
+    },
+    {
+      "form": "lettre",
+      "status": "fresh",
+      "rank": 557,
+      "id": "fr-rank-0557",
+      "meaning": null,
+      "slot": "p03_witness",
+      "semantic_fallback": false
+    },
+    {
+      "form": "point",
+      "status": "fresh",
+      "rank": 274,
+      "id": "fr-rank-0274",
+      "meaning": null,
+      "slot": "p03_perspective",
+      "semantic_fallback": false
+    },
+    {
+      "form": "raconter",
+      "status": "fresh",
+      "rank": 412,
+      "id": "fr-rank-0412",
+      "meaning": null,
+      "slot": "p03_method",
+      "semantic_fallback": false
+    },
+    {
+      "form": "attaquer",
+      "status": "fresh",
+      "rank": 624,
+      "id": "fr-rank-0624",
+      "meaning": null,
+      "slot": "p04_conflict",
+      "semantic_fallback": false
+    },
+    {
+      "form": "gouvernement",
+      "status": "fresh",
+      "rank": 880,
+      "id": "fr-rank-0880",
+      "meaning": null,
+      "slot": "p04_authority",
+      "semantic_fallback": false
+    },
+    {
+      "form": "membre",
+      "status": "fresh",
+      "rank": 833,
+      "id": "fr-rank-0833",
+      "meaning": null,
+      "slot": "p04_groups",
+      "semantic_fallback": false
+    },
+    {
+      "form": "pendant",
+      "status": "fresh",
+      "rank": 224,
+      "id": "fr-rank-0224",
+      "meaning": null,
+      "slot": "p04_scale",
+      "semantic_fallback": true
+    },
+    {
+      "form": "gagner",
+      "status": "fresh",
+      "rank": 266,
+      "id": "fr-rank-0266",
+      "meaning": null,
+      "slot": "p05_action",
+      "semantic_fallback": false
+    },
+    {
+      "form": "chef",
+      "status": "fresh",
+      "rank": 351,
+      "id": "fr-rank-0351",
+      "meaning": null,
+      "slot": "p05_actor",
+      "semantic_fallback": false
+    },
+    {
+      "form": "ensemble",
+      "status": "fresh",
+      "rank": 245,
+      "id": "fr-rank-0245",
+      "meaning": null,
+      "slot": "p05_explanation",
+      "semantic_fallback": false
+    },
+    {
+      "form": "fort",
+      "status": "fresh",
+      "rank": 308,
+      "id": "fr-rank-0308",
+      "meaning": null,
+      "slot": "p05_qualification",
+      "semantic_fallback": false
+    }
+  ],
+  "passage_groups": {
+    "p01": [
+      "début",
+      "fin",
+      "état",
+      "soldat"
+    ],
+    "p02": [
+      "commencer",
+      "détruire",
+      "pays",
+      "faim"
+    ],
+    "p03": [
+      "rapport",
+      "lettre",
+      "point",
+      "raconter"
+    ],
+    "p04": [
+      "attaquer",
+      "gouvernement",
+      "membre",
+      "pendant"
+    ],
+    "p05": [
+      "gagner",
+      "chef",
+      "ensemble",
+      "fort"
+    ]
+  },
+  "semantic_fallback_count": 1,
+  "semantic_fallbacks": [
+    {
+      "slot": "p04_scale",
+      "form": "pendant",
+      "preferred_candidates": [
+        "national",
+        "international",
+        "économique",
+        "militaire",
+        "social",
+        "pays"
+      ]
+    }
+  ],
+  "note": "Deterministic selection from persisted freshness probe; every fallback is explicitly audited; not generation approval."
+}
