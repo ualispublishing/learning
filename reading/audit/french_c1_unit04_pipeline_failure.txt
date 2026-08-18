@@ -1,15 +1,4 @@
 Traceback (most recent call last):
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04_retry.py", line 17, in fit
-    try:return orig_fit(paras,lo,hi)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 50, in fit
-    if len(text.split())<lo:raise AssertionError(f'Unit04 below C1 minimum {len(text.split())} < {lo}')
-                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: Unit04 below C1 minimum 398 < 500
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
   File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit04.py", line 39, in main
     run('generate_french_c1_unit04_retry.py');generated=True;stages.append('generate_c1_unit04_quality_preflight')
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -19,15 +8,9 @@ Traceback (most recent call last):
   File "<frozen runpy>", line 287, in run_path
   File "<frozen runpy>", line 98, in _run_module_code
   File "<frozen runpy>", line 88, in _run_code
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04_retry.py", line 27, in <module>
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04_retry.py", line 28, in <module>
     ns['main']()
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 86, in main
-    unit.append(checkpoint(groups,deck,lo,hi,theme))
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 74, in checkpoint
-    paras,text=fit(paras,lo,hi)
-               ^^^^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04_retry.py", line 23, in fit
-    if len(text.split())<lo:raise AssertionError(f'Unit04 below C1 minimum after substantive social-language expansion: {len(text.split())} < {lo}')
-                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: Unit04 below C1 minimum after substantive social-language expansion: 471 < 500
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit04.py", line 90, in main
+    if errs:raise AssertionError(f"{r['id']}: schema {[e.message for e in errs[:6]]}")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: fr-c1-u04-p01: schema ["'standard' is not one of ['instructional', 'reinforcement', 'transfer', 'interleaved', 'fluency', 'stretch', 'checkpoint', 'paired', 'integration']", "'social' is not one of ['personal', 'public', 'educational', 'professional']", "'target' is not one of ['new', 'review', 'contrast', 'integration']", "'target' is not one of ['new', 'review', 'contrast', 'integration']", "'scope' is not one of ['gist', 'literal_detail', 'sequence', 'cause_effect', 'reference_resolution', 'vocabulary_in_context', 'single_word_definition', 'cloze_transfer', 'grammar_in_context', 'grammar_category', 'grammar_choice', 'grammar_identification', 'grammar_function', 'person_form', 'contrast', 'paraphrase', 'inference', 'motive', 'main_claim', 'argument_relation', 'stance', 'tone', 'rhetorical_function', 'assumption', 'ambiguity_resolution', 'summary', 'synthesis', 'cross_text_synthesis', 'register_style']", "'standard' is not one of ['none', 'minimal', 'controlled']"]
