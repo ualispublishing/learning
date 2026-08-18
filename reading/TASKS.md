@@ -243,6 +243,19 @@ Remaining French generation:
 - [ ] Default `4` fresh targets in P01–P05, not a hard quota; P06 zero-new.
 - [ ] Preserve `500–800` words, 10 linked Q/A and all source/review/C1-quality guards.
 
+
+#### C1 Unit 09 — COMPLETE / GENERATION PASS
+- [x] Sequences 49–54 canonical; 6 passages / 60 Q / 60 A.
+- [x] Strict generation review and frontier lock PASS.
+- [x] Canonical C1 blob `76e43c57fdbd2f8e30c90263451ae2c23f50af55`.
+
+#### C1 Unit 10 — IMMEDIATE NEXT
+- Theme: **C1 synthesis**.
+- Genres: **["multi-section essay", "paired perspectives", "checkpoint"]**.
+- [ ] Generate sequences 55–60 against `76e43c57fdbd2f8e30c90263451ae2c23f50af55`.
+- [ ] Default `4` fresh targets in P01–P05, not a hard quota; P06 zero-new.
+- [ ] Preserve `500–800` words, 10 linked Q/A and all source/review/C1-quality guards.
+
 ## Urdu — QUEUED
 - [x] A1 sequences 1–6 exist.
 - [ ] A1 sequences 7–60.

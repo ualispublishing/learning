@@ -260,3 +260,13 @@ Theme: **economics, risk, and forecasting**. Genres: **["analysis", "briefing", 
 
 ### Immediate frontier — French C1 Unit 09
 Theme: **history, memory, and narrative**. Genres: **["historiographical essay", "source comparison", "reflection"]**. Generate sequences 49–54 against `db848d9447849c178e6dae39f4474c905b974503` with `500–800` words, 10 linked Q/A, exact source/review guards and C1 reasoning requirements.
+
+
+## French C1 Unit 09 — COMPLETE / CURRENT LOCK
+
+- Canonical C1 blob `76e43c57fdbd2f8e30c90263451ae2c23f50af55`; 54 C1 passages / 540 Q / 540 A.
+- Unit09 strict review and frontier lock PASS.
+- calibrated default remains `4`, not a hard quota.
+
+### Immediate frontier — French C1 Unit 10
+Theme: **C1 synthesis**. Genres: **["multi-section essay", "paired perspectives", "checkpoint"]**. Generate sequences 55–60 against `76e43c57fdbd2f8e30c90263451ae2c23f50af55` with `500–800` words, 10 linked Q/A, exact source/review guards and C1 reasoning requirements.
