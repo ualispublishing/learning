@@ -1,23 +1,36 @@
 Traceback (most recent call last):
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit05_retry.py", line 14, in fit
+    try:return orig_fit(paras,lo,hi)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit05.py", line 42, in fit
+    if len(text.split())<lo:raise AssertionError(f'Unit05 below C1 minimum {len(text.split())} < {lo}')
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Unit05 below C1 minimum 485 < 500
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
   File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit05.py", line 39, in main
     run('generate_french_c1_unit05.py');generated=True;stages.append('generate_c1_unit05')
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit05_retry.py", line 11, in run
+    return orig_run('generate_french_c1_unit05_retry.py')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit05.py", line 7, in run
     def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')
                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<frozen runpy>", line 287, in run_path
   File "<frozen runpy>", line 98, in _run_module_code
   File "<frozen runpy>", line 88, in _run_code
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit05.py", line 92, in <module>
-    if __name__=='__main__':main()
-                            ^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit05_retry.py", line 24, in <module>
+    ns['main']()
   File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit05.py", line 72, in main
     for s in specs():unit.append(row(s,groups[s['id'][-3:]],reviews[s['id'][-3:]],prior,deck,lo,hi,theme))
                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit05.py", line 49, in row
     paras=list(spec['paras']);paras[1]+=' '+' '.join(USE[f] for f in forms);paras[2]+=' '+review_bridge(reviews);paras,text=fit(paras,lo,hi);P=base.prior(prior);new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,P) for f in reviews];ids={t['form']:t['id'] for t in new+rev};q,a=base.qa(qa_items(spec,forms),ids)
                                                                                                                             ^^^^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit05.py", line 42, in fit
-    if len(text.split())<lo:raise AssertionError(f'Unit05 below C1 minimum {len(text.split())} < {lo}')
-                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: Unit05 below C1 minimum 485 < 500
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit05_retry.py", line 20, in fit
+    if len(text.split())<lo:raise AssertionError(f'Unit05 below C1 minimum after substantive uncertainty expansion: {len(text.split())} < {lo}')
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Unit05 below C1 minimum after substantive uncertainty expansion: 393 < 500
