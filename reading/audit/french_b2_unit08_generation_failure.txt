@@ -1799,7 +1799,14 @@ Traceback (most recent call last):
     ns['main']()
   File "/home/runner/work/learning/learning/reading/tools/generate_french_b2_unit08.py", line 226, in main
     unit=[make(s,prior,deck) for s in passage_specs(groups)];unit.append(checkpoint(groups,deck));V=Draft202012Validator(json.loads(SCHEMA.read_text(encoding='utf-8')));newids=[];newforms=[]
-                                      ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/generate_french_b2_unit08_retry.py", line 35, in patched_specs
-    raise AssertionError('Unit08 P04 agreement-repair anchor drift')
-AssertionError: Unit08 P04 agreement-repair anchor drift
+          ^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_b2_unit08_retry.py", line 46, in patched_make
+    row=orig_make(spec,prior,deck)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_b2_unit08.py", line 199, in make
+    text='\n\n'.join(spec['paras']);new=[base.nt(f,text,deck) for f in spec['forms']];reviews=[base.rev(f,prior) for f in spec['reviews']];ids={t['form']:t['id'] for t in new+reviews};q,a=base.qa(items_for(spec),ids)
+                                         ^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_a2_unit03.py", line 35, in nt
+    if n<1:raise AssertionError(f'{f}: no exact new-target exposure')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: commencer: no exact new-target exposure
