@@ -204,6 +204,19 @@ Remaining French generation:
 - [ ] Default `4` fresh targets in P01–P05, not a hard quota; P06 zero-new.
 - [ ] Preserve `500–800` words, 10 linked Q/A and all source/review/C1-quality guards.
 
+
+#### C1 Unit 06 — COMPLETE / GENERATION PASS
+- [x] Sequences 31–36 canonical; 6 passages / 60 Q / 60 A.
+- [x] Strict generation review and frontier lock PASS.
+- [x] Canonical C1 blob `c3aee049cf6bdbdadf6639d132fcfc061481a3c9`.
+
+#### C1 Unit 07 — IMMEDIATE NEXT
+- Theme: **literature and cultural criticism**.
+- Genres: **["critical essay", "review", "close-reading style prose"]**.
+- [ ] Generate sequences 37–42 against `c3aee049cf6bdbdadf6639d132fcfc061481a3c9`.
+- [ ] Default `4` fresh targets in P01–P05, not a hard quota; P06 zero-new.
+- [ ] Preserve `500–800` words, 10 linked Q/A and all source/review/C1-quality guards.
+
 ## Urdu — QUEUED
 - [x] A1 sequences 1–6 exist.
 - [ ] A1 sequences 7–60.

@@ -1,18 +1,31 @@
 {
-  "status": "C1_UNIT06_PENDING",
+  "status": "PASS_TO_C1_UNIT07",
   "date": "2026-08-17",
   "starting_c1_passages": 30,
-  "ending_c1_passages": 30,
+  "ending_c1_passages": 36,
   "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
-  "c1_blob": "26c09727e67f88bc5fcaf17440ce145df48b4d4b",
-  "c1_unit06_pass": false,
-  "c1_unit07_frontier_prepared": false,
+  "c1_blob": "c3aee049cf6bdbdadf6639d132fcfc061481a3c9",
+  "c1_unit06_pass": true,
+  "c1_unit07_frontier_prepared": true,
   "completed_stages": [
     "resolve_c1_unit06_plan",
     "probe_c1_unit06_targets",
     "select_c1_unit06_targets",
     "generate_c1_unit06",
-    "restore_preunit06_after_strict_failure"
+    "audit_c1_unit06_generation",
+    "lock_c1_unit06",
+    "resolve_c1_unit07_plan",
+    "probe_c1_unit07_targets",
+    "sync_c1_unit06_to_unit07"
   ],
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06.py\", line 37, in main\n    run_env('audit_french_c1_unit_generation.py',6);stages.append('audit_c1_unit06_generation');review=json.loads((AUD/'french_c1_unit06_generation_review.json').read_text())\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06.py\", line 10, in run_env\n    try:run(name)\n        ^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06_retry.py\", line 9, in run\n    return orig(name)\n           ^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit06.py\", line 7, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/audit_french_c1_unit_generation.py\", line 70, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/audit_french_c1_unit_generation.py\", line 30, in main\n    if lock.get('status')!='PASS' or lock.get('last_sequence')!=prefix_n or lock.get('c1_canonical_blob')!=prefix_blob or lock.get('b2_canonical_blob')!=b2blob:raise AssertionError(f'previous C1 lock/prefix drift for Unit{U:02d}')\n                                                                                                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: previous C1 lock/prefix drift for Unit06\n"
+  "error": null,
+  "accepted_c1_default": 4,
+  "default_is_hard_quota": false,
+  "unit07_theme": "literature and cultural criticism",
+  "unit07_genres": [
+    "critical essay",
+    "review",
+    "close-reading style prose"
+  ],
+  "remaining_fresh_source_terms": 330
 }
