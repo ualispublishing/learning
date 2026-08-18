@@ -1,0 +1,17 @@
+{
+  "status": "C1_UNIT03_PENDING",
+  "date": "2026-08-17",
+  "starting_c1_passages": 12,
+  "ending_c1_passages": 12,
+  "b2_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+  "c1_blob": "3dd6fc869920ed96cff6861d7498afe59e433947",
+  "c1_unit03_pass": false,
+  "c1_unit04_frontier_prepared": false,
+  "completed_stages": [
+    "complete_or_verify_c1_unit02",
+    "resolve_french_c1_unit03_plan",
+    "probe_french_c1_unit03_targets",
+    "select_french_c1_unit03_targets"
+  ],
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit03.py\", line 33, in main\n    run('generate_french_c1_unit03_retry.py');generated=True;stages.append('generate_c1_unit03_quality_preflight')\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit03.py\", line 12, in run\n    def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit03_retry.py\", line 52, in <module>\n    ns['main']()\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit03.py\", line 65, in main\n    for s in specs(theme,gs):unit.append(make(s,groups[s['prefix']],review[s['prefix']],prior,deck,lo,hi,theme))\n                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit03.py\", line 50, in make\n    paras=list(s['paras']);paras[1]+=' '+' '.join(lexical(f) for f in forms);paras[2]+=' '+bridge(reviews);paras,text=fit(paras,lo,hi);new=[base.nt(f,text,deck) for f in forms];rev=[base.rev(f,prior) for f in reviews];ids={t['form']:t['id'] for t in new+rev};items=[]\n                                                                                                                                            ^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_a2_unit03.py\", line 35, in nt\n    if n<1:raise AssertionError(f'{f}: no exact new-target exposure')\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: exact: no exact new-target exposure\n"
+}
