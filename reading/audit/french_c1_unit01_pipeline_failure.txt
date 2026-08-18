@@ -1,17 +1,23 @@
 Traceback (most recent call last):
-  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py", line 26, in main
-    run(name);stages.append(name.removesuffix('.py'))
-    ^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py", line 29, in main
+    run('generate_french_c1_unit01_calibration.py');generated_here=True;stages.append('generate_c1_unit01_calibration')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/home/runner/work/learning/learning/reading/tools/complete_french_c1_unit01_calibration.py", line 12, in run
     def run(name):print(f'=== RUN {name} ===');runpy.run_path(str(TOOLS/name),run_name='__main__')
                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<frozen runpy>", line 287, in run_path
   File "<frozen runpy>", line 98, in _run_module_code
   File "<frozen runpy>", line 88, in _run_code
-  File "/home/runner/work/learning/learning/reading/tools/select_french_c1_unit01_calibration_targets.py", line 55, in <module>
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit01_calibration.py", line 253, in <module>
     if __name__=='__main__':main()
                             ^^^^^^
-  File "/home/runner/work/learning/learning/reading/tools/select_french_c1_unit01_calibration_targets.py", line 40, in main
-    if mins and max(mins)>4:raise AssertionError(f'Canonical C1 standard appears to require >4 new lexical targets per passage: {hints}; calibration load must be reviewed explicitly')
-                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: Canonical C1 standard appears to require >4 new lexical targets per passage: [(7, 9, 'vocabulary nuance.\n\n### C1 — usually 7–9'), (6, 8, '6–8\nAdd stance, paragraph relation, cohesion, abstract vocabulary')]; calibration load must be reviewed explicitly
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit01_calibration.py", line 231, in main
+    checkpoint_genre=(genres[0] if genres else 'C1 cumulative synthesis');unit.append(checkpoint(groups,deck,lo,hi,theme,checkpoint_genre));V=Draft202012Validator(json.loads(SCHEMA.read_text(encoding='utf-8')));newids=[];newforms=[];selected={x['form'] for x in sel['selected']}
+                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit01_calibration.py", line 200, in checkpoint
+    ];paras,text=fit(paras,lo,hi,extras)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c1_unit01_calibration.py", line 97, in fit
+    if len(text.split())<lo:raise AssertionError(f'C1 draft below word minimum after substantive expansion: {len(text.split())} < {lo}')
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: C1 draft below word minimum after substantive expansion: 440 < 500
