@@ -5,7 +5,10 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/verify-and-approve-french-final.yml'
+      - 'reading/tools/repair_and_audit_french_final.py'
       - 'reading/tools/repair_and_audit_french_final_v3.py'
+      - 'reading/tools/audit_french_final_whole_v3.py'
+      - 'reading/tools/approve_french_after_final_audit.py'
   workflow_dispatch:
 
 permissions:
