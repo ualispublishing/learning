@@ -1,0 +1,2589 @@
+{
+  "audit": "French A1-A2 metalinguistic/CEFR pedagogy defect-class repair",
+  "date": "2026-08-19",
+  "status": "REPAIRED_DEFINED_CLASS_STRUCTURAL_PASS_HUMAN_DIFF_REVIEW_REQUIRED",
+  "scope": [
+    "reading/french/a1/passages.jsonl",
+    "reading/french/a2/passages.jsonl"
+  ],
+  "before_sha256": {
+    "A1": "5f187a8bdce83812265b6c79bf505130f084f13f92bfc02b9d57df64efbdda42",
+    "A2": "3c6dc3687fbacbd846c087d8041f2f0f58c0116b1dbf7008a64ad32611c4802a"
+  },
+  "after_sha256": {
+    "A1": "97948c375f54649935db2d20c44def1dc539939dc1c14d9b063d6647d566da13",
+    "A2": "54e38bdbd8c7264a0d77484296c256857465783d57069ac456cc63538d515552"
+  },
+  "inventory_candidate_total": 88,
+  "confirmed_defect_count": 63,
+  "false_positive_count": 25,
+  "changed_passage_count": 62,
+  "changed_passage_ids": [
+    "fr-a1-u01-p02",
+    "fr-a1-u01-p03",
+    "fr-a1-u01-p06",
+    "fr-a1-u02-p01",
+    "fr-a1-u02-p03",
+    "fr-a1-u02-p04",
+    "fr-a1-u02-p05",
+    "fr-a1-u03-p01",
+    "fr-a1-u03-p02",
+    "fr-a1-u03-p03",
+    "fr-a1-u03-p04",
+    "fr-a1-u03-p05",
+    "fr-a1-u04-p01",
+    "fr-a1-u04-p02",
+    "fr-a1-u04-p03",
+    "fr-a1-u04-p04",
+    "fr-a1-u04-p05",
+    "fr-a1-u05-p01",
+    "fr-a1-u05-p02",
+    "fr-a1-u05-p03",
+    "fr-a1-u05-p04",
+    "fr-a1-u05-p05",
+    "fr-a1-u05-p06",
+    "fr-a1-u06-p01",
+    "fr-a1-u06-p02",
+    "fr-a1-u06-p03",
+    "fr-a1-u06-p04",
+    "fr-a1-u06-p05",
+    "fr-a1-u06-p06",
+    "fr-a1-u07-p01",
+    "fr-a1-u07-p02",
+    "fr-a1-u07-p03",
+    "fr-a1-u07-p04",
+    "fr-a1-u07-p05",
+    "fr-a1-u07-p06",
+    "fr-a1-u08-p01",
+    "fr-a1-u08-p02",
+    "fr-a1-u08-p03",
+    "fr-a1-u08-p04",
+    "fr-a1-u08-p05",
+    "fr-a1-u08-p06",
+    "fr-a1-u09-p01",
+    "fr-a1-u09-p02",
+    "fr-a1-u09-p03",
+    "fr-a1-u09-p04",
+    "fr-a1-u09-p05",
+    "fr-a1-u09-p06",
+    "fr-a1-u10-p01",
+    "fr-a1-u10-p02",
+    "fr-a1-u10-p03",
+    "fr-a1-u10-p04",
+    "fr-a1-u10-p05",
+    "fr-a1-u10-p06",
+    "fr-a2-u01-p01",
+    "fr-a2-u01-p02",
+    "fr-a2-u01-p03",
+    "fr-a2-u01-p04",
+    "fr-a2-u01-p05",
+    "fr-a2-u01-p06",
+    "fr-a2-u02-p01",
+    "fr-a2-u02-p02",
+    "fr-a2-u02-p03"
+  ],
+  "adjudication_rule": {
+    "repair": [
+      "all grammar_category tasks in A1-A2",
+      "all grammar_function tasks in A1-A2",
+      "grammar_in_context tasks that explicitly require formal structural labels/forms",
+      "A1 non-grammar-type candidates that explicitly require formal grammar terminology"
+    ],
+    "retain": [
+      "ordinary form-choice recognition without terminology burden",
+      "literal/sequence/inference/content questions that matched scanner text accidentally",
+      "contextual meaning/order/purpose questions that do not require naming a grammar category"
+    ]
+  },
+  "confirmed": [
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p02",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p03",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p06",
+      "question_id": "q10",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u02-p01",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u02-p03",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u02-p04",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u02-p05",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p01",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p02",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p03",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p04",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p04",
+      "question_id": "q8",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p05",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p01",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p02",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p03",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p04",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p05",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p01",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p02",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p03",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p04",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p05",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p06",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p01",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p02",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p03",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p04",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p05",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p06",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p01",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p02",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p03",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p04",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p05",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p06",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p01",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p02",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p03",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p04",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p05",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p06",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p01",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p02",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p03",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p04",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p05",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p06",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p01",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p02",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p03",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p04",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p05",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p06",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p01",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "low_level_function_label_task"
+      ]
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p02",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p03",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p04",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p05",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p06",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ]
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p01",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "formal_grammar_in_context_retrieval"
+      ]
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p02",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "formal_grammar_in_context_retrieval"
+      ]
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p03",
+      "question_id": "q7",
+      "decision": "REPAIR",
+      "reasons": [
+        "formal_grammar_in_context_retrieval"
+      ]
+    }
+  ],
+  "false_positives": [
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p01",
+      "question_id": "q7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « Je viens avec toi » ou « Je vient avec toi » ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p03",
+      "question_id": "q8",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « Je veux sortir » ou « Je veut sortir » ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p04",
+      "question_id": "q8",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « Nous pouvons entrer » ou « Nous peut entrer » ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p05",
+      "question_id": "q8",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « Elle prend quatre pommes » ou « Elle prennent quatre pommes » ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u02-p01",
+      "question_id": "q4",
+      "question_type": "vocabulary_in_context",
+      "prompt": "Que signifie « faire » dans « faire un cours de danse » ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u02-p02",
+      "question_id": "q7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « Camille sait l’heure » ou « Camille saitent l’heure ».",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u02-p06",
+      "question_id": "q7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte pour un garçon qui parle de son sac : « mon sac » ou « ma sac ».",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p06",
+      "question_id": "q7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis : « nous pouvons améliorer » ou « nous peut améliorer ».",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p06",
+      "question_id": "q7",
+      "question_type": "grammar_choice",
+      "prompt": "Pour une action plus tôt, choisis « avant » ou « après ».",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p01",
+      "question_id": "q8",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis : « Le résultat est qu’elle arrive tôt » ou « Le résultat est elle arrive tôt » ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p02",
+      "question_id": "q8",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis : « l’information est correcte » ou « l’information sont correcte » ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p03",
+      "question_id": "q8",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis : « chaque élève est différent » ou « chaque élève sont différents » ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p04",
+      "question_id": "q7",
+      "question_type": "grammar_in_context",
+      "prompt": "Dans « depuis quelques semaines », que montre « depuis » ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p04",
+      "question_id": "q8",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis : « Depuis lundi, elle prépare son sac le soir » ou « Depuis lundi, elle a arrêté hier » ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p05",
+      "question_id": "q7",
+      "question_type": "grammar_in_context",
+      "prompt": "Dans « après avoir reçu l’information », quelle action se produit d’abord ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p05",
+      "question_id": "q8",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis : « après avoir reçu » ou « après avoir recevoir » ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p06",
+      "question_id": "q7",
+      "question_type": "grammar_in_context",
+      "prompt": "Dans « afin de voir », que présente « afin de » ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p06",
+      "question_id": "q8",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis : « avant de décider » ou « avant décider » ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u03-p04",
+      "question_id": "q7",
+      "question_type": "grammar_in_context",
+      "prompt": "Dans « avant de payer », quelle action doit arriver d’abord ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u04-p06",
+      "question_id": "q5",
+      "question_type": "vocabulary_in_context",
+      "prompt": "Quel rôle joue le programme ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u07-p05",
+      "question_id": "q2",
+      "question_type": "literal_detail",
+      "prompt": "Combien de temps la professeure accorde-t-elle au groupe ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u09-p05",
+      "question_id": "q6",
+      "question_type": "vocabulary_in_context",
+      "prompt": "Quel rôle joue « pourtant » ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u10-p01",
+      "question_id": "q1",
+      "question_type": "gist",
+      "prompt": "Quel est le sujet de l’interview de Camille ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u10-p01",
+      "question_id": "q3",
+      "question_type": "sequence",
+      "prompt": "Quelle surprise arrive après l’excuse ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u10-p04",
+      "question_id": "q8",
+      "question_type": "inference",
+      "prompt": "Quel rôle joue le fait de respirer ?",
+      "decision": "RETAIN",
+      "rationale": "Candidate does not require formal grammatical-category/function terminology under the adjudication rule; ordinary form-choice, comprehension, sequence, inference, or contextual-meaning tasks are retained."
+    }
+  ],
+  "transformations": [
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p02",
+      "sequence": 2,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Dans « Quand le feu devient vert, ils traversent », quel rôle joue « quand » ?",
+        "answer": "Il introduit le moment où l’action de traverser se produit.",
+        "target_ids": [
+          "fr-rank-0061"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « _____ elle regarde l’heure, il est encore tôt. »",
+        "answer": "« Quand »",
+        "target_ids": [
+          "fr-rank-0061"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p03",
+      "sequence": 3,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Dans « Sami s’assoit avec elle », que marque « avec » ?",
+        "answer": "L’accompagnement : Sami et Camille sont ensemble.",
+        "target_ids": [
+          "fr-rank-0035"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Après les cours, Sami passe chez Camille _____ un livre. »",
+        "answer": "« avec »",
+        "target_ids": [
+          "fr-rank-0035"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p06",
+      "sequence": 6,
+      "question_id": "q10",
+      "answer_id": "a10",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Dans « Quand elle rencontre Sami », que marque « quand » ?",
+        "answer": "Le moment où elle rencontre Sami.",
+        "target_ids": [
+          "fr-rank-0061"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « _____ elle rencontre Sami, ils marchent ensemble. »",
+        "answer": "« Quand »",
+        "target_ids": [
+          "fr-rank-0061"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u02-p01",
+      "sequence": 7,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quelle est la catégorie de « faire » dans « je vais faire un cours » ?",
+        "answer": "Un verbe.",
+        "target_ids": [
+          "fr-rank-0014"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Sa mère lui demande : « Qu’est-ce que tu vas _____ là-bas ? »",
+        "answer": "« faire »",
+        "target_ids": [
+          "fr-rank-0014"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u02-p03",
+      "sequence": 9,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Quel rôle joue « si » au début d’une phrase comme « Si je ne sais pas, je demande » ?",
+        "answer": "Il introduit une condition.",
+        "target_ids": [
+          "fr-rank-0032"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « _____ elle ne trouve pas quelque chose, elle doit demander. »",
+        "answer": "« Si »",
+        "target_ids": [
+          "fr-rank-0032"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u02-p04",
+      "sequence": 10,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « mon » dans « mon carnet » ?",
+        "answer": "Un déterminant possessif.",
+        "target_ids": [
+          "fr-rank-0038"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle dit : « _____ carnet était ici hier. »",
+        "answer": "« Mon »",
+        "target_ids": [
+          "fr-rank-0038"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u02-p05",
+      "sequence": 11,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Dans « plus de place », que fait l’expression « plus de » ?",
+        "answer": "Elle indique une quantité plus grande.",
+        "target_ids": [
+          "fr-rank-0037"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle écrit le titre, mais elle veut _____ de place pour dessiner. »",
+        "answer": "« plus »",
+        "target_ids": [
+          "fr-rank-0037"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p01",
+      "sequence": 13,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « ce » dans « ce projet » ?",
+        "answer": "Un déterminant démonstratif.",
+        "target_ids": [
+          "fr-rank-0019"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Le professeur montre une grande feuille et dit : « _____ projet est pour toute la classe. »",
+        "answer": "« Ce »",
+        "target_ids": [
+          "fr-rank-0019"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p02",
+      "sequence": 14,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Quel rôle joue « qui » après un nom comme « une personne qui répond » ?",
+        "answer": "Il relie le nom à une information sur cette personne.",
+        "target_ids": [
+          "fr-rank-0024"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Le lendemain, Camille et Sami cherchent une personne _____ peut répondre à leurs questions sur la bibliothèque. »",
+        "answer": "« qui »",
+        "target_ids": [
+          "fr-rank-0024"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p03",
+      "sequence": 15,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « nous » dans « nous avons » ?",
+        "answer": "Un pronom personnel sujet.",
+        "target_ids": [
+          "fr-rank-0027"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Camille pose les notes au centre de la table et dit : « _____ avons beaucoup d’informations. »",
+        "answer": "« Nous »",
+        "target_ids": [
+          "fr-rank-0027"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p04",
+      "sequence": 16,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de pronom est « moi » ici ?",
+        "answer": "Un pronom personnel tonique.",
+        "target_ids": [
+          "fr-rank-0041"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « » Camille répond : « Oui, mais laisse-_____ essayer d’abord. »",
+        "answer": "« moi »",
+        "target_ids": [
+          "fr-rank-0041"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p04",
+      "sequence": 16,
+      "question_id": "q8",
+      "answer_id": "a8",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt"
+      ],
+      "before": {
+        "type": "contrast",
+        "prompt": "Si Camille parle d’elle-même après une préposition, lequel convient : « moi » ou « nous » ?",
+        "answer": "moi",
+        "target_ids": [
+          "fr-rank-0041"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « » Camille répond : « Oui, mais laisse-_____ essayer d’abord. »",
+        "answer": "« moi »",
+        "target_ids": [
+          "fr-rank-0041"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p05",
+      "sequence": 17,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « ils » dans « ils montrent leurs images » ?",
+        "answer": "Un pronom personnel sujet.",
+        "target_ids": [
+          "fr-rank-0045"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Le professeur demande s’_____ sont prêts. »",
+        "answer": "« ils »",
+        "target_ids": [
+          "fr-rank-0045"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p01",
+      "sequence": 19,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Quel rôle joue « très » devant un adjectif ?",
+        "answer": "Il augmente son intensité.",
+        "target_ids": [
+          "fr-rank-0074"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Le premier cahier est _____ grand et ne rentre pas bien dans son sac. »",
+        "answer": "« très »",
+        "target_ids": [
+          "fr-rank-0074"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p02",
+      "sequence": 20,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Quel rôle joue « toujours » dans la phrase ?",
+        "answer": "Il indique une habitude répétée.",
+        "target_ids": [
+          "fr-rank-0094"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle travaille _____ à la table du salon quand elle doit se concentrer. »",
+        "answer": "« toujours »",
+        "target_ids": [
+          "fr-rank-0094"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p03",
+      "sequence": 21,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Dans « encore cinq minutes », que montre « encore » ?",
+        "answer": "Qu’il reste une durée supplémentaire.",
+        "target_ids": [
+          "fr-rank-0098"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « La bibliothèque n’est pas _____ ouverte. »",
+        "answer": "« encore »",
+        "target_ids": [
+          "fr-rank-0098"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p04",
+      "sequence": 22,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Dans « avant de partir », quelle relation exprime « avant » ?",
+        "answer": "Une action se produit plus tôt qu’une autre.",
+        "target_ids": [
+          "fr-rank-0126"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « _____ de dormir, elle met son cahier, son livre et sa trousse dans le sac. »",
+        "answer": "« Avant »",
+        "target_ids": [
+          "fr-rank-0126"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p05",
+      "sequence": 23,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Quelle relation temporelle exprime « après » ?",
+        "answer": "Une action arrive plus tard qu’une autre.",
+        "target_ids": [
+          "fr-rank-0133"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « _____ le petit-déjeuner, elle aide sa mère à ranger la cuisine. »",
+        "answer": "« Après »",
+        "target_ids": [
+          "fr-rank-0133"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p01",
+      "sequence": 25,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « matin » dans « lundi matin » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0307"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Lundi _____, Camille arrive à l’école une heure avant le début du cours. »",
+        "answer": "« matin »",
+        "target_ids": [
+          "fr-rank-0307"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p02",
+      "sequence": 26,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « soir » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0161"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Le lundi _____, elle doit terminer un exercice. »",
+        "answer": "« soir »",
+        "target_ids": [
+          "fr-rank-0161"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p03",
+      "sequence": 27,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « chose » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0054"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle hésite et demande à sa mère si elles peuvent essayer une autre _____. »",
+        "answer": "« chose »",
+        "target_ids": [
+          "fr-rank-0054"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p04",
+      "sequence": 28,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « place » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0289"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Devant l’entrée, elle cherche une _____ pour laisser son vélo. »",
+        "answer": "« place »",
+        "target_ids": [
+          "fr-rank-0289"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p05",
+      "sequence": 29,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « enfant » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0149"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Chaque _____ reçoit une feuille et des crayons. »",
+        "answer": "« enfant »",
+        "target_ids": [
+          "fr-rank-0149"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p06",
+      "sequence": 30,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « question » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0198"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Une fois au marché ou à la bibliothèque, elle garde sa liste et pose une _____ si quelque chose n’est pas clair. »",
+        "answer": "« question »",
+        "target_ids": [
+          "fr-rank-0198"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p01",
+      "sequence": 31,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Dans « peu de pain », que montre « peu » ?",
+        "answer": "Une petite quantité de pain.",
+        "target_ids": [
+          "fr-rank-0092"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle met _____ de pain sur son plateau, puis ajoute un fruit et un verre d’eau. »",
+        "answer": "« peu »",
+        "target_ids": [
+          "fr-rank-0092"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p02",
+      "sequence": 32,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Quel rôle joue « trop » dans « trop de travail » ?",
+        "answer": "Il indique une quantité excessive.",
+        "target_ids": [
+          "fr-rank-0127"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle pense d’abord qu’il y en a _____ pour une seule soirée. »",
+        "answer": "« trop »",
+        "target_ids": [
+          "fr-rank-0127"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p03",
+      "sequence": 33,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Quel rôle joue « même » devant « livre » ?",
+        "answer": "Il indique qu’il s’agit d’un livre identique.",
+        "target_ids": [
+          "fr-rank-0081"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Cette fois, ils choisissent _____ le même titre sans le savoir. »",
+        "answer": "« même »",
+        "target_ids": [
+          "fr-rank-0081"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p04",
+      "sequence": 34,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Dans « ne vient jamais », quels mots forment la négation ?",
+        "answer": "« ne » et « jamais ».",
+        "target_ids": [
+          "fr-rank-0075"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle ne parle _____ fort dans la salle de lecture. »",
+        "answer": "« jamais »",
+        "target_ids": [
+          "fr-rank-0075"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p05",
+      "sequence": 35,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Quel rôle joue « maintenant » dans la phrase ?",
+        "answer": "Il situe l’action au moment présent.",
+        "target_ids": [
+          "fr-rank-0086"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Camille et son petit frère sont _____ dans le centre de la ville. »",
+        "answer": "« maintenant »",
+        "target_ids": [
+          "fr-rank-0086"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p06",
+      "sequence": 36,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Dans « ne parle jamais », quel sens porte « jamais » ?",
+        "answer": "À aucun moment.",
+        "target_ids": [
+          "fr-rank-0075"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Camille y va souvent, mais elle ne parle _____ fort. »",
+        "answer": "« jamais »",
+        "target_ids": [
+          "fr-rank-0075"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p01",
+      "sequence": 37,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Dans « près de l’école », quel rôle joue « près de » ?",
+        "answer": "Il indique une proximité de lieu.",
+        "target_ids": [
+          "fr-rank-0396"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « La bibliothèque est _____ de leur école : ils peuvent y aller en cinq minutes. »",
+        "answer": "« près »",
+        "target_ids": [
+          "fr-rank-0396"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p02",
+      "sequence": 38,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Dans « devant le gymnase », que précise « devant » ?",
+        "answer": "La position du groupe.",
+        "target_ids": [
+          "fr-rank-0342"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Le lendemain, la classe attend _____ le gymnase. »",
+        "answer": "« devant »",
+        "target_ids": [
+          "fr-rank-0342"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p03",
+      "sequence": 39,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Quelle relation exprime « entre » ?",
+        "answer": "Une position au milieu de deux éléments.",
+        "target_ids": [
+          "fr-rank-0215"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Ils voient deux grands arbres avec un banc _____ eux. »",
+        "answer": "« entre »",
+        "target_ids": [
+          "fr-rank-0215"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p04",
+      "sequence": 40,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Dans « à gauche », que précise l’expression ?",
+        "answer": "La direction du déplacement.",
+        "target_ids": [
+          "fr-rank-0721"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Au premier carrefour, ils tournent à _____. »",
+        "answer": "« gauche »",
+        "target_ids": [
+          "fr-rank-0721"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p05",
+      "sequence": 41,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « rue » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0526"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle doit rejoindre sa mère bientôt dans une grande _____ commerçante. »",
+        "answer": "« rue »",
+        "target_ids": [
+          "fr-rank-0526"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p06",
+      "sequence": 42,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Dans « sous le banc », que précise « sous » ?",
+        "answer": "La position de la balle par rapport au banc.",
+        "target_ids": [
+          "fr-rank-0267"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Au parc, un banc peut être entre deux arbres et une balle _____ le banc. »",
+        "answer": "« sous »",
+        "target_ids": [
+          "fr-rank-0267"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p01",
+      "sequence": 43,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « main » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0195"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Dans la cuisine, elle pose une _____ sur son front et boit un verre d’eau. »",
+        "answer": "« main »",
+        "target_ids": [
+          "fr-rank-0195"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p02",
+      "sequence": 44,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « pied » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0424"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Après plusieurs tours, son _____ droit commence à être fatigué. »",
+        "answer": "« pied »",
+        "target_ids": [
+          "fr-rank-0424"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p03",
+      "sequence": 45,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « manger » ?",
+        "answer": "Un verbe.",
+        "target_ids": [
+          "fr-rank-0213"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Camille veut _____ son sandwich avant de boire son jus. »",
+        "answer": "« manger »",
+        "target_ids": [
+          "fr-rank-0213"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p04",
+      "sequence": 46,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « sentir » ?",
+        "answer": "Un verbe.",
+        "target_ids": [
+          "fr-rank-0166"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle commence à _____ la fatigue : ses yeux sont lourds et elle bâille. »",
+        "answer": "« sentir »",
+        "target_ids": [
+          "fr-rank-0166"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p05",
+      "sequence": 47,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « malade » dans « Camille est malade » ?",
+        "answer": "Un adjectif.",
+        "target_ids": [
+          "fr-rank-0491"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Un samedi matin, Camille se sent _____ et reste à la maison. »",
+        "answer": "« malade »",
+        "target_ids": [
+          "fr-rank-0491"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p06",
+      "sequence": 48,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Dans « se sentir mieux », que décrit « mieux » ?",
+        "answer": "Une amélioration de l’état.",
+        "target_ids": [
+          "fr-rank-0148"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Après du repos, elle peut se sentir _____. »",
+        "answer": "« mieux »",
+        "target_ids": [
+          "fr-rank-0148"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p01",
+      "sequence": 49,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « famille » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0192"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Samedi matin, Camille prend le petit-déjeuner avec sa _____. »",
+        "answer": "« famille »",
+        "target_ids": [
+          "fr-rank-0192"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p02",
+      "sequence": 50,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « mère » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0210"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Dimanche, la _____ de Camille attend un ami de la famille pour le déjeuner. »",
+        "answer": "« mère »",
+        "target_ids": [
+          "fr-rank-0210"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p03",
+      "sequence": 51,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « école » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0354"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Lundi, Camille apporte un livre à l’_____ pour un petit travail de lecture. »",
+        "answer": "« école »",
+        "target_ids": [
+          "fr-rank-0354"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p04",
+      "sequence": 52,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « table » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0656"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Camille entre, choisit une _____ près de la fenêtre et pose son sac dessus. »",
+        "answer": "« table »",
+        "target_ids": [
+          "fr-rank-0656"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p05",
+      "sequence": 53,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « eau » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0324"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle remplit une bouteille d’_____, choisit une table calme et ouvre son cahier. »",
+        "answer": "« eau »",
+        "target_ids": [
+          "fr-rank-0324"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p06",
+      "sequence": 54,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « livre » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0418"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « À l’école, elle ouvre un _____ pour faire un travail. »",
+        "answer": "« livre »",
+        "target_ids": [
+          "fr-rank-0418"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p01",
+      "sequence": 55,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « soleil » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0795"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Le ciel est gris au début, mais un peu de _____ reste visible entre les nuages. »",
+        "answer": "« soleil »",
+        "target_ids": [
+          "fr-rank-0795"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p02",
+      "sequence": 56,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « chaud » dans « il fait chaud » ?",
+        "answer": "Un adjectif.",
+        "target_ids": [
+          "fr-rank-0775"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Le soleil est plus fort et il fait _____. »",
+        "answer": "« chaud »",
+        "target_ids": [
+          "fr-rank-0775"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p03",
+      "sequence": 57,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « acheter » ?",
+        "answer": "Un verbe.",
+        "target_ids": [
+          "fr-rank-0297"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Après l’école, Camille veut _____ un livre simple pour un travail de classe. »",
+        "answer": "« acheter »",
+        "target_ids": [
+          "fr-rank-0297"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p04",
+      "sequence": 58,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « vêtement » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0975"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle prend aussi un _____ léger parce que la salle de l’activité peut être froide. »",
+        "answer": "« vêtement »",
+        "target_ids": [
+          "fr-rank-0975"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p05",
+      "sequence": 59,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « sac » ?",
+        "answer": "Un nom.",
+        "target_ids": [
+          "fr-rank-0532"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle a besoin d’un _____ plus solide pour porter ses livres. »",
+        "answer": "« sac »",
+        "target_ids": [
+          "fr-rank-0532"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p06",
+      "sequence": 60,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « acheter » ?",
+        "answer": "Un verbe.",
+        "target_ids": [
+          "fr-rank-0297"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Dans un magasin, elle peut demander un prix, décider d’_____ quelque chose et préparer l’argent nécessaire. »",
+        "answer": "« acheter »",
+        "target_ids": [
+          "fr-rank-0297"
+        ]
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p01",
+      "sequence": 1,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "grammar_function",
+        "prompt": "Dans « elle suit ce conseil parce qu’elle ne veut pas rester sans information », que présente « parce que » ?",
+        "answer": "La raison de son choix.",
+        "target_ids": []
+      },
+      "after": {
+        "type": "cause_effect",
+        "prompt": "Pourquoi Camille suit-elle ce conseil ?",
+        "answer": "Parce qu’elle ne veut pas rester sans information.",
+        "target_ids": []
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p02",
+      "sequence": 2,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « expliquer » ?",
+        "answer": "Un verbe.",
+        "target_ids": [
+          "fr-rank-0390"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Camille retient surtout deux choses : une erreur peut être corrigée, et _____ clairement ce qui s’est passé permet souvent d’éviter un malentendu inutile. »",
+        "answer": "« expliquer »",
+        "target_ids": [
+          "fr-rank-0390"
+        ]
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p03",
+      "sequence": 3,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « essayer » ?",
+        "answer": "Un verbe.",
+        "target_ids": [
+          "fr-rank-0122"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle décide d’_____ une deuxième fois en vérifiant chaque étape. »",
+        "answer": "« essayer »",
+        "target_ids": [
+          "fr-rank-0122"
+        ]
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p04",
+      "sequence": 4,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « réparer » ?",
+        "answer": "Un verbe.",
+        "target_ids": [
+          "fr-rank-0929"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Il peut _____ le vélo tout de suite, et le prix reste raisonnable. »",
+        "answer": "« réparer »",
+        "target_ids": [
+          "fr-rank-0929"
+        ]
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p05",
+      "sequence": 5,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « découvrir » ?",
+        "answer": "Un verbe.",
+        "target_ids": [
+          "fr-rank-0432"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Après la visite, Camille retourne dans la salle qu’elle vient de _____. »",
+        "answer": "« découvrir »",
+        "target_ids": [
+          "fr-rank-0432"
+        ]
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p06",
+      "sequence": 6,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "grammar_category",
+        "prompt": "Quel type de mot est « essayer » ?",
+        "answer": "Un verbe.",
+        "target_ids": [
+          "fr-rank-0122"
+        ]
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Devant une machine, elle doit _____ plusieurs étapes pour voir ce qui est possible. »",
+        "answer": "« essayer »",
+        "target_ids": [
+          "fr-rank-0122"
+        ]
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p01",
+      "sequence": 7,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_in_context_retrieval"
+      ],
+      "before": {
+        "type": "grammar_in_context",
+        "prompt": "Dans « la raison de ce changement », que complète « de ce changement » ?",
+        "answer": "Le nom « raison ».",
+        "target_ids": []
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « la raison de ce changement », que signifie « raison » ?",
+        "answer": "La cause ou l’explication du changement.",
+        "target_ids": []
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p02",
+      "sequence": 8,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_in_context_retrieval"
+      ],
+      "before": {
+        "type": "grammar_in_context",
+        "prompt": "Dans « avant de prendre une décision », quelle forme suit « de » ?",
+        "answer": "Un infinitif : « prendre ».",
+        "target_ids": []
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète l’expression du texte : « avant de _____ une décision ».",
+        "answer": "« prendre »",
+        "target_ids": []
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p03",
+      "sequence": 9,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_in_context_retrieval"
+      ],
+      "before": {
+        "type": "grammar_in_context",
+        "prompt": "Dans « il est important de pratiquer », quelle forme vient après « de » ?",
+        "answer": "Un infinitif.",
+        "target_ids": []
+      },
+      "after": {
+        "type": "cloze_transfer",
+        "prompt": "Complète l’expression du texte : « il est important de _____ ».",
+        "answer": "« pratiquer »",
+        "target_ids": []
+      }
+    }
+  ],
+  "validation": {
+    "json_parse": "PASS",
+    "60_records_each_level": "PASS",
+    "sequence_continuity": "PASS",
+    "unique_record_ids": "PASS",
+    "ten_questions_ten_answers": "PASS",
+    "question_answer_linkage": "PASS",
+    "target_ids_preserved_on_repaired_questions": "PASS",
+    "defined_defect_class_residue": 0,
+    "all_88_candidates_adjudicated": "PASS"
+  },
+  "release_effect": "French remains REOPEN_REQUIRED. Canonical A1/A2 hashes changed and all hash-bound educator/native/tool/model/human certification gates must use the repaired hashes.",
+  "next_gate": "Human semantic review of every transformed Q/A in passage context, followed by repaired-corpus deterministic and broader educator recertification."
+}
