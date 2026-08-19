@@ -301,3 +301,10 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 - [ ] Theme: **science, models, and epistemic limits**; genres: advanced synthesis, critique, research commentary.
 - [ ] Select source-backed rank-1001+ targets from `1949` fresh continuation terms.
 - [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.
+
+
+#### French C2 Unit 04 — IMMEDIATE NEXT
+- [x] Unit 03 sealed on `21be6a87ceb638cb304fa341641f43825bf6d561`.
+- [ ] Theme: **economics and complex systems**; genres: analytical essay, scenario analysis, commentary.
+- [ ] Select source-backed rank-1001+ targets from `1924` fresh continuation terms.
+- [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.
