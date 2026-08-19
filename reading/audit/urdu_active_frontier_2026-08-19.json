@@ -2,17 +2,50 @@
   "date": "2026-08-19",
   "language": "ur",
   "scope": "A1 graded-reading continuation",
-  "status": "ACTIVE_CANONICAL_12_UNITS03_04_STAGED",
+  "status": "ACTIVE_CANONICAL_24",
   "precedence_note": "Live canonical JSONL and fresh audit artifacts are authoritative. An earlier read occurred before the guarded Unit 02 promotion commit landed; this revision supersedes that temporary stale observation.",
   "sealed_languages": {
-    "arabic": {"status": "APPROVED", "canonical_passages": 360, "action": "do not reopen unless canonical data deliberately changes"},
-    "french": {"status": "APPROVED", "canonical_passages": 360, "action": "do not reopen unless hash-bound canonical data deliberately changes"}
+    "arabic": {
+      "status": "APPROVED",
+      "canonical_passages": 360,
+      "action": "do not reopen unless canonical data deliberately changes"
+    },
+    "french": {
+      "status": "APPROVED",
+      "canonical_passages": 360,
+      "action": "do not reopen unless hash-bound canonical data deliberately changes"
+    }
   },
   "urdu_a1": {
     "live_canonical_path": "reading/urdu/a1/passages.jsonl",
-    "live_canonical_blob": "7e0226ea41955634b9fab629c369f9ec1fa149eb",
-    "live_canonical_passages": 12,
-    "live_canonical_sequences": [1,2,3,4,5,6,7,8,9,10,11,12],
+    "live_canonical_blob": "afa3150718ad30ef9161f5adb4b96d90aaf10f99",
+    "live_canonical_passages": 24,
+    "live_canonical_sequences": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
     "calibration": {
       "status": "PASS_AFTER_REPAIR",
       "artifact": "reading/audit/urdu_a1_calibration_current_standard_audit.json",
@@ -20,31 +53,45 @@
     },
     "unit02": {
       "status": "CANONICAL_PROMOTED",
-      "sequences": [7,8,9,10,11,12],
+      "sequences": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
       "artifact": "reading/audit/urdu_a1_unit02_generation_result.json"
     },
-    "staged_units": {
-      "unit03": {
-        "sequences": [13,14,15,16,17,18],
-        "passages": 6,
-        "path": "reading/urdu/a1/staging/unit03",
-        "result": "reading/audit/urdu_a1_unit03_staging_result.json",
-        "status": "STAGED_STRUCTURALLY_CHECKED"
-      },
-      "unit04": {
-        "sequences": [19,20,21,22,23,24],
-        "passages": 6,
-        "path": "reading/urdu/a1/staging/unit04",
-        "result": "reading/audit/urdu_a1_unit04_staging_result.json",
-        "status": "STAGED_STRUCTURALLY_CHECKED"
-      }
-    },
+    "staged_units": {},
     "available_records": {
-      "canonical": 12,
-      "staged": 12,
-      "canonical_plus_staged": 24,
-      "questions_in_staged_units_03_04": 120,
-      "answers_in_staged_units_03_04": 120
+      "canonical": 24,
+      "staged": 0,
+      "canonical_plus_staged": 24
+    },
+    "unit03": {
+      "status": "CANONICAL_PROMOTED",
+      "sequences": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "artifact": "reading/audit/urdu_a1_unit03_generation_result.json"
+    },
+    "unit04": {
+      "status": "CANONICAL_PROMOTED",
+      "sequences": [
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "artifact": "reading/audit/urdu_a1_unit04_generation_result.json"
     }
   },
   "continuity_contradiction": {
@@ -58,11 +105,9 @@
     "repo_cleanup_complete": true
   },
   "next_exact_actions": [
-    "Run a final learner-facing Urdu polish pass over staged Units 03-04 while preserving target identity and structural invariants.",
-    "Promote Unit 03 sequences 13-18 against exact canonical blob 7e0226ea41955634b9fab629c369f9ec1fa149eb.",
-    "Promote Unit 04 sequences 19-24 immediately after Unit 03 if all guards pass.",
-    "Verify 24 contiguous canonical sequences, 240 linked questions, 240 linked answers, A1 word bands, exact target exposures/reviews, and zero-new P06 checkpoints.",
-    "Update STATUS.json, TASKS.md, and AGENT_HANDOFF.md to the resulting live canonical frontier."
+    "Generate Urdu A1 Unit 05 sequences 25-30 as the next guarded six-passage batch.",
+    "Continue generation-first production through A1 sequence 60, preserving read-only source lexicons and exact structural/lexical guards.",
+    "Run the planned level-level/final audit at the generation milestone unless a severe defect requires earlier repair."
   ],
   "generation_policy": "Continue generation-first production; staged passages are not canonical until guarded promotion succeeds. Formal multi-pass final audit remains deferred until the intended generation milestone unless a severe defect is found."
 }

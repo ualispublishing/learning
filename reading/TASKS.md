@@ -3,10 +3,11 @@
 
 - [x] Keep Arabic sealed.
 - [x] Keep French sealed.
-- [x] Audit Urdu A1 calibration sequences 1-6 against current guards.
-- [x] Repair legacy Urdu calibration review/exposure metadata without changing passage text.
-- [x] Promote Urdu A1 Unit 02 sequences 7-12 to canonical JSONL.
-- [ ] Generate Urdu A1 Unit 03 sequences 13-18 as the next guarded six-passage batch.
+- [x] Accept repaired Urdu A1 calibration sequences 1-6.
+- [x] Promote Urdu A1 Unit 02 sequences 7-12.
+- [x] Generate, polish, validate, and promote Urdu A1 Unit 03 sequences 13-18.
+- [x] Generate, polish, validate, and promote Urdu A1 Unit 04 sequences 19-24.
+- [ ] Generate Urdu A1 Unit 05 sequences 25-30 as the next guarded six-passage batch.
 - [ ] Continue Urdu A1 through sequence 60 before level-level final audit unless a severe defect requires immediate repair.
 <!-- CURRENT_URDU_FRONTIER_END -->
 
