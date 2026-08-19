@@ -322,3 +322,10 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 - [ ] Theme: **political and institutional argument without partisan advocacy**; genres: comparative analysis, policy critique, argument reconstruction.
 - [ ] Select source-backed rank-1001+ targets from `1874` fresh continuation terms.
 - [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.
+
+
+#### French C2 Unit 07 — IMMEDIATE NEXT
+- [x] Unit 06 sealed on `9fd04c6ad99c65b5691cea84bb29d1f2c39dcff2`.
+- [ ] Theme: **culture, translation, and interpretation**; genres: essay, comparative criticism, reflection.
+- [ ] Select source-backed rank-1001+ targets from `1849` fresh continuation terms.
+- [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.
