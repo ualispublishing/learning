@@ -1,0 +1,41 @@
+=== RUN resolve_french_c2_unit_plan.py ===
+{"status": "PASS", "unit": 7, "theme": "culture, translation, and interpretation", "genres": ["essay", "comparative criticism", "reflection"]}
+=== RUN probe_french_c2_unit_targets.py ===
+{"status": "PASS", "unit": 7, "fresh_count": 1849, "theme": "culture, translation, and interpretation"}
+=== RUN select_french_c2_unit07_targets.py ===
+{"status": "PASS", "selected_count": 25, "groups": {"p01": ["langue", "traduction", "traduire", "expression", "adaptation"], "p02": ["oreille", "français", "local", "sensible", "délicat"], "p03": ["origine", "tradition", "culture", "village", "voisin"], "p04": ["essai", "modèle", "qualité", "explication", "émotion"], "p05": ["échange", "transmettre", "occasion", "réunir", "communauté"]}}
+=== RUN generate_french_c2_unit07.py ===
+Traceback (most recent call last):
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c2_unit07.py", line 29, in main
+    env('resolve_french_c2_unit_plan.py',7); st.append('resolve_c2_unit07_plan'); env('probe_french_c2_unit_targets.py',7); st.append('probe_c2_unit07_targets'); run('select_french_c2_unit07_targets.py'); st.append('select_c2_unit07_targets'); run('generate_french_c2_unit07.py'); gen=True; st.append('generate_c2_unit07'); env('audit_french_c2_unit_generation.py',7); st.append('audit_c2_unit07'); env('lock_french_c2_unit_frontier.py',7); st.append('lock_c2_unit07'); verify(); seal=True; prep8(st); front=True
+                                                                                                                                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c2_unit07.py", line 7, in run
+    def run(n): print('=== RUN',n,'==='); runpy.run_path(str(T/n),run_name='__main__')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit07.py", line 98, in <module>
+    if __name__=='__main__': main()
+                             ^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit07.py", line 95, in main
+    if errs: raise AssertionError(f"{x['id']}: schema {[e.message for e in errs[:10]]}")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: fr-c2-u07-p01: schema ["'cultural' is not one of ['personal', 'public', 'educational', 'professional']"]
+
+{
+  "status": "C2_UNIT07_PENDING",
+  "date": "2026-08-18",
+  "starting_c2_passages": 36,
+  "ending_c2_passages": 36,
+  "c1_blob": "6f5bd912dfb550c064b54c8f7de4027bebf3786d",
+  "c2_blob": "9fd04c6ad99c65b5691cea84bb29d1f2c39dcff2",
+  "c2_unit07_pass": false,
+  "c2_unit08_frontier_prepared": false,
+  "completed_stages": [
+    "resolve_c2_unit07_plan",
+    "probe_c2_unit07_targets",
+    "select_c2_unit07_targets"
+  ],
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c2_unit07.py\", line 29, in main\n    env('resolve_french_c2_unit_plan.py',7); st.append('resolve_c2_unit07_plan'); env('probe_french_c2_unit_targets.py',7); st.append('probe_c2_unit07_targets'); run('select_french_c2_unit07_targets.py'); st.append('select_c2_unit07_targets'); run('generate_french_c2_unit07.py'); gen=True; st.append('generate_c2_unit07'); env('audit_french_c2_unit_generation.py',7); st.append('audit_c2_unit07'); env('lock_french_c2_unit_frontier.py',7); st.append('lock_c2_unit07'); verify(); seal=True; prep8(st); front=True\n                                                                                                                                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c2_unit07.py\", line 7, in run\n    def run(n): print('=== RUN',n,'==='); runpy.run_path(str(T/n),run_name='__main__')\n                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit07.py\", line 98, in <module>\n    if __name__=='__main__': main()\n                             ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit07.py\", line 95, in main\n    if errs: raise AssertionError(f\"{x['id']}: schema {[e.message for e in errs[:10]]}\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: fr-c2-u07-p01: schema [\"'cultural' is not one of ['personal', 'public', 'educational', 'professional']\"]\n"
+}
