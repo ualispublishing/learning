@@ -6,15 +6,15 @@
     "reading/french/a2/passages.jsonl"
   ],
   "canonical_sha256": {
-    "A1": "48db8f58dc105bcd880302d31b0f7fcae439e3018a35b0adb62b690d42b85562",
+    "A1": "1cdb31ecb8b987c50051bb6f8fa5b2f7fda812cb3004c81ab8697f832fceacba",
     "A2": "8fcd71903e6a495a2abaac8d436232b4b7ee00ae5ac0bce4d273aa4a134b3c15"
   },
   "status": "CANDIDATES_REQUIRE_SEMANTIC_ADJUDICATION",
   "candidate_counts": {
-    "A1": 45,
+    "A1": 68,
     "A2": 23
   },
-  "candidate_total": 68,
+  "candidate_total": 91,
   "method": "High-recall candidate scan only; keyword/type hits are not automatically defects. Every candidate requires semantic CEFR/pedagogical adjudication before repair.",
   "candidates": [
     {
@@ -40,6 +40,60 @@
         }
       ],
       "context": "Avant de partir acheter du pain, sa mère demande : « Tu veux venir avec moi ?",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p02",
+      "sequence": 2,
+      "unit": 1,
+      "title": "Le matin de l’école",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Complète avec le bon choix : « _____ le feu devient vert, ils traversent. » — « quand » ou « avec » ?",
+      "answer": "« quand ».",
+      "target_ids": [
+        "fr-rank-0061"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0061",
+          "form": "quand",
+          "lemma": "quand",
+          "role": "new"
+        }
+      ],
+      "context": "Quand elle regarde l’heure, il est encore tôt. Quand sa mère lui dit qu’il est presque huit heures, Camille se lève.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p03",
+      "sequence": 3,
+      "unit": 1,
+      "title": "Après les devoirs",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Complète avec le bon choix : « Sami s’assoit _____ elle. » — « avec » ou « sans » ?",
+      "answer": "« avec ».",
+      "target_ids": [
+        "fr-rank-0035"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0035",
+          "form": "avec",
+          "lemma": "avec",
+          "role": "new"
+        }
+      ],
+      "context": "Après les cours, Sami passe chez Camille avec un livre. Sami s’assoit avec elle à la table.",
       "candidate_reasons": [
         "question_type:grammar_choice"
       ]
@@ -127,6 +181,33 @@
     },
     {
       "level": "A1",
+      "passage_id": "fr-a1-u01-p06",
+      "sequence": 6,
+      "unit": 1,
+      "title": "Le quartier de Camille",
+      "question_id": "q10",
+      "answer_id": "a10",
+      "question_type": "grammar_choice",
+      "prompt": "Complète : « _____ il arrive, Camille sourit. » — « quand » ou « avec » ?",
+      "answer": "« quand ».",
+      "target_ids": [
+        "fr-rank-0061"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0061",
+          "form": "quand",
+          "lemma": null,
+          "role": "review"
+        }
+      ],
+      "context": "Quand elle rencontre Sami, ils marchent ensemble.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
       "passage_id": "fr-a1-u02-p01",
       "sequence": 7,
       "unit": 2,
@@ -208,6 +289,33 @@
     },
     {
       "level": "A1",
+      "passage_id": "fr-a1-u02-p03",
+      "sequence": 9,
+      "unit": 2,
+      "title": "Avant le déjeuner",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Complète : « Elle demandera de l’aide _____ elle ne trouve pas le livre. » — « si » ou « avec » ?",
+      "answer": "« si ».",
+      "target_ids": [
+        "fr-rank-0032"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0032",
+          "form": "si",
+          "lemma": "si",
+          "role": "new"
+        }
+      ],
+      "context": "Sa mère lui explique ce qu’elle doit faire : elle doit mettre quatre assiettes, quatre verres et les serviettes. Si elle ne trouve pas quelque chose, elle doit demander.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
       "passage_id": "fr-a1-u02-p04",
       "sequence": 10,
       "unit": 2,
@@ -229,6 +337,33 @@
         }
       ],
       "context": "Elle dit : « Mon carnet était ici hier. Puis son frère entre et montre la table du salon.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u02-p05",
+      "sequence": 11,
+      "unit": 2,
+      "title": "L’affiche du club",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Dans le texte, elle veut _____ de place pour dessiner : « plus » ou « moins » ?",
+      "answer": "« plus ».",
+      "target_ids": [
+        "fr-rank-0037"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0037",
+          "form": "plus",
+          "lemma": "plus",
+          "role": "new"
+        }
+      ],
+      "context": "Elle écrit le titre, mais elle veut plus de place pour dessiner. Elle déplace le titre vers le haut et gagne un peu plus d’espace.",
       "candidate_reasons": [
         "question_type:grammar_choice"
       ]
@@ -283,6 +418,33 @@
         }
       ],
       "context": "Mardi, la classe de Camille commence un petit projet sur le quartier. Le professeur montre une grande feuille et dit : « Ce projet est pour toute la classe.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p02",
+      "sequence": 14,
+      "unit": 3,
+      "title": "Une personne qui connaît la bibliothèque",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Complète : « Ils cherchent une personne _____ peut répondre. » — « qui » ou « avec » ?",
+      "answer": "« qui ».",
+      "target_ids": [
+        "fr-rank-0024"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0024",
+          "form": "qui",
+          "lemma": "qui",
+          "role": "new"
+        }
+      ],
+      "context": "Le lendemain, Camille et Sami cherchent une personne qui peut répondre à leurs questions sur la bibliothèque. Ils voient une employée qui range des livres près de l’entrée.",
       "candidate_reasons": [
         "question_type:grammar_choice"
       ]
@@ -391,6 +553,141 @@
         }
       ],
       "context": "Camille a compris que nous pouvons améliorer un texte en le relisant calmement.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p01",
+      "sequence": 19,
+      "unit": 4,
+      "title": "Un autre cahier",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Complète : « Le premier cahier est _____ grand. » — « très » ou « beaucoup » ?",
+      "answer": "« très ».",
+      "target_ids": [
+        "fr-rank-0074"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0074",
+          "form": "très",
+          "lemma": "très",
+          "role": "new"
+        }
+      ],
+      "context": "Le premier cahier est très grand et ne rentre pas bien dans son sac. Celui-ci est très léger.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p02",
+      "sequence": 20,
+      "unit": 4,
+      "title": "Assez de temps",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Complète : « Elle travaille _____ à la table du salon. » — « toujours » ou « très » ?",
+      "answer": "« toujours ».",
+      "target_ids": [
+        "fr-rank-0094"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0094",
+          "form": "toujours",
+          "lemma": "toujours",
+          "role": "new"
+        }
+      ],
+      "context": "Elle travaille toujours à la table du salon quand elle doit se concentrer. Camille explique qu’elle commence toujours par le travail le plus court, puis qu’elle regarde combien de temps il lui reste pour les autres tâches.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p03",
+      "sequence": 21,
+      "unit": 4,
+      "title": "Encore cinq minutes",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Complète : « Il reste _____ cinq minutes. » — « encore » ou « très » ?",
+      "answer": "« encore ».",
+      "target_ids": [
+        "fr-rank-0098"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0098",
+          "form": "encore",
+          "lemma": "encore",
+          "role": "new"
+        }
+      ],
+      "context": "La bibliothèque n’est pas encore ouverte. Dans la salle du club, il manque encore une chaise.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p04",
+      "sequence": 22,
+      "unit": 4,
+      "title": "Avant de fermer le sac",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "D’après le texte, elle prépare son sac _____ de dormir : « avant » ou « après » ?",
+      "answer": "« avant ».",
+      "target_ids": [
+        "fr-rank-0126"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0126",
+          "form": "avant",
+          "lemma": "avant",
+          "role": "new"
+        }
+      ],
+      "context": "Avant de dormir, elle met son cahier, son livre et sa trousse dans le sac. Avant le cours de sport, elle ouvre son sac et comprend le problème.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p05",
+      "sequence": 23,
+      "unit": 4,
+      "title": "Après le petit-déjeuner",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "D’après le texte, elle aide sa mère _____ le petit-déjeuner : « après » ou « avant » ?",
+      "answer": "« après ».",
+      "target_ids": [
+        "fr-rank-0133"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0133",
+          "form": "après",
+          "lemma": "après",
+          "role": "new"
+        }
+      ],
+      "context": "Après le petit-déjeuner, elle aide sa mère à ranger la cuisine. Après vingt minutes, elle entend son frère appeler : il est prêt.",
       "candidate_reasons": [
         "question_type:grammar_choice"
       ]
@@ -593,6 +890,276 @@
     },
     {
       "level": "A1",
+      "passage_id": "fr-a1-u06-p01",
+      "sequence": 31,
+      "unit": 6,
+      "title": "Beaucoup ou peu ?",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Complète : « Elle met _____ de pain sur son plateau. » — « peu » ou « très » ?",
+      "answer": "« peu ».",
+      "target_ids": [
+        "fr-rank-0092"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0092",
+          "form": "peu",
+          "lemma": "peu",
+          "role": "new"
+        }
+      ],
+      "context": "Elle met peu de pain sur son plateau, puis ajoute un fruit et un verre d’eau. Camille répond qu’elle préfère manger peu avant de travailler.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p02",
+      "sequence": 32,
+      "unit": 6,
+      "title": "Déjà presque fini",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Complète : « Il y a _____ de travail pour une seule soirée. » — « trop » ou « très » ?",
+      "answer": "« trop ».",
+      "target_ids": [
+        "fr-rank-0127"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0127",
+          "form": "trop",
+          "lemma": "trop",
+          "role": "new"
+        }
+      ],
+      "context": "Elle pense d’abord qu’il y en a trop pour une seule soirée. Elle comprend que le mot « trop » dépend parfois du temps disponible et de la taille des tâches.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p03",
+      "sequence": 33,
+      "unit": 6,
+      "title": "Le même livre",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "D’après le texte, Camille et Sami ont choisi le _____ titre : « même » ou « autre » ?",
+      "answer": "« même ».",
+      "target_ids": [
+        "fr-rank-0081"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0081",
+          "form": "même",
+          "lemma": "même",
+          "role": "new"
+        }
+      ],
+      "context": "Cette fois, ils choisissent même le même titre sans le savoir. Sami regarde les deux exemplaires : c’est bien le même livre, mais les couvertures ne sont pas de la même couleur.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p04",
+      "sequence": 34,
+      "unit": 6,
+      "title": "Souvent, mais jamais trop fort",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Complète : « Elle ne parle _____ fort dans la salle de lecture. » — « jamais » ou « très » ?",
+      "answer": "« jamais ».",
+      "target_ids": [
+        "fr-rank-0075"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0075",
+          "form": "jamais",
+          "lemma": "jamais",
+          "role": "new"
+        }
+      ],
+      "context": "Elle ne parle jamais fort dans la salle de lecture. Elle explique qu’elle ne vient jamais quand elle a un cours de sport tardif.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p05",
+      "sequence": 35,
+      "unit": 6,
+      "title": "Bientôt, les portes vont ouvrir",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "D’après le texte, ils sont _____ dans le centre de la ville : « maintenant » ou « plus tard » ?",
+      "answer": "« maintenant ».",
+      "target_ids": [
+        "fr-rank-0086"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0086",
+          "form": "maintenant",
+          "lemma": "maintenant",
+          "role": "new"
+        }
+      ],
+      "context": "Camille et son petit frère sont maintenant dans le centre de la ville. « Oui, maintenant nous avons le temps de boire un peu d’eau, et bientôt les portes vont ouvrir », répond Camille.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p06",
+      "sequence": 36,
+      "unit": 6,
+      "title": "Quantité, fréquence et temps",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Complète : « Camille ne crie _____ dans la bibliothèque. » — « jamais » ou « très » ?",
+      "answer": "« jamais ».",
+      "target_ids": [
+        "fr-rank-0075"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0075",
+          "form": "jamais",
+          "lemma": null,
+          "role": "review"
+        }
+      ],
+      "context": "Camille y va souvent, mais elle ne parle jamais fort.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p01",
+      "sequence": 37,
+      "unit": 7,
+      "title": "Près ou loin ?",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "D’après le texte, la bibliothèque est _____ de leur école : « près » ou « loin » ?",
+      "answer": "« près ».",
+      "target_ids": [
+        "fr-rank-0396"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0396",
+          "form": "près",
+          "lemma": "près",
+          "role": "new"
+        }
+      ],
+      "context": "Après l’école, Camille regarde un petit plan du quartier avec Sami. La bibliothèque est près de leur école : ils peuvent y aller en cinq minutes.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p02",
+      "sequence": 38,
+      "unit": 7,
+      "title": "Devant le gymnase",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "D’après le texte, la classe attend _____ le gymnase : « devant » ou « derrière » ?",
+      "answer": "« devant ».",
+      "target_ids": [
+        "fr-rank-0342"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0342",
+          "form": "devant",
+          "lemma": "devant",
+          "role": "new"
+        }
+      ],
+      "context": "Le lendemain, la classe attend devant le gymnase. La porte est déjà ouverte, mais le professeur demande aux élèves de rester devant le bâtiment quelques minutes.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p03",
+      "sequence": 39,
+      "unit": 7,
+      "title": "Entre les arbres",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Complète : « Un banc se trouve _____ deux arbres. » — « entre » ou « devant » ?",
+      "answer": "« entre ».",
+      "target_ids": [
+        "fr-rank-0215"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0215",
+          "form": "entre",
+          "lemma": "entre",
+          "role": "new"
+        }
+      ],
+      "context": "Ils voient deux grands arbres avec un banc entre eux. Camille trouve aussi une feuille entre deux pierres et la met dans une poubelle.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p04",
+      "sequence": 40,
+      "unit": 7,
+      "title": "À gauche, puis à droite",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "D’après le texte, au premier carrefour ils tournent à _____ : « gauche » ou « droite » ?",
+      "answer": "« gauche ».",
+      "target_ids": [
+        "fr-rank-0721"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0721",
+          "form": "gauche",
+          "lemma": "gauche",
+          "role": "new"
+        }
+      ],
+      "context": "Au premier carrefour, ils tournent à gauche. Camille répète : « gauche, puis droite ».",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
       "passage_id": "fr-a1-u07-p05",
       "sequence": 41,
       "unit": 7,
@@ -614,6 +1181,33 @@
         }
       ],
       "context": "Elle doit rejoindre sa mère bientôt dans une grande rue commerçante. Le premier chemin suit une rue très animée.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p06",
+      "sequence": 42,
+      "unit": 7,
+      "title": "Décrire un trajet",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "D’après le texte, une balle est _____ le banc : « sous » ou « devant » ?",
+      "answer": "« sous ».",
+      "target_ids": [
+        "fr-rank-0267"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0267",
+          "form": "sous",
+          "lemma": null,
+          "role": "review"
+        }
+      ],
+      "context": "Au parc, un banc peut être entre deux arbres et une balle sous le banc.",
       "candidate_reasons": [
         "question_type:grammar_choice"
       ]
@@ -803,6 +1397,33 @@
         }
       ],
       "context": "Un samedi matin, Camille se sent malade et reste à la maison.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p06",
+      "sequence": 48,
+      "unit": 8,
+      "title": "Parler simplement de sa santé",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Après du repos, Camille se sent-elle « mieux » ou « plus malade » ?",
+      "answer": "« mieux ».",
+      "target_ids": [
+        "fr-rank-0148"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0148",
+          "form": "mieux",
+          "lemma": null,
+          "role": "review"
+        }
+      ],
+      "context": "Après du repos, elle peut se sentir mieux.",
       "candidate_reasons": [
         "question_type:grammar_choice"
       ]
