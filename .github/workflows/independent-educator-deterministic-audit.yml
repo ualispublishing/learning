@@ -1,0 +1,116 @@
+name: Independent educator deterministic audit
+
+on:
+  push:
+    paths:
+      - '.github/workflows/independent-educator-deterministic-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install jsonschema
+      - name: Audit all Arabic and French canonical records
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, hashlib, re, unicodedata
+          from pathlib import Path
+          from collections import Counter, defaultdict
+          import jsonschema
+
+          root=Path('.')
+          schema=json.loads((root/'reading/schema/passage.schema.json').read_text(encoding='utf-8'))
+          langs=['arabic','french']
+          levels=['a1','a2','b1','b2','c1','c2']
+          bands={'a1':(90,140),'a2':(140,220),'b1':(220,350),'b2':(350,550),'c1':(500,800),'c2':(700,1200)}
+          report={'audit':'independent_educator_deterministic_baseline','date':'2026-08-19','coverage':{},'hashes':{},'summary':{},'findings':[]}
+          sev=Counter(); cats=Counter(); total_records=0; total_q=0; total_a=0
+
+          def add(language,level,pid,field,category,severity,detail):
+              report['findings'].append({'language':language,'level':level.upper(),'passage_id':pid,'field':field,'category':category,'severity':severity,'detail':detail,'status':'OPEN'})
+              sev[severity]+=1; cats[category]+=1
+
+          for language in langs:
+            report['coverage'][language]={}
+            report['hashes'][language]={}
+            for level in levels:
+              p=root/f'reading/{language}/{level}/passages.jsonl'
+              raw=p.read_bytes()
+              report['hashes'][language][level]={'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw)}
+              lines=[x for x in raw.decode('utf-8').splitlines() if x.strip()]
+              ids=[]; seqs=[]; qn=an=0
+              status_counts=Counter(); cov_counts=Counter(); lang_review=Counter(); ped_review=Counter(); answer_review=Counter()
+              for i,line in enumerate(lines,1):
+                total_records+=1
+                try: rec=json.loads(line)
+                except Exception as e:
+                  add(language,level,f'line:{i}','record','invalid_json','critical',str(e)); continue
+                pid=rec.get('id',f'line:{i}'); ids.append(pid); seqs.append(rec.get('sequence'))
+                try: jsonschema.Draft202012Validator(schema).validate(rec)
+                except Exception as e: add(language,level,pid,'record','schema_failure','critical',str(e).splitlines()[0])
+                qs=rec.get('questions',[]); ans=rec.get('answer_key',[]); qn+=len(qs); an+=len(ans); total_q+=len(qs); total_a+=len(ans)
+                if len(qs)!=10: add(language,level,pid,'questions','question_count','major',f'{len(qs)} questions; expected 10')
+                if len(ans)!=10: add(language,level,pid,'answer_key','answer_count','major',f'{len(ans)} answers; expected 10')
+                qids=[q.get('id') for q in qs]; aids=[a.get('id') for a in ans]
+                if len(qids)!=len(set(qids)): add(language,level,pid,'questions','duplicate_question_id','critical','duplicate local question id')
+                if len(aids)!=len(set(aids)): add(language,level,pid,'answer_key','duplicate_answer_id','critical','duplicate local answer id')
+                amap={a.get('id'):a for a in ans}
+                for q in qs:
+                  aid=q.get('answer_id')
+                  if aid not in amap: add(language,level,pid,f'question:{q.get("id")}.answer_id','broken_linkage','critical',f'missing answer {aid}')
+                  elif amap[aid].get('question_id')!=q.get('id'): add(language,level,pid,f'question:{q.get("id")}.answer_id','broken_linkage','critical',f'answer {aid} points to {amap[aid].get("question_id")}')
+                qset=set(qids)
+                for a in ans:
+                  if a.get('question_id') not in qset: add(language,level,pid,f'answer:{a.get("id")}.question_id','broken_linkage','critical',f'points to missing question {a.get("question_id")}')
+                # Question target IDs must be locally introduced/reviewed lexical targets when present.
+                local_lex={x.get('id') for x in rec.get('new_lexical_targets',[])}|{x.get('id') for x in rec.get('review_lexical_targets',[])}
+                for q in qs:
+                  for tid in q.get('target_ids',[]):
+                    if tid not in local_lex: add(language,level,pid,f'question:{q.get("id")}.target_ids','nonlocal_target','major',f'{tid} not locally declared lexical target')
+                declared=rec.get('word_count')
+                actual=len(re.findall(r'\S+',rec.get('text','')))
+                if declared!=actual: add(language,level,pid,'word_count','word_count_mismatch','minor',f'declared {declared}, whitespace count {actual}')
+                lo,hi=bands[level]
+                if actual<lo or actual>hi: add(language,level,pid,'text','standard_word_band','major',f'{actual} words outside standard {lo}-{hi}')
+                q=rec.get('quality',{})
+                status=str(q.get('status')); status_counts[status]+=1
+                cov=str(q.get('coverage_check')); cov_counts[cov]+=1
+                lr=str(q.get('linguistic_review')); lang_review[lr]+=1
+                pr=str(q.get('pedagogical_review')); ped_review[pr]+=1
+                ar=str(q.get('answer_key_check')); answer_review[ar]+=1
+                if status!='approved': add(language,level,pid,'quality.status','not_approved','critical',f'quality.status={status!r}')
+                if cov!='pass': add(language,level,pid,'quality.coverage_check','coverage_not_pass','major',f'coverage_check={cov!r}')
+                if lr!='pass': add(language,level,pid,'quality.linguistic_review','linguistic_not_pass','major',f'linguistic_review={lr!r}')
+                if pr!='pass': add(language,level,pid,'quality.pedagogical_review','pedagogical_not_pass','major',f'pedagogical_review={pr!r}')
+                if ar!='pass': add(language,level,pid,'quality.answer_key_check','answer_key_not_pass','major',f'answer_key_check={ar!r}')
+                cov=rec.get('estimated_known_token_coverage')
+                if cov in (None,0): add(language,level,pid,'estimated_known_token_coverage','coverage_missing_or_zero','major',f'value={cov!r}')
+                # Unicode NFC sanity.
+                for field in ['title','text']:
+                  val=rec.get(field,'')
+                  if val!=unicodedata.normalize('NFC',val): add(language,level,pid,field,'unicode_not_nfc','minor','not NFC-normalized')
+              if len(ids)!=len(set(ids)): add(language,level,'LEVEL','id','duplicate_passage_id','critical','duplicate passage IDs in level')
+              expected=list(range(1,len(lines)+1))
+              if seqs!=expected: add(language,level,'LEVEL','sequence','sequence_discontinuity','critical',f'actual sequence differs from 1..{len(lines)}')
+              report['coverage'][language][level]={'records':len(lines),'questions':qn,'answers':an,'quality_status_counts':dict(status_counts),'coverage_check_counts':dict(cov_counts),'linguistic_review_counts':dict(lang_review),'pedagogical_review_counts':dict(ped_review),'answer_key_check_counts':dict(answer_review)}
+          report['summary']={'records':total_records,'questions':total_q,'answers':total_a,'open_findings':len(report['findings']),'severity_counts':dict(sev),'category_counts':dict(cats),'deterministic_gate':'PASS' if not report['findings'] else 'FAIL'}
+          out=root/'reading/audit/independent_educator_deterministic_2026-08-19.json'
+          out.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(report['summary'],ensure_ascii=False,indent=2))
+          PY
+      - name: Commit audit result
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add reading/audit/independent_educator_deterministic_2026-08-19.json
+          git commit -m "audit: record independent educator deterministic baseline" || exit 0
+          git push
