@@ -1,0 +1,77 @@
+{
+  "audit": "independent_educator_recertification",
+  "date": "2026-08-19",
+  "review_role": "independent educator/curriculum reviewer",
+  "assurance_profile": "HIGHEST_ASSURANCE",
+  "historical_pass_verdicts_used_as_authority": false,
+  "scope": {
+    "languages": ["arabic", "french"],
+    "levels_each": ["A1", "A2", "B1", "B2", "C1", "C2"],
+    "canonical_records_deterministically_scanned": 720,
+    "canonical_questions_deterministically_scanned": 7200,
+    "canonical_answers_deterministically_scanned": 7200,
+    "learner_facing_semantic_educator_review_credited_complete": false,
+    "reason_semantic_review_not_credited": "Mandatory deterministic Gate A failed across the live canonical corpus. Highest-assurance protocol is fail-closed; certification cannot advance or be credited complete while canonical record-level quality/coverage/review evidence remains unresolved."
+  },
+  "deterministic_evidence": {
+    "full_artifact": "reading/audit/independent_educator_deterministic_2026-08-19.json",
+    "summary_artifact": "reading/audit/independent_educator_deterministic_2026-08-19.summary.json",
+    "summary_artifact_source_sha256": "ca8289b5e20f3897aab242352221ca8c5493a6ce2e00a0de662d19349fd3acf8",
+    "gate": "FAIL",
+    "open_findings": 4310,
+    "severity_counts": {
+      "critical": 720,
+      "major": 3582,
+      "minor": 8
+    },
+    "category_counts": {
+      "not_approved": 720,
+      "coverage_not_pass": 720,
+      "coverage_missing_or_zero": 720,
+      "linguistic_not_pass": 714,
+      "pedagogical_not_pass": 714,
+      "answer_key_not_pass": 714,
+      "unicode_not_nfc": 8
+    },
+    "important_interpretation": "These counts are release-evidence failures, not a claim that 4310 separate prose/answer errors exist. In particular, draft/pending/zero coverage metadata may be stale. Under the protocol, stale or unverified release evidence is itself a blocker and must not be changed to PASS without substantive revalidation."
+  },
+  "canonical_sha256": {
+    "arabic": {
+      "A1": "d6142ee56ec830c4a41cb7244fe99c65824cebbe59ff2e9b8f44d4640c9e228b",
+      "A2": "f27ad06c372d316ca70346e19a10a72645577897de8db676e317d869d8945e1c",
+      "B1": "c2968274d92dfdb4c0c35812d89a501aea751de54af6f725d6ac1f39e008600b",
+      "B2": "230d5a5b871795c6f46a584e8c54b0dca841f7126ff09b7d2d5194e105662762",
+      "C1": "2a8d71a25a8176a4383488b8d794151eb041e0e60e96b251f1c13e403d14b23e",
+      "C2": "82c0ecec8824bda6c5c6d351571086d91a20b3640ba50c9f5e7825b468bf4909"
+    },
+    "french": {
+      "A1": "5f187a8bdce83812265b6c79bf505130f084f13f92bfc02b9d57df64efbdda42",
+      "A2": "3c6dc3687fbacbd846c087d8041f2f0f58c0116b1dbf7008a64ad32611c4802a",
+      "B1": "7b1013fa606761bc7cc69fdaf67c66a0efcc9c91c478b1c8a5f8523458f9451b",
+      "B2": "bfa64c472a93d572d65fbe0217283b9d53bbb0a8d88fee7ea3a3aef1c7993942",
+      "C1": "56d19f61f5903afda48b1d6f6a3ca2a5bbf7e5df2bedccc1862075602f05fa80",
+      "C2": "9532050b975d482bb4323c1b4b6ef0d672771729d6683dc049a8c10f7a0af2a1"
+    }
+  },
+  "decision": {
+    "arabic_educator_gate": "BLOCKED",
+    "french_educator_gate": "BLOCKED",
+    "arabic_release_state_change": "NONE",
+    "french_release_state_change": "NONE",
+    "strongest_justified_state": "INTERNAL_LANGUAGE_PASS with independent recertification blocked at deterministic Gate A",
+    "educator_release_ready": false,
+    "hash_bound_released": false
+  },
+  "repair_policy": {
+    "canonical_metadata_auto_promoted": false,
+    "reason": "Changing draft/pending/coverage fields to make the audit pass would manufacture evidence. Each field must be backed by a fresh substantive check before promotion.",
+    "next_actions": [
+      "Recompute and substantively validate known-token coverage for all 720 records.",
+      "Run fresh 100% language, pedagogy, and answer-grounding review and record per-record evidence rather than bulk status edits.",
+      "Resolve the eight Unicode NFC findings and rerun affected record/level checks.",
+      "Only after substantive validation, update record-level quality/review fields and rerun deterministic Gate A against the same/fresh hashes.",
+      "Then complete the independent educator semantic review over 100% of learner-facing Arabic and French content.",
+      "Keep separate native-professional, external-tool, independent-model-family, and full blind second-human gates pending until actually evidenced."
+    ]
+  }
+}
