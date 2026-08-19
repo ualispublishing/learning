@@ -2,33 +2,28 @@
   "date": "2026-08-19",
   "language": "ur",
   "scope": "A1 graded-reading continuation",
-  "status": "ACTIVE_WITH_CANONICAL_PROMOTION_GATE",
-  "precedence_note": "Live canonical JSONL and fresh audit artifacts outrank older STATUS/HANDOFF/TASKS text. This artifact records a newly discovered contradiction in those continuity files and the live canonical file.",
+  "status": "ACTIVE_CANONICAL_12_UNITS03_04_STAGED",
+  "precedence_note": "Live canonical JSONL and fresh audit artifacts are authoritative. An earlier read occurred before the guarded Unit 02 promotion commit landed; this revision supersedes that temporary stale observation.",
   "sealed_languages": {
     "arabic": {"status": "APPROVED", "canonical_passages": 360, "action": "do not reopen unless canonical data deliberately changes"},
     "french": {"status": "APPROVED", "canonical_passages": 360, "action": "do not reopen unless hash-bound canonical data deliberately changes"}
   },
   "urdu_a1": {
     "live_canonical_path": "reading/urdu/a1/passages.jsonl",
-    "live_canonical_blob": "7899fc1dd857625e5c3419a31bc116dbfa658de5",
-    "live_canonical_passages": 6,
-    "live_canonical_sequences": [1,2,3,4,5,6],
-    "calibration_gate": {
-      "status": "REPAIR_REQUIRED_NOT_YET_CANONICAL",
-      "verified_defects": {
-        "invalid_running_text_review_entries": 14,
-        "new_target_exposure_count_repairs": [{"passage_id":"ur-a1-u01-p05","form":"اب","before":7,"verified_after":4}]
-      },
-      "repair_scope": "metadata/quality-state only; do not change Unit 1 passage text, questions, or answers"
+    "live_canonical_blob": "7e0226ea41955634b9fab629c369f9ec1fa149eb",
+    "live_canonical_passages": 12,
+    "live_canonical_sequences": [1,2,3,4,5,6,7,8,9,10,11,12],
+    "calibration": {
+      "status": "PASS_AFTER_REPAIR",
+      "artifact": "reading/audit/urdu_a1_calibration_current_standard_audit.json",
+      "repair_scope": "metadata/quality-state only; Unit 1 passage text, questions, and answers unchanged"
+    },
+    "unit02": {
+      "status": "CANONICAL_PROMOTED",
+      "sequences": [7,8,9,10,11,12],
+      "artifact": "reading/audit/urdu_a1_unit02_generation_result.json"
     },
     "staged_units": {
-      "unit02": {
-        "sequences": [7,8,9,10,11,12],
-        "passages": 6,
-        "path": "reading/urdu/a1/staging/unit02",
-        "plan": "reading/audit/urdu_a1_unit02_generation_plan.json",
-        "status": "STAGED_NOT_CANONICAL"
-      },
       "unit03": {
         "sequences": [13,14,15,16,17,18],
         "passages": 6,
@@ -45,29 +40,29 @@
       }
     },
     "available_records": {
-      "canonical": 6,
-      "staged": 18,
+      "canonical": 12,
+      "staged": 12,
       "canonical_plus_staged": 24,
-      "questions_in_staged_units_02_04": 180,
-      "answers_in_staged_units_02_04": 180
+      "questions_in_staged_units_03_04": 120,
+      "answers_in_staged_units_03_04": 120
     }
   },
   "continuity_contradiction": {
-    "present": true,
-    "details": "The current-frontier blocks at the top of reading/AGENT_HANDOFF.md and reading/TASKS.md claim the calibration repair and Unit 02 canonical promotion already occurred, but the live canonical Urdu A1 blob remains the original six-passage blob and the claimed promotion result artifact is absent. Treat those claims as stale/incorrect until canonical data proves otherwise.",
-    "resolution_rule": "Trust the live canonical file plus this fresh audit artifact. Do not count staged records as canonical."
+    "present": false,
+    "resolution": "The guarded workflow commit ebcf3b180ef790d6c250276183825500436a88a3 landed at 2026-08-19T17:02:01Z. It repaired/accepted Unit 1, promoted Unit 2, and updated STATUS/HANDOFF/TASKS. The earlier apparent contradiction was a timing/read-after-write issue."
   },
   "automation_attempt": {
-    "result": "NO_PROMOTION",
-    "details": "Two guarded GitHub Actions trigger approaches were attempted through connector-originated events; no workflow run was reported. The temporary workflow files were removed and trigger PR #1 was closed without merge.",
+    "result": "DELAYED_SUCCESS_FOR_PRIMARY_WORKFLOW",
+    "promotion_commit": "ebcf3b180ef790d6c250276183825500436a88a3",
+    "details": "Initial workflow-run polling returned no run, but the primary guarded workflow subsequently committed the promotion. The redundant PR-trigger path was closed without merge and both temporary workflow files were later removed.",
     "repo_cleanup_complete": true
   },
   "next_exact_actions": [
-    "Atomically repair the verified Unit 1 calibration metadata against live blob 7899fc1dd857625e5c3419a31bc116dbfa658de5.",
-    "Promote staged Unit 02 sequences 7-12 to canonical JSONL and verify 12 contiguous canonical sequences.",
-    "Promote structurally checked Unit 03 sequences 13-18, then Unit 04 sequences 19-24, strictly in sequence order.",
-    "After each promotion, validate word counts, 10Q/10A linkage, local target IDs, exact new-target exposures, exact running-text reviews, and zero-new P06 checkpoints.",
-    "Only after canonical promotion succeeds, reconcile reading/STATUS.json, reading/TASKS.md, and reading/AGENT_HANDOFF.md to the live canonical count."
+    "Run a final learner-facing Urdu polish pass over staged Units 03-04 while preserving target identity and structural invariants.",
+    "Promote Unit 03 sequences 13-18 against exact canonical blob 7e0226ea41955634b9fab629c369f9ec1fa149eb.",
+    "Promote Unit 04 sequences 19-24 immediately after Unit 03 if all guards pass.",
+    "Verify 24 contiguous canonical sequences, 240 linked questions, 240 linked answers, A1 word bands, exact target exposures/reviews, and zero-new P06 checkpoints.",
+    "Update STATUS.json, TASKS.md, and AGENT_HANDOFF.md to the resulting live canonical frontier."
   ],
-  "generation_policy": "Continue generation-first staging only if useful, but never represent staged passages as canonical or approved. Formal multi-pass final audit remains deferred until the intended generation milestone unless a severe defect is found."
+  "generation_policy": "Continue generation-first production; staged passages are not canonical until guarded promotion succeeds. Formal multi-pass final audit remains deferred until the intended generation milestone unless a severe defect is found."
 }
