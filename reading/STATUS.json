@@ -609,5 +609,23 @@
     "source_state_assertions_required_for_large_mutations": true,
     "serialize_workflows_that_push_the_same_artifact": true,
     "fix_failed_guards_instead_of_weakening_them": true
-  }
+  },
+  "status": "FRENCH_COMPLETE_APPROVED",
+  "mode": "serial_single_writer",
+  "canonical_passages": 360,
+  "unapproved_passages": 0,
+  "generation": {
+    "status": "COMPLETE",
+    "canonical_passages": 360
+  },
+  "final_audit": {
+    "policy": "pass1_12_before_approval",
+    "current_gate": "complete",
+    "approval": "APPROVED",
+    "audit_artifact": "reading/audit/french_final_whole_audit.json",
+    "approval_artifact": "reading/audit/french_final_approval.json",
+    "audit_pass_count": 15,
+    "whole_corpus_sha256": "e1501acb58b021412413fa32fb15e805c5271b8d90242c0034e54dd3da489388"
+  },
+  "next_action": "Resume the next unapproved language from the authoritative handoff; do not reopen French unless a deliberate canonical change invalidates this hash-bound approval."
 }
