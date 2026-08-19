@@ -315,3 +315,10 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 - [ ] Theme: **literary style and rhetoric**; genres: literary prose, critical analysis, rhetorical commentary.
 - [ ] Select source-backed rank-1001+ targets from `1899` fresh continuation terms.
 - [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.
+
+
+#### French C2 Unit 06 — IMMEDIATE NEXT
+- [x] Unit 05 sealed on `7eeb53f2535cb72b420e120f4481e93ce6e7f0af`.
+- [ ] Theme: **political and institutional argument without partisan advocacy**; genres: comparative analysis, policy critique, argument reconstruction.
+- [ ] Select source-backed rank-1001+ targets from `1874` fresh continuation terms.
+- [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.

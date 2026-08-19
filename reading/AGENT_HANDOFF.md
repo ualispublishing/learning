@@ -307,3 +307,10 @@ Resolve C2 standards and exact matrix node from canonical policy, then calibrate
 - Next canonical matrix theme: **literary style and rhetoric**; genres: literary prose, critical analysis, rhetorical commentary.
 - Fresh rank-1001+ continuation terms: 1899.
 - Do not weaken C2 word-band, source, exposure, review, linkage, reasoning, or zero-new checkpoint guards.
+
+
+### French C2 Unit 06 frontier
+- Unit 05 sealed; canonical C2 blob `7eeb53f2535cb72b420e120f4481e93ce6e7f0af`.
+- Next canonical matrix theme: **political and institutional argument without partisan advocacy**; genres: comparative analysis, policy critique, argument reconstruction.
+- Fresh rank-1001+ continuation terms: 1874.
+- Do not weaken C2 word-band, source, exposure, review, linkage, reasoning, or zero-new checkpoint guards.
