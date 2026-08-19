@@ -26,7 +26,7 @@ def main():
    if start!=42: raise AssertionError(f'C2 Unit08 requires 42-row Unit07 prefix, got {start}')
    prev=json.loads((A/'french_c2_unit07_frontier_lock.json').read_text(encoding='utf-8'))
    if prev.get('status')!='PASS' or prev.get('c2_canonical_blob')!=h(C2): raise AssertionError('C2 Unit07 dependency not sealed')
-   env('resolve_french_c2_unit_plan.py',8); st.append('resolve_c2_unit08_plan'); env('probe_french_c2_unit_targets.py',8); st.append('probe_c2_unit08_targets'); run('select_french_c2_unit08_targets.py'); st.append('select_c2_unit08_targets'); run('generate_french_c2_unit08.py'); gen=True; st.append('generate_c2_unit08'); env('audit_french_c2_unit_generation.py',8); st.append('audit_c2_unit08'); env('lock_french_c2_unit_frontier.py',8); st.append('lock_c2_unit08'); verify(); seal=True; prep9(st); front=True
+   env('resolve_french_c2_unit_plan.py',8); st.append('resolve_c2_unit08_plan'); env('probe_french_c2_unit_targets.py',8); st.append('probe_c2_unit08_targets'); run('select_french_c2_unit08_targets.py'); st.append('select_c2_unit08_targets'); run('generate_french_c2_unit08_preflight.py'); gen=True; st.append('generate_c2_unit08'); env('audit_french_c2_unit_generation.py',8); st.append('audit_c2_unit08'); env('lock_french_c2_unit_frontier.py',8); st.append('lock_c2_unit08'); verify(); seal=True; prep9(st); front=True
  except Exception:
   err=traceback.format_exc(); print(err)
   if gen and not seal: C2.write_bytes(before); st.append('restore_prec2unit08_after_strict_failure')
