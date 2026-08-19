@@ -31,7 +31,6 @@ jobs:
           C2 = ROOT / 'reading/french/c2/passages.jsonl'
           RELEASE = ROOT / 'reading/RELEASE_STATUS.json'
           AUDIT = ROOT / 'reading/audit/french_c1_c2_educator_defect_repair_2026-08-19.json'
-
           generic = "Il sert à préciser une composante de l’argument dont la portée est définie par le contexte du passage."
 
           c1_review_replacements = {
@@ -97,19 +96,13 @@ jobs:
           assert len(c1) == 60 and len(c2) == 60
           assert [r['sequence'] for r in c1] == list(range(1, 61))
           assert [r['sequence'] for r in c2] == list(range(1, 61))
+          findings, changed = [], []
 
-          findings = []
-          changed = []
-
-          # C1 Unit 01: remove learner-facing production labels, preserve review contacts naturally,
-          # and replace the 20 generic vocabulary answers with context-specific answers.
           for rec in c1:
             rid = rec['id']
             if rid not in c1_review_replacements:
               continue
-            old_text = rec['text']
-            old_words = len(old_text.split())
-            # Frenchify the English theme label wherever learner-facing.
+            old_text, old_words = rec['text'], len(rec['text'].split())
             for field in ('text', 'title'):
               rec[field] = rec[field].replace('research and evidence', 'recherche et preuves')
             for q in rec['questions']:
@@ -117,47 +110,52 @@ jobs:
               if q['id'] in {'q7','q8','q9','q10'}:
                 m = re.search(r'«\s*([^»]+)\s*»', q['prompt'])
                 assert m, (rid, q['id'], q['prompt'])
-                term = m.group(1).strip()
-                q['prompt'] = f"Quel rôle le terme « {term} » joue-t-il dans le raisonnement ?"
-            # Remove explicit level/production language from text while preserving content.
+                q['prompt'] = f"Quel rôle le terme « {m.group(1).strip()} » joue-t-il dans le raisonnement ?"
             rec['text'] = rec['text'].replace('La difficulté C1 consiste', 'La difficulté consiste')
             rec['text'] = rec['text'].replace('Une position C1 devient ainsi plus forte', 'Une position argumentée devient ainsi plus forte')
             rec['text'] = rec['text'].replace('Un rapport C1 devrait', 'Un rapport rigoureux devrait')
             rec['text'] = rec['text'].replace('Le texte C1 doit', 'Le texte doit')
             rec['text'] = rec['text'].replace('La recommandation C1 doit', 'La recommandation doit')
-
             pattern = re.compile(r'Pour maintenir la continuité avec la synthèse B2, l’auteur réemploie aussi « [^»]+ », « [^»]+ », « [^»]+ » et « [^»]+ » comme quatre points d’appui dont la fonction doit rester explicite dans l’argument\.')
             rec['text'], n = pattern.subn(c1_review_replacements[rid], rec['text'])
             assert n == 1, (rid, 'expected one B2 production-note sentence', n)
-
-            amap = c1_vocab_answers[rid]
             for a in rec['answer_key']:
-              if a['id'] in amap:
+              if a['id'] in c1_vocab_answers[rid]:
                 assert a['answer'] == generic, (rid, a['id'], 'unexpected pre-repair answer')
-                a['answer'] = amap[a['id']]
+                a['answer'] = c1_vocab_answers[rid][a['id']]
                 findings.append({'id': rid, 'field': f"answer_key.{a['id']}", 'severity': 'major', 'category': 'generic_vocabulary_answer', 'resolution': 'repaired'})
-
             if rec.get('topics'):
-              rec['topics'] = [
-                ('recherche et preuves' if t == 'research and evidence' else
-                 'niveau C1' if t == 'C1 calibration' else
-                 'raisonnement critique' if t == 'critical reasoning' else t)
-                for t in rec['topics']
-              ]
-
+              rec['topics'] = [('recherche et preuves' if t == 'research and evidence' else 'niveau C1' if t == 'C1 calibration' else 'raisonnement critique' if t == 'critical reasoning' else t) for t in rec['topics']]
             rec['word_count'] += len(rec['text'].split()) - old_words
             rec['revision'] = int(rec.get('revision', 1)) + 1
             changed.append(rid)
             findings.append({'id': rid, 'field': 'text/title/questions', 'severity': 'major', 'category': 'learner_facing_production_language', 'resolution': 'repaired'})
 
-          # C2 Unit 01: replace explicit review-production notes with natural sentences that retain
-          # every scheduled exact review form.
+          # C1 checkpoint P06 also leaked English theme / production-level framing.
+          p06 = next(r for r in c1 if r['id'] == 'fr-c1-u01-p06')
+          old_words = len(p06['text'].split())
+          p06['text'] = p06['text'].replace('Le checkpoint revient au thème « research and evidence » sans introduire de nouveau lexique délibéré.', 'Cette synthèse revient au thème « recherche et preuves » en mobilisant le vocabulaire déjà rencontré.')
+          p06['text'] = p06['text'].replace('La première exigence C1 consiste', 'La première exigence consiste')
+          p06['text'] = p06['text'].replace('Les quatre repères', 'Les quatre termes')
+          p06['text'] = p06['text'].replace('Les repères', 'Les termes')
+          p06['text'] = p06['text'].replace('La nuance C1 consiste', 'La nuance consiste')
+          p06['text'] = p06['text'].replace('La maîtrise C1 apparaît', 'La maîtrise du raisonnement apparaît')
+          p06['text'] = p06['text'].replace('Le checkpoint évalue ainsi', 'Cette synthèse évalue ainsi')
+          p06['title'] = p06['title'].replace('Checkpoint C1', 'Synthèse').replace('research and evidence', 'recherche et preuves')
+          for q in p06['questions']:
+            q['prompt'] = q['prompt'].replace('le checkpoint', 'cette synthèse').replace('la maîtrise C1', 'la maîtrise argumentative').replace('le checkpoint C1', 'la synthèse').replace('Résume le checkpoint C1.', 'Résume la synthèse.')
+          if p06.get('topics'):
+            p06['topics'] = [('recherche et preuves' if t == 'research and evidence' else 'niveau C1' if t == 'C1 calibration' else t) for t in p06['topics']]
+          p06['word_count'] += len(p06['text'].split()) - old_words
+          p06['revision'] = int(p06.get('revision', 1)) + 1
+          changed.append(p06['id'])
+          findings.append({'id': p06['id'], 'field': 'text/title/questions', 'severity': 'major', 'category': 'learner_facing_production_language', 'resolution': 'repaired'})
+
           for rec in c2:
             rid = rec['id']
             if rid not in c2_review_replacements:
               continue
-            old_text = rec['text']
-            old_words = len(old_text.split())
+            old_words = len(rec['text'].split())
             pattern = re.compile(r'Révision C1 intégrée\s*:\s*« [^»]+ », « [^»]+ », « [^»]+ », « [^»]+ »\. Le texte les réemploie comme outils de comparaison sans les présenter comme nouveau lexique\.')
             rec['text'], n = pattern.subn(c2_review_replacements[rid], rec['text'])
             assert n == 1, (rid, 'expected one C1 review production-note block', n)
@@ -166,16 +164,14 @@ jobs:
             changed.append(rid)
             findings.append({'id': rid, 'field': 'text', 'severity': 'major', 'category': 'learner_facing_production_language', 'resolution': 'repaired'})
 
-          assert len(changed) == 10, changed
+          assert len(changed) == 11, changed
 
-          # Complete structural/linkage checks for C1/C2 after repair.
-          for lang_rows, level in ((c1, 'C1'), (c2, 'C2')):
-            ids = [r['id'] for r in lang_rows]
+          for rows, level in ((c1, 'C1'), (c2, 'C2')):
+            ids = [r['id'] for r in rows]
             assert len(ids) == len(set(ids)) == 60
-            for rec in lang_rows:
+            for rec in rows:
               assert rec['cefr'] == level
-              assert len(rec['questions']) == 10, rec['id']
-              assert len(rec['answer_key']) == 10, rec['id']
+              assert len(rec['questions']) == len(rec['answer_key']) == 10, rec['id']
               qids = [q['id'] for q in rec['questions']]
               aids = [a['id'] for a in rec['answer_key']]
               assert len(qids) == len(set(qids)) == 10
@@ -183,29 +179,17 @@ jobs:
               assert {q['answer_id'] for q in rec['questions']} == set(aids), rec['id']
               assert {a['question_id'] for a in rec['answer_key']} == set(qids), rec['id']
 
-          # Exact review-form preservation for all changed records.
           index = {r['id']: r for r in c1 + c2}
           for rid in changed:
             rec = index[rid]
             for target in rec.get('review_lexical_targets', []):
               if target.get('representation') in {'running_text', 'summary'}:
-                form = target['form']
-                assert form in rec['text'], (rid, 'missing review form', form)
+                assert target['form'] in rec['text'], (rid, 'missing review form', target['form'])
 
-          # Defect-class sweep: none of these production leaks may remain anywhere in C1/C2
-          # learner-facing text/title/questions/answers.
-          forbidden = [
-            'research and evidence',
-            'Pour maintenir la continuité avec la synthèse B2',
-            'Révision C1 intégrée',
-            'sans les présenter comme nouveau lexique',
-            generic,
-          ]
+          forbidden = ['research and evidence', 'Pour maintenir la continuité avec la synthèse B2', 'Révision C1 intégrée', 'sans les présenter comme nouveau lexique', generic]
           residue = []
           for rec in c1 + c2:
-            learner = [rec.get('text',''), rec.get('title','')]
-            learner += [q.get('prompt','') for q in rec.get('questions', [])]
-            learner += [a.get('answer','') for a in rec.get('answer_key', [])]
+            learner = [rec.get('text',''), rec.get('title','')] + [q.get('prompt','') for q in rec.get('questions', [])] + [a.get('answer','') for a in rec.get('answer_key', [])]
             blob = '\n'.join(learner)
             for token in forbidden:
               if token in blob:
@@ -213,7 +197,6 @@ jobs:
           if residue:
             raise SystemExit('UNRESOLVED DEFECT-CLASS RESIDUE: ' + json.dumps(residue, ensure_ascii=False))
 
-          # Changed C1/C2 passages remain in their existing broad word bands.
           for rec in c1:
             assert 500 <= rec['word_count'] <= 800, (rec['id'], rec['word_count'])
           for rec in c2:
@@ -224,7 +207,6 @@ jobs:
           after = {'c1_sha256': sha256(C1), 'c2_sha256': sha256(C2)}
           assert before != after
 
-          # Canonical edits invalidate historical French release evidence.
           release = json.loads(RELEASE.read_text(encoding='utf-8'))
           fr = release['languages']['french']
           fr['release_state'] = 'REOPEN_REQUIRED'
@@ -250,22 +232,15 @@ jobs:
               'changed_passages': len(changed),
               'generic_vocabulary_answers_repaired': sum(1 for x in findings if x['category'] == 'generic_vocabulary_answer'),
               'production_language_records_repaired': sum(1 for x in findings if x['category'] == 'learner_facing_production_language'),
-              'unresolved_forbidden_pattern_hits': 0,
+              'unresolved_forbidden_pattern_hits': 0
             },
             'validation': {
-              'json_parse': 'PASS',
-              '60_records_each_level': 'PASS',
-              'sequence_continuity': 'PASS',
-              'unique_ids': 'PASS',
-              'ten_questions_and_answers': 'PASS',
-              'question_answer_linkage': 'PASS',
-              'review_forms_preserved_on_changed_records': 'PASS',
-              'defect_class_residue_scan': 'PASS',
-              'word_bands': 'PASS',
+              'json_parse': 'PASS', '60_records_each_level': 'PASS', 'sequence_continuity': 'PASS', 'unique_ids': 'PASS',
+              'ten_questions_and_answers': 'PASS', 'question_answer_linkage': 'PASS',
+              'review_forms_preserved_on_changed_records': 'PASS', 'defect_class_residue_scan': 'PASS', 'word_bands': 'PASS'
             },
             'release_effect': 'French remains not educator-release-ready; full re-certification must rerun against repaired hashes.'
           }, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-
           print(json.dumps({'changed': changed, 'before': before, 'after': after}, ensure_ascii=False, indent=2))
           PY
 
