@@ -1,0 +1,1744 @@
+{
+  "audit": "French A1-A2 human semantic refinement of metalinguistic repair",
+  "date": "2026-08-19",
+  "status": "HUMAN_REVIEWED_DEFINED_CLASS_PASS",
+  "review_scope": "All 63 machine-repaired Q/A transformations, plus exact-duplicate checks over all 120 A1/A2 passages",
+  "before_sha256": {
+    "A1": "97948c375f54649935db2d20c44def1dc539939dc1c14d9b063d6647d566da13",
+    "A2": "54e38bdbd8c7264a0d77484296c256857465783d57069ac456cc63538d515552"
+  },
+  "after_sha256": {
+    "A1": "48db8f58dc105bcd880302d31b0f7fcae439e3018a35b0adb62b690d42b85562",
+    "A2": "8fcd71903e6a495a2abaac8d436232b4b7ee00ae5ac0bce4d273aa4a134b3c15"
+  },
+  "reviewed_transformations": 63,
+  "changed_passages": 62,
+  "additional_preexisting_repairs": [
+    {
+      "passage_id": "fr-a1-u08-p02",
+      "question_id": "q6",
+      "category": "preexisting_exact_duplicate_prompt",
+      "before": "Que signifie « corps » ?",
+      "after": "Dans « écouter son corps », que doit faire Camille ?"
+    },
+    {
+      "passage_id": "fr-a1-u08-p03",
+      "question_id": "q6",
+      "category": "preexisting_exact_duplicate_prompt",
+      "before": "Que signifie « boire » ?",
+      "after": "Choisis la phrase correcte : « il faut boire de l’eau » ou « il faut boit de l’eau » ?"
+    },
+    {
+      "passage_id": "fr-a1-u08-p04",
+      "question_id": "q6",
+      "category": "preexisting_exact_duplicate_prompt",
+      "before": "Que signifie « dormir » ?",
+      "after": "Choisis la phrase correcte : « je vais dormir » ou « je vais dors » ?"
+    },
+    {
+      "passage_id": "fr-a1-u09-p02",
+      "question_id": "q6",
+      "category": "preexisting_exact_duplicate_prompt",
+      "before": "Que signifie « ami » ?",
+      "after": "Choisis la forme correcte : « Sami est un ami de Camille » ou « Sami est une ami de Camille » ?"
+    },
+    {
+      "passage_id": "fr-a1-u09-p05",
+      "question_id": "q6",
+      "category": "preexisting_exact_duplicate_prompt",
+      "before": "Que signifie « travail » ici ?",
+      "after": "Choisis la forme correcte : « un travail court » ou « une travail courte » ?"
+    },
+    {
+      "passage_id": "fr-a1-u10-p03",
+      "question_id": "q6",
+      "category": "preexisting_exact_duplicate_prompt",
+      "before": "Que signifie « prix » ?",
+      "after": "Choisis la forme correcte : « le prix du livre » ou « la prix du livre » ?"
+    },
+    {
+      "passage_id": "fr-a1-u10-p05",
+      "question_id": "q6",
+      "category": "preexisting_exact_duplicate_prompt",
+      "before": "Que signifie « chaussure » ?",
+      "after": "Choisis la forme correcte : « une chaussure » ou « un chaussure » ?"
+    }
+  ],
+  "human_review_findings": [
+    "Machine cloze extraction produced malformed nested quotation marks in dialogue contexts.",
+    "fr-a1-u03-p04 q7/q8 became duplicate malformed clozes and q8 lost the intended pour moi context.",
+    "fr-a1-u01-p03 q7 selected avec un livre instead of accompaniment.",
+    "fr-a1-u04-p03 q7 selected pas encore instead of additional-time encore.",
+    "fr-a1-u06-p03 q7 selected adverbial même instead of identical/same.",
+    "A definition fallback duplicated an existing meaning task; an exact pre-existing q4/q6 duplicate in fr-a1-u08-p02 was also repaired.",
+    "Copied-passage clozes duplicated the role of later transfer items and conflicted with the ten-question standard."
+  ],
+  "resolution": "Former category-label tasks now use operational form/use choices; function-label tasks use reviewed plain-language contextual meaning/reference; formal A2 structure-label tasks use form choice or contextual meaning; copied-passage clozes were removed from this repair class.",
+  "transformations": [
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p02",
+      "sequence": 2,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « _____ elle regarde l’heure, il est encore tôt. »",
+        "answer": "« Quand »",
+        "target_ids": [
+          "fr-rank-0061"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Quand le feu devient vert, ils traversent. », que signifie « quand » ici ?",
+        "answer": "« quand » signifie ici « au moment où ».",
+        "target_ids": [
+          "fr-rank-0061"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p03",
+      "sequence": 3,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Après les cours, Sami passe chez Camille _____ un livre. »",
+        "answer": "« avec »",
+        "target_ids": [
+          "fr-rank-0035"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Sami s’assoit avec elle. », que signifie « avec » ici ?",
+        "answer": "« avec » signifie ici que Sami et Camille sont ensemble.",
+        "target_ids": [
+          "fr-rank-0035"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p06",
+      "sequence": 6,
+      "question_id": "q10",
+      "answer_id": "a10",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « _____ elle rencontre Sami, ils marchent ensemble. »",
+        "answer": "« Quand »",
+        "target_ids": [
+          "fr-rank-0061"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Quand elle rencontre Sami, ils marchent ensemble. », que signifie « quand » ici ?",
+        "answer": "« quand » signifie ici « au moment où ».",
+        "target_ids": [
+          "fr-rank-0061"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u02-p01",
+      "sequence": 7,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Sa mère lui demande : « Qu’est-ce que tu vas _____ là-bas ? »",
+        "answer": "« faire »",
+        "target_ids": [
+          "fr-rank-0014"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « tu vas faire un cours » ou « tu vas fais un cours » ?",
+        "answer": "« tu vas faire un cours ».",
+        "target_ids": [
+          "fr-rank-0014"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u02-p03",
+      "sequence": 9,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « _____ elle ne trouve pas quelque chose, elle doit demander. »",
+        "answer": "« Si »",
+        "target_ids": [
+          "fr-rank-0032"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Si elle ne trouve pas quelque chose, elle doit demander. », que signifie « si » ici ?",
+        "answer": "« si » présente la condition : si elle ne trouve pas quelque chose, elle doit demander.",
+        "target_ids": [
+          "fr-rank-0032"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u02-p04",
+      "sequence": 10,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle dit : « _____ carnet était ici hier. »",
+        "answer": "« Mon »",
+        "target_ids": [
+          "fr-rank-0038"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Pour parler de son carnet, Camille dit : « mon carnet » ou « ma carnet » ?",
+        "answer": "« mon carnet ».",
+        "target_ids": [
+          "fr-rank-0038"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u02-p05",
+      "sequence": 11,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle écrit le titre, mais elle veut _____ de place pour dessiner. »",
+        "answer": "« plus »",
+        "target_ids": [
+          "fr-rank-0037"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Elle veut plus de place pour dessiner. », que signifie « plus » ici ?",
+        "answer": "« plus » signifie ici qu’elle veut une quantité plus grande de place.",
+        "target_ids": [
+          "fr-rank-0037"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p01",
+      "sequence": 13,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Le professeur montre une grande feuille et dit : « _____ projet est pour toute la classe. »",
+        "answer": "« Ce »",
+        "target_ids": [
+          "fr-rank-0019"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « ce projet » ou « cet projet » ?",
+        "answer": "« ce projet ».",
+        "target_ids": [
+          "fr-rank-0019"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p02",
+      "sequence": 14,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Le lendemain, Camille et Sami cherchent une personne _____ peut répondre à leurs questions sur la bibliothèque. »",
+        "answer": "« qui »",
+        "target_ids": [
+          "fr-rank-0024"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Ils cherchent une personne qui peut répondre à leurs questions. », que signifie « qui » ici ?",
+        "answer": "« qui » renvoie à la personne et précise qu’elle répond.",
+        "target_ids": [
+          "fr-rank-0024"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p03",
+      "sequence": 15,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Camille pose les notes au centre de la table et dit : « _____ avons beaucoup d’informations. »",
+        "answer": "« Nous »",
+        "target_ids": [
+          "fr-rank-0027"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « nous avons des informations » ou « nous a des informations » ?",
+        "answer": "« nous avons des informations ».",
+        "target_ids": [
+          "fr-rank-0027"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p04",
+      "sequence": 16,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « » Camille répond : « Oui, mais laisse-_____ essayer d’abord. »",
+        "answer": "« moi »",
+        "target_ids": [
+          "fr-rank-0041"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « cette photo est pour moi » ou « cette photo est pour je » ?",
+        "answer": "« cette photo est pour moi ».",
+        "target_ids": [
+          "fr-rank-0041"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p04",
+      "sequence": 16,
+      "question_id": "q8",
+      "answer_id": "a8",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « » Camille répond : « Oui, mais laisse-_____ essayer d’abord. »",
+        "answer": "« moi »",
+        "target_ids": [
+          "fr-rank-0041"
+        ]
+      },
+      "after": {
+        "type": "reference_resolution",
+        "prompt": "Dans « Cette photo est pour moi », à qui est destinée la photo ?",
+        "answer": "À la personne qui parle.",
+        "target_ids": [
+          "fr-rank-0041"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p05",
+      "sequence": 17,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Le professeur demande s’_____ sont prêts. »",
+        "answer": "« ils »",
+        "target_ids": [
+          "fr-rank-0045"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « ils montrent leurs images » ou « ils montre leurs images » ?",
+        "answer": "« ils montrent leurs images ».",
+        "target_ids": [
+          "fr-rank-0045"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p01",
+      "sequence": 19,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Le premier cahier est _____ grand et ne rentre pas bien dans son sac. »",
+        "answer": "« très »",
+        "target_ids": [
+          "fr-rank-0074"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Le premier cahier est très grand. », que signifie « très » ici ?",
+        "answer": "« très » renforce l’idée de grandeur : le cahier est vraiment grand.",
+        "target_ids": [
+          "fr-rank-0074"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p02",
+      "sequence": 20,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle travaille _____ à la table du salon quand elle doit se concentrer. »",
+        "answer": "« toujours »",
+        "target_ids": [
+          "fr-rank-0094"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Elle travaille toujours à la table du salon. », que signifie « toujours » ici ?",
+        "answer": "« toujours » signifie ici que l’action se fait de manière habituelle ou à chaque fois.",
+        "target_ids": [
+          "fr-rank-0094"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p03",
+      "sequence": 21,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « La bibliothèque n’est pas _____ ouverte. »",
+        "answer": "« encore »",
+        "target_ids": [
+          "fr-rank-0098"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Il reste encore cinq minutes. », que signifie « encore » ici ?",
+        "answer": "Ici, « encore » signifie qu’une durée supplémentaire reste avant l’ouverture.",
+        "target_ids": [
+          "fr-rank-0098"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p04",
+      "sequence": 22,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « _____ de dormir, elle met son cahier, son livre et sa trousse dans le sac. »",
+        "answer": "« Avant »",
+        "target_ids": [
+          "fr-rank-0126"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Avant de dormir, elle prépare son sac. », que signifie « avant » ici ?",
+        "answer": "« avant » signifie qu’une action se produit plus tôt qu’une autre.",
+        "target_ids": [
+          "fr-rank-0126"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u04-p05",
+      "sequence": 23,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « _____ le petit-déjeuner, elle aide sa mère à ranger la cuisine. »",
+        "answer": "« Après »",
+        "target_ids": [
+          "fr-rank-0133"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Après le petit-déjeuner, elle aide sa mère. », que signifie « après » ici ?",
+        "answer": "« après » signifie qu’une action se produit plus tard qu’une autre.",
+        "target_ids": [
+          "fr-rank-0133"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p01",
+      "sequence": 25,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Lundi _____, Camille arrive à l’école une heure avant le début du cours. »",
+        "answer": "« matin »",
+        "target_ids": [
+          "fr-rank-0307"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « le matin » ou « la matin » ?",
+        "answer": "« le matin ».",
+        "target_ids": [
+          "fr-rank-0307"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p02",
+      "sequence": 26,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Le lundi _____, elle doit terminer un exercice. »",
+        "answer": "« soir »",
+        "target_ids": [
+          "fr-rank-0161"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « le soir » ou « la soir » ?",
+        "answer": "« le soir ».",
+        "target_ids": [
+          "fr-rank-0161"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p03",
+      "sequence": 27,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle hésite et demande à sa mère si elles peuvent essayer une autre _____. »",
+        "answer": "« chose »",
+        "target_ids": [
+          "fr-rank-0054"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « une autre chose » ou « un autre chose » ?",
+        "answer": "« une autre chose ».",
+        "target_ids": [
+          "fr-rank-0054"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p04",
+      "sequence": 28,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Devant l’entrée, elle cherche une _____ pour laisser son vélo. »",
+        "answer": "« place »",
+        "target_ids": [
+          "fr-rank-0289"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « une place » ou « un place » ?",
+        "answer": "« une place ».",
+        "target_ids": [
+          "fr-rank-0289"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p05",
+      "sequence": 29,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Chaque _____ reçoit une feuille et des crayons. »",
+        "answer": "« enfant »",
+        "target_ids": [
+          "fr-rank-0149"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « chaque enfant reçoit une feuille » ou « chaque enfants reçoit une feuille » ?",
+        "answer": "« chaque enfant reçoit une feuille ».",
+        "target_ids": [
+          "fr-rank-0149"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p06",
+      "sequence": 30,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Une fois au marché ou à la bibliothèque, elle garde sa liste et pose une _____ si quelque chose n’est pas clair. »",
+        "answer": "« question »",
+        "target_ids": [
+          "fr-rank-0198"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « une question » ou « un question » ?",
+        "answer": "« une question ».",
+        "target_ids": [
+          "fr-rank-0198"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p01",
+      "sequence": 31,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle met _____ de pain sur son plateau, puis ajoute un fruit et un verre d’eau. »",
+        "answer": "« peu »",
+        "target_ids": [
+          "fr-rank-0092"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Elle met peu de pain sur son plateau. », que signifie « peu » ici ?",
+        "answer": "« peu » indique ici une petite quantité.",
+        "target_ids": [
+          "fr-rank-0092"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p02",
+      "sequence": 32,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle pense d’abord qu’il y en a _____ pour une seule soirée. »",
+        "answer": "« trop »",
+        "target_ids": [
+          "fr-rank-0127"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Il y a trop de travail pour une seule soirée. », que signifie « trop » ici ?",
+        "answer": "« trop » indique ici une quantité excessive.",
+        "target_ids": [
+          "fr-rank-0127"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p03",
+      "sequence": 33,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Cette fois, ils choisissent _____ le même titre sans le savoir. »",
+        "answer": "« même »",
+        "target_ids": [
+          "fr-rank-0081"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « C’est bien le même livre. », que signifie « même » ici ?",
+        "answer": "« même » signifie ici qu’il s’agit d’un livre identique.",
+        "target_ids": [
+          "fr-rank-0081"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p04",
+      "sequence": 34,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle ne parle _____ fort dans la salle de lecture. »",
+        "answer": "« jamais »",
+        "target_ids": [
+          "fr-rank-0075"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Elle ne parle jamais fort dans la salle de lecture. », que signifie « jamais » ici ?",
+        "answer": "Dans cette phrase négative, « jamais » signifie « à aucun moment ».",
+        "target_ids": [
+          "fr-rank-0075"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p05",
+      "sequence": 35,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Camille et son petit frère sont _____ dans le centre de la ville. »",
+        "answer": "« maintenant »",
+        "target_ids": [
+          "fr-rank-0086"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Camille et son petit frère sont maintenant dans le centre de la ville. », que signifie « maintenant » ici ?",
+        "answer": "« maintenant » signifie « au moment présent ».",
+        "target_ids": [
+          "fr-rank-0086"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u06-p06",
+      "sequence": 36,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Camille y va souvent, mais elle ne parle _____ fort. »",
+        "answer": "« jamais »",
+        "target_ids": [
+          "fr-rank-0075"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Camille y va souvent, mais elle ne parle jamais fort. », que signifie « jamais » ici ?",
+        "answer": "Dans cette phrase négative, « jamais » signifie « à aucun moment ».",
+        "target_ids": [
+          "fr-rank-0075"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p01",
+      "sequence": 37,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « La bibliothèque est _____ de leur école : ils peuvent y aller en cinq minutes. »",
+        "answer": "« près »",
+        "target_ids": [
+          "fr-rank-0396"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « La bibliothèque est près de leur école. », que signifie « près » ici ?",
+        "answer": "« près » signifie « à une petite distance » ou « proche ».",
+        "target_ids": [
+          "fr-rank-0396"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p02",
+      "sequence": 38,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Le lendemain, la classe attend _____ le gymnase. »",
+        "answer": "« devant »",
+        "target_ids": [
+          "fr-rank-0342"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « La classe attend devant le gymnase. », que signifie « devant » ici ?",
+        "answer": "« devant » indique une position en face ou à l’avant du gymnase.",
+        "target_ids": [
+          "fr-rank-0342"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p03",
+      "sequence": 39,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Ils voient deux grands arbres avec un banc _____ eux. »",
+        "answer": "« entre »",
+        "target_ids": [
+          "fr-rank-0215"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Un banc se trouve entre deux arbres. », que signifie « entre » ici ?",
+        "answer": "« entre » signifie « au milieu de deux éléments ».",
+        "target_ids": [
+          "fr-rank-0215"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p04",
+      "sequence": 40,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Au premier carrefour, ils tournent à _____. »",
+        "answer": "« gauche »",
+        "target_ids": [
+          "fr-rank-0721"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Au premier carrefour, ils tournent à gauche. », que signifie « gauche » ici ?",
+        "answer": "« à gauche » indique la direction du côté gauche.",
+        "target_ids": [
+          "fr-rank-0721"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p05",
+      "sequence": 41,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle doit rejoindre sa mère bientôt dans une grande _____ commerçante. »",
+        "answer": "« rue »",
+        "target_ids": [
+          "fr-rank-0526"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « une rue » ou « un rue » ?",
+        "answer": "« une rue ».",
+        "target_ids": [
+          "fr-rank-0526"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p06",
+      "sequence": 42,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Au parc, un banc peut être entre deux arbres et une balle _____ le banc. »",
+        "answer": "« sous »",
+        "target_ids": [
+          "fr-rank-0267"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Une balle est sous le banc. », que signifie « sous » ici ?",
+        "answer": "« sous » signifie « plus bas que » ou « en dessous de ».",
+        "target_ids": [
+          "fr-rank-0267"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p01",
+      "sequence": 43,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Dans la cuisine, elle pose une _____ sur son front et boit un verre d’eau. »",
+        "answer": "« main »",
+        "target_ids": [
+          "fr-rank-0195"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « une main » ou « un main » ?",
+        "answer": "« une main ».",
+        "target_ids": [
+          "fr-rank-0195"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p02",
+      "sequence": 44,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Après plusieurs tours, son _____ droit commence à être fatigué. »",
+        "answer": "« pied »",
+        "target_ids": [
+          "fr-rank-0424"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « son pied droit » ou « sa pied droit » ?",
+        "answer": "« son pied droit ».",
+        "target_ids": [
+          "fr-rank-0424"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p03",
+      "sequence": 45,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Camille veut _____ son sandwich avant de boire son jus. »",
+        "answer": "« manger »",
+        "target_ids": [
+          "fr-rank-0213"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « elle veut manger » ou « elle veut mange » ?",
+        "answer": "« elle veut manger ».",
+        "target_ids": [
+          "fr-rank-0213"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p04",
+      "sequence": 46,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle commence à _____ la fatigue : ses yeux sont lourds et elle bâille. »",
+        "answer": "« sentir »",
+        "target_ids": [
+          "fr-rank-0166"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « elle commence à sentir la fatigue » ou « elle commence à sent la fatigue » ?",
+        "answer": "« elle commence à sentir la fatigue ».",
+        "target_ids": [
+          "fr-rank-0166"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p05",
+      "sequence": 47,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Un samedi matin, Camille se sent _____ et reste à la maison. »",
+        "answer": "« malade »",
+        "target_ids": [
+          "fr-rank-0491"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « Camille est malade » ou « Camille est malades » ?",
+        "answer": "« Camille est malade ».",
+        "target_ids": [
+          "fr-rank-0491"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p06",
+      "sequence": 48,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Après du repos, elle peut se sentir _____. »",
+        "answer": "« mieux »",
+        "target_ids": [
+          "fr-rank-0148"
+        ]
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Après du repos, elle peut se sentir mieux. », que signifie « mieux » ici ?",
+        "answer": "« mieux » signifie que l’état s’est amélioré.",
+        "target_ids": [
+          "fr-rank-0148"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p01",
+      "sequence": 49,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Samedi matin, Camille prend le petit-déjeuner avec sa _____. »",
+        "answer": "« famille »",
+        "target_ids": [
+          "fr-rank-0192"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « sa famille » ou « son famille » ?",
+        "answer": "« sa famille ».",
+        "target_ids": [
+          "fr-rank-0192"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p02",
+      "sequence": 50,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Dimanche, la _____ de Camille attend un ami de la famille pour le déjeuner. »",
+        "answer": "« mère »",
+        "target_ids": [
+          "fr-rank-0210"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « sa mère » ou « son mère » ?",
+        "answer": "« sa mère ».",
+        "target_ids": [
+          "fr-rank-0210"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p03",
+      "sequence": 51,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Lundi, Camille apporte un livre à l’_____ pour un petit travail de lecture. »",
+        "answer": "« école »",
+        "target_ids": [
+          "fr-rank-0354"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « à l’école » ou « au école » ?",
+        "answer": "« à l’école ».",
+        "target_ids": [
+          "fr-rank-0354"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p04",
+      "sequence": 52,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Camille entre, choisit une _____ près de la fenêtre et pose son sac dessus. »",
+        "answer": "« table »",
+        "target_ids": [
+          "fr-rank-0656"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « une table » ou « un table » ?",
+        "answer": "« une table ».",
+        "target_ids": [
+          "fr-rank-0656"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p05",
+      "sequence": 53,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle remplit une bouteille d’_____, choisit une table calme et ouvre son cahier. »",
+        "answer": "« eau »",
+        "target_ids": [
+          "fr-rank-0324"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « de l’eau » ou « du eau » ?",
+        "answer": "« de l’eau ».",
+        "target_ids": [
+          "fr-rank-0324"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p06",
+      "sequence": 54,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « À l’école, elle ouvre un _____ pour faire un travail. »",
+        "answer": "« livre »",
+        "target_ids": [
+          "fr-rank-0418"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte au pluriel : « des livres » ou « des livre » ?",
+        "answer": "« des livres ».",
+        "target_ids": [
+          "fr-rank-0418"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p01",
+      "sequence": 55,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Le ciel est gris au début, mais un peu de _____ reste visible entre les nuages. »",
+        "answer": "« soleil »",
+        "target_ids": [
+          "fr-rank-0795"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « le soleil » ou « la soleil » ?",
+        "answer": "« le soleil ».",
+        "target_ids": [
+          "fr-rank-0795"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p02",
+      "sequence": 56,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Le soleil est plus fort et il fait _____. »",
+        "answer": "« chaud »",
+        "target_ids": [
+          "fr-rank-0775"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « il fait chaud » ou « il fait chaude » ?",
+        "answer": "« il fait chaud ».",
+        "target_ids": [
+          "fr-rank-0775"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p03",
+      "sequence": 57,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Après l’école, Camille veut _____ un livre simple pour un travail de classe. »",
+        "answer": "« acheter »",
+        "target_ids": [
+          "fr-rank-0297"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « elle veut acheter un livre » ou « elle veut achète un livre » ?",
+        "answer": "« elle veut acheter un livre ».",
+        "target_ids": [
+          "fr-rank-0297"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p04",
+      "sequence": 58,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle prend aussi un _____ léger parce que la salle de l’activité peut être froide. »",
+        "answer": "« vêtement »",
+        "target_ids": [
+          "fr-rank-0975"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « un vêtement » ou « une vêtement » ?",
+        "answer": "« un vêtement ».",
+        "target_ids": [
+          "fr-rank-0975"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p05",
+      "sequence": 59,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle a besoin d’un _____ plus solide pour porter ses livres. »",
+        "answer": "« sac »",
+        "target_ids": [
+          "fr-rank-0532"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la forme correcte : « un sac » ou « une sac » ?",
+        "answer": "« un sac ».",
+        "target_ids": [
+          "fr-rank-0532"
+        ]
+      }
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p06",
+      "sequence": 60,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "a1_explicit_metalinguistic_prompt",
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Dans un magasin, elle peut demander un prix, décider d’_____ quelque chose et préparer l’argent nécessaire. »",
+        "answer": "« acheter »",
+        "target_ids": [
+          "fr-rank-0297"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « elle veut acheter un livre » ou « elle veut achète un livre » ?",
+        "answer": "« elle veut acheter un livre ».",
+        "target_ids": [
+          "fr-rank-0297"
+        ]
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p01",
+      "sequence": 1,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "low_level_function_label_task"
+      ],
+      "before": {
+        "type": "cause_effect",
+        "prompt": "Pourquoi Camille suit-elle ce conseil ?",
+        "answer": "Parce qu’elle ne veut pas rester sans information.",
+        "target_ids": []
+      },
+      "after": {
+        "type": "cause_effect",
+        "prompt": "Pourquoi Camille suit-elle ce conseil ?",
+        "answer": "Parce qu’elle ne veut pas rester sans information.",
+        "target_ids": []
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p02",
+      "sequence": 2,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Camille retient surtout deux choses : une erreur peut être corrigée, et _____ clairement ce qui s’est passé permet souvent d’éviter un malentendu inutile. »",
+        "answer": "« expliquer »",
+        "target_ids": [
+          "fr-rank-0390"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « elle peut expliquer le problème » ou « elle peut explique le problème » ?",
+        "answer": "« elle peut expliquer le problème ».",
+        "target_ids": [
+          "fr-rank-0390"
+        ]
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p03",
+      "sequence": 3,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Elle décide d’_____ une deuxième fois en vérifiant chaque étape. »",
+        "answer": "« essayer »",
+        "target_ids": [
+          "fr-rank-0122"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « elle décide d’essayer » ou « elle décide d’essaie » ?",
+        "answer": "« elle décide d’essayer ».",
+        "target_ids": [
+          "fr-rank-0122"
+        ]
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p04",
+      "sequence": 4,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Il peut _____ le vélo tout de suite, et le prix reste raisonnable. »",
+        "answer": "« réparer »",
+        "target_ids": [
+          "fr-rank-0929"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « il peut réparer le vélo » ou « il peut répare le vélo » ?",
+        "answer": "« il peut réparer le vélo ».",
+        "target_ids": [
+          "fr-rank-0929"
+        ]
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p05",
+      "sequence": 5,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Après la visite, Camille retourne dans la salle qu’elle vient de _____. »",
+        "answer": "« découvrir »",
+        "target_ids": [
+          "fr-rank-0432"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « elle vient de découvrir un service » ou « elle vient de découvre un service » ?",
+        "answer": "« elle vient de découvrir un service ».",
+        "target_ids": [
+          "fr-rank-0432"
+        ]
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p06",
+      "sequence": 6,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_category_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète avec le mot du texte qui convient : « Devant une machine, elle doit _____ plusieurs étapes pour voir ce qui est possible. »",
+        "answer": "« essayer »",
+        "target_ids": [
+          "fr-rank-0122"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « elle décide d’essayer » ou « elle décide d’essaie » ?",
+        "answer": "« elle décide d’essayer ».",
+        "target_ids": [
+          "fr-rank-0122"
+        ]
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p01",
+      "sequence": 7,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_in_context_retrieval"
+      ],
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « la raison de ce changement », que signifie « raison » ?",
+        "answer": "La cause ou l’explication du changement.",
+        "target_ids": []
+      },
+      "after": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « la raison de ce changement », que signifie « raison » ?",
+        "answer": "La cause ou l’explication du changement.",
+        "target_ids": []
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p02",
+      "sequence": 8,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_in_context_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète l’expression du texte : « avant de _____ une décision ».",
+        "answer": "« prendre »",
+        "target_ids": []
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « avant de prendre une décision » ou « avant de prends une décision » ?",
+        "answer": "« avant de prendre une décision ».",
+        "target_ids": []
+      }
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p03",
+      "sequence": 9,
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reasons": [
+        "formal_grammar_in_context_retrieval"
+      ],
+      "before": {
+        "type": "cloze_transfer",
+        "prompt": "Complète l’expression du texte : « il est important de _____ ».",
+        "answer": "« pratiquer »",
+        "target_ids": []
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Choisis la phrase correcte : « il est important de pratiquer » ou « il est important de pratique » ?",
+        "answer": "« il est important de pratiquer ».",
+        "target_ids": []
+      }
+    }
+  ],
+  "validation": {
+    "all_63_machine_repairs_reviewed": "PASS",
+    "120_passages_duplicate_prompt_scan": "PASS",
+    "60_records_each_level": "PASS",
+    "sequence_continuity": "PASS",
+    "ten_questions_ten_answers": "PASS",
+    "question_answer_linkage": "PASS",
+    "target_ids_preserved": "PASS",
+    "unbalanced_guillemets": 0,
+    "defined_metalinguistic_defect_class_residue": 0,
+    "copied_passage_clozes_remaining_in_refined_class": 0
+  },
+  "release_effect": "French remains REOPEN_REQUIRED; A1/A2 hashes changed and all recertification gates must bind the final hashes.",
+  "next_gate": "Rerun deterministic evidence validation and continue full 100% French semantic educator recertification against final repaired hashes."
+}
