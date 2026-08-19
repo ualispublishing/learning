@@ -24,16 +24,26 @@ jobs:
           sed -n "/python - <<'PY'/,/^          PY$/p" .github/workflows/urdu-a1-promote-units03-04.yml | sed '1d;$d;s/^          //' > /tmp/urdu_promote_03_04.py
           python - <<'PY'
           from pathlib import Path
+          import re
           p = Path('/tmp/urdu_promote_03_04.py')
           s = p.read_text(encoding='utf-8')
           old = 'اب فہرست کی سب ضروری چیزیں ٹوکری میں ہیں۔'
           new = 'اب ضرورت کی تمام چیزیں ٹوکری میں ہیں۔'
           assert old in s
           s = s.replace(old, new)
-          needle = "                  validate(r, seq)\n"
-          replacement = "                  for a in r['answer_key']:\n                      a['answer'] = a['answer'].replace('A1', 'ابتدائی')\n                      a['explanation'] = a.get('explanation','').replace('A1', 'ابتدائی')\n                  validate(r, seq)\n"
-          assert needle in s
-          p.write_text(s.replace(needle, replacement), encoding='utf-8')
+          pattern = re.compile(r"(?m)^([ \t]*)validate\(r, seq\)$")
+          match = pattern.search(s)
+          assert match
+          indent = match.group(1)
+          replacement = (
+              f"{indent}for a in r['answer_key']:\n"
+              f"{indent}    a['answer'] = a['answer'].replace('A1', 'ابتدائی')\n"
+              f"{indent}    a['explanation'] = a.get('explanation','').replace('A1', 'ابتدائی')\n"
+              f"{indent}validate(r, seq)"
+          )
+          s, n = pattern.subn(replacement, s, count=1)
+          assert n == 1
+          p.write_text(s, encoding='utf-8')
           PY
           python /tmp/urdu_promote_03_04.py
 
