@@ -1,0 +1,567 @@
+{
+  "status": "FAIL",
+  "language": "fr",
+  "scope": "whole French A1-C2 final audit",
+  "audit_pass_count": 15,
+  "required_minimum_passes": 10,
+  "canonical_passages": 360,
+  "questions": 3600,
+  "answers": 3600,
+  "level_blobs": {
+    "a1": "0493a2fa13e51b5997db05e91cdea4d8dc5e647b",
+    "a2": "d0a80b8866071f426019aa0ad143e1d270dba4de",
+    "b1": "4a2cd9ff30c3cea58caf20fca2822b06200622ca",
+    "b2": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+    "c1": "6f5bd912dfb550c064b54c8f7de4027bebf3786d",
+    "c2": "5986cf5d498a8b414dfeabac38b65ebd4011fe4d"
+  },
+  "whole_corpus_sha256": "5ea3d0750ac8ceeb5542669f82eb845da78b607d05cd7646965239e58f5b9ca2",
+  "failed_passes": [
+    "06_review_provenance_and_question_target_links",
+    "07_lexical_exposure_and_review_visibility",
+    "08_learner_facing_meta_and_placeholder_hygiene",
+    "10_c2_role_lexical_and_checkpoint_contract"
+  ],
+  "passes": [
+    {
+      "name": "01_schema_and_record_integrity",
+      "status": "PASS",
+      "error_count": 0,
+      "errors": [],
+      "metrics": {
+        "records": 360,
+        "unique_ids": 360
+      },
+      "notes": []
+    },
+    {
+      "name": "02_grid_sequence_and_unit_continuity",
+      "status": "PASS",
+      "error_count": 0,
+      "errors": [],
+      "metrics": {
+        "levels": {
+          "a1": {
+            "passages": 60,
+            "units": {
+              "1": 6,
+              "2": 6,
+              "3": 6,
+              "4": 6,
+              "5": 6,
+              "6": 6,
+              "7": 6,
+              "8": 6,
+              "9": 6,
+              "10": 6
+            }
+          },
+          "a2": {
+            "passages": 60,
+            "units": {
+              "1": 6,
+              "2": 6,
+              "3": 6,
+              "4": 6,
+              "5": 6,
+              "6": 6,
+              "7": 6,
+              "8": 6,
+              "9": 6,
+              "10": 6
+            }
+          },
+          "b1": {
+            "passages": 60,
+            "units": {
+              "1": 6,
+              "2": 6,
+              "3": 6,
+              "4": 6,
+              "5": 6,
+              "6": 6,
+              "7": 6,
+              "8": 6,
+              "9": 6,
+              "10": 6
+            }
+          },
+          "b2": {
+            "passages": 60,
+            "units": {
+              "1": 6,
+              "2": 6,
+              "3": 6,
+              "4": 6,
+              "5": 6,
+              "6": 6,
+              "7": 6,
+              "8": 6,
+              "9": 6,
+              "10": 6
+            }
+          },
+          "c1": {
+            "passages": 60,
+            "units": {
+              "1": 6,
+              "2": 6,
+              "3": 6,
+              "4": 6,
+              "5": 6,
+              "6": 6,
+              "7": 6,
+              "8": 6,
+              "9": 6,
+              "10": 6
+            }
+          },
+          "c2": {
+            "passages": 60,
+            "units": {
+              "1": 6,
+              "2": 6,
+              "3": 6,
+              "4": 6,
+              "5": 6,
+              "6": 6,
+              "7": 6,
+              "8": 6,
+              "9": 6,
+              "10": 6
+            }
+          }
+        },
+        "total": 360
+      },
+      "notes": []
+    },
+    {
+      "name": "03_question_answer_cardinality_and_linkage",
+      "status": "PASS",
+      "error_count": 0,
+      "errors": [],
+      "metrics": {
+        "questions": 3600,
+        "answers": 3600
+      },
+      "notes": []
+    },
+    {
+      "name": "04_word_count_and_cefr_length_progression",
+      "status": "PASS",
+      "error_count": 0,
+      "errors": [],
+      "metrics": {
+        "median_words": {
+          "a1": 109.0,
+          "a2": 153.5,
+          "b1": 246.5,
+          "b2": 397.0,
+          "c1": 518.0,
+          "c2": 725.0
+        },
+        "ranges": {
+          "a1": [
+            95,
+            135
+          ],
+          "a2": [
+            140,
+            190
+          ],
+          "b1": [
+            222,
+            279
+          ],
+          "b2": [
+            351,
+            540
+          ],
+          "c1": [
+            500,
+            567
+          ],
+          "c2": [
+            700,
+            749
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "name": "05_lexical_identity_and_source_provenance",
+      "status": "PASS",
+      "error_count": 0,
+      "errors": [],
+      "metrics": {
+        "new_targets": 1000,
+        "unique_target_ids": 1000
+      },
+      "notes": []
+    },
+    {
+      "name": "06_review_provenance_and_question_target_links",
+      "status": "FAIL",
+      "error_count": 2,
+      "errors": [
+        "fr-a1-u02-p06: review form mismatch for fr-rank-0036: devoir vs doit",
+        "fr-a1-u03-p03: review form mismatch for fr-rank-0036: devoir vs doit"
+      ],
+      "metrics": {
+        "review_targets": 1998
+      },
+      "notes": []
+    },
+    {
+      "name": "07_lexical_exposure_and_review_visibility",
+      "status": "FAIL",
+      "error_count": 30,
+      "errors": [
+        "fr-a1-u01-p02: running-text review absent: ici",
+        "fr-a1-u01-p02: running-text review absent: venir",
+        "fr-a1-u01-p03: new target absent from learner text: vouloir",
+        "fr-a1-u01-p03: running-text review absent: ici",
+        "fr-a1-u01-p03: running-text review absent: venir",
+        "fr-a1-u01-p03: running-text review absent: quand",
+        "fr-a1-u01-p03: running-text review absent: alors",
+        "fr-a1-u01-p04: new target absent from learner text: pouvoir",
+        "fr-a1-u01-p04: running-text review absent: vouloir",
+        "fr-a1-u01-p05: running-text review absent: ici",
+        "fr-a1-u01-p05: running-text review absent: venir",
+        "fr-a1-u01-p05: running-text review absent: quand",
+        "fr-a1-u01-p05: running-text review absent: alors",
+        "fr-a1-u01-p05: running-text review absent: vouloir",
+        "fr-a1-u01-p05: running-text review absent: avec",
+        "fr-a1-u01-p05: running-text review absent: pouvoir",
+        "fr-a1-u01-p05: running-text review absent: voir",
+        "fr-a1-u01-p06: running-text review absent: venir",
+        "fr-a1-u01-p06: running-text review absent: alors",
+        "fr-a1-u01-p06: running-text review absent: vouloir",
+        "fr-a1-u01-p06: running-text review absent: pouvoir",
+        "fr-a1-u01-p06: running-text review absent: prendre",
+        "fr-a1-u02-p03: running-text review absent: prendre",
+        "fr-a1-u02-p04: running-text review absent: prendre",
+        "fr-a1-u03-p01: running-text review absent: faire",
+        "fr-a1-u03-p02: running-text review absent: dire",
+        "fr-a1-u03-p03: running-text review absent: devoir",
+        "fr-a1-u03-p05: running-text review absent: tout",
+        "fr-a1-u04-p06: running-text review absent: personne",
+        "fr-a1-u05-p02: running-text review absent: temps"
+      ],
+      "metrics": {
+        "target_checks": 2998
+      },
+      "notes": []
+    },
+    {
+      "name": "08_learner_facing_meta_and_placeholder_hygiene",
+      "status": "FAIL",
+      "error_count": 2,
+      "errors": [
+        "fr-c1-u03-p03: learner-facing banned fragment 'audit de'",
+        "fr-c2-u01-p06: learner-facing banned fragment 'calibration'"
+      ],
+      "metrics": {},
+      "notes": []
+    },
+    {
+      "name": "09_duplicate_and_template_collision",
+      "status": "PASS",
+      "error_count": 0,
+      "errors": [],
+      "metrics": {
+        "exact_text_duplicates": 0,
+        "suspicious_opening_groups": 0
+      },
+      "notes": []
+    },
+    {
+      "name": "10_c2_role_lexical_and_checkpoint_contract",
+      "status": "FAIL",
+      "error_count": 3,
+      "errors": [
+        "C2 unit 1: role order ['instructional', 'reinforcement', 'paired', 'paired', 'integration', 'checkpoint'] != ['instructional', 'reinforcement', 'interleaved', 'transfer', 'integration', 'checkpoint']",
+        "C2 unit 2: role order ['instructional', 'reinforcement', 'paired', 'paired', 'integration', 'checkpoint'] != ['instructional', 'reinforcement', 'interleaved', 'transfer', 'integration', 'checkpoint']",
+        "C2 unit 3: role order ['instructional', 'reinforcement', 'paired', 'paired', 'integration', 'checkpoint'] != ['instructional', 'reinforcement', 'interleaved', 'transfer', 'integration', 'checkpoint']"
+      ],
+      "metrics": {
+        "units": 10
+      },
+      "notes": []
+    },
+    {
+      "name": "11_paired_text_structure_and_capstone_coherence",
+      "status": "PASS",
+      "error_count": 0,
+      "errors": [],
+      "metrics": {
+        "paired_groups": {
+          "fr-b2-u01-citizen-science-access": [
+            "fr-b2-u01-p03",
+            "fr-b2-u01-p04"
+          ],
+          "fr-b2-u06-data-control-opinions": [
+            "fr-b2-u06-p03",
+            "fr-b2-u06-p04"
+          ],
+          "fr-b2-u10-evidence-action-viewpoints": [
+            "fr-b2-u10-p01",
+            "fr-b2-u10-p02"
+          ],
+          "fr-c1-u01-action-under-uncertainty-viewpoints": [
+            "fr-c1-u01-p02",
+            "fr-c1-u01-p03"
+          ],
+          "fr-c1-u02-generalization-context-viewpoints": [
+            "fr-c1-u02-p03",
+            "fr-c1-u02-p04"
+          ],
+          "fr-c1-u03-standardization-context-viewpoints": [
+            "fr-c1-u03-p03",
+            "fr-c1-u03-p04"
+          ],
+          "fr-c1-u04-language-norms-viewpoints": [
+            "fr-c1-u04-p03",
+            "fr-c1-u04-p04"
+          ],
+          "fr-c1-u06-liberty-enforcement-viewpoints": [
+            "fr-c1-u06-p03",
+            "fr-c1-u06-p04"
+          ],
+          "fr-c1-u07-adaptation-viewpoints": [
+            "fr-c1-u07-p03",
+            "fr-c1-u07-p04"
+          ],
+          "fr-c1-u08-forecast-decision-viewpoints": [
+            "fr-c1-u08-p03",
+            "fr-c1-u08-p04"
+          ],
+          "fr-c1-u09-conflict-source-viewpoints": [
+            "fr-c1-u09-p03",
+            "fr-c1-u09-p04"
+          ],
+          "fr-c1-u10-response-resilience-viewpoints": [
+            "fr-c1-u10-p03",
+            "fr-c1-u10-p04"
+          ],
+          "fr-c2-u01-intention-structure-viewpoints": [
+            "fr-c2-u01-p03",
+            "fr-c2-u01-p04"
+          ],
+          "fr-c2-u02-administrability-proportionality-viewpoints": [
+            "fr-c2-u02-p03",
+            "fr-c2-u02-p04"
+          ],
+          "fr-c2-u03-realism-instrumentalism-viewpoints": [
+            "fr-c2-u03-p03",
+            "fr-c2-u03-p04"
+          ],
+          "fr-c2-u10-shared-case-viewpoints": [
+            "fr-c2-u10-p03",
+            "fr-c2-u10-p04"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "name": "12_deferred_quality_findings_resolution",
+      "status": "PASS",
+      "error_count": 0,
+      "errors": [],
+      "metrics": {},
+      "notes": []
+    },
+    {
+      "name": "13_adversarial_formatting_and_corruption",
+      "status": "PASS",
+      "error_count": 0,
+      "errors": [],
+      "metrics": {},
+      "notes": []
+    },
+    {
+      "name": "14_genre_topic_diversity_and_progression_sanity",
+      "status": "PASS",
+      "error_count": 0,
+      "errors": [],
+      "metrics": {
+        "a1": {
+          "genre_count": 47,
+          "topic_count": 95,
+          "top_genres": [
+            [
+              "calibration passage",
+              6
+            ],
+            [
+              "everyday health narrative",
+              6
+            ],
+            [
+              "fluency checkpoint summary",
+              3
+            ],
+            [
+              "community activity narrative",
+              2
+            ],
+            [
+              "daily planning narrative",
+              1
+            ]
+          ]
+        },
+        "a2": {
+          "genre_count": 59,
+          "topic_count": 154,
+          "top_genres": [
+            [
+              "routine problem narrative",
+              2
+            ],
+            [
+              "practical form narrative",
+              1
+            ],
+            [
+              "ticket-purchase problem narrative",
+              1
+            ],
+            [
+              "repair-and-notification narrative",
+              1
+            ],
+            [
+              "health-center visit narrative",
+              1
+            ]
+          ]
+        },
+        "b1": {
+          "genre_count": 60,
+          "topic_count": 130,
+          "top_genres": [
+            [
+              "local-history research narrative",
+              1
+            ],
+            [
+              "community-meeting narrative",
+              1
+            ],
+            [
+              "technical troubleshooting narrative",
+              1
+            ],
+            [
+              "museum interview and reflection",
+              1
+            ],
+            [
+              "project reflection essay",
+              1
+            ]
+          ]
+        },
+        "b2": {
+          "genre_count": 51,
+          "topic_count": 115,
+          "top_genres": [
+            [
+              "paired viewpoint a",
+              3
+            ],
+            [
+              "paired viewpoint b",
+              3
+            ],
+            [
+              "b2 cumulative uncertainty checkpoint",
+              2
+            ],
+            [
+              "argument",
+              2
+            ],
+            [
+              "critique",
+              2
+            ]
+          ]
+        },
+        "c1": {
+          "genre_count": 30,
+          "topic_count": 91,
+          "top_genres": [
+            [
+              "analysis",
+              7
+            ],
+            [
+              "briefing",
+              4
+            ],
+            [
+              "commentary",
+              4
+            ],
+            [
+              "paired viewpoints",
+              4
+            ],
+            [
+              "research summary",
+              3
+            ]
+          ]
+        },
+        "c2": {
+          "genre_count": 27,
+          "topic_count": 155,
+          "top_genres": [
+            [
+              "critique",
+              6
+            ],
+            [
+              "critical analysis",
+              4
+            ],
+            [
+              "complex paired texts",
+              3
+            ],
+            [
+              "argumentative essay",
+              2
+            ],
+            [
+              "counterexample",
+              2
+            ]
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "name": "15_quality_metadata_completeness",
+      "status": "PASS",
+      "error_count": 0,
+      "errors": [],
+      "metrics": {
+        "quality_statuses": {
+          "draft": 360
+        }
+      },
+      "notes": [
+        "Generation-era draft/pending values are reported, not accepted as proof of final quality; final approval is bound to this independent audit artifact."
+      ]
+    }
+  ],
+  "approval_ready": false,
+  "note": "This artifact supersedes generation-frontier seals for final whole-French approval while preserving those seals as historical provenance."
+}
