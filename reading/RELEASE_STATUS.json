@@ -16,7 +16,7 @@
     "open_findings": 4310,
     "educator_gate": "BLOCKED",
     "semantic_educator_coverage_complete": false,
-    "note": "Do not auto-promote draft/pending metadata. Substantive per-record revalidation is required before educator certification can proceed."
+    "note": "This baseline predates later French canonical repairs. Do not auto-promote draft/pending metadata; substantive per-record revalidation and fresh hashes are required."
   },
   "latest_second_adversarial_educator_audit": {
     "date": "2026-08-19",
@@ -29,7 +29,7 @@
     ],
     "concrete_example": "ar-b1-u01-p01 q7 contains 'حتى إن كانت الإجابة لا الآن' and requires repair plus corpus-wide same-class search",
     "semantic_educator_coverage_complete": false,
-    "note": "This adversarial pass independently confirmed the systemic release-evidence blocker and found concrete learner-facing defects not represented by the deterministic summary. It did not claim 100% semantic coverage."
+    "note": "Historical detection artifact. The defined French A1-A2 metalinguistic class has since been repaired and human-refined, but Arabic defects and full French/Arabic recertification remain open."
   },
   "languages": {
     "arabic": {
@@ -39,7 +39,7 @@
       "release_state": "INTERNAL_LANGUAGE_PASS",
       "educator_release_ready": false,
       "target_assurance": "HIGHEST_ASSURANCE",
-      "reason": "Fresh independent recertification failed deterministic Gate A, and a second blind adversarial educator pass found concrete major learner-facing Arabic defects including CEFR-inappropriate metalinguistic assessment design and malformed/unnatural MSA phrasing in a B1 grammar-in-context item. Full semantic recertification remains incomplete.",
+      "reason": "Fresh independent recertification failed deterministic Gate A, and a blind adversarial educator pass found concrete major learner-facing Arabic defects including CEFR-inappropriate metalinguistic assessment design and malformed/unnatural MSA phrasing in a B1 grammar-in-context item. Full semantic recertification remains incomplete.",
       "latest_educator_attempt": {
         "status": "BLOCKED_AT_DETERMINISTIC_AND_SEMANTIC_GATES",
         "artifact": "reading/audit/second_adversarial_educator_audit_2026-08-19.json",
@@ -66,16 +66,22 @@
       "release_state": "REOPEN_REQUIRED",
       "educator_release_ready": false,
       "target_assurance": "HIGHEST_ASSURANCE",
-      "reason": "The confirmed French C1/C2 generic-answer and learner-facing production-note defect class was repaired on 2026-08-19, invalidating historical French approval hashes. Other strengthened recertification work remains open, including the separately identified low-level metalinguistic/CEFR question-design class, deterministic evidence revalidation, full semantic review, and independent native/tool/model/human gates.",
+      "reason": "Two confirmed French defect classes have been repaired: C1/C2 generic-answer/production-note leakage and the defined A1-A2 formal-metalinguistic/CEFR assessment class. The A1-A2 repair adjudicated 88 high-recall candidates, repaired 63 confirmed items across 62 passages, repaired seven additional exact duplicate prompts, and superseded an insufficient first human refinement with v2 semantic review of all 23 former A1 function-label items. These canonical edits invalidate historical French release hashes. Deterministic evidence revalidation, full 100% semantic review, and independent tool/model/native/educator/human gates remain incomplete.",
       "latest_educator_attempt": {
-        "status": "BLOCKED_AT_DETERMINISTIC_AND_SEMANTIC_GATES",
-        "artifact": "reading/audit/second_adversarial_educator_audit_2026-08-19.json",
-        "deterministic_summary": "reading/audit/independent_educator_deterministic_2026-08-19.summary.json"
+        "status": "BLOCKED_PENDING_POST_REPAIR_RECERTIFICATION",
+        "artifact": "reading/audit/french_a1_a2_metalinguistic_human_refinement_v2_2026-08-19.json",
+        "baseline_deterministic_summary": "reading/audit/independent_educator_deterministic_2026-08-19.summary.json"
+      },
+      "latest_repair_hashes": {
+        "A1": "1cdb31ecb8b987c50051bb6f8fa5b2f7fda812cb3004c81ab8697f832fceacba",
+        "A2": "8fcd71903e6a495a2abaac8d436232b4b7ee00ae5ac0bce4d273aa4a134b3c15",
+        "C1": "dead8e5d6e6e60a7c6c5185996159670e6077ea2d5da31860de168674050b39a",
+        "C2": "c161c4551a6ce0222850778c02ed0662e00bb60e5386d5dc0b4f31a92cb9f277"
       },
       "required_next_gates": [
+        "bind_fresh_post_repair_hashes_all_six_levels",
         "resolve_and_revalidate_deterministic_integrity_100pct",
         "fresh_full_passage_language_and_qa_audit_100pct",
-        "corpus_wide_low_level_metalinguistic_question_audit_and_repair",
         "LanguageTool_French_disagreement_pass",
         "Antidote_French_disagreement_pass",
         "DeepL_Write_French_disagreement_pass",
@@ -102,14 +108,13 @@
   },
   "global_release_blockers": [
     "Arabic fresh deterministic educator-release Gate A failed and requires substantive record-level revalidation",
-    "French fresh deterministic educator-release Gate A failed and requires substantive record-level revalidation against the repaired corpus",
-    "Second adversarial educator audit still has unresolved low-level metalinguistic/CEFR question-design defects in Arabic and French; the separate French C1/C2 generic-answer/production-note class has been repaired",
-    "Arabic learner-facing malformed/unnatural MSA grammar-target phrasing requires corpus-wide same-class repair",
+    "French deterministic educator-release evidence must be regenerated and substantively revalidated against the repaired corpus",
+    "Arabic still has unresolved low-level metalinguistic/CEFR and malformed MSA defect classes; the defined French A1-A2 metalinguistic class has been repaired under superseding v2 human refinement",
     "Arabic full 100% semantic educator review is incomplete",
     "French full 100% semantic educator review is incomplete",
     "Arabic independent external/native/model-family re-certification not yet complete",
     "French independent external/native/model-family re-certification not yet complete",
     "Urdu generation incomplete",
-    "French canonical C1/C2 repair invalidated prior release hashes; independent re-certification against repaired hashes is required"
+    "French canonical A1/A2/C1/C2 repairs invalidated prior release hashes; independent re-certification against final repaired hashes is required"
   ]
 }
