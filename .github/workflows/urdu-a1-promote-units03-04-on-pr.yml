@@ -47,6 +47,19 @@ jobs:
           s, n = sentence_pattern.subn(sentence_replacement, s, count=1)
           assert n == 1
 
+          roman_pattern = re.compile(
+              r"(?m)^([ \t]*)assert not re\.search\(r'\[A-Za-z\]', s\), \(r\['id'\], 'Roman-script leakage', loc, s\)$"
+          )
+          match = roman_pattern.search(s)
+          assert match
+          indent = match.group(1)
+          roman_replacement = (
+              f"{indent}if r['sequence'] >= 13:\n"
+              f"{indent}    assert not re.search(r'[A-Za-z]', s), (r['id'], 'Roman-script leakage', loc, s)"
+          )
+          s, n = roman_pattern.subn(roman_replacement, s, count=1)
+          assert n == 1
+
           validate_pattern = re.compile(r"(?m)^([ \t]*)validate\(r, seq\)$")
           match = validate_pattern.search(s)
           assert match
