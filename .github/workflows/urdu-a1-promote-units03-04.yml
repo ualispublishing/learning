@@ -1,0 +1,330 @@
+name: Urdu A1 guarded promote Units 03-04
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/urdu-a1-promote-units03-04.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate, polish, and promote Units 03-04
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import csv, hashlib, json, re
+
+          ROOT = Path('.')
+          CANON = ROOT / 'reading/urdu/a1/passages.jsonl'
+          LEXICON = ROOT / 'urdu_top1000.csv'
+          EXPECTED_BLOB = '7e0226ea41955634b9fab629c369f9ec1fa149eb'
+          TODAY = '2026-08-19'
+
+          def git_blob_sha(data: bytes) -> str:
+              return hashlib.sha1(f'blob {len(data)}\0'.encode() + data).hexdigest()
+
+          def exact_count(text: str, form: str) -> int:
+              return len(re.findall(rf'(?<!\w){re.escape(form)}(?!\w)', text))
+
+          def learner_strings(r):
+              yield ('title', r['title'])
+              yield ('text', r['text'])
+              for q in r['questions']:
+                  yield (f"{q['id']}.prompt", q['prompt'])
+              for a in r['answer_key']:
+                  yield (f"{a['id']}.answer", a['answer'])
+                  yield (f"{a['id']}.explanation", a.get('explanation',''))
+
+          with LEXICON.open(encoding='utf-8', newline='') as f:
+              rows = list(csv.DictReader(f))
+          lex_rank = {}
+          for row in rows:
+              m = re.search(r'Rank:\s*(\d+)', row.get('Back',''))
+              if m and row.get('Front'):
+                  lex_rank[row['Front']] = int(m.group(1))
+
+          required = {
+              'id','language','cefr','unit','sequence','revision','title','passage_type','genre',
+              'domains','topics','text','word_count','sentence_count','estimated_known_token_coverage',
+              'new_lexical_targets','review_lexical_targets','grammar_targets','discourse_targets',
+              'questions','answer_key','speed_training','quality'
+          }
+
+          def validate(r, expected_sequence):
+              missing = sorted(required - set(r))
+              assert not missing, (r.get('id'), 'missing', missing)
+              assert r['language'] == 'ur' and r['cefr'] == 'A1'
+              assert r['sequence'] == expected_sequence, (r['id'], r['sequence'], expected_sequence)
+              assert r['word_count'] == len(r['text'].split()), (r['id'], 'word_count', r['word_count'], len(r['text'].split()))
+              assert 90 <= r['word_count'] <= 140, (r['id'], 'A1 word band', r['word_count'])
+              assert r['sentence_count'] == r['text'].count('۔'), (r['id'], 'sentence_count', r['sentence_count'], r['text'].count('۔'))
+              assert len(r['questions']) == 10 and len(r['answer_key']) == 10, (r['id'], '10Q10A')
+              qids = {q['id'] for q in r['questions']}
+              aids = {a['id'] for a in r['answer_key']}
+              assert len(qids) == 10 and len(aids) == 10
+              assert all(q['answer_id'] in aids for q in r['questions'])
+              assert all(a['question_id'] in qids for a in r['answer_key'])
+              local_targets = {t['id'] for t in r['new_lexical_targets']} | {t['id'] for t in r['review_lexical_targets']}
+              for q in r['questions']:
+                  for target_id in q.get('target_ids', []):
+                      assert target_id in local_targets, (r['id'], 'nonlocal question target', target_id)
+              for t in r['new_lexical_targets']:
+                  assert t['source_lexicon'] == 'urdu_top1000.csv'
+                  assert t['form'] in lex_rank, (r['id'], 'target absent from lexicon', t['form'])
+                  assert lex_rank[t['form']] == t['source_rank'], (r['id'], 'rank mismatch', t['form'], t['source_rank'], lex_rank[t['form']])
+                  actual = exact_count(r['text'], t['form'])
+                  assert actual >= 1, (r['id'], 'new target absent', t['form'])
+                  assert actual == t['exposures_in_text'], (r['id'], 'exposure mismatch', t['form'], t['exposures_in_text'], actual)
+              for t in r['review_lexical_targets']:
+                  if t.get('representation') == 'running_text':
+                      assert exact_count(r['text'], t['form']) >= 1, (r['id'], 'running_text review absent', t['form'])
+              if expected_sequence % 6 == 0:
+                  assert len(r['new_lexical_targets']) == 0, (r['id'], 'checkpoint new targets')
+              for loc, s in learner_strings(r):
+                  assert not re.search(r'[A-Za-z]', s), (r['id'], 'Roman-script leakage', loc, s)
+
+          before_bytes = CANON.read_bytes()
+          before_blob = git_blob_sha(before_bytes)
+          assert before_blob == EXPECTED_BLOB, ('canonical blob drift; refusing promotion', before_blob)
+          canonical = [json.loads(x) for x in before_bytes.decode('utf-8').splitlines() if x.strip()]
+          assert len(canonical) == 12 and [r['sequence'] for r in canonical] == list(range(1,13))
+
+          # Final learner-facing language polish before promotion. Target forms/IDs remain unchanged.
+          polish = {
+              'ur-a1-u03-p01': {
+                  ('answer','a3'): 'پینے والا عام شفاف مائع۔',
+                  ('answer','a6'): 'پینے والا شفاف مائع۔'
+              },
+              'ur-a1-u03-p02': {
+                  ('answer','a3'): 'کسی چیز کے درکار ہونے کی حالت۔',
+                  ('text_replace','old'): ('اب ضرورت کی سب چیزیں ٹوکری میں ہیں۔','اب فہرست کی سب ضروری چیزیں ٹوکری میں ہیں۔')
+              },
+              'ur-a1-u03-p03': {
+                  ('answer','a7'): 'اس جگہ۔'
+              },
+              'ur-a1-u03-p04': {
+                  ('answer','a3'): 'کام مکمل ہے اور چیز استعمال یا کھانے کے لیے تیار ہے۔',
+                  ('answer','a4'): 'اسی وقت یا اس وقت تک۔',
+                  ('answer','a6'): 'آمادہ یا مکمل۔'
+              },
+              'ur-a1-u04-p02': {
+                  ('answer','a3'): 'ایک سے زیادہ انسان۔',
+                  ('answer','a4'): 'کم عمر لڑکے اور لڑکیاں۔',
+                  ('answer','a7'): 'کم عمر افراد۔',
+                  ('text_replace','old'): ('ایک بچہ جھولا لیتا ہے۔','ایک بچہ جھولا جھولتا ہے۔')
+              },
+              'ur-a1-u04-p03': {
+                  ('answer','a3'): 'رہنے کی جگہ۔',
+                  ('answer','a4'): 'عائشہ اور اس کے گھر والوں سے متعلق۔',
+                  ('answer','a7'): 'ہم سے متعلق یا ہماری ملکیت کا۔'
+              },
+              'ur-a1-u04-p04': {
+                  ('answer','a3'): 'اپنی ملکیت یا اپنے بارے میں۔',
+                  ('answer','a4'): 'ایک انسان یا فرد۔'
+              },
+              'ur-a1-u04-p05': {
+                  ('answer','a3'): 'لوگوں کے درمیان رشتہ یا نسبت۔',
+                  ('answer','a6'): 'رشتہ یا نسبت۔'
+              }
+          }
+
+          staged = []
+          units = {}
+          for unit, seqs in [(3, range(13,19)), (4, range(19,25))]:
+              folder = ROOT / f'reading/urdu/a1/staging/unit{unit:02d}'
+              paths = sorted(folder.glob(f'ur-a1-u{unit:02d}-p*.json'))
+              assert len(paths) == 6, (unit, [p.name for p in paths])
+              unit_records = []
+              for seq, p in zip(seqs, paths):
+                  r = json.loads(p.read_text(encoding='utf-8'))
+                  assert r['sequence'] == seq
+                  fixes = polish.get(r['id'], {})
+                  for key, value in fixes.items():
+                      if key[0] == 'answer':
+                          target = next(a for a in r['answer_key'] if a['id'] == key[1])
+                          target['answer'] = value
+                      elif key[0] == 'text_replace':
+                          old, new = value
+                          assert old in r['text'], (r['id'], 'expected polish source absent', old)
+                          r['text'] = r['text'].replace(old, new, 1)
+                  r['word_count'] = len(r['text'].split())
+                  r['sentence_count'] = r['text'].count('۔')
+                  notes = list(r['quality'].get('notes') or [])
+                  if r['id'] in polish:
+                      notes.append('Final pre-promotion learner-facing Urdu polish completed 2026-08-19; target identity and assessment intent preserved.')
+                  r['quality']['notes'] = notes
+                  validate(r, seq)
+                  p.write_text(json.dumps(r, ensure_ascii=False, separators=(',',':')) + '\n', encoding='utf-8')
+                  unit_records.append(r)
+                  staged.append(r)
+              units[unit] = unit_records
+
+          combined = canonical + staged
+          assert len(combined) == 24
+          assert [r['sequence'] for r in combined] == list(range(1,25))
+          assert len({r['id'] for r in combined}) == 24
+          for r in combined:
+              validate(r, r['sequence'])
+
+          out = ''.join(json.dumps(r, ensure_ascii=False, separators=(',',':')) + '\n' for r in combined)
+          CANON.write_text(out, encoding='utf-8')
+          after_bytes = CANON.read_bytes()
+          after_blob = git_blob_sha(after_bytes)
+          after_sha256 = hashlib.sha256(after_bytes).hexdigest()
+
+          for unit in (3,4):
+              records = units[unit]
+              result = {
+                  'language':'ur','cefr':'A1','unit':unit,'date':TODAY,'status':'CANONICAL_PROMOTED',
+                  'canonical_path':'reading/urdu/a1/passages.jsonl','canonical_blob_after_unit04_promotion':after_blob,
+                  'canonical_sha256_after_unit04_promotion':after_sha256,
+                  'sequences':[r['sequence'] for r in records],
+                  'passages':6,'questions':60,'answers':60,
+                  'word_counts':[r['word_count'] for r in records],
+                  'new_targets':[t['form'] for r in records for t in r['new_lexical_targets']],
+                  'structural_checks':{
+                      'ten_questions_each':True,'ten_answers_each':True,'a1_word_band_90_140':True,
+                      'question_answer_linkage':True,'question_targets_locally_declared':True,
+                      'source_rank_identity':True,'new_target_exposure_counts_exact':True,
+                      'running_text_review_visibility_exact':True,'p06_zero_new_targets':True,
+                      'learner_facing_roman_script_zero':True,'sentence_count_metadata_exact':True
+                  },
+                  'formal_final_audit':'deferred under generation-first policy'
+              }
+              result_path = ROOT / f'reading/audit/urdu_a1_unit{unit:02d}_generation_result.json'
+              result_path.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+              plan_path = ROOT / f'reading/audit/urdu_a1_unit{unit:02d}_generation_plan.json'
+              plan = json.loads(plan_path.read_text(encoding='utf-8'))
+              plan['status'] = 'CANONICAL_PROMOTED'
+              plan['promotion_date'] = TODAY
+              plan['canonical_path'] = 'reading/urdu/a1/passages.jsonl'
+              plan['canonical_blob_after_unit04_promotion'] = after_blob
+              plan['generation_result'] = str(result_path)
+              plan['verified_word_counts'] = [r['word_count'] for r in records]
+              plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+              staging_result_path = ROOT / f'reading/audit/urdu_a1_unit{unit:02d}_staging_result.json'
+              staging_result = json.loads(staging_result_path.read_text(encoding='utf-8'))
+              staging_result['canonical_promotion'] = 'PROMOTED'
+              staging_result['canonical_blob_after_unit04_promotion'] = after_blob
+              staging_result['superseded_as_frontier_by'] = str(result_path)
+              staging_result_path.write_text(json.dumps(staging_result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          status_path = ROOT / 'reading/STATUS.json'
+          status = json.loads(status_path.read_text(encoding='utf-8'))
+          status['updated'] = TODAY
+          status['active_language'] = 'Urdu'
+          status['phase'] = 'Arabic and French are sealed. Urdu A1 Units 01-04 are canonical; generation-first production continues from Unit 05.'
+          urdu = status.setdefault('urdu', {})
+          urdu['state'] = 'ACTIVE_A1_GENERATION'
+          urdu['canonical_passages'] = 24
+          urdu['levels'] = {'a1':24,'a2':0,'b1':0,'b2':0,'c1':0,'c2':0}
+          urdu['next_target'] = 'Generate Urdu A1 Unit 05 as sequences 25-30 under the generation-first policy; keep formal final audit deferred.'
+          gen = urdu.setdefault('a1_generation', {})
+          gen.update({
+              'status':'ACTIVE','canonical_passages':24,'completed_units':[1,2,3,4],
+              'last_sequence':24,'next_sequence':25,'next_unit':5,
+              'unit02_result':'reading/audit/urdu_a1_unit02_generation_result.json',
+              'unit03_result':'reading/audit/urdu_a1_unit03_generation_result.json',
+              'unit04_result':'reading/audit/urdu_a1_unit04_generation_result.json'
+          })
+          status['next_actions'] = [
+              'keep Arabic sealed unless canonical Arabic changes',
+              'keep French sealed unless deliberate canonical French changes invalidate hash-bound approval',
+              'continue Urdu A1 from sequence 25 in guarded six-passage units',
+              'preserve source lexicons read-only and defer multi-pass final audit until the generation milestone'
+          ]
+          important = status.setdefault('important_files', [])
+          for item in [
+              'reading/audit/urdu_a1_unit03_generation_result.json',
+              'reading/audit/urdu_a1_unit04_generation_result.json',
+              'reading/audit/urdu_active_frontier_2026-08-19.json'
+          ]:
+              if item not in important:
+                  important.append(item)
+          status_path.write_text(json.dumps(status, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          def upsert_frontier(path: Path, body: str):
+              start = '<!-- CURRENT_URDU_FRONTIER_START -->'
+              end = '<!-- CURRENT_URDU_FRONTIER_END -->'
+              old = path.read_text(encoding='utf-8')
+              block = start + '\n' + body.rstrip() + '\n' + end + '\n\n'
+              if start in old and end in old:
+                  old = re.sub(re.escape(start) + r'.*?' + re.escape(end) + r'\n*', block, old, flags=re.S)
+              else:
+                  old = block + old
+              path.write_text(old, encoding='utf-8')
+
+          upsert_frontier(ROOT/'reading/AGENT_HANDOFF.md', f'''## Current Urdu frontier — {TODAY}
+
+- Arabic: sealed / approved (360 canonical passages).
+- French: sealed / approved (360 canonical passages; hash-bound final approval remains authoritative).
+- Urdu: active.
+- Urdu A1 calibration sequences 1-6: **accepted after current-standard repair**.
+- Urdu A1 Units 02-04 sequences 7-24: **canonical generated**.
+- Urdu A1 canonical total: **24 passages / 240 questions / 240 answers**.
+- Unit 03 result: `reading/audit/urdu_a1_unit03_generation_result.json`.
+- Unit 04 result: `reading/audit/urdu_a1_unit04_generation_result.json`.
+- Next exact frontier: **Unit 05, sequences 25-30**.
+- Continue under `reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md`; source lexicons stay read-only; do not reopen Arabic/French without a deliberate canonical change.''')
+
+          upsert_frontier(ROOT/'reading/TASKS.md', f'''## Current execution queue — {TODAY}
+
+- [x] Keep Arabic sealed.
+- [x] Keep French sealed.
+- [x] Accept repaired Urdu A1 calibration sequences 1-6.
+- [x] Promote Urdu A1 Unit 02 sequences 7-12.
+- [x] Generate, polish, validate, and promote Urdu A1 Unit 03 sequences 13-18.
+- [x] Generate, polish, validate, and promote Urdu A1 Unit 04 sequences 19-24.
+- [ ] Generate Urdu A1 Unit 05 sequences 25-30 as the next guarded six-passage batch.
+- [ ] Continue Urdu A1 through sequence 60 before level-level final audit unless a severe defect requires immediate repair.''')
+
+          frontier_path = ROOT / 'reading/audit/urdu_active_frontier_2026-08-19.json'
+          frontier = json.loads(frontier_path.read_text(encoding='utf-8'))
+          frontier['status'] = 'ACTIVE_CANONICAL_24'
+          frontier['urdu_a1']['live_canonical_blob'] = after_blob
+          frontier['urdu_a1']['live_canonical_passages'] = 24
+          frontier['urdu_a1']['live_canonical_sequences'] = list(range(1,25))
+          frontier['urdu_a1']['unit03'] = {'status':'CANONICAL_PROMOTED','sequences':list(range(13,19)),'artifact':'reading/audit/urdu_a1_unit03_generation_result.json'}
+          frontier['urdu_a1']['unit04'] = {'status':'CANONICAL_PROMOTED','sequences':list(range(19,25)),'artifact':'reading/audit/urdu_a1_unit04_generation_result.json'}
+          frontier['urdu_a1']['staged_units'] = {}
+          frontier['urdu_a1']['available_records'] = {'canonical':24,'staged':0,'canonical_plus_staged':24}
+          frontier['next_exact_actions'] = [
+              'Generate Urdu A1 Unit 05 sequences 25-30 as the next guarded six-passage batch.',
+              'Continue generation-first production through A1 sequence 60, preserving read-only source lexicons and exact structural/lexical guards.',
+              'Run the planned level-level/final audit at the generation milestone unless a severe defect requires earlier repair.'
+          ]
+          frontier_path.write_text(json.dumps(frontier, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          print(json.dumps({
+              'before_blob':before_blob,'after_blob':after_blob,'canonical_passages':24,
+              'questions':sum(len(r['questions']) for r in combined),
+              'answers':sum(len(r['answer_key']) for r in combined),
+              'unit03_word_counts':[r['word_count'] for r in units[3]],
+              'unit04_word_counts':[r['word_count'] for r in units[4]]
+          }, ensure_ascii=False))
+          PY
+
+      - name: Commit promoted Urdu Units 03-04
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes produced; failing closed.'
+            exit 1
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/urdu/a1/passages.jsonl reading/urdu/a1/staging/unit03 reading/urdu/a1/staging/unit04 reading/audit/urdu_a1_unit03_generation_plan.json reading/audit/urdu_a1_unit04_generation_plan.json reading/audit/urdu_a1_unit03_staging_result.json reading/audit/urdu_a1_unit04_staging_result.json reading/audit/urdu_a1_unit03_generation_result.json reading/audit/urdu_a1_unit04_generation_result.json reading/audit/urdu_active_frontier_2026-08-19.json reading/STATUS.json reading/AGENT_HANDOFF.md reading/TASKS.md
+          git commit -m 'Promote Urdu A1 Units 03-04 with learner-facing polish'
+          git push origin HEAD:main
