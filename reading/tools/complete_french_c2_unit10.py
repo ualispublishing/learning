@@ -90,7 +90,7 @@ def main() -> None:
             stages.append('probe_c2_unit10_targets')
             run('select_french_c2_unit10_targets.py')
             stages.append('select_c2_unit10_targets')
-            run('generate_french_c2_unit10.py')
+            run('generate_french_c2_unit10_preflight.py')
             generated = True
             stages.append('generate_c2_unit10')
             env('audit_french_c2_unit_generation.py', 10)
