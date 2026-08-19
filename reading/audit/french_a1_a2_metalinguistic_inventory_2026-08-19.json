@@ -6,15 +6,15 @@
     "reading/french/a2/passages.jsonl"
   ],
   "canonical_sha256": {
-    "A1": "97948c375f54649935db2d20c44def1dc539939dc1c14d9b063d6647d566da13",
-    "A2": "54e38bdbd8c7264a0d77484296c256857465783d57069ac456cc63538d515552"
+    "A1": "48db8f58dc105bcd880302d31b0f7fcae439e3018a35b0adb62b690d42b85562",
+    "A2": "8fcd71903e6a495a2abaac8d436232b4b7ee00ae5ac0bce4d273aa4a134b3c15"
   },
   "status": "CANDIDATES_REQUIRE_SEMANTIC_ADJUDICATION",
   "candidate_counts": {
-    "A1": 9,
-    "A2": 16
+    "A1": 45,
+    "A2": 23
   },
-  "candidate_total": 25,
+  "candidate_total": 68,
   "method": "High-recall candidate scan only; keyword/type hits are not automatically defects. Every candidate requires semantic CEFR/pedagogical adjudication before repair.",
   "candidates": [
     {
@@ -154,6 +154,33 @@
     },
     {
       "level": "A1",
+      "passage_id": "fr-a1-u02-p01",
+      "sequence": 7,
+      "unit": 2,
+      "title": "Une matinée au centre sportif",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « tu vas faire un cours » ou « tu vas fais un cours » ?",
+      "answer": "« tu vas faire un cours ».",
+      "target_ids": [
+        "fr-rank-0014"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0014",
+          "form": "faire",
+          "lemma": "faire",
+          "role": "new"
+        }
+      ],
+      "context": "Sa mère lui demande : « Qu’est-ce que tu vas faire là-bas ? » Camille répond : « Je vais faire un cours de danse, puis je veux aller à la piscine.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
       "passage_id": "fr-a1-u02-p02",
       "sequence": 8,
       "unit": 2,
@@ -181,6 +208,33 @@
     },
     {
       "level": "A1",
+      "passage_id": "fr-a1-u02-p04",
+      "sequence": 10,
+      "unit": 2,
+      "title": "Mon carnet est sur la table",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Pour parler de son carnet, Camille dit : « mon carnet » ou « ma carnet » ?",
+      "answer": "« mon carnet ».",
+      "target_ids": [
+        "fr-rank-0038"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0038",
+          "form": "mon",
+          "lemma": "mon",
+          "role": "new"
+        }
+      ],
+      "context": "Elle dit : « Mon carnet était ici hier. Puis son frère entre et montre la table du salon.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
       "passage_id": "fr-a1-u02-p06",
       "sequence": 12,
       "unit": 2,
@@ -202,6 +256,114 @@
         }
       ],
       "context": "",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p01",
+      "sequence": 13,
+      "unit": 3,
+      "title": "Un projet sur le quartier",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « ce projet » ou « cet projet » ?",
+      "answer": "« ce projet ».",
+      "target_ids": [
+        "fr-rank-0019"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0019",
+          "form": "ce",
+          "lemma": "ce",
+          "role": "new"
+        }
+      ],
+      "context": "Mardi, la classe de Camille commence un petit projet sur le quartier. Le professeur montre une grande feuille et dit : « Ce projet est pour toute la classe.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p03",
+      "sequence": 15,
+      "unit": 3,
+      "title": "Dans la salle de travail",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « nous avons des informations » ou « nous a des informations » ?",
+      "answer": "« nous avons des informations ».",
+      "target_ids": [
+        "fr-rank-0027"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0027",
+          "form": "nous",
+          "lemma": "nous",
+          "role": "new"
+        }
+      ],
+      "context": "Camille pose les notes au centre de la table et dit : « Nous avons beaucoup d’informations. Maintenant, nous devons choisir les plus importantes.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p04",
+      "sequence": 16,
+      "unit": 3,
+      "title": "Laisse-moi essayer",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « cette photo est pour moi » ou « cette photo est pour je » ?",
+      "answer": "« cette photo est pour moi ».",
+      "target_ids": [
+        "fr-rank-0041"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0041",
+          "form": "moi",
+          "lemma": "moi",
+          "role": "new"
+        }
+      ],
+      "context": "» Camille répond : « Oui, mais laisse-moi essayer d’abord. Puis il montre une image et demande : « Cette photo est pour moi ou pour la page ?",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u03-p05",
+      "sequence": 17,
+      "unit": 3,
+      "title": "Oui, nous sommes prêts",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « ils montrent leurs images » ou « ils montre leurs images » ?",
+      "answer": "« ils montrent leurs images ».",
+      "target_ids": [
+        "fr-rank-0045"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0045",
+          "form": "ils",
+          "lemma": "ils",
+          "role": "new"
+        }
+      ],
+      "context": "Le professeur demande s’ils sont prêts. Ils parlent lentement et regardent les autres élèves.",
       "candidate_reasons": [
         "question_type:grammar_choice"
       ]
@@ -268,6 +430,951 @@
       ]
     },
     {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p01",
+      "sequence": 25,
+      "unit": 5,
+      "title": "Une heure avant le cours",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « le matin » ou « la matin » ?",
+      "answer": "« le matin ».",
+      "target_ids": [
+        "fr-rank-0307"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0307",
+          "form": "matin",
+          "lemma": "matin",
+          "role": "new"
+        }
+      ],
+      "context": "Lundi matin, Camille arrive à l’école une heure avant le début du cours. Le matin, la salle est encore calme et ils peuvent travailler sans bruit.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p02",
+      "sequence": 26,
+      "unit": 5,
+      "title": "Le calendrier de la semaine",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « le soir » ou « la soir » ?",
+      "answer": "« le soir ».",
+      "target_ids": [
+        "fr-rank-0161"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0161",
+          "form": "soir",
+          "lemma": "soir",
+          "role": "new"
+        }
+      ],
+      "context": "Le lundi soir, elle doit terminer un exercice. Le mardi soir, elle va à la bibliothèque avec Sami.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p03",
+      "sequence": 27,
+      "unit": 5,
+      "title": "Cette fois au marché",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « une autre chose » ou « un autre chose » ?",
+      "answer": "« une autre chose ».",
+      "target_ids": [
+        "fr-rank-0054"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0054",
+          "form": "chose",
+          "lemma": "chose",
+          "role": "new"
+        }
+      ],
+      "context": "Elle hésite et demande à sa mère si elles peuvent essayer une autre chose. Elle comprend qu’une petite chose oubliée peut obliger à revenir plus tard.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p04",
+      "sequence": 28,
+      "unit": 5,
+      "title": "Une place pour le vélo",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « une place » ou « un place » ?",
+      "answer": "« une place ».",
+      "target_ids": [
+        "fr-rank-0289"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0289",
+          "form": "place",
+          "lemma": "place",
+          "role": "new"
+        }
+      ],
+      "context": "Devant l’entrée, elle cherche une place pour laisser son vélo. La première place est prise, mais il y en a une autre près d’un arbre.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p05",
+      "sequence": 29,
+      "unit": 5,
+      "title": "Dessiner la ville",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « chaque enfant reçoit une feuille » ou « chaque enfants reçoit une feuille » ?",
+      "answer": "« chaque enfant reçoit une feuille ».",
+      "target_ids": [
+        "fr-rank-0149"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0149",
+          "form": "enfant",
+          "lemma": "enfant",
+          "role": "new"
+        }
+      ],
+      "context": "Mercredi après-midi, Camille accompagne son petit frère à une activité pour enfants dans le centre-ville. Chaque enfant reçoit une feuille et des crayons.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u05-p06",
+      "sequence": 30,
+      "unit": 5,
+      "title": "Une semaine bien organisée",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « une question » ou « un question » ?",
+      "answer": "« une question ».",
+      "target_ids": [
+        "fr-rank-0198"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0198",
+          "form": "question",
+          "lemma": null,
+          "role": "review"
+        }
+      ],
+      "context": "Une fois au marché ou à la bibliothèque, elle garde sa liste et pose une question si quelque chose n’est pas clair.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u07-p05",
+      "sequence": 41,
+      "unit": 7,
+      "title": "Le chemin vers la grande rue",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « une rue » ou « un rue » ?",
+      "answer": "« une rue ».",
+      "target_ids": [
+        "fr-rank-0526"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0526",
+          "form": "rue",
+          "lemma": "rue",
+          "role": "new"
+        }
+      ],
+      "context": "Elle doit rejoindre sa mère bientôt dans une grande rue commerçante. Le premier chemin suit une rue très animée.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p01",
+      "sequence": 43,
+      "unit": 8,
+      "title": "Un peu mal à la tête",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « une main » ou « un main » ?",
+      "answer": "« une main ».",
+      "target_ids": [
+        "fr-rank-0195"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0195",
+          "form": "main",
+          "lemma": "main",
+          "role": "new"
+        }
+      ],
+      "context": "Dans la cuisine, elle pose une main sur son front et boit un verre d’eau. Elle lave ensuite chaque main avant de préparer une petite collation.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p02",
+      "sequence": 44,
+      "unit": 8,
+      "title": "Écouter son corps",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « son pied droit » ou « sa pied droit » ?",
+      "answer": "« son pied droit ».",
+      "target_ids": [
+        "fr-rank-0424"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0424",
+          "form": "pied",
+          "lemma": "pied",
+          "role": "new"
+        }
+      ],
+      "context": "Après plusieurs tours, son pied droit commence à être fatigué. Elle s’arrête et regarde son pied : rien ne semble grave.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p03",
+      "sequence": 45,
+      "unit": 8,
+      "title": "Manger et boire",
+      "question_id": "q6",
+      "answer_id": "a6",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « il faut boire de l’eau » ou « il faut boit de l’eau » ?",
+      "answer": "« il faut boire de l’eau ».",
+      "target_ids": [
+        "fr-rank-0295"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0295",
+          "form": "boire",
+          "lemma": "boire",
+          "role": "new"
+        }
+      ],
+      "context": "Camille veut manger son sandwich avant de boire son jus. Sami préfère boire d’abord, puis manger.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p03",
+      "sequence": 45,
+      "unit": 8,
+      "title": "Manger et boire",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « elle veut manger » ou « elle veut mange » ?",
+      "answer": "« elle veut manger ».",
+      "target_ids": [
+        "fr-rank-0213"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0213",
+          "form": "manger",
+          "lemma": "manger",
+          "role": "new"
+        }
+      ],
+      "context": "Camille veut manger son sandwich avant de boire son jus. Sami préfère boire d’abord, puis manger.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p04",
+      "sequence": 46,
+      "unit": 8,
+      "title": "Prête à dormir",
+      "question_id": "q6",
+      "answer_id": "a6",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « je vais dormir » ou « je vais dors » ?",
+      "answer": "« je vais dormir ».",
+      "target_ids": [
+        "fr-rank-0296"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0296",
+          "form": "dormir",
+          "lemma": "dormir",
+          "role": "new"
+        }
+      ],
+      "context": "Le soir, Camille prépare sa chambre avant de dormir. Elle veut dormir assez longtemps parce qu’elle a école le lendemain.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p04",
+      "sequence": 46,
+      "unit": 8,
+      "title": "Prête à dormir",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « elle commence à sentir la fatigue » ou « elle commence à sent la fatigue » ?",
+      "answer": "« elle commence à sentir la fatigue ».",
+      "target_ids": [
+        "fr-rank-0166"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0166",
+          "form": "sentir",
+          "lemma": "sentir",
+          "role": "new"
+        }
+      ],
+      "context": "Elle commence à sentir la fatigue : ses yeux sont lourds et elle bâille. Camille sait qu’elle peut sentir la fatigue avant d’être complètement épuisée.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p05",
+      "sequence": 47,
+      "unit": 8,
+      "title": "Malade, puis mieux",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « Camille est malade » ou « Camille est malades » ?",
+      "answer": "« Camille est malade ».",
+      "target_ids": [
+        "fr-rank-0491"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0491",
+          "form": "malade",
+          "lemma": "malade",
+          "role": "new"
+        }
+      ],
+      "context": "Un samedi matin, Camille se sent malade et reste à la maison.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p01",
+      "sequence": 49,
+      "unit": 9,
+      "title": "Un matin en famille",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « sa famille » ou « son famille » ?",
+      "answer": "« sa famille ».",
+      "target_ids": [
+        "fr-rank-0192"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0192",
+          "form": "famille",
+          "lemma": "famille",
+          "role": "new"
+        }
+      ],
+      "context": "Samedi matin, Camille prend le petit-déjeuner avec sa famille. La famille parle ensuite du programme de la journée.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p02",
+      "sequence": 50,
+      "unit": 9,
+      "title": "Un ami après la promenade",
+      "question_id": "q6",
+      "answer_id": "a6",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « Sami est un ami de Camille » ou « Sami est une ami de Camille » ?",
+      "answer": "« Sami est un ami de Camille ».",
+      "target_ids": [
+        "fr-rank-0134"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0134",
+          "form": "ami",
+          "lemma": "ami",
+          "role": "new"
+        }
+      ],
+      "context": "Dimanche, la mère de Camille attend un ami de la famille pour le déjeuner. L’ami arrive après une longue promenade et dit que son pied est un peu fatigué.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p02",
+      "sequence": 50,
+      "unit": 9,
+      "title": "Un ami après la promenade",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « sa mère » ou « son mère » ?",
+      "answer": "« sa mère ».",
+      "target_ids": [
+        "fr-rank-0210"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0210",
+          "form": "mère",
+          "lemma": "mère",
+          "role": "new"
+        }
+      ],
+      "context": "Dimanche, la mère de Camille attend un ami de la famille pour le déjeuner. La mère de Camille lui propose de s’asseoir et de laisser son corps se reposer quelques minutes.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p03",
+      "sequence": 51,
+      "unit": 9,
+      "title": "Lire pendant la pause",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « à l’école » ou « au école » ?",
+      "answer": "« à l’école ».",
+      "target_ids": [
+        "fr-rank-0354"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0354",
+          "form": "école",
+          "lemma": "école",
+          "role": "new"
+        }
+      ],
+      "context": "Lundi, Camille apporte un livre à l’école pour un petit travail de lecture. À l’école, le professeur leur demande de noter deux idées importantes.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p04",
+      "sequence": 52,
+      "unit": 9,
+      "title": "Une table près de la porte",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « une table » ou « un table » ?",
+      "answer": "« une table ».",
+      "target_ids": [
+        "fr-rank-0656"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0656",
+          "form": "table",
+          "lemma": "table",
+          "role": "new"
+        }
+      ],
+      "context": "Camille entre, choisit une table près de la fenêtre et pose son sac dessus. À la fin, elle ferme son cahier, se lève de la table et passe par la porte.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p05",
+      "sequence": 53,
+      "unit": 9,
+      "title": "Reprendre un petit travail",
+      "question_id": "q6",
+      "answer_id": "a6",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « un travail court » ou « une travail courte » ?",
+      "answer": "« un travail court ».",
+      "target_ids": [
+        "fr-rank-0203"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0203",
+          "form": "travail",
+          "lemma": "travail",
+          "role": "new"
+        }
+      ],
+      "context": "Elle se sent mieux et veut terminer un petit travail. Le travail est court : elle doit relire une page et corriger trois réponses.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p05",
+      "sequence": 53,
+      "unit": 9,
+      "title": "Reprendre un petit travail",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « de l’eau » ou « du eau » ?",
+      "answer": "« de l’eau ».",
+      "target_ids": [
+        "fr-rank-0324"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0324",
+          "form": "eau",
+          "lemma": "eau",
+          "role": "new"
+        }
+      ],
+      "context": "Elle remplit une bouteille d’eau, choisit une table calme et ouvre son cahier. Camille boit un peu d’eau pendant qu’elle écrit.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p06",
+      "sequence": 54,
+      "unit": 9,
+      "title": "Personnes et objets du quotidien",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte au pluriel : « des livres » ou « des livre » ?",
+      "answer": "« des livres ».",
+      "target_ids": [
+        "fr-rank-0418"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0418",
+          "form": "livre",
+          "lemma": null,
+          "role": "review"
+        }
+      ],
+      "context": "À l’école, elle ouvre un livre pour faire un travail.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p01",
+      "sequence": 55,
+      "unit": 10,
+      "title": "Le ciel et le soleil",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « le soleil » ou « la soleil » ?",
+      "answer": "« le soleil ».",
+      "target_ids": [
+        "fr-rank-0795"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0795",
+          "form": "soleil",
+          "lemma": "soleil",
+          "role": "new"
+        }
+      ],
+      "context": "Le ciel est gris au début, mais un peu de soleil reste visible entre les nuages. Après vingt minutes, le ciel devient plus clair et le soleil revient.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p02",
+      "sequence": 56,
+      "unit": 10,
+      "title": "Froid le matin, chaud à midi",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « il fait chaud » ou « il fait chaude » ?",
+      "answer": "« il fait chaud ».",
+      "target_ids": [
+        "fr-rank-0775"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0775",
+          "form": "chaud",
+          "lemma": "chaud",
+          "role": "new"
+        }
+      ],
+      "context": "Le soleil est plus fort et il fait chaud. Camille comprend maintenant la différence : quand il fait froid, elle veut plus de chaleur ; quand il fait chaud, elle préfère un vêtement plus léger.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p03",
+      "sequence": 57,
+      "unit": 10,
+      "title": "Choisir avant d’acheter",
+      "question_id": "q6",
+      "answer_id": "a6",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « le prix du livre » ou « la prix du livre » ?",
+      "answer": "« le prix du livre ».",
+      "target_ids": [
+        "fr-rank-0616"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0616",
+          "form": "prix",
+          "lemma": "prix",
+          "role": "new"
+        }
+      ],
+      "context": "Le premier a un prix bas, le deuxième est plus joli mais plus cher, et le troisième est trop difficile. Avant d’acheter, elle demande encore le prix au vendeur pour vérifier.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p03",
+      "sequence": 57,
+      "unit": 10,
+      "title": "Choisir avant d’acheter",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « elle veut acheter un livre » ou « elle veut achète un livre » ?",
+      "answer": "« elle veut acheter un livre ».",
+      "target_ids": [
+        "fr-rank-0297"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0297",
+          "form": "acheter",
+          "lemma": "acheter",
+          "role": "new"
+        }
+      ],
+      "context": "Après l’école, Camille veut acheter un livre simple pour un travail de classe. Avant d’acheter, elle demande encore le prix au vendeur pour vérifier.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p04",
+      "sequence": 58,
+      "unit": 10,
+      "title": "Préparer l’argent et un vêtement",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « un vêtement » ou « une vêtement » ?",
+      "answer": "« un vêtement ».",
+      "target_ids": [
+        "fr-rank-0975"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0975",
+          "form": "vêtement",
+          "lemma": "vêtement",
+          "role": "new"
+        }
+      ],
+      "context": "Elle prend aussi un vêtement léger parce que la salle de l’activité peut être froide. Avant de partir, Camille vérifie la table et la porte une dernière fois : son sac est prêt, l’argent est là et le vêtement est plié au-dessus des livres.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p05",
+      "sequence": 59,
+      "unit": 10,
+      "title": "Un sac et des chaussures",
+      "question_id": "q6",
+      "answer_id": "a6",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « une chaussure » ou « un chaussure » ?",
+      "answer": "« une chaussure ».",
+      "target_ids": [
+        "fr-rank-0956"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0956",
+          "form": "chaussure",
+          "lemma": "chaussure",
+          "role": "new"
+        }
+      ],
+      "context": "Dans le magasin, elle regarde aussi une chaussure de sport, puis une autre paire. Elle n’a pas besoin de nouvelle chaussure aujourd’hui, donc elle n’en achète pas.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p05",
+      "sequence": 59,
+      "unit": 10,
+      "title": "Un sac et des chaussures",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « un sac » ou « une sac » ?",
+      "answer": "« un sac ».",
+      "target_ids": [
+        "fr-rank-0532"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0532",
+          "form": "sac",
+          "lemma": "sac",
+          "role": "new"
+        }
+      ],
+      "context": "Elle a besoin d’un sac plus solide pour porter ses livres. Son sac actuel est petit, alors elle choisit un grand sac avec deux poches.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p06",
+      "sequence": 60,
+      "unit": 10,
+      "title": "Ce que Camille sait faire en français",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « elle veut acheter un livre » ou « elle veut achète un livre » ?",
+      "answer": "« elle veut acheter un livre ».",
+      "target_ids": [
+        "fr-rank-0297"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0297",
+          "form": "acheter",
+          "lemma": null,
+          "role": "review"
+        }
+      ],
+      "context": "Dans un magasin, elle peut demander un prix, décider d’acheter quelque chose et préparer l’argent nécessaire.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p02",
+      "sequence": 2,
+      "unit": 1,
+      "title": "Une erreur sur le formulaire",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « elle peut expliquer le problème » ou « elle peut explique le problème » ?",
+      "answer": "« elle peut expliquer le problème ».",
+      "target_ids": [
+        "fr-rank-0390"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0390",
+          "form": "expliquer",
+          "lemma": "expliquer",
+          "role": "new"
+        }
+      ],
+      "context": "Camille retient surtout deux choses : une erreur peut être corrigée, et expliquer clairement ce qui s’est passé permet souvent d’éviter un malentendu inutile.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p03",
+      "sequence": 3,
+      "unit": 1,
+      "title": "Essayer une autre méthode",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « elle décide d’essayer » ou « elle décide d’essaie » ?",
+      "answer": "« elle décide d’essayer ».",
+      "target_ids": [
+        "fr-rank-0122"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0122",
+          "form": "essayer",
+          "lemma": "essayer",
+          "role": "new"
+        }
+      ],
+      "context": "Elle décide d’essayer une deuxième fois en vérifiant chaque étape. Camille comprend qu’« essayer » ne signifie pas répéter exactement la même action sans réfléchir : on peut aussi tenter une autre méthode.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p04",
+      "sequence": 4,
+      "unit": 1,
+      "title": "Un bruit dans le vélo",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « il peut réparer le vélo » ou « il peut répare le vélo » ?",
+      "answer": "« il peut réparer le vélo ».",
+      "target_ids": [
+        "fr-rank-0929"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0929",
+          "form": "réparer",
+          "lemma": "réparer",
+          "role": "new"
+        }
+      ],
+      "context": "Il peut réparer le vélo tout de suite, et le prix reste raisonnable.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p05",
+      "sequence": 5,
+      "unit": 1,
+      "title": "Un rendez-vous utile",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « elle vient de découvrir un service » ou « elle vient de découvre un service » ?",
+      "answer": "« elle vient de découvrir un service ».",
+      "target_ids": [
+        "fr-rank-0432"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0432",
+          "form": "découvrir",
+          "lemma": "découvrir",
+          "role": "new"
+        }
+      ],
+      "context": "Après la visite, Camille retourne dans la salle qu’elle vient de découvrir. Ce rendez-vous avait un objectif très simple, mais il lui a permis de découvrir un service qu’elle ne connaissait pas.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u01-p06",
+      "sequence": 6,
+      "unit": 1,
+      "title": "Gérer un petit problème",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « elle décide d’essayer » ou « elle décide d’essaie » ?",
+      "answer": "« elle décide d’essayer ».",
+      "target_ids": [
+        "fr-rank-0122"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0122",
+          "form": "essayer",
+          "lemma": null,
+          "role": "review"
+        }
+      ],
+      "context": "Devant une machine, elle doit essayer plusieurs étapes pour voir ce qui est possible.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
       "level": "A2",
       "passage_id": "fr-a2-u02-p01",
       "sequence": 7,
@@ -291,11 +1398,47 @@
       "sequence": 8,
       "unit": 2,
       "title": "Vérifier avant de décider",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « avant de prendre une décision » ou « avant de prends une décision » ?",
+      "answer": "« avant de prendre une décision ».",
+      "target_ids": [],
+      "target_forms": [],
+      "context": "",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p02",
+      "sequence": 8,
+      "unit": 2,
+      "title": "Vérifier avant de décider",
       "question_id": "q8",
       "answer_id": "a8",
       "question_type": "grammar_choice",
       "prompt": "Choisis : « l’information est correcte » ou « l’information sont correcte » ?",
       "answer": "« l’information est correcte. »",
+      "target_ids": [],
+      "target_forms": [],
+      "context": "",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A2",
+      "passage_id": "fr-a2-u02-p03",
+      "sequence": 9,
+      "unit": 2,
+      "title": "Une méthode différente",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « il est important de pratiquer » ou « il est important de pratique » ?",
+      "answer": "« il est important de pratiquer ».",
       "target_ids": [],
       "target_forms": [],
       "context": "",
