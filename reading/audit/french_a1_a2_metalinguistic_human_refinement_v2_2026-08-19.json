@@ -1,0 +1,539 @@
+{
+  "audit": "French A1-A2 metalinguistic human refinement v2",
+  "date": "2026-08-19",
+  "status": "HUMAN_REVIEWED_DEFINED_CLASS_PASS_V2",
+  "supersedes": "reading/audit/french_a1_a2_metalinguistic_human_refinement_2026-08-19.json",
+  "before_sha256": {
+    "A1": "48db8f58dc105bcd880302d31b0f7fcae439e3018a35b0adb62b690d42b85562",
+    "A2": "8fcd71903e6a495a2abaac8d436232b4b7ee00ae5ac0bce4d273aa4a134b3c15"
+  },
+  "after_sha256": {
+    "A1": "1cdb31ecb8b987c50051bb6f8fa5b2f7fda812cb3004c81ab8697f832fceacba",
+    "A2": "8fcd71903e6a495a2abaac8d436232b4b7ee00ae5ac0bce4d273aa4a134b3c15"
+  },
+  "function_items_semantically_rechecked": 23,
+  "changed_passages": 23,
+  "finding": "The first human refinement removed formal metalanguage but some function-label replacements duplicated existing vocabulary-meaning assessment roles.",
+  "resolution": "All 23 A1 function-label items now use operational use/choice or contextual selection tasks; q3/q4 retain meaning, q7/q10 use/grammar roles remain distinct, and existing transfer/cloze questions remain separate.",
+  "changes": [
+    {
+      "passage_id": "fr-a1-u01-p02",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Quand le feu devient vert, ils traversent. », que signifie « quand » ici ?",
+        "answer": "« quand » signifie ici « au moment où ».",
+        "target_ids": [
+          "fr-rank-0061"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Complète avec le bon choix : « _____ le feu devient vert, ils traversent. » — « quand » ou « avec » ?",
+        "answer": "« quand ».",
+        "target_ids": [
+          "fr-rank-0061"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u01-p03",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Sami s’assoit avec elle. », que signifie « avec » ici ?",
+        "answer": "« avec » signifie ici que Sami et Camille sont ensemble.",
+        "target_ids": [
+          "fr-rank-0035"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Complète avec le bon choix : « Sami s’assoit _____ elle. » — « avec » ou « sans » ?",
+        "answer": "« avec ».",
+        "target_ids": [
+          "fr-rank-0035"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u01-p06",
+      "question_id": "q10",
+      "answer_id": "a10",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Quand elle rencontre Sami, ils marchent ensemble. », que signifie « quand » ici ?",
+        "answer": "« quand » signifie ici « au moment où ».",
+        "target_ids": [
+          "fr-rank-0061"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Complète : « _____ il arrive, Camille sourit. » — « quand » ou « avec » ?",
+        "answer": "« quand ».",
+        "target_ids": [
+          "fr-rank-0061"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u02-p03",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Si elle ne trouve pas quelque chose, elle doit demander. », que signifie « si » ici ?",
+        "answer": "« si » présente la condition : si elle ne trouve pas quelque chose, elle doit demander.",
+        "target_ids": [
+          "fr-rank-0032"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Complète : « Elle demandera de l’aide _____ elle ne trouve pas le livre. » — « si » ou « avec » ?",
+        "answer": "« si ».",
+        "target_ids": [
+          "fr-rank-0032"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u02-p05",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Elle veut plus de place pour dessiner. », que signifie « plus » ici ?",
+        "answer": "« plus » signifie ici qu’elle veut une quantité plus grande de place.",
+        "target_ids": [
+          "fr-rank-0037"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Dans le texte, elle veut _____ de place pour dessiner : « plus » ou « moins » ?",
+        "answer": "« plus ».",
+        "target_ids": [
+          "fr-rank-0037"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u03-p02",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Ils cherchent une personne qui peut répondre à leurs questions. », que signifie « qui » ici ?",
+        "answer": "« qui » renvoie à la personne et précise qu’elle répond.",
+        "target_ids": [
+          "fr-rank-0024"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Complète : « Ils cherchent une personne _____ peut répondre. » — « qui » ou « avec » ?",
+        "answer": "« qui ».",
+        "target_ids": [
+          "fr-rank-0024"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u04-p01",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Le premier cahier est très grand. », que signifie « très » ici ?",
+        "answer": "« très » renforce l’idée de grandeur : le cahier est vraiment grand.",
+        "target_ids": [
+          "fr-rank-0074"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Complète : « Le premier cahier est _____ grand. » — « très » ou « beaucoup » ?",
+        "answer": "« très ».",
+        "target_ids": [
+          "fr-rank-0074"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u04-p02",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Elle travaille toujours à la table du salon. », que signifie « toujours » ici ?",
+        "answer": "« toujours » signifie ici que l’action se fait de manière habituelle ou à chaque fois.",
+        "target_ids": [
+          "fr-rank-0094"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Complète : « Elle travaille _____ à la table du salon. » — « toujours » ou « très » ?",
+        "answer": "« toujours ».",
+        "target_ids": [
+          "fr-rank-0094"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u04-p03",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Il reste encore cinq minutes. », que signifie « encore » ici ?",
+        "answer": "Ici, « encore » signifie qu’une durée supplémentaire reste avant l’ouverture.",
+        "target_ids": [
+          "fr-rank-0098"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Complète : « Il reste _____ cinq minutes. » — « encore » ou « très » ?",
+        "answer": "« encore ».",
+        "target_ids": [
+          "fr-rank-0098"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u04-p04",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Avant de dormir, elle prépare son sac. », que signifie « avant » ici ?",
+        "answer": "« avant » signifie qu’une action se produit plus tôt qu’une autre.",
+        "target_ids": [
+          "fr-rank-0126"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "D’après le texte, elle prépare son sac _____ de dormir : « avant » ou « après » ?",
+        "answer": "« avant ».",
+        "target_ids": [
+          "fr-rank-0126"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u04-p05",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Après le petit-déjeuner, elle aide sa mère. », que signifie « après » ici ?",
+        "answer": "« après » signifie qu’une action se produit plus tard qu’une autre.",
+        "target_ids": [
+          "fr-rank-0133"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "D’après le texte, elle aide sa mère _____ le petit-déjeuner : « après » ou « avant » ?",
+        "answer": "« après ».",
+        "target_ids": [
+          "fr-rank-0133"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u06-p01",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Elle met peu de pain sur son plateau. », que signifie « peu » ici ?",
+        "answer": "« peu » indique ici une petite quantité.",
+        "target_ids": [
+          "fr-rank-0092"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Complète : « Elle met _____ de pain sur son plateau. » — « peu » ou « très » ?",
+        "answer": "« peu ».",
+        "target_ids": [
+          "fr-rank-0092"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u06-p02",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Il y a trop de travail pour une seule soirée. », que signifie « trop » ici ?",
+        "answer": "« trop » indique ici une quantité excessive.",
+        "target_ids": [
+          "fr-rank-0127"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Complète : « Il y a _____ de travail pour une seule soirée. » — « trop » ou « très » ?",
+        "answer": "« trop ».",
+        "target_ids": [
+          "fr-rank-0127"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u06-p03",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « C’est bien le même livre. », que signifie « même » ici ?",
+        "answer": "« même » signifie ici qu’il s’agit d’un livre identique.",
+        "target_ids": [
+          "fr-rank-0081"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "D’après le texte, Camille et Sami ont choisi le _____ titre : « même » ou « autre » ?",
+        "answer": "« même ».",
+        "target_ids": [
+          "fr-rank-0081"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u06-p04",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Elle ne parle jamais fort dans la salle de lecture. », que signifie « jamais » ici ?",
+        "answer": "Dans cette phrase négative, « jamais » signifie « à aucun moment ».",
+        "target_ids": [
+          "fr-rank-0075"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Complète : « Elle ne parle _____ fort dans la salle de lecture. » — « jamais » ou « très » ?",
+        "answer": "« jamais ».",
+        "target_ids": [
+          "fr-rank-0075"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u06-p05",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Camille et son petit frère sont maintenant dans le centre de la ville. », que signifie « maintenant » ici ?",
+        "answer": "« maintenant » signifie « au moment présent ».",
+        "target_ids": [
+          "fr-rank-0086"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "D’après le texte, ils sont _____ dans le centre de la ville : « maintenant » ou « plus tard » ?",
+        "answer": "« maintenant ».",
+        "target_ids": [
+          "fr-rank-0086"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u06-p06",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Camille y va souvent, mais elle ne parle jamais fort. », que signifie « jamais » ici ?",
+        "answer": "Dans cette phrase négative, « jamais » signifie « à aucun moment ».",
+        "target_ids": [
+          "fr-rank-0075"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Complète : « Camille ne crie _____ dans la bibliothèque. » — « jamais » ou « très » ?",
+        "answer": "« jamais ».",
+        "target_ids": [
+          "fr-rank-0075"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u07-p01",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « La bibliothèque est près de leur école. », que signifie « près » ici ?",
+        "answer": "« près » signifie « à une petite distance » ou « proche ».",
+        "target_ids": [
+          "fr-rank-0396"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "D’après le texte, la bibliothèque est _____ de leur école : « près » ou « loin » ?",
+        "answer": "« près ».",
+        "target_ids": [
+          "fr-rank-0396"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u07-p02",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « La classe attend devant le gymnase. », que signifie « devant » ici ?",
+        "answer": "« devant » indique une position en face ou à l’avant du gymnase.",
+        "target_ids": [
+          "fr-rank-0342"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "D’après le texte, la classe attend _____ le gymnase : « devant » ou « derrière » ?",
+        "answer": "« devant ».",
+        "target_ids": [
+          "fr-rank-0342"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u07-p03",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Un banc se trouve entre deux arbres. », que signifie « entre » ici ?",
+        "answer": "« entre » signifie « au milieu de deux éléments ».",
+        "target_ids": [
+          "fr-rank-0215"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Complète : « Un banc se trouve _____ deux arbres. » — « entre » ou « devant » ?",
+        "answer": "« entre ».",
+        "target_ids": [
+          "fr-rank-0215"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u07-p04",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Au premier carrefour, ils tournent à gauche. », que signifie « gauche » ici ?",
+        "answer": "« à gauche » indique la direction du côté gauche.",
+        "target_ids": [
+          "fr-rank-0721"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "D’après le texte, au premier carrefour ils tournent à _____ : « gauche » ou « droite » ?",
+        "answer": "« gauche ».",
+        "target_ids": [
+          "fr-rank-0721"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u07-p06",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Une balle est sous le banc. », que signifie « sous » ici ?",
+        "answer": "« sous » signifie « plus bas que » ou « en dessous de ».",
+        "target_ids": [
+          "fr-rank-0267"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "D’après le texte, une balle est _____ le banc : « sous » ou « devant » ?",
+        "answer": "« sous ».",
+        "target_ids": [
+          "fr-rank-0267"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u08-p06",
+      "question_id": "q7",
+      "answer_id": "a7",
+      "reason": "semantic_assessment_duplication_after_first_human_refinement",
+      "before": {
+        "type": "vocabulary_in_context",
+        "prompt": "Dans « Après du repos, elle peut se sentir mieux. », que signifie « mieux » ici ?",
+        "answer": "« mieux » signifie que l’état s’est amélioré.",
+        "target_ids": [
+          "fr-rank-0148"
+        ]
+      },
+      "after": {
+        "type": "grammar_choice",
+        "prompt": "Après du repos, Camille se sent-elle « mieux » ou « plus malade » ?",
+        "answer": "« mieux ».",
+        "target_ids": [
+          "fr-rank-0148"
+        ]
+      }
+    }
+  ],
+  "validation": {
+    "23_function_items_rechecked": "PASS",
+    "120_passages_exact_duplicate_prompt_scan": "PASS",
+    "60_records_each_level": "PASS",
+    "sequence_continuity": "PASS",
+    "ten_questions_ten_answers": "PASS",
+    "question_answer_linkage": "PASS",
+    "target_ids_preserved": "PASS",
+    "defined_metalinguistic_defect_class_residue": 0,
+    "function_items_now_operational_use_choice": "PASS"
+  },
+  "release_effect": "French remains REOPEN_REQUIRED; final A1 hash changed again and all recertification gates must bind the v2 final hash.",
+  "next_gate": "Update generation policy to prohibit formal metalinguistic burden at A1/A2, then rerun deterministic evidence validation and continue 100% French semantic educator recertification."
+}
