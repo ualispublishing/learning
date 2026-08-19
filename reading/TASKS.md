@@ -343,3 +343,10 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 - [ ] Theme: **technology, ethics, and future uncertainty**; genres: advanced analysis, scenario argument, critique.
 - [ ] Select source-backed rank-1001+ targets from `1799` fresh continuation terms.
 - [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.
+
+
+#### French C2 Unit 10 — IMMEDIATE NEXT
+- [x] Unit 09 sealed on `c37cd57fd46ea1db5de234521e039d4cdcc349bb`.
+- [ ] Theme: **C2 capstone**; genres: multi-source-style synthesis, complex paired texts, final checkpoint.
+- [ ] Select source-backed rank-1001+ targets from `1774` fresh continuation terms.
+- [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.

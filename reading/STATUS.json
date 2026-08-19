@@ -6,7 +6,7 @@
   "paused_languages": [
     "Urdu"
   ],
-  "phase": "Arabic sealed. French A1-C1 integrity sealed. French C2 Units01-08 sealed; Unit09 is next. Final French multi-pass audit remains deferred until C2 completion.",
+  "phase": "Arabic sealed. French A1-C1 integrity sealed. French C2 Units01-09 sealed; Unit10 is next. Final French multi-pass audit remains deferred until C2 completion.",
   "target_passages": 1080,
   "target_is_quota": false,
   "approved_passages": 360,
@@ -49,17 +49,17 @@
   },
   "french": {
     "state": "ACTIVE_GENERATION",
-    "canonical_passages": 348,
+    "canonical_passages": 354,
     "levels": {
       "a1": 60,
       "a2": 60,
       "b1": 60,
       "b2": 60,
       "c1": 60,
-      "c2": 48
+      "c2": 54
     },
-    "questions": 3480,
-    "answers": 3480,
+    "questions": 3540,
+    "answers": 3540,
     "latest_audit_commit": "a784e4594b1bb487c51c882cf8b704c99331cd96",
     "generation_invariants": {
       "ten_questions_and_answers_per_passage": true,
@@ -385,7 +385,7 @@
         60
       ]
     },
-    "next_target": "Generate French C2 Unit 09 (technology, ethics, and future uncertainty) from exact sealed C2 blob 8760174e524ab2da8652ad7ecb9130787f572a13; retain 700-1200 words, advanced discourse, calibrated lexical default, 10 Q/A, and zero-new P06.",
+    "next_target": "Generate French C2 Unit 10 (C2 capstone) from exact sealed C2 blob c37cd57fd46ea1db5de234521e039d4cdcc349bb; retain 700-1200 words, advanced discourse, calibrated lexical default, 10 Q/A, and zero-new P06.",
     "c1_generation": {
       "status": "GENERATED_INTEGRITY_PASS_NOT_FINAL_AUDITED",
       "passages": 60,
@@ -499,9 +499,9 @@
     },
     "c2_generation": {
       "status": "GENERATION_IN_PROGRESS",
-      "passages": 48,
-      "questions": 480,
-      "answers": 480,
+      "passages": 54,
+      "questions": 540,
+      "answers": 540,
       "completed_units": [
         1,
         2,
@@ -510,23 +510,24 @@
         5,
         6,
         7,
-        8
+        8,
+        9
       ],
-      "last_sequence": 48,
-      "canonical_blob": "8760174e524ab2da8652ad7ecb9130787f572a13",
+      "last_sequence": 54,
+      "canonical_blob": "c37cd57fd46ea1db5de234521e039d4cdcc349bb",
       "accepted_default_new_targets_per_standard_passage": 5,
       "accepted_default_is_hard_quota": false,
       "source_policy": "validated french_top3000.csv continuation rank > 1000",
-      "last_frontier_lock": "reading/audit/french_c2_unit08_frontier_lock.json",
-      "next_unit": 9,
-      "next_theme": "technology, ethics, and future uncertainty",
+      "last_frontier_lock": "reading/audit/french_c2_unit09_frontier_lock.json",
+      "next_unit": 10,
+      "next_theme": "C2 capstone",
       "next_genres": [
-        "advanced analysis",
-        "scenario argument",
-        "critique"
+        "multi-source-style synthesis",
+        "complex paired texts",
+        "final checkpoint"
       ],
-      "next_target_probe": "reading/audit/french_c2_unit09_target_probe.json",
-      "next_fresh_source_terms": 1799
+      "next_target_probe": "reading/audit/french_c2_unit10_target_probe.json",
+      "next_fresh_source_terms": 1774
     }
   },
   "urdu": {

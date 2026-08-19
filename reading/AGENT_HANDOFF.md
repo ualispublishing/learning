@@ -335,3 +335,10 @@ Resolve C2 standards and exact matrix node from canonical policy, then calibrate
 - Next canonical matrix theme: **technology, ethics, and future uncertainty**; genres: advanced analysis, scenario argument, critique.
 - Fresh rank-1001+ continuation terms: 1799.
 - Do not weaken C2 word-band, source, exposure, review, linkage, reasoning, or zero-new checkpoint guards.
+
+
+### French C2 Unit 10 frontier
+- Unit 09 sealed; canonical C2 blob `c37cd57fd46ea1db5de234521e039d4cdcc349bb`.
+- Next canonical matrix theme: **C2 capstone**; genres: multi-source-style synthesis, complex paired texts, final checkpoint.
+- Fresh rank-1001+ continuation terms: 1774.
+- Do not weaken C2 word-band, source, exposure, review, linkage, reasoning, or zero-new checkpoint guards.
