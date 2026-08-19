@@ -6,15 +6,15 @@
     "reading/french/a2/passages.jsonl"
   ],
   "canonical_sha256": {
-    "A1": "5f187a8bdce83812265b6c79bf505130f084f13f92bfc02b9d57df64efbdda42",
-    "A2": "3c6dc3687fbacbd846c087d8041f2f0f58c0116b1dbf7008a64ad32611c4802a"
+    "A1": "48db8f58dc105bcd880302d31b0f7fcae439e3018a35b0adb62b690d42b85562",
+    "A2": "8fcd71903e6a495a2abaac8d436232b4b7ee00ae5ac0bce4d273aa4a134b3c15"
   },
   "status": "CANDIDATES_REQUIRE_SEMANTIC_ADJUDICATION",
   "candidate_counts": {
-    "A1": 63,
-    "A2": 25
+    "A1": 45,
+    "A2": 23
   },
-  "candidate_total": 88,
+  "candidate_total": 68,
   "method": "High-recall candidate scan only; keyword/type hits are not automatically defects. Every candidate requires semantic CEFR/pedagogical adjudication before repair.",
   "candidates": [
     {
@@ -42,61 +42,6 @@
       "context": "Avant de partir acheter du pain, sa mère demande : « Tu veux venir avec moi ?",
       "candidate_reasons": [
         "question_type:grammar_choice"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u01-p02",
-      "sequence": 2,
-      "unit": 1,
-      "title": "Le matin de l’école",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Dans « Quand le feu devient vert, ils traversent », quel rôle joue « quand » ?",
-      "answer": "Il introduit le moment où l’action de traverser se produit.",
-      "target_ids": [
-        "fr-rank-0061"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0061",
-          "form": "quand",
-          "lemma": "quand",
-          "role": "new"
-        }
-      ],
-      "context": "Quand elle regarde l’heure, il est encore tôt. Quand sa mère lui dit qu’il est presque huit heures, Camille se lève.",
-      "candidate_reasons": [
-        "pattern:quel(?:le)? (?:r[oô]le|fonction) joue",
-        "question_type:grammar_function"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u01-p03",
-      "sequence": 3,
-      "unit": 1,
-      "title": "Après les devoirs",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Dans « Sami s’assoit avec elle », que marque « avec » ?",
-      "answer": "L’accompagnement : Sami et Camille sont ensemble.",
-      "target_ids": [
-        "fr-rank-0035"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0035",
-          "form": "avec",
-          "lemma": "avec",
-          "role": "new"
-        }
-      ],
-      "context": "Après les cours, Sami passe chez Camille avec un livre. Sami s’assoit avec elle à la table.",
-      "candidate_reasons": [
-        "question_type:grammar_function"
       ]
     },
     {
@@ -182,33 +127,6 @@
     },
     {
       "level": "A1",
-      "passage_id": "fr-a1-u01-p06",
-      "sequence": 6,
-      "unit": 1,
-      "title": "Le quartier de Camille",
-      "question_id": "q10",
-      "answer_id": "a10",
-      "question_type": "grammar_function",
-      "prompt": "Dans « Quand elle rencontre Sami », que marque « quand » ?",
-      "answer": "Le moment où elle rencontre Sami.",
-      "target_ids": [
-        "fr-rank-0061"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0061",
-          "form": "quand",
-          "lemma": null,
-          "role": "review"
-        }
-      ],
-      "context": "Quand elle rencontre Sami, ils marchent ensemble.",
-      "candidate_reasons": [
-        "question_type:grammar_function"
-      ]
-    },
-    {
-      "level": "A1",
       "passage_id": "fr-a1-u02-p01",
       "sequence": 7,
       "unit": 2,
@@ -242,9 +160,9 @@
       "title": "Une matinée au centre sportif",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quelle est la catégorie de « faire » dans « je vais faire un cours » ?",
-      "answer": "Un verbe.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « tu vas faire un cours » ou « tu vas fais un cours » ?",
+      "answer": "« tu vas faire un cours ».",
       "target_ids": [
         "fr-rank-0014"
       ],
@@ -258,7 +176,7 @@
       ],
       "context": "Sa mère lui demande : « Qu’est-ce que tu vas faire là-bas ? » Camille répond : « Je vais faire un cours de danse, puis je veux aller à la piscine.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -290,43 +208,15 @@
     },
     {
       "level": "A1",
-      "passage_id": "fr-a1-u02-p03",
-      "sequence": 9,
-      "unit": 2,
-      "title": "Avant le déjeuner",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Quel rôle joue « si » au début d’une phrase comme « Si je ne sais pas, je demande » ?",
-      "answer": "Il introduit une condition.",
-      "target_ids": [
-        "fr-rank-0032"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0032",
-          "form": "si",
-          "lemma": "si",
-          "role": "new"
-        }
-      ],
-      "context": "Sa mère lui explique ce qu’elle doit faire : elle doit mettre quatre assiettes, quatre verres et les serviettes. Si elle ne trouve pas quelque chose, elle doit demander.",
-      "candidate_reasons": [
-        "pattern:quel(?:le)? (?:r[oô]le|fonction) joue",
-        "question_type:grammar_function"
-      ]
-    },
-    {
-      "level": "A1",
       "passage_id": "fr-a1-u02-p04",
       "sequence": 10,
       "unit": 2,
       "title": "Mon carnet est sur la table",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « mon » dans « mon carnet » ?",
-      "answer": "Un déterminant possessif.",
+      "question_type": "grammar_choice",
+      "prompt": "Pour parler de son carnet, Camille dit : « mon carnet » ou « ma carnet » ?",
+      "answer": "« mon carnet ».",
       "target_ids": [
         "fr-rank-0038"
       ],
@@ -340,35 +230,7 @@
       ],
       "context": "Elle dit : « Mon carnet était ici hier. Puis son frère entre et montre la table du salon.",
       "candidate_reasons": [
-        "metalinguistic_terminology",
-        "question_type:grammar_category"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u02-p05",
-      "sequence": 11,
-      "unit": 2,
-      "title": "L’affiche du club",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Dans « plus de place », que fait l’expression « plus de » ?",
-      "answer": "Elle indique une quantité plus grande.",
-      "target_ids": [
-        "fr-rank-0037"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0037",
-          "form": "plus",
-          "lemma": "plus",
-          "role": "new"
-        }
-      ],
-      "context": "Elle écrit le titre, mais elle veut plus de place pour dessiner. Elle déplace le titre vers le haut et gagne un peu plus d’espace.",
-      "candidate_reasons": [
-        "question_type:grammar_function"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -406,9 +268,9 @@
       "title": "Un projet sur le quartier",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « ce » dans « ce projet » ?",
-      "answer": "Un déterminant démonstratif.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « ce projet » ou « cet projet » ?",
+      "answer": "« ce projet ».",
       "target_ids": [
         "fr-rank-0019"
       ],
@@ -422,36 +284,7 @@
       ],
       "context": "Mardi, la classe de Camille commence un petit projet sur le quartier. Le professeur montre une grande feuille et dit : « Ce projet est pour toute la classe.",
       "candidate_reasons": [
-        "metalinguistic_terminology",
-        "question_type:grammar_category"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u03-p02",
-      "sequence": 14,
-      "unit": 3,
-      "title": "Une personne qui connaît la bibliothèque",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Quel rôle joue « qui » après un nom comme « une personne qui répond » ?",
-      "answer": "Il relie le nom à une information sur cette personne.",
-      "target_ids": [
-        "fr-rank-0024"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0024",
-          "form": "qui",
-          "lemma": "qui",
-          "role": "new"
-        }
-      ],
-      "context": "Le lendemain, Camille et Sami cherchent une personne qui peut répondre à leurs questions sur la bibliothèque. Ils voient une employée qui range des livres près de l’entrée.",
-      "candidate_reasons": [
-        "pattern:quel(?:le)? (?:r[oô]le|fonction) joue",
-        "question_type:grammar_function"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -462,9 +295,9 @@
       "title": "Dans la salle de travail",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « nous » dans « nous avons » ?",
-      "answer": "Un pronom personnel sujet.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « nous avons des informations » ou « nous a des informations » ?",
+      "answer": "« nous avons des informations ».",
       "target_ids": [
         "fr-rank-0027"
       ],
@@ -478,8 +311,7 @@
       ],
       "context": "Camille pose les notes au centre de la table et dit : « Nous avons beaucoup d’informations. Maintenant, nous devons choisir les plus importantes.",
       "candidate_reasons": [
-        "metalinguistic_terminology",
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -490,9 +322,9 @@
       "title": "Laisse-moi essayer",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de pronom est « moi » ici ?",
-      "answer": "Un pronom personnel tonique.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « cette photo est pour moi » ou « cette photo est pour je » ?",
+      "answer": "« cette photo est pour moi ».",
       "target_ids": [
         "fr-rank-0041"
       ],
@@ -506,35 +338,7 @@
       ],
       "context": "» Camille répond : « Oui, mais laisse-moi essayer d’abord. Puis il montre une image et demande : « Cette photo est pour moi ou pour la page ?",
       "candidate_reasons": [
-        "metalinguistic_terminology",
-        "question_type:grammar_category"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u03-p04",
-      "sequence": 16,
-      "unit": 3,
-      "title": "Laisse-moi essayer",
-      "question_id": "q8",
-      "answer_id": "a8",
-      "question_type": "contrast",
-      "prompt": "Si Camille parle d’elle-même après une préposition, lequel convient : « moi » ou « nous » ?",
-      "answer": "moi",
-      "target_ids": [
-        "fr-rank-0041"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0041",
-          "form": "moi",
-          "lemma": "moi",
-          "role": "new"
-        }
-      ],
-      "context": "» Camille répond : « Oui, mais laisse-moi essayer d’abord. Puis il montre une image et demande : « Cette photo est pour moi ou pour la page ?",
-      "candidate_reasons": [
-        "metalinguistic_terminology"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -545,9 +349,9 @@
       "title": "Oui, nous sommes prêts",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « ils » dans « ils montrent leurs images » ?",
-      "answer": "Un pronom personnel sujet.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « ils montrent leurs images » ou « ils montre leurs images » ?",
+      "answer": "« ils montrent leurs images ».",
       "target_ids": [
         "fr-rank-0045"
       ],
@@ -561,8 +365,7 @@
       ],
       "context": "Le professeur demande s’ils sont prêts. Ils parlent lentement et regardent les autres élèves.",
       "candidate_reasons": [
-        "metalinguistic_terminology",
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -590,144 +393,6 @@
       "context": "Camille a compris que nous pouvons améliorer un texte en le relisant calmement.",
       "candidate_reasons": [
         "question_type:grammar_choice"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u04-p01",
-      "sequence": 19,
-      "unit": 4,
-      "title": "Un autre cahier",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Quel rôle joue « très » devant un adjectif ?",
-      "answer": "Il augmente son intensité.",
-      "target_ids": [
-        "fr-rank-0074"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0074",
-          "form": "très",
-          "lemma": "très",
-          "role": "new"
-        }
-      ],
-      "context": "Le premier cahier est très grand et ne rentre pas bien dans son sac. Celui-ci est très léger.",
-      "candidate_reasons": [
-        "metalinguistic_terminology",
-        "pattern:quel(?:le)? (?:r[oô]le|fonction) joue",
-        "question_type:grammar_function"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u04-p02",
-      "sequence": 20,
-      "unit": 4,
-      "title": "Assez de temps",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Quel rôle joue « toujours » dans la phrase ?",
-      "answer": "Il indique une habitude répétée.",
-      "target_ids": [
-        "fr-rank-0094"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0094",
-          "form": "toujours",
-          "lemma": "toujours",
-          "role": "new"
-        }
-      ],
-      "context": "Elle travaille toujours à la table du salon quand elle doit se concentrer. Camille explique qu’elle commence toujours par le travail le plus court, puis qu’elle regarde combien de temps il lui reste pour les autres tâches.",
-      "candidate_reasons": [
-        "pattern:quel(?:le)? (?:r[oô]le|fonction) joue",
-        "question_type:grammar_function"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u04-p03",
-      "sequence": 21,
-      "unit": 4,
-      "title": "Encore cinq minutes",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Dans « encore cinq minutes », que montre « encore » ?",
-      "answer": "Qu’il reste une durée supplémentaire.",
-      "target_ids": [
-        "fr-rank-0098"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0098",
-          "form": "encore",
-          "lemma": "encore",
-          "role": "new"
-        }
-      ],
-      "context": "La bibliothèque n’est pas encore ouverte. Dans la salle du club, il manque encore une chaise.",
-      "candidate_reasons": [
-        "question_type:grammar_function"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u04-p04",
-      "sequence": 22,
-      "unit": 4,
-      "title": "Avant de fermer le sac",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Dans « avant de partir », quelle relation exprime « avant » ?",
-      "answer": "Une action se produit plus tôt qu’une autre.",
-      "target_ids": [
-        "fr-rank-0126"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0126",
-          "form": "avant",
-          "lemma": "avant",
-          "role": "new"
-        }
-      ],
-      "context": "Avant de dormir, elle met son cahier, son livre et sa trousse dans le sac. Avant le cours de sport, elle ouvre son sac et comprend le problème.",
-      "candidate_reasons": [
-        "question_type:grammar_function"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u04-p05",
-      "sequence": 23,
-      "unit": 4,
-      "title": "Après le petit-déjeuner",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Quelle relation temporelle exprime « après » ?",
-      "answer": "Une action arrive plus tard qu’une autre.",
-      "target_ids": [
-        "fr-rank-0133"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0133",
-          "form": "après",
-          "lemma": "après",
-          "role": "new"
-        }
-      ],
-      "context": "Après le petit-déjeuner, elle aide sa mère à ranger la cuisine. Après vingt minutes, elle entend son frère appeler : il est prêt.",
-      "candidate_reasons": [
-        "question_type:grammar_function"
       ]
     },
     {
@@ -772,9 +437,9 @@
       "title": "Une heure avant le cours",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « matin » dans « lundi matin » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « le matin » ou « la matin » ?",
+      "answer": "« le matin ».",
       "target_ids": [
         "fr-rank-0307"
       ],
@@ -788,7 +453,7 @@
       ],
       "context": "Lundi matin, Camille arrive à l’école une heure avant le début du cours. Le matin, la salle est encore calme et ils peuvent travailler sans bruit.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -799,9 +464,9 @@
       "title": "Le calendrier de la semaine",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « soir » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « le soir » ou « la soir » ?",
+      "answer": "« le soir ».",
       "target_ids": [
         "fr-rank-0161"
       ],
@@ -815,7 +480,7 @@
       ],
       "context": "Le lundi soir, elle doit terminer un exercice. Le mardi soir, elle va à la bibliothèque avec Sami.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -826,9 +491,9 @@
       "title": "Cette fois au marché",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « chose » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « une autre chose » ou « un autre chose » ?",
+      "answer": "« une autre chose ».",
       "target_ids": [
         "fr-rank-0054"
       ],
@@ -842,7 +507,7 @@
       ],
       "context": "Elle hésite et demande à sa mère si elles peuvent essayer une autre chose. Elle comprend qu’une petite chose oubliée peut obliger à revenir plus tard.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -853,9 +518,9 @@
       "title": "Une place pour le vélo",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « place » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « une place » ou « un place » ?",
+      "answer": "« une place ».",
       "target_ids": [
         "fr-rank-0289"
       ],
@@ -869,7 +534,7 @@
       ],
       "context": "Devant l’entrée, elle cherche une place pour laisser son vélo. La première place est prise, mais il y en a une autre près d’un arbre.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -880,9 +545,9 @@
       "title": "Dessiner la ville",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « enfant » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « chaque enfant reçoit une feuille » ou « chaque enfants reçoit une feuille » ?",
+      "answer": "« chaque enfant reçoit une feuille ».",
       "target_ids": [
         "fr-rank-0149"
       ],
@@ -896,7 +561,7 @@
       ],
       "context": "Mercredi après-midi, Camille accompagne son petit frère à une activité pour enfants dans le centre-ville. Chaque enfant reçoit une feuille et des crayons.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -907,9 +572,9 @@
       "title": "Une semaine bien organisée",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « question » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « une question » ou « un question » ?",
+      "answer": "« une question ».",
       "target_ids": [
         "fr-rank-0198"
       ],
@@ -923,281 +588,7 @@
       ],
       "context": "Une fois au marché ou à la bibliothèque, elle garde sa liste et pose une question si quelque chose n’est pas clair.",
       "candidate_reasons": [
-        "question_type:grammar_category"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u06-p01",
-      "sequence": 31,
-      "unit": 6,
-      "title": "Beaucoup ou peu ?",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Dans « peu de pain », que montre « peu » ?",
-      "answer": "Une petite quantité de pain.",
-      "target_ids": [
-        "fr-rank-0092"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0092",
-          "form": "peu",
-          "lemma": "peu",
-          "role": "new"
-        }
-      ],
-      "context": "Elle met peu de pain sur son plateau, puis ajoute un fruit et un verre d’eau. Camille répond qu’elle préfère manger peu avant de travailler.",
-      "candidate_reasons": [
-        "question_type:grammar_function"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u06-p02",
-      "sequence": 32,
-      "unit": 6,
-      "title": "Déjà presque fini",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Quel rôle joue « trop » dans « trop de travail » ?",
-      "answer": "Il indique une quantité excessive.",
-      "target_ids": [
-        "fr-rank-0127"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0127",
-          "form": "trop",
-          "lemma": "trop",
-          "role": "new"
-        }
-      ],
-      "context": "Elle pense d’abord qu’il y en a trop pour une seule soirée. Elle comprend que le mot « trop » dépend parfois du temps disponible et de la taille des tâches.",
-      "candidate_reasons": [
-        "pattern:quel(?:le)? (?:r[oô]le|fonction) joue",
-        "question_type:grammar_function"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u06-p03",
-      "sequence": 33,
-      "unit": 6,
-      "title": "Le même livre",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Quel rôle joue « même » devant « livre » ?",
-      "answer": "Il indique qu’il s’agit d’un livre identique.",
-      "target_ids": [
-        "fr-rank-0081"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0081",
-          "form": "même",
-          "lemma": "même",
-          "role": "new"
-        }
-      ],
-      "context": "Cette fois, ils choisissent même le même titre sans le savoir. Sami regarde les deux exemplaires : c’est bien le même livre, mais les couvertures ne sont pas de la même couleur.",
-      "candidate_reasons": [
-        "pattern:quel(?:le)? (?:r[oô]le|fonction) joue",
-        "question_type:grammar_function"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u06-p04",
-      "sequence": 34,
-      "unit": 6,
-      "title": "Souvent, mais jamais trop fort",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Dans « ne vient jamais », quels mots forment la négation ?",
-      "answer": "« ne » et « jamais ».",
-      "target_ids": [
-        "fr-rank-0075"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0075",
-          "form": "jamais",
-          "lemma": "jamais",
-          "role": "new"
-        }
-      ],
-      "context": "Elle ne parle jamais fort dans la salle de lecture. Elle explique qu’elle ne vient jamais quand elle a un cours de sport tardif.",
-      "candidate_reasons": [
-        "question_type:grammar_function"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u06-p05",
-      "sequence": 35,
-      "unit": 6,
-      "title": "Bientôt, les portes vont ouvrir",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Quel rôle joue « maintenant » dans la phrase ?",
-      "answer": "Il situe l’action au moment présent.",
-      "target_ids": [
-        "fr-rank-0086"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0086",
-          "form": "maintenant",
-          "lemma": "maintenant",
-          "role": "new"
-        }
-      ],
-      "context": "Camille et son petit frère sont maintenant dans le centre de la ville. « Oui, maintenant nous avons le temps de boire un peu d’eau, et bientôt les portes vont ouvrir », répond Camille.",
-      "candidate_reasons": [
-        "pattern:quel(?:le)? (?:r[oô]le|fonction) joue",
-        "question_type:grammar_function"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u06-p06",
-      "sequence": 36,
-      "unit": 6,
-      "title": "Quantité, fréquence et temps",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Dans « ne parle jamais », quel sens porte « jamais » ?",
-      "answer": "À aucun moment.",
-      "target_ids": [
-        "fr-rank-0075"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0075",
-          "form": "jamais",
-          "lemma": null,
-          "role": "review"
-        }
-      ],
-      "context": "Camille y va souvent, mais elle ne parle jamais fort.",
-      "candidate_reasons": [
-        "question_type:grammar_function"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u07-p01",
-      "sequence": 37,
-      "unit": 7,
-      "title": "Près ou loin ?",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Dans « près de l’école », quel rôle joue « près de » ?",
-      "answer": "Il indique une proximité de lieu.",
-      "target_ids": [
-        "fr-rank-0396"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0396",
-          "form": "près",
-          "lemma": "près",
-          "role": "new"
-        }
-      ],
-      "context": "Après l’école, Camille regarde un petit plan du quartier avec Sami. La bibliothèque est près de leur école : ils peuvent y aller en cinq minutes.",
-      "candidate_reasons": [
-        "pattern:quel(?:le)? (?:r[oô]le|fonction) joue",
-        "question_type:grammar_function"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u07-p02",
-      "sequence": 38,
-      "unit": 7,
-      "title": "Devant le gymnase",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Dans « devant le gymnase », que précise « devant » ?",
-      "answer": "La position du groupe.",
-      "target_ids": [
-        "fr-rank-0342"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0342",
-          "form": "devant",
-          "lemma": "devant",
-          "role": "new"
-        }
-      ],
-      "context": "Le lendemain, la classe attend devant le gymnase. La porte est déjà ouverte, mais le professeur demande aux élèves de rester devant le bâtiment quelques minutes.",
-      "candidate_reasons": [
-        "question_type:grammar_function"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u07-p03",
-      "sequence": 39,
-      "unit": 7,
-      "title": "Entre les arbres",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Quelle relation exprime « entre » ?",
-      "answer": "Une position au milieu de deux éléments.",
-      "target_ids": [
-        "fr-rank-0215"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0215",
-          "form": "entre",
-          "lemma": "entre",
-          "role": "new"
-        }
-      ],
-      "context": "Ils voient deux grands arbres avec un banc entre eux. Camille trouve aussi une feuille entre deux pierres et la met dans une poubelle.",
-      "candidate_reasons": [
-        "question_type:grammar_function"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u07-p04",
-      "sequence": 40,
-      "unit": 7,
-      "title": "À gauche, puis à droite",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Dans « à gauche », que précise l’expression ?",
-      "answer": "La direction du déplacement.",
-      "target_ids": [
-        "fr-rank-0721"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0721",
-          "form": "gauche",
-          "lemma": "gauche",
-          "role": "new"
-        }
-      ],
-      "context": "Au premier carrefour, ils tournent à gauche. Camille répète : « gauche, puis droite ».",
-      "candidate_reasons": [
-        "question_type:grammar_function"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1208,9 +599,9 @@
       "title": "Le chemin vers la grande rue",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « rue » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « une rue » ou « un rue » ?",
+      "answer": "« une rue ».",
       "target_ids": [
         "fr-rank-0526"
       ],
@@ -1224,34 +615,7 @@
       ],
       "context": "Elle doit rejoindre sa mère bientôt dans une grande rue commerçante. Le premier chemin suit une rue très animée.",
       "candidate_reasons": [
-        "question_type:grammar_category"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u07-p06",
-      "sequence": 42,
-      "unit": 7,
-      "title": "Décrire un trajet",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Dans « sous le banc », que précise « sous » ?",
-      "answer": "La position de la balle par rapport au banc.",
-      "target_ids": [
-        "fr-rank-0267"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0267",
-          "form": "sous",
-          "lemma": null,
-          "role": "review"
-        }
-      ],
-      "context": "Au parc, un banc peut être entre deux arbres et une balle sous le banc.",
-      "candidate_reasons": [
-        "question_type:grammar_function"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1262,9 +626,9 @@
       "title": "Un peu mal à la tête",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « main » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « une main » ou « un main » ?",
+      "answer": "« une main ».",
       "target_ids": [
         "fr-rank-0195"
       ],
@@ -1278,7 +642,7 @@
       ],
       "context": "Dans la cuisine, elle pose une main sur son front et boit un verre d’eau. Elle lave ensuite chaque main avant de préparer une petite collation.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1289,9 +653,9 @@
       "title": "Écouter son corps",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « pied » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « son pied droit » ou « sa pied droit » ?",
+      "answer": "« son pied droit ».",
       "target_ids": [
         "fr-rank-0424"
       ],
@@ -1305,7 +669,34 @@
       ],
       "context": "Après plusieurs tours, son pied droit commence à être fatigué. Elle s’arrête et regarde son pied : rien ne semble grave.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p03",
+      "sequence": 45,
+      "unit": 8,
+      "title": "Manger et boire",
+      "question_id": "q6",
+      "answer_id": "a6",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « il faut boire de l’eau » ou « il faut boit de l’eau » ?",
+      "answer": "« il faut boire de l’eau ».",
+      "target_ids": [
+        "fr-rank-0295"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0295",
+          "form": "boire",
+          "lemma": "boire",
+          "role": "new"
+        }
+      ],
+      "context": "Camille veut manger son sandwich avant de boire son jus. Sami préfère boire d’abord, puis manger.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1316,9 +707,9 @@
       "title": "Manger et boire",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « manger » ?",
-      "answer": "Un verbe.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « elle veut manger » ou « elle veut mange » ?",
+      "answer": "« elle veut manger ».",
       "target_ids": [
         "fr-rank-0213"
       ],
@@ -1332,7 +723,34 @@
       ],
       "context": "Camille veut manger son sandwich avant de boire son jus. Sami préfère boire d’abord, puis manger.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u08-p04",
+      "sequence": 46,
+      "unit": 8,
+      "title": "Prête à dormir",
+      "question_id": "q6",
+      "answer_id": "a6",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « je vais dormir » ou « je vais dors » ?",
+      "answer": "« je vais dormir ».",
+      "target_ids": [
+        "fr-rank-0296"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0296",
+          "form": "dormir",
+          "lemma": "dormir",
+          "role": "new"
+        }
+      ],
+      "context": "Le soir, Camille prépare sa chambre avant de dormir. Elle veut dormir assez longtemps parce qu’elle a école le lendemain.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1343,9 +761,9 @@
       "title": "Prête à dormir",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « sentir » ?",
-      "answer": "Un verbe.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « elle commence à sentir la fatigue » ou « elle commence à sent la fatigue » ?",
+      "answer": "« elle commence à sentir la fatigue ».",
       "target_ids": [
         "fr-rank-0166"
       ],
@@ -1359,7 +777,7 @@
       ],
       "context": "Elle commence à sentir la fatigue : ses yeux sont lourds et elle bâille. Camille sait qu’elle peut sentir la fatigue avant d’être complètement épuisée.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1370,9 +788,9 @@
       "title": "Malade, puis mieux",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « malade » dans « Camille est malade » ?",
-      "answer": "Un adjectif.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « Camille est malade » ou « Camille est malades » ?",
+      "answer": "« Camille est malade ».",
       "target_ids": [
         "fr-rank-0491"
       ],
@@ -1386,35 +804,7 @@
       ],
       "context": "Un samedi matin, Camille se sent malade et reste à la maison.",
       "candidate_reasons": [
-        "metalinguistic_terminology",
-        "question_type:grammar_category"
-      ]
-    },
-    {
-      "level": "A1",
-      "passage_id": "fr-a1-u08-p06",
-      "sequence": 48,
-      "unit": 8,
-      "title": "Parler simplement de sa santé",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Dans « se sentir mieux », que décrit « mieux » ?",
-      "answer": "Une amélioration de l’état.",
-      "target_ids": [
-        "fr-rank-0148"
-      ],
-      "target_forms": [
-        {
-          "id": "fr-rank-0148",
-          "form": "mieux",
-          "lemma": null,
-          "role": "review"
-        }
-      ],
-      "context": "Après du repos, elle peut se sentir mieux.",
-      "candidate_reasons": [
-        "question_type:grammar_function"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1425,9 +815,9 @@
       "title": "Un matin en famille",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « famille » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « sa famille » ou « son famille » ?",
+      "answer": "« sa famille ».",
       "target_ids": [
         "fr-rank-0192"
       ],
@@ -1441,7 +831,34 @@
       ],
       "context": "Samedi matin, Camille prend le petit-déjeuner avec sa famille. La famille parle ensuite du programme de la journée.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p02",
+      "sequence": 50,
+      "unit": 9,
+      "title": "Un ami après la promenade",
+      "question_id": "q6",
+      "answer_id": "a6",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « Sami est un ami de Camille » ou « Sami est une ami de Camille » ?",
+      "answer": "« Sami est un ami de Camille ».",
+      "target_ids": [
+        "fr-rank-0134"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0134",
+          "form": "ami",
+          "lemma": "ami",
+          "role": "new"
+        }
+      ],
+      "context": "Dimanche, la mère de Camille attend un ami de la famille pour le déjeuner. L’ami arrive après une longue promenade et dit que son pied est un peu fatigué.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1452,9 +869,9 @@
       "title": "Un ami après la promenade",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « mère » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « sa mère » ou « son mère » ?",
+      "answer": "« sa mère ».",
       "target_ids": [
         "fr-rank-0210"
       ],
@@ -1468,7 +885,7 @@
       ],
       "context": "Dimanche, la mère de Camille attend un ami de la famille pour le déjeuner. La mère de Camille lui propose de s’asseoir et de laisser son corps se reposer quelques minutes.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1479,9 +896,9 @@
       "title": "Lire pendant la pause",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « école » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « à l’école » ou « au école » ?",
+      "answer": "« à l’école ».",
       "target_ids": [
         "fr-rank-0354"
       ],
@@ -1495,7 +912,7 @@
       ],
       "context": "Lundi, Camille apporte un livre à l’école pour un petit travail de lecture. À l’école, le professeur leur demande de noter deux idées importantes.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1506,9 +923,9 @@
       "title": "Une table près de la porte",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « table » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « une table » ou « un table » ?",
+      "answer": "« une table ».",
       "target_ids": [
         "fr-rank-0656"
       ],
@@ -1522,7 +939,34 @@
       ],
       "context": "Camille entre, choisit une table près de la fenêtre et pose son sac dessus. À la fin, elle ferme son cahier, se lève de la table et passe par la porte.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u09-p05",
+      "sequence": 53,
+      "unit": 9,
+      "title": "Reprendre un petit travail",
+      "question_id": "q6",
+      "answer_id": "a6",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « un travail court » ou « une travail courte » ?",
+      "answer": "« un travail court ».",
+      "target_ids": [
+        "fr-rank-0203"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0203",
+          "form": "travail",
+          "lemma": "travail",
+          "role": "new"
+        }
+      ],
+      "context": "Elle se sent mieux et veut terminer un petit travail. Le travail est court : elle doit relire une page et corriger trois réponses.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1533,9 +977,9 @@
       "title": "Reprendre un petit travail",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « eau » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « de l’eau » ou « du eau » ?",
+      "answer": "« de l’eau ».",
       "target_ids": [
         "fr-rank-0324"
       ],
@@ -1549,7 +993,7 @@
       ],
       "context": "Elle remplit une bouteille d’eau, choisit une table calme et ouvre son cahier. Camille boit un peu d’eau pendant qu’elle écrit.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1560,9 +1004,9 @@
       "title": "Personnes et objets du quotidien",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « livre » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte au pluriel : « des livres » ou « des livre » ?",
+      "answer": "« des livres ».",
       "target_ids": [
         "fr-rank-0418"
       ],
@@ -1576,7 +1020,7 @@
       ],
       "context": "À l’école, elle ouvre un livre pour faire un travail.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1587,9 +1031,9 @@
       "title": "Le ciel et le soleil",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « soleil » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « le soleil » ou « la soleil » ?",
+      "answer": "« le soleil ».",
       "target_ids": [
         "fr-rank-0795"
       ],
@@ -1603,7 +1047,7 @@
       ],
       "context": "Le ciel est gris au début, mais un peu de soleil reste visible entre les nuages. Après vingt minutes, le ciel devient plus clair et le soleil revient.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1614,9 +1058,9 @@
       "title": "Froid le matin, chaud à midi",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « chaud » dans « il fait chaud » ?",
-      "answer": "Un adjectif.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « il fait chaud » ou « il fait chaude » ?",
+      "answer": "« il fait chaud ».",
       "target_ids": [
         "fr-rank-0775"
       ],
@@ -1630,8 +1074,34 @@
       ],
       "context": "Le soleil est plus fort et il fait chaud. Camille comprend maintenant la différence : quand il fait froid, elle veut plus de chaleur ; quand il fait chaud, elle préfère un vêtement plus léger.",
       "candidate_reasons": [
-        "metalinguistic_terminology",
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p03",
+      "sequence": 57,
+      "unit": 10,
+      "title": "Choisir avant d’acheter",
+      "question_id": "q6",
+      "answer_id": "a6",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « le prix du livre » ou « la prix du livre » ?",
+      "answer": "« le prix du livre ».",
+      "target_ids": [
+        "fr-rank-0616"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0616",
+          "form": "prix",
+          "lemma": "prix",
+          "role": "new"
+        }
+      ],
+      "context": "Le premier a un prix bas, le deuxième est plus joli mais plus cher, et le troisième est trop difficile. Avant d’acheter, elle demande encore le prix au vendeur pour vérifier.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1642,9 +1112,9 @@
       "title": "Choisir avant d’acheter",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « acheter » ?",
-      "answer": "Un verbe.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « elle veut acheter un livre » ou « elle veut achète un livre » ?",
+      "answer": "« elle veut acheter un livre ».",
       "target_ids": [
         "fr-rank-0297"
       ],
@@ -1658,7 +1128,7 @@
       ],
       "context": "Après l’école, Camille veut acheter un livre simple pour un travail de classe. Avant d’acheter, elle demande encore le prix au vendeur pour vérifier.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1669,9 +1139,9 @@
       "title": "Préparer l’argent et un vêtement",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « vêtement » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « un vêtement » ou « une vêtement » ?",
+      "answer": "« un vêtement ».",
       "target_ids": [
         "fr-rank-0975"
       ],
@@ -1685,7 +1155,34 @@
       ],
       "context": "Elle prend aussi un vêtement léger parce que la salle de l’activité peut être froide. Avant de partir, Camille vérifie la table et la porte une dernière fois : son sac est prêt, l’argent est là et le vêtement est plié au-dessus des livres.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
+      ]
+    },
+    {
+      "level": "A1",
+      "passage_id": "fr-a1-u10-p05",
+      "sequence": 59,
+      "unit": 10,
+      "title": "Un sac et des chaussures",
+      "question_id": "q6",
+      "answer_id": "a6",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « une chaussure » ou « un chaussure » ?",
+      "answer": "« une chaussure ».",
+      "target_ids": [
+        "fr-rank-0956"
+      ],
+      "target_forms": [
+        {
+          "id": "fr-rank-0956",
+          "form": "chaussure",
+          "lemma": "chaussure",
+          "role": "new"
+        }
+      ],
+      "context": "Dans le magasin, elle regarde aussi une chaussure de sport, puis une autre paire. Elle n’a pas besoin de nouvelle chaussure aujourd’hui, donc elle n’en achète pas.",
+      "candidate_reasons": [
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1696,9 +1193,9 @@
       "title": "Un sac et des chaussures",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « sac » ?",
-      "answer": "Un nom.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la forme correcte : « un sac » ou « une sac » ?",
+      "answer": "« un sac ».",
       "target_ids": [
         "fr-rank-0532"
       ],
@@ -1712,7 +1209,7 @@
       ],
       "context": "Elle a besoin d’un sac plus solide pour porter ses livres. Son sac actuel est petit, alors elle choisit un grand sac avec deux poches.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1723,9 +1220,9 @@
       "title": "Ce que Camille sait faire en français",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « acheter » ?",
-      "answer": "Un verbe.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « elle veut acheter un livre » ou « elle veut achète un livre » ?",
+      "answer": "« elle veut acheter un livre ».",
       "target_ids": [
         "fr-rank-0297"
       ],
@@ -1739,25 +1236,7 @@
       ],
       "context": "Dans un magasin, elle peut demander un prix, décider d’acheter quelque chose et préparer l’argent nécessaire.",
       "candidate_reasons": [
-        "question_type:grammar_category"
-      ]
-    },
-    {
-      "level": "A2",
-      "passage_id": "fr-a2-u01-p01",
-      "sequence": 1,
-      "unit": 1,
-      "title": "Un bus en retard",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_function",
-      "prompt": "Dans « elle suit ce conseil parce qu’elle ne veut pas rester sans information », que présente « parce que » ?",
-      "answer": "La raison de son choix.",
-      "target_ids": [],
-      "target_forms": [],
-      "context": "",
-      "candidate_reasons": [
-        "question_type:grammar_function"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1768,9 +1247,9 @@
       "title": "Une erreur sur le formulaire",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « expliquer » ?",
-      "answer": "Un verbe.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « elle peut expliquer le problème » ou « elle peut explique le problème » ?",
+      "answer": "« elle peut expliquer le problème ».",
       "target_ids": [
         "fr-rank-0390"
       ],
@@ -1784,7 +1263,7 @@
       ],
       "context": "Camille retient surtout deux choses : une erreur peut être corrigée, et expliquer clairement ce qui s’est passé permet souvent d’éviter un malentendu inutile.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1795,9 +1274,9 @@
       "title": "Essayer une autre méthode",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « essayer » ?",
-      "answer": "Un verbe.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « elle décide d’essayer » ou « elle décide d’essaie » ?",
+      "answer": "« elle décide d’essayer ».",
       "target_ids": [
         "fr-rank-0122"
       ],
@@ -1811,7 +1290,7 @@
       ],
       "context": "Elle décide d’essayer une deuxième fois en vérifiant chaque étape. Camille comprend qu’« essayer » ne signifie pas répéter exactement la même action sans réfléchir : on peut aussi tenter une autre méthode.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1822,9 +1301,9 @@
       "title": "Un bruit dans le vélo",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « réparer » ?",
-      "answer": "Un verbe.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « il peut réparer le vélo » ou « il peut répare le vélo » ?",
+      "answer": "« il peut réparer le vélo ».",
       "target_ids": [
         "fr-rank-0929"
       ],
@@ -1838,7 +1317,7 @@
       ],
       "context": "Il peut réparer le vélo tout de suite, et le prix reste raisonnable.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1849,9 +1328,9 @@
       "title": "Un rendez-vous utile",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « découvrir » ?",
-      "answer": "Un verbe.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « elle vient de découvrir un service » ou « elle vient de découvre un service » ?",
+      "answer": "« elle vient de découvrir un service ».",
       "target_ids": [
         "fr-rank-0432"
       ],
@@ -1865,7 +1344,7 @@
       ],
       "context": "Après la visite, Camille retourne dans la salle qu’elle vient de découvrir. Ce rendez-vous avait un objectif très simple, mais il lui a permis de découvrir un service qu’elle ne connaissait pas.",
       "candidate_reasons": [
-        "question_type:grammar_category"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1876,9 +1355,9 @@
       "title": "Gérer un petit problème",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_category",
-      "prompt": "Quel type de mot est « essayer » ?",
-      "answer": "Un verbe.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « elle décide d’essayer » ou « elle décide d’essaie » ?",
+      "answer": "« elle décide d’essayer ».",
       "target_ids": [
         "fr-rank-0122"
       ],
@@ -1892,25 +1371,7 @@
       ],
       "context": "Devant une machine, elle doit essayer plusieurs étapes pour voir ce qui est possible.",
       "candidate_reasons": [
-        "question_type:grammar_category"
-      ]
-    },
-    {
-      "level": "A2",
-      "passage_id": "fr-a2-u02-p01",
-      "sequence": 7,
-      "unit": 2,
-      "title": "Une raison et un résultat",
-      "question_id": "q7",
-      "answer_id": "a7",
-      "question_type": "grammar_in_context",
-      "prompt": "Dans « la raison de ce changement », que complète « de ce changement » ?",
-      "answer": "Le nom « raison ».",
-      "target_ids": [],
-      "target_forms": [],
-      "context": "",
-      "candidate_reasons": [
-        "question_type:grammar_in_context"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1939,15 +1400,14 @@
       "title": "Vérifier avant de décider",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_in_context",
-      "prompt": "Dans « avant de prendre une décision », quelle forme suit « de » ?",
-      "answer": "Un infinitif : « prendre ».",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « avant de prendre une décision » ou « avant de prends une décision » ?",
+      "answer": "« avant de prendre une décision ».",
       "target_ids": [],
       "target_forms": [],
       "context": "",
       "candidate_reasons": [
-        "metalinguistic_terminology",
-        "question_type:grammar_in_context"
+        "question_type:grammar_choice"
       ]
     },
     {
@@ -1976,15 +1436,14 @@
       "title": "Une méthode différente",
       "question_id": "q7",
       "answer_id": "a7",
-      "question_type": "grammar_in_context",
-      "prompt": "Dans « il est important de pratiquer », quelle forme vient après « de » ?",
-      "answer": "Un infinitif.",
+      "question_type": "grammar_choice",
+      "prompt": "Choisis la phrase correcte : « il est important de pratiquer » ou « il est important de pratique » ?",
+      "answer": "« il est important de pratiquer ».",
       "target_ids": [],
       "target_forms": [],
       "context": "",
       "candidate_reasons": [
-        "metalinguistic_terminology",
-        "question_type:grammar_in_context"
+        "question_type:grammar_choice"
       ]
     },
     {
