@@ -18,6 +18,19 @@
     "semantic_educator_coverage_complete": false,
     "note": "Do not auto-promote draft/pending metadata. Substantive per-record revalidation is required before educator certification can proceed."
   },
+  "latest_second_adversarial_educator_audit": {
+    "date": "2026-08-19",
+    "artifact": "reading/audit/second_adversarial_educator_audit_2026-08-19.json",
+    "status": "BLOCKED",
+    "blind_initial_semantic_records_directly_examined": 10,
+    "new_major_defect_classes_found": [
+      "low-level CEFR/pedagogy mismatch from formal grammatical-category/function questions in Arabic and French",
+      "learner-facing malformed/unnatural MSA grammar-target phrasing in Arabic B1"
+    ],
+    "concrete_example": "ar-b1-u01-p01 q7 contains 'حتى إن كانت الإجابة لا الآن' and requires repair plus corpus-wide same-class search",
+    "semantic_educator_coverage_complete": false,
+    "note": "This adversarial pass independently confirmed the systemic release-evidence blocker and found concrete learner-facing defects not represented by the deterministic summary. It did not claim 100% semantic coverage."
+  },
   "languages": {
     "arabic": {
       "generation_state": "COMPLETE",
@@ -26,15 +39,17 @@
       "release_state": "INTERNAL_LANGUAGE_PASS",
       "educator_release_ready": false,
       "target_assurance": "HIGHEST_ASSURANCE",
-      "reason": "Fresh independent recertification on 2026-08-19 failed deterministic Gate A. All 360 Arabic canonical records remain draft with coverage pending/missing; most record-level language, pedagogy and answer-key review fields are pending. Historical internal PASS cannot substitute for evidenced current record-level release validation.",
+      "reason": "Fresh independent recertification failed deterministic Gate A, and a second blind adversarial educator pass found concrete major learner-facing Arabic defects including CEFR-inappropriate metalinguistic assessment design and malformed/unnatural MSA phrasing in a B1 grammar-in-context item. Full semantic recertification remains incomplete.",
       "latest_educator_attempt": {
-        "status": "BLOCKED_AT_DETERMINISTIC_GATE_A",
-        "artifact": "reading/audit/independent_educator_recertification_2026-08-19.json",
+        "status": "BLOCKED_AT_DETERMINISTIC_AND_SEMANTIC_GATES",
+        "artifact": "reading/audit/second_adversarial_educator_audit_2026-08-19.json",
         "deterministic_summary": "reading/audit/independent_educator_deterministic_2026-08-19.summary.json"
       },
       "required_next_gates": [
         "resolve_and_revalidate_deterministic_integrity_100pct",
         "fresh_full_passage_language_and_qa_audit_100pct",
+        "corpus_wide_low_level_metalinguistic_question_audit_and_repair",
+        "corpus_wide_arabic_grammar_in_context_naturalness_audit",
         "LanguageTool_Arabic_disagreement_pass",
         "CAMeL_MSA_morphology_diagnostic_pass",
         "three_genuinely_independent_model_family_passes_100pct",
@@ -51,15 +66,16 @@
       "release_state": "INTERNAL_LANGUAGE_PASS",
       "educator_release_ready": false,
       "target_assurance": "HIGHEST_ASSURANCE",
-      "reason": "Fresh independent recertification on 2026-08-19 failed deterministic Gate A. All 360 French canonical records remain draft with coverage pending/missing and record-level language, pedagogy and answer-key review fields pending. Historical hash-bound/internal PASS cannot substitute for evidenced current record-level release validation.",
+      "reason": "Fresh independent recertification failed deterministic Gate A, and a second blind adversarial educator pass found a concrete low-level CEFR/pedagogy defect class involving formal grammatical-function questions in A1 material. Full semantic recertification remains incomplete.",
       "latest_educator_attempt": {
-        "status": "BLOCKED_AT_DETERMINISTIC_GATE_A",
-        "artifact": "reading/audit/independent_educator_recertification_2026-08-19.json",
+        "status": "BLOCKED_AT_DETERMINISTIC_AND_SEMANTIC_GATES",
+        "artifact": "reading/audit/second_adversarial_educator_audit_2026-08-19.json",
         "deterministic_summary": "reading/audit/independent_educator_deterministic_2026-08-19.summary.json"
       },
       "required_next_gates": [
         "resolve_and_revalidate_deterministic_integrity_100pct",
         "fresh_full_passage_language_and_qa_audit_100pct",
+        "corpus_wide_low_level_metalinguistic_question_audit_and_repair",
         "LanguageTool_French_disagreement_pass",
         "Antidote_French_disagreement_pass",
         "DeepL_Write_French_disagreement_pass",
@@ -87,8 +103,11 @@
   "global_release_blockers": [
     "Arabic fresh deterministic educator-release Gate A failed and requires substantive record-level revalidation",
     "French fresh deterministic educator-release Gate A failed and requires substantive record-level revalidation",
-    "Arabic independent external/native/educator re-certification not yet complete",
-    "French independent external/native/educator re-certification not yet complete",
+    "Second adversarial educator audit found concrete unresolved major learner-facing Arabic and French defect classes",
+    "Arabic full 100% semantic educator review is incomplete",
+    "French full 100% semantic educator review is incomplete",
+    "Arabic independent external/native/model-family re-certification not yet complete",
+    "French independent external/native/model-family re-certification not yet complete",
     "Urdu generation incomplete"
   ]
 }
