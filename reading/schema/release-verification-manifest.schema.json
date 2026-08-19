@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "release-verification-manifest.schema.json",
+  "title": "Graded Reading Educator Release Verification Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "release_state",
+    "protocol_version",
+    "generated_at",
+    "canonical_levels",
+    "deterministic_audit",
+    "independent_machine_reviews",
+    "independent_model_reviews",
+    "native_expert_review",
+    "educator_review",
+    "blind_post_repair_review",
+    "defect_ledger",
+    "unresolved_counts",
+    "approval_statement",
+    "invalidation_rule"
+  ],
+  "properties": {
+    "language": {"type": "string", "minLength": 1},
+    "release_state": {"const": "HASH_BOUND_RELEASED"},
+    "protocol_version": {"type": "string", "minLength": 1},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "canonical_levels": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["level", "path", "blob_sha", "record_count"],
+        "properties": {
+          "level": {"type": "string"},
+          "path": {"type": "string"},
+          "blob_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+          "record_count": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "deterministic_audit": {"$ref": "#/$defs/reviewGate"},
+    "independent_machine_reviews": {
+      "type": "array",
+      "minItems": 2,
+      "items": {"$ref": "#/$defs/reviewGate"}
+    },
+    "independent_model_reviews": {
+      "type": "array",
+      "minItems": 3,
+      "items": {"$ref": "#/$defs/reviewGate"}
+    },
+    "native_expert_review": {"$ref": "#/$defs/humanGate"},
+    "educator_review": {"$ref": "#/$defs/humanGate"},
+    "blind_post_repair_review": {"$ref": "#/$defs/humanGate"},
+    "defect_ledger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact", "total_found", "total_resolved"],
+      "properties": {
+        "artifact": {"type": "string"},
+        "total_found": {"type": "integer", "minimum": 0},
+        "total_resolved": {"type": "integer", "minimum": 0}
+      }
+    },
+    "unresolved_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["critical", "major", "minor", "disagreements"],
+      "properties": {
+        "critical": {"const": 0},
+        "major": {"const": 0},
+        "minor": {"const": 0},
+        "disagreements": {"const": 0}
+      }
+    },
+    "approval_statement": {
+      "const": "Full corpus independently re-audited; no known defects remain under the recorded verification protocol."
+    },
+    "invalidation_rule": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "reviewGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "status", "date", "coverage", "artifact", "findings", "unresolved"],
+      "properties": {
+        "name": {"type": "string"},
+        "version": {"type": ["string", "null"]},
+        "status": {"const": "PASS"},
+        "date": {"type": "string", "format": "date"},
+        "coverage": {"type": "string"},
+        "artifact": {"type": "string"},
+        "findings": {"type": "integer", "minimum": 0},
+        "unresolved": {"const": 0}
+      }
+    },
+    "humanGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reviewer_id", "qualification_summary", "status", "date", "coverage", "artifact", "findings", "unresolved"],
+      "properties": {
+        "reviewer_id": {"type": "string"},
+        "qualification_summary": {"type": "string"},
+        "status": {"const": "PASS"},
+        "date": {"type": "string", "format": "date"},
+        "coverage": {"type": "string"},
+        "artifact": {"type": "string"},
+        "findings": {"type": "integer", "minimum": 0},
+        "unresolved": {"const": 0}
+      }
+    }
+  }
+}
