@@ -5,6 +5,19 @@
   "protocol": "reading/planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md",
   "assurance_profile": "reading/planning/HIGHEST_ASSURANCE_RELEASE_PROFILE.md",
   "release_claim_policy": "No agent may claim literal 100% correctness. HASH_BOUND_RELEASED means full recorded verification completed with zero known unresolved defects under the required assurance profile.",
+  "latest_independent_recertification": {
+    "date": "2026-08-19",
+    "artifact": "reading/audit/independent_educator_recertification_2026-08-19.json",
+    "deterministic_summary": "reading/audit/independent_educator_deterministic_2026-08-19.summary.json",
+    "canonical_records_scanned": 720,
+    "questions_scanned": 7200,
+    "answers_scanned": 7200,
+    "deterministic_gate": "FAIL",
+    "open_findings": 4310,
+    "educator_gate": "BLOCKED",
+    "semantic_educator_coverage_complete": false,
+    "note": "Do not auto-promote draft/pending metadata. Substantive per-record revalidation is required before educator certification can proceed."
+  },
   "languages": {
     "arabic": {
       "generation_state": "COMPLETE",
@@ -13,9 +26,14 @@
       "release_state": "INTERNAL_LANGUAGE_PASS",
       "educator_release_ready": false,
       "target_assurance": "HIGHEST_ASSURANCE",
-      "reason": "Historical internal audit is substantial but has not yet been re-certified under the independent educator release protocol and highest-assurance profile.",
+      "reason": "Fresh independent recertification on 2026-08-19 failed deterministic Gate A. All 360 Arabic canonical records remain draft with coverage pending/missing; most record-level language, pedagogy and answer-key review fields are pending. Historical internal PASS cannot substitute for evidenced current record-level release validation.",
+      "latest_educator_attempt": {
+        "status": "BLOCKED_AT_DETERMINISTIC_GATE_A",
+        "artifact": "reading/audit/independent_educator_recertification_2026-08-19.json",
+        "deterministic_summary": "reading/audit/independent_educator_deterministic_2026-08-19.summary.json"
+      },
       "required_next_gates": [
-        "canonical_identity_and_deterministic_integrity_100pct",
+        "resolve_and_revalidate_deterministic_integrity_100pct",
         "fresh_full_passage_language_and_qa_audit_100pct",
         "LanguageTool_Arabic_disagreement_pass",
         "CAMeL_MSA_morphology_diagnostic_pass",
@@ -33,9 +51,14 @@
       "release_state": "INTERNAL_LANGUAGE_PASS",
       "educator_release_ready": false,
       "target_assurance": "HIGHEST_ASSURANCE",
-      "reason": "Historical hash-bound approval predates the strengthened independent educator release protocol and highest-assurance profile and must be re-certified before teacher-ready claims.",
+      "reason": "Fresh independent recertification on 2026-08-19 failed deterministic Gate A. All 360 French canonical records remain draft with coverage pending/missing and record-level language, pedagogy and answer-key review fields pending. Historical hash-bound/internal PASS cannot substitute for evidenced current record-level release validation.",
+      "latest_educator_attempt": {
+        "status": "BLOCKED_AT_DETERMINISTIC_GATE_A",
+        "artifact": "reading/audit/independent_educator_recertification_2026-08-19.json",
+        "deterministic_summary": "reading/audit/independent_educator_deterministic_2026-08-19.summary.json"
+      },
       "required_next_gates": [
-        "canonical_identity_and_deterministic_integrity_100pct",
+        "resolve_and_revalidate_deterministic_integrity_100pct",
         "fresh_full_passage_language_and_qa_audit_100pct",
         "LanguageTool_French_disagreement_pass",
         "Antidote_French_disagreement_pass",
@@ -62,6 +85,8 @@
     }
   },
   "global_release_blockers": [
+    "Arabic fresh deterministic educator-release Gate A failed and requires substantive record-level revalidation",
+    "French fresh deterministic educator-release Gate A failed and requires substantive record-level revalidation",
     "Arabic independent external/native/educator re-certification not yet complete",
     "French independent external/native/educator re-certification not yet complete",
     "Urdu generation incomplete"
