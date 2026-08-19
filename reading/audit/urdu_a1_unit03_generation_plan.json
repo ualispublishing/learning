@@ -2,7 +2,7 @@
   "language": "ur",
   "cefr": "A1",
   "unit": 3,
-  "status": "STAGING_READY_CANONICAL_GATE_PENDING",
+  "status": "STAGED_STRUCTURALLY_CHECKED_CANONICAL_GATE_PENDING",
   "theme": "food, shopping, and simple preferences",
   "genres": ["meal micro-story", "shopping scene", "market scene", "cooking routine", "personal routine", "checkpoint"],
   "policy": "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
@@ -25,7 +25,7 @@
     {"sequence": 17, "id": "ur-a1-u03-p05", "targets": [{"id":"ur-rank-0167","form":"اپنا","rank":167,"sense":"one's own; oneself"},{"id":"ur-rank-0161","form":"اہم","rank":161,"sense":"important; necessary"}]},
     {"sequence": 18, "id": "ur-a1-u03-p06", "targets": []}
   ],
-  "planned_word_counts": [111, 104, 115, 117, 124, 120],
+  "verified_word_counts": [111, 104, 115, 118, 124, 120],
   "structural_precheck": {
     "six_passages": true,
     "sequences_13_18": true,
@@ -35,7 +35,11 @@
     "p06_zero_new": true,
     "all_word_counts_in_a1_band": true,
     "target_forms_visible_in_introduction_text": true,
-    "target_source_rank_identity_checked": true
+    "target_source_rank_identity_checked": true,
+    "new_target_exposure_counts_checked": true,
+    "declared_running_text_reviews_visible": true,
+    "sentence_count_metadata_reconciled": true
   },
+  "staging_result": "reading/audit/urdu_a1_unit03_staging_result.json",
   "audit_policy": "Formal linguistic, pedagogical, coverage, and final approval audits remain deferred under generation-first policy; promotion must remain blocked until the earlier Urdu canonical gate is resolved."
 }
