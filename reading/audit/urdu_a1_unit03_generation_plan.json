@@ -1,0 +1,41 @@
+{
+  "language": "ur",
+  "cefr": "A1",
+  "unit": 3,
+  "status": "STAGING_READY_CANONICAL_GATE_PENDING",
+  "theme": "food, shopping, and simple preferences",
+  "genres": ["meal micro-story", "shopping scene", "market scene", "cooking routine", "personal routine", "checkpoint"],
+  "policy": "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
+  "ten_question_standard": "reading/planning/TEN_QUESTION_STANDARD.md",
+  "schema": "reading/schema/passage.schema.json",
+  "canonical_gate": "Urdu A1 Unit 1 current-standard repair and Unit 2 canonical promotion remain required before Unit 3 can be promoted.",
+  "word_band": [90, 140],
+  "new_target_policy": {
+    "p01_p05_default": 2,
+    "hard_quota": false,
+    "p06_new_targets": 0,
+    "source_lexicon": "urdu_top1000.csv",
+    "root_lexicon_read_only": true
+  },
+  "target_assignments": [
+    {"sequence": 13, "id": "ur-a1-u03-p01", "targets": [{"id":"ur-rank-0124","form":"پانی","rank":124,"sense":"water"},{"id":"ur-rank-0115","form":"کیونکہ","rank":115,"sense":"because"}]},
+    {"sequence": 14, "id": "ur-a1-u03-p02", "targets": [{"id":"ur-rank-0110","form":"ضرورت","rank":110,"sense":"need; necessity; requirement"},{"id":"ur-rank-0231","form":"چند","rank":231,"sense":"a few; some; several"}]},
+    {"sequence": 15, "id": "ur-a1-u03-p03", "targets": [{"id":"ur-rank-0114","form":"مختلف","rank":114,"sense":"different; various"},{"id":"ur-rank-0159","form":"یہاں","rank":159,"sense":"here"}]},
+    {"sequence": 16, "id": "ur-a1-u03-p04", "targets": [{"id":"ur-rank-0233","form":"تیار","rank":233,"sense":"ready"},{"id":"ur-rank-0247","form":"ابھی","rank":247,"sense":"now; at present"}]},
+    {"sequence": 17, "id": "ur-a1-u03-p05", "targets": [{"id":"ur-rank-0167","form":"اپنا","rank":167,"sense":"one's own; oneself"},{"id":"ur-rank-0161","form":"اہم","rank":161,"sense":"important; necessary"}]},
+    {"sequence": 18, "id": "ur-a1-u03-p06", "targets": []}
+  ],
+  "planned_word_counts": [111, 104, 115, 117, 124, 120],
+  "structural_precheck": {
+    "six_passages": true,
+    "sequences_13_18": true,
+    "ten_questions_each": true,
+    "ten_answers_each": true,
+    "question_answer_linkage": true,
+    "p06_zero_new": true,
+    "all_word_counts_in_a1_band": true,
+    "target_forms_visible_in_introduction_text": true,
+    "target_source_rank_identity_checked": true
+  },
+  "audit_policy": "Formal linguistic, pedagogical, coverage, and final approval audits remain deferred under generation-first policy; promotion must remain blocked until the earlier Urdu canonical gate is resolved."
+}
