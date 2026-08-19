@@ -1,15 +1,13 @@
 {
   "project": "Arabic, French, and Urdu graded reading curriculum A1-C2",
-  "updated": "2026-08-18",
+  "updated": "2026-08-19",
   "overall_status": "in_progress",
-  "active_language": "French",
-  "paused_languages": [
-    "Urdu"
-  ],
-  "phase": "Arabic sealed. French A1-C2 generation complete at 360 canonical passages; whole-French multi-pass final audit is now active. Urdu remains paused.",
+  "active_language": "Urdu",
+  "paused_languages": [],
+  "phase": "Arabic and French are formally sealed. Urdu is active from the six preserved A1 calibration passages.",
   "target_passages": 1080,
   "target_is_quota": false,
-  "approved_passages": 360,
+  "approved_passages": 720,
   "source_of_truth_precedence": [
     "live canonical JSONL on main",
     "freshly regenerated audit artifacts",
@@ -48,7 +46,7 @@
     }
   },
   "french": {
-    "state": "FINAL_AUDIT_ACTIVE",
+    "state": "APPROVED",
     "canonical_passages": 360,
     "levels": {
       "a1": 60,
@@ -75,7 +73,7 @@
       "new_targets_checked_against_all_prior_french_levels": true
     },
     "a1_completion": {
-      "state": "GENERATED_INTEGRITY_PASS_NOT_FINAL_AUDITED",
+      "state": "FINAL_APPROVED",
       "passages": 60,
       "questions": 600,
       "answers": 600,
@@ -84,7 +82,7 @@
       "generation_integrity_artifact": "reading/audit/french_a1_generation_integrity.json"
     },
     "a2_completion": {
-      "state": "GENERATED_INTEGRITY_PASS_NOT_FINAL_AUDITED",
+      "state": "FINAL_APPROVED",
       "passages": 60,
       "questions": 600,
       "answers": 600,
@@ -93,7 +91,7 @@
       "generation_integrity_artifact": "reading/audit/french_a2_generation_integrity.json"
     },
     "b1_completion": {
-      "state": "GENERATED_INTEGRITY_PASS_NOT_FINAL_AUDITED",
+      "state": "FINAL_APPROVED",
       "passages": 60,
       "questions": 600,
       "answers": 600,
@@ -105,7 +103,7 @@
       "a1_a2_cross_level_target_form_collisions": 0
     },
     "b2_generation": {
-      "state": "ACTIVE",
+      "state": "FINAL_APPROVED",
       "passages": 60,
       "questions": 600,
       "answers": 600,
@@ -385,9 +383,9 @@
         60
       ]
     },
-    "next_target": "Run the whole-French final review using at least 10 distinct audit lenses; repair defects, rerun integrity checks, and only then mark French finally approved.",
+    "next_target": "None. French is hash-bound approved; reopen only after a deliberate canonical French change invalidates approval.",
     "c1_generation": {
-      "status": "GENERATED_INTEGRITY_PASS_NOT_FINAL_AUDITED",
+      "status": "FINAL_APPROVED",
       "passages": 60,
       "questions": 600,
       "answers": 600,
@@ -498,7 +496,7 @@
       ]
     },
     "c2_generation": {
-      "status": "GENERATION_COMPLETE_PENDING_FINAL_AUDIT",
+      "status": "FINAL_APPROVED",
       "passages": 60,
       "questions": 600,
       "answers": 600,
@@ -515,7 +513,7 @@
         10
       ],
       "last_sequence": 60,
-      "canonical_blob": "c2e64d6d454559931be07d3ec71d5749ec0e063d",
+      "canonical_blob": "de13ed12c95db5501c6efcc3515ef02f7b1c34dc",
       "accepted_default_new_targets_per_standard_passage": 5,
       "accepted_default_is_hard_quota": false,
       "source_policy": "validated french_top3000.csv continuation rank > 1000",
@@ -525,10 +523,31 @@
       "next_genres": [],
       "next_target_probe": null,
       "next_fresh_source_terms": null
+    },
+    "formal_final_approval": true,
+    "generation_complete": true,
+    "final_audit": {
+      "status": "PASS",
+      "approval": "APPROVED",
+      "audit_version": 3,
+      "audit_pass_count": 15,
+      "failed_pass_count": 0,
+      "audit_artifact": "reading/audit/french_final_whole_audit.json",
+      "repair_artifact": "reading/audit/french_final_repair_transaction.json",
+      "approval_artifact": "reading/audit/french_final_approval.json",
+      "whole_corpus_sha256": "e1501acb58b021412413fa32fb15e805c5271b8d90242c0034e54dd3da489388",
+      "level_blobs": {
+        "a1": "0493a2fa13e51b5997db05e91cdea4d8dc5e647b",
+        "a2": "d0a80b8866071f426019aa0ad143e1d270dba4de",
+        "b1": "4a2cd9ff30c3cea58caf20fca2822b06200622ca",
+        "b2": "38976211f13329ba3e2b0b9dbd6868699023d05d",
+        "c1": "6f5bd912dfb550c064b54c8f7de4027bebf3786d",
+        "c2": "de13ed12c95db5501c6efcc3515ef02f7b1c34dc"
+      }
     }
   },
   "urdu": {
-    "state": "QUEUED",
+    "state": "ACTIVE_A1",
     "canonical_passages": 6,
     "levels": {
       "a1": 6,
@@ -538,14 +557,13 @@
       "c1": 0,
       "c2": 0
     },
-    "next_target": "Resume after French unless explicitly reprioritized; preserve the six live A1 calibration passages."
+    "next_target": "Audit and accept the six preserved Urdu A1 calibration passages against current standards, then continue A1 from sequence 7."
   },
   "next_actions": [
     "keep Arabic sealed unless canonical Arabic changes",
-    "prepare exact French C2 readiness and Unit01 calibration from the sealed C1 integrity artifact",
-    "use source-backed top-3000 continuation for advanced C2 vocabulary where appropriate",
-    "calibrate C2 lexical load conservatively; planning band is a maximum, not quota",
-    "defer final whole-French multi-pass audit until C2 generation completes"
+    "keep French sealed unless deliberate canonical French changes invalidate its hash-bound approval",
+    "run a strict current-standard audit of the six preserved Urdu A1 calibration passages",
+    "after Urdu A1 calibration is accepted, continue A1 from sequence 7 in guarded six-passage units"
   ],
   "important_files": [
     "reading/AGENT_HANDOFF.md",
@@ -609,23 +627,5 @@
     "source_state_assertions_required_for_large_mutations": true,
     "serialize_workflows_that_push_the_same_artifact": true,
     "fix_failed_guards_instead_of_weakening_them": true
-  },
-  "status": "FRENCH_COMPLETE_APPROVED",
-  "mode": "serial_single_writer",
-  "canonical_passages": 360,
-  "unapproved_passages": 0,
-  "generation": {
-    "status": "COMPLETE",
-    "canonical_passages": 360
-  },
-  "final_audit": {
-    "policy": "pass1_12_before_approval",
-    "current_gate": "complete",
-    "approval": "APPROVED",
-    "audit_artifact": "reading/audit/french_final_whole_audit.json",
-    "approval_artifact": "reading/audit/french_final_approval.json",
-    "audit_pass_count": 15,
-    "whole_corpus_sha256": "e1501acb58b021412413fa32fb15e805c5271b8d90242c0034e54dd3da489388"
-  },
-  "next_action": "Resume the next unapproved language from the authoritative handoff; do not reopen French unless a deliberate canonical change invalidates this hash-bound approval."
+  }
 }
