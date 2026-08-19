@@ -1,0 +1,72 @@
+name: Verify and approve French final
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-and-approve-french-final.yml'
+      - 'reading/tools/repair_and_audit_french_final_v3.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify-and-approve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout canonical main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run fail-closed French repair and whole-corpus audit
+        run: python reading/tools/repair_and_audit_french_final_v3.py
+
+      - name: Approve only from live hash-bound PASS
+        run: python reading/tools/approve_french_after_final_audit.py
+
+      - name: Verify approval invariants
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('.')
+          audit = json.loads((root/'reading/audit/french_final_whole_audit.json').read_text())
+          repair = json.loads((root/'reading/audit/french_final_repair_transaction.json').read_text())
+          approval = json.loads((root/'reading/audit/french_final_approval.json').read_text())
+          status = json.loads((root/'reading/STATUS.json').read_text())
+          assert audit['status'] == 'PASS' and audit['approval_ready'] is True
+          assert audit['canonical_passages'] == 360 and audit['questions'] == 3600 and audit['answers'] == 3600
+          assert repair['status'] == 'PASS_READY_FOR_FRENCH_APPROVAL' and repair['audit_status'] == 'PASS'
+          assert repair['historical_frontier_locks_preserved'] is True
+          assert repair['temporary_source_binding_restored'] is True
+          assert approval['status'] == 'APPROVED' and approval['canonical_passages'] == 360
+          assert approval['level_blobs'] == audit['level_blobs']
+          assert status['status'] == 'FRENCH_COMPLETE_APPROVED'
+          print('French final approval invariants: PASS')
+          PY
+
+      - name: Show exact repository changes
+        run: |
+          git status --short
+          git diff --check
+
+      - name: Commit verified canonical French artifacts
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/french/c2/passages.jsonl reading/audit/french_final_repair_transaction.json reading/audit/french_final_whole_audit.json reading/audit/french_final_approval.json reading/STATUS.json
+          git add -u reading/audit
+          if git diff --cached --quiet; then
+            echo 'No canonical changes to commit.'
+          else
+            git commit -m 'Approve French reading after final whole-corpus audit'
+            git push origin HEAD:main
+          fi
