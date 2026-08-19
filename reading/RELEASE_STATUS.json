@@ -63,10 +63,10 @@
       "generation_state": "COMPLETE",
       "historical_internal_audit_state": "PASS",
       "canonical_passages": 360,
-      "release_state": "INTERNAL_LANGUAGE_PASS",
+      "release_state": "REOPEN_REQUIRED",
       "educator_release_ready": false,
       "target_assurance": "HIGHEST_ASSURANCE",
-      "reason": "Fresh independent recertification failed deterministic Gate A, and a second blind adversarial educator pass found a concrete low-level CEFR/pedagogy defect class involving formal grammatical-function questions in A1 material. Full semantic recertification remains incomplete.",
+      "reason": "Canonical French C1/C2 learner-facing defects were repaired on 2026-08-19. Historical French approval hashes are invalidated; all affected educator/native/tool/hash-bound release gates must be rerun against the new canonical hashes.",
       "latest_educator_attempt": {
         "status": "BLOCKED_AT_DETERMINISTIC_AND_SEMANTIC_GATES",
         "artifact": "reading/audit/second_adversarial_educator_audit_2026-08-19.json",
@@ -108,6 +108,7 @@
     "French full 100% semantic educator review is incomplete",
     "Arabic independent external/native/model-family re-certification not yet complete",
     "French independent external/native/model-family re-certification not yet complete",
-    "Urdu generation incomplete"
+    "Urdu generation incomplete",
+    "French canonical C1/C2 repair invalidated prior release hashes; independent re-certification against repaired hashes is required"
   ]
 }
