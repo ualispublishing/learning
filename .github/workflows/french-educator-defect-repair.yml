@@ -1,0 +1,283 @@
+name: French educator defect repair
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'reading/audit/french_educator_repair_trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Repair confirmed learner-facing defect classes
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, re, hashlib, pathlib
+
+          ROOT = pathlib.Path('.')
+          C1 = ROOT / 'reading/french/c1/passages.jsonl'
+          C2 = ROOT / 'reading/french/c2/passages.jsonl'
+          RELEASE = ROOT / 'reading/RELEASE_STATUS.json'
+          AUDIT = ROOT / 'reading/audit/french_c1_c2_educator_defect_repair_2026-08-19.json'
+
+          generic = "Il sert à préciser une composante de l’argument dont la portée est définie par le contexte du passage."
+
+          c1_review_replacements = {
+            'fr-c1-u01-p01': "Un fait isolé ne clôt donc pas l’affaire : la peur d’une erreur ne suffit pas non plus à justifier l’inaction, et l’analyste doit rester prêt à réviser le mécanisme proposé lorsque des observations concurrentes l’exigent.",
+            'fr-c1-u01-p02': "À chaque moment du pilote, le dernier relevé doit pouvoir rendre visible un écart par rapport au protocole, afin que l’équipe puisse défendre ou modifier sa décision sur des critères annoncés.",
+            'fr-c1-u01-p03': "On ne peut donc pas supposer que vivre la mesure dans un autre contexte produira le même effet : le type d’institution — par exemple la police — peut modifier de façon décisive les comportements observés.",
+            'fr-c1-u01-p04': "L’analyste doit donc prêter attention à la partie de l’information qui pourrait manquer, puis vérifier dans la suite de l’enquête si cette absence change la conclusion.",
+            'fr-c1-u01-p05': "Un choix peut être dur à réviser lors du prochain cycle ; si un effet rend une option impossible à corriger, il faut pouvoir abandonner cette option plutôt que protéger la recommandation initiale.",
+          }
+
+          c1_vocab_answers = {
+            'fr-c1-u01-p01': {
+              'a7': "« Enquête » désigne le dispositif de collecte dont l’échantillonnage, les questions et les non-réponses déterminent la portée des preuves.",
+              'a8': "« Base » désigne le point de référence d’une comparaison ; la modifier peut changer l’apparence d’un écart sans changer les observations.",
+              'a9': "« Suspect » signale un résultat qui exige une vérification avant d’être intégré à la synthèse, sans être pour autant déclaré faux.",
+              'a10': "« Environ » marque une estimation et empêche de présenter une valeur approximative comme artificiellement exacte.",
+            },
+            'fr-c1-u01-p02': {
+              'a7': "« Courant » qualifie ici un usage fréquent servant de comparaison ; sa fréquence ne suffit pas à établir sa validité scientifique ou normative.",
+              'a8': "« Intérieur » situe une variation au sein d’un même groupe, variation qu’une moyenne globale peut masquer.",
+              'a9': "« Exister » sert à distinguer la simple possibilité d’une association de sa force, de son mécanisme causal et de sa stabilité.",
+              'a10': "« Âge » illustre une variable dont le rôle doit être précisé : cause possible, facteur de confusion ou simple corrélat.",
+            },
+            'fr-c1-u01-p03': {
+              'a7': "« Traiter » désigne l’opération de classer, comparer et interpréter les observations en rendant visibles les choix méthodologiques.",
+              'a8': "« Mener » signifie conduire l’étude en distinguant le protocole prévu de ce qui s’est réellement produit.",
+              'a9': "« Ailleurs » marque le transfert vers un autre contexte et oblige à vérifier la comparabilité des populations, institutions et mécanismes.",
+              'a10': "« Complètement » borne l’exigence d’explication : une explication peut être utile sans être exhaustive si elle annonce clairement ses limites.",
+            },
+            'fr-c1-u01-p04': {
+              'a7': "« Approcher » signifie examiner un même problème par plusieurs méthodes afin de comparer ce que chacune révèle ou laisse hors champ.",
+              'a8': "« Engager » souligne qu’impliquer des ressources ou des participants crée des obligations pratiques et éthiques qui comptent dans l’évaluation.",
+              'a9': "« Juge » illustre une source institutionnellement située, informative mais limitée par ce que sa fonction lui permet d’observer directement.",
+              'a10': "« Avocat » illustre une source située dont l’expérience procédurale peut être précise tout en ayant une fonction argumentative distincte d’une preuve indépendante.",
+            },
+            'fr-c1-u01-p05': {
+              'a7': "« Directeur » illustre un point de vue agrégé sur une organisation, utile mais susceptible de sous-représenter les expériences locales.",
+              'a8': "« Animal » sert à montrer qu’un mécanisme observé chez l’animal ne se transfère pas automatiquement à l’être humain.",
+              'a9': "« Drogue » illustre un objet d’étude qui exige de distinguer effet, dose, groupe observé, effets indésirables et comparaison avant de généraliser.",
+              'a10': "« Banque » illustre une source de données très précise sur ses propres clients mais potentiellement non représentative des personnes hors de son système.",
+            },
+          }
+
+          c2_review_replacements = {
+            'fr-c2-u01-p01': "Une définition peut sembler exactement adaptée à un cas sans l’être autant dans un autre ; elle doit donc annoncer son propre critère et la sorte de différence qu’elle juge pertinente.",
+            'fr-c2-u01-p02': "Ce qui paraît importer dans un exemple peut cesser de marcher comme explication dans un autre ; il serait alors trop facile de tirer une conclusion générale d’une seule condition de fond.",
+            'fr-c2-u01-p03': "Cette distinction compte aussi lorsqu’un argument de défense invoque une situation de secours : dans un procès, qualifier un acte de criminel exige de distinguer résultat, intention, risque accepté et contraintes.",
+            'fr-c2-u01-p04': "Une règle publique peut briser une distinction pertinente lorsque ses catégories sont trop grossières ; elle ne devient pas meilleure parce qu’un cas fait exploser l’opposition initiale, et un résultat terrible ne rend pas pour autant tout critère nul.",
+            'fr-c2-u01-p05': "Un docteur peut étudier un signe sans qu’il doive inquiéter immédiatement le patient ; de même, une objection mérite d’être examinée sérieusement sans être traitée comme une réfutation automatique.",
+          }
+
+          def sha256(path):
+            return hashlib.sha256(path.read_bytes()).hexdigest()
+
+          def load(path):
+            return [json.loads(x) for x in path.read_text(encoding='utf-8').splitlines() if x.strip()]
+
+          def dump(path, rows):
+            path.write_text('\n'.join(json.dumps(r, ensure_ascii=False, sort_keys=True) for r in rows) + '\n', encoding='utf-8')
+
+          before = {'c1_sha256': sha256(C1), 'c2_sha256': sha256(C2)}
+          c1, c2 = load(C1), load(C2)
+          assert len(c1) == 60 and len(c2) == 60
+          assert [r['sequence'] for r in c1] == list(range(1, 61))
+          assert [r['sequence'] for r in c2] == list(range(1, 61))
+
+          findings = []
+          changed = []
+
+          # C1 Unit 01: remove learner-facing production labels, preserve review contacts naturally,
+          # and replace the 20 generic vocabulary answers with context-specific answers.
+          for rec in c1:
+            rid = rec['id']
+            if rid not in c1_review_replacements:
+              continue
+            old_text = rec['text']
+            old_words = len(old_text.split())
+            # Frenchify the English theme label wherever learner-facing.
+            for field in ('text', 'title'):
+              rec[field] = rec[field].replace('research and evidence', 'recherche et preuves')
+            for q in rec['questions']:
+              q['prompt'] = q['prompt'].replace('research and evidence', 'recherche et preuves')
+              if q['id'] in {'q7','q8','q9','q10'}:
+                m = re.search(r'«\s*([^»]+)\s*»', q['prompt'])
+                assert m, (rid, q['id'], q['prompt'])
+                term = m.group(1).strip()
+                q['prompt'] = f"Quel rôle le terme « {term} » joue-t-il dans le raisonnement ?"
+            # Remove explicit level/production language from text while preserving content.
+            rec['text'] = rec['text'].replace('La difficulté C1 consiste', 'La difficulté consiste')
+            rec['text'] = rec['text'].replace('Une position C1 devient ainsi plus forte', 'Une position argumentée devient ainsi plus forte')
+            rec['text'] = rec['text'].replace('Un rapport C1 devrait', 'Un rapport rigoureux devrait')
+            rec['text'] = rec['text'].replace('Le texte C1 doit', 'Le texte doit')
+            rec['text'] = rec['text'].replace('La recommandation C1 doit', 'La recommandation doit')
+
+            pattern = re.compile(r'Pour maintenir la continuité avec la synthèse B2, l’auteur réemploie aussi « [^»]+ », « [^»]+ », « [^»]+ » et « [^»]+ » comme quatre points d’appui dont la fonction doit rester explicite dans l’argument\.')
+            rec['text'], n = pattern.subn(c1_review_replacements[rid], rec['text'])
+            assert n == 1, (rid, 'expected one B2 production-note sentence', n)
+
+            amap = c1_vocab_answers[rid]
+            for a in rec['answer_key']:
+              if a['id'] in amap:
+                assert a['answer'] == generic, (rid, a['id'], 'unexpected pre-repair answer')
+                a['answer'] = amap[a['id']]
+                findings.append({'id': rid, 'field': f"answer_key.{a['id']}", 'severity': 'major', 'category': 'generic_vocabulary_answer', 'resolution': 'repaired'})
+
+            if rec.get('topics'):
+              rec['topics'] = [
+                ('recherche et preuves' if t == 'research and evidence' else
+                 'niveau C1' if t == 'C1 calibration' else
+                 'raisonnement critique' if t == 'critical reasoning' else t)
+                for t in rec['topics']
+              ]
+
+            rec['word_count'] += len(rec['text'].split()) - old_words
+            rec['revision'] = int(rec.get('revision', 1)) + 1
+            changed.append(rid)
+            findings.append({'id': rid, 'field': 'text/title/questions', 'severity': 'major', 'category': 'learner_facing_production_language', 'resolution': 'repaired'})
+
+          # C2 Unit 01: replace explicit review-production notes with natural sentences that retain
+          # every scheduled exact review form.
+          for rec in c2:
+            rid = rec['id']
+            if rid not in c2_review_replacements:
+              continue
+            old_text = rec['text']
+            old_words = len(old_text.split())
+            pattern = re.compile(r'Révision C1 intégrée\s*:\s*« [^»]+ », « [^»]+ », « [^»]+ », « [^»]+ »\. Le texte les réemploie comme outils de comparaison sans les présenter comme nouveau lexique\.')
+            rec['text'], n = pattern.subn(c2_review_replacements[rid], rec['text'])
+            assert n == 1, (rid, 'expected one C1 review production-note block', n)
+            rec['word_count'] += len(rec['text'].split()) - old_words
+            rec['revision'] = int(rec.get('revision', 1)) + 1
+            changed.append(rid)
+            findings.append({'id': rid, 'field': 'text', 'severity': 'major', 'category': 'learner_facing_production_language', 'resolution': 'repaired'})
+
+          assert len(changed) == 10, changed
+
+          # Complete structural/linkage checks for C1/C2 after repair.
+          for lang_rows, level in ((c1, 'C1'), (c2, 'C2')):
+            ids = [r['id'] for r in lang_rows]
+            assert len(ids) == len(set(ids)) == 60
+            for rec in lang_rows:
+              assert rec['cefr'] == level
+              assert len(rec['questions']) == 10, rec['id']
+              assert len(rec['answer_key']) == 10, rec['id']
+              qids = [q['id'] for q in rec['questions']]
+              aids = [a['id'] for a in rec['answer_key']]
+              assert len(qids) == len(set(qids)) == 10
+              assert len(aids) == len(set(aids)) == 10
+              assert {q['answer_id'] for q in rec['questions']} == set(aids), rec['id']
+              assert {a['question_id'] for a in rec['answer_key']} == set(qids), rec['id']
+
+          # Exact review-form preservation for all changed records.
+          index = {r['id']: r for r in c1 + c2}
+          for rid in changed:
+            rec = index[rid]
+            for target in rec.get('review_lexical_targets', []):
+              if target.get('representation') in {'running_text', 'summary'}:
+                form = target['form']
+                assert form in rec['text'], (rid, 'missing review form', form)
+
+          # Defect-class sweep: none of these production leaks may remain anywhere in C1/C2
+          # learner-facing text/title/questions/answers.
+          forbidden = [
+            'research and evidence',
+            'Pour maintenir la continuité avec la synthèse B2',
+            'Révision C1 intégrée',
+            'sans les présenter comme nouveau lexique',
+            generic,
+          ]
+          residue = []
+          for rec in c1 + c2:
+            learner = [rec.get('text',''), rec.get('title','')]
+            learner += [q.get('prompt','') for q in rec.get('questions', [])]
+            learner += [a.get('answer','') for a in rec.get('answer_key', [])]
+            blob = '\n'.join(learner)
+            for token in forbidden:
+              if token in blob:
+                residue.append({'id': rec['id'], 'token': token})
+          if residue:
+            raise SystemExit('UNRESOLVED DEFECT-CLASS RESIDUE: ' + json.dumps(residue, ensure_ascii=False))
+
+          # Changed C1/C2 passages remain in their existing broad word bands.
+          for rec in c1:
+            assert 500 <= rec['word_count'] <= 800, (rec['id'], rec['word_count'])
+          for rec in c2:
+            assert 600 <= rec['word_count'] <= 1000, (rec['id'], rec['word_count'])
+
+          dump(C1, c1)
+          dump(C2, c2)
+          after = {'c1_sha256': sha256(C1), 'c2_sha256': sha256(C2)}
+          assert before != after
+
+          # Canonical edits invalidate historical French release evidence.
+          release = json.loads(RELEASE.read_text(encoding='utf-8'))
+          fr = release['languages']['french']
+          fr['release_state'] = 'REOPEN_REQUIRED'
+          fr['educator_release_ready'] = False
+          fr['reason'] = 'Canonical French C1/C2 learner-facing defects were repaired on 2026-08-19. Historical French approval hashes are invalidated; all affected educator/native/tool/hash-bound release gates must be rerun against the new canonical hashes.'
+          blockers = release.setdefault('global_release_blockers', [])
+          blocker = 'French canonical C1/C2 repair invalidated prior release hashes; independent re-certification against repaired hashes is required'
+          if blocker not in blockers:
+            blockers.append(blocker)
+          RELEASE.write_text(json.dumps(release, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          AUDIT.parent.mkdir(parents=True, exist_ok=True)
+          AUDIT.write_text(json.dumps({
+            'audit': 'French C1/C2 educator defect-class repair',
+            'date': '2026-08-19',
+            'status': 'REPAIRED_STRUCTURAL_REGRESSION_PASS',
+            'scope': ['reading/french/c1/passages.jsonl', 'reading/french/c2/passages.jsonl'],
+            'before_sha256': before,
+            'after_sha256': after,
+            'changed_passage_ids': changed,
+            'findings': findings,
+            'counts': {
+              'changed_passages': len(changed),
+              'generic_vocabulary_answers_repaired': sum(1 for x in findings if x['category'] == 'generic_vocabulary_answer'),
+              'production_language_records_repaired': sum(1 for x in findings if x['category'] == 'learner_facing_production_language'),
+              'unresolved_forbidden_pattern_hits': 0,
+            },
+            'validation': {
+              'json_parse': 'PASS',
+              '60_records_each_level': 'PASS',
+              'sequence_continuity': 'PASS',
+              'unique_ids': 'PASS',
+              'ten_questions_and_answers': 'PASS',
+              'question_answer_linkage': 'PASS',
+              'review_forms_preserved_on_changed_records': 'PASS',
+              'defect_class_residue_scan': 'PASS',
+              'word_bands': 'PASS',
+            },
+            'release_effect': 'French remains not educator-release-ready; full re-certification must rerun against repaired hashes.'
+          }, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          print(json.dumps({'changed': changed, 'before': before, 'after': after}, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Commit guarded repair to PR branch
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/french/c1/passages.jsonl reading/french/c2/passages.jsonl reading/RELEASE_STATUS.json reading/audit/french_c1_c2_educator_defect_repair_2026-08-19.json
+          if git diff --cached --quiet; then
+            echo 'No repair diff produced' >&2
+            exit 1
+          fi
+          git commit -m 'Repair French C1/C2 educator audit defects'
+          git push origin HEAD:${{ github.head_ref }}
