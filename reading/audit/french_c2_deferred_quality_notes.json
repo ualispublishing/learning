@@ -1,0 +1,40 @@
+{
+  "status": "DEFERRED_TO_FINAL_FRENCH_AUDIT",
+  "scope": "French C2 qualitative repairs not covered by per-unit structural seals",
+  "notes": [
+    {
+      "unit": 4,
+      "passages": ["fr-c2-u04-p03", "fr-c2-u04-p04"],
+      "issue": "passage_role_order",
+      "observed": "P03 is labeled transfer and P04 interleaved",
+      "expected": "canonical six-passage cycle uses sequence 3 interleaved and sequence 4 transfer",
+      "repair_policy": "correct metadata during final French audit while preserving learner-facing content unless independent review finds a content-role mismatch"
+    },
+    {
+      "unit": 5,
+      "passages": ["fr-c2-u05-p03", "fr-c2-u05-p04"],
+      "issue": "passage_role_order",
+      "observed": "P03 is labeled transfer and P04 interleaved",
+      "expected": "canonical six-passage cycle uses sequence 3 interleaved and sequence 4 transfer",
+      "repair_policy": "correct metadata during final French audit while preserving learner-facing content unless independent review finds a content-role mismatch"
+    },
+    {
+      "unit": 5,
+      "passages": ["fr-c2-u05-p01"],
+      "issue": "genre_purity",
+      "observed": "genre is literary prose, but much of the learner-facing record is critical commentary explaining an invented literary scene",
+      "expected": "final audit should verify that the matrix requirement for literary prose is satisfied by sustained original prose rather than commentary merely labeled as literary prose",
+      "repair_policy": "rewrite or reclassify only after whole-level review so lexical exposures, linked questions, and progression remain coherent"
+    },
+    {
+      "unit": 6,
+      "passages": ["fr-c2-u06-p04"],
+      "issue": "lexical_sense_alignment",
+      "target": "reçu",
+      "source_intended_sense": "receipt; accomplished",
+      "observed_usage": "document/fichier reçu = received document/file",
+      "expected": "learner-facing context should teach a sense supported by the declared source entry, preferably noun reçu = receipt unless the source entry is deliberately broadened with validated evidence",
+      "repair_policy": "repair target context and linked vocabulary answer during final French audit; then rerun exact exposure, linkage, schema, and source-identity checks"
+    }
+  ]
+}
