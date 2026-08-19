@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c2_unit04.py", line 107, in main
+    run('generate_french_c2_unit04_preflight.py')
+  File "/home/runner/work/learning/learning/reading/tools/complete_french_c2_unit04.py", line 24, in run
+    runpy.run_path(str(T / name), run_name='__main__')
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit04_preflight.py", line 24, in <module>
+    ns['main']()
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit04.py", line 399, in main
+    unit.append(checkpoint(groups, deck, lo, hi, plan['theme'], prior + unit))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit04.py", line 295, in checkpoint
+    paragraphs, text = fit(paragraphs, lo, hi)
+                       ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit04.py", line 80, in fit
+    raise AssertionError(f'C2 Unit04 word band {len(text.split())} not {lo}-{hi}')
+AssertionError: C2 Unit04 word band 669 not 700-1200
