@@ -1,0 +1,47 @@
+name: Urdu A1 promote Units 03-04 on PR
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'reading/urdu/a1/promotion-trigger-03-04.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Run corrected guarded promotion
+        shell: bash
+        run: |
+          sed -n "/python - <<'PY'/,/^          PY$/p" .github/workflows/urdu-a1-promote-units03-04.yml | sed '1d;$d;s/^          //' > /tmp/urdu_promote_03_04.py
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('/tmp/urdu_promote_03_04.py')
+          s = p.read_text(encoding='utf-8')
+          old = 'اب فہرست کی سب ضروری چیزیں ٹوکری میں ہیں۔'
+          new = 'اب ضرورت کی تمام چیزیں ٹوکری میں ہیں۔'
+          assert old in s
+          p.write_text(s.replace(old, new), encoding='utf-8')
+          PY
+          python /tmp/urdu_promote_03_04.py
+
+      - name: Commit promoted Urdu Units 03-04
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes produced; failing closed.'
+            exit 1
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/urdu/a1/passages.jsonl reading/urdu/a1/staging/unit03 reading/urdu/a1/staging/unit04 reading/audit/urdu_a1_unit03_generation_plan.json reading/audit/urdu_a1_unit04_generation_plan.json reading/audit/urdu_a1_unit03_staging_result.json reading/audit/urdu_a1_unit04_staging_result.json reading/audit/urdu_a1_unit03_generation_result.json reading/audit/urdu_a1_unit04_generation_result.json reading/audit/urdu_active_frontier_2026-08-19.json reading/STATUS.json reading/AGENT_HANDOFF.md reading/TASKS.md
+          git commit -m 'Promote Urdu A1 Units 03-04 with learner-facing polish'
+          git push origin HEAD:main
