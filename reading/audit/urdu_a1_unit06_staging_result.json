@@ -1,0 +1,40 @@
+{
+  "language": "ur",
+  "cefr": "A1",
+  "unit": 6,
+  "date": "2026-08-19",
+  "status": "STAGED_STRUCTURALLY_CHECKED",
+  "canonical_promotion": "WAITING_FOR_SEQUENCE_30_FRONTIER",
+  "staging_path": "reading/urdu/a1/staging/unit06",
+  "sequences": [31,32,33,34,35,36],
+  "passages": 6,
+  "questions": 60,
+  "answers": 60,
+  "word_counts": [111,127,128,115,129,129],
+  "new_targets": ["راہ","آگے","سفر","پہلا","صبح","شام","فون","طریقہ","صحیح","اجازت"],
+  "source_lexicon": "urdu_top1000.csv",
+  "source_lexicon_mutated": false,
+  "structural_checks": {
+    "six_passages": true,
+    "sequences_contiguous": true,
+    "a1_word_band_90_140": true,
+    "ten_questions_each": true,
+    "ten_answers_each": true,
+    "question_answer_linkage": true,
+    "question_targets_locally_declared": true,
+    "new_target_forms_visible": true,
+    "new_target_exposure_counts_checked": true,
+    "declared_running_text_reviews_visible": true,
+    "first_introduction_order_checked": true,
+    "p06_zero_new_targets": true,
+    "learner_facing_roman_script_zero": true,
+    "sentence_count_metadata_checked": true
+  },
+  "repairs_during_staging_check": [
+    "Removed premature شام exposure from P02 so formal first introduction remains P03.",
+    "Removed premature صحیح exposure from P03 and P04 so formal first introduction remains P05."
+  ],
+  "formal_final_audit": "deferred under generation-first policy",
+  "promotion_precondition": "Live canonical Urdu A1 must first contain contiguous sequences 1-30; then Unit 06 can be promoted with the same guarded checks.",
+  "next_generation_frontier_after_promotion": "Unit 07 sequences 37-42"
+}
