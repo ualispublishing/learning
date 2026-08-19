@@ -50,49 +50,66 @@ For this project, Arabic/French educator re-certification targets the **highest-
 
 A teacher/publication release requires `HASH_BOUND_RELEASED` in `reading/RELEASE_STATUS.json` and a matching release manifest.
 
+## 2A. Latest independent educator recertification attempt — BLOCKED
+
+A fresh independent run on 2026-08-19 did **not** inherit historical PASS/SEALED verdicts. It bound fresh SHA-256 hashes for all Arabic/French A1–C2 canonical files and deterministically scanned all **720 passages / 7,200 questions / 7,200 answers**.
+
+Evidence:
+
+- `reading/audit/independent_educator_deterministic_2026-08-19.json`
+- `reading/audit/independent_educator_deterministic_2026-08-19.summary.json`
+- `reading/audit/independent_educator_recertification_2026-08-19.json`
+
+Result: **deterministic Gate A = FAIL; educator recertification = BLOCKED.** The scan recorded 4,310 open release-evidence findings: 720 canonical records with `quality.status != approved`, 720 coverage checks not pass, 720 missing/zero known-token coverage values, 714 pending linguistic reviews, 714 pending pedagogical reviews, 714 pending answer-key checks, and 8 Unicode NFC findings.
+
+These counts do **not** establish 4,310 separate prose mistakes. They establish that the live canonical per-record evidence is not sufficient to support educator certification. The draft/pending fields may be stale, but agents must not bulk-flip them to PASS. Each failed field must be backed by substantive revalidation.
+
+Exact next certification action: resolve/revalidate Gate A across the full corpus without weakening guards, rerun the deterministic audit to PASS against bound hashes, then perform/record the fresh 100% learner-facing linguistic/Q&A/educator review and the remaining independent external/native/human gates. Until then Arabic and French remain `INTERNAL_LANGUAGE_PASS`, not educator-ready.
+
 ## 3. Arabic current state
 
 - Generation: complete, A1–C2.
 - Canonical: 360 passages / 3,600 questions / 3,600 answers.
 - Historical internal final audit: PASS through the prior final protocol.
+- Fresh educator recertification: **BLOCKED at deterministic Gate A**.
 - **Educator release state: `INTERNAL_LANGUAGE_PASS`; external/native/educator re-certification required.**
 - Do not regenerate broadly unless the new verification protocol identifies a concrete defect class requiring repair.
-- When repairing, preserve target/review scheduling and rerun all affected deterministic checks.
+- Do not change draft/pending quality metadata merely to make Gate A pass; substantively revalidate first.
 
 ### Arabic verification next actions
 
-1. bind current A1–C2 canonical hashes;
-2. run full deterministic integrity audit;
-3. fresh 100% linguistic + Q/A audit;
-4. LanguageTool Arabic disagreement scan;
-5. CAMeL Tools MSA morphology diagnostics;
-6. three independent model-family reviews with blinded first judgments;
-7. native MSA professional review covering 100% of learner-facing content;
-8. independent educator/curriculum review covering 100% of passages and Q/A;
-9. complete blind post-repair human review covering 100% of learner-facing content;
-10. create release manifest only with zero unresolved defects.
+1. resolve/revalidate the full deterministic Gate A findings and rerun to PASS;
+2. fresh 100% linguistic + Q/A audit;
+3. LanguageTool Arabic disagreement scan;
+4. CAMeL Tools MSA morphology diagnostics;
+5. three independent model-family reviews with blinded first judgments;
+6. native MSA professional review covering 100% of learner-facing content;
+7. independent educator/curriculum review covering 100% of passages and Q/A;
+8. complete blind post-repair human review covering 100% of learner-facing content;
+9. create release manifest only with zero unresolved defects.
 
 ## 4. French current state
 
 - Generation: complete, A1–C2.
 - Canonical: 360 passages / 3,600 questions / 3,600 answers.
 - Historical internal/hash-bound final audit: PASS under the previous protocol.
+- Fresh educator recertification: **BLOCKED at deterministic Gate A**.
 - **Educator release state: `INTERNAL_LANGUAGE_PASS`; strengthened independent re-certification required.**
 - Do not treat the old hash-bound approval as sufficient for a new teacher-ready claim.
+- Do not change draft/pending quality metadata merely to make Gate A pass; substantively revalidate first.
 
 ### French verification next actions
 
-1. bind current A1–C2 canonical hashes;
-2. run full deterministic integrity audit;
-3. fresh 100% linguistic + Q/A audit;
-4. LanguageTool French disagreement scan;
-5. Antidote French disagreement scan;
-6. DeepL Write French disagreement scan;
-7. three independent model-family reviews with blinded first judgments;
-8. native professional French proofreader/editor review covering 100% of learner-facing content;
-9. independent educator/FLE curriculum review covering 100% of passages and Q/A;
-10. complete blind post-repair human review covering 100% of learner-facing content;
-11. create release manifest only with zero unresolved defects.
+1. resolve/revalidate the full deterministic Gate A findings and rerun to PASS;
+2. fresh 100% linguistic + Q/A audit;
+3. LanguageTool French disagreement scan;
+4. Antidote French disagreement scan;
+5. DeepL Write French disagreement scan;
+6. three independent model-family reviews with blinded first judgments;
+7. native professional French proofreader/editor review covering 100% of learner-facing content;
+8. independent educator/FLE curriculum review covering 100% of passages and Q/A;
+9. complete blind post-repair human review covering 100% of learner-facing content;
+10. create release manifest only with zero unresolved defects.
 
 ## 5. Urdu current generation frontier
 
