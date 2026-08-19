@@ -1,0 +1,46 @@
+name: Complete French C2 Unit 05
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/select_french_c2_unit05_targets.py'
+      - 'reading/tools/generate_french_c2_unit05.py'
+      - 'reading/tools/complete_french_c2_unit05.py'
+      - 'reading/tools/audit_french_c2_unit_generation.py'
+      - 'reading/tools/lock_french_c2_unit_frontier.py'
+      - '.github/workflows/complete-french-c2-unit05.yml'
+concurrency:
+  group: french-c2-canonical-writer
+  cancel-in-progress: false
+permissions: {contents: write}
+jobs:
+  complete:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet jsonschema
+      - name: Run C2 Unit05 guarded transaction
+        id: run
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python reading/tools/complete_french_c2_unit05.py 2>&1 | tee /tmp/c2u05.log
+      - name: Preserve failure log
+        if: steps.run.outcome != 'success'
+        run: mkdir -p reading/audit && cp /tmp/c2u05.log reading/audit/french_c2_unit05_workflow_failure.txt || true
+      - name: Commit validated progress
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/french/c2/passages.jsonl reading/audit reading/STATUS.json reading/TASKS.md reading/AGENT_HANDOFF.md
+          git diff --cached --quiet && exit 0
+          git commit -m 'Complete guarded French C2 Unit 05 pipeline [skip ci]'
+          git fetch origin main && git rebase --autostash origin/main && git push origin HEAD:main
+      - name: Fail if Unit05 did not seal
+        if: steps.run.outcome != 'success'
+        run: exit 1
