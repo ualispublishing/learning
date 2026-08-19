@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "verification-finding.schema.json",
+  "title": "Graded Reading Verification Finding",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "finding_id",
+    "language",
+    "level",
+    "passage_id",
+    "field",
+    "category",
+    "severity",
+    "source",
+    "description",
+    "status"
+  ],
+  "properties": {
+    "finding_id": {"type": "string", "minLength": 1},
+    "language": {"type": "string", "minLength": 1},
+    "level": {"type": "string", "minLength": 1},
+    "passage_id": {"type": "string", "minLength": 1},
+    "field": {"type": "string", "minLength": 1},
+    "span": {"type": ["string", "null"]},
+    "category": {
+      "enum": [
+        "grammar",
+        "spelling_typography",
+        "morphology_agreement",
+        "naturalness",
+        "semantics",
+        "ambiguity",
+        "register_variety",
+        "cohesion_reference",
+        "translationese",
+        "qa_grounding",
+        "answer_correctness",
+        "vocabulary_target",
+        "review_schedule",
+        "cefr_level",
+        "pedagogy",
+        "cultural_pragmatic",
+        "factual",
+        "schema_linkage",
+        "canonical_identity",
+        "other"
+      ]
+    },
+    "severity": {"enum": ["critical", "major", "minor"]},
+    "source": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "proposed_repair": {"type": ["string", "null"]},
+    "confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "status": {"enum": ["open", "accepted", "rejected", "repaired", "verified_closed"]},
+    "adjudication": {"type": ["string", "null"]},
+    "repair_commit": {"type": ["string", "null"]},
+    "repair_blob_sha": {"type": ["string", "null"], "pattern": "^[0-9a-f]{40}$"},
+    "recheck_artifact": {"type": ["string", "null"]}
+  }
+}
