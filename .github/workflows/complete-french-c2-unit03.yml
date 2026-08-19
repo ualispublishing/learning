@@ -1,4 +1,4 @@
-# Trigger after sealed C2 Unit02.
+# Complete French C2 Unit03 from the sealed Unit02 frontier.
 name: Complete French C2 Unit 03
 on:
   workflow_dispatch:
@@ -6,7 +6,9 @@ on:
     paths:
       - 'reading/tools/select_french_c2_unit03_targets.py'
       - 'reading/tools/generate_french_c2_unit03.py'
+      - 'reading/tools/generate_french_c2_unit03_retry.py'
       - 'reading/tools/complete_french_c2_unit03.py'
+      - 'reading/tools/complete_french_c2_unit03_retry.py'
       - 'reading/tools/audit_french_c2_unit_generation.py'
       - 'reading/tools/lock_french_c2_unit_frontier.py'
       - '.github/workflows/complete-french-c2-unit03.yml'
@@ -23,13 +25,13 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - run: python -m pip install --quiet jsonschema
-      - name: Run C2 Unit03 transaction
+      - name: Run C2 Unit03 transaction through quality preflight
         id: run
         continue-on-error: true
         shell: bash
         run: |
           set -o pipefail
-          python reading/tools/complete_french_c2_unit03.py 2>&1 | tee /tmp/c2u03.log
+          python reading/tools/complete_french_c2_unit03_retry.py 2>&1 | tee /tmp/c2u03.log
       - name: Preserve failure log
         if: steps.run.outcome != 'success'
         run: mkdir -p reading/audit && cp /tmp/c2u03.log reading/audit/french_c2_unit03_workflow_failure.txt || true
