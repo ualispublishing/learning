@@ -2,6 +2,7 @@
 """Approve French reading only from a live, hash-bound whole-corpus PASS."""
 from __future__ import annotations
 import json,subprocess
+from datetime import date
 from pathlib import Path
 
 R=Path(__file__).resolve().parents[2]
@@ -18,7 +19,7 @@ def main():
  if repair.get('final_c2_blob')!=live['c2']:raise AssertionError('French repair artifact C2 blob does not match live canonical')
  if audit.get('canonical_passages')!=360 or audit.get('questions')!=3600 or audit.get('answers')!=3600:raise AssertionError('French final corpus cardinality mismatch')
 
- approval={'status':'APPROVED','language':'fr','scope':'French graded reading A1-C2','date':'2026-08-18','canonical_passages':360,'questions':3600,'answers':3600,'audit_version':audit.get('audit_version',3),'audit_pass_count':audit['audit_pass_count'],'whole_corpus_sha256':audit['whole_corpus_sha256'],'level_blobs':live,'repair_transaction_status':repair['status'],'historical_frontier_locks_preserved':repair.get('historical_frontier_locks_preserved',False),'approval_basis':'live canonical hashes match a whole-corpus audit with all required independent passes PASS'}
+ approval={'status':'APPROVED','language':'fr','scope':'French graded reading A1-C2','date':date.today().isoformat(),'canonical_passages':360,'questions':3600,'answers':3600,'audit_version':audit.get('audit_version',3),'audit_pass_count':audit['audit_pass_count'],'whole_corpus_sha256':audit['whole_corpus_sha256'],'level_blobs':live,'repair_transaction_status':repair['status'],'historical_frontier_locks_preserved':repair.get('historical_frontier_locks_preserved',False),'approval_basis':'live canonical hashes match a whole-corpus audit with all required independent passes PASS'}
  APPROVAL.write_text(json.dumps(approval,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 
  s=json.loads(STATUS.read_text(encoding='utf-8'))
