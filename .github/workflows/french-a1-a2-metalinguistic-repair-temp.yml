@@ -20,7 +20,10 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run guarded repair
-        run: python reading/tools/repair_french_a1_a2_metalinguistic.py
+        run: |
+          # Temporary runner-side correction to the validator only: trim spaces inside French guillemets.
+          sed -i "s/strip('«»')/strip('«»').strip()/" reading/tools/repair_french_a1_a2_metalinguistic.py
+          python reading/tools/repair_french_a1_a2_metalinguistic.py
       - name: Commit repair to PR branch
         run: |
           git config user.name 'github-actions[bot]'
