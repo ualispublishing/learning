@@ -2,13 +2,13 @@
   "language": "ur",
   "cefr": "A1",
   "unit": 6,
-  "status": "STAGING_READY_CANONICAL_30_GATE_PENDING",
+  "status": "STAGED_STRUCTURALLY_CHECKED_CANONICAL_30_GATE_PENDING",
   "theme": "directions, short trips, and simple travel routines",
   "genres": ["route description", "short trip", "time-of-day travel routine", "route-help message", "safe-travel routine", "checkpoint"],
   "policy": "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
   "ten_question_standard": "reading/planning/TEN_QUESTION_STANDARD.md",
   "schema": "reading/schema/passage.schema.json",
-  "promotion_precondition": "Units 03-04 must be canonical, then Unit 05 must promote as sequences 25-30 before Unit 06 can promote.",
+  "promotion_precondition": "Unit 05 must promote as sequences 25-30 so the live Urdu A1 canonical frontier is sequence 30 before Unit 06 can promote.",
   "word_band": [90, 140],
   "new_target_policy": {
     "p01_p05_default": 2,
@@ -25,15 +25,24 @@
     {"sequence": 35, "id": "ur-a1-u06-p05", "targets": [{"id":"ur-rank-0450","form":"صحیح","rank":450,"sense":"right; correct; accurate"},{"id":"ur-rank-0431","form":"اجازت","rank":431,"sense":"permission; consent"}]},
     {"sequence": 36, "id": "ur-a1-u06-p06", "targets": []}
   ],
+  "verified_word_counts": [111,127,128,115,129,129],
   "structural_precheck": {
-    "six_passages_planned": true,
+    "six_passages": true,
     "sequences_31_36": true,
-    "ten_questions_each_required": true,
-    "ten_answers_each_required": true,
+    "ten_questions_each": true,
+    "ten_answers_each": true,
+    "question_answer_linkage": true,
     "p06_zero_new": true,
-    "a1_word_band_90_140": true,
+    "all_word_counts_in_a1_band": true,
+    "target_forms_visible_in_introduction_text": true,
     "target_source_rank_identity_checked": true,
+    "new_target_exposure_counts_checked": true,
+    "declared_running_text_reviews_visible": true,
+    "sentence_count_metadata_checked": true,
+    "future_target_premature_exposure_check": true,
+    "learner_facing_roman_script_zero": true,
     "root_lexicon_mutation": false
   },
-  "audit_policy": "Formal multi-pass final audit remains deferred under generation-first policy; Unit 06 may be staged ahead of canonical promotion but must not be counted as canonical until sequence-order guards pass."
+  "staging_result": "reading/audit/urdu_a1_unit06_staging_result.json",
+  "audit_policy": "Formal multi-pass final audit remains deferred under generation-first policy; Unit 06 remains staged until the canonical frontier is sequence 30 and a guarded promotion passes."
 }
