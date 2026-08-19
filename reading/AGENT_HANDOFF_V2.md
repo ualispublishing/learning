@@ -13,11 +13,12 @@ Before doing graded-reading work, read in this order:
 3. `reading/STATUS.json` for generation/progression state;
 4. this file;
 5. `reading/planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md` for correctness/release work;
-6. `reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md`;
-7. `reading/planning/TEN_QUESTION_STANDARD.md`;
-8. `reading/schema/passage.schema.json`;
-9. `docs/READING_PASSAGE_STANDARD.md` and `docs/READING_PASSAGE_RESEARCH.md`;
-10. `reading/ROADMAP.md` and `reading/TASKS.md` when needed.
+6. `reading/planning/HIGHEST_ASSURANCE_RELEASE_PROFILE.md` when the user asks for maximum practical correctness/teacher-ready confidence;
+7. `reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md`;
+8. `reading/planning/TEN_QUESTION_STANDARD.md`;
+9. `reading/schema/passage.schema.json`;
+10. `docs/READING_PASSAGE_STANDARD.md` and `docs/READING_PASSAGE_RESEARCH.md`;
+11. `reading/ROADMAP.md` and `reading/TASKS.md` when needed.
 
 ### State precedence
 
@@ -27,7 +28,7 @@ For generation/progression:
 
 For educator/publication release:
 
-`live canonical JSONL > RELEASE_STATUS > hash-bound verification manifests > this handoff > fresh deterministic audits > STATUS (generation state only) > legacy handoff/history`
+`live canonical JSONL > RELEASE_STATUS > hash-bound verification manifests > highest-assurance profile + educator protocol > this handoff > fresh deterministic audits > STATUS (generation state only) > legacy handoff/history`
 
 Never infer completion from chat memory.
 
@@ -44,6 +45,8 @@ No agent may claim:
 The strongest permitted claim after the new protocol is:
 
 > full corpus independently re-audited; no known defects remain under the recorded protocol.
+
+For this project, Arabic/French educator re-certification targets the **highest-assurance profile**, including a complete blind second human review over 100% of learner-facing content rather than a sample-only final gate.
 
 A teacher/publication release requires `HASH_BOUND_RELEASED` in `reading/RELEASE_STATUS.json` and a matching release manifest.
 
@@ -65,8 +68,8 @@ A teacher/publication release requires `HASH_BOUND_RELEASED` in `reading/RELEASE
 5. CAMeL Tools MSA morphology diagnostics;
 6. three independent model-family reviews with blinded first judgments;
 7. native MSA professional review covering 100% of learner-facing content;
-8. independent educator/curriculum review;
-9. blind post-repair review;
+8. independent educator/curriculum review covering 100% of passages and Q/A;
+9. complete blind post-repair human review covering 100% of learner-facing content;
 10. create release manifest only with zero unresolved defects.
 
 ## 4. French current state
@@ -87,8 +90,8 @@ A teacher/publication release requires `HASH_BOUND_RELEASED` in `reading/RELEASE
 6. DeepL Write French disagreement scan;
 7. three independent model-family reviews with blinded first judgments;
 8. native professional French proofreader/editor review covering 100% of learner-facing content;
-9. independent educator/FLE curriculum review;
-10. blind post-repair review;
+9. independent educator/FLE curriculum review covering 100% of passages and Q/A;
+10. complete blind post-repair human review covering 100% of learner-facing content;
 11. create release manifest only with zero unresolved defects.
 
 ## 5. Urdu current generation frontier
@@ -138,9 +141,11 @@ For correctness/release work:
 - use independent tools/models as detectors, never as sole authority;
 - do not reveal earlier PASS verdicts to independent reviewers before their first judgment;
 - a model that generated/repaired an item cannot be its sole approver;
+- same-model repeated passes do not count as independent model families;
 - log exact defect location, category, severity, correction, and resolution;
 - zero unresolved critical, major, minor, or disagreement items for the highest-assurance release;
-- any major/critical defect found in blind review reopens the defect class across the corpus;
+- the final blind human review is 100% coverage for this project's highest-assurance profile;
+- any critical/major defect found in the final blind review reopens the defect class across the corpus;
 - any canonical edit invalidates affected release hashes and triggers regression review.
 
 ## 8. Handoff hygiene
@@ -166,6 +171,7 @@ Stop and fail closed rather than guessing when:
 - source vocabulary identity cannot be verified;
 - a reviewer disagreement remains unresolved;
 - external review coverage is incomplete;
+- fewer than the required independent model families are available for a gate that requires them;
 - the only evidence of correctness is an older PASS/SEALED label.
 
 Record the blocker and the exact next verification action.
