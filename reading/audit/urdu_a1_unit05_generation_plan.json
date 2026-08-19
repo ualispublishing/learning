@@ -1,0 +1,42 @@
+{
+  "language": "ur",
+  "cefr": "A1",
+  "unit": 5,
+  "status": "STAGING_READY_CANONICAL_24_GATE_PENDING",
+  "theme": "school day, classroom tasks, and school locations",
+  "genres": ["classroom scene", "reading routine", "school-location scene", "problem-solving scene", "end-of-day routine", "checkpoint"],
+  "policy": "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
+  "ten_question_standard": "reading/planning/TEN_QUESTION_STANDARD.md",
+  "schema": "reading/schema/passage.schema.json",
+  "promotion_precondition": "Units 03-04 must first promote successfully so the live Urdu A1 canonical frontier is sequence 24.",
+  "word_band": [90, 140],
+  "new_target_policy": {
+    "p01_p05_default": 2,
+    "hard_quota": false,
+    "p06_new_targets": 0,
+    "source_lexicon": "urdu_top1000.csv",
+    "root_lexicon_read_only": true
+  },
+  "target_assignments": [
+    {"sequence": 25, "id": "ur-a1-u05-p01", "targets": [{"id":"ur-rank-0286","form":"سوال","rank":286,"sense":"question"},{"id":"ur-rank-0276","form":"جواب","rank":276,"sense":"answer; reply; response"}]},
+    {"sequence": 26, "id": "ur-a1-u05-p02", "targets": [{"id":"ur-rank-0352","form":"کتاب","rank":352,"sense":"book"},{"id":"ur-rank-0351","form":"یاد","rank":351,"sense":"memory; recollection"}]},
+    {"sequence": 27, "id": "ur-a1-u05-p03", "targets": [{"id":"ur-rank-0292","form":"اندر","rank":292,"sense":"inside; in; within"},{"id":"ur-rank-0293","form":"قریب","rank":293,"sense":"near; nearby"}]},
+    {"sequence": 28, "id": "ur-a1-u05-p04", "targets": [{"id":"ur-rank-0322","form":"مشکل","rank":322,"sense":"hard; difficult; problematic"},{"id":"ur-rank-0326","form":"ممکن","rank":326,"sense":"possible"}]},
+    {"sequence": 29, "id": "ur-a1-u05-p05", "targets": [{"id":"ur-rank-0279","form":"آخری","rank":279,"sense":"final; last"},{"id":"ur-rank-0295","form":"واپس","rank":295,"sense":"back; return; returned"}]},
+    {"sequence": 30, "id": "ur-a1-u05-p06", "targets": []}
+  ],
+  "planned_word_counts": [124,118,117,122,125,117],
+  "structural_precheck": {
+    "six_passages": true,
+    "sequences_25_30": true,
+    "ten_questions_each": true,
+    "ten_answers_each": true,
+    "question_answer_linkage": true,
+    "p06_zero_new": true,
+    "all_word_counts_in_a1_band": true,
+    "target_forms_visible_in_introduction_text": true,
+    "target_source_rank_identity_checked": true,
+    "learner_facing_roman_script_zero": true
+  },
+  "audit_policy": "Formal multi-pass final audit remains deferred under generation-first policy; Unit 05 remains staged until the canonical frontier is sequence 24 and a guarded promotion passes."
+}
