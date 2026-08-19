@@ -20,7 +20,9 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run human-reviewed refinement v2
-        run: python reading/tools/refine_french_a1_a2_metalinguistic_repair_v2.py
+        run: |
+          python reading/tools/patch_refine_v2_duplicates.py
+          python reading/tools/refine_french_a1_a2_metalinguistic_repair_v2.py
       - name: Commit refinement to PR branch
         run: |
           git config user.name 'github-actions[bot]'
