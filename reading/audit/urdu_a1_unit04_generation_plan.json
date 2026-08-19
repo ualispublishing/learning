@@ -1,0 +1,41 @@
+{
+  "language": "ur",
+  "cefr": "A1",
+  "unit": 4,
+  "status": "STAGING_READY_CANONICAL_GATE_PENDING",
+  "theme": "family, people, and introductions",
+  "genres": ["family-photo description", "park scene", "home visit", "school introduction", "family-chart explanation", "checkpoint"],
+  "policy": "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
+  "ten_question_standard": "reading/planning/TEN_QUESTION_STANDARD.md",
+  "schema": "reading/schema/passage.schema.json",
+  "canonical_gate": "Urdu A1 Unit 1 current-standard repair and Unit 2 canonical promotion remain required before later staged units can be promoted.",
+  "word_band": [90, 140],
+  "new_target_policy": {
+    "p01_p05_default": 2,
+    "hard_quota": false,
+    "p06_new_targets": 0,
+    "source_lexicon": "urdu_top1000.csv",
+    "root_lexicon_read_only": true
+  },
+  "target_assignments": [
+    {"sequence": 19, "id": "ur-a1-u04-p01", "targets": [{"id":"ur-rank-0116","form":"نام","rank":116,"sense":"name"},{"id":"ur-rank-0097","form":"دوست","rank":97,"sense":"friend"}]},
+    {"sequence": 20, "id": "ur-a1-u04-p02", "targets": [{"id":"ur-rank-0101","form":"لوگ","rank":101,"sense":"people"},{"id":"ur-rank-0165","form":"بچے","rank":165,"sense":"children"}]},
+    {"sequence": 21, "id": "ur-a1-u04-p03", "targets": [{"id":"ur-rank-0143","form":"گھر","rank":143,"sense":"house; home"},{"id":"ur-rank-0118","form":"ہمارے","rank":118,"sense":"our"}]},
+    {"sequence": 22, "id": "ur-a1-u04-p04", "targets": [{"id":"ur-rank-0216","form":"میرا","rank":216,"sense":"my; mine"},{"id":"ur-rank-0238","form":"شخص","rank":238,"sense":"person; individual"}]},
+    {"sequence": 23, "id": "ur-a1-u04-p05", "targets": [{"id":"ur-rank-0237","form":"تعلق","rank":237,"sense":"relationship; relation; connection"},{"id":"ur-rank-0182","form":"دوسری","rank":182,"sense":"second; other (feminine)"}]},
+    {"sequence": 24, "id": "ur-a1-u04-p06", "targets": []}
+  ],
+  "planned_word_counts": [130, 110, 115, 115, 120, 120],
+  "structural_precheck": {
+    "six_passages": true,
+    "sequences_19_24": true,
+    "ten_questions_each": true,
+    "ten_answers_each": true,
+    "question_answer_linkage": true,
+    "p06_zero_new": true,
+    "all_word_counts_in_a1_band": true,
+    "target_forms_visible_in_introduction_text": true,
+    "target_source_rank_identity_checked": true
+  },
+  "audit_policy": "Formal multi-pass final audit remains deferred under generation-first policy; this unit remains staged until the earlier Urdu canonical gate is resolved."
+}
