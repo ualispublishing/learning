@@ -2,16 +2,23 @@
   "language": "ur",
   "cefr": "A1",
   "unit": 2,
-  "status": "GENERATION_READY",
+  "status": "CANONICAL_PROMOTED",
   "source_canonical_blob": "7899fc1dd857625e5c3419a31bc116dbfa658de5",
   "source_passage_count": 6,
   "source_last_sequence": 6,
   "theme": "daily routine and time",
-  "genres": ["routine narrative", "schedule", "short message"],
+  "genres": [
+    "routine narrative",
+    "schedule",
+    "short message"
+  ],
   "policy": "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
   "ten_question_standard": "reading/planning/TEN_QUESTION_STANDARD.md",
   "schema": "reading/schema/passage.schema.json",
-  "word_band": [90, 140],
+  "word_band": [
+    90,
+    140
+  ],
   "new_target_policy": {
     "p01_p05_default": 2,
     "hard_quota": false,
@@ -20,14 +27,110 @@
     "root_lexicon_read_only": true
   },
   "target_assignments": [
-    {"sequence": 7, "id": "ur-a1-u02-p01", "targets": [{"id":"ur-rank-0067","form":"سب","rank":67,"sense":"all; every"},{"id":"ur-rank-0079","form":"کم","rank":79,"sense":"few; little; less"}]},
-    {"sequence": 8, "id": "ur-a1-u02-p02", "targets": [{"id":"ur-rank-0077","form":"سال","rank":77,"sense":"year"},{"id":"ur-rank-0121","form":"زندگی","rank":121,"sense":"life"}]},
-    {"sequence": 9, "id": "ur-a1-u02-p03", "targets": [{"id":"ur-rank-0104","form":"مدد","rank":104,"sense":"help; aid"},{"id":"ur-rank-0103","form":"استعمال","rank":103,"sense":"use; usage"}]},
-    {"sequence": 10, "id": "ur-a1-u02-p04", "targets": [{"id":"ur-rank-0128","form":"دوران","rank":128,"sense":"during; duration; course/period"},{"id":"ur-rank-0136","form":"جاری","rank":136,"sense":"continuing; ongoing"}]},
-    {"sequence": 11, "id": "ur-a1-u02-p05", "targets": [{"id":"ur-rank-0163","form":"موقع","rank":163,"sense":"chance; opportunity"},{"id":"ur-rank-0100","form":"شامل","rank":100,"sense":"included; involved"}]},
-    {"sequence": 12, "id": "ur-a1-u02-p06", "targets": []}
+    {
+      "sequence": 7,
+      "id": "ur-a1-u02-p01",
+      "targets": [
+        {
+          "id": "ur-rank-0067",
+          "form": "سب",
+          "rank": 67,
+          "sense": "all; every"
+        },
+        {
+          "id": "ur-rank-0079",
+          "form": "کم",
+          "rank": 79,
+          "sense": "few; little; less"
+        }
+      ]
+    },
+    {
+      "sequence": 8,
+      "id": "ur-a1-u02-p02",
+      "targets": [
+        {
+          "id": "ur-rank-0077",
+          "form": "سال",
+          "rank": 77,
+          "sense": "year"
+        },
+        {
+          "id": "ur-rank-0121",
+          "form": "زندگی",
+          "rank": 121,
+          "sense": "life"
+        }
+      ]
+    },
+    {
+      "sequence": 9,
+      "id": "ur-a1-u02-p03",
+      "targets": [
+        {
+          "id": "ur-rank-0104",
+          "form": "مدد",
+          "rank": 104,
+          "sense": "help; aid"
+        },
+        {
+          "id": "ur-rank-0103",
+          "form": "استعمال",
+          "rank": 103,
+          "sense": "use; usage"
+        }
+      ]
+    },
+    {
+      "sequence": 10,
+      "id": "ur-a1-u02-p04",
+      "targets": [
+        {
+          "id": "ur-rank-0128",
+          "form": "دوران",
+          "rank": 128,
+          "sense": "during; duration; course/period"
+        },
+        {
+          "id": "ur-rank-0136",
+          "form": "جاری",
+          "rank": 136,
+          "sense": "continuing; ongoing"
+        }
+      ]
+    },
+    {
+      "sequence": 11,
+      "id": "ur-a1-u02-p05",
+      "targets": [
+        {
+          "id": "ur-rank-0163",
+          "form": "موقع",
+          "rank": 163,
+          "sense": "chance; opportunity"
+        },
+        {
+          "id": "ur-rank-0100",
+          "form": "شامل",
+          "rank": 100,
+          "sense": "included; involved"
+        }
+      ]
+    },
+    {
+      "sequence": 12,
+      "id": "ur-a1-u02-p06",
+      "targets": []
+    }
   ],
-  "planned_word_counts": [111, 114, 114, 113, 119, 128],
+  "planned_word_counts": [
+    111,
+    114,
+    114,
+    113,
+    119,
+    128
+  ],
   "structural_precheck": {
     "six_passages": true,
     "sequences_7_12": true,
@@ -39,5 +142,18 @@
     "target_forms_visible_in_introduction_text": true,
     "target_source_rank_identity_checked": true
   },
-  "audit_policy": "Formal linguistic, pedagogical, coverage, and final approval audits remain deferred under generation-first policy; severe generation defects are repaired immediately."
+  "audit_policy": "Formal linguistic, pedagogical, coverage, and final approval audits remain deferred under generation-first policy; severe generation defects are repaired immediately.",
+  "promotion_date": "2026-08-19",
+  "canonical_path": "reading/urdu/a1/passages.jsonl",
+  "canonical_blob_after_promotion": "7e0226ea41955634b9fab629c369f9ec1fa149eb",
+  "canonical_sequences": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "generation_result": "reading/audit/urdu_a1_unit02_generation_result.json",
+  "calibration_audit": "reading/audit/urdu_a1_calibration_current_standard_audit.json"
 }

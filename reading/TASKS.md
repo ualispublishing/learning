@@ -1,3 +1,15 @@
+<!-- CURRENT_URDU_FRONTIER_START -->
+## Current execution queue — 2026-08-19
+
+- [x] Keep Arabic sealed.
+- [x] Keep French sealed.
+- [x] Audit Urdu A1 calibration sequences 1-6 against current guards.
+- [x] Repair legacy Urdu calibration review/exposure metadata without changing passage text.
+- [x] Promote Urdu A1 Unit 02 sequences 7-12 to canonical JSONL.
+- [ ] Generate Urdu A1 Unit 03 sequences 13-18 as the next guarded six-passage batch.
+- [ ] Continue Urdu A1 through sequence 60 before level-level final audit unless a severe defect requires immediate repair.
+<!-- CURRENT_URDU_FRONTIER_END -->
+
 # Reading Curriculum Task List
 
 This is the **active operational queue**. Historical calibration/review work belongs in git history and audit artifacts; do not infer current state from old unchecked items.

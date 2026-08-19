@@ -1,3 +1,16 @@
+<!-- CURRENT_URDU_FRONTIER_START -->
+## Current Urdu frontier — 2026-08-19
+
+- Arabic: sealed / approved (360 canonical passages).
+- French: sealed / approved (360 canonical passages; hash-bound final approval remains authoritative).
+- Urdu: active.
+- Urdu A1 calibration sequences 1-6: **accepted after current-standard repair**. See `reading/audit/urdu_a1_calibration_current_standard_audit.json`.
+- Urdu A1 Unit 02 sequences 7-12: **canonical generated**. See `reading/audit/urdu_a1_unit02_generation_result.json`.
+- Urdu A1 canonical total: **12 passages / 120 questions / 120 answers**.
+- Next exact frontier: **Unit 03, sequences 13-18**.
+- Continue under `reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md`; source lexicons stay read-only; do not reopen Arabic/French without a deliberate canonical change.
+<!-- CURRENT_URDU_FRONTIER_END -->
+
 # Agent Handoff — Graded Reading Curriculum
 
 **Purpose:** resume the Arabic/French/Urdu graded-reading project from live repository state without replaying old chat history or restarting completed phases.

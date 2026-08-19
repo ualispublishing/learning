@@ -4,7 +4,7 @@
   "overall_status": "in_progress",
   "active_language": "Urdu",
   "paused_languages": [],
-  "phase": "Arabic and French are formally sealed. Urdu is active from the six preserved A1 calibration passages.",
+  "phase": "Arabic and French are sealed. Urdu A1 calibration is accepted after current-standard repair; Unit 02 is canonical and generation-first production continues.",
   "target_passages": 1080,
   "target_is_quota": false,
   "approved_passages": 720,
@@ -547,23 +547,47 @@
     }
   },
   "urdu": {
-    "state": "ACTIVE_A1",
-    "canonical_passages": 6,
+    "state": "ACTIVE_A1_GENERATION",
+    "canonical_passages": 12,
     "levels": {
-      "a1": 6,
+      "a1": 12,
       "a2": 0,
       "b1": 0,
       "b2": 0,
       "c1": 0,
       "c2": 0
     },
-    "next_target": "Audit and accept the six preserved Urdu A1 calibration passages against current standards, then continue A1 from sequence 7."
+    "next_target": "Generate Urdu A1 Unit 03 as sequences 13-18 under the generation-first policy; keep formal final audit deferred.",
+    "calibration": {
+      "status": "ACCEPTED_AFTER_REPAIR",
+      "sequences": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "audit_artifact": "reading/audit/urdu_a1_calibration_current_standard_audit.json"
+    },
+    "a1_generation": {
+      "status": "ACTIVE",
+      "canonical_passages": 12,
+      "completed_units": [
+        1,
+        2
+      ],
+      "last_sequence": 12,
+      "unit02_result": "reading/audit/urdu_a1_unit02_generation_result.json",
+      "next_sequence": 13,
+      "next_unit": 3
+    }
   },
   "next_actions": [
     "keep Arabic sealed unless canonical Arabic changes",
-    "keep French sealed unless deliberate canonical French changes invalidate its hash-bound approval",
-    "run a strict current-standard audit of the six preserved Urdu A1 calibration passages",
-    "after Urdu A1 calibration is accepted, continue A1 from sequence 7 in guarded six-passage units"
+    "keep French sealed unless deliberate canonical French changes invalidate hash-bound approval",
+    "continue Urdu A1 from sequence 13 in guarded six-passage units",
+    "preserve source lexicons read-only and defer multi-pass final audit until the generation milestone"
   ],
   "important_files": [
     "reading/AGENT_HANDOFF.md",
@@ -620,7 +644,10 @@
     "reading/audit/french_c1_unit10_target_probe.json",
     "reading/audit/french_c1_unit10_generation_review.json",
     "reading/audit/french_c1_unit10_frontier_lock.json",
-    "reading/audit/french_c1_generation_integrity.json"
+    "reading/audit/french_c1_generation_integrity.json",
+    "reading/audit/urdu_a1_calibration_current_standard_audit.json",
+    "reading/audit/urdu_a1_unit02_generation_plan.json",
+    "reading/audit/urdu_a1_unit02_generation_result.json"
   ],
   "parallel_agent_rules": {
     "verify_live_main_before_write_batch": true,
