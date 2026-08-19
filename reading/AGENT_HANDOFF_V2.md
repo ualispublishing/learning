@@ -1,117 +1,116 @@
 # Agent Handoff V2 — Graded Reading Curriculum
 
-**Authoritative current handoff.** This file replaces `reading/AGENT_HANDOFF.md` for current execution. The legacy handoff is historical context only and contains stale frontier sections that must not drive work.
+**Authoritative current handoff.** `reading/AGENT_HANDOFF.md` is legacy historical context and must not drive current work.
 
 Updated: 2026-08-19
 
 ## 1. Mandatory read order
 
-Before doing graded-reading work, read in this order:
+For graded-reading work, read:
 
-1. live canonical `reading/<language>/<level>/passages.jsonl` relevant to the task;
-2. `reading/RELEASE_STATUS.json` if the request involves correctness, approval, teacher/educator use, publication, or release;
-3. `reading/STATUS.json` for generation/progression state;
-4. this file;
-5. `reading/planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md` for correctness/release work;
-6. `reading/planning/HIGHEST_ASSURANCE_RELEASE_PROFILE.md` when the user asks for maximum practical correctness/teacher-ready confidence;
-7. `reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md`;
-8. `reading/planning/TEN_QUESTION_STANDARD.md`;
-9. `reading/schema/passage.schema.json`;
-10. `docs/READING_PASSAGE_STANDARD.md` and `docs/READING_PASSAGE_RESEARCH.md`;
-11. `reading/ROADMAP.md` and `reading/TASKS.md` when needed.
+1. relevant live canonical `reading/<language>/<level>/passages.jsonl`;
+2. `reading/RELEASE_STATUS.json` for correctness, teacher use, publication, or release claims;
+3. `reading/STATUS.json` for generation/progression state only;
+4. this handoff;
+5. `reading/planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md`;
+6. `reading/planning/HIGHEST_ASSURANCE_RELEASE_PROFILE.md` for maximum-assurance work;
+7. current generation policy, ten-question standard, schema, durable reading standards/research, roadmap/tasks as needed.
 
-### State precedence
+Generation precedence:
 
-For generation/progression:
+`live canonical JSONL > fresh audit artifacts > STATUS > this handoff > current policies/schema > historical artifacts`
 
-`live canonical JSONL > fresh audit artifacts > STATUS > this handoff > current policies/schema > durable standards > historical artifacts`
+Educator-release precedence:
 
-For educator/publication release:
-
-`live canonical JSONL > RELEASE_STATUS > hash-bound verification manifests > highest-assurance profile + educator protocol > this handoff > fresh deterministic audits > STATUS (generation state only) > legacy handoff/history`
+`live canonical JSONL > RELEASE_STATUS > hash-bound verification evidence > highest-assurance protocol > this handoff > deterministic audits > STATUS generation labels > legacy history`
 
 Never infer completion from chat memory.
 
-## 2. Critical correctness rule
+## 2. Correctness / release rule
 
-`APPROVED`, `SEALED`, `PASS`, and `FINAL_APPROVED` in historical status/audit files mean that the corpus passed the workflow that existed at that time. They do **not** independently prove educator-ready correctness.
+Historical `APPROVED`, `SEALED`, `PASS`, and `FINAL_APPROVED` labels prove only that the corpus passed the workflow that existed at that time. They do **not** independently prove educator-ready correctness.
 
-No agent may claim:
+Never claim literal `100% guaranteed correct`, `error-free`, or teacher-ready solely from internal audit status. For this project, highest-assurance release requires complete recorded review coverage, zero unresolved defects/disagreements, and matching release hashes.
 
-- literal `100% guaranteed correct`;
-- `error-free`;
-- `teacher-ready` or `educator-ready` solely from internal audit status.
-
-The strongest permitted claim after the new protocol is:
+The strongest permitted claim after all gates is:
 
 > full corpus independently re-audited; no known defects remain under the recorded protocol.
 
-For this project, Arabic/French educator re-certification targets the **highest-assurance profile**, including a complete blind second human review over 100% of learner-facing content rather than a sample-only final gate.
+A teacher/publication release requires `HASH_BOUND_RELEASED` in `reading/RELEASE_STATUS.json` plus a matching manifest.
 
-A teacher/publication release requires `HASH_BOUND_RELEASED` in `reading/RELEASE_STATUS.json` and a matching release manifest.
+## 3. Independent recertification findings — current truth
 
-## 2A. Latest independent educator recertification attempt — BLOCKED
+A fresh 2026-08-19 recertification attempt bound Arabic/French A1–C2 hashes and scanned all 720 passages / 7,200 questions / 7,200 answers. Deterministic Gate A remains incomplete because much canonical record-level quality evidence is stale/pending; do not bulk-flip metadata merely to obtain PASS.
 
-A fresh independent run on 2026-08-19 did **not** inherit historical PASS/SEALED verdicts. It bound fresh SHA-256 hashes for all Arabic/French A1–C2 canonical files and deterministically scanned all **720 passages / 7,200 questions / 7,200 answers**.
+A subsequent adversarial in-chat educator review found **concrete major French canonical defects** that the historical approval workflow had missed:
 
-Evidence:
+- French C1 Unit 01 P01–P05 contained 20 generic vocabulary answers that did not answer the target-specific questions.
+- French C1 Unit 01 P01–P06 contained learner-facing production/meta language, including an English theme label and internal progression/checkpoint wording.
+- French C2 Unit 01 P01–P05 contained learner-facing `Révision C1 intégrée` production notes.
 
-- `reading/audit/independent_educator_deterministic_2026-08-19.json`
-- `reading/audit/independent_educator_deterministic_2026-08-19.summary.json`
-- `reading/audit/independent_educator_recertification_2026-08-19.json`
+These defects were repaired on `main` through PR #6. Evidence:
 
-Result: **deterministic Gate A = FAIL; educator recertification = BLOCKED.** The scan recorded 4,310 open release-evidence findings: 720 canonical records with `quality.status != approved`, 720 coverage checks not pass, 720 missing/zero known-token coverage values, 714 pending linguistic reviews, 714 pending pedagogical reviews, 714 pending answer-key checks, and 8 Unicode NFC findings.
+- `reading/audit/french_c1_c2_educator_defect_repair_2026-08-19.json`
+- `reading/audit/french_c1_u01_p06_followup_repair_2026-08-19.json`
 
-These counts do **not** establish 4,310 separate prose mistakes. They establish that the live canonical per-record evidence is not sufficient to support educator certification. The draft/pending fields may be stale, but agents must not bulk-flip them to PASS. Each failed field must be backed by substantive revalidation.
+Repair result:
 
-Exact next certification action: resolve/revalidate Gate A across the full corpus without weakening guards, rerun the deterministic audit to PASS against bound hashes, then perform/record the fresh 100% learner-facing linguistic/Q&A/educator review and the remaining independent external/native/human gates. Until then Arabic and French remain `INTERNAL_LANGUAGE_PASS`, not educator-ready.
+- 11 affected passages repaired;
+- 20 generic vocabulary answers replaced with context-specific answers;
+- exact scheduled review forms preserved;
+- 10-question/10-answer linkage preserved;
+- full C1/C2 scan for the identified production-note/generic-answer patterns returned zero residue;
+- C1 Unit 01 P06 received an additional human spot-check repair after the first machine-clean pass exposed awkward wording.
 
-## 3. Arabic current state
+Post-repair SHA-256 evidence recorded by the repair artifacts:
 
-- Generation: complete, A1–C2.
-- Canonical: 360 passages / 3,600 questions / 3,600 answers.
-- Historical internal final audit: PASS through the prior final protocol.
-- Fresh educator recertification: **BLOCKED at deterministic Gate A**.
-- **Educator release state: `INTERNAL_LANGUAGE_PASS`; external/native/educator re-certification required.**
-- Do not regenerate broadly unless the new verification protocol identifies a concrete defect class requiring repair.
-- Do not change draft/pending quality metadata merely to make Gate A pass; substantively revalidate first.
+- French C1: `dead8e5d6e6e60a7c6c5185996159670e6077ea2d5da31860de168674050b39a`
+- French C2: `c161c4551a6ce0222850778c02ed0662e00bb60e5386d5dc0b4f31a92cb9f277`
 
-### Arabic verification next actions
+**Important:** this repair does not re-certify French. It invalidates the old French release hashes. French is now `REOPEN_REQUIRED` until the strengthened independent gates are rerun against the repaired corpus.
 
-1. resolve/revalidate the full deterministic Gate A findings and rerun to PASS;
-2. fresh 100% linguistic + Q/A audit;
-3. LanguageTool Arabic disagreement scan;
-4. CAMeL Tools MSA morphology diagnostics;
-5. three independent model-family reviews with blinded first judgments;
-6. native MSA professional review covering 100% of learner-facing content;
-7. independent educator/curriculum review covering 100% of passages and Q/A;
-8. complete blind post-repair human review covering 100% of learner-facing content;
-9. create release manifest only with zero unresolved defects.
+## 4. Arabic current state
 
-## 4. French current state
+- Generation: complete A1–C2; 360 passages / 3,600 questions / 3,600 answers.
+- Historical internal audit: PASS under the prior protocol.
+- Highest-assurance educator release: **not complete**.
+- Current release state remains non-release-ready; consult `reading/RELEASE_STATUS.json` for exact state.
+- Known deterministic concerns include pending/stale record-level evidence and previously detected Unicode normalization findings; substantive linguistic/native review remains required.
 
-- Generation: complete, A1–C2.
-- Canonical: 360 passages / 3,600 questions / 3,600 answers.
-- Historical internal/hash-bound final audit: PASS under the previous protocol.
-- Fresh educator recertification: **BLOCKED at deterministic Gate A**.
-- **Educator release state: `INTERNAL_LANGUAGE_PASS`; strengthened independent re-certification required.**
-- Do not treat the old hash-bound approval as sufficient for a new teacher-ready claim.
-- Do not change draft/pending quality metadata merely to make Gate A pass; substantively revalidate first.
+Next Arabic certification work:
 
-### French verification next actions
+1. substantively resolve/revalidate deterministic Gate A and rerun it;
+2. perform fresh 100% linguistic + Q/A review;
+3. LanguageTool Arabic + CAMeL MSA diagnostics;
+4. three genuinely independent model-family audits;
+5. 100% native MSA professional review;
+6. 100% independent educator/curriculum review;
+7. repair/regression/adjudication;
+8. complete blind post-repair human review;
+9. issue a hash-bound release manifest only at zero unresolved defects.
 
-1. resolve/revalidate the full deterministic Gate A findings and rerun to PASS;
-2. fresh 100% linguistic + Q/A audit;
-3. LanguageTool French disagreement scan;
-4. Antidote French disagreement scan;
-5. DeepL Write French disagreement scan;
-6. three independent model-family reviews with blinded first judgments;
-7. native professional French proofreader/editor review covering 100% of learner-facing content;
-8. independent educator/FLE curriculum review covering 100% of passages and Q/A;
-9. complete blind post-repair human review covering 100% of learner-facing content;
-10. create release manifest only with zero unresolved defects.
+## 5. French current state
 
-## 5. Urdu current generation frontier
+- Generation: complete A1–C2; 360 passages / 3,600 questions / 3,600 answers.
+- Historical internal/hash-bound audit: PASS under the previous protocol, now insufficient and hash-invalidated by canonical repairs.
+- Confirmed C1/C2 defect class described above: **repaired**.
+- Current educator release state: **`REOPEN_REQUIRED`**.
+- Do not restore historical approval merely because the identified defects were fixed.
+
+Next French certification work:
+
+1. rerun deterministic Gate A against the repaired canonical hashes and substantively resolve remaining evidence failures;
+2. run a fresh 100% learner-facing linguistic + answer-grounding + educator review, with explicit corpus-wide searches for templated/generic Q/A and production/meta-language leakage;
+3. LanguageTool French, Antidote, and DeepL Write disagreement passes;
+4. three genuinely independent model-family audits;
+5. 100% native professional French review;
+6. 100% independent FLE/CEFR educator review;
+7. adjudicate all disagreements and repair accepted defects;
+8. rerun affected deterministic/lexical/progression/Q&A checks;
+9. complete blind post-repair human review over 100% of learner-facing content;
+10. create a new hash-bound release manifest only with zero unresolved findings.
+
+## 6. Urdu current generation frontier
 
 Urdu remains the active generation language.
 
@@ -120,75 +119,68 @@ Confirmed canonical state at this handoff write:
 - A1 sequences 1–30 canonical;
 - 30 passages / 300 questions / 300 answers;
 - Units 01–05 canonical;
-- Unit 06 sequences 31–36 are staged but **not confirmed canonical** because `reading/audit/urdu_a1_unit06_generation_result.json` is absent at this write;
-- Unit 07 sequences 37–42 are staged and must remain non-canonical until Unit 06 promotion is verified;
+- Unit 06 sequences 31–36 staged but not confirmed canonical at this handoff write;
+- Unit 07 sequences 37–42 staged and must remain non-canonical until Unit 06 promotion is verified;
 - source lexicon remains read-only.
 
-### Exact next action
+Exact generation continuation:
 
-1. Verify live main for Unit 06 result/canonical sequences 31–36.
-2. If absent, run/retrigger the existing guarded Unit 06 promotion mechanism without weakening guards and without merging trigger-only PRs.
-3. If Unit 06 becomes canonical, bind the new canonical blob and promote Unit 07 under the same fail-closed rules.
-4. Continue Unit 08 generation after strict sequence order is restored.
-5. Continue A1 to sequence 60 before the normal level-level final audit unless a severe defect requires immediate repair.
+1. verify live main for Unit 06 result and sequences 31–36;
+2. if absent, retrigger the existing guarded promotion without weakening guards or merging trigger-only PRs;
+3. once Unit 06 is canonical, bind the new blob and promote Unit 07;
+4. continue Unit 08 after strict sequence order is restored;
+5. continue A1 to sequence 60 before normal level-level final audit unless a severe defect requires immediate repair.
 
-Do not count staging as canonical.
+Never count staging as canonical.
 
-## 6. Generation non-negotiables
+## 7. Non-negotiables
+
+Generation:
 
 - canonical data is JSONL;
-- exactly 10 questions and 10 linked answers per passage unless canonical policy explicitly changes;
-- passage first, then all questions, then answer reveal in reader-facing rendering;
-- vocabulary progression follows contextual infer → verify → transfer plus spaced review;
-- validated source lexicons are read-only;
-- target rank/ID/form/sense identity must be source-backed;
-- frequency rank is not CEFR level;
-- deliberate reviews must be visible according to current policy;
-- checkpoint zero-new rules must be preserved;
-- fail closed on source/hash drift, ID/sequence errors, collisions, exposure/review failures, schema/linkage failures, or learner-facing contamination;
-- repair failed content/metadata rather than weakening a valid guard;
-- verify live main before every canonical write;
-- serialize workflows that write the same canonical artifact.
+- exactly 10 questions + 10 linked answers per passage unless policy explicitly changes;
+- validated source lexicons remain read-only;
+- source rank/ID/form/sense identity must be verifiable;
+- deliberate review scheduling and checkpoint zero-new rules must survive repairs;
+- fail closed on hash/source drift, IDs/sequences, collisions, exposure/review failures, schema/linkage failures, or learner-facing contamination;
+- repair content/metadata rather than weakening valid guards;
+- verify live main before canonical writes and serialize writers to the same artifact.
 
-## 7. Independent-review non-negotiables
+Independent review:
 
-For correctness/release work:
-
-- review **100%** of learner-facing content for the primary language/Q&A pass;
-- use independent tools/models as detectors, never as sole authority;
-- do not reveal earlier PASS verdicts to independent reviewers before their first judgment;
-- a model that generated/repaired an item cannot be its sole approver;
-- same-model repeated passes do not count as independent model families;
-- log exact defect location, category, severity, correction, and resolution;
-- zero unresolved critical, major, minor, or disagreement items for the highest-assurance release;
-- the final blind human review is 100% coverage for this project's highest-assurance profile;
-- any critical/major defect found in the final blind review reopens the defect class across the corpus;
-- any canonical edit invalidates affected release hashes and triggers regression review.
+- primary linguistic/Q&A/educator review covers 100% of learner-facing content;
+- model/tool outputs are detectors, not sole authorities;
+- a generator/repairer cannot be the sole approver of its own work;
+- repeated runs of one model do not count as independent model families;
+- log exact defect, location, severity, repair, adjudication, and recheck evidence;
+- highest-assurance release requires zero unresolved critical/major/minor/disagreement items;
+- final blind human review covers 100% for this project;
+- any canonical edit invalidates affected release hashes.
 
 ## 8. Handoff hygiene
 
-At the end of a durable work session:
+At durable session boundaries:
 
-1. verify canonical counts/hashes directly from live main;
-2. update `reading/STATUS.json` only with verified generation state;
-3. update `reading/RELEASE_STATUS.json` only when release evidence changes;
-4. update this handoff with the **single current frontier**, not an append-only history;
-5. update `reading/TASKS.md` or the active verification task file;
-6. put detailed historical events in git history/audit artifacts, not in the current handoff;
-7. remove or explicitly deprecate stale frontier instructions;
-8. never leave contradictory `IMMEDIATE NEXT` sections in the authoritative handoff.
+1. verify live canonical counts/hashes;
+2. update `STATUS.json` only for verified generation state;
+3. update `RELEASE_STATUS.json` only from actual release evidence;
+4. keep **one current frontier** in this handoff rather than append-only history;
+5. update `VERIFICATION_TASKS.md` for release/correctness work and `TASKS.md` for generation work;
+6. store detailed history in audit artifacts/git history;
+7. remove temporary repair workflows/triggers after use;
+8. never leave contradictory `IMMEDIATE NEXT` sections.
 
-## 9. Stop conditions
+## 9. Stop / fail-closed conditions
 
-Stop and fail closed rather than guessing when:
+Stop rather than guess when:
 
-- live canonical state disagrees with status/handoff;
-- a required audit artifact is absent;
-- a release hash does not match canonical content;
-- source vocabulary identity cannot be verified;
+- live canonical state disagrees with release/generation records;
+- required audit evidence is absent;
+- a claimed release hash does not match canonical content;
+- vocabulary source identity cannot be verified;
 - a reviewer disagreement remains unresolved;
-- external review coverage is incomplete;
-- fewer than the required independent model families are available for a gate that requires them;
-- the only evidence of correctness is an older PASS/SEALED label.
+- external/human review coverage is incomplete;
+- required independent reviewer/model families are unavailable;
+- the only evidence for correctness is an older PASS/SEALED label.
 
 Record the blocker and the exact next verification action.
