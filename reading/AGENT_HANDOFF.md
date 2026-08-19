@@ -5,11 +5,10 @@
 - French: sealed / approved (360 canonical passages; hash-bound final approval remains authoritative).
 - Urdu: active.
 - Urdu A1 calibration sequences 1-6: **accepted after current-standard repair**.
-- Urdu A1 Units 02-04 sequences 7-24: **canonical generated**.
-- Urdu A1 canonical total: **24 passages / 240 questions / 240 answers**.
-- Unit 03 result: `reading/audit/urdu_a1_unit03_generation_result.json`.
-- Unit 04 result: `reading/audit/urdu_a1_unit04_generation_result.json`.
-- Next exact frontier: **Unit 05, sequences 25-30**.
+- Urdu A1 Units 02-05 sequences 7-30: **canonical generated**.
+- Urdu A1 canonical total: **30 passages / 300 questions / 300 answers**.
+- Unit 05 result: `reading/audit/urdu_a1_unit05_generation_result.json`.
+- Next exact frontier: **Unit 06, sequences 31-36**.
 - Continue under `reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md`; source lexicons stay read-only; do not reopen Arabic/French without a deliberate canonical change.
 <!-- CURRENT_URDU_FRONTIER_END -->
 

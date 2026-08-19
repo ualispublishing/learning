@@ -2,14 +2,24 @@
   "language": "ur",
   "cefr": "A1",
   "unit": 5,
-  "status": "STAGED_STRUCTURALLY_CHECKED_CANONICAL_24_GATE_PENDING",
+  "status": "CANONICAL_PROMOTED",
   "theme": "school day, classroom tasks, and school locations",
-  "genres": ["classroom scene", "reading routine", "school-location scene", "problem-solving scene", "end-of-day routine", "checkpoint"],
+  "genres": [
+    "classroom scene",
+    "reading routine",
+    "school-location scene",
+    "problem-solving scene",
+    "end-of-day routine",
+    "checkpoint"
+  ],
   "policy": "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
   "ten_question_standard": "reading/planning/TEN_QUESTION_STANDARD.md",
   "schema": "reading/schema/passage.schema.json",
   "promotion_precondition": "Units 03-04 must first promote successfully so the live Urdu A1 canonical frontier is sequence 24.",
-  "word_band": [90, 140],
+  "word_band": [
+    90,
+    140
+  ],
   "new_target_policy": {
     "p01_p05_default": 2,
     "hard_quota": false,
@@ -18,14 +28,110 @@
     "root_lexicon_read_only": true
   },
   "target_assignments": [
-    {"sequence": 25, "id": "ur-a1-u05-p01", "targets": [{"id":"ur-rank-0286","form":"سوال","rank":286,"sense":"question"},{"id":"ur-rank-0276","form":"جواب","rank":276,"sense":"answer; reply; response"}]},
-    {"sequence": 26, "id": "ur-a1-u05-p02", "targets": [{"id":"ur-rank-0352","form":"کتاب","rank":352,"sense":"book"},{"id":"ur-rank-0351","form":"یاد","rank":351,"sense":"memory; recollection"}]},
-    {"sequence": 27, "id": "ur-a1-u05-p03", "targets": [{"id":"ur-rank-0292","form":"اندر","rank":292,"sense":"inside; in; within"},{"id":"ur-rank-0293","form":"قریب","rank":293,"sense":"near; nearby"}]},
-    {"sequence": 28, "id": "ur-a1-u05-p04", "targets": [{"id":"ur-rank-0322","form":"مشکل","rank":322,"sense":"hard; difficult; problematic"},{"id":"ur-rank-0326","form":"ممکن","rank":326,"sense":"possible"}]},
-    {"sequence": 29, "id": "ur-a1-u05-p05", "targets": [{"id":"ur-rank-0279","form":"آخری","rank":279,"sense":"final; last"},{"id":"ur-rank-0295","form":"واپس","rank":295,"sense":"back; return; returned"}]},
-    {"sequence": 30, "id": "ur-a1-u05-p06", "targets": []}
+    {
+      "sequence": 25,
+      "id": "ur-a1-u05-p01",
+      "targets": [
+        {
+          "id": "ur-rank-0286",
+          "form": "سوال",
+          "rank": 286,
+          "sense": "question"
+        },
+        {
+          "id": "ur-rank-0276",
+          "form": "جواب",
+          "rank": 276,
+          "sense": "answer; reply; response"
+        }
+      ]
+    },
+    {
+      "sequence": 26,
+      "id": "ur-a1-u05-p02",
+      "targets": [
+        {
+          "id": "ur-rank-0352",
+          "form": "کتاب",
+          "rank": 352,
+          "sense": "book"
+        },
+        {
+          "id": "ur-rank-0351",
+          "form": "یاد",
+          "rank": 351,
+          "sense": "memory; recollection"
+        }
+      ]
+    },
+    {
+      "sequence": 27,
+      "id": "ur-a1-u05-p03",
+      "targets": [
+        {
+          "id": "ur-rank-0292",
+          "form": "اندر",
+          "rank": 292,
+          "sense": "inside; in; within"
+        },
+        {
+          "id": "ur-rank-0293",
+          "form": "قریب",
+          "rank": 293,
+          "sense": "near; nearby"
+        }
+      ]
+    },
+    {
+      "sequence": 28,
+      "id": "ur-a1-u05-p04",
+      "targets": [
+        {
+          "id": "ur-rank-0322",
+          "form": "مشکل",
+          "rank": 322,
+          "sense": "hard; difficult; problematic"
+        },
+        {
+          "id": "ur-rank-0326",
+          "form": "ممکن",
+          "rank": 326,
+          "sense": "possible"
+        }
+      ]
+    },
+    {
+      "sequence": 29,
+      "id": "ur-a1-u05-p05",
+      "targets": [
+        {
+          "id": "ur-rank-0279",
+          "form": "آخری",
+          "rank": 279,
+          "sense": "final; last"
+        },
+        {
+          "id": "ur-rank-0295",
+          "form": "واپس",
+          "rank": 295,
+          "sense": "back; return; returned"
+        }
+      ]
+    },
+    {
+      "sequence": 30,
+      "id": "ur-a1-u05-p06",
+      "targets": []
+    }
   ],
-  "verified_word_counts": [124,118,117,122,125,117],
+  "verified_word_counts": [
+    124,
+    118,
+    117,
+    122,
+    125,
+    117
+  ],
   "structural_precheck": {
     "six_passages": true,
     "sequences_25_30": true,
@@ -42,5 +148,9 @@
     "learner_facing_roman_script_zero": true
   },
   "staging_result": "reading/audit/urdu_a1_unit05_staging_result.json",
-  "audit_policy": "Formal multi-pass final audit remains deferred under generation-first policy; Unit 05 remains staged until the canonical frontier is sequence 24 and a guarded promotion passes."
+  "audit_policy": "Formal multi-pass final audit remains deferred under generation-first policy; Unit 05 remains staged until the canonical frontier is sequence 24 and a guarded promotion passes.",
+  "promotion_date": "2026-08-19",
+  "canonical_path": "reading/urdu/a1/passages.jsonl",
+  "canonical_blob": "4a267176ce4119c84c7886fc80e46c873f432119",
+  "generation_result": "reading/audit/urdu_a1_unit05_generation_result.json"
 }

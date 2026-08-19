@@ -4,14 +4,39 @@
   "unit": 5,
   "date": "2026-08-19",
   "status": "STAGED_STRUCTURALLY_CHECKED",
-  "canonical_promotion": "WAITING_FOR_SEQUENCE_24_FRONTIER",
+  "canonical_promotion": "PROMOTED",
   "staging_path": "reading/urdu/a1/staging/unit05",
-  "sequences": [25,26,27,28,29,30],
+  "sequences": [
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+  ],
   "passages": 6,
   "questions": 60,
   "answers": 60,
-  "word_counts": [124,118,117,122,125,117],
-  "new_targets": ["سوال","جواب","کتاب","یاد","اندر","قریب","مشکل","ممکن","آخری","واپس"],
+  "word_counts": [
+    124,
+    118,
+    117,
+    122,
+    125,
+    117
+  ],
+  "new_targets": [
+    "سوال",
+    "جواب",
+    "کتاب",
+    "یاد",
+    "اندر",
+    "قریب",
+    "مشکل",
+    "ممکن",
+    "آخری",
+    "واپس"
+  ],
   "source_lexicon": "urdu_top1000.csv",
   "source_lexicon_mutated": false,
   "structural_checks": {
@@ -31,5 +56,7 @@
   },
   "formal_final_audit": "deferred under generation-first policy",
   "promotion_precondition": "Live canonical Urdu A1 must first contain contiguous sequences 1-24; then Unit 05 can be promoted with the same guarded checks.",
-  "next_generation_frontier_after_promotion": "Unit 06 sequences 31-36"
+  "next_generation_frontier_after_promotion": "Unit 06 sequences 31-36",
+  "canonical_blob": "4a267176ce4119c84c7886fc80e46c873f432119",
+  "superseded_as_frontier_by": "reading/audit/urdu_a1_unit05_generation_result.json"
 }

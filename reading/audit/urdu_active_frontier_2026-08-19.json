@@ -2,7 +2,7 @@
   "date": "2026-08-19",
   "language": "ur",
   "scope": "A1 graded-reading continuation",
-  "status": "ACTIVE_CANONICAL_24",
+  "status": "ACTIVE_CANONICAL_30_UNIT06_STAGING",
   "precedence_note": "Live canonical JSONL and fresh audit artifacts are authoritative. An earlier read occurred before the guarded Unit 02 promotion commit landed; this revision supersedes that temporary stale observation.",
   "sealed_languages": {
     "arabic": {
@@ -18,8 +18,8 @@
   },
   "urdu_a1": {
     "live_canonical_path": "reading/urdu/a1/passages.jsonl",
-    "live_canonical_blob": "afa3150718ad30ef9161f5adb4b96d90aaf10f99",
-    "live_canonical_passages": 24,
+    "live_canonical_blob": "4a267176ce4119c84c7886fc80e46c873f432119",
+    "live_canonical_passages": 30,
     "live_canonical_sequences": [
       1,
       2,
@@ -44,7 +44,13 @@
       21,
       22,
       23,
-      24
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30
     ],
     "calibration": {
       "status": "PASS_AFTER_REPAIR",
@@ -65,9 +71,9 @@
     },
     "staged_units": {},
     "available_records": {
-      "canonical": 24,
-      "staged": 0,
-      "canonical_plus_staged": 24
+      "canonical": 30,
+      "staged": 6,
+      "canonical_plus_staged": 36
     },
     "unit03": {
       "status": "CANONICAL_PROMOTED",
@@ -92,6 +98,18 @@
         24
       ],
       "artifact": "reading/audit/urdu_a1_unit04_generation_result.json"
+    },
+    "unit05": {
+      "status": "CANONICAL_PROMOTED",
+      "sequences": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "artifact": "reading/audit/urdu_a1_unit05_generation_result.json"
     }
   },
   "continuity_contradiction": {
@@ -105,9 +123,9 @@
     "repo_cleanup_complete": true
   },
   "next_exact_actions": [
-    "Generate Urdu A1 Unit 05 sequences 25-30 as the next guarded six-passage batch.",
-    "Continue generation-first production through A1 sequence 60, preserving read-only source lexicons and exact structural/lexical guards.",
-    "Run the planned level-level/final audit at the generation milestone unless a severe defect requires earlier repair."
+    "Complete and structurally check Urdu A1 Unit 06 sequences 31-36.",
+    "Promote Unit 06 only against the exact live sequence-30 canonical blob.",
+    "Continue generation-first production through A1 sequence 60 before the planned level-level final audit unless a severe defect requires earlier repair."
   ],
   "generation_policy": "Continue generation-first production; staged passages are not canonical until guarded promotion succeeds. Formal multi-pass final audit remains deferred until the intended generation milestone unless a severe defect is found."
 }

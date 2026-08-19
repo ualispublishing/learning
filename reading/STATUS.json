@@ -4,7 +4,7 @@
   "overall_status": "in_progress",
   "active_language": "Urdu",
   "paused_languages": [],
-  "phase": "Arabic and French are sealed. Urdu A1 Units 01-04 are canonical; generation-first production continues from Unit 05.",
+  "phase": "Arabic and French are sealed. Urdu A1 Units 01-05 are canonical; generation-first production continues from Unit 06.",
   "target_passages": 1080,
   "target_is_quota": false,
   "approved_passages": 720,
@@ -548,16 +548,16 @@
   },
   "urdu": {
     "state": "ACTIVE_A1_GENERATION",
-    "canonical_passages": 24,
+    "canonical_passages": 30,
     "levels": {
-      "a1": 24,
+      "a1": 30,
       "a2": 0,
       "b1": 0,
       "b2": 0,
       "c1": 0,
       "c2": 0
     },
-    "next_target": "Generate Urdu A1 Unit 05 as sequences 25-30 under the generation-first policy; keep formal final audit deferred.",
+    "next_target": "Generate Urdu A1 Unit 06 as sequences 31-36 under the generation-first policy; keep formal final audit deferred.",
     "calibration": {
       "status": "ACCEPTED_AFTER_REPAIR",
       "sequences": [
@@ -572,25 +572,27 @@
     },
     "a1_generation": {
       "status": "ACTIVE",
-      "canonical_passages": 24,
+      "canonical_passages": 30,
       "completed_units": [
         1,
         2,
         3,
-        4
+        4,
+        5
       ],
-      "last_sequence": 24,
+      "last_sequence": 30,
       "unit02_result": "reading/audit/urdu_a1_unit02_generation_result.json",
-      "next_sequence": 25,
-      "next_unit": 5,
+      "next_sequence": 31,
+      "next_unit": 6,
       "unit03_result": "reading/audit/urdu_a1_unit03_generation_result.json",
-      "unit04_result": "reading/audit/urdu_a1_unit04_generation_result.json"
+      "unit04_result": "reading/audit/urdu_a1_unit04_generation_result.json",
+      "unit05_result": "reading/audit/urdu_a1_unit05_generation_result.json"
     }
   },
   "next_actions": [
     "keep Arabic sealed unless canonical Arabic changes",
     "keep French sealed unless deliberate canonical French changes invalidate hash-bound approval",
-    "continue Urdu A1 from sequence 25 in guarded six-passage units",
+    "continue Urdu A1 from sequence 31 in guarded six-passage units",
     "preserve source lexicons read-only and defer multi-pass final audit until the generation milestone"
   ],
   "important_files": [
@@ -654,7 +656,8 @@
     "reading/audit/urdu_a1_unit02_generation_result.json",
     "reading/audit/urdu_a1_unit03_generation_result.json",
     "reading/audit/urdu_a1_unit04_generation_result.json",
-    "reading/audit/urdu_active_frontier_2026-08-19.json"
+    "reading/audit/urdu_active_frontier_2026-08-19.json",
+    "reading/audit/urdu_a1_unit05_generation_result.json"
   ],
   "parallel_agent_rules": {
     "verify_live_main_before_write_batch": true,
