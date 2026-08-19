@@ -13,15 +13,21 @@ LOCK=A/'french_c2_unit09_frontier_lock.json';PLAN=A/'french_c2_unit10_plan.json'
 
 def repair_unit01_calibration(rows):
  by={r['id']:r for r in rows};r=by['fr-c2-u01-p06'];q=next(x for x in r['questions'] if x.get('id')=='q5')
+ before=json.dumps(r,ensure_ascii=False,sort_keys=True)
  old='Quelle posture finale caractérise la calibration C2 ?'
  new='Quelle posture finale caractérise ce checkpoint conceptuel ?'
- if q.get('prompt')==old:q['prompt']=new
- elif 'calibration' in ns['norm'](q.get('prompt','')) if 'norm' in ns else ('calibration' in q.get('prompt','').casefold()):
+ prompt=q.get('prompt','')
+ if prompt==old:q['prompt']=new
+ elif prompt==new:pass
+ elif 'calibration' in (ns['norm'](prompt) if 'norm' in ns else prompt.casefold()):
   raise AssertionError('Unit01 q5 calibration wording changed; review before rewriting')
- r['revision']=int(r.get('revision',1))+1
+ else:
+  raise AssertionError('Unit01 q5 no longer matches either approved calibration state; refusing heuristic rewrite')
  note='Final French review: removed learner-facing internal calibration wording from checkpoint question q5.'
  notes=r.setdefault('quality',{}).setdefault('notes',[])
  if note not in notes:notes.append(note)
+ after=json.dumps(r,ensure_ascii=False,sort_keys=True)
+ if after!=before:r['revision']=int(r.get('revision',1))+1
  return rows
 
 def regenerate_unit10_from_repaired_prefix(current):
