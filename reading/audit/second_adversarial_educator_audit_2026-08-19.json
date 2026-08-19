@@ -1,0 +1,145 @@
+{
+  "audit": "second_independent_adversarial_educator_audit",
+  "date": "2026-08-19",
+  "scope_requested": {
+    "languages": ["arabic", "french"],
+    "levels": ["A1", "A2", "B1", "B2", "C1", "C2"],
+    "target_records": 720,
+    "target_questions": 7200,
+    "target_answers": 7200,
+    "semantic_target_coverage": "100% learner-facing content"
+  },
+  "blindness_protocol": {
+    "historical_pass_labels_used_for_initial_judgment": false,
+    "prior_educator_findings_read_before_initial_live-content observations": false,
+    "initial_live_content_examined_before_comparison": [
+      "reading/arabic/a1/passages.jsonl sequences 1-3",
+      "reading/french/a1/passages.jsonl sequences 1-3",
+      "reading/arabic/a2/passages.jsonl sequence 1",
+      "reading/arabic/b1/passages.jsonl sequence 1",
+      "reading/french/a2/passages.jsonl sequence 1",
+      "reading/french/b1/passages.jsonl sequence 1"
+    ]
+  },
+  "canonical_hashes_compared_from_independent_baseline": {
+    "arabic": {
+      "a1": "d6142ee56ec830c4a41cb7244fe99c65824cebbe59ff2e9b8f44d4640c9e228b",
+      "a2": "f27ad06c372d316ca70346e19a10a72645577897de8db676e317d869d8945e1c",
+      "b1": "c2968274d92dfdb4c0c35812d89a501aea751de54af6f725d6ac1f39e008600b",
+      "b2": "230d5a5b871795c6f46a584e8c54b0dca841f7126ff09b7d2d5194e105662762",
+      "c1": "2a8d71a25a8176a4383488b8d794151eb041e0e60e96b251f1c13e403d14b23e",
+      "c2": "82c0ecec8824bda6c5c6d351571086d91a20b3640ba50c9f5e7825b468bf4909"
+    },
+    "french": {
+      "a1": "5f187a8bdce83812265b6c79bf505130f084f13f92bfc02b9d57df64efbdda42",
+      "a2": "3c6dc3687fbacbd846c087d8041f2f0f58c0116b1dbf7008a64ad32611c4802a",
+      "b1": "7b1013fa606761bc7cc69fdaf67c66a0efcc9c91c478b1c8a5f8523458f9451b",
+      "b2": "bfa64c472a93d572d65fbe0217283b9d53bbb0a8d88fee7ea3a3aef1c7993942",
+      "c1": "56d19f61f5903afda48b1d6f6a3ca2a5bbf7e5df2bedccc1862075602f05fa80",
+      "c2": "9532050b975d482bb4323c1b4b6ef0d672771729d6683dc049a8c10f7a0af2a1"
+    }
+  },
+  "blind_findings": [
+    {
+      "language": "arabic",
+      "level": "A1",
+      "passage_id": "ar-a1-u01-p01",
+      "field": "questions[q6] / answer_key[a6]",
+      "span": "ما التصنيف النحوي الأدق لـ«هنا» في الاستعمال المكاني؟",
+      "category": "cefr_task_misalignment_metalinguistic_burden",
+      "severity": "major",
+      "rationale": "An A1 graded-reading comprehension set asks the learner for formal grammatical classification rather than comprehension/use. The keyed response requires terminology ('اسم إشارة للمكان القريب') that is substantially more metalinguistic than the passage-reading objective and can penalize a learner who understands the word correctly.",
+      "proposed_repair": "Replace with an A1-appropriate meaning/use or reference task that tests 'هنا' in context without requiring grammatical terminology; preserve target linkage and rerun assessment-balance checks.",
+      "confidence": 0.92,
+      "resolution": "OPEN_DEFECT_CLASS_SEARCH_REQUIRED"
+    },
+    {
+      "language": "arabic",
+      "level": "A2",
+      "passage_id": "ar-a2-u01-p01",
+      "field": "questions[q6,q7] / answer_key[a6,a7]",
+      "span": "ما التصنيف النحوي لكلمة «شارع» ...؟ / ما التصنيف النحوي لكلمة «خدمة» ...؟",
+      "category": "cefr_task_misalignment_redundant_metalinguistic_retrieval",
+      "severity": "major",
+      "rationale": "Two of ten A2 reading questions were explicitly repurposed to part-of-speech naming ('اسم'). This tests grammatical labeling rather than reading comprehension, contextual vocabulary use, or communicative language ability and consumes 20% of the assessment inventory for the passage.",
+      "proposed_repair": "Replace with distinct A2 comprehension/transfer questions using the same target words naturally; then rerun question-type diversity, target linkage, and answer-key checks.",
+      "confidence": 0.97,
+      "resolution": "OPEN_DEFECT_CLASS_SEARCH_REQUIRED"
+    },
+    {
+      "language": "arabic",
+      "level": "B1",
+      "passage_id": "ar-b1-u01-p01",
+      "field": "questions[q7] / answer_key[a7]",
+      "span": "حتى إن كانت الإجابة لا الآن",
+      "category": "learner_facing_unnatural_or_malformed_msa",
+      "severity": "major",
+      "rationale": "The quoted construction is not natural standard MSA in this form and is presented as a grammar-in-context target. It risks teaching or reinforcing malformed phrasing. The passage itself uses the natural expression «ليس الآن» elsewhere, highlighting the inconsistency.",
+      "proposed_repair": "Rephrase the question around a natural construction such as «حتى إن كانت الإجابة: لا، ليس الآن» or redesign it around the already natural sentence; revalidate the keyed explanation and any grammar-target metadata.",
+      "confidence": 0.95,
+      "resolution": "OPEN_DEFECT_CLASS_SEARCH_REQUIRED"
+    },
+    {
+      "language": "french",
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p02",
+      "field": "questions[q7] / answer_key[a7]",
+      "span": "Dans « Quand le feu devient vert, ils traversent », quel rôle joue « quand » ?",
+      "category": "cefr_task_misalignment_metalinguistic_burden",
+      "severity": "major",
+      "rationale": "The task expects an A1 reader to state a grammatical/discourse function ('Il introduit le moment où...') rather than demonstrate comprehension or use. This is a pedagogical-level mismatch similar to the Arabic finding and should be searched across the full low-level corpus.",
+      "proposed_repair": "Use a temporal-order comprehension or simple cloze/choice task that demonstrates understanding of 'quand' without grammatical metalanguage.",
+      "confidence": 0.9,
+      "resolution": "OPEN_DEFECT_CLASS_SEARCH_REQUIRED"
+    },
+    {
+      "language": "french",
+      "level": "A1",
+      "passage_id": "fr-a1-u01-p01",
+      "field": "quality metadata",
+      "span": "quality.status=draft; linguistic_review=pending; pedagogical_review=pending; answer_key_check=pending; coverage_check=pending",
+      "category": "release_evidence_inconsistency",
+      "severity": "critical_release_blocker_not_prose_error",
+      "rationale": "Live canonical record-level evidence remains draft/pending despite higher-level historical approval labels. This does not itself prove prose is incorrect, but it prevents educator certification under the current fail-closed protocol.",
+      "proposed_repair": "Substantively revalidate the record and only then update evidence fields; never bulk-flip metadata.",
+      "confidence": 1.0,
+      "resolution": "CONFIRMED_SYSTEMIC_BY_INDEPENDENT_BASELINE"
+    }
+  ],
+  "comparison_after_blind_judgment": {
+    "prior_artifact": "reading/audit/independent_educator_deterministic_2026-08-19.summary.json",
+    "agreement": [
+      "The live draft/pending release-evidence inconsistency is systemic across all 720 records.",
+      "Educator certification is blocked before any claim of teacher/publication readiness.",
+      "Record-level substantive revalidation is required; metadata cannot be bulk-promoted."
+    ],
+    "second_audit_additions_not_captured_by_deterministic_summary": [
+      "Low-level metalinguistic question design can be CEFR/pedagogically misaligned in both Arabic and French.",
+      "Arabic B1 ar-b1-u01-p01 contains a concrete learner-facing malformed/unnatural MSA grammar-target phrase in q7."
+    ],
+    "independent_deterministic_totals": {
+      "records_scanned": 720,
+      "questions_scanned": 7200,
+      "answers_scanned": 7200,
+      "open_findings": 4310,
+      "deterministic_gate": "FAIL"
+    }
+  },
+  "repairs_applied": [],
+  "why_no_canonical_repair_was_applied_in_this_pass": "The protocol requires a corpus-wide search for the same defect class and revalidation of linked assessment/progression invariants before repair. This run established concrete defect classes but did not complete 100% semantic review of all 720 records, so silently patching isolated examples would violate the fail-closed process.",
+  "coverage_result": {
+    "deterministic_full_corpus_coverage_available_and_compared": true,
+    "semantic_educator_coverage_complete_in_this_second_run": false,
+    "semantic_records_directly_examined_in_blind_first_judgment": 10,
+    "certification_decision": "BLOCKED",
+    "reason": "The requested 100% semantic educator review is not complete, and concrete major learner-facing defects were found early. Highest-assurance policy requires zero unresolved defects and complete coverage."
+  },
+  "required_next_actions": [
+    "Search all Arabic A1-A2 and French A1-A2 questions for grammar_category/grammar_function/metalinguistic tasks and adjudicate CEFR appropriateness record by record.",
+    "Search all Arabic learner-facing fields for malformed constructions analogous to 'حتى إن كانت الإجابة لا الآن' and independently review every grammar-in-context item.",
+    "Resolve the 4310 deterministic release-evidence findings by substantive record-level validation, not metadata flipping.",
+    "Complete fresh 100% semantic language/Q&A educator review across all 720 records.",
+    "After repairs, rerun deterministic, lexical, linkage, progression and question-type checks and perform blind post-repair review.",
+    "Keep Arabic and French educator_release_ready=false until all mandatory external/native/model-family and human gates are evidenced against matching hashes."
+  ]
+}
