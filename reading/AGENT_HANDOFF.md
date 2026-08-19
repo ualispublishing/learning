@@ -328,3 +328,10 @@ Resolve C2 standards and exact matrix node from canonical policy, then calibrate
 - Next canonical matrix theme: **history and contested explanation**; genres: historiographical comparison, source critique, synthesis.
 - Fresh rank-1001+ continuation terms: 1824.
 - Do not weaken C2 word-band, source, exposure, review, linkage, reasoning, or zero-new checkpoint guards.
+
+
+### French C2 Unit 09 frontier
+- Unit 08 sealed; canonical C2 blob `8760174e524ab2da8652ad7ecb9130787f572a13`.
+- Next canonical matrix theme: **technology, ethics, and future uncertainty**; genres: advanced analysis, scenario argument, critique.
+- Fresh rank-1001+ continuation terms: 1799.
+- Do not weaken C2 word-band, source, exposure, review, linkage, reasoning, or zero-new checkpoint guards.

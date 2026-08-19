@@ -1,16 +1,29 @@
 {
-  "status": "C2_UNIT08_PENDING",
+  "status": "PASS_TO_C2_UNIT09",
   "date": "2026-08-18",
   "starting_c2_passages": 42,
-  "ending_c2_passages": 42,
+  "ending_c2_passages": 48,
   "c1_blob": "6f5bd912dfb550c064b54c8f7de4027bebf3786d",
-  "c2_blob": "5c543adbd136845d5bc181c9d0ce798de1ac0877",
-  "c2_unit08_pass": false,
-  "c2_unit09_frontier_prepared": false,
+  "c2_blob": "8760174e524ab2da8652ad7ecb9130787f572a13",
+  "c2_unit08_pass": true,
+  "c2_unit09_frontier_prepared": true,
   "completed_stages": [
     "resolve_c2_unit08_plan",
     "probe_c2_unit08_targets",
-    "select_c2_unit08_targets"
+    "select_c2_unit08_targets",
+    "generate_c2_unit08",
+    "audit_c2_unit08",
+    "lock_c2_unit08",
+    "resolve_c2_unit09_plan",
+    "probe_c2_unit09_targets",
+    "sync_c2_unit08_to_unit09"
   ],
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c2_unit08.py\", line 29, in main\n    env('resolve_french_c2_unit_plan.py',8); st.append('resolve_c2_unit08_plan'); env('probe_french_c2_unit_targets.py',8); st.append('probe_c2_unit08_targets'); run('select_french_c2_unit08_targets.py'); st.append('select_c2_unit08_targets'); run('generate_french_c2_unit08.py'); gen=True; st.append('generate_c2_unit08'); env('audit_french_c2_unit_generation.py',8); st.append('audit_c2_unit08'); env('lock_french_c2_unit_frontier.py',8); st.append('lock_c2_unit08'); verify(); seal=True; prep9(st); front=True\n                                                                                                                                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c2_unit08.py\", line 7, in run\n    def run(n): print('=== RUN',n,'==='); runpy.run_path(str(T/n),run_name='__main__')\n                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit08.py\", line 95, in <module>\n    if __name__=='__main__': main()\n                             ^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit08.py\", line 86, in main\n    unit=[make(x,groups[x['id'][-3:]],reviews[x['id'][-3:]],prior,D,lo,hi,p['theme']) for x in specs()]; unit.append(checkpoint(groups,D,lo,hi,p['theme'],prior+unit)); V=Draft202012Validator(json.loads(SCHEMA.read_text(encoding='utf-8')))\n                                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit08.py\", line 76, in checkpoint\n    ps,text=fit(ps,lo,hi); P=base.prior(prior); rev=[base.rev(f,P) for f in forms]; ids={t['form']:t['id'] for t in rev}\n            ^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit08.py\", line 54, in fit\n    if not lo<=len(t.split())<=hi: raise AssertionError(f'C2 Unit08 word band {len(t.split())} not {lo}-{hi}')\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: C2 Unit08 word band 590 not 700-1200\n"
+  "error": null,
+  "unit09_theme": "technology, ethics, and future uncertainty",
+  "unit09_genres": [
+    "advanced analysis",
+    "scenario argument",
+    "critique"
+  ],
+  "remaining_fresh_source_terms": 1799
 }

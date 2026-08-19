@@ -336,3 +336,10 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 - [ ] Theme: **history and contested explanation**; genres: historiographical comparison, source critique, synthesis.
 - [ ] Select source-backed rank-1001+ targets from `1824` fresh continuation terms.
 - [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.
+
+
+#### French C2 Unit 09 — IMMEDIATE NEXT
+- [x] Unit 08 sealed on `8760174e524ab2da8652ad7ecb9130787f572a13`.
+- [ ] Theme: **technology, ethics, and future uncertainty**; genres: advanced analysis, scenario argument, critique.
+- [ ] Select source-backed rank-1001+ targets from `1799` fresh continuation terms.
+- [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.
