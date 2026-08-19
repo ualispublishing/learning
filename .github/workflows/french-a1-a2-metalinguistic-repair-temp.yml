@@ -1,16 +1,16 @@
-name: French A1-A2 metalinguistic repair temp
+name: French A1-A2 metalinguistic refinement temp
 
 on:
   pull_request:
     branches: [main]
     paths:
-      - 'reading/audit/french_a1_a2_metalinguistic_repair_trigger.txt'
+      - 'reading/audit/french_a1_a2_metalinguistic_refine_trigger.txt'
 
 permissions:
   contents: write
 
 jobs:
-  repair:
+  refine:
     if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'repair/french-a1-a2-metalinguistic'
     runs-on: ubuntu-latest
     steps:
@@ -19,16 +19,13 @@ jobs:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Run guarded repair
-        run: |
-          # Temporary runner-side correction to the validator only: trim spaces inside French guillemets.
-          sed -i "s/strip('«»')/strip('«»').strip()/" reading/tools/repair_french_a1_a2_metalinguistic.py
-          python reading/tools/repair_french_a1_a2_metalinguistic.py
-      - name: Commit repair to PR branch
+      - name: Run human-reviewed refinement
+        run: python reading/tools/refine_french_a1_a2_metalinguistic_repair.py
+      - name: Commit refinement to PR branch
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- reading/french/a1/passages.jsonl reading/french/a2/passages.jsonl reading/audit/french_a1_a2_metalinguistic_repair_2026-08-19.json
+          git add -- reading/french/a1/passages.jsonl reading/french/a2/passages.jsonl reading/audit/french_a1_a2_metalinguistic_human_refinement_2026-08-19.json
           git diff --cached --quiet && exit 0
-          git commit -m 'Repair French A1-A2 metalinguistic tasks'
+          git commit -m 'Refine French A1-A2 metalinguistic repair'
           git push origin HEAD:${{ github.head_ref }}
