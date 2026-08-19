@@ -10,12 +10,13 @@ The questions are not limited to literal passage recall. They also reinforce voc
 2. Questions 1-5 normally remain passage-centred. Questions 6-10 may use the passage, its target vocabulary, or level-appropriate grammar independent of the passage.
 3. At least one question per deliberate lexical target must test meaning in context or transfer rather than simple copying.
 4. Single-word definition / meaning questions are allowed and encouraged when they reinforce a verified flashcard sense.
-5. Grammar questions may be independent of the passage when the grammar itself is appropriate to the current CEFR planning level.
+5. Grammar questions may be independent of the passage when the grammar itself is appropriate to the current CEFR planning level. At **A1-A2**, grammar is normally tested operationally through form choice, completion, reference, agreement, word order, negation, quantity, tense/use, or communicative contrast. Do **not** require learners to name formal categories or functions such as *pronom personnel*, *déterminant possessif*, *préposition*, *infinitif*, *COD/COI*, or comparable linguistic terminology merely to fill a grammar slot. Formal metalanguage at A1-A2 requires a specific pedagogical justification and must not replace communicative/form-use assessment.
 6. Cloze questions should normally require retrieval in a new sentence rather than reproducing the passage verbatim.
 7. Distractors must be plausible but unambiguously wrong at the target level.
 8. Do not test a lexical sense unless that exact sense has passed the language-specific flashcard verification gate.
 9. A fluency/checkpoint passage may contain grammar and vocabulary review questions but must not introduce a new lexical target through the questions.
 10. Question difficulty must rise through the levels; ten A1 questions should not become ten trivial recall questions, and ten C-level questions should not become ten obscure vocabulary quizzes.
+11. Avoid duplicate assessment roles within one passage. If one item already tests a target's meaning, a later item for the same target should normally test form/use, reference, contrast, or transfer rather than ask the same definition again with slightly different wording.
 
 ## Default distribution by level
 
@@ -24,8 +25,8 @@ The questions are not limited to literal passage recall. They also reinforce voc
 - 2 passage-linked vocabulary/context questions
 - 1 passage-linked sequence/reference/inference question
 - 1 single-word meaning/definition retrieval question
-- 1 basic grammar/category question
-- 1 form/contrast question (pronoun, demonstrative, negation, quantity, tense/aspect, agreement, etc.)
+- 1 basic **operational grammar/form-use** question (choice, completion, reference, agreement, word order, negation, quantity, etc.; no formal category naming by default)
+- 1 form/contrast question (pronoun use, demonstrative use, negation, quantity, tense/aspect, agreement, etc.)
 - 1 new-sentence cloze
 - 1 simple transfer/production or matching question
 
@@ -36,7 +37,7 @@ Typical answer length: one word to one short sentence.
 - 1 sequence/reference
 - 1 local inference
 - 2 vocabulary/collocation
-- 2 grammar/form questions
+- 2 operational grammar/form-use questions; prefer choosing or producing the correct form in context over naming the grammatical category
 - 1 cloze/transform
 - 1 short transfer question
 
