@@ -1,12 +1,14 @@
 {
   "status": "FAIL_RESTORED",
-  "date": "2026-08-18",
+  "date": "2026-08-19",
   "repair_version": 3,
   "before_c2_blob": "5986cf5d498a8b414dfeabac38b65ebd4011fe4d",
+  "unit10_regeneration_source_c2_blob": "c970a01f955f85599810c58804660e7b768c0fd8",
   "candidate_repaired_c2_blob": null,
   "final_c2_blob": "5986cf5d498a8b414dfeabac38b65ebd4011fe4d",
   "audit_status": null,
   "completed_stages": [
+    "regenerate_unit10_from_repaired_prefix_with_ephemeral_source_binding",
     "restore_original_c2_after_v3_failure"
   ],
   "confirmed_repairs": [
@@ -18,5 +20,6 @@
     "Unit10 P03/P04 genuine shared-case pair"
   ],
   "historical_frontier_locks_preserved": true,
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/repair_and_audit_french_final_v3.py\", line 29, in main\n    candidate=ns['regenerate_unit10_from_sealed_prefix'](current);stages.append('regenerate_unit10_shared_case_preflight')\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/repair_and_audit_french_final.py\", line 78, in regenerate_unit10_from_sealed_prefix\n    runpy.run_path(str(T / 'generate_french_c2_unit10_preflight.py'), run_name='__main__')\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit10_preflight.py\", line 50, in <module>\n    ns['main']()\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit10.py\", line 75, in main\n    if len(rows)!=54 or l.get('status')!='PASS' or l.get('last_sequence')!=54 or l.get('c1_canonical_blob')!=c1 or l.get('c2_canonical_blob')!=c2: raise AssertionError('C2 Unit10 source mismatch')\n                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: C2 Unit10 source mismatch\n"
+  "temporary_source_binding_restored": true,
+  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/repair_and_audit_french_final_v3.py\", line 67, in main\n    candidate=ns['apply_confirmed_repairs'](candidate);stages.append('apply_confirmed_unit04_unit05_unit06_repairs')\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/repair_and_audit_french_final.py\", line 104, in apply_confirmed_repairs\n    repair_receipt(byid['fr-c2-u06-p04'])\n  File \"/home/runner/work/learning/learning/reading/tools/repair_and_audit_french_final.py\", line 52, in repair_receipt\n    raise AssertionError('Unit06 reçu repair anchors changed; refusing heuristic rewrite')\nAssertionError: Unit06 reçu repair anchors changed; refusing heuristic rewrite\n"
 }
