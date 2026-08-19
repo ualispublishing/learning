@@ -66,7 +66,7 @@
       "release_state": "REOPEN_REQUIRED",
       "educator_release_ready": false,
       "target_assurance": "HIGHEST_ASSURANCE",
-      "reason": "Canonical French C1/C2 learner-facing defects were repaired on 2026-08-19. Historical French approval hashes are invalidated; all affected educator/native/tool/hash-bound release gates must be rerun against the new canonical hashes.",
+      "reason": "The confirmed French C1/C2 generic-answer and learner-facing production-note defect class was repaired on 2026-08-19, invalidating historical French approval hashes. Other strengthened recertification work remains open, including the separately identified low-level metalinguistic/CEFR question-design class, deterministic evidence revalidation, full semantic review, and independent native/tool/model/human gates.",
       "latest_educator_attempt": {
         "status": "BLOCKED_AT_DETERMINISTIC_AND_SEMANTIC_GATES",
         "artifact": "reading/audit/second_adversarial_educator_audit_2026-08-19.json",
@@ -102,8 +102,9 @@
   },
   "global_release_blockers": [
     "Arabic fresh deterministic educator-release Gate A failed and requires substantive record-level revalidation",
-    "French fresh deterministic educator-release Gate A failed and requires substantive record-level revalidation",
-    "Second adversarial educator audit found concrete unresolved major learner-facing Arabic and French defect classes",
+    "French fresh deterministic educator-release Gate A failed and requires substantive record-level revalidation against the repaired corpus",
+    "Second adversarial educator audit still has unresolved low-level metalinguistic/CEFR question-design defects in Arabic and French; the separate French C1/C2 generic-answer/production-note class has been repaired",
+    "Arabic learner-facing malformed/unnatural MSA grammar-target phrasing requires corpus-wide same-class repair",
     "Arabic full 100% semantic educator review is incomplete",
     "French full 100% semantic educator review is incomplete",
     "Arabic independent external/native/model-family re-certification not yet complete",
