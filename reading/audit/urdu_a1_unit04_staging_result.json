@@ -1,0 +1,40 @@
+{
+  "language": "ur",
+  "cefr": "A1",
+  "unit": 4,
+  "date": "2026-08-19",
+  "status": "STAGED_STRUCTURALLY_CHECKED",
+  "canonical_promotion": "BLOCKED_BY_EARLIER_URDU_GATE",
+  "staging_path": "reading/urdu/a1/staging/unit04",
+  "sequences": [19, 20, 21, 22, 23, 24],
+  "passages": 6,
+  "questions": 60,
+  "answers": 60,
+  "word_counts": [130, 110, 115, 115, 120, 120],
+  "new_targets": ["نام", "دوست", "لوگ", "بچے", "گھر", "ہمارے", "میرا", "شخص", "تعلق", "دوسری"],
+  "source_lexicon": "urdu_top1000.csv",
+  "source_lexicon_mutated": false,
+  "structural_checks": {
+    "six_passages": true,
+    "sequences_contiguous": true,
+    "a1_word_band_90_140": true,
+    "ten_questions_each": true,
+    "ten_answers_each": true,
+    "question_answer_linkage": true,
+    "question_targets_locally_declared": true,
+    "new_target_forms_visible": true,
+    "new_target_exposure_counts_checked": true,
+    "declared_running_text_reviews_visible": true,
+    "p06_zero_new_targets": true,
+    "sentence_count_metadata_checked": true
+  },
+  "formal_final_audit": "deferred under generation-first policy",
+  "promotion_precondition": "First repair/accept Urdu A1 Unit 1 calibration under current guards and promote staged Unit 2 sequences 7-12. Then promote later staged units in strict sequence order.",
+  "current_storage_state": {
+    "canonical_urdu_a1_passages": 6,
+    "staged_unit02_passages": 6,
+    "staged_unit03_passages": 6,
+    "staged_unit04_passages": 6,
+    "total_urdu_a1_records_available_canonical_plus_staging": 24
+  }
+}
