@@ -196,17 +196,25 @@ Do not cite a search-result snippet as if it were the underlying authority when 
 
 The Arabic/French/Urdu A1–C2 graded reading project under `reading/` is a separate long-running content-development workflow.
 
-When a request concerns reading passages, graded readers, the multilingual reading curriculum, comprehension questions, or reading-speed passage data, read these files before acting:
+When a request concerns reading passages, graded readers, the multilingual reading curriculum, comprehension questions, reading-speed passage data, correctness certification, teacher/educator use, or publication readiness, read the current authoritative files before acting.
 
-1. `reading/STATUS.json`
-2. `reading/AGENT_HANDOFF.md`
-3. `reading/ROADMAP.md`
-4. `reading/TASKS.md`
-5. `docs/READING_PASSAGE_RESEARCH.md`
-6. `docs/READING_PASSAGE_STANDARD.md`
-7. `reading/schema/passage.schema.json`
+### Mandatory current read order
 
-`reading/STATUS.json` is the exact machine-readable project state. Do not infer passage counts or completion from chat memory.
+1. live canonical `reading/<language>/<level>/passages.jsonl` relevant to the task;
+2. `reading/RELEASE_STATUS.json` for correctness/release claims;
+3. `reading/STATUS.json` for generation/progression state;
+4. `reading/AGENT_HANDOFF_V2.md`;
+5. `reading/planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md` when correctness, teacher use, publication, or release is involved;
+6. `reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md`;
+7. `reading/planning/TEN_QUESTION_STANDARD.md`;
+8. `reading/schema/passage.schema.json`;
+9. `docs/READING_PASSAGE_RESEARCH.md`;
+10. `docs/READING_PASSAGE_STANDARD.md`;
+11. `reading/ROADMAP.md` and `reading/TASKS.md` as needed.
+
+`reading/AGENT_HANDOFF.md` is legacy historical context and contains stale appended frontier sections. It is **not authoritative for current execution**. Do not follow an old `IMMEDIATE NEXT` section that conflicts with live canonical state, `RELEASE_STATUS.json`, `STATUS.json`, or `AGENT_HANDOFF_V2.md`.
+
+`reading/STATUS.json` is the exact machine-readable generation/progression state, but it is **not sufficient evidence of educator-release correctness**. For teacher/publication readiness, `reading/RELEASE_STATUS.json` and the educator verification protocol take precedence over historical `APPROVED`, `SEALED`, `PASS`, or `FINAL_APPROVED` labels.
 
 Core continuity rules:
 
@@ -219,9 +227,22 @@ Core continuity rules:
 - the validated 3,000-word language inventories are a foundation, not a complete C2 lexicon;
 - do not modify the validated root CSVs to make passage generation easier; derive reading ledgers;
 - calibrate small units before scaling;
-- only passages with `quality.status = approved` are publication-ready.
+- `quality.status = approved` means the item passed the internal content workflow, not that external educator certification is complete;
+- generation completion and educator/publication release certification are separate states;
+- no agent may claim literal `100% guaranteed correct`, `error-free`, or `teacher-ready` from internal audit status alone;
+- the strongest release claim is the exact claim authorized by `reading/planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md` after matching hash-bound evidence exists;
+- any learner-facing canonical edit invalidates affected release hashes and requires regression verification.
 
-Before a long reading-project session ends, update `reading/STATUS.json`, check off `reading/TASKS.md`, and update `reading/AGENT_HANDOFF.md` whenever a new decision, failure mode, or exception must survive into the next session.
+For educator/publication release, require complete deterministic validation, independent machine/model disagreement review, native professional review, educator/curriculum review, disagreement adjudication, post-repair blind review, zero unresolved defects, and a matching hash-bound release manifest.
+
+Before a long reading-project session ends:
+
+1. verify live canonical counts/hashes rather than trusting chat memory;
+2. update `reading/STATUS.json` only with verified generation state;
+3. update `reading/RELEASE_STATUS.json` only when release evidence changes;
+4. update `reading/AGENT_HANDOFF_V2.md` with one current frontier rather than append-only history;
+5. update `reading/TASKS.md` and/or `reading/VERIFICATION_TASKS.md` as appropriate;
+6. store detailed historical events in audit artifacts/git history rather than accumulating contradictory current instructions.
 
 ## 8. Definition of done for a completed lesson
 
