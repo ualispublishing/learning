@@ -308,3 +308,10 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 - [ ] Theme: **economics and complex systems**; genres: analytical essay, scenario analysis, commentary.
 - [ ] Select source-backed rank-1001+ targets from `1924` fresh continuation terms.
 - [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.
+
+
+#### French C2 Unit 05 — IMMEDIATE NEXT
+- [x] Unit 04 sealed on `b22101b5c1d1f6f9a60f95e1813a5ba53dfeeb60`.
+- [ ] Theme: **literary style and rhetoric**; genres: literary prose, critical analysis, rhetorical commentary.
+- [ ] Select source-backed rank-1001+ targets from `1899` fresh continuation terms.
+- [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.

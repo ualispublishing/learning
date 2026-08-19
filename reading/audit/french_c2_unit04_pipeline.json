@@ -1,16 +1,29 @@
 {
-  "status": "C2_UNIT04_PENDING",
+  "status": "PASS_TO_C2_UNIT05",
   "date": "2026-08-18",
   "starting_c2_passages": 18,
-  "ending_c2_passages": 18,
+  "ending_c2_passages": 24,
   "c1_blob": "6f5bd912dfb550c064b54c8f7de4027bebf3786d",
-  "c2_blob": "21be6a87ceb638cb304fa341641f43825bf6d561",
-  "c2_unit04_pass": false,
-  "c2_unit05_frontier_prepared": false,
+  "c2_blob": "b22101b5c1d1f6f9a60f95e1813a5ba53dfeeb60",
+  "c2_unit04_pass": true,
+  "c2_unit05_frontier_prepared": true,
   "completed_stages": [
     "resolve_c2_unit04_plan",
     "probe_c2_unit04_targets",
-    "select_c2_unit04_targets"
+    "select_c2_unit04_targets",
+    "generate_c2_unit04",
+    "audit_c2_unit04",
+    "lock_c2_unit04",
+    "resolve_c2_unit05_plan",
+    "probe_c2_unit05_targets",
+    "sync_c2_unit04_to_unit05"
   ],
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c2_unit04.py\", line 107, in main\n    run('generate_french_c2_unit04_preflight.py')\n  File \"/home/runner/work/learning/learning/reading/tools/complete_french_c2_unit04.py\", line 24, in run\n    runpy.run_path(str(T / name), run_name='__main__')\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit04_preflight.py\", line 24, in <module>\n    ns['main']()\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit04.py\", line 399, in main\n    unit.append(checkpoint(groups, deck, lo, hi, plan['theme'], prior + unit))\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit04.py\", line 295, in checkpoint\n    paragraphs, text = fit(paragraphs, lo, hi)\n                       ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/generate_french_c2_unit04.py\", line 80, in fit\n    raise AssertionError(f'C2 Unit04 word band {len(text.split())} not {lo}-{hi}')\nAssertionError: C2 Unit04 word band 669 not 700-1200\n"
+  "error": null,
+  "unit05_theme": "literary style and rhetoric",
+  "unit05_genres": [
+    "literary prose",
+    "critical analysis",
+    "rhetorical commentary"
+  ],
+  "remaining_fresh_source_terms": 1899
 }
