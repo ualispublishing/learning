@@ -321,3 +321,10 @@ Resolve C2 standards and exact matrix node from canonical policy, then calibrate
 - Next canonical matrix theme: **culture, translation, and interpretation**; genres: essay, comparative criticism, reflection.
 - Fresh rank-1001+ continuation terms: 1849.
 - Do not weaken C2 word-band, source, exposure, review, linkage, reasoning, or zero-new checkpoint guards.
+
+
+### French C2 Unit 08 frontier
+- Unit 07 sealed; canonical C2 blob `5c543adbd136845d5bc181c9d0ce798de1ac0877`.
+- Next canonical matrix theme: **history and contested explanation**; genres: historiographical comparison, source critique, synthesis.
+- Fresh rank-1001+ continuation terms: 1824.
+- Do not weaken C2 word-band, source, exposure, review, linkage, reasoning, or zero-new checkpoint guards.

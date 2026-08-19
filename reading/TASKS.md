@@ -329,3 +329,10 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 - [ ] Theme: **culture, translation, and interpretation**; genres: essay, comparative criticism, reflection.
 - [ ] Select source-backed rank-1001+ targets from `1849` fresh continuation terms.
 - [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.
+
+
+#### French C2 Unit 08 — IMMEDIATE NEXT
+- [x] Unit 07 sealed on `5c543adbd136845d5bc181c9d0ce798de1ac0877`.
+- [ ] Theme: **history and contested explanation**; genres: historiographical comparison, source critique, synthesis.
+- [ ] Select source-backed rank-1001+ targets from `1824` fresh continuation terms.
+- [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.
