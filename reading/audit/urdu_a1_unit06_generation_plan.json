@@ -1,0 +1,39 @@
+{
+  "language": "ur",
+  "cefr": "A1",
+  "unit": 6,
+  "status": "STAGING_READY_CANONICAL_30_GATE_PENDING",
+  "theme": "directions, short trips, and simple travel routines",
+  "genres": ["route description", "short trip", "time-of-day travel routine", "route-help message", "safe-travel routine", "checkpoint"],
+  "policy": "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
+  "ten_question_standard": "reading/planning/TEN_QUESTION_STANDARD.md",
+  "schema": "reading/schema/passage.schema.json",
+  "promotion_precondition": "Units 03-04 must be canonical, then Unit 05 must promote as sequences 25-30 before Unit 06 can promote.",
+  "word_band": [90, 140],
+  "new_target_policy": {
+    "p01_p05_default": 2,
+    "hard_quota": false,
+    "p06_new_targets": 0,
+    "source_lexicon": "urdu_top1000.csv",
+    "root_lexicon_read_only": true
+  },
+  "target_assignments": [
+    {"sequence": 31, "id": "ur-a1-u06-p01", "targets": [{"id":"ur-rank-0381","form":"راہ","rank":381,"sense":"route; path; way"},{"id":"ur-rank-0361","form":"آگے","rank":361,"sense":"ahead; forward"}]},
+    {"sequence": 32, "id": "ur-a1-u06-p02", "targets": [{"id":"ur-rank-0386","form":"سفر","rank":386,"sense":"travel; trip; journey"},{"id":"ur-rank-0377","form":"پہلا","rank":377,"sense":"first"}]},
+    {"sequence": 33, "id": "ur-a1-u06-p03", "targets": [{"id":"ur-rank-0447","form":"صبح","rank":447,"sense":"morning"},{"id":"ur-rank-0433","form":"شام","rank":433,"sense":"evening"}]},
+    {"sequence": 34, "id": "ur-a1-u06-p04", "targets": [{"id":"ur-rank-0455","form":"فون","rank":455,"sense":"phone; telephone; phone call"},{"id":"ur-rank-0444","form":"طریقہ","rank":444,"sense":"method; manner; way"}]},
+    {"sequence": 35, "id": "ur-a1-u06-p05", "targets": [{"id":"ur-rank-0450","form":"صحیح","rank":450,"sense":"right; correct; accurate"},{"id":"ur-rank-0431","form":"اجازت","rank":431,"sense":"permission; consent"}]},
+    {"sequence": 36, "id": "ur-a1-u06-p06", "targets": []}
+  ],
+  "structural_precheck": {
+    "six_passages_planned": true,
+    "sequences_31_36": true,
+    "ten_questions_each_required": true,
+    "ten_answers_each_required": true,
+    "p06_zero_new": true,
+    "a1_word_band_90_140": true,
+    "target_source_rank_identity_checked": true,
+    "root_lexicon_mutation": false
+  },
+  "audit_policy": "Formal multi-pass final audit remains deferred under generation-first policy; Unit 06 may be staged ahead of canonical promotion but must not be counted as canonical until sequence-order guards pass."
+}
