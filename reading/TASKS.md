@@ -350,3 +350,11 @@ Keep Urdu unchanged while French is active unless explicitly reprioritized.
 - [ ] Theme: **C2 capstone**; genres: multi-source-style synthesis, complex paired texts, final checkpoint.
 - [ ] Select source-backed rank-1001+ targets from `1774` fresh continuation terms.
 - [ ] 700–1,200 words; calibrated lexical default (not quota); 10 linked Q/A; P06 zero-new; strict post-unit audit/lock.
+
+
+#### French whole-corpus final audit — IMMEDIATE NEXT
+- [x] French C2 Unit 10 sealed; French generation is complete at 360 passages / 3,600 linked Q/A.
+- [ ] Run at least 10 distinct final-review passes from `reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md`.
+- [ ] Consume `reading/audit/french_c2_deferred_quality_notes.json` and repair all confirmed defects.
+- [ ] Re-run schema/ID/link/count/exposure/spacing/duplicate/topic-balance checks after repairs.
+- [ ] Do not mark French finally approved until the adversarial final pass also succeeds.

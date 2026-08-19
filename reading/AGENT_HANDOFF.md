@@ -342,3 +342,10 @@ Resolve C2 standards and exact matrix node from canonical policy, then calibrate
 - Next canonical matrix theme: **C2 capstone**; genres: multi-source-style synthesis, complex paired texts, final checkpoint.
 - Fresh rank-1001+ continuation terms: 1774.
 - Do not weaken C2 word-band, source, exposure, review, linkage, reasoning, or zero-new checkpoint guards.
+
+
+### French generation complete — final audit frontier
+- French C2 Unit 10 sealed; canonical C2 blob `c2e64d6d454559931be07d3ec71d5749ec0e063d`.
+- French now has 360 canonical passages and 3,600 linked questions/answers across A1-C2.
+- Generation is complete, but French is **not finally approved**.
+- Next work is the policy-required >=10-pass whole-French final audit, beginning with known deferred qualitative notes and independent structural/linguistic/adversarial passes.
