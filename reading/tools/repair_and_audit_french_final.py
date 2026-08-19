@@ -48,9 +48,16 @@ def repair_receipt(row: dict) -> None:
     new_a = 'Une note sans date ou un reçu de transmission sans contexte peut être authentique tout en étant difficile à relier au résultat final.'
     old_b = 'Un document « reçu » prouve qu’une information a été transmise ou qu’une opération a été enregistrée; il ne prouve pas à lui seul que son contenu a été compris, vérifié ou utilisé dans la décision finale.'
     new_b = 'Un « reçu » atteste ici qu’un document ou une opération a été transmis ou enregistré; il fournit une trace de transmission, mais ne prouve pas à lui seul que le contenu a été compris, vérifié ou utilisé dans la décision finale.'
-    if old_a not in row['text'] or old_b not in row['text']:
+    text = row['text']
+    if old_a in text and old_b in text:
+        row['text'] = text.replace(old_a, new_a).replace(old_b, new_b)
+    elif new_a in text and new_b in text:
+        # The canonical row may already contain this confirmed repair from an
+        # earlier fail-closed transaction. Accept exactly the intended state so
+        # rerunning the final transaction is deterministic and idempotent.
+        pass
+    else:
         raise AssertionError('Unit06 reçu repair anchors changed; refusing heuristic rewrite')
-    row['text'] = row['text'].replace(old_a, new_a).replace(old_b, new_b)
     a9 = next((a for a in row['answer_key'] if a.get('id') == 'a9'), None)
     if not a9:
         raise AssertionError('Unit06 reçu linked answer a9 missing')
@@ -92,6 +99,12 @@ def apply_confirmed_repairs(candidate: list[dict]) -> list[dict]:
     if missing:
         raise AssertionError(f'final repair targets missing: {missing}')
 
+    revision_targets = ['fr-c2-u04-p03','fr-c2-u04-p04','fr-c2-u05-p01','fr-c2-u05-p03','fr-c2-u05-p04','fr-c2-u06-p04']
+    before = {
+        pid: json.dumps(byid[pid], ensure_ascii=False, sort_keys=True)
+        for pid in revision_targets
+    }
+
     set_role(byid['fr-c2-u04-p03'], 'interleaved')
     set_role(byid['fr-c2-u04-p04'], 'transfer')
     set_role(byid['fr-c2-u05-p03'], 'interleaved')
@@ -103,7 +116,7 @@ def apply_confirmed_repairs(candidate: list[dict]) -> list[dict]:
         qnotes.append(note)
     repair_receipt(byid['fr-c2-u06-p04'])
 
-    # Preflight is authoritative for the capstone pair.  Assert rather than
+    # Preflight is authoritative for the capstone pair. Assert rather than
     # reconstruct it again here so a stale generator cannot silently pass.
     pair = 'fr-c2-u10-shared-case-viewpoints'
     if byid['fr-c2-u10-p02'].get('paired_text_group') is not None:
@@ -111,11 +124,13 @@ def apply_confirmed_repairs(candidate: list[dict]) -> list[dict]:
     if byid['fr-c2-u10-p03'].get('paired_text_group') != pair or byid['fr-c2-u10-p04'].get('paired_text_group') != pair:
         raise AssertionError('Unit10 preflight failed to create P03/P04 shared-case pair')
 
-    # Increment revisions only on rows changed during the cross-unit final
-    # repair. Unit10 rows are regenerated from the stronger preflight at their
-    # generator revision and are tracked by the transaction artifact.
-    for pid in ['fr-c2-u04-p03','fr-c2-u04-p04','fr-c2-u05-p01','fr-c2-u05-p03','fr-c2-u05-p04','fr-c2-u06-p04']:
-        byid[pid]['revision'] = int(byid[pid].get('revision', 1)) + 1
+    # Increment a revision only when this transaction actually changes that
+    # row. This prevents repeated final-verification runs from manufacturing
+    # meaningless revision churn after a repair is already canonical.
+    for pid in revision_targets:
+        after = json.dumps(byid[pid], ensure_ascii=False, sort_keys=True)
+        if after != before[pid]:
+            byid[pid]['revision'] = int(byid[pid].get('revision', 1)) + 1
     return candidate
 
 
