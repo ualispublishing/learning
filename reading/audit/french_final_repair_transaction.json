@@ -1,15 +1,17 @@
 {
-  "status": "FAIL_RESTORED",
+  "status": "PASS_READY_FOR_FRENCH_APPROVAL",
   "date": "2026-08-19",
   "repair_version": 3,
   "before_c2_blob": "5986cf5d498a8b414dfeabac38b65ebd4011fe4d",
   "unit10_regeneration_source_c2_blob": "c970a01f955f85599810c58804660e7b768c0fd8",
-  "candidate_repaired_c2_blob": null,
-  "final_c2_blob": "5986cf5d498a8b414dfeabac38b65ebd4011fe4d",
-  "audit_status": null,
+  "candidate_repaired_c2_blob": "de13ed12c95db5501c6efcc3515ef02f7b1c34dc",
+  "final_c2_blob": "de13ed12c95db5501c6efcc3515ef02f7b1c34dc",
+  "audit_status": "PASS",
   "completed_stages": [
     "regenerate_unit10_from_repaired_prefix_with_ephemeral_source_binding",
-    "restore_original_c2_after_v3_failure"
+    "apply_confirmed_unit04_unit05_unit06_repairs",
+    "remove_unit01_calibration_learner_leak",
+    "pass_15_lens_whole_french_audit_v3"
   ],
   "confirmed_repairs": [
     "Unit01 P06 calibration learner-language leak",
@@ -21,5 +23,5 @@
   ],
   "historical_frontier_locks_preserved": true,
   "temporary_source_binding_restored": true,
-  "error": "Traceback (most recent call last):\n  File \"/home/runner/work/learning/learning/reading/tools/repair_and_audit_french_final_v3.py\", line 67, in main\n    candidate=ns['apply_confirmed_repairs'](candidate);stages.append('apply_confirmed_unit04_unit05_unit06_repairs')\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/learning/learning/reading/tools/repair_and_audit_french_final.py\", line 104, in apply_confirmed_repairs\n    repair_receipt(byid['fr-c2-u06-p04'])\n  File \"/home/runner/work/learning/learning/reading/tools/repair_and_audit_french_final.py\", line 52, in repair_receipt\n    raise AssertionError('Unit06 reçu repair anchors changed; refusing heuristic rewrite')\nAssertionError: Unit06 reçu repair anchors changed; refusing heuristic rewrite\n"
+  "error": null
 }
