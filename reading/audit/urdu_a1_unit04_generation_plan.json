@@ -2,7 +2,7 @@
   "language": "ur",
   "cefr": "A1",
   "unit": 4,
-  "status": "STAGING_READY_CANONICAL_GATE_PENDING",
+  "status": "STAGED_STRUCTURALLY_CHECKED_CANONICAL_GATE_PENDING",
   "theme": "family, people, and introductions",
   "genres": ["family-photo description", "park scene", "home visit", "school introduction", "family-chart explanation", "checkpoint"],
   "policy": "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
@@ -25,7 +25,7 @@
     {"sequence": 23, "id": "ur-a1-u04-p05", "targets": [{"id":"ur-rank-0237","form":"تعلق","rank":237,"sense":"relationship; relation; connection"},{"id":"ur-rank-0182","form":"دوسری","rank":182,"sense":"second; other (feminine)"}]},
     {"sequence": 24, "id": "ur-a1-u04-p06", "targets": []}
   ],
-  "planned_word_counts": [130, 110, 115, 115, 120, 120],
+  "verified_word_counts": [130, 110, 115, 115, 120, 120],
   "structural_precheck": {
     "six_passages": true,
     "sequences_19_24": true,
@@ -35,7 +35,11 @@
     "p06_zero_new": true,
     "all_word_counts_in_a1_band": true,
     "target_forms_visible_in_introduction_text": true,
-    "target_source_rank_identity_checked": true
+    "target_source_rank_identity_checked": true,
+    "new_target_exposure_counts_checked": true,
+    "declared_running_text_reviews_visible": true,
+    "sentence_count_metadata_checked": true
   },
+  "staging_result": "reading/audit/urdu_a1_unit04_staging_result.json",
   "audit_policy": "Formal multi-pass final audit remains deferred under generation-first policy; this unit remains staged until the earlier Urdu canonical gate is resolved."
 }
