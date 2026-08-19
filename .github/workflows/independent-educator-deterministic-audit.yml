@@ -24,7 +24,7 @@ jobs:
           python - <<'PY'
           import json, hashlib, re, unicodedata
           from pathlib import Path
-          from collections import Counter, defaultdict
+          from collections import Counter
           import jsonschema
 
           root=Path('.')
@@ -40,11 +40,9 @@ jobs:
               sev[severity]+=1; cats[category]+=1
 
           for language in langs:
-            report['coverage'][language]={}
-            report['hashes'][language]={}
+            report['coverage'][language]={}; report['hashes'][language]={}
             for level in levels:
-              p=root/f'reading/{language}/{level}/passages.jsonl'
-              raw=p.read_bytes()
+              p=root/f'reading/{language}/{level}/passages.jsonl'; raw=p.read_bytes()
               report['hashes'][language][level]={'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw)}
               lines=[x for x in raw.decode('utf-8').splitlines() if x.strip()]
               ids=[]; seqs=[]; qn=an=0
@@ -52,8 +50,7 @@ jobs:
               for i,line in enumerate(lines,1):
                 total_records+=1
                 try: rec=json.loads(line)
-                except Exception as e:
-                  add(language,level,f'line:{i}','record','invalid_json','critical',str(e)); continue
+                except Exception as e: add(language,level,f'line:{i}','record','invalid_json','critical',str(e)); continue
                 pid=rec.get('id',f'line:{i}'); ids.append(pid); seqs.append(rec.get('sequence'))
                 try: jsonschema.Draft202012Validator(schema).validate(rec)
                 except Exception as e: add(language,level,pid,'record','schema_failure','critical',str(e).splitlines()[0])
@@ -71,30 +68,22 @@ jobs:
                 qset=set(qids)
                 for a in ans:
                   if a.get('question_id') not in qset: add(language,level,pid,f'answer:{a.get("id")}.question_id','broken_linkage','critical',f'points to missing question {a.get("question_id")}')
-                # Question target IDs must be locally introduced/reviewed lexical targets when present.
                 local_lex={x.get('id') for x in rec.get('new_lexical_targets',[])}|{x.get('id') for x in rec.get('review_lexical_targets',[])}
                 for q in qs:
                   for tid in q.get('target_ids',[]):
                     if tid not in local_lex: add(language,level,pid,f'question:{q.get("id")}.target_ids','nonlocal_target','major',f'{tid} not locally declared lexical target')
-                declared=rec.get('word_count')
-                actual=len(re.findall(r'\S+',rec.get('text','')))
+                declared=rec.get('word_count'); actual=len(re.findall(r'\S+',rec.get('text','')))
                 if declared!=actual: add(language,level,pid,'word_count','word_count_mismatch','minor',f'declared {declared}, whitespace count {actual}')
                 lo,hi=bands[level]
                 if actual<lo or actual>hi: add(language,level,pid,'text','standard_word_band','major',f'{actual} words outside standard {lo}-{hi}')
-                q=rec.get('quality',{})
-                status=str(q.get('status')); status_counts[status]+=1
-                cov=str(q.get('coverage_check')); cov_counts[cov]+=1
-                lr=str(q.get('linguistic_review')); lang_review[lr]+=1
-                pr=str(q.get('pedagogical_review')); ped_review[pr]+=1
-                ar=str(q.get('answer_key_check')); answer_review[ar]+=1
+                q=rec.get('quality',{}); status=str(q.get('status')); status_counts[status]+=1; cc=str(q.get('coverage_check')); cov_counts[cc]+=1; lr=str(q.get('linguistic_review')); lang_review[lr]+=1; pr=str(q.get('pedagogical_review')); ped_review[pr]+=1; ar=str(q.get('answer_key_check')); answer_review[ar]+=1
                 if status!='approved': add(language,level,pid,'quality.status','not_approved','critical',f'quality.status={status!r}')
-                if cov!='pass': add(language,level,pid,'quality.coverage_check','coverage_not_pass','major',f'coverage_check={cov!r}')
+                if cc!='pass': add(language,level,pid,'quality.coverage_check','coverage_not_pass','major',f'coverage_check={cc!r}')
                 if lr!='pass': add(language,level,pid,'quality.linguistic_review','linguistic_not_pass','major',f'linguistic_review={lr!r}')
                 if pr!='pass': add(language,level,pid,'quality.pedagogical_review','pedagogical_not_pass','major',f'pedagogical_review={pr!r}')
                 if ar!='pass': add(language,level,pid,'quality.answer_key_check','answer_key_not_pass','major',f'answer_key_check={ar!r}')
-                cov=rec.get('estimated_known_token_coverage')
-                if cov in (None,0): add(language,level,pid,'estimated_known_token_coverage','coverage_missing_or_zero','major',f'value={cov!r}')
-                # Unicode NFC sanity.
+                cv=rec.get('estimated_known_token_coverage')
+                if cv in (None,0): add(language,level,pid,'estimated_known_token_coverage','coverage_missing_or_zero','major',f'value={cv!r}')
                 for field in ['title','text']:
                   val=rec.get(field,'')
                   if val!=unicodedata.normalize('NFC',val): add(language,level,pid,field,'unicode_not_nfc','minor','not NFC-normalized')
@@ -103,14 +92,15 @@ jobs:
               if seqs!=expected: add(language,level,'LEVEL','sequence','sequence_discontinuity','critical',f'actual sequence differs from 1..{len(lines)}')
               report['coverage'][language][level]={'records':len(lines),'questions':qn,'answers':an,'quality_status_counts':dict(status_counts),'coverage_check_counts':dict(cov_counts),'linguistic_review_counts':dict(lang_review),'pedagogical_review_counts':dict(ped_review),'answer_key_check_counts':dict(answer_review)}
           report['summary']={'records':total_records,'questions':total_q,'answers':total_a,'open_findings':len(report['findings']),'severity_counts':dict(sev),'category_counts':dict(cats),'deterministic_gate':'PASS' if not report['findings'] else 'FAIL'}
-          out=root/'reading/audit/independent_educator_deterministic_2026-08-19.json'
-          out.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          out=root/'reading/audit/independent_educator_deterministic_2026-08-19.json'; out.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          compact={'audit':report['audit'],'date':report['date'],'source_artifact':str(out),'source_artifact_sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'summary':report['summary'],'coverage':report['coverage'],'canonical_hashes':report['hashes']}
+          (root/'reading/audit/independent_educator_deterministic_2026-08-19.summary.json').write_text(json.dumps(compact,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           print(json.dumps(report['summary'],ensure_ascii=False,indent=2))
           PY
       - name: Commit audit result
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add reading/audit/independent_educator_deterministic_2026-08-19.json
+          git add reading/audit/independent_educator_deterministic_2026-08-19.json reading/audit/independent_educator_deterministic_2026-08-19.summary.json
           git commit -m "audit: record independent educator deterministic baseline" || exit 0
           git push
