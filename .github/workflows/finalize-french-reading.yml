@@ -59,7 +59,7 @@ jobs:
           assert audit['status'] == 'PASS'
           assert audit['approval_ready'] is True
           assert audit['audit_pass_count'] == 15
-          assert audit['failed_pass_count'] == 0
+          assert not audit.get('failed_passes')
           assert audit['canonical_passages'] == 360
           assert audit['questions'] == 3600
           assert audit['answers'] == 3600
@@ -78,15 +78,23 @@ jobs:
           assert approval['level_blobs'] == audit['level_blobs']
           assert approval['repair_final_c2_blob'] == repair['final_c2_blob']
           assert approval['level_blobs']['c2'] == repair['final_c2_blob']
+          assert approval['historical_frontier_locks_preserved'] is True
+          assert approval['temporary_source_binding_restored'] is True
 
-          assert status['status'] == 'FRENCH_COMPLETE_APPROVED'
-          assert status['canonical_passages'] == 360
-          assert status['approved_passages'] == 360
-          assert status['unapproved_passages'] == 0
-          assert status['generation_complete'] is True
-          assert status['final_audit']['approval'] == 'APPROVED'
+          assert status['overall_status'] == 'in_progress'
+          assert status['active_language'] == 'Urdu'
+          assert 'Urdu' not in status.get('paused_languages', [])
+          assert status['approved_passages'] == 720
+          assert status['french']['state'] == 'APPROVED'
+          assert status['french']['formal_final_approval'] is True
+          assert status['french']['generation_complete'] is True
+          assert status['french']['final_audit']['approval'] == 'APPROVED'
+          assert status['french']['final_audit']['whole_corpus_sha256'] == audit['whole_corpus_sha256']
+          assert status['french']['final_audit']['level_blobs'] == audit['level_blobs']
+          assert status['urdu']['state'] == 'ACTIVE_A1'
+          assert status['urdu']['canonical_passages'] == 6
 
-          print('French final seal invariants: PASS')
+          print('French final seal + Urdu handoff invariants: PASS')
           PY
 
       - name: Preserve final-review failure logs
