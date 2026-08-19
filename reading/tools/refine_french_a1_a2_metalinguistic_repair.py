@@ -16,42 +16,42 @@ EXPECTED_BEFORE = {
     'A2': '54e38bdbd8c7264a0d77484296c256857465783d57069ac456cc63538d515552',
 }
 
-# Plain-language meanings for the former category-label questions. These avoid requiring
-# A1/A2 learners to name parts of speech while preserving the same lexical target.
-CATEGORY_MEANINGS = {
-    'faire': 'Ici, « faire un cours de danse » signifie participer au cours ou réaliser cette activité.',
-    'mon': '« mon » indique que le carnet appartient à la personne qui parle.',
-    'ce': '« ce » désigne le projet montré ou déjà identifié dans la situation.',
-    'nous': '« nous » désigne la personne qui parle avec une ou plusieurs autres personnes.',
-    'moi': '« moi » désigne la personne qui parle.',
-    'ils': '« ils » désigne plusieurs personnes dont on parle.',
-    'matin': 'Le matin est la première partie de la journée, avant midi.',
-    'soir': 'Le soir est la partie de la journée après l’après-midi et avant la nuit.',
-    'chose': 'Une chose est un objet, une idée ou un élément que l’on ne nomme pas plus précisément.',
-    'place': 'Ici, une place est un endroit ou un espace disponible.',
-    'enfant': 'Un enfant est une jeune personne.',
-    'question': 'Une question est une demande faite pour obtenir une réponse ou une information.',
-    'rue': 'Une rue est une voie d’une ville où l’on peut marcher ou circuler.',
-    'main': 'La main est la partie du corps située au bout du bras.',
-    'pied': 'Le pied est la partie du corps située au bout de la jambe.',
-    'manger': 'Manger signifie prendre et consommer de la nourriture.',
-    'sentir': 'Ici, sentir signifie remarquer ou éprouver une sensation, comme la fatigue.',
-    'malade': 'Être malade signifie ne pas être en bonne santé.',
-    'famille': 'La famille est le groupe de personnes liées entre elles, par exemple parents et enfants.',
-    'mère': 'La mère est le parent féminin d’un enfant.',
-    'école': 'L’école est le lieu où les élèves vont apprendre.',
-    'table': 'Une table est un meuble avec une surface sur laquelle on peut poser des objets.',
-    'eau': 'L’eau est le liquide que l’on boit notamment pour s’hydrater.',
-    'livre': 'Un livre est un ensemble de pages écrites ou imprimées que l’on lit.',
-    'soleil': 'Le soleil est l’astre qui éclaire la Terre pendant la journée.',
-    'chaud': 'Ici, chaud signifie que la température est élevée.',
-    'acheter': 'Acheter signifie obtenir quelque chose en le payant.',
-    'vêtement': 'Un vêtement est une pièce que l’on porte sur le corps.',
-    'sac': 'Un sac est un objet servant à transporter ou ranger des choses.',
-    'expliquer': 'Expliquer signifie rendre quelque chose plus clair en donnant des informations ou des raisons.',
-    'essayer': 'Essayer signifie tenter de faire quelque chose.',
-    'réparer': 'Réparer signifie remettre en bon état quelque chose qui est abîmé ou ne fonctionne pas.',
-    'découvrir': 'Découvrir signifie apprendre l’existence de quelque chose que l’on ne connaissait pas.',
+# Operational form/use tasks replace formal part-of-speech/category naming. These preserve
+# the q7 grammar/form slot without requiring labels such as nom, verbe, pronom or déterminant.
+CATEGORY_USE = {
+    'faire': ('Choisis la phrase correcte : « tu vas faire un cours » ou « tu vas fais un cours » ?', '« tu vas faire un cours ».'),
+    'mon': ('Pour parler de son carnet, Camille dit : « mon carnet » ou « ma carnet » ?', '« mon carnet ».'),
+    'ce': ('Choisis la forme correcte : « ce projet » ou « cet projet » ?', '« ce projet ».'),
+    'nous': ('Choisis la phrase correcte : « nous avons des informations » ou « nous a des informations » ?', '« nous avons des informations ».'),
+    'moi': ('Choisis la forme correcte : « cette photo est pour moi » ou « cette photo est pour je » ?', '« cette photo est pour moi ».'),
+    'ils': ('Choisis la phrase correcte : « ils montrent leurs images » ou « ils montre leurs images » ?', '« ils montrent leurs images ».'),
+    'matin': ('Choisis la forme correcte : « le matin » ou « la matin » ?', '« le matin ».'),
+    'soir': ('Choisis la forme correcte : « le soir » ou « la soir » ?', '« le soir ».'),
+    'chose': ('Choisis la forme correcte : « une autre chose » ou « un autre chose » ?', '« une autre chose ».'),
+    'place': ('Choisis la forme correcte : « une place » ou « un place » ?', '« une place ».'),
+    'enfant': ('Choisis la phrase correcte : « chaque enfant reçoit une feuille » ou « chaque enfants reçoit une feuille » ?', '« chaque enfant reçoit une feuille ».'),
+    'question': ('Choisis la forme correcte : « une question » ou « un question » ?', '« une question ».'),
+    'rue': ('Choisis la forme correcte : « une rue » ou « un rue » ?', '« une rue ».'),
+    'main': ('Choisis la forme correcte : « une main » ou « un main » ?', '« une main ».'),
+    'pied': ('Choisis la forme correcte : « son pied droit » ou « sa pied droit » ?', '« son pied droit ».'),
+    'manger': ('Choisis la phrase correcte : « elle veut manger » ou « elle veut mange » ?', '« elle veut manger ».'),
+    'sentir': ('Choisis la phrase correcte : « elle commence à sentir la fatigue » ou « elle commence à sent la fatigue » ?', '« elle commence à sentir la fatigue ».'),
+    'malade': ('Choisis la phrase correcte : « Camille est malade » ou « Camille est malades » ?', '« Camille est malade ».'),
+    'famille': ('Choisis la forme correcte : « sa famille » ou « son famille » ?', '« sa famille ».'),
+    'mère': ('Choisis la forme correcte : « sa mère » ou « son mère » ?', '« sa mère ».'),
+    'école': ('Choisis la forme correcte : « à l’école » ou « au école » ?', '« à l’école ».'),
+    'table': ('Choisis la forme correcte : « une table » ou « un table » ?', '« une table ».'),
+    'eau': ('Choisis la forme correcte : « de l’eau » ou « du eau » ?', '« de l’eau ».'),
+    'livre': ('Choisis la forme correcte au pluriel : « des livres » ou « des livre » ?', '« des livres ».'),
+    'soleil': ('Choisis la forme correcte : « le soleil » ou « la soleil » ?', '« le soleil ».'),
+    'chaud': ('Choisis la phrase correcte : « il fait chaud » ou « il fait chaude » ?', '« il fait chaud ».'),
+    'acheter': ('Choisis la phrase correcte : « elle veut acheter un livre » ou « elle veut achète un livre » ?', '« elle veut acheter un livre ».'),
+    'vêtement': ('Choisis la forme correcte : « un vêtement » ou « une vêtement » ?', '« un vêtement ».'),
+    'sac': ('Choisis la forme correcte : « un sac » ou « une sac » ?', '« un sac ».'),
+    'expliquer': ('Choisis la phrase correcte : « elle peut expliquer le problème » ou « elle peut explique le problème » ?', '« elle peut expliquer le problème ».'),
+    'essayer': ('Choisis la phrase correcte : « elle décide d’essayer » ou « elle décide d’essaie » ?', '« elle décide d’essayer ».'),
+    'réparer': ('Choisis la phrase correcte : « il peut réparer le vélo » ou « il peut répare le vélo » ?', '« il peut réparer le vélo ».'),
+    'découvrir': ('Choisis la phrase correcte : « elle vient de découvrir un service » ou « elle vient de découvre un service » ?', '« elle vient de découvrir un service ».'),
 }
 
 FUNCTION_MEANINGS = {
@@ -62,7 +62,7 @@ FUNCTION_MEANINGS = {
     'qui': '« qui » renvoie à la personne et précise qu’elle répond.',
     'très': '« très » renforce l’idée de grandeur : le cahier est vraiment grand.',
     'toujours': '« toujours » signifie ici que l’action se fait de manière habituelle ou à chaque fois.',
-    'encore': 'Ici, « encore » signifie qu’une quantité ou une durée supplémentaire reste à ajouter.',
+    'encore': 'Ici, « encore » signifie qu’une durée supplémentaire reste avant l’ouverture.',
     'avant': '« avant » signifie qu’une action se produit plus tôt qu’une autre.',
     'après': '« après » signifie qu’une action se produit plus tard qu’une autre.',
     'peu': '« peu » indique ici une petite quantité.',
@@ -78,7 +78,7 @@ FUNCTION_MEANINGS = {
     'mieux': '« mieux » signifie que l’état s’est amélioré.',
 }
 
-# These contexts preserve the exact sense that the original function question intended.
+# Explicit human-reviewed contexts prevent first-occurrence sense drift.
 FUNCTION_CONTEXT = {
     ('fr-a1-u01-p02', 'q7'): 'Quand le feu devient vert, ils traversent.',
     ('fr-a1-u01-p03', 'q7'): 'Sami s’assoit avec elle.',
@@ -151,7 +151,6 @@ for t in prior['transformations']:
     rec = index[t['passage_id']]
     q = next(x for x in rec['questions'] if x['id'] == t['question_id'])
     a = next(x for x in rec['answer_key'] if x['id'] == t['answer_id'])
-    # Bind this second-stage review to the exact machine-repair output.
     assert q['type'] == t['after']['type'], (key, q['type'], t['after']['type'])
     assert q['prompt'] == t['after']['prompt'], (key, 'prompt drift')
     assert a['answer'] == t['after']['answer'], (key, 'answer drift')
@@ -165,11 +164,10 @@ for t in prior['transformations']:
         a['answer'] = 'À la personne qui parle.'
     elif 'formal_grammar_category_retrieval' in reasons:
         form = get_form(rec, target_ids)
-        if form not in CATEGORY_MEANINGS:
-            raise AssertionError((key, 'missing reviewed category meaning', form))
-        q['type'] = 'single_word_definition'
-        q['prompt'] = f'Dans ce passage, que signifie « {form} » ?'
-        a['answer'] = CATEGORY_MEANINGS[form]
+        if form not in CATEGORY_USE:
+            raise AssertionError((key, 'missing reviewed form/use task', form))
+        q['type'] = 'grammar_choice'
+        q['prompt'], a['answer'] = CATEGORY_USE[form]
     elif 'low_level_function_label_task' in reasons:
         if key == ('fr-a2-u01-p01', 'q7'):
             q['type'] = 'cause_effect'
@@ -201,8 +199,6 @@ for t in prior['transformations']:
         else:
             raise AssertionError((key, 'unreviewed formal grammar-in-context item'))
     elif 'a1_explicit_metalinguistic_prompt' in reasons:
-        # Only the independently identified q8 contrast item should reach this branch;
-        # category items are handled above.
         raise AssertionError((key, 'unreviewed A1 metalinguistic item'))
     else:
         raise AssertionError((key, 'unexpected adjudication reason set', sorted(reasons)))
@@ -259,13 +255,12 @@ for level, rows in corpora.items():
 if residue:
     raise SystemExit('DEFINED DEFECT CLASS REMAINS: ' + json.dumps(residue, ensure_ascii=False))
 
-# Human-refinement-specific checks: no malformed nested guillemets and no verbatim-repair cloze
-# remains among the 63 transformed items, except A2 grammar-choice tasks intentionally quote alternatives.
+# Human-refinement-specific checks.
 for item in refined:
     q = next(x for x in index[item['passage_id']]['questions'] if x['id'] == item['question_id'])
     assert q['prompt'].count('«') == q['prompt'].count('»'), (item['passage_id'], item['question_id'], 'unbalanced guillemets')
     if item['after']['type'] == 'cloze_transfer':
-        raise AssertionError((item['passage_id'], item['question_id'], 'human refinement should not leave copied-passage cloze in repaired class'))
+        raise AssertionError((item['passage_id'], item['question_id'], 'copied-passage cloze remained in repaired class'))
 
 for level, path in FILES.items():
     dump_jsonl(path, corpora[level])
@@ -287,9 +282,10 @@ OUT.write_text(json.dumps({
         'fr-a1-u01-p03 q7 selected avec un livre instead of the intended accompaniment sense.',
         'fr-a1-u04-p03 q7 selected pas encore (not yet) instead of the intended additional-time encore sense.',
         'fr-a1-u06-p03 q7 selected adverbial même (even) instead of the intended identical/same sense.',
+        'A definition fallback duplicated existing vocabulary/definition functions in some passages (first caught in fr-a1-u08-p02).',
         'Verbatim passage clozes duplicated the role already assigned to later transfer/cloze questions and conflicted with the project ten-question standard.'
     ],
-    'resolution': 'Replaced the 63 defined-class items with plain-language meaning/use/reference tasks or A2 form-choice tasks that do not require grammar-category labels. Removed the copied-passage cloze strategy from this repair class.',
+    'resolution': 'Replaced former category-label tasks with operational form/use choices, former function-label tasks with plain-language context-meaning/reference tasks, and the few formal A2 structure-label tasks with form choices or contextual meaning. No copied-passage cloze strategy remains in this repair class.',
     'transformations': refined,
     'validation': {
         'all_63_machine_repairs_reviewed': 'PASS',
