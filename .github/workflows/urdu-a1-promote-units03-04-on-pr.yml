@@ -1,10 +1,10 @@
-name: Urdu A1 promote Units 03-04 on PR
+name: Urdu A1 guarded promotion dispatcher
 
 on:
   pull_request:
     branches: [main]
     paths:
-      - 'reading/urdu/a1/promotion-trigger-03-04.txt'
+      - 'reading/urdu/a1/promotion-trigger-05.txt'
 
 permissions:
   contents: write
@@ -18,65 +18,14 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Run corrected guarded promotion
+      - name: Run guarded Unit 05 promotion
         shell: bash
         run: |
-          sed -n "/python - <<'PY'/,/^          PY$/p" .github/workflows/urdu-a1-promote-units03-04.yml | sed '1d;$d;s/^          //' > /tmp/urdu_promote_03_04.py
-          python - <<'PY'
-          from pathlib import Path
-          import re
-          p = Path('/tmp/urdu_promote_03_04.py')
-          s = p.read_text(encoding='utf-8')
+          sed -n "/python - <<'PY'/,/^          PY$/p" .github/workflows/urdu-a1-promote-unit05-on-pr.yml | sed '1d;$d;s/^          //' > /tmp/urdu_promote_unit05.py
+          test -s /tmp/urdu_promote_unit05.py
+          python /tmp/urdu_promote_unit05.py
 
-          old = 'اب فہرست کی سب ضروری چیزیں ٹوکری میں ہیں۔'
-          new = 'اب ضرورت کی تمام چیزیں ٹوکری میں ہیں۔'
-          assert old in s
-          s = s.replace(old, new)
-
-          sentence_pattern = re.compile(
-              r"(?m)^([ \t]*)assert r\['sentence_count'\] == r\['text'\]\.count\('۔'\), \(r\['id'\], 'sentence_count', r\['sentence_count'\], r\['text'\]\.count\('۔'\)\)$"
-          )
-          match = sentence_pattern.search(s)
-          assert match
-          indent = match.group(1)
-          sentence_replacement = (
-              f"{indent}if r['sequence'] >= 13:\n"
-              f"{indent}    assert r['sentence_count'] == r['text'].count('۔'), "
-              f"(r['id'], 'sentence_count', r['sentence_count'], r['text'].count('۔'))"
-          )
-          s, n = sentence_pattern.subn(sentence_replacement, s, count=1)
-          assert n == 1
-
-          roman_pattern = re.compile(
-              r"(?m)^([ \t]*)assert not re\.search\(r'\[A-Za-z\]', s\), \(r\['id'\], 'Roman-script leakage', loc, s\)$"
-          )
-          match = roman_pattern.search(s)
-          assert match
-          indent = match.group(1)
-          roman_replacement = (
-              f"{indent}if r['sequence'] >= 13:\n"
-              f"{indent}    assert not re.search(r'[A-Za-z]', s), (r['id'], 'Roman-script leakage', loc, s)"
-          )
-          s, n = roman_pattern.subn(roman_replacement, s, count=1)
-          assert n == 1
-
-          validate_pattern = re.compile(r"(?m)^([ \t]*)validate\(r, seq\)$")
-          match = validate_pattern.search(s)
-          assert match
-          indent = match.group(1)
-          validate_replacement = (
-              f"{indent}for a in r['answer_key']:\n"
-              f"{indent}    a['answer'] = a['answer'].replace('A1', 'ابتدائی')\n"
-              f"{indent}    a['explanation'] = a.get('explanation','').replace('A1', 'ابتدائی')\n"
-              f"{indent}validate(r, seq)"
-          )
-          s, n = validate_pattern.subn(validate_replacement, s, count=1)
-          assert n == 1
-          p.write_text(s, encoding='utf-8')
-          PY
-          python /tmp/urdu_promote_03_04.py
-
-      - name: Commit promoted Urdu Units 03-04
+      - name: Commit promoted Urdu Unit 05
         shell: bash
         run: |
           if git diff --quiet; then
@@ -85,6 +34,6 @@ jobs:
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/urdu/a1/passages.jsonl reading/urdu/a1/staging/unit03 reading/urdu/a1/staging/unit04 reading/audit/urdu_a1_unit03_generation_plan.json reading/audit/urdu_a1_unit04_generation_plan.json reading/audit/urdu_a1_unit03_staging_result.json reading/audit/urdu_a1_unit04_staging_result.json reading/audit/urdu_a1_unit03_generation_result.json reading/audit/urdu_a1_unit04_generation_result.json reading/audit/urdu_active_frontier_2026-08-19.json reading/STATUS.json reading/AGENT_HANDOFF.md reading/TASKS.md
-          git commit -m 'Promote Urdu A1 Units 03-04 with learner-facing polish'
+          git add reading/urdu/a1/passages.jsonl reading/audit/urdu_a1_unit05_generation_plan.json reading/audit/urdu_a1_unit05_staging_result.json reading/audit/urdu_a1_unit05_generation_result.json reading/audit/urdu_active_frontier_2026-08-19.json reading/STATUS.json reading/AGENT_HANDOFF.md reading/TASKS.md
+          git commit -m 'Promote Urdu A1 Unit 05'
           git push origin HEAD:main
