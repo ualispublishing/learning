@@ -22,5 +22,9 @@ repair_extra('fr-a1-u10-p05','q6','Que signifie « chaussure » ?','Un objet que
 """
 assert old in s,'expected v2 duplicate-repair block not found'
 s=s.replace(old,new,1)
+# The phrase "Quel rôle joue..." is not itself grammatical metalanguage. Three A2 false
+# positives were already semantically adjudicated: programme purpose, pourtant discourse
+# effect, and the practical effect of breathing. Formal grammar types remain separately blocked.
+s=s.replace("'quel rôle joue',",'',1)
 p.write_text(s,encoding='utf-8')
-print('patched v2 duplicate repair block')
+print('patched v2 duplicate repairs and semantically aligned residue guard')
