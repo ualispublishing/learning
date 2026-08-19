@@ -3,7 +3,8 @@
   "updated": "2026-08-19",
   "purpose": "Independent educator/publication release status. This file overrides historical APPROVED/SEALED labels for educator-readiness claims.",
   "protocol": "reading/planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md",
-  "release_claim_policy": "No agent may claim literal 100% correctness. HASH_BOUND_RELEASED means full recorded verification completed with zero known unresolved defects.",
+  "assurance_profile": "reading/planning/HIGHEST_ASSURANCE_RELEASE_PROFILE.md",
+  "release_claim_policy": "No agent may claim literal 100% correctness. HASH_BOUND_RELEASED means full recorded verification completed with zero known unresolved defects under the required assurance profile.",
   "languages": {
     "arabic": {
       "generation_state": "COMPLETE",
@@ -11,16 +12,17 @@
       "canonical_passages": 360,
       "release_state": "INTERNAL_LANGUAGE_PASS",
       "educator_release_ready": false,
-      "reason": "Historical internal audit is substantial but has not yet been re-certified under the independent educator release protocol.",
+      "target_assurance": "HIGHEST_ASSURANCE",
+      "reason": "Historical internal audit is substantial but has not yet been re-certified under the independent educator release protocol and highest-assurance profile.",
       "required_next_gates": [
-        "canonical_identity_and_deterministic_integrity",
-        "fresh_full_passage_language_and_qa_audit",
+        "canonical_identity_and_deterministic_integrity_100pct",
+        "fresh_full_passage_language_and_qa_audit_100pct",
         "LanguageTool_Arabic_disagreement_pass",
         "CAMeL_MSA_morphology_diagnostic_pass",
-        "three_independent_model_family_passes",
-        "native_MSA_professional_review",
-        "educator_curriculum_review",
-        "blind_post_repair_review",
+        "three_genuinely_independent_model_family_passes_100pct",
+        "native_MSA_professional_review_100pct",
+        "educator_curriculum_review_100pct",
+        "blind_post_repair_human_review_100pct",
         "hash_bound_release_manifest"
       ]
     },
@@ -30,17 +32,18 @@
       "canonical_passages": 360,
       "release_state": "INTERNAL_LANGUAGE_PASS",
       "educator_release_ready": false,
-      "reason": "Historical hash-bound approval predates the strengthened independent educator release protocol and must be re-certified before teacher-ready claims.",
+      "target_assurance": "HIGHEST_ASSURANCE",
+      "reason": "Historical hash-bound approval predates the strengthened independent educator release protocol and highest-assurance profile and must be re-certified before teacher-ready claims.",
       "required_next_gates": [
-        "canonical_identity_and_deterministic_integrity",
-        "fresh_full_passage_language_and_qa_audit",
+        "canonical_identity_and_deterministic_integrity_100pct",
+        "fresh_full_passage_language_and_qa_audit_100pct",
         "LanguageTool_French_disagreement_pass",
         "Antidote_French_disagreement_pass",
         "DeepL_Write_French_disagreement_pass",
-        "three_independent_model_family_passes",
-        "native_French_professional_review",
-        "educator_curriculum_review",
-        "blind_post_repair_review",
+        "three_genuinely_independent_model_family_passes_100pct",
+        "native_French_professional_review_100pct",
+        "educator_curriculum_review_100pct",
+        "blind_post_repair_human_review_100pct",
         "hash_bound_release_manifest"
       ]
     },
@@ -49,11 +52,12 @@
       "historical_internal_audit_state": "PARTIAL",
       "release_state": "GENERATED",
       "educator_release_ready": false,
+      "target_assurance": "HIGHEST_ASSURANCE_AT_LANGUAGE_RELEASE",
       "reason": "Active generation; current canonical frontier is sequences 1-30 of A1, with Unit 06 staged but not yet confirmed canonical as of this status write.",
       "required_next_gates": [
         "continue_guarded_generation",
         "complete_level_and_language_internal_audits",
-        "apply_full_independent_educator_release_protocol_at_release_milestone"
+        "apply_full_independent_educator_release_protocol_and_highest_assurance_profile_at_release_milestone"
       ]
     }
   },
