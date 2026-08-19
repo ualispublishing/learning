@@ -1,0 +1,42 @@
+{
+  "language": "ur",
+  "cefr": "A1",
+  "unit": 7,
+  "status": "STAGING_READY_CANONICAL_36_GATE_PENDING",
+  "theme": "dates, weeks, months, and simple calendar planning",
+  "genres": ["weekly plan", "class-time routine", "school calendar", "future plan", "timed exercise", "checkpoint"],
+  "policy": "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
+  "ten_question_standard": "reading/planning/TEN_QUESTION_STANDARD.md",
+  "schema": "reading/schema/passage.schema.json",
+  "promotion_precondition": "Unit 06 must first promote as sequences 31-36 so the live Urdu A1 canonical frontier is sequence 36.",
+  "word_band": [90, 140],
+  "new_target_policy": {
+    "p01_p05_default": 2,
+    "hard_quota": false,
+    "p06_new_targets": 0,
+    "source_lexicon": "urdu_top1000.csv",
+    "root_lexicon_read_only": true
+  },
+  "target_assignments": [
+    {"sequence": 37, "id": "ur-a1-u07-p01", "targets": [{"id":"ur-rank-0439","form":"اگلے","rank":439,"sense":"next"},{"id":"ur-rank-0488","form":"ہفتے","rank":488,"sense":"week (oblique/plural form)"}]},
+    {"sequence": 38, "id": "ur-a1-u07-p02", "targets": [{"id":"ur-rank-0615","form":"بجے","rank":615,"sense":"at o'clock; time marker"},{"id":"ur-rank-0619","form":"منٹ","rank":619,"sense":"minute"}]},
+    {"sequence": 39, "id": "ur-a1-u07-p03", "targets": [{"id":"ur-rank-0655","form":"ستمبر","rank":655,"sense":"September"},{"id":"ur-rank-0636","form":"دسمبر","rank":636,"sense":"December"}]},
+    {"sequence": 40, "id": "ur-a1-u07-p04", "targets": [{"id":"ur-rank-0442","form":"آئندہ","rank":442,"sense":"future; next; hereafter"},{"id":"ur-rank-0476","form":"مستقبل","rank":476,"sense":"future"}]},
+    {"sequence": 41, "id": "ur-a1-u07-p05", "targets": [{"id":"ur-rank-0487","form":"دوبارہ","rank":487,"sense":"again"},{"id":"ur-rank-0504","form":"تقریباً","rank":504,"sense":"approximately"}]},
+    {"sequence": 42, "id": "ur-a1-u07-p06", "targets": []}
+  ],
+  "verified_word_counts": [118,108,116,122,113,121],
+  "structural_precheck": {
+    "six_passages_planned": true,
+    "sequences_37_42": true,
+    "ten_questions_each_required": true,
+    "ten_answers_each_required": true,
+    "p06_zero_new": true,
+    "all_word_counts_in_a1_band": true,
+    "target_source_rank_identity_checked": true,
+    "future_target_premature_exposure_check": true,
+    "learner_facing_roman_script_zero": true,
+    "root_lexicon_mutation": false
+  },
+  "audit_policy": "Formal multi-pass final audit remains deferred under generation-first policy; Unit 07 may be staged ahead of canonical promotion but must not be counted as canonical until sequence-order guards pass."
+}
