@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-20",
+  "language": "fr",
+  "status": "ADJUDICATED_FINDINGS_OPEN",
+  "bound_canonical_hashes": {
+    "A1": "1cdb31ecb8b987c50051bb6f8fa5b2f7fda812cb3004c81ab8697f832fceacba",
+    "A2": "8fcd71903e6a495a2abaac8d436232b4b7ee00ae5ac0bce4d273aa4a134b3c15",
+    "B1": "7b1013fa606761bc7cc69fdaf67c66a0efcc9c91c478b1c8a5f8523458f9451b",
+    "B2": "bfa64c472a93d572d65fbe0217283b9d53bbb0a8d88fee7ea3a3aef1c7993942",
+    "C1": "dead8e5d6e6e60a7c6c5185996159670e6077ea2d5da31860de168674050b39a",
+    "C2": "c161c4551a6ce0222850778c02ed0662e00bb60e5386d5dc0b4f31a92cb9f277"
+  },
+  "standard_basis": {
+    "document": "docs/SPACED_REINFORCEMENT_STANDARD.md",
+    "contract": "R1 after ~1-2 subsequent learning items; R2 after ~4-6; R3 after ~10-14; intervals are heuristics but labels represent expanding review opportunities rather than arbitrary representations."
+  },
+  "findings": [
+    {
+      "finding_id": "FR-REVIEW-STAGE-001",
+      "passage_id": "fr-a1-u02-p01",
+      "field": "review_lexical_targets[fr-rank-0047] and prior review history",
+      "target_id": "fr-rank-0047",
+      "lemma": "venir",
+      "category": "spaced_reinforcement_schedule",
+      "severity": "major",
+      "confidence": "high",
+      "status": "open",
+      "evidence": {
+        "introduced_sequence": 1,
+        "history": [
+          [2, "R1"],
+          [3, "R2"],
+          [4, "R2"],
+          [5, "R3"],
+          [6, "R3"],
+          [7, "R2"]
+        ],
+        "r3_window_sequences_checked": [11, 12, 13, 14, 15],
+        "natural_venir_occurrence_found_in_checked_r3_window": false
+      },
+      "adjudication": "The sequence-5/6 R3 labels are premature under the repository's expanding-interval contract, and sequence 7 correctly behaves as an R2-distance opportunity. Unlike the quand case, no natural venir occurrence exists in the checked +10-to-14 passage window, so merely relabeling metadata would expose a missing R3 opportunity rather than fully repair the schedule.",
+      "proposed_correction": "Relabel the premature sequence-5/6 events to R2 (or otherwise normalize them consistently with the spacing contract), preserve sequence 7 as R2, and add a genuine later R3 retrieval/re-exposure opportunity only through a pedagogically natural canonical passage/task. Do not fabricate a metadata-only R3 event where venir is absent.",
+      "resolution_required_before_release": true
+    },
+    {
+      "finding_id": "FR-REVIEW-STAGE-002",
+      "passage_id": "fr-a1-u02-p02",
+      "field": "review_lexical_targets[fr-rank-0061] and prior review history",
+      "target_id": "fr-rank-0061",
+      "lemma": "quand",
+      "category": "spaced_reinforcement_metadata",
+      "severity": "minor",
+      "confidence": "high",
+      "status": "open",
+      "evidence": {
+        "introduced_sequence": 2,
+        "history": [
+          [3, "R1"],
+          [4, "R2"],
+          [5, "R2"],
+          [6, "R3"],
+          [8, "R2"],
+          [11, "R3"]
+        ]
+      },
+      "adjudication": "The sequence-6 R3 label is premature and causes the reported R3-to-R2 regression at sequence 8. A genuine later R3 opportunity already exists at sequence 11, close to the intended expanding interval. This is therefore a metadata-stage defect, not a missing-review defect.",
+      "proposed_correction": "Relabel the premature sequence-6 event as R2 while retaining sequence 11 as R3; rerun chronology and linkage checks after the edit.",
+      "resolution_required_before_release": true
+    }
+  ],
+  "summary": {
+    "source_chronology_findings": 2,
+    "adjudicated_true_defects": 2,
+    "major": 1,
+    "minor": 1,
+    "false_positives": 0,
+    "canonical_changes_made_in_this_pass": false,
+    "release_effect": "French remains REOPEN_REQUIRED."
+  }
+}
