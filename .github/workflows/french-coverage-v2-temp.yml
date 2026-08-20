@@ -1,4 +1,4 @@
-name: French coverage v2 compact adjudication
+name: French coverage v2 micro summary
 on:
   push:
     branches: [audit/french-coverage-v2-2026-08-19]
@@ -9,177 +9,43 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Build compact lexical and spacing adjudication evidence
+      - name: Emit small summary
         run: |
           python - <<'PY'
           import json
-          from collections import Counter, defaultdict
           from pathlib import Path
-
-          root = Path('.')
-          audit = root / 'reading' / 'audit'
-          evidence = json.loads((audit / 'french_coverage_evidence_full_v2_2026-08-19.json').read_text(encoding='utf-8'))
-          ledger = json.loads((audit / 'french_curriculum_exposure_ledger_full_v2_2026-08-19.json').read_text(encoding='utf-8'))
-          levels = ['a1','a2','b1','b2','c1','c2']
-
-          id_to_index = {}
-          index_to_level = {}
-          idx = 0
-          for level in levels:
-              p = root / 'reading' / 'french' / level / 'passages.jsonl'
-              for line in p.read_text(encoding='utf-8').splitlines():
-                  if not line.strip():
-                      continue
-                  row = json.loads(line)
-                  idx += 1
-                  id_to_index[row['id']] = idx
-                  index_to_level[idx] = level.upper()
-
-          # Default review windows from READING_PASSAGE_STANDARD §10. These are heuristics,
-          # so out-of-window events are adjudication candidates, not automatic defects.
-          windows = {'R1': (1,2), 'R2': (4,6), 'R3': (10,14), 'R4': (25,35)}
-          spacing_counts = Counter()
-          spacing_candidates = []
-          target_by_id = {t['target_id']: t for t in ledger.get('targets', [])}
-          for t in ledger.get('targets', []):
-              intro = t.get('introduced_global_index')
-              if not intro:
-                  continue
-              for r in t.get('review_history', []):
-                  stage = r.get('stage')
-                  pidx = id_to_index.get(r.get('passage_id'))
-                  if not pidx:
-                      spacing_counts['unresolved_passage_id'] += 1
-                      continue
-                  offset = pidx - intro
-                  if stage in windows:
-                      lo, hi = windows[stage]
-                      ok = lo <= offset <= hi
-                      spacing_counts[f'{stage}_in_window' if ok else f'{stage}_out_of_window'] += 1
-                      if not ok:
-                          spacing_candidates.append({
-                              'target_id': t['target_id'], 'lemma': t.get('lemma'),
-                              'introduced_in': t.get('introduced_in'), 'introduced_global_index': intro,
-                              'review_passage_id': r.get('passage_id'), 'review_global_index': pidx,
-                              'stage': stage, 'offset_passages': offset,
-                              'default_window': [lo, hi], 'representation': r.get('representation'),
-                              'severity': 'NEEDS_ADJUDICATION_NOT_AUTOMATIC_DEFECT'
-                          })
-                  else:
-                      spacing_counts[f'{stage or "missing"}_no_fixed_window'] += 1
-
-          chronology = evidence.get('chronology_findings', [])
-          flagged_ids = sorted({x.get('target_id') for x in chronology if x.get('target_id')})
-          flagged_histories = []
-          for tid in flagged_ids:
-              t = target_by_id.get(tid, {})
-              hist = []
-              intro = t.get('introduced_global_index')
-              for r in t.get('review_history', []):
-                  pidx = id_to_index.get(r.get('passage_id'))
-                  hist.append({
-                      **r,
-                      'global_index': pidx,
-                      'offset_from_introduction': (pidx - intro) if pidx and intro else None,
-                      'default_window': list(windows[r['stage']]) if r.get('stage') in windows else None,
-                      'within_default_window': (windows[r['stage']][0] <= (pidx-intro) <= windows[r['stage']][1]) if pidx and intro and r.get('stage') in windows else None
-                  })
-              flagged_histories.append({
-                  'target_id': tid, 'lemma': t.get('lemma'), 'form': t.get('form'),
-                  'introduced_in': t.get('introduced_in'), 'introduced_global_index': intro,
-                  'review_history': hist,
-                  'source_chronology_findings': [x for x in chronology if x.get('target_id') == tid]
-              })
-
-          level_rows = defaultdict(list)
-          level_unknown = Counter()
-          level_tokens = Counter()
-          level_candidate_visible = defaultdict(Counter)
-          for p in evidence.get('passages', []):
-              level = p['level']
-              level_rows[level].append(p)
-              level_unknown[level] += p.get('classification_counts', {}).get('uncontrolled_unknown_candidate', 0)
-              level_tokens[level] += p.get('counted_tokens', 0)
-              for label, count in p.get('top_uncontrolled_unknown_candidates', []):
-                  parts = [z.strip() for z in label.split('|')]
-                  lemma = parts[0]
-                  for z in parts[1:]:
-                      if z.startswith('lemma='):
-                          lemma = z.split('=',1)[1]
-                          break
-                  level_candidate_visible[level][lemma.casefold()] += count
-
-          level_summary = {}
-          for level in [x.upper() for x in levels]:
-              rows = level_rows[level]
-              worst = sorted(rows, key=lambda x: x.get('uncontrolled_unknown_candidate_rate', 0), reverse=True)[:10]
-              level_summary[level] = {
-                  'passages': len(rows),
-                  'total_counted_tokens': level_tokens[level],
-                  'uncontrolled_unknown_tokens_exact': level_unknown[level],
-                  'weighted_uncontrolled_unknown_rate': round(level_unknown[level] / level_tokens[level], 6) if level_tokens[level] else None,
-                  'support_gate_pass': sum(1 for x in rows if x.get('support_gate') == 'PASS'),
-                  'support_gate_review_required': sum(1 for x in rows if x.get('support_gate') != 'PASS'),
-                  'top_candidate_lemmas_visible_in_per_passage_top25': level_candidate_visible[level].most_common(30),
-                  'worst_passages': [
-                      {
-                          'id': x['id'], 'sequence': x['sequence'], 'passage_type': x['passage_type'],
-                          'unknown_rate': x.get('uncontrolled_unknown_candidate_rate'),
-                          'threshold': x.get('uncontrolled_unknown_candidate_threshold'),
-                          'top_candidates': x.get('top_uncontrolled_unknown_candidates', [])[:12]
-                      } for x in worst
-                  ]
-              }
-
+          src = Path('reading/audit/french_coverage_v2_compact_adjudication_2026-08-19.json')
+          x = json.loads(src.read_text(encoding='utf-8'))
           out = {
-              'schema_version': 1,
-              'date': '2026-08-19',
-              'language': 'fr',
-              'status': 'ADJUDICATION_EVIDENCE_DO_NOT_AUTOPROMOTE',
-              'bound_canonical_hashes': evidence.get('bound_canonical_hashes'),
-              'source_evidence': 'reading/audit/french_coverage_evidence_full_v2_2026-08-19.json',
-              'source_ledger': 'reading/audit/french_curriculum_exposure_ledger_full_v2_2026-08-19.json',
-              'coverage_interpretation': {
-                  'estimated_known_token_coverage_population_allowed': False,
-                  'supported_coverage_is_learner_mastery': False,
-                  'advanced_level_warning': 'The validated top-3000 backbone is explicitly not a complete C1/C2 lexicon; advanced uncontrolled candidates require semantic/ledger adjudication before being called passage defects.',
-                  'a1_warning': 'A1 outside-backbone content is held to the strictest support policy and should be reviewed first.'
-              },
-              'level_summary': level_summary,
-              'chronology_findings_from_full_v2': chronology,
-              'flagged_target_histories': flagged_histories,
-              'spacing_window_method': {
-                  'source': 'docs/READING_PASSAGE_STANDARD.md section 10',
-                  'default_windows_in_passage_offsets': {k:list(v) for k,v in windows.items()},
-                  'important': 'Intervals are heuristics; out-of-window events are review candidates, not automatic defects.'
-              },
-              'spacing_event_counts': dict(spacing_counts),
-              'spacing_candidates_total': len(spacing_candidates),
-              'spacing_candidates_first_250': spacing_candidates[:250],
-              'decisions': {
-                  'may_mark_coverage_pass': False,
-                  'may_populate_known_coverage': False,
-                  'may_treat_all_spacing_candidates_as_defects': False,
-                  'next_priority': 'Adjudicate A1 threshold failures and the two source chronology regressions first; then determine whether advanced recurring beyond-base vocabulary is properly controlled/ledgered.'
-              }
+            'schema_version': 1,
+            'date': '2026-08-19',
+            'language': 'fr',
+            'bound_canonical_hashes': x['bound_canonical_hashes'],
+            'levels': {},
+            'chronology_findings': x['chronology_findings_from_full_v2'],
+            'flagged_target_histories': x['flagged_target_histories'],
+            'spacing_event_counts': x['spacing_event_counts'],
+            'spacing_candidates_total': x['spacing_candidates_total'],
+            'decisions': x['decisions']
           }
-          outp = audit / 'french_coverage_v2_compact_adjudication_2026-08-19.json'
-          outp.write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-          print(json.dumps({
-              'level_summary': {k:{q:v[q] for q in ['uncontrolled_unknown_tokens_exact','weighted_uncontrolled_unknown_rate','support_gate_pass','support_gate_review_required']} for k,v in level_summary.items()},
-              'chronology_findings': chronology,
-              'flagged_target_histories': flagged_histories,
-              'spacing_event_counts': dict(spacing_counts),
-              'spacing_candidates_total': len(spacing_candidates)
-          }, ensure_ascii=False, indent=2))
+          for level, r in x['level_summary'].items():
+            out['levels'][level] = {
+              'tokens': r['total_counted_tokens'],
+              'unknown_tokens': r['uncontrolled_unknown_tokens_exact'],
+              'weighted_unknown_rate': r['weighted_uncontrolled_unknown_rate'],
+              'support_gate_pass': r['support_gate_pass'],
+              'support_gate_review_required': r['support_gate_review_required'],
+              'top15_candidate_lemmas': r['top_candidate_lemmas_visible_in_per_passage_top25'][:15],
+              'worst5_passages': r['worst_passages'][:5]
+            }
+          Path('reading/audit/french_coverage_v2_micro_summary_2026-08-19.json').write_text(json.dumps(out, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+          print(json.dumps(out, ensure_ascii=False, indent=2))
           PY
-      - name: Commit compact evidence only
+      - name: Commit micro summary
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/audit/french_coverage_v2_compact_adjudication_2026-08-19.json
+          git add reading/audit/french_coverage_v2_micro_summary_2026-08-19.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Summarize French coverage v2 adjudication evidence [skip ci]'
+          git commit -m 'Record French coverage v2 micro summary [skip ci]'
           git push origin HEAD:audit/french-coverage-v2-2026-08-19
