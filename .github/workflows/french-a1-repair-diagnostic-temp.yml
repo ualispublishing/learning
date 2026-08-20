@@ -1,53 +1,31 @@
-name: French A1 later review opportunity audit
+name: French A1 later review opportunity micro summary
 on:
   push:
     branches: [repair/french-a1-coverage-2026-08-19]
 permissions:
   contents: write
 jobs:
-  audit:
+  summarize:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Find later natural occurrences for high-priority targets
+      - name: Emit R2/R3 window opportunities only
         run: |
           python - <<'PY'
-          import json,re,unicodedata
+          import json
           from pathlib import Path
-          rows=[json.loads(x) for x in Path('reading/french/a1/passages.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]
-          forms={
-            'fr-rank-0048':{'lemma':'ici','intro':1,'forms':['ici']},
-            'fr-rank-0047':{'lemma':'venir','intro':1,'forms':['venir','viens','vient','venons','venez','viennent','venu','venue','venus','venues']},
-            'fr-rank-0061':{'lemma':'quand','intro':2,'forms':['quand']},
-            'fr-rank-0063':{'lemma':'alors','intro':2,'forms':['alors']},
-            'fr-rank-0023':{'lemma':'vouloir','intro':3,'forms':['vouloir','veux','veut','voulons','voulez','veulent','voulu','voulue','voulus','voulues']},
-            'fr-rank-0035':{'lemma':'avec','intro':3,'forms':['avec']},
-            'fr-rank-0021':{'lemma':'pouvoir','intro':4,'forms':['pouvoir','peux','peut','pouvons','pouvez','peuvent','pu']},
-            'fr-rank-0039':{'lemma':'voir','intro':4,'forms':['voir','vois','voit','voyons','voyez','voient','vu','vue','vus','vues']},
-          }
-          def norm(s): return unicodedata.normalize('NFC',s).replace('’',"'").casefold()
-          out={}
-          for tid,d in forms.items():
-            hits=[]
-            for p in rows:
-              if p['sequence']<=d['intro']: continue
-              txt=norm(p['text']); found=[]
-              for f in d['forms']:
-                c=len(re.findall(r'(?<!\w)'+re.escape(norm(f))+r'(?!\w)',txt,flags=re.UNICODE))
-                if c: found.append([f,c])
-              qids=[q['id'] for q in p.get('questions',[]) if tid in q.get('target_ids',[])]
-              existing=[r for r in p.get('review_lexical_targets',[]) if r.get('id')==tid]
-              if found or qids or existing:
-                hits.append({'passage_id':p['id'],'sequence':p['sequence'],'offset':p['sequence']-d['intro'],'text_forms':found,'question_ids':qids,'existing_reviews':existing})
-            out[tid]={'lemma':d['lemma'],'intro':d['intro'],'hits':hits,'r3_window_hits':[h for h in hits if 10<=h['offset']<=14 and (h['text_forms'] or h['question_ids'])],'r2_window_hits':[h for h in hits if 4<=h['offset']<=6 and (h['text_forms'] or h['question_ids'])]}
-          Path('reading/audit/french_a1_later_review_opportunities_2026-08-19.json').write_text(json.dumps({'schema_version':1,'date':'2026-08-19','language':'fr','level':'A1','targets':out},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print(json.dumps({tid:{'lemma':d['lemma'],'r2':d['r2_window_hits'],'r3':d['r3_window_hits']} for tid,d in out.items()},ensure_ascii=False,indent=2))
+          x=json.loads(Path('reading/audit/french_a1_later_review_opportunities_2026-08-19.json').read_text(encoding='utf-8'))
+          out={'schema_version':1,'date':'2026-08-19','language':'fr','level':'A1','targets':{}}
+          for tid,d in x['targets'].items():
+            out['targets'][tid]={'lemma':d['lemma'],'intro':d['intro'],'r2_window_hits':d['r2_window_hits'],'r3_window_hits':d['r3_window_hits']}
+          Path('reading/audit/french_a1_later_review_opportunities_micro_2026-08-19.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(out,ensure_ascii=False,indent=2))
           PY
-      - name: Commit opportunity evidence
+      - name: Commit micro summary
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/audit/french_a1_later_review_opportunities_2026-08-19.json
+          git add reading/audit/french_a1_later_review_opportunities_micro_2026-08-19.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Locate natural French A1 later review opportunities [skip ci]'
+          git commit -m 'Condense French A1 later review opportunities [skip ci]'
           git push origin HEAD:repair/french-a1-coverage-2026-08-19
