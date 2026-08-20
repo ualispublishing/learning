@@ -1,56 +1,71 @@
-name: French A1 exact review visibility summary temp
+name: French A1 review visibility reconciliation temp
 on:
   push:
     branches: [audit/french-coverage-v2-2026-08-19]
 permissions:
   contents: write
 jobs:
-  summarize:
+  reconcile:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Group A1 review visibility findings
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check 'stanza==1.10.1'
+      - name: Reconcile exact-form and lemma-aware findings
         run: |
           python - <<'PY'
-          import json
-          from collections import defaultdict,Counter
+          import json,re,unicodedata
+          from collections import defaultdict
           from pathlib import Path
-          src=Path('reading/audit/french_exact_review_visibility_audit_2026-08-19.json')
-          x=json.loads(src.read_text(encoding='utf-8'))
-          groups=defaultdict(list); targets=Counter(); stages=Counter(); reps=Counter()
-          for f in x['findings']:
-            groups[f['passage_id']].append(f)
-            targets[(f['target_id'],f['form'])]+=1
-            stages[f['review_stage']]+=1
-            reps[f['representation']]+=1
+          import stanza
+          root=Path('.')
+          exact=json.loads((root/'reading/audit/french_exact_review_visibility_audit_2026-08-19.json').read_text(encoding='utf-8'))
+          lemma=json.loads((root/'reading/audit/french_review_target_visibility_audit_2026-08-19.json').read_text(encoding='utf-8'))
+          rows={json.loads(x)['id']:json.loads(x) for x in (root/'reading/french/a1/passages.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()}
+          lex={r['id']:r for r in [json.loads(x) for x in (root/'reading/lexicons/french.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]}
+          def norm(s):
+            s=unicodedata.normalize('NFC',str(s or '')).replace('’',"'").casefold().strip()
+            return re.sub(r"^[^\w]+|[^\w]+$",'',s,flags=re.UNICODE)
+          key=lambda f:(f['passage_id'],f['target_id'],f['representation'])
+          true_keys={key(f) for f in lemma['findings']}
+          exact_only=[f for f in exact['findings'] if key(f) not in true_keys]
+          true=[f for f in exact['findings'] if key(f) in true_keys]
+          stanza.download('fr',processors='tokenize,pos,lemma',verbose=False)
+          nlp=stanza.Pipeline('fr',processors='tokenize,pos,lemma',use_gpu=False,verbose=False)
+          exact_only_rows=[]
+          for f in exact_only:
+            p=rows[f['passage_id']]; lr=lex.get(f['target_id'],{})
+            keys={norm(f.get('form')),norm(lr.get('form')),norm(lr.get('match_form')),norm(lr.get('lemma'))}-{''}
+            matches=[]
+            for sent in nlp(p['text']).sentences:
+              for w in sent.words:
+                if norm(w.text) in keys or norm(w.lemma) in keys:
+                  matches.append({'surface':w.text,'lemma':w.lemma,'upos':w.upos})
+            exact_only_rows.append({**f,'matched_realizations':matches,'recommended_action':'UPDATE_REVIEW_FORM_TO_VISIBLE_REALIZATION_OR_REPRESENTATION; DO_NOT DELETE EXPOSURE'})
+          grouped=defaultdict(list)
+          for f in true: grouped[f['passage_id']].append(f)
           out={
             'schema_version':1,'date':'2026-08-19','language':'fr','level':'A1',
-            'source':'reading/audit/french_exact_review_visibility_audit_2026-08-19.json',
-            'bound_canonical_hash':x['bound_canonical_hashes']['A1'],
-            'finding_count':len(x['findings']),'passages_with_findings':len(groups),
-            'findings_by_passage':[
-              {'passage_id':pid,'sequence':rows[0]['sequence'],'finding_count':len(rows),'findings':[
-                {k:f[k] for k in ['target_id','form','review_stage','representation','question_target_visible','kind']}
-                for f in rows
-              ]} for pid,rows in sorted(groups.items(),key=lambda kv:kv[1][0]['sequence'])
-            ],
-            'target_frequency':[{'target_id':tid,'form':form,'count':count} for (tid,form),count in targets.most_common()],
-            'stage_frequency':dict(stages),'representation_frequency':dict(reps),
-            'repair_principle':[
-              'Do not preserve phantom planned exposures merely to keep historical stage counts.',
-              'If the target is naturally present or deliberately tested, correct the representation metadata instead of rewriting prose.',
-              'If the target is neither present nor tested, remove the false review entry unless a bounded natural insertion improves the passage.',
-              'After repair, rebuild the exposure ledger from actual evidence and then reassess R1-R5 timing.'
+            'bound_canonical_hash':exact['bound_canonical_hashes']['A1'],
+            'exact_findings':len(exact['findings']),'lemma_confirmed_true_visibility_defects':len(true),'inflection_or_surface_metadata_cases':len(exact_only),
+            'true_visibility_defects_by_passage':[{'passage_id':pid,'sequence':fs[0]['sequence'],'findings':[{k:f[k] for k in ['target_id','form','review_stage','representation','question_target_visible','kind']} for f in fs]} for pid,fs in sorted(grouped.items(),key=lambda kv:kv[1][0]['sequence'])],
+            'inflection_or_surface_metadata_cases_detail':exact_only_rows,
+            'repair_rules':[
+              'Lemma-confirmed true defects are not counted as exposures. Remove the false review declaration unless a bounded natural learner-facing review is intentionally added.',
+              'Exact-only cases have real lexical evidence; preserve the exposure and align review form/representation to the visible realization.',
+              'Rebuild target exposure histories only after these repairs; historical planned-contact counts are superseded where based on phantom reviews.'
             ]
           }
-          Path('reading/audit/french_a1_exact_review_visibility_summary_2026-08-19.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          Path('reading/audit/french_a1_review_visibility_reconciliation_2026-08-19.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           print(json.dumps(out,ensure_ascii=False,indent=2))
           PY
-      - name: Commit compact summary
+      - name: Commit reconciliation
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/audit/french_a1_exact_review_visibility_summary_2026-08-19.json
+          git add reading/audit/french_a1_review_visibility_reconciliation_2026-08-19.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Summarize French A1 review visibility defects [skip ci]'
+          git commit -m 'Reconcile French A1 review visibility findings [skip ci]'
           git push origin HEAD:audit/french-coverage-v2-2026-08-19
