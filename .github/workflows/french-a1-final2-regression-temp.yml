@@ -1,0 +1,104 @@
+name: French A1 decisive post-lifecycle regression temp
+on:
+  push:
+    branches: [repair/french-a1-coverage-2026-08-19]
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check 'stanza==1.10.1'
+      - name: Prepare corrected historical coverage audit
+        run: |
+          python - <<'PY'
+          import hashlib,json,re,subprocess
+          from pathlib import Path
+          root=Path('.'); a1=root/'reading/french/a1/passages.jsonl'
+          h=hashlib.sha256(a1.read_bytes()).hexdigest(); expected='5b8780d6d4dfbc01d3ac0856042672d3f05f219a3419607334e70e29221deed3'
+          if h!=expected: raise SystemExit(f'A1 drift: {h} != {expected}')
+          text='\n'.join(json.loads(x)['text'].replace('’',"'").casefold() for x in a1.read_text(encoding='utf-8').splitlines() if x.strip())
+          scope={'abord':len(re.findall(r'\babord\b',text)),'d_abord':text.count("d'abord"),'tandis':len(re.findall(r'\btandis\b',text)),'tandis_que':text.count('tandis que'),'afin':len(re.findall(r'\bafin\b',text)),'afin_linker':text.count('afin de')+text.count('afin que')}
+          if scope['abord']!=scope['d_abord'] or scope['tandis']!=scope['tandis_que'] or scope['afin']!=scope['afin_linker']: raise SystemExit('unsafe fixed expression scope '+json.dumps(scope))
+          Path('reading/audit/french_a1_fixed_expression_scope_decisive_2026-08-19.json').write_text(json.dumps({'status':'PASS','a1_hash':h,'scope':scope},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          src=subprocess.check_output(['git','show','7634a9adfed00675d087b70edf5792a333ca03e9:reading/tools/audit_french_curriculum_coverage.py'],text=True)
+          oldhash='"a1": "1cdb31ecb8b987c50051bb6f8fa5b2f7fda812cb3004c81ab8697f832fceacba"'
+          if oldhash not in src: raise SystemExit('hash anchor missing')
+          src=src.replace(oldhash,f'"a1": "{h}"',1)
+          old='FUNCTION_POS = {"AUX", "ADP", "CCONJ", "SCONJ", "DET", "PRON", "PART"}'
+          new=old+'\nFUNCTION_FORMS = {str(v).casefold() for v in json.loads((READING / "planning" / "a1_function_support.json").read_text(encoding="utf-8"))["french"]["function_forms"]}\nA1_FIXED_FUNCTION_LEMMAS = {"abord", "tandis", "afin"}'
+          if old not in src: raise SystemExit('function anchor missing')
+          src=src.replace(old,new,1)
+          rule='elif w.upos in FUNCTION_POS:'
+          repl='elif w.upos in FUNCTION_POS or surface in FUNCTION_FORMS or lemma in FUNCTION_FORMS or (level == "a1" and lemma in A1_FIXED_FUNCTION_LEMMAS):'
+          if rule not in src: raise SystemExit('classifier anchor missing')
+          src=src.replace(rule,repl,1)
+          src=src.replace('french_curriculum_exposure_ledger_2026-08-19.json','french_curriculum_exposure_ledger_decisive_a1_repair_2026-08-19.json')
+          src=src.replace('french_coverage_evidence_2026-08-19.json','french_coverage_evidence_decisive_a1_repair_2026-08-19.json')
+          Path('reading/tools/audit_french_decisive_a1_runtime.py').write_text(src,encoding='utf-8')
+          PY
+      - name: Run rebuilt coverage and exposure audit
+        run: python reading/tools/audit_french_decisive_a1_runtime.py
+      - name: Independently recheck A1 review visibility
+        run: |
+          python - <<'PY'
+          import hashlib,json,re,unicodedata
+          from pathlib import Path
+          import stanza
+          root=Path('.'); pth=root/'reading/french/a1/passages.jsonl'
+          rows=[json.loads(x) for x in pth.read_text(encoding='utf-8').splitlines() if x.strip()]
+          lex={r['id']:r for r in [json.loads(x) for x in (root/'reading/lexicons/french.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]}
+          def norm(s):
+              s=unicodedata.normalize('NFC',str(s or '')).replace('’',"'").replace('‘',"'").casefold().strip()
+              return re.sub(r"^[^\w]+|[^\w]+$",'',s,flags=re.UNICODE)
+          def exact(text,f): return len(re.findall(rf'(?<!\w){re.escape(str(f or ""))}(?!\w)',text,flags=re.I|re.UNICODE)) if f else 0
+          stanza.download('fr',processors='tokenize,pos,lemma',verbose=False); nlp=stanza.Pipeline('fr',processors='tokenize,pos,lemma',use_gpu=False,verbose=False)
+          exact_find=[]; lemma_find=[]; total=0
+          for p in rows:
+              doc=nlp(p['text']); tkeys=set()
+              for sent in doc.sentences:
+                  for w in sent.words:
+                      for z in (w.text,w.lemma):
+                          k=norm(z)
+                          if k:tkeys.add(k)
+              qtargets={tid for q in p.get('questions',[]) for tid in q.get('target_ids',[])}
+              for r in p.get('review_lexical_targets',[]):
+                  total+=1; tid=r.get('id'); rep=r.get('representation') or 'missing'; qhit=tid in qtargets; ex=exact(p['text'],r.get('form'))
+                  if (rep in {'running_text','summary'} and ex<1) or (rep in {'contrast','cloze','production'} and ex<1 and not qhit): exact_find.append({'passage_id':p['id'],'target_id':tid,'form':r.get('form'),'stage':r.get('review_stage'),'representation':rep})
+                  lr=lex.get(tid,{}); keys={norm(r.get('form')),norm(lr.get('form')),norm(lr.get('match_form')),norm(lr.get('lemma'))}-{''}; tm=bool(keys&tkeys); kind=None
+                  if rep in {'running_text','summary'} and not tm: kind='text_review_invisible'
+                  elif rep in {'contrast','cloze','production'} and not tm and not qhit: kind='task_review_invisible'
+                  elif rep in {'other','reference'} and not tm and not qhit: kind='unresolved_other_review_invisible'
+                  if kind: lemma_find.append({'passage_id':p['id'],'target_id':tid,'form':r.get('form'),'stage':r.get('review_stage'),'representation':rep,'kind':kind})
+          out={'schema_version':1,'date':'2026-08-19','language':'fr','level':'A1','a1_hash':hashlib.sha256(pth.read_bytes()).hexdigest(),'review_entries_scanned':total,'exact_findings':exact_find,'lemma_aware_findings':lemma_find,'exact_finding_count':len(exact_find),'lemma_aware_finding_count':len(lemma_find),'status':'PASS' if not exact_find and not lemma_find else 'FAIL'}
+          Path('reading/audit/french_a1_review_visibility_decisive_regression_2026-08-19.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'status':out['status'],'review_entries':total,'exact_findings':len(exact_find),'lemma_findings':len(lemma_find),'first_findings':(exact_find+lemma_find)[:30]},ensure_ascii=False,indent=2))
+          PY
+      - name: Emit decisive compact summary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          evp=Path('reading/audit/french_coverage_evidence_decisive_a1_repair_2026-08-19.json'); x=json.loads(evp.read_text(encoding='utf-8'))
+          x['schema_version']=6; x['decisive_repair_method']={'base_implementation_commit':'7634a9adfed00675d087b70edf5792a333ca03e9','stanza_version':'1.10.1','repository_function_forms':True,'a1_fixed_expression_scope_checked':True,'a1_support_lexicon_version':2,'phantom_review_repair':True,'early_lifecycle_repair':True,'learner_mastery_inferred':False,'estimated_known_token_coverage_population_allowed':False,'auto_release_allowed':False}
+          evp.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          vis=json.loads(Path('reading/audit/french_a1_review_visibility_decisive_regression_2026-08-19.json').read_text(encoding='utf-8')); a1=[r for r in x['passages'] if r['level']=='A1']
+          out={'schema_version':1,'date':'2026-08-19','language':'fr','level':'A1','a1_hash':x['bound_canonical_hashes']['A1'],'coverage_summary':x['coverage_summary_by_level']['A1'],'uncontrolled_unknown_tokens_exact':sum(r['classification_counts'].get('uncontrolled_unknown_candidate',0) for r in a1),'counted_tokens':sum(r['counted_tokens'] for r in a1),'support_gate_failures':[{'id':r['id'],'sequence':r['sequence'],'passage_type':r['passage_type'],'unknown_rate':r['uncontrolled_unknown_candidate_rate'],'threshold':r['uncontrolled_unknown_candidate_threshold'],'top_candidates':r['top_uncontrolled_unknown_candidates']} for r in a1 if r['support_gate']!='PASS'],'chronology_findings':x['chronology_findings'],'target_ledger_summary':x['target_ledger_summary'],'review_visibility':{k:vis[k] for k in ['status','review_entries_scanned','exact_finding_count','lemma_aware_finding_count']},'decision':x['decision']}
+          Path('reading/audit/french_a1_decisive_regression_summary_2026-08-19.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'a1_hash':out['a1_hash'],'coverage':out['coverage_summary'],'unknown_tokens':out['uncontrolled_unknown_tokens_exact'],'support_gate_failures':len(out['support_gate_failures']),'chronology_findings':out['chronology_findings'],'ledger':out['target_ledger_summary'],'visibility':out['review_visibility']},ensure_ascii=False,indent=2))
+          PY
+          rm -f reading/tools/audit_french_decisive_a1_runtime.py
+      - name: Commit decisive evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_a1_fixed_expression_scope_decisive_2026-08-19.json reading/audit/french_curriculum_exposure_ledger_decisive_a1_repair_2026-08-19.json reading/audit/french_coverage_evidence_decisive_a1_repair_2026-08-19.json reading/audit/french_a1_review_visibility_decisive_regression_2026-08-19.json reading/audit/french_a1_decisive_regression_summary_2026-08-19.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Run decisive French A1 post-repair regression [skip ci]'
+          git push origin HEAD:repair/french-a1-coverage-2026-08-19
