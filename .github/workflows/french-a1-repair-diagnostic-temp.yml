@@ -1,0 +1,72 @@
+name: French A1 repair diagnostic temp
+on:
+  push:
+    branches: [repair/french-a1-coverage-2026-08-19]
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Locate support and spacing evidence
+        run: |
+          python - <<'PY'
+          import json,re,unicodedata
+          from pathlib import Path
+          root=Path('.')
+          rows=[json.loads(x) for x in (root/'reading/french/a1/passages.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]
+          def n(s): return unicodedata.normalize('NFC',s).replace('’',"'").casefold()
+          proposed={
+            'banc':['banc','bancs'],
+            'carnet':['carnet','carnets'],
+            'affiche':['affiche','affiches'],
+            'crayon':['crayon','crayons'],
+            'relire':['relire','relis','relit','relisons','relisez','relisent','relisant','relu','relue','relus','relues'],
+            'corriger':['corriger','corrige','corriges','corrigeons','corrigez','corrigent','corrigé','corrigée','corrigés','corrigées'],
+            'fatigue':['fatigue','fatigues'],
+          }
+          support={}
+          for lemma,forms in proposed.items():
+            hits=[]
+            pats=[re.compile(r'(?<!\w)'+re.escape(n(f))+r'(?!\w)',re.UNICODE) for f in forms]
+            for p in rows:
+              txt=n(p['text'])
+              found=[]
+              for form,pat in zip(forms,pats):
+                c=len(pat.findall(txt))
+                if c: found.append([form,c])
+              if found:
+                hits.append({'id':p['id'],'sequence':p['sequence'],'unit':p['unit'],'forms':found,'text':p['text']})
+            support[lemma]={'first':hits[0] if hits else None,'all_hits':hits}
+          review={}
+          for lemma,forms in {'venir':['venir','viens','vient','venons','venez','viennent','venu','venue','venus','venues'], 'quand':['quand']}.items():
+            hits=[]
+            pats=[re.compile(r'(?<!\w)'+re.escape(n(f))+r'(?!\w)',re.UNICODE) for f in forms]
+            for p in rows:
+              txt=n(p['text'])
+              found=[]
+              for form,pat in zip(forms,pats):
+                c=len(pat.findall(txt))
+                if c: found.append([form,c])
+              r=[x for x in p.get('review_lexical_targets',[]) if x.get('id') in {'fr-rank-0047','fr-rank-0061'}]
+              q=[q for q in p.get('questions',[]) if any(t in {'fr-rank-0047','fr-rank-0061'} for t in q.get('target_ids',[]))]
+              if found or r or q:
+                hits.append({'id':p['id'],'sequence':p['sequence'],'unit':p['unit'],'text_forms':found,'review_entries':r,'question_ids':[x['id'] for x in q],'text':p['text']})
+            review[lemma]=hits
+          out={'support_candidates':support,'review_candidates':review}
+          Path('reading/audit/french_a1_repair_diagnostic_2026-08-19.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({
+            'support_first':{k:v['first'] for k,v in support.items()},
+            'venir_seq7_16':[x for x in review['venir'] if 7<=x['sequence']<=16],
+            'quand_seq7_16':[x for x in review['quand'] if 7<=x['sequence']<=16]
+          },ensure_ascii=False,indent=2))
+          PY
+      - name: Commit diagnostic
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_a1_repair_diagnostic_2026-08-19.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Record French A1 repair diagnostic [skip ci]'
+          git push origin HEAD:repair/french-a1-coverage-2026-08-19
