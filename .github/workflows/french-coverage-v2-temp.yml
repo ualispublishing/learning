@@ -1,4 +1,4 @@
-name: French coverage v2 micro summary
+name: French A1 residual coverage adjudication
 on:
   push:
     branches: [audit/french-coverage-v2-2026-08-19]
@@ -9,43 +9,112 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Emit small summary
+      - name: Build exact A1 residual report
         run: |
           python - <<'PY'
-          import json
+          import json, re, unicodedata
+          from collections import Counter, defaultdict
           from pathlib import Path
-          src = Path('reading/audit/french_coverage_v2_compact_adjudication_2026-08-19.json')
-          x = json.loads(src.read_text(encoding='utf-8'))
+
+          root = Path('.')
+          audit = root/'reading'/'audit'
+          e = json.loads((audit/'french_coverage_evidence_full_v2_2026-08-19.json').read_text(encoding='utf-8'))
+          support = json.loads((root/'reading'/'lexicons'/'french_a1_support.json').read_text(encoding='utf-8'))
+          lex = [json.loads(x) for x in (root/'reading'/'lexicons'/'french.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]
+          passages = {json.loads(x)['id']: json.loads(x) for x in (root/'reading'/'french'/'a1'/'passages.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()}
+
+          def norm(s):
+              s = unicodedata.normalize('NFC', str(s or '')).replace('’', "'").casefold().strip()
+              return re.sub(r"^[^\w]+|[^\w]+$", '', s, flags=re.UNICODE)
+
+          lexforms = set()
+          for r in lex:
+              for k in (r.get('form'), r.get('match_form')):
+                  if norm(k): lexforms.add(norm(k))
+          support_forms = set()
+          for item in support.get('items', []):
+              for k in [item.get('lemma'), *item.get('forms', [])]:
+                  if norm(k): support_forms.add(norm(k))
+
+          fixed = {'abord','tandis','afin'}
+          abbrev = {'mme'}
+          agg = defaultdict(lambda: {'count':0,'surfaces':Counter(),'upos':Counter(),'passages':Counter(),'contexts':[]})
+          failing = []
+          for p in e.get('passages', []):
+              if p.get('level') != 'A1' or p.get('support_gate') == 'PASS':
+                  continue
+              pid = p['id']
+              raw = passages[pid]
+              row = {
+                  'id': pid, 'sequence': p['sequence'], 'passage_type': p['passage_type'],
+                  'unknown_rate': p['uncontrolled_unknown_candidate_rate'],
+                  'threshold': p['uncontrolled_unknown_candidate_threshold'],
+                  'candidates': []
+              }
+              text = raw['text']
+              text_cf = text.casefold().replace('’', "'")
+              for label, count in p.get('top_uncontrolled_unknown_candidates', []):
+                  parts = [z.strip() for z in label.split('|')]
+                  surface = parts[0]
+                  lemma = surface
+                  upos = None
+                  for z in parts[1:]:
+                      if z.startswith('lemma='): lemma = z.split('=',1)[1]
+                      elif z.startswith('upos='): upos = z.split('=',1)[1]
+                  key = norm(lemma) or norm(surface)
+                  a = agg[key]
+                  a['count'] += count
+                  a['surfaces'][surface] += count
+                  if upos: a['upos'][upos] += count
+                  a['passages'][pid] += count
+                  pos = text_cf.find(surface.casefold().replace('’', "'"))
+                  if pos >= 0 and len(a['contexts']) < 4:
+                      lo, hi = max(0,pos-55), min(len(text),pos+len(surface)+55)
+                      a['contexts'].append({'passage_id':pid,'snippet':text[lo:hi]})
+                  classification = 'content_support_candidate'
+                  if key in fixed: classification = 'fixed_expression_or_linker_candidate'
+                  elif key in abbrev: classification = 'abbreviation_or_title_candidate'
+                  elif norm(surface) in lexforms or key in lexforms: classification = 'possible_nlp_or_normalization_miss'
+                  row['candidates'].append({'surface':surface,'lemma':lemma,'upos':upos,'count':count,'preliminary_class':classification})
+              failing.append(row)
+
+          candidates = []
+          for key, a in sorted(agg.items(), key=lambda kv:(-kv[1]['count'], kv[0])):
+              classification = 'content_support_candidate'
+              if key in fixed: classification = 'fixed_expression_or_linker_candidate'
+              elif key in abbrev: classification = 'abbreviation_or_title_candidate'
+              elif key in lexforms or any(norm(s) in lexforms for s in a['surfaces']): classification = 'possible_nlp_or_normalization_miss'
+              candidates.append({
+                  'lemma_key': key, 'count': a['count'], 'surfaces': a['surfaces'].most_common(),
+                  'upos': a['upos'].most_common(), 'passages': a['passages'].most_common(),
+                  'contexts': a['contexts'], 'preliminary_class': classification,
+                  'already_in_verified_a1_support': key in support_forms
+              })
+
           out = {
-            'schema_version': 1,
-            'date': '2026-08-19',
-            'language': 'fr',
-            'bound_canonical_hashes': x['bound_canonical_hashes'],
-            'levels': {},
-            'chronology_findings': x['chronology_findings_from_full_v2'],
-            'flagged_target_histories': x['flagged_target_histories'],
-            'spacing_event_counts': x['spacing_event_counts'],
-            'spacing_candidates_total': x['spacing_candidates_total'],
-            'decisions': x['decisions']
+              'schema_version':1,'date':'2026-08-19','language':'fr','level':'A1',
+              'status':'ADJUDICATION_EVIDENCE_DO_NOT_AUTOPROMOTE',
+              'bound_canonical_hash': e['bound_canonical_hashes']['A1'],
+              'failing_passage_count':len(failing),
+              'failing_passages':failing,
+              'candidate_type_count':len(candidates),
+              'candidate_token_count_visible':sum(x['count'] for x in candidates),
+              'candidates_ranked':candidates,
+              'rules':{
+                  'do_not_auto_whitelist':True,
+                  'support_item_requirement':'Verify contemporary meaning/register, pedagogical necessity, provenance, intended level/unit, and first exposure before adding.',
+                  'fixed_expression_candidates':'Inspect actual context before reclassifying; d’abord, tandis que, afin de/que may be grammatical/discourse support rather than lexical burden.',
+                  'content_candidates':'Recurring concrete words may be pedagogical support; unnecessary one-offs may instead justify passage simplification.'
+              }
           }
-          for level, r in x['level_summary'].items():
-            out['levels'][level] = {
-              'tokens': r['total_counted_tokens'],
-              'unknown_tokens': r['uncontrolled_unknown_tokens_exact'],
-              'weighted_unknown_rate': r['weighted_uncontrolled_unknown_rate'],
-              'support_gate_pass': r['support_gate_pass'],
-              'support_gate_review_required': r['support_gate_review_required'],
-              'top15_candidate_lemmas': r['top_candidate_lemmas_visible_in_per_passage_top25'][:15],
-              'worst5_passages': r['worst_passages'][:5]
-            }
-          Path('reading/audit/french_coverage_v2_micro_summary_2026-08-19.json').write_text(json.dumps(out, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
-          print(json.dumps(out, ensure_ascii=False, indent=2))
+          Path('reading/audit/french_a1_residual_coverage_adjudication_v2_2026-08-19.json').write_text(json.dumps(out, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+          print(json.dumps({'failing_passages':len(failing),'candidate_types':len(candidates),'candidate_tokens_visible':sum(x['count'] for x in candidates),'top25':candidates[:25]}, ensure_ascii=False, indent=2))
           PY
-      - name: Commit micro summary
+      - name: Commit A1 adjudication evidence
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/audit/french_coverage_v2_micro_summary_2026-08-19.json
+          git add reading/audit/french_a1_residual_coverage_adjudication_v2_2026-08-19.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Record French coverage v2 micro summary [skip ci]'
+          git commit -m 'Audit French A1 residual coverage candidates [skip ci]'
           git push origin HEAD:audit/french-coverage-v2-2026-08-19
