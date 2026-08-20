@@ -1,59 +1,61 @@
-name: French A1 Unit 07 targeted regression repair
+name: French A1 repaired spacing audit
 on:
   push:
     branches: [repair/french-a1-coverage-2026-08-19]
 permissions:
   contents: write
 jobs:
-  repair:
+  audit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Repair u07p04 exposure count and stale route questions
+      - name: Audit R1-R4 timing against repository default windows
         run: |
           python - <<'PY'
-          import json,re,hashlib
+          import hashlib,json
+          from collections import Counter,defaultdict
           from pathlib import Path
           path=Path('reading/french/a1/passages.jsonl')
           rows=[json.loads(x) for x in path.read_text(encoding='utf-8').splitlines() if x.strip()]
-          r=next(x for x in rows if x['id']=='fr-a1-u07-p04')
-          if r['revision']!=5:
-              raise SystemExit(f'unexpected u07p04 revision {r["revision"]}; expected 5')
-          targets={t['id']:t for t in r['new_lexical_targets']}
-          q={x['id']:x for x in r['questions']}
-          a={x['id']:x for x in r['answer_key']}
-          def count(form): return len(re.findall(rf'(?<!\w){re.escape(form)}(?!\w)',r['text'],flags=re.I|re.UNICODE))
-          actual_gauche=count('gauche'); actual_droite=count('droite')
-          if actual_gauche!=5 or actual_droite!=3:
-              raise SystemExit(f'unexpected current target counts gauche={actual_gauche}, droite={actual_droite}')
-          targets['fr-rank-0721']['exposures_in_text']=actual_gauche
-          targets['fr-rank-0276']['exposures_in_text']=actual_droite
-          q['q7']['prompt']='D’après le texte, ils tournent d’abord à _____ : « gauche » ou « droite » ?'
-          q['q9']['prompt']='La bibliothèque est du côté gauche. Complète : Tourne à _____. '
-          # Normalize the trailing space immediately; kept separate above for visual auditability.
-          q['q9']['prompt']=q['q9']['prompt'].strip()
-          if a['a7']['answer']!='« gauche ».' or a['a9']['answer']!='gauche':
-              raise SystemExit('answer drift for q7/q9')
-          r['revision']=6
-          r['quality']['status']='draft'
-          for field in ['linguistic_review','pedagogical_review','coverage_check','answer_key_check','schema_check']:
-              r['quality'][field]='pending'
-          r['quality'].setdefault('notes',[]).append('2026-08-19 targeted regression repair: synchronized gauche/droite exposures_in_text with revised prose and removed stale carrefour/café assumptions from q7/q9.')
-          if targets['fr-rank-0721']['exposures_in_text']!=count('gauche') or targets['fr-rank-0276']['exposures_in_text']!=count('droite'):
-              raise SystemExit('post-repair target exposure mismatch')
-          if 'carrefour' in q['q7']['prompt'].casefold() or 'café' in q['q9']['prompt'].casefold():
-              raise SystemExit('stale route assumption remains')
-          path.write_text('\n'.join(json.dumps(x,ensure_ascii=False,separators=(',',':')) for x in rows)+'\n',encoding='utf-8')
-          h=hashlib.sha256(path.read_bytes()).hexdigest()
-          out={'schema_version':1,'date':'2026-08-19','language':'fr','level':'A1','passage_id':r['id'],'status':'REPAIRED_PENDING_FULL_REGRESSION','revision':r['revision'],'target_exposure_counts':{'gauche':actual_gauche,'droite':actual_droite},'question_repairs':{'q7':q['q7']['prompt'],'q9':q['q9']['prompt']},'answer_checks':{'q7':a['a7']['answer'],'q9':a['a9']['answer']},'post_repair_a1_sha256':h}
-          Path('reading/audit/french_a1_u07p04_target_question_regression_repair_2026-08-19.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print(json.dumps(out,ensure_ascii=False,indent=2))
+          windows={'R1':(1,2),'R2':(4,6),'R3':(10,14),'R4':(25,35)}
+          intro={}; target_meta={}
+          for p in rows:
+            for t in p.get('new_lexical_targets',[]):
+              tid=t['id']
+              if tid not in intro:
+                intro[tid]=p['sequence']; target_meta[tid]={'form':t.get('form'),'lemma':t.get('lemma'),'introduced_in':p['id'],'introduced_sequence':p['sequence']}
+          candidates=[]; events=[]; counts=Counter(); histories=defaultdict(list)
+          for p in rows:
+            for r in p.get('review_lexical_targets',[]):
+              tid=r.get('id'); stage=r.get('review_stage'); start=intro.get(tid)
+              row={'target_id':tid,'form':r.get('form'),'stage':stage,'representation':r.get('representation'),'passage_id':p['id'],'sequence':p['sequence'],'introduced_sequence':start,'offset':(p['sequence']-start) if start else None}
+              events.append(row); histories[tid].append(row)
+              if not start:
+                counts['missing_local_introduction']+=1
+                candidates.append({**row,'kind':'missing_local_introduction','severity':'NEEDS_ADJUDICATION'})
+              elif stage in windows:
+                lo,hi=windows[stage]; off=p['sequence']-start
+                if off<lo:
+                  counts[f'{stage}_too_early']+=1; candidates.append({**row,'default_window':[lo,hi],'kind':'too_early','severity':'NEEDS_ADJUDICATION'})
+                elif off>hi:
+                  counts[f'{stage}_too_late']+=1; candidates.append({**row,'default_window':[lo,hi],'kind':'too_late','severity':'NEEDS_ADJUDICATION'})
+                else: counts[f'{stage}_in_window']+=1
+              else: counts[f'{stage}_no_fixed_window']+=1
+          history_rows=[]
+          for tid,h in histories.items():
+            if any(c['target_id']==tid for c in candidates):
+              m=target_meta.get(tid,{})
+              history_rows.append({'target_id':tid,**m,'reviews':h,'candidate_count':sum(1 for c in candidates if c['target_id']==tid)})
+          history_rows.sort(key=lambda x:(-x['candidate_count'],x.get('introduced_sequence') or 9999,x['target_id']))
+          out={'schema_version':1,'date':'2026-08-19','language':'fr','level':'A1','status':'ADJUDICATION_EVIDENCE_NOT_AUTOMATIC_DEFECT','a1_hash':hashlib.sha256(path.read_bytes()).hexdigest(),'default_windows':{k:list(v) for k,v in windows.items()},'policy_note':'READING_PASSAGE_STANDARD says these intervals are heuristics, not rigid laws. Candidates require pedagogical adjudication; no automatic stage rewrite.','summary':{'review_events':len(events),'candidate_events':len(candidates),'candidate_targets':len({c['target_id'] for c in candidates}),'counts':dict(counts)},'candidates':candidates,'candidate_target_histories':history_rows}
+          Path('reading/audit/french_a1_spacing_audit_after_visibility_repair_2026-08-19.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'a1_hash':out['a1_hash'],'summary':out['summary'],'top_target_histories':history_rows[:30]},ensure_ascii=False,indent=2))
           PY
-      - name: Commit targeted repair
+      - name: Commit spacing evidence
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/french/a1/passages.jsonl reading/audit/french_a1_u07p04_target_question_regression_repair_2026-08-19.json
+          git add reading/audit/french_a1_spacing_audit_after_visibility_repair_2026-08-19.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Fix French A1 Unit 07 repair regressions [skip ci]'
+          git commit -m 'Audit French A1 review-stage spacing [skip ci]'
           git push origin HEAD:repair/french-a1-coverage-2026-08-19
