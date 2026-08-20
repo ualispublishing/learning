@@ -1,54 +1,56 @@
-name: French exact review visibility audit temp
+name: French A1 exact review visibility summary temp
 on:
   push:
     branches: [audit/french-coverage-v2-2026-08-19]
 permissions:
   contents: write
 jobs:
-  audit:
+  summarize:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Audit exact review visibility using historical generator contract
+      - name: Group A1 review visibility findings
         run: |
           python - <<'PY'
-          import json,re,hashlib
-          from collections import Counter,defaultdict
+          import json
+          from collections import defaultdict,Counter
           from pathlib import Path
-          root=Path('.')
-          levels=['a1','a2','b1','b2','c1','c2']
-          def count(text,f): return len(re.findall(rf'(?<!\w){re.escape(str(f or ""))}(?!\w)',text,flags=re.I|re.UNICODE)) if f else 0
-          def sha256(p): return hashlib.sha256(p.read_bytes()).hexdigest()
-          findings=[]; reps=defaultdict(Counter); levelsum=defaultdict(Counter); total=0
-          hashes={}
-          for level in levels:
-            path=root/f'reading/french/{level}/passages.jsonl'; hashes[level.upper()]=sha256(path)
-            rows=[json.loads(x) for x in path.read_text(encoding='utf-8').splitlines() if x.strip()]
-            for p in rows:
-              qtargets={tid for q in p.get('questions',[]) for tid in q.get('target_ids',[])}
-              for r in p.get('review_lexical_targets',[]):
-                total+=1; rep=r.get('representation') or 'missing'; form=r.get('form'); tid=r.get('id')
-                exact=count(p['text'],form); qhit=tid in qtargets
-                reps[rep]['entries']+=1; levelsum[level.upper()]['entries']+=1
-                if exact: reps[rep]['exact_text_visible']+=1; levelsum[level.upper()]['exact_text_visible']+=1
-                if qhit: reps[rep]['question_target_visible']+=1; levelsum[level.upper()]['question_target_visible']+=1
-                kind=None
-                if rep in {'running_text','summary'} and exact<1:
-                  kind='exact_text_review_invisible'
-                elif rep in {'contrast','cloze','production'} and not qhit and exact<1:
-                  kind='task_review_invisible'
-                if kind:
-                  reps[rep][kind]+=1; levelsum[level.upper()][kind]+=1
-                  findings.append({'language':'fr','level':level.upper(),'passage_id':p['id'],'sequence':p['sequence'],'target_id':tid,'form':form,'review_stage':r.get('review_stage'),'representation':rep,'exact_text_count':exact,'question_target_visible':qhit,'kind':kind,'severity':'major','status':'NEEDS_ADJUDICATION'})
-          out={'schema_version':1,'date':'2026-08-19','language':'fr','status':'DETERMINISTIC_CANDIDATE_AUDIT_DO_NOT_AUTOPROMOTE','bound_canonical_hashes':hashes,'method':{'exact_count':'Historical French generator contract: (?<!\\w)FORM(?!\\w), case-insensitive Unicode.','hard_generation_invariant':'running_text and summary review forms were required to occur exactly in passage text in prior guarded generation code.','secondary_task_candidate_rule':'contrast/cloze/production is flagged only if neither exact text nor question target ID is visible; adjudication required.'},'summary':{'review_entries_scanned':total,'finding_count':len(findings),'by_level':{k:dict(v) for k,v in levelsum.items()},'by_representation':{k:dict(v) for k,v in reps.items()}},'findings':findings}
-          Path('reading/audit/french_exact_review_visibility_audit_2026-08-19.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print(json.dumps({'summary':out['summary'],'first100':findings[:100]},ensure_ascii=False,indent=2))
+          src=Path('reading/audit/french_exact_review_visibility_audit_2026-08-19.json')
+          x=json.loads(src.read_text(encoding='utf-8'))
+          groups=defaultdict(list); targets=Counter(); stages=Counter(); reps=Counter()
+          for f in x['findings']:
+            groups[f['passage_id']].append(f)
+            targets[(f['target_id'],f['form'])]+=1
+            stages[f['review_stage']]+=1
+            reps[f['representation']]+=1
+          out={
+            'schema_version':1,'date':'2026-08-19','language':'fr','level':'A1',
+            'source':'reading/audit/french_exact_review_visibility_audit_2026-08-19.json',
+            'bound_canonical_hash':x['bound_canonical_hashes']['A1'],
+            'finding_count':len(x['findings']),'passages_with_findings':len(groups),
+            'findings_by_passage':[
+              {'passage_id':pid,'sequence':rows[0]['sequence'],'finding_count':len(rows),'findings':[
+                {k:f[k] for k in ['target_id','form','review_stage','representation','question_target_visible','kind']}
+                for f in rows
+              ]} for pid,rows in sorted(groups.items(),key=lambda kv:kv[1][0]['sequence'])
+            ],
+            'target_frequency':[{'target_id':tid,'form':form,'count':count} for (tid,form),count in targets.most_common()],
+            'stage_frequency':dict(stages),'representation_frequency':dict(reps),
+            'repair_principle':[
+              'Do not preserve phantom planned exposures merely to keep historical stage counts.',
+              'If the target is naturally present or deliberately tested, correct the representation metadata instead of rewriting prose.',
+              'If the target is neither present nor tested, remove the false review entry unless a bounded natural insertion improves the passage.',
+              'After repair, rebuild the exposure ledger from actual evidence and then reassess R1-R5 timing.'
+            ]
+          }
+          Path('reading/audit/french_a1_exact_review_visibility_summary_2026-08-19.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(out,ensure_ascii=False,indent=2))
           PY
-      - name: Commit exact visibility evidence
+      - name: Commit compact summary
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/audit/french_exact_review_visibility_audit_2026-08-19.json
+          git add reading/audit/french_a1_exact_review_visibility_summary_2026-08-19.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Audit exact French review visibility [skip ci]'
+          git commit -m 'Summarize French A1 review visibility defects [skip ci]'
           git push origin HEAD:audit/french-coverage-v2-2026-08-19
