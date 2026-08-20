@@ -31,6 +31,12 @@
   },
   "french": {
     "function_forms": ["à", "au", "aux", "du", "des", "ne", "n", "y", "en", "ce", "cet", "cette", "ces", "où", "parce", "donc", "d", "l", "j", "m", "t", "s", "qu"],
+    "function_expressions": [
+      {"expression": "d'abord", "role": "discourse_sequence", "note": "Treat abord as grammatical/discourse support only when it occurs in the fixed expression d’abord; do not globally classify lexical noun abord as function support."},
+      {"expression": "tandis que", "role": "discourse_linker", "note": "Treat as a multiword linker when the full expression is present."},
+      {"expression": "afin de", "role": "purpose_linker", "note": "Treat as a multiword purpose linker when the full expression is present."},
+      {"expression": "afin que", "role": "purpose_linker", "note": "Treat as a multiword purpose linker when the full expression is present."}
+    ],
     "proper_names": ["camille", "sami", "nora"]
   },
   "urdu": {
