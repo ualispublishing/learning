@@ -1,0 +1,2668 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-20",
+  "language": "ar",
+  "levels": [
+    "A1",
+    "A2"
+  ],
+  "status": "CANDIDATE_AUDIT_DO_NOT_AUTOREPAIR",
+  "bound_canonical_hashes": {
+    "A1": "d6142ee56ec830c4a41cb7244fe99c65824cebbe59ff2e9b8f44d4640c9e228b",
+    "A2": "f27ad06c372d316ca70346e19a10a72645577897de8db676e317d869d8945e1c"
+  },
+  "scope": {
+    "records": 120,
+    "questions": 1200,
+    "answers": 1200
+  },
+  "method": {
+    "formal_types_flagged": [
+      "grammar_category",
+      "grammar_function",
+      "grammar_identification",
+      "person_form"
+    ],
+    "prompt_pattern_classes": [
+      "explicit_grammar_classification",
+      "explicit_grammar_function",
+      "explicit_pos_term_request"
+    ],
+    "exclusion": "grammar_choice and other communicative use tasks are not flagged unless their wording independently matches explicit metalinguistic patterns",
+    "purpose": "Find low-level assessment tasks that may test formal grammatical labeling rather than reading comprehension/use. Every candidate requires educator adjudication before repair."
+  },
+  "question_type_counts": {
+    "gist": 91,
+    "literal_detail": 157,
+    "vocabulary_in_context": 188,
+    "cloze_transfer": 178,
+    "grammar_category": 110,
+    "grammar_choice": 7,
+    "reference_resolution": 34,
+    "sequence": 23,
+    "single_word_definition": 100,
+    "grammar_identification": 2,
+    "cause_effect": 67,
+    "contrast": 109,
+    "person_form": 2,
+    "grammar_function": 31,
+    "summary": 22,
+    "inference": 79
+  },
+  "question_type_counts_by_level": {
+    "A1": {
+      "gist": 33,
+      "literal_detail": 89,
+      "vocabulary_in_context": 100,
+      "cloze_transfer": 99,
+      "grammar_category": 44,
+      "grammar_choice": 7,
+      "reference_resolution": 10,
+      "sequence": 22,
+      "single_word_definition": 69,
+      "grammar_identification": 2,
+      "cause_effect": 32,
+      "contrast": 66,
+      "person_form": 2,
+      "grammar_function": 15,
+      "summary": 10
+    },
+    "A2": {
+      "gist": 58,
+      "literal_detail": 68,
+      "vocabulary_in_context": 88,
+      "cause_effect": 35,
+      "grammar_category": 66,
+      "inference": 79,
+      "cloze_transfer": 79,
+      "contrast": 43,
+      "single_word_definition": 31,
+      "sequence": 1,
+      "summary": 12,
+      "reference_resolution": 24,
+      "grammar_function": 16
+    }
+  },
+  "candidate_summary": {
+    "count": 146,
+    "by_level": {
+      "A1": 63,
+      "A2": 83
+    },
+    "by_question_type": {
+      "grammar_category": 110,
+      "grammar_identification": 2,
+      "person_form": 2,
+      "grammar_function": 31,
+      "vocabulary_in_context": 1
+    },
+    "by_reason": {
+      "answer_requires_or_uses_grammar_label": 110,
+      "explicit_grammar_classification": 108,
+      "formal_question_type": 145,
+      "explicit_grammar_function": 6
+    }
+  },
+  "findings": [
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u01-p01",
+      "sequence": 1,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي الأدق لـ«هنا» في الاستعمال المكاني؟",
+      "answer": "اسم إشارة للمكان القريب.",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u01-p02",
+      "sequence": 2,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما وظيفة «بعد» في «بعد قليل»؟",
+      "answer": "ظرف زمان يدل على وقت لاحق.",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_function",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u01-p02",
+      "sequence": 2,
+      "question_id": "q9",
+      "question_type": "grammar_identification",
+      "prompt": "ما الكلمة التي تنفي الفعل في «لم تأخذ كل الكتب»؟",
+      "answer": "لم.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u01-p03",
+      "sequence": 3,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي الأدق لـ«هناك» في الاستعمال المكاني؟",
+      "answer": "اسم إشارة للمكان البعيد.",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u01-p03",
+      "sequence": 3,
+      "question_id": "q10",
+      "question_type": "person_form",
+      "prompt": "في «أريد»، من صاحب الفعل؟",
+      "answer": "المتكلم المفرد: أنا.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u01-p05",
+      "sequence": 5,
+      "question_id": "q7",
+      "question_type": "grammar_function",
+      "prompt": "ماذا تدل «حتى» في «حتى المساء»؟",
+      "answer": "تدل على الغاية أو نهاية المدة.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u01-p05",
+      "sequence": 5,
+      "question_id": "q9",
+      "question_type": "grammar_identification",
+      "prompt": "ما صيغة العدد في كلمة «كتابين»؟",
+      "answer": "المثنى.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u01-p06",
+      "sequence": 6,
+      "question_id": "q8",
+      "question_type": "grammar_function",
+      "prompt": "في «حتى المساء»، ماذا تحدد «حتى»؟",
+      "answer": "نهاية المدة الزمنية.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u01-p06",
+      "sequence": 6,
+      "question_id": "q10",
+      "question_type": "grammar_function",
+      "prompt": "ما وظيفة «أو» في «كتابًا واحدًا أو اثنين»؟",
+      "answer": "حرف عطف يربط بين بديلين أو احتمالين.",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_function",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u02-p01",
+      "sequence": 7,
+      "question_id": "q7",
+      "question_type": "grammar_function",
+      "prompt": "ما العلاقة الزمنية التي تدل عليها «قبل»؟",
+      "answer": "أن الحدث يحدث في وقت أسبق من حدث أو وقت آخر.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u02-p02",
+      "sequence": 8,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما وظيفة «أولًا» في ترتيب الأحداث؟",
+      "answer": "تدل على الحدث الذي يأتي قبل غيره.",
+      "reasons": [
+        "explicit_grammar_function",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u02-p03",
+      "sequence": 9,
+      "question_id": "q7",
+      "question_type": "grammar_function",
+      "prompt": "ما وظيفة «سوف» قبل الفعل؟",
+      "answer": "تدل على المستقبل.",
+      "reasons": [
+        "explicit_grammar_function",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u02-p04",
+      "sequence": 10,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «أيضا» في هذا الاستعمال؟",
+      "answer": "ظرف",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u02-p05",
+      "sequence": 11,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما نوع «كيف» في السؤال؟",
+      "answer": "اسم استفهام يسأل عن الحال أو الطريقة.",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u02-p06",
+      "sequence": 12,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "ماذا تسأل «كيف»؟",
+      "answer": "تسأل عن الطريقة أو الحال.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u03-p01",
+      "sequence": 13,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «يحب» في هذا الاستعمال؟",
+      "answer": "فعل مضارع",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u03-p02",
+      "sequence": 14,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «يحتاج» في هذا الاستعمال؟",
+      "answer": "فعل مضارع",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u03-p03",
+      "sequence": 15,
+      "question_id": "q7",
+      "question_type": "grammar_function",
+      "prompt": "ما وظيفة «عند» في «عند الثلاجة»؟",
+      "answer": "تحدد مكان الشيء بالنسبة إلى الثلاجة.",
+      "reasons": [
+        "explicit_grammar_function",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u03-p04",
+      "sequence": 16,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «لماذا» في هذا الاستعمال؟",
+      "answer": "أداة استفهام",
+      "reasons": [
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u03-p05",
+      "sequence": 17,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «ثم» في هذا الاستعمال؟",
+      "answer": "حرف عطف",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u03-p06",
+      "sequence": 18,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "ماذا تفعل «ثم» في سلسلة الأفعال؟",
+      "answer": "تربط الأفعال بترتيب، بحيث يأتي فعل بعد آخر.",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u04-p01",
+      "sequence": 19,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «أب» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u04-p02",
+      "sequence": 20,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «اسم» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u04-p03",
+      "sequence": 21,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «يقول» في هذا الاستعمال؟",
+      "answer": "فعل مضارع",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u04-p03",
+      "sequence": 21,
+      "question_id": "q8",
+      "question_type": "person_form",
+      "prompt": "في «تقول هدى»، من صاحب الفعل؟",
+      "answer": "هدى.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u04-p04",
+      "sequence": 22,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «أخبر» في هذا الاستعمال؟",
+      "answer": "فعل ماضٍ",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u04-p05",
+      "sequence": 23,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «جميع» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u04-p06",
+      "sequence": 24,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "ماذا يحدد «أمام» في «يقف الأطفال أمام الكبار»؟",
+      "answer": "الموقع المكاني للأطفال بالنسبة إلى الكبار.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u05-p01",
+      "sequence": 25,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «بدأ» في هذا الاستعمال؟",
+      "answer": "فعل ماضٍ",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u05-p02",
+      "sequence": 26,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «مدير» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u05-p03",
+      "sequence": 27,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «دور» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u05-p04",
+      "sequence": 28,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «يتحدث» في هذا الاستعمال؟",
+      "answer": "فعل مضارع",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u05-p05",
+      "sequence": 29,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «مقبل» في هذا الاستعمال؟",
+      "answer": "صفة",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u05-p06",
+      "sequence": 30,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "ماذا يدل «المقبل» في «الأسبوع المقبل»؟",
+      "answer": "على الأسبوع الآتي بعد الحالي.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u06-p01",
+      "sequence": 31,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «طريق» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u06-p02",
+      "sequence": 32,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «سيارة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u06-p03",
+      "sequence": 33,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «تحت» في هذا الاستعمال؟",
+      "answer": "ظرف",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u06-p04",
+      "sequence": 34,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «اذهب» في هذا الاستعمال؟",
+      "answer": "فعل أمر",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u06-p05",
+      "sequence": 35,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «موقع» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u06-p06",
+      "sequence": 36,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "ماذا يحدد «تحت»؟",
+      "answer": "موقعًا أسفل شيء آخر.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u07-p01",
+      "sequence": 37,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «سماء» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u07-p02",
+      "sequence": 38,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «درجة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u07-p03",
+      "sequence": 39,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «قادم» في هذا الاستعمال؟",
+      "answer": "صفة",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u07-p04",
+      "sequence": 40,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «صباح» في هذا الاستعمال؟",
+      "answer": "ظرف",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u07-p05",
+      "sequence": 41,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «ساعة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u07-p06",
+      "sequence": 42,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "ماذا تدل «درجة» في سياق الطقس؟",
+      "answer": "مقدار الحرارة أو البرودة.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u08-p01",
+      "sequence": 43,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «يشعر» في هذا الاستعمال؟",
+      "answer": "فعل مضارع",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u08-p02",
+      "sequence": 44,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «حاجة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u08-p03",
+      "sequence": 45,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «يد» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u08-p04",
+      "sequence": 46,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «قلب» في هذا الاستعمال؟",
+      "answer": "فعل ماضٍ",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u08-p05",
+      "sequence": 47,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «حاول» في هذا الاستعمال؟",
+      "answer": "فعل ماضٍ",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u08-p06",
+      "sequence": 48,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "ماذا يصف «يشعر»؟",
+      "answer": "إحساس الشخص بحالة جسدية أو نفسية.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u09-p01",
+      "sequence": 49,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «كرة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u09-p02",
+      "sequence": 50,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «مباراة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u09-p03",
+      "sequence": 51,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «أصدقاء» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u09-p05",
+      "sequence": 53,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «هدف» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u09-p06",
+      "sequence": 54,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "ماذا يعني «هدف» خارج نتيجة المباراة أيضًا؟",
+      "answer": "غاية أو شيء يريد الشخص الوصول إليه.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u10-p01",
+      "sequence": 55,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «دائما» في هذا الاستعمال؟",
+      "answer": "ظرف",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u10-p02",
+      "sequence": 56,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «طريقة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u10-p03",
+      "sequence": 57,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «مجموعة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u10-p04",
+      "sequence": 58,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «لحظة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u10-p05",
+      "sequence": 59,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «صفحة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A1",
+      "passage_id": "ar-a1-u10-p06",
+      "sequence": 60,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "ماذا يفعل «سؤال» في القراءة؟",
+      "answer": "يطلب جوابًا ويساعد القارئ على فحص فهمه.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u01-p01",
+      "sequence": 1,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «شارع» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u01-p01",
+      "sequence": 1,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «خدمة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u01-p02",
+      "sequence": 2,
+      "question_id": "q4",
+      "question_type": "vocabulary_in_context",
+      "prompt": "ما وظيفة «البنك» في النص؟",
+      "answer": "مؤسسة مالية يريد الأب زيارتها للحصول على خدمة.",
+      "reasons": [
+        "explicit_grammar_function"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u01-p02",
+      "sequence": 2,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «هاتف» في هذا الاستعمال؟",
+      "answer": "فعل ماضٍ",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u01-p02",
+      "sequence": 2,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «بنك» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u01-p03",
+      "sequence": 3,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «إعلان» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u01-p04",
+      "sequence": 4,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «زيارة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u01-p04",
+      "sequence": 4,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «قسم» في هذا الاستعمال؟",
+      "answer": "فعل ماضٍ",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u01-p05",
+      "sequence": 5,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «قائمة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u01-p05",
+      "sequence": 5,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «سعر» في هذا الاستعمال؟",
+      "answer": "فعل ماضٍ",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u01-p06",
+      "sequence": 6,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "لماذا تستخدم «إذا» أكثر من مرة في النص؟",
+      "answer": "لربط حالة ممكنة بالتصرف المناسب لها.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u02-p01",
+      "sequence": 7,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «موعد» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u02-p01",
+      "sequence": 7,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «رد» في هذا الاستعمال؟",
+      "answer": "فعل ماضٍ",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u02-p02",
+      "sequence": 8,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «متأكد» في هذا الاستعمال؟",
+      "answer": "صفة",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u02-p02",
+      "sequence": 8,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «تالي» في هذا الاستعمال؟",
+      "answer": "صفة",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u02-p03",
+      "sequence": 9,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «اتصل» في هذا الاستعمال؟",
+      "answer": "فعل ماضٍ",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u02-p03",
+      "sequence": 9,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «لاحق» في هذا الاستعمال؟",
+      "answer": "فعل ماضٍ",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u02-p04",
+      "sequence": 10,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «اختيار» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u02-p04",
+      "sequence": 10,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «حالي» في هذا الاستعمال؟",
+      "answer": "صفة",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u02-p05",
+      "sequence": 11,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «دورة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u02-p05",
+      "sequence": 11,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «تنظيم» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u02-p06",
+      "sequence": 12,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "ماذا يصف «التالي» في «اليوم التالي»؟",
+      "answer": "اليوم الذي يأتي بعد اليوم المذكور مباشرة.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u03-p01",
+      "sequence": 13,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «مؤخرا» في هذا الاستعمال؟",
+      "answer": "ظرف",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u03-p01",
+      "sequence": 13,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «مجددا» في هذا الاستعمال؟",
+      "answer": "ظرف",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u03-p02",
+      "sequence": 14,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «تسجيل» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u03-p02",
+      "sequence": 14,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «نظرة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u03-p03",
+      "sequence": 15,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «حفل» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u03-p04",
+      "sequence": 16,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «معظم» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u03-p05",
+      "sequence": 17,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «أثر» في هذا الاستعمال؟",
+      "answer": "فعل ماضٍ",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u03-p05",
+      "sequence": 17,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «فاز» في هذا الاستعمال؟",
+      "answer": "فعل ماضٍ",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u03-p06",
+      "sequence": 18,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "ماذا تفعل «ثم» ضمنيًا في فكرة تغير رأي نور بعد دليل جديد؟",
+      "answer": "تربط تصورًا سابقًا بنتيجة أو فهم لاحق تغير بسبب معلومات جديدة.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u04-p01",
+      "sequence": 19,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «حجم» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u04-p02",
+      "sequence": 20,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «ثمن» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u04-p03",
+      "sequence": 21,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «يستحق» في هذا الاستعمال؟",
+      "answer": "فعل مضارع",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u04-p03",
+      "sequence": 21,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «تطبيق» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u04-p04",
+      "sequence": 22,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «صالح» في هذا الاستعمال؟",
+      "answer": "صفة",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u04-p04",
+      "sequence": 22,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «بدل» في هذا الاستعمال؟",
+      "answer": "فعل ماضٍ",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u04-p05",
+      "sequence": 23,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «إصلاح» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u04-p05",
+      "sequence": 23,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «أسوأ» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u04-p06",
+      "sequence": 24,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "ماذا تعبر «أسوأ»؟",
+      "answer": "مقارنة تدل على حالة أكثر سوءًا من غيرها.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u05-p01",
+      "sequence": 25,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «تصوير» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u05-p01",
+      "sequence": 25,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «مسابقة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u05-p02",
+      "sequence": 26,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «تفكير» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u05-p02",
+      "sequence": 26,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «متابعة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u05-p03",
+      "sequence": 27,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «خطوة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u05-p03",
+      "sequence": 27,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «مشاريع» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u05-p04",
+      "sequence": 28,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «عادة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u05-p04",
+      "sequence": 28,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «يتعرف» في هذا الاستعمال؟",
+      "answer": "فعل مضارع",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u05-p05",
+      "sequence": 29,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «تدريب» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u05-p06",
+      "sequence": 30,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "ماذا يفعل «بدل أن» في النص؟",
+      "answer": "يقدم طريقة أفضل مقابل طريقة أخرى يريد النص تجنبها.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u06-p01",
+      "sequence": 31,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «طائرة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u06-p01",
+      "sequence": 31,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «مطار» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u06-p02",
+      "sequence": 32,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «قطار» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u06-p03",
+      "sequence": 33,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «نقل» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u06-p03",
+      "sequence": 33,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «وسائل» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u06-p04",
+      "sequence": 34,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «يتوقف» في هذا الاستعمال؟",
+      "answer": "فعل مضارع",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u06-p05",
+      "sequence": 35,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «قرية» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u06-p06",
+      "sequence": 36,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "ماذا يصف «مناسب» في سياق المحطة؟",
+      "answer": "مدى ملاءمة المحطة للوصول العملي إلى الوجهة.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u07-p01",
+      "sequence": 37,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «مناسبة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u07-p02",
+      "sequence": 38,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «بيان» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u07-p03",
+      "sequence": 39,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «تحقيق» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u07-p03",
+      "sequence": 39,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «تأثير» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u07-p04",
+      "sequence": 40,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «أعلن» في هذا الاستعمال؟",
+      "answer": "فعل",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u07-p05",
+      "sequence": 41,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «رئيسية» في هذا الاستعمال؟",
+      "answer": "صفة",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u07-p06",
+      "sequence": 42,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "ماذا تصف «رئيسية»؟",
+      "answer": "المعلومات الأساسية الأكثر أهمية في الخبر أو الملخص.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u08-p01",
+      "sequence": 43,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «منطقة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u08-p01",
+      "sequence": 43,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «مواد» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u08-p02",
+      "sequence": 44,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «استخدام» في هذا الاستعمال؟",
+      "answer": "فعل ماضٍ",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u08-p02",
+      "sequence": 44,
+      "question_id": "q7",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «طاقة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u08-p03",
+      "sequence": 45,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «نمو» في هذا الاستعمال؟",
+      "answer": "فعل ماضٍ",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u08-p04",
+      "sequence": 46,
+      "question_id": "q10",
+      "question_type": "grammar_function",
+      "prompt": "ماذا تعبر «ربما» في تفسير نور؟",
+      "answer": "عن احتمال غير مؤكد لسبب انتقال الأشياء.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u08-p05",
+      "sequence": 47,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «مجتمع» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u08-p06",
+      "sequence": 48,
+      "question_id": "q10",
+      "question_type": "grammar_function",
+      "prompt": "ماذا تفعل «بعد ذلك» في ترتيب منهج نور؟",
+      "answer": "تربط مرحلة المقارنة بالمرحلة التالية، وهي اقتراح تغيير محدد.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u09-p01",
+      "sequence": 49,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «قصة» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u09-p02",
+      "sequence": 50,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «نسخة» في هذا الاستعمال؟",
+      "answer": "فعل ماضٍ",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u09-p03",
+      "sequence": 51,
+      "question_id": "q6",
+      "question_type": "grammar_category",
+      "prompt": "ما التصنيف النحوي لكلمة «مطعم» في هذا الاستعمال؟",
+      "answer": "اسم",
+      "reasons": [
+        "answer_requires_or_uses_grammar_label",
+        "explicit_grammar_classification",
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u09-p06",
+      "sequence": 54,
+      "question_id": "q10",
+      "question_type": "grammar_function",
+      "prompt": "لماذا يستخدم النص أسئلة «من؟ متى؟ لماذا؟» في النهاية؟",
+      "answer": "لتقديم طريقة عملية لفحص العادة وسياقها قبل التعميم.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u10-p01",
+      "sequence": 55,
+      "question_id": "q10",
+      "question_type": "grammar_function",
+      "prompt": "ماذا تفعل «بل» في «لم يكن... بل...»؟",
+      "answer": "تصحح الفكرة الأولى وتقدم التفسير الذي تعتبره نور أدق.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u10-p02",
+      "sequence": 56,
+      "question_id": "q10",
+      "question_type": "grammar_function",
+      "prompt": "ماذا تفعل «بينما» في مقارنة السوق؟",
+      "answer": "تربط شيئين متقابلين: ما بقي وما تغير.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u10-p03",
+      "sequence": 57,
+      "question_id": "q10",
+      "question_type": "grammar_function",
+      "prompt": "ماذا تعبر «إذا... فقد...» في النص؟",
+      "answer": "عن احتمال نتيجة سلبية إذا حدث تأخير في القطار.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u10-p04",
+      "sequence": 58,
+      "question_id": "q10",
+      "question_type": "grammar_function",
+      "prompt": "ماذا تفعل «بينما» في وصف النتائج؟",
+      "answer": "تظهر الاختلاف بين مبانٍ انخفض فيها الاستخدام ومبنى لم يتغير كثيرًا.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u10-p05",
+      "sequence": 59,
+      "question_id": "q10",
+      "question_type": "grammar_function",
+      "prompt": "ماذا تفعل «بينما» عند الحديث عن الطعام؟",
+      "answer": "تقارن بين أقارب أعدوا أطباقًا معتادة وآخرين جربوا وصفات مختلفة.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    },
+    {
+      "language": "ar",
+      "level": "A2",
+      "passage_id": "ar-a2-u10-p06",
+      "sequence": 60,
+      "question_id": "q9",
+      "question_type": "grammar_function",
+      "prompt": "ما وظيفة المقارنة بين «ما قيل أولًا» و«ما ظهر لاحقًا»؟",
+      "answer": "تساعد القارئ على فهم التغير والنتائج وتصحيح التوقع أو الفكرة الأولى.",
+      "reasons": [
+        "formal_question_type"
+      ],
+      "severity_candidate": "major",
+      "status": "NEEDS_EDUCATOR_ADJUDICATION",
+      "note": "Candidate only. Communicative grammar-choice/use tasks are not flagged merely for testing grammar."
+    }
+  ],
+  "release_effect": "Arabic remains blocked. This artifact alone neither repairs nor approves any record."
+}
