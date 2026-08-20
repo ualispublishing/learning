@@ -1,4 +1,4 @@
-name: TEMP French A1 all-surface review visibility audit
+name: TEMP French A1 morphology review visibility audit
 on:
   push:
     branches: [repair/french-a1-review-integrity-2026-08-20]
@@ -14,12 +14,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python reading/tools/audit_french_a1_review_visibility_allsurfaces.py
+      - run: python reading/tools/audit_french_a1_review_visibility_morphology.py
       - name: Commit evidence
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/audit/french_a1_review_visibility_allsurfaces_2026-08-20.json
+          git add reading/audit/french_a1_review_visibility_morphology_2026-08-20.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Audit French A1 review visibility across learner surfaces [skip ci]'
+          git commit -m 'Audit French A1 review visibility with morphology [skip ci]'
           git push origin HEAD:repair/french-a1-review-integrity-2026-08-20
