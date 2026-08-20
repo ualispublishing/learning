@@ -1,4 +1,4 @@
-name: French review-target visibility audit
+name: French ghost-review impact audit
 on:
   push:
     branches: [audit/french-coverage-v2-2026-08-19]
@@ -9,122 +9,40 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Install pinned NLP dependency
-        run: python -m pip install --disable-pip-version-check 'stanza==1.10.1'
-      - name: Audit all declared French review targets for actual visibility
+      - name: Quantify contact-ledger impact
         run: |
           python - <<'PY'
-          import json,re,unicodedata
-          from collections import Counter,defaultdict
+          import json
+          from collections import Counter, defaultdict
           from pathlib import Path
-          import stanza
-
           root=Path('.')
-          levels=['a1','a2','b1','b2','c1','c2']
-          def norm(s):
-            s=unicodedata.normalize('NFC',str(s or '')).replace('’',"'").replace('‘',"'").casefold().strip()
-            return re.sub(r"^[^\w]+|[^\w]+$",'',s,flags=re.UNICODE)
-          lexrows=[json.loads(x) for x in (root/'reading/lexicons/french.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]
-          lex={r['id']:r for r in lexrows}
-          evidence=json.loads((root/'reading/audit/french_coverage_evidence_full_v2_2026-08-19.json').read_text(encoding='utf-8'))
-          stanza.download('fr',processors='tokenize,pos,lemma',verbose=False)
-          nlp=stanza.Pipeline('fr',processors='tokenize,pos,lemma',use_gpu=False,verbose=False)
-
-          findings=[]
-          counts=Counter()
-          by_level=defaultdict(Counter)
-          by_rep=defaultdict(Counter)
-          passages_with_findings=Counter()
-          total_reviews=0
-          total_passages=0
-
-          for level in levels:
-            rows=[json.loads(x) for x in (root/f'reading/french/{level}/passages.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]
-            for p in rows:
-              total_passages += 1
-              reviews=p.get('review_lexical_targets',[])
-              if not reviews: continue
-              doc=nlp(p['text'])
-              text_keys=set()
-              for sent in doc.sentences:
-                for w in sent.words:
-                  for z in (w.text,w.lemma):
-                    k=norm(z)
-                    if k: text_keys.add(k)
-              qtargets={tid for q in p.get('questions',[]) for tid in q.get('target_ids',[])}
-              for r in reviews:
-                total_reviews += 1
-                tid=r.get('id')
-                rep=r.get('representation') or 'missing'
-                stage=r.get('review_stage')
-                lr=lex.get(tid)
-                keys={norm(r.get('form'))}
-                if lr:
-                  keys|={norm(lr.get('form')),norm(lr.get('match_form')),norm(lr.get('lemma'))}
-                keys.discard('')
-                text_match=bool(keys & text_keys)
-                q_match=tid in qtargets
-                counts['review_entries'] += 1
-                by_level[level.upper()]['review_entries'] += 1
-                by_rep[rep]['review_entries'] += 1
-                if text_match: counts['text_visible'] += 1
-                if q_match: counts['question_targeted'] += 1
-                if text_match or q_match: counts['visible_somewhere'] += 1
-                kind=None
-                severity=None
-                rationale=None
-                if not lr:
-                  kind='review_target_missing_from_lexicon';severity='major';rationale='Review target ID has no canonical French lexicon row.'
-                elif rep=='running_text' and not text_match:
-                  kind='running_text_review_not_in_text';severity='major';rationale='Representation claims running_text, but Stanza surface/lemma matching finds no target in passage text.'
-                elif not text_match and not q_match:
-                  kind='declared_review_not_visible_in_text_or_targeted_question';severity='major';rationale='No target surface/lemma appears in text and no question targets this ID; planned exposure would be unsupported.'
-                elif rep in {'cloze','contrast','production'} and not q_match and not text_match:
-                  kind='task_review_not_visible';severity='major';rationale='Task representation is not evidenced by text or a targeted question.'
-                if kind:
-                  by_level[level.upper()][kind]+=1
-                  by_rep[rep][kind]+=1
-                  passages_with_findings[p['id']]+=1
-                  findings.append({
-                    'language':'fr','level':level.upper(),'passage_id':p['id'],'sequence':p['sequence'],
-                    'target_id':tid,'review_form':r.get('form'),'review_stage':stage,'representation':rep,
-                    'lexicon_keys':sorted(keys),'text_match':text_match,'question_target_match':q_match,
-                    'question_ids_targeting':[q['id'] for q in p.get('questions',[]) if tid in q.get('target_ids',[])],
-                    'kind':kind,'severity':severity,'rationale':rationale,
-                    'status':'NEEDS_ADJUDICATION'
-                  })
-
-          out={
-            'schema_version':1,'date':'2026-08-19','language':'fr',
-            'status':'DETERMINISTIC_CANDIDATE_AUDIT_DO_NOT_AUTOPROMOTE',
-            'bound_canonical_hashes':evidence['bound_canonical_hashes'],
-            'method':{
-              'nlp':'stanza==1.10.1 French tokenize,pos,lemma',
-              'text_visibility':'normalized surface or lemma intersects review form / canonical lexicon form/match_form/lemma',
-              'question_visibility':'review target ID appears in question.target_ids',
-              'major_candidate_rule':'running_text review absent from text, or review absent from both text and targeted questions',
-              'limitation':'A candidate is not silently repaired. Inflection/phrase ambiguity must be adjudicated before mutation.'
-            },
-            'summary':{
-              'passages_scanned':total_passages,'review_entries_scanned':total_reviews,
-              'counts':dict(counts),'finding_count':len(findings),
-              'passages_with_findings':len(passages_with_findings),
-              'by_level':{k:dict(v) for k,v in by_level.items()},
-              'by_representation':{k:dict(v) for k,v in by_rep.items()}
-            },
-            'findings':findings
-          }
-          Path('reading/audit/french_review_target_visibility_audit_2026-08-19.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print(json.dumps({'summary':out['summary'],'first50':findings[:50]},ensure_ascii=False,indent=2))
+          vis=json.loads((root/'reading/audit/french_review_target_visibility_audit_2026-08-19.json').read_text(encoding='utf-8'))
+          led=json.loads((root/'reading/audit/french_curriculum_exposure_ledger_full_v2_2026-08-19.json').read_text(encoding='utf-8'))
+          ghosts=Counter(f['target_id'] for f in vis['findings'])
+          passages=defaultdict(list)
+          for f in vis['findings']:
+            passages[f['target_id']].append({'passage_id':f['passage_id'],'sequence':f['sequence'],'stage':f['review_stage'],'representation':f['representation'],'kind':f['kind']})
+          affected=[]
+          drops=[]
+          for t in led['targets']:
+            tid=t['target_id']
+            n=ghosts.get(tid,0)
+            if not n: continue
+            before=int(t['planned_meaningful_contacts'])
+            after=max(0,before-n)
+            row={'target_id':tid,'lemma':t.get('lemma'),'form':t.get('form'),'introduced_in':t.get('introduced_in'),'ghost_review_events':n,'planned_contacts_before':before,'planned_contacts_after_removing_ghosts':after,'six_contact_before':before>=6,'six_contact_after':after>=6,'ghost_events':passages[tid]}
+            affected.append(row)
+            if before>=6 and after<6: drops.append(row)
+          affected.sort(key=lambda r:(-r['ghost_review_events'],r['target_id']))
+          out={'schema_version':1,'date':'2026-08-20','language':'fr','status':'IMPACT_AUDIT_DO_NOT_AUTOPROMOTE','bound_canonical_hashes':vis['bound_canonical_hashes'],'input_visibility_findings':len(vis['findings']),'affected_target_ids':len(affected),'ghost_review_events_by_target':dict(ghosts),'targets_dropping_below_six_planned_contacts':len(drops),'affected_targets':affected,'drops_below_six':drops,'interpretation':'Subtracting a deterministic ghost review removes only the planned review contact attributed to that metadata entry. It does not infer learner success and does not mutate canonical content.'}
+          Path('reading/audit/french_ghost_review_contact_impact_2026-08-20.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'input_findings':out['input_visibility_findings'],'affected_target_ids':out['affected_target_ids'],'targets_dropping_below_six':out['targets_dropping_below_six'],'drops':drops},ensure_ascii=False,indent=2))
           PY
-      - name: Commit visibility audit evidence
+      - name: Commit compact impact evidence
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/audit/french_review_target_visibility_audit_2026-08-19.json
+          git add reading/audit/french_ghost_review_contact_impact_2026-08-20.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Audit French review-target visibility [skip ci]'
+          git commit -m 'Quantify French ghost-review contact impact [skip ci]'
           git push origin HEAD:audit/french-coverage-v2-2026-08-19
