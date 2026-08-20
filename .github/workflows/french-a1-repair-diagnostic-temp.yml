@@ -1,31 +1,124 @@
-name: French A1 later review opportunity micro summary
+name: French A1 early review lifecycle guarded repair
 on:
   push:
     branches: [repair/french-a1-coverage-2026-08-19]
 permissions:
   contents: write
 jobs:
-  summarize:
+  repair:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Emit R2/R3 window opportunities only
+      - name: Apply evidence-backed R1-R3 lifecycle repair
         run: |
           python - <<'PY'
-          import json
+          import hashlib,json,re
           from pathlib import Path
-          x=json.loads(Path('reading/audit/french_a1_later_review_opportunities_2026-08-19.json').read_text(encoding='utf-8'))
-          out={'schema_version':1,'date':'2026-08-19','language':'fr','level':'A1','targets':{}}
-          for tid,d in x['targets'].items():
-            out['targets'][tid]={'lemma':d['lemma'],'intro':d['intro'],'r2_window_hits':d['r2_window_hits'],'r3_window_hits':d['r3_window_hits']}
-          Path('reading/audit/french_a1_later_review_opportunities_micro_2026-08-19.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print(json.dumps(out,ensure_ascii=False,indent=2))
+          path=Path('reading/french/a1/passages.jsonl')
+          before_hash=hashlib.sha256(path.read_bytes()).hexdigest()
+          expected='49996c9cbe382d5c078b3663157f7d4807947185c88bd40a8b76ada047efcf21'
+          if before_hash!=expected: raise SystemExit(f'guarded input hash mismatch: {before_hash} != {expected}')
+          rows=[json.loads(x) for x in path.read_text(encoding='utf-8').splitlines() if x.strip()]
+          byid={r['id']:r for r in rows}
+          changes=[]; touched=set()
+
+          def reviews(pid): return byid[pid].setdefault('review_lexical_targets',[])
+          def locate(pid,tid,stage,rep):
+              m=[r for r in reviews(pid) if r.get('id')==tid and r.get('review_stage')==stage and r.get('representation')==rep]
+              if len(m)!=1: raise SystemExit(f'{pid} {tid} {stage} {rep}: expected one review, got {len(m)}')
+              return m[0]
+          def stage(pid,tid,old,new,rep='running_text'):
+              r=locate(pid,tid,old,rep); r['review_stage']=new; touched.add(pid)
+              changes.append({'action':'relabel_stage','passage_id':pid,'target_id':tid,'form':r.get('form'),'representation':rep,'old_stage':old,'new_stage':new})
+          def remove(pid,tid,stage_name,rep='running_text'):
+              r=locate(pid,tid,stage_name,rep); reviews(pid).remove(r); touched.add(pid)
+              changes.append({'action':'remove_stage_declaration_keep_text_exposure','passage_id':pid,'target_id':tid,'form':r.get('form'),'representation':rep,'stage':stage_name})
+          def add(pid,tid,form,stage_name,rep='running_text'):
+              p=byid[pid]
+              if any(r.get('id')==tid and r.get('review_stage')==stage_name for r in reviews(pid)):
+                  raise SystemExit(f'{pid} {tid}: target/stage already declared')
+              if rep in {'running_text','summary'} and not re.search(rf'(?<!\w){re.escape(form)}(?!\w)',p['text'],flags=re.I|re.UNICODE):
+                  raise SystemExit(f'{pid} {tid}: requested visible form {form!r} absent')
+              entry={'expected_exposure_number':None,'form':form,'id':tid,'representation':rep,'review_stage':stage_name}
+              reviews(pid).append(entry); touched.add(pid)
+              changes.append({'action':'add_review_at_natural_occurrence','passage_id':pid,'target_id':tid,'form':form,'representation':rep,'stage':stage_name})
+
+          # Exact R1 window at +2 for quand/alors.
+          stage('fr-a1-u01-p04','fr-rank-0061','R2','R1')
+          stage('fr-a1-u01-p04','fr-rank-0063','R2','R1')
+
+          # Unit-1 checkpoint was incorrectly treating review ordinal as maturity stage.
+          stage('fr-a1-u01-p06','fr-rank-0048','R3','R2')
+          stage('fr-a1-u01-p06','fr-rank-0047','R3','R2')
+          stage('fr-a1-u01-p06','fr-rank-0061','R3','R2')
+          stage('fr-a1-u01-p06','fr-rank-0023','R2','R1')
+          stage('fr-a1-u01-p06','fr-rank-0021','R2','R1')
+          remove('fr-a1-u01-p06','fr-rank-0035','R2')
+          remove('fr-a1-u01-p06','fr-rank-0039','R2')
+
+          # Move R2 declarations to existing natural +4/+5 review opportunities.
+          add('fr-a1-u02-p01','fr-rank-0023','veut','R2')
+          add('fr-a1-u02-p01','fr-rank-0035','avec','R2')
+          p8=byid['fr-a1-u02-p02']
+          old='Maintenant, Camille sait quoi faire. Elle écrit à sa mère :'
+          new='Maintenant, Camille sait quoi faire. Alors, elle écrit à sa mère :'
+          if old not in p8['text']: raise SystemExit('u02p02 text anchor missing')
+          p8['text']=p8['text'].replace(old,new,1); touched.add(p8['id'])
+          changes.append({'action':'bounded_text_insertion','passage_id':p8['id'],'purpose':'create natural alors R2 at +6','old':old,'new':new})
+          add('fr-a1-u02-p02','fr-rank-0063','alors','R2')
+          add('fr-a1-u02-p03','fr-rank-0039','voit','R2')
+
+          # Mature reviews: prefer existing natural occurrences; only venir needs a tiny natural insertion.
+          add('fr-a1-u02-p04','fr-rank-0048','ici','R3')  # +9, accepted one-passage heuristic tolerance
+          remove('fr-a1-u02-p05','fr-rank-0061','R3')
+          p12=byid['fr-a1-u02-p06']
+          old='Sami l’aide parfois, mais Camille peut aussi travailler seule.'
+          new='Sami vient parfois l’aider, mais Camille peut aussi travailler seule.'
+          if old not in p12['text']: raise SystemExit('u02p06 venir insertion anchor missing')
+          p12['text']=p12['text'].replace(old,new,1); touched.add(p12['id'])
+          changes.append({'action':'bounded_text_replacement','passage_id':p12['id'],'purpose':'create natural venir R3 at +11','old':old,'new':new})
+          add('fr-a1-u02-p06','fr-rank-0047','vient','R3')
+          add('fr-a1-u02-p06','fr-rank-0061','quand','R3')
+          add('fr-a1-u03-p02','fr-rank-0023','veut','R3')
+          add('fr-a1-u03-p02','fr-rank-0039','voient','R3')
+          add('fr-a1-u03-p03','fr-rank-0021','pouvons','R3')
+
+          # Recompute learner-facing counts only where text changed; all touched passages are reopened.
+          for pid in touched:
+              p=byid[pid]
+              if pid in {'fr-a1-u02-p02','fr-a1-u02-p06'}:
+                  p['word_count']=len(p['text'].split())
+                  p['sentence_count']=len(re.findall(r'[.!?](?:\s|$|[»”"])',p['text']))
+              p['revision']=int(p.get('revision') or 0)+1
+              p['quality']['status']='draft'
+              for f in ['linguistic_review','pedagogical_review','coverage_check','answer_key_check','schema_check']:
+                  p['quality'][f]='pending'
+              p['quality'].setdefault('notes',[]).append('2026-08-19 educator recertification lifecycle repair: corrected premature R-stage metadata and attached later stages to evidence-backed natural occurrences; fresh full regression required.')
+
+          # Structural and review-visibility guards.
+          if len(rows)!=60 or [r['sequence'] for r in rows]!=list(range(1,61)) or len({r['id'] for r in rows})!=60:
+              raise SystemExit('A1 structural identity failure')
+          exact_fail=[]
+          for p in rows:
+              qtargets={tid for q in p.get('questions',[]) for tid in q.get('target_ids',[])}
+              for r in p.get('review_lexical_targets',[]):
+                  n=len(re.findall(rf'(?<!\w){re.escape(str(r.get("form") or ""))}(?!\w)',p['text'],flags=re.I|re.UNICODE)) if r.get('form') else 0
+                  rep=r.get('representation'); qhit=r.get('id') in qtargets
+                  if (rep in {'running_text','summary'} and n<1) or (rep in {'contrast','cloze','production'} and n<1 and not qhit):
+                      exact_fail.append({'passage_id':p['id'],'target_id':r.get('id'),'form':r.get('form'),'stage':r.get('review_stage'),'representation':rep})
+          if exact_fail: raise SystemExit('visibility regression: '+json.dumps(exact_fail,ensure_ascii=False))
+
+          path.write_text('\n'.join(json.dumps(r,ensure_ascii=False,separators=(',',':')) for r in rows)+'\n',encoding='utf-8')
+          after_hash=hashlib.sha256(path.read_bytes()).hexdigest()
+          out={'schema_version':1,'date':'2026-08-19','language':'fr','level':'A1','status':'REPAIRED_PENDING_FULL_REGRESSION','input_a1_hash':before_hash,'post_repair_a1_hash':after_hash,'change_count':len(changes),'touched_passages':sorted(touched,key=lambda pid:byid[pid]['sequence']),'changes':changes,'post_repair_exact_visibility_failures':0,'adjudication_notes':['R-stage windows are heuristics; one-passage boundary misses were retained where natural and non-contradictory.','Premature R3 labels at Unit-1 checkpoint were corrected.','Later R2/R3 labels were attached to natural occurrences rather than invented drill content.','alors R3 at sequence 11 (+9) is retained as an explicitly tolerated one-passage heuristic deviation.','ici R3 at sequence 10 (+9) is likewise retained as the closest natural occurrence rather than forcing unrelated prose.']}
+          Path('reading/audit/french_a1_early_review_lifecycle_repair_2026-08-19.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'post_repair_a1_hash':after_hash,'change_count':len(changes),'touched_passages':out['touched_passages'],'notes':out['adjudication_notes']},ensure_ascii=False,indent=2))
           PY
-      - name: Commit micro summary
+      - name: Commit lifecycle repair
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/audit/french_a1_later_review_opportunities_micro_2026-08-19.json
+          git add reading/french/a1/passages.jsonl reading/audit/french_a1_early_review_lifecycle_repair_2026-08-19.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Condense French A1 later review opportunities [skip ci]'
+          git commit -m 'Repair French A1 early review lifecycle [skip ci]'
           git push origin HEAD:repair/french-a1-coverage-2026-08-19
