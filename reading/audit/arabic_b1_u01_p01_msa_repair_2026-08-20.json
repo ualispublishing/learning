@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-20",
+  "language": "ar",
+  "level": "B1",
+  "passage_id": "ar-b1-u01-p01",
+  "status": "CONFIRMED_MSA_DEFECT_REPAIRED_NEEDS_INDEPENDENT_REVIEW",
+  "before_git_blob": "53f114cd16a15f5da144b5a86a240ab131271ec1",
+  "before_sha256": "c2968274d92dfdb4c0c35812d89a501aea751de54af6f725d6ac1f39e008600b",
+  "after_sha256": "65867fe577721dfb84fbcf804a6e1fd77d5b950f1a5c5124c10e303927a43a14",
+  "repair": {
+    "question_id": "q7",
+    "old_prompt": "ما دلالة «حتى إن» في «حتى إن كانت الإجابة لا الآن»؟",
+    "new_prompt": "ما دلالة «حتى إن» في هذه الجملة: يظل وضوح القرار مهمًا حتى إن كانت الإجابة «لا، ليس الآن»؟",
+    "old_answer": "تفيد أن وضوح القرار يظل مهمًا حتى في الحالة التي تكون فيها النتيجة عدم التسجيل الآن.",
+    "new_answer": "تفيد أن وضوح القرار يظل مهمًا حتى في الحالة التي تكون فيها الإجابة «لا، ليس الآن».",
+    "new_explanation": "«حتى إن» تضيف معنى التنازل هنا: تبقى الفكرة صحيحة في هذه الحالة أيضًا.",
+    "passage_text_changed": false
+  },
+  "separate_unresolved_item": {
+    "question_id": "q8",
+    "prompt": "ما وظيفة «إذا» في «إذا كانت الأولوية واضحة، يصبح قول ليس الآن أسهل»؟",
+    "type": "grammar_function",
+    "answer": "تقدم شرطًا ثم تربط به نتيجة مترتبة عليه.",
+    "status": "NEEDS_EDUCATOR_ADJUDICATION_UNCHANGED"
+  },
+  "release_effect": "Arabic remains educator-blocked; this repair resolves only the confirmed malformed-MSA q7 defect and does not adjudicate q8 or any corpus-wide class."
+}
