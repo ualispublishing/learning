@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-20",
+  "language": "ar",
+  "status": "CONFIRMED_LIVE_DEFECT",
+  "source_record": "reading/arabic/b1/passages.jsonl#ar-b1-u01-p01",
+  "canonical_blob_sha": "53f114cd16a15f5da144b5a86a240ab131271ec1",
+  "findings": [
+    {
+      "finding_id": "AR-B1-MSA-001",
+      "level": "B1",
+      "passage_id": "ar-b1-u01-p01",
+      "field": "questions[q7].prompt",
+      "span": "حتى إن كانت الإجابة لا الآن",
+      "category": "learner_facing_unnatural_or_malformed_msa",
+      "severity": "major",
+      "confidence": "high",
+      "status": "open",
+      "adjudication": "The malformed construction remains present in live canonical main on 2026-08-20. The passage itself uses the natural phrase «ليس الآن», so q7 is inconsistent with its own source text and risks teaching malformed MSA.",
+      "proposed_correction": "Rewrite q7 around the natural learner-facing construction already present in the passage, e.g. test the concessive meaning of «حتى إن» using a grammatical clause such as «حتى إن كانت الإجابة: لا، ليس الآن», then revalidate answer a7 and grammar-target linkage.",
+      "release_blocking": true
+    },
+    {
+      "finding_id": "AR-B1-PED-001",
+      "level": "B1",
+      "passage_id": "ar-b1-u01-p01",
+      "field": "questions[q8]",
+      "span": "ما وظيفة «إذا» في «إذا كانت الأولوية واضحة، يصبح قول ليس الآن أسهل»؟",
+      "category": "metalinguistic_task_candidate",
+      "severity": "needs_adjudication",
+      "confidence": "medium",
+      "status": "needs_educator_adjudication",
+      "adjudication": "This is grammatically well-formed enough to be a separate issue from q7, but it explicitly asks for the function of a grammatical connector. B1 may tolerate some grammar-in-context work; repository standards prefer embedded communicative grammar review. Adjudicate pedagogical value rather than auto-repairing it.",
+      "release_blocking": true
+    }
+  ],
+  "release_effect": "Arabic remains educator-blocked."
+}
