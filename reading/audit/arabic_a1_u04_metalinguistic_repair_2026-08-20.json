@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-20",
+  "language": "ar",
+  "level": "A1",
+  "unit": 4,
+  "status": "BOUNDED_REPAIR_APPLIED_NEEDS_INDEPENDENT_REVIEW",
+  "before_sha256": "d6142ee56ec830c4a41cb7244fe99c65824cebbe59ff2e9b8f44d4640c9e228b",
+  "after_sha256": "62036a705af9db459f382482f394487decf3cc49117d1d9497bafa862e373df5",
+  "repairs_applied": 7,
+  "passage_text_changed": false,
+  "repairs": [
+    {
+      "passage_id": "ar-a1-u04-p01",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «أب» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا كنت تشير إلى والدك، أي صيغة أنسب: «هذا أبي» أم «هذا أب أنا»؟",
+        "type": "grammar_choice",
+        "answer": "هذا أبي.",
+        "explanation": "في هذا التعبير نستخدم «أبي» للدلالة على والدي."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u04-p02",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «اسم» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا أردت تقديم نفسك، أي صيغة أنسب: «اسمي نور» أم «اسم أنا نور»؟",
+        "type": "grammar_choice",
+        "answer": "اسمي نور.",
+        "explanation": "«اسمي» هي الصيغة الطبيعية هنا عند ذكر اسم المتكلم."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u04-p03",
+      "question_id": "q7",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «يقول» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "فعل مضارع"
+      },
+      "after": {
+        "prompt": "اختر الصحيح مع «سامي»: «سامي يقول مرحبًا» أم «سامي تقول مرحبًا»؟",
+        "type": "grammar_choice",
+        "answer": "سامي يقول مرحبًا.",
+        "explanation": "مع «سامي» نستعمل «يقول»."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u04-p03",
+      "question_id": "q8",
+      "before": {
+        "prompt": "في «تقول هدى»، من صاحب الفعل؟",
+        "type": "person_form",
+        "answer": "هدى."
+      },
+      "after": {
+        "prompt": "حوّل الجملة إلى هدى: «سامي يقول مرحبًا» تصبح «هدى _____ مرحبًا».",
+        "type": "cloze_transfer",
+        "answer": "تقول.",
+        "explanation": "مع «هدى» نستعمل «تقول»."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u04-p04",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «أخبر» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "فعل ماضٍ"
+      },
+      "after": {
+        "prompt": "أي جملة تتحدث عن خبر حدث أمس: «أخبرت ليلى هدى أمس» أم «ستخبر ليلى هدى غدًا»؟",
+        "type": "grammar_choice",
+        "answer": "أخبرت ليلى هدى أمس.",
+        "explanation": "«أخبرت» هنا تدل على حدث وقع في الماضي."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u04-p05",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «جميع» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "في التحية للمجموعة، أي صيغة أنسب: «مرحبًا بكم جميعًا» أم «مرحبًا بكم جميع»؟",
+        "type": "grammar_choice",
+        "answer": "مرحبًا بكم جميعًا.",
+        "explanation": "بعد «بكم» تأتي هنا الصيغة «جميعًا»."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u04-p06",
+      "question_id": "q9",
+      "before": {
+        "prompt": "ماذا يحدد «أمام» في «يقف الأطفال أمام الكبار»؟",
+        "type": "grammar_function",
+        "answer": "الموقع المكاني للأطفال بالنسبة إلى الكبار."
+      },
+      "after": {
+        "prompt": "إذا كان الأطفال في مقدمة الصورة والكبار خلفهم، أي جملة أنسب: «الأطفال أمام الكبار» أم «الأطفال خلف الكبار»؟",
+        "type": "grammar_choice",
+        "answer": "الأطفال أمام الكبار.",
+        "explanation": "«أمام» تبين أن الأطفال في الجهة الأمامية بالنسبة إلى الكبار."
+      }
+    }
+  ],
+  "release_effect": "Arabic remains educator-blocked; independent semantic/native/educator review required."
+}
