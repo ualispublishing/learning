@@ -1,104 +1,93 @@
-name: French A1 Unit 07 guarded repair temp
+name: French A1 post-repair coverage regression
 on:
   push:
     branches: [repair/french-a1-coverage-2026-08-19]
 permissions:
   contents: write
 jobs:
-  repair:
+  audit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Apply narrow educator repair to Unit 07
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned deterministic NLP dependency
+        run: python -m pip install --disable-pip-version-check 'stanza==1.10.1'
+      - name: Assert A1 fixed-expression scope and reconstruct audit
         run: |
           python - <<'PY'
           import json,re
           from pathlib import Path
-          p=Path('reading/french/a1/passages.jsonl')
-          rows=[json.loads(x) for x in p.read_text(encoding='utf-8').splitlines() if x.strip()]
-          byid={r['id']:r for r in rows}
-
-          replacements={
-            'fr-a1-u07-p04': {
-              'expected_revision':4,
-              'text':'Camille va souvent à pied de l’école à la bibliothèque, mais elle ne prend jamais une petite rue qu’elle ne connaît pas. Aujourd’hui, Sami lui montre un chemin simple. Après quelques minutes, Sami dit : « Ici, à gauche. » Ils tournent à gauche. Plus loin, devant un café, ils tournent à droite. Camille répète : « gauche, puis droite ». Elle regarde les magasins pour savoir où elle est. Sami lui demande ensuite quel côté choisir. Camille répond « à gauche » sans hésiter. Ils arrivent bientôt devant la bibliothèque. Camille est contente : dans la rue, elle sait maintenant choisir la gauche ou la droite, pas seulement sur un dessin.',
-              'questions':{
-                'q1':'Quel chemin Camille apprend-elle ?',
-                'q2':'De quel côté tournent-ils d’abord ?',
-                'q5':'Dans quel ordre tournent-ils ?'
-              },
-              'answers':{
-                'a1':'Le chemin à pied de l’école à la bibliothèque.',
-                'a5':'Gauche, puis droite.'
-              }
-            },
-            'fr-a1-u07-p05': {
-              'expected_revision':3,
-              'text':'Camille est maintenant près du centre de la ville. Elle doit rejoindre sa mère bientôt dans une grande rue. Sur le plan, deux chemins sont possibles. Le premier chemin suit une rue où il y a beaucoup de monde. Le second passe par un petit parc et rejoint la même rue plus loin. Camille choisit le chemin du parc parce qu’il est plus calme. Elle marche dans le parc, puis suit les panneaux vers la rue principale. Bientôt, elle voit sa mère devant un magasin. Sa mère lui demande quel chemin elle a pris. Camille décrit simplement le parc et la rue. Elle comprend qu’un chemin montre par où on passe pour aller d’un lieu à un autre.',
-              'questions':{
-                'q5':'Par quels lieux Camille passe-t-elle avant d’arriver ?',
-                'q8':'On veut aller au parc. Quel mot convient pour ce qu’on suit : « chemin » ou « rue » ?'
-              },
-              'answers':{
-                'a3':'Par où on passe pour aller quelque part.',
-                'a5':'Le parc, puis la rue principale.',
-                'a6':'Par où on passe pour aller quelque part.'
-              }
-            },
-            'fr-a1-u07-p06': {
-              'expected_revision':4,
-              'text':'Camille sait maintenant mieux expliquer où sont les choses et comment aller quelque part. Un lieu peut être près ou loin. Elle peut attendre devant une porte et laisser son vélo derrière un mur. Au parc, un banc peut être entre deux arbres et une balle sous le banc. Quand elle marche, elle sait tourner à gauche ou à droite. Elle peut choisir un chemin calme ou suivre une grande rue. Ces mots l’aident à demander son chemin et à expliquer où se trouve un objet. Elle regarde encore autour d’elle, mais elle a moins besoin du plan qu’avant.',
-              'questions':{
-                'q1':'Qu’est-ce que Camille sait mieux faire maintenant ?',
-                'q5':'Pourquoi Camille regarde-t-elle encore autour d’elle ?',
-                'q10':'Résume en une phrase ce que Camille sait maintenant expliquer.'
-              },
-              'answers':{
-                'a1':'Elle sait mieux expliquer où sont les choses et comment aller quelque part.',
-                'a5':'Pour savoir où elle est et où aller.',
-                'a10':'Elle utilise des mots de distance, de position et de direction pour expliquer où sont les choses et comment aller quelque part.'
-              }
-            }
+          rows=[json.loads(x) for x in Path('reading/french/a1/passages.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]
+          text='\n'.join(r['text'].replace('’',"'").casefold() for r in rows)
+          checks={
+            'abord_tokens':len(re.findall(r'\babord\b',text)),
+            'd_abord_expressions':text.count("d'abord"),
+            'tandis_tokens':len(re.findall(r'\btandis\b',text)),
+            'tandis_que_expressions':text.count('tandis que'),
+            'afin_tokens':len(re.findall(r'\bafin\b',text)),
+            'afin_de_que_expressions':text.count('afin de')+text.count('afin que')
           }
+          if checks['abord_tokens'] != checks['d_abord_expressions']:
+            raise SystemExit(f'abord has non-d’abord A1 use: {checks}')
+          if checks['tandis_tokens'] != checks['tandis_que_expressions']:
+            raise SystemExit(f'tandis has non-tandis-que A1 use: {checks}')
+          if checks['afin_tokens'] != checks['afin_de_que_expressions']:
+            raise SystemExit(f'afin has non-purpose-linker A1 use: {checks}')
+          Path('reading/audit/french_a1_fixed_expression_scope_2026-08-19.json').write_text(json.dumps(checks,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 
-          changed=[]
-          for pid,spec in replacements.items():
-            r=byid[pid]
-            if r['revision']!=spec['expected_revision']:
-              raise SystemExit(f'{pid}: revision drift {r["revision"]} != {spec["expected_revision"]}')
-            r['text']=spec['text']
-            qmap={q['id']:q for q in r['questions']}
-            amap={a['id']:a for a in r['answer_key']}
-            for qid,prompt in spec.get('questions',{}).items(): qmap[qid]['prompt']=prompt
-            for aid,answer in spec.get('answers',{}).items(): amap[aid]['answer']=answer
-            r['revision']+=1
-            r['word_count']=len(r['text'].split())
-            r['sentence_count']=len(re.findall(r'[.!?](?:\s|$|[»”"])',r['text']))
-            r['quality']['status']='draft'
-            for field in ['linguistic_review','pedagogical_review','coverage_check','answer_key_check','schema_check']:
-              r['quality'][field]='pending'
-            r['quality'].setdefault('notes',[]).append('2026-08-19 educator recertification repair: simplified uncontrolled A1 lexical load in Unit 07 without changing the deliberate left/right/path/street targets; requires fresh regression audit.')
-            changed.append({'id':pid,'revision':r['revision'],'word_count':r['word_count'],'sentence_count':r['sentence_count']})
-
-          if [r['sequence'] for r in rows] != list(range(1,61)):
-            raise SystemExit('A1 sequence drift')
-          if len({r['id'] for r in rows})!=60:
-            raise SystemExit('A1 ID uniqueness failure')
-          for r in rows:
-            if len(r.get('questions',[]))!=10 or len(r.get('answer_key',[]))!=10:
-              raise SystemExit(f'{r["id"]}: question/answer count failure')
-            aids={a['id'] for a in r['answer_key']}
-            if any(q.get('answer_id') not in aids for q in r['questions']):
-              raise SystemExit(f'{r["id"]}: answer linkage failure')
-          p.write_text('\n'.join(json.dumps(r,ensure_ascii=False,separators=(',',':')) for r in rows)+'\n',encoding='utf-8')
-          Path('reading/audit/french_a1_unit07_educator_repair_2026-08-19.json').write_text(json.dumps({'status':'REPAIRED_PENDING_REGRESSION','changes':changed,'scope':'fr-a1-u07-p04/p05/p06 only','principle':'Simplify excessive uncontrolled abstract/support vocabulary while preserving deliberate Unit 07 spatial targets.'},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print(json.dumps(changed,ensure_ascii=False,indent=2))
+          import subprocess
+          src=subprocess.check_output(['git','show','7634a9adfed00675d087b70edf5792a333ca03e9:reading/tools/audit_french_curriculum_coverage.py'],text=True)
+          old='FUNCTION_POS = {"AUX", "ADP", "CCONJ", "SCONJ", "DET", "PRON", "PART"}'
+          new=old+'\nFUNCTION_FORMS = {str(v).casefold() for v in json.loads((READING / "planning" / "a1_function_support.json").read_text(encoding="utf-8"))["french"]["function_forms"]}\nA1_FIXED_FUNCTION_LEMMAS = {"abord", "tandis", "afin"}'
+          if old not in src: raise SystemExit('FUNCTION_POS anchor missing')
+          src=src.replace(old,new,1)
+          old_rule='elif w.upos in FUNCTION_POS:'
+          new_rule='elif w.upos in FUNCTION_POS or surface in FUNCTION_FORMS or lemma in FUNCTION_FORMS or (level == "a1" and lemma in A1_FIXED_FUNCTION_LEMMAS):'
+          if old_rule not in src: raise SystemExit('classification anchor missing')
+          src=src.replace(old_rule,new_rule,1)
+          old_guard='if got != EXPECTED_HASHES[level]:\n            raise SystemExit(f"canonical hash drift for {level}: expected {EXPECTED_HASHES[level]}, got {got}")'
+          new_guard='if level != "a1" and got != EXPECTED_HASHES[level]:\n            raise SystemExit(f"canonical hash drift for {level}: expected {EXPECTED_HASHES[level]}, got {got}")'
+          if old_guard not in src: raise SystemExit('hash guard anchor missing')
+          src=src.replace(old_guard,new_guard,1)
+          src=src.replace('french_curriculum_exposure_ledger_2026-08-19.json','french_curriculum_exposure_ledger_a1_repair_v3_2026-08-19.json')
+          src=src.replace('french_coverage_evidence_2026-08-19.json','french_coverage_evidence_a1_repair_v3_2026-08-19.json')
+          Path('reading/tools/audit_french_a1_repair_v3_runtime.py').write_text(src,encoding='utf-8')
           PY
-      - name: Commit guarded repair
+      - name: Run pinned full comparison audit
+        run: python reading/tools/audit_french_a1_repair_v3_runtime.py
+      - name: Annotate regression evidence
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('reading/audit/french_coverage_evidence_a1_repair_v3_2026-08-19.json')
+          x=json.loads(p.read_text(encoding='utf-8'))
+          x['schema_version']=3
+          x['repair_regression_method']={
+            'base_implementation_commit':'7634a9adfed00675d087b70edf5792a333ca03e9',
+            'stanza_version':'1.10.1',
+            'a1_hash_is_new_repair_hash':True,
+            'other_level_hashes_must_match_prior_canonical':True,
+            'repository_function_forms_enabled':True,
+            'a1_fixed_expression_lemmas':['abord','tandis','afin'],
+            'fixed_expression_scope_asserted_by':'reading/audit/french_a1_fixed_expression_scope_2026-08-19.json',
+            'support_lexicon':'reading/lexicons/french_a1_support.json version 2',
+            'does_not_establish_learner_mastery':True,
+            'may_populate_estimated_known_token_coverage':False,
+            'may_auto_approve_passages':False
+          }
+          p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+          rm -f reading/tools/audit_french_a1_repair_v3_runtime.py
+      - name: Commit regression evidence
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/french/a1/passages.jsonl reading/audit/french_a1_unit07_educator_repair_2026-08-19.json
+          git add reading/audit/french_a1_fixed_expression_scope_2026-08-19.json reading/audit/french_curriculum_exposure_ledger_a1_repair_v3_2026-08-19.json reading/audit/french_coverage_evidence_a1_repair_v3_2026-08-19.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Simplify French A1 Unit 07 lexical load [skip ci]'
+          git commit -m 'Audit French A1 coverage after educator repairs [skip ci]'
           git push origin HEAD:repair/french-a1-coverage-2026-08-19
