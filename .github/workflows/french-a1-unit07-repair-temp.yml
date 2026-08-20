@@ -1,145 +1,151 @@
-name: French A1 review visibility guarded repair
+name: French A1 full post-visibility regression
 on:
   push:
     branches: [repair/french-a1-coverage-2026-08-19]
 permissions:
   contents: write
 jobs:
-  repair:
+  audit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Repair phantom reviews and visible-form metadata
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned deterministic NLP dependency
+        run: python -m pip install --disable-pip-version-check 'stanza==1.10.1'
+      - name: Reconstruct corrected full-corpus coverage audit against repaired A1
         run: |
           python - <<'PY'
-          import json,re,hashlib
+          import hashlib,json,re,subprocess
           from pathlib import Path
-
-          path=Path('reading/french/a1/passages.jsonl')
-          rows=[json.loads(x) for x in path.read_text(encoding='utf-8').splitlines() if x.strip()]
-          byid={r['id']:r for r in rows}
-
-          # Lemma-confirmed true visibility defects from the independent reconciliation.
-          # These declarations have no supporting target occurrence and no supporting
-          # targeted task under the review representation. They are removed rather
-          # than counted as curriculum contacts.
-          remove_keys={
-            ('fr-a1-u01-p02','fr-rank-0048','R1','running_text'),
-            ('fr-a1-u01-p02','fr-rank-0047','R1','running_text'),
-            ('fr-a1-u01-p03','fr-rank-0048','R2','running_text'),
-            ('fr-a1-u01-p03','fr-rank-0047','R2','running_text'),
-            ('fr-a1-u01-p03','fr-rank-0061','R1','running_text'),
-            ('fr-a1-u01-p03','fr-rank-0063','R1','running_text'),
-            ('fr-a1-u01-p04','fr-rank-0023','R1','running_text'),
-            ('fr-a1-u01-p05','fr-rank-0048','R3','running_text'),
-            ('fr-a1-u01-p05','fr-rank-0047','R3','running_text'),
-            ('fr-a1-u01-p05','fr-rank-0061','R2','running_text'),
-            ('fr-a1-u01-p05','fr-rank-0063','R2','running_text'),
-            ('fr-a1-u01-p05','fr-rank-0023','R2','running_text'),
-            ('fr-a1-u01-p05','fr-rank-0035','R2','running_text'),
-            ('fr-a1-u01-p05','fr-rank-0021','R1','running_text'),
-            ('fr-a1-u01-p06','fr-rank-0063','R3','running_text'),
-            ('fr-a1-u03-p01','fr-rank-0013','R2','production'),
-            ('fr-a1-u03-p04','fr-rank-0038','R2','contrast'),
-            ('fr-a1-u05-p02','fr-rank-0091','R2','running_text'),
+          root=Path('.')
+          a1=root/'reading/french/a1/passages.jsonl'
+          current_a1=hashlib.sha256(a1.read_bytes()).hexdigest()
+          expected_a1='a146ddf582099d702b6096c107ad2cb8e01df82c21304b9f076a0f876479649a'
+          if current_a1 != expected_a1:
+              raise SystemExit(f'A1 drift before regression: {current_a1} != {expected_a1}')
+          fixed=json.loads((root/'reading/planning/a1_function_support.json').read_text(encoding='utf-8'))['french'].get('function_expressions',[])
+          text='\n'.join(json.loads(x)['text'].replace('’',"'").casefold() for x in a1.read_text(encoding='utf-8').splitlines() if x.strip())
+          scope={
+            'abord_tokens':len(re.findall(r'\babord\b',text)),
+            'd_abord':text.count("d'abord"),
+            'tandis_tokens':len(re.findall(r'\btandis\b',text)),
+            'tandis_que':text.count('tandis que'),
+            'afin_tokens':len(re.findall(r'\bafin\b',text)),
+            'afin_de_or_que':text.count('afin de')+text.count('afin que')
           }
+          if scope['abord_tokens']!=scope['d_abord'] or scope['tandis_tokens']!=scope['tandis_que'] or scope['afin_tokens']!=scope['afin_de_or_que']:
+              raise SystemExit('fixed-expression scope is not safe: '+json.dumps(scope,ensure_ascii=False))
+          (root/'reading/audit/french_a1_fixed_expression_scope_post_visibility_2026-08-19.json').write_text(json.dumps({'scope':scope,'configured_expressions':fixed,'status':'PASS'},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 
-          # Real exposures where the canonical review ID is correct but the stored
-          # form is an infinitive/singular lemma rather than the learner-visible form.
-          form_updates={
-            ('fr-a1-u01-p05','fr-rank-0039','R1','running_text'):'voit',
-            ('fr-a1-u01-p06','fr-rank-0047','R3','running_text'):'vient',
-            ('fr-a1-u01-p06','fr-rank-0023','R2','running_text'):'veut',
-            ('fr-a1-u01-p06','fr-rank-0021','R2','running_text'):'peut',
-            ('fr-a1-u01-p06','fr-rank-0060','R1','running_text'):'prend',
-            ('fr-a1-u02-p03','fr-rank-0060','R2','running_text'):'prend',
-            ('fr-a1-u02-p04','fr-rank-0060','R2','running_text'):'prend',
-            ('fr-a1-u02-p06','fr-rank-0014','R2','summary'):'fait',
-            ('fr-a1-u02-p06','fr-rank-0026','R2','summary'):'sait',
-            ('fr-a1-u02-p06','fr-rank-0036','R1','summary'):'doit',
-            ('fr-a1-u03-p01','fr-rank-0014','R2','running_text'):'fait',
-            ('fr-a1-u03-p02','fr-rank-0022','R2','running_text'):'dit',
-            ('fr-a1-u03-p03','fr-rank-0036','R2','running_text'):'devons',
-            ('fr-a1-u03-p05','fr-rank-0043','R2','running_text'):'tous',
-            ('fr-a1-u04-p06','fr-rank-0108','R1','running_text'):'personnes',
-            ('fr-a1-u05-p06','fr-rank-0149','R1','summary'):'enfants',
-          }
-
-          removed=[]; updated=[]; changed_passages=set()
-          seen_remove=set(); seen_update=set()
-          for r in rows:
-            kept=[]
-            for rev in r.get('review_lexical_targets',[]):
-              k=(r['id'],rev.get('id'),rev.get('review_stage'),rev.get('representation'))
-              if k in remove_keys:
-                removed.append({'passage_id':r['id'],'sequence':r['sequence'],'entry':dict(rev),'reason':'lemma-confirmed review visibility defect; not counted as exposure'})
-                seen_remove.add(k); changed_passages.add(r['id']); continue
-              if k in form_updates:
-                old=rev.get('form'); new=form_updates[k]
-                if old != new:
-                  rev['form']=new
-                  updated.append({'passage_id':r['id'],'sequence':r['sequence'],'target_id':rev.get('id'),'review_stage':rev.get('review_stage'),'representation':rev.get('representation'),'old_form':old,'new_form':new,'reason':'same lexical target is visibly realized by this surface form'})
-                  changed_passages.add(r['id'])
-                seen_update.add(k)
-              kept.append(rev)
-            r['review_lexical_targets']=kept
-
-          missing_remove=sorted(remove_keys-seen_remove)
-          missing_update=sorted(set(form_updates)-seen_update)
-          if missing_remove or missing_update:
-            raise SystemExit(f'guard mismatch: missing_remove={missing_remove}, missing_update={missing_update}')
-          if len(removed)!=18 or len(updated)!=16:
-            raise SystemExit(f'expected 18 removals/16 form updates, got {len(removed)}/{len(updated)}')
-
-          # Exact historical visibility invariant after repair.
-          def count(text,f):
-            return len(re.findall(rf'(?<!\\w){re.escape(str(f or ""))}(?!\\w)',text,flags=re.I|re.UNICODE)) if f else 0
-          exact_fail=[]
-          for r in rows:
-            qtargets={tid for q in r.get('questions',[]) for tid in q.get('target_ids',[])}
-            for rev in r.get('review_lexical_targets',[]):
-              rep=rev.get('representation'); n=count(r['text'],rev.get('form')); qhit=rev.get('id') in qtargets
-              if rep in {'running_text','summary'} and n<1:
-                exact_fail.append({'passage_id':r['id'],'id':rev.get('id'),'form':rev.get('form'),'stage':rev.get('review_stage'),'representation':rep,'qhit':qhit})
-              elif rep in {'contrast','cloze','production'} and n<1 and not qhit:
-                exact_fail.append({'passage_id':r['id'],'id':rev.get('id'),'form':rev.get('form'),'stage':rev.get('review_stage'),'representation':rep,'qhit':qhit})
-          if exact_fail:
-            raise SystemExit('exact review visibility remains after repair: '+json.dumps(exact_fail,ensure_ascii=False))
-
-          for pid in changed_passages:
-            r=byid[pid]
-            r['revision']=int(r.get('revision') or 0)+1
-            r['quality']['status']='draft'
-            for field in ['linguistic_review','pedagogical_review','coverage_check','answer_key_check','schema_check']:
-              r['quality'][field]='pending'
-            r['quality'].setdefault('notes',[]).append('2026-08-19 educator recertification: repaired review-target visibility metadata. Phantom review declarations were removed; real inflected exposures were retained using learner-visible surface forms. Fresh exposure/spacing regression required.')
-
-          if len(rows)!=60 or [x['sequence'] for x in rows]!=list(range(1,61)) or len({x['id'] for x in rows})!=60:
-            raise SystemExit('A1 structural invariant failure')
-          for r in rows:
-            if len(r.get('questions',[]))!=10 or len(r.get('answer_key',[]))!=10:
-              raise SystemExit(f'{r["id"]}: Q/A count failure')
-
-          path.write_text('\n'.join(json.dumps(r,ensure_ascii=False,separators=(',',':')) for r in rows)+'\n',encoding='utf-8')
-          new_hash=hashlib.sha256(path.read_bytes()).hexdigest()
-          artifact={
-            'schema_version':1,'date':'2026-08-19','language':'fr','level':'A1',
-            'status':'REPAIRED_PENDING_FULL_REGRESSION','source_reconciliation':'reading/audit/french_a1_review_visibility_reconciliation_2026-08-19.json on independent audit branch',
-            'removed_phantom_review_entries':removed,'updated_visible_surface_forms':updated,
-            'counts':{'removed':len(removed),'surface_form_updates':len(updated),'changed_passages':len(changed_passages)},
-            'changed_passage_ids':sorted(changed_passages,key=lambda pid:byid[pid]['sequence']),
-            'post_repair_exact_visibility_failures':0,
-            'post_repair_a1_sha256':new_hash,
-            'important':'Removal of phantom review declarations invalidates prior planned-contact and review-stage chronology evidence. Rebuild exposure ledger before judging R1-R5 timing.'
-          }
-          Path('reading/audit/french_a1_review_visibility_repair_2026-08-19.json').write_text(json.dumps(artifact,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print(json.dumps({'counts':artifact['counts'],'changed_passage_ids':artifact['changed_passage_ids'],'post_repair_a1_sha256':new_hash},ensure_ascii=False,indent=2))
+          src=subprocess.check_output(['git','show','7634a9adfed00675d087b70edf5792a333ca03e9:reading/tools/audit_french_curriculum_coverage.py'],text=True)
+          # Bind the historical implementation to the repaired A1 hash, retaining all
+          # other original level hashes unchanged.
+          old_a1='"a1": "1cdb31ecb8b987c50051bb6f8fa5b2f7fda812cb3004c81ab8697f832fceacba"'
+          new_a1=f'"a1": "{current_a1}"'
+          if old_a1 not in src: raise SystemExit('A1 expected-hash anchor missing')
+          src=src.replace(old_a1,new_a1,1)
+          old='FUNCTION_POS = {"AUX", "ADP", "CCONJ", "SCONJ", "DET", "PRON", "PART"}'
+          new=old+'\nFUNCTION_FORMS = {str(v).casefold() for v in json.loads((READING / "planning" / "a1_function_support.json").read_text(encoding="utf-8"))["french"]["function_forms"]}\nA1_FIXED_FUNCTION_LEMMAS = {"abord", "tandis", "afin"}'
+          if old not in src: raise SystemExit('FUNCTION_POS anchor missing')
+          src=src.replace(old,new,1)
+          old_rule='elif w.upos in FUNCTION_POS:'
+          new_rule='elif w.upos in FUNCTION_POS or surface in FUNCTION_FORMS or lemma in FUNCTION_FORMS or (level == "a1" and lemma in A1_FIXED_FUNCTION_LEMMAS):'
+          if old_rule not in src: raise SystemExit('classification rule anchor missing')
+          src=src.replace(old_rule,new_rule,1)
+          src=src.replace('french_curriculum_exposure_ledger_2026-08-19.json','french_curriculum_exposure_ledger_post_a1_visibility_2026-08-19.json')
+          src=src.replace('french_coverage_evidence_2026-08-19.json','french_coverage_evidence_post_a1_visibility_2026-08-19.json')
+          (root/'reading/tools/audit_french_post_a1_visibility_runtime.py').write_text(src,encoding='utf-8')
           PY
-      - name: Commit guarded metadata repair
+      - name: Run corrected full coverage / exposure audit
+        run: python reading/tools/audit_french_post_a1_visibility_runtime.py
+      - name: Run independent lemma-aware review visibility regression
+        run: |
+          python - <<'PY'
+          import hashlib,json,re,unicodedata
+          from collections import Counter,defaultdict
+          from pathlib import Path
+          import stanza
+          root=Path('.')
+          levels=['a1','a2','b1','b2','c1','c2']
+          def norm(s):
+              s=unicodedata.normalize('NFC',str(s or '')).replace('’',"'").replace('‘',"'").casefold().strip()
+              return re.sub(r"^[^\w]+|[^\w]+$",'',s,flags=re.UNICODE)
+          lex={r['id']:r for r in [json.loads(x) for x in (root/'reading/lexicons/french.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]}
+          stanza.download('fr',processors='tokenize,pos,lemma',verbose=False)
+          nlp=stanza.Pipeline('fr',processors='tokenize,pos,lemma',use_gpu=False,verbose=False)
+          findings=[]; total=0; by_level=defaultdict(Counter)
+          hashes={}
+          for level in levels:
+              pth=root/f'reading/french/{level}/passages.jsonl'; hashes[level.upper()]=hashlib.sha256(pth.read_bytes()).hexdigest()
+              rows=[json.loads(x) for x in pth.read_text(encoding='utf-8').splitlines() if x.strip()]
+              for p in rows:
+                  doc=nlp(p['text']); text_keys=set()
+                  for sent in doc.sentences:
+                      for w in sent.words:
+                          for z in (w.text,w.lemma):
+                              k=norm(z)
+                              if k:text_keys.add(k)
+                  qtargets={tid for q in p.get('questions',[]) for tid in q.get('target_ids',[])}
+                  for r in p.get('review_lexical_targets',[]):
+                      total+=1; tid=r.get('id'); rep=r.get('representation') or 'missing'; lr=lex.get(tid,{})
+                      keys={norm(r.get('form')),norm(lr.get('form')),norm(lr.get('match_form')),norm(lr.get('lemma'))}-{''}
+                      text_match=bool(keys & text_keys); qmatch=tid in qtargets
+                      kind=None
+                      if rep in {'running_text','summary'} and not text_match: kind='text_review_invisible'
+                      elif rep in {'contrast','cloze','production'} and not text_match and not qmatch: kind='task_review_invisible'
+                      elif rep in {'other','reference'} and not text_match and not qmatch: kind='unresolved_other_review_invisible'
+                      if kind:
+                          by_level[level.upper()][kind]+=1
+                          findings.append({'level':level.upper(),'passage_id':p['id'],'sequence':p['sequence'],'target_id':tid,'form':r.get('form'),'stage':r.get('review_stage'),'representation':rep,'text_match':text_match,'question_target_match':qmatch,'kind':kind})
+          out={'schema_version':2,'date':'2026-08-19','language':'fr','status':'PASS' if not findings else 'FAIL','bound_hashes':hashes,'review_entries_scanned':total,'finding_count':len(findings),'by_level':{k:dict(v) for k,v in by_level.items()},'findings':findings,'method':'stanza==1.10.1 surface/lemma + target-question evidence; exact historical visibility repaired separately'}
+          (root/'reading/audit/french_review_target_visibility_post_a1_repair_2026-08-19.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'status':out['status'],'finding_count':out['finding_count'],'by_level':out['by_level'],'findings':findings[:100]},ensure_ascii=False,indent=2))
+          PY
+      - name: Annotate rebuilt coverage evidence and emit compact result
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('reading/audit/french_coverage_evidence_post_a1_visibility_2026-08-19.json')
+          x=json.loads(p.read_text(encoding='utf-8'))
+          x['schema_version']=4
+          x['supersedes_for_repaired_a1']=['reading/audit/french_coverage_evidence_2026-08-19.json','reading/audit/french_coverage_evidence_full_v2_2026-08-19.json']
+          x['post_a1_repair_method']={
+              'base_implementation_commit':'7634a9adfed00675d087b70edf5792a333ca03e9',
+              'stanza_version':'1.10.1',
+              'repository_function_forms':True,
+              'a1_fixed_expression_scope_checked':True,
+              'a1_support_lexicon_version':2,
+              'review_visibility_repair_applied':True,
+              'learner_mastery_inferred':False,
+              'estimated_known_token_coverage_population_allowed':False,
+              'auto_approval_allowed':False
+          }
+          p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          a1=x['coverage_summary_by_level']['A1']
+          compact={
+              'schema_version':1,'date':'2026-08-19','language':'fr','level':'A1',
+              'a1_hash':x['bound_canonical_hashes']['A1'],
+              'coverage_summary':a1,
+              'classification_counts_global':x['classification_counts'],
+              'chronology_findings':x['chronology_findings'],
+              'target_ledger_summary':x['target_ledger_summary'],
+              'a1_review_visibility':json.loads(Path('reading/audit/french_review_target_visibility_post_a1_repair_2026-08-19.json').read_text(encoding='utf-8')),
+              'decision':x['decision']
+          }
+          Path('reading/audit/french_a1_post_repair_regression_summary_2026-08-19.json').write_text(json.dumps(compact,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'a1_hash':compact['a1_hash'],'coverage_summary':a1,'chronology_findings':compact['chronology_findings'],'target_ledger_summary':compact['target_ledger_summary'],'visibility_status':compact['a1_review_visibility']['status'],'visibility_findings':compact['a1_review_visibility']['finding_count']},ensure_ascii=False,indent=2))
+          PY
+          rm -f reading/tools/audit_french_post_a1_visibility_runtime.py
+      - name: Commit rebuilt regression evidence
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/french/a1/passages.jsonl reading/audit/french_a1_review_visibility_repair_2026-08-19.json
+          git add reading/audit/french_a1_fixed_expression_scope_post_visibility_2026-08-19.json reading/audit/french_curriculum_exposure_ledger_post_a1_visibility_2026-08-19.json reading/audit/french_coverage_evidence_post_a1_visibility_2026-08-19.json reading/audit/french_review_target_visibility_post_a1_repair_2026-08-19.json reading/audit/french_a1_post_repair_regression_summary_2026-08-19.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Repair French A1 review visibility metadata [skip ci]'
+          git commit -m 'Rebuild French A1 coverage and exposure evidence [skip ci]'
           git push origin HEAD:repair/french-a1-coverage-2026-08-19
