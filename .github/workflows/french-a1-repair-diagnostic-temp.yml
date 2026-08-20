@@ -1,4 +1,4 @@
-name: French A1 high-priority spacing adjudication
+name: French A1 later review opportunity audit
 on:
   push:
     branches: [repair/french-a1-coverage-2026-08-19]
@@ -9,42 +9,45 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build high-priority R2/R3 timing histories
+      - name: Find later natural occurrences for high-priority targets
         run: |
           python - <<'PY'
-          import hashlib,json
-          from collections import defaultdict
+          import json,re,unicodedata
           from pathlib import Path
-          pth=Path('reading/french/a1/passages.jsonl')
-          rows=[json.loads(x) for x in pth.read_text(encoding='utf-8').splitlines() if x.strip()]
-          intro={}; meta={}
-          for p in rows:
-            for t in p.get('new_lexical_targets',[]):
-              if t['id'] not in intro:
-                intro[t['id']]=p['sequence']; meta[t['id']]={'introduced_in':p['id'],'introduced_sequence':p['sequence'],'form':t.get('form'),'lemma':t.get('lemma')}
-          histories=defaultdict(list)
-          for p in rows:
-            for r in p.get('review_lexical_targets',[]):
-              tid=r['id']; start=intro.get(tid)
-              histories[tid].append({'passage_id':p['id'],'sequence':p['sequence'],'stage':r.get('review_stage'),'representation':r.get('representation'),'form':r.get('form'),'offset':p['sequence']-start if start else None})
-          high=[]
-          for tid,h in histories.items():
-            early=[]
-            for e in h:
-              if e['stage']=='R3' and e['offset'] is not None and e['offset']<10: early.append({**e,'window':[10,14]})
-              elif e['stage']=='R2' and e['offset'] is not None and e['offset']<4: early.append({**e,'window':[4,6]})
-            if early:
-              high.append({'target_id':tid,**meta.get(tid,{}),'early_events':early,'full_review_history':h,'later_in_window_R3':[e for e in h if e['stage']=='R3' and e['offset'] is not None and 10<=e['offset']<=14],'later_in_window_R2':[e for e in h if e['stage']=='R2' and e['offset'] is not None and 4<=e['offset']<=6]})
-          high.sort(key=lambda x:(x.get('introduced_sequence') or 9999,x['target_id']))
-          out={'schema_version':1,'date':'2026-08-19','language':'fr','level':'A1','status':'ADJUDICATION_EVIDENCE_NOT_AUTOMATIC_DEFECT','a1_hash':hashlib.sha256(pth.read_bytes()).hexdigest(),'high_priority_target_count':len(high),'targets':high,'adjudication_rule':'Prioritize clearly premature R3/R2 labels that misstate the default progression; preserve the actual exposure. Relabel only where a later history supports the correct stage or where the earlier label is plainly inconsistent with the surrounding sequence.'}
-          Path('reading/audit/french_a1_high_priority_spacing_adjudication_2026-08-19.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print(json.dumps(out,ensure_ascii=False,indent=2))
+          rows=[json.loads(x) for x in Path('reading/french/a1/passages.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]
+          forms={
+            'fr-rank-0048':{'lemma':'ici','intro':1,'forms':['ici']},
+            'fr-rank-0047':{'lemma':'venir','intro':1,'forms':['venir','viens','vient','venons','venez','viennent','venu','venue','venus','venues']},
+            'fr-rank-0061':{'lemma':'quand','intro':2,'forms':['quand']},
+            'fr-rank-0063':{'lemma':'alors','intro':2,'forms':['alors']},
+            'fr-rank-0023':{'lemma':'vouloir','intro':3,'forms':['vouloir','veux','veut','voulons','voulez','veulent','voulu','voulue','voulus','voulues']},
+            'fr-rank-0035':{'lemma':'avec','intro':3,'forms':['avec']},
+            'fr-rank-0021':{'lemma':'pouvoir','intro':4,'forms':['pouvoir','peux','peut','pouvons','pouvez','peuvent','pu']},
+            'fr-rank-0039':{'lemma':'voir','intro':4,'forms':['voir','vois','voit','voyons','voyez','voient','vu','vue','vus','vues']},
+          }
+          def norm(s): return unicodedata.normalize('NFC',s).replace('’',"'").casefold()
+          out={}
+          for tid,d in forms.items():
+            hits=[]
+            for p in rows:
+              if p['sequence']<=d['intro']: continue
+              txt=norm(p['text']); found=[]
+              for f in d['forms']:
+                c=len(re.findall(r'(?<!\w)'+re.escape(norm(f))+r'(?!\w)',txt,flags=re.UNICODE))
+                if c: found.append([f,c])
+              qids=[q['id'] for q in p.get('questions',[]) if tid in q.get('target_ids',[])]
+              existing=[r for r in p.get('review_lexical_targets',[]) if r.get('id')==tid]
+              if found or qids or existing:
+                hits.append({'passage_id':p['id'],'sequence':p['sequence'],'offset':p['sequence']-d['intro'],'text_forms':found,'question_ids':qids,'existing_reviews':existing})
+            out[tid]={'lemma':d['lemma'],'intro':d['intro'],'hits':hits,'r3_window_hits':[h for h in hits if 10<=h['offset']<=14 and (h['text_forms'] or h['question_ids'])],'r2_window_hits':[h for h in hits if 4<=h['offset']<=6 and (h['text_forms'] or h['question_ids'])]}
+          Path('reading/audit/french_a1_later_review_opportunities_2026-08-19.json').write_text(json.dumps({'schema_version':1,'date':'2026-08-19','language':'fr','level':'A1','targets':out},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({tid:{'lemma':d['lemma'],'r2':d['r2_window_hits'],'r3':d['r3_window_hits']} for tid,d in out.items()},ensure_ascii=False,indent=2))
           PY
-      - name: Commit compact spacing evidence
+      - name: Commit opportunity evidence
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/audit/french_a1_high_priority_spacing_adjudication_2026-08-19.json
+          git add reading/audit/french_a1_later_review_opportunities_2026-08-19.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Summarize high-priority French A1 spacing candidates [skip ci]'
+          git commit -m 'Locate natural French A1 later review opportunities [skip ci]'
           git push origin HEAD:repair/french-a1-coverage-2026-08-19
