@@ -1,16 +1,18 @@
 name: TEMP French A1 review integrity repair
 on:
-  push:
-    branches: [repair/french-a1-review-integrity-2026-08-20]
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
 permissions:
   contents: write
 jobs:
   repair:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'repair/french-a1-review-integrity-2026-08-20'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: repair/french-a1-review-integrity-2026-08-20
+          ref: ${{ github.event.pull_request.head.ref }}
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -28,9 +30,7 @@ jobs:
           def norm(s):
             s=unicodedata.normalize('NFC',str(s or '')).replace('’',"'").replace('‘',"'").casefold().strip()
             return re.sub(r"^[^\w]+|[^\w]+$",'',s,flags=re.UNICODE)
-          findings=[]
-          histories={}
-          order={'R1':1,'R2':2,'R3':3,'R4':4,'R5':5,'long_term':6}
+          findings=[]; histories={}; order={'R1':1,'R2':2,'R3':3,'R4':4,'R5':5,'long_term':6}
           for p in rows:
             text=' '+norm(p['text'])+' '
             qtargets={tid for q in p.get('questions',[]) for tid in q.get('target_ids',[])}
@@ -38,8 +38,7 @@ jobs:
               tid=r['id']; lr=lex.get(tid,{})
               keys={norm(r.get('form')),norm(lr.get('form')),norm(lr.get('match_form')),norm(lr.get('lemma'))}-{''}
               visible=any(re.search(r'(?<!\w)'+re.escape(k)+r'(?!\w)',text) for k in keys) or tid in qtargets
-              if not visible:
-                findings.append({'passage_id':p['id'],'sequence':p['sequence'],'target_id':tid,'stage':r['review_stage'],'representation':r['representation'],'kind':'review_not_visible_after_repair'})
+              if not visible: findings.append({'passage_id':p['id'],'sequence':p['sequence'],'target_id':tid,'stage':r['review_stage'],'representation':r['representation'],'kind':'review_not_visible_after_repair'})
               histories.setdefault(tid,[]).append({'passage_id':p['id'],'sequence':p['sequence'],'stage':r['review_stage']})
           regressions=[]
           for tid,h in histories.items():
@@ -60,4 +59,4 @@ jobs:
           git add reading/french/a1/passages.jsonl reading/audit/french_a1_review_integrity_repair_2026-08-20.json reading/audit/french_a1_review_integrity_postrepair_2026-08-20.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Repair French A1 review integrity [skip ci]'
-          git push origin HEAD:repair/french-a1-review-integrity-2026-08-20
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
