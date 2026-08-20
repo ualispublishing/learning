@@ -1,0 +1,67 @@
+name: TEMP French A1 review integrity repair
+on:
+  push:
+    branches: [repair/french-a1-review-integrity-2026-08-20]
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply bounded metadata repair
+        run: python reading/tools/repair_french_a1_review_integrity.py
+      - name: Validate repaired A1 review visibility and chronology
+        run: |
+          python - <<'PY'
+          import json,re,unicodedata,hashlib
+          from pathlib import Path
+          root=Path('.')
+          path=root/'reading/french/a1/passages.jsonl'
+          rows=[json.loads(x) for x in path.read_text(encoding='utf-8').splitlines() if x.strip()]
+          lex={r['id']:r for r in [json.loads(x) for x in (root/'reading/lexicons/french.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]}
+          def norm(s):
+            s=unicodedata.normalize('NFC',str(s or '')).replace('’',"'").replace('‘',"'").casefold().strip()
+            return re.sub(r"^[^\w]+|[^\w]+$",'',s,flags=re.UNICODE)
+          findings=[]
+          introduced={}
+          stage_order={'R1':1,'R2':2,'R3':3,'R4':4,'R5':5,'long_term':6}
+          histories={}
+          for p in rows:
+            pid=p['id']; text=norm(p['text'])
+            qtargets={tid for q in p.get('questions',[]) for tid in q.get('target_ids',[])}
+            for t in p.get('new_lexical_targets',[]): introduced.setdefault(t['id'],p['sequence'])
+            for r in p.get('review_lexical_targets',[]):
+              tid=r['id']; lr=lex.get(tid,{})
+              keys={norm(r.get('form')),norm(lr.get('form')),norm(lr.get('match_form')),norm(lr.get('lemma'))}-{''}
+              token_visible=any(re.search(r'(?<!\w)'+re.escape(k)+r'(?!\w)',text) for k in keys)
+              task_visible=tid in qtargets
+              if not token_visible and not task_visible:
+                findings.append({'passage_id':pid,'sequence':p['sequence'],'target_id':tid,'kind':'review_not_visible_after_repair','severity':'major'})
+              histories.setdefault(tid,[]).append({'sequence':p['sequence'],'stage':r['review_stage'],'visible':token_visible or task_visible,'passage_id':pid})
+          # Chronology regression check after bounded repair.
+          regressions=[]
+          for tid,h in histories.items():
+            highest=0
+            for e in h:
+              cur=stage_order.get(e['stage'],0)
+              if cur < highest:
+                regressions.append({'target_id':tid,**e,'kind':'review_stage_regression'})
+              highest=max(highest,cur)
+          out={'schema_version':1,'date':'2026-08-20','language':'fr','level':'A1','bound_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'review_visibility_findings':findings,'review_visibility_finding_count':len(findings),'stage_regressions':regressions,'stage_regression_count':len(regressions),'note':'Surface/token validation is a deterministic postrepair check; unresolved semantic spacing adequacy remains separately adjudicated.'}
+          (root/'reading/audit/french_a1_review_integrity_postrepair_2026-08-20.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'visibility_findings':len(findings),'stage_regressions':len(regressions)},ensure_ascii=False,indent=2))
+          if findings or regressions:
+            raise SystemExit('postrepair review-integrity audit still has deterministic findings')
+          PY
+      - name: Commit repaired A1 and audit evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/french/a1/passages.jsonl reading/audit/french_a1_review_integrity_repair_2026-08-20.json reading/audit/french_a1_review_integrity_postrepair_2026-08-20.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Repair French A1 review integrity [skip ci]'
+          git push origin HEAD:repair/french-a1-review-integrity-2026-08-20
