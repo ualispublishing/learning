@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-20",
+  "language": "ur",
+  "level": "A1",
+  "unit": 8,
+  "bound_canonical_sha256": "b4fcf0bbc07d62cd3e743b8d0a6d49df2d6b0df3d03aa892384d0501a7ef1d4a",
+  "status": "STAGING_VALIDATION_FAIL",
+  "canonical_promotion": "BLOCKED",
+  "staging_path": "reading/urdu/a1/staging/unit08",
+  "sequences": [
+    43,
+    44,
+    45,
+    46,
+    47,
+    48
+  ],
+  "passages": 6,
+  "questions": 60,
+  "answers": 60,
+  "word_counts": [
+    108,
+    112,
+    114,
+    113,
+    108,
+    120
+  ],
+  "new_targets": [
+    "والدین",
+    "خاندان",
+    "گفتگو",
+    "آواز",
+    "خط",
+    "دوسرا",
+    "بجلی",
+    "چیز",
+    "پورا",
+    "باقی"
+  ],
+  "source_lexicon": "urdu_top1000.csv",
+  "source_lexicon_mutated": false,
+  "checks": {
+    "six_passages": true,
+    "sequences_contiguous": true,
+    "a1_word_band_90_140": true,
+    "word_count_metadata_checked": true,
+    "sentence_count_metadata_checked": true,
+    "ten_questions_each": true,
+    "ten_answers_each": true,
+    "question_answer_linkage": true,
+    "question_targets_locally_declared": true,
+    "new_target_forms_visible": true,
+    "new_target_exposure_counts_checked": true,
+    "declared_running_text_reviews_visible": false,
+    "source_identity_checked": true,
+    "target_collisions_zero": true,
+    "within_unit_first_introduction_order_checked": true,
+    "p06_zero_new_targets": true,
+    "learner_facing_roman_script_zero": true
+  },
+  "problems": [
+    {
+      "file": "ur-a1-u08-p05.json",
+      "kind": "running_text_review_not_visible",
+      "id": "ur-rank-0488",
+      "form": "ہفتے"
+    }
+  ],
+  "record_evidence": [
+    {
+      "file": "ur-a1-u08-p01.json",
+      "id": "ur-a1-u08-p01",
+      "sequence": 43,
+      "word_count_actual": 108,
+      "sentence_count_actual": 8,
+      "new_targets": [
+        {
+          "id": "ur-rank-0430",
+          "form": "والدین",
+          "occurrences": 4
+        },
+        {
+          "id": "ur-rank-0460",
+          "form": "خاندان",
+          "occurrences": 3
+        }
+      ]
+    },
+    {
+      "file": "ur-a1-u08-p02.json",
+      "id": "ur-a1-u08-p02",
+      "sequence": 44,
+      "word_count_actual": 112,
+      "sentence_count_actual": 8,
+      "new_targets": [
+        {
+          "id": "ur-rank-0435",
+          "form": "گفتگو",
+          "occurrences": 3
+        },
+        {
+          "id": "ur-rank-0412",
+          "form": "آواز",
+          "occurrences": 3
+        }
+      ]
+    },
+    {
+      "file": "ur-a1-u08-p03.json",
+      "id": "ur-a1-u08-p03",
+      "sequence": 45,
+      "word_count_actual": 114,
+      "sentence_count_actual": 7,
+      "new_targets": [
+        {
+          "id": "ur-rank-0459",
+          "form": "خط",
+          "occurrences": 5
+        },
+        {
+          "id": "ur-rank-0443",
+          "form": "دوسرا",
+          "occurrences": 2
+        }
+      ]
+    },
+    {
+      "file": "ur-a1-u08-p04.json",
+      "id": "ur-a1-u08-p04",
+      "sequence": 46,
+      "word_count_actual": 113,
+      "sentence_count_actual": 9,
+      "new_targets": [
+        {
+          "id": "ur-rank-0456",
+          "form": "بجلی",
+          "occurrences": 5
+        },
+        {
+          "id": "ur-rank-0402",
+          "form": "چیز",
+          "occurrences": 3
+        }
+      ]
+    },
+    {
+      "file": "ur-a1-u08-p05.json",
+      "id": "ur-a1-u08-p05",
+      "sequence": 47,
+      "word_count_actual": 108,
+      "sentence_count_actual": 9,
+      "new_targets": [
+        {
+          "id": "ur-rank-0403",
+          "form": "پورا",
+          "occurrences": 5
+        },
+        {
+          "id": "ur-rank-0445",
+          "form": "باقی",
+          "occurrences": 3
+        }
+      ]
+    },
+    {
+      "file": "ur-a1-u08-p06.json",
+      "id": "ur-a1-u08-p06",
+      "sequence": 48,
+      "word_count_actual": 120,
+      "sentence_count_actual": 7,
+      "new_targets": []
+    }
+  ],
+  "formal_final_audit": "deferred under generation-first policy",
+  "promotion_precondition": "The stacked Unit07 frontier is present on this branch; main still requires the earlier Urdu promotion stack before Unit08 can ever be canonicalized.",
+  "next_generation_frontier_after_promotion": "Unit 09 sequences 49-54",
+  "release_effect": "Staging/generation progress only; Urdu remains non-release-ready."
+}
