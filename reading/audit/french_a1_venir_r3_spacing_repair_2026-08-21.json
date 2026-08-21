@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-21",
+  "language": "fr",
+  "level": "A1",
+  "target_id": "fr-rank-0047",
+  "lemma": "venir",
+  "status": "PASS_NATURAL_R3_SPACING_REPAIR",
+  "before_sha256": "42c6455db972afd1fe6158a2f58c6e9ed2725204dd12aa80a4f7961ef1b130d5",
+  "after_sha256": "a79455b1a94eccff136d78fab34ab36fe0fbf681d16e147e0c00d7ba7815cd68",
+  "introduction_sequence": 1,
+  "validated_r2_sequence": 6,
+  "repaired_r3_sequence": 14,
+  "r3_spacing_from_introduction": 13,
+  "intended_r3_window": [
+    10,
+    14
+  ],
+  "surface": "viennent",
+  "surface_kind": "high_confidence_inflected_form",
+  "passage_id": "fr-a1-u03-p02",
+  "text_change": {
+    "before_first_sentence": "Le lendemain, Camille et Sami cherchent une personne qui peut répondre à leurs questions sur la bibliothèque.",
+    "after_first_sentence": "Le lendemain, Camille et Sami viennent à la bibliothèque pour obtenir des informations sur leur projet."
+  },
+  "word_count_after": 105,
+  "revision_after": 5,
+  "checks": {
+    "story_context_preserved": true,
+    "a1_word_band_90_140": true,
+    "r2_preserved": true,
+    "r3_declared_running_text": true,
+    "r3_surface_visible": true,
+    "r3_spacing_in_window": true
+  },
+  "limitations": "Deterministic corpus repair; independent native/educator review remains required.",
+  "release_effect": "Closes the known French venir R3 spacing defect, but French release status still depends on the broader review/audit gates."
+}
