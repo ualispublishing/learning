@@ -1,6 +1,6 @@
 {
   "audit": "urdu_a1_final_deterministic_audit",
-  "generated_at_utc": "2026-08-22T19:42:45.202457+00:00",
+  "generated_at_utc": "2026-08-22T19:43:44.129670+00:00",
   "status": "FAIL_DETERMINISTIC_FINAL_AUDIT",
   "scope": "deterministic final-audit controls only; no automated semantic, naturalness, pedagogical, native-speaker, educator, or release approval",
   "policy_basis": [
@@ -140,6 +140,7 @@
   "notes": [
     "Duplicate-prompt rejection is scoped within each passage; cross-passage repetition is not treated as a deterministic defect.",
     "Legacy quality/review metadata inside generated records is not treated as current independent final-review evidence.",
+    "Future-target exposure uses the same-unit prospective scope used by the verified Urdu promotion runner; incidental use in an earlier unit is not reclassified retroactively as a target-introduction defect.",
     "Future-target exposure uses the same-unit prospective scope used by the verified Urdu promotion runner; incidental use in an earlier unit is not reclassified retroactively as a target-introduction defect."
   ],
   "audit_correction": {
