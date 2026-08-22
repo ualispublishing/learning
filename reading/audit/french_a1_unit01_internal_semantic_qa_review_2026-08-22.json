@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "unit": 1,
+  "review_kind": "internal_semantic_pedagogical_qa_review",
+  "status": "FINDINGS_RECORDED_NEEDS_BOUNDED_REPAIR_AND_INDEPENDENT_REVIEW",
+  "bound_a1_sha256": "b509f77c71e28505f80efaf202cb36cd5c45c5646bbd86cbf9773daf0743d037",
+  "scope": {"passages":6,"questions":60,"answers":60},
+  "standard": "reading/planning/TEN_QUESTION_STANDARD.md",
+  "confirmed_metadata_findings": {
+    "kind": "direct_target_teaching_question_missing_target_ids",
+    "count": 15,
+    "reason": "The current ten-question standard requires a question that directly teaches a flashcard/lexical target to record its target ID when the schema supports it.",
+    "items": [
+      {"passage_id":"fr-a1-u01-p01","question_id":"q3","required_target_ids":["fr-rank-0048"]},
+      {"passage_id":"fr-a1-u01-p01","question_id":"q4","required_target_ids":["fr-rank-0047"]},
+      {"passage_id":"fr-a1-u01-p01","question_id":"q5","required_target_ids":["fr-rank-0048"]},
+      {"passage_id":"fr-a1-u01-p02","question_id":"q3","required_target_ids":["fr-rank-0061"]},
+      {"passage_id":"fr-a1-u01-p02","question_id":"q4","required_target_ids":["fr-rank-0063"]},
+      {"passage_id":"fr-a1-u01-p02","question_id":"q5","required_target_ids":["fr-rank-0061","fr-rank-0063"]},
+      {"passage_id":"fr-a1-u01-p03","question_id":"q3","required_target_ids":["fr-rank-0023"]},
+      {"passage_id":"fr-a1-u01-p03","question_id":"q4","required_target_ids":["fr-rank-0035"]},
+      {"passage_id":"fr-a1-u01-p03","question_id":"q5","required_target_ids":["fr-rank-0023"]},
+      {"passage_id":"fr-a1-u01-p04","question_id":"q3","required_target_ids":["fr-rank-0021"]},
+      {"passage_id":"fr-a1-u01-p04","question_id":"q4","required_target_ids":["fr-rank-0039"]},
+      {"passage_id":"fr-a1-u01-p04","question_id":"q5","required_target_ids":["fr-rank-0021"]},
+      {"passage_id":"fr-a1-u01-p05","question_id":"q2","required_target_ids":["fr-rank-0060"]},
+      {"passage_id":"fr-a1-u01-p05","question_id":"q3","required_target_ids":["fr-rank-0057"]},
+      {"passage_id":"fr-a1-u01-p05","question_id":"q5","required_target_ids":["fr-rank-0057"]}
+    ],
+    "learner_facing_text_change_required": false,
+    "answer_change_required": false
+  },
+  "high_confidence_pedagogical_simplification_candidates": [
+    {
+      "passage_id":"fr-a1-u01-p01","question_id":"q10",
+      "issue":"A1 prompt uses the technical word « locuteur » unnecessarily.",
+      "current":"Pour parler de l’endroit où se trouve le locuteur, quel mot convient : « ici » ou « demain » ?",
+      "proposed":"Pour parler de l’endroit où tu es, quel mot convient : « ici » ou « demain » ?",
+      "answer_unchanged":"ici"
+    },
+    {
+      "passage_id":"fr-a1-u01-p05","question_id":"q10",
+      "issue":"A1 prompt uses the technical word « locuteur » unnecessarily.",
+      "current":"Pour désigner un endroit déjà montré mais pas forcément tout près du locuteur, quel mot convient ici : « là » ou « demain » ?",
+      "proposed":"Pour parler d’un endroit déjà montré mais pas forcément tout près, quel mot convient : « là » ou « demain » ?",
+      "answer_unchanged":"là"
+    }
+  ],
+  "additional_review_candidates_not_yet_confirmed_for_repair": [
+    {"passage_id":"fr-a1-u01-p05","question_id":"q9","note":"Consider simplifying « je vais en prendre un au marché » to avoid an unnecessary pronoun/implicit-unit burden while testing prendre."},
+    {"passage_id":"fr-a1-u01-p06","answer_id":"a1","note":"« utiliser ses différents endroits » is understandable but may be less idiomatic than a simpler A1 formulation."},
+    {"passage_id":"fr-a1-u01-p06","answer_id":"a3","note":"The keyed answer uses comparatively advanced wording (« fréquente régulièrement »); consider simplifying after independent pedagogical review."}
+  ],
+  "positive_checks": [
+    "All 6 passages have 10 linked questions and 10 linked answers.",
+    "P06 introduces zero new lexical targets and uses review targets only.",
+    "No confirmed answer-key contradiction was found in this internal Unit 01 pass.",
+    "The 15 target-linkage findings are metadata linkage omissions; they do not require changing learner-facing passage prose or keyed answers."
+  ],
+  "limitations": "Internal model review only. This artifact is not native-professional, educator, blind, external-tool, or independent-model-family approval.",
+  "release_effect": "NONE_AUTOMATIC: keep French REOPEN_REQUIRED. Repair confirmed metadata/linkage defects fail-closed, independently adjudicate wording candidates, then rerun affected deterministic gates."
+}
