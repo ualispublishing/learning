@@ -1,0 +1,334 @@
+{
+  "audit": "urdu_a1_final_deterministic_audit",
+  "generated_at_utc": "2026-08-22T19:41:03.983166+00:00",
+  "status": "FAIL_DETERMINISTIC_FINAL_AUDIT",
+  "scope": "deterministic final-audit controls only; no automated semantic, naturalness, pedagogical, native-speaker, educator, or release approval",
+  "policy_basis": [
+    "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
+    "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md"
+  ],
+  "source": {
+    "path": "reading/urdu/a1/passages.jsonl",
+    "expected_sha256": "3673ec71bf52d6d01ae11e8fd864eebc7f5fe1c3acac2ae19e4e2229ee14b728",
+    "actual_sha256": "3673ec71bf52d6d01ae11e8fd864eebc7f5fe1c3acac2ae19e4e2229ee14b728",
+    "hash_bound": true
+  },
+  "counts": {
+    "passages": 60,
+    "questions": 600,
+    "answers": 600,
+    "units": 10,
+    "new_lexical_target_declarations": 100,
+    "duplicate_prompts_within_passage": 0,
+    "learner_facing_roman_script_findings": 0,
+    "exact_target_visibility_misses": 0,
+    "violations": 1
+  },
+  "checks": {
+    "source_corpus_sha256_exact": true,
+    "jsonl_parse": true,
+    "passage_count_exact_60": true,
+    "passage_ids_unique": true,
+    "sequences_contiguous_1_60": true,
+    "units_exact_1_10": true,
+    "six_passages_per_unit": true,
+    "language_ur_and_cefr_a1": true,
+    "unit_and_id_sequence_alignment": true,
+    "a1_word_band_90_140": true,
+    "stored_word_count_matches_whitespace_count": true,
+    "ten_questions_and_answers_each": true,
+    "question_and_answer_counts_600_each": true,
+    "question_answer_ids_and_linkage": true,
+    "nonempty_learner_content": true,
+    "urdu_script_present_in_text": true,
+    "learner_facing_roman_script_zero": true,
+    "duplicate_prompts_within_passage_zero": true,
+    "question_targets_locally_declared": true,
+    "new_target_id_collisions_zero": true,
+    "new_targets_visible_exact_token": true,
+    "running_text_reviews_visible_exact_token": true,
+    "two_new_targets_p01_p05": true,
+    "p06_zero_new_and_reviews_all_unit_targets": true,
+    "p06_fluency_speed_policy": true,
+    "premature_future_target_exposure_zero_exact_token": false
+  },
+  "violations": [
+    {
+      "code": "premature_future_target_exposure_zero_exact_token",
+      "detail": [
+        {
+          "target_id": "ur-rank-0059",
+          "form": "اب",
+          "introduced_sequence": 5,
+          "earlier_sequence": 2
+        },
+        {
+          "target_id": "ur-rank-0052",
+          "form": "ہم",
+          "introduced_sequence": 5,
+          "earlier_sequence": 4
+        },
+        {
+          "target_id": "ur-rank-0124",
+          "form": "پانی",
+          "introduced_sequence": 13,
+          "earlier_sequence": 2
+        },
+        {
+          "target_id": "ur-rank-0115",
+          "form": "کیونکہ",
+          "introduced_sequence": 13,
+          "earlier_sequence": 11
+        },
+        {
+          "target_id": "ur-rank-0110",
+          "form": "ضرورت",
+          "introduced_sequence": 14,
+          "earlier_sequence": 3
+        },
+        {
+          "target_id": "ur-rank-0231",
+          "form": "چند",
+          "introduced_sequence": 14,
+          "earlier_sequence": 5
+        },
+        {
+          "target_id": "ur-rank-0233",
+          "form": "تیار",
+          "introduced_sequence": 16,
+          "earlier_sequence": 2
+        },
+        {
+          "target_id": "ur-rank-0167",
+          "form": "اپنا",
+          "introduced_sequence": 17,
+          "earlier_sequence": 2
+        },
+        {
+          "target_id": "ur-rank-0161",
+          "form": "اہم",
+          "introduced_sequence": 17,
+          "earlier_sequence": 8
+        },
+        {
+          "target_id": "ur-rank-0097",
+          "form": "دوست",
+          "introduced_sequence": 19,
+          "earlier_sequence": 2
+        },
+        {
+          "target_id": "ur-rank-0101",
+          "form": "لوگ",
+          "introduced_sequence": 20,
+          "earlier_sequence": 3
+        },
+        {
+          "target_id": "ur-rank-0165",
+          "form": "بچے",
+          "introduced_sequence": 20,
+          "earlier_sequence": 10
+        },
+        {
+          "target_id": "ur-rank-0143",
+          "form": "گھر",
+          "introduced_sequence": 21,
+          "earlier_sequence": 1
+        },
+        {
+          "target_id": "ur-rank-0238",
+          "form": "شخص",
+          "introduced_sequence": 22,
+          "earlier_sequence": 19
+        },
+        {
+          "target_id": "ur-rank-0182",
+          "form": "دوسری",
+          "introduced_sequence": 23,
+          "earlier_sequence": 2
+        },
+        {
+          "target_id": "ur-rank-0286",
+          "form": "سوال",
+          "introduced_sequence": 25,
+          "earlier_sequence": 10
+        },
+        {
+          "target_id": "ur-rank-0276",
+          "form": "جواب",
+          "introduced_sequence": 25,
+          "earlier_sequence": 9
+        },
+        {
+          "target_id": "ur-rank-0352",
+          "form": "کتاب",
+          "introduced_sequence": 26,
+          "earlier_sequence": 2
+        },
+        {
+          "target_id": "ur-rank-0351",
+          "form": "یاد",
+          "introduced_sequence": 26,
+          "earlier_sequence": 5
+        },
+        {
+          "target_id": "ur-rank-0293",
+          "form": "قریب",
+          "introduced_sequence": 27,
+          "earlier_sequence": 5
+        },
+        {
+          "target_id": "ur-rank-0295",
+          "form": "واپس",
+          "introduced_sequence": 29,
+          "earlier_sequence": 4
+        },
+        {
+          "target_id": "ur-rank-0377",
+          "form": "پہلا",
+          "introduced_sequence": 32,
+          "earlier_sequence": 25
+        },
+        {
+          "target_id": "ur-rank-0447",
+          "form": "صبح",
+          "introduced_sequence": 33,
+          "earlier_sequence": 2
+        },
+        {
+          "target_id": "ur-rank-0433",
+          "form": "شام",
+          "introduced_sequence": 33,
+          "earlier_sequence": 2
+        },
+        {
+          "target_id": "ur-rank-0455",
+          "form": "فون",
+          "introduced_sequence": 34,
+          "earlier_sequence": 9
+        },
+        {
+          "target_id": "ur-rank-0439",
+          "form": "اگلے",
+          "introduced_sequence": 37,
+          "earlier_sequence": 4
+        },
+        {
+          "target_id": "ur-rank-0488",
+          "form": "ہفتے",
+          "introduced_sequence": 37,
+          "earlier_sequence": 3
+        },
+        {
+          "target_id": "ur-rank-0615",
+          "form": "بجے",
+          "introduced_sequence": 38,
+          "earlier_sequence": 4
+        },
+        {
+          "target_id": "ur-rank-0619",
+          "form": "منٹ",
+          "introduced_sequence": 38,
+          "earlier_sequence": 9
+        },
+        {
+          "target_id": "ur-rank-0487",
+          "form": "دوبارہ",
+          "introduced_sequence": 41,
+          "earlier_sequence": 9
+        },
+        {
+          "target_id": "ur-rank-0460",
+          "form": "خاندان",
+          "introduced_sequence": 43,
+          "earlier_sequence": 19
+        },
+        {
+          "target_id": "ur-rank-0412",
+          "form": "آواز",
+          "introduced_sequence": 44,
+          "earlier_sequence": 10
+        },
+        {
+          "target_id": "ur-rank-0443",
+          "form": "دوسرا",
+          "introduced_sequence": 45,
+          "earlier_sequence": 36
+        },
+        {
+          "target_id": "ur-rank-0402",
+          "form": "چیز",
+          "introduced_sequence": 46,
+          "earlier_sequence": 14
+        },
+        {
+          "target_id": "ur-rank-0403",
+          "form": "پورا",
+          "introduced_sequence": 47,
+          "earlier_sequence": 4
+        },
+        {
+          "target_id": "ur-rank-0445",
+          "form": "باقی",
+          "introduced_sequence": 47,
+          "earlier_sequence": 1
+        },
+        {
+          "target_id": "ur-rank-0409",
+          "form": "ہاں",
+          "introduced_sequence": 51,
+          "earlier_sequence": 5
+        },
+        {
+          "target_id": "ur-rank-0365",
+          "form": "نیا",
+          "introduced_sequence": 56,
+          "earlier_sequence": 5
+        },
+        {
+          "target_id": "ur-rank-0397",
+          "form": "اکثر",
+          "introduced_sequence": 57,
+          "earlier_sequence": 27
+        },
+        {
+          "target_id": "ur-rank-0383",
+          "form": "ملاقات",
+          "introduced_sequence": 58,
+          "earlier_sequence": 24
+        },
+        {
+          "target_id": "ur-rank-0390",
+          "form": "پسند",
+          "introduced_sequence": 58,
+          "earlier_sequence": 13
+        },
+        {
+          "target_id": "ur-rank-0392",
+          "form": "جسم",
+          "introduced_sequence": 59,
+          "earlier_sequence": 52
+        }
+      ]
+    }
+  ],
+  "status_json_observation": {
+    "present": true,
+    "used_as_release_approval_evidence": false,
+    "sha256": "cc182a8c21fbf0deb03c8f2505b97960d8eb818703a2b8e563779fe05d0a2a47",
+    "generated_at_utc": null,
+    "note": "STATUS.json predates or may lag the final Urdu generation frontier; this audit does not use it as approval evidence."
+  },
+  "independent_review": {
+    "semantic_accuracy": "PENDING",
+    "urdu_naturalness_and_orthography": "PENDING",
+    "pedagogical_a1_fit": "PENDING",
+    "assessment_quality": "PENDING",
+    "educator_release_review": "PENDING"
+  },
+  "release_effect": "NONE_AUTOMATIC: Urdu A1 remains non-release-ready until the required independent semantic/naturalness/pedagogical and educator release reviews are completed.",
+  "notes": [
+    "Exact Unicode token-sequence matching is used for Urdu lexical visibility and premature-exposure checks; substring matching is intentionally forbidden (for example, ہاں does not match within یہاں).",
+    "Duplicate-prompt rejection is scoped within each passage; cross-passage repetition is not treated as a deterministic defect.",
+    "Legacy quality/review metadata inside generated records is not treated as current independent final-review evidence."
+  ]
+}
