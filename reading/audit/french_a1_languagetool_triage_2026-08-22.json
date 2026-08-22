@@ -1,0 +1,4059 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "audit": "languagetool_contextual_triage_inventory",
+  "bound_sha256": "fe9f321ada5740baf264c009ce0b5eb845777927f37f99f03e7459c5ae72b64c",
+  "source_scan": "reading/audit/french_a1_languagetool_fullscan_2026-08-22.json",
+  "raw_finding_count": 231,
+  "classification_counts": {
+    "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL": 20,
+    "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION": 30,
+    "MANUAL_CONTEXT_REVIEW": 93,
+    "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT": 57,
+    "STYLE_SIGNAL_NEEDS_CONTEXT": 31
+  },
+  "status": "MECHANICAL_TRIAGE_COMPLETE_CONTEXTUAL_ADJUDICATION_PENDING",
+  "items": [
+    {
+      "finding_index": 1,
+      "passage_id": "fr-a1-u01-p01",
+      "field": "question_prompt",
+      "item_id": "q3",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 68,
+      "replacements": [],
+      "source_text": "Que signifie « ici » dans « Je vais travailler ici chaque soir » ? A) dans cet endroit B) demain C) dans une autre ville",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 2,
+      "passage_id": "fr-a1-u01-p01",
+      "field": "question_prompt",
+      "item_id": "q3",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 88,
+      "replacements": [],
+      "source_text": "Que signifie « ici » dans « Je vais travailler ici chaque soir » ? A) dans cet endroit B) demain C) dans une autre ville",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 3,
+      "passage_id": "fr-a1-u01-p01",
+      "field": "question_prompt",
+      "item_id": "q4",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 58,
+      "replacements": [],
+      "source_text": "Dans « Tu veux venir avec moi ? », que propose la mère ? A) d’aller avec elle B) de rester seule C) de dormir",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 4,
+      "passage_id": "fr-a1-u01-p01",
+      "field": "question_prompt",
+      "item_id": "q4",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 79,
+      "replacements": [],
+      "source_text": "Dans « Tu veux venir avec moi ? », que propose la mère ? A) d’aller avec elle B) de rester seule C) de dormir",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 5,
+      "passage_id": "fr-a1-u01-p01",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "ACCORD_R_PERS_VERBE",
+      "category": "CAT_GRAMMAIRE",
+      "message": "Vérifiez l’accord entre le pronom « je » et le verbe « vient ».",
+      "matched_text": "vient",
+      "offset_in_field": 58,
+      "replacements": [
+        "viens"
+      ],
+      "source_text": "Choisis la forme correcte : « Je viens avec toi » ou « Je vient avec toi » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 6,
+      "passage_id": "fr-a1-u01-p01",
+      "field": "answer",
+      "item_id": "a5",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "ici",
+      "offset_in_field": 0,
+      "replacements": [
+        "Ici"
+      ],
+      "source_text": "ici.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 7,
+      "passage_id": "fr-a1-u01-p01",
+      "field": "answer",
+      "item_id": "a9",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "venir",
+      "offset_in_field": 0,
+      "replacements": [
+        "Venir"
+      ],
+      "source_text": "venir",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 8,
+      "passage_id": "fr-a1-u01-p02",
+      "field": "text",
+      "item_id": null,
+      "rule_id": "VIRGULE_DEBUT_DE_PHRASE",
+      "category": "PONCTUATION_VIRGULE",
+      "message": "Une virgule semble être requise dans ce contexte.",
+      "matched_text": " elle",
+      "offset_in_field": 248,
+      "replacements": [
+        ", elle"
+      ],
+      "source_text": "Le lendemain, Camille prépare son sac avant l’école. Quand elle regarde l’heure, il est encore tôt. Elle mange donc tranquillement, puis elle met deux cahiers dans son sac. Quand sa mère lui dit qu’il est presque huit heures, Camille se lève. Alors elle prend sa veste et va vers la porte. Dans la rue, elle rencontre son voisin Sami, qui va dans la même direction. Ils marchent ensemble jusqu’au carrefour. Quand le feu devient vert, ils traversent. Alors Camille voit l’école devant eux et elle sait qu’ils ne sont pas en retard. Après les cours, elle rentre chez elle. Quand elle ouvre la porte de sa chambre, elle pose son sac au même endroit qu’hier. Alors sa journée d’école est vraiment terminée.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 9,
+      "passage_id": "fr-a1-u01-p02",
+      "field": "question_prompt",
+      "item_id": "q1",
+      "rule_id": "FR_REPEATEDWORDS_PRESQUE",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "presque",
+      "offset_in_field": 49,
+      "replacements": [
+        "bientôt",
+        "quasiment",
+        "approximativement"
+      ],
+      "source_text": "Que fait Camille quand sa mère lui dit qu’il est presque huit heures ?",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 10,
+      "passage_id": "fr-a1-u01-p02",
+      "field": "question_prompt",
+      "item_id": "q3",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 57,
+      "replacements": [],
+      "source_text": "Dans le texte, « quand » sert surtout à indiquer quoi ? A) le moment où une action arrive B) un lieu C) une quantité",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 11,
+      "passage_id": "fr-a1-u01-p02",
+      "field": "question_prompt",
+      "item_id": "q3",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 91,
+      "replacements": [],
+      "source_text": "Dans le texte, « quand » sert surtout à indiquer quoi ? A) le moment où une action arrive B) un lieu C) une quantité",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 12,
+      "passage_id": "fr-a1-u01-p02",
+      "field": "question_prompt",
+      "item_id": "q4",
+      "rule_id": "FR_REPEATEDWORDS_PRESQUE",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "presque",
+      "offset_in_field": 36,
+      "replacements": [
+        "bientôt",
+        "quasiment",
+        "approximativement"
+      ],
+      "source_text": "Que montre « alors » après « il est presque huit heures » ? A) l’action qui suit cette information B) une action de la veille C) une personne",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 13,
+      "passage_id": "fr-a1-u01-p02",
+      "field": "question_prompt",
+      "item_id": "q4",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 61,
+      "replacements": [],
+      "source_text": "Que montre « alors » après « il est presque huit heures » ? A) l’action qui suit cette information B) une action de la veille C) une personne",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 14,
+      "passage_id": "fr-a1-u01-p02",
+      "field": "question_prompt",
+      "item_id": "q4",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 100,
+      "replacements": [],
+      "source_text": "Que montre « alors » après « il est presque huit heures » ? A) l’action qui suit cette information B) une action de la veille C) une personne",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 15,
+      "passage_id": "fr-a1-u01-p02",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "quand",
+      "offset_in_field": 2,
+      "replacements": [
+        "Quand"
+      ],
+      "source_text": "« quand ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 16,
+      "passage_id": "fr-a1-u01-p03",
+      "field": "text",
+      "item_id": null,
+      "rule_id": "ACCORD_R_PERS_VERBE",
+      "category": "CAT_GRAMMAIRE",
+      "message": "Vérifiez l’accord avec le sujet.",
+      "matched_text": "court",
+      "offset_in_field": 529,
+      "replacements": [
+        "cours"
+      ],
+      "source_text": "Après les cours, Sami passe chez Camille avec un livre. Camille veut finir ses devoirs, mais elle veut aussi montrer son nouveau quartier à Sami. Elle regarde la page qu’elle doit lire et décide de travailler d’abord. Sami s’assoit avec elle à la table. Il lit son livre pendant que Camille écrit. Vingt minutes plus tard, Camille ferme son cahier. Elle prend une bouteille d’eau et sort avec Sami. Ils vont avec le petit frère de Camille jusqu’au parc. Le garçon veut jouer au ballon ; il regarde les enfants qui jouent déjà et court vers eux. Camille et Sami restent près d’un arbre. Ils parlent de l’école et du quartier, puis ils rentrent avec le petit frère avant le dîner.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 17,
+      "passage_id": "fr-a1-u01-p03",
+      "field": "question_prompt",
+      "item_id": "q3",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 65,
+      "replacements": [],
+      "source_text": "Que comprend-on quand le petit frère « veut jouer au ballon » ? A) il a envie de jouer B) il a déjà fini de jouer C) il refuse de voir le ballon",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 18,
+      "passage_id": "fr-a1-u01-p03",
+      "field": "question_prompt",
+      "item_id": "q3",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 88,
+      "replacements": [],
+      "source_text": "Que comprend-on quand le petit frère « veut jouer au ballon » ? A) il a envie de jouer B) il a déjà fini de jouer C) il refuse de voir le ballon",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 19,
+      "passage_id": "fr-a1-u01-p03",
+      "field": "question_prompt",
+      "item_id": "q4",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 48,
+      "replacements": [],
+      "source_text": "Dans ce texte, « avec » indique surtout quoi ? A) des personnes ensemble B) un moment du passé C) un lieu éloigné",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 20,
+      "passage_id": "fr-a1-u01-p03",
+      "field": "question_prompt",
+      "item_id": "q4",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 74,
+      "replacements": [],
+      "source_text": "Dans ce texte, « avec » indique surtout quoi ? A) des personnes ensemble B) un moment du passé C) un lieu éloigné",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 21,
+      "passage_id": "fr-a1-u01-p03",
+      "field": "question_prompt",
+      "item_id": "q8",
+      "rule_id": "ACCORD_R_PERS_VERBE",
+      "category": "CAT_GRAMMAIRE",
+      "message": "Vérifiez l’accord entre le pronom « je » et le verbe « veut ».",
+      "matched_text": "veut",
+      "offset_in_field": 55,
+      "replacements": [
+        "veux"
+      ],
+      "source_text": "Choisis la forme correcte : « Je veux sortir » ou « Je veut sortir » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 22,
+      "passage_id": "fr-a1-u01-p03",
+      "field": "answer",
+      "item_id": "a5",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "veut",
+      "offset_in_field": 0,
+      "replacements": [
+        "Veut"
+      ],
+      "source_text": "veut.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 23,
+      "passage_id": "fr-a1-u01-p03",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "avec",
+      "offset_in_field": 2,
+      "replacements": [
+        "Avec"
+      ],
+      "source_text": "« avec ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 24,
+      "passage_id": "fr-a1-u01-p03",
+      "field": "answer",
+      "item_id": "a9",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "voulons",
+      "offset_in_field": 0,
+      "replacements": [
+        "Voulons"
+      ],
+      "source_text": "voulons",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 25,
+      "passage_id": "fr-a1-u01-p04",
+      "field": "question_prompt",
+      "item_id": "q3",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 51,
+      "replacements": [],
+      "source_text": "Que signifie « peut » dans « elle peut entrer » ? A) elle est capable de le faire B) elle doit partir C) elle l’a fait hier",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 26,
+      "passage_id": "fr-a1-u01-p04",
+      "field": "question_prompt",
+      "item_id": "q3",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 83,
+      "replacements": [],
+      "source_text": "Que signifie « peut » dans « elle peut entrer » ? A) elle est capable de le faire B) elle doit partir C) elle l’a fait hier",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 27,
+      "passage_id": "fr-a1-u01-p04",
+      "field": "question_prompt",
+      "item_id": "q4",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 62,
+      "replacements": [],
+      "source_text": "Que fait Camille quand elle « voit » Sami près de l’entrée ? A) elle le remarque avec ses yeux B) elle lui téléphone sans le voir C) elle quitte la ville",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 28,
+      "passage_id": "fr-a1-u01-p04",
+      "field": "question_prompt",
+      "item_id": "q4",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 96,
+      "replacements": [],
+      "source_text": "Que fait Camille quand elle « voit » Sami près de l’entrée ? A) elle le remarque avec ses yeux B) elle lui téléphone sans le voir C) elle quitte la ville",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 29,
+      "passage_id": "fr-a1-u01-p04",
+      "field": "answer",
+      "item_id": "a5",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "pouvons",
+      "offset_in_field": 0,
+      "replacements": [
+        "Pouvons"
+      ],
+      "source_text": "pouvons.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 30,
+      "passage_id": "fr-a1-u01-p04",
+      "field": "answer",
+      "item_id": "a9",
+      "rule_id": "VOIR_REGARDER",
+      "category": "CAT_TOURS_CRITIQUES",
+      "message": "Une autre structure semble plus appropriée.",
+      "matched_text": "vois",
+      "offset_in_field": 0,
+      "replacements": [
+        "regardes"
+      ],
+      "source_text": "vois",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 31,
+      "passage_id": "fr-a1-u01-p05",
+      "field": "question_prompt",
+      "item_id": "q2",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 58,
+      "replacements": [],
+      "source_text": "Dans le marché, que signifie « prendre quatre pommes » ? A) les choisir et les mettre dans le sac B) les regarder sans les toucher C) les vendre",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 32,
+      "passage_id": "fr-a1-u01-p05",
+      "field": "question_prompt",
+      "item_id": "q2",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 99,
+      "replacements": [],
+      "source_text": "Dans le marché, que signifie « prendre quatre pommes » ? A) les choisir et les mettre dans le sac B) les regarder sans les toucher C) les vendre",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 33,
+      "passage_id": "fr-a1-u01-p05",
+      "field": "question_prompt",
+      "item_id": "q3",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 62,
+      "replacements": [],
+      "source_text": "À quel endroit « là » renvoie-t-il quand Camille voit Sami ? A) au marché, près du stand de fleurs B) à l’école C) dans sa chambre",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 34,
+      "passage_id": "fr-a1-u01-p05",
+      "field": "question_prompt",
+      "item_id": "q3",
+      "rule_id": "UNPAIRED_BRACKETS",
+      "category": "PUNCTUATION",
+      "message": "Pas de correspondance fermante ou ouvrante pour le caractère « ( »",
+      "matched_text": ")",
+      "offset_in_field": 100,
+      "replacements": [],
+      "source_text": "À quel endroit « là » renvoie-t-il quand Camille voit Sami ? A) au marché, près du stand de fleurs B) à l’école C) dans sa chambre",
+      "classification": "MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL",
+      "rationale": "LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses."
+    },
+    {
+      "finding_index": 35,
+      "passage_id": "fr-a1-u01-p05",
+      "field": "question_prompt",
+      "item_id": "q8",
+      "rule_id": "ACCORD_R_PERS_VERBE",
+      "category": "CAT_GRAMMAIRE",
+      "message": "Vérifiez l’accord entre le pronom « Elle » et le verbe « prennent ».",
+      "matched_text": "Elle prennent",
+      "offset_in_field": 63,
+      "replacements": [
+        "Elles prennent",
+        "Elle prend",
+        "Elle prenne"
+      ],
+      "source_text": "Choisis la phrase correcte : « Elle prend quatre pommes » ou « Elle prennent quatre pommes » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 36,
+      "passage_id": "fr-a1-u01-p05",
+      "field": "question_prompt",
+      "item_id": "q10",
+      "rule_id": "PLACE_DE_LA_VIRGULE",
+      "category": "PONCTUATION_VIRGULE",
+      "message": "Une virgule est conseillée dans ce contexte.",
+      "matched_text": " mais",
+      "offset_in_field": 36,
+      "replacements": [
+        ", mais"
+      ],
+      "source_text": "Pour parler d’un endroit déjà montré mais pas forcément tout près, quel mot convient : « là » ou « demain » ?",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 37,
+      "passage_id": "fr-a1-u01-p05",
+      "field": "answer",
+      "item_id": "a5",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "là",
+      "offset_in_field": 0,
+      "replacements": [
+        "Là"
+      ],
+      "source_text": "là.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 38,
+      "passage_id": "fr-a1-u01-p05",
+      "field": "answer",
+      "item_id": "a9",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "prendre",
+      "offset_in_field": 0,
+      "replacements": [
+        "Prendre"
+      ],
+      "source_text": "prendre",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 39,
+      "passage_id": "fr-a1-u01-p06",
+      "field": "answer",
+      "item_id": "a6",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "ici",
+      "offset_in_field": 0,
+      "replacements": [
+        "Ici"
+      ],
+      "source_text": "ici",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 40,
+      "passage_id": "fr-a1-u01-p06",
+      "field": "answer",
+      "item_id": "a10",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "quand",
+      "offset_in_field": 2,
+      "replacements": [
+        "Quand"
+      ],
+      "source_text": "« quand ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 41,
+      "passage_id": "fr-a1-u02-p01",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "tu",
+      "offset_in_field": 2,
+      "replacements": [
+        "Tu"
+      ],
+      "source_text": "« tu vas faire un cours ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 42,
+      "passage_id": "fr-a1-u02-p01",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "aller",
+      "offset_in_field": 0,
+      "replacements": [
+        "Aller"
+      ],
+      "source_text": "aller",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 43,
+      "passage_id": "fr-a1-u02-p02",
+      "field": "text",
+      "item_id": null,
+      "rule_id": "QUOI_FAIRE",
+      "category": "CAT_REGLES_DE_BASE",
+      "message": "Cette structure peut sembler familière dans un contexte formel.",
+      "matched_text": "quoi faire",
+      "offset_in_field": 330,
+      "replacements": [
+        "que faire",
+        "comment faire"
+      ],
+      "source_text": "Après le cours, Camille reçoit un message de sa mère. Elle doit lui dire à quelle heure elle rentre. Camille regarde l’horloge, mais elle ne sait pas encore si elle va prendre le bus ou marcher avec Sami. Elle demande l’heure du prochain bus à l’accueil. L’employée lui dit qu’il arrive dans dix minutes. Maintenant, Camille sait quoi faire. Elle écrit à sa mère : « Je prends le bus de quatre heures et je serai bientôt à la maison. » Sami préfère marcher. Avant de partir, il dit au revoir à Camille. Dans le bus, Camille regarde le quartier par la fenêtre. Elle aime savoir où elle est et pouvoir dire clairement quand elle va arriver.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 44,
+      "passage_id": "fr-a1-u02-p02",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "FR_SPELLING_RULE",
+      "category": "TYPOS",
+      "message": "Faute de frappe possible trouvée.",
+      "matched_text": "saitent",
+      "offset_in_field": 66,
+      "replacements": [
+        "s'aient",
+        "s'aident",
+        "s'éteint",
+        "s'étend",
+        "vêtement",
+        "fêtent",
+        "sautent",
+        "sèment",
+        "bêtement",
+        "sainement",
+        "vêtent",
+        "tètent",
+        "Sérent",
+        "pètent",
+        "sartent",
+        "spittent",
+        "saintement"
+      ],
+      "source_text": "Choisis la forme correcte : « Camille sait l’heure » ou « Camille saitent l’heure ».",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 45,
+      "passage_id": "fr-a1-u02-p02",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "dire",
+      "offset_in_field": 0,
+      "replacements": [
+        "Dire"
+      ],
+      "source_text": "dire",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 46,
+      "passage_id": "fr-a1-u02-p03",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "si",
+      "offset_in_field": 2,
+      "replacements": [
+        "Si"
+      ],
+      "source_text": "« si ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 47,
+      "passage_id": "fr-a1-u02-p03",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "devoir",
+      "offset_in_field": 0,
+      "replacements": [
+        "Devoir"
+      ],
+      "source_text": "devoir",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 48,
+      "passage_id": "fr-a1-u02-p04",
+      "field": "title",
+      "item_id": null,
+      "rule_id": "POINT",
+      "category": "PONCTUATION_POINT",
+      "message": "Un point est requis pour indiquer la fin de cette phrase.",
+      "matched_text": "table",
+      "offset_in_field": 22,
+      "replacements": [
+        "table."
+      ],
+      "source_text": "Mon carnet est sur la table",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 49,
+      "passage_id": "fr-a1-u02-p04",
+      "field": "question_prompt",
+      "item_id": "q4",
+      "rule_id": "SUR_ACCENT",
+      "category": "CAT_HOMONYMES_PARONYMES",
+      "message": "Cet adjectif comporte un accent circonflexe pour le différencier avec la préposition « sur ».",
+      "matched_text": "sur",
+      "offset_in_field": 15,
+      "replacements": [
+        "sûr"
+      ],
+      "source_text": "Que signifie « sur » dans « le carnet est sur un livre » ?",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 50,
+      "passage_id": "fr-a1-u02-p04",
+      "field": "question_prompt",
+      "item_id": "q6",
+      "rule_id": "SUR_ACCENT",
+      "category": "CAT_HOMONYMES_PARONYMES",
+      "message": "Cet adjectif comporte un accent circonflexe pour le différencier avec la préposition « sur ».",
+      "matched_text": "sur",
+      "offset_in_field": 53,
+      "replacements": [
+        "sûr"
+      ],
+      "source_text": "Dans une phrase de lieu, que signifie généralement « sur » ?",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 51,
+      "passage_id": "fr-a1-u02-p04",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « carnet ».",
+      "matched_text": "ma carnet",
+      "offset_in_field": 61,
+      "replacements": [
+        "mon carnet"
+      ],
+      "source_text": "Pour parler de son carnet, Camille dit : « mon carnet » ou « ma carnet » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 52,
+      "passage_id": "fr-a1-u02-p04",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "mon",
+      "offset_in_field": 2,
+      "replacements": [
+        "Mon"
+      ],
+      "source_text": "« mon carnet ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 53,
+      "passage_id": "fr-a1-u02-p04",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "mon",
+      "offset_in_field": 0,
+      "replacements": [
+        "Mon"
+      ],
+      "source_text": "mon carnet",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 54,
+      "passage_id": "fr-a1-u02-p05",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "plus",
+      "offset_in_field": 2,
+      "replacements": [
+        "Plus"
+      ],
+      "source_text": "« plus ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 55,
+      "passage_id": "fr-a1-u02-p05",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "tout",
+      "offset_in_field": 0,
+      "replacements": [
+        "Tout"
+      ],
+      "source_text": "tout",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 56,
+      "passage_id": "fr-a1-u02-p06",
+      "field": "question_prompt",
+      "item_id": "q2",
+      "rule_id": "FR_REPEATEDWORDS_FACILEMENT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "facilement",
+      "offset_in_field": 49,
+      "replacements": [
+        "simplement",
+        "aisément",
+        "amplement",
+        "naturellement"
+      ],
+      "source_text": "Où Camille met-elle son carnet pour le retrouver facilement ?",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 57,
+      "passage_id": "fr-a1-u02-p06",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « sac ».",
+      "matched_text": "ma sac",
+      "offset_in_field": 45,
+      "replacements": [
+        "mon sac"
+      ],
+      "source_text": "Quelle forme est correcte : « mon sac » ou « ma sac » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 58,
+      "passage_id": "fr-a1-u02-p06",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "mon",
+      "offset_in_field": 0,
+      "replacements": [
+        "Mon"
+      ],
+      "source_text": "mon sac",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 59,
+      "passage_id": "fr-a1-u03-p01",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "CET_CE",
+      "category": "CAT_GRAMMAIRE",
+      "message": "Excepté devant une voyelle ou une voyelle précédée d’un « h » muet, il convient d’utiliser « ce ».",
+      "matched_text": "cet",
+      "offset_in_field": 47,
+      "replacements": [
+        "ce"
+      ],
+      "source_text": "Choisis la forme correcte : « ce projet » ou « cet projet » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 60,
+      "passage_id": "fr-a1-u03-p01",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "ce",
+      "offset_in_field": 2,
+      "replacements": [
+        "Ce"
+      ],
+      "source_text": "« ce projet ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 61,
+      "passage_id": "fr-a1-u03-p01",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "ce",
+      "offset_in_field": 0,
+      "replacements": [
+        "Ce"
+      ],
+      "source_text": "ce projet",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 62,
+      "passage_id": "fr-a1-u03-p02",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "qui",
+      "offset_in_field": 2,
+      "replacements": [
+        "Qui"
+      ],
+      "source_text": "« qui ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 63,
+      "passage_id": "fr-a1-u03-p02",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "mais",
+      "offset_in_field": 0,
+      "replacements": [
+        "Mais"
+      ],
+      "source_text": "mais",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 64,
+      "passage_id": "fr-a1-u03-p03",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "nous",
+      "offset_in_field": 2,
+      "replacements": [
+        "Nous"
+      ],
+      "source_text": "« nous avons des informations ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 65,
+      "passage_id": "fr-a1-u03-p03",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "nous",
+      "offset_in_field": 0,
+      "replacements": [
+        "Nous"
+      ],
+      "source_text": "nous",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 66,
+      "passage_id": "fr-a1-u03-p04",
+      "field": "text",
+      "item_id": null,
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « lit ».",
+      "matched_text": "la lit",
+      "offset_in_field": 269,
+      "replacements": [
+        "la lite",
+        "le lit"
+      ],
+      "source_text": "Vendredi matin, Camille relit la page du projet. Elle trouve que le titre est bien placé, mais une phrase est trop longue. Sami lui demande : « Tu veux que je la change ? » Camille répond : « Oui, mais laisse-moi essayer d’abord. » Elle écrit une phrase plus courte et la lit à voix haute. Sami dit que c’est bien. Puis il montre une image et demande : « Cette photo est pour moi ou pour la page ? » Camille rit : « Pour la page ! » Ils corrigent encore deux petits détails. À la fin, Camille se sent bien : le travail est simple, clair et facile à lire. Elle garde la dernière vérification pour elle et coche chaque élément de la liste.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 67,
+      "passage_id": "fr-a1-u03-p04",
+      "field": "text",
+      "item_id": null,
+      "rule_id": "VIRGULE_DEBUT_DE_PHRASE",
+      "category": "PONCTUATION_VIRGULE",
+      "message": "Une virgule semble être requise dans ce contexte.",
+      "matched_text": " il",
+      "offset_in_field": 319,
+      "replacements": [
+        ", il"
+      ],
+      "source_text": "Vendredi matin, Camille relit la page du projet. Elle trouve que le titre est bien placé, mais une phrase est trop longue. Sami lui demande : « Tu veux que je la change ? » Camille répond : « Oui, mais laisse-moi essayer d’abord. » Elle écrit une phrase plus courte et la lit à voix haute. Sami dit que c’est bien. Puis il montre une image et demande : « Cette photo est pour moi ou pour la page ? » Camille rit : « Pour la page ! » Ils corrigent encore deux petits détails. À la fin, Camille se sent bien : le travail est simple, clair et facile à lire. Elle garde la dernière vérification pour elle et coche chaque élément de la liste.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 68,
+      "passage_id": "fr-a1-u03-p04",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "cette",
+      "offset_in_field": 2,
+      "replacements": [
+        "Cette"
+      ],
+      "source_text": "« cette photo est pour moi ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 69,
+      "passage_id": "fr-a1-u03-p04",
+      "field": "answer",
+      "item_id": "a9",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "bien",
+      "offset_in_field": 0,
+      "replacements": [
+        "Bien"
+      ],
+      "source_text": "bien",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 70,
+      "passage_id": "fr-a1-u03-p04",
+      "field": "answer",
+      "item_id": "a10",
+      "rule_id": "VIRGULE_DEBUT_DE_PHRASE",
+      "category": "PONCTUATION_VIRGULE",
+      "message": "Une virgule semble être requise dans ce contexte.",
+      "matched_text": "moi",
+      "offset_in_field": 0,
+      "replacements": [
+        "moi,"
+      ],
+      "source_text": "moi",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 71,
+      "passage_id": "fr-a1-u03-p05",
+      "field": "question_prompt",
+      "item_id": "q4",
+      "rule_id": "FR_REPEATEDWORDS_LENTEMENT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "lentement",
+      "offset_in_field": 41,
+      "replacements": [
+        "doucement",
+        "progressivement",
+        "petit à petit"
+      ],
+      "source_text": "À qui renvoie « ils » dans « Ils parlent lentement » ?",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 72,
+      "passage_id": "fr-a1-u03-p05",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "ACCORD_R_PERS_VERBE",
+      "category": "CAT_GRAMMAIRE",
+      "message": "Vérifiez l’accord entre le pronom « ils » et le verbe « montre ».",
+      "matched_text": "ils montre",
+      "offset_in_field": 64,
+      "replacements": [
+        "il montre",
+        "ils montrent"
+      ],
+      "source_text": "Choisis la phrase correcte : « ils montrent leurs images » ou « ils montre leurs images » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 73,
+      "passage_id": "fr-a1-u03-p05",
+      "field": "question_prompt",
+      "item_id": "q10",
+      "rule_id": "PRONOMS_PERSONNELS_MINUSCULE",
+      "category": "CASING",
+      "message": "La majuscule n’est employée qu’au début d’une phrase ou pour les noms propres (noms, toponymes, etc.).",
+      "matched_text": ": — Tu",
+      "offset_in_field": 9,
+      "replacements": [
+        ":. — Tu",
+        ": — tu",
+        ": —. Tu",
+        ": — : Tu"
+      ],
+      "source_text": "Complète : — Tu viens avec nous ? — _____.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 74,
+      "passage_id": "fr-a1-u03-p05",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "ils",
+      "offset_in_field": 2,
+      "replacements": [
+        "Ils"
+      ],
+      "source_text": "« ils montrent leurs images ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 75,
+      "passage_id": "fr-a1-u03-p05",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "oui",
+      "offset_in_field": 0,
+      "replacements": [
+        "Oui"
+      ],
+      "source_text": "oui",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 76,
+      "passage_id": "fr-a1-u03-p06",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "nous",
+      "offset_in_field": 0,
+      "replacements": [
+        "Nous"
+      ],
+      "source_text": "nous pouvons améliorer",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 77,
+      "passage_id": "fr-a1-u03-p06",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "POINT",
+      "category": "PONCTUATION_POINT",
+      "message": "Un point est requis pour indiquer la fin de cette phrase.",
+      "matched_text": "améliorer",
+      "offset_in_field": 13,
+      "replacements": [
+        "améliorer.",
+        "améliorer…"
+      ],
+      "source_text": "nous pouvons améliorer",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 78,
+      "passage_id": "fr-a1-u03-p06",
+      "field": "answer",
+      "item_id": "a10",
+      "rule_id": "VIRGULE_DEBUT_DE_PHRASE",
+      "category": "PONCTUATION_VIRGULE",
+      "message": "Une virgule semble être requise dans ce contexte.",
+      "matched_text": "moi",
+      "offset_in_field": 0,
+      "replacements": [
+        "moi,"
+      ],
+      "source_text": "moi",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 79,
+      "passage_id": "fr-a1-u04-p01",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "REP_TRES",
+      "category": "REPETITIONS_STYLE",
+      "message": "Un mot est répété, et peut sembler familier dans un contexte formel.",
+      "matched_text": "très",
+      "offset_in_field": 54,
+      "replacements": [
+        "vraiment",
+        "extrêmement",
+        "réellement",
+        "hyper",
+        "absolument"
+      ],
+      "source_text": "Complète : « Le premier cahier est _____ grand. » — « très » ou « beaucoup » ?",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 80,
+      "passage_id": "fr-a1-u04-p01",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "REP_TRES",
+      "category": "REPETITIONS_STYLE",
+      "message": "Un mot est répété, et peut sembler familier dans un contexte formel.",
+      "matched_text": "très",
+      "offset_in_field": 2,
+      "replacements": [
+        "vraiment",
+        "extrêmement",
+        "réellement",
+        "hyper",
+        "absolument"
+      ],
+      "source_text": "« très ».",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 81,
+      "passage_id": "fr-a1-u04-p01",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "autre",
+      "offset_in_field": 0,
+      "replacements": [
+        "Autre"
+      ],
+      "source_text": "autre",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 82,
+      "passage_id": "fr-a1-u04-p02",
+      "field": "text",
+      "item_id": null,
+      "rule_id": "PUIS_QUE",
+      "category": "CAT_GRAMMAIRE",
+      "message": "« Puisque » indique la cause alors que « puis que » est un synonyme de « après que ».",
+      "matched_text": "puis qu’",
+      "offset_in_field": 591,
+      "replacements": [
+        "puisqu'"
+      ],
+      "source_text": "Jeudi, Camille doit terminer un exercice avant le dîner. Elle regarde l’horloge et voit qu’elle a encore assez de temps. Elle commence à six heures. Elle travaille toujours à la table du salon quand elle doit se concentrer. Après vingt minutes, son frère lui demande de jouer. Camille répond qu’elle veut finir d’abord. Elle prend encore dix minutes pour relire ses réponses. À six heures trente, elle ferme son cahier. Elle a utilisé son temps sans se dépêcher. Sa mère lui demande comment elle organise ses devoirs. Camille explique qu’elle commence toujours par le travail le plus court, puis qu’elle regarde combien de temps il lui reste pour les autres tâches.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 83,
+      "passage_id": "fr-a1-u04-p02",
+      "field": "text",
+      "item_id": null,
+      "rule_id": "VIRG_NON_TROUVEE",
+      "category": "PONCTUATION_VIRGULE",
+      "message": "Une virgule est requise.",
+      "matched_text": " il",
+      "offset_in_field": 628,
+      "replacements": [
+        ", il"
+      ],
+      "source_text": "Jeudi, Camille doit terminer un exercice avant le dîner. Elle regarde l’horloge et voit qu’elle a encore assez de temps. Elle commence à six heures. Elle travaille toujours à la table du salon quand elle doit se concentrer. Après vingt minutes, son frère lui demande de jouer. Camille répond qu’elle veut finir d’abord. Elle prend encore dix minutes pour relire ses réponses. À six heures trente, elle ferme son cahier. Elle a utilisé son temps sans se dépêcher. Sa mère lui demande comment elle organise ses devoirs. Camille explique qu’elle commence toujours par le travail le plus court, puis qu’elle regarde combien de temps il lui reste pour les autres tâches.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 84,
+      "passage_id": "fr-a1-u04-p02",
+      "field": "question_prompt",
+      "item_id": "q4",
+      "rule_id": "REP_TOUJOURS",
+      "category": "REPETITIONS_STYLE",
+      "message": "Dans un contexte formel, d’autres structures peuvent être utilisées pour enrichir votre style.",
+      "matched_text": "toujours",
+      "offset_in_field": 48,
+      "replacements": [
+        "constamment",
+        "à chaque fois",
+        "absolument",
+        "encore",
+        "éternellement"
+      ],
+      "source_text": "Que signifie « toujours » dans « elle travaille toujours à la table » ?",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 85,
+      "passage_id": "fr-a1-u04-p02",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "REP_TOUJOURS",
+      "category": "REPETITIONS_STYLE",
+      "message": "Dans un contexte formel, d’autres structures peuvent être utilisées pour enrichir votre style.",
+      "matched_text": "toujours",
+      "offset_in_field": 61,
+      "replacements": [
+        "constamment",
+        "à chaque fois",
+        "absolument",
+        "encore",
+        "éternellement"
+      ],
+      "source_text": "Complète : « Elle travaille _____ à la table du salon. » — « toujours » ou « très » ?",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 86,
+      "passage_id": "fr-a1-u04-p02",
+      "field": "question_prompt",
+      "item_id": "q8",
+      "rule_id": "REP_TOUJOURS",
+      "category": "REPETITIONS_STYLE",
+      "message": "Dans un contexte formel, d’autres structures peuvent être utilisées pour enrichir votre style.",
+      "matched_text": "toujours",
+      "offset_in_field": 49,
+      "replacements": [
+        "constamment",
+        "à chaque fois",
+        "absolument",
+        "encore",
+        "éternellement"
+      ],
+      "source_text": "Pour une habitude régulière, lequel convient : « toujours » ou « autre » ?",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 87,
+      "passage_id": "fr-a1-u04-p02",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "REP_TOUJOURS",
+      "category": "REPETITIONS_STYLE",
+      "message": "Dans un contexte formel, d’autres structures peuvent être utilisées pour enrichir votre style.",
+      "matched_text": "toujours",
+      "offset_in_field": 2,
+      "replacements": [
+        "constamment",
+        "à chaque fois",
+        "absolument",
+        "encore",
+        "éternellement"
+      ],
+      "source_text": "« toujours ».",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 88,
+      "passage_id": "fr-a1-u04-p02",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "REP_TOUJOURS",
+      "category": "REPETITIONS_STYLE",
+      "message": "Dans un contexte formel, d’autres structures peuvent être utilisées pour enrichir votre style.",
+      "matched_text": "toujours",
+      "offset_in_field": 0,
+      "replacements": [
+        "constamment",
+        "à chaque fois",
+        "absolument",
+        "encore",
+        "éternellement"
+      ],
+      "source_text": "toujours",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 89,
+      "passage_id": "fr-a1-u04-p02",
+      "field": "answer",
+      "item_id": "a10",
+      "rule_id": "REP_TOUJOURS",
+      "category": "REPETITIONS_STYLE",
+      "message": "Dans un contexte formel, d’autres structures peuvent être utilisées pour enrichir votre style.",
+      "matched_text": "toujours",
+      "offset_in_field": 0,
+      "replacements": [
+        "constamment",
+        "à chaque fois",
+        "absolument",
+        "encore",
+        "éternellement"
+      ],
+      "source_text": "toujours",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 90,
+      "passage_id": "fr-a1-u04-p03",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "encore",
+      "offset_in_field": 2,
+      "replacements": [
+        "Encore"
+      ],
+      "source_text": "« encore ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 91,
+      "passage_id": "fr-a1-u04-p03",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "personne",
+      "offset_in_field": 0,
+      "replacements": [
+        "Personne"
+      ],
+      "source_text": "personne",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 92,
+      "passage_id": "fr-a1-u04-p04",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "avant",
+      "offset_in_field": 2,
+      "replacements": [
+        "Avant"
+      ],
+      "source_text": "« avant ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 93,
+      "passage_id": "fr-a1-u04-p04",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "jour",
+      "offset_in_field": 0,
+      "replacements": [
+        "Jour"
+      ],
+      "source_text": "jour",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 94,
+      "passage_id": "fr-a1-u04-p05",
+      "field": "answer",
+      "item_id": "a6",
+      "rule_id": "OU_LEQUEL",
+      "category": "STYLE",
+      "message": "Un autre pronom relatif peut sembler plus approprié dans le langage formel.",
+      "matched_text": "où",
+      "offset_in_field": 24,
+      "replacements": [
+        "avec lequel",
+        "auquel",
+        "sur lequel",
+        "dans lequel",
+        "sous lequel"
+      ],
+      "source_text": "Le logement ou le foyer où une personne habite.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 95,
+      "passage_id": "fr-a1-u04-p05",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "après",
+      "offset_in_field": 2,
+      "replacements": [
+        "Après"
+      ],
+      "source_text": "« après ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 96,
+      "passage_id": "fr-a1-u04-p05",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "après",
+      "offset_in_field": 0,
+      "replacements": [
+        "Après"
+      ],
+      "source_text": "après",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 97,
+      "passage_id": "fr-a1-u04-p06",
+      "field": "text",
+      "item_id": null,
+      "rule_id": "QUOI_FAIRE",
+      "category": "CAT_REGLES_DE_BASE",
+      "message": "Cette structure peut sembler familière dans un contexte formel.",
+      "matched_text": "quoi faire",
+      "offset_in_field": 667,
+      "replacements": [
+        "que faire",
+        "comment faire"
+      ],
+      "source_text": "Camille remarque qu’elle organise mieux ses journées. Dans un magasin, elle peut choisir un autre objet quand le premier ne convient pas, et elle compare très simplement les options. Pour ses devoirs, elle regarde le temps disponible et travaille toujours dans un endroit calme. À la bibliothèque, elle peut attendre encore quelques minutes avec les autres personnes. Chaque jour, elle prépare son sac avant de partir, puis elle vérifie ce qu’il contient. Après ses activités, elle rentre à la maison et prépare la suite. Ces habitudes ne rendent pas chaque journée parfaite, mais elles l’aident à perdre moins de temps. Camille se sent plus calme parce qu’elle sait quoi faire avant et après les moments importants.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 98,
+      "passage_id": "fr-a1-u04-p06",
+      "field": "answer",
+      "item_id": "a5",
+      "rule_id": "QUOI_FAIRE",
+      "category": "CAT_REGLES_DE_BASE",
+      "message": "Cette structure peut sembler familière dans un contexte formel.",
+      "matched_text": "quoi faire",
+      "offset_in_field": 25,
+      "replacements": [
+        "que faire",
+        "comment faire"
+      ],
+      "source_text": "Parce qu’elle sait mieux quoi faire avant et après les moments importants.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 99,
+      "passage_id": "fr-a1-u04-p06",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "avant",
+      "offset_in_field": 0,
+      "replacements": [
+        "Avant"
+      ],
+      "source_text": "avant",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 100,
+      "passage_id": "fr-a1-u05-p01",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « matin ».",
+      "matched_text": "la matin",
+      "offset_in_field": 46,
+      "replacements": [
+        "le matin"
+      ],
+      "source_text": "Choisis la forme correcte : « le matin » ou « la matin » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 101,
+      "passage_id": "fr-a1-u05-p01",
+      "field": "answer",
+      "item_id": "a6",
+      "rule_id": "OU",
+      "category": "CAT_HOMONYMES_PARONYMES",
+      "message": "Un adverbe semble plus approprié.",
+      "matched_text": "ou",
+      "offset_in_field": 19,
+      "replacements": [
+        "où"
+      ],
+      "source_text": "Une unité de temps ou un moment indiqué par l’horloge.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 102,
+      "passage_id": "fr-a1-u05-p01",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "le",
+      "offset_in_field": 2,
+      "replacements": [
+        "Le"
+      ],
+      "source_text": "« le matin ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 103,
+      "passage_id": "fr-a1-u05-p01",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "heure",
+      "offset_in_field": 0,
+      "replacements": [
+        "Heure"
+      ],
+      "source_text": "heure",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 104,
+      "passage_id": "fr-a1-u05-p02",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « soir ».",
+      "matched_text": "la soir",
+      "offset_in_field": 45,
+      "replacements": [
+        "la soire",
+        "le soir"
+      ],
+      "source_text": "Choisis la forme correcte : « le soir » ou « la soir » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 105,
+      "passage_id": "fr-a1-u05-p02",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "le",
+      "offset_in_field": 2,
+      "replacements": [
+        "Le"
+      ],
+      "source_text": "« le soir ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 106,
+      "passage_id": "fr-a1-u05-p02",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "semaine",
+      "offset_in_field": 0,
+      "replacements": [
+        "Semaine"
+      ],
+      "source_text": "semaine",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 107,
+      "passage_id": "fr-a1-u05-p03",
+      "field": "answer",
+      "item_id": "a4",
+      "rule_id": "FR_REPEATEDWORDS_PRÉCISÉMENT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "précisément",
+      "offset_in_field": 33,
+      "replacements": [
+        "exactement",
+        "concrètement",
+        "justement",
+        "réellement"
+      ],
+      "source_text": "Un objet ou un élément non nommé précisément.",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 108,
+      "passage_id": "fr-a1-u05-p03",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "une",
+      "offset_in_field": 2,
+      "replacements": [
+        "Une"
+      ],
+      "source_text": "« une autre chose ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 109,
+      "passage_id": "fr-a1-u05-p03",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "chose",
+      "offset_in_field": 0,
+      "replacements": [
+        "Chose"
+      ],
+      "source_text": "chose",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 110,
+      "passage_id": "fr-a1-u05-p04",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « place ».",
+      "matched_text": "un place",
+      "offset_in_field": 47,
+      "replacements": [
+        "un placé",
+        "une place"
+      ],
+      "source_text": "Choisis la forme correcte : « une place » ou « un place » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 111,
+      "passage_id": "fr-a1-u05-p04",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "une",
+      "offset_in_field": 2,
+      "replacements": [
+        "Une"
+      ],
+      "source_text": "« une place ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 112,
+      "passage_id": "fr-a1-u05-p04",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "question",
+      "offset_in_field": 0,
+      "replacements": [
+        "Question"
+      ],
+      "source_text": "question",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 113,
+      "passage_id": "fr-a1-u05-p05",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "ACCORD_CHAQUE",
+      "category": "CAT_GRAMMAIRE",
+      "message": "« chaque » et « enfants » ne semblent pas bien accordés en nombre.",
+      "matched_text": "chaque enfants",
+      "offset_in_field": 71,
+      "replacements": [
+        "chaque enfant"
+      ],
+      "source_text": "Choisis la phrase correcte : « chaque enfant reçoit une feuille » ou « chaque enfants reçoit une feuille » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 114,
+      "passage_id": "fr-a1-u05-p05",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "chaque",
+      "offset_in_field": 2,
+      "replacements": [
+        "Chaque"
+      ],
+      "source_text": "« chaque enfant reçoit une feuille ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 115,
+      "passage_id": "fr-a1-u05-p05",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "enfant",
+      "offset_in_field": 0,
+      "replacements": [
+        "Enfant"
+      ],
+      "source_text": "enfant",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 116,
+      "passage_id": "fr-a1-u05-p06",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « question ».",
+      "matched_text": "un question",
+      "offset_in_field": 50,
+      "replacements": [
+        "une question",
+        "des questions"
+      ],
+      "source_text": "Choisis la forme correcte : « une question » ou « un question » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 117,
+      "passage_id": "fr-a1-u05-p06",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "une",
+      "offset_in_field": 2,
+      "replacements": [
+        "Une"
+      ],
+      "source_text": "« une question ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 118,
+      "passage_id": "fr-a1-u05-p06",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "enfant",
+      "offset_in_field": 0,
+      "replacements": [
+        "Enfant"
+      ],
+      "source_text": "enfant",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 119,
+      "passage_id": "fr-a1-u06-p01",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "peu",
+      "offset_in_field": 2,
+      "replacements": [
+        "Peu"
+      ],
+      "source_text": "« peu ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 120,
+      "passage_id": "fr-a1-u06-p01",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "beaucoup",
+      "offset_in_field": 0,
+      "replacements": [
+        "Beaucoup"
+      ],
+      "source_text": "beaucoup",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 121,
+      "passage_id": "fr-a1-u06-p02",
+      "field": "text",
+      "item_id": null,
+      "rule_id": "VIRGULE_DEBUT_DE_PHRASE",
+      "category": "PONCTUATION_VIRGULE",
+      "message": "Une virgule semble être requise dans ce contexte.",
+      "matched_text": " elle",
+      "offset_in_field": 199,
+      "replacements": [
+        ", elle"
+      ],
+      "source_text": "Cette semaine, Camille a déjà terminé plusieurs devoirs avant le soir. Mercredi, elle ouvre son agenda et voit encore trois exercices. Elle pense d’abord qu’il y en a trop pour une seule soirée. Puis elle remarque qu’un exercice est déjà presque fini. Elle le termine en dix minutes. Il reste alors deux tâches courtes. Camille décide de faire une petite pause avant de continuer. À la fin du soir, tout est terminé. Elle comprend que le mot « trop » dépend parfois du temps disponible et de la taille des tâches. Comme elle avait déjà commencé le travail plus tôt dans la semaine, la soirée est finalement calme.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 122,
+      "passage_id": "fr-a1-u06-p02",
+      "field": "question_prompt",
+      "item_id": "q4",
+      "rule_id": "FR_REPEATEDWORDS_PRESQUE",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "presque",
+      "offset_in_field": 34,
+      "replacements": [
+        "bientôt",
+        "quasiment",
+        "approximativement"
+      ],
+      "source_text": "Que signifie « déjà » dans « déjà presque fini » ?",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 123,
+      "passage_id": "fr-a1-u06-p02",
+      "field": "answer",
+      "item_id": "a4",
+      "rule_id": "FR_REPEATEDWORDS_PRESQUE",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "presque",
+      "offset_in_field": 17,
+      "replacements": [
+        "bientôt",
+        "quasiment",
+        "approximativement"
+      ],
+      "source_text": "L’exercice était presque fini avant ce moment.",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 124,
+      "passage_id": "fr-a1-u06-p02",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "trop",
+      "offset_in_field": 2,
+      "replacements": [
+        "Trop"
+      ],
+      "source_text": "« trop ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 125,
+      "passage_id": "fr-a1-u06-p02",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "déjà",
+      "offset_in_field": 0,
+      "replacements": [
+        "Déjà"
+      ],
+      "source_text": "déjà",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 126,
+      "passage_id": "fr-a1-u06-p03",
+      "field": "answer",
+      "item_id": "a3",
+      "rule_id": "FR_REPEATEDWORDS_ÉGALEMENT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "également",
+      "offset_in_field": 10,
+      "replacements": [
+        "aussi",
+        "par ailleurs",
+        "ainsi",
+        "pareillement",
+        "de plus"
+      ],
+      "source_text": "Sami fait également cette action.",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 127,
+      "passage_id": "fr-a1-u06-p03",
+      "field": "answer",
+      "item_id": "a6",
+      "rule_id": "FR_REPEATEDWORDS_ÉGALEMENT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "Également",
+      "offset_in_field": 0,
+      "replacements": [
+        "Aussi",
+        "Par ailleurs",
+        "Ainsi",
+        "Pareillement",
+        "De plus"
+      ],
+      "source_text": "Également ; de plus.",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 128,
+      "passage_id": "fr-a1-u06-p03",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "même",
+      "offset_in_field": 2,
+      "replacements": [
+        "Même"
+      ],
+      "source_text": "« même ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 129,
+      "passage_id": "fr-a1-u06-p03",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "aussi",
+      "offset_in_field": 0,
+      "replacements": [
+        "Aussi"
+      ],
+      "source_text": "aussi",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 130,
+      "passage_id": "fr-a1-u06-p04",
+      "field": "text",
+      "item_id": null,
+      "rule_id": "FR_REPEATEDWORDS_PRESQUE",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "presque",
+      "offset_in_field": 264,
+      "replacements": [
+        "bientôt",
+        "quasiment",
+        "approximativement"
+      ],
+      "source_text": "Camille va souvent à la bibliothèque après l’école. Elle trouve presque toujours une place près de la fenêtre. Elle ne parle jamais fort dans la salle de lecture. Un jour, Sami lui pose une question : « Tu viens souvent ici le mercredi ? » Camille répond que oui, presque chaque semaine. Elle explique qu’elle ne vient jamais quand elle a un cours de sport tardif. Aujourd’hui, ils choisissent une place au fond de la salle. Sami pose encore une question sur un livre, puis ils commencent à lire. Camille aime cette routine parce qu’elle sait où travailler et peut rester concentrée sans chercher un nouvel endroit chaque fois.",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 131,
+      "passage_id": "fr-a1-u06-p04",
+      "field": "question_prompt",
+      "item_id": "q3",
+      "rule_id": "FR_REPEATEDWORDS_SOUVENT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "souvent",
+      "offset_in_field": 15,
+      "replacements": [
+        "fréquemment",
+        "généralement",
+        "continuellement",
+        "habituellement"
+      ],
+      "source_text": "Que signifie « souvent » dans « va souvent à la bibliothèque » ?",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 132,
+      "passage_id": "fr-a1-u06-p04",
+      "field": "question_prompt",
+      "item_id": "q6",
+      "rule_id": "FR_REPEATEDWORDS_SOUVENT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "souvent",
+      "offset_in_field": 15,
+      "replacements": [
+        "fréquemment",
+        "généralement",
+        "continuellement",
+        "habituellement"
+      ],
+      "source_text": "Que signifie « souvent » ?",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 133,
+      "passage_id": "fr-a1-u06-p04",
+      "field": "question_prompt",
+      "item_id": "q8",
+      "rule_id": "FR_REPEATEDWORDS_SOUVENT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "souvent",
+      "offset_in_field": 87,
+      "replacements": [
+        "fréquemment",
+        "généralement",
+        "continuellement",
+        "habituellement"
+      ],
+      "source_text": "Pour dire qu’une chose ne se produit à aucun moment, lequel convient : « jamais » ou « souvent » ?",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 134,
+      "passage_id": "fr-a1-u06-p04",
+      "field": "answer",
+      "item_id": "a6",
+      "rule_id": "FR_REPEATEDWORDS_FRÉQUEMMENT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "Fréquemment",
+      "offset_in_field": 0,
+      "replacements": [
+        "Souvent",
+        "Généralement",
+        "Continuellement",
+        "Habituellement"
+      ],
+      "source_text": "Fréquemment ; de nombreuses fois.",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 135,
+      "passage_id": "fr-a1-u06-p04",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "jamais",
+      "offset_in_field": 2,
+      "replacements": [
+        "Jamais"
+      ],
+      "source_text": "« jamais ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 136,
+      "passage_id": "fr-a1-u06-p04",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "jamais",
+      "offset_in_field": 0,
+      "replacements": [
+        "Jamais"
+      ],
+      "source_text": "jamais",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 137,
+      "passage_id": "fr-a1-u06-p05",
+      "field": "text",
+      "item_id": null,
+      "rule_id": "FR_REPEATEDWORDS_MAINTENANT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "maintenant",
+      "offset_in_field": 241,
+      "replacements": [
+        "présentement",
+        "ce jour-ci",
+        "désormais",
+        "à présent"
+      ],
+      "source_text": "Camille et son petit frère sont maintenant dans le centre de la ville. Une activité pour enfants commence bientôt sur la grande place. Camille regarde l’affiche : il reste quinze minutes. Son frère demande s’ils doivent attendre ici. « Oui, maintenant nous avons le temps de boire un peu d’eau, et bientôt les portes vont ouvrir », répond Camille. Ils s’assoient près d’un arbre. Un enfant arrive bientôt avec son père, puis d’autres enfants arrivent avec leurs parents. Maintenant la place devient plus animée. Quand l’animatrice ouvre la porte, Camille accompagne son frère à l’intérieur. Elle voit qu’il est content d’être arrivé assez tôt et de ne pas avoir couru.",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 138,
+      "passage_id": "fr-a1-u06-p05",
+      "field": "text",
+      "item_id": null,
+      "rule_id": "VIRG_NON_TROUVEE",
+      "category": "PONCTUATION_VIRGULE",
+      "message": "Une virgule est requise.",
+      "matched_text": " nous",
+      "offset_in_field": 251,
+      "replacements": [
+        ", nous"
+      ],
+      "source_text": "Camille et son petit frère sont maintenant dans le centre de la ville. Une activité pour enfants commence bientôt sur la grande place. Camille regarde l’affiche : il reste quinze minutes. Son frère demande s’ils doivent attendre ici. « Oui, maintenant nous avons le temps de boire un peu d’eau, et bientôt les portes vont ouvrir », répond Camille. Ils s’assoient près d’un arbre. Un enfant arrive bientôt avec son père, puis d’autres enfants arrivent avec leurs parents. Maintenant la place devient plus animée. Quand l’animatrice ouvre la porte, Camille accompagne son frère à l’intérieur. Elle voit qu’il est content d’être arrivé assez tôt et de ne pas avoir couru.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 139,
+      "passage_id": "fr-a1-u06-p05",
+      "field": "text",
+      "item_id": null,
+      "rule_id": "FR_REPEATEDWORDS_MAINTENANT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "Maintenant",
+      "offset_in_field": 471,
+      "replacements": [
+        "Présentement",
+        "Ce jour-ci",
+        "Désormais",
+        "À présent"
+      ],
+      "source_text": "Camille et son petit frère sont maintenant dans le centre de la ville. Une activité pour enfants commence bientôt sur la grande place. Camille regarde l’affiche : il reste quinze minutes. Son frère demande s’ils doivent attendre ici. « Oui, maintenant nous avons le temps de boire un peu d’eau, et bientôt les portes vont ouvrir », répond Camille. Ils s’assoient près d’un arbre. Un enfant arrive bientôt avec son père, puis d’autres enfants arrivent avec leurs parents. Maintenant la place devient plus animée. Quand l’animatrice ouvre la porte, Camille accompagne son frère à l’intérieur. Elle voit qu’il est content d’être arrivé assez tôt et de ne pas avoir couru.",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 140,
+      "passage_id": "fr-a1-u06-p05",
+      "field": "question_prompt",
+      "item_id": "q3",
+      "rule_id": "FR_REPEATEDWORDS_MAINTENANT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "maintenant",
+      "offset_in_field": 15,
+      "replacements": [
+        "présentement",
+        "ce jour-ci",
+        "désormais",
+        "à présent"
+      ],
+      "source_text": "Que signifie « maintenant » dans le texte ?",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 141,
+      "passage_id": "fr-a1-u06-p05",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "FR_REPEATEDWORDS_MAINTENANT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "maintenant",
+      "offset_in_field": 64,
+      "replacements": [
+        "présentement",
+        "ce jour-ci",
+        "désormais",
+        "à présent"
+      ],
+      "source_text": "D’après le texte, ils sont _____ dans le centre de la ville : « maintenant » ou « plus tard » ?",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 142,
+      "passage_id": "fr-a1-u06-p05",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "FR_REPEATEDWORDS_MAINTENANT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "maintenant",
+      "offset_in_field": 2,
+      "replacements": [
+        "présentement",
+        "ce jour-ci",
+        "désormais",
+        "à présent"
+      ],
+      "source_text": "« maintenant ».",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 143,
+      "passage_id": "fr-a1-u06-p05",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "bientôt",
+      "offset_in_field": 0,
+      "replacements": [
+        "Bientôt"
+      ],
+      "source_text": "bientôt",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 144,
+      "passage_id": "fr-a1-u06-p06",
+      "field": "text",
+      "item_id": null,
+      "rule_id": "FR_REPEATEDWORDS_MAINTENANT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "maintenant",
+      "offset_in_field": 449,
+      "replacements": [
+        "présentement",
+        "ce jour-ci",
+        "désormais",
+        "à présent"
+      ],
+      "source_text": "Camille organise maintenant ses journées avec plus de facilité. Le matin, elle mange peu si elle n’a pas très faim, mais elle boit beaucoup d’eau. Le soir, elle vérifie si elle a trop de travail ou si une partie est déjà terminée. À la bibliothèque, Sami vient aussi, et ils lisent parfois le même livre. Camille y va souvent, mais elle ne parle jamais fort. Quand une activité commence bientôt, elle regarde l’heure et décide ce qu’elle peut faire maintenant. Ces petits mots l’aident à parler de quantité, de fréquence et de temps avec précision dans des situations très simples.",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 145,
+      "passage_id": "fr-a1-u06-p06",
+      "field": "question_prompt",
+      "item_id": "q4",
+      "rule_id": "FR_REPEATEDWORDS_SOUVENT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "souvent",
+      "offset_in_field": 15,
+      "replacements": [
+        "fréquemment",
+        "généralement",
+        "continuellement",
+        "habituellement"
+      ],
+      "source_text": "Que signifie « souvent » ici ?",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 146,
+      "passage_id": "fr-a1-u06-p06",
+      "field": "question_prompt",
+      "item_id": "q5",
+      "rule_id": "FR_REPEATEDWORDS_SOUVENT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "souvent",
+      "offset_in_field": 41,
+      "replacements": [
+        "fréquemment",
+        "généralement",
+        "continuellement",
+        "habituellement"
+      ],
+      "source_text": "À quoi renvoie « y » dans « Camille y va souvent » ?",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 147,
+      "passage_id": "fr-a1-u06-p06",
+      "field": "question_prompt",
+      "item_id": "q8",
+      "rule_id": "FR_REPEATEDWORDS_MAINTENANT",
+      "category": "REPETITIONS_STYLE",
+      "message": "Ce mot apparaît déjà dans l’une des phrases précédant immédiatement celle-ci. Utilisez un synonyme pour apporter plus de variété à votre texte, excepté si la répétition est intentionnelle.",
+      "matched_text": "maintenant",
+      "offset_in_field": 44,
+      "replacements": [
+        "présentement",
+        "ce jour-ci",
+        "désormais",
+        "à présent"
+      ],
+      "source_text": "Pour le moment présent, lequel convient : « maintenant » ou « bientôt » ?",
+      "classification": "STYLE_SIGNAL_NEEDS_CONTEXT",
+      "rationale": "A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect."
+    },
+    {
+      "finding_index": 148,
+      "passage_id": "fr-a1-u06-p06",
+      "field": "question_prompt",
+      "item_id": "q10",
+      "rule_id": "IMP_PRON",
+      "category": "CAT_GRAMMAIRE",
+      "message": "Un trait d’union est nécessaire entre le verbe et le pronom à l’impératif.",
+      "matched_text": "Résume en",
+      "offset_in_field": 0,
+      "replacements": [
+        "Résume-en"
+      ],
+      "source_text": "Résume en une phrase ce que Camille sait mieux exprimer.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 149,
+      "passage_id": "fr-a1-u06-p06",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "jamais",
+      "offset_in_field": 2,
+      "replacements": [
+        "Jamais"
+      ],
+      "source_text": "« jamais ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 150,
+      "passage_id": "fr-a1-u06-p06",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "maintenant",
+      "offset_in_field": 0,
+      "replacements": [
+        "Maintenant"
+      ],
+      "source_text": "maintenant",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 151,
+      "passage_id": "fr-a1-u07-p01",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "près",
+      "offset_in_field": 2,
+      "replacements": [
+        "Près"
+      ],
+      "source_text": "« près ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 152,
+      "passage_id": "fr-a1-u07-p01",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "près",
+      "offset_in_field": 0,
+      "replacements": [
+        "Près"
+      ],
+      "source_text": "près",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 153,
+      "passage_id": "fr-a1-u07-p02",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "devant",
+      "offset_in_field": 2,
+      "replacements": [
+        "Devant"
+      ],
+      "source_text": "« devant ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 154,
+      "passage_id": "fr-a1-u07-p02",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "derrière",
+      "offset_in_field": 0,
+      "replacements": [
+        "Derrière"
+      ],
+      "source_text": "derrière",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 155,
+      "passage_id": "fr-a1-u07-p03",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "entre",
+      "offset_in_field": 2,
+      "replacements": [
+        "Entre"
+      ],
+      "source_text": "« entre ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 156,
+      "passage_id": "fr-a1-u07-p03",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "sous",
+      "offset_in_field": 0,
+      "replacements": [
+        "Sous"
+      ],
+      "source_text": "sous",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 157,
+      "passage_id": "fr-a1-u07-p04",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "VIRG_NON_TROUVEE",
+      "category": "PONCTUATION_VIRGULE",
+      "message": "Une virgule est requise.",
+      "matched_text": " ils",
+      "offset_in_field": 38,
+      "replacements": [
+        ", ils"
+      ],
+      "source_text": "D’après le texte, au premier carrefour ils tournent à _____ : « gauche » ou « droite » ?",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 158,
+      "passage_id": "fr-a1-u07-p04",
+      "field": "question_prompt",
+      "item_id": "q8",
+      "rule_id": "PLACE_DE_LA_VIRGULE",
+      "category": "PONCTUATION_VIRGULE",
+      "message": "Une virgule est conseillée dans ce contexte.",
+      "matched_text": " mais",
+      "offset_in_field": 28,
+      "replacements": [
+        ", mais"
+      ],
+      "source_text": "Si on ne tourne pas à gauche mais de l’autre côté, lequel convient ?",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 159,
+      "passage_id": "fr-a1-u07-p04",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "gauche",
+      "offset_in_field": 2,
+      "replacements": [
+        "Gauche"
+      ],
+      "source_text": "« gauche ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 160,
+      "passage_id": "fr-a1-u07-p04",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "droite",
+      "offset_in_field": 0,
+      "replacements": [
+        "Droite"
+      ],
+      "source_text": "droite",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 161,
+      "passage_id": "fr-a1-u07-p05",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « rue ».",
+      "matched_text": "un rue",
+      "offset_in_field": 45,
+      "replacements": [
+        "un rué",
+        "un ru",
+        "une rue"
+      ],
+      "source_text": "Choisis la forme correcte : « une rue » ou « un rue » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 162,
+      "passage_id": "fr-a1-u07-p05",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "une",
+      "offset_in_field": 2,
+      "replacements": [
+        "Une"
+      ],
+      "source_text": "« une rue ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 163,
+      "passage_id": "fr-a1-u07-p05",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "chemin",
+      "offset_in_field": 0,
+      "replacements": [
+        "Chemin"
+      ],
+      "source_text": "chemin",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 164,
+      "passage_id": "fr-a1-u07-p06",
+      "field": "question_prompt",
+      "item_id": "q10",
+      "rule_id": "IMP_PRON",
+      "category": "CAT_GRAMMAIRE",
+      "message": "Un trait d’union est nécessaire entre le verbe et le pronom à l’impératif.",
+      "matched_text": "Résume en",
+      "offset_in_field": 0,
+      "replacements": [
+        "Résume-en"
+      ],
+      "source_text": "Résume en une phrase comment Camille décrit maintenant un trajet.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 165,
+      "passage_id": "fr-a1-u07-p06",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "sous",
+      "offset_in_field": 2,
+      "replacements": [
+        "Sous"
+      ],
+      "source_text": "« sous ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 166,
+      "passage_id": "fr-a1-u07-p06",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "droite",
+      "offset_in_field": 0,
+      "replacements": [
+        "Droite"
+      ],
+      "source_text": "droite",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 167,
+      "passage_id": "fr-a1-u08-p01",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « main ».",
+      "matched_text": "un main",
+      "offset_in_field": 46,
+      "replacements": [
+        "une main",
+        "des mains"
+      ],
+      "source_text": "Choisis la forme correcte : « une main » ou « un main » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 168,
+      "passage_id": "fr-a1-u08-p01",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "une",
+      "offset_in_field": 2,
+      "replacements": [
+        "Une"
+      ],
+      "source_text": "« une main ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 169,
+      "passage_id": "fr-a1-u08-p01",
+      "field": "answer",
+      "item_id": "a9",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "main",
+      "offset_in_field": 0,
+      "replacements": [
+        "Main"
+      ],
+      "source_text": "main",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 170,
+      "passage_id": "fr-a1-u08-p02",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « pied ».",
+      "matched_text": "sa pied",
+      "offset_in_field": 52,
+      "replacements": [
+        "son pied"
+      ],
+      "source_text": "Choisis la forme correcte : « son pied droit » ou « sa pied droit » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 171,
+      "passage_id": "fr-a1-u08-p02",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "son",
+      "offset_in_field": 2,
+      "replacements": [
+        "Son"
+      ],
+      "source_text": "« son pied droit ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 172,
+      "passage_id": "fr-a1-u08-p02",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "corps",
+      "offset_in_field": 0,
+      "replacements": [
+        "Corps"
+      ],
+      "source_text": "corps",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 173,
+      "passage_id": "fr-a1-u08-p03",
+      "field": "question_prompt",
+      "item_id": "q6",
+      "rule_id": "CONF_N_V",
+      "category": "CAT_TOURS_CRITIQUES",
+      "message": "Un infinitif semble plus approprié.",
+      "matched_text": "faut boit",
+      "offset_in_field": 64,
+      "replacements": [
+        "faut boire"
+      ],
+      "source_text": "Choisis la phrase correcte : « il faut boire de l’eau » ou « il faut boit de l’eau » ?",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 174,
+      "passage_id": "fr-a1-u08-p03",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "CONF_N_V",
+      "category": "CAT_TOURS_CRITIQUES",
+      "message": "Un infinitif semble plus approprié.",
+      "matched_text": "veut mange",
+      "offset_in_field": 60,
+      "replacements": [
+        "veut manger"
+      ],
+      "source_text": "Choisis la phrase correcte : « elle veut manger » ou « elle veut mange » ?",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 175,
+      "passage_id": "fr-a1-u08-p03",
+      "field": "answer",
+      "item_id": "a6",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "il",
+      "offset_in_field": 2,
+      "replacements": [
+        "Il"
+      ],
+      "source_text": "« il faut boire de l’eau ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 176,
+      "passage_id": "fr-a1-u08-p03",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "elle",
+      "offset_in_field": 2,
+      "replacements": [
+        "Elle"
+      ],
+      "source_text": "« elle veut manger ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 177,
+      "passage_id": "fr-a1-u08-p03",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "boire",
+      "offset_in_field": 0,
+      "replacements": [
+        "Boire"
+      ],
+      "source_text": "boire",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 178,
+      "passage_id": "fr-a1-u08-p04",
+      "field": "text",
+      "item_id": null,
+      "rule_id": "QUE_AVOIR",
+      "category": "CAT_GRAMMAIRE",
+      "message": "Si « mère » est l’antécédent du relatif « qu’ », vérifiez l’accord du participe « dormi ».",
+      "matched_text": "dormi",
+      "offset_in_field": 533,
+      "replacements": [
+        "(dormi)"
+      ],
+      "source_text": "Le soir, Camille prépare sa chambre avant de dormir. Son lit est à gauche de la fenêtre et sa lampe est à droite. Elle veut dormir assez longtemps parce qu’elle a école le lendemain. Avant de se coucher, elle ferme son livre et éteint son téléphone. Elle commence à sentir la fatigue : ses yeux sont lourds et elle bâille. Camille sait qu’elle peut sentir la fatigue avant d’être complètement épuisée. Elle se couche donc à une heure raisonnable. Le matin suivant, elle se réveille sans difficulté. Elle dit à sa mère qu’elle a bien dormi et qu’elle se sent prête pour la journée.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 179,
+      "passage_id": "fr-a1-u08-p04",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "PREP_VERBECONJUGUE",
+      "category": "CAT_GRAMMAIRE",
+      "message": "Le mot « sent » ne peut pas être un verbe conjugué après la préposition « à ».",
+      "matched_text": "sent",
+      "offset_in_field": 88,
+      "replacements": [
+        "sentir",
+        "sens",
+        "sept",
+        "cent",
+        "vent",
+        "lent",
+        "dent",
+        "set",
+        "sénat",
+        "Kent"
+      ],
+      "source_text": "Choisis la phrase correcte : « elle commence à sentir la fatigue » ou « elle commence à sent la fatigue » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 180,
+      "passage_id": "fr-a1-u08-p04",
+      "field": "answer",
+      "item_id": "a6",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "je",
+      "offset_in_field": 2,
+      "replacements": [
+        "Je"
+      ],
+      "source_text": "« je vais dormir ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 181,
+      "passage_id": "fr-a1-u08-p04",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "elle",
+      "offset_in_field": 2,
+      "replacements": [
+        "Elle"
+      ],
+      "source_text": "« elle commence à sentir la fatigue ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 182,
+      "passage_id": "fr-a1-u08-p04",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "sentir",
+      "offset_in_field": 0,
+      "replacements": [
+        "Sentir"
+      ],
+      "source_text": "sentir",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 183,
+      "passage_id": "fr-a1-u08-p05",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "mieux",
+      "offset_in_field": 0,
+      "replacements": [
+        "Mieux"
+      ],
+      "source_text": "mieux",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 184,
+      "passage_id": "fr-a1-u08-p06",
+      "field": "question_prompt",
+      "item_id": "q10",
+      "rule_id": "IMP_PRON",
+      "category": "CAT_GRAMMAIRE",
+      "message": "Un trait d’union est nécessaire entre le verbe et le pronom à l’impératif.",
+      "matched_text": "Résume en",
+      "offset_in_field": 0,
+      "replacements": [
+        "Résume-en"
+      ],
+      "source_text": "Résume en une phrase ce que Camille peut maintenant expliquer.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 185,
+      "passage_id": "fr-a1-u08-p06",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "mieux",
+      "offset_in_field": 2,
+      "replacements": [
+        "Mieux"
+      ],
+      "source_text": "« mieux ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 186,
+      "passage_id": "fr-a1-u08-p06",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "boire",
+      "offset_in_field": 0,
+      "replacements": [
+        "Boire"
+      ],
+      "source_text": "boire",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 187,
+      "passage_id": "fr-a1-u09-p01",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « famille ».",
+      "matched_text": "son famille",
+      "offset_in_field": 48,
+      "replacements": [
+        "sa famille"
+      ],
+      "source_text": "Choisis la forme correcte : « sa famille » ou « son famille » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 188,
+      "passage_id": "fr-a1-u09-p01",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "sa",
+      "offset_in_field": 2,
+      "replacements": [
+        "Sa"
+      ],
+      "source_text": "« sa famille ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 189,
+      "passage_id": "fr-a1-u09-p01",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "père",
+      "offset_in_field": 0,
+      "replacements": [
+        "Père"
+      ],
+      "source_text": "père",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 190,
+      "passage_id": "fr-a1-u09-p02",
+      "field": "question_prompt",
+      "item_id": "q6",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « ami ».",
+      "matched_text": "une ami",
+      "offset_in_field": 73,
+      "replacements": [
+        "une amie",
+        "un ami"
+      ],
+      "source_text": "Choisis la forme correcte : « Sami est un ami de Camille » ou « Sami est une ami de Camille » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 191,
+      "passage_id": "fr-a1-u09-p02",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « mère ».",
+      "matched_text": "son mère",
+      "offset_in_field": 45,
+      "replacements": [
+        "sa mère"
+      ],
+      "source_text": "Choisis la forme correcte : « sa mère » ou « son mère » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 192,
+      "passage_id": "fr-a1-u09-p02",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "sa",
+      "offset_in_field": 2,
+      "replacements": [
+        "Sa"
+      ],
+      "source_text": "« sa mère ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 193,
+      "passage_id": "fr-a1-u09-p02",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "mère",
+      "offset_in_field": 0,
+      "replacements": [
+        "Mère"
+      ],
+      "source_text": "mère",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 194,
+      "passage_id": "fr-a1-u09-p03",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « école ».",
+      "matched_text": "au école",
+      "offset_in_field": 47,
+      "replacements": [
+        "à l'école",
+        "aux écoles"
+      ],
+      "source_text": "Choisis la forme correcte : « à l’école » ou « au école » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 195,
+      "passage_id": "fr-a1-u09-p03",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "à",
+      "offset_in_field": 2,
+      "replacements": [
+        "À"
+      ],
+      "source_text": "« à l’école ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 196,
+      "passage_id": "fr-a1-u09-p03",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "livre",
+      "offset_in_field": 0,
+      "replacements": [
+        "Livre"
+      ],
+      "source_text": "livre",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 197,
+      "passage_id": "fr-a1-u09-p04",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « table ».",
+      "matched_text": "un table",
+      "offset_in_field": 47,
+      "replacements": [
+        "un tablé",
+        "une table"
+      ],
+      "source_text": "Choisis la forme correcte : « une table » ou « un table » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 198,
+      "passage_id": "fr-a1-u09-p04",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "une",
+      "offset_in_field": 2,
+      "replacements": [
+        "Une"
+      ],
+      "source_text": "« une table ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 199,
+      "passage_id": "fr-a1-u09-p04",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "table",
+      "offset_in_field": 0,
+      "replacements": [
+        "Table"
+      ],
+      "source_text": "table",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 200,
+      "passage_id": "fr-a1-u09-p05",
+      "field": "question_prompt",
+      "item_id": "q6",
+      "rule_id": "PLACE_ADJ",
+      "category": "CAT_TOURS_CRITIQUES",
+      "message": "Cet adjectif précède généralement le nom.",
+      "matched_text": "travail court",
+      "offset_in_field": 33,
+      "replacements": [
+        "court travail"
+      ],
+      "source_text": "Choisis la forme correcte : « un travail court » ou « une travail courte » ?",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 201,
+      "passage_id": "fr-a1-u09-p05",
+      "field": "question_prompt",
+      "item_id": "q6",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « travail ».",
+      "matched_text": "une travail",
+      "offset_in_field": 54,
+      "replacements": [
+        "un travail"
+      ],
+      "source_text": "Choisis la forme correcte : « un travail court » ou « une travail courte » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 202,
+      "passage_id": "fr-a1-u09-p05",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « eau ».",
+      "matched_text": "du eau",
+      "offset_in_field": 46,
+      "replacements": [
+        "de l'eau",
+        "des eaux"
+      ],
+      "source_text": "Choisis la forme correcte : « de l’eau » ou « du eau » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 203,
+      "passage_id": "fr-a1-u09-p05",
+      "field": "answer",
+      "item_id": "a6",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "un",
+      "offset_in_field": 2,
+      "replacements": [
+        "Un"
+      ],
+      "source_text": "« un travail court ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 204,
+      "passage_id": "fr-a1-u09-p05",
+      "field": "answer",
+      "item_id": "a6",
+      "rule_id": "PLACE_ADJ",
+      "category": "CAT_TOURS_CRITIQUES",
+      "message": "Cet adjectif précède généralement le nom.",
+      "matched_text": "travail court",
+      "offset_in_field": 5,
+      "replacements": [
+        "court travail"
+      ],
+      "source_text": "« un travail court ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 205,
+      "passage_id": "fr-a1-u09-p05",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "de",
+      "offset_in_field": 2,
+      "replacements": [
+        "De"
+      ],
+      "source_text": "« de l’eau ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 206,
+      "passage_id": "fr-a1-u09-p05",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "eau",
+      "offset_in_field": 0,
+      "replacements": [
+        "Eau"
+      ],
+      "source_text": "eau",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 207,
+      "passage_id": "fr-a1-u09-p06",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « livre ».",
+      "matched_text": "des livre",
+      "offset_in_field": 59,
+      "replacements": [
+        "de la livre",
+        "du livre",
+        "des livres"
+      ],
+      "source_text": "Choisis la forme correcte au pluriel : « des livres » ou « des livre » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 208,
+      "passage_id": "fr-a1-u09-p06",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "des",
+      "offset_in_field": 2,
+      "replacements": [
+        "Des"
+      ],
+      "source_text": "« des livres ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 209,
+      "passage_id": "fr-a1-u09-p06",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "table",
+      "offset_in_field": 0,
+      "replacements": [
+        "Table"
+      ],
+      "source_text": "table",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 210,
+      "passage_id": "fr-a1-u10-p01",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « soleil ».",
+      "matched_text": "la soleil",
+      "offset_in_field": 47,
+      "replacements": [
+        "le soleil"
+      ],
+      "source_text": "Choisis la forme correcte : « le soleil » ou « la soleil » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 211,
+      "passage_id": "fr-a1-u10-p01",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "le",
+      "offset_in_field": 2,
+      "replacements": [
+        "Le"
+      ],
+      "source_text": "« le soleil ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 212,
+      "passage_id": "fr-a1-u10-p01",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "ciel",
+      "offset_in_field": 0,
+      "replacements": [
+        "Ciel"
+      ],
+      "source_text": "ciel",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 213,
+      "passage_id": "fr-a1-u10-p02",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "il",
+      "offset_in_field": 2,
+      "replacements": [
+        "Il"
+      ],
+      "source_text": "« il fait chaud ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 214,
+      "passage_id": "fr-a1-u10-p02",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "chaud",
+      "offset_in_field": 0,
+      "replacements": [
+        "Chaud"
+      ],
+      "source_text": "chaud",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 215,
+      "passage_id": "fr-a1-u10-p03",
+      "field": "text",
+      "item_id": null,
+      "rule_id": "PLACE_DE_LA_VIRGULE",
+      "category": "PONCTUATION_VIRGULE",
+      "message": "Une virgule est conseillée dans ce contexte.",
+      "matched_text": " mais",
+      "offset_in_field": 208,
+      "replacements": [
+        ", mais"
+      ],
+      "source_text": "Après l’école, Camille veut acheter un livre simple pour un travail de classe. Elle entre dans une petite librairie près de l’école et regarde trois livres. Le premier a un prix bas, le deuxième est plus joli mais plus cher, et le troisième est trop difficile. Camille choisit le premier. Avant d’acheter, elle demande encore le prix au vendeur pour vérifier. Il lui répond clairement. Camille comprend qu’acheter signifie choisir un article et le payer, tandis que le prix indique combien l’article coûte. Elle garde le reçu dans son sac avec son livre et rentre commencer son travail.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 216,
+      "passage_id": "fr-a1-u10-p03",
+      "field": "question_prompt",
+      "item_id": "q6",
+      "rule_id": "D_N",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « prix ».",
+      "matched_text": "la prix",
+      "offset_in_field": 54,
+      "replacements": [
+        "les prix",
+        "le prix"
+      ],
+      "source_text": "Choisis la forme correcte : « le prix du livre » ou « la prix du livre » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 217,
+      "passage_id": "fr-a1-u10-p03",
+      "field": "answer",
+      "item_id": "a6",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "le",
+      "offset_in_field": 2,
+      "replacements": [
+        "Le"
+      ],
+      "source_text": "« le prix du livre ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 218,
+      "passage_id": "fr-a1-u10-p03",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "elle",
+      "offset_in_field": 2,
+      "replacements": [
+        "Elle"
+      ],
+      "source_text": "« elle veut acheter un livre ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 219,
+      "passage_id": "fr-a1-u10-p03",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "prix",
+      "offset_in_field": 0,
+      "replacements": [
+        "Prix"
+      ],
+      "source_text": "prix",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 220,
+      "passage_id": "fr-a1-u10-p04",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « vêtement ».",
+      "matched_text": "une vêtement",
+      "offset_in_field": 49,
+      "replacements": [
+        "un vêtement"
+      ],
+      "source_text": "Choisis la forme correcte : « un vêtement » ou « une vêtement » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 221,
+      "passage_id": "fr-a1-u10-p04",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "un",
+      "offset_in_field": 2,
+      "replacements": [
+        "Un"
+      ],
+      "source_text": "« un vêtement ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 222,
+      "passage_id": "fr-a1-u10-p04",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "vêtement",
+      "offset_in_field": 0,
+      "replacements": [
+        "Vêtement"
+      ],
+      "source_text": "vêtement",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 223,
+      "passage_id": "fr-a1-u10-p05",
+      "field": "question_prompt",
+      "item_id": "q6",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « chaussure ».",
+      "matched_text": "un chaussure",
+      "offset_in_field": 51,
+      "replacements": [
+        "une chaussure"
+      ],
+      "source_text": "Choisis la forme correcte : « une chaussure » ou « un chaussure » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 224,
+      "passage_id": "fr-a1-u10-p05",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "rule_id": "D_N_E_OU_E",
+      "category": "AGREEMENT",
+      "message": "Le déterminant s’accorde avec le nom « sac ».",
+      "matched_text": "une sac",
+      "offset_in_field": 44,
+      "replacements": [
+        "un sac"
+      ],
+      "source_text": "Choisis la forme correcte : « un sac » ou « une sac » ?",
+      "classification": "LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION",
+      "rationale": "Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing."
+    },
+    {
+      "finding_index": 225,
+      "passage_id": "fr-a1-u10-p05",
+      "field": "answer",
+      "item_id": "a6",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "une",
+      "offset_in_field": 2,
+      "replacements": [
+        "Une"
+      ],
+      "source_text": "« une chaussure ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 226,
+      "passage_id": "fr-a1-u10-p05",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "un",
+      "offset_in_field": 2,
+      "replacements": [
+        "Un"
+      ],
+      "source_text": "« un sac ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 227,
+      "passage_id": "fr-a1-u10-p05",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "sac",
+      "offset_in_field": 0,
+      "replacements": [
+        "Sac"
+      ],
+      "source_text": "sac",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    },
+    {
+      "finding_index": 228,
+      "passage_id": "fr-a1-u10-p06",
+      "field": "question_prompt",
+      "item_id": "q10",
+      "rule_id": "IMP_PRON",
+      "category": "CAT_GRAMMAIRE",
+      "message": "Un trait d’union est nécessaire entre le verbe et le pronom à l’impératif.",
+      "matched_text": "Résume en",
+      "offset_in_field": 0,
+      "replacements": [
+        "Résume-en"
+      ],
+      "source_text": "Résume en une phrase ce que Camille peut faire à la fin du niveau A1.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 229,
+      "passage_id": "fr-a1-u10-p06",
+      "field": "answer",
+      "item_id": "a5",
+      "rule_id": "PLACE_DE_LA_VIRGULE",
+      "category": "PONCTUATION_VIRGULE",
+      "message": "Une virgule est conseillée dans ce contexte.",
+      "matched_text": " mais",
+      "offset_in_field": 71,
+      "replacements": [
+        ", mais"
+      ],
+      "source_text": "Parce qu’A1 est un niveau de base : elle gère des situations familières mais son français reste limité.",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 230,
+      "passage_id": "fr-a1-u10-p06",
+      "field": "answer",
+      "item_id": "a7",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "elle",
+      "offset_in_field": 2,
+      "replacements": [
+        "Elle"
+      ],
+      "source_text": "« elle veut acheter un livre ».",
+      "classification": "MANUAL_CONTEXT_REVIEW",
+      "rationale": "No safe mechanical disposition."
+    },
+    {
+      "finding_index": 231,
+      "passage_id": "fr-a1-u10-p06",
+      "field": "answer",
+      "item_id": "a8",
+      "rule_id": "UPPERCASE_SENTENCE_START",
+      "category": "CASING",
+      "message": "Cette phrase ne commence pas par une majuscule.",
+      "matched_text": "chaussure",
+      "offset_in_field": 0,
+      "replacements": [
+        "Chaussure"
+      ],
+      "source_text": "chaussure",
+      "classification": "MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT",
+      "rationale": "Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence."
+    }
+  ],
+  "limitations": "Mechanical triage only. Only explicitly structural cases are called mechanical false positives. Grammar distractors and all residual grammar/punctuation/usage findings still require contextual adjudication.",
+  "release_effect": "NONE_AUTOMATIC: no corpus changes and no release approval."
+}
