@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "evidence_kind": "gate_a_revalidation_checkpoint",
+  "bound_sha256": "a79455b1a94eccff136d78fab34ab36fe0fbf681d16e147e0c00d7ba7815cd68",
+  "status": "REVIEW_REQUIRED",
+  "scope": {
+    "records": 60,
+    "questions": 600,
+    "answers": 600
+  },
+  "trigger": {
+    "kind": "canonical_passage_prose_change_after_prior_review_integrity_snapshot",
+    "passage_id": "fr-a1-u03-p02",
+    "target_id": "fr-rank-0047",
+    "lemma": "venir"
+  },
+  "current_durable_evidence": {
+    "review_integrity_round2": "reading/audit/french_a1_review_integrity_round2_postrepair_2026-08-20.json",
+    "review_integrity_round2_bound_sha256": "42c6455db972afd1fe6158a2f58c6e9ed2725204dd12aa80a4f7961ef1b130d5",
+    "venir_r3_spacing_repair": "reading/audit/french_a1_venir_r3_spacing_repair_2026-08-21.json",
+    "venir_r3_spacing_repair_after_sha256": "a79455b1a94eccff136d78fab34ab36fe0fbf681d16e147e0c00d7ba7815cd68",
+    "legacy_generation_integrity": "reading/audit/french_a1_generation_integrity.json"
+  },
+  "freshness_findings": {
+    "round2_review_integrity_snapshot_matches_current_corpus": false,
+    "legacy_generation_integrity_establishes_current_final_gate": false,
+    "current_spacing_repair_matches_current_corpus": true,
+    "prior_final_approval_may_be_relied_on_for_current_corpus": false
+  },
+  "required_revalidation": [
+    "rerun word-count/CEFR diagnostics affected by the passage prose change",
+    "rerun script hygiene affected by the passage prose change",
+    "rerun answer/evidence alignment where relevant",
+    "perform targeted naturalness re-review for the changed prose",
+    "regenerate all final-gate artifacts sequentially from the current corpus before any final approval attempt",
+    "run the final adversarial gate last",
+    "retain independent semantic/naturalness/coverage and educator-release review requirements"
+  ],
+  "protocol": "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md",
+  "limitations": "This checkpoint records evidence freshness and invalidation only. It does not claim Gate A PASS, semantic correctness, naturalness approval, coverage approval, educator approval, or release readiness.",
+  "release_effect": "French A1 remains REOPEN_REQUIRED. The older FINAL_APPROVED status is stale for this repaired branch until the required current-corpus audits and independent reviews are completed."
+}
