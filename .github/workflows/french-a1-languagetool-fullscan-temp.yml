@@ -1,0 +1,205 @@
+name: TEMP French A1 LanguageTool full scan
+
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+    paths:
+      - .github/workflows/french-a1-languagetool-fullscan-temp.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temp-french-a1-languagetool-fullscan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    if: github.event.pull_request.head.ref == 'repair/french-a1-review-integrity-2026-08-20'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: repair/french-a1-review-integrity-2026-08-20
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install LanguageTool Python wrapper
+        run: python -m pip install --quiet language_tool_python==3.4.0
+      - name: Scan 100 percent of French A1 learner-facing text
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from collections import Counter
+          import hashlib, json, os, subprocess
+          import language_tool_python
+
+          corpus=Path('reading/french/a1/passages.jsonl')
+          expected='fe9f321ada5740baf264c009ce0b5eb845777927f37f99f03e7459c5ae72b64c'
+          sha=hashlib.sha256(corpus.read_bytes()).hexdigest()
+          if sha!=expected:
+              raise SystemExit(f'FAIL CLOSED: French A1 hash drift {sha} != {expected}')
+          blob=subprocess.check_output(['git','hash-object',str(corpus)],text=True).strip()
+          if blob!='300d5f024d27ca095187793a4bb9520508dcb690':
+              raise SystemExit(f'FAIL CLOSED: French A1 blob drift {blob}')
+          rows=[json.loads(x) for x in corpus.read_text(encoding='utf-8').splitlines() if x.strip()]
+          if len(rows)!=60:
+              raise SystemExit(f'FAIL CLOSED: expected 60 records, found {len(rows)}')
+
+          tool=language_tool_python.LanguageTool('fr')
+          findings=[]
+          scanned_fields=0
+          scanned_chars=0
+          per_field=Counter(); per_rule=Counter(); per_category=Counter(); per_passage=Counter()
+
+          def attr(match,name,default=None):
+              try:
+                  val=getattr(match,name)
+                  if callable(val): return default
+                  return val
+              except Exception:
+                  return default
+
+          def serial(v):
+              if v is None or isinstance(v,(str,int,float,bool)): return v
+              if isinstance(v,(list,tuple,set)): return [serial(x) for x in v]
+              if isinstance(v,dict): return {str(k):serial(x) for k,x in v.items()}
+              return str(v)
+
+          for idx,row in enumerate(rows,1):
+              fields=[]
+              fields.append(('title',None,row.get('title','')))
+              fields.append(('text',None,row.get('text','')))
+              for q in row.get('questions',[]):
+                  fields.append(('question_prompt',q.get('id'),q.get('prompt','')))
+              for a in row.get('answer_key',[]):
+                  fields.append(('answer',a.get('id'),a.get('answer','')))
+                  if a.get('explanation'):
+                      fields.append(('answer_explanation',a.get('id'),a.get('explanation','')))
+
+              chunks=[]; ranges=[]; pos=0
+              for field,item_id,text in fields:
+                  if not isinstance(text,str) or not text.strip():
+                      continue
+                  start=pos; end=start+len(text)
+                  ranges.append((start,end,field,item_id,text))
+                  chunks.append(text)
+                  chunks.append('\n\n')
+                  pos=end+2
+                  scanned_fields+=1; scanned_chars+=len(text); per_field[field]+=1
+              combined=''.join(chunks)
+              matches=tool.check(combined)
+              for m in matches:
+                  off=int(attr(m,'offset',-1) or -1)
+                  length=int(attr(m,'error_length',attr(m,'errorLength',0)) or 0)
+                  mapped=None
+                  for start,end,field,item_id,text in ranges:
+                      if start<=off<end or (off==end and length==0):
+                          mapped=(start,end,field,item_id,text); break
+                  if mapped:
+                      start,end,field,item_id,text=mapped
+                      local_off=off-start
+                      excerpt_start=max(0,local_off-80); excerpt_end=min(len(text),local_off+max(length,1)+80)
+                      excerpt=text[excerpt_start:excerpt_end]
+                      field_name=field
+                  else:
+                      start=end=-1; field_name='UNMAPPED_SEPARATOR'; item_id=None; local_off=None; excerpt=combined[max(0,off-80):min(len(combined),off+max(length,1)+80)]
+
+                  rule_id=serial(attr(m,'rule_id',attr(m,'ruleId','UNKNOWN')))
+                  category=serial(attr(m,'category','UNKNOWN'))
+                  finding={
+                    'passage_id':row['id'],
+                    'field':field_name,
+                    'item_id':item_id,
+                    'rule_id':rule_id,
+                    'category':category,
+                    'rule_issue_type':serial(attr(m,'rule_issue_type',attr(m,'ruleIssueType',None))),
+                    'message':serial(attr(m,'message','')),
+                    'replacements':serial(attr(m,'replacements',[])),
+                    'offset_in_combined':off,
+                    'offset_in_field':local_off,
+                    'error_length':length,
+                    'matched_text':combined[off:off+length] if off>=0 else '',
+                    'excerpt':excerpt,
+                    'sentence':serial(attr(m,'sentence',None)),
+                    'context':serial(attr(m,'context',None))
+                  }
+                  findings.append(finding)
+                  per_rule[str(rule_id)]+=1; per_category[str(category)]+=1; per_passage[row['id']]+=1
+              if idx%10==0:
+                  print(json.dumps({'progress_passages':idx,'raw_findings':len(findings)},ensure_ascii=False))
+
+          try:
+              tool.close()
+          except Exception:
+              pass
+
+          cache_dirs=[]
+          for base in [Path.home()/'.cache'/'language_tool_python',Path.home()/'.cache'/'language_tool_python'/'LanguageTool']:
+              if base.exists():
+                  cache_dirs += sorted(str(p) for p in base.glob('**/LanguageTool-*') if p.is_dir())[:10]
+          wrapper_version=getattr(language_tool_python,'__version__','3.4.0')
+          java_version=subprocess.run(['java','-version'],text=True,capture_output=True).stderr.splitlines()
+          evidence={
+            'schema_version':1,
+            'date':'2026-08-22',
+            'language':'fr',
+            'level':'A1',
+            'audit':'independent_machine_detector_languagetool_fullscan',
+            'status':'RAW_FINDINGS_RECORDED_NEEDS_ADJUDICATION',
+            'bound_sha256':sha,
+            'bound_git_blob':blob,
+            'scope':{
+              'passages':len(rows),
+              'questions':sum(len(r.get('questions',[])) for r in rows),
+              'answers':sum(len(r.get('answer_key',[])) for r in rows),
+              'learner_facing_fields_scanned':scanned_fields,
+              'characters_scanned':scanned_chars,
+              'field_counts':dict(per_field)
+            },
+            'tool':{
+              'name':'LanguageTool via language_tool_python local server',
+              'language':'fr',
+              'language_tool_python_version':str(wrapper_version),
+              'java_version_output':java_version,
+              'detected_language_tool_cache_dirs':cache_dirs
+            },
+            'method':[
+              'The corpus hash/blob are fail-closed before scanning.',
+              'For each passage, title, passage text, all question prompts, all keyed answers, and nonempty answer explanations are concatenated with blank-line separators for one local LanguageTool request per passage.',
+              'Match offsets are mapped back to the exact learner-facing field/item. Raw detector findings are preserved without automatic correction.',
+              'LanguageTool is treated as an independent error detector, not an authority. Every finding requires contextual adjudication before any repair.'
+            ],
+            'raw_finding_count':len(findings),
+            'raw_findings_by_rule':dict(per_rule.most_common()),
+            'raw_findings_by_category':dict(per_category.most_common()),
+            'passages_with_findings':sum(1 for r in rows if per_passage[r['id']] > 0),
+            'passages_without_findings':sum(1 for r in rows if per_passage[r['id']] == 0),
+            'findings':findings,
+            'adjudication':{'status':'PENDING','accepted_defects':0,'false_positives':0,'needs_human_or_context_review':len(findings)},
+            'limitations':'This is one independent machine detector only. Antidote and DeepL Write scans, independent model-family review, native-professional review, educator review, and blind post-repair review remain pending. Raw LanguageTool suggestions are not automatically correct.',
+            'release_effect':'NONE_AUTOMATIC: French remains REOPEN_REQUIRED. This artifact does not by itself satisfy the full independent machine/tool gate.'
+          }
+          out=Path('reading/audit/french_a1_languagetool_fullscan_2026-08-22.json')
+          out.write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'status':evidence['status'],'bound_sha256':sha,'fields_scanned':scanned_fields,'raw_findings':len(findings),'passages_with_findings':evidence['passages_with_findings']},ensure_ascii=False))
+          PY
+      - name: Commit raw scan evidence and self-remove
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_a1_languagetool_fullscan_2026-08-22.json
+          git rm -f .github/workflows/french-a1-languagetool-fullscan-temp.yml
+          git commit -m 'Record French A1 LanguageTool raw scan [skip ci]'
+          git push origin HEAD:repair/french-a1-review-integrity-2026-08-20
