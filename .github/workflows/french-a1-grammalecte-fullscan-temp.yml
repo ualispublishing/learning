@@ -1,0 +1,88 @@
+name: TEMP French A1 Grammalecte full scan
+
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+    paths:
+      - .github/workflows/french-a1-grammalecte-fullscan-temp.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temp-french-a1-grammalecte-fullscan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    if: github.event.pull_request.head.ref == 'repair/french-a1-review-integrity-2026-08-20'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: repair/french-a1-review-integrity-2026-08-20
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install independent French checker
+        run: python -m pip install --quiet pygrammalecte==1.5.0
+      - name: Scan 100 percent of learner-facing French A1 fields
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from collections import Counter
+          import hashlib,json,subprocess
+          import pygrammalecte
+          from pygrammalecte import grammalecte_text
+
+          C=Path('reading/french/a1/passages.jsonl');want='7dbdb48ffc6efd00106490ca9b10ad25643bf7e89967e8fbd2977a04641d6ea3'
+          sha=hashlib.sha256(C.read_bytes()).hexdigest()
+          if sha!=want:raise SystemExit(f'FAIL CLOSED corpus drift {sha}')
+          blob=subprocess.check_output(['git','hash-object',str(C)],text=True).strip()
+          if blob!='417ee292a73244860ecd40741af521aee5436578':raise SystemExit(f'FAIL CLOSED blob drift {blob}')
+          rows=[json.loads(x) for x in C.read_text(encoding='utf-8').splitlines() if x.strip()]
+          if len(rows)!=60:raise SystemExit(f'FAIL CLOSED records {len(rows)}')
+          findings=[];field_counts=Counter();rule_counts=Counter();type_counts=Counter();class_counts=Counter();pass_counts=Counter();chars=0
+          def attr(m,n,d=None):
+              try:return getattr(m,n)
+              except Exception:return d
+          def ser(v):
+              if v is None or isinstance(v,(str,int,float,bool)):return v
+              if isinstance(v,(list,tuple,set)):return [ser(x) for x in v]
+              if isinstance(v,dict):return {str(k):ser(x) for k,x in v.items()}
+              return str(v)
+          for row in rows:
+              fields=[('title',None,row.get('title','')),('text',None,row.get('text',''))]
+              fields += [('question_prompt',q.get('id'),q.get('prompt','')) for q in row.get('questions',[])]
+              fields += [('answer',a.get('id'),a.get('answer','')) for a in row.get('answer_key',[])]
+              fields += [('answer_explanation',a.get('id'),a.get('explanation','')) for a in row.get('answer_key',[]) if a.get('explanation')]
+              for field,item_id,text in fields:
+                  if not isinstance(text,str) or not text.strip():continue
+                  field_counts[field]+=1;chars+=len(text)
+                  for m in grammalecte_text(text):
+                      cls=m.__class__.__name__;start=int(attr(m,'start',0) or 0);end=int(attr(m,'end',start) or start)
+                      rule=ser(attr(m,'rule',None));typ=ser(attr(m,'type',None));word=ser(attr(m,'word',None));msg=ser(attr(m,'message',''));sugg=ser(attr(m,'suggestions',[]));url=ser(attr(m,'url',None));line=ser(attr(m,'line',None))
+                      f={'passage_id':row['id'],'field':field,'item_id':item_id,'message_class':cls,'line':line,'start':start,'end':end,'matched_text':text[start:end] if 0<=start<=end<=len(text) else None,'word':word,'message':msg,'suggestions':sugg,'rule':rule,'type':typ,'url':url,'source_text':text}
+                      findings.append(f);class_counts[cls]+=1;rule_counts[str(rule)]+=1;type_counts[str(typ)]+=1;pass_counts[row['id']]+=1
+          payload={'schema_version':1,'date':'2026-08-22','language':'fr','level':'A1','audit':'independent_machine_detector_grammalecte_fullscan','status':'RAW_FINDINGS_RECORDED_NEEDS_ADJUDICATION','bound_sha256':sha,'bound_git_blob':blob,'scope':{'passages':60,'questions':600,'answers':600,'learner_facing_fields_scanned':sum(field_counts.values()),'characters_scanned':chars,'field_counts':dict(field_counts)},'tool':{'name':'Grammalecte via pygrammalecte','pygrammalecte_version':str(getattr(pygrammalecte,'__version__','1.5.0')),'wrapper_version_pinned':'1.5.0','underlying_grammalecte_version':'2.1.1 per pygrammalecte 1.4+/1.5 package metadata'},'raw_finding_count':len(findings),'findings_by_message_class':dict(class_counts.most_common()),'findings_by_rule':dict(rule_counts.most_common()),'findings_by_type':dict(type_counts.most_common()),'passages_with_findings':sum(1 for r in rows if pass_counts[r['id']]),'findings':findings,'method':['Fail-closed hash/blob check before scanning.','Every nonempty title, passage text, question prompt, keyed answer, and answer explanation is scanned separately, preserving exact field identity and source text.','Raw suggestions are detector evidence only; no change is applied automatically.'],'limitations':'This is an independent machine detector, not a native/professional or educator authority. Findings must be contextually adjudicated, including deliberate incorrect alternatives in grammar-choice questions.','release_effect':'NONE_AUTOMATIC: no release claim until all findings are adjudicated and later gates remain complete.'}
+          Path('reading/audit/french_a1_grammalecte_fullscan_2026-08-22.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'status':payload['status'],'fields_scanned':payload['scope']['learner_facing_fields_scanned'],'raw_findings':len(findings),'passages_with_findings':payload['passages_with_findings'],'top_rules':list(rule_counts.most_common(15))},ensure_ascii=False))
+          print('GRAMMALECTE_FINDINGS_BEGIN')
+          for i,f in enumerate(findings,1):
+              print(json.dumps({'index':i,'passage_id':f['passage_id'],'field':f['field'],'item_id':f['item_id'],'class':f['message_class'],'matched_text':f['matched_text'],'word':f['word'],'message':f['message'],'suggestions':f['suggestions'],'rule':f['rule'],'type':f['type'],'source_text':f['source_text']},ensure_ascii=False))
+          print('GRAMMALECTE_FINDINGS_END')
+          PY
+      - name: Commit raw detector evidence and self-remove
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_a1_grammalecte_fullscan_2026-08-22.json
+          git rm -f .github/workflows/french-a1-grammalecte-fullscan-temp.yml
+          git commit -m 'Record French A1 Grammalecte raw scan [skip ci]'
+          git push origin HEAD:repair/french-a1-review-integrity-2026-08-20
