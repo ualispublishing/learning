@@ -5,7 +5,8 @@ on:
     branches:
       - 'repair/**'
     paths:
-      - 'reading/audit/manifests/**.json'
+      - 'reading/audit/manifests/*.json'
+      - 'reading/audit/manifests/**/*.json'
 
 permissions:
   contents: write
@@ -70,6 +71,7 @@ jobs:
           : > /tmp/generated-paths.txt
           while IFS= read -r manifest; do
             [[ -z "$manifest" ]] && continue
+            python reading/tools/validate_bounded_repair_manifest.py "$manifest"
             python reading/tools/apply_bounded_assessment_repairs.py "$manifest"
             python reading/tools/apply_bounded_assessment_repairs.py "$manifest" --verify
             python - "$manifest" <<'PY' >> /tmp/generated-paths.txt
