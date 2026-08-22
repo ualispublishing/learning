@@ -1,0 +1,204 @@
+name: TEMP French A1 final bounded review repairs
+
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+    paths:
+      - .github/workflows/french-a1-final-bounded-repairs-temp.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temp-french-a1-final-bounded-review-repairs
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    if: github.event.pull_request.head.ref == 'repair/french-a1-review-integrity-2026-08-20'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: repair/french-a1-review-integrity-2026-08-20
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply exact reviewed repairs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json
+
+          corpus=Path('reading/french/a1/passages.jsonl')
+          before=hashlib.sha256(corpus.read_bytes()).hexdigest()
+          expected='005354922bb7a88adce0c0e60f63d5b52099565c557d0a90914ff4f0d7447b80'
+          if before != expected:
+              raise SystemExit(f'FAIL CLOSED: A1 hash drift {before} != {expected}')
+          rows=[json.loads(x) for x in corpus.read_text(encoding='utf-8').splitlines() if x.strip()]
+          by={r['id']:r for r in rows}
+          repairs=[]
+
+          # Unit 06: verified beaucoup quantity sense.
+          r=by['fr-a1-u06-p01']; t=next(x for x in r['new_lexical_targets'] if x['id']=='fr-rank-0141')
+          if t.get('form')!='beaucoup' or t.get('intended_sense')!='very' or 'sense_adjudication' in t:
+              raise SystemExit('FAIL CLOSED: beaucoup source metadata drift')
+          t['intended_sense']='a large quantity; a lot; much'
+          t['sense_adjudication']={
+            'status':'VERIFIED_OVERRIDE',
+            'authority':'Dictionnaire de l’Académie française, 9e édition, “beaucoup”',
+            'authority_url':'https://www.dictionnaire-academie.fr/article/A9B0705?history=0',
+            'verified_reader_sense':'en quantité indéterminée mais plus ou moins considérable; en grand nombre / a large quantity, a lot, much',
+            'reason':'The source deck gloss “very” does not support the quantity sense actually taught by the passage and all linked assessments; the Académie explicitly defines beaucoup as quantity/abundance.'
+          }
+          repairs.append({'passage_id':r['id'],'target_id':t['id'],'kind':'verified_target_sense','before':'very','after':t['intended_sense']})
+
+          r=by['fr-a1-u06-p06']; q=next(x for x in r['questions'] if x['id']=='q2'); a=next(x for x in r['answer_key'] if x['question_id']=='q2')
+          old='Que boit Camille beaucoup ?'; new='Que boit Camille le matin ?'
+          if (q.get('prompt'),q.get('type'),a.get('answer')) != (old,'literal_detail','De l’eau.'):
+              raise SystemExit('FAIL CLOSED: u06-p06/q2 source drift')
+          q['prompt']=new
+          repairs.append({'passage_id':r['id'],'question_id':'q2','kind':'question_naturalness','before':old,'after':new,'answer_unchanged':'De l’eau.'})
+
+          # Unit 07: answer grounding/naturalness.
+          r=by['fr-a1-u07-p01']; q=next(x for x in r['questions'] if x['id']=='q5'); a=next(x for x in r['answer_key'] if x['question_id']=='q5')
+          olda='Parce qu’elle est près et qu’ils ont peu de temps.'; newa='Parce qu’elle est près de leur école et qu’ils ont peu de temps.'
+          if q.get('prompt')!='Pourquoi choisissent-ils la bibliothèque ?' or a.get('answer')!=olda:
+              raise SystemExit('FAIL CLOSED: u07-p01/q5 source drift')
+          a['answer']=newa
+          repairs.append({'passage_id':r['id'],'question_id':'q5','kind':'answer_naturalness_grounding','before':olda,'after':newa})
+
+          # Unit 08 P01: natural reflexive/plural phrase, explicit inflected exposure evidence.
+          r=by['fr-a1-u08-p01']; old='Elle lave ensuite chaque main avant de préparer une petite collation.'; new='Elle se lave ensuite les mains avant de préparer une petite collation.'
+          if r['text'].count(old)!=1: raise SystemExit('FAIL CLOSED: u08-p01 text span drift')
+          t=next(x for x in r['new_lexical_targets'] if x['id']=='fr-rank-0195')
+          if t.get('form')!='main' or t.get('exposures_in_text')!=2 or 'exposure_surface_forms' in t:
+              raise SystemExit('FAIL CLOSED: u08-p01 main exposure metadata drift')
+          r['text']=r['text'].replace(old,new,1); t['exposure_surface_forms']=['main','mains']; t['exposure_count_method']='exact_declared_surface_forms'; r['word_count']=len(r['text'].split())
+          repairs.append({'passage_id':r['id'],'kind':'prose_naturalness_and_inflected_exposure','before':old,'after':new,'target_id':t['id'],'exposure_surface_forms':['main','mains'],'exposures_in_text':2})
+
+          r=by['fr-a1-u08-p02']; old='Elle comprend qu’écouter son corps ne signifie pas arrêter toujours, mais choisir un effort adapté à ce qu’on ressent.'; new='Elle comprend qu’écouter son corps ne signifie pas toujours s’arrêter, mais choisir un effort adapté à ce qu’on ressent.'
+          if r['text'].count(old)!=1: raise SystemExit('FAIL CLOSED: u08-p02 text span drift')
+          r['text']=r['text'].replace(old,new,1); r['word_count']=len(r['text'].split())
+          repairs.append({'passage_id':r['id'],'kind':'prose_naturalness','before':old,'after':new})
+
+          r=by['fr-a1-u08-p03']; q=next(x for x in r['questions'] if x['id']=='q2'); a=next(x for x in r['answer_key'] if x['question_id']=='q2')
+          old='Que boit beaucoup Camille ?'; new='Quelle boisson Camille boit-elle beaucoup ?'
+          if (q.get('prompt'),q.get('type'),a.get('answer')) != (old,'literal_detail','De l’eau.'):
+              raise SystemExit('FAIL CLOSED: u08-p03/q2 source drift')
+          q['prompt']=new
+          repairs.append({'passage_id':r['id'],'question_id':'q2','kind':'question_naturalness','before':old,'after':new,'answer_unchanged':'De l’eau.'})
+
+          # Unit 09: natural body-part construction and verified ordinary-water sense.
+          r=by['fr-a1-u09-p02']; old='Après le déjeuner, la mère de Camille sert du thé et son ami dit que son pied se sent déjà mieux.'; new='Après le déjeuner, la mère de Camille sert du thé et son ami dit que son pied va déjà mieux.'
+          if r['text'].count(old)!=1: raise SystemExit('FAIL CLOSED: u09-p02 text span drift')
+          r['text']=r['text'].replace(old,new,1); r['word_count']=len(r['text'].split())
+          repairs.append({'passage_id':r['id'],'kind':'prose_naturalness','before':old,'after':new})
+
+          r=by['fr-a1-u09-p05']; t=next(x for x in r['new_lexical_targets'] if x['id']=='fr-rank-0324')
+          old_sense='In particular, rain; Natural liquid quantities or expanses; Fluids such as sweat, formed and found in the body of man or animal'
+          if t.get('form')!='eau' or t.get('intended_sense')!=old_sense or 'sense_adjudication' in t:
+              raise SystemExit('FAIL CLOSED: eau source metadata drift')
+          t['intended_sense']='water; ordinary drinking water'
+          t['sense_adjudication']={
+            'status':'VERIFIED_OVERRIDE',
+            'authority':'Dictionnaire de l’Académie française, 9e édition, “eau”',
+            'authority_url':'https://www.dictionnaire-academie.fr/article/A9E0003',
+            'verified_reader_sense':'liquide transparent, incolore, inodore et sans saveur à l’état pur; ordinary water, including water that one drinks',
+            'reason':'The source deck gloss omits the ordinary-water sense actually taught by the passage and assessments. The Académie defines eau first as ordinary water; its usage guidance also gives “Boire de l’eau fraîche”.'
+          }
+          repairs.append({'passage_id':r['id'],'target_id':t['id'],'kind':'verified_target_sense','before':old_sense,'after':t['intended_sense']})
+
+          # Unit 10: naturalize shoe-shopping number while retaining the canonical lemma target.
+          r=by['fr-a1-u10-p05']
+          spans=[
+            ('Dans le magasin, elle regarde aussi une chaussure de sport, puis une autre paire.','Dans le magasin, elle regarde aussi une paire de chaussures de sport, puis une autre paire.'),
+            ('Elle n’a pas besoin de nouvelle chaussure aujourd’hui, donc elle n’en achète pas.','Elle n’a pas besoin de nouvelles chaussures aujourd’hui, donc elle n’en achète pas.')
+          ]
+          for old,new in spans:
+              if r['text'].count(old)!=1: raise SystemExit(f'FAIL CLOSED: u10-p05 span drift: {old}')
+              r['text']=r['text'].replace(old,new,1)
+          t=next(x for x in r['new_lexical_targets'] if x['id']=='fr-rank-0956')
+          if t.get('form')!='chaussure' or t.get('exposures_in_text')!=2 or 'exposure_surface_forms' in t:
+              raise SystemExit('FAIL CLOSED: u10-p05 chaussure exposure metadata drift')
+          t['exposure_surface_forms']=['chaussures']; t['exposure_count_method']='exact_declared_surface_forms'
+          q=next(x for x in r['questions'] if x['id']=='q2'); a=next(x for x in r['answer_key'] if x['question_id']=='q2')
+          if (q.get('prompt'),q.get('type'),a.get('answer')) != ('Achète-t-elle une nouvelle chaussure ?','literal_detail','Non.'):
+              raise SystemExit('FAIL CLOSED: u10-p05/q2 source drift')
+          q['prompt']='Achète-t-elle de nouvelles chaussures ?'; r['word_count']=len(r['text'].split())
+          repairs.append({'passage_id':r['id'],'kind':'number_naturalness_and_inflected_exposure','text_repairs':[{'before':a,'after':b} for a,b in spans],'question_id':'q2','before_prompt':'Achète-t-elle une nouvelle chaussure ?','after_prompt':'Achète-t-elle de nouvelles chaussures ?','target_id':t['id'],'exposure_surface_forms':['chaussures'],'exposures_in_text':2})
+
+          for rid in ['fr-a1-u08-p01','fr-a1-u08-p02','fr-a1-u09-p02','fr-a1-u10-p05']:
+              wc=by[rid]['word_count']
+              if not 90<=wc<=140: raise SystemExit(f'FAIL CLOSED: {rid} word band {wc}')
+
+          corpus.write_text('\n'.join(json.dumps(r,ensure_ascii=False,sort_keys=True) for r in rows)+'\n',encoding='utf-8')
+          after=hashlib.sha256(corpus.read_bytes()).hexdigest()
+
+          audit=Path('reading/tools/audit_french_a1_generation_integrity.py'); src=audit.read_text(encoding='utf-8')
+          old="OV={('fr-a1-u04-p01','autre'),('fr-a1-u04-p05','maison'),('fr-a1-u06-p04','jamais'),('fr-a1-u07-p04','droite')}"
+          new="OV={('fr-a1-u04-p01','autre'),('fr-a1-u04-p05','maison'),('fr-a1-u06-p01','beaucoup'),('fr-a1-u06-p04','jamais'),('fr-a1-u07-p04','droite'),('fr-a1-u09-p05','eau')}"
+          if src.count(old)!=1: raise SystemExit(f'FAIL CLOSED: OV patch anchor count {src.count(old)}')
+          audit.write_text(src.replace(old,new,1),encoding='utf-8')
+
+          review={
+            'schema_version':1,'date':'2026-08-22','language':'fr','level':'A1','review_kind':'internal_semantic_pedagogical_qa_review_units05_10',
+            'bound_before_sha256':before,'scope':{'units':[5,6,7,8,9,10],'passages':36,'questions':360,'answers':360},
+            'units':{
+              '5':{'status':'NO_HIGH_CONFIDENCE_REPAIR_CONFIRMED','confirmed_finding_count':0,'review_candidate':'p05/q6 definition of ville as “une grande localité” is slightly narrow; defer to independent pedagogy.'},
+              '6':{'status':'CONFIRMED_REPAIRS','confirmed_finding_count':2,'findings':['beaucoup metadata gloss contradicted the taught quantity sense','p06/q2 unnatural word order']},
+              '7':{'status':'CONFIRMED_REPAIR','confirmed_finding_count':1,'findings':['p01/q5 answer used incomplete “elle est près” instead of grounding the complement']},
+              '8':{'status':'CONFIRMED_REPAIRS','confirmed_finding_count':3,'findings':['p01 non-idiomatic hand-washing phrase','p02 misplaced toujours with infinitive','p03/q2 awkward beaucoup word order']},
+              '9':{'status':'CONFIRMED_REPAIRS','confirmed_finding_count':2,'findings':['p02 body-part construction “son pied se sent mieux”','eau metadata omitted ordinary-water sense taught by passage']},
+              '10':{'status':'CONFIRMED_REPAIR','confirmed_finding_count':1,'findings':['p05 shoe-shopping singular/plural wording was internally inconsistent and non-idiomatic']}
+            },
+            'authority_sources':[
+              {'target':'beaucoup','url':'https://www.dictionnaire-academie.fr/article/A9B0705?history=0','finding':'Académie 9e defines quantity/abundance.'},
+              {'target':'eau','url':'https://www.dictionnaire-academie.fr/article/A9E0003','finding':'Académie 9e defines ordinary water as the primary sense.'},
+              {'target':'eau_usage','url':'https://www.dictionnaire-academie.fr/article/A9D0139','finding':'Académie usage guidance includes “Boire de l’eau fraîche”.'}
+            ],
+            'limitations':'Internal model review plus cited lexical authority. This is not native-professional, educator, blind, independent-model-family, or external-tool release approval.',
+            'release_effect':'NONE_AUTOMATIC: French remains REOPEN_REQUIRED; independent release gates remain mandatory.'
+          }
+          Path('reading/audit/french_a1_units05_10_internal_semantic_qa_review_2026-08-22.json').write_text(json.dumps(review,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          evidence={'schema_version':1,'date':'2026-08-22','language':'fr','level':'A1','status':'BOUNDED_REPAIRS_APPLIED_NEEDS_DETERMINISTIC_RERUN','before_sha256':before,'after_sha256':after,'confirmed_repair_count':len(repairs),'repairs':repairs,'release_effect':'NONE_AUTOMATIC: French remains REOPEN_REQUIRED; deterministic repair is not independent release approval.'}
+          Path('reading/audit/french_a1_units06_10_final_bounded_repairs_2026-08-22.json').write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'before_sha256':before,'after_sha256':after,'repairs':len(repairs)},ensure_ascii=False))
+          PY
+      - name: Run strict source/sense/exposure integrity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile reading/tools/audit_french_a1_generation_integrity.py
+          python reading/tools/audit_french_a1_generation_integrity.py
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib,json
+          corpus=Path('reading/french/a1/passages.jsonl'); sha=hashlib.sha256(corpus.read_bytes()).hexdigest()
+          audit=json.loads(Path('reading/audit/french_a1_generation_integrity.json').read_text(encoding='utf-8'))
+          if audit.get('status')!='PASS' or audit.get('failures') or audit.get('legacy_unit01_exposure_variances'):
+              raise SystemExit(f'FAIL CLOSED: strict integrity failed: {audit.get("failures")}')
+          evp=Path('reading/audit/french_a1_units06_10_final_bounded_repairs_2026-08-22.json'); ev=json.loads(evp.read_text(encoding='utf-8'))
+          if sha!=ev['after_sha256']: raise SystemExit('FAIL CLOSED: repair evidence hash mismatch')
+          ev['status']='PASS_DETERMINISTIC_FRENCH_A1_FINAL_BOUNDED_REPAIRS_NEEDS_INDEPENDENT_REVIEW'; ev['bound_sha256']=sha; ev['generation_integrity_status']='PASS'
+          evp.write_text(json.dumps(ev,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'status':ev['status'],'bound_sha256':sha,'verified_overrides':audit.get('verified_sense_overrides')},ensure_ascii=False))
+          PY
+      - name: Commit durable repairs and review evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/french/a1/passages.jsonl \
+                  reading/tools/audit_french_a1_generation_integrity.py \
+                  reading/audit/french_a1_generation_integrity.json \
+                  reading/audit/french_a1_units05_10_internal_semantic_qa_review_2026-08-22.json \
+                  reading/audit/french_a1_units06_10_final_bounded_repairs_2026-08-22.json
+          git commit -m 'Apply final French A1 bounded review repairs [skip ci]'
+          git push origin HEAD:repair/french-a1-review-integrity-2026-08-20
