@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 CANON=ROOT/'reading/french/a1/passages.jsonl'; LEX=ROOT/'french_top1000.csv'
 OUT=ROOT/'reading/audit/french_a1_generation_integrity.json'
-OV={('fr-a1-u04-p01','autre'),('fr-a1-u04-p05','maison'),('fr-a1-u06-p04','jamais'),('fr-a1-u07-p04','droite')}
+OV={('fr-a1-u04-p01','autre'),('fr-a1-u04-p05','maison'),('fr-a1-u06-p01','beaucoup'),('fr-a1-u06-p04','jamais'),('fr-a1-u07-p04','droite'),('fr-a1-u09-p05','eau')}
 def deck():
  d={}
  with LEX.open(encoding='utf-8',newline='') as f:

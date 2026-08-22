@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "status": "PASS_DETERMINISTIC_FRENCH_A1_FINAL_BOUNDED_REPAIRS_NEEDS_INDEPENDENT_REVIEW",
+  "before_sha256": "005354922bb7a88adce0c0e60f63d5b52099565c557d0a90914ff4f0d7447b80",
+  "after_sha256": "fe9f321ada5740baf264c009ce0b5eb845777927f37f99f03e7459c5ae72b64c",
+  "confirmed_repair_count": 9,
+  "repairs": [
+    {
+      "passage_id": "fr-a1-u06-p01",
+      "target_id": "fr-rank-0141",
+      "kind": "verified_target_sense",
+      "before": "very",
+      "after": "a large quantity; a lot; much"
+    },
+    {
+      "passage_id": "fr-a1-u06-p06",
+      "question_id": "q2",
+      "kind": "question_naturalness",
+      "before": "Que boit Camille beaucoup ?",
+      "after": "Que boit Camille le matin ?",
+      "answer_unchanged": "De l’eau."
+    },
+    {
+      "passage_id": "fr-a1-u07-p01",
+      "question_id": "q5",
+      "kind": "answer_naturalness_grounding",
+      "before": "Parce qu’elle est près et qu’ils ont peu de temps.",
+      "after": "Parce qu’elle est près de leur école et qu’ils ont peu de temps."
+    },
+    {
+      "passage_id": "fr-a1-u08-p01",
+      "kind": "prose_naturalness_and_inflected_exposure",
+      "before": "Elle lave ensuite chaque main avant de préparer une petite collation.",
+      "after": "Elle se lave ensuite les mains avant de préparer une petite collation.",
+      "target_id": "fr-rank-0195",
+      "exposure_surface_forms": [
+        "main",
+        "mains"
+      ],
+      "exposures_in_text": 2
+    },
+    {
+      "passage_id": "fr-a1-u08-p02",
+      "kind": "prose_naturalness",
+      "before": "Elle comprend qu’écouter son corps ne signifie pas arrêter toujours, mais choisir un effort adapté à ce qu’on ressent.",
+      "after": "Elle comprend qu’écouter son corps ne signifie pas toujours s’arrêter, mais choisir un effort adapté à ce qu’on ressent."
+    },
+    {
+      "passage_id": "fr-a1-u08-p03",
+      "question_id": "q2",
+      "kind": "question_naturalness",
+      "before": "Que boit beaucoup Camille ?",
+      "after": "Quelle boisson Camille boit-elle beaucoup ?",
+      "answer_unchanged": "De l’eau."
+    },
+    {
+      "passage_id": "fr-a1-u09-p02",
+      "kind": "prose_naturalness",
+      "before": "Après le déjeuner, la mère de Camille sert du thé et son ami dit que son pied se sent déjà mieux.",
+      "after": "Après le déjeuner, la mère de Camille sert du thé et son ami dit que son pied va déjà mieux."
+    },
+    {
+      "passage_id": "fr-a1-u09-p05",
+      "target_id": "fr-rank-0324",
+      "kind": "verified_target_sense",
+      "before": "In particular, rain; Natural liquid quantities or expanses; Fluids such as sweat, formed and found in the body of man or animal",
+      "after": "water; ordinary drinking water"
+    },
+    {
+      "passage_id": "fr-a1-u10-p05",
+      "kind": "number_naturalness_and_inflected_exposure",
+      "text_repairs": [
+        {
+          "before": "Dans le magasin, elle regarde aussi une chaussure de sport, puis une autre paire.",
+          "after": "Dans le magasin, elle regarde aussi une paire de chaussures de sport, puis une autre paire."
+        },
+        {
+          "before": "Elle n’a pas besoin de nouvelle chaussure aujourd’hui, donc elle n’en achète pas.",
+          "after": "Elle n’a pas besoin de nouvelles chaussures aujourd’hui, donc elle n’en achète pas."
+        }
+      ],
+      "question_id": "q2",
+      "before_prompt": "Achète-t-elle une nouvelle chaussure ?",
+      "after_prompt": "Achète-t-elle de nouvelles chaussures ?",
+      "target_id": "fr-rank-0956",
+      "exposure_surface_forms": [
+        "chaussures"
+      ],
+      "exposures_in_text": 2
+    }
+  ],
+  "release_effect": "NONE_AUTOMATIC: French remains REOPEN_REQUIRED; deterministic repair is not independent release approval.",
+  "bound_sha256": "fe9f321ada5740baf264c009ce0b5eb845777927f37f99f03e7459c5ae72b64c",
+  "generation_integrity_status": "PASS"
+}
