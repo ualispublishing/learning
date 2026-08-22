@@ -79,6 +79,15 @@ def main() -> None:
 
     question_ids_by_passage = {r["id"]: {q["id"] for q in r.get("questions", [])} for r in scoped}
     answer_ids_by_passage = {r["id"]: {a["question_id"] for a in r.get("answer_key", [])} for r in scoped}
+    declared_target_ids_by_passage = {
+        r["id"]: {
+            item["id"]
+            for field in ("new_lexical_targets", "review_lexical_targets", "grammar_targets", "discourse_targets")
+            for item in r.get(field, [])
+            if isinstance(item, dict) and isinstance(item.get("id"), str) and item.get("id")
+        }
+        for r in scoped
+    }
     for rid in scoped_ids:
         if question_ids_by_passage[rid] != answer_ids_by_passage[rid]:
             raise SystemExit(f"Question/answer linkage mismatch in {rid}")
@@ -95,6 +104,21 @@ def main() -> None:
             missing_side = sorted({"prompt", "type", "answer"} - set(repair.get(side, {})))
             if missing_side:
                 raise SystemExit(f"Repair {key} missing {side} fields: {missing_side}")
+        before_has_targets = "target_ids" in repair.get("before", {})
+        after_has_targets = "target_ids" in repair.get("after", {})
+        if before_has_targets != after_has_targets:
+            raise SystemExit(f"Repair {key} must specify target_ids on both before and after, or neither")
+        if before_has_targets:
+            for side in ("before", "after"):
+                value = repair[side]["target_ids"]
+                if value is not None:
+                    if not isinstance(value, list) or any(not isinstance(x, str) or not x for x in value):
+                        raise SystemExit(f"Repair {key} has invalid {side}.target_ids: {value!r}")
+                    if len(value) != len(set(value)):
+                        raise SystemExit(f"Repair {key} has duplicate {side}.target_ids: {value!r}")
+            unknown = sorted(set(repair["after"]["target_ids"] or []) - declared_target_ids_by_passage[repair["passage_id"]])
+            if unknown:
+                raise SystemExit(f"Repair {key} links undeclared target IDs: {unknown}")
 
     fp_keys = []
     for fp in manifest["false_positives"]:
