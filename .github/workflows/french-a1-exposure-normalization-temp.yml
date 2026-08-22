@@ -1,0 +1,156 @@
+name: TEMP French A1 strict exposure normalization
+
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+    paths:
+      - .github/workflows/french-a1-exposure-normalization-temp.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temp-french-a1-exposure-normalization
+  cancel-in-progress: false
+
+jobs:
+  normalize-and-audit:
+    if: github.event.pull_request.head.ref == 'repair/french-a1-review-integrity-2026-08-20'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: repair/french-a1-review-integrity-2026-08-20
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Normalize exact exposure metadata and harden audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json
+
+          corpus = Path('reading/french/a1/passages.jsonl')
+          before = hashlib.sha256(corpus.read_bytes()).hexdigest()
+          expected = 'a1e19854469149d038dcaf41d0d8a6923081bddf2e5c6cd00675fa122d5c002f'
+          if before != expected:
+              raise SystemExit(f'FAIL CLOSED: A1 hash drift {before} != {expected}')
+
+          specs = {
+              ('fr-a1-u01-p02','fr-rank-0061'): ('quand', 4),
+              ('fr-a1-u01-p02','fr-rank-0063'): ('alors', 3),
+              ('fr-a1-u01-p03','fr-rank-0023'): ('veut', 3),
+              ('fr-a1-u01-p04','fr-rank-0021'): ('peut', 6),
+              ('fr-a1-u01-p05','fr-rank-0057'): ('là', 2),
+          }
+          lines = corpus.read_text(encoding='utf-8').splitlines()
+          rows = [json.loads(line) for line in lines if line.strip()]
+          seen = set()
+          changes = []
+          for row in rows:
+              for target in row.get('new_lexical_targets', []):
+                  key = (row['id'], target.get('id'))
+                  if key not in specs:
+                      continue
+                  if key in seen:
+                      raise SystemExit(f'FAIL CLOSED: duplicate normalization target {key}')
+                  seen.add(key)
+                  surface, count = specs[key]
+                  if target.get('exposures_in_text') != 1:
+                      raise SystemExit(f'FAIL CLOSED: stored exposure pre-value drift at {key}: {target.get("exposures_in_text")}')
+                  if 'exposure_surface_forms' in target or 'exposure_count_method' in target:
+                      raise SystemExit(f'FAIL CLOSED: exposure-method metadata already exists at {key}')
+                  target['exposures_in_text'] = count
+                  target['exposure_surface_forms'] = [surface]
+                  target['exposure_count_method'] = 'exact_declared_surface_forms'
+                  changes.append({
+                      'passage_id': key[0], 'target_id': key[1],
+                      'canonical_form': target.get('form'), 'lemma': target.get('lemma'),
+                      'before_exposures_in_text': 1, 'after_exposures_in_text': count,
+                      'exposure_surface_forms': [surface],
+                      'exposure_count_method': 'exact_declared_surface_forms'
+                  })
+          if seen != set(specs):
+              raise SystemExit(f'FAIL CLOSED: target inventory mismatch missing={sorted(set(specs)-seen)}')
+          corpus.write_text('\n'.join(json.dumps(r, ensure_ascii=False, sort_keys=True) for r in rows) + '\n', encoding='utf-8')
+
+          audit_path = Path('reading/tools/audit_french_a1_generation_integrity.py')
+          src = audit_path.read_text(encoding='utf-8')
+          old = """   actual=count(r['text'],form);stored=t.get('exposures_in_text')\n   if r.get('unit')==1:\n    if not isinstance(stored,int) or stored<1 or str(key) not in qtargets:bad.append(f'{pid}:{form}: invalid legacy calibration exposure evidence')\n    elif actual!=stored:legacy.append({'passage_id':pid,'form':form,'stored_exposures':stored,'literal_surface_occurrences':actual,'method':'legacy calibration selected/inflected exposure; exact literal equality not asserted'})\n   elif actual!=stored:bad.append(f'{pid}:{form}: exposure count')\n"""
+          new = """   declared_forms=t.get('exposure_surface_forms')\n   if declared_forms is None:declared_forms=[form]\n   if not isinstance(declared_forms,list) or not declared_forms or any(not isinstance(x,str) or not x for x in declared_forms) or len(declared_forms)!=len(set(declared_forms)):\n    bad.append(f'{pid}:{form}: invalid exposure_surface_forms');continue\n   method=t.get('exposure_count_method')\n   if method is not None and method!='exact_declared_surface_forms':bad.append(f'{pid}:{form}: unsupported exposure_count_method {method!r}')\n   actual=sum(count(r['text'],surface) for surface in declared_forms);stored=t.get('exposures_in_text')\n   if not isinstance(stored,int) or stored<1 or actual!=stored:\n    bad.append(f'{pid}:{form}: exposure count | surfaces={declared_forms!r} stored={stored!r} actual={actual}')\n"""
+          if src.count(old) != 1:
+              raise SystemExit(f'FAIL CLOSED: exposure-audit patch anchor count={src.count(old)}')
+          src = src.replace(old, new, 1)
+          old_note = "'Unit 01 predates the exact literal-surface exposure-count convention, so its positive exposure metadata is retained as legacy selected/inflected evidence and is cross-checked against lexical assessment use rather than rewritten.'"
+          new_note = "'Exposure counts are exact Unicode-bounded counts of exposure_surface_forms when explicitly declared, otherwise of the canonical target form; Unit 01 is held to the same exact convention as later units.'"
+          if src.count(old_note) != 1:
+              raise SystemExit('FAIL CLOSED: legacy method-note anchor missing')
+          src = src.replace(old_note, new_note, 1)
+          audit_path.write_text(src, encoding='utf-8')
+
+          after = hashlib.sha256(corpus.read_bytes()).hexdigest()
+          evidence = {
+              'schema_version': 1,
+              'date': '2026-08-22',
+              'language': 'fr', 'level': 'A1',
+              'status': 'NORMALIZED_NEEDS_DETERMINISTIC_RERUN',
+              'before_sha256': before, 'after_sha256': after,
+              'repair_count': len(changes), 'changes': changes,
+              'learner_facing_text_changed': False,
+              'questions_changed': False, 'answers_changed': False,
+              'target_ids_changed': False, 'target_lemmas_changed': False,
+              'target_senses_changed': False,
+              'audit_policy_change': 'Remove the Unit 01 grandfather exception and require exact Unicode-bounded exposure equality for all French A1 targets. Inflected realizations are counted only through explicit exposure_surface_forms metadata.',
+              'release_effect': 'NONE_AUTOMATIC: deterministic normalization only; French remains REOPEN_REQUIRED and independent release reviews remain pending.'
+          }
+          out = Path('reading/audit/french_a1_unit01_exposure_normalization_2026-08-22.json')
+          out.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          print(json.dumps({'before':before,'after':after,'repairs':len(changes)}, ensure_ascii=False))
+          PY
+
+      - name: Rerun strict A1 generation integrity and bind evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile reading/tools/audit_french_a1_generation_integrity.py
+          python reading/tools/audit_french_a1_generation_integrity.py
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json
+          corpus=Path('reading/french/a1/passages.jsonl')
+          current=hashlib.sha256(corpus.read_bytes()).hexdigest()
+          audit=json.loads(Path('reading/audit/french_a1_generation_integrity.json').read_text(encoding='utf-8'))
+          if audit.get('status')!='PASS' or audit.get('failures'):
+              raise SystemExit(f'FAIL CLOSED: strict generation audit did not pass: {audit.get("failures")}')
+          if audit.get('legacy_unit01_exposure_variances'):
+              raise SystemExit(f'FAIL CLOSED: legacy exposure variance remains: {audit.get("legacy_unit01_exposure_variances")}')
+          evp=Path('reading/audit/french_a1_unit01_exposure_normalization_2026-08-22.json')
+          ev=json.loads(evp.read_text(encoding='utf-8'))
+          if current != ev['after_sha256']:
+              raise SystemExit('FAIL CLOSED: evidence/corpus hash mismatch')
+          ev['status']='PASS_DETERMINISTIC_FRENCH_A1_EXPOSURE_NORMALIZATION_NEEDS_INDEPENDENT_REVIEW'
+          ev['bound_sha256']=current
+          ev['generation_integrity_status']='PASS'
+          ev['remaining_legacy_exposure_variance_count']=0
+          evp.write_text(json.dumps(ev, ensure_ascii=False, indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'status':ev['status'],'bound_sha256':current},ensure_ascii=False))
+          PY
+
+      - name: Commit only durable normalization outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/french/a1/passages.jsonl \
+                  reading/tools/audit_french_a1_generation_integrity.py \
+                  reading/audit/french_a1_generation_integrity.json \
+                  reading/audit/french_a1_unit01_exposure_normalization_2026-08-22.json
+          git commit -m 'Normalize French A1 exact exposure metadata [skip ci]'
+          git push origin HEAD:repair/french-a1-review-integrity-2026-08-20
