@@ -9,7 +9,7 @@ This directory is the queue for exact, review-gated language assessment repairs.
 3. The registered workflow runs a fail-closed preflight, applies only the exact manifest repairs, validates the bounded unit, verifies the generated output/evidence, and commits only the corpus and evidence paths named by the manifest.
 4. Open a draft PR and keep the independent semantic/native/educator review gate. Deterministic PASS is not release approval.
 
-Multiple manifests in one push may target different corpus files. A push containing multiple manifests for the same corpus file is rejected to prevent order-dependent repairs.
+Multiple manifests in one push may target different corpus files. A push containing multiple manifests for the same corpus file is rejected to prevent order-dependent repairs. Runs are serialized per repair branch, bounded by a workflow timeout, and only the final Git transport push is retried on transient failures; validation failures are never retried or bypassed.
 
 ## Required manifest fields
 
