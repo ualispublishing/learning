@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "unit": 3,
+  "review_kind": "internal_semantic_pedagogical_qa_review",
+  "status": "NO_HIGH_CONFIDENCE_REPAIR_CONFIRMED_NEEDS_INDEPENDENT_REVIEW",
+  "bound_a1_sha256": "a1e19854469149d038dcaf41d0d8a6923081bddf2e5c6cd00675fa122d5c002f",
+  "scope": {"passages":6,"questions":60,"answers":60},
+  "confirmed_finding_count": 0,
+  "confirmed_findings": [],
+  "positive_checks": [
+    "All 6 passages have 10 linked questions and 10 linked answers.",
+    "Direct lexical-target teaching questions inspected in Unit 03 carry target_ids.",
+    "P06 introduces zero new lexical targets and functions as a review checkpoint.",
+    "No high-confidence answer-key contradiction was confirmed in this internal pass.",
+    "No high-confidence semantic-category mismatch, misleading grammar framing, or unnecessary technical A1 wording comparable to the confirmed Unit 02 defects was found."
+  ],
+  "review_candidates_not_confirmed_for_repair": [
+    {"passage_id":"fr-a1-u03-p01","question_id":"q6","note":"The answer wording « Pour un destinataire ou dans un but précis » is somewhat abstract for A1; consider simplifying during independent pedagogical review, but it is semantically defensible."},
+    {"passage_id":"fr-a1-u03-p03","field":"text","note":"« Ensuite, nous pouvons imaginer la page finale, dit Camille en riant. » functions as direct-speech-style narration without guillemets. It is understandable and not auto-repaired; native editorial review can decide punctuation/style."},
+    {"passage_id":"fr-a1-u03-p06","field":"text","note":"The narration generalizes with « nous pouvons améliorer un texte » after third-person narration. This also supplies the intended nous review; retain pending native/pedagogical review rather than auto-rewriting."}
+  ],
+  "limitations": "Internal model review only. This is not native-professional, educator, blind, external-tool, or independent-model-family approval.",
+  "release_effect": "NONE_AUTOMATIC: French remains REOPEN_REQUIRED. Unit 03 has no confirmed bounded repair from this pass, but independent semantic/native/pedagogical/assessment review remains required."
+}
