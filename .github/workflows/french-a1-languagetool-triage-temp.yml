@@ -1,0 +1,121 @@
+name: TEMP French A1 LanguageTool triage
+
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+    paths:
+      - .github/workflows/french-a1-languagetool-triage-temp.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temp-french-a1-languagetool-triage
+  cancel-in-progress: false
+
+jobs:
+  triage:
+    if: github.event.pull_request.head.ref == 'repair/french-a1-review-integrity-2026-08-20'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: repair/french-a1-review-integrity-2026-08-20
+      - name: Build compact contextual adjudication inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from collections import Counter
+          import hashlib,json,re,subprocess
+
+          corpus=Path('reading/french/a1/passages.jsonl')
+          expected='fe9f321ada5740baf264c009ce0b5eb845777927f37f99f03e7459c5ae72b64c'
+          if hashlib.sha256(corpus.read_bytes()).hexdigest()!=expected:
+              raise SystemExit('FAIL CLOSED: corpus drift')
+          scanp=Path('reading/audit/french_a1_languagetool_fullscan_2026-08-22.json')
+          scan=json.loads(scanp.read_text(encoding='utf-8'))
+          if scan.get('bound_sha256')!=expected or scan.get('raw_finding_count')!=len(scan.get('findings',[])):
+              raise SystemExit('FAIL CLOSED: raw LanguageTool evidence mismatch')
+          rows={r['id']:r for r in [json.loads(x) for x in corpus.read_text(encoding='utf-8').splitlines() if x.strip()]}
+
+          def source_field(f):
+              r=rows[f['passage_id']]
+              fld=f['field']; iid=f.get('item_id')
+              if fld=='title': return r.get('title',''),None
+              if fld=='text': return r.get('text',''),None
+              if fld=='question_prompt':
+                  q=next(x for x in r['questions'] if x['id']==iid); return q.get('prompt',''),q
+              if fld=='answer':
+                  a=next(x for x in r['answer_key'] if x['id']==iid); return a.get('answer',''),a
+              if fld=='answer_explanation':
+                  a=next(x for x in r['answer_key'] if x['id']==iid); return a.get('explanation',''),a
+              return '',None
+
+          items=[]; counts=Counter(); manual=[]
+          for n,f in enumerate(scan['findings'],1):
+              text,obj=source_field(f); rid=str(f.get('rule_id')); cat=str(f.get('category')); off=f.get('offset_in_field'); matched=f.get('matched_text','')
+              classification='MANUAL_CONTEXT_REVIEW'
+              rationale='No safe mechanical disposition.'
+
+              if rid=='UNPAIRED_BRACKETS' and f.get('field')=='question_prompt' and matched==')' and re.search(r'(?:^|\s)[A-D]\)',text):
+                  classification='MECHANICAL_FALSE_POSITIVE_MC_OPTION_LABEL'
+                  rationale='LanguageTool interprets A)/B)/C)/D) answer-option labels as unmatched closing parentheses.'
+              elif rid=='UPPERCASE_SENTENCE_START':
+                  if f.get('field')=='answer' and text and text[:1].islower() and not re.search(r'[.!?…]$',text.strip()):
+                      classification='MECHANICAL_FALSE_POSITIVE_SHORT_ANSWER_FRAGMENT'
+                      rationale='Keyed answer is intentionally a lower-case lexical/phrase fragment, not a standalone prose sentence.'
+                  elif f.get('field')=='question_prompt' and off is not None:
+                      prefix=text[max(0,int(off)-8):int(off)]
+                      if re.search(r'[A-D]\)\s*$',prefix):
+                          classification='MECHANICAL_FALSE_POSITIVE_MC_OPTION_CASING'
+                          rationale='Lower-case option content follows an A)/B)/C)/D) label and is not a new prose sentence.'
+              if classification=='MANUAL_CONTEXT_REVIEW' and f.get('field')=='question_prompt' and isinstance(obj,dict) and obj.get('type')=='grammar_choice' and cat in {'AGREEMENT','CAT_GRAMMAIRE','TYPOS','CAT_HOMONYMES_PARONYMES','CAT_REGLES_DE_BASE'}:
+                  classification='LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION'
+                  rationale='Signal occurs inside a grammar-choice teaching prompt that intentionally includes an incorrect alternative; confirm span before dismissing.'
+              if classification=='MANUAL_CONTEXT_REVIEW' and cat=='REPETITIONS_STYLE':
+                  classification='STYLE_SIGNAL_NEEDS_CONTEXT'
+                  rationale='A1 controlled vocabulary deliberately repeats target forms; style repetition is not automatically a defect.'
+
+              item={
+                'finding_index':n,
+                'passage_id':f['passage_id'],'field':f['field'],'item_id':f.get('item_id'),
+                'rule_id':rid,'category':cat,'message':f.get('message'),
+                'matched_text':matched,'offset_in_field':off,'replacements':f.get('replacements',[]),
+                'source_text':text,'classification':classification,'rationale':rationale
+              }
+              items.append(item); counts[classification]+=1
+              if classification in {'MANUAL_CONTEXT_REVIEW','LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION'}:
+                  manual.append(item)
+
+          payload={
+            'schema_version':1,'date':'2026-08-22','language':'fr','level':'A1',
+            'audit':'languagetool_contextual_triage_inventory','bound_sha256':expected,
+            'source_scan':'reading/audit/french_a1_languagetool_fullscan_2026-08-22.json',
+            'raw_finding_count':len(items),'classification_counts':dict(counts),
+            'status':'MECHANICAL_TRIAGE_COMPLETE_CONTEXTUAL_ADJUDICATION_PENDING',
+            'items':items,
+            'limitations':'Mechanical triage only. Only explicitly structural cases are called mechanical false positives. Grammar distractors and all residual grammar/punctuation/usage findings still require contextual adjudication.',
+            'release_effect':'NONE_AUTOMATIC: no corpus changes and no release approval.'
+          }
+          out=Path('reading/audit/french_a1_languagetool_triage_2026-08-22.json')
+          out.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'classification_counts':dict(counts),'manual_or_distractor_review_count':len(manual)},ensure_ascii=False))
+          print('LANGUAGETOOL_MANUAL_QUEUE_BEGIN')
+          for x in manual:
+              print(json.dumps({k:x[k] for k in ('finding_index','passage_id','field','item_id','rule_id','category','message','matched_text','replacements','source_text','classification')},ensure_ascii=False))
+          print('LANGUAGETOOL_MANUAL_QUEUE_END')
+          PY
+      - name: Commit triage evidence and self-remove
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_a1_languagetool_triage_2026-08-22.json
+          git rm -f .github/workflows/french-a1-languagetool-triage-temp.yml
+          git commit -m 'Triage French A1 LanguageTool findings [skip ci]'
+          git push origin HEAD:repair/french-a1-review-integrity-2026-08-20
