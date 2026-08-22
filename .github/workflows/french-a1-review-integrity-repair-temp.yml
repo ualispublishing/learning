@@ -1,0 +1,62 @@
+name: TEMP French A1 review integrity repair
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  repair:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'repair/french-a1-review-integrity-2026-08-20'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply bounded metadata repair
+        run: python reading/tools/repair_french_a1_review_integrity.py
+      - name: Postrepair exact learner-facing visibility check
+        run: |
+          python - <<'PY'
+          import json,re,unicodedata,hashlib
+          from pathlib import Path
+          root=Path('.')
+          path=root/'reading/french/a1/passages.jsonl'
+          rows=[json.loads(x) for x in path.read_text(encoding='utf-8').splitlines() if x.strip()]
+          lex={r['id']:r for r in [json.loads(x) for x in (root/'reading/lexicons/french.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]}
+          def norm(s):
+            s=unicodedata.normalize('NFC',str(s or '')).replace('’',"'").replace('‘',"'").casefold().strip()
+            return re.sub(r"^[^\w]+|[^\w]+$",'',s,flags=re.UNICODE)
+          findings=[]; histories={}; order={'R1':1,'R2':2,'R3':3,'R4':4,'R5':5,'long_term':6}
+          for p in rows:
+            text=' '+norm(p['text'])+' '
+            qtargets={tid for q in p.get('questions',[]) for tid in q.get('target_ids',[])}
+            for r in p.get('review_lexical_targets',[]):
+              tid=r['id']; lr=lex.get(tid,{})
+              keys={norm(r.get('form')),norm(lr.get('form')),norm(lr.get('match_form')),norm(lr.get('lemma'))}-{''}
+              visible=any(re.search(r'(?<!\w)'+re.escape(k)+r'(?!\w)',text) for k in keys) or tid in qtargets
+              if not visible: findings.append({'passage_id':p['id'],'sequence':p['sequence'],'target_id':tid,'stage':r['review_stage'],'representation':r['representation'],'kind':'review_not_visible_after_repair'})
+              histories.setdefault(tid,[]).append({'passage_id':p['id'],'sequence':p['sequence'],'stage':r['review_stage']})
+          regressions=[]
+          for tid,h in histories.items():
+            high=0
+            for e in h:
+              cur=order[e['stage']]
+              if cur<high: regressions.append({'target_id':tid,**e})
+              high=max(high,cur)
+          out={'schema_version':1,'date':'2026-08-20','language':'fr','level':'A1','bound_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'review_visibility_finding_count':len(findings),'review_visibility_findings':findings,'stage_regression_count':len(regressions),'stage_regressions':regressions}
+          (root/'reading/audit/french_a1_review_integrity_postrepair_2026-08-20.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'visibility_findings':len(findings),'regressions':len(regressions)},ensure_ascii=False,indent=2))
+          if findings or regressions: raise SystemExit('postrepair deterministic integrity still fails')
+          PY
+      - name: Commit repaired A1 and evidence to repair branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/french/a1/passages.jsonl reading/audit/french_a1_review_integrity_repair_2026-08-20.json reading/audit/french_a1_review_integrity_postrepair_2026-08-20.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Repair French A1 review integrity [skip ci]'
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
