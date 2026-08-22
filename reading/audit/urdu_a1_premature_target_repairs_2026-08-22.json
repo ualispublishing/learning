@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "ur",
+  "level": "A1",
+  "status": "PASS_DETERMINISTIC_BOUNDED_REPAIR_NEEDS_INDEPENDENT_REVIEW",
+  "scope": "Seven exact running-text repairs for same-unit premature lexical-target exposure; questions, answers, target IDs, and target declarations unchanged.",
+  "before_sha256": "3673ec71bf52d6d01ae11e8fd864eebc7f5fe1c3acac2ae19e4e2229ee14b728",
+  "after_sha256": "9968988956d8813543a6ca800ecaadc3df973ab6b22b001a56ce84c0a39911d2",
+  "records_changed": [
+    "ur-a1-u01-p02",
+    "ur-a1-u01-p04",
+    "ur-a1-u04-p01",
+    "ur-a1-u04-p02",
+    "ur-a1-u05-p01",
+    "ur-a1-u06-p01"
+  ],
+  "repair_count": 9,
+  "repairs": [
+    {
+      "record_id": "ur-a1-u01-p02",
+      "reason": "remove premature same-unit target اب before sequence 5",
+      "before": "اب اس کے پاس کھیلنے کے لیے بھی وقت تھا، اس لیے وہ صحن میں چلی گئی۔",
+      "after": "پھر اس کے پاس کھیلنے کے لیے بھی وقت تھا، اس لیے وہ صحن میں چلی گئی۔"
+    },
+    {
+      "record_id": "ur-a1-u01-p04",
+      "reason": "remove premature same-unit target ہم before sequence 5 while preserving the two female participants",
+      "before": "خالہ نے کہا کہ اگر بارش شروع ہو تو ہم گھر میں رہیں گے۔",
+      "after": "خالہ نے کہا کہ اگر بارش شروع ہو تو وہ دونوں گھر میں رہیں گی۔"
+    },
+    {
+      "record_id": "ur-a1-u04-p01",
+      "reason": "remove premature same-unit target گھر before sequence 21; align with existing answer wording",
+      "before": "عائشہ اپنی دوست مریم کو گھر کی ایک پرانی تصویر دکھاتی ہے۔",
+      "after": "عائشہ اپنی دوست مریم کو خاندان کی ایک پرانی تصویر دکھاتی ہے۔"
+    },
+    {
+      "record_id": "ur-a1-u04-p01",
+      "reason": "remove premature same-unit target شخص before sequence 22",
+      "before": "مریم ہر شخص کے بارے میں پوچھتی ہے۔",
+      "after": "مریم تصویر میں سب کے بارے میں پوچھتی ہے۔"
+    },
+    {
+      "record_id": "ur-a1-u04-p01",
+      "reason": "remove second premature گھر occurrence in the same passage",
+      "before": "عائشہ کہتی ہے کہ یہ تصویر اہم ہے کیونکہ اس میں سب گھر والے ساتھ ہیں۔",
+      "after": "عائشہ کہتی ہے کہ یہ تصویر اہم ہے کیونکہ اس میں سب ایک ساتھ ہیں۔"
+    },
+    {
+      "record_id": "ur-a1-u04-p02",
+      "reason": "remove premature same-unit target گھر before sequence 21",
+      "before": "مریم بھی اپنے گھر والوں کے ساتھ آتی ہے۔",
+      "after": "مریم بھی اپنی خالہ کے ساتھ آتی ہے۔"
+    },
+    {
+      "record_id": "ur-a1-u04-p02",
+      "reason": "remove second premature گھر occurrence while preserving the park-closing event",
+      "before": "شام ہونے پر لوگ آہستہ آہستہ گھر جاتے ہیں اور پارک پرسکون ہو جاتا ہے۔",
+      "after": "شام ہونے پر لوگ آہستہ آہستہ وہاں سے جاتے ہیں اور پارک پرسکون ہو جاتا ہے۔"
+    },
+    {
+      "record_id": "ur-a1-u05-p01",
+      "reason": "remove premature same-unit target کتاب before sequence 26",
+      "before": "اس کے بعد عائشہ بھی ایک سوال پوچھتی ہے اور جاننا چاہتی ہے کہ آج کون سی کتاب پڑھنی ہے۔",
+      "after": "اس کے بعد عائشہ بھی ایک سوال پوچھتی ہے اور جاننا چاہتی ہے کہ آج کیا پڑھنا ہے۔"
+    },
+    {
+      "record_id": "ur-a1-u06-p01",
+      "reason": "remove premature same-unit target صبح before sequence 33",
+      "before": "ہفتے کی صبح عائشہ پہلی بار محلے کی نئی لائبریری پیدل جا رہی ہے۔",
+      "after": "اس وقت عائشہ پہلی بار محلے کی نئی لائبریری پیدل جا رہی ہے۔"
+    }
+  ],
+  "questions_changed": false,
+  "answers_changed": false,
+  "target_declarations_changed": false,
+  "postrepair_checks": {
+    "source_corpus_before_sha256_exact": true,
+    "passage_count_exact_60": true,
+    "passage_ids_unique": true,
+    "sequences_contiguous_1_60": true,
+    "units_exact_1_10_and_six_each": true,
+    "language_ur_cefr_a1_id_sequence_alignment": true,
+    "a1_word_band_and_stored_counts": true,
+    "ten_questions_answers_and_linkage": true,
+    "duplicate_prompts_within_passage_zero": true,
+    "question_targets_locally_declared": true,
+    "new_target_id_collisions_zero": true,
+    "new_targets_visible_exact_token": true,
+    "running_text_reviews_visible_exact_token": true,
+    "p01_p05_two_new_and_p06_review_policy": true,
+    "premature_future_target_exposure_zero_exact_token_same_unit": true,
+    "learner_facing_roman_script_zero": true
+  },
+  "postrepair_problem_count": 0,
+  "postrepair_problems": [],
+  "independent_semantic_naturalness_pedagogical_review": "PENDING",
+  "educator_release_review": "PENDING",
+  "release_effect": "NONE_AUTOMATIC: repair is deterministic-only and remains review-gated."
+}
