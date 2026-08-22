@@ -1,0 +1,48 @@
+name: French ghost-review impact audit
+on:
+  push:
+    branches: [audit/french-coverage-v2-2026-08-19]
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Quantify contact-ledger impact
+        run: |
+          python - <<'PY'
+          import json
+          from collections import Counter, defaultdict
+          from pathlib import Path
+          root=Path('.')
+          vis=json.loads((root/'reading/audit/french_review_target_visibility_audit_2026-08-19.json').read_text(encoding='utf-8'))
+          led=json.loads((root/'reading/audit/french_curriculum_exposure_ledger_full_v2_2026-08-19.json').read_text(encoding='utf-8'))
+          ghosts=Counter(f['target_id'] for f in vis['findings'])
+          passages=defaultdict(list)
+          for f in vis['findings']:
+            passages[f['target_id']].append({'passage_id':f['passage_id'],'sequence':f['sequence'],'stage':f['review_stage'],'representation':f['representation'],'kind':f['kind']})
+          affected=[]
+          drops=[]
+          for t in led['targets']:
+            tid=t['target_id']
+            n=ghosts.get(tid,0)
+            if not n: continue
+            before=int(t['planned_meaningful_contacts'])
+            after=max(0,before-n)
+            row={'target_id':tid,'lemma':t.get('lemma'),'form':t.get('form'),'introduced_in':t.get('introduced_in'),'ghost_review_events':n,'planned_contacts_before':before,'planned_contacts_after_removing_ghosts':after,'six_contact_before':before>=6,'six_contact_after':after>=6,'ghost_events':passages[tid]}
+            affected.append(row)
+            if before>=6 and after<6: drops.append(row)
+          affected.sort(key=lambda r:(-r['ghost_review_events'],r['target_id']))
+          out={'schema_version':1,'date':'2026-08-20','language':'fr','status':'IMPACT_AUDIT_DO_NOT_AUTOPROMOTE','bound_canonical_hashes':vis['bound_canonical_hashes'],'input_visibility_findings':len(vis['findings']),'affected_target_ids':len(affected),'ghost_review_events_by_target':dict(ghosts),'targets_dropping_below_six_planned_contacts':len(drops),'affected_targets':affected,'drops_below_six':drops,'interpretation':'Subtracting a deterministic ghost review removes only the planned review contact attributed to that metadata entry. It does not infer learner success and does not mutate canonical content.'}
+          Path('reading/audit/french_ghost_review_contact_impact_2026-08-20.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'input_findings':out['input_visibility_findings'],'affected_target_ids':out['affected_target_ids'],'targets_dropping_below_six':out['targets_dropping_below_six'],'drops':drops},ensure_ascii=False,indent=2))
+          PY
+      - name: Commit compact impact evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_ghost_review_contact_impact_2026-08-20.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Quantify French ghost-review contact impact [skip ci]'
+          git push origin HEAD:audit/french-coverage-v2-2026-08-19
