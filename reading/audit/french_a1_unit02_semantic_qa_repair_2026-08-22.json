@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "unit": 2,
+  "manifest": "reading/audit/manifests/french_a1_unit02_semantic_qa_2026-08-22.json",
+  "status": "BOUNDED_REPAIR_APPLIED_NEEDS_INDEPENDENT_REVIEW",
+  "before_sha256": "66f5a01223fb8d18ecfb09fe4226dcffa91c32d9253547db9c0cf8b7e058ef9f",
+  "after_sha256": "a1e19854469149d038dcaf41d0d8a6923081bddf2e5c6cd00675fa122d5c002f",
+  "inventory_candidates": 5,
+  "confirmed_repairs": 5,
+  "adjudicated_false_positive_count": 0,
+  "adjudicated_false_positives": [],
+  "passage_text_changed": false,
+  "target_linkage_changed_count": 0,
+  "notable_sense_corrections": [
+    "u02-p01/q2 aligns the requested category with the keyed answer.",
+    "u02-p01/q8 adds a deictic anchor so aller/venir is unambiguous.",
+    "u02-p03/q7 removes unnecessary future-simple load while preserving the si target.",
+    "u02-p04/q8 removes technical A1 wording.",
+    "u02-p06/q7 removes misleading owner-gender framing for mon."
+  ],
+  "repairs": [
+    {
+      "passage_id": "fr-a1-u02-p01",
+      "question_id": "q2",
+      "before": {
+        "prompt": "Quels endroits Camille veut-elle visiter au centre sportif ?",
+        "type": "literal_detail",
+        "answer": "Le cours de danse et la piscine.",
+        "target_ids": null
+      },
+      "after": {
+        "prompt": "Que veut faire Camille au centre sportif ?",
+        "type": "literal_detail",
+        "answer": "Elle veut faire un cours de danse et aller à la piscine.",
+        "explanation": "",
+        "target_ids": null
+      }
+    },
+    {
+      "passage_id": "fr-a1-u02-p01",
+      "question_id": "q8",
+      "before": {
+        "prompt": "Pour parler d’un déplacement vers un lieu, quel verbe convient ici : « aller » ou « venir » ?",
+        "type": "contrast",
+        "answer": "aller",
+        "target_ids": [
+          "fr-rank-0013",
+          "fr-rank-0047"
+        ]
+      },
+      "after": {
+        "prompt": "Camille est chez elle et veut se déplacer vers le parc. Quel verbe convient : « aller » ou « venir » ?",
+        "type": "contrast",
+        "answer": "aller",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0013",
+          "fr-rank-0047"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u02-p03",
+      "question_id": "q7",
+      "before": {
+        "prompt": "Complète : « Elle demandera de l’aide _____ elle ne trouve pas le livre. » — « si » ou « avec » ?",
+        "type": "grammar_choice",
+        "answer": "« si ».",
+        "target_ids": [
+          "fr-rank-0032"
+        ]
+      },
+      "after": {
+        "prompt": "Complète : « Elle demande de l’aide _____ elle ne trouve pas le livre. » — « si » ou « avec » ?",
+        "type": "grammar_choice",
+        "answer": "« si ».",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0032"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u02-p04",
+      "question_id": "q8",
+      "before": {
+        "prompt": "Si le carnet appartient au locuteur, lequel convient : « mon carnet » ou « ton carnet » ?",
+        "type": "contrast",
+        "answer": "mon carnet",
+        "target_ids": [
+          "fr-rank-0038"
+        ]
+      },
+      "after": {
+        "prompt": "Camille parle de son propre carnet. Que dit-elle : « mon carnet » ou « ton carnet » ?",
+        "type": "contrast",
+        "answer": "mon carnet",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0038"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u02-p06",
+      "question_id": "q7",
+      "before": {
+        "prompt": "Choisis la forme correcte pour un garçon qui parle de son sac : « mon sac » ou « ma sac ».",
+        "type": "grammar_choice",
+        "answer": "mon sac",
+        "target_ids": [
+          "fr-rank-0038"
+        ]
+      },
+      "after": {
+        "prompt": "Quelle forme est correcte : « mon sac » ou « ma sac » ?",
+        "type": "grammar_choice",
+        "answer": "mon sac",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0038"
+        ]
+      }
+    }
+  ],
+  "release_effect": "French remains REOPEN_REQUIRED; this deterministic Unit 02 repair does not satisfy independent semantic/native/pedagogical/educator release review."
+}
