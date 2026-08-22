@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-20",
+  "language": "ar",
+  "level": "A1",
+  "unit": 9,
+  "status": "BOUNDED_REPAIR_APPLIED_NEEDS_INDEPENDENT_REVIEW",
+  "before_sha256": "d6142ee56ec830c4a41cb7244fe99c65824cebbe59ff2e9b8f44d4640c9e228b",
+  "after_sha256": "8e86fcf6a87cd675c2646580633e614a9ed74a892fa52a95dffb20a34ba356ab",
+  "repairs_applied": 5,
+  "passage_text_changed": false,
+  "untouched_passage": "ar-a1-u09-p04 had no finding in the formal-item inventory and was not changed.",
+  "repairs": [
+    {
+      "passage_id": "ar-a1-u09-p01",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «كرة» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا وصفت كرة صغيرة، أي جملة أنسب: «هذه كرة صغيرة» أم «هذا كرة صغيرة»؟",
+        "type": "grammar_choice",
+        "answer": "هذه كرة صغيرة.",
+        "explanation": "«كرة» مؤنثة، لذلك نستخدم معها «هذه»."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u09-p02",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «مباراة» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا وصفت مباراة قصيرة، أي جملة أنسب: «هذه مباراة قصيرة» أم «هذا مباراة قصيرة»؟",
+        "type": "grammar_choice",
+        "answer": "هذه مباراة قصيرة.",
+        "explanation": "«مباراة» مؤنثة، لذلك نستخدم معها «هذه»."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u09-p03",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «أصدقاء» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا كان أمامك أكثر من صديق، أي عبارة أنسب: «هؤلاء أصدقاء» أم «هذا أصدقاء»؟",
+        "type": "grammar_choice",
+        "answer": "هؤلاء أصدقاء.",
+        "explanation": "«أصدقاء» جمع لأشخاص، لذلك نستخدم «هؤلاء» هنا."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u09-p05",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «هدف» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا وصفت هدفًا واضحًا، أي جملة أنسب: «هذا هدف واضح» أم «هذه هدف واضح»؟",
+        "type": "grammar_choice",
+        "answer": "هذا هدف واضح.",
+        "explanation": "«هدف» مذكر، لذلك نستخدم معه «هذا»."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u09-p06",
+      "question_id": "q9",
+      "before": {
+        "prompt": "ماذا يعني «هدف» خارج نتيجة المباراة أيضًا؟",
+        "type": "grammar_function",
+        "answer": "غاية أو شيء يريد الشخص الوصول إليه."
+      },
+      "after": {
+        "prompt": "إذا كنت تتحدث عن شيء تريد الوصول إليه، أي عبارة أنسب: «هذا هدفي» أم «هذا فوزي»؟",
+        "type": "grammar_choice",
+        "answer": "هذا هدفي.",
+        "explanation": "«هدف» يمكن أن يعني غاية يريد الشخص الوصول إليها، لا نقطة في مباراة فقط."
+      }
+    }
+  ],
+  "release_effect": "Arabic remains educator-blocked; independent semantic/native/educator review required."
+}
