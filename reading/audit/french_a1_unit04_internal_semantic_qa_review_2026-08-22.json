@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "unit": 4,
+  "review_kind": "internal_semantic_pedagogical_qa_review",
+  "status": "CONFIRMED_REPAIRS_NEED_BOUNDED_APPLICATION_AND_INDEPENDENT_REVIEW",
+  "bound_a1_sha256": "769bb4867e7f3571992378dca439d455aa9fb42586fcad0c61a35e185d5a3c78",
+  "scope": {"passages":6,"questions":60,"answers":60},
+  "confirmed_findings": [
+    {
+      "passage_id":"fr-a1-u04-p02","question_id":"q9","kind":"unnatural_cloze_output",
+      "issue":"The keyed completion produces « J’ai dix minutes de temps avant le bus », which is redundant/unnatural French for this A1 context.",
+      "current_prompt":"Complète : J’ai dix minutes de _____ avant le bus.",
+      "current_answer":"temps",
+      "proposed_prompt":"Complète : J’ai assez de _____ avant le bus.",
+      "proposed_answer":"temps"
+    },
+    {
+      "passage_id":"fr-a1-u04-p03","field":"text","kind":"grammar_syntax",
+      "issue":"« Quand la porte ouvre » is non-standard in this intransitive context; the door opens = « la porte s’ouvre ».",
+      "current":"Quand la porte ouvre, tout le monde entre calmement.",
+      "proposed":"Quand la porte s’ouvre, tout le monde entre calmement."
+    },
+    {
+      "passage_id":"fr-a1-u04-p03","field":"text/new_lexical_targets","target_id":"fr-rank-0108","kind":"target_sense_contamination_and_exposure_mismatch",
+      "issue":"The target introduces personne in the affirmative noun sense “person”, but two of its four counted surface occurrences are negative-pronoun personne = “nobody”. Counting all four as exposures of the introduced noun sense is semantically misleading for A1.",
+      "current_spans":["Personne ne veut commencer sans lui.","quand personne n’est pressé."],
+      "proposed_spans":["Tout le monde veut attendre Sami.","quand le groupe n’est pas pressé."],
+      "current_exposures_in_text":4,
+      "proposed_exposures_in_text":2,
+      "intended_sense_unchanged":"person"
+    }
+  ],
+  "confirmed_finding_count": 3,
+  "positive_checks": [
+    "All 6 passages have 10 linked questions and 10 linked answers.",
+    "P06 introduces zero new lexical targets.",
+    "No other high-confidence answer-key contradiction was confirmed in this pass.",
+    "The proposed P03 sense cleanup preserves the intended affirmative noun sense and removes only the competing negative-pronoun sense."
+  ],
+  "review_candidates_not_confirmed_for_repair": [
+    {"passage_id":"fr-a1-u04-p06","question_id":"q4","note":"The item is typed reference_resolution although it functions more like vocabulary-in-context/definition. Learner-facing content is defensible; leave type adjudication for later assessment review."}
+  ],
+  "limitations":"Internal model review only. This is not native-professional, educator, blind, external-tool, or independent-model-family approval.",
+  "release_effect":"NONE_AUTOMATIC: French remains REOPEN_REQUIRED. Apply confirmed repairs fail-closed, rerun affected deterministic gates on the resulting hash, and retain all independent review requirements."
+}
