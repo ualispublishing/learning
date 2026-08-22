@@ -1,0 +1,76 @@
+name: TEMP French A1 LanguageTool punctuation repair
+
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+    paths:
+      - .github/workflows/french-a1-lt-comma-repair-temp.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temp-french-a1-lt-comma-repair
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    if: github.event.pull_request.head.ref == 'repair/french-a1-review-integrity-2026-08-20'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: repair/french-a1-review-integrity-2026-08-20
+      - name: Apply exact bounded answer punctuation repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib,json,subprocess
+          p=Path('reading/french/a1/passages.jsonl')
+          before_sha='fe9f321ada5740baf264c009ce0b5eb845777927f37f99f03e7459c5ae72b64c'
+          got=hashlib.sha256(p.read_bytes()).hexdigest()
+          if got!=before_sha: raise SystemExit(f'FAIL CLOSED hash drift {got}')
+          old='Parce qu’A1 est un niveau de base : elle gère des situations familières mais son français reste limité.'
+          new='Parce qu’A1 est un niveau de base : elle gère des situations familières, mais son français reste limité.'
+          lines=p.read_text(encoding='utf-8').splitlines()
+          hits=[]
+          for i,line in enumerate(lines):
+              if old in line: hits.append(i)
+          if hits!=[59]: raise SystemExit(f'FAIL CLOSED expected exact target only on line 60; hits={hits}')
+          row=json.loads(lines[59])
+          if row.get('id')!='fr-a1-u10-p06': raise SystemExit('FAIL CLOSED passage mismatch')
+          a5=next(a for a in row['answer_key'] if a['id']=='a5')
+          if a5.get('question_id')!='q5' or a5.get('answer')!=old: raise SystemExit('FAIL CLOSED answer mismatch')
+          lines[59]=lines[59].replace(old,new,1)
+          p.write_text('\n'.join(lines)+'\n',encoding='utf-8')
+          after_sha=hashlib.sha256(p.read_bytes()).hexdigest()
+          after_blob=subprocess.check_output(['git','hash-object',str(p)],text=True).strip()
+          evidence={
+            'schema_version':1,'date':'2026-08-22','language':'fr','level':'A1',
+            'repair_kind':'languagetool_adjudicated_punctuation_repair',
+            'before_sha256':before_sha,'after_sha256':after_sha,'after_git_blob':after_blob,
+            'source_scan':'reading/audit/french_a1_languagetool_fullscan_2026-08-22.json',
+            'source_finding_index':229,'passage_id':'fr-a1-u10-p06','field':'answer','item_id':'a5',
+            'before':old,'after':new,
+            'adjudication':'ACCEPTED_DEFECT',
+            'reason':'The answer contains two independent clauses joined by mais; the comma improves standard French punctuation and was the only high-confidence repair among the 14 plausible LanguageTool residuals after contextual adjudication.',
+            'scope':'One answer-key punctuation mark only; passage prose, questions, lexical targets, source lexicons, and passage word counts are unchanged.',
+            'release_effect':'NONE_AUTOMATIC: deterministic and independent-machine evidence must be rerun on the new hash.'
+          }
+          Path('reading/audit/french_a1_languagetool_bounded_repair_2026-08-22.json').write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'status':'APPLIED','after_sha256':after_sha,'after_git_blob':after_blob},ensure_ascii=False))
+          PY
+          python reading/tools/audit_french_a1_generation_integrity.py
+      - name: Commit repair and self-remove
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/french/a1/passages.jsonl reading/audit/french_a1_generation_integrity.json reading/audit/french_a1_languagetool_bounded_repair_2026-08-22.json
+          git rm -f .github/workflows/french-a1-lt-comma-repair-temp.yml
+          git commit -m 'Apply adjudicated French A1 punctuation repair [skip ci]'
+          git push origin HEAD:repair/french-a1-review-integrity-2026-08-20
