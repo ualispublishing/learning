@@ -122,6 +122,8 @@ def validate_output(records: list[dict[str, Any]], manifest: dict[str, Any]) -> 
             raise SystemExit(f"Output drift at {key}: expected={wanted_after!r}, actual={actual_after!r}")
         if "explanation" in expected_after and a.get("explanation") != expected_after["explanation"]:
             raise SystemExit(f"Explanation drift at {key}")
+        if "target_ids" in expected_after and q.get("target_ids") != expected_after["target_ids"]:
+            raise SystemExit(f"Target linkage drift at {key}: expected={expected_after["target_ids"]!r}, actual={q.get("target_ids")!r}")
 
     fp_specs: dict[tuple[str, str], dict[str, Any]] = {}
     for fp in manifest.get("false_positives", []):
@@ -232,11 +234,14 @@ def apply_manifest(manifest_path: Path, manifest: dict[str, Any]) -> None:
                 f"Source drift at {key}: expected={expected_before_triplet!r}, actual={actual_before_triplet!r}"
             )
 
+        if "target_ids" in repair["before"] and q.get("target_ids") != repair["before"]["target_ids"]:
+            raise SystemExit(f"Target-linkage source drift at {key}: expected={repair["before"]["target_ids"]!r}, actual={q.get("target_ids")!r}")
         target_ids_before = copy.deepcopy(q.get("target_ids"))
         before_snapshot = {
             "prompt": q.get("prompt"),
             "type": q.get("type"),
             "answer": a.get("answer"),
+            "target_ids": target_ids_before,
         }
         after = repair["after"]
         q["prompt"] = after["prompt"]
@@ -244,7 +249,13 @@ def apply_manifest(manifest_path: Path, manifest: dict[str, Any]) -> None:
         a["answer"] = after["answer"]
         if "explanation" in after:
             a["explanation"] = after["explanation"]
-        if q.get("target_ids") != target_ids_before:
+        if "target_ids" in after:
+            wanted_target_ids = copy.deepcopy(after["target_ids"])
+            if wanted_target_ids is None:
+                q.pop("target_ids", None)
+            else:
+                q["target_ids"] = wanted_target_ids
+        elif q.get("target_ids") != target_ids_before:
             raise SystemExit(f"Target linkage changed unexpectedly at {key}")
         touched_ids.add(record["id"])
         applied.append(
@@ -257,6 +268,7 @@ def apply_manifest(manifest_path: Path, manifest: dict[str, Any]) -> None:
                     "type": q.get("type"),
                     "answer": a.get("answer"),
                     "explanation": a.get("explanation"),
+                    "target_ids": copy.deepcopy(q.get("target_ids")),
                 },
             }
         )
@@ -282,6 +294,9 @@ def apply_manifest(manifest_path: Path, manifest: dict[str, Any]) -> None:
     validation = validate_output(output_records, manifest)
 
     false_positives = validation["allowed_false_positives"]
+    target_linkage_changed_count = sum(
+        1 for item in applied if item["before"].get("target_ids") != item["after"].get("target_ids")
+    )
     repair_evidence = {
         "schema_version": 1,
         "date": manifest["date"],
@@ -297,6 +312,7 @@ def apply_manifest(manifest_path: Path, manifest: dict[str, Any]) -> None:
         "adjudicated_false_positive_count": len(false_positives),
         "adjudicated_false_positives": false_positives,
         "passage_text_changed": False,
+        "target_linkage_changed_count": target_linkage_changed_count,
         "notable_sense_corrections": manifest.get("notable_sense_corrections", []),
         "repairs": applied,
         "release_effect": manifest.get(
@@ -322,6 +338,7 @@ def apply_manifest(manifest_path: Path, manifest: dict[str, Any]) -> None:
         "exact_duplicate_prompt_count": len(validation["duplicate_prompts"]),
         "duplicate_prompts": validation["duplicate_prompts"],
         "passage_text_changed": False,
+        "target_linkage_changed_count": target_linkage_changed_count,
         "question_type_counts": validation["question_type_counts"],
         "status": manifest.get("pass_status", "PASS_DETERMINISTIC_BOUNDED_REPAIR"),
         "limitations": "Deterministic/self-review only; independent native/educator review remains required.",
@@ -359,6 +376,12 @@ def verify_manifest(manifest_path: Path, manifest: dict[str, Any]) -> None:
         )
     validation = validate_output(records, manifest)
     expected_candidates = len(manifest.get("repairs", [])) + len(manifest.get("false_positives", []))
+    expected_target_linkage_changes = sum(
+        1
+        for repair in manifest.get("repairs", [])
+        if ("target_ids" in repair.get("before", {}) or "target_ids" in repair.get("after", {}))
+        and repair.get("before", {}).get("target_ids") != repair.get("after", {}).get("target_ids")
+    )
     checks = {
         "scope": validation["scope"],
         "inventory_candidates": expected_candidates,
@@ -366,6 +389,7 @@ def verify_manifest(manifest_path: Path, manifest: dict[str, Any]) -> None:
         "adjudicated_false_positive_count": len(manifest.get("false_positives", [])),
         "unexpected_formal_metalinguistic_finding_count": 0,
         "exact_duplicate_prompt_count": 0,
+        "target_linkage_changed_count": expected_target_linkage_changes,
     }
     for key, expected in checks.items():
         if post.get(key) != expected:

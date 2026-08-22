@@ -54,3 +54,8 @@ For languages whose formal-question markers differ from the Arabic defaults, set
 ## Fail-closed guarantees
 
 The preflight rejects unsafe paths, stale corpus hashes, wrong unit scope, broken question/answer linkage, unknown IDs, duplicate repair/false-positive keys, and overlap between repairs and false positives. The repair engine additionally requires exact old prompt/type/answer triples, preserves passage prose and target linkage, checks the full bounded scope, rejects unexpected residual formal-metalinguistic findings and duplicate prompts, writes SHA-bound evidence, and verifies that evidence against the resulting corpus before any generated files are committed.
+
+## Explicit target-linkage repairs
+
+A repair may intentionally add, replace, or remove a question's `target_ids`. Include `target_ids` on both the `before` and `after` objects; use `null` when the field is absent. Preflight rejects unilateral linkage declarations, invalid/duplicate IDs, and any new ID not locally declared by that passage. Omitting `target_ids` from both sides preserves linkage exactly. Evidence records before/after linkage and the intentional linkage-change count.
+
