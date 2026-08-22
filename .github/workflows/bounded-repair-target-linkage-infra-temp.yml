@@ -33,94 +33,95 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Patch concurrency and explicit target linkage support
+      - name: Patch permanent bounded-repair infrastructure
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
 
-          def replace_one(path, old, new):
-              p=Path(path); s=p.read_text(encoding='utf-8')
-              n=s.count(old)
-              if n != 1:
-                  raise SystemExit(f'FAIL CLOSED: {path}: expected one patch anchor, found {n}')
-              p.write_text(s.replace(old,new,1),encoding='utf-8')
+          def rep(path, old, new):
+              p = Path(path)
+              s = p.read_text(encoding='utf-8')
+              if s.count(old) != 1:
+                  raise SystemExit(f'FAIL CLOSED: {path}: patch anchor count={s.count(old)} for {old[:80]!r}')
+              p.write_text(s.replace(old, new, 1), encoding='utf-8')
 
-          replace_one(
-              '.github/workflows/language-bounded-repair.yml',
-              '  group: language-bounded-repair-${{ github.event.pull_request.head.ref || github.ref }}',
-              '  group: language-bounded-repair-${{ github.event.pull_request.head.ref || github.ref_name }}'
-          )
+          # Use one branch-name representation for both push and PR events.
+          token = '$' + '{{'
+          old = '  group: language-bounded-repair-' + token + ' github.event.pull_request.head.ref || github.ref }}'
+          new = '  group: language-bounded-repair-' + token + ' github.event.pull_request.head.ref || github.ref_name }}'
+          rep('.github/workflows/language-bounded-repair.yml', old, new)
 
-          apply='reading/tools/apply_bounded_assessment_repairs.py'
-          replace_one(
+          apply = 'reading/tools/apply_bounded_assessment_repairs.py'
+          rep(
               apply,
               '        if "explanation" in expected_after and a.get("explanation") != expected_after["explanation"]:\n            raise SystemExit(f"Explanation drift at {key}")\n',
               '        if "explanation" in expected_after and a.get("explanation") != expected_after["explanation"]:\n            raise SystemExit(f"Explanation drift at {key}")\n        if "target_ids" in expected_after and q.get("target_ids") != expected_after["target_ids"]:\n            raise SystemExit(f"Target linkage drift at {key}: expected={expected_after[\"target_ids\"]!r}, actual={q.get(\"target_ids\")!r}")\n'
           )
-          replace_one(
+          rep(
               apply,
               '        target_ids_before = copy.deepcopy(q.get("target_ids"))\n        before_snapshot = {\n            "prompt": q.get("prompt"),\n            "type": q.get("type"),\n            "answer": a.get("answer"),\n        }\n',
               '        if "target_ids" in repair["before"] and q.get("target_ids") != repair["before"]["target_ids"]:\n            raise SystemExit(f"Target-linkage source drift at {key}: expected={repair[\"before\"][\"target_ids\"]!r}, actual={q.get(\"target_ids\")!r}")\n        target_ids_before = copy.deepcopy(q.get("target_ids"))\n        before_snapshot = {\n            "prompt": q.get("prompt"),\n            "type": q.get("type"),\n            "answer": a.get("answer"),\n            "target_ids": target_ids_before,\n        }\n'
           )
-          replace_one(
+          rep(
               apply,
               '        if "explanation" in after:\n            a["explanation"] = after["explanation"]\n        if q.get("target_ids") != target_ids_before:\n            raise SystemExit(f"Target linkage changed unexpectedly at {key}")\n',
               '        if "explanation" in after:\n            a["explanation"] = after["explanation"]\n        if "target_ids" in after:\n            wanted_target_ids = copy.deepcopy(after["target_ids"])\n            if wanted_target_ids is None:\n                q.pop("target_ids", None)\n            else:\n                q["target_ids"] = wanted_target_ids\n        elif q.get("target_ids") != target_ids_before:\n            raise SystemExit(f"Target linkage changed unexpectedly at {key}")\n'
           )
-          replace_one(
+          rep(
               apply,
               '                    "answer": a.get("answer"),\n                    "explanation": a.get("explanation"),\n                },\n',
               '                    "answer": a.get("answer"),\n                    "explanation": a.get("explanation"),\n                    "target_ids": copy.deepcopy(q.get("target_ids")),\n                },\n'
           )
-          replace_one(
+          rep(
               apply,
               '    false_positives = validation["allowed_false_positives"]\n    repair_evidence = {\n',
               '    false_positives = validation["allowed_false_positives"]\n    target_linkage_changed_count = sum(\n        1 for item in applied if item["before"].get("target_ids") != item["after"].get("target_ids")\n    )\n    repair_evidence = {\n'
           )
-          replace_one(
+          rep(
               apply,
               '        "passage_text_changed": False,\n        "notable_sense_corrections": manifest.get("notable_sense_corrections", []),\n',
               '        "passage_text_changed": False,\n        "target_linkage_changed_count": target_linkage_changed_count,\n        "notable_sense_corrections": manifest.get("notable_sense_corrections", []),\n'
           )
-          replace_one(
+          rep(
               apply,
               '        "passage_text_changed": False,\n        "question_type_counts": validation["question_type_counts"],\n',
               '        "passage_text_changed": False,\n        "target_linkage_changed_count": target_linkage_changed_count,\n        "question_type_counts": validation["question_type_counts"],\n'
           )
-          replace_one(
+          rep(
               apply,
               '    checks = {\n        "scope": validation["scope"],\n',
-              '    expected_target_linkage_changes = sum(\n        1\n        for repair in manifest.get("repairs", [])\n        if repair.get("before", {}).get("target_ids") != repair.get("after", {}).get("target_ids")\n        and ("target_ids" in repair.get("before", {}) or "target_ids" in repair.get("after", {}))\n    )\n    checks = {\n        "scope": validation["scope"],\n'
+              '    expected_target_linkage_changes = sum(\n        1\n        for repair in manifest.get("repairs", [])\n        if ("target_ids" in repair.get("before", {}) or "target_ids" in repair.get("after", {}))\n        and repair.get("before", {}).get("target_ids") != repair.get("after", {}).get("target_ids")\n    )\n    checks = {\n        "scope": validation["scope"],\n'
           )
-          replace_one(
+          rep(
               apply,
               '        "exact_duplicate_prompt_count": 0,\n    }\n',
               '        "exact_duplicate_prompt_count": 0,\n        "target_linkage_changed_count": expected_target_linkage_changes,\n    }\n'
           )
 
-          validator='reading/tools/validate_bounded_repair_manifest.py'
-          replace_one(
+          validator = 'reading/tools/validate_bounded_repair_manifest.py'
+          rep(
               validator,
               '    question_ids_by_passage = {r["id"]: {q["id"] for q in r.get("questions", [])} for r in scoped}\n    answer_ids_by_passage = {r["id"]: {a["question_id"] for a in r.get("answer_key", [])} for r in scoped}\n',
               '    question_ids_by_passage = {r["id"]: {q["id"] for q in r.get("questions", [])} for r in scoped}\n    answer_ids_by_passage = {r["id"]: {a["question_id"] for a in r.get("answer_key", [])} for r in scoped}\n    declared_target_ids_by_passage = {\n        r["id"]: {\n            item["id"]\n            for field in ("new_lexical_targets", "review_lexical_targets", "grammar_targets", "discourse_targets")\n            for item in r.get(field, [])\n            if isinstance(item, dict) and isinstance(item.get("id"), str) and item.get("id")\n        }\n        for r in scoped\n    }\n'
           )
-          replace_one(
+          rep(
               validator,
               '        for side in ("before", "after"):\n            missing_side = sorted({"prompt", "type", "answer"} - set(repair.get(side, {})))\n            if missing_side:\n                raise SystemExit(f"Repair {key} missing {side} fields: {missing_side}")\n',
               '        for side in ("before", "after"):\n            missing_side = sorted({"prompt", "type", "answer"} - set(repair.get(side, {})))\n            if missing_side:\n                raise SystemExit(f"Repair {key} missing {side} fields: {missing_side}")\n        before_has_targets = "target_ids" in repair.get("before", {})\n        after_has_targets = "target_ids" in repair.get("after", {})\n        if before_has_targets != after_has_targets:\n            raise SystemExit(f"Repair {key} must specify target_ids on both before and after, or neither")\n        if before_has_targets:\n            for side in ("before", "after"):\n                value = repair[side]["target_ids"]\n                if value is not None:\n                    if not isinstance(value, list) or any(not isinstance(x, str) or not x for x in value):\n                        raise SystemExit(f"Repair {key} has invalid {side}.target_ids: {value!r}")\n                    if len(value) != len(set(value)):\n                        raise SystemExit(f"Repair {key} has duplicate {side}.target_ids: {value!r}")\n            unknown = sorted(set(repair["after"]["target_ids"] or []) - declared_target_ids_by_passage[repair["passage_id"]])\n            if unknown:\n                raise SystemExit(f"Repair {key} links undeclared target IDs: {unknown}")\n'
           )
 
-          readme=Path('reading/audit/manifests/README.md')
-          text=readme.read_text(encoding='utf-8')
-          addition='''\n\n## Explicit target-linkage repairs\n\nA repair may intentionally add, replace, or remove a question's `target_ids`. To do so, include `target_ids` on **both** the `before` and `after` objects; use `null` when the field is absent. The preflight rejects unilateral linkage declarations, duplicate/invalid IDs, and any `after.target_ids` not locally declared by that passage. If `target_ids` is omitted from both sides, the runner preserves linkage exactly as before. Evidence records the before/after linkage and the count of intentional linkage changes.\n'''
-          if '## Explicit target-linkage repairs' in text:
-              raise SystemExit('FAIL CLOSED: README linkage section already present')
-          readme.write_text(text.rstrip()+addition+'\n',encoding='utf-8')
+          readme = Path('reading/audit/manifests/README.md')
+          s = readme.read_text(encoding='utf-8')
+          marker = '## Explicit target-linkage repairs'
+          if marker in s:
+              raise SystemExit('FAIL CLOSED: target-linkage README section already exists')
+          s = s.rstrip() + '''\n\n## Explicit target-linkage repairs\n\nA repair may intentionally add, replace, or remove a question's `target_ids`. Include `target_ids` on both the `before` and `after` objects; use `null` when the field is absent. Preflight rejects unilateral linkage declarations, invalid/duplicate IDs, and any new ID not locally declared by that passage. Omitting `target_ids` from both sides preserves linkage exactly. Evidence records before/after linkage and the intentional linkage-change count.\n'''
+          readme.write_text(s + '\n', encoding='utf-8')
           PY
 
-      - name: Compile and run synthetic target-linkage regression test
+      - name: Compile and run synthetic linkage regression
         shell: bash
         run: |
           set -euo pipefail
@@ -128,17 +129,17 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import hashlib, json
-          corpus=Path('reading/audit/.tmp_target_linkage_fixture.jsonl')
-          record={
+          corpus = Path('reading/audit/.tmp_target_linkage_fixture.jsonl')
+          record = {
             'id':'fr-a1-u01-p01','cefr':'A1','unit':1,'text':'Texte.',
             'new_lexical_targets':[{'id':'fr-rank-test','form':'test'}],
             'review_lexical_targets':[],'grammar_targets':[],'discourse_targets':[],
             'questions':[{'id':'q1','type':'contrast','prompt':'Prompt','answer_id':'a1'}],
             'answer_key':[{'id':'a1','question_id':'q1','answer':'Réponse','explanation':''}]
           }
-          corpus.write_text(json.dumps(record,ensure_ascii=False,sort_keys=True)+'\n',encoding='utf-8')
-          sha=hashlib.sha256(corpus.read_bytes()).hexdigest()
-          manifest={
+          corpus.write_text(json.dumps(record, ensure_ascii=False, sort_keys=True)+'\n', encoding='utf-8')
+          sha = hashlib.sha256(corpus.read_bytes()).hexdigest()
+          manifest = {
             'schema_version':1,'date':'2026-08-22','language':'fr','level':'A1','unit':1,
             'input_file':str(corpus),'expected_before_sha256':sha,
             'expected_scope':{'records':1,'questions':1,'answers':1},
@@ -150,7 +151,7 @@ jobs:
             'false_positives':[],'formal_types':[],'formal_prompt_markers':[],
             'pass_status':'PASS_SYNTHETIC_TARGET_LINKAGE'
           }
-          Path('/tmp/target_linkage_manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          Path('/tmp/target_linkage_manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
           PY
           python reading/tools/validate_bounded_repair_manifest.py /tmp/target_linkage_manifest.json
           python reading/tools/run_bounded_assessment_repairs.py /tmp/target_linkage_manifest.json
@@ -158,16 +159,15 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import json
-          row=json.loads(Path('reading/audit/.tmp_target_linkage_fixture.jsonl').read_text(encoding='utf-8'))
-          post=json.loads(Path('reading/audit/.tmp_target_linkage_post.json').read_text(encoding='utf-8'))
-          assert row['questions'][0]['target_ids']==['fr-rank-test']
-          assert post['target_linkage_changed_count']==1
+          row = json.loads(Path('reading/audit/.tmp_target_linkage_fixture.jsonl').read_text(encoding='utf-8'))
+          post = json.loads(Path('reading/audit/.tmp_target_linkage_post.json').read_text(encoding='utf-8'))
+          assert row['questions'][0]['target_ids'] == ['fr-rank-test']
+          assert post['target_linkage_changed_count'] == 1
           print('synthetic target-linkage regression PASS')
           PY
           rm -f reading/audit/.tmp_target_linkage_fixture.jsonl reading/audit/.tmp_target_linkage_repair.json reading/audit/.tmp_target_linkage_post.json /tmp/target_linkage_manifest.json
-          git diff --exit-code -- reading/audit/.tmp_target_linkage_fixture.jsonl reading/audit/.tmp_target_linkage_repair.json reading/audit/.tmp_target_linkage_post.json
 
-      - name: Remove temporary workflow and commit permanent infrastructure
+      - name: Remove temporary workflow and commit tested infrastructure
         shell: bash
         run: |
           set -euo pipefail
