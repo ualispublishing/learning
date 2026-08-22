@@ -38,20 +38,47 @@ jobs:
           git fetch origin main
           git merge --no-edit origin/main
 
-      - name: Run guarded deterministic revalidation batch
+      - name: Guard source and repair exact exposure metadata defect
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
-          import hashlib
+          import hashlib, json, re
+
           p = Path('reading/french/a1/passages.jsonl')
-          got = hashlib.sha256(p.read_bytes()).hexdigest()
+          before = hashlib.sha256(p.read_bytes()).hexdigest()
           want = 'a79455b1a94eccff136d78fab34ab36fe0fbf681d16e147e0c00d7ba7815cd68'
-          if got != want:
-              raise SystemExit(f'FAIL CLOSED: French A1 SHA drift: {got} != {want}')
-          print('French A1 exact SHA guard PASS:', got)
+          if before != want:
+              raise SystemExit(f'FAIL CLOSED: French A1 source SHA drift: {before} != {want}')
+
+          rows = [json.loads(x) for x in p.read_text(encoding='utf-8').splitlines() if x.strip()]
+          matches = [r for r in rows if r.get('id') == 'fr-a1-u03-p02']
+          if len(matches) != 1:
+              raise SystemExit(f'FAIL CLOSED: expected one fr-a1-u03-p02, got {len(matches)}')
+          row = matches[0]
+          targets = [t for t in row.get('new_lexical_targets', []) if t.get('id') == 'fr-rank-0024' and t.get('form') == 'qui']
+          if len(targets) != 1:
+              raise SystemExit(f'FAIL CLOSED: expected one qui target, got {len(targets)}')
+          target = targets[0]
+          if target.get('exposures_in_text') != 3:
+              raise SystemExit(f"FAIL CLOSED: expected stale qui exposure count 3, got {target.get('exposures_in_text')!r}")
+          actual = len(re.findall(r'(?<!\w)qui(?!\w)', row.get('text',''), flags=re.I|re.UNICODE))
+          if actual != 2:
+              raise SystemExit(f'FAIL CLOSED: expected exactly 2 learner-text qui occurrences, got {actual}')
+          target['exposures_in_text'] = actual
+
+          p.write_text('\n'.join(json.dumps(r, ensure_ascii=False, sort_keys=True) for r in rows) + '\n', encoding='utf-8')
+          after = hashlib.sha256(p.read_bytes()).hexdigest()
+          Path('/tmp/french_a1_before_sha').write_text(before)
+          Path('/tmp/french_a1_after_sha').write_text(after)
+          print(json.dumps({'repair':'fr-a1-u03-p02 fr-rank-0024 exposures_in_text 3->2','before_sha256':before,'after_sha256':after,'learner_text_changed':False}, ensure_ascii=False))
           PY
+
+      - name: Run guarded deterministic revalidation batch
+        shell: bash
+        run: |
+          set -euo pipefail
           python reading/tools/audit_french_a1_generation_integrity.py
           cp reading/audit/french_final_whole_audit.json /tmp/french_final_whole_audit.before.json
           python reading/tools/audit_french_final_whole_v3.py
@@ -67,9 +94,10 @@ jobs:
           import hashlib, json, subprocess
 
           a1 = Path('reading/french/a1/passages.jsonl')
+          before = Path('/tmp/french_a1_before_sha').read_text().strip()
           exact = hashlib.sha256(a1.read_bytes()).hexdigest()
-          expected = 'a79455b1a94eccff136d78fab34ab36fe0fbf681d16e147e0c00d7ba7815cd68'
-          assert exact == expected, (exact, expected)
+          after_recorded = Path('/tmp/french_a1_after_sha').read_text().strip()
+          assert exact == after_recorded
           a1_blob = subprocess.check_output(['git','hash-object',str(a1)], text=True).strip()
 
           gen_path = Path('reading/audit/french_a1_generation_integrity.json')
@@ -81,7 +109,7 @@ jobs:
           if whole.get('status') != 'PASS' or whole.get('failed_passes'):
               raise SystemExit('FAIL CLOSED: broad whole-French deterministic diagnostic did not PASS')
           if whole.get('level_blobs', {}).get('a1') != a1_blob:
-              raise SystemExit('FAIL CLOSED: broad audit A1 blob does not match live repaired A1')
+              raise SystemExit('FAIL CLOSED: broad audit A1 blob does not match repaired A1')
           if whole.get('canonical_passages') != 360 or whole.get('questions') != 3600 or whole.get('answers') != 3600:
               raise SystemExit('FAIL CLOSED: whole-French cardinality mismatch')
 
@@ -92,9 +120,23 @@ jobs:
             'level': 'A1',
             'evidence_kind': 'current_corpus_deterministic_revalidation',
             'status': 'PASS_DETERMINISTIC_NEEDS_INDEPENDENT_REVIEW',
+            'before_sha256': before,
             'bound_sha256': exact,
             'bound_git_blob': a1_blob,
             'scope': {'records': 60, 'questions': 600, 'answers': 600},
+            'bounded_repair': {
+              'passage_id': 'fr-a1-u03-p02',
+              'target_id': 'fr-rank-0024',
+              'form': 'qui',
+              'field': 'new_lexical_targets.exposures_in_text',
+              'before': 3,
+              'after': 2,
+              'actual_exact_learner_text_occurrences': 2,
+              'learner_facing_text_changed': False,
+              'questions_changed': False,
+              'answers_changed': False,
+              'reason': 'The earlier venir prose repair left the stored qui exposure count stale; exact learner-text count is two.'
+            },
             'checks': {
               'exact_source_sha_guard': True,
               'a1_generation_integrity_current_corpus': 'PASS',
@@ -123,7 +165,7 @@ jobs:
             'protocol': 'reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md',
             'notes': [
               'The repository whole-French audit script was executed only as a broad deterministic diagnostic against the repaired corpus.',
-              'Its internal approval_ready flag is not treated as release approval here because required independent semantic/naturalness/pedagogical/coverage/educator review has not been re-established for the changed A1 prose.',
+              'Its internal approval_ready flag is not treated as release approval because required independent current-corpus review has not been re-established for the changed A1 prose.',
               'The persisted legacy french_final_whole_audit.json is intentionally left unchanged as historical evidence rather than silently rebinding it to the new corpus.',
             ],
             'release_effect': 'NONE_AUTOMATIC: French is REOPEN_REQUIRED; deterministic revalidation does not restore FINAL_APPROVED.',
@@ -131,15 +173,29 @@ jobs:
           out = Path('reading/audit/french_a1_current_corpus_revalidation_2026-08-22.json')
           out.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
+          checkpoint_path = Path('reading/audit/french_a1_gate_a_revalidation_checkpoint_2026-08-22.json')
+          checkpoint = json.loads(checkpoint_path.read_text(encoding='utf-8'))
+          checkpoint['prior_bound_sha256'] = checkpoint.get('bound_sha256')
+          checkpoint['bound_sha256'] = exact
+          checkpoint['status'] = 'DETERMINISTIC_REVALIDATED_INDEPENDENT_REVIEW_REQUIRED'
+          checkpoint['current_corpus_revalidation'] = str(out)
+          checkpoint['additional_bounded_repair'] = evidence['bounded_repair']
+          checkpoint['freshness_findings']['current_a1_generation_integrity_matches_current_corpus'] = True
+          checkpoint['freshness_findings']['broad_deterministic_whole_french_diagnostic_matches_current_corpus'] = True
+          checkpoint['freshness_findings']['prior_final_approval_may_be_relied_on_for_current_corpus'] = False
+          checkpoint['limitations'] = 'Current-corpus deterministic diagnostics pass after the bounded exposure-metadata repair. This does not claim independent semantic correctness, French naturalness/orthography approval, pedagogical approval, coverage approval, educator approval, or release readiness.'
+          checkpoint['release_effect'] = 'French A1 is deterministic-revalidated but remains REOPEN_REQUIRED pending independent current-corpus review and final-gate regeneration.'
+          checkpoint_path.write_text(json.dumps(checkpoint, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
           status_path = Path('reading/STATUS.json')
           s = json.loads(status_path.read_text(encoding='utf-8'))
           s['updated'] = '2026-08-22'
-          s['phase'] = 'Arabic remains sealed. French is reopened after a repaired A1 canonical prose change and is deterministic-revalidated but independent final review remains pending. Urdu continues under its separate generation/final-review evidence.'
+          s['phase'] = 'Arabic remains sealed. French is reopened after a repaired A1 canonical change and is deterministic-revalidated but independent final review remains pending. Urdu continues under its separate generation/final-review evidence.'
           s['approved_passages'] = 360
           f = s.setdefault('french', {})
           f['state'] = 'REOPEN_REQUIRED'
           f['formal_final_approval'] = False
-          f['next_target'] = 'Complete independent current-corpus French A1 semantic/naturalness/pedagogical/assessment/coverage review, then regenerate final approval gates sequentially and run the adversarial/final approval gate last.'
+          f['next_target'] = 'Complete independent current-corpus French A1 semantic/naturalness/pedagogical/assessment/coverage review, then regenerate final approval gates sequentially and run the final adversarial/approval gate last.'
           a1s = f.setdefault('a1_completion', {})
           a1s['state'] = 'DETERMINISTIC_REVALIDATED_NEEDS_INDEPENDENT_REVIEW'
           a1s['canonical_blob'] = a1_blob
@@ -168,12 +224,10 @@ jobs:
           set -euo pipefail
           rm -f .github/workflows/french-a1-current-corpus-revalidation.yml
           git add reading/STATUS.json \
+                  reading/french/a1/passages.jsonl \
                   reading/audit/french_a1_generation_integrity.json \
                   reading/audit/french_a1_current_corpus_revalidation_2026-08-22.json \
+                  reading/audit/french_a1_gate_a_revalidation_checkpoint_2026-08-22.json \
                   .github/workflows/french-a1-current-corpus-revalidation.yml
-          if git diff --cached --quiet; then
-            echo 'No durable changes to commit.'
-          else
-            git commit -m 'Revalidate French A1 current corpus fail closed [skip ci]'
-          fi
+          git commit -m 'Repair and revalidate French A1 current corpus [skip ci]'
           git push origin HEAD:repair/french-a1-review-integrity-2026-08-20
