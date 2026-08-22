@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "ar",
+  "level": "A2",
+  "unit": 10,
+  "manifest": "reading/audit/manifests/arabic_a2_u10_metalinguistic_2026-08-22.json",
+  "bound_sha256": "1dd058a2d3a150ebb52a529815f3d0519c927d9f3f350158d636ee4fb2535969",
+  "scope": {
+    "records": 6,
+    "questions": 60,
+    "answers": 60
+  },
+  "inventory_candidates": 6,
+  "confirmed_repairs": 5,
+  "adjudicated_false_positive_count": 1,
+  "allowed_false_positives": [
+    {
+      "passage_id": "ar-a2-u10-p06",
+      "question_id": "q9",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة المقارنة بين «ما قيل أولًا» و«ما ظهر لاحقًا»؟",
+      "answer": "تساعد القارئ على فهم التغير والنتائج وتصحيح التوقع أو الفكرة الأولى.",
+      "reason": "Despite its legacy type label, the question asks about the reading/comprehension purpose of comparing earlier claims with later evidence; it does not require a grammatical category or form label."
+    }
+  ],
+  "unexpected_formal_metalinguistic_finding_count": 0,
+  "unexpected_findings": [],
+  "exact_duplicate_prompt_count": 0,
+  "duplicate_prompts": [],
+  "passage_text_changed": false,
+  "question_type_counts": {
+    "cause_effect": 6,
+    "contrast": 11,
+    "gist": 6,
+    "grammar_function": 1,
+    "inference": 12,
+    "literal_detail": 8,
+    "reference_resolution": 6,
+    "single_word_definition": 1,
+    "summary": 2,
+    "vocabulary_in_context": 7
+  },
+  "status": "PASS_DETERMINISTIC_A2_UNIT10",
+  "limitations": "Deterministic/self-review only; independent native/educator review remains required.",
+  "release_effect": "Arabic remains educator-blocked; independent semantic/native/educator review required."
+}

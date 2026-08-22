@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "ar",
+  "level": "A2",
+  "unit": 10,
+  "manifest": "reading/audit/manifests/arabic_a2_u10_metalinguistic_2026-08-22.json",
+  "status": "BOUNDED_REPAIR_APPLIED_NEEDS_INDEPENDENT_REVIEW",
+  "before_sha256": "f27ad06c372d316ca70346e19a10a72645577897de8db676e317d869d8945e1c",
+  "after_sha256": "1dd058a2d3a150ebb52a529815f3d0519c927d9f3f350158d636ee4fb2535969",
+  "inventory_candidates": 6,
+  "confirmed_repairs": 5,
+  "adjudicated_false_positive_count": 1,
+  "adjudicated_false_positives": [
+    {
+      "passage_id": "ar-a2-u10-p06",
+      "question_id": "q9",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة المقارنة بين «ما قيل أولًا» و«ما ظهر لاحقًا»؟",
+      "answer": "تساعد القارئ على فهم التغير والنتائج وتصحيح التوقع أو الفكرة الأولى.",
+      "reason": "Despite its legacy type label, the question asks about the reading/comprehension purpose of comparing earlier claims with later evidence; it does not require a grammatical category or form label."
+    }
+  ],
+  "passage_text_changed": false,
+  "notable_sense_corrections": [],
+  "repairs": [
+    {
+      "passage_id": "ar-a2-u10-p01",
+      "question_id": "q10",
+      "before": {
+        "prompt": "ماذا تفعل «بل» في «لم يكن... بل...»؟",
+        "type": "grammar_function",
+        "answer": "تصحح الفكرة الأولى وتقدم التفسير الذي تعتبره نور أدق."
+      },
+      "after": {
+        "prompt": "أي جملة تعبر بدقة عن سبب تنظيم يوم نور رغم تغير الخطط؟",
+        "type": "contrast",
+        "answer": "لم يكن منظمًا لأن كل شيء سار كما أرادت، بل لأنها عرفت المعلومات الجديدة وعدلت الخطوات التالية.",
+        "explanation": "Operational comprehension task preserves the passage contrast without requiring a grammatical-function label."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u10-p02",
+      "question_id": "q10",
+      "before": {
+        "prompt": "ماذا تفعل «بينما» في مقارنة السوق؟",
+        "type": "grammar_function",
+        "answer": "تربط شيئين متقابلين: ما بقي وما تغير."
+      },
+      "after": {
+        "prompt": "أي وصف يلخص ما وجدته نور عند مقارنة السوق القديم بالحالي؟",
+        "type": "contrast",
+        "answer": "بقيت بعض المباني، بينما تغيرت واجهات ومحلات كثيرة.",
+        "explanation": "Operational contrast asks the learner to recover the actual old-versus-current comparison from the passage."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u10-p03",
+      "question_id": "q10",
+      "before": {
+        "prompt": "ماذا تعبر «إذا... فقد...» في النص؟",
+        "type": "grammar_function",
+        "answer": "عن احتمال نتيجة سلبية إذا حدث تأخير في القطار."
+      },
+      "after": {
+        "prompt": "إذا تأخر القطار الأرخص عشر دقائق، فما النتيجة المحتملة؟",
+        "type": "cause_effect",
+        "answer": "قد يصبح الانتقال إلى الحافلة الأخيرة صعبًا.",
+        "explanation": "Operational cause-result comprehension tests the conditional meaning in context rather than naming the construction."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u10-p04",
+      "question_id": "q10",
+      "before": {
+        "prompt": "ماذا تفعل «بينما» في وصف النتائج؟",
+        "type": "grammar_function",
+        "answer": "تظهر الاختلاف بين مبانٍ انخفض فيها الاستخدام ومبنى لم يتغير كثيرًا."
+      },
+      "after": {
+        "prompt": "ما الفرق بين نتائج المباني بعد شهرين؟",
+        "type": "contrast",
+        "answer": "انخفض الاستخدام في بعض المباني، بينما لم يتغير مبنى آخر كثيرًا.",
+        "explanation": "Operational comparison retrieves the observed difference between buildings instead of asking for connector terminology."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u10-p05",
+      "question_id": "q10",
+      "before": {
+        "prompt": "ماذا تفعل «بينما» عند الحديث عن الطعام؟",
+        "type": "grammar_function",
+        "answer": "تقارن بين أقارب أعدوا أطباقًا معتادة وآخرين جربوا وصفات مختلفة."
+      },
+      "after": {
+        "prompt": "كيف اختلف ما أحضره الأقارب من طعام؟",
+        "type": "contrast",
+        "answer": "أحضر بعض الأقارب أطباقًا معتادة، بينما جرب آخرون وصفات مختلفة.",
+        "explanation": "Operational contrast recovers the food-practice difference directly from the passage."
+      }
+    }
+  ],
+  "release_effect": "Arabic remains educator-blocked; independent semantic/native/educator review required."
+}
