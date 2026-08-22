@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "ur",
+  "level": "A1",
+  "status": "PASS_DETERMINISTIC_BATCH_PROMOTION_NEEDS_FINAL_REVIEW",
+  "promotion_order": [
+    9,
+    10
+  ],
+  "before_sha256": "89fbbbaf5f7b376a274accb1dc0cbe6cae82eba496f24d4bfff57cf3e2977e63",
+  "after_unit09_sha256": "49ec5d2ebd506a71a713f3eb1d02a9697e4003491ecb14e732f2327355ef7ad0",
+  "after_sha256": "3673ec71bf52d6d01ae11e8fd864eebc7f5fe1c3acac2ae19e4e2229ee14b728",
+  "canonical_passages_after": 60,
+  "canonical_questions_after": 600,
+  "canonical_answers_after": 600,
+  "promoted_sequences": [
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60
+  ],
+  "staging_git_blobs": {
+    "9": {
+      "reading/urdu/a1/staging/unit09/ur-a1-u09-p01.json": "64b3ae387cc77a4d5d3c26a4a7c8e473cfd83fc6",
+      "reading/urdu/a1/staging/unit09/ur-a1-u09-p02.json": "da46ecf6fbce474eedccc468a4349208db483b50",
+      "reading/urdu/a1/staging/unit09/ur-a1-u09-p03.json": "c00b469a970b04ae3e313e248410bddabf66b31a",
+      "reading/urdu/a1/staging/unit09/ur-a1-u09-p04.json": "0b2b5dee8052eb3ae7563e7c8b2ce0ddb2234da4",
+      "reading/urdu/a1/staging/unit09/ur-a1-u09-p05.json": "c9abe90f1b7c8f285379043af8a3f59327087499",
+      "reading/urdu/a1/staging/unit09/ur-a1-u09-p06.json": "34fdf32249eae63bbfdfc3a8992a73f32d889f3c"
+    },
+    "10": {
+      "reading/urdu/a1/staging/unit10/ur-a1-u10-p01.json": "40845d5ab0436107a25aefd162b7680abd2f1b6c",
+      "reading/urdu/a1/staging/unit10/ur-a1-u10-p02.json": "92b391574bb1fe32fab6ed04b103a080d68665fc",
+      "reading/urdu/a1/staging/unit10/ur-a1-u10-p03.json": "74f4b32937a30dc03555f740fe3c16246c83cb9c",
+      "reading/urdu/a1/staging/unit10/ur-a1-u10-p04.json": "3ebb10f745bc929d42771dd12cdd0d7d80929681",
+      "reading/urdu/a1/staging/unit10/ur-a1-u10-p05.json": "ea5563df91642a8eabe1ca74c74324f6e68ad579",
+      "reading/urdu/a1/staging/unit10/ur-a1-u10-p06.json": "eac507c7f57621f5f6eed360289a53712eb263ef"
+    }
+  },
+  "checks": {
+    "source_frontier_sha256_exact": true,
+    "staging_git_blobs_exact": true,
+    "promotion_order_unit09_then_unit10": true,
+    "sequences_contiguous_1_60": true,
+    "a1_word_band_90_140": true,
+    "ten_questions_and_answers_each": true,
+    "answer_linkage": true,
+    "question_targets_locally_declared": true,
+    "new_target_id_collisions_zero": true,
+    "new_targets_visible_exact_token": true,
+    "running_text_reviews_visible_exact_token": true,
+    "p06_zero_new_and_reviews_unit_targets": true,
+    "premature_future_target_exposure_zero_exact_token": true,
+    "learner_facing_roman_script_zero": true
+  },
+  "formal_final_audit": "deferred under generation-first policy",
+  "independent_semantic_naturalness_pedagogical_review": "PENDING",
+  "educator_release_review": "PENDING",
+  "release_effect": "Generation/canonicalization complete for Urdu A1 through sequence 60; Urdu remains non-release-ready pending final multi-pass review and educator release approval."
+}
