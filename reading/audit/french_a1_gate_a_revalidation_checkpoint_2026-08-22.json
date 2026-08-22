@@ -22,32 +22,40 @@
     "review_integrity_round2_bound_sha256": "42c6455db972afd1fe6158a2f58c6e9ed2725204dd12aa80a4f7961ef1b130d5",
     "venir_r3_spacing_repair": "reading/audit/french_a1_venir_r3_spacing_repair_2026-08-21.json",
     "venir_r3_spacing_repair_after_sha256": "a79455b1a94eccff136d78fab34ab36fe0fbf681d16e147e0c00d7ba7815cd68",
-    "legacy_generation_integrity": "reading/audit/french_a1_generation_integrity.json"
+    "current_a1_generation_integrity": "reading/audit/french_a1_generation_integrity.json",
+    "current_corpus_revalidation": "reading/audit/french_a1_current_corpus_revalidation_2026-08-22.json",
+    "current_highest_assurance_gate_a": "reading/audit/french_current_deterministic_gate_a_2026-08-22.json"
   },
   "freshness_findings": {
-    "round2_review_integrity_snapshot_matches_current_corpus": false,
+    "round2_review_integrity_snapshot_hash_matches_current_corpus": false,
     "legacy_generation_integrity_establishes_current_final_gate": false,
-    "current_spacing_repair_matches_current_corpus": true,
+    "venir_spacing_repair_artifact_hash_matches_current_corpus": false,
+    "venir_spacing_repair_content_is_retained_in_current_corpus": true,
     "prior_final_approval_may_be_relied_on_for_current_corpus": false,
     "current_a1_generation_integrity_matches_current_corpus": true,
     "broad_deterministic_whole_french_diagnostic_matches_current_corpus": true,
     "highest_assurance_release_gate_a_matches_current_corpus": true,
     "highest_assurance_release_gate_a_status": "FAIL"
   },
-  "required_revalidation": [
-    "rerun word-count/CEFR diagnostics affected by the passage prose change",
-    "rerun script hygiene affected by the passage prose change",
-    "rerun answer/evidence alignment where relevant",
-    "perform targeted naturalness re-review for the changed prose",
-    "regenerate all final-gate artifacts sequentially from the current corpus before any final approval attempt",
-    "run the final adversarial gate last",
-    "retain independent semantic/naturalness/coverage and educator-release review requirements"
+  "completed_current_corpus_deterministic_revalidation": [
+    "A1 generation-integrity audit: PASS on the current A1 corpus",
+    "broad 15-lens whole-French automated diagnostic: PASS with current A1 blob",
+    "highest-assurance deterministic release-evidence Gate A: rerun on current hashes and recorded as FAIL with 2160 evidence blockers",
+    "bounded stale exposure metadata repair for fr-a1-u03-p02 / fr-rank-0024: exposures_in_text 3 -> 2 with no learner-facing text, question, or answer change"
+  ],
+  "remaining_release_work": [
+    "substantively revalidate the 2160 current Gate-A release-evidence blockers; do not bulk-promote draft/pending/coverage/review metadata",
+    "complete targeted independent French naturalness review for the changed venir passage wording",
+    "complete required current-corpus semantic, naturalness/orthography, pedagogical, assessment/answer-evidence, and coverage review",
+    "complete all independent external/native/model-family/educator gates required by the highest-assurance release profile",
+    "only after all prerequisite evidence is current and passing, regenerate final-gate artifacts sequentially and run the final adversarial/approval gate last"
   ],
   "protocol": "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md",
-  "limitations": "Current-corpus A1 generation-integrity and the broad 15-lens diagnostic pass, but the actual highest-assurance release-evidence Gate A is separately recorded and remains controlling for release. No automated result is independent human review.",
+  "release_protocol": "reading/planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md",
+  "assurance_profile": "reading/planning/HIGHEST_ASSURANCE_RELEASE_PROFILE.md",
+  "limitations": "Current-corpus A1 generation-integrity and the broad 15-lens diagnostic pass. The actual highest-assurance release-evidence Gate A fails with 2160 evidence blockers across French, and no automated result is independent human review. The older venir repair artifact is content-retained but no longer hash-equal to the corpus because a later metadata-only exposure-count repair changed the A1 file hash.",
   "release_effect": "French remains REOPEN_REQUIRED; no final approval until Gate A is substantively cleared on current hashes and all required independent review gates are actually completed.",
   "prior_bound_sha256": "a79455b1a94eccff136d78fab34ab36fe0fbf681d16e147e0c00d7ba7815cd68",
-  "current_corpus_revalidation": "reading/audit/french_a1_current_corpus_revalidation_2026-08-22.json",
   "additional_bounded_repair": {
     "passage_id": "fr-a1-u03-p02",
     "target_id": "fr-rank-0024",
@@ -61,8 +69,5 @@
     "answers_changed": false,
     "reason": "The earlier venir prose repair left the stored qui exposure count stale; exact learner-text count is two."
   },
-  "current_highest_assurance_gate_a": "reading/audit/french_current_deterministic_gate_a_2026-08-22.json",
-  "current_highest_assurance_gate_a_open_findings": 2160,
-  "current_spacing_repair_content_retained": true,
-  "current_spacing_repair_artifact_hash_equals_current_corpus": false
+  "current_highest_assurance_gate_a_open_findings": 2160
 }
