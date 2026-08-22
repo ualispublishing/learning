@@ -1,0 +1,343 @@
+name: Urdu A1 bounded target-order repair
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [synchronize]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: urdu-a1-bounded-target-order-repair
+  cancel-in-progress: false
+
+jobs:
+  repair-and-audit:
+    if: github.head_ref == 'audit/urdu-a1-final-deterministic-2026-08-22'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/urdu-a1-final-deterministic-2026-08-22
+          fetch-depth: 0
+
+      - name: Apply exact bounded repairs and rerun deterministic final audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/repair_and_audit.py <<'PY'
+          import hashlib
+          import json
+          import re
+          import unicodedata
+          from collections import Counter, defaultdict
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          CORPUS = Path('reading/urdu/a1/passages.jsonl')
+          REPAIR_EVIDENCE = Path('reading/audit/urdu_a1_premature_target_repairs_2026-08-22.json')
+          FINAL_EVIDENCE = Path('reading/audit/urdu_a1_final_deterministic_audit_2026-08-22.json')
+          BEFORE_SHA = '3673ec71bf52d6d01ae11e8fd864eebc7f5fe1c3acac2ae19e4e2229ee14b728'
+
+          REPAIRS = {
+              'ur-a1-u01-p02': [
+                  ('اب اس کے پاس کھیلنے کے لیے بھی وقت تھا، اس لیے وہ صحن میں چلی گئی۔',
+                   'پھر اس کے پاس کھیلنے کے لیے بھی وقت تھا، اس لیے وہ صحن میں چلی گئی۔',
+                   'remove premature same-unit target اب before sequence 5'),
+              ],
+              'ur-a1-u01-p04': [
+                  ('خالہ نے کہا کہ اگر بارش شروع ہو تو ہم گھر میں رہیں گے۔',
+                   'خالہ نے کہا کہ اگر بارش شروع ہو تو وہ دونوں گھر میں رہیں گی۔',
+                   'remove premature same-unit target ہم before sequence 5 while preserving the two female participants'),
+              ],
+              'ur-a1-u04-p01': [
+                  ('عائشہ اپنی دوست مریم کو گھر کی ایک پرانی تصویر دکھاتی ہے۔',
+                   'عائشہ اپنی دوست مریم کو خاندان کی ایک پرانی تصویر دکھاتی ہے۔',
+                   'remove premature same-unit target گھر before sequence 21; align with existing answer wording'),
+                  ('مریم ہر شخص کے بارے میں پوچھتی ہے۔',
+                   'مریم تصویر میں سب کے بارے میں پوچھتی ہے۔',
+                   'remove premature same-unit target شخص before sequence 22'),
+                  ('عائشہ کہتی ہے کہ یہ تصویر اہم ہے کیونکہ اس میں سب گھر والے ساتھ ہیں۔',
+                   'عائشہ کہتی ہے کہ یہ تصویر اہم ہے کیونکہ اس میں سب ایک ساتھ ہیں۔',
+                   'remove second premature گھر occurrence in the same passage'),
+              ],
+              'ur-a1-u04-p02': [
+                  ('مریم بھی اپنے گھر والوں کے ساتھ آتی ہے۔',
+                   'مریم بھی اپنی خالہ کے ساتھ آتی ہے۔',
+                   'remove premature same-unit target گھر before sequence 21'),
+                  ('شام ہونے پر لوگ آہستہ آہستہ گھر جاتے ہیں اور پارک پرسکون ہو جاتا ہے۔',
+                   'شام ہونے پر لوگ آہستہ آہستہ وہاں سے جاتے ہیں اور پارک پرسکون ہو جاتا ہے۔',
+                   'remove second premature گھر occurrence while preserving the park-closing event'),
+              ],
+              'ur-a1-u05-p01': [
+                  ('اس کے بعد عائشہ بھی ایک سوال پوچھتی ہے اور جاننا چاہتی ہے کہ آج کون سی کتاب پڑھنی ہے۔',
+                   'اس کے بعد عائشہ بھی ایک سوال پوچھتی ہے اور جاننا چاہتی ہے کہ آج کیا پڑھنا ہے۔',
+                   'remove premature same-unit target کتاب before sequence 26'),
+              ],
+              'ur-a1-u06-p01': [
+                  ('ہفتے کی صبح عائشہ پہلی بار محلے کی نئی لائبریری پیدل جا رہی ہے۔',
+                   'اس وقت عائشہ پہلی بار محلے کی نئی لائبریری پیدل جا رہی ہے۔',
+                   'remove premature same-unit target صبح before sequence 33'),
+              ],
+          }
+
+          def sha256(data):
+              return hashlib.sha256(data).hexdigest()
+
+          def norm(s):
+              return unicodedata.normalize('NFC', str(s or ''))
+
+          def tokens(s):
+              return re.findall(r'[^\W_]+', norm(s), flags=re.UNICODE)
+
+          def has_surface(text, form):
+              ft, tt = tokens(form), tokens(text)
+              if not ft:
+                  return False
+              n = len(ft)
+              return any(tt[i:i+n] == ft for i in range(len(tt)-n+1))
+
+          before_raw = CORPUS.read_bytes()
+          before_sha = sha256(before_raw)
+          if before_sha != BEFORE_SHA:
+              raise SystemExit(f'FAIL source drift: {before_sha} != {BEFORE_SHA}')
+
+          raw_lines = before_raw.decode('utf-8').splitlines()
+          records = [json.loads(line) for line in raw_lines if line.strip()]
+          if len(records) != 60 or [r.get('sequence') for r in records] != list(range(1, 61)):
+              raise SystemExit('FAIL source frontier is not exact sequences 1..60')
+          by_id = {r['id']: (i, r) for i, r in enumerate(records)}
+
+          repair_log = []
+          for rid, changes in REPAIRS.items():
+              if rid not in by_id:
+                  raise SystemExit(f'FAIL missing repair record {rid}')
+              idx, rec = by_id[rid]
+              text = rec.get('text', '')
+              original_text = text
+              for old, new, reason in changes:
+                  count = text.count(old)
+                  if count != 1:
+                      raise SystemExit(f'FAIL exact repair precondition {rid}: expected one occurrence, got {count}: {old}')
+                  text = text.replace(old, new, 1)
+                  repair_log.append({
+                      'record_id': rid,
+                      'reason': reason,
+                      'before': old,
+                      'after': new,
+                  })
+              rec['text'] = text
+              rec['word_count'] = len(text.split())
+              if not 90 <= rec['word_count'] <= 140:
+                  raise SystemExit(f'FAIL word band after repair {rid}: {rec["word_count"]}')
+              # Re-serialize only affected lines, preserving the parsed insertion order.
+              raw_lines[idx] = json.dumps(rec, ensure_ascii=False)
+              by_id[rid] = (idx, rec)
+
+          after_text = '\n'.join(raw_lines) + '\n'
+          CORPUS.write_text(after_text, encoding='utf-8')
+          after_raw = CORPUS.read_bytes()
+          after_sha = sha256(after_raw)
+          if after_sha == before_sha:
+              raise SystemExit('FAIL repair produced no corpus change')
+
+          # Full deterministic final-audit controls.
+          records = [json.loads(line) for line in after_raw.decode('utf-8').splitlines() if line.strip()]
+          problems = []
+          def fail(code, rid=None, detail=None):
+              item = {'code': code}
+              if rid is not None: item['record_id'] = rid
+              if detail is not None: item['detail'] = detail
+              problems.append(item)
+
+          if len(records) != 60: fail('passage_count_exact', detail=len(records))
+          if [r.get('sequence') for r in records] != list(range(1, 61)): fail('sequences_contiguous_1_60')
+          ids = [r.get('id') for r in records]
+          if len(set(ids)) != len(ids): fail('passage_ids_unique')
+
+          total_q = total_a = 0
+          new_ids = []
+          by_unit = defaultdict(list)
+          duplicate_prompts = 0
+          roman = 0
+          visibility_misses = 0
+
+          for r in records:
+              rid = r.get('id') or '<missing>'
+              seq = r.get('sequence')
+              unit = r.get('unit')
+              by_unit[unit].append(r)
+              if r.get('language') != 'ur': fail('language_ur', rid)
+              if r.get('cefr') != 'A1': fail('cefr_a1', rid)
+              if isinstance(seq, int):
+                  eu = ((seq - 1) // 6) + 1
+                  ep = ((seq - 1) % 6) + 1
+                  if unit != eu: fail('unit_sequence_alignment', rid)
+                  if rid != f'ur-a1-u{eu:02d}-p{ep:02d}': fail('id_sequence_alignment', rid)
+              wc = r.get('word_count')
+              if not isinstance(wc, int) or not 90 <= wc <= 140: fail('a1_word_band_90_140', rid, wc)
+              if isinstance(wc, int) and len(norm(r.get('text')).split()) != wc:
+                  fail('stored_word_count_matches_whitespace_count', rid)
+
+              qs = r.get('questions') or []
+              ans = r.get('answer_key') or []
+              total_q += len(qs); total_a += len(ans)
+              if len(qs) != 10: fail('ten_questions_each', rid, len(qs))
+              if len(ans) != 10: fail('ten_answers_each', rid, len(ans))
+              if [q.get('id') for q in qs] != [f'q{i}' for i in range(1, 11)]: fail('question_ids_q1_q10', rid)
+              if [a.get('id') for a in ans] != [f'a{i}' for i in range(1, 11)]: fail('answer_ids_a1_a10', rid)
+              amap = {a.get('id'): a for a in ans}
+              for q in qs:
+                  a = amap.get(q.get('answer_id'))
+                  if not a or a.get('question_id') != q.get('id'): fail('answer_linkage', rid, q.get('id'))
+
+              prompts = [' '.join(norm(q.get('prompt')).split()) for q in qs]
+              dupes = [p for p, n in Counter(prompts).items() if p and n > 1]
+              if dupes:
+                  duplicate_prompts += len(dupes)
+                  fail('duplicate_prompts_within_passage_zero', rid, dupes)
+
+              nts = r.get('new_lexical_targets') or []
+              rts = r.get('review_lexical_targets') or []
+              local = {t.get('id') for t in nts + rts if t.get('id')}
+              for q in qs:
+                  for tid in q.get('target_ids') or []:
+                      if tid not in local: fail('question_targets_locally_declared', rid, {'question': q.get('id'), 'target': tid})
+              for t in nts:
+                  tid, form = t.get('id'), t.get('form') or t.get('lemma')
+                  if not tid or not form: fail('new_target_id_and_form_nonempty', rid)
+                  else:
+                      new_ids.append(tid)
+                      if t.get('first_introduced') is not True: fail('new_target_first_introduced_true', rid, tid)
+                      if not has_surface(r.get('text', ''), form):
+                          visibility_misses += 1; fail('new_targets_visible_exact_token', rid, {'target': tid, 'form': form})
+              for t in rts:
+                  tid, form = t.get('id'), t.get('form')
+                  if not tid or not form: fail('review_target_id_and_form_nonempty', rid)
+                  elif t.get('representation') == 'running_text' and not has_surface(r.get('text', ''), form):
+                      visibility_misses += 1; fail('running_text_reviews_visible_exact_token', rid, {'target': tid, 'form': form})
+
+              for s in [r.get('text', ''), r.get('title', '')] + [q.get('prompt', '') for q in qs] + [a.get('answer', '') for a in ans]:
+                  if re.search(r'[A-Za-z]', norm(s)):
+                      roman += 1; fail('learner_facing_roman_script_zero', rid); break
+
+          if total_q != 600: fail('question_count_exact', detail=total_q)
+          if total_a != 600: fail('answer_count_exact', detail=total_a)
+          if len(set(new_ids)) != len(new_ids): fail('new_target_id_collisions_zero')
+          if set(by_unit) != set(range(1, 11)): fail('units_exact_1_10')
+
+          for unit in range(1, 11):
+              urs = sorted(by_unit.get(unit, []), key=lambda r: r.get('sequence', 0))
+              if len(urs) != 6:
+                  fail('six_passages_per_unit', detail=unit); continue
+              unit_new = []
+              for r in urs[:5]:
+                  nts = r.get('new_lexical_targets') or []
+                  if len(nts) != 2: fail('two_new_targets_p01_p05', r.get('id'), len(nts))
+                  unit_new.extend(t.get('id') for t in nts if t.get('id'))
+              p06 = urs[5]
+              if p06.get('new_lexical_targets') not in ([], None): fail('p06_zero_new', p06.get('id'))
+              reviews = [t.get('id') for t in (p06.get('review_lexical_targets') or []) if t.get('id')]
+              if set(reviews) != set(unit_new) or len(reviews) != len(unit_new): fail('p06_reviews_all_unit_targets', p06.get('id'))
+              speed = p06.get('speed_training') or {}
+              if p06.get('passage_type') != 'fluency' or speed.get('timed') is not True or speed.get('new_word_policy') != 'none':
+                  fail('p06_fluency_speed_policy', p06.get('id'))
+
+              intro = []
+              for r in urs:
+                  for t in r.get('new_lexical_targets') or []:
+                      if t.get('id') and t.get('form'):
+                          intro.append((r['sequence'], t['id'], t['form']))
+              for r in urs:
+                  for intro_seq, tid, form in intro:
+                      if intro_seq > r['sequence'] and has_surface(r.get('text', ''), form):
+                          fail('premature_future_target_exposure_zero_exact_token', r.get('id'), {'target': tid, 'form': form, 'introduced_sequence': intro_seq, 'earlier_sequence': r['sequence']})
+
+          checks = {
+              'source_corpus_before_sha256_exact': before_sha == BEFORE_SHA,
+              'passage_count_exact_60': not any(p['code'] == 'passage_count_exact' for p in problems),
+              'passage_ids_unique': not any(p['code'] == 'passage_ids_unique' for p in problems),
+              'sequences_contiguous_1_60': not any(p['code'] == 'sequences_contiguous_1_60' for p in problems),
+              'units_exact_1_10_and_six_each': not any(p['code'] in ('units_exact_1_10','six_passages_per_unit') for p in problems),
+              'language_ur_cefr_a1_id_sequence_alignment': not any(p['code'] in ('language_ur','cefr_a1','unit_sequence_alignment','id_sequence_alignment') for p in problems),
+              'a1_word_band_and_stored_counts': not any(p['code'] in ('a1_word_band_90_140','stored_word_count_matches_whitespace_count') for p in problems),
+              'ten_questions_answers_and_linkage': not any(p['code'] in ('ten_questions_each','ten_answers_each','question_ids_q1_q10','answer_ids_a1_a10','answer_linkage','question_count_exact','answer_count_exact') for p in problems),
+              'duplicate_prompts_within_passage_zero': not any(p['code'] == 'duplicate_prompts_within_passage_zero' for p in problems),
+              'question_targets_locally_declared': not any(p['code'] == 'question_targets_locally_declared' for p in problems),
+              'new_target_id_collisions_zero': not any(p['code'] == 'new_target_id_collisions_zero' for p in problems),
+              'new_targets_visible_exact_token': not any(p['code'] == 'new_targets_visible_exact_token' for p in problems),
+              'running_text_reviews_visible_exact_token': not any(p['code'] == 'running_text_reviews_visible_exact_token' for p in problems),
+              'p01_p05_two_new_and_p06_review_policy': not any(p['code'] in ('two_new_targets_p01_p05','p06_zero_new','p06_reviews_all_unit_targets','p06_fluency_speed_policy') for p in problems),
+              'premature_future_target_exposure_zero_exact_token_same_unit': not any(p['code'] == 'premature_future_target_exposure_zero_exact_token' for p in problems),
+              'learner_facing_roman_script_zero': not any(p['code'] == 'learner_facing_roman_script_zero' for p in problems),
+          }
+
+          passed = not problems
+          now = datetime.now(timezone.utc).isoformat()
+          repair_evidence = {
+              'schema_version': 1,
+              'date': '2026-08-22',
+              'language': 'ur',
+              'level': 'A1',
+              'status': 'PASS_DETERMINISTIC_BOUNDED_REPAIR_NEEDS_INDEPENDENT_REVIEW' if passed else 'FAIL_DETERMINISTIC_BOUNDED_REPAIR',
+              'scope': 'Seven exact running-text repairs for same-unit premature lexical-target exposure; questions, answers, target IDs, and target declarations unchanged.',
+              'before_sha256': before_sha,
+              'after_sha256': after_sha,
+              'records_changed': sorted(REPAIRS),
+              'repair_count': len(repair_log),
+              'repairs': repair_log,
+              'questions_changed': False,
+              'answers_changed': False,
+              'target_declarations_changed': False,
+              'postrepair_checks': checks,
+              'postrepair_problem_count': len(problems),
+              'postrepair_problems': problems,
+              'independent_semantic_naturalness_pedagogical_review': 'PENDING',
+              'educator_release_review': 'PENDING',
+              'release_effect': 'NONE_AUTOMATIC: repair is deterministic-only and remains review-gated.'
+          }
+          REPAIR_EVIDENCE.write_text(json.dumps(repair_evidence, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          final_evidence = {
+              'audit': 'urdu_a1_final_deterministic_audit',
+              'generated_at_utc': now,
+              'status': 'PASS_DETERMINISTIC_FINAL_AUDIT_NEEDS_INDEPENDENT_REVIEW' if passed else 'FAIL_DETERMINISTIC_FINAL_AUDIT',
+              'scope': 'deterministic post-generation audit after bounded target-order repair; no automated semantic, naturalness, pedagogical, native-speaker, educator, or release approval',
+              'policy_basis': ['reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md','reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md'],
+              'source': {'path': str(CORPUS), 'pre_repair_sha256': before_sha, 'actual_sha256': after_sha, 'hash_bound': True},
+              'counts': {'passages': len(records), 'questions': total_q, 'answers': total_a, 'units': len(by_unit), 'new_lexical_target_declarations': len(new_ids), 'duplicate_prompts_within_passage': duplicate_prompts, 'learner_facing_roman_script_findings': roman, 'exact_target_visibility_misses': visibility_misses, 'violations': len(problems)},
+              'checks': checks,
+              'violations': problems,
+              'bounded_repair_evidence': str(REPAIR_EVIDENCE),
+              'independent_review': {'semantic_accuracy':'PENDING','urdu_naturalness_and_orthography':'PENDING','pedagogical_a1_fit':'PENDING','assessment_quality':'PENDING','educator_release_review':'PENDING'},
+              'release_effect': 'NONE_AUTOMATIC: Urdu A1 remains non-release-ready until independent semantic/naturalness/pedagogical and educator release reviews are completed.',
+              'notes': ['Exact Unicode token-sequence matching is used; substring matching is forbidden (ہاں does not match within یہاں).','Future-target exposure is scoped prospectively within each unit, matching the verified Urdu promotion runner.','Duplicate-prompt rejection is scoped within each passage.','Legacy quality/review metadata is not treated as current independent final-review evidence.']
+          }
+          FINAL_EVIDENCE.write_text(json.dumps(final_evidence, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          print(final_evidence['status'])
+          print('after_sha256', after_sha)
+          if problems:
+              print(json.dumps(problems, ensure_ascii=False, indent=2))
+          PY
+
+          python /tmp/repair_and_audit.py
+          AUDIT_STATUS="$(python - <<'PY'
+          import json
+          print(json.load(open('reading/audit/urdu_a1_final_deterministic_audit_2026-08-22.json', encoding='utf-8'))['status'])
+          PY
+          )"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/urdu-a1-premature-target-repair.yml
+          git add reading/urdu/a1/passages.jsonl reading/audit/urdu_a1_premature_target_repairs_2026-08-22.json reading/audit/urdu_a1_final_deterministic_audit_2026-08-22.json
+          git commit -m "Repair Urdu A1 premature target exposures [skip ci]"
+          git push origin "HEAD:${GITHUB_HEAD_REF:-audit/urdu-a1-final-deterministic-2026-08-22}"
+
+          if [[ "$AUDIT_STATUS" != "PASS_DETERMINISTIC_FINAL_AUDIT_NEEDS_INDEPENDENT_REVIEW" ]]; then
+            echo "Post-repair deterministic audit failed; evidence checkpointed." >&2
+            exit 1
+          fi
