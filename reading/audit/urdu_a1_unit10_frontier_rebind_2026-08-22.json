@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "ur",
+  "level": "A1",
+  "unit": 10,
+  "evidence_kind": "generation_frontier_rebind",
+  "status": "SOURCE_FRONTIER_EQUIVALENCE_CONFIRMED_NEEDS_REVIEW",
+  "current_canonical_passages": 48,
+  "current_canonical_git_blob": "4f4fa0f74838a2fc1ecb99580bf4d8bfd5acc637",
+  "current_canonical_sha256": "89fbbbaf5f7b376a274accb1dc0cbe6cae82eba496f24d4bfff57cf3e2977e63",
+  "original_unit10_staging_frontier": {
+    "unit07_canonical_sha256": "b4fcf0bbc07d62cd3e743b8d0a6d49df2d6b0df3d03aa892384d0501a7ef1d4a",
+    "unit08_staging_aggregate_sha256": "965ef7b038c3f6840760ece3936c8e052f1275a8583dd069dc610b612cf1e116",
+    "unit09_staging_aggregate_sha256": "bf96124cb5c6b2e127372f74961cfa31c9c28bf3475847475cc812a4612658a4"
+  },
+  "equivalence_evidence": {
+    "unit08_promotion_artifact": "reading/audit/urdu_a1_unit08_promotion_2026-08-21.json",
+    "unit08_exact_staged_blobs_promoted": true,
+    "unit08_current_canonical_sha256": "89fbbbaf5f7b376a274accb1dc0cbe6cae82eba496f24d4bfff57cf3e2977e63",
+    "unit09_staging_artifact": "reading/audit/urdu_a1_unit09_staging_result_2026-08-20.json",
+    "unit09_staging_files_are_present_on_main": true,
+    "unit09_staging_is_not_canonical": true,
+    "current_main_canonical_blob_matches_unit08_promoted_corpus": true
+  },
+  "unit10_existing_evidence": [
+    "reading/audit/urdu_a1_unit10_target_selection_2026-08-21.json",
+    "reading/audit/urdu_a1_unit10_staging_result_2026-08-21.json"
+  ],
+  "canonicalization_blockers": [
+    "Unit 09 has staging evidence on main but has not been canonically promoted.",
+    "Unit 10 must not be canonically promoted before a guarded Unit 09 promotion establishes the 54-passage canonical frontier.",
+    "Any later Unit 10 promotion must bind to the exact post-Unit09 canonical corpus and rerun the materially required promotion checks."
+  ],
+  "limitations": "This checkpoint proves source-frontier equivalence for retaining Unit 10 as staging on current main. It does not rerun or replace semantic, naturalness, pedagogical, final-audit, or educator-release review and does not authorize canonical promotion.",
+  "release_effect": "Unit 10 may remain staging-only evidence through sequence 60. Canonical Urdu A1 remains at 48 passages; Urdu remains non-release-ready."
+}
