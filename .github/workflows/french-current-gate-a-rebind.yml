@@ -1,0 +1,187 @@
+name: French current Gate A rebind
+
+on:
+  push:
+    branches:
+      - repair/french-a1-review-integrity-2026-08-20
+    paths:
+      - .github/workflows/french-current-gate-a-rebind.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/french-current-gate-a-rebind.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: french-current-gate-a-rebind
+  cancel-in-progress: false
+
+jobs:
+  gate-a:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: repair/french-a1-review-integrity-2026-08-20
+          fetch-depth: 0
+
+      - name: Merge current main fail closed
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git merge --no-edit origin/main
+
+      - name: Run current highest-assurance deterministic Gate A
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import collections, hashlib, json, pathlib, unicodedata
+          root=pathlib.Path('.')
+          levels=['a1','a2','b1','b2','c1','c2']
+          expected_a1='b509f77c71e28505f80efaf202cb36cd5c45c5646bbd86cbf9773daf0743d037'
+          if hashlib.sha256((root/'reading/french/a1/passages.jsonl').read_bytes()).hexdigest()!=expected_a1:
+              raise SystemExit('FAIL CLOSED: current French A1 SHA drift before Gate A')
+
+          findings=[]; coverage={}; hashes={}; totals={'records':0,'questions':0,'answers':0}
+          cats=collections.Counter(); sevs=collections.Counter()
+          def add(level,rid,category,severity,path,value=None):
+              f={'level':level,'passage_id':rid,'category':category,'severity':severity,'path':path}
+              if value is not None: f['value']=value
+              findings.append(f); cats[category]+=1; sevs[severity]+=1
+          def walk_strings(x,path=''):
+              if isinstance(x,str):
+                  yield path,x
+              elif isinstance(x,list):
+                  for i,v in enumerate(x): yield from walk_strings(v,f'{path}[{i}]')
+              elif isinstance(x,dict):
+                  for k,v in x.items(): yield from walk_strings(v,f'{path}.{k}' if path else k)
+
+          for level in levels:
+              p=root/f'reading/french/{level}/passages.jsonl'
+              raw=p.read_bytes(); hashes[level]={'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw)}
+              rows=[json.loads(line) for line in raw.decode('utf-8').splitlines() if line.strip()]
+              assert len(rows)==60,(level,len(rows))
+              assert [r['sequence'] for r in rows]==list(range(1,61)),level
+              c={'records':60,'questions':0,'answers':0,'quality_status_counts':collections.Counter(),'coverage_check_counts':collections.Counter(),'linguistic_review_counts':collections.Counter(),'pedagogical_review_counts':collections.Counter(),'answer_key_check_counts':collections.Counter()}
+              for r in rows:
+                  rid=r['id']; q=r.get('quality') or {}; qs=r.get('questions') or []; ans=r.get('answer_key') or []
+                  assert len(qs)==10 and len(ans)==10,rid
+                  assert {x['answer_id'] for x in qs}=={x['id'] for x in ans},rid
+                  assert {x['question_id'] for x in ans}=={x['id'] for x in qs},rid
+                  c['questions']+=len(qs); c['answers']+=len(ans)
+                  status=q.get('status'); cov=q.get('coverage_check'); ling=q.get('linguistic_review'); ped=q.get('pedagogical_review'); akey=q.get('answer_key_check'); known=r.get('estimated_known_token_coverage')
+                  c['quality_status_counts'][str(status)]+=1; c['coverage_check_counts'][str(cov)]+=1; c['linguistic_review_counts'][str(ling)]+=1; c['pedagogical_review_counts'][str(ped)]+=1; c['answer_key_check_counts'][str(akey)]+=1
+                  if status!='approved': add(level,rid,'not_approved','critical','quality.status',status)
+                  if cov!='pass': add(level,rid,'coverage_not_pass','major','quality.coverage_check',cov)
+                  if not isinstance(known,(int,float)) or known<=0: add(level,rid,'coverage_missing_or_zero','major','estimated_known_token_coverage',known)
+                  if ling!='pass': add(level,rid,'linguistic_not_pass','major','quality.linguistic_review',ling)
+                  if ped!='pass': add(level,rid,'pedagogical_not_pass','major','quality.pedagogical_review',ped)
+                  if akey!='pass': add(level,rid,'answer_key_not_pass','major','quality.answer_key_check',akey)
+                  for spath,s in walk_strings(r):
+                      if s!=unicodedata.normalize('NFC',s): add(level,rid,'unicode_not_nfc','minor',spath)
+              totals['records']+=60; totals['questions']+=c['questions']; totals['answers']+=c['answers']
+              coverage[level]={k:(dict(v) if isinstance(v,collections.Counter) else v) for k,v in c.items()}
+
+          out={
+            'audit':'french_current_highest_assurance_deterministic_gate_a',
+            'date':'2026-08-22',
+            'assurance_profile':'reading/planning/HIGHEST_ASSURANCE_RELEASE_PROFILE.md',
+            'release_protocol':'reading/planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md',
+            'method':'Current-corpus re-run of the established French deterministic Gate A: approval evidence, coverage evidence, linguistic/pedagogical/answer-key review evidence, known-token coverage, Unicode NFC, and structural 60-record/10Q/10A/linkage assertions. No metadata is auto-promoted.',
+            'bound_commit_before_output':__import__('subprocess').check_output(['git','rev-parse','HEAD'],text=True).strip(),
+            'canonical_hashes':hashes,
+            'coverage':coverage,
+            'summary':{**totals,'open_findings':len(findings),'severity_counts':dict(sevs),'category_counts':dict(cats),'deterministic_gate':'PASS' if not findings else 'FAIL'},
+            'findings':findings,
+            'interpretation':'Findings are release-evidence failures, not automatically separate learner-facing prose errors. Gate A FAIL blocks educator/public release and must not be cleared by bulk-promoting metadata.',
+            'independent_review_status':'PENDING',
+            'release_effect':'NONE_AUTOMATIC'
+          }
+          dest=root/'reading/audit/french_current_deterministic_gate_a_2026-08-22.json'
+          dest.write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          pathlib.Path('/tmp/gate_a_summary.json').write_text(json.dumps(out['summary']))
+          pathlib.Path('/tmp/gate_a_hashes.json').write_text(json.dumps(hashes))
+          print(json.dumps(out['summary'],ensure_ascii=False,indent=2))
+          print(json.dumps(hashes,ensure_ascii=False,indent=2))
+          PY
+
+      - name: Rebind French current-state evidence fail closed
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, pathlib
+          gate_path=pathlib.Path('reading/audit/french_current_deterministic_gate_a_2026-08-22.json')
+          gate=json.loads(gate_path.read_text(encoding='utf-8'))
+          summary=gate['summary']; hashes=gate['canonical_hashes']
+          assert summary['records']==360 and summary['questions']==3600 and summary['answers']==3600
+          assert hashes['a1']['sha256']=='b509f77c71e28505f80efaf202cb36cd5c45c5646bbd86cbf9773daf0743d037'
+
+          reval_path=pathlib.Path('reading/audit/french_a1_current_corpus_revalidation_2026-08-22.json')
+          reval=json.loads(reval_path.read_text(encoding='utf-8'))
+          reval['highest_assurance_gate_a']={
+            'artifact':str(gate_path),
+            'status':summary['deterministic_gate'],
+            'open_findings':summary['open_findings'],
+            'severity_counts':summary['severity_counts'],
+            'category_counts':summary['category_counts'],
+            'important_interpretation':'This is the actual release-evidence Gate A. The separate A1 generation-integrity and 15-lens whole-French diagnostics can PASS while Gate A remains blocked by unsubstantiated draft/pending/coverage/review evidence.'
+          }
+          reval['status']='PASS_DETERMINISTIC_CONTENT_CHECKS_RELEASE_GATE_A_'+summary['deterministic_gate']+'_NEEDS_INDEPENDENT_REVIEW'
+          reval['release_effect']='NONE_AUTOMATIC: French remains REOPEN_REQUIRED. Gate A status is '+summary['deterministic_gate']+' and independent review remains pending.'
+          reval_path.write_text(json.dumps(reval,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          cp=pathlib.Path('reading/audit/french_a1_gate_a_revalidation_checkpoint_2026-08-22.json')
+          c=json.loads(cp.read_text(encoding='utf-8'))
+          c['status']='CURRENT_GATE_A_'+summary['deterministic_gate']+'_INDEPENDENT_REVIEW_REQUIRED'
+          c['freshness_findings']['current_a1_generation_integrity_matches_current_corpus']=True
+          c['freshness_findings']['broad_deterministic_whole_french_diagnostic_matches_current_corpus']=True
+          c['freshness_findings']['highest_assurance_release_gate_a_matches_current_corpus']=True
+          c['freshness_findings']['highest_assurance_release_gate_a_status']=summary['deterministic_gate']
+          c['freshness_findings']['prior_final_approval_may_be_relied_on_for_current_corpus']=False
+          c['current_highest_assurance_gate_a']=str(gate_path)
+          c['current_highest_assurance_gate_a_open_findings']=summary['open_findings']
+          c['current_spacing_repair_content_retained']=True
+          c['current_spacing_repair_artifact_hash_equals_current_corpus']=False
+          c['limitations']='Current-corpus A1 generation-integrity and the broad 15-lens diagnostic pass, but the actual highest-assurance release-evidence Gate A is separately recorded and remains controlling for release. No automated result is independent human review.'
+          c['release_effect']='French remains REOPEN_REQUIRED; no final approval until Gate A is substantively cleared on current hashes and all required independent review gates are actually completed.'
+          cp.write_text(json.dumps(c,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          sp=pathlib.Path('reading/STATUS.json'); s=json.loads(sp.read_text(encoding='utf-8'))
+          f=s.setdefault('french',{}); a1=f.setdefault('a1_completion',{}); fa=f.setdefault('final_audit',{})
+          f['state']='REOPEN_REQUIRED'; f['formal_final_approval']=False
+          f['next_target']='Substantively clear the current highest-assurance French release-evidence Gate A without bulk-promoting metadata; complete current-corpus semantic/naturalness/pedagogical/assessment/coverage review; then run final approval gates sequentially.'
+          a1['state']='DETERMINISTIC_CONTENT_CHECKS_PASS_RELEASE_GATE_A_'+summary['deterministic_gate']
+          a1['highest_assurance_gate_a_status']=summary['deterministic_gate']
+          a1['highest_assurance_gate_a_artifact']=str(gate_path)
+          a1['independent_review_status']='PENDING'
+          fa['status']='CURRENT_RELEASE_GATE_A_'+summary['deterministic_gate']
+          fa['approval']='REOPEN_REQUIRED'
+          fa['old_approval_may_be_relied_on']=False
+          fa['current_highest_assurance_gate_a']=str(gate_path)
+          fa['current_highest_assurance_gate_a_open_findings']=summary['open_findings']
+          fa['independent_review_status']='PENDING'
+          fa['next_action']='Substantive Gate-A evidence revalidation first; independent review must actually complete; only then regenerate/run final approval gate last.'
+          sp.write_text(json.dumps(s,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+
+      - name: Remove temporary workflow and commit durable evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/french-current-gate-a-rebind.yml
+          git add .github/workflows/french-current-gate-a-rebind.yml \
+                  reading/STATUS.json \
+                  reading/audit/french_current_deterministic_gate_a_2026-08-22.json \
+                  reading/audit/french_a1_current_corpus_revalidation_2026-08-22.json \
+                  reading/audit/french_a1_gate_a_revalidation_checkpoint_2026-08-22.json
+          git commit -m 'Rebind French highest-assurance Gate A to current corpus [skip ci]'
+          git push origin HEAD:repair/french-a1-review-integrity-2026-08-20
