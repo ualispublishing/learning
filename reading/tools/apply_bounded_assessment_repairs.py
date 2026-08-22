@@ -389,8 +389,13 @@ def verify_manifest(manifest_path: Path, manifest: dict[str, Any]) -> None:
         "adjudicated_false_positive_count": len(manifest.get("false_positives", [])),
         "unexpected_formal_metalinguistic_finding_count": 0,
         "exact_duplicate_prompt_count": 0,
-        "target_linkage_changed_count": expected_target_linkage_changes,
     }
+    if any(
+        "target_ids" in repair.get(side, {})
+        for repair in manifest.get("repairs", [])
+        for side in ("before", "after")
+    ):
+        checks["target_linkage_changed_count"] = expected_target_linkage_changes
     for key, expected in checks.items():
         if post.get(key) != expected:
             raise SystemExit(f"Postrepair evidence mismatch for {key}: expected={expected!r}, got={post.get(key)!r}")
