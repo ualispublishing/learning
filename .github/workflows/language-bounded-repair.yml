@@ -92,6 +92,27 @@ jobs:
           : > /tmp/generated-paths.txt
           while IFS= read -r manifest; do
             [[ -z "$manifest" ]] && continue
+
+            # Idempotent resume: if this exact manifest has already produced evidence
+            # bound to the current corpus, verify it and do not attempt to apply twice.
+            if python - "$manifest" <<'PY'
+          import hashlib, json, sys
+          from pathlib import Path
+          manifest = json.loads(Path(sys.argv[1]).read_text(encoding='utf-8'))
+          post = Path(manifest['post_evidence_file'])
+          if not post.exists():
+              raise SystemExit(1)
+          evidence = json.loads(post.read_text(encoding='utf-8'))
+          current = hashlib.sha256(Path(manifest['input_file']).read_bytes()).hexdigest()
+          if current != evidence.get('bound_sha256'):
+              raise SystemExit(1)
+          print(f"Already applied at {current}; verifying only: {sys.argv[1]}")
+          PY
+            then
+              python reading/tools/run_bounded_assessment_repairs.py "$manifest" --verify
+              continue
+            fi
+
             python reading/tools/validate_bounded_repair_manifest.py "$manifest"
             python reading/tools/run_bounded_assessment_repairs.py "$manifest"
             python reading/tools/run_bounded_assessment_repairs.py "$manifest" --verify
