@@ -4,7 +4,7 @@
   "language": "fr",
   "level": "A1",
   "evidence_kind": "current_corpus_deterministic_revalidation",
-  "status": "PASS_DETERMINISTIC_NEEDS_INDEPENDENT_REVIEW",
+  "status": "PASS_DETERMINISTIC_CONTENT_CHECKS_RELEASE_GATE_A_FAIL_NEEDS_INDEPENDENT_REVIEW",
   "before_sha256": "a79455b1a94eccff136d78fab34ab36fe0fbf681d16e147e0c00d7ba7815cd68",
   "bound_sha256": "b509f77c71e28505f80efaf202cb36cd5c45c5646bbd86cbf9773daf0743d037",
   "bound_git_blob": "f0961fb8e575e951f5ae39e7ad5f693f8c3c2e05",
@@ -64,5 +64,23 @@
     "Its internal approval_ready flag is not treated as release approval because required independent current-corpus review has not been re-established for the changed A1 prose.",
     "The persisted legacy french_final_whole_audit.json is intentionally left unchanged as historical evidence rather than silently rebinding it to the new corpus."
   ],
-  "release_effect": "NONE_AUTOMATIC: French is REOPEN_REQUIRED; deterministic revalidation does not restore FINAL_APPROVED."
+  "release_effect": "NONE_AUTOMATIC: French remains REOPEN_REQUIRED. Gate A status is FAIL and independent review remains pending.",
+  "highest_assurance_gate_a": {
+    "artifact": "reading/audit/french_current_deterministic_gate_a_2026-08-22.json",
+    "status": "FAIL",
+    "open_findings": 2160,
+    "severity_counts": {
+      "critical": 360,
+      "major": 1800
+    },
+    "category_counts": {
+      "not_approved": 360,
+      "coverage_not_pass": 360,
+      "coverage_missing_or_zero": 360,
+      "linguistic_not_pass": 360,
+      "pedagogical_not_pass": 360,
+      "answer_key_not_pass": 360
+    },
+    "important_interpretation": "This is the actual release-evidence Gate A. The separate A1 generation-integrity and 15-lens whole-French diagnostics can PASS while Gate A remains blocked by unsubstantiated draft/pending/coverage/review evidence."
+  }
 }
