@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-20",
+  "language": "ur",
+  "level": "A1",
+  "unit": 8,
+  "status": "TARGET_SELECTION_RECORDED_FOR_STAGING",
+  "bound_canonical_sha256": "b4fcf0bbc07d62cd3e743b8d0a6d49df2d6b0df3d03aa892384d0501a7ef1d4a",
+  "canonical_passages_at_selection": 42,
+  "unused_a1_core_candidate_count": 435,
+  "focused_rank_400_700_candidate_count": 90,
+  "selection_policy": [
+    "Use only source-backed unused A1_core_candidate IDs/forms from urdu_top1000.csv.",
+    "Prefer concrete or high-utility household/family/communication senses with low ambiguity in the staged context.",
+    "Use exactly two fresh targets in P01-P05 and zero new targets in P06.",
+    "Reject politically specialized, domain-narrow, malformed, transliteration-only, or uncontrolled polysemous candidates for this unit.",
+    "Recheck source identity, collisions, first-introduction order, exposure counts, review visibility, and learner-facing script during staging validation."
+  ],
+  "theme": "family communication and small household tasks",
+  "selected_targets": [
+    {"id":"ur-rank-0430","rank":430,"form":"والدین","sense":"parents; mother and father","passage":"ur-a1-u08-p01"},
+    {"id":"ur-rank-0460","rank":460,"form":"خاندان","sense":"family; household","passage":"ur-a1-u08-p01"},
+    {"id":"ur-rank-0435","rank":435,"form":"گفتگو","sense":"conversation; dialogue","passage":"ur-a1-u08-p02"},
+    {"id":"ur-rank-0412","rank":412,"form":"آواز","sense":"voice; sound","passage":"ur-a1-u08-p02"},
+    {"id":"ur-rank-0459","rank":459,"form":"خط","sense":"letter; written correspondence","passage":"ur-a1-u08-p03"},
+    {"id":"ur-rank-0443","rank":443,"form":"دوسرا","sense":"another; a second one","passage":"ur-a1-u08-p03"},
+    {"id":"ur-rank-0456","rank":456,"form":"بجلی","sense":"electricity; electric power","passage":"ur-a1-u08-p04"},
+    {"id":"ur-rank-0402","rank":402,"form":"چیز","sense":"thing; item","passage":"ur-a1-u08-p04"},
+    {"id":"ur-rank-0403","rank":403,"form":"پورا","sense":"whole; complete; entire","passage":"ur-a1-u08-p05"},
+    {"id":"ur-rank-0445","rank":445,"form":"باقی","sense":"remaining; rest","passage":"ur-a1-u08-p05"}
+  ],
+  "checkpoint": {
+    "passage": "ur-a1-u08-p06",
+    "new_targets": 0,
+    "reviews_all_ten_selected_targets": true
+  },
+  "validation_result": "reading/audit/urdu_a1_unit08_staging_result_2026-08-20.json",
+  "release_effect": "Planning/staging evidence only; Urdu remains non-release-ready."
+}
