@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-20",
+  "language": "ar",
+  "level": "A1",
+  "unit": 1,
+  "status": "BOUNDED_REPAIR_APPLIED_NEEDS_INDEPENDENT_REVIEW",
+  "policy": "reading/planning/TEN_QUESTION_STANDARD.md",
+  "before_sha256": "d6142ee56ec830c4a41cb7244fe99c65824cebbe59ff2e9b8f44d4640c9e228b",
+  "after_sha256": "6cb78aa291c9e4e19c26fcb165b50edb9c2346ace90635b099fda9a7535409b0",
+  "canonical_records": 60,
+  "unit_records": 6,
+  "repairs_applied": 9,
+  "passage_text_changed": false,
+  "questions_changed": true,
+  "answers_changed": true,
+  "repair_scope": "Only the nine independently scanned Unit 01 A1 formal-metalinguistic items were converted to operational form/use tasks.",
+  "repairs": [
+    {
+      "passage_id": "ar-a1-u01-p01",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي الأدق لـ«هنا» في الاستعمال المكاني؟",
+        "type": "grammar_category",
+        "target_ids": [
+          "ar-r34"
+        ],
+        "answer": "اسم إشارة للمكان القريب.",
+        "explanation": ""
+      },
+      "after": {
+        "prompt": "أنت واقف بجانب الباب. أي جملة أنسب: «الباب هنا» أم «الباب هناك»؟",
+        "type": "grammar_choice",
+        "target_ids": [
+          "ar-r34"
+        ],
+        "answer": "الباب هنا.",
+        "explanation": "«هنا» تستعمل للمكان القريب من المتكلم."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u01-p02",
+      "question_id": "q7",
+      "before": {
+        "prompt": "ما وظيفة «بعد» في «بعد قليل»؟",
+        "type": "grammar_category",
+        "target_ids": [
+          "ar-r37"
+        ],
+        "answer": "ظرف زمان يدل على وقت لاحق.",
+        "explanation": ""
+      },
+      "after": {
+        "prompt": "إذا كانت المدرسة لاحقًا، أي جملة صحيحة: «نذهب إلى المدرسة بعد قليل» أم «نذهب إلى المدرسة قبل قليل»؟",
+        "type": "grammar_choice",
+        "target_ids": [
+          "ar-r37"
+        ],
+        "answer": "نذهب إلى المدرسة بعد قليل.",
+        "explanation": "«بعد قليل» تدل على وقت لاحق."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u01-p02",
+      "question_id": "q9",
+      "before": {
+        "prompt": "ما الكلمة التي تنفي الفعل في «لم تأخذ كل الكتب»؟",
+        "type": "grammar_identification",
+        "target_ids": null,
+        "answer": "لم.",
+        "explanation": ""
+      },
+      "after": {
+        "prompt": "اختر الجملة الصحيحة لنفي فعل في الماضي: «لم تأخذ ليلى كل الكتب» أم «لا أخذت ليلى كل الكتب»؟",
+        "type": "grammar_choice",
+        "target_ids": null,
+        "answer": "لم تأخذ ليلى كل الكتب.",
+        "explanation": "«لم» مع الفعل المضارع تستعمل هنا لنفي حدث في الماضي."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u01-p03",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي الأدق لـ«هناك» في الاستعمال المكاني؟",
+        "type": "grammar_category",
+        "target_ids": [
+          "ar-r40"
+        ],
+        "answer": "اسم إشارة للمكان البعيد.",
+        "explanation": ""
+      },
+      "after": {
+        "prompt": "إذا كانت الحديقة بعيدة عن المتكلم، أي جملة أنسب: «الحديقة هناك» أم «الحديقة هنا»؟",
+        "type": "grammar_choice",
+        "target_ids": [
+          "ar-r40"
+        ],
+        "answer": "الحديقة هناك.",
+        "explanation": "«هناك» تستعمل للمكان البعيد عن المتكلم."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u01-p03",
+      "question_id": "q10",
+      "before": {
+        "prompt": "في «أريد»، من صاحب الفعل؟",
+        "type": "person_form",
+        "target_ids": null,
+        "answer": "المتكلم المفرد: أنا.",
+        "explanation": ""
+      },
+      "after": {
+        "prompt": "أكمل عن نفسك: «أنا _____ أن أذهب إلى الحديقة.»",
+        "type": "cloze_transfer",
+        "target_ids": [
+          "ar-r33"
+        ],
+        "answer": "أريد.",
+        "explanation": "مع «أنا» نقول «أريد»."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u01-p05",
+      "question_id": "q7",
+      "before": {
+        "prompt": "ماذا تدل «حتى» في «حتى المساء»؟",
+        "type": "grammar_function",
+        "target_ids": [
+          "ar-r56"
+        ],
+        "answer": "تدل على الغاية أو نهاية المدة.",
+        "explanation": ""
+      },
+      "after": {
+        "prompt": "إذا كان البقاء ينتهي عند المساء، أي جملة أنسب: «بقيت في المكتبة حتى المساء» أم «بقيت في المكتبة بعد المساء»؟",
+        "type": "grammar_choice",
+        "target_ids": [
+          "ar-r56"
+        ],
+        "answer": "بقيت في المكتبة حتى المساء.",
+        "explanation": "«حتى المساء» تبين أن مدة البقاء تنتهي عند المساء."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u01-p05",
+      "question_id": "q9",
+      "before": {
+        "prompt": "ما صيغة العدد في كلمة «كتابين»؟",
+        "type": "grammar_identification",
+        "target_ids": null,
+        "answer": "المثنى.",
+        "explanation": ""
+      },
+      "after": {
+        "prompt": "اختر الصحيح في هذه الجملة: «أخذت ليلى كتابين» أم «أخذت ليلى كتابان»؟",
+        "type": "grammar_choice",
+        "target_ids": null,
+        "answer": "أخذت ليلى كتابين.",
+        "explanation": "بعد الفعل «أخذت» هنا تأتي الصيغة «كتابين»."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u01-p06",
+      "question_id": "q8",
+      "before": {
+        "prompt": "في «حتى المساء»، ماذا تحدد «حتى»؟",
+        "type": "grammar_function",
+        "target_ids": [
+          "ar-r56"
+        ],
+        "answer": "نهاية المدة الزمنية.",
+        "explanation": ""
+      },
+      "after": {
+        "prompt": "إذا انتهت القراءة عند المساء، أي جملة أنسب: «قرأت ليلى حتى المساء» أم «قرأت ليلى بعد المساء»؟",
+        "type": "grammar_choice",
+        "target_ids": [
+          "ar-r56"
+        ],
+        "answer": "قرأت ليلى حتى المساء.",
+        "explanation": "«حتى المساء» تبين أن القراءة استمرت إلى المساء ثم انتهت عنده."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u01-p06",
+      "question_id": "q10",
+      "before": {
+        "prompt": "ما وظيفة «أو» في «كتابًا واحدًا أو اثنين»؟",
+        "type": "grammar_function",
+        "target_ids": null,
+        "answer": "حرف عطف يربط بين بديلين أو احتمالين.",
+        "explanation": ""
+      },
+      "after": {
+        "prompt": "عندما يكون أمامك خياران، أي جملة أنسب: «أقرأ كتابًا واحدًا أو اثنين» أم «أقرأ كتابًا واحدًا واثنين»؟",
+        "type": "grammar_choice",
+        "target_ids": null,
+        "answer": "أقرأ كتابًا واحدًا أو اثنين.",
+        "explanation": "«أو» تستعمل هنا للاختيار بين بديلين."
+      }
+    }
+  ],
+  "release_effect": "Arabic remains educator-blocked. This bounded repair is not release approval and requires independent semantic/educator re-review plus corpus-wide continuation."
+}
