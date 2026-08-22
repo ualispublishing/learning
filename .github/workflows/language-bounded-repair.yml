@@ -11,9 +11,14 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: language-bounded-repair-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   repair:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
@@ -102,4 +107,13 @@ jobs:
             exit 0
           fi
           git commit -m 'Apply bounded language assessment repair [skip ci]'
-          git push origin "HEAD:${{ github.ref_name }}"
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:${{ github.ref_name }}"; then
+              exit 0
+            fi
+            if [[ "$attempt" -eq 3 ]]; then
+              echo 'git push failed after 3 transport retries' >&2
+              exit 1
+            fi
+            sleep $((attempt * 3))
+          done
