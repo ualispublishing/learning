@@ -4,8 +4,8 @@
   "language": "fr",
   "level": "A1",
   "evidence_kind": "gate_a_revalidation_checkpoint",
-  "bound_sha256": "b509f77c71e28505f80efaf202cb36cd5c45c5646bbd86cbf9773daf0743d037",
-  "status": "CURRENT_GATE_A_FAIL_INDEPENDENT_REVIEW_REQUIRED",
+  "bound_sha256": "fe9f321ada5740baf264c009ce0b5eb845777927f37f99f03e7459c5ae72b64c",
+  "status": "FORMAL_PROTOCOL_GATE_A_PASS_LATER_RELEASE_GATES_PENDING",
   "scope": {
     "records": 60,
     "questions": 600,
@@ -24,7 +24,10 @@
     "venir_r3_spacing_repair_after_sha256": "a79455b1a94eccff136d78fab34ab36fe0fbf681d16e147e0c00d7ba7815cd68",
     "current_a1_generation_integrity": "reading/audit/french_a1_generation_integrity.json",
     "current_corpus_revalidation": "reading/audit/french_a1_current_corpus_revalidation_2026-08-22.json",
-    "current_highest_assurance_gate_a": "reading/audit/french_current_deterministic_gate_a_2026-08-22.json"
+    "current_highest_assurance_gate_a": "reading/audit/french_current_deterministic_gate_a_2026-08-22.json",
+    "final_bounded_repairs": "reading/audit/french_a1_units06_10_final_bounded_repairs_2026-08-22.json",
+    "units05_10_internal_review": "reading/audit/french_a1_units05_10_internal_semantic_qa_review_2026-08-22.json",
+    "formal_protocol_gate_a": "reading/audit/french_a1_formal_gate_a_2026-08-22.json"
   },
   "freshness_findings": {
     "round2_review_integrity_snapshot_hash_matches_current_corpus": false,
@@ -34,27 +37,29 @@
     "prior_final_approval_may_be_relied_on_for_current_corpus": false,
     "current_a1_generation_integrity_matches_current_corpus": true,
     "broad_deterministic_whole_french_diagnostic_matches_current_corpus": true,
-    "highest_assurance_release_gate_a_matches_current_corpus": true,
-    "highest_assurance_release_gate_a_status": "FAIL"
+    "formal_protocol_gate_a_matches_current_corpus": true,
+    "formal_protocol_gate_a_status": "PASS",
+    "legacy_release_evidence_scan_hash_matches_current_corpus": false
   },
   "completed_current_corpus_deterministic_revalidation": [
-    "A1 generation-integrity audit: PASS on the current A1 corpus",
-    "broad 15-lens whole-French automated diagnostic: PASS with current A1 blob",
-    "highest-assurance deterministic release-evidence Gate A: rerun on current hashes and recorded as FAIL with 2160 evidence blockers",
-    "bounded stale exposure metadata repair for fr-a1-u03-p02 / fr-rank-0024: exposures_in_text 3 -> 2 with no learner-facing text, question, or answer change"
+    "French A1 strict generation/source/sense/exposure integrity: PASS on the current 60-passage corpus.",
+    "All confirmed internal-review bounded repairs through Units 01-10 were applied and revalidated fail-closed.",
+    "Formal protocol Gate A under EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md §3: PASS with 0 blockers on 60 passages / 600 questions / 600 answers and 182 review-target checks.",
+    "The prior draft Gate A punctuation failure was a validator false positive caused by multiple-choice labels A)/B)/C); the corrected validator passed without a corpus change for that issue."
   ],
   "remaining_release_work": [
-    "substantively revalidate the 2160 current Gate-A release-evidence blockers; do not bulk-promote draft/pending/coverage/review metadata",
-    "complete targeted independent French naturalness review for the changed venir passage wording",
-    "complete required current-corpus semantic, naturalness/orthography, pedagogical, assessment/answer-evidence, and coverage review",
-    "complete all independent external/native/model-family/educator gates required by the highest-assurance release profile",
-    "only after all prerequisite evidence is current and passing, regenerate final-gate artifacts sequentially and run the final adversarial/approval gate last"
+    "Complete and reconcile fresh internal linguistic/Q&A coverage for 100% of learner-facing A1 fields under the highest-assurance profile; internal model review is not independent approval.",
+    "Run required independent French machine/tool scans across supported learner-facing text (target stack: LanguageTool, Antidote, DeepL Write) and adjudicate every finding.",
+    "Run required independent model-family audit across 100% of A1 learner-facing records; missing independent families remain release blockers.",
+    "Obtain native-professional French review of 100% of learner-facing fields and resolve all findings.",
+    "Obtain educator/curriculum review of all passages and all question/answer sets, including CEFR A1 alignment.",
+    "After repairs, freeze the corpus and complete the blind post-repair human review, rerun affected gates, and only then issue hash-bound release evidence."
   ],
   "protocol": "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md",
   "release_protocol": "reading/planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md",
   "assurance_profile": "reading/planning/HIGHEST_ASSURANCE_RELEASE_PROFILE.md",
-  "limitations": "Current-corpus A1 generation-integrity and the broad 15-lens diagnostic pass. The actual highest-assurance release-evidence Gate A fails with 2160 evidence blockers across French, and no automated result is independent human review. The older venir repair artifact is content-retained but no longer hash-equal to the corpus because a later metadata-only exposure-count repair changed the A1 file hash.",
-  "release_effect": "French remains REOPEN_REQUIRED; no final approval until Gate A is substantively cleared on current hashes and all required independent review gates are actually completed.",
+  "limitations": "Formal protocol Gate A now passes deterministic integrity on the current A1 hash. This is not independent machine, model-family, native-professional, educator, or blind-review approval. The older 2160-item release-evidence scan was bound to an earlier A1 hash and represented draft/pending evidence fields rather than 2160 distinct prose defects; it is retained only as historical evidence.",
+  "release_effect": "French remains REOPEN_REQUIRED. Formal Gate A PASS advances A1 to STRUCTURAL_PASS only; no educator/public release claim is permitted until all mandatory later gates pass against the same then-current hashes.",
   "prior_bound_sha256": "a79455b1a94eccff136d78fab34ab36fe0fbf681d16e147e0c00d7ba7815cd68",
   "additional_bounded_repair": {
     "passage_id": "fr-a1-u03-p02",
@@ -69,5 +74,7 @@
     "answers_changed": false,
     "reason": "The earlier venir prose repair left the stored qui exposure count stale; exact learner-text count is two."
   },
-  "current_highest_assurance_gate_a_open_findings": 2160
+  "bound_git_blob": "300d5f024d27ca095187793a4bb9520508dcb690",
+  "current_formal_protocol_gate_a_open_findings": 0,
+  "historical_release_evidence_scan_open_findings": 2160
 }

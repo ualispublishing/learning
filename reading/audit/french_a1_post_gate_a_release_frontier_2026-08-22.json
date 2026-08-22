@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "evidence_kind": "post_formal_gate_a_release_frontier",
+  "bound_sha256": "fe9f321ada5740baf264c009ce0b5eb845777927f37f99f03e7459c5ae72b64c",
+  "bound_git_blob": "300d5f024d27ca095187793a4bb9520508dcb690",
+  "formal_gate_a": {
+    "status": "PASS",
+    "artifact": "reading/audit/french_a1_formal_gate_a_2026-08-22.json",
+    "blockers": 0
+  },
+  "generation_integrity": {
+    "status": "PASS",
+    "artifact": "reading/audit/french_a1_generation_integrity.json"
+  },
+  "internal_review_evidence": [
+    "reading/audit/french_a1_unit01_internal_semantic_qa_review_2026-08-22.json",
+    "reading/audit/french_a1_unit01_wording_postrepair_2026-08-22.json",
+    "reading/audit/french_a1_unit02_semantic_qa_postrepair_2026-08-22.json",
+    "reading/audit/french_a1_unit03_internal_semantic_qa_review_2026-08-22.json",
+    "reading/audit/french_a1_unit04_internal_semantic_qa_review_2026-08-22.json",
+    "reading/audit/french_a1_unit04_bounded_repair_2026-08-22.json",
+    "reading/audit/french_a1_units05_10_internal_semantic_qa_review_2026-08-22.json",
+    "reading/audit/french_a1_units06_10_final_bounded_repairs_2026-08-22.json"
+  ],
+  "release_state": "REOPEN_REQUIRED",
+  "next_mandatory_frontier": "complete/reconcile 100% internal learner-facing Gate B/C/D evidence, then independent Gate E+ reviews",
+  "independent_gates": {
+    "machine_tools": "PENDING",
+    "model_family": "PENDING",
+    "native_professional": "PENDING",
+    "educator_cefr": "PENDING",
+    "blind_postrepair": "PENDING"
+  },
+  "historical_note": "The older 2160-item release-evidence scan is bound to an earlier A1 hash and primarily records draft/pending/zero evidence fields. It is not the formal protocol §3 Gate A and is not evidence of 2160 distinct content defects.",
+  "release_effect": "NONE_AUTOMATIC: no educator/public release approval."
+}
