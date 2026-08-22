@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "audit": "languagetool_postrepair_adjudication",
+  "status": "LANGUAGETOOL_CURRENT_HASH_ALL_SIGNALS_DISPOSITIONED_NO_OPEN_ACCEPTED_DEFECTS",
+  "bound_sha256": "7dbdb48ffc6efd00106490ca9b10ad25643bf7e89967e8fbd2977a04641d6ea3",
+  "bound_git_blob": "417ee292a73244860ecd40741af521aee5436578",
+  "pre_repair": {
+    "raw_findings": 231,
+    "mechanical_mc_label_false_positives": 20,
+    "mechanical_short_answer_casing_false_positives": 57,
+    "style_repetition_signals": 31,
+    "intentional_grammar_distractor_signals_confirmed": 32,
+    "plausible_residuals_contextually_reviewed": 14,
+    "accepted_defects": 1,
+    "accepted_defect_finding_index": 229
+  },
+  "accepted_defect": {
+    "passage_id": "fr-a1-u10-p06",
+    "field": "answer",
+    "item_id": "a5",
+    "rule_id": "PLACE_DE_LA_VIRGULE",
+    "repair_artifact": "reading/audit/french_a1_languagetool_bounded_repair_2026-08-22.json",
+    "postrepair_absent": true
+  },
+  "residual_adjudication": {
+    "other_13_plausible_residuals": "NO_REPAIR: context inspection found optional punctuation, detector misparses, or answer fragments rather than high-confidence learner-facing defects.",
+    "evidence_source": "GitHub Actions residual-inspection run 32606145928 plus durable raw/triage artifacts.",
+    "style_signals": "NO_AUTOMATIC_DEFECT: controlled A1 target repetition; retained for later native/educator style review.",
+    "intentional_grammar_distractors": "NO_DEFECT: detector spans occur in explicitly incorrect alternatives of grammar_choice items."
+  },
+  "postrepair": {
+    "raw_findings": 230,
+    "new_signals": 0,
+    "semantic_fingerprint_equivalent_to_pre_repair_minus_accepted_defect": true,
+    "open_accepted_defects": 0
+  },
+  "machine_gate_state": "PARTIAL_LANGUAGETOOL_COMPLETE_ANTIDOTE_DEEPL_PENDING",
+  "limitations": "Contextual adjudication here does not substitute for native-professional, educator, independent model-family, Antidote, DeepL Write, or blind post-repair review.",
+  "release_effect": "NONE_AUTOMATIC: French remains REOPEN_REQUIRED."
+}

@@ -6,8 +6,8 @@
   "audit": "formal_protocol_gate_a_current_corpus",
   "protocol": "reading/planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md §3",
   "status": "PASS_DETERMINISTIC_FORMAL_GATE_A_NEEDS_LATER_RELEASE_GATES",
-  "bound_sha256": "fe9f321ada5740baf264c009ce0b5eb845777927f37f99f03e7459c5ae72b64c",
-  "bound_git_blob": "300d5f024d27ca095187793a4bb9520508dcb690",
+  "bound_sha256": "7dbdb48ffc6efd00106490ca9b10ad25643bf7e89967e8fbd2977a04641d6ea3",
+  "bound_git_blob": "417ee292a73244860ecd40741af521aee5436578",
   "scope": {
     "passages": 60,
     "questions": 600,
@@ -33,17 +33,10 @@
   "blocker_count": 0,
   "blockers": [],
   "validator_correction": {
-    "issue": "Previous draft Gate A counted multiple-choice labels A)/B)/C) as unmatched closing parentheses.",
-    "correction": "Punctuation sanity now removes standalone A)-D) option labels before balancing real parentheses; legitimate parenthesized text remains checked.",
+    "issue": "Multiple-choice labels A)/B)/C) are not parentheses.",
+    "correction": "Standalone A)-D) option labels are removed before balancing real parentheses.",
     "corpus_change_required": false
   },
-  "warnings": [
-    {
-      "kind": "future_target_leakage",
-      "hard_rule_applicable": false,
-      "reason": "No French A1 repository policy prohibiting incidental pre-exposure was identified; protocol blocks this only where prohibited."
-    }
-  ],
   "source_lexicon_sha256": {
     "french_top1000.csv": "db330c9afbbf5ff8c798f57701320a41308dfeb50dee0699d66afbe3ac400b00",
     "french_top3000.csv": "fd8661b17263f8c104bbb0d430f6270e8ff85606c6b8d2c0c326144d7a7796db",
@@ -55,11 +48,11 @@
     "french_naturalness_orthography": "PENDING",
     "pedagogical_a1_fit": "PENDING",
     "assessment_answer_grounding": "PENDING",
-    "independent_machine_tools": "PENDING",
+    "independent_machine_tools": "PARTIAL_LANGUAGETOOL_POSTREPAIR_RERUN_PENDING_IN_THIS_JOB",
     "independent_model_family": "PENDING",
     "native_professional": "PENDING",
     "educator_release": "PENDING",
     "blind_review": "PENDING"
   },
-  "release_effect": "NONE_AUTOMATIC: formal Gate A is deterministic integrity only. French remains REOPEN_REQUIRED until mandatory later gates pass against the same then-current hashes."
+  "release_effect": "NONE_AUTOMATIC: formal Gate A is deterministic integrity only; French remains REOPEN_REQUIRED."
 }

@@ -4,7 +4,7 @@
   "overall_status": "in_progress",
   "active_language": "Urdu",
   "paused_languages": [],
-  "phase": "French A1 formal protocol Gate A passes deterministic integrity on the current corpus; French remains REOPEN_REQUIRED while mandatory internal completeness and independent machine/model/native/educator/blind release gates remain pending. Urdu continues under its separate generation/final-review evidence.",
+  "phase": "French A1 formal protocol Gate A and the LanguageTool portion of the machine-detector gate are current on the post-repair hash. French remains REOPEN_REQUIRED while internal field-level completeness, Antidote/DeepL, independent model-family, native-professional, educator/CEFR, and blind post-repair gates remain pending.",
   "target_passages": 1080,
   "target_is_quota": false,
   "approved_passages": 360,
@@ -73,14 +73,14 @@
       "new_targets_checked_against_all_prior_french_levels": true
     },
     "a1_completion": {
-      "state": "STRUCTURAL_PASS_FORMAL_GATE_A_NEEDS_LATER_RELEASE_GATES",
+      "state": "STRUCTURAL_PASS_FORMAL_GATE_A_LANGUAGETOOL_PARTIAL_MACHINE_PASS_LATER_GATES_PENDING",
       "passages": 60,
       "questions": 600,
       "answers": 600,
-      "canonical_blob": "300d5f024d27ca095187793a4bb9520508dcb690",
+      "canonical_blob": "417ee292a73244860ecd40741af521aee5436578",
       "generation_integrity": "PASS_CURRENT_CORPUS",
       "generation_integrity_artifact": "reading/audit/french_a1_generation_integrity.json",
-      "canonical_sha256": "fe9f321ada5740baf264c009ce0b5eb845777927f37f99f03e7459c5ae72b64c",
+      "canonical_sha256": "7dbdb48ffc6efd00106490ca9b10ad25643bf7e89967e8fbd2977a04641d6ea3",
       "current_corpus_revalidation_artifact": "reading/audit/french_a1_current_corpus_revalidation_2026-08-22.json",
       "independent_review_status": "PENDING",
       "formal_protocol_gate_a_status": "PASS",
@@ -88,7 +88,11 @@
       "formal_protocol_gate_a_blockers": 0,
       "legacy_release_evidence_scan_status": "HISTORICAL_FAIL_REVIEW_EVIDENCE_INCOMPLETE_NOT_CURRENT_HASH",
       "legacy_release_evidence_scan_artifact": "reading/audit/french_current_deterministic_gate_a_2026-08-22.json",
-      "legacy_release_evidence_scan_open_findings_at_old_hash": 2160
+      "legacy_release_evidence_scan_open_findings_at_old_hash": 2160,
+      "languagetool_status": "PASS_CURRENT_HASH_ALL_SIGNALS_DISPOSITIONED_NO_OPEN_ACCEPTED_DEFECTS",
+      "languagetool_postrepair_scan": "reading/audit/french_a1_languagetool_postrepair_fullscan_2026-08-22.json",
+      "languagetool_adjudication": "reading/audit/french_a1_languagetool_postrepair_adjudication_2026-08-22.json",
+      "independent_machine_tool_gate": "PARTIAL_LANGUAGETOOL_COMPLETE_ANTIDOTE_DEEPL_PENDING"
     },
     "a2_completion": {
       "state": "FINAL_APPROVED",
