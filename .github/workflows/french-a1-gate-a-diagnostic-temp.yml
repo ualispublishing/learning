@@ -1,0 +1,65 @@
+name: TEMP French A1 Gate A blocker diagnostic
+
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+    paths:
+      - .github/workflows/french-a1-gate-a-diagnostic-temp.yml
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    if: github.event.pull_request.head.ref == 'repair/french-a1-review-integrity-2026-08-20'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: repair/french-a1-review-integrity-2026-08-20
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet stanza
+      - name: Print review visibility and chronology blockers
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib,json,re,unicodedata
+          import stanza
+          C=Path('reading/french/a1/passages.jsonl')
+          expected='005354922bb7a88adce0c0e60f63d5b52099565c557d0a90914ff4f0d7447b80'
+          sha=hashlib.sha256(C.read_bytes()).hexdigest()
+          if sha!=expected: raise SystemExit(f'FAIL CLOSED: corpus drift {sha} != {expected}')
+          rows=[json.loads(x) for x in C.read_text(encoding='utf-8').splitlines() if x.strip()]
+          stanza.download('fr',processors='tokenize,pos,lemma',verbose=False)
+          nlp=stanza.Pipeline('fr',processors='tokenize,pos,lemma',use_gpu=False,verbose=False)
+          def norm(s): return re.sub(r"^[^\w]+|[^\w]+$",'',unicodedata.normalize('NFC',str(s or '')).replace('’',"'").casefold(),flags=re.UNICODE)
+          intro={}; high={}; order={'R1':1,'R2':2,'R3':3,'R4':4,'R5':5,'long_term':6}; vis=[]; chrono=[]
+          for row in rows:
+              doc=nlp(row['text']); toks={(norm(w.text),norm(w.lemma)) for sent in doc.sentences for w in sent.words}
+              allfields='\n'.join([row.get('text','')]+[q.get('prompt','') for q in row.get('questions',[])]+[a.get('answer','') for a in row.get('answer_key',[])])
+              qtargets={tid for q in row.get('questions',[]) for tid in q.get('target_ids',[])}
+              for rv in row.get('review_lexical_targets',[]):
+                  tid=rv.get('id'); prev=intro.get(tid)
+                  if prev is None or prev['sequence']>=row['sequence']:
+                      chrono.append({'passage_id':row['id'],'target_id':tid,'form':rv.get('form'),'review_stage':rv.get('review_stage'),'kind':'review_before_introduction','introduced':prev}); continue
+                  cur=order.get(rv.get('review_stage'),0); prior=high.get(tid,0)
+                  if cur<prior:
+                      chrono.append({'passage_id':row['id'],'target_id':tid,'form':rv.get('form'),'review_stage':rv.get('review_stage'),'kind':'stage_regression','prior_numeric':prior,'current_numeric':cur})
+                  high[tid]=max(prior,cur)
+                  keys={norm(rv.get('form')),norm(prev.get('form')),norm(prev.get('lemma'))}-{''}
+                  running=any(s in keys or l in keys for s,l in toks)
+                  exact=any(re.search(r'(?<!\w)'+re.escape(k)+r'(?!\w)',unicodedata.normalize('NFC',allfields).casefold(),flags=re.UNICODE) for k in keys)
+                  linked=tid in qtargets
+                  visible=running if rv.get('representation')=='running_text' else (running or exact or linked)
+                  if not visible:
+                      vis.append({'passage_id':row['id'],'target_id':tid,'form':rv.get('form'),'representation':rv.get('representation'),'review_stage':rv.get('review_stage'),'keys':sorted(keys),'running':running,'exact':exact,'linked':linked})
+              for t in row.get('new_lexical_targets',[]): intro[t.get('id')]={'sequence':row['sequence'],'form':t.get('form'),'lemma':t.get('lemma')}
+          print(json.dumps({'bound_sha256':sha,'visibility_count':len(vis),'visibility':vis,'chronology_count':len(chrono),'chronology':chrono},ensure_ascii=False,indent=2))
+          PY
