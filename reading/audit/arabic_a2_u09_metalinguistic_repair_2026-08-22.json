@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "ar",
+  "level": "A2",
+  "unit": 9,
+  "status": "BOUNDED_REPAIR_APPLIED_NEEDS_INDEPENDENT_REVIEW",
+  "before_sha256": "f27ad06c372d316ca70346e19a10a72645577897de8db676e317d869d8945e1c",
+  "after_sha256": "11ace33f489636038ed7eb972bb6782724b99ddb37be1d802c2795a291f5e7d6",
+  "inventory_candidates": 4,
+  "confirmed_repairs": 3,
+  "adjudicated_false_positive_count": 1,
+  "adjudicated_false_positives": [
+    {
+      "passage_id": "ar-a2-u09-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "لماذا يستخدم النص أسئلة «من؟ متى؟ لماذا؟» في النهاية؟",
+      "answer": "لتقديم طريقة عملية لفحص العادة وسياقها قبل التعميم.",
+      "reason": "Discourse-comprehension question asks why the passage ends with a practical question set for examining a custom and its context; it does not require a grammatical label or form identification."
+    }
+  ],
+  "passage_text_changed": false,
+  "notable_sense_corrections": [
+    "نسخة: live context is the noun 'version/copy', not a past-tense verb."
+  ],
+  "repairs": [
+    {
+      "passage_id": "ar-a2-u09-p01",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «قصة» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا وصفت الحكاية التي روتها الجدة، أي عبارة أنسب: «قصة عائلية» أم «قصة عائلي»؟",
+        "type": "grammar_choice",
+        "answer": "قصة عائلية.",
+        "explanation": "التعبير الطبيعي هو «قصة عائلية» عند وصف حكاية مرتبطة بالعائلة."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u09-p02",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «نسخة» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "فعل ماضٍ"
+      },
+      "after": {
+        "prompt": "إذا قارنت نور رواية الجد برواية الخالة، أي تعبير أنسب: «نسخة الجد من القصة» أم «نسخة الجد القصة»؟",
+        "type": "grammar_choice",
+        "answer": "نسخة الجد من القصة.",
+        "explanation": "«نسخة» هنا اسم بمعنى رواية أو صيغة من القصة، ويأتي طبيعيًا مع «من»؛ وليست فعلًا ماضيًا في هذا السياق."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u09-p03",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «مطعم» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "للتحدث عن مكان العشاء، أي جملة أنسب: «ذهبنا إلى مطعم قريب» أم «ذهبنا مطعم قريب»؟",
+        "type": "grammar_choice",
+        "answer": "ذهبنا إلى مطعم قريب.",
+        "explanation": "التعبير الطبيعي هو «ذهبنا إلى مطعم قريب» عند ذكر الوجهة."
+      }
+    }
+  ],
+  "release_effect": "Arabic remains educator-blocked; independent semantic/native/educator review required."
+}
