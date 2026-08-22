@@ -1,0 +1,41 @@
+name: Urdu A1 finish generation
+
+on:
+  push:
+    branches:
+      - promote/urdu-a1-finish-2026-08-22
+
+permissions:
+  contents: write
+
+concurrency:
+  group: urdu-a1-finish-generation
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Promote staged Units 09 and 10
+        run: python reading/tools/promote_staged_urdu_a1_finish.py
+      - name: Commit durable promotion output and remove temporary runner
+        shell: bash
+        run: |
+          rm -f .github/workflows/urdu-a1-finish-generation.yml reading/tools/promote_staged_urdu_a1_finish.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Promote Urdu A1 Units 09-10 from verified staging [skip ci]"
+          git push origin HEAD:${{ github.ref_name }}
