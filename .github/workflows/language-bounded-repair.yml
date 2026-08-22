@@ -7,21 +7,30 @@ on:
     paths:
       - 'reading/audit/manifests/*.json'
       - 'reading/audit/manifests/**/*.json'
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches: [main]
+    paths:
+      - 'reading/audit/manifests/*.json'
+      - 'reading/audit/manifests/**/*.json'
 
 permissions:
   contents: write
+  pull-requests: read
 
 concurrency:
-  group: language-bounded-repair-${{ github.ref }}
+  group: language-bounded-repair-${{ github.event.pull_request.head.ref || github.ref }}
   cancel-in-progress: false
 
 jobs:
   repair:
+    if: github.event_name == 'push' || (github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'github-actions[bot]')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || github.ref_name }}
           fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
@@ -32,14 +41,21 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          before='${{ github.event.before }}'
-          head='${{ github.sha }}'
-          if [[ "$before" =~ ^0+$ ]] || ! git cat-file -e "$before^{commit}" 2>/dev/null; then
-            git show --pretty='' --name-only "$head" -- reading/audit/manifests \
+          if [[ '${{ github.event_name }}' == 'pull_request' ]]; then
+            base='${{ github.event.pull_request.base.ref }}'
+            git fetch origin "$base"
+            git diff --name-only "origin/$base...HEAD" -- reading/audit/manifests \
               | grep -E '\.json$' | sort -u > /tmp/manifests.txt || true
           else
-            git diff --name-only "$before" "$head" -- reading/audit/manifests \
-              | grep -E '\.json$' | sort -u > /tmp/manifests.txt || true
+            before='${{ github.event.before }}'
+            head='${{ github.sha }}'
+            if [[ "$before" =~ ^0+$ ]] || ! git cat-file -e "$before^{commit}" 2>/dev/null; then
+              git show --pretty='' --name-only "$head" -- reading/audit/manifests \
+                | grep -E '\.json$' | sort -u > /tmp/manifests.txt || true
+            else
+              git diff --name-only "$before" "$head" -- reading/audit/manifests \
+                | grep -E '\.json$' | sort -u > /tmp/manifests.txt || true
+            fi
           fi
           if [[ ! -s /tmp/manifests.txt ]]; then
             echo 'No changed bounded-repair manifests.'
@@ -107,8 +123,13 @@ jobs:
             exit 0
           fi
           git commit -m 'Apply bounded language assessment repair [skip ci]'
+          if [[ '${{ github.event_name }}' == 'pull_request' ]]; then
+            target='${{ github.event.pull_request.head.ref }}'
+          else
+            target='${{ github.ref_name }}'
+          fi
           for attempt in 1 2 3; do
-            if git push origin "HEAD:${{ github.ref_name }}"; then
+            if git push origin "HEAD:$target"; then
               exit 0
             fi
             if [[ "$attempt" -eq 3 ]]; then
