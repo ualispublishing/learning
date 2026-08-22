@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "unit": 2,
+  "input_file": "reading/french/a1/passages.jsonl",
+  "expected_before_sha256": "66f5a01223fb8d18ecfb09fe4226dcffa91c32d9253547db9c0cf8b7e058ef9f",
+  "expected_scope": {"records": 6, "questions": 60, "answers": 60},
+  "repair_evidence_file": "reading/audit/french_a1_unit02_semantic_qa_repair_2026-08-22.json",
+  "post_evidence_file": "reading/audit/french_a1_unit02_semantic_qa_postrepair_2026-08-22.json",
+  "pass_status": "PASS_DETERMINISTIC_FRENCH_A1_UNIT02_SEMANTIC_QA",
+  "formal_types": [],
+  "formal_prompt_markers": [],
+  "repairs": [
+    {
+      "passage_id":"fr-a1-u02-p01","question_id":"q2",
+      "before":{"prompt":"Quels endroits Camille veut-elle visiter au centre sportif ?","type":"literal_detail","answer":"Le cours de danse et la piscine."},
+      "after":{"prompt":"Que veut faire Camille au centre sportif ?","type":"literal_detail","answer":"Elle veut faire un cours de danse et aller à la piscine.","explanation":""}
+    },
+    {
+      "passage_id":"fr-a1-u02-p01","question_id":"q8",
+      "before":{"prompt":"Pour parler d’un déplacement vers un lieu, quel verbe convient ici : « aller » ou « venir » ?","type":"contrast","answer":"aller"},
+      "after":{"prompt":"Camille est chez elle et veut se déplacer vers le parc. Quel verbe convient : « aller » ou « venir » ?","type":"contrast","answer":"aller","explanation":""}
+    },
+    {
+      "passage_id":"fr-a1-u02-p03","question_id":"q7",
+      "before":{"prompt":"Complète : « Elle demandera de l’aide _____ elle ne trouve pas le livre. » — « si » ou « avec » ?","type":"grammar_choice","answer":"« si »."},
+      "after":{"prompt":"Complète : « Elle demande de l’aide _____ elle ne trouve pas le livre. » — « si » ou « avec » ?","type":"grammar_choice","answer":"« si ».","explanation":""}
+    },
+    {
+      "passage_id":"fr-a1-u02-p04","question_id":"q8",
+      "before":{"prompt":"Si le carnet appartient au locuteur, lequel convient : « mon carnet » ou « ton carnet » ?","type":"contrast","answer":"mon carnet"},
+      "after":{"prompt":"Camille parle de son propre carnet. Que dit-elle : « mon carnet » ou « ton carnet » ?","type":"contrast","answer":"mon carnet","explanation":""}
+    },
+    {
+      "passage_id":"fr-a1-u02-p06","question_id":"q7",
+      "before":{"prompt":"Choisis la forme correcte pour un garçon qui parle de son sac : « mon sac » ou « ma sac ».","type":"grammar_choice","answer":"mon sac"},
+      "after":{"prompt":"Quelle forme est correcte : « mon sac » ou « ma sac » ?","type":"grammar_choice","answer":"mon sac","explanation":""}
+    }
+  ],
+  "false_positives": [],
+  "notable_sense_corrections": [
+    "u02-p01/q2 aligns the requested category with the keyed answer.",
+    "u02-p01/q8 adds a deictic anchor so aller/venir is unambiguous.",
+    "u02-p03/q7 removes unnecessary future-simple load while preserving the si target.",
+    "u02-p04/q8 removes technical A1 wording.",
+    "u02-p06/q7 removes misleading owner-gender framing for mon."
+  ],
+  "release_effect": "French remains REOPEN_REQUIRED; this deterministic Unit 02 repair does not satisfy independent semantic/native/pedagogical/educator release review."
+}
