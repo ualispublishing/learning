@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-21",
+  "language": "ur",
+  "level": "A1",
+  "unit": 10,
+  "bound_canonical_sha256": "b4fcf0bbc07d62cd3e743b8d0a6d49df2d6b0df3d03aa892384d0501a7ef1d4a",
+  "bound_unit08_stage_aggregate_sha256": "965ef7b038c3f6840760ece3936c8e052f1275a8583dd069dc610b612cf1e116",
+  "bound_unit09_stage_aggregate_sha256": "bf96124cb5c6b2e127372f74961cfa31c9c28bf3475847475cc812a4612658a4",
+  "status": "STAGED_STRUCTURALLY_CHECKED",
+  "canonical_promotion": "STACKED_FRONTIER_READY_FOR_REVIEW_NOT_PROMOTED",
+  "staging_path": "reading/urdu/a1/staging/unit10",
+  "sequences": [
+    55,
+    56,
+    57,
+    58,
+    59,
+    60
+  ],
+  "passages": 6,
+  "questions": 60,
+  "answers": 60,
+  "word_counts": [
+    116,
+    123,
+    115,
+    125,
+    124,
+    130
+  ],
+  "new_targets": [
+    "باغ",
+    "رنگ",
+    "زبان",
+    "نیا",
+    "ہمیشہ",
+    "اکثر",
+    "ملاقات",
+    "پسند",
+    "جسم",
+    "ہدایت"
+  ],
+  "checks": {
+    "six_passages": true,
+    "sequences_contiguous": true,
+    "a1_word_band_90_140": true,
+    "word_count_metadata_checked": true,
+    "sentence_count_metadata_checked": true,
+    "ten_questions_each": true,
+    "ten_answers_each": true,
+    "question_answer_linkage": true,
+    "question_targets_locally_declared": true,
+    "selection_exact": true,
+    "source_identity_checked": true,
+    "new_target_forms_visible": true,
+    "new_target_exposure_counts_checked": true,
+    "declared_running_text_reviews_visible": true,
+    "target_collisions_zero": true,
+    "within_unit_first_introduction_order_checked": true,
+    "two_new_p01_p05": true,
+    "p06_zero_new_reviews_all_ten": true,
+    "learner_facing_roman_script_zero": true
+  },
+  "problems": [],
+  "record_evidence": [
+    {
+      "file": "ur-a1-u10-p01.json",
+      "id": "ur-a1-u10-p01",
+      "sequence": 55,
+      "word_count_actual": 116,
+      "sentence_count_actual": 9,
+      "new_targets": [
+        {
+          "id": "ur-rank-0353",
+          "form": "باغ",
+          "occurrences": 5
+        },
+        {
+          "id": "ur-rank-0362",
+          "form": "رنگ",
+          "occurrences": 4
+        }
+      ]
+    },
+    {
+      "file": "ur-a1-u10-p02.json",
+      "id": "ur-a1-u10-p02",
+      "sequence": 56,
+      "word_count_actual": 123,
+      "sentence_count_actual": 8,
+      "new_targets": [
+        {
+          "id": "ur-rank-0364",
+          "form": "زبان",
+          "occurrences": 4
+        },
+        {
+          "id": "ur-rank-0365",
+          "form": "نیا",
+          "occurrences": 5
+        }
+      ]
+    },
+    {
+      "file": "ur-a1-u10-p03.json",
+      "id": "ur-a1-u10-p03",
+      "sequence": 57,
+      "word_count_actual": 115,
+      "sentence_count_actual": 8,
+      "new_targets": [
+        {
+          "id": "ur-rank-0368",
+          "form": "ہمیشہ",
+          "occurrences": 5
+        },
+        {
+          "id": "ur-rank-0397",
+          "form": "اکثر",
+          "occurrences": 4
+        }
+      ]
+    },
+    {
+      "file": "ur-a1-u10-p04.json",
+      "id": "ur-a1-u10-p04",
+      "sequence": 58,
+      "word_count_actual": 125,
+      "sentence_count_actual": 9,
+      "new_targets": [
+        {
+          "id": "ur-rank-0383",
+          "form": "ملاقات",
+          "occurrences": 5
+        },
+        {
+          "id": "ur-rank-0390",
+          "form": "پسند",
+          "occurrences": 3
+        }
+      ]
+    },
+    {
+      "file": "ur-a1-u10-p05.json",
+      "id": "ur-a1-u10-p05",
+      "sequence": 59,
+      "word_count_actual": 124,
+      "sentence_count_actual": 9,
+      "new_targets": [
+        {
+          "id": "ur-rank-0392",
+          "form": "جسم",
+          "occurrences": 4
+        },
+        {
+          "id": "ur-rank-0398",
+          "form": "ہدایت",
+          "occurrences": 5
+        }
+      ]
+    },
+    {
+      "file": "ur-a1-u10-p06.json",
+      "id": "ur-a1-u10-p06",
+      "sequence": 60,
+      "word_count_actual": 130,
+      "sentence_count_actual": 8,
+      "new_targets": []
+    }
+  ],
+  "formal_final_audit": "deferred under generation-first policy",
+  "promotion_precondition": "This staging branch is stacked after verified Units 08 and 09; earlier Urdu promotion/staging stack must land before Unit10 can be canonicalized.",
+  "next_generation_frontier_after_promotion": "A1 sequence 60 reached; hold further A1 generation pending stack/promotion and final audit policy.",
+  "release_effect": "Staging/generation progress only; Urdu remains non-release-ready."
+}
