@@ -6,6 +6,11 @@ on:
       - repair/french-a1-review-integrity-2026-08-20
     paths:
       - .github/workflows/french-a1-current-corpus-revalidation.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/french-a1-current-corpus-revalidation.yml
   workflow_dispatch:
 
 permissions:
@@ -21,6 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: repair/french-a1-review-integrity-2026-08-20
           fetch-depth: 0
 
       - name: Merge current main without overwriting conflicts
@@ -58,7 +64,7 @@ jobs:
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
-          import datetime, hashlib, json, subprocess
+          import hashlib, json, subprocess
 
           a1 = Path('reading/french/a1/passages.jsonl')
           exact = hashlib.sha256(a1.read_bytes()).hexdigest()
