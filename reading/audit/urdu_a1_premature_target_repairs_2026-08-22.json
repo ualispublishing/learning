@@ -3,10 +3,10 @@
   "date": "2026-08-22",
   "language": "ur",
   "level": "A1",
-  "status": "FAIL_DETERMINISTIC_BOUNDED_REPAIR",
+  "status": "PASS_DETERMINISTIC_BOUNDED_REPAIR_NEEDS_INDEPENDENT_REVIEW",
   "scope": "Seven exact running-text repairs for same-unit premature lexical-target exposure; questions, answers, target IDs, and target declarations unchanged.",
   "before_sha256": "3673ec71bf52d6d01ae11e8fd864eebc7f5fe1c3acac2ae19e4e2229ee14b728",
-  "after_sha256": "1645beb493ef6335cc70191ca21a84029e119ec42e055e89d76423c6014a5969",
+  "after_sha256": "e6450c04b6aa7d47b501e0cfbf2664fa37b2e95490ab363945f7d757dfa34a1d",
   "records_changed": [
     "ur-a1-u01-p02",
     "ur-a1-u01-p04",
@@ -91,14 +91,10 @@
     "running_text_reviews_visible_exact_token": true,
     "p01_p05_two_new_and_p06_review_policy": true,
     "premature_future_target_exposure_zero_exact_token_same_unit": true,
-    "learner_facing_roman_script_zero": false
+    "learner_facing_roman_script_zero": true
   },
-  "postrepair_problem_count": 1,
-  "postrepair_problems": [
-    {
-      "check": "learner_facing_roman_script_zero"
-    }
-  ],
+  "postrepair_problem_count": 0,
+  "postrepair_problems": [],
   "independent_semantic_naturalness_pedagogical_review": "PENDING",
   "educator_release_review": "PENDING",
   "release_effect": "NONE_AUTOMATIC: repair is deterministic-only and remains review-gated.",
@@ -114,6 +110,17 @@
     "questions_changed": false,
     "answers_changed": false,
     "target_declarations_changed": false,
+    "independent_review_claimed": false
+  },
+  "after_sha256_before_roman_cleanup": "1645beb493ef6335cc70191ca21a84029e119ec42e055e89d76423c6014a5969",
+  "learner_facing_roman_cleanup": {
+    "record_id": "ur-a1-u02-p03",
+    "field": "answer:a8:explanation",
+    "before": "«کیا» یہاں yes-no سوال بناتا ہے۔",
+    "after": "«کیا» یہاں ایسا سوال بناتا ہے جس کا جواب «ہاں» یا «نہیں» میں دیا جاتا ہے۔",
+    "answer_text_changed": false,
+    "explanation_changed": true,
+    "semantic_intent_changed": false,
     "independent_review_claimed": false
   }
 }

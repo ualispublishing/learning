@@ -1,7 +1,7 @@
 {
   "audit": "urdu_a1_final_deterministic_audit",
-  "generated_at_utc": "2026-08-22T20:06:44.690774+00:00",
-  "status": "FAIL_DETERMINISTIC_FINAL_AUDIT",
+  "generated_at_utc": "2026-08-22T20:09:12.262785+00:00",
+  "status": "PASS_DETERMINISTIC_FINAL_AUDIT_NEEDS_INDEPENDENT_REVIEW",
   "scope": "deterministic post-generation audit after bounded target-order repair; no automated semantic, naturalness, pedagogical, native-speaker, educator, or release approval",
   "policy_basis": [
     "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
@@ -10,9 +10,10 @@
   "source": {
     "path": "reading/urdu/a1/passages.jsonl",
     "pre_repair_sha256": "3673ec71bf52d6d01ae11e8fd864eebc7f5fe1c3acac2ae19e4e2229ee14b728",
-    "actual_sha256": "1645beb493ef6335cc70191ca21a84029e119ec42e055e89d76423c6014a5969",
+    "actual_sha256": "e6450c04b6aa7d47b501e0cfbf2664fa37b2e95490ab363945f7d757dfa34a1d",
     "hash_bound": true,
-    "intermediate_repair_sha256": "9968988956d8813543a6ca800ecaadc3df973ab6b22b001a56ce84c0a39911d2"
+    "intermediate_repair_sha256": "9968988956d8813543a6ca800ecaadc3df973ab6b22b001a56ce84c0a39911d2",
+    "pre_roman_cleanup_sha256": "1645beb493ef6335cc70191ca21a84029e119ec42e055e89d76423c6014a5969"
   },
   "counts": {
     "passages": 60,
@@ -21,9 +22,9 @@
     "units": 10,
     "new_lexical_target_declarations": 100,
     "duplicate_prompts_within_passage": 0,
-    "learner_facing_roman_script_findings": 1,
+    "learner_facing_roman_script_findings": 0,
     "exact_target_visibility_misses": 0,
-    "violations": 1
+    "violations": 0
   },
   "checks": {
     "source_corpus_before_sha256_exact": true,
@@ -41,13 +42,9 @@
     "running_text_reviews_visible_exact_token": true,
     "p01_p05_two_new_and_p06_review_policy": true,
     "premature_future_target_exposure_zero_exact_token_same_unit": true,
-    "learner_facing_roman_script_zero": false
+    "learner_facing_roman_script_zero": true
   },
-  "violations": [
-    {
-      "check": "learner_facing_roman_script_zero"
-    }
-  ],
+  "violations": [],
   "bounded_repair_evidence": "reading/audit/urdu_a1_premature_target_repairs_2026-08-22.json",
   "independent_review": {
     "semantic_accuracy": "PENDING",
@@ -72,5 +69,12 @@
       "ur-a1-u06-p01"
     ],
     "semantic_native_educator_approval_claimed": false
+  },
+  "learner_facing_roman_cleanup": {
+    "record_id": "ur-a1-u02-p03",
+    "field": "answer:a8:explanation",
+    "pre_cleanup_sha256": "1645beb493ef6335cc70191ca21a84029e119ec42e055e89d76423c6014a5969",
+    "final_sha256": "e6450c04b6aa7d47b501e0cfbf2664fa37b2e95490ab363945f7d757dfa34a1d",
+    "independent_review_claimed": false
   }
 }
