@@ -1,0 +1,77 @@
+name: TEMP French A1 LanguageTool residual inspection
+
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+    paths:
+      - .github/workflows/french-a1-languagetool-residual-print-temp.yml
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    if: github.event.pull_request.head.ref == 'repair/french-a1-review-integrity-2026-08-20'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: repair/french-a1-review-integrity-2026-08-20
+      - name: Print plausible non-noise residuals
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib,json,re
+          expected='fe9f321ada5740baf264c009ce0b5eb845777927f37f99f03e7459c5ae72b64c'
+          c=Path('reading/french/a1/passages.jsonl')
+          if hashlib.sha256(c.read_bytes()).hexdigest()!=expected: raise SystemExit('corpus drift')
+          rows={r['id']:r for r in [json.loads(x) for x in c.read_text(encoding='utf-8').splitlines() if x.strip()]}
+          scan=json.loads(Path('reading/audit/french_a1_languagetool_fullscan_2026-08-22.json').read_text(encoding='utf-8'))
+          keep=[]; distractor=[]
+          for i,f in enumerate(scan['findings'],1):
+              r=rows[f['passage_id']]; field=f['field']; iid=f.get('item_id'); src=''; obj=None
+              if field=='title': src=r['title']
+              elif field=='text': src=r['text']
+              elif field=='question_prompt': obj=next(q for q in r['questions'] if q['id']==iid); src=obj['prompt']
+              elif field=='answer': obj=next(a for a in r['answer_key'] if a['id']==iid); src=obj['answer']
+              off=f.get('offset_in_field')
+              if field=='question_prompt' and isinstance(obj,dict) and obj.get('type')=='grammar_choice' and off is not None:
+                  # Confirm detector span is in the alternative after the explicit choice delimiter.
+                  delim=src.find(' ou ')
+                  if delim>=0 and int(off)>delim:
+                      distractor.append(i); continue
+              rid=f.get('rule_id'); cat=f.get('category')
+              # Known structural/no-authority signals that do not need another manual pass.
+              if rid=='UNPAIRED_BRACKETS' and field=='question_prompt' and re.search(r'(?:^|\s)[A-D]\)',src): continue
+              if rid=='UPPERCASE_SENTENCE_START' and field=='answer': continue
+              if cat=='REPETITIONS_STYLE': continue
+              if rid=='POINT' and field=='title': continue
+              if rid=='SUR_ACCENT' and field=='question_prompt' and '« sur »' in src: continue
+              if rid in {'QUOI_FAIRE','OU_LEQUEL'}: continue
+              if rid=='OU' and ' ou ' in src: continue
+              if rid=='IMP_PRON' and src.startswith('Résume en une phrase'): continue
+              if rid=='QUE_AVOIR' and 'qu’elle a bien dormi' in src: continue
+              if rid=='PUIS_QUE' and 'puis qu’elle' in src: continue
+              if rid=='D_N_E_OU_E' and field=='text' and 'la lit à voix haute' in src: continue
+              if rid=='PLACE_ADJ' and 'travail court' in src: continue
+              if rid=='PRONOMS_PERSONNELS_MINUSCULE' and '— Tu viens avec nous ?' in src: continue
+              if rid=='VOIR_REGARDER' and field=='answer' and src.strip('«». ')=='vois': continue
+              keep.append((i,f,src))
+          print(json.dumps({'confirmed_intentional_distractor_count':len(distractor),'plausible_residual_count':len(keep)},ensure_ascii=False))
+          print('PLAUSIBLE_RESIDUALS_BEGIN')
+          for i,f,src in keep:
+              print(json.dumps({'finding_index':i,'passage_id':f['passage_id'],'field':f['field'],'item_id':f.get('item_id'),'rule_id':f.get('rule_id'),'category':f.get('category'),'message':f.get('message'),'matched_text':f.get('matched_text'),'offset_in_field':f.get('offset_in_field'),'replacements':f.get('replacements',[]),'excerpt':f.get('excerpt'),'source_text':src},ensure_ascii=False))
+          print('PLAUSIBLE_RESIDUALS_END')
+          PY
+      - name: Self-remove inspection workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm -f .github/workflows/french-a1-languagetool-residual-print-temp.yml
+          git commit -m 'Remove LanguageTool residual inspection workflow [skip ci]'
+          git push origin HEAD:repair/french-a1-review-integrity-2026-08-20
