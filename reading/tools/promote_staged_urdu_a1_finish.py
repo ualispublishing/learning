@@ -35,6 +35,7 @@ UNITS = {
     },
 }
 ASCII = re.compile(r"[A-Za-z]")
+WORD_RE = re.compile(r"\w+", re.UNICODE)
 
 
 def sha256(data: bytes) -> str:
@@ -48,6 +49,15 @@ def git_blob_sha(data: bytes) -> str:
 
 def read_jsonl(data: bytes):
     return [json.loads(line) for line in data.decode("utf-8").splitlines() if line.strip()]
+
+
+def has_surface(text: str, form: str) -> bool:
+    form = (form or "").strip()
+    if not form:
+        return True
+    if any(ch.isspace() for ch in form):
+        return re.search(r"(?<!\w)" + re.escape(form) + r"(?!\w)", text, re.UNICODE) is not None
+    return form in WORD_RE.findall(text or "")
 
 
 def learner_strings(record):
@@ -95,10 +105,10 @@ def validate_record(record, expected_seq, expected_unit, introduced_ids):
         tid, form = t.get("id"), t.get("form")
         if not tid or tid in introduced_ids:
             problems.append(f"new_target_collision:{tid}")
-        if form and form not in text:
+        if form and not has_surface(text, form):
             problems.append(f"new_target_not_visible:{tid}")
     for t in reviews:
-        if t.get("representation") == "running_text" and t.get("form") and t.get("form") not in text:
+        if t.get("representation") == "running_text" and t.get("form") and not has_surface(text, t.get("form")):
             problems.append(f"running_review_not_visible:{t.get('id')}")
 
     if expected_seq % 6 == 0 and new_targets:
@@ -142,7 +152,7 @@ def validate_staged(staged):
         for rec in staged[unit]:
             text = rec.get("text", "")
             for form, seq in intro.items():
-                if seq > rec["sequence"] and form in text:
+                if seq > rec["sequence"] and has_surface(text, form):
                     problems.append(f"u{unit}:{rec.get('id')}:premature_target:{form}")
     return problems
 
@@ -217,10 +227,10 @@ def main():
             "answer_linkage": True,
             "question_targets_locally_declared": True,
             "new_target_id_collisions_zero": True,
-            "new_targets_visible": True,
-            "running_text_reviews_visible": True,
+            "new_targets_visible_exact_token": True,
+            "running_text_reviews_visible_exact_token": True,
             "p06_zero_new_and_reviews_unit_targets": True,
-            "premature_future_target_exposure_zero": True,
+            "premature_future_target_exposure_zero_exact_token": True,
             "learner_facing_roman_script_zero": True
         },
         "formal_final_audit": "deferred under generation-first policy",
