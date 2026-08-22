@@ -1,0 +1,57 @@
+name: Urdu A1 Learner Roman Diagnostic
+
+on:
+  pull_request:
+    branches: [main]
+    types: [edited]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: urdu-a1-roman-diagnostic
+  cancel-in-progress: false
+
+jobs:
+  diagnose:
+    if: github.head_ref == 'audit/urdu-a1-final-deterministic-2026-08-22'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - name: Print exact learner-facing Roman-script findings and self-clean
+        shell: bash
+        env:
+          TARGET_BRANCH: ${{ github.head_ref }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, re
+          from pathlib import Path
+          rx = re.compile(r'[A-Za-z]')
+          findings = []
+          for line in Path('reading/urdu/a1/passages.jsonl').read_text(encoding='utf-8').splitlines():
+              if not line.strip():
+                  continue
+              r = json.loads(line)
+              rid = r.get('id')
+              fields = [('text', r.get('text', ''))]
+              for q in r.get('questions') or []:
+                  fields.append((f"question:{q.get('id')}:prompt", q.get('prompt', '')))
+              for a in r.get('answer_key') or []:
+                  fields.append((f"answer:{a.get('id')}:answer", a.get('answer', '')))
+                  fields.append((f"answer:{a.get('id')}:explanation", a.get('explanation', '')))
+              for field, value in fields:
+                  if rx.search(str(value or '')):
+                      findings.append({'record_id': rid, 'field': field, 'value': value})
+          print('ROMAN_FINDINGS_JSON=' + json.dumps(findings, ensure_ascii=False))
+          print('ROMAN_FINDING_COUNT=' + str(len(findings)))
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -f .github/workflows/urdu-a1-roman-diagnostic.yml || true
+          git commit -m "Remove one-shot Urdu Roman diagnostic [skip ci]"
+          git push origin "HEAD:${TARGET_BRANCH}"
