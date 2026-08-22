@@ -3,10 +3,10 @@
   "date": "2026-08-22",
   "language": "ur",
   "level": "A1",
-  "status": "PASS_DETERMINISTIC_BOUNDED_REPAIR_NEEDS_INDEPENDENT_REVIEW",
+  "status": "FAIL_DETERMINISTIC_BOUNDED_REPAIR",
   "scope": "Seven exact running-text repairs for same-unit premature lexical-target exposure; questions, answers, target IDs, and target declarations unchanged.",
   "before_sha256": "3673ec71bf52d6d01ae11e8fd864eebc7f5fe1c3acac2ae19e4e2229ee14b728",
-  "after_sha256": "9968988956d8813543a6ca800ecaadc3df973ab6b22b001a56ce84c0a39911d2",
+  "after_sha256": "1645beb493ef6335cc70191ca21a84029e119ec42e055e89d76423c6014a5969",
   "records_changed": [
     "ur-a1-u01-p02",
     "ur-a1-u01-p04",
@@ -45,13 +45,13 @@
       "record_id": "ur-a1-u04-p01",
       "reason": "remove second premature گھر occurrence in the same passage",
       "before": "عائشہ کہتی ہے کہ یہ تصویر اہم ہے کیونکہ اس میں سب گھر والے ساتھ ہیں۔",
-      "after": "عائشہ کہتی ہے کہ یہ تصویر اہم ہے کیونکہ اس میں سب ایک ساتھ ہیں۔"
+      "after": "عائشہ کہتی ہے کہ یہ تصویر اہم ہے کیونکہ اس میں خاندان کے سب افراد ایک ساتھ ہیں۔"
     },
     {
       "record_id": "ur-a1-u04-p02",
       "reason": "remove premature same-unit target گھر before sequence 21",
       "before": "مریم بھی اپنے گھر والوں کے ساتھ آتی ہے۔",
-      "after": "مریم بھی اپنی خالہ کے ساتھ آتی ہے۔"
+      "after": "مریم بھی پارک آتی ہے۔"
     },
     {
       "record_id": "ur-a1-u04-p02",
@@ -69,7 +69,7 @@
       "record_id": "ur-a1-u06-p01",
       "reason": "remove premature same-unit target صبح before sequence 33",
       "before": "ہفتے کی صبح عائشہ پہلی بار محلے کی نئی لائبریری پیدل جا رہی ہے۔",
-      "after": "اس وقت عائشہ پہلی بار محلے کی نئی لائبریری پیدل جا رہی ہے۔"
+      "after": "آج عائشہ پہلی بار محلے کی نئی لائبریری پیدل جا رہی ہے۔"
     }
   ],
   "questions_changed": false,
@@ -91,11 +91,29 @@
     "running_text_reviews_visible_exact_token": true,
     "p01_p05_two_new_and_p06_review_policy": true,
     "premature_future_target_exposure_zero_exact_token_same_unit": true,
-    "learner_facing_roman_script_zero": true
+    "learner_facing_roman_script_zero": false
   },
-  "postrepair_problem_count": 0,
-  "postrepair_problems": [],
+  "postrepair_problem_count": 1,
+  "postrepair_problems": [
+    {
+      "check": "learner_facing_roman_script_zero"
+    }
+  ],
   "independent_semantic_naturalness_pedagogical_review": "PENDING",
   "educator_release_review": "PENDING",
-  "release_effect": "NONE_AUTOMATIC: repair is deterministic-only and remains review-gated."
+  "release_effect": "NONE_AUTOMATIC: repair is deterministic-only and remains review-gated.",
+  "intermediate_sha256_before_preservation_refinement": "9968988956d8813543a6ca800ecaadc3df973ab6b22b001a56ce84c0a39911d2",
+  "preservation_refinement": {
+    "reason": "Refine three mechanically valid substitutions so the bounded repair preserves source meaning and local answer support without introducing unsupported relationship detail or a contextless deictic opening.",
+    "intermediate_sha256": "9968988956d8813543a6ca800ecaadc3df973ab6b22b001a56ce84c0a39911d2",
+    "content_scope": [
+      "ur-a1-u04-p01",
+      "ur-a1-u04-p02",
+      "ur-a1-u06-p01"
+    ],
+    "questions_changed": false,
+    "answers_changed": false,
+    "target_declarations_changed": false,
+    "independent_review_claimed": false
+  }
 }
