@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "repair_kind": "languagetool_adjudicated_punctuation_repair",
+  "before_sha256": "fe9f321ada5740baf264c009ce0b5eb845777927f37f99f03e7459c5ae72b64c",
+  "after_sha256": "7dbdb48ffc6efd00106490ca9b10ad25643bf7e89967e8fbd2977a04641d6ea3",
+  "after_git_blob": "417ee292a73244860ecd40741af521aee5436578",
+  "source_scan": "reading/audit/french_a1_languagetool_fullscan_2026-08-22.json",
+  "source_finding_index": 229,
+  "passage_id": "fr-a1-u10-p06",
+  "field": "answer",
+  "item_id": "a5",
+  "before": "Parce qu’A1 est un niveau de base : elle gère des situations familières mais son français reste limité.",
+  "after": "Parce qu’A1 est un niveau de base : elle gère des situations familières, mais son français reste limité.",
+  "adjudication": "ACCEPTED_DEFECT",
+  "reason": "The answer contains two independent clauses joined by mais; the comma improves standard French punctuation and was the only high-confidence repair among the 14 plausible LanguageTool residuals after contextual adjudication.",
+  "scope": "One answer-key punctuation mark only; passage prose, questions, lexical targets, source lexicons, and passage word counts are unchanged.",
+  "release_effect": "NONE_AUTOMATIC: deterministic and independent-machine evidence must be rerun on the new hash."
+}
