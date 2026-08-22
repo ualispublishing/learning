@@ -4,8 +4,8 @@
   "language": "fr",
   "level": "A1",
   "evidence_kind": "gate_a_revalidation_checkpoint",
-  "bound_sha256": "a79455b1a94eccff136d78fab34ab36fe0fbf681d16e147e0c00d7ba7815cd68",
-  "status": "REVIEW_REQUIRED",
+  "bound_sha256": "b509f77c71e28505f80efaf202cb36cd5c45c5646bbd86cbf9773daf0743d037",
+  "status": "DETERMINISTIC_REVALIDATED_INDEPENDENT_REVIEW_REQUIRED",
   "scope": {
     "records": 60,
     "questions": 600,
@@ -28,7 +28,9 @@
     "round2_review_integrity_snapshot_matches_current_corpus": false,
     "legacy_generation_integrity_establishes_current_final_gate": false,
     "current_spacing_repair_matches_current_corpus": true,
-    "prior_final_approval_may_be_relied_on_for_current_corpus": false
+    "prior_final_approval_may_be_relied_on_for_current_corpus": false,
+    "current_a1_generation_integrity_matches_current_corpus": true,
+    "broad_deterministic_whole_french_diagnostic_matches_current_corpus": true
   },
   "required_revalidation": [
     "rerun word-count/CEFR diagnostics affected by the passage prose change",
@@ -40,6 +42,21 @@
     "retain independent semantic/naturalness/coverage and educator-release review requirements"
   ],
   "protocol": "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md",
-  "limitations": "This checkpoint records evidence freshness and invalidation only. It does not claim Gate A PASS, semantic correctness, naturalness approval, coverage approval, educator approval, or release readiness.",
-  "release_effect": "French A1 remains REOPEN_REQUIRED. The older FINAL_APPROVED status is stale for this repaired branch until the required current-corpus audits and independent reviews are completed."
+  "limitations": "Current-corpus deterministic diagnostics pass after the bounded exposure-metadata repair. This does not claim independent semantic correctness, French naturalness/orthography approval, pedagogical approval, coverage approval, educator approval, or release readiness.",
+  "release_effect": "French A1 is deterministic-revalidated but remains REOPEN_REQUIRED pending independent current-corpus review and final-gate regeneration.",
+  "prior_bound_sha256": "a79455b1a94eccff136d78fab34ab36fe0fbf681d16e147e0c00d7ba7815cd68",
+  "current_corpus_revalidation": "reading/audit/french_a1_current_corpus_revalidation_2026-08-22.json",
+  "additional_bounded_repair": {
+    "passage_id": "fr-a1-u03-p02",
+    "target_id": "fr-rank-0024",
+    "form": "qui",
+    "field": "new_lexical_targets.exposures_in_text",
+    "before": 3,
+    "after": 2,
+    "actual_exact_learner_text_occurrences": 2,
+    "learner_facing_text_changed": false,
+    "questions_changed": false,
+    "answers_changed": false,
+    "reason": "The earlier venir prose repair left the stored qui exposure count stale; exact learner-text count is two."
+  }
 }
