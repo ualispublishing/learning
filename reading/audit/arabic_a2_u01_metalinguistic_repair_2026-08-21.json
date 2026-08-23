@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-21",
+  "language": "ar",
+  "level": "A2",
+  "unit": 1,
+  "status": "BOUNDED_REPAIR_APPLIED_NEEDS_INDEPENDENT_REVIEW",
+  "before_sha256": "f27ad06c372d316ca70346e19a10a72645577897de8db676e317d869d8945e1c",
+  "after_sha256": "0fd755cea0579bd91938deb5b6eb6dcbeb54ac8f312bc81842403afa5c2c25f2",
+  "inventory_candidates": 11,
+  "confirmed_repairs": 10,
+  "adjudicated_false_positives": [
+    {
+      "passage_id": "ar-a2-u01-p02",
+      "question_id": "q4",
+      "prompt": "ما وظيفة «البنك» في النص؟",
+      "type": "vocabulary_in_context",
+      "reason": "Comprehension asks the real-world role of the bank in the passage; it is not a grammatical-function question."
+    }
+  ],
+  "passage_text_changed": false,
+  "notable_sense_corrections": [
+    "هاتف: live context is phone/device noun, not past-tense verb.",
+    "قسم: live context is department/section noun, not past-tense verb.",
+    "سعر: live context is price noun, not past-tense verb."
+  ],
+  "repairs": [
+    {
+      "passage_id": "ar-a2-u01-p01",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «شارع» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا وصفت الطريق الرئيسي في الحي، أي جملة أنسب: «هذا شارع رئيسي» أم «هذه شارع رئيسية»؟",
+        "type": "grammar_choice",
+        "answer": "هذا شارع رئيسي.",
+        "explanation": "«شارع» مذكر، لذلك نستخدم معه «هذا» ويأتي الوصف «رئيسي»."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u01-p01",
+      "question_id": "q7",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «خدمة» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا وصفت مساعدة يقدمها المركز للسكان، أي جملة أنسب: «هذه خدمة مفيدة» أم «هذا خدمة مفيد»؟",
+        "type": "grammar_choice",
+        "answer": "هذه خدمة مفيدة.",
+        "explanation": "«خدمة» مؤنثة، لذلك نستخدم معها «هذه» ويأتي الوصف «مفيدة»."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u01-p02",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «هاتف» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "فعل ماضٍ"
+      },
+      "after": {
+        "prompt": "إذا أشرت إلى الجهاز الذي اتصل به الأب، أي جملة أنسب: «هذا هاتف أبي» أم «هذه هاتف أبي»؟",
+        "type": "grammar_choice",
+        "answer": "هذا هاتف أبي.",
+        "explanation": "«هاتف» في هذا السياق اسم للجهاز، وهو مذكر؛ وليس فعلًا ماضيًا هنا."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u01-p02",
+      "question_id": "q7",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «بنك» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا وصفت المؤسسة المالية القريبة، أي جملة أنسب: «هذا بنك قريب» أم «هذه بنك قريبة»؟",
+        "type": "grammar_choice",
+        "answer": "هذا بنك قريب.",
+        "explanation": "«بنك» مذكر، لذلك نستخدم معه «هذا»."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u01-p03",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «إعلان» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا كان النص المعلق عند المدخل مهمًا للسكان، أي جملة أنسب: «هذا إعلان مهم» أم «هذه إعلان مهمة»؟",
+        "type": "grammar_choice",
+        "answer": "هذا إعلان مهم.",
+        "explanation": "«إعلان» مذكر، لذلك نستخدم معه «هذا»."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u01-p04",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «زيارة» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا كانت المرة الأولى في المركز قصيرة، أي جملة أنسب: «هذه زيارة قصيرة» أم «هذا زيارة قصير»؟",
+        "type": "grammar_choice",
+        "answer": "هذه زيارة قصيرة.",
+        "explanation": "«زيارة» مؤنثة، لذلك نستخدم معها «هذه»."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u01-p04",
+      "question_id": "q7",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «قسم» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "فعل ماضٍ"
+      },
+      "after": {
+        "prompt": "إذا أشرت إلى جزء المؤسسة المخصص للاستقبال، أي عبارة أنسب: «هذا قسم الاستقبال» أم «هذه قسم الاستقبال»؟",
+        "type": "grammar_choice",
+        "answer": "هذا قسم الاستقبال.",
+        "explanation": "«قسم» في هذا السياق اسم لجزء من المؤسسة، وهو مذكر؛ وليس فعلًا ماضيًا هنا."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u01-p05",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «قائمة» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا كانت ورقة الأسعار محدثة، أي جملة أنسب: «هذه قائمة حديثة» أم «هذا قائمة حديث»؟",
+        "type": "grammar_choice",
+        "answer": "هذه قائمة حديثة.",
+        "explanation": "«قائمة» مؤنثة، لذلك نستخدم معها «هذه»."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u01-p05",
+      "question_id": "q7",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «سعر» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "فعل ماضٍ"
+      },
+      "after": {
+        "prompt": "إذا أشرت إلى المبلغ المطلوب للمنتج، أي جملة أنسب: «هذا سعر جديد» أم «هذه سعر جديدة»؟",
+        "type": "grammar_choice",
+        "answer": "هذا سعر جديد.",
+        "explanation": "«سعر» في هذا السياق اسم للمبلغ المطلوب، وهو مذكر؛ وليس فعلًا ماضيًا هنا."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u01-p06",
+      "question_id": "q9",
+      "before": {
+        "prompt": "لماذا تستخدم «إذا» أكثر من مرة في النص؟",
+        "type": "grammar_function",
+        "answer": "لربط حالة ممكنة بالتصرف المناسب لها."
+      },
+      "after": {
+        "prompt": "أكمل بما يناسب لربط الحالة بالتصرف: «_____ كان البنك مغلقًا، أعود غدًا»: «إذا» أم «لأن»؟",
+        "type": "grammar_choice",
+        "answer": "إذا.",
+        "explanation": "«إذا» تربط هنا حالة ممكنة بالتصرف الذي يحدث عند تحققها."
+      }
+    }
+  ],
+  "release_effect": "Arabic remains educator-blocked; independent semantic/native/educator review required."
+}
