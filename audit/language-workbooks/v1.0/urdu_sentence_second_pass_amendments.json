@@ -1,0 +1,181 @@
+{
+  "artifact": "Urdu sentence second-pass audit amendments",
+  "release": "v1.0",
+  "language": "urdu",
+  "source_zip_sha256": "d55d3b4f95a6957093d7b46ddb244fd3a6530367dfc9fefd9baced598c9234a5",
+  "policy": "These amendments replace first-pass evidence only for named ranks where second-pass review found an honorific-number ambiguity, an incomplete correction, or a still-awkward recommendation.",
+  "amendments": [
+    {
+      "rank": 521,
+      "reason": "The first-pass target meant 'I think I have a fever' more directly than 'I seem to have a fever'.",
+      "confirmed_findings": [
+        {
+          "rank": 521,
+          "type": "semantic_second_pass",
+          "observed": "مجھے لگ رہا ہے کہ بخار ہے۔ / I seem to have a fever.",
+          "recommended": "لگتا ہے کہ مجھے بخار ہے۔ / I seem to have a fever.",
+          "note": "The impersonal لگتا ہے construction preserves the evidential/seeming nuance more closely."
+        }
+      ],
+      "editorial_flags": []
+    },
+    {
+      "rank": 293,
+      "reason": "انہوں نے can be honorific singular; changing English to plural was overconfident. Use an unambiguously singular target for the singular English.",
+      "confirmed_findings": [
+        {
+          "rank": 293,
+          "type": "spelling_person_second_pass",
+          "observed": "انہیوں نے آج کیا کیا؟ / What did he do today?",
+          "recommended": "اس نے آج کیا کیا؟ / What did he do today?"
+        }
+      ],
+      "editorial_flags": []
+    },
+    {
+      "rank": 372,
+      "reason": "انہوں نے may be honorific singular, so the first-pass plural-English change was not a safe correction for a standalone learner pair.",
+      "confirmed_findings": [
+        {
+          "rank": 372,
+          "type": "person_disambiguation_second_pass",
+          "observed": "انہوں نے میری پیشکش ٹھکرا دی۔ / He turned down my offer.",
+          "recommended": "اس نے میری پیشکش ٹھکرا دی۔ / He turned down my offer."
+        }
+      ],
+      "editorial_flags": []
+    },
+    {
+      "rank": 551,
+      "reason": "The first-pass plural-English correction ignored the honorific-singular reading of انہوں نے.",
+      "confirmed_findings": [
+        {
+          "rank": 551,
+          "type": "person_disambiguation_second_pass",
+          "observed": "انہوں نے مجھے اپنی زندگی کی کہانی سنائی۔ / He told me his life's story.",
+          "recommended": "اس نے مجھے اپنی زندگی کی کہانی سنائی۔ / He told me his life story."
+        }
+      ],
+      "editorial_flags": []
+    },
+    {
+      "rank": 702,
+      "reason": "The first-pass plural-English correction was not warranted because ان کو/وہ غلط تھے can encode respect; make singular person explicit in Urdu instead.",
+      "confirmed_findings": [
+        {
+          "rank": 702,
+          "type": "person_disambiguation_second_pass",
+          "observed": "میں نے ان کو بتایا کہ وہ غلط تھے۔ / I told him that he was wrong.",
+          "recommended": "میں نے اسے بتایا کہ وہ غلط تھا۔ / I told him that he was wrong."
+        }
+      ],
+      "editorial_flags": []
+    },
+    {
+      "rank": 750,
+      "reason": "The first-pass plural-English correction ignored honorific ambiguity and also left الماری mismatched with English shelf.",
+      "confirmed_findings": [
+        {
+          "rank": 750,
+          "type": "person_lexical_second_pass",
+          "observed": "انہوں نے کتاب کو الماری میں رکھ دیا۔ / He put the book on the shelf.",
+          "recommended": "اس نے کتاب شیلف پر رکھ دی۔ / He put the book on the shelf."
+        }
+      ],
+      "editorial_flags": []
+    },
+    {
+      "rank": 827,
+      "reason": "انہوں نے may be honorific singular; retain singular English by making the Urdu subject unambiguously singular while also fixing ڈھیر.",
+      "confirmed_findings": [
+        {
+          "rank": 827,
+          "type": "spelling_person_second_pass",
+          "observed": "انہوں نے مجھے ڈھیڑ ساری خوبصورت تصویریں دکھائیں۔ / He showed me a lot of beautiful photos.",
+          "recommended": "اس نے مجھے ڈھیر ساری خوبصورت تصویریں دکھائیں۔ / He showed me a lot of beautiful photos."
+        }
+      ],
+      "editorial_flags": []
+    },
+    {
+      "rank": 839,
+      "reason": "The first-pass recommendation contained an awkward double سے construction.",
+      "confirmed_findings": [
+        {
+          "rank": 839,
+          "type": "spelling_grammar_second_pass",
+          "observed": "وہ پانچ دن کے لئے اسکول سے غیر حاصر تھی۔",
+          "recommended": "وہ پانچ دن تک اسکول سے غیر حاضر تھی۔",
+          "note": "Fixes غیر حاضر and uses پانچ دن تک for the duration."
+        }
+      ],
+      "editorial_flags": []
+    },
+    {
+      "rank": 855,
+      "reason": "The first-pass plural-English correction ignored honorific-singular ambiguity.",
+      "confirmed_findings": [
+        {
+          "rank": 855,
+          "type": "grammar_person_second_pass",
+          "observed": "انہوں نے اپنی بیٹی کو پھل اور سبزیاں بھیجی۔ / He sent fruit and vegetables to his daughter.",
+          "recommended": "اس نے اپنی بیٹی کو پھل اور سبزیاں بھیجیں۔ / He sent fruit and vegetables to his daughter."
+        }
+      ],
+      "editorial_flags": []
+    },
+    {
+      "rank": 864,
+      "reason": "The first-pass مدد دی wording is less idiomatic than مدد کی in this construction.",
+      "confirmed_findings": [
+        {
+          "rank": 864,
+          "type": "spelling_grammar_second_pass",
+          "observed": "اس نے بزرگ کی سڑک پاڑ کرنے میں مدد کی۔",
+          "recommended": "اس نے بزرگ کو سڑک پار کرنے میں مدد کی۔"
+        }
+      ],
+      "editorial_flags": []
+    },
+    {
+      "rank": 865,
+      "reason": "The first-pass version retained honorific-number ambiguity and used less natural مدد دی.",
+      "confirmed_findings": [
+        {
+          "rank": 865,
+          "type": "spelling_grammar_person_second_pass",
+          "observed": "انہوں نے بزرگ کی سڑک پاڑ کرنے میں مدد کی۔ / She helped the old man cross the road.",
+          "recommended": "اس نے بزرگ کو سڑک پار کرنے میں مدد کی۔ / She helped the old man cross the road.",
+          "note": "Urdu third-person singular is gender-neutral in this form, so singular English 'she' remains context-compatible."
+        }
+      ],
+      "editorial_flags": []
+    },
+    {
+      "rank": 873,
+      "reason": "The first-pass wording redundantly meant 'walk for a walk'.",
+      "confirmed_findings": [
+        {
+          "rank": 873,
+          "type": "grammar_semantic_second_pass",
+          "observed": "تم نے بعد میں چہل قدمی کے لئیے چلنا ہے؟",
+          "recommended": "کیا تم بعد میں چہل قدمی کرنا چاہتے ہو؟"
+        }
+      ],
+      "editorial_flags": []
+    },
+    {
+      "rank": 874,
+      "reason": "The first-pass wording redundantly meant 'walk for a walk'.",
+      "confirmed_findings": [
+        {
+          "rank": 874,
+          "type": "grammar_semantic_register_second_pass",
+          "observed": "آپ نے بعد میں چہل قدمی کے لئیے چلنا ہے؟",
+          "recommended": "کیا آپ بعد میں چہل قدمی کرنا چاہتے ہیں؟"
+        }
+      ],
+      "editorial_flags": []
+    }
+  ]
+}
