@@ -1,0 +1,72 @@
+{
+  "artifact": "French sentence second-pass approvals - batch 001",
+  "release": "v1.0",
+  "language": "french",
+  "source_zip_sha256": "9e35994767f7307dc1fa9d5efcc36681f3756a1bdaaa02c1381b3eb11461261e",
+  "policy": "Every approval below is a second-pass verification of the correction already recorded by the row-by-row audit. No independent build-time correction is introduced.",
+  "approvals": [
+    {
+      "rank": 2,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "Pouvez-vous m'aider, s'il vous plaît ?",
+      "approved_english": "Can you help me, please?",
+      "audit_basis": {"ledger": "french_sentence_editorial_audit_001_250.json", "recommended": "Pouvez-vous m'aider, s'il vous plaît ?"},
+      "approval_note": "Second-pass verified spelling: plaît requires the circumflex; meaning is otherwise unchanged."
+    },
+    {
+      "rank": 37,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "Qu'est-ce que tu as mangé aujourd'hui ?",
+      "approved_english": "What did you eat today?",
+      "audit_basis": {"ledger": "french_sentence_editorial_audit_001_250.json", "recommended": "Qu'est-ce que tu as mangé aujourd'hui ? / What did you eat today?"},
+      "approval_note": "Second-pass verified: passé composé mangé correctly matches the English simple-past eating event."
+    },
+    {
+      "rank": 80,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "Qu'est-ce que tu voulais que je fasse ?",
+      "approved_english": "What did you want me to do?",
+      "audit_basis": {"ledger": "french_sentence_editorial_audit_001_250.json", "recommended": "Qu'est-ce que tu voulais que je fasse ? / What did you want me to do?"},
+      "approval_note": "Second-pass verified: the French past vouloir is correctly represented by English past 'did you want', not the original conditional-style gloss."
+    },
+    {
+      "rank": 90,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "Pourquoi as-tu besoin de mon aide ?",
+      "approved_english": "Why do you need my help?",
+      "audit_basis": {"ledger": "french_sentence_editorial_audit_001_250.json", "recommended": "Pourquoi as-tu besoin de mon aide ? / Why do you need my help?"},
+      "approval_note": "Second-pass verified: avoir besoin de means need; the corrected English restores lexical equivalence."
+    },
+    {
+      "rank": 137,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "Sais-tu où ils sont ?",
+      "approved_english": "Do you know where they are?",
+      "audit_basis": {"ledger": "french_sentence_editorial_audit_001_250.json", "recommended": "Sais-tu où ils sont ?"},
+      "approval_note": "Second-pass verified subject-verb agreement: plural ils requires sont."
+    },
+    {
+      "rank": 202,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "Qu'est-ce que tu as acheté pour ton petit ami ?",
+      "approved_english": "What did you buy your boyfriend?",
+      "audit_basis": {"ledger": "french_sentence_editorial_audit_001_250.json", "recommended": "Qu'est-ce que tu as acheté pour ton petit ami ?"},
+      "approval_note": "Second-pass verified orthography: standard interrogative form is Qu'est-ce que."
+    },
+    {
+      "rank": 203,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "Que faisais-tu là-bas ?",
+      "approved_english": "What were you doing there?",
+      "audit_basis": {"ledger": "french_sentence_editorial_audit_001_250.json", "recommended": "Que faisais-tu là-bas ? / What were you doing there?"},
+      "approval_note": "Second-pass verified: the French imparfait denotes ongoing/background activity and is accurately matched by English past progressive."
+    }
+  ]
+}
