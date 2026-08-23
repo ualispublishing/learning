@@ -1,0 +1,89 @@
+name: TEMP Urdu A1 metalinguistic inventory
+
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+    paths:
+      - .github/workflows/urdu-a1-metalinguistic-inventory-temp.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temp-urdu-a1-metalinguistic-inventory
+  cancel-in-progress: false
+
+jobs:
+  inventory:
+    if: github.event.pull_request.head.ref == 'audit/urdu-a1-final-deterministic-2026-08-22'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/urdu-a1-final-deterministic-2026-08-22
+      - name: Build high-recall formal-task candidate inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from collections import Counter
+          import hashlib,json,re
+          corpus=Path('reading/urdu/a1/passages.jsonl')
+          expected='9519a085ba046e71cafcc55a0a98f4d5517f2ec86d138f664727cac2d753d892'
+          got=hashlib.sha256(corpus.read_bytes()).hexdigest()
+          if got!=expected: raise SystemExit(f'FAIL CLOSED corpus drift {got}')
+          rows=[json.loads(x) for x in corpus.read_text(encoding='utf-8').splitlines() if x.strip()]
+          type_flags={'grammar_category','grammar_function'}
+          patterns=[
+            ('category_question',r'کس قسم کا(?:\s+لفظ|\s+سوال|\s+تعلق)?'),
+            ('function_wording',r'(?:کا|کی|کے)\s+کام\s+کیا\s+(?:ہے|کرتا|کرتی)'),
+            ('relation_wording',r'کیا\s+تعلق\s+(?:دکھاتا|بناتا|ظاہر)'),
+            ('introduces_wording',r'کیا\s+متعارف\s+کراتا'),
+            ('explicit_term',r'(?:حرف[ِ\s-]*ربط|ضمیر|اسم|صفت|فعل|نفی|شرط)')
+          ]
+          candidates=[]
+          for r in rows:
+            amap={a['id']:a for a in r['answer_key']}
+            for q in r['questions']:
+              a=amap[q['answer_id']]
+              reasons=[]
+              if q.get('type') in type_flags: reasons.append('formal_task_type')
+              joined=(q.get('prompt','')+' '+a.get('answer','')+' '+a.get('explanation',''))
+              for name,pat in patterns:
+                if re.search(pat,joined): reasons.append(name)
+              if reasons:
+                candidates.append({
+                  'passage_id':r['id'],'unit':r['unit'],'sequence':r['sequence'],'question_id':q['id'],
+                  'type':q.get('type'),'prompt':q.get('prompt'),'target_ids':q.get('target_ids',[]),
+                  'answer':a.get('answer'),'explanation':a.get('explanation',''),'reasons':sorted(set(reasons))
+                })
+          payload={
+            'schema_version':1,'date':'2026-08-22','language':'ur','level':'A1',
+            'audit':'high_recall_metalinguistic_candidate_inventory','bound_sha256':got,
+            'candidate_count':len(candidates),'by_unit':dict(sorted(Counter(str(x['unit']) for x in candidates).items())),
+            'by_type':dict(Counter(x['type'] for x in candidates)),
+            'status':'CANDIDATE_INVENTORY_NEEDS_SEMANTIC_ADJUDICATION',
+            'candidates':candidates,
+            'limitations':'High-recall inventory only. Vocabulary-in-context questions may legitimately use words such as تعلق, شرط, or نفی; candidate status is not a defect verdict. Each item requires semantic/pedagogical adjudication before repair.',
+            'release_effect':'NONE_AUTOMATIC'
+          }
+          Path('reading/audit/urdu_a1_metalinguistic_candidates_2026-08-22.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'candidate_count':len(candidates),'by_unit':payload['by_unit'],'by_type':payload['by_type']},ensure_ascii=False))
+          print('CANDIDATES_BEGIN')
+          for x in candidates:
+            print(json.dumps(x,ensure_ascii=False))
+          print('CANDIDATES_END')
+          PY
+      - name: Commit inventory and self-remove
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/urdu_a1_metalinguistic_candidates_2026-08-22.json
+          git rm -f .github/workflows/urdu-a1-metalinguistic-inventory-temp.yml
+          git commit -m 'Inventory Urdu A1 metalinguistic candidates [skip ci]'
+          git push origin HEAD:audit/urdu-a1-final-deterministic-2026-08-22
