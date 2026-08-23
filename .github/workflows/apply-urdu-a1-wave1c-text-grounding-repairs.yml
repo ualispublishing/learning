@@ -1,0 +1,46 @@
+name: Apply Urdu A1 Wave 1C text grounding repairs
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/apply_urdu_a1_wave1c_text_grounding_repairs.py'
+      - '.github/workflows/apply-urdu-a1-wave1c-text-grounding-repairs.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Apply objective text and grounding repairs
+        run: python reading/tools/apply_urdu_a1_wave1c_text_grounding_repairs.py
+      - name: Validate corpus and Wave 1C report
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[json.loads(x) for x in Path('reading/urdu/a1/passages.jsonl').read_text(encoding='utf-8').splitlines() if x]
+          assert len(rows)==60
+          assert [r['sequence'] for r in rows]==list(range(1,61))
+          report=json.loads(Path('reading/audit/urdu_a1_wave1c_text_grounding_repairs_2026-08-23.json').read_text(encoding='utf-8'))
+          assert report['cloze_question_count']==130
+          assert report['all_cloze_structures_reconstructed'] is True
+          assert report['quality_promotion'] is False
+          print('validated Urdu A1 Wave 1C')
+          PY
+      - name: Commit repaired corpus and report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/urdu/a1/passages.jsonl reading/audit/urdu_a1_wave1c_text_grounding_repairs_2026-08-23.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Apply Urdu A1 Wave 1C text grounding repairs [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
