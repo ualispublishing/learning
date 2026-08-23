@@ -1,0 +1,121 @@
+name: TEMP French A1 calibrated LanguageTool rebind
+
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+    paths:
+      - .github/workflows/french-a1-languagetool-calibrated-fast-temp.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temp-french-a1-languagetool-calibrated-fast
+  cancel-in-progress: false
+
+jobs:
+  rebind:
+    if: github.event.pull_request.head.ref == 'repair/french-a1-review-integrity-2026-08-20'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: repair/french-a1-review-integrity-2026-08-20
+          fetch-depth: 0
+      - name: Install pinned LanguageTool
+        run: |
+          python -m venv .venv-lt
+          .venv-lt/bin/python -m pip install --disable-pip-version-check language-tool-python==3.4.0
+      - name: Calibrate historical scanner and rebind current corpus
+        shell: bash
+        run: |
+          set -euo pipefail
+          .venv-lt/bin/python - <<'PY'
+          from pathlib import Path
+          from collections import Counter
+          import hashlib,json,subprocess
+          import language_tool_python
+
+          OLD_SHA='7dbdb48ffc6efd00106490ca9b10ad25643bf7e89967e8fbd2977a04641d6ea3'
+          NEW_SHA='8019fe53061a67faca527a50495d2188439da5142dd94a414a43e1a3986cf7f4'
+          OLD_COMMIT='14c7d04fcb6c957eceabaaf99bfb422210c1572e'
+          corpus=Path('reading/french/a1/passages.jsonl')
+          if hashlib.sha256(corpus.read_bytes()).hexdigest()!=NEW_SHA: raise SystemExit('FAIL CLOSED current hash drift')
+          old_bytes=subprocess.check_output(['git','show',f'{OLD_COMMIT}:reading/french/a1/passages.jsonl'])
+          if hashlib.sha256(old_bytes).hexdigest()!=OLD_SHA: raise SystemExit('FAIL CLOSED old hash drift')
+          old_rows=[json.loads(x) for x in old_bytes.decode().splitlines() if x.strip()]
+          new_rows=[json.loads(x) for x in corpus.read_text(encoding='utf-8').splitlines() if x.strip()]
+          persisted_path=Path('reading/audit/french_a1_languagetool_postrepair_fullscan_2026-08-22.json')
+          persisted=json.loads(persisted_path.read_text(encoding='utf-8'))
+          if persisted.get('bound_sha256')!=OLD_SHA or persisted.get('raw_finding_count')!=230: raise SystemExit('FAIL CLOSED persisted old LT evidence drift')
+
+          def norm(s): return (s or '').replace('\u00a0',' ').replace('\u202f',' ')
+          def sig(f):
+              return (f.get('passage_id'),f.get('field'),f.get('item_id'),f.get('rule_id'),f.get('category'),f.get('rule_issue_type'),norm(f.get('message')),tuple(norm(x) for x in (f.get('replacements') or [])),f.get('offset_in_field'),f.get('error_length'),norm(f.get('matched_text')))
+
+          def scan(rows,tool):
+              out=[]; fields_count=Counter(); chars=0; boundary=[]
+              for r in rows:
+                  fields=[('title',None,r['title']),('text',None,r['text'])]+[('question_prompt',q['id'],q['prompt']) for q in r['questions']]+[('answer',a['id'],a['answer']) for a in r['answer_key']]
+                  fields_count.update(f for f,_,_ in fields); chars+=sum(len(t) for _,_,t in fields)
+                  spans=[]; parts=[]; pos=0
+                  for i,(field,item,text) in enumerate(fields):
+                      if i: parts.append('  '); pos+=2
+                      start=pos; parts.append(text); pos+=len(text); spans.append((start,pos,field,item,text))
+                  combined=''.join(parts)
+                  for m in tool.check(combined):
+                      off=int(m.offset); end=off+int(m.error_length)
+                      hit=next((s for s in spans if off>=s[0] and end<=s[1]),None)
+                      if not hit:
+                          boundary.append((r['id'],m.rule_id,off,end,combined[off:end])); continue
+                      start,_,field,item,text=hit; local=off-start; length=int(m.error_length)
+                      out.append({'passage_id':r['id'],'field':field,'item_id':item,'rule_id':m.rule_id,'category':str(m.category),'rule_issue_type':str(m.rule_issue_type),'message':m.message,'replacements':list(m.replacements),'offset_in_combined':off,'offset_in_field':local,'error_length':length,'matched_text':text[local:local+length],'excerpt':text[max(0,local-60):min(len(text),local+length+60)],'sentence':getattr(m,'sentence','') or '','context':getattr(m,'context','') or ''})
+              return out,fields_count,chars,boundary
+
+          tool=language_tool_python.LanguageTool('fr')
+          old_scan,_,_,old_boundary=scan(old_rows,tool)
+          expected=Counter(sig(f) for f in persisted['findings']); oldgot=Counter(sig(f) for f in old_scan)
+          if oldgot!=expected:
+              print(json.dumps({'phase':'old_calibration','persisted':sum(expected.values()),'reconstructed':sum(oldgot.values()),'boundary_skipped':len(old_boundary),'missing':list((expected-oldgot).elements())[:15],'added':list((oldgot-expected).elements())[:15]},ensure_ascii=False,default=list))
+              raise SystemExit('FAIL CLOSED historical scanner reconstruction mismatch')
+          if len(old_scan)!=230: raise SystemExit('FAIL CLOSED old reconstructed count')
+          new_scan,fc,chars,new_boundary=scan(new_rows,tool)
+          try: tool.close()
+          except Exception: pass
+          newgot=Counter(sig(f) for f in new_scan)
+          if newgot!=expected:
+              print(json.dumps({'phase':'current_compare','old':sum(expected.values()),'current':sum(newgot.values()),'old_boundary':len(old_boundary),'new_boundary':len(new_boundary),'missing':list((expected-newgot).elements())[:20],'added':list((newgot-expected).elements())[:20]},ensure_ascii=False,default=list))
+              raise SystemExit('FAIL CLOSED current LanguageTool finding set changed')
+          if len(new_scan)!=230: raise SystemExit('FAIL CLOSED current count')
+
+          blob=subprocess.check_output(['git','hash-object',str(corpus)],text=True).strip()
+          by_rule=Counter(x['rule_id'] for x in new_scan); by_cat=Counter(x['category'] for x in new_scan)
+          artifact={'schema_version':2,'date':'2026-08-22','language':'fr','level':'A1','audit':'independent_machine_detector_languagetool_post_nbsp_fullscan','status':'POST_NBSP_SCAN_COMPLETE_CALIBRATED_SEMANTIC_FINGERPRINT_EQUIVALENT','bound_sha256':NEW_SHA,'bound_git_blob':blob,'scope':{'passages':60,'questions':600,'answers':600,'learner_facing_fields_scanned':sum(fc.values()),'characters_scanned':chars,'field_counts':dict(fc)},'tool':{'name':'LanguageTool via language_tool_python local server','language':'fr','language_tool_python_version':'3.4.0','language_tool_distribution':'6.8'},'scanner_calibration':{'old_corpus_sha256':OLD_SHA,'persisted_old_scan':str(persisted_path),'old_reconstruction_exact_semantic_fingerprint_match':True,'old_reconstructed_findings':230,'old_boundary_only_matches_skipped':len(old_boundary),'current_boundary_only_matches_skipped':len(new_boundary),'boundary_policy':'Only matches wholly contained in a learner-facing field are retained; exact reconstruction of the historical 230-finding artifact validates this mapping policy.'},'raw_finding_count':230,'raw_findings_by_rule':dict(by_rule),'raw_findings_by_category':dict(by_cat),'passages_with_findings':len({x['passage_id'] for x in new_scan}),'equivalence_to_pre_nbsp_scan':{'semantic_fingerprint_equivalent':True,'new_signals':0,'missing_signals':0,'normalization':'U+00A0/U+202F -> ordinary space only'},'findings':new_scan}
+          Path('reading/audit/french_a1_languagetool_post_nbsp_fullscan_2026-08-22.json').write_text(json.dumps(artifact,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          adjp=Path('reading/audit/french_a1_languagetool_postrepair_adjudication_2026-08-22.json'); adj=json.loads(adjp.read_text(encoding='utf-8'))
+          if adj.get('bound_sha256')!=OLD_SHA or adj.get('postrepair',{}).get('open_accepted_defects')!=0: raise SystemExit('FAIL CLOSED old adjudication state')
+          adj['bound_sha256']=NEW_SHA; adj['bound_git_blob']=blob; adj['status']='LANGUAGETOOL_CURRENT_HASH_ALL_SIGNALS_DISPOSITIONED_NO_OPEN_ACCEPTED_DEFECTS'; adj['machine_gate_state']='PARTIAL_LANGUAGETOOL_AND_GRAMMALECTE_COMPLETE_ANTIDOTE_DEEPL_PENDING'; adj['rebind_after_nbsp_typography_repair']={'current_scan':'reading/audit/french_a1_languagetool_post_nbsp_fullscan_2026-08-22.json','raw_findings':230,'semantic_fingerprint_equivalent_to_pre_nbsp_scan':True,'new_signals':0,'missing_signals':0,'old_scanner_reconstruction_calibrated_exactly':True,'old_boundary_only_matches_skipped':len(old_boundary),'current_boundary_only_matches_skipped':len(new_boundary)}
+          adjp.write_text(json.dumps(adj,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          cp=Path('reading/audit/french_a1_post_nbsp_revalidation_2026-08-22.json'); chk=json.loads(cp.read_text(encoding='utf-8'))
+          if chk.get('bound_sha256')!=NEW_SHA: raise SystemExit('FAIL CLOSED checkpoint hash')
+          chk.update({'languagetool_status':'CURRENT_HASH_ALL_SIGNALS_DISPOSITIONED_NO_OPEN_ACCEPTED_DEFECTS','languagetool_raw_findings':230,'languagetool_new_signals':0,'independent_machine_tools':'PARTIAL: LANGUAGETOOL_AND_GRAMMALECTE_CURRENT; ANTIDOTE_AND_DEEPL_WRITE_PENDING'})
+          cp.write_text(json.dumps(chk,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          gatep=Path('reading/audit/french_a1_formal_gate_a_2026-08-22.json'); gate=json.loads(gatep.read_text(encoding='utf-8'))
+          if gate.get('bound_sha256')!=NEW_SHA or gate.get('blocker_count')!=0: raise SystemExit('FAIL CLOSED gate state')
+          gate['independent_review']['independent_machine_tools']='PARTIAL: LANGUAGETOOL_AND_GRAMMALECTE_CURRENT; ANTIDOTE/DEEPL_WRITE_PENDING'; gatep.write_text(json.dumps(gate,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'old_calibration_exact':True,'old_boundary_skipped':len(old_boundary),'current_boundary_skipped':len(new_boundary),'current_findings':230,'new_signals':0,'open_accepted_defects':0,'sha256':NEW_SHA,'git_blob':blob},ensure_ascii=False))
+          PY
+      - name: Commit current-hash evidence and clean temp runners
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/french_a1_languagetool_post_nbsp_fullscan_2026-08-22.json reading/audit/french_a1_languagetool_postrepair_adjudication_2026-08-22.json reading/audit/french_a1_post_nbsp_revalidation_2026-08-22.json reading/audit/french_a1_formal_gate_a_2026-08-22.json
+          git rm -f .github/workflows/french-a1-languagetool-calibrated-fast-temp.yml
+          git rm -f .github/workflows/french-a1-languagetool-post-nbsp-rebind-temp.yml || true
+          git commit -m 'Rebind French A1 LanguageTool evidence after typography repair [skip ci]'
+          git push origin HEAD:repair/french-a1-review-integrity-2026-08-20
