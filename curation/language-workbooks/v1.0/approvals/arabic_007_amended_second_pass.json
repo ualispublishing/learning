@@ -1,0 +1,27 @@
+{
+  "artifact": "Arabic amended second-pass approvals - batch 007",
+  "release": "v1.0",
+  "language": "arabic",
+  "source_zip_sha256": "b72f70d3b724c3060da55f74ea1753da249d8eb38a6dbdea3dcc28798d077914",
+  "policy": "These approvals use only the explicit second-pass amendment evidence that superseded the original first-pass recommendation.",
+  "approvals": [
+    {
+      "rank": 319,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "كيف أمكنك ألا تلاحظ ذلك؟",
+      "approved_english": "How could you not notice?",
+      "audit_basis": {"ledger": "arabic_sentence_second_pass_amendments.json", "recommended": "كيف أمكنك ألا تلاحظ ذلك؟ / How could you not notice?"},
+      "approval_note": "Approved only after second-pass amendment restored the modal could nuance and distinguished failure to notice from deliberate ignoring."
+    },
+    {
+      "rank": 363,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "من أين يأتي الرضّع؟",
+      "approved_english": "Where do babies come from?",
+      "audit_basis": {"ledger": "arabic_sentence_second_pass_amendments.json", "recommended": "من أين يأتي الرضّع؟ / Where do babies come from?"},
+      "approval_note": "Approved only after second-pass amendment replaced the overly broad children term with الرضّع for babies/infants."
+    }
+  ]
+}
