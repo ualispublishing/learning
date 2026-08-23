@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "urdu",
+  "level": "A1",
+  "scope": {
+    "canonical_path": "reading/urdu/a1/passages.jsonl",
+    "canonical_blob_sha": "16507c293ae39cd44f7f5136dd00c9ef029646a7",
+    "sequences": [13, 18],
+    "passage_ids": ["ur-a1-u03-p01","ur-a1-u03-p02","ur-a1-u03-p03","ur-a1-u03-p04","ur-a1-u03-p05","ur-a1-u03-p06"]
+  },
+  "audit_type": "manual_semantic_linguistic_pedagogical_pass_1",
+  "status": "REPAIR_REQUIRED",
+  "release_effect": "Detection evidence only. No quality gate is promoted by this audit.",
+  "findings": [
+    {
+      "id": "U3P01-01",
+      "passage_id": "ur-a1-u03-p01",
+      "severity": "major",
+      "field": "q4/a4/q7/a7",
+      "original": ["«کیونکہ» جملے میں کیا کام کرتا ہے؟ -> یہ وجہ بتاتا ہے۔", "«کیونکہ» کس قسم کا تعلق بناتا ہے؟ -> سبب یا وجہ جوڑنے والا حرفِ ربط۔"],
+      "correction": ["عائشہ سیب کیوں لیتی ہے؟ -> کیونکہ اسے سیب پسند ہے۔", "دو جملوں میں وجہ بتانے کے لیے کون سا لفظ استعمال ہوا ہے؟ -> کیونکہ۔"],
+      "reason": "The current items turn a basic connector into explicit grammar-function/part-of-speech metalanguage. A1 should test the reason relation operationally."
+    },
+    {
+      "id": "U3P02-01",
+      "passage_id": "ur-a1-u03-p02",
+      "severity": "minor",
+      "field": "text",
+      "original": "اسکول کے بعد عائشہ اور خالہ دکان جاتی ہیں۔",
+      "correction": "اسکول کے بعد عائشہ اور خالہ دکان پر جاتی ہیں۔",
+      "reason": "The destination construction is more natural with پر."
+    },
+    {
+      "id": "U3P02-02",
+      "passage_id": "ur-a1-u03-p02",
+      "severity": "minor",
+      "field": "text",
+      "original": "دکان میں عائشہ فہرست کا استعمال کرتی ہے تاکہ کوئی چیز بھول نہ جائے۔",
+      "correction": "دکان میں عائشہ فہرست دیکھتی ہے تاکہ کوئی چیز بھول نہ جائے۔",
+      "reason": "فہرست کا استعمال کرتی ہے is unnecessarily nominalized/stiff for A1; the direct verb construction is natural."
+    },
+    {
+      "id": "U3P02-03",
+      "passage_id": "ur-a1-u03-p02",
+      "severity": "minor",
+      "field": "a6",
+      "original": "حاجت یا کسی چیز کے درکار ہونے کی حالت۔",
+      "correction": "کسی چیز کی ضرورت ہونا؛ کسی چیز کا چاہیے ہونا۔",
+      "reason": "حاجت and the nominalized definition are harder/more formal than the target itself."
+    },
+    {
+      "id": "U3P03-01",
+      "passage_id": "ur-a1-u03-p03",
+      "severity": "minor",
+      "field": "text",
+      "original": "یہاں پھل، سبزیاں، روٹی اور دوسری کئی چیزیں ملتی ہیں۔",
+      "correction": "یہاں پھل، سبزیاں، روٹی اور کئی دوسری چیزیں ملتی ہیں۔",
+      "reason": "کئی دوسری چیزیں is the natural constituent order."
+    },
+    {
+      "id": "U3P04-01",
+      "passage_id": "ur-a1-u03-p04",
+      "severity": "minor",
+      "field": "new_lexical_targets[ابھی].intended_sense",
+      "original": "now; at present",
+      "correction": "now; right now; still (senses actually used in this passage)",
+      "reason": "The passage uses ابھی both as present-time reference and in ابھی جاری ہے, where 'still' is the relevant sense."
+    },
+    {
+      "id": "U3P04-02",
+      "passage_id": "ur-a1-u03-p04",
+      "severity": "minor",
+      "field": "a4",
+      "original": "اسی وقت یا اس وقت تک۔",
+      "correction": "اس وقت؛ ابھی تک جاری ہونے کی صورت میں 'اب بھی/ابھی تک' کے قریب۔",
+      "reason": "The original mixes present-time and continuation senses imprecisely."
+    },
+    {
+      "id": "U3P05-01",
+      "passage_id": "ur-a1-u03-p05",
+      "severity": "major",
+      "field": "q3/a3",
+      "original": "متن میں «اپنا» کس تعلق کو دکھاتا ہے؟ -> اپنی ملکیت یا اپنے ہی کام کی طرف اشارہ کرتا ہے۔",
+      "correction": "«عائشہ اپنا ناشتہ خود تیار کرے گی» میں ناشتہ کس کا ہے؟ -> عائشہ کا اپنا۔",
+      "reason": "The current prompt asks for an abstract relation label instead of resolving ownership/reference in the sentence."
+    },
+    {
+      "id": "U3P05-02",
+      "passage_id": "ur-a1-u03-p05",
+      "severity": "minor",
+      "field": "a6",
+      "original": "اپنے ہی شخص یا اپنی ہی ملکیت سے متعلق۔",
+      "correction": "خود سے متعلق؛ اپنی چیز یا اپنا کام۔",
+      "reason": "اپنے ہی شخص is unnatural learner-facing Urdu."
+    },
+    {
+      "id": "U3P06-01",
+      "passage_id": "ur-a1-u03-p06",
+      "severity": "major",
+      "field": "text/q2/a2",
+      "original": "کبھی وہ ناشتہ کرتے وقت پانی چنتی ہے کیونکہ اسے ہلکا مشروب چاہیے ہوتا ہے۔ -> کیونکہ اسے ہلکا مشروب چاہیے ہوتا ہے۔",
+      "correction": "Preserve the source reason from P01: وہ پانی چنتی ہے کیونکہ وہ اسکول کے بعد کھیلنے جائے گی; or rewrite the checkpoint without asserting a new reason.",
+      "reason": "The checkpoint invents a reason that is not present in the source passage. P01 explicitly gives after-school play as the reason for preferring water."
+    },
+    {
+      "id": "U3P06-02",
+      "passage_id": "ur-a1-u03-p06",
+      "severity": "major",
+      "field": "text/q5/a5",
+      "original": "کھانا بنانے کے وقت وہ پوچھتی ہے کہ کیا ابھی کچھ تیار ہے یا اسے انتظار کرنا ہے۔ -> وہ پوچھتی ہے کہ کیا ابھی کچھ تیار ہے یا انتظار کرنا ہے۔",
+      "correction": "Rewrite as a passage-grounded comprehension item, for example: کھانا بناتے وقت چاول تیار ہونے کے بعد بھی عائشہ کیوں انتظار کرتی ہے؟ -> کیونکہ سبزی ابھی پک رہی ہوتی ہے۔",
+      "reason": "P04 never says that Aisha asks whether something is ready. The checkpoint creates a new action and then tests that invented detail."
+    },
+    {
+      "id": "U3P06-03",
+      "passage_id": "ur-a1-u03-p06",
+      "severity": "minor",
+      "field": "q6/a6",
+      "original": "«اپنا کام» میں «اپنا» کیا تعلق دکھاتا ہے؟ -> اپنے ہی کام یا اپنی ذمہ داری سے متعلق۔",
+      "correction": "«اپنا کام» کس کا کام ہے؟ -> اسی شخص کا جو کام کر رہا ہے۔",
+      "reason": "The checkpoint repeats the same abstract relation-language defect found in P05."
+    }
+  ],
+  "summary": {
+    "passages_reviewed": 6,
+    "findings": 12,
+    "major": 4,
+    "minor": 8,
+    "critical": 0,
+    "passages_with_findings": 6
+  },
+  "confirmed_defect_classes": [
+    "checkpoint-to-source semantic drift",
+    "A1 grammar-function/relation metalanguage",
+    "stiff nominalized beginner prose",
+    "over-formal learner definitions",
+    "intended-sense metadata not matching all senses actually used"
+  ],
+  "required_next_actions": [
+    "Continue semantic pass 1 through Units 04-05.",
+    "Add checkpoint-source factual alignment to the corpus-wide systemic searches.",
+    "After Unit 05, create one full Urdu A1 Units 01-10 bounded repair manifest and only then begin canonical repair waves."
+  ]
+}
