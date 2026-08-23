@@ -8,6 +8,7 @@ on:
       - 'scripts/workbook_release_passes.py'
       - 'scripts/workbook_release_passes_v5.py'
       - 'scripts/workbook_release_passes_v6.py'
+      - 'scripts/workbook_render_pass.py'
       - '.github/workflows/build-language-workbooks-v1.yml'
       - 'arabic_top1000.csv'
       - 'french_top1000.csv'
@@ -19,6 +20,7 @@ on:
       - 'scripts/workbook_release_passes.py'
       - 'scripts/workbook_release_passes_v5.py'
       - 'scripts/workbook_release_passes_v6.py'
+      - 'scripts/workbook_render_pass.py'
       - '.github/workflows/build-language-workbooks-v1.yml'
       - 'audit/language-workbooks/v1.0/BUILD_TRIGGER.md'
   workflow_dispatch:
@@ -29,7 +31,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 45
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4
@@ -68,9 +70,21 @@ jobs:
         shell: bash
         run: timeout --signal=TERM 120s python scripts/workbook_release_passes_v6.py corpus-audit
 
-      - name: Pass 4 — build 42 PDFs from approved corpus (max 12 min)
+      - name: Pass 4A — render Arabic workbook set (max 12 min)
         shell: bash
-        run: timeout --signal=TERM 720s python scripts/workbook_release_passes_v6.py build
+        run: timeout --signal=TERM 720s python scripts/workbook_render_pass.py arabic
+
+      - name: Pass 4B — render French workbook set (max 12 min)
+        shell: bash
+        run: timeout --signal=TERM 720s python scripts/workbook_render_pass.py french
+
+      - name: Pass 4C — render Urdu workbook set (max 12 min)
+        shell: bash
+        run: timeout --signal=TERM 720s python scripts/workbook_render_pass.py urdu
+
+      - name: Pass 4D — aggregate rendered QA (max 1 min)
+        shell: bash
+        run: timeout --signal=TERM 60s python scripts/workbook_render_pass.py finalize
 
       - name: Pass 5 — structural and render preflight (max 7 min)
         shell: bash
