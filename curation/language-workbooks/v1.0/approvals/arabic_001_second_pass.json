@@ -1,0 +1,108 @@
+{
+  "artifact": "Arabic sentence second-pass approvals - batch 001",
+  "release": "v1.0",
+  "language": "arabic",
+  "source_zip_sha256": "b72f70d3b724c3060da55f74ea1753da249d8eb38a6dbdea3dcc28798d077914",
+  "policy": "Every approval below is a second-pass verification of the correction already recorded by the row-by-row audit. No independent build-time correction is introduced.",
+  "approvals": [
+    {
+      "rank": 27,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "ماذا ترون؟",
+      "approved_english": "What do you see?",
+      "audit_basis": {"ledger": "arabic_sentence_editorial_audit_001_250.json", "recommended": "ماذا ترون؟ / What do you see?"},
+      "approval_note": "Second-pass verified: ترون means 'you see'; English 'What do you see?' restores direct semantic equivalence."
+    },
+    {
+      "rank": 34,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "متى سنأكل؟",
+      "approved_english": "When will we eat?",
+      "audit_basis": {"ledger": "arabic_sentence_editorial_audit_001_250.json", "recommended": "متى سنأكل؟ / When will we eat?"},
+      "approval_note": "Second-pass verified: سنأكل is future and matches 'will eat'."
+    },
+    {
+      "rank": 38,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "أين تذهب للعمل؟",
+      "approved_english": "Where do you go to work?",
+      "audit_basis": {"ledger": "arabic_sentence_editorial_audit_001_250.json", "recommended": "أين تذهب للعمل؟ / Where do you go to work?"},
+      "approval_note": "Second-pass verified: the target asks where the listener goes for work, not simply where they work."
+    },
+    {
+      "rank": 57,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "هل تشرب القهوة عادةً؟",
+      "approved_english": "Do you usually drink coffee?",
+      "audit_basis": {"ledger": "arabic_sentence_editorial_audit_001_250.json", "recommended": "هل تشرب القهوة عادةً؟ / Do you usually drink coffee?"},
+      "approval_note": "Second-pass verified: عادةً explicitly contributes the frequency adverb 'usually'."
+    },
+    {
+      "rank": 59,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "هل لديك شكوك؟",
+      "approved_english": "Do you have doubts?",
+      "audit_basis": {"ledger": "arabic_sentence_editorial_audit_001_250.json", "recommended": "هل لديك شكوك؟ / Do you have doubts?"},
+      "approval_note": "Second-pass verified plural noun and interrogative punctuation."
+    },
+    {
+      "rank": 73,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "هل تحب كرة القدم؟",
+      "approved_english": "Do you like soccer?",
+      "audit_basis": {"ledger": "arabic_sentence_editorial_audit_001_250.json", "recommended": "هل تحب كرة القدم؟"},
+      "approval_note": "Second-pass verified spelling: كرة القدم is the correct phrase for football/soccer."
+    },
+    {
+      "rank": 100,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "هل تحتاج إلى مساعدة؟",
+      "approved_english": "Do you need help?",
+      "audit_basis": {"ledger": "arabic_sentence_editorial_audit_001_250.json", "recommended": "هل تحتاج إلى مساعدة؟ / Do you need help?"},
+      "approval_note": "Second-pass verified: the Arabic asks whether help is needed; corrected English matches that question."
+    },
+    {
+      "rank": 101,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "هل يمكنني أن أساعدك؟",
+      "approved_english": "May I help you?",
+      "audit_basis": {"ledger": "arabic_sentence_editorial_audit_001_250.json", "recommended": "هل يمكنني أن أساعدك؟"},
+      "approval_note": "Second-pass verified hamza spelling in أساعدك; meaning remains correct."
+    },
+    {
+      "rank": 102,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "ألا ينبغي أن تذهب إلى البيت؟",
+      "approved_english": "Shouldn't you go home?",
+      "audit_basis": {"ledger": "arabic_sentence_editorial_audit_001_250.json", "recommended": "ألا ينبغي أن تذهب إلى البيت؟ / Shouldn't you go home?"},
+      "approval_note": "Second-pass verified: ألا ينبغي correctly carries the negative recommendation/question missing from the original target."
+    },
+    {
+      "rank": 105,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "ماذا تقرأ؟",
+      "approved_english": "What are you reading?",
+      "audit_basis": {"ledger": "arabic_sentence_editorial_audit_001_250.json", "recommended": "ماذا تقرأ؟"},
+      "approval_note": "Second-pass verified missing Arabic question mark; wording and meaning are otherwise correct."
+    },
+    {
+      "rank": 132,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "متى بدأت؟",
+      "approved_english": "When did you begin?",
+      "audit_basis": {"ledger": "arabic_sentence_editorial_audit_001_250.json", "recommended": "متى بدأت؟"},
+      "approval_note": "Second-pass verified missing Arabic question mark; wording and meaning are otherwise correct."
+    }
+  ]
+}
