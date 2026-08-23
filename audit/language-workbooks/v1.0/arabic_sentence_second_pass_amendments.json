@@ -1,0 +1,37 @@
+{
+  "artifact": "Arabic sentence second-pass audit amendments",
+  "release": "v1.0",
+  "language": "arabic",
+  "source_zip_sha256": "b72f70d3b724c3060da55f74ea1753da249d8eb38a6dbdea3dcc28798d077914",
+  "policy": "These amendments replace first-pass evidence only for the named ranks after second-pass review found the original recommendation incomplete or too broad.",
+  "amendments": [
+    {
+      "rank": 319,
+      "reason": "The first-pass correction removed the English modal nuance 'could'.",
+      "confirmed_findings": [
+        {
+          "rank": 319,
+          "type": "critical_semantic_second_pass",
+          "observed": "كيف أمكنك تجاهل ذلك؟ / How could you not notice?",
+          "recommended": "كيف أمكنك ألا تلاحظ ذلك؟ / How could you not notice?",
+          "note": "أمكنك preserves 'could', while ألا تلاحظ expresses not noticing rather than deliberately ignoring."
+        }
+      ],
+      "editorial_flags": []
+    },
+    {
+      "rank": 363,
+      "reason": "The first-pass replacement الأطفال was broader than the English 'babies'.",
+      "confirmed_findings": [
+        {
+          "rank": 363,
+          "type": "critical_lexical_second_pass",
+          "observed": "من أين يأتي الصّبيان؟ / Where do babies come from?",
+          "recommended": "من أين يأتي الرضّع؟ / Where do babies come from?",
+          "note": "الرضّع specifically denotes infants/babies; الصبيان means boys."
+        }
+      ],
+      "editorial_flags": []
+    }
+  ]
+}
