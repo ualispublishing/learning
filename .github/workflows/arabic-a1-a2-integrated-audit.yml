@@ -7,21 +7,30 @@ on:
     paths:
       - 'reading/tools/integrate_audited_arabic_a1_a2.py'
       - '.github/workflows/arabic-a1-a2-integrated-audit.yml'
+  pull_request:
+    branches:
+      - main
+    types: [opened, reopened, synchronize]
+    paths:
+      - 'reading/tools/integrate_audited_arabic_a1_a2.py'
+      - '.github/workflows/arabic-a1-a2-integrated-audit.yml'
 
 permissions:
   contents: write
 
 concurrency:
-  group: arabic-a1-a2-integrated-audit
+  group: arabic-a1-a2-integrated-audit-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: false
 
 jobs:
   integrate-and-validate:
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
           fetch-depth: 0
           persist-credentials: true
       - uses: actions/setup-python@v5
