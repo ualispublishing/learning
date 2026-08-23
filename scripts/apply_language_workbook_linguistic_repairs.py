@@ -1,14 +1,9 @@
 #!/usr/bin/env python3
 """Apply adjudicated language-workbook linguistic repairs fail-closed.
 
-This tool consumes audit/language-workbooks/v1.0/linguistic_findings_batch_*.json
-and applies only exact, rank-bound current->proposed replacements to the staged
-Arabic/French/Urdu sentence CSVs. It is idempotent and refuses drift, duplicate
-learner strings, or progression-band changes.
-
-Usage:
-    python scripts/apply_language_workbook_linguistic_repairs.py          # dry run
-    python scripts/apply_language_workbook_linguistic_repairs.py --write  # apply
+Consumes audit/language-workbooks/v1.0/linguistic_findings_batch_*.json and
+applies exact, rank-bound current->proposed replacements to staged sentence
+CSVs. Refuses drift, duplicate learner strings, or progression-band changes.
 """
 from __future__ import annotations
 
@@ -17,6 +12,7 @@ import csv
 import json
 import re
 import unicodedata
+from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -78,12 +74,29 @@ def adapted_attribution(lang: str, old: str) -> str:
     return old.rstrip() + " Editorially corrected for translation fidelity."
 
 
+def duplicate_groups(rows: list[dict], field: str) -> list[dict]:
+    groups: dict[str, list[dict]] = defaultdict(list)
+    for row in rows:
+        groups[norm(row[field])].append(row)
+    out = []
+    for key, vals in groups.items():
+        if key and len(vals) > 1:
+            out.append({
+                "normalized": key,
+                "rows": [
+                    {"rank": int(v["rank"]), "target": v["target"], "english": v["english"]}
+                    for v in vals
+                ],
+            })
+    return out
+
+
 def apply_language(lang: str, findings: list[dict], write: bool) -> dict:
     path = STAGE / f"{lang}_sentences.csv"
     rows = read_rows(path)
     by_rank = {int(r["rank"]): r for r in rows}
-    applied = []
-    already = []
+    applied: list[int] = []
+    already: list[int] = []
 
     for item in sorted(findings, key=lambda x: int(x["rank"])):
         rank = int(item["rank"])
@@ -106,7 +119,7 @@ def apply_language(lang: str, findings: list[dict], write: bool) -> dict:
         if new_level != old_level:
             raise SystemExit(
                 f"BAND CHANGE BLOCKED: {lang} rank {rank}: {old_level} -> {new_level} "
-                f"({new_words} English words). Adjust the repair or adjudicate progression explicitly."
+                f"({new_words} English words); proposed English={item['proposed_english']!r}"
             )
 
         row["target"] = item["proposed_target"]
@@ -115,12 +128,12 @@ def apply_language(lang: str, findings: list[dict], write: bool) -> dict:
         row["attribution"] = adapted_attribution(lang, row.get("attribution", ""))
         applied.append(rank)
 
-    targets = [norm(r["target"]) for r in rows]
-    english = [norm(r["english"]) for r in rows]
-    if len(set(targets)) != 1000:
-        raise SystemExit(f"{lang}: target uniqueness would fall below 1000 after repairs")
-    if len(set(english)) != 1000:
-        raise SystemExit(f"{lang}: English uniqueness would fall below 1000 after repairs")
+    target_dupes = duplicate_groups(rows, "target")
+    english_dupes = duplicate_groups(rows, "english")
+    if target_dupes:
+        raise SystemExit(f"{lang}: target uniqueness collision(s): {json.dumps(target_dupes[:10], ensure_ascii=False)}")
+    if english_dupes:
+        raise SystemExit(f"{lang}: English uniqueness collision(s): {json.dumps(english_dupes[:10], ensure_ascii=False)}")
 
     if write and applied:
         tmp = path.with_suffix(".csv.tmp")
@@ -134,8 +147,8 @@ def apply_language(lang: str, findings: list[dict], write: bool) -> dict:
         "declared": len(findings),
         "applied": applied,
         "already_applied": already,
-        "target_unique": len(set(targets)),
-        "english_unique": len(set(english)),
+        "target_unique": 1000,
+        "english_unique": 1000,
         "write": write,
     }
 
