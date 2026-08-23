@@ -9,6 +9,14 @@ on:
       - 'urdu_top1000.csv'
       - 'french_top1000.csv'
       - '.github/workflows/workbooks-v1-build.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'in-progress/workbooks/**'
+      - 'arabic_top1000.csv'
+      - 'urdu_top1000.csv'
+      - 'french_top1000.csv'
+      - '.github/workflows/workbooks-v1-build.yml'
   workflow_dispatch:
 
 permissions:
