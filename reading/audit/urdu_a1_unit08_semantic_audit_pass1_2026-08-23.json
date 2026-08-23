@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "urdu",
+  "level": "A1",
+  "scope": {
+    "canonical_path": "reading/urdu/a1/passages.jsonl",
+    "canonical_blob_sha": "16507c293ae39cd44f7f5136dd00c9ef029646a7",
+    "sequences": [43, 48],
+    "passage_ids": ["ur-a1-u08-p01","ur-a1-u08-p02","ur-a1-u08-p03","ur-a1-u08-p04","ur-a1-u08-p05","ur-a1-u08-p06"]
+  },
+  "audit_type": "manual_semantic_linguistic_pedagogical_pass_1",
+  "status": "REPAIR_REQUIRED",
+  "release_effect": "Detection evidence only. This artifact does not approve passages, mutate quality metadata, or certify educator release.",
+  "findings": [
+    {
+      "id": "U8P02-01",
+      "passage_id": "ur-a1-u08-p02",
+      "severity": "minor",
+      "field": "text",
+      "original": "گفتگو پہلے اسکول کے بارے میں ہوتی ہے، پھر دونوں خاندان کی خبر پوچھتی ہیں۔",
+      "correction": "گفتگو پہلے اسکول کے بارے میں ہوتی ہے، پھر دونوں ایک دوسرے کے خاندان کا حال پوچھتی ہیں۔",
+      "reason": "خاندان کی خبر پوچھنا is awkward for asking after family; خاندان کا حال پوچھنا is the natural construction."
+    },
+    {
+      "id": "U8P02-02",
+      "passage_id": "ur-a1-u08-p02",
+      "severity": "major",
+      "field": "q4/a4/q7/a7",
+      "original": ["متن میں «آواز» کس چیز کو بتاتی ہے؟ -> سنائی دینے والی بولنے کی آواز۔", "«آواز» کا بنیادی مطلب کیا ہے؟ -> جو چیز بولنے یا کسی آواز سے سنائی دے۔"],
+      "correction": ["خالہ کی «آواز» سے کیا مراد ہے؟ -> خالہ کے بولنے کی آواز۔", "جو ہم کان سے سنتے ہیں اسے کیا کہتے ہیں؟ -> آواز۔"],
+      "reason": "The current definitions are circular, awkward, and in the second case semantically incoherent. A1 should use a concrete operational meaning."
+    },
+    {
+      "id": "U8P03-01",
+      "passage_id": "ur-a1-u08-p03",
+      "severity": "minor",
+      "field": "text/a4/a5",
+      "original": "پہلے کاغذ پر اس کا قلم اچھی طرح نہیں چلتا، اس لیے وہ دوسرا قلم لیتی ہے۔",
+      "correction": "جو قلم عائشہ پہلے استعمال کرتی ہے، وہ اچھی طرح نہیں چلتا، اس لیے وہ دوسرا قلم لیتی ہے۔",
+      "reason": "In the current sentence پہلے most naturally attaches to کاغذ, while the Q/A material treats it as establishing a first pen. The rewrite removes ambiguity."
+    },
+    {
+      "id": "U8P04-01",
+      "passage_id": "ur-a1-u08-p04",
+      "severity": "minor",
+      "field": "text",
+      "original": "وہ سمجھتی ہے کہ بجلی کے وقت اور بغیر بجلی کے گھر کے کام کچھ مختلف ہوتے ہیں۔",
+      "correction": "وہ سمجھتی ہے کہ بجلی نہ ہو تو گھر کے کچھ کام مختلف طریقے سے کرنے پڑتے ہیں۔",
+      "reason": "بجلی کے وقت is not the natural contrast with بغیر بجلی کے in this context."
+    },
+    {
+      "id": "U8P05-01",
+      "passage_id": "ur-a1-u08-p05",
+      "severity": "minor",
+      "field": "a1.explanation",
+      "original": "پہلے جملے میں عائشہ کے میز صاف کرنے کا ذکر ہے۔",
+      "correction": "پہلے جملے میں عائشہ کی میز صاف کرنے کا ذکر ہے۔",
+      "reason": "The possessive agreement should be عائشہ کی میز."
+    },
+    {
+      "id": "U8P05-02",
+      "passage_id": "ur-a1-u08-p05",
+      "severity": "major",
+      "field": "q9/a9",
+      "original": "میں نے _____ کتاب پڑھ لی۔ -> پورا",
+      "correction": "میں نے _____ سبق پڑھ لیا۔ -> پورا",
+      "reason": "کتاب is feminine, so the current completion requires پوری, not the declared target form پورا. The proposed masculine noun preserves the exact lexical target naturally."
+    },
+    {
+      "id": "U8P06-01",
+      "passage_id": "ur-a1-u08-p06",
+      "severity": "major",
+      "field": "q5/a5",
+      "original": "جواب لکھتے وقت عائشہ کو دوسرے قلم کی ضرورت کیوں یاد آتی ہے؟ -> جواب لکھتے وقت اسے دوسرا قلم لینا پڑا۔",
+      "correction": "جواب لکھتے وقت عائشہ کو کیا کرنا پڑا؟ -> اسے دوسرا قلم لینا پڑا۔",
+      "reason": "The current answer does not answer the why-question, and the checkpoint text does not state the original reason that the first pen failed. The repair restores passage-grounded Q/A linkage."
+    },
+    {
+      "id": "U8P06-02",
+      "passage_id": "ur-a1-u08-p06",
+      "severity": "minor",
+      "field": "a6",
+      "original": "بجلی چلی گئی تھی اور ہر چیز اپنی جگہ رکھنا ضروری تھا۔",
+      "correction": "بجلی چلی گئی تھی اور ہر چیز کو اپنی جگہ رکھنا ضروری تھا۔",
+      "reason": "The object marker کو is required in this learner-facing construction."
+    },
+    {
+      "id": "U8P06-03",
+      "passage_id": "ur-a1-u08-p06",
+      "severity": "minor",
+      "field": "text",
+      "original": "ماں میز کی طرف دیکھتی ہیں اور کہتی ہیں کہ پورا کام اچھا ہوا، لیکن باقی کاغذ کل بھی دیکھنے ہیں۔",
+      "correction": "ماں میز کی طرف دیکھتی ہیں اور کہتی ہیں کہ عائشہ نے پورا میز پوش اچھی طرح صاف کیا، لیکن باقی کاغذ کل دیکھنے ہیں۔",
+      "reason": "پورا کام اچھا ہوا is stilted and semantically conflicts with immediately saying work remains. The proposed sentence preserves a natural پورا exposure without contradiction."
+    },
+    {
+      "id": "U8P06-04",
+      "passage_id": "ur-a1-u08-p06",
+      "severity": "major",
+      "field": "q10/a10",
+      "original": "_____ گئی تو ہر _____ سنبھالی؛ میز کا _____ کام ہوا مگر کچھ _____ تھا۔ -> بجلی؛ چیز؛ پورا؛ باقی",
+      "correction": "_____ گئی تو ہر _____ سنبھالی؛ _____ ہفتہ گھر کے کام ہوتے رہے اور کچھ کاغذ _____ تھے۔ -> بجلی؛ چیز؛ پورا؛ باقی",
+      "reason": "The current completion contains the stilted میز کا پورا کام ہوا and a vague contradictory remainder. The repaired checkpoint uses all four target forms naturally."
+    }
+  ],
+  "passage_without_confirmed_finding_in_this_pass": ["ur-a1-u08-p01"],
+  "summary": {
+    "passages_reviewed": 6,
+    "findings": 10,
+    "major": 4,
+    "minor": 6,
+    "critical": 0,
+    "passages_with_findings": 5,
+    "passages_without_confirmed_finding": 1
+  },
+  "confirmed_defect_classes": [
+    "gender/agreement mismatch in cloze target selection",
+    "question type and answer mismatch",
+    "circular or incoherent learner-facing definitions",
+    "checkpoint target forcing that creates unnatural Urdu",
+    "ambiguous attachment that changes the intended lexical contrast"
+  ],
+  "required_next_actions": [
+    "Merge Units 06-10 confirmed findings into a bounded Urdu A1 repair manifest.",
+    "Search the full Urdu A1 corpus for the newly confirmed morphology/Q-A/forced-target defect classes.",
+    "Apply repairs only after exact affected fields and target-exposure consequences are enumerated.",
+    "After accepted repairs, rerun schema, Q/A linkage, exposure/review chronology, lexical coverage, and CEFR checks.",
+    "Do not flip pending quality fields based on this detection pass alone."
+  ]
+}
