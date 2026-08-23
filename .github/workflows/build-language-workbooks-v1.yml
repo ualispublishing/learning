@@ -23,6 +23,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Sync latest main
+        run: |
+          git fetch origin main
+          git checkout main
+          git pull --ff-only origin main
+
       - name: Install PDF and font dependencies
         run: |
           sudo apt-get update
@@ -76,4 +82,5 @@ jobs:
             exit 0
           fi
           git commit -m 'release: language workbooks v1.0 production candidate'
-          git push
+          git pull --rebase origin main
+          git push origin main
