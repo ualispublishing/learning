@@ -9,6 +9,8 @@ on:
       - 'scripts/workbook_release_passes_v5.py'
       - 'scripts/workbook_release_passes_v6.py'
       - 'scripts/workbook_render_pass.py'
+      - 'scripts/apply_language_workbook_linguistic_repairs.py'
+      - 'audit/language-workbooks/v1.0/linguistic_findings_batch_*.json'
       - '.github/workflows/build-language-workbooks-v1.yml'
       - 'arabic_top1000.csv'
       - 'french_top1000.csv'
@@ -21,6 +23,8 @@ on:
       - 'scripts/workbook_release_passes_v5.py'
       - 'scripts/workbook_release_passes_v6.py'
       - 'scripts/workbook_render_pass.py'
+      - 'scripts/apply_language_workbook_linguistic_repairs.py'
+      - 'audit/language-workbooks/v1.0/linguistic_findings_batch_*.json'
       - '.github/workflows/build-language-workbooks-v1.yml'
       - 'audit/language-workbooks/v1.0/BUILD_TRIGGER.md'
   workflow_dispatch:
@@ -65,6 +69,10 @@ jobs:
       - name: Pass 2 — select 3,000 sentence corpus (max 5 min)
         shell: bash
         run: timeout --signal=TERM 300s python scripts/workbook_release_passes_v6.py corpus-select
+
+      - name: Pass 2.5 — apply adjudicated linguistic repairs fail-closed (max 1 min)
+        shell: bash
+        run: timeout --signal=TERM 60s python scripts/apply_language_workbook_linguistic_repairs.py --write
 
       - name: Pass 3 — full corpus audit + stratified samples (max 2 min)
         shell: bash
