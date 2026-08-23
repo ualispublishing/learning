@@ -6,6 +6,7 @@ on:
       - 'scripts/build_language_workbooks_v1.py'
       - 'scripts/build_language_workbooks_v1_quality.py'
       - 'scripts/workbook_release_passes.py'
+      - 'scripts/workbook_release_passes_v4.py'
       - '.github/workflows/build-language-workbooks-v1.yml'
       - 'arabic_top1000.csv'
       - 'french_top1000.csv'
@@ -15,6 +16,7 @@ on:
       - 'scripts/build_language_workbooks_v1.py'
       - 'scripts/build_language_workbooks_v1_quality.py'
       - 'scripts/workbook_release_passes.py'
+      - 'scripts/workbook_release_passes_v4.py'
       - '.github/workflows/build-language-workbooks-v1.yml'
       - 'audit/language-workbooks/v1.0/BUILD_TRIGGER.md'
   workflow_dispatch:
@@ -58,15 +60,15 @@ jobs:
 
       - name: Pass 2 — select 3,000 sentence corpus (max 5 min)
         shell: bash
-        run: timeout --signal=TERM 300s python scripts/workbook_release_passes.py corpus-select
+        run: timeout --signal=TERM 300s python scripts/workbook_release_passes_v4.py corpus-select
 
       - name: Pass 3 — full corpus audit + stratified samples (max 2 min)
         shell: bash
-        run: timeout --signal=TERM 120s python scripts/workbook_release_passes.py corpus-audit
+        run: timeout --signal=TERM 120s python scripts/workbook_release_passes_v4.py corpus-audit
 
       - name: Pass 4 — build 42 PDFs from approved corpus (max 12 min)
         shell: bash
-        run: timeout --signal=TERM 720s python scripts/workbook_release_passes.py build
+        run: timeout --signal=TERM 720s python scripts/workbook_release_passes_v4.py build
 
       - name: Pass 5 — structural and render preflight (max 7 min)
         shell: bash
@@ -88,7 +90,7 @@ jobs:
 
       - name: Pass 6 — release manifest and cross-gate audit (max 2 min)
         shell: bash
-        run: timeout --signal=TERM 120s python scripts/workbook_release_passes.py release-audit
+        run: timeout --signal=TERM 120s python scripts/workbook_release_passes_v4.py release-audit
 
       - name: Archive release artifact
         uses: actions/upload-artifact@v4
