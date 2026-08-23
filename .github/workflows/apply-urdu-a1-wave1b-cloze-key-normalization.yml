@@ -1,0 +1,45 @@
+name: Apply Urdu A1 Wave 1B cloze-key normalization
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/apply_urdu_a1_wave1b_cloze_key_normalization.py'
+      - '.github/workflows/apply-urdu-a1-wave1b-cloze-key-normalization.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Normalize cloze keys and validate all cloze structures
+        run: python reading/tools/apply_urdu_a1_wave1b_cloze_key_normalization.py
+      - name: Validate corpus and normalization report
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[json.loads(x) for x in Path('reading/urdu/a1/passages.jsonl').read_text(encoding='utf-8').splitlines() if x]
+          assert len(rows)==60
+          report=json.loads(Path('reading/audit/urdu_a1_wave1b_cloze_key_normalization_2026-08-23.json').read_text(encoding='utf-8'))
+          assert report['cloze_question_count']==130
+          assert report['normalized_key_count']>0
+          assert report['validation']['no_cloze_key_part_has_terminal_sentence_punctuation'] is True
+          print('validated Urdu A1 Wave 1B')
+          PY
+      - name: Commit normalized keys and audit report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/urdu/a1/passages.jsonl reading/audit/urdu_a1_wave1b_cloze_key_normalization_2026-08-23.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Normalize Urdu A1 cloze answer keys [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
