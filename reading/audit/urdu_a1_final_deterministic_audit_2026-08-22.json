@@ -1,19 +1,19 @@
 {
   "audit": "urdu_a1_final_deterministic_audit",
-  "generated_at_utc": "2026-08-22T20:09:12.262785+00:00",
-  "status": "PASS_DETERMINISTIC_FINAL_AUDIT_NEEDS_INDEPENDENT_REVIEW",
-  "scope": "deterministic post-generation audit after bounded target-order repair; no automated semantic, naturalness, pedagogical, native-speaker, educator, or release approval",
+  "generated_at_utc": "2026-08-23T00:49:05.335319+00:00",
+  "status": "PASS_DETERMINISTIC_POST_INTERNAL_REPAIR_NEEDS_INDEPENDENT_REVIEW",
+  "scope": "Fresh full deterministic audit after Urdu A1 Units 01-02 internal question/answer/pedagogy repairs; no automated semantic, naturalness, native-speaker, educator, or release approval.",
   "policy_basis": [
     "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
-    "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md"
+    "reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md",
+    "reading/planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md"
   ],
   "source": {
     "path": "reading/urdu/a1/passages.jsonl",
-    "pre_repair_sha256": "3673ec71bf52d6d01ae11e8fd864eebc7f5fe1c3acac2ae19e4e2229ee14b728",
-    "actual_sha256": "e6450c04b6aa7d47b501e0cfbf2664fa37b2e95490ab363945f7d757dfa34a1d",
+    "actual_sha256": "9519a085ba046e71cafcc55a0a98f4d5517f2ec86d138f664727cac2d753d892",
     "hash_bound": true,
-    "intermediate_repair_sha256": "9968988956d8813543a6ca800ecaadc3df973ab6b22b001a56ce84c0a39911d2",
-    "pre_roman_cleanup_sha256": "1645beb493ef6335cc70191ca21a84029e119ec42e055e89d76423c6014a5969"
+    "prior_deterministic_sha256": "e6450c04b6aa7d47b501e0cfbf2664fa37b2e95490ab363945f7d757dfa34a1d",
+    "internal_units01_02_repair_evidence": "reading/audit/urdu_a1_units01_02_internal_review_2026-08-22.json"
   },
   "counts": {
     "passages": 60,
@@ -24,10 +24,11 @@
     "duplicate_prompts_within_passage": 0,
     "learner_facing_roman_script_findings": 0,
     "exact_target_visibility_misses": 0,
+    "premature_future_target_exposures": 0,
     "violations": 0
   },
   "checks": {
-    "source_corpus_before_sha256_exact": true,
+    "source_corpus_sha256_exact": true,
     "passage_count_exact_60": true,
     "passage_ids_unique": true,
     "sequences_contiguous_1_60": true,
@@ -45,36 +46,19 @@
     "learner_facing_roman_script_zero": true
   },
   "violations": [],
-  "bounded_repair_evidence": "reading/audit/urdu_a1_premature_target_repairs_2026-08-22.json",
   "independent_review": {
-    "semantic_accuracy": "PENDING",
-    "urdu_naturalness_and_orthography": "PENDING",
-    "pedagogical_a1_fit": "PENDING",
-    "assessment_quality": "PENDING",
-    "educator_release_review": "PENDING"
+    "semantic_accuracy": "PARTIAL_INTERNAL_UNITS01_02_ONLY",
+    "urdu_naturalness_and_orthography": "PENDING_INDEPENDENT_NATIVE",
+    "pedagogical_a1_fit": "PARTIAL_INTERNAL_UNITS01_02_ONLY",
+    "assessment_quality": "PARTIAL_INTERNAL_UNITS01_02_ONLY",
+    "independent_model_family": "PENDING",
+    "educator_release_review": "PENDING",
+    "blind_postrepair": "PENDING"
   },
-  "release_effect": "NONE_AUTOMATIC: Urdu A1 remains non-release-ready until independent semantic/naturalness/pedagogical and educator release reviews are completed.",
+  "release_effect": "NONE_AUTOMATIC: Urdu A1 remains non-release-ready. Internal review is incomplete for Units 03-10 and all independent/native/educator gates remain pending.",
   "notes": [
-    "Exact Unicode token-sequence matching is used; substring matching is forbidden (ہاں does not match within یہاں).",
-    "Future-target exposure is scoped prospectively within each unit, matching the verified Urdu promotion runner.",
-    "Duplicate-prompt rejection is scoped within each passage.",
-    "Legacy quality/review metadata is not treated as current independent final-review evidence."
-  ],
-  "repair_preservation_refinement": {
-    "intermediate_sha256": "9968988956d8813543a6ca800ecaadc3df973ab6b22b001a56ce84c0a39911d2",
-    "final_sha256": "1645beb493ef6335cc70191ca21a84029e119ec42e055e89d76423c6014a5969",
-    "records_refined": [
-      "ur-a1-u04-p01",
-      "ur-a1-u04-p02",
-      "ur-a1-u06-p01"
-    ],
-    "semantic_native_educator_approval_claimed": false
-  },
-  "learner_facing_roman_cleanup": {
-    "record_id": "ur-a1-u02-p03",
-    "field": "answer:a8:explanation",
-    "pre_cleanup_sha256": "1645beb493ef6335cc70191ca21a84029e119ec42e055e89d76423c6014a5969",
-    "final_sha256": "e6450c04b6aa7d47b501e0cfbf2664fa37b2e95490ab363945f7d757dfa34a1d",
-    "independent_review_claimed": false
-  }
+    "Exact Unicode token-sequence matching is used; substring matching is forbidden.",
+    "Passage prose and target schedules were unchanged by the Units 01-02 repair, but the full deterministic audit was rerun because learner-facing Q/A fields and one target linkage changed.",
+    "Legacy quality metadata is not treated as current independent final-review evidence."
+  ]
 }
