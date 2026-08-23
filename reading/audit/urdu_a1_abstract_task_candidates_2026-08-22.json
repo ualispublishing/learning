@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "ur",
+  "level": "A1",
+  "audit": "abstract_meta_style_task_candidate_inventory",
+  "bound_sha256": "e4c996dbd9fc9808eed0a29c66aa5d7114543b5bb7ccc34d5bcd1de6b9d5cf8c",
+  "candidate_count": 4,
+  "by_unit": {
+    "2": 1,
+    "3": 2,
+    "4": 1
+  },
+  "status": "HIGH_RECALL_CANDIDATES_NEED_CONTEXTUAL_ADJUDICATION",
+  "candidates": [
+    {
+      "passage_id": "ur-a1-u02-p01",
+      "unit": 2,
+      "sequence": 7,
+      "question_id": "q8",
+      "type": "contrast",
+      "prompt": "کون سا جملہ بتاتا ہے کہ کوئی چیز باقی نہیں رہنی چاہیے: «کچھ نہ رہ جائے» یا «کچھ رہ جائے»؟",
+      "target_ids": [],
+      "answer": "«کچھ نہ رہ جائے»۔",
+      "explanation": "«نہ» یہاں رہ جانے کی نفی کرتا ہے۔",
+      "reasons": [
+        "grammar_term_answer"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u03-p01",
+      "unit": 3,
+      "sequence": 13,
+      "question_id": "q4",
+      "type": "vocabulary_in_context",
+      "prompt": "«کیونکہ» جملے میں کیا کام کرتا ہے؟",
+      "target_ids": [
+        "ur-rank-0115"
+      ],
+      "answer": "یہ وجہ بتاتا ہے۔",
+      "explanation": "«کیونکہ» پہلے بیان کی وجہ متعارف کراتا ہے۔",
+      "reasons": [
+        "function_abstract"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u03-p05",
+      "unit": 3,
+      "sequence": 17,
+      "question_id": "q3",
+      "type": "vocabulary_in_context",
+      "prompt": "متن میں «اپنا» کس تعلق کو دکھاتا ہے؟",
+      "target_ids": [
+        "ur-rank-0167"
+      ],
+      "answer": "اپنی ملکیت یا اپنے ہی کام کی طرف اشارہ کرتا ہے۔",
+      "explanation": "یہاں عائشہ کے اپنے ناشتے اور اپنے کام کی بات ہے۔",
+      "reasons": [
+        "relation_abstract"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u04-p03",
+      "unit": 4,
+      "sequence": 21,
+      "question_id": "q4",
+      "type": "vocabulary_in_context",
+      "prompt": "«ہمارے گھر» میں «ہمارے» کس تعلق کو دکھاتا ہے؟",
+      "target_ids": [
+        "ur-rank-0118"
+      ],
+      "answer": "عائشہ اور اس کے گھر والوں سے متعلق۔",
+      "explanation": "«ہمارے» مشترک ملکیت یا تعلق دکھاتا ہے۔",
+      "reasons": [
+        "relation_abstract"
+      ]
+    }
+  ],
+  "limitations": "This is a high-recall pedagogical wording scan, not a defect verdict. Concrete vocabulary questions can legitimately ask what a word indicates. Repair only items that require abstract linguistic relation/function/category reasoning instead of A1 comprehension or use.",
+  "release_effect": "NONE_AUTOMATIC"
+}

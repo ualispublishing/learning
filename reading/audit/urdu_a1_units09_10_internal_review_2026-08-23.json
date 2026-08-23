@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "ur",
+  "level": "A1",
+  "units": [
+    9,
+    10
+  ],
+  "review_kind": "internal_semantic_naturalness_answer_pedagogy_review_placeholder_cleanup_and_bounded_repair",
+  "before_sha256": "636f8b2f18b1948ae4155cb605b8ebd989d412f73d0bf82f8269378d4046cc2f",
+  "after_sha256": "af35f4bfa1c41b4fec5a08a13ac1a2f52007b6f0f1406873c28b3f9e2a108a07",
+  "records_reviewed": 12,
+  "questions_reviewed": 120,
+  "answers_reviewed": 120,
+  "exact_placeholder_explanations_removed": 120,
+  "placeholder_policy": "Exact generic placeholders were replaced with empty explanations rather than invented evidence. Explanation enrichment remains a later independent-review task.",
+  "confirmed_content_repairs": 22,
+  "repairs": [
+    {
+      "passage_id": "ur-a1-u10-p01",
+      "field": "text",
+      "before": "والد کہتے ہیں کہ پچھلے دورہ میں یہاں کم پودے تھے۔",
+      "after": "والد کہتے ہیں کہ ان کا پچھلا دورہ مختصر تھا اور اس وقت یہاں کم پودے تھے۔",
+      "reason": "Replace ungrammatical oblique use while preserving the exact review token دورہ in natural prose."
+    },
+    {
+      "passage_id": "ur-a1-u10-p02",
+      "field": "text",
+      "before": "اسکول میں آج عائشہ اردو کی زبان کے ساتھ ایک نیا لفظ سیکھتی ہے۔",
+      "after": "اسکول میں آج عائشہ اردو زبان میں ایک نیا لفظ سیکھتی ہے۔",
+      "reason": "Replace awkward “with the Urdu language” construction while preserving زبان and نیا."
+    },
+    {
+      "passage_id": "ur-a1-u10-p02",
+      "field": "text",
+      "before": "عائشہ کہتی ہے کہ لفظ کی مقدار نہیں، درست استعمال اہم ہے۔",
+      "after": "عائشہ کہتی ہے کہ نئے لفظوں کی مقدار سے زیادہ ان کا درست استعمال اہم ہے۔",
+      "reason": "Give مقدار a natural quantity sense instead of an artificial single-word quantity contrast."
+    },
+    {
+      "passage_id": "ur-a1-u09-p01",
+      "question_id": "q1",
+      "field": "prompt",
+      "before": "اس دورہ میں عائشہ کہاں جاتی ہے؟",
+      "after": "اس دورے میں عائشہ کہاں جاتی ہے؟",
+      "reason": "Use the correct oblique form in the question.",
+      "target_ids": []
+    },
+    {
+      "passage_id": "ur-a1-u09-p01",
+      "question_id": "q4",
+      "field": "prompt",
+      "before": "متن میں «دینا» کیا کام بتاتا ہے؟",
+      "after": "عائشہ تحفہ کس کو دینا چاہتی ہے؟",
+      "reason": "Replace function-style wording with concrete comprehension while keeping the دینا target.",
+      "target_ids": [
+        "ur-rank-0426"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u09-p01",
+      "question_id": "q4",
+      "field": "answer",
+      "before": "کسی شخص کو کوئی چیز یا وقت پیش کرنا۔",
+      "after": "خالہ کو۔",
+      "reason": "Answer the concrete passage question.",
+      "target_ids": [
+        "ur-rank-0426"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u09-p03",
+      "question_id": "q3",
+      "field": "prompt",
+      "before": "متن میں «ہاں» کیا جواب دیتی ہے؟",
+      "after": "کتاب میلے میں آنے کے سوال پر عائشہ کیا جواب دیتی ہے؟",
+      "reason": "Replace awkward word-function wording with dialogue comprehension.",
+      "target_ids": [
+        "ur-rank-0409"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u09-p03",
+      "question_id": "q3",
+      "field": "answer",
+      "before": "یہ مثبت جواب دیتی ہے۔",
+      "after": "ہاں، آئے گی۔",
+      "reason": "Ground the answer in the dialogue.",
+      "target_ids": [
+        "ur-rank-0409"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u09-p03",
+      "question_id": "q4",
+      "field": "prompt",
+      "before": "متن میں «بالکل» کیا معنی بڑھاتا ہے؟",
+      "after": "«ہاں، بالکل آؤں گی» میں عائشہ کتنے یقین سے آنے کی بات کرتی ہے؟",
+      "reason": "Replace abstract meaning-function wording with communicative certainty.",
+      "target_ids": [
+        "ur-rank-0424"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u09-p03",
+      "question_id": "q4",
+      "field": "answer",
+      "before": "یہ مکمل یقین یا واضح موافقت دکھاتا ہے۔",
+      "after": "پورے یقین سے۔",
+      "reason": "Direct communicative answer.",
+      "target_ids": [
+        "ur-rank-0424"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u09-p03",
+      "question_id": "q6",
+      "field": "prompt",
+      "before": "«ہاں» کا بنیادی استعمال کیا ہے؟",
+      "after": "اگر کسی سوال کا جواب مثبت ہو تو کیا کہیں گے؟",
+      "reason": "Replace terminology with productive A1 use.",
+      "target_ids": [
+        "ur-rank-0409"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u09-p03",
+      "question_id": "q6",
+      "field": "answer",
+      "before": "کسی سوال کا مثبت جواب دینا۔",
+      "after": "ہاں۔",
+      "reason": "Give the usable form.",
+      "target_ids": [
+        "ur-rank-0409"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u09-p05",
+      "question_id": "q10",
+      "field": "prompt",
+      "before": "خالی جگہ پُر کریں: روز چلنے کا ایک _____ صحت ہے۔",
+      "after": "خالی جگہ پُر کریں: روز چلنے کا ایک _____ یہ ہے کہ جسم فعال رہتا ہے۔",
+      "reason": "Repair an unnatural and semantically malformed cloze while preserving فائدہ.",
+      "target_ids": [
+        "ur-rank-0408"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u09-p06",
+      "question_id": "q2",
+      "field": "prompt",
+      "before": "خاندان کے دورہ میں عائشہ نے کیا سیکھا؟",
+      "after": "خالہ کے گھر دورہ کرتے وقت عائشہ نے کیا سیکھا؟",
+      "reason": "Use a grammatical construction while preserving the exact target token دورہ.",
+      "target_ids": [
+        "ur-rank-0423",
+        "ur-rank-0426"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u09-p06",
+      "question_id": "q7",
+      "field": "prompt",
+      "before": "گھر میں عائشہ نے پنکھے کی کیا چیز دیکھی؟",
+      "after": "پنکھا دیکھتے وقت عائشہ نے اس کے بارے میں کیا جانچا؟",
+      "reason": "Replace vague “what thing” wording with supported comprehension.",
+      "target_ids": [
+        "ur-rank-0452"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u10-p01",
+      "question_id": "q8",
+      "field": "prompt",
+      "before": "والد پچھلے دورہ کے بارے میں کیا کہتے ہیں؟",
+      "after": "والد پچھلے دورے کے بارے میں کیا کہتے ہیں؟",
+      "reason": "Use correct oblique form in learner-facing question.",
+      "target_ids": [
+        "ur-rank-0423"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u10-p01",
+      "question_id": "q8",
+      "field": "answer",
+      "before": "پچھلے دورہ میں پودے کم تھے۔",
+      "after": "پچھلے دورے کے وقت وہاں پودے کم تھے۔",
+      "reason": "Align with grammatical question/source meaning.",
+      "target_ids": [
+        "ur-rank-0423"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u10-p02",
+      "question_id": "q1",
+      "field": "answer",
+      "before": "اردو کی زبان میں ایک نیا لفظ۔",
+      "after": "اردو زبان کا ایک نیا لفظ۔",
+      "reason": "Remove redundant/awkward phrase while preserving target meaning.",
+      "target_ids": [
+        "ur-rank-0364",
+        "ur-rank-0365"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u10-p02",
+      "question_id": "q8",
+      "field": "prompt",
+      "before": "عائشہ لفظ کی مقدار کے بارے میں کیا کہتی ہے؟",
+      "after": "عائشہ نئے لفظوں کی مقدار اور درست استعمال کے بارے میں کیا کہتی ہے؟",
+      "reason": "Match the repaired natural sentence and review target مقدار.",
+      "target_ids": [
+        "ur-rank-0438"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u10-p02",
+      "question_id": "q8",
+      "field": "answer",
+      "before": "وہ کہتی ہے کہ درست استعمال اہم ہے۔",
+      "after": "وہ کہتی ہے کہ نئے لفظوں کی مقدار سے زیادہ درست استعمال اہم ہے۔",
+      "reason": "Align answer with repaired prose.",
+      "target_ids": [
+        "ur-rank-0438"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u10-p06",
+      "question_id": "q4",
+      "field": "prompt",
+      "before": "عادت کی مقدار بتانے کے لیے کون سے دو الفاظ آتے ہیں؟",
+      "after": "کوئی کام کتنی بار ہوتا ہے، یہ بتانے کے لیے کون سے دو الفاظ آتے ہیں؟",
+      "reason": "Replace abstract “quantity of habit” wording with concrete frequency.",
+      "target_ids": [
+        "ur-rank-0368",
+        "ur-rank-0397"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u10-p06",
+      "question_id": "q8",
+      "field": "prompt",
+      "before": "کسی کام کی واضح بات یا حکم کے لیے کون سا لفظ مناسب ہے؟",
+      "after": "استاد کی دی ہوئی واضح بات پر عمل کرنے کے لیے کون سا لفظ مناسب ہے؟",
+      "reason": "Use learner-facing instruction context rather than abstract command terminology.",
+      "target_ids": [
+        "ur-rank-0398"
+      ]
+    }
+  ],
+  "verification": {
+    "qa_linkage_valid": true,
+    "question_target_locality_valid": true,
+    "review_target_visibility_preserved": true,
+    "word_count_metadata_current": true,
+    "duplicate_prompts_zero": true,
+    "formal_task_types_zero": true,
+    "generic_placeholder_explanations_zero": true,
+    "learner_facing_roman_script_zero": true,
+    "internal_review_explanation_leakage_zero": true
+  },
+  "limitations": [
+    "Internal model review only.",
+    "Empty explanations created by placeholder cleanup are not claimed as complete explanation-quality review.",
+    "Native Urdu naturalness/orthography, independent model-family review, educator/CEFR A1 review, and blind post-repair review remain pending."
+  ],
+  "status": "PASS_INTERNAL_UNITS09_10_BOUNDED_REPAIR_NEEDS_INDEPENDENT_REVIEW",
+  "release_effect": "NONE_AUTOMATIC: Urdu A1 remains non-release-ready."
+}

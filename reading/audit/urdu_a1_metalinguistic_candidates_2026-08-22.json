@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "ur",
+  "level": "A1",
+  "audit": "high_recall_metalinguistic_candidate_inventory",
+  "bound_sha256": "9519a085ba046e71cafcc55a0a98f4d5517f2ec86d138f664727cac2d753d892",
+  "candidate_count": 7,
+  "by_unit": {
+    "1": 2,
+    "2": 2,
+    "3": 2,
+    "4": 1
+  },
+  "by_type": {
+    "literal_detail": 1,
+    "cause_effect": 2,
+    "contrast": 1,
+    "grammar_function": 1,
+    "vocabulary_in_context": 2
+  },
+  "status": "CANDIDATE_INVENTORY_NEEDS_SEMANTIC_ADJUDICATION",
+  "candidates": [
+    {
+      "passage_id": "ur-a1-u01-p04",
+      "unit": 1,
+      "sequence": 4,
+      "question_id": "q3",
+      "type": "literal_detail",
+      "prompt": "«اگر» کیا بتاتا ہے؟ الف) ایک شرط اور نتیجہ ب) صرف ایک جگہ ج) صرف ایک شخص",
+      "target_ids": [],
+      "answer": "الف) ایک شرط اور نتیجہ۔",
+      "explanation": "",
+      "reasons": [
+        "explicit_term"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u01-p04",
+      "unit": 1,
+      "sequence": 4,
+      "question_id": "q6",
+      "type": "cause_effect",
+      "prompt": "«اگر دروازہ کھلا ہو تو ہم اندر جائیں گے» میں اندر جانے کی شرط کیا ہے؟",
+      "target_ids": [
+        "ur-rank-0058"
+      ],
+      "answer": "دروازہ کھلا ہونا۔",
+      "explanation": "یہ سوال «اگر» کے استعمال کو عملی شرط کے طور پر جانچتا ہے، نحوی اصطلاح نہیں مانگتا۔",
+      "reasons": [
+        "explicit_term"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u02-p01",
+      "unit": 2,
+      "sequence": 7,
+      "question_id": "q8",
+      "type": "contrast",
+      "prompt": "کون سا جملہ بتاتا ہے کہ کوئی چیز باقی نہیں رہنی چاہیے: «کچھ نہ رہ جائے» یا «کچھ رہ جائے»؟",
+      "target_ids": [],
+      "answer": "«کچھ نہ رہ جائے»۔",
+      "explanation": "«نہ» یہاں رہ جانے کی نفی کرتا ہے۔",
+      "reasons": [
+        "explicit_term"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u02-p05",
+      "unit": 2,
+      "sequence": 11,
+      "question_id": "q8",
+      "type": "cause_effect",
+      "prompt": "عائشہ اگلے ہفتے بھی کب گروپ میں شامل ہوگی؟",
+      "target_ids": [
+        "ur-rank-0100"
+      ],
+      "answer": "اگر اس کے پاس وقت ہوا۔",
+      "explanation": "آخری جملوں میں یہ شرط دی گئی ہے۔",
+      "reasons": [
+        "explicit_term"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u03-p01",
+      "unit": 3,
+      "sequence": 13,
+      "question_id": "q7",
+      "type": "grammar_function",
+      "prompt": "«کیونکہ» کس قسم کا تعلق بناتا ہے؟",
+      "target_ids": [
+        "ur-rank-0115"
+      ],
+      "answer": "سبب یا وجہ جوڑنے والا حرفِ ربط۔",
+      "explanation": "«کیونکہ» دو حصوں میں وجہ کا تعلق بناتا ہے۔",
+      "reasons": [
+        "category_question",
+        "explicit_term",
+        "formal_task_type"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u03-p06",
+      "unit": 3,
+      "sequence": 18,
+      "question_id": "q6",
+      "type": "vocabulary_in_context",
+      "prompt": "«اپنا کام» میں «اپنا» کیا تعلق دکھاتا ہے؟",
+      "target_ids": [
+        "ur-rank-0167"
+      ],
+      "answer": "اپنے ہی کام یا اپنی ذمہ داری سے متعلق۔",
+      "explanation": "«اپنا» خود سے متعلق چیز یا کام دکھاتا ہے۔",
+      "reasons": [
+        "relation_wording"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u04-p04",
+      "unit": 4,
+      "sequence": 22,
+      "question_id": "q3",
+      "type": "vocabulary_in_context",
+      "prompt": "«میرا نام حارث ہے» میں «میرا» کیا تعلق دکھاتا ہے؟",
+      "target_ids": [
+        "ur-rank-0216"
+      ],
+      "answer": "اپنی ملکیت یا اپنے بارے میں۔",
+      "explanation": "حارث اور عائشہ اپنے نام بتاتے ہیں۔",
+      "reasons": [
+        "relation_wording"
+      ]
+    }
+  ],
+  "limitations": "High-recall inventory only. Vocabulary-in-context questions may legitimately use words such as تعلق, شرط, or نفی; candidate status is not a defect verdict. Each item requires semantic/pedagogical adjudication before repair.",
+  "release_effect": "NONE_AUTOMATIC"
+}

@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "ur",
+  "level": "A1",
+  "units": [
+    7,
+    8
+  ],
+  "review_kind": "internal_semantic_naturalness_answer_pedagogy_review_and_bounded_repair",
+  "before_sha256": "9203d429d7cd84a75d464a7ad2f063f569801741da25dce2feda4a96fb66d662",
+  "after_sha256": "636f8b2f18b1948ae4155cb605b8ebd989d412f73d0bf82f8269378d4046cc2f",
+  "records_reviewed": 12,
+  "questions_reviewed": 120,
+  "answers_reviewed": 120,
+  "confirmed_repairs": 22,
+  "repairs": [
+    {
+      "passage_id": "ur-a1-u07-p02",
+      "field": "text",
+      "before": "عائشہ گھڑی پر وقت دیکھتی ہے اور سمجھتی ہے کہ منٹ چھوٹے وقت کو بتانے میں مدد دیتے ہیں۔",
+      "after": "عائشہ گھڑی پر وقت دیکھتی ہے اور سمجھتی ہے کہ منٹ وقت کی چھوٹی مدت بتاتے ہیں۔",
+      "reason": "Replace machine-like wording about minutes with ordinary Urdu while preserving منٹ."
+    },
+    {
+      "passage_id": "ur-a1-u07-p05",
+      "field": "text",
+      "before": "وہ سمجھتی ہے کہ دوبارہ پڑھنے سے سوال صاف ہوتا ہے اور تقریباً وقت جاننے سے کام منظم رہتا ہے۔",
+      "after": "وہ سمجھتی ہے کہ دوبارہ پڑھنے سے سوال صاف ہوتا ہے اور تقریباً کتنا وقت چاہیے، یہ جاننے سے کام منظم رہتا ہے۔",
+      "reason": "Clarify the role of an approximate duration while preserving دوبارہ and تقریباً."
+    },
+    {
+      "passage_id": "ur-a1-u08-p02",
+      "field": "text",
+      "before": "گفتگو پہلے اسکول کے بارے میں ہوتی ہے، پھر دونوں خاندان کی خبر پوچھتی ہیں۔",
+      "after": "گفتگو پہلے اسکول کے بارے میں ہوتی ہے، پھر دونوں ایک دوسرے کے خاندان کا حال پوچھتی ہیں۔",
+      "reason": "Replace an unnatural family-news construction with idiomatic mutual inquiry."
+    },
+    {
+      "passage_id": "ur-a1-u08-p04",
+      "field": "text",
+      "before": "وہ سمجھتی ہے کہ بجلی کے وقت اور بغیر بجلی کے گھر کے کام کچھ مختلف ہوتے ہیں۔",
+      "after": "وہ سمجھتی ہے کہ بجلی ہونے اور نہ ہونے کی صورت میں گھر کے کام کچھ مختلف ہوتے ہیں۔",
+      "reason": "Replace awkward “at electricity time / without electricity” phrasing with a natural condition contrast."
+    },
+    {
+      "passage_id": "ur-a1-u08-p06",
+      "field": "text",
+      "before": "پھر وہ بجلی جانے والی شام کا ذکر کرتی ہے، جب ہر چیز اپنی جگہ رکھنا ضروری تھا۔",
+      "after": "پھر وہ بجلی جانے والی شام کا ذکر کرتی ہے، جب ہر چیز کو اپنی جگہ رکھنا ضروری تھا۔",
+      "reason": "Add the required object marker کو."
+    },
+    {
+      "passage_id": "ur-a1-u07-p01",
+      "question_id": "q4",
+      "field": "answer",
+      "before": "سات دن کے عرصے یا اس کی حالت کو بتاتا ہے۔",
+      "after": "سات دن کے عرصے سے۔",
+      "reason": "Replace morphology-like wording with the concrete duration.",
+      "target_ids": [
+        "ur-rank-0488"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u07-p01",
+      "question_id": "q7",
+      "field": "prompt",
+      "before": "«ہفتے» کس وقت کی اکائی سے متعلق ہے؟",
+      "after": "ایک ہفتے میں کتنے دن ہوتے ہیں؟",
+      "reason": "Replace word-form metalanguage with a concrete A1 time question.",
+      "target_ids": [
+        "ur-rank-0488"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u07-p01",
+      "question_id": "q7",
+      "field": "answer",
+      "before": "سات دن کے عرصے کی حالت؛ ہفتہ کے بعد استعمال ہونے والی صورت۔",
+      "after": "سات دن۔",
+      "reason": "Remove morphological-form explanation from learner-facing answer.",
+      "target_ids": [
+        "ur-rank-0488"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u07-p01",
+      "question_id": "q7",
+      "field": "explanation",
+      "before": "یہ «ہفتے» کا بنیادی استعمال ہے۔",
+      "after": "ایک ہفتے میں سات دن ہوتے ہیں۔",
+      "reason": "Give direct learner-facing support.",
+      "target_ids": [
+        "ur-rank-0488"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u07-p02",
+      "question_id": "q3",
+      "field": "prompt",
+      "before": "متن میں «بجے» کیا بتاتا ہے؟",
+      "after": "«گیارہ بجے وقفہ ہوتا ہے» میں وقفہ کب ہوتا ہے؟",
+      "reason": "Replace abstract function question with clock-time comprehension.",
+      "target_ids": [
+        "ur-rank-0615"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u07-p02",
+      "question_id": "q3",
+      "field": "answer",
+      "before": "گھڑی کے مقررہ گھنٹے کو بتانے والا وقت کا لفظ۔",
+      "after": "گیارہ بجے۔",
+      "reason": "Answer the concrete time question.",
+      "target_ids": [
+        "ur-rank-0615"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u07-p02",
+      "question_id": "q3",
+      "field": "explanation",
+      "before": "متن میں نو، گیارہ اور بارہ بجے کے اوقات آئے ہیں۔",
+      "after": "جملے میں وقفے کا وقت گیارہ بجے ہے۔",
+      "reason": "Ground the answer in the sentence.",
+      "target_ids": [
+        "ur-rank-0615"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u07-p02",
+      "question_id": "q6",
+      "field": "prompt",
+      "before": "«بجے» کا بنیادی استعمال کیا ہے؟",
+      "after": "گھڑی بارہ دکھائے تو وقت کیسے کہیں گے؟",
+      "reason": "Replace terminology with productive A1 use.",
+      "target_ids": [
+        "ur-rank-0615"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u07-p02",
+      "question_id": "q6",
+      "field": "answer",
+      "before": "گھڑی کے گھنٹے کے ساتھ استعمال ہونے والا لفظ۔",
+      "after": "بارہ بجے۔",
+      "reason": "Give the usable time expression.",
+      "target_ids": [
+        "ur-rank-0615"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u07-p02",
+      "question_id": "q6",
+      "field": "explanation",
+      "before": "یہ «بجے» کا بنیادی استعمال ہے۔",
+      "after": "گھڑی بارہ دکھائے تو ہم «بارہ بجے» کہتے ہیں۔",
+      "reason": "Teach through an example rather than terminology.",
+      "target_ids": [
+        "ur-rank-0615"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u07-p05",
+      "question_id": "q4",
+      "field": "prompt",
+      "before": "متن میں «تقریباً» کس طرح کی مقدار بتاتا ہے؟",
+      "after": "«تقریباً ایک منٹ» کا کیا مطلب ہے؟",
+      "reason": "Replace abstract quantity-category wording with direct meaning.",
+      "target_ids": [
+        "ur-rank-0504"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u07-p05",
+      "question_id": "q4",
+      "field": "answer",
+      "before": "بالکل نہیں بلکہ اندازاً مقدار یا وقت بتانا۔",
+      "after": "ایک منٹ کے قریب، ضروری نہیں بالکل ایک منٹ۔",
+      "reason": "Clarify approximate duration in learner-facing language.",
+      "target_ids": [
+        "ur-rank-0504"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u07-p05",
+      "question_id": "q4",
+      "field": "explanation",
+      "before": "متن میں تقریباً ایک، پانچ اور چار منٹ کے اوقات آئے ہیں۔",
+      "after": "«تقریباً» بتاتا ہے کہ وقت اندازاً ایک منٹ ہے۔",
+      "reason": "Ground the approximation directly.",
+      "target_ids": [
+        "ur-rank-0504"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u07-p06",
+      "question_id": "q6",
+      "field": "prompt",
+      "before": "سوال صاف نہ ہو تو عائشہ دوبارہ اور تقریباً کو کیسے استعمال کرتی ہے؟",
+      "after": "سوال صاف نہ ہو تو عائشہ کیا کرتی ہے اور وقت کا اندازہ کیسے لگاتی ہے؟",
+      "reason": "Replace word-name manipulation with comprehension of the strategy.",
+      "target_ids": [
+        "ur-rank-0487",
+        "ur-rank-0504"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u07-p06",
+      "question_id": "q6",
+      "field": "answer",
+      "before": "وہ سوال دوبارہ پڑھتی ہے اور تقریباً مطلوب وقت دیکھتی ہے۔",
+      "after": "وہ سوال دوبارہ پڑھتی ہے اور دیکھتی ہے کہ تقریباً کتنا وقت چاہیے۔",
+      "reason": "Use natural, supported wording.",
+      "target_ids": [
+        "ur-rank-0487",
+        "ur-rank-0504"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u08-p06",
+      "question_id": "q5",
+      "field": "prompt",
+      "before": "جواب لکھتے وقت عائشہ کو دوسرے قلم کی ضرورت کیوں یاد آتی ہے؟",
+      "after": "جواب لکھتے وقت عائشہ کو قلم کے ساتھ کیا کرنا پڑا؟",
+      "reason": "The checkpoint text says what happened, not why; ask the supported question.",
+      "target_ids": [
+        "ur-rank-0443"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u08-p06",
+      "question_id": "q6",
+      "field": "answer",
+      "before": "بجلی چلی گئی تھی اور ہر چیز اپنی جگہ رکھنا ضروری تھا۔",
+      "after": "بجلی چلی گئی تھی اور ہر چیز کو اپنی جگہ رکھنا ضروری تھا۔",
+      "reason": "Correct the missing object marker in the answer.",
+      "target_ids": [
+        "ur-rank-0456",
+        "ur-rank-0402"
+      ]
+    }
+  ],
+  "retained_after_review": {
+    "note": "All other Unit07-08 learner-facing fields were retained after internal contextual review. No native-speaker, independent-model, or educator approval is claimed."
+  },
+  "verification": {
+    "qa_linkage_valid": true,
+    "question_target_locality_valid": true,
+    "review_target_visibility_preserved": true,
+    "word_count_metadata_current": true,
+    "duplicate_prompts_zero": true,
+    "formal_task_types_zero": true,
+    "learner_facing_roman_script_zero": true,
+    "internal_review_explanation_leakage_zero": true
+  },
+  "limitations": [
+    "Internal model review only.",
+    "Native Urdu naturalness/orthography, independent model-family review, educator/CEFR A1 review, and blind post-repair review remain pending."
+  ],
+  "status": "PASS_INTERNAL_UNITS07_08_BOUNDED_REPAIR_NEEDS_INDEPENDENT_REVIEW",
+  "release_effect": "NONE_AUTOMATIC: Urdu A1 remains non-release-ready."
+}

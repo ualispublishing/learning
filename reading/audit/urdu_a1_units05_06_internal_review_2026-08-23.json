@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "ur",
+  "level": "A1",
+  "units": [
+    5,
+    6
+  ],
+  "review_kind": "internal_semantic_naturalness_answer_pedagogy_review_and_bounded_repair",
+  "before_sha256": "18bce53a0aac274b59cf77e5aaa41dec294b41c50cf458e75a64b1e4df39396c",
+  "after_sha256": "9203d429d7cd84a75d464a7ad2f063f569801741da25dce2feda4a96fb66d662",
+  "records_reviewed": 12,
+  "questions_reviewed": 120,
+  "answers_reviewed": 120,
+  "confirmed_repairs": 12,
+  "repairs": [
+    {
+      "passage_id": "ur-a1-u05-p01",
+      "field": "text",
+      "before": "ایک نیا شخص کلاس کے دروازے پر آتا ہے اور استاد سے اپنا نام بتاتا ہے۔",
+      "after": "ایک نیا شخص کلاس کے دروازے پر آتا ہے اور استاد کو اپنا نام بتاتا ہے۔",
+      "reason": "Correct the recipient case marker: one tells a name to someone (کو), not “from” someone (سے)."
+    },
+    {
+      "passage_id": "ur-a1-u05-p02",
+      "field": "text",
+      "before": "استاد کہتے ہیں کہ اگلے دن یہی کہانی دوبارہ یاد کریں گے۔",
+      "after": "استاد کہتے ہیں کہ اگلے دن اسی کہانی کی اہم باتیں یاد کریں گے۔",
+      "reason": "Replace stiff repetition wording with natural recall phrasing while preserving یاد."
+    },
+    {
+      "passage_id": "ur-a1-u05-p04",
+      "field": "text",
+      "before": "وہ سوال دوبارہ پڑھتی ہے اور سوچتی ہے کہ اسے چھوٹے حصوں میں حل کرنا ممکن ہے۔",
+      "after": "وہ سوال دوبارہ پڑھتی ہے اور سوچتی ہے کہ اسے چھوٹے حصوں میں بانٹ کر حل کرنا ممکن ہے۔",
+      "reason": "Make the problem-solving action explicit and idiomatic: divide into smaller parts, then solve."
+    },
+    {
+      "passage_id": "ur-a1-u05-p06",
+      "field": "text",
+      "before": "عائشہ اب اسکول کے دن کو آسان ترتیب میں سمجھتی ہے۔",
+      "after": "عائشہ اب اسکول کے دن کے کاموں کی ترتیب اچھی طرح سمجھتی ہے۔",
+      "reason": "Replace an unnatural “understands the day in an easy order” construction with ordinary Urdu."
+    },
+    {
+      "passage_id": "ur-a1-u06-p02",
+      "field": "text",
+      "before": "یہ اس سال اس کا پہلا بس کا سفر ہے۔",
+      "after": "یہ اس سال بس میں اس کا پہلا سفر ہے۔",
+      "reason": "Use natural Urdu word order for “her first trip by bus”."
+    },
+    {
+      "passage_id": "ur-a1-u06-p04",
+      "field": "text",
+      "before": "مریم فون ہاتھ میں رکھتی ہے اور ہر قدم سنتی جاتی ہے۔",
+      "after": "مریم فون ہاتھ میں رکھتی ہے اور ہر ہدایت سنتی جاتی ہے۔",
+      "reason": "Directions are listened to as instructions, not literally as steps."
+    },
+    {
+      "passage_id": "ur-a1-u05-p04",
+      "question_id": "q2",
+      "field": "answer",
+      "before": "وہ سوال کو چھوٹے حصوں میں حل کرنے کا سوچتی ہے۔",
+      "after": "وہ سوال کو چھوٹے حصوں میں بانٹ کر حل کرنے کا سوچتی ہے۔",
+      "reason": "Align the answer with the clarified problem-solving action.",
+      "target_ids": [
+        "ur-rank-0326"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u05-p06",
+      "question_id": "q1",
+      "field": "answer",
+      "before": "عائشہ کلاس کے کام، پڑھنے، جگہوں اور دن کے اختتام کو منظم طریقے سے سمجھتی ہے۔",
+      "after": "عائشہ کلاس کے کام، پڑھنے، جگہوں اور دن کے اختتام کی ترتیب سمجھتی ہے۔",
+      "reason": "Replace machine-like gist wording with a direct, supported summary.",
+      "target_ids": []
+    },
+    {
+      "passage_id": "ur-a1-u06-p02",
+      "question_id": "q10",
+      "field": "prompt",
+      "before": "خالی جگہ پُر کریں: یہ میرا _____ بس کا سفر ہے۔",
+      "after": "خالی جگہ پُر کریں: بس میں یہ میرا _____ سفر ہے۔",
+      "reason": "Use natural Urdu word order while preserving the پہلا and سفر targets.",
+      "target_ids": [
+        "ur-rank-0377",
+        "ur-rank-0386"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u06-p06",
+      "question_id": "q2",
+      "field": "prompt",
+      "before": "گھر سے نکلتے وقت عائشہ راہ اور آگے کی سمت کے ساتھ کیا کرتی ہے؟",
+      "after": "گھر سے نکلتے وقت عائشہ راہ کیسے چنتی ہے اور پھر کیا کرتی ہے؟",
+      "reason": "Replace awkward “with the route and forward direction” wording with direct A1 comprehension.",
+      "target_ids": [
+        "ur-rank-0381",
+        "ur-rank-0361"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u06-p06",
+      "question_id": "q3",
+      "field": "prompt",
+      "before": "صبح اور شام عائشہ کی واپسی کی ترتیب کیا ہے؟",
+      "after": "صبح اور شام عائشہ کے آنے جانے کی ترتیب کیا ہے؟",
+      "reason": "Correct the semantic mismatch: morning is departure and evening is return, not two returns.",
+      "target_ids": [
+        "ur-rank-0447",
+        "ur-rank-0433"
+      ]
+    },
+    {
+      "passage_id": "ur-a1-u06-p06",
+      "question_id": "q4",
+      "field": "prompt",
+      "before": "نئی جگہ کے پہلے سفر میں عائشہ کس کے ساتھ جانا بہتر سمجھتی ہے؟",
+      "after": "نئی جگہ کا پہلا سفر کس کے ساتھ کرنا عائشہ کو آسان لگتا ہے؟",
+      "reason": "Remove unsupported normative “better” wording and ask exactly what the passage states.",
+      "target_ids": [
+        "ur-rank-0377",
+        "ur-rank-0386"
+      ]
+    }
+  ],
+  "retained_after_review": {
+    "note": "All other Unit05-06 passage prose, prompts, answers, and explanations were retained after internal contextual review; this is not native-speaker or independent approval."
+  },
+  "verification": {
+    "qa_linkage_valid": true,
+    "question_target_locality_valid": true,
+    "review_target_visibility_preserved": true,
+    "word_count_metadata_current": true,
+    "duplicate_prompts_zero": true,
+    "formal_task_types_zero": true,
+    "learner_facing_roman_script_zero": true,
+    "internal_review_explanation_leakage_zero": true
+  },
+  "limitations": [
+    "Internal model review only; native Urdu naturalness and orthography remain pending.",
+    "Independent model-family and educator/CEFR A1 review remain pending.",
+    "Blind post-repair review remains pending."
+  ],
+  "independent_review": {
+    "native_urdu_naturalness_orthography": "PENDING",
+    "independent_model_family": "PENDING",
+    "educator_cefr_a1": "PENDING",
+    "blind_postrepair": "PENDING"
+  },
+  "status": "PASS_INTERNAL_UNITS05_06_BOUNDED_REPAIR_NEEDS_INDEPENDENT_REVIEW",
+  "release_effect": "NONE_AUTOMATIC: Urdu A1 remains non-release-ready."
+}
