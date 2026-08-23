@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "ur",
+  "level": "A1",
+  "units": [
+    3,
+    4
+  ],
+  "review_kind": "internal_semantic_naturalness_answer_pedagogy_review_and_bounded_repair",
+  "before_sha256": "cd6bd2fcd3a312c7d066541f5f82e108c472cea11de8417f0b3c70b896e0512e",
+  "after_sha256": "18bce53a0aac274b59cf77e5aaa41dec294b41c50cf458e75a64b1e4df39396c",
+  "records_reviewed": 12,
+  "questions_reviewed": 120,
+  "answers_reviewed": 120,
+  "confirmed_repairs": 5,
+  "repairs": [
+    {
+      "passage_id": "ur-a1-u03-p02",
+      "field": "text",
+      "before": "اب ضرورت کی تمام چیزیں ٹوکری میں ہیں۔",
+      "after": "اب ضرورت کی سب چیزیں ٹوکری میں ہیں۔",
+      "reason": "Replace a stiff calque-like noun phrase with ordinary Urdu while preserving ضرورت."
+    },
+    {
+      "passage_id": "ur-a1-u03-p03",
+      "field": "text",
+      "before": "دونوں ایک چھوٹے کھانے کے گروپ میں شامل دوستوں کے لیے پھل لینے کا سوچتی ہیں۔",
+      "after": "دونوں اپنے دوستوں کے چھوٹے گروپ کے لیے پھل لینے کا سوچتی ہیں، جس میں وہ خود بھی شامل ہیں۔",
+      "reason": "Replace an unclear “food group” construction with a natural small-group-of-friends reading while preserving شامل."
+    },
+    {
+      "passage_id": "ur-a1-u03-p06",
+      "field": "text",
+      "before": "اس طرح وہ کھانے، خریداری اور گھر کے کام کو آسان ترتیب میں رکھتی ہے اور دوسروں کی مدد بھی کرتی ہے۔",
+      "after": "اس طرح وہ کھانے، خریداری اور گھر کے کام کو آسانی سے ترتیب دیتی ہے اور دوسروں کی مدد بھی کرتی ہے۔",
+      "reason": "Replace unnatural “keep in an easy order” phrasing with idiomatic ترتیب دینا."
+    },
+    {
+      "passage_id": "ur-a1-u04-p06",
+      "field": "text",
+      "before": "خاندان کے چارٹ میں وہ ہر تعلق دیکھتی ہے اور دوسری شاخ کے نام بھی پڑھتی ہے۔",
+      "after": "خاندان کے چارٹ میں وہ ہر تعلق سمجھتی ہے اور دوسری شاخ کے نام بھی پڑھتی ہے۔",
+      "reason": "Use سمجھتی ہے for understanding relationships in a chart while preserving تعلق and دوسری review forms."
+    },
+    {
+      "passage_id": "ur-a1-u04-p06",
+      "field": "answer:a6",
+      "before": "وہ خاندان کے چارٹ میں ہر تعلق دیکھتی ہے۔",
+      "after": "وہ خاندان کے چارٹ میں ہر تعلق سمجھتی ہے۔",
+      "reason": "Align checkpoint answer exactly with repaired natural source wording."
+    }
+  ],
+  "retained_after_review": {
+    "passages_without_repairs": 8,
+    "note": "All other Unit03-04 passage prose, prompts, answers, and explanations were retained after internal contextual review; no claim of native-speaker or independent review."
+  },
+  "verification": {
+    "qa_linkage_valid": true,
+    "question_target_locality_valid": true,
+    "review_target_running_text_visibility_preserved": true,
+    "word_count_metadata_current": true,
+    "learner_facing_roman_script_zero": true,
+    "internal_review_explanation_leakage_zero": true
+  },
+  "limitations": [
+    "This is an internal model review, not native Urdu certification.",
+    "Highly idiomatic regional/style preferences remain for independent native-professional review.",
+    "Educator/CEFR A1 suitability remains independently pending even where internal pedagogy review found no blocker."
+  ],
+  "independent_review": {
+    "native_urdu_naturalness_orthography": "PENDING",
+    "independent_model_family": "PENDING",
+    "educator_cefr_a1": "PENDING",
+    "blind_postrepair": "PENDING"
+  },
+  "status": "PASS_INTERNAL_UNITS03_04_BOUNDED_REPAIR_NEEDS_INDEPENDENT_REVIEW",
+  "release_effect": "NONE_AUTOMATIC: Urdu A1 remains non-release-ready."
+}
