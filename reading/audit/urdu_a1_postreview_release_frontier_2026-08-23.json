@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "ur",
+  "level": "A1",
+  "evidence_kind": "post_internal_review_release_frontier",
+  "bound_sha256": "0bdc43cf8e27fbbdea329d16a5832636d42079a9fabfae3017f78ed401ebb4a8",
+  "counts": {
+    "passages": 60,
+    "questions": 600,
+    "answers": 600,
+    "internal_review_passages": 60
+  },
+  "deterministic_audit": {
+    "status": "PASS_DETERMINISTIC_FULL_POSTREVIEW_AUDIT_NEEDS_INDEPENDENT_REVIEW",
+    "artifact": "reading/audit/urdu_a1_final_deterministic_audit_2026-08-22.json",
+    "violations": 0
+  },
+  "internal_review": {
+    "status": "COMPLETE_60_OF_60_PASSAGES_INTERNAL_ONLY",
+    "artifacts": [
+      "reading/audit/urdu_a1_units01_02_internal_review_2026-08-22.json",
+      "reading/audit/urdu_a1_units03_04_internal_review_2026-08-23.json",
+      "reading/audit/urdu_a1_units05_06_internal_review_2026-08-23.json",
+      "reading/audit/urdu_a1_units07_08_internal_review_2026-08-23.json",
+      "reading/audit/urdu_a1_units09_10_internal_review_2026-08-23.json"
+    ],
+    "limitations": "This is internal model review and is not native-speaker, independent-model, educator, or blind post-repair approval."
+  },
+  "hygiene": {
+    "learner_facing_roman_script": 0,
+    "internal_review_explanation_leakage": 0,
+    "generic_units09_10_placeholder_explanations": 0,
+    "units09_10_placeholder_policy": "120 exact generic placeholders were removed rather than treated as evidence; explanation enrichment remains pending."
+  },
+  "target_integrity": {
+    "fresh_lexical_targets": 100,
+    "exact_visibility_and_exposure_counts": "PASS",
+    "same_unit_premature_future_target_exposure": 0,
+    "p06_cumulative_review_policy": "PASS",
+    "metadata_reconciliation": "reading/audit/urdu_a1_postreview_exposure_metadata_repair_2026-08-23.json"
+  },
+  "release_state": "REOPEN_REQUIRED",
+  "remaining_mandatory_gates": {
+    "explanation_enrichment": "PENDING_INDEPENDENT",
+    "native_urdu_naturalness_and_orthography": "PENDING",
+    "independent_model_family": "PENDING",
+    "educator_cefr_a1": "PENDING",
+    "blind_postrepair_review": "PENDING"
+  },
+  "release_effect": "NONE_AUTOMATIC: Urdu A1 remains non-release-ready and PR #46 must remain draft/unmerged until the required independent gates are satisfied against the then-current hash."
+}
