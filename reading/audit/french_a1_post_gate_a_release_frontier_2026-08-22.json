@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "date": "2026-08-22",
   "language": "fr",
   "level": "A1",
@@ -26,9 +26,9 @@
     "reading/audit/french_a1_units06_10_final_bounded_repairs_2026-08-22.json"
   ],
   "release_state": "REOPEN_REQUIRED",
-  "next_mandatory_frontier": "reconcile internal field-level Gate B/C/D evidence and complete remaining independent machine/model/native/educator/blind gates",
+  "next_mandatory_frontier": "reconcile internal field-level Gate B/C/D evidence; complete Antidote/DeepL and NBSP serialization-policy work; then complete independent model-family, native-professional, educator/CEFR, and blind post-repair gates",
   "independent_gates": {
-    "machine_tools": "PARTIAL_LANGUAGETOOL_COMPLETE_ANTIDOTE_DEEPL_PENDING",
+    "machine_tools": "PARTIAL_LANGUAGETOOL_COMPLETE_GRAMMALECTE_LINGUISTIC_ADJUDICATED_ANTIDOTE_DEEPL_AND_NBSP_POLICY_PENDING",
     "model_family": "PENDING",
     "native_professional": "PENDING",
     "educator_cefr": "PENDING",
@@ -41,5 +41,18 @@
     "scan": "reading/audit/french_a1_languagetool_postrepair_fullscan_2026-08-22.json",
     "adjudication": "reading/audit/french_a1_languagetool_postrepair_adjudication_2026-08-22.json",
     "open_accepted_defects": 0
+  },
+  "grammalecte": {
+    "status": "PASS_LINGUISTIC_ADJUDICATION_NO_CORPUS_CHANGE_TYPOGRAPHY_POLICY_PENDING",
+    "scan": "reading/audit/french_a1_grammalecte_fullscan_2026-08-22.json",
+    "triage": "reading/audit/french_a1_grammalecte_triage_2026-08-22.json",
+    "adjudication": "reading/audit/french_a1_grammalecte_adjudication_2026-08-22.json",
+    "raw_findings": 2040,
+    "typography_nbsp_policy_findings": 1992,
+    "verified_intentional_grammar_distractor_findings": 38,
+    "mechanical_level_label_false_positives": 3,
+    "contextual_findings_adjudicated": 7,
+    "linguistic_corpus_changes_required": 0,
+    "note": "NBSP findings are retained separately as a typography/serialization policy issue and are not treated as grammar, lexical, semantic, or pedagogical defects."
   }
 }
