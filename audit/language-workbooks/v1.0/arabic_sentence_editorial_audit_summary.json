@@ -1,0 +1,55 @@
+{
+  "artifact": "Arabic sentence bank editorial audit summary",
+  "workbook_release": "v1.0",
+  "source_path": "completed/languages/workbooks/v1.0/arabic/arabic_sentence_bank_1000.csv",
+  "source_zip_sha256": "b72f70d3b724c3060da55f74ea1753da249d8eb38a6dbdea3dcc28798d077914",
+  "target_register": "Modern Standard Arabic (MSA)",
+  "audit_completed_utc_date": "2026-08-23",
+  "first_pass": {
+    "rows_total": 1000,
+    "rows_screened": 1000,
+    "coverage_percent": 100.0,
+    "result": "BLOCKING_DEFECTS_FOUND"
+  },
+  "batch_ledgers": [
+    "arabic_sentence_editorial_audit_001_250.json",
+    "arabic_sentence_editorial_audit_251_500.json",
+    "arabic_sentence_editorial_audit_501_750.json",
+    "arabic_sentence_editorial_audit_751_1000.json"
+  ],
+  "critical_examples": [
+    {"rank": 27, "issue": "ترون means 'you see' while English says 'What do you think?'"},
+    {"rank": 100, "issue": "Target asks 'Do you need help?' while English says 'May I help you?'"},
+    {"rank": 102, "issue": "Target lacks the negation in English 'Shouldn't you go home?'"},
+    {"rank": 227, "issue": "الغذاء means food/nourishment; English requires lunch (الغداء)."},
+    {"rank": 288, "issue": "الفاتورة is bill/invoice; English says receipt."},
+    {"rank": 319, "issue": "تجاهل means ignore while English says fail to notice."},
+    {"rank": 363, "issue": "الصبيان means boys while English says babies."},
+    {"rank": 416, "issue": "Target expresses ability to eat, not financial affordability."},
+    {"rank": 419, "issue": "Target says crab while English says carp."},
+    {"rank": 543, "issue": "Target says look at while English says look for."},
+    {"rank": 544, "issue": "Target says look at while English says look for."},
+    {"rank": 598, "issue": "Target asks where speaker sewed the suit; English asks where they had it made."},
+    {"rank": 654, "issue": "Arabic is first-person singular 'I can'; English is first-person plural 'we can'."},
+    {"rank": 659, "issue": "Target asks why speaker cannot leave their room; English asks why they cannot have their own room."},
+    {"rank": 674, "issue": "Target says the person did not want to come; English says the person would never come."},
+    {"rank": 718, "issue": "Target asks about degree/certificate; English asks about college major."},
+    {"rank": 723, "issue": "ظهرًا is noon while English says afternoon."},
+    {"rank": 755, "issue": "Target says how much the speaker worried; English says how worried the other person made the speaker."},
+    {"rank": 892, "issue": "Arabic modality does not correctly express English 'shouldn't'."},
+    {"rank": 898, "issue": "Target says what I want to do; English says what I want you to do."},
+    {"rank": 911, "issue": "Arabic is a yes/no habitual question; English asks frequency ('How often')."},
+    {"rank": 965, "issue": "Target construction هل يوجد أين is ungrammatical for the intended meaning."},
+    {"rank": 967, "issue": "Target says became a member; English says registered."},
+    {"rank": 1000, "issue": "Target contains a malformed relative/person construction and requires rewriting."}
+  ],
+  "root_cause": "The current sentence builder validates source licensing, script plausibility, target uniqueness, and length, then ranks primarily from English-side usefulness. It does not validate Arabic grammar, spelling, MSA register, or bilingual semantic equivalence before selecting the top 1000.",
+  "release_status": "BLOCKED",
+  "release_requirements": [
+    "Convert confirmed findings into a source-locked curated correction/replacement layer.",
+    "Second-pass verify every proposed correction and all native-judgment rows.",
+    "Regenerate Arabic sentence CSV and all sentence-bearing PDFs together from the curated layer.",
+    "Run deterministic structural and render regression QA after regeneration.",
+    "Complete independent native/editorial review before any absolute correctness claim."
+  ]
+}
