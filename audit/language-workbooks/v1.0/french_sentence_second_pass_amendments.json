@@ -1,0 +1,63 @@
+{
+  "artifact": "French sentence second-pass audit amendments",
+  "release": "v1.0",
+  "language": "french",
+  "source_zip_sha256": "9e35994767f7307dc1fa9d5efcc36681f3756a1bdaaa02c1381b3eb11461261e",
+  "policy": "These amendments replace first-pass evidence only for the named ranks after second-pass review found the original recommendation incomplete or not yet safe to approve.",
+  "amendments": [
+    {
+      "rank": 573,
+      "reason": "The first-pass recommendation fixed only interrogative hyphenation but left a modal mismatch: French present pouvons versus English could.",
+      "confirmed_findings": [
+        {
+          "rank": 573,
+          "type": "orthography_modality_second_pass",
+          "observed": "Y-a-il quelque chose que nous pouvons faire pour aider ? / Is there anything we could do to help?",
+          "recommended": "Y a-t-il quelque chose que nous pourrions faire pour aider ? / Is there anything we could do to help?",
+          "note": "Y a-t-il fixes the interrogative; pourrions matches the English conditional could."
+        }
+      ],
+      "editorial_flags": []
+    },
+    {
+      "rank": 687,
+      "reason": "The first-pass rewrite did not have enough confidence to settle the nuance of 'even want' and the shift from être sûr to savoir without native editorial judgment.",
+      "confirmed_findings": [],
+      "editorial_flags": [
+        {
+          "issue": "Second-pass review: keep blocked for native/editorial resolution of modality and the emphatic 'even' in 'How do you know I even want that job?'; do not auto-promote the first-pass rewrite."
+        }
+      ]
+    },
+    {
+      "rank": 761,
+      "reason": "The first-pass use of aider avec quelque chose is possible in some usage but not sufficiently settled for the workbook's standard contemporary French register.",
+      "confirmed_findings": [],
+      "editorial_flags": [
+        {
+          "issue": "Second-pass review: native/editorial decision required for the most idiomatic standard rendering of 'Do you have time to help me with something?'; do not auto-promote aider avec quelque chose."
+        }
+      ]
+    },
+    {
+      "rank": 762,
+      "reason": "The first-pass rewrite still sounded formal/calqued and did not clearly resolve the target register.",
+      "confirmed_findings": [],
+      "editorial_flags": [
+        {
+          "issue": "Second-pass review: native/editorial decision required for a contemporary formal rendering of 'Do you have time to help me with something?'; do not auto-promote the first-pass wording."
+        }
+      ]
+    },
+    {
+      "rank": 898,
+      "reason": "The first-pass d'à quel point construction needs native stylistic review before being treated as the preferred learner-facing correction.",
+      "confirmed_findings": [],
+      "editorial_flags": [
+        {
+          "issue": "Second-pass review: retain as NATIVE_REVIEW until the idiomatic standard-French rendering of 'Do you have any idea how stupid I feel now?' is independently settled."
+        }
+      ]
+    }
+  ]
+}
