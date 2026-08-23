@@ -1,0 +1,42 @@
+name: Apply Urdu A1 Wave 2A operational questions
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/apply_urdu_a1_wave2a_operational_questions.py'
+      - '.github/workflows/apply-urdu-a1-wave2a-operational-questions.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Apply A1-operational Q/A repairs
+        run: python reading/tools/apply_urdu_a1_wave2a_operational_questions.py
+      - name: Validate and commit
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[json.loads(x) for x in Path('reading/urdu/a1/passages.jsonl').read_text(encoding='utf-8').splitlines() if x]
+          assert len(rows)==60 and [r['sequence'] for r in rows]==list(range(1,61))
+          r=json.loads(Path('reading/audit/urdu_a1_wave2a_operational_questions_2026-08-23.json').read_text(encoding='utf-8'))
+          assert r['cloze_question_count']==130 and r['all_cloze_structures_reconstructed'] is True
+          assert r['passage_text_changed'] is False and r['lexical_exposure_counts_changed'] is False
+          assert r['quality_promotion'] is False
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/urdu/a1/passages.jsonl reading/audit/urdu_a1_wave2a_operational_questions_2026-08-23.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Make Urdu A1 questions operational [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
