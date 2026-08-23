@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-21",
+  "language": "ar",
+  "level": "A2",
+  "unit": 3,
+  "status": "BOUNDED_REPAIR_APPLIED_NEEDS_INDEPENDENT_REVIEW",
+  "before_sha256": "f27ad06c372d316ca70346e19a10a72645577897de8db676e317d869d8945e1c",
+  "after_sha256": "10d372cb4ab1d36acebb426a4e31adf33c3b74743825bb303cb3389ec392cf76",
+  "inventory_candidates": 9,
+  "confirmed_repairs": 9,
+  "passage_text_changed": false,
+  "notable_sense_corrections": [
+    "أثر: live context is the noun trace/effect, not a past-tense verb."
+  ],
+  "repairs": [
+    {
+      "passage_id": "ar-a2-u03-p01",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «مؤخرا» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "ظرف"
+      },
+      "after": {
+        "prompt": "إذا حدثت الزيارة قبل أيام قليلة، أي جملة أنسب: «زرت المكان مؤخرًا» أم «سأزور المكان مؤخرًا غدًا»؟",
+        "type": "grammar_choice",
+        "answer": "زرت المكان مؤخرًا.",
+        "explanation": "«مؤخرًا» تشير هنا إلى وقت قريب مضى."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u03-p01",
+      "question_id": "q7",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «مجددا» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "ظرف"
+      },
+      "after": {
+        "prompt": "إذا لم أفهم الصورة أول مرة وأعدت النظر إليها، أي جملة أنسب: «نظرت إليها مجددًا» أم «نظرت إليها مؤخرًا فقط»؟",
+        "type": "grammar_choice",
+        "answer": "نظرت إليها مجددًا.",
+        "explanation": "«مجددًا» تعني أن الفعل حدث مرة أخرى."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u03-p02",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «تسجيل» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا حفظ الهاتف ملفًا فيه أصوات، أي عبارة أنسب: «تسجيل صوتي» أم «نظرة صوتية»؟",
+        "type": "grammar_choice",
+        "answer": "تسجيل صوتي.",
+        "explanation": "«تسجيل» هنا اسم لملف أو مادة محفوظة فيها أصوات."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u03-p02",
+      "question_id": "q7",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «نظرة» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا أردت فحص الصور سريعًا، أي عبارة أنسب: «ألقيت نظرة على الصور» أم «ألقيت تسجيلًا على الصور»؟",
+        "type": "grammar_choice",
+        "answer": "ألقيت نظرة على الصور.",
+        "explanation": "«نظرة» هنا اسم لفعل النظر أو الفحص."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u03-p03",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «حفل» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا أشرت إلى مناسبة التخرج، أي جملة أنسب: «هذا حفل تخرج» أم «هذه حفل تخرج»؟",
+        "type": "grammar_choice",
+        "answer": "هذا حفل تخرج.",
+        "explanation": "«حفل» مذكر، لذلك نستخدم معه «هذا»."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u03-p04",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «معظم» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا حضر أغلب الطلاب وغاب بعضهم، أي جملة أدق: «حضر معظم الطلاب» أم «حضر جميع الطلاب»؟",
+        "type": "grammar_choice",
+        "answer": "حضر معظم الطلاب.",
+        "explanation": "«معظم» تدل على الأغلبية ولا تعني الجميع."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u03-p05",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «أثر» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "فعل ماضٍ"
+      },
+      "after": {
+        "prompt": "إذا بقيت علامة جميلة من الرحلة في الذاكرة، أي جملة أنسب: «تركت الرحلة أثرًا جميلًا» أم «تركت الرحلة فاز جميلًا»؟",
+        "type": "grammar_choice",
+        "answer": "تركت الرحلة أثرًا جميلًا.",
+        "explanation": "«أثر» في هذا السياق اسم لعلامة أو تأثير باقٍ، وليس فعلًا ماضيًا."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u03-p05",
+      "question_id": "q7",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «فاز» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "فعل ماضٍ"
+      },
+      "after": {
+        "prompt": "إذا كان الفوز حدث أمس، أي جملة أنسب: «فاز الفريق أمس» أم «يفوز الفريق أمس»؟",
+        "type": "grammar_choice",
+        "answer": "فاز الفريق أمس.",
+        "explanation": "«فاز» تناسب حدثًا وقع في الماضي."
+      }
+    },
+    {
+      "passage_id": "ar-a2-u03-p06",
+      "question_id": "q9",
+      "before": {
+        "prompt": "ماذا تفعل «ثم» ضمنيًا في فكرة تغير رأي نور بعد دليل جديد؟",
+        "type": "grammar_function",
+        "answer": "تربط تصورًا سابقًا بنتيجة أو فهم لاحق تغير بسبب معلومات جديدة."
+      },
+      "after": {
+        "prompt": "إذا كان رأي نور تغير بعد ظهور دليل جديد، أي ربط أنسب: «ظنت شيئًا، ثم تغير رأيها» أم «ظنت شيئًا، لأن تغير رأيها»؟",
+        "type": "grammar_choice",
+        "answer": "ظنت شيئًا، ثم تغير رأيها.",
+        "explanation": "«ثم» تربط حدثًا أو فهمًا أول بما جاء بعده في التسلسل."
+      }
+    }
+  ],
+  "release_effect": "Arabic remains educator-blocked; independent semantic/native/educator review required."
+}
