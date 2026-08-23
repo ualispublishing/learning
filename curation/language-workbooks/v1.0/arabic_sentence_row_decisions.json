@@ -5631,18 +5631,19 @@
     {
       "rank": 319,
       "status": "CORRECT_PENDING_SECOND_PASS",
-      "audit_fingerprint": "3c6704b0606c04c91bf003916dbc973f2dbd9a8c76e2c702b137ff5466e3ddbe",
+      "audit_fingerprint": "c728b5e2363ccf4e07ec468c6a9cfa88784ad4ceabfd4343da7c03f231a4618a",
       "source_target": "كيف أمكنك تجاهل ذلك؟",
       "source_english": "How could you not notice?",
       "source_attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #3096838 (CK) & #6731977 (Safa_Alfulaij)",
       "confirmed_findings": [
         {
-          "ledger": "arabic_sentence_editorial_audit_251_500.json",
+          "ledger": "arabic_sentence_second_pass_amendments.json",
+          "second_pass_amendment": true,
           "rank": 319,
-          "type": "critical_semantic",
+          "type": "critical_semantic_second_pass",
           "observed": "كيف أمكنك تجاهل ذلك؟ / How could you not notice?",
-          "recommended": "كيف لم تلاحظ ذلك؟ / How could you not notice?",
-          "note": "تجاهل means ignore, not fail to notice."
+          "recommended": "كيف أمكنك ألا تلاحظ ذلك؟ / How could you not notice?",
+          "note": "أمكنك preserves 'could', while ألا تلاحظ expresses not noticing rather than deliberately ignoring."
         }
       ],
       "editorial_flags": [],
@@ -6676,18 +6677,19 @@
     {
       "rank": 363,
       "status": "CORRECT_PENDING_SECOND_PASS",
-      "audit_fingerprint": "0f52e16d1d61b63a750b1703e2e2c95e5375c8aa408b2f135f52862d6fef8dc9",
+      "audit_fingerprint": "a26b8630daacb17f13e59b3d7bad00ae9c6ebf2cc368e70e7d42803aa3b2df3b",
       "source_target": "من أين يأتي الصّبيان؟",
       "source_english": "Where do babies come from?",
       "source_attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #1637230 (Spamster) & #7976229 (OsoHombre)",
       "confirmed_findings": [
         {
-          "ledger": "arabic_sentence_editorial_audit_251_500.json",
+          "ledger": "arabic_sentence_second_pass_amendments.json",
+          "second_pass_amendment": true,
           "rank": 363,
-          "type": "critical_lexical",
+          "type": "critical_lexical_second_pass",
           "observed": "من أين يأتي الصّبيان؟ / Where do babies come from?",
-          "recommended": "من أين يأتي الأطفال؟ / Where do babies come from?",
-          "note": "الصبيان means boys, not babies."
+          "recommended": "من أين يأتي الرضّع؟ / Where do babies come from?",
+          "note": "الرضّع specifically denotes infants/babies; الصبيان means boys."
         }
       ],
       "editorial_flags": [],
