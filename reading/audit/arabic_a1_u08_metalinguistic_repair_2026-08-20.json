@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-20",
+  "language": "ar",
+  "level": "A1",
+  "unit": 8,
+  "status": "BOUNDED_REPAIR_APPLIED_NEEDS_INDEPENDENT_REVIEW",
+  "before_sha256": "d6142ee56ec830c4a41cb7244fe99c65824cebbe59ff2e9b8f44d4640c9e228b",
+  "after_sha256": "38866a609882ed768a9aaa568e12fa4bbdefd1fa15b387d69812083c5767e780",
+  "repairs_applied": 6,
+  "passage_text_changed": false,
+  "notable_correction": "ar-a1-u08-p04 q6 previously labeled قلب as a past-tense verb despite noun/body-part usage; replacement tests the intended heart sense operationally.",
+  "repairs": [
+    {
+      "passage_id": "ar-a1-u08-p01",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «يشعر» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "فعل مضارع"
+      },
+      "after": {
+        "prompt": "اختر الجملة الصحيحة مع «مريم»: «مريم تشعر بالتعب» أم «مريم يشعر بالتعب»؟",
+        "type": "grammar_choice",
+        "answer": "مريم تشعر بالتعب.",
+        "explanation": "مع «مريم» نستعمل هنا «تشعر»."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u08-p02",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «حاجة» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا وصفت حاجة بسيطة، أي جملة أنسب: «هذه حاجة بسيطة» أم «هذا حاجة بسيطة»؟",
+        "type": "grammar_choice",
+        "answer": "هذه حاجة بسيطة.",
+        "explanation": "«حاجة» مؤنثة، لذلك نستخدم معها «هذه» هنا."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u08-p03",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «يد» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "اسم"
+      },
+      "after": {
+        "prompt": "إذا أشرت إلى يدك، أي جملة أنسب: «هذه يدي» أم «هذا يدي»؟",
+        "type": "grammar_choice",
+        "answer": "هذه يدي.",
+        "explanation": "«يد» مؤنثة، لذلك نستخدم معها «هذه»."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u08-p04",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «قلب» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "فعل ماضٍ"
+      },
+      "after": {
+        "prompt": "إذا أشرت إلى جزء الجسم داخل صدرك، أي جملة أنسب: «هذا قلبي» أم «هذه قلبي»؟",
+        "type": "grammar_choice",
+        "answer": "هذا قلبي.",
+        "explanation": "«قلب» في هذا السياق اسم لجزء من الجسم، وهو مذكر."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u08-p05",
+      "question_id": "q6",
+      "before": {
+        "prompt": "ما التصنيف النحوي لكلمة «حاول» في هذا الاستعمال؟",
+        "type": "grammar_category",
+        "answer": "فعل ماضٍ"
+      },
+      "after": {
+        "prompt": "اختر الجملة الصحيحة مع «سامر» عن محاولة حدثت أمس: «حاول سامر أن يقرأ» أم «تحاول سامر أن يقرأ»؟",
+        "type": "grammar_choice",
+        "answer": "حاول سامر أن يقرأ.",
+        "explanation": "مع «سامر» ولحدث ماضٍ نستعمل هنا «حاول»."
+      }
+    },
+    {
+      "passage_id": "ar-a1-u08-p06",
+      "question_id": "q9",
+      "before": {
+        "prompt": "ماذا يصف «يشعر»؟",
+        "type": "grammar_function",
+        "answer": "إحساس الشخص بحالة جسدية أو نفسية."
+      },
+      "after": {
+        "prompt": "إذا كان سامر متعبًا، أي جملة أنسب: «سامر يشعر بالتعب» أم «سامر يصل بالتعب»؟",
+        "type": "grammar_choice",
+        "answer": "سامر يشعر بالتعب.",
+        "explanation": "«يشعر» تصف هنا إحساس سامر بحالته."
+      }
+    }
+  ],
+  "release_effect": "Arabic remains educator-blocked; independent semantic/native/educator review required."
+}
