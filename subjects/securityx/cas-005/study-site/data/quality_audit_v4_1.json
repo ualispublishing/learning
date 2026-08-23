@@ -1,0 +1,49 @@
+{
+  "version": "4.1-quality-audit",
+  "audit_date": "2026-08-22",
+  "cards": 1156,
+  "eight_layer_cards": 1156,
+  "blueprint_examples": 618,
+  "blueprint_examples_mapped": 618,
+  "objective_sections": 23,
+  "practice_questions": 100,
+  "practice_answer_distribution": {
+    "D": 25,
+    "C": 25,
+    "A": 25,
+    "B": 25
+  },
+  "practice_domain_distribution": {
+    "Governance, Risk, and Compliance": 20,
+    "Security Architecture": 27,
+    "Security Engineering": 31,
+    "Security Operations": 22
+  },
+  "pbq_drills": 12,
+  "sources": 42,
+  "cards_with_only_scope_source_non_acronym": 26,
+  "direct_answer_length_chars": {
+    "median": 106.0,
+    "p95": 238,
+    "max": 334
+  },
+  "prerequisite_graph": {
+    "invalid_refs": 0,
+    "cycles": 0,
+    "rule": "all prerequisites point to lower-numbered cards; recall cards are roots; application cards depend on paired recall where available"
+  },
+  "quality_changes": [
+    "Rebuilt 247 cyclic prerequisite components (879 cards affected in pre-audit graph) into an acyclic graph.",
+    "Added dedicated objective 2.3 cards for assessments, scanning, and metrics rather than mapping all three to the parent control-effectiveness card.",
+    "Disambiguated duplicate card fronts for encryption, financial, and hardening across different objectives.",
+    "Strengthened Layer 8 with authoritative technical references for non-acronym cards that previously cited only the CompTIA scope document where a suitable source exists.",
+    "Preserved the eight-layer retrieve-first structure and original hard practice/PBQ banks."
+  ],
+  "deterministic_issues": [],
+  "limitations": [
+    "CompTIA states the objective examples are non-exhaustive, so published-blueprint completeness is not a live-item-bank guarantee.",
+    "The protected live exam item bank cannot be legitimately audited.",
+    "No internal review can provide a literal pass guarantee; application skill must be validated with unseen scenario/PBQ practice.",
+    "Standards, product terminology, and regulations can change after the audit date."
+  ]
+}
