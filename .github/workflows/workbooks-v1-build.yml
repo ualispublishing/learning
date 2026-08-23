@@ -6,16 +6,22 @@ on:
     paths:
       - 'in-progress/workbooks/**'
       - 'arabic_top1000.csv'
+      - 'arabic_top3000.csv'
       - 'urdu_top1000.csv'
+      - 'urdu_top3000.csv'
       - 'french_top1000.csv'
+      - 'french_top3000.csv'
       - '.github/workflows/workbooks-v1-build.yml'
   pull_request:
     branches: [main]
     paths:
       - 'in-progress/workbooks/**'
       - 'arabic_top1000.csv'
+      - 'arabic_top3000.csv'
       - 'urdu_top1000.csv'
+      - 'urdu_top3000.csv'
       - 'french_top1000.csv'
+      - 'french_top3000.csv'
       - '.github/workflows/workbooks-v1-build.yml'
   workflow_dispatch:
 
@@ -36,7 +42,7 @@ jobs:
       - name: Install Python dependencies
         run: python -m pip install --upgrade pypdf weasyprint
       - name: Build corpus and PDFs
-        run: python in-progress/workbooks/build_workbooks.py
+        run: python in-progress/workbooks/build_workbooks_v2.py
       - name: Structural PDF QA
         shell: bash
         run: |
