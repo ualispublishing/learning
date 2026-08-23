@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "urdu",
+  "level": "A1",
+  "canonical_path": "reading/urdu/a1/passages.jsonl",
+  "canonical_blob_sha": "16507c293ae39cd44f7f5136dd00c9ef029646a7",
+  "scope": {
+    "sequences": [31, 60],
+    "units": [6, 7, 8, 9, 10],
+    "passages_reviewed": 30
+  },
+  "source_audits": [
+    {
+      "path": "reading/audit/urdu_a1_unit06_semantic_audit_pass1_2026-08-23.json",
+      "findings": 11,
+      "major": 5,
+      "minor": 6
+    },
+    {
+      "path": "reading/audit/urdu_a1_unit07_semantic_audit_pass1_2026-08-23.json",
+      "findings": 15,
+      "major": 6,
+      "minor": 9
+    },
+    {
+      "path": "reading/audit/urdu_a1_unit08_semantic_audit_pass1_2026-08-23.json",
+      "findings": 10,
+      "major": 4,
+      "minor": 6
+    },
+    {
+      "path": "reading/audit/urdu_a1_units09_10_semantic_audit_pass1_2026-08-23.json",
+      "findings": 25,
+      "major": 8,
+      "minor": 17
+    }
+  ],
+  "aggregate": {
+    "findings": 61,
+    "major": 23,
+    "minor": 38,
+    "critical": 0,
+    "passages_with_confirmed_findings": 27,
+    "passages_without_confirmed_findings_in_pass1": [
+      "ur-a1-u07-p03",
+      "ur-a1-u08-p01",
+      "ur-a1-u10-p05"
+    ]
+  },
+  "status": "BOUNDED_REPAIR_REQUIRED",
+  "release_effect": "This manifest bounds a repair set. It does not certify the unaffected passages, does not imply the corpus outside Units 06-10 is clean, and does not authorize quality-field promotion.",
+  "repair_waves": [
+    {
+      "wave": 1,
+      "name": "answer_key_cloze_and_grounding_correctness",
+      "priority": "highest",
+      "finding_ids": [
+        "U6P06-02",
+        "U6P06-03",
+        "U6P06-04",
+        "U6P06-05",
+        "U7P04-02",
+        "U7P06-05",
+        "U8P05-02",
+        "U8P06-01",
+        "U8P06-04",
+        "U9P01-02",
+        "U9P05-01"
+      ],
+      "reason": "These defects directly produce wrong, ungrammatical, ungrounded, or internally mismatched learner answers when the official key is used."
+    },
+    {
+      "wave": 2,
+      "name": "systemic_naturalness_and_a1_operationality",
+      "priority": "high",
+      "finding_ids": [
+        "U6P02-01",
+        "U7P01-02",
+        "U7P02-02",
+        "U7P05-01",
+        "U7P06-03",
+        "U8P02-02",
+        "U9P02-01",
+        "U9P03-01",
+        "U9P06-02",
+        "U10P02-01",
+        "U10P02-02",
+        "U10P06-01"
+      ],
+      "reason": "These expose systemic failure classes: forced target insertion, unnatural collocation, circular/metalinguistic definition, and A1 tasks that test abstract labels instead of practical use."
+    },
+    {
+      "wave": 3,
+      "name": "minor_language_polish_after_structural_repairs",
+      "priority": "normal",
+      "selection_rule": "All remaining minor findings in the four source audits, plus any secondary wording changes required by accepted Wave 1/2 repairs.",
+      "reason": "Minor wording changes must be applied after structural repairs so exposure counts and checkpoint language are recalculated once rather than repeatedly."
+    }
+  ],
+  "systemic_search_classes": [
+    {
+      "id": "SC01",
+      "class": "answer_insertion_failure",
+      "search_goal": "Find every cloze where inserting the keyed answer yields wrong agreement, case, order, or an unnatural sentence."
+    },
+    {
+      "id": "SC02",
+      "class": "reversed_multi_blank_answer_order",
+      "search_goal": "Find cumulative/multi-blank items whose answer list order does not correspond to blank order."
+    },
+    {
+      "id": "SC03",
+      "class": "checkpoint_source_drift",
+      "search_goal": "Compare each Unit checkpoint against its source passages for newly introduced grammatical, semantic, or grounding defects."
+    },
+    {
+      "id": "SC04",
+      "class": "forced_target_collocation",
+      "search_goal": "Find target/review vocabulary inserted into semantically possible but non-idiomatic contexts solely to preserve exposure counts."
+    },
+    {
+      "id": "SC05",
+      "class": "a1_metalinguistic_abstraction",
+      "search_goal": "Find A1 questions asking learners to describe grammatical/semantic functions abstractly when an operational use/context task is available."
+    },
+    {
+      "id": "SC06",
+      "class": "urdu_case_gender_agreement",
+      "search_goal": "Check oblique case, ko-marking, adjective-noun gender agreement, and possessive agreement across learner-facing text and explanations."
+    },
+    {
+      "id": "SC07",
+      "class": "circular_or_incoherent_definition",
+      "search_goal": "Find definitions that repeat the target, define it with the same concept circularly, or contain language harder/less natural than the target itself."
+    }
+  ],
+  "edit_guardrails": [
+    "Do not edit passages outside the exact IDs implicated by a source finding unless a corpus-wide search confirms the same defect class there and a new finding is recorded first.",
+    "Do not change quality.status or any pending review field merely because a repair was applied.",
+    "Preserve target IDs unless the intended sense itself is rejected; if a target is rescheduled, update introduction/review chronology explicitly.",
+    "Any learner-facing text change invalidates exact exposure counts for affected targets and requires recounting.",
+    "Checkpoint repairs must be validated separately from their source passages.",
+    "All keyed clozes must be mechanically reconstructed with their official answers and read as complete sentences during regression testing."
+  ],
+  "required_regression_after_each_wave": [
+    "JSON/schema validity",
+    "exact question-to-answer ID linkage",
+    "question/passage grounding",
+    "mechanical keyed-answer insertion for every cloze",
+    "new target exposure counts",
+    "review target chronology and expected exposure numbers",
+    "lexical coverage audit",
+    "A1 operationality/CEFR audit",
+    "duplicate/repetition and checkpoint known-material checks",
+    "fresh manual adversarial read of every changed passage"
+  ],
+  "next_scope_after_repair_manifest": "Continue semantic pass 1 over Urdu A1 Units 01-05, then run the seven systemic search classes over all 60 A1 passages before any educator-ready claim."
+}
