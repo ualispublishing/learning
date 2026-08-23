@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "urdu",
+  "level": "A1",
+  "scope": {
+    "canonical_path": "reading/urdu/a1/passages.jsonl",
+    "canonical_blob_sha": "16507c293ae39cd44f7f5136dd00c9ef029646a7",
+    "sequences": [37, 42],
+    "passage_ids": ["ur-a1-u07-p01","ur-a1-u07-p02","ur-a1-u07-p03","ur-a1-u07-p04","ur-a1-u07-p05","ur-a1-u07-p06"]
+  },
+  "audit_type": "manual_semantic_linguistic_pedagogical_pass_1",
+  "status": "REPAIR_REQUIRED",
+  "release_effect": "Detection evidence only. This artifact does not approve passages, mutate quality metadata, or certify educator release.",
+  "findings": [
+    {
+      "id": "U7P01-01",
+      "passage_id": "ur-a1-u07-p01",
+      "severity": "minor",
+      "field": "a4",
+      "original": "سات دن کے عرصے یا اس کی حالت کو بتاتا ہے۔",
+      "correction": "یہاں اس سے سات دن کا عرصہ مراد ہے۔",
+      "reason": "اس کی حالت is semantically unclear and unnecessary for an A1 learner."
+    },
+    {
+      "id": "U7P01-02",
+      "passage_id": "ur-a1-u07-p01",
+      "severity": "major",
+      "field": "q7/a7",
+      "original": "«ہفتے» کس وقت کی اکائی سے متعلق ہے؟ -> سات دن کے عرصے کی حالت؛ ہفتہ کے بعد استعمال ہونے والی صورت۔",
+      "correction": "«اگلے ہفتے» میں «ہفتے» سے کتنا وقت مراد ہے؟ -> سات دن کا عرصہ۔",
+      "reason": "The current answer is abstract morphological metalanguage and is itself awkward Urdu. A1 should test operational meaning/use rather than formal word-form description."
+    },
+    {
+      "id": "U7P02-01",
+      "passage_id": "ur-a1-u07-p02",
+      "severity": "minor",
+      "field": "title",
+      "original": "کلاس کے بجے اور منٹ",
+      "correction": "کلاس کا وقت: بجے اور منٹ",
+      "reason": "بجے is a clock-time marker, so کلاس کے بجے is not a natural noun phrase."
+    },
+    {
+      "id": "U7P02-02",
+      "passage_id": "ur-a1-u07-p02",
+      "severity": "major",
+      "field": "q3/a3/q6/a6",
+      "original": ["متن میں «بجے» کیا بتاتا ہے؟ -> گھڑی کے مقررہ گھنٹے کو بتانے والا وقت کا لفظ۔", "«بجے» کا بنیادی استعمال کیا ہے؟ -> گھڑی کے گھنٹے کے ساتھ استعمال ہونے والا لفظ۔"],
+      "correction": ["«کلاس نو بجے شروع ہوتی ہے» میں «نو بجے» کیا بتاتا ہے؟ -> کلاس شروع ہونے کا وقت۔", "گھڑی کا وقت بتاتے ہوئے «نو» کے بعد کون سا لفظ آتا ہے؟ -> بجے۔"],
+      "reason": "The current material asks for an abstract description of a grammatical/time marker instead of operational A1 use, and the answers are stilted."
+    },
+    {
+      "id": "U7P02-03",
+      "passage_id": "ur-a1-u07-p02",
+      "severity": "minor",
+      "field": "text",
+      "original": "منٹ چھوٹے وقت کو بتانے میں مدد دیتے ہیں۔",
+      "correction": "منٹ وقت کی چھوٹی اکائیاں ہیں۔",
+      "reason": "The current phrase چھوٹے وقت is unnatural."
+    },
+    {
+      "id": "U7P04-01",
+      "passage_id": "ur-a1-u07-p04",
+      "severity": "minor",
+      "field": "text/q8/a8",
+      "original": ["کلاس کے آخر میں ہر بچہ ایک آئندہ کام بتاتا ہے۔", "اپنا آئندہ کام"],
+      "correction": ["کلاس کے آخر میں ہر بچہ ایک ایسا کام بتاتا ہے جو وہ آئندہ کرنا چاہتا ہے۔", "وہ کام جو عائشہ آئندہ کرنا چاہتی ہے"],
+      "reason": "آئندہ is natural adverbially or in phrases such as آئندہ دنوں میں; ایک آئندہ کام is stilted."
+    },
+    {
+      "id": "U7P04-02",
+      "passage_id": "ur-a1-u07-p04",
+      "severity": "major",
+      "field": "q9/a9",
+      "original": "_____ میں یہ کام پہلے کروں گا۔ -> آئندہ",
+      "correction": "_____ یہ کام پہلے کروں گا۔ -> آئندہ",
+      "reason": "The keyed answer creates آئندہ میں, which is not the intended natural adverbial construction."
+    },
+    {
+      "id": "U7P05-01",
+      "passage_id": "ur-a1-u07-p05",
+      "severity": "major",
+      "field": "q4/a4",
+      "original": "متن میں «تقریباً» کس طرح کی مقدار بتاتا ہے؟ -> بالکل نہیں بلکہ اندازاً مقدار یا وقت بتانا۔",
+      "correction": "«تقریباً پانچ منٹ» کا مطلب کیا ہے؟ -> پانچ منٹ کے قریب، ضروری نہیں کہ بالکل پانچ منٹ۔",
+      "reason": "The current prompt is abstract and the answer is awkward. The repaired item tests the word in an actual A1 phrase."
+    },
+    {
+      "id": "U7P05-02",
+      "passage_id": "ur-a1-u07-p05",
+      "severity": "minor",
+      "field": "title/text",
+      "original": ["دوبارہ پڑھنا اور تقریباً وقت", "تقریباً وقت جاننے سے کام منظم رہتا ہے"],
+      "correction": ["دوبارہ پڑھنا اور وقت کا اندازہ", "یہ جاننے سے کہ کام میں تقریباً کتنا وقت لگے گا، کام منظم رہتا ہے"],
+      "reason": "تقریباً وقت is not a natural phrase for approximate duration."
+    },
+    {
+      "id": "U7P05-03",
+      "passage_id": "ur-a1-u07-p05",
+      "severity": "minor",
+      "field": "q10/a10",
+      "original": "یہ کام _____ پانچ منٹ لیتا ہے۔ -> تقریباً",
+      "correction": "اس کام میں _____ پانچ منٹ لگتے ہیں۔ -> تقریباً",
+      "reason": "The proposed Urdu construction with لگتے ہیں is more idiomatic for duration than the calqued لیتا ہے frame."
+    },
+    {
+      "id": "U7P06-01",
+      "passage_id": "ur-a1-u07-p06",
+      "severity": "minor",
+      "field": "a1",
+      "original": "عائشہ ہفتے، گھڑی، مہینوں اور آئندہ کاموں کو چارٹ میں منظم کرتی ہے۔",
+      "correction": "عائشہ ہفتے کے کام، کلاس کے اوقات، مہینوں اور آئندہ کے منصوبوں کو چارٹ میں منظم کرتی ہے۔",
+      "reason": "The current answer implies organizing a clock itself and repeats the stilted آئندہ کام construction."
+    },
+    {
+      "id": "U7P06-02",
+      "passage_id": "ur-a1-u07-p06",
+      "severity": "minor",
+      "field": "q4/a4",
+      "original": "ستمبر اور دسمبر چارٹ میں کیا دکھاتے ہیں؟ -> ستمبر اور دسمبر سال کے چارٹ میں بڑی سرگرمیوں کی جگہ دکھاتے ہیں۔",
+      "correction": "ستمبر اور دسمبر کے سامنے کیا دکھایا گیا ہے؟ -> ان مہینوں میں ہونے والی بڑی سرگرمیاں۔",
+      "reason": "The current wording uses جگہ for temporal placement and is less direct than an A1 calendar question."
+    },
+    {
+      "id": "U7P06-03",
+      "passage_id": "ur-a1-u07-p06",
+      "severity": "major",
+      "field": "q6/a6",
+      "original": "سوال صاف نہ ہو تو عائشہ دوبارہ اور تقریباً کو کیسے استعمال کرتی ہے؟ -> وہ سوال دوبارہ پڑھتی ہے اور تقریباً مطلوب وقت دیکھتی ہے۔",
+      "correction": "سوال صاف نہ ہو تو عائشہ کیا کرتی ہے، اور وقت کے بارے میں کیا دیکھتی ہے؟ -> وہ سوال دوبارہ پڑھتی ہے اور دیکھتی ہے کہ اسے حل کرنے میں تقریباً کتنا وقت چاہیے۔",
+      "reason": "The current question treats two lexical items as objects that are 'used' together, and the answer phrase تقریباً مطلوب وقت is unnatural."
+    },
+    {
+      "id": "U7P06-04",
+      "passage_id": "ur-a1-u07-p06",
+      "severity": "minor",
+      "field": "q9/a9",
+      "original": "_____ اور _____ مہینے ہیں؛ _____ کام _____ کے لیے لکھو۔ -> ستمبر؛ دسمبر؛ آئندہ؛ مستقبل",
+      "correction": "_____ اور _____ مہینے ہیں؛ _____ کے کام _____ کی تیاری کے لیے لکھو۔ -> ستمبر؛ دسمبر؛ آئندہ؛ مستقبل",
+      "reason": "The current completion آئندہ کام مستقبل کے لیے لکھو is redundant and stilted."
+    },
+    {
+      "id": "U7P06-05",
+      "passage_id": "ur-a1-u07-p06",
+      "severity": "major",
+      "field": "q10/a10",
+      "original": "سوال _____ پڑھو اور _____ وقت لکھو۔ -> دوبارہ؛ تقریباً",
+      "correction": "سوال _____ پڑھو اور لکھو کہ اسے حل کرنے میں _____ کتنا وقت لگے گا۔ -> دوبارہ؛ تقریباً",
+      "reason": "The current keyed completion creates تقریباً وقت, an unnatural phrase. The repaired cloze preserves both targets in a natural operational sentence."
+    }
+  ],
+  "passage_without_confirmed_finding_in_this_pass": ["ur-a1-u07-p03"],
+  "summary": {
+    "passages_reviewed": 6,
+    "findings": 15,
+    "major": 6,
+    "minor": 9,
+    "critical": 0,
+    "passages_with_findings": 5,
+    "passages_without_confirmed_finding": 1
+  },
+  "confirmed_defect_classes": [
+    "A1 metalinguistic abstraction instead of operational use",
+    "adverb/marker forced into noun-like constructions",
+    "cumulative checkpoint wording weaker than source passage wording",
+    "cloze frames that become unnatural only after answer insertion"
+  ],
+  "required_next_actions": [
+    "Audit Unit 08 with the same checkpoint-separated method.",
+    "Add Unit 07 findings to the bounded Urdu A1 repair manifest.",
+    "After accepted repairs, rerun schema, Q/A linkage, target exposure counts, review chronology, lexical coverage, and A1-level checks.",
+    "Do not flip pending quality fields based on this detection pass alone."
+  ]
+}
