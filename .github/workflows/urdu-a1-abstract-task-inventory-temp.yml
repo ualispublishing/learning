@@ -1,0 +1,71 @@
+name: TEMP Urdu A1 abstract-task inventory
+
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+    paths:
+      - .github/workflows/urdu-a1-abstract-task-inventory-temp.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temp-urdu-a1-abstract-task-inventory
+  cancel-in-progress: false
+
+jobs:
+  inventory:
+    if: github.event.pull_request.head.ref == 'audit/urdu-a1-final-deterministic-2026-08-22'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/urdu-a1-final-deterministic-2026-08-22
+      - name: Inventory abstract/meta-style A1 task wording
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from collections import Counter
+          import hashlib,json,re
+          p=Path('reading/urdu/a1/passages.jsonl')
+          expected='e4c996dbd9fc9808eed0a29c66aa5d7114543b5bb7ccc34d5bcd1de6b9d5cf8c'
+          got=hashlib.sha256(p.read_bytes()).hexdigest()
+          if got!=expected: raise SystemExit(f'FAIL CLOSED corpus drift {got}')
+          rows=[json.loads(x) for x in p.read_text(encoding='utf-8').splitlines() if x.strip()]
+          patterns=[
+            ('relation_abstract',r'(?:کیا|کس)\s+تعلق(?:\s+کو)?\s+(?:دکھاتا|دکھاتی|بناتا|بناتی|ظاہر)'),
+            ('function_abstract',r'(?:کیا|کون\s+سا)\s+کام\s+(?:کرتا|کرتی|کرتے|کرتی\s+ہے)'),
+            ('category_abstract',r'کس\s+قسم\s+کا'),
+            ('introduces_abstract',r'کیا\s+متعارف\s+کراتا'),
+            ('grammar_term_answer',r'(?:حرف[ِ\s-]*ربط|ضمیر|اسم|صفت|فعل|نفی|حرف\s+جار|حرف\s+اضافت)'),
+          ]
+          items=[]
+          for r in rows:
+            amap={a['id']:a for a in r['answer_key']}
+            for q in r['questions']:
+              a=amap[q['answer_id']]
+              joined=q.get('prompt','')+' '+a.get('answer','')+' '+a.get('explanation','')
+              reasons=[name for name,pat in patterns if re.search(pat,joined)]
+              if reasons:
+                items.append({'passage_id':r['id'],'unit':r['unit'],'sequence':r['sequence'],'question_id':q['id'],'type':q.get('type'),'prompt':q.get('prompt'),'target_ids':q.get('target_ids',[]),'answer':a.get('answer'),'explanation':a.get('explanation',''),'reasons':reasons})
+          out={'schema_version':1,'date':'2026-08-22','language':'ur','level':'A1','audit':'abstract_meta_style_task_candidate_inventory','bound_sha256':got,'candidate_count':len(items),'by_unit':dict(sorted(Counter(str(x['unit']) for x in items).items())),'status':'HIGH_RECALL_CANDIDATES_NEED_CONTEXTUAL_ADJUDICATION','candidates':items,'limitations':'This is a high-recall pedagogical wording scan, not a defect verdict. Concrete vocabulary questions can legitimately ask what a word indicates. Repair only items that require abstract linguistic relation/function/category reasoning instead of A1 comprehension or use.','release_effect':'NONE_AUTOMATIC'}
+          Path('reading/audit/urdu_a1_abstract_task_candidates_2026-08-22.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'candidate_count':len(items),'by_unit':out['by_unit']},ensure_ascii=False))
+          print('CANDIDATES_BEGIN')
+          for x in items: print(json.dumps(x,ensure_ascii=False))
+          print('CANDIDATES_END')
+          PY
+      - name: Commit inventory and self-remove
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/urdu_a1_abstract_task_candidates_2026-08-22.json
+          git rm -f .github/workflows/urdu-a1-abstract-task-inventory-temp.yml
+          git commit -m 'Inventory Urdu A1 abstract task wording [skip ci]'
+          git push origin HEAD:audit/urdu-a1-final-deterministic-2026-08-22
