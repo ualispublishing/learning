@@ -1,0 +1,124 @@
+name: TEMP Urdu A1 post-metalinguistic final audit
+
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+    paths:
+      - .github/workflows/urdu-a1-post-metalinguistic-final-audit-temp.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temp-urdu-a1-post-metalinguistic-final-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    if: github.event.pull_request.head.ref == 'audit/urdu-a1-final-deterministic-2026-08-22'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/urdu-a1-final-deterministic-2026-08-22
+      - name: Rerun complete deterministic audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from collections import Counter,defaultdict
+          from datetime import datetime,timezone
+          import hashlib,json,re,unicodedata
+
+          p=Path('reading/urdu/a1/passages.jsonl')
+          expected='e4c996dbd9fc9808eed0a29c66aa5d7114543b5bb7ccc34d5bcd1de6b9d5cf8c'
+          got=hashlib.sha256(p.read_bytes()).hexdigest()
+          if got!=expected: raise SystemExit(f'FAIL CLOSED corpus drift {got}')
+          rows=[json.loads(x) for x in p.read_text(encoding='utf-8').splitlines() if x.strip()]
+          v=[]
+          def bad(code,**kw): v.append({'code':code,**kw})
+          def toks(s): return re.findall(r'[^\W_]+',unicodedata.normalize('NFC',s or ''),flags=re.UNICODE)
+          def has(text,phrase):
+              a=toks(text); b=toks(phrase)
+              return bool(b) and any(a[i:i+len(b)]==b for i in range(max(0,len(a)-len(b)+1)))
+
+          if len(rows)!=60: bad('passage_count',actual=len(rows))
+          ids=[r.get('id') for r in rows]; seq=[r.get('sequence') for r in rows]
+          if len(set(ids))!=60: bad('passage_ids_unique')
+          if seq!=list(range(1,61)): bad('sequence_continuity')
+          units=Counter(r.get('unit') for r in rows)
+          if units!=Counter({i:6 for i in range(1,11)}): bad('unit_distribution',actual=dict(units))
+          by_unit=defaultdict(list); newids=[]; newcount=0; roman=[]; vis=[]; future=[]; formal=[]
+          for r in rows:
+              by_unit[r['unit']].append(r); rid=r['id']
+              m=re.fullmatch(r'ur-a1-u(\d{2})-p(\d{2})',rid)
+              if not m or r.get('language')!='ur' or str(r.get('cefr')).upper()!='A1' or int(m.group(1))!=r.get('unit'):
+                  bad('identity_alignment',passage_id=rid)
+              wc=len(r.get('text','').split())
+              if r.get('word_count')!=wc or not 90<=wc<=140: bad('word_count',passage_id=rid,stored=r.get('word_count'),actual=wc)
+              qs=r.get('questions',[]); ans=r.get('answer_key',[])
+              if len(qs)!=10 or len(ans)!=10: bad('qa_cardinality',passage_id=rid)
+              amap={a.get('id'):a for a in ans}; prompts=[]
+              local={x.get('id') for x in r.get('new_lexical_targets',[])+r.get('review_lexical_targets',[])}
+              for q in qs:
+                  prompts.append(q.get('prompt',''))
+                  aid=q.get('answer_id')
+                  if aid not in amap or amap[aid].get('question_id')!=q.get('id'): bad('qa_linkage',passage_id=rid,question_id=q.get('id'))
+                  for tid in q.get('target_ids',[]):
+                      if tid not in local: bad('nonlocal_target',passage_id=rid,question_id=q.get('id'),target_id=tid)
+                  if q.get('type') in {'grammar_category','grammar_function'}:
+                      formal.append([rid,q.get('id'),q.get('type')]); bad('formal_task_type',passage_id=rid,question_id=q.get('id'),type=q.get('type'))
+              if len(prompts)!=len(set(prompts)): bad('duplicate_prompt',passage_id=rid)
+              new=r.get('new_lexical_targets',[]); rev=r.get('review_lexical_targets',[])
+              if rid.endswith('-p06'):
+                  if new: bad('p06_new_targets',passage_id=rid)
+              elif len(new)!=2: bad('p01_p05_new_targets',passage_id=rid,actual=len(new))
+              for x in new:
+                  newcount+=1; newids.append(x.get('id'))
+                  if not has(r.get('text',''),x.get('form','')): vis.append([rid,x.get('id')]); bad('new_target_visibility',passage_id=rid,target_id=x.get('id'))
+              for x in rev:
+                  if not has(r.get('text',''),x.get('form','')): vis.append([rid,x.get('id')]); bad('review_target_visibility',passage_id=rid,target_id=x.get('id'))
+              fields=[r.get('title',''),r.get('text','')]+[q.get('prompt','') for q in qs]+[z for a in ans for z in (a.get('answer',''),a.get('explanation',''))]
+              if any(re.search(r'[A-Za-z]',z or '') for z in fields): roman.append(rid); bad('roman_script',passage_id=rid)
+          if newcount!=100: bad('new_target_count',actual=newcount)
+          if len(set(newids))!=len(newids): bad('new_target_collision')
+          for unit,rs in by_unit.items():
+              rs=sorted(rs,key=lambda r:r['sequence'])
+              intro=[(r['sequence'],x.get('id'),x.get('form','')) for r in rs for x in r.get('new_lexical_targets',[])]
+              for s,tid,form in intro:
+                  for r in rs:
+                      if r['sequence']>=s: break
+                      if has(r.get('text',''),form): future.append([r['id'],tid]); bad('premature_future_target',passage_id=r['id'],target_id=tid)
+              introduced={x.get('id') for r in rs[:-1] for x in r.get('new_lexical_targets',[])}
+              reviewed={x.get('id') for x in rs[-1].get('review_lexical_targets',[])}
+              miss=sorted(introduced-reviewed)
+              if miss: bad('p06_missing_reviews',unit=unit,target_ids=miss)
+
+          audit={
+            'audit':'urdu_a1_final_deterministic_audit','generated_at_utc':datetime.now(timezone.utc).isoformat(),
+            'status':'PASS_DETERMINISTIC_POST_METALINGUISTIC_REPAIR_NEEDS_INDEPENDENT_REVIEW' if not v else 'FAIL_DETERMINISTIC_POST_METALINGUISTIC_REPAIR',
+            'scope':'Fresh complete deterministic audit after corpus-wide Urdu A1 metalinguistic candidate adjudication and bounded Q/A repairs; no native-speaker, independent-model, educator, or release approval.',
+            'source':{'path':str(p),'actual_sha256':got,'hash_bound':True,'prior_sha256':'9519a085ba046e71cafcc55a0a98f4d5517f2ec86d138f664727cac2d753d892','adjudication':'reading/audit/urdu_a1_metalinguistic_adjudication_2026-08-22.json'},
+            'counts':{'passages':len(rows),'questions':sum(len(r['questions']) for r in rows),'answers':sum(len(r['answer_key']) for r in rows),'units':len(units),'new_lexical_target_declarations':newcount,'formal_task_types':len(formal),'learner_facing_roman_script_findings':len(roman),'exact_target_visibility_misses':len(vis),'premature_future_target_exposures':len(future),'violations':len(v)},
+            'checks':{'passage_count_exact_60':len(rows)==60,'sequences_contiguous_1_60':seq==list(range(1,61)),'units_exact_1_10_and_six_each':units==Counter({i:6 for i in range(1,11)}),'ten_questions_answers_and_linkage':not any(x['code'] in {'qa_cardinality','qa_linkage'} for x in v),'duplicate_prompts_zero':not any(x['code']=='duplicate_prompt' for x in v),'question_targets_local':not any(x['code']=='nonlocal_target' for x in v),'new_target_ids_unique':len(set(newids))==len(newids),'target_visibility_exact_token':not vis,'p06_review_policy':not any(x['code'] in {'p06_new_targets','p01_p05_new_targets','p06_missing_reviews'} for x in v),'premature_future_target_exposure_zero':not future,'learner_facing_roman_script_zero':not roman,'grammar_category_and_grammar_function_types_zero':not formal},
+            'violations':v,
+            'review_frontier':{'internal_units01_02_semantic_qa_pedagogy':'COMPLETE_INTERNAL','metalinguistic_class_corpus_wide':'ADJUDICATED_INTERNAL','units03_10_full_semantic_naturalness_answer_pedagogy':'PENDING_INTERNAL','native_urdu_naturalness_orthography':'PENDING','independent_model_family':'PENDING','educator_cefr':'PENDING','blind_postrepair':'PENDING'},
+            'release_effect':'NONE_AUTOMATIC: Urdu A1 remains non-release-ready.'
+          }
+          Path('reading/audit/urdu_a1_final_deterministic_audit_2026-08-22.json').write_text(json.dumps(audit,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'sha256':got,'status':audit['status'],'counts':audit['counts']},ensure_ascii=False))
+          if v: raise SystemExit('FAIL CLOSED deterministic violations present')
+          PY
+      - name: Commit audit and self-remove
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/urdu_a1_final_deterministic_audit_2026-08-22.json
+          git rm -f .github/workflows/urdu-a1-post-metalinguistic-final-audit-temp.yml
+          git commit -m 'Refresh Urdu A1 final audit after metalinguistic repairs [skip ci]'
+          git push origin HEAD:audit/urdu-a1-final-deterministic-2026-08-22
