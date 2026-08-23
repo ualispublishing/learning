@@ -1,0 +1,44 @@
+name: Apply Urdu A1 Wave 1A repairs
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/apply_urdu_a1_wave1a_repairs.py'
+      - '.github/workflows/apply-urdu-a1-wave1a-repairs.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Apply bounded Wave 1A repairs and reconstruct all clozes
+        run: python reading/tools/apply_urdu_a1_wave1a_repairs.py
+      - name: Validate JSONL and report JSON
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('reading/urdu/a1/passages.jsonl')
+          rows=[json.loads(x) for x in p.read_text(encoding='utf-8').splitlines() if x]
+          assert len(rows)==60
+          assert [x['sequence'] for x in rows]==list(range(1,61))
+          json.loads(Path('reading/audit/urdu_a1_wave1a_reconstructed_clozes_2026-08-23.json').read_text(encoding='utf-8'))
+          print('validated 60 passages and Wave 1A reconstruction report')
+          PY
+      - name: Commit repaired Urdu A1 corpus and audit report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/urdu/a1/passages.jsonl reading/audit/urdu_a1_wave1a_reconstructed_clozes_2026-08-23.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Apply Urdu A1 Wave 1A bounded repairs [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
