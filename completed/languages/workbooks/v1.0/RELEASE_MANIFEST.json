@@ -1,12 +1,25 @@
 {
   "release": "v1.0",
   "generated_utc": "2026-08-23T15:12:39.799824+00:00",
-  "status": "production_candidate",
+  "status": "blocked_editorial_audit",
   "languages": [
     "arabic",
     "french",
     "urdu"
   ],
+  "language_release_status": {
+    "arabic": "not_yet_linguistically_certified",
+    "french": "not_yet_linguistically_certified",
+    "urdu": "blocked_repairs_required"
+  },
+  "urdu_sentence_first_pass": {
+    "rows_screened": 1000,
+    "rows_total": 1000,
+    "coverage_percent": 100.0,
+    "result": "blocking_defects_found",
+    "audit_path": "audit/language-workbooks/v1.0"
+  },
   "qa_path": "audit/language-workbooks/v1.0",
-  "source_policy": "Natural learner language outranks artificial uniqueness; legitimate homographs are allowed when meaning and grammatical role differ."
+  "source_policy": "Natural learner language outranks artificial uniqueness; legitimate homographs are allowed when meaning and grammatical role differ.",
+  "release_gate": "Do not treat this release as learner/publication ready until Urdu sentence repairs are applied and regenerated, Arabic and French sentence banks receive linguistic/editorial screening, deterministic regression QA passes, and independent native/editorial review is completed."
 }
