@@ -1,0 +1,168 @@
+{
+  "artifact": "Urdu workbook sentence curation layer",
+  "release": "v1.0",
+  "language": "urdu",
+  "status": "repair_in_progress",
+  "release_gate": "BLOCK",
+  "source": {
+    "sentence_bank": "completed/languages/workbooks/v1.0/urdu/urdu_sentence_bank_1000.csv",
+    "manythings_zip_sha256": "d55d3b4f95a6957093d7b46ddb244fd3a6530367dfc9fefd9baced598c9234a5",
+    "audit_summary": "audit/language-workbooks/v1.0/urdu_sentence_editorial_audit_summary.json"
+  },
+  "policy": {
+    "rank_key_is_valid_only_for_pinned_source_hash": true,
+    "expected_source_pair_must_match_before_edit": true,
+    "adapted_pairs_must_preserve_original_attribution_and_add_change_notice": true,
+    "candidate_override_is_not_release_approved": true,
+    "automatic_release_requires_zero_unresolved_blockers": true,
+    "independent_native_editorial_review_required": true
+  },
+  "candidate_overrides": [
+    {
+      "rank": 293,
+      "expected_target": "انہیوں نے آج کیا کیا؟",
+      "expected_english": "What did he do today?",
+      "candidate_target": "انہوں نے آج کیا کیا؟",
+      "candidate_english": "What did they do today?",
+      "reason": "spelling plus person/number mismatch"
+    },
+    {
+      "rank": 402,
+      "expected_target": "وہ کھیلوں میں کافی بڑی ہے۔",
+      "expected_english": "She is bad at sports.",
+      "candidate_target": "وہ کھیلوں میں کافی بری ہے۔",
+      "candidate_english": "She is bad at sports.",
+      "reason": "lexical typo changes meaning from bad to big"
+    },
+    {
+      "rank": 458,
+      "expected_target": "اس سیب کا ذائقہ بہت کڑوا ہے۔",
+      "expected_english": "This apple tastes very sour.",
+      "candidate_target": "اس سیب کا ذائقہ بہت کھٹا ہے۔",
+      "candidate_english": "This apple tastes very sour.",
+      "reason": "bitter/sour mismatch"
+    },
+    {
+      "rank": 491,
+      "expected_target": "کیا تم نے سب کچھ صحیح سے کیا ہے؟",
+      "expected_english": "Have you ever done anything right?",
+      "candidate_target": "کیا تم نے کبھی کچھ صحیح کیا ہے؟",
+      "candidate_english": "Have you ever done anything right?",
+      "reason": "quantifier and aspect mismatch"
+    },
+    {
+      "rank": 492,
+      "expected_target": "کیا تم نے سب کچھ ٹھیک سے کیا ہے؟",
+      "expected_english": "Have you ever done anything right?",
+      "candidate_target": "کیا تم نے کبھی کچھ ٹھیک کیا ہے؟",
+      "candidate_english": "Have you ever done anything right?",
+      "reason": "quantifier and aspect mismatch"
+    },
+    {
+      "rank": 498,
+      "expected_target": "میں سونے کیلئے بستر پر لیٹ چکا ہوں",
+      "expected_english": "I have to go to bed.",
+      "candidate_target": "مجھے سونے کے لیے بستر پر جانا ہے۔",
+      "candidate_english": "I have to go to bed.",
+      "reason": "current target says speaker is already lying down"
+    },
+    {
+      "rank": 639,
+      "expected_target": "میں کہ رہا ہوں رکو،،",
+      "expected_english": "I told you to stop, didn't I?",
+      "candidate_target": "میں نے تم سے رکنے کو کہا تھا، ہے نا؟",
+      "candidate_english": "I told you to stop, didn't I?",
+      "reason": "tense, spelling, punctuation, and tag-question mismatch"
+    },
+    {
+      "rank": 663,
+      "expected_target": "ہمیں کبھی کبھی احساس ہوتا ہے کہ یہ کتنا ضروری ہے۔",
+      "expected_english": "We hardly realize how important it is.",
+      "candidate_target": "ہمیں شاذ ہی احساس ہوتا ہے کہ یہ کتنا ضروری ہے۔",
+      "candidate_english": "We hardly realize how important it is.",
+      "reason": "sometimes/hardly mismatch"
+    },
+    {
+      "rank": 697,
+      "expected_target": "میں ریڈیو کبھی کبھی سنتا ہوں۔",
+      "expected_english": "I almost never listen to the radio.",
+      "candidate_target": "میں ریڈیو تقریباً کبھی نہیں سنتا۔",
+      "candidate_english": "I almost never listen to the radio.",
+      "reason": "sometimes/almost-never mismatch"
+    },
+    {
+      "rank": 702,
+      "expected_target": "میں نے ان کو بتایا کہ وہ غلط تھے۔",
+      "expected_english": "I told him that he was wrong.",
+      "candidate_target": "میں نے ان کو بتایا کہ وہ غلط تھے۔",
+      "candidate_english": "I told them that they were wrong.",
+      "reason": "person/number mismatch"
+    },
+    {
+      "rank": 737,
+      "expected_target": "بیلجیم فرانس جتنا برا نہیں۔",
+      "expected_english": "Belgium is not as big as France.",
+      "candidate_target": "بیلجیم فرانس جتنا بڑا نہیں۔",
+      "candidate_english": "Belgium is not as big as France.",
+      "reason": "bad/big mismatch"
+    },
+    {
+      "rank": 750,
+      "expected_target": "انہوں نے کتاب کو الماری میں رکھ دیا۔",
+      "expected_english": "He put the book on the shelf.",
+      "candidate_target": "انہوں نے کتاب کو الماری میں رکھ دیا۔",
+      "candidate_english": "They put the book on the shelf.",
+      "reason": "person/number mismatch"
+    },
+    {
+      "rank": 764,
+      "expected_target": "اس آدمی کو سزائے موت دی گئی ہے۔",
+      "expected_english": "The man was given a life sentence.",
+      "candidate_target": "اس آدمی کو عمر قید کی سزا دی گئی ہے۔",
+      "candidate_english": "The man was given a life sentence.",
+      "reason": "death sentence/life sentence contradiction"
+    },
+    {
+      "rank": 851,
+      "expected_target": "تینوں لڑکوں کو انعام ملے گا۔",
+      "expected_english": "Each of the three boys got a prize.",
+      "candidate_target": "تینوں لڑکوں کو انعام ملا۔",
+      "candidate_english": "Each of the three boys got a prize.",
+      "reason": "future/past mismatch"
+    },
+    {
+      "rank": 942,
+      "expected_target": "میں نی اپنی بہن کو اس کی سالگرہ پر ہیروں کا ہار دیا۔",
+      "expected_english": "I gave my sister a pearl necklace on her birthday.",
+      "candidate_target": "میں نے اپنی بہن کو اس کی سالگرہ پر موتیوں کا ہار دیا۔",
+      "candidate_english": "I gave my sister a pearl necklace on her birthday.",
+      "reason": "diamond/pearl mismatch plus spelling"
+    },
+    {
+      "rank": 951,
+      "expected_target": "پچھلے سال کے مقابلے میں اس سال کی کپاس بے مثال ہیں۔",
+      "expected_english": "Compared with last year, this year's crops are much better.",
+      "candidate_target": "پچھلے سال کے مقابلے میں اس سال کی فصلیں بہت بہتر ہیں۔",
+      "candidate_english": "Compared with last year, this year's crops are much better.",
+      "reason": "cotton/crops and incomparable/better mismatch"
+    },
+    {
+      "rank": 957,
+      "expected_target": "ہمیں کیا امریکا سے چاول کی برآمدگی کرنی چاہیے؟",
+      "expected_english": "Do you think we should import rice from the U.S.?",
+      "candidate_target": "کیا ہمیں امریکا سے چاول درآمد کرنا چاہیے؟",
+      "candidate_english": "Do you think we should import rice from the U.S.?",
+      "reason": "export/import contradiction"
+    },
+    {
+      "rank": 993,
+      "expected_target": "سولہ سال سے کم عمر کے بچے ٹھیٹر میں داخل نہیں ہو سکتے۔",
+      "expected_english": "Children who are sixteen years old or younger may not enter the theater.",
+      "candidate_target": "سولہ سال یا اس سے کم عمر کے بچے تھیٹر میں داخل نہیں ہو سکتے۔",
+      "candidate_english": "Children who are sixteen years old or younger may not enter the theater.",
+      "reason": "age-boundary mismatch plus spelling"
+    }
+  ],
+  "remaining_scope": "All findings and normalization/editorial flags in the four first-pass audit ledgers remain in scope. Candidate overrides above are only the first high-severity tranche and must not be treated as final/native-certified edits.",
+  "next_step": "Promote corrections only after second-pass verification; then add all remaining explicit fixes and resolve replace/native-judgment rows before changing release_gate from BLOCK."
+}
