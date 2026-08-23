@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "ur",
+  "level": "A1",
+  "units": [
+    1,
+    2
+  ],
+  "review_kind": "internal_semantic_answer_pedagogy_review_and_bounded_repair",
+  "before_sha256": "e6450c04b6aa7d47b501e0cfbf2664fa37b2e95490ab363945f7d757dfa34a1d",
+  "after_sha256": "9519a085ba046e71cafcc55a0a98f4d5517f2ec86d138f664727cac2d753d892",
+  "records_reviewed": 12,
+  "questions_reviewed": 120,
+  "answers_reviewed": 120,
+  "confirmed_metalinguistic_repairs": 6,
+  "target_linkage_repairs": 1,
+  "repairs": [
+    {
+      "passage_id": "ur-a1-u01-p04",
+      "question_id": "q6",
+      "before": {
+        "prompt": "«اگر» کا کام کیا ہے؟",
+        "type": "single_word_definition",
+        "answer": "کسی شرط کو بیان کرنا۔"
+      },
+      "after": {
+        "prompt": "«اگر دروازہ کھلا ہو تو ہم اندر جائیں گے» میں اندر جانے کی شرط کیا ہے؟",
+        "type": "cause_effect",
+        "answer": "دروازہ کھلا ہونا۔",
+        "explanation": "یہ سوال «اگر» کے استعمال کو عملی شرط کے طور پر جانچتا ہے، نحوی اصطلاح نہیں مانگتا۔"
+      },
+      "reason": "Replace formal function wording with an operational condition-in-context task while preserving the اگر target."
+    },
+    {
+      "passage_id": "ur-a1-u01-p05",
+      "question_id": "q10",
+      "before": {
+        "prompt": "«ہم» کس قسم کا لفظ ہے؟",
+        "type": "grammar_category",
+        "answer": "ضمیر۔"
+      },
+      "after": {
+        "prompt": "کون سا جملہ دو یا زیادہ لوگوں کی مشترک بات کرتا ہے: «میں بازار جاؤں گا» یا «ہم بازار جائیں گے»؟",
+        "type": "contrast",
+        "answer": "«ہم بازار جائیں گے»۔",
+        "explanation": "«ہم» بولنے والے کو ایک یا زیادہ دوسرے لوگوں کے ساتھ شامل کرتا ہے۔"
+      },
+      "reason": "Remove a grammatical-category label task and test communicative use of ہم instead."
+    },
+    {
+      "passage_id": "ur-a1-u01-p06",
+      "question_id": "q8",
+      "before": {
+        "prompt": "«اگر موسم اچھا ہو» میں «اگر» کیا متعارف کراتا ہے؟",
+        "type": "grammar_function",
+        "answer": "ایک شرط۔"
+      },
+      "after": {
+        "prompt": "اگر موسم اچھا ہو تو عائشہ اتوار کو کیا کرتی ہے؟",
+        "type": "cause_effect",
+        "answer": "وہ پارک جاتی ہے۔",
+        "explanation": "یہ سوال «اگر» کے معنی کو عبارت کے نتیجے کے ساتھ جوڑتا ہے۔"
+      },
+      "reason": "Replace a grammar-function label with direct conditional comprehension."
+    },
+    {
+      "passage_id": "ur-a1-u02-p01",
+      "question_id": "q8",
+      "before": {
+        "prompt": "«کچھ نہ رہ جائے» میں «نہ» کیا کرتا ہے؟",
+        "type": "grammar_function",
+        "answer": "یہ نفی کرتا ہے، یعنی چیز کے رہ جانے کو رد کرتا ہے۔"
+      },
+      "after": {
+        "prompt": "کون سا جملہ بتاتا ہے کہ کوئی چیز باقی نہیں رہنی چاہیے: «کچھ نہ رہ جائے» یا «کچھ رہ جائے»؟",
+        "type": "contrast",
+        "answer": "«کچھ نہ رہ جائے»۔",
+        "explanation": "«نہ» یہاں رہ جانے کی نفی کرتا ہے۔"
+      },
+      "reason": "Test negation operationally through a meaning contrast rather than asking for a function label."
+    },
+    {
+      "passage_id": "ur-a1-u02-p02",
+      "question_id": "q8",
+      "before": {
+        "prompt": "«اس کی روز کی زندگی» میں «کی» کیا تعلق دکھاتا ہے؟",
+        "type": "grammar_function",
+        "answer": "یہ عائشہ اور اس کی زندگی کے درمیان ملکیت/تعلق دکھاتا ہے۔"
+      },
+      "after": {
+        "prompt": "«اس کی روز کی زندگی» میں زندگی کس کی ہے؟",
+        "type": "reference_resolution",
+        "answer": "عائشہ کی۔",
+        "explanation": "«کی» عائشہ اور زندگی کے تعلق کو ظاہر کرتی ہے۔"
+      },
+      "reason": "Replace explicit grammar-relation terminology with a concrete ownership/reference question."
+    },
+    {
+      "passage_id": "ur-a1-u02-p03",
+      "question_id": "q8",
+      "before": {
+        "prompt": "«کیا تم میری مدد کر سکتی ہو؟» کس قسم کا سوال ہے؟",
+        "type": "grammar_function",
+        "answer": "ایسا سوال جس کا جواب ہاں یا نہیں میں دیا جا سکتا ہے۔"
+      },
+      "after": {
+        "prompt": "«کیا تم میری مدد کر سکتی ہو؟» کا مناسب مختصر جواب کون سا ہے: «ہاں، کر سکتی ہوں» یا «سات بجے»؟",
+        "type": "contrast",
+        "answer": "«ہاں، کر سکتی ہوں»۔",
+        "explanation": "«کیا» سے بنا یہ سوال ہاں یا نہیں کے جواب کے لیے استعمال ہوا ہے۔"
+      },
+      "reason": "Replace question-type terminology with an operational response-selection task."
+    }
+  ],
+  "target_linkage_repair": {
+    "passage_id": "ur-a1-u02-p06",
+    "question_id": "q2",
+    "before_target_ids": [
+      "ur-rank-0077",
+      "ur-rank-0121"
+    ],
+    "after_target_ids": [],
+    "reason": "q2 asks what tool organizes the day and is answered by “a simple chart”; سال and زندگی are not the assessed answer concepts here. Both targets remain explicitly assessed together in q7."
+  },
+  "verification": {
+    "passage_prose_unchanged": true,
+    "titles_unchanged": true,
+    "lexical_target_declarations_unchanged": true,
+    "review_target_schedules_unchanged": true,
+    "word_sentence_metadata_unchanged": true,
+    "ten_questions_answers_per_passage": true,
+    "qa_linkage_valid": true,
+    "local_question_target_ids_only": true,
+    "duplicate_prompts_within_passage_zero": true,
+    "units01_02_formal_metalinguistic_types_zero": true,
+    "units01_02_reviewed_formal_wording_patterns_zero": true,
+    "learner_facing_roman_script_zero": true
+  },
+  "adjudication_notes": [
+    "Most Units 01-02 passage prose and Q/A content was retained after internal semantic/answer-support review.",
+    "The repaired class is narrow: formal grammar-category/function prompts inappropriate for the intended A1 operational task profile.",
+    "One unrelated target-linkage omission was corrected by removing سال/زندگی from ur-a1-u02-p06 q2; q7 still directly assesses both targets.",
+    "Potential native-style refinements such as highly idiomatic phrasing are not silently treated as resolved by this internal review."
+  ],
+  "independent_review": {
+    "native_urdu_naturalness_orthography": "PENDING",
+    "independent_model_family": "PENDING",
+    "educator_cefr_a1": "PENDING",
+    "blind_postrepair": "PENDING"
+  },
+  "status": "PASS_INTERNAL_UNITS01_02_BOUNDED_REPAIR_NEEDS_INDEPENDENT_REVIEW",
+  "release_effect": "NONE_AUTOMATIC: Urdu A1 remains non-release-ready."
+}
