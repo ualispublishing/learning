@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 PATH = ROOT / 'reading' / 'urdu' / 'a1' / 'passages.jsonl'
 REPORT = ROOT / 'reading' / 'audit' / 'urdu_a1_final_integrity_2026-08-23.json'
-EXPECTED = '293cdb4ec7855f2c34583e29e47775424faad8b4'
+EXPECTED = 'ec0970dc1916ce523dd3320d2f4dca4c7f8bc677'
 
 ALLOWED_QUESTION_TYPES = {
     'gist', 'literal_detail', 'cause_effect', 'vocabulary_in_context',
@@ -259,7 +259,7 @@ banned_fragments = [
     'بجلی کے وقت اور بغیر بجلی کے', 'پورا کام اچھا ہوا', 'ان کی محنت کامیاب ہوتی ہے',
     'پیلے رنگ کی قطار', 'بالکل ہمیشہ نہیں', 'پیغام میں وقت طے',
     'کسی شخص سے طے شدہ ملنا', 'سب فائدہ دیتے ہیں',
-    'ماں کو رقم کیوں رکھنی ہے؟', 'گھر کے خرچ کے لیے۔'
+    'ماں کو رقم کیوں رکھنی ہے؟', 'گھر کے خرچ کے لیے۔', 'ایک کلو کی مقدار کافی ہے'
 ]
 for frag in banned_fragments:
     if frag in joined:
