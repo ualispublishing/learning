@@ -25,11 +25,11 @@ jobs:
           set -euo pipefail
           count=$(find .securityx-import -maxdepth 1 -type f -name 'part-*.txt' 2>/dev/null | wc -l | tr -d ' ')
           echo "count=$count" >> "$GITHUB_OUTPUT"
-          if [ "$count" -ne 16 ]; then
-            echo "Have $count/16 archive parts; importer will exit without changes."
+          if [ "$count" -ne 24 ]; then
+            echo "Have $count/24 archive parts; importer will exit without changes."
           fi
       - name: Reconstruct and verify audited archive
-        if: steps.parts.outputs.count == '16'
+        if: steps.parts.outputs.count == '24'
         shell: bash
         run: |
           set -euo pipefail
@@ -50,7 +50,7 @@ jobs:
           print(a)
           PY
       - name: Install exact canonical site and self-clean
-        if: steps.parts.outputs.count == '16'
+        if: steps.parts.outputs.count == '24'
         shell: bash
         run: |
           set -euo pipefail
