@@ -1,0 +1,43 @@
+{
+  "artifact": "French sentence bank editorial audit - rows 1-250",
+  "workbook_release": "v1.0",
+  "source_path": "completed/languages/workbooks/v1.0/french/french_sentence_bank_1000.csv",
+  "source_zip_sha256": "9e35994767f7307dc1fa9d5efcc36681f3756a1bdaaa02c1381b3eb11461261e",
+  "target_register": "standard contemporary French",
+  "range": {"start": 1, "end": 250, "rows_screened": 250},
+  "status": "BLOCKING_DEFECTS_FOUND",
+  "confirmed_or_high_confidence_findings": [
+    {"rank": 2, "type": "spelling", "observed": "Pouvez-vous m'aider, s'il vous plait ?", "recommended": "Pouvez-vous m'aider, s'il vous plaît ?"},
+    {"rank": 37, "type": "critical_semantic/tense", "observed": "Qu'est-ce que tu as à manger aujourd'hui ? / What did you eat today?", "recommended": "Qu'est-ce que tu as mangé aujourd'hui ? / What did you eat today?", "note": "The source target asks what the person has available/to eat today, not what they ate."},
+    {"rank": 42, "type": "grammar/register", "observed": "Quelle heure vous avez ? / What time do you have?", "recommended": "Quelle heure avez-vous ? / What time do you have?", "note": "Current word order is nonstandard for a polished learner workbook."},
+    {"rank": 80, "type": "tense/semantic", "observed": "Qu'est-ce que tu voulais que je fasse ? / What would you have me do?", "recommended": "Qu'est-ce que tu voulais que je fasse ? / What did you want me to do?", "note": "French is past 'wanted'; the English conditional-style prompt is not a tight standalone equivalent."},
+    {"rank": 90, "type": "critical_semantic", "observed": "Pourquoi as-tu besoin de mon aide? / Why do you want my help?", "recommended": "Pourquoi as-tu besoin de mon aide ? / Why do you need my help?", "note": "avoir besoin de means need, not want."},
+    {"rank": 137, "type": "critical_grammar", "observed": "Sais-tu où il sont ?", "recommended": "Sais-tu où ils sont ?"},
+    {"rank": 171, "type": "semantic", "observed": "D'où connaissais-tu mon nom ? / How did you know my name?", "recommended": "Comment connaissais-tu mon nom ? / How did you know my name?", "note": "D'où asks from where/from what source rather than simply how."},
+    {"rank": 172, "type": "semantic", "observed": "D'où connaissiez-vous mon nom ? / How did you know my name?", "recommended": "Comment connaissiez-vous mon nom ? / How did you know my name?"},
+    {"rank": 183, "type": "naturalness", "observed": "Comment aimeriez-vous votre café ? / How do you want your coffee?", "recommended": "Comment voulez-vous votre café ? / How do you want your coffee?"},
+    {"rank": 202, "type": "orthography", "observed": "Qu'est ce que tu as acheté pour ton petit ami ?", "recommended": "Qu'est-ce que tu as acheté pour ton petit ami ?"},
+    {"rank": 203, "type": "critical_aspect", "observed": "Que faisais-tu là-bas ? / What did you do in there?", "recommended": "Que faisais-tu là-bas ? / What were you doing there?", "note": "French imperfect is progressive/background aspect, unlike the English simple past supplied."},
+    {"rank": 215, "type": "critical_grammar", "observed": "Qu'ai-je besoin de savoir ?", "recommended": "Qu'est-ce que j'ai besoin de savoir ?", "note": "The inversion is not valid with avoir besoin in this construction; 'Que dois-je savoir ?' is another natural option."}
+  ],
+  "normalization_or_editorial_flags": [
+    {"ranks": [3,4], "issue": "Space before the question mark is inconsistent with the workbook's other French typography; normalize to one French spacing convention."},
+    {"ranks": [59,66,90,96,216], "issue": "Question-mark spacing is inconsistent; define one house style (prefer French typographic spacing) and normalize."},
+    {"ranks": [75,76,81,155,156,181,182], "issue": "Several elevated/literary subjunctive forms are grammatically possible but may be inappropriate for the intended general learner register; native editorial review should simplify where useful."},
+    {"ranks": [81], "issue": "fisse is literary imperfect subjunctive and disproportionately advanced/archaic for the surrounding bank."},
+    {"ranks": [96], "issue": "ce qu'il s'est passé is widespread usage, but ce qui s'est passé is often preferred in edited standard French; choose a house standard rather than silently mixing."},
+    {"ranks": [134], "issue": "où elle est can legitimately translate 'where it is' when the referent is feminine, but the standalone English is gender-neutral; consider a less context-dependent pair."},
+    {"ranks": [146,149], "issue": "qui c'est is idiomatic spoken French; keep only if the workbook intentionally includes conversational register alongside formal variants."},
+    {"ranks": [188], "issue": "J'ai combien de temps ? is conversational word order; for standard written learner French prefer Combien de temps ai-je ?."},
+    {"ranks": [196], "issue": "Que puis-je pour votre service ? is highly formal/dated; replace with a contemporary learner phrase such as En quoi puis-je vous aider ? if register consistency is the goal."},
+    {"ranks": [204], "issue": "encore adds an 'again/what now?' nuance absent from the English 'this time'; review equivalence."},
+    {"ranks": [225,227,228], "issue": "Qu'avez-vous/Qu'as-tu besoin de... is less polished than De quoi avez-vous besoin ? or Qu'est-ce que vous avez besoin de...; review standard-register phrasing."},
+    {"ranks": [231,232,233,235,236], "issue": "Mood choice after croire/penser in affirmative questions varies by nuance/register; native-editorial review should normalize without over-correcting legitimate variants."}
+  ],
+  "checkpoint": {
+    "cumulative_rows_screened": 250,
+    "cumulative_coverage_percent": 25.0,
+    "next_row": 251,
+    "release_status": "BLOCKED_PENDING_FULL_SCREEN_AND_REPAIR"
+  }
+}
