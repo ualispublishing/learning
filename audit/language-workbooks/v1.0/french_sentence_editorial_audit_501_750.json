@@ -1,0 +1,53 @@
+{
+  "artifact": "French sentence bank editorial audit - rows 501-750",
+  "workbook_release": "v1.0",
+  "source_path": "completed/languages/workbooks/v1.0/french/french_sentence_bank_1000.csv",
+  "source_zip_sha256": "9e35994767f7307dc1fa9d5efcc36681f3756a1bdaaa02c1381b3eb11461261e",
+  "target_register": "standard contemporary French",
+  "range": {"start": 501, "end": 750, "rows_screened": 250},
+  "status": "BLOCKING_DEFECTS_FOUND",
+  "confirmed_or_high_confidence_findings": [
+    {"rank": 524, "type": "critical_grammar/register", "observed": "Sais-tu le quantième est aujourd'hui ? / Do you know what day it is today?", "recommended": "Sais-tu quel jour on est aujourd'hui ? / Do you know what day it is today?", "note": "The construction is malformed and quantième is rare/marked for this everyday learner meaning."},
+    {"rank": 525, "type": "critical_grammar/register", "observed": "Savez-vous le quantième est aujourd'hui ? / Do you know what day it is today?", "recommended": "Savez-vous quel jour nous sommes aujourd'hui ? / Do you know what day it is today?"},
+    {"rank": 549, "type": "critical_semantic", "observed": "Allô, en quoi puis-je vous être utile ? / Excuse me, but do you need any help?", "recommended": "Allô, en quoi puis-je vous être utile ? / Hello, how can I help you?", "note": "The French is a telephone-style greeting plus an offer of help; the English is a different question."},
+    {"rank": 566, "type": "critical_grammar", "observed": "Est-ce ce que tu veux que je dise ?", "recommended": "Est-ce que c'est ce que tu veux que je dise ?"},
+    {"rank": 567, "type": "critical_grammar", "observed": "Est-ce ce que vous voulez que je dise ?", "recommended": "Est-ce que c'est ce que vous voulez que je dise ?"},
+    {"rank": 573, "type": "orthography", "observed": "Y-a-il quelque chose que nous pouvons faire pour aider ?", "recommended": "Y a-t-il quelque chose que nous pouvons faire pour aider ?"},
+    {"rank": 578, "type": "semantic", "observed": "Je peux faire quelque chose pour toi ? / Is there anything you want me to do?", "recommended": "Y a-t-il quelque chose que tu veux que je fasse ? / Is there anything you want me to do?", "note": "The French offers to do something; it does not explicitly ask what the other person wants done."},
+    {"rank": 622, "type": "orthography", "observed": "Y a t-il quelqu'un ici qui parle anglais ?", "recommended": "Y a-t-il quelqu'un ici qui parle anglais ?"},
+    {"rank": 631, "type": "politeness", "observed": "Pourrais-tu me dire comment le faire ? / Could you please tell me how to do this?", "recommended": "Pourrais-tu me dire comment le faire, s'il te plaît ? / Could you please tell me how to do this?"},
+    {"rank": 632, "type": "politeness", "observed": "Pourriez-vous me dire comment le faire ? / Could you please tell me how to do this?", "recommended": "Pourriez-vous me dire comment le faire, s'il vous plaît ? / Could you please tell me how to do this?"},
+    {"rank": 633, "type": "politeness/deixis", "observed": "Pourrais-tu me dire comment faire ça ? / Could you please tell me how to do this?", "recommended": "Pourrais-tu me dire comment faire ceci, s'il te plaît ? / Could you please tell me how to do this?"},
+    {"rank": 636, "type": "semantic", "observed": "Veux-tu me dire ce dont il s'agit ? / Do you want to tell me what this is?", "recommended": "Veux-tu me dire ce dont il s'agit ? / Do you want to tell me what this is about?"},
+    {"rank": 637, "type": "semantic", "observed": "Voulez-vous me dire ce dont il s'agit ? / Do you want to tell me what this is?", "recommended": "Voulez-vous me dire ce dont il s'agit ? / Do you want to tell me what this is about?"},
+    {"rank": 646, "type": "critical_deixis", "observed": "À quelle heure veux-tu que je sois là ? / What time do you want me to be here?", "recommended": "À quelle heure veux-tu que je sois ici ? / What time do you want me to be here?"},
+    {"rank": 658, "type": "spelling", "observed": "Pouvez-vous s'il vous plait me répéter votre nom ?", "recommended": "Pouvez-vous, s'il vous plaît, me répéter votre nom ?"},
+    {"rank": 664, "type": "spelling", "observed": "Peux-tu, s'il te plait, me dire pourquoi tu l'aimes ?", "recommended": "Peux-tu, s'il te plaît, me dire pourquoi tu l'aimes ?"},
+    {"rank": 669, "type": "english_grammar", "observed": "As-tu une idée d'où se trouve ton chien actuellement ? / Do you have idea where your dog is now?", "recommended": "As-tu une idée d'où se trouve ton chien actuellement ? / Do you have any idea where your dog is now?"},
+    {"rank": 687, "type": "semantic/modality", "observed": "Comment peux-tu être sûr que je veuille ce travail ? / How do you know I even want that job?", "recommended": "Comment sais-tu seulement si je veux ce travail ? / How do you know I even want that job?", "note": "The French asks how the person can be sure; the English asks how they know and includes 'even'."},
+    {"rank": 690, "type": "critical_grammar", "observed": "Est-ce ce que tu penses que je veux entendre ?", "recommended": "Est-ce que c'est ce que tu penses que je veux entendre ?"},
+    {"rank": 691, "type": "critical_grammar", "observed": "Est-ce ce que vous pensez que je veux entendre ?", "recommended": "Est-ce que c'est ce que vous pensez que je veux entendre ?"}
+  ],
+  "normalization_or_editorial_flags": [
+    {"ranks": [503,506], "issue": "cette nuit and tonight overlap but can differ from ce soir; choose time-of-day translations consistently for standalone learner pairs."},
+    {"ranks": [516,517], "issue": "planter quelqu'un is colloquial for ditch/leave stranded; valid but register-marked relative to the workbook's standard-formal variants."},
+    {"ranks": [547], "issue": "qui c'est is conversational French; decide whether to retain colloquial variants alongside standard qui il est."},
+    {"ranks": [561,562,563,564], "issue": "faire se sentir constructions are calqued/heavy; native editorial review should rewrite into idiomatic contemporary French."},
+    {"ranks": [574,575,576], "issue": "The French asks whether/how the listener can help rather than mirroring the English existential 'Is there anything you can do to help?'; semantically close but structurally awkward."},
+    {"ranks": [579,580,581,584,585,694,695,702,703,704,705,706,712], "issue": "Mood choices with vouloir after indefinite/interrogative antecedents vary; native editorial review should normalize without treating legitimate subjunctive forms as errors."},
+    {"ranks": [620,621], "issue": "ici maps to here, while English 'over here' adds a deictic nuance; acceptable but not exact."},
+    {"ranks": [653], "issue": "je vous en prie means 'please/go ahead' in context; English 'here you are' implies physically handing over the dictionary. Review if exact situational equivalence is required."},
+    {"ranks": [665,666], "issue": "je te/vous prie is formal/dated compared with surrounding contemporary prompts; standardize politeness register."},
+    {"ranks": [667], "issue": "English explicitly includes here; French omits it. Not necessarily contradictory, but the standalone pair is not exact."},
+    {"ranks": [684,685], "issue": "dire un mot is literally 'say a word'; avoir un mot/te parler un instant would more directly match English 'have a word with you'."},
+    {"ranks": [701], "issue": "French asks whether the speaker can do anything else; English asks whether there is anything else the listener wants done. Close but not fully equivalent."},
+    {"ranks": [714,715], "issue": "c'est quoi que is strongly conversational; keep only if colloquial French is intentionally within scope."},
+    {"ranks": [717], "issue": "là maintenant is awkward/calqued; prefer tout de suite or maintenant for standard learner French."}
+  ],
+  "checkpoint": {
+    "cumulative_rows_screened": 750,
+    "cumulative_coverage_percent": 75.0,
+    "next_row": 751,
+    "release_status": "BLOCKED_PENDING_FULL_SCREEN_AND_REPAIR"
+  }
+}
