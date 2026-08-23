@@ -1,0 +1,166 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-23",
+  "scope": "Final deterministic Arabic A1+A2 validation after assessment-review linkage repair",
+  "input_blobs": {
+    "a1": "bf7f0a6023b1cb129c9328021892d93cb120fa38",
+    "a2": "90b6f2f334b689200c76b25c3b7b983f89230555"
+  },
+  "base_validator_stats": {
+    "a1": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "new_targets": 100
+    },
+    "a2": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "new_targets": 79
+    }
+  },
+  "diagnostic_ledger": {
+    "original_diagnostics": 321,
+    "resolved_first_pass": 214,
+    "resolved_second_pass_variants": 41,
+    "removed_false_running_text_reviews": 43,
+    "final_count_repairs": 14,
+    "final_valid_morphology_no_change": 9,
+    "unresolved": 0
+  },
+  "assessment_review_linkage": {
+    "distinct_targets": 15,
+    "question_links": 17,
+    "learner_text_changes": 0,
+    "checks": [
+      {
+        "passage_id": "ar-a1-u03-p06",
+        "target_id": "ar-r97",
+        "representation": "other",
+        "question_ids": [
+          "q10"
+        ]
+      },
+      {
+        "passage_id": "ar-a1-u04-p04",
+        "target_id": "ar-r99",
+        "representation": "other",
+        "question_ids": [
+          "q8"
+        ]
+      },
+      {
+        "passage_id": "ar-a1-u06-p06",
+        "target_id": "ar-r317",
+        "representation": "other",
+        "question_ids": [
+          "q8"
+        ]
+      },
+      {
+        "passage_id": "ar-a1-u07-p06",
+        "target_id": "ar-r111",
+        "representation": "other",
+        "question_ids": [
+          "q2"
+        ]
+      },
+      {
+        "passage_id": "ar-a1-u08-p06",
+        "target_id": "ar-r397",
+        "representation": "other",
+        "question_ids": [
+          "q3"
+        ]
+      },
+      {
+        "passage_id": "ar-a1-u09-p06",
+        "target_id": "ar-r205",
+        "representation": "other",
+        "question_ids": [
+          "q4"
+        ]
+      },
+      {
+        "passage_id": "ar-a1-u09-p06",
+        "target_id": "ar-r480",
+        "representation": "other",
+        "question_ids": [
+          "q3"
+        ]
+      },
+      {
+        "passage_id": "ar-a1-u10-p06",
+        "target_id": "ar-r249",
+        "representation": "other",
+        "question_ids": [
+          "q6"
+        ]
+      },
+      {
+        "passage_id": "ar-a2-u01-p06",
+        "target_id": "ar-r583",
+        "representation": "other",
+        "question_ids": [
+          "q6"
+        ]
+      },
+      {
+        "passage_id": "ar-a2-u02-p06",
+        "target_id": "ar-r648",
+        "representation": "other",
+        "question_ids": [
+          "q6"
+        ]
+      },
+      {
+        "passage_id": "ar-a2-u02-p06",
+        "target_id": "ar-r663",
+        "representation": "other",
+        "question_ids": [
+          "q2",
+          "q10"
+        ]
+      },
+      {
+        "passage_id": "ar-a2-u03-p06",
+        "target_id": "ar-r885",
+        "representation": "other",
+        "question_ids": [
+          "q3"
+        ]
+      },
+      {
+        "passage_id": "ar-a2-u06-p06",
+        "target_id": "ar-r855",
+        "representation": "other",
+        "question_ids": [
+          "q3"
+        ]
+      },
+      {
+        "passage_id": "ar-a2-u09-p06",
+        "target_id": "ar-r1149",
+        "representation": "other",
+        "question_ids": [
+          "q2",
+          "q6"
+        ]
+      },
+      {
+        "passage_id": "ar-a2-u10-p06",
+        "target_id": "ar-r977",
+        "representation": "other",
+        "question_ids": [
+          "q6"
+        ]
+      }
+    ]
+  },
+  "base_expected_tolerated_errors": 15,
+  "hard_error_count": 0,
+  "hard_errors": [],
+  "quality_promotion": false,
+  "status": "PASS_ZERO_UNRESOLVED_DETERMINISTIC_NEEDS_FINAL_SEMANTIC_READ"
+}
