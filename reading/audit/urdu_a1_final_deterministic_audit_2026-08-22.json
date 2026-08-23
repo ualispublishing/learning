@@ -1,14 +1,14 @@
 {
   "audit": "urdu_a1_final_deterministic_audit",
-  "generated_at_utc": "2026-08-23T13:21:26.066115+00:00",
-  "status": "PASS_DETERMINISTIC_POST_UNITS07_08_INTERNAL_REPAIR_NEEDS_INDEPENDENT_REVIEW",
-  "scope": "Fresh deterministic audit after Urdu A1 Units07-08 internal semantic/naturalness/answer/pedagogy review and bounded repairs; no native-speaker, independent-model, educator, or release approval.",
+  "generated_at_utc": "2026-08-23T13:25:45.506175+00:00",
+  "status": "PASS_DETERMINISTIC_FULL_A1_INTERNAL_REVIEW_COMPLETE_NEEDS_INDEPENDENT_REVIEW",
+  "scope": "Fresh deterministic audit after internal semantic/naturalness/answer/pedagogy review across all 60 Urdu A1 passages plus exact generic-explanation placeholder cleanup. Internal model review is complete; native-speaker, independent-model, educator, explanation-enrichment, and blind release review remain pending.",
   "source": {
     "path": "reading/urdu/a1/passages.jsonl",
-    "actual_sha256": "636f8b2f18b1948ae4155cb605b8ebd989d412f73d0bf82f8269378d4046cc2f",
+    "actual_sha256": "af35f4bfa1c41b4fec5a08a13ac1a2f52007b6f0f1406873c28b3f9e2a108a07",
     "hash_bound": true,
-    "prior_sha256": "9203d429d7cd84a75d464a7ad2f063f569801741da25dce2feda4a96fb66d662",
-    "latest_repair_evidence": "reading/audit/urdu_a1_units07_08_internal_review_2026-08-23.json"
+    "prior_sha256": "636f8b2f18b1948ae4155cb605b8ebd989d412f73d0bf82f8269378d4046cc2f",
+    "latest_repair_evidence": "reading/audit/urdu_a1_units09_10_internal_review_2026-08-23.json"
   },
   "counts": {
     "passages": 60,
@@ -18,7 +18,8 @@
     "formal_task_types": 0,
     "learner_facing_roman_script_findings": 0,
     "learner_explanation_internal_review_leakage_findings": 0,
-    "violations": 0
+    "violations": 0,
+    "generic_placeholder_explanations": 0
   },
   "checks": {
     "passage_count_exact_60": true,
@@ -36,13 +37,15 @@
     "internal_units03_04_semantic_naturalness_answer_pedagogy": "COMPLETE_INTERNAL",
     "internal_units05_06_semantic_naturalness_answer_pedagogy": "COMPLETE_INTERNAL",
     "internal_units07_08_semantic_naturalness_answer_pedagogy": "COMPLETE_INTERNAL",
+    "internal_units09_10_semantic_naturalness_answer_pedagogy": "COMPLETE_INTERNAL_WITH_PLACEHOLDER_CLEANUP",
+    "internal_a1_coverage": "COMPLETE_60_OF_60_PASSAGES",
     "metalinguistic_class_corpus_wide": "ADJUDICATED_INTERNAL",
-    "abstract_task_candidate_class_through_unit04": "ADJUDICATED_INTERNAL",
-    "units09_10_full_semantic_naturalness_answer_pedagogy": "PENDING_INTERNAL",
+    "generic_explanation_placeholder_class_units09_10": "REMOVED_EXACT_CLASS",
+    "explanation_enrichment": "PENDING_INDEPENDENT",
     "native_urdu_naturalness_orthography": "PENDING",
     "independent_model_family": "PENDING",
     "educator_cefr": "PENDING",
     "blind_postrepair": "PENDING"
   },
-  "release_effect": "NONE_AUTOMATIC: Urdu A1 remains non-release-ready."
+  "release_effect": "NONE_AUTOMATIC: Urdu A1 remains non-release-ready until independent/native/educator/blind gates are completed."
 }
