@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "urdu",
+  "level": "A1",
+  "scope": {
+    "canonical_path": "reading/urdu/a1/passages.jsonl",
+    "canonical_blob_sha": "16507c293ae39cd44f7f5136dd00c9ef029646a7",
+    "sequences": [31, 36],
+    "passage_ids": [
+      "ur-a1-u06-p01",
+      "ur-a1-u06-p02",
+      "ur-a1-u06-p03",
+      "ur-a1-u06-p04",
+      "ur-a1-u06-p05",
+      "ur-a1-u06-p06"
+    ]
+  },
+  "audit_type": "manual_semantic_linguistic_pedagogical_pass_1",
+  "status": "REPAIR_REQUIRED",
+  "release_effect": "Detection evidence only. This artifact does not approve passages, mutate quality metadata, or certify educator release.",
+  "findings": [
+    {
+      "id": "U6P01-01",
+      "passage_id": "ur-a1-u06-p01",
+      "severity": "minor",
+      "field": "text",
+      "original": "وہاں سے پارک کی راہ سامنے آتی ہے۔",
+      "correction": "وہاں سے پارک کی طرف جانے والی راہ سامنے آتی ہے۔",
+      "reason": "The original possessive relation is compressed and less natural than an explicit directional relation."
+    },
+    {
+      "id": "U6P02-01",
+      "passage_id": "ur-a1-u06-p02",
+      "severity": "major",
+      "field": "title/text/q10",
+      "original": ["پہلا بس کا سفر", "یہ اس سال اس کا پہلا بس کا سفر ہے۔", "اسے اپنا پہلا بس کا سفر آسان اور دلچسپ لگتا ہے۔", "یہ میرا _____ بس کا سفر ہے۔"],
+      "correction": ["بس میں پہلا سفر", "یہ اس سال بس میں اس کا پہلا سفر ہے۔", "اسے بس میں اپنا پہلا سفر آسان اور دلچسپ لگتا ہے۔", "یہ میرا بس میں _____ _____ ہے۔ -> پہلا؛ سفر"],
+      "reason": "پہلا بس کا سفر has nonstandard/awkward constituent order. The cloze currently reinforces that order. Repairs should preserve both lexical targets and trigger exposure recounting."
+    },
+    {
+      "id": "U6P02-02",
+      "passage_id": "ur-a1-u06-p02",
+      "severity": "minor",
+      "field": "a6",
+      "original": "ایک جگہ سے دوسری جگہ جانے کا عمل یا دورہ۔",
+      "correction": "ایک جگہ سے دوسری جگہ جانے کا عمل یا سفر۔",
+      "reason": "Using دورہ as a near-definition risks conflating journey/travel with visit/tour for an A1 learner, especially because دورہ is later taught as a separate target."
+    },
+    {
+      "id": "U6P03-01",
+      "passage_id": "ur-a1-u06-p03",
+      "severity": "minor",
+      "field": "text",
+      "original": "عائشہ کا اسکول کا راستہ صبح اور شام تھوڑا مختلف لگتا ہے۔",
+      "correction": "عائشہ کا اسکول جانے کا راستہ صبح اور شام تھوڑا مختلف لگتا ہے۔",
+      "reason": "Avoids the awkward stacked possessive عائشہ کا اسکول کا راستہ and states the intended route-to-school relation directly."
+    },
+    {
+      "id": "U6P04-01",
+      "passage_id": "ur-a1-u06-p04",
+      "severity": "minor",
+      "field": "text",
+      "original": "مریم فون ہاتھ میں رکھتی ہے اور ہر قدم سنتی جاتی ہے۔",
+      "correction": "مریم فون ہاتھ میں رکھتی ہے اور عائشہ کی ہدایات سنتی جاتی ہے۔",
+      "reason": "A learner listens to instructions, not literally to each step."
+    },
+    {
+      "id": "U6P05-01",
+      "passage_id": "ur-a1-u06-p05",
+      "severity": "minor",
+      "field": "text",
+      "original": "ہفتے کو عائشہ مریم کے ساتھ قریبی کتابوں کی دکان جانا چاہتی ہے۔",
+      "correction": "ہفتے کو عائشہ مریم کے ساتھ قریبی کتابوں کی دکان پر جانا چاہتی ہے۔",
+      "reason": "Adding پر gives the standard destination construction for the shop."
+    },
+    {
+      "id": "U6P06-01",
+      "passage_id": "ur-a1-u06-p06",
+      "severity": "minor",
+      "field": "text/a2/q2",
+      "original": ["وہ پہلے صحیح راہ دیکھتی ہے اور پھر آگے بڑھتی ہے۔", "گھر سے نکلتے وقت عائشہ راہ اور آگے کی سمت کے ساتھ کیا کرتی ہے؟"],
+      "correction": ["وہ پہلے صحیح راہ چنتی ہے اور پھر آگے بڑھتی ہے۔", "گھر سے نکلتے وقت عائشہ پہلے کیا چنتی ہے اور پھر کیا کرتی ہے؟"],
+      "reason": "راہ چننا is the natural action here; the current question is a forced metalinguistic construction built around target labels."
+    },
+    {
+      "id": "U6P06-02",
+      "passage_id": "ur-a1-u06-p06",
+      "severity": "major",
+      "field": "q3/a3",
+      "original": "صبح اور شام عائشہ کی واپسی کی ترتیب کیا ہے؟ -> وہ صبح وقت پر نکلتی ہے اور شام کو سیدھا گھر واپس آتی ہے۔",
+      "correction": "صبح اور شام عائشہ کی روز کی ترتیب کیا ہے؟ -> وہ صبح وقت پر نکلتی ہے اور شام کو سیدھا گھر واپس آتی ہے۔",
+      "reason": "The answer describes morning departure plus evening return, while the prompt incorrectly frames both as return."
+    },
+    {
+      "id": "U6P06-03",
+      "passage_id": "ur-a1-u06-p06",
+      "severity": "major",
+      "field": "q8/a8",
+      "original": "یہ میرا _____ بس کا _____ ہے۔ -> سفر؛ پہلا",
+      "correction": "یہ میرا بس میں _____ _____ ہے۔ -> پہلا؛ سفر",
+      "reason": "The keyed answer produces an impossible sentence, and even the target-id ordering would preserve the awkward constituent order from P02."
+    },
+    {
+      "id": "U6P06-04",
+      "passage_id": "ur-a1-u06-p06",
+      "severity": "major",
+      "field": "q9/a9",
+      "original": "_____ نکلتے وقت _____ واپسی کا وقت بتاؤ؛ ضرورت ہو تو _____ کرو اور دوسرا _____ دیکھو۔ -> صبح؛ شام؛ فون؛ طریقہ",
+      "correction": "_____ گھر سے نکلتے وقت بتاؤ کہ _____ کو کب واپس آؤ گے؛ ضرورت ہو تو _____ کرو اور دوسرا _____ دیکھو۔ -> صبح؛ شام؛ فون؛ طریقہ",
+      "reason": "The current completion yields شام واپسی, an ungrammatical/unnatural sequence. The repaired frame preserves all four targets in operational A1 use."
+    },
+    {
+      "id": "U6P06-05",
+      "passage_id": "ur-a1-u06-p06",
+      "severity": "major",
+      "field": "q10/a10",
+      "original": "باہر جانے سے پہلے _____ لو اور _____ راستہ چنو۔ -> صحیح؛ اجازت",
+      "correction": "باہر جانے سے پہلے _____ لو اور _____ راستہ چنو۔ -> اجازت؛ صحیح",
+      "reason": "The answer order is reversed. The current key produces صحیح لو اور اجازت راستہ چنو, which is invalid learner-facing Urdu."
+    }
+  ],
+  "summary": {
+    "passages_reviewed": 6,
+    "findings": 11,
+    "major": 5,
+    "minor": 6,
+    "critical": 0,
+    "passages_with_findings": 6
+  },
+  "checkpoint_observation": "The source instructional passages and their cumulative checkpoint can fail differently. In Unit 06, the source P02 cloze target ordering is usable after a local wording repair, while P06 independently introduces reversed keys and malformed cumulative cloze frames. Checkpoint auditing must therefore remain a separate explicit pass.",
+  "required_next_actions": [
+    "Audit Units 07 and 08 with the same checkpoint-separated method.",
+    "Add Unit 06 findings to a bounded repair manifest before editing canonical learner-facing content.",
+    "After accepted repairs, rerun schema, question-answer linkage, exact target exposure counts, review chronology, lexical coverage, and A1 level checks.",
+    "Do not flip pending quality fields based on this detection pass alone."
+  ]
+}
