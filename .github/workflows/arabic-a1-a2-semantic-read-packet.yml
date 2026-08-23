@@ -1,0 +1,41 @@
+name: Arabic A1+A2 semantic read packet
+
+on:
+  push:
+    branches: [audit/arabic-a1-a2-integrated-2026-08-23]
+    paths:
+      - 'reading/tools/extract_arabic_a1_a2_semantic_read_packet.py'
+      - '.github/workflows/arabic-a1-a2-semantic-read-packet.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arabic-a1-a2-semantic-read-packet
+  cancel-in-progress: false
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/arabic-a1-a2-integrated-2026-08-23
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Extract final semantic read packet
+        run: python reading/tools/extract_arabic_a1_a2_semantic_read_packet.py
+      - name: Commit packet
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reading/audit/arabic_a1_a2_semantic_read_packet_2026-08-23.md
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Extract Arabic A1/A2 final semantic read packet [skip ci]"
+          git fetch origin audit/arabic-a1-a2-integrated-2026-08-23
+          git rebase origin/audit/arabic-a1-a2-integrated-2026-08-23
+          git push origin HEAD:audit/arabic-a1-a2-integrated-2026-08-23
