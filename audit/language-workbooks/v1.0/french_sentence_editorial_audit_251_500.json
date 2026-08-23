@@ -1,0 +1,45 @@
+{
+  "artifact": "French sentence bank editorial audit - rows 251-500",
+  "workbook_release": "v1.0",
+  "source_path": "completed/languages/workbooks/v1.0/french/french_sentence_bank_1000.csv",
+  "source_zip_sha256": "9e35994767f7307dc1fa9d5efcc36681f3756a1bdaaa02c1381b3eb11461261e",
+  "target_register": "standard contemporary French",
+  "range": {"start": 251, "end": 500, "rows_screened": 250},
+  "status": "BLOCKING_DEFECTS_FOUND",
+  "confirmed_or_high_confidence_findings": [
+    {"rank": 304, "type": "critical_deixis", "observed": "Où allons-nous à partir de là ? / Where do we go from here?", "recommended": "Où allons-nous à partir d'ici ? / Where do we go from here?", "note": "là means there, while English specifies here."},
+    {"rank": 332, "type": "critical_semantic", "observed": "Pourquoi voulez-vous savoir ? / Why do you need to know?", "recommended": "Pourquoi avez-vous besoin de savoir ? / Why do you need to know?", "note": "vouloir means want, not need."},
+    {"rank": 333, "type": "critical_semantic", "observed": "Pourquoi veux-tu savoir ? / Why do you need to know?", "recommended": "Pourquoi as-tu besoin de savoir ? / Why do you need to know?"},
+    {"rank": 339, "type": "politeness", "observed": "Viendrais-tu avec moi ? / Would you come with me, please?", "recommended": "Viendrais-tu avec moi, s'il te plaît ? / Would you come with me, please?"},
+    {"rank": 356, "type": "semantic", "observed": "Peux-tu me dire de quoi il retourne ? / Can you tell me what this is?", "recommended": "Peux-tu me dire de quoi il retourne ? / Can you tell me what this is about?"},
+    {"rank": 357, "type": "semantic", "observed": "Peux-tu me dire de quoi il s'agit ? / Can you tell me what this is?", "recommended": "Peux-tu me dire de quoi il s'agit ? / Can you tell me what this is about?"},
+    {"rank": 359, "type": "semantic", "observed": "Pouvez-vous me dire de quoi il retourne ? / Can you tell me what this is?", "recommended": "Pouvez-vous me dire de quoi il retourne ? / Can you tell me what this is about?"},
+    {"rank": 360, "type": "semantic", "observed": "Pouvez-vous me dire de quoi il s'agit ? / Can you tell me what this is?", "recommended": "Pouvez-vous me dire de quoi il s'agit ? / Can you tell me what this is about?"},
+    {"rank": 366, "type": "tense/modality", "observed": "Pourrez-vous m'aider quand je déménagerai ? / Could you help me when I move?", "recommended": "Pourrez-vous m'aider quand je déménagerai ? / Will you be able to help me when I move?"},
+    {"rank": 368, "type": "spelling", "observed": "Pourrais-tu me rappeler demain, s'il te plait ?", "recommended": "Pourrais-tu me rappeler demain, s'il te plaît ?"},
+    {"rank": 379, "type": "critical_polarity", "observed": "Tu ne sais pas où est ma montre ? / Do you know where my watch is?", "recommended": "Tu ne sais pas où est ma montre ? / Don't you know where my watch is?", "note": "The French is negative; the English is positive."},
+    {"rank": 406, "type": "modality", "observed": "Comment pouvez-vous savoir qui je suis ? / How do you know who I am?", "recommended": "Comment savez-vous qui je suis ? / How do you know who I am?", "note": "pouvez-vous savoir means 'how can you know', not simply 'how do you know'."},
+    {"rank": 421, "type": "deixis", "observed": "Que pensez-vous qu'il y ait là-bas ? / What do you think is down there?", "recommended": "Que pensez-vous qu'il y ait en bas ? / What do you think is down there?"},
+    {"rank": 475, "type": "spelling", "observed": "Pourrais-tu me ramener chez moi, s'il te plait ?", "recommended": "Pourrais-tu me ramener chez moi, s'il te plaît ?"},
+    {"rank": 485, "type": "spelling", "observed": "Pourriez-vous me dire qui vous êtes, s'il vous plait ?", "recommended": "Pourriez-vous me dire qui vous êtes, s'il vous plaît ?"},
+    {"rank": 486, "type": "spelling", "observed": "Pourrais-tu me dire qui tu es, s'il te plait ?", "recommended": "Pourrais-tu me dire qui tu es, s'il te plaît ?"}
+  ],
+  "normalization_or_editorial_flags": [
+    {"ranks": [264], "issue": "French future arriverez-vous and English present 'do you arrive tomorrow' are compatible in context but not tense-identical; consider aligning for standalone drills."},
+    {"ranks": [266,328,371,388,431,451,452,456,459,494,495], "issue": "Conversational subject-verb word order is valid spoken French but mixed with formal inversion; define whether the workbook intentionally teaches both registers."},
+    {"ranks": [277,340], "issue": "French vouloir is more direct than English 'would you like'; align politeness/register if exact equivalence is the goal."},
+    {"ranks": [302], "issue": "French specifies ce matin while English says today; not contradictory for breakfast, but standalone time precision differs."},
+    {"ranks": [305], "issue": "Où avons-nous besoin d'aller ? is understandable but calqued; Où devons-nous aller ? is more idiomatic standard French."},
+    {"ranks": [345,346], "issue": "requérir is grammatical but formal/legal in everyday contexts; need is better rendered by avoir besoin de for a general learner workbook."},
+    {"ranks": [443,444,471,472,473,474,476], "issue": "je vous/te prie constructions are formal or dated relative to surrounding conversational material; native editorial review should normalize register."},
+    {"ranks": [447,448], "issue": "French says 'tell me what I can do to help'; English says 'tell me how I can help'. Semantically close but not literal; either English can be tightened or pair replaced."},
+    {"ranks": [481,482], "issue": "Adverb placement/comma usage is awkward for contemporary learner French; prefer Pouvez-vous me redire votre nom ? or Pouvez-vous me dire votre nom à nouveau ?."},
+    {"ranks": [496,497], "issue": "Subjunctive veuille after fait penser is marked; native editorial review should choose a contemporary mood/register policy."}
+  ],
+  "checkpoint": {
+    "cumulative_rows_screened": 500,
+    "cumulative_coverage_percent": 50.0,
+    "next_row": 501,
+    "release_status": "BLOCKED_PENDING_FULL_SCREEN_AND_REPAIR"
+  }
+}
