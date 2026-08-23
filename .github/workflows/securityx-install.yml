@@ -37,6 +37,10 @@ jobs:
             test -f "$f"
             if [ "$i" = "009" ]; then
               head -c 12000 "$f" >> /tmp/securityx.b64
+            elif [ "$i" = "014" ]; then
+              test "$(wc -c < .securityx-pages/site-tarxz/fix-014-a.txt | tr -d ' ')" = "6000"
+              test "$(wc -c < .securityx-pages/site-tarxz/fix-014-b.txt | tr -d ' ')" = "6000"
+              cat .securityx-pages/site-tarxz/fix-014-a.txt .securityx-pages/site-tarxz/fix-014-b.txt >> /tmp/securityx.b64
             else
               cat "$f" >> /tmp/securityx.b64
             fi
