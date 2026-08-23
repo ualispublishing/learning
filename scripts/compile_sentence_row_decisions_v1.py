@@ -2,31 +2,32 @@
 """Compile one authoritative curation decision for every workbook sentence row.
 
 The completed row-by-row editorial audit is the source of truth. This script does
-not re-audit or invent new corrections. It only converts the audit ledgers into
-explicit per-rank states that downstream correction/regeneration must obey.
+not re-audit or invent new corrections. It converts the audit ledgers into an
+explicit state for every rank and preserves an existing approval only when the
+source row and its exact audit evidence are unchanged.
 
 Initial states:
-- KEEP: the row was explicitly inside a completed audit range and no issue was logged.
-- CORRECT_PENDING_SECOND_PASS: a confirmed/high-confidence finding contains an
-  audited recommendation that can be verified and promoted.
-- REPLACE_PENDING_SECOND_PASS: the audit explicitly calls for replacement or
-  retranslation rather than a deterministic edit.
-- NATIVE_REVIEW: the audit flagged register/naturalness/ambiguity or supplied no
-  deterministic correction.
+- KEEP
+- CORRECT_PENDING_SECOND_PASS
+- REPLACE_PENDING_SECOND_PASS
+- NATIVE_REVIEW
 
-Only a later second-pass verification may promote pending states to
-CORRECT_APPROVED / REPLACE_APPROVED. Regeneration must fail while any pending or
-native-review state remains.
+Approved states preserved only under an unchanged audit fingerprint:
+- CORRECT_APPROVED
+- REPLACE_APPROVED
 """
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 AUDIT = ROOT / "audit" / "language-workbooks" / "v1.0"
 OUT = ROOT / "curation" / "language-workbooks" / "v1.0"
+RESOLVED = {"KEEP", "CORRECT_APPROVED", "REPLACE_APPROVED"}
+APPROVED = {"CORRECT_APPROVED", "REPLACE_APPROVED"}
 
 CONFIG = {
     "arabic": {
@@ -80,6 +81,26 @@ def is_replace_action(value: object) -> bool:
     return "replace" in value or "retranslate" in value
 
 
+def fingerprint(row: dict, confirmed: list[dict], flags: list[dict]) -> str:
+    payload = {
+        "source_target": row["target"],
+        "source_english": row["english"],
+        "source_attribution": row["attribution"],
+        "confirmed_findings": confirmed,
+        "editorial_flags": flags,
+    }
+    raw = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+
+def load_previous(path: Path) -> dict[int, dict]:
+    if not path.exists():
+        return {}
+    data = json.loads(path.read_text(encoding="utf-8"))
+    rows = data.get("rows", [])
+    return {int(row["rank"]): row for row in rows if isinstance(row, dict) and "rank" in row}
+
+
 def compile_language(language: str, cfg: dict) -> dict:
     rows = load_rows(cfg["source"])
     audited_ranks: set[int] = set()
@@ -96,8 +117,7 @@ def compile_language(language: str, cfg: dict) -> dict:
         if span:
             start, end = int(span["start"]), int(span["end"])
         else:
-            # The original Urdu 1-250 ledger predates the explicit range object.
-            start, end = 1, 250
+            start, end = 1, 250  # original Urdu 1-250 ledger
         for rank in range(start, end + 1):
             if rank in audited_ranks:
                 raise SystemExit(f"Overlapping audit coverage for {language} rank {rank}")
@@ -118,7 +138,10 @@ def compile_language(language: str, cfg: dict) -> dict:
         extra = sorted(audited_ranks - expected)
         raise SystemExit(f"Incomplete audit coverage for {language}; missing={missing[:20]} extra={extra[:20]}")
 
+    output_path = OUT / f"{language}_sentence_row_decisions.json"
+    previous = load_previous(output_path)
     decisions = []
+
     for row in rows:
         rank = int(row["rank"])
         c = confirmed.get(rank, [])
@@ -136,18 +159,38 @@ def compile_language(language: str, cfg: dict) -> dict:
         else:
             status = "KEEP"
 
+        audit_fingerprint = fingerprint(row, c, f)
+        prior = previous.get(rank)
+        approved_target = None
+        approved_english = None
+        approval_note = None
+        approval_source = None
+
+        if (
+            prior
+            and prior.get("audit_fingerprint") == audit_fingerprint
+            and prior.get("status") in APPROVED
+        ):
+            status = prior["status"]
+            approved_target = prior.get("approved_target")
+            approved_english = prior.get("approved_english")
+            approval_note = prior.get("approval_note")
+            approval_source = prior.get("approval_source")
+
         decisions.append(
             {
                 "rank": rank,
                 "status": status,
+                "audit_fingerprint": audit_fingerprint,
                 "source_target": row["target"],
                 "source_english": row["english"],
                 "source_attribution": row["attribution"],
                 "confirmed_findings": c,
                 "editorial_flags": f,
-                "approved_target": None,
-                "approved_english": None,
-                "approval_note": None,
+                "approved_target": approved_target,
+                "approved_english": approved_english,
+                "approval_note": approval_note,
+                "approval_source": approval_source,
             }
         )
 
@@ -169,6 +212,7 @@ def compile_language(language: str, cfg: dict) -> dict:
             "independent_rederivation_during_build_forbidden": True,
             "pending_or_native_review_blocks_regeneration": True,
             "second_pass_required_before_correction_or_replacement_approval": True,
+            "approval_survives_recompile_only_when_audit_fingerprint_matches": True,
         },
         "status_counts": counts,
         "rows": decisions,
@@ -183,7 +227,7 @@ def main() -> None:
         path = OUT / f"{language}_sentence_row_decisions.json"
         path.write_text(json.dumps(compiled, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         counts = compiled["status_counts"]
-        unresolved = sum(v for k, v in counts.items() if k != "KEEP")
+        unresolved = sum(v for k, v in counts.items() if k not in RESOLVED)
         summary["languages"][language] = {"status_counts": counts, "unresolved_rows": unresolved}
         summary["total_rows"] += 1000
         summary["unresolved_rows"] += unresolved
