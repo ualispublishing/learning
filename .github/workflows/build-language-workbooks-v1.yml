@@ -5,6 +5,7 @@ on:
     paths:
       - 'scripts/build_language_workbooks_v1.py'
       - 'scripts/build_language_workbooks_v1_quality.py'
+      - 'scripts/workbook_release_passes.py'
       - '.github/workflows/build-language-workbooks-v1.yml'
       - 'arabic_top1000.csv'
       - 'french_top1000.csv'
@@ -13,6 +14,7 @@ on:
     paths:
       - 'scripts/build_language_workbooks_v1.py'
       - 'scripts/build_language_workbooks_v1_quality.py'
+      - 'scripts/workbook_release_passes.py'
       - '.github/workflows/build-language-workbooks-v1.yml'
       - 'audit/language-workbooks/v1.0/BUILD_TRIGGER.md'
   workflow_dispatch:
@@ -23,7 +25,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 40
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4
@@ -47,29 +49,46 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install 'weasyprint>=66,<67' 'pypdf>=6,<7'
 
-      - name: Attest canonical language datasets
-        run: |
-          python scripts/attest_live_csvs.py
-          python scripts/audit_french_urdu_top1000_regressions.py
-
-      - name: Build quality-gated production candidate
-        run: python scripts/build_language_workbooks_v1_quality.py
-
-      - name: Structural and render preflight
+      - name: Pass 1 — canonical vocabulary integrity (max 3 min)
         shell: bash
         run: |
           set -euo pipefail
-          count=0
-          while IFS= read -r -d '' pdf; do
-            qpdf --check "$pdf"
-            pdfinfo "$pdf" >/dev/null
-            stem=$(basename "$pdf" .pdf)
-            pdftoppm -f 1 -singlefile -png -r 90 "$pdf" "/tmp/${stem}" >/dev/null 2>&1
-            test -s "/tmp/${stem}.png"
-            count=$((count+1))
-          done < <(find completed/languages/workbooks/v1.0 -name '*.pdf' -print0)
-          test "$count" -eq 42
-          echo "Verified $count PDFs with qpdf, pdfinfo, and Poppler rendering."
+          timeout --signal=TERM 180s python scripts/attest_live_csvs.py
+          timeout --signal=TERM 180s python scripts/audit_french_urdu_top1000_regressions.py
+
+      - name: Pass 2 — select 3,000 sentence corpus (max 5 min)
+        shell: bash
+        run: timeout --signal=TERM 300s python scripts/workbook_release_passes.py corpus-select
+
+      - name: Pass 3 — full corpus audit + stratified samples (max 2 min)
+        shell: bash
+        run: timeout --signal=TERM 120s python scripts/workbook_release_passes.py corpus-audit
+
+      - name: Pass 4 — build 42 PDFs from approved corpus (max 12 min)
+        shell: bash
+        run: timeout --signal=TERM 720s python scripts/workbook_release_passes.py build
+
+      - name: Pass 5 — structural and render preflight (max 7 min)
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout --signal=TERM 420s bash -c '
+            count=0
+            while IFS= read -r -d "" pdf; do
+              qpdf --check "$pdf"
+              pdfinfo "$pdf" >/dev/null
+              stem=$(basename "$pdf" .pdf)
+              pdftoppm -f 1 -singlefile -png -r 100 "$pdf" "/tmp/${stem}" >/dev/null 2>&1
+              test -s "/tmp/${stem}.png"
+              count=$((count+1))
+            done < <(find completed/languages/workbooks/v1.0 -name "*.pdf" -print0)
+            test "$count" -eq 42
+            echo "Verified $count PDFs with qpdf, pdfinfo, and Poppler rendering."
+          '
+
+      - name: Pass 6 — release manifest and cross-gate audit (max 2 min)
+        shell: bash
+        run: timeout --signal=TERM 120s python scripts/workbook_release_passes.py release-audit
 
       - name: Archive release artifact
         uses: actions/upload-artifact@v4
@@ -94,6 +113,6 @@ jobs:
             echo 'No release-output changes.'
             exit 0
           fi
-          git commit -m 'release: rebuild language workbooks v1.0 after linguistic QA'
+          git commit -m 'release: language workbooks v1.0 staged quality candidate'
           git pull --rebase origin "$branch"
           git push origin "$branch"
