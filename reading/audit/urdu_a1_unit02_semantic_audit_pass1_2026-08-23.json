@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "urdu",
+  "level": "A1",
+  "scope": {
+    "canonical_path": "reading/urdu/a1/passages.jsonl",
+    "canonical_blob_sha": "16507c293ae39cd44f7f5136dd00c9ef029646a7",
+    "sequences": [7, 12],
+    "passage_ids": ["ur-a1-u02-p01","ur-a1-u02-p02","ur-a1-u02-p03","ur-a1-u02-p04","ur-a1-u02-p05","ur-a1-u02-p06"]
+  },
+  "audit_type": "manual_semantic_linguistic_pedagogical_pass_1",
+  "status": "REPAIR_REQUIRED",
+  "release_effect": "Detection evidence only. No quality gate is promoted by this audit.",
+  "findings": [
+    {
+      "id": "U2P01-01",
+      "passage_id": "ur-a1-u02-p01",
+      "severity": "major",
+      "field": "q8/a8",
+      "original": "«کچھ نہ رہ جائے» میں «نہ» کیا کرتا ہے؟ -> یہ نفی کرتا ہے، یعنی چیز کے رہ جانے کو رد کرتا ہے۔",
+      "correction": "«کچھ نہ رہ جائے» کا مطلب کیا ہے؟ -> کوئی ضروری چیز پیچھے نہ چھوٹے۔",
+      "reason": "The current item asks an A1 learner to name a grammar function instead of understanding the phrase operationally."
+    },
+    {
+      "id": "U2P01-02",
+      "passage_id": "ur-a1-u02-p01",
+      "severity": "minor",
+      "field": "text",
+      "original": "مریم گلی کے پاس اس کا انتظار کر رہی ہوتی ہے۔",
+      "correction": "مریم گلی کے موڑ پر اس کا انتظار کر رہی ہوتی ہے۔",
+      "reason": "گلی کے پاس is underspecified/awkward for a concrete waiting location; the proposed phrase is natural and A1-clear."
+    },
+    {
+      "id": "U2P02-01",
+      "passage_id": "ur-a1-u02-p02",
+      "severity": "major",
+      "field": "q8/a8",
+      "original": "«اس کی روز کی زندگی» میں «کی» کیا تعلق دکھاتا ہے؟ -> یہ عائشہ اور اس کی زندگی کے درمیان ملکیت/تعلق دکھاتا ہے۔",
+      "correction": "«اس کی روز کی زندگی» کس کی زندگی ہے؟ -> عائشہ کی۔",
+      "reason": "The current question and answer use explicit grammatical metalanguage (relation/possession) rather than practical A1 comprehension."
+    },
+    {
+      "id": "U2P02-02",
+      "passage_id": "ur-a1-u02-p02",
+      "severity": "minor",
+      "field": "a7",
+      "original": "جینے کا حال یا طریقہ؛ یہاں روزمرہ کے معمول۔",
+      "correction": "انسان کے جینے اور روزمرہ کے کاموں کا مجموعہ؛ یہاں عائشہ کا روزمرہ معمول۔",
+      "reason": "The original learner-facing definition is compressed and unnatural."
+    },
+    {
+      "id": "U2P03-01",
+      "passage_id": "ur-a1-u02-p03",
+      "severity": "minor",
+      "field": "text",
+      "original": "مریم نے گھڑی کا استعمال دوبارہ شروع کیا اور وقت دیکھا۔",
+      "correction": "مریم نے گھڑی دوبارہ استعمال کرنا شروع کی اور وقت دیکھا۔",
+      "reason": "The nominalized استعمال construction is grammatical but unnecessarily stiff in an A1 narrative."
+    },
+    {
+      "id": "U2P03-02",
+      "passage_id": "ur-a1-u02-p03",
+      "severity": "major",
+      "field": "q8/a8",
+      "original": "«کیا تم میری مدد کر سکتی ہو؟» کس قسم کا سوال ہے؟ -> ایسا سوال جس کا جواب ہاں یا نہیں میں دیا جا سکتا ہے۔",
+      "correction": "«کیا تم میری مدد کر سکتی ہو؟» کا مناسب مختصر مثبت جواب کیا ہے؟ -> ہاں، کر سکتی ہوں۔",
+      "reason": "The current item tests formal question classification instead of communication."
+    },
+    {
+      "id": "U2P03-03",
+      "passage_id": "ur-a1-u02-p03",
+      "severity": "minor",
+      "field": "text",
+      "original": "پھر عائشہ نے اپنے فون کے الارم کا استعمال دکھایا۔",
+      "correction": "پھر عائشہ نے دکھایا کہ فون کا الارم کیسے استعمال کرنا ہے۔",
+      "reason": "The repaired phrasing is more natural and directly models the verb construction learners need."
+    },
+    {
+      "id": "U2P04-01",
+      "passage_id": "ur-a1-u02-p04",
+      "severity": "minor",
+      "field": "new_lexical_targets[دوران].intended_sense",
+      "original": "during; duration; course/period",
+      "correction": "during; in the course of (sense taught here)",
+      "reason": "The intended-sense field should stay scoped to the sense actually taught in the passage rather than mixing noun senses with the postpositional use."
+    },
+    {
+      "id": "U2P04-02",
+      "passage_id": "ur-a1-u02-p04",
+      "severity": "minor",
+      "field": "a3/a6",
+      "original": ["کسی کام یا مدت کے اندر گزرنے والا وقت۔", "کے وقت؛ کسی مدت کے اندر۔"],
+      "correction": ["کسی کام کے ہوتے وقت۔", "کسی کام کے ہوتے وقت؛ اس کے بیچ میں۔"],
+      "reason": "The current definitions are more abstract than necessary for A1 and describe duration rather than the practical during-relation."
+    },
+    {
+      "id": "U2P05-01",
+      "passage_id": "ur-a1-u02-p05",
+      "severity": "minor",
+      "field": "q8.type",
+      "original": "cause_effect",
+      "correction": "conditional_comprehension",
+      "reason": "The question asks under what condition she will join next week; it is not a causal relation. This is metadata/pedagogical classification, not a learner-facing wording defect."
+    },
+    {
+      "id": "U2P06-01",
+      "passage_id": "ur-a1-u02-p06",
+      "severity": "minor",
+      "field": "q3",
+      "original": "مریم کو گھڑی یا الارم کے بارے میں مسئلہ ہو تو عائشہ کیا کرتی ہے؟",
+      "correction": "مریم کو گھڑی یا الارم استعمال کرنے میں مدد چاہیے ہو تو عائشہ کیا کرتی ہے؟",
+      "reason": "The checkpoint should preserve the precise source relation (help with use) rather than the vague 'problem about a clock or alarm'."
+    },
+    {
+      "id": "U2P06-02",
+      "passage_id": "ur-a1-u02-p06",
+      "severity": "minor",
+      "field": "q5.type",
+      "original": "cause_effect",
+      "correction": "sequence_or_decision_condition",
+      "reason": "The prompt asks what she checks before deciding to join; this is sequence/decision-condition rather than cause-effect."
+    }
+  ],
+  "summary": {
+    "passages_reviewed": 6,
+    "findings": 12,
+    "major": 3,
+    "minor": 9,
+    "critical": 0,
+    "passages_with_findings": 6
+  },
+  "confirmed_defect_classes": [
+    "A1 grammar-function/classification metalanguage",
+    "over-abstract learner definitions",
+    "unnecessarily nominalized/stiff Urdu in beginner narratives",
+    "intended-sense metadata broader than the taught sense",
+    "question-type metadata drifting from the actual cognitive task"
+  ],
+  "required_next_actions": [
+    "Continue semantic pass 1 through Units 03-05.",
+    "After Units 03-05, merge Units 01-10 into one full-A1 bounded repair manifest.",
+    "Run corpus-wide searches for grammar-function question types and over-broad intended_sense fields before repair."
+  ]
+}
