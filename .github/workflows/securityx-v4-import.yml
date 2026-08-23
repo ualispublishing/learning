@@ -1,0 +1,68 @@
+name: SecurityX v4.1 canonical importer
+
+on:
+  push:
+    branches: [securityx-v4-1-pages]
+    paths:
+      - '.securityx-import/**'
+      - '.github/workflows/securityx-v4-import.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: securityx-v4-1-pages
+          fetch-depth: 0
+      - name: Wait for all parts
+        id: parts
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=$(find .securityx-import -maxdepth 1 -type f -name 'part-*.txt' 2>/dev/null | wc -l | tr -d ' ')
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          if [ "$count" -ne 16 ]; then
+            echo "Have $count/16 archive parts; importer will exit without changes."
+          fi
+      - name: Reconstruct and verify audited archive
+        if: steps.parts.outputs.count == '16'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .securityx-import/part-*.txt | base64 -d > /tmp/securityx.zip
+          echo '4d2efda9a17e36365f2e2194399d1b463b8247afce23ae541d8b2bda5600c5cb  /tmp/securityx.zip' | sha256sum -c -
+          rm -rf /tmp/securityx-expanded
+          mkdir -p /tmp/securityx-expanded
+          unzip -q /tmp/securityx.zip -d /tmp/securityx-expanded
+          src=/tmp/securityx-expanded/SecurityX_CAS005_GitHub_Pages_v4_1
+          test -f "$src/index.html"
+          test -f "$src/data/final_audit.json"
+          test -f "$src/data/quality_audit_v4_1.json"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('/tmp/securityx-expanded/SecurityX_CAS005_GitHub_Pages_v4_1/data/final_audit.json')
+          a=json.loads(p.read_text())
+          print(a)
+          PY
+      - name: Install exact canonical site and self-clean
+        if: steps.parts.outputs.count == '16'
+        shell: bash
+        run: |
+          set -euo pipefail
+          dst=subjects/securityx/cas-005/study-site
+          src=/tmp/securityx-expanded/SecurityX_CAS005_GitHub_Pages_v4_1
+          rm -rf "$dst"
+          mkdir -p "$dst"
+          cp -a "$src"/. "$dst"/
+          rm -rf .securityx-import
+          rm -f .github/workflows/securityx-v4-import.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Install audited SecurityX CAS-005 v4.1 study site' || exit 0
+          git push origin HEAD:securityx-v4-1-pages
