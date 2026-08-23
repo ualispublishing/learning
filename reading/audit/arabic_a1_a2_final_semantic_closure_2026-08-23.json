@@ -1,0 +1,245 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "scope": "Arabic A1/A2 final semantic/adversarial closure",
+  "input_blobs": {
+    "a1": "bf7f0a6023b1cb129c9328021892d93cb120fa38",
+    "a2": "90b6f2f334b689200c76b25c3b7b983f89230555"
+  },
+  "output_blobs": {
+    "a1": "cd963e0bab42ec8cbf0f07e04f09309a5dc24ffa",
+    "a2": "109fc63c8cba362ca6c08c4fd81c3f0b0efdd316"
+  },
+  "repair_operation_count": 27,
+  "changed_passage_count": 19,
+  "changed_passages": [
+    "ar-a1-u01-p02",
+    "ar-a1-u01-p04",
+    "ar-a1-u01-p06",
+    "ar-a1-u02-p02",
+    "ar-a1-u03-p02",
+    "ar-a1-u03-p03",
+    "ar-a1-u04-p05",
+    "ar-a1-u05-p02",
+    "ar-a1-u07-p02",
+    "ar-a1-u08-p04",
+    "ar-a1-u09-p05",
+    "ar-a1-u10-p06",
+    "ar-a2-u02-p05",
+    "ar-a2-u05-p06",
+    "ar-a2-u07-p01",
+    "ar-a2-u09-p04",
+    "ar-a2-u09-p05",
+    "ar-a2-u10-p03",
+    "ar-a2-u10-p06"
+  ],
+  "lexical_realization_deltas": [],
+  "repairs": [
+    {
+      "passage_id": "ar-a1-u01-p02",
+      "kind": "text",
+      "label": "repair implausibly fast school-return transition",
+      "before": "بعد قليل كانت ليلى في المنزل مرة أخرى.",
+      "after": "بعد انتهاء الدوام عادت ليلى إلى المنزل."
+    },
+    {
+      "passage_id": "ar-a1-u01-p02",
+      "question_id": "q3",
+      "kind": "prompt",
+      "label": "align quoted evidence with repaired timeline",
+      "before": "ماذا تعني «بعد» في «بعد قليل كانت ليلى في المنزل مرة أخرى»؟",
+      "after": "ماذا تعني «بعد» في «بعد انتهاء الدوام عادت ليلى إلى المنزل»؟"
+    },
+    {
+      "passage_id": "ar-a1-u01-p04",
+      "kind": "text",
+      "label": "natural location phrase",
+      "before": "كان الكتاب مع حقيبتها.",
+      "after": "كان الكتاب في حقيبتها."
+    },
+    {
+      "passage_id": "ar-a1-u01-p06",
+      "kind": "text",
+      "label": "natural book/bag relation",
+      "before": "تضع كتابها هنا، مع حقيبتها.",
+      "after": "تضع كتابها هنا، بجانب حقيبتها."
+    },
+    {
+      "passage_id": "ar-a1-u02-p02",
+      "kind": "text",
+      "label": "remove contradictory first-action claim while preserving target exposure",
+      "before": "عندما تدخل الصف تضع حقيبتها بجانب الكرسي. أول شيء تفعله هو إخراج الدفتر والقلم.",
+      "after": "عندما تدخل الصف تضع حقيبتها بجانب الكرسي. بعد ذلك تُخرج أولًا الدفتر والقلم."
+    },
+    {
+      "passage_id": "ar-a1-u02-p02",
+      "question_id": "q1",
+      "kind": "answer",
+      "label": "ground first action exactly",
+      "before": "تضع حقيبتها ثم تخرج الدفتر والقلم.",
+      "after": "تضع حقيبتها بجانب الكرسي."
+    },
+    {
+      "passage_id": "ar-a1-u03-p02",
+      "question_id": "q1",
+      "kind": "prompt",
+      "label": "natural counted-noun question",
+      "before": "كم طماطم تحتاج الأم؟",
+      "after": "كم حبة طماطم تحتاج الأم؟"
+    },
+    {
+      "passage_id": "ar-a1-u03-p03",
+      "question_id": "q4",
+      "kind": "answer",
+      "label": "remove vague location gloss",
+      "before": "أن الحليب موجود قرب الثلاجة أو في مكانها.",
+      "after": "أن الحليب موجود قرب الثلاجة."
+    },
+    {
+      "passage_id": "ar-a1-u04-p05",
+      "question_id": "q7",
+      "kind": "answer",
+      "label": "correct أمام definition",
+      "before": "في الجهة المقابلة للمقدمة أو قدام الشيء.",
+      "after": "في الجهة المقابلة للشيء أو الشخص، لا خلفه."
+    },
+    {
+      "passage_id": "ar-a1-u05-p02",
+      "question_id": "q5",
+      "kind": "answer",
+      "label": "remove unsupported waiting action",
+      "before": "تنتظر، ثم تشكر المدير وتعود إلى صفها.",
+      "after": "تقول إنه لا يوجد شيء آخر، ثم تشكر المدير وتعود إلى صفها."
+    },
+    {
+      "passage_id": "ar-a1-u07-p02",
+      "question_id": "q4",
+      "kind": "answer",
+      "label": "natural يبدو gloss",
+      "before": "أن الجو يظهر أو يُشعر ليلى بأنه أبرد.",
+      "after": "أن الجو يظهر لليلى أبرد مما توقعت."
+    },
+    {
+      "passage_id": "ar-a1-u08-p04",
+      "kind": "text",
+      "label": "make educational heart-demonstration scene physically coherent",
+      "before": "تضع الممرضة جهازًا صغيرًا على إصبعها وتشرح أن القلب يعمل طوال الوقت. ثم تطلب من ليلى أن تستمع إلى صوت قلبها بعد حركة قصيرة. تمشي ليلى بسرعة لمدة دقيقة، ثم تجلس.",
+      "after": "تضع الممرضة سماعة بسيطة على صدر ليلى وتطلب منها أن تستمع إلى نبض قلبها. ثم تشرح أن القلب يعمل طوال الوقت. بعد ذلك تمشي ليلى بسرعة لمدة دقيقة، ثم تجلس."
+    },
+    {
+      "passage_id": "ar-a1-u09-p05",
+      "question_id": "q3",
+      "kind": "answer",
+      "label": "precise sports-goal definition",
+      "before": "إدخال الكرة بطريقة تزيد نتيجة الفريق.",
+      "after": "إدخال الكرة في مرمى الفريق الآخر واحتساب ذلك في نتيجة المباراة."
+    },
+    {
+      "passage_id": "ar-a1-u10-p06",
+      "kind": "text",
+      "label": "remove learner-facing course-level label",
+      "before": "في نهاية المستوى المبتدئ الأول تستطيع ليلى أن تقرأ",
+      "after": "بعد هذه المرحلة تستطيع ليلى أن تقرأ"
+    },
+    {
+      "passage_id": "ar-a1-u10-p06",
+      "question_id": "q1",
+      "kind": "answer",
+      "label": "remove duplicated course-level metalanguage",
+      "before": "ليلى تستطيع الآن قراءة موضوعات يومية كثيرة وفهمها على مستوى المستوى المبتدئ الأول.",
+      "after": "ليلى تستطيع الآن قراءة موضوعات يومية كثيرة وفهمها بوضوح أكبر."
+    },
+    {
+      "passage_id": "ar-a2-u02-p05",
+      "question_id": "q4",
+      "kind": "answer",
+      "label": "natural تنظيم gloss",
+      "before": "ترتيب المواعيد والواجبات بحيث لا تتعارض بلا خطة.",
+      "after": "ترتيب المواعيد والواجبات بحيث لا تتعارض، مع معرفة ما يحتاج إلى تعديل."
+    },
+    {
+      "passage_id": "ar-a2-u05-p06",
+      "kind": "text",
+      "label": "replace overly forceful learning phrasing",
+      "before": "وما المشروع الصغير الذي يمكن أن يجبرني على استخدام ما تعلمته؟",
+      "after": "وما المشروع الصغير الذي يمكن أن يدفعني إلى استخدام ما تعلمته؟"
+    },
+    {
+      "passage_id": "ar-a2-u07-p01",
+      "kind": "text",
+      "label": "repair agreement and coordination",
+      "before": "لكنني فهمت أن الفعالية يمكن أن تجمع أنشطة وجمهورًا مختلفين في المكان نفسه.",
+      "after": "لكنني فهمت أن الفعالية يمكن أن تجمع أنشطة متعددة وأنواعًا مختلفة من الجمهور في المكان نفسه."
+    },
+    {
+      "passage_id": "ar-a2-u09-p04",
+      "question_id": "q7",
+      "kind": "answer",
+      "label": "remove ambiguous طقس/ritual wording",
+      "before": "إلى الطقس أو الفعل المتكرر في احتفالات العائلة، مثل الصورة أو الطبق.",
+      "after": "إلى الفعل المتكرر في احتفالات العائلة، مثل الصورة الجماعية أو طبق معين."
+    },
+    {
+      "passage_id": "ar-a2-u09-p05",
+      "kind": "text",
+      "label": "make comparison refer to accounts rather than people",
+      "before": "لم تقل نور إن إحداهما «أصح» من الأخرى،",
+      "after": "لم تقل نور إن إحدى الروايتين «أصح» من الأخرى،"
+    },
+    {
+      "passage_id": "ar-a2-u09-p05",
+      "question_id": "q6",
+      "kind": "prompt",
+      "label": "align reference-resolution question",
+      "before": "إلى ماذا تشير «إحداهما»؟",
+      "after": "إلى ماذا تشير «إحدى الروايتين»؟"
+    },
+    {
+      "passage_id": "ar-a2-u09-p05",
+      "question_id": "q6",
+      "kind": "answer",
+      "label": "remove ambiguous dual referent",
+      "before": "إلى الجدة والجارة، أو إلى روايتيهما عن المناسبة.",
+      "after": "إلى روايتي الجدة والجارة عن المناسبة."
+    },
+    {
+      "passage_id": "ar-a2-u10-p03",
+      "kind": "text",
+      "label": "natural comparative phrasing",
+      "before": "ليس دائمًا الاختيار الذي يحل المشكلة أفضل.",
+      "after": "ليس دائمًا الاختيار الذي يحل المشكلة بصورة أفضل."
+    },
+    {
+      "passage_id": "ar-a2-u10-p03",
+      "question_id": "q5",
+      "kind": "answer",
+      "label": "use transport-transfer term instead of contact-time",
+      "before": "تقارنان تذكرتين بحسب الثمن ووقت الاتصال، وتقارن هدى الشاحن بحاجتها وتستبدله عندما لا يناسب.",
+      "after": "تقارنان تذكرتين بحسب الثمن ووقت الانتقال، وتقارن هدى الشاحن بحاجتها وتستبدله عندما لا يناسب."
+    },
+    {
+      "passage_id": "ar-a2-u10-p06",
+      "kind": "text",
+      "label": "remove learner-facing course-level label",
+      "before": "بعد إنهاء المستوى المبتدئ الثاني، تستطيع نور متابعة نصوص يومية أطول",
+      "after": "بعد هذه المرحلة، تستطيع نور متابعة نصوص يومية أطول"
+    },
+    {
+      "passage_id": "ar-a2-u10-p06",
+      "question_id": "q1",
+      "kind": "answer",
+      "label": "remove course-level metalanguage from gist key",
+      "before": "نور أصبحت قادرة على فهم نصوص المستوى المبتدئ الثاني اليومية بربط المعلومات عبر الجمل والمقارنة بين الأسباب والنتائج والمصادر.",
+      "after": "نور أصبحت قادرة على فهم نصوص يومية أطول بربط المعلومات عبر الجمل والمقارنة بين الأسباب والنتائج والمصادر."
+    },
+    {
+      "passage_id": "ar-a2-u10-p06",
+      "question_id": "q5",
+      "kind": "prompt",
+      "label": "remove course-level metalanguage from prompt",
+      "before": "لخص أهم مهارات المستوى المبتدئ الثاني المذكورة.",
+      "after": "لخص أهم المهارات المذكورة في النص."
+    }
+  ],
+  "quality_promotion": false
+}
