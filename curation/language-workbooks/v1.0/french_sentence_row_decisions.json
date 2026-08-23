@@ -18,8 +18,8 @@
   "status_counts": {
     "KEEP": 775,
     "CORRECT_APPROVED": 66,
-    "NATIVE_REVIEW": 149,
-    "CORRECT_PENDING_SECOND_PASS": 10
+    "NATIVE_REVIEW": 153,
+    "CORRECT_PENDING_SECOND_PASS": 6
   },
   "rows": [
     {
@@ -9138,17 +9138,19 @@
     {
       "rank": 573,
       "status": "CORRECT_PENDING_SECOND_PASS",
-      "audit_fingerprint": "bab041ea48e5257109cb537741f9eaa61db4099c9049bd3d0bbb5b5a2d2abfd3",
+      "audit_fingerprint": "db2516255ef4444fee5b939e7368cf22dcb2ac10487f8397049c04f4d19ae6a2",
       "source_target": "Y-a-il quelque chose que nous pouvons faire pour aider ?",
       "source_english": "Is there anything we could do to help?",
       "source_attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #4015524 (CK) & #5291327 (Aiji)",
       "confirmed_findings": [
         {
-          "ledger": "french_sentence_editorial_audit_501_750.json",
+          "ledger": "french_sentence_second_pass_amendments.json",
+          "second_pass_amendment": true,
           "rank": 573,
-          "type": "orthography",
-          "observed": "Y-a-il quelque chose que nous pouvons faire pour aider ?",
-          "recommended": "Y a-t-il quelque chose que nous pouvons faire pour aider ?"
+          "type": "orthography_modality_second_pass",
+          "observed": "Y-a-il quelque chose que nous pouvons faire pour aider ? / Is there anything we could do to help?",
+          "recommended": "Y a-t-il quelque chose que nous pourrions faire pour aider ? / Is there anything we could do to help?",
+          "note": "Y a-t-il fixes the interrogative; pourrions matches the English conditional could."
         }
       ],
       "editorial_flags": [],
@@ -11030,22 +11032,22 @@
     },
     {
       "rank": 687,
-      "status": "CORRECT_PENDING_SECOND_PASS",
-      "audit_fingerprint": "9e2839ef547f77d43aca28162955afe9ab7b9e13861153f109b14d95f98f453a",
+      "status": "NATIVE_REVIEW",
+      "audit_fingerprint": "4a9df652dc26207ba5370e8b7b9ec9243b5b4ed4264247a5052f07fa002aa13f",
       "source_target": "Comment peux-tu être sûr que je veuille ce travail ?",
       "source_english": "How do you know I even want that job?",
       "source_attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #2019118 (CK) & #7370140 (Micsmithel)",
-      "confirmed_findings": [
+      "confirmed_findings": [],
+      "editorial_flags": [
         {
-          "ledger": "french_sentence_editorial_audit_501_750.json",
-          "rank": 687,
-          "type": "semantic/modality",
-          "observed": "Comment peux-tu être sûr que je veuille ce travail ? / How do you know I even want that job?",
-          "recommended": "Comment sais-tu seulement si je veux ce travail ? / How do you know I even want that job?",
-          "note": "The French asks how the person can be sure; the English asks how they know and includes 'even'."
+          "ledger": "french_sentence_second_pass_amendments.json",
+          "second_pass_amendment": true,
+          "ranks": [
+            687
+          ],
+          "issue": "Second-pass review: keep blocked for native/editorial resolution of modality and the emphatic 'even' in 'How do you know I even want that job?'; do not auto-promote the first-pass rewrite."
         }
       ],
-      "editorial_flags": [],
       "approved_target": null,
       "approved_english": null,
       "approval_note": null,
@@ -12303,21 +12305,22 @@
     },
     {
       "rank": 761,
-      "status": "CORRECT_PENDING_SECOND_PASS",
-      "audit_fingerprint": "ce6a469c4e54c162a1e83467c007335d740abd8d16eddb08bb73cef2da86ef3a",
+      "status": "NATIVE_REVIEW",
+      "audit_fingerprint": "aa098d4b978560407973ecc8dd7f11dd04d800cd589f782341b6a6f300204859",
       "source_target": "Aurais-tu le temps de m'aider à quelque chose?",
       "source_english": "Would you have time to help me with something?",
       "source_attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #4374698 (CK) & #4374860 (Scorpionvenin14)",
-      "confirmed_findings": [
+      "confirmed_findings": [],
+      "editorial_flags": [
         {
-          "ledger": "french_sentence_editorial_audit_751_1000.json",
-          "rank": 761,
-          "type": "grammar/naturalness",
-          "observed": "Aurais-tu le temps de m'aider à quelque chose?",
-          "recommended": "Aurais-tu le temps de m'aider avec quelque chose ?"
+          "ledger": "french_sentence_second_pass_amendments.json",
+          "second_pass_amendment": true,
+          "ranks": [
+            761
+          ],
+          "issue": "Second-pass review: native/editorial decision required for the most idiomatic standard rendering of 'Do you have time to help me with something?'; do not auto-promote aider avec quelque chose."
         }
       ],
-      "editorial_flags": [],
       "approved_target": null,
       "approved_english": null,
       "approval_note": null,
@@ -12325,21 +12328,22 @@
     },
     {
       "rank": 762,
-      "status": "CORRECT_PENDING_SECOND_PASS",
-      "audit_fingerprint": "7cee401caef1b9a64fd285dc0e84631660cef088c352b49be38b315a93e11175",
+      "status": "NATIVE_REVIEW",
+      "audit_fingerprint": "814f4add2231ad289fc84c0f69a66b41d4e74df416d62d6e763730bee01f9814",
       "source_target": "Disposeriez-vous de temps pour m'aider à quelque chose ?",
       "source_english": "Would you have time to help me with something?",
       "source_attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #4374698 (CK) & #4381340 (sacredceltic)",
-      "confirmed_findings": [
+      "confirmed_findings": [],
+      "editorial_flags": [
         {
-          "ledger": "french_sentence_editorial_audit_751_1000.json",
-          "rank": 762,
-          "type": "grammar/naturalness",
-          "observed": "Disposeriez-vous de temps pour m'aider à quelque chose ?",
-          "recommended": "Auriez-vous le temps de m'aider avec quelque chose ?"
+          "ledger": "french_sentence_second_pass_amendments.json",
+          "second_pass_amendment": true,
+          "ranks": [
+            762
+          ],
+          "issue": "Second-pass review: native/editorial decision required for a contemporary formal rendering of 'Do you have time to help me with something?'; do not auto-promote the first-pass wording."
         }
       ],
-      "editorial_flags": [],
       "approved_target": null,
       "approved_english": null,
       "approval_note": null,
@@ -14705,21 +14709,22 @@
     },
     {
       "rank": 898,
-      "status": "CORRECT_PENDING_SECOND_PASS",
-      "audit_fingerprint": "cb75b105131977136fbc6f24b99aeaa694c379b99039f9d8b601a794ab46256a",
+      "status": "NATIVE_REVIEW",
+      "audit_fingerprint": "7b9ada03769ee676a2e107220141a1a84c698d17704b8d0dc5fcafa2ffc06162",
       "source_target": "As-tu la moindre idée de combien je me sens désormais idiote ?",
       "source_english": "Do you have any idea how stupid I feel right now?",
       "source_attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #3732026 (CM) & #4428512 (sacredceltic)",
-      "confirmed_findings": [
+      "confirmed_findings": [],
+      "editorial_flags": [
         {
-          "ledger": "french_sentence_editorial_audit_751_1000.json",
-          "rank": 898,
-          "type": "critical_grammar/naturalness",
-          "observed": "As-tu la moindre idée de combien je me sens désormais idiote ?",
-          "recommended": "As-tu la moindre idée d'à quel point je me sens idiote maintenant ?"
+          "ledger": "french_sentence_second_pass_amendments.json",
+          "second_pass_amendment": true,
+          "ranks": [
+            898
+          ],
+          "issue": "Second-pass review: retain as NATIVE_REVIEW until the idiomatic standard-French rendering of 'Do you have any idea how stupid I feel now?' is independently settled."
         }
       ],
-      "editorial_flags": [],
       "approved_target": null,
       "approved_english": null,
       "approval_note": null,
