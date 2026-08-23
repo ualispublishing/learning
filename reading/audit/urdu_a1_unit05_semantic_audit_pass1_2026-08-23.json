@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "urdu",
+  "level": "A1",
+  "scope": {
+    "canonical_path": "reading/urdu/a1/passages.jsonl",
+    "canonical_blob_sha": "16507c293ae39cd44f7f5136dd00c9ef029646a7",
+    "sequences": [25, 30],
+    "passage_ids": ["ur-a1-u05-p01","ur-a1-u05-p02","ur-a1-u05-p03","ur-a1-u05-p04","ur-a1-u05-p05","ur-a1-u05-p06"]
+  },
+  "audit_type": "manual_semantic_linguistic_pedagogical_pass_1",
+  "status": "REPAIR_REQUIRED",
+  "release_effect": "Detection evidence only. No quality gate is promoted by this audit.",
+  "findings": [
+    {
+      "id": "U5P01-01",
+      "passage_id": "ur-a1-u05-p01",
+      "severity": "major",
+      "field": "text",
+      "original": "ایک نیا شخص کلاس کے دروازے پر آتا ہے اور استاد سے اپنا نام بتاتا ہے۔",
+      "correction": "ایک نیا شخص کلاس کے دروازے پر آتا ہے اور استاد کو اپنا نام بتاتا ہے۔",
+      "reason": "بتانا takes the recipient with کو here; استاد سے means 'from/with the teacher' and is incorrect in this learner-facing sentence."
+    },
+    {
+      "id": "U5P01-02",
+      "passage_id": "ur-a1-u05-p01",
+      "severity": "major",
+      "field": "q5/a5",
+      "original": "مختصر اور واضح جواب کیوں اچھا سمجھا جاتا ہے؟ -> کیونکہ استاد کہتے ہیں کہ اچھا جواب مختصر اور واضح ہوتا ہے۔",
+      "correction": "استاد اچھے جواب کے بارے میں کیا کہتے ہیں؟ -> اچھا جواب مختصر اور واضح ہوتا ہے۔",
+      "reason": "The current answer merely restates that the teacher says it, rather than giving a reason. The proposed question is fully passage-grounded."
+    },
+    {
+      "id": "U5P02-01",
+      "passage_id": "ur-a1-u05-p02",
+      "severity": "minor",
+      "field": "a3",
+      "original": "پڑھنے کے لیے لکھی ہوئی کتاب۔",
+      "correction": "صفحات پر لکھی یا چھپی ہوئی تحریر جسے پڑھا جاتا ہے۔",
+      "reason": "The original is circular/tautological and does not actually define کتاب."
+    },
+    {
+      "id": "U5P02-02",
+      "passage_id": "ur-a1-u05-p02",
+      "severity": "minor",
+      "field": "text",
+      "original": "استاد کہتے ہیں کہ اگلے دن یہی کہانی دوبارہ یاد کریں گے۔",
+      "correction": "استاد کہتے ہیں کہ اگلے دن اسی کہانی کی اہم باتیں دوبارہ یاد کریں گے۔",
+      "reason": "کہانی یاد کرنا is understandable, but the source lesson is specifically about remembering important details; the revised sentence is more precise and natural."
+    },
+    {
+      "id": "U5P04-01",
+      "passage_id": "ur-a1-u05-p04",
+      "severity": "minor",
+      "field": "q2/a2",
+      "original": "عائشہ سوال کو حل کرنے کے لیے کیا طریقہ سوچتی ہے؟ -> وہ سوال کو چھوٹے حصوں میں حل کرنے کا سوچتی ہے۔",
+      "correction": "عائشہ سوال حل کرنے کے لیے کیا طریقہ اپناتی ہے؟ -> وہ سوال کو چھوٹے حصوں میں بانٹ کر حل کرنے کی کوشش کرتی ہے۔",
+      "reason": "The current answer phrase حل کرنے کا سوچتی ہے is awkward, and 'divide into parts' expresses the strategy more naturally."
+    },
+    {
+      "id": "U5P04-02",
+      "passage_id": "ur-a1-u05-p04",
+      "severity": "minor",
+      "field": "text",
+      "original": "مشکل کام بھی ترتیب سے ممکن ہو سکتا ہے۔",
+      "correction": "مشکل کام بھی ترتیب سے کرنا ممکن ہو سکتا ہے۔",
+      "reason": "ممکن needs a clearer complement here; the current sentence sounds incomplete."
+    },
+    {
+      "id": "U5P05-01",
+      "passage_id": "ur-a1-u05-p05",
+      "severity": "minor",
+      "field": "a4",
+      "original": "کسی چیز کو پھر اس کی پہلے والی جگہ یا سمت میں لے جانا۔",
+      "correction": "پہلی جگہ یا سمت کی طرف پھر جانا یا کسی چیز کو وہاں لے جانا۔",
+      "reason": "The original defines only transitive return of an object, while واپس also applies to a person's own movement."
+    },
+    {
+      "id": "U5P06-01",
+      "passage_id": "ur-a1-u05-p06",
+      "severity": "minor",
+      "field": "q3",
+      "original": "پڑھنے کے وقت عائشہ کتاب اور یاد کے ساتھ کیا کرتی ہے؟",
+      "correction": "پڑھنے کے وقت عائشہ کتاب کے ساتھ کیا کرتی ہے، اور اہم بات کے بارے میں کیا کوشش کرتی ہے؟",
+      "reason": "کتاب اور یاد کے ساتھ is a forced target-label construction rather than natural Urdu."
+    },
+    {
+      "id": "U5P06-02",
+      "passage_id": "ur-a1-u05-p06",
+      "severity": "major",
+      "field": "text/q4/a4",
+      "original": "وقفے میں کبھی اسے کلاس کے اندر جانا پڑتا ہے، اور مریم دروازے کے قریب اس کا انتظار کرتی ہے۔ -> مریم دروازے کے قریب انتظار کرتی ہے۔",
+      "correction": "Preserve P03: وقفے کے بعد عائشہ اور مریم دونوں کلاس کے اندر جاتی ہیں؛ later they return toward the door when the bell rings. Rewrite q4 to test the actual sequence/location.",
+      "reason": "P03 explicitly says Maryam also goes inside. The checkpoint changes the event into Maryam waiting outside/near the door and then tests the invented detail."
+    },
+    {
+      "id": "U5P06-03",
+      "passage_id": "ur-a1-u05-p06",
+      "severity": "minor",
+      "field": "q6",
+      "original": "آخری سبق میں عائشہ چیزوں کے ساتھ کیا کرتی ہے؟",
+      "correction": "آخری سبق میں عائشہ اپنی چیزیں کہاں رکھتی ہے؟",
+      "reason": "چیزوں کے ساتھ کیا کرتی ہے is vague and less natural than a concrete location/action question."
+    }
+  ],
+  "passage_without_confirmed_finding_in_this_pass": ["ur-a1-u05-p03"],
+  "summary": {
+    "passages_reviewed": 6,
+    "findings": 10,
+    "major": 3,
+    "minor": 7,
+    "critical": 0,
+    "passages_with_findings": 5,
+    "passages_without_confirmed_finding": 1
+  },
+  "confirmed_defect_classes": [
+    "Urdu recipient/postposition error",
+    "question and answer relation mismatch",
+    "checkpoint-to-source event contradiction",
+    "circular beginner definition",
+    "forced target-label wording",
+    "incomplete or awkward complement with ممکن"
+  ],
+  "required_next_actions": [
+    "Merge Units 01-10 audit findings into a full Urdu A1 bounded repair manifest.",
+    "Run corpus-wide systemic searches over all 60 passages before applying canonical repairs.",
+    "Treat U5P01-01, U5P01-02 and U5P06-02 as high-priority structural/grounding repairs."
+  ]
+}
