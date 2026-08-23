@@ -30,7 +30,7 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           from collections import Counter
-          import hashlib,json,re
+          import hashlib,json
 
           corpus=Path('reading/french/a1/passages.jsonl')
           expected='7dbdb48ffc6efd00106490ca9b10ad25643bf7e89967e8fbd2977a04641d6ea3'
@@ -38,17 +38,29 @@ jobs:
           if got!=expected: raise SystemExit(f'FAIL CLOSED corpus drift {got}')
           scanp=Path('reading/audit/french_a1_grammalecte_fullscan_2026-08-22.json')
           scan=json.loads(scanp.read_text(encoding='utf-8'))
-          if scan.get('bound_sha256')!=expected or scan.get('raw_finding_count')!=len(scan.get('findings',[])) or scan.get('raw_finding_count')!=421:
-              raise SystemExit('FAIL CLOSED Grammalecte raw evidence mismatch')
+          findings=scan.get('findings',[])
+          raw_count=scan.get('raw_finding_count')
+          if scan.get('bound_sha256')!=expected:
+              raise SystemExit('FAIL CLOSED Grammalecte bound corpus mismatch')
+          if raw_count!=len(findings):
+              raise SystemExit(f'FAIL CLOSED Grammalecte serialized count mismatch: header={raw_count} items={len(findings)}')
+          if raw_count!=2040:
+              raise SystemExit(f'FAIL CLOSED Grammalecte unexpected raw count: {raw_count}')
+          declared_types=scan.get('findings_by_type',{})
+          if sum(int(v) for v in declared_types.values())!=raw_count:
+              raise SystemExit('FAIL CLOSED Grammalecte type-count total mismatch')
+          if int(declared_types.get('nbsp',0))!=1992:
+              raise SystemExit(f"FAIL CLOSED Grammalecte nbsp-count mismatch: {declared_types.get('nbsp')}")
+
           rows={r['id']:r for r in [json.loads(x) for x in corpus.read_text(encoding='utf-8').splitlines() if x.strip()]}
           known_names={'Camille','Sami'}
-          counts=Counter();items=[];residual=[]
+          counts=Counter();items=[];contextual=[]
 
           def qobj(f):
               if f.get('field')!='question_prompt' or not f.get('item_id'): return None
               return next((q for q in rows[f['passage_id']]['questions'] if q.get('id')==f['item_id']),None)
 
-          for idx,f in enumerate(scan['findings'],1):
+          for idx,f in enumerate(findings,1):
               cls='CONTEXT_REVIEW_REQUIRED';reason='No conservative mechanical disposition.'
               matched=str(f.get('matched_text') or f.get('word') or '')
               word=str(f.get('word') or '')
@@ -58,18 +70,19 @@ jobs:
               q=qobj(f)
 
               token=(word or matched).strip('«»“”"\'.,;:!?()[]{}—–- ')
-              if rule=='_' and token in known_names:
+              if typ=='nbsp':
+                  cls='TYPOGRAPHY_POLICY_SIGNAL_NBSP'
+                  reason='Grammalecte requests French non-breaking-space typography. Preserve as a real typography-policy signal; do not auto-edit the corpus or count it as a grammar/spelling defect.'
+              elif rule=='_' and token in known_names:
                   cls='MECHANICAL_FALSE_POSITIVE_KNOWN_CHARACTER_NAME'
                   reason='Exact corpus character name is outside the spellchecker lexicon.'
               elif q and q.get('type')=='grammar_choice':
                   start=f.get('start')
-                  # Most grammar-choice records present correct form first and incorrect alternative after " ou ".
-                  # Only classify mechanically when the detector begins inside that second alternative.
                   delim=src.find(' ou ')
                   if isinstance(start,int) and delim>=0 and start>delim+3:
                       cls='LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION'
                       reason='Detector span is inside the explicitly contrasted second alternative of a grammar_choice item; confirm before dismissal.'
-              if cls=='CONTEXT_REVIEW_REQUIRED' and rule=='_' and token and token[:1].isupper() and token in {'A1'}:
+              if cls=='CONTEXT_REVIEW_REQUIRED' and rule=='_' and token=='A1':
                   cls='MECHANICAL_FALSE_POSITIVE_LEVEL_LABEL'
                   reason='CEFR level label A1 is not a French lexical spelling error.'
 
@@ -80,28 +93,36 @@ jobs:
                 'start':f.get('start'),'end':f.get('end'),'source_text':src,'classification':cls,'rationale':reason
               }
               items.append(item);counts[cls]+=1
-              if cls!='MECHANICAL_FALSE_POSITIVE_KNOWN_CHARACTER_NAME' and cls!='MECHANICAL_FALSE_POSITIVE_LEVEL_LABEL': residual.append(item)
+              if cls in {'CONTEXT_REVIEW_REQUIRED','LIKELY_INTENTIONAL_GRAMMAR_DISTRACTOR_NEEDS_CONFIRMATION'}:
+                  contextual.append(item)
+
+          non_nbsp=sum(1 for x in items if x.get('type')!='nbsp')
+          if non_nbsp!=48:
+              raise SystemExit(f'FAIL CLOSED non-nbsp count mismatch: {non_nbsp}')
 
           payload={
-            'schema_version':1,'date':'2026-08-22','language':'fr','level':'A1',
+            'schema_version':2,'date':'2026-08-22','language':'fr','level':'A1',
             'audit':'grammalecte_conservative_triage_inventory','bound_sha256':expected,
+            'bound_git_blob':scan.get('bound_git_blob'),
             'source_scan':'reading/audit/french_a1_grammalecte_fullscan_2026-08-22.json',
-            'raw_finding_count':len(items),'classification_counts':dict(counts),
-            'status':'CONSERVATIVE_MECHANICAL_TRIAGE_COMPLETE_CONTEXTUAL_ADJUDICATION_PENDING',
+            'raw_finding_count':len(items),'typography_signal_count':counts['TYPOGRAPHY_POLICY_SIGNAL_NBSP'],
+            'non_nbsp_signal_count':non_nbsp,'contextual_adjudication_count':len(contextual),
+            'classification_counts':dict(counts),
+            'status':'CONSERVATIVE_TRIAGE_COMPLETE_CONTEXTUAL_ADJUDICATION_PENDING',
             'items':items,
-            'limitations':'Only exact known character names and CEFR A1 labels are mechanically dismissed. Grammar-choice second-alternative signals remain confirmation-required. Every other signal remains contextual review required.',
+            'limitations':'NBSP findings are preserved as typography-policy signals, not silently dismissed and not automatically repaired. Only exact known character names and the CEFR A1 label may be mechanically dismissed. Grammar-choice second-alternative signals remain confirmation-required. Every other non-NBSP signal remains contextual review required.',
             'release_effect':'NONE_AUTOMATIC: no corpus changes and no release approval.'
           }
           Path('reading/audit/french_a1_grammalecte_triage_2026-08-22.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print(json.dumps({'classification_counts':dict(counts),'residual_count':len(residual)},ensure_ascii=False))
-          print('GRAMMALECTE_RESIDUAL_SUMMARY_BEGIN')
-          by_rule=Counter((str(x['rule']),str(x['type']),str(x['message_class'])) for x in residual)
+          print(json.dumps({'raw':len(items),'non_nbsp':non_nbsp,'classification_counts':dict(counts),'contextual_count':len(contextual)},ensure_ascii=False))
+          print('GRAMMALECTE_CONTEXTUAL_SUMMARY_BEGIN')
+          by_rule=Counter((str(x['rule']),str(x['type']),str(x['message_class'])) for x in contextual)
           for k,n in by_rule.most_common(): print(json.dumps({'rule':k[0],'type':k[1],'class':k[2],'count':n},ensure_ascii=False))
-          print('GRAMMALECTE_RESIDUAL_SUMMARY_END')
-          print('GRAMMALECTE_RESIDUAL_SAMPLE_BEGIN')
-          for x in residual[:160]:
+          print('GRAMMALECTE_CONTEXTUAL_SUMMARY_END')
+          print('GRAMMALECTE_CONTEXTUAL_ITEMS_BEGIN')
+          for x in contextual:
               print(json.dumps({k:x[k] for k in ('finding_index','passage_id','field','item_id','matched_text','word','message','suggestions','rule','type','start','source_text','classification')},ensure_ascii=False))
-          print('GRAMMALECTE_RESIDUAL_SAMPLE_END')
+          print('GRAMMALECTE_CONTEXTUAL_ITEMS_END')
           PY
       - name: Commit triage evidence and self-remove
         shell: bash
