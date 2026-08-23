@@ -1,0 +1,42 @@
+name: Arabic A1+A2 integrated audit
+
+on:
+  push:
+    branches:
+      - audit/arabic-a1-a2-integrated-2026-08-23
+    paths:
+      - 'reading/tools/integrate_audited_arabic_a1_a2.py'
+      - '.github/workflows/arabic-a1-a2-integrated-audit.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arabic-a1-a2-integrated-audit
+  cancel-in-progress: false
+
+jobs:
+  integrate-and-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Integrate independently adjudicated unit repairs and validate
+        run: python reading/tools/integrate_audited_arabic_a1_a2.py
+      - name: Commit guarded integrated corpus and evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reading/arabic/a1/passages.jsonl reading/arabic/a2/passages.jsonl reading/audit/arabic_a1_a2_integrated_repair_audit_2026-08-23.json
+          if git diff --cached --quiet; then
+            echo "No integration changes to commit."
+            exit 0
+          fi
+          git commit -m "Integrate audited Arabic A1/A2 repairs [skip ci]"
+          git push origin HEAD:audit/arabic-a1-a2-integrated-2026-08-23
