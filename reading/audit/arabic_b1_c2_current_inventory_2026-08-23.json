@@ -3,10 +3,10 @@
   "date": "2026-08-23",
   "scope": "Fresh current-corpus Arabic B1-C2 inventory",
   "input_blobs": {
-    "b1": "53f114cd16a15f5da144b5a86a240ab131271ec1",
+    "b1": "cbe9e70e07543c3ce9080fb375af6468cfbd2d3c",
     "b2": "a9486b2c38dc53661143e734c9797cd26fa1f742",
     "c1": "3f68da825c50c3018f9e054cbeec27ba01b17be0",
-    "c2": "eb4105692d37c2dc38dc5241cee0edcabcf64585"
+    "c2": "b8e78e2a8dce942e87ef627a8436f1c8571f9d43"
   },
   "levels": {
     "b1": {
@@ -14,7 +14,7 @@
       "questions": 600,
       "answers": 600,
       "new_targets": 81,
-      "hard_errors": 12,
+      "hard_errors": 0,
       "diagnostics": 19,
       "semantic_candidates": 99,
       "question_type_counts": {
@@ -113,7 +113,7 @@
       "questions": 600,
       "answers": 600,
       "new_targets": 90,
-      "hard_errors": 4,
+      "hard_errors": 0,
       "diagnostics": 13,
       "semantic_candidates": 141,
       "question_type_counts": {
@@ -140,104 +140,7 @@
       }
     }
   },
-  "hard_errors": [
-    {
-      "code": "sentence_count_metadata",
-      "passage_id": "ar-b1-u02-p03",
-      "metadata": 15,
-      "calculated": 16
-    },
-    {
-      "code": "sentence_count_metadata",
-      "passage_id": "ar-b1-u02-p05",
-      "metadata": 17,
-      "calculated": 19
-    },
-    {
-      "code": "sentence_count_metadata",
-      "passage_id": "ar-b1-u04-p01",
-      "metadata": 16,
-      "calculated": 17
-    },
-    {
-      "code": "sentence_count_metadata",
-      "passage_id": "ar-b1-u04-p04",
-      "metadata": 17,
-      "calculated": 18
-    },
-    {
-      "code": "sentence_count_metadata",
-      "passage_id": "ar-b1-u05-p01",
-      "metadata": 15,
-      "calculated": 17
-    },
-    {
-      "code": "sentence_count_metadata",
-      "passage_id": "ar-b1-u07-p01",
-      "metadata": 15,
-      "calculated": 16
-    },
-    {
-      "code": "sentence_count_metadata",
-      "passage_id": "ar-b1-u07-p02",
-      "metadata": 16,
-      "calculated": 17
-    },
-    {
-      "code": "sentence_count_metadata",
-      "passage_id": "ar-b1-u07-p03",
-      "metadata": 18,
-      "calculated": 19
-    },
-    {
-      "code": "sentence_count_metadata",
-      "passage_id": "ar-b1-u08-p04",
-      "metadata": 14,
-      "calculated": 16
-    },
-    {
-      "code": "sentence_count_metadata",
-      "passage_id": "ar-b1-u08-p05",
-      "metadata": 17,
-      "calculated": 19
-    },
-    {
-      "code": "sentence_count_metadata",
-      "passage_id": "ar-b1-u08-p06",
-      "metadata": 21,
-      "calculated": 22
-    },
-    {
-      "code": "sentence_count_metadata",
-      "passage_id": "ar-b1-u10-p01",
-      "metadata": 16,
-      "calculated": 18
-    },
-    {
-      "code": "sentence_count_metadata",
-      "passage_id": "ar-c2-u05-p03",
-      "metadata": 58,
-      "calculated": 60
-    },
-    {
-      "code": "sentence_count_metadata",
-      "passage_id": "ar-c2-u05-p05",
-      "metadata": 57,
-      "calculated": 61
-    },
-    {
-      "code": "sentence_count_metadata",
-      "passage_id": "ar-c2-u08-p06",
-      "metadata": 66,
-      "calculated": 70
-    },
-    {
-      "code": "sentence_count_metadata",
-      "passage_id": "ar-c2-u10-p01",
-      "metadata": 44,
-      "calculated": 46
-    }
-  ],
+  "hard_errors": [],
   "diagnostics": [
     {
       "code": "running_text_review_no_exact_surface",
@@ -672,7 +575,7 @@
   ],
   "semantic_candidate_count": 481,
   "quality_promotion": false,
-  "hard_error_count": 16,
+  "hard_error_count": 0,
   "diagnostic_count": 60,
-  "status": "FAIL_STRUCTURE"
+  "status": "PASS_STRUCTURE_SEMANTIC_ADJUDICATION_REQUIRED"
 }
