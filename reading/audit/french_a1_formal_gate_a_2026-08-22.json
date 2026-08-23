@@ -6,8 +6,8 @@
   "audit": "formal_protocol_gate_a_current_corpus",
   "protocol": "reading/planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md §3",
   "status": "PASS_DETERMINISTIC_FORMAL_GATE_A_NEEDS_LATER_RELEASE_GATES",
-  "bound_sha256": "7dbdb48ffc6efd00106490ca9b10ad25643bf7e89967e8fbd2977a04641d6ea3",
-  "bound_git_blob": "417ee292a73244860ecd40741af521aee5436578",
+  "bound_sha256": "8019fe53061a67faca527a50495d2188439da5142dd94a414a43e1a3986cf7f4",
+  "bound_git_blob": "6c1553acf3fb02f4a9e4c0f582262071d47bb4ed",
   "scope": {
     "passages": 60,
     "questions": 600,
@@ -48,11 +48,33 @@
     "french_naturalness_orthography": "PENDING",
     "pedagogical_a1_fit": "PENDING",
     "assessment_answer_grounding": "PENDING",
-    "independent_machine_tools": "PARTIAL_LANGUAGETOOL_POSTREPAIR_RERUN_PENDING_IN_THIS_JOB",
+    "independent_machine_tools": "PARTIAL: GRAMMALECTE CURRENT; LANGUAGETOOL MUST_REBIND_AFTER_HASH_CHANGE; ANTIDOTE/DEEPL_WRITE_PENDING",
     "independent_model_family": "PENDING",
     "native_professional": "PENDING",
     "educator_release": "PENDING",
     "blind_review": "PENDING"
   },
-  "release_effect": "NONE_AUTOMATIC: formal Gate A is deterministic integrity only; French remains REOPEN_REQUIRED."
+  "release_effect": "NONE_AUTOMATIC: formal Gate A is deterministic integrity only; French remains REOPEN_REQUIRED.",
+  "rebind_after_nbsp_typography_repair": {
+    "previous_sha256": "7dbdb48ffc6efd00106490ca9b10ad25643bf7e89967e8fbd2977a04641d6ea3",
+    "repair_commit": "97452efaec2a40255224f41e4259821c4c291bc5",
+    "typography_substitutions_verified": 1992,
+    "only_change_class": "ordinary ASCII space to U+00A0/U+202F no-break space in learner-facing fields",
+    "all_non_learner_record_content_identical": true,
+    "generation_integrity_rerun": "PASS",
+    "grammalecte_post_nbsp_findings": 0,
+    "grammalecte_non_nbsp_findings_preserved": 48,
+    "formal_invariants_rechecked": [
+      "identity/sequence/level grid",
+      "60/600/600 scope",
+      "question-answer linkage",
+      "duplicate prompts",
+      "checkpoint p06 zero-new",
+      "Unicode NFC",
+      "guillemet/parenthesis sanity",
+      "182 review-target count",
+      "strict generation source/rank/exposure integrity",
+      "bounded repair file set/no lexicon changes"
+    ]
+  }
 }
