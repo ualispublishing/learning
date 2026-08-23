@@ -1,0 +1,45 @@
+{
+  "artifact": "Urdu sentence bank editorial audit summary",
+  "workbook_release": "v1.0",
+  "source_path": "completed/languages/workbooks/v1.0/urdu/urdu_sentence_bank_1000.csv",
+  "source_zip_sha256": "d55d3b4f95a6957093d7b46ddb244fd3a6530367dfc9fefd9baced598c9234a5",
+  "audit_completed_utc_date": "2026-08-23",
+  "first_pass": {
+    "rows_total": 1000,
+    "rows_screened": 1000,
+    "coverage_percent": 100.0,
+    "result": "BLOCKING_DEFECTS_FOUND"
+  },
+  "batch_ledgers": [
+    "urdu_sentence_editorial_audit.json",
+    "urdu_sentence_editorial_audit_251_500.json",
+    "urdu_sentence_editorial_audit_501_750.json",
+    "urdu_sentence_editorial_audit_751_1000.json"
+  ],
+  "critical_examples": [
+    {"rank": 293, "issue": "Urdu plural subject paired with singular English, plus target spelling error."},
+    {"rank": 402, "issue": "Target says بڑی (big) where the English requires بری (bad) at sports."},
+    {"rank": 458, "issue": "Target says bitter while English says sour."},
+    {"rank": 491, "issue": "Target asks whether everything was done correctly; English asks whether anything has ever been done right."},
+    {"rank": 492, "issue": "Same semantic mismatch as rank 491."},
+    {"rank": 498, "issue": "Target says speaker is already lying in bed; English says speaker has to go to bed."},
+    {"rank": 639, "issue": "Malformed present Urdu is paired with a past English statement plus tag question."},
+    {"rank": 697, "issue": "Target says sometimes; English says almost never."},
+    {"rank": 737, "issue": "Target says bad; English says big."},
+    {"rank": 764, "issue": "Target says death sentence; English says life sentence."},
+    {"rank": 851, "issue": "Target is future; English is past."},
+    {"rank": 942, "issue": "Target says diamond necklace; English says pearl necklace."},
+    {"rank": 951, "issue": "Target refers to cotton and does not match English crops are much better."},
+    {"rank": 957, "issue": "Target uses export; English requires import."},
+    {"rank": 993, "issue": "Target says under sixteen; English says sixteen or younger."}
+  ],
+  "root_cause": "The current sentence builder filters licensing, script plausibility, target uniqueness, and length, then ranks primarily from English-side usefulness. It does not validate target-language grammar, spelling, idiomaticity, register, or bilingual semantic equivalence before selecting the top 1000.",
+  "release_status": "BLOCKED",
+  "release_requirements": [
+    "Convert all confirmed findings into a source-locked curated correction/replacement layer.",
+    "Keep uncertain/native-judgment rows out of automatic promotion until independently reviewed.",
+    "Regenerate Urdu sentence CSV and all sentence-bearing PDFs from the curated layer together.",
+    "Run deterministic regression checks against the audited source hash and corrected learner pairs.",
+    "Complete an independent native/editorial review before any absolute correctness claim."
+  ]
+}
