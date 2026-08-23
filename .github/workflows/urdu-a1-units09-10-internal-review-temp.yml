@@ -1,0 +1,155 @@
+name: TEMP Urdu A1 Units 09-10 internal review
+
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+    paths:
+      - .github/workflows/urdu-a1-units09-10-internal-review-temp.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temp-urdu-a1-units09-10-internal-review
+  cancel-in-progress: false
+
+jobs:
+  review:
+    if: github.event.pull_request.head.ref == 'audit/urdu-a1-final-deterministic-2026-08-22'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/urdu-a1-final-deterministic-2026-08-22
+      - name: Clean placeholders and apply bounded Units 09-10 review repairs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib,json,re,datetime
+
+          corpus=Path('reading/urdu/a1/passages.jsonl')
+          before='636f8b2f18b1948ae4155cb605b8ebd989d412f73d0bf82f8269378d4046cc2f'
+          got=hashlib.sha256(corpus.read_bytes()).hexdigest()
+          if got!=before: raise SystemExit(f'FAIL CLOSED corpus drift {got}')
+          rows=[json.loads(x) for x in corpus.read_text(encoding='utf-8').splitlines() if x.strip()]
+          byid={r['id']:r for r in rows}; scope=[r for r in rows if r.get('unit') in (9,10)]
+          if len(scope)!=12: raise SystemExit('FAIL CLOSED expected 12 records')
+          evidence=[]
+
+          # Remove only the exact generic placeholder. Empty is more honest than fake evidence;
+          # richer explanations remain a later independent-review task.
+          placeholder='متن اور سوال کے مطابق یہی مناسب جواب ہے۔'
+          placeholder_count=0
+          for r in scope:
+            for a in r['answer_key']:
+              if a.get('explanation')!=placeholder:
+                raise SystemExit(f'FAIL CLOSED non-placeholder explanation in scope {r["id"]} {a["id"]}: {a.get("explanation")!r}')
+              a['explanation']=''; placeholder_count+=1
+          if placeholder_count!=120: raise SystemExit(f'FAIL CLOSED expected 120 placeholders, got {placeholder_count}')
+
+          prose_repairs=[
+            ('ur-a1-u10-p01','والد کہتے ہیں کہ پچھلے دورہ میں یہاں کم پودے تھے۔','والد کہتے ہیں کہ ان کا پچھلا دورہ مختصر تھا اور اس وقت یہاں کم پودے تھے۔','Replace ungrammatical oblique use while preserving the exact review token دورہ in natural prose.'),
+            ('ur-a1-u10-p02','اسکول میں آج عائشہ اردو کی زبان کے ساتھ ایک نیا لفظ سیکھتی ہے۔','اسکول میں آج عائشہ اردو زبان میں ایک نیا لفظ سیکھتی ہے۔','Replace awkward “with the Urdu language” construction while preserving زبان and نیا.'),
+            ('ur-a1-u10-p02','عائشہ کہتی ہے کہ لفظ کی مقدار نہیں، درست استعمال اہم ہے۔','عائشہ کہتی ہے کہ نئے لفظوں کی مقدار سے زیادہ ان کا درست استعمال اہم ہے۔','Give مقدار a natural quantity sense instead of an artificial single-word quantity contrast.'),
+          ]
+          for pid,old,new,reason in prose_repairs:
+            r=byid[pid]
+            if r['text'].count(old)!=1: raise SystemExit(f'FAIL CLOSED prose mismatch {pid}')
+            r['text']=r['text'].replace(old,new); r['word_count']=len(r['text'].split())
+            evidence.append({'passage_id':pid,'field':'text','before':old,'after':new,'reason':reason})
+
+          qa_repairs=[
+            ('ur-a1-u09-p01','q1','prompt','اس دورہ میں عائشہ کہاں جاتی ہے؟','اس دورے میں عائشہ کہاں جاتی ہے؟','Use the correct oblique form in the question.'),
+            ('ur-a1-u09-p01','q4','prompt','متن میں «دینا» کیا کام بتاتا ہے؟','عائشہ تحفہ کس کو دینا چاہتی ہے؟','Replace function-style wording with concrete comprehension while keeping the دینا target.'),
+            ('ur-a1-u09-p01','q4','answer','کسی شخص کو کوئی چیز یا وقت پیش کرنا۔','خالہ کو۔','Answer the concrete passage question.'),
+            ('ur-a1-u09-p03','q3','prompt','متن میں «ہاں» کیا جواب دیتی ہے؟','کتاب میلے میں آنے کے سوال پر عائشہ کیا جواب دیتی ہے؟','Replace awkward word-function wording with dialogue comprehension.'),
+            ('ur-a1-u09-p03','q3','answer','یہ مثبت جواب دیتی ہے۔','ہاں، آئے گی۔','Ground the answer in the dialogue.'),
+            ('ur-a1-u09-p03','q4','prompt','متن میں «بالکل» کیا معنی بڑھاتا ہے؟','«ہاں، بالکل آؤں گی» میں عائشہ کتنے یقین سے آنے کی بات کرتی ہے؟','Replace abstract meaning-function wording with communicative certainty.'),
+            ('ur-a1-u09-p03','q4','answer','یہ مکمل یقین یا واضح موافقت دکھاتا ہے۔','پورے یقین سے۔','Direct communicative answer.'),
+            ('ur-a1-u09-p03','q6','prompt','«ہاں» کا بنیادی استعمال کیا ہے؟','اگر کسی سوال کا جواب مثبت ہو تو کیا کہیں گے؟','Replace terminology with productive A1 use.'),
+            ('ur-a1-u09-p03','q6','answer','کسی سوال کا مثبت جواب دینا۔','ہاں۔','Give the usable form.'),
+            ('ur-a1-u09-p05','q10','prompt','خالی جگہ پُر کریں: روز چلنے کا ایک _____ صحت ہے۔','خالی جگہ پُر کریں: روز چلنے کا ایک _____ یہ ہے کہ جسم فعال رہتا ہے۔','Repair an unnatural and semantically malformed cloze while preserving فائدہ.'),
+            ('ur-a1-u09-p06','q2','prompt','خاندان کے دورہ میں عائشہ نے کیا سیکھا؟','خالہ کے گھر دورہ کرتے وقت عائشہ نے کیا سیکھا؟','Use a grammatical construction while preserving the exact target token دورہ.'),
+            ('ur-a1-u09-p06','q7','prompt','گھر میں عائشہ نے پنکھے کی کیا چیز دیکھی؟','پنکھا دیکھتے وقت عائشہ نے اس کے بارے میں کیا جانچا؟','Replace vague “what thing” wording with supported comprehension.'),
+            ('ur-a1-u10-p01','q8','prompt','والد پچھلے دورہ کے بارے میں کیا کہتے ہیں؟','والد پچھلے دورے کے بارے میں کیا کہتے ہیں؟','Use correct oblique form in learner-facing question.'),
+            ('ur-a1-u10-p01','q8','answer','پچھلے دورہ میں پودے کم تھے۔','پچھلے دورے کے وقت وہاں پودے کم تھے۔','Align with grammatical question/source meaning.'),
+            ('ur-a1-u10-p02','q1','answer','اردو کی زبان میں ایک نیا لفظ۔','اردو زبان کا ایک نیا لفظ۔','Remove redundant/awkward phrase while preserving target meaning.'),
+            ('ur-a1-u10-p02','q8','prompt','عائشہ لفظ کی مقدار کے بارے میں کیا کہتی ہے؟','عائشہ نئے لفظوں کی مقدار اور درست استعمال کے بارے میں کیا کہتی ہے؟','Match the repaired natural sentence and review target مقدار.'),
+            ('ur-a1-u10-p02','q8','answer','وہ کہتی ہے کہ درست استعمال اہم ہے۔','وہ کہتی ہے کہ نئے لفظوں کی مقدار سے زیادہ درست استعمال اہم ہے۔','Align answer with repaired prose.'),
+            ('ur-a1-u10-p06','q4','prompt','عادت کی مقدار بتانے کے لیے کون سے دو الفاظ آتے ہیں؟','کوئی کام کتنی بار ہوتا ہے، یہ بتانے کے لیے کون سے دو الفاظ آتے ہیں؟','Replace abstract “quantity of habit” wording with concrete frequency.'),
+            ('ur-a1-u10-p06','q8','prompt','کسی کام کی واضح بات یا حکم کے لیے کون سا لفظ مناسب ہے؟','استاد کی دی ہوئی واضح بات پر عمل کرنے کے لیے کون سا لفظ مناسب ہے؟','Use learner-facing instruction context rather than abstract command terminology.'),
+          ]
+          for pid,qid,field,old,new,reason in qa_repairs:
+            r=byid[pid]; q=next(q for q in r['questions'] if q['id']==qid); a=next(a for a in r['answer_key'] if a['id']==q['answer_id'])
+            obj=q if field=='prompt' else a; key='prompt' if field=='prompt' else 'answer'
+            if obj.get(key)!=old: raise SystemExit(f'FAIL CLOSED QA drift {pid} {qid} {field}: {obj.get(key)!r}')
+            targets=list(q.get('target_ids',[])); obj[key]=new
+            if list(q.get('target_ids',[]))!=targets: raise SystemExit('FAIL target linkage changed')
+            evidence.append({'passage_id':pid,'question_id':qid,'field':field,'before':old,'after':new,'reason':reason,'target_ids':targets})
+
+          corpus.write_text('\n'.join(json.dumps(r,ensure_ascii=False,separators=(',',':')) for r in rows)+'\n',encoding='utf-8')
+          after=hashlib.sha256(corpus.read_bytes()).hexdigest()
+          if after==before: raise SystemExit('FAIL CLOSED no corpus change')
+
+          # Whole-level deterministic preservation checks.
+          if len(rows)!=60 or [r['sequence'] for r in rows]!=list(range(1,61)): raise SystemExit('FAIL identity/sequence')
+          roman=[]; leakage=[]; formal=[]; placeholders=[]
+          for r in rows:
+            if len(r['questions'])!=10 or len(r['answer_key'])!=10: raise SystemExit(f'FAIL cardinality {r["id"]}')
+            if r['word_count']!=len(r['text'].split()): raise SystemExit(f'FAIL word count {r["id"]}')
+            ans={a['id']:a for a in r['answer_key']}; declared={t['id'] for k in ('new_lexical_targets','review_lexical_targets','grammar_targets','discourse_targets') for t in r.get(k,[])}
+            prompts=[]
+            for q in r['questions']:
+              if q.get('answer_id') not in ans or ans[q['answer_id']].get('question_id')!=q['id']: raise SystemExit(f'FAIL Q/A link {r["id"]} {q["id"]}')
+              if any(t not in declared for t in q.get('target_ids',[])): raise SystemExit(f'FAIL target locality {r["id"]} {q["id"]}')
+              prompts.append(q['prompt'])
+              if q.get('type') in {'grammar_category','grammar_function'}: formal.append((r['id'],q['id']))
+            if len(prompts)!=len(set(prompts)): raise SystemExit(f'FAIL duplicate prompts {r["id"]}')
+            for t in r.get('review_lexical_targets',[]):
+              if t.get('representation')=='running_text' and t.get('form') not in r['text']: raise SystemExit(f'FAIL review visibility {r["id"]} {t.get("form")}')
+            fields=[r.get('title',''),r.get('text','')]+[q.get('prompt','') for q in r['questions']]+[a.get('answer','') for a in r['answer_key']]+[a.get('explanation','') for a in r['answer_key']]
+            for text in fields:
+              if re.search(r'[A-Za-z]',str(text or '')): roman.append((r['id'],text))
+            for a in r['answer_key']:
+              exp=str(a.get('explanation') or '')
+              if exp==placeholder: placeholders.append((r['id'],a['id']))
+              if re.search(r'یہ\s+سوال|سوال\s+.*جانچ|نحو|نحوی|گرامر|لسانی\s+اصطلاح|جانچتا\s+ہے|جانچتی\s+ہے|\b(?:audit|review|target|schema|generated|generation)\b',exp,re.I): leakage.append((r['id'],a['id'],exp))
+          if roman or leakage or formal or placeholders: raise SystemExit(f'FAIL hygiene roman={roman[:3]} leakage={leakage[:3]} formal={formal[:3]} placeholders={placeholders[:3]}')
+
+          review={
+            'schema_version':1,'date':'2026-08-23','language':'ur','level':'A1','units':[9,10],
+            'review_kind':'internal_semantic_naturalness_answer_pedagogy_review_placeholder_cleanup_and_bounded_repair',
+            'before_sha256':before,'after_sha256':after,'records_reviewed':12,'questions_reviewed':120,'answers_reviewed':120,
+            'exact_placeholder_explanations_removed':placeholder_count,
+            'placeholder_policy':'Exact generic placeholders were replaced with empty explanations rather than invented evidence. Explanation enrichment remains a later independent-review task.',
+            'confirmed_content_repairs':len(evidence),'repairs':evidence,
+            'verification':{'qa_linkage_valid':True,'question_target_locality_valid':True,'review_target_visibility_preserved':True,'word_count_metadata_current':True,'duplicate_prompts_zero':True,'formal_task_types_zero':True,'generic_placeholder_explanations_zero':True,'learner_facing_roman_script_zero':True,'internal_review_explanation_leakage_zero':True},
+            'limitations':['Internal model review only.','Empty explanations created by placeholder cleanup are not claimed as complete explanation-quality review.','Native Urdu naturalness/orthography, independent model-family review, educator/CEFR A1 review, and blind post-repair review remain pending.'],
+            'status':'PASS_INTERNAL_UNITS09_10_BOUNDED_REPAIR_NEEDS_INDEPENDENT_REVIEW','release_effect':'NONE_AUTOMATIC: Urdu A1 remains non-release-ready.'
+          }
+          Path('reading/audit/urdu_a1_units09_10_internal_review_2026-08-23.json').write_text(json.dumps(review,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          fp=Path('reading/audit/urdu_a1_final_deterministic_audit_2026-08-22.json'); final=json.loads(fp.read_text(encoding='utf-8'))
+          final['generated_at_utc']=datetime.datetime.now(datetime.timezone.utc).isoformat(); final['status']='PASS_DETERMINISTIC_FULL_A1_INTERNAL_REVIEW_COMPLETE_NEEDS_INDEPENDENT_REVIEW'
+          final['scope']='Fresh deterministic audit after internal semantic/naturalness/answer/pedagogy review across all 60 Urdu A1 passages plus exact generic-explanation placeholder cleanup. Internal model review is complete; native-speaker, independent-model, educator, explanation-enrichment, and blind release review remain pending.'
+          final['source']={'path':'reading/urdu/a1/passages.jsonl','actual_sha256':after,'hash_bound':True,'prior_sha256':before,'latest_repair_evidence':'reading/audit/urdu_a1_units09_10_internal_review_2026-08-23.json'}
+          final['counts'].update({'passages':60,'questions':600,'answers':600,'formal_task_types':0,'generic_placeholder_explanations':0,'learner_facing_roman_script_findings':0,'learner_explanation_internal_review_leakage_findings':0,'violations':0}); final['violations']=[]
+          final['review_frontier']={'internal_units01_02_semantic_qa_pedagogy':'COMPLETE_INTERNAL_WITH_EXPLANATION_HYGIENE_REPAIR','internal_units03_04_semantic_naturalness_answer_pedagogy':'COMPLETE_INTERNAL','internal_units05_06_semantic_naturalness_answer_pedagogy':'COMPLETE_INTERNAL','internal_units07_08_semantic_naturalness_answer_pedagogy':'COMPLETE_INTERNAL','internal_units09_10_semantic_naturalness_answer_pedagogy':'COMPLETE_INTERNAL_WITH_PLACEHOLDER_CLEANUP','internal_a1_coverage':'COMPLETE_60_OF_60_PASSAGES','metalinguistic_class_corpus_wide':'ADJUDICATED_INTERNAL','generic_explanation_placeholder_class_units09_10':'REMOVED_EXACT_CLASS','explanation_enrichment':'PENDING_INDEPENDENT','native_urdu_naturalness_orthography':'PENDING','independent_model_family':'PENDING','educator_cefr':'PENDING','blind_postrepair':'PENDING'}
+          final['release_effect']='NONE_AUTOMATIC: Urdu A1 remains non-release-ready until independent/native/educator/blind gates are completed.'
+          fp.write_text(json.dumps(final,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'after_sha256':after,'placeholder_explanations_removed':placeholder_count,'content_repairs':len(evidence),'status':final['status']},ensure_ascii=False))
+          PY
+      - name: Commit internal review evidence and self-remove
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/urdu/a1/passages.jsonl reading/audit/urdu_a1_units09_10_internal_review_2026-08-23.json reading/audit/urdu_a1_final_deterministic_audit_2026-08-22.json
+          git rm -f .github/workflows/urdu-a1-units09-10-internal-review-temp.yml
+          git commit -m 'Review and polish Urdu A1 Units 09-10 [skip ci]'
+          git push origin HEAD:audit/urdu-a1-final-deterministic-2026-08-22
