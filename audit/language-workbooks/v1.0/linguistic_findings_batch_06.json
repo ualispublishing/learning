@@ -1,0 +1,35 @@
+{
+  "date": "2026-08-23",
+  "branch": "release/language-workbooks-v1-final",
+  "status": "REPAIR_REQUIRED",
+  "scope_note": "High-confidence Arabic findings from ranks 516 onward.",
+  "arabic": [
+    {"rank":516,"current_target":"لا آتي إلى هنا كثيرا.","current_english":"I don't come here very often.","issue":"unnormalized adverbial tanwin","proposed_target":"لا آتي إلى هنا كثيرًا.","proposed_english":"I don't come here very often."},
+    {"rank":517,"current_target":"لا أعرف أي شخص هناك.","current_english":"I don't even know anybody there.","issue":"English emphatic 'even' is absent from target","proposed_target":"لا أعرف حتى أي شخص هناك.","proposed_english":"I don't even know anybody there."},
+    {"rank":519,"current_target":"لا أدري ماذا تعني.","current_english":"I don't know what it means.","issue":"تعني without an explicit neuter antecedent is person/gender ambiguous and does not cleanly match English 'it'","proposed_target":"لا أدري ماذا يعني ذلك.","proposed_english":"I don't know what it means."},
+    {"rank":529,"current_target":"يجب عليي الذهاب إلى الحمام","current_english":"I have to go the bathroom.","issue":"Arabic typo عليي and ungrammatical English missing 'to'","proposed_target":"يجب عليّ الذهاب إلى الحمام.","proposed_english":"I have to go to the bathroom."},
+    {"rank":530,"current_target":"آمل أن أخاك قد تحسن.","current_english":"I hope your brother is better.","issue":"ungrammatical أن-clause","proposed_target":"آمل أن يكون أخوك قد تحسن.","proposed_english":"I hope your brother is better."},
+    {"rank":532,"current_target":"عليّ أن آخذ ساعتي لِتُصْلح.","current_english":"I must have my watch repaired.","issue":"malformed passive-purpose construction","proposed_target":"عليّ أن آخذ ساعتي لإصلاحها.","proposed_english":"I must have my watch repaired."},
+    {"rank":534,"current_target":"ما كان يجب علي أن أخبرك بكل شيء","current_english":"I shouldn't have told you anything.","issue":"بكل شيء means everything, not anything under the intended reading","proposed_target":"ما كان يجب عليّ أن أخبرك بكل شيء.","proposed_english":"I shouldn't have told you everything."},
+    {"rank":539,"current_target":"أُجبرتُ على الذهاب هناك.","current_english":"I was made to go there.","issue":"missing preposition إلى with destination","proposed_target":"أُجبرت على الذهاب إلى هناك.","proposed_english":"I was made to go there."},
+    {"rank":541,"current_target":"اود الحصول على تأشيرة سياحية .","current_english":"I would like a tourist visa.","issue":"missing initial hamza and incorrect punctuation spacing","proposed_target":"أود الحصول على تأشيرة سياحية.","proposed_english":"I would like a tourist visa."},
+    {"rank":542,"current_target":"لا أعرف كيف سأبدأ.","current_english":"I wouldn't know how to begin.","issue":"target is indicative present/future, not conditional","proposed_target":"لا أعرف كيف سأبدأ.","proposed_english":"I don't know how I'll begin."},
+    {"rank":549,"current_target":"فضلا، أيمكنني الحصول على كوب قهوة آخر؟","current_english":"Could I have one more coffee, please?","issue":"unnormalized فضلًا spelling","proposed_target":"فضلًا، أيمكنني الحصول على كوب قهوة آخر؟","proposed_english":"Could I have one more coffee, please?"},
+    {"rank":554,"current_target":"هل تريد أن تنصحني بشيء ما ؟","current_english":"Do you have any advice for me?","issue":"target asks whether the addressee wants to advise, not whether they have advice; bad punctuation spacing","proposed_target":"هل لديك أي نصيحة لي؟","proposed_english":"Do you have any advice for me?"},
+    {"rank":557,"current_target":"كل ما عليك القيام به هو الإنتظار.","current_english":"All you need to do is wait.","issue":"incorrect hamza spelling in الانتظار","proposed_target":"كل ما عليك القيام به هو الانتظار.","proposed_english":"All you need to do is wait."},
+    {"rank":559,"current_target":"لا أعرف كيف يُفعل ذلك.","current_english":"I cannot tell how this is done.","issue":"this/that mismatch and unnatural English rendering of لا أعرف","proposed_target":"لا أعرف كيف يُفعل ذلك.","proposed_english":"I don't know how that is done."},
+    {"rank":560,"current_target":"أنا حتى لا أعرف ما ذلك.","current_english":"I don't even know what that is.","issue":"unnatural Arabic placement of حتى","proposed_target":"أنا لا أعرف حتى ما ذلك.","proposed_english":"I don't even know what that is."},
+    {"rank":561,"current_target":"لا أرغب في بتناول أي طعامٍ اليوم.","current_english":"I don't feel like eating anything today.","issue":"duplicated prepositional element في بــ makes target ungrammatical","proposed_target":"لا أرغب في تناول أي طعام اليوم.","proposed_english":"I don't feel like eating anything today."},
+    {"rank":562,"current_target":"ليس لدي وقت للاكل الان.","current_english":"I don't have time to eat now.","issue":"missing hamzas in للأكل and الآن","proposed_target":"ليس لدي وقت للأكل الآن.","proposed_english":"I don't have time to eat now."},
+    {"rank":566,"current_target":"لا أعرف ما أفعلُهُ غداً.","current_english":"I don't know what to do tomorrow.","issue":"awkward literal structure and inconsistent diacritics","proposed_target":"لا أعرف ماذا أفعل غدًا.","proposed_english":"I don't know what to do tomorrow."},
+    {"rank":568,"current_target":"لا أعرف أين توجد نظاراتي الشمسية","current_english":"I don't know where my sunglasses are.","issue":"missing terminal punctuation","proposed_target":"لا أعرف أين توجد نظاراتي الشمسية.","proposed_english":"I don't know where my sunglasses are."},
+    {"rank":569,"current_target":"أشك في أن يستطيع أحد فعل ذلك.","current_english":"I don't think anybody could do that.","issue":"unnatural subject placement inside أن-clause","proposed_target":"أشك في أن أحدًا يستطيع فعل ذلك.","proposed_english":"I don't think anybody could do that."}
+  ],
+  "french": [],
+  "urdu": [],
+  "next_steps": [
+    "Continue sentence audit through remaining Arabic/French ranges.",
+    "Resolve any fail-closed uniqueness collisions with distinct semantically faithful repairs.",
+    "Begin row-level vocabulary audit after sentence corpus coverage is complete."
+  ]
+}
