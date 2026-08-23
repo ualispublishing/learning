@@ -67,12 +67,12 @@ jobs:
           manifest = json.loads(manifest_path.read_text())
           verified_repairs = {
               'README.md': {
-                  'sha256': '9ee3bb6226c4b8eab94d41f48fe5e7765fa3f6cc726f76f1e56b2985e3d858dd',
-                  'bytes': 4667,
+                  'sha256': '5955bda01b9760749a85f184d1a04ca2f41762e872460c9e157fd74ff9616d47',
+                  'bytes': 1962,
               },
               'docs/PUBLISHING.md': {
-                  'sha256': 'dac539083bea133935cf7394caee0246ef5b1fb69af4c52dae1f3d8242c8c9236',
-                  'bytes': 626,
+                  'sha256': '3253aeae02a0bc09812ee9486a1398126a8a31c528600c6b1784cc3c915eaae9',
+                  'bytes': 979,
               },
           }
           repaired = set()
