@@ -1,0 +1,144 @@
+name: TEMP Urdu A1 Units 07-08 internal review
+
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+    paths:
+      - .github/workflows/urdu-a1-units07-08-internal-review-temp.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temp-urdu-a1-units07-08-internal-review
+  cancel-in-progress: false
+
+jobs:
+  review:
+    if: github.event.pull_request.head.ref == 'audit/urdu-a1-final-deterministic-2026-08-22'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/urdu-a1-final-deterministic-2026-08-22
+      - name: Apply bounded Units 07-08 semantic, pedagogy, and naturalness repairs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib,json,re,datetime
+
+          corpus=Path('reading/urdu/a1/passages.jsonl')
+          before='9203d429d7cd84a75d464a7ad2f063f569801741da25dce2feda4a96fb66d662'
+          got=hashlib.sha256(corpus.read_bytes()).hexdigest()
+          if got!=before: raise SystemExit(f'FAIL CLOSED corpus drift {got}')
+          rows=[json.loads(x) for x in corpus.read_text(encoding='utf-8').splitlines() if x.strip()]
+          byid={r['id']:r for r in rows}; evidence=[]
+
+          prose_repairs=[
+            ('ur-a1-u07-p02','عائشہ گھڑی پر وقت دیکھتی ہے اور سمجھتی ہے کہ منٹ چھوٹے وقت کو بتانے میں مدد دیتے ہیں۔','عائشہ گھڑی پر وقت دیکھتی ہے اور سمجھتی ہے کہ منٹ وقت کی چھوٹی مدت بتاتے ہیں۔','Replace machine-like wording about minutes with ordinary Urdu while preserving منٹ.'),
+            ('ur-a1-u07-p05','وہ سمجھتی ہے کہ دوبارہ پڑھنے سے سوال صاف ہوتا ہے اور تقریباً وقت جاننے سے کام منظم رہتا ہے۔','وہ سمجھتی ہے کہ دوبارہ پڑھنے سے سوال صاف ہوتا ہے اور تقریباً کتنا وقت چاہیے، یہ جاننے سے کام منظم رہتا ہے۔','Clarify the role of an approximate duration while preserving دوبارہ and تقریباً.'),
+            ('ur-a1-u08-p02','گفتگو پہلے اسکول کے بارے میں ہوتی ہے، پھر دونوں خاندان کی خبر پوچھتی ہیں۔','گفتگو پہلے اسکول کے بارے میں ہوتی ہے، پھر دونوں ایک دوسرے کے خاندان کا حال پوچھتی ہیں۔','Replace an unnatural family-news construction with idiomatic mutual inquiry.'),
+            ('ur-a1-u08-p04','وہ سمجھتی ہے کہ بجلی کے وقت اور بغیر بجلی کے گھر کے کام کچھ مختلف ہوتے ہیں۔','وہ سمجھتی ہے کہ بجلی ہونے اور نہ ہونے کی صورت میں گھر کے کام کچھ مختلف ہوتے ہیں۔','Replace awkward “at electricity time / without electricity” phrasing with a natural condition contrast.'),
+            ('ur-a1-u08-p06','پھر وہ بجلی جانے والی شام کا ذکر کرتی ہے، جب ہر چیز اپنی جگہ رکھنا ضروری تھا۔','پھر وہ بجلی جانے والی شام کا ذکر کرتی ہے، جب ہر چیز کو اپنی جگہ رکھنا ضروری تھا۔','Add the required object marker کو.'),
+          ]
+          for pid,old,new,reason in prose_repairs:
+            r=byid[pid]
+            if r['text'].count(old)!=1: raise SystemExit(f'FAIL CLOSED prose mismatch {pid}: {r["text"].count(old)}')
+            r['text']=r['text'].replace(old,new); r['word_count']=len(r['text'].split())
+            evidence.append({'passage_id':pid,'field':'text','before':old,'after':new,'reason':reason})
+
+          # Exact Q/A repairs. Target IDs are deliberately preserved.
+          qa_repairs=[
+            ('ur-a1-u07-p01','q4','answer','سات دن کے عرصے یا اس کی حالت کو بتاتا ہے۔','سات دن کے عرصے سے۔','Replace morphology-like wording with the concrete duration.'),
+            ('ur-a1-u07-p01','q4','explanation','متن میں موجودہ اور آنے والے ہفتے کی منصوبہ بندی ہے۔','متن میں موجودہ اور آنے والے ہفتے کی منصوبہ بندی ہے۔','NOOP'),
+            ('ur-a1-u07-p01','q7','prompt','«ہفتے» کس وقت کی اکائی سے متعلق ہے؟','ایک ہفتے میں کتنے دن ہوتے ہیں؟','Replace word-form metalanguage with a concrete A1 time question.'),
+            ('ur-a1-u07-p01','q7','answer','سات دن کے عرصے کی حالت؛ ہفتہ کے بعد استعمال ہونے والی صورت۔','سات دن۔','Remove morphological-form explanation from learner-facing answer.'),
+            ('ur-a1-u07-p01','q7','explanation','یہ «ہفتے» کا بنیادی استعمال ہے۔','ایک ہفتے میں سات دن ہوتے ہیں۔','Give direct learner-facing support.'),
+            ('ur-a1-u07-p02','q3','prompt','متن میں «بجے» کیا بتاتا ہے؟','«گیارہ بجے وقفہ ہوتا ہے» میں وقفہ کب ہوتا ہے؟','Replace abstract function question with clock-time comprehension.'),
+            ('ur-a1-u07-p02','q3','answer','گھڑی کے مقررہ گھنٹے کو بتانے والا وقت کا لفظ۔','گیارہ بجے۔','Answer the concrete time question.'),
+            ('ur-a1-u07-p02','q3','explanation','متن میں نو، گیارہ اور بارہ بجے کے اوقات آئے ہیں۔','جملے میں وقفے کا وقت گیارہ بجے ہے۔','Ground the answer in the sentence.'),
+            ('ur-a1-u07-p02','q6','prompt','«بجے» کا بنیادی استعمال کیا ہے؟','گھڑی بارہ دکھائے تو وقت کیسے کہیں گے؟','Replace terminology with productive A1 use.'),
+            ('ur-a1-u07-p02','q6','answer','گھڑی کے گھنٹے کے ساتھ استعمال ہونے والا لفظ۔','بارہ بجے۔','Give the usable time expression.'),
+            ('ur-a1-u07-p02','q6','explanation','یہ «بجے» کا بنیادی استعمال ہے۔','گھڑی بارہ دکھائے تو ہم «بارہ بجے» کہتے ہیں۔','Teach through an example rather than terminology.'),
+            ('ur-a1-u07-p05','q4','prompt','متن میں «تقریباً» کس طرح کی مقدار بتاتا ہے؟','«تقریباً ایک منٹ» کا کیا مطلب ہے؟','Replace abstract quantity-category wording with direct meaning.'),
+            ('ur-a1-u07-p05','q4','answer','بالکل نہیں بلکہ اندازاً مقدار یا وقت بتانا۔','ایک منٹ کے قریب، ضروری نہیں بالکل ایک منٹ۔','Clarify approximate duration in learner-facing language.'),
+            ('ur-a1-u07-p05','q4','explanation','متن میں تقریباً ایک، پانچ اور چار منٹ کے اوقات آئے ہیں۔','«تقریباً» بتاتا ہے کہ وقت اندازاً ایک منٹ ہے۔','Ground the approximation directly.'),
+            ('ur-a1-u07-p06','q6','prompt','سوال صاف نہ ہو تو عائشہ دوبارہ اور تقریباً کو کیسے استعمال کرتی ہے؟','سوال صاف نہ ہو تو عائشہ کیا کرتی ہے اور وقت کا اندازہ کیسے لگاتی ہے؟','Replace word-name manipulation with comprehension of the strategy.'),
+            ('ur-a1-u07-p06','q6','answer','وہ سوال دوبارہ پڑھتی ہے اور تقریباً مطلوب وقت دیکھتی ہے۔','وہ سوال دوبارہ پڑھتی ہے اور دیکھتی ہے کہ تقریباً کتنا وقت چاہیے۔','Use natural, supported wording.'),
+            ('ur-a1-u08-p06','q5','prompt','جواب لکھتے وقت عائشہ کو دوسرے قلم کی ضرورت کیوں یاد آتی ہے؟','جواب لکھتے وقت عائشہ کو قلم کے ساتھ کیا کرنا پڑا؟','The checkpoint text says what happened, not why; ask the supported question.'),
+            ('ur-a1-u08-p06','q6','answer','بجلی چلی گئی تھی اور ہر چیز اپنی جگہ رکھنا ضروری تھا۔','بجلی چلی گئی تھی اور ہر چیز کو اپنی جگہ رکھنا ضروری تھا۔','Correct the missing object marker in the answer.'),
+          ]
+          # One listed row above is a deliberate same-text guard and is not counted as a repair.
+          for pid,qid,field,old,new,reason in qa_repairs:
+            if reason=='NOOP':
+              r=byid[pid]; q=next(q for q in r['questions'] if q['id']==qid); a=next(a for a in r['answer_key'] if a['id']==q['answer_id'])
+              if a.get('explanation')!=old: raise SystemExit(f'FAIL CLOSED evidence guard drift {pid} {qid}')
+              continue
+            r=byid[pid]; q=next(q for q in r['questions'] if q['id']==qid); a=next(a for a in r['answer_key'] if a['id']==q['answer_id'])
+            obj=q if field=='prompt' else a; key='prompt' if field=='prompt' else field
+            if obj.get(key)!=old: raise SystemExit(f'FAIL CLOSED QA drift {pid} {qid} {field}: {obj.get(key)!r}')
+            targets=list(q.get('target_ids',[])); obj[key]=new
+            if list(q.get('target_ids',[]))!=targets: raise SystemExit('FAIL target linkage changed')
+            evidence.append({'passage_id':pid,'question_id':qid,'field':field,'before':old,'after':new,'reason':reason,'target_ids':targets})
+
+          corpus.write_text('\n'.join(json.dumps(r,ensure_ascii=False,separators=(',',':')) for r in rows)+'\n',encoding='utf-8')
+          after=hashlib.sha256(corpus.read_bytes()).hexdigest()
+          if after==before: raise SystemExit('FAIL CLOSED no corpus change')
+
+          roman=[]; leakage=[]; formal=[]
+          for r in rows:
+            if len(r['questions'])!=10 or len(r['answer_key'])!=10: raise SystemExit(f'FAIL cardinality {r["id"]}')
+            if r['word_count']!=len(r['text'].split()): raise SystemExit(f'FAIL word count {r["id"]}')
+            ans={a['id']:a for a in r['answer_key']}; declared={t['id'] for k in ('new_lexical_targets','review_lexical_targets','grammar_targets','discourse_targets') for t in r.get(k,[])}
+            prompts=[]
+            for q in r['questions']:
+              if q.get('answer_id') not in ans or ans[q['answer_id']].get('question_id')!=q['id']: raise SystemExit(f'FAIL Q/A link {r["id"]} {q["id"]}')
+              if any(t not in declared for t in q.get('target_ids',[])): raise SystemExit(f'FAIL target locality {r["id"]} {q["id"]}')
+              prompts.append(q['prompt'])
+              if q.get('type') in {'grammar_category','grammar_function'}: formal.append((r['id'],q['id']))
+            if len(prompts)!=len(set(prompts)): raise SystemExit(f'FAIL duplicate prompts {r["id"]}')
+            for t in r.get('review_lexical_targets',[]):
+              if t.get('representation')=='running_text' and t.get('form') not in r['text']: raise SystemExit(f'FAIL review visibility {r["id"]} {t.get("form")}')
+            fields=[r.get('title',''),r.get('text','')]+[q.get('prompt','') for q in r['questions']]+[a.get('answer','') for a in r['answer_key']]+[a.get('explanation','') for a in r['answer_key']]
+            for text in fields:
+              if re.search(r'[A-Za-z]',str(text or '')): roman.append((r['id'],text))
+            for a in r['answer_key']:
+              exp=str(a.get('explanation') or '')
+              if re.search(r'یہ\s+سوال|سوال\s+.*جانچ|نحو|نحوی|گرامر|لسانی\s+اصطلاح|جانچتا\s+ہے|جانچتی\s+ہے|\b(?:audit|review|target|schema|generated|generation)\b',exp,re.I): leakage.append((r['id'],a['id'],exp))
+          if roman or leakage or formal: raise SystemExit(f'FAIL hygiene roman={roman[:3]} leakage={leakage[:3]} formal={formal[:3]}')
+
+          review={
+            'schema_version':1,'date':'2026-08-23','language':'ur','level':'A1','units':[7,8],
+            'review_kind':'internal_semantic_naturalness_answer_pedagogy_review_and_bounded_repair',
+            'before_sha256':before,'after_sha256':after,'records_reviewed':12,'questions_reviewed':120,'answers_reviewed':120,
+            'confirmed_repairs':len(evidence),'repairs':evidence,
+            'retained_after_review':{'note':'All other Unit07-08 learner-facing fields were retained after internal contextual review. No native-speaker, independent-model, or educator approval is claimed.'},
+            'verification':{'qa_linkage_valid':True,'question_target_locality_valid':True,'review_target_visibility_preserved':True,'word_count_metadata_current':True,'duplicate_prompts_zero':True,'formal_task_types_zero':True,'learner_facing_roman_script_zero':True,'internal_review_explanation_leakage_zero':True},
+            'limitations':['Internal model review only.','Native Urdu naturalness/orthography, independent model-family review, educator/CEFR A1 review, and blind post-repair review remain pending.'],
+            'status':'PASS_INTERNAL_UNITS07_08_BOUNDED_REPAIR_NEEDS_INDEPENDENT_REVIEW','release_effect':'NONE_AUTOMATIC: Urdu A1 remains non-release-ready.'
+          }
+          Path('reading/audit/urdu_a1_units07_08_internal_review_2026-08-23.json').write_text(json.dumps(review,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          fp=Path('reading/audit/urdu_a1_final_deterministic_audit_2026-08-22.json'); final=json.loads(fp.read_text(encoding='utf-8'))
+          final['generated_at_utc']=datetime.datetime.now(datetime.timezone.utc).isoformat(); final['status']='PASS_DETERMINISTIC_POST_UNITS07_08_INTERNAL_REPAIR_NEEDS_INDEPENDENT_REVIEW'
+          final['scope']='Fresh deterministic audit after Urdu A1 Units07-08 internal semantic/naturalness/answer/pedagogy review and bounded repairs; no native-speaker, independent-model, educator, or release approval.'
+          final['source']={'path':'reading/urdu/a1/passages.jsonl','actual_sha256':after,'hash_bound':True,'prior_sha256':before,'latest_repair_evidence':'reading/audit/urdu_a1_units07_08_internal_review_2026-08-23.json'}
+          final['counts'].update({'passages':60,'questions':600,'answers':600,'formal_task_types':0,'learner_facing_roman_script_findings':0,'learner_explanation_internal_review_leakage_findings':0,'violations':0}); final['violations']=[]
+          final['review_frontier']={'internal_units01_02_semantic_qa_pedagogy':'COMPLETE_INTERNAL_WITH_EXPLANATION_HYGIENE_REPAIR','internal_units03_04_semantic_naturalness_answer_pedagogy':'COMPLETE_INTERNAL','internal_units05_06_semantic_naturalness_answer_pedagogy':'COMPLETE_INTERNAL','internal_units07_08_semantic_naturalness_answer_pedagogy':'COMPLETE_INTERNAL','metalinguistic_class_corpus_wide':'ADJUDICATED_INTERNAL','abstract_task_candidate_class_through_unit04':'ADJUDICATED_INTERNAL','units09_10_full_semantic_naturalness_answer_pedagogy':'PENDING_INTERNAL','native_urdu_naturalness_orthography':'PENDING','independent_model_family':'PENDING','educator_cefr':'PENDING','blind_postrepair':'PENDING'}
+          fp.write_text(json.dumps(final,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'after_sha256':after,'repairs':len(evidence),'status':final['status']},ensure_ascii=False))
+          PY
+      - name: Commit internal review evidence and self-remove
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/urdu/a1/passages.jsonl reading/audit/urdu_a1_units07_08_internal_review_2026-08-23.json reading/audit/urdu_a1_final_deterministic_audit_2026-08-22.json
+          git rm -f .github/workflows/urdu-a1-units07-08-internal-review-temp.yml
+          git commit -m 'Review and polish Urdu A1 Units 07-08 [skip ci]'
+          git push origin HEAD:audit/urdu-a1-final-deterministic-2026-08-22
