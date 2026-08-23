@@ -1,0 +1,51 @@
+rank,status,target,english,issue,proposed_target,proposed_english
+1,PASS,هل أنت جاهز؟,Are you ready?,,,
+2,PASS,هل نستطيع أن نذهب؟,Can we go?,,,
+3,PASS,هل يمكنك القدوم؟,Can you come?,,,
+4,PASS,هل اتصلت؟,Did you call?,,,
+5,PASS,هل تفهم؟,Do you understand?,,,
+6,PASS,كيف حالك؟,How are you?,,,
+7,PASS,أين نحن؟,Where are we?,,,
+8,PASS,أين أنت؟,Where are you?,,,
+9,PASS,من أنت؟,Who are you?,,,
+10,PASS,ها نحن ذا,Here we are!,,,
+11,REPAIR,اتصل بي غداً.,Call me tomorrow.,Normalize MSA tanwin spelling.,اتصل بي غدًا.,Call me tomorrow.
+12,PASS,ها قد وصلنا.,Here we are.,,,
+13,REPAIR,سآكل هنا.,I eat here.,Future-tense mismatch: سآكل means I will eat.,سآكل هنا.,I will eat here.
+14,PASS,أحبك.,I like you.,,,
+15,PASS,أحتاج وقتا.,I need time.,,,
+16,PASS,أحتاج إليك.,I need you.,,,
+17,PASS,أريدك.,I want you.,,,
+18,REPAIR,"لا، شكراً لك.","No, thank you.",Normalize standard Arabic tanwin spelling.,"لا، شكرًا لك.","No, thank you."
+19,REPAIR,تعال الى هنا من فضلك.,Please come here.,Missing hamza below in إلى.,تعال إلى هنا من فضلك.,Please come here.
+20,PASS,من فضلك ساعدني.,Please help me.,,,
+21,PASS,نحن نحتاج إلى مساعدة,We need help.,,,
+22,PASS,نعم أنا أعلم,"Yes, I know.",,,
+23,HOLD,أنت تعلم كيف,You know how.,Standalone fragment is semantically possible but pedagogically incomplete; retain blocked pending progression-aware replacement.,,
+24,PASS,أنت تفهمني.,You understand me.,,,
+25,PASS,ها هو هنا,Here he is!,,,
+26,HOLD,نادني أبي.,Call me dad.,Arabic is structurally ambiguous without quotation/vocative context and could be read differently; requires explicit adjudication.,,
+27,PASS,تعال إلي,Come to me.,,,
+28,PASS,تعال معي.,Come with me.,,,
+29,PASS,لا تأت هنا.,Don't come here.,,,
+30,PASS,كُل خضراواتك.,Eat your vegetables.,,,
+31,REPAIR,كُل الخضار الخاص بك.,Eat your veggies.,Unnatural possessive calque.,تناول خضرواتك.,Eat your veggies.
+32,PASS,عد إلى المنزل في الحين.,Go home immediately.,,,
+33,PASS,اذهب إلى العمل,Go to work.,,,
+34,PASS,بإمكانه المجيء,He can come.,,,
+35,PASS,ها هي.,Here it is.,,,
+36,REPAIR,ها قد أَتَوْا.,Here they come.,Arabic perfect أتوا is past/completed while English is present arrival.,ها هم قادمون.,Here they come.
+37,PASS,أصدقك.,I believe you.,,,
+38,PASS,يمكنني القفز.,I can jump.,,,
+39,PASS,يمكنني السباحة.,I can swim.,,,
+40,REPAIR,فعلت هذا,I did that.,Demonstrative mismatch: هذا means this.,فعلت هذا.,I did this.
+41,REPAIR,لا أعرف‏.‏‏,I don't know.,Stray bidirectional/punctuation control characters.,لا أعرف.,I don't know.
+42,PASS,لا أفهم.,I don't understand.,,,
+43,PASS,أشعر بالحكة.,I feel itchy.,,,
+44,REPAIR,أشعر بالإرهاق.,I feel tired.,الإرهاق is exhaustion/fatigue and is stronger than generic tired.,أشعر بالإرهاق.,I feel exhausted.
+45,PASS,لقد كَرِهتُ المَدرَسَة.,I hated school.,,,
+46,PASS,لدي شكوك.,I have doubts.,,,
+47,PASS,عندي أسئلة.,I have questions.,,,
+48,PASS,لدي أخوات.,I have sisters.,,,
+49,PASS,أنا أسمعك.,I hear you.,,,
+50,PASS,أعرِفها.,I know her.,,,
