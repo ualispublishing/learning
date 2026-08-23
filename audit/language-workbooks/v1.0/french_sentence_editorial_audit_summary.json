@@ -1,0 +1,60 @@
+{
+  "artifact": "French sentence bank editorial audit summary",
+  "workbook_release": "v1.0",
+  "source_path": "completed/languages/workbooks/v1.0/french/french_sentence_bank_1000.csv",
+  "source_zip_sha256": "9e35994767f7307dc1fa9d5efcc36681f3756a1bdaaa02c1381b3eb11461261e",
+  "target_register": "standard contemporary French",
+  "audit_completed_utc_date": "2026-08-23",
+  "first_pass": {
+    "rows_total": 1000,
+    "rows_screened": 1000,
+    "coverage_percent": 100.0,
+    "result": "BLOCKING_DEFECTS_FOUND"
+  },
+  "batch_ledgers": [
+    "french_sentence_editorial_audit_001_250.json",
+    "french_sentence_editorial_audit_251_500.json",
+    "french_sentence_editorial_audit_501_750.json",
+    "french_sentence_editorial_audit_751_1000.json"
+  ],
+  "critical_examples": [
+    {"rank": 37, "issue": "Target does not express English past 'What did you eat today?'"},
+    {"rank": 90, "issue": "avoir besoin de means need while English says want."},
+    {"rank": 137, "issue": "il sont is an agreement error; should be ils sont."},
+    {"rank": 203, "issue": "French imperfect aspect is paired with English simple past."},
+    {"rank": 215, "issue": "Qu'ai-je besoin de savoir ? is not a valid polished construction."},
+    {"rank": 304, "issue": "French says from there; English says from here."},
+    {"rank": 332, "issue": "French says want; English says need."},
+    {"rank": 333, "issue": "French says want; English says need."},
+    {"rank": 379, "issue": "French question is negative while English is positive."},
+    {"rank": 524, "issue": "Malformed/marked quantième construction for an everyday date question."},
+    {"rank": 525, "issue": "Malformed/marked quantième construction for an everyday date question."},
+    {"rank": 549, "issue": "French telephone greeting/help offer does not match the English question."},
+    {"rank": 566, "issue": "Nonstandard Est-ce ce que construction."},
+    {"rank": 567, "issue": "Nonstandard Est-ce ce que construction."},
+    {"rank": 646, "issue": "French says there while English says here."},
+    {"rank": 690, "issue": "Nonstandard Est-ce ce que construction."},
+    {"rank": 691, "issue": "Nonstandard Est-ce ce que construction."},
+    {"rank": 769, "issue": "Nonstandard tag-question form si ? for the intended English tag."},
+    {"rank": 770, "issue": "Nonstandard tag-question form si ? for the intended English tag."},
+    {"rank": 823, "issue": "French son bureau means his/her office while English says your office."},
+    {"rank": 826, "issue": "French says out of there; English says out of here."},
+    {"rank": 827, "issue": "French says out of there; English says out of here."},
+    {"rank": 863, "issue": "Malformed de quoi tout ceci retourne construction."},
+    {"rank": 864, "issue": "Malformed de quoi tout ceci retourne construction."},
+    {"rank": 886, "issue": "French omits the action 'do' from what the listener wants to do."},
+    {"rank": 896, "issue": "Malformed idée combien construction."},
+    {"rank": 897, "issue": "Malformed idée combien construction."},
+    {"rank": 898, "issue": "Malformed de combien je me sens construction."},
+    {"rank": 938, "issue": "lorsque on should contract to lorsqu'on."}
+  ],
+  "root_cause": "The current sentence builder validates source licensing, script plausibility, target uniqueness, and length, then ranks primarily from English-side usefulness. It does not validate French grammar, register, or bilingual semantic equivalence before selecting the top 1000.",
+  "release_status": "BLOCKED",
+  "release_requirements": [
+    "Compile an explicit row decision for every rank 1-1000 from the completed row-by-row audit.",
+    "Use those row decisions as the sole correction/replacement input rather than re-deriving edits independently.",
+    "Second-pass verify every CORRECT, REPLACE, and NATIVE_REVIEW row before approval.",
+    "Regenerate French sentence CSV and sentence-bearing PDFs from approved row decisions only.",
+    "Run deterministic structural/render regression QA and independent native/editorial review before an absolute correctness claim."
+  ]
+}
