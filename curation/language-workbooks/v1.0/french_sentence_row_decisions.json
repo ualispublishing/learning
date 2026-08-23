@@ -4,7 +4,7 @@
   "language": "french",
   "source_path": "completed/languages/workbooks/v1.0/french/french_sentence_bank_1000.csv",
   "source_zip_sha256": "9e35994767f7307dc1fa9d5efcc36681f3756a1bdaaa02c1381b3eb11461261e",
-  "decision_source": "completed row-by-row editorial audit",
+  "decision_source": "completed row-by-row editorial audit plus explicit second-pass amendments",
   "policy": {
     "row_count": 1000,
     "every_rank_has_exactly_one_status": true,
@@ -12,6 +12,7 @@
     "independent_rederivation_during_build_forbidden": true,
     "pending_or_native_review_blocks_regeneration": true,
     "second_pass_required_before_correction_or_replacement_approval": true,
+    "second_pass_audit_changes_require_explicit_amendment_file": true,
     "approval_survives_recompile_only_when_audit_fingerprint_matches": true
   },
   "status_counts": {

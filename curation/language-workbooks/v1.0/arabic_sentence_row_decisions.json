@@ -4,7 +4,7 @@
   "language": "arabic",
   "source_path": "completed/languages/workbooks/v1.0/arabic/arabic_sentence_bank_1000.csv",
   "source_zip_sha256": "b72f70d3b724c3060da55f74ea1753da249d8eb38a6dbdea3dcc28798d077914",
-  "decision_source": "completed row-by-row editorial audit",
+  "decision_source": "completed row-by-row editorial audit plus explicit second-pass amendments",
   "policy": {
     "row_count": 1000,
     "every_rank_has_exactly_one_status": true,
@@ -12,6 +12,7 @@
     "independent_rederivation_during_build_forbidden": true,
     "pending_or_native_review_blocks_regeneration": true,
     "second_pass_required_before_correction_or_replacement_approval": true,
+    "second_pass_audit_changes_require_explicit_amendment_file": true,
     "approval_survives_recompile_only_when_audit_fingerprint_matches": true
   },
   "status_counts": {
