@@ -25,11 +25,11 @@ jobs:
           set -euo pipefail
           count=$(find .securityx-import -maxdepth 1 -type f -name 'part-*.txt' 2>/dev/null | wc -l | tr -d ' ')
           echo "count=$count" >> "$GITHUB_OUTPUT"
-          if [ "$count" -ne 24 ]; then
-            echo "Have $count/24 archive parts; importer will exit without changes."
+          if [ "$count" -ne 12 ]; then
+            echo "Have $count/12 archive parts; importer will exit without changes."
           fi
       - name: Reconstruct and verify audited archive
-        if: steps.parts.outputs.count == '24'
+        if: steps.parts.outputs.count == '12'
         shell: bash
         run: |
           set -euo pipefail
@@ -48,9 +48,15 @@ jobs:
           p=Path('/tmp/securityx-expanded/SecurityX_CAS005_GitHub_Pages_v4_1/data/final_audit.json')
           a=json.loads(p.read_text())
           print(a)
+          assert a.get('remaining_issues') == 0
+          assert a.get('cards') == 1156
+          assert a.get('questions') == 100
+          assert a.get('pbqs') == 12
+          assert a.get('blueprint_entries') == 618
+          assert a.get('sources') == 42
           PY
       - name: Install exact canonical site and self-clean
-        if: steps.parts.outputs.count == '24'
+        if: steps.parts.outputs.count == '12'
         shell: bash
         run: |
           set -euo pipefail
