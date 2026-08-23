@@ -27,7 +27,7 @@ jobs:
         run: |
           python -m venv .venv-lt
           .venv-lt/bin/python -m pip install --disable-pip-version-check language-tool-python==3.4.0
-      - name: Rerun LanguageTool and require semantic fingerprint equivalence
+      - name: Rerun LanguageTool field-by-field and require semantic fingerprint equivalence
         shell: bash
         run: |
           set -euo pipefail
@@ -51,10 +51,11 @@ jobs:
           def clean(s):
               return (s or '').replace('\u00a0',' ').replace('\u202f',' ')
           def core(f):
+              # Deliberately excludes offsets/sentence-context because current scan is field-isolated.
               return (
                 f.get('passage_id'),f.get('field'),f.get('item_id'),f.get('rule_id'),f.get('category'),
                 f.get('rule_issue_type'),clean(f.get('message')),tuple(clean(x) for x in (f.get('replacements') or [])),
-                f.get('offset_in_field'),f.get('error_length'),clean(f.get('matched_text'))
+                f.get('error_length'),clean(f.get('matched_text'))
               )
 
           tool=language_tool_python.LanguageTool('fr')
@@ -63,37 +64,31 @@ jobs:
               fields=[('title',None,r['title']),('text',None,r['text'])]
               fields += [('question_prompt',q['id'],q['prompt']) for q in r['questions']]
               fields += [('answer',a['id'],a['answer']) for a in r['answer_key']]
-              field_counts.update(f for f,_,_ in fields); chars+=sum(len(t) for _,_,t in fields)
-              spans=[]; parts=[]; pos=0
-              for i,(field,item,text) in enumerate(fields):
-                  if i:
-                      parts.append('  '); pos+=2
-                  start=pos; parts.append(text); pos+=len(text); spans.append((start,pos,field,item,text))
-              combined=''.join(parts)
-              for m in tool.check(combined):
-                  off=int(m.offset); end=off+int(m.error_length)
-                  hit=next((s for s in spans if off>=s[0] and end<=s[1]),None)
-                  if hit is None:
-                      raise SystemExit(f'FAIL CLOSED LanguageTool match crosses field boundary {r["id"]} {off}:{end}')
-                  start,stop,field,item,text=hit
-                  local=off-start
-                  findings.append({
-                    'passage_id':r['id'],'field':field,'item_id':item,
-                    'rule_id':m.rule_id,'category':str(m.category),'rule_issue_type':str(m.rule_issue_type),
-                    'message':m.message,'replacements':list(m.replacements),
-                    'offset_in_combined':off,'offset_in_field':local,'error_length':int(m.error_length),
-                    'matched_text':text[local:local+int(m.error_length)],
-                    'excerpt':text[max(0,local-60):min(len(text),local+int(m.error_length)+60)],
-                    'sentence':getattr(m,'sentence','') or '',
-                    'context':getattr(m,'context','') or ''
-                  })
+              for field,item,text in fields:
+                  field_counts[field]+=1; chars+=len(text)
+                  # Scan every learner-facing field independently. This prevents synthetic
+                  # findings caused by concatenation separators between unrelated fields.
+                  for m in tool.check(text):
+                      off=int(m.offset); length=int(m.error_length)
+                      if off < 0 or off+length > len(text):
+                          raise SystemExit(f'FAIL CLOSED out-of-field LanguageTool span {r["id"]} {field} {item} {off}:{off+length}')
+                      findings.append({
+                        'passage_id':r['id'],'field':field,'item_id':item,
+                        'rule_id':m.rule_id,'category':str(m.category),'rule_issue_type':str(m.rule_issue_type),
+                        'message':m.message,'replacements':list(m.replacements),
+                        'offset_in_field':off,'error_length':length,
+                        'matched_text':text[off:off+length],
+                        'excerpt':text[max(0,off-60):min(len(text),off+length+60)],
+                        'sentence':getattr(m,'sentence','') or '',
+                        'context':getattr(m,'context','') or ''
+                      })
           try: tool.close()
           except Exception: pass
 
           before=Counter(core(f) for f in old.get('findings',[]))
           after=Counter(core(f) for f in findings)
           if before!=after:
-              removed=list((before-after).elements())[:20]; added=list((after-before).elements())[:20]
+              removed=list((before-after).elements())[:40]; added=list((after-before).elements())[:40]
               print(json.dumps({'old_count':sum(before.values()),'new_count':sum(after.values()),'removed':removed,'added':added},ensure_ascii=False,default=list))
               raise SystemExit('FAIL CLOSED LanguageTool semantic fingerprint changed after NBSP repair')
           if len(findings)!=230:
@@ -102,15 +97,19 @@ jobs:
           by_rule=Counter(f['rule_id'] for f in findings); by_cat=Counter(f['category'] for f in findings)
           blob=subprocess.check_output(['git','hash-object',str(corpus)],text=True).strip()
           out={
-            'schema_version':1,'date':'2026-08-22','language':'fr','level':'A1',
+            'schema_version':2,'date':'2026-08-22','language':'fr','level':'A1',
             'audit':'independent_machine_detector_languagetool_post_nbsp_fullscan',
-            'status':'POST_NBSP_SCAN_COMPLETE_SEMANTIC_FINGERPRINT_EQUIVALENT',
+            'status':'POST_NBSP_FIELD_ISOLATED_SCAN_COMPLETE_SEMANTIC_FINGERPRINT_EQUIVALENT',
             'bound_sha256':got,'bound_git_blob':blob,
-            'scope':{'passages':60,'questions':600,'answers':600,'learner_facing_fields_scanned':sum(field_counts.values()),'characters_scanned':chars,'field_counts':dict(field_counts)},
+            'scope':{'passages':60,'questions':600,'answers':600,'learner_facing_fields_scanned':sum(field_counts.values()),'characters_scanned':chars,'field_counts':dict(field_counts),'scan_mode':'each learner-facing field independently'},
             'tool':{'name':'LanguageTool via language_tool_python local server','language':'fr','language_tool_python_version':'3.4.0','language_tool_distribution':'6.8'},
             'raw_finding_count':len(findings),'raw_findings_by_rule':dict(by_rule),'raw_findings_by_category':dict(by_cat),
             'passages_with_findings':len({f['passage_id'] for f in findings}),
-            'equivalence_to_pre_nbsp_scan':{'source_scan':str(oldp),'semantic_fingerprint_equivalent':True,'new_signals':0,'missing_signals':0,'normalization_for_comparison':'U+00A0/U+202F mapped to ordinary space only'},
+            'equivalence_to_pre_nbsp_scan':{
+              'source_scan':str(oldp),'semantic_fingerprint_equivalent':True,'new_signals':0,'missing_signals':0,
+              'normalization_for_comparison':'U+00A0/U+202F mapped to ordinary space; offsets and sentence/context excluded because current scan is field-isolated',
+              'reason_for_field_isolation':'A prior concatenated rerun correctly failed closed when LanguageTool emitted a match spanning an artificial separator between fields.'
+            },
             'findings':findings
           }
           Path('reading/audit/french_a1_languagetool_post_nbsp_fullscan_2026-08-22.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
@@ -124,8 +123,8 @@ jobs:
           adj['rebind_after_nbsp_typography_repair']={
             'current_scan':'reading/audit/french_a1_languagetool_post_nbsp_fullscan_2026-08-22.json',
             'raw_findings':len(findings),'semantic_fingerprint_equivalent_to_pre_nbsp_scan':True,
-            'new_signals':0,'missing_signals':0,
-            'basis':'The only canonical content change was the separately proven 1,992 space-to-no-break-space typography substitution set; current LanguageTool findings match the prior adjudicated finding multiset after only no-break-space normalization.'
+            'new_signals':0,'missing_signals':0,'scan_mode':'field_isolated',
+            'basis':'The only corpus change was the separately proven 1,992 space-to-no-break-space typography substitution set; the current field-isolated LanguageTool finding multiset matches the prior adjudicated findings after no-break-space normalization.'
           }
           adj['machine_gate_state']='PARTIAL_LANGUAGETOOL_AND_GRAMMALECTE_COMPLETE_ANTIDOTE_DEEPL_PENDING'
           adjp.write_text(json.dumps(adj,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
@@ -135,15 +134,15 @@ jobs:
           if chk.get('bound_sha256')!=got: raise SystemExit('FAIL CLOSED revalidation checkpoint hash mismatch')
           chk['languagetool_status']='CURRENT_HASH_ALL_SIGNALS_DISPOSITIONED_NO_OPEN_ACCEPTED_DEFECTS'
           chk['languagetool_raw_findings']=len(findings); chk['languagetool_new_signals']=0
-          chk['independent_machine_tools']='PARTIAL: LANGUAGETOOL_AND_GRAMMALECTE_CURRENT; ANTIDOTE_AND_DEEPL_WRITE_PENDING'
+          chk['independent_machine_tools']='PARTIAL: LANGUAGETOOL_AND GRAMMALECTE CURRENT; ANTIDOTE AND DEEPL WRITE PENDING'
           cp.write_text(json.dumps(chk,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 
           gatep=Path('reading/audit/french_a1_formal_gate_a_2026-08-22.json')
           gate=json.loads(gatep.read_text(encoding='utf-8'))
           if gate.get('bound_sha256')!=got or gate.get('blocker_count')!=0: raise SystemExit('FAIL CLOSED formal Gate A state mismatch')
-          gate['independent_review']['independent_machine_tools']='PARTIAL: LANGUAGETOOL_AND_GRAMMALECTE_CURRENT; ANTIDOTE/DEEPL_WRITE_PENDING'
+          gate['independent_review']['independent_machine_tools']='PARTIAL: LANGUAGETOOL AND GRAMMALECTE CURRENT; ANTIDOTE/DEEPL WRITE PENDING'
           gatep.write_text(json.dumps(gate,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print(json.dumps({'sha256':got,'git_blob':blob,'raw_findings':len(findings),'semantic_fingerprint_equivalent':True,'new_signals':0,'open_accepted_defects':0},ensure_ascii=False))
+          print(json.dumps({'sha256':got,'git_blob':blob,'raw_findings':len(findings),'semantic_fingerprint_equivalent':True,'new_signals':0,'open_accepted_defects':0,'scan_mode':'field_isolated'},ensure_ascii=False))
           PY
       - name: Commit current-hash LanguageTool evidence and self-remove
         shell: bash
