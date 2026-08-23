@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "urdu",
+  "level": "A1",
+  "scope": {
+    "canonical_path": "reading/urdu/a1/passages.jsonl",
+    "canonical_blob_sha": "16507c293ae39cd44f7f5136dd00c9ef029646a7",
+    "sequences": [1, 6],
+    "passage_ids": ["ur-a1-u01-p01","ur-a1-u01-p02","ur-a1-u01-p03","ur-a1-u01-p04","ur-a1-u01-p05","ur-a1-u01-p06"]
+  },
+  "audit_type": "manual_semantic_linguistic_pedagogical_pass_1",
+  "status": "REPAIR_REQUIRED_AND_LEGACY_QUALITY_METADATA_INVALID",
+  "release_effect": "Detection evidence only. Existing Unit 01 pass/calibrated fields cannot be treated as current proof of quality because confirmed learner-facing defects remain and the canonical notes themselves state that formal audits had been deferred.",
+  "findings": [
+    {
+      "id": "U1META-01",
+      "passage_id": "ur-a1-u01-p01..p06",
+      "severity": "major",
+      "field": "quality",
+      "original": "answer_key_check/coverage_check/linguistic_review/pedagogical_review/schema_check are marked pass and status calibrated, while the same quality.notes say formal linguistic, pedagogical, lexical-coverage, answer-key, and schema audits were intentionally deferred until generation was complete.",
+      "correction": "Treat the legacy pass/calibrated metadata as non-authoritative until current deterministic and semantic audit results are explicitly reconciled. Do not bulk-flip fields; revalidate each gate against current canonical content.",
+      "reason": "The metadata is internally contradictory, and this manual pass confirms substantive learner-facing defects despite the pass labels."
+    },
+    {
+      "id": "U1P01-01",
+      "passage_id": "ur-a1-u01-p01",
+      "severity": "major",
+      "field": "text/q8/a8",
+      "original": "خالہ نے پوچھا کہ کیا وہ بازار چلنا چاہتی ہے۔ / «وہ» کس کے لیے ہے؟ -> عائشہ کے لیے۔",
+      "correction": "خالہ نے عائشہ سے پوچھا، «کیا تم بازار چلنا چاہتی ہو؟» Then replace q8 with a direct reference/comprehension item that has one unambiguous antecedent.",
+      "reason": "Both خالہ and عائشہ are feminine singular, so وہ is grammatically ambiguous. A calibrated A1 reference-resolution item must not require guessing the intended antecedent."
+    },
+    {
+      "id": "U1P02-01",
+      "passage_id": "ur-a1-u01-p02",
+      "severity": "minor",
+      "field": "a6",
+      "original": "کسی وقت یا کام کے گزرنے کے پیچھے آنے والا وقت۔",
+      "correction": "کسی کام کے ختم ہونے کے بعد آنے والا وقت۔",
+      "reason": "The original definition is stilted and uses پیچھے in a confusing temporal description."
+    },
+    {
+      "id": "U1P02-02",
+      "passage_id": "ur-a1-u01-p02",
+      "severity": "minor",
+      "field": "q10",
+      "original": "کھانے سے پہلے اور کھانے کے بعد میں کون سا لفظ بعد میں آنے والے وقت کو ظاہر کرتا ہے؟",
+      "correction": "«کھانے سے پہلے» اور «کھانے کے بعد» میں کون سا لفظ کھانا ختم ہونے کے بعد کا وقت بتاتا ہے؟",
+      "reason": "The current comparison frame is syntactically awkward and underspecified."
+    },
+    {
+      "id": "U1P03-01",
+      "passage_id": "ur-a1-u01-p03",
+      "severity": "minor",
+      "field": "new_lexical_targets[بہت].intended_sense",
+      "original": "many, much; enough, sufficient",
+      "correction": "many; much; a lot (sense taught in this passage)",
+      "reason": "The intended-sense field should identify the sense actually taught. Including enough/sufficient imports an unexercised sense and weakens sense control."
+    },
+    {
+      "id": "U1P04-01",
+      "passage_id": "ur-a1-u01-p04",
+      "severity": "major",
+      "field": "q1/a1",
+      "original": "اگر بارش شروع ہوتی تو عائشہ اور خالہ کیا کرتیں؟ -> وہ گھر میں رہتیں۔",
+      "correction": "اگر بارش شروع ہو تو عائشہ اور خالہ کیا کریں گی؟ -> وہ گھر میں رہیں گی۔",
+      "reason": "The passage uses the real/future conditional اگر بارش شروع ہو تو ہم گھر میں رہیں گے. The current literal-detail question changes it to a counterfactual/past-style frame, adding grammar not grounded in the source."
+    },
+    {
+      "id": "U1P04-02",
+      "passage_id": "ur-a1-u01-p04",
+      "severity": "major",
+      "field": "q3/a3",
+      "original": "«اگر» کیا بتاتا ہے؟ -> ایک شرط اور نتیجہ۔",
+      "correction": "«اگر» جملے کے کس حصے کو شروع کرتا ہے؟ -> شرط کو۔",
+      "reason": "اگر itself introduces a condition; it does not by itself mean both condition and result. The current keyed concept is imprecise."
+    },
+    {
+      "id": "U1P04-03",
+      "passage_id": "ur-a1-u01-p04",
+      "severity": "minor",
+      "field": "a7",
+      "original": "پانچ بجے کو وقت کی آخری حد بنانا۔",
+      "correction": "پانچ بجے آخری وقت ہے؛ اس سے دیر نہیں۔",
+      "reason": "The current nominalized explanation is unnatural for an A1 definition of تک."
+    },
+    {
+      "id": "U1P04-04",
+      "passage_id": "ur-a1-u01-p04",
+      "severity": "minor",
+      "field": "new_lexical_targets[اگر].intended_sense",
+      "original": "if; agarwood",
+      "correction": "if (conditional conjunction)",
+      "reason": "Agarwood is an unrelated homonymous lexical sense not taught or relevant in this passage and should not appear in the intended-sense field."
+    },
+    {
+      "id": "U1P05-01",
+      "passage_id": "ur-a1-u01-p05",
+      "severity": "major",
+      "field": "q10/a10",
+      "original": "«ہم» کس قسم کا لفظ ہے؟ -> ضمیر۔",
+      "correction": "«ہم آج اسکول کے بعد بازار جائیں گے» میں «ہم» کن لوگوں کے لیے ہے؟ -> بولنے والا اور اس کے ساتھ شامل دوسرے لوگ۔",
+      "reason": "The current item tests a formal grammar category at A1 rather than practical reference/use, contrary to the project's operational A1 standard."
+    },
+    {
+      "id": "U1P06-01",
+      "passage_id": "ur-a1-u01-p06",
+      "severity": "minor",
+      "field": "q6/a6",
+      "original": "«اب» اس عبارت میں کس وقت کی طرف اشارہ کرتا ہے؟ -> عائشہ کی موجودہ حالت اور موجودہ وقت کی طرف۔",
+      "correction": "«اب» اس عبارت میں کس وقت کی طرف اشارہ کرتا ہے؟ -> موجودہ وقت کی طرف۔",
+      "reason": "The answer adds 'current state' although the question asks specifically for time."
+    },
+    {
+      "id": "U1P06-02",
+      "passage_id": "ur-a1-u01-p06",
+      "severity": "major",
+      "field": "q8/a8",
+      "original": "«اگر موسم اچھا ہو» میں «اگر» کیا متعارف کراتا ہے؟ -> ایک شرط۔",
+      "correction": "اگر موسم اچھا ہو تو عائشہ اتوار کو کہاں جاتی ہے؟ -> پارک۔",
+      "reason": "Although the current answer is semantically correct, the item is explicit grammar-function metalanguage. The cumulative A1 checkpoint should test operational comprehension/use instead."
+    }
+  ],
+  "summary": {
+    "passages_reviewed": 6,
+    "findings": 12,
+    "major": 6,
+    "minor": 6,
+    "critical": 0,
+    "passages_with_findings": 6
+  },
+  "confirmed_defect_classes": [
+    "legacy pass metadata conflicting with deferred-audit notes and current defects",
+    "ambiguous pronoun-reference question",
+    "conditional tense/grounding drift",
+    "incorrect semantic description of a function word",
+    "A1 grammar-category/function metalanguage",
+    "unscoped intended-sense metadata containing unrelated homonym/polysemy"
+  ],
+  "required_next_actions": [
+    "Continue semantic pass 1 through Urdu A1 Units 02-05.",
+    "Add Unit 01 to the bounded repair manifest after Units 02-05 are audited.",
+    "Search all A1 intended_sense fields for unrelated homonymous or unused senses.",
+    "Reconcile legacy pass/calibrated metadata only after current gate-specific revalidation; never treat this audit as permission to bulk-edit quality fields."
+  ]
+}
