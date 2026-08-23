@@ -6,6 +6,12 @@ on:
     paths:
       - '.securityx-pages/txz/**'
       - '.github/workflows/securityx-v4-install.yml'
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+    paths:
+      - '.securityx-pages/txz/**'
+      - '.github/workflows/securityx-v4-install.yml'
   workflow_dispatch:
 
 permissions:
