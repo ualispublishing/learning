@@ -37,6 +37,33 @@ LATIN_RE = re.compile(r"[A-Za-z]")
 DIACRITICS = re.compile(r"[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED]")
 NONWORD = re.compile(r"[^\u0621-\u064A\u0660-\u0669A-Za-z0-9]+")
 
+POST_REPAIRS = {
+    ("a2", "ar-a2-u09-p06", "q10"): {
+        "before_prompt": "لماذا يستخدم النص أسئلة «من؟ متى؟ لماذا؟» في النهاية؟",
+        "before_type": "grammar_function",
+        "after_prompt": "عندما تريد نور فهم عادة جديدة، ما الأسئلة التي تسألها؟",
+        "after_type": "literal_detail",
+        "after_answer": "تسأل: من يفعلها؟ متى؟ لماذا؟ وهل يفعلها الآخرون بالطريقة نفسها أم بطرق أخرى؟",
+        "after_explanation": "يعيد السؤال المتعلم إلى الخطوات العملية التي تستخدمها نور لفهم العادة قبل التعميم.",
+    },
+    ("a2", "ar-a2-u10-p06", "q9"): {
+        "before_prompt": "ما وظيفة المقارنة بين «ما قيل أولًا» و«ما ظهر لاحقًا»؟",
+        "before_type": "grammar_function",
+        "after_prompt": "كيف تساعد مقارنة «ما قيل أولًا» بما «ظهر لاحقًا» القارئ؟",
+        "after_type": "inference",
+        "after_answer": "تساعد القارئ على فهم التغير والنتائج وتصحيح التوقع أو الفكرة الأولى.",
+        "after_explanation": "يقيس السؤال فائدة المقارنة في الفهم بدل طلب اسم وظيفة نحوية.",
+    },
+}
+
+ARABIC_EXPLANATIONS = {
+    "ar-a2-u10-p01": "يقيس السؤال فهم المقابلة في النص من غير طلب اسم وظيفة نحوية.",
+    "ar-a2-u10-p02": "يعيد السؤال المتعلم إلى المقارنة الفعلية بين السوق القديم والحالي في النص.",
+    "ar-a2-u10-p03": "يقيس السؤال فهم السبب والنتيجة في السياق بدل طلب اسم التركيب.",
+    "ar-a2-u10-p04": "يقيس السؤال الفرق الملاحظ بين المباني بدل السؤال عن اسم أداة الربط.",
+    "ar-a2-u10-p05": "يعيد السؤال إلى الفرق المباشر في ما أحضره الأقارب من طعام.",
+}
+
 
 def run(*args):
     return subprocess.check_output(args, text=True).strip()
@@ -116,6 +143,62 @@ def learner_strings(record):
 
 def add(bucket, code, **detail):
     bucket.append({"code": code, **detail})
+
+
+def find_q_and_a(row, qid):
+    q = next((x for x in row.get("questions", []) if x.get("id") == qid), None)
+    a = next((x for x in row.get("answer_key", []) if x.get("question_id") == qid), None)
+    return q, a
+
+
+def apply_post_repairs(integrated, report):
+    repairs = report.setdefault("post_integration_repairs", [])
+    by_id = {level: {r["id"]: r for r in rows} for level, rows in integrated.items()}
+
+    for (level, pid, qid), spec in POST_REPAIRS.items():
+        row = by_id[level].get(pid)
+        if row is None:
+            add(report["hard_errors"], "postrepair_missing_passage", level=level, passage_id=pid)
+            continue
+        q, a = find_q_and_a(row, qid)
+        if not q or not a:
+            add(report["hard_errors"], "postrepair_missing_qa", passage_id=pid, question_id=qid)
+            continue
+        if q.get("prompt") != spec["before_prompt"] or q.get("type") != spec["before_type"]:
+            add(report["hard_errors"], "postrepair_precondition_mismatch", passage_id=pid, question_id=qid,
+                expected_prompt=spec["before_prompt"], actual_prompt=q.get("prompt"), expected_type=spec["before_type"], actual_type=q.get("type"))
+            continue
+        before = {"question": copy.deepcopy(q), "answer": copy.deepcopy(a)}
+        q["prompt"] = spec["after_prompt"]
+        q["type"] = spec["after_type"]
+        a["answer"] = spec["after_answer"]
+        a["explanation"] = spec["after_explanation"]
+        repairs.append({"kind": "operational_question", "passage_id": pid, "question_id": qid, "before": before,
+                        "after": {"question": copy.deepcopy(q), "answer": copy.deepcopy(a)}})
+
+    for pid, arabic_explanation in ARABIC_EXPLANATIONS.items():
+        row = by_id["a2"].get(pid)
+        if row is None:
+            add(report["hard_errors"], "explanation_repair_missing_passage", passage_id=pid)
+            continue
+        q, a = find_q_and_a(row, "q10")
+        if not q or not a:
+            add(report["hard_errors"], "explanation_repair_missing_qa", passage_id=pid, question_id="q10")
+            continue
+        before = str(a.get("explanation", ""))
+        if not LATIN_RE.search(before):
+            add(report["hard_errors"], "explanation_repair_precondition_mismatch", passage_id=pid, actual=before)
+            continue
+        a["explanation"] = arabic_explanation
+        repairs.append({"kind": "arabic_explanation", "passage_id": pid, "question_id": "q10", "before": before, "after": arabic_explanation})
+
+    for level, rows in integrated.items():
+        for row in rows:
+            calculated = count_sentences(row.get("text", ""))
+            before = row.get("sentence_count")
+            if before != calculated:
+                row["sentence_count"] = calculated
+                repairs.append({"kind": "sentence_count_metadata", "level": level, "passage_id": row.get("id"), "before": before, "after": calculated})
 
 
 def validate_level(level, rows):
@@ -261,9 +344,16 @@ def validate_level(level, rows):
 def main():
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
     report = {
-        "schema_version": 2, "date": "2026-08-23", "scope": "Arabic A1+A2 integrated assessment repair",
-        "expected_input_git_blobs": EXPECTED_GIT_BLOBS, "source_prs": UNIT_PRS,
-        "integration": {}, "validation": {}, "hard_errors": [], "warnings": [], "quality_promotion": False,
+        "schema_version": 3,
+        "date": "2026-08-23",
+        "scope": "Arabic A1+A2 integrated assessment repair",
+        "expected_input_git_blobs": EXPECTED_GIT_BLOBS,
+        "source_prs": UNIT_PRS,
+        "integration": {},
+        "validation": {},
+        "hard_errors": [],
+        "warnings": [],
+        "quality_promotion": False,
     }
 
     main_rows = {}
@@ -303,17 +393,21 @@ def main():
                 cur["questions"] = copy.deepcopy(src["questions"])
                 cur["answer_key"] = copy.deepcopy(src["answer_key"])
                 cur["revision"] = max(int(cur.get("revision") or 0), int(src.get("revision") or 0)) + 1
-                q = cur.setdefault("quality", {})
+                qmeta = cur.setdefault("quality", {})
                 for gate in ("answer_key_check", "coverage_check", "linguistic_review", "pedagogical_review", "schema_check"):
-                    q[gate] = "pending"
-                q["status"] = "draft"
-                notes = q.setdefault("notes", [])
+                    qmeta[gate] = "pending"
+                qmeta["status"] = "draft"
+                notes = qmeta.setdefault("notes", [])
                 note = f"Integrated independently adjudicated operational-assessment repair from PR #{pr} on 2026-08-23; final integrated semantic/integrity review pending."
                 if note not in notes:
                     notes.append(note)
             report["integration"][level].append({"unit": unit, "source_pr": pr, "passage_ids": ids})
 
+    if not report["hard_errors"]:
+        apply_post_repairs(integrated, report)
+
     if report["hard_errors"]:
+        report["hard_error_count"] = len(report["hard_errors"])
         REPORT_PATH.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(json.dumps({"hard_errors": report["hard_errors"][:30]}, ensure_ascii=False))
         raise SystemExit(1)
@@ -332,8 +426,13 @@ def main():
     REPORT_PATH.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     print(json.dumps({
-        "status": report["status"], "hard_errors": report["hard_error_count"], "warnings": report["warning_count"],
-        "a1": report["validation"].get("a1"), "a2": report["validation"].get("a2"), "outputs": report.get("output_git_blobs", {}),
+        "status": report["status"],
+        "hard_errors": report["hard_error_count"],
+        "warnings": report["warning_count"],
+        "post_repairs": len(report.get("post_integration_repairs", [])),
+        "a1": report["validation"].get("a1"),
+        "a2": report["validation"].get("a2"),
+        "outputs": report.get("output_git_blobs", {}),
     }, ensure_ascii=False))
     if report["hard_errors"]:
         print(json.dumps({"hard_error_sample": report["hard_errors"][:40]}, ensure_ascii=False))
