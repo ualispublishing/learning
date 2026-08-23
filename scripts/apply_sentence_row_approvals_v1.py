@@ -5,6 +5,11 @@ Approval files may only resolve an existing audited row decision. They cannot ad
 new findings or silently substitute a different rationale. Each approval must
 point back to an exact recommendation or editorial flag already attached to that
 rank by the row-by-row audit.
+
+For CORRECT_APPROVED, an approval may provide only the side that changes. The
+omitted side is inherited exactly from the audited source row, preventing needless
+manual retyping. At least one side must actually change. REPLACE_APPROVED must
+provide both sides because it is a new learner pair.
 """
 from __future__ import annotations
 
@@ -113,13 +118,26 @@ def apply_language(language: str) -> dict:
             if requested == "KEEP":
                 target = row["source_target"]
                 english = row["source_english"]
-            else:
+            elif requested == "CORRECT_APPROVED":
+                target = approval.get("approved_target", row["source_target"])
+                english = approval.get("approved_english", row["source_english"])
+                if not isinstance(target, str) or not target.strip():
+                    raise SystemExit(f"Invalid approved_target for {language} rank {rank}")
+                if not isinstance(english, str) or not english.strip():
+                    raise SystemExit(f"Invalid approved_english for {language} rank {rank}")
+                target = target.strip()
+                english = english.strip()
+                if target == row["source_target"] and english == row["source_english"]:
+                    raise SystemExit(f"No-op CORRECT_APPROVED for {language} rank {rank}")
+            else:  # REPLACE_APPROVED
                 target = approval.get("approved_target")
                 english = approval.get("approved_english")
                 if not isinstance(target, str) or not target.strip():
-                    raise SystemExit(f"Missing approved_target for {language} rank {rank}")
+                    raise SystemExit(f"Missing approved_target for replacement {language} rank {rank}")
                 if not isinstance(english, str) or not english.strip():
-                    raise SystemExit(f"Missing approved_english for {language} rank {rank}")
+                    raise SystemExit(f"Missing approved_english for replacement {language} rank {rank}")
+                target = target.strip()
+                english = english.strip()
 
             row["status"] = requested
             row["approved_target"] = target
