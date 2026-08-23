@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "urdu",
+  "level": "A1",
+  "canonical_path": "reading/urdu/a1/passages.jsonl",
+  "canonical_blob_sha": "16507c293ae39cd44f7f5136dd00c9ef029646a7",
+  "scope": {
+    "sequences": [1, 60],
+    "units": [1,2,3,4,5,6,7,8,9,10],
+    "passages_reviewed": 60
+  },
+  "source_audits": [
+    {"path":"reading/audit/urdu_a1_unit01_semantic_audit_pass1_2026-08-23.json","findings":12,"major":6,"minor":6},
+    {"path":"reading/audit/urdu_a1_unit02_semantic_audit_pass1_2026-08-23.json","findings":12,"major":3,"minor":9},
+    {"path":"reading/audit/urdu_a1_unit03_semantic_audit_pass1_2026-08-23.json","findings":12,"major":4,"minor":8},
+    {"path":"reading/audit/urdu_a1_unit04_semantic_audit_pass1_2026-08-23.json","findings":11,"major":5,"minor":6},
+    {"path":"reading/audit/urdu_a1_unit05_semantic_audit_pass1_2026-08-23.json","findings":10,"major":3,"minor":7},
+    {"path":"reading/audit/urdu_a1_unit06_semantic_audit_pass1_2026-08-23.json","findings":11,"major":5,"minor":6},
+    {"path":"reading/audit/urdu_a1_unit07_semantic_audit_pass1_2026-08-23.json","findings":15,"major":6,"minor":9},
+    {"path":"reading/audit/urdu_a1_unit08_semantic_audit_pass1_2026-08-23.json","findings":10,"major":4,"minor":6},
+    {"path":"reading/audit/urdu_a1_units09_10_semantic_audit_pass1_2026-08-23.json","findings":25,"major":8,"minor":17}
+  ],
+  "aggregate": {
+    "findings": 118,
+    "major": 44,
+    "minor": 74,
+    "critical": 0,
+    "passages_with_confirmed_findings": 56,
+    "passages_without_confirmed_findings_in_pass1": ["ur-a1-u05-p03","ur-a1-u07-p03","ur-a1-u08-p01","ur-a1-u10-p05"]
+  },
+  "status": "FULL_A1_BOUNDED_REPAIR_REQUIRED",
+  "release_effect": "All 60 Urdu A1 passages have now received semantic/linguistic pass 1. This manifest bounds known findings only; it is not an educator-ready certification, does not prove the four passages without pass-1 findings are defect-free, and does not authorize quality-field promotion.",
+  "highest_priority_findings": [
+    "U1META-01",
+    "U1P01-01",
+    "U1P04-01",
+    "U1P04-02",
+    "U1P05-01",
+    "U1P06-02",
+    "U2P01-01",
+    "U2P02-01",
+    "U2P03-02",
+    "U3P01-01",
+    "U3P05-01",
+    "U3P06-01",
+    "U3P06-02",
+    "U4P03-01",
+    "U4P03-02",
+    "U4P04-01",
+    "U4P05-01",
+    "U4P06-01",
+    "U5P01-01",
+    "U5P01-02",
+    "U5P06-02",
+    "U6P02-01",
+    "U6P06-02",
+    "U6P06-03",
+    "U6P06-04",
+    "U6P06-05",
+    "U7P01-02",
+    "U7P02-02",
+    "U7P04-02",
+    "U7P05-01",
+    "U7P06-03",
+    "U7P06-05",
+    "U8P02-02",
+    "U8P05-02",
+    "U8P06-01",
+    "U8P06-04",
+    "U9P01-02",
+    "U9P02-01",
+    "U9P03-01",
+    "U9P05-01",
+    "U9P06-02",
+    "U10P02-01",
+    "U10P02-02",
+    "U10P06-01"
+  ],
+  "repair_waves": [
+    {
+      "wave": 0,
+      "name": "corpus_wide_detection_before_edit",
+      "priority": "mandatory",
+      "purpose": "Run mechanical/systemic searches over the entire 60-passage canonical corpus before editing, so known defect classes are fully enumerated rather than fixed only where manually noticed."
+    },
+    {
+      "wave": 1,
+      "name": "learner_answer_correctness_and_grounding",
+      "priority": "highest",
+      "selection_rule": "All findings where official answer insertion is ungrammatical/wrong, answer order is reversed, Q/A linkage is mismatched, source/checkpoint facts conflict, or a source sentence contains a clear case/agreement error.",
+      "examples": ["U4P06-01","U5P01-01","U5P06-02","U6P06-03","U6P06-04","U6P06-05","U7P04-02","U7P06-05","U8P05-02","U8P06-01","U9P01-02","U9P05-01"]
+    },
+    {
+      "wave": 2,
+      "name": "natural_urdu_and_a1_operationality",
+      "priority": "high",
+      "selection_rule": "Forced target collocations, metalinguistic A1 questions, circular definitions, perspective/reference inconsistency, and unnatural beginner phrasing after Wave 1 is stable."
+    },
+    {
+      "wave": 3,
+      "name": "metadata_sense_and_pedagogical_classification",
+      "priority": "normal",
+      "selection_rule": "intended_sense scoping, question-type corrections, legacy quality-metadata reconciliation, and other metadata that must match repaired learner content."
+    },
+    {
+      "wave": 4,
+      "name": "minor_polish_and_regression_closeout",
+      "priority": "normal",
+      "selection_rule": "remaining minor wording/definition polish, followed by full deterministic and manual re-audit."
+    }
+  ],
+  "systemic_search_classes": [
+    {"id":"SC01","class":"answer_insertion_failure","goal":"Mechanically insert every official cloze answer into every blank and flag count/order/agreement/case/unidiomatic failures."},
+    {"id":"SC02","class":"multi_blank_answer_order","goal":"Verify answer-list order exactly corresponds to blank order for all multi-blank questions."},
+    {"id":"SC03","class":"checkpoint_source_drift","goal":"Compare every Unit p06 checkpoint assertion and answer against p01-p05 source events; flag invented, contradicted, or weakened details."},
+    {"id":"SC04","class":"forced_target_collocation","goal":"Find lexical targets/reviews inserted in non-idiomatic contexts primarily to satisfy exposure requirements."},
+    {"id":"SC05","class":"a1_metalinguistic_abstraction","goal":"Find grammar_function, grammar_category, relation-label, formal morphology/gender, or similar A1 tasks that can be replaced by operational comprehension/use."},
+    {"id":"SC06","class":"urdu_case_gender_agreement","goal":"Check oblique case, ko/se/ke/ki/ka selection, adjective-noun gender, possessive agreement, and verb/adjective agreement in learner-facing content."},
+    {"id":"SC07","class":"circular_or_overformal_definition","goal":"Find definitions that repeat the target, define with equally/harder formal vocabulary, or contain incoherent semantic explanations."},
+    {"id":"SC08","class":"narrative_person_reference_consistency","goal":"Find unmarked switches among first/second/third person, ambiguous pronoun antecedents, and possessive perspective shifts."},
+    {"id":"SC09","class":"intended_sense_scope","goal":"Find unrelated homonyms, unused polysemous senses, or missing senses actually exercised in canonical text."},
+    {"id":"SC10","class":"question_type_alignment","goal":"Verify metadata type matches the actual cognitive task: literal, sequence, cause-effect, contrast, conditional, etc."},
+    {"id":"SC11","class":"checkpoint_cloze_independence","goal":"Audit checkpoint clozes as new learner-facing sentences rather than assuming source passage correctness propagates."},
+    {"id":"SC12","class":"legacy_quality_metadata_consistency","goal":"Identify pass/calibrated fields that conflict with deferred-audit notes or current confirmed findings; reconcile only through gate-specific revalidation."}
+  ],
+  "edit_guardrails": [
+    "Do not edit canonical learner-facing text until Wave 0 systemic enumeration is recorded.",
+    "Do not bulk-change quality fields. Each gate must be independently rerun on the repaired canonical blob.",
+    "Preserve lexical target IDs unless the intended sense or target itself is rejected; if rescheduled, explicitly repair introduction/review chronology.",
+    "Any learner-facing text change invalidates affected exact exposure counts and requires recounting.",
+    "Every checkpoint must be validated independently from its source passages.",
+    "Every cloze must be reconstructed mechanically with the official keyed answer(s) and then manually read as a full sentence.",
+    "All repairs must be blob-bound and bounded by passage ID/field before canonical edits are applied."
+  ],
+  "required_regression_after_each_repair_wave": [
+    "JSON/schema validity",
+    "exact question/answer ID linkage",
+    "mechanical keyed-answer insertion",
+    "passage-grounded answer verification",
+    "checkpoint/source consistency",
+    "new-target exact exposure counts",
+    "review-target chronology and expected exposure numbers",
+    "lexical coverage audit",
+    "A1 operationality/CEFR audit",
+    "Urdu case/gender/agreement pass",
+    "duplicate/repetition/checkpoint known-material checks",
+    "fresh adversarial manual read of every changed passage"
+  ],
+  "next_action": "Execute Wave 0 systemic corpus-wide detection on the canonical 60-passage blob, record any additional findings, then begin bounded Wave 1 repairs."
+}
