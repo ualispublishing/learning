@@ -8,6 +8,11 @@ on:
       - 'arabic_top1000.csv'
       - 'french_top1000.csv'
       - 'urdu_top1000.csv'
+  pull_request:
+    paths:
+      - 'scripts/build_language_workbooks_v1.py'
+      - '.github/workflows/build-language-workbooks-v1.yml'
+      - 'audit/language-workbooks/v1.0/BUILD_TRIGGER.md'
   workflow_dispatch:
 
 permissions:
@@ -18,16 +23,26 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - name: Checkout
+      - name: Checkout branch
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.head_ref || 'main' }}
 
-      - name: Sync latest main
+      - name: Sync branch and detect pre-existing release outputs
+        id: state
+        shell: bash
         run: |
-          git fetch origin main
-          git checkout main
-          git pull --ff-only origin main
+          set -euo pipefail
+          branch="${GITHUB_HEAD_REF:-main}"
+          git fetch origin "$branch"
+          git checkout "$branch"
+          git pull --ff-only origin "$branch"
+          if git ls-files 'completed/languages/workbooks/v1.0/**' | grep -q .; then
+            echo 'outputs_preexisting=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'outputs_preexisting=false' >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Install PDF and font dependencies
         run: |
@@ -70,17 +85,15 @@ jobs:
             completed/languages/workbooks/v1.0/
             audit/language-workbooks/v1.0/
 
-      - name: Commit verified release outputs
+      - name: Commit verified outputs to PR branch
+        if: github.event_name == 'pull_request' && steps.state.outputs.outputs_preexisting == 'false'
         shell: bash
         run: |
           set -euo pipefail
+          branch="${GITHUB_HEAD_REF}"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add completed/languages/workbooks/v1.0 audit/language-workbooks/v1.0
-          if git diff --cached --quiet; then
-            echo 'No release-output changes.'
-            exit 0
-          fi
           git commit -m 'release: language workbooks v1.0 production candidate'
-          git pull --rebase origin main
-          git push origin main
+          git pull --rebase origin "$branch"
+          git push origin "$branch"
