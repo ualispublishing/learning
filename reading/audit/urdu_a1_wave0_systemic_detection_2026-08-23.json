@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "urdu",
+  "level": "A1",
+  "canonical_path": "reading/urdu/a1/passages.jsonl",
+  "canonical_blob_sha": "16507c293ae39cd44f7f5136dd00c9ef029646a7",
+  "scope": {
+    "sequences": [1, 60],
+    "units": [1,2,3,4,5,6,7,8,9,10],
+    "passages": 60,
+    "source_semantic_pass": "complete",
+    "checkpoint_mechanical_reconstruction": "complete"
+  },
+  "status": "WAVE0_COMPLETE_REPAIR_REQUIRED",
+  "release_effect": "Wave 0 completes pre-edit systemic enumeration. It authorizes bounded repair work under the full-A1 repair manifest; it does not certify educator release or authorize bulk quality-field promotion.",
+  "method": [
+    "Used the exact canonical blob bound above, not stale staging data.",
+    "Combined the completed passage-by-passage semantic/linguistic pass over all 60 records with a dedicated systemic review of confirmed defect classes.",
+    "Reconstructed every cumulative checkpoint cloze with its official keyed answer(s), rather than assuming source-passage correctness propagates to checkpoints.",
+    "Re-read checkpoint Q/A assertions against their source-unit events for source/checkpoint drift.",
+    "Reviewed explicit grammar-function/category items and semantically equivalent metalinguistic questions against the operational A1 standard.",
+    "Reviewed known case/gender/agreement, narrative-person, intended-sense, definition, question-type and forced-collocation classes across the 60-passage pass-1 evidence.",
+    "GitHub code search does not reliably index this JSONL; exact canonical file/blob reads were used instead. No claim is made that a separate local parser mechanically executed every source-passage single-target cloze. Those were checked in the 60-passage semantic pass; the dedicated mechanical subpass here targeted all cumulative checkpoint clozes, where defect density was highest."
+  ],
+  "checkpoint_cloze_results": [
+    {
+      "passage_id": "ur-a1-u02-p06",
+      "result": "additional_forced_collocation_found",
+      "notes": "Q7 reconstructs as: اس سال منظم زندگی کے لیے میں روز چارٹ دیکھتا ہوں۔ Grammatical but forced/unnatural in this exercise frame."
+    },
+    {
+      "passage_id": "ur-a1-u03-p06",
+      "result": "clozes_structurally_usable_but_checkpoint_source_drift_confirmed_elsewhere",
+      "notes": "Q8-Q10 reconstruct; Q2 and Q5 still contain previously recorded invented checkpoint details."
+    },
+    {
+      "passage_id": "ur-a1-u04-p06",
+      "result": "known_failure_reproduced",
+      "notes": "Q9 + keyed ہمارے؛ گھر reconstructs as یہ ہمارے گھر ہے, which is ungrammatical. Q7 is tautological/unnatural as previously recorded."
+    },
+    {
+      "passage_id": "ur-a1-u05-p06",
+      "result": "clozes_structurally_usable_but_checkpoint_source_drift_confirmed_elsewhere",
+      "notes": "Q7-Q10 reconstruct; checkpoint Q4/text contradict P03 regarding Maryam entering the classroom."
+    },
+    {
+      "passage_id": "ur-a1-u06-p06",
+      "result": "multiple_known_failures_reproduced",
+      "notes": "Q8 has invalid/reversed target order; Q9 creates شام واپسی; Q10 answer order is reversed and creates صحیح لو / اجازت راستہ."
+    },
+    {
+      "passage_id": "ur-a1-u07-p06",
+      "result": "known_naturalness_failures_reproduced",
+      "notes": "Q9 creates redundant/stilted آئندہ کام مستقبل کے لیے; Q10 creates تقریباً وقت."
+    },
+    {
+      "passage_id": "ur-a1-u08-p06",
+      "result": "known_failure_reproduced",
+      "notes": "Q10 creates the stilted/contradictory میز کا پورا کام ہوا مگر کچھ باقی تھا; Q5 has a why/answer mismatch."
+    },
+    {
+      "passage_id": "ur-a1-u09-p06",
+      "result": "no_checkpoint_cloze_items",
+      "notes": "Source/collocation defects remain, including دورہ oblique-case and مقدار issues."
+    },
+    {
+      "passage_id": "ur-a1-u10-p06",
+      "result": "no_checkpoint_cloze_items",
+      "notes": "Primary checkpoint defect is semantic framing such as عادت کی مقدار."
+    }
+  ],
+  "additional_findings_beyond_pass1": [
+    {
+      "id": "W0-U2P06-Q7",
+      "passage_id": "ur-a1-u02-p06",
+      "severity": "minor",
+      "class": "forced_target_collocation",
+      "field": "q7/a7",
+      "original_prompt": "اس _____ منظم _____ کے لیے میں روز چارٹ دیکھتا ہوں۔",
+      "keyed_answer": "سال؛ زندگی",
+      "reconstructed": "اس سال منظم زندگی کے لیے میں روز چارٹ دیکھتا ہوں۔",
+      "recommended_repair": "اس _____ اپنی روز کی _____ منظم کرنے کے لیے میں چارٹ دیکھتا ہوں۔ -> سال؛ زندگی",
+      "reason": "The official completion is grammatical but contrived and less natural than an operational sentence that preserves both exact targets."
+    }
+  ],
+  "confirmed_systemic_classes": [
+    {
+      "id": "SC01",
+      "class": "answer_insertion_failure",
+      "status": "confirmed",
+      "examples": ["U4P06-01","U6P06-03","U6P06-04","U6P06-05","U7P04-02","U7P06-05","U8P05-02","U9P01-02","U9P05-01"]
+    },
+    {
+      "id": "SC02",
+      "class": "multi_blank_answer_order",
+      "status": "confirmed",
+      "examples": ["U6P06-03","U6P06-05"]
+    },
+    {
+      "id": "SC03",
+      "class": "checkpoint_source_drift",
+      "status": "confirmed",
+      "examples": ["U3P06-01","U3P06-02","U5P06-02"]
+    },
+    {
+      "id": "SC04",
+      "class": "forced_target_collocation",
+      "status": "confirmed",
+      "examples": ["W0-U2P06-Q7","U7P06-05","U8P06-04","U9P02-01","U10P02-02"]
+    },
+    {
+      "id": "SC05",
+      "class": "a1_metalinguistic_abstraction",
+      "status": "confirmed",
+      "examples": ["U1P05-01","U1P06-02","U2P01-01","U2P02-01","U2P03-02","U3P01-01","U3P05-01","U4P03-02","U4P04-01","U4P05-01","U7P01-02","U7P02-02","U7P05-01","U9P03-01"]
+    },
+    {
+      "id": "SC06",
+      "class": "urdu_case_gender_agreement",
+      "status": "confirmed",
+      "examples": ["U5P01-01","U8P05-02","U9P01-01","U10P01-01"]
+    },
+    {
+      "id": "SC07",
+      "class": "circular_or_overformal_definition",
+      "status": "confirmed",
+      "examples": ["U2P02-02","U2P04-02","U3P02-03","U8P02-02"]
+    },
+    {
+      "id": "SC08",
+      "class": "narrative_person_reference_consistency",
+      "status": "confirmed",
+      "examples": ["U1P01-01","U4P03-01"]
+    },
+    {
+      "id": "SC09",
+      "class": "intended_sense_scope",
+      "status": "confirmed",
+      "examples": ["U1P03-01","U1P04-04","U2P04-01","U3P04-01"]
+    },
+    {
+      "id": "SC10",
+      "class": "question_type_alignment",
+      "status": "confirmed",
+      "examples": ["U2P05-01","U2P06-02","U4P04-02"]
+    },
+    {
+      "id": "SC11",
+      "class": "checkpoint_cloze_independence",
+      "status": "confirmed",
+      "examples": ["U4P06-01","U6P06-03","U6P06-04","U6P06-05","U7P06-05","U8P06-04","W0-U2P06-Q7"]
+    },
+    {
+      "id": "SC12",
+      "class": "legacy_quality_metadata_consistency",
+      "status": "confirmed",
+      "examples": ["U1META-01"]
+    }
+  ],
+  "aggregate_after_wave0": {
+    "pass1_findings": 118,
+    "new_wave0_findings": 1,
+    "known_findings_total": 119,
+    "major": 44,
+    "minor": 75,
+    "critical": 0
+  },
+  "repair_authorization": {
+    "bounded_wave1_may_begin": true,
+    "bulk_quality_metadata_promotion": false,
+    "educator_release_ready": false
+  },
+  "next_action": "Begin bounded Wave 1 repairs for answer correctness, Q/A grounding, source/checkpoint contradictions, and clear case/agreement errors; rerun all required regressions on every changed passage before proceeding to Wave 2."
+}
