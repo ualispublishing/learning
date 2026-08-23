@@ -1,11 +1,17 @@
 #!/usr/bin/env python3
 """Curated wrapper for language workbook v1.0 generation.
 
-This wrapper deliberately refuses to regenerate Urdu learner artifacts while the
-Urdu sentence curation layer is still blocked. Once the curation file is moved
-to `approved_for_regeneration`, only explicitly approved overrides are applied.
-The raw Tatoeba/ManyThings attribution is retained and an adaptation notice is
-added to edited learner pairs.
+The completed row-by-row sentence audit is authoritative. This builder does not
+invent or independently re-derive edits. It will regenerate a language only when
+all 1,000 ranks have an explicit row decision compiled from that audit and every
+non-KEEP row has passed second-pass approval.
+
+Allowed build-time states:
+- KEEP: use the exact audited source pair unchanged.
+- CORRECT_APPROVED: apply the approved pair recorded on that audited row.
+- REPLACE_APPROVED: apply the approved replacement pair recorded on that audited row.
+
+Any pending/native-review/missing state blocks regeneration.
 """
 from __future__ import annotations
 
@@ -16,7 +22,13 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 BASE_PATH = HERE / "build_language_workbooks_v1.py"
-CURATION_PATH = ROOT / "curation" / "language-workbooks" / "v1.0" / "urdu_sentence_curation.json"
+CURATION_DIR = ROOT / "curation" / "language-workbooks" / "v1.0"
+
+LANGUAGE_BY_CODE = {
+    "ara": "arabic",
+    "fra": "french",
+    "urd": "urdu",
+}
 
 spec = importlib.util.spec_from_file_location("workbook_v1_base", BASE_PATH)
 if spec is None or spec.loader is None:
@@ -26,89 +38,109 @@ spec.loader.exec_module(base)
 ORIGINAL_PARSE_SENTENCES = base.parse_sentences
 
 
-def _load_urdu_curation() -> dict:
-    if not CURATION_PATH.exists():
-        raise SystemExit(f"Missing mandatory Urdu curation file: {CURATION_PATH}")
-    data = json.loads(CURATION_PATH.read_text(encoding="utf-8"))
-    if data.get("language") != "urdu" or data.get("release") != "v1.0":
-        raise SystemExit("Urdu curation identity/version mismatch")
+def _load_decisions(language: str) -> dict:
+    path = CURATION_DIR / f"{language}_sentence_row_decisions.json"
+    if not path.exists():
+        raise SystemExit(
+            f"Missing mandatory audited row-decision file: {path}. "
+            "Run scripts/compile_sentence_row_decisions_v1.py first."
+        )
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if data.get("language") != language or data.get("release") != "v1.0":
+        raise SystemExit(f"Row-decision identity/version mismatch for {language}")
+    rows = data.get("rows")
+    if not isinstance(rows, list) or len(rows) != 1000:
+        raise SystemExit(f"{language} must have exactly 1000 row decisions")
     return data
 
 
-def _check_expected(row: dict, override: dict) -> None:
-    rank = override["rank"]
-    if row.get("rank") != rank:
-        raise SystemExit(f"Urdu curation rank mismatch at {rank}")
-    if row.get("target") != override.get("expected_target"):
+def _check_source_row(language: str, raw_row: dict, decision: dict, rank: int) -> None:
+    if int(decision.get("rank", -1)) != rank:
+        raise SystemExit(f"{language} row-decision rank mismatch at {rank}")
+    if raw_row.get("rank") != rank:
+        raise SystemExit(f"{language} raw rank mismatch at {rank}")
+    if raw_row.get("target") != decision.get("source_target"):
         raise SystemExit(
-            f"Urdu source target drift at rank {rank}; refusing to apply a rank-based edit"
+            f"{language} source target drift at rank {rank}; refusing audited rank-based curation"
         )
-    if row.get("english") != override.get("expected_english"):
+    if raw_row.get("english") != decision.get("source_english"):
         raise SystemExit(
-            f"Urdu source English drift at rank {rank}; refusing to apply a rank-based edit"
+            f"{language} source English drift at rank {rank}; refusing audited rank-based curation"
+        )
+    if raw_row.get("attribution") != decision.get("source_attribution"):
+        raise SystemExit(
+            f"{language} source attribution drift at rank {rank}; refusing regeneration"
         )
 
 
-def _apply_approved_overrides(rows: list[dict], data: dict) -> list[dict]:
-    edited = [dict(r) for r in rows]
-    approved = data.get("approved_overrides", [])
-    seen = set()
-    for override in approved:
-        rank = int(override["rank"])
-        if rank in seen or not 1 <= rank <= len(edited):
-            raise SystemExit(f"Invalid or duplicate approved Urdu override rank: {rank}")
-        seen.add(rank)
-        row = edited[rank - 1]
-        _check_expected(row, override)
-        row["target"] = override["target"]
-        row["english"] = override["english"]
-        row["words"] = len(base.english_words(row["english"]))
-        row["score"] = base.score_sentence(row["english"])
-        row["level"] = "A" if row["words"] <= 4 else "B" if row["words"] <= 8 else "C" if row["words"] <= 13 else "D"
-        notice = "Editorially adapted for learner accuracy; original source attribution retained"
-        if notice not in row["attribution"]:
-            row["attribution"] = f"{row['attribution']} | {notice}"
+def _apply_approved_decisions(language: str, raw_rows: list[dict], data: dict) -> list[dict]:
+    edited: list[dict] = []
+    unresolved: list[tuple[int, str]] = []
+
+    for rank, (raw_row, decision) in enumerate(zip(raw_rows, data["rows"]), start=1):
+        _check_source_row(language, raw_row, decision, rank)
+        status = decision.get("status")
+        row = dict(raw_row)
+
+        if status == "KEEP":
+            pass
+        elif status in {"CORRECT_APPROVED", "REPLACE_APPROVED"}:
+            target = decision.get("approved_target")
+            english = decision.get("approved_english")
+            if not isinstance(target, str) or not target.strip():
+                raise SystemExit(f"{language} rank {rank} has {status} without approved_target")
+            if not isinstance(english, str) or not english.strip():
+                raise SystemExit(f"{language} rank {rank} has {status} without approved_english")
+            if not decision.get("approval_note"):
+                raise SystemExit(f"{language} rank {rank} has {status} without approval_note")
+
+            row["target"] = target.strip()
+            row["english"] = english.strip()
+            row["words"] = len(base.english_words(row["english"]))
+            row["score"] = base.score_sentence(row["english"])
+            row["level"] = (
+                "A" if row["words"] <= 4 else
+                "B" if row["words"] <= 8 else
+                "C" if row["words"] <= 13 else
+                "D"
+            )
+            notice = "Editorially adapted for learner accuracy; original source attribution retained"
+            if notice not in row["attribution"]:
+                row["attribution"] = f"{row['attribution']} | {notice}"
+        else:
+            unresolved.append((rank, str(status)))
+
+        edited.append(row)
+
+    if unresolved:
+        preview = ", ".join(f"{rank}:{status}" for rank, status in unresolved[:25])
+        raise SystemExit(
+            f"{language} regeneration BLOCKED: {len(unresolved)} row decisions are unresolved. "
+            f"First unresolved rows: {preview}"
+        )
 
     if len({base.norm(r["target"]) for r in edited}) != len(edited):
-        raise SystemExit("Urdu curated target duplicate gate failed")
+        raise SystemExit(f"{language} curated target duplicate gate failed")
     return edited
 
 
 def curated_parse_sentences(cfg):
-    rows, candidate_count, zip_hash = ORIGINAL_PARSE_SENTENCES(cfg)
-    if cfg.get("code") != "urd":
-        return rows, candidate_count, zip_hash
+    raw_rows, candidate_count, zip_hash = ORIGINAL_PARSE_SENTENCES(cfg)
+    language = LANGUAGE_BY_CODE.get(cfg.get("code"))
+    if language is None:
+        return raw_rows, candidate_count, zip_hash
 
-    data = _load_urdu_curation()
-    expected_hash = data.get("source", {}).get("manythings_zip_sha256")
+    data = _load_decisions(language)
+    expected_hash = data.get("source_zip_sha256")
     if not expected_hash:
-        raise SystemExit("Urdu curation is missing its pinned source ZIP SHA-256")
+        raise SystemExit(f"{language} row decisions are missing the pinned source ZIP SHA-256")
     if zip_hash != expected_hash:
         raise SystemExit(
-            "Urdu ManyThings source ZIP changed from the fully audited source; "
+            f"{language} source ZIP changed from the fully audited source; "
             "refusing rank-based curation until the new source is re-audited"
         )
 
-    # Candidate edits are deliberately checked against the audited source even
-    # before approval. This catches upstream/ranking drift early.
-    for candidate in data.get("candidate_overrides", []):
-        rank = int(candidate["rank"])
-        if not 1 <= rank <= len(rows):
-            raise SystemExit(f"Invalid Urdu candidate override rank: {rank}")
-        _check_expected(rows[rank - 1], candidate)
-
-    if data.get("release_gate") != "ALLOW_REGENERATION" or data.get("status") != "approved_for_regeneration":
-        raise SystemExit(
-            "Urdu sentence curation is intentionally BLOCKED. Complete second-pass "
-            "verification, resolve every blocker, promote only verified edits to "
-            "approved_overrides, then set status=approved_for_regeneration and "
-            "release_gate=ALLOW_REGENERATION."
-        )
-
-    unresolved = data.get("unresolved_blockers", [])
-    if unresolved:
-        raise SystemExit(f"Urdu curation still has unresolved blockers: {unresolved}")
-    return _apply_approved_overrides(rows, data), candidate_count, zip_hash
+    return _apply_approved_decisions(language, raw_rows, data), candidate_count, zip_hash
 
 
 base.parse_sentences = curated_parse_sentences
