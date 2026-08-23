@@ -2,9 +2,14 @@
 """Compile one authoritative curation decision for every workbook sentence row.
 
 The completed row-by-row editorial audit is the source of truth. This script does
-not re-audit or invent new corrections. It converts the audit ledgers into an
-explicit state for every rank and preserves an existing approval only when the
-source row and its exact audit evidence are unchanged.
+not invent build-time corrections. It converts the audit ledgers into an explicit
+state for every rank and preserves an existing approval only when the source row
+and its exact audit evidence are unchanged.
+
+Second-pass review may discover that a first-pass recommendation itself was
+incomplete or overconfident. Such changes must be recorded in a language-specific
+`*_sentence_second_pass_amendments.json` audit file. An amendment replaces the
+audit evidence for only the named rank; it never edits the source row directly.
 
 Initial states:
 - KEEP
@@ -38,6 +43,7 @@ CONFIG = {
             "arabic_sentence_editorial_audit_501_750.json",
             "arabic_sentence_editorial_audit_751_1000.json",
         ],
+        "amendments": "arabic_sentence_second_pass_amendments.json",
         "source_zip_sha256": "b72f70d3b724c3060da55f74ea1753da249d8eb38a6dbdea3dcc28798d077914",
     },
     "french": {
@@ -48,6 +54,7 @@ CONFIG = {
             "french_sentence_editorial_audit_501_750.json",
             "french_sentence_editorial_audit_751_1000.json",
         ],
+        "amendments": "french_sentence_second_pass_amendments.json",
         "source_zip_sha256": "9e35994767f7307dc1fa9d5efcc36681f3756a1bdaaa02c1381b3eb11461261e",
     },
     "urdu": {
@@ -58,6 +65,7 @@ CONFIG = {
             "urdu_sentence_editorial_audit_501_750.json",
             "urdu_sentence_editorial_audit_751_1000.json",
         ],
+        "amendments": "urdu_sentence_second_pass_amendments.json",
         "source_zip_sha256": "d55d3b4f95a6957093d7b46ddb244fd3a6530367dfc9fefd9baced598c9234a5",
     },
 }
@@ -101,6 +109,40 @@ def load_previous(path: Path) -> dict[int, dict]:
     return {int(row["rank"]): row for row in rows if isinstance(row, dict) and "rank" in row}
 
 
+def apply_second_pass_amendments(language: str, cfg: dict, confirmed: dict[int, list[dict]], flags: dict[int, list[dict]]) -> None:
+    filename = cfg.get("amendments")
+    if not filename:
+        return
+    path = AUDIT / filename
+    if not path.exists():
+        return
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if data.get("language") != language or data.get("release") != "v1.0":
+        raise SystemExit(f"Second-pass amendment identity/version mismatch: {path}")
+    if data.get("source_zip_sha256") != cfg["source_zip_sha256"]:
+        raise SystemExit(f"Second-pass amendment source hash mismatch: {path}")
+
+    seen: set[int] = set()
+    for amendment in data.get("amendments", []):
+        rank = int(amendment["rank"])
+        if rank in seen or not 1 <= rank <= 1000:
+            raise SystemExit(f"Invalid/duplicate amendment rank {language}:{rank}")
+        seen.add(rank)
+        if not amendment.get("reason"):
+            raise SystemExit(f"Missing amendment reason {language}:{rank}")
+
+        new_confirmed = amendment.get("confirmed_findings", [])
+        new_flags = amendment.get("editorial_flags", [])
+        confirmed[rank] = [
+            {"ledger": filename, "second_pass_amendment": True, **item}
+            for item in new_confirmed
+        ]
+        flags[rank] = [
+            {"ledger": filename, "second_pass_amendment": True, "ranks": [rank], **item}
+            for item in new_flags
+        ]
+
+
 def compile_language(language: str, cfg: dict) -> dict:
     rows = load_rows(cfg["source"])
     audited_ranks: set[int] = set()
@@ -117,7 +159,7 @@ def compile_language(language: str, cfg: dict) -> dict:
         if span:
             start, end = int(span["start"]), int(span["end"])
         else:
-            start, end = 1, 250  # original Urdu 1-250 ledger
+            start, end = 1, 250
         for rank in range(start, end + 1):
             if rank in audited_ranks:
                 raise SystemExit(f"Overlapping audit coverage for {language} rank {rank}")
@@ -137,6 +179,11 @@ def compile_language(language: str, cfg: dict) -> dict:
         missing = sorted(expected - audited_ranks)
         extra = sorted(audited_ranks - expected)
         raise SystemExit(f"Incomplete audit coverage for {language}; missing={missing[:20]} extra={extra[:20]}")
+
+    # Explicit second-pass audit corrections supersede first-pass evidence only
+    # for their named ranks. This is the only supported way to change an audit
+    # recommendation after first-pass completion.
+    apply_second_pass_amendments(language, cfg, confirmed, flags)
 
     output_path = OUT / f"{language}_sentence_row_decisions.json"
     previous = load_previous(output_path)
@@ -204,7 +251,7 @@ def compile_language(language: str, cfg: dict) -> dict:
         "language": language,
         "source_path": str(cfg["source"].relative_to(ROOT)),
         "source_zip_sha256": cfg["source_zip_sha256"],
-        "decision_source": "completed row-by-row editorial audit",
+        "decision_source": "completed row-by-row editorial audit plus explicit second-pass amendments",
         "policy": {
             "row_count": 1000,
             "every_rank_has_exactly_one_status": True,
@@ -212,6 +259,7 @@ def compile_language(language: str, cfg: dict) -> dict:
             "independent_rederivation_during_build_forbidden": True,
             "pending_or_native_review_blocks_regeneration": True,
             "second_pass_required_before_correction_or_replacement_approval": True,
+            "second_pass_audit_changes_require_explicit_amendment_file": True,
             "approval_survives_recompile_only_when_audit_fingerprint_matches": True,
         },
         "status_counts": counts,
