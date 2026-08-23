@@ -6,6 +6,7 @@ on:
     paths:
       - 'reading/tools/extract_arabic_a1_a2_remaining_23.py'
       - 'reading/tools/summarize_arabic_remaining_23.py'
+      - 'reading/tools/print_arabic_zero_match_contexts.py'
       - '.github/workflows/arabic-a1-a2-remaining-23.yml'
   pull_request:
     branches: [main]
@@ -13,6 +14,7 @@ on:
     paths:
       - 'reading/tools/extract_arabic_a1_a2_remaining_23.py'
       - 'reading/tools/summarize_arabic_remaining_23.py'
+      - 'reading/tools/print_arabic_zero_match_contexts.py'
       - '.github/workflows/arabic-a1-a2-remaining-23.yml'
 
 permissions:
@@ -40,6 +42,8 @@ jobs:
         run: python reading/tools/extract_arabic_a1_a2_remaining_23.py
       - name: Build concise decision sheet
         run: python reading/tools/summarize_arabic_remaining_23.py
+      - name: Print zero-match contexts
+        run: python reading/tools/print_arabic_zero_match_contexts.py
       - name: Commit blocker manifest and summary
         run: |
           git config user.name "github-actions[bot]"
