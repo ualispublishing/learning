@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "ur",
+  "level": "A1",
+  "review_kind": "abstract_task_candidate_adjudication_and_bounded_repair",
+  "source_inventory": "reading/audit/urdu_a1_abstract_task_candidates_2026-08-22.json",
+  "before_sha256": "d513cf0dcd19d6c283da2cb2e45d07dc8715e6d71eca18783f84cab3cb45b9bd",
+  "after_sha256": "cd6bd2fcd3a312c7d066541f5f82e108c472cea11de8417f0b3c70b896e0512e",
+  "inventory_candidates": 4,
+  "confirmed_repairs": 3,
+  "adjudicated_false_positives": 1,
+  "false_positive": {
+    "passage_id": "ur-a1-u02-p01",
+    "question_id": "q8",
+    "classification": "KEEP_OPERATIONAL_NEGATION_CONTRAST",
+    "rationale": "The item asks the learner to choose which full sentence means that nothing should remain; the learner is not asked to name a grammatical category or function."
+  },
+  "repairs": [
+    {
+      "passage_id": "ur-a1-u03-p01",
+      "question_id": "q4",
+      "before": {
+        "prompt": "«کیونکہ» جملے میں کیا کام کرتا ہے؟",
+        "type": "vocabulary_in_context",
+        "answer": "یہ وجہ بتاتا ہے۔",
+        "explanation": "«کیونکہ» پہلے بیان کی وجہ متعارف کراتا ہے۔",
+        "target_ids": [
+          "ur-rank-0115"
+        ]
+      },
+      "after": {
+        "prompt": "«عائشہ سیب لیتی ہے کیونکہ اسے سیب پسند ہے» میں «کیونکہ» کے بعد کیا بتایا گیا ہے؟",
+        "type": "vocabulary_in_context",
+        "answer": "عائشہ کو سیب پسند ہے۔",
+        "explanation": "یہ بات سیب لینے کی وجہ بتاتی ہے۔",
+        "target_ids": [
+          "ur-rank-0115"
+        ]
+      },
+      "reason": "Replace abstract function wording with concrete reason comprehension while preserving the کیونکہ target."
+    },
+    {
+      "passage_id": "ur-a1-u03-p05",
+      "question_id": "q3",
+      "before": {
+        "prompt": "متن میں «اپنا» کس تعلق کو دکھاتا ہے؟",
+        "type": "vocabulary_in_context",
+        "answer": "اپنی ملکیت یا اپنے ہی کام کی طرف اشارہ کرتا ہے۔",
+        "explanation": "یہاں عائشہ کے اپنے ناشتے اور اپنے کام کی بات ہے۔",
+        "target_ids": [
+          "ur-rank-0167"
+        ]
+      },
+      "after": {
+        "prompt": "«عائشہ اپنا ناشتہ خود تیار کرے گی» میں ناشتہ کس کا ہے؟",
+        "type": "reference_resolution",
+        "answer": "عائشہ کا اپنا ناشتہ۔",
+        "explanation": "«اپنا» عائشہ کے اپنے ناشتے کی طرف اشارہ کرتا ہے۔",
+        "target_ids": [
+          "ur-rank-0167"
+        ]
+      },
+      "reason": "Replace abstract relation-label reasoning with concrete ownership/reference resolution."
+    },
+    {
+      "passage_id": "ur-a1-u04-p03",
+      "question_id": "q4",
+      "before": {
+        "prompt": "«ہمارے گھر» میں «ہمارے» کس تعلق کو دکھاتا ہے؟",
+        "type": "vocabulary_in_context",
+        "answer": "عائشہ اور اس کے گھر والوں سے متعلق۔",
+        "explanation": "«ہمارے» مشترک ملکیت یا تعلق دکھاتا ہے۔",
+        "target_ids": [
+          "ur-rank-0118"
+        ]
+      },
+      "after": {
+        "prompt": "«ہمارے گھر میں دو کمرے ہیں» میں گھر کس کا ہے؟",
+        "type": "reference_resolution",
+        "answer": "عائشہ اور اس کے گھر والوں کا۔",
+        "explanation": "«ہمارے» عائشہ اور اس کے گھر والوں کے گھر کی طرف اشارہ کرتا ہے۔",
+        "target_ids": [
+          "ur-rank-0118"
+        ]
+      },
+      "reason": "Replace abstract possession-relation wording with concrete reference resolution."
+    }
+  ],
+  "verification": {
+    "passage_prose_unchanged": true,
+    "target_linkage_preserved_for_repaired_items": true,
+    "qa_linkage_valid": true,
+    "local_question_targets_only": true,
+    "duplicate_prompts_zero": true,
+    "formal_task_types_zero": true,
+    "learner_facing_roman_script_zero": true,
+    "internal_review_explanation_leakage_zero": true
+  },
+  "status": "PASS_INTERNAL_ABSTRACT_TASK_CLASS_ADJUDICATED_NEEDS_INDEPENDENT_REVIEW",
+  "release_effect": "NONE_AUTOMATIC: Urdu A1 remains non-release-ready."
+}

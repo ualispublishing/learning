@@ -1,14 +1,17 @@
 {
   "audit": "urdu_a1_final_deterministic_audit",
-  "generated_at_utc": "2026-08-23T13:12:27.851986+00:00",
-  "status": "PASS_DETERMINISTIC_POST_EXPLANATION_HYGIENE_NEEDS_INDEPENDENT_REVIEW",
-  "scope": "Fresh deterministic audit after bounded learner-facing answer-explanation hygiene repair; no native-speaker, independent-model, educator, or release approval.",
+  "generated_at_utc": "2026-08-23T13:13:30.713294+00:00",
+  "status": "PASS_DETERMINISTIC_POST_ABSTRACT_TASK_REPAIR_NEEDS_INDEPENDENT_REVIEW",
+  "scope": "Fresh deterministic audit after bounded Urdu A1 abstract-task candidate adjudication/repair and learner-explanation hygiene cleanup; no native-speaker, independent-model, educator, or release approval.",
   "source": {
     "path": "reading/urdu/a1/passages.jsonl",
-    "actual_sha256": "d513cf0dcd19d6c283da2cb2e45d07dc8715e6d71eca18783f84cab3cb45b9bd",
+    "actual_sha256": "cd6bd2fcd3a312c7d066541f5f82e108c472cea11de8417f0b3c70b896e0512e",
     "hash_bound": true,
-    "prior_sha256": "e4c996dbd9fc9808eed0a29c66aa5d7114543b5bb7ccc34d5bcd1de6b9d5cf8c",
-    "repair_evidence": "reading/audit/urdu_a1_learner_explanation_hygiene_repair_2026-08-23.json"
+    "prior_sha256": "d513cf0dcd19d6c283da2cb2e45d07dc8715e6d71eca18783f84cab3cb45b9bd",
+    "repair_evidence": [
+      "reading/audit/urdu_a1_learner_explanation_hygiene_repair_2026-08-23.json",
+      "reading/audit/urdu_a1_abstract_task_adjudication_2026-08-23.json"
+    ]
   },
   "counts": {
     "passages": 60,
@@ -25,12 +28,16 @@
     "sequences_contiguous_1_60": true,
     "ten_questions_answers_and_linkage": true,
     "learner_facing_roman_script_zero": true,
-    "learner_explanation_internal_review_leakage_zero": true
+    "learner_explanation_internal_review_leakage_zero": true,
+    "duplicate_prompts_zero": true,
+    "question_targets_local": true,
+    "grammar_category_and_grammar_function_types_zero": true
   },
   "violations": [],
   "review_frontier": {
     "internal_units01_02_semantic_qa_pedagogy": "COMPLETE_INTERNAL_WITH_EXPLANATION_HYGIENE_REPAIR",
     "metalinguistic_class_corpus_wide": "ADJUDICATED_INTERNAL",
+    "abstract_task_candidate_class_through_unit04": "ADJUDICATED_INTERNAL",
     "units03_10_full_semantic_naturalness_answer_pedagogy": "PENDING_INTERNAL",
     "native_urdu_naturalness_orthography": "PENDING",
     "independent_model_family": "PENDING",
