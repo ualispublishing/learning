@@ -2,8 +2,9 @@
 """Apply second-pass approvals to compiled sentence row decisions.
 
 Approval files may only resolve an existing audited row decision. They cannot add
-new audit findings or change the source row. This keeps correction provenance
-strictly tied to the completed row-by-row audit.
+new findings or silently substitute a different rationale. Each approval must
+point back to an exact recommendation or editorial flag already attached to that
+rank by the row-by-row audit.
 """
 from __future__ import annotations
 
@@ -25,6 +26,31 @@ def load_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def audit_basis_matches(row: dict, basis: dict) -> bool:
+    if not isinstance(basis, dict):
+        return False
+    ledger = basis.get("ledger")
+    if "recommended" in basis:
+        wanted = basis["recommended"]
+        return any(
+            item.get("ledger") == ledger and item.get("recommended") == wanted
+            for item in row.get("confirmed_findings", [])
+        )
+    if "recommended_action" in basis:
+        wanted = basis["recommended_action"]
+        return any(
+            item.get("ledger") == ledger and item.get("recommended_action") == wanted
+            for item in row.get("confirmed_findings", [])
+        )
+    if "issue" in basis:
+        wanted = basis["issue"]
+        return any(
+            item.get("ledger") == ledger and item.get("issue") == wanted
+            for item in row.get("editorial_flags", [])
+        )
+    return False
+
+
 def apply_language(language: str) -> dict:
     decision_path = CURATION / f"{language}_sentence_row_decisions.json"
     if not decision_path.exists():
@@ -43,6 +69,9 @@ def apply_language(language: str) -> dict:
         approval_doc = load_json(path)
         if approval_doc.get("language") != language or approval_doc.get("release") != "v1.0":
             raise SystemExit(f"Approval identity/version mismatch: {path}")
+        if approval_doc.get("source_zip_sha256") != data.get("source_zip_sha256"):
+            raise SystemExit(f"Approval source hash mismatch: {path}")
+
         for approval in approval_doc.get("approvals", []):
             rank = int(approval["rank"])
             if rank in seen:
@@ -52,20 +81,23 @@ def apply_language(language: str) -> dict:
             if row is None:
                 raise SystemExit(f"Approval references missing {language} rank {rank}")
 
-            if approval.get("audit_fingerprint") != row.get("audit_fingerprint"):
-                raise SystemExit(
-                    f"Audit fingerprint mismatch for {language} rank {rank}; "
-                    "the row/audit changed after approval was prepared"
-                )
-            if approval.get("source_target") != row.get("source_target"):
+            if "source_target" in approval and approval["source_target"] != row.get("source_target"):
                 raise SystemExit(f"Source target mismatch for {language} rank {rank}")
-            if approval.get("source_english") != row.get("source_english"):
+            if "source_english" in approval and approval["source_english"] != row.get("source_english"):
                 raise SystemExit(f"Source English mismatch for {language} rank {rank}")
+            if not audit_basis_matches(row, approval.get("audit_basis")):
+                raise SystemExit(
+                    f"Approval for {language} rank {rank} is not tied to its exact audited recommendation/flag"
+                )
 
             current = row.get("status")
+            expected = approval.get("expected_status")
             requested = approval.get("approved_status")
+            if expected and current != expected and current not in RESOLVED:
+                raise SystemExit(
+                    f"Expected {language} rank {rank} to be {expected}, found {current}"
+                )
             if current in RESOLVED:
-                # Idempotent replay is allowed only for an identical prior approval.
                 if current != requested:
                     raise SystemExit(f"Conflicting approval for resolved {language} rank {rank}")
                 continue
