@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "urdu",
+  "level": "A1",
+  "scope": {
+    "canonical_path": "reading/urdu/a1/passages.jsonl",
+    "canonical_blob_sha": "16507c293ae39cd44f7f5136dd00c9ef029646a7",
+    "sequences": [19, 24],
+    "passage_ids": ["ur-a1-u04-p01","ur-a1-u04-p02","ur-a1-u04-p03","ur-a1-u04-p04","ur-a1-u04-p05","ur-a1-u04-p06"]
+  },
+  "audit_type": "manual_semantic_linguistic_pedagogical_pass_1",
+  "status": "REPAIR_REQUIRED",
+  "release_effect": "Detection evidence only. No quality gate is promoted by this audit.",
+  "findings": [
+    {
+      "id": "U4P01-01",
+      "passage_id": "ur-a1-u04-p01",
+      "severity": "minor",
+      "field": "q2/a2",
+      "original": "تصویر میں عائشہ کی اچھی دوست کون ہے؟ -> اس کی کزن۔",
+      "correction": "تصویر میں عائشہ کے پاس کھڑی بچی کون ہے؟ -> اس کی کزن، جو اس کی اچھی دوست بھی ہے۔",
+      "reason": "The passage earlier mentions two cousins; the current answer 'her cousin' is less specific than the source detail and can feel ambiguous."
+    },
+    {
+      "id": "U4P02-01",
+      "passage_id": "ur-a1-u04-p02",
+      "severity": "minor",
+      "field": "q1/a1",
+      "original": "عائشہ اور خالہ کہاں بیٹھی ہیں؟ -> وہ محلے کے پارک میں ہیں۔",
+      "correction": "عائشہ اور خالہ کہاں بیٹھی ہیں؟ -> محلے کے پارک میں ایک بینچ پر۔",
+      "reason": "The answer should preserve the specific location asked by بیٹھنا rather than only naming the broader park."
+    },
+    {
+      "id": "U4P03-01",
+      "passage_id": "ur-a1-u04-p03",
+      "severity": "major",
+      "field": "text",
+      "original": ["ہمارے گھر میں دو کمرے اور ایک چھوٹا سا صحن ہے۔", "عائشہ کہتی ہے کہ ہمارے مہمان پہلے صحن میں بیٹھ سکتے ہیں۔", "ہمارے گھر کا صحن چھوٹا ہے"],
+      "correction": "Keep ہمارے inside clearly attributed first-person speech, for example: عائشہ کہتی ہے، «ہمارے گھر میں دو کمرے اور ایک چھوٹا سا صحن ہے۔ ہمارے مہمان پہلے صحن میں بیٹھ سکتے ہیں۔» In third-person narration use عائشہ کے/ان کے گھر rather than unquoted ہمارے.",
+      "reason": "The current narration shifts without warning from third-person narration to first-person plural possession, creating a perspective/reference inconsistency."
+    },
+    {
+      "id": "U4P03-02",
+      "passage_id": "ur-a1-u04-p03",
+      "severity": "major",
+      "field": "q4/a4",
+      "original": "«ہمارے گھر» میں «ہمارے» کس تعلق کو دکھاتا ہے؟ -> عائشہ اور اس کے گھر والوں سے متعلق۔",
+      "correction": "عائشہ کہتی ہے «ہمارے گھر»۔ یہ گھر کن لوگوں کا ہے؟ -> عائشہ اور اس کے گھر والوں کا۔",
+      "reason": "The current item asks for an abstract relation label instead of resolving the first-person plural possessive in context."
+    },
+    {
+      "id": "U4P04-01",
+      "passage_id": "ur-a1-u04-p04",
+      "severity": "major",
+      "field": "q3/a3",
+      "original": "«میرا نام حارث ہے» میں «میرا» کیا تعلق دکھاتا ہے؟ -> اپنی ملکیت یا اپنے بارے میں۔",
+      "correction": "«میرا نام حارث ہے» کون کہتا ہے، اور نام کس کا ہے؟ -> حارث کہتا ہے؛ نام حارث کا ہے۔",
+      "reason": "The current wording again tests abstract possession terminology rather than practical reference resolution."
+    },
+    {
+      "id": "U4P04-02",
+      "passage_id": "ur-a1-u04-p04",
+      "severity": "minor",
+      "field": "q5.type",
+      "original": "cause_effect",
+      "correction": "literal_detail_or_process",
+      "reason": "'How does Aisha help Haris?' asks for an action/manner, not a cause-effect relation."
+    },
+    {
+      "id": "U4P05-01",
+      "passage_id": "ur-a1-u04-p05",
+      "severity": "major",
+      "field": "q7/a7",
+      "original": "«دوسری» کا مطلب کیا ہے؟ -> پہلی کے بعد والی یا کوئی اور مؤنث چیز۔",
+      "correction": "«پہلی کتاب سرخ ہے اور دوسری نیلی ہے» میں «دوسری» کون سی کتاب ہے؟ -> پہلی کے بعد والی کتاب۔",
+      "reason": "The current definition introduces formal grammatical gender metalanguage (مؤنث) at A1 instead of teaching the word through a concrete contrast."
+    },
+    {
+      "id": "U4P05-02",
+      "passage_id": "ur-a1-u04-p05",
+      "severity": "minor",
+      "field": "q9",
+      "original": "علی اور حسن کا خاندانی _____ ہے۔",
+      "correction": "علی اور حسن کے درمیان خاندانی _____ ہے۔",
+      "reason": "The postpositional relation کے درمیان makes the intended noun تعلق natural and explicit."
+    },
+    {
+      "id": "U4P06-01",
+      "passage_id": "ur-a1-u04-p06",
+      "severity": "major",
+      "field": "q9/a9",
+      "original": "یہ _____ _____ ہے۔ -> ہمارے؛ گھر",
+      "correction": "یہ _____ گھر کے کمرے ہیں۔ -> ہمارے; or redesign as ہمارے گھر میں دو کمرے ہیں so the exact target form is grammatical.",
+      "reason": "The current keyed completion produces یہ ہمارے گھر ہے, which is ungrammatical; singular گھر requires ہمارا in that frame, not the declared target ہمارے."
+    },
+    {
+      "id": "U4P06-02",
+      "passage_id": "ur-a1-u04-p06",
+      "severity": "minor",
+      "field": "q7/a7",
+      "original": "مریم میری _____ ہے اور اس کا _____ مریم ہے۔ -> دوست؛ نام",
+      "correction": "مریم میری _____ ہے؛ اس کا _____ سب کو یاد ہے۔ -> دوست؛ نام",
+      "reason": "The current completion is grammatical but tautological and unnatural as cumulative practice."
+    },
+    {
+      "id": "U4P06-03",
+      "passage_id": "ur-a1-u04-p06",
+      "severity": "minor",
+      "field": "a8.explanation",
+      "original": "بالغ/عمومی افراد اور کم عمر افراد کے لیے یہ الفاظ درست ہیں۔",
+      "correction": "لوگ عام طور پر افراد کی جماعت کو اور بچے کم عمر افراد کو بتاتا ہے؛ بچے بھی لوگ ہوتے ہیں۔",
+      "reason": "The current explanation can imply that لوگ excludes children, which is semantically false."
+    }
+  ],
+  "summary": {
+    "passages_reviewed": 6,
+    "findings": 11,
+    "major": 5,
+    "minor": 6,
+    "critical": 0,
+    "passages_with_findings": 6
+  },
+  "confirmed_defect_classes": [
+    "mechanically invalid cloze after answer insertion",
+    "narrative-person/reference inconsistency",
+    "A1 possessive/gender metalanguage instead of reference resolution",
+    "question-answer specificity loss",
+    "semantic explanation that creates a false category contrast"
+  ],
+  "required_next_actions": [
+    "Continue semantic pass 1 through Unit 05.",
+    "Add first/second-person perspective consistency to the corpus-wide systemic search classes.",
+    "Treat U4P06-01 as Wave-1 answer-key/cloze correctness in the full-A1 repair manifest."
+  ]
+}
