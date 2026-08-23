@@ -1,0 +1,978 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "audit": "independent_machine_detector_grammalecte_post_nbsp_repair",
+  "status": "RAW_FINDINGS_RECORDED_NEEDS_ADJUDICATION",
+  "bound_sha256": "8019fe53061a67faca527a50495d2188439da5142dd94a414a43e1a3986cf7f4",
+  "scope": {
+    "passages": 60,
+    "questions": 600,
+    "answers": 600,
+    "learner_facing_fields_scanned": 1320,
+    "characters_scanned": 85792,
+    "field_counts": {
+      "title": 60,
+      "text": 60,
+      "question_prompt": 600,
+      "answer": 600
+    }
+  },
+  "tool": {
+    "name": "Grammalecte via pygrammalecte",
+    "pygrammalecte_version": "1.5.0",
+    "underlying_grammalecte_version": "2.1.1 per pygrammalecte 1.4+/1.5 package metadata"
+  },
+  "raw_finding_count": 48,
+  "findings_by_message_class": {
+    "GrammalecteGrammarMessage": 44,
+    "GrammalecteSpellingMessage": 4
+  },
+  "findings_by_rule": {
+    "g2__conj_je__b2_a1_1": 2,
+    "g2__conj_1p_sans_sujet__b1_a1_1": 1,
+    "None": 4,
+    "g3__gn_ma_ta_sa_1m__b1_a2_1": 3,
+    "g3__gn_ma_ta_sa_1m__b1_a3_1": 1,
+    "g3__gn_cet_1m__b1_a3_1": 1,
+    "g2__conf_où_ou__b2_a1_1": 1,
+    "gv1__ppas_det_plur_COD_que_avoir__b1_a2_1": 1,
+    "g2__conj_ils__b1_a2_1": 1,
+    "g2__conj_ils__b1_a1_1": 1,
+    "g3__gn_la_1m__b2_a2_1": 4,
+    "g3__gn_un_1m__b2_a1_1": 6,
+    "g3__gn_un_1m__b2_a2_1": 4,
+    "g3__gn_notre_votre_chaque_1m__b1_a1_1": 1,
+    "g2__pleo_substantifs__b12_a1_1": 1,
+    "gv2__vmode_verbe_que_subjonctif__b6_a1_1": 1,
+    "g3__infi_falloir__b1_a1_1": 1,
+    "g2__conf_a_à_verbe__b14_a7_1": 1,
+    "gv1__ppas_être_accord_sing__b1_a1_1": 1,
+    "g3__gn_mon_ton_son_1m__b1_a2_1": 2,
+    "g3__gn_une_1m__b1_a1_1": 4,
+    "g3__gn_une_1m__b1_a2_1": 1,
+    "g3__gn_au_1m__b2_a1_1": 1,
+    "g3__gn_du_1m__b2_a1_1": 1,
+    "g3__gn_det_epi_plur_1m__b1_a1_1": 1,
+    "g2__maj_gentilés__b3_a2_1": 2
+  },
+  "findings_by_type": {
+    "conj": 5,
+    "None": 4,
+    "gn": 28,
+    "conf": 2,
+    "ppas": 2,
+    "pleo": 1,
+    "vmode": 1,
+    "infi": 1,
+    "eleu": 2,
+    "maj": 2
+  },
+  "passages_with_findings": 31,
+  "findings": [
+    {
+      "passage_id": "fr-a1-u01-p01",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 58,
+      "end": 63,
+      "matched_text": "vient",
+      "word": null,
+      "message": "Conjugaison erronée. Accord avec « Je ». Le verbe devrait être à la 1ʳᵉ personne du singulier.",
+      "suggestions": [
+        "viens"
+      ],
+      "rule": "g2__conj_je__b2_a1_1",
+      "type": "conj",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « Je viens avec toi » ou « Je vient avec toi » ?"
+    },
+    {
+      "passage_id": "fr-a1-u01-p03",
+      "field": "question_prompt",
+      "item_id": "q8",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 55,
+      "end": 59,
+      "matched_text": "veut",
+      "word": null,
+      "message": "Conjugaison erronée. Accord avec « Je ». Le verbe devrait être à la 1ʳᵉ personne du singulier.",
+      "suggestions": [
+        "veux"
+      ],
+      "rule": "g2__conj_je__b2_a1_1",
+      "type": "conj",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « Je veux sortir » ou « Je veut sortir » ?"
+    },
+    {
+      "passage_id": "fr-a1-u01-p04",
+      "field": "answer",
+      "item_id": "a5",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 0,
+      "end": 7,
+      "matched_text": "pouvons",
+      "word": null,
+      "message": "Ceci est un verbe à la 1ʳᵉ personne du pluriel. Sujet (« nous » ou équivalent) introuvable.",
+      "suggestions": [
+        "peuvent"
+      ],
+      "rule": "g2__conj_1p_sans_sujet__b1_a1_1",
+      "type": "conj",
+      "url": "",
+      "source_text": "pouvons."
+    },
+    {
+      "passage_id": "fr-a1-u02-p02",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteSpellingMessage",
+      "line": 1,
+      "start": 66,
+      "end": 73,
+      "matched_text": "saitent",
+      "word": "saitent",
+      "message": "Mot inconnu : saitent",
+      "suggestions": [],
+      "rule": null,
+      "type": null,
+      "url": "",
+      "source_text": "Choisis la forme correcte : « Camille sait l’heure » ou « Camille saitent l’heure »."
+    },
+    {
+      "passage_id": "fr-a1-u02-p04",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 61,
+      "end": 63,
+      "matched_text": "ma",
+      "word": null,
+      "message": "Accord de genre erroné : « carnet » est masculin.",
+      "suggestions": [
+        "mon"
+      ],
+      "rule": "g3__gn_ma_ta_sa_1m__b1_a2_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Pour parler de son carnet, Camille dit : « mon carnet » ou « ma carnet » ?"
+    },
+    {
+      "passage_id": "fr-a1-u02-p04",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 64,
+      "end": 70,
+      "matched_text": "carnet",
+      "word": null,
+      "message": "Accord de genre erroné : « ma » est un déterminant féminin.",
+      "suggestions": [
+        "carnée"
+      ],
+      "rule": "g3__gn_ma_ta_sa_1m__b1_a3_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Pour parler de son carnet, Camille dit : « mon carnet » ou « ma carnet » ?"
+    },
+    {
+      "passage_id": "fr-a1-u02-p06",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 45,
+      "end": 47,
+      "matched_text": "ma",
+      "word": null,
+      "message": "Accord de genre erroné : « sac » est masculin.",
+      "suggestions": [
+        "mon"
+      ],
+      "rule": "g3__gn_ma_ta_sa_1m__b1_a2_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Quelle forme est correcte : « mon sac » ou « ma sac » ?"
+    },
+    {
+      "passage_id": "fr-a1-u03-p01",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 47,
+      "end": 50,
+      "matched_text": "cet",
+      "word": null,
+      "message": "Accord de genre correct, mais euphonie non respectée.",
+      "suggestions": [
+        "ce"
+      ],
+      "rule": "g3__gn_cet_1m__b1_a3_1",
+      "type": "gn",
+      "url": "http://fr.wikipedia.org/wiki/Euphonie",
+      "source_text": "Choisis la forme correcte : « ce projet » ou « cet projet » ?"
+    },
+    {
+      "passage_id": "fr-a1-u03-p02",
+      "field": "question_prompt",
+      "item_id": "q8",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 40,
+      "end": 42,
+      "matched_text": "ou",
+      "word": null,
+      "message": "Confusion. La conjonction « ou » signale une alternative. Pour évoquer un lieu, un temps ou une situation, écrivez « où ».",
+      "suggestions": [
+        "où"
+      ],
+      "rule": "g2__conf_où_ou__b2_a1_1",
+      "type": "conf",
+      "url": "",
+      "source_text": "Quel mot marque le contraste : « mais » ou « pour » ?"
+    },
+    {
+      "passage_id": "fr-a1-u03-p05",
+      "field": "text",
+      "item_id": null,
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 702,
+      "end": 711,
+      "matched_text": "travaillé",
+      "word": null,
+      "message": "Si « les groupes et dit… » est bien le COD du participe passé « travaillé », celui-ci devrait être au masculin pluriel.",
+      "suggestions": [
+        "travaillés"
+      ],
+      "rule": "gv1__ppas_det_plur_COD_que_avoir__b1_a2_1",
+      "type": "ppas",
+      "url": "http://fr.wikipedia.org/wiki/Accord_du_participe_pass%C3%A9_en_fran%C3%A7ais",
+      "source_text": "Lundi suivant, deux groupes présentent leur travail devant la classe. Camille et Sami passent en premier. Le professeur demande s’ils sont prêts. « Oui », répond Camille. Sami montre la page sur la bibliothèque pendant que Camille explique le parc. Ils parlent lentement et regardent les autres élèves. Quand ils terminent, plusieurs élèves posent des questions. Camille répond oui quand elle connaît la réponse et demande à Sami de compléter une information. Ensuite, deux garçons présentent leur projet. Ils ont choisi le marché et le centre sportif. Ils montrent leurs images et expliquent pourquoi ces lieux sont importants. À la fin, le professeur remercie tous les groupes et dit qu’ils ont bien travaillé ensemble."
+    },
+    {
+      "passage_id": "fr-a1-u03-p05",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 64,
+      "end": 67,
+      "matched_text": "ils",
+      "word": null,
+      "message": "Accord avec le terme « montre ».",
+      "suggestions": [
+        "il"
+      ],
+      "rule": "g2__conj_ils__b1_a2_1",
+      "type": "conj",
+      "url": "",
+      "source_text": "Choisis la phrase correcte : « ils montrent leurs images » ou « ils montre leurs images » ?"
+    },
+    {
+      "passage_id": "fr-a1-u03-p05",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 68,
+      "end": 74,
+      "matched_text": "montre",
+      "word": null,
+      "message": "Conjugaison erronée. Accord avec « ils ». Le verbe devrait être à la 3ᵉ personne du pluriel.",
+      "suggestions": [
+        "montrent"
+      ],
+      "rule": "g2__conj_ils__b1_a1_1",
+      "type": "conj",
+      "url": "",
+      "source_text": "Choisis la phrase correcte : « ils montrent leurs images » ou « ils montre leurs images » ?"
+    },
+    {
+      "passage_id": "fr-a1-u05-p01",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 46,
+      "end": 48,
+      "matched_text": "la",
+      "word": null,
+      "message": "Accord de genre erroné : « matin » est masculin.",
+      "suggestions": [
+        "le"
+      ],
+      "rule": "g3__gn_la_1m__b2_a2_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « le matin » ou « la matin » ?"
+    },
+    {
+      "passage_id": "fr-a1-u05-p02",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 45,
+      "end": 47,
+      "matched_text": "la",
+      "word": null,
+      "message": "Accord de genre erroné : « soir » est masculin.",
+      "suggestions": [
+        "le"
+      ],
+      "rule": "g3__gn_la_1m__b2_a2_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « le soir » ou « la soir » ?"
+    },
+    {
+      "passage_id": "fr-a1-u05-p04",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 47,
+      "end": 49,
+      "matched_text": "un",
+      "word": null,
+      "message": "Accord de genre erroné : « place » est féminin.",
+      "suggestions": [
+        "une"
+      ],
+      "rule": "g3__gn_un_1m__b2_a1_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « une place » ou « un place » ?"
+    },
+    {
+      "passage_id": "fr-a1-u05-p04",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 50,
+      "end": 55,
+      "matched_text": "place",
+      "word": null,
+      "message": "Accord de genre erroné : « un » est un déterminant masculin.",
+      "suggestions": [
+        "placé"
+      ],
+      "rule": "g3__gn_un_1m__b2_a2_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « une place » ou « un place » ?"
+    },
+    {
+      "passage_id": "fr-a1-u05-p05",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 78,
+      "end": 85,
+      "matched_text": "enfants",
+      "word": null,
+      "message": "Accord de nombre erroné : « enfants » devrait être au singulier.",
+      "suggestions": [
+        "enfant"
+      ],
+      "rule": "g3__gn_notre_votre_chaque_1m__b1_a1_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la phrase correcte : « chaque enfant reçoit une feuille » ou « chaque enfants reçoit une feuille » ?"
+    },
+    {
+      "passage_id": "fr-a1-u05-p06",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 50,
+      "end": 52,
+      "matched_text": "un",
+      "word": null,
+      "message": "Accord de genre erroné : « question » est féminin.",
+      "suggestions": [
+        "une"
+      ],
+      "rule": "g3__gn_un_1m__b2_a1_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « une question » ou « un question » ?"
+    },
+    {
+      "passage_id": "fr-a1-u07-p05",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 45,
+      "end": 47,
+      "matched_text": "un",
+      "word": null,
+      "message": "Accord de genre erroné : « rue » est féminin.",
+      "suggestions": [
+        "une"
+      ],
+      "rule": "g3__gn_un_1m__b2_a1_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « une rue » ou « un rue » ?"
+    },
+    {
+      "passage_id": "fr-a1-u07-p05",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 48,
+      "end": 51,
+      "matched_text": "rue",
+      "word": null,
+      "message": "Accord de genre erroné : « un » est un déterminant masculin.",
+      "suggestions": [
+        "rué",
+        "ru"
+      ],
+      "rule": "g3__gn_un_1m__b2_a2_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « une rue » ou « un rue » ?"
+    },
+    {
+      "passage_id": "fr-a1-u08-p01",
+      "field": "text",
+      "item_id": null,
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 377,
+      "end": 393,
+      "matched_text": "petite collation",
+      "word": null,
+      "message": "Pléonasme.",
+      "suggestions": [
+        "collation"
+      ],
+      "rule": "g2__pleo_substantifs__b12_a1_1",
+      "type": "pleo",
+      "url": "",
+      "source_text": "Après une longue matinée, Camille a un peu mal à la tête. Elle est près de l’école et sa maison n’est pas loin, alors elle décide de rentrer tranquillement. Dans la cuisine, elle pose une main sur son front et boit un verre d’eau. Sa mère lui demande si sa tête fait encore mal. Camille répond que oui, mais moins qu’avant. Elle se lave ensuite les mains avant de préparer une petite collation. Après vingt minutes au calme, elle se sent déjà mieux. Elle comprend qu’elle doit parfois arrêter une activité, boire de l’eau et laisser sa tête se reposer quelques minutes."
+    },
+    {
+      "passage_id": "fr-a1-u08-p01",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 46,
+      "end": 48,
+      "matched_text": "un",
+      "word": null,
+      "message": "Accord de genre erroné : « main » est féminin.",
+      "suggestions": [
+        "une"
+      ],
+      "rule": "g3__gn_un_1m__b2_a1_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « une main » ou « un main » ?"
+    },
+    {
+      "passage_id": "fr-a1-u08-p01",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 49,
+      "end": 53,
+      "matched_text": "main",
+      "word": null,
+      "message": "Accord de genre erroné : « un » est un déterminant masculin.",
+      "suggestions": [
+        "maint"
+      ],
+      "rule": "g3__gn_un_1m__b2_a2_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « une main » ou « un main » ?"
+    },
+    {
+      "passage_id": "fr-a1-u08-p02",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 52,
+      "end": 54,
+      "matched_text": "sa",
+      "word": null,
+      "message": "Accord de genre erroné : « pied » est masculin.",
+      "suggestions": [
+        "son"
+      ],
+      "rule": "g3__gn_ma_ta_sa_1m__b1_a2_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « son pied droit » ou « sa pied droit » ?"
+    },
+    {
+      "passage_id": "fr-a1-u08-p02",
+      "field": "answer",
+      "item_id": "a6",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 39,
+      "end": 46,
+      "matched_text": "ressent",
+      "word": null,
+      "message": "Après « faire attention à ce que », le verbe doit être au subjonctif.",
+      "suggestions": [
+        "ressente",
+        "ressentît"
+      ],
+      "rule": "gv2__vmode_verbe_que_subjonctif__b6_a1_1",
+      "type": "vmode",
+      "url": "",
+      "source_text": "Elle doit faire attention à ce qu’elle ressent physiquement."
+    },
+    {
+      "passage_id": "fr-a1-u08-p03",
+      "field": "question_prompt",
+      "item_id": "q6",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 69,
+      "end": 73,
+      "matched_text": "boit",
+      "word": null,
+      "message": "Après le verbe « falloir », le verbe devrait être à l’infinitif.",
+      "suggestions": [
+        "boire"
+      ],
+      "rule": "g3__infi_falloir__b1_a1_1",
+      "type": "infi",
+      "url": "",
+      "source_text": "Choisis la phrase correcte : « il faut boire de l’eau » ou « il faut boit de l’eau » ?"
+    },
+    {
+      "passage_id": "fr-a1-u08-p04",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 88,
+      "end": 92,
+      "matched_text": "sent",
+      "word": null,
+      "message": "Incohérence : « à » est une préposition ; « sent » est une forme verbale.",
+      "suggestions": [],
+      "rule": "g2__conf_a_à_verbe__b14_a7_1",
+      "type": "conf",
+      "url": "",
+      "source_text": "Choisis la phrase correcte : « elle commence à sentir la fatigue » ou « elle commence à sent la fatigue » ?"
+    },
+    {
+      "passage_id": "fr-a1-u08-p05",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 69,
+      "end": 76,
+      "matched_text": "malades",
+      "word": null,
+      "message": "Accord avec la forme verbale « est » : « malades » devrait être au singulier.",
+      "suggestions": [
+        "malade"
+      ],
+      "rule": "gv1__ppas_être_accord_sing__b1_a1_1",
+      "type": "ppas",
+      "url": "",
+      "source_text": "Choisis la phrase correcte : « Camille est malade » ou « Camille est malades » ?"
+    },
+    {
+      "passage_id": "fr-a1-u09-p01",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 48,
+      "end": 51,
+      "matched_text": "son",
+      "word": null,
+      "message": "Accord de genre erroné : « famille » est féminin.",
+      "suggestions": [
+        "sa"
+      ],
+      "rule": "g3__gn_mon_ton_son_1m__b1_a2_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « sa famille » ou « son famille » ?"
+    },
+    {
+      "passage_id": "fr-a1-u09-p02",
+      "field": "question_prompt",
+      "item_id": "q6",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 73,
+      "end": 76,
+      "matched_text": "une",
+      "word": null,
+      "message": "Accord de genre erroné : « ami » est masculin.",
+      "suggestions": [
+        "un"
+      ],
+      "rule": "g3__gn_une_1m__b1_a1_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « Sami est un ami de Camille » ou « Sami est une ami de Camille » ?"
+    },
+    {
+      "passage_id": "fr-a1-u09-p02",
+      "field": "question_prompt",
+      "item_id": "q6",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 77,
+      "end": 80,
+      "matched_text": "ami",
+      "word": null,
+      "message": "Accord de genre erroné : « une » est un déterminant féminin.",
+      "suggestions": [
+        "amie"
+      ],
+      "rule": "g3__gn_une_1m__b1_a2_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « Sami est un ami de Camille » ou « Sami est une ami de Camille » ?"
+    },
+    {
+      "passage_id": "fr-a1-u09-p02",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 45,
+      "end": 48,
+      "matched_text": "son",
+      "word": null,
+      "message": "Accord de genre erroné : « mère » est féminin.",
+      "suggestions": [
+        "sa"
+      ],
+      "rule": "g3__gn_mon_ton_son_1m__b1_a2_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « sa mère » ou « son mère » ?"
+    },
+    {
+      "passage_id": "fr-a1-u09-p03",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 47,
+      "end": 50,
+      "matched_text": "au ",
+      "word": null,
+      "message": "Euphonie. Si « école » est bien censé être un singulier, il faut élider. Sinon, il faut écrire « aux » et mettre « école » au pluriel.",
+      "suggestions": [
+        "à l’",
+        "aux "
+      ],
+      "rule": "g3__gn_au_1m__b2_a1_1",
+      "type": "eleu",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « à l’école » ou « au école » ?"
+    },
+    {
+      "passage_id": "fr-a1-u09-p04",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 47,
+      "end": 49,
+      "matched_text": "un",
+      "word": null,
+      "message": "Accord de genre erroné : « table » est féminin.",
+      "suggestions": [
+        "une"
+      ],
+      "rule": "g3__gn_un_1m__b2_a1_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « une table » ou « un table » ?"
+    },
+    {
+      "passage_id": "fr-a1-u09-p04",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 50,
+      "end": 55,
+      "matched_text": "table",
+      "word": null,
+      "message": "Accord de genre erroné : « un » est un déterminant masculin.",
+      "suggestions": [],
+      "rule": "g3__gn_un_1m__b2_a2_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « une table » ou « un table » ?"
+    },
+    {
+      "passage_id": "fr-a1-u09-p05",
+      "field": "question_prompt",
+      "item_id": "q6",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 54,
+      "end": 57,
+      "matched_text": "une",
+      "word": null,
+      "message": "Accord de genre erroné : « travail » est masculin.",
+      "suggestions": [
+        "un"
+      ],
+      "rule": "g3__gn_une_1m__b1_a1_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « un travail court » ou « une travail courte » ?"
+    },
+    {
+      "passage_id": "fr-a1-u09-p05",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 46,
+      "end": 49,
+      "matched_text": "du ",
+      "word": null,
+      "message": "Euphonie. Il faut élider.",
+      "suggestions": [
+        "de l’"
+      ],
+      "rule": "g3__gn_du_1m__b2_a1_1",
+      "type": "eleu",
+      "url": "https://fr.wikipedia.org/wiki/%C3%89lision",
+      "source_text": "Choisis la forme correcte : « de l’eau » ou « du eau » ?"
+    },
+    {
+      "passage_id": "fr-a1-u09-p06",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 63,
+      "end": 68,
+      "matched_text": "livre",
+      "word": null,
+      "message": "Accord de nombre erroné : « livre » devrait être au pluriel.",
+      "suggestions": [
+        "livres"
+      ],
+      "rule": "g3__gn_det_epi_plur_1m__b1_a1_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte au pluriel : « des livres » ou « des livre » ?"
+    },
+    {
+      "passage_id": "fr-a1-u10-p01",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 47,
+      "end": 49,
+      "matched_text": "la",
+      "word": null,
+      "message": "Accord de genre erroné : « soleil » est masculin.",
+      "suggestions": [
+        "le"
+      ],
+      "rule": "g3__gn_la_1m__b2_a2_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « le soleil » ou « la soleil » ?"
+    },
+    {
+      "passage_id": "fr-a1-u10-p03",
+      "field": "question_prompt",
+      "item_id": "q6",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 54,
+      "end": 56,
+      "matched_text": "la",
+      "word": null,
+      "message": "Accord de genre erroné : « prix » est masculin.",
+      "suggestions": [
+        "le"
+      ],
+      "rule": "g3__gn_la_1m__b2_a2_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « le prix du livre » ou « la prix du livre » ?"
+    },
+    {
+      "passage_id": "fr-a1-u10-p04",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 49,
+      "end": 52,
+      "matched_text": "une",
+      "word": null,
+      "message": "Accord de genre erroné : « vêtement » est masculin.",
+      "suggestions": [
+        "un"
+      ],
+      "rule": "g3__gn_une_1m__b1_a1_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « un vêtement » ou « une vêtement » ?"
+    },
+    {
+      "passage_id": "fr-a1-u10-p05",
+      "field": "question_prompt",
+      "item_id": "q6",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 51,
+      "end": 53,
+      "matched_text": "un",
+      "word": null,
+      "message": "Accord de genre erroné : « chaussure » est féminin.",
+      "suggestions": [
+        "une"
+      ],
+      "rule": "g3__gn_un_1m__b2_a1_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « une chaussure » ou « un chaussure » ?"
+    },
+    {
+      "passage_id": "fr-a1-u10-p05",
+      "field": "question_prompt",
+      "item_id": "q7",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 44,
+      "end": 47,
+      "matched_text": "une",
+      "word": null,
+      "message": "Accord de genre erroné : « sac » est masculin.",
+      "suggestions": [
+        "un"
+      ],
+      "rule": "g3__gn_une_1m__b1_a1_1",
+      "type": "gn",
+      "url": "",
+      "source_text": "Choisis la forme correcte : « un sac » ou « une sac » ?"
+    },
+    {
+      "passage_id": "fr-a1-u10-p06",
+      "field": "text",
+      "item_id": null,
+      "message_class": "GrammalecteSpellingMessage",
+      "line": 1,
+      "start": 19,
+      "end": 21,
+      "matched_text": "A1",
+      "word": "A1",
+      "message": "Mot inconnu : A1",
+      "suggestions": [],
+      "rule": null,
+      "type": null,
+      "url": "",
+      "source_text": "À la fin du niveau A1, Camille peut gérer de nombreuses situations familières avec un français simple. Elle regarde le ciel et le soleil et sait dire s’il fait froid ou chaud. Dans un magasin, elle peut demander un prix, décider d’acheter quelque chose et préparer l’argent nécessaire. Elle sait nommer un vêtement, un sac ou une chaussure. Avec les mots des unités précédentes, elle peut parler de sa famille, de son école, de son travail, de son quartier, de sa santé et de ses déplacements. Elle ne sait pas encore tout dire, mais elle peut déjà comprendre des informations simples, poser des questions et expliquer ses besoins essentiels."
+    },
+    {
+      "passage_id": "fr-a1-u10-p06",
+      "field": "text",
+      "item_id": null,
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 86,
+      "end": 94,
+      "matched_text": "français",
+      "word": null,
+      "message": "S’il s’agit d’un gentilé, mettez une majuscule.",
+      "suggestions": [
+        "Français"
+      ],
+      "rule": "g2__maj_gentilés__b3_a2_1",
+      "type": "maj",
+      "url": "https://fr.wiktionary.org/wiki/gentil%C3%A9",
+      "source_text": "À la fin du niveau A1, Camille peut gérer de nombreuses situations familières avec un français simple. Elle regarde le ciel et le soleil et sait dire s’il fait froid ou chaud. Dans un magasin, elle peut demander un prix, décider d’acheter quelque chose et préparer l’argent nécessaire. Elle sait nommer un vêtement, un sac ou une chaussure. Avec les mots des unités précédentes, elle peut parler de sa famille, de son école, de son travail, de son quartier, de sa santé et de ses déplacements. Elle ne sait pas encore tout dire, mais elle peut déjà comprendre des informations simples, poser des questions et expliquer ses besoins essentiels."
+    },
+    {
+      "passage_id": "fr-a1-u10-p06",
+      "field": "question_prompt",
+      "item_id": "q10",
+      "message_class": "GrammalecteSpellingMessage",
+      "line": 1,
+      "start": 66,
+      "end": 68,
+      "matched_text": "A1",
+      "word": "A1",
+      "message": "Mot inconnu : A1",
+      "suggestions": [],
+      "rule": null,
+      "type": null,
+      "url": "",
+      "source_text": "Résume en une phrase ce que Camille peut faire à la fin du niveau A1."
+    },
+    {
+      "passage_id": "fr-a1-u10-p06",
+      "field": "answer",
+      "item_id": "a1",
+      "message_class": "GrammalecteGrammarMessage",
+      "line": 1,
+      "start": 99,
+      "end": 107,
+      "matched_text": "français",
+      "word": null,
+      "message": "S’il s’agit d’un gentilé, mettez une majuscule.",
+      "suggestions": [
+        "Français"
+      ],
+      "rule": "g2__maj_gentilés__b3_a2_1",
+      "type": "maj",
+      "url": "https://fr.wiktionary.org/wiki/gentil%C3%A9",
+      "source_text": "Camille peut maintenant comprendre et communiquer dans de nombreuses situations familières avec un français simple."
+    },
+    {
+      "passage_id": "fr-a1-u10-p06",
+      "field": "answer",
+      "item_id": "a5",
+      "message_class": "GrammalecteSpellingMessage",
+      "line": 1,
+      "start": 9,
+      "end": 11,
+      "matched_text": "A1",
+      "word": "A1",
+      "message": "Mot inconnu : A1",
+      "suggestions": [],
+      "rule": null,
+      "type": null,
+      "url": "",
+      "source_text": "Parce qu’A1 est un niveau de base : elle gère des situations familières, mais son français reste limité."
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "unit": 4,
+  "status": "PASS_DETERMINISTIC_FRENCH_A1_UNIT04_BOUNDED_REPAIR_NEEDS_INDEPENDENT_REVIEW",
+  "before_sha256": "769bb4867e7f3571992378dca439d455aa9fb42586fcad0c61a35e185d5a3c78",
+  "after_sha256": "005354922bb7a88adce0c0e60f63d5b52099565c557d0a90914ff4f0d7447b80",
+  "confirmed_repair_count": 3,
+  "repairs": [
+    {
+      "passage_id": "fr-a1-u04-p02",
+      "question_id": "q9",
+      "kind": "unnatural_cloze_output",
+      "before_prompt": "Complète : J’ai dix minutes de _____ avant le bus.",
+      "after_prompt": "Complète : J’ai assez de _____ avant le bus.",
+      "answer_unchanged": "temps",
+      "target_ids_unchanged": [
+        "fr-rank-0091"
+      ]
+    },
+    {
+      "passage_id": "fr-a1-u04-p03",
+      "field": "text",
+      "kind": "grammar_syntax",
+      "before": "Quand la porte ouvre, tout le monde entre calmement.",
+      "after": "Quand la porte s’ouvre, tout le monde entre calmement."
+    },
+    {
+      "passage_id": "fr-a1-u04-p03",
+      "field": "text/new_lexical_targets",
+      "target_id": "fr-rank-0108",
+      "kind": "target_sense_contamination_and_exposure_mismatch",
+      "before_spans": [
+        "Personne ne veut commencer sans lui.",
+        "quand personne n’est pressé."
+      ],
+      "after_spans": [
+        "Tout le monde veut attendre Sami.",
+        "quand le groupe n’est pas pressé."
+      ],
+      "before_exposures_in_text": 4,
+      "after_exposures_in_text": 2,
+      "intended_sense_unchanged": "person"
+    }
+  ],
+  "answers_changed": false,
+  "target_ids_changed": false,
+  "target_lemma_changed": false,
+  "target_sense_changed": false,
+  "passage_text_changed": true,
+  "release_effect": "NONE_AUTOMATIC: French remains REOPEN_REQUIRED; independent semantic/native/pedagogical/educator review remains pending.",
+  "bound_sha256": "005354922bb7a88adce0c0e60f63d5b52099565c557d0a90914ff4f0d7447b80",
+  "generation_integrity_status": "PASS"
+}

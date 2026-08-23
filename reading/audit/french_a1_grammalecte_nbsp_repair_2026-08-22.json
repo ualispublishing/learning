@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "repair": "grammalecte_nbsp_typography_repair",
+  "old_sha256": "7dbdb48ffc6efd00106490ca9b10ad25643bf7e89967e8fbd2977a04641d6ea3",
+  "new_sha256": "8019fe53061a67faca527a50495d2188439da5142dd94a414a43e1a3986cf7f4",
+  "old_scan": "reading/audit/french_a1_grammalecte_fullscan_2026-08-22.json",
+  "post_scan": "reading/audit/french_a1_grammalecte_post_nbsp_fullscan_2026-08-22.json",
+  "applied_replacements": 1992,
+  "post_repair_nbsp_findings": 0,
+  "non_nbsp_findings_before": 48,
+  "non_nbsp_findings_after": 48,
+  "non_nbsp_multiset_preserved": true,
+  "authoritative_typography_basis": [
+    {
+      "source": "Office québécois de la langue française — espace insécable",
+      "url": "https://vitrinelinguistique.oqlf.gouv.qc.ca/fiche-gdt/fiche/8360213/espace-insecable"
+    },
+    {
+      "source": "Office québécois de la langue française — deux-points",
+      "url": "https://vitrinelinguistique.oqlf.gouv.qc.ca/23325/la-ponctuation/deux-points/emplois-courants-du-deux-points"
+    },
+    {
+      "source": "Office québécois de la langue française — guillemets",
+      "url": "https://vitrinelinguistique.oqlf.gouv.qc.ca/23363/la-ponctuation/guillemets/generalites-sur-les-guillemets"
+    },
+    {
+      "source": "Unicode UAX #14 line breaking",
+      "url": "https://www.unicode.org/reports/tr14/"
+    }
+  ],
+  "scope_note": "Only exact Grammalecte type=nbsp suggestions from the hash-bound pre-repair scan were applied to learner-facing title/text/question/answer fields. No lexical, grammatical, semantic, answer-key, target, or metadata changes were made by this repair.",
+  "release_effect": "NO_RELEASE_APPROVAL: canonical hash changed; deterministic and later independent release gates must be rebound."
+}

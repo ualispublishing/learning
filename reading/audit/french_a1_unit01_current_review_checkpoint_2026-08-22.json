@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "unit": 1,
+  "evidence_kind": "current_unit_review_checkpoint",
+  "status": "BOUNDED_FINDINGS_REMAIN_NEEDS_REPAIR_AND_INDEPENDENT_REVIEW",
+  "bound_canonical": {
+    "sha256": "288b48c9a5288ae9b5c177c46f402cd21e001d447b2aca4990e0130eda41bdb2",
+    "git_blob": "3872ce6762769c6be4e4bd29bf9e36a6288977be",
+    "passages": 60,
+    "unit01_questions": 60,
+    "unit01_answers": 60
+  },
+  "completed_in_current_hash": {
+    "a1_wording_repair": {
+      "artifact": "reading/audit/french_a1_unit01_wording_postrepair_2026-08-22.json",
+      "status": "PASS_DETERMINISTIC_FRENCH_A1_UNIT01_WORDING",
+      "repairs": 2,
+      "passage_text_changed": false,
+      "resolved": ["fr-a1-u01-p01/q10 technical-locuteur wording", "fr-a1-u01-p05/q10 technical-locuteur wording"]
+    }
+  },
+  "remaining_confirmed_target_linkage_findings": {
+    "count": 15,
+    "source_review": "reading/audit/french_a1_unit01_internal_semantic_qa_review_2026-08-22.json",
+    "kind": "direct target-teaching questions missing target_ids",
+    "requires_learner_facing_text_change": false,
+    "requires_answer_change": false
+  },
+  "remaining_formal_exposure_findings": {
+    "count": 5,
+    "source_checkpoint": "reading/audit/french_a1_formal_gate_a_exposure_checkpoint_2026-08-22.json",
+    "kind": "Unit 01 legacy exposures_in_text declarations require exact current-convention normalization",
+    "still_applicable_after_wording_repair": true,
+    "requires_learner_facing_text_change": false,
+    "note": "The two completed q10 prompt edits do not change passage text or lexical exposure counts."
+  },
+  "additional_internal_review_candidates": {
+    "confirmed_for_repair": 0,
+    "pending_independent_adjudication": 3,
+    "source_review": "reading/audit/french_a1_unit01_internal_semantic_qa_review_2026-08-22.json"
+  },
+  "independent_review": {
+    "semantic_accuracy": "PENDING",
+    "french_naturalness_and_orthography": "PENDING",
+    "pedagogical_a1_fit": "PENDING",
+    "assessment_quality_and_answer_evidence": "PENDING",
+    "native_professional_review": "PENDING",
+    "educator_release_review": "PENDING"
+  },
+  "release_effect": "NONE_AUTOMATIC: French remains REOPEN_REQUIRED. Resolve the 15 target-linkage and 5 exposure-metadata findings fail-closed, rerun affected deterministic checks, and retain all independent release gates."
+}

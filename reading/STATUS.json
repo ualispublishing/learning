@@ -1,13 +1,13 @@
 {
   "project": "Arabic, French, and Urdu graded reading curriculum A1-C2",
-  "updated": "2026-08-19",
+  "updated": "2026-08-22",
   "overall_status": "in_progress",
   "active_language": "Urdu",
   "paused_languages": [],
-  "phase": "Arabic and French are sealed. Urdu A1 Units 01-05 are canonical; generation-first production continues from Unit 06.",
+  "phase": "French A1 formal protocol Gate A and the LanguageTool portion of the machine-detector gate are current on the post-repair hash. French remains REOPEN_REQUIRED while internal field-level completeness, Antidote/DeepL, independent model-family, native-professional, educator/CEFR, and blind post-repair gates remain pending.",
   "target_passages": 1080,
   "target_is_quota": false,
-  "approved_passages": 720,
+  "approved_passages": 360,
   "source_of_truth_precedence": [
     "live canonical JSONL on main",
     "freshly regenerated audit artifacts",
@@ -46,7 +46,7 @@
     }
   },
   "french": {
-    "state": "APPROVED",
+    "state": "REOPEN_REQUIRED",
     "canonical_passages": 360,
     "levels": {
       "a1": 60,
@@ -73,13 +73,26 @@
       "new_targets_checked_against_all_prior_french_levels": true
     },
     "a1_completion": {
-      "state": "FINAL_APPROVED",
+      "state": "STRUCTURAL_PASS_FORMAL_GATE_A_LANGUAGETOOL_PARTIAL_MACHINE_PASS_LATER_GATES_PENDING",
       "passages": 60,
       "questions": 600,
       "answers": 600,
-      "canonical_blob": "0493a2fa13e51b5997db05e91cdea4d8dc5e647b",
-      "generation_integrity": "PASS",
-      "generation_integrity_artifact": "reading/audit/french_a1_generation_integrity.json"
+      "canonical_blob": "417ee292a73244860ecd40741af521aee5436578",
+      "generation_integrity": "PASS_CURRENT_CORPUS",
+      "generation_integrity_artifact": "reading/audit/french_a1_generation_integrity.json",
+      "canonical_sha256": "7dbdb48ffc6efd00106490ca9b10ad25643bf7e89967e8fbd2977a04641d6ea3",
+      "current_corpus_revalidation_artifact": "reading/audit/french_a1_current_corpus_revalidation_2026-08-22.json",
+      "independent_review_status": "PENDING",
+      "formal_protocol_gate_a_status": "PASS",
+      "formal_protocol_gate_a_artifact": "reading/audit/french_a1_formal_gate_a_2026-08-22.json",
+      "formal_protocol_gate_a_blockers": 0,
+      "legacy_release_evidence_scan_status": "HISTORICAL_FAIL_REVIEW_EVIDENCE_INCOMPLETE_NOT_CURRENT_HASH",
+      "legacy_release_evidence_scan_artifact": "reading/audit/french_current_deterministic_gate_a_2026-08-22.json",
+      "legacy_release_evidence_scan_open_findings_at_old_hash": 2160,
+      "languagetool_status": "PASS_CURRENT_HASH_ALL_SIGNALS_DISPOSITIONED_NO_OPEN_ACCEPTED_DEFECTS",
+      "languagetool_postrepair_scan": "reading/audit/french_a1_languagetool_postrepair_fullscan_2026-08-22.json",
+      "languagetool_adjudication": "reading/audit/french_a1_languagetool_postrepair_adjudication_2026-08-22.json",
+      "independent_machine_tool_gate": "PARTIAL_LANGUAGETOOL_COMPLETE_ANTIDOTE_DEEPL_PENDING"
     },
     "a2_completion": {
       "state": "FINAL_APPROVED",
@@ -383,7 +396,7 @@
         60
       ]
     },
-    "next_target": "None. French is hash-bound approved; reopen only after a deliberate canonical French change invalidates approval.",
+    "next_target": "Substantively clear the current highest-assurance French release-evidence Gate A without bulk-promoting metadata; complete current-corpus semantic/naturalness/pedagogical/assessment/coverage review; then run final approval gates sequentially.",
     "c1_generation": {
       "status": "FINAL_APPROVED",
       "passages": 60,
@@ -524,11 +537,11 @@
       "next_target_probe": null,
       "next_fresh_source_terms": null
     },
-    "formal_final_approval": true,
+    "formal_final_approval": false,
     "generation_complete": true,
     "final_audit": {
-      "status": "PASS",
-      "approval": "APPROVED",
+      "status": "CURRENT_RELEASE_GATE_A_FAIL",
+      "approval": "REOPEN_REQUIRED",
       "audit_version": 3,
       "audit_pass_count": 15,
       "failed_pass_count": 0,
@@ -543,7 +556,15 @@
         "b2": "38976211f13329ba3e2b0b9dbd6868699023d05d",
         "c1": "6f5bd912dfb550c064b54c8f7de4027bebf3786d",
         "c2": "de13ed12c95db5501c6efcc3515ef02f7b1c34dc"
-      }
+      },
+      "old_approval_may_be_relied_on": false,
+      "current_a1_sha256": "b509f77c71e28505f80efaf202cb36cd5c45c5646bbd86cbf9773daf0743d037",
+      "current_a1_blob": "f0961fb8e575e951f5ae39e7ad5f693f8c3c2e05",
+      "current_corpus_deterministic_revalidation": "reading/audit/french_a1_current_corpus_revalidation_2026-08-22.json",
+      "independent_review_status": "PENDING",
+      "next_action": "Substantive Gate-A evidence revalidation first; independent review must actually complete; only then regenerate/run final approval gate last.",
+      "current_highest_assurance_gate_a": "reading/audit/french_current_deterministic_gate_a_2026-08-22.json",
+      "current_highest_assurance_gate_a_open_findings": 2160
     }
   },
   "urdu": {

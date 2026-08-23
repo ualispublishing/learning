@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "evidence_kind": "formal_protocol_gate_a_bounded_exposure_checkpoint",
+  "status": "BLOCKED_BOUNDED_METADATA_NORMALIZATION_REQUIRED",
+  "protocol": "reading/planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md §3",
+  "bound_canonical": {
+    "sha256": "b509f77c71e28505f80efaf202cb36cd5c45c5646bbd86cbf9773daf0743d037",
+    "git_blob": "f0961fb8e575e951f5ae39e7ad5f693f8c3c2e05",
+    "passages": 60,
+    "questions": 600,
+    "answers": 600
+  },
+  "confirmed_bounded_blockers": [
+    {"passage_id":"fr-a1-u01-p02","target_id":"fr-rank-0061","lemma":"quand","stored_exposures_in_text":1,"confirmed_exact_realizations":4,"confirmed_surface_forms":["quand"],"proposed_exposures_in_text":4},
+    {"passage_id":"fr-a1-u01-p02","target_id":"fr-rank-0063","lemma":"alors","stored_exposures_in_text":1,"confirmed_exact_realizations":3,"confirmed_surface_forms":["alors"],"proposed_exposures_in_text":3},
+    {"passage_id":"fr-a1-u01-p03","target_id":"fr-rank-0023","lemma":"vouloir","stored_exposures_in_text":1,"confirmed_exact_realizations":3,"confirmed_surface_forms":["veut"],"proposed_exposures_in_text":3,"proposed_exposure_count_method":"exact_declared_surface_forms"},
+    {"passage_id":"fr-a1-u01-p04","target_id":"fr-rank-0021","lemma":"pouvoir","stored_exposures_in_text":1,"confirmed_exact_realizations":6,"confirmed_surface_forms":["peut"],"proposed_exposures_in_text":6,"proposed_exposure_count_method":"exact_declared_surface_forms"},
+    {"passage_id":"fr-a1-u01-p05","target_id":"fr-rank-0057","lemma":"là","stored_exposures_in_text":1,"confirmed_exact_realizations":2,"confirmed_surface_forms":["là"],"proposed_exposures_in_text":2}
+  ],
+  "confirmed_count": 5,
+  "normalization_contract": {
+    "learner_facing_text_changes": 0,
+    "question_changes": 0,
+    "answer_changes": 0,
+    "target_id_changes": 0,
+    "target_lemma_changes": 0,
+    "target_sense_changes": 0,
+    "required_metadata_changes": 5,
+    "recommended_morphology_evidence": "For vouloir and pouvoir, retain the canonical lemma/target and record the exact inflected surface forms counted (veut, peut).",
+    "idempotence": "Apply only if the corpus SHA and all five stored pre-values match this checkpoint; otherwise fail closed and re-audit."
+  },
+  "existing_evidence": {
+    "a1_generation_integrity": "PASS but explicitly grandfathers these five Unit 01 exposure variances as legacy selected/inflected evidence",
+    "broad_whole_french_diagnostic": "PASS; not equivalent to educator-release formal Gate A",
+    "release_evidence_completeness": "FAIL with 2160 evidence blockers in reading/audit/french_current_deterministic_gate_a_2026-08-22.json"
+  },
+  "execution_note": {
+    "attempted_one_shot_run_id": 32603314488,
+    "attempted_run_status_at_checkpoint": "PENDING_WITH_NO_JOB_ALLOCATION",
+    "credited_as_executed_evidence": false,
+    "temporary_workflow_removed_from_pr": true
+  },
+  "independent_review": {
+    "semantic_accuracy": "PENDING",
+    "french_naturalness_and_orthography": "PENDING",
+    "pedagogical_a1_fit": "PENDING",
+    "assessment_quality_and_answer_evidence": "PENDING",
+    "native_professional_review": "PENDING",
+    "educator_release_review": "PENDING",
+    "blind_postrepair_review": "PENDING"
+  },
+  "release_effect": "NONE_AUTOMATIC: French remains REOPEN_REQUIRED. Normalize the five bounded Unit 01 exposure declarations, rerun formal Gate A on the resulting exact hash, and continue the later independent release gates."
+}

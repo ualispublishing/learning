@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "unit": 2,
+  "review_kind": "internal_semantic_pedagogical_qa_review",
+  "status": "FIVE_CONFIRMED_REPAIRS_NEEDS_BOUNDED_REPAIR_AND_INDEPENDENT_REVIEW",
+  "bound_a1_sha256": "288b48c9a5288ae9b5c177c46f402cd21e001d447b2aca4990e0130eda41bdb2",
+  "scope": {"passages":6,"questions":60,"answers":60},
+  "confirmed_findings": [
+    {
+      "passage_id":"fr-a1-u02-p01","question_id":"q2","kind":"semantic_category_mismatch",
+      "issue":"The prompt asks for places, but the keyed response combines an activity (dance class) with a place (the pool).",
+      "current_prompt":"Quels endroits Camille veut-elle visiter au centre sportif ?",
+      "current_answer":"Le cours de danse et la piscine.",
+      "proposed_prompt":"Que veut faire Camille au centre sportif ?",
+      "proposed_answer":"Elle veut faire un cours de danse et aller à la piscine."
+    },
+    {
+      "passage_id":"fr-a1-u02-p01","question_id":"q8","kind":"ambiguous_deictic_contrast",
+      "issue":"Without a deictic anchor, both aller and venir can describe movement toward a place depending on viewpoint.",
+      "current_prompt":"Pour parler d’un déplacement vers un lieu, quel verbe convient ici : « aller » ou « venir » ?",
+      "current_answer":"aller",
+      "proposed_prompt":"Camille est chez elle et veut se déplacer vers le parc. Quel verbe convient : « aller » ou « venir » ?",
+      "proposed_answer":"aller"
+    },
+    {
+      "passage_id":"fr-a1-u02-p03","question_id":"q7","kind":"cefr_grammar_load_mismatch",
+      "issue":"The item introduces future simple demandera while the declared A1 target is si + présent and future simple is unnecessary for testing si.",
+      "current_prompt":"Complète : « Elle demandera de l’aide _____ elle ne trouve pas le livre. » — « si » ou « avec » ?",
+      "current_answer":"« si ».",
+      "proposed_prompt":"Complète : « Elle demande de l’aide _____ elle ne trouve pas le livre. » — « si » ou « avec » ?",
+      "proposed_answer":"« si »."
+    },
+    {
+      "passage_id":"fr-a1-u02-p04","question_id":"q8","kind":"unnecessary_technical_wording",
+      "issue":"The A1 prompt uses the technical word « locuteur » when a concrete formulation is sufficient.",
+      "current_prompt":"Si le carnet appartient au locuteur, lequel convient : « mon carnet » ou « ton carnet » ?",
+      "current_answer":"mon carnet",
+      "proposed_prompt":"Camille parle de son propre carnet. Que dit-elle : « mon carnet » ou « ton carnet » ?",
+      "proposed_answer":"mon carnet"
+    },
+    {
+      "passage_id":"fr-a1-u02-p06","question_id":"q7","kind":"misleading_possessive_gender_framing",
+      "issue":"« un garçon qui parle de son sac » can imply that mon is selected because the speaker is male; French possessive agreement here depends on the masculine noun sac, not the owner’s gender.",
+      "current_prompt":"Choisis la forme correcte pour un garçon qui parle de son sac : « mon sac » ou « ma sac ».",
+      "current_answer":"mon sac",
+      "proposed_prompt":"Quelle forme est correcte : « mon sac » ou « ma sac » ?",
+      "proposed_answer":"mon sac"
+    }
+  ],
+  "confirmed_finding_count": 5,
+  "positive_checks": [
+    "All 6 passages have 10 linked questions and 10 linked answers.",
+    "Direct target-teaching questions in Unit 02 consistently carry target_ids; the Unit 01 linkage-omission class was not found here.",
+    "P06 introduces zero new lexical targets.",
+    "No additional high-confidence answer-key contradiction was confirmed in this internal pass."
+  ],
+  "review_candidates_not_confirmed_for_repair": [
+    {"passage_id":"fr-a1-u02-p04","question_id":"q6","note":"The definition of sur uses comparatively technical wording (« au-dessus et en contact »); consider simpler A1 phrasing during independent review."},
+    {"passage_id":"fr-a1-u02-p05","question_id":"q6","note":"« sans négation » is metalinguistic terminology that may be simplifiable, but the distinction is semantically legitimate and is not auto-repaired here."}
+  ],
+  "limitations": "Internal model review only. This is not native-professional, educator, blind, external-tool, or independent-model-family approval.",
+  "release_effect": "NONE_AUTOMATIC: keep French REOPEN_REQUIRED; apply the five confirmed repairs fail-closed and retain independent review requirements."
+}

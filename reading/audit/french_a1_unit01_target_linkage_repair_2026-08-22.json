@@ -1,0 +1,307 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "unit": 1,
+  "manifest": "reading/audit/manifests/french_a1_unit01_target_linkage_2026-08-22.json",
+  "status": "BOUNDED_REPAIR_APPLIED_NEEDS_INDEPENDENT_REVIEW",
+  "before_sha256": "288b48c9a5288ae9b5c177c46f402cd21e001d447b2aca4990e0130eda41bdb2",
+  "after_sha256": "66f5a01223fb8d18ecfb09fe4226dcffa91c32d9253547db9c0cf8b7e058ef9f",
+  "inventory_candidates": 15,
+  "confirmed_repairs": 15,
+  "adjudicated_false_positive_count": 0,
+  "adjudicated_false_positives": [],
+  "passage_text_changed": false,
+  "target_linkage_changed_count": 15,
+  "notable_sense_corrections": [],
+  "repairs": [
+    {
+      "passage_id": "fr-a1-u01-p01",
+      "question_id": "q3",
+      "before": {
+        "prompt": "Que signifie « ici » dans « Je vais travailler ici chaque soir » ? A) dans cet endroit B) demain C) dans une autre ville",
+        "type": "vocabulary_in_context",
+        "answer": "A) dans cet endroit.",
+        "target_ids": null
+      },
+      "after": {
+        "prompt": "Que signifie « ici » dans « Je vais travailler ici chaque soir » ? A) dans cet endroit B) demain C) dans une autre ville",
+        "type": "vocabulary_in_context",
+        "answer": "A) dans cet endroit.",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0048"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u01-p01",
+      "question_id": "q4",
+      "before": {
+        "prompt": "Dans « Tu veux venir avec moi ? », que propose la mère ? A) d’aller avec elle B) de rester seule C) de dormir",
+        "type": "literal_detail",
+        "answer": "A) d’aller avec elle.",
+        "target_ids": null
+      },
+      "after": {
+        "prompt": "Dans « Tu veux venir avec moi ? », que propose la mère ? A) d’aller avec elle B) de rester seule C) de dormir",
+        "type": "literal_detail",
+        "answer": "A) d’aller avec elle.",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0047"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u01-p01",
+      "question_id": "q5",
+      "before": {
+        "prompt": "Complète : Ma chaise est près de la fenêtre ; je vais lire _____ ce soir.",
+        "type": "cloze_transfer",
+        "answer": "ici.",
+        "target_ids": null
+      },
+      "after": {
+        "prompt": "Complète : Ma chaise est près de la fenêtre ; je vais lire _____ ce soir.",
+        "type": "cloze_transfer",
+        "answer": "ici.",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0048"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u01-p02",
+      "question_id": "q3",
+      "before": {
+        "prompt": "Dans le texte, « quand » sert surtout à indiquer quoi ? A) le moment où une action arrive B) un lieu C) une quantité",
+        "type": "literal_detail",
+        "answer": "A) le moment où une action arrive.",
+        "target_ids": null
+      },
+      "after": {
+        "prompt": "Dans le texte, « quand » sert surtout à indiquer quoi ? A) le moment où une action arrive B) un lieu C) une quantité",
+        "type": "literal_detail",
+        "answer": "A) le moment où une action arrive.",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0061"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u01-p02",
+      "question_id": "q4",
+      "before": {
+        "prompt": "Que montre « alors » après « il est presque huit heures » ? A) l’action qui suit cette information B) une action de la veille C) une personne",
+        "type": "literal_detail",
+        "answer": "A) l’action qui suit cette information.",
+        "target_ids": null
+      },
+      "after": {
+        "prompt": "Que montre « alors » après « il est presque huit heures » ? A) l’action qui suit cette information B) une action de la veille C) une personne",
+        "type": "literal_detail",
+        "answer": "A) l’action qui suit cette information.",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0063"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u01-p02",
+      "question_id": "q5",
+      "before": {
+        "prompt": "Complète : _____ la porte s’ouvre, nous entrons ; _____ nous nous asseyons.",
+        "type": "cloze_transfer",
+        "answer": "Quand ; alors.",
+        "target_ids": null
+      },
+      "after": {
+        "prompt": "Complète : _____ la porte s’ouvre, nous entrons ; _____ nous nous asseyons.",
+        "type": "cloze_transfer",
+        "answer": "Quand ; alors.",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0061",
+          "fr-rank-0063"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u01-p03",
+      "question_id": "q3",
+      "before": {
+        "prompt": "Que comprend-on quand le petit frère « veut jouer au ballon » ? A) il a envie de jouer B) il a déjà fini de jouer C) il refuse de voir le ballon",
+        "type": "literal_detail",
+        "answer": "A) il a envie de jouer.",
+        "target_ids": null
+      },
+      "after": {
+        "prompt": "Que comprend-on quand le petit frère « veut jouer au ballon » ? A) il a envie de jouer B) il a déjà fini de jouer C) il refuse de voir le ballon",
+        "type": "literal_detail",
+        "answer": "A) il a envie de jouer.",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0023"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u01-p03",
+      "question_id": "q4",
+      "before": {
+        "prompt": "Dans ce texte, « avec » indique surtout quoi ? A) des personnes ensemble B) un moment du passé C) un lieu éloigné",
+        "type": "literal_detail",
+        "answer": "A) des personnes ensemble.",
+        "target_ids": null
+      },
+      "after": {
+        "prompt": "Dans ce texte, « avec » indique surtout quoi ? A) des personnes ensemble B) un moment du passé C) un lieu éloigné",
+        "type": "literal_detail",
+        "answer": "A) des personnes ensemble.",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0035"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u01-p03",
+      "question_id": "q5",
+      "before": {
+        "prompt": "Complète : Nora a soif ; elle _____ boire de l’eau.",
+        "type": "cloze_transfer",
+        "answer": "veut.",
+        "target_ids": null
+      },
+      "after": {
+        "prompt": "Complète : Nora a soif ; elle _____ boire de l’eau.",
+        "type": "cloze_transfer",
+        "answer": "veut.",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0023"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u01-p04",
+      "question_id": "q3",
+      "before": {
+        "prompt": "Que signifie « peut » dans « elle peut entrer » ? A) elle est capable de le faire B) elle doit partir C) elle l’a fait hier",
+        "type": "vocabulary_in_context",
+        "answer": "A) elle est capable de le faire.",
+        "target_ids": null
+      },
+      "after": {
+        "prompt": "Que signifie « peut » dans « elle peut entrer » ? A) elle est capable de le faire B) elle doit partir C) elle l’a fait hier",
+        "type": "vocabulary_in_context",
+        "answer": "A) elle est capable de le faire.",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0021"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u01-p04",
+      "question_id": "q4",
+      "before": {
+        "prompt": "Que fait Camille quand elle « voit » Sami près de l’entrée ? A) elle le remarque avec ses yeux B) elle lui téléphone sans le voir C) elle quitte la ville",
+        "type": "literal_detail",
+        "answer": "A) elle le remarque avec ses yeux.",
+        "target_ids": null
+      },
+      "after": {
+        "prompt": "Que fait Camille quand elle « voit » Sami près de l’entrée ? A) elle le remarque avec ses yeux B) elle lui téléphone sans le voir C) elle quitte la ville",
+        "type": "literal_detail",
+        "answer": "A) elle le remarque avec ses yeux.",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0039"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u01-p04",
+      "question_id": "q5",
+      "before": {
+        "prompt": "Complète : La porte est ouverte, donc nous _____ entrer.",
+        "type": "cloze_transfer",
+        "answer": "pouvons.",
+        "target_ids": null
+      },
+      "after": {
+        "prompt": "Complète : La porte est ouverte, donc nous _____ entrer.",
+        "type": "cloze_transfer",
+        "answer": "pouvons.",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0021"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u01-p05",
+      "question_id": "q2",
+      "before": {
+        "prompt": "Dans le marché, que signifie « prendre quatre pommes » ? A) les choisir et les mettre dans le sac B) les regarder sans les toucher C) les vendre",
+        "type": "vocabulary_in_context",
+        "answer": "A) les choisir et les mettre dans le sac.",
+        "target_ids": null
+      },
+      "after": {
+        "prompt": "Dans le marché, que signifie « prendre quatre pommes » ? A) les choisir et les mettre dans le sac B) les regarder sans les toucher C) les vendre",
+        "type": "vocabulary_in_context",
+        "answer": "A) les choisir et les mettre dans le sac.",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0060"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u01-p05",
+      "question_id": "q3",
+      "before": {
+        "prompt": "À quel endroit « là » renvoie-t-il quand Camille voit Sami ? A) au marché, près du stand de fleurs B) à l’école C) dans sa chambre",
+        "type": "literal_detail",
+        "answer": "A) au marché, près du stand de fleurs.",
+        "target_ids": null
+      },
+      "after": {
+        "prompt": "À quel endroit « là » renvoie-t-il quand Camille voit Sami ? A) au marché, près du stand de fleurs B) à l’école C) dans sa chambre",
+        "type": "literal_detail",
+        "answer": "A) au marché, près du stand de fleurs.",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0057"
+        ]
+      }
+    },
+    {
+      "passage_id": "fr-a1-u01-p05",
+      "question_id": "q5",
+      "before": {
+        "prompt": "Complète : Le livre est sur la table, _____, près de la fenêtre.",
+        "type": "cloze_transfer",
+        "answer": "là.",
+        "target_ids": null
+      },
+      "after": {
+        "prompt": "Complète : Le livre est sur la table, _____, près de la fenêtre.",
+        "type": "cloze_transfer",
+        "answer": "là.",
+        "explanation": "",
+        "target_ids": [
+          "fr-rank-0057"
+        ]
+      }
+    }
+  ],
+  "release_effect": "French remains REOPEN_REQUIRED; this linkage-only deterministic repair does not satisfy independent semantic/native/pedagogical/educator release review."
+}

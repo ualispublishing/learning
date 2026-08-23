@@ -15,12 +15,20 @@
       "form": "maison"
     },
     {
+      "passage_id": "fr-a1-u06-p01",
+      "form": "beaucoup"
+    },
+    {
       "passage_id": "fr-a1-u06-p04",
       "form": "jamais"
     },
     {
       "passage_id": "fr-a1-u07-p04",
       "form": "droite"
+    },
+    {
+      "passage_id": "fr-a1-u09-p05",
+      "form": "eau"
     }
   ],
   "validated_root_gloss_narrowings": [
@@ -137,43 +145,7 @@
       "root_gloss": "afterwards; after, later than in time; Indicates the continuous aspect"
     }
   ],
-  "legacy_unit01_exposure_variances": [
-    {
-      "passage_id": "fr-a1-u01-p02",
-      "form": "quand",
-      "stored_exposures": 1,
-      "literal_surface_occurrences": 4,
-      "method": "legacy calibration selected/inflected exposure; exact literal equality not asserted"
-    },
-    {
-      "passage_id": "fr-a1-u01-p02",
-      "form": "alors",
-      "stored_exposures": 1,
-      "literal_surface_occurrences": 3,
-      "method": "legacy calibration selected/inflected exposure; exact literal equality not asserted"
-    },
-    {
-      "passage_id": "fr-a1-u01-p03",
-      "form": "vouloir",
-      "stored_exposures": 1,
-      "literal_surface_occurrences": 0,
-      "method": "legacy calibration selected/inflected exposure; exact literal equality not asserted"
-    },
-    {
-      "passage_id": "fr-a1-u01-p04",
-      "form": "pouvoir",
-      "stored_exposures": 1,
-      "literal_surface_occurrences": 0,
-      "method": "legacy calibration selected/inflected exposure; exact literal equality not asserted"
-    },
-    {
-      "passage_id": "fr-a1-u01-p05",
-      "form": "là",
-      "stored_exposures": 1,
-      "literal_surface_occurrences": 2,
-      "method": "legacy calibration selected/inflected exposure; exact literal equality not asserted"
-    }
-  ],
+  "legacy_unit01_exposure_variances": [],
   "units": {
     "1": {
       "passages": 6,
@@ -222,6 +194,6 @@
   "method_notes": [
     "Source identity resolves direct validated surface form first, then explicit source lookup, then validated lemma for inflected reader forms.",
     "A curriculum intended_sense may narrow a validated polysemous root gloss when each normalized sense atom is supported by that root gloss; unsupported extensions require explicit verified adjudication.",
-    "Unit 01 predates the exact literal-surface exposure-count convention, so its positive exposure metadata is retained as legacy selected/inflected evidence and is cross-checked against lexical assessment use rather than rewritten."
+    "Exposure counts are exact Unicode-bounded counts of exposure_surface_forms when explicitly declared, otherwise of the canonical target form; Unit 01 is held to the same exact convention as later units."
   ]
 }

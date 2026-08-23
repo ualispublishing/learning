@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "status": "PASS_DETERMINISTIC_FRENCH_A1_EXPOSURE_NORMALIZATION_NEEDS_INDEPENDENT_REVIEW",
+  "before_sha256": "a1e19854469149d038dcaf41d0d8a6923081bddf2e5c6cd00675fa122d5c002f",
+  "after_sha256": "769bb4867e7f3571992378dca439d455aa9fb42586fcad0c61a35e185d5a3c78",
+  "repair_count": 5,
+  "changes": [
+    {
+      "passage_id": "fr-a1-u01-p02",
+      "target_id": "fr-rank-0061",
+      "canonical_form": "quand",
+      "lemma": "quand",
+      "before_exposures_in_text": 1,
+      "after_exposures_in_text": 4,
+      "exposure_surface_forms": [
+        "quand"
+      ],
+      "exposure_count_method": "exact_declared_surface_forms"
+    },
+    {
+      "passage_id": "fr-a1-u01-p02",
+      "target_id": "fr-rank-0063",
+      "canonical_form": "alors",
+      "lemma": "alors",
+      "before_exposures_in_text": 1,
+      "after_exposures_in_text": 3,
+      "exposure_surface_forms": [
+        "alors"
+      ],
+      "exposure_count_method": "exact_declared_surface_forms"
+    },
+    {
+      "passage_id": "fr-a1-u01-p03",
+      "target_id": "fr-rank-0023",
+      "canonical_form": "vouloir",
+      "lemma": "vouloir",
+      "before_exposures_in_text": 1,
+      "after_exposures_in_text": 3,
+      "exposure_surface_forms": [
+        "veut"
+      ],
+      "exposure_count_method": "exact_declared_surface_forms"
+    },
+    {
+      "passage_id": "fr-a1-u01-p04",
+      "target_id": "fr-rank-0021",
+      "canonical_form": "pouvoir",
+      "lemma": "pouvoir",
+      "before_exposures_in_text": 1,
+      "after_exposures_in_text": 6,
+      "exposure_surface_forms": [
+        "peut"
+      ],
+      "exposure_count_method": "exact_declared_surface_forms"
+    },
+    {
+      "passage_id": "fr-a1-u01-p05",
+      "target_id": "fr-rank-0057",
+      "canonical_form": "là",
+      "lemma": "là",
+      "before_exposures_in_text": 1,
+      "after_exposures_in_text": 2,
+      "exposure_surface_forms": [
+        "là"
+      ],
+      "exposure_count_method": "exact_declared_surface_forms"
+    }
+  ],
+  "learner_facing_text_changed": false,
+  "questions_changed": false,
+  "answers_changed": false,
+  "target_ids_changed": false,
+  "target_lemmas_changed": false,
+  "target_senses_changed": false,
+  "audit_policy_change": "Remove the Unit 01 grandfather exception and require exact Unicode-bounded exposure equality for all French A1 targets. Inflected realizations are counted only through explicit exposure_surface_forms metadata.",
+  "release_effect": "NONE_AUTOMATIC: deterministic normalization only; French remains REOPEN_REQUIRED and independent release reviews remain pending.",
+  "bound_sha256": "769bb4867e7f3571992378dca439d455aa9fb42586fcad0c61a35e185d5a3c78",
+  "generation_integrity_status": "PASS",
+  "remaining_legacy_exposure_variance_count": 0
+}

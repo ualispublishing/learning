@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "audit": "formal_protocol_gate_a_current_corpus",
+  "protocol": "reading/planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md §3",
+  "status": "PASS_DETERMINISTIC_FORMAL_GATE_A_NEEDS_LATER_RELEASE_GATES",
+  "bound_sha256": "8019fe53061a67faca527a50495d2188439da5142dd94a414a43e1a3986cf7f4",
+  "bound_git_blob": "6c1553acf3fb02f4a9e4c0f582262071d47bb4ed",
+  "scope": {
+    "passages": 60,
+    "questions": 600,
+    "answers": 600,
+    "review_target_checks": 182
+  },
+  "checks": {
+    "schema_valid_100_percent": true,
+    "identity_sequence_level_grid": true,
+    "question_answer_one_to_one": true,
+    "duplicate_prompts_within_passage_zero": true,
+    "word_band_and_stored_counts": true,
+    "assessment_targets_locally_declared": true,
+    "checkpoint_p06_zero_new": true,
+    "unicode_punctuation_sanity": true,
+    "learner_facing_hygiene": true,
+    "source_lexicons_unchanged_from_main": true,
+    "review_target_visibility_100_percent": true,
+    "review_target_chronology_and_stage_monotonicity": true,
+    "strict_source_rank_and_exact_exposure_integrity": true,
+    "future_target_leakage_rule": "NOT_APPLICABLE_NO_FRENCH_A1_PROHIBITION_RECORDED"
+  },
+  "blocker_count": 0,
+  "blockers": [],
+  "validator_correction": {
+    "issue": "Multiple-choice labels A)/B)/C) are not parentheses.",
+    "correction": "Standalone A)-D) option labels are removed before balancing real parentheses.",
+    "corpus_change_required": false
+  },
+  "source_lexicon_sha256": {
+    "french_top1000.csv": "db330c9afbbf5ff8c798f57701320a41308dfeb50dee0699d66afbe3ac400b00",
+    "french_top3000.csv": "fd8661b17263f8c104bbb0d430f6270e8ff85606c6b8d2c0c326144d7a7796db",
+    "reading/lexicons/french.jsonl": "f4c9391b79eb6feaf4c17dba66934285be193657819a91ba04b18cbd1bf53a1e",
+    "reading/lexicons/french_a1_support.json": "af619acd478e08e672bc93d19942c9944adb57390a58b4de0dddec769420d1d7"
+  },
+  "independent_review": {
+    "semantic_accuracy": "PENDING",
+    "french_naturalness_orthography": "PENDING",
+    "pedagogical_a1_fit": "PENDING",
+    "assessment_answer_grounding": "PENDING",
+    "independent_machine_tools": "PARTIAL: GRAMMALECTE CURRENT; LANGUAGETOOL MUST_REBIND_AFTER_HASH_CHANGE; ANTIDOTE/DEEPL_WRITE_PENDING",
+    "independent_model_family": "PENDING",
+    "native_professional": "PENDING",
+    "educator_release": "PENDING",
+    "blind_review": "PENDING"
+  },
+  "release_effect": "NONE_AUTOMATIC: formal Gate A is deterministic integrity only; French remains REOPEN_REQUIRED.",
+  "rebind_after_nbsp_typography_repair": {
+    "previous_sha256": "7dbdb48ffc6efd00106490ca9b10ad25643bf7e89967e8fbd2977a04641d6ea3",
+    "repair_commit": "97452efaec2a40255224f41e4259821c4c291bc5",
+    "typography_substitutions_verified": 1992,
+    "only_change_class": "ordinary ASCII space to U+00A0/U+202F no-break space in learner-facing fields",
+    "all_non_learner_record_content_identical": true,
+    "generation_integrity_rerun": "PASS",
+    "grammalecte_post_nbsp_findings": 0,
+    "grammalecte_non_nbsp_findings_preserved": 48,
+    "formal_invariants_rechecked": [
+      "identity/sequence/level grid",
+      "60/600/600 scope",
+      "question-answer linkage",
+      "duplicate prompts",
+      "checkpoint p06 zero-new",
+      "Unicode NFC",
+      "guillemet/parenthesis sanity",
+      "182 review-target count",
+      "strict generation source/rank/exposure integrity",
+      "bounded repair file set/no lexicon changes"
+    ]
+  }
+}

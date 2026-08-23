@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "language": "fr",
+  "level": "A1",
+  "review_kind": "internal_semantic_pedagogical_qa_review_units05_10",
+  "bound_before_sha256": "005354922bb7a88adce0c0e60f63d5b52099565c557d0a90914ff4f0d7447b80",
+  "scope": {
+    "units": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "passages": 36,
+    "questions": 360,
+    "answers": 360
+  },
+  "units": {
+    "5": {
+      "status": "NO_HIGH_CONFIDENCE_REPAIR_CONFIRMED",
+      "confirmed_finding_count": 0,
+      "review_candidate": "p05/q6 definition of ville as “une grande localité” is slightly narrow; defer to independent pedagogy."
+    },
+    "6": {
+      "status": "CONFIRMED_REPAIRS",
+      "confirmed_finding_count": 2,
+      "findings": [
+        "beaucoup metadata gloss contradicted the taught quantity sense",
+        "p06/q2 unnatural word order"
+      ]
+    },
+    "7": {
+      "status": "CONFIRMED_REPAIR",
+      "confirmed_finding_count": 1,
+      "findings": [
+        "p01/q5 answer used incomplete “elle est près” instead of grounding the complement"
+      ]
+    },
+    "8": {
+      "status": "CONFIRMED_REPAIRS",
+      "confirmed_finding_count": 3,
+      "findings": [
+        "p01 non-idiomatic hand-washing phrase",
+        "p02 misplaced toujours with infinitive",
+        "p03/q2 awkward beaucoup word order"
+      ]
+    },
+    "9": {
+      "status": "CONFIRMED_REPAIRS",
+      "confirmed_finding_count": 2,
+      "findings": [
+        "p02 body-part construction “son pied se sent mieux”",
+        "eau metadata omitted ordinary-water sense taught by passage"
+      ]
+    },
+    "10": {
+      "status": "CONFIRMED_REPAIR",
+      "confirmed_finding_count": 1,
+      "findings": [
+        "p05 shoe-shopping singular/plural wording was internally inconsistent and non-idiomatic"
+      ]
+    }
+  },
+  "authority_sources": [
+    {
+      "target": "beaucoup",
+      "url": "https://www.dictionnaire-academie.fr/article/A9B0705?history=0",
+      "finding": "Académie 9e defines quantity/abundance."
+    },
+    {
+      "target": "eau",
+      "url": "https://www.dictionnaire-academie.fr/article/A9E0003",
+      "finding": "Académie 9e defines ordinary water as the primary sense."
+    },
+    {
+      "target": "eau_usage",
+      "url": "https://www.dictionnaire-academie.fr/article/A9D0139",
+      "finding": "Académie usage guidance includes “Boire de l’eau fraîche”."
+    }
+  ],
+  "limitations": "Internal model review plus cited lexical authority. This is not native-professional, educator, blind, independent-model-family, or external-tool release approval.",
+  "release_effect": "NONE_AUTOMATIC: French remains REOPEN_REQUIRED; independent release gates remain mandatory."
+}

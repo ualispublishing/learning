@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-20",
+  "language": "fr",
+  "level": "A1",
+  "status": "BOUNDED_REPAIR_APPLIED_NEEDS_POSTREPAIR_AUDIT",
+  "before_sha256": "1cdb31ecb8b987c50051bb6f8fa5b2f7fda812cb3004c81ab8697f832fceacba",
+  "after_sha256": "714cf8d41df917d2deb745f1cd9e82586a75f59cdaa4bff2eb494144a5345037",
+  "canonical_records": 60,
+  "learner_facing_text_changed": false,
+  "questions_changed": false,
+  "answers_changed": false,
+  "review_declarations_removed": 18,
+  "review_stage_labels_corrected": 2,
+  "removed": [
+    {
+      "passage_id": "fr-a1-u01-p02",
+      "target_id": "fr-rank-0048",
+      "form": "ici",
+      "review_stage": "R1",
+      "representation": "running_text"
+    },
+    {
+      "passage_id": "fr-a1-u01-p02",
+      "target_id": "fr-rank-0047",
+      "form": "venir",
+      "review_stage": "R1",
+      "representation": "running_text"
+    },
+    {
+      "passage_id": "fr-a1-u01-p03",
+      "target_id": "fr-rank-0048",
+      "form": "ici",
+      "review_stage": "R2",
+      "representation": "running_text"
+    },
+    {
+      "passage_id": "fr-a1-u01-p03",
+      "target_id": "fr-rank-0047",
+      "form": "venir",
+      "review_stage": "R2",
+      "representation": "running_text"
+    },
+    {
+      "passage_id": "fr-a1-u01-p03",
+      "target_id": "fr-rank-0061",
+      "form": "quand",
+      "review_stage": "R1",
+      "representation": "running_text"
+    },
+    {
+      "passage_id": "fr-a1-u01-p03",
+      "target_id": "fr-rank-0063",
+      "form": "alors",
+      "review_stage": "R1",
+      "representation": "running_text"
+    },
+    {
+      "passage_id": "fr-a1-u01-p04",
+      "target_id": "fr-rank-0023",
+      "form": "vouloir",
+      "review_stage": "R1",
+      "representation": "running_text"
+    },
+    {
+      "passage_id": "fr-a1-u01-p05",
+      "target_id": "fr-rank-0048",
+      "form": "ici",
+      "review_stage": "R3",
+      "representation": "running_text"
+    },
+    {
+      "passage_id": "fr-a1-u01-p05",
+      "target_id": "fr-rank-0047",
+      "form": "venir",
+      "review_stage": "R3",
+      "representation": "running_text"
+    },
+    {
+      "passage_id": "fr-a1-u01-p05",
+      "target_id": "fr-rank-0061",
+      "form": "quand",
+      "review_stage": "R2",
+      "representation": "running_text"
+    },
+    {
+      "passage_id": "fr-a1-u01-p05",
+      "target_id": "fr-rank-0063",
+      "form": "alors",
+      "review_stage": "R2",
+      "representation": "running_text"
+    },
+    {
+      "passage_id": "fr-a1-u01-p05",
+      "target_id": "fr-rank-0023",
+      "form": "vouloir",
+      "review_stage": "R2",
+      "representation": "running_text"
+    },
+    {
+      "passage_id": "fr-a1-u01-p05",
+      "target_id": "fr-rank-0035",
+      "form": "avec",
+      "review_stage": "R2",
+      "representation": "running_text"
+    },
+    {
+      "passage_id": "fr-a1-u01-p05",
+      "target_id": "fr-rank-0021",
+      "form": "pouvoir",
+      "review_stage": "R1",
+      "representation": "running_text"
+    },
+    {
+      "passage_id": "fr-a1-u01-p06",
+      "target_id": "fr-rank-0063",
+      "form": "alors",
+      "review_stage": "R3",
+      "representation": "running_text"
+    },
+    {
+      "passage_id": "fr-a1-u03-p01",
+      "target_id": "fr-rank-0013",
+      "form": "aller",
+      "review_stage": "R2",
+      "representation": "production"
+    },
+    {
+      "passage_id": "fr-a1-u03-p04",
+      "target_id": "fr-rank-0038",
+      "form": "mon",
+      "review_stage": "R2",
+      "representation": "contrast"
+    },
+    {
+      "passage_id": "fr-a1-u05-p02",
+      "target_id": "fr-rank-0091",
+      "form": "temps",
+      "review_stage": "R2",
+      "representation": "running_text"
+    }
+  ],
+  "relabeled": [
+    {
+      "passage_id": "fr-a1-u01-p06",
+      "target_id": "fr-rank-0047",
+      "form": "venir",
+      "from": "R3",
+      "to": "R2",
+      "representation": "running_text"
+    },
+    {
+      "passage_id": "fr-a1-u01-p06",
+      "target_id": "fr-rank-0061",
+      "form": "quand",
+      "from": "R3",
+      "to": "R2",
+      "representation": "running_text"
+    }
+  ],
+  "known_unresolved_after_this_repair": [
+    {
+      "target_id": "fr-rank-0047",
+      "lemma": "venir",
+      "kind": "missing_later_R3_opportunity",
+      "severity": "major",
+      "note": "No natural learner-facing venir review was found in the intended +10-to-14 passage window. This repair does not fabricate one."
+    }
+  ],
+  "release_effect": "French remains REOPEN_REQUIRED pending postrepair visibility/chronology/exposure audits and all other release gates."
+}

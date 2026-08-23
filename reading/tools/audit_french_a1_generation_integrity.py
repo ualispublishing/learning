@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 CANON=ROOT/'reading/french/a1/passages.jsonl'; LEX=ROOT/'french_top1000.csv'
 OUT=ROOT/'reading/audit/french_a1_generation_integrity.json'
-OV={('fr-a1-u04-p01','autre'),('fr-a1-u04-p05','maison'),('fr-a1-u06-p04','jamais'),('fr-a1-u07-p04','droite')}
+OV={('fr-a1-u04-p01','autre'),('fr-a1-u04-p05','maison'),('fr-a1-u06-p01','beaucoup'),('fr-a1-u06-p04','jamais'),('fr-a1-u07-p04','droite'),('fr-a1-u09-p05','eau')}
 def deck():
  d={}
  with LEX.open(encoding='utf-8',newline='') as f:
@@ -55,11 +55,15 @@ def main():
     if norm(intended)!=norm(sense):
      if sense_supported(intended,sense):narrow.append({'passage_id':pid,'form':form,'lookup':lookup,'intended_sense':intended,'root_gloss':sense})
      else:bad.append(f'{pid}:{form}: unsupported reader sense | intended={intended!r} root={sense!r}')
-   actual=count(r['text'],form);stored=t.get('exposures_in_text')
-   if r.get('unit')==1:
-    if not isinstance(stored,int) or stored<1 or str(key) not in qtargets:bad.append(f'{pid}:{form}: invalid legacy calibration exposure evidence')
-    elif actual!=stored:legacy.append({'passage_id':pid,'form':form,'stored_exposures':stored,'literal_surface_occurrences':actual,'method':'legacy calibration selected/inflected exposure; exact literal equality not asserted'})
-   elif actual!=stored:bad.append(f'{pid}:{form}: exposure count')
+   declared_forms=t.get('exposure_surface_forms')
+   if declared_forms is None:declared_forms=[form]
+   if not isinstance(declared_forms,list) or not declared_forms or any(not isinstance(x,str) or not x for x in declared_forms) or len(declared_forms)!=len(set(declared_forms)):
+    bad.append(f'{pid}:{form}: invalid exposure_surface_forms');continue
+   method=t.get('exposure_count_method')
+   if method is not None and method!='exact_declared_surface_forms':bad.append(f'{pid}:{form}: unsupported exposure_count_method {method!r}')
+   actual=sum(count(r['text'],surface) for surface in declared_forms);stored=t.get('exposures_in_text')
+   if not isinstance(stored,int) or stored<1 or actual!=stored:
+    bad.append(f'{pid}:{form}: exposure count | surfaces={declared_forms!r} stored={stored!r} actual={actual}')
  for r in rows:
   for t in r.get('review_lexical_targets',[]):
    x=seen.get(t.get('id'))
@@ -67,7 +71,7 @@ def main():
  if len(seen)!=100:bad.append(f'new target total {len(seen)} != 100')
  if ovs!=OV:bad.append(f'override set {sorted(ovs)}')
  units={str(u):{'passages':sum(r['unit']==u for r in rows),'new_targets':sum(len(r.get('new_lexical_targets',[])) for r in rows if r['unit']==u)} for u in range(1,11)}
- payload={'status':'PASS' if not bad else 'FAIL','scope':'French A1 generation milestone','passages':len(rows),'questions':sum(len(r['questions']) for r in rows),'answers':sum(len(r['answer_key']) for r in rows),'new_targets':len(seen),'verified_sense_overrides':[{'passage_id':p,'form':f} for p,f in sorted(ovs)],'validated_root_gloss_narrowings':narrow,'legacy_unit01_exposure_variances':legacy,'units':units,'failures':bad,'coverage_note':'estimated_known_token_coverage remains unmeasured placeholder data; no percentage is inferred','full_final_audit_deferred':True,'method_notes':['Source identity resolves direct validated surface form first, then explicit source lookup, then validated lemma for inflected reader forms.','A curriculum intended_sense may narrow a validated polysemous root gloss when each normalized sense atom is supported by that root gloss; unsupported extensions require explicit verified adjudication.','Unit 01 predates the exact literal-surface exposure-count convention, so its positive exposure metadata is retained as legacy selected/inflected evidence and is cross-checked against lexical assessment use rather than rewritten.']}
+ payload={'status':'PASS' if not bad else 'FAIL','scope':'French A1 generation milestone','passages':len(rows),'questions':sum(len(r['questions']) for r in rows),'answers':sum(len(r['answer_key']) for r in rows),'new_targets':len(seen),'verified_sense_overrides':[{'passage_id':p,'form':f} for p,f in sorted(ovs)],'validated_root_gloss_narrowings':narrow,'legacy_unit01_exposure_variances':legacy,'units':units,'failures':bad,'coverage_note':'estimated_known_token_coverage remains unmeasured placeholder data; no percentage is inferred','full_final_audit_deferred':True,'method_notes':['Source identity resolves direct validated surface form first, then explicit source lookup, then validated lemma for inflected reader forms.','A curriculum intended_sense may narrow a validated polysemous root gloss when each normalized sense atom is supported by that root gloss; unsupported extensions require explicit verified adjudication.','Exposure counts are exact Unicode-bounded counts of exposure_surface_forms when explicitly declared, otherwise of the canonical target form; Unit 01 is held to the same exact convention as later units.']}
  OUT.parent.mkdir(parents=True,exist_ok=True);OUT.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
  print(json.dumps({'status':payload['status'],'failures':len(bad),'root_gloss_narrowings':len(narrow),'legacy_exposure_variances':len(legacy),'verified_overrides':len(ovs)},ensure_ascii=False))
  if bad:
