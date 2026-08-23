@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "ur",
+  "level": "A1",
+  "repair_kind": "learner_facing_answer_explanation_hygiene",
+  "before_sha256": "e4c996dbd9fc9808eed0a29c66aa5d7114543b5bb7ccc34d5bcd1de6b9d5cf8c",
+  "after_sha256": "d513cf0dcd19d6c283da2cb2e45d07dc8715e6d71eca18783f84cab3cb45b9bd",
+  "repair_count": 3,
+  "repairs": [
+    {
+      "passage_id": "ur-a1-u01-p04",
+      "question_id": "q6",
+      "answer_id": "a6",
+      "prompt": "«اگر دروازہ کھلا ہو تو ہم اندر جائیں گے» میں اندر جانے کی شرط کیا ہے؟",
+      "answer": "دروازہ کھلا ہونا۔",
+      "before_explanation": "یہ سوال «اگر» کے استعمال کو عملی شرط کے طور پر جانچتا ہے، نحوی اصطلاح نہیں مانگتا۔",
+      "after_explanation": "دروازہ کھلا ہونا اندر جانے کی شرط ہے۔"
+    },
+    {
+      "passage_id": "ur-a1-u01-p06",
+      "question_id": "q8",
+      "answer_id": "a8",
+      "prompt": "اگر موسم اچھا ہو تو عائشہ اتوار کو کیا کرتی ہے؟",
+      "answer": "وہ پارک جاتی ہے۔",
+      "before_explanation": "یہ سوال «اگر» کے معنی کو عبارت کے نتیجے کے ساتھ جوڑتا ہے۔",
+      "after_explanation": "موسم اچھا ہو تو عائشہ اتوار کو پارک جاتی ہے۔"
+    },
+    {
+      "passage_id": "ur-a1-u02-p03",
+      "question_id": "q8",
+      "answer_id": "a8",
+      "prompt": "«کیا تم میری مدد کر سکتی ہو؟» کا مناسب مختصر جواب کون سا ہے: «ہاں، کر سکتی ہوں» یا «سات بجے»؟",
+      "answer": "«ہاں، کر سکتی ہوں»۔",
+      "before_explanation": "«کیا» سے بنا یہ سوال ہاں یا نہیں کے جواب کے لیے استعمال ہوا ہے۔",
+      "after_explanation": "یہاں مناسب مختصر جواب «ہاں، کر سکتی ہوں» ہے۔"
+    }
+  ],
+  "preservation": {
+    "passage_prose_unchanged": true,
+    "titles_unchanged": true,
+    "question_prompts_types_targets_unchanged": true,
+    "answer_texts_unchanged": true,
+    "lexical_target_declarations_unchanged": true,
+    "review_schedules_unchanged": true
+  },
+  "verification": {
+    "passages": 60,
+    "questions": 600,
+    "answers": 600,
+    "qa_linkage_valid": true,
+    "learner_explanation_internal_review_leakage_zero": true,
+    "learner_facing_roman_script_zero": true
+  },
+  "status": "PASS_BOUNDED_EXPLANATION_HYGIENE_REPAIR_NEEDS_INDEPENDENT_REVIEW",
+  "release_effect": "NONE_AUTOMATIC: independent Urdu semantic/native/educator review remains pending."
+}

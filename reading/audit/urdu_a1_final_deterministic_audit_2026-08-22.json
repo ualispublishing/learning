@@ -1,44 +1,35 @@
 {
   "audit": "urdu_a1_final_deterministic_audit",
-  "generated_at_utc": "2026-08-23T00:53:31.215419+00:00",
-  "status": "PASS_DETERMINISTIC_POST_METALINGUISTIC_REPAIR_NEEDS_INDEPENDENT_REVIEW",
-  "scope": "Fresh complete deterministic audit after corpus-wide Urdu A1 metalinguistic candidate adjudication and bounded Q/A repairs; no native-speaker, independent-model, educator, or release approval.",
+  "generated_at_utc": "2026-08-23T13:12:27.851986+00:00",
+  "status": "PASS_DETERMINISTIC_POST_EXPLANATION_HYGIENE_NEEDS_INDEPENDENT_REVIEW",
+  "scope": "Fresh deterministic audit after bounded learner-facing answer-explanation hygiene repair; no native-speaker, independent-model, educator, or release approval.",
   "source": {
     "path": "reading/urdu/a1/passages.jsonl",
-    "actual_sha256": "e4c996dbd9fc9808eed0a29c66aa5d7114543b5bb7ccc34d5bcd1de6b9d5cf8c",
+    "actual_sha256": "d513cf0dcd19d6c283da2cb2e45d07dc8715e6d71eca18783f84cab3cb45b9bd",
     "hash_bound": true,
-    "prior_sha256": "9519a085ba046e71cafcc55a0a98f4d5517f2ec86d138f664727cac2d753d892",
-    "adjudication": "reading/audit/urdu_a1_metalinguistic_adjudication_2026-08-22.json"
+    "prior_sha256": "e4c996dbd9fc9808eed0a29c66aa5d7114543b5bb7ccc34d5bcd1de6b9d5cf8c",
+    "repair_evidence": "reading/audit/urdu_a1_learner_explanation_hygiene_repair_2026-08-23.json"
   },
   "counts": {
     "passages": 60,
     "questions": 600,
     "answers": 600,
     "units": 10,
-    "new_lexical_target_declarations": 100,
     "formal_task_types": 0,
     "learner_facing_roman_script_findings": 0,
-    "exact_target_visibility_misses": 0,
-    "premature_future_target_exposures": 0,
+    "learner_explanation_internal_review_leakage_findings": 0,
     "violations": 0
   },
   "checks": {
     "passage_count_exact_60": true,
     "sequences_contiguous_1_60": true,
-    "units_exact_1_10_and_six_each": true,
     "ten_questions_answers_and_linkage": true,
-    "duplicate_prompts_zero": true,
-    "question_targets_local": true,
-    "new_target_ids_unique": true,
-    "target_visibility_exact_token": true,
-    "p06_review_policy": true,
-    "premature_future_target_exposure_zero": true,
     "learner_facing_roman_script_zero": true,
-    "grammar_category_and_grammar_function_types_zero": true
+    "learner_explanation_internal_review_leakage_zero": true
   },
   "violations": [],
   "review_frontier": {
-    "internal_units01_02_semantic_qa_pedagogy": "COMPLETE_INTERNAL",
+    "internal_units01_02_semantic_qa_pedagogy": "COMPLETE_INTERNAL_WITH_EXPLANATION_HYGIENE_REPAIR",
     "metalinguistic_class_corpus_wide": "ADJUDICATED_INTERNAL",
     "units03_10_full_semantic_naturalness_answer_pedagogy": "PENDING_INTERNAL",
     "native_urdu_naturalness_orthography": "PENDING",
