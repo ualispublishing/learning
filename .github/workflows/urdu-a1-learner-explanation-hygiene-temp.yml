@@ -32,7 +32,7 @@ jobs:
           import hashlib,json,re
 
           corpus=Path('reading/urdu/a1/passages.jsonl')
-          expected='e6450c04b6aa7d47b501e0cfbf2664fa37b2e95490ab363945f7d757dfa34a1d'
+          expected='e4c996dbd9fc9808eed0a29c66aa5d7114543b5bb7ccc34d5bcd1de6b9d5cf8c'
           got=hashlib.sha256(corpus.read_bytes()).hexdigest()
           if got!=expected: raise SystemExit(f'FAIL CLOSED corpus drift {got}')
           rows=[json.loads(x) for x in corpus.read_text(encoding='utf-8').splitlines() if x.strip()]
