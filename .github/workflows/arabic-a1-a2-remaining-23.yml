@@ -5,12 +5,14 @@ on:
     branches: [audit/arabic-a1-a2-integrated-2026-08-23]
     paths:
       - 'reading/tools/extract_arabic_a1_a2_remaining_23.py'
+      - 'reading/tools/summarize_arabic_remaining_23.py'
       - '.github/workflows/arabic-a1-a2-remaining-23.yml'
   pull_request:
     branches: [main]
     types: [opened, reopened, synchronize]
     paths:
       - 'reading/tools/extract_arabic_a1_a2_remaining_23.py'
+      - 'reading/tools/summarize_arabic_remaining_23.py'
       - '.github/workflows/arabic-a1-a2-remaining-23.yml'
 
 permissions:
@@ -36,11 +38,13 @@ jobs:
           python-version: '3.12'
       - name: Extract compact blocker manifest
         run: python reading/tools/extract_arabic_a1_a2_remaining_23.py
-      - name: Commit blocker manifest
+      - name: Build concise decision sheet
+        run: python reading/tools/summarize_arabic_remaining_23.py
+      - name: Commit blocker manifest and summary
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add reading/audit/arabic_a1_a2_remaining_23_2026-08-23.json
+          git add reading/audit/arabic_a1_a2_remaining_23_2026-08-23.json reading/audit/arabic_a1_a2_remaining_23_summary_2026-08-23.md
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "Extract Arabic A1/A2 remaining blockers [skip ci]"
           git fetch origin audit/arabic-a1-a2-integrated-2026-08-23
