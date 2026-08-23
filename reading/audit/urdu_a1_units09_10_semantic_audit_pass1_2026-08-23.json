@@ -1,0 +1,312 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "language": "urdu",
+  "level": "A1",
+  "scope": {
+    "canonical_path": "reading/urdu/a1/passages.jsonl",
+    "canonical_blob_sha": "16507c293ae39cd44f7f5136dd00c9ef029646a7",
+    "sequences": [49, 60],
+    "passage_ids": [
+      "ur-a1-u09-p01",
+      "ur-a1-u09-p02",
+      "ur-a1-u09-p03",
+      "ur-a1-u09-p04",
+      "ur-a1-u09-p05",
+      "ur-a1-u09-p06",
+      "ur-a1-u10-p01",
+      "ur-a1-u10-p02",
+      "ur-a1-u10-p03",
+      "ur-a1-u10-p04",
+      "ur-a1-u10-p05",
+      "ur-a1-u10-p06"
+    ]
+  },
+  "audit_type": "manual_semantic_linguistic_pedagogical_pass_1",
+  "status": "REPAIR_REQUIRED",
+  "release_effect": "This is detection evidence only. It does not approve the passages, change quality metadata, or certify educator release.",
+  "rubric": [
+    "natural contemporary standard Urdu",
+    "grammar and case morphology",
+    "lexical sense and collocation",
+    "A1-appropriate question wording",
+    "answer-key correctness",
+    "operational rather than abstract metalinguistic assessment",
+    "checkpoint propagation of earlier defects"
+  ],
+  "confirmed_defect_classes": [
+    {
+      "class": "oblique_case_daurah",
+      "description": "دورہ is repeatedly left in direct form before postpositions/possessive constructions where دورے is required.",
+      "corpus_search_required": true
+    },
+    {
+      "class": "forced_lexical_target_usage",
+      "description": "Target/review vocabulary is sometimes inserted into contexts where standard Urdu would choose a different construction, especially مقدار in banking, word-count, and habit-frequency contexts.",
+      "corpus_search_required": true
+    },
+    {
+      "class": "a1_metalinguistic_abstraction",
+      "description": "Some A1 questions ask for abstract semantic/function descriptions instead of operational use, contrary to the Ten-Question Standard.",
+      "corpus_search_required": true
+    },
+    {
+      "class": "cloze_answer_morphology_or_collocation",
+      "description": "At least two cloze items produce incorrect or materially unnatural learner-facing Urdu when the keyed answer is inserted.",
+      "corpus_search_required": true
+    }
+  ],
+  "findings": [
+    {
+      "id": "U9P01-01",
+      "passage_id": "ur-a1-u09-p01",
+      "severity": "minor",
+      "field": "text/questions",
+      "original": ["اس دورہ میں", "دورہ کے دوران", "اگلے دورہ کا دن"],
+      "correction": ["اس دورے میں", "دورے کے دوران", "اگلے دورے کا دن"],
+      "reason": "Oblique case is required in these constructions. Recalculate declared target exposures after repair."
+    },
+    {
+      "id": "U9P01-02",
+      "passage_id": "ur-a1-u09-p01",
+      "severity": "major",
+      "field": "q10/a10",
+      "original": "مجھے یہ کتاب مریم کو _____ ہے۔ -> دینا",
+      "correction": "میں یہ کتاب مریم کو _____ چاہتی ہوں۔ -> دینا",
+      "reason": "With مجھے ... کتاب ... ہے, the required form is دینی, so the current keyed answer teaches incorrect agreement. The proposed rewrite preserves the infinitive target دینا naturally."
+    },
+    {
+      "id": "U9P01-03",
+      "passage_id": "ur-a1-u09-p01",
+      "severity": "minor",
+      "field": "text",
+      "original": "خالہ کے گھر ایک مختصر دورہ کرتی ہے",
+      "correction": "خالہ کے گھر جاتی ہے۔ یہ ایک مختصر دورہ ہے",
+      "reason": "The original is understandable but stilted for an ordinary family visit. Repair should preserve/recount target exposure."
+    },
+    {
+      "id": "U9P02-01",
+      "passage_id": "ur-a1-u09-p02",
+      "severity": "major",
+      "field": "text/questions",
+      "original": ["جمع کرانے والی رقم کی مقدار", "رسید پر مقدار", "مقدار دوبارہ بتاتا ہے", "بینک میں مقدار"],
+      "correction": "Redesign the مقدار teaching context around a noun that naturally takes quantity/amount (for example پانی, چاول, چینی, خوراک) or remove مقدار as a deliberate target/review from this banking passage and reschedule it.",
+      "reason": "The repeated financial collocations are forced and unidiomatic; رقم itself already expresses a sum/amount. Repetition would teach unnatural Urdu."
+    },
+    {
+      "id": "U9P02-02",
+      "passage_id": "ur-a1-u09-p02",
+      "severity": "minor",
+      "field": "text",
+      "original": "ایک ملازم لوگوں کو قطار دکھاتا ہے",
+      "correction": "ایک ملازم لوگوں کو بتاتا ہے کہ کہاں کھڑا ہونا ہے",
+      "reason": "Natural A1 phrasing; قطار دکھانا is awkward here."
+    },
+    {
+      "id": "U9P03-01",
+      "passage_id": "ur-a1-u09-p03",
+      "severity": "major",
+      "field": "q4/a4",
+      "original": "متن میں «بالکل» کیا معنی بڑھاتا ہے؟ -> یہ مکمل یقین یا واضح موافقت دکھاتا ہے۔",
+      "correction": "عائشہ کہتی ہے: «ہاں، بالکل آؤں گی۔» یہاں «بالکل» کیا بتاتا ہے؟ الف) وہ ضرور آئے گی ب) شاید آئے گی ج) نہیں آئے گی -> الف",
+      "reason": "The original requires abstract metalinguistic interpretation and vocabulary (مکمل یقین، واضح موافقت) beyond an operational A1 task."
+    },
+    {
+      "id": "U9P03-02",
+      "passage_id": "ur-a1-u09-p03",
+      "severity": "minor",
+      "field": "q6",
+      "original": "«ہاں» کا بنیادی استعمال کیا ہے؟",
+      "correction": "اگر کوئی پوچھے «کیا تم آؤ گی؟» تو مثبت جواب کے لیے کون سا لفظ کہیں گے؟",
+      "reason": "Operational use is more appropriate than function-label recall at A1."
+    },
+    {
+      "id": "U9P04-01",
+      "passage_id": "ur-a1-u09-p04",
+      "severity": "minor",
+      "field": "q1/a1",
+      "original": "اس منصوبے میں عائشہ کیا مکمل کرتی ہے؟ -> ایک چھوٹا اسکول منصوبہ۔",
+      "correction": "عائشہ اسکول کے بعد کیا مکمل کرتی ہے؟ -> اسکول کا ایک چھوٹا منصوبہ۔",
+      "reason": "Both the prompt and noun phrase are more natural after repair."
+    },
+    {
+      "id": "U9P04-02",
+      "passage_id": "ur-a1-u09-p04",
+      "severity": "minor",
+      "field": "q8",
+      "original": "عائشہ اور مریم باقی کام کے ساتھ کیا کرتی ہیں؟",
+      "correction": "عائشہ اور مریم باقی کام کا کیا کرتی ہیں؟",
+      "reason": "کے ساتھ is the wrong relation for the intended question."
+    },
+    {
+      "id": "U9P04-03",
+      "passage_id": "ur-a1-u09-p04",
+      "severity": "minor",
+      "field": "text",
+      "original": "آخر میں ان کی محنت کامیاب ہوتی ہے",
+      "correction": "آخر میں وہ محنت سے کام کامیابی کے ساتھ مکمل کر لیتی ہیں",
+      "reason": "محنت کامیاب ہونا is an unnatural collocation in this context."
+    },
+    {
+      "id": "U9P05-01",
+      "passage_id": "ur-a1-u09-p05",
+      "severity": "major",
+      "field": "q10/a10",
+      "original": "روز چلنے کا ایک _____ صحت ہے۔ -> فائدہ",
+      "correction": "روز چلنے کا ایک _____ یہ ہے کہ صحت بہتر رہتی ہے۔ -> فائدہ",
+      "reason": "The keyed completion creates the unnatural sentence روز چلنے کا ایک فائدہ صحت ہے."
+    },
+    {
+      "id": "U9P05-02",
+      "passage_id": "ur-a1-u09-p05",
+      "severity": "minor",
+      "field": "text",
+      "original": "بہتر حالت کے لیے مرمت ضروری ہے",
+      "correction": "پنکھے کی حالت بہتر کرنے کے لیے مرمت ضروری ہے",
+      "reason": "The repaired version makes the relation explicit and natural."
+    },
+    {
+      "id": "U9P06-01",
+      "passage_id": "ur-a1-u09-p06",
+      "severity": "minor",
+      "field": "text/q2",
+      "original": "خاندان کے دورہ میں",
+      "correction": "خاندان کے دورے میں",
+      "reason": "Oblique case is required."
+    },
+    {
+      "id": "U9P06-02",
+      "passage_id": "ur-a1-u09-p06",
+      "severity": "major",
+      "field": "text/q3",
+      "original": "بینک میں اس نے رقم کی مقدار دیکھی",
+      "correction": "Rewrite after U9P02 مقدار-context repair; the checkpoint must review only a natural, verified use of مقدار.",
+      "reason": "The cumulative passage propagates the same forced collocation from U9P02."
+    },
+    {
+      "id": "U9P06-03",
+      "passage_id": "ur-a1-u09-p06",
+      "severity": "minor",
+      "field": "text",
+      "original": "بینک کے کاغذ صاف رکھنا",
+      "correction": "بینک کی رسید اور دوسرے کاغذات سنبھال کر رکھنا",
+      "reason": "صاف رکھنا does not express the intended record-keeping idea clearly."
+    },
+    {
+      "id": "U9P06-04",
+      "passage_id": "ur-a1-u09-p06",
+      "severity": "minor",
+      "field": "q7",
+      "original": "گھر میں عائشہ نے پنکھے کی کیا چیز دیکھی؟",
+      "correction": "گھر میں عائشہ نے پنکھے کے بارے میں کیا دیکھا؟",
+      "reason": "The original question is awkward and treats حالت as a 'thing'."
+    },
+    {
+      "id": "U10P01-01",
+      "passage_id": "ur-a1-u10-p01",
+      "severity": "minor",
+      "field": "text/q8/a8",
+      "original": "پچھلے دورہ میں",
+      "correction": "پچھلے دورے میں",
+      "reason": "Oblique case is required. Recalculate review exposure if exact-form accounting is used."
+    },
+    {
+      "id": "U10P01-02",
+      "passage_id": "ur-a1-u10-p01",
+      "severity": "minor",
+      "field": "text",
+      "original": "پیلے رنگ کی قطار",
+      "correction": "پیلے پھولوں کی قطار",
+      "reason": "The row consists of flowers, not 'yellow colour'; the original is semantically compressed and unnatural."
+    },
+    {
+      "id": "U10P02-01",
+      "passage_id": "ur-a1-u10-p02",
+      "severity": "major",
+      "field": "text/a1",
+      "original": ["اردو کی زبان کے ساتھ ایک نیا لفظ سیکھتی ہے", "اردو کی زبان میں ایک نیا لفظ"],
+      "correction": ["آج عائشہ اردو کا ایک نیا لفظ سیکھتی ہے", "اردو کا ایک نیا لفظ"],
+      "reason": "اردو کی زبان and زبان کے ساتھ are redundant/unnatural in this context. Preserve natural separate exposures of the target زبان elsewhere in the passage and recount them."
+    },
+    {
+      "id": "U10P02-02",
+      "passage_id": "ur-a1-u10-p02",
+      "severity": "major",
+      "field": "text/q8",
+      "original": "لفظ کی مقدار نہیں، درست استعمال اہم ہے / لفظ کی مقدار کے بارے میں",
+      "correction": "الفاظ کی تعداد نہیں، درست استعمال اہم ہے; remove مقدار as a forced review target from this passage unless a separate natural quantity context is added.",
+      "reason": "لفظ کی مقدار is not natural standard Urdu for number of words. This is a repeated forced-target defect class."
+    },
+    {
+      "id": "U10P03-01",
+      "passage_id": "ur-a1-u10-p03",
+      "severity": "minor",
+      "field": "text/a7",
+      "original": "بالکل ہمیشہ نہیں",
+      "correction": "ہر بار نہیں",
+      "reason": "The original is understandable but stilted. If بالکل must be reviewed here, redesign the sentence rather than forcing the collocation."
+    },
+    {
+      "id": "U10P04-01",
+      "passage_id": "ur-a1-u10-p04",
+      "severity": "minor",
+      "field": "a3",
+      "original": "کسی شخص سے طے شدہ ملنا",
+      "correction": "کسی سے ملنے کا طے شدہ موقع",
+      "reason": "The original definition is grammatically awkward for the noun ملاقات."
+    },
+    {
+      "id": "U10P04-02",
+      "passage_id": "ur-a1-u10-p04",
+      "severity": "minor",
+      "field": "text",
+      "original": "دونوں پیغام میں وقت طے کرتی ہیں",
+      "correction": "دونوں پیغام کے ذریعے وقت طے کرتی ہیں",
+      "reason": "کے ذریعے expresses the intended medium naturally."
+    },
+    {
+      "id": "U10P06-01",
+      "passage_id": "ur-a1-u10-p06",
+      "severity": "major",
+      "field": "q4",
+      "original": "عادت کی مقدار بتانے کے لیے کون سے دو الفاظ آتے ہیں؟",
+      "correction": "کوئی کام کتنی بار ہوتا ہے، یہ بتانے کے لیے کون سے دو الفاظ آتے ہیں؟",
+      "reason": "عادت کی مقدار is an unnatural semantic framing. The repaired question operationally tests ہمیشہ/اکثر at A1."
+    },
+    {
+      "id": "U10P06-02",
+      "passage_id": "ur-a1-u10-p06",
+      "severity": "minor",
+      "field": "text",
+      "original": "جانتی ہے کہ زبان آہستہ آہستہ بہتر ہوتی ہے",
+      "correction": "دیکھتی ہے کہ اس کی اردو آہستہ آہستہ بہتر ہوتی ہے",
+      "reason": "A learner's proficiency improves; the language itself is not what is improving in this scene."
+    },
+    {
+      "id": "U10P06-03",
+      "passage_id": "ur-a1-u10-p06",
+      "severity": "minor",
+      "field": "text",
+      "original": "واضح ہدایت، اچھی ملاقات اور نئی زبان کی مشق سب فائدہ دیتے ہیں",
+      "correction": "ان سب چیزوں سے فائدہ ہوتا ہے",
+      "reason": "The original coordination is stilted and creates avoidable agreement/collocation awkwardness."
+    }
+  ],
+  "passage_without_confirmed_finding_in_this_pass": ["ur-a1-u10-p05"],
+  "summary": {
+    "passages_reviewed": 12,
+    "findings": 25,
+    "major": 8,
+    "minor": 17,
+    "critical": 0,
+    "passages_with_findings": 11,
+    "passages_without_confirmed_finding": 1
+  },
+  "required_next_actions": [
+    "Run corpus-wide searches for each confirmed defect class before limiting repairs to Units 09-10.",
+    "Create a bounded repair manifest containing exact affected passage IDs and fields.",
+    "For every accepted repair, rerun question-answer linkage, schema, target exposure/review chronology, level integrity, and lexical coverage checks.",
+    "Do not bulk-change pending quality fields to pass.",
+    "Continue the remaining distinct Urdu A1 final-audit passes after the bounded repair and regression cycle."
+  ]
+}
