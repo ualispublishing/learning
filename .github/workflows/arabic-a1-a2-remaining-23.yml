@@ -6,22 +6,29 @@ on:
     paths:
       - 'reading/tools/extract_arabic_a1_a2_remaining_23.py'
       - '.github/workflows/arabic-a1-a2-remaining-23.yml'
+  pull_request:
+    branches: [main]
+    types: [opened, reopened, synchronize]
+    paths:
+      - 'reading/tools/extract_arabic_a1_a2_remaining_23.py'
+      - '.github/workflows/arabic-a1-a2-remaining-23.yml'
 
 permissions:
   contents: write
 
 concurrency:
-  group: arabic-a1-a2-remaining-23
+  group: arabic-a1-a2-remaining-23-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: false
 
 jobs:
   extract:
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: audit/arabic-a1-a2-integrated-2026-08-23
+          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
           fetch-depth: 0
           persist-credentials: true
       - uses: actions/setup-python@v5
