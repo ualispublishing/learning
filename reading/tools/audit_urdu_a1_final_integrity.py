@@ -7,19 +7,33 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 PATH = ROOT / 'reading' / 'urdu' / 'a1' / 'passages.jsonl'
 REPORT = ROOT / 'reading' / 'audit' / 'urdu_a1_final_integrity_2026-08-23.json'
-EXPECTED = 'ae420dda7b2f0893eac4b5a030ffc639a5f2d2ad'
+EXPECTED = '293cdb4ec7855f2c34583e29e47775424faad8b4'
+
+ALLOWED_QUESTION_TYPES = {
+    'gist', 'literal_detail', 'cause_effect', 'vocabulary_in_context',
+    'single_word_definition', 'sequence', 'cloze_transfer', 'contrast',
+    'summary', 'reference_resolution', 'conditional_comprehension'
+}
+ALLOWED_REVIEW_STAGES = {'R1', 'R2', 'R3', 'R4', 'long_term'}
+QUALITY_GATES = ('answer_key_check', 'coverage_check', 'linguistic_review', 'pedagogical_review', 'schema_check')
 
 
 def blob(path):
     return subprocess.check_output(['git', 'hash-object', str(path)], text=True).strip()
 
 
+def exact_form_count(text, form):
+    if not form:
+        return 0
+    return len(re.findall(rf'(?<!\w){re.escape(form)}(?!\w)', text, flags=re.UNICODE | re.IGNORECASE))
+
+
 def answer_parts(answer):
-    return [x.strip() for x in answer.split('؛')]
+    return [x.strip() for x in str(answer).split('؛')]
 
 
 def sentence_count(text):
-    return sum(text.count(x) for x in ('۔', '؟', '!'))
+    return sum(text.count(x) for x in ('۔', '؟', '?', '!'))
 
 
 def add_error(errors, code, **detail):
@@ -38,7 +52,6 @@ except Exception as exc:
 
 if actual_blob != EXPECTED:
     add_error(hard_errors, 'unexpected_input_blob', expected=EXPECTED, actual=actual_blob)
-
 if len(rows) != 60:
     add_error(hard_errors, 'passage_count', expected=60, actual=len(rows))
 
@@ -59,9 +72,8 @@ quality_status_counts = Counter()
 question_type_counts = Counter()
 new_target_exposure_checks = []
 review_presence_checks = []
-reconstructed_clozes = []
+duplicate_prompt_checks = []
 
-allowed_review_stages = {'R1', 'R2', 'R3', 'R4', 'long_term'}
 for row in rows:
     rid = row.get('id')
     seq = row.get('sequence')
@@ -78,7 +90,9 @@ for row in rows:
     if rid != expected_id:
         add_error(hard_errors, 'passage_id_sequence_mismatch', passage_id=rid, expected=expected_id)
 
-    text = row.get('text', '')
+    text = str(row.get('text', ''))
+    if not text.strip():
+        add_error(hard_errors, 'empty_passage_text', passage_id=rid)
     wc = len(re.findall(r'\S+', text))
     if row.get('word_count') != wc:
         add_error(hard_errors, 'word_count_mismatch', passage_id=rid, metadata=row.get('word_count'), calculated=wc)
@@ -106,11 +120,33 @@ for row in rows:
     if len(set(aids)) != len(aids):
         add_error(hard_errors, 'duplicate_answer_ids', passage_id=rid)
 
+    prompt_counts = Counter(str(q.get('prompt', '')).strip() for q in questions)
+    dup_prompts = [p for p, n in prompt_counts.items() if p and n > 1]
+    duplicate_prompt_checks.append({'passage_id': rid, 'duplicates': dup_prompts})
+    if dup_prompts:
+        add_error(hard_errors, 'duplicate_question_prompts', passage_id=rid, duplicates=dup_prompts)
+
     by_q = {a.get('question_id'): a for a in answers}
+    if len(by_q) != len(answers):
+        add_error(hard_errors, 'duplicate_answer_question_backlinks', passage_id=rid)
+
+    new_targets = row.get('new_lexical_targets', [])
+    review_targets = row.get('review_lexical_targets', [])
+    if expected_p == 6 and new_targets:
+        add_error(hard_errors, 'checkpoint_has_new_lexical_targets', passage_id=rid, target_ids=[t.get('id') for t in new_targets])
+    local_target_ids = {t.get('id') for t in new_targets} | {t.get('id') for t in review_targets}
+
     for q in questions:
         qid = q.get('id')
         qtype = q.get('type')
         question_type_counts[qtype] += 1
+        if qtype not in ALLOWED_QUESTION_TYPES:
+            add_error(hard_errors, 'unknown_or_disallowed_question_type', passage_id=rid, question_id=qid, type=qtype)
+        if qtype in {'grammar_function', 'grammar_category'}:
+            add_error(hard_errors, 'explicit_grammar_label_type', passage_id=rid, question_id=qid, type=qtype)
+        if not str(q.get('prompt', '')).strip():
+            add_error(hard_errors, 'empty_question_prompt', passage_id=rid, question_id=qid)
+
         a = by_q.get(qid)
         if not a:
             add_error(hard_errors, 'missing_answer_for_question', passage_id=rid, question_id=qid)
@@ -119,21 +155,22 @@ for row in rows:
             add_error(hard_errors, 'qa_link_mismatch', passage_id=rid, question_id=qid, question_answer_id=q.get('answer_id'), actual_answer_id=a.get('id'))
         if a.get('question_id') != qid:
             add_error(hard_errors, 'answer_backlink_mismatch', passage_id=rid, question_id=qid, answer_id=a.get('id'))
+        if not str(a.get('answer', '')).strip():
+            add_error(hard_errors, 'empty_answer', passage_id=rid, question_id=qid)
 
         tids = q.get('target_ids', [])
         if not isinstance(tids, list):
             add_error(hard_errors, 'target_ids_not_list', passage_id=rid, question_id=qid)
-        else:
-            for tid in tids:
-                if not re.fullmatch(r'ur-rank-\d{4}', str(tid)):
-                    add_error(hard_errors, 'malformed_question_target_id', passage_id=rid, question_id=qid, target_id=tid)
-
-        if qtype in {'grammar_function', 'grammar_category'}:
-            add_error(hard_errors, 'explicit_grammar_label_type', passage_id=rid, question_id=qid, type=qtype)
+            tids = []
+        for tid in tids:
+            if not re.fullmatch(r'ur-rank-\d{4}', str(tid)):
+                add_error(hard_errors, 'malformed_question_target_id', passage_id=rid, question_id=qid, target_id=tid)
+            if tid not in local_target_ids:
+                add_error(hard_errors, 'question_target_not_in_local_target_lists', passage_id=rid, question_id=qid, target_id=tid)
 
         if qtype == 'cloze_transfer':
             cloze_count += 1
-            prompt = q.get('prompt', '')
+            prompt = str(q.get('prompt', ''))
             answer = str(a.get('answer', ''))
             parts = answer_parts(answer)
             blanks = prompt.count('_____')
@@ -149,21 +186,12 @@ for row in rows:
                 reconstructed = reconstructed.replace('_____', part, 1)
             if '_____' in reconstructed:
                 add_error(hard_errors, 'cloze_unfilled_after_reconstruction', passage_id=rid, question_id=qid, reconstructed=reconstructed)
-            reconstructed_clozes.append({'passage_id': rid, 'question_id': qid, 'reconstructed': reconstructed})
-
-    new_targets = row.get('new_lexical_targets', [])
-    review_targets = row.get('review_lexical_targets', [])
-    local_target_ids = {t.get('id') for t in new_targets} | {t.get('id') for t in review_targets}
-    for q in questions:
-        for tid in q.get('target_ids', []) if isinstance(q.get('target_ids', []), list) else []:
-            if tid not in local_target_ids:
-                warnings.append({'code': 'question_target_not_in_local_target_lists', 'passage_id': rid, 'question_id': q.get('id'), 'target_id': tid})
 
     for t in new_targets:
         tid = t.get('id')
         new_target_ids.append(tid)
         form = str(t.get('form', ''))
-        exact = text.casefold().count(form.casefold()) if form else 0
+        exact = exact_form_count(text, form)
         meta = t.get('exposures_in_text')
         new_target_exposure_checks.append({'passage_id': rid, 'target_id': tid, 'form': form, 'metadata': meta, 'exact_text_count': exact})
         if not re.fullmatch(r'ur-rank-\d{4}', str(tid)):
@@ -184,28 +212,27 @@ for row in rows:
     for t in review_targets:
         tid = t.get('id')
         form = str(t.get('form', ''))
-        exact = text.casefold().count(form.casefold()) if form else 0
+        exact = exact_form_count(text, form)
         stage = t.get('review_stage')
         review_presence_checks.append({'passage_id': rid, 'target_id': tid, 'form': form, 'review_stage': stage, 'exact_text_count': exact})
-        if stage not in allowed_review_stages:
+        if stage not in ALLOWED_REVIEW_STAGES:
             add_error(hard_errors, 'invalid_review_stage', passage_id=rid, target_id=tid, stage=stage)
         if exact == 0:
             item = {'code': 'review_target_zero_exact_occurrence', 'passage_id': rid, 'target_id': tid, 'form': form, 'review_stage': stage}
             review_zero_occurrence.append(item)
-            warnings.append(item)
+            add_error(hard_errors, **item)
 
     quality = row.get('quality', {})
     status = quality.get('status')
     quality_status_counts[status] += 1
     if status != 'draft':
         add_error(hard_errors, 'stale_or_premature_quality_status', passage_id=rid, status=status)
-    for gate in ('answer_key_check', 'coverage_check', 'linguistic_review', 'pedagogical_review', 'schema_check'):
+    for gate in QUALITY_GATES:
         if quality.get(gate) == 'pass':
             add_error(hard_errors, 'premature_quality_pass', passage_id=rid, gate=gate)
 
 if len(new_target_ids) != len(set(new_target_ids)):
     add_error(hard_errors, 'duplicate_new_target_introductions', duplicates=[x for x, n in Counter(new_target_ids).items() if n > 1])
-
 if question_count != 600:
     add_error(hard_errors, 'total_question_count', expected=600, actual=question_count)
 if answer_count != 600:
@@ -213,21 +240,33 @@ if answer_count != 600:
 if cloze_count != 130:
     add_error(hard_errors, 'total_cloze_count', expected=130, actual=cloze_count)
 
-joined = '\n'.join(str(r.get('text', '')) + '\n' + ' '.join(str(q.get('prompt', '')) for q in r.get('questions', [])) for r in rows)
+joined = '\n'.join(
+    str(r.get('title', '')) + '\n' + str(r.get('text', '')) + '\n' +
+    '\n'.join(str(q.get('prompt', '')) for q in r.get('questions', [])) + '\n' +
+    '\n'.join(str(a.get('answer', '')) for a in r.get('answer_key', []))
+    for r in rows
+)
 banned_fragments = [
     'اس دورہ میں', 'دورہ کے دوران', 'اگلے دورہ کا', 'خاندان کے دورہ میں', 'پچھلے دورہ میں',
     'اردو کی زبان', 'لفظ کی مقدار', 'عادت کی مقدار', 'پہلا بس کا سفر',
     'یہ میرا _____ بس کا _____ ہے', 'استاد سے اپنا نام بتاتا ہے',
     'ہر چیز اپنی جگہ رکھنا ضروری تھا', 'میں نے _____ کتاب پڑھ لی',
     '_____ میں یہ کام پہلے کروں گا', 'روز چلنے کا ایک _____ صحت ہے',
-    'خالہ نے پوچھا کہ کیا وہ بازار چلنا چاہتی ہے'
+    'خالہ نے پوچھا کہ کیا وہ بازار چلنا چاہتی ہے',
+    'عائشہ کا اسکول کا راستہ', 'ہر قدم سنتی جاتی ہے', 'کلاس کے بجے اور منٹ',
+    'منٹ چھوٹے وقت کو بتانے', 'تقریباً وقت جاننے', 'سنائی دینے والی بولنے کی آواز',
+    'دونوں خاندان کی خبر پوچھتی ہیں', 'پہلے کاغذ پر اس کا قلم',
+    'بجلی کے وقت اور بغیر بجلی کے', 'پورا کام اچھا ہوا', 'ان کی محنت کامیاب ہوتی ہے',
+    'پیلے رنگ کی قطار', 'بالکل ہمیشہ نہیں', 'پیغام میں وقت طے',
+    'کسی شخص سے طے شدہ ملنا', 'سب فائدہ دیتے ہیں',
+    'ماں کو رقم کیوں رکھنی ہے؟', 'گھر کے خرچ کے لیے۔'
 ]
 for frag in banned_fragments:
     if frag in joined:
         add_error(hard_errors, 'known_bad_fragment_remaining', fragment=frag)
 
 report = {
-    'schema_version': 1,
+    'schema_version': 2,
     'date': '2026-08-23',
     'language': 'urdu',
     'level': 'A1',
@@ -244,6 +283,7 @@ report = {
     'review_target_presence_checks': review_presence_checks,
     'review_target_zero_exact_occurrence_count': len(review_zero_occurrence),
     'review_target_zero_exact_occurrences': review_zero_occurrence,
+    'duplicate_prompt_checks': duplicate_prompt_checks,
     'hard_error_count': len(hard_errors),
     'hard_errors': hard_errors,
     'warning_count': len(warnings),
@@ -252,6 +292,6 @@ report = {
     'quality_promotion': False,
 }
 REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-print(json.dumps({'hard_errors': len(hard_errors), 'warnings': len(warnings), 'review_zero': len(review_zero_occurrence), 'questions': question_count, 'clozes': cloze_count}, ensure_ascii=False))
+print(json.dumps({'hard_errors': len(hard_errors), 'warnings': len(warnings), 'review_zero': len(review_zero_occurrence), 'questions': question_count, 'answers': answer_count, 'clozes': cloze_count}, ensure_ascii=False))
 if hard_errors:
     raise SystemExit(1)
