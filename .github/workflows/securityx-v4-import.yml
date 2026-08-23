@@ -25,11 +25,11 @@ jobs:
           set -euo pipefail
           count=$(find .securityx-import -maxdepth 1 -type f -name 'part-*.txt' 2>/dev/null | wc -l | tr -d ' ')
           echo "count=$count" >> "$GITHUB_OUTPUT"
-          if [ "$count" -ne 12 ]; then
-            echo "Have $count/12 archive parts; importer will exit without changes."
+          if [ "$count" -ne 7 ]; then
+            echo "Have $count/7 archive parts; importer will exit without changes."
           fi
       - name: Reconstruct and verify audited archive
-        if: steps.parts.outputs.count == '12'
+        if: steps.parts.outputs.count == '7'
         shell: bash
         run: |
           set -euo pipefail
@@ -48,15 +48,28 @@ jobs:
           p=Path('/tmp/securityx-expanded/SecurityX_CAS005_GitHub_Pages_v4_1/data/final_audit.json')
           a=json.loads(p.read_text())
           print(a)
-          assert a.get('remaining_issues') == 0
-          assert a.get('cards') == 1156
-          assert a.get('questions') == 100
-          assert a.get('pbqs') == 12
-          assert a.get('blueprint_entries') == 618
-          assert a.get('sources') == 42
+          assert a['cards'] == 1156
+          assert a['eight_layers_per_card'] == 1156
+          assert a['published_blueprint_topics_checked'] == 618
+          assert a['published_blueprint_topics_mapped'] == 618
+          assert a['objective_sections'] == 23
+          assert a['practice_questions'] == 100
+          assert a['pbq_drills'] == 12
+          assert a['sources'] == 42
+          assert a['prerequisite_cycles'] == 0
+          assert a['duplicate_fronts'] == 0
+          assert a['duplicate_direct_answers'] == 0
+          assert a['structural_issues'] == []
+          assert sorted(a['practice_answer_letter_distribution'].values()) == [25,25,25,25]
+          assert a['practice_domain_distribution'] == {
+            'Governance, Risk, and Compliance': 20,
+            'Security Architecture': 27,
+            'Security Engineering': 31,
+            'Security Operations': 22,
+          }
           PY
       - name: Install exact canonical site and self-clean
-        if: steps.parts.outputs.count == '12'
+        if: steps.parts.outputs.count == '7'
         shell: bash
         run: |
           set -euo pipefail
