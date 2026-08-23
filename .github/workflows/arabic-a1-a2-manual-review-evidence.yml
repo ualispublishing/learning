@@ -1,0 +1,45 @@
+name: Arabic A1+A2 manual review evidence
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, reopened, synchronize]
+    paths:
+      - 'reading/tools/extract_arabic_a1_a2_manual_review_evidence.py'
+      - '.github/workflows/arabic-a1-a2-manual-review-evidence.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arabic-a1-a2-manual-review-evidence-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  extract:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Extract manual-review evidence
+        run: python reading/tools/extract_arabic_a1_a2_manual_review_evidence.py
+      - name: Commit evidence packet
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reading/audit/arabic_a1_a2_manual_review_evidence_2026-08-23.json
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Extract Arabic A1/A2 manual review evidence [skip ci]"
+          git fetch origin audit/arabic-a1-a2-integrated-2026-08-23
+          git rebase origin/audit/arabic-a1-a2-integrated-2026-08-23
+          git push origin HEAD:audit/arabic-a1-a2-integrated-2026-08-23
