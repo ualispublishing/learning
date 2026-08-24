@@ -2,11 +2,13 @@
 
 Updated: 2026-08-23
 
-This file is an **active queue only**. Completed timelines belong in Git history and `reading/audit/`. Current truth starts in `reading/CONTINUATION.json`.
+This file is an **active queue only**. Completed timelines belong in Git history and `reading/audit/`. Current truth starts with `PROJECT_TRACKS.json`, `reading/CONTINUATION.json`, and live canonical data.
 
 ## P0 — state integrity
 
+- [ ] Confirm `PROJECT_TRACKS.json` routes this session to `LANG-A1C2`, not `LANG-WB`.
 - [ ] Run `python reading/tools/validate_continuation_state.py` before resuming generation after a new chat/session.
+- [ ] If `reading/STATE_MANIFEST.json` differs from tracked live-state bytes, stop and reconcile/refresh it before continuing.
 - [ ] If canonical counts or the pinned Urdu A1 blob differ from continuation/status state, reconcile before writing new passages.
 - [ ] Keep production state and educator-release state separate; never infer release readiness from generation-complete or historical approval labels.
 
@@ -62,13 +64,20 @@ After release-evidence changes:
 
 - [ ] `reading/VERIFICATION_TASKS.md`
 - [ ] `reading/RELEASE_STATUS.json`
-- [ ] `reading/CONTINUATION.json` if the summary/frontier materially changes
+- [ ] `reading/CONTINUATION.json` whenever its cached release summary changes
+
+After all tracked live-state edits:
+
+- [ ] run `python reading/tools/refresh_state_manifest.py` last;
+- [ ] run `python reading/tools/validate_continuation_state.py` against the refreshed bundle when execution is available.
 
 ## Definition of a clean handoff
 
 A work session ends with:
 
+- project route confirmed;
 - live canonical state verified;
+- state manifest refreshed for the exact live-state bundle;
 - affected checks run and recorded;
 - no hidden source/hash drift;
 - blockers separated into content vs tooling/evidence problems;
