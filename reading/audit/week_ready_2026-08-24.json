@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "audited_on": "2026-08-23",
+  "ready_from": "2026-08-24",
+  "timezone": "America/Toronto",
+  "status": "PASS",
+  "purpose": "Hash-bound evidence that the prepared seven-session Urdu A2 queue matches the canonical A2 roadmap and has internally consistent sequence/count arithmetic.",
+  "not_a_release_promotion": true,
+  "sessions": 7,
+  "units": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "sequence_range": [
+    7,
+    48
+  ],
+  "themes": [
+    "plans, invitations, and changes",
+    "past events and memories",
+    "shopping, comparison, and problems",
+    "hobbies and learning skills",
+    "transport and travel",
+    "community events and simple news",
+    "nature and environment"
+  ],
+  "baseline_after_unit01_integration": {
+    "project_canonical_passages": 786,
+    "urdu_canonical_passages": 66,
+    "active_language": "urdu",
+    "active_level": "A2",
+    "active_unit": 2,
+    "start_sequence": 7
+  },
+  "end_of_week_expected_state": {
+    "project_canonical_passages": 828,
+    "urdu_canonical_passages": 108,
+    "urdu_a2_passages": 48,
+    "remaining_project_generation_passages": 252,
+    "active_language": "urdu",
+    "active_level": "A2",
+    "active_unit": 9,
+    "start_sequence": 49
+  },
+  "evidence_files": {
+    "reading/planning/WEEK_READY_2026-08-24.json": {
+      "git_blob": "f39a1476cc654b12db6b091e6bdd81a199d283ec",
+      "sha256": "99b712da66714c3807cb8a01d5b6ae82a6772b61652df2dd9051725b88a4dc29",
+      "bytes": 9339
+    },
+    "reading/planning/topic_genre_matrix.json": {
+      "git_blob": "2c14ee6142022957daa86aebce44f364044b8d5b",
+      "sha256": "56d795d8238a02467c43aafb8789c4685738c54eee4968255f660c85885aff1a",
+      "bytes": 9696
+    },
+    "reading/tools/validate_week_ready_queue.py": {
+      "git_blob": "7f6d3858a000737dad2036e2433671774bf34a16",
+      "sha256": "5e772745818c8dec4ce43560fe0d5f09bfa4366b247ec97bf209b749df981eef",
+      "bytes": 5646
+    },
+    "reading/TOMORROW_START_2026-08-24.md": {
+      "git_blob": "6b16adb20eb01160e0619f224ad8b4a7d4e85b88",
+      "sha256": "a787e62e4833116a86b0321d70e8d671d432512fdebfa74ffd4be879b44ecdae",
+      "bytes": 4612
+    }
+  },
+  "validated_invariants": [
+    "exactly seven sessions",
+    "sessions map exactly to Urdu A2 Units 2-8",
+    "session themes and genres exactly match reading/planning/topic_genre_matrix.json",
+    "each session owns exactly six non-overlapping passage sequences",
+    "project and Urdu before/after totals advance by exactly six per session",
+    "next-unit and next-sequence frontiers are contiguous",
+    "A2 standard word band remains 140-220 in the shared contract",
+    "the ten-question contract remains visible in the session contract",
+    "successful week ends at Urdu A2 Unit 9 / sequence 49"
+  ],
+  "precondition": "Unit 1 must first be integrated so main reaches project=786, Urdu=66, active Unit 2 / sequence 7 with continuation validation green; the week queue does not manufacture that state.",
+  "failure_policy": "If any evidence file blob/hash changes, rerun this writer after validation; old PASS becomes historical evidence rather than current truth."
+}
