@@ -3,10 +3,11 @@
 <head><meta charset="utf-8"><title>CISSP Atlas Browser Smoke</title></head>
 <body>
 <pre id="result" data-smoke="running">RUNNING</pre>
-<iframe id="app" src="index.html?browser-smoke=1" style="width:1280px;height:900px;border:0"></iframe>
+<iframe id="app" src="index.html?browser-smoke=desktop" style="width:1280px;height:900px;border:0"></iframe>
+<iframe id="mobile" src="index.html?browser-smoke=mobile" style="width:390px;height:844px;border:0"></iframe>
 <script>
 (()=>{'use strict';
-const result=document.querySelector('#result'),frame=document.querySelector('#app');
+const result=document.querySelector('#result'),frame=document.querySelector('#app'),mobile=document.querySelector('#mobile');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function waitFor(fn,label,timeout=8000){
   const end=Date.now()+timeout;
@@ -17,7 +18,7 @@ function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
 function visible(el){return !!el&&!el.classList.contains('hidden')}
 function key(win,key,code=key){win.dispatchEvent(new win.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
 async function run(){
-  await waitFor(()=>frame.contentDocument?.documentElement?.dataset?.cisspReady==='true','app readiness');
+  await waitFor(()=>frame.contentDocument?.documentElement?.dataset?.cisspReady==='true','desktop app readiness');
   const d=frame.contentDocument,w=frame.contentWindow;
   assert(d.documentElement.dataset.cisspCore==='ready','core ready');
   assert(d.documentElement.dataset.cisspBank==='ready','released bank ready');
@@ -63,10 +64,25 @@ async function run(){
   await waitFor(()=>visible(d.querySelector('#practice'))&&d.querySelectorAll('[data-diag-opt]').length===4,'baseline diagnostic launch');
   assert(d.querySelector('.diagnostic-card .quiz-top')?.textContent.includes('1/16'),'diagnostic starts at 1 of 16');
 
+  await waitFor(()=>mobile.contentDocument?.documentElement?.dataset?.cisspReady==='true','mobile app readiness');
+  const md=mobile.contentDocument,mw=mobile.contentWindow;
+  assert(mw.getComputedStyle(md.querySelector('.sidebar')).display==='none','mobile sidebar hidden');
+  assert(mw.getComputedStyle(md.querySelector('.mobile-nav')).display!=='none','mobile bottom nav visible');
+  assert(mw.getComputedStyle(md.querySelector('.top-actions .small')).display==='none','mobile export action compacted');
+  assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile Today has no horizontal overflow');
+  md.querySelector('.mobile-nav [data-view="practice"]').click();
+  await waitFor(()=>visible(md.querySelector('#practice')),'mobile Practice view');
+  const cols=mw.getComputedStyle(md.querySelector('#practiceSetup')).gridTemplateColumns.trim().split(/\s+/).filter(Boolean);
+  assert(cols.length===1,'390px practice setup is one column');
+  assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile Practice has no horizontal overflow');
+
   result.dataset.smoke='pass';
-  result.textContent='PASS interactive browser smoke: startup keyboard-review practice progress sources navigation diagnostic';
+  result.textContent='PASS interactive browser smoke: startup keyboard-review practice progress sources navigation diagnostic mobile-390';
 }
-frame.addEventListener('load',()=>run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)}),{once:true});
+Promise.all([
+  new Promise(r=>frame.addEventListener('load',r,{once:true})),
+  new Promise(r=>mobile.addEventListener('load',r,{once:true}))
+]).then(()=>run()).catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
 </script>
 </body>
