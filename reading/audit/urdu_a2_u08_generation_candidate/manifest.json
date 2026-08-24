@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "ur",
+  "cefr": "A2",
+  "unit": 8,
+  "date": "2026-08-24",
+  "status": "STAGED_NOT_CANONICAL",
+  "canonical_target": "reading/urdu/a2/passages.jsonl",
+  "sequence_range": [43, 48],
+  "record_count": 6,
+  "records": [
+    {"path": "ur-a2-u08-p01.json", "id": "ur-a2-u08-p01", "sequence": 43, "sha256_local_stage": "3fcb4553c7583a8ffffd3aef7b51c81ac257cb8a65f3bc96671bbc2ecaaef891"},
+    {"path": "ur-a2-u08-p02.json", "id": "ur-a2-u08-p02", "sequence": 44, "sha256_local_stage": "cc270cd1ddc7136715a4f639817f4bc9252a66899c768f3cb4eee484fe9088f0"},
+    {"path": "ur-a2-u08-p03.json", "id": "ur-a2-u08-p03", "sequence": 45, "sha256_local_stage": "6599ec9a8503f6c1c080bd7366d4b845d4c782796ac5eab67db36ef28d82d77c"},
+    {"path": "ur-a2-u08-p04.json", "id": "ur-a2-u08-p04", "sequence": 46, "sha256_local_stage": "f6b4f2041f0eda73f1450971e8d8c5a90b9c171763e6b93d5ce123c5208d4f65"},
+    {"path": "ur-a2-u08-p05.json", "id": "ur-a2-u08-p05", "sequence": 47, "sha256_local_stage": "df6eb1d85e4cfae6cfcd766152c784c866e79ba8fa9f1e81be59ddaaa857799d"},
+    {"path": "ur-a2-u08-p06.json", "id": "ur-a2-u08-p06", "sequence": 48, "sha256_local_stage": "b4a9e593b05db81ca30300e4615ff12e318504d4c0328f7fb292ca5a1b803ab5"}
+  ],
+  "lexical_evidence": "reading/audit/urdu_a2_u08_lexical_sense_check_2026-08-24.json",
+  "validation_evidence": "reading/audit/urdu_a2_u08_generation_validation_2026-08-24.json",
+  "notes": [
+    "These are complete candidate passage records, staged individually to avoid unsafe full-file replacement of the live large canonical JSONL.",
+    "Do not advance STATUS, CONTINUATION, ACTIVE_GENERATION_PLAN, or STATE_MANIFEST until the six records are safely appended to the canonical Urdu A2 JSONL and live validation succeeds.",
+    "Staging and deterministic integrity checks do not promote educator/publication release readiness."
+  ]
+}
