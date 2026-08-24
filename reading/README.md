@@ -16,19 +16,21 @@ This directory is the source of truth for the Arabic, French, and Urdu A1-C2 gra
 1. `../PROJECT_TRACKS.json` — route `LANG-A1C2` vs `LANG-WB` before reading project state.
 2. `AGENTS.md` — scoped fail-closed agent rules for this project.
 3. `CONTINUATION.json` — compact live resume state and scope guard.
-4. Verify the live canonical JSONL for any language/level you will touch.
-5. `RELEASE_STATUS.json` — educator/publication release evidence and decisions only.
-6. `STATUS.json` — live production counts and frontier only.
-7. `planning/ACTIVE_GENERATION_PLAN.json` — exact current generation target.
-8. `AGENT_HANDOFF_V2.md` — human operating contract.
-9. `TASKS.md` and `VERIFICATION_TASKS.md` — active queues only.
-10. durable policies, standards, schema, and `ROADMAP.md` as needed.
+4. `STATE_MANIFEST.json` — exact-byte lock for the live continuation/status/handoff bundle.
+5. Verify the live canonical JSONL for any language/level you will touch.
+6. `RELEASE_STATUS.json` — educator/publication release evidence and decisions only.
+7. `STATUS.json` — live production counts and frontier only.
+8. `planning/ACTIVE_GENERATION_PLAN.json` — exact current generation target.
+9. `AGENT_HANDOFF_V2.md` — human operating contract.
+10. `TASKS.md` and `VERIFICATION_TASKS.md` — active queues only.
+11. durable policies, standards, schema, and `ROADMAP.md` as needed.
 
 ## Authority is domain-specific
 
 Do not use one global precedence list for every kind of fact:
 
 - **Project routing/scope:** `PROJECT_TRACKS.json`, `reading/AGENTS.md`, and `CONTINUATION.json` must agree.
+- **State-bundle integrity:** `STATE_MANIFEST.json` pins the exact tracked live-state bytes plus an aggregate SHA-256; tracked-file drift means the handoff bundle must be refreshed/reconciled.
 - **Production facts:** live canonical JSONL is ground truth. `STATUS.json` and `CONTINUATION.json` must match it; mismatch is a stop condition.
 - **Release readiness:** fresh hash-bound evidence can invalidate a release claim. `RELEASE_STATUS.json` is the authoritative affirmative educator/publication decision; stale or conflicting evidence means fail closed, not infer readiness.
 - **Active generation frontier:** `CONTINUATION.json`, `STATUS.json`, and `ACTIVE_GENERATION_PLAN.json` must agree.
@@ -46,7 +48,7 @@ Production target: 1,080 passages total, 360 per language, 60 per CEFR level A1-
 
 Current production frontier: **Urdu A2, Unit 1, sequence 1**.
 
-Run `python reading/tools/validate_continuation_state.py` before trusting stored counts/frontiers in a fresh session.
+Run `python reading/tools/validate_continuation_state.py` before trusting stored counts/frontiers in a fresh session. After tracked live-state edits, run `python reading/tools/refresh_state_manifest.py` last.
 
 ## Core architecture
 
@@ -93,4 +95,4 @@ Do not mutate validated root CSVs merely to simplify passage production. Use der
 
 ## Handoff hygiene
 
-Live state files must remain compact. Do not append dated historical timelines or multiple contradictory `IMMEDIATE NEXT` sections. Completed work belongs in Git history and `reading/audit/`; live files should preserve only verified current state, blockers, and exact next actions.
+Live state files must remain compact. Do not append dated historical timelines or multiple contradictory `IMMEDIATE NEXT` sections. Completed work belongs in Git history and `reading/audit/`; live files should preserve only verified current state, blockers, and exact next actions. Refresh the state manifest after tracked live-state edits so a replacement chat can prove it has one coherent bundle rather than a mixture of revisions.
