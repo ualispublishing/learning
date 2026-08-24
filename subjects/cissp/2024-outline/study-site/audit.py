@@ -46,7 +46,7 @@ check(len({q['id'] for q in data['questions']})==len(data['questions']),'Duplica
 computed_cards=62+len(data['high']); subtopics=sum(len(v) for v in coverage.values()); ai_areas=sum(len(v) for v in ai.values()); sources=len(data['sources'])
 check(computed_cards==140,'Runtime cards != 140')
 check(len(data['questions'])==56,'Runtime questions != 56')
-check(sources==19,'Source count != 19')
+check(sources==20,'Source count != 20')
 check(subtopics==344,'Subtopic check count != 344')
 check(ai_areas==33,'AI coverage area count != 33')
 for d in range(1,9):
