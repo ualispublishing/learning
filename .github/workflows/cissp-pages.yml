@@ -38,8 +38,8 @@ jobs:
         working-directory: subjects/cissp/2024-outline/study-site
         run: |
           for f in data-meta.js data-d{1..8}.js data-ai.js data-precision.js coverage-detail.js data-question-calibration.js legacy-rationales.js keyboard-shortcuts.js bootstrap.js app.js enhancements.js state-ui-bridge.js product-polish.js; do node --check "$f"; done
-          for f in index.html 404.html styles.css mobile-fix.css enhancements.css product-polish.css workflow-clarity.css browser-smoke.sh question-bank/RELEASED_BATCHES.json question-bank/candidates/batch-001-a.jsonl question-bank/candidates/batch-001-b.jsonl question-bank/candidates/batch-001-c.jsonl question-bank/candidates/batch-001-d.jsonl; do test -s "$f"; done
-      - name: Execute browser startup smoke test
+          for f in index.html 404.html browser-smoke.html styles.css mobile-fix.css enhancements.css product-polish.css workflow-clarity.css browser-smoke.sh question-bank/RELEASED_BATCHES.json question-bank/candidates/batch-001-a.jsonl question-bank/candidates/batch-001-b.jsonl question-bank/candidates/batch-001-c.jsonl question-bank/candidates/batch-001-d.jsonl; do test -s "$f"; done
+      - name: Execute interactive browser smoke test
         working-directory: subjects/cissp/2024-outline/study-site
         run: bash browser-smoke.sh 8766
       - name: Configure Pages
