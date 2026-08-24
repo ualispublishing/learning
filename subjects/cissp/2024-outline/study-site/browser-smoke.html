@@ -15,9 +15,10 @@ async function waitFor(fn,label,timeout=8000){
 }
 function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
 function visible(el){return !!el&&!el.classList.contains('hidden')}
+function key(win,key,code=key){win.dispatchEvent(new win.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
 async function run(){
   await waitFor(()=>frame.contentDocument?.documentElement?.dataset?.cisspReady==='true','app readiness');
-  const d=frame.contentDocument;
+  const d=frame.contentDocument,w=frame.contentWindow;
   assert(d.documentElement.dataset.cisspCore==='ready','core ready');
   assert(d.documentElement.dataset.cisspBank==='ready','released bank ready');
   assert(!d.querySelector('#startupIssue'),'no startup issue');
@@ -27,9 +28,14 @@ async function run(){
 
   d.querySelector('#nav [data-view="learn"]').click();
   await waitFor(()=>visible(d.querySelector('#learn'))&&d.querySelector('#revealBtn'),'Review view');
-  d.querySelector('#revealBtn').click();
-  await waitFor(()=>d.querySelector('.layer-content')&&d.querySelectorAll('.rating [data-grade]').length===4,'review reveal and ratings');
+  key(w,' ','Space');
+  await waitFor(()=>d.querySelector('.layer-content')&&d.querySelectorAll('.rating [data-grade]').length===4,'keyboard reveal and ratings');
   assert(d.querySelectorAll('.layer-tabs button').length===8,'eight learning layers');
+  assert(d.querySelector('.layer-tabs button.active')?.dataset.layer==='0','first layer active after reveal');
+  key(w,'ArrowRight','ArrowRight');
+  await waitFor(()=>d.querySelector('.layer-tabs button.active')?.dataset.layer==='1','keyboard next layer');
+  key(w,'3','Digit3');
+  await waitFor(()=>d.querySelector('#revealBtn'),'keyboard rating advances to next card');
 
   d.querySelector('#nav [data-view="practice"]').click();
   await waitFor(()=>visible(d.querySelector('#practice'))&&d.querySelector('#startQuiz'),'Practice view');
@@ -53,8 +59,12 @@ async function run(){
   await waitFor(()=>visible(d.querySelector('#today')),'mobile navigation handler');
   assert(d.querySelector('.mobile-nav [data-view="today"]').classList.contains('active'),'mobile nav active state');
 
+  d.querySelector('#continueBtn').click();
+  await waitFor(()=>visible(d.querySelector('#practice'))&&d.querySelectorAll('[data-diag-opt]').length===4,'baseline diagnostic launch');
+  assert(d.querySelector('.diagnostic-card .quiz-top')?.textContent.includes('1/16'),'diagnostic starts at 1 of 16');
+
   result.dataset.smoke='pass';
-  result.textContent='PASS interactive browser smoke: startup review practice progress sources navigation';
+  result.textContent='PASS interactive browser smoke: startup keyboard-review practice progress sources navigation diagnostic';
 }
 frame.addEventListener('load',()=>run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)}),{once:true});
 })();
