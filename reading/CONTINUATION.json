@@ -69,7 +69,7 @@
     "project_passages": 1080
   },
   "production": {
-    "canonical_passages": 816,
+    "canonical_passages": 822,
     "arabic": {
       "state": "GENERATION_COMPLETE",
       "canonical_passages": 360,
@@ -98,7 +98,7 @@
     },
     "urdu": {
       "state": "A2_GENERATION_IN_PROGRESS",
-      "canonical_passages": 96,
+      "canonical_passages": 102,
       "complete_levels": [
         "A1"
       ],
@@ -136,7 +136,7 @@
     "production": {
       "language": "urdu",
       "level": "A2",
-      "action": "Continue generation-first production from Urdu A2 Unit 7 / sequence 37 using the canonical roadmap and ten-question contract. Do not reopen Urdu A1 generation unless fresh evidence identifies a concrete defect."
+      "action": "Continue generation-first production from Urdu A2 Unit 8 / sequence 43 using the canonical roadmap and ten-question contract. Do not reopen Urdu A1 generation unless fresh evidence identifies a concrete defect."
     },
     "verification_parallel": [
       "Keep Arabic educator-release remediation open under RELEASE_STATUS.json.",
@@ -153,7 +153,7 @@
   ],
   "exact_next_actions": [
     "Validate the routed state bundle and continuation/status snapshot against live canonical JSONL.",
-    "Use reading/planning/ACTIVE_GENERATION_PLAN.json to start the next guarded Urdu A2 Unit 7 batch at sequence 37.",
+    "Use reading/planning/ACTIVE_GENERATION_PLAN.json to start the next guarded Urdu A2 Unit 8 batch at sequence 43.",
     "Maintain Arabic/French release remediation and Urdu A1 educator verification as separate verification lanes without blocking generation-first production unless a concrete defect requires it."
   ]
 }
