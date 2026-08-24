@@ -1,0 +1,147 @@
+name: Promote Urdu A2 Unit 8
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/promote-urdu-a2-u08.yml'
+      - 'reading/audit/urdu_a2_u08_generation_candidate/**'
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate and promote staged Unit 8
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          import json
+
+          target = Path('reading/urdu/a2/passages.jsonl')
+          stage = Path('reading/audit/urdu_a2_u08_generation_candidate')
+          expected_ids = [f'ur-a2-u08-p{i:02d}' for i in range(1, 7)]
+          expected_seq = list(range(43, 49))
+
+          def read_jsonl(path):
+              lines = [line for line in path.read_text(encoding='utf-8').splitlines() if line.strip()]
+              return [json.loads(line) for line in lines]
+
+          existing = read_jsonl(target)
+          existing_ids = [r['id'] for r in existing]
+          existing_seq = [r['sequence'] for r in existing]
+
+          # Idempotent success if Unit 8 is already canonical and complete.
+          if len(existing) == 48 and existing_seq == list(range(1, 49)) and existing_ids[-6:] == expected_ids:
+              print('Unit 8 is already canonical; no append required.')
+              raise SystemExit(0)
+
+          if len(existing) != 42:
+              raise SystemExit(f'Fail closed: expected 42 canonical records before promotion, found {len(existing)}')
+          if existing_seq != list(range(1, 43)):
+              raise SystemExit('Fail closed: canonical sequence is not exactly 1..42')
+          if len(existing_ids) != len(set(existing_ids)):
+              raise SystemExit('Fail closed: duplicate canonical passage IDs before promotion')
+
+          candidates = []
+          for i, seq in enumerate(expected_seq, 1):
+              p = stage / f'ur-a2-u08-p{i:02d}.json'
+              if not p.exists():
+                  raise SystemExit(f'Fail closed: missing staged record {p}')
+              rec = json.loads(p.read_text(encoding='utf-8'))
+              candidates.append(rec)
+
+          if [r.get('id') for r in candidates] != expected_ids:
+              raise SystemExit('Fail closed: staged IDs do not match Unit 8 contract')
+          if [r.get('sequence') for r in candidates] != expected_seq:
+              raise SystemExit('Fail closed: staged sequences do not match 43..48')
+          if any(r.get('unit') != 8 or r.get('cefr') != 'A2' or r.get('language') != 'ur' for r in candidates):
+              raise SystemExit('Fail closed: staged language/level/unit mismatch')
+          if any(len(r.get('questions', [])) != 10 or len(r.get('answer_key', [])) != 10 for r in candidates):
+              raise SystemExit('Fail closed: every staged record must have 10 questions and 10 answers')
+          if [len(r.get('new_lexical_targets', [])) for r in candidates] != [2, 2, 2, 2, 0, 0]:
+              raise SystemExit('Fail closed: Unit 8 new-target distribution must be 2/2/2/2/0/0')
+          if candidates[-1].get('passage_type') != 'fluency' or not candidates[-1].get('speed_training', {}).get('timed') or candidates[-1].get('speed_training', {}).get('new_word_policy') != 'none':
+              raise SystemExit('Fail closed: P6 fluency policy mismatch')
+          if set(existing_ids) & set(expected_ids):
+              raise SystemExit('Fail closed: staged IDs already collide with canonical records')
+
+          # Preserve all existing canonical bytes; append only normalized candidate records.
+          before_bytes = target.read_bytes()
+          prefix = before_bytes.decode('utf-8')
+          if prefix and not prefix.endswith('\n'):
+              prefix += '\n'
+          appended = ''.join(json.dumps(r, ensure_ascii=False, separators=(',', ':')) + '\n' for r in candidates)
+          target.write_text(prefix + appended, encoding='utf-8')
+
+          final = read_jsonl(target)
+          if len(final) != 48:
+              raise SystemExit(f'Post-write validation failed: expected 48 records, found {len(final)}')
+          if [r['sequence'] for r in final] != list(range(1, 49)):
+              raise SystemExit('Post-write validation failed: sequence is not 1..48')
+          ids = [r['id'] for r in final]
+          if len(ids) != len(set(ids)) or ids[-6:] != expected_ids:
+              raise SystemExit('Post-write validation failed: ID continuity/uniqueness error')
+
+          # Ensure pre-existing corpus bytes were not altered.
+          after_bytes = target.read_bytes()
+          if not after_bytes.startswith(before_bytes):
+              raise SystemExit('Post-write validation failed: pre-existing canonical bytes changed')
+
+          audit = {
+              'schema_version': 1,
+              'project_id': 'LANG-A1C2',
+              'language': 'ur',
+              'cefr': 'A2',
+              'unit': 8,
+              'date': '2026-08-24',
+              'status': 'CANONICAL_PROMOTION_PASS',
+              'release_promotion': False,
+              'before_record_count': 42,
+              'after_record_count': 48,
+              'appended_sequences': expected_seq,
+              'appended_ids': expected_ids,
+              'preexisting_bytes_preserved_exactly': True,
+              'canonical_sha256_after': hashlib.sha256(after_bytes).hexdigest(),
+              'checks': {
+                  'record_count': 'PASS',
+                  'sequence_1_through_48': 'PASS',
+                  'unique_ids': 'PASS',
+                  'unit8_tail_ids': 'PASS',
+                  'question_answer_count': 'PASS',
+                  'target_distribution_2_2_2_2_0_0': 'PASS',
+                  'p6_fluency_policy': 'PASS'
+              },
+              'notes': [
+                  'This is a production/canonicalization fact, not educator/publication release approval.',
+                  'Formal multi-pass release review remains separate.'
+              ]
+          }
+          audit_path = Path('reading/audit/urdu_a2_u08_promotion_2026-08-24.json')
+          audit_path.write_text(json.dumps(audit, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          print('Validated and appended Urdu A2 Unit 8: sequences 43-48.')
+          PY
+
+      - name: Commit canonical promotion
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- reading/urdu/a2/passages.jsonl reading/audit/urdu_a2_u08_promotion_2026-08-24.json; then
+            echo 'No changes to commit.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/urdu/a2/passages.jsonl reading/audit/urdu_a2_u08_promotion_2026-08-24.json
+          git commit -m 'Promote Urdu A2 Unit 8 to canonical corpus'
+          git push
