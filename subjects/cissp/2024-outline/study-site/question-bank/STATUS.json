@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-24",
+  "released": {
+    "standard_mcq": 56,
+    "difficulty_distribution": {"F": 37, "E": 19, "S": 0, "B": 0},
+    "classification_manifest": "RELEASED_QUESTION_CLASSIFICATION.json"
+  },
+  "candidate_batches": {
+    "001": {
+      "status": "CANDIDATE_PRECHECK_PASS_NOT_YET_RELEASED",
+      "records": 24,
+      "standard_mcq": 23,
+      "bellringer": 1,
+      "difficulty_distribution": {"F": 4, "E": 15, "S": 4, "B": 1},
+      "review": "BATCH_001_REVIEW.json"
+    }
+  },
+  "after_batch_001_promotion": {
+    "bank_records": 80,
+    "standard_mcq": 79,
+    "bellringer_cases": 1,
+    "difficulty_distribution": {"F": 41, "E": 34, "S": 4, "B": 1}
+  },
+  "long_term_target": {
+    "bank_records": 800,
+    "F": 120,
+    "E": 480,
+    "S": 160,
+    "B": 40
+  },
+  "next_priority": [
+    "Promote Batch 001 only after the full repository quality gate remains clean.",
+    "After promotion, author subsequent batches with very little Foundation+ content because the released baseline already has 37 Foundation+ questions.",
+    "Bias the next 120 records heavily toward Exam-calibrated and Stretch reasoning while expanding objective/subtopic exposure.",
+    "Add bellringer UI separately so integrative cases cannot be mistaken for real CISSP item format.",
+    "Track confidence, distractor choice, response time, and spaced repeat performance before making empirical difficulty claims."
+  ]
+}
