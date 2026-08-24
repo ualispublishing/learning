@@ -77,10 +77,29 @@
     "bellringer_exam_representation": false
   },
   "deployment": {
-    "expected_pages_url": "https://ualispublishing.github.io/learning/",
+    "pages_url": "https://ualispublishing.github.io/learning/",
     "workflow_ready": true,
+    "pages_activation_verified": true,
+    "pages_actions_deployment_verified": true,
+    "public_endpoint_observed_live_in_this_session": true,
+    "public_runtime_verified_after_deploy": true,
+    "last_verified_run_id": 32791600280,
+    "last_verified_commit": "ee79361a71ea2fff4fa96edb218a44deb3d4ba15",
+    "last_verified_on": "2026-08-24",
     "runtime_health_markers": true,
     "interactive_browser_smoke_gate": true,
+    "public_runtime_fingerprint_gate": true,
+    "public_runtime_verification": [
+      "exact deployed Git commit fingerprint",
+      "CISSP Atlas HTML shell",
+      "released question-bank manifest",
+      "core runtime ready marker",
+      "released-bank ready marker",
+      "full runtime ready marker",
+      "Mastery product-polish state",
+      "baseline diagnostic CTA",
+      "unreleased Batch 002 excluded with HTTP 404"
+    ],
     "browser_smoke_coverage": [
       "core and released-bank startup",
       "keyboard reveal/layer/rating flow",
@@ -96,8 +115,7 @@
     "browser_test_harness_excluded_from_pages_artifact": true,
     "candidate_drafts_block_release_deploy": false,
     "candidate_drafts_still_checked_by_normal_ci": true,
-    "public_endpoint_observed_live_in_this_session": false,
-    "activation_fallback": "If GitHub Pages has never been enabled for the repository, set Settings > Pages > Build and deployment > Source to GitHub Actions once; the committed workflow then deploys automatically."
+    "activation_status": "GitHub Pages is enabled and successful GitHub Actions Pages deployments plus post-deploy public runtime verification have been observed. No manual Pages activation step remains."
   },
   "precision_boundary": "READY_FOR_STUDY means the public ISC2 scope, mapped subtopics, curated precision distinctions, released original scenario bank, metadata, teaching rationales, and site assets are release-organized and audited. The item-level audit currently covers 220 released learner-facing item IDs with zero keyed-answer reversals and no known remaining material factual error. This is not a mathematical guarantee of perpetual infallibility or a guarantee of passing the live adaptive CISSP exam.",
   "known_non_blocking_limitations": [
@@ -105,7 +123,6 @@
     "The diagnostic is intentionally a routing signal, not an exam-readiness prediction.",
     "Blueprint subtopic labels are paraphrased; the ISC2 source remains authoritative for exact wording.",
     "The combined released bank still skews easier than the long-term target because the original 56-question baseline contains 37 Foundation+ items.",
-    "Unreleased candidate batches remain excluded from the Pages artifact until promoted through the release gate.",
-    "The Pages deployment workflow is committed and browser-gated, but this session could not verify whether the repository's one-time Pages setting was already enabled."
+    "Unreleased candidate batches remain excluded from the Pages artifact until promoted through the release gate."
   ]
 }
