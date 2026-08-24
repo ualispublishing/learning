@@ -30,6 +30,9 @@ jobs:
       - name: Run deterministic knowledge audit
         working-directory: subjects/cissp/2024-outline/study-site
         run: python audit.py
+      - name: Run question originality and duplicate gate
+        working-directory: subjects/cissp/2024-outline/study-site
+        run: python question-bank/quality_gate.py
       - name: Check JavaScript syntax
         working-directory: subjects/cissp/2024-outline/study-site
         run: |
