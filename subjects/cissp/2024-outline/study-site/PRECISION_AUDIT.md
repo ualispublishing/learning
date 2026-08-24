@@ -1,12 +1,44 @@
-# CISSP Atlas Precision Audit — 2026-08-23
+# CISSP Atlas Precision Audit — 2026-08-24
 
 ## Result
 
-**Published-scope mapping: PASS, with an explicit mastery boundary.**
+**Published-scope mapping: PASS. Item-level semantic review: PASS, with explicit nuance notes.**
 
-The site is mapped to the current public ISC2 CISSP exam outline, effective April 15, 2024, plus ISC2's current cross-domain guidance for AI security.
+The site is mapped to the current public ISC2 CISSP exam outline, effective April 15, 2024, plus ISC2's current cross-domain guidance for AI security. The live ISC2 outline was re-checked on 2026-08-24 before this semantic pass.
 
-### Deterministic scope checks
+## 2026-08-24 item-level semantic audit
+
+Every current learner-facing knowledge/question item was individually reviewed for factual precision, misleading absolutes, answer-key validity, and consistency with the current public outline and primary references where material.
+
+Scope: **196 items total**
+
+- 62 objective cards;
+- 38 high-yield cards;
+- 8 AI cards;
+- 32 precision-depth cards;
+- 56 scenario questions, including every option set, keyed answer, and explanation.
+
+Result:
+
+- **193 VERIFIED unchanged**;
+- **1 VERIFIED_AFTER_CORRECTION**;
+- **2 VERIFIED_WITH_SOURCE_SCOPE_NOTE**;
+- **0 answer-key reversals**;
+- **0 material factual errors identified as remaining after this pass**.
+
+`SEMANTIC_ITEM_AUDIT.json` records a status for all 196 item IDs, and `audit.py` now fails if a current card/question is added or removed without a corresponding semantic-audit status.
+
+### Correction made
+
+`HY-014` (digital signatures) was tightened. The old wording could be read as implying that a digital signature itself guarantees nonrepudiation. The corrected card states that digital signatures provide integrity and origin authentication and can **support** nonrepudiation when signer identity, private-key control, key/certificate validity, and supporting evidence are trustworthy. A signature does not itself provide confidentiality or guarantee nonrepudiation under weak identity/key custody.
+
+### Source-scope notes
+
+`AI-005` and `PX-020` remain factually valid: the current CISSP outline explicitly includes non-human/AI-agent identities and service-account governance. However, NIST SP 800-63-4 is explicitly scoped to identity proofing, authentication, and federation of **users** such as employees, contractors, or private individuals. It can be useful supporting IAM context, but it should not be treated as the sole primary authority for non-human/service identities. The ISC2 outline is the direct scope authority for those two items.
+
+These notes are intentionally recorded rather than silently flattening “correct content” and “perfect source fit” into the same claim.
+
+## Deterministic scope checks
 
 - 8/8 domains present.
 - 62/62 numbered public objectives present exactly once.
@@ -19,9 +51,10 @@ The site is mapped to the current public ISC2 CISSP exam outline, effective Apri
 - Every high-yield/precision card maps to a valid objective and valid source ID.
 - Every practice item maps to a valid objective, has four options, a valid answer index, and an explanation.
 - Duplicate objective/card/question identifiers are rejected by `audit.py`.
+- The complete 196-item semantic audit manifest is now required by `audit.py`.
 - Metadata counts are recomputed and compared with the declared release metadata so stale claims fail validation.
 
-## Semantic review performed
+## Semantic scope review
 
 The objective/subtopic map was compared against the current ISC2 web outline rather than relying on historical CISSP summaries. This specifically surfaced and preserved detail that an objective-only audit can miss, including:
 
@@ -51,15 +84,45 @@ Primary references were expanded for these distinctions, including NIST SP 800-8
 
 ISC2's current CISSP page explicitly integrates AI security across all eight domains rather than creating a separate AI domain. The site therefore includes AI coverage for governance/ethics and supplier risk; AI data/model assets; AI architecture and prompt/adversarial threats; AI network isolation and NDR; non-human/agent identities; AI red teaming; AI-assisted operations/model drift; and AI-assisted development/supply-chain risks.
 
+## Current-standards checks relevant to this release
+
+- NIST SP 800-61 Rev. 3 (April 2025) is the current NIST incident-response publication and supersedes Rev. 2.
+- NIST SP 800-63-4 (July 2025) is the current NIST Digital Identity Guidelines and supersedes SP 800-63-3.
+- NIST SP 800-88 Rev. 2 (September 2025) is the current media-sanitization publication and supersedes Rev. 1.
+- RFC 4301 continues to support the site's high-level distinction that AH provides integrity/data-origin authentication but not confidentiality, while ESP can provide confidentiality and can satisfy most IPsec security requirements; both transport and tunnel modes exist.
+
 ## Accuracy boundary
 
-The audit proves **published-outline mapping and internal consistency**. It does not prove that memorizing 140 cards is sufficient to pass CISSP, and the UI does not make that claim. ISC2 describes CISSP as experiential and does not guarantee that a candidate will pass. The outline also provides examples rather than disclosing a complete live item bank.
+The audits provide strong evidence of **published-outline alignment, item-level review, answer-key consistency, and internal traceability**. They do not create a mathematically valid “100% infallible forever” guarantee. Standards can change, a reviewer can still miss nuance, and ISC2's live adaptive item bank is not public.
+
+The correct claim for this release is therefore:
+
+> **No known material factual errors or incorrect keyed answers remain after the 2026-08-24 item-level audit; every current item has an explicit semantic review status.**
+
+That is materially stronger and more auditable than saying “100% correct” without qualification.
 
 A listed subtopic in `coverage-detail.js` means the site tracks that area and can route study toward it. It does **not** mean the learner has demonstrated deep mastery merely because the term appears in the blueprint view. Deep mastery requires retrieval, distinction from confusable concepts, scenario application, and later re-testing.
 
+## Question-bank expansion controls
+
+The expansion design is documented in `question-bank/QUESTION_BANK_EXPANSION_PLAN.md` and includes:
+
+- a target 800-record bank;
+- a 15% Foundation+ / 60% Exam-calibrated / 20% Stretch / 5% Bellringer distribution;
+- no exam dumps or commercial-question seeds;
+- decision-rule-first original authoring;
+- exact, near-text, and structural duplicate gates;
+- explicit distractor rationales;
+- objective/subtopic exposure metadata;
+- a separate non-exam-representative bellringer case format;
+- `question-bank/quality_gate.py` for automated originality/duplicate validation;
+- `question-bank/CANDIDATE_SCHEMA.json` for future candidate structure.
+
+CI now runs the question-bank quality gate alongside the deterministic knowledge audit.
+
 ## Study-quality controls
 
-The v1.2 workflow includes retrieval-before-reveal layered cards, local spaced review, weak-objective and weighted-domain routing, a 16-question diagnostic used only for routing, original scenario feedback, a CISSP decision lens, expandable subtopic coverage, current AI coverage, the new precision-depth layer, progress export/reset, responsive navigation, and CI regression checks.
+The v1.2 workflow includes retrieval-before-reveal layered cards, local spaced review, weak-objective and weighted-domain routing, a 16-question diagnostic used only for routing, original scenario feedback, a CISSP decision lens, expandable subtopic coverage, current AI coverage, the precision-depth layer, progress export/reset, responsive navigation, and CI regression checks.
 
 ## Primary scope references
 
