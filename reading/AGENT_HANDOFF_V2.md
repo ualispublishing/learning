@@ -29,11 +29,11 @@ If stored state, the state manifest, and live canonical files disagree, **fail c
 ### Production
 
 - Target: 1,080 passages total; 360 per language; 60 per CEFR level A1-C2.
-- Canonical generated total: **822**.
+- Canonical generated total: **828**.
 - Arabic: **360/360**, A1-C2 generation complete.
 - French: **360/360**, A1-C2 generation complete.
-- Urdu: **102/360**; A1 generation complete and A2 generation in progress.
-- Urdu A2 canonical path: `reading/urdu/a2/passages.jsonl`; Units 1-7 currently contain sequences 1-42.
+- Urdu: **108/360**; A1 generation complete and A2 generation in progress.
+- Urdu A2 canonical path: `reading/urdu/a2/passages.jsonl`; Units 1-8 currently contain sequences 1-48.
 - Urdu A1 canonical path: `reading/urdu/a1/passages.jsonl`.
 - Urdu A1 pinned Git blob: `ec0970dc1916ce523dd3320d2f4dca4c7f8bc677`.
 - Urdu A1 final integrity evidence: `reading/audit/urdu_a1_final_integrity_2026-08-23.json`.
@@ -51,7 +51,7 @@ Never convert historical `APPROVED`, `SEALED`, `PASS`, or generation-complete wo
 
 ## Active production frontier
 
-Continue **Urdu A2**, starting from Unit 8 / sequence 43, under:
+Continue **Urdu A2**, starting from Unit 9 / sequence 49, under:
 
 - `reading/planning/ACTIVE_GENERATION_PLAN.json`
 - `reading/planning/topic_genre_matrix.json`
@@ -59,7 +59,7 @@ Continue **Urdu A2**, starting from Unit 8 / sequence 43, under:
 - `reading/planning/TEN_QUESTION_STANDARD.md`
 - `reading/schema/passage.schema.json`
 
-Unit 8 uses the roadmap theme **nature and environment** with `description`, `simple explanatory text`, and `story` genres.
+Unit 9 uses the roadmap theme **culture, celebrations, and customs** with `cultural note`, `personal narrative`, and `comparison` genres.
 
 Generate in guarded unit or large bounded batches. Do not reopen Urdu A1 generation unless fresh evidence identifies a concrete defect.
 
@@ -119,4 +119,4 @@ Do not append historical timelines to live state files. Detailed completed work 
 
 ## Exact next action
 
-Run `python reading/tools/validate_continuation_state.py`; if it passes, resume guarded generation at **Urdu A2 Unit 8 / sequence 43** using the Unit 8 roadmap theme `nature and environment`.
+Run `python reading/tools/validate_continuation_state.py`; if it passes, resume guarded generation at **Urdu A2 Unit 9 / sequence 49** using the Unit 9 roadmap theme `culture, celebrations, and customs`.
