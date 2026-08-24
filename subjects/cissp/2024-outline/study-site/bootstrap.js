@@ -36,5 +36,5 @@ try{
 await import('./app.js');
 await import('./enhancements.js');
 await import('./state-ui-bridge.js');
-await import('./product-polish.js');
+await import('./product-polish.js?v=3');
 })();
