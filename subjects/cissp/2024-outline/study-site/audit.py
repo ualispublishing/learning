@@ -17,6 +17,9 @@ for d in range(1,9):
     pre='window.CISSP_CHUNKS.push('; suf=');'
     assert raw.startswith(pre) and raw.endswith(suf), f'data-d{d}.js wrapper invalid'
     chunks.append(json.loads(raw[len(pre):-len(suf)]))
+raw=(ROOT/'data-ai.js').read_text(encoding='utf-8').strip(); pre='window.CISSP_CHUNKS.push('; suf=');'
+assert raw.startswith(pre) and raw.endswith(suf), 'data-ai.js wrapper invalid'
+chunks.append(json.loads(raw[len(pre):-len(suf)]))
 data={**meta,'objectives':sum((c['objectives'] for c in chunks),[]),'high':sum((c['high'] for c in chunks),[]),'questions':sum((c['questions'] for c in chunks),[])}
 errors=[]
 def check(cond,msg):
@@ -41,12 +44,12 @@ for q in data['questions']:
     check(bool(q.get('explanation','').strip()),f"Question {q['id']} explanation missing")
 check(len({h['id'] for h in data['high']})==len(data['high']),'Duplicate high card ID')
 check(len({q['id'] for q in data['questions']})==len(data['questions']),'Duplicate question ID')
-check(62+len(data['high'])==100,'Runtime cards != 100')
+check(62+len(data['high'])==108,'Runtime cards != 108')
 html=(ROOT/'index.html').read_text(encoding='utf-8')
-check(all(x in html for x in ['data-meta.js']+[f'data-d{i}.js' for i in range(1,9)]+['app.js','id="today"','id="learn"','id="practice"','id="blueprint"','id="progress"','id="sources"']),'HTML shell incomplete')
+check(all(x in html for x in ['data-meta.js']+[f'data-d{i}.js' for i in range(1,9)]+['data-ai.js','app.js','id="today"','id="learn"','id="practice"','id="blueprint"','id="progress"','id="sources"']),'HTML shell incomplete')
 app=(ROOT/'app.js').read_text(encoding='utf-8')
 check('CISSP_CHUNKS.flatMap' in app and 'D.cards=' in app and 'layersFor' in app,'Runtime assembly missing')
 if errors:
     print('FAIL'); [print('-',e) for e in errors]; sys.exit(1)
 print('PASS')
-print(f"domains=8 objectives=62 cards={62+len(data['high'])} questions={len(data['questions'])} sources={len(data['sources'])} weights=100% chunks=8")
+print(f"domains=8 objectives=62 cards={62+len(data['high'])} questions={len(data['questions'])} sources={len(data['sources'])} weights=100% chunks=9")
