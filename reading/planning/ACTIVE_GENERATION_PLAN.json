@@ -1,149 +1,39 @@
 {
+  "schema_version": 2,
+  "project_id": "LANG-A1C2",
+  "updated": "2026-08-23",
+  "state_type": "ACTIVE_PRODUCTION_FRONTIER",
+  "source_continuation": "reading/CONTINUATION.json",
   "source_status": "reading/STATUS.json",
   "source_matrix": "reading/planning/topic_genre_matrix.json",
-  "active_level": "A1",
+  "generation_policy": "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
+  "active_language": "urdu",
+  "active_level": "A2",
+  "active_unit": 1,
+  "start_sequence": 1,
+  "roadmap_lookup": "$.levels.A2",
   "generation_first": true,
-  "formal_audits_deferred": true,
-  "match_count": 1,
-  "matches": [
-    {
-      "path": "$.levels.A1",
-      "value": [
-        {
-          "unit": 1,
-          "theme": "people, place, and daily orientation",
-          "genres": [
-            "micro-story",
-            "dialogue-like narrative",
-            "simple description"
-          ],
-          "domains": [
-            "self",
-            "home",
-            "neighborhood"
-          ]
-        },
-        {
-          "unit": 2,
-          "theme": "daily routine and time",
-          "genres": [
-            "routine narrative",
-            "schedule",
-            "short message"
-          ],
-          "domains": [
-            "daily life",
-            "time"
-          ]
-        },
-        {
-          "unit": 3,
-          "theme": "food and simple choices",
-          "genres": [
-            "market/cafe scene",
-            "description",
-            "short exchange"
-          ],
-          "domains": [
-            "food",
-            "shopping"
-          ]
-        },
-        {
-          "unit": 4,
-          "theme": "family and friends",
-          "genres": [
-            "profile",
-            "micro-story",
-            "message"
-          ],
-          "domains": [
-            "relationships"
-          ]
-        },
-        {
-          "unit": 5,
-          "theme": "school and basic work",
-          "genres": [
-            "day-in-the-life",
-            "notice",
-            "simple explanation"
-          ],
-          "domains": [
-            "education",
-            "work"
-          ]
-        },
-        {
-          "unit": 6,
-          "theme": "directions and local travel",
-          "genres": [
-            "route description",
-            "micro-story",
-            "instruction"
-          ],
-          "domains": [
-            "transport",
-            "places"
-          ]
-        },
-        {
-          "unit": 7,
-          "theme": "weather, clothes, and plans",
-          "genres": [
-            "forecast-like note",
-            "story",
-            "message"
-          ],
-          "domains": [
-            "weather",
-            "daily life"
-          ]
-        },
-        {
-          "unit": 8,
-          "theme": "health and basic needs",
-          "genres": [
-            "problem-solution story",
-            "advice note",
-            "description"
-          ],
-          "domains": [
-            "health"
-          ]
-        },
-        {
-          "unit": 9,
-          "theme": "leisure and simple preferences",
-          "genres": [
-            "profile",
-            "invitation",
-            "micro-story"
-          ],
-          "domains": [
-            "hobbies",
-            "social life"
-          ]
-        },
-        {
-          "unit": 10,
-          "theme": "A1 cumulative mixed life",
-          "genres": [
-            "connected story",
-            "mixed notices/messages",
-            "checkpoint"
-          ],
-          "domains": [
-            "mixed"
-          ]
-        }
-      ],
-      "match": "level_key"
-    }
+  "formal_release_audits_deferred_during_ordinary_generation": true,
+  "previous_level_anchor": {
+    "level": "A1",
+    "canonical_path": "reading/urdu/a1/passages.jsonl",
+    "passages": 60,
+    "git_blob": "ec0970dc1916ce523dd3320d2f4dca4c7f8bc677",
+    "integrity_evidence": "reading/audit/urdu_a1_final_integrity_2026-08-23.json",
+    "integrity_gate": "PASS",
+    "quality_promotion": false
+  },
+  "guardrails": [
+    "Before the first A2 write, verify CONTINUATION.json and STATUS.json against live canonical files.",
+    "Use the exact A2 unit themes/genres/domains from topic_genre_matrix.json; do not duplicate the full roadmap in this derived file.",
+    "Generate in guarded unit or large bounded batches, not one workflow per passage.",
+    "Preserve 6 passages per unit and the active 10-question/10-answer contract unless a documented pedagogical exception applies.",
+    "Write natural independent Urdu rather than translating Arabic or French passages.",
+    "Fix obvious severe defects immediately; defer repeated formal release audits until the designated review phase.",
+    "Do not interpret Urdu A1 integrity PASS as educator/publication release approval."
   ],
-  "notes": [
-    "Derived artifact only; canonical roadmap remains topic_genre_matrix.json.",
-    "Do not invent or rename unit themes when an exact roadmap match exists.",
-    "Passage-quality audits remain deferred to the final multi-pass phase."
+  "on_frontier_change": [
+    "Update this file, reading/CONTINUATION.json, reading/STATUS.json, and reading/TASKS.md together.",
+    "Update reading/RELEASE_STATUS.json only if release evidence changes."
   ]
 }
