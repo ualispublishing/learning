@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-08-24",
+  "batch": "005",
+  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "records": 16,
+  "formats": {"mcq": 16, "bellringer": 0},
+  "difficulty_distribution": {"F": 0, "E": 12, "S": 4, "B": 0},
+  "primary_domain_distribution": {"1": 5, "2": 1, "3": 3, "4": 0, "5": 1, "6": 1, "7": 4, "8": 1},
+  "planner_basis": {
+    "tool": "coverage_report.py",
+    "phase": "depth-after-zero-gap-closure",
+    "targeted_sparse_objectives": ["1.1", "1.4", "1.5", "1.10", "7.3", "7.11", "7.12", "7.15", "3.2", "3.3", "3.8", "6.1", "2.2", "5.1", "8.3"],
+    "planning_standard_mcq_objective_exposure_before_batch": "62/62",
+    "planning_standard_mcq_objective_exposure_after_batch": "62/62",
+    "note": "Batch 005 increases depth and E/S diversity after Batch 004 closed the last zero-exposure objective gaps. Exposure is an authoring metric, not mastery or release status."
+  },
+  "batch_concentration": {
+    "max_primary_domain_records": 5,
+    "max_primary_domain_share": 0.3125,
+    "quality_gate_limit": 0.35,
+    "within_limit": true
+  },
+  "authoring_review": {
+    "semantic_reviewed_records": 16,
+    "four_option_rationales_present": 16,
+    "external_question_seeds_used": 0,
+    "foundation_filler_records": 0,
+    "exam_or_stretch_records": 16,
+    "unknown_source_ids_in_manual_precheck": 0,
+    "unknown_registered_subtopic_labels_in_manual_precheck": 0,
+    "duplicate_candidate_ids_in_batch": 0
+  },
+  "focus": [
+    "Increase application depth for ethics, law/compliance, investigations, and threat modeling without repeating the original decision families.",
+    "Increase operational depth for configuration provisioning, personnel safety, DR testing communications, and disaster-recovery coordination.",
+    "Add formal-model reasoning, requirements-driven control tailoring, and external-hazard facility design.",
+    "Add targeted application for third-party assessment strategy, classified-data handling, service least privilege, and software-security effectiveness.",
+    "Maintain an Exam-calibrated center of gravity and the 35% primary-domain concentration guard."
+  ],
+  "gate_state": {
+    "quality_gate_required": true,
+    "quality_gate_execution_observed_in_this_session": false,
+    "promotion_allowed": false,
+    "reason": "Batch 005 is semantically reviewed and manually schema-prechecked, but promotion still requires an observed automated originality/duplicate gate across the released bank and all unreleased candidates."
+  },
+  "promotion_requirements": [
+    "python question-bank/quality_gate.py completes without FAIL",
+    "every similarity WARN is manually reviewed and resolved before promotion",
+    "python audit.py remains clean after release integration",
+    "semantic audit manifest is expanded if Batch 005 is promoted",
+    "release metadata/counts/difficulty distribution are recomputed",
+    "runtime and static-site checks remain clean"
+  ]
+}
