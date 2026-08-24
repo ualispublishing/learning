@@ -13,22 +13,27 @@ This directory is the source of truth for the Arabic, French, and Urdu A1-C2 gra
 
 ## Start / resume order
 
-1. `CONTINUATION.json` — compact authoritative live resume state and scope guard.
-2. Verify the live canonical JSONL for any language/level you will touch.
-3. `RELEASE_STATUS.json` — educator/publication readiness only.
-4. `STATUS.json` — production counts and frontier only.
-5. `AGENT_HANDOFF_V2.md` — human operating contract.
-6. `planning/ACTIVE_GENERATION_PLAN.json` — exact current generation target.
-7. `TASKS.md` and `VERIFICATION_TASKS.md` — active queues only.
-8. `planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md` and `planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md`.
-9. `planning/TEN_QUESTION_STANDARD.md` and `schema/passage.schema.json`.
-10. durable standards and `ROADMAP.md`.
+1. `../PROJECT_TRACKS.json` — route `LANG-A1C2` vs `LANG-WB` before reading project state.
+2. `AGENTS.md` — scoped fail-closed agent rules for this project.
+3. `CONTINUATION.json` — compact live resume state and scope guard.
+4. Verify the live canonical JSONL for any language/level you will touch.
+5. `RELEASE_STATUS.json` — educator/publication release evidence and decisions only.
+6. `STATUS.json` — live production counts and frontier only.
+7. `planning/ACTIVE_GENERATION_PLAN.json` — exact current generation target.
+8. `AGENT_HANDOFF_V2.md` — human operating contract.
+9. `TASKS.md` and `VERIFICATION_TASKS.md` — active queues only.
+10. durable policies, standards, schema, and `ROADMAP.md` as needed.
 
-Truth precedence:
+## Authority is domain-specific
 
-**live canonical JSONL > fresh hash-bound audit evidence > CONTINUATION > RELEASE_STATUS for release claims > STATUS for production state > handoff/active queues > durable policy/schema/roadmap > historical artifacts.**
+Do not use one global precedence list for every kind of fact:
 
-If those disagree, fail closed and reconcile the live files/evidence first.
+- **Project routing/scope:** `PROJECT_TRACKS.json`, `reading/AGENTS.md`, and `CONTINUATION.json` must agree.
+- **Production facts:** live canonical JSONL is ground truth. `STATUS.json` and `CONTINUATION.json` must match it; mismatch is a stop condition.
+- **Release readiness:** fresh hash-bound evidence can invalidate a release claim. `RELEASE_STATUS.json` is the authoritative affirmative educator/publication decision; stale or conflicting evidence means fail closed, not infer readiness.
+- **Active generation frontier:** `CONTINUATION.json`, `STATUS.json`, and `ACTIVE_GENERATION_PLAN.json` must agree.
+- **Durable rules:** policies/schema/roadmap constrain work but do not override a newer verified live frontier.
+- **History:** Git history, `reading/audit/`, the legacy handoff, and historical snapshots are non-authoritative for the current frontier unless explicitly promoted by the live state stack.
 
 ## Current operating state — 2026-08-23
 
