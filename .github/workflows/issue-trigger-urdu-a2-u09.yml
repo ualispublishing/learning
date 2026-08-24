@@ -1,0 +1,46 @@
+name: Explicit Trigger Urdu A2 Unit 9
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  trigger:
+    if: github.event.issue.title == '[LANG-A1C2] Trigger Urdu A2 Unit 9'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Repair staged learner text and retrigger guarded promotion
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          p=Path('reading/audit/urdu_a2_u09_generation_candidate/ur-a2-u09-p04.json')
+          r=json.loads(p.read_text(encoding='utf-8'))
+          next(a for a in r['answer_key'] if a['id']=='a6')['answer']='شاعری کی دو مصرعوں پر مشتمل ایک اکائی۔'
+          p.write_text(json.dumps(r,ensure_ascii=False,separators=(',',':'))+'\n',encoding='utf-8')
+          wf=Path('.github/workflows/promote-urdu-a2-u09.yml')
+          text=wf.read_text(encoding='utf-8')
+          marker='# explicit-issue-trigger-2026-08-24\n'
+          if marker not in text:
+              wf.write_text(text+'\n'+marker,encoding='utf-8')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/urdu_a2_u09_generation_candidate/ur-a2-u09-p04.json .github/workflows/promote-urdu-a2-u09.yml
+          if ! git diff --cached --quiet; then
+            git commit -m 'Repair Unit 9 learner script and explicitly trigger promotion'
+            git push
+          fi
+      - name: Close trigger issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue close "${{ github.event.issue.number }}" --comment 'Unit 9 promotion trigger processed.'
