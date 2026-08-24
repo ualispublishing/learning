@@ -11,7 +11,7 @@ The repository is organized so a visitor can quickly distinguish **finished/publ
 | [`completed/`](completed/) | Finished | Human-readable index of completed/public-ready learning assets. |
 | Root language CSVs | Finished | Canonical publication-ready Arabic, French, and Urdu datasets. |
 | [`in-progress/`](in-progress/) | In progress | Human-readable index of active and paused learning tracks. |
-| [`subjects/`](subjects/) | Active learning state | Canonical flashcards for material actually reached in the current study program. |
+| [`subjects/`](subjects/) | Active learning state | Canonical study systems and flashcards for tracked subjects. |
 | [`playlists/`](playlists/) | Active curriculum | Ordered audio/video learning paths. |
 | [`progress/`](progress/) | Active state | Machine-readable progress plus the human-readable next lesson. |
 | [`sources/`](sources/) | Reference | Curated source metadata used by learning tracks. |
@@ -19,6 +19,14 @@ The repository is organized so a visitor can quickly distinguish **finished/publ
 | [`audit/`](audit/) | Verification only | Quality-control evidence, candidates, review queues, source extractions, and attestations. **Not learner material.** |
 | [`archive/`](archive/) | Historical | Superseded decks, quarantined content, paused material, and obsolete development iterations. **Not current learner material.** |
 | [`scripts/`](scripts/) + [`.github/workflows/`](.github/workflows/) | Tooling | Active rebuild, audit, and maintenance automation. |
+
+## CISSP Atlas
+
+The current CISSP study system is [`subjects/cissp/2024-outline/study-site/`](subjects/cissp/2024-outline/study-site/). Start with [`TOMORROW_START.md`](subjects/cissp/2024-outline/study-site/TOMORROW_START.md) or the site's 16-question diagnostic rather than reading the repository files sequentially.
+
+**CISSP Atlas v1.2 release scope:** 8 domains, all 62 numbered public objectives, 344 mapped subtopic checks, 33 current AI-security coverage areas, 140 layered retrieval cards, 56 original scenario questions, and 20 primary/reference sources. The machine-readable state is [`RELEASE_STATUS.json`](subjects/cissp/2024-outline/study-site/RELEASE_STATUS.json), and the semantic audit is [`PRECISION_AUDIT.md`](subjects/cissp/2024-outline/study-site/PRECISION_AUDIT.md).
+
+The site is unofficial and independent of ISC2. Its release status means the public-outline mapping, study workflow, and internal consistency have been audited; it does not claim that memorization guarantees a CISSP pass or reproduces the live exam bank.
 
 ## Finished language datasets
 
@@ -36,7 +44,7 @@ These finished datasets are standalone reference/study assets. Their existence d
 
 See [`in-progress/README.md`](in-progress/README.md) for the human-readable overview. The exact machine-readable state is [`progress/current.json`](progress/current.json), and the next lesson is [`progress/NEXT.md`](progress/NEXT.md).
 
-The active track is currently the restarted **Arabic MSA audio-first path**. MATS / Efficient Engineer is preserved as a paused track.
+The active language track is currently the restarted **Arabic MSA audio-first path**. MATS / Efficient Engineer is preserved as a paused track. CISSP Atlas is independently routed through `PROJECT_TRACKS.json` as `CISSP-ATLAS`.
 
 ## Quality status
 
