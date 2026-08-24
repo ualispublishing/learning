@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-23",
+  "purpose": "Prevent cross-project continuation mistakes when language-project chats are restarted or truncated.",
+  "routing_rule": "When a new chat identifies a project_id, stay inside that project's roots and read its continuation/status sources before acting. Never silently switch between LANG-A1C2 and LANG-WB.",
+  "tracks": {
+    "LANG-A1C2": {
+      "name": "Arabic/French/Urdu A1-C2 graded reading",
+      "canonical_root": "reading/",
+      "start_here": [
+        "reading/AGENTS.md",
+        "reading/CONTINUATION.json",
+        "reading/RELEASE_STATUS.json",
+        "reading/STATUS.json",
+        "reading/AGENT_HANDOFF_V2.md"
+      ],
+      "explicit_exclusions": [
+        "completed/languages/workbooks/v1.0/",
+        "audit/language-workbooks/v1.0/",
+        "curation/language-workbooks/v1.0/",
+        "progress/"
+      ],
+      "new_chat_prefix": "LANG-A1C2 — CONTINUE"
+    },
+    "LANG-WB": {
+      "name": "Language workbook v1.0 generation/audit/correction",
+      "canonical_roots": [
+        "completed/languages/workbooks/v1.0/",
+        "audit/language-workbooks/v1.0/",
+        "curation/language-workbooks/v1.0/"
+      ],
+      "explicit_exclusions": [
+        "reading/",
+        "progress/"
+      ],
+      "new_chat_prefix": "LANG-WB — CONTINUE"
+    }
+  },
+  "ambiguity_rule": "If a language request says only 'continue/proceed' and the active project cannot be established from the current chat, consult this router and the project-specific continuation files rather than guessing from whichever language files were most recently edited."
+}
