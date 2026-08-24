@@ -29,10 +29,11 @@ If stored state, the state manifest, and live canonical files disagree, **fail c
 ### Production
 
 - Target: 1,080 passages total; 360 per language; 60 per CEFR level A1-C2.
-- Canonical generated total: **780**.
+- Canonical generated total: **786**.
 - Arabic: **360/360**, A1-C2 generation complete.
 - French: **360/360**, A1-C2 generation complete.
-- Urdu: **60/360**; A1 generation complete, A2 is the next production level.
+- Urdu: **66/360**; A1 generation complete and A2 generation in progress.
+- Urdu A2 canonical path: `reading/urdu/a2/passages.jsonl`; Unit 1 currently contains sequences 1-6.
 - Urdu A1 canonical path: `reading/urdu/a1/passages.jsonl`.
 - Urdu A1 pinned Git blob: `ec0970dc1916ce523dd3320d2f4dca4c7f8bc677`.
 - Urdu A1 final integrity evidence: `reading/audit/urdu_a1_final_integrity_2026-08-23.json`.
@@ -50,13 +51,15 @@ Never convert historical `APPROVED`, `SEALED`, `PASS`, or generation-complete wo
 
 ## Active production frontier
 
-Continue **Urdu A2**, starting from Unit 1 / sequence 1, under:
+Continue **Urdu A2**, starting from Unit 2 / sequence 7, under:
 
 - `reading/planning/ACTIVE_GENERATION_PLAN.json`
 - `reading/planning/topic_genre_matrix.json`
 - `reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md`
 - `reading/planning/TEN_QUESTION_STANDARD.md`
 - `reading/schema/passage.schema.json`
+
+Unit 2 uses the roadmap theme **plans, invitations, and changes** with `email/message`, `narrative`, and `schedule` genres.
 
 Generate in guarded unit or large bounded batches. Do not reopen Urdu A1 generation unless fresh evidence identifies a concrete defect.
 
@@ -91,6 +94,7 @@ After a **production** state change, update together:
 - `reading/STATUS.json`
 - `reading/planning/ACTIVE_GENERATION_PLAN.json` if the frontier changed
 - `reading/TASKS.md`
+- `reading/AGENT_HANDOFF_V2.md` when its live snapshot/frontier changes
 
 After a **verification/release** evidence change, update as applicable:
 
@@ -115,4 +119,4 @@ Do not append historical timelines to live state files. Detailed completed work 
 
 ## Exact next action
 
-Run `python reading/tools/validate_continuation_state.py`; if it passes, resume guarded generation at **Urdu A2 Unit 1** while keeping the three release/verification lanes separate.
+Run `python reading/tools/validate_continuation_state.py`; if it passes, resume guarded generation at **Urdu A2 Unit 2 / sequence 7** using the Unit 2 roadmap theme `plans, invitations, and changes`.
