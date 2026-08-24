@@ -1,6 +1,23 @@
 (async()=>{'use strict';
 const calibration=window.CISSP_QUESTION_CALIBRATION||{};
 for(const chunk of (window.CISSP_CHUNKS||[]))for(const q of (chunk.questions||[])){const c=calibration[q.id];if(c){q.difficulty_tier=c.tier;q.difficulty_score=c.score}}
+// The original card engine keeps an in-memory progress snapshot. v1.3 practice adds
+// richer quiz/Bellringer history after that snapshot is created. Preserve those newer
+// histories if a later card grade writes the older snapshot back to localStorage.
+const PROGRESS_KEY='cissp_atlas_progress_v1',nativeSet=Storage.prototype.setItem;
+Storage.prototype.setItem=function(key,value){
+  if(this===localStorage&&key===PROGRESS_KEY){
+    try{
+      const current=JSON.parse(this.getItem(key)||'{}'),incoming=JSON.parse(value||'{}');
+      const currentQuizHistory=current.quiz?.history||[],incomingQuizHistory=incoming.quiz?.history||[];
+      if(currentQuizHistory.length>incomingQuizHistory.length)incoming.quiz=current.quiz;
+      const currentBellHistory=current.bellringers?.history||[],incomingBellHistory=incoming.bellringers?.history||[];
+      if(currentBellHistory.length>incomingBellHistory.length)incoming.bellringers=current.bellringers;
+      value=JSON.stringify(incoming);
+    }catch(e){console.warn('CISSP progress merge fallback',e)}
+  }
+  return nativeSet.call(this,key,value);
+};
 try{
   const manifest=await fetch('question-bank/RELEASED_BATCHES.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(`release manifest ${r.status}`);return r.json()});
   const files=manifest.released_batches.flatMap(b=>b.files||[]);
