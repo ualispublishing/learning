@@ -3,6 +3,16 @@ const $=s=>document.querySelector(s);
 const setText=(s,t)=>{const n=$(s);if(n)n.textContent=t};
 const setHTML=(s,t)=>{const n=$(s);if(n)n.innerHTML=t};
 
+// Final workflow overrides load after the compact product skin so the study path
+// remains visible without reintroducing the older visual clutter.
+if(!document.querySelector('link[data-workflow-clarity]')){
+  const link=document.createElement('link');
+  link.rel='stylesheet';
+  link.href='workflow-clarity.css?v=1';
+  link.dataset.workflowClarity='1';
+  document.head.appendChild(link);
+}
+
 // Trim product copy so the interface teaches through use instead of explaining itself.
 setText('.brand span','CISSP study system');
 setHTML('#today .hero h1','Study what matters.<br><span>Prove you know it.</span>');
