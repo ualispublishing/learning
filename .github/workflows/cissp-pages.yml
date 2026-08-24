@@ -26,11 +26,11 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
-      - name: Run release audit before deploy
+      - name: Run released-corpus audit before deploy
         working-directory: subjects/cissp/2024-outline/study-site
         run: |
           python audit.py
-          python question-bank/quality_gate.py
+          python question-bank/quality_gate.py --released-only
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload CISSP site
