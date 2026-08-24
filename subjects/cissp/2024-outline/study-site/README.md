@@ -2,73 +2,77 @@
 
 Unofficial, original study site mapped to the current public ISC2 CISSP exam outline (effective 2024-04-15) and the AI-security cross-domain guidance currently published on ISC2's live outline page.
 
-## Audited scope
+## Current release — v1.3
 
-- 8 CISSP domains;
+- 8 CISSP domains and current official weights: 16/10/13/13/13/12/13/10 = 100%;
 - all 62 numbered public objectives mapped;
-- 344 paraphrased public-outline subtopic checks across those objectives;
+- 344 paraphrased public-outline subtopic checks;
 - 33 current AI-security coverage areas across all 8 domains;
-- 140 layered retrieval cards: objective coverage, high-yield distinctions, AI cross-domain cards, and a 32-card precision-depth layer;
-- 56 original scenario questions, including AI scenarios and 16 additional precision scenarios;
-- current official domain weights (16/10/13/13/13/12/13/10 = 100%);
-- 20 primary/reference sources, including current NIST SP 800-63-4 (2025), SP 800-61 Rev. 3 (2025), SP 800-88 Rev. 2 (2025), IETF IPsec/Kerberos/OAuth specifications, OpenID Connect, OASIS SAML, and OWASP ASVS.
+- 140 layered retrieval cards;
+- **79 released standard scenario questions + 1 Bellringer = 80 released bank records**;
+- released author-difficulty mix: **41 Foundation+ / 34 Exam-calibrated / 4 Stretch / 1 Bellringer**;
+- **220 learner-facing items in the semantic-audit ledger**;
+- 20 primary/reference sources.
 
-## 2026-08-24 item-level semantic pass
+`question-bank/RELEASED_BATCHES.json` is authoritative for promoted question batches. Batch 001 is released in v1.3; Batch 002 remains candidate-only until its repository gate is clean.
 
-All **196 current learner-facing items** were individually reviewed: 62 objective cards, 38 high-yield cards, 8 AI cards, 32 precision cards, and all 56 questions including option sets, keyed answers, and explanations.
+## Item-level semantic status
 
-Result:
+The semantic ledger now covers all 220 released learner-facing items: 62 objective cards, 38 high-yield cards, 8 AI cards, 32 precision cards, 79 standard questions, and 1 Bellringer.
 
-- 193 verified unchanged;
-- 1 verified after a precision wording correction (`HY-014`, digital signatures/nonrepudiation);
+Current audit summary:
+
+- 217 verified unchanged;
+- 1 verified after a wording correction (`HY-014`, digital signatures/nonrepudiation);
 - 2 verified with explicit source-scope notes (`AI-005`, `PX-020`);
-- **0 answer-key reversals**;
-- **0 known remaining material factual errors identified by this pass**.
+- **0 keyed-answer reversals**;
+- **0 known remaining material factual errors identified by the documented review**.
 
-`SEMANTIC_ITEM_AUDIT.json` records the status of every current item. `audit.py` now rejects a release if the live card/question IDs no longer exactly match that semantic-audit manifest.
-
-See `PRECISION_AUDIT.md` for the detailed review and the boundary between “no known error after review” and an impossible absolute guarantee of eternal 100% infallibility.
+This is a strong, auditable quality claim—not a mathematical guarantee that every sentence can never contain nuance or that studying the site guarantees a live CISSP pass. See `PRECISION_AUDIT.md` and `SEMANTIC_ITEM_AUDIT.json`.
 
 ## Study workflow
 
-The interface is organized around **diagnose → retrieve → apply → repair weak areas → re-test later** rather than passive content browsing. It includes:
+The interface is organized around **diagnose → retrieve → apply → repair weak areas → re-test later**. v1.3 includes:
 
-- a 16-question, two-per-domain first-run diagnostic used only for routing;
+- 16-question, two-per-domain first-run diagnostic used only for routing;
 - local spaced-review state and retrieval-before-reveal cards;
 - weighted domain mastery and weak-objective recommendations;
-- expandable subtopic coverage under every objective;
-- a precision-depth deck for commonly confused technical and managerial distinctions;
-- 10/20/40/56-question scenario sets;
-- global search across cards, objectives, and mapped subtopics;
-- keyboard study controls and a CISSP decision lens for management/risk scenarios;
-- progress export/reset;
-- responsive desktop/mobile layouts;
-- primary/reference source traceability.
+- expandable subtopic coverage and precision-depth cards;
+- **difficulty-aware standard practice** with Foundation+, Exam-calibrated, Stretch, and Exam+Stretch filters;
+- **confidence-before-answer** capture;
+- high-confidence-miss tracking;
+- full four-option teaching rationales for newly authored released batches;
+- separate **NON-EXAM-REPRESENTATIVE INTEGRATIVE DRILL** Bellringer mode with constructed responses, rubric reveal, and self-scoring;
+- global search, keyboard controls, progress export/reset, and responsive desktop/mobile layouts.
+
+The original 56-question baseline still uses the older single-explanation format, so its incorrect options receive a generic teaching fallback until their four-option rationales are backfilled.
 
 ## Question-bank expansion
 
-`question-bank/QUESTION_BANK_EXPANSION_PLAN.md` defines the next bank maturity target: **800 total records** with a deliberate difficulty mix:
+`question-bank/QUESTION_BANK_EXPANSION_PLAN.md` defines an 800-record maturity target:
 
 - 15% Foundation+ — slightly easier than expected exam level;
-- **60% Exam-calibrated** — the center of gravity;
+- **60% Exam-calibrated** — center of gravity;
 - 20% Stretch — somewhat harder through reasoning depth, not obscure trivia;
-- 5% Bellringer — clearly labeled non-exam-representative multi-domain case drills.
+- 5% Bellringer — clearly labeled, non-exam-representative multi-domain cases.
 
-Originality is enforced by authoring from public scope/primary standards rather than other questions, plus exact/near-text/structural duplicate detection. `question-bank/quality_gate.py` is wired into CI, and `question-bank/CANDIDATE_SCHEMA.json` defines future question/case metadata.
+Originality is enforced by decision-rule-first authoring from public scope/registered standards and audited knowledge, never from exam dumps, live-item recollections, leaked banks, or commercial-question wording/templates. `question-bank/quality_gate.py` compares unreleased candidates against the base bank, all promoted batches, and their own batch using exact, near-text, and structural duplicate checks.
 
-## Precision boundary
+### Current expansion state
 
-`audit.py` verifies structural and mapping correctness: objective IDs/counts, official weights, exact subtopic-map coverage, AI coverage across all eight domains, source references, answer indices, duplicate IDs, per-domain precision/scenario coverage, runtime card/question/source counts, release-status agreement, metadata-count agreement, the complete semantic-item manifest, and required application assets.
-
-This is **published-outline coverage plus item-level review**, not a claim that a public deck contains every live adaptive-exam fact or can guarantee a pass. ISC2 describes CISSP as experiential and does not guarantee that a candidate will pass. All practice questions here are original; no exam dumps or copied commercial questions are included.
+- **Batch 001:** released in v1.3; 24 records = F4/E15/S4/B1.
+- **Batch 002:** candidate-only; 16 standard MCQs = E12/S4, exactly two primary-domain questions per domain, zero Foundation+ filler. It must remain unreleased until its full repository gate produces no unresolved failures/warnings.
 
 ## Continuous audit
 
-`.github/workflows/cissp-study-site-audit.yml` runs the deterministic knowledge audit, question-bank originality/duplicate gate, JavaScript syntax checks, and a static HTTP asset smoke test whenever this site changes.
+`.github/workflows/cissp-study-site-audit.yml` runs:
 
-## Tomorrow start
+1. `python audit.py`;
+2. `python question-bank/quality_gate.py`;
+3. JavaScript syntax checks, including the v1.3 bootstrap/calibration/practice files;
+4. static HTTP smoke checks for critical site and released-bank assets.
 
-Read `TOMORROW_START.md` or simply open the site and run the 16-question diagnostic. `RELEASE_STATUS.json` is the machine-readable release marker.
+The Pages workflow also runs both Python gates before deployment.
 
 ## Run locally
 
@@ -79,8 +83,10 @@ python audit.py
 python question-bank/quality_gate.py
 ```
 
+Serve the folder over HTTP rather than opening `index.html` directly, because v1.3 loads the released batch manifest/JSONL through `fetch()` before the application initializes.
+
 ## GitHub Pages
 
-`.github/workflows/cissp-pages.yml` is the standard audited Pages deployment: it runs `audit.py`, uploads only this static study-site folder, and deploys it with GitHub's Pages actions. The expected project URL is `https://ualispublishing.github.io/learning/`.
+`.github/workflows/cissp-pages.yml` deploys only after the release audit and question-bank quality gate. Expected project URL: `https://ualispublishing.github.io/learning/`.
 
-If Pages has never been enabled for this repository, GitHub requires a one-time repository setting before the workflow can deploy: **Settings → Pages → Build and deployment → Source → GitHub Actions**. The normal `GITHUB_TOKEN` cannot perform that initial enablement itself. Once enabled, pushes affecting this site trigger the deployment workflow automatically.
+If Pages has never been enabled for this repository, the one-time repository setting remains: **Settings → Pages → Build and deployment → Source → GitHub Actions**.
