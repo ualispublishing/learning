@@ -79,10 +79,7 @@ async function run(){
   result.dataset.smoke='pass';
   result.textContent='PASS interactive browser smoke: startup keyboard-review practice progress sources navigation diagnostic mobile-390';
 }
-Promise.all([
-  new Promise(r=>frame.addEventListener('load',r,{once:true})),
-  new Promise(r=>mobile.addEventListener('load',r,{once:true}))
-]).then(()=>run()).catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
+run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
 </script>
 </body>
