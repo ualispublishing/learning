@@ -1,14 +1,17 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "updated": "2026-08-24",
   "released": {
-    "standard_mcq": 56,
-    "difficulty_distribution": {"F": 37, "E": 19, "S": 0, "B": 0},
-    "classification_manifest": "RELEASED_QUESTION_CLASSIFICATION.json"
+    "bank_records": 80,
+    "standard_mcq": 79,
+    "bellringer_cases": 1,
+    "difficulty_distribution": {"F": 41, "E": 34, "S": 4, "B": 1},
+    "base_classification_manifest": "RELEASED_QUESTION_CLASSIFICATION.json",
+    "released_batch_manifest": "RELEASED_BATCHES.json"
   },
-  "candidate_batches": {
+  "released_batches": {
     "001": {
-      "status": "CANDIDATE_PRECHECK_PASS_NOT_YET_RELEASED",
+      "status": "RELEASED_V1_3_0",
       "records": 24,
       "standard_mcq": 23,
       "bellringer": 1,
@@ -16,11 +19,22 @@
       "review": "BATCH_001_REVIEW.json"
     }
   },
-  "after_batch_001_promotion": {
-    "bank_records": 80,
-    "standard_mcq": 79,
+  "candidate_batches": {
+    "002": {
+      "status": "SEMANTIC_REVIEWED_PENDING_REPOSITORY_GATE",
+      "records": 16,
+      "standard_mcq": 16,
+      "bellringer": 0,
+      "difficulty_distribution": {"F": 0, "E": 12, "S": 4, "B": 0},
+      "file": "candidates/batch-002.jsonl",
+      "primary_domain_distribution": {"1": 2, "2": 2, "3": 2, "4": 2, "5": 2, "6": 2, "7": 2, "8": 2}
+    }
+  },
+  "if_batch_002_promotes": {
+    "bank_records": 96,
+    "standard_mcq": 95,
     "bellringer_cases": 1,
-    "difficulty_distribution": {"F": 41, "E": 34, "S": 4, "B": 1}
+    "difficulty_distribution": {"F": 41, "E": 46, "S": 8, "B": 1}
   },
   "long_term_target": {
     "bank_records": 800,
@@ -30,10 +44,10 @@
     "B": 40
   },
   "next_priority": [
-    "Promote Batch 001 only after the full repository quality gate remains clean.",
-    "After promotion, author subsequent batches with very little Foundation+ content because the released baseline already has 37 Foundation+ questions.",
-    "Bias the next 120 records heavily toward Exam-calibrated and Stretch reasoning while expanding objective/subtopic exposure.",
-    "Add bellringer UI separately so integrative cases cannot be mistaken for real CISSP item format.",
-    "Track confidence, distractor choice, response time, and spaced repeat performance before making empirical difficulty claims."
+    "Run the repository originality/duplicate/semantic gate against Batch 002 and all 80 released records.",
+    "Do not promote Batch 002 if any similarity warning cannot be resolved semantically.",
+    "Continue biasing subsequent batches toward Exam-calibrated and Stretch reasoning until the released mix approaches target.",
+    "Backfill four-option rationales for the 56 legacy baseline questions so all standard items have the same teaching depth.",
+    "Use confidence and selected-distractor history to identify durable misconceptions before making any empirical difficulty claims."
   ]
 }
