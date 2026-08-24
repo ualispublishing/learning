@@ -36,6 +36,10 @@ function decorateShortcuts(){
 const learn=$('#learn');if(learn)new MutationObserver(decorateShortcuts).observe(learn,{childList:true,subtree:true});decorateShortcuts();
 
 // Keep dynamic readiness wording compact after the base renderer refreshes it.
-function compactReadiness(){const b=$('#readinessCard .ready-copy b');if(b)b.textContent='Mastery'}
+// Guard the write so the observer cannot trigger itself indefinitely.
+function compactReadiness(){
+  const b=$('#readinessCard .ready-copy b');
+  if(b&&b.textContent!=='Mastery')b.textContent='Mastery';
+}
 const readiness=$('#readinessCard');if(readiness)new MutationObserver(compactReadiness).observe(readiness,{childList:true,subtree:true});compactReadiness();
 })();
