@@ -1,24 +1,19 @@
 {
-  "status": "GENERATION_COMPLETE_PENDING_FINAL_AUDIT",
+  "state_version": 2,
+  "state_type": "HISTORICAL_FRENCH_C2_GENERATION_SNAPSHOT",
+  "authoritative_for_current_frontier": false,
+  "current_state_source": "reading/CONTINUATION.json",
+  "current_production_source": "reading/STATUS.json",
+  "current_release_source": "reading/RELEASE_STATUS.json",
+  "historical_status_at_completion": "GENERATION_COMPLETE_PENDING_FINAL_AUDIT",
   "language": "fr",
   "cefr": "C2",
-  "canonical_blob": "c2e64d6d454559931be07d3ec71d5749ec0e063d",
+  "canonical_blob_at_completion": "c2e64d6d454559931be07d3ec71d5749ec0e063d",
   "passages": 60,
   "units": 10,
   "last_sequence": 60,
-  "completed_units": [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10
-  ],
-  "source_of_truth": "reading/french/c2/passages.jsonl + reading/audit/french_c2_unit10_frontier_lock.json",
-  "next_phase": "whole-French final audit (>=10 distinct passes)",
-  "note": "Generation completion is not final French approval."
+  "completed_units": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  "historical_source_of_truth": "reading/french/c2/passages.jsonl + reading/audit/french_c2_unit10_frontier_lock.json",
+  "historical_next_phase_at_completion": "whole-French final audit (>=10 distinct passes)",
+  "note": "Retained for historical traceability only. Do not use this file to select the current language/level/frontier or to infer current French release readiness."
 }
