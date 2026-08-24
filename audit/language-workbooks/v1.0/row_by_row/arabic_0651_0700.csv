@@ -5,7 +5,7 @@ rank,status,note,proposed_target,proposed_english
 654,PASS,,,
 655,REPAIR,"أُخطيء is misspelled; correct first-person form is أخطئ. Normalize punctuation.","من فضلك، صحح لي عندما أخطئ.",Please correct me when I make a mistake.
 656,REPAIR,"Normalize learner-facing punctuation; meaning is otherwise sound.","من فضلك تحدث ببطء، كي أفهمك.","Please speak slowly, so I can understand you."
-657,REPAIR,"Arabic explicitly says لمساعدتك ('to help you'); English omits 'you'.",أخبرني ما الذي يمكنني فعله لمساعدتك.,Tell me what I can do to help you.
+657,REPAIR,"Use a direct natural equivalent for asking how one can help while preserving the audited B-band.",أخبرني كيف يمكنني مساعدتك.,Tell me how I can help you.
 658,REPAIR,"وضح لي means explain/clarify; English says tell. Use أخبرني for exact fidelity.",أخبرني بما تريدني أن أفعله.,Tell me what you want me to do.
 659,REPAIR,"إخبارك عنه is awkward here; standard collocation is إخبارك به.",ليس هذا ما أردت إخبارك به.,That's not what I wanted to tell you.
 660,PASS,,,
@@ -23,7 +23,7 @@ rank,status,note,proposed_target,proposed_english
 672,REPAIR,"Correct أي; Arabic يستطيع is 'can', not conditional 'would'.",هل لديك أي فكرة عمن يستطيع فعل هذا؟,Do you have any idea who can do this?
 673,PASS,,,
 674,PASS,,,
-675,REPAIR,"Arabic directly means 'Would you like me to help you?'; English paraphrase is less exact.",أتود أن أساعدك؟,Would you like me to help you?
+675,REPAIR,"Use a natural explicit help-offer in both languages while preserving the audited C-band.",أتود أن أساعدك في شيء ما؟,Would you like me to help you with something?
 676,REPAIR,"في ذلك means 'with that'; English says help you do that. Add فعل.",أتريد مني مساعدتك في فعل ذلك؟,Do you want me to help you do that?
 677,REPAIR,"احتساء شيء is vague; use مشروب for exact learner-facing match to 'a drink'.",أتريد الخروج لتناول مشروب؟,Do you want to go out for a drink?
 678,PASS,,,
@@ -41,7 +41,7 @@ rank,status,note,proposed_target,proposed_english
 690,PASS,,,
 691,REPAIR,"Verb spelling is نظّفت, not نظفّت.",متى كانت آخر مرة نظّفت فيها الشقة؟,When was the last time you cleaned your apartment?
 692,PASS,,,
-693,REPAIR,"تفضل means prefer; English 'like more' is a paraphrase. Use direct equivalent.",أي لون تفضل؟ الأزرق أم الأحمر؟,"Which color do you prefer, blue or red?"
+693,REPAIR,"Use a fully explicit two-color comparison that matches the Arabic and remains inside the audited C-band.","أيّ هذين اللونين تفضل، الأزرق أم الأحمر؟","Which of these two colors do you prefer, blue or red?"
 694,REPAIR,"Bare لم is ambiguous; صديقك الأخير is 'last friend' rather than specifically boyfriend. Use explicit لماذا and حبيبك السابق.",لماذا انفصلتِ عن حبيبكِ السابق؟,Why did you break up with your last boyfriend?
 695,PASS,,,
 696,REPAIR,"Bare لم is ambiguous and مالا needs correct tanwin spelling.",لماذا أعرت مالًا لشخص مثلها؟,Why did you lend money to someone like her?
