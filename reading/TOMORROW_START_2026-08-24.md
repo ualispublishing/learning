@@ -39,6 +39,8 @@ A reviewed Unit 1 generation branch exists:
 
 `lang-a1c2-urdu-a2-unit01`
 
+Draft integration PR: **#58 — LANG-A1C2: add and polish Urdu A2 Unit 1**.
+
 Its intended post-integration production state is:
 
 - project: **786/1080** generated;
@@ -52,7 +54,13 @@ The branch contains:
 - exact lexical-sense evidence for the eight deliberate targets;
 - a hash-guarded bounded reader-first quality remediation that corrects the identified naturalness/semantic issues and emits `reading/audit/urdu_a2_u01_quality_pass_2026-08-23.json`.
 
-If `main` already shows 786 total passages, Urdu 66, and Unit 2 / sequence 7 with the continuation validator green, **do not redo Unit 1**. If not, verify the quality-pass artifact and integrate the branch using a normal merge/PR path that preserves unrelated concurrent work on `main`. Never force `main` to an older branch tree.
+### Morning decision
+
+**Case 1 — Unit 1 is already integrated:** if `main` shows project=786, Urdu=66, and Unit 2 / sequence 7 with `validate_continuation_state.py` green, do **not** reopen or regenerate Unit 1. Go directly to Session 1 below.
+
+**Case 2 — PR #58 is still draft:** verify that `reading/audit/urdu_a2_u01_quality_pass_2026-08-23.json` exists on the PR branch and is bound to the repaired Unit 1 corpus. If it is absent, keep the PR blocked and run/apply the prepared exact remediation before merge. If it is present and checks are clean, merge PR #58 through GitHub's normal merge path and rerun continuation validation on `main`.
+
+Never force `main` to the Unit 1 branch head or reuse the branch's whole tree as `main`; unrelated work is landing in parallel.
 
 ## Gate B — seven ready sessions
 
@@ -72,6 +80,8 @@ If all seven sessions complete successfully, the expected frontier is:
 - Urdu: **108/360** generated;
 - Urdu A2: **48/60** generated;
 - next: **Urdu A2 Unit 9 / sequence 49**.
+
+When present, `reading/audit/week_ready_2026-08-24.json` is the hash-bound machine evidence for the prepared queue. If that audit is absent, rerun `python reading/tools/write_week_ready_audit.py` after the queue validator passes rather than inferring readiness from this guide alone.
 
 ## Per-session operating pattern
 
