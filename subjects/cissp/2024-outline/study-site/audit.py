@@ -15,6 +15,7 @@ assert cover_raw.startswith('window.CISSP_COVERAGE=') and marker in cover_raw an
 coverage=json.loads(cover_raw[len('window.CISSP_COVERAGE='):cover_raw.index(marker)])
 ai=json.loads(cover_raw[cover_raw.index(marker)+len(marker):-1])
 release=json.loads((ROOT/'RELEASE_STATUS.json').read_text(encoding='utf-8'))
+semantic=json.loads((ROOT/'SEMANTIC_ITEM_AUDIT.json').read_text(encoding='utf-8'))
 errors=[]
 def check(cond,msg):
     if not cond: errors.append(msg)
@@ -64,6 +65,18 @@ check(meta['meta'].get('domain_weight_total')==sum(d['weight'] for d in data['do
 rs=release.get('scope',{})
 check(release.get('project_id')=='CISSP-ATLAS' and release.get('release')=='1.2.0' and release.get('status')=='READY_FOR_STUDY','Release status identity/version/state drift')
 check(rs.get('domains')==8 and rs.get('numbered_objectives')==62 and rs.get('subtopic_checks')==subtopics and rs.get('ai_coverage_areas')==ai_areas and rs.get('layered_cards')==computed_cards and rs.get('original_scenario_questions')==len(data['questions']) and rs.get('sources')==sources and rs.get('official_weight_total_percent')==100,'Release scope drift')
+expected_semantic={*(f"OBJ-{o['id']}" for o in data['objectives']),*(h['id'] for h in data['high']),*(q['id'] for q in data['questions'])}
+semantic_items=semantic.get('items',{})
+allowed_semantic={'VERIFIED','VERIFIED_AFTER_CORRECTION','VERIFIED_WITH_SOURCE_SCOPE_NOTE'}
+check(semantic.get('release')=='1.2.0' and semantic.get('audit_date')=='2026-08-24','Semantic audit release/date drift')
+check(set(semantic_items)==expected_semantic,f'Semantic audit coverage mismatch: expected {len(expected_semantic)} items, got {len(semantic_items)}')
+check(len(expected_semantic)==196,'Semantic audit expected item count != 196')
+check(all(v.get('status') in allowed_semantic for v in semantic_items.values()),'Semantic audit contains invalid/unreviewed status')
+ss=semantic.get('scope',{})
+check(ss.get('objective_cards')==62 and ss.get('high_yield_cards')==38 and ss.get('ai_cards')==8 and ss.get('precision_cards')==32 and ss.get('questions')==56 and ss.get('total_items')==196,'Semantic audit scope counts drift')
+sem_summary=semantic.get('summary',{})
+check(sem_summary.get('answer_key_reversals')==0,'Semantic audit reports answer-key reversal')
+check(sem_summary.get('material_factual_errors_remaining')==0,'Semantic audit reports remaining material factual error')
 check((ROOT/'TOMORROW_START.md').exists() and 'Run the 16-question diagnostic once' in (ROOT/'TOMORROW_START.md').read_text(encoding='utf-8'),'Tomorrow-start guide missing or incomplete')
 html=(ROOT/'index.html').read_text(encoding='utf-8')
 required=['data-meta.js']+[f'data-d{i}.js' for i in range(1,9)]+['data-ai.js','data-precision.js','coverage-detail.js','app.js','enhancements.js','styles.css','mobile-fix.css','enhancements.css','id="today"','id="learn"','id="practice"','id="blueprint"','id="progress"','id="sources"','<option>56</option>','Mixed domains','RELEASE v1.2']
@@ -75,4 +88,4 @@ check('diagnosticSet' in enh and 'decorateBlueprint' in enh and 'cissp_atlas_dia
 if errors:
     print('FAIL'); [print('-',e) for e in errors]; sys.exit(1)
 print('PASS')
-print(f"release=1.2.0 status=READY_FOR_STUDY domains=8 objectives={len(ids)} subtopic_checks={subtopics} ai_areas={ai_areas} cards={computed_cards} questions={len(data['questions'])} sources={sources} weights=100%")
+print(f"release=1.2.0 status=READY_FOR_STUDY domains=8 objectives={len(ids)} subtopic_checks={subtopics} ai_areas={ai_areas} cards={computed_cards} questions={len(data['questions'])} sources={sources} semantic_items={len(semantic_items)} weights=100%")
