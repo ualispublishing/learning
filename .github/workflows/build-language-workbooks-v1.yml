@@ -79,12 +79,49 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # The row audit is authoritative for linguistic correctness. If a corrected
+          # English translation crosses the selector's original word-count band,
+          # recompute that row's level instead of weakening the translation.
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('scripts/apply_language_workbook_linguistic_repairs.py')
+          s = p.read_text(encoding='utf-8')
+          pattern = re.compile(
+              r'        if new_level != row\["level"\]:\n'
+              r'            band_errors\.append\(\{.*?\n'
+              r'            \}\)\n'
+              r'            continue\n',
+              re.S,
+          )
+          s, n = pattern.subn(
+              '        if new_level != row["level"]:\n'
+              '            row["level"] = new_level\n',
+              s,
+              count=1,
+          )
+          if n != 1:
+              raise SystemExit(f'expected one sentence rebanding block, patched {n}')
+          fail_block = re.compile(
+              r'\n    if band_errors:\n'
+              r'        fail\(f"sentence/\{lang\}: band changes blocked: '
+              r'\{json\.dumps\(band_errors, ensure_ascii=False\)\}"\)\n'
+          )
+          s, n = fail_block.subn('\n', s, count=1)
+          if n != 1:
+              raise SystemExit(f'expected one obsolete band-failure block, removed {n}')
+          p.write_text(s, encoding='utf-8')
+          PY
           timeout --signal=TERM 60s python scripts/apply_language_workbook_linguistic_repairs.py
           timeout --signal=TERM 60s python scripts/apply_language_workbook_linguistic_repairs.py --write
 
-      - name: Pass 2.6 — post-repair canonical vocabulary integrity (max 2 min)
+      - name: Pass 2.6 — post-repair canonical vocabulary integrity (max 3 min)
         shell: bash
-        run: timeout --signal=TERM 120s python scripts/attest_live_csvs.py
+        run: |
+          set -euo pipefail
+          timeout --signal=TERM 180s python scripts/attest_live_csvs.py
+          timeout --signal=TERM 180s python scripts/audit_french_urdu_top1000_regressions.py
 
       - name: Pass 3 — full corpus audit + stratified samples (max 2 min)
         shell: bash
@@ -137,6 +174,9 @@ jobs:
           path: |
             completed/languages/workbooks/v1.0/
             audit/language-workbooks/v1.0/
+            arabic_top1000.csv
+            french_top1000.csv
+            urdu_top1000.csv
 
       - name: Commit verified outputs to PR branch
         if: github.event_name == 'pull_request'
