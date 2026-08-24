@@ -213,6 +213,7 @@ def plan_sentences(lang: str, ledger: list[dict]) -> dict:
     by_rank = {int(r["rank"]): r for r in rows}
     applied: list[int] = []
     already: list[int] = []
+    band_errors: list[dict] = []
 
     for item in ledger:
         rank = int(item["rank"])
@@ -229,10 +230,14 @@ def plan_sentences(lang: str, ledger: list[dict]) -> dict:
         new_words = len(english_words(proposed_english))
         new_level = band(new_words)
         if new_level != row["level"]:
-            fail(
-                f"BAND CHANGE BLOCKED: sentence/{lang} rank {rank}: "
-                f"{row['level']} -> {new_level}; proposed English={proposed_english!r}"
-            )
+            band_errors.append({
+                "rank": rank,
+                "from": row["level"],
+                "to": new_level,
+                "words": new_words,
+                "proposed_english": proposed_english,
+            })
+            continue
 
         current_pair = (row["target"], row["english"])
         proposed_pair = (proposed_target, proposed_english)
@@ -248,6 +253,9 @@ def plan_sentences(lang: str, ledger: list[dict]) -> dict:
         row["words"] = str(new_words)
         row["attribution"] = adapted_attribution(row.get("attribution", ""))
         applied.append(rank)
+
+    if band_errors:
+        fail(f"sentence/{lang}: band changes blocked: {json.dumps(band_errors, ensure_ascii=False)}")
 
     target_dupes = duplicate_groups(rows, "target")
     english_dupes = duplicate_groups(rows, "english")
