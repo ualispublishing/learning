@@ -34,4 +34,4 @@ This is a decision lens, not a universal answer key.
 
 ## Release scope
 
-CISSP Atlas v1.2 includes 8 domains, all 62 numbered public objectives, 344 mapped subtopic checks, 33 current AI-security coverage areas, 140 layered cards, 56 original scenarios, and 19 primary/reference sources. See `PRECISION_AUDIT.md` for the audit boundary and `RELEASE_STATUS.json` for machine-readable release status.
+CISSP Atlas v1.2 includes 8 domains, all 62 numbered public objectives, 344 mapped subtopic checks, 33 current AI-security coverage areas, 140 layered cards, 56 original scenarios, and 20 primary/reference sources. See `PRECISION_AUDIT.md` for the audit boundary and `RELEASE_STATUS.json` for machine-readable release status.
