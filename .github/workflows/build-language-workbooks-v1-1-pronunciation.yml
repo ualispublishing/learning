@@ -7,6 +7,7 @@ on:
     paths:
       - 'audit/language-workbooks/v1.1-pronunciation/row_by_row/**'
       - 'audit/language-workbooks/v1.1-pronunciation/candidates/**'
+      - 'scripts/repair_pronunciation_candidate_provenance.py'
       - 'scripts/finalize_language_workbook_pronunciation.py'
       - 'scripts/build_language_workbooks_v1_1_pronunciation.py'
       - '.github/workflows/build-language-workbooks-v1-1-pronunciation.yml'
@@ -16,6 +17,7 @@ on:
     paths:
       - 'audit/language-workbooks/v1.1-pronunciation/row_by_row/**'
       - 'audit/language-workbooks/v1.1-pronunciation/candidates/**'
+      - 'scripts/repair_pronunciation_candidate_provenance.py'
       - 'scripts/finalize_language_workbook_pronunciation.py'
       - 'scripts/build_language_workbooks_v1_1_pronunciation.py'
       - '.github/workflows/build-language-workbooks-v1-1-pronunciation.yml'
@@ -55,8 +57,36 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          python -m py_compile scripts/repair_pronunciation_candidate_provenance.py
           python -m py_compile scripts/finalize_language_workbook_pronunciation.py
           python -m py_compile scripts/build_language_workbooks_v1_1_pronunciation.py
+
+      - name: Pass 1.5 — repair known French candidate provenance defect
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/repair_pronunciation_candidate_provenance.py | tee /tmp/pronunciation-provenance-repair.json
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          candidate = Path('audit/language-workbooks/v1.1-pronunciation/candidates/french_sentences.csv')
+          ledger = Path('audit/language-workbooks/v1.1-pronunciation/row_by_row/french_sentences_0251_0300.csv')
+          with candidate.open(encoding='utf-8-sig', newline='') as h:
+              rows = list(csv.DictReader(h))
+          assert len(rows) == 1000
+          assert [int(r['rank']) for r in rows] == list(range(1,1001))
+          assert rows[287]['target'] == "Pouvez-vous signer ici, s'il vous plaît ?"
+          assert rows[287]['english'] == 'Could you sign here, please?'
+          assert rows[287]['level'] == 'B'
+          with ledger.open(encoding='utf-8-sig', newline='') as h:
+              led = list(csv.DictReader(h))
+          assert len(led) == 50
+          r = led[37]
+          assert r['rank'] == '288' and r['status'] == 'REPAIR'
+          assert r['proposed_ipa'] == '/puve vu siɲe isi sil vu plɛ/'
+          assert r['proposed_learner_hint'] == 'poo-vay voo see-nyay ee-see seel voo pleh'
+          print('French rank 288 provenance repair gate: PASS')
+          PY
 
       - name: Pass 2 — finalize 6,000 audited pronunciation rows fail-closed
         shell: bash
@@ -159,6 +189,8 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add \
+            audit/language-workbooks/v1.1-pronunciation/candidates/french_sentences.csv \
+            audit/language-workbooks/v1.1-pronunciation/row_by_row/french_sentences_0251_0300.csv \
             completed/languages/workbooks/v1.1-pronunciation \
             audit/language-workbooks/v1.1-pronunciation/final \
             audit/language-workbooks/v1.1-pronunciation/final_manifest.json \
