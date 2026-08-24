@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "prepared_on": "2026-08-23",
+  "ready_from": "2026-08-24",
+  "timezone": "America/Toronto",
+  "purpose": "Pre-stage seven self-contained Urdu A2 production sessions so work can resume immediately without reconstructing scope, arithmetic, roadmap, or validation rules.",
+  "scope_guard": {
+    "language": "urdu",
+    "cefr": "A2",
+    "canonical_path": "reading/urdu/a2/passages.jsonl",
+    "explicitly_excludes": [
+      "LANG-WB workbook work",
+      "progress/ language-study track",
+      "Arabic/French generation work",
+      "educator/publication release promotion"
+    ]
+  },
+  "pre_week_gate": {
+    "required_state_after_urdu_a2_unit01_integration": {
+      "project_canonical_passages": 786,
+      "urdu_canonical_passages": 66,
+      "active_language": "urdu",
+      "active_level": "A2",
+      "active_unit": 2,
+      "start_sequence": 7
+    },
+    "unit01_source_branch": "lang-a1c2-urdu-a2-unit01",
+    "unit01_required_artifacts": [
+      "reading/urdu/a2/passages.jsonl with exactly sequences 1-6",
+      "reading/audit/urdu_a2_u01_lexical_sense_check_2026-08-23.json",
+      "reading/audit/urdu_a2_u01_quality_pass_2026-08-23.json after the bounded quality remediation completes"
+    ],
+    "rule": "If main already satisfies the required state and continuation validation passes, do not redo Unit 1. Otherwise integrate the vetted Unit 1 branch through a normal merge/PR path that preserves concurrent unrelated main work."
+  },
+  "shared_session_contract": {
+    "passages_per_session": 6,
+    "unit_roles": [
+      "instructional",
+      "reinforcement",
+      "interleaved",
+      "transfer",
+      "integration",
+      "fluency"
+    ],
+    "standard_word_band": {
+      "min": 140,
+      "max": 220,
+      "source": "docs/READING_PASSAGE_STANDARD.md"
+    },
+    "lexical_policy": [
+      "Treat frequency/planning band as a curriculum aid, never as a CEFR fact.",
+      "Default to a small verified load: normally about 2 deliberate new targets in P1-P4 when natural; use fewer when grammar/discourse load is higher.",
+      "P5 should be cumulative with zero or minimal new deliberate vocabulary; P6 should introduce no deliberate new lexical target unless an explicitly documented exception is pedagogically necessary.",
+      "Resolve candidate targets from reading/lexicons/urdu.jsonl minus all new_lexical_target IDs already present in live canonical Urdu A1/A2.",
+      "Do not rely on reading/ledgers/urdu_lexical_exposure.jsonl as scheduling truth until its stale introduced_in state is rebuilt from canonical passages.",
+      "Verify the exact learner-facing sense before a target is committed; dictionary existence alone is not sufficient when the sense/collocation is ambiguous."
+    ],
+    "question_policy": [
+      "Exactly 10 questions and 10 linked answers per passage under reading/planning/TEN_QUESTION_STANDARD.md.",
+      "At A2, prefer operational grammar/form-use over formal metalanguage.",
+      "Every deliberate new lexical target must receive meaning-in-context or transfer assessment, plus later retrieval/recycling.",
+      "Cloze items must be uniquely defensible in a new sentence/context rather than copied blanks from the passage."
+    ],
+    "language_policy": [
+      "Write independent contemporary standard Urdu in Unicode Urdu script.",
+      "Do not translate Arabic or French passages sentence-by-sentence.",
+      "Reject Hindi-only, archaic, noisy-dictionary, or mismatched senses unless explicitly intended and labeled.",
+      "Prefer natural collocations even when that means using fewer target occurrences."
+    ],
+    "transaction_order": [
+      "Confirm current branch/main head and run python reading/tools/validate_continuation_state.py.",
+      "Confirm ACTIVE_GENERATION_PLAN points to the expected unit and start sequence for this packet.",
+      "Select and independently sense-check deliberate targets before canonical write.",
+      "Generate all six records with immutable IDs, correct sequence numbers, 10 q/a each, and 140-220-word standard-band prose unless a documented exception is warranted.",
+      "Run a reader-first bounded quality pass for naturalness, target-sense clarity, answer grounding, operational grammar, and fluency new-word policy.",
+      "Update reading/STATUS.json, reading/CONTINUATION.json, reading/TASKS.md, and derived plan as required by the state contract.",
+      "Run python reading/tools/extract_active_generation_plan.py, then python reading/tools/refresh_state_manifest.py, then python reading/tools/validate_continuation_state.py.",
+      "Integrate through a merge/PR path that preserves concurrent unrelated main commits; never force main to an older branch tree."
+    ],
+    "release_guard": "Generation/integrity PASS never promotes educator/publication readiness. RELEASE_STATUS.json changes only when release evidence itself changes."
+  },
+  "sessions": [
+    {
+      "session": 1,
+      "suggested_date": "2026-08-24",
+      "unit": 2,
+      "theme": "plans, invitations, and changes",
+      "genres": ["email/message", "narrative", "schedule"],
+      "sequence_start": 7,
+      "sequence_end": 12,
+      "project_passages_before": 786,
+      "project_passages_after": 792,
+      "urdu_passages_before": 66,
+      "urdu_passages_after": 72,
+      "expected_next": {"unit": 3, "start_sequence": 13},
+      "focus": "Plan/replan language, invitation responses, schedule changes, reasons, and short reference chains."
+    },
+    {
+      "session": 2,
+      "suggested_date": "2026-08-25",
+      "unit": 3,
+      "theme": "past events and memories",
+      "genres": ["personal narrative", "diary", "short interview"],
+      "sequence_start": 13,
+      "sequence_end": 18,
+      "project_passages_before": 792,
+      "project_passages_after": 798,
+      "urdu_passages_before": 72,
+      "urdu_passages_after": 78,
+      "expected_next": {"unit": 4, "start_sequence": 19},
+      "focus": "Connected past narration, temporal ordering, remembered detail, and simple contrast between then/now."
+    },
+    {
+      "session": 3,
+      "suggested_date": "2026-08-26",
+      "unit": 4,
+      "theme": "shopping, comparison, and problems",
+      "genres": ["review", "problem-solution narrative", "notice"],
+      "sequence_start": 19,
+      "sequence_end": 24,
+      "project_passages_before": 798,
+      "project_passages_after": 804,
+      "urdu_passages_before": 78,
+      "urdu_passages_after": 84,
+      "expected_next": {"unit": 5, "start_sequence": 25},
+      "focus": "Comparisons, prices/features, purchase problems, evidence-based complaints, and practical resolution."
+    },
+    {
+      "session": 4,
+      "suggested_date": "2026-08-27",
+      "unit": 5,
+      "theme": "hobbies and learning skills",
+      "genres": ["profile", "how-to", "short article"],
+      "sequence_start": 25,
+      "sequence_end": 30,
+      "project_passages_before": 804,
+      "project_passages_after": 810,
+      "urdu_passages_before": 84,
+      "urdu_passages_after": 90,
+      "expected_next": {"unit": 6, "start_sequence": 31},
+      "focus": "Learning processes, practice habits, simple instructions, progress, and choosing strategies."
+    },
+    {
+      "session": 5,
+      "suggested_date": "2026-08-28",
+      "unit": 6,
+      "theme": "transport and travel",
+      "genres": ["travel story", "information page", "message"],
+      "sequence_start": 31,
+      "sequence_end": 36,
+      "project_passages_before": 810,
+      "project_passages_after": 816,
+      "urdu_passages_before": 90,
+      "urdu_passages_after": 96,
+      "expected_next": {"unit": 7, "start_sequence": 37},
+      "focus": "Schedules, route choices, delays, tickets/information, changed plans, and multi-step travel decisions."
+    },
+    {
+      "session": 6,
+      "suggested_date": "2026-08-29",
+      "unit": 7,
+      "theme": "community events and simple news",
+      "genres": ["brief news report", "announcement", "reaction"],
+      "sequence_start": 37,
+      "sequence_end": 42,
+      "project_passages_before": 816,
+      "project_passages_after": 822,
+      "urdu_passages_before": 96,
+      "urdu_passages_after": 102,
+      "expected_next": {"unit": 8, "start_sequence": 43},
+      "focus": "Who/what/when/where reporting, announcements, simple cause/effect, and reactions grounded in the text."
+    },
+    {
+      "session": 7,
+      "suggested_date": "2026-08-30",
+      "unit": 8,
+      "theme": "nature and environment",
+      "genres": ["description", "simple explanatory text", "story"],
+      "sequence_start": 43,
+      "sequence_end": 48,
+      "project_passages_before": 822,
+      "project_passages_after": 828,
+      "urdu_passages_before": 102,
+      "urdu_passages_after": 108,
+      "expected_next": {"unit": 9, "start_sequence": 49},
+      "focus": "Concrete environmental observations, simple explanations, local actions, and cause/consequence without unsupported factual claims."
+    }
+  ],
+  "end_of_week_expected_state": {
+    "project_canonical_passages": 828,
+    "urdu_canonical_passages": 108,
+    "urdu_a2_passages": 48,
+    "remaining_project_generation_passages": 252,
+    "active_language": "urdu",
+    "active_level": "A2",
+    "active_unit": 9,
+    "start_sequence": 49
+  },
+  "validation_command": "python reading/tools/validate_week_ready_queue.py"
+}
