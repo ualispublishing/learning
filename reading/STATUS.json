@@ -1,11 +1,12 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "project_id": "LANG-A1C2",
   "updated": "2026-08-23",
   "state_type": "PRODUCTION_STATUS_ONLY",
   "purpose": "Compact canonical generation/progression status. Do not use this file to infer educator/publication readiness; release claims are controlled by reading/RELEASE_STATUS.json.",
   "continuation": "reading/CONTINUATION.json",
   "release_status": "reading/RELEASE_STATUS.json",
+  "state_manifest": "reading/STATE_MANIFEST.json",
   "canonical_format": "reading/<language>/<level>/passages.jsonl",
   "targets": {
     "passages_per_level": 60,
@@ -25,16 +26,14 @@
       "canonical_passages": 360,
       "remaining_generation_passages": 0,
       "complete_levels": ["A1", "A2", "B1", "B2", "C1", "C2"],
-      "next_generation_level": null,
-      "release_status_source": "reading/RELEASE_STATUS.json"
+      "next_generation_level": null
     },
     "french": {
       "generation_state": "COMPLETE",
       "canonical_passages": 360,
       "remaining_generation_passages": 0,
       "complete_levels": ["A1", "A2", "B1", "B2", "C1", "C2"],
-      "next_generation_level": null,
-      "release_status_source": "reading/RELEASE_STATUS.json"
+      "next_generation_level": null
     },
     "urdu": {
       "generation_state": "A1_COMPLETE_A2_NEXT",
@@ -51,27 +50,20 @@
         "hard_errors": 0,
         "warnings": 0,
         "quality_promotion": false
-      },
-      "release_status_source": "reading/RELEASE_STATUS.json"
+      }
     }
   },
-  "source_of_truth": {
-    "precedence": [
-      "live canonical JSONL",
-      "fresh hash-bound audit evidence",
-      "reading/CONTINUATION.json",
-      "reading/RELEASE_STATUS.json for release claims",
-      "this STATUS.json for production counts/frontier",
-      "reading/AGENT_HANDOFF_V2.md",
-      "durable policies/schema/roadmap",
-      "historical artifacts"
-    ],
-    "legacy_handoff": "reading/AGENT_HANDOFF.md is historical and must not drive current work"
+  "authority": {
+    "production_facts": "Live canonical JSONL is ground truth; this file and CONTINUATION.json must match it.",
+    "release_readiness": "reading/RELEASE_STATUS.json controls affirmative educator/publication readiness and must not be inferred from this production file.",
+    "active_frontier": "This file, CONTINUATION.json, and ACTIVE_GENERATION_PLAN.json must agree.",
+    "state_bundle_integrity": "reading/STATE_MANIFEST.json pins the live continuation/status/handoff bundle and must be refreshed after tracked state-file changes."
   },
   "update_contract": [
     "After canonical passage generation changes, update this file and CONTINUATION.json in the same work unit.",
     "After the production language/level frontier changes, update ACTIVE_GENERATION_PLAN.json and TASKS.md too.",
     "Only update RELEASE_STATUS.json when release evidence itself changes.",
+    "After all tracked live-state edits are complete, run python reading/tools/refresh_state_manifest.py.",
     "Do not append historical timelines here; use Git history and reading/audit/."
   ]
 }
