@@ -15,7 +15,7 @@ Unofficial, original study site mapped to the current public ISC2 CISSP exam out
 - **220 learner-facing items in the semantic-audit ledger**;
 - 20 primary/reference sources.
 
-`question-bank/RELEASED_BATCHES.json` is authoritative for promoted question batches. Batch 001 is released in v1.3; Batch 002 remains candidate-only until its repository gate is clean.
+`question-bank/RELEASED_BATCHES.json` is authoritative for promoted question batches. Batch 001 is released in v1.3. Batches 002 and 003 remain candidate-only until their repository gates are observed clean.
 
 ## Item-level semantic status
 
@@ -59,10 +59,16 @@ The original 56-question baseline was left semantically intact: its stems, optio
 
 Originality is enforced by decision-rule-first authoring from public scope/registered standards and audited knowledge, never from exam dumps, live-item recollections, leaked banks, or commercial-question wording/templates. `question-bank/quality_gate.py` compares unreleased candidates against the base bank, all promoted batches, and their own batch using exact, near-text, and structural duplicate checks.
 
+`question-bank/coverage_report.py` adds a second planning layer: it measures objective/difficulty density and explicit subtopic-tag exposure so future questions target under-practiced areas rather than simply adding more volume.
+
 ### Current expansion state
 
 - **Batch 001:** released in v1.3; 24 records = F4/E15/S4/B1.
-- **Batch 002:** candidate-only; 16 standard MCQs = E12/S4, exactly two primary-domain questions per domain, zero Foundation+ filler. It must remain unreleased until its full repository gate produces no unresolved failures/warnings.
+- **Batch 002:** candidate-only; 16 standard MCQs = E12/S4, exactly two primary-domain questions per domain, zero Foundation+ filler.
+- **Batch 003:** candidate-only; 16 standard MCQs = E12/S4, exactly two primary-domain questions per domain, zero Foundation+ filler.
+- If both pending batches eventually promote, the bank becomes **112 records = F41/E58/S12/B1**.
+
+Neither pending batch may be promoted until its full repository gate produces no unresolved failures or warnings.
 
 ## Continuous audit
 
@@ -70,9 +76,10 @@ Originality is enforced by decision-rule-first authoring from public scope/regis
 
 1. `python audit.py`;
 2. `python question-bank/quality_gate.py` against unreleased candidates and the released comparison corpus;
-3. JavaScript syntax checks, including the v1.3 bootstrap/calibration/practice/state/rationale files;
-4. a 56 × 4 legacy-rationale completeness invariant;
-5. static HTTP smoke checks for critical site, rationale, and released-bank assets.
+3. `python question-bank/coverage_report.py` to keep expansion coverage-aware;
+4. JavaScript syntax checks, including the v1.3 bootstrap/calibration/practice/state/rationale files;
+5. a 56 × 4 legacy-rationale completeness invariant;
+6. static HTTP smoke checks for critical site, rationale, released-bank, and candidate assets.
 
 The Pages workflow validates the immutable released corpus before deployment; unreleased candidate failures cannot block an already-valid release from publishing.
 
@@ -83,6 +90,7 @@ python -m http.server 8000
 # open http://localhost:8000
 python audit.py
 python question-bank/quality_gate.py
+python question-bank/coverage_report.py --human
 ```
 
 Serve the folder over HTTP rather than opening `index.html` directly, because v1.3 loads the released batch manifest/JSONL through `fetch()` before the application initializes.
