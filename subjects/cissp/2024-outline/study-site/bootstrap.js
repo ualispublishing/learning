@@ -1,6 +1,9 @@
 (async()=>{'use strict';
-const calibration=window.CISSP_QUESTION_CALIBRATION||{};
-for(const chunk of (window.CISSP_CHUNKS||[]))for(const q of (chunk.questions||[])){const c=calibration[q.id];if(c){q.difficulty_tier=c.tier;q.difficulty_score=c.score}}
+const calibration=window.CISSP_QUESTION_CALIBRATION||{},legacyRationales=window.CISSP_LEGACY_RATIONALES||{};
+for(const chunk of (window.CISSP_CHUNKS||[]))for(const q of (chunk.questions||[])){
+  const c=calibration[q.id];if(c){q.difficulty_tier=c.tier;q.difficulty_score=c.score}
+  const r=legacyRationales[q.id];if(r)q.distractor_rationales=r;
+}
 // The original card engine keeps an in-memory progress snapshot. v1.3 practice adds
 // richer quiz/Bellringer history after that snapshot is created. Preserve those newer
 // histories if a later card grade writes the older snapshot back to localStorage.
