@@ -42,6 +42,8 @@
     "question_candidate_schema": "subjects/cissp/2024-outline/study-site/question-bank/CANDIDATE_SCHEMA.json",
     "legacy_rationale_layer": "subjects/cissp/2024-outline/study-site/legacy-rationales.js",
     "progress_ui_bridge": "subjects/cissp/2024-outline/study-site/state-ui-bridge.js",
+    "browser_smoke_harness": "subjects/cissp/2024-outline/study-site/browser-smoke.html",
+    "browser_smoke_runner": "subjects/cissp/2024-outline/study-site/browser-smoke.sh",
     "ci_workflow": ".github/workflows/cissp-study-site-audit.yml",
     "pages_workflow": ".github/workflows/cissp-pages.yml"
   },
@@ -77,6 +79,21 @@
   "deployment": {
     "expected_pages_url": "https://ualispublishing.github.io/learning/",
     "workflow_ready": true,
+    "runtime_health_markers": true,
+    "interactive_browser_smoke_gate": true,
+    "browser_smoke_coverage": [
+      "core and released-bank startup",
+      "keyboard reveal/layer/rating flow",
+      "calibrated practice confidence and four-option rationales",
+      "progress and weak-area rendering",
+      "sources rendering",
+      "desktop/mobile navigation",
+      "16-question diagnostic launch",
+      "390px mobile layout and horizontal-overflow checks"
+    ],
+    "released_only_pages_artifact": true,
+    "unreleased_candidates_excluded_from_pages_artifact": true,
+    "browser_test_harness_excluded_from_pages_artifact": true,
     "candidate_drafts_block_release_deploy": false,
     "candidate_drafts_still_checked_by_normal_ci": true,
     "public_endpoint_observed_live_in_this_session": false,
@@ -88,7 +105,7 @@
     "The diagnostic is intentionally a routing signal, not an exam-readiness prediction.",
     "Blueprint subtopic labels are paraphrased; the ISC2 source remains authoritative for exact wording.",
     "The combined released bank still skews easier than the long-term target because the original 56-question baseline contains 37 Foundation+ items.",
-    "Batches 002 through 005 remain candidate-only until their automated repository originality/duplicate gate is observed clean and every warning is resolved.",
-    "The Pages deployment workflow is committed, but this session could not verify whether the repository's one-time Pages setting was already enabled."
+    "Unreleased candidate batches remain excluded from the Pages artifact until promoted through the release gate.",
+    "The Pages deployment workflow is committed and browser-gated, but this session could not verify whether the repository's one-time Pages setting was already enabled."
   ]
 }
