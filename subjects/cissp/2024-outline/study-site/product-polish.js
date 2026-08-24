@@ -27,48 +27,7 @@ setText('#sources .page-title p','Scope and reference material.');
 
 const footerVersion=document.querySelector('footer span:last-child');if(footerVersion)footerVersion.textContent='v1.3 · local progress';
 
-function isEditable(){
-  const e=document.activeElement;
-  return !!e&&(['INPUT','SELECT','TEXTAREA'].includes(e.tagName)||e.isContentEditable);
-}
-function learnVisible(){const v=$('#learn');return !!v&&!v.classList.contains('hidden')}
-function activeLayerButton(){return $('.layer-tabs button.active')}
-function moveLayer(delta){
-  const current=activeLayerButton();
-  if(!current)return false;
-  const buttons=[...document.querySelectorAll('.layer-tabs button')];
-  const i=buttons.indexOf(current),next=buttons[i+delta];
-  if(!next)return false;
-  next.click();
-  return true;
-}
-function gradeWithKey(key){
-  const i=Number(key)-1;
-  const buttons=[...document.querySelectorAll('.rating [data-grade]')];
-  if(!buttons[i])return false;
-  buttons[i].click();
-  return true;
-}
-
-// Capture before app.js's older bubble handler so arrows mean layers, not cards.
-document.addEventListener('keydown',e=>{
-  if(!learnVisible()||isEditable()||e.metaKey||e.ctrlKey||e.altKey)return;
-  if(e.key===' '){
-    const reveal=$('#revealBtn');
-    if(!reveal)return;
-    e.preventDefault();e.stopImmediatePropagation();reveal.click();return;
-  }
-  if(e.key==='ArrowLeft'||e.key==='ArrowRight'){
-    e.preventDefault();e.stopImmediatePropagation();
-    moveLayer(e.key==='ArrowRight'?1:-1);return;
-  }
-  if(['1','2','3','4'].includes(e.key)){
-    const hasRating=document.querySelector('.rating [data-grade]');
-    if(!hasRating)return;
-    e.preventDefault();e.stopImmediatePropagation();gradeWithKey(e.key);
-  }
-},true);
-
+// Accessibility metadata only. Keyboard behavior lives exclusively in keyboard-shortcuts.js.
 function decorateShortcuts(){
   const reveal=$('#revealBtn');if(reveal){reveal.setAttribute('aria-keyshortcuts','Space');reveal.title='Space';}
   document.querySelectorAll('.rating [data-grade]').forEach((b,i)=>b.setAttribute('aria-keyshortcuts',String(i+1)));
