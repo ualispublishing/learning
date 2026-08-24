@@ -1,4 +1,7 @@
 (async()=>{'use strict';
+const root=document.documentElement;
+root.dataset.cisspReady='loading';
+root.dataset.cisspBank='loading';
 const calibration=window.CISSP_QUESTION_CALIBRATION||{},legacyRationales=window.CISSP_LEGACY_RATIONALES||{};
 for(const chunk of (window.CISSP_CHUNKS||[]))for(const q of (chunk.questions||[])){
   const c=calibration[q.id];if(c){q.difficulty_tier=c.tier;q.difficulty_score=c.score}
@@ -22,7 +25,9 @@ Storage.prototype.setItem=function(key,value){
   return nativeSet.call(this,key,value);
 };
 
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#039;'}[c]))}
 function surfaceStartupIssue(message,{fatal=false}={}){
+  root.dataset.cisspReady=fatal?'failed':'degraded';
   const main=document.querySelector('#main');
   if(!main)return;
   const existing=document.querySelector('#startupIssue');
@@ -30,7 +35,7 @@ function surfaceStartupIssue(message,{fatal=false}={}){
   box.id='startupIssue';
   box.className='notice';
   box.setAttribute('role','alert');
-  box.innerHTML=`<b>${fatal?'CISSP Atlas could not finish starting.':'CISSP Atlas recovered from a startup issue.'}</b> ${String(message||'Unknown startup error').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}${fatal?' <button class="btn small" type="button" onclick="location.reload()">Reload</button>':''}`;
+  box.innerHTML=`<b>${fatal?'CISSP Atlas could not finish starting.':'CISSP Atlas recovered from a startup issue.'}</b> ${esc(message||'Unknown startup error')}${fatal?' <button class="btn small" type="button" onclick="location.reload()">Reload</button>':''}`;
   if(!existing)main.prepend(box);
 }
 
@@ -45,26 +50,33 @@ try{
   window.CISSP_BELLRINGERS=rows.filter(r=>r.format==='bellringer');
   window.CISSP_RELEASED_BANK_MANIFEST=manifest;
   window.CISSP_BANK_READY=true;
+  root.dataset.cisspBank='ready';
 }catch(err){
   console.error('CISSP released bank load failed',err);
   window.CISSP_RELEASE_LOAD_ERROR=String(err);
   window.CISSP_BELLRINGERS=[];
+  root.dataset.cisspBank='degraded';
 }
 
 try{
   await import('./app.js');
+  root.dataset.cisspCore='ready';
 }catch(err){
   console.error('CISSP core app load failed',err);
+  root.dataset.cisspCore='failed';
   surfaceStartupIssue(err,{fatal:true});
   return;
 }
 
-for(const modulePath of ['./enhancements.js','./state-ui-bridge.js','./product-polish.js?v=4']){
+let optionalFailures=0;
+for(const modulePath of ['./enhancements.js','./state-ui-bridge.js','./product-polish.js?v=5']){
   try{
     await import(modulePath);
   }catch(err){
+    optionalFailures++;
     console.error(`CISSP optional module failed: ${modulePath}`,err);
     surfaceStartupIssue(`${modulePath}: ${err?.message||err}`);
   }
 }
+if(!optionalFailures)root.dataset.cisspReady='true';
 })();
