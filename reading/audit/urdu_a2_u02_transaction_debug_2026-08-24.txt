@@ -1,0 +1,13 @@
+LANG-A1C2 Urdu A2 Unit 2 transaction diagnostic
+Date: 2026-08-24
+Pinned staging commit: a4e1149f2e0964595f1ceb359b18b791b3eeca91
+
+=== apply pinned Unit 2 ===
+Traceback (most recent call last):
+  File "/tmp/apply-unit02.py", line 45, in <module>
+    packet_bytes=gzip.decompress(base64.b64decode(os.environ["PACKET_B64_GZ"]))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/gzip.py", line 638, in decompress
+    raise BadGzipFile("CRC check failed")
+gzip.BadGzipFile: CRC check failed
+apply_rc=1
