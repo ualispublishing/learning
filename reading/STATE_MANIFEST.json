@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "branch_expected": "main",
+  "purpose": "Exact-byte lock for the compact live continuation/status/handoff bundle. The manifest intentionally excludes itself.",
+  "generated_by": "reading/tools/refresh_state_manifest.py",
+  "state_file_count": 10,
+  "state_file_bytes": 43568,
+  "aggregate_sha256": "83ea37dc3b6bc1c7ae27278d1f59ec3586726dec90f966a0bef878f1ba721be8",
+  "state_files": {
+    "PROJECT_TRACKS.json": {
+      "git_blob": "3b704372cff8b20c518377a5b388e293ac275885",
+      "bytes": 1844
+    },
+    "reading/AGENTS.md": {
+      "git_blob": "d69eecaa333622c3b783c9b064caaec54be76b7a",
+      "bytes": 3372
+    },
+    "reading/CONTINUATION.json": {
+      "git_blob": "1510f7b6cb91f9c411f9fe803cfaf15a8109d715",
+      "bytes": 6996
+    },
+    "reading/STATUS.json": {
+      "git_blob": "10cbc701e331e9cf688a5ccad13b7e1209bd9e16",
+      "bytes": 3040
+    },
+    "reading/RELEASE_STATUS.json": {
+      "git_blob": "9e366c12c06cdf9dac8f55ef01c9cc07a4384241",
+      "bytes": 5284
+    },
+    "reading/AGENT_HANDOFF_V2.md": {
+      "git_blob": "34a76377ad2cff54daa1ded99c8b6810490851b5",
+      "bytes": 6201
+    },
+    "reading/TASKS.md": {
+      "git_blob": "ecaa1759553fd998fdae3e06c7287f162fc174a0",
+      "bytes": 4106
+    },
+    "reading/VERIFICATION_TASKS.md": {
+      "git_blob": "35e435fb4b8f251d64d369d10d4093242e75288f",
+      "bytes": 4766
+    },
+    "reading/README.md": {
+      "git_blob": "6105a5c022d51ee3ff3dba0a9204d685c19a0b32",
+      "bytes": 6037
+    },
+    "reading/planning/ACTIVE_GENERATION_PLAN.json": {
+      "git_blob": "04d03b9da2bfc4ede47b8d76b31ed543cbf3669a",
+      "bytes": 1922
+    }
+  },
+  "production_snapshot": {
+    "canonical_passages": 780,
+    "remaining_generation_passages": 300,
+    "active_language": "urdu",
+    "active_level": "A2",
+    "arabic_passages": 360,
+    "french_passages": 360,
+    "urdu_passages": 60
+  },
+  "canonical_anchor": {
+    "urdu_a1_path": "reading/urdu/a1/passages.jsonl",
+    "urdu_a1_git_blob": "ec0970dc1916ce523dd3320d2f4dca4c7f8bc677"
+  },
+  "validation_command": "python reading/tools/validate_continuation_state.py",
+  "refresh_command": "python reading/tools/refresh_state_manifest.py"
+}
