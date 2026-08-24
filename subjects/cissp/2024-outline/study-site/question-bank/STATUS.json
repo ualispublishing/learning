@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "updated": "2026-08-24",
   "released": {
     "bank_records": 80,
@@ -28,16 +28,24 @@
       "difficulty_distribution": {"F": 0, "E": 12, "S": 4, "B": 0},
       "file": "candidates/batch-002.jsonl",
       "review": "BATCH_002_REVIEW.json",
-      "primary_domain_distribution": {"1": 2, "2": 2, "3": 2, "4": 2, "5": 2, "6": 2, "7": 2, "8": 2},
-      "promotion_allowed": false,
-      "promotion_blocker": "Automated repository quality/originality gate has not been observed completing in this session."
+      "primary_domain_distribution": {"1": 2, "2": 2, "3": 2, "4": 2, "5": 2, "6": 2, "7": 2, "8": 2}
+    },
+    "003": {
+      "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+      "records": 16,
+      "standard_mcq": 16,
+      "bellringer": 0,
+      "difficulty_distribution": {"F": 0, "E": 12, "S": 4, "B": 0},
+      "file": "candidates/batch-003.jsonl",
+      "review": "BATCH_003_REVIEW.json",
+      "primary_domain_distribution": {"1": 2, "2": 2, "3": 2, "4": 2, "5": 2, "6": 2, "7": 2, "8": 2}
     }
   },
-  "if_batch_002_promotes": {
-    "bank_records": 96,
-    "standard_mcq": 95,
+  "if_batches_002_and_003_promote": {
+    "bank_records": 112,
+    "standard_mcq": 111,
     "bellringer_cases": 1,
-    "difficulty_distribution": {"F": 41, "E": 46, "S": 8, "B": 1}
+    "difficulty_distribution": {"F": 41, "E": 58, "S": 12, "B": 1}
   },
   "long_term_target": {
     "bank_records": 800,
@@ -47,11 +55,10 @@
     "B": 40
   },
   "next_priority": [
-    "Observe python question-bank/quality_gate.py completing against Batch 002 and all 80 released records.",
-    "Do not promote Batch 002 if any similarity warning cannot be resolved semantically.",
-    "If clean, promote Batch 002 by updating RELEASED_BATCHES.json, the semantic ledger, release counts, and runtime validation together.",
-    "Continue biasing subsequent batches toward Exam-calibrated and Stretch reasoning until the released mix approaches target.",
-    "Backfill four-option rationales for the 56 legacy baseline questions so all standard items have the same teaching depth.",
-    "Use confidence and selected-distractor history to identify durable misconceptions before making any empirical difficulty claims."
+    "Observe a clean repository originality/duplicate gate for Batches 002 and 003 against all 80 released records before promotion.",
+    "Do not promote any candidate with an unresolved similarity warning or structural duplicate concern.",
+    "Continue biasing expansion toward Exam-calibrated and Stretch reasoning until the released mix approaches target.",
+    "Add additional Bellringers only as separately labeled integrative drills; do not use them to imitate live exam format.",
+    "Use confidence, chosen distractor, response time, and spaced repeat performance to identify durable misconceptions before making empirical difficulty claims."
   ]
 }
