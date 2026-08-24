@@ -38,6 +38,7 @@
     "released_batch_manifest": "subjects/cissp/2024-outline/study-site/question-bank/RELEASED_BATCHES.json",
     "question_bank_plan": "subjects/cissp/2024-outline/study-site/question-bank/QUESTION_BANK_EXPANSION_PLAN.md",
     "question_bank_quality_gate": "subjects/cissp/2024-outline/study-site/question-bank/quality_gate.py",
+    "question_bank_coverage_planner": "subjects/cissp/2024-outline/study-site/question-bank/coverage_report.py",
     "question_candidate_schema": "subjects/cissp/2024-outline/study-site/question-bank/CANDIDATE_SCHEMA.json",
     "legacy_rationale_layer": "subjects/cissp/2024-outline/study-site/legacy-rationales.js",
     "progress_ui_bridge": "subjects/cissp/2024-outline/study-site/state-ui-bridge.js",
@@ -51,6 +52,10 @@
     "stretch_percent": 20,
     "bellringer_percent": 5,
     "current_records": 80,
+    "pending_semantic_reviewed_candidates": 32,
+    "pending_candidate_difficulty": {"F": 0, "E": 24, "S": 8, "B": 0},
+    "if_current_candidates_promote_records": 112,
+    "if_current_candidates_promote_difficulty": {"F": 41, "E": 58, "S": 12, "B": 1},
     "next_bias": "Very low Foundation+; heavily Exam-calibrated and Stretch until the released mix moves toward target.",
     "originality_rule": "Questions are authored from public scope/primary standards and audited knowledge, never from exam dumps, live-item recollections, leaked banks, or commercial-question wording/templates."
   },
@@ -74,13 +79,13 @@
     "public_endpoint_observed_live_in_this_session": false,
     "activation_fallback": "If GitHub Pages has never been enabled for the repository, set Settings > Pages > Build and deployment > Source to GitHub Actions once; the committed workflow then deploys automatically."
   },
-  "precision_boundary": "READY_FOR_STUDY means the public ISC2 scope, mapped subtopics, curated precision distinctions, released original scenario bank, metadata, teaching rationales, and site assets are release-organized and audited. The item-level audit currently covers 220 learner-facing item IDs with zero keyed-answer reversals and no known remaining material factual error. This is not a mathematical guarantee of perpetual infallibility or a guarantee of passing the live adaptive CISSP exam.",
+  "precision_boundary": "READY_FOR_STUDY means the public ISC2 scope, mapped subtopics, curated precision distinctions, released original scenario bank, metadata, teaching rationales, and site assets are release-organized and audited. The item-level audit currently covers 220 released learner-facing item IDs with zero keyed-answer reversals and no known remaining material factual error. This is not a mathematical guarantee of perpetual infallibility or a guarantee of passing the live adaptive CISSP exam.",
   "known_non_blocking_limitations": [
     "Browser-local progress does not sync across devices unless exported manually.",
     "The diagnostic is intentionally a routing signal, not an exam-readiness prediction.",
     "Blueprint subtopic labels are paraphrased; the ISC2 source remains authoritative for exact wording.",
     "The combined released bank still skews easier than the long-term target because the original 56-question baseline contains 37 Foundation+ items.",
-    "Batch 002 remains candidate-only until its automated repository originality/duplicate gate is observed clean and any warning is resolved.",
+    "Batches 002 and 003 remain candidate-only until their automated repository originality/duplicate gates are observed clean and every warning is resolved.",
     "The Pages deployment workflow is committed, but this session could not verify whether the repository's one-time Pages setting was already enabled."
   ]
 }
