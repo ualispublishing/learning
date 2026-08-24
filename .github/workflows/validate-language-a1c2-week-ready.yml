@@ -2,9 +2,11 @@ name: Validate LANG-A1C2 week-ready queue
 
 on:
   push:
+    branches: [main]
     paths:
       - 'reading/planning/WEEK_READY_2026-08-24.json'
       - 'reading/tools/validate_week_ready_queue.py'
+      - 'reading/tools/write_week_ready_audit.py'
       - 'reading/TOMORROW_START_2026-08-24.md'
       - 'reading/planning/topic_genre_matrix.json'
       - '.github/workflows/validate-language-a1c2-week-ready.yml'
@@ -12,20 +14,62 @@ on:
     paths:
       - 'reading/planning/WEEK_READY_2026-08-24.json'
       - 'reading/tools/validate_week_ready_queue.py'
+      - 'reading/tools/write_week_ready_audit.py'
       - 'reading/TOMORROW_START_2026-08-24.md'
       - 'reading/planning/topic_genre_matrix.json'
       - '.github/workflows/validate-language-a1c2-week-ready.yml'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: lang-a1c2-week-ready-main
+  cancel-in-progress: false
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
+      - name: Check out main
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Synchronize to latest main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git reset --hard origin/main
 
       - name: Validate seven-session queue
         run: python reading/tools/validate_week_ready_queue.py
+
+      - name: Write hash-bound readiness evidence
+        run: python reading/tools/write_week_ready_audit.py
+
+      - name: Commit evidence without overwriting concurrent work
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reading/audit/week_ready_2026-08-24.json
+          if git diff --cached --quiet; then
+            echo "Week-ready evidence already matches current sources."
+            exit 0
+          fi
+          git commit -m "Record hash-bound LANG-A1C2 week readiness [skip ci]"
+
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            git rebase origin/main
+            python reading/tools/validate_week_ready_queue.py
+            python reading/tools/write_week_ready_audit.py
+            git add reading/audit/week_ready_2026-08-24.json
+            git commit --amend --no-edit
+          fi
+
+          git push origin HEAD:main
