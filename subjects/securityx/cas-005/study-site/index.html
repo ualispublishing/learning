@@ -1,9 +1,181 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Unofficial SecurityX CAS-005 layered study site"><title>SecurityX CAS-005 Layered Study Site</title><link rel="stylesheet" href="styles.css"></head><body><div class="top"><div class="wrap"><div class="nav" id="nav"><button data-view="home" class="active">Overview</button><button data-view="cards">Layered Flashcards</button><button data-view="quiz">Practice</button><button data-view="pbq">PBQ Drills</button><button data-view="coverage">Coverage</button><button data-view="plan">Gameplan</button><button data-view="sources">Sources</button></div></div></div><main class="wrap">
-<section id="home" class="view"><h1>SecurityX CAS-005<br>Layered Study Site</h1><p class="notice"><strong>Unofficial, original study resource.</strong> It is audited against the public CAS-005 objectives, but no legitimate deck can guarantee a pass. CompTIA states its public examples are non-exhaustive, and the live exam includes scenario/performance-based assessment.</p><div class="grid" id="stats"></div><div class="panel" style="margin-top:16px"><h2>Layered method</h2><p><strong>Retrieve first; expand second.</strong> Answer the front before revealing anything. Layer 1 is the fast retrieval answer; layers 2–8 progressively add mechanism, scenario, boundaries, connections, transfer, mastery proof, and sources.</p><ol><li>Direct Answer</li><li>Concept Expansion</li><li>Worked / SecurityX Scenario</li><li>Boundaries and Misconceptions</li><li>Connections and Memory</li><li>Transfer Prompt</li><li>Mastery Evidence</li><li>Sources</li></ol></div></section>
-<section id="cards" class="view hidden"><h2>Layered Flashcards</h2><div class="controls"><input id="cardSearch" placeholder="Search cards…"><select id="domainFilter"><option value="">All domains</option></select><select id="objFilter"><option value="">All objectives</option></select><select id="reviewFilter"><option value="">All review states</option><option value="due">Due now</option><option value="new">New</option><option value="learning">Learning</option><option value="mature">Mature</option></select><button class="btn" id="shuffleCard">Shuffle</button></div><div class="muted" id="cardCount"></div><div class="card flash" id="flashcard"></div><div class="controls"><button class="btn" id="prevCard">← Previous</button><button class="btn primary" id="nextCard">Next →</button><button class="btn" id="markMastered">Reset this card</button></div></section>
-<section id="quiz" class="view hidden"><h2>Hard Practice</h2><div class="controls"><select id="quizCount"><option>10</option><option>20</option><option>50</option><option>90</option></select><button class="btn primary" id="startQuiz">Start mixed set</button></div><div id="quizBox" class="panel"><p class="muted">Questions are original and domain-weighted to the public blueprint. Repeated use is useful for retrieval, but use an independent unseen source before the real exam to avoid writer-style overfitting.</p></div></section>
-<section id="pbq" class="view hidden"><h2>PBQ-style drills</h2><div id="pbqList"></div></section>
-<section id="coverage" class="view hidden"><h2>Published-blueprint coverage</h2><p>Every normalized public blueprint example is mapped to at least one study card. This is <strong>published-blueprint completeness</strong>, not a claim that the live exam is exhaustively known.</p><div class="controls"><input id="bpSearch" placeholder="Search blueprint topics…"><select id="bpObj"><option value="">All objectives</option></select></div><div id="bpList" class="panel"></div></section>
-<section id="plan" class="view hidden"><h2>Post-first-pass gameplan</h2><div class="panel"><p>Your intended sequence is preserved: <strong>finish one complete pass first</strong>, then switch to retrieval, spacing, interleaving, hard mixed questions, PBQs, and labs.</p><p>See <a href="docs/GAMEPLAN.md">the full gameplan</a>.</p><h3>Core loop after first pass</h3><ol><li>Due layered flashcards.</li><li>20–30 mixed hard scenarios.</li><li>Review every miss and low-confidence correct answer.</li><li>One lab, architecture diagram, log-analysis task, or PBQ block.</li><li>Convert each real mistake into one retrievable rule/card/action.</li></ol></div></section>
-<section id="sources" class="view hidden"><h2>Sources</h2><p>Layer 8 cites source IDs. The official CompTIA blueprint is the scope authority; standards bodies and primary technical references are added where useful.</p><div id="sourceList"></div></section>
-</main><footer><div class="wrap">SecurityX and CompTIA are trademarks of their respective owner. This site is unofficial and not affiliated with or endorsed by CompTIA. No live-exam dumps or copied commercial questions are included.</div></footer><script src="data/meta.js"></script><script src="data/cards-001.js"></script><script src="data/cards-002.js"></script><script src="data/cards-003.js"></script><script src="data/cards-004.js"></script><script src="data/cards-005.js"></script><script src="data/cards-006.js"></script><script src="data/cards-007.js"></script><script src="data/cards-008.js"></script><script src="data/cards-009.js"></script><script src="data/cards-010.js"></script><script src="data/cards-011.js"></script><script src="data/cards-012.js"></script><script src="data/cards-013.js"></script><script src="data/cards-014.js"></script><script src="data/cards-015.js"></script><script src="data/cards-016.js"></script><script src="data/cards-017.js"></script><script src="data/cards-018.js"></script><script src="data/cards-019.js"></script><script src="data/cards-020.js"></script><script src="data/cards-021.js"></script><script src="data/cards-022.js"></script><script src="data/cards-023.js"></script><script src="data/cards-024.js"></script><script src="data/cards-025.js"></script><script src="data/cards-026.js"></script><script src="data/cards-027.js"></script><script src="data/cards-028.js"></script><script src="data/cards-029.js"></script><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Unofficial SecurityX CAS-005 precision-audited layered study workflow">
+  <meta name="color-scheme" content="dark light">
+  <title>SecurityX CAS-005 · Study Workflow</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to study content</a>
+<header class="app-header">
+  <div class="shell header-inner">
+    <button class="brand" data-go="home" aria-label="SecurityX study home">
+      <span class="brand-mark">SX</span>
+      <span><b>SecurityX CAS-005</b><small>Precision study workflow</small></span>
+    </button>
+    <div class="header-progress" id="headerProgress" aria-live="polite"></div>
+    <div class="header-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle color theme" title="Toggle theme">◐</button>
+      <button class="icon-btn" id="shortcutToggle" aria-label="Show keyboard shortcuts" title="Keyboard shortcuts">⌨</button>
+    </div>
+  </div>
+</header>
+
+<div class="shell app-shell">
+  <nav class="side-nav" id="nav" aria-label="Study areas">
+    <button class="active" data-view="home"><span>⌂</span><b>Today</b></button>
+    <button data-view="cards"><span>▣</span><b>Flashcards</b><em id="navDue"></em></button>
+    <button data-view="quiz"><span>✓</span><b>Practice</b></button>
+    <button data-view="pbq"><span>⌘</span><b>PBQ Lab</b></button>
+    <button data-view="coverage"><span>◎</span><b>Coverage</b></button>
+    <button data-view="plan"><span>→</span><b>Workflow</b></button>
+    <button data-view="sources"><span>↗</span><b>Sources</b></button>
+  </nav>
+
+  <main id="main" class="main-content" tabindex="-1">
+    <section id="home" class="view">
+      <div class="hero panel gradient-panel">
+        <div>
+          <div class="eyebrow"><span class="status-dot"></span> v4.2 precision-audited · local progress only</div>
+          <h1>Know it. Retrieve it.<br><span>Apply it under pressure.</span></h1>
+          <p class="hero-copy">A guided CAS-005 workflow built around retrieval, spaced review, scenario practice and performance-based application—not passive rereading.</p>
+          <div class="hero-actions">
+            <button class="btn primary large" id="startReview">Start today’s review <span>→</span></button>
+            <button class="btn large" id="continueStudy">Continue last session</button>
+          </div>
+          <p class="microcopy">Progress below measures your study history, not a probability of passing the exam.</p>
+        </div>
+        <div class="mastery-ring-wrap">
+          <div class="mastery-ring" id="masteryRing"><div><strong id="masteryPct">0%</strong><span>mature cards</span></div></div>
+          <div class="audit-chip"><b>618 / 618</b><span>published blueprint examples mapped</span></div>
+        </div>
+      </div>
+
+      <div class="stat-grid" id="stats"></div>
+
+      <div class="dashboard-grid">
+        <section class="panel workflow-card">
+          <div class="section-head"><div><span class="eyebrow">Recommended next</span><h2 id="nextActionTitle">Build today’s queue</h2></div><span class="step-badge" id="nextActionBadge">01</span></div>
+          <p id="nextActionCopy" class="muted"></p>
+          <div class="workflow-actions" id="workflowActions"></div>
+        </section>
+        <section class="panel">
+          <div class="section-head"><div><span class="eyebrow">Adaptive focus</span><h2>Weakest objectives</h2></div><button class="text-btn" data-go="coverage">See coverage</button></div>
+          <div id="weakObjectives" class="weak-list"></div>
+        </section>
+      </div>
+
+      <section class="panel domain-panel">
+        <div class="section-head"><div><span class="eyebrow">Blueprint-weighted view</span><h2>Domain progress</h2></div><span class="muted">20 / 27 / 31 / 22%</span></div>
+        <div id="domainProgress" class="domain-progress"></div>
+      </section>
+
+      <section class="workflow-strip" aria-label="Study workflow">
+        <button data-workflow="learn"><span>1</span><b>Learn</b><small>New concepts</small></button>
+        <i>→</i>
+        <button data-workflow="retrieve"><span>2</span><b>Retrieve</b><small>Due cards</small></button>
+        <i>→</i>
+        <button data-workflow="apply"><span>3</span><b>Apply</b><small>Hard scenarios</small></button>
+        <i>→</i>
+        <button data-workflow="perform"><span>4</span><b>Perform</b><small>PBQ drills</small></button>
+        <i>→</i>
+        <button data-workflow="review"><span>5</span><b>Review</b><small>Misses & weak areas</small></button>
+      </section>
+    </section>
+
+    <section id="cards" class="view hidden">
+      <div class="page-title"><div><span class="eyebrow">Retrieve before reveal</span><h1>Layered flashcards</h1><p>Commit to an answer first. Then reveal only as much depth as you need.</p></div><div class="session-chip" id="cardSessionChip">0 reviewed this session</div></div>
+      <div class="study-toolbar panel compact-panel">
+        <div class="segmented" id="sessionModes" aria-label="Flashcard session mode">
+          <button data-mode="due" class="active">Due</button><button data-mode="new">New</button><button data-mode="weak">Weak</button><button data-mode="mixed">Mixed</button><button data-mode="all">All</button>
+        </div>
+        <div class="toolbar-row">
+          <label class="field search-field"><span>Search</span><input id="cardSearch" type="search" placeholder="Concept, card ID or layer text…"></label>
+          <label class="field"><span>Domain</span><select id="domainFilter"><option value="">All domains</option></select></label>
+          <label class="field"><span>Objective</span><select id="objFilter"><option value="">All objectives</option></select></label>
+          <button class="btn" id="shuffleCard">Shuffle queue</button>
+        </div>
+      </div>
+      <div class="session-progress"><div><span id="cardCount">0 cards</span><span id="queueMeta"></span></div><div class="progress"><div id="cardProgressBar"></div></div></div>
+      <article class="flashcard" id="flashcard" aria-live="polite"></article>
+      <div class="card-nav-row">
+        <button class="btn" id="prevCard">← Previous</button>
+        <button class="btn" id="bookmarkCard">☆ Mark for review</button>
+        <button class="btn" id="resetCard">Reset history</button>
+        <button class="btn primary" id="nextCard">Next →</button>
+      </div>
+      <div class="keyboard-hint">Space reveal · 1–8 layers · A/H/G/E grade · ←/→ cards</div>
+    </section>
+
+    <section id="quiz" class="view hidden">
+      <div class="page-title"><div><span class="eyebrow">Application under uncertainty</span><h1>Hard practice</h1><p>Original scenario questions. Track confidence as well as correctness to expose lucky guesses.</p></div><div id="quizLifetime" class="session-chip"></div></div>
+      <div class="panel compact-panel quiz-builder" id="quizBuilder">
+        <div class="toolbar-row">
+          <label class="field"><span>Mode</span><select id="quizMode"><option value="mixed">Mixed practice</option><option value="weak">Weak-area practice</option><option value="exam">90-question blueprint simulation</option></select></label>
+          <label class="field"><span>Questions</span><select id="quizCount"><option>10</option><option>20</option><option>50</option><option>90</option></select></label>
+          <label class="field"><span>Domain</span><select id="quizDomain"><option value="">All domains</option></select></label>
+          <label class="field"><span>Objective</span><select id="quizObjective"><option value="">All objectives</option></select></label>
+          <button class="btn primary" id="startQuiz">Build practice set →</button>
+        </div>
+      </div>
+      <div id="quizBox" class="panel quiz-stage">
+        <div class="empty-state"><span>✓</span><h2>Build a deliberate practice set</h2><p>Start with 10–20 mixed questions. Use the 90-question mode after you can sustain accuracy across all domains.</p></div>
+      </div>
+    </section>
+
+    <section id="pbq" class="view hidden">
+      <div class="page-title"><div><span class="eyebrow">Constructed response</span><h1>PBQ lab</h1><p>Write your approach before revealing the rubric. Self-score only after committing to a response.</p></div><div id="pbqProgressChip" class="session-chip"></div></div>
+      <div class="pbq-layout">
+        <aside class="panel pbq-list" id="pbqNav"></aside>
+        <section class="panel pbq-stage" id="pbqStage"></section>
+      </div>
+    </section>
+
+    <section id="coverage" class="view hidden">
+      <div class="page-title"><div><span class="eyebrow">Public blueprint map</span><h1>Coverage & mastery</h1><p>All 618 normalized public examples map to study cards. Mastery reflects your local review history—not hidden exam coverage.</p></div><div class="audit-chip inline"><b>618 / 618</b><span>mapped</span></div></div>
+      <div class="coverage-summary" id="coverageSummary"></div>
+      <div class="panel compact-panel toolbar-row">
+        <label class="field search-field"><span>Search topics</span><input id="bpSearch" type="search" placeholder="Search blueprint topic…"></label>
+        <label class="field"><span>Objective</span><select id="bpObj"><option value="">All objectives</option></select></label>
+        <label class="field"><span>Status</span><select id="bpStatus"><option value="">All statuses</option><option value="mature">Mature</option><option value="learning">Learning</option><option value="new">New</option></select></label>
+      </div>
+      <div id="bpList" class="panel coverage-table"></div>
+    </section>
+
+    <section id="plan" class="view hidden">
+      <div class="page-title"><div><span class="eyebrow">One repeatable system</span><h1>Study workflow</h1><p>Use the site as a loop, not a library. Each stage has a specific job.</p></div></div>
+      <div class="workflow-timeline">
+        <article><span>01</span><div><h2>First pass</h2><p>Move through new cards objective by objective. Retrieve the front before revealing Layer 1, then open deeper layers only where your explanation is incomplete.</p><button class="btn" data-start-mode="new">Learn new cards →</button></div></article>
+        <article><span>02</span><div><h2>Spaced retrieval</h2><p>Clear the due queue daily. Grade the quality of retrieval, not familiarity. Wrong and Hard answers become tomorrow’s highest-value work.</p><button class="btn" data-start-mode="due">Review due cards →</button></div></article>
+        <article><span>03</span><div><h2>Interleaved application</h2><p>Use mixed scenarios across domains. Record confidence before answering; low-confidence correct answers still belong in the weak queue.</p><button class="btn" data-go="quiz">Open practice →</button></div></article>
+        <article><span>04</span><div><h2>Performance practice</h2><p>Work PBQs, CLI/log-analysis tasks, diagrams and labs without answer cues. Explain tradeoffs and evidence, not just the final control name.</p><button class="btn" data-go="pbq">Open PBQ lab →</button></div></article>
+        <article><span>05</span><div><h2>Error-driven refinement</h2><p>Revisit missed objectives after a delay. The dashboard prioritizes lapses, low-confidence quiz answers and incomplete PBQs automatically.</p><button class="btn" data-start-mode="weak">Review weak cards →</button></div></article>
+      </div>
+      <div class="panel note-panel"><b>Full gameplan</b><p>The detailed evidence-based schedule, interleaving plan and lab recommendations remain in <a href="docs/GAMEPLAN.md">docs/GAMEPLAN.md</a>.</p></div>
+    </section>
+
+    <section id="sources" class="view hidden">
+      <div class="page-title"><div><span class="eyebrow">Proof layer</span><h1>Sources & audit trail</h1><p>CompTIA defines exam scope. Technical claims are backed by current standards bodies and primary references where a clean source exists.</p></div><div class="audit-chip inline"><b id="sourceCount">0</b><span>registered sources</span></div></div>
+      <div class="panel audit-summary" id="precisionSummary"></div>
+      <div class="panel compact-panel toolbar-row"><label class="field search-field"><span>Search sources</span><input id="sourceSearch" type="search" placeholder="NIST, DMARC, OAuth, OT…"></label></div>
+      <div id="sourceList" class="source-grid"></div>
+    </section>
+  </main>
+</div>
+
+<div class="modal hidden" id="shortcutModal" role="dialog" aria-modal="true" aria-labelledby="shortcutTitle">
+  <div class="modal-card"><div class="section-head"><h2 id="shortcutTitle">Keyboard shortcuts</h2><button class="icon-btn" id="shortcutClose" aria-label="Close">×</button></div><div class="shortcut-grid"><kbd>Space</kbd><span>Reveal direct answer</span><kbd>1–8</kbd><span>Open flashcard layer</span><kbd>A</kbd><span>Again / wrong</span><kbd>H</kbd><span>Hard</span><kbd>G</kbd><span>Good</span><kbd>E</kbd><span>Easy</span><kbd>← →</kbd><span>Previous / next card</span><kbd>/</kbd><span>Focus card search</span></div></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<footer><div class="shell footer-inner"><span>Unofficial SecurityX CAS-005 study resource. No exam dumps.</span><span>Progress stays in this browser.</span></div></footer>
+
+<script src="data/meta.js"></script>
+<script src="data/cards-001.js"></script><script src="data/cards-002.js"></script><script src="data/cards-003.js"></script><script src="data/cards-004.js"></script><script src="data/cards-005.js"></script><script src="data/cards-006.js"></script><script src="data/cards-007.js"></script><script src="data/cards-008.js"></script><script src="data/cards-009.js"></script><script src="data/cards-010.js"></script><script src="data/cards-011.js"></script><script src="data/cards-012.js"></script><script src="data/cards-013.js"></script><script src="data/cards-014.js"></script><script src="data/cards-015.js"></script><script src="data/cards-016.js"></script><script src="data/cards-017.js"></script><script src="data/cards-018.js"></script><script src="data/cards-019.js"></script><script src="data/cards-020.js"></script><script src="data/cards-021.js"></script><script src="data/cards-022.js"></script><script src="data/cards-023.js"></script><script src="data/cards-024.js"></script><script src="data/cards-025.js"></script><script src="data/cards-026.js"></script><script src="data/cards-027.js"></script><script src="data/cards-028.js"></script><script src="data/cards-029.js"></script>
+<script src="data/precision_overrides_v4_2.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
