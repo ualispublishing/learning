@@ -13,7 +13,21 @@ Unofficial, original study site mapped to the current public ISC2 CISSP exam out
 - current official domain weights (16/10/13/13/13/12/13/10 = 100%);
 - 20 primary/reference sources, including current NIST SP 800-63-4 (2025), SP 800-61 Rev. 3 (2025), SP 800-88 Rev. 2 (2025), IETF IPsec/Kerberos/OAuth specifications, OpenID Connect, OASIS SAML, and OWASP ASVS.
 
-See `PRECISION_AUDIT.md` for the semantic audit and the exact boundary between mapped scope and demonstrated mastery.
+## 2026-08-24 item-level semantic pass
+
+All **196 current learner-facing items** were individually reviewed: 62 objective cards, 38 high-yield cards, 8 AI cards, 32 precision cards, and all 56 questions including option sets, keyed answers, and explanations.
+
+Result:
+
+- 193 verified unchanged;
+- 1 verified after a precision wording correction (`HY-014`, digital signatures/nonrepudiation);
+- 2 verified with explicit source-scope notes (`AI-005`, `PX-020`);
+- **0 answer-key reversals**;
+- **0 known remaining material factual errors identified by this pass**.
+
+`SEMANTIC_ITEM_AUDIT.json` records the status of every current item. `audit.py` now rejects a release if the live card/question IDs no longer exactly match that semantic-audit manifest.
+
+See `PRECISION_AUDIT.md` for the detailed review and the boundary between “no known error after review” and an impossible absolute guarantee of eternal 100% infallibility.
 
 ## Study workflow
 
@@ -31,15 +45,26 @@ The interface is organized around **diagnose → retrieve → apply → repair w
 - responsive desktop/mobile layouts;
 - primary/reference source traceability.
 
+## Question-bank expansion
+
+`question-bank/QUESTION_BANK_EXPANSION_PLAN.md` defines the next bank maturity target: **800 total records** with a deliberate difficulty mix:
+
+- 15% Foundation+ — slightly easier than expected exam level;
+- **60% Exam-calibrated** — the center of gravity;
+- 20% Stretch — somewhat harder through reasoning depth, not obscure trivia;
+- 5% Bellringer — clearly labeled non-exam-representative multi-domain case drills.
+
+Originality is enforced by authoring from public scope/primary standards rather than other questions, plus exact/near-text/structural duplicate detection. `question-bank/quality_gate.py` is wired into CI, and `question-bank/CANDIDATE_SCHEMA.json` defines future question/case metadata.
+
 ## Precision boundary
 
-`audit.py` verifies structural and mapping correctness: objective IDs/counts, official weights, exact subtopic-map coverage, AI coverage across all eight domains, source references, answer indices, duplicate IDs, per-domain precision/scenario coverage, runtime card/question/source counts, release-status agreement, metadata-count agreement, and required application assets. Content was also reviewed against the current public ISC2 outline and current primary supporting standards where used.
+`audit.py` verifies structural and mapping correctness: objective IDs/counts, official weights, exact subtopic-map coverage, AI coverage across all eight domains, source references, answer indices, duplicate IDs, per-domain precision/scenario coverage, runtime card/question/source counts, release-status agreement, metadata-count agreement, the complete semantic-item manifest, and required application assets.
 
-This is **published-outline coverage**, not a claim that a public deck contains every live adaptive-exam fact or can guarantee a pass. ISC2 describes CISSP as experiential and does not guarantee that a candidate will pass. All practice questions here are original; no exam dumps or copied commercial questions are included.
+This is **published-outline coverage plus item-level review**, not a claim that a public deck contains every live adaptive-exam fact or can guarantee a pass. ISC2 describes CISSP as experiential and does not guarantee that a candidate will pass. All practice questions here are original; no exam dumps or copied commercial questions are included.
 
 ## Continuous audit
 
-`.github/workflows/cissp-study-site-audit.yml` runs the deterministic knowledge audit, JavaScript syntax checks, and a static HTTP asset smoke test whenever this site changes.
+`.github/workflows/cissp-study-site-audit.yml` runs the deterministic knowledge audit, question-bank originality/duplicate gate, JavaScript syntax checks, and a static HTTP asset smoke test whenever this site changes.
 
 ## Tomorrow start
 
@@ -51,6 +76,7 @@ Read `TOMORROW_START.md` or simply open the site and run the 16-question diagnos
 python -m http.server 8000
 # open http://localhost:8000
 python audit.py
+python question-bank/quality_gate.py
 ```
 
 ## GitHub Pages
