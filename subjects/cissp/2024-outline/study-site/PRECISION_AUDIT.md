@@ -15,7 +15,7 @@ The site is mapped to the current public ISC2 CISSP exam outline, effective Apri
 - 33 current AI-security coverage areas distributed across all 8 domains.
 - 140 layered retrieval cards.
 - 56 original scenario questions.
-- 19 primary/reference sources.
+- 20 primary/reference sources.
 - Every high-yield/precision card maps to a valid objective and valid source ID.
 - Every practice item maps to a valid objective, has four options, a valid answer index, and an explanation.
 - Duplicate objective/card/question identifiers are rejected by `audit.py`.
