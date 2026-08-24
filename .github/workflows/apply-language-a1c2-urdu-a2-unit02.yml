@@ -23,134 +23,35 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Sync to latest main
+      - name: Synchronize to latest main
         shell: bash
         run: |
           set -euo pipefail
           git fetch origin main
           git reset --hard origin/main
 
-      - name: Apply reviewed Unit 2 transaction
+      - name: Recover and run the hash-bound reviewed transaction
         shell: bash
-        env:
-          PACKET_B64_GZ: "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"
         run: |
+          set -euo pipefail
+          ORIGINAL_COMMIT='a4e1149f2e0964595f1ceb359b18b791b3eeca91'
+          ORIGINAL_PATH='.github/workflows/apply-language-a1c2-urdu-a2-unit02.yml'
+          git show "${ORIGINAL_COMMIT}:${ORIGINAL_PATH}" > /tmp/original-unit02.yml
           python - <<'PY'
-          import base64, gzip, hashlib, json, os, subprocess
-          from pathlib import Path
-
-          ROOT = Path.cwd(); R = ROOT / "reading"
-          CANON = R / "urdu/a2/passages.jsonl"; STATUS = R / "STATUS.json"; CONT = R / "CONTINUATION.json"
-          TASKS = R / "TASKS.md"; HANDOFF = R / "AGENT_HANDOFF_V2.md"
-          LEX_AUDIT = R / "audit/urdu_a2_u02_lexical_sense_check_2026-08-24.json"
-          QUALITY_AUDIT = R / "audit/urdu_a2_u02_quality_pass_2026-08-24.json"
-          EXPECTED_SOURCE_BLOB = "e5bb0fb6fb642a37ba4f69537f960cbb324fd365"
-          EXPECTED_PACKET_SHA256 = "da767ab449a2252c561dfac34aceceafeab2830a6f2403a550157196f53385af"
-          EXPECTED_NEW = [["ur-rank-0751","ur-rank-0753"],["ur-rank-0716","ur-rank-0741"],["ur-rank-0901","ur-rank-0927"],["ur-rank-0879","ur-rank-0858"],[],[]]
-          EXPECTED_ROLES = ["instructional","reinforcement","interleaved","transfer","integration","fluency"]
-          GENRES = {"email/message","narrative","schedule"}
-
-          def fail(msg): raise SystemExit("Urdu A2 Unit 2 integration failed: " + msg)
-          def load_json(p): return json.loads(p.read_text(encoding="utf-8"))
-          def write_json(p,o): p.parent.mkdir(parents=True,exist_ok=True); p.write_text(json.dumps(o,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-          def read_jsonl(p):
-              out=[]
-              for n,raw in enumerate(p.read_text(encoding="utf-8").splitlines(),1):
-                  if not raw.strip(): continue
-                  try: out.append(json.loads(raw))
-                  except json.JSONDecodeError as e: fail(f"invalid JSONL {p}:{n}: {e}")
-              return out
-          def blob(p): return subprocess.check_output(["git","hash-object",str(p.relative_to(ROOT))],text=True).strip()
-          def project_count():
-              total=0
-              for lang in ("arabic","french","urdu"):
-                  for level in ("a1","a2","b1","b2","c1","c2"):
-                      p=R/lang/level/"passages.jsonl"
-                      if p.exists(): total += len(read_jsonl(p))
-              return total
-          def urdu_count():
-              total=0
-              for level in ("a1","a2","b1","b2","c1","c2"):
-                  p=R/"urdu"/level/"passages.jsonl"
-                  if p.exists(): total += len(read_jsonl(p))
-              return total
-          def replace_once(text,old,new,label):
-              c=text.count(old)
-              if c != 1: fail(f"{label} expected once, found {c}")
-              return text.replace(old,new,1)
-
-          if blob(CANON) != EXPECTED_SOURCE_BLOB: fail(f"source blob drift: {blob(CANON)}")
-          packet_bytes=gzip.decompress(base64.b64decode(os.environ["PACKET_B64_GZ"]))
-          if hashlib.sha256(packet_bytes).hexdigest()!=EXPECTED_PACKET_SHA256: fail("embedded packet hash drift")
-          packet=[json.loads(x) for x in packet_bytes.decode("utf-8").splitlines() if x.strip()]
-          current=read_jsonl(CANON)
-          if len(current)!=6 or [x.get("sequence") for x in current]!=list(range(1,7)): fail("live Urdu A2 baseline is no longer sequences 1-6")
-          if [x.get("id") for x in current] != [f"ur-a2-u01-p{i:02d}" for i in range(1,7)]: fail("live Unit 1 IDs changed")
-          if len(packet)!=6: fail("packet must contain six records")
-
-          status=load_json(STATUS); cont=load_json(CONT)
-          if status.get("current",{}).get("canonical_passages")!=786: fail("STATUS project total no longer 786")
-          if status.get("languages",{}).get("urdu",{}).get("canonical_passages")!=66: fail("STATUS Urdu total no longer 66")
-          if cont.get("production",{}).get("canonical_passages")!=786: fail("CONTINUATION project total no longer 786")
-          if cont.get("production",{}).get("urdu",{}).get("canonical_passages")!=66: fail("CONTINUATION Urdu total no longer 66")
-          if project_count()!=786 or urdu_count()!=66: fail("live canonical counts drifted from baseline")
-
-          prior_ids={t.get("id") for p in (R/"urdu/a1/passages.jsonl",CANON) for row in read_jsonl(p) for t in (row.get("new_lexical_targets") or [])}
-          overlap=sorted(set(x for g in EXPECTED_NEW for x in g)&prior_ids)
-          if overlap: fail(f"new target IDs no longer fresh: {overlap}")
-
-          for i,row in enumerate(packet):
-              rid=f"ur-a2-u02-p{i+1:02d}"; seq=7+i
-              if row.get("id")!=rid or row.get("sequence")!=seq or row.get("unit")!=2: fail(f"{rid} identity/sequence/unit mismatch")
-              if row.get("language")!="ur" or row.get("cefr")!="A2" or row.get("revision")!=1: fail(f"{rid} language/level/revision mismatch")
-              if row.get("passage_type")!=EXPECTED_ROLES[i] or row.get("genre") not in GENRES: fail(f"{rid} role/genre mismatch")
-              wc=len(row.get("text","").split())
-              if row.get("word_count")!=wc or not 140<=wc<=220: fail(f"{rid} word-count failure: {wc}")
-              qs=row.get("questions") or []; ans=row.get("answer_key") or []
-              if len(qs)!=10 or len(ans)!=10: fail(f"{rid} must have 10 questions and 10 answers")
-              if [q.get("id") for q in qs] != [f"q{n}" for n in range(1,11)]: fail(f"{rid} q ids invalid")
-              if [a.get("id") for a in ans] != [f"a{n}" for n in range(1,11)]: fail(f"{rid} answer ids invalid")
-              for n,(q,a) in enumerate(zip(qs,ans),1):
-                  if q.get("answer_id")!=f"a{n}" or a.get("question_id")!=f"q{n}": fail(f"{rid} q/a linkage invalid at {n}")
-                  if not str(a.get("answer","")).strip(): fail(f"{rid} empty answer at {n}")
-              targets=row.get("new_lexical_targets") or []
-              if [t.get("id") for t in targets]!=EXPECTED_NEW[i]: fail(f"{rid} new target set mismatch")
-              for t in targets:
-                  exp=row["text"].count(t["form"])
-                  if exp<2 or t.get("exposures_in_text")!=exp: fail(f"{rid} target exposure mismatch for {t.get('id')}")
-                  if not any(t["id"] in (q.get("target_ids") or []) for q in qs): fail(f"{rid} target not assessed: {t.get('id')}")
-              if i==4 and targets: fail("P5 must have no deliberate new target")
-              if i==5:
-                  speed=row.get("speed_training") or {}
-                  if targets or speed.get("new_word_policy")!="none" or speed.get("timed") is not True: fail("P6 fluency new-word policy failure")
-
-          old=CANON.read_text(encoding="utf-8")
-          if old and not old.endswith("\n"): old += "\n"
-          CANON.write_text(old+"".join(json.dumps(x,ensure_ascii=False,separators=(",",":"))+"\n" for x in packet),encoding="utf-8")
-          result=read_jsonl(CANON)
-          if len(result)!=12 or [x.get("sequence") for x in result]!=list(range(1,13)): fail("post-write A2 sequences invalid")
-          result_blob=blob(CANON)
-
-          status["updated"]="2026-08-24"; status["current"]["canonical_passages"]=792; status["current"]["remaining_generation_passages"]=288
-          status["languages"]["urdu"]["canonical_passages"]=72; status["languages"]["urdu"]["remaining_generation_passages"]=288; write_json(STATUS,status)
-          cont["updated"]="2026-08-24"; cont["production"]["canonical_passages"]=792; cont["production"]["urdu"]["canonical_passages"]=72
-          cont["active_frontier"]["production"]["action"]="Continue generation-first production from Urdu A2 Unit 3 / sequence 13 using the canonical roadmap and ten-question contract. Do not reopen Urdu A1 generation unless fresh evidence identifies a concrete defect."
-          if not isinstance(cont.get("exact_next_actions"),list) or len(cont["exact_next_actions"])<3: fail("CONTINUATION exact_next_actions shape changed")
-          cont["exact_next_actions"][1]="Use reading/planning/ACTIVE_GENERATION_PLAN.json to start the next guarded Urdu A2 Unit 3 batch at sequence 13."; write_json(CONT,cont)
-
-          tasks=TASKS.read_text(encoding="utf-8")
-          for oldtxt,newtxt,label in [("Updated: 2026-08-23","Updated: 2026-08-24","TASKS date"),("Canonical production frontier: **Urdu A2, Unit 2, sequence 7**.","Canonical production frontier: **Urdu A2, Unit 3, sequence 13**.","TASKS frontier"),("- Urdu: 66/360 generated; A1 complete, A2 in progress.","- Urdu: 72/360 generated; A1 complete, A2 in progress.","TASKS Urdu"),("- Project: 786/1080 generated.","- Project: 792/1080 generated.","TASKS project")]: tasks=replace_once(tasks,oldtxt,newtxt,label)
-          TASKS.write_text(tasks,encoding="utf-8")
-
-          hand=HANDOFF.read_text(encoding="utf-8")
-          for oldtxt,newtxt,label in [("Updated: 2026-08-23","Updated: 2026-08-24","handoff date"),("- Canonical generated total: **786**.","- Canonical generated total: **792**.","handoff project"),("- Urdu: **66/360**; A1 generation complete and A2 generation in progress.","- Urdu: **72/360**; A1 generation complete and A2 generation in progress.","handoff Urdu"),("- Urdu A2 canonical path: `reading/urdu/a2/passages.jsonl`; Unit 1 currently contains sequences 1-6.","- Urdu A2 canonical path: `reading/urdu/a2/passages.jsonl`; Units 1-2 currently contain sequences 1-12.","handoff snapshot"),("Continue **Urdu A2**, starting from Unit 2 / sequence 7, under:","Continue **Urdu A2**, starting from Unit 3 / sequence 13, under:","handoff frontier"),("Unit 2 uses the roadmap theme **plans, invitations, and changes** with `email/message`, `narrative`, and `schedule` genres.","Unit 3 uses the roadmap theme **past events and memories** with `personal narrative`, `diary`, and `short interview` genres.","handoff roadmap"),("Run `python reading/tools/validate_continuation_state.py`; if it passes, resume guarded generation at **Urdu A2 Unit 2 / sequence 7** using the Unit 2 roadmap theme `plans, invitations, and changes`.","Run `python reading/tools/validate_continuation_state.py`; if it passes, resume guarded generation at **Urdu A2 Unit 3 / sequence 13** using the Unit 3 roadmap theme `past events and memories`.","handoff next")]: hand=replace_once(hand,oldtxt,newtxt,label)
-          HANDOFF.write_text(hand,encoding="utf-8")
-          if project_count()!=792 or urdu_count()!=72: fail("post-write totals invalid")
-
-          lexical={"schema_version":1,"project_id":"LANG-A1C2","language":"ur","cefr":"A2","unit":2,"date":"2026-08-24","status":"PASS_FOR_GENERATION_TARGET_SENSES","scope":"Deliberate learner-facing senses only. This does not validate whole-passage linguistic/pedagogical quality or educator/publication release readiness.","source_lexicon":"reading/lexicons/urdu.jsonl","canonical_freshness_method":"Candidate target IDs were checked against live canonical Urdu A1 and A2 new_lexical_targets; all eight were absent before Unit 2.","targets":[{"id":"ur-rank-0751","form":"منصوبہ","source_rank":751,"accepted_sense":"plan; intended course of action","dictionary":"Rekhta Dictionary","url":"https://www.rekhta.org/urdudictionary?keyword=%D9%85%D9%86%D8%B5%D9%88%D8%A8%DB%81%DB%94%DB%94%DB%94"},{"id":"ur-rank-0753","form":"توقع","source_rank":753,"accepted_sense":"expectation; what one thinks or hopes will happen","dictionary":"Rekhta Dictionary","url":"https://www.rekhtadictionary.com/meaning-of-tavaqqo"},{"id":"ur-rank-0716","form":"مصروف","source_rank":716,"accepted_sense":"busy; occupied with something","dictionary":"Rekhta Dictionary","url":"https://www.rekhta.org/urdudictionary?keyword=%D9%85%D8%B5%D8%B1%D9%88%D9%81"},{"id":"ur-rank-0741","form":"انکار","source_rank":741,"accepted_sense":"refusal; saying no to a request or invitation","dictionary":"Rekhta Dictionary","url":"https://www.rekhtadictionary.com/meaning-of-inkaar"},{"id":"ur-rank-0901","form":"اطلاع","source_rank":901,"accepted_sense":"notice; information communicated to someone","dictionary":"Rekhta Dictionary","url":"https://www.rekhtadictionary.com/meaning-of-ittilaa"},{"id":"ur-rank-0927","form":"اچانک","source_rank":927,"accepted_sense":"suddenly; unexpectedly; without advance warning","dictionary":"Rekhta Dictionary","url":"https://www.rekhtadictionary.com/meaning-of-achaanak"},{"id":"ur-rank-0879","form":"انتظام","source_rank":879,"accepted_sense":"arrangement; practical preparation for an event or activity","dictionary":"Rekhta Dictionary","url":"https://www.rekhtadictionary.com/meaning-of-intizaam"},{"id":"ur-rank-0858","form":"انتظار","source_rank":858,"accepted_sense":"waiting; staying until someone or something arrives","dictionary":"Rekhta Dictionary","url":"https://www.rekhta.org/urdudictionary?keyword=%D8%A7%D9%86%D8%AA%D8%B8%D8%A7%D8%B1"}],"generation_policy":{"P1_P4_new_targets_per_passage":2,"P5_new_targets":0,"P6_new_targets":0,"P6_new_word_policy":"none"},"quality_promotion":False}; write_json(LEX_AUDIT,lexical)
-          qa={"schema_version":1,"project_id":"LANG-A1C2","language":"ur","cefr":"A2","unit":2,"date":"2026-08-24","status":"PASS_AFTER_PRECANONICAL_READER_PASS","scope":"Bounded generation-stage reader-first pass for Unit 2 only: naturalness, target-sense clarity, answer grounding/linkage, operational A2 grammar, word-band checks, roadmap role/genre checks, and fluency new-word policy. Formal corpus-wide linguistic, pedagogical, CEFR/coverage, independent/native, and educator-release gates remain pending.","source_canonical_git_blob":EXPECTED_SOURCE_BLOB,"source_a2_passages":6,"packet_sha256":EXPECTED_PACKET_SHA256,"result_canonical_git_blob":result_blob,"result_a2_passages":12,"project_passages_after":792,"urdu_passages_after":72,"unit_sequences":[7,8,9,10,11,12],"passages":6,"questions":60,"answers":60,"word_counts":{x["id"]:x["word_count"] for x in packet},"new_target_ids_by_passage":{x["id"]:[t["id"] for t in x.get("new_lexical_targets",[])] for x in packet},"new_target_exposures":{x["id"]:{t["id"]:t["exposures_in_text"] for t in x.get("new_lexical_targets",[])} for x in packet},"lexical_sense_evidence":"reading/audit/urdu_a2_u02_lexical_sense_check_2026-08-24.json","checks":{"source_blob_guard":True,"packet_hash_guard":True,"fresh_target_ids_against_live_urdu_a1_a2":True,"six_passage_role_order":True,"roadmap_genres_only":True,"word_band_140_220":True,"exactly_10_questions_and_10_answers_each":True,"bidirectional_q_a_links":True,"each_new_target_assessed":True,"target_exposure_metadata_recounted":True,"p5_has_no_new_deliberate_targets":True,"p6_has_no_new_deliberate_targets":True,"p6_new_word_policy_none":True,"post_write_project_and_urdu_counts":True},"quality_promotion":False,"educator_release_ready":False}; write_json(QUALITY_AUDIT,qa)
-          print(f"unit02_applied=true result_blob={result_blob} project=792 urdu=72 a2=12")
+          import pathlib, re, textwrap
+          src = pathlib.Path('/tmp/original-unit02.yml').read_text(encoding='utf-8')
+          packet = re.search(r'PACKET_B64_GZ: "([^"]+)"', src)
+          if not packet:
+              raise SystemExit('Could not recover embedded Unit 2 packet from pinned staging commit.')
+          marker = "          python - <<'PY'\n"
+          if marker not in src:
+              raise SystemExit('Could not recover pinned Unit 2 transaction script.')
+          body = src.split(marker, 1)[1].split("\n          PY", 1)[0]
+          pathlib.Path('/tmp/packet.txt').write_text(packet.group(1), encoding='utf-8')
+          pathlib.Path('/tmp/apply-unit02.py').write_text(textwrap.dedent(body), encoding='utf-8')
           PY
+          export PACKET_B64_GZ="$(cat /tmp/packet.txt)"
+          python /tmp/apply-unit02.py
 
       - name: Derive next plan and validate state
         shell: bash
@@ -164,17 +65,22 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           BASE_HEAD="$(git rev-parse HEAD)"
-          git add reading/urdu/a2/passages.jsonl reading/audit/urdu_a2_u02_lexical_sense_check_2026-08-24.json reading/audit/urdu_a2_u02_quality_pass_2026-08-24.json reading/STATUS.json reading/CONTINUATION.json reading/TASKS.md reading/AGENT_HANDOFF_V2.md reading/planning/ACTIVE_GENERATION_PLAN.json reading/STATE_MANIFEST.json
-          git commit -m "Complete Urdu A2 Unit 2 and advance to Unit 3 [skip ci]"
+          git add reading/urdu/a2/passages.jsonl \
+            reading/audit/urdu_a2_u02_lexical_sense_check_2026-08-24.json \
+            reading/audit/urdu_a2_u02_quality_pass_2026-08-24.json \
+            reading/STATUS.json reading/CONTINUATION.json reading/TASKS.md \
+            reading/AGENT_HANDOFF_V2.md reading/planning/ACTIVE_GENERATION_PLAN.json \
+            reading/STATE_MANIFEST.json
+          git commit -m 'Complete Urdu A2 Unit 2 and advance to Unit 3 [skip ci]'
           git fetch origin main
           if [ "$(git rev-parse origin/main)" != "$BASE_HEAD" ]; then
             CHANGED="$(git diff --name-only "$BASE_HEAD"..origin/main || true)"
             printf '%s\n' "$CHANGED"
             if printf '%s\n' "$CHANGED" | grep -Eq '^(reading/urdu/a2/passages\.jsonl|reading/STATUS\.json|reading/CONTINUATION\.json|reading/TASKS\.md|reading/AGENT_HANDOFF_V2\.md|reading/planning/ACTIVE_GENERATION_PLAN\.json|reading/STATE_MANIFEST\.json)$'; then
-              echo "Critical continuation state changed concurrently; refusing to push."
+              echo 'Critical continuation state changed concurrently; refusing to push.'
               exit 1
             fi
             git rebase origin/main
