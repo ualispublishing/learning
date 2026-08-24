@@ -1,0 +1,31 @@
+name: Validate LANG-A1C2 week-ready queue
+
+on:
+  push:
+    paths:
+      - 'reading/planning/WEEK_READY_2026-08-24.json'
+      - 'reading/tools/validate_week_ready_queue.py'
+      - 'reading/TOMORROW_START_2026-08-24.md'
+      - 'reading/planning/topic_genre_matrix.json'
+      - '.github/workflows/validate-language-a1c2-week-ready.yml'
+  pull_request:
+    paths:
+      - 'reading/planning/WEEK_READY_2026-08-24.json'
+      - 'reading/tools/validate_week_ready_queue.py'
+      - 'reading/TOMORROW_START_2026-08-24.md'
+      - 'reading/planning/topic_genre_matrix.json'
+      - '.github/workflows/validate-language-a1c2-week-ready.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate seven-session queue
+        run: python reading/tools/validate_week_ready_queue.py
