@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "project_id": "LANG-A1C2",
   "updated": "2026-08-23",
   "purpose": "Compact live resume state for the Arabic/French/Urdu A1-C2 graded-reading project. This file contains the current frontier only; historical work belongs in Git history and reading/audit/.",
@@ -12,15 +12,16 @@
       "curation/language-workbooks/v1.0/",
       "progress/"
     ],
-    "legacy_non_authoritative": [
-      "reading/AGENT_HANDOFF.md"
-    ]
+    "legacy_non_authoritative": ["reading/AGENT_HANDOFF.md"]
   },
   "authoritative_read_order": [
+    "PROJECT_TRACKS.json",
+    "reading/AGENTS.md",
     "reading/CONTINUATION.json",
     "live reading/<language>/<level>/passages.jsonl for any level being touched",
     "reading/RELEASE_STATUS.json",
     "reading/STATUS.json",
+    "reading/planning/ACTIVE_GENERATION_PLAN.json",
     "reading/AGENT_HANDOFF_V2.md",
     "reading/TASKS.md",
     "reading/VERIFICATION_TASKS.md",
@@ -30,21 +31,20 @@
     "reading/schema/passage.schema.json",
     "reading/ROADMAP.md"
   ],
-  "truth_precedence": [
-    "live canonical JSONL",
-    "fresh hash-bound audit evidence",
-    "CONTINUATION.json",
-    "RELEASE_STATUS.json for release claims",
-    "STATUS.json for production counts/frontier",
-    "AGENT_HANDOFF_V2.md and active task queues",
-    "durable policies/schema/roadmap",
-    "historical artifacts and legacy handoffs"
-  ],
+  "authority_by_domain": {
+    "project_routing_and_scope": "PROJECT_TRACKS.json plus reading/AGENTS.md and this scope_guard. Any disagreement is a stop condition.",
+    "production_facts": "Live canonical JSONL is ground truth. STATUS.json and this file cache counts/frontier and must match live data; mismatch fails closed.",
+    "release_readiness": "Fresh hash-bound evidence may invalidate an existing release claim. RELEASE_STATUS.json is the authoritative affirmative educator/publication decision. If evidence and RELEASE_STATUS disagree or evidence is stale, fail closed rather than infer readiness.",
+    "active_generation_frontier": "CONTINUATION.json, STATUS.json, and ACTIVE_GENERATION_PLAN.json must agree; otherwise stop and reconcile before generation.",
+    "durable_rules": "Policies, schema, standards, and roadmap define durable constraints but must not override a newer verified live frontier.",
+    "history": "Git history, reading/audit/, legacy handoffs, and historical state snapshots are evidence/history only unless explicitly promoted by the live state stack."
+  },
   "state_contract": {
     "production_and_release_are_separate": true,
     "generation_complete_never_implies_educator_release_ready": true,
     "fail_closed_on_canonical_state_drift": true,
     "do_not_copy_historical_timelines_into_live_state": true,
+    "release_status_changes_require_continuation_summary_refresh": true,
     "update_together_after_substantive_state_change": [
       "reading/CONTINUATION.json",
       "reading/STATUS.json",
@@ -94,17 +94,18 @@
   },
   "release": {
     "source": "reading/RELEASE_STATUS.json",
+    "cached_summary_only": true,
     "arabic": {
       "educator_release_ready": false,
-      "state": "INTERNAL_LANGUAGE_PASS_WITH_RELEASE_BLOCKERS"
+      "release_state": "INTERNAL_LANGUAGE_PASS"
     },
     "french": {
       "educator_release_ready": false,
-      "state": "REOPEN_REQUIRED"
+      "release_state": "REOPEN_REQUIRED"
     },
     "urdu": {
       "educator_release_ready": false,
-      "state": "A1_INTEGRITY_PASS_NOT_QUALITY_PROMOTED"
+      "release_state": "NOT_RELEASE_READY"
     }
   },
   "active_frontier": {
@@ -121,11 +122,12 @@
   },
   "resume_checks": [
     "Run python reading/tools/validate_continuation_state.py before trusting stored counts/frontiers.",
-    "If live canonical JSONL differs from this state, stop and reconcile live files plus fresh audit evidence before generating or claiming release status.",
+    "If live canonical JSONL differs from production state, stop and reconcile before generating.",
+    "If fresh release evidence conflicts with RELEASE_STATUS or the cached release summary here, fail closed and reconcile before making a release claim.",
     "Never infer educator readiness from historical APPROVED, SEALED, PASS, or generation-complete wording."
   ],
   "exact_next_actions": [
-    "Validate the continuation/status snapshot against live canonical JSONL.",
+    "Validate the continuation/status snapshot against live canonical JSONL and project routing.",
     "Use reading/planning/ACTIVE_GENERATION_PLAN.json to start the next guarded Urdu A2 generation batch.",
     "Maintain Arabic/French release remediation and Urdu A1 educator verification as separate verification lanes without blocking generation-first production unless a concrete defect requires it."
   ]
