@@ -85,6 +85,16 @@ def main() -> int:
         "CONTINUATION must preserve production/release separation",
         errors,
     )
+    authority = continuation.get("authority_by_domain", {})
+    for domain in (
+        "project_routing_and_scope",
+        "production_facts",
+        "release_readiness",
+        "active_generation_frontier",
+        "durable_rules",
+        "history",
+    ):
+        require(bool(authority.get(domain)), f"CONTINUATION authority_by_domain missing {domain}", errors)
 
     actual = {language: canonical_count(language) for language in LANGUAGES}
     actual_total = sum(actual.values())
@@ -133,11 +143,15 @@ def main() -> int:
     require(integrity.get("quality_promotion") is False, "Urdu A1 integrity artifact unexpectedly promotes quality", errors)
     require(release["languages"]["urdu"]["a1_integrity_evidence"].get("quality_promotion") is False, "RELEASE_STATUS must preserve Urdu A1 quality_promotion=false", errors)
 
+    require(continuation.get("release", {}).get("source") == "reading/RELEASE_STATUS.json", "CONTINUATION cached release summary must identify RELEASE_STATUS as its source", errors)
     for language in LANGUAGES:
         language_release = release["languages"][language]
+        cached_release = continuation["release"][language]
         ready = language_release.get("educator_release_ready")
         open_classes = language_release.get("open_release_classes", [])
         require(isinstance(ready, bool), f"{language}: educator_release_ready must be boolean", errors)
+        require(cached_release.get("educator_release_ready") == ready, f"{language}: CONTINUATION cached educator_release_ready differs from RELEASE_STATUS", errors)
+        require(cached_release.get("release_state") == language_release.get("release_state"), f"{language}: CONTINUATION cached release_state differs from RELEASE_STATUS", errors)
         require(not (ready and open_classes), f"{language}: educator_release_ready=true is inconsistent with unresolved open_release_classes", errors)
 
     require(
