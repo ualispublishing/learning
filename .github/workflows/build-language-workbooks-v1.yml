@@ -5,6 +5,7 @@ on:
     paths:
       - 'scripts/build_language_workbooks_v1.py'
       - 'scripts/build_language_workbooks_v1_quality.py'
+      - 'scripts/language_workbook_pronunciation.py'
       - 'scripts/workbook_release_passes.py'
       - 'scripts/workbook_release_passes_v5.py'
       - 'scripts/workbook_release_passes_v6.py'
@@ -20,6 +21,7 @@ on:
     paths:
       - 'scripts/build_language_workbooks_v1.py'
       - 'scripts/build_language_workbooks_v1_quality.py'
+      - 'scripts/language_workbook_pronunciation.py'
       - 'scripts/workbook_release_passes.py'
       - 'scripts/workbook_release_passes_v5.py'
       - 'scripts/workbook_release_passes_v6.py'
@@ -92,6 +94,21 @@ jobs:
       - name: Pass 3 — full corpus audit + stratified samples (max 2 min)
         shell: bash
         run: timeout --signal=TERM 120s python scripts/workbook_release_passes_v6.py corpus-audit
+
+      - name: Pass 3.5 — pronunciation foundations audit (max 1 min)
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout --signal=TERM 60s python - <<'PY'
+          import json
+          import sys
+          sys.path.insert(0, 'scripts')
+          import language_workbook_pronunciation as pronunciation
+          result = pronunciation.audit_payload()
+          if result.get('status') != 'PASS':
+              raise SystemExit('pronunciation foundations gate failed')
+          print(json.dumps(result, ensure_ascii=False, indent=2))
+          PY
 
       - name: Pass 4A — render Arabic workbook set (max 12 min)
         shell: bash
