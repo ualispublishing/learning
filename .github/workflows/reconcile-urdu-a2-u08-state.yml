@@ -1,0 +1,154 @@
+name: Reconcile Urdu A2 Unit 8 State
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/reconcile-urdu-a2-u08-state.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconcile production frontier
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+
+          corpus_path = Path('reading/urdu/a2/passages.jsonl')
+          rows = [json.loads(x) for x in corpus_path.read_text(encoding='utf-8').splitlines() if x.strip()]
+          if len(rows) != 48 or [r.get('sequence') for r in rows] != list(range(1, 49)):
+              raise SystemExit('Fail closed: Urdu A2 canonical corpus is not exactly sequences 1..48')
+          if [r.get('id') for r in rows[-6:]] != [f'ur-a2-u08-p{i:02d}' for i in range(1, 7)]:
+              raise SystemExit('Fail closed: canonical Unit 8 tail mismatch')
+
+          status_path = Path('reading/STATUS.json')
+          status = json.loads(status_path.read_text(encoding='utf-8'))
+          status['updated'] = '2026-08-24'
+          status['current']['canonical_passages'] = 828
+          status['current']['remaining_generation_passages'] = 252
+          status['current']['active_language'] = 'urdu'
+          status['current']['active_level'] = 'A2'
+          status['languages']['urdu']['generation_state'] = 'A2_IN_PROGRESS'
+          status['languages']['urdu']['canonical_passages'] = 108
+          status['languages']['urdu']['remaining_generation_passages'] = 252
+          status['languages']['urdu']['next_generation_level'] = 'A2'
+          status_path.write_text(json.dumps(status, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          cont_path = Path('reading/CONTINUATION.json')
+          cont = json.loads(cont_path.read_text(encoding='utf-8'))
+          cont['updated'] = '2026-08-24'
+          cont['production']['canonical_passages'] = 828
+          cont['production']['urdu']['canonical_passages'] = 108
+          cont['production']['urdu']['state'] = 'A2_GENERATION_IN_PROGRESS'
+          cont['production']['urdu']['next_generation_level'] = 'A2'
+          cont['active_frontier']['production'] = {
+              'language': 'urdu',
+              'level': 'A2',
+              'action': 'Continue generation-first production from Urdu A2 Unit 9 / sequence 49 using the canonical roadmap and ten-question contract. Do not reopen Urdu A1 generation unless fresh evidence identifies a concrete defect.'
+          }
+          cont['exact_next_actions'] = [
+              'Validate the routed state bundle and continuation/status snapshot against live canonical JSONL.',
+              'Use reading/planning/ACTIVE_GENERATION_PLAN.json to start the next guarded Urdu A2 Unit 9 batch at sequence 49.',
+              'Maintain Arabic/French release remediation and Urdu A1 educator verification as separate verification lanes without blocking generation-first production unless a concrete defect requires it.'
+          ]
+          cont_path.write_text(json.dumps(cont, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          matrix = json.loads(Path('reading/planning/topic_genre_matrix.json').read_text(encoding='utf-8'))
+          unit9 = next(x for x in matrix['levels']['A2'] if x['unit'] == 9)
+          plan_path = Path('reading/planning/ACTIVE_GENERATION_PLAN.json')
+          plan = json.loads(plan_path.read_text(encoding='utf-8'))
+          plan['active_language'] = 'urdu'
+          plan['active_level'] = 'A2'
+          plan['active_unit'] = 9
+          plan['start_sequence'] = 49
+          plan['existing_active_level_passages'] = 48
+          plan['active_unit_roadmap'] = {
+              'unit': 9,
+              'theme': unit9['theme'],
+              'genres': unit9['genres']
+          }
+          plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          tasks_path = Path('reading/TASKS.md')
+          tasks = tasks_path.read_text(encoding='utf-8')
+          replacements = {
+              'Canonical production frontier: **Urdu A2, Unit 8, sequence 43**.': 'Canonical production frontier: **Urdu A2, Unit 9, sequence 49**.',
+              '- Urdu: 102/360 generated; A1 complete, A2 in progress.': '- Urdu: 108/360 generated; A1 complete, A2 in progress.',
+              '- Project: 822/1080 generated.': '- Project: 828/1080 generated.'
+          }
+          for old, new in replacements.items():
+              if old not in tasks:
+                  raise SystemExit(f'Fail closed: TASKS expected text missing: {old}')
+              tasks = tasks.replace(old, new, 1)
+          tasks_path.write_text(tasks, encoding='utf-8')
+
+          handoff_path = Path('reading/AGENT_HANDOFF_V2.md')
+          handoff = handoff_path.read_text(encoding='utf-8')
+          replacements = {
+              '- Canonical generated total: **822**.': '- Canonical generated total: **828**.',
+              '- Urdu: **102/360**; A1 generation complete and A2 generation in progress.': '- Urdu: **108/360**; A1 generation complete and A2 generation in progress.',
+              '- Urdu A2 canonical path: `reading/urdu/a2/passages.jsonl`; Units 1-7 currently contain sequences 1-42.': '- Urdu A2 canonical path: `reading/urdu/a2/passages.jsonl`; Units 1-8 currently contain sequences 1-48.',
+              'Continue **Urdu A2**, starting from Unit 8 / sequence 43, under:': 'Continue **Urdu A2**, starting from Unit 9 / sequence 49, under:',
+              'Unit 8 uses the roadmap theme **nature and environment** with `description`, `simple explanatory text`, and `story` genres.': 'Unit 9 uses the roadmap theme **culture, celebrations, and customs** with `cultural note`, `personal narrative`, and `comparison` genres.',
+              'Run `python reading/tools/validate_continuation_state.py`; if it passes, resume guarded generation at **Urdu A2 Unit 8 / sequence 43** using the Unit 8 roadmap theme `nature and environment`.': 'Run `python reading/tools/validate_continuation_state.py`; if it passes, resume guarded generation at **Urdu A2 Unit 9 / sequence 49** using the Unit 9 roadmap theme `culture, celebrations, and customs`.'
+          }
+          for old, new in replacements.items():
+              if old not in handoff:
+                  raise SystemExit(f'Fail closed: HANDOFF expected text missing: {old}')
+              handoff = handoff.replace(old, new, 1)
+          handoff_path.write_text(handoff, encoding='utf-8')
+          PY
+
+      - name: Refresh state manifest
+        run: python reading/tools/refresh_state_manifest.py
+
+      - name: Validate reconciled continuation state
+        run: python reading/tools/validate_continuation_state.py
+
+      - name: Record and commit reconciliation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          audit = {
+            'schema_version': 1,
+            'project_id': 'LANG-A1C2',
+            'date': '2026-08-24',
+            'status': 'PASS',
+            'canonical_urdu_a2_passages': 48,
+            'project_canonical_passages': 828,
+            'urdu_canonical_passages': 108,
+            'next_frontier': {'language': 'urdu', 'level': 'A2', 'unit': 9, 'sequence': 49},
+            'checks': {
+              'canonical_sequences_1_48': 'PASS',
+              'unit8_tail': 'PASS',
+              'state_manifest_refresh': 'PASS',
+              'validate_continuation_state': 'PASS'
+            },
+            'release_promotion': False
+          }
+          Path('reading/audit/urdu_a2_u08_state_reconcile_2026-08-24.json').write_text(json.dumps(audit, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/STATUS.json reading/CONTINUATION.json reading/planning/ACTIVE_GENERATION_PLAN.json reading/TASKS.md reading/AGENT_HANDOFF_V2.md reading/STATE_MANIFEST.json reading/audit/urdu_a2_u08_state_reconcile_2026-08-24.json
+          if git diff --cached --quiet; then
+            echo 'No state changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Advance Urdu A2 frontier to Unit 9'
+          git push
