@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "ur",
+  "cefr": "A2",
+  "unit": 8,
+  "date": "2026-08-24",
+  "artifact": "reading/audit/urdu_a2_u08_generation_candidate_2026-08-24.jsonl",
+  "canonicalized": false,
+  "release_promotion": false,
+  "checks": {
+    "record_count": {"expected": 6, "actual": 6, "status": "PASS"},
+    "sequence_range": {"expected": [43, 48], "actual": [43, 48], "contiguous": true, "status": "PASS"},
+    "unit_id_pattern": {"status": "PASS", "ids": ["ur-a2-u08-p01", "ur-a2-u08-p02", "ur-a2-u08-p03", "ur-a2-u08-p04", "ur-a2-u08-p05", "ur-a2-u08-p06"]},
+    "question_answer_contract": {"expected_questions_each": 10, "expected_answers_each": 10, "status": "PASS"},
+    "bidirectional_question_answer_links": {"status": "PASS"},
+    "new_target_distribution": {"expected": [2, 2, 2, 2, 0, 0], "actual": [2, 2, 2, 2, 0, 0], "status": "PASS"},
+    "new_target_minimum_text_exposures": {"minimum": 1, "actual": {"ur-a2-u08-p01": {"منظر": 3, "وسیع": 3}, "ur-a2-u08-p02": {"کاشت": 3, "زراعت": 3}, "ur-a2-u08-p03": {"خطرہ": 3, "ملوث": 3}, "ur-a2-u08-p04": {"گندم": 4, "پناہ": 3}}, "status": "PASS"},
+    "p6_policy": {"timed": true, "new_word_policy": "none", "new_targets": 0, "status": "PASS"},
+    "learner_facing_script_scan": {"devanagari_found": false, "latin_found": false, "status": "PASS"},
+    "roadmap": {"theme": "nature and environment", "genres_used": ["description", "simple explanatory text", "story"], "required_genres": ["description", "simple explanatory text", "story"], "status": "PASS"},
+    "production_release_separation": {"all_quality_statuses": "draft", "formal_release_promoted": false, "status": "PASS"}
+  },
+  "notes": [
+    "This validates the bounded generation candidate, not the live canonical JSONL.",
+    "The canonical Urdu A2 frontier remains sequence 43 until this candidate is safely appended and the live state bundle is refreshed.",
+    "The connected GitHub write interface available in this session supports complete-file replacement rather than append/patch for the existing large canonical JSONL, so this candidate is staged fail-closed instead of risking corruption of reading/urdu/a2/passages.jsonl."
+  ]
+}
