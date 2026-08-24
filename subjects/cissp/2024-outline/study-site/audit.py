@@ -46,7 +46,7 @@ check(len({h['id'] for h in data['high']})==len(data['high']),'Duplicate high ca
 check(len({q['id'] for q in data['questions']})==len(data['questions']),'Duplicate question ID')
 check(62+len(data['high'])==108,'Runtime cards != 108')
 html=(ROOT/'index.html').read_text(encoding='utf-8')
-check(all(x in html for x in ['data-meta.js']+[f'data-d{i}.js' for i in range(1,9)]+['data-ai.js','app.js','id="today"','id="learn"','id="practice"','id="blueprint"','id="progress"','id="sources"']),'HTML shell incomplete')
+check(all(x in html for x in ['data-meta.js']+[f'data-d{i}.js' for i in range(1,9)]+['data-ai.js','mobile-fix.css','app.js','id="today"','id="learn"','id="practice"','id="blueprint"','id="progress"','id="sources"','<option>40</option>']),'HTML shell incomplete')
 app=(ROOT/'app.js').read_text(encoding='utf-8')
 check('CISSP_CHUNKS.flatMap' in app and 'D.cards=' in app and 'layersFor' in app,'Runtime assembly missing')
 if errors:
