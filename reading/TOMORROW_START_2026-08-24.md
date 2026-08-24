@@ -21,7 +21,8 @@ Then read, in order:
 6. `reading/STATUS.json`
 7. `reading/planning/ACTIVE_GENERATION_PLAN.json`
 8. `reading/planning/WEEK_READY_2026-08-24.json`
-9. `reading/TASKS.md`
+9. `reading/audit/week_ready_2026-08-24.json`
+10. `reading/TASKS.md`
 
 Run:
 
@@ -31,61 +32,56 @@ and:
 
 `python reading/tools/validate_week_ready_queue.py`
 
-before trusting a stored frontier when execution is available.
+before writing new canonical passages when execution is available.
 
-## Gate A — close/integrate Urdu A2 Unit 1
+## Baseline is already closed
 
-A reviewed Unit 1 generation branch exists:
+Urdu A2 Unit 1 is **integrated on `main`**. Do not regenerate or reopen it merely because the historical source branch or closed PR still exists.
 
-`lang-a1c2-urdu-a2-unit01`
-
-Draft integration PR: **#58 — LANG-A1C2: add and polish Urdu A2 Unit 1**.
-
-Its intended post-integration production state is:
+Current intended production baseline:
 
 - project: **786/1080** generated;
 - Urdu: **66/360** generated;
 - Urdu A2: **6/60** generated;
 - active frontier: **Urdu A2 Unit 2 / sequence 7**.
 
-The branch contains:
+Unit 1 evidence on `main` includes:
 
-- six Unit 1 passages, sequences 1-6;
-- exact lexical-sense evidence for the eight deliberate targets;
-- a hash-guarded bounded reader-first quality remediation that corrects the identified naturalness/semantic issues and emits `reading/audit/urdu_a2_u01_quality_pass_2026-08-23.json`.
+- `reading/audit/urdu_a2_u01_lexical_sense_check_2026-08-23.json`;
+- `reading/audit/urdu_a2_u01_quality_pass_2026-08-23.json` with `PASS_AFTER_BOUNDED_REMEDIATION`;
+- repaired Unit 1 corpus result blob `e5bb0fb6fb642a37ba4f69537f960cbb324fd365`;
+- 6 passages / 60 questions / 60 answers;
+- unchanged deliberate target identities;
+- zero deliberate new lexical targets in the Unit 1 fluency passage;
+- refreshed `reading/STATE_MANIFEST.json` bound to project=786 / Urdu=66.
 
-### Morning decision
+Historical draft PR #58 was closed as superseded after the vetted files were replayed cleanly onto the then-current `main`. Do not merge or revive it.
 
-**Case 1 — Unit 1 is already integrated:** if `main` shows project=786, Urdu=66, and Unit 2 / sequence 7 with `validate_continuation_state.py` green, do **not** reopen or regenerate Unit 1. Go directly to Session 1 below.
-
-**Case 2 — PR #58 is still draft:** verify that `reading/audit/urdu_a2_u01_quality_pass_2026-08-23.json` exists on the PR branch and is bound to the repaired Unit 1 corpus. If it is absent, keep the PR blocked and run/apply the prepared exact remediation before merge. If it is present and checks are clean, merge PR #58 through GitHub's normal merge path and rerun continuation validation on `main`.
-
-Never force `main` to the Unit 1 branch head or reuse the branch's whole tree as `main`; unrelated work is landing in parallel.
-
-## Gate B — seven ready sessions
+## Seven ready sessions
 
 `reading/planning/WEEK_READY_2026-08-24.json` pre-stages seven sessions:
 
-1. Urdu A2 Unit 2 — plans, invitations, and changes — sequences 7-12
-2. Unit 3 — past events and memories — 13-18
-3. Unit 4 — shopping, comparison, and problems — 19-24
-4. Unit 5 — hobbies and learning skills — 25-30
-5. Unit 6 — transport and travel — 31-36
-6. Unit 7 — community events and simple news — 37-42
-7. Unit 8 — nature and environment — 43-48
+1. **Unit 2** — plans, invitations, and changes — sequences **7-12**
+2. **Unit 3** — past events and memories — **13-18**
+3. **Unit 4** — shopping, comparison, and problems — **19-24**
+4. **Unit 5** — hobbies and learning skills — **25-30**
+5. **Unit 6** — transport and travel — **31-36**
+6. **Unit 7** — community events and simple news — **37-42**
+7. **Unit 8** — nature and environment — **43-48**
 
-If all seven sessions complete successfully, the expected frontier is:
+The queue has a hash-bound PASS artifact at `reading/audit/week_ready_2026-08-24.json`. That artifact must match this guide, the week queue, validator, and A2 roadmap; if any of those files change, regenerate the audit rather than relying on the old PASS.
+
+If all seven sessions complete successfully, expected state is:
 
 - project: **828/1080** generated;
 - Urdu: **108/360** generated;
 - Urdu A2: **48/60** generated;
-- next: **Urdu A2 Unit 9 / sequence 49**.
-
-When present, `reading/audit/week_ready_2026-08-24.json` is the hash-bound machine evidence for the prepared queue. If that audit is absent, rerun `python reading/tools/write_week_ready_audit.py` after the queue validator passes rather than inferring readiness from this guide alone.
+- remaining project generation: **252** passages;
+- next frontier: **Urdu A2 Unit 9 / sequence 49**.
 
 ## Per-session operating pattern
 
-Each session is one complete six-passage unit, not six disconnected micro-tasks:
+Each session is one complete six-passage unit:
 
 - P1 instructional;
 - P2 reinforcement;
@@ -94,28 +90,34 @@ Each session is one complete six-passage unit, not six disconnected micro-tasks:
 - P5 integration;
 - P6 fluency/checkpoint.
 
-Use the A2 standard band of **140-220 words** as the normal target, not a hard law. Keep new vocabulary controlled, sense-verified, inferable, and naturally collocated. P6 should normally have no deliberate new lexical target. Every passage gets exactly 10 linked questions/answers under the current Ten-Question Standard, with operational A2 grammar rather than unnecessary formal metalanguage.
+Use the A2 standard band of **140-220 words** as the normal target, not a hard law. Keep new vocabulary controlled, sense-verified, inferable, and naturally collocated. P5 should be cumulative; P6 should normally introduce no deliberate new lexical target. Every passage gets exactly **10 linked questions and 10 answers** under the current Ten-Question Standard, with operational A2 grammar rather than unnecessary formal metalanguage.
 
 ## Important lexical scheduling note
 
 `reading/ledgers/urdu_lexical_exposure.jsonl` currently has stale `introduced_in` state and must **not** be treated as authoritative scheduling truth until rebuilt from canonical passages.
 
-For each new unit, derive candidate targets from `reading/lexicons/urdu.jsonl`, subtract all target IDs already introduced in live Urdu A1/A2 canonical passages, then verify the exact learner-facing sense before generation. Do not teach an ambiguous collocation merely to preserve a target occurrence.
+For each new unit:
+
+1. derive candidate targets from `reading/lexicons/urdu.jsonl`;
+2. subtract every target ID already introduced in live Urdu A1/A2 canonical passages;
+3. verify the exact learner-facing sense before generation;
+4. reject ambiguous/noisy senses or unnatural collocations rather than forcing an occurrence;
+5. schedule deliberate review in later passages using the canonical passage history as the reliable source.
 
 ## State transaction order
 
 After each unit:
 
 1. update canonical Urdu A2 JSONL;
-2. run the bounded reader-first quality pass and preserve evidence;
+2. run a bounded reader-first quality pass and preserve evidence;
 3. update `reading/STATUS.json`, `reading/CONTINUATION.json`, and `reading/TASKS.md` as required;
 4. run `python reading/tools/extract_active_generation_plan.py`;
 5. run `python reading/tools/refresh_state_manifest.py`;
 6. run `python reading/tools/validate_continuation_state.py`;
-7. integrate via a merge/PR path that preserves concurrent unrelated `main` commits.
+7. integrate through a current-main-safe transaction; never overwrite concurrent unrelated work with an older branch tree.
 
 Generation/integrity success never changes educator/publication readiness by itself. `reading/RELEASE_STATUS.json` changes only when release evidence itself changes.
 
-## Exact first production action tomorrow
+## Exact first action tomorrow
 
-After Gate A is green, execute **Session 1 / Urdu A2 Unit 2**, sequences **7-12**, theme **“plans, invitations, and changes”**, using the exact genres in the A2 roadmap and the shared contract in `WEEK_READY_2026-08-24.json`.
+Execute **Session 1 / Urdu A2 Unit 2**, sequences **7-12**, theme **“plans, invitations, and changes”**, using the exact genres in `reading/planning/topic_genre_matrix.json` and the shared contract in `reading/planning/WEEK_READY_2026-08-24.json`.
