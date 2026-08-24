@@ -3,6 +3,7 @@
   "release": "1.2.0",
   "status": "READY_FOR_STUDY",
   "prepared_on": "2026-08-23",
+  "last_semantic_audit": "2026-08-24",
   "target_use_date": "2026-08-24",
   "scope": {
     "domains": 8,
@@ -11,6 +12,8 @@
     "ai_coverage_areas": 33,
     "layered_cards": 140,
     "original_scenario_questions": 56,
+    "semantic_items_reviewed": 196,
+    "semantic_answer_key_reversals": 0,
     "sources": 20,
     "official_weight_total_percent": 100
   },
@@ -24,9 +27,21 @@
   ],
   "validation": {
     "deterministic_audit": "subjects/cissp/2024-outline/study-site/audit.py",
+    "semantic_item_manifest": "subjects/cissp/2024-outline/study-site/SEMANTIC_ITEM_AUDIT.json",
+    "semantic_report": "subjects/cissp/2024-outline/study-site/PRECISION_AUDIT.md",
+    "question_bank_plan": "subjects/cissp/2024-outline/study-site/question-bank/QUESTION_BANK_EXPANSION_PLAN.md",
+    "question_bank_quality_gate": "subjects/cissp/2024-outline/study-site/question-bank/quality_gate.py",
+    "question_candidate_schema": "subjects/cissp/2024-outline/study-site/question-bank/CANDIDATE_SCHEMA.json",
     "ci_workflow": ".github/workflows/cissp-study-site-audit.yml",
-    "pages_workflow": ".github/workflows/cissp-pages.yml",
-    "semantic_report": "subjects/cissp/2024-outline/study-site/PRECISION_AUDIT.md"
+    "pages_workflow": ".github/workflows/cissp-pages.yml"
+  },
+  "question_bank_expansion_target": {
+    "total_records": 800,
+    "foundation_plus_percent": 15,
+    "exam_calibrated_percent": 60,
+    "stretch_percent": 20,
+    "bellringer_percent": 5,
+    "originality_rule": "Questions are authored from public scope/primary standards and audited knowledge, never from exam dumps, live-item recollections, leaked banks, or commercial-question wording/templates."
   },
   "deployment": {
     "expected_pages_url": "https://ualispublishing.github.io/learning/",
@@ -34,11 +49,12 @@
     "public_endpoint_observed_live_in_this_session": false,
     "activation_fallback": "If GitHub Pages has never been enabled for the repository, set Settings > Pages > Build and deployment > Source to GitHub Actions once; the committed workflow then deploys automatically."
   },
-  "precision_boundary": "READY_FOR_STUDY means the public ISC2 scope, mapped subtopics, curated precision distinctions, original scenario bank, metadata, and site assets are release-organized and audited. It does not mean memorizing this site guarantees a CISSP pass or that any public resource can reproduce the live adaptive exam bank.",
+  "precision_boundary": "READY_FOR_STUDY means the public ISC2 scope, mapped subtopics, curated precision distinctions, original scenario bank, metadata, and site assets are release-organized and audited. The 2026-08-24 item-level pass found zero keyed-answer reversals and no known remaining material factual error. This is still not a mathematically valid guarantee that every sentence is forever infallible or that memorizing this site guarantees a CISSP pass.",
   "known_non_blocking_limitations": [
     "Browser-local progress does not sync across devices unless exported manually.",
     "The diagnostic is intentionally a routing signal, not an exam-readiness prediction.",
     "Blueprint subtopic labels are paraphrased; the ISC2 source remains authoritative for exact wording.",
+    "The current 56-question bank is accurate but still too small and generally too clean/direct to represent the intended mature exam-calibrated distribution.",
     "The Pages deployment workflow is committed, but this session could not verify whether the repository's one-time Pages setting was already enabled."
   ]
 }
