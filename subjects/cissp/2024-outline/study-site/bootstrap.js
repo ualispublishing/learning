@@ -21,6 +21,19 @@ Storage.prototype.setItem=function(key,value){
   }
   return nativeSet.call(this,key,value);
 };
+
+function surfaceStartupIssue(message,{fatal=false}={}){
+  const main=document.querySelector('#main');
+  if(!main)return;
+  const existing=document.querySelector('#startupIssue');
+  const box=existing||document.createElement('div');
+  box.id='startupIssue';
+  box.className='notice';
+  box.setAttribute('role','alert');
+  box.innerHTML=`<b>${fatal?'CISSP Atlas could not finish starting.':'CISSP Atlas recovered from a startup issue.'}</b> ${String(message||'Unknown startup error').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}${fatal?' <button class="btn small" type="button" onclick="location.reload()">Reload</button>':''}`;
+  if(!existing)main.prepend(box);
+}
+
 try{
   const manifest=await fetch('question-bank/RELEASED_BATCHES.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(`release manifest ${r.status}`);return r.json()});
   const files=manifest.released_batches.flatMap(b=>b.files||[]);
@@ -32,9 +45,26 @@ try{
   window.CISSP_BELLRINGERS=rows.filter(r=>r.format==='bellringer');
   window.CISSP_RELEASED_BANK_MANIFEST=manifest;
   window.CISSP_BANK_READY=true;
-}catch(err){console.error('CISSP released bank load failed',err);window.CISSP_RELEASE_LOAD_ERROR=String(err);window.CISSP_BELLRINGERS=[];}
-await import('./app.js');
-await import('./enhancements.js');
-await import('./state-ui-bridge.js');
-await import('./product-polish.js?v=3');
+}catch(err){
+  console.error('CISSP released bank load failed',err);
+  window.CISSP_RELEASE_LOAD_ERROR=String(err);
+  window.CISSP_BELLRINGERS=[];
+}
+
+try{
+  await import('./app.js');
+}catch(err){
+  console.error('CISSP core app load failed',err);
+  surfaceStartupIssue(err,{fatal:true});
+  return;
+}
+
+for(const modulePath of ['./enhancements.js','./state-ui-bridge.js','./product-polish.js?v=4']){
+  try{
+    await import(modulePath);
+  }catch(err){
+    console.error(`CISSP optional module failed: ${modulePath}`,err);
+    surfaceStartupIssue(`${modulePath}: ${err?.message||err}`);
+  }
+}
 })();
