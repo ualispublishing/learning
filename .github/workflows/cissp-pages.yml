@@ -1,0 +1,42 @@
+name: Deploy CISSP Atlas to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'subjects/cissp/2024-outline/study-site/**'
+      - '.github/workflows/cissp-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: cissp-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run release audit before deploy
+        working-directory: subjects/cissp/2024-outline/study-site
+        run: python audit.py
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Upload CISSP site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: subjects/cissp/2024-outline/study-site
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
