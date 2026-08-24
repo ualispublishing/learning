@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-08-24",
+  "batch": "006",
+  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "records": 16,
+  "formats": {"mcq": 16, "bellringer": 0},
+  "difficulty_distribution": {"F": 0, "E": 12, "S": 4, "B": 0},
+  "primary_domain_distribution": {"1": 0, "2": 3, "3": 2, "4": 3, "5": 2, "6": 2, "7": 0, "8": 4},
+  "phase": "balanced-depth-after-gap-closure",
+  "planner_basis": {
+    "tool": "coverage_report.py",
+    "planning_standard_mcq_objective_exposure_before_batch": "62/62",
+    "planning_standard_mcq_objective_exposure_after_batch": "62/62",
+    "targeted_objectives": ["2.2","2.3","2.6","3.4","3.6","4.2","4.3","5.1","5.2","5.5","5.6","6.1","6.3","6.5","8.1","8.2","8.3","8.4"],
+    "note": "Batch 006 deliberately rebalances away from D1/D7 after Batches 004-005 concentrated there to close sparse objective gaps."
+  },
+  "batch_concentration": {
+    "max_primary_domain_records": 4,
+    "max_primary_domain_share": 0.25,
+    "quality_gate_limit": 0.35,
+    "within_limit": true
+  },
+  "authoring_review": {
+    "semantic_reviewed_records": 16,
+    "four_option_rationales_present": 16,
+    "external_question_seeds_used": 0,
+    "foundation_filler_records": 0,
+    "exam_or_stretch_records": 16,
+    "duplicate_candidate_ids_in_batch": 0
+  },
+  "focus": [
+    "Increase handling, intangible-asset, and data-state application depth in Domain 2.",
+    "Increase cryptographic capability and PKI lifecycle judgment in Domain 3.",
+    "Increase infrastructure redundancy, privileged remote administration, and contingency-link performance reasoning in Domain 4.",
+    "Increase session and service-identity lifecycle reasoning in Domain 5.",
+    "Increase evidence interpretation and audit-scope judgment in Domain 6.",
+    "Increase mature DevSecOps, change traceability, transitive dependency, and ongoing SaaS assurance depth in Domain 8."
+  ],
+  "gate_state": {
+    "quality_gate_required": true,
+    "quality_gate_execution_observed_in_this_session": false,
+    "promotion_allowed": false,
+    "reason": "Batch 006 is semantically reviewed and schema-aligned, but promotion still requires an observed automated originality/duplicate gate across the released bank and every unreleased candidate batch."
+  },
+  "promotion_requirements": [
+    "python question-bank/quality_gate.py completes without FAIL",
+    "every similarity WARN is manually reviewed and resolved before promotion",
+    "python audit.py remains clean after release integration",
+    "semantic audit manifest is expanded if Batch 006 is promoted",
+    "release metadata/counts/difficulty distribution are recomputed",
+    "runtime and static-site checks remain clean"
+  ]
+}
