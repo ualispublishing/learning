@@ -53,6 +53,7 @@ jobs:
           cp data-meta.js data-d{1..8}.js data-ai.js data-precision.js coverage-detail.js data-question-calibration.js legacy-rationales.js keyboard-shortcuts.js bootstrap.js app.js enhancements.js state-ui-bridge.js product-polish.js "$SITE/"
           cp question-bank/RELEASED_BATCHES.json "$SITE/question-bank/"
           cp question-bank/candidates/batch-001-{a,b,c,d}.jsonl "$SITE/question-bank/candidates/"
+          printf '%s\n' "$GITHUB_SHA" > "$SITE/deploy-sha.txt"
           test ! -e "$SITE/browser-smoke.html"
           test ! -e "$SITE/question-bank/candidates/batch-002.jsonl"
           echo "Released-only artifact assembled at $SITE"
@@ -73,6 +74,7 @@ jobs:
           BASE="${PAGE_URL%/}/"
           HTML="$RUNNER_TEMP/cissp-public.html"
           DOM="$RUNNER_TEMP/cissp-public-dom.html"
+          REMOTE_SHA="$RUNNER_TEMP/cissp-public-sha.txt"
           CHROME="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
           test -n "$CHROME"
           passed=0
@@ -80,7 +82,8 @@ jobs:
             echo "Public verification attempt $attempt: $BASE"
             if curl -fsSL --max-time 15 -H 'Cache-Control: no-cache' "${BASE}?verify=${GITHUB_SHA}-${attempt}" -o "$HTML" \
               && grep -Fq '<title>CISSP Atlas · Study Workflow</title>' "$HTML" \
-              && grep -Fq 'bootstrap.js?v=5' "$HTML" \
+              && curl -fsSL --max-time 15 "${BASE}deploy-sha.txt?verify=${GITHUB_SHA}-${attempt}" -o "$REMOTE_SHA" \
+              && test "$(tr -d '\r\n' < "$REMOTE_SHA")" = "$GITHUB_SHA" \
               && curl -fsSL --max-time 15 "${BASE}question-bank/RELEASED_BATCHES.json?verify=${GITHUB_SHA}-${attempt}" >/dev/null; then
               "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=9000 --dump-dom "${BASE}?runtime-verify=${GITHUB_SHA}-${attempt}" >"$DOM" 2>/dev/null || true
               if grep -Fq 'data-cissp-core="ready"' "$DOM" \
@@ -96,6 +99,9 @@ jobs:
           done
           if [ "$passed" -ne 1 ]; then
             echo 'Public CISSP Atlas runtime did not reach the expected deployed state.' >&2
+            echo "Expected deployment SHA: $GITHUB_SHA" >&2
+            echo -n 'Observed deployment SHA: ' >&2
+            cat "$REMOTE_SHA" >&2 2>/dev/null || true
             tail -n 80 "$HTML" >&2 || true
             tail -n 80 "$DOM" >&2 || true
             exit 1
