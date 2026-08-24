@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>CISSP Atlas Browser Smoke</title></head>
+<body>
+<pre id="result" data-smoke="running">RUNNING</pre>
+<iframe id="app" src="index.html?browser-smoke=1" style="width:1280px;height:900px;border:0"></iframe>
+<script>
+(()=>{'use strict';
+const result=document.querySelector('#result'),frame=document.querySelector('#app');
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function waitFor(fn,label,timeout=8000){
+  const end=Date.now()+timeout;
+  while(Date.now()<end){try{const v=fn();if(v)return v}catch{}await sleep(50)}
+  throw new Error(`Timed out waiting for ${label}`);
+}
+function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
+function visible(el){return !!el&&!el.classList.contains('hidden')}
+async function run(){
+  await waitFor(()=>frame.contentDocument?.documentElement?.dataset?.cisspReady==='true','app readiness');
+  const d=frame.contentDocument;
+  assert(d.documentElement.dataset.cisspCore==='ready','core ready');
+  assert(d.documentElement.dataset.cisspBank==='ready','released bank ready');
+  assert(!d.querySelector('#startupIssue'),'no startup issue');
+  assert(d.querySelector('#continueBtn')?.textContent.includes('diagnostic'),'first-run diagnostic CTA');
+  assert(d.querySelector('link[data-workflow-clarity]'),'workflow clarity loaded');
+  assert(d.querySelector('#readinessCard .ready-copy b')?.textContent==='Mastery','readiness polish applied');
+
+  d.querySelector('#nav [data-view="learn"]').click();
+  await waitFor(()=>visible(d.querySelector('#learn'))&&d.querySelector('#revealBtn'),'Review view');
+  d.querySelector('#revealBtn').click();
+  await waitFor(()=>d.querySelector('.layer-content')&&d.querySelectorAll('.rating [data-grade]').length===4,'review reveal and ratings');
+  assert(d.querySelectorAll('.layer-tabs button').length===8,'eight learning layers');
+
+  d.querySelector('#nav [data-view="practice"]').click();
+  await waitFor(()=>visible(d.querySelector('#practice'))&&d.querySelector('#startQuiz'),'Practice view');
+  d.querySelector('#startQuiz').click();
+  await waitFor(()=>d.querySelector('[data-conf="medium"]')&&d.querySelectorAll('[data-cal-opt]').length===4,'calibrated practice question');
+  d.querySelector('[data-conf="medium"]').click();
+  const firstOption=d.querySelector('[data-cal-opt="0"]');
+  assert(firstOption&&!firstOption.disabled,'answer options unlock after confidence');
+  firstOption.click();
+  await waitFor(()=>d.querySelectorAll('.rationale-item').length===4,'four option rationales');
+  assert(d.querySelector('#calNext'),'practice next control');
+
+  d.querySelector('#nav [data-view="progress"]').click();
+  await waitFor(()=>visible(d.querySelector('#progress'))&&d.querySelectorAll('#progressStats .stat-card').length>=4,'Progress view');
+  assert(d.querySelector('#weakList')?.children.length>0,'weak-area recommendations');
+
+  d.querySelector('#nav [data-view="sources"]').click();
+  await waitFor(()=>visible(d.querySelector('#sources'))&&d.querySelectorAll('#sourceList .source-card').length>0,'Sources view');
+
+  d.querySelector('.mobile-nav [data-view="today"]').click();
+  await waitFor(()=>visible(d.querySelector('#today')),'mobile navigation handler');
+  assert(d.querySelector('.mobile-nav [data-view="today"]').classList.contains('active'),'mobile nav active state');
+
+  result.dataset.smoke='pass';
+  result.textContent='PASS interactive browser smoke: startup review practice progress sources navigation';
+}
+frame.addEventListener('load',()=>run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)}),{once:true});
+})();
+</script>
+</body>
+</html>
