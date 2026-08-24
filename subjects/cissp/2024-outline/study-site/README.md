@@ -15,11 +15,11 @@ Unofficial, original study site mapped to the current public ISC2 CISSP exam out
 - **220 learner-facing items in the semantic-audit ledger**;
 - 20 primary/reference sources.
 
-`question-bank/RELEASED_BATCHES.json` is authoritative for promoted question batches. Batch 001 is released in v1.3. Batches 002, 003, and 004 remain candidate-only until their repository gates are observed clean.
+`question-bank/RELEASED_BATCHES.json` is authoritative for promoted question batches. Batch 001 is released in v1.3. Batches 002 through 005 remain candidate-only until their repository gates are observed clean.
 
 ## Item-level semantic status
 
-The semantic ledger now covers all 220 released learner-facing items: 62 objective cards, 38 high-yield cards, 8 AI cards, 32 precision cards, 79 standard questions, and 1 Bellringer.
+The semantic ledger covers all 220 released learner-facing items: 62 objective cards, 38 high-yield cards, 8 AI cards, 32 precision cards, 79 standard questions, and 1 Bellringer.
 
 Current audit summary:
 
@@ -59,18 +59,21 @@ The original 56-question baseline was left semantically intact: its stems, optio
 
 Originality is enforced by decision-rule-first authoring from public scope/registered standards and audited knowledge, never from exam dumps, live-item recollections, leaked banks, or commercial-question wording/templates. `question-bank/quality_gate.py` compares unreleased candidates against the base bank, all promoted batches, and their own batch using exact, near-text, and structural duplicate checks.
 
-`question-bank/coverage_report.py` adds a second planning layer: it measures objective/difficulty density and explicit subtopic-tag exposure so future questions target under-practiced areas rather than simply adding more volume. For standard candidate batches of at least 16 records, the quality gate also caps any one primary domain at **35%** so a raw deficit ranking cannot make a batch too narrow.
+`question-bank/coverage_report.py` measures objective/difficulty density and explicit subtopic-tag exposure so future questions target under-practiced areas rather than simply adding volume. `question-bank/batch_planner.py` consumes that planning state and recommends the next 16-record authoring slate with a default **E12/S4** target, preferring tier deficits and thin objectives while enforcing the same primary-domain diversity constraint used by the gate. It recommends targets only; it does not author, validate, or release questions.
+
+For standard candidate batches of at least 16 records, the quality gate requires Exam-calibrated items at ≥50%, Bellringers at ≤10%, and caps any one primary domain at **35%**.
 
 ### Current expansion state
 
 - **Batch 001:** released in v1.3; 24 records = F4/E15/S4/B1.
-- **Batch 002:** candidate-only; 16 standard MCQs = E12/S4, exactly two primary-domain questions per domain, zero Foundation+ filler.
-- **Batch 003:** candidate-only; 16 standard MCQs = E12/S4, exactly two primary-domain questions per domain, zero Foundation+ filler.
-- **Batch 004:** candidate-only; 16 standard MCQs = E12/S4. It was selected from the coverage-gap planner and closes the last five objectives that had zero standard-MCQ exposure in the **released-plus-candidate planning state**: 1.2, 1.12, 7.5, 7.7, and 7.14.
-- Combined pending candidates: **48 records = E36/S12**.
-- If Batches 002–004 eventually promote, the bank becomes **128 records = F41/E70/S16/B1**.
+- **Batch 002:** candidate-only; 16 standard MCQs = E12/S4, exactly two primary-domain questions per domain.
+- **Batch 003:** candidate-only; 16 standard MCQs = E12/S4, exactly two primary-domain questions per domain.
+- **Batch 004:** candidate-only; 16 standard MCQs = E12/S4. It closed the last five zero-standard-MCQ objective gaps in the **released-plus-candidate planning state**: 1.2, 1.12, 7.5, 7.7, and 7.14.
+- **Batch 005:** candidate-only; 16 standard MCQs = E12/S4. It begins the post-coverage depth phase, targeting sparse objectives in ethics/legal/investigative reasoning, DR operations, formal models, requirements-driven architecture, assessment strategy, data handling, IAM, and software-security effectiveness.
+- Combined pending candidates: **64 records = E48/S16**.
+- If Batches 002–005 eventually promote, the bank becomes **144 records = F41/E82/S20/B1**.
 
-With Batch 004 included for planning, **62/62 objectives now have at least one mapped standard MCQ somewhere in the released-plus-candidate corpus**. This is an authoring-coverage milestone only: Batch 004 is unreleased, one question per objective is not sufficient depth, and this does not imply learner mastery.
+With the current candidate set included for planning, **62/62 objectives have at least one mapped standard MCQ somewhere in the released-plus-candidate corpus**. This is an authoring-coverage milestone only: pending batches are unreleased, one question per objective is not sufficient depth, and this does not imply learner mastery.
 
 No pending batch may be promoted until its full repository gate produces no unresolved failures or warnings.
 
@@ -80,10 +83,10 @@ No pending batch may be promoted until its full repository gate produces no unre
 
 1. `python audit.py`;
 2. `python question-bank/quality_gate.py` against unreleased candidates and the released comparison corpus;
-3. `python question-bank/coverage_report.py` to keep expansion coverage-aware;
+3. `python question-bank/coverage_report.py` plus `python question-bank/batch_planner.py` for deterministic expansion planning;
 4. JavaScript syntax checks, including the v1.3 bootstrap/calibration/practice/state/rationale files;
 5. a 56 × 4 legacy-rationale completeness invariant;
-6. static HTTP smoke checks for critical site, rationale, released-bank, and candidate assets.
+6. static HTTP smoke checks for critical site, rationale, released-bank, candidate, and planning assets.
 
 The Pages workflow validates the immutable released corpus before deployment; unreleased candidate failures cannot block an already-valid release from publishing.
 
@@ -95,6 +98,7 @@ python -m http.server 8000
 python audit.py
 python question-bank/quality_gate.py
 python question-bank/coverage_report.py --human
+python question-bank/batch_planner.py --human
 ```
 
 Serve the folder over HTTP rather than opening `index.html` directly, because v1.3 loads the released batch manifest/JSONL through `fetch()` before the application initializes.
