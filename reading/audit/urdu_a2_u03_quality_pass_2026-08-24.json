@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "ur",
+  "cefr": "A2",
+  "unit": 3,
+  "date": "2026-08-24",
+  "status": "PASS_AFTER_PRECANONICAL_READER_PASS",
+  "scope": "Bounded generation-stage reader-first pass for Unit 3 only: naturalness, target-sense clarity, answer grounding/linkage, operational A2 grammar, word-band checks, roadmap role/genre checks, and fluency new-word policy. Formal corpus-wide linguistic, pedagogical, CEFR/coverage, independent/native, and educator-release gates remain pending.",
+  "source_canonical_git_blob": "fa03e0e9c18a2f3e5e16d2838743a8502380e258",
+  "source_a2_passages": 12,
+  "packet_sha256": "6c9057fe7923861071381baa1e5e85908959181560e536d274a6f3cfd0d3d4b3",
+  "packet_git_blob": "00edfd5819e08bf26d18e288b5d3df49fab70ab6",
+  "result_canonical_git_blob": "be63df201db20cd4969e845793c122844bc18bb7",
+  "result_a2_passages": 18,
+  "project_passages_after": 798,
+  "urdu_passages_after": 78,
+  "unit_sequences": [
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "passages": 6,
+  "questions": 60,
+  "answers": 60,
+  "word_counts": {
+    "ur-a2-u03-p01": 210,
+    "ur-a2-u03-p02": 212,
+    "ur-a2-u03-p03": 220,
+    "ur-a2-u03-p04": 219,
+    "ur-a2-u03-p05": 218,
+    "ur-a2-u03-p06": 216
+  },
+  "new_target_ids_by_passage": {
+    "ur-a2-u03-p01": [
+      "ur-rank-0614",
+      "ur-rank-0883"
+    ],
+    "ur-a2-u03-p02": [
+      "ur-rank-0705",
+      "ur-rank-0917"
+    ],
+    "ur-a2-u03-p03": [
+      "ur-rank-0706",
+      "ur-rank-0863"
+    ],
+    "ur-a2-u03-p04": [
+      "ur-rank-0665",
+      "ur-rank-0924"
+    ],
+    "ur-a2-u03-p05": [],
+    "ur-a2-u03-p06": []
+  },
+  "new_target_exposures": {
+    "ur-a2-u03-p01": {
+      "ur-rank-0614": 2,
+      "ur-rank-0883": 3
+    },
+    "ur-a2-u03-p02": {
+      "ur-rank-0705": 4,
+      "ur-rank-0917": 7
+    },
+    "ur-a2-u03-p03": {
+      "ur-rank-0706": 3,
+      "ur-rank-0863": 6
+    },
+    "ur-a2-u03-p04": {
+      "ur-rank-0665": 4,
+      "ur-rank-0924": 5
+    },
+    "ur-a2-u03-p05": {},
+    "ur-a2-u03-p06": {}
+  },
+  "lexical_sense_evidence": "reading/audit/urdu_a2_u03_lexical_sense_check_2026-08-24.json",
+  "reader_first_note": "Reviewed packet includes the prior bounded naturalness correction in P4 ('انہی پرانی کہانیوں میں سے چند ...'); the exact corrected packet is hash-locked above.",
+  "checks": {
+    "source_blob_guard": true,
+    "packet_hash_guard": true,
+    "six_chunk_hash_guards": true,
+    "fresh_target_ids_against_live_urdu_a1_a2": true,
+    "six_passage_role_order": true,
+    "roadmap_genres_only": true,
+    "word_band_140_220": true,
+    "exactly_10_questions_and_10_answers_each": true,
+    "bidirectional_q_a_links": true,
+    "each_new_target_assessed": true,
+    "target_exposure_metadata_recounted": true,
+    "p5_has_no_new_deliberate_targets": true,
+    "p6_has_no_new_deliberate_targets": true,
+    "p6_new_word_policy_none": true,
+    "post_write_project_and_urdu_counts": true
+  },
+  "quality_promotion": false,
+  "educator_release_ready": false
+}
