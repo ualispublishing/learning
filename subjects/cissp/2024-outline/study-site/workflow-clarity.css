@@ -1,0 +1,21 @@
+/* Final workflow-specific overrides. Kept separate so the compact product skin can stay minimal. */
+#today .two-col{
+  grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);
+  align-items:start;
+}
+#today .two-col>.panel:nth-child(2){display:block!important}
+#today .workflow{display:grid!important}
+#today .workflow>div{
+  grid-template-columns:30px 1fr;
+  padding:10px 0;
+}
+#today .workflow>div b{color:#6f7f92}
+#today .workflow>div span{font-size:12px}
+#today .workflow>div small{font-size:10px;line-height:1.45}
+#today .workflow>div:first-child span{color:var(--text)}
+#today .workflow>div:first-child b{color:var(--cyan)}
+
+@media(max-width:760px){
+  #today .two-col{grid-template-columns:1fr}
+  #today .two-col>.panel:nth-child(2){display:block!important}
+}
