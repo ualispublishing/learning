@@ -32,4 +32,5 @@ try{
 }catch(err){console.error('CISSP released bank load failed',err);window.CISSP_RELEASE_LOAD_ERROR=String(err);window.CISSP_BELLRINGERS=[];}
 await import('./app.js');
 await import('./enhancements.js');
+await import('./state-ui-bridge.js');
 })();
