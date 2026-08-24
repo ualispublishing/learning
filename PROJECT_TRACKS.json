@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "updated": "2026-08-23",
   "purpose": "Prevent cross-project continuation mistakes when language-project chats are restarted or truncated.",
   "routing_rule": "When a new chat identifies a project_id, stay inside that project's roots and read its continuation/status sources before acting. Never silently switch between LANG-A1C2 and LANG-WB.",
@@ -10,10 +10,13 @@
       "start_here": [
         "reading/AGENTS.md",
         "reading/CONTINUATION.json",
+        "reading/STATE_MANIFEST.json",
         "reading/RELEASE_STATUS.json",
         "reading/STATUS.json",
         "reading/AGENT_HANDOFF_V2.md"
       ],
+      "validation_command": "python reading/tools/validate_continuation_state.py",
+      "state_manifest_refresh_command": "python reading/tools/refresh_state_manifest.py",
       "explicit_exclusions": [
         "completed/languages/workbooks/v1.0/",
         "audit/language-workbooks/v1.0/",
