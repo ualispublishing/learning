@@ -2,7 +2,7 @@
 const coverage=window.CISSP_COVERAGE||{}, ai=window.CISSP_AI_COVERAGE||{}, chunks=window.CISSP_CHUNKS||[], questions=chunks.flatMap(x=>x.questions||[]), objectives=chunks.flatMap(x=>x.objectives||[]), domains=window.CISSP_META?.domains||[];
 const objectiveById=Object.fromEntries(objectives.map(o=>[o.id,o]));
 const DKEY='cissp_atlas_diagnostic_v1';
-const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#039;'}[c]));
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 const subtopicCount=Object.values(coverage).reduce((n,a)=>n+a.length,0);
 const primaryBtn=document.querySelector('#continueBtn'),baseContinue=primaryBtn?.onclick;
 function navigate(view){const b=document.querySelector(`#nav [data-view="${view}"]`)||document.querySelector(`.mobile-nav [data-view="${view}"]`);b?.click()}
