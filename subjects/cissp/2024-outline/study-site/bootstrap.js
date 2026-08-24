@@ -25,7 +25,7 @@ Storage.prototype.setItem=function(key,value){
   return nativeSet.call(this,key,value);
 };
 
-function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#039;'}[c]))}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
 function surfaceStartupIssue(message,{fatal=false}={}){
   root.dataset.cisspReady=fatal?'failed':'degraded';
   const main=document.querySelector('#main');
