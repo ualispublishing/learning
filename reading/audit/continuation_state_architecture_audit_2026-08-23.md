@@ -14,6 +14,7 @@ Primary files reviewed:
 - `reading/TASKS.md`
 - `reading/VERIFICATION_TASKS.md`
 - `reading/planning/ACTIVE_GENERATION_PLAN.json`
+- `reading/planning/C2_GENERATION_STATE.json`
 - `reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md`
 - `reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md`
 - `reading/planning/topic_genre_matrix.json`
@@ -69,7 +70,9 @@ Historical `APPROVED`, `SEALED`, and internal PASS wording coexisted with strict
 
 Risk: generation completion or an internal pass could be incorrectly reported as teacher/publication readiness.
 
-Resolution: `STATUS.json` is now explicitly production-only; `RELEASE_STATUS.json` exclusively controls educator/publication readiness. `CONTINUATION.json` requires the two states to remain separate.
+Resolution: `STATUS.json` is explicitly production-only; `RELEASE_STATUS.json` is explicitly release-evidence-only. `CONTINUATION.json` requires the two states to remain separate.
+
+A first redesign still mirrored live canonical passage counts into `RELEASE_STATUS.json`. That would have forced release state to change after every generation batch even when no release evidence changed. This coupling was removed. Release status now records the **scope of the cited evidence**, while `STATUS.json` owns live production counts.
 
 ### F4 — high: durable policy carried dated frontier state
 
@@ -102,15 +105,16 @@ Resolution: added `reading/tools/validate_continuation_state.py` and `.github/wo
 The validator checks:
 
 - project identity;
-- canonical JSONL validity/counts by language;
+- canonical JSONL validity/counts by language against production state (`STATUS` and `CONTINUATION`);
 - total generated count;
-- agreement among `CONTINUATION`, `STATUS`, `RELEASE_STATUS`, and `ACTIVE_GENERATION_PLAN`;
-- exact Urdu A1 Git blob binding;
+- active-frontier agreement among `CONTINUATION`, `STATUS`, and `ACTIVE_GENERATION_PLAN`;
+- `RELEASE_STATUS` remains release-evidence-only rather than a live production mirror;
+- exact Urdu A1 Git blob binding across production and release evidence;
 - exact integrity-artifact blob binding;
 - Urdu A1 integrity counts/errors/warnings/cloze gate;
 - `quality_promotion: false` preservation;
 - production/release separation;
-- workbook/progress scope exclusions.
+- `PROJECT_TRACKS.json` routing and workbook/progress scope exclusions.
 
 Any mismatch exits non-zero.
 
@@ -130,7 +134,26 @@ Resolution:
 - added root `PROJECT_TRACKS.json` routing `LANG-A1C2` vs `LANG-WB`;
 - canonical new-chat prefixes are `LANG-A1C2 — CONTINUE` and `LANG-WB — CONTINUE`.
 
+### F10 — medium: specialized historical state could still advertise an obsolete next phase
+
+`reading/planning/C2_GENERATION_STATE.json` was a valid French C2 completion snapshot but still exposed `next_phase: whole-French final audit` as though it were a live instruction.
+
+Risk: a new agent searching for state-like files could mistake a historical French C2 milestone for the project frontier.
+
+Resolution: the file is retained for traceability but is now explicitly `HISTORICAL_FRENCH_C2_GENERATION_SNAPSHOT`, sets `authoritative_for_current_frontier: false`, and points to `CONTINUATION`, `STATUS`, and `RELEASE_STATUS` for current truth.
+
 ## New continuation architecture
+
+### Repository project router
+
+`PROJECT_TRACKS.json`
+
+Routes the two similarly named language projects before their internal continuation files are read:
+
+- `LANG-A1C2` -> `reading/`;
+- `LANG-WB` -> workbook generation/audit/curation roots.
+
+Each route explicitly excludes the other project's root(s).
 
 ### Machine-readable live state
 
@@ -152,13 +175,13 @@ Contains only:
 
 `reading/STATUS.json`
 
-Contains production counts/frontier only. It cannot authorize educator-release claims.
+Contains live production counts/frontier only. It cannot authorize educator-release claims.
 
 ### Release status
 
 `reading/RELEASE_STATUS.json`
 
-Contains only the latest release-relevant state, evidence pointers, blockers, and assurance rules. Detailed history stays in audit artifacts/Git.
+Contains release decisions, evidence scopes, evidence pointers, blockers, and assurance rules only. Evidence-scope counts describe the corpus actually reviewed; they are not live generation counters. Detailed history stays in audit artifacts/Git.
 
 ### Human handoff
 
@@ -194,7 +217,7 @@ Release:
 
 - Arabic: not educator/publication ready under current release gates.
 - French: `REOPEN_REQUIRED`; latest post-repair Gate A remains failed pending substantive evidence revalidation.
-- Urdu: A1 deterministic/integrity baseline passes for the pinned corpus, but `quality_promotion` is false and A2-C2 are not generated.
+- Urdu: A1 deterministic/integrity baseline passes for the pinned corpus, but `quality_promotion` is false; broader release evidence is not recorded as complete.
 
 ## New-chat protocol
 
@@ -212,13 +235,13 @@ Do not infer one from the other based on generic words such as “language”, �
 
 ## Residual limitations
 
-- The connected GitHub interface used for this audit can write/read repository files but does not expose workflow dispatch or push-run listing in this session, so the newly added CI workflow could not be manually dispatched/observed here.
-- Direct network access from the execution runtime to GitHub is blocked, so the repository-side validator could not be executed locally from a cloned checkout in this session.
-- These are tooling-observation limitations, not evidence that the validator failed. The validator and workflow are committed; a future visible Actions run should be treated as the machine confirmation.
+- The connected GitHub interface used for this audit can write/read repository files, but a repository-side CI run of the newly added validation workflow has not been observed in this session.
+- Direct network access from the execution runtime to GitHub was unavailable for cloning/executing the repository locally in this session.
+- These are tooling-observation limitations, not evidence that the validator passed or failed. The validator and workflow are committed; an observed Actions run should be treated as the machine confirmation.
 - Durable roadmap/history files may still mention older lifecycle terminology, but they are deliberately lower precedence than the new continuation stack, and the legacy handoff they reference now redirects to current state.
 
 ## Audit result
 
 **Architecture materially improved and stale live-state contradictions corrected.**
 
-The project now has a single explicit identity, compact current-state object, separated production/release truth, one production frontier, active-only queues, legacy redirect, scope routing, and a fail-closed consistency validator.
+The project now has a single explicit identity, compact current-state object, genuinely separated production/release truth, one production frontier, active-only queues, legacy redirect, scope routing, historical-snapshot labeling, and a fail-closed consistency validator.
