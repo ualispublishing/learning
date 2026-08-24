@@ -21,13 +21,16 @@
   },
   "candidate_batches": {
     "002": {
-      "status": "SEMANTIC_REVIEWED_PENDING_REPOSITORY_GATE",
+      "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
       "records": 16,
       "standard_mcq": 16,
       "bellringer": 0,
       "difficulty_distribution": {"F": 0, "E": 12, "S": 4, "B": 0},
       "file": "candidates/batch-002.jsonl",
-      "primary_domain_distribution": {"1": 2, "2": 2, "3": 2, "4": 2, "5": 2, "6": 2, "7": 2, "8": 2}
+      "review": "BATCH_002_REVIEW.json",
+      "primary_domain_distribution": {"1": 2, "2": 2, "3": 2, "4": 2, "5": 2, "6": 2, "7": 2, "8": 2},
+      "promotion_allowed": false,
+      "promotion_blocker": "Automated repository quality/originality gate has not been observed completing in this session."
     }
   },
   "if_batch_002_promotes": {
@@ -44,8 +47,9 @@
     "B": 40
   },
   "next_priority": [
-    "Run the repository originality/duplicate/semantic gate against Batch 002 and all 80 released records.",
+    "Observe python question-bank/quality_gate.py completing against Batch 002 and all 80 released records.",
     "Do not promote Batch 002 if any similarity warning cannot be resolved semantically.",
+    "If clean, promote Batch 002 by updating RELEASED_BATCHES.json, the semantic ledger, release counts, and runtime validation together.",
     "Continue biasing subsequent batches toward Exam-calibrated and Stretch reasoning until the released mix approaches target.",
     "Backfill four-option rationales for the 56 legacy baseline questions so all standard items have the same teaching depth.",
     "Use confidence and selected-distractor history to identify durable misconceptions before making any empirical difficulty claims."
