@@ -10,7 +10,8 @@ on:
       - 'scripts/workbook_release_passes_v6.py'
       - 'scripts/workbook_render_pass.py'
       - 'scripts/apply_language_workbook_linguistic_repairs.py'
-      - 'audit/language-workbooks/v1.0/linguistic_findings_batch_*.json'
+      - 'audit/language-workbooks/v1.0/row_by_row/**'
+      - 'audit/language-workbooks/v1.0/row_by_row_vocab/**'
       - '.github/workflows/build-language-workbooks-v1.yml'
       - 'arabic_top1000.csv'
       - 'french_top1000.csv'
@@ -24,9 +25,13 @@ on:
       - 'scripts/workbook_release_passes_v6.py'
       - 'scripts/workbook_render_pass.py'
       - 'scripts/apply_language_workbook_linguistic_repairs.py'
-      - 'audit/language-workbooks/v1.0/linguistic_findings_batch_*.json'
+      - 'audit/language-workbooks/v1.0/row_by_row/**'
+      - 'audit/language-workbooks/v1.0/row_by_row_vocab/**'
       - '.github/workflows/build-language-workbooks-v1.yml'
       - 'audit/language-workbooks/v1.0/BUILD_TRIGGER.md'
+      - 'arabic_top1000.csv'
+      - 'french_top1000.csv'
+      - 'urdu_top1000.csv'
   workflow_dispatch:
 
 permissions:
@@ -59,7 +64,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install 'weasyprint>=66,<67' 'pypdf>=6,<7'
 
-      - name: Pass 1 — canonical vocabulary integrity (max 3 min)
+      - name: Pass 1 — canonical vocabulary baseline integrity (max 3 min)
         shell: bash
         run: |
           set -euo pipefail
@@ -70,9 +75,16 @@ jobs:
         shell: bash
         run: timeout --signal=TERM 300s python scripts/workbook_release_passes_v6.py corpus-select
 
-      - name: Pass 2.5 — apply adjudicated linguistic repairs fail-closed (max 1 min)
+      - name: Pass 2.5 — validate and apply 6,000-row adjudications fail-closed (max 2 min)
         shell: bash
-        run: timeout --signal=TERM 60s python scripts/apply_language_workbook_linguistic_repairs.py --write
+        run: |
+          set -euo pipefail
+          timeout --signal=TERM 60s python scripts/apply_language_workbook_linguistic_repairs.py
+          timeout --signal=TERM 60s python scripts/apply_language_workbook_linguistic_repairs.py --write
+
+      - name: Pass 2.6 — post-repair canonical vocabulary integrity (max 2 min)
+        shell: bash
+        run: timeout --signal=TERM 120s python scripts/attest_live_csvs.py
 
       - name: Pass 3 — full corpus audit + stratified samples (max 2 min)
         shell: bash
@@ -134,7 +146,8 @@ jobs:
           branch="${GITHUB_HEAD_REF}"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add completed/languages/workbooks/v1.0 audit/language-workbooks/v1.0
+          git add completed/languages/workbooks/v1.0 audit/language-workbooks/v1.0 \
+            arabic_top1000.csv french_top1000.csv urdu_top1000.csv
           if git diff --cached --quiet; then
             echo 'No release-output changes.'
             exit 0
