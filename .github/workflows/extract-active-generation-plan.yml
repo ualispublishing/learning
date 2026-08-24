@@ -1,30 +1,95 @@
 name: Extract active generation plan
+
 on:
   workflow_dispatch:
   push:
     paths:
-      - 'reading/tools/extract_active_generation_plan.py'
+      - 'PROJECT_TRACKS.json'
+      - 'reading/AGENTS.md'
+      - 'reading/CONTINUATION.json'
       - 'reading/STATUS.json'
+      - 'reading/RELEASE_STATUS.json'
+      - 'reading/AGENT_HANDOFF_V2.md'
+      - 'reading/TASKS.md'
+      - 'reading/VERIFICATION_TASKS.md'
+      - 'reading/README.md'
+      - 'reading/*/*/passages.jsonl'
       - 'reading/planning/topic_genre_matrix.json'
+      - 'reading/tools/extract_active_generation_plan.py'
+      - 'reading/tools/refresh_state_manifest.py'
+      - 'reading/tools/validate_continuation_state.py'
       - '.github/workflows/extract-active-generation-plan.yml'
+
 permissions:
   contents: write
+
+concurrency:
+  group: lang-a1c2-active-plan-main
+  cancel-in-progress: false
+
 jobs:
   extract:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with: {fetch-depth: 0}
+        with:
+          ref: main
+          fetch-depth: 0
+
       - uses: actions/setup-python@v5
-        with: {python-version: '3.12'}
-      - run: python reading/tools/extract_active_generation_plan.py
-      - name: Commit derived active plan
+        with:
+          python-version: '3.12'
+
+      - name: Capture source revision
+        id: source
+        shell: bash
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Derive active plan
+        run: python reading/tools/extract_active_generation_plan.py
+
+      - name: Refresh exact-byte state manifest
+        run: python reading/tools/refresh_state_manifest.py
+
+      - name: Validate continuation state
+        run: python reading/tools/validate_continuation_state.py
+
+      - name: Commit derived state atomically
+        shell: bash
+        env:
+          START_SHA: ${{ steps.source.outputs.sha }}
         run: |
+          set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/planning/ACTIVE_GENERATION_PLAN.json
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Derive active generation roadmap [skip ci]'
+
+          git add \
+            reading/planning/ACTIVE_GENERATION_PLAN.json \
+            reading/STATE_MANIFEST.json
+
+          if git diff --cached --quiet; then
+            echo 'Derived plan and state manifest already match the validated source revision.'
+            exit 0
+          fi
+
+          # Never transplant a plan derived from an older checkout onto newer state.
+          # Any concurrent main-branch change makes this run stale and must trigger a
+          # fresh derivation from the newer revision instead of a rebase/autostash.
           git fetch origin main
-          git rebase --autostash origin/main
+          REMOTE_SHA="$(git rev-parse origin/main)"
+          if [ "$REMOTE_SHA" != "$START_SHA" ]; then
+            echo "Refusing stale derived-state commit: source=$START_SHA remote=$REMOTE_SHA" >&2
+            exit 1
+          fi
+
+          git commit -m 'Derive and validate active generation state [skip ci]'
+
+          # Close the remaining race window immediately before the push.
+          git fetch origin main
+          REMOTE_SHA="$(git rev-parse origin/main)"
+          if [ "$REMOTE_SHA" != "$START_SHA" ]; then
+            echo "Refusing stale derived-state push: source=$START_SHA remote=$REMOTE_SHA" >&2
+            exit 1
+          fi
+
           git push origin HEAD:main
