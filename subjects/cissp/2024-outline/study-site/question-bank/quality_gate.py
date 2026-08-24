@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """CISSP Atlas question-bank quality/originality gate.
 
-Released batches are immutable comparison corpus. Default execution validates only
-unreleased question-bank/candidates/*.jsonl files against every released record.
+Default validates the immutable released corpus plus every unreleased candidate.
+Use --released-only for deployment of an already-audited release: candidate drafts
+are ignored, but the complete released bank still receives structural/originality checks.
 """
 from __future__ import annotations
 import json,re,sys
@@ -21,15 +22,15 @@ REVIEW_PREFIX="SEMANTIC_REVIEWED_"
 
 def parse_chunk(path:Path)->dict:
     raw=path.read_text(encoding="utf-8").strip();pre,suf="window.CISSP_CHUNKS.push(",");"
-    if not(raw.startswith(pre) and raw.endswith(suf)): raise ValueError(f"Invalid CISSP chunk wrapper: {path.name}")
+    if not(raw.startswith(pre) and raw.endswith(suf)):raise ValueError(f"Invalid CISSP chunk wrapper: {path.name}")
     return json.loads(raw[len(pre):-len(suf)])
 
 def load_jsonl(path:Path):
     out=[]
     for lineno,line in enumerate(path.read_text(encoding="utf-8").splitlines(),1):
-        if not line.strip(): continue
-        try: obj=json.loads(line)
-        except Exception as e: raise ValueError(f"{path}:{lineno}: invalid JSON: {e}") from e
+        if not line.strip():continue
+        try:obj=json.loads(line)
+        except Exception as e:raise ValueError(f"{path}:{lineno}: invalid JSON: {e}") from e
         obj["_source_file"],obj["_source_line"]=str(path),lineno;out.append(obj)
     return out
 
@@ -38,32 +39,21 @@ def load_meta():
     return json.loads(raw[len("window.CISSP_META="):end])
 
 def load_scope():
-    chunks=[parse_chunk(p) for p in CHUNK_FILES]
-    base=sum((c.get("questions",[]) for c in chunks),[])
-    objectives={o["id"] for c in chunks for o in c.get("objectives",[])}
-    cover_raw=(ROOT/"coverage-detail.js").read_text(encoding="utf-8").strip();marker=";\nwindow.CISSP_AI_COVERAGE="
-    coverage=json.loads(cover_raw[len("window.CISSP_COVERAGE="):cover_raw.index(marker)])
-    subtopics={x for values in coverage.values() for x in values};meta=load_meta();sources=set(meta["sources"])
-    return base,objectives,subtopics,sources,meta
+    chunks=[parse_chunk(p) for p in CHUNK_FILES];base=sum((c.get("questions",[]) for c in chunks),[]);objectives={o["id"] for c in chunks for o in c.get("objectives",[])}
+    raw=(ROOT/"coverage-detail.js").read_text(encoding="utf-8").strip();marker=";\nwindow.CISSP_AI_COVERAGE=";coverage=json.loads(raw[len("window.CISSP_COVERAGE="):raw.index(marker)])
+    meta=load_meta();return base,objectives,{x for values in coverage.values() for x in values},set(meta["sources"]),meta
 
 def released_manifest():
-    p=QB/"RELEASED_BATCHES.json"
-    if not p.exists(): return {"released_batches":[]}
-    return json.loads(p.read_text(encoding="utf-8"))
+    p=QB/"RELEASED_BATCHES.json";return json.loads(p.read_text(encoding="utf-8")) if p.exists() else {"released_batches":[]}
 
 def released_records():
     m=released_manifest();records=[];paths=[]
     for b in m.get("released_batches",[]):
-        for rel in b.get("files",[]):
-            p=ROOT/rel;paths.append(p.resolve());records.extend(load_jsonl(p))
+        for rel in b.get("files",[]):p=ROOT/rel;paths.append(p.resolve());records.extend(load_jsonl(p))
     return records,set(paths),m
 
 def norm(text:str)->str:
-    text=text.lower().replace("’", "'")
-    text=re.sub(r"\b(?:mr|ms|mrs|dr)\.?\s+[a-z]+\b"," person ",text)
-    text=re.sub(r"\b\d+(?:\.\d+)?\b"," number ",text)
-    text=re.sub(r"[^a-z0-9]+"," ",text)
-    return " ".join(text.split())
+    text=text.lower().replace("’", "'");text=re.sub(r"\b(?:mr|ms|mrs|dr)\.?\s+[a-z]+\b"," person ",text);text=re.sub(r"\b\d+(?:\.\d+)?\b"," number ",text);text=re.sub(r"[^a-z0-9]+"," ",text);return " ".join(text.split())
 
 def shingles(text:str,n:int=3):
     toks=norm(text).split();return ({tuple(toks)} if toks else set()) if len(toks)<n else {tuple(toks[i:i+n]) for i in range(len(toks)-n+1)}
@@ -74,15 +64,13 @@ def jaccard(a:set,b:set)->float:
     return len(a&b)/len(a|b)
 
 def question_text(q:dict)->str:
-    if q.get("format","mcq")=="bellringer":return f"{q.get('stem','')} {' '.join(map(str,q.get('prompts',[])))}"
-    return f"{q.get('stem','')} {' '.join(map(str,q.get('options',[])))}"
+    return f"{q.get('stem','')} {' '.join(map(str,q.get('prompts',[])))}" if q.get("format","mcq")=="bellringer" else f"{q.get('stem','')} {' '.join(map(str,q.get('options',[])))}"
 
 def structural_signature(q:dict):
     return(q.get("domain_primary"),tuple(sorted(q.get("objectives",[]))),q.get("scenario_family"),q.get("decision_point"),q.get("correct_rule_id"),tuple(sorted(q.get("misconceptions",[]))))
 
 def validate_record(q,objectives,subtopics,sources,errors):
-    qid=q.get("id","<missing-id>");fmt=q.get("format","mcq")
-    req=["id","format","stem","domain_primary","domains_secondary","objectives","subtopics","difficulty_tier","difficulty_score","scenario_family","decision_point","decision_verb","correct_rule_id","knowledge_atoms","misconceptions","source_ids","originality","review_status"]
+    qid=q.get("id","<missing-id>");fmt=q.get("format","mcq");req=["id","format","stem","domain_primary","domains_secondary","objectives","subtopics","difficulty_tier","difficulty_score","scenario_family","decision_point","decision_verb","correct_rule_id","knowledge_atoms","misconceptions","source_ids","originality","review_status"]
     for k in req:
         if k not in q or q[k] in (None,""):errors.append(f"{qid}: missing required field {k}")
     if not isinstance(q.get("objectives"),list) or not q.get("objectives"):errors.append(f"{qid}: objectives must be non-empty list")
@@ -135,10 +123,12 @@ def similarity_check(records,against,errors,warnings,structural=True):
         against=against+[q]
 
 def main(argv:list[str])->int:
+    released_only="--released-only" in argv[1:];file_args=[x for x in argv[1:] if x!="--released-only"]
     base,objectives,subtopics,sources,meta=load_scope();released,released_paths,manifest=released_records();errors=[];warnings=[]
     for q in released:validate_record(q,objectives,subtopics,sources,errors)
     if len({q.get('id') for q in released})!=len(released):errors.append("Released batch IDs are duplicated")
-    if any(q.get('id') in {x['id'] for x in base} for q in released):errors.append("Released batch ID collides with base bank")
+    base_ids={x['id'] for x in base}
+    if any(q.get('id') in base_ids for q in released):errors.append("Released batch ID collides with base bank")
     similarity_check(released,[{"id":q["id"],"format":"mcq","stem":q["stem"],"options":q["options"]} for q in base],errors,warnings)
     std=[q for q in released if q.get("format")=="mcq"];bells=[q for q in released if q.get("format")=="bellringer"]
     if len(base)+len(std)!=meta["meta"].get("question_count"):errors.append("Metadata standard-question count drift")
@@ -150,14 +140,14 @@ def main(argv:list[str])->int:
         dist=Counter(q.get("difficulty_tier") for q in batch)
         if len(batch)!=b.get("records") or sum(q.get("format")=="mcq" for q in batch)!=b.get("standard_mcq") or sum(q.get("format")=="bellringer" for q in batch)!=b.get("bellringers"):errors.append(f"{b.get('batch_id')}: release count drift")
         if {k:dist.get(k,0) for k in ("F","E","S","B")}!=b.get("difficulty"):errors.append(f"{b.get('batch_id')}: difficulty distribution drift")
-    explicit=[Path(x).resolve() for x in argv[1:]]
-    if explicit:files=explicit
-    else:
-        d=QB/"candidates";files=[p.resolve() for p in sorted(d.glob("*.jsonl")) if p.resolve() not in released_paths] if d.exists() else []
-    if files:
+    candidates=[]
+    if not released_only:
+        if file_args:files=[Path(x).resolve() for x in file_args]
+        else:
+            d=QB/"candidates";files=[p.resolve() for p in sorted(d.glob("*.jsonl")) if p.resolve() not in released_paths] if d.exists() else []
         candidates=[q for f in files for q in load_jsonl(f)]
         if len({q.get('id') for q in candidates})!=len(candidates):errors.append("Candidate IDs duplicated within candidate set")
-        current_ids={q['id'] for q in base}|{q.get('id') for q in released}
+        current_ids=base_ids|{q.get('id') for q in released}
         if any(q.get('id') in current_ids for q in candidates):errors.append("Candidate ID collides with released bank")
         for q in candidates:validate_record(q,objectives,subtopics,sources,errors)
         if len(candidates)>=16:
@@ -165,12 +155,11 @@ def main(argv:list[str])->int:
             if dist["E"]<len(candidates)*.50:errors.append("Candidate set must keep Exam-calibrated items at >=50%")
             if dist["B"]>len(candidates)*.10:errors.append("Bellringers exceed 10% of candidate set")
         similarity_check(candidates,base+released,errors,warnings)
-    else:candidates=[]
     [print("WARN",w) for w in warnings]
     if errors:
         [print("FAIL",e) for e in errors];return 1
-    dist=Counter(q.get("difficulty_tier") for q in candidates)
-    print(f"PASS released_mcq={len(base)+len(std)} released_bellringers={len(bells)} candidates={len(candidates)} F={dist['F']} E={dist['E']} S={dist['S']} B={dist['B']} warnings={len(warnings)}")
+    dist=Counter(q.get("difficulty_tier") for q in candidates);mode="released-only" if released_only else "released+candidate"
+    print(f"PASS mode={mode} released_mcq={len(base)+len(std)} released_bellringers={len(bells)} candidates={len(candidates)} F={dist['F']} E={dist['E']} S={dist['S']} B={dist['B']} warnings={len(warnings)}")
     return 0
 
 if __name__=="__main__":raise SystemExit(main(sys.argv))
