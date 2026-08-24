@@ -37,7 +37,7 @@ jobs:
         working-directory: subjects/cissp/2024-outline/study-site
         run: |
           node --check data-meta.js
-          for f in data-d{1..8}.js data-ai.js data-precision.js coverage-detail.js app.js enhancements.js; do node --check "$f"; done
+          for f in data-d{1..8}.js data-ai.js data-precision.js coverage-detail.js data-question-calibration.js bootstrap.js app.js enhancements.js; do node --check "$f"; done
       - name: Verify static site serves all critical assets
         working-directory: subjects/cissp/2024-outline/study-site
         run: |
@@ -45,6 +45,6 @@ jobs:
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
           sleep 1
-          for f in index.html styles.css mobile-fix.css enhancements.css data-meta.js data-d1.js data-d8.js data-ai.js data-precision.js coverage-detail.js app.js enhancements.js; do
+          for f in index.html styles.css mobile-fix.css enhancements.css data-meta.js data-d1.js data-d8.js data-ai.js data-precision.js coverage-detail.js data-question-calibration.js bootstrap.js app.js enhancements.js question-bank/RELEASED_BATCHES.json question-bank/candidates/batch-001-a.jsonl question-bank/candidates/batch-001-b.jsonl question-bank/candidates/batch-001-c.jsonl question-bank/candidates/batch-001-d.jsonl; do
             curl --fail --silent --show-error "http://127.0.0.1:8765/$f" >/dev/null
           done
