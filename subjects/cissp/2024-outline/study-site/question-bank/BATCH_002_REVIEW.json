@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-08-24",
+  "batch": "002",
+  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "records": 16,
+  "formats": {"mcq": 16, "bellringer": 0},
+  "difficulty_distribution": {"F": 0, "E": 12, "S": 4, "B": 0},
+  "primary_domain_distribution": {"1": 2, "2": 2, "3": 2, "4": 2, "5": 2, "6": 2, "7": 2, "8": 2},
+  "authoring_review": {
+    "semantic_reviewed_records": 16,
+    "four_option_rationales_present": 16,
+    "external_question_seeds_used": 0,
+    "foundation_filler_records": 0,
+    "exam_or_stretch_records": 16
+  },
+  "gate_state": {
+    "quality_gate_required": true,
+    "quality_gate_execution_observed_in_this_session": false,
+    "promotion_allowed": false,
+    "reason": "The connected GitHub interface in this session does not expose the push-triggered Actions result, and the execution container could not reach GitHub to clone the repository. Do not infer a PASS; CI/repository execution must confirm the automated originality and duplicate gate."
+  },
+  "promotion_requirements": [
+    "python question-bank/quality_gate.py completes without FAIL",
+    "every similarity WARN is manually reviewed and resolved before promotion",
+    "python audit.py remains clean after release integration",
+    "semantic audit manifest is expanded if Batch 002 is promoted",
+    "release metadata/counts/difficulty distribution are recomputed",
+    "runtime and static-site checks remain clean"
+  ],
+  "notes": [
+    "Batch 002 is deliberately E/S-heavy to counter the Foundation+-heavy original baseline.",
+    "The 16 scenarios are two-per-domain and target decision points different from the released bank by authoring intent.",
+    "Candidate records remain excluded from the live practice bank until added to RELEASED_BATCHES.json."
+  ]
+}
