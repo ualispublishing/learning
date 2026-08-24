@@ -1,111 +1,102 @@
-# Educator Release Verification Queue
+# LANG-A1C2 Active Verification Queue
 
-Updated: 2026-08-19
+Updated: 2026-08-23
 
-This queue is separate from generation work. `reading/TASKS.md` tracks curriculum production; this file tracks correctness/release certification.
+This is the live verification queue only. Completed audit waves and detailed evidence remain in `reading/audit/` and Git history. Release claims are controlled by `reading/RELEASE_STATUS.json`.
 
-## French post-repair deterministic Gate A — current frontier
+## Gate 0 — continuation/state consistency
 
-- [x] Merge French A1/A2 repair PR #7 into `main` at `3356eaffcb7bf04feb755d3356089b7a3e7906e8`.
-- [x] Bind fresh post-repair SHA-256 hashes for all six French levels.
-- [x] Rerun the baseline-equivalent deterministic release-evidence categories over all **360 passages / 3,600 questions / 3,600 answers**.
-- [x] Preserve the fresh result at `reading/audit/french_postrepair_deterministic_gate_a_2026-08-19.json`.
-- [x] Structural assertions: 60 records per level, contiguous sequences, exactly 10 linked questions/answers per record — PASS.
-- [x] Unicode NFC findings in the fresh French run: **0**.
-- [ ] **BLOCKER: post-repair deterministic Gate A = FAIL with 2,160 release-evidence findings.**
-  - 360 `quality.status != approved`
-  - 360 `quality.coverage_check != pass`
-  - 360 missing/zero `estimated_known_token_coverage`
-  - 360 `quality.linguistic_review != pass`
-  - 360 `quality.pedagogical_review != pass`
-  - 360 `quality.answer_key_check != pass`
-- [ ] Substantively revalidate these record-level evidence fields across 100% of French. **Do not bulk-flip draft/pending metadata merely to clear the gate.**
-- [ ] After evidence is actually established, rerun deterministic Gate A and require PASS before educator release can advance.
-- [ ] Continue the independent 100% semantic/linguistic/Q&A/educator review against the same final hashes.
+- [ ] `python reading/tools/validate_continuation_state.py` passes against live canonical files.
+- [ ] Stored production totals equal canonical JSONL counts.
+- [ ] Active frontier in `CONTINUATION.json`, `STATUS.json`, and `ACTIVE_GENERATION_PLAN.json` agrees.
+- [ ] Pinned Urdu A1 blob still matches the canonical file before relying on its final integrity audit.
+- [ ] A zero-step/skipped CI run is never treated as verification success.
 
-Fresh bound hashes:
+## Arabic — educator release blocked
 
-- A1 `1cdb31ecb8b987c50051bb6f8fa5b2f7fda812cb3004c81ab8697f832fceacba`
-- A2 `8fcd71903e6a495a2abaac8d436232b4b7ee00ae5ac0bce4d273aa4a134b3c15`
-- B1 `7b1013fa606761bc7cc69fdaf67c66a0efcc9c91c478b1c8a5f8523458f9451b`
-- B2 `bfa64c472a93d572d65fbe0217283b9d53bbb0a8d88fee7ea3a3aef1c7993942`
-- C1 `dead8e5d6e6e60a7c6c5185996159670e6077ea2d5da31860de168674050b39a`
-- C2 `c161c4551a6ce0222850778c02ed0662e00bb60e5386d5dc0b4f31a92cb9f277`
+Current generation: 360/360 complete.
 
-Interpretation: the 2,160 findings are **release-evidence failures**, not a claim that there are 2,160 independent prose mistakes. The earlier repair work demonstrated that real content defects can coexist with stale metadata, so evidence revalidation and semantic review are both required.
+Current release position: historical internal language pass exists, but educator/publication release is **not ready** under the current assurance profile.
 
-## French A1/A2 metalinguistic / CEFR repair — 2026-08-19
+Open verification work:
 
-- [x] Inventory 88 high-recall candidates (63 A1, 25 A2) against pre-repair hashes.
-- [x] Semantically adjudicate all 88 candidates; do not treat scanner hits as automatic defects.
-- [x] Repair **63** confirmed formal-metalinguistic/CEFR-inappropriate items across **62 passages**; retain 25 legitimate items.
-- [x] Repair seven additional exact duplicate prompts (`corps`, `boire`, `dormir`, `ami`, `travail`, `prix`, `chaussure`).
-- [x] Reject the first machine cloze strategy after human review found malformed quotation, sense-drift, and assessment-diversity problems.
-- [x] Mark the first human refinement superseded after direct canonical spot-check found semantic role duplication.
-- [x] Re-review all 23 former A1 function-label items and convert them to operational use/choice/context-selection tasks.
-- [x] Final exact-duplicate scan over all 120 A1/A2 passages: PASS.
-- [x] Defined formal-metalinguistic residue under the recorded adjudication rule: **0**.
-- [x] Strengthen `reading/planning/TEN_QUESTION_STANDARD.md` so A1/A2 grammar defaults to operational use/form tasks and duplicate assessment roles are prohibited.
-- [x] Merge PR #7.
+- [ ] fresh deterministic educator-release revalidation;
+- [ ] corpus-wide low-level metalinguistic/CEFR question audit and repair;
+- [ ] corpus-wide Arabic grammar-in-context naturalness audit;
+- [ ] full passage language/question/answer semantic review;
+- [ ] independent professional/native and model-family disagreement passes;
+- [ ] educator curriculum review;
+- [ ] blind post-repair human review;
+- [ ] final hash-bound release manifest only after all required gates are clean.
 
-Durable evidence:
+Primary current evidence pointers are maintained in `reading/RELEASE_STATUS.json`.
 
-- pre-repair inventory: `reading/audit/french_a1_a2_metalinguistic_inventory_2026-08-19.json`
-- first guarded repair: `reading/audit/french_a1_a2_metalinguistic_repair_2026-08-19.json`
-- post-repair raw rescan: `reading/audit/french_a1_a2_metalinguistic_postrepair_rescan_2026-08-19.json`
-- superseded first refinement: `reading/audit/french_a1_a2_metalinguistic_human_refinement_2026-08-19.json`
-- authoritative v2 refinement: `reading/audit/french_a1_a2_metalinguistic_human_refinement_v2_2026-08-19.json`
+## French — `REOPEN_REQUIRED`
 
-## French C1/C2 confirmed-defect repair — 2026-08-19
+Current generation: 360/360 complete.
 
-- [x] Repair C1 U1 P01–P05 generic vocabulary answers (20 answers).
-- [x] Remove C1 U1 P01–P06 learner-facing production/meta language.
-- [x] Remove C2 U1 P01–P05 `Révision C1 intégrée` production notes while preserving required review vocabulary.
-- [x] Human spot-check and repair C1 P06 after the first machine-clean pass.
-- [x] Preserve 10Q/10A linkage, sequence continuity, review vocabulary and broad word bands.
-- [x] Merge PR #6.
+Latest post-repair deterministic Gate A:
 
-Evidence:
+- status: **FAIL**;
+- records: 360;
+- questions: 3,600;
+- answers: 3,600;
+- open release-evidence findings: **2,160**.
 
-- `reading/audit/french_c1_c2_educator_defect_repair_2026-08-19.json`
-- `reading/audit/french_c1_u01_p06_followup_repair_2026-08-19.json`
+Open verification work:
 
-## French A1–C2 remaining certification gates
+- [ ] substantively revalidate record-level coverage, linguistic, pedagogical, answer-key, and approval evidence;
+- [ ] never bulk-promote pending metadata merely to make Gate A pass;
+- [ ] rerun post-revalidation Gate A from the current canonical hashes;
+- [ ] complete fresh full semantic language/question/answer review;
+- [ ] complete independent professional/native/tool/model-family disagreement passes;
+- [ ] complete educator and blind post-repair human review;
+- [ ] create a hash-bound release manifest only after all required gates pass.
 
-- [ ] Substantively revalidate record-level deterministic Gate A evidence for all 360 records.
-- [ ] Rerun deterministic Gate A to PASS.
-- [ ] Fresh 100% linguistic, naturalness, pedagogy, target-sense, and answer-grounding audit independent of prior PASS artifacts and repairer judgments.
-- [ ] Search for additional templated/generic Q&A, duplicated assessment roles, production/meta leakage, and target-sense mismatches beyond repaired classes.
-- [ ] LanguageTool French disagreement pass.
-- [ ] Antidote French disagreement pass.
-- [ ] DeepL Write French disagreement pass.
-- [ ] Three genuinely independent model-family audits with blinded initial judgments.
-- [ ] 100% native professional French review.
-- [ ] 100% independent FLE/CEFR educator review.
-- [ ] Adjudicate/repair all accepted findings and rerun regressions.
-- [ ] Complete blind post-repair human review over 100% of learner-facing content.
-- [ ] Confirm zero unresolved critical/major/minor/disagreement items.
-- [ ] Generate a new hash-bound French release manifest and set `HASH_BOUND_RELEASED` only when every gate matches final hashes.
+Evidence: `reading/audit/french_postrepair_deterministic_gate_a_2026-08-19.json`.
 
-## Arabic A1–C2 re-certification
+## Urdu A1 — integrity clean, quality not promoted
 
-- [x] Bind historical baseline hashes for all six canonical levels.
-- [x] Run baseline deterministic audit; unresolved evidence blockers remain.
-- [ ] Repair/adjudicate known Arabic low-level metalinguistic/CEFR and malformed MSA defect classes corpus-wide.
-- [ ] Substantively resolve deterministic Gate A blockers and rerun to PASS.
-- [ ] Run fresh 100% linguistic and answer-grounding audit.
-- [ ] Run LanguageTool Arabic and CAMeL Tools MSA diagnostics.
-- [ ] Run three genuinely independent model-family audits.
-- [ ] Complete 100% native professional and independent educator/curriculum review.
-- [ ] Complete repair/regression/adjudication and blind post-repair human review.
-- [ ] Generate hash-bound Arabic release manifest only at zero unresolved findings.
+Canonical A1:
 
-## Urdu
+- path: `reading/urdu/a1/passages.jsonl`;
+- passages: 60;
+- pinned Git blob: `ec0970dc1916ce523dd3320d2f4dca4c7f8bc677`.
 
-- [ ] Continue guarded A1 generation from the verified canonical frontier.
-- [ ] At each level completion, run the level-level internal final audit.
-- [ ] At language release milestone, execute the same highest-assurance independent educator-release protocol.
+Final integrity evidence: `reading/audit/urdu_a1_final_integrity_2026-08-23.json`.
 
-## Release claim
+Recorded integrity result:
 
-Until a language reaches `HASH_BOUND_RELEASED` in `reading/RELEASE_STATUS.json`, do not describe it as guaranteed error-free or educator-ready. Use the exact current release state instead.
+- 60 passages;
+- 600 questions;
+- 600 answers;
+- 130 cloze questions reconstruct;
+- 0 hard errors;
+- 0 warnings;
+- `quality_promotion: false`.
+
+Therefore:
+
+- [x] exact-corpus deterministic/integrity audit closed for the pinned blob;
+- [ ] semantic naturalness/idiomaticity review;
+- [ ] pedagogy and CEFR calibration review;
+- [ ] question/answer/evidence quality review;
+- [ ] lexical exposure/coverage review where required;
+- [ ] independent/native/educator review at the designated assurance milestone;
+- [ ] release decision only after applicable release gates are satisfied.
+
+Do not reopen deterministic repair work simply because quality review remains pending. Conversely, do not call A1 educator-ready merely because integrity is green.
+
+## Freshness and invalidation rules
+
+- Any audit is evidence only for the canonical bytes/fields it examined.
+- Passage-prose edits invalidate affected language/naturalness, word-band/CEFR, and evidence-alignment checks.
+- Question/answer edits invalidate the affected question/evidence/answer-key gates.
+- Target/exposure edits invalidate lexical/source/exposure gates.
+- Schema/ID/order edits invalidate data-integrity gates.
+- Final release attempts must regenerate the required final evidence sequentially from the current canonical state.
+- Tooling/environment failures are blockers, not content defects; record them separately.
+
+## Completion rule
+
+No language is educator/publication ready until `reading/RELEASE_STATUS.json` records readiness from fresh hash-bound evidence. Generation completion by itself is never sufficient.
