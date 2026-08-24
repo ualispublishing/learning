@@ -16,6 +16,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Rebase onto current main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git pull --rebase origin main
+
       - name: Validate, canonicalize, and advance B1 frontier
         shell: bash
         run: |
@@ -23,78 +30,305 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import hashlib, json, re
-          root=Path('.')
-          stage=root/'reading/audit/urdu_b1_u01_generation_candidate'
-          target=root/'reading/urdu/b1/passages.jsonl'
-          schema=json.loads((root/'reading/schema/passage.schema.json').read_text(encoding='utf-8'))
-          req=set(schema['required']); ptypes=set(schema['properties']['passage_type']['enum']); domains=set(schema['properties']['domains']['items']['enum']); qtypes=set(schema['$defs']['question']['properties']['type']['enum']); strategies=set(schema['$defs']['newLexicalTarget']['properties']['context_strategy']['items']['enum'])
-          expected_ids=[f'ur-b1-u01-p{i:02d}' for i in range(1,7)]; expected_seq=list(range(1,7)); expected_targets=['ur-rank-1036','ur-rank-1073','ur-rank-1090','ur-rank-1071','ur-rank-1085','ur-rank-1029','ur-rank-1001','ur-rank-1070','ur-rank-1062','ur-rank-1105','ur-rank-1104','ur-rank-1047','ur-rank-1108','ur-rank-1021','ur-rank-1022']
-          def jl(p): return [json.loads(x) for x in p.read_text(encoding='utf-8').splitlines() if x.strip()]
-          a1=jl(root/'reading/urdu/a1/passages.jsonl'); a2=jl(root/'reading/urdu/a2/passages.jsonl')
-          if len(a1)!=60 or len(a2)!=60: raise SystemExit('Fail closed: Urdu A1/A2 must each be 60 before B1 promotion')
-          taught={t['id'] for r in a1+a2 for t in r.get('new_lexical_targets',[])}
-          collision=sorted(taught.intersection(expected_targets))
-          if collision: raise SystemExit(f'Fail closed: B1 target freshness collision {collision}')
-          if target.exists() and target.read_text(encoding='utf-8').strip(): raise SystemExit('Fail closed: Urdu B1 canonical already contains data')
-          rows=[]; learner=[]
-          for i in range(1,7):
-            p=stage/f'ur-b1-u01-p{i:02d}.json'
-            if not p.exists(): raise SystemExit(f'Missing candidate {p}')
-            r=json.loads(p.read_text(encoding='utf-8'))
-            r['word_count']=len(r['text'].split()); r['sentence_count']=r['text'].count('۔')
-            for t in r.get('new_lexical_targets',[]):
-              t['exposures_in_text']=r['text'].count(t['form'])
-              t['context_strategy']=['scenario_resolution' if x=='goal_relation' else x for x in t['context_strategy']]
-            p.write_text(json.dumps(r,ensure_ascii=False,separators=(',',':'))+'\n',encoding='utf-8')
-            rows.append(r); learner += [r['title'],r['text']] + [q['prompt'] for q in r['questions']] + [a['answer'] for a in r['answer_key']]
-          if [r['id'] for r in rows]!=expected_ids or [r['sequence'] for r in rows]!=expected_seq: raise SystemExit('ID/sequence contract failed')
-          if [r['passage_type'] for r in rows]!=['instructional','reinforcement','interleaved','transfer','integration','checkpoint']: raise SystemExit('B1 role cycle failed')
-          if [len(r['new_lexical_targets']) for r in rows]!=[3,3,3,3,3,0]: raise SystemExit('B1 target distribution failed')
-          if [t['id'] for r in rows[:5] for t in r['new_lexical_targets']]!=expected_targets: raise SystemExit('B1 target order/identity failed')
-          if any(t['exposures_in_text']<1 for r in rows for t in r['new_lexical_targets']): raise SystemExit('New target absent from learner text')
-          if not {'article','student narrative','advice'}.issubset({r['genre'] for r in rows}): raise SystemExit('Required B1 Unit 1 genres missing')
-          p6=rows[-1]
-          if p6['new_lexical_targets'] or not p6['speed_training']['timed'] or p6['speed_training']['new_word_policy']!='none': raise SystemExit('P6 checkpoint policy failed')
+
+          root = Path('.')
+          stage = root / 'reading/audit/urdu_b1_u01_generation_candidate'
+          target = root / 'reading/urdu/b1/passages.jsonl'
+          schema = json.loads((root / 'reading/schema/passage.schema.json').read_text(encoding='utf-8'))
+          req = set(schema['required'])
+          ptypes = set(schema['properties']['passage_type']['enum'])
+          domains = set(schema['properties']['domains']['items']['enum'])
+          qtypes = set(schema['$defs']['question']['properties']['type']['enum'])
+          strategies = set(schema['$defs']['newLexicalTarget']['properties']['context_strategy']['items']['enum'])
+
+          expected_ids = [f'ur-b1-u01-p{i:02d}' for i in range(1, 7)]
+          expected_seq = list(range(1, 7))
+          expected_targets = [
+              'ur-rank-1036','ur-rank-1073','ur-rank-1090',
+              'ur-rank-1071','ur-rank-1085','ur-rank-1029',
+              'ur-rank-1001','ur-rank-1070','ur-rank-1062',
+              'ur-rank-1105','ur-rank-1104','ur-rank-1047',
+              'ur-rank-1108','ur-rank-1021','ur-rank-1022'
+          ]
+
+          def jl(path):
+              return [json.loads(x) for x in path.read_text(encoding='utf-8').splitlines() if x.strip()]
+
+          a1 = jl(root / 'reading/urdu/a1/passages.jsonl')
+          a2 = jl(root / 'reading/urdu/a2/passages.jsonl')
+          if len(a1) != 60 or len(a2) != 60:
+              raise SystemExit('Fail closed: Urdu A1/A2 must each contain 60 canonical passages')
+
+          taught = {t['id'] for r in a1 + a2 for t in r.get('new_lexical_targets', [])}
+          collision = sorted(taught.intersection(expected_targets))
+          if collision:
+              raise SystemExit(f'Fail closed: B1 target freshness collision: {collision}')
+
+          if target.exists() and target.read_text(encoding='utf-8').strip():
+              raise SystemExit('Fail closed: Urdu B1 canonical already contains data')
+
+          rows = []
+          learner = []
+          for i in range(1, 7):
+              path = stage / f'ur-b1-u01-p{i:02d}.json'
+              if not path.exists():
+                  raise SystemExit(f'Missing candidate: {path}')
+              r = json.loads(path.read_text(encoding='utf-8'))
+
+              # The staged checkpoint was six whitespace tokens above the B1 band.
+              # Apply a meaning-preserving deterministic trim before recounting.
+              if r['id'] == 'ur-b1-u01-p06':
+                  r['text'] = r['text'].replace(
+                      'اپنے تعلیمی تجربات کا مشترک جائزہ',
+                      'تعلیمی تجربات کا جائزہ',
+                      1,
+                  ).replace(
+                      'اس بات کی یاد دہانی تھی کہ',
+                      'یاد دہانی تھی کہ',
+                      1,
+                  ).replace(
+                      'زیادہ معلومات جمع کرنے',
+                      'معلومات جمع کرنے',
+                      1,
+                  )
+
+              r['word_count'] = len(r['text'].split())
+              r['sentence_count'] = r['text'].count('۔')
+              for t in r.get('new_lexical_targets', []):
+                  t['exposures_in_text'] = r['text'].count(t['form'])
+                  t['context_strategy'] = [
+                      'scenario_resolution' if x == 'goal_relation' else x
+                      for x in t['context_strategy']
+                  ]
+              path.write_text(json.dumps(r, ensure_ascii=False, separators=(',', ':')) + '\n', encoding='utf-8')
+              rows.append(r)
+              learner += [r['title'], r['text']]
+              learner += [q['prompt'] for q in r['questions']]
+              learner += [a['answer'] for a in r['answer_key']]
+
+          if [r['id'] for r in rows] != expected_ids or [r['sequence'] for r in rows] != expected_seq:
+              raise SystemExit('ID/sequence contract failed')
+          if [r['passage_type'] for r in rows] != ['instructional','reinforcement','interleaved','transfer','integration','checkpoint']:
+              raise SystemExit('B1 role cycle failed')
+          if [len(r['new_lexical_targets']) for r in rows] != [3,3,3,3,3,0]:
+              raise SystemExit('B1 target distribution failed')
+          if [t['id'] for r in rows[:5] for t in r['new_lexical_targets']] != expected_targets:
+              raise SystemExit('B1 target order/identity failed')
+          if any(t['exposures_in_text'] < 1 for r in rows for t in r['new_lexical_targets']):
+              raise SystemExit('New target absent from learner text')
+          if not {'article','student narrative','advice'}.issubset({r['genre'] for r in rows}):
+              raise SystemExit('Required B1 Unit 1 genres missing')
+
+          p6 = rows[-1]
+          if p6['new_lexical_targets'] or not p6['speed_training']['timed'] or p6['speed_training']['new_word_policy'] != 'none':
+              raise SystemExit('P6 checkpoint policy failed')
+
           for r in rows:
-            miss=req-set(r)
-            if miss: raise SystemExit(f'{r["id"]} missing {sorted(miss)}')
-            if r['passage_type'] not in ptypes or any(d not in domains for d in r['domains']): raise SystemExit(f'Enum failure {r["id"]}')
-            if len(r['questions'])!=10 or len(r['answer_key'])!=10: raise SystemExit(f'10x10 failed {r["id"]}')
-            if not 220 <= r['word_count'] <= 320: raise SystemExit(f'B1 word band failed {r["id"]}: {r["word_count"]}')
-            amap={a['id']:a for a in r['answer_key']}
-            for t in r.get('new_lexical_targets',[]):
-              if any(x not in strategies for x in t['context_strategy']): raise SystemExit(f'Invalid context strategy {r["id"]}/{t["id"]}')
-            for q in r['questions']:
-              if q['type'] not in qtypes or q['answer_id'] not in amap or amap[q['answer_id']]['question_id']!=q['id']: raise SystemExit(f'QA link/type failure {r["id"]}/{q["id"]}')
-          ls='\n'.join(learner)
-          if re.search(r'[A-Za-z\u0900-\u097F]',ls): raise SystemExit('Learner-facing Latin/Devanagari leakage')
-          target.parent.mkdir(parents=True,exist_ok=True)
-          payload=''.join(json.dumps(r,ensure_ascii=False,separators=(',',':'))+'\n' for r in rows)
-          target.write_text(payload,encoding='utf-8')
-          final=jl(target)
-          if len(final)!=6 or [r['id'] for r in final]!=expected_ids or [r['sequence'] for r in final]!=expected_seq: raise SystemExit('Canonical B1 post-write check failed')
-          canonical_bytes=target.read_bytes()
-          manifest={'schema_version':1,'project_id':'LANG-A1C2','language':'ur','cefr':'B1','unit':1,'date':'2026-08-24','status':'CANONICALIZED','canonical_target':'reading/urdu/b1/passages.jsonl','sequence_range':[1,6],'record_count':6,'release_promotion':False}
-          (stage/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          validation={'schema_version':1,'project_id':'LANG-A1C2','language':'ur','cefr':'B1','unit':1,'date':'2026-08-24','canonicalized':True,'release_promotion':False,'checks':{'prior_a1_a2_60_each':'PASS','freshness_across_all_prior_urdu':'PASS','record_count':'PASS','sequence_1_through_6':'PASS','role_cycle':'PASS','question_answer_10x10':'PASS','bidirectional_links':'PASS','new_target_distribution_3_3_3_3_3_0':'PASS','new_target_text_exposure':'PASS','required_genres':'PASS','p6_checkpoint_policy':'PASS','learner_script_scan':'PASS','schema_required_fields_enums_and_context_strategies':'PASS','b1_word_band':'PASS'}}
-          (root/'reading/audit/urdu_b1_u01_generation_validation_2026-08-24.json').write_text(json.dumps(validation,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          promotion={'schema_version':1,'project_id':'LANG-A1C2','language':'ur','cefr':'B1','unit':1,'date':'2026-08-24','status':'CANONICAL_PROMOTION_PASS','release_promotion':False,'before_record_count':0,'after_record_count':6,'appended_sequences':expected_seq,'appended_ids':expected_ids,'canonical_sha256_after':hashlib.sha256(canonical_bytes).hexdigest()}
-          (root/'reading/audit/urdu_b1_u01_promotion_2026-08-24.json').write_text(json.dumps(promotion,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          lexp=root/'reading/audit/urdu_b1_u01_lexical_sense_check_2026-08-24.json'; lex=json.loads(lexp.read_text(encoding='utf-8')); lex['status']='PASS_FOR_GENERATION_TARGET_SENSES_AND_CANONICAL_FRESHNESS'; lex['freshness_result']='PASS'; lex['freshness_scope']='Exact target IDs checked against all canonical Urdu A1 and A2 new_lexical_targets before B1 canonical write.'; lexp.write_text(json.dumps(lex,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          sp=root/'reading/STATUS.json'; s=json.loads(sp.read_text(encoding='utf-8')); s['current']['canonical_passages']=846; s['current']['remaining_generation_passages']=234; s['current']['active_language']='urdu'; s['current']['active_level']='B1'; u=s['languages']['urdu']; u['generation_state']='B1_IN_PROGRESS'; u['canonical_passages']=126; u['remaining_generation_passages']=234; u['next_generation_level']='B1'; sp.write_text(json.dumps(s,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          cp=root/'reading/CONTINUATION.json'; c=json.loads(cp.read_text(encoding='utf-8')); c['production']['canonical_passages']=846; cu=c['production']['urdu']; cu['state']='B1_GENERATION_IN_PROGRESS'; cu['canonical_passages']=126; cu['next_generation_level']='B1'; c['active_frontier']['production']={'language':'urdu','level':'B1','action':'Continue generation-first production from Urdu B1 Unit 2 / sequence 7 using the canonical roadmap and ten-question contract.'}; c['exact_next_actions']=['Validate the routed state bundle and live canonical counts.','Use reading/planning/ACTIVE_GENERATION_PLAN.json to start guarded Urdu B1 Unit 2 generation at sequence 7.','Keep release/educator verification separate from generation progress.']; cp.write_text(json.dumps(c,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          pp=root/'reading/planning/ACTIVE_GENERATION_PLAN.json'; p=json.loads(pp.read_text(encoding='utf-8')); p['active_language']='urdu'; p['active_level']='B1'; p['active_unit']=2; p['start_sequence']=7; p['canonical_active_path']='reading/urdu/b1/passages.jsonl'; p['existing_active_level_passages']=6; p['roadmap_lookup']='$.levels.B1'; p['active_unit_roadmap']={'unit':2,'theme':'work and workplace choices','genres':['profile','workplace scenario','email']}; pp.write_text(json.dumps(p,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          tp=root/'reading/TASKS.md'; t=tp.read_text(encoding='utf-8'); t=re.sub(r'Canonical production frontier: \*\*Urdu B1, Unit 1, sequence 1\*\*\.', 'Canonical production frontier: **Urdu B1, Unit 2, sequence 7**.', t, count=1); t=re.sub(r'- Urdu: 120/360 generated; A1-A2 complete, B1 in progress\.', '- Urdu: 126/360 generated; A1-A2 complete, B1 in progress.', t, count=1); t=re.sub(r'- Project: 840/1080 generated\.', '- Project: 846/1080 generated.', t, count=1); tp.write_text(t,encoding='utf-8')
-          hp=root/'reading/AGENT_HANDOFF_V2.md'; h=hp.read_text(encoding='utf-8'); h=re.sub(r'- Canonical generated total: \*\*840\*\*\.', '- Canonical generated total: **846**.', h, count=1); h=re.sub(r'- Urdu: \*\*120/360\*\*; A1-A2 generation complete and B1 generation in progress\.', '- Urdu: **126/360**; A1-A2 generation complete and B1 generation in progress.', h, count=1); h=re.sub(r'Continue \*\*Urdu B1\*\*, starting from Unit 1 / sequence 1, under:', 'Continue **Urdu B1**, starting from Unit 2 / sequence 7, under:', h, count=1); h=re.sub(r'B1 Unit 1 uses the roadmap theme \*\*education and learning\*\* with `article`, `student narrative`, and `advice` genres\.', 'B1 Unit 2 uses the roadmap theme **work and workplace choices** with `profile`, `workplace scenario`, and `email` genres.', h, count=1); h=re.sub(r'resume guarded generation at \*\*Urdu B1 Unit 1 / sequence 1\*\* using the B1 Unit 1 roadmap theme `education and learning`\.', 'resume guarded generation at **Urdu B1 Unit 2 / sequence 7** using the B1 Unit 2 roadmap theme `work and workplace choices`.', h, count=1); hp.write_text(h,encoding='utf-8')
-          (root/'reading/audit/urdu_b1_u01_state_reconcile_2026-08-24.json').write_text(json.dumps({'schema_version':1,'project_id':'LANG-A1C2','date':'2026-08-24','status':'PASS','canonical_urdu_b1_passages':6,'project_canonical_passages':846,'urdu_canonical_passages':126,'next_frontier':{'language':'urdu','level':'B1','unit':2,'sequence':7},'release_promotion':False},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+              missing = req - set(r)
+              if missing:
+                  raise SystemExit(f'{r["id"]} missing required fields: {sorted(missing)}')
+              if r['passage_type'] not in ptypes or any(d not in domains for d in r['domains']):
+                  raise SystemExit(f'Enum failure: {r["id"]}')
+              if len(r['questions']) != 10 or len(r['answer_key']) != 10:
+                  raise SystemExit(f'10x10 failed: {r["id"]}')
+              if not 220 <= r['word_count'] <= 320:
+                  raise SystemExit(f'B1 word band failed {r["id"]}: {r["word_count"]}')
+              amap = {a['id']: a for a in r['answer_key']}
+              for t in r.get('new_lexical_targets', []):
+                  if any(x not in strategies for x in t['context_strategy']):
+                      raise SystemExit(f'Invalid context strategy {r["id"]}/{t["id"]}')
+              for q in r['questions']:
+                  if q['type'] not in qtypes or q['answer_id'] not in amap or amap[q['answer_id']]['question_id'] != q['id']:
+                      raise SystemExit(f'QA link/type failure {r["id"]}/{q["id"]}')
+
+          learner_text = '\n'.join(learner)
+          if re.search(r'[A-Za-z\u0900-\u097F]', learner_text):
+              raise SystemExit('Learner-facing Latin/Devanagari leakage')
+
+          target.parent.mkdir(parents=True, exist_ok=True)
+          payload = ''.join(json.dumps(r, ensure_ascii=False, separators=(',', ':')) + '\n' for r in rows)
+          target.write_text(payload, encoding='utf-8')
+          final = jl(target)
+          if len(final) != 6 or [r['id'] for r in final] != expected_ids or [r['sequence'] for r in final] != expected_seq:
+              raise SystemExit('Canonical B1 post-write check failed')
+
+          canonical_bytes = target.read_bytes()
+          (stage / 'manifest.json').write_text(json.dumps({
+              'schema_version': 1,
+              'project_id': 'LANG-A1C2',
+              'language': 'ur',
+              'cefr': 'B1',
+              'unit': 1,
+              'date': '2026-08-24',
+              'status': 'CANONICALIZED',
+              'canonical_target': 'reading/urdu/b1/passages.jsonl',
+              'sequence_range': [1, 6],
+              'record_count': 6,
+              'release_promotion': False,
+          }, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          validation = {
+              'schema_version': 1,
+              'project_id': 'LANG-A1C2',
+              'language': 'ur',
+              'cefr': 'B1',
+              'unit': 1,
+              'date': '2026-08-24',
+              'canonicalized': True,
+              'release_promotion': False,
+              'word_counts': [r['word_count'] for r in rows],
+              'checks': {
+                  'prior_a1_a2_60_each': 'PASS',
+                  'freshness_across_all_prior_urdu': 'PASS',
+                  'record_count': 'PASS',
+                  'sequence_1_through_6': 'PASS',
+                  'role_cycle': 'PASS',
+                  'question_answer_10x10': 'PASS',
+                  'bidirectional_links': 'PASS',
+                  'new_target_distribution_3_3_3_3_3_0': 'PASS',
+                  'new_target_text_exposure': 'PASS',
+                  'required_genres': 'PASS',
+                  'p6_checkpoint_policy': 'PASS',
+                  'learner_script_scan': 'PASS',
+                  'schema_required_fields_enums_and_context_strategies': 'PASS',
+                  'b1_word_band': 'PASS',
+              },
+          }
+          (root / 'reading/audit/urdu_b1_u01_generation_validation_2026-08-24.json').write_text(
+              json.dumps(validation, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+          )
+
+          promotion = {
+              'schema_version': 1,
+              'project_id': 'LANG-A1C2',
+              'language': 'ur',
+              'cefr': 'B1',
+              'unit': 1,
+              'date': '2026-08-24',
+              'status': 'CANONICAL_PROMOTION_PASS',
+              'release_promotion': False,
+              'before_record_count': 0,
+              'after_record_count': 6,
+              'appended_sequences': expected_seq,
+              'appended_ids': expected_ids,
+              'canonical_sha256_after': hashlib.sha256(canonical_bytes).hexdigest(),
+          }
+          (root / 'reading/audit/urdu_b1_u01_promotion_2026-08-24.json').write_text(
+              json.dumps(promotion, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+          )
+
+          lexp = root / 'reading/audit/urdu_b1_u01_lexical_sense_check_2026-08-24.json'
+          lex = json.loads(lexp.read_text(encoding='utf-8'))
+          lex['status'] = 'PASS_FOR_GENERATION_TARGET_SENSES_AND_CANONICAL_FRESHNESS'
+          lex['freshness_result'] = 'PASS'
+          lex['freshness_scope'] = 'Exact target IDs checked against all canonical Urdu A1 and A2 new_lexical_targets before B1 canonical write.'
+          lexp.write_text(json.dumps(lex, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          sp = root / 'reading/STATUS.json'
+          s = json.loads(sp.read_text(encoding='utf-8'))
+          s['current']['canonical_passages'] = 846
+          s['current']['remaining_generation_passages'] = 234
+          s['current']['active_language'] = 'urdu'
+          s['current']['active_level'] = 'B1'
+          u = s['languages']['urdu']
+          u['generation_state'] = 'B1_IN_PROGRESS'
+          u['canonical_passages'] = 126
+          u['remaining_generation_passages'] = 234
+          u['next_generation_level'] = 'B1'
+          sp.write_text(json.dumps(s, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          cp = root / 'reading/CONTINUATION.json'
+          c = json.loads(cp.read_text(encoding='utf-8'))
+          c['production']['canonical_passages'] = 846
+          cu = c['production']['urdu']
+          cu['state'] = 'B1_GENERATION_IN_PROGRESS'
+          cu['canonical_passages'] = 126
+          cu['next_generation_level'] = 'B1'
+          c['active_frontier']['production'] = {
+              'language': 'urdu',
+              'level': 'B1',
+              'action': 'Continue generation-first production from Urdu B1 Unit 2 / sequence 7 using the canonical roadmap and ten-question contract.'
+          }
+          c['exact_next_actions'] = [
+              'Validate the routed state bundle and live canonical counts.',
+              'Use reading/planning/ACTIVE_GENERATION_PLAN.json to start guarded Urdu B1 Unit 2 generation at sequence 7.',
+              'Keep release/educator verification separate from generation progress.'
+          ]
+          cp.write_text(json.dumps(c, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          pp = root / 'reading/planning/ACTIVE_GENERATION_PLAN.json'
+          p = json.loads(pp.read_text(encoding='utf-8'))
+          p['active_language'] = 'urdu'
+          p['active_level'] = 'B1'
+          p['active_unit'] = 2
+          p['start_sequence'] = 7
+          p['canonical_active_path'] = 'reading/urdu/b1/passages.jsonl'
+          p['existing_active_level_passages'] = 6
+          p['roadmap_lookup'] = '$.levels.B1'
+          p['active_unit_roadmap'] = {
+              'unit': 2,
+              'theme': 'work and workplace choices',
+              'genres': ['profile', 'workplace scenario', 'email']
+          }
+          pp.write_text(json.dumps(p, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          tp = root / 'reading/TASKS.md'
+          t = tp.read_text(encoding='utf-8')
+          t = t.replace('## P1 — active production: Urdu A2', '## P1 — active production: Urdu B1', 1)
+          t = t.replace('Canonical production frontier: **Urdu B1, Unit 1, sequence 1**.', 'Canonical production frontier: **Urdu B1, Unit 2, sequence 7**.', 1)
+          t = t.replace('Read `reading/planning/ACTIVE_GENERATION_PLAN.json` and the exact A2 entry', 'Read `reading/planning/ACTIVE_GENERATION_PLAN.json` and the exact B1 entry', 1)
+          t = t.replace('Generate Urdu A2 in guarded unit or large bounded batches', 'Generate Urdu B1 in guarded unit or large bounded batches', 1)
+          t = t.replace('- Urdu: 120/360 generated; A1-A2 complete, B1 in progress.', '- Urdu: 126/360 generated; A1-A2 complete, B1 in progress.', 1)
+          t = t.replace('- Project: 840/1080 generated.', '- Project: 846/1080 generated.', 1)
+          tp.write_text(t, encoding='utf-8')
+
+          hp = root / 'reading/AGENT_HANDOFF_V2.md'
+          h = hp.read_text(encoding='utf-8')
+          h = h.replace('- Canonical generated total: **840**.', '- Canonical generated total: **846**.', 1)
+          h = h.replace('- Urdu: **120/360**; A1-A2 generation complete and B1 generation in progress.', '- Urdu: **126/360**; A1-A2 generation complete and B1 generation in progress.', 1)
+          h = h.replace('Continue **Urdu B1**, starting from Unit 1 / sequence 1, under:', 'Continue **Urdu B1**, starting from Unit 2 / sequence 7, under:', 1)
+          h = h.replace('B1 Unit 1 uses the roadmap theme **education and learning** with `article`, `student narrative`, and `advice` genres.', 'B1 Unit 2 uses the roadmap theme **work and workplace choices** with `profile`, `workplace scenario`, and `email` genres.', 1)
+          h = h.replace('resume guarded generation at **Urdu B1 Unit 1 / sequence 1** using the B1 Unit 1 roadmap theme `education and learning`.', 'resume guarded generation at **Urdu B1 Unit 2 / sequence 7** using the B1 Unit 2 roadmap theme `work and workplace choices`.', 1)
+          hp.write_text(h, encoding='utf-8')
+
+          reconcile = {
+              'schema_version': 1,
+              'project_id': 'LANG-A1C2',
+              'date': '2026-08-24',
+              'status': 'PASS',
+              'canonical_urdu_b1_passages': 6,
+              'project_canonical_passages': 846,
+              'urdu_canonical_passages': 126,
+              'next_frontier': {'language': 'urdu', 'level': 'B1', 'unit': 2, 'sequence': 7},
+              'release_promotion': False,
+          }
+          (root / 'reading/audit/urdu_b1_u01_state_reconcile_2026-08-24.json').write_text(
+              json.dumps(reconcile, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+          )
           PY
-      - run: python reading/tools/refresh_state_manifest.py
-      - run: python reading/tools/validate_continuation_state.py
+
+      - name: Refresh and validate live state
+        shell: bash
+        run: |
+          set -euo pipefail
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+
       - name: Commit canonical B1 unit and state
         shell: bash
         run: |
+          set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/urdu/b1/passages.jsonl reading/audit/urdu_b1_u01_generation_candidate reading/audit/urdu_b1_u01_generation_validation_2026-08-24.json reading/audit/urdu_b1_u01_promotion_2026-08-24.json reading/audit/urdu_b1_u01_state_reconcile_2026-08-24.json reading/audit/urdu_b1_u01_lexical_sense_check_2026-08-24.json reading/STATUS.json reading/CONTINUATION.json reading/planning/ACTIVE_GENERATION_PLAN.json reading/TASKS.md reading/AGENT_HANDOFF_V2.md reading/STATE_MANIFEST.json
+          git add reading/urdu/b1/passages.jsonl \
+                  reading/audit/urdu_b1_u01_generation_candidate \
+                  reading/audit/urdu_b1_u01_generation_validation_2026-08-24.json \
+                  reading/audit/urdu_b1_u01_promotion_2026-08-24.json \
+                  reading/audit/urdu_b1_u01_state_reconcile_2026-08-24.json \
+                  reading/audit/urdu_b1_u01_lexical_sense_check_2026-08-24.json \
+                  reading/STATUS.json reading/CONTINUATION.json \
+                  reading/planning/ACTIVE_GENERATION_PLAN.json \
+                  reading/TASKS.md reading/AGENT_HANDOFF_V2.md reading/STATE_MANIFEST.json
           git commit -m 'Add Urdu B1 Unit 1 and advance to Unit 2'
+          git pull --rebase origin main
           git push
