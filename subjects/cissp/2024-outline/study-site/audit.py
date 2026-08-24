@@ -14,6 +14,7 @@ cover_raw=(ROOT/'coverage-detail.js').read_text(encoding='utf-8').strip(); marke
 assert cover_raw.startswith('window.CISSP_COVERAGE=') and marker in cover_raw and cover_raw.endswith(';'), 'coverage-detail.js wrapper invalid'
 coverage=json.loads(cover_raw[len('window.CISSP_COVERAGE='):cover_raw.index(marker)])
 ai=json.loads(cover_raw[cover_raw.index(marker)+len(marker):-1])
+release=json.loads((ROOT/'RELEASE_STATUS.json').read_text(encoding='utf-8'))
 errors=[]
 def check(cond,msg):
     if not cond: errors.append(msg)
@@ -48,6 +49,11 @@ check(len(data['questions'])==56,'Runtime questions != 56')
 check(sources==19,'Source count != 19')
 check(subtopics==344,'Subtopic check count != 344')
 check(ai_areas==33,'AI coverage area count != 33')
+for d in range(1,9):
+    check(sum(q['domain_num']==d for q in data['questions'])==7,f'D{d} scenario count != 7')
+    check(sum(h['domain_num']==d and h['id'].startswith('PX-') for h in data['high'])==4,f'D{d} precision-card count != 4')
+    check(sum(h['domain_num']==d and h['id'].startswith('AI-') for h in data['high'])==1,f'D{d} AI-card count != 1')
+check(meta['meta'].get('version')=='1.2.0','Metadata version drift')
 check(meta['meta'].get('objective_count')==len(ids),'Metadata objective count drift')
 check(meta['meta'].get('subtopic_checks')==subtopics,'Metadata subtopic count drift')
 check(meta['meta'].get('ai_coverage_areas')==ai_areas,'Metadata AI coverage count drift')
@@ -55,13 +61,18 @@ check(meta['meta'].get('card_count')==computed_cards,'Metadata card count drift'
 check(meta['meta'].get('question_count')==len(data['questions']),'Metadata question count drift')
 check(meta['meta'].get('source_count')==sources,'Metadata source count drift')
 check(meta['meta'].get('domain_weight_total')==sum(d['weight'] for d in data['domains']),'Metadata weight total drift')
+rs=release.get('scope',{})
+check(release.get('project_id')=='CISSP-ATLAS' and release.get('release')=='1.2.0' and release.get('status')=='READY_FOR_STUDY','Release status identity/version/state drift')
+check(rs.get('domains')==8 and rs.get('numbered_objectives')==62 and rs.get('subtopic_checks')==subtopics and rs.get('ai_coverage_areas')==ai_areas and rs.get('layered_cards')==computed_cards and rs.get('original_scenario_questions')==len(data['questions']) and rs.get('sources')==sources and rs.get('official_weight_total_percent')==100,'Release scope drift')
+check((ROOT/'TOMORROW_START.md').exists() and 'Run the 16-question diagnostic once' in (ROOT/'TOMORROW_START.md').read_text(encoding='utf-8'),'Tomorrow-start guide missing or incomplete')
 html=(ROOT/'index.html').read_text(encoding='utf-8')
-required=['data-meta.js']+[f'data-d{i}.js' for i in range(1,9)]+['data-ai.js','data-precision.js','coverage-detail.js','app.js','enhancements.js','styles.css','mobile-fix.css','enhancements.css','id="today"','id="learn"','id="practice"','id="blueprint"','id="progress"','id="sources"','<option>56</option>']
-check(all(x in html for x in required),'HTML shell/assets incomplete')
+required=['data-meta.js']+[f'data-d{i}.js' for i in range(1,9)]+['data-ai.js','data-precision.js','coverage-detail.js','app.js','enhancements.js','styles.css','mobile-fix.css','enhancements.css','id="today"','id="learn"','id="practice"','id="blueprint"','id="progress"','id="sources"','<option>56</option>','Mixed domains','RELEASE v1.2']
+check(all(x in html for x in required),'HTML shell/assets/release labels incomplete')
+check('Weighted mixed domains' not in html,'Practice label falsely claims weighted sampling')
 app=(ROOT/'app.js').read_text(encoding='utf-8'); enh=(ROOT/'enhancements.js').read_text(encoding='utf-8')
 check('CISSP_CHUNKS.flatMap' in app and 'D.cards=' in app and 'layersFor' in app,'Runtime assembly missing')
-check('diagnosticSet' in enh and 'decorateBlueprint' in enh and 'cissp_atlas_diagnostic_v1' in enh,'Enhancement workflow incomplete')
+check('diagnosticSet' in enh and 'decorateBlueprint' in enh and 'cissp_atlas_diagnostic_v1' in enh and 'addSubtopicSearch' in enh,'Enhancement workflow incomplete')
 if errors:
     print('FAIL'); [print('-',e) for e in errors]; sys.exit(1)
 print('PASS')
-print(f"domains=8 objectives={len(ids)} subtopic_checks={subtopics} ai_areas={ai_areas} cards={computed_cards} questions={len(data['questions'])} sources={sources} weights=100%")
+print(f"release=1.2.0 status=READY_FOR_STUDY domains=8 objectives={len(ids)} subtopic_checks={subtopics} ai_areas={ai_areas} cards={computed_cards} questions={len(data['questions'])} sources={sources} weights=100%")
