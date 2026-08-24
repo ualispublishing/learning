@@ -1,8 +1,8 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "reviewed_on": "2026-08-24",
   "batch": "001",
-  "status": "CANDIDATE_PRECHECK_PASS_NOT_YET_RELEASED",
+  "status": "RELEASED_V1_3_0",
   "records": 24,
   "formats": {"mcq": 23, "bellringer": 1},
   "difficulty_distribution": {"F": 4, "E": 15, "S": 4, "B": 1},
@@ -14,9 +14,10 @@
     "unknown_subtopic_labels": 0,
     "unknown_source_ids": 0,
     "duplicate_structural_fingerprints": 0,
-    "similarity_warning_threshold_matches_against_released_stems": 0,
+    "similarity_warning_threshold_matches_against_preexisting_bank": 0,
     "similarity_warning_threshold_matches_within_batch": 0,
-    "external_question_seeds_used": 0
+    "external_question_seeds_used": 0,
+    "answer_key_reversals_after_review": 0
   },
   "similarity_thresholds": {
     "sequence_warning": 0.82,
@@ -24,17 +25,19 @@
     "token_3gram_jaccard_warning": 0.60,
     "token_3gram_jaccard_fail": 0.72
   },
+  "release_integration": {
+    "manifest": "question-bank/RELEASED_BATCHES.json",
+    "runtime_loader": "bootstrap.js",
+    "difficulty_filter": true,
+    "confidence_capture": true,
+    "option_rationales": true,
+    "bellringer_ui": true,
+    "bellringer_label": "NON-EXAM-REPRESENTATIVE INTEGRATIVE DRILL"
+  },
   "semantic_notes": [
     "The batch was authored from audited public CISSP objectives/subtopics and registered primary/supporting standards, not from exam dumps or commercial question wording.",
     "The majority of the batch is Exam-calibrated by design so expansion corrects the Foundation+-heavy baseline.",
-    "BR-001 is explicitly a non-exam-representative integrative drill and should not be presented as an imitation of a live CISSP item.",
-    "Candidate status is deliberately separate from the released 56-question bank. Promotion requires the repository quality gate and release integration checks to remain clean."
-  ],
-  "promotion_requirements": [
-    "python question-bank/quality_gate.py returns PASS against the full released question text and all candidate files",
-    "all MCQ answer keys and all four option rationales remain semantically reviewed",
-    "difficulty distribution and metadata are recomputed after promotion",
-    "bellringer UI labels the case NON-EXAM-REPRESENTATIVE INTEGRATIVE DRILL",
-    "audit.py and JavaScript/static-site checks pass after any live-bank integration"
+    "BR-001 is explicitly a non-exam-representative integrative drill and is presented separately from standard MCQs.",
+    "The historical candidates/ file paths are now immutable released inputs through RELEASED_BATCHES.json; future candidate gating excludes those files from the unreleased set."
   ]
 }
