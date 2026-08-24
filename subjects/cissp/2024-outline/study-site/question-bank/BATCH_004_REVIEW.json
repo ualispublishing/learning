@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-08-24",
+  "batch": "004",
+  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "records": 16,
+  "formats": {"mcq": 16, "bellringer": 0},
+  "difficulty_distribution": {"F": 0, "E": 12, "S": 4, "B": 0},
+  "primary_domain_distribution": {"1": 5, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 5, "8": 1},
+  "planner_basis": {
+    "tool": "coverage_report.py",
+    "objective_minimum_model": {"F": 1, "E": 4, "S": 1},
+    "zero_exposure_objectives_before_batch": ["1.2", "1.12", "7.5", "7.7", "7.14"],
+    "zero_exposure_objectives_after_batch_if_included_in_planning": [],
+    "all_62_objectives_have_at_least_one_standard_mcq_in_planning_state": true,
+    "note": "This is exposure coverage, not mastery depth or release status. The batch remains unreleased."
+  },
+  "batch_concentration": {
+    "max_primary_domain_records": 5,
+    "max_primary_domain_share": 0.3125,
+    "quality_gate_limit": 0.35,
+    "within_limit": true
+  },
+  "authoring_review": {
+    "semantic_reviewed_records": 16,
+    "four_option_rationales_present": 16,
+    "external_question_seeds_used": 0,
+    "foundation_filler_records": 0,
+    "exam_or_stretch_records": 16,
+    "unknown_source_ids_in_manual_precheck": 0,
+    "unknown_registered_subtopic_labels_in_manual_precheck": 0,
+    "duplicate_candidate_ids_in_batch": 0
+  },
+  "focus": [
+    "Repair the last five objectives with zero standard-question exposure in the released-plus-candidate planning state.",
+    "Add exam-calibrated and stretch application for core security properties, awareness effectiveness, resource/media protection, preventive/detective operations, and physical-security operations.",
+    "Add targeted depth to policy hierarchy, facility evidence storage, third-party assessment strategy, intangible asset lifecycle, session lifecycle, secure collaboration, and memory-safe coding.",
+    "Avoid concentrating more than 35% of standard items in one primary domain even when raw objective deficit ranking favors a narrower batch."
+  ],
+  "gate_state": {
+    "quality_gate_required": true,
+    "quality_gate_execution_observed_in_this_session": false,
+    "promotion_allowed": false,
+    "reason": "Batch 004 is semantically reviewed and manually schema-prechecked, but promotion still requires an observed automated originality/duplicate gate across the released bank and all unreleased candidates."
+  },
+  "promotion_requirements": [
+    "python question-bank/quality_gate.py completes without FAIL",
+    "every similarity WARN is manually reviewed and resolved before promotion",
+    "python audit.py remains clean after release integration",
+    "semantic audit manifest is expanded if Batch 004 is promoted",
+    "release metadata/counts/difficulty distribution are recomputed",
+    "runtime and static-site checks remain clean"
+  ]
+}
