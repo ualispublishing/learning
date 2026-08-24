@@ -1,0 +1,85 @@
+name: Integrate vetted Urdu A2 Unit 3
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'reading/staging/urdu_a2_u03_p*.jsonl.gz'
+      - 'reading/tools/integrate_urdu_a2_u03.py'
+      - '.github/workflows/run-urdu-a2-u03-integration.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lang-a1c2-urdu-a2-u03-main
+  cancel-in-progress: false
+
+jobs:
+  integrate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Synchronize to staging head
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git reset --hard origin/main
+
+      - name: Apply reviewed Unit 3 transaction
+        shell: bash
+        run: |
+          set -euo pipefail
+          python reading/tools/integrate_urdu_a2_u03.py
+          python reading/tools/extract_active_generation_plan.py
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+          git diff --check
+
+      - name: Commit without overwriting concurrent LANG-A1C2 work
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          BASE_HEAD="$(git rev-parse HEAD)"
+          git add reading/urdu/a2/passages.jsonl \
+            reading/audit/urdu_a2_u03_lexical_sense_check_2026-08-24.json \
+            reading/audit/urdu_a2_u03_quality_pass_2026-08-24.json \
+            reading/STATUS.json reading/CONTINUATION.json reading/TASKS.md \
+            reading/AGENT_HANDOFF_V2.md reading/planning/ACTIVE_GENERATION_PLAN.json \
+            reading/STATE_MANIFEST.json
+          git rm -f --ignore-unmatch \
+            reading/staging/urdu_a2_u03_p01.jsonl.gz \
+            reading/staging/urdu_a2_u03_p02.jsonl.gz \
+            reading/staging/urdu_a2_u03_p03.jsonl.gz \
+            reading/staging/urdu_a2_u03_p04.jsonl.gz \
+            reading/staging/urdu_a2_u03_p05.jsonl.gz \
+            reading/staging/urdu_a2_u03_p06.jsonl.gz \
+            reading/tools/integrate_urdu_a2_u03.py \
+            .github/workflows/run-urdu-a2-u03-integration.yml
+          git commit -m 'Integrate vetted Urdu A2 Unit 3 and advance to Unit 4 [skip ci]'
+          git fetch origin main
+          if [ "$(git rev-parse origin/main)" != "$BASE_HEAD" ]; then
+            CHANGED="$(git diff --name-only "$BASE_HEAD"..origin/main || true)"
+            printf '%s\n' "$CHANGED"
+            if printf '%s\n' "$CHANGED" | grep -Eq '^(reading/|PROJECT_TRACKS\.json$)'; then
+              echo 'LANG-A1C2 or project routing changed concurrently; refusing to overwrite it.'
+              exit 1
+            fi
+            git rebase origin/main
+            python reading/tools/extract_active_generation_plan.py
+            python reading/tools/refresh_state_manifest.py
+            python reading/tools/validate_continuation_state.py
+            git add reading/planning/ACTIVE_GENERATION_PLAN.json reading/STATE_MANIFEST.json
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+          fi
+          git push origin HEAD:main
