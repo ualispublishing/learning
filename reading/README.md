@@ -1,47 +1,82 @@
-# Graded Reading Curriculum
+# Graded Reading Curriculum — LANG-A1C2
 
-This directory is the source of truth for the Arabic, French, and Urdu A1–C2 graded-reading curriculum.
+This directory is the source of truth for the Arabic, French, and Urdu A1-C2 graded-reading project.
 
-## Current operating state — 2026-08-16
+## Scope
 
-- **Arabic:** 360/360 passages, formally approved after fresh Pass 12.
-- **French:** active; 6 A1 calibration passages exist, 354 passages remain across A1–C2.
-- **Urdu:** queued; 6 A1 calibration passages exist, 354 passages remain across A1–C2.
+`LANG-A1C2` means the graded-reading curriculum under `reading/` only. It is separate from:
 
-Do not restart Arabic review or French/Urdu calibration from old checklist text. Read `STATUS.json` and `AGENT_HANDOFF.md` first.
+- the language-workbook project under `completed/languages/workbooks/v1.0/`, `audit/language-workbooks/v1.0/`, and `curation/language-workbooks/v1.0/`;
+- the separate language-study/progress track under `progress/`.
 
-## Read order
+`reading/AGENT_HANDOFF.md` is legacy history and must not drive current work.
 
-1. `STATUS.json` — current language, counts, and next action.
-2. `AGENT_HANDOFF.md` — concise continuity/throughput rules.
-3. `planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md` — production order.
-4. `planning/TEN_QUESTION_STANDARD.md` — ten-question contract.
-5. `schema/passage.schema.json` — authoritative schema/type enum.
-6. `../docs/READING_PASSAGE_STANDARD.md` — durable quality standard.
-7. `ROADMAP.md` — curriculum architecture.
-8. `TASKS.md` — active operational queue.
-9. `planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md` — final-audit batching/freshness rules.
+## Start / resume order
 
-Current-state precedence:
+1. `CONTINUATION.json` — compact authoritative live resume state and scope guard.
+2. Verify the live canonical JSONL for any language/level you will touch.
+3. `RELEASE_STATUS.json` — educator/publication readiness only.
+4. `STATUS.json` — production counts and frontier only.
+5. `AGENT_HANDOFF_V2.md` — human operating contract.
+6. `planning/ACTIVE_GENERATION_PLAN.json` — exact current generation target.
+7. `TASKS.md` and `VERIFICATION_TASKS.md` — active queues only.
+8. `planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md` and `planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md`.
+9. `planning/TEN_QUESTION_STANDARD.md` and `schema/passage.schema.json`.
+10. durable standards and `ROADMAP.md`.
 
-**live canonical JSONL > fresh audit artifacts > STATUS > current handoff/policy > Ten-Question Standard + schema > durable standards/roadmap > historical calibration instructions/artifacts.**
+Truth precedence:
 
-## Target scale
+**live canonical JSONL > fresh hash-bound audit evidence > CONTINUATION > RELEASE_STATUS for release claims > STATUS for production state > handoff/active queues > durable policy/schema/roadmap > historical artifacts.**
 
-- Arabic: 360 passages — **complete/approved**.
-- French: 360 passages — 6 currently exist.
-- Urdu: 360 passages — 6 currently exist.
-- total target: 1,080 passages.
+If those disagree, fail closed and reconcile the live files/evidence first.
 
-Each language uses 60 passages at each CEFR level A1–C2; each level uses 10 units × 6 passages.
+## Current operating state — 2026-08-23
 
-## Core design
+Production target: 1,080 passages total, 360 per language, 60 per CEFR level A1-C2.
 
-The curriculum combines graded reading, contextual vocabulary growth, infer → verify → transfer learning, spaced reinforcement, interleaving, grammar automaticity, fluency with comprehension gates, and progressively deeper inference/discourse/synthesis.
+- **Arabic:** 360/360 generated; A1-C2 generation complete. Educator/publication release is not currently cleared by `RELEASE_STATUS.json`.
+- **French:** 360/360 generated; A1-C2 generation complete. Release is `REOPEN_REQUIRED`; the latest post-repair deterministic Gate A remains failed pending substantive evidence revalidation.
+- **Urdu:** 60/360 generated; A1 generation complete, A2 is next. The exact A1 integrity audit reports 60 passages, 600 questions, 600 answers, 0 hard errors, and 0 warnings for the pinned corpus, but explicitly does **not** promote quality/release status.
+- **Project generated:** 780/1080 passages.
+
+Current production frontier: **Urdu A2, Unit 1, sequence 1**.
+
+Run `python reading/tools/validate_continuation_state.py` before trusting stored counts/frontiers in a fresh session.
+
+## Core architecture
+
+Each language uses 60 passages per CEFR level; each level uses 10 units x 6 passages. The six-passage unit cycle is:
+
+1. introduce;
+2. reinforce;
+3. interleave;
+4. transfer;
+5. integrate/checkpoint;
+6. fluency/checkpoint.
 
 Canonical data is JSONL at `reading/<language>/<level>/passages.jsonl`. App-specific exports are derived outputs.
 
-## Existing lexical inventories
+Canonical passages use 10 questions with 10 linked answers under `planning/TEN_QUESTION_STANDARD.md` unless a documented pedagogical exception is necessary.
+
+## Production model
+
+Follow `planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md`:
+
+- write natural, high-quality language from the start;
+- generate in guarded unit or large bounded batches rather than one workflow per passage;
+- fix obvious severe defects immediately;
+- defer repeated formal release-audit bookkeeping to designated final review phases;
+- keep generation state separate from educator/publication release state.
+
+Arabic, French, and Urdu passages must be independently natural and pedagogically designed rather than translations of one another.
+
+## Verification / release model
+
+Use `planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md`, `planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md`, and `planning/HIGHEST_ASSURANCE_RELEASE_PROFILE.md` for final verification.
+
+No agent should claim literal 100% correctness. Release claims require fresh evidence bound to the reviewed canonical corpus, with no known unresolved defects under the applicable assurance profile.
+
+## Existing lexical foundations
 
 Validated root CSVs are lexical foundations, not CEFR labels:
 
@@ -49,36 +84,8 @@ Validated root CSVs are lexical foundations, not CEFR labels:
 - French: `../french_top1000.csv`, `../french_top3000.csv`;
 - Urdu: `../urdu_top1000.csv`, `../urdu_top3000.csv`.
 
-Do not mutate validated root CSVs merely to simplify passage production. Build derived ledgers/overrides where necessary. Frequency rank is not a CEFR label, and a 3,000-item base is not a complete C2 lexicon.
+Do not mutate validated root CSVs merely to simplify passage production. Use derived ledgers/overrides where necessary. Frequency rank is not itself a CEFR label.
 
-## Question / rendering contract
+## Handoff hygiene
 
-Canonical passages use 10 questions with 10 linked answers under `planning/TEN_QUESTION_STANDARD.md`.
-
-Reader-facing order:
-
-1. title;
-2. passage;
-3. all questions;
-4. answers only after submission/reveal.
-
-The schema is authoritative for allowed question type names. Older prose standards that predate the expanded ten-question taxonomy are historical where they conflict with the active Ten-Question Standard/schema.
-
-## Production throughput
-
-During generation, use **large guarded unit/batch scopes**, not one workflow per passage. Rerun only structural/source/linkage checks affected by the write. Reserve the full expensive multi-pass final review for the completed generated corpus.
-
-At final review, use `planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md`: sequential fresh audit evidence, explicit adjudication where heuristics surface candidates, and Pass 12 last.
-
-## Arabic final evidence
-
-Arabic Pass 12 directly revalidated 360 unique passages, valid level sequences, word bands, stored word counts, question-answer linkage, local question-target declarations, Arabic-script reader content, and P6 zero-new-target policy, with zero hard regressions and zero approval blockers.
-
-Final artifact:
-`audit/final_arabic_pass12_adversarial_gate_falsification.json`
-
-Arabic coverage remains unmeasured; existing zeros are placeholders and were not fabricated into a percentage for approval.
-
-## Immediate production frontier
-
-Continue **French A1 from sequence 7**, preserving the six existing calibration passages. French content must be independently natural and pedagogically designed; do not translate the Arabic corpus passage-by-passage.
+Live state files must remain compact. Do not append dated historical timelines or multiple contradictory `IMMEDIATE NEXT` sections. Completed work belongs in Git history and `reading/audit/`; live files should preserve only verified current state, blockers, and exact next actions.
