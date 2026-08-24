@@ -10,6 +10,15 @@ on:
       - 'scripts/finalize_language_workbook_pronunciation.py'
       - 'scripts/build_language_workbooks_v1_1_pronunciation.py'
       - '.github/workflows/build-language-workbooks-v1-1-pronunciation.yml'
+  pull_request:
+    branches:
+      - release/language-workbooks-v1-final
+    paths:
+      - 'audit/language-workbooks/v1.1-pronunciation/row_by_row/**'
+      - 'audit/language-workbooks/v1.1-pronunciation/candidates/**'
+      - 'scripts/finalize_language_workbook_pronunciation.py'
+      - 'scripts/build_language_workbooks_v1_1_pronunciation.py'
+      - '.github/workflows/build-language-workbooks-v1-1-pronunciation.yml'
   workflow_dispatch:
 
 permissions:
@@ -24,13 +33,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ github.ref_name }}
+          ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Sync branch
         shell: bash
         run: |
           set -euo pipefail
-          branch="${GITHUB_REF_NAME}"
+          branch="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
           git fetch origin "$branch"
           git checkout "$branch"
           git pull --ff-only origin "$branch"
@@ -146,7 +155,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          branch="${GITHUB_REF_NAME}"
+          branch="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add \
