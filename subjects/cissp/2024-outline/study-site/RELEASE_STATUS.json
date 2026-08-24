@@ -28,10 +28,17 @@
     "pages_workflow": ".github/workflows/cissp-pages.yml",
     "semantic_report": "subjects/cissp/2024-outline/study-site/PRECISION_AUDIT.md"
   },
+  "deployment": {
+    "expected_pages_url": "https://ualispublishing.github.io/learning/",
+    "workflow_ready": true,
+    "public_endpoint_observed_live_in_this_session": false,
+    "activation_fallback": "If GitHub Pages has never been enabled for the repository, set Settings > Pages > Build and deployment > Source to GitHub Actions once; the committed workflow then deploys automatically."
+  },
   "precision_boundary": "READY_FOR_STUDY means the public ISC2 scope, mapped subtopics, curated precision distinctions, original scenario bank, metadata, and site assets are release-organized and audited. It does not mean memorizing this site guarantees a CISSP pass or that any public resource can reproduce the live adaptive exam bank.",
   "known_non_blocking_limitations": [
     "Browser-local progress does not sync across devices unless exported manually.",
     "The diagnostic is intentionally a routing signal, not an exam-readiness prediction.",
-    "Blueprint subtopic labels are paraphrased; the ISC2 source remains authoritative for exact wording."
+    "Blueprint subtopic labels are paraphrased; the ISC2 source remains authoritative for exact wording.",
+    "The Pages deployment workflow is committed, but this session could not verify whether the repository's one-time Pages setting was already enabled."
   ]
 }
