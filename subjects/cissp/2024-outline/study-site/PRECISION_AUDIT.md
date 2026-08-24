@@ -77,7 +77,7 @@ In addition to the prior retrieval/spaced-review workflow, v1.3 adds:
 - a progress-state bridge so later flashcard grading does not erase newer confidence/Bellringer history created by the practice layer;
 - current-state Progress/Export behavior and an intentional full reset path.
 
-## Question-bank originality controls
+## Question-bank originality and coverage controls
 
 `question-bank/quality_gate.py` treats the current released bank as permanent comparison corpus. Unreleased candidates must pass:
 
@@ -93,9 +93,18 @@ In addition to the prior retrieval/spaced-review workflow, v1.3 adds:
 
 For candidate sets of at least 16 records, Exam-calibrated items must remain at least 50% and Bellringers may not exceed 10%.
 
-## Batch 002 state
+`question-bank/coverage_report.py` is a separate planning tool. It reports per-objective F/E/S density, explicit enriched-subtopic exposure, remaining difficulty counts toward the 800-record target, and a weighted priority queue so future authoring targets thin areas rather than repeatedly exercising already-dense objectives. The report does not treat missing explicit subtopic tags on the legacy 56 as proof that those concepts have never been tested.
 
-Batch 002 is **not released**. It currently contains 16 semantically reviewed candidates: E12 / S4 / F0 / B0, with exactly two primary-domain scenarios per domain. It is intentionally harder than the released baseline and must remain candidate-only until the repository quality gate is observed clean and any warning is resolved semantically.
+## Pending candidate state
+
+Batches 002 and 003 are **not released**.
+
+- **Batch 002:** 16 semantically reviewed MCQs = E12 / S4 / F0 / B0; exactly two primary-domain scenarios per domain.
+- **Batch 003:** 16 semantically reviewed MCQs = E12 / S4 / F0 / B0; exactly two primary-domain scenarios per domain.
+- Combined pending candidates: **32 records = E24 / S8**.
+- If both eventually promote, the bank becomes **112 records = F41 / E58 / S12 / B1**.
+
+Both batches are intentionally harder than the released baseline and must remain candidate-only until the repository quality gate is observed clean and every similarity warning, if any, is resolved semantically.
 
 ## Accuracy boundary
 
