@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 
 import build_language_workbooks_v1 as base
 import build_language_workbooks_v1_quality as quality
+import language_workbook_pronunciation as pronunciation
 import workbook_release_passes as passes
 
 
@@ -15,9 +16,11 @@ def configure():
     if not (passes.STAGE / "corpus_audit.json").exists():
         raise SystemExit("corpus-audit pass must complete before rendering")
     base.parse_sentences = passes.staged_parse_sentences
-    base.cover = quality.quality_cover
+    base.cover = pronunciation.cover
+    base.foundations_html = pronunciation.foundations_html
     base.sources_html = quality.quality_sources_html
     base.LANGS["urdu"]["zip"] = "internal://ualis/urdu-controlled-conversation-v1"
+    pronunciation.write_qa()
 
 
 def render_language(lang: str):
@@ -26,7 +29,7 @@ def render_language(lang: str):
     configure()
     selection = json.loads((passes.STAGE / f"{lang}_selection.json").read_text(encoding="utf-8"))
     quality.QUALITY_META[lang] = selection["quality"]
-    print(f"Rendering approved {lang} corpus...", flush=True)
+    print(f"Rendering approved {lang} corpus with pronunciation foundations...", flush=True)
     qa = base.build_language(lang, base.LANGS[lang])
     if len(qa.get("pdfs", {})) != 14:
         raise SystemExit(f"{lang}: expected 14 PDFs, found {len(qa.get('pdfs', {}))}")
@@ -37,11 +40,13 @@ def render_language(lang: str):
         "sentence_rows": qa["sentence_rows"],
         "target_unique": qa["sentence_target_unique"],
         "english_unique": qa["sentence_english_unique"],
+        "pronunciation_foundations": "PASS",
     }, ensure_ascii=False, indent=2))
 
 
 def finalize():
     configure()
+    pronunciation_qa = pronunciation.audit_payload()
     for lang in ("arabic", "french", "urdu"):
         qa_path = base.AUDIT / f"{lang}_qa.json"
         if not qa_path.exists():
@@ -59,13 +64,19 @@ def finalize():
         "status": "production_candidate",
         "languages": ["arabic", "french", "urdu"],
         "qa_path": "audit/language-workbooks/v1.0",
+        "pronunciation_foundations": {
+            "status": pronunciation_qa["status"],
+            "guide_sha256": pronunciation_qa["guide_sha256"],
+            "scope": pronunciation_qa["scope"],
+        },
         "source_policy": "Natural learner language outranks artificial uniqueness; legitimate homographs are allowed when meaning and grammatical role differ.",
     }
     (base.OUT / "RELEASE_MANIFEST.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     quality.post_process()
-    print("Aggregated three rendered workbooks and applied corpus-quality gates.")
+    pronunciation.write_qa()
+    print("Aggregated three rendered workbooks, applied corpus-quality gates, and recorded pronunciation QA.")
 
 
 def main():
