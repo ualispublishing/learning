@@ -1,0 +1,25 @@
+name: Validate LANG-A1C2 continuation state
+
+on:
+  push:
+    paths:
+      - 'reading/**'
+      - '.github/workflows/validate-language-a1c2-continuation.yml'
+  pull_request:
+    paths:
+      - 'reading/**'
+      - '.github/workflows/validate-language-a1c2-continuation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate live continuation state
+        run: python reading/tools/validate_continuation_state.py
