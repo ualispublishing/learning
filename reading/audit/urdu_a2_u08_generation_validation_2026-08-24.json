@@ -5,7 +5,8 @@
   "cefr": "A2",
   "unit": 8,
   "date": "2026-08-24",
-  "artifact": "reading/audit/urdu_a2_u08_generation_candidate_2026-08-24.jsonl",
+  "artifact": "reading/audit/urdu_a2_u08_generation_candidate/manifest.json",
+  "staged_record_directory": "reading/audit/urdu_a2_u08_generation_candidate/",
   "canonicalized": false,
   "release_promotion": false,
   "checks": {
@@ -22,8 +23,9 @@
     "production_release_separation": {"all_quality_statuses": "draft", "formal_release_promoted": false, "status": "PASS"}
   },
   "notes": [
-    "This validates the bounded generation candidate, not the live canonical JSONL.",
-    "The canonical Urdu A2 frontier remains sequence 43 until this candidate is safely appended and the live state bundle is refreshed.",
-    "The connected GitHub write interface available in this session supports complete-file replacement rather than append/patch for the existing large canonical JSONL, so this candidate is staged fail-closed instead of risking corruption of reading/urdu/a2/passages.jsonl."
+    "This validates the bounded staged generation candidate, not the live canonical JSONL.",
+    "All six complete candidate passage records are persisted individually under the staged_record_directory and indexed by manifest.json.",
+    "The canonical Urdu A2 frontier remains sequence 43 until these records are safely appended and the live state bundle is refreshed.",
+    "The connected GitHub write interface available in this session supports complete-file replacement rather than append/patch for the existing large canonical JSONL, so the batch is staged fail-closed instead of risking corruption of reading/urdu/a2/passages.jsonl."
   ]
 }
