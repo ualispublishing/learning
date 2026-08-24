@@ -91,20 +91,25 @@ In addition to the prior retrieval/spaced-review workflow, v1.3 adds:
 - four option rationales for MCQs;
 - Bellringer structure/rubric rules.
 
-For candidate sets of at least 16 records, Exam-calibrated items must remain at least 50% and Bellringers may not exceed 10%.
+For each candidate batch with at least 16 records, Exam-calibrated items must remain at least 50%, Bellringers may not exceed 10%, and no single primary domain may exceed **35% of the standard MCQs in that batch**. The domain cap prevents a raw coverage deficit from creating a narrowly repetitive training tranche.
 
 `question-bank/coverage_report.py` is a separate planning tool. It reports per-objective F/E/S density, explicit enriched-subtopic exposure, remaining difficulty counts toward the 800-record target, and a weighted priority queue so future authoring targets thin areas rather than repeatedly exercising already-dense objectives. The report does not treat missing explicit subtopic tags on the legacy 56 as proof that those concepts have never been tested.
 
 ## Pending candidate state
 
-Batches 002 and 003 are **not released**.
+Batches 002, 003, and 004 are **not released**.
 
 - **Batch 002:** 16 semantically reviewed MCQs = E12 / S4 / F0 / B0; exactly two primary-domain scenarios per domain.
 - **Batch 003:** 16 semantically reviewed MCQs = E12 / S4 / F0 / B0; exactly two primary-domain scenarios per domain.
-- Combined pending candidates: **32 records = E24 / S8**.
-- If both eventually promote, the bank becomes **112 records = F41 / E58 / S12 / B1**.
+- **Batch 004:** 16 semantically reviewed MCQs = E12 / S4 / F0 / B0; planner-driven primary distribution D1=5, D2=1, D3=1, D4=1, D5=1, D6=1, D7=5, D8=1, so the maximum single-domain share is 31.25%.
+- Combined pending candidates: **48 records = E36 / S12**.
+- If all three eventually promote, the bank becomes **128 records = F41 / E70 / S16 / B1**.
 
-Both batches are intentionally harder than the released baseline and must remain candidate-only until the repository quality gate is observed clean and every similarity warning, if any, is resolved semantically.
+Batch 004 deliberately targeted the final five objectives with zero standard-MCQ exposure in the released-plus-candidate planning state: **1.2, 1.12, 7.5, 7.7, and 7.14**. With Batch 004 included, the planning corpus now has at least one standard MCQ mapped to **62/62 objectives**.
+
+That 62/62 figure is a planning/exposure milestone only. Batch 004 is unreleased, the released bank remains 80 records, one standard question is not sufficient instructional depth, and mapped question exposure is not evidence of learner mastery.
+
+All three pending batches remain candidate-only until the repository quality gate is observed clean and every similarity warning, if any, is resolved semantically.
 
 ## Accuracy boundary
 
