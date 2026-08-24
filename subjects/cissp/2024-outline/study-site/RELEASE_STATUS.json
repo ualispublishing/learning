@@ -1,0 +1,37 @@
+{
+  "project_id": "CISSP-ATLAS",
+  "release": "1.2.0",
+  "status": "READY_FOR_STUDY",
+  "prepared_on": "2026-08-23",
+  "target_use_date": "2026-08-24",
+  "scope": {
+    "domains": 8,
+    "numbered_objectives": 62,
+    "subtopic_checks": 344,
+    "ai_coverage_areas": 33,
+    "layered_cards": 140,
+    "original_scenario_questions": 56,
+    "sources": 19,
+    "official_weight_total_percent": 100
+  },
+  "workflow": [
+    "Run the 16-question diagnostic once if no baseline exists.",
+    "Study the lowest diagnostic domain with retrieval-before-reveal cards.",
+    "Grade retrieval honestly and let due review drive repetition.",
+    "Run a mixed scenario set and explain why the distractors lose.",
+    "Repair weak objectives, then interleave with stronger domains.",
+    "Re-test later rather than immediately repeating the same set."
+  ],
+  "validation": {
+    "deterministic_audit": "subjects/cissp/2024-outline/study-site/audit.py",
+    "ci_workflow": ".github/workflows/cissp-study-site-audit.yml",
+    "pages_workflow": ".github/workflows/cissp-pages.yml",
+    "semantic_report": "subjects/cissp/2024-outline/study-site/PRECISION_AUDIT.md"
+  },
+  "precision_boundary": "READY_FOR_STUDY means the public ISC2 scope, mapped subtopics, curated precision distinctions, original scenario bank, metadata, and site assets are release-organized and audited. It does not mean memorizing this site guarantees a CISSP pass or that any public resource can reproduce the live adaptive exam bank.",
+  "known_non_blocking_limitations": [
+    "Browser-local progress does not sync across devices unless exported manually.",
+    "The diagnostic is intentionally a routing signal, not an exam-readiness prediction.",
+    "Blueprint subtopic labels are paraphrased; the ISC2 source remains authoritative for exact wording."
+  ]
+}
