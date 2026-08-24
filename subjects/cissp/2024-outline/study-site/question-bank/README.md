@@ -8,13 +8,12 @@ This directory governs the original CISSP Atlas practice bank from candidate aut
 - Released difficulty: **F41 / E34 / S4 / B1**.
 - All **79 released standard questions** provide four-option teaching rationales.
 - Batch 001: released in v1.3 through `RELEASED_BATCHES.json`.
-- Batch 002: **candidate-only**, 16 MCQs = E12/S4, pending automated repository gate.
-- Batch 003: **candidate-only**, 16 MCQs = E12/S4, pending automated repository gate.
-- Batch 004: **candidate-only**, 16 MCQs = E12/S4, planner-driven and pending automated repository gate.
-- Pending candidate total: **48 records = E36/S12**.
+- Batches 002–006: **candidate-only**, each 16 MCQs = E12/S4, pending automated repository gate.
+- Pending candidate total: **80 records = E60/S20**.
+- If all pending batches eventually promote: **160 bank records = F41 / E94 / S24 / B1**.
 - Long-term target: 800 records at F15% / E60% / S20% / B5%.
 
-With Batch 004 included only for authoring analysis, the released-plus-candidate planning corpus now has at least one standard MCQ mapped to **all 62 numbered objectives**. That is not a release claim and is far below the intended mature depth of at least F1/E4/S1 per objective.
+With Batches 002–006 included only for authoring analysis, the released-plus-candidate planning corpus has at least one standard MCQ mapped to **all 62 numbered objectives**. That is not a release claim and is far below the intended mature depth of at least F1/E4/S1 per objective.
 
 ## Author → review → gate → release
 
@@ -57,7 +56,7 @@ It reports:
 
 The subtopic report deliberately notes a limitation: Q-001..Q-056 predate explicit subtopic tags. Therefore an “unexposed” subtopic label in that report means **not explicitly tagged by enriched records**, not proof that the concept never appears in a legacy question.
 
-Batch 004 used this planner to close the final zero-standard-question objective gaps in the planning state: **1.2, 1.12, 7.5, 7.7, and 7.14**.
+Batch 004 used this planner to close the final zero-standard-question objective gaps in the planning state: **1.2, 1.12, 7.5, 7.7, and 7.14**. Batch 005 then moved into E/S depth, and Batch 006 deliberately rebalanced toward D2/D4/D5/D6/D8 after the prior D1/D7 gap-repair concentration.
 
 ## Per-batch concentration guard
 
@@ -67,7 +66,7 @@ Coverage deficits are not allowed to make an individual study tranche too narrow
 - Bellringers at **≤10%**;
 - no single primary domain above **35% of the standard MCQs** in that batch.
 
-Batch 004 uses D1=5 and D7=5 as its largest primary-domain counts, or 31.25% each, while still repairing the highest-priority gaps.
+Batch 004 uses D1=5 and D7=5 as its largest primary-domain counts, or 31.25% each. Batch 006 is more balanced: its largest primary-domain count is D8=4/16, or 25%.
 
 ## Non-negotiable originality rule
 
