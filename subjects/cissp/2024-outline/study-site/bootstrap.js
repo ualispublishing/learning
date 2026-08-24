@@ -1,5 +1,4 @@
 (async()=>{'use strict';
-const polishCss=document.createElement('link');polishCss.rel='stylesheet';polishCss.href='product-polish.css';document.head.appendChild(polishCss);
 const calibration=window.CISSP_QUESTION_CALIBRATION||{},legacyRationales=window.CISSP_LEGACY_RATIONALES||{};
 for(const chunk of (window.CISSP_CHUNKS||[]))for(const q of (chunk.questions||[])){
   const c=calibration[q.id];if(c){q.difficulty_tier=c.tier;q.difficulty_score=c.score}
