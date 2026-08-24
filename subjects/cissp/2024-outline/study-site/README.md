@@ -55,4 +55,6 @@ python audit.py
 
 ## GitHub Pages
 
-`.github/workflows/cissp-pages.yml` deploys this folder as the repository's Pages artifact after running `audit.py`. The expected repository Pages URL is `https://ualispublishing.github.io/learning/` once GitHub Pages finishes enabling/deploying.
+`.github/workflows/cissp-pages.yml` is the standard audited Pages deployment: it runs `audit.py`, uploads only this static study-site folder, and deploys it with GitHub's Pages actions. The expected project URL is `https://ualispublishing.github.io/learning/`.
+
+If Pages has never been enabled for this repository, GitHub requires a one-time repository setting before the workflow can deploy: **Settings → Pages → Build and deployment → Source → GitHub Actions**. The normal `GITHUB_TOKEN` cannot perform that initial enablement itself. Once enabled, pushes affecting this site trigger the deployment workflow automatically.
