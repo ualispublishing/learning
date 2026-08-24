@@ -33,11 +33,12 @@ jobs:
       - name: Run question originality and duplicate gate
         working-directory: subjects/cissp/2024-outline/study-site
         run: python question-bank/quality_gate.py
-      - name: Generate question-bank coverage plan
+      - name: Generate question-bank coverage and next-batch plans
         working-directory: subjects/cissp/2024-outline/study-site
         run: |
           python question-bank/coverage_report.py --released-only >/tmp/cissp-released-coverage.json
           python question-bank/coverage_report.py --human
+          python question-bank/batch_planner.py --human
       - name: Check JavaScript syntax
         working-directory: subjects/cissp/2024-outline/study-site
         run: |
@@ -66,6 +67,6 @@ jobs:
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
           sleep 1
-          for f in index.html styles.css mobile-fix.css enhancements.css data-meta.js data-d1.js data-d8.js data-ai.js data-precision.js coverage-detail.js data-question-calibration.js legacy-rationales.js bootstrap.js app.js enhancements.js state-ui-bridge.js question-bank/RELEASED_BATCHES.json question-bank/candidates/batch-001-a.jsonl question-bank/candidates/batch-001-b.jsonl question-bank/candidates/batch-001-c.jsonl question-bank/candidates/batch-001-d.jsonl question-bank/candidates/batch-002.jsonl question-bank/candidates/batch-003.jsonl question-bank/candidates/batch-004.jsonl question-bank/candidates/batch-005.jsonl; do
+          for f in index.html styles.css mobile-fix.css enhancements.css data-meta.js data-d1.js data-d8.js data-ai.js data-precision.js coverage-detail.js data-question-calibration.js legacy-rationales.js bootstrap.js app.js enhancements.js state-ui-bridge.js question-bank/RELEASED_BATCHES.json question-bank/candidates/batch-001-a.jsonl question-bank/candidates/batch-001-b.jsonl question-bank/candidates/batch-001-c.jsonl question-bank/candidates/batch-001-d.jsonl question-bank/candidates/batch-002.jsonl question-bank/candidates/batch-003.jsonl question-bank/candidates/batch-004.jsonl question-bank/candidates/batch-005.jsonl question-bank/coverage_report.py question-bank/batch_planner.py; do
             curl --fail --silent --show-error "http://127.0.0.1:8765/$f" >/dev/null
           done
