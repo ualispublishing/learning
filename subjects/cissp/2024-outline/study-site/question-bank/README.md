@@ -6,11 +6,15 @@ This directory governs the original CISSP Atlas practice bank from candidate aut
 
 - Released: **80 records** = 79 standard MCQs + 1 Bellringer.
 - Released difficulty: **F41 / E34 / S4 / B1**.
-- All **79 released standard questions** now provide four-option teaching rationales.
+- All **79 released standard questions** provide four-option teaching rationales.
 - Batch 001: released in v1.3 through `RELEASED_BATCHES.json`.
 - Batch 002: **candidate-only**, 16 MCQs = E12/S4, pending automated repository gate.
 - Batch 003: **candidate-only**, 16 MCQs = E12/S4, pending automated repository gate.
+- Batch 004: **candidate-only**, 16 MCQs = E12/S4, planner-driven and pending automated repository gate.
+- Pending candidate total: **48 records = E36/S12**.
 - Long-term target: 800 records at F15% / E60% / S20% / B5%.
+
+With Batch 004 included only for authoring analysis, the released-plus-candidate planning corpus now has at least one standard MCQ mapped to **all 62 numbered objectives**. That is not a release claim and is far below the intended mature depth of at least F1/E4/S1 per objective.
 
 ## Author → review → gate → release
 
@@ -53,13 +57,25 @@ It reports:
 
 The subtopic report deliberately notes a limitation: Q-001..Q-056 predate explicit subtopic tags. Therefore an “unexposed” subtopic label in that report means **not explicitly tagged by enriched records**, not proof that the concept never appears in a legacy question.
 
+Batch 004 used this planner to close the final zero-standard-question objective gaps in the planning state: **1.2, 1.12, 7.5, 7.7, and 7.14**.
+
+## Per-batch concentration guard
+
+Coverage deficits are not allowed to make an individual study tranche too narrow. For candidate batches with at least 16 records, the automated gate requires:
+
+- Exam-calibrated items at **≥50%** of the batch;
+- Bellringers at **≤10%**;
+- no single primary domain above **35% of the standard MCQs** in that batch.
+
+Batch 004 uses D1=5 and D7=5 as its largest primary-domain counts, or 31.25% each, while still repairing the highest-priority gaps.
+
 ## Non-negotiable originality rule
 
 Questions are authored from the public CISSP scope, registered primary/supporting standards, and audited CISSP Atlas knowledge—not from live-exam recollections, exam dumps, leaked items, or commercial practice-question wording/templates.
 
 Changing names, vendors, numbers, or synonyms does **not** make a question original if the underlying scenario, decision rule, evidence, and misconception path are materially the same.
 
-The gate checks exact normalized text, near-text sequence similarity, token-shingle similarity, structural fingerprints, valid objective/subtopic/source mappings, semantic-review state, difficulty calibration, and required option rationales.
+The gate checks exact normalized text, near-text sequence similarity, token-shingle similarity, structural fingerprints, valid objective/subtopic/source mappings, semantic-review state, difficulty calibration, required option rationales, batch difficulty composition, and batch primary-domain concentration.
 
 ## Difficulty tiers
 
@@ -80,4 +96,4 @@ Do not edit a released batch in place to create new questions. New work receives
 
 v1.3 standard practice records correctness, selected option, confidence before answer, difficulty, objective, and attempt time. High-confidence misses should be treated as high-priority misconceptions. Bellringers are stored separately as self-scored integrative drills.
 
-The original Q-001..Q-056 stems/options/keys remain unchanged, but `legacy-rationales.js` now supplies four reviewed rationales for each question (224 option rationales total). `LEGACY_RATIONALE_AUDIT.json` records that backfill, so all 79 released standard questions now use the same four-option teaching model.
+The original Q-001..Q-056 stems/options/keys remain unchanged, but `legacy-rationales.js` supplies four reviewed rationales for each question (224 option rationales total). `LEGACY_RATIONALE_AUDIT.json` records that backfill, so all 79 released standard questions use the same four-option teaching model.
