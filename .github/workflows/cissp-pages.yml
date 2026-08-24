@@ -42,12 +42,26 @@ jobs:
       - name: Execute interactive browser smoke test
         working-directory: subjects/cissp/2024-outline/study-site
         run: bash browser-smoke.sh 8766
+      - name: Assemble released-only Pages artifact
+        working-directory: subjects/cissp/2024-outline/study-site
+        run: |
+          SITE="$RUNNER_TEMP/cissp-pages"
+          rm -rf "$SITE"
+          mkdir -p "$SITE/question-bank/candidates"
+          cp .nojekyll 404.html index.html "$SITE/"
+          cp styles.css mobile-fix.css enhancements.css product-polish.css workflow-clarity.css "$SITE/"
+          cp data-meta.js data-d{1..8}.js data-ai.js data-precision.js coverage-detail.js data-question-calibration.js legacy-rationales.js keyboard-shortcuts.js bootstrap.js app.js enhancements.js state-ui-bridge.js product-polish.js "$SITE/"
+          cp question-bank/RELEASED_BATCHES.json "$SITE/question-bank/"
+          cp question-bank/candidates/batch-001-{a,b,c,d}.jsonl "$SITE/question-bank/candidates/"
+          test ! -e "$SITE/browser-smoke.html"
+          test ! -e "$SITE/question-bank/candidates/batch-002.jsonl"
+          echo "Released-only artifact assembled at $SITE"
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload CISSP site
         uses: actions/upload-pages-artifact@v4
         with:
-          path: subjects/cissp/2024-outline/study-site
+          path: ${{ runner.temp }}/cissp-pages
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
