@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-08-24",
+  "batch": "003",
+  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "records": 16,
+  "formats": {"mcq": 16, "bellringer": 0},
+  "difficulty_distribution": {"F": 0, "E": 12, "S": 4, "B": 0},
+  "primary_domain_distribution": {"1": 2, "2": 2, "3": 2, "4": 2, "5": 2, "6": 2, "7": 2, "8": 2},
+  "authoring_review": {
+    "semantic_reviewed_records": 16,
+    "four_option_rationales_present": 16,
+    "external_question_seeds_used": 0,
+    "foundation_filler_records": 0,
+    "exam_or_stretch_records": 16,
+    "known_answer_key_conflicts": 0,
+    "known_unknown_objective_mappings": 0,
+    "known_unknown_subtopic_mappings": 0,
+    "known_unknown_source_ids": 0
+  },
+  "coverage_intent": [
+    "Risk transfer and retained accountability",
+    "Privileged personnel role transitions",
+    "Data owner/controller versus processor/custodian accountability",
+    "Persistent DRM usage controls",
+    "Issuing-CA private-key compromise and PKI trust restoration",
+    "Serverless shared responsibility and workload identity",
+    "Jitter/QoS reasoning for real-time traffic",
+    "Physical path diversity and common-mode communications failure",
+    "Contextual ABAC decisions",
+    "Exposed CI/CD service-account credentials",
+    "Synthetic transaction testing",
+    "Third-party audit scope gaps",
+    "UEBA for authenticated behavioral anomalies",
+    "Ransomware recovery after privileged identity compromise",
+    "Transitive dependency exposure and SCA",
+    "Open-source maintainability and exit risk"
+  ],
+  "gate_state": {
+    "quality_gate_required": true,
+    "quality_gate_execution_observed_in_this_session": false,
+    "promotion_allowed": false,
+    "reason": "Candidate content is semantically reviewed but must still pass the repository exact/near-text/structural duplicate gate against every released record and other candidate records. Do not infer a PASS from authoring review alone."
+  },
+  "promotion_requirements": [
+    "python question-bank/quality_gate.py completes without FAIL for the candidate set",
+    "every similarity WARN is manually reviewed and resolved before promotion",
+    "python audit.py remains clean after release integration",
+    "semantic audit manifest is expanded if Batch 003 is promoted",
+    "release metadata/counts/difficulty distribution are recomputed",
+    "runtime and static-site checks remain clean"
+  ]
+}
