@@ -16,6 +16,7 @@ The site remains mapped to the current public ISC2 CISSP exam outline, effective
 - **79 released standard scenario questions.**
 - **1 released Bellringer**, explicitly non-exam-representative.
 - **80 total released question-bank records.**
+- **79/79 released standard questions have four-option teaching rationales.**
 - 20 primary/reference sources.
 - **220 learner-facing items represented in `SEMANTIC_ITEM_AUDIT.json`.**
 
@@ -54,6 +55,14 @@ Batch 001 is released in v1.3 through `question-bank/RELEASED_BATCHES.json`:
 
 The historical source files remain under `question-bank/candidates/`, but the release manifest is authoritative and the quality gate excludes released paths from the unreleased candidate set while continuing to use them as duplicate-comparison corpus.
 
+## Legacy 56-question rationale backfill
+
+The original Q-001..Q-056 set remains semantically frozen: **0 stem changes, 0 option-text changes, and 0 keyed-answer changes** were introduced during the teaching-depth pass.
+
+A separate `legacy-rationales.js` layer provides four individualized option rationales for each of those 56 questions, for **224 reviewed rationale statements** total. `LEGACY_RATIONALE_AUDIT.json` records the method and results. CI evaluates the rationale layer and fails unless all Q-001..Q-056 IDs each expose exactly four non-empty rationales.
+
+Combined with Batch 001's native rationales, this means **all 79 released standard questions now support four-option teaching feedback**.
+
 ## v1.3 study-quality controls
 
 In addition to the prior retrieval/spaced-review workflow, v1.3 adds:
@@ -62,12 +71,11 @@ In addition to the prior retrieval/spaced-review workflow, v1.3 adds:
 - confidence commitment before a standard answer can be selected;
 - persistent attempt history including choice, confidence, difficulty, objective, and correctness;
 - explicit prioritization of high-confidence misses as misconception signals;
-- four-option rationale rendering for new authored batches;
+- four-option rationale rendering for every released standard question;
 - a separate Bellringer mode labeled **NON-EXAM-REPRESENTATIVE INTEGRATIVE DRILL**;
 - constructed-response Bellringer prompts, delayed rubric reveal, and self-scoring;
-- a progress-state bridge so later flashcard grading does not erase newer confidence/Bellringer history created by the practice layer.
-
-The original 56 standard questions still have their original single-explanation format. v1.3 provides a generic losing-option teaching fallback for them; a future quality pass should backfill individualized rationales for all legacy distractors.
+- a progress-state bridge so later flashcard grading does not erase newer confidence/Bellringer history created by the practice layer;
+- current-state Progress/Export behavior and an intentional full reset path.
 
 ## Question-bank originality controls
 
