@@ -1,0 +1,16 @@
+window.CISSP_QUESTION_CALIBRATION={
+"Q-001":{tier:"E",score:56},"Q-002":{tier:"F",score:37},"Q-003":{tier:"F",score:45},"Q-004":{tier:"E",score:55},
+"Q-005":{tier:"F",score:38},"Q-006":{tier:"F",score:39},"Q-007":{tier:"F",score:42},"Q-008":{tier:"F",score:40},
+"Q-009":{tier:"F",score:40},"Q-010":{tier:"E",score:52},"Q-011":{tier:"F",score:40},"Q-012":{tier:"E",score:54},
+"Q-013":{tier:"F",score:43},"Q-014":{tier:"E",score:53},"Q-015":{tier:"E",score:52},"Q-016":{tier:"F",score:47},
+"Q-017":{tier:"F",score:37},"Q-018":{tier:"F",score:45},"Q-019":{tier:"F",score:39},"Q-020":{tier:"F",score:44},
+"Q-021":{tier:"F",score:46},"Q-022":{tier:"F",score:41},"Q-023":{tier:"E",score:55},"Q-024":{tier:"F",score:35},
+"Q-025":{tier:"F",score:43},"Q-026":{tier:"E",score:59},"Q-027":{tier:"E",score:54},"Q-028":{tier:"E",score:57},
+"Q-029":{tier:"F",score:44},"Q-030":{tier:"E",score:53},"Q-031":{tier:"F",score:36},"Q-032":{tier:"E",score:51},
+"Q-033":{tier:"E",score:58},"Q-034":{tier:"F",score:48},"Q-035":{tier:"E",score:54},"Q-036":{tier:"F",score:47},
+"Q-037":{tier:"E",score:55},"Q-038":{tier:"F",score:48},"Q-039":{tier:"F",score:42},"Q-040":{tier:"E",score:54},
+"Q-041":{tier:"F",score:38},"Q-042":{tier:"F",score:44},"Q-043":{tier:"F",score:45},"Q-044":{tier:"F",score:41},
+"Q-045":{tier:"F",score:46},"Q-046":{tier:"F",score:43},"Q-047":{tier:"F",score:46},"Q-048":{tier:"F",score:41},
+"Q-049":{tier:"F",score:46},"Q-050":{tier:"F",score:46},"Q-051":{tier:"F",score:40},"Q-052":{tier:"E",score:53},
+"Q-053":{tier:"F",score:40},"Q-054":{tier:"E",score:55},"Q-055":{tier:"F",score:46},"Q-056":{tier:"E",score:53}
+};
