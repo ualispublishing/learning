@@ -6,11 +6,9 @@ meta_raw=(ROOT/'data-meta.js').read_text(encoding='utf-8').strip()
 assert meta_raw.startswith('window.CISSP_META=') and ';window.CISSP_CHUNKS=[];' in meta_raw
 meta=json.loads(meta_raw[len('window.CISSP_META='):meta_raw.index(';window.CISSP_CHUNKS=[];')])
 chunks=[]
-for d in range(1,9):
-    raw=(ROOT/f'data-d{d}.js').read_text(encoding='utf-8').strip(); pre='window.CISSP_CHUNKS.push('; suf=');'
-    assert raw.startswith(pre) and raw.endswith(suf), f'data-d{d}.js wrapper invalid'; chunks.append(json.loads(raw[len(pre):-len(suf)]))
-raw=(ROOT/'data-ai.js').read_text(encoding='utf-8').strip(); pre='window.CISSP_CHUNKS.push('; suf=');'
-assert raw.startswith(pre) and raw.endswith(suf), 'data-ai.js wrapper invalid'; chunks.append(json.loads(raw[len(pre):-len(suf)]))
+for name in [*(f'data-d{i}.js' for i in range(1,9)),'data-ai.js','data-precision.js']:
+    raw=(ROOT/name).read_text(encoding='utf-8').strip(); pre='window.CISSP_CHUNKS.push('; suf=');'
+    assert raw.startswith(pre) and raw.endswith(suf), f'{name} wrapper invalid'; chunks.append(json.loads(raw[len(pre):-len(suf)]))
 data={**meta,'objectives':sum((c['objectives'] for c in chunks),[]),'high':sum((c['high'] for c in chunks),[]),'questions':sum((c['questions'] for c in chunks),[])}
 cover_raw=(ROOT/'coverage-detail.js').read_text(encoding='utf-8').strip(); marker=';\nwindow.CISSP_AI_COVERAGE='
 assert cover_raw.startswith('window.CISSP_COVERAGE=') and marker in cover_raw and cover_raw.endswith(';'), 'coverage-detail.js wrapper invalid'
@@ -35,16 +33,19 @@ for o in data['objectives']:
     check(bool(o.get('direct','').strip()) and bool(o.get('trap','').strip()),f"Objective {o['id']} missing content")
     check(all(s in data['sources'] for s in o.get('source_ids',[])),f"Objective {o['id']} source invalid")
 for h in data['high']:
-    check(h['objective'] in ids,f"High card {h['id']} objective invalid"); check(all(s in data['sources'] for s in h['source_ids']),f"High card {h['id']} source invalid")
+    check(h['objective'] in ids,f"High card {h['id']} objective invalid")
+    check(bool(h.get('front','').strip()) and bool(h.get('direct','').strip()) and bool(h.get('trap','').strip()),f"High card {h['id']} missing content")
+    check(all(s in data['sources'] for s in h['source_ids']),f"High card {h['id']} source invalid")
 for q in data['questions']:
     check(q['objective'] in ids,f"Question {q['id']} objective invalid")
     check(len(q['options'])==4 and isinstance(q['answer'],int) and 0<=q['answer']<4,f"Question {q['id']} answer/options invalid")
-    check(bool(q.get('explanation','').strip()),f"Question {q['id']} explanation missing")
+    check(bool(q.get('stem','').strip()) and bool(q.get('explanation','').strip()),f"Question {q['id']} content missing")
 check(len({h['id'] for h in data['high']})==len(data['high']),'Duplicate high card ID')
 check(len({q['id'] for q in data['questions']})==len(data['questions']),'Duplicate question ID')
-computed_cards=62+len(data['high']); subtopics=sum(len(v) for v in coverage.values()); ai_areas=sum(len(v) for v in ai.values())
-check(computed_cards==108,'Runtime cards != 108')
-check(len(data['questions'])==40,'Runtime questions != 40')
+computed_cards=62+len(data['high']); subtopics=sum(len(v) for v in coverage.values()); ai_areas=sum(len(v) for v in ai.values()); sources=len(data['sources'])
+check(computed_cards==140,'Runtime cards != 140')
+check(len(data['questions'])==56,'Runtime questions != 56')
+check(sources==19,'Source count != 19')
 check(subtopics==344,'Subtopic check count != 344')
 check(ai_areas==33,'AI coverage area count != 33')
 check(meta['meta'].get('objective_count')==len(ids),'Metadata objective count drift')
@@ -52,9 +53,10 @@ check(meta['meta'].get('subtopic_checks')==subtopics,'Metadata subtopic count dr
 check(meta['meta'].get('ai_coverage_areas')==ai_areas,'Metadata AI coverage count drift')
 check(meta['meta'].get('card_count')==computed_cards,'Metadata card count drift')
 check(meta['meta'].get('question_count')==len(data['questions']),'Metadata question count drift')
+check(meta['meta'].get('source_count')==sources,'Metadata source count drift')
 check(meta['meta'].get('domain_weight_total')==sum(d['weight'] for d in data['domains']),'Metadata weight total drift')
 html=(ROOT/'index.html').read_text(encoding='utf-8')
-required=['data-meta.js']+[f'data-d{i}.js' for i in range(1,9)]+['data-ai.js','coverage-detail.js','app.js','enhancements.js','styles.css','mobile-fix.css','enhancements.css','id="today"','id="learn"','id="practice"','id="blueprint"','id="progress"','id="sources"','<option>40</option>']
+required=['data-meta.js']+[f'data-d{i}.js' for i in range(1,9)]+['data-ai.js','data-precision.js','coverage-detail.js','app.js','enhancements.js','styles.css','mobile-fix.css','enhancements.css','id="today"','id="learn"','id="practice"','id="blueprint"','id="progress"','id="sources"','<option>56</option>']
 check(all(x in html for x in required),'HTML shell/assets incomplete')
 app=(ROOT/'app.js').read_text(encoding='utf-8'); enh=(ROOT/'enhancements.js').read_text(encoding='utf-8')
 check('CISSP_CHUNKS.flatMap' in app and 'D.cards=' in app and 'layersFor' in app,'Runtime assembly missing')
@@ -62,4 +64,4 @@ check('diagnosticSet' in enh and 'decorateBlueprint' in enh and 'cissp_atlas_dia
 if errors:
     print('FAIL'); [print('-',e) for e in errors]; sys.exit(1)
 print('PASS')
-print(f"domains=8 objectives={len(ids)} subtopic_checks={subtopics} ai_areas={ai_areas} cards={computed_cards} questions={len(data['questions'])} sources={len(data['sources'])} weights=100%")
+print(f"domains=8 objectives={len(ids)} subtopic_checks={subtopics} ai_areas={ai_areas} cards={computed_cards} questions={len(data['questions'])} sources={sources} weights=100%")
