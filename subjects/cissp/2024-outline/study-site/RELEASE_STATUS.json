@@ -14,6 +14,9 @@
     "bellringers": 1,
     "question_bank_records": 80,
     "released_difficulty_distribution": {"F": 41, "E": 34, "S": 4, "B": 1},
+    "standard_questions_with_four_option_rationales": 79,
+    "legacy_rationale_sets": 56,
+    "legacy_option_rationales": 224,
     "semantic_items_reviewed": 220,
     "semantic_answer_key_reversals": 0,
     "sources": 20,
@@ -24,7 +27,7 @@
     "Study the lowest diagnostic domain with retrieval-before-reveal cards.",
     "Use Exam + Stretch as the default standard-practice filter.",
     "Commit confidence before answering; prioritize high-confidence misses for repair.",
-    "Review why all four options win or lose when detailed rationales are available.",
+    "Review why all four options win or lose on every released standard question.",
     "Use Bellringers separately as non-exam-representative integrative drills.",
     "Re-test later rather than immediately repeating the same set."
   ],
@@ -36,6 +39,8 @@
     "question_bank_plan": "subjects/cissp/2024-outline/study-site/question-bank/QUESTION_BANK_EXPANSION_PLAN.md",
     "question_bank_quality_gate": "subjects/cissp/2024-outline/study-site/question-bank/quality_gate.py",
     "question_candidate_schema": "subjects/cissp/2024-outline/study-site/question-bank/CANDIDATE_SCHEMA.json",
+    "legacy_rationale_layer": "subjects/cissp/2024-outline/study-site/legacy-rationales.js",
+    "progress_ui_bridge": "subjects/cissp/2024-outline/study-site/state-ui-bridge.js",
     "ci_workflow": ".github/workflows/cissp-study-site-audit.yml",
     "pages_workflow": ".github/workflows/cissp-pages.yml"
   },
@@ -53,23 +58,29 @@
     "difficulty_filter": true,
     "confidence_before_answer": true,
     "high_confidence_miss_tracking": true,
-    "distractor_rationale_support": true,
+    "four_option_rationales_all_standard_questions": true,
+    "progress_history_preserved_across_card_grading": true,
+    "current_state_progress_display": true,
+    "current_state_export": true,
+    "intentional_full_progress_reset": true,
     "bellringer_mode": true,
     "bellringer_exam_representation": false
   },
   "deployment": {
     "expected_pages_url": "https://ualispublishing.github.io/learning/",
     "workflow_ready": true,
+    "candidate_drafts_block_release_deploy": false,
+    "candidate_drafts_still_checked_by_normal_ci": true,
     "public_endpoint_observed_live_in_this_session": false,
     "activation_fallback": "If GitHub Pages has never been enabled for the repository, set Settings > Pages > Build and deployment > Source to GitHub Actions once; the committed workflow then deploys automatically."
   },
-  "precision_boundary": "READY_FOR_STUDY means the public ISC2 scope, mapped subtopics, curated precision distinctions, released original scenario bank, metadata, and site assets are release-organized and audited. The item-level audit currently covers 220 learner-facing items with zero keyed-answer reversals and no known remaining material factual error. This is not a mathematical guarantee of perpetual infallibility or a guarantee of passing the live adaptive CISSP exam.",
+  "precision_boundary": "READY_FOR_STUDY means the public ISC2 scope, mapped subtopics, curated precision distinctions, released original scenario bank, metadata, teaching rationales, and site assets are release-organized and audited. The item-level audit currently covers 220 learner-facing item IDs with zero keyed-answer reversals and no known remaining material factual error. This is not a mathematical guarantee of perpetual infallibility or a guarantee of passing the live adaptive CISSP exam.",
   "known_non_blocking_limitations": [
     "Browser-local progress does not sync across devices unless exported manually.",
     "The diagnostic is intentionally a routing signal, not an exam-readiness prediction.",
     "Blueprint subtopic labels are paraphrased; the ISC2 source remains authoritative for exact wording.",
     "The combined released bank still skews easier than the long-term target because the original 56-question baseline contains 37 Foundation+ items.",
-    "Full four-option teaching rationales are guaranteed for newly released authored batches; some legacy baseline questions still use the older single-explanation format until their distractor rationales are backfilled.",
+    "Batch 002 remains candidate-only until its automated repository originality/duplicate gate is observed clean and any warning is resolved.",
     "The Pages deployment workflow is committed, but this session could not verify whether the repository's one-time Pages setting was already enabled."
   ]
 }
