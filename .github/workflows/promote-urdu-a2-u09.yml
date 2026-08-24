@@ -1,0 +1,207 @@
+name: Promote Urdu A2 Unit 9
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/promote-urdu-a2-u09.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate, normalize, promote, and advance state
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json, re
+
+          repo = Path('.')
+          target = repo / 'reading/urdu/a2/passages.jsonl'
+          stage = repo / 'reading/audit/urdu_a2_u09_generation_candidate'
+          schema = json.loads((repo/'reading/schema/passage.schema.json').read_text(encoding='utf-8'))
+          required = set(schema['required'])
+          passage_types = set(schema['properties']['passage_type']['enum'])
+          domain_enum = set(schema['properties']['domains']['items']['enum'])
+          question_types = set(schema['$defs']['question']['properties']['type']['enum'])
+          expected_ids = [f'ur-a2-u09-p{i:02d}' for i in range(1,7)]
+          expected_seq = list(range(49,55))
+          expected_targets = ['ur-rank-0895','ur-rank-0896','ur-rank-0779','ur-rank-0962','ur-rank-0785','ur-rank-0823','ur-rank-0829','ur-rank-0904']
+
+          def read_jsonl(path):
+              return [json.loads(x) for x in path.read_text(encoding='utf-8').splitlines() if x.strip()]
+
+          existing = read_jsonl(target)
+          if len(existing) == 54 and [r.get('sequence') for r in existing] == list(range(1,55)) and [r.get('id') for r in existing[-6:]] == expected_ids:
+              print('Unit 9 already canonical; promotion step is idempotently satisfied.')
+              raise SystemExit(0)
+          if len(existing) != 48 or [r.get('sequence') for r in existing] != list(range(1,49)):
+              raise SystemExit(f'Fail closed: expected canonical Urdu A2 sequences 1..48, found {len(existing)} records')
+          existing_ids = [r['id'] for r in existing]
+          if len(existing_ids) != len(set(existing_ids)):
+              raise SystemExit('Fail closed: duplicate canonical IDs before Unit 9')
+          taught = {t['id'] for r in existing for t in r.get('new_lexical_targets',[])}
+
+          candidates=[]
+          learner_script=[]
+          for i,seq in enumerate(expected_seq,1):
+              p=stage/f'ur-a2-u09-p{i:02d}.json'
+              if not p.exists(): raise SystemExit(f'Fail closed: missing {p}')
+              r=json.loads(p.read_text(encoding='utf-8'))
+              # Normalize two draft-only domain labels to the schema's public domain.
+              r['domains']=['public' if d in {'community','social'} else d for d in r.get('domains',[])]
+              # Normalize deterministic metadata from the actual learner text.
+              r['word_count']=len(r['text'].split())
+              r['sentence_count']=r['text'].count('۔')
+              for t in r.get('new_lexical_targets',[]):
+                  t['exposures_in_text']=r['text'].count(t['form'])
+              p.write_text(json.dumps(r,ensure_ascii=False,separators=(',',':'))+'\n',encoding='utf-8')
+              candidates.append(r)
+              learner_script += [r.get('title',''),r.get('text','')]
+              learner_script += [q.get('prompt','') for q in r.get('questions',[])]
+              learner_script += [a.get('answer','') for a in r.get('answer_key',[])]
+
+          if [r.get('id') for r in candidates] != expected_ids: raise SystemExit('Fail closed: candidate ID contract mismatch')
+          if [r.get('sequence') for r in candidates] != expected_seq: raise SystemExit('Fail closed: candidate sequence contract mismatch')
+          if [r.get('passage_type') for r in candidates] != ['instructional','reinforcement','interleaved','transfer','integration','fluency']:
+              raise SystemExit('Fail closed: six-passage role cycle mismatch')
+          if [len(r.get('new_lexical_targets',[])) for r in candidates] != [2,2,2,2,0,0]: raise SystemExit('Fail closed: new-target distribution mismatch')
+          if [t['id'] for r in candidates[:4] for t in r['new_lexical_targets']] != expected_targets: raise SystemExit('Fail closed: final Unit 9 target IDs mismatch')
+          if taught.intersection(expected_targets): raise SystemExit('Fail closed: one or more Unit 9 target IDs were already deliberately taught')
+          if any(t['exposures_in_text'] < 1 for r in candidates for t in r.get('new_lexical_targets',[])): raise SystemExit('Fail closed: new target absent from learner text')
+          if not {'cultural note','personal narrative','comparison'}.issubset({r['genre'] for r in candidates}): raise SystemExit('Fail closed: required Unit 9 genres missing')
+          p6=candidates[-1]
+          if p6['passage_type']!='fluency' or p6['new_lexical_targets'] or not p6['speed_training']['timed'] or p6['speed_training']['new_word_policy']!='none':
+              raise SystemExit('Fail closed: P6 fluency/new-word policy mismatch')
+
+          for r in candidates:
+              missing=required-set(r)
+              if missing: raise SystemExit(f'Fail closed: {r["id"]} missing required fields: {sorted(missing)}')
+              if r['passage_type'] not in passage_types: raise SystemExit(f'Fail closed: invalid passage_type in {r["id"]}')
+              if any(d not in domain_enum for d in r['domains']): raise SystemExit(f'Fail closed: invalid domain in {r["id"]}: {r["domains"]}')
+              if len(r['questions'])!=10 or len(r['answer_key'])!=10: raise SystemExit(f'Fail closed: 10x10 assessment contract failed in {r["id"]}')
+              qids=[q['id'] for q in r['questions']]; aids=[a['id'] for a in r['answer_key']]
+              if qids != [f'q{x}' for x in range(1,11)] or aids != [f'a{x}' for x in range(1,11)]: raise SystemExit(f'Fail closed: question/answer IDs malformed in {r["id"]}')
+              amap={a['id']:a for a in r['answer_key']}
+              for q in r['questions']:
+                  if q['type'] not in question_types: raise SystemExit(f'Fail closed: invalid question type {q["type"]}')
+                  if q['answer_id'] not in amap or amap[q['answer_id']]['question_id'] != q['id']: raise SystemExit(f'Fail closed: broken QA link in {r["id"]}/{q["id"]}')
+              if r['word_count'] < 120 or r['word_count'] > 260: raise SystemExit(f'Fail closed: unexpected A2 word count {r["word_count"]} in {r["id"]}')
+              if r['sentence_count'] < 7 or r['sentence_count'] > 15: raise SystemExit(f'Fail closed: unexpected sentence count {r["sentence_count"]} in {r["id"]}')
+
+          learner='\n'.join(learner_script)
+          if re.search(r'[\u0900-\u097F]',learner): raise SystemExit('Fail closed: Devanagari leakage in learner-facing content')
+          # Latin letters may occur in no learner-facing content for this Urdu batch.
+          if re.search(r'[A-Za-z]',learner): raise SystemExit('Fail closed: Latin-script leakage in learner-facing content')
+
+          before=target.read_bytes()
+          prefix=before.decode('utf-8')
+          if prefix and not prefix.endswith('\n'): prefix+='\n'
+          appended=''.join(json.dumps(r,ensure_ascii=False,separators=(',',':'))+'\n' for r in candidates)
+          target.write_text(prefix+appended,encoding='utf-8')
+          after=target.read_bytes()
+          if not after.startswith(before): raise SystemExit('Fail closed: pre-existing canonical bytes changed')
+          final=read_jsonl(target)
+          if len(final)!=54 or [r['sequence'] for r in final] != list(range(1,55)): raise SystemExit('Post-write validation failed: canonical sequence/count')
+          ids=[r['id'] for r in final]
+          if len(ids)!=len(set(ids)) or ids[-6:]!=expected_ids: raise SystemExit('Post-write validation failed: canonical IDs')
+
+          # Candidate evidence.
+          manifest={
+            'schema_version':1,'project_id':'LANG-A1C2','language':'ur','cefr':'A2','unit':9,'date':'2026-08-24',
+            'status':'CANONICALIZED','canonical_target':'reading/urdu/a2/passages.jsonl','sequence_range':[49,54],'record_count':6,
+            'records':[{'path':f'ur-a2-u09-p{i:02d}.json','id':f'ur-a2-u09-p{i:02d}','sequence':48+i} for i in range(1,7)],
+            'lexical_evidence':'reading/audit/urdu_a2_u09_lexical_sense_check_2026-08-24.json',
+            'validation_evidence':'reading/audit/urdu_a2_u09_generation_validation_2026-08-24.json',
+            'release_promotion':False
+          }
+          (stage/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          validation={
+            'schema_version':1,'project_id':'LANG-A1C2','language':'ur','cefr':'A2','unit':9,'date':'2026-08-24','canonicalized':True,'release_promotion':False,
+            'checks':{
+              'record_count':'PASS','sequence_49_through_54':'PASS','role_cycle':'PASS','question_answer_10x10':'PASS','bidirectional_links':'PASS',
+              'new_target_distribution_2_2_2_2_0_0':'PASS','new_target_freshness':'PASS','new_target_text_exposure':'PASS','required_genres':'PASS',
+              'p6_fluency_policy':'PASS','learner_script_scan':'PASS','required_schema_fields_and_enums':'PASS','preexisting_canonical_bytes_preserved':'PASS'
+            }
+          }
+          (repo/'reading/audit/urdu_a2_u09_generation_validation_2026-08-24.json').write_text(json.dumps(validation,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          promotion={
+            'schema_version':1,'project_id':'LANG-A1C2','language':'ur','cefr':'A2','unit':9,'date':'2026-08-24','status':'CANONICAL_PROMOTION_PASS','release_promotion':False,
+            'before_record_count':48,'after_record_count':54,'appended_sequences':expected_seq,'appended_ids':expected_ids,
+            'preexisting_bytes_preserved_exactly':True,'canonical_sha256_after':hashlib.sha256(after).hexdigest()
+          }
+          (repo/'reading/audit/urdu_a2_u09_promotion_2026-08-24.json').write_text(json.dumps(promotion,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          # Advance compact live production state to Unit 10 / sequence 55.
+          status_path=repo/'reading/STATUS.json'; status=json.loads(status_path.read_text(encoding='utf-8'))
+          status['updated']='2026-08-24'; status['current']['canonical_passages']=834; status['current']['remaining_generation_passages']=246
+          status['current']['active_language']='urdu'; status['current']['active_level']='A2'
+          status['languages']['urdu']['generation_state']='A2_IN_PROGRESS'; status['languages']['urdu']['canonical_passages']=114; status['languages']['urdu']['remaining_generation_passages']=246; status['languages']['urdu']['next_generation_level']='A2'
+          status_path.write_text(json.dumps(status,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          cont_path=repo/'reading/CONTINUATION.json'; cont=json.loads(cont_path.read_text(encoding='utf-8'))
+          cont['updated']='2026-08-24'; cont['production']['canonical_passages']=834; cont['production']['urdu']['canonical_passages']=114
+          cont['active_frontier']['production']={'language':'urdu','level':'A2','action':'Continue generation-first production from Urdu A2 Unit 10 / sequence 55 using the canonical roadmap and ten-question contract. Do not reopen Urdu A1 generation unless fresh evidence identifies a concrete defect.'}
+          cont['exact_next_actions']=[
+            'Validate the routed state bundle and continuation/status snapshot against live canonical JSONL.',
+            'Use reading/planning/ACTIVE_GENERATION_PLAN.json to start the next guarded Urdu A2 Unit 10 batch at sequence 55.',
+            'Maintain Arabic/French release remediation and Urdu A1 educator verification as separate verification lanes without blocking generation-first production unless a concrete defect requires it.'
+          ]
+          cont_path.write_text(json.dumps(cont,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          matrix=json.loads((repo/'reading/planning/topic_genre_matrix.json').read_text(encoding='utf-8'))
+          u10=next(x for x in matrix['levels']['A2'] if x['unit']==10)
+          plan_path=repo/'reading/planning/ACTIVE_GENERATION_PLAN.json'; plan=json.loads(plan_path.read_text(encoding='utf-8'))
+          plan['active_unit']=10; plan['start_sequence']=55; plan['existing_active_level_passages']=54
+          plan['active_unit_roadmap']={'unit':10,'theme':u10['theme'],'genres':u10['genres']}
+          plan_path.write_text(json.dumps(plan,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          tasks_path=repo/'reading/TASKS.md'; tasks=tasks_path.read_text(encoding='utf-8')
+          tasks,n1=re.subn(r'Canonical production frontier: \*\*Urdu A2, Unit \d+, sequence \d+\*\*\.', 'Canonical production frontier: **Urdu A2, Unit 10, sequence 55**.', tasks, count=1)
+          tasks,n2=re.subn(r'- Urdu: \d+/360 generated; A1 complete, A2 in progress\.', '- Urdu: 114/360 generated; A1 complete, A2 in progress.', tasks, count=1)
+          tasks,n3=re.subn(r'- Project: \d+/1080 generated\.', '- Project: 834/1080 generated.', tasks, count=1)
+          if (n1,n2,n3)!=(1,1,1): raise SystemExit(f'Fail closed: TASKS frontier replacements failed {(n1,n2,n3)}')
+          tasks_path.write_text(tasks,encoding='utf-8')
+
+          handoff_path=repo/'reading/AGENT_HANDOFF_V2.md'; h=handoff_path.read_text(encoding='utf-8')
+          h,n1=re.subn(r'- Canonical generated total: \*\*\d+\*\*\.', '- Canonical generated total: **834**.', h, count=1)
+          h,n2=re.subn(r'- Urdu: \*\*\d+/360\*\*; A1 generation complete and A2 generation in progress\.', '- Urdu: **114/360**; A1 generation complete and A2 generation in progress.', h, count=1)
+          h,n3=re.subn(r'- Urdu A2 canonical path: `reading/urdu/a2/passages\.jsonl`; Units 1-\d+ currently contain sequences 1-\d+\.', '- Urdu A2 canonical path: `reading/urdu/a2/passages.jsonl`; Units 1-9 currently contain sequences 1-54.', h, count=1)
+          h,n4=re.subn(r'Continue \*\*Urdu A2\*\*, starting from Unit \d+ / sequence \d+, under:', 'Continue **Urdu A2**, starting from Unit 10 / sequence 55, under:', h, count=1)
+          h,n5=re.subn(r'Unit 9 uses the roadmap theme \*\*culture, celebrations, and customs\*\* with `cultural note`, `personal narrative`, and `comparison` genres\.', 'Unit 10 uses the roadmap theme **A2 cumulative checkpoint** with `multi-paragraph story`, `mixed functional texts`, and `checkpoint` genres.', h, count=1)
+          h,n6=re.subn(r'Run `python reading/tools/validate_continuation_state\.py`; if it passes, resume guarded generation at \*\*Urdu A2 Unit \d+ / sequence \d+\*\* using the Unit \d+ roadmap theme `[^`]+`\.', 'Run `python reading/tools/validate_continuation_state.py`; if it passes, resume guarded generation at **Urdu A2 Unit 10 / sequence 55** using the Unit 10 roadmap theme `A2 cumulative checkpoint`.', h, count=1)
+          if (n1,n2,n3,n4,n5,n6)!=(1,1,1,1,1,1): raise SystemExit(f'Fail closed: HANDOFF frontier replacements failed {(n1,n2,n3,n4,n5,n6)}')
+          handoff_path.write_text(h,encoding='utf-8')
+          PY
+
+      - name: Refresh state manifest
+        run: python reading/tools/refresh_state_manifest.py
+
+      - name: Validate live continuation state
+        run: python reading/tools/validate_continuation_state.py
+
+      - name: Record state validation and commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          evidence={'schema_version':1,'project_id':'LANG-A1C2','date':'2026-08-24','status':'PASS','canonical_urdu_a2_passages':54,'project_canonical_passages':834,'urdu_canonical_passages':114,'next_frontier':{'language':'urdu','level':'A2','unit':10,'sequence':55},'checks':{'canonical_sequences_1_54':'PASS','unit9_tail':'PASS','state_manifest_refresh':'PASS','validate_continuation_state':'PASS'},'release_promotion':False}
+          Path('reading/audit/urdu_a2_u09_state_reconcile_2026-08-24.json').write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/urdu/a2/passages.jsonl reading/audit/urdu_a2_u09_generation_candidate reading/audit/urdu_a2_u09_generation_validation_2026-08-24.json reading/audit/urdu_a2_u09_promotion_2026-08-24.json reading/audit/urdu_a2_u09_state_reconcile_2026-08-24.json reading/STATUS.json reading/CONTINUATION.json reading/planning/ACTIVE_GENERATION_PLAN.json reading/TASKS.md reading/AGENT_HANDOFF_V2.md reading/STATE_MANIFEST.json
+          git commit -m 'Promote Urdu A2 Unit 9 and advance to Unit 10'
+          git push
