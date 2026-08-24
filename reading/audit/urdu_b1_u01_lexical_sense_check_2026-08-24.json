@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "ur",
+  "cefr": "B1",
+  "unit": 1,
+  "date": "2026-08-24",
+  "status": "PASS_FOR_GENERATION_TARGET_SENSES_PENDING_CANONICAL_FRESHNESS_GATE",
+  "scope": "Bounded learner-facing sense plan for the fifteen deliberate Urdu B1 Unit 1 targets. Exact freshness across canonical Urdu A1+A2 is rechecked fail-closed by the promotion workflow before any B1 canonical write. This is not educator/publication release approval.",
+  "architecture_reference": "Completed French B1 Unit 1 calibration uses 3 new targets in P1-P5 and zero new targets in P6; Urdu B1 mirrors that B1 load while remaining independently written.",
+  "new_target_distribution": [3,3,3,3,3,0],
+  "targets": [
+    {"id":"ur-rank-1036","form":"عملی","source_rank":1036,"intended_sense":"practical; based on doing or application rather than explanation alone","source_lexicon_meaning":"functional; usable; useable","external_check":"Rekhta: عمل سے منسوب یا متعلق، کام کا","external_url":"https://www.rekhta.org/urdudictionary?keyword=عملی&lang=ur"},
+    {"id":"ur-rank-1073","form":"دریافت","source_rank":1073,"intended_sense":"discovery or finding reached by investigation or observation","source_lexicon_meaning":"discovery; find; uncovering","external_check":"Rekhta dictionary supports investigation/recognition and discovered/found senses","external_url":"https://www.rekhta.org/urdudictionary?keyword=دریافت&lang=ur"},
+    {"id":"ur-rank-1090","form":"وضاحت","source_rank":1090,"intended_sense":"clarification or explanation that makes an idea clearer","source_lexicon_meaning":"clarification","external_check":"Rekhta: صاف ظاہر کرنا، نمایاں کرنا; clarification/refinement","external_url":"https://www.rekhta.org/urdudictionary?keyword=وضاحت&lang=ur"},
+    {"id":"ur-rank-1071","form":"توازن","source_rank":1071,"intended_sense":"balance between two demands, activities, or priorities","source_lexicon_meaning":"balance","external_check":"Rekhta supports balance/evenness/steadiness","external_url":"https://www.rekhta.org/urdudictionary?keyword=tavaazun&lang=ur"},
+    {"id":"ur-rank-1085","form":"بہتری","source_rank":1085,"intended_sense":"improvement; movement to a better condition","source_lexicon_meaning":"improvement","external_check":"Rekhta/Platts: betterment, improvement, good/advantage","external_url":"https://www.rekhta.org/urdudictionary?keyword=behtarii"},
+    {"id":"ur-rank-1029","form":"عرصہ","source_rank":1029,"intended_sense":"a span or period of time","source_lexicon_meaning":"long time","external_check":"Rekhta: مدت، زمانہ، دور","external_url":"https://www.rekhta.org/urdudictionary?keyword=عرصہ&lang=ur"},
+    {"id":"ur-rank-1001","form":"مطابق","source_rank":1001,"intended_sense":"according to; in agreement with a rule, plan, or evidence","source_lexicon_meaning":"accordingly"},
+    {"id":"ur-rank-1070","form":"مہیا","source_rank":1070,"intended_sense":"made available or provided for use","source_lexicon_meaning":"available"},
+    {"id":"ur-rank-1062","form":"حصول","source_rank":1062,"intended_sense":"obtaining or attaining something through effort or process","source_lexicon_meaning":"getting"},
+    {"id":"ur-rank-1105","form":"تحقیقات","source_rank":1105,"intended_sense":"research or systematic investigation used to answer a question","source_lexicon_meaning":"investigation; investigating"},
+    {"id":"ur-rank-1104","form":"اوسط","source_rank":1104,"intended_sense":"average; a value representing the central level of several numerical results","source_lexicon_meaning":"mean; mean value"},
+    {"id":"ur-rank-1047","form":"مجموعی","source_rank":1047,"intended_sense":"overall or aggregate, considering the whole rather than one part","source_lexicon_meaning":"total; aggregate"},
+    {"id":"ur-rank-1108","form":"ڈگری","source_rank":1108,"intended_sense":"academic degree awarded after completing a program of study","source_lexicon_meaning":"degree"},
+    {"id":"ur-rank-1021","form":"صورتحال","source_rank":1021,"intended_sense":"situation; the set of current conditions affecting a decision or problem","source_lexicon_meaning":"status"},
+    {"id":"ur-rank-1022","form":"درج","source_rank":1022,"intended_sense":"entered or recorded in a list, form, record, or system","source_lexicon_meaning":"registered"}
+  ],
+  "generation_policy": {
+    "p1_to_p5": "three deliberate new lexical targets each, matching B1 calibration load",
+    "p6": "zero deliberate new lexical targets; cumulative checkpoint",
+    "p6_new_word_policy": "none",
+    "target_word_band": "roughly 230-300 words with connected multi-paragraph reasoning",
+    "assessment": "10 questions and 10 linked answers with multi-sentence inference, motive, grammar-in-context, vocabulary, and synthesis"
+  },
+  "release_promotion": false
+}
