@@ -1,22 +1,9 @@
-name: Validate LANG-A1C2 week-ready queue
+name: Apply Urdu A2 Unit 2 via established LANG-A1C2 workflow
 
 on:
   push:
     branches: [main]
     paths:
-      - 'reading/planning/WEEK_READY_2026-08-24.json'
-      - 'reading/tools/validate_week_ready_queue.py'
-      - 'reading/tools/write_week_ready_audit.py'
-      - 'reading/TOMORROW_START_2026-08-24.md'
-      - 'reading/planning/topic_genre_matrix.json'
-      - '.github/workflows/validate-language-a1c2-week-ready.yml'
-  pull_request:
-    paths:
-      - 'reading/planning/WEEK_READY_2026-08-24.json'
-      - 'reading/tools/validate_week_ready_queue.py'
-      - 'reading/tools/write_week_ready_audit.py'
-      - 'reading/TOMORROW_START_2026-08-24.md'
-      - 'reading/planning/topic_genre_matrix.json'
       - '.github/workflows/validate-language-a1c2-week-ready.yml'
   workflow_dispatch:
 
@@ -24,52 +11,81 @@ permissions:
   contents: write
 
 concurrency:
-  group: lang-a1c2-week-ready-main
+  group: lang-a1c2-unit02-established-runner
   cancel-in-progress: false
 
 jobs:
-  validate:
+  apply:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out main
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
 
-      - name: Synchronize to latest main
+      - name: Sync to current main
         shell: bash
         run: |
           set -euo pipefail
           git fetch origin main
           git reset --hard origin/main
 
-      - name: Validate seven-session queue
-        run: python reading/tools/validate_week_ready_queue.py
-
-      - name: Write hash-bound readiness evidence
-        run: python reading/tools/write_week_ready_audit.py
-
-      - name: Commit evidence without overwriting concurrent work
+      - name: Recover pinned reviewed Unit 2 transaction
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add reading/audit/week_ready_2026-08-24.json
-          if git diff --cached --quiet; then
-            echo "Week-ready evidence already matches current sources."
-            exit 0
-          fi
-          git commit -m "Record hash-bound LANG-A1C2 week readiness [skip ci]"
+          PIN='a4e1149f2e0964595f1ceb359b18b791b3eeca91'
+          PATH_IN_REPO='.github/workflows/apply-language-a1c2-urdu-a2-unit02.yml'
+          git show "${PIN}:${PATH_IN_REPO}" > /tmp/original-unit02.yml
+          python - <<'PY'
+          import pathlib, re, textwrap
+          src = pathlib.Path('/tmp/original-unit02.yml').read_text(encoding='utf-8')
+          packet = re.search(r'PACKET_B64_GZ: "([^"]+)"', src)
+          marker = "          python - <<'PY'\n"
+          if not packet or marker not in src:
+              raise SystemExit('Pinned Unit 2 transaction payload could not be recovered.')
+          body = src.split(marker, 1)[1].split("\n          PY", 1)[0]
+          pathlib.Path('/tmp/packet.txt').write_text(packet.group(1), encoding='utf-8')
+          pathlib.Path('/tmp/apply-unit02.py').write_text(textwrap.dedent(body), encoding='utf-8')
+          PY
+          export PACKET_B64_GZ="$(cat /tmp/packet.txt)"
+          python /tmp/apply-unit02.py
 
+      - name: Derive next frontier and validate continuation bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python reading/tools/extract_active_generation_plan.py
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+
+      - name: Commit guarded Unit 2 result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          BASE_HEAD="$(git rev-parse HEAD)"
+          git add reading/urdu/a2/passages.jsonl \
+            reading/audit/urdu_a2_u02_lexical_sense_check_2026-08-24.json \
+            reading/audit/urdu_a2_u02_quality_pass_2026-08-24.json \
+            reading/STATUS.json reading/CONTINUATION.json reading/TASKS.md \
+            reading/AGENT_HANDOFF_V2.md reading/planning/ACTIVE_GENERATION_PLAN.json \
+            reading/STATE_MANIFEST.json
+          git commit -m 'Complete Urdu A2 Unit 2 and advance to Unit 3 [skip ci]'
           git fetch origin main
-          if ! git merge-base --is-ancestor origin/main HEAD; then
+          if [ "$(git rev-parse origin/main)" != "$BASE_HEAD" ]; then
+            CHANGED="$(git diff --name-only "$BASE_HEAD"..origin/main || true)"
+            printf '%s\n' "$CHANGED"
+            if printf '%s\n' "$CHANGED" | grep -Eq '^(reading/urdu/a2/passages\.jsonl|reading/STATUS\.json|reading/CONTINUATION\.json|reading/TASKS\.md|reading/AGENT_HANDOFF_V2\.md|reading/planning/ACTIVE_GENERATION_PLAN\.json|reading/STATE_MANIFEST\.json)$'; then
+              echo 'Critical LANG-A1C2 state changed concurrently; refusing to overwrite it.'
+              exit 1
+            fi
             git rebase origin/main
-            python reading/tools/validate_week_ready_queue.py
-            python reading/tools/write_week_ready_audit.py
-            git add reading/audit/week_ready_2026-08-24.json
+            python reading/tools/extract_active_generation_plan.py
+            python reading/tools/refresh_state_manifest.py
+            python reading/tools/validate_continuation_state.py
+            git add reading/planning/ACTIVE_GENERATION_PLAN.json reading/STATE_MANIFEST.json
             git commit --amend --no-edit
           fi
-
           git push origin HEAD:main
