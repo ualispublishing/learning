@@ -4,11 +4,14 @@ Updated: 2026-08-23
 
 This is the live verification queue only. Completed audit waves and detailed evidence remain in `reading/audit/` and Git history. Release claims are controlled by `reading/RELEASE_STATUS.json`.
 
-## Gate 0 — continuation/state consistency
+## Gate 0 — route / continuation / state-bundle consistency
 
-- [ ] `python reading/tools/validate_continuation_state.py` passes against live canonical files.
+- [ ] `PROJECT_TRACKS.json` routes the session to `LANG-A1C2` and excludes the workbook roots.
+- [ ] `reading/STATE_MANIFEST.json` matches the exact tracked live-state bytes and aggregate SHA-256.
+- [ ] `python reading/tools/validate_continuation_state.py` passes against the routed state bundle and live canonical files.
 - [ ] Stored production totals equal canonical JSONL counts.
 - [ ] Active frontier in `CONTINUATION.json`, `STATUS.json`, and `ACTIVE_GENERATION_PLAN.json` agrees.
+- [ ] Cached release summary in `CONTINUATION.json` agrees with `RELEASE_STATUS.json`.
 - [ ] Pinned Urdu A1 blob still matches the canonical file before relying on its final integrity audit.
 - [ ] A zero-step/skipped CI run is never treated as verification success.
 
@@ -90,6 +93,7 @@ Do not reopen deterministic repair work simply because quality review remains pe
 ## Freshness and invalidation rules
 
 - Any audit is evidence only for the canonical bytes/fields it examined.
+- Any tracked live-state edit invalidates `STATE_MANIFEST.json` until it is refreshed.
 - Passage-prose edits invalidate affected language/naturalness, word-band/CEFR, and evidence-alignment checks.
 - Question/answer edits invalidate the affected question/evidence/answer-key gates.
 - Target/exposure edits invalidate lexical/source/exposure gates.
