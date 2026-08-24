@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
-"""Apply completed row-by-row language-workbook adjudications fail-closed.
+"""Apply completed row-by-row workbook adjudications fail-closed.
 
-The row ledgers are the source of truth for 6,000 individually reviewed rows:
-3 x 1,000 sentences and 3 x 1,000 vocabulary entries.
+The authoritative evidence is 6,000 individually reviewed rows:
+3 x 1,000 sentence/translation rows and 3 x 1,000 vocabulary rows.
 
-Default mode is dry-run. With --write, all sources are validated in memory first;
-nothing is written unless every language/content-type gate passes.
+Default mode is a dry-run. --write is all-or-nothing at the planning stage: every
+ledger/source/duplicate gate must pass in memory before any learner source is
+written. Corrected sentence translations are re-banded from their corrected
+English length; linguistic fidelity is never weakened merely to preserve a
+pre-repair selector bucket.
 """
 from __future__ import annotations
 
@@ -25,7 +28,6 @@ STAGE = AUDIT / "staging_v3"
 SENT_LEDGER_DIR = AUDIT / "row_by_row"
 VOCAB_LEDGER_DIR = AUDIT / "row_by_row_vocab"
 REPORT = AUDIT / "ledger_repair_application.json"
-
 LANGS = ("arabic", "french", "urdu")
 SENT_FIELDS = ["rank", "level", "target", "english", "attribution", "words", "contributor"]
 DIAC_AR = re.compile(r"[\u0610-\u061a\u064b-\u065f\u0670\u06d6-\u06ed]")
@@ -33,8 +35,7 @@ RANK_RE = re.compile(r"(?m)^Rank:\s*(\d+)\s*$")
 MEANING_RE = re.compile(r"(?m)^Meaning:[ \t]*(.*?)[ \t]*$")
 POS_RE = re.compile(r"(?m)^Part of speech:[ \t]*(.*?)[ \t]*$")
 
-# Exact Git blob IDs of the canonical vocabulary decks reviewed row by row.
-# A prior repaired output recorded in REPORT is also accepted for idempotent reruns.
+# Exact Git blobs of the vocabulary decks that were reviewed row by row.
 VOCAB_BASELINE_BLOBS = {
     "arabic": "a8dc009cc28c27624d69d517cd38479c5d418fbc",
     "french": "419d96467a78c205996358caaf4ae9ba1ac3caa9",
@@ -43,22 +44,22 @@ VOCAB_BASELINE_BLOBS = {
 EXPECTED_VOCAB_DISTINCT = {"arabic": 999, "french": 1000, "urdu": 1000}
 
 
-def fail(msg: str) -> None:
-    raise SystemExit(msg)
+def fail(message: str) -> None:
+    raise SystemExit(message)
 
 
-def norm(s: str) -> str:
-    s = unicodedata.normalize("NFKC", s or "").replace("ـ", "")
-    s = DIAC_AR.sub("", s)
-    return re.sub(r"\s+", " ", s).strip().casefold()
+def norm(text: str) -> str:
+    text = unicodedata.normalize("NFKC", text or "").replace("ـ", "")
+    text = DIAC_AR.sub("", text)
+    return re.sub(r"\s+", " ", text).strip().casefold()
 
 
-def english_words(s: str) -> list[str]:
-    return re.findall(r"[A-Za-z']+", (s or "").casefold())
+def english_words(text: str) -> list[str]:
+    return re.findall(r"[A-Za-z']+", (text or "").casefold())
 
 
-def band(n: int) -> str:
-    return "A" if n <= 4 else "B" if n <= 8 else "C" if n <= 13 else "D"
+def band(word_count: int) -> str:
+    return "A" if word_count <= 4 else "B" if word_count <= 8 else "C" if word_count <= 13 else "D"
 
 
 def git_blob_sha(raw: bytes) -> str:
@@ -80,27 +81,26 @@ def ledger_pattern(lang: str) -> re.Pattern[str]:
 
 
 def load_ledgers(directory: Path, lang: str, kind: str) -> list[dict]:
-    pat = ledger_pattern(lang)
+    pattern = ledger_pattern(lang)
     files: list[tuple[int, int, Path]] = []
     for path in directory.glob("*.csv"):
-        m = pat.match(path.name)
-        if m:
-            files.append((int(m.group(1)), int(m.group(2)), path))
+        match = pattern.match(path.name)
+        if match:
+            files.append((int(match.group(1)), int(match.group(2)), path))
     files.sort()
     if not files:
-        fail(f"{kind}/{lang}: no row ledgers found in {directory}")
+        fail(f"{kind}/{lang}: no row ledgers found")
 
     merged: dict[int, dict] = {}
     expected_start = 1
     for start, end, path in files:
-        if start != expected_start:
-            fail(f"{kind}/{lang}: ledger gap/overlap before {path.name}; expected start {expected_start}")
-        if end < start:
-            fail(f"{kind}/{lang}: invalid range in {path.name}")
-        with path.open(encoding="utf-8-sig", newline="") as f:
-            rows = list(csv.DictReader(f))
-        if [int(r["rank"]) for r in rows] != list(range(start, end + 1)):
-            fail(f"{kind}/{lang}: {path.name} ranks do not exactly match filename range")
+        if start != expected_start or end < start:
+            fail(f"{kind}/{lang}: ledger gap/overlap at {path.name}; expected start {expected_start}")
+        with path.open(encoding="utf-8-sig", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+        expected_ranks = list(range(start, end + 1))
+        if [int(row["rank"]) for row in rows] != expected_ranks:
+            fail(f"{kind}/{lang}: {path.name} ranks do not match its filename range")
         for row in rows:
             rank = int(row["rank"])
             if rank in merged:
@@ -117,6 +117,7 @@ def load_ledgers(directory: Path, lang: str, kind: str) -> list[dict]:
     holds = [rank for rank, row in merged.items() if row["status"] == "HOLD"]
     if holds:
         fail(f"{kind}/{lang}: unresolved HOLD rows block release: {holds[:30]}")
+
     for rank, row in merged.items():
         proposals = [
             (row.get("proposed_target") or "").strip(),
@@ -126,8 +127,8 @@ def load_ledgers(directory: Path, lang: str, kind: str) -> list[dict]:
         if row["status"] == "REPAIR" and not any(proposals):
             fail(f"{kind}/{lang} rank {rank}: REPAIR has no proposed change")
         if row["status"] == "PASS" and any(proposals):
-            fail(f"{kind}/{lang} rank {rank}: PASS unexpectedly contains proposed change")
-    return [merged[i] for i in range(1, 1001)]
+            fail(f"{kind}/{lang} rank {rank}: PASS unexpectedly contains a proposed change")
+    return [merged[rank] for rank in range(1, 1001)]
 
 
 def sentence_source_guard(lang: str, raw: bytes) -> tuple[str, str]:
@@ -139,8 +140,8 @@ def sentence_source_guard(lang: str, raw: bytes) -> tuple[str, str]:
     current = hashlib.sha256(raw).hexdigest()
     if not expected or current != expected:
         fail(
-            f"DRIFT: sentence/{lang} staged corpus sha256 {current} does not match "
-            f"fresh corpus-selection sha256 {expected!r}; rerun corpus-select before repairs"
+            f"DRIFT: sentence/{lang} staged sha256 {current} does not match "
+            f"fresh corpus-selection sha256 {expected!r}"
         )
     return git_blob_sha(raw), "fresh_selected_baseline"
 
@@ -162,32 +163,36 @@ def vocab_source_guard(lang: str, raw: bytes) -> tuple[str, str]:
 
 def adapted_attribution(old: str) -> str:
     marker = "Editorially corrected after complete row-by-row linguistic audit."
-    if marker in old:
+    if marker in (old or ""):
         return old
     return f"{(old or '').strip()} {marker}".strip()
 
 
-def duplicate_groups(rows: list[dict], field: str) -> list[dict]:
+def sentence_duplicate_groups(rows: list[dict], field: str) -> list[dict]:
     groups: dict[str, list[dict]] = defaultdict(list)
     for row in rows:
         groups[norm(row[field])].append(row)
     return [
         {
             "normalized": key,
-            "rows": [{"rank": int(v["rank"]), "target": v["target"], "english": v["english"]} for v in vals],
+            "rows": [
+                {"rank": int(item["rank"]), "target": item["target"], "english": item["english"]}
+                for item in values
+            ],
         }
-        for key, vals in groups.items() if key and len(vals) > 1
+        for key, values in groups.items()
+        if key and len(values) > 1
     ]
 
 
 def csv_bytes(rows: list[dict], fields: list[str], original_raw: bytes) -> bytes:
     newline = "\r\n" if b"\r\n" in original_raw else "\n"
     had_bom = original_raw.startswith(b"\xef\xbb\xbf")
-    buf = io.StringIO(newline="")
-    writer = csv.DictWriter(buf, fieldnames=fields, lineterminator=newline)
+    buffer = io.StringIO(newline="")
+    writer = csv.DictWriter(buffer, fieldnames=fields, lineterminator=newline)
     writer.writeheader()
     writer.writerows(rows)
-    text = buf.getvalue()
+    text = buffer.getvalue()
     if had_bom:
         text = "\ufeff" + text
     return text.encode("utf-8")
@@ -196,13 +201,13 @@ def csv_bytes(rows: list[dict], fields: list[str], original_raw: bytes) -> bytes
 def read_sentence_source(lang: str) -> tuple[Path, bytes, list[dict]]:
     path = STAGE / f"{lang}_sentences.csv"
     raw = path.read_bytes()
-    with path.open(encoding="utf-8-sig", newline="") as f:
-        reader = csv.DictReader(f)
+    with path.open(encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
         rows = list(reader)
         fields = reader.fieldnames or []
     if fields != SENT_FIELDS:
         fail(f"sentence/{lang}: unexpected headers {fields!r}")
-    if len(rows) != 1000 or [int(r["rank"]) for r in rows] != list(range(1, 1001)):
+    if len(rows) != 1000 or [int(row["rank"]) for row in rows] != list(range(1, 1001)):
         fail(f"sentence/{lang}: source must contain ranks 1..1000 exactly once")
     return path, raw, rows
 
@@ -210,10 +215,10 @@ def read_sentence_source(lang: str) -> tuple[Path, bytes, list[dict]]:
 def plan_sentences(lang: str, ledger: list[dict]) -> dict:
     path, raw, rows = read_sentence_source(lang)
     input_blob, source_state = sentence_source_guard(lang, raw)
-    by_rank = {int(r["rank"]): r for r in rows}
+    by_rank = {int(row["rank"]): row for row in rows}
     applied: list[int] = []
     already: list[int] = []
-    band_errors: list[dict] = []
+    rebanded: list[dict] = []
 
     for item in ledger:
         rank = int(item["rank"])
@@ -227,38 +232,30 @@ def plan_sentences(lang: str, ledger: list[dict]) -> dict:
 
         proposed_target = (item.get("proposed_target") or "").strip() or row["target"]
         proposed_english = (item.get("proposed_english") or "").strip() or row["english"]
-        new_words = len(english_words(proposed_english))
-        new_level = band(new_words)
-        if new_level != row["level"]:
-            band_errors.append({
-                "rank": rank,
-                "from": row["level"],
-                "to": new_level,
-                "words": new_words,
-                "proposed_english": proposed_english,
-            })
-            continue
-
         current_pair = (row["target"], row["english"])
         proposed_pair = (proposed_target, proposed_english)
-        if current_pair == proposed_pair:
+
+        if current_pair != proposed_pair:
+            if item.get("target") and current_pair[0] != item["target"]:
+                fail(f"DRIFT: sentence/{lang} rank {rank} target no longer matches audited original")
+            if item.get("english") and current_pair[1] != item["english"]:
+                fail(f"DRIFT: sentence/{lang} rank {rank} English no longer matches audited original")
+            old_level = row["level"]
+            new_words = len(english_words(proposed_english))
+            new_level = band(new_words)
+            row["target"] = proposed_target
+            row["english"] = proposed_english
+            row["words"] = str(new_words)
+            row["level"] = new_level
+            row["attribution"] = adapted_attribution(row.get("attribution", ""))
+            if old_level != new_level:
+                rebanded.append({"rank": rank, "from": old_level, "to": new_level, "words": new_words})
+            applied.append(rank)
+        else:
             already.append(rank)
-            continue
-        if item.get("target") and current_pair[0] != item["target"]:
-            fail(f"DRIFT: sentence/{lang} rank {rank} target no longer matches audited original")
-        if item.get("english") and current_pair[1] != item["english"]:
-            fail(f"DRIFT: sentence/{lang} rank {rank} English no longer matches audited original")
-        row["target"] = proposed_target
-        row["english"] = proposed_english
-        row["words"] = str(new_words)
-        row["attribution"] = adapted_attribution(row.get("attribution", ""))
-        applied.append(rank)
 
-    if band_errors:
-        fail(f"sentence/{lang}: band changes blocked: {json.dumps(band_errors, ensure_ascii=False)}")
-
-    target_dupes = duplicate_groups(rows, "target")
-    english_dupes = duplicate_groups(rows, "english")
+    target_dupes = sentence_duplicate_groups(rows, "target")
+    english_dupes = sentence_duplicate_groups(rows, "english")
     if target_dupes:
         fail(f"sentence/{lang}: target uniqueness collision(s): {json.dumps(target_dupes[:10], ensure_ascii=False)}")
     if english_dupes:
@@ -266,46 +263,53 @@ def plan_sentences(lang: str, ledger: list[dict]) -> dict:
 
     output_raw = csv_bytes(rows, SENT_FIELDS, raw)
     return {
-        "path": path, "raw": output_raw, "input_git_blob": input_blob,
-        "output_git_blob": git_blob_sha(output_raw), "source_state": source_state,
-        "repairs_declared": sum(1 for x in ledger if x["status"] == "REPAIR"),
-        "applied": applied, "already_applied": already,
-        "target_unique": 1000, "english_unique": 1000,
+        "path": path,
+        "raw": output_raw,
+        "input_git_blob": input_blob,
+        "output_git_blob": git_blob_sha(output_raw),
+        "source_state": source_state,
+        "repairs_declared": sum(1 for item in ledger if item["status"] == "REPAIR"),
+        "applied": applied,
+        "already_applied": already,
+        "rebanded": rebanded,
+        "target_unique": 1000,
+        "english_unique": 1000,
     }
 
 
 def vocab_rank(back: str) -> int:
-    m = RANK_RE.search(back or "")
-    return int(m.group(1)) if m else -1
+    match = RANK_RE.search(back or "")
+    return int(match.group(1)) if match else -1
 
 
-def extract_one(rx: re.Pattern[str], back: str, label: str, lang: str, rank: int) -> str:
-    matches = rx.findall(back or "")
+def extract_one(regex: re.Pattern[str], back: str, label: str, lang: str, rank: int) -> str:
+    matches = regex.findall(back or "")
     if len(matches) != 1:
-        fail(f"vocab/{lang} rank {rank}: expected exactly one {label} line, found {len(matches)}")
+        fail(f"vocab/{lang} rank {rank}: expected one {label} line, found {len(matches)}")
     return matches[0].strip()
 
 
-def replace_one(rx: re.Pattern[str], back: str, label: str, value: str, lang: str, rank: int) -> str:
-    matches = list(rx.finditer(back or ""))
+def replace_one(regex: re.Pattern[str], back: str, label: str, value: str, lang: str, rank: int) -> str:
+    matches = list(regex.finditer(back or ""))
     if len(matches) != 1:
-        fail(f"vocab/{lang} rank {rank}: expected exactly one {label} line, found {len(matches)}")
+        fail(f"vocab/{lang} rank {rank}: expected one {label} line, found {len(matches)}")
     prefix = "Meaning: " if label == "Meaning" else "Part of speech: "
-    return (back or "")[:matches[0].start()] + prefix + value + (back or "")[matches[0].end():]
+    match = matches[0]
+    return (back or "")[: match.start()] + prefix + value + (back or "")[match.end() :]
 
 
 def read_vocab_source(lang: str) -> tuple[Path, bytes, list[dict]]:
     path = ROOT / f"{lang}_top1000.csv"
     raw = path.read_bytes()
-    with path.open(encoding="utf-8-sig", newline="") as f:
-        reader = csv.DictReader(f)
+    with path.open(encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
         rows = list(reader)
         fields = reader.fieldnames or []
     if fields != ["Front", "Back"]:
         fail(f"vocab/{lang}: unexpected headers {fields!r}")
-    if len(rows) != 1000 or [vocab_rank(r["Back"]) for r in rows] != list(range(1, 1001)):
+    if len(rows) != 1000 or [vocab_rank(row["Back"]) for row in rows] != list(range(1, 1001)):
         fail(f"vocab/{lang}: embedded ranks must be exactly 1..1000")
-    if any(not norm(r["Front"]) for r in rows):
+    if any(not norm(row["Front"]) for row in rows):
         fail(f"vocab/{lang}: blank normalized Front")
     return path, raw, rows
 
@@ -316,25 +320,28 @@ def vocab_duplicate_audit(lang: str, rows: list[dict]) -> tuple[int, list[dict],
         rank = vocab_rank(row["Back"])
         meaning = extract_one(MEANING_RE, row["Back"], "Meaning", lang, rank).casefold()
         pos = extract_one(POS_RE, row["Back"], "Part of speech", lang, rank).casefold()
-        groups[norm(row["Front"])].append({"rank": rank, "front": row["Front"], "meaning": meaning, "part_of_speech": pos})
-    homographs, blocking = [], []
-    for normalized, vals in groups.items():
-        if len(vals) < 2:
+        groups[norm(row["Front"])].append(
+            {"rank": rank, "front": row["Front"], "meaning": meaning, "part_of_speech": pos}
+        )
+    homographs: list[dict] = []
+    blocking: list[dict] = []
+    for normalized, values in groups.items():
+        if len(values) < 2:
             continue
-        meanings = [v["meaning"] for v in vals]
-        poses = [v["part_of_speech"] for v in vals]
-        item = {"normalized_front": normalized, "rows": vals}
-        if all(meanings) and all(poses) and len(set(meanings)) == len(vals) and len(set(poses)) == len(vals):
-            homographs.append(item)
+        meanings = [item["meaning"] for item in values]
+        poses = [item["part_of_speech"] for item in values]
+        group = {"normalized_front": normalized, "rows": values}
+        if all(meanings) and all(poses) and len(set(meanings)) == len(values) and len(set(poses)) == len(values):
+            homographs.append(group)
         else:
-            blocking.append(item)
+            blocking.append(group)
     return len(groups), homographs, blocking
 
 
 def plan_vocab(lang: str, ledger: list[dict]) -> dict:
     path, raw, rows = read_vocab_source(lang)
     input_blob, source_state = vocab_source_guard(lang, raw)
-    by_rank = {vocab_rank(r["Back"]): r for r in rows}
+    by_rank = {vocab_rank(row["Back"]): row for row in rows}
     applied: list[int] = []
     already: list[int] = []
 
@@ -355,7 +362,8 @@ def plan_vocab(lang: str, ledger: list[dict]) -> dict:
             already.append(rank)
             continue
         if source_state != "baseline":
-            fail(f"DRIFT: vocab/{lang} rank {rank} differs from proposed inside prior repaired source")
+            fail(f"DRIFT: vocab/{lang} rank {rank} differs from its proposal inside prior repaired source")
+
         row["Front"] = proposed_target
         if current_meaning != proposed_meaning:
             row["Back"] = replace_one(MEANING_RE, row["Back"], "Meaning", proposed_meaning, lang, rank)
@@ -376,17 +384,22 @@ def plan_vocab(lang: str, ledger: list[dict]) -> dict:
 
     output_raw = csv_bytes(rows, ["Front", "Back"], raw)
     return {
-        "path": path, "raw": output_raw, "input_git_blob": input_blob,
-        "output_git_blob": git_blob_sha(output_raw), "source_state": source_state,
-        "repairs_declared": sum(1 for x in ledger if x["status"] == "REPAIR"),
-        "applied": applied, "already_applied": already,
-        "distinct_normalized_fronts": distinct, "intentional_homographs": homographs,
+        "path": path,
+        "raw": output_raw,
+        "input_git_blob": input_blob,
+        "output_git_blob": git_blob_sha(output_raw),
+        "source_state": source_state,
+        "repairs_declared": sum(1 for item in ledger if item["status"] == "REPAIR"),
+        "applied": applied,
+        "already_applied": already,
+        "distinct_normalized_fronts": distinct,
+        "intentional_homographs": homographs,
         "blocking_duplicate_groups": 0,
     }
 
 
 def public_result(plan: dict) -> dict:
-    return {k: v for k, v in plan.items() if k not in {"path", "raw"}}
+    return {key: value for key, value in plan.items() if key not in {"path", "raw"}}
 
 
 def main() -> None:
@@ -410,6 +423,7 @@ def main() -> None:
             for kind in ("sentence", "vocab")
         },
     }
+
     if args.write:
         for kind in ("sentence", "vocab"):
             for lang in LANGS:
