@@ -1,0 +1,52 @@
+name: Apply Urdu A2 Unit 1 quality pass
+
+on:
+  push:
+    branches:
+      - lang-a1c2-urdu-a2-unit01
+    paths:
+      - 'reading/tools/apply_urdu_a2_u01_quality_pass.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lang-a1c2-urdu-a2-u01-quality-pass
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact branch head
+        uses: actions/checkout@v4
+        with:
+          ref: lang-a1c2-urdu-a2-unit01
+          fetch-depth: 0
+
+      - name: Apply guarded quality pass
+        run: python reading/tools/apply_urdu_a2_u01_quality_pass.py
+
+      - name: Validate continuation and canonical counts
+        run: python reading/tools/validate_continuation_state.py
+
+      - name: Commit only expected remediation outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reading/urdu/a2/passages.jsonl reading/audit/urdu_a2_u01_quality_pass_2026-08-23.json
+          if git diff --cached --quiet; then
+            echo "No remediation changes to commit."
+            exit 0
+          fi
+          unexpected="$(git status --porcelain | grep -vE '^(M |A |\?\?) (reading/urdu/a2/passages.jsonl|reading/audit/urdu_a2_u01_quality_pass_2026-08-23.json)$' || true)"
+          if [ -n "$unexpected" ]; then
+            echo "Unexpected working-tree changes:" >&2
+            echo "$unexpected" >&2
+            exit 1
+          fi
+          git commit -m "Polish Urdu A2 Unit 1 after quality pass [skip ci]"
+          git push origin HEAD:lang-a1c2-urdu-a2-unit01
