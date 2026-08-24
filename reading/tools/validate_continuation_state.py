@@ -122,7 +122,7 @@ def main() -> int:
         require(integrity.get("input_git_blob_sha_expected") == pinned, "Urdu A1 integrity expected blob differs from CONTINUATION", errors)
         require(integrity.get("input_git_blob_sha_actual") == pinned, "Urdu A1 integrity actual blob differs from CONTINUATION", errors)
         require(release_scope.get("levels") == ["A1"], "Urdu release evidence scope must remain explicitly A1-only until new release evidence changes it", errors)
-        require(release_scope.get("canonical_passages") == 60, "Urdu A1 release evidence scope must record the 60-passages reviewed corpus", errors)
+        require(release_scope.get("canonical_passages") == 60, "Urdu A1 release evidence scope must record the 60-passage reviewed corpus", errors)
 
     require(integrity.get("passage_count") == 60, "Urdu A1 integrity passage_count must be 60", errors)
     require(integrity.get("question_count") == 600, "Urdu A1 integrity question_count must be 600", errors)
@@ -134,7 +134,25 @@ def main() -> int:
     require(release["languages"]["urdu"]["a1_integrity_evidence"].get("quality_promotion") is False, "RELEASE_STATUS must preserve Urdu A1 quality_promotion=false", errors)
 
     for language in LANGUAGES:
-        require(release["languages"][language]["educator_release_ready"] is False, f"{language}: educator_release_ready changed without a corresponding audited release-state update", errors)
+        language_release = release["languages"][language]
+        ready = language_release.get("educator_release_ready")
+        open_classes = language_release.get("open_release_classes", [])
+        require(isinstance(ready, bool), f"{language}: educator_release_ready must be boolean", errors)
+        require(not (ready and open_classes), f"{language}: educator_release_ready=true is inconsistent with unresolved open_release_classes", errors)
+
+    require(
+        not release["languages"]["urdu"]["educator_release_ready"],
+        "Urdu cannot be educator-release-ready while its cited A1 integrity evidence has quality_promotion=false",
+        errors,
+    )
+    require(
+        not (
+            release["languages"]["french"]["latest_deterministic_gate"].get("status") == "FAIL"
+            and release["languages"]["french"]["educator_release_ready"]
+        ),
+        "French cannot be educator-release-ready while the cited deterministic gate is FAIL",
+        errors,
+    )
 
     expected_scope_exclusions = {
         "completed/languages/workbooks/v1.0/",
