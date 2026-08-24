@@ -12,15 +12,17 @@ Do **not** resume the language-workbook project (`completed/languages/workbooks/
 
 ## Start every new session here
 
-1. Read `reading/CONTINUATION.json`.
-2. Verify the canonical JSONL for the language/level you are about to touch.
-3. Read `reading/RELEASE_STATUS.json` if making any quality/release claim.
-4. Read `reading/STATUS.json` for production counts/frontier.
-5. Read `reading/planning/ACTIVE_GENERATION_PLAN.json` for the current generation target.
-6. Read `reading/TASKS.md` and `reading/VERIFICATION_TASKS.md` for active work only.
-7. Apply durable policy/schema/roadmap files as needed.
+1. Read `PROJECT_TRACKS.json` and confirm `LANG-A1C2` routes to `reading/`.
+2. Read `reading/AGENTS.md` and `reading/CONTINUATION.json`.
+3. Verify the canonical JSONL for the language/level you are about to touch.
+4. Read `reading/STATE_MANIFEST.json` and run `python reading/tools/validate_continuation_state.py` when execution is available.
+5. Read `reading/RELEASE_STATUS.json` if making any quality/release claim.
+6. Read `reading/STATUS.json` for production counts/frontier.
+7. Read `reading/planning/ACTIVE_GENERATION_PLAN.json` for the current generation target.
+8. Read `reading/TASKS.md` and `reading/VERIFICATION_TASKS.md` for active work only.
+9. Apply durable policy/schema/roadmap files as needed.
 
-If stored state and live canonical files disagree, **fail closed and reconcile first**. Do not continue from chat memory or stale checklist text.
+If stored state, the state manifest, and live canonical files disagree, **fail closed and reconcile first**. Do not continue from chat memory or stale checklist text.
 
 ## Current truth snapshot
 
@@ -40,11 +42,11 @@ If stored state and live canonical files disagree, **fail closed and reconcile f
 
 Generation state and release state are separate.
 
-- Arabic: generation complete; educator/publication release **not ready** under the current highest-assurance release gate.
-- French: generation complete; release state **REOPEN_REQUIRED**. The latest post-repair deterministic Gate A remains failed with 2,160 release-evidence findings requiring substantive revalidation.
-- Urdu: A1 integrity is structurally clean under its pinned audit, but that audit is **not** semantic/educator approval. Urdu A2-C2 are not generated.
+- Arabic: educator/publication release **not ready** under the current highest-assurance release gate.
+- French: release state **REOPEN_REQUIRED**. The latest post-repair deterministic Gate A remains failed with 2,160 release-evidence findings requiring substantive revalidation.
+- Urdu: the cited release evidence establishes an A1 structural/integrity baseline only; it is **not** semantic/educator approval or a language-level release. Consult `reading/STATUS.json` for live generation progress beyond that evidence scope.
 
-Never convert historical `APPROVED`, `SEALED`, `PASS`, or generation-complete wording into an educator-readiness claim. `reading/RELEASE_STATUS.json` controls those claims.
+Never convert historical `APPROVED`, `SEALED`, `PASS`, or generation-complete wording into an educator-readiness claim. `reading/RELEASE_STATUS.json` controls affirmative release decisions, and fresh contrary evidence invalidates reliance on stale approval evidence.
 
 ## Active production frontier
 
@@ -70,14 +72,16 @@ These are separate from the generation frontier:
 
 For each substantive work unit:
 
-1. verify current canonical state and relevant hashes/counts;
-2. select the highest-value unfinished item from the active frontier/queue;
-3. work in an evidence-bounded batch;
-4. run only the checks materially affected by the change, plus any required final gate;
-5. fail closed on source drift, schema mismatch, unexpected record selection, or stale audit evidence;
-6. commit canonical changes and directly affected evidence together when practical;
-7. update live state immediately;
-8. leave one exact next action, not several historical alternatives.
+1. verify project route, current canonical state, and relevant hashes/counts;
+2. verify the state bundle when execution is available;
+3. select the highest-value unfinished item from the active frontier/queue;
+4. work in an evidence-bounded batch;
+5. run only the checks materially affected by the change, plus any required final gate;
+6. fail closed on source drift, schema mismatch, unexpected record selection, stale audit evidence, or state-bundle mismatch;
+7. commit canonical changes and directly affected evidence together when practical;
+8. update live state immediately;
+9. refresh `reading/STATE_MANIFEST.json` after tracked state edits;
+10. leave one exact next action, not several historical alternatives.
 
 ## State update contract
 
@@ -92,9 +96,13 @@ After a **verification/release** evidence change, update as applicable:
 
 - `reading/VERIFICATION_TASKS.md`
 - `reading/RELEASE_STATUS.json`
-- `reading/CONTINUATION.json` only if the live release summary/frontier changed
+- `reading/CONTINUATION.json` whenever its cached release summary changes
 
-Do not append historical timelines to these files. Detailed completed work belongs in `reading/audit/` and Git history.
+After those edits, run:
+
+`python reading/tools/refresh_state_manifest.py`
+
+Do not append historical timelines to live state files. Detailed completed work belongs in `reading/audit/` and Git history.
 
 ## Freshness rules
 
