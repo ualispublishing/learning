@@ -8,10 +8,10 @@ Unofficial, original study site mapped to the current public ISC2 CISSP exam out
 - all 62 numbered public objectives mapped;
 - 344 paraphrased public-outline subtopic checks across those objectives;
 - 33 current AI-security coverage areas across all 8 domains;
-- 108 layered retrieval cards, including 8 current AI cross-domain cards;
-- 40 original scenario questions, including one AI-security scenario per domain;
+- 140 layered retrieval cards: objective coverage, high-yield distinctions, AI cross-domain cards, and a 32-card precision-depth layer;
+- 56 original scenario questions, including AI scenarios and 16 additional precision scenarios;
 - current official domain weights (16/10/13/13/13/12/13/10 = 100%);
-- 11 primary/reference sources, including current NIST SP 800-63-4 (2025) and SP 800-61 Rev. 3 (2025).
+- 19 primary/reference sources, including current NIST SP 800-63-4 (2025), SP 800-61 Rev. 3 (2025), SP 800-88 Rev. 2 (2025), IETF IPsec/Kerberos/OAuth specifications, OpenID Connect, and OASIS SAML.
 
 See `PRECISION_AUDIT.md` for the semantic audit and the exact boundary between mapped scope and demonstrated mastery.
 
@@ -23,6 +23,8 @@ The interface is organized around **diagnose → retrieve → apply → repair w
 - local spaced-review state and retrieval-before-reveal cards;
 - weighted domain mastery and weak-objective recommendations;
 - expandable subtopic coverage under every objective;
+- a precision-depth deck for commonly confused technical and managerial distinctions;
+- 10/20/40/56-question scenario sets;
 - global search and keyboard study controls;
 - a CISSP decision lens for management/risk scenarios;
 - progress export/reset;
@@ -31,9 +33,9 @@ The interface is organized around **diagnose → retrieve → apply → repair w
 
 ## Precision boundary
 
-`audit.py` verifies structural and mapping correctness: objective IDs/counts, official weights, exact subtopic-map coverage, AI coverage across all eight domains, source references, answer indices, duplicate IDs, runtime card counts, and required application assets. Content was also reviewed against the current public ISC2 outline and current primary supporting standards where used.
+`audit.py` verifies structural and mapping correctness: objective IDs/counts, official weights, exact subtopic-map coverage, AI coverage across all eight domains, source references, answer indices, duplicate IDs, runtime card/question/source counts, metadata-count agreement, and required application assets. Content was also reviewed against the current public ISC2 outline and current primary supporting standards where used.
 
-This is **published-outline coverage**, not a claim that a public deck contains every live adaptive-exam fact or can guarantee a pass. ISC2 states that its exam is experiential and that it cannot guarantee a candidate will pass. All practice questions here are original; no exam dumps or copied commercial questions are included.
+This is **published-outline coverage**, not a claim that a public deck contains every live adaptive-exam fact or can guarantee a pass. ISC2 describes CISSP as experiential and does not guarantee that a candidate will pass. All practice questions here are original; no exam dumps or copied commercial questions are included.
 
 ## Continuous audit
 
