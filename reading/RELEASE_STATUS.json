@@ -1,143 +1,96 @@
 {
-  "schema_version": 1,
-  "updated": "2026-08-19",
-  "purpose": "Independent educator/publication release status. This file overrides historical APPROVED/SEALED labels for educator-readiness claims.",
+  "schema_version": 2,
+  "project_id": "LANG-A1C2",
+  "updated": "2026-08-23",
+  "purpose": "Independent educator/publication release status. This file is intentionally separate from generation status and overrides historical APPROVED/SEALED labels for educator-readiness claims.",
   "protocol": "reading/planning/EDUCATOR_RELEASE_VERIFICATION_PROTOCOL.md",
   "assurance_profile": "reading/planning/HIGHEST_ASSURANCE_RELEASE_PROFILE.md",
-  "release_claim_policy": "No agent may claim literal 100% correctness. HASH_BOUND_RELEASED means full recorded verification completed with zero known unresolved defects under the required assurance profile.",
-  "latest_independent_recertification": {
-    "date": "2026-08-19",
-    "artifact": "reading/audit/independent_educator_recertification_2026-08-19.json",
-    "deterministic_summary": "reading/audit/independent_educator_deterministic_2026-08-19.summary.json",
-    "canonical_records_scanned": 720,
-    "questions_scanned": 7200,
-    "answers_scanned": 7200,
-    "deterministic_gate": "FAIL",
-    "open_findings": 4310,
-    "educator_gate": "BLOCKED",
-    "semantic_educator_coverage_complete": false,
-    "note": "Historical Arabic/French baseline. French has since been canonically repaired and re-scanned separately; do not use these old French hashes as current evidence."
-  },
-  "latest_second_adversarial_educator_audit": {
-    "date": "2026-08-19",
-    "artifact": "reading/audit/second_adversarial_educator_audit_2026-08-19.json",
-    "status": "BLOCKED",
-    "blind_initial_semantic_records_directly_examined": 10,
-    "new_major_defect_classes_found": [
-      "low-level CEFR/pedagogy mismatch from formal grammatical-category/function questions in Arabic and French",
-      "learner-facing malformed/unnatural MSA grammar-target phrasing in Arabic B1"
-    ],
-    "concrete_example": "ar-b1-u01-p01 q7 contains 'حتى إن كانت الإجابة لا الآن' and requires repair plus corpus-wide same-class search",
-    "semantic_educator_coverage_complete": false,
-    "note": "Historical detection artifact. The defined French A1-A2 metalinguistic class has since been repaired under superseding v2 human refinement; Arabic defects and full French/Arabic recertification remain open."
-  },
+  "release_claim_policy": "Do not claim literal 100% correctness. A release-ready claim requires fresh hash-bound evidence with zero known unresolved defects under the required assurance profile.",
   "languages": {
     "arabic": {
       "generation_state": "COMPLETE",
-      "historical_internal_audit_state": "PASS",
       "canonical_passages": 360,
+      "historical_internal_audit_state": "PASS",
       "release_state": "INTERNAL_LANGUAGE_PASS",
       "educator_release_ready": false,
       "target_assurance": "HIGHEST_ASSURANCE",
-      "reason": "Fresh independent recertification failed deterministic Gate A, and a blind adversarial educator pass found concrete major learner-facing Arabic defects including CEFR-inappropriate metalinguistic assessment design and malformed/unnatural MSA phrasing in a B1 grammar-in-context item. Full semantic recertification remains incomplete.",
-      "latest_educator_attempt": {
-        "status": "BLOCKED_AT_DETERMINISTIC_AND_SEMANTIC_GATES",
-        "artifact": "reading/audit/second_adversarial_educator_audit_2026-08-19.json",
-        "deterministic_summary": "reading/audit/independent_educator_deterministic_2026-08-19.summary.json"
-      },
-      "required_next_gates": [
-        "resolve_and_revalidate_deterministic_integrity_100pct",
-        "fresh_full_passage_language_and_qa_audit_100pct",
-        "corpus_wide_low_level_metalinguistic_question_audit_and_repair",
-        "corpus_wide_arabic_grammar_in_context_naturalness_audit",
-        "LanguageTool_Arabic_disagreement_pass",
-        "CAMeL_MSA_morphology_diagnostic_pass",
-        "three_genuinely_independent_model_family_passes_100pct",
-        "native_MSA_professional_review_100pct",
-        "educator_curriculum_review_100pct",
-        "blind_post_repair_human_review_100pct",
-        "hash_bound_release_manifest"
+      "latest_release_evidence": [
+        "reading/audit/independent_educator_deterministic_2026-08-19.summary.json",
+        "reading/audit/second_adversarial_educator_audit_2026-08-19.json"
+      ],
+      "open_release_classes": [
+        "fresh deterministic educator-release revalidation",
+        "corpus-wide low-level metalinguistic/CEFR audit and repair",
+        "corpus-wide Arabic grammar-in-context naturalness audit",
+        "full semantic educator review",
+        "independent native/model-family recertification",
+        "blind post-repair human review",
+        "hash-bound release manifest"
       ]
     },
     "french": {
       "generation_state": "COMPLETE",
-      "historical_internal_audit_state": "PASS",
       "canonical_passages": 360,
+      "historical_internal_audit_state": "PASS",
       "release_state": "REOPEN_REQUIRED",
       "educator_release_ready": false,
       "target_assurance": "HIGHEST_ASSURANCE",
-      "reason": "The defined French C1/C2 generic-answer/production-note and A1-A2 formal-metalinguistic/CEFR defect classes have been repaired, but the fresh post-repair deterministic release-evidence gate still fails. Against the final repaired hashes, all 360 records remain draft with pending coverage, linguistic, pedagogical, and answer-key evidence and zero/missing known-token coverage. These are evidence failures that require substantive revalidation; they must not be auto-promoted. Full 100% semantic and independent external review also remains incomplete.",
-      "latest_educator_attempt": {
-        "status": "BLOCKED_AT_POST_REPAIR_DETERMINISTIC_GATE_A",
-        "artifact": "reading/audit/french_postrepair_deterministic_gate_a_2026-08-19.json",
-        "deterministic_gate": "FAIL",
-        "open_findings": 2160,
-        "semantic_educator_coverage_complete": false
-      },
-      "latest_postrepair_deterministic_gate_a": {
-        "bound_commit": "3356eaffcb7bf04feb755d3356089b7a3e7906e8",
+      "latest_release_evidence": "reading/audit/french_postrepair_deterministic_gate_a_2026-08-19.json",
+      "latest_deterministic_gate": {
+        "status": "FAIL",
         "records": 360,
         "questions": 3600,
         "answers": 3600,
         "open_findings": 2160,
-        "severity_counts": {
-          "critical": 360,
-          "major": 1800
-        },
-        "category_counts": {
+        "finding_classes": {
           "not_approved": 360,
           "coverage_not_pass": 360,
           "coverage_missing_or_zero": 360,
           "linguistic_not_pass": 360,
           "pedagogical_not_pass": 360,
           "answer_key_not_pass": 360
-        },
-        "unicode_not_nfc": 0,
-        "canonical_hashes": {
-          "A1": "1cdb31ecb8b987c50051bb6f8fa5b2f7fda812cb3004c81ab8697f832fceacba",
-          "A2": "8fcd71903e6a495a2abaac8d436232b4b7ee00ae5ac0bce4d273aa4a134b3c15",
-          "B1": "7b1013fa606761bc7cc69fdaf67c66a0efcc9c91c478b1c8a5f8523458f9451b",
-          "B2": "bfa64c472a93d572d65fbe0217283b9d53bbb0a8d88fee7ea3a3aef1c7993942",
-          "C1": "dead8e5d6e6e60a7c6c5185996159670e6077ea2d5da31860de168674050b39a",
-          "C2": "c161c4551a6ce0222850778c02ed0662e00bb60e5386d5dc0b4f31a92cb9f277"
         }
       },
-      "required_next_gates": [
-        "substantively_revalidate_record_level_gate_a_evidence_100pct",
-        "rerun_post_revalidation_deterministic_gate_a_to_pass",
-        "fresh_full_passage_language_and_qa_audit_100pct",
-        "LanguageTool_French_disagreement_pass",
-        "Antidote_French_disagreement_pass",
-        "DeepL_Write_French_disagreement_pass",
-        "three_genuinely_independent_model_family_passes_100pct",
-        "native_French_professional_review_100pct",
-        "educator_curriculum_review_100pct",
-        "blind_post_repair_human_review_100pct",
-        "hash_bound_release_manifest"
-      ]
+      "open_release_classes": [
+        "substantive record-level Gate A evidence revalidation",
+        "fresh full passage language and QA audit",
+        "full semantic educator review",
+        "independent professional/native/model-family review",
+        "blind post-repair human review",
+        "hash-bound release manifest"
+      ],
+      "guard": "Never bulk-promote pending metadata merely to make Gate A green."
     },
     "urdu": {
-      "generation_state": "IN_PROGRESS",
-      "historical_internal_audit_state": "PARTIAL",
-      "release_state": "GENERATED",
+      "generation_state": "A1_COMPLETE_LANGUAGE_IN_PROGRESS",
+      "canonical_passages": 60,
+      "release_state": "NOT_RELEASE_READY",
       "educator_release_ready": false,
       "target_assurance": "HIGHEST_ASSURANCE_AT_LANGUAGE_RELEASE",
-      "reason": "Active generation; current canonical frontier is sequences 1-30 of A1, with Unit 06 staged but not yet confirmed canonical as of this status write.",
-      "required_next_gates": [
-        "continue_guarded_generation",
-        "complete_level_and_language_internal_audits",
-        "apply_full_independent_educator_release_protocol_and_highest_assurance_profile_at_release_milestone"
+      "a1_integrity_evidence": {
+        "artifact": "reading/audit/urdu_a1_final_integrity_2026-08-23.json",
+        "bound_git_blob": "ec0970dc1916ce523dd3320d2f4dca4c7f8bc677",
+        "passages": 60,
+        "questions": 600,
+        "answers": 600,
+        "hard_errors": 0,
+        "warnings": 0,
+        "integrity_gate": "PASS",
+        "quality_promotion": false
+      },
+      "open_release_classes": [
+        "A1 semantic/naturalness/pedagogical/answer-key/CEFR evidence remains separate from the integrity pass",
+        "A2-C2 generation remains incomplete",
+        "complete language-level internal audits",
+        "apply full independent educator-release protocol and highest-assurance profile at release milestone"
       ]
     }
   },
   "global_release_blockers": [
-    "Arabic fresh deterministic educator-release Gate A failed and requires substantive record-level revalidation",
-    "French post-repair deterministic Gate A FAIL: 2160 record-level release-evidence findings require substantive revalidation; no metadata may be bulk-promoted merely to clear the gate",
-    "Arabic still has unresolved low-level metalinguistic/CEFR and malformed MSA defect classes; the defined French A1-A2 metalinguistic class has been repaired under superseding v2 human refinement",
-    "Arabic full 100% semantic educator review is incomplete",
-    "French full 100% semantic educator review is incomplete",
-    "Arabic independent external/native/model-family re-certification not yet complete",
-    "French independent external/native/model-family re-certification not yet complete",
-    "Urdu generation incomplete"
-  ]
+    "Arabic educator-release revalidation and full semantic/independent review are incomplete.",
+    "French post-repair deterministic Gate A remains failed with 2160 release-evidence findings requiring substantive revalidation.",
+    "Urdu A1 integrity PASS is not a quality promotion, and Urdu A2-C2 generation remains incomplete."
+  ],
+  "historical_evidence_policy": "Detailed historical audit narratives stay in reading/audit/ and Git history. This file keeps only the latest release-relevant pointers and blockers.",
+  "continuation": "reading/CONTINUATION.json"
 }
