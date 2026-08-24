@@ -9,6 +9,7 @@ on:
       - 'audit/language-workbooks/v1.1-pronunciation/candidates/**'
       - 'scripts/repair_pronunciation_candidate_provenance.py'
       - 'scripts/finalize_language_workbook_pronunciation.py'
+      - 'scripts/align_final_pronunciation_sidecars_to_v1.py'
       - 'scripts/build_language_workbooks_v1_1_pronunciation.py'
       - '.github/workflows/build-language-workbooks-v1-1-pronunciation.yml'
   pull_request:
@@ -19,6 +20,7 @@ on:
       - 'audit/language-workbooks/v1.1-pronunciation/candidates/**'
       - 'scripts/repair_pronunciation_candidate_provenance.py'
       - 'scripts/finalize_language_workbook_pronunciation.py'
+      - 'scripts/align_final_pronunciation_sidecars_to_v1.py'
       - 'scripts/build_language_workbooks_v1_1_pronunciation.py'
       - '.github/workflows/build-language-workbooks-v1-1-pronunciation.yml'
   workflow_dispatch:
@@ -59,6 +61,7 @@ jobs:
           set -euo pipefail
           python -m py_compile scripts/repair_pronunciation_candidate_provenance.py
           python -m py_compile scripts/finalize_language_workbook_pronunciation.py
+          python -m py_compile scripts/align_final_pronunciation_sidecars_to_v1.py
           python -m py_compile scripts/build_language_workbooks_v1_1_pronunciation.py
 
       - name: Pass 1.5 — repair known French candidate provenance defect
@@ -106,6 +109,24 @@ jobs:
               assert int(v['rows']) == 1000, (name, v)
               assert Path(v['output_path']).is_file(), (name, v['output_path'])
           print('Final pronunciation gate: 6 datasets / 6,000 rows / 0 unresolved.')
+          PY
+
+      - name: Pass 2.5 — align exact v1.0 display text after semantic drift check
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/align_final_pronunciation_sidecars_to_v1.py | tee /tmp/pronunciation-canonical-alignment.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('audit/language-workbooks/v1.1-pronunciation/final_manifest.json')
+          data = json.loads(p.read_text(encoding='utf-8'))
+          gate = data.get('canonical_v1_display_alignment', {})
+          assert gate.get('gate') == 'PASS'
+          assert gate.get('rows') == 6000
+          assert gate.get('normalized_drift') == 0
+          assert len(gate.get('datasets', {})) == 6
+          print('Canonical display alignment: 6,000 rows / zero normalized drift.')
           PY
 
       - name: Pass 3 — build pronunciation-aided v1.1 workbook sets
