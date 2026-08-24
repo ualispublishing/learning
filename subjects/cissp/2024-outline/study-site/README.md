@@ -11,6 +11,7 @@ Unofficial, original study site mapped to the current public ISC2 CISSP exam out
 - 140 layered retrieval cards;
 - **79 released standard scenario questions + 1 Bellringer = 80 released bank records**;
 - released author-difficulty mix: **41 Foundation+ / 34 Exam-calibrated / 4 Stretch / 1 Bellringer**;
+- **all 79 released standard questions have four-option teaching rationales**;
 - **220 learner-facing items in the semantic-audit ledger**;
 - 20 primary/reference sources.
 
@@ -41,11 +42,11 @@ The interface is organized around **diagnose → retrieve → apply → repair w
 - **difficulty-aware standard practice** with Foundation+, Exam-calibrated, Stretch, and Exam+Stretch filters;
 - **confidence-before-answer** capture;
 - high-confidence-miss tracking;
-- full four-option teaching rationales for newly authored released batches;
+- **four individualized option rationales for every released standard question**;
 - separate **NON-EXAM-REPRESENTATIVE INTEGRATIVE DRILL** Bellringer mode with constructed responses, rubric reveal, and self-scoring;
 - global search, keyboard controls, progress export/reset, and responsive desktop/mobile layouts.
 
-The original 56-question baseline still uses the older single-explanation format, so its incorrect options receive a generic teaching fallback until their four-option rationales are backfilled.
+The original 56-question baseline was left semantically intact: its stems, option text, keyed answers, and original explanations were not changed. A separate reviewed rationale layer adds 224 option rationales (56 × 4). `LEGACY_RATIONALE_AUDIT.json` records that backfill and CI fails if any of the 56 rationale sets is missing or incomplete.
 
 ## Question-bank expansion
 
@@ -68,11 +69,12 @@ Originality is enforced by decision-rule-first authoring from public scope/regis
 `.github/workflows/cissp-study-site-audit.yml` runs:
 
 1. `python audit.py`;
-2. `python question-bank/quality_gate.py`;
-3. JavaScript syntax checks, including the v1.3 bootstrap/calibration/practice files;
-4. static HTTP smoke checks for critical site and released-bank assets.
+2. `python question-bank/quality_gate.py` against unreleased candidates and the released comparison corpus;
+3. JavaScript syntax checks, including the v1.3 bootstrap/calibration/practice/state/rationale files;
+4. a 56 × 4 legacy-rationale completeness invariant;
+5. static HTTP smoke checks for critical site, rationale, and released-bank assets.
 
-The Pages workflow also runs both Python gates before deployment.
+The Pages workflow validates the immutable released corpus before deployment; unreleased candidate failures cannot block an already-valid release from publishing.
 
 ## Run locally
 
@@ -87,6 +89,6 @@ Serve the folder over HTTP rather than opening `index.html` directly, because v1
 
 ## GitHub Pages
 
-`.github/workflows/cissp-pages.yml` deploys only after the release audit and question-bank quality gate. Expected project URL: `https://ualispublishing.github.io/learning/`.
+`.github/workflows/cissp-pages.yml` deploys only after released-corpus validation. Expected project URL: `https://ualispublishing.github.io/learning/`.
 
 If Pages has never been enabled for this repository, the one-time repository setting remains: **Settings → Pages → Build and deployment → Source → GitHub Actions**.
