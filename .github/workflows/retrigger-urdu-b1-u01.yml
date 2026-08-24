@@ -19,12 +19,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          marker='# retrigger-b1-u01-2026-08-24'
+          marker='# retrigger-b1-u01-2026-08-24-v2'
           grep -Fq "$marker" .github/workflows/promote-urdu-b1-u01.yml || printf '\n%s\n' "$marker" >> .github/workflows/promote-urdu-b1-u01.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add .github/workflows/promote-urdu-b1-u01.yml
           git diff --cached --quiet || git commit -m 'Retrigger Urdu B1 Unit 1 promotion'
+          git pull --rebase origin main
           git push
-
-# explicit-second-push
