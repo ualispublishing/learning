@@ -1,5 +1,5 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "updated": "2026-08-24",
   "released": {
     "bank_records": 80,
@@ -39,13 +39,38 @@
       "file": "candidates/batch-003.jsonl",
       "review": "BATCH_003_REVIEW.json",
       "primary_domain_distribution": {"1": 2, "2": 2, "3": 2, "4": 2, "5": 2, "6": 2, "7": 2, "8": 2}
+    },
+    "004": {
+      "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+      "records": 16,
+      "standard_mcq": 16,
+      "bellringer": 0,
+      "difficulty_distribution": {"F": 0, "E": 12, "S": 4, "B": 0},
+      "file": "candidates/batch-004.jsonl",
+      "review": "BATCH_004_REVIEW.json",
+      "primary_domain_distribution": {"1": 5, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 5, "8": 1},
+      "planner_zero_exposure_objectives_closed": ["1.2", "1.12", "7.5", "7.7", "7.14"]
     }
   },
-  "if_batches_002_and_003_promote": {
-    "bank_records": 112,
-    "standard_mcq": 111,
+  "pending_candidate_summary": {
+    "records": 48,
+    "standard_mcq": 48,
+    "bellringer_cases": 0,
+    "difficulty_distribution": {"F": 0, "E": 36, "S": 12, "B": 0},
+    "planning_standard_mcq_objective_exposure": "62/62",
+    "planning_exposure_boundary": "62/62 means at least one standard MCQ maps to every objective when unreleased Batches 002-004 are included. It is not a released-bank claim and does not imply mastery depth."
+  },
+  "if_batches_002_through_004_promote": {
+    "bank_records": 128,
+    "standard_mcq": 127,
     "bellringer_cases": 1,
-    "difficulty_distribution": {"F": 41, "E": 58, "S": 12, "B": 1}
+    "difficulty_distribution": {"F": 41, "E": 70, "S": 16, "B": 1}
+  },
+  "authoring_guardrails": {
+    "minimum_exam_calibrated_share_for_batch_16_plus": 0.50,
+    "maximum_bellringer_share_for_batch_16_plus": 0.10,
+    "maximum_primary_domain_share_for_standard_batch_16_plus": 0.35,
+    "objective_planning_minimum": {"F": 1, "E": 4, "S": 1}
   },
   "long_term_target": {
     "bank_records": 800,
@@ -55,9 +80,10 @@
     "B": 40
   },
   "next_priority": [
-    "Observe a clean repository originality/duplicate gate for Batches 002 and 003 against all 80 released records before promotion.",
+    "Observe a clean repository originality/duplicate gate for Batches 002-004 against all 80 released records before promotion.",
     "Do not promote any candidate with an unresolved similarity warning or structural duplicate concern.",
-    "Continue biasing expansion toward Exam-calibrated and Stretch reasoning until the released mix approaches target.",
+    "Use coverage_report.py to target sparse objectives now that zero-objective exposure gaps are closed in the planning state.",
+    "Continue biasing expansion toward Exam-calibrated and Stretch reasoning while keeping any primary domain at or below 35% of a 16+ standard-question batch.",
     "Add additional Bellringers only as separately labeled integrative drills; do not use them to imitate live exam format.",
     "Use confidence, chosen distractor, response time, and spaced repeat performance to identify durable misconceptions before making empirical difficulty claims."
   ]
