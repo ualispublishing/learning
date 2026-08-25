@@ -5,9 +5,9 @@ Selection still uses the naturalness-first v5 policy. After the complete row-by-
 linguistic audit, however, corrected English can legitimately cross the selector's
 original word-count buckets. The release gate therefore validates the corrected
 corpus itself: exact row/uniqueness invariants, recomputed word-count/level
-consistency, strong progression coverage, source diversity, register checks, and
-review samples. It does not force a correct translation back into an obsolete
-pre-repair quota.
+consistency, strong progression coverage, source diversity, register checks,
+pronunciation-foundation integrity, and review samples. It does not force a
+correct translation back into an obsolete pre-repair quota.
 """
 from collections import Counter
 import csv
@@ -128,7 +128,70 @@ def corpus_audit_v6():
     print(json.dumps(audit, ensure_ascii=False, indent=2))
 
 
+def release_audit_v6():
+    qa_path = p.base.AUDIT / "qa_summary.json"
+    manifest_path = p.base.OUT / "RELEASE_MANIFEST.json"
+    pronunciation_path = p.base.AUDIT / "pronunciation_qa.json"
+    if not qa_path.exists() or not manifest_path.exists() or not pronunciation_path.exists():
+        raise SystemExit("missing final QA, pronunciation QA, or release manifest")
+
+    qa = json.loads(qa_path.read_text(encoding="utf-8"))
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    pronunciation = json.loads(pronunciation_path.read_text(encoding="utf-8"))
+    problems = []
+    pdfs = list(p.base.OUT.glob("*/*.pdf"))
+
+    if len(pdfs) != 42:
+        problems.append(f"pdf_count={len(pdfs)}")
+    for lang in ("arabic", "french", "urdu"):
+        z = qa.get(lang, {})
+        if z.get("corpus_quality_gate") != "PASS":
+            problems.append(f"{lang}_corpus_gate")
+        if z.get("vocabulary_rows") != 1000 or z.get("sentence_rows") != 1000:
+            problems.append(f"{lang}_row_count")
+        if z.get("sentence_target_unique") != 1000 or z.get("sentence_english_unique") != 1000:
+            problems.append(f"{lang}_uniqueness")
+
+    if pronunciation.get("status") != "PASS":
+        problems.append("pronunciation_gate")
+    checks = pronunciation.get("checks", {})
+    for required_check in (
+        "all_languages_present",
+        "broad_ipa_not_english_respelling",
+        "no_per_sentence_romanization_dependency",
+        "source_notes_present",
+        "mixed_direction_ipa_isolated",
+    ):
+        if checks.get(required_check) is not True:
+            problems.append(f"pronunciation_{required_check}")
+
+    manifest_pron = manifest.get("pronunciation_foundations", {})
+    if manifest_pron.get("status") != "PASS":
+        problems.append("manifest_pronunciation_status")
+    if manifest_pron.get("guide_sha256") != pronunciation.get("guide_sha256"):
+        problems.append("manifest_pronunciation_hash_mismatch")
+    if set(pronunciation.get("languages", [])) != {"arabic", "french", "urdu"}:
+        problems.append("pronunciation_language_set")
+
+    if problems:
+        raise SystemExit("release audit failed: " + ", ".join(problems))
+
+    result = {
+        "gate": "PASS",
+        "pdf_count": len(pdfs),
+        "languages": ["arabic", "french", "urdu"],
+        "pronunciation_gate": "PASS",
+        "pronunciation_guide_sha256": pronunciation["guide_sha256"],
+        "note": "Automated production-candidate release gates passed; independent native-speaker certification remains separate.",
+    }
+    (p.base.AUDIT / "release_gate_v3.json").write_text(
+        json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    print(json.dumps(result, indent=2))
+
+
 p.corpus_audit = corpus_audit_v6
+p.release_audit = release_audit_v6
 
 if __name__ == "__main__":
     p.main()
