@@ -1,37 +1,31 @@
 {
   "schema_version": 1,
-  "release": "1.5.0",
+  "release": "1.6.0",
   "audit_date": "2026-08-24",
   "base_ledger": "SEMANTIC_ITEM_AUDIT.json",
   "base_items": 300,
-  "added_items": 16,
-  "total_items": 316,
-  "source_batch": "BATCH-007",
-  "quality_gate_workflow_run_id": 32794006934,
-  "quality_gate_warnings": 0,
+  "added_items": 32,
+  "total_items": 332,
+  "source_batches": ["BATCH-007","BATCH-008"],
+  "quality_gate_evidence": [
+    {"batch":"BATCH-007","workflow_run_id":32794006934,"warnings":0},
+    {"batch":"BATCH-008","workflow_run_id":32796186191,"warnings":0}
+  ],
   "summary": {
-    "verified": 16,
+    "verified": 32,
     "verified_after_correction": 0,
     "verified_with_source_scope_note": 0,
     "answer_key_reversals": 0,
     "material_factual_errors_remaining": 0
   },
   "items": {
-    "C-104":{"status":"VERIFIED"},
-    "C-105":{"status":"VERIFIED"},
-    "C-106":{"status":"VERIFIED"},
-    "C-107":{"status":"VERIFIED"},
-    "C-108":{"status":"VERIFIED"},
-    "C-109":{"status":"VERIFIED"},
-    "C-110":{"status":"VERIFIED"},
-    "C-111":{"status":"VERIFIED"},
-    "C-112":{"status":"VERIFIED"},
-    "C-113":{"status":"VERIFIED"},
-    "C-114":{"status":"VERIFIED"},
-    "C-115":{"status":"VERIFIED"},
-    "C-116":{"status":"VERIFIED"},
-    "C-117":{"status":"VERIFIED"},
-    "C-118":{"status":"VERIFIED"},
-    "C-119":{"status":"VERIFIED"}
+    "C-104":{"status":"VERIFIED"},"C-105":{"status":"VERIFIED"},"C-106":{"status":"VERIFIED"},"C-107":{"status":"VERIFIED"},
+    "C-108":{"status":"VERIFIED"},"C-109":{"status":"VERIFIED"},"C-110":{"status":"VERIFIED"},"C-111":{"status":"VERIFIED"},
+    "C-112":{"status":"VERIFIED"},"C-113":{"status":"VERIFIED"},"C-114":{"status":"VERIFIED"},"C-115":{"status":"VERIFIED"},
+    "C-116":{"status":"VERIFIED"},"C-117":{"status":"VERIFIED"},"C-118":{"status":"VERIFIED"},"C-119":{"status":"VERIFIED"},
+    "C-120":{"status":"VERIFIED"},"C-121":{"status":"VERIFIED"},"C-122":{"status":"VERIFIED"},"C-123":{"status":"VERIFIED"},
+    "C-124":{"status":"VERIFIED"},"C-125":{"status":"VERIFIED"},"C-126":{"status":"VERIFIED"},"C-127":{"status":"VERIFIED"},
+    "C-128":{"status":"VERIFIED"},"C-129":{"status":"VERIFIED"},"C-130":{"status":"VERIFIED"},"C-131":{"status":"VERIFIED"},
+    "C-132":{"status":"VERIFIED"},"C-133":{"status":"VERIFIED"},"C-134":{"status":"VERIFIED"},"C-135":{"status":"VERIFIED"}
   }
 }
