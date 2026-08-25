@@ -36,6 +36,10 @@ on:
       - 'urdu_top1000.csv'
   workflow_dispatch:
 
+concurrency:
+  group: language-workbooks-v1-${{ github.event.pull_request.head.ref || github.ref_name }}
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
