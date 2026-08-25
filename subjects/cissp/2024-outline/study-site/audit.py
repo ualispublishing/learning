@@ -171,7 +171,7 @@ check(base_summary.get("answer_key_reversals",0)+add_summary.get("answer_key_rev
 check(base_summary.get("material_factual_errors_remaining",0)+add_summary.get("material_factual_errors_remaining",0)==0,"Semantic summary reports unresolved factual error")
 
 html=read(ROOT/"index.html"); label=".".join(str(version).split(".")[:2])
-required=["data-meta.js",*[f"data-d{i}.js" for i in range(1,9)],"data-ai.js","data-precision.js","coverage-detail.js","data-question-calibration.js","bootstrap.js","styles.css","mobile-fix.css","enhancements.css",'id="today"','id="learn"','id="practice"','id="blueprint"','id="progress"','id="sources"','id="quizDifficulty"','id="startBellringer"',f"<option>{standard}</option>",f"RELEASE v{label}"]
+required=["data-meta.js",*[f"data-d{i}.js" for i in range(1,9)],"data-ai.js","data-precision.js","coverage-detail.js","data-question-calibration.js","bootstrap.js","styles.css","mobile-fix.css","enhancements.css",'id="today"','id="learn"','id="practice"','id="blueprint"','id="progress"','id="sources"','id="quizDifficulty"','id="startBellringer"','value="999999">All available</option>',f"RELEASE v{label}"]
 check(all(x in html for x in required),"HTML shell/assets/release controls incomplete"); check("Weighted mixed domains" not in html,"Misleading weighted-mix wording present")
 bootstrap=read(ROOT/"bootstrap.js"); app=read(ROOT/"app.js"); enh=read(ROOT/"enhancements.js")
 check("RELEASED_BATCHES.json" in bootstrap and "CISSP_BELLRINGERS" in bootstrap and "import('./app.js')" in bootstrap,"Bootstrap release loading incomplete")
