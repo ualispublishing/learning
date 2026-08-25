@@ -42,6 +42,11 @@ def replace_once(text: str, old: str, new: str, label: str) -> str:
     return text.replace(old, new, 1)
 
 
+def exact_form_count(text: str, form: str) -> int:
+    """Count a complete Unicode word/form, not a substring inside another Urdu word."""
+    return len(re.findall(rf"(?<!\w){re.escape(form)}(?!\w)", text, flags=re.UNICODE))
+
+
 def main() -> int:
     schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
     required = set(schema["required"])
@@ -101,7 +106,7 @@ def main() -> int:
         row["word_count"] = len(row["text"].split())
         row["sentence_count"] = row["text"].count("۔")
         for target in row.get("new_lexical_targets", []):
-            target["exposures_in_text"] = row["text"].count(target["form"])
+            target["exposures_in_text"] = exact_form_count(row["text"], target["form"])
         path.write_text(json.dumps(row, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
         rows.append(row)
         learner_parts.extend([row["title"], row["text"]])
@@ -124,7 +129,7 @@ def main() -> int:
     prior_learner = ""
     for row in rows[:5]:
         for target in row["new_lexical_targets"]:
-            if target["form"] in prior_learner:
+            if exact_form_count(prior_learner, target["form"]) > 0:
                 fail(f"premature exact-form exposure before first introduction: {target['form']} / {target['id']}")
         prior_learner += "\n" + "\n".join(
             [row["title"], row["text"]]
@@ -137,7 +142,7 @@ def main() -> int:
     checkpoint_forms = {t["form"] for t in p6["review_lexical_targets"] if t["representation"] == "running_text"}
     if p6["new_lexical_targets"] or not p6["speed_training"]["timed"] or p6["speed_training"]["new_word_policy"] != "none":
         fail("Unit 1 P6 checkpoint policy failed")
-    if checkpoint_forms != expected_forms or any(form not in p6["text"] for form in expected_forms):
+    if checkpoint_forms != expected_forms or any(exact_form_count(p6["text"], form) < 1 for form in expected_forms):
         fail("Unit 1 P6 does not visibly recycle all ten new targets")
 
     for row in rows:
@@ -209,7 +214,7 @@ def main() -> int:
         "bidirectional_links",
         "new_target_distribution_2_2_2_2_2_0",
         "new_target_text_exposure",
-        "first_introduction_order",
+        "first_introduction_order_unicode_word_boundary",
         "required_genres",
         "p6_checkpoint_policy",
         "p6_all_target_recycling",
