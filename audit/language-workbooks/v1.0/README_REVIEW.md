@@ -1,1 +1,1 @@
-This directory contains active linguistic correctness audit evidence for the Arabic, French, and Urdu workbook candidate.
+This directory contains the completed automated and row-level linguistic QA evidence for the Arabic, French, and Urdu v1.0 workbook production candidate, together with the explicit remaining hold for final native-speaker linguistic certification.
