@@ -9,11 +9,13 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from datetime import datetime, timezone
 
 import build_language_workbooks_v1 as base
 
 ORIGINAL_FOUNDATIONS_HTML = base.foundations_html
+ARABIC_RUN = re.compile(r"([\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff]+)")
 
 PRONUNCIATION = {
     "arabic": {
@@ -86,15 +88,49 @@ PRONUNCIATION = {
 }
 
 
+def _pron_target_html(lang: str, cfg: dict, target: str) -> str:
+    """Render mixed Arabic-script + IPA/Latin content without bidi reordering.
+
+    Pronunciation examples are pedagogical pairs, not target-language prose. Keep
+    the row itself LTR so its authored sequence is stable, and isolate each
+    Arabic-script run in an RTL BDI span using the language font.
+    """
+    if cfg["dir"] != "rtl":
+        return (
+            '<div class="target" dir="ltr" '
+            f'style="--target-font:\'{cfg["font"]}\';text-align:left">'
+            f'{base.esc(target)}</div>'
+        )
+
+    rendered = []
+    for part in ARABIC_RUN.split(target):
+        if not part:
+            continue
+        if ARABIC_RUN.fullmatch(part):
+            rendered.append(
+                '<bdi dir="rtl" '
+                f'style="font-family:\'{cfg["font"]}\';font-size:1.18em">'
+                f'{base.esc(part)}</bdi>'
+            )
+        else:
+            rendered.append(f'<bdi dir="ltr">{base.esc(part)}</bdi>')
+    return (
+        '<div dir="ltr" style="font-family:\'DejaVu Sans\',sans-serif;'
+        'font-size:15pt;font-weight:600;line-height:1.5;margin:.05in 0 .08in;'
+        'text-align:left;unicode-bidi:isolate">'
+        + "".join(rendered)
+        + '</div>'
+    )
+
+
 def _guide_html(lang: str, cfg: dict) -> str:
     guide = PRONUNCIATION[lang]
-    rtl = "rtl" if cfg["dir"] == "rtl" else ""
     cards = []
     for title, target, note in guide["rows"]:
         cards.append(
             '<div class="foundation-card">'
             f'<h3>{base.esc(title)}</h3>'
-            f'<div class="target {rtl}" style="--target-font:\'{cfg["font"]}\'">{base.esc(target)}</div>'
+            f'{_pron_target_html(lang, cfg, target)}'
             f'<p>{base.esc(note)}</p>'
             '</div>'
         )
@@ -153,6 +189,14 @@ def audit_payload() -> dict:
         if "romanization:" in joined or "transliteration:" in joined:
             raise SystemExit(f"{lang}: per-item romanization/transliteration field found")
 
+    for lang in ("arabic", "urdu"):
+        cfg = base.LANGS[lang]
+        rendered = "\n".join(_pron_target_html(lang, cfg, row[1]) for row in PRONUNCIATION[lang]["rows"])
+        if '<div dir="ltr"' not in rendered or '<bdi dir="rtl"' not in rendered or '<bdi dir="ltr"' not in rendered:
+            raise SystemExit(f"{lang}: mixed-direction pronunciation isolation gate failed")
+        if 'class="target rtl"' in rendered:
+            raise SystemExit(f"{lang}: pronunciation rows must not inherit paragraph-level RTL direction")
+
     canonical = json.dumps(PRONUNCIATION, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     digest = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
     return {
@@ -167,6 +211,7 @@ def audit_payload() -> dict:
             "broad_ipa_not_english_respelling": True,
             "no_per_sentence_romanization_dependency": True,
             "source_notes_present": True,
+            "mixed_direction_ipa_isolated": True,
         },
         "assurance_note": "No known pronunciation-guide defect after source-backed review. This gate validates the workbook guide and its pedagogical constraints; it is not a substitute for native-audio evaluation of every possible accent realization.",
         "sources": {lang: PRONUNCIATION[lang]["sources"] for lang in sorted(required)},
