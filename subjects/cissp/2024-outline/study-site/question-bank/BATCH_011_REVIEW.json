@@ -2,7 +2,7 @@
   "schema_version": 2,
   "batch_id": "011",
   "reviewed_on": "2026-08-25",
-  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "status": "SEMANTIC_REVIEWED_GATE_PASSED",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -31,14 +31,25 @@
     "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; declared sibling relationships only where the objective/rule family is reused through a materially different decision boundary"
   },
   "gate_state": {
-    "automated_repository_gate": "PENDING",
+    "automated_repository_gate": "PASS",
+    "workflow_run_id": 32873443342,
     "quality_gate_mode": "released+candidate",
-    "promotion_allowed": false,
-    "requirement": "Promote only after quality_gate.py passes against the full v1.8 released corpus and Batch 011 with zero unresolved warnings, and the browser smoke gate passes."
+    "released_mcq_compared": 223,
+    "released_bellringers_compared": 1,
+    "candidate_records": 16,
+    "warnings": 0,
+    "browser_smoke": "PASS",
+    "promotion_allowed": true
+  },
+  "coverage_effect": {
+    "explicit_subtopic_tags_before": 231,
+    "explicit_subtopic_tags_after_candidate": 245,
+    "total_mapped_subtopics": 344
   },
   "notes": [
     "Batch 011 follows the v1.8 planner exactly rather than adding random volume: MFA-fatigue operations, privileged job rotation, protected backup-media transport, golden-image provenance, ML-assisted detection governance, procedures, BIA sequencing, constrained-device NAC, Biba integrity, serverless least privilege, cryptographic fault injection, just-in-time privileged access, federation trust validation, mandatory access control, TPM-sealed disk-key release, and hybrid assessment strategy.",
     "Declared siblings are used only when the same objective or rule family is intentionally revisited through a distinct operational decision, such as Biba versus Bell-LaPadula, procedure versus standard, federation trust validation versus relying-party role mapping, or TPM-sealed boot keys versus runtime plaintext secret exposure.",
-    "The batch remains excluded from RELEASED_BATCHES.json and therefore from the public Pages artifact until the automated gate passes."
+    "Repository-wide quality_gate.py passed against 223 released standard questions plus 1 Bellringer and all 16 Batch 011 candidates with zero warnings.",
+    "The interactive browser smoke test also passed before promotion."
   ]
 }
