@@ -3,8 +3,9 @@
 Current runtime: **GitHub Pages only**.
 
 ## Current queue
-- **115** candidate-complete, tech-focused prepared applications in the encrypted queue.
-- The August 24 quality audit removed three records from the runnable set: one closed posting, one non-tech customer-service role, and one materially low-fit degree/domain mismatch.
+- **111** candidate-complete, tech-focused prepared applications in the encrypted queue.
+- The August 24 live-quality audit removed seven records from the former 118-role runnable set: five stale/closed postings, one non-tech customer-service role, and one materially low-fit degree/domain mismatch.
+- The most recent stale removals were Intuit — Full Stack Software Developer I; Tripledot Studios / Clipwire Games — Junior Data Analyst; NEXT Supply — Junior IT Helpdesk Technician; and Savaria Corporation — Junior Service Desk Technician (1-Year Contract).
 - Queue content is decrypted in the browser from the seeded URL fragment and then stored in local browser storage.
 - The public encrypted payload is minimized to runtime fields; résumé and cover-letter references are reduced to basenames.
 - Public runner code contains no candidate profile, passwords, or plaintext résumé/cover-letter documents.
