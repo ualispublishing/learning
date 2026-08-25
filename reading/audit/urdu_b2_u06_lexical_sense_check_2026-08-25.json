@@ -5,32 +5,142 @@
   "cefr": "B2",
   "unit": 6,
   "date": "2026-08-25",
-  "status": "REVIEWED_FOR_GENERATION_PENDING_CANONICAL_FRESHNESS",
+  "status": "PASS_FOR_GENERATION_TARGET_SENSES_AND_CANONICAL_FRESHNESS",
   "controlled_lexicon": "reading/lexicons/urdu.jsonl",
   "source_file_label": "urdu_top3000.csv",
   "method": "Controlled-lexicon identity/rank check plus learner-first sense review. Raw English glosses are treated as discovery hints, not authoritative Urdu definitions. Canonical freshness is rechecked fail-closed immediately before append.",
   "targets": [
-    {"id":"ur-rank-2424","form":"ریکارڈنگ","rank":2424,"source_gloss":"recording","intended_sense":"محفوظ کی گئی آواز یا میڈیا کی ریکارڈ شدہ نقل","sense_result":"PASS"},
-    {"id":"ur-rank-2431","form":"بھیجنا","rank":2431,"source_gloss":"send","intended_sense":"معلومات یا پیغام کو دوسرے مقام یا نظام تک منتقل کرنا","sense_result":"PASS"},
-    {"id":"ur-rank-2503","form":"مبہم","rank":2503,"source_gloss":"apprehensive","intended_sense":"غیر واضح، گول مول، مشتبہ یا ایسا جس کا مطلب صاف نہ ہو","sense_result":"PASS_WITH_SOURCE_GLOSS_CORRECTION","note":"The controlled lexicon English gloss is not reliable for the taught sense; Rekhta explicitly supports ambiguous/vague/indistinct."},
-    {"id":"ur-rank-2445","form":"مفاہمت","rank":2445,"source_gloss":"compromise","intended_sense":"باہمی سمجھ، اتفاق یا قابلِ عمل سمجھوتا","sense_result":"PASS"},
-    {"id":"ur-rank-2444","form":"معطلی","rank":2444,"source_gloss":"dismissal; discharge","intended_sense":"کسی کام، عہدے یا رسائی کو عارضی طور پر معطل یا روک دینے کی حالت","sense_result":"PASS_WITH_SCOPE_NOTE","note":"Rekhta includes suspension/removal from work; the passage explicitly teaches temporary account suspension rather than permanent dismissal."},
-    {"id":"ur-rank-2495","form":"تعطل","rank":2495,"source_gloss":"inaction; inactivity","intended_sense":"کسی کام یا خدمت کا بند، رکا یا غیر فعال ہو جانا","sense_result":"PASS_WITH_SOURCE_GLOSS_EXPANSION","note":"Rekhta explicitly includes a work/process stopping or becoming inactive, supporting service outage/stoppage."},
-    {"id":"ur-rank-2464","form":"چھاپ","rank":2464,"source_gloss":"impression","intended_sense":"نقش، اثر یا نشان؛ یہاں سرگرمی سے رہ جانے والی ڈیجیٹل چھاپ","sense_result":"PASS","note":"Rekhta supports imprint/mark/effect; the digital use is a transparent metaphor made explicit in context."},
-    {"id":"ur-rank-2488","form":"پرت","rank":2488,"source_gloss":"layer","intended_sense":"تہ، سطح یا ساخت کی ایک الگ پرت","sense_result":"PASS"},
-    {"id":"ur-rank-2486","form":"فرسودہ","rank":2486,"source_gloss":"creaky; decrepit; derelict","intended_sense":"پرانا، گھسا ہوا یا زمانے/معاونت کے لحاظ سے متروک","sense_result":"PASS","note":"Rekhta supports old/worn-out and contemporary examples with obsolete ideas/technology."},
-    {"id":"ur-rank-2475","form":"گمشدہ","rank":2475,"source_gloss":"lost","intended_sense":"کھویا ہوا یا ایسا جس کا مقام/قبضہ معلوم نہ ہو","sense_result":"PASS"}
+    {
+      "id": "ur-rank-2424",
+      "form": "ریکارڈنگ",
+      "rank": 2424,
+      "source_gloss": "recording",
+      "intended_sense": "محفوظ کی گئی آواز یا میڈیا کی ریکارڈ شدہ نقل",
+      "sense_result": "PASS"
+    },
+    {
+      "id": "ur-rank-2431",
+      "form": "بھیجنا",
+      "rank": 2431,
+      "source_gloss": "send",
+      "intended_sense": "معلومات یا پیغام کو دوسرے مقام یا نظام تک منتقل کرنا",
+      "sense_result": "PASS"
+    },
+    {
+      "id": "ur-rank-2503",
+      "form": "مبہم",
+      "rank": 2503,
+      "source_gloss": "apprehensive",
+      "intended_sense": "غیر واضح، گول مول، مشتبہ یا ایسا جس کا مطلب صاف نہ ہو",
+      "sense_result": "PASS_WITH_SOURCE_GLOSS_CORRECTION",
+      "note": "The controlled lexicon English gloss is not reliable for the taught sense; Rekhta explicitly supports ambiguous/vague/indistinct."
+    },
+    {
+      "id": "ur-rank-2445",
+      "form": "مفاہمت",
+      "rank": 2445,
+      "source_gloss": "compromise",
+      "intended_sense": "باہمی سمجھ، اتفاق یا قابلِ عمل سمجھوتا",
+      "sense_result": "PASS"
+    },
+    {
+      "id": "ur-rank-2444",
+      "form": "معطلی",
+      "rank": 2444,
+      "source_gloss": "dismissal; discharge",
+      "intended_sense": "کسی کام، عہدے یا رسائی کو عارضی طور پر معطل یا روک دینے کی حالت",
+      "sense_result": "PASS_WITH_SCOPE_NOTE",
+      "note": "Rekhta includes suspension/removal from work; the passage explicitly teaches temporary account suspension rather than permanent dismissal."
+    },
+    {
+      "id": "ur-rank-2495",
+      "form": "تعطل",
+      "rank": 2495,
+      "source_gloss": "inaction; inactivity",
+      "intended_sense": "کسی کام یا خدمت کا بند، رکا یا غیر فعال ہو جانا",
+      "sense_result": "PASS_WITH_SOURCE_GLOSS_EXPANSION",
+      "note": "Rekhta explicitly includes a work/process stopping or becoming inactive, supporting service outage/stoppage."
+    },
+    {
+      "id": "ur-rank-2464",
+      "form": "چھاپ",
+      "rank": 2464,
+      "source_gloss": "impression",
+      "intended_sense": "نقش، اثر یا نشان؛ یہاں سرگرمی سے رہ جانے والی ڈیجیٹل چھاپ",
+      "sense_result": "PASS",
+      "note": "Rekhta supports imprint/mark/effect; the digital use is a transparent metaphor made explicit in context."
+    },
+    {
+      "id": "ur-rank-2488",
+      "form": "پرت",
+      "rank": 2488,
+      "source_gloss": "layer",
+      "intended_sense": "تہ، سطح یا ساخت کی ایک الگ پرت",
+      "sense_result": "PASS"
+    },
+    {
+      "id": "ur-rank-2486",
+      "form": "فرسودہ",
+      "rank": 2486,
+      "source_gloss": "creaky; decrepit; derelict",
+      "intended_sense": "پرانا، گھسا ہوا یا زمانے/معاونت کے لحاظ سے متروک",
+      "sense_result": "PASS",
+      "note": "Rekhta supports old/worn-out and contemporary examples with obsolete ideas/technology."
+    },
+    {
+      "id": "ur-rank-2475",
+      "form": "گمشدہ",
+      "rank": 2475,
+      "source_gloss": "lost",
+      "intended_sense": "کھویا ہوا یا ایسا جس کا مقام/قبضہ معلوم نہ ہو",
+      "sense_result": "PASS"
+    }
   ],
   "external_checks": [
-    {"form":"مبہم","source":"Rekhta Dictionary","url":"https://www.rekhta.org/urdudictionary?keyword=%D9%85%D8%A8%DB%81%D9%85","supports":"ambiguous, vague, indistinct, doubtful"},
-    {"form":"مفاہمت","source":"Rekhta Dictionary","url":"https://www.rekhta.org/urdudictionary?keyword=%D9%85%D9%81%D8%A7%DB%81%D9%85%D8%AA","supports":"understanding, agreement, compromise"},
-    {"form":"معطلی","source":"Rekhta Dictionary","url":"https://www.rekhtadictionary.com/meaning-of-muattalii?lang=ur","supports":"suspension, removal from work, becoming inactive"},
-    {"form":"تعطل","source":"Rekhta Dictionary","url":"https://www.rekhtadictionary.com/meaning-of-taattul?lang=ur","supports":"work/process stopping, inactivity, suspension"},
-    {"form":"چھاپ","source":"Rekhta Dictionary","url":"https://www.rekhtadictionary.com/meaning-of-chhaap?lang=ur","supports":"imprint, mark, stamp; effect/impression"},
-    {"form":"پرت","source":"Rekhta Dictionary","url":"https://www.rekhtadictionary.com/meaning-of-parat?lang=ur","supports":"layer, stratum, sheet/part"},
-    {"form":"فرسودہ","source":"Rekhta Dictionary","url":"https://rekhtadictionary.com/meaning-of-farsuuda?lang=ur","supports":"old, worn, obsolete"}
+    {
+      "form": "مبہم",
+      "source": "Rekhta Dictionary",
+      "url": "https://www.rekhta.org/urdudictionary?keyword=%D9%85%D8%A8%DB%81%D9%85",
+      "supports": "ambiguous, vague, indistinct, doubtful"
+    },
+    {
+      "form": "مفاہمت",
+      "source": "Rekhta Dictionary",
+      "url": "https://www.rekhta.org/urdudictionary?keyword=%D9%85%D9%81%D8%A7%DB%81%D9%85%D8%AA",
+      "supports": "understanding, agreement, compromise"
+    },
+    {
+      "form": "معطلی",
+      "source": "Rekhta Dictionary",
+      "url": "https://www.rekhtadictionary.com/meaning-of-muattalii?lang=ur",
+      "supports": "suspension, removal from work, becoming inactive"
+    },
+    {
+      "form": "تعطل",
+      "source": "Rekhta Dictionary",
+      "url": "https://www.rekhtadictionary.com/meaning-of-taattul?lang=ur",
+      "supports": "work/process stopping, inactivity, suspension"
+    },
+    {
+      "form": "چھاپ",
+      "source": "Rekhta Dictionary",
+      "url": "https://www.rekhtadictionary.com/meaning-of-chhaap?lang=ur",
+      "supports": "imprint, mark, stamp; effect/impression"
+    },
+    {
+      "form": "پرت",
+      "source": "Rekhta Dictionary",
+      "url": "https://www.rekhtadictionary.com/meaning-of-parat?lang=ur",
+      "supports": "layer, stratum, sheet/part"
+    },
+    {
+      "form": "فرسودہ",
+      "source": "Rekhta Dictionary",
+      "url": "https://rekhtadictionary.com/meaning-of-farsuuda?lang=ur",
+      "supports": "old, worn, obsolete"
+    }
   ],
-  "freshness_result": "PENDING_PROMOTION_GATE",
-  "freshness_scope": "Promotion script must check these exact target IDs against all canonical Urdu A1-B1 and B2 sequences 1-30 immediately before Unit 6 append.",
+  "freshness_result": "PASS",
+  "freshness_scope": "Exact target IDs checked against all canonical Urdu A1-B1 and B2 sequences 1-30 immediately before Unit 6 append.",
   "release_promotion": false
 }
