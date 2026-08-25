@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "batch_id": "015",
+  "reviewed_on": "2026-08-25",
+  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "records": 16,
+  "standard_mcq": 16,
+  "bellringers": 0,
+  "files": [
+    "question-bank/candidates/batch-015-a.jsonl",
+    "question-bank/candidates/batch-015-b.jsonl",
+    "question-bank/candidates/batch-015-c.jsonl",
+    "question-bank/candidates/batch-015-d.jsonl"
+  ],
+  "difficulty_distribution": {"F":0,"E":12,"S":4,"B":0},
+  "primary_domain_distribution": {"1":5,"2":0,"3":3,"4":1,"5":1,"6":1,"7":5,"8":0},
+  "reviewed_ids": ["C-232","C-233","C-234","C-235","C-236","C-237","C-238","C-239","C-240","C-241","C-242","C-243","C-244","C-245","C-246","C-247"],
+  "semantic_review": {
+    "semantic_reviewed_records": 16,
+    "answer_key_conflicts": 0,
+    "objective_mapping_conflicts": 0,
+    "source_mapping_conflicts": 0,
+    "material_factual_errors_remaining": 0,
+    "four_option_rationales_complete": true,
+    "originality_provenance_complete": true,
+    "external_question_seeds_used": 0
+  },
+  "authoring_focus": {
+    "planner_basis": "released v1.12 deficit state after Batch 014 promotion",
+    "objective_targets": ["1.8","7.5","7.7","7.8","7.9","7.12","6.4","1.1","1.7","3.2","3.5","1.10","3.7","4.2","5.3","1.11"],
+    "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; declared sibling relationships only where a released objective/rule family is deliberately revisited through a materially different decision boundary"
+  },
+  "gate_state": {
+    "automated_repository_gate": "PENDING",
+    "quality_gate_mode": "released+candidate",
+    "promotion_allowed": false,
+    "requirement": "Promote only after quality_gate.py passes against the full v1.12 released corpus and Batch 015 with zero unresolved warnings, and the browser smoke gate passes."
+  },
+  "notes": [
+    "Batch 015 follows the v1.12 planner exactly: complete termination deprovisioning, removable-media cross-zone controls, WAF rule tuning, transitive-dependency vulnerability management, post-emergency change reconciliation, progressively realistic DR exercises, assessment finding closure by retest, ethics of competence and truthful assurance, dependency-aware BIA, Biba integrity reasoning, serverless workload/event trust boundaries, agentic-AI tool abuse threat modeling, cryptographic fault injection, WAN common-mode redundancy, federation claim/authorization lifecycle, and ongoing supplier monitoring.",
+    "Stretch items are C-235, C-239, C-243, and C-247. Sibling relationships deliberately revisit only broad objective families through materially different decisions.",
+    "The batch remains excluded from RELEASED_BATCHES.json and the public Pages artifact until the automated gate passes."
+  ]
+}
