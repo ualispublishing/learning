@@ -1,12 +1,12 @@
 {
-  "schema_version": 11,
+  "schema_version": 12,
   "updated": "2026-08-25",
-  "release": "1.8.0",
+  "release": "1.9.0",
   "released": {
-    "bank_records": 224,
-    "standard_mcq": 223,
+    "bank_records": 240,
+    "standard_mcq": 239,
     "bellringer_cases": 1,
-    "difficulty_distribution": {"F":41,"E":141,"S":41,"B":1},
+    "difficulty_distribution": {"F":41,"E":153,"S":45,"B":1},
     "base_classification_manifest": "RELEASED_QUESTION_CLASSIFICATION.json",
     "released_batch_manifest": "RELEASED_BATCHES.json"
   },
@@ -16,14 +16,15 @@
     "007": {"status":"RELEASED_V1_5_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_007_REVIEW.json","quality_gate_workflow_run_id":32794006934,"quality_gate_warnings":0},
     "008": {"status":"RELEASED_V1_6_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_008_REVIEW.json","quality_gate_workflow_run_id":32796186191,"quality_gate_warnings":0},
     "009": {"status":"RELEASED_V1_7_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_009_REVIEW.json","quality_gate_workflow_run_id":32796710357,"quality_gate_warnings":0},
-    "010": {"status":"RELEASED_V1_8_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_010_REVIEW.json","quality_gate_workflow_run_id":32857069623,"quality_gate_warnings":0}
+    "010": {"status":"RELEASED_V1_8_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_010_REVIEW.json","quality_gate_workflow_run_id":32857069623,"quality_gate_warnings":0},
+    "011": {"status":"RELEASED_V1_9_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_011_REVIEW.json","quality_gate_workflow_run_id":32873443342,"quality_gate_warnings":0}
   },
   "candidate_batches": {},
   "pending_candidate_summary": {"records":0,"standard_mcq":0,"bellringer_cases":0,"difficulty_distribution":{"F":0,"E":0,"S":0,"B":0}},
   "coverage": {
     "numbered_objectives_with_standard_mcq_exposure": "62/62",
     "mapped_subtopics": 344,
-    "explicit_enriched_subtopic_exposure": 231,
+    "explicit_enriched_subtopic_exposure": 245,
     "boundary": "Objective/subtopic exposure is an authoring coverage metric, not evidence of learner mastery."
   },
   "authoring_guardrails": {
@@ -33,9 +34,9 @@
     "objective_planning_minimum": {"F":1,"E":4,"S":1}
   },
   "long_term_target": {"bank_records":800,"F":120,"E":480,"S":160,"B":40},
-  "remaining_to_target": {"bank_records":576,"F":79,"E":339,"S":119,"B":39},
+  "remaining_to_target": {"bank_records":560,"F":79,"E":327,"S":115,"B":39},
   "next_priority": [
-    "Use the v1.8 coverage planner to target the remaining sparse objectives and 113 enriched subtopics without explicit question tags.",
+    "Use the v1.9 coverage planner to target the remaining sparse objectives and 99 enriched subtopics without explicit question tags.",
     "Keep the next 16-question batch centered on Exam-calibrated and Stretch application while preserving the 35% primary-domain cap.",
     "Keep every new candidate behind semantic review plus the repository-wide originality/duplicate gate before release.",
     "Add Bellringers separately and sparsely; they are integrative drills, not imitations of live CISSP items.",
