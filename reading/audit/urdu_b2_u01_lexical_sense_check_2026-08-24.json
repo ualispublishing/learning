@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "ur",
+  "cefr": "B2",
+  "unit": 1,
+  "date": "2026-08-24",
+  "roadmap_theme": "science and society",
+  "required_genres": ["popular science", "analysis", "paired viewpoints"],
+  "status": "PASS_FOR_GENERATION_TARGET_SENSES",
+  "release_promotion": false,
+  "new_target_distribution": [2,2,2,2,2,0],
+  "freshness_method": "Guarded promotion must check exact target IDs against all canonical Urdu A1-B1 targets and any live B2 records immediately before append.",
+  "targets": [
+    {"passage":1,"id":"ur-rank-2243","form":"ریاضی","rank":2243,"source_lexicon":"urdu_top3000.csv","intended_sense":"mathematics; quantitative reasoning used to describe or compare patterns"},
+    {"passage":1,"id":"ur-rank-2107","form":"عیاں","rank":2107,"source_lexicon":"urdu_top3000.csv","intended_sense":"clear, evident, or made apparent"},
+    {"passage":2,"id":"ur-rank-2246","form":"مچھر","rank":2246,"source_lexicon":"urdu_top3000.csv","intended_sense":"mosquito"},
+    {"passage":2,"id":"ur-rank-2211","form":"رضامندی","rank":2211,"source_lexicon":"urdu_top3000.csv","intended_sense":"consent; voluntary agreement after relevant information is understood"},
+    {"passage":3,"id":"ur-rank-2031","form":"ڈیزل","rank":2031,"source_lexicon":"urdu_top3000.csv","intended_sense":"diesel fuel or diesel-powered transport in an emissions-policy context"},
+    {"passage":3,"id":"ur-rank-2104","form":"تجدید","rank":2104,"source_lexicon":"urdu_top3000.csv","intended_sense":"renewal, modernization, or systematic upgrading"},
+    {"passage":4,"id":"ur-rank-2255","form":"نمو","rank":2255,"source_lexicon":"urdu_top3000.csv","intended_sense":"growth or development, especially plant growth"},
+    {"passage":4,"id":"ur-rank-2265","form":"سطحی","rank":2265,"source_lexicon":"urdu_top3000.csv","intended_sense":"superficial; based only on the most obvious layer without deeper examination"},
+    {"passage":5,"id":"ur-rank-2032","form":"اخلاقیات","rank":2032,"source_lexicon":"urdu_top3000.csv","intended_sense":"ethics; principles for judging responsible conduct"},
+    {"passage":5,"id":"ur-rank-2277","form":"بشری","rank":2277,"source_lexicon":"urdu_top3000.csv","intended_sense":"human; relating to people and human judgment, needs, or limits"}
+  ],
+  "generation_guardrails": [
+    "B2 passage text should remain in the 350-550 whitespace-token production band.",
+    "Difficulty should come from argument structure, assumptions, counterarguments, scope, and synthesis rather than excessive new vocabulary.",
+    "P1-P5 introduce exactly two new lexical targets each; P6 introduces none and visibly recycles all ten.",
+    "Science-and-society scenarios are fictional or method-focused unless factual claims are independently sourced.",
+    "Public-health and ethics passages remain educational and do not provide individualized medical advice.",
+    "The consent scenario must distinguish voluntary participation from mere notification.",
+    "Generation/integrity status remains separate from educator/publication release approval."
+  ]
+}
