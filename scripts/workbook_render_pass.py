@@ -12,13 +12,30 @@ import language_workbook_pronunciation as pronunciation
 import workbook_release_passes as passes
 
 
+def sources_with_pronunciation():
+    html = quality.quality_sources_html()
+    marker = "</section>"
+    if not html.endswith(marker):
+        raise RuntimeError("unexpected sources HTML shape; refusing unsafe pronunciation-source injection")
+    note = (
+        '<p><strong>Pronunciation foundations:</strong> broad-IPA and articulatory guidance was '
+        'cross-checked against Karin C. Ryding, <em>A Reference Grammar of Modern Standard Arabic</em> '
+        '(Cambridge University Press); Bernard Tranel, <em>The Sounds of French: An Introduction</em> '
+        '(Cambridge University Press); Saleem et al., <em>Urdu Consonantal and Vocalic Sounds</em> '
+        '(CRULP / Center for Language Engineering); and the Omniglot Urdu-script reference for '
+        'Nastaliq, nūn ghunnah, and aspirated-letter conventions. These are broad learner reference '
+        'targets, not a claim that each language has one accent-free phonetic realization.</p>'
+    )
+    return html[:-len(marker)] + note + marker
+
+
 def configure():
     if not (passes.STAGE / "corpus_audit.json").exists():
         raise SystemExit("corpus-audit pass must complete before rendering")
     base.parse_sentences = passes.staged_parse_sentences
     base.cover = pronunciation.cover
     base.foundations_html = pronunciation.foundations_html
-    base.sources_html = quality.quality_sources_html
+    base.sources_html = sources_with_pronunciation
     base.LANGS["urdu"]["zip"] = "internal://ualis/urdu-controlled-conversation-v1"
     pronunciation.write_qa()
 
@@ -41,12 +58,18 @@ def render_language(lang: str):
         "target_unique": qa["sentence_target_unique"],
         "english_unique": qa["sentence_english_unique"],
         "pronunciation_foundations": "PASS",
+        "pronunciation_references_rendered": True,
     }, ensure_ascii=False, indent=2))
 
 
 def finalize():
     configure()
     pronunciation_qa = pronunciation.audit_payload()
+    rendered_sources = sources_with_pronunciation()
+    for required_reference in ("Ryding", "Tranel", "Urdu Consonantal and Vocalic Sounds", "Omniglot"):
+        if required_reference not in rendered_sources:
+            raise SystemExit(f"missing rendered pronunciation reference: {required_reference}")
+
     for lang in ("arabic", "french", "urdu"):
         qa_path = base.AUDIT / f"{lang}_qa.json"
         if not qa_path.exists():
@@ -68,6 +91,7 @@ def finalize():
             "status": pronunciation_qa["status"],
             "guide_sha256": pronunciation_qa["guide_sha256"],
             "scope": pronunciation_qa["scope"],
+            "references_rendered": True,
         },
         "source_policy": "Natural learner language outranks artificial uniqueness; legitimate homographs are allowed when meaning and grammatical role differ.",
     }
@@ -76,7 +100,7 @@ def finalize():
     )
     quality.post_process()
     pronunciation.write_qa()
-    print("Aggregated three rendered workbooks, applied corpus-quality gates, and recorded pronunciation QA.")
+    print("Aggregated three rendered workbooks, applied corpus-quality gates, and recorded pronunciation QA/references.")
 
 
 def main():
