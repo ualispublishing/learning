@@ -6,22 +6,103 @@
   "unit": 3,
   "date": "2026-08-24",
   "roadmap_theme": "ethics and competing values",
-  "required_genres": ["argument", "case", "response"],
-  "status": "PASS_FOR_GENERATION_TARGET_SENSES",
+  "required_genres": [
+    "argument",
+    "case",
+    "response"
+  ],
+  "status": "PASS_FOR_GENERATION_TARGET_SENSES_AND_CANONICAL_FRESHNESS",
   "release_promotion": false,
-  "new_target_distribution": [2,2,2,2,2,0],
+  "new_target_distribution": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    0
+  ],
   "freshness_method": "Guarded promotion must check exact target IDs against all canonical Urdu A1-B1 and live B2 sequences 1-12 immediately before append.",
   "targets": [
-    {"passage":1,"id":"ur-rank-2005","form":"فریب","rank":2005,"source_lexicon":"urdu_top3000.csv","intended_sense":"deception or deliberate misleading"},
-    {"passage":1,"id":"ur-rank-2004","form":"حرمت","rank":2004,"source_lexicon":"urdu_top3000.csv","intended_sense":"respect, dignity, or protected moral standing"},
-    {"passage":2,"id":"ur-rank-2118","form":"مجاز","rank":2118,"source_lexicon":"urdu_top3000.csv","intended_sense":"authorized or permitted to act or access information"},
-    {"passage":2,"id":"ur-rank-2350","form":"حاجت","rank":2350,"source_lexicon":"urdu_top3000.csv","intended_sense":"need or requirement that may justify limited access or an exception"},
-    {"passage":3,"id":"ur-rank-2378","form":"زاویہ","rank":2378,"source_lexicon":"urdu_top3000.csv","intended_sense":"angle or perspective from which a problem is considered"},
-    {"passage":3,"id":"ur-rank-2352","form":"عاجزی","rank":2352,"source_lexicon":"urdu_top3000.csv","intended_sense":"humility; willingness to recognize the limits of one's own judgment"},
-    {"passage":4,"id":"ur-rank-2320","form":"رسوائی","rank":2320,"source_lexicon":"urdu_top3000.csv","intended_sense":"public disgrace or humiliation"},
-    {"passage":4,"id":"ur-rank-2056","form":"شرمندہ","rank":2056,"source_lexicon":"urdu_top3000.csv","intended_sense":"ashamed or embarrassed because of perceived wrongdoing or exposure"},
-    {"passage":5,"id":"ur-rank-2062","form":"وفادار","rank":2062,"source_lexicon":"urdu_top3000.csv","intended_sense":"loyal or faithful to a person, group, or commitment"},
-    {"passage":5,"id":"ur-rank-2025","form":"غداری","rank":2025,"source_lexicon":"urdu_top3000.csv","intended_sense":"betrayal or serious breach of loyalty"}
+    {
+      "passage": 1,
+      "id": "ur-rank-2005",
+      "form": "فریب",
+      "rank": 2005,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "deception or deliberate misleading"
+    },
+    {
+      "passage": 1,
+      "id": "ur-rank-2004",
+      "form": "حرمت",
+      "rank": 2004,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "respect, dignity, or protected moral standing"
+    },
+    {
+      "passage": 2,
+      "id": "ur-rank-2118",
+      "form": "مجاز",
+      "rank": 2118,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "authorized or permitted to act or access information"
+    },
+    {
+      "passage": 2,
+      "id": "ur-rank-2350",
+      "form": "حاجت",
+      "rank": 2350,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "need or requirement that may justify limited access or an exception"
+    },
+    {
+      "passage": 3,
+      "id": "ur-rank-2378",
+      "form": "زاویہ",
+      "rank": 2378,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "angle or perspective from which a problem is considered"
+    },
+    {
+      "passage": 3,
+      "id": "ur-rank-2352",
+      "form": "عاجزی",
+      "rank": 2352,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "humility; willingness to recognize the limits of one's own judgment"
+    },
+    {
+      "passage": 4,
+      "id": "ur-rank-2320",
+      "form": "رسوائی",
+      "rank": 2320,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "public disgrace or humiliation"
+    },
+    {
+      "passage": 4,
+      "id": "ur-rank-2056",
+      "form": "شرمندہ",
+      "rank": 2056,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "ashamed or embarrassed because of perceived wrongdoing or exposure"
+    },
+    {
+      "passage": 5,
+      "id": "ur-rank-2062",
+      "form": "وفادار",
+      "rank": 2062,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "loyal or faithful to a person, group, or commitment"
+    },
+    {
+      "passage": 5,
+      "id": "ur-rank-2025",
+      "form": "غداری",
+      "rank": 2025,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "betrayal or serious breach of loyalty"
+    }
   ],
   "generation_guardrails": [
     "B2 passage text remains in the 350-550 whitespace-token production band.",
@@ -30,5 +111,7 @@
     "Cases are fictional and do not give legal, medical, or individualized professional advice.",
     "Ethical disagreements must present plausible competing considerations rather than partisan or moralistic caricatures.",
     "Generation/integrity state remains separate from educator/publication release approval."
-  ]
+  ],
+  "freshness_result": "PASS",
+  "freshness_scope": "Exact target IDs checked against all canonical Urdu A1-B1 and B2 sequences 1-12 immediately before Unit 3 append."
 }
