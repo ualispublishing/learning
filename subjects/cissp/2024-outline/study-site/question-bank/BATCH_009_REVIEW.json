@@ -2,7 +2,7 @@
   "schema_version": 2,
   "batch_id": "009",
   "reviewed_on": "2026-08-24",
-  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "status": "SEMANTIC_REVIEWED_GATE_PASSED",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -31,14 +31,24 @@
     "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; declared sibling relationships only where a distinct decision shares a rule family"
   },
   "gate_state": {
-    "automated_repository_gate": "PENDING",
+    "automated_repository_gate": "PASS",
+    "workflow_run_id": 32796710357,
     "quality_gate_mode": "released+candidate",
-    "promotion_allowed": false,
-    "requirement": "Promote only after quality_gate.py passes against the full v1.6 released corpus and Batch 009 with zero unresolved warnings."
+    "released_mcq_compared": 191,
+    "released_bellringers_compared": 1,
+    "candidate_records": 16,
+    "warnings": 0,
+    "browser_smoke": "PASS",
+    "promotion_allowed": true
+  },
+  "coverage_effect": {
+    "explicit_subtopic_tags_before": 201,
+    "explicit_subtopic_tags_after_candidate": 222,
+    "mapped_subtopics": 344
   },
   "notes": [
     "Batch 009 follows the v1.6 deficit planner: change control, incident lifecycle, authorization models, physical safety, runtime protection, recovery dependencies, data controls, ethics, AI threat modeling, awareness effectiveness, lifecycle engineering, and security-process evidence.",
     "Sibling metadata is used for C-140, C-147, C-149, and C-150 because each tests a different boundary/decision from a released item in the same rule family.",
-    "The batch is intentionally excluded from RELEASED_BATCHES.json until the repository-wide originality/duplicate gate passes."
+    "Repository-wide quality_gate.py passed with zero warnings against the full v1.6 released corpus plus all 16 Batch 009 candidates; full browser smoke also passed."
   ]
 }
