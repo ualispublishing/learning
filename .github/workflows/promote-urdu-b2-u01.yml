@@ -29,6 +29,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # Exact-form lexical checks use Unicode word boundaries, not substrings.
           python3 reading/tools/promote_urdu_b2_u01.py
 
       - name: Refresh and validate live state bundle
