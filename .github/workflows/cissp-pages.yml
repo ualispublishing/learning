@@ -102,6 +102,7 @@ jobs:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
           set -euo pipefail
+          ROOT='subjects/cissp/2024-outline/study-site'
           BASE="${PAGE_URL%/}/"
           HTML="$RUNNER_TEMP/cissp-public.html"
           DOM="$RUNNER_TEMP/cissp-public-dom.html"
@@ -110,24 +111,30 @@ jobs:
           UNRELEASED="$RUNNER_TEMP/cissp-unreleased-candidates.txt"
           CHROME="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
           test -n "$CHROME"
+          EXPECTED_VERSION="$(node -e "global.window={}; require('./${ROOT}/data-meta.js'); process.stdout.write(String(window.CISSP_META.meta.version))")"
+          EXPECTED_LABEL="${EXPECTED_VERSION%.*}"
+          EXPECTED_STANDARD="$(node -e "global.window={}; require('./${ROOT}/data-meta.js'); process.stdout.write(String(window.CISSP_META.meta.question_count))")"
+          EXPECTED_BELL="$(node -e "global.window={}; require('./${ROOT}/data-meta.js'); process.stdout.write(String(window.CISSP_META.meta.bellringer_count))")"
+          EXPECTED_BANK="$(node -e "global.window={}; require('./${ROOT}/data-meta.js'); process.stdout.write(String(window.CISSP_META.meta.question_bank_records))")"
+          EXPECTED_RELEASED="$(node -e "const m=require('./${ROOT}/question-bank/RELEASED_BATCHES.json'); process.stdout.write(String(m.released_batches.reduce((n,b)=>n+Number(b.records||0),0)))")"
+          test "$((EXPECTED_STANDARD + EXPECTED_BELL))" -eq "$EXPECTED_BANK"
           passed=0
           for attempt in {1..12}; do
             echo "Public verification attempt $attempt: $BASE"
             if curl -fsSL --max-time 15 -H 'Cache-Control: no-cache' "${BASE}?verify=${GITHUB_SHA}-${attempt}" -o "$HTML" \
               && grep -Fq '<title>CISSP Atlas · Study Workflow</title>' "$HTML" \
-              && grep -Fq 'RELEASE v1.4' "$HTML" \
-              && grep -Fq '<option>159</option>' "$HTML" \
+              && grep -Fq "RELEASE v${EXPECTED_LABEL}" "$HTML" \
+              && grep -Fq "<option>${EXPECTED_STANDARD}</option>" "$HTML" \
               && curl -fsSL --max-time 15 "${BASE}deploy-sha.txt?verify=${GITHUB_SHA}-${attempt}" -o "$REMOTE_SHA" \
               && test "$(tr -d '\r\n' < "$REMOTE_SHA")" = "$GITHUB_SHA" \
-              && curl -fsSL --max-time 15 "${BASE}question-bank/RELEASED_BATCHES.json?verify=${GITHUB_SHA}-${attempt}" -o "$REMOTE_MANIFEST" \
-              && grep -Fq 'BATCH-002-006' "$REMOTE_MANIFEST"; then
+              && curl -fsSL --max-time 15 "${BASE}question-bank/RELEASED_BATCHES.json?verify=${GITHUB_SHA}-${attempt}" -o "$REMOTE_MANIFEST"; then
               "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=10000 --dump-dom "${BASE}?runtime-verify=${GITHUB_SHA}-${attempt}" >"$DOM" 2>/dev/null || true
               if grep -Fq 'data-cissp-core="ready"' "$DOM" \
                 && grep -Fq 'data-cissp-bank="ready"' "$DOM" \
                 && grep -Fq 'data-cissp-ready="true"' "$DOM" \
-                && grep -Fq 'data-cissp-released-records="104"' "$DOM" \
-                && grep -Fq 'data-cissp-standard-questions="159"' "$DOM" \
-                && grep -Fq 'data-cissp-bellringers="1"' "$DOM" \
+                && grep -Fq "data-cissp-released-records=\"${EXPECTED_RELEASED}\"" "$DOM" \
+                && grep -Fq "data-cissp-standard-questions=\"${EXPECTED_STANDARD}\"" "$DOM" \
+                && grep -Fq "data-cissp-bellringers=\"${EXPECTED_BELL}\"" "$DOM" \
                 && grep -Fq '>Mastery<' "$DOM" \
                 && grep -Fq 'Run baseline diagnostic' "$DOM"; then
                 passed=1
@@ -139,6 +146,7 @@ jobs:
           if [ "$passed" -ne 1 ]; then
             echo 'Public CISSP Atlas runtime did not reach the expected deployed state.' >&2
             echo "Expected deployment SHA: $GITHUB_SHA" >&2
+            echo "Expected version/standard/released/bell: $EXPECTED_VERSION/$EXPECTED_STANDARD/$EXPECTED_RELEASED/$EXPECTED_BELL" >&2
             echo -n 'Observed deployment SHA: ' >&2
             cat "$REMOTE_SHA" >&2 2>/dev/null || true
             tail -n 80 "$HTML" >&2 || true
@@ -165,4 +173,4 @@ jobs:
             status="$(curl -sS -o /dev/null -w '%{http_code}' "${BASE}${rel}?verify=${GITHUB_SHA}")"
             test "$status" = '404'
           done < "$UNRELEASED"
-          echo "PASS public_pages_runtime url=$BASE commit=$GITHUB_SHA standard_questions=159 released_records=104 released_only=true"
+          echo "PASS public_pages_runtime url=$BASE commit=$GITHUB_SHA version=$EXPECTED_VERSION standard_questions=$EXPECTED_STANDARD released_records=$EXPECTED_RELEASED bellringers=$EXPECTED_BELL released_only=true"
