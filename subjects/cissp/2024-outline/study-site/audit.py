@@ -17,7 +17,7 @@ def jsonish(s,label):
         if fixed==s: raise RuntimeError(f"{label} invalid JSON-compatible data: {e1}") from e1
         try: return json.loads(fixed)
         except json.JSONDecodeError as e2: raise RuntimeError(f"{label} invalid JSON-compatible JavaScript data: {e2}") from e2
-def meta():
+def parse_meta():
     s=read(ROOT/"data-meta.js"); pre="window.CISSP_META="; marker=";window.CISSP_CHUNKS=[];"
     if not s.startswith(pre) or marker not in s: raise RuntimeError("data-meta.js wrapper invalid")
     return jsonish(s[len(pre):s.index(marker)],"data-meta.js")
@@ -25,7 +25,7 @@ def chunk(name):
     s=read(ROOT/name); pre="window.CISSP_CHUNKS.push("; suf=");"
     if not s.startswith(pre) or not s.endswith(suf): raise RuntimeError(f"{name} wrapper invalid")
     return jsonish(s[len(pre):-len(suf)],name)
-def cov():
+def parse_coverage():
     s=read(ROOT/"coverage-detail.js"); pre="window.CISSP_COVERAGE="; marker=";\nwindow.CISSP_AI_COVERAGE="
     if not s.startswith(pre) or marker not in s or not s.endswith(";"): raise RuntimeError("coverage-detail.js wrapper invalid")
     i=s.index(marker)
@@ -39,11 +39,13 @@ def jsonl(p):
     return out
 
 try:
-    M=meta()
+    M=parse_meta()
     chunks=[chunk(f"data-d{i}.js") for i in range(1,9)]+[chunk("data-ai.js"),chunk("data-precision.js")]
-    coverage,ai=cov()
+    coverage,ai=parse_coverage()
     release=json.loads(read(ROOT/"RELEASE_STATUS.json"))
-    semantic=json.loads(read(ROOT/"SEMANTIC_ITEM_AUDIT.json"))
+    semantic_base=json.loads(read(ROOT/"SEMANTIC_ITEM_AUDIT.json"))
+    additions_path=ROOT/"SEMANTIC_RELEASE_ADDITIONS.json"
+    semantic_additions=json.loads(read(additions_path)) if additions_path.exists() else None
     manifest=json.loads(read(QB/"RELEASED_BATCHES.json"))
 except (OSError,ValueError,RuntimeError,AssertionError) as e:
     print("FAIL"); print("-",f"Parse/setup error: {e}"); sys.exit(1)
@@ -51,7 +53,6 @@ except (OSError,ValueError,RuntimeError,AssertionError) as e:
 objectives=sum((c["objectives"] for c in chunks),[])
 high=sum((c["high"] for c in chunks),[])
 base=sum((c["questions"] for c in chunks),[])
-
 released=[]; seen_files=set()
 for b in manifest.get("released_batches",[]):
     rows=[]
@@ -64,11 +65,12 @@ for b in manifest.get("released_batches",[]):
     for rel in b.get("review_files",[]):
         p=ROOT/rel; check(p.is_file(),f"Release review file missing: {rel}")
         if p.is_file():
-            try: r=json.loads(read(p)); check(str(r.get("status","")).startswith("SEMANTIC_REVIEWED_"),f"Release review not semantically reviewed: {rel}")
+            try:
+                r=json.loads(read(p))
+                check(str(r.get("status","")).startswith("SEMANTIC_REVIEWED_"),f"Release review not semantically reviewed: {rel}")
             except ValueError as e: errors.append(f"{rel} invalid JSON: {e}")
     released+=rows
-    d=Counter(x.get("difficulty_tier") for x in rows)
-    bid=b.get("batch_id")
+    d=Counter(x.get("difficulty_tier") for x in rows); bid=b.get("batch_id")
     check(len(rows)==b.get("records"),f"{bid} record count drift")
     check(sum(x.get("format")=="mcq" for x in rows)==b.get("standard_mcq"),f"{bid} MCQ count drift")
     check(sum(x.get("format")=="bellringer" for x in rows)==b.get("bellringers"),f"{bid} Bellringer count drift")
@@ -79,7 +81,6 @@ for b in manifest.get("released_batches",[]):
 released_mcq=[x for x in released if x.get("format")=="mcq"]
 bells=[x for x in released if x.get("format")=="bellringer"]
 questions=base+released_mcq
-
 obj_counts={1:12,2:6,3:10,4:3,5:6,6:5,7:15,8:5}
 weights={1:16,2:10,3:13,4:13,5:13,6:12,7:13,8:10}
 check(len(M["domains"])==8,"Expected 8 domains")
@@ -122,14 +123,17 @@ check(len({h["id"] for h in high})==len(high),"Duplicate high-card ID")
 check(len({q["id"] for q in questions})==len(questions),"Duplicate standard-question ID")
 check(len({q["id"] for q in released})==len(released),"Duplicate released-batch ID")
 cards=62+len(high); subtopics=sum(len(v) for v in coverage.values()); ai_areas=sum(len(v) for v in ai.values()); sources=len(M["sources"])
-standard=len(questions); bell_count=len(bells); bank=standard+bell_count; sem_items=semantic.get("items",{}); sem_count=len(sem_items)
+standard=len(questions); bell_count=len(bells); bank=standard+bell_count
+base_sem_items=semantic_base.get("items",{}); add_sem_items=(semantic_additions or {}).get("items",{})
+check(not(set(base_sem_items)&set(add_sem_items)),"Semantic base/additions contain duplicate item IDs")
+sem_items={**base_sem_items,**add_sem_items}; sem_count=len(sem_items)
 cal_raw=read(ROOT/"data-question-calibration.js")
 cal=dict(re.findall(r'"(Q-\d{3})":\{tier:"([FES])"',cal_raw))
 check(len(cal)==56 and all(f"Q-{i:03d}" in cal for i in range(1,57)),"Base difficulty calibration incomplete")
 dist=Counter(cal.get(q["id"]) for q in base); dist.update(q.get("difficulty_tier") for q in released)
 
 check(cards==140,"Runtime cards !=140"); check(len(base)==56,"Base question baseline !=56")
-check(standard>=159,"Released standard MCQs fell below v1.4 floor"); check(bell_count>=1,"Released Bellringers fell below v1.4 floor"); check(bank>=160,"Question-bank records fell below v1.4 floor")
+check(standard>=175,"Released standard MCQs fell below v1.5 floor"); check(bell_count>=1,"Released Bellringers fell below v1.5 floor"); check(bank>=176,"Question-bank records fell below v1.5 floor")
 check(sources==20,"Source count !=20"); check(subtopics==344,"Subtopic count !=344"); check(ai_areas==33,"AI area count !=33")
 for d in range(1,9):
     check(sum((q.get("domain_num") if "domain_num" in q else q.get("domain_primary"))==d for q in questions)>=9,f"D{d} standard-question coverage too low")
@@ -137,7 +141,8 @@ for d in range(1,9):
     check(sum(h["domain_num"]==d and h["id"].startswith("AI-") for h in high)==1,f"D{d} AI cards !=1")
 
 mm=M["meta"]; version=release.get("release")
-check(version==mm.get("version")==semantic.get("release"),"Release version drift across ledgers")
+semantic_release=(semantic_additions or semantic_base).get("release")
+check(version==mm.get("version")==semantic_release,"Release version drift across ledgers")
 check(mm.get("audited_on")=="2026-08-24","Metadata audit date drift")
 check(mm.get("objective_count")==62 and mm.get("subtopic_checks")==subtopics and mm.get("ai_coverage_areas")==ai_areas and mm.get("card_count")==cards,"Metadata knowledge counts drift")
 check(mm.get("question_count")==standard and mm.get("bellringer_count")==bell_count and mm.get("question_bank_records")==bank and mm.get("semantic_items_reviewed")==sem_count,"Metadata bank counts drift")
@@ -149,15 +154,21 @@ check(rs.get("released_difficulty_distribution")=={k:dist.get(k,0) for k in ("F"
 
 expected_semantic={*(f"OBJ-{o['id']}" for o in objectives),*(h["id"] for h in high),*(q["id"] for q in base),*(q["id"] for q in released)}
 allowed={"VERIFIED","VERIFIED_AFTER_CORRECTION","VERIFIED_WITH_SOURCE_SCOPE_NOTE"}
-check(semantic.get("audit_date")=="2026-08-24","Semantic audit date drift")
+check(semantic_base.get("audit_date")=="2026-08-24","Semantic base audit date drift")
+check(semantic_base.get("scope",{}).get("total_items")==len(base_sem_items),"Semantic base scope drift")
+if semantic_additions:
+    check(semantic_additions.get("audit_date")=="2026-08-24","Semantic additions audit date drift")
+    check(semantic_additions.get("base_items")==len(base_sem_items),"Semantic additions base count drift")
+    check(semantic_additions.get("added_items")==len(add_sem_items),"Semantic additions count drift")
+    check(semantic_additions.get("total_items")==sem_count,"Semantic additions total count drift")
 check(set(sem_items)==expected_semantic,f"Semantic coverage mismatch expected {len(expected_semantic)} got {len(sem_items)}")
-check(len(expected_semantic)>=300,"Semantic item count fell below v1.4 floor")
+check(len(expected_semantic)>=316,"Semantic item count fell below v1.5 floor")
 check(all(v.get("status") in allowed for v in sem_items.values()),"Semantic audit contains unreviewed status")
-ss=semantic.get("scope",{})
-check(ss.get("objective_cards")==62 and ss.get("high_yield_cards")==38 and ss.get("ai_cards")==8 and ss.get("precision_cards")==32 and ss.get("standard_questions")==standard and ss.get("bellringers")==bell_count and ss.get("total_items")==sem_count,"Semantic scope drift")
-summary=semantic.get("summary",{})
-check(summary.get("verified",0)+summary.get("verified_after_correction",0)+summary.get("verified_with_source_scope_note",0)==sem_count,"Semantic summary count drift")
-check(summary.get("answer_key_reversals")==0 and summary.get("material_factual_errors_remaining")==0,"Semantic summary reports unresolved error")
+base_summary=semantic_base.get("summary",{}); add_summary=(semantic_additions or {}).get("summary",{})
+reviewed_total=sum(base_summary.get(k,0)+add_summary.get(k,0) for k in ("verified","verified_after_correction","verified_with_source_scope_note"))
+check(reviewed_total==sem_count,"Semantic summary count drift")
+check(base_summary.get("answer_key_reversals",0)+add_summary.get("answer_key_reversals",0)==0,"Semantic summary reports answer-key reversal")
+check(base_summary.get("material_factual_errors_remaining",0)+add_summary.get("material_factual_errors_remaining",0)==0,"Semantic summary reports unresolved factual error")
 
 html=read(ROOT/"index.html"); label=".".join(str(version).split(".")[:2])
 required=["data-meta.js",*[f"data-d{i}.js" for i in range(1,9)],"data-ai.js","data-precision.js","coverage-detail.js","data-question-calibration.js","bootstrap.js","styles.css","mobile-fix.css","enhancements.css",'id="today"','id="learn"','id="practice"','id="blueprint"','id="progress"','id="sources"','id="quizDifficulty"','id="startBellringer"',f"<option>{standard}</option>",f"RELEASE v{label}"]
