@@ -14,7 +14,7 @@ This file is an **active queue only**. Completed timelines belong in Git history
 
 ## P1 — active production: Urdu B2
 
-Canonical production frontier: **Urdu B2, Unit 1, sequence 1**.
+Canonical production frontier: **Urdu B2, Unit 2, sequence 7**.
 
 - [ ] Read `reading/planning/ACTIVE_GENERATION_PLAN.json` and the exact B2 entry in `reading/planning/topic_genre_matrix.json`.
 - [ ] Generate Urdu B2 in guarded unit or large bounded batches under the generation-first policy.
@@ -28,8 +28,8 @@ Current production totals:
 
 - Arabic: 360/360 generated.
 - French: 360/360 generated.
-- Urdu: 180/360 generated; A1-B1 complete, B2 in progress.
-- Project: 900/1080 generated.
+- Urdu: 186/360 generated; A1-B1 complete, B2 in progress.
+- Project: 906/1080 generated.
 
 ## P1 — release/verification workstreams
 
