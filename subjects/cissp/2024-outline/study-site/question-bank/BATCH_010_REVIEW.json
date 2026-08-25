@@ -2,7 +2,7 @@
   "schema_version": 2,
   "batch_id": "010",
   "reviewed_on": "2026-08-24",
-  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "status": "SEMANTIC_REVIEWED_GATE_PASSED",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -31,14 +31,25 @@
     "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; declared sibling relationships only where the decision is materially distinct from the released rule-family item"
   },
   "gate_state": {
-    "automated_repository_gate": "PENDING",
+    "automated_repository_gate": "PASS",
+    "workflow_run_id": 32857069623,
     "quality_gate_mode": "released+candidate",
-    "promotion_allowed": false,
-    "requirement": "Promote only after quality_gate.py passes against the full v1.7 released corpus and Batch 010 with zero unresolved warnings, and the browser smoke gate passes."
+    "released_mcq_compared": 207,
+    "released_bellringers_compared": 1,
+    "candidate_records": 16,
+    "warnings": 0,
+    "browser_smoke": "PASS",
+    "promotion_allowed": true
+  },
+  "coverage_effect": {
+    "explicit_subtopic_tags_before": 222,
+    "explicit_subtopic_tags_after_candidate": 231,
+    "total_mapped_subtopics": 344
   },
   "notes": [
     "Batch 010 follows the v1.7 planner rather than adding random volume: configuration drift, governance accountability, cross-border obligations, adversarial API assessment, investigation authority, contractor transfers, site diversity, asset criticality, recovery validation/testing/continuity, ephemeral assets, physical-boundary bypass, zero-trust architecture, exception handling, and archive migration.",
     "C-161, C-162, and C-167 declare released siblings because each shares a rule family while testing a different decision boundary: tabletop vs parallel testing, independent continuity workaround vs external supplier disruption, and retained-record migration vs disposed-device sanitization.",
-    "The batch remains excluded from RELEASED_BATCHES.json and therefore from the public Pages artifact until the automated gate passes."
+    "The first automated attempt correctly blocked C-166 for an Exam-tier score of 70; the score was corrected to 69 without changing the question, and the full gate then passed with zero warnings.",
+    "Repository-wide quality_gate.py and the interactive browser smoke test completed successfully before promotion."
   ]
 }
