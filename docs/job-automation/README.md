@@ -3,9 +3,11 @@
 Current runtime: **GitHub Pages only**.
 
 ## Current queue
-- 118 candidate-complete prepared applications in the encrypted queue.
+- **115** candidate-complete, tech-focused prepared applications in the encrypted queue.
+- The August 24 quality audit removed three records from the runnable set: one closed posting, one non-tech customer-service role, and one materially low-fit degree/domain mismatch.
 - Queue content is decrypted in the browser from the seeded URL fragment and then stored in local browser storage.
-- Public runner code contains no candidate profile, passwords, or plaintext resume documents.
+- The public encrypted payload is minimized to runtime fields; résumé and cover-letter references are reduced to basenames.
+- Public runner code contains no candidate profile, passwords, or plaintext résumé/cover-letter documents.
 
 ## Runner behavior
 1. Preserve matching progress when the encrypted queue is refreshed.
@@ -23,13 +25,18 @@ A static GitHub Pages site cannot read or modify DOM fields in a different emplo
 
 Do not change this project to claim cross-origin autofill is possible from Pages alone.
 
-## Safety/truth rules
+## Safety / quality rules
+- Tech-only runnable queue: software, QA, security, IT/support, data/AI, or genuinely technical systems/operations roles.
 - No CAPTCHA bypass.
 - No invented candidate answers.
 - No guessed legal/privacy/compensation/relocation/travel/demographic/security-clearance answers.
 - Do not mark `submitted` without applicant-confirmed employer success.
 - Treat dead/stale postings as `closed`, not submitted or blocked.
 - Preserve duplicate prevention and prior local outcomes across queue refreshes.
+- Prefer official employer routes and remove stale or materially mismatched roles when verified.
+
+## Runtime policy
+The active automation path is Pages only. Historical extension, Vercel, Playwright, routing, and re-verification artifacts belong in the private Library `Legacy` folder and are not active dependencies.
 
 ## Public data policy
-Do not commit plaintext resumes, cover letters, candidate PII, passwords, application credentials, or private tracker exports to the public Pages repository. Keep the public site limited to runner code and encrypted/minimized queue data.
+Do not commit plaintext résumés, cover letters, candidate PII, passwords, application credentials, private tracker exports, or full private Library paths to the public Pages repository. Keep the public site limited to runner code and encrypted/minimized queue data.
