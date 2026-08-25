@@ -58,7 +58,7 @@ jobs:
           print('Authoritative artifact revalidated: 42 PDFs; release and pronunciation gates PASS.')
           PY
 
-      - name: Publish inspected bytes and repair permanent staging logic
+      - name: Publish inspected bytes
         shell: bash
         run: |
           set -euo pipefail
@@ -68,33 +68,13 @@ jobs:
           cp /tmp/verified/french_top1000.csv ./french_top1000.csv
           cp /tmp/verified/urdu_top1000.csv ./urdu_top1000.csv
 
-          # The prior full build failed only because this tracked attestation was
-          # regenerated but omitted from the publication staging list.
+          # Recreate the tracked live attestation from the exact repaired decks.
           python scripts/attest_live_csvs.py
-
-          python - <<'PY'
-          from pathlib import Path
-          p = Path('.github/workflows/build-language-workbooks-v1.yml')
-          text = p.read_text(encoding='utf-8')
-
-          archive_old = """            audit/language-workbooks/v1.0/\n            arabic_top1000.csv"""
-          archive_new = """            audit/language-workbooks/v1.0/\n            audit/live_csv_attestation.json\n            arabic_top1000.csv"""
-          if archive_old not in text and archive_new not in text:
-              raise SystemExit('refusing unsafe workflow patch: archive anchor missing')
-          text = text.replace(archive_old, archive_new, 1)
-
-          stage_old = """          git add completed/languages/workbooks/v1.0 audit/language-workbooks/v1.0 \\\n            arabic_top1000.csv french_top1000.csv urdu_top1000.csv"""
-          stage_new = """          rm -rf scripts/__pycache__\n          git add completed/languages/workbooks/v1.0 audit/language-workbooks/v1.0 audit/live_csv_attestation.json \\\n            arabic_top1000.csv french_top1000.csv urdu_top1000.csv"""
-          if stage_old not in text and stage_new not in text:
-              raise SystemExit('refusing unsafe workflow patch: staging anchor missing')
-          text = text.replace(stage_old, stage_new, 1)
-          p.write_text(text, encoding='utf-8')
-          PY
 
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -rf scripts/__pycache__
           git add completed/languages/workbooks/v1.0 audit/language-workbooks/v1.0 audit/live_csv_attestation.json \
-            arabic_top1000.csv french_top1000.csv urdu_top1000.csv \
-            .github/workflows/build-language-workbooks-v1.yml
+            arabic_top1000.csv french_top1000.csv urdu_top1000.csv
           git commit -m 'release: publish inspected language workbooks v1.0 candidate'
           git push origin HEAD:release/language-workbooks-v1-final
