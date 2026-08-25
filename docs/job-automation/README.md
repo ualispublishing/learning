@@ -3,9 +3,10 @@
 Current runtime: **GitHub Pages only**.
 
 ## Current queue
-- **111** candidate-complete, tech-focused prepared applications in the encrypted queue.
-- The August 24 live-quality audit removed seven records from the former 118-role runnable set: five stale/closed postings, one non-tech customer-service role, and one materially low-fit degree/domain mismatch.
-- The most recent stale removals were Intuit — Full Stack Software Developer I; Tripledot Studios / Clipwire Games — Junior Data Analyst; NEXT Supply — Junior IT Helpdesk Technician; and Savaria Corporation — Junior Service Desk Technician (1-Year Contract).
+- **109** candidate-complete, tech-focused prepared applications in the encrypted queue.
+- The August 24 live-quality audit removed nine records from the former 118-role runnable set: seven stale/closed postings, one non-tech customer-service role, and one materially low-fit degree/domain mismatch.
+- The seven stale/closed removals are MoeGo — Junior Onboarding Specialist; Intuit — Full Stack Software Developer I; Tripledot Studios / Clipwire Games — Junior Data Analyst; NEXT Supply — Junior IT Helpdesk Technician; Savaria Corporation — Junior Service Desk Technician (1-Year Contract); Intuit — Software Developer 1 (Center of Money); and Uplifter Inc. — Product Specialist GTA - Toronto.
+- The other exclusions are Coffee Heating & Air Conditioning — Customer Service Representative (non-tech) and Everest Clinical Research — Clinical Data Management Specialist (material degree/domain mismatch).
 - Queue content is decrypted in the browser from the seeded URL fragment and then stored in local browser storage.
 - The public encrypted payload is minimized to runtime fields; résumé and cover-letter references are reduced to basenames.
 - Public runner code contains no candidate profile, passwords, or plaintext résumé/cover-letter documents.
