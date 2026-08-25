@@ -7,7 +7,7 @@ for(const chunk of (window.CISSP_CHUNKS||[]))for(const q of (chunk.questions||[]
   const c=calibration[q.id];if(c){q.difficulty_tier=c.tier;q.difficulty_score=c.score}
   const r=legacyRationales[q.id];if(r)q.distractor_rationales=r;
 }
-// The original card engine keeps an in-memory progress snapshot. v1.3 practice adds
+// The original card engine keeps an in-memory progress snapshot. Practice adds
 // richer quiz/Bellringer history after that snapshot is created. Preserve those newer
 // histories if a later card grade writes the older snapshot back to localStorage.
 const PROGRESS_KEY='cissp_atlas_progress_v1',nativeSet=Storage.prototype.setItem;
@@ -51,6 +51,9 @@ try{
   window.CISSP_RELEASED_BANK_MANIFEST=manifest;
   window.CISSP_BANK_READY=true;
   root.dataset.cisspBank='ready';
+  root.dataset.cisspReleasedRecords=String(rows.length);
+  root.dataset.cisspStandardQuestions=String((window.CISSP_CHUNKS||[]).flatMap(c=>c.questions||[]).length);
+  root.dataset.cisspBellringers=String(window.CISSP_BELLRINGERS.length);
 }catch(err){
   console.error('CISSP released bank load failed',err);
   window.CISSP_RELEASE_LOAD_ERROR=String(err);
