@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "batch_id": "011",
+  "reviewed_on": "2026-08-25",
+  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "records": 16,
+  "standard_mcq": 16,
+  "bellringers": 0,
+  "files": [
+    "question-bank/candidates/batch-011-a.jsonl",
+    "question-bank/candidates/batch-011-b.jsonl",
+    "question-bank/candidates/batch-011-c.jsonl",
+    "question-bank/candidates/batch-011-d.jsonl"
+  ],
+  "difficulty_distribution": {"F":0,"E":12,"S":4,"B":0},
+  "primary_domain_distribution": {"1":2,"2":0,"3":4,"4":1,"5":3,"6":1,"7":5,"8":0},
+  "reviewed_ids": ["C-168","C-169","C-170","C-171","C-172","C-173","C-174","C-175","C-176","C-177","C-178","C-179","C-180","C-181","C-182","C-183"],
+  "semantic_review": {
+    "semantic_reviewed_records": 16,
+    "answer_key_conflicts": 0,
+    "objective_mapping_conflicts": 0,
+    "source_mapping_conflicts": 0,
+    "material_factual_errors_remaining": 0,
+    "four_option_rationales_complete": true,
+    "originality_provenance_complete": true,
+    "external_question_seeds_used": 0
+  },
+  "authoring_focus": {
+    "planner_basis": "released v1.8 deficit state after Batch 010 promotion",
+    "objective_targets": ["7.15","7.4","7.5","7.3","7.7","1.6","1.7","4.2","3.2","3.5","3.7","5.2","5.3","5.4","3.4","6.1"],
+    "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; declared sibling relationships only where the objective/rule family is reused through a materially different decision boundary"
+  },
+  "gate_state": {
+    "automated_repository_gate": "PENDING",
+    "quality_gate_mode": "released+candidate",
+    "promotion_allowed": false,
+    "requirement": "Promote only after quality_gate.py passes against the full v1.8 released corpus and Batch 011 with zero unresolved warnings, and the browser smoke gate passes."
+  },
+  "notes": [
+    "Batch 011 follows the v1.8 planner exactly rather than adding random volume: MFA-fatigue operations, privileged job rotation, protected backup-media transport, golden-image provenance, ML-assisted detection governance, procedures, BIA sequencing, constrained-device NAC, Biba integrity, serverless least privilege, cryptographic fault injection, just-in-time privileged access, federation trust validation, mandatory access control, TPM-sealed disk-key release, and hybrid assessment strategy.",
+    "Declared siblings are used only when the same objective or rule family is intentionally revisited through a distinct operational decision, such as Biba versus Bell-LaPadula, procedure versus standard, federation trust validation versus relying-party role mapping, or TPM-sealed boot keys versus runtime plaintext secret exposure.",
+    "The batch remains excluded from RELEASED_BATCHES.json and therefore from the public Pages artifact until the automated gate passes."
+  ]
+}
