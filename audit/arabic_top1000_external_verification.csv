@@ -1,14 +1,14 @@
 rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,semantic_overlap,semantic_overlap_terms,wordfreq_attested,wordfreq_zipf,arabic_wordnet_entry,camel_analysis,lexique4_entry,lexique4_pos,urdu_ud_entry,urdu_ud_pos,support_count,confidence
 1,في,in; at,True,prep|verb,True,False,,True,7.54,False,True,False,,False,,3,semantic_review
 2,أن,that; to (subordinator: أَنْ / أَنَّ),True,conj|noun|verb,True,False,,True,7.03,True,True,False,,False,,4,semantic_review
-3,من,from; who; whom,True,noun|prep|pron|verb,True,False,,True,7.50,True,True,False,,False,,4,semantic_review
+3,من,from (مِنْ); who; whom; whoever (مَنْ),True,noun|prep|pron|verb,True,True,whoever,True,7.50,True,True,False,,False,,4,strong
 4,على,on; upon; over,True,adj|prep|verb,True,True,over,True,7.18,True,True,False,,False,,4,strong
 5,لا,no; not,True,conj|particle|prefix,True,True,no|not,True,6.93,True,True,False,,False,,4,strong
 6,إلى,to; toward,True,noun|prep,True,True,toward,True,6.91,False,True,False,,False,,3,strong
 7,هذا,this (masculine singular),True,pron,False,False,,True,6.67,False,True,False,,False,,3,form_only
 8,كان,was; were; be (past form of كان),True,name|verb,True,False,,True,6.55,True,True,False,,False,,4,semantic_review
 9,إن,if (إِنْ); indeed; certainly (إِنَّ),True,conj|particle,True,True,if|inde,True,6.27,True,True,False,,False,,4,strong
-10,ما,what; that which,True,adv|conj|particle|pron,True,True,what,True,6.85,False,True,False,,False,,3,strong
+10,ما,not; what; that which; whatever (conditional),True,adv|conj|particle|pron,True,True,conditional|not|what|whatever,True,6.85,False,True,False,,False,,3,strong
 11,له,to him; for him; he has,True,prep,True,False,,True,6.12,True,True,False,,False,,4,semantic_review
 12,أنا,I,True,noun|pron,True,False,,True,5.89,True,True,False,,False,,4,semantic_review
 13,عن,about; from; away from,True,noun|prep|verb,True,True,about|away,True,6.77,False,True,False,,False,,3,strong
@@ -20,7 +20,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 19,أنت,you (singular; masculine or feminine when unvocalized),True,pron|verb,True,True,you,True,6.03,False,True,False,,False,,3,strong
 20,هل,yes/no question particle; is/are/do/does/did...?,True,particle,True,True,question,True,5.92,False,True,False,,False,,3,strong
 21,التي,who; which; that (feminine singular relative pronoun),True,pron,True,False,,True,6.64,False,True,False,,False,,3,semantic_review
-22,ليس,"is not; are not; was not (ليس, negative copular verb)",True,adj|conj|noun|particle|verb,True,True,not,True,5.92,True,True,False,,False,,4,strong
+22,ليس,"is not; are not (ليس, negative copular verb)",True,adj|conj|noun|particle|verb,True,True,not,True,5.92,True,True,False,,False,,4,strong
 23,لكن,but; however (لَكِنْ / لَكِنَّ),True,conj|noun,True,True,but|however,True,6.03,True,True,False,,False,,4,strong
 24,كل,all; every; each; eat! (كُلّ / كُلْ),True,noun|verb,True,True,all|each|every,True,6.60,True,True,False,,False,,4,strong
 25,هذه,this (feminine singular),True,pron,False,False,,True,6.59,False,True,False,,False,,3,form_only
@@ -54,14 +54,14 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 53,بعض,some; part of,True,noun|verb,True,True,part|some,True,6.16,True,True,False,,False,,4,strong
 54,فقط,only; just,True,adv|verb,True,True,only,True,5.98,True,True,False,,False,,4,strong
 55,لن,will not,True,adv,True,True,not,True,5.79,True,True,False,,False,,4,strong
-56,حتى,until; up to; even,True,adv|conj|prep,True,True,even|until|up,True,6.29,True,True,False,,False,,4,strong
+56,حتى,until; up to; even; so that,True,adv|conj|prep,True,True,even|so|until|up,True,6.29,True,True,False,,False,,4,strong
 57,أمر,matter; affair; order/command; ordered/commanded,True,adj|noun|verb,True,True,affair|command|matter|order,True,5.44,True,True,False,,False,,4,strong
 58,عمل,work; action; worked; functioned,True,noun|verb,True,True,action|work,True,5.74,True,True,False,,False,,4,strong
 59,يجب,must; should; is necessary,True,verb,False,False,,True,5.79,False,True,False,,False,,3,form_only
 60,أحد,one; someone; anyone,True,adj|name|noun|verb,True,True,anyone,True,5.98,True,True,False,,False,,4,strong
 61,وقت,time,True,noun|verb,True,True,time,True,5.66,True,True,False,,False,,4,strong
-62,أجل,for the sake of; because of; yes/indeed in أَجَلْ,True,adj|adv|noun|verb,True,True,inde|yes,True,5.83,True,True,False,,False,,4,strong
-63,قبل,accepted; received; approved,True,adv|noun|prep|verb,True,True,accept,True,6.29,True,True,False,,False,,4,strong
+62,أجل,term/appointed time; for the sake of/because of (أَجْل); yes/indeed (أَجَلْ),True,adj|adv|noun|verb,True,True,appoint|inde|time|yes,True,5.83,True,True,False,,False,,4,strong
+63,قبل,before; prior to; earlier,True,adv|noun|prep|verb,True,True,before|earlier|prior,True,6.29,True,True,False,,False,,4,strong
 64,خلال,during; throughout; through,True,noun|prep,True,True,during,True,6.19,True,True,False,,False,,4,strong
 65,نفس,self; same; soul; breath (depending on vocalization),True,noun|verb,True,True,breath|same|self|soul,True,5.63,True,True,False,,False,,4,strong
 66,يفعل,does; performs,True,verb,False,False,,True,4.78,False,True,False,,False,,3,form_only
@@ -92,7 +92,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 91,مجلس,council; board; assembly,True,noun,True,True,board|council,True,5.60,True,True,False,,False,,4,strong
 92,لماذا,why?,True,adv,True,True,why,True,5.45,False,True,False,,False,,3,strong
 93,أم,or (أَمْ); mother (أُمّ),True,conj|noun|verb,True,True,mother,True,5.62,True,True,False,,False,,4,strong
-94,فعل,did; acted,True,noun|verb,True,False,,True,5.36,True,True,False,,False,,4,semantic_review
+94,فعل,act/action; verb (grammar); did/performed,True,noun|verb,True,True,act|action|perform,True,5.36,True,True,False,,False,,4,strong
 95,عدد,number; count,True,noun|verb,True,True,count|number,True,5.96,True,True,False,,False,,4,strong
 96,يذهب,goes,True,verb,False,False,,True,4.62,True,True,False,,False,,4,form_only
 97,أخرى,other; another (feminine),True,adj,True,False,,True,5.94,False,True,False,,False,,3,semantic_review
@@ -105,15 +105,15 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 104,منذ,since; for (a period); ago,True,conj|prep,True,True,period|since,True,6.00,True,True,False,,False,,4,strong
 105,ربما,perhaps; maybe,True,adv,True,True,maybe|perhap,True,5.40,True,True,False,,False,,4,strong
 106,أين,where?,True,adv|noun|verb,True,True,where,True,5.11,True,True,False,,False,,4,strong
-107,جميع,all; everyone; entire,True,adj,True,True,all|entire,True,5.84,True,True,False,,False,,4,strong
+107,جميع,all; entire; whole,True,adj,True,True,all|entire|whole,True,5.84,True,True,False,,False,,4,strong
 108,مكان,place; location,True,noun,True,True,location|place,True,5.52,True,True,False,,False,,4,strong
-109,هيا,come on!; let's go!,True,intj,True,True,come|go|let',True,4.52,False,True,False,,False,,3,strong
+109,هيا,come on!; let’s go!,True,intj,True,True,come|go,True,4.52,False,True,False,,False,,3,strong
 110,لو,if; if only; even if (لَوْ),True,conj,True,True,if|only,True,5.97,True,True,False,,False,,4,strong
 111,يبدو,seems; appears,True,verb,False,False,,True,5.44,False,True,False,,False,,3,form_only
 112,شكرا,thanks; thank you,True,intj,True,True,thank,True,5.26,True,True,False,,False,,4,strong
 113,سبب,reason; cause; caused,True,noun|verb,True,True,cause|reason,True,5.29,True,True,False,,False,,4,strong
 114,ابن,son,True,noun|verb,True,True,son,True,5.57,True,True,False,,False,,4,strong
-115,عند,at; with; by; near,True,adj|noun|prep|verb,True,True,near,True,5.91,False,True,False,,False,,3,strong
+115,عند,at; near; with/in the possession of,True,adj|noun|prep|verb,True,True,near|possession,True,5.91,False,True,False,,False,,3,strong
 116,أفضل,better; best; preferable,True,adj|verb,True,True,best|better|preferable,True,5.66,True,True,False,,False,,4,strong
 117,تم,was completed; took place; became complete,True,noun|verb,True,True,complet|place,True,6.15,True,True,False,,False,,4,strong
 118,دولة,state; country,True,noun,True,True,state,True,5.41,True,True,False,,False,,4,strong
@@ -127,7 +127,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 126,يقوم,stands; gets up; carries out; performs,True,verb,False,False,,True,5.42,False,True,False,,False,,3,form_only
 127,مرحبا,hello; welcome,True,intj,True,True,hello|welcome,True,4.70,True,True,False,,False,,4,strong
 128,يعمل,works; operates,True,verb,False,False,,True,5.37,True,True,False,,False,,4,form_only
-129,خير,good; goodness; better/best in some expressions,True,adj|noun|verb,True,True,best|better|good|goodnes,True,5.03,True,True,False,,False,,4,strong
+129,خير,good; goodness; better; best (depending on construction),True,adj|noun|verb,True,True,best|better|good|goodnes,True,5.03,True,True,False,,False,,4,strong
 130,خاصة,special; particular; especially (خاصة),True,adv|noun,True,True,particular,True,5.53,True,True,False,,False,,4,strong
 131,أمام,in front of; before,True,noun|prep,True,True,before|front,True,5.51,True,True,False,,False,,4,strong
 132,شركة,company; firm,True,noun,True,True,company,True,5.58,True,True,False,,False,,4,strong
@@ -141,7 +141,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 140,ثم,then; afterwards,True,adv|conj|noun|verb,True,True,afterward|then,True,6.08,True,True,False,,False,,4,strong
 141,تاريخ,date; history,True,noun,True,True,date|history,True,5.40,True,True,False,,False,,4,strong
 142,حقا,really; truly,True,adv,True,True,truly,True,5.14,True,True,False,,False,,4,strong
-143,أيها,O...! (formal masculine vocative introducer أيها),True,particle|pron,True,True,vocative,True,5.14,False,True,False,,False,,3,strong
+143,أيها,O...! (formal masculine vocative introducer),True,particle|pron,True,True,vocative,True,5.14,False,True,False,,False,,3,strong
 144,منطقة,region; area; zone,True,noun,True,True,area|zone,True,5.56,True,True,False,,False,,4,strong
 145,وضع,situation; status; position; placed/put,True,noun|verb,True,True,position|put|situ,True,5.39,True,True,False,,False,,4,strong
 146,شكل,shape; form; appearance; formed/shaped,True,noun|verb,True,True,shape,True,5.18,True,True,False,,False,,4,strong
@@ -149,7 +149,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 148,آسف,sorry; regretful,True,adj|verb,True,True,sorry,True,4.48,True,True,False,,False,,4,strong
 149,حكومة,government,True,noun,True,True,govern,True,5.19,True,True,False,,False,,4,strong
 150,يحتاج,needs; requires,True,verb,False,False,,True,4.99,False,True,False,,False,,3,form_only
-151,جانب,side; aspect; beside; alongside,True,noun|prep,True,True,beside|side,True,5.26,True,True,False,,False,,4,strong
+151,جانب,side; aspect; flank,True,noun|prep,True,True,side,True,5.26,True,True,False,,False,,4,strong
 152,اسم,name,True,noun|verb,True,True,name,True,5.40,True,True,False,,False,,4,strong
 153,أخير,last; final; recent,True,adj,True,True,final|last|recent,True,3.54,True,True,False,,False,,4,strong
 154,رائع,wonderful; excellent; great,True,adj,True,True,great|wonderful,True,4.97,True,True,False,,False,,4,strong
@@ -157,15 +157,15 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 156,ناس,people,True,noun|verb,True,True,people,True,4.73,True,True,False,,False,,4,strong
 157,إدارة,administration; management,True,noun,True,True,administr|manage,True,5.36,True,True,False,,False,,4,strong
 158,نشر,publication; publishing; spreading; published/spread,True,noun|verb,True,True,publish|spread,True,5.27,True,True,False,,False,,4,strong
-159,ثانية,second; a second (unit of time); feminine ordinal 'second',True,adj|noun,True,True,second|time|unit,True,4.98,True,True,False,,False,,4,strong
+159,ثانية,second; a second (unit of time); feminine ordinal second,True,adj|noun,True,True,second|time|unit,True,4.98,True,True,False,,False,,4,strong
 160,الذين,who; those who (masculine plural relative pronoun),True,pron,True,False,,True,5.99,False,True,False,,False,,3,semantic_review
 161,كلا,"no; certainly not (كَلَّا); both (masculine, كِلَا)",True,intj|pron,True,True,both|no|not,True,5.10,True,True,False,,False,,4,strong
 162,حق,right; truth; entitlement,True,adj|noun|verb,True,True,right|truth,True,5.42,True,True,False,,False,,4,strong
 163,مدينة,city,True,noun,True,True,city,True,5.79,True,True,False,,False,,4,strong
 164,عدم,absence; nonexistence; lack,True,noun|verb,True,True,absence|lack,True,5.54,True,True,False,,False,,4,strong
-165,حدث,happened; occurred,True,noun|verb,True,True,happen,True,5.37,True,True,False,,False,,4,strong
+165,حدث,event; happened; occurred (depending on vocalization/use),True,noun|verb,True,True,event|happen,True,5.37,True,True,False,,False,,4,strong
 166,اتحاد,union; federation,True,noun,True,True,union,True,4.83,True,True,False,,False,,4,strong
-167,أولى,first; former; feminine of أول / one of two in certain constructions,True,adj|noun|pron|verb,True,False,,True,4.73,True,True,False,,False,,4,semantic_review
+167,أولى,"first (feminine); more worthy; more entitled; more fitting; granted or bestowed (verb, depending on vocalization/use)",True,adj|noun|pron|verb,True,True,more,True,4.73,True,True,False,,False,,4,strong
 168,ليلة,night,True,noun,True,True,night,True,5.15,True,True,False,,False,,4,strong
 169,مدير,director; manager,True,adj|noun,True,True,director|manager,True,5.08,True,True,False,,False,,4,strong
 170,سيارة,car; automobile,True,noun,True,True,automobile|car,True,5.13,True,True,False,,False,,4,strong
@@ -185,12 +185,12 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 184,يوجد,exists; is present; there is,True,verb,False,False,,True,5.57,False,True,False,,False,,3,form_only
 185,مركز,center; centre,True,noun,True,True,center,True,5.48,True,True,False,,False,,4,strong
 186,لجنة,committee; commission,True,noun,True,True,commission|committee,True,5.19,True,True,False,,False,,4,strong
-187,سياسي,politician; political figure,True,adj|noun,True,True,political|politician,True,4.93,True,True,False,,False,,4,strong
+187,سياسي,politician; political figure; political,True,adj|noun,True,True,political|politician,True,4.93,True,True,False,,False,,4,strong
 188,داخل,inside; within,True,adj|noun|prep|verb,True,True,inside,True,5.54,True,True,False,,False,,4,strong
-189,قدم,antiquity/oldness; presented/offered (depending on vocalization),True,adv|noun|verb,True,True,offer,True,5.20,True,True,False,,False,,4,strong
+189,قدم,foot; antiquity/oldness; presented/offered (depending on vocalization/form),True,adv|noun|verb,True,True,foot|offer,True,5.20,True,True,False,,False,,4,strong
 190,سنة,year; Sunnah/tradition (depending on vocalization),True,noun,True,True,tradition|year,True,5.68,True,True,False,,False,,4,strong
 191,يتم,is completed; takes place; is carried out,True,noun|verb,True,False,,True,5.81,True,True,False,,False,,4,semantic_review
-192,أمن,secured; ensured; made safe,True,adj|noun|verb,True,True,safe,True,4.92,True,True,False,,False,,4,strong
+192,أمن,security; safety; was or felt safe; secured or made safe,True,adj|noun|verb,True,True,safe|safety|security,True,4.92,True,True,False,,False,,4,strong
 193,شرطة,police,True,noun,True,True,police,True,5.00,True,True,False,,False,,4,strong
 194,لذا,therefore; thus; for that reason,False,,False,False,,True,5.13,False,True,False,,False,,2,form_only
 195,عربية,Arabic; Arab (feminine adjective/noun use),True,adj|noun,True,True,arab|arabic,True,5.00,True,True,False,,False,,4,strong
@@ -219,7 +219,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 218,تحقيق,investigation; achievement/realization (context-dependent),True,noun,True,True,achieve|investig,True,5.09,True,True,False,,False,,4,strong
 219,جميل,beautiful; nice,True,adj|name|noun,True,True,beautiful,True,5.23,True,True,False,,False,,4,strong
 220,بيت,house; home,True,noun|verb,True,True,house,True,5.27,True,True,False,,False,,4,strong
-221,هم,concern; worry (هَمّ); note: unvocalized spelling can also represent the pronoun 'they',True,adj|noun|pron|verb,True,True,concern|they|worry,True,5.71,True,True,False,,False,,4,strong
+221,هم,they; concern; worry (هُمْ / هَمّ),True,adj|noun|pron|verb,True,True,concern|they|worry,True,5.71,True,True,False,,False,,4,strong
 222,وزارة,ministry,True,noun,True,True,ministry,True,5.52,True,True,False,,False,,4,strong
 223,قرار,decision; resolution,True,noun,True,True,decision,True,5.23,True,True,False,,False,,4,strong
 224,رغم,despite; in spite of (رغم),True,noun|verb,True,False,,True,5.34,True,True,False,,False,,4,semantic_review
@@ -229,33 +229,33 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 228,يحاول,tries; attempts,True,verb,False,False,,True,4.90,False,True,False,,False,,3,form_only
 229,عين,eye; spring; individual/notable; appointed/designated (depending on vocalization),True,noun|verb,True,True,appoint|eye|spring,True,5.18,True,True,False,,False,,4,strong
 230,كي,so that; in order that,True,conj|noun|prep,True,True,order,True,5.20,True,True,False,,False,,4,strong
-231,كم,how many?; how much?,True,adv|noun|pron|verb,True,True,how|many|much,True,5.43,True,True,False,,False,,4,strong
+231,كم,how many?; how much?; many/a great many (interrogative or declarative كَمْ),True,adv|noun|pron|verb,True,True,how|many|much,True,5.43,True,True,False,,False,,4,strong
 232,أيام,days,True,noun,True,True,days,True,5.41,True,True,False,,False,,4,strong
 233,أصبح,became; came to be,True,adj|verb,True,False,,True,5.42,True,True,False,,False,,4,semantic_review
-234,حسب,calculated; counted; considered/thought (depending on vocalization),True,noun|prep|verb,True,True,consider,True,5.38,True,True,False,,False,,4,strong
+234,حسب,according to; enough/sufficient; calculated/count(ed); considered/thought (depending on vocalization/use),True,noun|prep|verb,True,True,accord|consider,True,5.38,True,True,False,,False,,4,strong
 235,دائما,always,True,adv,True,True,alway,True,5.54,True,True,False,,False,,4,strong
 236,انظر,look!; see!,True,verb,False,False,,True,5.33,False,True,False,,False,,3,form_only
 237,طريقة,way; method; manner,True,noun,True,True,manner|method|way,True,5.35,True,True,False,,False,,4,strong
-238,فيما,in what; concerning what; while/insofar as (فيما),True,conj,True,True,what|while,True,5.56,False,True,False,,False,,3,strong
+238,فيما,"in what; in which; concerning what/which; while/insofar as, depending on context",True,conj,True,True,what|while,True,5.56,False,True,False,,False,,3,strong
 239,صديق,friend,True,adj|noun,True,True,friend,True,4.90,True,True,False,,False,,4,strong
-240,عرض,presented; offered; displayed,True,noun|verb,True,True,display|offer,True,5.33,True,True,False,,False,,4,strong
+240,عرض,offer; presentation or display; width; symptom; presented or offered or displayed,True,noun|verb,True,True,display|offer|symptom|width,True,5.33,True,True,False,,False,,4,strong
 241,أبدا,ever; never (with negation); at all,True,adv|intj,True,True,all|never,True,5.28,True,True,False,,False,,4,strong
 242,هدف,goal; target; objective,True,noun|verb,True,True,goal|objective|target,True,5.07,True,True,False,,False,,4,strong
-243,يعد,counts; enumerates; prepares (depending on vocalization),True,verb,False,False,,True,5.33,True,True,False,,False,,4,form_only
+243,يعد,counts/enumerates; prepares; is considered (يَعُدّ / يُعِدّ / يُعَدّ),True,verb,False,False,,True,5.33,True,True,False,,False,,4,form_only
 244,وجود,existence; presence,True,noun,True,True,existence,True,5.59,True,True,False,,False,,4,strong
 245,نهاية,end; ending; conclusion,True,noun,True,True,end,True,5.48,True,True,False,,False,,4,strong
 246,مجموعة,group; collection; set,True,adj|noun,True,True,collection|group,True,5.68,True,True,False,,False,,4,strong
 247,دول,countries; states,True,noun|verb,True,False,,True,5.32,True,True,False,,False,,4,semantic_review
-248,فقد,loss; absence; losing (فَقْد),True,noun|verb,True,False,,True,5.73,True,True,False,,False,,4,semantic_review
+248,فقد,lost; loss/absence; so/then + already/may (فَقَدَ / فَقْد / فَ + قَدْ),True,noun|verb,True,False,,True,5.73,True,True,False,,False,,4,semantic_review
 249,مختلف,different; various,True,adj,True,True,different,True,5.30,True,True,False,,False,,4,strong
-250,ألف,authored; composed; compiled,True,noun|num|verb,True,True,author,True,5.44,True,True,False,,False,,4,strong
+250,ألف,thousand; authored/composed/compiled (أَلْف / أَلَّفَ),True,noun|num|verb,True,True,author|thousand,True,5.44,True,True,False,,False,,4,strong
 251,نائب,deputy; vice-president; representative,True,noun,True,True,deputy|representative,True,4.89,True,True,False,,False,,4,strong
 252,أسبوع,week,True,noun,True,True,week,True,4.81,True,True,False,,False,,4,strong
 253,قانون,law,True,noun,True,True,law,True,5.28,True,True,False,,False,,4,strong
 254,مستوى,level; standard,True,noun,True,True,level|standard,True,5.24,True,True,False,,False,,4,strong
 255,قطاع,sector,True,noun,True,True,sector,True,4.94,True,True,False,,False,,4,strong
 256,نظام,system; regime,True,noun,True,True,regime|system,True,5.51,True,True,False,,False,,4,strong
-257,مازال,still was/is; continued to be (ما زال),False,,False,False,,True,4.65,False,True,False,,False,,2,form_only
+257,ما زال,still is/was; continues/continued to be,False,,False,False,,True,4.91,True,False,False,,False,,2,form_only
 258,مساعدة,help; assistance,True,noun,True,True,help,True,5.07,True,True,False,,False,,4,strong
 259,يحصل,gets; obtains; happens; collects/achieves (depending on form),True,verb,False,False,,True,4.97,False,True,False,,False,,3,form_only
 260,شهر,month,True,noun|verb,True,True,month,True,5.43,True,True,False,,False,,4,strong
@@ -267,11 +267,11 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 266,قليل,little; few; small amount,True,adj|noun,True,True,few|little,True,5.02,True,True,False,,False,,4,strong
 267,نحو,toward; about; approximately,True,noun|prep|verb,True,True,about|toward,True,5.44,True,True,False,,False,,4,strong
 268,أطفال,children,True,noun,True,False,,True,5.17,False,True,False,,False,,3,semantic_review
-269,لابد,must; necessarily; inevitably (لا بُدَّ),False,,False,False,,True,4.90,False,True,False,,False,,2,form_only
+269,لا بد,must; necessarily; inevitably,True,phrase,True,True,inevitably|must,True,4.84,False,False,False,,False,,2,strong
 270,نوع,type; kind; form,True,noun|verb,True,True,type,True,5.38,True,True,False,,False,,4,strong
 271,منتخب,team; national/select team; elected/selected (context-dependent),True,noun,True,True,elect|national|team,True,4.74,True,True,False,,False,,4,strong
 272,شيخ,sheikh; elder; senior man,True,noun,True,True,elder|man,True,4.79,True,True,False,,False,,4,strong
-273,مشروع,project; plan,True,adj|noun,True,True,project,True,5.31,True,True,False,,False,,4,strong
+273,مشروع,project; plan; lawful; legitimate,True,adj|noun,True,True,lawful|legitimate|project,True,5.31,True,True,False,,False,,4,strong
 274,أشياء,things,True,noun,True,False,,True,4.96,True,True,False,,False,,4,semantic_review
 275,وحيد,only; lone; unique; lonely,True,adj|name,True,True,lonely|only|unique,True,4.60,True,True,False,,False,,4,strong
 276,صباح,morning; in the morning,True,adj|noun,True,True,morn,True,5.35,True,True,False,,False,,4,strong
@@ -280,24 +280,24 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 279,يجد,finds,True,verb,False,False,,True,4.83,False,True,False,,False,,3,form_only
 280,توقف,stopped; halted; stop!,True,noun|verb,True,True,stop|stopp,True,4.86,True,True,False,,False,,4,strong
 281,لأن,because; because of the fact that (لأن),True,conj,True,True,because,True,5.65,False,True,False,,False,,3,strong
-282,بطولة,championship; tournament,True,noun,True,True,championship,True,4.92,True,True,False,,False,,4,strong
-283,هيئة,body; authority; commission; organization,True,noun,True,True,organiz,True,5.19,True,True,False,,False,,4,strong
+282,بطولة,championship; tournament; heroism,True,noun,True,True,championship,True,4.92,True,True,False,,False,,4,strong
+283,هيئة,form; appearance; body; authority; commission; organization,True,noun,True,True,appearance|organiz,True,5.19,True,True,False,,False,,4,strong
 284,عملية,process; operation,True,adj|noun,True,True,oper|proces,True,5.53,True,True,False,,False,,4,strong
 285,طويل,long; tall,True,adj,True,True,long|tall,True,4.99,True,True,False,,False,,4,strong
 286,بل,rather; but; instead,True,conj|noun|verb,True,True,but|rather,True,5.71,True,True,False,,False,,4,strong
 287,تأكيد,confirmation; emphasis,True,noun,True,True,confirm,True,4.61,True,True,False,,False,,4,strong
-288,إذن,then; therefore; in that case (إذن),True,adv|noun,True,True,then|therefore,True,4.82,True,True,False,,False,,4,strong
+288,إذن,then; therefore; in that case (إِذًا/إذن); permission; authorization (إِذْن),True,adv|noun,True,True,authoriz|permission|then|therefore,True,4.82,True,True,False,,False,,4,strong
 289,أمور,matters; affairs; things,True,noun,True,False,,True,4.69,True,True,False,,False,,4,semantic_review
 290,فوز,victory; winning,True,noun,True,True,victory,True,4.63,True,True,False,,False,,4,strong
 291,أقل,less; least; fewer,True,adj|verb,True,True,fewer|least|less,True,5.37,True,True,False,,False,,4,strong
-292,ألا,attention/emphasis particle; also unvocalized form of أَلَّا 'that not',True,conj|particle|verb,True,True,not,True,5.28,False,True,False,,False,,3,strong
+292,ألا,attention/emphasis particle; that not (أَلَّا); don't/doesn't/isn't... ? (أَ + لا),True,conj|particle|verb,True,True,doesn't|don't|not,True,5.28,False,True,False,,False,,3,strong
 293,شباب,youth; young people,True,adj|noun,True,True,youth,True,5.02,True,True,False,,False,,4,strong
 294,حقيقي,real; genuine; true,True,adj,True,True,real|true,True,4.83,True,True,False,,False,,4,strong
 295,كامل,complete; full; entire,True,adj|name,True,True,complete|entire|full,True,5.27,True,True,False,,False,,4,strong
 296,لاعب,player; sport/game player,True,noun|verb,True,True,player,True,5.11,True,True,False,,False,,4,strong
 297,انتظر,waited; wait!,True,verb,True,True,wait,True,4.45,True,True,False,,False,,4,strong
 298,شركات,companies,True,noun,True,False,,True,5.14,False,True,False,,False,,3,semantic_review
-299,مما,from/of what; from/of which (a contraction of مِن and ما),True,pron,True,True,what,True,5.75,False,True,False,,False,,3,strong
+299,مما,"from/of what; from/of which; from what/that which, depending on context",True,pron,True,True,what,True,5.75,False,True,False,,False,,3,strong
 300,سابق,previous; former; preceding; competed/raced (depending on vocalization),True,adj|verb,True,True,former|preced|previou,True,5.03,True,True,False,,False,,4,strong
 301,غرفة,room; chamber,True,noun,True,True,chamber|room,True,5.02,True,True,False,,False,,4,strong
 302,مال,money; wealth; leaned/inclined (depending on vocalization),True,adv|noun|verb,True,True,inclin|lean|money|wealth,True,4.70,True,True,False,,False,,4,strong
@@ -318,7 +318,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 317,يصل,arrives; reaches,True,verb,False,False,,True,5.06,False,True,False,,False,,3,form_only
 318,إضافة,addition; adding,True,noun,True,True,addition,True,5.18,True,True,False,,False,,4,strong
 319,رأس,head; top; headed/presided,True,noun|verb,True,True,head|top,True,5.08,True,True,False,,False,,4,strong
-320,حسن,goodness; beauty; became good (depending on vocalization),True,adj|name|noun|verb,True,True,beauty|good|goodnes,True,5.41,True,True,False,,False,,4,strong
+320,حسن,good/fine; goodness/beauty; became good/beautiful (depending on vocalization),True,adj|name|noun|verb,True,True,beautiful|beauty|fine|good|goodnes,True,5.41,True,True,False,,False,,4,strong
 321,فكرة,idea; thought,True,noun,True,True,idea|thought,True,5.30,True,True,False,,False,,4,strong
 322,أخذ,taking; took,True,noun|verb,True,True,taking,True,5.02,True,True,False,,False,,4,strong
 323,أشار,indicated; pointed out; referred to,True,verb,True,True,out|point,True,4.66,True,True,False,,False,,4,strong
@@ -330,10 +330,10 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 329,حصول,occurrence; obtaining; acquisition,True,noun,True,False,,True,4.25,True,True,False,,False,,4,semantic_review
 330,ذهب,gold; went (depending on vocalization),True,noun|verb,True,True,gold,True,4.89,True,True,False,,False,,4,strong
 331,يبدأ,begins; starts,True,verb,False,False,,True,4.89,False,True,False,,False,,3,form_only
-332,ذات,self/same; possessing (in constructions such as ذات),True,noun|pron,True,True,same|self,True,5.56,True,True,False,,False,,4,strong
+332,ذات,"self; essence; having; possessing (feminine form corresponding to ذو, depending on construction)",True,noun|pron,True,True,essence|self,True,5.56,True,True,False,,False,,4,strong
 333,تحدث,speaking; conversation; spoke/talked,True,noun|verb,True,True,speak|talk,True,5.17,True,True,False,,False,,4,strong
 334,وصل,arrived; reached; connected,True,noun|verb,True,True,connect|reach,True,5.10,True,True,False,,False,,4,strong
-335,علم,knowledge; science; flag; taught/instructed (depending on vocalization),True,noun|verb,True,True,flag|instruct|knowledge|science,True,5.36,True,True,False,,False,,4,strong
+335,علم,knowledge; science; flag; knew/recognized; taught/instructed (depending on vocalization/form),True,noun|verb,True,True,flag|instruct|knowledge|science,True,5.36,True,True,False,,False,,4,strong
 336,أما,as for; whereas; as regards (أَمَّا),True,conj|particle|verb,True,False,,True,5.65,False,True,False,,False,,3,semantic_review
 337,أعلن,announced; declared,True,verb,True,False,,True,5.11,True,True,False,,False,,4,semantic_review
 338,إطلاقا,at all; absolutely,False,,False,False,,True,4.02,True,True,False,,False,,3,form_only
@@ -345,20 +345,20 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 344,طفل,child,True,noun,True,True,child,True,5.00,True,True,False,,False,,4,strong
 345,قضية,case; issue; cause,True,noun,True,True,cause|issue,True,5.13,True,True,False,,False,,4,strong
 346,أعلى,higher; highest; upper,True,adj|noun|verb,True,True,higher|highest|upper,True,5.18,True,True,False,,False,,4,strong
-347,ما,how...!; what a...! (exclamative ما),True,adv|conj|particle|pron,True,True,how|what,True,6.85,False,True,False,,False,,3,strong
+347,ما,how...!; what a...! (exclamative ma in the ma afala pattern),True,adv|conj|particle|pron,True,True,how|what,True,6.85,False,True,False,,False,,3,strong
 348,دعم,support; backing; supported,True,noun|verb,True,True,support,True,5.20,True,True,False,,False,,4,strong
 349,حاجة,need; necessity,True,noun,True,True,necessity|need,True,5.10,True,True,False,,False,,4,strong
 350,تعال,come!,True,noun|verb,True,True,come,True,4.71,True,True,False,,False,,4,strong
-351,مجرد,mere; simply; abstract/bare,True,adj,True,True,abstract|mere,True,5.30,True,True,False,,False,,4,strong
+351,مجرد,mere; bare; stripped; abstract; as soon as / merely / just in بمجرد constructions,True,adj,True,True,abstract|mere|stripp,True,5.30,True,True,False,,False,,4,strong
 352,وزراء,ministers,True,noun,True,False,,True,4.66,False,True,False,,False,,3,semantic_review
 353,هؤلاء,these,True,pron,True,True,these,True,5.52,False,True,False,,False,,3,strong
-354,عقد,held; concluded; contracted; tied,True,noun|verb,True,True,contract,True,5.13,True,True,False,,False,,4,strong
+354,عقد,contract/agreement; decade; necklace; held/concluded/tied (depending on vocalization),True,noun|verb,True,True,contract|decade|necklace,True,5.13,True,True,False,,False,,4,strong
 355,دقيقة,minute; precise/fine (context-dependent),True,noun,True,True,minute,True,5.09,True,True,False,,False,,4,strong
 356,طبع,printing; nature/character; printed,True,noun|verb,True,True,nature|print,True,4.17,True,True,False,,False,,4,strong
 357,صورة,picture; image; form,True,noun,True,True,image|picture,True,5.43,True,True,False,,False,,4,strong
-358,تقدم,progress; advance; advanced/progressed,True,noun|verb,True,True,advance|progres,True,5.18,True,True,False,,False,,4,strong
+358,تقدم,progress; advance; advanced; came forward; applied (depending on use),True,noun|verb,True,True,advance|progres,True,5.18,True,True,False,,False,,4,strong
 359,جامعة,university,True,noun,True,True,university,True,5.34,True,True,False,,False,,4,strong
-360,عبر,crossed; passed through; expressed (context-dependent),True,noun|prep|verb,True,True,pass,True,5.73,True,True,False,,False,,4,strong
+360,عبر,through; via; across; lessons; morals; crossed/passed through; expressed (depending on vocalization/use),True,noun|prep|verb,True,True,acros|pass,True,5.73,True,True,False,,False,,4,strong
 361,اذهب,go!,True,verb,False,False,,True,4.19,False,True,False,,False,,3,form_only
 362,وجد,found,True,noun|verb,True,False,,True,4.96,True,True,False,,False,,4,semantic_review
 363,قادم,coming; next,True,adj|noun,True,True,coming|next,True,4.27,True,True,False,,False,,4,strong
@@ -384,20 +384,20 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 383,ذو,possessor of; having; with (ذو),True,noun,True,True,possessor,True,5.11,False,True,False,,False,,3,strong
 384,مدرسة,school; female teacher (depending on vocalization),True,adj|noun,True,True,female|school|teacher,True,5.14,True,True,False,,False,,4,strong
 385,سرعة,speed; rapidity,True,noun,True,True,speed,True,4.76,True,True,False,,False,,4,strong
-386,لما,when (لَمَّا); not yet / when used with negation; for what/to what (لِمَا),True,adv|conj|name|particle,True,True,not|what|when|yet,True,5.68,False,True,False,,False,,3,strong
+386,لما,when (لَمَّا); not yet (لَمَّا); for what / to what (لِمَا),True,adv|conj|name|particle,True,True,not|what|when|yet,True,5.68,False,True,False,,False,,3,strong
 387,أعضاء,members,True,noun,False,False,,True,5.30,False,True,False,,False,,3,form_only
 388,عمر,age; lifetime,True,name|noun|verb,True,True,age|lifetime,True,5.47,True,True,False,,False,,4,strong
 389,إسلامي,Islamic,True,adj,True,True,islamic,True,4.18,True,True,False,,False,,4,strong
 390,مرحلة,stage; phase,True,noun,True,True,phase|stage,True,5.00,True,True,False,,False,,4,strong
 391,بعيد,far; distant,True,adj|prep,True,True,distant|far,True,5.08,True,True,False,,False,,4,strong
 392,يخبر,tells; informs,True,verb,False,False,,True,3.90,False,True,False,,False,,3,form_only
-393,أوضح,clarified; explained; made clear,True,adj|verb,True,True,clear,True,4.55,True,True,False,,False,,4,strong
+393,أوضح,clearer; clearest; clarified; explained; made clear,True,adj|verb,True,True,clear|clearer|clearest,True,4.55,True,True,False,,False,,4,strong
 394,حب,love,True,noun|verb,True,True,love,True,5.01,True,True,False,,False,,4,strong
-395,مالية,financial; fiscal,True,noun,True,True,financial,True,4.65,True,True,False,,False,,4,strong
+395,مالية,financial; fiscal; finance; finances,True,noun,True,True,financial,True,4.65,True,True,False,,False,,4,strong
 396,علاقة,relationship; relation,True,noun,True,True,relation|relationship,True,5.19,True,True,False,,False,,4,strong
 397,يد,hand,True,noun,True,True,hand,True,5.13,True,True,False,,False,,4,strong
 398,ينظر,looks; considers; examines,True,verb,False,False,,True,4.74,True,True,False,,False,,4,form_only
-399,مستقبل,future,True,adj|noun,True,False,,True,4.66,True,True,False,,False,,4,semantic_review
+399,مستقبل,future; receiver; recipient; host (depending on vocalization/use),True,adj|noun,True,False,,True,4.66,True,True,False,,False,,4,semantic_review
 400,زوجة,wife,True,noun,True,True,wife,True,4.78,True,True,False,,False,,4,strong
 401,جيش,army,True,noun|verb,True,True,army,True,4.91,True,True,False,,False,,4,strong
 402,مدة,duration; period,True,noun|prep,True,True,duration|period,True,4.95,True,True,False,,False,,4,strong
@@ -440,11 +440,11 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 439,وصول,arrival; access,True,noun,True,True,arrival,True,4.79,True,True,False,,False,,4,strong
 440,دخول,entry; entrance,True,noun,True,True,entrance,True,5.06,True,True,False,,False,,4,strong
 441,عالمية,global; international (feminine),True,noun,True,False,,True,4.69,True,True,False,,False,,4,semantic_review
-442,مهمة,task; mission; assignment,True,adj|noun,True,True,assign|mission|task,True,5.16,True,True,False,,False,,4,strong
+442,مهمة,task; mission; assignment; important in the feminine adjective reading,True,adj|noun,True,True,assign|important|mission|task,True,5.16,True,True,False,,False,,4,strong
 443,مزيد,more; additional amount; further,True,adj|noun,True,True,amount|more,True,4.76,False,True,False,,False,,3,strong
 444,رئاسة,presidency; chairmanship,True,noun,True,True,chairmanship|presidency,True,4.65,True,True,False,,False,,4,strong
 445,مجتمع,society; community,True,noun,True,True,community|society,True,4.78,True,True,False,,False,,4,strong
-446,قلب,turned; overturned; reversed,True,adj|noun|verb,True,True,turn,True,5.01,True,True,False,,False,,4,strong
+446,قلب,heart; core or center; turned; overturned; reversed,True,adj|noun|verb,True,True,heart|turn,True,5.01,True,True,False,,False,,4,strong
 447,ينتظر,waits,True,verb,False,False,,True,4.65,False,True,False,,False,,3,form_only
 448,تعاون,cooperation; collaborated/cooperated,True,noun|verb,True,True,cooper,True,4.37,True,True,False,,False,,4,strong
 449,عبد,servant; slave; worshipped,True,noun|verb,True,True,slave,True,5.88,True,True,False,,False,,4,strong
@@ -454,9 +454,9 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 453,يود,would like; wants,True,noun|verb,True,False,,True,4.00,True,True,False,,False,,4,semantic_review
 454,قيام,standing; undertaking; carrying out,True,adj|noun,True,False,,True,4.82,True,True,False,,False,,4,semantic_review
 455,خارجية,foreign; external; exterior (feminine adjective/noun use),True,adj|noun,True,True,exterior|foreign,True,4.59,True,True,False,,False,,4,strong
-456,ذكر,mention; remembrance,True,noun|verb,True,True,mention|remembrance,True,5.40,True,True,False,,False,,4,strong
-457,حديث,modern; recent; new (adjective حديث),True,adj|noun,True,True,modern|new|recent,True,4.94,True,True,False,,False,,4,strong
-458,ظهر,noon; midday (ظُهْر),True,noun|verb,True,True,midday|noon,True,5.09,True,True,False,,False,,4,strong
+456,ذكر,masculine being; mention or remembrance; mentioned or recalled,True,noun|verb,True,True,mention|recall|remembrance,True,5.40,True,True,False,,False,,4,strong
+457,حديث,modern; recent; new; speech or talk or report; Hadith,True,adj|noun,True,True,hadith|modern|new|recent|speech|talk,True,4.94,True,True,False,,False,,4,strong
+458,ظهر,back; noon or midday; appeared or became visible,True,noun|verb,True,True,appear|back|midday|noon|visible,True,5.09,True,True,False,,False,,4,strong
 459,عديد,many; numerous,True,adj|noun,True,True,many|numerou,True,4.05,True,True,False,,False,,4,strong
 460,كأن,as if; as though,True,conj,True,True,if,True,4.45,False,True,False,,False,,3,strong
 461,لحظة,moment,True,noun,True,True,moment,True,5.09,True,True,False,,False,,4,strong
@@ -465,7 +465,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 464,نار,fire,True,noun,True,True,fire,True,4.73,True,True,False,,False,,4,strong
 465,حاول,tried; attempted; try!,True,verb,True,True,try,True,4.95,True,True,False,,False,,4,strong
 466,دين,religion; debt (depending on vocalization),True,adj|noun|verb,True,True,debt|religion,True,4.93,True,True,False,,False,,4,strong
-467,دوري,league; round/periodic competition; periodic (depending on use),True,adj|verb,True,True,periodic,True,5.03,True,True,False,,False,,4,strong
+467,دوري,league; periodic; my turn; my role (depending on vocalization/use),True,adj|verb,True,True,periodic,True,5.03,True,True,False,,False,,4,strong
 468,يبحث,searches; researches; looks for,True,verb,False,False,,True,4.67,True,True,False,,False,,4,form_only
 469,يعطي,gives,True,verb,False,False,,True,4.67,False,True,False,,False,,3,form_only
 470,غاية,goal; purpose; utmost extent,True,noun,True,True,goal|purpose,True,4.70,True,True,False,,False,,4,strong
@@ -473,13 +473,13 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 472,دفع,payment; pushing; paid/pushed,True,noun|verb,True,True,payment|push,True,5.05,True,True,False,,False,,4,strong
 473,دعا,called; invited; prayed,True,verb,True,True,call|pray,True,4.57,True,True,False,,False,,4,strong
 474,موقف,position; stance; situation,True,noun,True,True,position|situ,True,4.92,True,True,False,,False,,4,strong
-475,مشيرا,indicating; pointing out; noting (مشيرًا),False,,False,False,,True,4.04,False,True,False,,False,,2,form_only
+475,مشيرا,indicating; pointing out; noting (mushiran),False,,False,False,,True,4.04,False,True,False,,False,,2,form_only
 476,تنفيذ,implementation; execution,True,noun,True,False,,True,4.90,True,True,False,,False,,4,semantic_review
 477,يقصد,means; intends; aims,True,verb,False,False,,True,4.46,False,True,False,,False,,3,form_only
 478,يذكر,mentions; remembers,True,verb,False,False,,True,4.91,False,True,False,,False,,3,form_only
 479,سالم,safe; sound; intact; unharmed,True,adj|name|verb,True,True,intact|safe|sound,True,4.75,True,True,False,,False,,4,strong
 480,أصدقاء,friends,True,noun,True,False,,True,4.68,False,True,False,,False,,3,semantic_review
-481,وحدة,unit; unity,True,noun,True,True,unit|unity,True,5.00,True,True,False,,False,,4,strong
+481,وحدة,unit; unity; loneliness; solitude (depending on vocalization/use),True,noun,True,True,lonelines|solitude|unit|unity,True,5.00,True,True,False,,False,,4,strong
 482,قديم,old; ancient,True,adj,True,True,ancient|old,True,4.57,True,True,False,,False,,4,strong
 483,أزمة,crisis,True,noun,True,True,crisi,True,4.74,True,True,False,,False,,4,strong
 484,تقرير,report,True,noun,True,True,report,True,5.02,True,True,False,,False,,4,strong
@@ -492,13 +492,13 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 491,وسط,middle; center; among,True,adj|noun|prep|verb,True,True,among|center|middle,True,5.35,True,True,False,,False,,4,strong
 492,جميعا,all together; altogether; everyone,False,,False,False,,True,5.24,False,True,False,,False,,2,form_only
 493,موت,death,True,noun|verb,True,True,death,True,4.87,True,True,False,,False,,4,strong
-494,شعر,poetry; hair (depending on vocalization),True,noun|verb,True,True,hair|poetry,True,4.96,True,True,False,,False,,4,strong
+494,شعر,poetry; hair; felt/perceived (شِعْر / شَعْر / شَعَرَ),True,noun|verb,True,True,hair|poetry,True,4.96,True,True,False,,False,,4,strong
 495,دفاع,defense; defence,True,noun,True,True,defence|defense,True,4.48,True,True,False,,False,,4,strong
 496,درجة,degree; grade; level,True,noun,True,True,degree|grade,True,5.19,True,True,False,,False,,4,strong
 497,اتصال,contact; communication,True,noun,True,False,,True,4.73,True,True,False,,False,,4,semantic_review
 498,عشر,ten; one tenth (depending on vocalization),True,noun|num,True,True,ten|tenth,True,5.63,True,True,False,,False,,4,strong
 499,سؤال,question,True,noun,True,True,question,True,5.00,True,True,False,,False,,4,strong
-500,كلام,speech; statement; remark; talk; saying,True,noun,True,True,remark|saying|speech|state|talk,True,4.90,True,True,False,,False,,4,strong
+500,كلام,speech; talk; words,True,noun,True,True,speech|talk,True,4.90,True,True,False,,False,,4,strong
 501,كأس,cup; trophy,True,noun,True,True,cup|trophy,True,5.20,True,True,False,,False,,4,strong
 502,جعل,made; rendered; caused,True,noun|verb,True,False,,True,5.11,True,True,False,,False,,4,semantic_review
 503,طوال,throughout; during; all through,True,noun|prep,True,True,during|throughout,True,4.99,True,True,False,,False,,4,strong
@@ -506,7 +506,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 505,متى,when?,True,adv|name|prep,True,True,when,True,5.17,True,True,False,,False,,4,strong
 506,ضبط,control; regulation; adjustment; controlled; adjusted,True,noun|verb,True,True,adjust,True,4.39,True,True,False,,False,,4,strong
 507,أثناء,during; while,True,noun|prep,True,True,during,True,5.49,True,True,False,,False,,4,strong
-508,وطنية,national; patriotic (feminine adjective),True,adj|noun,True,False,,True,4.63,True,True,False,,False,,4,semantic_review
+508,وطنية,national; patriotic; patriotism,True,adj|noun,True,True,patriotism,True,4.63,True,True,False,,False,,4,strong
 509,معرفة,knowledge; knowing,True,noun,True,True,knowledge,True,5.13,True,True,False,,False,,4,strong
 510,بيان,statement; declaration; data/itemization (context-dependent),True,noun,True,True,declar|state,True,4.89,True,True,False,,False,,4,strong
 511,قرر,decided; determined,True,verb,True,False,,True,4.81,True,True,False,,False,,4,semantic_review
@@ -525,7 +525,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 524,طاقة,energy; capacity,True,noun,True,True,energy,True,4.56,True,True,False,,False,,4,strong
 525,يعتبر,is considered; regards/considers,False,,False,False,,True,5.25,True,True,False,,False,,3,form_only
 526,عاد,returned; came back,True,name|noun|verb,True,True,back|return,True,5.05,True,True,False,,False,,4,strong
-527,خلف,succeeded/followed; came after,True,noun|prep|verb,True,True,after|follow|succeed,True,5.05,True,True,False,,False,,4,strong
+527,خلف,behind; back; rear; succeeded/followed; came after (depending on vocalization/use),True,noun|prep|verb,True,True,after|back|behind|follow|succeed,True,5.05,True,True,False,,False,,4,strong
 528,شرق,east,True,noun|verb,True,True,east,True,5.06,True,True,False,,False,,4,strong
 529,داخلية,internal; domestic; interior (feminine),True,adj|noun,True,True,interior,True,4.44,True,True,False,,False,,4,strong
 530,ضمن,within; among; included/guaranteed (depending on vocalization),True,noun|prep|verb,True,True,among|within,True,5.49,True,True,False,,False,,4,strong
@@ -534,8 +534,8 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 533,مستشفى,hospital,True,noun,True,True,hospital,True,4.88,True,True,False,,False,,4,strong
 534,إنسان,human being; person,True,noun,True,True,human,True,4.73,True,True,False,,False,,4,strong
 535,أعطى,gave,True,verb,True,False,,True,4.44,True,True,False,,False,,4,semantic_review
-536,ألم,pain (أَلَم); did...not? / interrogative combination أَلَمْ depending on vocalization,True,noun|verb,True,True,pain,True,4.78,True,True,False,,False,,4,strong
-537,منظمة,organization; organisation,True,noun,True,True,organiz,True,5.19,False,True,False,,False,,3,strong
+536,ألم,pain (أَلَم); did ... not? (أَ + لَمْ),True,noun|verb,True,True,pain,True,4.78,True,True,False,,False,,4,strong
+537,منظمة,"organization; organized (feminine, depending on vocalization/use)",True,noun,True,True,organiz,True,5.19,False,True,False,,False,,3,strong
 538,كتب,books; wrote,True,noun|verb,True,False,,True,5.44,True,True,False,,False,,4,semantic_review
 539,حضور,attendance; presence,True,adj|noun,True,True,attendance|presence,True,4.61,True,True,False,,False,,4,strong
 540,رفع,raising; lifting; raised,True,noun|verb,True,True,lift|rais,True,5.04,True,True,False,,False,,4,strong
@@ -551,23 +551,23 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 550,نتائج,results; consequences,True,noun,True,False,,True,5.01,False,True,False,,False,,3,semantic_review
 551,مدرب,coach; trainer,True,adj|noun,True,True,coach|trainer,True,4.72,True,True,False,,False,,4,strong
 552,يترك,leaves; abandons,True,verb,False,False,,True,4.58,False,True,False,,False,,3,form_only
-553,فهم,understood,True,noun|verb,True,False,,True,5.11,True,True,False,,False,,4,semantic_review
+553,فهم,understanding; comprehension; understood (depending on vocalization/use),True,noun|verb,True,True,comprehension|understand,True,5.11,True,True,False,,False,,4,strong
 554,أساسي,basic; fundamental,True,adj|noun,True,True,basic|fundamental,True,4.57,True,True,False,,False,,4,strong
 555,أشخاص,people; persons,True,noun,False,False,,True,5.14,True,True,False,,False,,4,form_only
 556,جنوب,south,True,noun,True,True,south,True,5.36,True,True,False,,False,,4,strong
 557,يسمع,hears; listens,True,verb,False,False,,True,4.52,False,True,False,,False,,3,form_only
-558,سجن,prison; imprisonment,True,noun|verb,True,True,imprison|prison,True,4.71,True,True,False,,False,,4,strong
+558,سجن,prison; imprisonment; imprisoned,True,noun|verb,True,True,imprison|prison,True,4.71,True,True,False,,False,,4,strong
 559,تحديد,determination; specification; identification,True,noun,True,False,,True,5.05,True,True,False,,False,,4,semantic_review
 560,وطن,homeland; nation; country,True,noun|verb,True,True,country|homeland|nation,True,4.42,True,True,False,,False,,4,strong
 561,ظل,shade; shadow; remained/continued,True,noun|verb,True,True,remain|shade|shadow,True,5.11,True,True,False,,False,,4,strong
-562,ولد,boy; son; gave birth,True,noun|verb,True,True,birth|boy|son,True,5.45,True,True,False,,False,,4,strong
+562,ولد,boy; son; child; gave birth; was born (depending on vocalization/use),True,noun|verb,True,True,birth|boy|child|son,True,5.45,True,True,False,,False,,4,strong
 563,إعلان,announcement; advertisement,True,noun,True,True,advertise|announce,True,4.86,True,True,False,,False,,4,strong
 564,شارع,street,True,noun,True,True,street,True,4.99,True,True,False,,False,,4,strong
 565,جولة,tour; round; trip,True,noun,True,True,trip,True,4.66,True,True,False,,False,,4,strong
 566,ينتهي,ends; finishes,True,verb,False,False,,True,4.72,True,True,False,,False,,4,form_only
 567,تغيير,change; alteration,True,noun,True,True,alter|change,True,5.11,True,True,False,,False,,4,strong
-568,أمين,trustworthy; honest; faithful,True,adj|name|noun,True,True,faithful|honest|trustworthy,True,4.74,True,True,False,,False,,4,strong
-569,قدر,fate; destiny; amount; ability; estimated,True,noun|verb,True,True,ability|amount|destiny|fate,True,4.97,True,True,False,,False,,4,strong
+568,أمين,trustworthy; honest; faithful; secretary; custodian,True,adj|name|noun,True,True,custodian|faithful|honest|secretary|trustworthy,True,4.74,True,True,False,,False,,4,strong
+569,قدر,fate; destiny; amount; value; ability; was able to; estimated; decreed/determined (depending on vocalization/use),True,noun|verb,True,True,ability|able|amount|destiny|fate|value,True,4.97,True,True,False,,False,,4,strong
 570,يحمل,carries; bears; loads/imposes (depending on form),True,verb,False,False,,True,4.98,False,True,False,,False,,3,form_only
 571,يلعب,plays,True,verb,False,False,,True,4.78,True,True,False,,False,,4,form_only
 572,يضع,puts; places,True,verb,False,False,,True,4.63,True,True,False,,False,,4,form_only
@@ -576,7 +576,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 575,خط,line; route,True,noun|verb,True,True,line,True,5.01,True,True,False,,False,,4,strong
 576,هاتف,telephone; phone; telephoned,True,noun|verb,True,True,telephone,True,4.62,True,True,False,,False,,4,strong
 577,علاقات,relations; relationships,True,noun,True,False,,True,4.65,True,True,False,,False,,4,semantic_review
-578,عرف,knew; recognized,True,noun|verb,True,False,,True,4.78,True,True,False,,False,,4,semantic_review
+578,عرف,custom; convention; knew; recognized (depending on vocalization/use),True,noun|verb,True,True,convention|custom,True,4.78,True,True,False,,False,,4,strong
 579,أخ,brother,True,noun,True,True,brother,True,4.18,True,True,False,,False,,4,strong
 580,مواجهة,confrontation; facing,False,,False,False,,True,4.90,True,True,False,,False,,3,form_only
 581,بنك,bank,True,noun,True,True,bank,True,4.74,True,True,False,,False,,4,strong
@@ -589,11 +589,11 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 588,إعلام,media; information/publicity,True,noun,True,True,inform|media,True,4.46,True,True,False,,False,,4,strong
 589,أية,any; whichever; which (feminine form أية),True,pron,True,False,,True,5.08,False,True,False,,False,,3,semantic_review
 590,زيارة,visit,True,noun,True,True,visit,True,4.97,True,True,False,,False,,4,strong
-591,مرأة,woman,True,noun,True,False,,True,3.46,False,True,False,,False,,3,semantic_review
+591,مرأة,woman (alternative form of امرأة),True,noun,True,True,alternative,True,3.46,False,True,False,,False,,3,strong
 592,صحة,health; correctness,True,noun,True,True,correctnes|health,True,4.80,True,True,False,,False,,4,strong
 593,مناسبة,occasion; event; suitable/appropriate (feminine),True,adj|noun,True,True,occasion,True,4.72,True,True,False,,False,,4,strong
 594,قسم,section; department; oath; divided (depending on vocalization),True,noun|verb,True,True,depart|oath|section,True,5.30,True,True,False,,False,,4,strong
-595,قائمة,list; menu,True,noun,True,True,list|menu,True,5.32,True,True,False,,False,,4,strong
+595,قائمة,"list; menu; standing; existing (feminine, depending on use)",True,noun,True,True,list|menu,True,5.32,True,True,False,,False,,4,strong
 596,مشاكل,problems,True,noun,True,False,,True,5.03,True,True,False,,False,,4,semantic_review
 597,غريب,strange; foreign; odd,True,adj|noun,True,True,foreign|strange,True,4.83,True,True,False,,False,,4,strong
 598,حقوق,rights,True,noun,True,True,right,True,5.28,True,True,False,,False,,4,strong
@@ -601,13 +601,13 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 600,بيع,sale; selling,True,noun|verb,True,True,sale,True,4.99,True,True,False,,False,,4,strong
 601,حاليا,currently; at present,True,adv,True,True,currently,True,5.32,True,True,False,,False,,4,strong
 602,رجاء,request; hope; please (as a polite formula),True,noun,True,True,hope|request,True,4.48,True,True,False,,False,,4,strong
-603,أحضر,brought; brought in; supplied/presented (depending on vocalization/context),True,verb,True,False,,True,3.94,True,True,False,,False,,4,semantic_review
+603,أحضر,brought; brought in; supplied; bring!; I attend / I am present (depending on vocalization/context),True,verb,True,True,bring,True,3.94,True,True,False,,False,,4,strong
 604,سيء,bad; poor,True,adj|verb,True,False,,True,4.54,True,True,False,,False,,4,semantic_review
 605,سلاح,weapon; arms,True,noun,True,True,weapon,True,4.79,True,True,False,,False,,4,strong
 606,يطلب,asks for; requests; demands,True,verb,False,False,,True,4.68,False,True,False,,False,,3,form_only
 607,مناطق,regions; areas,True,noun,True,False,,True,5.16,False,True,False,,False,,3,semantic_review
-608,شخصية,personality; character,True,adj|noun,True,True,character|personality,True,5.14,True,True,False,,False,,4,strong
-609,رياضي,sporting; athletic,True,adj|noun,True,True,athletic|sport,True,4.21,True,True,False,,False,,4,strong
+608,شخصية,"personality; character; personal (feminine, depending on use)",True,adj|noun,True,True,character|personality,True,5.14,True,True,False,,False,,4,strong
+609,رياضي,athletic; sporting; athlete; sportsman; mathematician,True,adj|noun,True,True,athlete|athletic|mathematician|sport|sportsman,True,4.21,True,True,False,,False,,4,strong
 610,يتذكر,remembers,True,verb,False,False,,True,4.26,True,True,False,,False,,4,form_only
 611,أداء,performance; execution,True,noun|verb,True,True,execution|performance,True,4.84,True,True,False,,False,,4,strong
 612,مؤسسة,institution; organization,True,adj|noun,True,True,institution,True,5.11,True,True,False,,False,,4,strong
@@ -617,9 +617,9 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 616,واضح,clear; obvious,True,adj,True,True,clear|obviou,True,5.00,True,True,False,,False,,4,strong
 617,أحيان,times; occasions (commonly in أحيانًا = sometimes),True,noun,False,False,,True,3.70,False,True,False,,False,,3,form_only
 618,جريمة,crime,True,noun,True,True,crime,True,4.94,True,True,False,,False,,4,strong
-619,مؤكدا,confirmed; certain; confirming/emphasizing (context-dependent),False,,False,False,,True,3.96,False,True,False,,False,,2,form_only
+619,مؤكدا,confirming; emphasizing; confirmed; certain; definitely (depending on vocalization/context),False,,False,False,,True,3.96,False,True,False,,False,,2,form_only
 620,أتى,came; arrived,True,verb,True,False,,True,4.57,True,True,False,,False,,4,semantic_review
-621,حالي,current; present,True,adj,True,True,current,True,3.83,True,True,False,,False,,4,strong
+621,حالي,current; present; my condition; my state (depending on structure),True,adj,True,True,current,True,3.83,True,True,False,,False,,4,strong
 622,يدفع,pays; pushes,True,verb,False,False,,True,4.67,False,True,False,,False,,3,form_only
 623,تالي,next; following,True,adj,False,False,,True,3.27,True,True,False,,False,,4,form_only
 624,إقامة,residence; establishment; holding,True,noun,True,True,establish,True,4.61,True,True,False,,False,,4,strong
@@ -641,14 +641,14 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 640,طبيب,doctor; physician,True,noun,True,True,doctor|physician,True,4.70,True,True,False,,False,,4,strong
 641,مباشرة,directly; direct; immediate,True,adj|adv|noun,True,True,directly,True,5.33,True,True,False,,False,,4,strong
 642,جمهورية,republic,True,adj|noun,True,True,republic,True,4.81,True,True,False,,False,,4,strong
-643,بأس,harm; hardship; might; strength; often in لا بأس = no problem/not bad,True,noun,True,True,strength,True,4.37,True,True,False,,False,,4,strong
-644,أشهر,months; more famous/most famous (depending on vocalization),True,adj|noun|verb,True,True,famou|more|most,True,5.30,True,True,False,,False,,4,strong
-645,ملك,angel (مَلَك); unvocalized spelling can also represent king/possession in other contexts,True,adj|noun|verb,True,True,angel|king|possession,True,5.14,True,True,False,,False,,4,strong
-646,قضاء,judgment; ruling; judiciary; judicial authority; fulfillment/performance,True,noun,True,False,,True,4.69,True,True,False,,False,,4,semantic_review
+643,بأس,harm / hardship; might / strength,True,noun,True,True,strength,True,4.37,True,True,False,,False,,4,strong
+644,أشهر,months; more famous; most famous (depending on vocalization/use),True,adj|noun|verb,True,True,famou|more|most,True,5.30,True,True,False,,False,,4,strong
+645,ملك,king; angel; property; possession; owned; possessed (depending on vocalization/use),True,adj|noun|verb,True,True,angel|king|possession|property,True,5.14,True,True,False,,False,,4,strong
+646,قضاء,judgment / ruling; judiciary; fulfillment / carrying out,True,noun,True,False,,True,4.69,True,True,False,,False,,4,semantic_review
 647,دراسة,study,True,noun,True,True,study,True,5.04,True,True,False,,False,,4,strong
 648,متأكد,sure; certain; confident,True,adj,True,True,certain|sure,True,4.34,True,True,False,,False,,4,strong
 649,سياسة,politics; policy,True,noun,True,True,policy|politic,True,4.98,True,True,False,,False,,4,strong
-650,صعب,was difficult; became hard,True,adj|verb,True,True,difficult|hard,True,4.77,True,True,False,,False,,4,strong
+650,صعب,difficult; hard; was difficult; became hard (depending on vocalization/use),True,adj|verb,True,True,difficult|hard,True,4.77,True,True,False,,False,,4,strong
 651,دخل,income; revenue; entered,True,noun|verb,True,True,enter|income,True,5.22,True,True,False,,False,,4,strong
 652,يقتل,kills; is killed (voice depends on vocalization/context),True,verb,False,False,,True,4.60,False,True,False,,False,,3,form_only
 653,عالمي,global; worldwide; international,True,adj,True,True,global|worldwide,True,4.50,True,True,False,,False,,4,strong
@@ -666,10 +666,10 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 665,اهتمام,interest; attention; concern,True,noun,True,True,attention|interest,True,4.57,True,True,False,,False,,4,strong
 666,إطار,framework; frame,True,noun,True,True,frame|framework,True,4.85,True,True,False,,False,,4,strong
 667,أمنية,wish; desire,True,adj|noun,True,True,desire|wish,True,4.60,True,True,False,,False,,4,strong
-668,مسؤول,official; person responsible; responsible person,True,adj|noun,True,True,official|responsible,True,4.56,True,True,False,,False,,4,strong
+668,مسؤول,responsible; official; person responsible,True,adj|noun,True,True,official|responsible,True,4.56,True,True,False,,False,,4,strong
 669,قائد,leader; commander; driver,True,noun,True,True,commander|leader,True,4.97,True,True,False,,False,,4,strong
 670,مصادر,sources,True,noun,True,False,,True,5.06,False,True,False,,False,,3,semantic_review
-671,وقع,happened; occurred; fell; was located,True,noun|verb,True,True,happen|locat,True,4.94,True,True,False,,False,,4,strong
+671,وقع,impact; effect; happened; occurred; fell; was located; signed (depending on vocalization/use),True,noun|verb,True,True,happen|locat|sign,True,4.94,True,True,False,,False,,4,strong
 672,مباريات,matches; games,True,noun,True,False,,True,4.75,False,True,False,,False,,3,semantic_review
 673,لاحق,subsequent; later; following; followed/caught up with,True,adj|verb,True,True,follow|subsequent,True,4.54,True,True,False,,False,,4,strong
 674,اتصل,contacted; connected; call!/contact!,True,verb,True,True,call|connect|contact,True,4.60,True,True,False,,False,,4,strong
@@ -694,15 +694,15 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 693,يتعلق,relates to; concerns; is connected with,True,verb,False,False,,True,5.16,False,True,False,,False,,3,form_only
 694,اجتماعي,social,True,adj|noun,True,True,social,True,4.34,True,True,False,,False,,4,strong
 695,امرأة,woman,True,noun,True,True,woman,True,5.17,True,True,False,,False,,4,strong
-696,أسهم,shares; stocks; contributed/participated,True,noun|verb,True,False,,True,4.21,True,True,False,,False,,4,semantic_review
+696,أسهم,arrows; shares; stocks; contributed; participated (depending on vocalization/use),True,noun|verb,True,False,,True,4.21,True,True,False,,False,,4,semantic_review
 697,أجهزة,devices; equipment,True,noun,True,False,,True,4.93,False,True,False,,False,,3,semantic_review
 698,بدء,beginning; start,True,noun,True,True,beginn|start,True,4.84,True,True,False,,False,,4,strong
 699,جلسة,session; meeting,True,noun,True,True,meet|session,True,4.67,True,True,False,,False,,4,strong
-700,لايزال,still is; continues to be (لا يزال),False,,False,False,,True,4.02,False,True,False,,False,,2,form_only
+700,لا يزال,still is; continues to be,True,verb,True,True,still,True,5.06,True,False,False,,False,,3,strong
 701,رسمي,official; formal,True,adj|noun|verb,True,True,formal|official,True,4.67,True,True,False,,False,,4,strong
 702,تأثير,effect; influence; impact,True,noun,True,True,influence,True,5.04,True,True,False,,False,,4,strong
 703,لقب,title; nickname; titled/nicknamed,True,noun|verb,True,True,nickname|title,True,4.62,True,True,False,,False,,4,strong
-704,فرق,teams/groups; differences,True,noun|verb,True,True,group,True,4.89,True,True,False,,False,,4,strong
+704,فرق,difference; separation; teams; groups; separated; distinguished (depending on vocalization/use),True,noun|verb,True,True,difference|distinguish|group|separ,True,4.89,True,True,False,,False,,4,strong
 705,هجوم,attack; assault,True,noun,True,True,attack,True,4.84,True,True,False,,False,,4,strong
 706,ابنة,daughter,True,noun,True,True,daughter,True,4.61,True,True,False,,False,,4,strong
 707,يستمر,continues; persists,True,verb,False,False,,True,4.57,False,True,False,,False,,3,form_only
@@ -717,7 +717,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 716,صالح,valid; suitable; righteous; good,True,adj|name|noun,True,True,good|suitable,True,5.21,True,True,False,,False,,4,strong
 717,ملابس,clothes; clothing,True,noun,True,False,,True,4.70,True,True,False,,False,,4,semantic_review
 718,تحرك,movement; activity; moved,True,verb,True,True,move,True,4.47,True,True,False,,False,,4,strong
-719,بدل,substitute; instead of; changed/replaced,True,adj|noun|prep|verb,True,True,instead,True,4.64,True,True,False,,False,,4,strong
+719,بدل,substitute; allowance; compensation; instead of; changed; replaced (depending on vocalization/use),True,adj|noun|prep|verb,True,True,compens|instead,True,4.64,True,True,False,,False,,4,strong
 720,طائرة,airplane; aircraft,True,adj|noun,True,True,airplane,True,4.82,True,True,False,,False,,4,strong
 721,جماعة,group; community,True,noun,True,True,community|group,True,4.96,True,True,False,,False,,4,strong
 722,مصدر,source,True,noun,True,True,source,True,5.05,True,True,False,,False,,4,strong
@@ -726,11 +726,11 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 725,قطع,pieces; parts; cut,True,noun|verb,True,True,cut,True,5.02,True,True,False,,False,,4,strong
 726,موافقة,approval; agreement; agreeing/suitable (feminine adjective use),True,adj|noun,True,True,agree|approval,True,4.59,True,True,False,,False,,4,strong
 727,أخبار,news; reports,True,noun,True,False,,True,5.05,True,True,False,,False,,4,semantic_review
-728,محافظة,governorate/province; conservative/preserving (feminine adjective use),True,adj|noun,True,True,preserv|province,True,5.06,True,True,False,,False,,4,strong
-729,خطر,danger; risk,True,adj|noun|verb,True,True,danger|risk,True,5.00,True,True,False,,False,,4,strong
+728,محافظة,"governorate; province; preservation; maintenance; conservation; conservative/preserving (feminine, depending on use)",True,adj|noun,True,True,preserv|province,True,5.06,True,True,False,,False,,4,strong
+729,خطر,danger; risk; dangerous; occurred; came to mind (depending on vocalization/use),True,adj|noun|verb,True,True,danger|dangerou|mind|risk,True,5.00,True,True,False,,False,,4,strong
 730,صندوق,box; fund,True,noun,True,True,box|fund,True,4.83,True,True,False,,False,,4,strong
 731,جزيرة,island,True,noun,True,True,island,True,4.89,True,True,False,,False,,4,strong
-732,يصدق,is truthful; tells the truth; proves true,True,verb,False,False,,True,4.24,False,True,False,,False,,3,form_only
+732,يصدق,is truthful; tells the truth; proves true; believes; accepts as true; confirms/ratifies (depending on vocalization/form),True,verb,False,False,,True,4.24,False,True,False,,False,,3,form_only
 733,قوى,forces; powers; strengths,True,noun|verb,True,False,,True,4.76,True,True,False,,False,,4,semantic_review
 734,دم,blood,True,noun|verb,True,True,blood,True,4.59,True,True,False,,False,,4,strong
 735,جائزة,prize; award,True,noun,True,True,prize,True,5.01,True,True,False,,False,,4,strong
@@ -756,7 +756,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 755,دقائق,minutes,True,noun,True,False,,True,4.92,False,True,False,,False,,3,semantic_review
 756,فعلا,really; indeed; actually,True,adv,True,True,actually|inde|really,True,5.19,True,True,False,,False,,4,strong
 757,عسكرية,military,True,adj|noun,True,False,,True,4.90,True,True,False,,False,,4,semantic_review
-758,معرض,exhibition; display; fair,True,noun,True,True,exhibition|fair,True,4.89,True,True,False,,False,,4,strong
+758,معرض,exhibition; fair; display; exposed; susceptible (depending on vocalization/use),True,noun,True,True,exhibition|fair,True,4.89,True,True,False,,False,,4,strong
 759,بقاء,remaining; survival; staying,True,noun,True,True,remain,True,4.30,True,True,False,,False,,4,strong
 760,اتصالات,communications; contacts,False,,False,False,,True,4.39,True,True,False,,False,,3,form_only
 761,حفل,ceremony; party; event,True,noun|verb,True,False,,True,4.88,True,True,False,,False,,4,semantic_review
@@ -765,7 +765,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 764,يرغب,wants; desires; wishes,True,verb,False,False,,True,4.63,False,True,False,,False,,3,form_only
 765,زمن,time; era,True,noun,True,True,time,True,4.90,True,True,False,,False,,4,strong
 766,سلامة,safety; soundness; well-being,True,noun,True,True,safety|well-be,True,4.62,True,True,False,,False,,4,strong
-767,حي,neighborhood; district; living/alive (depending on vocalization),True,adj|noun|verb,True,True,alive|district|living,True,5.17,True,True,False,,False,,4,strong
+767,حي,alive; living; neighborhood; district,True,adj|noun|verb,True,True,alive|district|living,True,5.17,True,True,False,,False,,4,strong
 768,حوالي,around; approximately; about,True,prep,True,True,approximately|around,True,5.27,True,True,False,,False,,4,strong
 769,طرق,roads; ways; knocked,True,noun|verb,True,True,knock|road,True,4.98,True,True,False,,False,,4,strong
 770,أسرع,faster; fastest; hasten; hurry,True,adj|verb,True,True,faster|fastest|hurry,True,4.57,True,True,False,,False,,4,strong
@@ -795,7 +795,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 794,يتعلم,learns; studies,True,verb,False,False,,True,4.14,False,True,False,,False,,3,form_only
 795,جو,weather; atmosphere; air,True,noun,True,True,air|atmosphere|weather,True,4.77,True,True,False,,False,,4,strong
 796,أسلحة,weapons; arms,True,noun,True,False,,True,4.61,True,True,False,,False,,4,semantic_review
-797,صدر,was issued; was published; came from,True,noun|verb,True,True,publish,True,5.04,True,True,False,,False,,4,strong
+797,صدر,chest; breast; front; was issued; was published; came from (depending on vocalization/use),True,noun|verb,True,True,breast|chest|front|publish,True,5.04,True,True,False,,False,,4,strong
 798,نوم,sleep,True,noun|verb,True,True,sleep,True,4.54,True,True,False,,False,,4,strong
 799,صناعة,industry; manufacture,True,noun,True,True,industry|manufacture,True,4.93,True,True,False,,False,,4,strong
 800,تحرير,liberation; editing,True,noun,True,True,liber,True,4.94,True,True,False,,False,,4,strong
@@ -807,7 +807,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 806,تدريب,training; practice,True,noun,True,True,practice|train,True,4.78,True,True,False,,False,,4,strong
 807,وفد,delegation; arrived/came as a delegate,True,noun|verb,True,True,deleg,True,4.24,True,True,False,,False,,4,strong
 808,اتجاه,direction; trend; orientation,True,noun,True,True,direction,True,4.57,True,True,False,,False,,4,strong
-809,تناول,handling; eating; taking; consumption; ate/took/dealt with,True,noun|verb,True,True,taking,True,4.82,True,True,False,,False,,4,strong
+809,تناول,eating / consumption; taking; handling / dealing with,True,noun|verb,True,True,deal|taking,True,4.82,True,True,False,,False,,4,strong
 810,وقف,endowment (waqf); stopped; stood,True,noun|verb,True,True,endow|stopp|waqf,True,4.87,True,True,False,,False,,4,strong
 811,أرسل,sent,True,verb,True,False,,True,4.76,True,True,False,,False,,4,semantic_review
 812,يضم,includes; comprises,True,verb,False,False,,True,4.64,False,True,False,,False,,3,form_only
@@ -840,10 +840,10 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 839,انتهاء,ending; completion,True,noun,True,False,,True,4.75,True,True,False,,False,,4,semantic_review
 840,معنى,meaning; sense,True,noun,True,True,sense,True,5.03,True,True,False,,False,,4,strong
 841,يعاني,suffers,False,,False,False,,True,4.73,False,True,False,,False,,2,form_only
-842,جاري,current; ongoing,True,adj|verb,False,False,,True,3.99,True,True,False,,False,,4,form_only
+842,جاري,current; ongoing; my neighbor (depending on structure/vocalization),True,adj|verb,False,False,,True,3.99,True,True,False,,False,,4,form_only
 843,مواد,materials; substances,True,noun,True,False,,True,4.79,True,True,False,,False,,4,semantic_review
 844,مسألة,issue; matter; question,True,noun,True,True,issue|question,True,4.80,True,True,False,,False,,4,strong
-845,قلق,anxiety; concern; worried/anxious,True,adj|noun|verb,True,True,anxiety|anxiou|worr,True,4.48,True,True,False,,False,,4,strong
+845,قلق,anxiety; concern; anxious; worried; became anxious/worried (depending on vocalization/use),True,adj|noun|verb,True,True,anxiety|anxiou|worr,True,4.48,True,True,False,,False,,4,strong
 846,دعوة,invitation; call; advocacy; mission,True,noun,True,True,call|invit,True,4.89,True,True,False,,False,,4,strong
 847,سكان,inhabitants; population,True,noun,True,False,,True,5.13,True,True,False,,False,,4,semantic_review
 848,أسباب,reasons; causes,True,noun,True,False,,True,4.96,False,True,False,,False,,3,semantic_review
@@ -856,7 +856,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 855,وسائل,means; methods; media/devices,True,noun,True,True,media,True,5.13,False,True,False,,False,,3,strong
 856,مهرجان,festival,True,noun,True,True,festival,True,4.89,True,True,False,,False,,4,strong
 857,تجارة,trade; commerce,True,noun,True,True,commerce,True,4.60,True,True,False,,False,,4,strong
-858,ضرب,hitting; striking; a strike; hit/struck,True,adj|noun|verb,True,True,hit|hitt|strik|strike,True,4.74,True,True,False,,False,,4,strong
+858,ضرب,hitting; striking; strike; multiplication; hit; struck (depending on use),True,adj|noun|verb,True,True,hit|hitt|multiplic|strik|strike,True,4.74,True,True,False,,False,,4,strong
 859,مقاومة,resistance; opposition,True,noun,True,True,opposition|resistance,True,4.63,True,True,False,,False,,4,strong
 860,يستخدم,uses; is used (voice depends on vocalization),True,verb,False,False,,True,4.99,True,True,False,,False,,4,form_only
 861,مصلحة,interest; benefit; public service/agency (context-dependent),True,noun,True,True,interest,True,4.36,True,True,False,,False,,4,strong
@@ -871,20 +871,20 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 870,جنس,type; kind; sex/gender,True,noun|verb,True,True,gender|kind|sex,True,4.76,True,True,False,,False,,4,strong
 871,أنفس,selves; souls,True,adj|noun|verb,True,False,,True,3.09,False,True,False,,False,,3,semantic_review
 872,تسجيل,registration; recording,True,noun,True,True,record|registr,True,4.93,True,True,False,,False,,4,strong
-873,أوسط,middle; central; intermediate (أوسط),True,adj,True,True,central|middle,True,3.00,True,True,False,,False,,4,strong
+873,أوسط,middle; central; intermediate; middlemost,True,adj,True,True,central|middle,True,3.00,True,True,False,,False,,4,strong
 874,حقق,achieved; realized; investigated/verified (depending on form),True,noun|verb,True,False,,True,4.73,True,True,False,,False,,4,semantic_review
 875,خطاب,speech; address; discourse,True,adj|noun,True,True,addres|discourse|speech,True,4.64,True,True,False,,False,,4,strong
 876,نجح,succeeded,True,noun|verb,True,False,,True,4.59,True,True,False,,False,,4,semantic_review
 877,تشكيل,formation; composition; shaping,True,noun,True,False,,True,4.76,True,True,False,,False,,4,semantic_review
-878,سيئة,bad; poor (feminine),True,adj|noun,True,True,bad,True,4.68,False,True,False,,False,,3,strong
+878,سيئة,bad; poor (feminine); bad deed; wrongdoing; sin,True,adj|noun,True,True,bad|deed,True,4.68,False,True,False,,False,,3,strong
 879,بطل,hero; champion,True,adj|noun|verb,True,True,hero,True,4.78,True,True,False,,False,,4,strong
 880,يقف,stands; stops,True,verb,False,False,,True,4.68,False,True,False,,False,,3,form_only
 881,يواجه,faces; confronts,False,,False,False,,True,4.43,True,True,False,,False,,3,form_only
-882,قرب,approached; came near,True,noun|prep|verb,True,True,approach|near,True,4.98,True,True,False,,False,,4,strong
+882,قرب,nearness; proximity; approached; came near (depending on vocalization/use),True,noun|prep|verb,True,True,approach|near|nearnes,True,4.98,True,True,False,,False,,4,strong
 883,حاكم,ruler; governor; judged/prosecuted,True,adj|noun,True,True,governor|ruler,True,4.51,True,True,False,,False,,4,strong
 884,عقب,after; following; commented/followed up (عَقِب / عَقَّب),True,noun|prep|verb,True,True,after|comment|follow,True,4.85,True,True,False,,False,,4,strong
 885,ظن,thought; belief; assumption; thought/believed,True,noun|verb,True,False,,True,4.25,True,True,False,,False,,4,semantic_review
-886,مر,bitter (مُرّ); passed/went by (مَرَّ),True,adj|noun|verb,True,True,bitter|pass,True,4.92,True,True,False,,False,,4,strong
+886,مر,bitter; passed; went by (depending on vocalization/use),True,adj|noun|verb,True,True,bitter|pass,True,4.92,True,True,False,,False,,4,strong
 887,عشاء,dinner; evening meal (عَشَاء),True,noun,True,True,dinner|even,True,4.08,True,True,False,,False,,4,strong
 888,إعداد,preparation; setup,True,noun,True,True,prepar,True,4.70,True,True,False,,False,,4,strong
 889,فندق,hotel,True,noun,True,True,hotel,True,4.73,True,True,False,,False,,4,strong
@@ -893,7 +893,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 892,تحول,transformation; change; changed/transformed,True,noun|verb,True,True,change|transform,True,4.85,True,True,False,,False,,4,strong
 893,سريع,fast; quick,True,adj,True,True,fast|quick,True,4.72,True,True,False,,False,,4,strong
 894,يشهد,witnesses; observes,True,verb,False,False,,True,4.37,True,True,False,,False,,4,form_only
-895,سر,secret,True,noun|verb,True,True,secret,True,4.68,True,True,False,,False,,4,strong
+895,سر,secret; go!; proceed!; pleased; delighted (depending on vocalization/use),True,noun|verb,True,True,delight|secret,True,4.68,True,True,False,,False,,4,strong
 896,ظروف,circumstances; conditions,True,noun,True,False,,True,4.75,True,True,False,,False,,4,semantic_review
 897,فاز,won,True,verb,True,False,,True,4.75,True,True,False,,False,,4,semantic_review
 898,ميت,dead,True,adj,True,True,dead,True,4.61,True,True,False,,False,,4,strong
@@ -909,7 +909,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 908,مسابقة,competition; contest,True,noun,True,True,competition|contest,True,4.76,True,True,False,,False,,4,strong
 909,دليل,evidence; guide; proof,True,noun,True,True,evidence|guide|proof,True,5.05,True,True,False,,False,,4,strong
 910,سفر,travel; journey,True,noun|verb,True,True,journey|travel,True,4.68,True,True,False,,False,,4,strong
-911,حمل,load; burden; حمل = carrying,True,noun|verb,True,True,burden|carry|load,True,4.79,True,True,False,,False,,4,strong
+911,حمل,load; burden; carrying; pregnancy; carried (depending on vocalization/use),True,noun|verb,True,True,burden|carry|load|pregnancy,True,4.79,True,True,False,,False,,4,strong
 912,تصوير,photography; filming,True,noun,True,True,photography,True,4.90,True,True,False,,False,,4,strong
 913,طيران,aviation; flying,True,noun,True,True,aviation,True,4.46,True,True,False,,False,,4,strong
 914,محطة,station; stop,True,noun,True,True,station,True,4.95,True,True,False,,False,,4,strong
@@ -923,7 +923,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 922,مقر,headquarters; seat; location,True,adj|noun|verb,True,True,seat,True,4.82,True,True,False,,False,,4,strong
 923,فشل,failure; failed,True,adj|noun|verb,True,True,fail|failure,True,4.76,True,True,False,,False,,4,strong
 924,افعل,do!; act!,True,verb,False,False,,True,4.09,False,True,False,,False,,3,form_only
-925,كبار,senior people; elders; major/important people,True,adj|noun,True,False,,True,4.74,True,True,False,,False,,4,semantic_review
+925,كبار,big; large; major; senior; elders; senior people,True,adj|noun,True,False,,True,4.74,True,True,False,,False,,4,semantic_review
 926,يتعرف,gets to know; becomes acquainted with; recognizes,True,verb,False,False,,True,3.86,False,True,False,,False,,3,form_only
 927,وفقا,according to; in accordance with (commonly وَفْقًا لِـ),False,,False,False,,True,5.28,False,True,False,,False,,2,form_only
 928,منافسة,competition; rivalry,True,noun,True,True,competition,True,4.28,True,True,False,,False,,4,strong
@@ -934,18 +934,18 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 933,طبيعي,natural; normal,True,adj|noun,True,True,natural|normal,True,4.82,True,True,False,,False,,4,strong
 934,خطوة,step,True,noun,True,True,step,True,4.89,True,True,False,,False,,4,strong
 935,مشاريع,projects,True,noun,True,False,,True,4.73,False,True,False,,False,,3,semantic_review
-936,شاهد,watched; saw; witnessed,True,noun|verb,True,True,watch,True,4.91,True,True,False,,False,,4,strong
-937,أصل,origin; root; basis,True,noun|verb,True,True,basi|origin|root,True,4.99,True,True,False,,False,,4,strong
+936,شاهد,witness; observer; viewer; spectator; watched; saw; witnessed (depending on use),True,noun|verb,True,True,watch|witnes,True,4.91,True,True,False,,False,,4,strong
+937,أصل,origin; root; basis; I arrive; I reach (depending on vocalization/use),True,noun|verb,True,True,basi|origin|root,True,4.99,True,True,False,,False,,4,strong
 938,مدارس,schools,True,noun,True,False,,True,4.59,False,True,False,,False,,3,semantic_review
 939,ثمن,price; value,True,noun|verb,True,True,price|value,True,4.65,True,True,False,,False,,4,strong
 940,إيجاد,finding; creation; bringing into existence,True,noun,True,True,creation,True,4.79,False,True,False,,False,,3,strong
 941,صفقة,deal; transaction,True,noun,True,False,,True,4.58,True,True,False,,False,,4,semantic_review
 942,يطلق,launches; releases; fires; calls/names (depending on form),True,verb,False,False,,True,4.79,False,True,False,,False,,3,form_only
-943,يقبل,kisses; is kissing (يُقَبِّل),True,verb,False,False,,True,4.49,False,True,False,,False,,3,form_only
+943,يقبل,accepts; approaches; comes forward; kisses (depending on vocalization/form),True,verb,False,False,,True,4.49,False,True,False,,False,,3,form_only
 944,يجمع,collects; gathers,True,verb,False,False,,True,4.55,True,True,False,,False,,4,form_only
 945,شديد,severe; strong; intense,True,adj,True,True,intense|severe|strong,True,4.91,True,True,False,,False,,4,strong
 946,أسئلة,questions,True,noun,True,False,,True,4.64,False,True,False,,False,,3,semantic_review
-947,سن,age; tooth (depending on vocalization),True,noun|verb,True,True,age|tooth,True,4.91,True,True,False,,False,,4,strong
+947,سن,age; tooth; enacted; established; sharpened (depending on vocalization/use),True,noun|verb,True,True,age|enact|establish|sharpen|tooth,True,4.91,True,True,False,,False,,4,strong
 948,تفكير,thinking; thought,True,noun,True,True,think,True,4.29,True,True,False,,False,,4,strong
 949,أسماء,names,True,name|noun,True,True,name,True,4.97,False,True,False,,False,,3,strong
 950,مستشار,advisor; consultant,True,noun,True,True,consultant,True,4.28,True,True,False,,False,,4,strong
@@ -956,7 +956,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 955,ضغط,pressure; pressing; pressed,True,noun|verb,True,True,pressure,True,4.78,True,True,False,,False,,4,strong
 956,إشارة,signal; sign; indication,True,noun,True,True,sign|signal,True,4.81,True,True,False,,False,,4,strong
 957,متابعة,follow-up; monitoring,True,noun,True,False,,True,4.83,True,True,False,,False,,4,semantic_review
-958,أصاب,hit; affected; injured,True,verb,True,True,hit,True,4.21,True,True,False,,False,,4,strong
+958,أصاب,hit; affected; injured; was right; got it right; hit the target,True,verb,True,True,hit|right,True,4.21,True,True,False,,False,,4,strong
 959,أخت,sister,True,noun,True,True,sister,True,4.16,True,True,False,,False,,4,strong
 960,حذر,caution; warning; cautious,True,adj|noun|verb,True,True,caution|cautiou|warn,True,4.27,True,True,False,,False,,4,strong
 961,خليج,gulf,True,noun,True,True,gulf,True,4.11,True,True,False,,False,,4,strong
@@ -965,7 +965,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 964,حارس,guard; goalkeeper,True,adj|noun,True,True,goalkeeper|guard,True,4.49,True,True,False,,False,,4,strong
 965,ناحية,side; direction; aspect; from the standpoint of,True,noun|prep,True,True,direction|side,True,4.95,True,True,False,,False,,4,strong
 966,مرض,illness; disease; fell ill,True,noun|verb,True,True,disease|illnes,True,4.90,True,True,False,,False,,4,strong
-967,فصل,separated; divided; dismissed,True,adj|noun|verb,True,False,,True,4.81,True,True,False,,False,,4,semantic_review
+967,فصل,class; chapter; season; section; separation; separated; divided; dismissed (depending on vocalization/use),True,adj|noun|verb,True,True,chapter|clas|season|separ,True,4.81,True,True,False,,False,,4,strong
 968,تغير,change; alteration; changed,True,noun|verb,True,True,alter|change,True,4.99,True,True,False,,False,,4,strong
 969,مجنون,crazy; insane,True,adj,True,True,crazy|insane,True,4.23,True,True,False,,False,,4,strong
 970,نصر,victory; support; helped/supported,True,noun|verb,True,True,help|support|victory,True,4.73,True,True,False,,False,,4,strong
@@ -989,7 +989,7 @@ rank,front,expected_english,kaikki_entry,kaikki_pos,kaikki_has_english_gloss,sem
 988,كتابة,writing,True,noun,True,True,writ,True,4.89,True,True,False,,False,,4,strong
 989,خوف,fear,True,adj|noun|verb,True,True,fear,True,4.47,True,True,False,,False,,4,strong
 990,شمس,sun,True,noun|verb,True,True,sun,True,4.63,True,True,False,,False,,4,strong
-991,ساعد,helped; assisted,True,noun|verb,True,True,assist|help,True,4.43,True,True,False,,False,,4,strong
+991,ساعد,forearm; helped; assisted (depending on vocalization/use),True,noun|verb,True,True,assist|forearm|help,True,4.43,True,True,False,,False,,4,strong
 992,يقل,decreases; becomes less,True,verb,False,False,,True,4.69,False,True,False,,False,,3,form_only
 993,اتخاذ,taking; adoption; making (as in اتخاذ قرار = making a decision),True,noun,True,False,,True,4.74,False,True,False,,False,,3,semantic_review
 994,حفلة,party; celebration,True,noun,True,True,celebr|party,True,4.41,True,True,False,,False,,4,strong
