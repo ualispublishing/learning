@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "updated": "2026-08-24",
   "released_batches": [
     {
@@ -18,7 +18,39 @@
       "difficulty": {"F": 4, "E": 15, "S": 4, "B": 1},
       "semantic_review": "PASS",
       "originality_preflight": "PASS",
-      "note": "File paths retain the historical candidates/ directory name, but this manifest is authoritative: Batch 001 is released and must be treated as immutable input to the live bank. Future candidate gating excludes files named here."
+      "note": "File paths retain the historical candidates/ directory name, but this manifest is authoritative: Batch 001 is released and immutable input to the live bank."
+    },
+    {
+      "batch_id": "BATCH-002-006",
+      "released_on": "2026-08-24",
+      "release_version": "1.4.0",
+      "files": [
+        "question-bank/candidates/batch-002.jsonl",
+        "question-bank/candidates/batch-003.jsonl",
+        "question-bank/candidates/batch-004.jsonl",
+        "question-bank/candidates/batch-005.jsonl",
+        "question-bank/candidates/batch-006.jsonl"
+      ],
+      "review_files": [
+        "question-bank/BATCH_002_REVIEW.json",
+        "question-bank/BATCH_003_REVIEW.json",
+        "question-bank/BATCH_004_REVIEW.json",
+        "question-bank/BATCH_005_REVIEW.json",
+        "question-bank/BATCH_006_REVIEW.json"
+      ],
+      "records": 80,
+      "standard_mcq": 80,
+      "bellringers": 0,
+      "difficulty": {"F": 0, "E": 59, "S": 21, "B": 0},
+      "semantic_review": "PASS",
+      "originality_preflight": "PASS",
+      "quality_gate_evidence": {
+        "workflow_run_id": 32791694987,
+        "mode": "released+candidate",
+        "candidate_records": 80,
+        "warnings": 0
+      },
+      "note": "Batches 002-006 were promoted together after all 80 records had semantic-review status and the repository-wide released+candidate originality/duplicate gate completed with zero warnings. Aggregate corpus counts are authoritative where historical per-batch review summaries differ from the live candidate data."
     }
   ]
 }
