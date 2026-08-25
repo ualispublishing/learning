@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "ur",
+  "cefr": "B1",
+  "unit": 8,
+  "date": "2026-08-24",
+  "roadmap_theme": "media and information",
+  "required_genres": ["news-style report", "commentary", "comparison"],
+  "status": "READY_FOR_GENERATION_INTERNAL_LEXICON_ONLY",
+  "release_promotion": false,
+  "external_dictionary_review": {
+    "status": "DEFERRED_AFTER_TEMPORARY_SERVICE_FAILURE",
+    "notes": "Independent external lexical review remains separate. Generation-stage senses below are constrained to repository lexicon meanings and common contemporary media contexts."
+  },
+  "new_target_distribution": [3,3,3,3,3,0],
+  "freshness_method": "Guarded promotion checks all selected IDs against canonical Urdu A1, A2, and B1 sequences 1-42 immediately before append.",
+  "targets": [
+    {"passage":1,"id":"ur-rank-1996","form":"ایڈیٹر","rank":1996,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"editor; editor in chief","intended_sense":"an editor who reviews and prepares material for publication"},
+    {"passage":1,"id":"ur-rank-1819","form":"اخباری","rank":1819,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"journalistic","intended_sense":"journalistic or relating to news writing"},
+    {"passage":1,"id":"ur-rank-1821","form":"صداقت","rank":1821,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"truth","intended_sense":"truthfulness or fidelity to what the evidence supports"},
+    {"passage":2,"id":"ur-rank-1875","form":"ڈیٹا","rank":1875,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"data","intended_sense":"recorded data used for comparison or analysis"},
+    {"passage":2,"id":"ur-rank-1898","form":"گنتی","rank":1898,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"count; counting; reckoning","intended_sense":"counting or a numerical tally"},
+    {"passage":2,"id":"ur-rank-1760","form":"فائل","rank":1760,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"file; data file","intended_sense":"a file containing stored records or data"},
+    {"passage":3,"id":"ur-rank-1757","form":"عکس","rank":1757,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"mirror image; reflection","intended_sense":"a visual image or captured view used as a source"},
+    {"passage":3,"id":"ur-rank-1784","form":"زبانی","rank":1784,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"oral","intended_sense":"oral or spoken rather than written"},
+    {"passage":3,"id":"ur-rank-1707","form":"گواہی","rank":1707,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"witness","intended_sense":"testimony or a witness account of an event"},
+    {"passage":4,"id":"ur-rank-1704","form":"ارسال","rank":1704,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"act of sending","intended_sense":"sending or transmission of a written message"},
+    {"passage":4,"id":"ur-rank-1761","form":"نثر","rank":1761,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"prose","intended_sense":"continuous prose text rather than a fragment or isolated phrase"},
+    {"passage":4,"id":"ur-rank-1651","form":"خبردار","rank":1651,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"warning","intended_sense":"alert or warned to exercise attention/caution"},
+    {"passage":5,"id":"ur-rank-1769","form":"متنازع","rank":1769,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"disputed","intended_sense":"disputed or controversial"},
+    {"passage":5,"id":"ur-rank-1753","form":"بدنام","rank":1753,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"infamous","intended_sense":"notorious or having a strongly negative reputation"},
+    {"passage":5,"id":"ur-rank-1705","form":"خوفناک","rank":1705,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"awful; dreadful","intended_sense":"frightening, dreadful, or emotionally severe as a descriptor"}
+  ],
+  "generation_guardrails": [
+    "P1-P5 introduce exactly three new targets each; P6 introduces none and visibly recycles all fifteen.",
+    "All six passages retain ten questions and ten linked answers and remain within the 220-320 whitespace-token B1 band.",
+    "Learner-facing title, passage text, questions, and answers use Urdu script only.",
+    "Media scenarios distinguish evidence, source limits, headline wording, data presentation, witness accounts, and commentary.",
+    "Loaded labels are analyzed rather than endorsed; factual claims are fictional or generic unless independently verified.",
+    "Guarded promotion fails closed on target-ID freshness collisions, schema drift, QA-link errors, script leakage, first-introduction collisions, or state mismatch.",
+    "Generation/integrity status remains separate from educator/publication release approval."
+  ]
+}
