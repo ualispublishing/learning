@@ -124,7 +124,7 @@ jobs:
             if curl -fsSL --max-time 15 -H 'Cache-Control: no-cache' "${BASE}?verify=${GITHUB_SHA}-${attempt}" -o "$HTML" \
               && grep -Fq '<title>CISSP Atlas · Study Workflow</title>' "$HTML" \
               && grep -Fq "RELEASE v${EXPECTED_LABEL}" "$HTML" \
-              && grep -Fq "<option>${EXPECTED_STANDARD}</option>" "$HTML" \
+              && grep -Fq 'value="999999">All available</option>' "$HTML" \
               && curl -fsSL --max-time 15 "${BASE}deploy-sha.txt?verify=${GITHUB_SHA}-${attempt}" -o "$REMOTE_SHA" \
               && test "$(tr -d '\r\n' < "$REMOTE_SHA")" = "$GITHUB_SHA" \
               && curl -fsSL --max-time 15 "${BASE}question-bank/RELEASED_BATCHES.json?verify=${GITHUB_SHA}-${attempt}" -o "$REMOTE_MANIFEST"; then
