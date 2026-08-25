@@ -2,7 +2,7 @@
   "schema_version": 2,
   "batch_id": "014",
   "reviewed_on": "2026-08-25",
-  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "status": "SEMANTIC_REVIEWED_GATE_PASSED",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -31,14 +31,25 @@
     "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; declared sibling relationships only where a released objective/rule family is deliberately revisited through a materially different decision boundary"
   },
   "gate_state": {
-    "automated_repository_gate": "PENDING",
+    "automated_repository_gate": "PASS",
+    "workflow_run_id": 32882176999,
     "quality_gate_mode": "released+candidate",
-    "promotion_allowed": false,
-    "requirement": "Promote only after quality_gate.py passes against the full v1.11 released corpus and Batch 014 with zero unresolved warnings, and the browser smoke gate passes."
+    "released_mcq_compared": 271,
+    "released_bellringers_compared": 1,
+    "candidate_records": 16,
+    "warnings": 0,
+    "browser_smoke": "PASS",
+    "promotion_allowed": true
+  },
+  "coverage_effect": {
+    "explicit_subtopic_tags_before": 271,
+    "explicit_subtopic_tags_after_candidate": 277,
+    "total_mapped_subtopics": 344
   },
   "notes": [
     "Batch 014 follows the v1.11 planner exactly: risk-based framework tailoring, encryption-product import/export review, regulatory evidence integrity, urgent contractor onboarding exceptions, continuity key-person dependency, emergency-exit security with life safety, high-risk travel and duress readiness, immutable-baseline emergency-change propagation, managed-service privileged accountability, brokered vendor remote access, fail-secure authorization dependencies, coordinated vulnerability disclosure, intangible security-asset inventory, SaaS development-platform acquisition assurance, governance-document hierarchy, and end-to-end architecture requirement traceability.",
     "Stretch items are C-219, C-223, C-227, and C-231. Declared siblings revisit objective families only through distinct decisions, including governance tailoring versus risk ownership, technology export versus data localization, investigation evidence production versus initial investigation authority, urgent onboarding versus transfer revalidation, immutable image propagation versus runtime drift reconciliation, disclosure versus remediation exception, intangible inventory versus ephemeral compute, and lifecycle traceability versus retirement closure.",
-    "The batch remains excluded from RELEASED_BATCHES.json and the public Pages artifact until the automated gate passes."
+    "Repository-wide quality_gate.py passed against 271 released standard questions plus 1 Bellringer and all 16 Batch 014 candidates with zero warnings.",
+    "The interactive browser smoke test also passed before promotion."
   ]
 }
