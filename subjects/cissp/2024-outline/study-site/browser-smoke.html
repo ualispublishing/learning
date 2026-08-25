@@ -40,8 +40,15 @@ async function run(){
 
   d.querySelector('#nav [data-view="practice"]').click();
   await waitFor(()=>visible(d.querySelector('#practice'))&&d.querySelector('#startQuiz'),'Practice view');
+  const count=d.querySelector('#quizCount'),difficulty=d.querySelector('#quizDifficulty'),allAvailable=count?.querySelector('option[value="999999"]');
+  assert(allAvailable?.textContent.trim()==='All available','semantic all-available practice control');
+  count.value='999999';
+  difficulty.value='';
   d.querySelector('#startQuiz').click();
   await waitFor(()=>d.querySelector('[data-conf="medium"]')&&d.querySelectorAll('[data-cal-opt]').length===4,'calibrated practice question');
+  const expectedStandard=Number(w.CISSP_META?.meta?.question_count||0);
+  assert(expectedStandard>0,'metadata exposes standard-question count');
+  assert(d.querySelector('.quiz-top')?.textContent.includes(`1 / ${expectedStandard}`),'All available uses complete released standard bank');
   d.querySelector('[data-conf="medium"]').click();
   const firstOption=d.querySelector('[data-cal-opt="0"]');
   assert(firstOption&&!firstOption.disabled,'answer options unlock after confidence');
@@ -77,7 +84,7 @@ async function run(){
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile Practice has no horizontal overflow');
 
   result.dataset.smoke='pass';
-  result.textContent='PASS interactive browser smoke: startup keyboard-review practice progress sources navigation diagnostic mobile-390';
+  result.textContent='PASS interactive browser smoke: startup keyboard-review full-bank-practice progress sources navigation diagnostic mobile-390';
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
