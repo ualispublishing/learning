@@ -2,7 +2,7 @@
   "schema_version": 2,
   "batch_id": "012",
   "reviewed_on": "2026-08-25",
-  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "status": "SEMANTIC_REVIEWED_GATE_PASSED",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -31,14 +31,25 @@
     "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; declared sibling relationships only where a released objective/rule family is deliberately revisited through a materially different decision boundary"
   },
   "gate_state": {
-    "automated_repository_gate": "PENDING",
+    "automated_repository_gate": "PASS",
+    "workflow_run_id": 32874750574,
     "quality_gate_mode": "released+candidate",
-    "promotion_allowed": false,
-    "requirement": "Promote only after quality_gate.py passes against the full v1.9 released corpus and Batch 012 with zero unresolved warnings, and the browser smoke gate passes."
+    "released_mcq_compared": 239,
+    "released_bellringers_compared": 1,
+    "candidate_records": 16,
+    "warnings": 0,
+    "browser_smoke": "PASS",
+    "promotion_allowed": true
+  },
+  "coverage_effect": {
+    "explicit_subtopic_tags_before": 245,
+    "explicit_subtopic_tags_after_candidate": 257,
+    "total_mapped_subtopics": 344
   },
   "notes": [
     "Batch 012 follows the v1.9 planner exactly: patch effectiveness verification, standard-change scope drift, incident reporting under uncertainty, audit independence, volatile evidence, multi-region DNS dependency, backup restore evidence, classification-based contractor handling, orphan service identities, controlled detection simulation, encrypted-backup classification, constrained-WAN capacity/QoS, legal hold, DevSecOps lifecycle integration, DRM, and AI-assisted software-change provenance.",
     "Declared siblings revisit only the objective/rule family while changing the tested decision: vulnerability closure versus prioritization, standard-change scope drift versus pre-deployment gate completeness, reporting versus containment, availability DNS dependency versus recovery identity dependency, persistent DRM versus cloud DLP, and retention hold versus archive migration.",
-    "The batch remains excluded from RELEASED_BATCHES.json and the public Pages artifact until the automated gate passes."
+    "Repository-wide quality_gate.py passed against 239 released standard questions plus 1 Bellringer and all 16 Batch 012 candidates with zero warnings.",
+    "The interactive browser smoke test also passed before promotion."
   ]
 }
