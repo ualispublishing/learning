@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "ur",
+  "cefr": "B2",
+  "unit": 2,
+  "date": "2026-08-24",
+  "roadmap_theme": "economics and personal/public choices",
+  "required_genres": ["explanatory article", "case study", "commentary"],
+  "status": "PASS_FOR_GENERATION_TARGET_SENSES",
+  "release_promotion": false,
+  "new_target_distribution": [2,2,2,2,2,0],
+  "freshness_method": "Guarded promotion must check exact target IDs against all canonical Urdu A1-B1 and live B2 sequences 1-6 immediately before append.",
+  "targets": [
+    {"passage":1,"id":"ur-rank-2099","form":"کھاتا","rank":2099,"source_lexicon":"urdu_top3000.csv","intended_sense":"account; an organized record or place where money is held or tracked"},
+    {"passage":1,"id":"ur-rank-2082","form":"بقا","rank":2082,"source_lexicon":"urdu_top3000.csv","intended_sense":"survival or continued ability to meet essential needs"},
+    {"passage":2,"id":"ur-rank-2102","form":"املاک","rank":2102,"source_lexicon":"urdu_top3000.csv","intended_sense":"property or real-estate assets"},
+    {"passage":2,"id":"ur-rank-2116","form":"فلیٹ","rank":2116,"source_lexicon":"urdu_top3000.csv","intended_sense":"flat or apartment used as a housing unit"},
+    {"passage":3,"id":"ur-rank-2073","form":"برانڈ","rank":2073,"source_lexicon":"urdu_top3000.csv","intended_sense":"brand; a named commercial identity associated with a product"},
+    {"passage":3,"id":"ur-rank-2250","form":"تشہیر","rank":2250,"source_lexicon":"urdu_top3000.csv","intended_sense":"advertising or promotion intended to influence attention or demand"},
+    {"passage":4,"id":"ur-rank-2087","form":"وراثت","rank":2087,"source_lexicon":"urdu_top3000.csv","intended_sense":"inheritance; property or resources passed from one generation to another"},
+    {"passage":4,"id":"ur-rank-2276","form":"برابری","rank":2276,"source_lexicon":"urdu_top3000.csv","intended_sense":"equality; comparable treatment, opportunity, or standing"},
+    {"passage":5,"id":"ur-rank-2281","form":"ضامن","rank":2281,"source_lexicon":"urdu_top3000.csv","intended_sense":"guarantor; a person or party accepting responsibility if another fails to meet an obligation"},
+    {"passage":5,"id":"ur-rank-2055","form":"ساکھ","rank":2055,"source_lexicon":"urdu_top3000.csv","intended_sense":"reputation, credibility, or established trustworthiness"}
+  ],
+  "generation_guardrails": [
+    "B2 passage text remains in the 350-550 whitespace-token production band.",
+    "P1-P5 introduce exactly two new lexical targets each; P6 introduces none and visibly recycles all ten.",
+    "Difficulty comes from trade-offs, incentives, opportunity cost, distribution, assumptions, and counterarguments rather than vocabulary density.",
+    "All monetary examples are fictional and illustrative; no passage gives individualized financial or investment advice.",
+    "Housing, inheritance, consumer, and credit scenarios avoid presenting one policy choice as universally optimal.",
+    "Generation/integrity state remains separate from educator/publication release approval."
+  ]
+}
