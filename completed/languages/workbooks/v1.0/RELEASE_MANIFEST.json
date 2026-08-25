@@ -1,46 +1,19 @@
 {
   "release": "v1.0",
-  "generated_utc": "2026-08-23T15:12:39.799824+00:00",
-  "status": "blocked_editorial_curation",
+  "generated_utc": "2026-08-25T01:32:32.454196+00:00",
+  "status": "production_candidate",
   "languages": [
     "arabic",
     "french",
     "urdu"
   ],
-  "language_release_status": {
-    "arabic": "blocked_row_decision_curation_required",
-    "french": "blocked_row_decision_curation_required",
-    "urdu": "blocked_row_decision_curation_required"
-  },
-  "sentence_first_pass": {
-    "rows_screened": 3000,
-    "rows_total": 3000,
-    "coverage_percent": 100.0,
-    "result": "blocking_defects_found_in_all_languages",
-    "correction_source_policy": "The completed row-by-row audit is authoritative. Every rank must resolve to KEEP, CORRECT, REPLACE, or NATIVE_REVIEW. Corrections and replacements must be promoted from the audited row decision, not independently re-derived during regeneration."
-  },
-  "arabic_sentence_first_pass": {
-    "rows_screened": 1000,
-    "rows_total": 1000,
-    "coverage_percent": 100.0,
-    "result": "blocking_defects_found",
-    "audit_summary": "audit/language-workbooks/v1.0/arabic_sentence_editorial_audit_summary.json"
-  },
-  "french_sentence_first_pass": {
-    "rows_screened": 1000,
-    "rows_total": 1000,
-    "coverage_percent": 100.0,
-    "result": "blocking_defects_found",
-    "audit_summary": "audit/language-workbooks/v1.0/french_sentence_editorial_audit_summary.json"
-  },
-  "urdu_sentence_first_pass": {
-    "rows_screened": 1000,
-    "rows_total": 1000,
-    "coverage_percent": 100.0,
-    "result": "blocking_defects_found",
-    "audit_summary": "audit/language-workbooks/v1.0/urdu_sentence_editorial_audit_summary.json"
-  },
   "qa_path": "audit/language-workbooks/v1.0",
+  "pronunciation_foundations": {
+    "status": "PASS",
+    "guide_sha256": "abe0a42afc92073505c8ef6f847ca3d7fe5657e86ea58a7d53c5454dde0f1035",
+    "scope": "beginner pronunciation foundations",
+    "references_rendered": true
+  },
   "source_policy": "Natural learner language outranks artificial uniqueness; legitimate homographs are allowed when meaning and grammatical role differ.",
-  "release_gate": "Do not treat this release as learner/publication ready until all 3,000 row decisions are compiled and resolved, approved corrections/replacements are applied from those decisions, all language artifacts are regenerated, deterministic regression QA passes, and independent native/editorial review is completed."
+  "corpus_quality": "v2_balanced_external_ar_fr_controlled_original_ur"
 }

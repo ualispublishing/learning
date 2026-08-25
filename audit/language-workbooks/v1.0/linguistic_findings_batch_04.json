@@ -1,0 +1,38 @@
+{
+  "date": "2026-08-23",
+  "branch": "release/language-workbooks-v1-final",
+  "status": "REPAIR_REQUIRED",
+  "scope_note": "High-confidence Arabic/French findings from the next inspected ranges; preference-only rewrites excluded.",
+  "arabic": [
+    {"rank":342,"current_target":"لدي كل البوماتك","current_english":"I have all your albums.","issue":"missing initial hamza in ألبوماتك and missing punctuation","proposed_target":"لدي كل ألبوماتك.","proposed_english":"I have all your albums."},
+    {"rank":345,"current_target":"انا اعرف كيفية النجاة","current_english":"I know how to survive.","issue":"missing hamzas in أنا أعرف and missing punctuation","proposed_target":"أنا أعرف كيفية النجاة.","proposed_english":"I know how to survive."},
+    {"rank":349,"current_target":"أخبرك الحقيقة.","current_english":"I tell you the truth.","issue":"unnatural/incorrect argument marking for أخبر with the intended meaning","proposed_target":"أخبرك بالحقيقة.","proposed_english":"I tell you the truth."},
+    {"rank":350,"current_target":"أفكّر بشكل مختلف عنك.","current_english":"I think different from you.","issue":"English adverb error","proposed_target":"أفكّر بشكل مختلف عنك.","proposed_english":"I think differently from you."},
+    {"rank":351,"current_target":"أنا أعتقد انهُ غاضب.","current_english":"I think he is angry.","issue":"missing hamza in أنه and stray short-vowel mark","proposed_target":"أنا أعتقد أنه غاضب.","proposed_english":"I think he is angry."},
+    {"rank":356,"current_target":"أريد أن أتعلم كيف.","current_english":"I want to learn how.","issue":"incomplete decontextualized learner sentence in both languages","proposed_target":"أريد أن أتعلم كيف أفعل ذلك.","proposed_english":"I want to learn how to do it."},
+    {"rank":359,"current_target":"سوف اكون سعيد لمساعدتك.","current_english":"I will gladly help you.","issue":"missing hamza and translation does not reflect the explicit 'be happy' construction","proposed_target":"سأكون سعيدًا بمساعدتك.","proposed_english":"I will be happy to help you."},
+    {"rank":360,"current_target":"إنه تماماً ما نحتاج.","current_english":"It's just what we need.","issue":"incomplete نحتاج construction and inconsistent tanwin orthography","proposed_target":"إنه تمامًا ما نحتاج إليه.","proposed_english":"It's just what we need."},
+    {"rank":361,"current_target":"الحب هو كل ما تحتاجه .","current_english":"Love is all you need.","issue":"incorrect space before punctuation","proposed_target":"الحب هو كل ما تحتاجه.","proposed_english":"Love is all you need."},
+    {"rank":367,"current_target":"شكراً لكَ على إهتمامك.","current_english":"Thank you for your interest.","issue":"incorrect hamza spelling in اهتمام and inconsistent diacritics","proposed_target":"شكرًا لك على اهتمامك.","proposed_english":"Thank you for your interest."},
+    {"rank":369,"current_target":"لهذا السبب جئت الى هنا.","current_english":"That's why I came here.","issue":"missing hamza in إلى","proposed_target":"لهذا السبب جئت إلى هنا.","proposed_english":"That's why I came here."},
+    {"rank":386,"current_target":"كلامك يذكرني بزوجتي","current_english":"You sound like my wife.","issue":"semantic mismatch: target says your words remind me of my wife","proposed_target":"صوتك يشبه صوت زوجتي.","proposed_english":"You sound like my wife."},
+    {"rank":389,"current_target":"هل بمقدورنا الأكل هنا؟","current_english":"Can we afford to eat here?","issue":"target asks ability/permission to eat here, not financial affordability","proposed_target":"هل نستطيع تحمّل تكلفة الأكل هنا؟","proposed_english":"Can we afford to eat here?"},
+    {"rank":391,"current_target":"أيمكنك أن تحزر ما لديّ؟","current_english":"Can you guess what I have?","issue":"nonstandard/poor learner choice تحزر for guess","proposed_target":"أيمكنك تخمين ما لدي؟","proposed_english":"Can you guess what I have?"},
+    {"rank":395,"current_target":"أتعتقد أن هناك أشباح؟","current_english":"Do you believe there are ghosts?","issue":"case error after أن هناك","proposed_target":"أتعتقد أن هناك أشباحًا؟","proposed_english":"Do you believe there are ghosts?"}
+  ],
+  "french": [
+    {"rank":220,"current_target":"Je pourrais vous enseigner.","current_english":"I could tutor you.","issue":"enseigner means teach rather than tutor in this bare construction","proposed_target":"Je pourrais vous enseigner.","proposed_english":"I could teach you."},
+    {"rank":228,"current_target":"Je t'avais prévenue.","current_english":"I did warn you.","issue":"tense mismatch: plus-que-parfait = had warned","proposed_target":"Je t'avais prévenue.","proposed_english":"I had warned you."},
+    {"rank":242,"current_target":"Je ne travaille pas demain.","current_english":"I don't work tomorrow.","issue":"unnatural English future-schedule rendering","proposed_target":"Je ne travaille pas demain.","proposed_english":"I'm not working tomorrow."},
+    {"rank":243,"current_target":"Je compte sur votre aide.","current_english":"I expect your help.","issue":"semantic mismatch: compter sur = count/rely on","proposed_target":"J'attends votre aide.","proposed_english":"I expect your help."},
+    {"rank":248,"current_target":"Je me sens bizarre, aujourd'hui.","current_english":"I feel funny today.","issue":"bizarre means strange/odd; 'funny' is misleading here","proposed_target":"Je me sens bizarre aujourd'hui.","proposed_english":"I feel strange today."},
+    {"rank":259,"current_target":"Est-ce que je peux aller avec vous ?","current_english":"Can I come with you?","issue":"directional mismatch: aller = go; English says come","proposed_target":"Est-ce que je peux venir avec vous ?","proposed_english":"Can I come with you?"},
+    {"rank":274,"current_target":"Peux-tu le faire demain?","current_english":"Can you do it tomorrow?","issue":"French typography requires a space before the question mark","proposed_target":"Peux-tu le faire demain ?","proposed_english":"Can you do it tomorrow?"}
+  ],
+  "urdu": [],
+  "next_steps": [
+    "Continue full sentence audit.",
+    "Audit all three top-1000 vocabulary files at row level after sentence review.",
+    "Use workflow failures as blockers, not as reasons to weaken uniqueness or progression gates."
+  ]
+}

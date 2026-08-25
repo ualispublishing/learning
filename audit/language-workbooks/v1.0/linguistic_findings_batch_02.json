@@ -1,0 +1,27 @@
+{
+  "date": "2026-08-23",
+  "branch": "release/language-workbooks-v1-final",
+  "status": "REPAIR_REQUIRED",
+  "scope_note": "Continuation of high-confidence row-level findings from the next inspected Arabic/French ranges.",
+  "arabic": [
+    {"rank":147,"current_target":"هل تحب كره القدم؟","current_english":"Do you like soccer?","issue":"lexical spelling error: كره = hatred; football is كرة القدم","proposed_target":"هل تحب كرة القدم؟","proposed_english":"Do you like soccer?"},
+    {"rank":163,"current_target":"و كيف أجبت؟","current_english":"How did you reply?","issue":"extra conjunction omitted in English and separated conjunction orthography","proposed_target":"كيف أجبت؟","proposed_english":"How did you reply?"},
+    {"rank":173,"current_target":"إفعل ما تريد.","current_english":"Do as you like.","issue":"incorrect imperative hamza spelling; direct correction would collide with rank 174","proposed_target":"افعل ما يحلو لك.","proposed_english":"Do as you like."},
+    {"rank":183,"current_target":"هذا ما ظننته","current_english":"Here's what I think.","issue":"tense/meaning mismatch; ظننته is past: thought","proposed_target":"هذا ما ظننته.","proposed_english":"That's what I thought."},
+    {"rank":185,"current_target":"أستطيع تحدث الإنجليزية.","current_english":"I can speak English.","issue":"ungrammatical verbal construction","proposed_target":"أستطيع التحدث بالإنجليزية.","proposed_english":"I can speak English."},
+    {"rank":194,"current_target":"ليس لدي شك.","current_english":"I have no doubts.","issue":"singular/plural mismatch","proposed_target":"ليس لدي شك.","proposed_english":"I have no doubt."}
+  ],
+  "french": [
+    {"rank":179,"current_target":"C'est mon bagage.","current_english":"Here is my baggage.","issue":"deictic mismatch; target is 'This is my luggage/baggage'","proposed_target":"C'est mon bagage.","proposed_english":"This is my luggage."},
+    {"rank":185,"current_target":"Ton chien est là.","current_english":"Here is your dog.","issue":"location mismatch; là = there","proposed_target":"Ton chien est là.","proposed_english":"Your dog is there."},
+    {"rank":186,"current_target":"Nous voici donc de nouveau au même point.","current_english":"Here we are again.","issue":"target is much more elaborate than the English and is poor beginner progression","proposed_target":"Nous revoilà.","proposed_english":"Here we are again."},
+    {"rank":198,"current_target":"Je peux le faire !","current_english":"I can do this.","issue":"pronoun mismatch; le = it, not demonstrative this","proposed_target":"Je peux le faire !","proposed_english":"I can do it."},
+    {"rank":205,"current_target":"Je parle anglais.","current_english":"I can speak English.","issue":"modal mismatch; target directly states 'I speak English'","proposed_target":"Je parle anglais.","proposed_english":"I speak English."}
+  ],
+  "urdu": [],
+  "next_steps": [
+    "Continue inspection through the remaining sentence ranges and then vocabulary lists.",
+    "Integrate confirmed repairs with adaptation attribution where source pairs are altered.",
+    "Re-run uniqueness/band/render/PDF checks after integration."
+  ]
+}

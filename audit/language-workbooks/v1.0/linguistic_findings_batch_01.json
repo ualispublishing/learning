@@ -1,0 +1,55 @@
+{
+  "date": "2026-08-23",
+  "branch": "release/language-workbooks-v1-final",
+  "status": "REPAIR_REQUIRED",
+  "scope_note": "High-confidence row-level findings only. Debatable stylistic preferences are excluded.",
+  "arabic": [
+    {"rank":13,"current_target":"سآكل هنا.","current_english":"I eat here.","issue":"tense mismatch","proposed_target":"سآكل هنا.","proposed_english":"I will eat here."},
+    {"rank":19,"current_target":"تعال الى هنا من فضلك.","current_english":"Please come here.","issue":"standard Arabic hamza orthography","proposed_target":"تعال إلى هنا من فضلك.","proposed_english":"Please come here."},
+    {"rank":31,"current_target":"كُل الخضار الخاص بك.","current_english":"Eat your veggies.","issue":"unnatural possessive calque","proposed_target":"تناول خضرواتك.","proposed_english":"Eat your veggies."},
+    {"rank":40,"current_target":"فعلت هذا","current_english":"I did that.","issue":"demonstrative mismatch: هذا = this","proposed_target":"فعلت هذا.","proposed_english":"I did this."},
+    {"rank":41,"current_target":"لا أعرف‏.‏‏","current_english":"I don't know.","issue":"stray bidi/punctuation control characters","proposed_target":"لا أعرف.","proposed_english":"I don't know."},
+    {"rank":57,"current_target":"احب البنات","current_english":"I like girls.","issue":"missing initial hamza","proposed_target":"أحب البنات.","proposed_english":"I like girls."},
+    {"rank":61,"current_target":"أحب الرز","current_english":"I like rice.","issue":"non-preferred colloquial/regional form in MSA workbook","proposed_target":"أحب الأرز.","proposed_english":"I like rice."},
+    {"rank":67,"current_target":"اشتقت لك.","current_english":"I missed you.","issue":"non-preferred colloquial construction for an MSA workbook and collision risk with row 66 if normalized directly","proposed_target":"افتقدتك.","proposed_english":"I missed you."},
+    {"rank":68,"current_target":"اعتقد خلاف ذلك.","current_english":"I think otherwise.","issue":"missing initial hamza","proposed_target":"أعتقد خلاف ذلك.","proposed_english":"I think otherwise."},
+    {"rank":74,"current_target":"أُريد الإنتقام.","current_english":"I want vengeance.","issue":"incorrect hamza spelling in الانتقام","proposed_target":"أريد الانتقام.","proposed_english":"I want vengeance."},
+    {"rank":75,"current_target":"لم أَكُنْ هُناكْ.","current_english":"I wasn't there.","issue":"incorrect final vocalization on هناك and inconsistent unnecessary vocalization","proposed_target":"لم أكن هناك.","proposed_english":"I wasn't there."},
+    {"rank":79,"current_target":"إفعل شيئاً, رجاءً.","current_english":"Please do something.","issue":"incorrect imperative hamza plus non-Arabic comma","proposed_target":"افعل شيئًا، رجاءً.","proposed_english":"Please do something."},
+    {"rank":81,"current_target":"تفضّل البيت بيتك.","current_english":"Please help yourself.","issue":"translation mismatch; idiom means make yourself at home","proposed_target":"تفضّل، البيت بيتك.","proposed_english":"Make yourself at home."},
+    {"rank":82,"current_target":"ساعدو أنفسكم من فضلكم.","current_english":"Please help yourselves.","issue":"misspelled plural imperative and unnatural literal calque","proposed_target":"تفضلوا، البيت بيتكم.","proposed_english":"Make yourselves at home."},
+    {"rank":95,"current_target":"نحن نحتاج إلي المطر.","current_english":"We need rain.","issue":"incorrect spelling of preposition إلى","proposed_target":"نحن نحتاج إلى المطر.","proposed_english":"We need rain."},
+    {"rank":103,"current_target":"كيف بإمكاني مساعدتك ؟","current_english":"How can I help?","issue":"target explicitly includes you while English does not; spacing before Arabic question mark","proposed_target":"كيف يمكنني المساعدة؟","proposed_english":"How can I help?"},
+    {"rank":104,"current_target":"و كيف لك أن تعرف؟","current_english":"How do you know?","issue":"extra conjunction and separated conjunction orthography","proposed_target":"كيف تعرف؟","proposed_english":"How do you know?"},
+    {"rank":110,"current_target":"ماذا ترون؟","current_english":"What do you think?","issue":"semantic mismatch; ترون here means see","proposed_target":"ماذا ترون؟","proposed_english":"What do you see?"},
+    {"rank":113,"current_target":"متىَ أتيتَ؟","current_english":"When did you come?","issue":"incorrect stray short vowel after متى","proposed_target":"متى أتيت؟","proposed_english":"When did you come?"},
+    {"rank":114,"current_target":"متى سنأكل؟","current_english":"When do we eat?","issue":"future-tense mismatch","proposed_target":"متى سنأكل؟","proposed_english":"When will we eat?"},
+    {"rank":122,"current_target":"هل الجميع جاهز؟","current_english":"Are you all ready?","issue":"subject mismatch; الجميع = everyone","proposed_target":"هل الجميع جاهز؟","proposed_english":"Is everyone ready?"},
+    {"rank":124,"current_target":"هل أنت غير مشغول غداً؟","current_english":"Are you free tomorrow?","issue":"awkward negative calque for free/available","proposed_target":"هل أنت متفرغ غدًا؟","proposed_english":"Are you free tomorrow?"},
+    {"rank":130,"current_target":"هل تستطيع التحدث باللغة الانجليزية؟","current_english":"Can you speak English?","issue":"missing hamza in الإنجليزية","proposed_target":"هل تستطيع التحدث باللغة الإنجليزية؟","proposed_english":"Can you speak English?"},
+    {"rank":131,"current_target":"أتستطيع تحدث الفرنسية؟","current_english":"Can you speak French?","issue":"ungrammatical verbal construction","proposed_target":"هل تستطيع التحدث بالفرنسية؟","proposed_english":"Can you speak French?"},
+    {"rank":135,"current_target":"هل تشرب القهوة عادةً؟","current_english":"Do you drink coffee?","issue":"target includes usually but English omits it","proposed_target":"هل تشرب القهوة؟","proposed_english":"Do you drink coffee?"},
+    {"rank":137,"current_target":"هل لديك شك.","current_english":"Do you have doubts?","issue":"singular/plural mismatch and statement punctuation on a question","proposed_target":"هل لديك شكوك؟","proposed_english":"Do you have doubts?"}
+  ],
+  "french": [
+    {"rank":10,"current_target":"Aide-moi, s'il te plait.","current_english":"Help me, please.","issue":"missing circumflex in plaît","proposed_target":"Aide-moi, s'il te plaît.","proposed_english":"Help me, please."},
+    {"rank":13,"current_target":"Je t'en prie.","current_english":"Here you are.","issue":"translation mismatch; common meaning is you're welcome / please","proposed_target":"Je t'en prie.","proposed_english":"You're welcome."},
+    {"rank":30,"current_target":"Pardonne-moi s'il te plaît.","current_english":"Please excuse me.","issue":"forgive/excuse semantic mismatch","proposed_target":"Pardonne-moi s'il te plaît.","proposed_english":"Please forgive me."},
+    {"rank":40,"current_target":"Nous partons demain.","current_english":"We go tomorrow.","issue":"unnatural English rendering of partons","proposed_target":"Nous partons demain.","proposed_english":"We're leaving tomorrow."},
+    {"rank":46,"current_target":"Tu peux te joindre.","current_english":"You can come.","issue":"incomplete/unidiomatic pronominal construction","proposed_target":"Tu peux venir.","proposed_english":"You can come."},
+    {"rank":50,"current_target":"Tu sais comment.","current_english":"You know how.","issue":"unnatural fragment in isolation","proposed_target":"Tu sais comment faire.","proposed_english":"You know how."},
+    {"rank":74,"current_target":"De quelle manière puis-je aider ?","current_english":"How can I help?","issue":"grammatical but unnecessarily stilted for beginner conversational material","proposed_target":"Comment puis-je aider ?","proposed_english":"How can I help?"},
+    {"rank":84,"current_target":"Qu'y puis-je ?","current_english":"What can I do?","issue":"archaic/literary expression unsuitable for basic conversational progression","proposed_target":"Que puis-je faire ?","proposed_english":"What can I do?"},
+    {"rank":132,"current_target":"Je suis dénué de toit.","current_english":"I have no home.","issue":"literary/unnatural phrasing for learner conversation","proposed_target":"Je n'ai pas de logement.","proposed_english":"I have no home."},
+    {"rank":140,"current_target":"Paies ce que tu peux.","current_english":"Pay what you can.","issue":"incorrect imperative morphology; payer imperative is paie/paye","proposed_target":"Paie ce que tu peux.","proposed_english":"Pay what you can."}
+  ],
+  "urdu": [
+    {"rank":988,"current_target":"اسے اردو میں کیا کہتے ہیں؟","current_english":"What do you call this in Urdu?","issue":"deictic/pronoun mismatch; اسے is most directly it/him/her in this construction","proposed_target":"اسے اردو میں کیا کہتے ہیں؟","proposed_english":"What do you call it in Urdu?"}
+  ],
+  "next_steps": [
+    "Continue row-level audit beyond the first inspected batches.",
+    "Integrate only confirmed repairs into the generation pipeline or staged corpus with adapted-attribution markers where sourced Tatoeba pairs are modified.",
+    "Re-run uniqueness, progression-band, render, and PDF checks after repair integration.",
+    "Do not declare final correctness while unresolved rows remain."
+  ]
+}
