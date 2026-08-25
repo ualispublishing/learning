@@ -6,28 +6,162 @@
   "unit": 9,
   "date": "2026-08-24",
   "roadmap_theme": "public life and community choices",
-  "required_genres": ["local report", "proposal", "viewpoint"],
-  "status": "READY_FOR_GENERATION_INTERNAL_LEXICON_ONLY",
+  "required_genres": [
+    "local report",
+    "proposal",
+    "viewpoint"
+  ],
+  "status": "CANONICAL_FRESHNESS_PASS_EXTERNAL_LEXICAL_REVIEW_DEFERRED",
   "release_promotion": false,
-  "external_dictionary_review": {"status":"DEFERRED_AFTER_TEMPORARY_SERVICE_FAILURE","notes":"Generation-stage senses use the repository lexicon; independent lexical approval remains separate."},
-  "new_target_distribution": [3,3,3,3,3,0],
+  "external_dictionary_review": {
+    "status": "DEFERRED_AFTER_TEMPORARY_SERVICE_FAILURE",
+    "notes": "Generation-stage senses use the repository lexicon; independent lexical approval remains separate."
+  },
+  "new_target_distribution": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    0
+  ],
   "freshness_method": "Guarded promotion checks selected target IDs against canonical Urdu A1, A2, and B1 sequences 1-48 immediately before append.",
   "targets": [
-    {"passage":1,"id":"ur-rank-1980","form":"میئر","rank":1980,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"mayor","intended_sense":"mayor; local civic executive or chair in the fictional scenario"},
-    {"passage":1,"id":"ur-rank-1678","form":"محلہ","rank":1678,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"ward","intended_sense":"neighborhood or local residential area"},
-    {"passage":1,"id":"ur-rank-1714","form":"ہجوم","rank":1714,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"crowd","intended_sense":"a crowd or large gathered group"},
-    {"passage":2,"id":"ur-rank-1706","form":"ضابطہ","rank":1706,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"regulation","intended_sense":"a rule, regulation, or formal procedure"},
-    {"passage":2,"id":"ur-rank-1735","form":"اندراج","rank":1735,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"registration","intended_sense":"registration or formal recording of an application or exception"},
-    {"passage":2,"id":"ur-rank-1782","form":"رعایت","rank":1782,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"concession","intended_sense":"a limited concession or allowance within a rule"},
-    {"passage":3,"id":"ur-rank-1728","form":"فریق","rank":1728,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"party","intended_sense":"a party or stakeholder affected by a public choice"},
-    {"passage":3,"id":"ur-rank-1662","form":"عدل","rank":1662,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"justice; judicature","intended_sense":"justice or fairness in treatment and process"},
-    {"passage":3,"id":"ur-rank-1985","form":"شہریت","rank":1985,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"citizenship","intended_sense":"citizenship, with emphasis on responsible participation in public life"},
-    {"passage":4,"id":"ur-rank-1988","form":"کمائی","rank":1988,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"income","intended_sense":"income or earnings from work"},
-    {"passage":4,"id":"ur-rank-1679","form":"استحصال","rank":1679,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"exploitation; using","intended_sense":"unfair exploitation of another person's vulnerable position"},
-    {"passage":4,"id":"ur-rank-1669","form":"رشوت","rank":1669,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"bribe","intended_sense":"a bribe or improper benefit intended to influence an official decision"},
-    {"passage":5,"id":"ur-rank-1712","form":"نعرہ","rank":1712,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"slogan","intended_sense":"a short public slogan used to express or mobilize support for a cause"},
-    {"passage":5,"id":"ur-rank-1729","form":"افزائش","rank":1729,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"increase; growth","intended_sense":"growth or increase, here of housing/population"},
-    {"passage":5,"id":"ur-rank-1791","form":"ہمسایہ","rank":1791,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"neighbor","intended_sense":"neighboring or adjacent area/person; here an adjacent district"}
+    {
+      "passage": 1,
+      "id": "ur-rank-1980",
+      "form": "میئر",
+      "rank": 1980,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "mayor",
+      "intended_sense": "mayor; local civic executive or chair in the fictional scenario"
+    },
+    {
+      "passage": 1,
+      "id": "ur-rank-1678",
+      "form": "محلہ",
+      "rank": 1678,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "ward",
+      "intended_sense": "neighborhood or local residential area"
+    },
+    {
+      "passage": 1,
+      "id": "ur-rank-1714",
+      "form": "ہجوم",
+      "rank": 1714,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "crowd",
+      "intended_sense": "a crowd or large gathered group"
+    },
+    {
+      "passage": 2,
+      "id": "ur-rank-1706",
+      "form": "ضابطہ",
+      "rank": 1706,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "regulation",
+      "intended_sense": "a rule, regulation, or formal procedure"
+    },
+    {
+      "passage": 2,
+      "id": "ur-rank-1735",
+      "form": "اندراج",
+      "rank": 1735,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "registration",
+      "intended_sense": "registration or formal recording of an application or exception"
+    },
+    {
+      "passage": 2,
+      "id": "ur-rank-1782",
+      "form": "رعایت",
+      "rank": 1782,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "concession",
+      "intended_sense": "a limited concession or allowance within a rule"
+    },
+    {
+      "passage": 3,
+      "id": "ur-rank-1728",
+      "form": "فریق",
+      "rank": 1728,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "party",
+      "intended_sense": "a party or stakeholder affected by a public choice"
+    },
+    {
+      "passage": 3,
+      "id": "ur-rank-1662",
+      "form": "عدل",
+      "rank": 1662,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "justice; judicature",
+      "intended_sense": "justice or fairness in treatment and process"
+    },
+    {
+      "passage": 3,
+      "id": "ur-rank-1985",
+      "form": "شہریت",
+      "rank": 1985,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "citizenship",
+      "intended_sense": "citizenship, with emphasis on responsible participation in public life"
+    },
+    {
+      "passage": 4,
+      "id": "ur-rank-1988",
+      "form": "کمائی",
+      "rank": 1988,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "income",
+      "intended_sense": "income or earnings from work"
+    },
+    {
+      "passage": 4,
+      "id": "ur-rank-1679",
+      "form": "استحصال",
+      "rank": 1679,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "exploitation; using",
+      "intended_sense": "unfair exploitation of another person's vulnerable position"
+    },
+    {
+      "passage": 4,
+      "id": "ur-rank-1669",
+      "form": "رشوت",
+      "rank": 1669,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "bribe",
+      "intended_sense": "a bribe or improper benefit intended to influence an official decision"
+    },
+    {
+      "passage": 5,
+      "id": "ur-rank-1712",
+      "form": "نعرہ",
+      "rank": 1712,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "slogan",
+      "intended_sense": "a short public slogan used to express or mobilize support for a cause"
+    },
+    {
+      "passage": 5,
+      "id": "ur-rank-1729",
+      "form": "افزائش",
+      "rank": 1729,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "increase; growth",
+      "intended_sense": "growth or increase, here of housing/population"
+    },
+    {
+      "passage": 5,
+      "id": "ur-rank-1791",
+      "form": "ہمسایہ",
+      "rank": 1791,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "neighbor",
+      "intended_sense": "neighboring or adjacent area/person; here an adjacent district"
+    }
   ],
   "generation_guardrails": [
     "P1-P5 introduce exactly three new targets each; P6 introduces none and visibly recycles all fifteen.",
@@ -37,5 +171,7 @@
     "Learner-facing title, passage text, questions, and answers use Urdu script only.",
     "Guarded promotion fails closed on target freshness, schema drift, QA links, script leakage, first-introduction collisions, or state mismatch.",
     "Generation/integrity state remains separate from educator/publication release approval."
-  ]
+  ],
+  "freshness_result": "PASS",
+  "freshness_scope": "Exact target IDs checked against all canonical Urdu A1, A2, and B1 sequences 1-48 immediately before Unit 9 append."
 }
