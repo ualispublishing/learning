@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "batch_id": "009",
+  "reviewed_on": "2026-08-24",
+  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "records": 16,
+  "standard_mcq": 16,
+  "bellringers": 0,
+  "files": [
+    "question-bank/candidates/batch-009-a.jsonl",
+    "question-bank/candidates/batch-009-b.jsonl",
+    "question-bank/candidates/batch-009-c.jsonl",
+    "question-bank/candidates/batch-009-d.jsonl"
+  ],
+  "difficulty_distribution": {"F":0,"E":12,"S":4,"B":0},
+  "primary_domain_distribution": {"1":5,"2":1,"3":3,"4":0,"5":1,"6":1,"7":5,"8":0},
+  "reviewed_ids": ["C-136","C-137","C-138","C-139","C-140","C-141","C-142","C-143","C-144","C-145","C-146","C-147","C-148","C-149","C-150","C-151"],
+  "semantic_review": {
+    "semantic_reviewed_records": 16,
+    "answer_key_conflicts": 0,
+    "objective_mapping_conflicts": 0,
+    "source_mapping_conflicts": 0,
+    "material_factual_errors_remaining": 0,
+    "four_option_rationales_complete": true,
+    "originality_provenance_complete": true,
+    "external_question_seeds_used": 0
+  },
+  "authoring_focus": {
+    "planner_basis": "v1.6 planning state from CISSP audit run 32796186191 after Batch 008 inclusion",
+    "objective_targets": ["7.9","7.6","5.4","7.14","3.4","7.10","2.6","7.15","1.1","1.10","1.12","1.6","1.2","3.10","3.3","6.3"],
+    "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; declared sibling relationships only where a distinct decision shares a rule family"
+  },
+  "gate_state": {
+    "automated_repository_gate": "PENDING",
+    "quality_gate_mode": "released+candidate",
+    "promotion_allowed": false,
+    "requirement": "Promote only after quality_gate.py passes against the full v1.6 released corpus and Batch 009 with zero unresolved warnings."
+  },
+  "notes": [
+    "Batch 009 follows the v1.6 deficit planner: change control, incident lifecycle, authorization models, physical safety, runtime protection, recovery dependencies, data controls, ethics, AI threat modeling, awareness effectiveness, lifecycle engineering, and security-process evidence.",
+    "Sibling metadata is used for C-140, C-147, C-149, and C-150 because each tests a different boundary/decision from a released item in the same rule family.",
+    "The batch is intentionally excluded from RELEASED_BATCHES.json until the repository-wide originality/duplicate gate passes."
+  ]
+}
