@@ -2,7 +2,7 @@
   "schema_version": 2,
   "batch_id": "013",
   "reviewed_on": "2026-08-25",
-  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "status": "SEMANTIC_REVIEWED_GATE_PASSED",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -31,14 +31,25 @@
     "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; declared sibling relationships only where a released objective/rule family is deliberately revisited through a materially different decision boundary"
   },
   "gate_state": {
-    "automated_repository_gate": "PENDING",
+    "automated_repository_gate": "PASS",
+    "workflow_run_id": 32881051384,
     "quality_gate_mode": "released+candidate",
-    "promotion_allowed": false,
-    "requirement": "Promote only after quality_gate.py passes against the full v1.10 released corpus and Batch 013 with zero unresolved warnings, and the browser smoke gate passes."
+    "released_mcq_compared": 255,
+    "released_bellringers_compared": 1,
+    "candidate_records": 16,
+    "warnings": 0,
+    "browser_smoke": "PASS",
+    "promotion_allowed": true
+  },
+  "coverage_effect": {
+    "explicit_subtopic_tags_before": 257,
+    "explicit_subtopic_tags_after_candidate": 271,
+    "total_mapped_subtopics": 344
   },
   "notes": [
     "Batch 013 follows the v1.10 planner exactly: conflict-of-interest ethics, iterative threat-model maintenance, software-supply-chain provenance, correlated low-and-slow egress monitoring, role-based emerging-threat awareness, authenticity/integrity/nonrepudiation, architecture retirement, API mass assignment, controls derived from security requirements, cryptographic agility, secure site selection, controller/processor lifecycle accountability, backup-power common-mode dependencies, authentication recovery lifecycle, DR activation authority, and failback/reconciliation testing.",
     "Stretch items are C-203, C-207, C-211, and C-215. Declared siblings revisit only objective/rule families through materially different decisions: ethics conflict management vs public-harm truthfulness, iterative threat-model maintenance vs structure-first modeling, site selection or backup-power common mode vs earlier route diversity, and failback/reconciliation vs alternate-site capacity/failover testing.",
-    "The batch remains excluded from RELEASED_BATCHES.json and the public Pages artifact until the automated gate passes."
+    "Repository-wide quality_gate.py passed against 255 released standard questions plus 1 Bellringer and all 16 Batch 013 candidates with zero warnings.",
+    "The interactive browser smoke test also passed before promotion."
   ]
 }
