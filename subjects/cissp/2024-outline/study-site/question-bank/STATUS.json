@@ -1,37 +1,31 @@
 {
-  "schema_version": 6,
+  "schema_version": 7,
   "updated": "2026-08-24",
+  "release": "1.4.0",
   "released": {
-    "bank_records": 80,
-    "standard_mcq": 79,
+    "bank_records": 160,
+    "standard_mcq": 159,
     "bellringer_cases": 1,
-    "difficulty_distribution": {"F": 41, "E": 34, "S": 4, "B": 1},
+    "difficulty_distribution": {"F": 41, "E": 93, "S": 25, "B": 1},
     "base_classification_manifest": "RELEASED_QUESTION_CLASSIFICATION.json",
     "released_batch_manifest": "RELEASED_BATCHES.json"
   },
   "released_batches": {
-    "001": {"status":"RELEASED_V1_3_0","records":24,"standard_mcq":23,"bellringer":1,"difficulty_distribution":{"F":4,"E":15,"S":4,"B":1},"review":"BATCH_001_REVIEW.json"}
+    "001": {"status":"RELEASED_V1_3_0","records":24,"standard_mcq":23,"bellringer":1,"difficulty_distribution":{"F":4,"E":15,"S":4,"B":1},"review":"BATCH_001_REVIEW.json"},
+    "002-006": {"status":"RELEASED_V1_4_0","records":80,"standard_mcq":80,"bellringer":0,"difficulty_distribution":{"F":0,"E":59,"S":21,"B":0},"reviews":["BATCH_002_REVIEW.json","BATCH_003_REVIEW.json","BATCH_004_REVIEW.json","BATCH_005_REVIEW.json","BATCH_006_REVIEW.json"],"quality_gate_workflow_run_id":32791694987,"quality_gate_warnings":0}
   },
-  "candidate_batches": {
-    "002": {"status":"SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"file":"candidates/batch-002.jsonl","review":"BATCH_002_REVIEW.json","primary_domain_distribution":{"1":2,"2":2,"3":2,"4":2,"5":2,"6":2,"7":2,"8":2}},
-    "003": {"status":"SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"file":"candidates/batch-003.jsonl","review":"BATCH_003_REVIEW.json","primary_domain_distribution":{"1":2,"2":2,"3":2,"4":2,"5":2,"6":2,"7":2,"8":2}},
-    "004": {"status":"SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"file":"candidates/batch-004.jsonl","review":"BATCH_004_REVIEW.json","primary_domain_distribution":{"1":5,"2":1,"3":1,"4":1,"5":1,"6":1,"7":5,"8":1},"planner_zero_exposure_objectives_closed":["1.2","1.12","7.5","7.7","7.14"]},
-    "005": {"status":"SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"file":"candidates/batch-005.jsonl","review":"BATCH_005_REVIEW.json","primary_domain_distribution":{"1":5,"2":1,"3":3,"4":0,"5":1,"6":1,"7":4,"8":1},"phase":"depth-after-zero-gap-closure"},
-    "006": {"status":"SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"file":"candidates/batch-006.jsonl","review":"BATCH_006_REVIEW.json","primary_domain_distribution":{"1":0,"2":3,"3":2,"4":3,"5":2,"6":2,"7":0,"8":4},"phase":"balanced-depth-after-gap-closure"}
-  },
+  "candidate_batches": {},
   "pending_candidate_summary": {
-    "records": 80,
-    "standard_mcq": 80,
+    "records": 0,
+    "standard_mcq": 0,
     "bellringer_cases": 0,
-    "difficulty_distribution": {"F": 0, "E": 60, "S": 20, "B": 0},
-    "planning_standard_mcq_objective_exposure": "62/62",
-    "planning_exposure_boundary": "62/62 means at least one standard MCQ maps to every objective when unreleased Batches 002-006 are included. It is not a released-bank claim and does not imply mastery depth."
+    "difficulty_distribution": {"F": 0, "E": 0, "S": 0, "B": 0}
   },
-  "if_batches_002_through_006_promote": {
-    "bank_records": 160,
-    "standard_mcq": 159,
-    "bellringer_cases": 1,
-    "difficulty_distribution": {"F": 41, "E": 94, "S": 24, "B": 1}
+  "coverage": {
+    "numbered_objectives_with_standard_mcq_exposure": "62/62",
+    "mapped_subtopics": 344,
+    "explicit_subtopic_exposure_before_next_authoring_pass": "recompute with coverage_report.py",
+    "boundary": "Objective/subtopic exposure is an authoring coverage metric, not evidence of learner mastery."
   },
   "authoring_guardrails": {
     "minimum_exam_calibrated_share_for_batch_16_plus": 0.50,
@@ -40,12 +34,11 @@
     "objective_planning_minimum": {"F": 1, "E": 4, "S": 1}
   },
   "long_term_target": {"bank_records":800,"F":120,"E":480,"S":160,"B":40},
+  "remaining_to_target": {"bank_records":640,"F":79,"E":387,"S":135,"B":39},
   "next_priority": [
-    "Observe a clean repository originality/duplicate gate for Batches 002-006 against all 80 released records before promotion.",
-    "Do not promote any candidate with an unresolved similarity warning or structural duplicate concern.",
-    "Use coverage_report.py to keep adding E/S depth to the sparsest objectives now that planning exposure is 62/62.",
-    "Keep any primary domain at or below 35% of a 16+ standard-question batch.",
-    "Prefer future batches that reduce per-objective E/S deficits instead of repeating already-dense scenario families.",
+    "Run coverage_report.py against the 160-record released bank and select the sparsest objective/subtopic gaps.",
+    "Author the next 16-question batch at an Exam/Stretch center of gravity without repeating existing scenario families.",
+    "Keep every new candidate behind semantic review plus the repository-wide originality/duplicate gate before release.",
     "Add Bellringers separately and sparsely; they are integrative drills, not imitations of live CISSP items.",
     "Use confidence, chosen distractor, response time, and spaced repeat performance before making empirical difficulty claims."
   ]
