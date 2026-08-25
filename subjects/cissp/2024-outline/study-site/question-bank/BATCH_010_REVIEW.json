@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "batch_id": "010",
+  "reviewed_on": "2026-08-24",
+  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "records": 16,
+  "standard_mcq": 16,
+  "bellringers": 0,
+  "files": [
+    "question-bank/candidates/batch-010-a.jsonl",
+    "question-bank/candidates/batch-010-b.jsonl",
+    "question-bank/candidates/batch-010-c.jsonl",
+    "question-bank/candidates/batch-010-d.jsonl"
+  ],
+  "difficulty_distribution": {"F":0,"E":12,"S":4,"B":0},
+  "primary_domain_distribution": {"1":4,"2":3,"3":2,"4":0,"5":0,"6":2,"7":5,"8":0},
+  "reviewed_ids": ["C-152","C-153","C-154","C-155","C-156","C-157","C-158","C-159","C-160","C-161","C-162","C-163","C-164","C-165","C-166","C-167"],
+  "semantic_review": {
+    "semantic_reviewed_records": 16,
+    "answer_key_conflicts": 0,
+    "objective_mapping_conflicts": 0,
+    "source_mapping_conflicts": 0,
+    "material_factual_errors_remaining": 0,
+    "four_option_rationales_complete": true,
+    "originality_provenance_complete": true,
+    "external_question_seeds_used": 0
+  },
+  "authoring_focus": {
+    "planner_basis": "released v1.7 deficit state after Batch 009 promotion",
+    "objective_targets": ["7.3","1.3","1.4","6.2","1.5","1.8","3.8","2.1","7.11","7.12","7.13","2.3","7.14","3.1","6.4","2.5"],
+    "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; declared sibling relationships only where the decision is materially distinct from the released rule-family item"
+  },
+  "gate_state": {
+    "automated_repository_gate": "PENDING",
+    "quality_gate_mode": "released+candidate",
+    "promotion_allowed": false,
+    "requirement": "Promote only after quality_gate.py passes against the full v1.7 released corpus and Batch 010 with zero unresolved warnings, and the browser smoke gate passes."
+  },
+  "notes": [
+    "Batch 010 follows the v1.7 planner rather than adding random volume: configuration drift, governance accountability, cross-border obligations, adversarial API assessment, investigation authority, contractor transfers, site diversity, asset criticality, recovery validation/testing/continuity, ephemeral assets, physical-boundary bypass, zero-trust architecture, exception handling, and archive migration.",
+    "C-161, C-162, and C-167 declare released siblings because each shares a rule family while testing a different decision boundary: tabletop vs parallel testing, independent continuity workaround vs external supplier disruption, and retained-record migration vs disposed-device sanitization.",
+    "The batch remains excluded from RELEASED_BATCHES.json and therefore from the public Pages artifact until the automated gate passes."
+  ]
+}
