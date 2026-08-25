@@ -3,10 +3,12 @@
 Current runtime: **GitHub Pages only**.
 
 ## Current queue
-- **47** candidate-complete, tech-focused prepared applications in the encrypted queue.
+- **48** candidate-complete, tech-focused prepared applications in the encrypted queue.
 - The queue is regenerated from the canonical tracker and includes only records whose current canonical status is `prepared_manual_submission`.
 - A 2026-08-24 quality repair restored 48 incorrectly promoted records to their previously verified states: 24 closed/stale postings and 24 records that still require applicant-specific fields. Those records are not runnable.
 - A live form audit also moved Aquila — Junior Helpdesk Support Technician out of the runnable set because its current application requires applicant demographic selections plus a Human Check.
+- On 2026-08-25, SecureRx — Junior Data Analyst (Contract), Healthcare SaaS – Remote was moved out of the runnable queue because the role is still indexed as current but no stable direct employer/ATS application URL has been verified.
+- On 2026-08-25, two live Cresta internships were added after official Greenhouse verification: Forward Deployed Engineering Intern (AI Agent) and Software Engineer Intern. Both use truthful, employer-neutral prepared software materials; the Software Engineer Intern scaffold also includes the required short problem-preference response.
 - Other user-field, user-file, future-consideration, stale, excluded, or otherwise non-runnable statuses are also excluded from the encrypted Pages queue.
 - Queue content is decrypted in the browser from the seeded URL fragment and then stored in local browser storage.
 - The public encrypted payload is minimized to runtime fields; résumé and cover-letter references are reduced to basenames.
