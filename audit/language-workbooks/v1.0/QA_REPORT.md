@@ -2,6 +2,11 @@
 
 Production-candidate gates passed. Natural language quality takes priority over artificial uniqueness. Independent native-speaker editorial certification remains the final step before any absolute error-free commercial claim.
 
+- Pronunciation foundations: PASS for Arabic, French, and Urdu.
+- Pronunciation method: broad IPA/articulatory quick-start; no ad-hoc per-sentence romanization.
+- Mixed RTL script + IPA isolation: PASS.
+- Pronunciation references are rendered in each workbook's Sources / QA section.
+
 ## Arabic
 - Vocabulary: 1000 audited entries; 999 normalized surface forms.
 - Sentences: 1000 rows; 1000 unique target strings; 1000 unique English strings.
