@@ -3,9 +3,10 @@
 Current runtime: **GitHub Pages only**.
 
 ## Current queue
-- **48** candidate-complete, tech-focused prepared applications in the encrypted queue.
+- **47** candidate-complete, tech-focused prepared applications in the encrypted queue.
 - The queue is regenerated from the canonical tracker and includes only records whose current canonical status is `prepared_manual_submission`.
 - A 2026-08-24 quality repair restored 48 incorrectly promoted records to their previously verified states: 24 closed/stale postings and 24 records that still require applicant-specific fields. Those records are not runnable.
+- A live form audit also moved Aquila — Junior Helpdesk Support Technician out of the runnable set because its current application requires applicant demographic selections plus a Human Check.
 - Other user-field, user-file, future-consideration, stale, excluded, or otherwise non-runnable statuses are also excluded from the encrypted Pages queue.
 - Queue content is decrypted in the browser from the seeded URL fragment and then stored in local browser storage.
 - The public encrypted payload is minimized to runtime fields; résumé and cover-letter references are reduced to basenames.
