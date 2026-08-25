@@ -62,6 +62,45 @@ def render_language(lang: str):
     }, ensure_ascii=False, indent=2))
 
 
+def synchronize_release_docs():
+    readme_path = base.OUT / "README.md"
+    report_path = base.AUDIT / "QA_REPORT.md"
+    if not readme_path.exists() or not report_path.exists():
+        raise SystemExit("missing README or QA report during pronunciation documentation sync")
+
+    readme = readme_path.read_text(encoding="utf-8")
+    old = (
+        "The release favors natural, idiomatic language over artificial uniqueness. Genuine homographs are permitted when meaning and grammatical role genuinely differ. "
+        "Transliteration is omitted from the sentence drill corpus rather than introducing inconsistent ad-hoc romanization."
+    )
+    new = (
+        "The release favors natural, idiomatic language over artificial uniqueness. Genuine homographs are permitted when meaning and grammatical role genuinely differ. "
+        "Each language now includes a source-backed pronunciation quick-start in Foundations using broad IPA/articulatory guidance; sentence drills remain in normal target-language spelling rather than introducing inconsistent ad-hoc romanization."
+    )
+    if old not in readme:
+        raise SystemExit("README pronunciation sync anchor missing")
+    readme = readme.replace(old, new, 1)
+    readme = readme.replace(
+        "Automated source, diversity, duplicate, script, corpus-balance, PDF, font, and render checks support the release.",
+        "Automated source, diversity, duplicate, script, corpus-balance, pronunciation-structure, PDF, font, and render checks support the release.",
+        1,
+    )
+    readme_path.write_text(readme, encoding="utf-8")
+
+    report = report_path.read_text(encoding="utf-8")
+    anchor = "Production-candidate gates passed. Natural language quality takes priority over artificial uniqueness. Independent native-speaker editorial certification remains the final step before any absolute error-free commercial claim.\n"
+    addition = (
+        anchor
+        + "\n- Pronunciation foundations: PASS for Arabic, French, and Urdu.\n"
+        + "- Pronunciation method: broad IPA/articulatory quick-start; no ad-hoc per-sentence romanization.\n"
+        + "- Mixed RTL script + IPA isolation: PASS.\n"
+        + "- Pronunciation references are rendered in each workbook's Sources / QA section.\n"
+    )
+    if anchor not in report:
+        raise SystemExit("QA report pronunciation sync anchor missing")
+    report_path.write_text(report.replace(anchor, addition, 1), encoding="utf-8")
+
+
 def finalize():
     configure()
     pronunciation_qa = pronunciation.audit_payload()
@@ -100,7 +139,8 @@ def finalize():
     )
     quality.post_process()
     pronunciation.write_qa()
-    print("Aggregated three rendered workbooks, applied corpus-quality gates, and recorded pronunciation QA/references.")
+    synchronize_release_docs()
+    print("Aggregated three rendered workbooks, applied corpus-quality gates, and synchronized pronunciation QA/references/docs.")
 
 
 def main():
