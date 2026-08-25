@@ -2,7 +2,7 @@
   "schema_version": 2,
   "batch_id": "008",
   "reviewed_on": "2026-08-24",
-  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "status": "SEMANTIC_REVIEWED_GATE_PASSED",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -31,14 +31,24 @@
     "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; one materially distinct scenario decision per record"
   },
   "gate_state": {
-    "automated_repository_gate": "PENDING",
+    "automated_repository_gate": "PASS",
+    "workflow_run_id": 32796186191,
     "quality_gate_mode": "released+candidate",
-    "promotion_allowed": false,
-    "requirement": "Promote only after quality_gate.py passes against the full released corpus and Batch 008 with zero unresolved warnings."
+    "released_mcq_compared": 175,
+    "released_bellringers_compared": 1,
+    "candidate_records": 16,
+    "warnings": 0,
+    "browser_smoke": "PASS",
+    "promotion_allowed": true
+  },
+  "coverage_effect": {
+    "explicit_subtopic_tags_before": 178,
+    "explicit_subtopic_tags_after_candidate": 201,
+    "mapped_subtopics": 344
   },
   "notes": [
     "Every item was authored from a decision rule and public CISSP/registered standards scope rather than an external practice-question seed.",
-    "Batch 008 follows the v1.5 deficit planner instead of adding raw volume: policy hierarchy, personnel lifecycle, continuity/operations, classification/EOL, formal models, cryptographic attacks, federation, and facility design.",
-    "The batch remains excluded from RELEASED_BATCHES.json and therefore from the public Pages artifact until promotion gates pass."
+    "Repository-wide quality_gate.py passed with zero warnings against the full v1.5 released corpus plus all 16 Batch 008 candidates.",
+    "The full CISSP audit, static asset checks, and interactive browser smoke test also passed on the candidate state."
   ]
 }
