@@ -12,12 +12,12 @@ This file is an **active queue only**. Completed timelines belong in Git history
 - [ ] If canonical counts or the pinned Urdu A1 blob differ from continuation/status state, reconcile before writing new passages.
 - [ ] Keep production state and educator-release state separate; never infer release readiness from generation-complete or historical approval labels.
 
-## P1 — active production: Urdu B1
+## P1 — active production: Urdu B2
 
-Canonical production frontier: **Urdu B1, Unit 10, sequence 55**.
+Canonical production frontier: **Urdu B2, Unit 1, sequence 1**.
 
-- [ ] Read `reading/planning/ACTIVE_GENERATION_PLAN.json` and the exact B1 entry in `reading/planning/topic_genre_matrix.json`.
-- [ ] Generate Urdu B1 in guarded unit or large bounded batches under the generation-first policy.
+- [ ] Read `reading/planning/ACTIVE_GENERATION_PLAN.json` and the exact B2 entry in `reading/planning/topic_genre_matrix.json`.
+- [ ] Generate Urdu B2 in guarded unit or large bounded batches under the generation-first policy.
 - [ ] Preserve 6 passages per unit and the active 10-question/10-answer contract unless a documented pedagogical exception is necessary.
 - [ ] Write independent natural contemporary Urdu; do not translate Arabic/French passage-by-passage.
 - [ ] Independently learner-check every deliberately taught lexical sense before assessing that sense in a question.
@@ -28,8 +28,8 @@ Current production totals:
 
 - Arabic: 360/360 generated.
 - French: 360/360 generated.
-- Urdu: 174/360 generated; A1-A2 complete, B1 in progress.
-- Project: 894/1080 generated.
+- Urdu: 180/360 generated; A1-B1 complete, B2 in progress.
+- Project: 900/1080 generated.
 
 ## P1 — release/verification workstreams
 

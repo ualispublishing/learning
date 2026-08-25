@@ -6,28 +6,162 @@
   "unit": 10,
   "date": "2026-08-24",
   "roadmap_theme": "B1 synthesis",
-  "required_genres": ["longer integrated article", "paired short texts", "checkpoint"],
-  "status": "READY_FOR_GENERATION_INTERNAL_LEXICON_ONLY",
+  "required_genres": [
+    "longer integrated article",
+    "paired short texts",
+    "checkpoint"
+  ],
+  "status": "CANONICAL_FRESHNESS_PASS_EXTERNAL_LEXICAL_REVIEW_DEFERRED",
   "release_promotion": false,
-  "external_dictionary_review": {"status":"DEFERRED_AFTER_TEMPORARY_SERVICE_FAILURE","notes":"Generation-stage senses use repository lexicon evidence; independent lexical approval remains separate."},
-  "new_target_distribution": [3,3,3,3,3,0],
+  "external_dictionary_review": {
+    "status": "DEFERRED_AFTER_TEMPORARY_SERVICE_FAILURE",
+    "notes": "Generation-stage senses use repository lexicon evidence; independent lexical approval remains separate."
+  },
+  "new_target_distribution": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    0
+  ],
   "freshness_method": "Guarded promotion checks all selected IDs against canonical Urdu A1, A2, and B1 sequences 1-54 immediately before append.",
   "targets": [
-    {"passage":1,"id":"ur-rank-1650","form":"ایجاد","rank":1650,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"invention","intended_sense":"invention or newly created solution"},
-    {"passage":1,"id":"ur-rank-1671","form":"استعداد","rank":1671,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"talent","intended_sense":"ability, aptitude, or capacity for a task"},
-    {"passage":1,"id":"ur-rank-1675","form":"خلا","rank":1675,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"void; vacancy; emptiness","intended_sense":"a gap or unmet need in a design/problem context"},
-    {"passage":2,"id":"ur-rank-1661","form":"ریٹائر","rank":1661,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"retired","intended_sense":"retired or leaving regular employment after a career"},
-    {"passage":2,"id":"ur-rank-1688","form":"منصب","rank":1688,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"place","intended_sense":"office, position, or formal role in an organization"},
-    {"passage":2,"id":"ur-rank-1660","form":"مدعو","rank":1660,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"invited","intended_sense":"invited or asked to attend by choice"},
-    {"passage":3,"id":"ur-rank-1702","form":"سچائی","rank":1702,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"truth","intended_sense":"truth or factual reality supported by evidence"},
-    {"passage":3,"id":"ur-rank-1676","form":"پردہ","rank":1676,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"concealment; hiding","intended_sense":"concealment or a barrier preventing information from being seen"},
-    {"passage":3,"id":"ur-rank-1750","form":"اسرار","rank":1750,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"secret","intended_sense":"secrets or mysteries; unknown matters presented as hidden"},
-    {"passage":4,"id":"ur-rank-1670","form":"گم","rank":1670,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"lost","intended_sense":"lost or missing"},
-    {"passage":4,"id":"ur-rank-1682","form":"ٹریک","rank":1682,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"track","intended_sense":"track, route, or traceable sequence of locations/events"},
-    {"passage":4,"id":"ur-rank-1665","form":"اردگرد","rank":1665,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"about; around","intended_sense":"around or in the nearby surroundings"},
-    {"passage":5,"id":"ur-rank-1690","form":"انا","rank":1690,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"ego; self-importance","intended_sense":"ego or self-importance affecting interaction"},
-    {"passage":5,"id":"ur-rank-1759","form":"نرمی","rank":1759,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"softness","intended_sense":"gentleness or softness of manner without surrendering a position"},
-    {"passage":5,"id":"ur-rank-1758","form":"مہربانی","rank":1758,"source_lexicon":"urdu_top3000.csv","meaning_en_source":"kindness","intended_sense":"kindness expressed through respectful, useful behavior"}
+    {
+      "passage": 1,
+      "id": "ur-rank-1650",
+      "form": "ایجاد",
+      "rank": 1650,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "invention",
+      "intended_sense": "invention or newly created solution"
+    },
+    {
+      "passage": 1,
+      "id": "ur-rank-1671",
+      "form": "استعداد",
+      "rank": 1671,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "talent",
+      "intended_sense": "ability, aptitude, or capacity for a task"
+    },
+    {
+      "passage": 1,
+      "id": "ur-rank-1675",
+      "form": "خلا",
+      "rank": 1675,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "void; vacancy; emptiness",
+      "intended_sense": "a gap or unmet need in a design/problem context"
+    },
+    {
+      "passage": 2,
+      "id": "ur-rank-1661",
+      "form": "ریٹائر",
+      "rank": 1661,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "retired",
+      "intended_sense": "retired or leaving regular employment after a career"
+    },
+    {
+      "passage": 2,
+      "id": "ur-rank-1688",
+      "form": "منصب",
+      "rank": 1688,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "place",
+      "intended_sense": "office, position, or formal role in an organization"
+    },
+    {
+      "passage": 2,
+      "id": "ur-rank-1660",
+      "form": "مدعو",
+      "rank": 1660,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "invited",
+      "intended_sense": "invited or asked to attend by choice"
+    },
+    {
+      "passage": 3,
+      "id": "ur-rank-1702",
+      "form": "سچائی",
+      "rank": 1702,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "truth",
+      "intended_sense": "truth or factual reality supported by evidence"
+    },
+    {
+      "passage": 3,
+      "id": "ur-rank-1676",
+      "form": "پردہ",
+      "rank": 1676,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "concealment; hiding",
+      "intended_sense": "concealment or a barrier preventing information from being seen"
+    },
+    {
+      "passage": 3,
+      "id": "ur-rank-1750",
+      "form": "اسرار",
+      "rank": 1750,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "secret",
+      "intended_sense": "secrets or mysteries; unknown matters presented as hidden"
+    },
+    {
+      "passage": 4,
+      "id": "ur-rank-1670",
+      "form": "گم",
+      "rank": 1670,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "lost",
+      "intended_sense": "lost or missing"
+    },
+    {
+      "passage": 4,
+      "id": "ur-rank-1682",
+      "form": "ٹریک",
+      "rank": 1682,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "track",
+      "intended_sense": "track, route, or traceable sequence of locations/events"
+    },
+    {
+      "passage": 4,
+      "id": "ur-rank-1665",
+      "form": "اردگرد",
+      "rank": 1665,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "about; around",
+      "intended_sense": "around or in the nearby surroundings"
+    },
+    {
+      "passage": 5,
+      "id": "ur-rank-1690",
+      "form": "انا",
+      "rank": 1690,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "ego; self-importance",
+      "intended_sense": "ego or self-importance affecting interaction"
+    },
+    {
+      "passage": 5,
+      "id": "ur-rank-1759",
+      "form": "نرمی",
+      "rank": 1759,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "softness",
+      "intended_sense": "gentleness or softness of manner without surrendering a position"
+    },
+    {
+      "passage": 5,
+      "id": "ur-rank-1758",
+      "form": "مہربانی",
+      "rank": 1758,
+      "source_lexicon": "urdu_top3000.csv",
+      "meaning_en_source": "kindness",
+      "intended_sense": "kindness expressed through respectful, useful behavior"
+    }
   ],
   "generation_guardrails": [
     "P1-P5 introduce exactly three new targets each; P6 introduces none and visibly recycles all fifteen.",
@@ -36,5 +170,7 @@
     "Learner-facing title, passage text, questions, and answers use Urdu script only.",
     "Guarded promotion fails closed on freshness, schema drift, QA links, script leakage, first-introduction collisions, checkpoint recycling, or state mismatch.",
     "B1 completion changes production frontier to B2 only; it does not imply educator/publication release approval."
-  ]
+  ],
+  "freshness_result": "PASS",
+  "freshness_scope": "Exact target IDs checked against all canonical Urdu A1, A2, and B1 sequences 1-54 immediately before Unit 10 append."
 }
