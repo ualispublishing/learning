@@ -1,6 +1,6 @@
 # LANG-A1C2 Active Tasks
 
-Updated: 2026-08-24
+Updated: 2026-08-25
 
 This file is an **active queue only**. Completed timelines belong in Git history and `reading/audit/`. Current truth starts with `PROJECT_TRACKS.json`, `reading/CONTINUATION.json`, and live canonical data.
 
@@ -14,7 +14,7 @@ This file is an **active queue only**. Completed timelines belong in Git history
 
 ## P1 — active production: Urdu B2
 
-Canonical production frontier: **Urdu B2, Unit 4, sequence 19**.
+Canonical production frontier: **Urdu B2, Unit 5, sequence 25**.
 
 - [ ] Read `reading/planning/ACTIVE_GENERATION_PLAN.json` and the exact B2 entry in `reading/planning/topic_genre_matrix.json`.
 - [ ] Generate Urdu B2 in guarded unit or large bounded batches under the generation-first policy.
@@ -28,8 +28,8 @@ Current production totals:
 
 - Arabic: 360/360 generated.
 - French: 360/360 generated.
-- Urdu: 198/360 generated; A1-B1 complete, B2 in progress.
-- Project: 918/1080 generated.
+- Urdu: 204/360 generated; A1-B1 complete, B2 in progress.
+- Project: 924/1080 generated.
 
 ## P1 — release/verification workstreams
 

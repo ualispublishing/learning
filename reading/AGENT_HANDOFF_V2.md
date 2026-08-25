@@ -1,6 +1,6 @@
 # LANG-A1C2 Agent Handoff
 
-Updated: 2026-08-24
+Updated: 2026-08-25
 
 ## Scope guard
 
@@ -29,10 +29,10 @@ If stored state, the state manifest, and live canonical files disagree, **fail c
 ### Production
 
 - Target: 1,080 passages total; 360 per language; 60 per CEFR level A1-C2.
-- Canonical generated total: **918**.
+- Canonical generated total: **924**.
 - Arabic: **360/360**, A1-C2 generation complete.
 - French: **360/360**, A1-C2 generation complete.
-- Urdu: **198/360**; A1-B1 generation complete and B2 generation in progress.
+- Urdu: **204/360**; A1-B1 generation complete and B2 generation in progress.
 - Urdu A2 canonical path: `reading/urdu/a2/passages.jsonl`; Units 1-10 contain sequences 1-60 and A2 generation is complete.
 - Urdu A1 canonical path: `reading/urdu/a1/passages.jsonl`.
 - Urdu A1 pinned Git blob: `ec0970dc1916ce523dd3320d2f4dca4c7f8bc677`.
@@ -51,7 +51,7 @@ Never convert historical `APPROVED`, `SEALED`, `PASS`, or generation-complete wo
 
 ## Active production frontier
 
-Continue **Urdu B2**, starting from Unit 4 / sequence 19, under:
+Continue **Urdu B2**, starting from Unit 5 / sequence 25, under:
 
 - `reading/planning/ACTIVE_GENERATION_PLAN.json`
 - `reading/planning/topic_genre_matrix.json`
@@ -59,7 +59,7 @@ Continue **Urdu B2**, starting from Unit 4 / sequence 19, under:
 - `reading/planning/TEN_QUESTION_STANDARD.md`
 - `reading/schema/passage.schema.json`
 
-B2 Unit 4 uses the roadmap theme **cities and design** with `report`, `proposal`, and `critique` genres.
+B2 Unit 5 uses the roadmap theme **climate and uncertainty** with `evidence summary`, `news analysis`, and `argument` genres.
 
 Generate in guarded unit or large bounded batches. Do not reopen Urdu A1 generation unless fresh evidence identifies a concrete defect.
 
@@ -119,4 +119,4 @@ Do not append historical timelines to live state files. Detailed completed work 
 
 ## Exact next action
 
-Run `python reading/tools/validate_continuation_state.py`; if it passes, resume guarded generation at **Urdu B2 Unit 4 / sequence 19** using the B2 Unit 4 roadmap theme `cities and design`.
+Run `python reading/tools/validate_continuation_state.py`; if it passes, resume guarded generation at **Urdu B2 Unit 5 / sequence 25** using the B2 Unit 5 roadmap theme `climate and uncertainty`.

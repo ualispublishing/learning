@@ -6,22 +6,103 @@
   "unit": 4,
   "date": "2026-08-25",
   "roadmap_theme": "cities and design",
-  "required_genres": ["report", "proposal", "critique"],
-  "status": "PASS_FOR_GENERATION_TARGET_SENSES",
+  "required_genres": [
+    "report",
+    "proposal",
+    "critique"
+  ],
+  "status": "PASS_FOR_GENERATION_TARGET_SENSES_AND_CANONICAL_FRESHNESS",
   "release_promotion": false,
-  "new_target_distribution": [2, 2, 2, 2, 2, 0],
+  "new_target_distribution": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    0
+  ],
   "freshness_method": "Guarded promotion must check exact target IDs against all canonical Urdu A1-B1 and live B2 sequences 1-18 immediately before append.",
   "targets": [
-    {"passage":1,"id":"ur-rank-2397","form":"دہلیز","rank":2397,"source_lexicon":"urdu_top3000.csv","intended_sense":"literal threshold or entrance edge whose height and form affect access"},
-    {"passage":1,"id":"ur-rank-2369","form":"منقسم","rank":2369,"source_lexicon":"urdu_top3000.csv","intended_sense":"divided into separate parts or groups"},
-    {"passage":2,"id":"ur-rank-2379","form":"سرنگ","rank":2379,"source_lexicon":"urdu_top3000.csv","intended_sense":"tunnel carrying movement below or through an obstacle"},
-    {"passage":2,"id":"ur-rank-2331","form":"خلل","rank":2331,"source_lexicon":"urdu_top3000.csv","intended_sense":"disruption or interruption in normal movement or service"},
-    {"passage":3,"id":"ur-rank-2376","form":"ایمبولینس","rank":2376,"source_lexicon":"urdu_top3000.csv","intended_sense":"ambulance or emergency medical transport vehicle"},
-    {"passage":3,"id":"ur-rank-2294","form":"ریزرو","rank":2294,"source_lexicon":"urdu_top3000.csv","intended_sense":"reserved or set aside for a specified use"},
-    {"passage":4,"id":"ur-rank-2400","form":"صدا","rank":2400,"source_lexicon":"urdu_top3000.csv","intended_sense":"sound or voice as part of the experienced acoustic environment"},
-    {"passage":4,"id":"ur-rank-2289","form":"افق","rank":2289,"source_lexicon":"urdu_top3000.csv","intended_sense":"visible horizon or distant visual line used when discussing views and skyline"},
-    {"passage":5,"id":"ur-rank-2382","form":"فوٹیج","rank":2382,"source_lexicon":"urdu_top3000.csv","intended_sense":"recorded video footage used as observational evidence"},
-    {"passage":5,"id":"ur-rank-2398","form":"رجسٹر","rank":2398,"source_lexicon":"urdu_top3000.csv","intended_sense":"register or structured written log of observations or entries"}
+    {
+      "passage": 1,
+      "id": "ur-rank-2397",
+      "form": "دہلیز",
+      "rank": 2397,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "literal threshold or entrance edge whose height and form affect access"
+    },
+    {
+      "passage": 1,
+      "id": "ur-rank-2369",
+      "form": "منقسم",
+      "rank": 2369,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "divided into separate parts or groups"
+    },
+    {
+      "passage": 2,
+      "id": "ur-rank-2379",
+      "form": "سرنگ",
+      "rank": 2379,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "tunnel carrying movement below or through an obstacle"
+    },
+    {
+      "passage": 2,
+      "id": "ur-rank-2331",
+      "form": "خلل",
+      "rank": 2331,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "disruption or interruption in normal movement or service"
+    },
+    {
+      "passage": 3,
+      "id": "ur-rank-2376",
+      "form": "ایمبولینس",
+      "rank": 2376,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "ambulance or emergency medical transport vehicle"
+    },
+    {
+      "passage": 3,
+      "id": "ur-rank-2294",
+      "form": "ریزرو",
+      "rank": 2294,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "reserved or set aside for a specified use"
+    },
+    {
+      "passage": 4,
+      "id": "ur-rank-2400",
+      "form": "صدا",
+      "rank": 2400,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "sound or voice as part of the experienced acoustic environment"
+    },
+    {
+      "passage": 4,
+      "id": "ur-rank-2289",
+      "form": "افق",
+      "rank": 2289,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "visible horizon or distant visual line used when discussing views and skyline"
+    },
+    {
+      "passage": 5,
+      "id": "ur-rank-2382",
+      "form": "فوٹیج",
+      "rank": 2382,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "recorded video footage used as observational evidence"
+    },
+    {
+      "passage": 5,
+      "id": "ur-rank-2398",
+      "form": "رجسٹر",
+      "rank": 2398,
+      "source_lexicon": "urdu_top3000.csv",
+      "intended_sense": "register or structured written log of observations or entries"
+    }
   ],
   "generation_guardrails": [
     "B2 passage text remains in the 350-550 whitespace-token production band.",
@@ -30,5 +111,7 @@
     "Urban cases are fictional and avoid implying that one design solution fits every city or population.",
     "Accessibility, emergency access, surveillance, and public-space discussion remain general and non-individualized.",
     "Generation/integrity state remains separate from educator/publication release approval."
-  ]
+  ],
+  "freshness_result": "PASS",
+  "freshness_scope": "Exact target IDs checked against all canonical Urdu A1-B1 and B2 sequences 1-18 immediately before Unit 4 append."
 }
