@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "batch_id": "013",
+  "reviewed_on": "2026-08-25",
+  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "records": 16,
+  "standard_mcq": 16,
+  "bellringers": 0,
+  "files": [
+    "question-bank/candidates/batch-013-a.jsonl",
+    "question-bank/candidates/batch-013-b.jsonl",
+    "question-bank/candidates/batch-013-c.jsonl",
+    "question-bank/candidates/batch-013-d.jsonl"
+  ],
+  "difficulty_distribution": {"F":0,"E":12,"S":4,"B":0},
+  "primary_domain_distribution": {"1":5,"2":1,"3":5,"4":0,"5":1,"6":0,"7":3,"8":1},
+  "reviewed_ids": ["C-200","C-201","C-202","C-203","C-204","C-205","C-206","C-207","C-208","C-209","C-210","C-211","C-212","C-213","C-214","C-215"],
+  "semantic_review": {
+    "semantic_reviewed_records": 16,
+    "answer_key_conflicts": 0,
+    "objective_mapping_conflicts": 0,
+    "source_mapping_conflicts": 0,
+    "material_factual_errors_remaining": 0,
+    "four_option_rationales_complete": true,
+    "originality_provenance_complete": true,
+    "external_question_seeds_used": 0
+  },
+  "authoring_focus": {
+    "planner_basis": "released v1.10 deficit state after Batch 012 promotion",
+    "objective_targets": ["1.1","1.10","1.11","7.2","1.12","1.2","3.10","8.5","3.3","3.6","3.8","2.4","3.9","5.6","7.11","7.12"],
+    "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; declared sibling relationships only where a released objective/rule family is deliberately revisited through a materially different decision boundary"
+  },
+  "gate_state": {
+    "automated_repository_gate": "PENDING",
+    "quality_gate_mode": "released+candidate",
+    "promotion_allowed": false,
+    "requirement": "Promote only after quality_gate.py passes against the full v1.10 released corpus and Batch 013 with zero unresolved warnings, and the browser smoke gate passes."
+  },
+  "notes": [
+    "Batch 013 follows the v1.10 planner exactly: conflict-of-interest ethics, iterative threat-model maintenance, software-supply-chain provenance, correlated low-and-slow egress monitoring, role-based emerging-threat awareness, authenticity/integrity/nonrepudiation, architecture retirement, API mass assignment, controls derived from security requirements, cryptographic agility, secure site selection, controller/processor lifecycle accountability, backup-power common-mode dependencies, authentication recovery lifecycle, DR activation authority, and failback/reconciliation testing.",
+    "Stretch items are C-203, C-207, C-211, and C-215. Declared siblings revisit only objective/rule families through materially different decisions: ethics conflict management vs public-harm truthfulness, iterative threat-model maintenance vs structure-first modeling, site selection or backup-power common mode vs earlier route diversity, and failback/reconciliation vs alternate-site capacity/failover testing.",
+    "The batch remains excluded from RELEASED_BATCHES.json and the public Pages artifact until the automated gate passes."
+  ]
+}
