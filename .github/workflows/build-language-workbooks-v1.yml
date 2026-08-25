@@ -161,6 +161,7 @@ jobs:
           path: |
             completed/languages/workbooks/v1.0/
             audit/language-workbooks/v1.0/
+            audit/live_csv_attestation.json
             arabic_top1000.csv
             french_top1000.csv
             urdu_top1000.csv
@@ -184,7 +185,8 @@ jobs:
 
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add completed/languages/workbooks/v1.0 audit/language-workbooks/v1.0 \
+          rm -rf scripts/__pycache__
+          git add completed/languages/workbooks/v1.0 audit/language-workbooks/v1.0 audit/live_csv_attestation.json \
             arabic_top1000.csv french_top1000.csv urdu_top1000.csv
           if ! git diff --quiet; then
             echo 'Unexpected unstaged tracked changes after release staging:'
