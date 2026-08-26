@@ -23,7 +23,7 @@ def parse_meta():
     return jsonish(s[len(pre):s.index(marker)],"data-meta.js")
 def chunk(name):
     s=read(ROOT/name); pre="window.CISSP_CHUNKS.push("; suf=");"
-    if not s.startswith(pre) or not s.endswith(suf): raise RuntimeError(f"{name} wrapper invalid")
+    if not s.startswith(pre) or not s.endswith(suf): raise RuntimeError(f"Invalid CISSP chunk wrapper: {name}")
     return jsonish(s[len(pre):-len(suf)],name)
 def parse_coverage():
     s=read(ROOT/"coverage-detail.js"); pre="window.CISSP_COVERAGE="; marker=";\nwindow.CISSP_AI_COVERAGE="
@@ -142,8 +142,9 @@ for d in range(1,9):
 
 mm=M["meta"]; version=release.get("release")
 semantic_release=(semantic_additions or semantic_base).get("release")
+release_audit_date=release.get("last_semantic_audit") or release.get("prepared_on")
 check(version==mm.get("version")==semantic_release,"Release version drift across ledgers")
-check(mm.get("audited_on")=="2026-08-24","Metadata audit date drift")
+check(bool(release_audit_date) and mm.get("audited_on")==release_audit_date,"Metadata audit date drift")
 check(mm.get("objective_count")==62 and mm.get("subtopic_checks")==subtopics and mm.get("ai_coverage_areas")==ai_areas and mm.get("card_count")==cards,"Metadata knowledge counts drift")
 check(mm.get("question_count")==standard and mm.get("bellringer_count")==bell_count and mm.get("question_bank_records")==bank and mm.get("semantic_items_reviewed")==sem_count,"Metadata bank counts drift")
 check(mm.get("source_count")==sources and mm.get("domain_weight_total")==100,"Metadata source/weight drift")
@@ -157,7 +158,7 @@ allowed={"VERIFIED","VERIFIED_AFTER_CORRECTION","VERIFIED_WITH_SOURCE_SCOPE_NOTE
 check(semantic_base.get("audit_date")=="2026-08-24","Semantic base audit date drift")
 check(semantic_base.get("scope",{}).get("total_items")==len(base_sem_items),"Semantic base scope drift")
 if semantic_additions:
-    check(semantic_additions.get("audit_date")=="2026-08-24","Semantic additions audit date drift")
+    check(semantic_additions.get("audit_date")==release_audit_date,"Semantic additions audit date drift")
     check(semantic_additions.get("base_items")==len(base_sem_items),"Semantic additions base count drift")
     check(semantic_additions.get("added_items")==len(add_sem_items),"Semantic additions count drift")
     check(semantic_additions.get("total_items")==sem_count,"Semantic additions total count drift")
