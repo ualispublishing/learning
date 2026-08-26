@@ -1,0 +1,43 @@
+name: Arabic B1 U1 P1 MSA integration
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, reopened, synchronize]
+    paths:
+      - 'reading/tools/integrate_arabic_b1_u01_p01_msa_fix.py'
+      - '.github/workflows/arabic-b1-u01-p01-msa-integration.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arabic-b1-u01-p01-msa-integration-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  integrate:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Integrate adjudicated MSA repair
+        run: python reading/tools/integrate_arabic_b1_u01_p01_msa_fix.py
+      - name: Commit bounded repair and evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reading/arabic/b1/passages.jsonl reading/audit/arabic_b1_u01_p01_msa_fix_integrated_2026-08-23.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Integrate Arabic B1 U1 P1 MSA repair [skip ci]"
+          git fetch origin audit/arabic-b1-c2-final-2026-08-23
+          git rebase origin/audit/arabic-b1-c2-final-2026-08-23
+          git push origin HEAD:audit/arabic-b1-c2-final-2026-08-23

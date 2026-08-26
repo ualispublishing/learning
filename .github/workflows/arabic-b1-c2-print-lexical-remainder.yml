@@ -1,0 +1,23 @@
+name: Arabic B1-C2 print lexical remainder
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, reopened, synchronize]
+    paths:
+      - 'reading/tools/print_arabic_b1_c2_lexical_remainder.py'
+      - '.github/workflows/arabic-b1-c2-print-lexical-remainder.yml'
+
+jobs:
+  print:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python reading/tools/print_arabic_b1_c2_lexical_remainder.py

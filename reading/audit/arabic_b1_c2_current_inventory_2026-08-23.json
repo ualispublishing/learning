@@ -1,0 +1,582 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "scope": "Fresh current-corpus Arabic B1-C2 inventory",
+  "input_blobs": {
+    "b1": "8cb5a2d31c128896e4f9a7952ad4e7aa94823c1a",
+    "b2": "62beb2ff83ad0cbd23d72d8e6bfc5e2e79da54e4",
+    "c1": "c91f5b194394403187e3dc0480a5eab4814e03a5",
+    "c2": "b8e78e2a8dce942e87ef627a8436f1c8571f9d43"
+  },
+  "levels": {
+    "b1": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "new_targets": 81,
+      "hard_errors": 0,
+      "diagnostics": 19,
+      "semantic_candidates": 99,
+      "question_type_counts": {
+        "gist": 60,
+        "literal_detail": 58,
+        "motive": 6,
+        "inference": 71,
+        "vocabulary_in_context": 49,
+        "single_word_definition": 71,
+        "grammar_in_context": 2,
+        "grammar_function": 95,
+        "summary": 25,
+        "contrast": 58,
+        "main_claim": 15,
+        "argument_relation": 2,
+        "synthesis": 38,
+        "cause_effect": 37,
+        "reference_resolution": 13
+      },
+      "word_count": {
+        "min": 225,
+        "max": 293,
+        "mean": 254.8
+      },
+      "sentence_count": {
+        "min": 13,
+        "max": 22,
+        "mean": 16.6
+      }
+    },
+    "b2": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "new_targets": 90,
+      "hard_errors": 0,
+      "diagnostics": 5,
+      "semantic_candidates": 103,
+      "question_type_counts": {
+        "gist": 60,
+        "literal_detail": 60,
+        "inference": 60,
+        "cause_effect": 60,
+        "synthesis": 45,
+        "grammar_function": 101,
+        "contrast": 60,
+        "single_word_definition": 89,
+        "reference_resolution": 1,
+        "vocabulary_in_context": 31,
+        "main_claim": 15,
+        "summary": 15,
+        "argument_relation": 3
+      },
+      "word_count": {
+        "min": 350,
+        "max": 419,
+        "mean": 374.7
+      },
+      "sentence_count": {
+        "min": 18,
+        "max": 32,
+        "mean": 23.0
+      }
+    },
+    "c1": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "new_targets": 84,
+      "hard_errors": 0,
+      "diagnostics": 23,
+      "semantic_candidates": 135,
+      "question_type_counts": {
+        "summary": 60,
+        "literal_detail": 60,
+        "inference": 120,
+        "argument_relation": 63,
+        "synthesis": 60,
+        "contrast": 45,
+        "grammar_function": 72,
+        "single_word_definition": 90,
+        "vocabulary_in_context": 30
+      },
+      "word_count": {
+        "min": 501,
+        "max": 647,
+        "mean": 538.2
+      },
+      "sentence_count": {
+        "min": 26,
+        "max": 50,
+        "mean": 33.1
+      }
+    },
+    "c2": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "new_targets": 90,
+      "hard_errors": 0,
+      "diagnostics": 13,
+      "semantic_candidates": 141,
+      "question_type_counts": {
+        "summary": 60,
+        "literal_detail": 60,
+        "inference": 126,
+        "argument_relation": 60,
+        "synthesis": 60,
+        "contrast": 45,
+        "grammar_function": 69,
+        "single_word_definition": 90,
+        "vocabulary_in_context": 18,
+        "register_style": 12
+      },
+      "word_count": {
+        "min": 709,
+        "max": 977,
+        "mean": 797.0
+      },
+      "sentence_count": {
+        "min": 40,
+        "max": 74,
+        "mean": 54.3
+      }
+    }
+  },
+  "hard_errors": [],
+  "diagnostics": [
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u01-p01",
+      "target_id": "ar-r682",
+      "form": "اختيار",
+      "review_stage": "R3"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u01-p02",
+      "target_id": "ar-r935",
+      "form": "مشاريع",
+      "review_stage": "R3"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u01-p03",
+      "target_id": "ar-r934",
+      "form": "خطوة",
+      "review_stage": "R3"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u01-p05",
+      "target_id": "ar-r682",
+      "form": "اختيار",
+      "review_stage": "R3"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u01-p06",
+      "target_id": "ar-r682",
+      "form": "اختيار",
+      "review_stage": "R4"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u02-p04",
+      "target_id": "ar-r935",
+      "form": "مشاريع",
+      "review_stage": "R4"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u02-p05",
+      "target_id": "ar-r836",
+      "form": "مناسب",
+      "review_stage": "R4"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u03-p02",
+      "target_id": "ar-r935",
+      "form": "مشاريع",
+      "review_stage": "R4"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u03-p03",
+      "target_id": "ar-r1024",
+      "form": "معلومة",
+      "review_stage": "R1"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u03-p03",
+      "target_id": "ar-r1149",
+      "form": "نسخة",
+      "review_stage": "R4"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u03-p05",
+      "target_id": "ar-r1024",
+      "form": "معلومة",
+      "review_stage": "R2"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u03-p06",
+      "target_id": "ar-r1021",
+      "form": "إلكتروني",
+      "review_stage": "R2"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u04-p05",
+      "target_id": "ar-r1024",
+      "form": "معلومة",
+      "review_stage": "R4"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u05-p03",
+      "target_id": "ar-r909",
+      "form": "دليل",
+      "review_stage": "R4"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u06-p06",
+      "target_id": "ar-r1224",
+      "form": "زار",
+      "review_stage": "R2"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u07-p06",
+      "target_id": "ar-r1320",
+      "form": "تلقى",
+      "review_stage": "R2"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u08-p01",
+      "target_id": "ar-r727",
+      "form": "أخبار",
+      "review_stage": "R4"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u08-p06",
+      "target_id": "ar-r1275",
+      "form": "نبأ",
+      "review_stage": "R2"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b1-u10-p04",
+      "target_id": "ar-r1140",
+      "form": "يومي",
+      "review_stage": "R3"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b2-u02-p05",
+      "target_id": "ar-r1453",
+      "form": "ثابت",
+      "review_stage": "R1"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b2-u03-p05",
+      "target_id": "ar-r1468",
+      "form": "معيار",
+      "review_stage": "R3"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b2-u04-p06",
+      "target_id": "ar-r1558",
+      "form": "طبقة",
+      "review_stage": "R2"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b2-u09-p02",
+      "target_id": "ar-r1909",
+      "form": "توصية",
+      "review_stage": "R1"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-b2-u09-p04",
+      "target_id": "ar-r2040",
+      "form": "توازن",
+      "review_stage": "R1"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u01-p05",
+      "target_id": "ar-r2187",
+      "form": "تكرار",
+      "review_stage": "R1"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u01-p06",
+      "target_id": "ar-r2501",
+      "form": "حسبما",
+      "review_stage": "R2"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u02-p03",
+      "target_id": "ar-r2897",
+      "form": "مصداقية",
+      "review_stage": "R2"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u02-p04",
+      "target_id": "ar-r2497",
+      "form": "مقياس",
+      "review_stage": "R4"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u03-p03",
+      "target_id": "ar-r3000",
+      "form": "عتبة",
+      "review_stage": "R2"
+    },
+    {
+      "code": "new_target_no_exact_surface",
+      "passage_id": "ar-c1-u03-p04",
+      "target_id": "ar-r2962",
+      "form": "أطلع",
+      "lemma": "أطلع",
+      "part_of_speech": "verb",
+      "declared": 1
+    },
+    {
+      "code": "new_target_no_exact_surface",
+      "passage_id": "ar-c1-u03-p05",
+      "target_id": "ar-r2991",
+      "form": "أسس",
+      "lemma": "أسس",
+      "part_of_speech": "verb",
+      "declared": 1
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u03-p05",
+      "target_id": "ar-r2900",
+      "form": "حافز",
+      "review_stage": "R4"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u03-p06",
+      "target_id": "ar-r2962",
+      "form": "أطلع",
+      "review_stage": "R2"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u03-p06",
+      "target_id": "ar-r2991",
+      "form": "أسس",
+      "review_stage": "R2"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u04-p02",
+      "target_id": "ar-r1940",
+      "form": "مصطلح",
+      "review_stage": "R1"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u04-p03",
+      "target_id": "ar-r2226",
+      "form": "تنوع",
+      "review_stage": "R1"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u04-p05",
+      "target_id": "ar-r2219",
+      "form": "نثر",
+      "review_stage": "R1"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u06-p01",
+      "target_id": "ar-r2886",
+      "form": "مقصد",
+      "review_stage": "R4"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u07-p02",
+      "target_id": "ar-r2913",
+      "form": "خيط",
+      "review_stage": "R1"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u09-p06",
+      "target_id": "ar-r2923",
+      "form": "خلافة",
+      "review_stage": "R2"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u10-p01",
+      "target_id": "ar-r2496",
+      "form": "ناتج",
+      "review_stage": "R3"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u10-p01",
+      "target_id": "ar-r2751",
+      "form": "ثغرة",
+      "review_stage": "R3"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u10-p01",
+      "target_id": "ar-r2614",
+      "form": "أمثل",
+      "review_stage": "R3"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u10-p01",
+      "target_id": "ar-r2884",
+      "form": "متواضع",
+      "review_stage": "R3"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u10-p02",
+      "target_id": "ar-r2957",
+      "form": "خلاصة",
+      "review_stage": "R3"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u10-p05",
+      "target_id": "ar-r3000",
+      "form": "عتبة",
+      "review_stage": "R3"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c1-u10-p05",
+      "target_id": "ar-r2497",
+      "form": "مقياس",
+      "review_stage": "R3"
+    },
+    {
+      "code": "new_target_no_exact_surface",
+      "passage_id": "ar-c2-u01-p02",
+      "target_id": "ar-r2250",
+      "form": "بساطة",
+      "lemma": "بساطة",
+      "part_of_speech": "noun",
+      "declared": 1
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c2-u01-p02",
+      "target_id": "ar-r2021",
+      "form": "منطق",
+      "review_stage": "R1"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c2-u02-p04",
+      "target_id": "ar-r1988",
+      "form": "نسبي",
+      "review_stage": "R4"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c2-u03-p01",
+      "target_id": "ar-r2250",
+      "form": "بساطة",
+      "review_stage": "R3"
+    },
+    {
+      "code": "new_target_no_exact_surface",
+      "passage_id": "ar-c2-u03-p02",
+      "target_id": "ar-r1955",
+      "form": "كيمياء",
+      "lemma": "كيمياء",
+      "part_of_speech": "noun",
+      "declared": 1
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c2-u03-p03",
+      "target_id": "ar-r2601",
+      "form": "تدريجي",
+      "review_stage": "R4"
+    },
+    {
+      "code": "new_target_no_exact_surface",
+      "passage_id": "ar-c2-u03-p04",
+      "target_id": "ar-r1603",
+      "form": "أثبت",
+      "lemma": "أثبت",
+      "part_of_speech": "verb",
+      "declared": 1
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c2-u03-p06",
+      "target_id": "ar-r1603",
+      "form": "أثبت",
+      "review_stage": "R2"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c2-u03-p06",
+      "target_id": "ar-r1447",
+      "form": "حرارة",
+      "review_stage": "R4"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c2-u05-p02",
+      "target_id": "ar-r2219",
+      "form": "نثر",
+      "review_stage": "R4"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c2-u07-p01",
+      "target_id": "ar-r2520",
+      "form": "ضيافة",
+      "review_stage": "R4"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c2-u07-p02",
+      "target_id": "ar-r2377",
+      "form": "توثيق",
+      "review_stage": "R4"
+    },
+    {
+      "code": "running_text_review_no_exact_surface",
+      "passage_id": "ar-c2-u07-p04",
+      "target_id": "ar-r1879",
+      "form": "مظهر",
+      "review_stage": "R4"
+    }
+  ],
+  "semantic_candidate_count": 478,
+  "quality_promotion": false,
+  "hard_error_count": 0,
+  "diagnostic_count": 60,
+  "status": "PASS_STRUCTURE_SEMANTIC_ADJUDICATION_REQUIRED"
+}
