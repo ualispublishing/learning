@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-23",
+  "scope": "Final deterministic Arabic A1+A2 post-repair validation",
+  "input_blobs": {
+    "a1": "bf7f0a6023b1cb129c9328021892d93cb120fa38",
+    "a2": "90b6f2f334b689200c76b25c3b7b983f89230555"
+  },
+  "stats": {
+    "a1": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "new_targets": 100
+    },
+    "a2": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "new_targets": 79
+    }
+  },
+  "diagnostic_ledger": {
+    "original_diagnostics": 321,
+    "resolved_first_pass": 214,
+    "resolved_second_pass_variants": 41,
+    "removed_false_running_text_reviews": 43,
+    "final_count_repairs": 14,
+    "final_valid_morphology_no_change": 9,
+    "unresolved": 0
+  },
+  "hard_error_count": 15,
+  "hard_errors": [
+    {
+      "code": "removed_false_review_reappeared",
+      "passage_id": "ar-a1-u03-p06",
+      "target_id": "ar-r97"
+    },
+    {
+      "code": "removed_false_review_reappeared",
+      "passage_id": "ar-a1-u04-p04",
+      "target_id": "ar-r99"
+    },
+    {
+      "code": "removed_false_review_reappeared",
+      "passage_id": "ar-a1-u06-p06",
+      "target_id": "ar-r317"
+    },
+    {
+      "code": "removed_false_review_reappeared",
+      "passage_id": "ar-a1-u07-p06",
+      "target_id": "ar-r111"
+    },
+    {
+      "code": "removed_false_review_reappeared",
+      "passage_id": "ar-a1-u08-p06",
+      "target_id": "ar-r397"
+    },
+    {
+      "code": "removed_false_review_reappeared",
+      "passage_id": "ar-a1-u09-p06",
+      "target_id": "ar-r480"
+    },
+    {
+      "code": "removed_false_review_reappeared",
+      "passage_id": "ar-a1-u09-p06",
+      "target_id": "ar-r205"
+    },
+    {
+      "code": "removed_false_review_reappeared",
+      "passage_id": "ar-a1-u10-p06",
+      "target_id": "ar-r249"
+    },
+    {
+      "code": "removed_false_review_reappeared",
+      "passage_id": "ar-a2-u01-p06",
+      "target_id": "ar-r583"
+    },
+    {
+      "code": "removed_false_review_reappeared",
+      "passage_id": "ar-a2-u02-p06",
+      "target_id": "ar-r663"
+    },
+    {
+      "code": "removed_false_review_reappeared",
+      "passage_id": "ar-a2-u02-p06",
+      "target_id": "ar-r648"
+    },
+    {
+      "code": "removed_false_review_reappeared",
+      "passage_id": "ar-a2-u03-p06",
+      "target_id": "ar-r885"
+    },
+    {
+      "code": "removed_false_review_reappeared",
+      "passage_id": "ar-a2-u06-p06",
+      "target_id": "ar-r855"
+    },
+    {
+      "code": "removed_false_review_reappeared",
+      "passage_id": "ar-a2-u09-p06",
+      "target_id": "ar-r1149"
+    },
+    {
+      "code": "removed_false_review_reappeared",
+      "passage_id": "ar-a2-u10-p06",
+      "target_id": "ar-r977"
+    }
+  ],
+  "quality_promotion": false,
+  "status": "FAIL"
+}

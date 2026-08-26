@@ -1,0 +1,43 @@
+name: Arabic A1+A2 final post-linkage validation
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, reopened, synchronize]
+    paths:
+      - 'reading/tools/final_validate_arabic_a1_a2_post_linkage_2026_08_23.py'
+      - '.github/workflows/arabic-a1-a2-final-post-linkage.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arabic-a1-a2-final-post-linkage-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run post-linkage final validation
+        run: python reading/tools/final_validate_arabic_a1_a2_post_linkage_2026_08_23.py
+      - name: Commit final post-linkage evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reading/audit/arabic_a1_a2_final_validation_2026-08-23.json reading/audit/arabic_a1_a2_final_validation_post_linkage_2026-08-23.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Validate Arabic A1/A2 post-linkage at zero unresolved [skip ci]"
+          git fetch origin audit/arabic-a1-a2-integrated-2026-08-23
+          git rebase origin/audit/arabic-a1-a2-integrated-2026-08-23
+          git push origin HEAD:audit/arabic-a1-a2-integrated-2026-08-23
