@@ -1,0 +1,39 @@
+name: Apply Urdu C1 Unit 3 canonicalization
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'reading/tools/apply_urdu_c1_unit03.py'
+      - '.github/workflows/apply-urdu-c1-unit03.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Apply bounded Urdu C1 Unit 3 canonicalization
+        run: python reading/tools/apply_urdu_c1_unit03.py
+      - name: Commit canonical batch and live state
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/urdu/c1/passages.jsonl \
+                  reading/CONTINUATION.json \
+                  reading/STATUS.json \
+                  reading/planning/ACTIVE_GENERATION_PLAN.json \
+                  reading/TASKS.md \
+                  reading/AGENT_HANDOFF_V2.md \
+                  reading/audit/urdu_c1_u03_generation_qa_2026-08-26.json \
+                  reading/STATE_MANIFEST.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Canonicalize Urdu C1 Unit 3 and advance frontier [skip ci]'
+          git fetch origin main
+          git rebase --autostash origin/main
+          git push origin HEAD:main
