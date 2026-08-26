@@ -3,7 +3,7 @@
 Current runtime: **GitHub Pages only**.
 
 ## Current queue
-- **48** candidate-complete, tech-focused prepared applications in the encrypted queue.
+- **47** candidate-complete, tech-focused prepared applications in the encrypted queue.
 - The queue is regenerated from the canonical tracker and includes only records whose current canonical status is `prepared_manual_submission`.
 - A 2026-08-24 quality repair restored 48 incorrectly promoted records to their previously verified states: 24 closed/stale postings and 24 records that still require applicant-specific fields. Those records are not runnable.
 - A live form audit also moved Aquila — Junior Helpdesk Support Technician out of the runnable set because its current application requires applicant demographic selections plus a Human Check.
@@ -11,6 +11,7 @@ Current runtime: **GitHub Pages only**.
 - On 2026-08-25, Cresta Forward Deployed Engineering Intern (AI Agent) and Software Engineer Intern were added after official Greenhouse verification with truthful prepared materials.
 - A second 2026-08-25 audit removed BMO — Business Intelligence Analyst R260023770 after plausible exact official BMO requisition URLs returned HTTP 410 Gone, despite stale third-party boards still showing an August 27 deadline.
 - That stale BMO slot was replaced with the live official Cresta Machine Learning Engineering Intern posting. The verified background directly covers the current-student, Python, TensorFlow/Keras, ML-fundamentals and large-data experimentation requirements; no production RAG/ML-engineer tenure is claimed.
+- On 2026-08-26, Applied Systems Canada — Associate AI Engineer / AI Engineer was removed from candidate-complete status after a live-route audit confirmed that downstream iCIMS questions are gated behind an email/login step and therefore remain unaudited. The role is preserved privately as a manual stretch target rather than treated as automatically ready.
 - Other user-field, user-file, future-consideration, stale, excluded, or otherwise non-runnable statuses are also excluded from the encrypted Pages queue.
 - Queue content is decrypted in the browser from the seeded URL fragment and then stored in local browser storage.
 - The public encrypted payload is minimized to runtime fields; résumé and cover-letter references are reduced to basenames.
