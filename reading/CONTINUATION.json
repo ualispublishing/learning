@@ -69,7 +69,7 @@
     "project_passages": 1080
   },
   "production": {
-    "canonical_passages": 954,
+    "canonical_passages": 960,
     "arabic": {
       "state": "GENERATION_COMPLETE",
       "canonical_passages": 360,
@@ -97,14 +97,15 @@
       "next_generation_level": null
     },
     "urdu": {
-      "state": "B2_GENERATION_IN_PROGRESS",
-      "canonical_passages": 234,
+      "state": "C1_GENERATION_IN_PROGRESS",
+      "canonical_passages": 240,
       "complete_levels": [
         "A1",
         "A2",
-        "B1"
+        "B1",
+        "B2"
       ],
-      "next_generation_level": "B2",
+      "next_generation_level": "C1",
       "a1_canonical_path": "reading/urdu/a1/passages.jsonl",
       "a1_git_blob": "ec0970dc1916ce523dd3320d2f4dca4c7f8bc677",
       "a1_integrity_evidence": "reading/audit/urdu_a1_final_integrity_2026-08-23.json",
@@ -137,8 +138,8 @@
   "active_frontier": {
     "production": {
       "language": "urdu",
-      "level": "B2",
-      "action": "Continue generation-first production from Urdu B2 Unit 10 / sequence 55 using the canonical roadmap and ten-question contract."
+      "level": "C1",
+      "action": "Continue generation-first production from Urdu C1 Unit 1 / sequence 1 using the canonical roadmap and ten-question contract."
     },
     "verification_parallel": [
       "Keep Arabic educator-release remediation open under RELEASE_STATUS.json.",
@@ -155,7 +156,7 @@
   ],
   "exact_next_actions": [
     "Validate the routed state bundle and live canonical counts.",
-    "Use reading/planning/ACTIVE_GENERATION_PLAN.json to start guarded Urdu B2 Unit 10 generation at sequence 55.",
+    "Use reading/planning/ACTIVE_GENERATION_PLAN.json to start guarded Urdu C1 Unit 1 generation at sequence 1.",
     "Keep release/educator verification separate from generation progress."
   ]
 }
