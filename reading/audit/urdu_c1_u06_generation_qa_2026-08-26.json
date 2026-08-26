@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "ur",
+  "cefr": "C1",
+  "unit": 6,
+  "theme": "law, rights, and interpretation",
+  "sequences": [
+    31,
+    32,
+    33,
+    34,
+    35,
+    36
+  ],
+  "generated_passages": 6,
+  "question_contract": {
+    "questions_per_passage": 10,
+    "answers_per_passage": 10,
+    "status": "PASS"
+  },
+  "structural_checks": {
+    "unique_record_ids": "PASS",
+    "sequence_contiguity": "PASS",
+    "unit_alignment": "PASS",
+    "allowed_genres": "PASS",
+    "question_answer_links": "PASS",
+    "target_exposure_min_2": "PASS",
+    "target_first_occurrence_order": "PASS",
+    "context_strategy_schema_enum": "PASS",
+    "source_rank_collision_search": "PASS",
+    "stored_word_counts": "PASS",
+    "controlled_lexicon_rank_check": "PASS",
+    "canonical_frontier_guard": "PASS"
+  },
+  "lexical_targets": [
+    {
+      "id": "ur-rank-1685",
+      "form": "مقدمہ",
+      "source_rank": 1685,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 4
+    },
+    {
+      "id": "ur-rank-1115",
+      "form": "تنازع",
+      "source_rank": 1115,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 3
+    },
+    {
+      "id": "ur-rank-1195",
+      "form": "امتیاز",
+      "source_rank": 1195,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 4
+    },
+    {
+      "id": "ur-rank-1707",
+      "form": "گواہی",
+      "source_rank": 1707,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 5
+    },
+    {
+      "id": "ur-rank-2354",
+      "form": "مجرمانہ",
+      "source_rank": 2354,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 4
+    },
+    {
+      "id": "ur-rank-1128",
+      "form": "اصول",
+      "source_rank": 1128,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 6
+    }
+  ],
+  "lexical_freshness": "PASS",
+  "lexical_sense_notes": [
+    "مقدمہ is used for a legal case/lawsuit before a court or legal forum.",
+    "تنازع is used for a conflict between rights, interests, or claims.",
+    "امتیاز is used for reasoned discernment/distinction between relevant and irrelevant differences, not as a blanket label for discrimination.",
+    "گواہی is used for witness testimony offered as evidence.",
+    "مجرمانہ is used in the criminal-liability sense.",
+    "اصول is used for a fundamental principle guiding rights-sensitive decision-making."
+  ],
+  "genre_cycle": [
+    "case-style explanation",
+    "argument",
+    "commentary",
+    "case-style explanation",
+    "argument",
+    "commentary"
+  ],
+  "passage_roles": [
+    "instructional",
+    "reinforcement",
+    "interleaved",
+    "transfer",
+    "integration",
+    "checkpoint"
+  ],
+  "word_counts": [
+    548,
+    539,
+    516,
+    534,
+    546,
+    539
+  ],
+  "formal_release_audit": "DEFERRED",
+  "release_note": "Generation-stage QA only. This does not mark educator/publication release approval.",
+  "canonicalization_status": "CANONICAL_APPEND_CONFIRMED",
+  "expected_frontier_after_append": {
+    "urdu_c1_passages": 36,
+    "next_sequence": 37,
+    "next_unit": 7,
+    "overall_reading_count": 996
+  },
+  "canonicalized_on": "2026-08-26",
+  "canonical_path": "reading/urdu/c1/passages.jsonl",
+  "canonical_passage_count": 36,
+  "project_canonical_passages": 996,
+  "urdu_canonical_passages": 276,
+  "next_frontier": "Urdu C1 Unit 7 / sequence 37"
+}
