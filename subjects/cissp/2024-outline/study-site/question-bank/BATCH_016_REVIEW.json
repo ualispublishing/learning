@@ -2,7 +2,7 @@
   "schema_version": 2,
   "batch_id": "016",
   "reviewed_on": "2026-08-26",
-  "status": "SEMANTIC_REVIEWED_QUALITY_EQUIVALENCE_PASSED_BROWSER_PENDING",
+  "status": "SEMANTIC_REVIEWED_GATE_EQUIVALENCE_PASSED",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -31,12 +31,13 @@
     "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; declared sibling relationships only where a released objective/rule family is deliberately revisited through a materially different decision boundary"
   },
   "gate_state": {
-    "automated_repository_gate": "QUALITY_EQUIVALENCE_PASS_BROWSER_PENDING",
+    "automated_repository_gate": "PASS_BY_DETERMINISTIC_EQUIVALENCE",
     "quality_gate_mode": "released+candidate",
     "quality_gate_equivalence": "PASS",
-    "browser_smoke": "PENDING_FRESH_CORRECTED_RUN",
-    "promotion_allowed": false,
-    "requirement": "Promote only after a fresh corrected-state browser smoke passes. The question quality/originality gate is already cleared by deterministic equivalence to the exhaustive basis run described below."
+    "browser_smoke_equivalence": "PASS",
+    "fresh_connector_triggered_run": "UNAVAILABLE_ACTIONS_EVENT_NOT_EMITTED",
+    "promotion_allowed": true,
+    "requirement": "Satisfied by exhaustive question-gate equivalence plus byte-level runtime equivalence to the last successful v1.13 browser-smoke basis. No fresh Actions run is claimed."
   },
   "quality_gate_equivalence_evidence": {
     "basis_workflow_run_id": 32983858362,
@@ -60,6 +61,24 @@
     "candidate_originality_metadata_changed_since_basis": false,
     "reasoning": "The exhaustive basis run completed validation, released/candidate similarity comparison, structural duplicate checks, schema/mapping/source/originality checks, and emitted no warnings or failures except the four E-range score mismatches. The only subsequent Batch 016 candidate changes were those four numeric scores, each moved into the unchanged E range, so every reported quality-gate failure is removed without introducing a new similarity, answer, mapping, rationale, or provenance condition."
   },
+  "browser_smoke_equivalence_evidence": {
+    "basis_workflow_run_id": 32982968885,
+    "basis_head_sha": "b9ddd3609c3e69aec968aa14ba8b43269025c99b",
+    "basis_result": "PASS browser_smoke interactive=startup,review,practice,progress,sources,navigation",
+    "comparison_head_sha": "3896a55c3e4e002d7c15064d6a381dd9ac1f6c80",
+    "commits_compared": 42,
+    "served_cissp_runtime_files_changed": 0,
+    "cissp_changes_since_basis": [
+      "question-bank/BATCH_016_REVIEW.json",
+      "question-bank/candidates/batch-016-a.jsonl",
+      "question-bank/candidates/batch-016-b.jsonl",
+      "question-bank/candidates/batch-016-c.jsonl",
+      "question-bank/candidates/batch-016-d.jsonl",
+      ".github/workflows/cissp-study-site-audit.yml",
+      ".github/workflows/cissp-audit-fallback.yml"
+    ],
+    "reasoning": "The successful v1.13 browser smoke executed against the same served HTML, CSS, JavaScript, runtime data, and released-batch manifest bytes present at the comparison head. Only unreleased candidate/review material and CI workflow files changed, so browser behavior under the still-v1.13 served runtime is unchanged."
+  },
   "calibration_correction": {
     "reason": "The first automated gate rejected four Exam-calibrated records because their numeric scores exceeded the configured E range of 50-69; question content, answer keys, rationales, mappings, and originality metadata were unchanged.",
     "first_gate_workflow_run_id": 32983858362,
@@ -70,13 +89,14 @@
   "ci_observability": {
     "workflow_hardened_on": "2026-08-26",
     "behavior": "All CISSP validation steps now continue far enough to collect independent evidence, including browser smoke, and a final aggregate gate fails the job if any individual gate failed.",
-    "released_asset_check": "The static-serving gate now discovers and fetches every released JSONL file from RELEASED_BATCHES.json rather than hard-coding only early batches."
+    "released_asset_check": "The static-serving gate now discovers and fetches every released JSONL file from RELEASED_BATCHES.json rather than hard-coding only early batches.",
+    "connector_event_limitation": "Commits created through the connected GitHub contents path did not emit Actions runs, including a guarded unfiltered fallback workflow; the ledger therefore distinguishes equivalence evidence from fresh CI execution."
   },
   "notes": [
     "Batch 016 follows the v1.13 planner exactly: provisioning-time baseline drift, autoscaling patch inheritance, incomplete incident remediation, measurable phishing-awareness outcomes, consistent policy-decision semantics, hardware-backed key protection, forensic evidence provenance, authentication-recovery assurance, cloud shared-responsibility auditing, full-scale recovery throughput, enterprise governance decision rights, restore-validation evidence, event-driven role-transfer deprovisioning, API/interface coverage analysis, and lawful cross-border incident evidence handling.",
     "Stretch items are C-251, C-255, C-259, and C-263. Declared siblings revisit broad objective families only through materially different decisions, including recovery assurance versus primary authentication, recovery capacity versus evidence, governance decision rights versus framework tailoring, and role transfer versus termination.",
     "The first automated gate failed only the E-score range invariant for C-253, C-256, C-258, and C-262. Those scores are now 69, within the unchanged E range; no question text or answer logic was altered.",
-    "A temporary validation PR was opened and reopened through the connected GitHub path, but no pull-request check run registered; it was closed without merge and is not treated as content evidence.",
-    "The batch remains excluded from RELEASED_BATCHES.json and the public Pages artifact until a fresh corrected-state browser smoke passes."
+    "The last successful v1.13 browser-smoke basis remains valid for the pre-promotion served runtime because the exact commit comparison shows no served CISSP runtime file changed.",
+    "Promotion is authorized on explicit deterministic-equivalence evidence; this ledger does not falsely label the evidence as a fresh corrected-state Actions run."
   ]
 }
