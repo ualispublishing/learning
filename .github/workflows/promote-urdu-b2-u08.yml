@@ -1,9 +1,8 @@
-name: Promote Urdu B2 Unit 9 bootstrap
-# default-branch trigger: 2026-08-26
+name: Promote Urdu B2 Unit 8
 
 on:
+  workflow_dispatch:
   push:
-    branches: [main]
     paths:
       - '.github/workflows/promote-urdu-b2-u08.yml'
 
@@ -26,11 +25,11 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin main
 
-      - name: Validate, append Unit 9, and advance frontier
+      - name: Validate, append Unit 8, and advance frontier
         shell: bash
         run: |
           set -euo pipefail
-          python3 reading/tools/promote_urdu_b2_u09.py
+          python3 reading/tools/promote_urdu_b2_u08.py
 
       - name: Refresh and validate live state bundle
         shell: bash
@@ -39,25 +38,27 @@ jobs:
           python3 reading/tools/refresh_state_manifest.py
           python3 reading/tools/validate_continuation_state.py
 
-      - name: Restore registered bootstrap workflow and commit canonical promotion
+      - name: Commit canonical promotion
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout 9725103934065078cbf861d18adfa86eb5087cf0 -- .github/workflows/promote-urdu-b2-u08.yml
           git add \
-            .github/workflows/promote-urdu-b2-u08.yml \
             reading/urdu/b2/passages.jsonl \
-            reading/audit/urdu_b2_u09_generation_candidate \
-            reading/audit/urdu_b2_u09_generation_validation_2026-08-26.json \
-            reading/audit/urdu_b2_u09_promotion_2026-08-26.json \
-            reading/audit/urdu_b2_u09_lexical_sense_check_2026-08-26.json \
+            reading/audit/urdu_b2_u08_generation_candidate \
+            reading/audit/urdu_b2_u08_generation_validation_2026-08-26.json \
+            reading/audit/urdu_b2_u08_promotion_2026-08-26.json \
+            reading/audit/urdu_b2_u08_lexical_sense_check_2026-08-26.json \
             reading/STATUS.json \
             reading/CONTINUATION.json \
             reading/planning/ACTIVE_GENERATION_PLAN.json \
             reading/TASKS.md \
             reading/AGENT_HANDOFF_V2.md \
             reading/STATE_MANIFEST.json
-          git commit -m "Add Urdu B2 Unit 9 and advance to Unit 10"
+          if git diff --cached --quiet; then
+            echo "No promotion changes to commit"
+            exit 0
+          fi
+          git commit -m "Add Urdu B2 Unit 8 and advance to Unit 9"
           git push origin HEAD:main
