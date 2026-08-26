@@ -1,12 +1,12 @@
 {
-  "schema_version": 18,
+  "schema_version": 19,
   "updated": "2026-08-26",
-  "release": "1.14.0",
+  "release": "1.15.0",
   "released": {
-    "bank_records": 320,
-    "standard_mcq": 319,
+    "bank_records": 336,
+    "standard_mcq": 335,
     "bellringer_cases": 1,
-    "difficulty_distribution": {"F":41,"E":213,"S":65,"B":1},
+    "difficulty_distribution": {"F":41,"E":225,"S":69,"B":1},
     "base_classification_manifest": "RELEASED_QUESTION_CLASSIFICATION.json",
     "released_batch_manifest": "RELEASED_BATCHES.json"
   },
@@ -22,17 +22,18 @@
     "013": {"status":"RELEASED_V1_11_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_013_REVIEW.json","quality_gate_workflow_run_id":32881051384,"quality_gate_warnings":0},
     "014": {"status":"RELEASED_V1_12_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_014_REVIEW.json","quality_gate_workflow_run_id":32882176999,"quality_gate_warnings":0},
     "015": {"status":"RELEASED_V1_13_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_015_REVIEW.json","quality_gate_workflow_run_id":32883157593,"quality_gate_warnings":0},
-    "016": {"status":"RELEASED_V1_14_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_016_REVIEW.json","quality_gate_evidence_type":"deterministic-equivalence","quality_gate_basis_workflow_run_id":32983858362,"browser_evidence_type":"runtime-byte-equivalence","browser_basis_workflow_run_id":32982968885,"quality_gate_warnings":0}
+    "016": {"status":"RELEASED_V1_14_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_016_REVIEW.json","quality_gate_evidence_type":"deterministic-equivalence","quality_gate_basis_workflow_run_id":32983858362,"browser_evidence_type":"runtime-byte-equivalence","browser_basis_workflow_run_id":32982968885,"quality_gate_warnings":0,"explicit_subtopic_tags_after":285},
+    "017": {"status":"RELEASED_V1_15_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"primary_domain_distribution":{"1":1,"2":4,"3":1,"4":2,"5":1,"6":1,"7":1,"8":5},"review":"BATCH_017_REVIEW.json","quality_gate_workflow_run_id":32995967102,"quality_gate_warnings":0,"logical_batch_mix":"PASS","browser_smoke":"PASS","explicit_subtopic_tags_after":295}
   },
-  "candidate_batches": {
-    "017": {"status":"SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"primary_domain_distribution":{"1":1,"2":4,"3":1,"4":2,"5":1,"6":1,"7":1,"8":5},"review":"BATCH_017_REVIEW.json","promotion_allowed":false}
-  },
-  "pending_candidate_summary": {"records":16,"standard_mcq":16,"bellringer_cases":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0}},
+  "candidate_batches": {},
+  "pending_candidate_summary": {"records":0,"standard_mcq":0,"bellringer_cases":0,"difficulty_distribution":{"F":0,"E":0,"S":0,"B":0}},
   "coverage": {
     "numbered_objectives_with_standard_mcq_exposure": "62/62",
     "mapped_subtopics": 344,
-    "explicit_enriched_subtopic_exposure": 280,
-    "boundary": "280 is the last directly executed released-only coverage count from v1.13 and is retained as a conservative verified floor. The v1.14 release and unreleased Batch 017 may increase explicit tag exposure; recompute before claiming a higher exact figure. Objective/subtopic exposure is an authoring coverage metric, not evidence of learner mastery."
+    "explicit_enriched_subtopic_exposure": 295,
+    "explicit_enriched_subtopic_unexposed": 49,
+    "measurement_workflow_run_id": 32995967102,
+    "boundary": "295/344 is the directly executed released+Batch-017 candidate measurement immediately before promotion. Because v1.15 promotes those exact candidate files unchanged, it is the v1.15 enriched-metadata exposure count; a released-only post-promotion audit must still pass before public deployment is considered verified. Objective/subtopic exposure is an authoring coverage metric, not evidence of learner mastery."
   },
   "authoring_guardrails": {
     "minimum_exam_calibrated_share_for_batch_16_plus": 0.50,
@@ -41,13 +42,19 @@
     "objective_planning_minimum": {"F":1,"E":4,"S":1}
   },
   "long_term_target": {"bank_records":800,"F":120,"E":480,"S":160,"B":40},
-  "remaining_to_target": {"bank_records":480,"F":79,"E":267,"S":95,"B":39},
-  "remaining_if_batch_017_promotes": {"bank_records":464,"F":79,"E":255,"S":91,"B":39},
+  "remaining_to_target": {"bank_records":464,"F":79,"E":255,"S":91,"B":39},
+  "next_planned_batch": {
+    "basis_workflow_run_id": 32995967102,
+    "size": 16,
+    "difficulty_target": {"E":12,"S":4},
+    "primary_domain_distribution": {"1":5,"2":1,"3":4,"5":1,"7":4,"8":1},
+    "objective_targets": ["8.1","2.6","1.5","3.3","1.1","1.10","1.11","3.6","1.12","3.8","3.9","5.6","7.11","7.13","7.14","7.15"],
+    "boundary": "This is an authoring recommendation from the executable planner, not a release authorization or psychometric claim."
+  },
   "next_priority": [
-    "Run the full released+candidate quality/originality gate and logical-batch composition gate against Batch 017 before any v1.15 promotion.",
-    "Recompute released-only and released+candidate enriched subtopic exposure on the next executable CISSP audit before publishing a higher exact coverage figure.",
-    "Keep Batch 017 unreleased until deterministic knowledge, syntax/static, and browser smoke checks also pass on the candidate-containing state.",
-    "After Batch 017 is resolved, use the executable v1.14/v1.15 planner state rather than manually guessing the next objective slate.",
+    "Run the complete released-only v1.15 audit after promotion and require all deterministic, originality, mix, planning, syntax, rationale, static, and browser gates to pass.",
+    "Use the recorded executable planner slate for Batch 018, selecting materially new scenario families and thinner subtopics within the targeted objectives.",
+    "Keep each future candidate behind semantic review plus the repository-wide originality/duplicate and logical-batch gates before release.",
     "Add Bellringers separately and sparsely; they are integrative drills, not imitations of live CISSP items.",
     "Use confidence, chosen distractor, response time, and spaced repeat performance before making empirical difficulty claims."
   ]
