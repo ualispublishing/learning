@@ -2,7 +2,7 @@
   "schema_version": 3,
   "batch_id": "021",
   "reviewed_on": "2026-08-26",
-  "status": "SEMANTIC_REVIEWED_GATE_PASSED",
+  "status": "SEMANTIC_REVIEWED_RELEASED_V1_19_VERIFIED",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -34,17 +34,6 @@
     "objective_targets": ["7.8","7.6","2.3","7.13","1.7","3.4","5.4","7.14","7.1","5.2","6.5","1.6","6.3","5.5","6.2","3.2"],
     "guardrails": "E12/S4; max primary-domain count 5/16; 16 distinct decision points; answer positions 4/4/4/4; original-from-public-scope only; no external question seeds; canonical enriched-subtopic labels only"
   },
-  "current_source_check": {
-    "isc2_outline_effective_date": "2024-04-15",
-    "isc2_outline_rechecked_on": "2026-08-26",
-    "isc2_outline_status": "Current ISC2 CISSP Certification Exam Outline page remains the public scope authority used by the released v1.18 corpus.",
-    "nist_800_34_rev1_update1": "registered contingency-planning, BIA, recovery and exercise reference",
-    "nist_800_61_rev3": "registered current incident-response risk-management reference",
-    "nist_800_63_4": "registered current digital identity guidance",
-    "nist_800_86": "registered forensic evidence reference",
-    "nist_800_115": "registered security testing and assessment reference",
-    "nist_800_53_rev5_update1": "registered supporting control catalog"
-  },
   "gate_state": {
     "candidate_validation_pr": 80,
     "pr_event_registration": "NOT_REGISTERED",
@@ -58,7 +47,6 @@
     "candidate_records": 16,
     "quality_gate_warnings": 0,
     "logical_batch_mix": "PASS",
-    "logical_batch_mix_details": {"exam_calibrated_share":0.75,"bellringer_share":0.0,"largest_primary_domain":"7","largest_primary_domain_records":5,"largest_primary_domain_share":0.3125},
     "deterministic_knowledge_audit": "PASS",
     "planning_gate": "PASS",
     "javascript_syntax": "PASS",
@@ -82,26 +70,44 @@
     "released_only": true,
     "unreleased_candidate_urls_required_404": true
   },
+  "release_verification": {
+    "release_version": "1.19.0",
+    "released_state_pr_number": 81,
+    "released_state_pr_audit": "NOT_REGISTERED",
+    "release_validation_evidence_type": "exact-post-merge-main-and-pages-compensating-control",
+    "release_merge_commit_sha": "c32f032e152f4b395710d3680e5a30eba08193bf",
+    "post_merge_main_audit_workflow_run_id": 33024504766,
+    "post_merge_main_audit": "PASS",
+    "post_merge_quality_gate_warnings": 0,
+    "pages_workflow_run_id": 33024504778,
+    "public_runtime": "PASS",
+    "public_runtime_version": "1.19.0",
+    "public_runtime_standard_questions": 399,
+    "public_runtime_manifest_released_records": 344,
+    "public_runtime_bellringers": 1,
+    "public_runtime_released_only": true,
+    "public_runtime_sha": "c32f032e152f4b395710d3680e5a30eba08193bf"
+  },
   "coverage_effect": {
     "explicit_subtopic_tags_before": 296,
     "explicit_subtopic_tags_after_candidate": 300,
+    "explicit_subtopic_tags_after_release": 300,
     "total_mapped_subtopics": 344,
     "candidate_state_measured_in_workflow_run_id": 33023723634,
-    "boundary": "Batch 021 increases distinct explicit enriched-subtopic exposure from 296 to 300 of 344 while also adding scenario depth. This is an authoring metadata metric, not a learner-mastery claim."
+    "released_state_measured_in_workflow_run_id": 33024504766,
+    "boundary": "Batch 021 increases distinct explicit enriched-subtopic exposure from 296 to 300 of 344. This is an authoring metadata metric, not a learner-mastery claim."
   },
   "next_planner_slate_if_promoted": {
-    "basis_workflow_run_id": 33023723634,
+    "basis_workflow_run_id": 33024504766,
     "difficulty_distribution": {"E":12,"S":4},
     "primary_domain_distribution": {"1":5,"2":5,"3":1,"7":4,"8":1},
     "objective_targets": ["7.10","2.1","2.2","7.4","2.5","8.1","2.4","7.5","2.6","1.1","1.10","7.9","1.11","1.12","1.2","3.5"]
   },
   "notes": [
-    "Batch 021 follows the exact released-only v1.18 planner slate from final main audit 33018954386 and keeps D7 at 5/16, below the configured 35% primary-domain cap.",
-    "The scenarios test risk-based vulnerability prioritization, controlled ransomware recovery, accountable ownership of orphaned cloud information, cross-functional continuity exercises, peak-period BIA effects, TPM measured-boot key release, attribute/risk-aware authorization, internal physical zoning, volatile container evidence, strong authenticator recovery, audit independence, document hierarchy conflicts, restore-test evidence, service-account lifecycle governance, negative multi-tenant API authorization testing, and controlled Bell-LaPadula declassification.",
-    "Stretch items are C-331, C-335, C-339, and C-343. The remaining twelve are Exam-calibrated and all numeric scores are within configured tier ranges.",
-    "GitHub did not register the declared CISSP pull_request workflow for PR #80 or its synchronize commit on this connector-created lineage. Batch 021 was therefore merged only as unreleased candidate material and validated by exact post-merge main audit 33023723634, which passed the released+candidate originality gate with zero warnings plus every remaining CISSP gate.",
-    "Pages run 33023723631 independently kept the public site on released-only v1.18.0 and required all unreleased candidate URLs, including Batch 021, to return 404 before succeeding.",
-    "Promotion still requires a separate v1.19 release-state synchronization and post-promotion audit/Pages verification; this candidate validation does not itself release Batch 021.",
+    "Batch 021 follows the exact released-only v1.18 planner slate and stays below the configured 35% primary-domain cap.",
+    "GitHub did not register the declared CISSP pull_request workflow for Batch 021 PR #80 or release PR #81 on this connector-created lineage; that limitation is explicitly recorded rather than hidden.",
+    "Exact candidate-inclusive main audit 33023723634 passed with zero originality warnings, and Pages 33023723631 proved Batch 021 remained excluded before promotion.",
+    "After v1.19 promotion, exact merge SHA c32f032e152f4b395710d3680e5a30eba08193bf passed comprehensive main audit 33024504766 and Pages 33024504778 verified the live released-only v1.19 runtime with 399 standard questions, 344 manifest records, and 1 Bellringer.",
     "Authored difficulty is an internal calibration scale and does not claim ISC2 psychometric equivalence or reproduce live exam items."
   ]
 }
