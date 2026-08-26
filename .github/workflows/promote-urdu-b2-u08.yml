@@ -2,6 +2,7 @@ name: Promote Urdu B2 Unit 9 bootstrap
 
 on:
   push:
+    branches: [main]
     paths:
       - '.github/workflows/promote-urdu-b2-u08.yml'
 
@@ -43,7 +44,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout origin/main -- .github/workflows/promote-urdu-b2-u08.yml
+          git checkout 9725103934065078cbf861d18adfa86eb5087cf0 -- .github/workflows/promote-urdu-b2-u08.yml
           git add \
             .github/workflows/promote-urdu-b2-u08.yml \
             reading/urdu/b2/passages.jsonl \
