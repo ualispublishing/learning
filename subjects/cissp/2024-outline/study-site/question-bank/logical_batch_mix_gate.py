@@ -39,22 +39,21 @@ def validate(name: str, records: list[dict]) -> list[str]:
     if n < 16:
         return errors
 
-    e_count = sum(r.get("difficulty_tier") == "E" for r in records)
-    if e_count / n < 0.50:
-        errors.append(f"{name}: E items {e_count}/{n} below 50% minimum")
+    dist = collections.Counter(r.get("difficulty_tier") for r in records)
+    if dist["E"] < n * 0.50:
+        errors.append(f"{name}: Exam-calibrated items must be >=50% of the batch ({dist['E']}/{n})")
+    if dist["B"] > n * 0.10:
+        errors.append(f"{name}: Bellringer-tier items exceed 10% of the batch ({dist['B']}/{n})")
 
-    bell_count = sum(r.get("format") == "bellringer" for r in records)
-    if bell_count / n > 0.10:
-        errors.append(f"{name}: Bellringers {bell_count}/{n} exceed 10% maximum")
-
-    standard = [r for r in records if r.get("format") != "bellringer"]
+    standard = [r for r in records if r.get("format", "mcq") == "mcq"]
     if standard:
         counts = collections.Counter(r.get("domain_primary") for r in standard)
         domain, count = counts.most_common(1)[0]
         cap = math.floor(len(standard) * 0.35)
         if count > cap:
             errors.append(
-                f"{name}: primary domain {domain} owns {count}/{len(standard)} standard items; maximum is {cap} (35%)"
+                f"{name}: D{domain} is {count}/{len(standard)} primary-domain items "
+                f"({count/len(standard):.1%}); max allowed is 35%"
             )
     return errors
 
