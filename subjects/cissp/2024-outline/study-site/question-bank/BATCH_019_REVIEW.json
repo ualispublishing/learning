@@ -1,0 +1,87 @@
+{
+  "schema_version": 3,
+  "batch_id": "019",
+  "reviewed_on": "2026-08-26",
+  "status": "SEMANTIC_REVIEWED_GATE_PASSED",
+  "records": 16,
+  "standard_mcq": 16,
+  "bellringers": 0,
+  "files": [
+    "question-bank/candidates/batch-019-a.jsonl",
+    "question-bank/candidates/batch-019-b.jsonl",
+    "question-bank/candidates/batch-019-c.jsonl",
+    "question-bank/candidates/batch-019-d.jsonl"
+  ],
+  "difficulty_distribution": {"F":0,"E":12,"S":4,"B":0},
+  "primary_domain_distribution": {"1":5,"2":0,"3":5,"4":1,"5":1,"6":0,"7":4,"8":0},
+  "reviewed_ids": ["C-296","C-297","C-298","C-299","C-300","C-301","C-302","C-303","C-304","C-305","C-306","C-307","C-308","C-309","C-310","C-311"],
+  "semantic_review": {
+    "semantic_reviewed_records": 16,
+    "answer_key_conflicts": 0,
+    "objective_mapping_conflicts": 0,
+    "source_mapping_conflicts": 0,
+    "material_factual_errors_remaining": 0,
+    "four_option_rationales_complete": true,
+    "originality_provenance_complete": true,
+    "external_question_seeds_used": 0,
+    "answer_position_distribution": {"0":4,"1":4,"2":4,"3":4}
+  },
+  "authoring_focus": {
+    "planner_basis_workflow_run_id": 33000149524,
+    "planner_basis_release": "1.16.0",
+    "planner_measured_explicit_subtopic_exposure": "296/344",
+    "planner_unexposed_enriched_subtopics": 48,
+    "objective_targets": ["1.2","1.3","1.4","1.5","1.8","7.4","7.5","7.7","7.9","3.10","3.3","3.8","3.6","4.3","5.6","3.9"],
+    "guardrails": "E12/S4; max primary-domain count 5/16; 16 distinct decision points; answer positions 4/4/4/4; original-from-public-scope only; no external question seeds; canonical enriched-subtopic labels only"
+  },
+  "current_source_check": {
+    "isc2_outline_effective_date": "2024-04-15",
+    "isc2_outline_rechecked_on": "2026-08-26",
+    "isc2_outline_status": "Current ISC2 CISSP Certification Exam Outline page still identifies April 15, 2024 as the effective date.",
+    "nist_800_53_rev5_update1": "registered current supporting control catalog; source page rechecked 2026-08-26",
+    "nist_800_86": "registered forensic and investigation reference",
+    "nist_csf2": "registered cybersecurity risk and governance reference"
+  },
+  "gate_state": {
+    "automated_repository_gate": "PASS",
+    "workflow_run_id": 33002790298,
+    "workflow_head_sha": "4d9955487bea144f6546f961e97f8f53cacf59fe",
+    "quality_gate_mode": "released+candidate",
+    "released_mcq_compared": 351,
+    "released_bellringers_compared": 1,
+    "candidate_records": 16,
+    "quality_gate_warnings": 0,
+    "logical_batch_mix": "PASS",
+    "logical_batch_mix_details": {"exam_calibrated_share":0.75,"bellringer_share":0.0,"largest_primary_domain":"1_and_3","largest_primary_domain_records":5,"largest_primary_domain_share":0.3125},
+    "deterministic_knowledge_audit": "PASS",
+    "planning_gate": "PASS",
+    "javascript_syntax": "PASS",
+    "legacy_rationales": "PASS",
+    "static_asset_serving": "PASS",
+    "browser_smoke": "PASS",
+    "browser_smoke_workflows": ["startup","review","practice","progress","sources","navigation"],
+    "aggregate_gate": "PASS",
+    "promotion_allowed": true
+  },
+  "coverage_effect": {
+    "explicit_subtopic_tags_before": 296,
+    "explicit_subtopic_tags_after_candidate": 296,
+    "total_mapped_subtopics": 344,
+    "candidate_state_measured_in_workflow_run_id": 33002790298,
+    "boundary": "Batch 019 adds depth to already exposed enriched tags; it does not increase the explicit tag-count metric. That does not imply zero knowledge gain because the metric counts distinct tag labels rather than scenario depth."
+  },
+  "next_planner_slate_if_promoted": {
+    "basis_workflow_run_id": 33002790298,
+    "difficulty_distribution": {"E":12,"S":4},
+    "primary_domain_distribution": {"1":2,"2":1,"3":3,"5":2,"6":2,"7":5,"8":1},
+    "objective_targets": ["7.12","7.15","7.3","7.11","7.7","3.1","6.1","2.3","6.4","8.4","1.6","1.7","3.2","3.7","5.3","5.4"]
+  },
+  "notes": [
+    "Batch 019 follows the released v1.16 planner slate from main audit 33000149524 and keeps both D1 and D3 at the 5/16 maximum rather than exceeding the 35% cap.",
+    "The scenarios test independently rooted software authenticity, post-acquisition governance, cross-border forensic processing, civil-litigation preservation, personnel transfers, privileged operations separation, removable-media custody, honeypot containment, emergency change control, system retirement, requirements-to-control traceability, multi-tenant facility design, CA-key compromise, third-party remote administration, workload-authenticator lifecycle, and common-mode utility failure.",
+    "Stretch items are C-299, C-303, C-307, and C-311. The remaining twelve are Exam-calibrated and all numeric scores are within configured tier ranges.",
+    "Fresh workflow run 33002790298 passed the repository-wide quality/originality gate with zero warnings, logical batch composition, deterministic knowledge audit, coverage/planning, JavaScript syntax, legacy rationale integrity, static asset serving, interactive browser smoke, and final aggregate enforcement.",
+    "Because this evidence-recording commit changes the exact candidate head, it must itself pass the full PR audit before merge; promotion_allowed records the substantive candidate result, not permission to bypass exact-head revalidation.",
+    "Authored difficulty is an internal calibration scale and does not claim ISC2 psychometric equivalence or reproduce live exam items."
+  ]
+}
