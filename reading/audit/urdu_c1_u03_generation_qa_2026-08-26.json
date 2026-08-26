@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "ur",
+  "cefr": "C1",
+  "unit": 3,
+  "theme": "institutions and incentives",
+  "sequences": [13,14,15,16,17,18],
+  "generated_passages": 6,
+  "question_contract": {"questions_per_passage":10,"answers_per_passage":10,"status":"PASS"},
+  "structural_checks": {
+    "unique_record_ids":"PASS",
+    "sequence_contiguity":"PASS",
+    "unit_alignment":"PASS",
+    "allowed_genres":"PASS",
+    "question_answer_links":"PASS",
+    "target_exposure_min_2":"PASS",
+    "context_strategy_schema_enum":"PASS"
+  },
+  "lexical_targets": [
+    {"id":"ur-rank-1777","form":"ترغیب","source_rank":1777,"source_lexicon":"urdu_top3000.csv","prior_c1_target_collision":false,"exposures_in_text":3},
+    {"id":"ur-rank-1706","form":"ضابطہ","source_rank":1706,"source_lexicon":"urdu_top3000.csv","prior_c1_target_collision":false,"exposures_in_text":5},
+    {"id":"ur-rank-2167","form":"شفافیت","source_rank":2167,"source_lexicon":"urdu_top3000.csv","prior_c1_target_collision":false,"exposures_in_text":3},
+    {"id":"ur-rank-1548","form":"جرمانہ","source_rank":1548,"source_lexicon":"urdu_top3000.csv","prior_c1_target_collision":false,"exposures_in_text":4},
+    {"id":"ur-rank-1782","form":"رعایت","source_rank":1782,"source_lexicon":"urdu_top3000.csv","prior_c1_target_collision":false,"exposures_in_text":5},
+    {"id":"ur-rank-1013","form":"پابندی","source_rank":1013,"source_lexicon":"urdu_top3000.csv","prior_c1_target_collision":false,"exposures_in_text":5}
+  ],
+  "lexical_freshness":"PASS",
+  "genre_cycle":["analysis","commentary","policy note","analysis","commentary","policy note"],
+  "passage_roles":["instructional","reinforcement","interleaved","transfer","integration","checkpoint"],
+  "word_counts":[490,478,459,419,425,542],
+  "formal_release_audit":"DEFERRED",
+  "release_note":"Generation-stage QA only. This does not mark educator/publication release approval.",
+  "canonicalization_status":"CANDIDATE_READY_FOR_APPEND",
+  "expected_frontier_after_append":{"urdu_c1_passages":18,"next_sequence":19,"next_unit":4,"overall_reading_count":978}
+}
