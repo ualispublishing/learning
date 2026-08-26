@@ -18,7 +18,7 @@ permissions:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 7
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v5
@@ -27,24 +27,43 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+
       - name: Run deterministic knowledge audit
+        id: knowledge
+        continue-on-error: true
         working-directory: subjects/cissp/2024-outline/study-site
         run: python audit.py
+
       - name: Run question originality and duplicate gate
+        id: quality
+        if: always()
+        continue-on-error: true
         working-directory: subjects/cissp/2024-outline/study-site
         run: python question-bank/quality_gate.py
+
       - name: Generate question-bank coverage and next-batch plans
+        id: planning
+        if: always()
+        continue-on-error: true
         working-directory: subjects/cissp/2024-outline/study-site
         run: |
           python question-bank/coverage_report.py --released-only >/tmp/cissp-released-coverage.json
           python question-bank/coverage_report.py --human
           python question-bank/batch_planner.py --human
+
       - name: Check JavaScript syntax
+        id: syntax
+        if: always()
+        continue-on-error: true
         working-directory: subjects/cissp/2024-outline/study-site
         run: |
           node --check data-meta.js
           for f in data-d{1..8}.js data-ai.js data-precision.js coverage-detail.js data-question-calibration.js legacy-rationales.js keyboard-shortcuts.js bootstrap.js app.js enhancements.js state-ui-bridge.js product-polish.js; do node --check "$f"; done
+
       - name: Verify legacy option-rationale coverage
+        id: rationales
+        if: always()
+        continue-on-error: true
         working-directory: subjects/cissp/2024-outline/study-site
         run: |
           node <<'NODE'
@@ -60,16 +79,58 @@ jobs:
           }
           console.log('PASS legacy_rationales=56 option_rationales=224');
           NODE
+
       - name: Verify static site serves all critical assets
+        id: static
+        if: always()
+        continue-on-error: true
         working-directory: subjects/cissp/2024-outline/study-site
         run: |
           python -m http.server 8765 >/tmp/cissp-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
           sleep 1
-          for f in index.html 404.html browser-smoke.html styles.css mobile-fix.css enhancements.css product-polish.css workflow-clarity.css data-meta.js data-d1.js data-d8.js data-ai.js data-precision.js coverage-detail.js data-question-calibration.js legacy-rationales.js keyboard-shortcuts.js bootstrap.js app.js enhancements.js state-ui-bridge.js product-polish.js browser-smoke.sh question-bank/RELEASED_BATCHES.json question-bank/candidates/batch-001-a.jsonl question-bank/candidates/batch-001-b.jsonl question-bank/candidates/batch-001-c.jsonl question-bank/candidates/batch-001-d.jsonl question-bank/candidates/batch-002.jsonl question-bank/candidates/batch-003.jsonl question-bank/candidates/batch-004.jsonl question-bank/candidates/batch-005.jsonl question-bank/candidates/batch-006.jsonl question-bank/BATCH_006_REVIEW.json question-bank/coverage_report.py question-bank/batch_planner.py; do
+          for f in index.html 404.html browser-smoke.html styles.css mobile-fix.css enhancements.css product-polish.css workflow-clarity.css data-meta.js data-d1.js data-d8.js data-ai.js data-precision.js coverage-detail.js data-question-calibration.js legacy-rationales.js keyboard-shortcuts.js bootstrap.js app.js enhancements.js state-ui-bridge.js product-polish.js browser-smoke.sh question-bank/RELEASED_BATCHES.json question-bank/coverage_report.py question-bank/batch_planner.py; do
             curl --fail --silent --show-error "http://127.0.0.1:8765/$f" >/dev/null
           done
+          python - <<'PY'
+          import json, pathlib, urllib.request
+          root = pathlib.Path('.')
+          manifest = json.loads((root/'question-bank/RELEASED_BATCHES.json').read_text())
+          rels = [rel for batch in manifest.get('released_batches', []) for rel in batch.get('files', [])]
+          for rel in rels:
+              with urllib.request.urlopen('http://127.0.0.1:8765/' + rel) as response:
+                  if response.status != 200:
+                      raise SystemExit(f'asset failed: {rel} status={response.status}')
+          print(f'PASS released_batch_assets={len(rels)}')
+          PY
+
       - name: Execute interactive browser smoke test
+        id: browser
+        if: always()
+        continue-on-error: true
         working-directory: subjects/cissp/2024-outline/study-site
         run: bash browser-smoke.sh 8766
+
+      - name: Enforce aggregate CISSP gate
+        if: always()
+        env:
+          KNOWLEDGE: ${{ steps.knowledge.outcome }}
+          QUALITY: ${{ steps.quality.outcome }}
+          PLANNING: ${{ steps.planning.outcome }}
+          SYNTAX: ${{ steps.syntax.outcome }}
+          RATIONALES: ${{ steps.rationales.outcome }}
+          STATIC: ${{ steps.static.outcome }}
+          BROWSER: ${{ steps.browser.outcome }}
+        run: |
+          failed=0
+          for gate in KNOWLEDGE QUALITY PLANNING SYNTAX RATIONALES STATIC BROWSER; do
+            value="${!gate}"
+            echo "$gate=$value"
+            if [ "$value" != "success" ]; then failed=1; fi
+          done
+          if [ "$failed" -ne 0 ]; then
+            echo "FAIL one or more CISSP validation gates failed; see the individual step logs above."
+            exit 1
+          fi
+          echo "PASS all CISSP validation gates, including browser smoke."
