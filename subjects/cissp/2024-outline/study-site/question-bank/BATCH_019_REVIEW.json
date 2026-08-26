@@ -1,0 +1,78 @@
+{
+  "schema_version": 3,
+  "batch_id": "019",
+  "reviewed_on": "2026-08-26",
+  "status": "SEMANTIC_REVIEWED_GATE_PENDING",
+  "records": 16,
+  "standard_mcq": 16,
+  "bellringers": 0,
+  "files": [
+    "question-bank/candidates/batch-019-a.jsonl",
+    "question-bank/candidates/batch-019-b.jsonl",
+    "question-bank/candidates/batch-019-c.jsonl",
+    "question-bank/candidates/batch-019-d.jsonl"
+  ],
+  "difficulty_distribution": {"F":0,"E":12,"S":4,"B":0},
+  "primary_domain_distribution": {"1":5,"2":0,"3":5,"4":1,"5":1,"6":0,"7":4,"8":0},
+  "reviewed_ids": ["C-296","C-297","C-298","C-299","C-300","C-301","C-302","C-303","C-304","C-305","C-306","C-307","C-308","C-309","C-310","C-311"],
+  "semantic_review": {
+    "semantic_reviewed_records": 16,
+    "answer_key_conflicts": 0,
+    "objective_mapping_conflicts": 0,
+    "source_mapping_conflicts": 0,
+    "material_factual_errors_remaining": 0,
+    "four_option_rationales_complete": true,
+    "originality_provenance_complete": true,
+    "external_question_seeds_used": 0,
+    "answer_position_distribution": {"0":4,"1":4,"2":4,"3":4}
+  },
+  "authoring_focus": {
+    "planner_basis_workflow_run_id": 33000149524,
+    "planner_basis_release": "1.16.0",
+    "planner_measured_explicit_subtopic_exposure": "296/344",
+    "planner_unexposed_enriched_subtopics": 48,
+    "objective_targets": ["1.2","1.3","1.4","1.5","1.8","7.4","7.5","7.7","7.9","3.10","3.3","3.8","3.6","4.3","5.6","3.9"],
+    "guardrails": "E12/S4; max primary-domain count 5/16; 16 distinct decision points; answer positions 4/4/4/4; original-from-public-scope only; no external question seeds; canonical enriched-subtopic labels only"
+  },
+  "current_source_check": {
+    "isc2_outline_effective_date": "2024-04-15",
+    "isc2_outline_rechecked_on": "2026-08-26",
+    "isc2_outline_status": "Current ISC2 CISSP Certification Exam Outline page still identifies April 15, 2024 as the effective date.",
+    "nist_800_53_rev5_update1": "registered current supporting control catalog; source page rechecked 2026-08-26",
+    "nist_800_86": "registered forensic and investigation reference",
+    "nist_csf2": "registered cybersecurity risk and governance reference"
+  },
+  "gate_state": {
+    "automated_repository_gate": "PENDING",
+    "workflow_run_id": null,
+    "workflow_head_sha": null,
+    "quality_gate_mode": "released+candidate",
+    "released_mcq_compared": null,
+    "released_bellringers_compared": null,
+    "candidate_records": 16,
+    "quality_gate_warnings": null,
+    "logical_batch_mix": "PENDING",
+    "logical_batch_mix_details": {"exam_calibrated_share":0.75,"bellringer_share":0.0,"largest_primary_domain":"1_and_3","largest_primary_domain_records":5,"largest_primary_domain_share":0.3125},
+    "deterministic_knowledge_audit": "PENDING",
+    "planning_gate": "PENDING",
+    "javascript_syntax": "PENDING",
+    "legacy_rationales": "PENDING",
+    "static_asset_serving": "PENDING",
+    "browser_smoke": "PENDING",
+    "aggregate_gate": "PENDING",
+    "promotion_allowed": false
+  },
+  "coverage_effect": {
+    "explicit_subtopic_tags_before": 296,
+    "explicit_subtopic_tags_after_candidate": null,
+    "total_mapped_subtopics": 344,
+    "candidate_state_measured_in_workflow_run_id": null
+  },
+  "notes": [
+    "Batch 019 follows the released v1.16 planner slate from main audit 33000149524 and keeps both D1 and D3 at the 5/16 maximum rather than exceeding the 35% cap.",
+    "The scenarios test independently rooted software authenticity, post-acquisition governance, cross-border forensic processing, civil-litigation preservation, personnel transfers, privileged operations separation, removable-media custody, honeypot containment, emergency change control, system retirement, requirements-to-control traceability, multi-tenant facility design, CA-key compromise, third-party remote administration, workload-authenticator lifecycle, and common-mode utility failure.",
+    "Stretch items are C-299, C-303, C-307, and C-311. The remaining twelve are Exam-calibrated and all numeric scores are within configured tier ranges.",
+    "The repository quality/originality, logical-batch, deterministic, planning, syntax, rationale, static, browser, and aggregate gates must pass on the exact candidate branch before promotion is authorized.",
+    "Authored difficulty is an internal calibration scale and does not claim ISC2 psychometric equivalence or reproduce live exam items."
+  ]
+}
