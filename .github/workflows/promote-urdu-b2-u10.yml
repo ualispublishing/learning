@@ -1,9 +1,9 @@
-name: Promote Urdu C1 Unit 1 bootstrap
-# repaired bootstrap rerun: 2026-08-26
+name: Promote Urdu B2 Unit 10
+# clean-pr trigger: 2026-08-26
 
 on:
+  workflow_dispatch:
   push:
-    branches: [main]
     paths:
       - '.github/workflows/promote-urdu-b2-u10.yml'
 
@@ -26,21 +26,11 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin main
 
-      - name: Repair script-only typo and validate C1 Unit 1
+      - name: Validate, generate, append Unit 10, and advance to C1
         shell: bash
         run: |
           set -euo pipefail
-          python3 - <<'PY'
-          from pathlib import Path
-          p = Path('reading/tools/promote_urdu_c1_u01.py')
-          s = p.read_text(encoding='utf-8')
-          old = 'ملتیं'
-          new = 'ملتیں'
-          if old not in s:
-              raise SystemExit('expected script typo not found')
-          p.write_text(s.replace(old, new), encoding='utf-8')
-          PY
-          python3 reading/tools/promote_urdu_c1_u01.py
+          python3 reading/tools/promote_urdu_b2_u10.py
 
       - name: Refresh and validate live state bundle
         shell: bash
@@ -49,26 +39,27 @@ jobs:
           python3 reading/tools/refresh_state_manifest.py
           python3 reading/tools/validate_continuation_state.py
 
-      - name: Restore registered workflow and commit canonical C1 promotion
+      - name: Commit canonical B2 completion
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout eae0ef0c0473110e493fcd4153373dc489d9b0b3 -- .github/workflows/promote-urdu-b2-u10.yml
           git add \
-            .github/workflows/promote-urdu-b2-u10.yml \
-            reading/tools/promote_urdu_c1_u01.py \
-            reading/urdu/c1/passages.jsonl \
-            reading/audit/urdu_c1_u01_generation_candidate \
-            reading/audit/urdu_c1_u01_generation_validation_2026-08-26.json \
-            reading/audit/urdu_c1_u01_promotion_2026-08-26.json \
-            reading/audit/urdu_c1_u01_lexical_sense_check_2026-08-26.json \
+            reading/urdu/b2/passages.jsonl \
+            reading/audit/urdu_b2_u10_generation_candidate \
+            reading/audit/urdu_b2_u10_generation_validation_2026-08-26.json \
+            reading/audit/urdu_b2_u10_promotion_2026-08-26.json \
+            reading/audit/urdu_b2_u10_lexical_sense_check_2026-08-26.json \
             reading/STATUS.json \
             reading/CONTINUATION.json \
             reading/planning/ACTIVE_GENERATION_PLAN.json \
             reading/TASKS.md \
             reading/AGENT_HANDOFF_V2.md \
             reading/STATE_MANIFEST.json
-          git commit -m "Add Urdu C1 Unit 1 and advance to Unit 2"
+          if git diff --cached --quiet; then
+            echo "No promotion changes to commit"
+            exit 0
+          fi
+          git commit -m "Add Urdu B2 Unit 10 and advance to C1"
           git push origin HEAD:main
