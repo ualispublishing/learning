@@ -5,21 +5,76 @@
   "cefr": "B2",
   "unit": 9,
   "date": "2026-08-26",
-  "status": "PASS_FOR_GENERATION_TARGET_SENSES_PENDING_CANONICAL_FRESHNESS",
-  "freshness_result": "PENDING_LIVE_PROMOTION_CHECK",
+  "status": "PASS_FOR_GENERATION_TARGET_SENSES_AND_CANONICAL_FRESHNESS",
+  "freshness_result": "PASS",
   "source_lexicon": "reading/lexicons/urdu.jsonl",
   "source_file_metadata": "urdu_top3000.csv",
   "targets": [
-    {"id":"ur-rank-2687","form":"تصفیہ","intended_sense":"settlement or resolution of a dispute","sense_check":"PASS","note":"Rekhta usage and related decision/settlement entries support تصفیہ as settling or resolving a dispute."},
-    {"id":"ur-rank-2688","form":"جائداد","intended_sense":"property or real estate","sense_check":"PASS","note":"Controlled lexicon form retained. Rekhta legal compounds attest جائداد for property, although جائیداد is also common in contemporary spelling."},
-    {"id":"ur-rank-2699","form":"کھاد","intended_sense":"fertilizer used to support soil or crop needs","sense_check":"PASS"},
-    {"id":"ur-rank-2721","form":"پیشگی","intended_sense":"in advance; an upfront payment before a later event","sense_check":"PASS"},
-    {"id":"ur-rank-2781","form":"کسوٹی","intended_sense":"criterion or standard used to test or evaluate","sense_check":"PASS","note":"Rekhta explicitly gives criterion/test and figurative معیار for evaluation."},
-    {"id":"ur-rank-2794","form":"افلاس","intended_sense":"poverty or severe financial deprivation","sense_check":"PASS"},
-    {"id":"ur-rank-2821","form":"باشندہ","intended_sense":"resident or inhabitant of a place","sense_check":"PASS"},
-    {"id":"ur-rank-2836","form":"بڑھاوا","intended_sense":"encouragement or incentive that promotes a behavior","sense_check":"PASS","note":"Used in the natural construction بڑھاوا دینا; dictionary evidence supports encouragement/promotion sense."},
-    {"id":"ur-rank-2762","form":"رضامند","intended_sense":"willing or consenting","sense_check":"PASS"},
-    {"id":"ur-rank-2704","form":"تصحیح","intended_sense":"correction or rectification of an error","sense_check":"PASS"}
+    {
+      "id": "ur-rank-2687",
+      "form": "تصفیہ",
+      "intended_sense": "settlement or resolution of a dispute",
+      "sense_check": "PASS",
+      "note": "Rekhta usage and related decision/settlement entries support تصفیہ as settling or resolving a dispute."
+    },
+    {
+      "id": "ur-rank-2688",
+      "form": "جائداد",
+      "intended_sense": "property or real estate",
+      "sense_check": "PASS",
+      "note": "Controlled lexicon form retained. Rekhta legal compounds attest جائداد for property, although جائیداد is also common in contemporary spelling."
+    },
+    {
+      "id": "ur-rank-2699",
+      "form": "کھاد",
+      "intended_sense": "fertilizer used to support soil or crop needs",
+      "sense_check": "PASS"
+    },
+    {
+      "id": "ur-rank-2721",
+      "form": "پیشگی",
+      "intended_sense": "in advance; an upfront payment before a later event",
+      "sense_check": "PASS"
+    },
+    {
+      "id": "ur-rank-2781",
+      "form": "کسوٹی",
+      "intended_sense": "criterion or standard used to test or evaluate",
+      "sense_check": "PASS",
+      "note": "Rekhta explicitly gives criterion/test and figurative معیار for evaluation."
+    },
+    {
+      "id": "ur-rank-2794",
+      "form": "افلاس",
+      "intended_sense": "poverty or severe financial deprivation",
+      "sense_check": "PASS"
+    },
+    {
+      "id": "ur-rank-2821",
+      "form": "باشندہ",
+      "intended_sense": "resident or inhabitant of a place",
+      "sense_check": "PASS"
+    },
+    {
+      "id": "ur-rank-2836",
+      "form": "بڑھاوا",
+      "intended_sense": "encouragement or incentive that promotes a behavior",
+      "sense_check": "PASS",
+      "note": "Used in the natural construction بڑھاوا دینا; dictionary evidence supports encouragement/promotion sense."
+    },
+    {
+      "id": "ur-rank-2762",
+      "form": "رضامند",
+      "intended_sense": "willing or consenting",
+      "sense_check": "PASS"
+    },
+    {
+      "id": "ur-rank-2704",
+      "form": "تصحیح",
+      "intended_sense": "correction or rectification of an error",
+      "sense_check": "PASS"
+    }
   ],
-  "promotion_requirement": "Fail closed unless every exact target ID is fresh against all canonical Urdu A1-B1 and B2 sequences 1-48 immediately before append."
+  "promotion_requirement": "Fail closed unless every exact target ID is fresh against all canonical Urdu A1-B1 and B2 sequences 1-48 immediately before append.",
+  "freshness_scope": "Exact target IDs checked against all canonical Urdu A1-B1 and B2 sequences 1-48 immediately before Unit 9 append."
 }
