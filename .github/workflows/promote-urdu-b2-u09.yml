@@ -1,10 +1,11 @@
-name: Promote Urdu B2 Unit 9 bootstrap
+name: Promote Urdu B2 Unit 9
+# registration retrigger: 2026-08-26
 
 on:
+  workflow_dispatch:
   push:
-    branches: [main]
     paths:
-      - '.github/workflows/promote-urdu-b2-u08.yml'
+      - '.github/workflows/promote-urdu-b2-u09.yml'
 
 permissions:
   contents: write
@@ -38,15 +39,13 @@ jobs:
           python3 reading/tools/refresh_state_manifest.py
           python3 reading/tools/validate_continuation_state.py
 
-      - name: Restore registered bootstrap workflow and commit canonical promotion
+      - name: Commit canonical promotion
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout 9725103934065078cbf861d18adfa86eb5087cf0 -- .github/workflows/promote-urdu-b2-u08.yml
           git add \
-            .github/workflows/promote-urdu-b2-u08.yml \
             reading/urdu/b2/passages.jsonl \
             reading/audit/urdu_b2_u09_generation_candidate \
             reading/audit/urdu_b2_u09_generation_validation_2026-08-26.json \
@@ -58,5 +57,9 @@ jobs:
             reading/TASKS.md \
             reading/AGENT_HANDOFF_V2.md \
             reading/STATE_MANIFEST.json
+          if git diff --cached --quiet; then
+            echo "No promotion changes to commit"
+            exit 0
+          fi
           git commit -m "Add Urdu B2 Unit 9 and advance to Unit 10"
           git push origin HEAD:main
