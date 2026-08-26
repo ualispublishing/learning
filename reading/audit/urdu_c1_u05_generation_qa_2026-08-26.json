@@ -5,7 +5,14 @@
   "cefr": "C1",
   "unit": 5,
   "theme": "scientific uncertainty and communication",
-  "sequences": [25, 26, 27, 28, 29, 30],
+  "sequences": [
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+  ],
   "generated_passages": 6,
   "question_contract": {
     "questions_per_passage": 10,
@@ -25,12 +32,54 @@
     "stored_word_counts": "PASS"
   },
   "lexical_targets": [
-    {"id":"ur-rank-1608","form":"نمونہ","source_rank":1608,"source_lexicon":"urdu_top3000.csv","prior_target_collision":false,"exposures_in_text":4},
-    {"id":"ur-rank-1796","form":"تخمینہ","source_rank":1796,"source_lexicon":"urdu_top3000.csv","prior_target_collision":false,"exposures_in_text":4},
-    {"id":"ur-rank-2910","form":"تفاوت","source_rank":2910,"source_lexicon":"urdu_top3000.csv","prior_target_collision":false,"exposures_in_text":4},
-    {"id":"ur-rank-1160","form":"رجحان","source_rank":1160,"source_lexicon":"urdu_top3000.csv","prior_target_collision":false,"exposures_in_text":4},
-    {"id":"ur-rank-1105","form":"تحقیقات","source_rank":1105,"source_lexicon":"urdu_top3000.csv","prior_target_collision":false,"exposures_in_text":5},
-    {"id":"ur-rank-1400","form":"تجزیہ","source_rank":1400,"source_lexicon":"urdu_top3000.csv","prior_target_collision":false,"exposures_in_text":4}
+    {
+      "id": "ur-rank-1608",
+      "form": "نمونہ",
+      "source_rank": 1608,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 4
+    },
+    {
+      "id": "ur-rank-1796",
+      "form": "تخمینہ",
+      "source_rank": 1796,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 4
+    },
+    {
+      "id": "ur-rank-2910",
+      "form": "تفاوت",
+      "source_rank": 2910,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 4
+    },
+    {
+      "id": "ur-rank-1160",
+      "form": "رجحان",
+      "source_rank": 1160,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 4
+    },
+    {
+      "id": "ur-rank-1105",
+      "form": "تحقیقات",
+      "source_rank": 1105,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 5
+    },
+    {
+      "id": "ur-rank-1400",
+      "form": "تجزیہ",
+      "source_rank": 1400,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 4
+    }
   ],
   "lexical_freshness": "PASS",
   "lexical_sense_notes": [
@@ -41,16 +90,43 @@
     "تحقیقات is used collectively for research studies/investigations.",
     "تجزیہ is used for systematic examination of evidence, limits, and interpretations."
   ],
-  "genre_cycle": ["research summary", "journalistic analysis", "critique", "research summary", "journalistic analysis", "critique"],
-  "passage_roles": ["instructional", "reinforcement", "interleaved", "transfer", "integration", "checkpoint"],
-  "word_counts": [505, 488, 500, 476, 490, 478],
+  "genre_cycle": [
+    "research summary",
+    "journalistic analysis",
+    "critique",
+    "research summary",
+    "journalistic analysis",
+    "critique"
+  ],
+  "passage_roles": [
+    "instructional",
+    "reinforcement",
+    "interleaved",
+    "transfer",
+    "integration",
+    "checkpoint"
+  ],
+  "word_counts": [
+    505,
+    488,
+    500,
+    476,
+    490,
+    478
+  ],
   "formal_release_audit": "DEFERRED",
   "release_note": "Generation-stage QA only. This does not mark educator/publication release approval.",
-  "canonicalization_status": "CANDIDATE_READY_FOR_APPEND",
+  "canonicalization_status": "CANONICAL_APPEND_CONFIRMED",
   "expected_frontier_after_append": {
     "urdu_c1_passages": 30,
     "next_sequence": 31,
     "next_unit": 6,
     "overall_reading_count": 990
-  }
+  },
+  "canonicalized_on": "2026-08-26",
+  "canonical_path": "reading/urdu/c1/passages.jsonl",
+  "canonical_passage_count": 30,
+  "project_canonical_passages": 990,
+  "urdu_canonical_passages": 270,
+  "next_frontier": "Urdu C1 Unit 6 / sequence 31"
 }
