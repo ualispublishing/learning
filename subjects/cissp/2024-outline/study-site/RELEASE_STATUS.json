@@ -9,7 +9,7 @@
     "numbered_objectives": 62,
     "subtopic_checks": 344,
     "explicit_enriched_subtopic_exposure": 296,
-    "explicit_enriched_subtopic_exposure_status": "CANDIDATE_MEASURED_EXACT_FILES_PENDING_RELEASED_STATE_CONFIRMATION",
+    "explicit_enriched_subtopic_exposure_status": "RELEASED_STATE_CONFIRMED_IN_PR",
     "ai_coverage_areas": 33,
     "layered_cards": 140,
     "standard_scenario_questions": 351,
@@ -46,7 +46,10 @@
     "explicit_enriched_subtopic_exposure_before": 295,
     "explicit_enriched_subtopic_exposure_after": 296,
     "objective_exposure": "62/62 numbered objectives have at least one standard MCQ exposure",
-    "released_state_pr_audit": "PENDING"
+    "released_state_pr_audit": "PASS",
+    "released_state_pr_audit_workflow_run_id": 32999651694,
+    "released_state_pr_head_sha": "ce3d84498bc5063501b77bbd0944480aa8c9bdcd",
+    "release_status_evidence_update_requires_exact_head_revalidation": true
   },
   "pending_candidate": null,
   "workflow": [
@@ -84,7 +87,7 @@
     "current_released_difficulty": {"F":41,"E":237,"S":73,"B":1},
     "remaining_to_target": {"F":79,"E":243,"S":87,"B":39},
     "current_unreleased_candidates": 0,
-    "next_bias": "After v1.16 released-state verification, use the executable planner slate from Batch 018 gate run 32998856487 for Batch 019 while selecting materially new scenario families and thin concepts.",
+    "next_bias": "After v1.16 main and public-runtime verification, use the executable planner slate from Batch 018 gate run 32998856487 for Batch 019 while selecting materially new scenario families and thin concepts.",
     "next_planner_objectives": ["1.2","1.3","1.4","1.5","1.8","7.4","7.5","7.7","7.9","3.10","3.3","3.8","3.6","4.3","5.6","3.9"],
     "per_batch_primary_domain_cap_for_16_plus_standard_items": 0.35,
     "originality_rule": "Questions are authored from public scope/primary standards and audited knowledge, never from exam dumps, live-item recollections, leaked banks, or commercial-question wording/templates."
@@ -127,9 +130,9 @@
     "released_only_pages_artifact": true,
     "browser_test_harness_excluded_from_pages_artifact": true,
     "release_count_agnostic_full_bank_control": true,
-    "activation_status": "v1.16 is a release candidate only until the exact released-state PR passes, merges to main, and the main audit plus Pages public-runtime fingerprint complete successfully."
+    "activation_status": "The v1.16 released-state PR passed all gates in workflow run 32999651694. Public v1.16 is still not claimed until this evidence-ledger update is revalidated on its exact head, the release PR merges, and main audit plus Pages public-runtime fingerprint succeed."
   },
-  "precision_boundary": "READY_FOR_STUDY for the v1.16 release candidate means the corpus is organized around the public ISC2 scope, mapped subtopics, curated precision distinctions, original scenario questions, metadata, teaching rationales, and auditable release controls. The semantic ledger covers 492 learner-facing item IDs with zero known keyed-answer reversals and no known remaining material factual error. Batch 018 passed fresh candidate-state quality/originality, logical-mix, deterministic, planning, syntax, rationale, static, browser, and aggregate gates with zero warnings in workflow run 32998856487; its final evidence-ledger head passed the same full PR gate in workflow run 32999113249. The 296/344 enriched-subtopic count was measured on the exact files being promoted. Public v1.16 is not claimed until released-state and live deployment verification succeed. This is not a mathematical guarantee of perpetual infallibility or a guarantee of passing the live adaptive CISSP exam.",
+  "precision_boundary": "READY_FOR_STUDY for the v1.16 release candidate means the corpus is organized around the public ISC2 scope, mapped subtopics, curated precision distinctions, original scenario questions, metadata, teaching rationales, and auditable release controls. The semantic ledger covers 492 learner-facing item IDs with zero known keyed-answer reversals and no known remaining material factual error. Batch 018 passed fresh candidate-state gates with zero warnings in workflow run 32998856487, its final candidate-ledger head passed in run 32999113249, and the promoted released state passed the full repository audit and browser smoke in run 32999651694. The exact enriched-subtopic exposure is 296/344. Public v1.16 is not claimed until main and live deployment verification succeed. This is not a mathematical guarantee of perpetual infallibility or a guarantee of passing the live adaptive CISSP exam.",
   "known_non_blocking_limitations": [
     "Browser-local progress does not sync across devices unless exported manually.",
     "The diagnostic is intentionally a routing signal, not an exam-readiness prediction.",
