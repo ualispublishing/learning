@@ -2,7 +2,7 @@
   "schema_version": 2,
   "batch_id": "017",
   "reviewed_on": "2026-08-26",
-  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "status": "SEMANTIC_REVIEWED_GATE_PASSED",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -26,11 +26,11 @@
     "external_question_seeds_used": 0
   },
   "authoring_focus": {
-    "planner_basis": "v1.14 deficit-biased continuation using the verified released state and thin recent coverage; the repository planner is also executed by every CISSP audit for comparison and future-batch planning",
+    "planner_basis": "v1.14 deficit-biased continuation using the verified released state and thin recent coverage; the repository planner was executed in the promotion gate and produced the next authoring slate separately",
     "objective_targets": ["2.1","2.2","2.5","2.6","4.1","4.2","5.1","6.1","7.2","1.9","3.5","8.1","8.2","8.3","8.5","8.4"],
     "guardrails": "E12/S4; max primary-domain count 5/16; 16 distinct objective decision points; original-from-public-scope only; no external question seeds; declared siblings only where a prior broad family is deliberately revisited through a different decision boundary"
   },
-  "current-source-check": {
+  "current_source_check": {
     "isc2_outline_effective_date": "2024-04-15",
     "isc2_outline_rechecked_on": "2026-08-26",
     "nist_800_53_rev5_update1": "registered supporting control catalog",
@@ -40,29 +40,47 @@
     "owasp_asvs": "registered application-security verification reference"
   },
   "gate_state": {
-    "automated_repository_gate": "PENDING_RECHECK_AFTER_CORRECTIONS",
+    "automated_repository_gate": "PASS",
+    "workflow_run_id": 32995967102,
+    "workflow_head_sha": "a94dba2fdcc710dc41f79ea244fca13b65203305",
     "quality_gate_mode": "released+candidate",
-    "logical_batch_mix_manual_precheck": "PASS",
+    "released_mcq_compared": 319,
+    "released_bellringers_compared": 1,
+    "candidate_records": 16,
+    "quality_gate_warnings": 0,
+    "logical_batch_mix": "PASS",
     "logical_batch_mix_details": {"exam_calibrated_share":0.75,"bellringer_share":0.0,"largest_primary_domain":"8","largest_primary_domain_records":5,"largest_primary_domain_share":0.3125},
-    "prior_workflow_run_id": 32992211110,
-    "prior_run_browser_smoke": "PASS",
-    "prior_run_logical_batch_mix": "PASS",
-    "prior_run_static_syntax_rationale_planning": "PASS",
-    "prior_run_blockers": [
-      "C-274 used the unregistered label 'edge computing systems' instead of the mapped label 'edge computing'.",
-      "The v1.14 semantic release additions ledger still stopped at C-247 / release 1.13.0.",
-      "The deterministic audit hard-coded the older release audit date instead of following the current release ledger."
+    "deterministic_knowledge_audit": "PASS",
+    "planning_gate": "PASS",
+    "javascript_syntax": "PASS",
+    "legacy_rationales": "PASS",
+    "static_asset_serving": "PASS",
+    "browser_smoke": "PASS",
+    "browser_smoke_workflows": ["startup","review","practice","progress","sources","navigation"],
+    "aggregate_gate": "PASS",
+    "promotion_allowed": true
+  },
+  "coverage_effect": {
+    "explicit_subtopic_tags_before": 285,
+    "explicit_subtopic_tags_after_candidate": 295,
+    "total_mapped_subtopics": 344,
+    "candidate_state_measured_in_workflow_run_id": 32995967102
+  },
+  "correction_history": {
+    "prior_failed_workflow_run_id": 32992211110,
+    "corrected_candidate": "C-274",
+    "correction": "Replaced the unregistered subtopic label 'edge computing systems' with the mapped label 'edge computing'.",
+    "release_ledger_repairs": [
+      "Synchronized SEMANTIC_RELEASE_ADDITIONS.json through v1.14 / C-263.",
+      "Made audit-date validation follow the current release ledger instead of a historical hard-coded date."
     ],
-    "corrections_merged_on_main": "c58e3bd802e4453ca6d319fe9e4076bf79aa6439",
-    "fresh_browser_smoke_required_for_promotion": true,
-    "promotion_allowed": false,
-    "requirement": "Do not add Batch 017 to RELEASED_BATCHES.json until quality_gate.py, logical_batch_mix_gate.py, the deterministic knowledge audit, static/syntax checks, and the browser smoke gate pass on the corrected state that includes Batch 017."
+    "corrections_merged_on_main": "c58e3bd802e4453ca6d319fe9e4076bf79aa6439"
   },
   "notes": [
-    "Batch 017 intentionally biases toward Asset Security and Software Development Security, which received little or no primary-domain representation in Batch 016, while retaining a five-record maximum in any one domain.",
+    "Batch 017 intentionally biases toward Asset Security and Software Development Security while retaining a five-record maximum in any one domain.",
     "The scenarios cover AI model/data classification, re-identifiable derived-data handling, end-of-support asset risk, state-aware cloud data controls, east-west microsegmentation, NAC across virtual-session trust boundaries, task-scoped physical/logical vendor access, SaaS assessment scope, ephemeral serverless logging, governed risk acceptance, IoT fleet credential architecture, DevSecOps integration, dependency-confusion defenses, software-security outcome measurement, SSRF-resistant server-side fetching, and managed AI code-assistant acquisition assurance.",
-    "Stretch items are C-267, C-271, C-275, and C-279. The remaining twelve are Exam-calibrated and all numeric scores are within the configured tier ranges.",
-    "The first full Batch 017 workflow attempt ran all gates. Browser smoke, logical mix, planning, JavaScript syntax, legacy rationales, and static serving passed; the remaining deterministic-ledger and C-274 metadata blockers were corrected before this recheck.",
-    "Batch 017 remains an unreleased candidate until a corrected-state full gate pass. No v1.15 release or public Pages deployment is claimed."
+    "Stretch items are C-267, C-271, C-275, and C-279. The remaining twelve are Exam-calibrated and all numeric scores are within configured tier ranges.",
+    "Fresh workflow run 32995967102 passed the repository-wide quality/originality gate with zero warnings, the logical batch composition gate, deterministic knowledge audit, coverage/planning checks, JavaScript syntax, legacy rationale integrity, static asset serving, interactive browser smoke, and the final aggregate gate.",
+    "Promotion to v1.15 is authorized by fresh automated evidence; this review does not claim that authored difficulty equals ISC2 psychometric difficulty or that the bank reproduces live exam items."
   ]
 }
