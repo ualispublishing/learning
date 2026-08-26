@@ -2,7 +2,7 @@
   "schema_version": 3,
   "batch_id": "019",
   "reviewed_on": "2026-08-26",
-  "status": "SEMANTIC_REVIEWED_GATE_PASSED",
+  "status": "SEMANTIC_REVIEWED_RELEASED_V1_17_VERIFIED",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -46,6 +46,8 @@
     "automated_repository_gate": "PASS",
     "workflow_run_id": 33002790298,
     "workflow_head_sha": "4d9955487bea144f6546f961e97f8f53cacf59fe",
+    "candidate_exact_head_revalidation_workflow_run_id": 33003007143,
+    "candidate_exact_head_sha": "01cacbc23a03a7b89b111730d0810439458abf2f",
     "quality_gate_mode": "released+candidate",
     "released_mcq_compared": 351,
     "released_bellringers_compared": 1,
@@ -63,11 +65,30 @@
     "aggregate_gate": "PASS",
     "promotion_allowed": true
   },
+  "release_verification": {
+    "release_version": "1.17.0",
+    "released_state_pr_number": 75,
+    "released_state_pr_head_sha": "8530abd86eb933cd480ff957eb66e5f61f16eb01",
+    "released_state_pr_audit_workflow_run_id": 33004069390,
+    "released_state_pr_audit": "PASS",
+    "release_merge_commit_sha": "d3ec3321c5b961cdc0d9b302367cfd38ffafcf49",
+    "post_merge_main_audit_workflow_run_id": 33004251528,
+    "post_merge_main_audit": "PASS",
+    "pages_workflow_run_id": 33004251507,
+    "public_runtime": "PASS",
+    "public_runtime_version": "1.17.0",
+    "public_runtime_standard_questions": 367,
+    "public_runtime_manifest_released_records": 312,
+    "public_runtime_bellringers": 1,
+    "public_runtime_released_only": true
+  },
   "coverage_effect": {
     "explicit_subtopic_tags_before": 296,
     "explicit_subtopic_tags_after_candidate": 296,
+    "explicit_subtopic_tags_after_release": 296,
     "total_mapped_subtopics": 344,
     "candidate_state_measured_in_workflow_run_id": 33002790298,
+    "released_state_measured_in_workflow_run_id": 33004251528,
     "boundary": "Batch 019 adds depth to already exposed enriched tags; it does not increase the explicit tag-count metric. That does not imply zero knowledge gain because the metric counts distinct tag labels rather than scenario depth."
   },
   "next_planner_slate_if_promoted": {
@@ -80,8 +101,8 @@
     "Batch 019 follows the released v1.16 planner slate from main audit 33000149524 and keeps both D1 and D3 at the 5/16 maximum rather than exceeding the 35% cap.",
     "The scenarios test independently rooted software authenticity, post-acquisition governance, cross-border forensic processing, civil-litigation preservation, personnel transfers, privileged operations separation, removable-media custody, honeypot containment, emergency change control, system retirement, requirements-to-control traceability, multi-tenant facility design, CA-key compromise, third-party remote administration, workload-authenticator lifecycle, and common-mode utility failure.",
     "Stretch items are C-299, C-303, C-307, and C-311. The remaining twelve are Exam-calibrated and all numeric scores are within configured tier ranges.",
-    "Fresh workflow run 33002790298 passed the repository-wide quality/originality gate with zero warnings, logical batch composition, deterministic knowledge audit, coverage/planning, JavaScript syntax, legacy rationale integrity, static asset serving, interactive browser smoke, and final aggregate enforcement.",
-    "Because this evidence-recording commit changes the exact candidate head, it must itself pass the full PR audit before merge; promotion_allowed records the substantive candidate result, not permission to bypass exact-head revalidation.",
+    "Fresh workflow run 33002790298 passed the repository-wide quality/originality gate with zero warnings, and exact candidate head run 33003007143 independently passed all gates.",
+    "Released-state PR #75 passed all CISSP gates in workflow run 33004069390. After merge, main audit 33004251528 passed and Pages run 33004251507 verified the live released-only v1.17 runtime at merge SHA d3ec3321c5b961cdc0d9b302367cfd38ffafcf49.",
     "Authored difficulty is an internal calibration scale and does not claim ISC2 psychometric equivalence or reproduce live exam items."
   ]
 }
