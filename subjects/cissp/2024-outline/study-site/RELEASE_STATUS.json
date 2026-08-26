@@ -43,6 +43,17 @@
     "coverage_recompute_pending": true,
     "objective_exposure": "62/62 numbered objectives have at least one standard MCQ exposure"
   },
+  "pending_candidate": {
+    "batch": "017",
+    "records": 16,
+    "standard_questions": 16,
+    "difficulty_distribution": {"F":0,"E":12,"S":4,"B":0},
+    "primary_domain_distribution": {"1":1,"2":4,"3":1,"4":2,"5":1,"6":1,"7":1,"8":5},
+    "semantic_review": "PASS",
+    "automated_gate": "PENDING",
+    "promotion_allowed": false,
+    "review_file": "subjects/cissp/2024-outline/study-site/question-bank/BATCH_017_REVIEW.json"
+  },
   "workflow": [
     "Run the 16-question diagnostic once if no baseline exists.",
     "Study the lowest diagnostic domain with retrieval-before-reveal cards.",
@@ -60,12 +71,14 @@
     "released_batch_manifest": "subjects/cissp/2024-outline/study-site/question-bank/RELEASED_BATCHES.json",
     "question_bank_plan": "subjects/cissp/2024-outline/study-site/question-bank/QUESTION_BANK_EXPANSION_PLAN.md",
     "question_bank_quality_gate": "subjects/cissp/2024-outline/study-site/question-bank/quality_gate.py",
+    "logical_batch_mix_gate": "subjects/cissp/2024-outline/study-site/question-bank/logical_batch_mix_gate.py",
     "question_bank_coverage_planner": "subjects/cissp/2024-outline/study-site/question-bank/coverage_report.py",
     "browser_smoke_runner": "subjects/cissp/2024-outline/study-site/browser-smoke.sh",
     "ci_workflow": ".github/workflows/cissp-study-site-audit.yml",
     "fallback_ci_workflow": ".github/workflows/cissp-audit-fallback.yml",
     "pages_workflow": ".github/workflows/cissp-pages.yml",
-    "v1_14_release_evidence": "subjects/cissp/2024-outline/study-site/question-bank/BATCH_016_REVIEW.json"
+    "v1_14_release_evidence": "subjects/cissp/2024-outline/study-site/question-bank/BATCH_016_REVIEW.json",
+    "batch_017_candidate_review": "subjects/cissp/2024-outline/study-site/question-bank/BATCH_017_REVIEW.json"
   },
   "question_bank_expansion_target": {
     "total_records": 800,
@@ -76,8 +89,9 @@
     "current_released_records": 320,
     "current_released_difficulty": {"F":41,"E":213,"S":65,"B":1},
     "remaining_to_target": {"F":79,"E":267,"S":95,"B":39},
-    "current_unreleased_candidates": 0,
-    "next_bias": "Exam-calibrated and Stretch scenarios selected by the newest objective/subtopic deficits, while avoiding scenario-family repetition.",
+    "current_unreleased_candidates": 16,
+    "remaining_if_current_candidates_promote": {"F":79,"E":255,"S":91,"B":39},
+    "next_bias": "Resolve Batch 017 through the full candidate gate before authoring the next slate from an executable updated coverage plan.",
     "per_batch_primary_domain_cap_for_16_plus_standard_items": 0.35,
     "originality_rule": "Questions are authored from public scope/primary standards and audited knowledge, never from exam dumps, live-item recollections, leaked banks, or commercial-question wording/templates."
   },
@@ -111,13 +125,14 @@
     "release_count_agnostic_full_bank_control": true,
     "activation_status": "GitHub Pages is enabled; v1.14 is committed on main, but connector-created commits did not emit the Actions event needed to republish Pages during this run."
   },
-  "precision_boundary": "READY_FOR_STUDY means the public ISC2 scope, mapped subtopics, curated precision distinctions, released original scenario bank, metadata, teaching rationales, and site assets are release-organized and audited. The semantic review set now covers 460 released learner-facing item IDs with zero known keyed-answer reversals and no known remaining material factual error. Batch 016 release evidence is explicitly recorded as deterministic quality-gate equivalence plus runtime-byte browser equivalence because the connected GitHub contents path did not emit a fresh Actions event. This is not a mathematical guarantee of perpetual infallibility or a guarantee of passing the live adaptive CISSP exam.",
+  "precision_boundary": "READY_FOR_STUDY describes the released v1.14 corpus only. The semantic review set covers 460 released learner-facing item IDs with zero known keyed-answer reversals and no known remaining material factual error. Batch 017 adds 16 semantically reviewed but unreleased candidates and is not included in released counts or public study claims until the full automated gate and browser checks pass. Batch 016 release evidence remains explicitly recorded as deterministic quality-gate equivalence plus runtime-byte browser equivalence because the connected GitHub contents path did not emit a fresh Actions event. This is not a mathematical guarantee of perpetual infallibility or a guarantee of passing the live adaptive CISSP exam.",
   "known_non_blocking_limitations": [
     "Browser-local progress does not sync across devices unless exported manually.",
     "The diagnostic is intentionally a routing signal, not an exam-readiness prediction.",
     "Blueprint subtopic labels are paraphrased; the ISC2 source remains authoritative for exact wording.",
     "Legacy Q-001..Q-056 predate explicit enriched subtopic tags, and the currently published 280/344 tag figure is a verified v1.13 floor pending an executable v1.14 coverage recomputation.",
     "Question difficulty is an authoring scale until sufficient real learner-response data exists for empirical calibration.",
-    "v1.14 is on main but its GitHub Pages republish remains pending because connector-created commits did not emit Actions events in this session."
+    "v1.14 is on main but its GitHub Pages republish remains pending because connector-created commits did not emit Actions events in this session.",
+    "Batch 017 is semantically reviewed but remains unreleased until the full automated gate and fresh browser smoke can execute."
   ]
 }
