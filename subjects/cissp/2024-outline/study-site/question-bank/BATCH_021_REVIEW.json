@@ -1,0 +1,82 @@
+{
+  "schema_version": 3,
+  "batch_id": "021",
+  "reviewed_on": "2026-08-26",
+  "status": "SEMANTIC_REVIEWED_GATE_PENDING",
+  "records": 16,
+  "standard_mcq": 16,
+  "bellringers": 0,
+  "files": [
+    "question-bank/candidates/batch-021-a.jsonl",
+    "question-bank/candidates/batch-021-b.jsonl",
+    "question-bank/candidates/batch-021-c.jsonl",
+    "question-bank/candidates/batch-021-d.jsonl"
+  ],
+  "difficulty_distribution": {"F":0,"E":12,"S":4,"B":0},
+  "primary_domain_distribution": {"1":2,"2":1,"3":2,"4":0,"5":3,"6":3,"7":5,"8":0},
+  "reviewed_ids": ["C-328","C-329","C-330","C-331","C-332","C-333","C-334","C-335","C-336","C-337","C-338","C-339","C-340","C-341","C-342","C-343"],
+  "semantic_review": {
+    "semantic_reviewed_records": 16,
+    "answer_key_conflicts": 0,
+    "objective_mapping_conflicts": 0,
+    "source_mapping_conflicts": 0,
+    "material_factual_errors_remaining": 0,
+    "four_option_rationales_complete": true,
+    "originality_provenance_complete": true,
+    "external_question_seeds_used": 0,
+    "answer_position_distribution": {"0":4,"1":4,"2":4,"3":4}
+  },
+  "authoring_focus": {
+    "planner_basis_workflow_run_id": 33018954386,
+    "planner_basis_release": "1.18.0",
+    "planner_measured_explicit_subtopic_exposure": "296/344",
+    "planner_unexposed_enriched_subtopics": 48,
+    "objective_targets": ["7.8","7.6","2.3","7.13","1.7","3.4","5.4","7.14","7.1","5.2","6.5","1.6","6.3","5.5","6.2","3.2"],
+    "guardrails": "E12/S4; max primary-domain count 5/16; 16 distinct decision points; answer positions 4/4/4/4; original-from-public-scope only; no external question seeds; canonical enriched-subtopic labels only"
+  },
+  "current_source_check": {
+    "isc2_outline_effective_date": "2024-04-15",
+    "isc2_outline_rechecked_on": "2026-08-26",
+    "isc2_outline_status": "Current ISC2 CISSP Certification Exam Outline page remains the public scope authority used by the released v1.18 corpus.",
+    "nist_800_34_rev1_update1": "registered contingency-planning, BIA, recovery and exercise reference",
+    "nist_800_61_rev3": "registered current incident-response risk-management reference",
+    "nist_800_63_4": "registered current digital identity guidance",
+    "nist_800_86": "registered forensic evidence reference",
+    "nist_800_115": "registered security testing and assessment reference",
+    "nist_800_53_rev5_update1": "registered supporting control catalog"
+  },
+  "gate_state": {
+    "candidate_validation_pr": 80,
+    "automated_repository_gate": "PENDING",
+    "workflow_run_id": null,
+    "workflow_head_sha": null,
+    "quality_gate_mode": "released+candidate",
+    "released_mcq_compared": null,
+    "released_bellringers_compared": null,
+    "candidate_records": 16,
+    "quality_gate_warnings": null,
+    "logical_batch_mix": "PENDING",
+    "logical_batch_mix_details": {"exam_calibrated_share":0.75,"bellringer_share":0.0,"largest_primary_domain":"7","largest_primary_domain_records":5,"largest_primary_domain_share":0.3125},
+    "deterministic_knowledge_audit": "PENDING",
+    "planning_gate": "PENDING",
+    "javascript_syntax": "PENDING",
+    "legacy_rationales": "PENDING",
+    "static_asset_serving": "PENDING",
+    "browser_smoke": "PENDING",
+    "aggregate_gate": "PENDING",
+    "promotion_allowed": false
+  },
+  "coverage_effect": {
+    "explicit_subtopic_tags_before": 296,
+    "explicit_subtopic_tags_after_candidate": null,
+    "total_mapped_subtopics": 344,
+    "candidate_state_measured_in_workflow_run_id": null
+  },
+  "notes": [
+    "Batch 021 follows the exact released-only v1.18 planner slate from final main audit 33018954386 and keeps D7 at 5/16, below the configured 35% primary-domain cap.",
+    "The scenarios test risk-based vulnerability prioritization, controlled ransomware recovery, accountable ownership of orphaned cloud information, cross-functional continuity exercises, peak-period BIA effects, TPM measured-boot key release, attribute/risk-aware authorization, internal physical zoning, volatile container evidence, strong authenticator recovery, audit independence, document hierarchy conflicts, restore-test evidence, service-account lifecycle governance, negative multi-tenant API authorization testing, and controlled Bell-LaPadula declassification.",
+    "Stretch items are C-331, C-335, C-339, and C-343. The remaining twelve are Exam-calibrated and all numeric scores are within configured tier ranges.",
+    "Candidate material remains unreleased until the repository-wide originality/duplicate, logical-batch, deterministic, planning, syntax, rationale, static, browser, and aggregate gates pass on the exact candidate head.",
+    "Authored difficulty is an internal calibration scale and does not claim ISC2 psychometric equivalence or reproduce live exam items."
+  ]
+}
