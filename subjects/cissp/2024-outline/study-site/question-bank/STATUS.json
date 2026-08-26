@@ -1,5 +1,5 @@
 {
-  "schema_version": 17,
+  "schema_version": 18,
   "updated": "2026-08-26",
   "release": "1.14.0",
   "released": {
@@ -24,13 +24,15 @@
     "015": {"status":"RELEASED_V1_13_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_015_REVIEW.json","quality_gate_workflow_run_id":32883157593,"quality_gate_warnings":0},
     "016": {"status":"RELEASED_V1_14_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_016_REVIEW.json","quality_gate_evidence_type":"deterministic-equivalence","quality_gate_basis_workflow_run_id":32983858362,"browser_evidence_type":"runtime-byte-equivalence","browser_basis_workflow_run_id":32982968885,"quality_gate_warnings":0}
   },
-  "candidate_batches": {},
-  "pending_candidate_summary": {"records":0,"standard_mcq":0,"bellringer_cases":0,"difficulty_distribution":{"F":0,"E":0,"S":0,"B":0}},
+  "candidate_batches": {
+    "017": {"status":"SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"primary_domain_distribution":{"1":1,"2":4,"3":1,"4":2,"5":1,"6":1,"7":1,"8":5},"review":"BATCH_017_REVIEW.json","promotion_allowed":false}
+  },
+  "pending_candidate_summary": {"records":16,"standard_mcq":16,"bellringer_cases":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0}},
   "coverage": {
     "numbered_objectives_with_standard_mcq_exposure": "62/62",
     "mapped_subtopics": 344,
     "explicit_enriched_subtopic_exposure": 280,
-    "boundary": "280 is the last directly executed released-only coverage count from v1.13 and is retained as a conservative verified floor. Batch 016 may increase explicit tag exposure; recompute before claiming a higher exact figure. Objective/subtopic exposure is an authoring coverage metric, not evidence of learner mastery."
+    "boundary": "280 is the last directly executed released-only coverage count from v1.13 and is retained as a conservative verified floor. The v1.14 release and unreleased Batch 017 may increase explicit tag exposure; recompute before claiming a higher exact figure. Objective/subtopic exposure is an authoring coverage metric, not evidence of learner mastery."
   },
   "authoring_guardrails": {
     "minimum_exam_calibrated_share_for_batch_16_plus": 0.50,
@@ -40,11 +42,12 @@
   },
   "long_term_target": {"bank_records":800,"F":120,"E":480,"S":160,"B":40},
   "remaining_to_target": {"bank_records":480,"F":79,"E":267,"S":95,"B":39},
+  "remaining_if_batch_017_promotes": {"bank_records":464,"F":79,"E":255,"S":91,"B":39},
   "next_priority": [
-    "Recompute released-only explicit enriched subtopic exposure on the next executable CISSP audit before publishing a higher exact coverage figure.",
-    "Use the v1.14 deficit state to target remaining sparse objectives and untagged enriched subtopics.",
-    "Keep the next 16-question batch centered on Exam-calibrated and Stretch application while preserving the 35% primary-domain cap.",
-    "Keep every new candidate behind semantic review plus the repository-wide originality/duplicate gate before release.",
+    "Run the full released+candidate quality/originality gate and logical-batch composition gate against Batch 017 before any v1.15 promotion.",
+    "Recompute released-only and released+candidate enriched subtopic exposure on the next executable CISSP audit before publishing a higher exact coverage figure.",
+    "Keep Batch 017 unreleased until deterministic knowledge, syntax/static, and browser smoke checks also pass on the candidate-containing state.",
+    "After Batch 017 is resolved, use the executable v1.14/v1.15 planner state rather than manually guessing the next objective slate.",
     "Add Bellringers separately and sparsely; they are integrative drills, not imitations of live CISSP items.",
     "Use confidence, chosen distractor, response time, and spaced repeat performance before making empirical difficulty claims."
   ]
