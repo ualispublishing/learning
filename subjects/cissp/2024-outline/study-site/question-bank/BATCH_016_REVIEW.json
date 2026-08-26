@@ -31,14 +31,22 @@
     "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; declared sibling relationships only where a released objective/rule family is deliberately revisited through a materially different decision boundary"
   },
   "gate_state": {
-    "automated_repository_gate": "PENDING",
+    "automated_repository_gate": "PENDING_RERUN_AFTER_CALIBRATION_CORRECTION",
     "quality_gate_mode": "released+candidate",
     "promotion_allowed": false,
-    "requirement": "Promote only after quality_gate.py passes against the full v1.13 released corpus and Batch 016 with zero unresolved warnings, and the browser smoke gate passes."
+    "requirement": "Promote only after quality_gate.py passes against the full v1.13 released corpus and corrected Batch 016 with zero unresolved warnings, and the browser smoke gate passes."
+  },
+  "calibration_correction": {
+    "reason": "The first automated gate rejected four Exam-calibrated records because their numeric scores exceeded the configured E range of 50-69; question content, answer keys, rationales, mappings, and originality metadata were unchanged.",
+    "first_gate_workflow_run_id": 32983858362,
+    "corrected_scores": {"C-253":69,"C-256":69,"C-258":69,"C-262":69},
+    "content_changed": false,
+    "gate_thresholds_changed": false
   },
   "notes": [
     "Batch 016 follows the v1.13 planner exactly: provisioning-time baseline drift, autoscaling patch inheritance, incomplete incident remediation, measurable phishing-awareness outcomes, consistent policy-decision semantics, hardware-backed key protection, forensic evidence provenance, authentication-recovery assurance, cloud shared-responsibility auditing, full-scale recovery throughput, enterprise governance decision rights, restore-validation evidence, event-driven role-transfer deprovisioning, API/interface coverage analysis, and lawful cross-border incident evidence handling.",
     "Stretch items are C-251, C-255, C-259, and C-263. Declared siblings revisit broad objective families only through materially different decisions, including recovery assurance versus primary authentication, recovery capacity versus evidence, governance decision rights versus framework tailoring, and role transfer versus termination.",
-    "The batch remains excluded from RELEASED_BATCHES.json and the public Pages artifact until the automated gate passes."
+    "The first automated gate failed only the E-score range invariant for C-253, C-256, C-258, and C-262. Those scores are now 69, within the unchanged E range; no question text or answer logic was altered.",
+    "The batch remains excluded from RELEASED_BATCHES.json and the public Pages artifact until the corrected automated gate passes."
   ]
 }
