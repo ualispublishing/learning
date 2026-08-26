@@ -35,6 +35,13 @@ jobs:
         working-directory: subjects/cissp/2024-outline/study-site
         run: python question-bank/quality_gate.py
 
+      - name: Run logical batch composition gate
+        id: mix
+        if: always()
+        continue-on-error: true
+        working-directory: subjects/cissp/2024-outline/study-site
+        run: python question-bank/logical_batch_mix_gate.py
+
       - name: Generate question-bank coverage and next-batch plans
         id: planning
         if: always()
@@ -84,7 +91,7 @@ jobs:
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
           sleep 1
-          for f in index.html 404.html browser-smoke.html styles.css mobile-fix.css enhancements.css product-polish.css workflow-clarity.css data-meta.js data-d1.js data-d8.js data-ai.js data-precision.js coverage-detail.js data-question-calibration.js legacy-rationales.js keyboard-shortcuts.js bootstrap.js app.js enhancements.js state-ui-bridge.js product-polish.js browser-smoke.sh question-bank/RELEASED_BATCHES.json question-bank/coverage_report.py question-bank/batch_planner.py; do
+          for f in index.html 404.html browser-smoke.html styles.css mobile-fix.css enhancements.css product-polish.css workflow-clarity.css data-meta.js data-d1.js data-d8.js data-ai.js data-precision.js coverage-detail.js data-question-calibration.js legacy-rationales.js keyboard-shortcuts.js bootstrap.js app.js enhancements.js state-ui-bridge.js product-polish.js browser-smoke.sh question-bank/RELEASED_BATCHES.json question-bank/coverage_report.py question-bank/batch_planner.py question-bank/logical_batch_mix_gate.py; do
             curl --fail --silent --show-error "http://127.0.0.1:8765/$f" >/dev/null
           done
           python - <<'PY'
@@ -111,6 +118,7 @@ jobs:
         env:
           KNOWLEDGE: ${{ steps.knowledge.outcome }}
           QUALITY: ${{ steps.quality.outcome }}
+          MIX: ${{ steps.mix.outcome }}
           PLANNING: ${{ steps.planning.outcome }}
           SYNTAX: ${{ steps.syntax.outcome }}
           RATIONALES: ${{ steps.rationales.outcome }}
@@ -118,7 +126,7 @@ jobs:
           BROWSER: ${{ steps.browser.outcome }}
         run: |
           failed=0
-          for gate in KNOWLEDGE QUALITY PLANNING SYNTAX RATIONALES STATIC BROWSER; do
+          for gate in KNOWLEDGE QUALITY MIX PLANNING SYNTAX RATIONALES STATIC BROWSER; do
             value="${!gate}"
             echo "$gate=$value"
             if [ "$value" != "success" ]; then failed=1; fi
@@ -127,4 +135,4 @@ jobs:
             echo "FAIL one or more CISSP validation gates failed; see the individual step logs above."
             exit 1
           fi
-          echo "PASS all CISSP validation gates, including browser smoke."
+          echo "PASS all CISSP validation gates, including logical batch mix and browser smoke."
