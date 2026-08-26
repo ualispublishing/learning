@@ -1,12 +1,12 @@
 {
-  "schema_version": 16,
+  "schema_version": 17,
   "updated": "2026-08-26",
-  "release": "1.13.0",
+  "release": "1.14.0",
   "released": {
-    "bank_records": 304,
-    "standard_mcq": 303,
+    "bank_records": 320,
+    "standard_mcq": 319,
     "bellringer_cases": 1,
-    "difficulty_distribution": {"F":41,"E":201,"S":61,"B":1},
+    "difficulty_distribution": {"F":41,"E":213,"S":65,"B":1},
     "base_classification_manifest": "RELEASED_QUESTION_CLASSIFICATION.json",
     "released_batch_manifest": "RELEASED_BATCHES.json"
   },
@@ -21,7 +21,8 @@
     "012": {"status":"RELEASED_V1_10_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_012_REVIEW.json","quality_gate_workflow_run_id":32874750574,"quality_gate_warnings":0},
     "013": {"status":"RELEASED_V1_11_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_013_REVIEW.json","quality_gate_workflow_run_id":32881051384,"quality_gate_warnings":0},
     "014": {"status":"RELEASED_V1_12_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_014_REVIEW.json","quality_gate_workflow_run_id":32882176999,"quality_gate_warnings":0},
-    "015": {"status":"RELEASED_V1_13_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_015_REVIEW.json","quality_gate_workflow_run_id":32883157593,"quality_gate_warnings":0}
+    "015": {"status":"RELEASED_V1_13_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_015_REVIEW.json","quality_gate_workflow_run_id":32883157593,"quality_gate_warnings":0},
+    "016": {"status":"RELEASED_V1_14_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_016_REVIEW.json","quality_gate_evidence_type":"deterministic-equivalence","quality_gate_basis_workflow_run_id":32983858362,"browser_evidence_type":"runtime-byte-equivalence","browser_basis_workflow_run_id":32982968885,"quality_gate_warnings":0}
   },
   "candidate_batches": {},
   "pending_candidate_summary": {"records":0,"standard_mcq":0,"bellringer_cases":0,"difficulty_distribution":{"F":0,"E":0,"S":0,"B":0}},
@@ -29,7 +30,7 @@
     "numbered_objectives_with_standard_mcq_exposure": "62/62",
     "mapped_subtopics": 344,
     "explicit_enriched_subtopic_exposure": 280,
-    "boundary": "Objective/subtopic exposure is an authoring coverage metric, not evidence of learner mastery."
+    "boundary": "280 is the last directly executed released-only coverage count from v1.13 and is retained as a conservative verified floor. Batch 016 may increase explicit tag exposure; recompute before claiming a higher exact figure. Objective/subtopic exposure is an authoring coverage metric, not evidence of learner mastery."
   },
   "authoring_guardrails": {
     "minimum_exam_calibrated_share_for_batch_16_plus": 0.50,
@@ -38,9 +39,10 @@
     "objective_planning_minimum": {"F":1,"E":4,"S":1}
   },
   "long_term_target": {"bank_records":800,"F":120,"E":480,"S":160,"B":40},
-  "remaining_to_target": {"bank_records":496,"F":79,"E":279,"S":99,"B":39},
+  "remaining_to_target": {"bank_records":480,"F":79,"E":267,"S":95,"B":39},
   "next_priority": [
-    "Use the v1.13 coverage planner to target the remaining sparse objectives and 64 enriched subtopics without explicit question tags.",
+    "Recompute released-only explicit enriched subtopic exposure on the next executable CISSP audit before publishing a higher exact coverage figure.",
+    "Use the v1.14 deficit state to target remaining sparse objectives and untagged enriched subtopics.",
     "Keep the next 16-question batch centered on Exam-calibrated and Stretch application while preserving the 35% primary-domain cap.",
     "Keep every new candidate behind semantic review plus the repository-wide originality/duplicate gate before release.",
     "Add Bellringers separately and sparsely; they are integrative drills, not imitations of live CISSP items.",
