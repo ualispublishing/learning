@@ -2,7 +2,7 @@
   "schema_version": 2,
   "batch_id": "015",
   "reviewed_on": "2026-08-25",
-  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "status": "SEMANTIC_REVIEWED_GATE_PASSED",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -31,14 +31,25 @@
     "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; declared sibling relationships only where a released objective/rule family is deliberately revisited through a materially different decision boundary"
   },
   "gate_state": {
-    "automated_repository_gate": "PENDING",
+    "automated_repository_gate": "PASS",
+    "workflow_run_id": 32883157593,
     "quality_gate_mode": "released+candidate",
-    "promotion_allowed": false,
-    "requirement": "Promote only after quality_gate.py passes against the full v1.12 released corpus and Batch 015 with zero unresolved warnings, and the browser smoke gate passes."
+    "released_mcq_compared": 287,
+    "released_bellringers_compared": 1,
+    "candidate_records": 16,
+    "warnings": 0,
+    "browser_smoke": "PASS",
+    "promotion_allowed": true
+  },
+  "coverage_effect": {
+    "explicit_subtopic_tags_before": 277,
+    "explicit_subtopic_tags_after_candidate": 280,
+    "total_mapped_subtopics": 344
   },
   "notes": [
     "Batch 015 follows the v1.12 planner exactly: complete termination deprovisioning, removable-media cross-zone controls, WAF rule tuning, transitive-dependency vulnerability management, post-emergency change reconciliation, progressively realistic DR exercises, assessment finding closure by retest, ethics of competence and truthful assurance, dependency-aware BIA, Biba integrity reasoning, serverless workload/event trust boundaries, agentic-AI tool abuse threat modeling, cryptographic fault injection, WAN common-mode redundancy, federation claim/authorization lifecycle, and ongoing supplier monitoring.",
     "Stretch items are C-235, C-239, C-243, and C-247. Sibling relationships deliberately revisit only broad objective families through materially different decisions.",
-    "The batch remains excluded from RELEASED_BATCHES.json and the public Pages artifact until the automated gate passes."
+    "Repository-wide quality_gate.py passed against 287 released standard questions plus 1 Bellringer and all 16 Batch 015 candidates with zero warnings.",
+    "The interactive browser smoke test also passed before promotion."
   ]
 }
