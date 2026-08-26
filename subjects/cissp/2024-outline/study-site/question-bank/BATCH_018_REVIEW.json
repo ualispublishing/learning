@@ -2,7 +2,8 @@
   "schema_version": 3,
   "batch_id": "018",
   "reviewed_on": "2026-08-26",
-  "status": "RELEASED_V1_16_VERIFIED",
+  "status": "SEMANTIC_REVIEWED_GATE_PASSED",
+  "release_verification_status": "RELEASED_V1_16_VERIFIED",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -101,6 +102,7 @@
     "Candidate run 32998856487 and final candidate-head run 32999113249 passed with zero originality warnings, logical mix, deterministic audit, planning, syntax, rationale integrity, static serving, browser smoke, and aggregate enforcement.",
     "The promoted released state passed PR audit 32999651694 and post-merge main audit 33000149524.",
     "Pages run 33000149453 verified the public v1.16 runtime at release SHA d17026f3e995d67b6ea9c2f9235b037a76b56f7f with 351 standard questions, 296 manifest-released expansion records, 1 Bellringer, and a released-only artifact.",
+    "The status field intentionally retains the SEMANTIC_REVIEWED_ prefix required by audit.py; release_verification_status carries the independent v1.16 release label.",
     "Authored difficulty remains an internal calibration scale and does not claim ISC2 psychometric equivalence or reproduce live exam items."
   ]
 }
