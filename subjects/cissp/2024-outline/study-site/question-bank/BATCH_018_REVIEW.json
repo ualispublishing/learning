@@ -1,8 +1,8 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "batch_id": "018",
   "reviewed_on": "2026-08-26",
-  "status": "SEMANTIC_REVIEWED_GATE_PASSED",
+  "status": "RELEASED_V1_16_VERIFIED",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -45,17 +45,31 @@
     "nist_800_86": "registered forensic and investigation reference"
   },
   "gate_state": {
-    "automated_repository_gate": "PASS",
-    "workflow_run_id": 32998856487,
-    "candidate_branch_head_sha_at_run": "152de3f26a478236dbcf3fdcb797cc93757cef89",
-    "tested_pr_merge_ref_sha": "b3961f2cc46019cdeb6fd4fc5c517066ca2adb81",
-    "quality_gate_mode": "released+candidate",
+    "candidate_repository_gate": "PASS",
+    "candidate_workflow_run_id": 32998856487,
+    "candidate_quality_gate_mode": "released+candidate",
     "released_mcq_compared": 335,
     "released_bellringers_compared": 1,
     "candidate_records": 16,
     "quality_gate_warnings": 0,
     "logical_batch_mix": "PASS",
     "logical_batch_mix_details": {"exam_calibrated_share":0.75,"bellringer_share":0.0,"largest_primary_domain":"1","largest_primary_domain_records":5,"largest_primary_domain_share":0.3125},
+    "candidate_final_head_revalidation": "PASS",
+    "candidate_final_head_revalidation_workflow_run_id": 32999113249,
+    "candidate_final_head_sha": "4ea99991179e91427b4369fcfde438b6f655549d",
+    "released_state_pr_audit": "PASS",
+    "released_state_pr_audit_workflow_run_id": 32999651694,
+    "released_state_pr_head_sha": "ce3d84498bc5063501b77bbd0944480aa8c9bdcd",
+    "post_merge_main_audit": "PASS",
+    "post_merge_main_audit_workflow_run_id": 33000149524,
+    "release_merge_commit_sha": "d17026f3e995d67b6ea9c2f9235b037a76b56f7f",
+    "public_pages_runtime": "PASS",
+    "public_pages_workflow_run_id": 33000149453,
+    "public_pages_version": "1.16.0",
+    "public_pages_standard_questions": 351,
+    "public_pages_manifest_released_records": 296,
+    "public_pages_bellringers": 1,
+    "public_pages_released_only": true,
     "deterministic_knowledge_audit": "PASS",
     "planning_gate": "PASS",
     "javascript_syntax": "PASS",
@@ -65,25 +79,28 @@
     "browser_smoke_workflows": ["startup","review","practice","progress","sources","navigation"],
     "aggregate_gate": "PASS",
     "promotion_allowed": true,
-    "final_ledger_head_requires_revalidation": true
+    "status_ledger_revalidation_policy": "Every subsequent CISSP-path bookkeeping edit is independently audited; historical release evidence remains tied to the recorded immutable workflow runs and release merge SHA."
   },
   "coverage_effect": {
     "explicit_subtopic_tags_before": 295,
     "explicit_subtopic_tags_after_candidate": 296,
+    "explicit_subtopic_tags_released": 296,
     "total_mapped_subtopics": 344,
-    "candidate_state_measured_in_workflow_run_id": 32998856487
+    "candidate_state_measured_in_workflow_run_id": 32998856487,
+    "released_state_confirmed_in_workflow_run_id": 33000149524
   },
-  "next_planner_slate_from_gate": {
+  "next_planner_slate_from_released_state": {
+    "basis_workflow_run_id": 33000149524,
     "difficulty_distribution": {"E":12,"S":4},
     "primary_domain_distribution": {"1":5,"3":5,"4":1,"5":1,"7":4},
     "objective_targets": ["1.2","1.3","1.4","1.5","1.8","7.4","7.5","7.7","7.9","3.10","3.3","3.8","3.6","4.3","5.6","3.9"]
   },
   "notes": [
-    "Batch 018 follows the exact v1.15 planner slate from workflow run 32997226840 and keeps the largest primary-domain share at 5/16 (31.25%).",
-    "The scenarios cover secure-development maturity models, DRM/DLP/CASB selection, investigation-type governance, requirements-derived controls, professional ethics, proactive threat modeling, layered SCRM with roots of trust/PUF/SBOM, cryptographic lifecycle and quantum-transition planning, awareness-program effectiveness, site selection, evidence-room facility controls, authentication recovery lifecycle, disaster-recovery execution, business-continuity exercises, layered physical security, and travel/duress safety.",
-    "Stretch items are C-283, C-287, C-291, and C-295. The remaining twelve are Exam-calibrated and all numeric scores are within configured tier ranges.",
-    "Fresh PR workflow run 32998856487 tested the candidate against current main through merge ref b3961f2cc46019cdeb6fd4fc5c517066ca2adb81 and passed the repository-wide quality/originality gate with zero warnings, logical batch composition, deterministic knowledge audit, coverage/planning, JavaScript syntax, legacy rationale integrity, static asset serving, interactive browser smoke, and aggregate gate.",
-    "The candidate increased explicit enriched-subtopic exposure from 295/344 to 296/344; most items deliberately deepen thin objectives rather than merely adding new labels.",
-    "This ledger update itself must receive a clean PR audit on the new exact head before merge. Authored difficulty remains an internal calibration scale and does not claim ISC2 psychometric equivalence or reproduce live exam items."
+    "Batch 018 followed the v1.15 executable planner slate and kept the largest primary-domain share at 5/16 (31.25%).",
+    "Stretch items are C-283, C-287, C-291, and C-295; the other twelve are Exam-calibrated and all numeric scores are within configured tier ranges.",
+    "Candidate run 32998856487 and final candidate-head run 32999113249 passed with zero originality warnings, logical mix, deterministic audit, planning, syntax, rationale integrity, static serving, browser smoke, and aggregate enforcement.",
+    "The promoted released state passed PR audit 32999651694 and post-merge main audit 33000149524.",
+    "Pages run 33000149453 verified the public v1.16 runtime at release SHA d17026f3e995d67b6ea9c2f9235b037a76b56f7f with 351 standard questions, 296 manifest-released expansion records, 1 Bellringer, and a released-only artifact.",
+    "Authored difficulty remains an internal calibration scale and does not claim ISC2 psychometric equivalence or reproduce live exam items."
   ]
 }
