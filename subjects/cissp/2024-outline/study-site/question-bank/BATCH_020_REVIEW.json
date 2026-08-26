@@ -1,8 +1,8 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "batch_id": "020",
   "reviewed_on": "2026-08-26",
-  "status": "SEMANTIC_REVIEWED_GATE_PASSED",
+  "status": "SEMANTIC_REVIEWED_RELEASED_V1_18_VERIFIED_PENDING_FINAL_BOOKKEEPING_REVALIDATION",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -43,47 +43,75 @@
     "nist_800_53_rev5_update1": "registered current supporting control catalog",
     "nist_800_63_4": "registered current digital identity and federation guidance"
   },
-  "gate_state": {
+  "candidate_gate_state": {
     "automated_repository_gate": "PASS",
     "workflow_run_id": 33005686967,
     "workflow_head_sha": "328152e405fc2cc3360a079bd67c2adc6233d572",
+    "exact_final_candidate_head_revalidation_workflow_run_id": 33005950520,
+    "exact_final_candidate_head_sha": "fa7e26c6b51f50284918233d468769cdb708d002",
     "quality_gate_mode": "released+candidate",
     "released_mcq_compared": 367,
     "released_bellringers_compared": 1,
     "candidate_records": 16,
     "quality_gate_warnings": 0,
     "logical_batch_mix": "PASS",
-    "logical_batch_mix_details": {"exam_calibrated_share":0.75,"bellringer_share":0.0,"largest_primary_domain":"7","largest_primary_domain_records":5,"largest_primary_domain_share":0.3125},
     "deterministic_knowledge_audit": "PASS",
     "planning_gate": "PASS",
     "javascript_syntax": "PASS",
     "legacy_rationales": "PASS",
     "static_asset_serving": "PASS",
     "browser_smoke": "PASS",
-    "browser_smoke_workflows": ["startup","review","practice","progress","sources","navigation"],
-    "aggregate_gate": "PASS",
-    "promotion_allowed": true,
-    "exact_final_ledger_head_revalidation": "PENDING"
+    "aggregate_gate": "PASS"
+  },
+  "release_verification": {
+    "release_version": "1.18.0",
+    "released_state_pr_number": 79,
+    "released_state_pr_head_sha": "1a5d9e185df621573df80661417a9552bb06a615",
+    "released_state_pr_audit_workflow_run_id": null,
+    "released_state_pr_audit": "UNAVAILABLE_GITHUB_PULL_REQUEST_EVENT_EMISSION",
+    "compensating_control": "Clean six-file promotion head was merged only after two exact candidate-state full audits. The exact post-merge main SHA then had to pass the comprehensive CISSP audit and the Pages workflow's released-only audit/browser/deploy/live-runtime chain before release evidence was accepted.",
+    "release_merge_commit_sha": "89662ffff4c294012a168791bf65ccb75cf9c0ae",
+    "post_merge_main_audit_workflow_run_id": 33018594367,
+    "post_merge_main_audit": "PASS",
+    "pages_workflow_run_id": 33018594552,
+    "pages_released_corpus_audit": "PASS",
+    "pages_browser_validation": "PASS",
+    "pages_interactive_browser_smoke": "PASS",
+    "pages_released_only_artifact": "PASS",
+    "pages_deploy": "PASS",
+    "public_runtime": "PASS",
+    "public_runtime_fingerprint": {
+      "commit": "89662ffff4c294012a168791bf65ccb75cf9c0ae",
+      "version": "1.18.0",
+      "standard_questions": 383,
+      "manifest_released_records": 328,
+      "bellringers": 1,
+      "released_only": true
+    },
+    "final_bookkeeping_sha_revalidation": "PENDING"
   },
   "coverage_effect": {
     "explicit_subtopic_tags_before": 296,
     "explicit_subtopic_tags_after_candidate": 296,
+    "explicit_subtopic_tags_after_release": 296,
     "total_mapped_subtopics": 344,
-    "candidate_state_measured_in_workflow_run_id": 33005686967,
+    "candidate_state_measured_in_workflow_run_id": 33005950520,
+    "released_state_measured_in_workflow_run_id": 33018594367,
     "boundary": "Batch 020 increases scenario depth and objective practice without increasing the distinct enriched-subtopic tag count. The 296/344 metric counts distinct explicit labels, not depth or mastery."
   },
-  "next_planner_slate_if_promoted": {
-    "basis_workflow_run_id": 33005686967,
+  "next_planner_slate": {
+    "basis_workflow_run_id": 33018594367,
     "difficulty_distribution": {"E":12,"S":4},
     "primary_domain_distribution": {"1":2,"2":1,"3":2,"5":3,"6":3,"7":5},
     "objective_targets": ["7.8","7.6","2.3","7.13","1.7","3.4","5.4","7.14","7.1","5.2","6.5","1.6","6.3","5.5","6.2","3.2"]
   },
   "notes": [
     "Batch 020 follows the released-only v1.17 planner slate from main audit 33004251528 and keeps D7 at the 5/16 maximum, below the configured 35% primary-domain cap.",
-    "The scenarios test parallel recovery execution without primary interruption, MFA-fatigue response during travel, configuration drift after emergency changes, coordinated disaster restoration under personnel and supplier constraints, managed-security-provider governance, fail-secure entry with life-safety egress, hybrid assessment strategy, intangible asset ownership, remediation exceptions, software acquisition due diligence, policy/standard/procedure hierarchy, BIA external dependencies, Biba integrity reasoning, chosen-ciphertext oracle recognition, hybrid federation, and attribute/risk-aware authorization.",
     "Stretch items are C-315, C-319, C-323, and C-327. The remaining twelve are Exam-calibrated and all numeric scores are within configured tier ranges.",
-    "Fresh workflow run 33005686967 passed every CISSP candidate-state gate, including repository-wide originality comparison with zero warnings and interactive browser smoke.",
-    "Because recording this evidence changes the branch head, promotion remains contingent on a second full exact-head revalidation of the ledger-updated branch.",
+    "Candidate workflow 33005686967 and exact final candidate-head workflow 33005950520 both passed all CISSP gates with zero originality warnings.",
+    "GitHub did not emit pull_request Actions runs for the v1.18 promotion PRs despite multiple native PR events; no nonexistent PR audit run is claimed.",
+    "The exact release merge SHA 89662ffff4c294012a168791bf65ccb75cf9c0ae passed comprehensive main audit 33018594367 and Pages run 33018594552, including live public fingerprint verification.",
+    "This bookkeeping update must itself pass the comprehensive main audit and live Pages fingerprint before v1.18 is considered fully closed at the final repository state.",
     "Authored difficulty is an internal calibration scale and does not claim ISC2 psychometric equivalence or reproduce live exam items."
   ]
 }
