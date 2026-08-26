@@ -2,7 +2,7 @@
   "schema_version": 3,
   "batch_id": "020",
   "reviewed_on": "2026-08-26",
-  "status": "SEMANTIC_REVIEWED_GATE_PASSED",
+  "status": "SEMANTIC_REVIEWED_PROMOTION_PENDING_V1_18_RELEASE_AUDIT",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -47,6 +47,8 @@
     "automated_repository_gate": "PASS",
     "workflow_run_id": 33005686967,
     "workflow_head_sha": "328152e405fc2cc3360a079bd67c2adc6233d572",
+    "candidate_exact_head_revalidation_workflow_run_id": 33005950520,
+    "candidate_exact_head_sha": "fa7e26c6b51f50284918233d468769cdb708d002",
     "quality_gate_mode": "released+candidate",
     "released_mcq_compared": 367,
     "released_bellringers_compared": 1,
@@ -63,17 +65,31 @@
     "browser_smoke_workflows": ["startup","review","practice","progress","sources","navigation"],
     "aggregate_gate": "PASS",
     "promotion_allowed": true,
-    "exact_final_ledger_head_revalidation": "PENDING"
+    "exact_final_ledger_head_revalidation": "PASS"
+  },
+  "release_verification": {
+    "release_version": "1.18.0",
+    "released_state_pr_number": null,
+    "released_state_pr_head_sha": null,
+    "released_state_pr_audit_workflow_run_id": null,
+    "released_state_pr_audit": "PENDING",
+    "release_merge_commit_sha": null,
+    "post_merge_main_audit_workflow_run_id": null,
+    "post_merge_main_audit": "PENDING",
+    "pages_workflow_run_id": null,
+    "public_runtime": "PENDING"
   },
   "coverage_effect": {
     "explicit_subtopic_tags_before": 296,
     "explicit_subtopic_tags_after_candidate": 296,
+    "explicit_subtopic_tags_after_release": null,
     "total_mapped_subtopics": 344,
     "candidate_state_measured_in_workflow_run_id": 33005686967,
+    "released_state_measured_in_workflow_run_id": null,
     "boundary": "Batch 020 increases scenario depth and objective practice without increasing the distinct enriched-subtopic tag count. The 296/344 metric counts distinct explicit labels, not depth or mastery."
   },
   "next_planner_slate_if_promoted": {
-    "basis_workflow_run_id": 33005686967,
+    "basis_workflow_run_id": 33005950520,
     "difficulty_distribution": {"E":12,"S":4},
     "primary_domain_distribution": {"1":2,"2":1,"3":2,"5":3,"6":3,"7":5},
     "objective_targets": ["7.8","7.6","2.3","7.13","1.7","3.4","5.4","7.14","7.1","5.2","6.5","1.6","6.3","5.5","6.2","3.2"]
@@ -82,8 +98,8 @@
     "Batch 020 follows the released-only v1.17 planner slate from main audit 33004251528 and keeps D7 at the 5/16 maximum, below the configured 35% primary-domain cap.",
     "The scenarios test parallel recovery execution without primary interruption, MFA-fatigue response during travel, configuration drift after emergency changes, coordinated disaster restoration under personnel and supplier constraints, managed-security-provider governance, fail-secure entry with life-safety egress, hybrid assessment strategy, intangible asset ownership, remediation exceptions, software acquisition due diligence, policy/standard/procedure hierarchy, BIA external dependencies, Biba integrity reasoning, chosen-ciphertext oracle recognition, hybrid federation, and attribute/risk-aware authorization.",
     "Stretch items are C-315, C-319, C-323, and C-327. The remaining twelve are Exam-calibrated and all numeric scores are within configured tier ranges.",
-    "Fresh workflow run 33005686967 passed every CISSP candidate-state gate, including repository-wide originality comparison with zero warnings and interactive browser smoke.",
-    "Because recording this evidence changes the branch head, promotion remains contingent on a second full exact-head revalidation of the ledger-updated branch.",
+    "Fresh workflow run 33005686967 passed every CISSP candidate-state gate with zero originality warnings, and exact final candidate-ledger head run 33005950520 independently passed all gates.",
+    "Promotion to v1.18 remains contingent on a released-state PR audit, post-merge main audit, and exact live Pages runtime verification.",
     "Authored difficulty is an internal calibration scale and does not claim ISC2 psychometric equivalence or reproduce live exam items."
   ]
 }
