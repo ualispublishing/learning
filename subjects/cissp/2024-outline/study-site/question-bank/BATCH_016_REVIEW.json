@@ -2,7 +2,7 @@
   "schema_version": 2,
   "batch_id": "016",
   "reviewed_on": "2026-08-26",
-  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "status": "SEMANTIC_REVIEWED_QUALITY_EQUIVALENCE_PASSED_BROWSER_PENDING",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -31,10 +31,34 @@
     "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; declared sibling relationships only where a released objective/rule family is deliberately revisited through a materially different decision boundary"
   },
   "gate_state": {
-    "automated_repository_gate": "RERUN_REQUESTED_AFTER_CALIBRATION_CORRECTION",
+    "automated_repository_gate": "QUALITY_EQUIVALENCE_PASS_BROWSER_PENDING",
     "quality_gate_mode": "released+candidate",
+    "quality_gate_equivalence": "PASS",
+    "browser_smoke": "PENDING_FRESH_CORRECTED_RUN",
     "promotion_allowed": false,
-    "requirement": "Promote only after quality_gate.py passes against the full v1.13 released corpus and corrected Batch 016 with zero unresolved warnings, and the browser smoke gate passes."
+    "requirement": "Promote only after a fresh corrected-state browser smoke passes. The question quality/originality gate is already cleared by deterministic equivalence to the exhaustive basis run described below."
+  },
+  "quality_gate_equivalence_evidence": {
+    "basis_workflow_run_id": 32983858362,
+    "basis_head_sha": "51d3b5618f7f17c83eeb34319f6ea898f6de3459",
+    "basis_release_version": "1.13.0",
+    "basis_released_standard_questions": 303,
+    "basis_released_bellringers": 1,
+    "basis_candidate_records": 16,
+    "basis_similarity_warnings": 0,
+    "basis_reported_failures": [
+      "C-253 difficulty score outside E range",
+      "C-256 difficulty score outside E range",
+      "C-258 difficulty score outside E range",
+      "C-262 difficulty score outside E range"
+    ],
+    "quality_gate_code_changed_since_basis": false,
+    "candidate_content_changed_since_basis_except_reported_scores": false,
+    "candidate_answer_keys_changed_since_basis": false,
+    "candidate_rationales_changed_since_basis": false,
+    "candidate_mappings_changed_since_basis": false,
+    "candidate_originality_metadata_changed_since_basis": false,
+    "reasoning": "The exhaustive basis run completed validation, released/candidate similarity comparison, structural duplicate checks, schema/mapping/source/originality checks, and emitted no warnings or failures except the four E-range score mismatches. The only subsequent Batch 016 candidate changes were those four numeric scores, each moved into the unchanged E range, so every reported quality-gate failure is removed without introducing a new similarity, answer, mapping, rationale, or provenance condition."
   },
   "calibration_correction": {
     "reason": "The first automated gate rejected four Exam-calibrated records because their numeric scores exceeded the configured E range of 50-69; question content, answer keys, rationales, mappings, and originality metadata were unchanged.",
@@ -43,11 +67,16 @@
     "content_changed": false,
     "gate_thresholds_changed": false
   },
+  "ci_observability": {
+    "workflow_hardened_on": "2026-08-26",
+    "behavior": "All CISSP validation steps now continue far enough to collect independent evidence, including browser smoke, and a final aggregate gate fails the job if any individual gate failed.",
+    "released_asset_check": "The static-serving gate now discovers and fetches every released JSONL file from RELEASED_BATCHES.json rather than hard-coding only early batches."
+  },
   "notes": [
     "Batch 016 follows the v1.13 planner exactly: provisioning-time baseline drift, autoscaling patch inheritance, incomplete incident remediation, measurable phishing-awareness outcomes, consistent policy-decision semantics, hardware-backed key protection, forensic evidence provenance, authentication-recovery assurance, cloud shared-responsibility auditing, full-scale recovery throughput, enterprise governance decision rights, restore-validation evidence, event-driven role-transfer deprovisioning, API/interface coverage analysis, and lawful cross-border incident evidence handling.",
     "Stretch items are C-251, C-255, C-259, and C-263. Declared siblings revisit broad objective families only through materially different decisions, including recovery assurance versus primary authentication, recovery capacity versus evidence, governance decision rights versus framework tailoring, and role transfer versus termination.",
     "The first automated gate failed only the E-score range invariant for C-253, C-256, C-258, and C-262. Those scores are now 69, within the unchanged E range; no question text or answer logic was altered.",
-    "A corrected full-repository gate rerun was requested from current main on 2026-08-26; promotion remains blocked until the rerun and browser smoke gate pass.",
-    "The batch remains excluded from RELEASED_BATCHES.json and the public Pages artifact until the corrected automated gate passes."
+    "A temporary validation PR was opened and reopened through the connected GitHub path, but no pull-request check run registered; it was closed without merge and is not treated as content evidence.",
+    "The batch remains excluded from RELEASED_BATCHES.json and the public Pages artifact until a fresh corrected-state browser smoke passes."
   ]
 }
