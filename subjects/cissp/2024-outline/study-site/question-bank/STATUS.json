@@ -1,5 +1,5 @@
 {
-  "schema_version": 20,
+  "schema_version": 21,
   "updated": "2026-08-26",
   "release": "1.16.0",
   "released": {
@@ -24,7 +24,7 @@
     "015": {"status":"RELEASED_V1_13_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_015_REVIEW.json","quality_gate_workflow_run_id":32883157593,"quality_gate_warnings":0},
     "016": {"status":"RELEASED_V1_14_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"review":"BATCH_016_REVIEW.json","quality_gate_evidence_type":"deterministic-equivalence","quality_gate_basis_workflow_run_id":32983858362,"browser_evidence_type":"runtime-byte-equivalence","browser_basis_workflow_run_id":32982968885,"quality_gate_warnings":0,"explicit_subtopic_tags_after":285},
     "017": {"status":"RELEASED_V1_15_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"primary_domain_distribution":{"1":1,"2":4,"3":1,"4":2,"5":1,"6":1,"7":1,"8":5},"review":"BATCH_017_REVIEW.json","quality_gate_workflow_run_id":32995967102,"quality_gate_warnings":0,"logical_batch_mix":"PASS","browser_smoke":"PASS","explicit_subtopic_tags_after":295},
-    "018": {"status":"RELEASED_V1_16_0","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"primary_domain_distribution":{"1":5,"2":1,"3":4,"4":0,"5":1,"6":0,"7":4,"8":1},"review":"BATCH_018_REVIEW.json","quality_gate_workflow_run_id":32998856487,"candidate_final_head_revalidation_workflow_run_id":32999113249,"quality_gate_warnings":0,"logical_batch_mix":"PASS","browser_smoke":"PASS","explicit_subtopic_tags_after":296}
+    "018": {"status":"RELEASED_V1_16_0_VERIFIED","records":16,"standard_mcq":16,"bellringer":0,"difficulty_distribution":{"F":0,"E":12,"S":4,"B":0},"primary_domain_distribution":{"1":5,"2":1,"3":4,"4":0,"5":1,"6":0,"7":4,"8":1},"review":"BATCH_018_REVIEW.json","quality_gate_workflow_run_id":32998856487,"candidate_final_head_revalidation_workflow_run_id":32999113249,"released_state_pr_audit_workflow_run_id":32999651694,"post_merge_main_audit_workflow_run_id":33000149524,"pages_workflow_run_id":33000149453,"quality_gate_warnings":0,"logical_batch_mix":"PASS","browser_smoke":"PASS","public_runtime":"PASS","explicit_subtopic_tags_after":296}
   },
   "candidate_batches": {},
   "pending_candidate_summary": {"records":0,"standard_mcq":0,"bellringer_cases":0,"difficulty_distribution":{"F":0,"E":0,"S":0,"B":0}},
@@ -33,8 +33,8 @@
     "mapped_subtopics": 344,
     "explicit_enriched_subtopic_exposure": 296,
     "explicit_enriched_subtopic_unexposed": 48,
-    "measurement_workflow_run_id": 32998856487,
-    "boundary": "296/344 was directly measured on the exact v1.15 released corpus plus the 16 Batch 018 files in the successful candidate gate. v1.16 promotes those exact files unchanged; the release PR must independently pass the released-state audit before merge and public deployment. Objective/subtopic exposure is an authoring coverage metric, not evidence of learner mastery."
+    "measurement_workflow_run_id": 33000149524,
+    "boundary": "296/344 is confirmed on the released v1.16 corpus by the post-merge main audit in workflow run 33000149524. Objective/subtopic exposure is an authoring coverage metric, not evidence of learner mastery."
   },
   "authoring_guardrails": {
     "minimum_exam_calibrated_share_for_batch_16_plus": 0.50,
@@ -45,18 +45,18 @@
   "long_term_target": {"bank_records":800,"F":120,"E":480,"S":160,"B":40},
   "remaining_to_target": {"bank_records":448,"F":79,"E":243,"S":87,"B":39},
   "next_planned_batch": {
-    "basis_workflow_run_id": 32998856487,
+    "basis_workflow_run_id": 33000149524,
     "size": 16,
     "difficulty_target": {"E":12,"S":4},
     "primary_domain_distribution": {"1":5,"3":5,"4":1,"5":1,"7":4},
     "objective_targets": ["1.2","1.3","1.4","1.5","1.8","7.4","7.5","7.7","7.9","3.10","3.3","3.8","3.6","4.3","5.6","3.9"],
-    "boundary": "This is an authoring recommendation from the executable planner, not a release authorization or psychometric claim."
+    "boundary": "This is an authoring recommendation from the executable released-state planner, not a release authorization or psychometric claim."
   },
   "next_priority": [
-    "Require the complete released-state v1.16 PR audit to pass before merging the promotion branch.",
-    "After merge, require the main CISSP audit and released-only Pages deployment/public runtime fingerprint to pass before claiming public v1.16.",
-    "Use the recorded executable planner slate for Batch 019 only after v1.16 is clean, selecting materially new scenario families and thin concepts rather than optimizing only for tag count.",
-    "Keep every future candidate behind semantic review plus repository-wide originality/duplicate and logical-batch gates before release.",
-    "Add Bellringers separately and sparsely; they are integrative drills, not imitations of live CISSP items."
+    "Author Batch 019 from the recorded released-state planner slate, selecting materially new scenario families and thin concepts rather than optimizing only for tag count.",
+    "Keep Batch 019 at E12/S4 unless the executable planner changes, with no primary domain above 5/16 standard items.",
+    "Keep every future candidate behind semantic review plus repository-wide originality/duplicate, logical-batch, deterministic, planning, static, and browser gates before release.",
+    "Add Bellringers separately and sparsely; they are integrative drills, not imitations of live CISSP items.",
+    "Use learner confidence, distractor choice, response time, and spaced-repeat performance before making empirical difficulty claims."
   ]
 }
