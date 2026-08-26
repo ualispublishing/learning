@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "ur",
+  "cefr": "B2",
+  "unit": 7,
+  "date": "2026-08-26",
+  "theme": "arts and interpretation",
+  "source_lexicon": "reading/lexicons/urdu.jsonl",
+  "source_file_metadata": "urdu_top3000.csv",
+  "status": "PASS_FOR_GENERATION_TARGET_SENSES_PENDING_CANONICAL_FRESHNESS",
+  "freshness_result": "PENDING_PROMOTION_GATE",
+  "targets": [
+    {"id":"ur-rank-2514","form":"تان","source_rank":2514,"source_gloss":"tension","intended_sense":"a melodic phrase or ornamented vocal run in music","sense_check":"PASS_WITH_SOURCE_GLOSS_CORRECTION","note":"The controlled form is valid Urdu; the raw English gloss is not the intended music sense used here."},
+    {"id":"ur-rank-2534","form":"ناظر","source_rank":2534,"source_gloss":"viewer; watcher","intended_sense":"a viewer or audience member","sense_check":"PASS"},
+    {"id":"ur-rank-2532","form":"شاٹ","source_rank":2532,"source_gloss":"shot","intended_sense":"a continuous framed film shot or camera view","sense_check":"PASS_CONTEXTUALIZED"},
+    {"id":"ur-rank-2583","form":"کیمرا","source_rank":2583,"source_gloss":"photographic camera","intended_sense":"a camera used to frame and record an image","sense_check":"PASS"},
+    {"id":"ur-rank-2536","form":"گمنام","source_rank":2536,"source_gloss":"unknown","intended_sense":"anonymous or of unknown authorship","sense_check":"PASS_CONTEXTUALIZED"},
+    {"id":"ur-rank-2546","form":"نقلی","source_rank":2546,"source_gloss":"fake","intended_sense":"fake, imitation, or not the claimed original","sense_check":"PASS"},
+    {"id":"ur-rank-2579","form":"پوسٹر","source_rank":2579,"source_gloss":"poster","intended_sense":"a promotional poster","sense_check":"PASS"},
+    {"id":"ur-rank-2544","form":"لاجواب","source_rank":2544,"source_gloss":"unrivaled","intended_sense":"excellent, outstanding, or unmatched as an evaluative claim","sense_check":"PASS_CONTEXTUALIZED"},
+    {"id":"ur-rank-2586","form":"تال","source_rank":2586,"source_gloss":"meter; metre; time","intended_sense":"rhythm or metrical beat in music and dance","sense_check":"PASS_CONTEXTUALIZED"},
+    {"id":"ur-rank-2587","form":"تجسس","source_rank":2587,"source_gloss":"curiosity","intended_sense":"curiosity or an investigative desire to explore","sense_check":"PASS"}
+  ],
+  "policy_notes": [
+    "Target IDs are taken only from the controlled repository lexicon and are not invented.",
+    "Exact canonical freshness is intentionally deferred to the promotion script, which checks all prior canonical Urdu target IDs immediately before append.",
+    "Learner-facing questions assess only the intended contextual senses recorded here.",
+    "Raw English glosses are treated as source metadata rather than unquestionable semantic authority when the Urdu form has a clear context-specific sense."
+  ]
+}
