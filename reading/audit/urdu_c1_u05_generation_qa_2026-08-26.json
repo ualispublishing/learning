@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "ur",
+  "cefr": "C1",
+  "unit": 5,
+  "theme": "scientific uncertainty and communication",
+  "sequences": [25, 26, 27, 28, 29, 30],
+  "generated_passages": 6,
+  "question_contract": {
+    "questions_per_passage": 10,
+    "answers_per_passage": 10,
+    "status": "PASS"
+  },
+  "structural_checks": {
+    "unique_record_ids": "PASS",
+    "sequence_contiguity": "PASS",
+    "unit_alignment": "PASS",
+    "allowed_genres": "PASS",
+    "question_answer_links": "PASS",
+    "target_exposure_min_2": "PASS",
+    "target_first_occurrence_order": "PASS",
+    "context_strategy_schema_enum": "PASS",
+    "source_rank_collision_search": "PASS",
+    "stored_word_counts": "PASS"
+  },
+  "lexical_targets": [
+    {"id":"ur-rank-1608","form":"نمونہ","source_rank":1608,"source_lexicon":"urdu_top3000.csv","prior_target_collision":false,"exposures_in_text":4},
+    {"id":"ur-rank-1796","form":"تخمینہ","source_rank":1796,"source_lexicon":"urdu_top3000.csv","prior_target_collision":false,"exposures_in_text":4},
+    {"id":"ur-rank-2910","form":"تفاوت","source_rank":2910,"source_lexicon":"urdu_top3000.csv","prior_target_collision":false,"exposures_in_text":4},
+    {"id":"ur-rank-1160","form":"رجحان","source_rank":1160,"source_lexicon":"urdu_top3000.csv","prior_target_collision":false,"exposures_in_text":4},
+    {"id":"ur-rank-1105","form":"تحقیقات","source_rank":1105,"source_lexicon":"urdu_top3000.csv","prior_target_collision":false,"exposures_in_text":5},
+    {"id":"ur-rank-1400","form":"تجزیہ","source_rank":1400,"source_lexicon":"urdu_top3000.csv","prior_target_collision":false,"exposures_in_text":4}
+  ],
+  "lexical_freshness": "PASS",
+  "lexical_sense_notes": [
+    "نمونہ is used in the research-sample sense.",
+    "تخمینہ is used for a provisional estimate that can be revised with new evidence.",
+    "تفاوت is used for interpretable variation/difference across studies or measurements.",
+    "رجحان is used for a sustained direction across observations rather than a short run of points.",
+    "تحقیقات is used collectively for research studies/investigations.",
+    "تجزیہ is used for systematic examination of evidence, limits, and interpretations."
+  ],
+  "genre_cycle": ["research summary", "journalistic analysis", "critique", "research summary", "journalistic analysis", "critique"],
+  "passage_roles": ["instructional", "reinforcement", "interleaved", "transfer", "integration", "checkpoint"],
+  "word_counts": [505, 488, 500, 476, 490, 478],
+  "formal_release_audit": "DEFERRED",
+  "release_note": "Generation-stage QA only. This does not mark educator/publication release approval.",
+  "canonicalization_status": "CANDIDATE_READY_FOR_APPEND",
+  "expected_frontier_after_append": {
+    "urdu_c1_passages": 30,
+    "next_sequence": 31,
+    "next_unit": 6,
+    "overall_reading_count": 990
+  }
+}
