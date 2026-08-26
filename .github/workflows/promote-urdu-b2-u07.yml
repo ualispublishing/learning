@@ -1,0 +1,64 @@
+name: Promote Urdu B2 Unit 7
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/promote-urdu-b2-u07.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Rebase onto current main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+
+      - name: Validate, append Unit 7, and advance frontier
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 reading/tools/promote_urdu_b2_u07.py
+
+      - name: Refresh and validate live state bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 reading/tools/refresh_state_manifest.py
+          python3 reading/tools/validate_continuation_state.py
+
+      - name: Commit canonical promotion
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            reading/urdu/b2/passages.jsonl \
+            reading/audit/urdu_b2_u07_generation_candidate \
+            reading/audit/urdu_b2_u07_generation_validation_2026-08-26.json \
+            reading/audit/urdu_b2_u07_promotion_2026-08-26.json \
+            reading/audit/urdu_b2_u07_lexical_sense_check_2026-08-26.json \
+            reading/STATUS.json \
+            reading/CONTINUATION.json \
+            reading/planning/ACTIVE_GENERATION_PLAN.json \
+            reading/TASKS.md \
+            reading/AGENT_HANDOFF_V2.md \
+            reading/STATE_MANIFEST.json
+          if git diff --cached --quiet; then
+            echo "No promotion changes to commit"
+            exit 0
+          fi
+          git commit -m "Add Urdu B2 Unit 7 and advance to Unit 8"
+          git push origin HEAD:main
