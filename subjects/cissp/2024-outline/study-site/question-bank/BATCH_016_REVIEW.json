@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "batch_id": "016",
+  "reviewed_on": "2026-08-26",
+  "status": "SEMANTIC_REVIEWED_PENDING_AUTOMATED_GATE",
+  "records": 16,
+  "standard_mcq": 16,
+  "bellringers": 0,
+  "files": [
+    "question-bank/candidates/batch-016-a.jsonl",
+    "question-bank/candidates/batch-016-b.jsonl",
+    "question-bank/candidates/batch-016-c.jsonl",
+    "question-bank/candidates/batch-016-d.jsonl"
+  ],
+  "difficulty_distribution": {"F":0,"E":12,"S":4,"B":0},
+  "primary_domain_distribution": {"1":4,"2":0,"3":1,"4":0,"5":3,"6":3,"7":5,"8":0},
+  "reviewed_ids": ["C-248","C-249","C-250","C-251","C-252","C-253","C-254","C-255","C-256","C-257","C-258","C-259","C-260","C-261","C-262","C-263"],
+  "semantic_review": {
+    "semantic_reviewed_records": 16,
+    "answer_key_conflicts": 0,
+    "objective_mapping_conflicts": 0,
+    "source_mapping_conflicts": 0,
+    "material_factual_errors_remaining": 0,
+    "four_option_rationales_complete": true,
+    "originality_provenance_complete": true,
+    "external_question_seeds_used": 0
+  },
+  "authoring_focus": {
+    "planner_basis": "released v1.13 deficit state after Batch 015 promotion",
+    "objective_targets": ["7.3","7.8","7.6","1.12","5.4","3.4","7.1","1.2","5.2","6.5","7.10","1.3","6.3","5.5","6.2","1.4"],
+    "guardrails": "E12/S4; max primary-domain count 5/16; original-from-public-scope only; declared sibling relationships only where a released objective/rule family is deliberately revisited through a materially different decision boundary"
+  },
+  "gate_state": {
+    "automated_repository_gate": "PENDING",
+    "quality_gate_mode": "released+candidate",
+    "promotion_allowed": false,
+    "requirement": "Promote only after quality_gate.py passes against the full v1.13 released corpus and Batch 016 with zero unresolved warnings, and the browser smoke gate passes."
+  },
+  "notes": [
+    "Batch 016 follows the v1.13 planner exactly: provisioning-time baseline drift, autoscaling patch inheritance, incomplete incident remediation, measurable phishing-awareness outcomes, consistent policy-decision semantics, hardware-backed key protection, forensic evidence provenance, authentication-recovery assurance, cloud shared-responsibility auditing, full-scale recovery throughput, enterprise governance decision rights, restore-validation evidence, event-driven role-transfer deprovisioning, API/interface coverage analysis, and lawful cross-border incident evidence handling.",
+    "Stretch items are C-251, C-255, C-259, and C-263. Declared siblings revisit broad objective families only through materially different decisions, including recovery assurance versus primary authentication, recovery capacity versus evidence, governance decision rights versus framework tailoring, and role transfer versus termination.",
+    "The batch remains excluded from RELEASED_BATCHES.json and the public Pages artifact until the automated gate passes."
+  ]
+}
