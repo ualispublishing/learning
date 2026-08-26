@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "batch_id": "018",
+  "reviewed_on": "2026-08-26",
+  "status": "SEMANTIC_REVIEWED_GATE_PENDING",
+  "records": 16,
+  "standard_mcq": 16,
+  "bellringers": 0,
+  "files": [
+    "question-bank/candidates/batch-018-a.jsonl",
+    "question-bank/candidates/batch-018-b.jsonl",
+    "question-bank/candidates/batch-018-c.jsonl",
+    "question-bank/candidates/batch-018-d.jsonl"
+  ],
+  "difficulty_distribution": {"F":0,"E":12,"S":4,"B":0},
+  "primary_domain_distribution": {"1":5,"2":1,"3":4,"4":0,"5":1,"6":0,"7":4,"8":1},
+  "reviewed_ids": ["C-280","C-281","C-282","C-283","C-284","C-285","C-286","C-287","C-288","C-289","C-290","C-291","C-292","C-293","C-294","C-295"],
+  "semantic_review": {
+    "semantic_reviewed_records": 16,
+    "answer_key_conflicts": 0,
+    "objective_mapping_conflicts": 0,
+    "source_mapping_conflicts": 0,
+    "material_factual_errors_remaining": 0,
+    "four_option_rationales_complete": true,
+    "originality_provenance_complete": true,
+    "external_question_seeds_used": 0,
+    "answer_position_distribution": {"0":4,"1":4,"2":4,"3":4}
+  },
+  "authoring_focus": {
+    "planner_basis_workflow_run_id": 32997226840,
+    "planner_basis_release": "1.15.0",
+    "planner_measured_explicit_subtopic_exposure": "295/344",
+    "planner_unexposed_enriched_subtopics": 49,
+    "objective_targets": ["8.1","2.6","1.5","3.3","1.1","1.10","1.11","3.6","1.12","3.8","3.9","5.6","7.11","7.13","7.14","7.15"],
+    "guardrails": "E12/S4; max primary-domain count 5/16; 16 distinct objective decision points; original-from-public-scope only; no external question seeds; canonical enriched-subtopic labels only"
+  },
+  "current_source_check": {
+    "isc2_outline_effective_date": "2024-04-15",
+    "isc2_outline_rechecked_on": "2026-08-26",
+    "isc2_ethics_rechecked_on": "2026-08-26",
+    "nist_800_63_4": "registered current digital-identity reference",
+    "nist_800_218": "registered final SSDF reference",
+    "nist_800_53_rev5_update1": "registered supporting control catalog",
+    "nist_800_34_rev1_update1": "registered contingency-planning reference",
+    "nist_800_86": "registered forensic and investigation reference"
+  },
+  "gate_state": {
+    "automated_repository_gate": "PENDING",
+    "workflow_run_id": null,
+    "workflow_head_sha": null,
+    "quality_gate_mode": "released+candidate",
+    "quality_gate_warnings": null,
+    "logical_batch_mix": "PENDING",
+    "logical_batch_mix_details": {"exam_calibrated_share":0.75,"bellringer_share":0.0,"largest_primary_domain":"1","largest_primary_domain_records":5,"largest_primary_domain_share":0.3125},
+    "deterministic_knowledge_audit": "PENDING",
+    "planning_gate": "PENDING",
+    "javascript_syntax": "PENDING",
+    "legacy_rationales": "PENDING",
+    "static_asset_serving": "PENDING",
+    "browser_smoke": "PENDING",
+    "aggregate_gate": "PENDING",
+    "promotion_allowed": false
+  },
+  "coverage_effect": {
+    "explicit_subtopic_tags_before": 295,
+    "explicit_subtopic_tags_after_candidate": null,
+    "total_mapped_subtopics": 344,
+    "candidate_state_measured_in_workflow_run_id": null
+  },
+  "notes": [
+    "Batch 018 follows the exact v1.15 planner slate from workflow run 32997226840 and keeps the largest primary-domain share at 5/16 (31.25%).",
+    "The scenarios cover secure-development maturity models, DRM/DLP/CASB selection, investigation-type governance, requirements-derived controls, professional ethics, proactive threat modeling, layered SCRM with roots of trust/PUF/SBOM, cryptographic lifecycle and quantum-transition planning, awareness-program effectiveness, site selection, evidence-room facility controls, authentication recovery lifecycle, disaster-recovery execution, business-continuity exercises, layered physical security, and travel/duress safety.",
+    "Stretch items are C-283, C-287, C-291, and C-295. The remaining twelve are Exam-calibrated and all numeric scores are within configured tier ranges.",
+    "The repository quality/originality, logical-batch, deterministic, planning, syntax, static, and browser gates must pass on the exact candidate branch before promotion is authorized.",
+    "Authored difficulty is an internal calibration scale and does not claim ISC2 psychometric equivalence or reproduce live exam items."
+  ]
+}
