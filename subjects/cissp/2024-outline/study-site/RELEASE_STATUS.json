@@ -47,7 +47,7 @@
     "explicit_enriched_subtopic_exposure_after": 295,
     "objective_exposure": "62/62 numbered objectives have at least one standard MCQ exposure",
     "post_promotion_main_audit_workflow_run_id": 32996762184,
-    "post_promotion_main_sha": "4f97700f38346791c29d8ec511616ef5db5f5b98",
+    "post_promotion_release_content_sha": "4f97700f38346791c29d8ec511616ef5db5f5b98",
     "post_promotion_main_audit": "PASS"
   },
   "pending_candidate": null,
@@ -112,12 +112,16 @@
     "last_confirmed_public_pages_release": "1.15.0",
     "public_v1_15_verification_pending": false,
     "public_runtime_verified": true,
-    "pages_workflow_run_id": 32996762272,
-    "deployed_sha": "4f97700f38346791c29d8ec511616ef5db5f5b98",
-    "public_standard_questions": 335,
-    "public_manifest_released_records": 280,
-    "public_bellringers": 1,
-    "public_released_only": true,
+    "release_runtime_evidence": {
+      "pages_workflow_run_id": 32996762272,
+      "release_content_sha": "4f97700f38346791c29d8ec511616ef5db5f5b98",
+      "version": "1.15.0",
+      "standard_questions": 335,
+      "manifest_released_records": 280,
+      "bellringers": 1,
+      "released_only": true
+    },
+    "note_on_deploy_sha": "The live deploy SHA is intentionally not stored as a self-referential current-state field here: editing this ledger itself triggers a new Pages run. The Pages workflow independently writes deploy-sha.txt and requires the live value to equal that run's GITHUB_SHA before succeeding.",
     "public_runtime_verification_required_after_every_deploy": true,
     "runtime_health_markers": true,
     "interactive_browser_smoke_gate": true,
@@ -125,9 +129,9 @@
     "released_only_pages_artifact": true,
     "browser_test_harness_excluded_from_pages_artifact": true,
     "release_count_agnostic_full_bank_control": true,
-    "activation_status": "v1.15 is on main and the public GitHub Pages runtime is verified against deployment SHA 4f97700f38346791c29d8ec511616ef5db5f5b98. The deployed artifact contains only released question-bank files and passed live runtime fingerprint checks."
+    "activation_status": "v1.15 is on main and has confirmed public GitHub Pages runtime evidence. Every subsequent Pages deployment must independently verify its own live deployment SHA, version, question counts, runtime markers, and released-only artifact before the workflow can pass."
   },
-  "precision_boundary": "READY_FOR_STUDY means the released v1.15 repository corpus is organized around the public ISC2 scope, mapped subtopics, curated precision distinctions, original scenario questions, metadata, teaching rationales, and auditable release controls. The semantic ledger covers 476 released learner-facing item IDs with zero known keyed-answer reversals and no known remaining material factual error. Batch 017 passed fresh candidate-state gates in workflow run 32995967102; the promoted v1.15 release then passed the full released-state PR audit and the post-merge main audit in workflow run 32996762184. The exact released-only enriched-subtopic exposure is 295/344. GitHub Pages workflow run 32996762272 verified the live v1.15 runtime at SHA 4f97700f38346791c29d8ec511616ef5db5f5b98 with 335 standard questions, 1 Bellringer, and a released-only artifact. This is not a mathematical guarantee of perpetual infallibility or a guarantee of passing the live adaptive CISSP exam.",
+  "precision_boundary": "READY_FOR_STUDY means the released v1.15 repository corpus is organized around the public ISC2 scope, mapped subtopics, curated precision distinctions, original scenario questions, metadata, teaching rationales, and auditable release controls. The semantic ledger covers 476 released learner-facing item IDs with zero known keyed-answer reversals and no known remaining material factual error. Batch 017 passed fresh candidate-state gates in workflow run 32995967102; the promoted v1.15 release then passed the full released-state PR audit and the post-merge main audit in workflow run 32996762184. The exact released-only enriched-subtopic exposure is 295/344. GitHub Pages workflow run 32996762272 verified the live v1.15 runtime for release-content SHA 4f97700f38346791c29d8ec511616ef5db5f5b98 with 335 standard questions, 1 Bellringer, and a released-only artifact. Subsequent status-only deployments remain subject to the same live SHA/runtime gate. This is not a mathematical guarantee of perpetual infallibility or a guarantee of passing the live adaptive CISSP exam.",
   "known_non_blocking_limitations": [
     "Browser-local progress does not sync across devices unless exported manually.",
     "The diagnostic is intentionally a routing signal, not an exam-readiness prediction.",
