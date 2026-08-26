@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "ur",
+  "cefr": "C1",
+  "unit": 4,
+  "theme": "language, identity, and society",
+  "sequences": [
+    19,
+    20,
+    21,
+    22,
+    23,
+    24
+  ],
+  "generated_passages": 6,
+  "question_contract": {
+    "questions_per_passage": 10,
+    "answers_per_passage": 10,
+    "status": "PASS"
+  },
+  "structural_checks": {
+    "unique_record_ids": "PASS",
+    "sequence_contiguity": "PASS",
+    "unit_alignment": "PASS",
+    "allowed_genres": "PASS",
+    "question_answer_links": "PASS",
+    "target_exposure_min_2": "PASS",
+    "target_first_occurrence_order": "PASS",
+    "context_strategy_schema_enum": "PASS",
+    "source_rank_collision_search": "PASS"
+  },
+  "lexical_targets": [
+    {
+      "id": "ur-rank-1978",
+      "form": "لہجہ",
+      "source_rank": 1978,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 3
+    },
+    {
+      "id": "ur-rank-2496",
+      "form": "تلفظ",
+      "source_rank": 2496,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 5
+    },
+    {
+      "id": "ur-rank-2920",
+      "form": "لسانیات",
+      "source_rank": 2920,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 3
+    },
+    {
+      "id": "ur-rank-2746",
+      "form": "فصاحت",
+      "source_rank": 2746,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 4
+    },
+    {
+      "id": "ur-rank-1526",
+      "form": "مقبولیت",
+      "source_rank": 1526,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 4
+    },
+    {
+      "id": "ur-rank-1152",
+      "form": "ترجمہ",
+      "source_rank": 1152,
+      "source_lexicon": "urdu_top3000.csv",
+      "prior_target_collision": false,
+      "exposures_in_text": 4
+    }
+  ],
+  "lexical_freshness": "PASS",
+  "genre_cycle": [
+    "essay",
+    "analysis",
+    "paired viewpoints",
+    "essay",
+    "analysis",
+    "paired viewpoints"
+  ],
+  "passage_roles": [
+    "instructional",
+    "reinforcement",
+    "interleaved",
+    "transfer",
+    "integration",
+    "checkpoint"
+  ],
+  "word_counts": [
+    511,
+    467,
+    507,
+    479,
+    504,
+    568
+  ],
+  "formal_release_audit": "DEFERRED",
+  "release_note": "Generation-stage QA only. This does not mark educator/publication release approval.",
+  "canonicalization_status": "CANDIDATE_READY_FOR_APPEND",
+  "expected_frontier_after_append": {
+    "urdu_c1_passages": 24,
+    "next_sequence": 25,
+    "next_unit": 5,
+    "overall_reading_count": 984
+  }
+}
