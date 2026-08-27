@@ -1,0 +1,133 @@
+{
+  "schema_version": 3,
+  "batch_id": "022",
+  "reviewed_on": "2026-08-26",
+  "status": "SEMANTIC_REVIEWED_GATE_RECHECK_PENDING",
+  "records": 16,
+  "standard_mcq": 16,
+  "bellringers": 0,
+  "files": [
+    "question-bank/candidates/batch-022-a.jsonl",
+    "question-bank/candidates/batch-022-b.jsonl",
+    "question-bank/candidates/batch-022-c.jsonl",
+    "question-bank/candidates/batch-022-d.jsonl"
+  ],
+  "difficulty_distribution": {"F":0,"E":12,"S":4,"B":0},
+  "primary_domain_distribution": {"1":5,"2":5,"3":1,"4":0,"5":0,"6":0,"7":4,"8":1},
+  "reviewed_ids": ["C-344","C-345","C-346","C-347","C-348","C-349","C-350","C-351","C-352","C-353","C-354","C-355","C-356","C-357","C-358","C-359"],
+  "semantic_review": {
+    "semantic_reviewed_records": 16,
+    "answer_key_conflicts": 0,
+    "objective_mapping_conflicts": 0,
+    "source_mapping_conflicts": 0,
+    "material_factual_errors_remaining": 0,
+    "four_option_rationales_complete": true,
+    "originality_provenance_complete": true,
+    "external_question_seeds_used": 0,
+    "answer_position_distribution": {"0":4,"1":4,"2":4,"3":4}
+  },
+  "authoring_focus": {
+    "planner_basis_workflow_run_id": 33024759451,
+    "planner_basis_release": "1.19.0",
+    "planner_measured_explicit_subtopic_exposure": "300/344",
+    "planner_unexposed_enriched_subtopics": 44,
+    "objective_targets": ["7.10","2.1","2.2","7.4","2.5","8.1","2.4","7.5","2.6","1.1","1.10","7.9","1.11","1.12","1.2","3.5"],
+    "guardrails": "E12/S4; max primary-domain count 5/16; 16 distinct decision points; answer positions 4/4/4/4; original-from-public-scope only; no external question seeds; canonical enriched-subtopic labels only"
+  },
+  "current_source_check": {
+    "isc2_outline_effective_date": "2024-04-15",
+    "isc2_outline_rechecked_on": "2026-08-26",
+    "isc2_outline_status": "Current ISC2 CISSP Certification Exam Outline remains the public scope authority used by released v1.19.",
+    "isc2_ethics": "registered primary authority for the ISC2 Code of Ethics",
+    "nist_800_34_rev1_update1": "registered contingency-planning, recovery-strategy and exercise reference",
+    "nist_800_53_rev5_update1": "registered supporting security and privacy control catalog",
+    "nist_800_88_rev2": "registered current media-sanitization guidance",
+    "nist_800_218": "registered secure software development framework reference"
+  },
+  "initial_gate_attempt": {
+    "candidate_validation_pr": 82,
+    "pr_event_registration": "REGISTERED",
+    "workflow_run_id": 33030404999,
+    "workflow_pr_merge_sha": "a8ce59307ee84e32bc33c221df32b2d4e804cdba",
+    "workflow_branch_head_sha": "55cbc9a7014b214c95e5b6b05870c0eaad7a521b",
+    "deterministic_knowledge_audit": "PASS",
+    "quality_gate": "FAIL_DIFFICULTY_SCORE_BOUNDS",
+    "quality_gate_failures": [
+      "C-352 E score 70 exceeded configured E range 50-69",
+      "C-356 E score 70 exceeded configured E range 50-69",
+      "C-359 S score 85 exceeded configured S range 70-84"
+    ],
+    "duplicate_or_similarity_failures_reported": 0,
+    "logical_batch_mix": "PASS",
+    "planning_gate": "PASS",
+    "javascript_syntax": "PASS",
+    "legacy_rationales": "PASS",
+    "static_asset_serving": "PASS",
+    "browser_smoke": "PASS",
+    "browser_smoke_workflows": ["startup","review","practice","progress","sources","navigation"],
+    "aggregate_gate": "FAIL_BECAUSE_QUALITY_FAILED",
+    "corrections_applied": {
+      "C-352_difficulty_score": "70 -> 69",
+      "C-356_difficulty_score": "70 -> 69",
+      "C-359_difficulty_score": "85 -> 84",
+      "question_text_or_answer_keys_changed": false
+    }
+  },
+  "gate_state": {
+    "candidate_validation_pr": 82,
+    "pr_event_registration": "REGISTERED",
+    "validation_evidence_type": "native-pull-request-merge-result-recheck-pending",
+    "automated_repository_gate": "RECHECK_PENDING",
+    "workflow_run_id": null,
+    "workflow_head_sha": null,
+    "quality_gate_mode": "released+candidate",
+    "released_mcq_compared": 399,
+    "released_bellringers_compared": 1,
+    "candidate_records": 16,
+    "quality_gate_warnings": null,
+    "logical_batch_mix": "PENDING_RECHECK",
+    "deterministic_knowledge_audit": "PENDING_RECHECK",
+    "planning_gate": "PENDING_RECHECK",
+    "javascript_syntax": "PENDING_RECHECK",
+    "legacy_rationales": "PENDING_RECHECK",
+    "static_asset_serving": "PENDING_RECHECK",
+    "browser_smoke": "PENDING_RECHECK",
+    "aggregate_gate": "PENDING_RECHECK",
+    "promotion_allowed": false
+  },
+  "public_isolation_evidence": {
+    "pages_workflow_run_id": null,
+    "workflow_head_sha": null,
+    "released_corpus_audit": "PENDING_AFTER_CANDIDATE_VALIDATION",
+    "released_only_quality_warnings": null,
+    "public_runtime": "PENDING_AFTER_CANDIDATE_VALIDATION",
+    "public_version": "1.19.0",
+    "public_standard_questions": 399,
+    "public_manifest_released_records": 344,
+    "public_bellringers": 1,
+    "released_only": true,
+    "unreleased_candidate_urls_required_404": true
+  },
+  "coverage_effect": {
+    "explicit_subtopic_tags_before": 300,
+    "explicit_subtopic_tags_after_candidate": 302,
+    "total_mapped_subtopics": 344,
+    "candidate_state_measured_in_workflow_run_id": 33030404999,
+    "boundary": "The first native PR audit measured Batch 022 candidate-inclusive explicit enriched-subtopic exposure at 302/344, up from released-only v1.19 at 300/344. That run was not release-authorizing because three numeric difficulty scores violated configured tier bounds. This remains an authoring metadata metric, not a learner-mastery claim."
+  },
+  "next_planner_slate_if_promoted": {
+    "basis_workflow_run_id": 33030404999,
+    "status": "PROVISIONAL_UNTIL_BATCH_022_RECHECK_PASSES_AND_PROMOTES",
+    "difficulty_distribution": {"E":12,"S":4},
+    "primary_domain_distribution": {"1":4,"3":5,"4":2,"5":2,"7":3},
+    "objective_targets": ["1.3","1.4","1.5","3.7","1.8","3.10","3.3","4.2","3.6","3.8","4.3","5.3","5.6","7.11","7.12","7.2"]
+  },
+  "notes": [
+    "Batch 022 follows the exact released-only v1.19 planner slate from final bookkeeping audit 33024759451 and keeps both D1 and D2 at 5/16, below the configured 35% primary-domain cap.",
+    "The scenarios test recovery capacity versus RTO, impact-based classification of industrial-control artifacts, classification-driven handling under deadline pressure, attributable just-in-time emergency privilege, legal-hold-aware retention and end-of-support retirement, controlled DevSecOps hotfix delivery, owner/controller versus processor/custodian roles, failed-SSD sanitization, DLP/CASB tailoring, professional ethics under commercial pressure, iterative threat modeling, emergency-change closure, supplier/SBOM assurance, behavior-based awareness measurement, nonrepudiation, and isolated code-signing key architecture.",
+    "Stretch items are C-347, C-351, C-355, and C-359. After the score-only corrections prompted by run 33030404999, all numeric scores are within configured tier ranges.",
+    "Native PR audit 33030404999 validated deterministic knowledge, logical batch mix, coverage/planning, syntax, legacy rationales, static serving, and browser smoke, but correctly failed the quality and aggregate gates because C-352, C-356, and C-359 had out-of-range numeric authoring scores. No question text or keyed answer was changed to fix this metadata issue.",
+    "No external question bank, live-item recollection, exam dump, or commercial-question wording/template was used. Difficulty remains an internal authoring scale and does not claim ISC2 psychometric equivalence.",
+    "Batch 022 remains unreleased. Promotion is prohibited until the synchronized exact PR state passes every CISSP gate and subsequent public Pages isolation proves unreleased Batch 022 candidate URLs remain absent."
+  ]
+}
