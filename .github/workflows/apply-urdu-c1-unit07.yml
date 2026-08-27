@@ -27,6 +27,8 @@ jobs:
           if len(exact) != 1 or len(generic) != 1:
               raise SystemExit(f'FAIL CLOSED: replacement rules not uniquely found: exact={exact}, generic={generic}')
           line = lines.pop(exact[0])
+          if not line.rstrip().endswith(','):
+              line = line + ','
           generic = [i for i,l in enumerate(lines) if '"Unit 7 / sequence 37":"Unit 8 / sequence 43"' in l]
           lines.insert(generic[0], line)
           p.write_text('\n'.join(lines) + '\n', encoding='utf-8')
