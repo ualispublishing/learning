@@ -1,0 +1,97 @@
+{
+  "schema_version": 3,
+  "batch_id": "022",
+  "reviewed_on": "2026-08-26",
+  "status": "SEMANTIC_REVIEWED_GATE_PENDING",
+  "records": 16,
+  "standard_mcq": 16,
+  "bellringers": 0,
+  "files": [
+    "question-bank/candidates/batch-022-a.jsonl",
+    "question-bank/candidates/batch-022-b.jsonl",
+    "question-bank/candidates/batch-022-c.jsonl",
+    "question-bank/candidates/batch-022-d.jsonl"
+  ],
+  "difficulty_distribution": {"F":0,"E":12,"S":4,"B":0},
+  "primary_domain_distribution": {"1":5,"2":5,"3":1,"4":0,"5":0,"6":0,"7":4,"8":1},
+  "reviewed_ids": ["C-344","C-345","C-346","C-347","C-348","C-349","C-350","C-351","C-352","C-353","C-354","C-355","C-356","C-357","C-358","C-359"],
+  "semantic_review": {
+    "semantic_reviewed_records": 16,
+    "answer_key_conflicts": 0,
+    "objective_mapping_conflicts": 0,
+    "source_mapping_conflicts": 0,
+    "material_factual_errors_remaining": 0,
+    "four_option_rationales_complete": true,
+    "originality_provenance_complete": true,
+    "external_question_seeds_used": 0,
+    "answer_position_distribution": {"0":4,"1":4,"2":4,"3":4}
+  },
+  "authoring_focus": {
+    "planner_basis_workflow_run_id": 33024759451,
+    "planner_basis_release": "1.19.0",
+    "planner_measured_explicit_subtopic_exposure": "300/344",
+    "planner_unexposed_enriched_subtopics": 44,
+    "objective_targets": ["7.10","2.1","2.2","7.4","2.5","8.1","2.4","7.5","2.6","1.1","1.10","7.9","1.11","1.12","1.2","3.5"],
+    "guardrails": "E12/S4; max primary-domain count 5/16; 16 distinct decision points; answer positions 4/4/4/4; original-from-public-scope only; no external question seeds; canonical enriched-subtopic labels only"
+  },
+  "current_source_check": {
+    "isc2_outline_effective_date": "2024-04-15",
+    "isc2_outline_rechecked_on": "2026-08-26",
+    "isc2_outline_status": "Current ISC2 CISSP Certification Exam Outline remains the public scope authority used by released v1.19.",
+    "isc2_ethics": "registered primary authority for the ISC2 Code of Ethics",
+    "nist_800_34_rev1_update1": "registered contingency-planning, recovery-strategy and exercise reference",
+    "nist_800_53_rev5_update1": "registered supporting security and privacy control catalog",
+    "nist_800_88_rev2": "registered current media-sanitization guidance",
+    "nist_800_218": "registered secure software development framework reference"
+  },
+  "gate_state": {
+    "candidate_validation_pr": null,
+    "pr_event_registration": "PENDING",
+    "validation_evidence_type": "PENDING",
+    "automated_repository_gate": "PENDING",
+    "workflow_run_id": null,
+    "workflow_head_sha": null,
+    "quality_gate_mode": "PENDING",
+    "released_mcq_compared": 399,
+    "released_bellringers_compared": 1,
+    "candidate_records": 16,
+    "quality_gate_warnings": null,
+    "logical_batch_mix": "PENDING",
+    "deterministic_knowledge_audit": "PENDING",
+    "planning_gate": "PENDING",
+    "javascript_syntax": "PENDING",
+    "legacy_rationales": "PENDING",
+    "static_asset_serving": "PENDING",
+    "browser_smoke": "PENDING",
+    "aggregate_gate": "PENDING",
+    "promotion_allowed": false
+  },
+  "public_isolation_evidence": {
+    "pages_workflow_run_id": null,
+    "workflow_head_sha": null,
+    "released_corpus_audit": "PENDING",
+    "released_only_quality_warnings": null,
+    "public_runtime": "PENDING",
+    "public_version": "1.19.0",
+    "public_standard_questions": 399,
+    "public_manifest_released_records": 344,
+    "public_bellringers": 1,
+    "released_only": true,
+    "unreleased_candidate_urls_required_404": true
+  },
+  "coverage_effect": {
+    "explicit_subtopic_tags_before": 300,
+    "explicit_subtopic_tags_after_candidate": null,
+    "total_mapped_subtopics": 344,
+    "candidate_state_measured_in_workflow_run_id": null,
+    "boundary": "Post-Batch-022 explicit enriched-subtopic exposure is intentionally left unclaimed until the executable coverage report measures the candidate-inclusive corpus. This is an authoring metadata metric, not a learner-mastery claim."
+  },
+  "next_planner_slate_if_promoted": null,
+  "notes": [
+    "Batch 022 follows the exact released-only v1.19 planner slate from final bookkeeping audit 33024759451 and keeps both D1 and D2 at 5/16, below the configured 35% primary-domain cap.",
+    "The scenarios test recovery capacity versus RTO, impact-based classification of industrial-control artifacts, classification-driven handling under deadline pressure, attributable just-in-time emergency privilege, legal-hold-aware retention and end-of-support retirement, controlled DevSecOps hotfix delivery, owner/controller versus processor/custodian roles, failed-SSD sanitization, DLP/CASB tailoring, professional ethics under commercial pressure, iterative threat modeling, emergency-change closure, supplier/SBOM assurance, behavior-based awareness measurement, nonrepudiation, and isolated code-signing key architecture.",
+    "Stretch items are C-347, C-351, C-355, and C-359. The remaining twelve are Exam-calibrated and all numeric scores are within configured tier ranges.",
+    "No external question bank, live-item recollection, exam dump, or commercial-question wording/template was used. Difficulty remains an internal authoring scale and does not claim ISC2 psychometric equivalence.",
+    "Batch 022 must remain unreleased until the exact candidate state passes the full originality, logical-mix, coverage/planning, syntax, rationale, static, browser, and aggregate controls and public Pages isolation is independently verified."
+  ]
+}
