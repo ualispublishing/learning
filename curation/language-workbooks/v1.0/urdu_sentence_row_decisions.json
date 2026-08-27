@@ -17,9 +17,9 @@
   },
   "status_counts": {
     "KEEP": 593,
-    "CORRECT_APPROVED": 274,
+    "CORRECT_APPROVED": 282,
     "REPLACE_APPROVED": 16,
-    "NATIVE_REVIEW": 117
+    "NATIVE_REVIEW": 109
   },
   "rows": [
     {
@@ -2795,7 +2795,7 @@
     },
     {
       "rank": 166,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "138cc92d6fb765211644c5664691e7facbfde31112af71c94a953c1351bdaa62",
       "source_target": "کيسا چل رہا ہے ؟",
       "source_english": "How is it going?",
@@ -2811,10 +2811,10 @@
           "issue": "Normalize non-Urdu yeh code points/orthography (e.g. بخير, کيسا) to Urdu forms."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "کیسا چل رہا ہے؟",
+      "approved_english": "How is it going?",
+      "approval_note": "Mechanical combined correction: Urdu yeh normalization plus removal of the audited stray punctuation space.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_010_native_deterministic_orthography.json"
     },
     {
       "rank": 167,
@@ -6062,7 +6062,7 @@
     },
     {
       "rank": 359,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "59f5923afe45a3c9abc2356ec2e70893f5bbf4f10e4a532c3ce45b1162e1a809",
       "source_target": "تمھیں زیادہ پڑھنا چاہئیے۔",
       "source_english": "You need to study more.",
@@ -6080,10 +6080,10 @@
           "issue": "Normalize nonstandard/legacy لیے spellings (لئیے/لیئے) consistently."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "تمھیں زیادہ پڑھنا چاہیے۔",
+      "approved_english": "You need to study more.",
+      "approval_note": "Mechanical spelling normalization چاہئیے → چاہیے; meaning and syntax are unchanged.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_010_native_deterministic_orthography.json"
     },
     {
       "rank": 360,
@@ -6229,7 +6229,7 @@
     },
     {
       "rank": 369,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "3515f2a6b55013dd908bba4b6c5083d0374983de3b53362106b7d59c98f18dfe",
       "source_target": "میرے لئیے بھی ایک ٹکٹ لینا۔",
       "source_english": "Get a ticket for me.",
@@ -6247,10 +6247,10 @@
           "issue": "Normalize nonstandard/legacy لیے spellings (لئیے/لیئے) consistently."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "میرے لیے بھی ایک ٹکٹ لینا۔",
+      "approved_english": "Get a ticket for me.",
+      "approval_note": "Mechanical spelling normalization لئیے → لیے; no other wording is changed.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_010_native_deterministic_orthography.json"
     },
     {
       "rank": 370,
@@ -7693,7 +7693,7 @@
     },
     {
       "rank": 457,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "2f49f49a503f76cf27eabe6c7a30b7175fe68d8bd0e1c0700fd71ed7d69405ce",
       "source_target": "انہوں نے ایک اچھا موقعہ گنوا دیا۔",
       "source_english": "They missed a good chance.",
@@ -7708,10 +7708,10 @@
           "issue": "Normalize موقعہ to the preferred standard spelling موقع for this corpus."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "انہوں نے ایک اچھا موقع گنوا دیا۔",
+      "approved_english": "They missed a good chance.",
+      "approval_note": "Mechanical corpus-standard spelling normalization موقعہ → موقع.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_010_native_deterministic_orthography.json"
     },
     {
       "rank": 458,
@@ -8122,7 +8122,7 @@
     },
     {
       "rank": 481,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "341e7315c43aaa97b26fa8780f626c5d9e657acc5ea6442145817e95a8c6436e",
       "source_target": "مجھے نہیں پتا کیا کہنا ہے ۔",
       "source_english": "I don't know what to say.",
@@ -8137,14 +8137,14 @@
           "issue": "Remove stray space before punctuation."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "مجھے نہیں پتا کیا کہنا ہے۔",
+      "approved_english": "I don't know what to say.",
+      "approval_note": "Mechanical removal of the audited stray space before Urdu punctuation.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_010_native_deterministic_orthography.json"
     },
     {
       "rank": 482,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "d5ad3b473d7e7d157c3c409e5449b67bfb87aef25d8ddebcd53f038c0f56c360",
       "source_target": "میرے پاس کھیل کود کے لئیے وقت نہیں ہے۔",
       "source_english": "I have no time for games.",
@@ -8162,14 +8162,14 @@
           "issue": "Normalize nonstandard/legacy لیے spellings (لئیے/لیئے) consistently."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "میرے پاس کھیل کود کے لیے وقت نہیں ہے۔",
+      "approved_english": "I have no time for games.",
+      "approval_note": "Mechanical spelling normalization لئیے → لیے; sentence meaning is unchanged.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_010_native_deterministic_orthography.json"
     },
     {
       "rank": 483,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c7307d579e92f696c1e76dc638bb52a7bb7e6fd96ff33feca3551b85378ddefe",
       "source_target": "یہ ہی تو میں جاننا چاہتا ہوں۔",
       "source_english": "That's what I want to know.",
@@ -8185,14 +8185,14 @@
           "issue": "Normalize یہ ہی to یہی."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "یہی تو میں جاننا چاہتا ہوں۔",
+      "approved_english": "That's what I want to know.",
+      "approval_note": "Mechanical orthographic normalization یہ ہی → یہی.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_010_native_deterministic_orthography.json"
     },
     {
       "rank": 484,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c6d84d8dbc8988d5b032d7d8f6aa31a01c46b682dd0ce28666350dabf15fb240",
       "source_target": "یہ ہی تو میں جاننا چاہتی ہوں۔",
       "source_english": "That's what I want to know.",
@@ -8208,10 +8208,10 @@
           "issue": "Normalize یہ ہی to یہی."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "یہی تو میں جاننا چاہتی ہوں۔",
+      "approved_english": "That's what I want to know.",
+      "approval_note": "Mechanical orthographic normalization یہ ہی → یہی.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_010_native_deterministic_orthography.json"
     },
     {
       "rank": 485,
