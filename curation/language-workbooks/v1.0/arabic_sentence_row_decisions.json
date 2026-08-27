@@ -17,9 +17,9 @@
   },
   "status_counts": {
     "KEEP": 693,
-    "NATIVE_REVIEW": 146,
-    "CORRECT_PENDING_SECOND_PASS": 159,
-    "REPLACE_PENDING_SECOND_PASS": 2
+    "NATIVE_REVIEW": 112,
+    "CORRECT_APPROVED": 193,
+    "REPLACE_APPROVED": 2
   },
   "rows": [
     {
@@ -301,7 +301,7 @@
     },
     {
       "rank": 20,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "898efcf19dd4dc1c2a79f41057657334cd88a870ebae635d63ef1c841c033a42",
       "source_target": "من فضلك ساعدني.",
       "source_english": "Please help me.",
@@ -319,10 +319,10 @@
           "issue": "Normalize initial conjunction spacing from 'و كيف' to 'وكيف'."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "وكيف لك أن تعرف؟",
+      "approved_english": "And how do you know?",
+      "approval_note": "Whole-row second pass normalized conjunction spacing and added the conjunction to English so both sides carry 'and'.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 21,
@@ -410,7 +410,7 @@
     },
     {
       "rank": 27,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "e25b45e69e477aacbdd19ebc79e40dc959dac320e53efb264ebdfcd51758415c",
       "source_target": "تعال إلي",
       "source_english": "Come to me.",
@@ -426,10 +426,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا ترون؟",
+      "approved_english": "What do you see?",
+      "approval_note": "Second-pass verified: ترون means 'you see'; English 'What do you see?' restores direct semantic equivalence.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_001_second_pass.json"
     },
     {
       "rank": 28,
@@ -503,7 +503,7 @@
     },
     {
       "rank": 33,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "d7448d995044ef0063d3604931af2a0939b549bcc616cb7049f6bcaa9a00cacf",
       "source_target": "اذهب إلى العمل",
       "source_english": "Go to work.",
@@ -526,14 +526,14 @@
           "issue": "Mixed partial diacritization is inconsistent across the learner bank; define and apply one display policy rather than sporadic vowel marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "متى أتيت؟",
+      "approved_english": "Go to work.",
+      "approval_note": "Whole-row second pass removed sporadic optional vowel marks; meaning remains exact.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 34,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "cb338072e6d23e8bf3837f6a5ba26d185c24706c06e767ea92ec452253b7b3fa",
       "source_target": "بإمكانه المجيء",
       "source_english": "He can come.",
@@ -548,10 +548,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "متى سنأكل؟",
+      "approved_english": "When will we eat?",
+      "approval_note": "Second-pass verified: سنأكل is future and matches 'will eat'.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_001_second_pass.json"
     },
     {
       "rank": 35,
@@ -597,7 +597,7 @@
     },
     {
       "rank": 38,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "e39c43f8607de17e0bf25ea84fe816ac655694a058acb62bba2774fdd24983a8",
       "source_target": "يمكنني القفز.",
       "source_english": "I can jump.",
@@ -612,10 +612,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أين تذهب للعمل؟",
+      "approved_english": "Where do you go to work?",
+      "approval_note": "Second-pass verified: the target asks where the listener goes for work, not simply where they work.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_001_second_pass.json"
     },
     {
       "rank": 39,
@@ -703,7 +703,7 @@
     },
     {
       "rank": 45,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "35de2aaa80cf9327590c07f9e029c42854a270244e56c0c8d85ae3e6c20a219f",
       "source_target": "لقد كَرِهتُ المَدرَسَة.",
       "source_english": "I hated school.",
@@ -718,10 +718,10 @@
           "issue": "Grammatical but stiff for everyday MSA; prefer a natural learner form such as هل أنت متفرغ غدًا؟ for 'Are you free tomorrow?'"
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل أنت متفرغ غدًا؟",
+      "approved_english": "Are you free tomorrow?",
+      "approval_note": "Whole-row second pass adopted the audit's natural MSA learner phrasing.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 46,
@@ -865,7 +865,7 @@
     },
     {
       "rank": 56,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "441bbdedbbadaa53b466f85070c52d581c0228aee9a62b49b13071bd7a9e575d",
       "source_target": "أحب الشوكولاتة.",
       "source_english": "I like chocolate.",
@@ -883,14 +883,14 @@
           "issue": "Remove stray spaces before Arabic question marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل قلت شيئًا؟",
+      "approved_english": "I like chocolate.",
+      "approval_note": "Whole-row second pass removed stray punctuation spacing and optional addressee diacritic for consistent display.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 57,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "b6a22d4f12b4787ceb33c2ab3d0d12b06c895ea0c127ffc952782839b8511cbb",
       "source_target": "أحب البنات.",
       "source_english": "I like girls.",
@@ -905,10 +905,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تشرب القهوة عادةً؟",
+      "approved_english": "Do you usually drink coffee?",
+      "approval_note": "Second-pass verified: عادةً explicitly contributes the frequency adverb 'usually'.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_001_second_pass.json"
     },
     {
       "rank": 58,
@@ -926,7 +926,7 @@
     },
     {
       "rank": 59,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "580210200f926141458c70446d1a7dcd1f8bec245e01bc4e19acc61bf40da171",
       "source_target": "أحب موسيقى الجاز.",
       "source_english": "I like jazz.",
@@ -941,10 +941,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل لديك شكوك؟",
+      "approved_english": "Do you have doubts?",
+      "approval_note": "Second-pass verified plural noun and interrogative punctuation.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_001_second_pass.json"
     },
     {
       "rank": 60,
@@ -962,7 +962,7 @@
     },
     {
       "rank": 61,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "97970585c8fd1e5d8acba575e6f5c4c5609f56f65669fb0ede7371dcf628878e",
       "source_target": "أحب الأرز.",
       "source_english": "I like rice.",
@@ -980,10 +980,10 @@
           "issue": "Remove stray spaces before Arabic question marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل لديك مال؟",
+      "approved_english": "I like rice.",
+      "approval_note": "Whole-row second pass: punctuation-only normalization; bilingual meaning is sound.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 62,
@@ -1141,7 +1141,7 @@
     },
     {
       "rank": 73,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c76d233d7e98ff3241f725b99d94c1a749f66c6661e4a94a9676c77ece69149b",
       "source_target": "أريد مخلّلًا.",
       "source_english": "I want pickles.",
@@ -1156,10 +1156,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تحب كرة القدم؟",
+      "approved_english": "Do you like soccer?",
+      "approval_note": "Second-pass verified spelling: كرة القدم is the correct phrase for football/soccer.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_001_second_pass.json"
     },
     {
       "rank": 74,
@@ -1339,7 +1339,7 @@
     },
     {
       "rank": 86,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "65687f0e11ab56d9bcea6ecdbc3ae0bd78167144d1bd270e054ecb5d7b7e80b4",
       "source_target": "ارفع صوتك، رجاءً.",
       "source_english": "Speak louder, please.",
@@ -1362,10 +1362,10 @@
           "issue": "Mixed partial diacritization is inconsistent across the learner bank; define and apply one display policy rather than sporadic vowel marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تفهمها؟",
+      "approved_english": "Speak louder, please.",
+      "approval_note": "Whole-row second pass removed sporadic internal vowel marks; meaning remains 'Do you understand her?'",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 87,
@@ -1439,7 +1439,7 @@
     },
     {
       "rank": 92,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "ccafd5c2c43b12e20dfb0a6843e3d5d089095549b477c2ff489c48976930de5b",
       "source_target": "نحن رجال.",
       "source_english": "We are men.",
@@ -1457,10 +1457,10 @@
           "issue": "Normalize initial conjunction spacing from 'و كيف' to 'وكيف'."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "وكيف أجبت؟",
+      "approved_english": "And how did you reply?",
+      "approval_note": "Whole-row second pass normalized conjunction spacing and aligned the English conjunction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 93,
@@ -1492,7 +1492,7 @@
     },
     {
       "rank": 95,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "e0956915cb5197d95cca22cf004325b38a02bcb078aece1c42321a5c2c54f008",
       "source_target": "نحن نحتاج إلى المطر.",
       "source_english": "We need rain.",
@@ -1510,14 +1510,14 @@
           "issue": "Normalize initial conjunction spacing from 'و كيف' to 'وكيف'."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "وكيف لي أن أعرف؟",
+      "approved_english": "And how should I know?",
+      "approval_note": "Whole-row second pass normalized conjunction spacing and aligned English with the retained conjunction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 96,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "15b1b264b519842854b8de4bb957f4e226fda539da6a4017b1cc4fe85891cfb9",
       "source_target": "نحتاج الماء",
       "source_english": "We need water.",
@@ -1535,10 +1535,10 @@
           "issue": "Normalize initial conjunction spacing from 'و كيف' to 'وكيف'."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "وكيف لي أن أعلم؟",
+      "approved_english": "And how should I know?",
+      "approval_note": "Whole-row second pass normalized conjunction spacing and aligned English with the retained conjunction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 97,
@@ -1556,7 +1556,7 @@
     },
     {
       "rank": 98,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "9664a01355ba0cc194e680f56157fff88f32ec1a8356e29fa00fc61e09784394",
       "source_target": "هل يمكنك أن تساعدني؟",
       "source_english": "Can you help me?",
@@ -1579,10 +1579,10 @@
           "issue": "Mixed partial diacritization is inconsistent across the learner bank; define and apply one display policy rather than sporadic vowel marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كيف كانت المدرسة اليوم؟",
+      "approved_english": "Can you help me?",
+      "approval_note": "Whole-row second pass removed sporadic optional vowel mark; meaning remains exact.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 99,
@@ -1608,7 +1608,7 @@
     },
     {
       "rank": 100,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "399803a6b4a1cd8bd7ea8a74fd52e0066b58fa24425e1ac38eafdc9839f4cf59",
       "source_target": "هل تعرفني؟",
       "source_english": "Do you know me?",
@@ -1623,14 +1623,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تحتاج إلى مساعدة؟",
+      "approved_english": "Do you need help?",
+      "approval_note": "Second-pass verified: the Arabic asks whether help is needed; corrected English matches that question.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_001_second_pass.json"
     },
     {
       "rank": 101,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "041e041fbe43869baa2b680436a6b010fb35607b0d63026acea0ec0d0fd0be03",
       "source_target": "هل تعلم لماذا؟",
       "source_english": "Do you know why?",
@@ -1645,14 +1645,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل يمكنني أن أساعدك؟",
+      "approved_english": "May I help you?",
+      "approval_note": "Second-pass verified hamza spelling in أساعدك; meaning remains correct.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_001_second_pass.json"
     },
     {
       "rank": 102,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "bdd6bcdb14aa0e3d6e8cba6ed86daae820e1ab709c086acbde7ebf7c367f1bdf",
       "source_target": "هل تفهمني؟",
       "source_english": "Do you understand me?",
@@ -1668,10 +1668,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ألا ينبغي أن تذهب إلى البيت؟",
+      "approved_english": "Shouldn't you go home?",
+      "approval_note": "Second-pass verified: ألا ينبغي correctly carries the negative recommendation/question missing from the original target.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_001_second_pass.json"
     },
     {
       "rank": 103,
@@ -1703,7 +1703,7 @@
     },
     {
       "rank": 105,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "b8c2311b9cfce8a708a04942167f14f8de95dd82aa86e0daf50199747ec8e485",
       "source_target": "ما عساني أن أفعل؟",
       "source_english": "What can I do?",
@@ -1718,10 +1718,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا تقرأ؟",
+      "approved_english": "What are you reading?",
+      "approval_note": "Second-pass verified missing Arabic question mark; wording and meaning are otherwise correct.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_001_second_pass.json"
     },
     {
       "rank": 106,
@@ -2107,7 +2107,7 @@
     },
     {
       "rank": 132,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "9a74a1c57a0023f1581cc9d92a368bc6a5ef3127a633d0dfe5db7781aa2a49e4",
       "source_target": "هل أحسنت التصرف اليوم؟",
       "source_english": "Did you behave today?",
@@ -2122,10 +2122,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "متى بدأت؟",
+      "approved_english": "When did you begin?",
+      "approval_note": "Second-pass verified missing Arabic question mark; wording and meaning are otherwise correct.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_001_second_pass.json"
     },
     {
       "rank": 133,
@@ -2325,7 +2325,7 @@
     },
     {
       "rank": 147,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "d137dfff2672f47f43fd4b3cbba67059ee974e55ca0b93f2cca4ccec28f6ea1e",
       "source_target": "هل تحب كرة القدم؟",
       "source_english": "Do you like soccer?",
@@ -2342,10 +2342,10 @@
           "issue": "Future/present English phrasing is context-sensitive; tighten tense/aspect equivalence for standalone learner pairs."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تحب كرة القدم؟",
+      "approved_english": "Where will you go?",
+      "approval_note": "Whole-row second pass aligned English future with Arabic ستذهب.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 148,
@@ -2443,7 +2443,7 @@
     },
     {
       "rank": 154,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "34da7113e03101463458a4524401a8cdc667f23f5295e98b4b4191b9663ca332",
       "source_target": "هل تتكلم اللغة الإنجليزية؟",
       "source_english": "Do you speak English?",
@@ -2458,10 +2458,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تتكلم اللغة الإنجليزية؟",
+      "approved_english": "Where is his school?",
+      "approval_note": "Second-pass verified possessive suffix ـه = his; original English omitted possession.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_005_second_pass.json"
     },
     {
       "rank": 155,
@@ -2535,7 +2535,7 @@
     },
     {
       "rank": 160,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "abb980e881506afcf6cd16db88bf9b2cae3fbefb0450f62f0116ff0feb95b2a2",
       "source_target": "هل أكلت اليوم؟",
       "source_english": "Have you eaten today?",
@@ -2551,10 +2551,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أي حقيبة هي حقيبتك؟",
+      "approved_english": "Which is your bag?",
+      "approval_note": "Second-pass verified interrogative أي construction; original أيها was vocative.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_005_second_pass.json"
     },
     {
       "rank": 161,
@@ -2614,7 +2614,7 @@
     },
     {
       "rank": 165,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "0f79d99b3b3b0f9c7accaab23d98c406eeaf27693d91b0b0631449705974ec22",
       "source_target": "كيف لي أن أعرف؟",
       "source_english": "How should I know?",
@@ -2643,14 +2643,14 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا نختبئ؟",
+      "approved_english": "How should I know?",
+      "approval_note": "Whole-row second pass replaced ambiguous unvocalized لم with explicit لماذا.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 166,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "683efabe216ecdeec7e429d93fe8b8e0347215b4d05697b755855e51f8ae6586",
       "source_target": "كم يبلغ طولك؟",
       "source_english": "How tall are you?",
@@ -2679,10 +2679,10 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا أنت وحدك؟",
+      "approved_english": "How tall are you?",
+      "approval_note": "Whole-row second pass uses explicit لماذا for beginner clarity.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 167,
@@ -2700,7 +2700,7 @@
     },
     {
       "rank": 168,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "f83e5b263a7e763f8570e7dc765249d0cd900a4738d9f83ec212ea75c1f8a849",
       "source_target": "ما أطولك!",
       "source_english": "How tall you are!",
@@ -2715,14 +2715,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا أنت ذاهب؟",
+      "approved_english": "How tall you are!",
+      "approval_note": "Second-pass verified unambiguous interrogative لماذا.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_005_second_pass.json"
     },
     {
       "rank": 169,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "50783715b073b4da1b2eadbc03b3bbb30a2e977b7f40fe4f63ad648e4e4f55ea",
       "source_target": "قف مكانك!",
       "source_english": "Stand where you are!",
@@ -2751,10 +2751,10 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا أنت واقف؟",
+      "approved_english": "Stand where you are!",
+      "approval_note": "Whole-row second pass uses explicit لماذا for beginner clarity.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 170,
@@ -2800,7 +2800,7 @@
     },
     {
       "rank": 173,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "e1f56a1ab9eb2861d065ead295bab49f8b6beb12f3fe9551778dcd97ac415a40",
       "source_target": "افعل ما يحلو لك.",
       "source_english": "Do as you like.",
@@ -2829,14 +2829,14 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا بقيت؟",
+      "approved_english": "Do as you like.",
+      "approval_note": "Whole-row second pass removes ambiguity between interrogative لِمَ and negative particle لم.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 174,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "920aaa30d87735bff9b53636eacdaee3d011d5f69278f07e1e8da6f2960166b0",
       "source_target": "افعل ما تريد.",
       "source_english": "Do as you want.",
@@ -2865,10 +2865,10 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا تسأل؟",
+      "approved_english": "Do as you want.",
+      "approval_note": "Whole-row second pass uses explicit لماذا; bilingual meaning remains exact.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 175,
@@ -2942,7 +2942,7 @@
     },
     {
       "rank": 180,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "d45eb17a3941a31a1e93ef067abc1f6005e12530e0fdfeb0f70cb6274e3cde9d",
       "source_target": "ها هو كتابك.",
       "source_english": "Here is your book.",
@@ -2980,10 +2980,10 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا يتسوق المرء هناك على أي حال؟",
+      "approved_english": "Why shop there anyway?",
+      "approval_note": "Second-pass verified grammatical standard-MSA wording, المرء spelling, and anyway phrase.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_005_second_pass.json"
     },
     {
       "rank": 181,
@@ -3057,7 +3057,7 @@
     },
     {
       "rank": 186,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "0d5d955ba30034e77a49cbdc9277ee8f642cfbcb25f7e127f2c27fe3ba9adc02",
       "source_target": "ليس لدي وقت.",
       "source_english": "I don't have time.",
@@ -3075,10 +3075,10 @@
           "issue": "Remove stray spaces before Arabic question marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا فعلت اليوم؟",
+      "approved_english": "I don't have time.",
+      "approval_note": "Whole-row second pass: punctuation-only normalization.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 187,
@@ -3110,7 +3110,7 @@
     },
     {
       "rank": 189,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "bd9dbe97530e3b539b29d1f4db886ccbc0deecd555d03b42715d9370facdfa70",
       "source_target": "لا أحب المدرسة.",
       "source_english": "I don't like school.",
@@ -3139,14 +3139,14 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا تعمل هنا؟",
+      "approved_english": "I don't like school.",
+      "approval_note": "Whole-row second pass uses explicit لماذا for unvocalized beginner text.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 190,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "41eb86e3064bb2dc3e1ec30de82091e1e2e9e861df9b35615c6e69b3f0cf107f",
       "source_target": "أتوقع مساعدتك.",
       "source_english": "I expect your help.",
@@ -3161,14 +3161,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا أتيت إلى هنا؟",
+      "approved_english": "I expect your help.",
+      "approval_note": "Second-pass verified لماذا spelling.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_005_second_pass.json"
     },
     {
       "rank": 191,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "53e9e7a2414de16dac6bcb39a51b85dba322f01e2a1398cc9319f7a4adac5937",
       "source_target": "أشعر بما تمر به.",
       "source_english": "I feel for you.",
@@ -3183,10 +3183,10 @@
           "issue": "Normalize punctuation spacing and Arabic comma conventions."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أهلًا، هل تعمل هنا؟",
+      "approved_english": "I feel for you.",
+      "approval_note": "Whole-row second pass normalized greeting spelling, Arabic comma, and spacing; English remains compatible.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 192,
@@ -3246,7 +3246,7 @@
     },
     {
       "rank": 196,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "882094e8a321c6023129164f468b29a7f569bd5985b6c9e539f29e78e73b99c0",
       "source_target": "ليس لدي أشقاء.",
       "source_english": "I have no siblings.",
@@ -3261,10 +3261,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل لديك خبرة في العمل؟",
+      "approved_english": "I have no siblings.",
+      "approval_note": "Second-pass verified removal of erroneous tanwin on خبرة in this construction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_005_second_pass.json"
     },
     {
       "rank": 197,
@@ -3352,7 +3352,7 @@
     },
     {
       "rank": 203,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "2c729a1aa8d67a26736de61ad19b2e1b5dfd1e789130d20d6f4d08789b0dfd27",
       "source_target": "تعجبني سيارتك.",
       "source_english": "I like your car.",
@@ -3375,10 +3375,10 @@
           "issue": "Mixed partial diacritization is inconsistent across the learner bank; define and apply one display policy rather than sporadic vowel marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أنت كيف عرفت ذلك؟",
+      "approved_english": "I like your car.",
+      "approval_note": "Whole-row second pass removed sporadic optional diacritics; sentence remains grammatical and semantically aligned.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 204,
@@ -3396,7 +3396,7 @@
     },
     {
       "rank": 205,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "b1a149f0f5ae032f113181103e29a8b0e9dee9f4d1f4e5b3e814950254df3097",
       "source_target": "تعجبني خطتك.",
       "source_english": "I like your plan.",
@@ -3427,10 +3427,10 @@
           "issue": "من أين تعرف/تعلم هذا is literal and less direct than كيف تعرف ذلك؟ for the English 'How do you know that?'; review learner naturalness."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كيف تعرف ذلك؟",
+      "approved_english": "How do you know that?",
+      "approval_note": "Whole-row second pass adopted the audit's direct natural MSA wording and also removes the sporadic partial diacritic issue.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 206,
@@ -3500,7 +3500,7 @@
     },
     {
       "rank": 209,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "3c584b296154057066c536270e7e60befe7911f1d10b6673c6bcdd767d02e900",
       "source_target": "أحتاج لمفتاحي.",
       "source_english": "I need my key.",
@@ -3523,10 +3523,10 @@
           "issue": "Mixed partial diacritization is inconsistent across the learner bank; define and apply one display policy rather than sporadic vowel marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كيف تعلمين هذا؟",
+      "approved_english": "I need my key.",
+      "approval_note": "Whole-row second pass removed optional vowel marking; feminine addressee meaning remains valid.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 210,
@@ -3544,7 +3544,7 @@
     },
     {
       "rank": 211,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "e6f3f1c7708338d813a627edd3deba9d39d48be29ab8315462ea822c3c3c6a81",
       "source_target": "أظن أنني أفهم.",
       "source_english": "I think I understand.",
@@ -3559,10 +3559,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا عساني أن أفعل الآن؟",
+      "approved_english": "I think I understand.",
+      "approval_note": "Second-pass verified interrogative ماذا; original هاذا was malformed.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_005_second_pass.json"
     },
     {
       "rank": 212,
@@ -3580,7 +3580,7 @@
     },
     {
       "rank": 213,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "263aa554474f8770b8d5b43a0a30123d8fc077a94a48d8d7413f575890c2da80",
       "source_target": "أريد أن أعرف رأيك.",
       "source_english": "I want your opinion.",
@@ -3603,10 +3603,10 @@
           "issue": "Mixed partial diacritization is inconsistent across the learner bank; define and apply one display policy rather than sporadic vowel marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا فعلت بالأمس؟",
+      "approved_english": "I want your opinion.",
+      "approval_note": "Whole-row second pass removed sporadic optional diacritics; bilingual meaning is exact.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 214,
@@ -3652,7 +3652,7 @@
     },
     {
       "rank": 217,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "30d3226e167294eeadee160ec5049891178d678dc1864e0342d88dfbc8375073",
       "source_target": "أرجوك , قم بزيارتي غدا.",
       "source_english": "Please visit me tomorrow.",
@@ -3667,10 +3667,10 @@
           "issue": "ماذا تريد بعد؟ is less explicit for English 'What else do you want?'; consider ماذا تريد أيضًا؟ or ماذا تريد غير ذلك؟."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا تريد أيضًا؟",
+      "approved_english": "What else do you want?",
+      "approval_note": "Whole-row second pass selected the direct standard-MSA أيضًا option proposed by the audit.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 218,
@@ -3702,7 +3702,7 @@
     },
     {
       "rank": 220,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "22d99c98005b86f610af9d565e01b66c2a64ce154348665f9354609654a7da30",
       "source_target": "خذ ما تحتاجهُ.",
       "source_english": "Take what you need.",
@@ -3719,10 +3719,10 @@
           "issue": "Future/present English phrasing is context-sensitive; tighten tense/aspect equivalence for standalone learner pairs."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "خذ ما تحتاجهُ.",
+      "approved_english": "When will you leave?",
+      "approval_note": "Whole-row second pass aligns English future with Arabic ستذهب and uses when rather than the more specific what time.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 221,
@@ -3740,7 +3740,7 @@
     },
     {
       "rank": 222,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "b992495402f0a542a5c68f114b0d445a77016d736dad671fc30bad62406b2974",
       "source_target": "أخبرني ، ما الذي حدث؟",
       "source_english": "Tell me what happened.",
@@ -3755,10 +3755,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "متى تتناول الإفطار؟",
+      "approved_english": "Tell me what happened.",
+      "approval_note": "Second-pass verified hamza in الإفطار.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_005_second_pass.json"
     },
     {
       "rank": 223,
@@ -3804,7 +3804,7 @@
     },
     {
       "rank": 226,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "eae64781d91186423e49fe898e64c7c1f2aa9a945589e7dcd67e9b299e6f4fb3",
       "source_target": "اليوم هو يوم ميلادك",
       "source_english": "Today is your birthday.",
@@ -3819,14 +3819,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "من أين تشتري ملابس؟",
+      "approved_english": "Today is your birthday.",
+      "approval_note": "Second-pass verified unmarked plural ملابس rather than malformed ملابسا.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_005_second_pass.json"
     },
     {
       "rank": 227,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "11de2dc68ed92fdc40aad5d9228360f6fca1240d53580e756bf4d3eeacf08583",
       "source_target": "نُقَدِّر مساعدتك.",
       "source_english": "We appreciate your help.",
@@ -3842,14 +3842,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أين تتناول الغداء؟",
+      "approved_english": "Where do you have lunch?",
+      "approval_note": "Second-pass verified الغداء = lunch; original الغذاء meant food/nourishment.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_005_second_pass.json"
     },
     {
       "rank": 228,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "0531950fb9fde28803c2cb948a568148745fdcea1567ed973fd29b13a6732677",
       "source_target": "ليس لدينا ماء.",
       "source_english": "We have no water.",
@@ -3878,14 +3878,14 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا تركتني؟",
+      "approved_english": "We have no water.",
+      "approval_note": "Whole-row second pass uses explicit لماذا for beginner clarity.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 229,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "6494b3ab9b13cd02baf6b25252a08f6f1ed6aeee577ce6cce60d3b10fd95b407",
       "source_target": "علينا أن نساعد",
       "source_english": "We have to help.",
@@ -3914,14 +3914,14 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا سألتني؟",
+      "approved_english": "We have to help.",
+      "approval_note": "Whole-row second pass uses explicit لماذا for beginner clarity.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 230,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "d200c81eedb16f74cc34e92ff920e503960ceb5a1f2adfa199678356dd3cb28b",
       "source_target": "نعرف حقوقنا.",
       "source_english": "We know our rights.",
@@ -3950,10 +3950,10 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا اخترتني؟",
+      "approved_english": "We know our rights.",
+      "approval_note": "Whole-row second pass uses explicit لماذا for beginner clarity.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 231,
@@ -3971,7 +3971,7 @@
     },
     {
       "rank": 232,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "76388643ec74ad337c6014363c2966b95bc6efd3d5be165003b3c75acf5a4d1d",
       "source_target": "أنت صديقي.",
       "source_english": "You are my friend.",
@@ -4000,14 +4000,14 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا قلت ذلك؟",
+      "approved_english": "You are my friend.",
+      "approval_note": "Whole-row second pass uses explicit لماذا for beginner clarity.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 233,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "badc88219d569f22ebe681f2c3fbd8adde19401cc104586a39459c13d7f46127",
       "source_target": "أنتِ أُمّي.",
       "source_english": "You are my mother.",
@@ -4044,14 +4044,14 @@
           "issue": "تقبل/توافق mean accept/agree rather than literally 'say yes'; decide whether to align English more literally or replace with a direct نعم construction."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا لم تقبل؟",
+      "approved_english": "Why didn't you accept?",
+      "approval_note": "Whole-row second pass resolves both concerns: explicit لماذا and English accept to match تقبل, avoiding duplication with the direct نعم row.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 234,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "4e3e516428c1c7f29d5dbd957585ffe397e2b2e38382d62dfccae993c5167e84",
       "source_target": "يمكنك أن تفعلها!",
       "source_english": "You can do it.",
@@ -4088,14 +4088,14 @@
           "issue": "تقبل/توافق mean accept/agree rather than literally 'say yes'; decide whether to align English more literally or replace with a direct نعم construction."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا لم توافق؟",
+      "approved_english": "Why didn't you agree?",
+      "approval_note": "Whole-row second pass resolves both concerns: explicit لماذا and English agree to match توافق.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 235,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "477b4563310c721e0de7557b60078a114c24b29080fa0bc9aa5dfc1964ddc061",
       "source_target": "يمكنك أن تدرس هنا.",
       "source_english": "You can study here.",
@@ -4124,10 +4124,10 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا لم تقل نعم؟",
+      "approved_english": "You can study here.",
+      "approval_note": "Whole-row second pass uses explicit لماذا while preserving the direct 'say yes' pair.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 236,
@@ -4187,7 +4187,7 @@
     },
     {
       "rank": 240,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "5cb84491bf7dcc66868dbdabe6fd1a762ac3ac18d58f9c2b88fd17cba1779655",
       "source_target": "حمّامك جاهز.",
       "source_english": "Your bath is ready.",
@@ -4202,14 +4202,14 @@
           "issue": "Missing Arabic question mark."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا لا تحبني؟",
+      "approved_english": "Your bath is ready.",
+      "approval_note": "Whole-row second pass adds the required Arabic question mark; bilingual meaning is sound.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 241,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "f6dbcb834675c11278f3d8d0e4c334bf61c4ec306bc94ba3cfcc2e362fe5e2ec",
       "source_target": "هنا كلبك.",
       "source_english": "Your dog is here.",
@@ -4247,10 +4247,10 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا قد أقول شيئًا؟",
+      "approved_english": "Why would I say anything?",
+      "approval_note": "Second-pass verified explicit interrogative and modal قد for would.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_005_second_pass.json"
     },
     {
       "rank": 242,
@@ -4296,7 +4296,7 @@
     },
     {
       "rank": 245,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "65874ed241e9021c9c45f2fb15cae0a12ed81e48b6507241e03ef5a6ba038b66",
       "source_target": "ها قد وصلت الحافلة!",
       "source_english": "Here comes the bus!",
@@ -4311,14 +4311,14 @@
           "issue": "نحن مجازون من المدرسة غدًا is understandable but stiff; prefer a more natural standalone learner sentence for 'We have no school tomorrow.'"
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ليس لدينا دوام في المدرسة غدًا.",
+      "approved_english": "We have no school tomorrow.",
+      "approval_note": "Whole-row second pass uses a natural MSA school-attendance expression while preserving the intended English meaning.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 246,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "ed5d9bb39b336f9c8a2ebf8b28ecac400094ba8b75ea79d1fc2f6c49f515f86d",
       "source_target": "لكم اشتقت إليك!",
       "source_english": "How I've missed you!",
@@ -4350,14 +4350,14 @@
           "issue": "Mixed partial diacritization is inconsistent across the learner bank; define and apply one display policy rather than sporadic vowel marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تمزح معي؟",
+      "approved_english": "Are you kidding me?",
+      "approval_note": "Second-pass verified removal of unsupported English intensity; target is neutral kidding/joking.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_005_second_pass.json"
     },
     {
       "rank": 247,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "e0b24f518430574e2e3b78d05a8daf25260563e4fc1c679e46af824363c1c2dd",
       "source_target": "كم رائع أنتَ!",
       "source_english": "How wonderful you are!",
@@ -4372,14 +4372,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل نحن مستعدون للذهاب؟",
+      "approved_english": "How wonderful you are!",
+      "approval_note": "Second-pass verified missing question mark.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_005_second_pass.json"
     },
     {
       "rank": 248,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "60ad4561c372445226e99ff8c35cd1a0c0fcb8cf85cf73b928f8cb7fe69ec333",
       "source_target": "يا لوقاحتك!",
       "source_english": "How rude of you!",
@@ -4394,14 +4394,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل أنت مشغول غدًا صباحًا؟",
+      "approved_english": "How rude of you!",
+      "approval_note": "Second-pass verified أنت, standardized adverbial tanwin, and punctuation.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_005_second_pass.json"
     },
     {
       "rank": 249,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "4a69a35a9277ad91086cef97a6fe7e241fbad4e9caec1b6e3ecbcd57d3720d93",
       "source_target": "ما أغرب الحياة!",
       "source_english": "How strange life is!",
@@ -4416,10 +4416,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل أنت مشغول صباح الغد؟",
+      "approved_english": "How strange life is!",
+      "approval_note": "Second-pass verified punctuation/spacing normalization.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_005_second_pass.json"
     },
     {
       "rank": 250,
@@ -4672,7 +4672,7 @@
     },
     {
       "rank": 265,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "959a015c312e47e8877970b36a80095271b61002c60aface88b2c110da2d6b95",
       "source_target": "أنتَ كيف عرفتَ ذلك؟",
       "source_english": "How did you know that?",
@@ -4687,10 +4687,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل يمكنني البقاء هنا هذه الليلة؟",
+      "approved_english": "Can I stay here tonight?",
+      "approval_note": "Second-pass verified explicit هنا aligns with English here.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 266,
@@ -4870,7 +4870,7 @@
     },
     {
       "rank": 275,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "171f3d3f438264b1d82739fd618b046223e81d2e5dc83f05cc34b1591434ba47",
       "source_target": "ما الذي جعلك تأتي إلى هنا؟",
       "source_english": "What made you come here?",
@@ -4885,14 +4885,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل اشتريت الدواء؟",
+      "approved_english": "Did you buy the medicine?",
+      "approval_note": "Second-pass verified standard initial hamza orthography in اشتريت.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 276,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "5eb264012d9721a773d6df609b32ddd19e96881e33998d5d864f3cab629f544d",
       "source_target": "متى ستذهب؟",
       "source_english": "What time are you leaving?",
@@ -4907,10 +4907,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل اشتريت هذا الكتاب؟",
+      "approved_english": "Did you buy this book?",
+      "approval_note": "Second-pass verified demonstrative هذا restores deictic equivalence.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 277,
@@ -5068,7 +5068,7 @@
     },
     {
       "rank": 288,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c46728f8b2c18ee1afb856d8606533046ca7f5281d0d38f70b3d55df4eae3c0f",
       "source_target": "لماذا فعلت ذلك؟",
       "source_english": "Why did you do that?",
@@ -5084,14 +5084,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل عندك الإيصال؟",
+      "approved_english": "Do you have a receipt?",
+      "approval_note": "Second-pass verified lexical distinction: الإيصال = receipt, while الفاتورة is bill/invoice.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 289,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "222e5fecb3a2cf1649f71a6326e6c4a08e22645e3906a31cf8e726f2ec05bb4c",
       "source_target": "لماذا قلت ذلك؟",
       "source_english": "Why did you say that?",
@@ -5106,14 +5106,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل لديك ألم في أسنانك؟",
+      "approved_english": "Do you have a toothache?",
+      "approval_note": "Second-pass verified hamza spelling and question punctuation; target naturally expresses tooth pain.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 290,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "6982954ba57bea4cf75c6262b685d41c2ac5ca4f3a52e5a1795cc428be162a1c",
       "source_target": "لماذا لم تقل نعم؟",
       "source_english": "Why didn't you say yes?",
@@ -5128,10 +5128,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تعاني من ألم الأسنان؟",
+      "approved_english": "Do you have a toothache?",
+      "approval_note": "Second-pass verified spelling, genitive construction, and punctuation.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 291,
@@ -5412,7 +5412,7 @@
     },
     {
       "rank": 308,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "a4a2e1853c7502be037aa92629346f592ad3396d05134ee413916125393fb76f",
       "source_target": "أنا أعلم أين تسكن",
       "source_english": "I know where you live.",
@@ -5427,14 +5427,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل ما زلت تريد شايًا؟",
+      "approved_english": "Do you still want tea?",
+      "approval_note": "Second-pass verified want/need distinction and standard spacing/orthography.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 309,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "4cf1e80dca23632698deef69f03f6d3e58bf2eddd50a76621aa7380279bfb276",
       "source_target": "أنا أعلم أنك غني",
       "source_english": "I know you are rich.",
@@ -5449,10 +5449,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل ما زلت تريدين شايًا؟",
+      "approved_english": "Do you still want tea?",
+      "approval_note": "Second-pass verified feminine form, want/need distinction, and standard spacing.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 310,
@@ -5571,7 +5571,7 @@
     },
     {
       "rank": 316,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "b180c73596b75acba2b84e9b146e86c81aac781f8819cb5d46270ff78d458ce8",
       "source_target": "لا نحتاج مساعدتك.",
       "source_english": "We don't need your help.",
@@ -5586,14 +5586,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ما مدى سوء صداعك؟",
+      "approved_english": "How bad is your headache?",
+      "approval_note": "Second-pass verified spelling مدى, natural noun phrase صداعك, and punctuation.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 317,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "beb82f0eb295ae2c5e3cddba821c16f61bb76a0821067395e8c245cd6af7e453",
       "source_target": "ليس لدينا دوام مدرسي غدًا.",
       "source_english": "We have no school tomorrow.",
@@ -5608,10 +5608,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ما مدى شدة صداعك؟",
+      "approved_english": "How bad is your headache?",
+      "approval_note": "Second-pass verified natural degree construction for headache severity.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 318,
@@ -5629,7 +5629,7 @@
     },
     {
       "rank": 319,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "69c40dde0b35ab0a8955772bb297f560134ec37ab6cf1f8099287364703b7675",
       "source_target": "أنتَ يمكنكَ دائماً القدوم هنا.",
       "source_english": "You can always come here.",
@@ -5646,10 +5646,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كيف أمكنك ألا تلاحظ ذلك؟",
+      "approved_english": "How could you not notice?",
+      "approval_note": "Approved only after second-pass amendment restored the modal could nuance and distinguished failure to notice from deliberate ignoring.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_007_amended_second_pass.json"
     },
     {
       "rank": 320,
@@ -6029,7 +6029,7 @@
     },
     {
       "rank": 333,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "297b0f7906a9fd3ea352f91d786d717f31986fcea7174799471e0d6834679733",
       "source_target": "ساعدني. لا أعرف السّباحة.",
       "source_english": "Help me. I can't swim.",
@@ -6044,10 +6044,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ما الذي تضحك عليه؟",
+      "approved_english": "What are you laughing at?",
+      "approval_note": "Second-pass verified spelling تضحك.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 334,
@@ -6517,7 +6517,7 @@
     },
     {
       "rank": 354,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "12206e8af71735a752a8e354142489edefc610c57cbe8b70685053e62daf5444",
       "source_target": "أريد أن أكون هنا",
       "source_english": "I want to be here.",
@@ -6532,10 +6532,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "متى قابلتها؟",
+      "approved_english": "When did you meet her?",
+      "approval_note": "Second-pass verified قابل means meet, not merely see.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 355,
@@ -6567,7 +6567,7 @@
     },
     {
       "rank": 357,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "7bb615ee53985cb65f6d3af1d9b8f1eae89539b18f5a23209773f22d700d4cb0",
       "source_target": "أريد العيش هنا.",
       "source_english": "I want to live here.",
@@ -6582,10 +6582,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أين هو المرحاض، من فضلك؟",
+      "approved_english": "Where is the toilet, please?",
+      "approval_note": "Second-pass verified singular number alignment.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 358,
@@ -6617,7 +6617,7 @@
     },
     {
       "rank": 360,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "d9e73293b653c383fcb8100a6a0c248b7e49c10547bfb1d59783ede64790fa6d",
       "source_target": "إنه تمامًا ما نحتاج إليه.",
       "source_english": "It's just what we need.",
@@ -6632,10 +6632,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أين يمكنني تبديل النقود؟",
+      "approved_english": "Where can I exchange money?",
+      "approval_note": "Second-pass verified يمكنني orthography and natural money-exchange verb تبديل.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 361,
@@ -6675,7 +6675,7 @@
     },
     {
       "rank": 363,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "18dbae497f1b1ae21b053a410f71adc4bffcb685679ac2c0594d12d5294df5d2",
       "source_target": "أرِنِي جواز سفرك، لو سمحت.",
       "source_english": "Show me your passport, please.",
@@ -6692,14 +6692,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "من أين يأتي الرضّع؟",
+      "approved_english": "Where do babies come from?",
+      "approval_note": "Approved only after second-pass amendment replaced the overly broad children term with الرضّع for babies/infants.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_007_amended_second_pass.json"
     },
     {
       "rank": 364,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "00b89f74d11f4169a2255171be5753ed86fd5601ff14a64d51b87bfcd3265c63",
       "source_target": "أخبرني عن طفولتك.",
       "source_english": "Tell me about your childhood.",
@@ -6714,10 +6714,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "عمّن تتحدث؟",
+      "approved_english": "Who are you talking about?",
+      "approval_note": "Second-pass verified contraction عن + من -> عمّن.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 365,
@@ -6777,7 +6777,7 @@
     },
     {
       "rank": 369,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "5247c96cde58fa08a9f9a2f96b8ae9709d7397d6a9209acd7fa7ae13c1dd4d9f",
       "source_target": "لهذا السبب جئت إلى هنا.",
       "source_english": "That's why I came here.",
@@ -6792,10 +6792,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا أنت مضطرب إلى هذه الدرجة؟",
+      "approved_english": "Why are you so agitated?",
+      "approval_note": "Second-pass verified standard MSA degree expression.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 370,
@@ -7009,7 +7009,7 @@
     },
     {
       "rank": 378,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "773a8926a59a289128e98885b14967e2c396e8771468ea1c4fb6d28038548952",
       "source_target": "أنت دائما تقول لي ذلك.",
       "source_english": "You always tell me that.",
@@ -7024,14 +7024,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا لم تستطع أن تأتي بالأمس؟",
+      "approved_english": "Why couldn't you come yesterday?",
+      "approval_note": "Second-pass verified spelling/morphology تستطع after لم.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 379,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "418963b328a4a64c0cc7b6da3b56e31ab742aa9be90263b2522f88fdd421ac1f",
       "source_target": "أنت تقف في طريقي.",
       "source_english": "You are in my way.",
@@ -7047,10 +7047,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا تزوجت منه؟",
+      "approved_english": "Why did you marry him?",
+      "approval_note": "Second-pass verified standard interrogative and past verb form.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 380,
@@ -7104,7 +7104,7 @@
     },
     {
       "rank": 383,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "89825cbdd80115303018f4399c1e40ce949fc5dad60772d1292a2e8a301da2ff",
       "source_target": "عليك العودة.",
       "source_english": "You have to come back.",
@@ -7151,10 +7151,10 @@
           "issue": "Partial diacritization is inconsistent; normalize display policy across the workbook."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا أهتم أصلًا؟",
+      "approved_english": "Why do I even care?",
+      "approval_note": "Second-pass verified direct semantic match for care/even.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 384,
@@ -7200,7 +7200,7 @@
     },
     {
       "rank": 387,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "3e0adecc782d675ae27a2f777ae1f6d284668b8bc4c71da8fd2cfb6725cb118c",
       "source_target": "أأشتري لك شرابا آخر؟",
       "source_english": "Can I buy you another drink?",
@@ -7215,14 +7215,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لم لا نفعل ذلك؟",
+      "approved_english": "Why don't we do that?",
+      "approval_note": "Second-pass verified that the Arabic suggestion question matches present English rather than conditional wouldn't.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 388,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "6a81efdd45c7d6a57dc4797f284c91b9cd98ec22c413f4d929f7e676ba319555",
       "source_target": "هلّا أعطيتني اسمك الكامل؟",
       "source_english": "Can I have your full name?",
@@ -7237,10 +7237,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لم لا نقوم بذلك؟",
+      "approved_english": "Why don't we do that?",
+      "approval_note": "Second-pass verified present suggestion-question modality.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 389,
@@ -7772,7 +7772,7 @@
     },
     {
       "rank": 416,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "762bac190a341ea8f4aeb8a061125cf934fe30d7bd07973d69a8618f5277860d",
       "source_target": "كم طفلًا لديك؟",
       "source_english": "How many kids do you have?",
@@ -7788,10 +7788,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل نستطيع تحمل تكلفة الأكل هنا؟",
+      "approved_english": "Can we afford to eat here?",
+      "approval_note": "Second-pass verified financial-affordability meaning via تحمل تكلفة.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 417,
@@ -7823,7 +7823,7 @@
     },
     {
       "rank": 419,
-      "status": "REPLACE_PENDING_SECOND_PASS",
+      "status": "REPLACE_APPROVED",
       "audit_fingerprint": "fa5a3286c3c76ce53489f7d47e1c1e43295017c4e880a5cd3cae6338dc0c9eea",
       "source_target": "كم مرة تسافر إلى الخارج عادةً؟",
       "source_english": "How often do you go abroad?",
@@ -7839,10 +7839,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تعلم أن سمك الشبوط يأكل الشراغف؟",
+      "approved_english": "Did you know carp eat tadpoles?",
+      "approval_note": "Replaced السلطعون (crab) with the standard carp term سمك الشبوط and normalized أن/punctuation; bilingual animal meaning is now aligned.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_006_replacements.json"
     },
     {
       "rank": 420,
@@ -7896,7 +7896,7 @@
     },
     {
       "rank": 423,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "37bf8135ccfa1f0e2107509b277089de6e7817e5f8829c9ad271790e3bed4c54",
       "source_target": "ما سبب مجيئك إلى هنا؟",
       "source_english": "What did you come here for?",
@@ -7911,10 +7911,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل رخصة قيادتك معك؟",
+      "approved_english": "Do you have your driver's license?",
+      "approval_note": "Second-pass verified specificity: رخصة قيادة = driver's license.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 424,
@@ -7988,7 +7988,7 @@
     },
     {
       "rank": 429,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "7187d003be91fc9331ca57048b35becc56c6107e482e6173664409a70aee827b",
       "source_target": "ماذا تُسَمّى هذه الوردة؟",
       "source_english": "What do you call this flower?",
@@ -8003,10 +8003,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ألا تريد أن تعرف لماذا؟",
+      "approved_english": "Don't you want to know why?",
+      "approval_note": "Second-pass verified hamza in interrogative ألا.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 430,
@@ -8052,7 +8052,7 @@
     },
     {
       "rank": 433,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "2fa17a2870048908f61d0000f37834fa2d93707aa97011da0d13f72f363b86ba",
       "source_target": "ماذا تنصحني أن أفعل؟",
       "source_english": "What do you suggest I do?",
@@ -8067,14 +8067,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كم نسخة تحتاج؟",
+      "approved_english": "How many copies do you need?",
+      "approval_note": "Second-pass verified question punctuation.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 434,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "a679ee8ce4252e2769b3763f9da5b7ea89f35229b84bbb0f982d3705a5bc0770",
       "source_target": "ماذا تقترح أن نفعل؟",
       "source_english": "What do you suggest we do?",
@@ -8089,10 +8089,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كم عدد قطع الدونات التي تريد؟",
+      "approved_english": "How many donuts do you want?",
+      "approval_note": "Second-pass verified orthography and countable noun phrase for doughnuts.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 435,
@@ -8272,7 +8272,7 @@
     },
     {
       "rank": 447,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "f4c915123082bdf226a1c4b788f006c62f6d04140cb046173ab58334ffb680a7",
       "source_target": "أين تقترح أن نذهب؟",
       "source_english": "Where would you suggest we go?",
@@ -8318,10 +8318,10 @@
           "issue": "Partial diacritization is inconsistent; normalize display policy across the workbook."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا تسمّى هذه الوردة؟",
+      "approved_english": "What do you call this rose?",
+      "approval_note": "Second-pass verified lexical specificity: وردة = rose.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 448,
@@ -8353,7 +8353,7 @@
     },
     {
       "rank": 450,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "38568583fd7f1baadb656926dcc4a0e4df9b7c3bf9443c020d8bd4a8d82ed5b1",
       "source_target": "لماذا عادت إلى المنزل باكرًا؟",
       "source_english": "Why did she return home early?",
@@ -8368,10 +8368,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا تقترح أن نفعل؟",
+      "approved_english": "What do you suggest we do?",
+      "approval_note": "Second-pass verified hamza in أن.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 451,
@@ -8509,7 +8509,7 @@
     },
     {
       "rank": 460,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "779406172531851753f80aa890f373317ea798deff3b1580d50ea8bf0e7f7403",
       "source_target": "هل يمكنك الدخول إلى هنا، رجاءً؟",
       "source_english": "Could you come in here, please?",
@@ -8524,14 +8524,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "من أين اشتريت هذا الثوب؟",
+      "approved_english": "Where did you buy this dress?",
+      "approval_note": "Second-pass verified initial hamza orthography and this/هذا deixis.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 461,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "4741d75fff9ce1066cea277102608c240ea424f8d6c7513926d74ae0a256a333",
       "source_target": "سأذهب إلى هناك اليوم.",
       "source_english": "I am to go there today.",
@@ -8546,10 +8546,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "من أين اشتريت هذا الثوب؟",
+      "approved_english": "Where did you buy this dress?",
+      "approval_note": "Second-pass verified initial hamza orthography and this/هذا deixis; gender of addressee is not represented without diacritics.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 462,
@@ -8759,7 +8759,7 @@
     },
     {
       "rank": 474,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "ba068efd665101eda0f976b549dd6c6ef421e2775e50d2b71a787558a24525dd",
       "source_target": "لدي شيء أريد أن أخبرك به.",
       "source_english": "I have something to tell you.",
@@ -8774,10 +8774,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا لن تكون هنا غدًا؟",
+      "approved_english": "Why won't you be here tomorrow?",
+      "approval_note": "Second-pass verified interrogative لماذا and future negation لن.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 475,
@@ -8963,7 +8963,7 @@
     },
     {
       "rank": 482,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "0a8e3a69c2b71cedc3febf517cf234d4d6b3879380281fa728f23c70eee3f2c2",
       "source_target": "أريد منك أن تثق بي.",
       "source_english": "I want you to trust me.",
@@ -8997,10 +8997,10 @@
           "issue": "Normalize terminal punctuation to the chosen Arabic/English learner style; current rows mix periods and Arabic question punctuation inconsistently."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أنا أعلم أنك لست معجبًا بي.",
+      "approved_english": "I know you don't like me.",
+      "approval_note": "Second-pass verified agreement with أنك and predicate construction لست معجبًا بي; acceptable semantic match in this context.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 483,
@@ -9136,7 +9136,7 @@
     },
     {
       "rank": 487,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "21ba4f2664ce789720f394516d25992a479e657bc7c3abe2c91516049675e5e2",
       "source_target": "فقط أخبرني ماذا تريد.",
       "source_english": "Just tell me what you want.",
@@ -9170,10 +9170,10 @@
           "issue": "Normalize terminal punctuation to the chosen Arabic/English learner style; current rows mix periods and Arabic question punctuation inconsistently."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "سأشتري غدًا ما أحتاج إليه.",
+      "approved_english": "Tomorrow I'll buy what I need.",
+      "approval_note": "Second-pass verified natural MSA verb سأشتري and required preposition إليه.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 488,
@@ -9280,7 +9280,7 @@
     },
     {
       "rank": 494,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "05453ccaadcf16ebda2c1ef297c46be145d7afc76dab9fb17ce9477d96dd4717",
       "source_target": "أخبرهم ما أخبرتك بهِ.",
       "source_english": "Tell them what I told you.",
@@ -9295,14 +9295,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل يمكنني أن أخرج للعب؟",
+      "approved_english": "Can I go out to play?",
+      "approval_note": "Second-pass verified final-ya orthography in يمكنني.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 495,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "7781a6f1c2edcdae1303948231269156f3096898c873c0011fabec866ab33a1e",
       "source_target": "سأبتاع غدًا ما أحتاج إليه.",
       "source_english": "Tomorrow I'll buy what I need.",
@@ -9317,10 +9317,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أيمكنني الدفع عن طريق بطاقة الائتمان؟",
+      "approved_english": "Can I pay by credit card?",
+      "approval_note": "Second-pass verified standard spelling الائتمان.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 496,
@@ -9397,7 +9397,7 @@
     },
     {
       "rank": 499,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c30ddb223eda4f6171635cf3dd254ca61d6889aeb16cb280ca819dae031ab809",
       "source_target": "يُمكِنَك أن تقول ما تريد.",
       "source_english": "You can say whatever you want.",
@@ -9412,14 +9412,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أيمكنني استخدام بطاقتي الائتمانية؟",
+      "approved_english": "Can I use my credit card?",
+      "approval_note": "Second-pass verified standard credit-card spelling and possessive form.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 500,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c369c5c19441dc2aed5446edf81762f4e2c0a58e4e6b60ba61fa484306f3ffc0",
       "source_target": "ليس عليك أن تأتي غدًا.",
       "source_english": "You don't have to come tomorrow.",
@@ -9434,10 +9434,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أيمكنك أن تغلف هذا كهدية، من فضلك؟",
+      "approved_english": "Can you gift-wrap this, please?",
+      "approval_note": "Second-pass verified natural singular كهدية for gift wrapping.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_002_second_pass.json"
     },
     {
       "rank": 501,
@@ -9497,7 +9497,7 @@
     },
     {
       "rank": 505,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "4f40a936831f2a5ae9f11c7def7527823787c84a21490912b28f9c1a7a02aa83",
       "source_target": "كيف تجرؤ على شتم أختي!",
       "source_english": "How dare you insult my sister!",
@@ -9512,10 +9512,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل يمكنك أن تريني الطريق؟",
+      "approved_english": "How dare you insult my sister!",
+      "approval_note": "Second-pass verified hamza in أن.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 506,
@@ -9617,7 +9617,7 @@
     },
     {
       "rank": 513,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "6808eac62a6171fcfb2ddd794bc6df4e59e7c74a16f38ab04cb911cd575b455f",
       "source_target": "لم أكن بحاجة لإخباره.",
       "source_english": "I didn't need to tell him.",
@@ -9632,10 +9632,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ألديك بطاقة ائتمان؟",
+      "approved_english": "I didn't need to tell him.",
+      "approval_note": "Second-pass verified standard spelling ائتمان.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 514,
@@ -9830,7 +9830,7 @@
     },
     {
       "rank": 527,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "9f93b176334e3b9c86199e65519c8ae4ebe22f5a29ce7cf4e1cd4cf78ce9c122",
       "source_target": "لدي بعض الأسئلة لك.",
       "source_english": "I have some questions for you.",
@@ -9846,14 +9846,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "إلى ماذا تنظر؟",
+      "approved_english": "What are you looking at?",
+      "approval_note": "Second-pass verified initial hamza and removed unsupported English discourse marker Hey.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 528,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "ebd508c46f7ff7abebcb35863a28e04d9c4a7c0a81608e14f7cee1f879e4cab8",
       "source_target": "عليّ فعل هذا مجددًا.",
       "source_english": "I have to do this again.",
@@ -9868,10 +9868,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "عليّ فعل هذا مجددًا.",
+      "approved_english": "What are you talking about?",
+      "approval_note": "Second-pass verified removal of unsupported English discourse marker Hey; Arabic target remains correct.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 529,
@@ -10079,7 +10079,7 @@
     },
     {
       "rank": 543,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "f1c86676dc9db93b44f8c2805d9fa6e69953f60696c3f156b123517bbddde391",
       "source_target": "حان وقت ذهابي.",
       "source_english": "It's time for me to go.",
@@ -10095,14 +10095,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ما الذي تبحث عنه تحديدًا؟",
+      "approved_english": "What specifically are you looking for?",
+      "approval_note": "Second-pass verified تبحث عن = look for and standard spelling/punctuation.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 544,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "862039e73d86e2434e0a8851a3f5e51bd370e55201f7be6723f237f65b0990df",
       "source_target": "هل أنت غاضب مما قلت؟",
       "source_english": "Are you angry at what I said?",
@@ -10117,14 +10117,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "عمّ تبحث تحديدًا؟",
+      "approved_english": "What specifically are you looking for?",
+      "approval_note": "Second-pass verified contracted عن ما/عن ماذا form and search semantics.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 545,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "0aa7866abaec312bcdd92b659afdf4a55cf09139349fbad6ef218202d08adc11",
       "source_target": "هل أنت جاهز للذهاب للبيت الآن؟",
       "source_english": "Are you ready to go home now?",
@@ -10139,10 +10139,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ما الذي تبحث عنه بالتحديد؟",
+      "approved_english": "Are you ready to go home now?",
+      "approval_note": "Second-pass verified spacing ما الذي.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 546,
@@ -10382,7 +10382,7 @@
     },
     {
       "rank": 561,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "e497de856843f761bb5ff3cbd849a57ef5d95449bd807faca5be2a091aadd42a",
       "source_target": "لا أرغب في تناول أي طعام اليوم.",
       "source_english": "I don't feel like eating anything today.",
@@ -10397,14 +10397,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "من يعلم ما قد يحصل غدًا؟",
+      "approved_english": "I don't feel like eating anything today.",
+      "approval_note": "Second-pass verified spelling يحصل.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 562,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "716672efa1fdf251051e9f5c82c0c7b21a945de0220291e36123c8cecc212ab2",
       "source_target": "ليس لدي وقت للأكل الآن.",
       "source_english": "I don't have time to eat now.",
@@ -10419,10 +10419,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا تتصرف هكذا؟",
+      "approved_english": "I don't have time to eat now.",
+      "approval_note": "Second-pass verified unambiguous interrogative لماذا.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 563,
@@ -10454,7 +10454,7 @@
     },
     {
       "rank": 565,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "e029d59d52e99de849932730554a5a582f7ddedd953b6f0beb13df211419141e",
       "source_target": "لا أعرف ماذا سأفعل بعد الآن.",
       "source_english": "I don't know what to do anymore.",
@@ -10469,10 +10469,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا لا أستطيع قول الحقيقة؟",
+      "approved_english": "I don't know what to do anymore.",
+      "approval_note": "Second-pass verified spelling الحقيقة.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 566,
@@ -10806,7 +10806,7 @@
     },
     {
       "rank": 589,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "bca9901283ddfc346ea27808d67d21c71c72714b62923c9815dd5903dd0c7706",
       "source_target": "أريد أن أخبرك ما حدث.",
       "source_english": "I want to tell you what happened.",
@@ -10821,14 +10821,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كيف علمتِ ما كانت تريده؟",
+      "approved_english": "I want to tell you what happened.",
+      "approval_note": "Second-pass verified feminine past form علمتِ and removal of malformed extra ending.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 590,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "65bf9a5aacc097da0317017f344fceacbf9466a9926d073cf5632b0c7bbb737b",
       "source_target": "أريد منك مغادرة منزلي.",
       "source_english": "I want you to leave my house.",
@@ -10843,10 +10843,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كم من الوقت انتظرتني؟",
+      "approved_english": "I want you to leave my house.",
+      "approval_note": "Second-pass verified standard initial alif spelling in انتظرتني.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 591,
@@ -10892,7 +10892,7 @@
     },
     {
       "rank": 594,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "9b8c44f83b56a50f16a54ce08b3a26238621150614b541551fff432b8e85a976",
       "source_target": "أود أن أعرف اسمها.",
       "source_english": "I would like to know her name.",
@@ -10907,10 +10907,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا يمكنك أن تقول لي عن ذلك؟",
+      "approved_english": "I would like to know her name.",
+      "approval_note": "Second-pass verified hamza in أن.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 595,
@@ -10956,7 +10956,7 @@
     },
     {
       "rank": 598,
-      "status": "REPLACE_PENDING_SECOND_PASS",
+      "status": "REPLACE_APPROVED",
       "audit_fingerprint": "a662d63bbd5f4687ffca8973136a00144ded7718dbdf3020f83b7882357c7aef",
       "source_target": "بلغها أن تعاود الاتصال بي من فضلك.",
       "source_english": "Please tell her to call me back.",
@@ -10980,10 +10980,10 @@
           "issue": "Requires a true causative/tailoring construction rather than a literal sewing verb; native review required before promotion."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أين تم تفصيل بدلتك؟",
+      "approved_english": "Where did you have your suit made?",
+      "approval_note": "Replaced the self-sewing reading with a standard passive tailoring construction that expresses having one's suit made.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_006_replacements.json"
     },
     {
       "rank": 599,
@@ -11085,7 +11085,7 @@
     },
     {
       "rank": 606,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "aee61299bfb85545488fc9e4ba1387ec59e90c8ec9b0281675144ed6ec165f44",
       "source_target": "انتظر، أريد إخبارك بأمر ما.",
       "source_english": "Wait. I want to tell you something.",
@@ -11100,14 +11100,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا تريدين المغادرة اليوم؟",
+      "approved_english": "Wait. I want to tell you something.",
+      "approval_note": "Second-pass verified explicit interrogative لماذا.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 607,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "17c75fcacab212dbe22a770cd1f6021664e37692b9678e4d397bf3c641292713",
       "source_target": "علينا تكرار هذا غدًا.",
       "source_english": "We have to repeat this tomorrow.",
@@ -11122,10 +11122,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا قد نرغب في فعل ذلك؟",
+      "approved_english": "Why would we want to do that?",
+      "approval_note": "Second-pass verified conditional/modal nuance through قد and standard في فعل ذلك construction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 608,
@@ -11263,7 +11263,7 @@
     },
     {
       "rank": 617,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "420c65ef5cdd2fc04681acd0ede88aa1d41e873db00064209b8e06f779a15c07",
       "source_target": "افترضت أن هذا هو سبب اتصالك بي.",
       "source_english": "I assumed that was why you called me.",
@@ -11287,10 +11287,10 @@
           "issue": "Remove stray spaces before Arabic question marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل لديك أي نصيحة لي؟",
+      "approved_english": "Do you have any advice for me?",
+      "approval_note": "Second-pass verified have-advice semantics rather than asking whether listener wants to advise.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 618,
@@ -11436,7 +11436,7 @@
     },
     {
       "rank": 627,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "429d8e323fc7e61bd5f075c67d86ff5395f8e6db973d665ebb157d1358eef7bb",
       "source_target": "لا أريدك أن تقلق بشأني.",
       "source_english": "I don't want you to worry about me.",
@@ -11451,10 +11451,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كيف سأسدد ديوني الآن؟",
+      "approved_english": "I don't want you to worry about me.",
+      "approval_note": "Second-pass verified ديوني orthography and removal of unnecessary partial diacritics.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 628,
@@ -11656,7 +11656,7 @@
     },
     {
       "rank": 641,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "5788a16a741023e1504037eaf30aa1ee6d6ca94fc4485e46e9b082c40cd88068",
       "source_target": "أقترح أن نخرج لتناول مشروب.",
       "source_english": "I suggest we go out for a drink.",
@@ -11671,14 +11671,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ما رأيك بهذه الخطة؟",
+      "approved_english": "I suggest we go out for a drink.",
+      "approval_note": "Second-pass verified spacing ما رأيك.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 642,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "37d075b3c201248c76ac6b29a903e2755ac16a11284aae8754c661534378c250",
       "source_target": "أعتقد أن الحياة هي ما تصنعه.",
       "source_english": "I think life is what you make it.",
@@ -11693,14 +11693,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا تعتقد أنني كنت أفعل؟",
+      "approved_english": "What do you think I was doing?",
+      "approval_note": "Second-pass verified أنني form and past progressive aspect.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 643,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "8e8780a7ec29d567c12deb4a5124e8a3143ed680e8661d9e2996c008f3d0ffbd",
       "source_target": "أعتقد أنك شخص لطيف حقاً",
       "source_english": "I think you are a really nice person.",
@@ -11715,10 +11715,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا تعتقدين أنني كنت أفعل؟",
+      "approved_english": "What do you think I was doing?",
+      "approval_note": "Second-pass verified feminine addressee form, أنني, and past progressive aspect.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 644,
@@ -11736,7 +11736,7 @@
     },
     {
       "rank": 645,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "0a4b37d93ce0c206a7b74ab8e224b10cb9964e87c7d6524adb6479857f0a5588",
       "source_target": "ظننت أنك قد تود الذهاب معي.",
       "source_english": "I thought you might want to join me.",
@@ -11751,10 +11751,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ما الأمر الآخر الذي يجب عليك أن تفعله؟",
+      "approved_english": "I thought you might want to join me.",
+      "approval_note": "Second-pass verified hamza in أن.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 646,
@@ -11786,7 +11786,7 @@
     },
     {
       "rank": 648,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "25fa841dd1ffb791a9a73980134b44abbe868c67d87fb8c8e5d951105bb3442a",
       "source_target": "أودّ معرفة سبب فعلك لذلك.",
       "source_english": "I'd like to know why you did that.",
@@ -11801,10 +11801,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ما نوع الجراحة التي تحتاجها؟",
+      "approved_english": "I'd like to know why you did that.",
+      "approval_note": "Second-pass verified question punctuation.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 649,
@@ -11864,7 +11864,7 @@
     },
     {
       "rank": 653,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "34f0b246ce091d1c26a0edff983d3dc7812833633006546a63b24f1e0388d213",
       "source_target": "لن أنس أبدًا ما فعلته من أجلي.",
       "source_english": "I'll never forget what you did for me.",
@@ -11879,14 +11879,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أين يمكنني استلام تذكرتي؟",
+      "approved_english": "I'll never forget what you did for me.",
+      "approval_note": "Second-pass verified standard initial alif in استلام.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 654,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c50165bbb8baaf0ea1fc775c392667442d56ccca00fecf8d1978e4bc63074f56",
       "source_target": "أرجو أن تتصل بي إن أردتني.",
       "source_english": "Please call me up if you want me.",
@@ -11901,10 +11901,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أرجو أن تتصل بي إن أردتني.",
+      "approved_english": "Where can I make a phone call?",
+      "approval_note": "Second-pass verified first-person singular يمكنني; corrected English I matches target.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 655,
@@ -11964,7 +11964,7 @@
     },
     {
       "rank": 659,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "cc34f597cbbbd9de25e0e919cc9ba18a50067d92356ac7d25bc5e27afa41e321",
       "source_target": "ليس هذا ما أردت إخبارك به.",
       "source_english": "That's not what I wanted to tell you.",
@@ -11980,10 +11980,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا لا يمكنني الحصول على غرفة خاصة بي؟",
+      "approved_english": "Why can't I have my own room?",
+      "approval_note": "Second-pass verified possession/acquisition semantics rather than leaving a room.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 660,
@@ -12065,7 +12065,7 @@
     },
     {
       "rank": 665,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "0ea561d9c1e2be789f798de9d13ff221515c36bee9634babb1d7ad82f4603faf",
       "source_target": "يمكنك الذهاب إلى المحطة بالحافلة.",
       "source_english": "You can go to the station by bus.",
@@ -12080,10 +12080,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كل ما عليك القيام به هو الانتظار.",
+      "approved_english": "You can go to the station by bus.",
+      "approval_note": "Second-pass verified standard spelling الانتظار.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 666,
@@ -12157,7 +12157,7 @@
     },
     {
       "rank": 671,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "b0d7cd8872d199479b1143094823bb47ee25c1038ecb2cd619574eb4ab2b373a",
       "source_target": "أيمكنك إخباري عن سبب حبك لها؟",
       "source_english": "Could you please tell me why you love her?",
@@ -12172,14 +12172,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لم أستطع يومًا أن أقول لك لا.",
+      "approved_english": "I never could say no to you.",
+      "approval_note": "Second-pass verified past inability and never nuance.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 672,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c6b78e75bc0e4bafc7abb4f216af29cd3f771162ac43886a62558b3be2df9093",
       "source_target": "هل لديك أي فكرة عمن يستطيع فعل هذا؟",
       "source_english": "Do you have any idea who can do this?",
@@ -12194,14 +12194,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أعتقد أنه يمكننا مساعدة بعضنا بعضًا.",
+      "approved_english": "Do you have any idea who can do this?",
+      "approval_note": "Second-pass verified hamza, complementizer, and standard reciprocal form.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 673,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c5896c89cef2d97ed2b8e0fba4f23054e44c894d7f2c4f5ed3a0b52bfc5c5ae7",
       "source_target": "هل تذكر اليوم الذي تقابلنا فيه أول مرة؟",
       "source_english": "Do you remember the day when we first met?",
@@ -12216,14 +12216,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "اعتقدت أنك لن تأتي إلى هنا أبدًا.",
+      "approved_english": "I thought you would never come here.",
+      "approval_note": "Second-pass verified أبدًا supplies never and standard إلى/أنك orthography.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 674,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "ff76c372b1f6cf501eb1bbced308dc7d5a7514e88dc7013f1735f1473594a280",
       "source_target": "هل تذكر الليلة التي تقابلنا فيها أول مرة؟",
       "source_english": "Do you remember the night when we first met?",
@@ -12239,10 +12239,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "اعتقدت أنك لا تريد أن تأتي إلى هنا.",
+      "approved_english": "I thought you didn't want to come here.",
+      "approval_note": "Second-pass verified want/not-want semantics; corrected English matches target rather than never-coming claim.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 675,
@@ -12274,7 +12274,7 @@
     },
     {
       "rank": 677,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "3db46b1ebf310c2fec9ee75b45d6523be2a4144dcdf7429191202b9abd974fc8",
       "source_target": "أتريد الخروج لتناول مشروب؟",
       "source_english": "Do you want to go out for a drink?",
@@ -12289,10 +12289,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ربما يمكنك مساعدتي على فعل ذلك.",
+      "approved_english": "Maybe you can help me do that.",
+      "approval_note": "Second-pass verified natural MSA help construction مساعدتي على فعل ذلك.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 678,
@@ -12352,7 +12352,7 @@
     },
     {
       "rank": 682,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "a299e378ed80628179d3ea934c55cbbf9b887224ccfaaeb45b922653cf4593ca",
       "source_target": "كم مرة تنسى أن تقوم بواجباتك المنزلية؟",
       "source_english": "How often do you forget to do your homework?",
@@ -12367,10 +12367,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ما هي خططك ليوم الأحد؟",
+      "approved_english": "How often do you forget to do your homework?",
+      "approval_note": "Second-pass verified spacing ما هي.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 683,
@@ -12430,7 +12430,7 @@
     },
     {
       "rank": 687,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "f288997da90c17c14c6c08dc50912488feeec0661906d084d9a96b429f453568",
       "source_target": "ماذا تريد أن تفعل في المستقبل؟",
       "source_english": "What do you want to do in the future?",
@@ -12445,14 +12445,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل يمكنني أن أتكلم معك للحظة؟",
+      "approved_english": "What do you want to do in the future?",
+      "approval_note": "Second-pass verified hamza in أن/أتكلم construction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 688,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "10a70a11899f92641e42c1275db8c442ab828ca8e10cf2455551f91e7e9ad152",
       "source_target": "متى خلدت إلى النوم ليلة الأمس؟",
       "source_english": "What time did you go to bed last night?",
@@ -12467,10 +12467,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل يمكنك قراءة هذا النص من أجلي؟",
+      "approved_english": "What time did you go to bed last night?",
+      "approval_note": "Second-pass verified question punctuation and normalized unnecessary diacritic.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 689,
@@ -12530,7 +12530,7 @@
     },
     {
       "rank": 693,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "0ba05664f0a5841b25047b1301ef4bbc355d75ed4c9536a693adadb74d7275a2",
       "source_target": "أيّ هذين اللونين تفضل، الأزرق أم الأحمر؟",
       "source_english": "Which of these two colors do you prefer, blue or red?",
@@ -12546,10 +12546,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أيّ هذين اللونين تفضل، الأزرق أم الأحمر؟",
+      "approved_english": "Is your family big?",
+      "approval_note": "Second-pass verified direct copular meaning; English come from introduced unsupported structure.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 694,
@@ -12751,7 +12751,7 @@
     },
     {
       "rank": 707,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "90eb3431dbfb6da3b2b94bcf63476f8eda299b3bee2201881772b447ffbb8451",
       "source_target": "لم أعلم كم سيطول الاجتماع.",
       "source_english": "I didn't know how long the meeting would last.",
@@ -12766,10 +12766,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا ستفعل إذا لم يأتِ؟",
+      "approved_english": "If he doesn't come, what'll you do?",
+      "approval_note": "Second-pass verified فعل verb choice, real conditional إذا, and jussive يأتِ.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 708,
@@ -12815,7 +12815,7 @@
     },
     {
       "rank": 711,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c99b8bb6ce752e813a4d5aa697eb225172fa30fc4a914977ea3460ee992f0ba8",
       "source_target": "لا أريد أن أخبرهم عن سبب تأخّري.",
       "source_english": "I don't want to tell them why I'm late.",
@@ -12830,10 +12830,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل لي أن أعرّفك بصديقي؟",
+      "approved_english": "May I introduce my friend to you?",
+      "approval_note": "Second-pass verified interrogative permission form هل لي أن.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 712,
@@ -12921,7 +12921,7 @@
     },
     {
       "rank": 718,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "3669952e5754e198a151fb868cafb1184d48d6294a47b5ea27c99521c46a52b3",
       "source_target": "إني شاكر لك من أعماق قلبي.",
       "source_english": "I am grateful to you from the bottom of my heart.",
@@ -12937,10 +12937,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "إني شاكر لك من أعماق قلبي.",
+      "approved_english": "What degree did you graduate with?",
+      "approval_note": "Second-pass verified الشهادة asks about degree/credential; English major was inaccurate.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 719,
@@ -13000,7 +13000,7 @@
     },
     {
       "rank": 723,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "a2bf84e102eb892e63d0d656d7c5f9bfbf838cd502bdf4727dc996a7cd79031e",
       "source_target": "آسف ساعتي ليست معي.",
       "source_english": "I'm sorry I don't have my watch with me.",
@@ -13016,10 +13016,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا تفعل بعد الظهر؟",
+      "approved_english": "What do you do in the afternoon?",
+      "approval_note": "Second-pass verified بعد الظهر = afternoon; ظهرًا alone is noon.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 724,
@@ -13333,7 +13333,7 @@
     },
     {
       "rank": 745,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "5d3f147456e0aae44051683bce63646e3034f4eaa905e7b255ef2f2bbaa90760",
       "source_target": "أين هي الوثائق التي كانت على طاولتي؟",
       "source_english": "Where are the documents that were on my desk?",
@@ -13348,10 +13348,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا لا تُبقي عينيك مفتوحتين؟",
+      "approved_english": "Why don't you keep your eyes open?",
+      "approval_note": "Second-pass verified causative تُبقي and accusative dual forms عينيك مفتوحتين.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 746,
@@ -13383,7 +13383,7 @@
     },
     {
       "rank": 748,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "f9270ec802ba6b241e31cf130be664dbf9d6848af0d1643664861a960f885635",
       "source_target": "لا تنس أنّه يجب أن تشتري قليلا من البصل.",
       "source_english": "Don't forget that you need to buy some onions.",
@@ -13398,10 +13398,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا تريد المجيء معي؟",
+      "approved_english": "Why do you want to come with me?",
+      "approval_note": "Second-pass verified verbal noun المجيء and interrogative لماذا.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_003_second_pass.json"
     },
     {
       "rank": 749,
@@ -13528,7 +13528,7 @@
     },
     {
       "rank": 755,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c87d6f59a62a2e6aa788a5052429b646c61eb12c5bab52478d8507c48cb05ae0",
       "source_target": "أظن أن بإمكاني الانتظار أكثر قليلًا.",
       "source_english": "I guess I could wait a little bit longer.",
@@ -13544,10 +13544,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تعلم كم جعلتني أقلق عليك؟",
+      "approved_english": "Do you know how worried you made me?",
+      "approval_note": "Second-pass verified causative جعلتني أقلق عليك restores made me worry semantics.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 756,
@@ -13565,7 +13565,7 @@
     },
     {
       "rank": 757,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "b96fbedac9e42a25ee3af02df70ccee45a9e7697b1d7f8a6e8ca6151e4e9f7c3",
       "source_target": "يجب أن آخذ الدواء كل ست ساعات.",
       "source_english": "I have to take my medicine every six hours.",
@@ -13611,14 +13611,14 @@
           "issue": "Normalize sentence-final punctuation consistently; several declarative rows use ASCII periods while Arabic question rows use Arabic question marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تريدينني أن أمشط شعرك؟",
+      "approved_english": "I have to take my medicine every six hours.",
+      "approval_note": "Second-pass verified تريدينني morphology and question punctuation.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 758,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "a2b214262a26df00506bd5a57bdf30a7096ad3a49aebc432df6bd9f7d28c6865",
       "source_target": "أتمنى فقط لو كنت أعرف كيف أتكلم الفرنسية.",
       "source_english": "I just wish I knew how to speak French.",
@@ -13633,10 +13633,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كيف تعرّفتما إلى بعضكما؟",
+      "approved_english": "I just wish I knew how to speak French.",
+      "approval_note": "Second-pass verified reciprocal meeting verb تعرّفتما.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 759,
@@ -13690,7 +13690,7 @@
     },
     {
       "rank": 762,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "4bfcf39c1821b23d87b9904acbfb5e9031ac022ff519987baf248ecc76d711ba",
       "source_target": "سأبذل قصارى جهدي ألّا أقاطع مذاكرتك.",
       "source_english": "I'll do my best not to disturb your studying.",
@@ -13705,14 +13705,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "سأبذل قصارى جهدي ألّا أقاطع مذاكرتك.",
+      "approved_english": "When do you go to bed?",
+      "approval_note": "Second-pass verified target contains no explicit usually frequency marker.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 763,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "e695e4d6af9e9bd4afa0461959eafcb4f14ba1ef1d3c89ac7a842913c38b7d51",
       "source_target": "لن أنس أبدًا المرّة الأولى التي رأيتك فيها.",
       "source_english": "I'll never forget the first time I saw you.",
@@ -13727,10 +13727,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "في أي ساعة تنام؟",
+      "approved_english": "What time do you go to bed?",
+      "approval_note": "Second-pass verified standard time-question form and removal of unsupported usually.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 764,
@@ -14238,7 +14238,7 @@
     },
     {
       "rank": 788,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "036a3e1c1aac85a5f41faeb7a2bcd54156eeb5c86c11cb67abbcceca8e5bbb8b",
       "source_target": "هل أنتَ مُتأكِّد أنّنا نسير في الاتّجاه الصّحيح؟",
       "source_english": "Are you sure we're going in the right direction?",
@@ -14253,10 +14253,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل لديك هذا الحذاء بمقاسي؟",
+      "approved_english": "Do you have this shoe in my size?",
+      "approval_note": "Second-pass verified singular demonstrative and number alignment.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 789,
@@ -14274,7 +14274,7 @@
     },
     {
       "rank": 790,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "db73c8e1c856d78cf4cd5d38350f26f5a8a4a0eeb65071c336dc371c3d7db75c",
       "source_target": "لا أريد أن أسمع كلمة أخرى عن هذا!",
       "source_english": "I don't want to hear another word about this!",
@@ -14289,14 +14289,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لا أريد أن أسمع كلمة أخرى عن هذا!",
+      "approved_english": "Can you drive a car?",
+      "approval_note": "Second-pass verified ability meaning; target does not explicitly encode know how.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 791,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "636e07260484ae3e12a5efa3489c50794214bc6412f10fffa8ab94129ce62ce8",
       "source_target": "فتاة حسناء مثلك حتمًا تكون قد لوحظت.",
       "source_english": "A pretty girl like you must surely have been noticed.",
@@ -14311,10 +14311,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تعرف كيف تصلح هذا التلفاز؟",
+      "approved_english": "Do you know how to fix this TV?",
+      "approval_note": "Second-pass verified demonstrative هذا restores this-TV deixis.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 792,
@@ -14374,7 +14374,7 @@
     },
     {
       "rank": 796,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "df92ca57fe54965f791a6f4f60d37488cb09b87580cf6b482ad548d3e37cbca7",
       "source_target": "هو أصم، لكنه يعرف كيف يقرأ الشفاه.",
       "source_english": "He is deaf, but knows how to read lips.",
@@ -14389,14 +14389,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تعرف كيف تستخدم فأسًا؟",
+      "approved_english": "He is deaf, but knows how to read lips.",
+      "approval_note": "Second-pass verified indefinite accusative and question punctuation.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 797,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "31a5ce5cd08c0d074d4e6b1c3bd576ec68509c46f7a5aa2445bad2c6e13e6adb",
       "source_target": "إنهُ صادق جداً, لذا يمكننا أن نعتمد عليه.",
       "source_english": "He's very honest, so we can depend on him.",
@@ -14411,14 +14411,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تريدني حقًا أن أفعل هذا؟",
+      "approved_english": "Do you really want me to do this?",
+      "approval_note": "Second-pass verified this/هذا deixis and standardized حقًا.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 798,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "fca8288a87f5cf441b2ec936e55a2bc030859f2f2826ec507b4bb3bc0d8113ac",
       "source_target": "إنه أمين جدًا، لذلك يمكننا الاعتماد عليه.",
       "source_english": "He's very honest, so we can rely on him.",
@@ -14433,10 +14433,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تريدينني حقًا أن أفعل هذا؟",
+      "approved_english": "Do you really want me to do this?",
+      "approval_note": "Second-pass verified feminine تريدينني and this/هذا deixis.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 799,
@@ -14496,7 +14496,7 @@
     },
     {
       "rank": 803,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c528e5a7851000f0bdb6d29be447ffd1e2152506642c1f05ae60236a8e139a2b",
       "source_target": "لا يمكنني أن أنسى اليوم الذي قابلته فيه.",
       "source_english": "I can't forget the day when I met him.",
@@ -14511,10 +14511,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كم مضى من الوقت منذ أن ضربت رأسك؟",
+      "approved_english": "I can't forget the day when I met him.",
+      "approval_note": "Second-pass verified الوقت spelling.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 804,
@@ -14582,7 +14582,7 @@
     },
     {
       "rank": 808,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "cb23fddb05063c2d87b85cade8ed321d8361f3f4eaeea53feac1d96a1a9c1a97",
       "source_target": "لا أريد الجلوس في الظلام بمفردي.",
       "source_english": "I don't want to sit alone in the dark.",
@@ -14597,10 +14597,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كم مدرسة في مدينتك؟",
+      "approved_english": "I don't want to sit alone in the dark.",
+      "approval_note": "Second-pass verified singular noun after كم and removed malformed مدارسة.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 809,
@@ -15515,7 +15515,7 @@
     },
     {
       "rank": 853,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "58f3567d2beeb55a0ee3352c0a4a82920e7e65e0d298d5925ca346c86340b86e",
       "source_target": "كان هناك ثلاثة أشخاص ينتظرون أمامي.",
       "source_english": "There were three people waiting in front of me.",
@@ -15530,10 +15530,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل لديك هذا بألوان أخرى؟",
+      "approved_english": "There were three people waiting in front of me.",
+      "approval_note": "Second-pass verified natural standard-MSA other-colors construction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 854,
@@ -15551,7 +15551,7 @@
     },
     {
       "rank": 855,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "07eb56c817afa4c66d50ad81b241d72b1f1eb2848415e2f2778d2f60ee01c7c9",
       "source_target": "اليوم مُشمس جداً, لذلك الجميع يرتدي نظارات الشمس.",
       "source_english": "Today it's very sunny, so everyone is wearing sunglasses.",
@@ -15566,10 +15566,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أتريد لعب الغولف أم لا؟",
+      "approved_english": "Today it's very sunny, so everyone is wearing sunglasses.",
+      "approval_note": "Second-pass verified interrogative hamza.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 856,
@@ -15615,7 +15615,7 @@
     },
     {
       "rank": 859,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "daa910f9202b76409fa39bd187391836192d79228697d89441ea9ab177c88051",
       "source_target": "لم نرَ الكثير من السياح بالقرب من هنا مؤخرًا.",
       "source_english": "We haven't seen a lot of tourists around here lately.",
@@ -15630,10 +15630,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كم ولدًا يوجد في هذا الصف؟",
+      "approved_english": "We haven't seen a lot of tourists around here lately.",
+      "approval_note": "Second-pass verified كم + singular accusative and existential يوجد.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 860,
@@ -15715,7 +15715,7 @@
     },
     {
       "rank": 865,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "5c574ea949df65ccf6cb0e6aa08ef706139aed342281a746f75fda950bb259b7",
       "source_target": "ستتعلم كيف تفعلها عاجلًا أو آجلًا.",
       "source_english": "You'll learn how to do it sooner or later.",
@@ -15730,10 +15730,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل نذهب عندي أم عندك؟",
+      "approved_english": "You'll learn how to do it sooner or later.",
+      "approval_note": "Second-pass verified عندي spelling and punctuation.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 866,
@@ -15801,7 +15801,7 @@
     },
     {
       "rank": 870,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "d8f4e6ea5915a4690c1781f2089f179fa0aa4dcb3272a7e41d4524e1ff25e4dd",
       "source_target": "أيمكنك أن تعلّمني كيف أستخدم الغسّالة؟",
       "source_english": "Could you teach me how to use the washing machine?",
@@ -15816,10 +15816,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل سيتم اعتقالك إن فعلت ذلك؟",
+      "approved_english": "Will you be arrested if you do that?",
+      "approval_note": "Second-pass verified real future conditional modality and normalized orthography.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 871,
@@ -15857,7 +15857,7 @@
     },
     {
       "rank": 872,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "7dbd57c28e5b5a2116131fa2c6d0c03baba0e8ff89bbe8128b73fb7e50fb97f3",
       "source_target": "هل تذكر اليوم الذي رأينا فيه الحادث؟",
       "source_english": "Do you remember the day when we saw the accident?",
@@ -15872,10 +15872,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أنت لم تغسل يديك إلى الآن، أليس كذلك؟",
+      "approved_english": "Do you remember the day when we saw the accident?",
+      "approval_note": "Second-pass verified concise verb, إلى, comma spacing, and standard tag question.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 873,
@@ -15907,7 +15907,7 @@
     },
     {
       "rank": 875,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "505255334709946776b2b32f894147235632c61dc68d91c41fddf8028ba82625",
       "source_target": "ما المبلغ الذي كان عليك دفعه للتذاكر؟",
       "source_english": "How much did you have to pay for the tickets?",
@@ -15922,10 +15922,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل يوجد أي شيء آخر تريد أن تخبرني به؟",
+      "approved_english": "How much did you have to pay for the tickets?",
+      "approval_note": "Second-pass verified آخر spelling and normalized diacritics.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 876,
@@ -15957,7 +15957,7 @@
     },
     {
       "rank": 878,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "90fe4a9da745674fec7901ef5eaec138b297d7c8db5d3244fda32e20e16fa14f",
       "source_target": "ماذا فعلت عندما رجعت إلى منزلك أمس؟",
       "source_english": "What did you do when you got back home yesterday?",
@@ -15972,10 +15972,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أحتاج إلى أن تخبرني أين أذهب.",
+      "approved_english": "I need you to tell me where to go.",
+      "approval_note": "Second-pass verified أحتاج إلى أن + subordinate verb construction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 879,
@@ -15993,7 +15993,7 @@
     },
     {
       "rank": 880,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "dbe257fcdc5eb42feaad1bec91d1c8f354d8724556494c0942e7c3e8f9754ba5",
       "source_target": "ماذا كنتَ ستفعلُ لو كنت أصغر بعشر سنين؟",
       "source_english": "What would you do if you were ten years younger?",
@@ -16008,14 +16008,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أمتأكد من أنك تعرف كيف تفعل هذا؟",
+      "approved_english": "What would you do if you were ten years younger?",
+      "approval_note": "Second-pass verified spelling متأكد.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 881,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c7081e3c862807d4798b955f36a5d8095d19098c241e22ccf20b941e5cd23394",
       "source_target": "ماذا كنتَ ستقول لو كنت في مكاني؟",
       "source_english": "What would you say if you were in my place?",
@@ -16030,10 +16030,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل لديك أي فكرة عمّن قد يفعل هذا؟",
+      "approved_english": "Do you have any idea who would do this?",
+      "approval_note": "Second-pass verified أي, عمّن, and modal قد for would.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 882,
@@ -16185,7 +16185,7 @@
     },
     {
       "rank": 892,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "884dbb9f7ad4a2cb44e39f5072be3c3f23e6f7e580caa4d109c09622fafff3b2",
       "source_target": "لا أريد أن تكون بيني وبينك أي صلة.",
       "source_english": "I don't want to have anything to do with you.",
@@ -16201,10 +16201,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لم تكن تعلم أنه لا ينبغي لي أن أفعل ذلك، أليس كذلك؟",
+      "approved_english": "You didn't know I shouldn't do that, did you?",
+      "approval_note": "Second-pass verified negative obligation/advice with لا ينبغي لي and tag question.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 893,
@@ -16296,7 +16296,7 @@
     },
     {
       "rank": 898,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "292c8e7fd0c18c68908a825287a860cb6b3475344ec63a40578d9f1253a08736",
       "source_target": "الأمر متروك لك الآن لاتخاذ القرار.",
       "source_english": "It is up to you to make the decision now.",
@@ -16311,10 +16311,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "سأخبرك بما أريدك أن تفعله.",
+      "approved_english": "I'll tell you what I want you to do.",
+      "approval_note": "Second-pass verified embedded object أريدك أن تفعله; original omitted you.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 899,
@@ -16332,7 +16332,7 @@
     },
     {
       "rank": 900,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "b7ed070a64cc95886e79182bdc16278e05b21c6bf4c24d647ee5960e754faf6e",
       "source_target": "عدني أنك لن تغضب إن قلت لك.",
       "source_english": "Promise me you won't get mad if I tell you.",
@@ -16347,14 +16347,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل أنت متأكد بأنك لست بحاجة إلى فعل هذا؟",
+      "approved_english": "Promise me you won't get mad if I tell you.",
+      "approval_note": "Second-pass verified required preposition إلى after بحاجة.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 901,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "7f4cc3acc903f3f0b069d98ebffe1820504ab7bcbfdb3503e9a66feadffb931d",
       "source_target": "ليس هناك حاجة للاستعجال. لدينا متسع من الوقت.",
       "source_english": "There's no need to hurry. We have plenty of time.",
@@ -16369,10 +16369,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل يمكنك إخباري بالطريق إلى المكتبة؟",
+      "approved_english": "There's no need to hurry. We have plenty of time.",
+      "approval_note": "Second-pass verified بالطريق and إلى orthography.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 902,
@@ -16390,7 +16390,7 @@
     },
     {
       "rank": 903,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "be183c2bb290c017c05c71305d56f2e1a5b37aeb8828d947248e9e89122eaa85",
       "source_target": "هذا أمر علينا أن نعمل معًا على حلّه.",
       "source_english": "This is something we need to work together to solve.",
@@ -16405,10 +16405,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أيمكنك أن تتحدث ببطء أكثر قليلًا، من فضلك؟",
+      "approved_english": "Could you please speak a little bit more slowly?",
+      "approval_note": "Second-pass verified ببطء spelling and comparative degree أكثر قليلًا.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 904,
@@ -16468,7 +16468,7 @@
     },
     {
       "rank": 908,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "8ae0c613d4a81c673976a3694b27b55d891c4de5964532ea406faa945b3626ce",
       "source_target": "يمكنك الذهاب للبيت بعد انتهائك من هذا العمل.",
       "source_english": "You can go home after you have finished this work.",
@@ -16483,10 +16483,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كم شخصًا دعوت إلى حفلتك؟",
+      "approved_english": "How many people did you invite to your party?",
+      "approval_note": "Second-pass verified possessive حفلتك.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 909,
@@ -16518,7 +16518,7 @@
     },
     {
       "rank": 911,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "b1e0d5de4cde9b024025aeefd119c7cfcfb6cd9d66d4478d1a3a3c0914ee37fe",
       "source_target": "هل لديكم معرض لمنتجاتكم في المدينة؟",
       "source_english": "Do you have a showroom for your products in the city?",
@@ -16534,10 +16534,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كم مرة تنسى عادةً أداء واجباتك؟",
+      "approved_english": "How often do you forget to do your homework?",
+      "approval_note": "Second-pass verified frequency question كم مرة and homework noun phrase.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 912,
@@ -16569,7 +16569,7 @@
     },
     {
       "rank": 914,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "72b3997c80c7036ad95e10640b036bdb457259ce784924d0dc12a5bfdd45f975",
       "source_target": "كيف خطرت ببالك فكرة هذا المعرض؟",
       "source_english": "How did you come up with the idea for this exhibition?",
@@ -16584,10 +16584,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "متى كانت آخر مرة نظفت فيها الشقة؟",
+      "approved_english": "How did you come up with the idea for this exhibition?",
+      "approval_note": "Second-pass verified standard undoubled spelling نظفت.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 915,
@@ -16669,7 +16669,7 @@
     },
     {
       "rank": 920,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "b3b369b1f0d8e3e2c95a9e124b08355c9c8edceb26cdbb30d2106f25c358b1e3",
       "source_target": "من أعطاك الحق بأن تتحدث إلي هكذا؟",
       "source_english": "Who gave you the right to talk to me like that?",
@@ -16684,10 +16684,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا لم تقم بذلك كما اقترحت عليك؟",
+      "approved_english": "Why didn't you do that the way I suggested?",
+      "approval_note": "Second-pass verified اقترحت = suggested and explicit لماذا.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 921,
@@ -16705,7 +16705,7 @@
     },
     {
       "rank": 922,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "eb0fcd1116920979d2fe3b79ff207073e5322f09c7f37e57df1530425d1a7a17",
       "source_target": "كل ما عليك فعله أن تنتبه لنفسك.",
       "source_english": "All you have to do is to take care of yourself.",
@@ -16720,10 +16720,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا عليّ القيام بذلك بنفسي؟",
+      "approved_english": "All you have to do is to take care of yourself.",
+      "approval_note": "Second-pass verified interrogative لماذا and عليّ orthography.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 923,
@@ -16887,7 +16887,7 @@
     },
     {
       "rank": 930,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "e353582a88a5526a5fedef769eff31bc98d71a88df23ffce0cbe983b6ed12741",
       "source_target": "لم يكن لدي أي فكرة أنك تعرف كيف تعزف على التشيلو.",
       "source_english": "I had no idea you knew how to play the cello.",
@@ -16902,10 +16902,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أيمكنك أن توصلني إلى المحطة؟",
+      "approved_english": "I had no idea you knew how to play the cello.",
+      "approval_note": "Second-pass verified typo أيمكننك -> أيمكنك.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 931,
@@ -16937,7 +16937,7 @@
     },
     {
       "rank": 933,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "8e63751bb1728b85867a00e9c480915460106de2d78839c25be34d8bf044ee6c",
       "source_target": "ليس المهم ما تقوله، بل ما تفعله.",
       "source_english": "It's not what you say, but what you do that counts.",
@@ -16952,14 +16952,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل استلمت الرسالة التي أرسلتها لك بالأمس؟",
+      "approved_english": "It's not what you say, but what you do that counts.",
+      "approval_note": "Second-pass verified standard استلمت and normalized unnecessary diacritics.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 934,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "9734582a94998ab15bc8b9881501d37a53c4cecb5676b44eac24962c3f8a8d19",
       "source_target": "لا يهم ما تفعله، يجب عليك أن تبذل قصارى جهدك.",
       "source_english": "No matter what you do, you have to do your best.",
@@ -16974,14 +16974,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل عليّ أن أجيب على أسئلتك كلها؟",
+      "approved_english": "Do I have to answer all your questions?",
+      "approval_note": "Second-pass verified Arabic على code point/orthography and possessive English equivalence.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 935,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "0b459861e866e03c5ed29da6c093afad2934d8fe27c6d8a2d6e25be49db843f5",
       "source_target": "من فضلك أخبرني كيف يمكنني أن أتواصل معها.",
       "source_english": "Please tell me how I can get in touch with her.",
@@ -16996,10 +16996,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل يجب عليّ أن أجيب على أسئلتك كلها؟",
+      "approved_english": "Do I have to answer all your questions?",
+      "approval_note": "Second-pass verified عليّ/على orthography and possessive English equivalence.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 936,
@@ -17031,7 +17031,7 @@
     },
     {
       "rank": 938,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "4e8ffa43f9820cd67f93c48a5c8b212fe5b3f3d870f5f534e6af171ca723ab51",
       "source_target": "لسنا صغارًا جدا إلى درجة عدم فهم ماهية الحب.",
       "source_english": "We're not so young that we don't understand what love is.",
@@ -17046,10 +17046,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تريدين حقًا التحدث بشأن هذا الآن؟",
+      "approved_english": "We're not so young that we don't understand what love is.",
+      "approval_note": "Second-pass verified feminine تريدين, حقًا, and الآن spelling.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 939,
@@ -17067,7 +17067,7 @@
     },
     {
       "rank": 940,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "474ec35fbecf5759e65cd528638fa6e852604d782d24e8035385804bc43ceae1",
       "source_target": "هل لديك أي فكرة عمن يستطيع فعل مثل هذا الشيء؟",
       "source_english": "Do you have any idea who can do this kind of thing?",
@@ -17082,14 +17082,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تريدني حقًا أن أذهب إلى هناك الآن؟",
+      "approved_english": "Do you have any idea who can do this kind of thing?",
+      "approval_note": "Second-pass verified حقًا and الآن spelling.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 941,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "b62bea995a973579a9db7535044aa94304c963c66773f543e6e542a8436c0657",
       "source_target": "ما أفضل طريقة برأيك لتسوية هذا النزاع؟",
       "source_english": "What do you think is the best way to settle this conflict?",
@@ -17104,10 +17104,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تريدينني حقًا أن أذهب إلى هناك الآن؟",
+      "approved_english": "What do you think is the best way to settle this conflict?",
+      "approval_note": "Second-pass verified feminine تريدينني and now spelling.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 942,
@@ -17374,7 +17374,7 @@
     },
     {
       "rank": 958,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "33f5475605dc874b253d71ca78df0d7309c4921e2931350b3c7aa3bc17c9d80d",
       "source_target": "لا خيار أمامي سوى فعل كلّ ما طلبوا منّي فعله.",
       "source_english": "I have no choice but to do everything they've told me to do.",
@@ -17389,14 +17389,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لا أعتقد أننا نملك الوقت الكافي لفعل ذلك.",
+      "approved_english": "I have no choice but to do everything they've told me to do.",
+      "approval_note": "Second-pass verified hamzas in أعتقد/أننا.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 959,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "b1e545bf7ba7680f9815e9a134a02d2c7dc0c09ad6f6fddd4dc93e47069db8ff",
       "source_target": "سأساعدك في الفرنسية إذا ساعدتني في الإنجليزية.",
       "source_english": "I'll help you with your French, if you help me with my English.",
@@ -17442,10 +17442,10 @@
           "issue": "Normalize sentence-final punctuation consistently; several declarative rows use ASCII periods while Arabic question rows use Arabic question marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "يمكنك الذهاب إلى البيت بعد انتهائك من هذا العمل.",
+      "approved_english": "I'll help you with your French, if you help me with my English.",
+      "approval_note": "Second-pass verified إلى and انتهائك orthography.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 960,
@@ -17527,7 +17527,7 @@
     },
     {
       "rank": 965,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "890a48d37704cc865ad9ef20abf9beaa2f67c38ddbbe2181dcd815ea816dd999",
       "source_target": "يجب عليك أن تُخطط للقدوم معنا المرة المقبلة التي نذهب فيها للتخييم.",
       "source_english": "You should plan to come with us the next time we go camping.",
@@ -17542,10 +17542,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل يوجد مكان يمكننا أن نتحدث فيه على انفراد حول هذا؟",
+      "approved_english": "Is there somewhere that we can talk privately about this?",
+      "approval_note": "Second-pass verified grammatical existential-relative construction مكان ... فيه.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 966,
@@ -17563,7 +17563,7 @@
     },
     {
       "rank": 967,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "467f0d8743fe4350d009128b89f84f1cf6f1d170c03267859ee9cab4f0aca9f2",
       "source_target": "لو لم أكن قد أكلت بالفعل، لأحببت تناول الغداء معك.",
       "source_english": "If I hadn't already eaten, I would have loved to have lunch with you.",
@@ -17579,10 +17579,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا أفعل الآن بعد أن أصبحت عضوًا؟",
+      "approved_english": "What do I do now that I'm a member?",
+      "approval_note": "Second-pass verified member semantics and tanwin normalization; registered is a different concept already covered by rank 966.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 968,
@@ -17670,7 +17670,7 @@
     },
     {
       "rank": 974,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "650263ec005c64209783f1685ae094fee048c2c7875997759244153edd06a6c2",
       "source_target": "لا يهم من تسأل, أنتَ لن تستطيع أن تحصل على الإجابة المُرضية.",
       "source_english": "No matter who you ask, you won't be able to get a satisfactory answer.",
@@ -17685,10 +17685,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أنت تعلم لماذا لست مضطرًا للقيام بهذا، أليس كذلك؟",
+      "approved_english": "No matter who you ask, you won't be able to get a satisfactory answer.",
+      "approval_note": "Second-pass verified complete matrix clause and لماذا.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 975,
@@ -17761,7 +17761,7 @@
     },
     {
       "rank": 979,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "b5722045285e2e64a0360abc7f26e1c1488c6b22ad1d25247efd63c6057dee31",
       "source_target": "لا يبدو على علم بسوء التفاهم الذي بيني وبين أبي.",
       "source_english": "He seems not to be aware of the misunderstanding between my father and me.",
@@ -17789,14 +17789,14 @@
           "issue": "Normalize comma/quotation typography to a single Arabic/Unicode house style."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لا يهم ما تفعله، يجب عليك أن تبذل قصارى جهدك.",
+      "approved_english": "No matter what you do, you have to do your best.",
+      "approval_note": "Second-pass verified idiomatic بذل قصارى جهدك = do your best and Arabic comma.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 980,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "1148fe067fc08f8249d40b98e2a718355db7b05cd3075a4e8820bf36b8865030",
       "source_target": "أحب كيف يصبح الهواء في الخارج منعشًا وعليلًا بعد نزول المطر.",
       "source_english": "I love how fresh and pleasant the air becomes outside after the rain falls.",
@@ -17842,14 +17842,14 @@
           "issue": "Normalize sentence-final punctuation consistently; several declarative rows use ASCII periods while Arabic question rows use Arabic question marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "من فضلك أخبرني كيف يمكنني التواصل معها.",
+      "approved_english": "I love how fresh and pleasant the air becomes outside after the rain falls.",
+      "approval_note": "Second-pass verified idiomatic التواصل معها construction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 981,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "81262bf578b860b479d6316a62406f72982cd5e221b17fd001204eb0881459b4",
       "source_target": "ابنتي في المستشفى لأنها أصيبت في حادث سير.",
       "source_english": "My daughter is in the hospital because she was injured in a traffic accident.",
@@ -17895,10 +17895,10 @@
           "issue": "Normalize sentence-final punctuation consistently; several declarative rows use ASCII periods while Arabic question rows use Arabic question marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "من فضلك أخبريني كيف يمكنني التواصل معها.",
+      "approved_english": "My daughter is in the hospital because she was injured in a traffic accident.",
+      "approval_note": "Second-pass verified feminine imperative and idiomatic التواصل معها.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 982,
@@ -17975,7 +17975,7 @@
     },
     {
       "rank": 985,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "ec5815b087f8a54525f3c472276b52d9f11cce86a4bf24d6ef717d3f88daf927",
       "source_target": "إذا قمت بتغيير الخطة، فيجب عليك أن تبلغ أعضاء الفريق بهذه التغييرات.",
       "source_english": "If you alter the plan, you must inform the team members of the changes.",
@@ -17990,10 +17990,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كيف خطرت ببالك فكرة هذا المعرض؟",
+      "approved_english": "If you alter the plan, you must inform the team members of the changes.",
+      "approval_note": "Second-pass verified natural genitive word order فكرة هذا المعرض.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 986,
@@ -18112,7 +18112,7 @@
     },
     {
       "rank": 993,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "04c5d981eca578ea0b0a75a9f7246f219bc87c585a19cc0aae32a0084bc22411",
       "source_target": "كان يجب أن تكون في الحفلة الليلة الماضية. كانت ممتعة جدًا.",
       "source_english": "You should have been at the party last night. It was a lot of fun.",
@@ -18127,14 +18127,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ما أفضل طريقة برأيك لتسوية هذا النزاع؟",
+      "approved_english": "You should have been at the party last night. It was a lot of fun.",
+      "approval_note": "Second-pass verified grammatical interrogative structure with parenthetical برأيك.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 994,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "2b0019d254ecef32f35dcadb63dfa7cc0ed59dc989192e890a5e96237c51d3a3",
       "source_target": "ربما كنت تعتقد أنك تعرف كيفية القيام بذلك، ولكن اسمح لي أن أشرح مرة أخرى.",
       "source_english": "You probably think you know how to do this, but let me explain it once more.",
@@ -18149,14 +18149,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "دعني أخبرك سبب عدم رغبتي في فعل ذلك.",
+      "approved_english": "You probably think you know how to do this, but let me explain it once more.",
+      "approval_note": "Second-pass verified required preposition في after رغبتي.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 995,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "f9309fa8040c232f8253443c71da5ba9a9125d9dbf3a68722d71ed8d7c539dcf",
       "source_target": "عندما لا أستطيع النوم ليلًا، فإن الشيء الوحيد الذي يزعجني هو تكتكة الساعة.",
       "source_english": "It's only when I can't sleep at night that the ticking of the clock bothers me.",
@@ -18202,10 +18202,10 @@
           "issue": "Normalize sentence-final punctuation consistently; several declarative rows use ASCII periods while Arabic question rows use Arabic question marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لدينا الكثير من العمل للقيام به قبل أن نتمكن من العودة إلى المنزل.",
+      "approved_english": "We have a lot of work to do before we can go home.",
+      "approval_note": "Second-pass verified explicit ability-before-return clause aligns with before we can go home.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     },
     {
       "rank": 996,
@@ -18278,7 +18278,7 @@
     },
     {
       "rank": 1000,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "66f27e33fb7b49bb5c941e18b37ad66c807aff25987d70d4acfce5f3c32709d4",
       "source_target": "أرش الأرانب في حديقتي بمسدس ماء لإبعادها عن الخضروات.",
       "source_english": "I spray the rabbits in my garden with a squirt gun to keep them away from the vegetables.",
@@ -18306,10 +18306,10 @@
           "issue": "Normalize comma/quotation typography to a single Arabic/Unicode house style."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "إذا كنت تستطيع اختيار شخص مشهور ترغب في قضاء الوقت معه، فمن سيكون؟",
+      "approved_english": "I spray the rabbits in my garden with a squirt gun to keep them away from the vegetables.",
+      "approval_note": "Second-pass verified removal of malformed redundant pronoun and relative construction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_004_second_pass.json"
     }
   ]
 }

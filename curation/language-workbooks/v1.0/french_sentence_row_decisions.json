@@ -17,8 +17,8 @@
   },
   "status_counts": {
     "KEEP": 775,
-    "CORRECT_PENDING_SECOND_PASS": 72,
-    "NATIVE_REVIEW": 153
+    "CORRECT_APPROVED": 80,
+    "NATIVE_REVIEW": 145
   },
   "rows": [
     {
@@ -37,7 +37,7 @@
     },
     {
       "rank": 2,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "e4673f88c018968280be8f1abdc230c782f2e6386ba24e9bce65f7e72efbb0d8",
       "source_target": "Es-tu chez toi ?",
       "source_english": "Are you home?",
@@ -52,14 +52,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pouvez-vous m'aider, s'il vous plaît ?",
+      "approved_english": "Can you help me, please?",
+      "approval_note": "Second-pass verified spelling: plaît requires the circumflex; meaning is otherwise unchanged.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_001_second_pass.json"
     },
     {
       "rank": 3,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "a2061b8614048ab08b19381eb793bc7b666a2235f577037564a5f5f089381e77",
       "source_target": "Es-tu prêt ?",
       "source_english": "Are you ready?",
@@ -75,14 +75,14 @@
           "issue": "Space before the question mark is inconsistent with the workbook's other French typography; normalize to one French spacing convention."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Peux-tu me dire comment ?",
+      "approved_english": "Are you ready?",
+      "approval_note": "Whole-row second pass: only typography was flagged; normalized to a narrow no-break space before the question mark.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_007_native_deterministic.json"
     },
     {
       "rank": 4,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "110757191ab8d2f1a55c6398790d26da847a63c74891f17443919d4e32a37463",
       "source_target": "Vous êtes là ?",
       "source_english": "Are you there?",
@@ -98,10 +98,10 @@
           "issue": "Space before the question mark is inconsistent with the workbook's other French typography; normalize to one French spacing convention."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pouvez-vous me dire comment ?",
+      "approved_english": "Are you there?",
+      "approval_note": "Whole-row second pass: only typography was flagged; normalized to the French narrow no-break-space house style.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_007_native_deterministic.json"
     },
     {
       "rank": 5,
@@ -553,7 +553,7 @@
     },
     {
       "rank": 37,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "806ed3b728a9db667c56495959fdd6f37df1f6ce5752c45708e9a0e75f85dcac",
       "source_target": "Nous pouvons payer.",
       "source_english": "We can pay.",
@@ -569,10 +569,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Qu'est-ce que tu as mangé aujourd'hui ?",
+      "approved_english": "What did you eat today?",
+      "approval_note": "Second-pass verified: passé composé mangé correctly matches the English simple-past eating event.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_001_second_pass.json"
     },
     {
       "rank": 38,
@@ -632,7 +632,7 @@
     },
     {
       "rank": 42,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "996fec2ddc21d61f49e725a7ced7a9e977b92bc8cbb03a9374d49a2e384e72ff",
       "source_target": "Il nous faut de l'aide.",
       "source_english": "We need help.",
@@ -648,10 +648,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Quelle heure avez-vous ?",
+      "approved_english": "What time do you have?",
+      "approval_note": "Second-pass verified standard formal inversion avez-vous.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_006_final_deterministic.json"
     },
     {
       "rank": 43,
@@ -879,7 +879,7 @@
     },
     {
       "rank": 59,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c5edd0a1a9efd930e0fd781a7199387ab6b603b475662a520966c8a3148e7c1a",
       "source_target": "M'avez-vous compris ?",
       "source_english": "Did you understand me?",
@@ -898,10 +898,10 @@
           "issue": "Question-mark spacing is inconsistent; define one house style (prefer French typographic spacing) and normalize."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourquoi êtes-vous rentré à la maison ?",
+      "approved_english": "Did you understand me?",
+      "approval_note": "Whole-row second pass: target/English meaning is sound; normalized question-mark spacing only.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_007_native_deterministic.json"
     },
     {
       "rank": 60,
@@ -989,7 +989,7 @@
     },
     {
       "rank": 66,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "22b52b77372b83a28feeee64f70ec98d35d1d7657960655cc3de67990412f7c9",
       "source_target": "Est-ce que tu m'aimes ?",
       "source_english": "Do you love me?",
@@ -1008,10 +1008,10 @@
           "issue": "Question-mark spacing is inconsistent; define one house style (prefer French typographic spacing) and normalize."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Sais-tu ce que j'ai fait ?",
+      "approved_english": "Do you love me?",
+      "approval_note": "Whole-row second pass: target/English meaning is sound; normalized question-mark spacing only.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_007_native_deterministic.json"
     },
     {
       "rank": 67,
@@ -1225,7 +1225,7 @@
     },
     {
       "rank": 80,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "728d70aa49f7cfe30eb6cfbc14ee2c7e1f83f2b90c2a1b309e7cdcb04f43530d",
       "source_target": "Comment le savais-tu ?",
       "source_english": "How did you know?",
@@ -1241,14 +1241,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Qu'est-ce que tu voulais que je fasse ?",
+      "approved_english": "What did you want me to do?",
+      "approval_note": "Second-pass verified: the French past vouloir is correctly represented by English past 'did you want', not the original conditional-style gloss.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_001_second_pass.json"
     },
     {
       "rank": 81,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "7ef4daa70b6318df33710d24541ff5ddd035f1ca15f9527f330d2601f3ecfce0",
       "source_target": "Comment savez-vous ?",
       "source_english": "How do you know?",
@@ -1276,10 +1276,10 @@
           "issue": "fisse is literary imperfect subjunctive and disproportionately advanced/archaic for the surrounding bank."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Qu'auriez-vous voulu que je fasse ?",
+      "approved_english": "How do you know?",
+      "approval_note": "Whole-row second pass: replaced archaic imperfect-subjunctive fisse with contemporary fasse while preserving the past conditional meaning.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_007_native_deterministic.json"
     },
     {
       "rank": 82,
@@ -1395,7 +1395,7 @@
     },
     {
       "rank": 90,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "a823c774abf389a3c1225737092f399d781b8883a688a7d027544054cd7a2751",
       "source_target": "Qu'as-tu acheté ?",
       "source_english": "What did you buy?",
@@ -1423,10 +1423,10 @@
           "issue": "Question-mark spacing is inconsistent; define one house style (prefer French typographic spacing) and normalize."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourquoi as-tu besoin de mon aide ?",
+      "approved_english": "Why do you need my help?",
+      "approval_note": "Second-pass verified: avoir besoin de means need; the corrected English restores lexical equivalence.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_001_second_pass.json"
     },
     {
       "rank": 91,
@@ -1500,7 +1500,7 @@
     },
     {
       "rank": 96,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "aeed534e10f3db111eb101c0dc8d3655cdb6e79c1caf5b299041de607f168509",
       "source_target": "Que sais-tu ?",
       "source_english": "What do you know?",
@@ -1526,10 +1526,10 @@
           "issue": "ce qu'il s'est passé is widespread usage, but ce qui s'est passé is often preferred in edited standard French; choose a house standard rather than silently mixing."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Peux-tu me dire ce qui s'est passé ?",
+      "approved_english": "What do you know?",
+      "approval_note": "Whole-row second pass: chose edited-standard ce qui s'est passé and simultaneously normalized French question-mark spacing, resolving both recorded concerns.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_007_native_deterministic.json"
     },
     {
       "rank": 97,
@@ -2101,7 +2101,7 @@
     },
     {
       "rank": 137,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "13bd0bca1905da4c5898b19a602cde164d20ebf0668dc586950ce6ffa42da47f",
       "source_target": "J'ai besoin de toi ici.",
       "source_english": "I need you here.",
@@ -2116,10 +2116,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Sais-tu où ils sont ?",
+      "approved_english": "Do you know where they are?",
+      "approval_note": "Second-pass verified subject-verb agreement: plural ils requires sont.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_001_second_pass.json"
     },
     {
       "rank": 138,
@@ -2631,7 +2631,7 @@
     },
     {
       "rank": 171,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "64092542acd1788b20c5450746aaba863faff5caabd58fd8a274dcfa06307a9e",
       "source_target": "Mangez ce que vous voulez.",
       "source_english": "Eat whatever you want.",
@@ -2647,14 +2647,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Comment connaissais-tu mon nom ?",
+      "approved_english": "How did you know my name?",
+      "approval_note": "Second-pass verified Comment matches how; D'où would ask from what source/where.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_006_final_deterministic.json"
     },
     {
       "rank": 172,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "f35d47cae349968603d49e630f89a9e720e10cee8f3a59266129db9b719d9b63",
       "source_target": "Mange ta soupe, s'il te plaît.",
       "source_english": "Eat your soup, please.",
@@ -2669,10 +2669,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Comment connaissiez-vous mon nom ?",
+      "approved_english": "How did you know my name?",
+      "approval_note": "Second-pass verified formal Comment question for how.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_006_final_deterministic.json"
     },
     {
       "rank": 173,
@@ -2844,7 +2844,7 @@
     },
     {
       "rank": 183,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "b5284362c308368521c1d8cadd6b8fcbe37a2701f049956bc90b3f65b2aadeb9",
       "source_target": "Ton sac est ici.",
       "source_english": "Here is your bag.",
@@ -2859,10 +2859,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Comment voulez-vous votre café ?",
+      "approved_english": "How do you want your coffee?",
+      "approval_note": "Second-pass verified contemporary vouloir construction; original aimeriez-vous was awkward for this preparation/preference question.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_006_final_deterministic.json"
     },
     {
       "rank": 184,
@@ -2922,7 +2922,7 @@
     },
     {
       "rank": 188,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "d68983ababae20829b34d5ec6ea738751782f8049a2ed786a74c3433dca50b53",
       "source_target": "Voilà ce que je pense.",
       "source_english": "Here's what I think.",
@@ -2937,10 +2937,10 @@
           "issue": "J'ai combien de temps ? is conversational word order; for standard written learner French prefer Combien de temps ai-je ?."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Combien de temps ai-je ?",
+      "approved_english": "Here's what I think.",
+      "approval_note": "Whole-row second pass: standardized inversion for the stated standard-contemporary learner register and normalized question typography.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_007_native_deterministic.json"
     },
     {
       "rank": 189,
@@ -3134,7 +3134,7 @@
     },
     {
       "rank": 202,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "25ded067e9c6fbe1f9ef643f5a03fd3b4056bc6ab58e33b223726a91952049aa",
       "source_target": "Je peux me débrouiller, merci.",
       "source_english": "I can manage, thanks.",
@@ -3149,14 +3149,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Qu'est-ce que tu as acheté pour ton petit ami ?",
+      "approved_english": "What did you buy your boyfriend?",
+      "approval_note": "Second-pass verified orthography: standard interrogative form is Qu'est-ce que.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_001_second_pass.json"
     },
     {
       "rank": 203,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "df6db41ca9d6dc426522eec62ae2078d4a88fb1397fcefee4310432467e2625c",
       "source_target": "Je peux payer d'avance.",
       "source_english": "I can pay upfront.",
@@ -3172,10 +3172,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Que faisais-tu là-bas ?",
+      "approved_english": "What were you doing there?",
+      "approval_note": "Second-pass verified: the French imparfait denotes ongoing/background activity and is accurately matched by English past progressive.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_001_second_pass.json"
     },
     {
       "rank": 204,
@@ -3341,7 +3341,7 @@
     },
     {
       "rank": 215,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "1ec1f183a1ba0a2c7f4d0aa68b92debb5b71b78c8ab21d4cd91d1369464bbfaa",
       "source_target": "Je pourrais le faire.",
       "source_english": "I could do it.",
@@ -3357,14 +3357,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Qu'est-ce que j'ai besoin de savoir ?",
+      "approved_english": "What do I need to know?",
+      "approval_note": "Second-pass verified grammatical contemporary construction; removes invalid inversion Qu'ai-je besoin.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_006_final_deterministic.json"
     },
     {
       "rank": 216,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "d61861aef232c6a3b5e733cf307154d81ea9263579391de431b20b6806243dd0",
       "source_target": "Je ne pouvais rien faire.",
       "source_english": "I could do nothing.",
@@ -3383,10 +3383,10 @@
           "issue": "Question-mark spacing is inconsistent; define one house style (prefer French typographic spacing) and normalize."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Comment appelez-vous votre chien ?",
+      "approved_english": "I could do nothing.",
+      "approval_note": "Whole-row second pass: only typography was flagged; meaning is retained unchanged.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_007_native_deterministic.json"
     },
     {
       "rank": 217,
@@ -4741,7 +4741,7 @@
     },
     {
       "rank": 304,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "6fff56c34dd94c5ec9f7675ee545dc64f67ef41fe27f49cd830de446005928d8",
       "source_target": "As-tu mon livre ?",
       "source_english": "Do you have my book?",
@@ -4757,10 +4757,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Où allons-nous à partir d'ici ?",
+      "approved_english": "Where do we go from here?",
+      "approval_note": "Second-pass verified deictic alignment: ici = here.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_002_second_pass.json"
     },
     {
       "rank": 305,
@@ -5168,7 +5168,7 @@
     },
     {
       "rank": 332,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "8f60e015a17b445465462eef1c15d7c0d2ef373eb40207023f41a478b723b9de",
       "source_target": "Tu veux ma photo ?",
       "source_english": "Do you want my picture?",
@@ -5184,14 +5184,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourquoi avez-vous besoin de savoir ?",
+      "approved_english": "Why do you need to know?",
+      "approval_note": "Second-pass verified lexical equivalence: avoir besoin de = need.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_002_second_pass.json"
     },
     {
       "rank": 333,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "f256cb1b6b6f6bd920a561251e4faad7e6687b48ff7c1b1327190a978b7b8f41",
       "source_target": "Tu veux de l'aide ?",
       "source_english": "Do you want some help?",
@@ -5206,10 +5206,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourquoi as-tu besoin de savoir ?",
+      "approved_english": "Why do you need to know?",
+      "approval_note": "Second-pass verified lexical equivalence: avoir besoin de = need.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_002_second_pass.json"
     },
     {
       "rank": 334,
@@ -5283,7 +5283,7 @@
     },
     {
       "rank": 339,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "18a2fcdeed334683ec9a0363babc40d1be665e226af15d8c040aecf2102ffa6c",
       "source_target": "Est-ce que tu veux savoir ?",
       "source_english": "Do you want to know?",
@@ -5298,10 +5298,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Viendrais-tu avec moi, s'il te plaît ?",
+      "approved_english": "Would you come with me, please?",
+      "approval_note": "Second-pass verified politeness marker required by English please.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_002_second_pass.json"
     },
     {
       "rank": 340,
@@ -5556,7 +5556,7 @@
     },
     {
       "rank": 356,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "53d6d03603b4b1b3eae2827b9ef12bcd4d728b5a4dab0c9c5d23b3802e96b714",
       "source_target": "Comment pouvez-vous savoir cela ?",
       "source_english": "How can you know that?",
@@ -5571,14 +5571,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Peux-tu me dire de quoi il retourne ?",
+      "approved_english": "Can you tell me what this is about?",
+      "approval_note": "Second-pass verified idiomatic meaning of de quoi il retourne.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_002_second_pass.json"
     },
     {
       "rank": 357,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "d735f535e34cc8f0722b6caa01f3e43ace1741039e772a73ba026ca19294f817",
       "source_target": "Comment peux-tu ne pas le savoir ?",
       "source_english": "How can you not know?",
@@ -5593,10 +5593,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Peux-tu me dire de quoi il s'agit ?",
+      "approved_english": "Can you tell me what this is about?",
+      "approval_note": "Second-pass verified idiomatic meaning of de quoi il s'agit.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_002_second_pass.json"
     },
     {
       "rank": 358,
@@ -5614,7 +5614,7 @@
     },
     {
       "rank": 359,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "414482e75b6d46e97280ba3c4b70dd639d4dca04f1270f650be0ea461f232674",
       "source_target": "Comment pourrais-je vous oublier ?",
       "source_english": "How could I forget you?",
@@ -5629,14 +5629,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pouvez-vous me dire de quoi il retourne ?",
+      "approved_english": "Can you tell me what this is about?",
+      "approval_note": "Second-pass verified idiomatic meaning of de quoi il retourne.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_002_second_pass.json"
     },
     {
       "rank": 360,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "9af5ce1308d4be421fd0136cd32f9830e1dfd6285ef94e4c0e007c1dcf23ac76",
       "source_target": "Comment aurais-je pu savoir ?",
       "source_english": "How could I have known?",
@@ -5651,10 +5651,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pouvez-vous me dire de quoi il s'agit ?",
+      "approved_english": "Can you tell me what this is about?",
+      "approval_note": "Second-pass verified idiomatic meaning of de quoi il s'agit.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_002_second_pass.json"
     },
     {
       "rank": 361,
@@ -5728,7 +5728,7 @@
     },
     {
       "rank": 366,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "4f47ac87dab9bc91fafb76553731d6dc7aa5969eb21cb9349c2a0ea641d48cf0",
       "source_target": "Comment pourrais-tu dire cela ?",
       "source_english": "How could you say that?",
@@ -5743,10 +5743,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourrez-vous m'aider quand je déménagerai ?",
+      "approved_english": "Will you be able to help me when I move?",
+      "approval_note": "Second-pass verified future tense/modality alignment.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_002_second_pass.json"
     },
     {
       "rank": 367,
@@ -5764,7 +5764,7 @@
     },
     {
       "rank": 368,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "4175a3fdbc6d2197a7302dfcaa3864c38f65a962eda787d8c00ea4fde52db5fc",
       "source_target": "Comment suis-je parvenu ici ?",
       "source_english": "How did I get here?",
@@ -5779,10 +5779,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourrais-tu me rappeler demain, s'il te plaît ?",
+      "approved_english": "Could you please call me back tomorrow?",
+      "approval_note": "Second-pass verified spelling plaît with circumflex.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_002_second_pass.json"
     },
     {
       "rank": 369,
@@ -5944,7 +5944,7 @@
     },
     {
       "rank": 379,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "08a82d3bd877d0d9fa93dbbc0139101f14b88210d9d4f35add48be1beb64f4c0",
       "source_target": "Comment le savons-nous ?",
       "source_english": "How do we know that?",
@@ -5960,10 +5960,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Tu ne sais pas où est ma montre ?",
+      "approved_english": "Don't you know where my watch is?",
+      "approval_note": "Second-pass verified polarity: both sides are negative questions.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_002_second_pass.json"
     },
     {
       "rank": 380,
@@ -6349,7 +6349,7 @@
     },
     {
       "rank": 406,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "b1117b13808c46c3fa9da212f08c79134eb82e6052a8356b11e3adfd824f8a67",
       "source_target": "J'ai bien fait mon travail.",
       "source_english": "I did my work well.",
@@ -6365,10 +6365,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Comment savez-vous qui je suis ?",
+      "approved_english": "How do you know who I am?",
+      "approval_note": "Second-pass verified removal of unintended ability modality.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_002_second_pass.json"
     },
     {
       "rank": 407,
@@ -6568,7 +6568,7 @@
     },
     {
       "rank": 421,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "68c4a6807d44b565e38f8564ca0905f839482d2ddba1895e5c5055fb13331962",
       "source_target": "Je ne veux pas de toi ici.",
       "source_english": "I don't want you here.",
@@ -6583,10 +6583,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Que pensez-vous qu'il y ait en bas ?",
+      "approved_english": "What do you think is down there?",
+      "approval_note": "Second-pass verified en bas matches down there/down below.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_002_second_pass.json"
     },
     {
       "rank": 422,
@@ -7524,7 +7524,7 @@
     },
     {
       "rank": 475,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "ac26d4ae7e76e7cffb2054b0d9bd3664348c8bbbcdc1c030157da230599fbbc6",
       "source_target": "J'aime votre façon de penser.",
       "source_english": "I like how you think.",
@@ -7539,10 +7539,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourrais-tu me ramener chez moi, s'il te plaît ?",
+      "approved_english": "Could you please take me back home?",
+      "approval_note": "Second-pass verified spelling plaît with circumflex.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_002_second_pass.json"
     },
     {
       "rank": 476,
@@ -7704,7 +7704,7 @@
     },
     {
       "rank": 485,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "67f423cb958f53bbae022ae0ebf44ea620a4fdd41ec30d295724e9f99c55f611",
       "source_target": "Je crois que je t'aime bien.",
       "source_english": "I think I like you.",
@@ -7719,14 +7719,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourriez-vous me dire qui vous êtes, s'il vous plaît ?",
+      "approved_english": "Could you please tell me who you are?",
+      "approval_note": "Second-pass verified spelling plaît with circumflex.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_002_second_pass.json"
     },
     {
       "rank": 486,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "11780f6c7b143868c6a51cfe630daa476d8057f48c34ec5d675e570eebcd102a",
       "source_target": "Je pense que tout le monde est prêt.",
       "source_english": "I think everybody is ready.",
@@ -7741,10 +7741,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourrais-tu me dire qui tu es, s'il te plaît ?",
+      "approved_english": "Could you please tell me who you are?",
+      "approval_note": "Second-pass verified spelling plaît with circumflex.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_002_second_pass.json"
     },
     {
       "rank": 487,
@@ -8356,7 +8356,7 @@
     },
     {
       "rank": 524,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "fbd308a6edb18f023a6e7f87ad084f0ec527f0221d937aa6e3295d41030b5ff7",
       "source_target": "C'est pour ça que je t'aime.",
       "source_english": "That's why I love you.",
@@ -8372,14 +8372,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Sais-tu quel jour on est aujourd'hui ?",
+      "approved_english": "Do you know what day it is today?",
+      "approval_note": "Second-pass verified contemporary everyday date-question construction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 525,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "8764abfd1b94792a3042118b9992cd2c422495482fec3313eff099309656f776",
       "source_target": "Réfléchis à ce que tu veux.",
       "source_english": "Think about what you want.",
@@ -8394,10 +8394,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Savez-vous quel jour nous sommes aujourd'hui ?",
+      "approved_english": "Do you know what day it is today?",
+      "approval_note": "Second-pass verified standard formal date-question construction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 526,
@@ -8731,7 +8731,7 @@
     },
     {
       "rank": 549,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "2abc6df2f874200e7a58acbd607f50c56e594c75cdece6fa7158354a5d2fc81b",
       "source_target": "C'est l'aide dont nous avons besoin.",
       "source_english": "What we need is help.",
@@ -8747,10 +8747,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Allô, en quoi puis-je vous être utile ?",
+      "approved_english": "Hello, how can I help you?",
+      "approval_note": "Second-pass verified telephone greeting/help-offer semantics.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 550,
@@ -9022,7 +9022,7 @@
     },
     {
       "rank": 566,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "25cc49dad3adecae3613f39219e12f01d458d683afe6aa5e5b9c931585ff6e4f",
       "source_target": "Vous savez ce que je veux.",
       "source_english": "You know what I want.",
@@ -9037,14 +9037,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Est-ce que c'est ce que tu veux que je dise ?",
+      "approved_english": "Is that what you want me to say?",
+      "approval_note": "Second-pass verified standard interrogative construction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 567,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "9494425a120d3353eb8334d0018833a62ae798a4a2a9d7e38e02445b2d28a0aa",
       "source_target": "Vous savez ce qu'il faut faire.",
       "source_english": "You know what to do.",
@@ -9059,10 +9059,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Est-ce que c'est ce que vous voulez que je dise ?",
+      "approved_english": "Is that what you want me to say?",
+      "approval_note": "Second-pass verified standard interrogative construction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 568,
@@ -9136,7 +9136,7 @@
     },
     {
       "rank": 573,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "ba997edb40860bc72be7056658fdd367109e4219eeb0ae9c26a656d5b78b10ed",
       "source_target": "Tu dois m'aider.",
       "source_english": "You must help me.",
@@ -9153,10 +9153,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Y a-t-il quelque chose que nous pourrions faire pour aider ?",
+      "approved_english": "Is there anything we could do to help?",
+      "approval_note": "Approved only after second-pass amendment fixed both interrogative orthography and conditional modality.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_006_final_deterministic.json"
     },
     {
       "rank": 574,
@@ -9246,7 +9246,7 @@
     },
     {
       "rank": 578,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "82eafb1de520a8e3508c7943272a0a1ea05ad34823d3bf5c202503ce43251a2d",
       "source_target": "Tout ce que je peux faire, c'est essayer.",
       "source_english": "All I can do is try.",
@@ -9262,10 +9262,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Y a-t-il quelque chose que tu veux que je fasse ?",
+      "approved_english": "Is there anything you want me to do?",
+      "approval_note": "Second-pass verified that the corrected target explicitly asks what the listener wants done.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 579,
@@ -9989,7 +9989,7 @@
     },
     {
       "rank": 622,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "711d48a790962eb820a0a239f42cafb87d573fb31f8056dc83b0357542c6212a",
       "source_target": "Je viens à l'école en bus.",
       "source_english": "I come to school by bus.",
@@ -10004,10 +10004,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Y a-t-il quelqu'un ici qui parle anglais ?",
+      "approved_english": "I come to school by bus.",
+      "approval_note": "Second-pass verified fixed interrogative hyphenation Y a-t-il; source English remains unchanged.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_005_second_pass.json"
     },
     {
       "rank": 623,
@@ -10123,7 +10123,7 @@
     },
     {
       "rank": 631,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "fa7f5cd5ec8a6952a93dfdf0bd86b5a1d1e4654534337f0c96b9face5d860f90",
       "source_target": "Je ne savais pas que tu étais là.",
       "source_english": "I didn't know you were there.",
@@ -10138,14 +10138,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourrais-tu me dire comment le faire, s'il te plaît ?",
+      "approved_english": "Could you please tell me how to do this?",
+      "approval_note": "Second-pass verified explicit politeness alignment.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 632,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "f70a696b7508cba4916ef572a4a150ea9902cb3bee15ac8bfc3f29f97a2dba48",
       "source_target": "Je ne savais pas que tu travaillais ici.",
       "source_english": "I didn't know you worked here.",
@@ -10160,14 +10160,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourriez-vous me dire comment le faire, s'il vous plaît ?",
+      "approved_english": "Could you please tell me how to do this?",
+      "approval_note": "Second-pass verified explicit politeness alignment.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 633,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "cf769565aaea0734a05070f452930dc8dc9f5b6144a528dfffddddd72da1f531",
       "source_target": "Je réprouve ce que tu dis.",
       "source_english": "I disapprove of what you say.",
@@ -10182,10 +10182,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourrais-tu me dire comment faire ceci, s'il te plaît ?",
+      "approved_english": "Could you please tell me how to do this?",
+      "approval_note": "Second-pass verified deixis and politeness alignment.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 634,
@@ -10217,7 +10217,7 @@
     },
     {
       "rank": 636,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "26957316e5bd161e1a37788eb3bf774749bd8a7a871a3c0a49356c9b9c9d27df",
       "source_target": "Je n'ai pas envie de t'aider.",
       "source_english": "I don't feel like helping you.",
@@ -10232,14 +10232,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Veux-tu me dire ce dont il s'agit ?",
+      "approved_english": "Do you want to tell me what this is about?",
+      "approval_note": "Second-pass verified idiomatic meaning of ce dont il s'agit.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 637,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "ba4bca5178e065cd95ea8191140ba8b495773d7d03a0f8fdf9bb870a18d5d875",
       "source_target": "Je n'ai pas de temps pour toi.",
       "source_english": "I don't have time for you.",
@@ -10254,10 +10254,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Voulez-vous me dire ce dont il s'agit ?",
+      "approved_english": "Do you want to tell me what this is about?",
+      "approval_note": "Second-pass verified idiomatic meaning of ce dont il s'agit.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 638,
@@ -10373,7 +10373,7 @@
     },
     {
       "rank": 646,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "271f80cad878e6c095ee98db5dff188c9d91f627f4ab40be06838ac00c3e14cf",
       "source_target": "Je ne sais pas où c'est.",
       "source_english": "I don't know where it is.",
@@ -10388,10 +10388,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "À quelle heure veux-tu que je sois ici ?",
+      "approved_english": "What time do you want me to be here?",
+      "approval_note": "Second-pass verified deictic alignment: ici = here.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 647,
@@ -10557,7 +10557,7 @@
     },
     {
       "rank": 658,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "8093c0b9221f9c2010db2a9f8dbf4447b08c119c93c6831ed6237386d1af62d5",
       "source_target": "Comment oses-tu te montrer ici ?",
       "source_english": "How dare you show your face around here!",
@@ -10572,10 +10572,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pouvez-vous, s'il vous plaît, me répéter votre nom ?",
+      "approved_english": "Can you please tell me your name once more?",
+      "approval_note": "Second-pass verified spelling and punctuation of s'il vous plaît; répéter is acceptable for 'tell me again' in context.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 659,
@@ -10649,7 +10649,7 @@
     },
     {
       "rank": 664,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "7d943dfa77b93c7e428a2bce28979f0463d0bd7619fd282edf14600da0af7882",
       "source_target": "Regarde-moi quand je te parle !",
       "source_english": "Look at me when I talk to you!",
@@ -10664,10 +10664,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Peux-tu, s'il te plaît, me dire pourquoi tu l'aimes ?",
+      "approved_english": "Could you please tell me why you love her?",
+      "approval_note": "Second-pass verified spelling plaît and retained context-compatible aimer translation.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 665,
@@ -10753,7 +10753,7 @@
     },
     {
       "rank": 669,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "89e1f9b9dc0a321344e261d6c860a05e77e82f14e0b9617c0528b48a9912c9ec",
       "source_target": "Es-tu en train de me reprocher ton échec ?",
       "source_english": "Are you blaming me for your failure?",
@@ -10768,10 +10768,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "As-tu une idée d'où se trouve ton chien actuellement ?",
+      "approved_english": "Do you have any idea where your dog is now?",
+      "approval_note": "Second-pass verified English article/quantifier repair; French target is sound.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 670,
@@ -11082,7 +11082,7 @@
     },
     {
       "rank": 690,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "8c6d9cd20156b46bab898ab5c2a955e3bd569049b2720348ba844af89d0f9eee",
       "source_target": "Je peux te parler une seconde, s'il te plaît ?",
       "source_english": "Can I talk to you for a second, please?",
@@ -11097,14 +11097,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Est-ce que c'est ce que tu penses que je veux entendre ?",
+      "approved_english": "Is that what you think I want to hear?",
+      "approval_note": "Second-pass verified standard interrogative construction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 691,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "d002fdf32f36a6caa7e1d22cc181057862f4d2f01634abb2c3426480ca69056f",
       "source_target": "Quelqu'un peut-il me dire ce que je devrais faire après ?",
       "source_english": "Can anyone tell me what I should do next?",
@@ -11119,10 +11119,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Est-ce que c'est ce que vous pensez que je veux entendre ?",
+      "approved_english": "Is that what you think I want to hear?",
+      "approval_note": "Second-pass verified standard interrogative construction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_003_second_pass.json"
     },
     {
       "rank": 692,
@@ -12454,7 +12454,7 @@
     },
     {
       "rank": 769,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "fd5866d2414d508c8c7135aa5ffa454124d107e65e8cfde0f9a2a815dced2736",
       "source_target": "Tout ce que tu as à faire, c'est appuyer sur ce bouton.",
       "source_english": "All you have to do is push this button.",
@@ -12469,14 +12469,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Tu ne veux pas me dire pourquoi, n'est-ce pas ?",
+      "approved_english": "You don't want to tell me why, do you?",
+      "approval_note": "Second-pass verified standard French tag-question form; original final si ? was unsuitable.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 770,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "407915880579207bfcdc73bee36af888e4bb2dd5b3c812f965e50929487719b8",
       "source_target": "Tout ce que tu as à faire, c'est nous rejoindre.",
       "source_english": "All you have to do is join us.",
@@ -12491,10 +12491,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Vous ne voulez pas me dire pourquoi, n'est-ce pas ?",
+      "approved_english": "You don't want to tell me why, do you?",
+      "approval_note": "Second-pass verified standard French tag-question form; original final si ? was unsuitable.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 771,
@@ -12512,7 +12512,7 @@
     },
     {
       "rank": 772,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "1effbc2b23373e7e55ce09a7c8619e3271fe2f1f1201aa32929ced012017efa1",
       "source_target": "Tout ce que tu as à faire, c'est faire de ton mieux.",
       "source_english": "All you have to do is do your best.",
@@ -12527,10 +12527,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Vous n'avez aucune idée de ce dont il s'agit, n'est-ce pas ?",
+      "approved_english": "You have no idea what this is about, do you?",
+      "approval_note": "Second-pass verified that ce dont il s'agit means what this is about.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 773,
@@ -12818,7 +12818,7 @@
     },
     {
       "rank": 792,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "81919294081bc961ae63646fdee64e997e8472c4484305727b611d52abb9b38d",
       "source_target": "Il est ce qu'on appelle un homme de culture.",
       "source_english": "He is what we call a man of culture.",
@@ -12833,10 +12833,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Dis-moi à quelle heure je dois être là.",
+      "approved_english": "Tell me what time I need to be there.",
+      "approval_note": "Second-pass verified location/state meaning: être là matches be there; venir did not.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 793,
@@ -12896,7 +12896,7 @@
     },
     {
       "rank": 797,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "bb15fff0320474b60fac593e9fff370a8c64a3799ce88bb69acaad6b14e12998",
       "source_target": "Je ne suis pas content de ce que vous avez fait.",
       "source_english": "I am not pleased with what you have done.",
@@ -12911,14 +12911,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourrais-tu me dire à nouveau qui est ton père, s'il te plaît ?",
+      "approved_english": "Could you please tell me again who your father is?",
+      "approval_note": "Second-pass verified explicit politeness alignment.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 798,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "2fd5b9510e56bea340f899d4bbaa53d752ad81ae4cbebded2b32936b8face3c1",
       "source_target": "J'apprécie que tu prennes le temps de me voir.",
       "source_english": "I appreciate your taking the time to see me.",
@@ -12933,10 +12933,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourriez-vous me dire à nouveau qui est votre père, s'il vous plaît ?",
+      "approved_english": "Could you please tell me again who your father is?",
+      "approval_note": "Second-pass verified explicit politeness alignment.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 799,
@@ -12990,7 +12990,7 @@
     },
     {
       "rank": 802,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "55df3dc8deb4b8c345845b3b2d315b1333ec01ca9ef7d57aaee92e5ff088a169",
       "source_target": "Je peux à peine me souvenir à quoi mon grand-père ressemblait.",
       "source_english": "I can barely remember what my grandfather looked like.",
@@ -13005,14 +13005,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourrais-tu me redire pourquoi tu es en retard, s'il te plaît ?",
+      "approved_english": "Could you please tell me again why you are late?",
+      "approval_note": "Second-pass verified redire plus explicit politeness as a natural match for tell me again, please.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 803,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "9ab8d0cf2123884c93a2e38ced28dbf395bb32aa05776b664639d30a83196517",
       "source_target": "Je peux être convaincant quand je le veux.",
       "source_english": "I can be persuasive when I want to be.",
@@ -13027,10 +13027,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourriez-vous me redire pourquoi vous êtes en retard, s'il vous plaît ?",
+      "approved_english": "Could you please tell me again why you are late?",
+      "approval_note": "Second-pass verified redire plus explicit politeness as a natural formal match.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 804,
@@ -13048,7 +13048,7 @@
     },
     {
       "rank": 805,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "91a4fb1061ea242e81da8399dbd283fbf1528830bbb845c1aeffff752cfaa07d",
       "source_target": "Je peux arriver à la station avant toi.",
       "source_english": "I can get to the station before you do.",
@@ -13063,10 +13063,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourriez-vous me dire où je peux prendre le métro ?",
+      "approved_english": "Could you tell me where I can take the subway?",
+      "approval_note": "Second-pass verified transport verb prendre and aligned English wording.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 806,
@@ -13326,7 +13326,7 @@
     },
     {
       "rank": 823,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "dffc3731be0ddea9b61937df56d073a2343dea74f9a4bf835562bb1a3e7df59a",
       "source_target": "Je l'ai fait comme tu me l'as demandé.",
       "source_english": "I did it the way you asked me to.",
@@ -13342,10 +13342,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourriez-vous me dire comment me rendre à votre bureau ?",
+      "approved_english": "Could you tell me how to get to your office?",
+      "approval_note": "Second-pass verified possessive alignment and idiomatic movement construction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 824,
@@ -13377,7 +13377,7 @@
     },
     {
       "rank": 826,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "517216e3ecd9677f0a390a1dfa36ac986550932bd8384cf71eb47d4989a6f691",
       "source_target": "Je ne m'attendais pas à ce que tu dises quelque chose comme ça.",
       "source_english": "I didn't expect you to say something like that.",
@@ -13392,14 +13392,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Penses-tu pouvoir me sortir d'ici ?",
+      "approved_english": "Do you think you can get me out of here?",
+      "approval_note": "Second-pass verified deictic alignment: d'ici = out of here.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 827,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "1b91ef67fc721ceef9f9ab4d166f12de989658e12c7af94b4a8998e6dad8f214",
       "source_target": "Je n'ai pas eu assez de temps pour finir ma présentation.",
       "source_english": "I didn't have enough time to finish my presentation.",
@@ -13414,10 +13414,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pensez-vous pouvoir me sortir d'ici ?",
+      "approved_english": "Do you think you can get me out of here?",
+      "approval_note": "Second-pass verified deictic alignment: d'ici = out of here.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 828,
@@ -13927,7 +13927,7 @@
     },
     {
       "rank": 863,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "d2a546c4723e91153a91e92fa92ff18d947b223f232a047f8bf668ca53c7f3ea",
       "source_target": "Je ne sais pas quand ma maman reviendra.",
       "source_english": "I don't know when my mom will come back.",
@@ -13942,14 +13942,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourquoi ne me dites-vous pas de quoi il retourne ?",
+      "approved_english": "Why don't you tell me what this is all about?",
+      "approval_note": "Second-pass verified fixed idiom de quoi il retourne; English emphasis remains compatible.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 864,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "0a2b7e369fc83922c5585750ec556b09ac492111e424e694451d8395b793acd7",
       "source_target": "Je ne sais pas où j'ai posé mon téléphone portable.",
       "source_english": "I don't know where I put my cell phone.",
@@ -13964,10 +13964,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourquoi ne me dis-tu pas de quoi il retourne ?",
+      "approved_english": "Why don't you tell me what this is all about?",
+      "approval_note": "Second-pass verified fixed idiom de quoi il retourne; English emphasis remains compatible.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 865,
@@ -14073,7 +14073,7 @@
     },
     {
       "rank": 871,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "1923c9dff040b718f525f75d9e3f63da813949af1822fe18f5a66ca06747de93",
       "source_target": "Je n'aime pas quand tu me fixes.",
       "source_english": "I don't like it when you stare at me.",
@@ -14088,14 +14088,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Pourriez-vous, s'il vous plaît, me dire quel est votre numéro de téléphone mobile ?",
+      "approved_english": "Could you please tell me what your cell phone number is?",
+      "approval_note": "Second-pass verified spelling plaît and punctuation.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 872,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "686ec50376197365ac8bb6456cf8db0682b79410cee1734e567ea52d27588f48",
       "source_target": "Je n'aime pas que ma femme m'appelle au travail.",
       "source_english": "I don't like my wife calling me at work.",
@@ -14110,10 +14110,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Peux-tu, s'il te plaît, me dire quel est ton numéro de GSM ?",
+      "approved_english": "Could you please tell me what your cell phone number is?",
+      "approval_note": "Second-pass verified spelling plaît; GSM is regionally valid terminology and remains traceable to the audited row.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 873,
@@ -14427,7 +14427,7 @@
     },
     {
       "rank": 886,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "6b69441e8dd6f808e0bb5ecc45bdfda0af15bdc19b5845bf4344e0833b360d08",
       "source_target": "Je ne pense pas que tu veuilles prendre ce risque.",
       "source_english": "I don't think you want to take that risk.",
@@ -14443,14 +14443,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Dis-moi simplement ce que tu veux faire, s'il te plaît.",
+      "approved_english": "Please just tell me what it is you want to do.",
+      "approval_note": "Second-pass verified restoration of the missing action faire and polite request.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 887,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "91a9e95e0d970b1dc511ffd6065f193494e9327bec58dd28484dc36032d41f27",
       "source_target": "Je ne comprends pas pourquoi j'ai dû faire ça.",
       "source_english": "I don't understand why I had to do that.",
@@ -14465,10 +14465,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Je peux compter sur toi pour être ici à l'heure demain ?",
+      "approved_english": "Can I rely on you to be here on time tomorrow?",
+      "approval_note": "Second-pass verified explicit ici required for English here.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 888,
@@ -14664,7 +14664,7 @@
     },
     {
       "rank": 896,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "7576fc04621e53eea8ea6f8c81e2d0f47d4b9513d545ca00e86f89ceeac179c6",
       "source_target": "Je ne veux pas dire ça à ma petite amie.",
       "source_english": "I don't want to say that to my girlfriend.",
@@ -14679,14 +14679,14 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "As-tu la moindre idée de l'importance de tes notes d'examen ?",
+      "approved_english": "Do you have any idea how important your test grades are?",
+      "approval_note": "Second-pass verified grammatical nominal construction expressing degree of importance.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 897,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "8b8c7dee431a44465579486e7e684713e1fa769758db85fd57e003672819aaff",
       "source_target": "Je ne veux pas passer toute ma vie ici.",
       "source_english": "I don't want to spend my whole life here.",
@@ -14701,10 +14701,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Avez-vous la moindre idée de l'importance de vos notes d'examen ?",
+      "approved_english": "Do you have any idea how important your test grades are?",
+      "approval_note": "Second-pass verified grammatical nominal construction expressing degree of importance.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 898,
@@ -15111,7 +15111,7 @@
     },
     {
       "rank": 921,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "18014bd04066fccd88ce7b08e1c6acab41f866bf36714bf203b17654de30b05f",
       "source_target": "Je n'ai aucune idée de ce que je vais faire.",
       "source_english": "I have no idea what I'm going to do.",
@@ -15126,10 +15126,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Y a-t-il quoi que ce soit d'autre que vous puissiez nous dire qui pourrait aider ?",
+      "approved_english": "Is there anything else you can tell us that might help?",
+      "approval_note": "Second-pass verified subjunctive after indefinite/interrogative antecedent in this construction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 922,
@@ -15286,7 +15286,7 @@
     },
     {
       "rank": 932,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "7edc84745d487674288ddf32688a89c27be0dd2d80806533c0e6db25c216d26d",
       "source_target": "Je n'ai rien à dire à aucun d'entre vous.",
       "source_english": "I have nothing to say to any of you.",
@@ -15301,10 +15301,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Voudrais-tu que je te montre comment faire ?",
+      "approved_english": "Would you like me to show you how to do that?",
+      "approval_note": "Second-pass verified conditional vouloir matches English would you like.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 933,
@@ -15398,7 +15398,7 @@
     },
     {
       "rank": 938,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "43a1190df5a1661e18436973865c6330c9d2006c6365a55a3324f125a7cc134b",
       "source_target": "Je dois faire quelque chose tant que je le peux.",
       "source_english": "I have to do something while I still can.",
@@ -15413,10 +15413,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Que fait-on lorsqu'on n'a pas le temps de déjeuner ?",
+      "approved_english": "What do you do when you don't have time to eat lunch?",
+      "approval_note": "Second-pass verified mandatory elision lorsque + on -> lorsqu'on.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 939,
@@ -15597,7 +15597,7 @@
     },
     {
       "rank": 948,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "2f58aa50517c659062a325fa652c11eeb490ce9db138f78b09ac7fcd4e89f063",
       "source_target": "Je veux seulement savoir si tu m'aimes.",
       "source_english": "I just want to know if you love me.",
@@ -15612,10 +15612,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Je sais que la dernière chose que vous voulez faire est de m'aider.",
+      "approved_english": "I know the last thing you want to do is help me.",
+      "approval_note": "Second-pass verified present-tense alignment with English want.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 949,
@@ -15692,7 +15692,7 @@
     },
     {
       "rank": 953,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "387f67a58cf981bd84aa74bbe18b9f29f84488994d312476e8037b8f9fb0f8c6",
       "source_target": "Je sais à quel point c'est difficile de faire cela.",
       "source_english": "I know how hard it is to do that.",
@@ -15707,10 +15707,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "Peux-tu me dire quelque chose à propos de ce qui va se passer ici aujourd'hui ?",
+      "approved_english": "Can you tell me anything about what's going to happen here today?",
+      "approval_note": "Second-pass verified standard ce qui va se passer construction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/french_004_second_pass.json"
     },
     {
       "rank": 954,
