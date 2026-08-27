@@ -1,0 +1,97 @@
+{
+  "artifact": "Urdu deterministic native-review orthography approvals - batch 009",
+  "release": "v1.0",
+  "language": "urdu",
+  "source_zip_sha256": "d55d3b4f95a6957093d7b46ddb244fd3a6530367dfc9fefd9baced598c9234a5",
+  "policy": "Resolve only native-review rows whose audit flag itself specifies an exact mechanical orthographic, code-point, punctuation, or spacing normalization. No idiomatic, register, dialect, gender, or semantic judgment is promoted by this batch.",
+  "approvals": [
+    {
+      "rank": 4,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "چلو!",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit.json", "issue": "Target-side exclamation mark placement should be normalized: چلو!"},
+      "approval_note": "Mechanical punctuation placement exactly specified by the audit flag."
+    },
+    {
+      "rank": 6,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "سب کھاؤ۔",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit.json", "issue": "Normalize legacy/variant imperative spellings such as کھائو/جائو/بتائو/دکھائو to contemporary کھاؤ/جاؤ/بتاؤ/دکھاؤ."},
+      "approval_note": "Mechanical legacy spelling normalization کھائو → کھاؤ; meaning and punctuation are unchanged."
+    },
+    {
+      "rank": 18,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "بھاگ جاؤ۔",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit.json", "issue": "Normalize legacy/variant imperative spellings such as کھائو/جائو/بتائو/دکھائو to contemporary کھاؤ/جاؤ/بتاؤ/دکھاؤ."},
+      "approval_note": "Mechanical legacy spelling normalization جائو → جاؤ; learner-pair meaning is unchanged."
+    },
+    {
+      "rank": 21,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "صبح بخیر۔",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit.json", "issue": "Normalize non-Urdu yeh code points/orthography (e.g. بخير, کيسا) to Urdu forms."},
+      "approval_note": "Mechanical Urdu yeh/code-point normalization بخير → بخیر."
+    },
+    {
+      "rank": 78,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "کون سے دانت میں درد ہے؟",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit.json", "issue": "Prefer standard spacing کون سے over کونسے in this learner corpus."},
+      "approval_note": "Mechanical spacing normalization explicitly prescribed by the learner-corpus audit."
+    },
+    {
+      "rank": 137,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "وہ ایک آرام دہ زندگی گزار رہا ہے۔",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit.json", "issue": "Normalize آرامدہ to آرام دہ."},
+      "approval_note": "Mechanical word-spacing normalization exactly specified by the audit."
+    },
+    {
+      "rank": 174,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "تم مجھے بتاؤ۔",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit.json", "issue": "Normalize legacy/variant imperative spellings such as کھائو/جائو/بتائو/دکھائو to contemporary کھاؤ/جاؤ/بتاؤ/دکھاؤ."},
+      "approval_note": "Mechanical legacy spelling normalization بتائو → بتاؤ; all other wording is preserved."
+    },
+    {
+      "rank": 175,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "تم مجھے یہ بتاؤ۔",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit.json", "issue": "Normalize legacy/variant imperative spellings such as کھائو/جائو/بتائو/دکھائو to contemporary کھاؤ/جاؤ/بتاؤ/دکھاؤ."},
+      "approval_note": "Mechanical legacy spelling normalization بتائو → بتاؤ; all other wording is preserved."
+    },
+    {
+      "rank": 230,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "مجھے ایک اور گھڑی دکھاؤ۔",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit.json", "issue": "Normalize legacy/variant imperative spellings such as کھائو/جائو/بتائو/دکھائو to contemporary کھاؤ/جاؤ/بتاؤ/دکھاؤ."},
+      "approval_note": "Mechanical legacy spelling normalization دکھائو → دکھاؤ; meaning is unchanged."
+    },
+    {
+      "rank": 400,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "اپنی دائیں آستین کو اوپر چڑھاؤ۔",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit_251_500.json", "issue": "Normalize legacy/variant imperative/future spellings چڑھائو/کھائو to چڑھاؤ/کھاؤ."},
+      "approval_note": "Mechanical legacy spelling normalization چڑھائو → چڑھاؤ; no semantic rewrite."
+    },
+    {
+      "rank": 465,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "تم کیا کھاؤ گے؟",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit_251_500.json", "issue": "Normalize legacy/variant imperative/future spellings چڑھائو/کھائو to چڑھاؤ/کھاؤ."},
+      "approval_note": "Mechanical legacy spelling normalization کھائو → کھاؤ; sentence meaning and register are otherwise untouched."
+    }
+  ]
+}
