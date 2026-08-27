@@ -1,0 +1,23 @@
+{
+  "artifact": "Urdu native-review mechanical audit amendments - batch 02",
+  "release": "v1.0",
+  "language": "urdu",
+  "source_zip_sha256": "d55d3b4f95a6957093d7b46ddb244fd3a6530367dfc9fefd9baced598c9234a5",
+  "policy": "Combine only independently audited mechanical spelling defects into one atomic recommendation; do not alter syntax, meaning, register, punctuation, or learner-pair semantics.",
+  "amendments": [
+    {
+      "rank": 964,
+      "reason": "This row carries two independent mechanical audit flags: normalize چاہیے spelling and normalize لیے spelling. A single exact recommendation is required so both changes are provenance-locked as one atomic approval.",
+      "confirmed_findings": [
+        {
+          "rank": 964,
+          "type": "orthography_native_review_amendment",
+          "observed": "مجھے پینٹ کا ایک کنستر اور چاہئیے چھت کو پوری طرح پینٹ کرنے کے لئیے۔ / I need another can of paint to finish painting the ceiling.",
+          "recommended": "مجھے پینٹ کا ایک کنستر اور چاہیے چھت کو پوری طرح پینٹ کرنے کے لیے۔ / I need another can of paint to finish painting the ceiling.",
+          "note": "Normalizes چاہئیے → چاہیے and لئیے → لیے only; all other wording and meaning are unchanged."
+        }
+      ],
+      "editorial_flags": []
+    }
+  ]
+}
