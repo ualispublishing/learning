@@ -16,9 +16,9 @@
     "approval_survives_recompile_only_when_audit_fingerprint_matches": true
   },
   "status_counts": {
-    "KEEP": 693,
-    "NATIVE_REVIEW": 112,
+    "KEEP": 713,
     "CORRECT_APPROVED": 193,
+    "NATIVE_REVIEW": 92,
     "REPLACE_APPROVED": 2
   },
   "rows": [
@@ -276,7 +276,7 @@
     },
     {
       "rank": 19,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "abd29d98a30164e0c50105ff5e1a96703e71f8686f9a5841f840ce14ebf0841f",
       "source_target": "تعال إلى هنا من فضلك.",
       "source_english": "Please come here.",
@@ -294,10 +294,10 @@
           "issue": "Remove stray spaces before Arabic question marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "تعال إلى هنا من فضلك.",
+      "approved_english": "Please come here.",
+      "approval_note": "Independent second pass verified the live pair; stale compiled review evidence requires no learner-text change.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 20,
@@ -1303,7 +1303,7 @@
     },
     {
       "rank": 84,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "ca937e0fcd5bf2afa6c05e632c2637fb7f2a6e3a652dfb08773c122360008e8f",
       "source_target": "أراك غدًا.",
       "source_english": "See you tomorrow.",
@@ -1318,10 +1318,10 @@
           "issue": "Review أما زلت against the chosen punctuation/hamza convention for interrogative learner text."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أراك غدًا.",
+      "approved_english": "See you tomorrow.",
+      "approval_note": "Independent second pass verified the live pair; stale compiled review evidence requires no learner-text change.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 85,
@@ -1586,7 +1586,7 @@
     },
     {
       "rank": 99,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "4124af175841e7574cbc1db8ce20a5794a044c091eb72ac63bd99ce1dec20907",
       "source_target": "أيمكنك مساعدتي؟",
       "source_english": "Could you help me?",
@@ -1601,10 +1601,10 @@
           "issue": "صديقكِ can mean 'your friend' and does not unambiguously encode English 'boyfriend'; consider a clearer learner pair if relationship specificity matters."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أيمكنك مساعدتي؟",
+      "approved_english": "Could you help me?",
+      "approval_note": "Independent second pass verified the live pair; stale compiled review evidence requires no learner-text change.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 100,
@@ -1921,7 +1921,7 @@
     },
     {
       "rank": 120,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "544c2e93a00a233d89e3967c75eddc99c1337796f7e5ea8b95e70359497929ba",
       "source_target": "أحتاج مساعدتك.",
       "source_english": "I need your help.",
@@ -1937,14 +1937,14 @@
           "issue": "Both are usable but صفاته/مواصفاته differ in naturalness for describing a person; native editorial review should pick the more learner-appropriate wording."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أحتاج مساعدتك.",
+      "approved_english": "I need your help.",
+      "approval_note": "Independent second pass verified the live pair; stale compiled review evidence requires no learner-text change.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 121,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "c51d880ffefe54e490308fa70aab9788263af4947da62b588deffa0f25560d72",
       "source_target": "نحتاج إلى مساعدتك.",
       "source_english": "We need your help.",
@@ -1960,10 +1960,10 @@
           "issue": "Both are usable but صفاته/مواصفاته differ in naturalness for describing a person; native editorial review should pick the more learner-appropriate wording."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "نحتاج إلى مساعدتك.",
+      "approved_english": "We need your help.",
+      "approval_note": "Independent second pass verified the live pair; stale compiled review evidence requires no learner-text change.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 122,
@@ -2349,7 +2349,7 @@
     },
     {
       "rank": 148,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "a52aad4f6441c4da1cefd13e3545b6bcbddbdc2db4b0c6f4ab49a215e23571c7",
       "source_target": "هل تحب كرة المضرب؟",
       "source_english": "Do you like tennis?",
@@ -2366,10 +2366,10 @@
           "issue": "Future/present English phrasing is context-sensitive; tighten tense/aspect equivalence for standalone learner pairs."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تحب كرة المضرب؟",
+      "approved_english": "Do you like tennis?",
+      "approval_note": "Independent second pass verified the live pair; stale compiled review evidence requires no learner-text change.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 149,
@@ -3434,7 +3434,7 @@
     },
     {
       "rank": 206,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "df3c986a0b43ad7fda6a260480ad763c41b8cfbe3d86d03a2e08b5b6abfdc70a",
       "source_target": "أنا بحاجة للمساعدة الآن.",
       "source_english": "I need help now.",
@@ -3465,10 +3465,10 @@
           "issue": "من أين تعرف/تعلم هذا is literal and less direct than كيف تعرف ذلك؟ for the English 'How do you know that?'; review learner naturalness."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أنا بحاجة للمساعدة الآن.",
+      "approved_english": "I need help now.",
+      "approval_note": "Independent second pass verified the live pair; stale compiled review evidence requires no learner-text change.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 207,
@@ -4521,7 +4521,7 @@
     },
     {
       "rank": 257,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "aeb86331df9ec796eea30dbaa09617324f55927254ffd2b3ae68171a90b14cdf",
       "source_target": "أتعرف والدي؟",
       "source_english": "Do you know my father?",
@@ -4559,10 +4559,10 @@
           "issue": "Partial diacritization is inconsistent; normalize display policy across the workbook."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أتعرف والدي؟",
+      "approved_english": "Do you know my father?",
+      "approval_note": "Independent second pass verified the live pair; generic display-policy evidence does not identify a live defect.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 258,
@@ -4736,7 +4736,7 @@
     },
     {
       "rank": 269,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "bef9188a07c4048121512bbd7f3d306e6541924e2fbcdec7e389628a4533dd94",
       "source_target": "أي خيار كان لدي؟",
       "source_english": "What choice did I have?",
@@ -4774,10 +4774,10 @@
           "issue": "Partial diacritization is inconsistent; normalize display policy across the workbook."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أي خيار كان لدي؟",
+      "approved_english": "What choice did I have?",
+      "approval_note": "Independent second pass verified the live pair; generic display-policy evidence does not identify a live defect.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 270,
@@ -5219,7 +5219,7 @@
     },
     {
       "rank": 297,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "8e7ef472708b8f3dc9aa875551e50aac534df56f1e314252835ddd3f23a2add1",
       "source_target": "لماذا أتيت إلى هنا؟",
       "source_english": "Why have you come here?",
@@ -5234,10 +5234,10 @@
           "issue": "كريم لأشعة الشمس is awkward for sunscreen; prefer a standard learner term such as واقٍ من الشمس / واقي شمس after native-register review."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا أتيت إلى هنا؟",
+      "approved_english": "Why have you come here?",
+      "approval_note": "Independent second pass verified the live pair; stale compiled review evidence requires no learner-text change.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 298,
@@ -5726,7 +5726,7 @@
     },
     {
       "rank": 323,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "e5f927e68986143c249d1724b0c6b5b316cb23555de96553e055f89e9d9a1d8a",
       "source_target": "تعرف ما أعنيه.",
       "source_english": "You know what I mean.",
@@ -5764,10 +5764,10 @@
           "issue": "Partial diacritization is inconsistent; normalize display policy across the workbook."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "تعرف ما أعنيه.",
+      "approved_english": "You know what I mean.",
+      "approval_note": "Independent second pass verified the live pair; generic display-policy evidence does not identify a live defect.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 324,
@@ -6200,7 +6200,7 @@
     },
     {
       "rank": 338,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "6c781cc2bbd2b2c613adc7721cee45b18e70eba7ef4014ab21dc4ea401311d1d",
       "source_target": "لا أستطيع الانتظار إلى الغد.",
       "source_english": "I can't wait till tomorrow.",
@@ -6238,10 +6238,10 @@
           "issue": "Partial diacritization is inconsistent; normalize display policy across the workbook."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لا أستطيع الانتظار إلى الغد.",
+      "approved_english": "I can't wait till tomorrow.",
+      "approval_note": "Independent second pass verified the live pair; generic display-policy evidence does not identify a live defect.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 339,
@@ -6315,7 +6315,7 @@
     },
     {
       "rank": 344,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "919bb955dfb07f482554ac3a6445167a9b98cbb1c70fe267ec3226e466610493",
       "source_target": "أنا أعلم أنه مشغول.",
       "source_english": "I know he is busy.",
@@ -6353,14 +6353,14 @@
           "issue": "Partial diacritization is inconsistent; normalize display policy across the workbook."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أنا أعلم أنه مشغول.",
+      "approved_english": "I know he is busy.",
+      "approval_note": "Independent second pass verified the live pair; generic display-policy evidence does not identify a live defect.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 345,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "14fc5e11913990c24c7f386c0b2ada70bff65ad8a5dbd95fdf40b2f911f598eb",
       "source_target": "أنا أعرف كيفية النجاة.",
       "source_english": "I know how to survive.",
@@ -6398,10 +6398,10 @@
           "issue": "Partial diacritization is inconsistent; normalize display policy across the workbook."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أنا أعرف كيفية النجاة.",
+      "approved_english": "I know how to survive.",
+      "approval_note": "Independent second pass verified the live pair; generic display-policy evidence does not identify a live defect.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 346,
@@ -6855,7 +6855,7 @@
     },
     {
       "rank": 372,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "be919dff066ac1a2856eac10d8b5a819654949e3c9bd19632cabcbf15415e3c5",
       "source_target": "هذا ما وجدناه.",
       "source_english": "This is what we found.",
@@ -6876,10 +6876,10 @@
           "issue": "Degree expressions are inconsistent (كثيرًا / لهذه الدرجة); review naturalness and MSA register, especially منحوس which is colloquial in many contexts."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هذا ما وجدناه.",
+      "approved_english": "This is what we found.",
+      "approval_note": "Independent second pass verified the live pair; stale compiled review evidence requires no learner-text change.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 373,
@@ -6911,7 +6911,7 @@
     },
     {
       "rank": 374,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "e2d5e72a6ddbc84b0db052d65c983c191e5e6580c2350f8175b2142b27532273",
       "source_target": "يمكننا الاختباء هنا.",
       "source_english": "We can hide in here.",
@@ -6932,10 +6932,10 @@
           "issue": "Degree expressions are inconsistent (كثيرًا / لهذه الدرجة); review naturalness and MSA register, especially منحوس which is colloquial in many contexts."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "يمكننا الاختباء هنا.",
+      "approved_english": "We can hide in here.",
+      "approval_note": "Independent second pass verified the live pair; stale compiled review evidence requires no learner-text change.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 375,
@@ -7345,7 +7345,7 @@
     },
     {
       "rank": 394,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "68a94e7490b0a9f49de325b6b7bc646b7a065e3e369b41ac1939cc143a168e5b",
       "source_target": "هل تعلم أن سمك الشبوط يأكل الشراغف؟",
       "source_english": "Did you know carp eat tadpoles?",
@@ -7360,10 +7360,10 @@
           "issue": "Hold on maps to انتظر in context, but the learner pair should be checked for register and request politeness."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تعلم أن سمك الشبوط يأكل الشراغف؟",
+      "approved_english": "Did you know carp eat tadpoles?",
+      "approval_note": "Independent second pass verified the live pair; stale compiled review evidence requires no learner-text change.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 395,
@@ -8864,7 +8864,7 @@
     },
     {
       "rank": 479,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "1df7a842c8870ed5be971149b34c7858905ea5dce6162b929bd5004acf1f0f7a",
       "source_target": "أنا أعرف من هو والدك.",
       "source_english": "I know who your father is.",
@@ -8890,14 +8890,14 @@
           "issue": "Normalize terminal punctuation to the chosen Arabic/English learner style; current rows mix periods and Arabic question punctuation inconsistently."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أنا أعرف من هو والدك.",
+      "approved_english": "I know who your father is.",
+      "approval_note": "Independent second pass verified the live pair; punctuation concern is already satisfied.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 480,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "463923a0dd0615bd396fca916a5cf11e4ee279cf053faf8b430c868d3787025d",
       "source_target": "أعلم بأنك لا تصدقني.",
       "source_english": "I know you don't believe me.",
@@ -8923,14 +8923,14 @@
           "issue": "Normalize terminal punctuation to the chosen Arabic/English learner style; current rows mix periods and Arabic question punctuation inconsistently."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أعلم بأنك لا تصدقني.",
+      "approved_english": "I know you don't believe me.",
+      "approval_note": "Independent second pass verified the live pair; punctuation concern is already satisfied.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 481,
-      "status": "NATIVE_REVIEW",
+      "status": "KEEP",
       "audit_fingerprint": "04c86680969bbb4bd3367873632868171ee4b8fd6f32da020dfd667343f73584",
       "source_target": "أنا أعلم أنك لا تحبني.",
       "source_english": "I know you don't like me.",
@@ -8956,10 +8956,10 @@
           "issue": "Normalize terminal punctuation to the chosen Arabic/English learner style; current rows mix periods and Arabic question punctuation inconsistently."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أنا أعلم أنك لا تحبني.",
+      "approved_english": "I know you don't like me.",
+      "approval_note": "Independent second pass verified the live pair; punctuation concern is already satisfied.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_009_native_stale_keep_a.json"
     },
     {
       "rank": 482,
