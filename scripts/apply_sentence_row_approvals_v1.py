@@ -3,8 +3,14 @@
 
 Approval files may only resolve an existing audited row decision. They cannot add
 new findings or silently substitute a different rationale. Each approval must
-point back to an exact recommendation or editorial flag already attached to that
-rank by the row-by-row audit.
+point back to exact evidence either already attached to that rank by the compiled
+row-by-row audit or recorded in an explicit second-pass amendment ledger.
+
+Standalone amendment ledgers are accepted only from the controlled v1.0 audit
+directory and must exactly match the approval's language, release, source hash,
+rank, and cited recommendation/action/issue. This preserves provenance without
+requiring second-pass evidence to be copied into the compiled row before the
+approval workflow can consume it.
 
 For CORRECT_APPROVED, an approval may provide only the side that changes. The
 omitted side is inherited exactly from the audited source row, preventing needless
@@ -19,41 +25,103 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CURATION = ROOT / "curation" / "language-workbooks" / "v1.0"
 APPROVAL_DIR = CURATION / "approvals"
+AUDIT_DIR = ROOT / "audit" / "language-workbooks" / "v1.0"
 RESOLVED = {"KEEP", "CORRECT_APPROVED", "REPLACE_APPROVED"}
 ALLOWED_TRANSITIONS = {
     "CORRECT_PENDING_SECOND_PASS": {"CORRECT_APPROVED"},
     "REPLACE_PENDING_SECOND_PASS": {"REPLACE_APPROVED"},
     "NATIVE_REVIEW": {"KEEP", "CORRECT_APPROVED", "REPLACE_APPROVED"},
 }
+_AMENDMENT_CACHE: dict[tuple[str, str, str], dict | None] = {}
 
 
 def load_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def audit_basis_matches(row: dict, basis: dict) -> bool:
+def evidence_matches(items: list[dict], basis: dict, *, require_ledger: str | None) -> bool:
+    """Return True only for an exact cited evidence value."""
+    checks = (
+        ("recommended", "recommended"),
+        ("recommended_action", "recommended_action"),
+        ("observed", "observed"),
+        ("issue", "issue"),
+    )
+    selected = [(basis_key, item_key) for basis_key, item_key in checks if basis_key in basis]
+    if len(selected) != 1:
+        return False
+    basis_key, item_key = selected[0]
+    wanted = basis[basis_key]
+    return any(
+        (require_ledger is None or item.get("ledger") == require_ledger)
+        and item.get(item_key) == wanted
+        for item in items
+    )
+
+
+def load_amendment_ledger(ledger: str, language: str, source_zip_sha256: str) -> dict | None:
+    """Load a controlled standalone amendment ledger after strict identity checks."""
+    if not isinstance(ledger, str) or not ledger.endswith(".json"):
+        return None
+    if Path(ledger).name != ledger:
+        return None
+
+    key = (ledger, language, source_zip_sha256)
+    if key in _AMENDMENT_CACHE:
+        return _AMENDMENT_CACHE[key]
+
+    path = AUDIT_DIR / ledger
+    if not path.is_file():
+        _AMENDMENT_CACHE[key] = None
+        return None
+
+    doc = load_json(path)
+    if doc.get("release") != "v1.0":
+        raise SystemExit(f"Amendment ledger release mismatch: {path}")
+    if doc.get("language") != language:
+        raise SystemExit(f"Amendment ledger language mismatch: {path}")
+    if doc.get("source_zip_sha256") != source_zip_sha256:
+        raise SystemExit(f"Amendment ledger source hash mismatch: {path}")
+    if not isinstance(doc.get("amendments"), list):
+        raise SystemExit(f"Malformed amendment ledger (missing amendments list): {path}")
+
+    _AMENDMENT_CACHE[key] = doc
+    return doc
+
+
+def audit_basis_matches(
+    row: dict,
+    basis: dict,
+    *,
+    language: str,
+    source_zip_sha256: str,
+) -> bool:
     if not isinstance(basis, dict):
         return False
     ledger = basis.get("ledger")
-    if "recommended" in basis:
-        wanted = basis["recommended"]
-        return any(
-            item.get("ledger") == ledger and item.get("recommended") == wanted
-            for item in row.get("confirmed_findings", [])
-        )
-    if "recommended_action" in basis:
-        wanted = basis["recommended_action"]
-        return any(
-            item.get("ledger") == ledger and item.get("recommended_action") == wanted
-            for item in row.get("confirmed_findings", [])
-        )
-    if "issue" in basis:
-        wanted = basis["issue"]
-        return any(
-            item.get("ledger") == ledger and item.get("issue") == wanted
-            for item in row.get("editorial_flags", [])
-        )
-    return False
+    if not isinstance(ledger, str) or not ledger:
+        return False
+
+    # First accept exact evidence already compiled onto the row.
+    row_evidence = list(row.get("confirmed_findings", [])) + list(row.get("editorial_flags", []))
+    if evidence_matches(row_evidence, basis, require_ledger=ledger):
+        return True
+
+    # If the cited ledger is an explicit standalone second-pass amendment file,
+    # resolve the same rank there. No fuzzy matching or cross-rank fallback is allowed.
+    amendment_doc = load_amendment_ledger(ledger, language, source_zip_sha256)
+    if amendment_doc is None:
+        return False
+
+    rank = int(row["rank"])
+    matches = [item for item in amendment_doc["amendments"] if int(item.get("rank", -1)) == rank]
+    if len(matches) != 1:
+        return False
+    amendment = matches[0]
+    amendment_evidence = list(amendment.get("confirmed_findings", [])) + list(
+        amendment.get("editorial_flags", [])
+    )
+    return evidence_matches(amendment_evidence, basis, require_ledger=None)
 
 
 def apply_language(language: str) -> dict:
@@ -65,6 +133,9 @@ def apply_language(language: str) -> dict:
     if len(rows) != 1000:
         raise SystemExit(f"{language} decision file must contain 1000 rows")
     by_rank = {int(row["rank"]): row for row in rows}
+    source_zip_sha256 = data.get("source_zip_sha256")
+    if not isinstance(source_zip_sha256, str) or not source_zip_sha256:
+        raise SystemExit(f"Missing source hash in {decision_path}")
 
     approval_files = sorted(APPROVAL_DIR.glob(f"{language}_*.json"))
     seen: set[int] = set()
@@ -74,7 +145,7 @@ def apply_language(language: str) -> dict:
         approval_doc = load_json(path)
         if approval_doc.get("language") != language or approval_doc.get("release") != "v1.0":
             raise SystemExit(f"Approval identity/version mismatch: {path}")
-        if approval_doc.get("source_zip_sha256") != data.get("source_zip_sha256"):
+        if approval_doc.get("source_zip_sha256") != source_zip_sha256:
             raise SystemExit(f"Approval source hash mismatch: {path}")
 
         for approval in approval_doc.get("approvals", []):
@@ -90,7 +161,12 @@ def apply_language(language: str) -> dict:
                 raise SystemExit(f"Source target mismatch for {language} rank {rank}")
             if "source_english" in approval and approval["source_english"] != row.get("source_english"):
                 raise SystemExit(f"Source English mismatch for {language} rank {rank}")
-            if not audit_basis_matches(row, approval.get("audit_basis")):
+            if not audit_basis_matches(
+                row,
+                approval.get("audit_basis"),
+                language=language,
+                source_zip_sha256=source_zip_sha256,
+            ):
                 raise SystemExit(
                     f"Approval for {language} rank {rank} is not tied to its exact audited recommendation/flag"
                 )
