@@ -17,9 +17,9 @@
   },
   "status_counts": {
     "KEEP": 593,
-    "CORRECT_APPROVED": 263,
-    "NATIVE_REVIEW": 128,
-    "REPLACE_APPROVED": 16
+    "CORRECT_APPROVED": 274,
+    "REPLACE_APPROVED": 16,
+    "NATIVE_REVIEW": 117
   },
   "rows": [
     {
@@ -75,7 +75,7 @@
     },
     {
       "rank": 4,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "9db126bde0e812956d6f2fc8e8534ddf1a48eca21e4a96bb843feb2f4d37bfc2",
       "source_target": "!چلو",
       "source_english": "Let's go!",
@@ -90,10 +90,10 @@
           "issue": "Target-side exclamation mark placement should be normalized: چلو!"
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "چلو!",
+      "approved_english": "Let's go!",
+      "approval_note": "Mechanical punctuation placement exactly specified by the audit flag.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_009_native_deterministic_orthography.json"
     },
     {
       "rank": 5,
@@ -111,7 +111,7 @@
     },
     {
       "rank": 6,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "4259d431c8f616c6cc6d0da26e223fb1bcf08dbece3ba931622fc4bc97105135",
       "source_target": "سب کھائو۔",
       "source_english": "Eat everything.",
@@ -130,10 +130,10 @@
           "issue": "Normalize legacy/variant imperative spellings such as کھائو/جائو/بتائو/دکھائو to contemporary کھاؤ/جاؤ/بتاؤ/دکھاؤ."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "سب کھاؤ۔",
+      "approved_english": "Eat everything.",
+      "approval_note": "Mechanical legacy spelling normalization کھائو → کھاؤ; meaning and punctuation are unchanged.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_009_native_deterministic_orthography.json"
     },
     {
       "rank": 7,
@@ -317,7 +317,7 @@
     },
     {
       "rank": 18,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "70e636b81a812d5c82f85ed4074a1fa77d98323d24fb3f0f284c9e115a0ede7e",
       "source_target": "بھاگ جائو۔",
       "source_english": "Beat it.",
@@ -336,10 +336,10 @@
           "issue": "Normalize legacy/variant imperative spellings such as کھائو/جائو/بتائو/دکھائو to contemporary کھاؤ/جاؤ/بتاؤ/دکھاؤ."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "بھاگ جاؤ۔",
+      "approved_english": "Beat it.",
+      "approval_note": "Mechanical legacy spelling normalization جائو → جاؤ; learner-pair meaning is unchanged.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_009_native_deterministic_orthography.json"
     },
     {
       "rank": 19,
@@ -380,7 +380,7 @@
     },
     {
       "rank": 21,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "9b2d31c1e5106a4453a8e29ba28348384265409abe62d9e52762bac45b6890d1",
       "source_target": "صبح بخير۔",
       "source_english": "Good morning.",
@@ -396,10 +396,10 @@
           "issue": "Normalize non-Urdu yeh code points/orthography (e.g. بخير, کيسا) to Urdu forms."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "صبح بخیر۔",
+      "approved_english": "Good morning.",
+      "approval_note": "Mechanical Urdu yeh/code-point normalization بخير → بخیر.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_009_native_deterministic_orthography.json"
     },
     {
       "rank": 22,
@@ -1285,7 +1285,7 @@
     },
     {
       "rank": 78,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "2a568c80aa78e350405f724ece3302ac06e0f673cf4aa501266a87c107670a84",
       "source_target": "کونسے دانت میں درد ہے؟",
       "source_english": "Which tooth hurts?",
@@ -1300,10 +1300,10 @@
           "issue": "Prefer standard spacing کون سے over کونسے in this learner corpus."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "کون سے دانت میں درد ہے؟",
+      "approved_english": "Which tooth hurts?",
+      "approval_note": "Mechanical spacing normalization explicitly prescribed by the learner-corpus audit.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_009_native_deterministic_orthography.json"
     },
     {
       "rank": 79,
@@ -2229,7 +2229,7 @@
     },
     {
       "rank": 137,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "e4b4669242ec2cb5731828048bef5ca418589bdb664c5ebf8b20d4f3ccb51190",
       "source_target": "وہ ایک آرامدہ زندگی گزار رہا ہے۔",
       "source_english": "He lives comfortably.",
@@ -2244,10 +2244,10 @@
           "issue": "Normalize آرامدہ to آرام دہ."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "وہ ایک آرام دہ زندگی گزار رہا ہے۔",
+      "approved_english": "He lives comfortably.",
+      "approval_note": "Mechanical word-spacing normalization exactly specified by the audit.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_009_native_deterministic_orthography.json"
     },
     {
       "rank": 138,
@@ -2938,7 +2938,7 @@
     },
     {
       "rank": 174,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "5914409e9b7fdbfc51290a1b970b5901c8fbf6dd36d6a5625f697a1b2285dbb9",
       "source_target": "تم مجھے بتائو۔",
       "source_english": "You must tell me.",
@@ -2957,14 +2957,14 @@
           "issue": "Normalize legacy/variant imperative spellings such as کھائو/جائو/بتائو/دکھائو to contemporary کھاؤ/جاؤ/بتاؤ/دکھاؤ."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "تم مجھے بتاؤ۔",
+      "approved_english": "You must tell me.",
+      "approval_note": "Mechanical legacy spelling normalization بتائو → بتاؤ; all other wording is preserved.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_009_native_deterministic_orthography.json"
     },
     {
       "rank": 175,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c392edd6e8a69e91eec37f288f85e46a41b750b16e409afed4df34f8776ecfc5",
       "source_target": "تم مجھے یہ بتائو۔",
       "source_english": "You must tell me.",
@@ -2983,10 +2983,10 @@
           "issue": "Normalize legacy/variant imperative spellings such as کھائو/جائو/بتائو/دکھائو to contemporary کھاؤ/جاؤ/بتاؤ/دکھاؤ."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "تم مجھے یہ بتاؤ۔",
+      "approved_english": "You must tell me.",
+      "approval_note": "Mechanical legacy spelling normalization بتائو → بتاؤ; all other wording is preserved.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_009_native_deterministic_orthography.json"
     },
     {
       "rank": 176,
@@ -3926,7 +3926,7 @@
     },
     {
       "rank": 230,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c620507fd225c0aa069fb39ad4e16f26e4243338a1710a31c492b0495ba72c7a",
       "source_target": "مجھے ایک اور گھڑی دکھائو۔",
       "source_english": "Show me another watch.",
@@ -3945,10 +3945,10 @@
           "issue": "Normalize legacy/variant imperative spellings such as کھائو/جائو/بتائو/دکھائو to contemporary کھاؤ/جاؤ/بتاؤ/دکھاؤ."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "مجھے ایک اور گھڑی دکھاؤ۔",
+      "approved_english": "Show me another watch.",
+      "approval_note": "Mechanical legacy spelling normalization دکھائو → دکھاؤ; meaning is unchanged.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_009_native_deterministic_orthography.json"
     },
     {
       "rank": 231,
@@ -6755,7 +6755,7 @@
     },
     {
       "rank": 400,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "0b16812dfffe45cf78346b639da64cf33a30ec03845ecc27ba1ecb28f6638a0f",
       "source_target": "اپنی دائیں آستین کو اوپر چڑھائو۔",
       "source_english": "Roll up your right sleeve.",
@@ -6771,10 +6771,10 @@
           "issue": "Normalize legacy/variant imperative/future spellings چڑھائو/کھائو to چڑھاؤ/کھاؤ."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "اپنی دائیں آستین کو اوپر چڑھاؤ۔",
+      "approved_english": "Roll up your right sleeve.",
+      "approval_note": "Mechanical legacy spelling normalization چڑھائو → چڑھاؤ; no semantic rewrite.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_009_native_deterministic_orthography.json"
     },
     {
       "rank": 401,
@@ -7829,7 +7829,7 @@
     },
     {
       "rank": 465,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "f39003ecc69846981360f97e6884d681a3b71b262a3d0b5b6b7e1e267632a29b",
       "source_target": "تم کیا کھائو گے؟",
       "source_english": "What would you like to eat?",
@@ -7845,10 +7845,10 @@
           "issue": "Normalize legacy/variant imperative/future spellings چڑھائو/کھائو to چڑھاؤ/کھاؤ."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "تم کیا کھاؤ گے؟",
+      "approved_english": "What would you like to eat?",
+      "approval_note": "Mechanical legacy spelling normalization کھائو → کھاؤ; sentence meaning and register are otherwise untouched.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/urdu_009_native_deterministic_orthography.json"
     },
     {
       "rank": 466,
