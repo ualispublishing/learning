@@ -3,7 +3,7 @@
   "release": "v1.0",
   "language": "urdu",
   "source_zip_sha256": "d55d3b4f95a6957093d7b46ddb244fd3a6530367dfc9fefd9baced598c9234a5",
-  "policy": "These amendments replace first-pass evidence only for named ranks where second-pass review found an honorific-number ambiguity, an incomplete correction, or a still-awkward recommendation.",
+  "policy": "These amendments replace first-pass evidence only for named ranks where second-pass review found an honorific-number ambiguity, an incomplete correction, a still-awkward recommendation, or a remaining semantic-number mismatch.",
   "amendments": [
     {
       "rank": 521,
@@ -67,6 +67,20 @@
           "type": "person_disambiguation_second_pass",
           "observed": "میں نے ان کو بتایا کہ وہ غلط تھے۔ / I told him that he was wrong.",
           "recommended": "میں نے اسے بتایا کہ وہ غلط تھا۔ / I told him that he was wrong."
+        }
+      ],
+      "editorial_flags": []
+    },
+    {
+      "rank": 725,
+      "reason": "The first-pass rewrite repaired agreement but collapsed English plural 'advances' into singular mass-noun 'progress' and rendered 'remarkable' loosely as 'splendid'. Preserve plural developments and the evaluative meaning explicitly.",
+      "confirmed_findings": [
+        {
+          "rank": 725,
+          "type": "grammar_semantic_number_second_pass",
+          "observed": "طب کے میدان میں حال ہی میں ہونے والے ترقی بہت شاندار ہیں۔ / The recent advances in medicine are remarkable.",
+          "recommended": "طب کے میدان میں حالیہ ترقیات قابلِ ذکر ہیں۔ / The recent advances in medicine are remarkable.",
+          "note": "ترقیات preserves the plural sense of advances; قابلِ ذکر aligns directly with remarkable; plural ہیں restores agreement."
         }
       ],
       "editorial_flags": []
