@@ -6,6 +6,7 @@ on:
     paths:
       - 'curation/language-workbooks/v1.0/approvals/**'
       - 'scripts/apply_sentence_row_approvals_v1.py'
+      - 'scripts/build_sentence_native_review_queue.py'
       - '.github/workflows/apply-language-row-approvals.yml'
 
 permissions:
@@ -39,11 +40,13 @@ jobs:
             git reset --hard origin/main
 
             python scripts/apply_sentence_row_approvals_v1.py
+            python scripts/build_sentence_native_review_queue.py
             git add curation/language-workbooks/v1.0/*_sentence_row_decisions.json
             git add curation/language-workbooks/v1.0/sentence_row_decision_summary.json
+            git add curation/language-workbooks/v1.0/sentence_native_review_queue.json
 
             if git diff --cached --quiet; then
-              echo 'No row-decision changes to commit.'
+              echo 'No row-decision or review-queue changes to commit.'
               exit 0
             fi
 
