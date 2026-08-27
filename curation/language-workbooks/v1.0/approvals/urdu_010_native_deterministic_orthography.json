@@ -1,0 +1,75 @@
+{
+  "artifact": "Urdu deterministic native-review approvals - batch 010",
+  "release": "v1.0",
+  "language": "urdu",
+  "source_zip_sha256": "d55d3b4f95a6957093d7b46ddb244fd3a6530367dfc9fefd9baced598c9234a5",
+  "policy": "Resolve only exact mechanical orthography, code-point, punctuation, and spacing defects. Rows with additional idiomatic or semantic concerns remain in native review.",
+  "approvals": [
+    {
+      "rank": 166,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "کیسا چل رہا ہے؟",
+      "approved_english": "How is it going?",
+      "audit_basis": {"ledger": "urdu_sentence_native_review_mechanical_amendments_01.json", "recommended": "کیسا چل رہا ہے؟ / How is it going?"},
+      "approval_note": "Mechanical combined correction: Urdu yeh normalization plus removal of the audited stray punctuation space."
+    },
+    {
+      "rank": 359,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "تمھیں زیادہ پڑھنا چاہیے۔",
+      "approved_english": "You need to study more.",
+      "audit_basis": {"ledger": "urdu_sentence_native_review_mechanical_amendments_01.json", "recommended": "تمھیں زیادہ پڑھنا چاہیے۔ / You need to study more."},
+      "approval_note": "Mechanical spelling normalization چاہئیے → چاہیے; meaning and syntax are unchanged."
+    },
+    {
+      "rank": 369,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "میرے لیے بھی ایک ٹکٹ لینا۔",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit_251_500.json", "issue": "Normalize nonstandard/legacy لیے spellings (لئیے/لیئے) consistently."},
+      "approval_note": "Mechanical spelling normalization لئیے → لیے; no other wording is changed."
+    },
+    {
+      "rank": 457,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "انہوں نے ایک اچھا موقع گنوا دیا۔",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit_251_500.json", "issue": "Normalize موقعہ to the preferred standard spelling موقع for this corpus."},
+      "approval_note": "Mechanical corpus-standard spelling normalization موقعہ → موقع."
+    },
+    {
+      "rank": 481,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "مجھے نہیں پتا کیا کہنا ہے۔",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit_251_500.json", "issue": "Remove stray space before punctuation."},
+      "approval_note": "Mechanical removal of the audited stray space before Urdu punctuation."
+    },
+    {
+      "rank": 482,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "میرے پاس کھیل کود کے لیے وقت نہیں ہے۔",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit_251_500.json", "issue": "Normalize nonstandard/legacy لیے spellings (لئیے/لیئے) consistently."},
+      "approval_note": "Mechanical spelling normalization لئیے → لیے; sentence meaning is unchanged."
+    },
+    {
+      "rank": 483,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "یہی تو میں جاننا چاہتا ہوں۔",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit_251_500.json", "issue": "Normalize یہ ہی to یہی."},
+      "approval_note": "Mechanical orthographic normalization یہ ہی → یہی."
+    },
+    {
+      "rank": 484,
+      "expected_status": "NATIVE_REVIEW",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "یہی تو میں جاننا چاہتی ہوں۔",
+      "audit_basis": {"ledger": "urdu_sentence_editorial_audit_251_500.json", "issue": "Normalize یہ ہی to یہی."},
+      "approval_note": "Mechanical orthographic normalization یہ ہی → یہی."
+    }
+  ]
+}
