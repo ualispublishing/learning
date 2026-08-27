@@ -16,6 +16,22 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Normalize Unit 7 handoff replacement ordering
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('reading/tools/apply_urdu_c1_unit07.py')
+          s = p.read_text(encoding='utf-8')
+          old = '''            "Unit 7 / sequence 37":"Unit 8 / sequence 43",
+            "C1 Unit 7 uses the roadmap theme **literature and cultural criticism** with `critical essay`, `review`, and `close-reading style prose` genres.":"C1 Unit 8 uses the roadmap theme **economics, risk, and forecasting** with `analysis`, `briefing`, and `scenario comparison` genres.",
+            "**Urdu C1 Unit 7 / sequence 37** using the C1 Unit 7 roadmap theme `literature and cultural criticism`":"**Urdu C1 Unit 8 / sequence 43** using the C1 Unit 8 roadmap theme `economics, risk, and forecasting`"'''
+          new = '''            "**Urdu C1 Unit 7 / sequence 37** using the C1 Unit 7 roadmap theme `literature and cultural criticism`":"**Urdu C1 Unit 8 / sequence 43** using the C1 Unit 8 roadmap theme `economics, risk, and forecasting`",
+            "Unit 7 / sequence 37":"Unit 8 / sequence 43",
+            "C1 Unit 7 uses the roadmap theme **literature and cultural criticism** with `critical essay`, `review`, and `close-reading style prose` genres.":"C1 Unit 8 uses the roadmap theme **economics, risk, and forecasting** with `analysis`, `briefing`, and `scenario comparison` genres."'''
+          if old not in s:
+              raise SystemExit('FAIL CLOSED: expected Unit 7 replacement block not found')
+          p.write_text(s.replace(old, new), encoding='utf-8')
+          PY
       - name: Verify live frontier and canonicalize Unit 7
         run: python reading/tools/apply_urdu_c1_unit07.py
       - name: Commit canonical unit and advanced state
