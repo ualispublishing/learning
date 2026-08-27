@@ -40,12 +40,16 @@ jobs:
           code=$?
           cat /tmp/unit07.log
           if [ "$code" -ne 0 ]; then
-            cp /tmp/unit07.log reading/audit/urdu_c1_u07_failed_run.log
+            cp /tmp/unit07.log /tmp/urdu_c1_u07_failed_run.log
+            git reset --hard HEAD
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/urdu_c1_u07_failed_run.log reading/audit/urdu_c1_u07_failed_run.log
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
             git add reading/audit/urdu_c1_u07_failed_run.log
             git commit -m 'Record Urdu C1 Unit 7 guarded failure diagnostic'
-            git push
+            git push origin HEAD:main
             exit "$code"
           fi
       - name: Commit canonical unit and advanced state
