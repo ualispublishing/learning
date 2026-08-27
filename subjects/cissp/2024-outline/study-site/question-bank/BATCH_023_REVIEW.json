@@ -1,8 +1,8 @@
 {
-  "schema_version": 5,
+  "schema_version": 6,
   "batch_id": "023",
   "reviewed_on": "2026-08-27",
-  "status": "SEMANTIC_REVIEWED_GATE_PASSED_MAIN_ISOLATION_VERIFIED",
+  "status": "SEMANTIC_REVIEWED_RELEASED_V1_21_0_VERIFIED",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -37,7 +37,7 @@
   "current_source_check": {
     "isc2_outline_effective_date": "2024-04-15",
     "isc2_outline_rechecked_on": "2026-08-27",
-    "isc2_outline_status": "Current ISC2 CISSP Certification Exam Outline remains the public scope authority used by released v1.20.",
+    "isc2_outline_status": "Current ISC2 CISSP Certification Exam Outline remains the public scope authority used by released v1.21.",
     "nist_800_53_rev5_update1": "registered broad security and privacy control reference",
     "nist_800_63_4": "registered final July 2025 digital identity, authentication, authenticator lifecycle, and federation reference",
     "nist_800_61_rev3": "registered final April 2025 incident-response risk-management reference",
@@ -46,18 +46,20 @@
     "nist_800_207": "registered zero-trust architecture reference",
     "nist_800_86": "registered digital-forensics and incident-response evidence reference"
   },
-  "gate_state": {
+  "candidate_gate_state": {
     "candidate_validation_pr": 84,
     "pr_event_registration": "REGISTERED",
-    "validation_evidence_type": "native-pr-initial-plus-native-final-head-plus-exact-post-merge-main",
+    "validation_evidence_type": "native-pr-initial-plus-native-final-head-plus-exact-post-merge-main-plus-final-bookkeeping",
     "initial_native_pr_workflow_run_id": 33088373351,
     "initial_native_pr_branch_head_sha": "07237e2abc7ea2c609ae35aa531e047eaeb8c47f",
     "final_native_pr_workflow_run_id": 33088704604,
     "final_native_pr_branch_head_sha": "47916ce1f7bb5a27b17a50558b6f37f23f651c63",
-    "final_native_pr_merge_ref_sha": "2231affe3a84e72d1aa43910c00a301dfdab19f0",
     "candidate_merge_commit_sha": "c5e4695c408ea92d09265500cd337eb4194284d7",
     "post_merge_main_workflow_run_id": 33089088457,
-    "post_merge_main_sha": "c5e4695c408ea92d09265500cd337eb4194284d7",
+    "pages_isolation_workflow_run_id": 33089088945,
+    "candidate_final_bookkeeping_audit_workflow_run_id": 33090347974,
+    "candidate_final_bookkeeping_pages_workflow_run_id": 33090347941,
+    "candidate_final_bookkeeping_sha": "40a3b90cfb4afef628731ae0c69e2e01c18f122e",
     "quality_gate_mode": "released+candidate",
     "released_mcq_compared": 415,
     "released_bellringers_compared": 1,
@@ -72,8 +74,36 @@
     "static_asset_serving": "PASS",
     "browser_smoke": "PASS",
     "browser_smoke_workflows": ["startup","review","practice","progress","sources","navigation"],
+    "aggregate_gate": "PASS"
+  },
+  "release_gate_state": {
+    "release_pr_number": 86,
+    "released_state_pr_workflow_run_id": 33091527218,
+    "released_state_pr_head_sha": "64952afff6584c9f9b9c926c5eda0e26b2352eb6",
+    "release_merge_commit_sha": "c7240881ffbaecb59b9ef035a5313f8026a56d64",
+    "post_promotion_main_audit_workflow_run_id": 33091947858,
+    "public_pages_workflow_run_id": 33091948020,
+    "released_state_quality_gate_mode": "released+candidate",
+    "released_standard_mcq": 431,
+    "released_bellringers": 1,
+    "candidate_records": 0,
+    "quality_gate_warnings": 0,
+    "logical_batch_mix": "PASS",
+    "deterministic_knowledge_audit": "PASS",
+    "planning_gate": "PASS",
+    "javascript_syntax": "PASS",
+    "legacy_rationales": "PASS",
+    "static_asset_serving": "PASS",
+    "browser_smoke": "PASS",
+    "browser_smoke_workflows": ["startup","review","practice","progress","sources","navigation"],
     "aggregate_gate": "PASS",
-    "promotion_allowed": true
+    "public_runtime": "PASS",
+    "public_version": "1.21.0",
+    "public_standard_questions": 431,
+    "public_manifest_released_records": 376,
+    "public_bellringers": 1,
+    "released_only": true,
+    "release_verified": true
   },
   "public_isolation_evidence": {
     "pages_workflow_run_id": 33089088945,
@@ -93,12 +123,15 @@
   "coverage_effect": {
     "explicit_subtopic_tags_before": 302,
     "explicit_subtopic_tags_after_candidate": 302,
+    "explicit_subtopic_tags_after_release": 302,
     "total_mapped_subtopics": 344,
     "candidate_state_measured_in_workflow_run_id": 33089088457,
-    "boundary": "Batch 023 adds scenario depth and objective-balance coverage but does not increase the distinct explicit enriched-subtopic tag count: 302/344 before and after. This is an authoring metadata metric, not a learner-mastery claim."
+    "released_state_measured_in_workflow_run_id": 33091947858,
+    "boundary": "Batch 023 adds scenario depth and objective-balance coverage but does not increase the distinct explicit enriched-subtopic tag count: 302/344 before candidate, after candidate, and after release. This is an authoring metadata metric, not a learner-mastery claim."
   },
-  "next_planner_slate_if_promoted": {
-    "basis_workflow_run_id": 33089088457,
+  "next_planner_slate": {
+    "basis_workflow_run_id": 33091947858,
+    "basis_release": "1.21.0",
     "status": "AUTHORING_RECOMMENDATION_NOT_RELEASE_AUTHORIZATION",
     "difficulty_distribution": {"E":12,"S":4},
     "primary_domain_distribution": {"1":1,"2":1,"3":2,"4":0,"5":2,"6":4,"7":5,"8":1},
@@ -107,11 +140,12 @@
   "notes": [
     "Batch 023 follows the exact released-only v1.20 planner slate emitted by final release audit 33084083529.",
     "Primary-domain count peaks at D3=5/16 (31.25%), below the configured 35% cap. Stretch items are C-363, C-367, C-371, and C-375, and all numeric difficulty scores are inside configured tier ranges.",
-    "Native PR audit 33088373351 first passed the complete released+candidate gate with zero warnings. After the evidence ledger was synchronized without changing candidate question bytes, exact final-head PR audit 33088704604 repeated every CISSP gate successfully with zero warnings and browser smoke PASS.",
-    "PR #84 squash-merged only the four candidate JSONL files plus this review ledger as main SHA c5e4695c408ea92d09265500cd337eb4194284d7. Exact post-merge main audit 33089088457 again passed with 415 released standard questions, 1 released Bellringer, 16 candidates, E12/S4, zero warnings, and all gates PASS.",
-    "Pages run 33089088945 independently proved public isolation on the same main SHA: v1.20.0 remained at 415 standard questions, 360 manifest released records, 1 Bellringer, released_only=true, with unreleased candidate URLs required to return 404.",
+    "Native candidate PR audits 33088373351 and 33088704604, exact candidate main audit 33089088457, final candidate-bookkeeping audit 33090347974, and Pages isolation 33090347941 all passed with zero CISSP quality warnings.",
+    "Release PR #86 passed released-state audit 33091527218 on exact head 64952afff6584c9f9b9c926c5eda0e26b2352eb6 with 431 released standard questions, 1 Bellringer, zero candidates, zero warnings, browser smoke PASS, and aggregate PASS.",
+    "PR #86 merged as main SHA c7240881ffbaecb59b9ef035a5313f8026a56d64. Exact post-promotion main audit 33091947858 passed every CISSP gate, including exhaustive originality, browser smoke, and aggregate enforcement.",
+    "Pages run 33091948020 live-verified v1.21.0 from c7240881ffbaecb59b9ef035a5313f8026a56d64 with 431 standard questions, 376 manifest released records, 1 Bellringer, and released_only=true.",
     "Executable coverage remains 302/344 explicit enriched subtopics. No breadth increase is claimed; the batch improves scenario depth and objective distribution.",
     "No external question bank, live-item recollection, exam dump, or commercial-question wording/template was used. Difficulty remains an internal authoring scale and does not claim ISC2 psychometric equivalence.",
-    "Batch 023 is validated but remains unreleased until a separate v1.21 promotion state passes released-state audit and live Pages verification."
+    "Batch 023 is fully released and verified as CISSP Atlas v1.21.0."
   ]
 }
