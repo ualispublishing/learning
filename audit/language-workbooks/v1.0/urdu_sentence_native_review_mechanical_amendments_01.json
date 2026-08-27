@@ -1,0 +1,37 @@
+{
+  "artifact": "Urdu native-review mechanical audit amendments - batch 01",
+  "release": "v1.0",
+  "language": "urdu",
+  "source_zip_sha256": "d55d3b4f95a6957093d7b46ddb244fd3a6530367dfc9fefd9baced598c9234a5",
+  "policy": "Amend only rows where the first-pass native-review flags are mechanically incomplete or misclassified. Each recommendation combines or corrects already-observable orthographic/punctuation defects without introducing semantic, register, dialect, or stylistic judgment.",
+  "amendments": [
+    {
+      "rank": 166,
+      "reason": "The row carries two mechanical audit flags: non-Urdu yeh normalization and removal of the stray space before punctuation. A single exact recommendation is required for atomic approval.",
+      "confirmed_findings": [
+        {
+          "rank": 166,
+          "type": "orthography_punctuation_native_review_amendment",
+          "observed": "کيسا چل رہا ہے ؟ / How is it going?",
+          "recommended": "کیسا چل رہا ہے؟ / How is it going?",
+          "note": "Normalizes Arabic yeh to Urdu yeh in کیسا and removes the stray pre-question-mark space; meaning is unchanged."
+        }
+      ],
+      "editorial_flags": []
+    },
+    {
+      "rank": 359,
+      "reason": "The first-pass group label cites لیے spellings, but this row actually contains the nonstandard چاہیے spelling چاہئیے. The row is mechanically correctable without native-style judgment.",
+      "confirmed_findings": [
+        {
+          "rank": 359,
+          "type": "orthography_native_review_amendment",
+          "observed": "تمھیں زیادہ پڑھنا چاہئیے۔ / You need to study more.",
+          "recommended": "تمھیں زیادہ پڑھنا چاہیے۔ / You need to study more.",
+          "note": "Normalizes چاہئیے to contemporary learner-facing چاہیے; syntax and meaning remain unchanged."
+        }
+      ],
+      "editorial_flags": []
+    }
+  ]
+}
