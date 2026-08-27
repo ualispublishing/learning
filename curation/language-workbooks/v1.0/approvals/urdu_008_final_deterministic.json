@@ -1,0 +1,33 @@
+{
+  "artifact": "Urdu final deterministic second-pass approvals - batch 008",
+  "release": "v1.0",
+  "language": "urdu",
+  "source_zip_sha256": "d55d3b4f95a6957093d7b46ddb244fd3a6530367dfc9fefd9baced598c9234a5",
+  "policy": "Resolve only the remaining deterministic second-pass rows. Rank 341 retains the audited natural correction; rank 725 uses explicit amended evidence to preserve English number and meaning. Native-review rows remain blocked.",
+  "approvals": [
+    {
+      "rank": 341,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "میں اسے خریدنے پر راضی ہو گیا۔",
+      "approved_english": "I agreed to buy it.",
+      "audit_basis": {
+        "ledger": "urdu_sentence_editorial_audit_251_500.json",
+        "recommended": "میں اسے خریدنے پر راضی ہو گیا۔ / I agreed to buy it."
+      },
+      "approval_note": "Second-pass verified the correction as grammatical and semantically aligned. The Urdu form is explicitly a masculine-speaker rendering of the gender-neutral English sentence."
+    },
+    {
+      "rank": 725,
+      "expected_status": "CORRECT_PENDING_SECOND_PASS",
+      "approved_status": "CORRECT_APPROVED",
+      "approved_target": "طب کے میدان میں حالیہ ترقیات قابلِ ذکر ہیں۔",
+      "approved_english": "The recent advances in medicine are remarkable.",
+      "audit_basis": {
+        "ledger": "urdu_sentence_second_pass_amendments.json",
+        "recommended": "طب کے میدان میں حالیہ ترقیات قابلِ ذکر ہیں۔ / The recent advances in medicine are remarkable."
+      },
+      "approval_note": "Second-pass amendment preserves plural advances with ترقیات, renders remarkable directly as قابلِ ذکر, and restores plural agreement with ہیں."
+    }
+  ]
+}
