@@ -17,9 +17,8 @@
   },
   "status_counts": {
     "KEEP": 693,
-    "NATIVE_REVIEW": 146,
-    "CORRECT_APPROVED": 157,
-    "CORRECT_PENDING_SECOND_PASS": 2,
+    "NATIVE_REVIEW": 112,
+    "CORRECT_APPROVED": 193,
     "REPLACE_APPROVED": 2
   },
   "rows": [
@@ -302,7 +301,7 @@
     },
     {
       "rank": 20,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "8fbc7cc2a09ebfae20bb4f86ff431034c2d16c516f1f80e1abf236369383d77a",
       "source_target": "و كيف لك أن تعرف؟",
       "source_english": "How do you know?",
@@ -320,10 +319,10 @@
           "issue": "Normalize initial conjunction spacing from 'و كيف' to 'وكيف'."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "وكيف لك أن تعرف؟",
+      "approved_english": "And how do you know?",
+      "approval_note": "Whole-row second pass normalized conjunction spacing and added the conjunction to English so both sides carry 'and'.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 21,
@@ -504,7 +503,7 @@
     },
     {
       "rank": 33,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "5a6d32cf6e3d2a4360a4554057ba26e10fa20d17a0ea51e5221181ee587c81ff",
       "source_target": "متىَ أتيتَ؟",
       "source_english": "When did you come?",
@@ -527,10 +526,10 @@
           "issue": "Mixed partial diacritization is inconsistent across the learner bank; define and apply one display policy rather than sporadic vowel marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "متى أتيت؟",
+      "approved_english": "When did you come?",
+      "approval_note": "Whole-row second pass removed sporadic optional vowel marks; meaning remains exact.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 34,
@@ -704,7 +703,7 @@
     },
     {
       "rank": 45,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "6f18dde1262927b6ee9f64579bccf609bf8866f35f9c3dc90db5cea1a27d9df3",
       "source_target": "هل أنت غير مشغول غداً؟",
       "source_english": "Are you free tomorrow?",
@@ -719,10 +718,10 @@
           "issue": "Grammatical but stiff for everyday MSA; prefer a natural learner form such as هل أنت متفرغ غدًا؟ for 'Are you free tomorrow?'"
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل أنت متفرغ غدًا؟",
+      "approved_english": "Are you free tomorrow?",
+      "approval_note": "Whole-row second pass adopted the audit's natural MSA learner phrasing.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 46,
@@ -866,7 +865,7 @@
     },
     {
       "rank": 56,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "e2903ff04af4e3d1671477ac61e519c1f6ed2c5dc08413d8370be6497cc9118d",
       "source_target": "هل قلتَ شيئًا ؟",
       "source_english": "Did you say something?",
@@ -884,10 +883,10 @@
           "issue": "Remove stray spaces before Arabic question marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل قلت شيئًا؟",
+      "approved_english": "Did you say something?",
+      "approval_note": "Whole-row second pass removed stray punctuation spacing and optional addressee diacritic for consistent display.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 57,
@@ -963,7 +962,7 @@
     },
     {
       "rank": 61,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "7c7ec917d762c32668ff6af635b2a1bd10e76461d799ed47e027a40e47564f7b",
       "source_target": "هل لديك مال ؟",
       "source_english": "Do you have money?",
@@ -981,10 +980,10 @@
           "issue": "Remove stray spaces before Arabic question marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل لديك مال؟",
+      "approved_english": "Do you have money?",
+      "approval_note": "Whole-row second pass: punctuation-only normalization; bilingual meaning is sound.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 62,
@@ -1340,7 +1339,7 @@
     },
     {
       "rank": 86,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "b9deaa376a01c8f53c4615686cd9072c3ac3a30ad50c623fc6b8477cd1353e41",
       "source_target": "هل تفهَمُها؟",
       "source_english": "Do you understand her?",
@@ -1363,10 +1362,10 @@
           "issue": "Mixed partial diacritization is inconsistent across the learner bank; define and apply one display policy rather than sporadic vowel marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "هل تفهمها؟",
+      "approved_english": "Do you understand her?",
+      "approval_note": "Whole-row second pass removed sporadic internal vowel marks; meaning remains 'Do you understand her?'",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 87,
@@ -1440,7 +1439,7 @@
     },
     {
       "rank": 92,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "28be5f88a2ea9a142c1691bf2b245f1cc979e20d994728c5f11c921e56385978",
       "source_target": "و كيف أجبت؟",
       "source_english": "How did you reply?",
@@ -1458,10 +1457,10 @@
           "issue": "Normalize initial conjunction spacing from 'و كيف' to 'وكيف'."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "وكيف أجبت؟",
+      "approved_english": "And how did you reply?",
+      "approval_note": "Whole-row second pass normalized conjunction spacing and aligned the English conjunction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 93,
@@ -1493,7 +1492,7 @@
     },
     {
       "rank": 95,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "3bfd69cc96ae1cce9492bc35141ace873a3229ec28e3af62d98f633fff8c65f4",
       "source_target": "و كيف لي أن أعرف؟",
       "source_english": "How should I know?",
@@ -1511,14 +1510,14 @@
           "issue": "Normalize initial conjunction spacing from 'و كيف' to 'وكيف'."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "وكيف لي أن أعرف؟",
+      "approved_english": "And how should I know?",
+      "approval_note": "Whole-row second pass normalized conjunction spacing and aligned English with the retained conjunction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 96,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "7695fc4dae9f98e3926d6e53b1337cb0e02f592c9ec64c13d5626f6813a0f146",
       "source_target": "و كيف لي أن أعلم؟",
       "source_english": "How should I know?",
@@ -1536,10 +1535,10 @@
           "issue": "Normalize initial conjunction spacing from 'و كيف' to 'وكيف'."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "وكيف لي أن أعلم؟",
+      "approved_english": "And how should I know?",
+      "approval_note": "Whole-row second pass normalized conjunction spacing and aligned English with the retained conjunction.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 97,
@@ -1557,7 +1556,7 @@
     },
     {
       "rank": 98,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "7d3483ecd99d506d344c1be899453aa495497f025e7125ea7c3f9b192f333353",
       "source_target": "كيفَ كانت المدرسة اليوم؟",
       "source_english": "How was school today?",
@@ -1580,10 +1579,10 @@
           "issue": "Mixed partial diacritization is inconsistent across the learner bank; define and apply one display policy rather than sporadic vowel marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كيف كانت المدرسة اليوم؟",
+      "approved_english": "How was school today?",
+      "approval_note": "Whole-row second pass removed sporadic optional vowel mark; meaning remains exact.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 99,
@@ -2326,7 +2325,7 @@
     },
     {
       "rank": 147,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "7c9b09f2b4c8eca7bf9a4361cf0c2eca93d889f00f43d9bc87757b01506b527a",
       "source_target": "إلى أين ستذهب؟",
       "source_english": "Where are you going?",
@@ -2343,10 +2342,10 @@
           "issue": "Future/present English phrasing is context-sensitive; tighten tense/aspect equivalence for standalone learner pairs."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "إلى أين ستذهب؟",
+      "approved_english": "Where will you go?",
+      "approval_note": "Whole-row second pass aligned English future with Arabic ستذهب.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 148,
@@ -2615,7 +2614,7 @@
     },
     {
       "rank": 165,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "55c9568889dbf40e5cfcb1f251036c8c67f3ac4d786e75a23cac0a2f2b7c4029",
       "source_target": "لم نختبئ؟",
       "source_english": "Why are we hiding?",
@@ -2644,14 +2643,14 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا نختبئ؟",
+      "approved_english": "Why are we hiding?",
+      "approval_note": "Whole-row second pass replaced ambiguous unvocalized لم with explicit لماذا.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 166,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "9988b22f9f5ec71a79f0a46c97428da4f744f6a17b72e5ae90a4a8dadabceaf8",
       "source_target": "لم أنت وحدك؟",
       "source_english": "Why are you alone?",
@@ -2680,10 +2679,10 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا أنت وحدك؟",
+      "approved_english": "Why are you alone?",
+      "approval_note": "Whole-row second pass uses explicit لماذا for beginner clarity.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 167,
@@ -2723,7 +2722,7 @@
     },
     {
       "rank": 169,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "6bc9041bbe72046d7c70d3748fe3aa5e526a20749984fca769c6d09d8c7fbcaa",
       "source_target": "لم أنت واقف؟",
       "source_english": "Why are you standing?",
@@ -2752,10 +2751,10 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا أنت واقف؟",
+      "approved_english": "Why are you standing?",
+      "approval_note": "Whole-row second pass uses explicit لماذا for beginner clarity.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 170,
@@ -2801,7 +2800,7 @@
     },
     {
       "rank": 173,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "f79ece562ad268e4901353a52bee08ab907c761315eaa3c1699868c09258a873",
       "source_target": "لم بقيت؟",
       "source_english": "Why did you stay?",
@@ -2830,14 +2829,14 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا بقيت؟",
+      "approved_english": "Why did you stay?",
+      "approval_note": "Whole-row second pass removes ambiguity between interrogative لِمَ and negative particle لم.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 174,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "f00a2549a1dcf34d1ce07be3df309b492da4037b43aa75991eef1a0f04a87b30",
       "source_target": "لم تسأل؟",
       "source_english": "Why do you ask?",
@@ -2866,10 +2865,10 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا تسأل؟",
+      "approved_english": "Why do you ask?",
+      "approval_note": "Whole-row second pass uses explicit لماذا; bilingual meaning remains exact.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 175,
@@ -3058,7 +3057,7 @@
     },
     {
       "rank": 186,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "9799545a6600a07972e294aed46cb878cc461e1a986a356c219bb36cd901897a",
       "source_target": "ماذا فعلت اليوم ؟",
       "source_english": "What did you do today?",
@@ -3076,10 +3075,10 @@
           "issue": "Remove stray spaces before Arabic question marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا فعلت اليوم؟",
+      "approved_english": "What did you do today?",
+      "approval_note": "Whole-row second pass: punctuation-only normalization.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 187,
@@ -3111,7 +3110,7 @@
     },
     {
       "rank": 189,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "88b1c39c744553e952078e33a185f8683ad2957722e8b7139cfa5c960c2a147a",
       "source_target": "لمَ تعمل هنا؟",
       "source_english": "Why do you work here?",
@@ -3140,10 +3139,10 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا تعمل هنا؟",
+      "approved_english": "Why do you work here?",
+      "approval_note": "Whole-row second pass uses explicit لماذا for unvocalized beginner text.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 190,
@@ -3169,7 +3168,7 @@
     },
     {
       "rank": 191,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "fa678a1aea2f1693530f6ffc7411845f9d3aebe4f54fbd1e563d6b2469d37e31",
       "source_target": "أهلاً ، هل تعمل هنا؟",
       "source_english": "Hi! Do you work here?",
@@ -3184,10 +3183,10 @@
           "issue": "Normalize punctuation spacing and Arabic comma conventions."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أهلًا، هل تعمل هنا؟",
+      "approved_english": "Hi! Do you work here?",
+      "approval_note": "Whole-row second pass normalized greeting spelling, Arabic comma, and spacing; English remains compatible.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 192,
@@ -3353,7 +3352,7 @@
     },
     {
       "rank": 203,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c6dfd61ca7cdefae77320af1f7e91a0595603273f4e20fe00fcd471514f5b7db",
       "source_target": "أنتَ كيف عرفتَ ذلك؟",
       "source_english": "How did you know that?",
@@ -3376,10 +3375,10 @@
           "issue": "Mixed partial diacritization is inconsistent across the learner bank; define and apply one display policy rather than sporadic vowel marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "أنت كيف عرفت ذلك؟",
+      "approved_english": "How did you know that?",
+      "approval_note": "Whole-row second pass removed sporadic optional diacritics; sentence remains grammatical and semantically aligned.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 204,
@@ -3397,7 +3396,7 @@
     },
     {
       "rank": 205,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "822432d015645eb2ba8fdf64d6276107fb8d3af90fdd72a5d58067bc6d38b1fd",
       "source_target": "من أينَ تعرف هذا؟",
       "source_english": "How do you know that?",
@@ -3428,10 +3427,10 @@
           "issue": "من أين تعرف/تعلم هذا is literal and less direct than كيف تعرف ذلك؟ for the English 'How do you know that?'; review learner naturalness."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كيف تعرف ذلك؟",
+      "approved_english": "How do you know that?",
+      "approval_note": "Whole-row second pass adopted the audit's direct natural MSA wording and also removes the sporadic partial diacritic issue.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 206,
@@ -3501,7 +3500,7 @@
     },
     {
       "rank": 209,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "ab6c50d08ee80661b5d1409ac646ef9193afb9204ddb8af4b3a5fbe6e19a439c",
       "source_target": "كيفَ تعلمين هذا؟",
       "source_english": "How do you know that?",
@@ -3524,10 +3523,10 @@
           "issue": "Mixed partial diacritization is inconsistent across the learner bank; define and apply one display policy rather than sporadic vowel marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كيف تعلمين هذا؟",
+      "approved_english": "How do you know that?",
+      "approval_note": "Whole-row second pass removed optional vowel marking; feminine addressee meaning remains valid.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 210,
@@ -3581,7 +3580,7 @@
     },
     {
       "rank": 213,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "3babbbe1a51ec5dd0dd9e5c51cbae92caa2a360492423c3f5488e902baa05d32",
       "source_target": "ماذا فَعَلتَ بِالأمس؟",
       "source_english": "What did you do yesterday?",
@@ -3604,10 +3603,10 @@
           "issue": "Mixed partial diacritization is inconsistent across the learner bank; define and apply one display policy rather than sporadic vowel marks."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا فعلت بالأمس؟",
+      "approved_english": "What did you do yesterday?",
+      "approval_note": "Whole-row second pass removed sporadic optional diacritics; bilingual meaning is exact.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 214,
@@ -3653,7 +3652,7 @@
     },
     {
       "rank": 217,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "ef8ee8720d25283009c267bfc40dd16862437af10b22a7bc7818bcdd346878da",
       "source_target": "ماذا تريد بعد؟",
       "source_english": "What else do you want?",
@@ -3668,10 +3667,10 @@
           "issue": "ماذا تريد بعد؟ is less explicit for English 'What else do you want?'; consider ماذا تريد أيضًا؟ or ماذا تريد غير ذلك؟."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ماذا تريد أيضًا؟",
+      "approved_english": "What else do you want?",
+      "approval_note": "Whole-row second pass selected the direct standard-MSA أيضًا option proposed by the audit.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 218,
@@ -3703,7 +3702,7 @@
     },
     {
       "rank": 220,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "e4ee53c06b17ba04107d88feae683ba7432c6c3477b4240035903ec9e2a32900",
       "source_target": "متى ستذهب؟",
       "source_english": "What time are you leaving?",
@@ -3720,10 +3719,10 @@
           "issue": "Future/present English phrasing is context-sensitive; tighten tense/aspect equivalence for standalone learner pairs."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "متى ستذهب؟",
+      "approved_english": "When will you leave?",
+      "approval_note": "Whole-row second pass aligns English future with Arabic ستذهب and uses when rather than the more specific what time.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 221,
@@ -3850,7 +3849,7 @@
     },
     {
       "rank": 228,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "50e07445c7f16d5d42aabad62780957d2419a9c80afd127607387e74ffd35399",
       "source_target": "لم تركتني؟",
       "source_english": "Why did you abandon me?",
@@ -3879,14 +3878,14 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا تركتني؟",
+      "approved_english": "Why did you abandon me?",
+      "approval_note": "Whole-row second pass uses explicit لماذا for beginner clarity.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 229,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "39d8276ceb31069201753d4c7d01c692665b224ec0849dca6e8cacc65a012148",
       "source_target": "لم سألتني؟",
       "source_english": "Why did you ask me?",
@@ -3915,14 +3914,14 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا سألتني؟",
+      "approved_english": "Why did you ask me?",
+      "approval_note": "Whole-row second pass uses explicit لماذا for beginner clarity.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 230,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "370846e2209b4dfd0a3a0541575a25fb55a31bcf682a079fe99627cbc35782c2",
       "source_target": "لم اخترتني؟",
       "source_english": "Why did you choose me?",
@@ -3951,10 +3950,10 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا اخترتني؟",
+      "approved_english": "Why did you choose me?",
+      "approval_note": "Whole-row second pass uses explicit لماذا for beginner clarity.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 231,
@@ -3972,7 +3971,7 @@
     },
     {
       "rank": 232,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "5ad5bcbc834fb6e33b0704d56a57b56f4cbd828997016796892c347e1159d55b",
       "source_target": "لم قلت ذلك؟",
       "source_english": "Why did you say that?",
@@ -4001,14 +4000,14 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا قلت ذلك؟",
+      "approved_english": "Why did you say that?",
+      "approval_note": "Whole-row second pass uses explicit لماذا for beginner clarity.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 233,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "71687325899310ecd4cdad148b99024fb7dfb9b1fa9ab895dec6c9fe3a4b890c",
       "source_target": "لم لم تقبل؟",
       "source_english": "Why didn't you say yes?",
@@ -4045,14 +4044,14 @@
           "issue": "تقبل/توافق mean accept/agree rather than literally 'say yes'; decide whether to align English more literally or replace with a direct نعم construction."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا لم تقبل؟",
+      "approved_english": "Why didn't you accept?",
+      "approval_note": "Whole-row second pass resolves both concerns: explicit لماذا and English accept to match تقبل, avoiding duplication with the direct نعم row.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 234,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "d6c4b5a8fdebb5a75fe4724bdd8839f30afad917ef3039244f30faec3495a8ef",
       "source_target": "لم لم توافق؟",
       "source_english": "Why didn't you say yes?",
@@ -4089,14 +4088,14 @@
           "issue": "تقبل/توافق mean accept/agree rather than literally 'say yes'; decide whether to align English more literally or replace with a direct نعم construction."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا لم توافق؟",
+      "approved_english": "Why didn't you agree?",
+      "approval_note": "Whole-row second pass resolves both concerns: explicit لماذا and English agree to match توافق.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 235,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "3a1513568aa7c6cdefe44acfb0574a99d6c572ae2b25db7185c1d26695af6792",
       "source_target": "لم لم تقل نعم؟",
       "source_english": "Why didn't you say yes?",
@@ -4125,10 +4124,10 @@
           "issue": "Short لِمَ forms are inconsistently written without disambiguating vowel marks; for unvocalized beginner material, لماذا is often clearer."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا لم تقل نعم؟",
+      "approved_english": "Why didn't you say yes?",
+      "approval_note": "Whole-row second pass uses explicit لماذا while preserving the direct 'say yes' pair.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 236,
@@ -4188,7 +4187,7 @@
     },
     {
       "rank": 240,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "10daddcef40172e4070306f81786bc37d8ee59aac42d027d7210036665d66e89",
       "source_target": "لماذا لا تحبني",
       "source_english": "Why don't you like me?",
@@ -4203,10 +4202,10 @@
           "issue": "Missing Arabic question mark."
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "لماذا لا تحبني؟",
+      "approved_english": "Why don't you like me?",
+      "approval_note": "Whole-row second pass adds the required Arabic question mark; bilingual meaning is sound.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 241,
@@ -4297,7 +4296,7 @@
     },
     {
       "rank": 245,
-      "status": "NATIVE_REVIEW",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "def66b281bfdf832543d73a212d59020f7fd25528f82dc94949329b0d5d1b03b",
       "source_target": "نحن مجازون من المدرسة غدًا.",
       "source_english": "We have no school tomorrow.",
@@ -4312,10 +4311,10 @@
           "issue": "نحن مجازون من المدرسة غدًا is understandable but stiff; prefer a more natural standalone learner sentence for 'We have no school tomorrow.'"
         }
       ],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "ليس لدينا دوام في المدرسة غدًا.",
+      "approved_english": "We have no school tomorrow.",
+      "approval_note": "Whole-row second pass uses a natural MSA school-attendance expression while preserving the intended English meaning.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_008_native_deterministic_001_250.json"
     },
     {
       "rank": 246,
@@ -5630,7 +5629,7 @@
     },
     {
       "rank": 319,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "c728b5e2363ccf4e07ec468c6a9cfa88784ad4ceabfd4343da7c03f231a4618a",
       "source_target": "كيف أمكنك تجاهل ذلك؟",
       "source_english": "How could you not notice?",
@@ -5647,10 +5646,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "كيف أمكنك ألا تلاحظ ذلك؟",
+      "approved_english": "How could you not notice?",
+      "approval_note": "Approved only after second-pass amendment restored the modal could nuance and distinguished failure to notice from deliberate ignoring.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_007_amended_second_pass.json"
     },
     {
       "rank": 320,
@@ -6676,7 +6675,7 @@
     },
     {
       "rank": 363,
-      "status": "CORRECT_PENDING_SECOND_PASS",
+      "status": "CORRECT_APPROVED",
       "audit_fingerprint": "a26b8630daacb17f13e59b3d7bad00ae9c6ebf2cc368e70e7d42803aa3b2df3b",
       "source_target": "من أين يأتي الصّبيان؟",
       "source_english": "Where do babies come from?",
@@ -6693,10 +6692,10 @@
         }
       ],
       "editorial_flags": [],
-      "approved_target": null,
-      "approved_english": null,
-      "approval_note": null,
-      "approval_source": null
+      "approved_target": "من أين يأتي الرضّع؟",
+      "approved_english": "Where do babies come from?",
+      "approval_note": "Approved only after second-pass amendment replaced the overly broad children term with الرضّع for babies/infants.",
+      "approval_source": "curation/language-workbooks/v1.0/approvals/arabic_007_amended_second_pass.json"
     },
     {
       "rank": 364,
