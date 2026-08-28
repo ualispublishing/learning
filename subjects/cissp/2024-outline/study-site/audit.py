@@ -153,6 +153,28 @@ check(release.get("project_id")=="CISSP-ATLAS" and release.get("status")=="READY
 check(rs.get("domains")==8 and rs.get("numbered_objectives")==62 and rs.get("subtopic_checks")==subtopics and rs.get("ai_coverage_areas")==ai_areas and rs.get("layered_cards")==cards and rs.get("standard_scenario_questions")==standard and rs.get("bellringers")==bell_count and rs.get("question_bank_records")==bank and rs.get("semantic_items_reviewed")==sem_count and rs.get("sources")==sources and rs.get("official_weight_total_percent")==100,"Release scope drift")
 check(rs.get("released_difficulty_distribution")=={k:dist.get(k,0) for k in ("F","E","S","B")},"Release difficulty distribution drift")
 
+# Learner-facing documentation and continuation routing must not lag the release ledger.
+try:
+    readme=read(ROOT/"README.md")
+    tomorrow=read(ROOT/"TOMORROW_START.md")
+    precision=read(ROOT/"PRECISION_AUDIT.md")
+    tracks=json.loads(read(ROOT.parents[3]/"PROJECT_TRACKS.json"))
+except (OSError,ValueError) as e:
+    errors.append(f"Release documentation freshness setup error: {e}")
+else:
+    doc_markers={
+        "README.md":[f"v{version}",f"{standard} released standard scenario questions + {bell_count} Bellringer = {bank} released bank records",f"{sem_count} learner-facing item IDs"],
+        "TOMORROW_START.md":[f"v{version}",f"{standard} released standard scenario questions + {bell_count} Bellringer = {bank} question-bank records",f"{sem_count} semantically reviewed learner-facing item IDs"],
+        "PRECISION_AUDIT.md":[f"v{version}",f"{standard} released standard scenario questions",f"{bank} total released question-bank records",f"{sem_count} learner-facing item IDs"],
+    }
+    for name,text in (("README.md",readme),("TOMORROW_START.md",tomorrow),("PRECISION_AUDIT.md",precision)):
+        for marker in doc_markers[name]: check(marker in text,f"{name} release marker stale/missing: {marker}")
+    cscope=tracks.get("tracks",{}).get("CISSP-ATLAS",{}).get("current_scope",{})
+    check(cscope.get("version")==version,"PROJECT_TRACKS CISSP version drift")
+    check(cscope.get("domains")==8 and cscope.get("objectives")==62 and cscope.get("subtopic_checks")==subtopics and cscope.get("ai_coverage_areas")==ai_areas and cscope.get("layered_cards")==cards,"PROJECT_TRACKS CISSP knowledge-count drift")
+    check(cscope.get("released_standard_questions")==standard and cscope.get("released_bellringers")==bell_count and cscope.get("released_bank_records")==bank and cscope.get("semantic_items_reviewed")==sem_count,"PROJECT_TRACKS CISSP release-count drift")
+    check(cscope.get("released_question_difficulty")=={k:dist.get(k,0) for k in ("F","E","S","B")},"PROJECT_TRACKS CISSP difficulty drift")
+
 expected_semantic={*(f"OBJ-{o['id']}" for o in objectives),*(h["id"] for h in high),*(q["id"] for q in base),*(q["id"] for q in released)}
 allowed={"VERIFIED","VERIFIED_AFTER_CORRECTION","VERIFIED_WITH_SOURCE_SCOPE_NOTE"}
 check(semantic_base.get("audit_date")=="2026-08-24","Semantic base audit date drift")
