@@ -1,8 +1,8 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "batch_id": "025",
   "reviewed_on": "2026-08-28",
-  "status": "SEMANTIC_REVIEWED_CANDIDATE_PENDING_NATIVE_PR_GATE",
+  "status": "SEMANTIC_REVIEWED_CANDIDATE_NATIVE_PR_GATE_PASS_PENDING_FINAL_HEAD_REVALIDATION",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -33,17 +33,55 @@
     "four_option_rationales_complete": true,
     "originality_provenance_complete": true,
     "external_question_seeds_used": 0,
-    "status": "PENDING_AUTOMATED_ORIGINALITY_AND-REPOSITORY-GATE"
+    "status": "PASS"
+  },
+  "native_pr_validation": {
+    "pull_request": 96,
+    "initial_workflow_run_id": 33195203297,
+    "initial_result": "FAIL_METADATA_ONLY",
+    "initial_issue": "C-395 used noncanonical subtopic shorthand 'east-west flows' instead of registered label 'north-south and east-west flows'. No semantic, keyed-answer, originality, or scenario-logic defect was identified.",
+    "corrected_head_sha": "4cfcc5fe867a780bfdb2caa599b16aaaa70daf9d",
+    "corrected_workflow_run_id": 33195497272,
+    "corrected_result": "PASS",
+    "quality_gate": "PASS",
+    "quality_gate_warnings": 0,
+    "logical_batch_mix": "PASS",
+    "planning": "PASS",
+    "syntax": "PASS",
+    "legacy_rationales": "PASS",
+    "static_assets": "PASS",
+    "browser_smoke": "PASS",
+    "aggregate_gate": "PASS",
+    "released_mcq_compared": 447,
+    "released_bellringers_compared": 1,
+    "candidate_records": 16,
+    "explicit_subtopic_tags_if_promoted": "303/344"
   },
   "current_source_check": {
     "isc2_outline_effective_date": "2024-04-15",
     "isc2_outline_rechecked_on": "2026-08-28",
     "isc2_outline_status": "Current public ISC2 CISSP outline remains the scope authority; domain weights remain 16/10/13/13/13/12/13/10.",
-    "registered_supporting_sources_used": ["NIST_800_53","NIST_CSF2","NIST_800_61_3","NIST_800_86","NIST_800_34","NIST_800_115","NIST_800_207","NIST_800_63_4","SAML2_CORE","OWASP_ASVS"]
+    "registered_supporting_sources_used": ["NIST_800_53","NIST_CSF2","NIST_800_61_3","NIST_800_86","NIST_800_34","NIST_800_115","NIST_800_207","NIST_800_63_4","SAML2_CORE","OWASP_ASVS"],
+    "targeted_second_pass": [
+      "C-392 media protection and transport/custody behavior checked against current registered NIST media/control guidance.",
+      "C-394 emergency/risk-based patching logic checked against NIST SP 800-40 Rev. 4 and SP 1800-31.",
+      "C-397 containment/evidence/recovery sequencing checked against NIST incident-response/forensics guidance.",
+      "C-398 external dependency/RTO logic checked against NIST contingency-planning/BIA guidance.",
+      "C-402 workload-identity/least-privilege logic checked against NIST cloud-native zero-trust guidance.",
+      "C-406 SAML service-provider session invalidation distinction checked against OASIS SAML 2.0 Core logout/session rules."
+    ]
+  },
+  "next_planner_preview_if_promoted": {
+    "size": 16,
+    "difficulty_distribution": {"E":12,"S":4},
+    "primary_domain_distribution": {"2":4,"4":1,"5":3,"6":3,"7":3,"8":2},
+    "objective_targets": ["5.4","7.1","7.2","2.5","7.10","5.2","6.5","8.3","6.3","4.1","5.5","8.5","6.2","2.1","2.2","2.4"],
+    "boundary": "Planner preview from corrected candidate PR; becomes authoritative only after candidate promotion and released-only remeasurement."
   },
   "notes": [
     "Candidate wording was authored from public scope and registered standards only; no exam dump, live-item recollection, commercial question, or external question seed was used.",
     "Difficulty labels are internal authoring tiers and do not claim ISC2 psychometric equivalence.",
-    "This review file records the manual semantic pass before automated repository-wide originality, structure, planning, static, and browser gates. It is not release authorization."
+    "The only initial automated-gate defect was one noncanonical metadata label on C-395; it was corrected without changing the scenario, answer key, rationale logic, or intended learning objective.",
+    "This review file records candidate validation evidence only. Batch 025 remains unreleased until final-head PR revalidation, exact-main validation, and released-only Pages isolation pass."
   ]
 }
