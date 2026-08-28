@@ -19,7 +19,7 @@ The site remains mapped to the current public ISC2 CISSP exam outline, effective
 - **448 total released question-bank records**.
 - **447/447** released standard questions have four-option teaching rationales.
 - **20** primary/reference sources.
-- **588** learner-facing item IDs represented across `SEMANTIC_ITEM_AUDIT.json` and `SEMANTIC_RELEASE_ADDITIONS.json`.
+- 588 learner-facing item IDs represented across `SEMANTIC_ITEM_AUDIT.json` and `SEMANTIC_RELEASE_ADDITIONS.json`.
 
 Released author-difficulty distribution is **F41 / E309 / S97 / B1**. Difficulty labels are an authoring/calibration scale rather than an empirically equated promise of live-exam difficulty.
 
