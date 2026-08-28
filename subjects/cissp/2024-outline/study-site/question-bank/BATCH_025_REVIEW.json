@@ -1,8 +1,8 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "batch_id": "025",
   "reviewed_on": "2026-08-28",
-  "status": "SEMANTIC_REVIEWED_AWAITING_NATIVE_PR_GATE",
+  "status": "SEMANTIC_REVIEWED_GATE_PASSED_AWAITING_FINAL_HEAD_REVALIDATION",
   "records": 16,
   "standard_mcq": 16,
   "bellringers": 0,
@@ -55,35 +55,78 @@
   "stretch_items": ["C-395","C-399","C-403","C-407"],
   "current_source_check": {
     "isc2_outline_effective_date": "2024-04-15",
-    "isc2_outline_status": "Uses the current public CISSP outline and the existing v1.22 registered source set; no new source identifier introduced.",
+    "isc2_outline_status": "Uses the current public CISSP outline and the existing v1.22 registered source set.",
+    "nist_800_63_4_traceability_enrichment": "C-401 now includes the already-registered NIST_800_63_4 source for hardware-backed non-exportable authentication-key guidance.",
     "source_registry_changed": false
   },
+  "corrective_history": {
+    "initial_pr_number": 95,
+    "initial_pr_head_sha": "3e1a29abbddcc8667abc7497ebb10fd1dba79f24",
+    "initial_pr_base_sha": "c917d7b4d2d086df72ed512b6fcbcff98f2f974b",
+    "initial_pr_merge_ref_sha": "16ef1e9b86c1c013e1187df68de564e993d8ffe1",
+    "initial_pr_workflow_run_id": 33194953107,
+    "initial_result": "FAIL_QUALITY_ONLY",
+    "initial_failure": "C-404 difficulty score 70 was outside the configured E range",
+    "initial_other_gates": "PASS",
+    "initial_coverage_measurement": "303/344",
+    "correction": "C-404 difficulty_score changed 70 to 69; C-401 source traceability enriched with existing NIST_800_63_4 source identifier",
+    "difficulty_correction_commit_sha": "162a93b37c95a43ddc36a8777b18d2405478507c",
+    "source_traceability_commit_sha": "30e5ee41c7df9ee87a4d6b3d6ca50b7f214cc1fb"
+  },
   "gate_state": {
-    "native_candidate_pr": "PENDING",
-    "native_pr_workflow_run_id": "PENDING",
+    "native_candidate_pr": 95,
+    "validation_evidence_type": "native-pr-corrective-rerun-awaiting-ledger-head-revalidation",
+    "corrected_pr_workflow_run_id": 33195399980,
+    "corrected_pr_head_sha": "30e5ee41c7df9ee87a4d6b3d6ca50b7f214cc1fb",
+    "corrected_pr_base_sha": "57b4622903f7289467dcbac5a13c970e2f32d7f2",
+    "corrected_pr_merge_ref_sha": "f8c751776d94c959acbca0bcc4f1bf27fa76a809",
     "quality_gate_mode": "released+candidate",
-    "quality_gate_warnings": "PENDING",
-    "logical_batch_mix": "PENDING",
-    "deterministic_knowledge_audit": "PENDING",
-    "planning_gate": "PENDING",
-    "javascript_syntax": "PENDING",
-    "legacy_rationales": "PENDING",
-    "static_asset_serving": "PENDING",
-    "browser_smoke": "PENDING",
-    "aggregate_gate": "PENDING",
+    "released_mcq_compared": 447,
+    "released_bellringers_compared": 1,
+    "candidate_records": 16,
+    "candidate_difficulty_distribution": {"F":0,"E":12,"S":4,"B":0},
+    "quality_gate_warnings": 0,
+    "logical_batch_mix": "PASS",
+    "deterministic_knowledge_audit": "PASS",
+    "planning_gate": "PASS",
+    "javascript_syntax": "PASS",
+    "legacy_rationales": "PASS",
+    "static_asset_serving": "PASS",
+    "browser_smoke": "PASS",
+    "browser_smoke_workflows": ["startup","review","practice","progress","sources","navigation"],
+    "aggregate_gate": "PASS",
+    "final_ledger_head_revalidation": "PENDING",
     "released": false
   },
   "coverage_effect": {
     "explicit_subtopic_tags_before": 302,
-    "explicit_subtopic_tags_after_candidate": "PENDING_EXECUTABLE_MEASUREMENT",
+    "explicit_subtopic_tags_after_candidate": 303,
+    "explicit_subtopic_tags_added": 1,
+    "explicit_subtopic_tags_unexposed_after_candidate": 41,
     "total_mapped_subtopics": 344,
-    "boundary": "No breadth increase is claimed before coverage_report.py measures the exact candidate state. The batch deliberately uses canonical subtopic labels from coverage-detail.js and targets the verified v1.22 planner slate."
+    "candidate_state_measured_in_workflow_run_id": 33195399980,
+    "boundary": "Executable coverage_report.py measured a real candidate-inclusive increase from 302/344 to 303/344 explicit enriched-subtopic labels. This remains an authoring metadata metric, not a learner-mastery claim."
+  },
+  "candidate_inclusive_planning": {
+    "records": 464,
+    "difficulty": {"F":41,"E":321,"S":101,"B":1},
+    "remaining_if_promoted": {"F":79,"E":159,"S":59,"B":39}
+  },
+  "next_planner_slate_if_promoted": {
+    "basis_workflow_run_id": 33195399980,
+    "status": "AUTHORING_RECOMMENDATION_NOT_RELEASE_AUTHORIZATION",
+    "difficulty_distribution": {"E":12,"S":4},
+    "primary_domain_distribution": {"1":0,"2":4,"3":0,"4":1,"5":3,"6":3,"7":3,"8":2},
+    "objective_targets": ["5.4","7.1","7.2","2.5","7.10","5.2","6.5","8.3","6.3","4.1","5.5","8.5","6.2","2.1","2.2","2.4"]
   },
   "notes": [
     "Batch 025 follows the exact verified-v1.22 planner slate emitted by workflow 33192924868.",
     "Primary-domain count peaks at D7=5/16 (31.25%), below the configured 35% cap. Stretch items are C-395, C-399, C-403, and C-407.",
-    "The semantic review found zero answer-key conflicts, zero objective/source mapping conflicts, zero remaining material factual errors, and complete four-option rationales.",
+    "Initial native PR audit 33194953107 passed deterministic, logical-mix, planning, syntax, rationale, static, and browser gates but correctly rejected C-404 because E difficulty score 70 exceeded the configured E range.",
+    "C-404 was corrected to score 69 without changing its tier, stem, answer, explanation, objective, or scenario family. C-401 also received an already-registered NIST_800_63_4 source for tighter TPM traceability.",
+    "Corrective native PR audit 33195399980 passed every CISSP gate: released_mcq=447, released_bellringers=1, candidates=16, E12/S4, warnings=0, browser smoke PASS, aggregate PASS.",
+    "Executable candidate-inclusive coverage increased from 302/344 to 303/344 explicit enriched-subtopic labels, leaving 41 unexposed labels.",
     "No external question bank, live-item recollection, exam dump, or commercial-question wording/template was used. Difficulty remains an internal authoring scale and does not claim ISC2 psychometric equivalence.",
-    "Batch 025 remains unreleased until native PR validation, exact-main validation, released-only Pages isolation, and later release-promotion gates pass."
+    "This evidence-ledger commit itself requires one exact native PR revalidation before merge. Batch 025 remains unreleased."
   ]
 }
