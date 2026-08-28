@@ -12,6 +12,8 @@ on:
 permissions:
   contents: read
 
+# Permanent pre-render guard: a row-level approval is not sufficient if a final
+# correction collides with, or was copied from, a different audited rank.
 jobs:
   audit:
     runs-on: ubuntu-latest
