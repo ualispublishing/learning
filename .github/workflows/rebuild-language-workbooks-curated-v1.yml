@@ -1,0 +1,152 @@
+name: Rebuild curated language workbooks v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "curation/language-workbooks/v1.0/arabic_sentence_row_decisions.json"
+      - "curation/language-workbooks/v1.0/french_sentence_row_decisions.json"
+      - "curation/language-workbooks/v1.0/urdu_sentence_row_decisions.json"
+      - "scripts/build_language_workbooks_from_decisions_v1.py"
+      - "scripts/verify_curated_workbook_production_v1.py"
+      - "scripts/language_workbook_pronunciation.py"
+      - "scripts/build_language_workbooks_v1.py"
+      - ".github/workflows/rebuild-language-workbooks-curated-v1.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: curated-language-workbooks-v1
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PDF and font dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            fonts-dejavu-core \
+            fonts-noto-core \
+            fonts-noto-extra \
+            fontconfig \
+            poppler-utils
+          python -m pip install --upgrade pip
+          python -m pip install pypdf weasyprint
+          fc-cache -f
+
+      - name: Render from final decision ledgers
+        run: python scripts/build_language_workbooks_from_decisions_v1.py
+
+      - name: Verify exact production alignment
+        run: python scripts/verify_curated_workbook_production_v1.py
+
+      - name: PDF structural and render smoke tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t pdfs < <(find completed/languages/workbooks/v1.0 -mindepth 2 -maxdepth 2 -type f -name '*.pdf' | sort)
+          if [ "${#pdfs[@]}" -ne 42 ]; then
+            echo "Expected 42 PDFs, found ${#pdfs[@]}"
+            exit 1
+          fi
+          for pdf in "${pdfs[@]}"; do
+            pdfinfo "$pdf" >/dev/null
+          done
+
+          rm -rf /tmp/workbook-render-smoke
+          mkdir -p /tmp/workbook-render-smoke
+          for lang in arabic french urdu; do
+            count="$(find "completed/languages/workbooks/v1.0/$lang" -maxdepth 1 -type f -name '*.pdf' | wc -l)"
+            if [ "$count" -ne 14 ]; then
+              echo "$lang: expected 14 PDFs, found $count"
+              exit 1
+            fi
+            master="completed/languages/workbooks/v1.0/$lang/00_${lang}_complete_master.pdf"
+            pdftoppm -f 1 -l 1 -singlefile -png -r 120 \
+              "$master" "/tmp/workbook-render-smoke/${lang}-master-page1"
+            test -s "/tmp/workbook-render-smoke/${lang}-master-page1.png"
+          done
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          out = Path("audit/language-workbooks/v1.0/pdf_render_smoke.json")
+          previews = sorted(Path("/tmp/workbook-render-smoke").glob("*-master-page1.png"))
+          payload = {
+              "gate": "PASS",
+              "pdfinfo_checked_pdfs": 42,
+              "master_first_pages_rendered": len(previews),
+              "languages": ["arabic", "french", "urdu"],
+              "renderer": "poppler pdftoppm",
+          }
+          if len(previews) != 3:
+              raise SystemExit("expected three rendered master previews")
+          out.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+          print(json.dumps(payload, indent=2))
+          PY
+
+      - name: Upload master-page render previews
+        uses: actions/upload-artifact@v4
+        with:
+          name: language-workbook-master-render-smoke
+          path: /tmp/workbook-render-smoke/*.png
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Commit verified production candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          for f in \
+            curation/language-workbooks/v1.0/arabic_sentence_row_decisions.json \
+            curation/language-workbooks/v1.0/french_sentence_row_decisions.json \
+            curation/language-workbooks/v1.0/urdu_sentence_row_decisions.json
+          do
+            sha256sum "$f"
+          done > /tmp/local-decision-hashes.txt
+
+          git fetch origin main
+          : > /tmp/remote-decision-hashes.txt
+          for f in \
+            curation/language-workbooks/v1.0/arabic_sentence_row_decisions.json \
+            curation/language-workbooks/v1.0/french_sentence_row_decisions.json \
+            curation/language-workbooks/v1.0/urdu_sentence_row_decisions.json
+          do
+            git show "origin/main:$f" | sha256sum | awk -v path="$f" '{print $1 "  " path}'
+          done >> /tmp/remote-decision-hashes.txt
+
+          if ! diff -u /tmp/local-decision-hashes.txt /tmp/remote-decision-hashes.txt; then
+            echo "Decision ledgers changed during the build; refusing to publish stale PDFs."
+            exit 1
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add completed/languages/workbooks/v1.0 audit/language-workbooks/v1.0
+
+          if git diff --cached --quiet; then
+            echo "Verified build produced no repository changes."
+            exit 0
+          fi
+
+          git commit -m "Rebuild language workbooks from final row decisions"
+          git rebase origin/main
+          git push origin HEAD:main
