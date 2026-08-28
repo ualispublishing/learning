@@ -1,5 +1,5 @@
 {
-  "schema_version": 5,
+  "schema_version": 6,
   "batch_id": "024",
   "reviewed_on": "2026-08-27",
   "status": "SEMANTIC_REVIEWED_GATE_PASSED_MAIN_VERIFIED",
@@ -49,7 +49,7 @@
   "gate_state": {
     "candidate_validation_pr": 88,
     "pr_event_registration": "REGISTERED",
-    "validation_evidence_type": "native-pr-initial-plus-native-final-head-plus-exact-post-merge-main-plus-pages-isolation",
+    "validation_evidence_type": "native-pr-initial-plus-native-final-head-plus-exact-post-merge-main-plus-pages-isolation-plus-final-bookkeeping",
     "initial_native_pr_workflow_run_id": 33114317762,
     "initial_native_pr_branch_head_sha": "17ab98f5f5e608e96492e9296ccd12cc47bc86f3",
     "initial_native_pr_base_sha": "8ff1790316147a6c214a009b1b1fb01506b82073",
@@ -59,6 +59,10 @@
     "candidate_merge_commit_sha": "c2582fb22c88311659f90160e2dfe31e1d52a5ef",
     "post_merge_main_workflow_run_id": 33114992526,
     "pages_isolation_workflow_run_id": 33114992602,
+    "final_bookkeeping_pr": 89,
+    "final_bookkeeping_merge_commit_sha": "a9791b2ef564241a4cf45481ea54c077ea350041",
+    "final_bookkeeping_audit_workflow_run_id": 33116114863,
+    "final_bookkeeping_pages_workflow_run_id": 33116114793,
     "quality_gate_mode": "released+candidate",
     "released_mcq_compared": 431,
     "released_bellringers_compared": 1,
@@ -76,11 +80,14 @@
     "aggregate_gate": "PASS",
     "promotion_allowed": true,
     "candidate_state_verified_on_main": true,
+    "final_bookkeeping_state_verified_on_main": true,
     "released": false
   },
   "public_isolation_evidence": {
-    "pages_workflow_run_id": 33114992602,
-    "workflow_head_sha": "c2582fb22c88311659f90160e2dfe31e1d52a5ef",
+    "candidate_pages_workflow_run_id": 33114992602,
+    "candidate_main_sha": "c2582fb22c88311659f90160e2dfe31e1d52a5ef",
+    "final_bookkeeping_pages_workflow_run_id": 33116114793,
+    "final_bookkeeping_main_sha": "a9791b2ef564241a4cf45481ea54c077ea350041",
     "released_corpus_audit": "PASS",
     "released_only_quality_warnings": 0,
     "browser_runtime": "PASS",
@@ -98,6 +105,7 @@
     "explicit_subtopic_tags_after_candidate": 302,
     "total_mapped_subtopics": 344,
     "candidate_state_measured_in_workflow_run_id": 33114992526,
+    "final_bookkeeping_state_revalidated_in_workflow_run_id": 33116114863,
     "boundary": "Batch 024 improves scenario depth and objective balance but does not increase the distinct explicit enriched-subtopic tag count: 302/344 before and after candidate inclusion. This is an authoring metadata metric, not a learner-mastery claim."
   },
   "next_planner_slate_if_promoted": {
@@ -113,8 +121,9 @@
     "Initial native PR audit 33114317762 and final ledger-synchronized PR audit 33114657301 both passed every CISSP gate with zero quality warnings.",
     "PR #88 merged the unreleased candidate state as c2582fb22c88311659f90160e2dfe31e1d52a5ef. Exact-main audit 33114992526 passed every CISSP gate, including exhaustive originality, browser smoke, and aggregate enforcement.",
     "Pages isolation run 33114992602 live-verified v1.21.0 with 431 standard questions, 376 manifest released records, 1 Bellringer, released_only=true, and unreleased candidate URLs excluded from the public artifact.",
+    "Final candidate-evidence bookkeeping PR #89 merged as a9791b2ef564241a4cf45481ea54c077ea350041; exact-main audit 33116114863 and Pages run 33116114793 both passed, with the public fingerprint still v1.21.0 / 431 standard / 376 manifest records / 1 Bellringer / released_only=true.",
     "Executable candidate-inclusive coverage remains 302/344 explicit enriched subtopics. No breadth increase is claimed; the batch improves scenario depth and objective distribution.",
     "No external question bank, live-item recollection, exam dump, or commercial-question wording/template was used. Difficulty remains an internal authoring scale and does not claim ISC2 psychometric equivalence.",
-    "Batch 024 is eligible for a separate release-promotion PR but remains unreleased until that released-state PR and all post-merge release gates pass."
+    "Batch 024 is eligible for a separate v1.22 release-promotion PR but remains unreleased until that released-state PR and all post-merge release gates pass."
   ]
 }
