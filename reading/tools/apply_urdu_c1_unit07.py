@@ -33,6 +33,43 @@ def dump_json(path, obj):
     path.write_text(json.dumps(obj, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+
+def repair_known_target_collision(existing):
+    passage = PASSAGES[2]
+    target = passage["new_lexical_targets"][0]
+    if target["id"] != "ur-rank-1978":
+        return
+    prior_forms = {t["form"] for p in existing for t in p.get("new_lexical_targets", [])}
+    candidates = [
+        ("راوی", "the narrator or narrative voice presenting the scene", "متن میں واقعات یا مشاہدات پیش کرنے والی آواز۔"),
+        ("منظر", "a scene presented for close literary reading", "متن میں پیش کیا گیا وہ حصہ یا صورتِ حال جسے قاری تفصیل سے دیکھتا ہے۔"),
+        ("خاموشی", "meaningful silence used as a literary device", "وہ خاموش کیفیت جو متن میں محض آواز کی عدم موجودگی نہیں بلکہ معنی پیدا کرے۔"),
+        ("اشارہ", "an indirect textual cue that guides interpretation", "متن میں ایسا غیر مستقیم قرینہ جو کسی معنی یا امکان کی طرف رہنمائی کرے۔"),
+        ("فضا", "the atmosphere or mood created by textual details", "تفصیلات سے پیدا ہونے والی مجموعی ادبی کیفیت یا ماحول۔"),
+    ]
+    for i, (form, sense, answer) in enumerate(candidates, 1):
+        count = passage["text"].count(form)
+        if count >= 2 and form not in prior_forms:
+            tid = f"ur-u07-beyond-p03-{i:02d}"
+            passage["new_lexical_targets"] = [{
+                "id": tid,
+                "form": form,
+                "lemma": form,
+                "part_of_speech": "noun",
+                "intended_sense": sense,
+                "register": "literary/critical",
+                "context_strategy": ["evidence_interpretation"],
+                "first_introduced": True,
+                "exposures_in_text": count,
+                "beyond_base": True,
+                "variety": "standard Urdu",
+            }]
+            passage["questions"][9]["prompt"] = f"یہاں {form} سے کیا مراد ہے؟"
+            passage["questions"][9]["target_ids"] = [tid]
+            passage["answer_key"][9]["answer"] = answer
+            return
+    raise SystemExit("FAIL CLOSED: no fresh repeated literary target available for Unit 7 passage 39")
+
 def validate_passages(existing):
     assert [p["id"] for p in PASSAGES] == EXPECTED_IDS
     assert [p["sequence"] for p in PASSAGES] == EXPECTED_SEQ
@@ -102,9 +139,9 @@ def update_state():
         reps = {
             "Canonical generated total: **996**":"Canonical generated total: **1002**",
             "Urdu: **276/360**":"Urdu: **282/360**",
+            "**Urdu C1 Unit 7 / sequence 37** using the C1 Unit 7 roadmap theme `literature and cultural criticism`":"**Urdu C1 Unit 8 / sequence 43** using the C1 Unit 8 roadmap theme `economics, risk, and forecasting`",
             "Unit 7 / sequence 37":"Unit 8 / sequence 43",
             "C1 Unit 7 uses the roadmap theme **literature and cultural criticism** with `critical essay`, `review`, and `close-reading style prose` genres.":"C1 Unit 8 uses the roadmap theme **economics, risk, and forecasting** with `analysis`, `briefing`, and `scenario comparison` genres.",
-            "**Urdu C1 Unit 7 / sequence 37** using the C1 Unit 7 roadmap theme `literature and cultural criticism`":"**Urdu C1 Unit 8 / sequence 43** using the C1 Unit 8 roadmap theme `economics, risk, and forecasting`"
         }
         for old,new in reps.items():
             assert old in hand
@@ -116,6 +153,8 @@ def main():
     existing = [json.loads(line) for line in CANON.read_text(encoding="utf-8").splitlines() if line.strip()]
     seqs = [p["sequence"] for p in existing]
     ids = [p["id"] for p in existing]
+    baseline_targets = existing[:-6] if seqs == list(range(1,43)) and ids[-6:] == EXPECTED_IDS else existing
+    repair_known_target_collision(baseline_targets)
     if seqs == list(range(1,37)):
         target_ids = validate_passages(existing)
         with CANON.open("a", encoding="utf-8") as f:
