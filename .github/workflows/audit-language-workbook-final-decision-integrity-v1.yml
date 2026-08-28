@@ -1,0 +1,38 @@
+name: Audit language workbook final decision integrity
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/audit_language_workbook_final_decision_integrity_v1.py"
+      - "curation/language-workbooks/v1.0/*_sentence_row_decisions.json"
+      - ".github/workflows/audit-language-workbook-final-decision-integrity-v1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run integrity audit
+        id: audit
+        continue-on-error: true
+        run: python scripts/audit_language_workbook_final_decision_integrity_v1.py
+      - name: Upload full integrity report
+        uses: actions/upload-artifact@v4
+        with:
+          name: language-workbook-final-decision-integrity
+          path: audit/language-workbooks/v1.0/final_decision_integrity_audit.json
+          if-no-files-found: error
+          retention-days: 14
+      - name: Enforce integrity gate
+        if: steps.audit.outcome != 'success'
+        run: |
+          echo "Final decision integrity audit failed; production remains blocked."
+          exit 1
