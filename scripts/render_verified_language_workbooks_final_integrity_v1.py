@@ -59,3 +59,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+# Integrity-review batches intentionally trigger the guarded workflow through this stable production entrypoint.
