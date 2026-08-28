@@ -1,4 +1,4 @@
-name: Diagnose language workbook final-decision duplicates
+name: Diagnose language workbook final-decision integrity
 
 on:
   workflow_dispatch:
@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - "scripts/diagnose_language_workbook_decision_duplicates_v1.py"
+      - "scripts/audit_language_workbook_final_decision_integrity_v1.py"
       - ".github/workflows/diagnose-language-workbook-decision-duplicates-v1.yml"
 
 permissions:
@@ -19,4 +20,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python scripts/diagnose_language_workbook_decision_duplicates_v1.py
+      - name: Run compact duplicate diagnostic
+        run: python scripts/diagnose_language_workbook_decision_duplicates_v1.py
+      - name: Run full cross-rank integrity audit
+        id: integrity
+        continue-on-error: true
+        run: python scripts/audit_language_workbook_final_decision_integrity_v1.py
+      - name: Upload integrity report
+        uses: actions/upload-artifact@v4
+        with:
+          name: language-workbook-final-decision-integrity
+          path: audit/language-workbooks/v1.0/final_decision_integrity_audit.json
+          if-no-files-found: error
+          retention-days: 14
+      - name: Enforce integrity gate
+        if: steps.integrity.outcome != 'success'
+        run: exit 1
