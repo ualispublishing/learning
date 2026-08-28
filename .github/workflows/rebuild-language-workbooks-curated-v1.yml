@@ -9,6 +9,9 @@ on:
       - "curation/language-workbooks/v1.0/arabic_sentence_row_decisions.json"
       - "curation/language-workbooks/v1.0/french_sentence_row_decisions.json"
       - "curation/language-workbooks/v1.0/urdu_sentence_row_decisions.json"
+      - "curation/language-workbooks/v1.0/final_integrity_overrides/**"
+      - "scripts/language_workbook_final_integrity_v1.py"
+      - "scripts/render_verified_language_workbooks_final_integrity_v1.py"
       - "scripts/build_language_workbooks_from_decisions_v1.py"
       - "scripts/verify_curated_workbook_production_v1.py"
       - "scripts/language_workbook_pronunciation.py"
@@ -38,6 +41,37 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Compile source-locked final integrity review
+        run: python scripts/language_workbook_final_integrity_v1.py
+
+      - name: Publish integrity review queue before any render
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            audit/language-workbooks/v1.0/final_integrity_review_queue.json \
+            audit/language-workbooks/v1.0/final_integrity_review_summary.json
+          if git diff --cached --quiet; then
+            echo "Integrity review outputs already current."
+            exit 0
+          fi
+          git commit -m "Refresh language workbook final integrity queue"
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            if git rebase origin/main && git push origin HEAD:main; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 2))
+          done
+          echo "Could not publish final integrity review outputs after retries."
+          exit 1
+
+      - name: Require source-locked final integrity
+        run: python scripts/language_workbook_final_integrity_v1.py --require-resolved
+
       - name: Install PDF and font dependencies
         run: |
           sudo apt-get update
@@ -51,11 +85,8 @@ jobs:
           python -m pip install pypdf weasyprint
           fc-cache -f
 
-      - name: Render from final decision ledgers
-        run: python scripts/build_language_workbooks_from_decisions_v1.py
-
-      - name: Verify exact production alignment
-        run: python scripts/verify_curated_workbook_production_v1.py
+      - name: Render and verify source-locked effective decisions
+        run: python scripts/render_verified_language_workbooks_final_integrity_v1.py
 
       - name: PDF structural and render smoke tests
         shell: bash
@@ -115,26 +146,11 @@ jobs:
         run: |
           set -euo pipefail
 
-          for f in \
-            curation/language-workbooks/v1.0/arabic_sentence_row_decisions.json \
-            curation/language-workbooks/v1.0/french_sentence_row_decisions.json \
-            curation/language-workbooks/v1.0/urdu_sentence_row_decisions.json
-          do
-            sha256sum "$f"
-          done > /tmp/local-decision-hashes.txt
-
+          local_curation_tree="$(git rev-parse HEAD:curation/language-workbooks/v1.0)"
           git fetch origin main
-          : > /tmp/remote-decision-hashes.txt
-          for f in \
-            curation/language-workbooks/v1.0/arabic_sentence_row_decisions.json \
-            curation/language-workbooks/v1.0/french_sentence_row_decisions.json \
-            curation/language-workbooks/v1.0/urdu_sentence_row_decisions.json
-          do
-            git show "origin/main:$f" | sha256sum | awk -v path="$f" '{print $1 "  " path}'
-          done >> /tmp/remote-decision-hashes.txt
-
-          if ! diff -u /tmp/local-decision-hashes.txt /tmp/remote-decision-hashes.txt; then
-            echo "Decision ledgers changed during the build; refusing to publish stale PDFs."
+          remote_curation_tree="$(git rev-parse origin/main:curation/language-workbooks/v1.0)"
+          if [ "$local_curation_tree" != "$remote_curation_tree" ]; then
+            echo "Curation/override state changed during the build; refusing to publish stale PDFs."
             exit 1
           fi
 
@@ -147,6 +163,6 @@ jobs:
             exit 0
           fi
 
-          git commit -m "Rebuild language workbooks from final row decisions"
+          git commit -m "Rebuild language workbooks from source-locked final decisions"
           git rebase origin/main
           git push origin HEAD:main
