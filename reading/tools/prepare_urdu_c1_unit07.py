@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 import textwrap
 
+# Trigger marker: rerun the guarded Unit 7 recovery after lexical-collision repair.
 SCRIPT = Path(__file__).with_name("apply_urdu_c1_unit07.py")
 
 
