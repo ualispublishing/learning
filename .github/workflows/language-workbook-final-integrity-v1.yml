@@ -62,3 +62,5 @@ jobs:
           done
           echo "Could not publish final integrity review outputs after retries."
           exit 1
+
+# Intentionally separate from PDF regeneration: this workflow only materializes the source-locked review state.
