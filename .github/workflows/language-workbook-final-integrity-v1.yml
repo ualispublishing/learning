@@ -1,0 +1,64 @@
+name: Language workbook final integrity v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "curation/language-workbooks/v1.0/arabic_sentence_row_decisions.json"
+      - "curation/language-workbooks/v1.0/french_sentence_row_decisions.json"
+      - "curation/language-workbooks/v1.0/urdu_sentence_row_decisions.json"
+      - "curation/language-workbooks/v1.0/final_integrity_overrides/**"
+      - "scripts/language_workbook_final_integrity_v1.py"
+      - ".github/workflows/language-workbook-final-integrity-v1.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: language-workbook-final-integrity-v1
+  cancel-in-progress: false
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile source-locked final integrity review
+        run: python scripts/language_workbook_final_integrity_v1.py
+
+      - name: Commit review queue and summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            audit/language-workbooks/v1.0/final_integrity_review_queue.json \
+            audit/language-workbooks/v1.0/final_integrity_review_summary.json
+          if git diff --cached --quiet; then
+            echo "Integrity review outputs already current."
+            exit 0
+          fi
+          git commit -m "Refresh language workbook final integrity queue"
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            if git rebase origin/main && git push origin HEAD:main; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 2))
+          done
+          echo "Could not publish final integrity review outputs after retries."
+          exit 1
