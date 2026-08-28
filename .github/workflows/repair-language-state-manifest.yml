@@ -1,0 +1,67 @@
+name: Repair language state manifest
+
+on:
+  push:
+    paths:
+      - '.github/workflows/repair-language-state-manifest.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Confirm the only routed-state drift is PROJECT_TRACKS
+        shell: bash
+        run: |
+          set +e
+          output="$(python reading/tools/validate_continuation_state.py 2>&1)"
+          rc=$?
+          set -e
+          printf '%s\n' "$output"
+          if [ "$rc" -eq 0 ]; then
+            echo 'Manifest already valid; no repair needed.'
+            exit 0
+          fi
+          python - "$output" <<'PY'
+          import sys
+          output = sys.argv[1]
+          errors = [line[2:] for line in output.splitlines() if line.startswith('- ')]
+          allowed = (
+              'STATE_MANIFEST blob drift: PROJECT_TRACKS.json:',
+              'STATE_MANIFEST byte-size drift: PROJECT_TRACKS.json:',
+              'STATE_MANIFEST state_file_bytes mismatch',
+              'STATE_MANIFEST aggregate_sha256 mismatch',
+          )
+          unexpected = [e for e in errors if not any(e.startswith(prefix) for prefix in allowed)]
+          if not errors or unexpected:
+              raise SystemExit(f'Unexpected continuation-state drift; refusing repair: {unexpected or errors}')
+          if not any(e.startswith('STATE_MANIFEST blob drift: PROJECT_TRACKS.json:') for e in errors):
+              raise SystemExit('Expected PROJECT_TRACKS blob drift was not present; refusing repair')
+          print('Confirmed: drift is limited to the previously observed PROJECT_TRACKS manifest entry and aggregate metadata.')
+          PY
+      - name: Refresh and validate manifest
+        run: |
+          python reading/tools/refresh_state_manifest.py
+          changed="$(git diff --name-only)"
+          printf 'Changed files:\n%s\n' "$changed"
+          test "$changed" = 'reading/STATE_MANIFEST.json'
+          python reading/tools/validate_continuation_state.py
+      - name: Commit repaired manifest
+        run: |
+          if git diff --quiet; then
+            echo 'No changes required.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/STATE_MANIFEST.json
+          git commit -m 'Refresh language state manifest after project router update'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
