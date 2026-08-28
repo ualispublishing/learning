@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "batch_id": "025",
+  "reviewed_on": "2026-08-28",
+  "status": "SEMANTIC_REVIEWED_AWAITING_NATIVE_PR_GATE",
+  "records": 16,
+  "standard_mcq": 16,
+  "bellringers": 0,
+  "files": [
+    "question-bank/candidates/batch-025-a.jsonl",
+    "question-bank/candidates/batch-025-b.jsonl",
+    "question-bank/candidates/batch-025-c.jsonl",
+    "question-bank/candidates/batch-025-d.jsonl"
+  ],
+  "difficulty_distribution": {"F":0,"E":12,"S":4,"B":0},
+  "primary_domain_distribution": {"1":1,"2":2,"3":4,"4":2,"5":1,"6":1,"7":5,"8":0},
+  "reviewed_ids": ["C-392","C-393","C-394","C-395","C-396","C-397","C-398","C-399","C-400","C-401","C-402","C-403","C-404","C-405","C-406","C-407"],
+  "semantic_review": {
+    "semantic_reviewed_records": 16,
+    "answer_key_conflicts": 0,
+    "objective_mapping_conflicts": 0,
+    "source_mapping_conflicts": 0,
+    "material_factual_errors_remaining": 0,
+    "four_option_rationales_complete": true,
+    "originality_provenance_complete": true,
+    "external_question_seeds_used": 0,
+    "answer_position_distribution": {"0":4,"1":4,"2":4,"3":4}
+  },
+  "authoring_focus": {
+    "planner_basis_workflow_run_id": 33192924868,
+    "planner_basis_release": "1.22.0-verified",
+    "planner_measured_explicit_subtopic_exposure": "302/344",
+    "planner_unexposed_enriched_subtopics": 42,
+    "objective_targets": ["7.5","7.7","7.8","4.1","7.9","7.6","1.7","6.2","3.2","3.4","3.5","2.1","3.7","4.2","5.3","2.2"],
+    "guardrails": "E12/S4; max primary-domain count 5/16; 16 distinct decision points; answer positions 4/4/4/4; original-from-public-scope only; no external question seeds; canonical enriched-subtopic labels only"
+  },
+  "scenario_families": [
+    "encrypted-removable-media-lacks-lifecycle-inventory-assignment-and-expiration-controls",
+    "signature-only-gateway-misses-new-executables-that-need-isolated-behavior-analysis",
+    "scanner-severity-conflicts-with-exposure-exploitation-and-business-impact-during-remediation-prioritization",
+    "central-stateful-inspection-hairpins-all-east-west-microservice-traffic-and-becomes-scaling-bottleneck",
+    "recommended-storage-firmware-changes-configuration-defaults-and-needs-controlled-production-rollout",
+    "public-repository-secret-exposure-remains-actionable-after-history-is-rewritten",
+    "four-hour-business-recovery-objective-conflicts-with-uncommitted-external-identity-provider-dependency",
+    "stateful-multitenant-api-authorization-risk-survives-sast-dependency-and-unauthenticated-dast",
+    "formal-model-selection-for-preventing-low-integrity-input-from-corrupting-high-integrity-analytics-baselines",
+    "software-keystore-device-key-can-be-exported-and-reused-away-from-approved-platform-state",
+    "hpc-compute-workloads-share-management-plane-network-and-can-reach-cluster-control-interfaces",
+    "merger-data-label-schemes-use-non-equivalent-definitions-and-cannot-be-safely-mapped-by-name",
+    "decryption-endpoint-leaks-oracle-information-through-malformed-ciphertext-errors-and-timing",
+    "dual-carrier-internet-links-share-one-physical-conduit-and-fail-from-single-excavation",
+    "onprem-enterprise-identity-provider-must-federate-trusted-assertions-to-cloud-saas-without-separate-passwords",
+    "restricted-design-files-needed-by-vendor-but-project-manager-proposes-reclassification-to-bypass-handling-controls"
+  ],
+  "stretch_items": ["C-395","C-399","C-403","C-407"],
+  "current_source_check": {
+    "isc2_outline_effective_date": "2024-04-15",
+    "isc2_outline_status": "Uses the current public CISSP outline and the existing v1.22 registered source set; no new source identifier introduced.",
+    "source_registry_changed": false
+  },
+  "gate_state": {
+    "native_candidate_pr": "PENDING",
+    "native_pr_workflow_run_id": "PENDING",
+    "quality_gate_mode": "released+candidate",
+    "quality_gate_warnings": "PENDING",
+    "logical_batch_mix": "PENDING",
+    "deterministic_knowledge_audit": "PENDING",
+    "planning_gate": "PENDING",
+    "javascript_syntax": "PENDING",
+    "legacy_rationales": "PENDING",
+    "static_asset_serving": "PENDING",
+    "browser_smoke": "PENDING",
+    "aggregate_gate": "PENDING",
+    "released": false
+  },
+  "coverage_effect": {
+    "explicit_subtopic_tags_before": 302,
+    "explicit_subtopic_tags_after_candidate": "PENDING_EXECUTABLE_MEASUREMENT",
+    "total_mapped_subtopics": 344,
+    "boundary": "No breadth increase is claimed before coverage_report.py measures the exact candidate state. The batch deliberately uses canonical subtopic labels from coverage-detail.js and targets the verified v1.22 planner slate."
+  },
+  "notes": [
+    "Batch 025 follows the exact verified-v1.22 planner slate emitted by workflow 33192924868.",
+    "Primary-domain count peaks at D7=5/16 (31.25%), below the configured 35% cap. Stretch items are C-395, C-399, C-403, and C-407.",
+    "The semantic review found zero answer-key conflicts, zero objective/source mapping conflicts, zero remaining material factual errors, and complete four-option rationales.",
+    "No external question bank, live-item recollection, exam dump, or commercial-question wording/template was used. Difficulty remains an internal authoring scale and does not claim ISC2 psychometric equivalence.",
+    "Batch 025 remains unreleased until native PR validation, exact-main validation, released-only Pages isolation, and later release-promotion gates pass."
+  ]
+}
