@@ -1,0 +1,49 @@
+name: LANG-WB native-review ledger check
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/build_lang_wb_native_review_ledgers.py'
+      - 'completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json'
+      - 'completed/languages/workbooks/v1.0/arabic/arabic_vocabulary_1000.csv'
+      - 'completed/languages/workbooks/v1.0/arabic/arabic_sentence_bank_1000.csv'
+      - 'completed/languages/workbooks/v1.0/arabic/00_arabic_complete_master.pdf'
+      - 'completed/languages/workbooks/v1.0/french/french_vocabulary_1000.csv'
+      - 'completed/languages/workbooks/v1.0/french/french_sentence_bank_1000.csv'
+      - 'completed/languages/workbooks/v1.0/french/00_french_complete_master.pdf'
+      - 'completed/languages/workbooks/v1.0/urdu/urdu_vocabulary_1000.csv'
+      - 'completed/languages/workbooks/v1.0/urdu/urdu_sentence_bank_1000.csv'
+      - 'completed/languages/workbooks/v1.0/urdu/00_urdu_complete_master.pdf'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-ledger-generation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build current-candidate reviewer ledgers
+        run: python scripts/build_lang_wb_native_review_ledgers.py
+
+      - name: Validate generated outputs
+        shell: bash
+        run: |
+          test -f audit/language-workbooks/v1.0/native-review-ledgers/CANDIDATE_BINDINGS.json
+          for lang in arabic french urdu; do
+            file="audit/language-workbooks/v1.0/native-review-ledgers/${lang}_native_review_ledger.csv"
+            test -f "$file"
+            rows=$(($(wc -l < "$file") - 1))
+            if [ "$rows" -ne 2000 ]; then
+              echo "$lang ledger has $rows data rows; expected 2000"
+              exit 1
+            fi
+          done
