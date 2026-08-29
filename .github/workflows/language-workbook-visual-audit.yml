@@ -1,23 +1,33 @@
 name: Language workbook visual audit
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
     paths:
       - ".github/workflows/language-workbook-visual-audit.yml"
-  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - "Rebuild curated language workbooks v1"
+    types:
+      - completed
+    branches:
+      - main
 
 permissions:
   contents: read
 
 jobs:
   audit:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - name: Checkout current main
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Install PDF renderer
         run: |
