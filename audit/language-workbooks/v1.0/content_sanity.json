@@ -1,0 +1,67 @@
+{
+  "release": "v1.0",
+  "gate": "PASS",
+  "scope": "whole-file structural/encoding/bilingual-column sanity; not native-speaker certification",
+  "languages": {
+    "arabic": {
+      "gate": "PASS",
+      "sentence_rows": 1000,
+      "vocabulary_rows": 1000,
+      "hard_failure_count": 0,
+      "warning_count": 6,
+      "hard_failures": [],
+      "warnings": [
+        {
+          "type": "space_before_target_punctuation",
+          "rank": 251,
+          "target": "أهلاً ، هل تعمل هنا؟"
+        },
+        {
+          "type": "space_before_target_punctuation",
+          "rank": 401,
+          "target": "هل تعلم من أنا ؟"
+        },
+        {
+          "type": "ascii_comma_in_arabic_script_target",
+          "rank": 630,
+          "target": "ليس لدي أكثر من 1,000 ين."
+        },
+        {
+          "type": "space_before_target_punctuation",
+          "rank": 724,
+          "target": "أحاول أن أفهم لماذا لم تقم بالأمر ."
+        },
+        {
+          "type": "space_before_target_punctuation",
+          "rank": 793,
+          "target": "لقد بقيت في المنزل لأنني كنت مصاباً بالزكام ."
+        },
+        {
+          "type": "ascii_comma_in_arabic_script_target",
+          "rank": 932,
+          "target": "إذا أردت, يمكنني أن أُريك كيف تفعل ذلك."
+        }
+      ]
+    },
+    "french": {
+      "gate": "PASS",
+      "sentence_rows": 1000,
+      "vocabulary_rows": 1000,
+      "hard_failure_count": 0,
+      "warning_count": 0,
+      "hard_failures": [],
+      "warnings": []
+    },
+    "urdu": {
+      "gate": "PASS",
+      "sentence_rows": 1000,
+      "vocabulary_rows": 1000,
+      "hard_failure_count": 0,
+      "warning_count": 0,
+      "hard_failures": [],
+      "warnings": []
+    }
+  },
+  "hard_failure_count": 0,
+  "warning_count": 6
+}

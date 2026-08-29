@@ -19,7 +19,7 @@ All 3,000 sentence ranks have resolved, source-locked v1.0 editorial decisions. 
 - Source provenance retained: 1000/1000 rows.
 - Licensed external Tatoeba attribution: 1000/1000 rows.
 - UALIS controlled-original rows: 0/1000 rows.
-- Editorial decisions: {'CORRECT_APPROVED': 8, 'KEEP': 992}; unresolved: 0.
+- Editorial decisions: {'CORRECT_APPROVED': 10, 'KEEP': 990}; unresolved: 0.
 - Pronunciation foundations: PASS.
 - PDFs: 14 (1 master + 13 split PDFs).
 - Corpus/release checks: PASS.
