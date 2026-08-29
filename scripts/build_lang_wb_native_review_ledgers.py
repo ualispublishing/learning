@@ -38,6 +38,9 @@ LANGUAGES: dict[str, dict[str, str]] = {
     },
 }
 
+EXPECTED_VOCAB_COLUMNS = {"rank", "target", "english", "part_of_speech"}
+EXPECTED_SENTENCE_COLUMNS = {"rank", "level", "target", "english", "attribution"}
+
 LEDGER_FIELDS = [
     "item_type",
     "rank",
@@ -72,6 +75,8 @@ def require(condition: bool, message: str) -> None:
 def validate_source_rows(lang: str, vocabulary: list[dict[str, str]], sentences: list[dict[str, str]]) -> None:
     require(len(vocabulary) == 1000, f"{lang}: vocabulary row count is {len(vocabulary)}, expected 1000")
     require(len(sentences) == 1000, f"{lang}: sentence row count is {len(sentences)}, expected 1000")
+    require(bool(vocabulary) and set(vocabulary[0]) == EXPECTED_VOCAB_COLUMNS, f"{lang}: unexpected vocabulary CSV schema")
+    require(bool(sentences) and set(sentences[0]) == EXPECTED_SENTENCE_COLUMNS, f"{lang}: unexpected sentence CSV schema")
 
     for name, rows in (("vocabulary", vocabulary), ("sentences", sentences)):
         ranks = [r.get("rank", "") for r in rows]
@@ -79,8 +84,8 @@ def validate_source_rows(lang: str, vocabulary: list[dict[str, str]], sentences:
         require(all(r.get("target", "").strip() for r in rows), f"{lang}: blank target in {name}")
         require(all(r.get("english", "").strip() for r in rows), f"{lang}: blank English in {name}")
 
-    require(all("part_of_speech" in r for r in vocabulary), f"{lang}: vocabulary schema missing part_of_speech")
-    require(all("level" in r and "attribution" in r for r in sentences), f"{lang}: sentence schema missing level/attribution")
+    require(all(set(r) == EXPECTED_VOCAB_COLUMNS for r in vocabulary), f"{lang}: vocabulary row schema drift")
+    require(all(set(r) == EXPECTED_SENTENCE_COLUMNS for r in sentences), f"{lang}: sentence row schema drift")
 
 
 def ledger_rows(vocabulary: list[dict[str, str]], sentences: list[dict[str, str]]) -> list[dict[str, str]]:
