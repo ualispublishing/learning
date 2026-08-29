@@ -22,10 +22,30 @@ Each language ledger contains exactly 2,000 structured learner items: 1,000 voca
 - `reviewer_notes` — explanation/evidence;
 - `proposed_correction` — correction when appropriate.
 
+## Validate a completed worksheet
+
+Before creating a final language sign-off, run the source-bound preflight for that language:
+
+```bash
+python scripts/validate_lang_wb_native_review_ledger.py arabic
+python scripts/validate_lang_wb_native_review_ledger.py french
+python scripts/validate_lang_wb_native_review_ledger.py urdu
+```
+
+You may also provide an explicit ledger path as the second argument.
+
+The validator checks that all 2,000 immutable source fields still match the current production candidate and that every review outcome is well formed. Its exit states are deliberately fail-closed:
+
+- exit `0`: every structured row is explicitly `PASS` and source-bound;
+- exit `2`: the ledger is source-valid but is incomplete or contains at least one `FAIL`/`HOLD`;
+- exit `1`: malformed worksheet, source drift, invalid review metadata, or another validation error.
+
+For `FAIL`, `defect_type` and `reviewer_notes` are required. For `HOLD`, `reviewer_notes` are required. A `PASS` row cannot simultaneously carry a defect classification or proposed correction. The validator writes a sibling `*_validation.json` report with counts and current candidate bindings.
+
 ## Important limitation
 
 These worksheets are an ergonomic aid, **not** the final certification artifact. They do not contain every learner-facing item in the rendered workbook. A qualified reviewer must also inspect the complete current master PDF, including Foundations, pronunciation guidance, headings, instructions, and any other learner-facing text or presentation that can affect correctness.
 
-The final release gate remains [`../FINAL_NATIVE_REVIEW_PACKET.md`](../FINAL_NATIVE_REVIEW_PACKET.md) plus an immutable sign-off derived from [`../FINAL_NATIVE_SIGNOFF_TEMPLATE.json`](../FINAL_NATIVE_SIGNOFF_TEMPLATE.json). No generated ledger row is pre-approved, and generating a worksheet does not alter release status.
+Even a structured-ledger exit `0` is only a preflight. The final release gate remains [`../FINAL_NATIVE_REVIEW_PACKET.md`](../FINAL_NATIVE_REVIEW_PACKET.md) plus an immutable sign-off derived from [`../FINAL_NATIVE_SIGNOFF_TEMPLATE.json`](../FINAL_NATIVE_SIGNOFF_TEMPLATE.json). No generated ledger row is pre-approved, and generating or validating a worksheet does not alter release status.
 
 `CANDIDATE_BINDINGS.json` records the current master-workbook Git blob SHA, release-manifest Git blob SHA, source companion-CSV Git blob SHAs, and sentence-decision SHA-256 so a reviewer can confirm that their worksheet belongs to the exact candidate being certified.
