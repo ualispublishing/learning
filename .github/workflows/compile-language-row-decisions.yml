@@ -1,11 +1,27 @@
 name: Compile language row decisions
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
-      - 'audit/language-workbooks/v1.0/**'
+      - 'audit/language-workbooks/v1.0/arabic_sentence_editorial_audit_001_250.json'
+      - 'audit/language-workbooks/v1.0/arabic_sentence_editorial_audit_251_500.json'
+      - 'audit/language-workbooks/v1.0/arabic_sentence_editorial_audit_501_750.json'
+      - 'audit/language-workbooks/v1.0/arabic_sentence_editorial_audit_751_1000.json'
+      - 'audit/language-workbooks/v1.0/arabic_sentence_second_pass_amendments.json'
+      - 'audit/language-workbooks/v1.0/french_sentence_editorial_audit_001_250.json'
+      - 'audit/language-workbooks/v1.0/french_sentence_editorial_audit_251_500.json'
+      - 'audit/language-workbooks/v1.0/french_sentence_editorial_audit_501_750.json'
+      - 'audit/language-workbooks/v1.0/french_sentence_editorial_audit_751_1000.json'
+      - 'audit/language-workbooks/v1.0/french_sentence_second_pass_amendments.json'
+      - 'audit/language-workbooks/v1.0/urdu_sentence_editorial_audit.json'
+      - 'audit/language-workbooks/v1.0/urdu_sentence_editorial_audit_251_500.json'
+      - 'audit/language-workbooks/v1.0/urdu_sentence_editorial_audit_501_750.json'
+      - 'audit/language-workbooks/v1.0/urdu_sentence_editorial_audit_751_1000.json'
+      - 'audit/language-workbooks/v1.0/urdu_sentence_second_pass_amendments.json'
       - 'scripts/compile_sentence_row_decisions_v1.py'
+      - '.github/workflows/compile-language-row-decisions.yml'
 
 permissions:
   contents: write
@@ -40,3 +56,6 @@ jobs:
             git commit -m 'Compile audited sentence row decisions'
             git push
           fi
+
+# Generated QA, render, release, and visual-audit files are deliberately excluded.
+# They are downstream evidence and must never trigger an upstream curation recompile.
