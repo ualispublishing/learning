@@ -22,6 +22,11 @@ async function run(){
   const d=frame.contentDocument,w=frame.contentWindow;
   assert(d.documentElement.dataset.cisspCore==='ready','core ready');
   assert(d.documentElement.dataset.cisspBank==='ready','released bank ready');
+  assert(d.documentElement.dataset.learnShortcuts==='4','keyboard shortcut controller v4 loaded');
+  assert(d.querySelector('script[src="keyboard-shortcuts.js?v=4"]'),'keyboard shortcut cache version v4');
+  assert(d.querySelector('.shortcut-help')?.textContent.includes('Reveal / hide'),'keyboard help describes reveal toggle');
+  assert(d.querySelector('.shortcut-help')?.textContent.includes('Cards hidden'),'keyboard help describes hidden-card arrows');
+  assert(d.querySelector('footer span:last-child')?.textContent.includes('v1.24'),'footer shows current production release');
   assert(!d.querySelector('#startupIssue'),'no startup issue');
   assert(d.querySelector('#continueBtn')?.textContent.includes('diagnostic'),'first-run diagnostic CTA');
   assert(d.querySelector('link[data-workflow-clarity]'),'workflow clarity loaded');
@@ -94,7 +99,7 @@ async function run(){
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile Practice has no horizontal overflow');
 
   result.dataset.smoke='pass';
-  result.textContent='PASS interactive browser smoke: startup keyboard-toggle-nav full-bank-practice progress sources navigation diagnostic mobile-390';
+  result.textContent='PASS interactive browser smoke: startup keyboard-toggle-nav keyboard-guidance release-footer full-bank-practice progress sources navigation diagnostic mobile-390';
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
