@@ -58,6 +58,24 @@ If a reviewer reports any defect:
 6. invalidate any sign-off bound to the superseded artifact;
 7. repeat full human review as necessary for the changed candidate.
 
+## Recording sign-offs
+
+Use [`FINAL_NATIVE_SIGNOFF_TEMPLATE.json`](FINAL_NATIVE_SIGNOFF_TEMPLATE.json) as the canonical schema and store completed records under [`native-signoffs/`](native-signoffs/). Sign-offs are immutable historical records: if a candidate changes or a later reviewer reaches a different outcome, add a new record rather than rewriting the old one.
+
+The latest review bound to the current candidate controls. A newer FAIL or HOLD therefore overrides an older PASS for the same candidate.
+
+## Automated promotion validation
+
+Run:
+
+```bash
+python scripts/workbook_final_human_promotion_gate.py
+```
+
+The validator independently recomputes the current master-workbook Git blob hashes, reads the current sentence-decision hashes from the release manifest, verifies the release-manifest blob binding, validates reviewer qualifications and all scope attestations, requires empty defects/holds for PASS, and selects the latest current-candidate review for each language.
+
+The command exits non-zero until Arabic, French, and Urdu all have valid latest PASS records. GitHub Actions also runs this gate automatically when sign-off JSONs or the bound release artifacts change via [`.github/workflows/language-workbook-final-human-promotion.yml`](../../../.github/workflows/language-workbook-final-human-promotion.yml).
+
 ## Promotion rule
 
 LANG-WB v1.0 may be promoted beyond `production_candidate` only when:
@@ -66,7 +84,6 @@ LANG-WB v1.0 may be promoted beyond `production_candidate` only when:
 - French has a completed PASS sign-off;
 - Urdu has a completed PASS sign-off;
 - all three sign-offs bind to the current candidate artifacts/decision hashes;
-- no known learner-facing defect or unresolved hold remains; and
+- no known learner-facing defect or unresolved hold remains;
+- `python scripts/workbook_final_human_promotion_gate.py` returns PASS; and
 - post-sign-off release/integrity checks still pass.
-
-Use [`FINAL_NATIVE_SIGNOFF_TEMPLATE.json`](FINAL_NATIVE_SIGNOFF_TEMPLATE.json) as the canonical sign-off schema. Store completed sign-offs as new immutable files; do not overwrite historical sign-offs after a candidate changes.
