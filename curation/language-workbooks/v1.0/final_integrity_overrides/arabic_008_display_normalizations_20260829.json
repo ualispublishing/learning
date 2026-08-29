@@ -1,0 +1,83 @@
+{
+  "release": "v1.0",
+  "language": "arabic",
+  "source_zip_sha256": "b72f70d3b724c3060da55f74ea1753da249d8eb38a6dbdea3dcc28798d077914",
+  "policy": "Source-locked display-only normalization discovered by the whole-file production sanity audit. Each row must preserve its exact non-punctuation Arabic content and exact English translation; only punctuation/whitespace may change.",
+  "overrides": [
+    {
+      "rank": 251,
+      "override_kind": "DISPLAY_NORMALIZATION",
+      "normalization_scope": "punctuation_whitespace_only",
+      "source_target": "أهلاً ، هل تعمل هنا؟",
+      "source_english": "Hi! Do you work here?",
+      "source_attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #54608 (Zifre) & #384030 (saeb)",
+      "historical_status": "KEEP",
+      "historical_target": "أهلاً ، هل تعمل هنا؟",
+      "historical_english": "Hi! Do you work here?",
+      "final_status": "CORRECT_APPROVED",
+      "final_target": "أهلاً، هل تعمل هنا؟",
+      "final_english": "Hi! Do you work here?",
+      "review_note": "Display-only normalization: remove the stray pre-comma space and use the Arabic comma; lexical content and English remain unchanged."
+    },
+    {
+      "rank": 401,
+      "override_kind": "DISPLAY_NORMALIZATION",
+      "normalization_scope": "punctuation_whitespace_only",
+      "source_target": "هل تعلم من أنا ؟",
+      "source_english": "Do you know who I am?",
+      "source_attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #2726734 (WestofEden) & #3664328 (Alaakhalid)",
+      "historical_status": "KEEP",
+      "historical_target": "هل تعلم من أنا ؟",
+      "historical_english": "Do you know who I am?",
+      "final_status": "CORRECT_APPROVED",
+      "final_target": "هل تعلم من أنا؟",
+      "final_english": "Do you know who I am?",
+      "review_note": "Display-only normalization: remove the stray space before the Arabic question mark; lexical content and English remain unchanged."
+    },
+    {
+      "rank": 724,
+      "override_kind": "DISPLAY_NORMALIZATION",
+      "normalization_scope": "punctuation_whitespace_only",
+      "source_target": "أحاول أن أفهم لماذا لم تقم بالأمر .",
+      "source_english": "I'm trying to understand why you didn't do it.",
+      "source_attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #867920 (theegyptian) & #867919 (theegyptian)",
+      "historical_status": "KEEP",
+      "historical_target": "أحاول أن أفهم لماذا لم تقم بالأمر .",
+      "historical_english": "I'm trying to understand why you didn't do it.",
+      "final_status": "CORRECT_APPROVED",
+      "final_target": "أحاول أن أفهم لماذا لم تقم بالأمر.",
+      "final_english": "I'm trying to understand why you didn't do it.",
+      "review_note": "Display-only normalization: remove the stray space before the final period; lexical content and English remain unchanged."
+    },
+    {
+      "rank": 793,
+      "override_kind": "DISPLAY_NORMALIZATION",
+      "normalization_scope": "punctuation_whitespace_only",
+      "source_target": "لقد بقيت في المنزل لأنني كنت مصاباً بالزكام .",
+      "source_english": "Because I had a cold, I stayed at home.",
+      "source_attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #63727 (CK) & #455217 (motaamel)",
+      "historical_status": "KEEP",
+      "historical_target": "لقد بقيت في المنزل لأنني كنت مصاباً بالزكام .",
+      "historical_english": "Because I had a cold, I stayed at home.",
+      "final_status": "CORRECT_APPROVED",
+      "final_target": "لقد بقيت في المنزل لأنني كنت مصاباً بالزكام.",
+      "final_english": "Because I had a cold, I stayed at home.",
+      "review_note": "Display-only normalization: remove the stray space before the final period; lexical content and English remain unchanged."
+    },
+    {
+      "rank": 932,
+      "override_kind": "DISPLAY_NORMALIZATION",
+      "normalization_scope": "punctuation_whitespace_only",
+      "source_target": "إذا أردت, يمكنني أن أُريك كيف تفعل ذلك.",
+      "source_english": "If you want, I can show you how to do that.",
+      "source_attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #2028655 (CK) & #2028839 (Asma)",
+      "historical_status": "KEEP",
+      "historical_target": "إذا أردت, يمكنني أن أُريك كيف تفعل ذلك.",
+      "historical_english": "If you want, I can show you how to do that.",
+      "final_status": "CORRECT_APPROVED",
+      "final_target": "إذا أردت، يمكنني أن أُريك كيف تفعل ذلك.",
+      "final_english": "If you want, I can show you how to do that.",
+      "review_note": "Display-only normalization: replace the ASCII prose comma with the Arabic comma; lexical content and English remain unchanged."
+    }
+  ]
+}
