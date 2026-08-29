@@ -29,10 +29,20 @@ async function run(){
 
   d.querySelector('#nav [data-view="learn"]').click();
   await waitFor(()=>visible(d.querySelector('#learn'))&&d.querySelector('#revealBtn'),'Review view');
+  const firstPosition=d.querySelector('#cardPosition')?.textContent;
+  key(w,'ArrowRight','ArrowRight');
+  await waitFor(()=>d.querySelector('#revealBtn')&&d.querySelector('#cardPosition')?.textContent!==firstPosition,'hidden-card keyboard next');
+  key(w,'ArrowLeft','ArrowLeft');
+  await waitFor(()=>d.querySelector('#revealBtn')&&d.querySelector('#cardPosition')?.textContent===firstPosition,'hidden-card keyboard previous');
   key(w,' ','Space');
   await waitFor(()=>d.querySelector('.layer-content')&&d.querySelectorAll('.rating [data-grade]').length===4,'keyboard reveal and ratings');
   assert(d.querySelectorAll('.layer-tabs button').length===8,'eight learning layers');
   assert(d.querySelector('.layer-tabs button.active')?.dataset.layer==='0','first layer active after reveal');
+  key(w,' ','Space');
+  await waitFor(()=>d.querySelector('#revealBtn')&&!d.querySelector('.layer-content'),'keyboard unreveal returns retrieval gate');
+  assert(d.querySelector('#cardPosition')?.textContent===firstPosition,'unreveal preserves current card');
+  key(w,' ','Space');
+  await waitFor(()=>d.querySelector('.layer-tabs button.active')?.dataset.layer==='0','keyboard re-reveal');
   key(w,'ArrowRight','ArrowRight');
   await waitFor(()=>d.querySelector('.layer-tabs button.active')?.dataset.layer==='1','keyboard next layer');
   key(w,'3','Digit3');
@@ -84,7 +94,7 @@ async function run(){
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile Practice has no horizontal overflow');
 
   result.dataset.smoke='pass';
-  result.textContent='PASS interactive browser smoke: startup keyboard-review full-bank-practice progress sources navigation diagnostic mobile-390';
+  result.textContent='PASS interactive browser smoke: startup keyboard-toggle-nav full-bank-practice progress sources navigation diagnostic mobile-390';
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
