@@ -1,0 +1,216 @@
+name: LANG-WB final human promotion self-test
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/language-workbook-final-human-promotion-selftest.yml'
+      - 'scripts/workbook_final_human_promotion_gate.py'
+      - 'audit/language-workbooks/v1.0/FINAL_NATIVE_SIGNOFF_TEMPLATE.json'
+      - 'completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json'
+      - 'completed/languages/workbooks/v1.0/arabic/00_arabic_complete_master.pdf'
+      - 'completed/languages/workbooks/v1.0/french/00_french_complete_master.pdf'
+      - 'completed/languages/workbooks/v1.0/urdu/00_urdu_complete_master.pdf'
+
+permissions:
+  contents: read
+
+jobs:
+  promotion-gate-selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Isolate synthetic sign-off workspace
+        shell: bash
+        run: |
+          find audit/language-workbooks/v1.0/native-signoffs -maxdepth 1 -type f -name '*.json' -delete
+
+      - name: Confirm no-signoff state is HOLD
+        shell: bash
+        run: |
+          set +e
+          python scripts/workbook_final_human_promotion_gate.py
+          code=$?
+          set -e
+          if [ "$code" -ne 2 ]; then
+            echo "no-signoff gate exit=$code; expected 2"
+            exit 1
+          fi
+
+      - name: Create three synthetic current-candidate PASS records
+        run: |
+          python - <<'PY'
+          from datetime import datetime, timedelta, timezone
+          import json
+          from pathlib import Path
+          import sys
+
+          sys.path.insert(0, 'scripts')
+          import workbook_final_human_promotion_gate as g
+
+          manifest = g.load_json(g.MANIFEST_PATH)
+          manifest_blob = g.git_blob_sha(g.MANIFEST_PATH)
+          manifest_langs = manifest['sentence_curation']['languages']
+          reviewed = datetime.now(timezone.utc) - timedelta(minutes=5)
+
+          g.SIGNOFF_DIR.mkdir(parents=True, exist_ok=True)
+          for lang in g.LANGUAGES:
+              master_rel = f"completed/languages/workbooks/v1.0/{lang}/{g.MASTER_NAMES[lang]}"
+              master = g.ROOT / master_rel
+              record = {
+                  'schema': 'lang-wb-native-signoff-v1',
+                  'release': 'v1.0',
+                  'language': lang,
+                  'review_outcome': 'PASS',
+                  'review_completed_utc': reviewed.isoformat().replace('+00:00', 'Z'),
+                  'reviewer': {
+                      'name_or_identifier': 'synthetic-ci-reviewer',
+                      'native_or_near_native_status': 'synthetic test only',
+                      'qualification_basis': 'ephemeral CI fixture; not a human certification',
+                      'relevant_editing_teaching_or_linguistic_experience': '',
+                      'conflict_of_interest_or_relationship_to_project': 'synthetic CI fixture'
+                  },
+                  'candidate_binding': {
+                      'master_workbook_path': master_rel,
+                      'master_workbook_git_blob_sha': g.git_blob_sha(master),
+                      'sentence_decision_sha256': manifest_langs[lang]['decision_sha256'],
+                      'release_manifest_path': 'completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json',
+                      'release_manifest_git_blob_sha': manifest_blob,
+                  },
+                  'scope_attestation': {field: True for field in g.REQUIRED_SCOPE_FIELDS},
+                  'defects': [],
+                  'holds': [],
+                  'attestation': 'Synthetic ephemeral CI fixture exercising the validator only.',
+                  'pass_condition_acknowledged': 'Synthetic ephemeral CI fixture only.'
+              }
+              path = g.SIGNOFF_DIR / f'{lang}_synthetic_base_pass.json'
+              path.write_text(json.dumps(record, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+
+      - name: Confirm three valid current-candidate PASS records pass
+        run: python scripts/workbook_final_human_promotion_gate.py
+
+      - name: Confirm newer stale-candidate record does not override current PASS
+        shell: bash
+        run: |
+          python - <<'PY'
+          from datetime import datetime, timedelta, timezone
+          import json, sys
+          sys.path.insert(0, 'scripts')
+          import workbook_final_human_promotion_gate as g
+
+          base = g.load_json(g.SIGNOFF_DIR / 'arabic_synthetic_base_pass.json')
+          base['review_outcome'] = 'FAIL'
+          base['review_completed_utc'] = (datetime.now(timezone.utc) - timedelta(minutes=4)).isoformat().replace('+00:00', 'Z')
+          base['candidate_binding']['master_workbook_git_blob_sha'] = '0' * 40
+          base['defects'] = [{'synthetic': True}]
+          (g.SIGNOFF_DIR / 'arabic_synthetic_stale_fail.json').write_text(
+              json.dumps(base, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+          )
+          PY
+          python scripts/workbook_final_human_promotion_gate.py
+
+      - name: Confirm newer current-candidate HOLD overrides older PASS
+        shell: bash
+        run: |
+          python - <<'PY'
+          from datetime import datetime, timedelta, timezone
+          import json, sys
+          sys.path.insert(0, 'scripts')
+          import workbook_final_human_promotion_gate as g
+
+          base = g.load_json(g.SIGNOFF_DIR / 'arabic_synthetic_base_pass.json')
+          base['review_outcome'] = 'HOLD'
+          base['review_completed_utc'] = (datetime.now(timezone.utc) - timedelta(minutes=3)).isoformat().replace('+00:00', 'Z')
+          base['holds'] = [{'synthetic': True}]
+          (g.SIGNOFF_DIR / 'arabic_synthetic_newer_hold.json').write_text(
+              json.dumps(base, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+          )
+          PY
+          set +e
+          python scripts/workbook_final_human_promotion_gate.py
+          code=$?
+          set -e
+          if [ "$code" -ne 2 ]; then
+            echo "newer-HOLD gate exit=$code; expected 2"
+            exit 1
+          fi
+          rm audit/language-workbooks/v1.0/native-signoffs/arabic_synthetic_newer_hold.json
+
+      - name: Confirm future-dated current-candidate review is rejected
+        shell: bash
+        run: |
+          python - <<'PY'
+          from datetime import datetime, timedelta, timezone
+          import json, sys
+          sys.path.insert(0, 'scripts')
+          import workbook_final_human_promotion_gate as g
+
+          base = g.load_json(g.SIGNOFF_DIR / 'arabic_synthetic_base_pass.json')
+          base['review_completed_utc'] = (datetime.now(timezone.utc) + timedelta(hours=1)).isoformat().replace('+00:00', 'Z')
+          (g.SIGNOFF_DIR / 'arabic_synthetic_future_pass.json').write_text(
+              json.dumps(base, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+          )
+          PY
+          set +e
+          python scripts/workbook_final_human_promotion_gate.py
+          code=$?
+          set -e
+          if [ "$code" -ne 2 ]; then
+            echo "future-review gate exit=$code; expected 2"
+            exit 1
+          fi
+          python - <<'PY'
+          import json
+          data = json.load(open('audit/language-workbooks/v1.0/final_human_promotion_gate.json', encoding='utf-8'))
+          problems = data['languages']['arabic']['problems']
+          if not any('review_timestamp_in_future' in p for p in problems):
+              raise SystemExit(f'future timestamp was not explicitly rejected: {problems}')
+          PY
+          rm audit/language-workbooks/v1.0/native-signoffs/arabic_synthetic_future_pass.json
+
+      - name: Confirm duplicate latest timestamps are ambiguous and rejected
+        shell: bash
+        run: |
+          python - <<'PY'
+          from datetime import datetime, timedelta, timezone
+          import json, sys
+          sys.path.insert(0, 'scripts')
+          import workbook_final_human_promotion_gate as g
+
+          reviewed = (datetime.now(timezone.utc) - timedelta(minutes=2)).isoformat().replace('+00:00', 'Z')
+          base = g.load_json(g.SIGNOFF_DIR / 'arabic_synthetic_base_pass.json')
+          for suffix in ('a', 'b'):
+              record = dict(base)
+              record['review_completed_utc'] = reviewed
+              (g.SIGNOFF_DIR / f'arabic_synthetic_duplicate_{suffix}.json').write_text(
+                  json.dumps(record, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+              )
+          PY
+          set +e
+          python scripts/workbook_final_human_promotion_gate.py
+          code=$?
+          set -e
+          if [ "$code" -ne 2 ]; then
+            echo "duplicate-latest gate exit=$code; expected 2"
+            exit 1
+          fi
+          python - <<'PY'
+          import json
+          data = json.load(open('audit/language-workbooks/v1.0/final_human_promotion_gate.json', encoding='utf-8'))
+          problems = data['languages']['arabic']['problems']
+          if not any(p.startswith('ambiguous_latest_review_timestamp:') for p in problems):
+              raise SystemExit(f'duplicate latest timestamp was not rejected: {problems}')
+          PY
+
+      - name: Confirm self-test never committed synthetic certification
+        shell: bash
+        run: |
+          git diff --exit-code -- audit/language-workbooks/v1.0/native-signoffs
