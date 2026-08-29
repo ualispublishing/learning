@@ -22,7 +22,7 @@ setText('#today .section-head h2','Study queue');
 
 setText('#learn .page-title h1','Review');
 setText('#learn .page-title p','Recall first. Reveal only what you need.');
-setHTML('#learn .shortcut-help','<kbd>Space</kbd><span class="shortcut-label">Reveal</span><kbd>←</kbd><kbd>→</kbd><span class="shortcut-label">Layers</span><kbd>1–4</kbd><span class="shortcut-label">Rate</span>');
+setHTML('#learn .shortcut-help','<kbd>Space</kbd><span class="shortcut-label">Reveal / hide</span><kbd>←</kbd><kbd>→</kbd><span class="shortcut-label">Cards hidden · Layers shown</span><kbd>1–4</kbd><span class="shortcut-label">Rate</span>');
 setText('#prevBtn','← Previous card');
 setText('#nextBtn','Next card →');
 
@@ -35,7 +35,7 @@ setText('#progress .page-title p','See weak areas and what to study next.');
 setText('#sources .page-title h1','Sources');
 setText('#sources .page-title p','Scope and reference material.');
 
-const footerVersion=document.querySelector('footer span:last-child');if(footerVersion)footerVersion.textContent='v1.3 · local progress';
+const footerVersion=document.querySelector('footer span:last-child');if(footerVersion)footerVersion.textContent='v1.24 · local progress';
 
 // Accessibility metadata only. Keyboard behavior lives exclusively in keyboard-shortcuts.js.
 function decorateShortcuts(){
