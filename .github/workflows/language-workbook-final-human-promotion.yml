@@ -1,28 +1,63 @@
-name: LANG-WB final human promotion gate
+name: LANG-WB human sign-off validation and promotion status
 
 on:
   workflow_dispatch:
   push:
     paths:
       - 'audit/language-workbooks/v1.0/native-signoffs/*.json'
+      - 'scripts/validate_lang_wb_native_signoff.py'
+      - 'scripts/workbook_final_human_promotion_gate.py'
 
 permissions:
   contents: read
 
 jobs:
-  final-human-promotion-gate:
+  validate-human-signoffs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Validate latest current-candidate human sign-offs
-        run: python scripts/workbook_final_human_promotion_gate.py
+      - name: Validate sign-off records submitted by this push
+        if: github.event_name == 'push'
+        shell: bash
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          CURRENT_SHA: ${{ github.sha }}
+        run: |
+          mapfile -t files < <(git diff --name-only "$BEFORE_SHA" "$CURRENT_SHA" -- 'audit/language-workbooks/v1.0/native-signoffs/*.json')
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No native-signoff JSON changed in this push; per-record validation not required."
+          fi
+          for file in "${files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "Sign-off records are immutable and must not be deleted: $file"
+              exit 1
+            fi
+            python scripts/validate_lang_wb_native_signoff.py "$file"
+          done
+
+      - name: Evaluate overall three-language promotion status
+        shell: bash
+        run: |
+          set +e
+          python scripts/workbook_final_human_promotion_gate.py
+          code=$?
+          set -e
+          if [ "$code" -eq 0 ]; then
+            echo "LANG-WB final human promotion gate: PASS"
+          elif [ "$code" -eq 2 ]; then
+            echo "Submitted sign-off record(s) are valid, but LANG-WB remains on human-review HOLD until the current candidate has valid latest PASS records for Arabic, French, and Urdu."
+          else
+            exit "$code"
+          fi
 
       - name: Show promotion-gate report
         if: always()
