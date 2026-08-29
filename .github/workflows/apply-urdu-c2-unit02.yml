@@ -1,0 +1,42 @@
+name: Apply Urdu C2 Unit 2
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-urdu-c2-unit02.yml'
+      - 'reading/tools/apply_urdu_c2_unit02.py'
+      - 'reading/tools/unit02_c2_specs.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  canonicalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate and canonicalize C2 Unit 2
+        run: python reading/tools/apply_urdu_c2_unit02.py
+      - name: Commit canonical unit and advanced state
+        run: |
+          if git diff --quiet; then
+            echo 'No changes required; canonical state already matches.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/urdu/c2/passages.jsonl \
+                  reading/CONTINUATION.json \
+                  reading/STATUS.json \
+                  reading/planning/ACTIVE_GENERATION_PLAN.json \
+                  reading/TASKS.md \
+                  reading/AGENT_HANDOFF_V2.md \
+                  reading/STATE_MANIFEST.json \
+                  reading/audit/urdu_c2_u02_generation_qa_2026-08-29.json
+          git commit -m 'Canonicalize Urdu C2 Unit 2 and advance frontier'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
