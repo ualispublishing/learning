@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
 """Final-integrity v2 for language workbook v1.0.
 
-This preserves the v1 source-lock model and adds one narrowly scoped exception:
-a historical KEEP row may be repaired only when the historical source pair itself is
-proven corrupt. Such a SOURCE_PAIR_REPAIR must match the exact historical target,
-English, and attribution, provide explicit external evidence, and resolve to a
-non-KEEP correction/replacement. Ordinary KEEP rows remain immutable.
+This preserves the v1 source-lock model and adds two narrowly scoped exceptions for
+historical KEEP rows:
+- SOURCE_PAIR_REPAIR: repairs a provably corrupted bilingual source pair using explicit
+  external evidence.
+- DISPLAY_NORMALIZATION: permits punctuation/whitespace-only target cleanup while
+  requiring the non-punctuation target content and English translation to remain exact.
+
+Ordinary KEEP rows remain immutable.
 """
 from __future__ import annotations
 
 import argparse
 import json
+import unicodedata
 from collections import Counter
 
 import language_workbook_final_integrity_v1 as legacy
@@ -24,6 +28,7 @@ HISTORICAL_RESOLVED = legacy.HISTORICAL_RESOLVED
 FINAL_RESOLVED = legacy.FINAL_RESOLVED
 REVIEW_REQUIRED = legacy.REVIEW_REQUIRED
 SOURCE_PAIR_REPAIR = "SOURCE_PAIR_REPAIR"
+DISPLAY_NORMALIZATION = "DISPLAY_NORMALIZATION"
 
 # Re-export helpers used by the guarded renderer.
 load_json = legacy.load_json
@@ -37,7 +42,7 @@ def apply_source_pair_repair(language: str, row: dict, override: dict) -> dict:
         raise SystemExit(f"{language} rank {rank}: SOURCE_PAIR_REPAIR is only valid for historical KEEP rows")
     if override.get("override_kind") != SOURCE_PAIR_REPAIR:
         raise SystemExit(
-            f"{language} rank {rank}: historical KEEP override requires override_kind={SOURCE_PAIR_REPAIR!r}"
+            f"{language} rank {rank}: historical KEEP override requires an explicit supported override_kind"
         )
 
     expected_attr = (row.get("source_attribution") or "").strip()
@@ -73,6 +78,61 @@ def apply_source_pair_repair(language: str, row: dict, override: dict) -> dict:
     return effective
 
 
+def display_skeleton(value: str) -> str:
+    """Return exact semantic characters after dropping only Unicode punctuation/separators."""
+    value = unicodedata.normalize("NFKC", value or "")
+    return "".join(
+        ch for ch in value
+        if not ch.isspace()
+        and not unicodedata.category(ch).startswith("P")
+        and not unicodedata.category(ch).startswith("Z")
+    )
+
+
+def apply_display_normalization(language: str, row: dict, override: dict) -> dict:
+    rank = int(row["rank"])
+    if row.get("status") != "KEEP":
+        raise SystemExit(f"{language} rank {rank}: DISPLAY_NORMALIZATION is only valid for historical KEEP rows")
+    if override.get("override_kind") != DISPLAY_NORMALIZATION:
+        raise SystemExit(f"{language} rank {rank}: invalid DISPLAY_NORMALIZATION override_kind")
+
+    expected_attr = (row.get("source_attribution") or "").strip()
+    if not expected_attr or override.get("source_attribution") != expected_attr:
+        raise SystemExit(
+            f"{language} rank {rank}: DISPLAY_NORMALIZATION source_attribution mismatch; refusing stale normalization"
+        )
+
+    if override.get("normalization_scope") != "punctuation_whitespace_only":
+        raise SystemExit(
+            f"{language} rank {rank}: DISPLAY_NORMALIZATION requires normalization_scope='punctuation_whitespace_only'"
+        )
+    if override.get("final_status") != "CORRECT_APPROVED":
+        raise SystemExit(f"{language} rank {rank}: DISPLAY_NORMALIZATION must resolve to CORRECT_APPROVED")
+
+    source_target = row["source_target"].strip()
+    source_english = row["source_english"].strip()
+    final_target = override.get("final_target")
+    final_english = override.get("final_english")
+    if not isinstance(final_target, str) or not final_target.strip():
+        raise SystemExit(f"{language} rank {rank}: DISPLAY_NORMALIZATION final_target missing")
+    if final_english != source_english:
+        raise SystemExit(
+            f"{language} rank {rank}: DISPLAY_NORMALIZATION may not change the English translation"
+        )
+    if display_skeleton(final_target) != display_skeleton(source_target):
+        raise SystemExit(
+            f"{language} rank {rank}: DISPLAY_NORMALIZATION changed non-punctuation target content"
+        )
+    if final_target.strip() == source_target:
+        raise SystemExit(f"{language} rank {rank}: DISPLAY_NORMALIZATION is a no-op")
+
+    # v1 verifies exact historical target/English/source identity and requires the review note.
+    effective = legacy.apply_override(language, row, override)
+    effective["display_normalization"] = True
+    effective["display_normalization_scope"] = "punctuation_whitespace_only"
+    return effective
+
+
 def effective_language(language: str) -> dict:
     path = CURATION / f"{language}_sentence_row_decisions.json"
     data = load_json(path)
@@ -88,6 +148,7 @@ def effective_language(language: str) -> dict:
 
     effective_rows = []
     source_pair_repairs = 0
+    display_normalizations = 0
     for expected_rank, row in enumerate(rows, start=1):
         if int(row.get("rank", -1)) != expected_rank:
             raise SystemExit(f"{language}: rank drift at {expected_rank}")
@@ -103,13 +164,20 @@ def effective_language(language: str) -> dict:
                 effective["historical_target"] = row["source_target"]
                 effective["historical_english"] = row["source_english"]
                 effective["final_integrity_reviewed"] = True
-            else:
+            elif override.get("override_kind") == SOURCE_PAIR_REPAIR:
                 effective = apply_source_pair_repair(language, row, override)
                 source_pair_repairs += 1
-        elif override is not None:
-            if override.get("override_kind") == SOURCE_PAIR_REPAIR:
+            elif override.get("override_kind") == DISPLAY_NORMALIZATION:
+                effective = apply_display_normalization(language, row, override)
+                display_normalizations += 1
+            else:
                 raise SystemExit(
-                    f"{language} rank {expected_rank}: SOURCE_PAIR_REPAIR cannot be used for historical {status}"
+                    f"{language} rank {expected_rank}: historical KEEP override has unsupported override_kind"
+                )
+        elif override is not None:
+            if override.get("override_kind") in {SOURCE_PAIR_REPAIR, DISPLAY_NORMALIZATION}:
+                raise SystemExit(
+                    f"{language} rank {expected_rank}: {override.get('override_kind')} cannot be used for historical {status}"
                 )
             effective = legacy.apply_override(language, row, override)
         else:
@@ -130,6 +198,7 @@ def effective_language(language: str) -> dict:
     out["rows"] = effective_rows
     out["final_integrity_override_count"] = len(overrides)
     out["source_pair_repair_count"] = source_pair_repairs
+    out["display_normalization_count"] = display_normalizations
     out["status_counts"] = dict(sorted(Counter(r["status"] for r in effective_rows).items()))
     return out
 
@@ -148,6 +217,7 @@ def compile_review() -> dict:
     unresolved_total = 0
     final_rows_total = 0
     repair_total = 0
+    normalization_total = 0
     for language in LANGUAGES:
         data = effective_language(language)
         queue = []
@@ -169,11 +239,13 @@ def compile_review() -> dict:
         unresolved_total += unresolved
         final_rows_total += len(data["rows"])
         repair_total += data["source_pair_repair_count"]
+        normalization_total += data["display_normalization_count"]
         languages[language] = {
             "source_zip_sha256": data["source_zip_sha256"],
             "status_counts": data["status_counts"],
             "final_integrity_override_count": data["final_integrity_override_count"],
             "source_pair_repair_count": data["source_pair_repair_count"],
+            "display_normalization_count": data["display_normalization_count"],
             "unresolved_rows": unresolved,
             "review_queue": queue,
         }
@@ -185,11 +257,12 @@ def compile_review() -> dict:
         "total_rows": final_rows_total,
         "unresolved_rows": unresolved_total,
         "source_pair_repair_count": repair_total,
+        "display_normalization_count": normalization_total,
         "languages": languages,
         "policy": (
             "Historical non-KEEP approvals require exact source-locked final-integrity overrides. "
-            "Historical KEEP rows remain immutable except explicit SOURCE_PAIR_REPAIR overrides that "
-            "match the exact corrupted row and attribution, carry external evidence, and resolve to a non-KEEP correction."
+            "Historical KEEP rows remain immutable except explicit SOURCE_PAIR_REPAIR overrides with external evidence, "
+            "or DISPLAY_NORMALIZATION overrides that can change punctuation/whitespace only while preserving target content and exact English."
         ),
     }
 
@@ -207,11 +280,13 @@ def write_review_outputs() -> dict:
         "total_rows": result["total_rows"],
         "unresolved_rows": result["unresolved_rows"],
         "source_pair_repair_count": result["source_pair_repair_count"],
+        "display_normalization_count": result["display_normalization_count"],
         "languages": {
             language: {
                 "status_counts": info["status_counts"],
                 "final_integrity_override_count": info["final_integrity_override_count"],
                 "source_pair_repair_count": info["source_pair_repair_count"],
+                "display_normalization_count": info["display_normalization_count"],
                 "unresolved_rows": info["unresolved_rows"],
             }
             for language, info in result["languages"].items()
