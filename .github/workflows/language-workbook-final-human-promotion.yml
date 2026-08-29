@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
+      - '.github/workflows/language-workbook-final-human-promotion.yml'
       - 'audit/language-workbooks/v1.0/native-signoffs/*.json'
       - 'scripts/validate_lang_wb_native_signoff.py'
       - 'scripts/workbook_final_human_promotion_gate.py'
