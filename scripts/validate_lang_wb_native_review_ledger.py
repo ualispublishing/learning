@@ -162,6 +162,7 @@ def main() -> int:
         else ledgers.OUT / f"{lang}_native_review_ledger.csv"
     )
     report_path = ledger_path.with_name(ledger_path.stem + "_validation.json")
+    report_path.parent.mkdir(parents=True, exist_ok=True)
 
     report: dict[str, Any] = {
         "schema": "lang-wb-native-review-ledger-validation-v1",
