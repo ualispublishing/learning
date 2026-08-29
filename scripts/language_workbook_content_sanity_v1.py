@@ -133,7 +133,6 @@ def audit_language(language: str) -> dict:
                         failures.append({"type": issue, "kind": kind, "rank": pos, "field": field, "value": value})
 
         if ranks != list(range(1, len(rows) + 1)):
-            # Detailed drift entries above contain the actionable ranks.
             pass
 
     if len(sentences) == 1000:
@@ -142,7 +141,6 @@ def audit_language(language: str) -> dict:
         if len({norm(row["english"]) for row in sentences}) != 1000:
             failures.append({"type": "sentence_english_uniqueness"})
 
-    # Script plausibility is deliberately coarse and structural, not linguistic grading.
     for row in sentences:
         rank = int(row["rank"])
         target = row["target"]
@@ -175,10 +173,13 @@ def audit_language(language: str) -> dict:
                 })
 
         if language in {"arabic", "urdu"}:
-            # Typography-only findings are visible in the audit but do not fail semantic production.
             if re.search(r"\s+[،؟.]", target):
                 warnings.append({"type": "space_before_target_punctuation", "rank": rank, "target": target})
-            if "," in target and any("ARABIC" in unicodedata.name(ch, "") for ch in target if ch.isalpha()):
+            # A comma inside a digit group (for example 1,000) is an intentional numeric
+            # thousands separator, not Arabic-prose punctuation.
+            if re.search(r"(?<!\d),(?!\d)", target) and any(
+                "ARABIC" in unicodedata.name(ch, "") for ch in target if ch.isalpha()
+            ):
                 warnings.append({"type": "ascii_comma_in_arabic_script_target", "rank": rank, "target": target})
 
     return {
