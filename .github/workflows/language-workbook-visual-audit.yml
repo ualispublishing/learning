@@ -123,6 +123,63 @@ jobs:
           printf '\n  ]\n}\n' >> "$out/french_repair_manifest.json"
           cat "$out/french_repair_manifest.json"
 
+      - name: Render normalized Arabic cards exactly
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="/tmp/language-workbook-visual-audit"
+          printf '{\n  "normalizations": [\n' > "$out/arabic_normalization_manifest.json"
+          first=1
+
+          render_match() {
+            label="$1"
+            pdf="$2"
+            needle="$3"
+            pages="$(pdfinfo "$pdf" | awk '/^Pages:/ {print $2}')"
+            found=''
+            for page in $(seq 1 "$pages"); do
+              if pdftotext -f "$page" -l "$page" "$pdf" - | grep -Fq "$needle"; then
+                found="$page"
+                break
+              fi
+            done
+            if [ -z "$found" ]; then
+              echo "Could not locate normalized card $label in $pdf"
+              exit 1
+            fi
+            stem="$out/${label}"
+            pdftoppm -f "$found" -l "$found" -singlefile -png -r 170 "$pdf" "$stem"
+            test -s "${stem}.png"
+            if [ "$first" -eq 0 ]; then printf ',\n' >> "$out/arabic_normalization_manifest.json"; fi
+            first=0
+            printf '    {"label":"%s","pdf":"%s","page":%s,"needle":"%s","png":"%s"}' \
+              "$label" "$(basename "$pdf")" "$found" "$needle" "$(basename "${stem}.png")" >> "$out/arabic_normalization_manifest.json"
+          }
+
+          render_match \
+            'arabic-rank-251-normalization' \
+            'completed/languages/workbooks/v1.0/arabic/08_sentences_251-0375.pdf' \
+            'Hi! Do you work here?'
+          render_match \
+            'arabic-rank-401-normalization' \
+            'completed/languages/workbooks/v1.0/arabic/09_sentences_376-0500.pdf' \
+            'Do you know who I am?'
+          render_match \
+            'arabic-rank-724-normalization' \
+            'completed/languages/workbooks/v1.0/arabic/11_sentences_626-0750.pdf' \
+            "I'm trying to understand why you didn't do it."
+          render_match \
+            'arabic-rank-793-normalization' \
+            'completed/languages/workbooks/v1.0/arabic/12_sentences_751-0875.pdf' \
+            'Because I had a cold, I stayed at home.'
+          render_match \
+            'arabic-rank-932-normalization' \
+            'completed/languages/workbooks/v1.0/arabic/13_sentences_876-1000.pdf' \
+            'If you want, I can show you how to do that.'
+
+          printf '\n  ]\n}\n' >> "$out/arabic_normalization_manifest.json"
+          cat "$out/arabic_normalization_manifest.json"
+
       - name: Upload representative renders
         uses: actions/upload-artifact@v4
         with:
