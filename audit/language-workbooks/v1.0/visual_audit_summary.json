@@ -1,0 +1,44 @@
+{
+  "release": "v1.0",
+  "gate": "PASS",
+  "audit_type": "sampled visual render review of committed master PDFs",
+  "workflow_run_id": 33264230373,
+  "artifact_name": "language-workbook-interior-visual-audit",
+  "artifact_id": 9718146591,
+  "artifact_sha256_digest": "5b0ca98af29a8e86a71b439d6c4a8b43ab5f4340e7d5105501b1792c22e642f7",
+  "renderer": "Poppler pdftoppm at 150 DPI",
+  "sample_count": 27,
+  "criteria": [
+    "no clipped or overlapping text",
+    "no broken Arabic or Urdu glyph shaping",
+    "no broken IPA or pronunciation symbols",
+    "consistent RTL/LTR alignment",
+    "readable vocabulary and sentence-card spacing",
+    "final Sources/licensing page matches per-language provenance policy"
+  ],
+  "languages": {
+    "arabic": {
+      "master_pages": 256,
+      "sample_pages": [2, 4, 7, 46, 92, 138, 184, 230, 256],
+      "result": "PASS"
+    },
+    "french": {
+      "master_pages": 263,
+      "sample_pages": [2, 4, 7, 47, 95, 142, 189, 237, 263],
+      "result": "PASS"
+    },
+    "urdu": {
+      "master_pages": 251,
+      "sample_pages": [2, 4, 7, 45, 90, 136, 181, 226, 251],
+      "result": "PASS"
+    }
+  },
+  "observations": [
+    "Foundations and pronunciation pages render cleanly with no visible clipping or symbol corruption.",
+    "Vocabulary and distributed sentence-drill samples preserve consistent card geometry and readable line wrapping.",
+    "Arabic and Urdu RTL target text is shaped and positioned correctly in the sampled pages.",
+    "The final Sources/licensing pages render cleanly and distinguish Arabic/French Tatoeba attribution from the UALIS-controlled Urdu corpus.",
+    "Sparse final sentence pages are intentional consequences of pagination, not clipping or missing content."
+  ],
+  "scope_note": "This is a representative visual sampling across each master PDF, not an assertion that every individual page was manually inspected. Structural checks cover all 42 PDFs separately."
+}
