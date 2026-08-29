@@ -11,6 +11,8 @@ on:
       - "curation/language-workbooks/v1.0/urdu_sentence_row_decisions.json"
       - "curation/language-workbooks/v1.0/final_integrity_overrides/**"
       - "scripts/language_workbook_final_integrity_v1.py"
+      - "scripts/language_workbook_final_integrity_v2.py"
+      - "scripts/language_workbook_content_sanity_v1.py"
       - "scripts/render_verified_language_workbooks_final_integrity_v1.py"
       - "scripts/build_language_workbooks_from_decisions_v1.py"
       - "scripts/build_language_workbooks_from_decisions_provenance_v2.py"
@@ -44,7 +46,7 @@ jobs:
           python-version: "3.12"
 
       - name: Compile source-locked final integrity review
-        run: python scripts/language_workbook_final_integrity_v1.py
+        run: python scripts/language_workbook_final_integrity_v2.py
 
       - name: Publish integrity review queue before any render
         shell: bash
@@ -72,7 +74,7 @@ jobs:
           exit 1
 
       - name: Require source-locked final integrity
-        run: python scripts/language_workbook_final_integrity_v1.py --require-resolved
+        run: python scripts/language_workbook_final_integrity_v2.py --require-resolved
 
       - name: Install PDF and font dependencies
         run: |
