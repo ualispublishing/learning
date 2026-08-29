@@ -18,6 +18,18 @@ Reviewers must review the exact current master workbook for their language and r
 
 Release manifest: [`completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json`](../../../completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json).
 
+## Structured reviewer worksheets
+
+For faster systematic review of the vocabulary and sentence banks, generate the current-candidate worksheets with:
+
+```bash
+python scripts/build_lang_wb_native_review_ledgers.py
+```
+
+Instructions are in [`native-review-ledgers/README.md`](native-review-ledgers/README.md). The generator creates one 2,000-item ledger per language: 1,000 vocabulary rows plus 1,000 sentence rows. It also creates `CANDIDATE_BINDINGS.json`, binding the worksheets to the current master-workbook, release-manifest, companion-CSV, and sentence-decision identifiers.
+
+All reviewer fields are intentionally blank. The generator performs no linguistic adjudication and cannot create a PASS. The worksheets cover the structured vocabulary/sentence items only; the reviewer must still inspect the complete rendered master PDF for Foundations, pronunciation guidance, headings, instructions, and every other learner-facing element.
+
 ## Required review scope
 
 Review the complete learner-facing master workbook, not a sample. Check every vocabulary item, translation, example, sentence pair, prompt, answer, explanation, heading, pronunciation statement, and other instructional text that could affect a learner.
@@ -74,7 +86,7 @@ python scripts/workbook_final_human_promotion_gate.py
 
 The validator independently recomputes the current master-workbook Git blob hashes, reads the current sentence-decision hashes from the release manifest, verifies the release-manifest blob binding, validates reviewer qualifications and all scope attestations, requires empty defects/holds for PASS, and selects the latest current-candidate review for each language.
 
-The command exits non-zero until Arabic, French, and Urdu all have valid latest PASS records. GitHub Actions also runs this gate automatically when sign-off JSONs or the bound release artifacts change via [`.github/workflows/language-workbook-final-human-promotion.yml`](../../../.github/workflows/language-workbook-final-human-promotion.yml).
+The command exits non-zero until Arabic, French, and Urdu all have valid latest PASS records. The strict GitHub Actions promotion gate runs on actual sign-off submissions (or manual dispatch) via [`.github/workflows/language-workbook-final-human-promotion.yml`](../../../.github/workflows/language-workbook-final-human-promotion.yml). Candidate/master/manifest changes are evaluated separately by [`.github/workflows/language-workbook-signoff-binding-status.yml`](../../../.github/workflows/language-workbook-signoff-binding-status.yml), where an expected human-review HOLD is reported without turning an otherwise valid production-candidate build red.
 
 ## Promotion rule
 
