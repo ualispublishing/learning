@@ -1,0 +1,43 @@
+name: Apply Urdu C1 Unit 10
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/apply-urdu-c1-unit10.yml'
+      - 'reading/tools/apply_urdu_c1_unit10.py'
+      - 'reading/tools/unit10_specs.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  canonicalize:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate and canonicalize Unit 10
+        run: python reading/tools/apply_urdu_c1_unit10.py
+      - name: Commit canonical C1 capstone and advance to C2
+        run: |
+          if git diff --quiet; then
+            echo 'No changes required; canonical state already matches.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/urdu/c1/passages.jsonl \
+                  reading/CONTINUATION.json \
+                  reading/STATUS.json \
+                  reading/planning/ACTIVE_GENERATION_PLAN.json \
+                  reading/TASKS.md \
+                  reading/AGENT_HANDOFF_V2.md \
+                  reading/STATE_MANIFEST.json \
+                  reading/audit/urdu_c1_u10_generation_qa_2026-08-29.json
+          git commit -m 'Complete Urdu C1 generation and advance frontier to C2'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
