@@ -5,6 +5,7 @@
   "total_rows": 3000,
   "unresolved_rows": 0,
   "source_pair_repair_count": 2,
+  "display_normalization_count": 0,
   "languages": {
     "arabic": {
       "source_zip_sha256": "b72f70d3b724c3060da55f74ea1753da249d8eb38a6dbdea3dcc28798d077914",
@@ -14,6 +15,7 @@
       },
       "final_integrity_override_count": 214,
       "source_pair_repair_count": 0,
+      "display_normalization_count": 0,
       "unresolved_rows": 0,
       "review_queue": []
     },
@@ -25,6 +27,7 @@
       },
       "final_integrity_override_count": 87,
       "source_pair_repair_count": 2,
+      "display_normalization_count": 0,
       "unresolved_rows": 0,
       "review_queue": []
     },
@@ -36,9 +39,10 @@
       },
       "final_integrity_override_count": 331,
       "source_pair_repair_count": 0,
+      "display_normalization_count": 0,
       "unresolved_rows": 0,
       "review_queue": []
     }
   },
-  "policy": "Historical non-KEEP approvals require exact source-locked final-integrity overrides. Historical KEEP rows remain immutable except explicit SOURCE_PAIR_REPAIR overrides that match the exact corrupted row and attribution, carry external evidence, and resolve to a non-KEEP correction."
+  "policy": "Historical non-KEEP approvals require exact source-locked final-integrity overrides. Historical KEEP rows remain immutable except explicit SOURCE_PAIR_REPAIR overrides with external evidence, or DISPLAY_NORMALIZATION overrides that can change punctuation/whitespace only while preserving target content and exact English."
 }
