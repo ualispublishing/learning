@@ -19,6 +19,8 @@ For release state and verification material:
 - [`RELEASE_MANIFEST.json`](RELEASE_MANIFEST.json) — current v1.0 production-candidate state and source/provenance summary.
 - [`audit/language-workbooks/v1.0/`](../../../../audit/language-workbooks/v1.0/) — QA, integrity, render, pronunciation, visual-audit, and release-gate evidence.
 - [`curation/language-workbooks/v1.0/`](../../../../curation/language-workbooks/v1.0/) — source-locked row decisions, approvals, overrides, and review-state records.
+- [`FINAL_NATIVE_REVIEW_PACKET.md`](../../../../audit/language-workbooks/v1.0/FINAL_NATIVE_REVIEW_PACKET.md) — exact remaining human linguistic sign-off procedure.
+- [Final native-speaker sign-off tracker — issue #106](https://github.com/ualispublishing/learning/issues/106) — Arabic/French/Urdu completion checklist.
 
 Vocabulary comes from the repository's audited top-1,000 learner decks. Arabic and French sentence pairs originate from the ManyThings bilingual exports of the Tatoeba Project and retain supplied sentence-level attribution under CC BY 2.0 France. Urdu v1.0 uses UALIS Publishing original controlled learner sentences; those rows retain UALIS source provenance and are not represented as third-party Tatoeba quotations.
 
