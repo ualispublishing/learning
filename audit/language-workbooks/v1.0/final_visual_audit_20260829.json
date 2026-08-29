@@ -1,0 +1,112 @@
+{
+  "release": "v1.0",
+  "gate": "PASS",
+  "scope": "Rendered-PDF visual QA after final integrity-v2 production build; representative master-page sampling plus exact-page checks for every exceptional French repair and Arabic display normalization.",
+  "production_commit": "ae4f9de0b71f623cb7332d51ea791fecc17dad5f",
+  "visual_workflow_definition_commit": "2794d3c57cdd376def94778cb1ee71a21339a8e1",
+  "workflow_run_id": 33271597414,
+  "workflow_job_id": 99150918964,
+  "workflow_conclusion": "success",
+  "artifact": {
+    "id": 9720266770,
+    "name": "language-workbook-interior-visual-audit",
+    "digest": "sha256:8e9fb9fbc7204b3217ca7b4a08430e138f3f1cce2a1890152dcacf9c464d3eee",
+    "retention_note": "Artifact is temporary; this JSON permanently records the audit result and exact evidence identity."
+  },
+  "production_output_stability": {
+    "gate": "PASS",
+    "comparison_base": "ae4f9de0b71f623cb7332d51ea791fecc17dad5f",
+    "comparison_head": "2794d3c57cdd376def94778cb1ee71a21339a8e1",
+    "workbook_output_files_changed": 0,
+    "note": "GitHub commit comparison showed no completed/languages/workbooks/v1.0 output changes between the final production build and the visual-audit workflow commit."
+  },
+  "representative_master_sampling": {
+    "gate": "PASS",
+    "rendered_pages": 27,
+    "languages": {
+      "arabic": {"master_pages": 256, "sample_pages": [2, 4, 7, 46, 92, 138, 184, 230, 256]},
+      "french": {"master_pages": 263, "sample_pages": [2, 4, 7, 47, 95, 142, 189, 237, 263]},
+      "urdu": {"master_pages": 251, "sample_pages": [2, 4, 7, 45, 90, 136, 181, 226, 251]}
+    }
+  },
+  "targeted_french_repairs": {
+    "gate": "PASS",
+    "cards": [
+      {
+        "rank": 288,
+        "pdf": "08_sentences_251-0375.pdf",
+        "page": 8,
+        "locator": "Could you sign here, please?",
+        "visual_result": "PASS",
+        "note": "Complete French/English card rendered without column spill, clipping, or wrapping defect."
+      },
+      {
+        "rank": 794,
+        "pdf": "12_sentences_751-0875.pdf",
+        "page": 10,
+        "locator": "Hurry up and you can still catch your train.",
+        "visual_result": "PASS",
+        "note": "Full restored English sentence and French target rendered cleanly."
+      }
+    ]
+  },
+  "targeted_arabic_display_normalizations": {
+    "gate": "PASS",
+    "cards": [
+      {
+        "rank": 251,
+        "pdf": "08_sentences_251-0375.pdf",
+        "page": 2,
+        "locator": "Hi! Do you work here?",
+        "visual_result": "PASS",
+        "note": "Arabic comma is attached correctly with clean RTL shaping."
+      },
+      {
+        "rank": 401,
+        "pdf": "09_sentences_376-0500.pdf",
+        "page": 6,
+        "locator": "Do you know who I am?",
+        "visual_result": "PASS",
+        "note": "Arabic question mark spacing is normalized and the card remains aligned."
+      },
+      {
+        "rank": 724,
+        "pdf": "11_sentences_626-0750.pdf",
+        "page": 18,
+        "locator": "I'm trying to understand why you didn't do it.",
+        "visual_result": "PASS",
+        "note": "Final period spacing is normalized; RTL shaping and line layout are clean."
+      },
+      {
+        "rank": 793,
+        "pdf": "12_sentences_751-0875.pdf",
+        "page": 9,
+        "locator": "Because I had a cold, I stayed at home.",
+        "visual_result": "PASS",
+        "note": "Final period spacing is normalized; no clipping or alignment regression."
+      },
+      {
+        "rank": 932,
+        "pdf": "13_sentences_876-1000.pdf",
+        "page": 11,
+        "locator": "If you want, I can show you how to do that.",
+        "visual_result": "PASS",
+        "note": "Arabic prose comma renders correctly; target and English remain aligned."
+      }
+    ]
+  },
+  "manual_visual_inspection": {
+    "gate": "PASS",
+    "checked": 7,
+    "issues_found": 0,
+    "checks": [
+      "correct target/English pair visible",
+      "expected punctuation visible",
+      "RTL/LTR shaping intact",
+      "no clipping or overlap",
+      "no abnormal wrapping",
+      "card labels/ranks coherent"
+    ]
+  },
+  "quality_boundary": "This is rendered-output QA and source-locked editorial verification, not independent native-speaker certification or an absolute error-free guarantee."
+}
