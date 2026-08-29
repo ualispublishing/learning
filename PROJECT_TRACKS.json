@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated": "2026-08-28",
+  "updated": "2026-08-29",
   "purpose": "Prevent cross-project continuation mistakes when long-running learning and study-system chats are restarted or truncated.",
   "routing_rule": "When a new chat identifies a project_id or clearly names a tracked project, stay inside that project's canonical roots and read its start_here/status sources before acting. Never silently switch between independent tracks.",
   "tracks": {
@@ -69,7 +69,7 @@
         "difficulty_mix_percent": {"foundation_plus":15,"exam_calibrated":60,"stretch":20,"bellringer":5},
         "next_batch": "026",
         "next_batch_target_difficulty": {"E":12,"S":4},
-        "public_release_verified": false
+        "public_release_verified": true
       },
       "new_chat_prefix": "CISSP-ATLAS — CONTINUE"
     }

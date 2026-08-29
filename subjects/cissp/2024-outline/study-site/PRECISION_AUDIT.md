@@ -1,10 +1,10 @@
-# CISSP Atlas Precision Audit — v1.23 Release State
+# CISSP Atlas Precision Audit — v1.23 Verified Release
 
 ## Result
 
-**Published-scope mapping: PASS. Released-item semantic review: PASS within the documented audit boundary. v1.23 release promotion: staged and awaiting exact release-PR, post-merge main, and public Pages verification.**
+**Published-scope mapping: PASS. Released-item semantic review: PASS within the documented audit boundary. v1.23 release validation and public runtime verification: PASS.**
 
-The study site remains mapped to the current public ISC2 CISSP exam outline effective April 15, 2024, with cross-domain AI-security coverage represented in the project’s current source model. The last confirmed public runtime remains v1.22.0 until the v1.23 promotion completes its release controls.
+The study site remains mapped to the current public ISC2 CISSP exam outline effective April 15, 2024, with cross-domain AI-security coverage represented in the project’s current source model. The verified public runtime is v1.23.0.
 
 ## v1.23.0 released scope
 
@@ -57,25 +57,34 @@ The v1.23 bank contains the frozen 56-question baseline plus promoted original b
 - Current released difficulty: **F41 / E321 / S101 / B1**.
 - Current unreleased candidates: **0**.
 
-Every promoted record must carry semantic-review status and `original-from-public-scope` provenance. Candidate/release controls reject external question seeds and compare against the released corpus using exact, near-text, and structural duplicate checks.
+Every promoted record must carry semantic-review status and `original-from-public-scope` provenance. Candidate/release controls compare new material against the released corpus using exact, near-text, and structural duplicate checks.
 
 ## Batch 025 semantic and originality closure
 
 Batch 025 contributes **16 standard questions**, difficulty **E12 / S4**, with balanced answer positions **4/4/4/4** and primary-domain distribution D1=1, D2=2, D3=4, D4=2, D5=1, D6=1, D7=5, D8=0.
 
-All 16 Batch 025 records are semantically reviewed. The documented review records **0 answer-key conflicts, 0 source/objective mapping conflicts, 0 material factual errors remaining, and 0 external question seeds**. Candidate-inclusive enriched-subtopic exposure increased from 302/344 to **303/344**.
+All 16 Batch 025 records are semantically reviewed. The documented review records **0 answer-key conflicts, 0 source/objective mapping conflicts, 0 material factual errors remaining, and 0 external question seeds**. Released enriched-subtopic exposure increased from 302/344 to **303/344**.
 
-Validation evidence before release promotion:
+Candidate validation evidence:
 
 - Canonical candidate PR **#96**, head `a20ee669629fe8e618dc694b069bdb96fe99d844`.
 - Candidate native audit workflow **33195497272: PASS**.
 - Candidate merge commit `e0f12cfed0f3a81658637063acacfb5dfe57eaeb`.
 - Exact candidate post-merge main audit **33196231330: PASS**.
 - Candidate Pages isolation **33196231338: PASS**; public v1.22 remained unchanged.
-- Final bookkeeping PR **#98** audit **33197070577: PASS**.
-- Final bookkeeping merge commit `2f112093ccfc3873d2ce8e219632f474fd1d3490`.
+- Final candidate-bookkeeping PR **#98** audit **33197070577: PASS**.
+- Final candidate-bookkeeping merge commit `2f112093ccfc3873d2ce8e219632f474fd1d3490`.
 - Exact final-bookkeeping main audit **33197373175: PASS**.
 - Final-bookkeeping Pages workflow **33197373373: PASS**.
+
+Release validation evidence:
+
+- Release PR **#99** final validated head: `ea6198942c167a56968248cce190f3972da2da20`.
+- Exact release-PR CISSP audit **33258135385: PASS**, including deterministic knowledge, originality/duplicate, logical batch mix, coverage planner, JavaScript syntax, legacy rationale coverage, static-asset checks, interactive browser smoke, and aggregate CISSP gate.
+- Release merge commit: `05e1d62c0ed373d5b30877c4bccb9a733d650123`.
+- Exact post-merge main CISSP audit **33258294712: PASS**, including the same full gate set.
+- GitHub Pages workflow **33258294775: PASS**, including released-corpus audit, browser validation, interactive smoke, released-only artifact assembly, deploy, and deployed public runtime verification.
+- Verified public fingerprint: **v1.23.0 / 463 standard / 408 manifest released records / 1 Bellringer / released_only=true**.
 
 ## Legacy 56-question rationale backfill
 
@@ -97,28 +106,25 @@ All **62/62** numbered objectives have at least one standard-MCQ exposure in the
 
 ## Next expansion state
 
-There is **no unreleased candidate batch**. After v1.23 public closure, the planned Batch 026 target is **E12 / S4**, with objectives:
+There is **no unreleased candidate batch**. After this final release-evidence bookkeeping changeset passes its normal CISSP validation and merges, Batch 026 is unblocked. Its planned target is **E12 / S4**, with objectives:
 
 `5.4, 7.1, 7.2, 2.5, 7.10, 5.2, 6.5, 8.3, 6.3, 4.1, 5.5, 8.5, 6.2, 2.1, 2.2, 2.4`
 
-Planned primary-domain distribution is D2=4, D4=1, D5=3, D6=3, D7=3, D8=2. **Batch 026 must not begin until v1.23 passes release-PR exact-head validation, exact post-merge main validation, public Pages fingerprint verification, and final release-evidence bookkeeping.**
+Planned primary-domain distribution is D2=4, D4=1, D5=3, D6=3, D7=3, D8=2.
 
 The 800-record maturity target leaves authoring deficits of **F79 / E159 / S59 / B39**, or **336 records total**.
 
 ## v1.23 release-verification boundary
 
-The release metadata and candidate evidence are prepared for v1.23, but public v1.23 is **not yet claimed verified** in this pre-merge release state.
+All release-state verification controls are complete:
 
-The required closing sequence is:
+1. Exact-head CISSP audit on v1.23 release PR #99: **PASS** — workflow 33258135385.
+2. Exact validated release head merged: **PASS** — merge `05e1d62c0ed373d5b30877c4bccb9a733d650123`.
+3. Exact post-merge main CISSP audit: **PASS** — workflow 33258294712.
+4. GitHub Pages workflow: **PASS** — workflow 33258294775.
+5. Deployed public runtime verification: **PASS** — **v1.23.0 / 463 standard / 408 manifest released records / 1 Bellringer / released_only=true**.
 
-1. Exact-head CISSP audit on the v1.23 release PR: PASS.
-2. Merge only that validated head.
-3. Exact post-merge main CISSP audit: PASS.
-4. GitHub Pages workflow: PASS.
-5. Live public fingerprint: **v1.23.0 / 463 standard / 408 manifest released records / 1 Bellringer / released_only=true**.
-6. Final evidence bookkeeping marks v1.23 public verification complete.
-
-Until steps 1–5 complete, the last confirmed public fingerprint remains **v1.22.0 / 447 standard / 392 manifest released records / 1 Bellringer / released_only=true**.
+v1.23.0 is therefore the verified public release.
 
 ## Accuracy boundary
 
