@@ -1,0 +1,38 @@
+name: LANG-WB final human promotion gate
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'audit/language-workbooks/v1.0/native-signoffs/*.json'
+      - 'audit/language-workbooks/v1.0/FINAL_NATIVE_SIGNOFF_TEMPLATE.json'
+      - 'scripts/workbook_final_human_promotion_gate.py'
+      - 'completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json'
+      - 'completed/languages/workbooks/v1.0/arabic/00_arabic_complete_master.pdf'
+      - 'completed/languages/workbooks/v1.0/french/00_french_complete_master.pdf'
+      - 'completed/languages/workbooks/v1.0/urdu/00_urdu_complete_master.pdf'
+
+permissions:
+  contents: read
+
+jobs:
+  final-human-promotion-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate latest current-candidate human sign-offs
+        run: python scripts/workbook_final_human_promotion_gate.py
+
+      - name: Show promotion-gate report
+        if: always()
+        run: |
+          if [ -f audit/language-workbooks/v1.0/final_human_promotion_gate.json ]; then
+            cat audit/language-workbooks/v1.0/final_human_promotion_gate.json
+          fi
