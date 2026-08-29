@@ -35,19 +35,19 @@ This is a decision lens, not a universal answer key.
 - Optional: one Bellringer case.
 - Finish in Progress and leave due reviews scheduled.
 
-## Current v1.23.0 scope
+## Current v1.24.0 scope
 
 - 8 domains; official weights total 100%.
 - 62 numbered public objectives.
-- 344 mapped subtopic checks; 303/344 with explicit enriched-subtopic practice exposure.
+- 344 mapped subtopic checks; 304/344 with explicit enriched-subtopic practice exposure.
 - 33 AI-security coverage areas.
 - 140 layered retrieval cards.
-- **463 released standard scenario questions + 1 Bellringer = 464 question-bank records**.
-- Difficulty mix: **F41 / E321 / S101 / B1**.
-- Four-option teaching rationales on **463/463** standard questions.
-- **604 semantically reviewed learner-facing item IDs**, with zero known keyed-answer reversals and no known remaining material factual error in the documented audit boundary.
+- **479 released standard scenario questions + 1 Bellringer = 480 question-bank records**.
+- Difficulty mix: **F41 / E333 / S105 / B1**.
+- Four-option teaching rationales on **479/479** standard questions.
+- **620 semantically reviewed learner-facing item IDs**, with zero known keyed-answer reversals and no known remaining material factual error in the documented audit boundary.
 - 20 primary/reference sources.
 
-There are no unreleased candidate records in the proposed v1.23 release state. Batch 026 must not begin until v1.23 passes exact release-PR validation, post-merge main audit, live Pages fingerprint verification, and final evidence closure.
+There are no unreleased candidate records in the proposed v1.24 release state. Batch 027 must not begin until v1.24 passes exact release-PR validation, post-merge main audit, live Pages fingerprint verification, and final evidence closure.
 
 See `RELEASE_STATUS.json` for machine-readable release/deployment evidence and `PRECISION_AUDIT.md` for the accuracy boundary. CISSP Atlas is unofficial and does not guarantee a pass on the live adaptive exam.
