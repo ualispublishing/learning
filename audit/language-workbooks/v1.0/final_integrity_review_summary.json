@@ -2,7 +2,7 @@
   "release": "v1.0",
   "gate": "BLOCKED",
   "total_rows": 3000,
-  "unresolved_rows": 184,
+  "unresolved_rows": 141,
   "languages": {
     "arabic": {
       "status_counts": {
@@ -23,12 +23,11 @@
     },
     "urdu": {
       "status_counts": {
-        "CORRECT_APPROVED": 2,
-        "FINAL_REVIEW_REQUIRED": 43,
-        "KEEP": 955
+        "CORRECT_APPROVED": 5,
+        "KEEP": 995
       },
-      "final_integrity_override_count": 288,
-      "unresolved_rows": 43
+      "final_integrity_override_count": 331,
+      "unresolved_rows": 0
     }
   },
   "policy": "Historical non-KEEP approvals are untrusted after production integrity exposed cross-rank application. Each must receive an exact source-locked final-integrity override before production."
