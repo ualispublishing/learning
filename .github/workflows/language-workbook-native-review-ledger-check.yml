@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - 'scripts/build_lang_wb_native_review_ledgers.py'
+      - 'scripts/validate_lang_wb_native_review_ledger.py'
       - 'completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json'
       - 'completed/languages/workbooks/v1.0/arabic/arabic_vocabulary_1000.csv'
       - 'completed/languages/workbooks/v1.0/arabic/arabic_sentence_bank_1000.csv'
@@ -46,4 +47,28 @@ jobs:
               echo "$lang ledger has $rows data rows; expected 2000"
               exit 1
             fi
+          done
+
+      - name: Confirm blank worksheets remain incomplete, not falsely PASS
+        shell: bash
+        run: |
+          for lang in arabic french urdu; do
+            set +e
+            python scripts/validate_lang_wb_native_review_ledger.py "$lang"
+            code=$?
+            set -e
+            if [ "$code" -ne 2 ]; then
+              echo "$lang blank ledger validator exit=$code; expected 2 (INCOMPLETE)"
+              exit 1
+            fi
+            report="audit/language-workbooks/v1.0/native-review-ledgers/${lang}_native_review_ledger_validation.json"
+            python - "$report" <<'PY'
+          import json, sys
+          p = sys.argv[1]
+          data = json.load(open(p, encoding='utf-8'))
+          if data.get('structural_gate') != 'PASS' or data.get('review_gate') != 'INCOMPLETE':
+              raise SystemExit(f'unexpected blank-ledger validation state: {data}')
+          if (data.get('review_counts') or {}).get('UNREVIEWED') != 2000:
+              raise SystemExit(f'expected 2000 unreviewed rows: {data}')
+          PY
           done
