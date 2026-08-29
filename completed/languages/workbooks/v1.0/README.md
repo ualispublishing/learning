@@ -20,6 +20,7 @@ For release state and verification material:
 - [`audit/language-workbooks/v1.0/`](../../../../audit/language-workbooks/v1.0/) — QA, integrity, render, pronunciation, visual-audit, and release-gate evidence.
 - [`curation/language-workbooks/v1.0/`](../../../../curation/language-workbooks/v1.0/) — source-locked row decisions, approvals, overrides, and review-state records.
 - [`FINAL_NATIVE_REVIEW_PACKET.md`](../../../../audit/language-workbooks/v1.0/FINAL_NATIVE_REVIEW_PACKET.md) — exact remaining human linguistic sign-off procedure.
+- [`REVIEWER_ONBOARDING.md`](../../../../audit/language-workbooks/v1.0/REVIEWER_ONBOARDING.md) — concise public instructions for a qualified Arabic, French, or Urdu native/near-native reviewer.
 - [`native-review-ledgers/`](../../../../audit/language-workbooks/v1.0/native-review-ledgers/) — structured reviewer-worksheet instructions; generate current 2,000-item worksheets with `python scripts/build_lang_wb_native_review_ledgers.py`.
 - [Final native-speaker sign-off tracker — issue #106](https://github.com/ualispublishing/learning/issues/106) — Arabic/French/Urdu completion checklist.
 
