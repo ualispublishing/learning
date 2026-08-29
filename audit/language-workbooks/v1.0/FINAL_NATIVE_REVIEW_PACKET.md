@@ -6,6 +6,8 @@ This packet defines the final human linguistic certification step for the Arabic
 
 All automated, structural, provenance, pronunciation, rendering, reproducibility, and source-locked row-decision gates are already separate evidence. This review must not be treated as a spot check or as a substitute for those gates. Its purpose is full learner-facing linguistic review by a qualified native or near-native expert.
 
+For a concise participation walkthrough, see [`REVIEWER_ONBOARDING.md`](REVIEWER_ONBOARDING.md).
+
 ## Exact candidate being reviewed
 
 Reviewers must review the exact current master workbook for their language and record the bound identifiers below in the sign-off record.
@@ -18,6 +20,8 @@ Reviewers must review the exact current master workbook for their language and r
 
 Release manifest: [`completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json`](../../../completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json).
 
+The table above identifies the current candidate, but reviewers should use freshly generated `CANDIDATE_BINDINGS.json` values when filling a sign-off so stale hashes are never copied from documentation or an older review.
+
 ## Structured reviewer worksheets
 
 For faster systematic review of the vocabulary and sentence banks, generate the current-candidate worksheets with:
@@ -29,6 +33,22 @@ python scripts/build_lang_wb_native_review_ledgers.py
 Instructions are in [`native-review-ledgers/README.md`](native-review-ledgers/README.md). The generator creates one 2,000-item ledger per language: 1,000 vocabulary rows plus 1,000 sentence rows. It also creates `CANDIDATE_BINDINGS.json`, binding the worksheets to the current master-workbook, release-manifest, companion-CSV, and sentence-decision identifiers.
 
 All reviewer fields are intentionally blank. The generator performs no linguistic adjudication and cannot create a PASS. The worksheets cover the structured vocabulary/sentence items only; the reviewer must still inspect the complete rendered master PDF for Foundations, pronunciation guidance, headings, instructions, and every other learner-facing element.
+
+Validate a completed structured worksheet with:
+
+```bash
+python scripts/validate_lang_wb_native_review_ledger.py <arabic|french|urdu>
+```
+
+The validator rejects source drift and malformed review metadata; it returns success only when all 2,000 structured items are explicitly PASS. This is a structured-row preflight, not final certification.
+
+If the human reviewer records FAIL/HOLD items, project only those explicit decisions into a compact remediation queue with:
+
+```bash
+python scripts/extract_lang_wb_native_review_actions.py <arabic|french|urdu>
+```
+
+The extractor performs no linguistic inference and does not alter reviewer decisions.
 
 ## Required review scope
 
@@ -74,19 +94,35 @@ If a reviewer reports any defect:
 
 Use [`FINAL_NATIVE_SIGNOFF_TEMPLATE.json`](FINAL_NATIVE_SIGNOFF_TEMPLATE.json) as the canonical schema and store completed records under [`native-signoffs/`](native-signoffs/). Sign-offs are immutable historical records: if a candidate changes or a later reviewer reaches a different outcome, add a new record rather than rewriting the old one.
 
-The latest review bound to the current candidate controls. A newer FAIL or HOLD therefore overrides an older PASS for the same candidate.
+Use current candidate values from `native-review-ledgers/CANDIDATE_BINDINGS.json`; the canonical template intentionally uses placeholders instead of embedding a candidate-specific hash that could later become stale.
 
-## Automated promotion validation
+`review_completed_utc` must be the real timezone-aware completion time. Reviews dated before the current candidate existed, materially future-dated timestamps, and ambiguous ties for the latest current-candidate review are rejected fail-closed.
 
-Run:
+The latest **unambiguous** review bound to the current candidate controls. A newer FAIL or HOLD therefore overrides an older PASS for the same candidate. A newer record bound to a superseded/stale candidate does not override a current-candidate review.
+
+## Sign-off submission validation versus final promotion
+
+Each newly submitted human record is validated independently with:
+
+```bash
+python scripts/validate_lang_wb_native_signoff.py path/to/signoff.json
+```
+
+That per-record validator confirms the current-candidate binding, timestamp, reviewer qualification fields, outcome rules, scope-field shape, and PASS/FAIL/HOLD requirements. A valid Arabic record can therefore be accepted while French and Urdu are still pending.
+
+GitHub Actions runs this per-record check on sign-off submissions via [`.github/workflows/language-workbook-final-human-promotion.yml`](../../../.github/workflows/language-workbook-final-human-promotion.yml). That workflow also evaluates the overall promotion state, but an expected partial-review HOLD does **not** turn a valid single-language submission red.
+
+Candidate/master/manifest changes are evaluated separately by [`.github/workflows/language-workbook-signoff-binding-status.yml`](../../../.github/workflows/language-workbook-signoff-binding-status.yml), where an expected human-review HOLD is likewise reported without treating an otherwise valid production candidate as a failed build.
+
+The final all-language gate remains:
 
 ```bash
 python scripts/workbook_final_human_promotion_gate.py
 ```
 
-The validator independently recomputes the current master-workbook Git blob hashes, reads the current sentence-decision hashes from the release manifest, verifies the release-manifest blob binding, validates reviewer qualifications and all scope attestations, requires empty defects/holds for PASS, and selects the latest current-candidate review for each language.
+It independently recomputes current master-workbook Git blob hashes, reads current sentence-decision hashes from the release manifest, verifies release-manifest binding, checks reviewer qualifications and PASS scope attestations, enforces timestamp precedence, requires no PASS defects/holds, and selects the latest unambiguous current-candidate review for each language.
 
-The command exits non-zero until Arabic, French, and Urdu all have valid latest PASS records. The strict GitHub Actions promotion gate runs on actual sign-off submissions (or manual dispatch) via [`.github/workflows/language-workbook-final-human-promotion.yml`](../../../.github/workflows/language-workbook-final-human-promotion.yml). Candidate/master/manifest changes are evaluated separately by [`.github/workflows/language-workbook-signoff-binding-status.yml`](../../../.github/workflows/language-workbook-signoff-binding-status.yml), where an expected human-review HOLD is reported without turning an otherwise valid production-candidate build red.
+The command exits non-zero until Arabic, French, and Urdu all have valid latest PASS records. Its logic is exercised by a CI-only synthetic self-test in [`.github/workflows/language-workbook-final-human-promotion-selftest.yml`](../../../.github/workflows/language-workbook-final-human-promotion-selftest.yml); synthetic fixtures exist only inside the runner workspace and are never human certification records.
 
 ## Promotion rule
 
