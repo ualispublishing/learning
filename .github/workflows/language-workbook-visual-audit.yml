@@ -24,7 +24,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y poppler-utils
 
-      - name: Render representative interior pages
+      - name: Render representative pages
         shell: bash
         run: |
           set -euo pipefail
@@ -43,16 +43,18 @@ jobs:
               exit 1
             fi
 
-            # Page 7 plus distributed interior samples. Cover-only inspection is intentionally excluded.
+            # Foundations, first vocabulary page, distributed corpus pages, and final Sources/licensing page.
+            p0=2
+            p00=4
             p1=7
             p2=$(( (pages * 18 + 50) / 100 ))
             p3=$(( (pages * 36 + 50) / 100 ))
             p4=$(( (pages * 54 + 50) / 100 ))
             p5=$(( (pages * 72 + 50) / 100 ))
             p6=$(( (pages * 90 + 50) / 100 ))
-            p7=$(( pages - 1 ))
+            p7=$pages
 
-            for page in "$p1" "$p2" "$p3" "$p4" "$p5" "$p6" "$p7"; do
+            for page in "$p0" "$p00" "$p1" "$p2" "$p3" "$p4" "$p5" "$p6" "$p7"; do
               stem="$out/${lang}-page-${page}"
               pdftoppm -f "$page" -l "$page" -singlefile -png -r 150 "$pdf" "$stem"
               test -s "${stem}.png"
@@ -66,7 +68,7 @@ jobs:
           printf '\n  ]\n}\n' >> "$out/sample_manifest.json"
           cat "$out/sample_manifest.json"
 
-      - name: Upload representative interior renders
+      - name: Upload representative renders
         uses: actions/upload-artifact@v4
         with:
           name: language-workbook-interior-visual-audit
