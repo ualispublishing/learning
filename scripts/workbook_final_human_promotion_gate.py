@@ -7,7 +7,7 @@ promotion beyond production_candidate may not.
 """
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import hashlib
 import json
 from pathlib import Path
@@ -36,6 +36,7 @@ REQUIRED_SCOPE_FIELDS = (
     "pedagogical_and_progression_appropriateness_reviewed",
     "script_punctuation_or_diacritic_hygiene_reviewed",
 )
+MAX_FUTURE_CLOCK_SKEW = timedelta(minutes=10)
 
 
 def git_blob_sha(path: Path) -> str:
@@ -55,7 +56,7 @@ def parse_review_time(value: Any) -> datetime:
     parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
     if parsed.tzinfo is None:
         raise ValueError("review_completed_utc must include timezone")
-    return parsed
+    return parsed.astimezone(timezone.utc)
 
 
 def reviewer_complete(record: dict[str, Any]) -> bool:
@@ -154,14 +155,21 @@ def main() -> None:
     manifest = load_json(MANIFEST_PATH)
     manifest_blob = git_blob_sha(MANIFEST_PATH)
     manifest_langs = manifest.get("sentence_curation", {}).get("languages", {})
+    try:
+        candidate_generated_at = parse_review_time(manifest.get("generated_utc"))
+    except ValueError as exc:
+        raise SystemExit(f"invalid manifest generated_utc: {exc}")
+    now_utc = datetime.now(timezone.utc)
+
     overall: dict[str, Any] = {
         "release": "v1.0",
         "gate": "HOLD",
         "manifest_status": manifest.get("status"),
+        "candidate_generated_utc": manifest.get("generated_utc"),
         "release_manifest_git_blob_sha": manifest_blob,
         "languages": {},
         "problems": [],
-        "note": "PASS means all three independent full-content human sign-offs bind to the current production candidate. The latest review for a current candidate controls; an older PASS cannot override a newer FAIL or HOLD.",
+        "note": "PASS means all three independent full-content human sign-offs bind to the current production candidate. The latest unambiguous review for a current candidate controls; an older PASS cannot override a newer FAIL or HOLD.",
     }
 
     if manifest.get("status") != "production_candidate":
@@ -216,14 +224,24 @@ def main() -> None:
             )
             entry: dict[str, Any] = {"path": rel, "binding_problems": bind_problems}
             if not bind_problems:
+                entry["current_candidate"] = True
                 try:
                     reviewed_at = parse_review_time(record.get("review_completed_utc"))
-                    current_records.append((reviewed_at, path, record))
-                    entry["current_candidate"] = True
                     entry["review_completed_utc"] = record.get("review_completed_utc")
                     entry["review_outcome"] = record.get("review_outcome")
+                    temporal_problems: list[str] = []
+                    if reviewed_at < candidate_generated_at:
+                        temporal_problems.append("review_before_candidate_generated")
+                    if reviewed_at > now_utc + MAX_FUTURE_CLOCK_SKEW:
+                        temporal_problems.append("review_timestamp_in_future")
+                    if temporal_problems:
+                        entry["problems"] = temporal_problems
+                        lang_result["problems"].append(
+                            f"invalid_current_candidate_timestamp:{rel}:" + ",".join(temporal_problems)
+                        )
+                    else:
+                        current_records.append((reviewed_at, path, record))
                 except ValueError as exc:
-                    entry["current_candidate"] = True
                     entry["problems"] = [f"review_completed_utc:{exc}"]
                     lang_result["problems"].append(f"ambiguous_current_candidate_timestamp:{rel}")
             else:
@@ -235,26 +253,35 @@ def main() -> None:
 
         if current_records:
             current_records.sort(key=lambda item: item[0])
-            _, latest_path, latest_record = current_records[-1]
-            latest_rel = str(latest_path.relative_to(ROOT))
-            latest_problems = validate_pass_signoff(
-                latest_record,
-                lang=lang,
-                expected_master_path=master_rel,
-                expected_master_blob=master_blob,
-                expected_decision_sha=expected_decision,
-                expected_manifest_blob=manifest_blob,
-            )
-            lang_result["latest_current_candidate_signoff"] = {
-                "path": latest_rel,
-                "review_completed_utc": latest_record.get("review_completed_utc"),
-                "review_outcome": latest_record.get("review_outcome"),
-                "problems": latest_problems,
-            }
-            if not latest_problems and not lang_result["problems"]:
-                lang_result["gate"] = "PASS"
+            latest_time = current_records[-1][0]
+            latest_records = [item for item in current_records if item[0] == latest_time]
+            if len(latest_records) != 1:
+                lang_result["problems"].append(
+                    "ambiguous_latest_review_timestamp:" + ",".join(
+                        str(item[1].relative_to(ROOT)) for item in latest_records
+                    )
+                )
             else:
-                lang_result["problems"].append("latest_current_candidate_signoff_not_PASS")
+                _, latest_path, latest_record = latest_records[0]
+                latest_rel = str(latest_path.relative_to(ROOT))
+                latest_problems = validate_pass_signoff(
+                    latest_record,
+                    lang=lang,
+                    expected_master_path=master_rel,
+                    expected_master_blob=master_blob,
+                    expected_decision_sha=expected_decision,
+                    expected_manifest_blob=manifest_blob,
+                )
+                lang_result["latest_current_candidate_signoff"] = {
+                    "path": latest_rel,
+                    "review_completed_utc": latest_record.get("review_completed_utc"),
+                    "review_outcome": latest_record.get("review_outcome"),
+                    "problems": latest_problems,
+                }
+                if not latest_problems and not lang_result["problems"]:
+                    lang_result["gate"] = "PASS"
+                else:
+                    lang_result["problems"].append("latest_current_candidate_signoff_not_PASS")
         else:
             lang_result["problems"].append("no_current_candidate_signoff")
 
