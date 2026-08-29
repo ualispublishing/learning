@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
+      - '.github/workflows/language-workbook-native-review-ledger-check.yml'
       - 'scripts/build_lang_wb_native_review_ledgers.py'
       - 'scripts/validate_lang_wb_native_review_ledger.py'
       - 'completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json'
@@ -72,3 +73,82 @@ jobs:
               raise SystemExit(f'expected 2000 unreviewed rows: {data}')
           PY
           done
+
+      - name: Exercise PASS HOLD FAIL and source-drift validator states
+        shell: bash
+        run: |
+          mkdir -p /tmp/lang-wb-ledger-tests
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+
+          source = Path('audit/language-workbooks/v1.0/native-review-ledgers/arabic_native_review_ledger.csv')
+          with source.open('r', encoding='utf-8-sig', newline='') as f:
+              reader = csv.DictReader(f)
+              fields = list(reader.fieldnames or [])
+              rows = list(reader)
+
+          def write(name, mutate=None):
+              out = Path('/tmp/lang-wb-ledger-tests') / name
+              copied = [dict(r) for r in rows]
+              for row in copied:
+                  row['review_outcome'] = 'PASS'
+              if mutate:
+                  mutate(copied)
+              with out.open('w', encoding='utf-8-sig', newline='') as f:
+                  w = csv.DictWriter(f, fieldnames=fields)
+                  w.writeheader()
+                  w.writerows(copied)
+
+          write('pass.csv')
+
+          def hold(r):
+              r[0]['review_outcome'] = 'HOLD'
+              r[0]['reviewer_notes'] = 'Synthetic CI hold for validator testing.'
+          write('hold.csv', hold)
+
+          def fail(r):
+              r[0]['review_outcome'] = 'FAIL'
+              r[0]['defect_type'] = 'synthetic_ci_test'
+              r[0]['reviewer_notes'] = 'Synthetic CI failure for validator testing.'
+          write('fail.csv', fail)
+
+          def drift(r):
+              r[0]['target'] = r[0]['target'] + ' SYNTHETIC_DRIFT'
+          write('drift.csv', drift)
+          PY
+
+          python scripts/validate_lang_wb_native_review_ledger.py arabic /tmp/lang-wb-ledger-tests/pass.csv
+
+          for case in hold fail; do
+            set +e
+            python scripts/validate_lang_wb_native_review_ledger.py arabic "/tmp/lang-wb-ledger-tests/${case}.csv"
+            code=$?
+            set -e
+            if [ "$code" -ne 2 ]; then
+              echo "$case validator exit=$code; expected 2"
+              exit 1
+            fi
+            python - "/tmp/lang-wb-ledger-tests/${case}_validation.json" "$case" <<'PY'
+          import json, sys
+          data = json.load(open(sys.argv[1], encoding='utf-8'))
+          expected = sys.argv[2].upper()
+          if data.get('structural_gate') != 'PASS' or data.get('review_gate') != expected:
+              raise SystemExit(f'expected {expected}, got {data}')
+          PY
+          done
+
+          set +e
+          python scripts/validate_lang_wb_native_review_ledger.py arabic /tmp/lang-wb-ledger-tests/drift.csv
+          code=$?
+          set -e
+          if [ "$code" -ne 1 ]; then
+            echo "source-drift validator exit=$code; expected 1"
+            exit 1
+          fi
+          python - /tmp/lang-wb-ledger-tests/drift_validation.json <<'PY'
+          import json, sys
+          data = json.load(open(sys.argv[1], encoding='utf-8'))
+          if data.get('structural_gate') != 'FAIL' or 'source_drift' not in (data.get('error') or ''):
+              raise SystemExit(f'expected source-drift hard failure, got {data}')
+          PY
