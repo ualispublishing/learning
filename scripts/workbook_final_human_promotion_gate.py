@@ -7,6 +7,7 @@ promotion beyond production_candidate may not.
 """
 from __future__ import annotations
 
+from datetime import datetime
 import hashlib
 import json
 from pathlib import Path
@@ -47,6 +48,16 @@ def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def parse_review_time(value: Any) -> datetime:
+    text = str(value or "").strip()
+    if not text:
+        raise ValueError("empty review_completed_utc")
+    parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+    if parsed.tzinfo is None:
+        raise ValueError("review_completed_utc must include timezone")
+    return parsed
+
+
 def reviewer_complete(record: dict[str, Any]) -> bool:
     reviewer = record.get("reviewer") or {}
     required = (
@@ -57,7 +68,7 @@ def reviewer_complete(record: dict[str, Any]) -> bool:
     return all(str(reviewer.get(k, "")).strip() for k in required)
 
 
-def validate_signoff(
+def binding_problems(
     record: dict[str, Any],
     *,
     lang: str,
@@ -73,12 +84,6 @@ def validate_signoff(
         problems.append("release")
     if record.get("language") != lang:
         problems.append("language")
-    if record.get("review_outcome") != "PASS":
-        problems.append("review_outcome")
-    if not str(record.get("review_completed_utc", "")).strip():
-        problems.append("review_completed_utc")
-    if not reviewer_complete(record):
-        problems.append("reviewer_qualification")
 
     binding = record.get("candidate_binding") or {}
     if binding.get("master_workbook_path") != expected_master_path:
@@ -91,6 +96,34 @@ def validate_signoff(
         problems.append("release_manifest_path")
     if binding.get("release_manifest_git_blob_sha") != expected_manifest_blob:
         problems.append("release_manifest_git_blob_sha")
+    return problems
+
+
+def validate_pass_signoff(
+    record: dict[str, Any],
+    *,
+    lang: str,
+    expected_master_path: str,
+    expected_master_blob: str,
+    expected_decision_sha: str,
+    expected_manifest_blob: str,
+) -> list[str]:
+    problems = binding_problems(
+        record,
+        lang=lang,
+        expected_master_path=expected_master_path,
+        expected_master_blob=expected_master_blob,
+        expected_decision_sha=expected_decision_sha,
+        expected_manifest_blob=expected_manifest_blob,
+    )
+    if record.get("review_outcome") != "PASS":
+        problems.append("review_outcome")
+    try:
+        parse_review_time(record.get("review_completed_utc"))
+    except ValueError as exc:
+        problems.append(f"review_completed_utc:{exc}")
+    if not reviewer_complete(record):
+        problems.append("reviewer_qualification")
 
     scope = record.get("scope_attestation") or {}
     for field in REQUIRED_SCOPE_FIELDS:
@@ -128,7 +161,7 @@ def main() -> None:
         "release_manifest_git_blob_sha": manifest_blob,
         "languages": {},
         "problems": [],
-        "note": "PASS means all three independent full-content human sign-offs bind to the current production candidate. It is not generated from automated linguistic inference.",
+        "note": "PASS means all three independent full-content human sign-offs bind to the current production candidate. The latest review for a current candidate controls; an older PASS cannot override a newer FAIL or HOLD.",
     }
 
     if manifest.get("status") != "production_candidate":
@@ -141,7 +174,7 @@ def main() -> None:
         master_path = ROOT / master_rel
         lang_result: dict[str, Any] = {
             "gate": "HOLD",
-            "matching_pass_signoff": None,
+            "latest_current_candidate_signoff": None,
             "checked_signoffs": [],
             "problems": [],
         }
@@ -158,31 +191,73 @@ def main() -> None:
 
         master_blob = git_blob_sha(master_path)
         signoffs = candidate_signoffs(lang)
+        current_records: list[tuple[datetime, Path, dict[str, Any]]] = []
+        malformed_files: list[str] = []
         if not signoffs:
             lang_result["problems"].append("no_signoff_files")
+
         for path in signoffs:
+            rel = str(path.relative_to(ROOT))
             try:
                 record = load_json(path)
-                problems = validate_signoff(
-                    record,
-                    lang=lang,
-                    expected_master_path=master_rel,
-                    expected_master_blob=master_blob,
-                    expected_decision_sha=expected_decision,
-                    expected_manifest_blob=manifest_blob,
-                )
-            except Exception as exc:  # fail closed on malformed reviewer record
-                problems = [f"parse_error:{type(exc).__name__}:{exc}"]
-            lang_result["checked_signoffs"].append(
-                {"path": str(path.relative_to(ROOT)), "problems": problems}
-            )
-            if not problems:
-                lang_result["matching_pass_signoff"] = str(path.relative_to(ROOT))
+            except Exception as exc:  # a sign-off file must never be silently ignored
+                problem = f"parse_error:{type(exc).__name__}:{exc}"
+                malformed_files.append(rel)
+                lang_result["checked_signoffs"].append({"path": rel, "problems": [problem]})
+                continue
 
-        if lang_result["matching_pass_signoff"]:
-            lang_result["gate"] = "PASS"
+            bind_problems = binding_problems(
+                record,
+                lang=lang,
+                expected_master_path=master_rel,
+                expected_master_blob=master_blob,
+                expected_decision_sha=expected_decision,
+                expected_manifest_blob=manifest_blob,
+            )
+            entry: dict[str, Any] = {"path": rel, "binding_problems": bind_problems}
+            if not bind_problems:
+                try:
+                    reviewed_at = parse_review_time(record.get("review_completed_utc"))
+                    current_records.append((reviewed_at, path, record))
+                    entry["current_candidate"] = True
+                    entry["review_completed_utc"] = record.get("review_completed_utc")
+                    entry["review_outcome"] = record.get("review_outcome")
+                except ValueError as exc:
+                    entry["current_candidate"] = True
+                    entry["problems"] = [f"review_completed_utc:{exc}"]
+                    lang_result["problems"].append(f"ambiguous_current_candidate_timestamp:{rel}")
+            else:
+                entry["current_candidate"] = False
+            lang_result["checked_signoffs"].append(entry)
+
+        if malformed_files:
+            lang_result["problems"].append("malformed_signoff_files:" + ",".join(malformed_files))
+
+        if current_records:
+            current_records.sort(key=lambda item: item[0])
+            _, latest_path, latest_record = current_records[-1]
+            latest_rel = str(latest_path.relative_to(ROOT))
+            latest_problems = validate_pass_signoff(
+                latest_record,
+                lang=lang,
+                expected_master_path=master_rel,
+                expected_master_blob=master_blob,
+                expected_decision_sha=expected_decision,
+                expected_manifest_blob=manifest_blob,
+            )
+            lang_result["latest_current_candidate_signoff"] = {
+                "path": latest_rel,
+                "review_completed_utc": latest_record.get("review_completed_utc"),
+                "review_outcome": latest_record.get("review_outcome"),
+                "problems": latest_problems,
+            }
+            if not latest_problems and not lang_result["problems"]:
+                lang_result["gate"] = "PASS"
+            else:
+                lang_result["problems"].append("latest_current_candidate_signoff_not_PASS")
         else:
-            lang_result["problems"].append("no_current_candidate_PASS_signoff")
+            lang_result["problems"].append("no_current_candidate_signoff")
+
         overall["languages"][lang] = lang_result
 
     failed = [lang for lang in LANGUAGES if overall["languages"].get(lang, {}).get("gate") != "PASS"]
