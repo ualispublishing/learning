@@ -11,6 +11,7 @@ on:
       - "curation/language-workbooks/v1.0/urdu_sentence_row_decisions.json"
       - "curation/language-workbooks/v1.0/final_integrity_overrides/**"
       - "scripts/language_workbook_final_integrity_v1.py"
+      - "scripts/language_workbook_final_integrity_v2.py"
       - ".github/workflows/language-workbook-final-integrity-v1.yml"
 
 permissions:
@@ -36,7 +37,7 @@ jobs:
           python-version: "3.12"
 
       - name: Compile source-locked final integrity review
-        run: python scripts/language_workbook_final_integrity_v1.py
+        run: python scripts/language_workbook_final_integrity_v2.py
 
       - name: Commit review queue and summary
         shell: bash
