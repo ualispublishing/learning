@@ -1,0 +1,75 @@
+name: Language workbook visual audit
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/language-workbook-visual-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+
+      - name: Install PDF renderer
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+
+      - name: Render representative interior pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="/tmp/language-workbook-visual-audit"
+          rm -rf "$out"
+          mkdir -p "$out"
+          printf '{\n  "samples": [\n' > "$out/sample_manifest.json"
+          first=1
+
+          for lang in arabic french urdu; do
+            pdf="completed/languages/workbooks/v1.0/$lang/00_${lang}_complete_master.pdf"
+            test -s "$pdf"
+            pages="$(pdfinfo "$pdf" | awk '/^Pages:/ {print $2}')"
+            if [ -z "$pages" ] || [ "$pages" -lt 20 ]; then
+              echo "$lang: invalid page count: $pages"
+              exit 1
+            fi
+
+            # Page 7 plus distributed interior samples. Cover-only inspection is intentionally excluded.
+            p1=7
+            p2=$(( (pages * 18 + 50) / 100 ))
+            p3=$(( (pages * 36 + 50) / 100 ))
+            p4=$(( (pages * 54 + 50) / 100 ))
+            p5=$(( (pages * 72 + 50) / 100 ))
+            p6=$(( (pages * 90 + 50) / 100 ))
+            p7=$(( pages - 1 ))
+
+            for page in "$p1" "$p2" "$p3" "$p4" "$p5" "$p6" "$p7"; do
+              stem="$out/${lang}-page-${page}"
+              pdftoppm -f "$page" -l "$page" -singlefile -png -r 150 "$pdf" "$stem"
+              test -s "${stem}.png"
+              if [ "$first" -eq 0 ]; then printf ',\n' >> "$out/sample_manifest.json"; fi
+              first=0
+              printf '    {"language":"%s","master_pages":%s,"sample_page":%s,"png":"%s"}' \
+                "$lang" "$pages" "$page" "$(basename "${stem}.png")" >> "$out/sample_manifest.json"
+            done
+          done
+
+          printf '\n  ]\n}\n' >> "$out/sample_manifest.json"
+          cat "$out/sample_manifest.json"
+
+      - name: Upload representative interior renders
+        uses: actions/upload-artifact@v4
+        with:
+          name: language-workbook-interior-visual-audit
+          path: /tmp/language-workbook-visual-audit/*
+          if-no-files-found: error
+          retention-days: 7
