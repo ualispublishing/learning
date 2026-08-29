@@ -3,8 +3,8 @@
 
 Historical decision ledgers remain immutable provenance. During this guarded build only,
 the script projects the effective final-integrity decisions into the historical ledger
-paths so the provenance-aware renderer and verifier consume the exact source-locked rows.
-The original files are restored byte-for-byte in a finally block before control returns.
+paths so the provenance-aware renderer, whole-file sanity gate, and verifier consume the
+exact source-locked rows. The original files are restored byte-for-byte in a finally block.
 """
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-import language_workbook_final_integrity_v1 as integrity
+import language_workbook_final_integrity_v2 as integrity
 
 ROOT = Path(__file__).resolve().parents[1]
 CURATION = ROOT / "curation" / "language-workbooks" / "v1.0"
@@ -44,6 +44,7 @@ def main() -> None:
             path.write_text(json.dumps(effective, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
         run([sys.executable, "scripts/build_language_workbooks_from_decisions_provenance_v2.py"])
+        run([sys.executable, "scripts/language_workbook_content_sanity_v1.py"])
         run([sys.executable, "scripts/verify_curated_workbook_production_provenance_v2.py"])
     finally:
         for path, raw in originals.items():
@@ -54,7 +55,7 @@ def main() -> None:
         if path.read_bytes() != raw:
             raise SystemExit(f"historical decision ledger was not restored byte-for-byte: {path}")
 
-    print("Final-integrity provenance-aware render and verification completed with historical ledgers restored.")
+    print("Final-integrity provenance-aware render, whole-file sanity, and verification completed with historical ledgers restored.")
 
 
 if __name__ == "__main__":
