@@ -1,0 +1,68 @@
+{
+  "release": "v1.0",
+  "language": "french",
+  "source_zip_sha256": "9e35994767f7307dc1fa9d5efcc36681f3756a1bdaaa02c1381b3eb11461261e",
+  "policy": "Evidence-backed source-pair repairs discovered by the post-build whole-file sanity audit. These overrides apply only to exact corrupted historical KEEP rows and do not generalize KEEP-row mutability.",
+  "overrides": [
+    {
+      "rank": 288,
+      "override_kind": "SOURCE_PAIR_REPAIR",
+      "source_target": "\"Pouvez-vous signer ici",
+      "source_english": "s'il vous plaît ?\"",
+      "source_attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #61518 (CK) & #11238 (sacredceltic) Editorially corrected after complete row-by-row linguistic audit.",
+      "historical_status": "KEEP",
+      "historical_target": "\"Pouvez-vous signer ici",
+      "historical_english": "s'il vous plaît ?\"",
+      "final_status": "CORRECT_APPROVED",
+      "final_target": "Pouvez-vous signer ici, s'il vous plaît ?",
+      "final_english": "Could you sign here, please?",
+      "review_note": "Post-build whole-file sanity audit found a CSV/source-pair column split. Tatoeba sentence #61518 supplies 'Could you sign here, please?' and links to French #11238 'Pouvez-vous signer ici, s'il vous plaît ?'. Repair restores that exact bilingual pair while retaining the original attribution.",
+      "external_evidence": [
+        {
+          "source": "Tatoeba",
+          "sentence_id": 61518,
+          "language": "English",
+          "text": "Could you sign here, please?",
+          "license": "CC BY 2.0 France"
+        },
+        {
+          "source": "Tatoeba",
+          "sentence_id": 11238,
+          "language": "French",
+          "text": "Pouvez-vous signer ici, s'il vous plaît ?",
+          "linked_from": 61518
+        }
+      ]
+    },
+    {
+      "rank": 794,
+      "override_kind": "SOURCE_PAIR_REPAIR",
+      "source_target": "Si tu te dépêches tu peux encore attraper ton train.",
+      "source_english": "If you hurry",
+      "source_attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #476262 (morganlmallory) & #481288 (Goofy) Editorially corrected after complete row-by-row linguistic audit.",
+      "historical_status": "KEEP",
+      "historical_target": "Si tu te dépêches tu peux encore attraper ton train.",
+      "historical_english": "If you hurry",
+      "final_status": "CORRECT_APPROVED",
+      "final_target": "Si tu te dépêches tu peux encore attraper ton train.",
+      "final_english": "Hurry up and you can still catch your train.",
+      "review_note": "Post-build whole-file sanity audit found the English sentence truncated to a subordinate fragment. Tatoeba #476262 gives 'Hurry up and you can still catch your train.' and links to the exact French target #481288. Repair restores the authoritative full English pair.",
+      "external_evidence": [
+        {
+          "source": "Tatoeba",
+          "sentence_id": 476262,
+          "language": "English",
+          "text": "Hurry up and you can still catch your train.",
+          "license": "CC BY 2.0 France"
+        },
+        {
+          "source": "Tatoeba",
+          "sentence_id": 481288,
+          "language": "French",
+          "text": "Si tu te dépêches tu peux encore attraper ton train.",
+          "linked_from": 476262
+        }
+      ]
+    }
+  ]
+}
