@@ -1,8 +1,10 @@
 {
   "release": "v1.0",
+  "integrity_layer": "v2",
   "gate": "PASS",
   "total_rows": 3000,
   "unresolved_rows": 0,
+  "source_pair_repair_count": 2,
   "languages": {
     "arabic": {
       "status_counts": {
@@ -10,14 +12,16 @@
         "KEEP": 940
       },
       "final_integrity_override_count": 214,
+      "source_pair_repair_count": 0,
       "unresolved_rows": 0
     },
     "french": {
       "status_counts": {
-        "CORRECT_APPROVED": 8,
-        "KEEP": 992
+        "CORRECT_APPROVED": 10,
+        "KEEP": 990
       },
-      "final_integrity_override_count": 85,
+      "final_integrity_override_count": 87,
+      "source_pair_repair_count": 2,
       "unresolved_rows": 0
     },
     "urdu": {
@@ -26,8 +30,9 @@
         "KEEP": 995
       },
       "final_integrity_override_count": 331,
+      "source_pair_repair_count": 0,
       "unresolved_rows": 0
     }
   },
-  "policy": "Historical non-KEEP approvals are untrusted after production integrity exposed cross-rank application. Each must receive an exact source-locked final-integrity override before production."
+  "policy": "Historical non-KEEP approvals require exact source-locked final-integrity overrides. Historical KEEP rows remain immutable except explicit SOURCE_PAIR_REPAIR overrides that match the exact corrupted row and attribution, carry external evidence, and resolve to a non-KEEP correction."
 }
