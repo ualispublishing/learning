@@ -32,6 +32,8 @@ The site is unofficial and independent of ISC2. Its release status means the pub
 
 The canonical learner-facing CSVs remain at the repository root so their existing verification and maintenance tooling stays stable. They are indexed under [`completed/languages/`](completed/languages/).
 
+**Language workbooks:** the Arabic, French, and Urdu LANG-WB v1.0 master PDFs, split PDFs, 1,000-word companion CSVs, 1,000-sentence companion CSVs, release manifest, QA evidence, and curation records are indexed from [`completed/languages/workbooks/v1.0/`](completed/languages/workbooks/v1.0/).
+
 - **Arabic:** `arabic_top1000.csv`, `arabic_top3000.csv`, and `arabic_phrase_bank.csv`.
 - **French:** `french_top1000.csv` and `french_top3000.csv`.
 - **Urdu:** `urdu_top1000.csv` and `urdu_top3000.csv`.
