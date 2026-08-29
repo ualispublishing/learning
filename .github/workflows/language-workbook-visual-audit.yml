@@ -78,6 +78,51 @@ jobs:
           printf '\n  ]\n}\n' >> "$out/sample_manifest.json"
           cat "$out/sample_manifest.json"
 
+      - name: Render repaired French cards exactly
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="/tmp/language-workbook-visual-audit"
+          printf '{\n  "repairs": [\n' > "$out/french_repair_manifest.json"
+          first=1
+
+          render_match() {
+            label="$1"
+            pdf="$2"
+            needle="$3"
+            pages="$(pdfinfo "$pdf" | awk '/^Pages:/ {print $2}')"
+            found=''
+            for page in $(seq 1 "$pages"); do
+              if pdftotext -f "$page" -l "$page" "$pdf" - | grep -Fq "$needle"; then
+                found="$page"
+                break
+              fi
+            done
+            if [ -z "$found" ]; then
+              echo "Could not locate repaired card $label in $pdf"
+              exit 1
+            fi
+            stem="$out/${label}"
+            pdftoppm -f "$found" -l "$found" -singlefile -png -r 170 "$pdf" "$stem"
+            test -s "${stem}.png"
+            if [ "$first" -eq 0 ]; then printf ',\n' >> "$out/french_repair_manifest.json"; fi
+            first=0
+            printf '    {"label":"%s","pdf":"%s","page":%s,"needle":"%s","png":"%s"}' \
+              "$label" "$(basename "$pdf")" "$found" "$needle" "$(basename "${stem}.png")" >> "$out/french_repair_manifest.json"
+          }
+
+          render_match \
+            'french-rank-288-repair' \
+            'completed/languages/workbooks/v1.0/french/08_sentences_251-0375.pdf' \
+            'Could you sign here, please?'
+          render_match \
+            'french-rank-794-repair' \
+            'completed/languages/workbooks/v1.0/french/12_sentences_751-0875.pdf' \
+            'Hurry up and you can still catch your train.'
+
+          printf '\n  ]\n}\n' >> "$out/french_repair_manifest.json"
+          cat "$out/french_repair_manifest.json"
+
       - name: Upload representative renders
         uses: actions/upload-artifact@v4
         with:
