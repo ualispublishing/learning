@@ -1,0 +1,48 @@
+name: Language workbook content audit export
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/language-workbook-content-audit-export.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+
+      - name: Verify companion CSV inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=()
+          for lang in arabic french urdu; do
+            files+=("completed/languages/workbooks/v1.0/$lang/${lang}_vocabulary_1000.csv")
+            files+=("completed/languages/workbooks/v1.0/$lang/${lang}_sentence_bank_1000.csv")
+          done
+          for file in "${files[@]}"; do
+            test -s "$file"
+          done
+          test "${#files[@]}" -eq 6
+
+      - name: Upload committed companion CSVs
+        uses: actions/upload-artifact@v4
+        with:
+          name: language-workbook-content-audit-inputs
+          path: |
+            completed/languages/workbooks/v1.0/arabic/arabic_vocabulary_1000.csv
+            completed/languages/workbooks/v1.0/arabic/arabic_sentence_bank_1000.csv
+            completed/languages/workbooks/v1.0/french/french_vocabulary_1000.csv
+            completed/languages/workbooks/v1.0/french/french_sentence_bank_1000.csv
+            completed/languages/workbooks/v1.0/urdu/urdu_vocabulary_1000.csv
+            completed/languages/workbooks/v1.0/urdu/urdu_sentence_bank_1000.csv
+          if-no-files-found: error
+          retention-days: 7
