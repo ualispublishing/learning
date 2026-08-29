@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/language-workbook-final-human-promotion-selftest.yml'
       - 'scripts/workbook_final_human_promotion_gate.py'
+      - 'scripts/validate_lang_wb_native_signoff.py'
       - 'audit/language-workbooks/v1.0/FINAL_NATIVE_SIGNOFF_TEMPLATE.json'
       - 'completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json'
       - 'completed/languages/workbooks/v1.0/arabic/00_arabic_complete_master.pdf'
@@ -49,7 +50,6 @@ jobs:
           python - <<'PY'
           from datetime import datetime, timedelta, timezone
           import json
-          from pathlib import Path
           import sys
 
           sys.path.insert(0, 'scripts')
@@ -94,10 +94,18 @@ jobs:
               path.write_text(json.dumps(record, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
           PY
 
+      - name: Confirm each synthetic PASS record is individually valid
+        shell: bash
+        run: |
+          for lang in arabic french urdu; do
+            python scripts/validate_lang_wb_native_signoff.py \
+              "audit/language-workbooks/v1.0/native-signoffs/${lang}_synthetic_base_pass.json"
+          done
+
       - name: Confirm three valid current-candidate PASS records pass
         run: python scripts/workbook_final_human_promotion_gate.py
 
-      - name: Confirm newer stale-candidate record does not override current PASS
+      - name: Confirm newer stale-candidate record is rejected individually but does not override current PASS
         shell: bash
         run: |
           python - <<'PY'
@@ -115,9 +123,17 @@ jobs:
               json.dumps(base, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
           )
           PY
+          set +e
+          python scripts/validate_lang_wb_native_signoff.py audit/language-workbooks/v1.0/native-signoffs/arabic_synthetic_stale_fail.json
+          code=$?
+          set -e
+          if [ "$code" -ne 1 ]; then
+            echo "stale per-record validator exit=$code; expected 1"
+            exit 1
+          fi
           python scripts/workbook_final_human_promotion_gate.py
 
-      - name: Confirm newer current-candidate HOLD overrides older PASS
+      - name: Confirm newer current-candidate HOLD is a valid record and overrides older PASS
         shell: bash
         run: |
           python - <<'PY'
@@ -134,6 +150,7 @@ jobs:
               json.dumps(base, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
           )
           PY
+          python scripts/validate_lang_wb_native_signoff.py audit/language-workbooks/v1.0/native-signoffs/arabic_synthetic_newer_hold.json
           set +e
           python scripts/workbook_final_human_promotion_gate.py
           code=$?
@@ -144,7 +161,7 @@ jobs:
           fi
           rm audit/language-workbooks/v1.0/native-signoffs/arabic_synthetic_newer_hold.json
 
-      - name: Confirm future-dated current-candidate review is rejected
+      - name: Confirm future-dated current-candidate review is rejected individually and globally
         shell: bash
         run: |
           python - <<'PY'
@@ -160,11 +177,13 @@ jobs:
           )
           PY
           set +e
+          python scripts/validate_lang_wb_native_signoff.py audit/language-workbooks/v1.0/native-signoffs/arabic_synthetic_future_pass.json
+          record_code=$?
           python scripts/workbook_final_human_promotion_gate.py
-          code=$?
+          gate_code=$?
           set -e
-          if [ "$code" -ne 2 ]; then
-            echo "future-review gate exit=$code; expected 2"
+          if [ "$record_code" -ne 1 ] || [ "$gate_code" -ne 2 ]; then
+            echo "future review record=$record_code gate=$gate_code; expected 1 and 2"
             exit 1
           fi
           python - <<'PY'
@@ -176,7 +195,7 @@ jobs:
           PY
           rm audit/language-workbooks/v1.0/native-signoffs/arabic_synthetic_future_pass.json
 
-      - name: Confirm duplicate latest timestamps are ambiguous and rejected
+      - name: Confirm duplicate latest timestamps are individually valid but globally ambiguous
         shell: bash
         run: |
           python - <<'PY'
@@ -194,6 +213,8 @@ jobs:
                   json.dumps(record, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
               )
           PY
+          python scripts/validate_lang_wb_native_signoff.py audit/language-workbooks/v1.0/native-signoffs/arabic_synthetic_duplicate_a.json
+          python scripts/validate_lang_wb_native_signoff.py audit/language-workbooks/v1.0/native-signoffs/arabic_synthetic_duplicate_b.json
           set +e
           python scripts/workbook_final_human_promotion_gate.py
           code=$?
@@ -210,7 +231,11 @@ jobs:
               raise SystemExit(f'duplicate latest timestamp was not rejected: {problems}')
           PY
 
-      - name: Confirm self-test never committed synthetic certification
+      - name: Confirm self-test contains no tracked synthetic certification
         shell: bash
         run: |
+          if git ls-files 'audit/language-workbooks/v1.0/native-signoffs/*synthetic*.json' | grep -q .; then
+            echo "Synthetic sign-off fixture unexpectedly became a tracked repository file."
+            exit 1
+          fi
           git diff --exit-code -- audit/language-workbooks/v1.0/native-signoffs
