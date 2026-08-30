@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "gate": "Gate 0 — route / continuation / state-bundle consistency",
+  "date": "2026-08-30",
+  "status": "PASS",
+  "scope": "Post-generation structural/state integrity for the exact 1080-passage canonical corpus; not semantic or educator approval.",
+  "continuation_validator": {
+    "command": "python reading/tools/validate_continuation_state.py",
+    "returncode": 0,
+    "output": "LANG-A1C2 continuation validation: PASS\nstate bundle: 10 files, 47377 bytes, sha256 fdc341646edb607ee7b1a5fcd624e776a162e88d9671c17b3f999977aa304d8b\ncanonical passages: 1080 (Arabic 360, French 360, Urdu 360)\nactive frontier: None None\nrelease evidence is decoupled from live production counts\nUrdu A1 pinned integrity baseline: exact blob match; 0 hard errors; 0 warnings; quality_promotion=false"
+  },
+  "canonical_totals": {
+    "project": 1080,
+    "arabic": 360,
+    "french": 360,
+    "urdu": 360,
+    "questions": 10800,
+    "answers": 10800
+  },
+  "generation_frontier": {
+    "remaining_generation_passages": 0,
+    "active_language": null,
+    "active_level": null,
+    "generation_complete": true
+  },
+  "canonical_files": {
+    "reading/arabic/a1/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 404041,
+      "sha256": "d6142ee56ec830c4a41cb7244fe99c65824cebbe59ff2e9b8f44d4640c9e228b",
+      "git_blob": "f1eef9fa9cf0afb0007d5a22d396e5c78b143f03"
+    },
+    "reading/arabic/a2/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 480606,
+      "sha256": "f27ad06c372d316ca70346e19a10a72645577897de8db676e317d869d8945e1c",
+      "git_blob": "e4d5470d100e22f58e75cc2386860be8960f14f0"
+    },
+    "reading/arabic/b1/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 583526,
+      "sha256": "c2968274d92dfdb4c0c35812d89a501aea751de54af6f725d6ac1f39e008600b",
+      "git_blob": "53f114cd16a15f5da144b5a86a240ab131271ec1"
+    },
+    "reading/arabic/b2/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 674213,
+      "sha256": "230d5a5b871795c6f46a584e8c54b0dca841f7126ff09b7d2d5194e105662762",
+      "git_blob": "a9486b2c38dc53661143e734c9797cd26fa1f742"
+    },
+    "reading/arabic/c1/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 797878,
+      "sha256": "2a8d71a25a8176a4383488b8d794151eb041e0e60e96b251f1c13e403d14b23e",
+      "git_blob": "3f68da825c50c3018f9e054cbeec27ba01b17be0"
+    },
+    "reading/arabic/c2/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 960203,
+      "sha256": "82c0ecec8824bda6c5c6d351571086d91a20b3640ba50c9f5e7825b468bf4909",
+      "git_blob": "eb4105692d37c2dc38dc5241cee0edcabcf64585"
+    },
+    "reading/french/a1/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 354935,
+      "sha256": "1cdb31ecb8b987c50051bb6f8fa5b2f7fda812cb3004c81ab8697f832fceacba",
+      "git_blob": "8c2b965b5c9b2a47fd6c8dd68e1f3a49dd08c1ac"
+    },
+    "reading/french/a2/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 385882,
+      "sha256": "8fcd71903e6a495a2abaac8d436232b4b7ee00ae5ac0bce4d273aa4a134b3c15",
+      "git_blob": "034a43143992314200ec6997cdfde6dd34266811"
+    },
+    "reading/french/b1/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 488479,
+      "sha256": "7b1013fa606761bc7cc69fdaf67c66a0efcc9c91c478b1c8a5f8523458f9451b",
+      "git_blob": "4a2cd9ff30c3cea58caf20fca2822b06200622ca"
+    },
+    "reading/french/b2/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 625977,
+      "sha256": "bfa64c472a93d572d65fbe0217283b9d53bbb0a8d88fee7ea3a3aef1c7993942",
+      "git_blob": "38976211f13329ba3e2b0b9dbd6868699023d05d"
+    },
+    "reading/french/c1/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 662916,
+      "sha256": "dead8e5d6e6e60a7c6c5185996159670e6077ea2d5da31860de168674050b39a",
+      "git_blob": "bf11016755fceba84b4369c64221d205230cc0b8"
+    },
+    "reading/french/c2/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 831849,
+      "sha256": "c161c4551a6ce0222850778c02ed0662e00bb60e5386d5dc0b4f31a92cb9f277",
+      "git_blob": "9678c2b8583670a8dcfcc78e3a51da96537bb100"
+    },
+    "reading/urdu/a1/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 425398,
+      "sha256": "7f56631bd64b96bacf6e811abd2eaae7129484ce95496e5fa8f01e19d03f97af",
+      "git_blob": "ec0970dc1916ce523dd3320d2f4dca4c7f8bc677"
+    },
+    "reading/urdu/a2/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 510746,
+      "sha256": "2b997a38de4f4a2602591dee7e7b08d66f16ef05717af9c1007cb68399a83948",
+      "git_blob": "3e77bbee5fa82243c0092f0a0ad3b63eb5a96844"
+    },
+    "reading/urdu/b1/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 549632,
+      "sha256": "37ae0eb5720dc7aa676b745af9cd943ea992b7e7c4b863e0d5530c8e8a369a0b",
+      "git_blob": "5fcb94d20e5f2ec15e07e9ef5d53cd43c66fcee9"
+    },
+    "reading/urdu/b2/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 601369,
+      "sha256": "2b095cefb9ee39b6b12f483c48818210333dbb1ac3a650a79fa76bea9218f131",
+      "git_blob": "51853f3ef59c5801922a593c8413f4d5f29f060d"
+    },
+    "reading/urdu/c1/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 618363,
+      "sha256": "81a8e4e45c78a226ad1181652e9d27d29cfea1db72a9a9304915267e5060fe3b",
+      "git_blob": "6194c5126c37b182d7be09a72feccd18d7a1104d"
+    },
+    "reading/urdu/c2/passages.jsonl": {
+      "passages": 60,
+      "questions": 600,
+      "answers": 600,
+      "bytes": 655130,
+      "sha256": "bad8c9854cb033fc87d035c457641743f9e2405af11c9be5dbdb9692d32634b4",
+      "git_blob": "ea42d00cc7ab6d56251be9fa0bbe93c4a0ff5bc9"
+    }
+  },
+  "urdu_a1_integrity_anchor": {
+    "pinned_git_blob": "ec0970dc1916ce523dd3320d2f4dca4c7f8bc677",
+    "actual_git_blob": "ec0970dc1916ce523dd3320d2f4dca4c7f8bc677",
+    "matches": true
+  },
+  "release_state_snapshot": {
+    "arabic": {
+      "release_state": "INTERNAL_LANGUAGE_PASS",
+      "educator_release_ready": false
+    },
+    "french": {
+      "release_state": "REOPEN_REQUIRED",
+      "educator_release_ready": false
+    },
+    "urdu": {
+      "release_state": "NOT_RELEASE_READY",
+      "educator_release_ready": false
+    }
+  },
+  "hard_errors": 0,
+  "errors": [],
+  "release_claim": false,
+  "next_gate": "Language-specific fresh educator-release revalidation; Gate 0 does not promote any language to release-ready."
+}

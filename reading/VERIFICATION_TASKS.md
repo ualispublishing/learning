@@ -1,19 +1,21 @@
 # LANG-A1C2 Active Verification Queue
 
-Updated: 2026-08-23
+Updated: 2026-08-30
 
 This is the live verification queue only. Completed audit waves and detailed evidence remain in `reading/audit/` and Git history. Release claims are controlled by `reading/RELEASE_STATUS.json`.
 
 ## Gate 0 — route / continuation / state-bundle consistency
 
-- [ ] `PROJECT_TRACKS.json` routes the session to `LANG-A1C2` and excludes the workbook roots.
-- [ ] `reading/STATE_MANIFEST.json` matches the exact tracked live-state bytes and aggregate SHA-256.
-- [ ] `python reading/tools/validate_continuation_state.py` passes against the routed state bundle and live canonical files.
-- [ ] Stored production totals equal canonical JSONL counts.
-- [ ] Active frontier in `CONTINUATION.json`, `STATUS.json`, and `ACTIVE_GENERATION_PLAN.json` agrees.
-- [ ] Cached release summary in `CONTINUATION.json` agrees with `RELEASE_STATUS.json`.
-- [ ] Pinned Urdu A1 blob still matches the canonical file before relying on its final integrity audit.
+- [x] `PROJECT_TRACKS.json` routes the session to `LANG-A1C2` and excludes the workbook roots.
+- [x] `reading/STATE_MANIFEST.json` matches the exact tracked live-state bytes and aggregate SHA-256.
+- [x] `python reading/tools/validate_continuation_state.py` passes against the routed state bundle and live canonical files.
+- [x] Stored production totals equal canonical JSONL counts.
+- [x] Active frontier in `CONTINUATION.json`, `STATUS.json`, and `ACTIVE_GENERATION_PLAN.json` agrees.
+- [x] Cached release summary in `CONTINUATION.json` agrees with `RELEASE_STATUS.json`.
+- [x] Pinned Urdu A1 blob still matches the canonical file before relying on its final integrity audit.
 - [ ] A zero-step/skipped CI run is never treated as verification success.
+
+Fresh Gate 0 evidence: `reading/audit/post_generation_gate0_2026-08-30.json` (exact 1,080-passage corpus; release claim false).
 
 ## Arabic — educator release blocked
 
