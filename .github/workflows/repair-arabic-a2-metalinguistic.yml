@@ -35,7 +35,7 @@ jobs:
             git fetch origin "+refs/heads/${ref}:refs/remotes/origin/${ref}"
           done
 
-      - name: Apply guarded A2 83-item remediation
+      - name: Apply guarded A2 remediation
         run: python reading/tools/repair_arabic_a2_metalinguistic.py
 
       - name: Regenerate exact-corpus Gate 0
@@ -60,10 +60,16 @@ jobs:
 
           if repair['repairs_applied'] != 83:
               raise SystemExit(f"Expected 83 A2 repairs, got {repair['repairs_applied']}")
-          if repair['formal_question_types_after_full_a2'] != 0:
-              raise SystemExit('Formal question types remain in A2')
+          if repair['historical_adjudicated_false_positives_checked'] != 1:
+              raise SystemExit('Expected exactly one bound A2 comprehension false positive')
+          if repair['formal_type_labels_after_full_a2'] != 1:
+              raise SystemExit('Expected exactly one preserved legacy formal-type label in A2')
+          if repair['adjudicated_comprehension_false_positives_after'] != 1:
+              raise SystemExit('A2 false-positive binding was not preserved exactly')
+          if repair['unresolved_metalinguistic_defects_after'] != 0:
+              raise SystemExit('Unresolved metalinguistic defects remain in A2')
           if repair['explicit_formal_prompt_pattern_findings_after'] != 0:
-              raise SystemExit('Explicit formal prompt patterns remain in A2')
+              raise SystemExit('Unadjudicated explicit formal prompt patterns remain in A2')
           if repair['a2_questions_checked'] != 600 or repair['a2_answers_checked'] != 600:
               raise SystemExit('A2 full Q/A scan count mismatch')
           if not repair['untargeted_records_byte_identical']:
@@ -102,25 +108,27 @@ jobs:
               'a1_formal_label_questions_repaired_total': 63,
               'a1_formal_question_types_remaining': 0,
               'a2_questions_checked': 600,
-              'a2_historical_candidates_repaired_total': 83,
-              'a2_formal_question_types_remaining': 0,
-              'a2_explicit_formal_prompt_patterns_remaining': 0,
+              'a2_historical_repairs_total': 83,
+              'a2_adjudicated_comprehension_false_positives': 1,
+              'a2_legacy_formal_type_labels_remaining': 1,
+              'a2_unresolved_historical_metalinguistic_defects': 0,
+              'a2_explicit_unadjudicated_formal_prompt_patterns_remaining': 0,
               'combined_a1_a2_repairs': 146,
-              'remaining_scope': 'Fresh A1 explicit prompt-pattern/CEFR review and B1-C2 CEFR/metalinguistic review as applicable; naturalness, semantic educator, independent native/model-family, and blind review remain separate.',
+              'remaining_scope': 'Fresh A1-A2 CEFR/prompt review beyond the historical candidate sets and B1-C2 CEFR/metalinguistic review as applicable; naturalness, semantic educator, independent native/model-family, and blind review remain separate.',
               'latest_artifact': artifact,
           }
           blockers = [b for b in release.get('global_release_blockers', []) if not b.startswith('Arabic ')]
-          blockers.insert(0, 'Arabic fresh deterministic release revalidation remains FAIL with 2496 open release-evidence findings; NFC defects and the historically identified A1-A2 low-level metalinguistic classes are closed (146 repairs total), but broader CEFR, naturalness, semantic, and independent review remain open.')
+          blockers.insert(0, 'Arabic fresh deterministic release revalidation remains FAIL with 2496 open release-evidence findings; NFC defects and the historically identified A1-A2 low-level metalinguistic defects are closed (146 repairs total). One A2 legacy grammar_function label is preserved because its exact question was independently adjudicated as reading-comprehension, not a grammatical-label task. Broader CEFR, naturalness, semantic, and independent review remain open.')
           release['global_release_blockers'] = blockers
           release['updated'] = '2026-08-30'
           release_path.write_text(json.dumps(release, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
           text = tasks_path.read_text(encoding='utf-8')
           parent = '- [ ] corpus-wide low-level metalinguistic/CEFR question audit and repair;\n'
-          child = '- [x] Arabic A2 historical low-level batch: re-adjudicated all 83 candidates; 600 questions / 600 answers scanned, with 0 formal question types and 0 configured explicit formal-prompt patterns remaining;\n'
+          child = '- [x] Arabic A2 historical low-level batch: applied 83 current-corpus repairs and revalidated 1 bound comprehension false positive; 600 questions / 600 answers scanned with 0 unresolved historical metalinguistic defects and 0 unadjudicated configured formal-prompt patterns;\n'
           if child not in text:
               text = text.replace(parent, parent + child, 1)
-          evidence_line = 'A2 metalinguistic repair evidence: `reading/audit/arabic_a2_metalinguistic_repair_2026-08-30.json` — 83 current-corpus repairs across all 10 A2 units; 0 formal question types and 0 configured explicit formal-prompt findings across 600 A2 questions; untargeted records byte-identical.\n\n'
+          evidence_line = 'A2 metalinguistic repair evidence: `reading/audit/arabic_a2_metalinguistic_repair_2026-08-30.json` — 83 current-corpus repairs across all 10 A2 units plus 1 exact preserved comprehension false positive whose legacy type is `grammar_function`; 0 unresolved historical metalinguistic defects and 0 unadjudicated configured formal-prompt findings across 600 A2 questions; untargeted records byte-identical.\n\n'
           anchor = 'Open verification work:\n\n'
           if evidence_line not in text:
               pos = text.find(anchor, text.find('## Arabic'))
