@@ -6,6 +6,29 @@ The current release is a **production candidate**, not a claimed human-certified
 
 You may review **one language only**. Arabic, French, and Urdu are certified independently.
 
+## Fastest start: use a self-contained reviewer bundle
+
+A reviewer does not need to assemble the workbook, worksheet, candidate hashes, sign-off draft, and instructions manually.
+
+GitHub Actions provides [`LANG-WB reviewer bundles`](../../../.github/workflows/language-workbook-reviewer-bundles.yml). Run the workflow and choose `arabic`, `french`, `urdu`, or `all`; the resulting artifact contains a ZIP for each requested language. Each ZIP contains the complete master PDF, a blank 2,000-item review ledger, exact current candidate binding, intentionally incomplete sign-off draft, canonical review documents, PR checklist, bundle manifest, and SHA-256 checksums.
+
+The same package can be built locally with one command:
+
+```bash
+python scripts/build_lang_wb_reviewer_bundle.py arabic --output-root ~/Desktop
+# or: french / urdu
+```
+
+The generated draft contains **no human outcome, reviewer identity/qualification, or completed scope attestations**. It is deliberately invalid as a sign-off until a qualified reviewer completes the required review and fills the human-only fields truthfully.
+
+Language-specific work trackers:
+
+- Arabic: [issue #114](https://github.com/ualispublishing/learning/issues/114)
+- French: [issue #115](https://github.com/ualispublishing/learning/issues/115)
+- Urdu: [issue #116](https://github.com/ualispublishing/learning/issues/116)
+
+Parent release tracker: [issue #106](https://github.com/ualispublishing/learning/issues/106).
+
 ## 1. Confirm that you are an appropriate reviewer
 
 A reviewer should be either:
@@ -39,7 +62,7 @@ Do not change the master PDF, release manifest, companion CSVs, or decision ledg
 
 ## 4. Use the structured worksheet for the 2,000 row-based items
 
-From the repository root:
+If you are not using the self-contained bundle, generate the current worksheets from the repository root:
 
 ```bash
 python scripts/build_lang_wb_native_review_ledgers.py
@@ -84,7 +107,7 @@ A reviewer is not required to implement the source repair personally.
 
 ## 7. Prepare and complete your immutable sign-off
 
-The safest way to avoid copying candidate hashes by hand is to generate a draft bound to the exact current candidate:
+If you are not using the bundle's already bound incomplete draft, generate one with:
 
 ```bash
 python scripts/prepare_lang_wb_native_signoff_draft.py arabic
