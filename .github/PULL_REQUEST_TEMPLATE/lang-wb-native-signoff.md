@@ -34,7 +34,9 @@
 ## Submission
 
 - [ ] I added a **new immutable JSON record** under `audit/language-workbooks/v1.0/native-signoffs/` using `FINAL_NATIVE_SIGNOFF_TEMPLATE.json`.
+- [ ] The filename begins with the same declared language plus `_`: `arabic_`, `french_`, or `urdu_`.
 - [ ] `review_completed_utc` is the real timezone-aware completion time of this review.
-- [ ] I have not deleted or rewritten prior sign-off history.
+- [ ] I have not modified, renamed, or deleted any previously committed sign-off record; a later outcome is submitted as another new file.
+- [ ] I expect CI to validate this addition on the pull request before merge.
 
 A valid single-language submission may still leave the overall LANG-WB release on human-review HOLD while the other languages are pending. That is expected; the all-language promotion gate passes only when Arabic, French, and Urdu each have a valid latest PASS bound to the current candidate.
