@@ -39,4 +39,11 @@
 - [ ] I have not modified, renamed, or deleted any previously committed sign-off record; a later outcome is submitted as another new file.
 - [ ] I expect CI to validate this addition on the pull request before merge.
 
+### If the committer is not the linguistic reviewer
+
+- [ ] The reviewer authored the submitted human-review fields; the committer did not fill or reinterpret them on the reviewer's behalf.
+- [ ] The reviewer identity/qualification stored inside the JSON remains the authoritative reviewer identity; the GitHub commit author is not being presented as the linguistic reviewer.
+- [ ] The returned record was preserved unchanged in substance. If the reviewer supplied a SHA-256 checksum, it was checked before submission.
+- [ ] Any incomplete, malformed, stale, FAIL, or HOLD review was **not** upgraded to PASS by the maintainer.
+
 A valid single-language submission may still leave the overall LANG-WB release on human-review HOLD while the other languages are pending. That is expected; the all-language promotion gate passes only when Arabic, French, and Urdu each have a valid latest PASS bound to the current candidate.
