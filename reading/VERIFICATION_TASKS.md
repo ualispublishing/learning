@@ -21,7 +21,7 @@ Fresh Gate 0 evidence: `reading/audit/post_generation_gate0_2026-08-30.json` (ex
 
 Current generation: 360/360 complete.
 
-Current release position: fresh deterministic revalidation is **FAIL** with **2506** open evidence findings; educator/publication release remains **not ready** under the current assurance profile.
+Current release position: fresh deterministic revalidation is **FAIL** with **2496** open evidence findings; educator/publication release remains **not ready** under the current assurance profile.
 
 Fresh deterministic evidence: `reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json` — 360 records, 3,600 questions, 3,600 answers; status **FAIL**; open findings **2496**. This is a release-evidence gate, not semantic approval.
 
@@ -29,10 +29,13 @@ NFC repair evidence: `reading/audit/arabic_nfc_repair_2026-08-30.json`; the reru
 
 Open verification work:
 
+A1 Unit 1 metalinguistic repair evidence: `reading/audit/arabic_a1_u01_metalinguistic_repair_2026-08-30.json` — 9 repaired questions, 0 formal metalinguistic question types remaining in Unit 1, records 7–60 byte-identical.
+
 - [x] fresh deterministic educator-release revalidation;
 - [x] close the 10 fresh deterministic Unicode NFC findings with a byte-bounded normalization-only repair;
 - [ ] substantively resolve the fresh deterministic release-evidence blockers without bulk-promoting draft/pending metadata;
 - [ ] corpus-wide low-level metalinguistic/CEFR question audit and repair;
+- [x] Arabic A1 Unit 1 sub-batch: reviewed 6 passages / 60 questions and replaced 9 formal-label items with A1 reading/use tasks;
 - [ ] corpus-wide Arabic grammar-in-context naturalness audit;
 - [ ] full passage language/question/answer semantic review;
 - [ ] independent professional/native and model-family disagreement passes;

@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A1",
+  "unit": 1,
+  "date": "2026-08-30",
+  "status": "APPLIED_AND_REVIEWED_INTERNAL",
+  "scope": "Question/answer-only remediation of nine low-level formal-label items across Arabic A1 Unit 1; passage prose, lexical inventory, and records 7-60 unchanged.",
+  "source_sha256": "d6142ee56ec830c4a41cb7244fe99c65824cebbe59ff2e9b8f44d4640c9e228b",
+  "result_sha256": "940975ffccbdaf2f685dfbdd6c87caa334c89cb33df1458efd43ec5b103ddecc",
+  "passages_reviewed": 6,
+  "questions_reviewed": 60,
+  "answers_reviewed": 60,
+  "questions_repaired": 9,
+  "repairs": [
+    {
+      "passage_id": "ar-a1-u01-p01",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "contrast",
+      "new_prompt": "إذا كانت ليلى في الغرفة والكتاب بجانبها، فأيهما أنسب: «الكتاب هنا» أم «الكتاب هناك»؟",
+      "new_answer": "الكتاب هنا."
+    },
+    {
+      "passage_id": "ar-a1-u01-p02",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "sequence",
+      "new_prompt": "إذا قالت الأم «بعد قليل نذهب إلى المدرسة»، فهل الذهاب الآن أم لاحقًا؟",
+      "new_answer": "لاحقًا، بعد قليل."
+    },
+    {
+      "passage_id": "ar-a1-u01-p02",
+      "question_id": "q9",
+      "old_type": "grammar_identification",
+      "new_type": "grammar_choice",
+      "new_prompt": "اختر الجملة الصحيحة لنفي أخذ الكتب في الماضي: «لم تأخذ كل الكتب» أم «لا أخذت كل الكتب»؟",
+      "new_answer": "لم تأخذ كل الكتب."
+    },
+    {
+      "passage_id": "ar-a1-u01-p03",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "reference_resolution",
+      "new_prompt": "في «أريد أن أذهب إلى هناك مرة أخرى»، إلى أي مكان تشير «هناك»؟",
+      "new_answer": "إلى الحديقة."
+    },
+    {
+      "passage_id": "ar-a1-u01-p03",
+      "question_id": "q10",
+      "old_type": "person_form",
+      "new_type": "reference_resolution",
+      "new_prompt": "إذا قالت ليلى «أريد أن أعود الآن»، فمن الذي يريد العودة؟",
+      "new_answer": "ليلى."
+    },
+    {
+      "passage_id": "ar-a1-u01-p05",
+      "question_id": "q7",
+      "old_type": "grammar_function",
+      "new_type": "sequence",
+      "new_prompt": "إذا بقيت ليلى في المكتبة حتى المساء، متى انتهى بقاؤها هناك؟",
+      "new_answer": "عند المساء، عندما جاء المساء."
+    },
+    {
+      "passage_id": "ar-a1-u01-p05",
+      "question_id": "q9",
+      "old_type": "grammar_identification",
+      "new_type": "grammar_choice",
+      "new_prompt": "اختر الصيغة الصحيحة: «أخذت ليلى كتابين» أم «أخذت ليلى كتابان»؟",
+      "new_answer": "أخذت ليلى كتابين."
+    },
+    {
+      "passage_id": "ar-a1-u01-p06",
+      "question_id": "q8",
+      "old_type": "grammar_function",
+      "new_type": "sequence",
+      "new_prompt": "إذا قرأت ليلى حتى المساء، متى تنتهي القراءة؟",
+      "new_answer": "عند المساء."
+    },
+    {
+      "passage_id": "ar-a1-u01-p06",
+      "question_id": "q10",
+      "old_type": "grammar_function",
+      "new_type": "contrast",
+      "new_prompt": "أي عبارة تدل على خيارين: «كتابًا واحدًا أو اثنين» أم «كتابًا واحدًا واثنين معًا»؟",
+      "new_answer": "كتابًا واحدًا أو اثنين."
+    }
+  ],
+  "post_repair_formal_question_types_in_unit": 0,
+  "records_7_60_byte_identical": true,
+  "quality_interpretation": "Internal substantive Q/A remediation only. It does not substitute for required independent native, educator, model-family, or blind post-repair review.",
+  "release_claim": false
+}
