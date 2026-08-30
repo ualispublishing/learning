@@ -62,7 +62,39 @@ def git_head() -> str | None:
         return None
 
 
-def current_language_inputs(language: str) -> tuple[dict[str, Any], list[dict[str, str]]]:
+def resolve_repository_commit(explicit_commit: str | None) -> str:
+    detected = git_head()
+    if detected:
+        detected = detected.strip().lower()
+        require(
+            bool(re.fullmatch(r"[0-9a-f]{40}", detected)),
+            f"detected git HEAD is not a full 40-character SHA: {detected!r}",
+        )
+
+    if explicit_commit:
+        explicit = explicit_commit.strip().lower()
+        require(
+            bool(re.fullmatch(r"[0-9a-f]{40}", explicit)),
+            "--repository-commit-sha must be a full 40-character hexadecimal commit SHA",
+        )
+        if detected:
+            require(
+                detected == explicit,
+                f"explicit repository commit {explicit} does not match checkout HEAD {detected}",
+            )
+        return explicit
+
+    require(
+        bool(detected),
+        "repository commit is unavailable because this source tree has no usable .git metadata; "
+        "re-run with --repository-commit-sha <exact-40-character-commit>",
+    )
+    return detected
+
+
+def current_language_inputs(
+    language: str, repository_commit_sha: str | None = None
+) -> tuple[dict[str, Any], list[dict[str, str]]]:
     manifest = json.loads(ledgers.MANIFEST.read_text(encoding="utf-8"))
     require(manifest.get("release") == "v1.0", "unexpected release manifest release")
     require(
@@ -70,6 +102,7 @@ def current_language_inputs(language: str) -> tuple[dict[str, Any], list[dict[st
         f"reviewer bundles require production_candidate status, got {manifest.get('status')!r}",
     )
 
+    resolved_commit = resolve_repository_commit(repository_commit_sha)
     names = ledgers.LANGUAGES[language]
     base = RELEASE / language
     master = base / names["master"]
@@ -97,7 +130,7 @@ def current_language_inputs(language: str) -> tuple[dict[str, Any], list[dict[st
         "release": "v1.0",
         "release_status": manifest.get("status"),
         "language": language,
-        "repository_commit_sha": git_head(),
+        "repository_commit_sha": resolved_commit,
         "parent_tracker": "https://github.com/ualispublishing/learning/issues/106",
         "language_review_issue": f"https://github.com/ualispublishing/learning/issues/{ISSUES[language]}",
         "master_workbook_path": str(master.relative_to(ROOT)),
@@ -241,8 +274,13 @@ A reviewer may complete only this language. Arabic, French, and Urdu are certifi
 """
 
 
-def build_bundle(language: str, output_root: Path, make_zip: bool = True) -> tuple[Path, Path | None]:
-    binding, review_rows = current_language_inputs(language)
+def build_bundle(
+    language: str,
+    output_root: Path,
+    make_zip: bool = True,
+    repository_commit_sha: str | None = None,
+) -> tuple[Path, Path | None]:
+    binding, review_rows = current_language_inputs(language, repository_commit_sha)
     names = ledgers.LANGUAGES[language]
     base = RELEASE / language
     source_master = base / names["master"]
@@ -284,7 +322,8 @@ def build_bundle(language: str, output_root: Path, make_zip: bool = True) -> tup
     validate_local_markdown_links(bundle_dir)
 
     payload_files = sorted(
-        p for p in bundle_dir.iterdir() if p.is_file() and p.name not in {"BUNDLE_MANIFEST.json", "CHECKSUMS.sha256"}
+        p for p in bundle_dir.iterdir()
+        if p.is_file() and p.name not in {"BUNDLE_MANIFEST.json", "CHECKSUMS.sha256"}
     )
     bundle_manifest = {
         "schema": "lang-wb-reviewer-bundle-v1",
@@ -295,7 +334,8 @@ def build_bundle(language: str, output_root: Path, make_zip: bool = True) -> tup
         "human_certification_present": False,
         "human_review_fields_prefilled": False,
         "files": [
-            {"name": p.name, "bytes": p.stat().st_size, "sha256": sha256_file(p)} for p in payload_files
+            {"name": p.name, "bytes": p.stat().st_size, "sha256": sha256_file(p)}
+            for p in payload_files
         ],
         "note": (
             "This package contains review inputs and an incomplete sign-off draft only. "
@@ -306,7 +346,9 @@ def build_bundle(language: str, output_root: Path, make_zip: bool = True) -> tup
         json.dumps(bundle_manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
 
-    checksum_targets = sorted(p for p in bundle_dir.iterdir() if p.is_file() and p.name != "CHECKSUMS.sha256")
+    checksum_targets = sorted(
+        p for p in bundle_dir.iterdir() if p.is_file() and p.name != "CHECKSUMS.sha256"
+    )
     (bundle_dir / "CHECKSUMS.sha256").write_text(
         "".join(f"{sha256_file(p)}  {p.name}\n" for p in checksum_targets), encoding="utf-8"
     )
@@ -332,11 +374,21 @@ def main() -> int:
         default=str(DEFAULT_OUTPUT_ROOT),
         help=f"Output directory root (default: {DEFAULT_OUTPUT_ROOT})",
     )
+    parser.add_argument(
+        "--repository-commit-sha",
+        help=(
+            "Exact 40-character source commit SHA. Required for archive/source exports without .git; "
+            "when .git is available, an explicit value must match HEAD."
+        ),
+    )
     parser.add_argument("--no-zip", action="store_true", help="Build the directory without a ZIP archive.")
     args = parser.parse_args()
 
     bundle_dir, zip_path = build_bundle(
-        args.language, Path(args.output_root).expanduser().resolve(), make_zip=not args.no_zip
+        args.language,
+        Path(args.output_root).expanduser().resolve(),
+        make_zip=not args.no_zip,
+        repository_commit_sha=args.repository_commit_sha,
     )
     print(
         json.dumps(
@@ -344,6 +396,7 @@ def main() -> int:
                 "language": args.language,
                 "bundle_directory": str(bundle_dir),
                 "zip": str(zip_path) if zip_path else None,
+                "repository_commit_sha": resolve_repository_commit(args.repository_commit_sha),
                 "human_certification_present": False,
             },
             ensure_ascii=False,
