@@ -2,9 +2,9 @@
 """Build one self-contained LANG-WB v1.0 reviewer handoff bundle.
 
 The bundle is a transport/review aid only. It contains the exact current master
-workbook, a blank 2,000-row review ledger, a deterministic candidate binding,
-an intentionally incomplete sign-off draft, review instructions, and checksums.
-It never fills or infers a human PASS/HOLD/FAIL decision.
+workbook, companion source CSVs, a blank 2,000-row review ledger, deterministic
+candidate binding, intentionally incomplete sign-off draft, review instructions,
+and checksums. It never fills or infers a human PASS/HOLD/FAIL decision.
 """
 from __future__ import annotations
 
@@ -31,6 +31,7 @@ DOCS = {
     "REVIEWER_ONBOARDING.md": AUDIT / "REVIEWER_ONBOARDING.md",
     "FINAL_NATIVE_REVIEW_PACKET.md": AUDIT / "FINAL_NATIVE_REVIEW_PACKET.md",
     "CORRECTNESS_STANDARD.md": AUDIT / "CORRECTNESS_STANDARD.md",
+    "FINAL_NATIVE_SIGNOFF_TEMPLATE.json": AUDIT / "FINAL_NATIVE_SIGNOFF_TEMPLATE.json",
     "NATIVE_SIGNOFF_README.md": AUDIT / "native-signoffs" / "README.md",
     "PR_CHECKLIST.md": ROOT / ".github" / "PULL_REQUEST_TEMPLATE" / "lang-wb-native-signoff.md",
 }
@@ -129,6 +130,7 @@ def write_ledger(path: Path, rows: list[dict[str, str]]) -> None:
 def reviewer_readme(language: str) -> str:
     issue = ISSUES[language]
     display = language.capitalize()
+    names = ledgers.LANGUAGES[language]
     return f"""# {display} LANG-WB v1.0 reviewer bundle
 
 This package is a **review aid for the production candidate**, not a pre-approved or human-certified release.
@@ -140,9 +142,13 @@ Parent release tracker: https://github.com/ualispublishing/learning/issues/106
 ## Contents
 
 - `MASTER_WORKBOOK.pdf` — complete rendered {display} master workbook; review all learner-facing pages.
+- `{names['vocabulary']}` — exact 1,000-row vocabulary companion CSV used by the package.
+- `{names['sentences']}` — exact 1,000-row sentence companion CSV used by the package.
 - `{language}_REVIEW_LEDGER.csv` — 2,000 blank-adjudication rows: 1,000 vocabulary + 1,000 sentence rows.
+- `RELEASE_MANIFEST.json` — current release/provenance/decision-hash manifest copied into the package.
 - `CANDIDATE_BINDING.json` — exact current source/artifact identifiers used to build this bundle.
 - `{language}_SIGNOFF_DRAFT.json` — current-candidate-bound but intentionally incomplete human sign-off draft.
+- `FINAL_NATIVE_SIGNOFF_TEMPLATE.json` — canonical sign-off schema/template.
 - `REVIEWER_ONBOARDING.md` — concise start-to-finish procedure.
 - `FINAL_NATIVE_REVIEW_PACKET.md` — canonical full-content review and sign-off rules.
 - `CORRECTNESS_STANDARD.md` — learner-facing correctness dimensions.
@@ -167,7 +173,10 @@ A reviewer may complete only this language. Arabic, French, and Urdu are certifi
 def build_bundle(language: str, output_root: Path, make_zip: bool = True) -> tuple[Path, Path | None]:
     binding, review_rows = current_language_inputs(language)
     names = ledgers.LANGUAGES[language]
-    source_master = RELEASE / language / names["master"]
+    base = RELEASE / language
+    source_master = base / names["master"]
+    source_vocab = base / names["vocabulary"]
+    source_sentences = base / names["sentences"]
 
     output_root.mkdir(parents=True, exist_ok=True)
     bundle_dir = output_root / f"{language}_lang_wb_v1.0_reviewer_bundle"
@@ -176,6 +185,9 @@ def build_bundle(language: str, output_root: Path, make_zip: bool = True) -> tup
     bundle_dir.mkdir(parents=True)
 
     shutil.copy2(source_master, bundle_dir / "MASTER_WORKBOOK.pdf")
+    shutil.copy2(source_vocab, bundle_dir / source_vocab.name)
+    shutil.copy2(source_sentences, bundle_dir / source_sentences.name)
+    shutil.copy2(ledgers.MANIFEST, bundle_dir / "RELEASE_MANIFEST.json")
     write_ledger(bundle_dir / f"{language}_REVIEW_LEDGER.csv", review_rows)
     (bundle_dir / "CANDIDATE_BINDING.json").write_text(
         json.dumps(binding, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
