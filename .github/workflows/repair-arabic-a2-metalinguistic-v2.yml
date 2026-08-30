@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  current-b1-c2-grounding-repair:
+  arabic-gate-b-naturalness-start:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
@@ -29,8 +29,7 @@ jobs:
           if [ "$rc" -ne 0 ]; then
             python - "$output" <<'PY'
           import sys
-          output=sys.argv[1]
-          errors=[line[2:] for line in output.splitlines() if line.startswith('- ')]
+          errors=[line[2:] for line in sys.argv[1].splitlines() if line.startswith('- ')]
           allowed=(
             'STATE_MANIFEST blob drift: PROJECT_TRACKS.json:',
             'STATE_MANIFEST byte-size drift: PROJECT_TRACKS.json:',
@@ -39,133 +38,72 @@ jobs:
           )
           unexpected=[e for e in errors if not any(e.startswith(p) for p in allowed)]
           if not errors or unexpected or not any(e.startswith('STATE_MANIFEST blob drift: PROJECT_TRACKS.json:') for e in errors):
-              raise SystemExit(f'Unexpected state drift; refusing repair: {unexpected or errors}')
+              raise SystemExit(f'Unexpected routed-state drift; refusing Gate B start: {unexpected or errors}')
           print('Only PROJECT_TRACKS manifest bookkeeping drift detected; bounded refresh allowed.')
           PY
             python reading/tools/refresh_state_manifest.py
             python reading/tools/validate_continuation_state.py
           fi
 
-      - name: Apply exactly nine bounded B1-C1 Q/A grounding repairs
-        run: python reading/tools/repair_arabic_b1_c2_metalinguistic_grounding.py
+      - name: Remove stale closed metalinguistic blocker
+        run: python reading/tools/close_stale_arabic_metalinguistic_blocker.py
 
-      - name: Regenerate exact-corpus Gate 0
-        run: python reading/tools/run_post_generation_gate0.py
+      - name: Build exact-current Arabic Gate B review inventory and packets
+        run: python reading/tools/build_arabic_gate_b_naturalness_review.py
 
-      - name: Rescan all Arabic questions and rerun current B1-C2 triage
-        run: |
-          python reading/tools/audit_arabic_metalinguistic_cefr_candidates.py
-          python reading/tools/adjudicate_arabic_b1_c2_metalinguistic_cefr.py
-
-      - name: Require closed current low-level metalinguistic queue
+      - name: Mark Gate B internal review in progress without quality promotion
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          rep=json.loads(Path('reading/audit/arabic_b1_c2_metalinguistic_grounding_repair_2026-08-30.json').read_text(encoding='utf-8'))
-          inv=json.loads(Path('reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json').read_text(encoding='utf-8'))
-          tri=json.loads(Path('reading/audit/arabic_b1_c2_metalinguistic_cefr_triage_2026-08-30.json').read_text(encoding='utf-8'))
-          if rep['repairs_applied'] != 9 or rep['passage_prose_changed'] or rep['lexical_targets_changed'] or not rep['untargeted_records_byte_identical']:
-              raise SystemExit('Bounded repair contract failed')
-          expected_levels={
-            'a1':(0,0,0), 'a2':(3,0,3), 'b1':(96,96,0), 'b2':(101,101,0), 'c1':(71,71,0), 'c2':(69,69,0)
+          rp=Path('reading/RELEASE_STATUS.json')
+          ap=Path('reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json')
+          d=json.loads(rp.read_text(encoding='utf-8')); a=json.loads(ap.read_text(encoding='utf-8')); ar=d['languages']['arabic']
+          if ar['release_state']!='REOPEN_REQUIRED' or ar['educator_release_ready'] is not False:
+              raise SystemExit('Arabic release state changed unexpectedly')
+          if a['status']!='IN_PROGRESS' or a['records']!=360 or a['questions']!=3600 or a['answers']!=3600 or a['release_claim'] is not False:
+              raise SystemExit('Gate B packet inventory contract failed')
+          ar['naturalness_review_progress']={
+            'status':'FRESH_GATE_B_INTERNAL_REVIEW_IN_PROGRESS',
+            'records_in_scope':360,
+            'questions_in_scope':3600,
+            'answers_in_scope':3600,
+            'fresh_records_reviewed':0,
+            'fresh_records_with_findings':0,
+            'fresh_findings':0,
+            'current_inventory':'reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json',
+            'review_order':['A1','A2','B1','B2','C1','C2'],
+            'guard':'Historical naturalness notes are context only; fresh review must bind every decision to current learner-facing hashes.'
           }
-          for level,(cand,need,fp) in expected_levels.items():
-              got=inv['levels'][level]
-              if (got['candidate_count'],got['needs_adjudication'],got['adjudicated_false_positives']) != (cand,need,fp):
-                  # For B1-C2 the inventory marks candidates as needs_adjudication before contextual triage.
-                  if level in {'b1','b2','c1','c2'} and (got['candidate_count'],got['needs_adjudication'],got['adjudicated_false_positives']) == (cand,cand,0):
-                      continue
-                  raise SystemExit(f'Unexpected {level} inventory counts: {got}')
-          if inv['candidate_count'] != 340 or inv['needs_adjudication'] != 337 or inv['adjudicated_false_positives'] != 3:
-              raise SystemExit(f'Unexpected postrepair inventory summary: {inv["candidate_count"]}/{inv["needs_adjudication"]}/{inv["adjudicated_false_positives"]}')
-          if tri['candidate_count'] != 337 or tri['manual_review_count'] != 0 or tri['retained_contextual_count'] != 337:
-              raise SystemExit(f'Unclosed B1-C2 triage: {tri["decision_counts"]}')
-          if tri['adjudicated_ellipsis_shorthand_retain_count'] != 2:
-              raise SystemExit('Expected exactly two verified ellipsis-shorthand retains')
-          final={
-            'schema_version':1,'project_id':'LANG-A1C2','language':'arabic','levels':['B1','B2','C1','C2'],'date':'2026-08-30',
-            'status':'CURRENT_LOWLEVEL_METALINGUISTIC_CANDIDATE_CLASS_CLOSED',
-            'initial_current_candidates':344,'initial_auto_retained_contextual':333,'confirmed_grounding_repairs':9,'adjudicated_detector_false_positives':2,
-            'accounting_check':333+9+2,
-            'postrepair_current_candidates':tri['candidate_count'],'postrepair_retained_contextual':tri['retained_contextual_count'],'postrepair_manual_review':tri['manual_review_count'],
-            'postrepair_inventory_total_candidates_including_a2_false_positives':inv['candidate_count'],
-            'a2_previously_adjudicated_false_positives':3,
-            'repair_artifact':'reading/audit/arabic_b1_c2_metalinguistic_grounding_repair_2026-08-30.json',
-            'triage_artifact':'reading/audit/arabic_b1_c2_metalinguistic_cefr_triage_2026-08-30.json',
-            'inventory_artifact':'reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json',
-            'interpretation':'The configured low-level/formal-type candidate class is fully adjudicated on the current Arabic corpus. B1-C2 retains contextual grammar/discourse-function analysis appropriate to the level; this is not a semantic, naturalness, educator-release, or publication approval.',
-            'quality_promotion':False,'release_claim':False
-          }
-          Path('reading/audit/arabic_b1_c2_metalinguistic_cefr_adjudication_2026-08-30.json').write_text(json.dumps(final,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          PY
-
-      - name: Rerun fresh Arabic deterministic release evidence gate
-        run: python reading/tools/run_arabic_fresh_deterministic_revalidation.py
-
-      - name: Reconcile Arabic release evidence without promotion
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          relp=Path('reading/RELEASE_STATUS.json'); taskp=Path('reading/VERIFICATION_TASKS.md')
-          rel=json.loads(relp.read_text(encoding='utf-8')); ar=rel['languages']['arabic']
-          gate=json.loads(Path('reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json').read_text(encoding='utf-8'))
-          if gate['status']!='FAIL' or gate['open_findings']!=2496 or gate['structural_errors']:
-              raise SystemExit(f'Unexpected Arabic deterministic gate after repair: {gate.get("status")}/{gate.get("open_findings")}/{gate.get("structural_errors")}')
-          ar['release_state']='REOPEN_REQUIRED'; ar['educator_release_ready']=False
           evidence=ar.get('latest_release_evidence',[])
           if isinstance(evidence,str): evidence=[evidence]
-          for artifact in [
-            'reading/audit/arabic_b1_c2_metalinguistic_grounding_repair_2026-08-30.json',
-            'reading/audit/arabic_b1_c2_metalinguistic_cefr_adjudication_2026-08-30.json',
-            'reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json',
-            'reading/audit/arabic_b1_c2_metalinguistic_cefr_triage_2026-08-30.json']:
-              if artifact not in evidence: evidence.append(artifact)
+          artifact='reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json'
+          if artifact not in evidence: evidence.append(artifact)
           ar['latest_release_evidence']=evidence
-          ar['latest_deterministic_gate']={'status':gate['status'],'records':gate['records'],'questions':gate['questions'],'answers':gate['answers'],'open_findings':gate['open_findings'],'finding_classes':gate['finding_classes'],'artifact':'reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json','date':gate['date']}
-          ar['metalinguistic_review_progress']={
-            'status':'A1_C2_CONFIGURED_LOWLEVEL_METALINGUISTIC_CLASS_CLOSED_CONTINUING',
-            'questions_scanned_current_corpus':3600,
-            'a1_confirmed_repairs':63,
-            'a2_original_inventory_candidates':83,'a2_confirmed_repairs':80,'a2_adjudicated_false_positives':3,
-            'b1_c2_initial_current_candidates':344,'b1_c2_auto_retained_contextual':333,'b1_c2_confirmed_grounding_repairs':9,'b1_c2_adjudicated_detector_false_positives':2,
-            'b1_c2_postrepair_contextual_candidates_retained':337,'b1_c2_postrepair_manual_review_remaining':0,
-            'combined_confirmed_repairs':152,
-            'remaining_scope':'Broader CEFR calibration, Arabic grammar-in-context naturalness, full semantic educator review, independent native/model-family recertification, and blind post-repair human review remain open.',
-            'latest_artifact':'reading/audit/arabic_b1_c2_metalinguistic_cefr_adjudication_2026-08-30.json'}
-          blockers=[b for b in rel.get('global_release_blockers',[]) if not b.startswith('Arabic ')]
-          blockers.insert(0,'Arabic fresh deterministic release revalidation remains FAIL with 2496 open release-evidence findings; NFC and the configured A1-C2 low-level/metalinguistic candidate class are closed on the current corpus (152 confirmed repairs total, with 3 A2 comprehension false positives and 2 B1-C2 ellipsis-shorthand detector false positives), while broader CEFR calibration, naturalness, semantic, and independent review remain open.')
-          rel['global_release_blockers']=blockers; rel['updated']='2026-08-30'; relp.write_text(json.dumps(rel,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          text=taskp.read_text(encoding='utf-8')
-          line='Arabic A1-C2 low-level/metalinguistic closure evidence: `reading/audit/arabic_b1_c2_metalinguistic_cefr_adjudication_2026-08-30.json` — all 3,600 current Arabic questions scanned; B1-C2 initial 344 candidates adjudicated as 333 contextual retains, 9 repairs, and 2 detector false positives; post-repair manual queue 0. This does not close naturalness, semantic, educator, or independent review.\n\n'
-          anchor='Open verification work:\n\n'
-          if line not in text:
-              pos=text.find(anchor,text.find('## Arabic'))
-              if pos<0: raise SystemExit('Arabic verification anchor missing')
-              pos+=len(anchor); text=text[:pos]+line+text[pos:]
-          taskp.write_text(text,encoding='utf-8')
+          d['updated']='2026-08-30'
+          rp.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           PY
 
-      - name: Refresh state manifest last and validate
+      - name: Refresh manifest last and validate
         run: |
           python reading/tools/refresh_state_manifest.py
           python reading/tools/validate_continuation_state.py
 
-      - name: Commit and rebase safely
+      - name: Commit Gate B start evidence safely
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/arabic/b1/passages.jsonl reading/arabic/b2/passages.jsonl reading/arabic/c1/passages.jsonl \
-            reading/audit/arabic_b1_c2_metalinguistic_grounding_repair_2026-08-30.json \
-            reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json \
-            reading/audit/arabic_b1_c2_metalinguistic_cefr_triage_2026-08-30.json \
-            reading/audit/arabic_b1_c2_metalinguistic_cefr_adjudication_2026-08-30.json \
-            reading/audit/post_generation_gate0_2026-08-30.json reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json \
-            reading/RELEASE_STATUS.json reading/VERIFICATION_TASKS.md reading/STATE_MANIFEST.json
-          git commit -m 'Repair current Arabic B1-C1 metalinguistic grounding'
+          git add reading/RELEASE_STATUS.json reading/STATE_MANIFEST.json \
+            reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json \
+            reading/audit/arabic_gate_b_packets_2026-08-30/a1.jsonl \
+            reading/audit/arabic_gate_b_packets_2026-08-30/a2.jsonl \
+            reading/audit/arabic_gate_b_packets_2026-08-30/b1.jsonl \
+            reading/audit/arabic_gate_b_packets_2026-08-30/b2.jsonl \
+            reading/audit/arabic_gate_b_packets_2026-08-30/c1.jsonl \
+            reading/audit/arabic_gate_b_packets_2026-08-30/c2.jsonl
+          git commit -m 'Start fresh Arabic Gate B naturalness review'
           git fetch origin main
           git rebase origin/main
           set +e
