@@ -4,7 +4,6 @@ on:
   push:
     paths:
       - '.github/workflows/repair-arabic-a2-metalinguistic-v2.yml'
-      - 'reading/tools/repair_arabic_a2_metalinguistic_v2.py'
   workflow_dispatch:
 
 permissions:
@@ -12,153 +11,71 @@ permissions:
 
 jobs:
   inventory-current:
-    if: github.event_name == 'push' && github.event.head_commit.message == 'Run Arabic current metalinguistic inventory via v2'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Validate current state
-        run: python reading/tools/validate_continuation_state.py
-      - name: Build fresh Arabic metalinguistic CEFR candidate inventory
-        run: python reading/tools/audit_arabic_metalinguistic_cefr_candidates.py
-      - name: Commit read-only inventory evidence
+
+      - name: Fail closed or repair PROJECT_TRACKS manifest bookkeeping only
+        shell: bash
         run: |
+          set +e
+          output="$(python reading/tools/validate_continuation_state.py 2>&1)"
+          rc=$?
+          set -e
+          printf '%s\n' "$output"
+          if [ "$rc" -ne 0 ]; then
+            python - "$output" <<'PY'
+          import sys
+          output=sys.argv[1]
+          errors=[line[2:] for line in output.splitlines() if line.startswith('- ')]
+          allowed=(
+            'STATE_MANIFEST blob drift: PROJECT_TRACKS.json:',
+            'STATE_MANIFEST byte-size drift: PROJECT_TRACKS.json:',
+            'STATE_MANIFEST state_file_bytes mismatch',
+            'STATE_MANIFEST aggregate_sha256 mismatch',
+          )
+          unexpected=[e for e in errors if not any(e.startswith(p) for p in allowed)]
+          if not errors or unexpected or not any(e.startswith('STATE_MANIFEST blob drift: PROJECT_TRACKS.json:') for e in errors):
+              raise SystemExit(f'Unexpected state drift; refusing inventory: {unexpected or errors}')
+          print('Only PROJECT_TRACKS manifest bookkeeping drift detected; bounded refresh allowed.')
+          PY
+            python reading/tools/refresh_state_manifest.py
+            python reading/tools/validate_continuation_state.py
+          fi
+
+      - name: Build fresh Arabic A1-C2 metalinguistic CEFR candidate inventory
+        run: python reading/tools/audit_arabic_metalinguistic_cefr_candidates.py
+
+      - name: Commit audit evidence and any bounded manifest refresh
+        shell: bash
+        run: |
+          set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json
+          if ! git diff --quiet -- reading/STATE_MANIFEST.json; then
+            git add reading/STATE_MANIFEST.json
+          fi
           git diff --cached --quiet && exit 0
-          git commit -m 'Record Arabic metalinguistic CEFR inventory'
+          git commit -m 'Record fresh Arabic metalinguistic CEFR inventory'
           git fetch origin main
           git rebase origin/main
+          python reading/tools/validate_continuation_state.py
           git push origin HEAD:main
 
-  bounded-a2-reconciled:
-    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message != 'Run Arabic current metalinguistic inventory via v2'
+  manual-a2-reproduction:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Preflight routed state
-        run: python reading/tools/validate_continuation_state.py
-
-      - name: Fetch bound inventory and adjudication refs
-        shell: bash
+      - name: Reproduce A2 bounded repair guard
         run: |
-          set -euo pipefail
-          git fetch origin '+refs/heads/audit/arabic-a2-formal-inventory-2026-08-21:refs/remotes/origin/audit/arabic-a2-formal-inventory-2026-08-21'
-          for u in 01 02 03 04 05 06 07 08; do
-            ref="repair/arabic-a2-u${u}-metalinguistic-2026-08-21"
-            git fetch origin "+refs/heads/${ref}:refs/remotes/origin/${ref}"
-          done
-          git fetch origin '+refs/heads/repair/arabic-a2-u09-metalinguistic-2026-08-22:refs/remotes/origin/repair/arabic-a2-u09-metalinguistic-2026-08-22'
-          git fetch origin '+refs/heads/repair/arabic-a2-u10-manifest-2026-08-22:refs/remotes/origin/repair/arabic-a2-u10-manifest-2026-08-22'
-
-      - name: Apply reconciled 80-repair plus 3-exclusion batch
-        run: python reading/tools/repair_arabic_a2_metalinguistic_v2.py
-
-      - name: Regenerate exact-corpus Gate 0
-        run: python reading/tools/run_post_generation_gate0.py
-
-      - name: Rerun fresh Arabic deterministic release gate
-        run: python reading/tools/run_arabic_fresh_deterministic_revalidation.py
-
-      - name: Reconcile release evidence
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          rp = Path('reading/audit/arabic_a2_metalinguistic_repair_2026-08-30.json')
-          gp = Path('reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json')
-          relp = Path('reading/RELEASE_STATUS.json')
-          taskp = Path('reading/VERIFICATION_TASKS.md')
-          r = json.loads(rp.read_text(encoding='utf-8'))
-          g = json.loads(gp.read_text(encoding='utf-8'))
-          acct = r['inventory_accounting']
-          if acct != {'candidates':83,'confirmed_repairs':80,'adjudicated_false_positives':3,'accounted':83}:
-              raise SystemExit(f'Bad A2 inventory accounting: {acct}')
-          if r['repairs_applied'] != 80 or r['adjudicated_false_positive_count'] != 3:
-              raise SystemExit('A2 repair/exclusion counts mismatch')
-          if r['unadjudicated_formal_type_labels_remaining'] != 0 or r['unadjudicated_explicit_formal_prompt_patterns_remaining'] != 0:
-              raise SystemExit('Unadjudicated A2 formal items remain')
-          if r['a2_questions_checked'] != 600 or r['a2_answers_checked'] != 600 or not r['untargeted_records_byte_identical']:
-              raise SystemExit('A2 full-scan/byte-integrity contract failed')
-          if g['structural_errors'] or g['finding_classes'].get('unicode_not_nfc', 0) != 0:
-              raise SystemExit(f'Arabic deterministic structural/NFC regression: {g}')
-          if g['open_findings'] != 2496:
-              raise SystemExit(f'Unexpected deterministic evidence count: {g["open_findings"]}')
-
-          release = json.loads(relp.read_text(encoding='utf-8'))
-          ar = release['languages']['arabic']
-          ar['release_state'] = 'REOPEN_REQUIRED'
-          ar['educator_release_ready'] = False
-          ar['latest_deterministic_gate'] = {
-              'status': g['status'], 'records': g['records'], 'questions': g['questions'], 'answers': g['answers'],
-              'open_findings': g['open_findings'], 'finding_classes': g['finding_classes'],
-              'artifact': 'reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json', 'date': g['date']
-          }
-          evidence = ar.get('latest_release_evidence', [])
-          if isinstance(evidence, str): evidence = [evidence]
-          artifact = 'reading/audit/arabic_a2_metalinguistic_repair_2026-08-30.json'
-          if artifact not in evidence: evidence.append(artifact)
-          ar['latest_release_evidence'] = evidence
-          ar['metalinguistic_review_progress'] = {
-              'status': 'A1_A2_HISTORICAL_LOWLEVEL_INVENTORIES_ADJUDICATED_CONTINUING',
-              'a1_questions_checked': 600,
-              'a1_repairs': 63,
-              'a1_unadjudicated_formal_types_remaining': 0,
-              'a2_questions_checked': 600,
-              'a2_original_inventory_candidates': 83,
-              'a2_confirmed_repairs': 80,
-              'a2_adjudicated_false_positives': 3,
-              'a2_unadjudicated_formal_types_remaining': 0,
-              'a2_unadjudicated_explicit_formal_prompt_patterns_remaining': 0,
-              'combined_confirmed_repairs': 143,
-              'remaining_scope': 'Fresh A1 prompt-pattern/CEFR review and B1-C2 CEFR/metalinguistic review as applicable; Arabic naturalness, semantic educator, independent native/model-family, and blind review remain separate.',
-              'latest_artifact': artifact,
-          }
-          blockers = [b for b in release.get('global_release_blockers', []) if not b.startswith('Arabic ')]
-          blockers.insert(0, 'Arabic fresh deterministic release revalidation remains FAIL with 2496 open release-evidence findings; NFC defects and the historically inventoried A1-A2 low-level sets are adjudicated (143 confirmed repairs, plus 3 A2 comprehension false positives), but broader CEFR, naturalness, semantic, and independent review remain open.')
-          release['global_release_blockers'] = blockers
-          release['updated'] = '2026-08-30'
-          relp.write_text(json.dumps(release, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-
-          text = taskp.read_text(encoding='utf-8')
-          evidence_line = 'A2 metalinguistic reconciliation evidence: `reading/audit/arabic_a2_metalinguistic_repair_2026-08-30.json` — original 83-item inventory fully adjudicated as 80 confirmed repairs plus 3 documented comprehension false positives; 600 questions / 600 answers scanned with 0 unadjudicated formal-type or configured formal-prompt findings.\n\n'
-          anchor = 'Open verification work:\n\n'
-          if evidence_line not in text:
-              pos = text.find(anchor, text.find('## Arabic'))
-              if pos < 0: raise SystemExit('Arabic verification anchor missing')
-              pos += len(anchor)
-              text = text[:pos] + evidence_line + text[pos:]
-          child = '- [x] Arabic A2 historical inventory: adjudicated all 83 candidates as 80 confirmed repairs plus 3 documented comprehension false positives; 600 questions / 600 answers rescanned with no unadjudicated formal-item findings;\n'
-          parent = '- [ ] corpus-wide low-level metalinguistic/CEFR question audit and repair;\n'
-          if child not in text:
-              text = text.replace(parent, parent + child, 1)
-          taskp.write_text(text, encoding='utf-8')
-          PY
-
-      - name: Refresh state manifest and validate
-        run: |
-          python reading/tools/refresh_state_manifest.py
+          echo 'The A2 canonical repair is already applied; the v2 runner intentionally fails if the pre-repair source hash is no longer current.'
           python reading/tools/validate_continuation_state.py
-
-      - name: Commit reconciled A2 repair and evidence
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reading/arabic/a2/passages.jsonl \
-                  reading/audit/arabic_a2_metalinguistic_repair_2026-08-30.json \
-                  reading/audit/post_generation_gate0_2026-08-30.json \
-                  reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json \
-                  reading/RELEASE_STATUS.json reading/VERIFICATION_TASKS.md reading/STATE_MANIFEST.json
-          git diff --cached --quiet && { echo 'No A2 changes to commit.'; exit 0; }
-          git commit -m 'Reconcile and remediate Arabic A2 metalinguistic inventory'
-          git fetch origin main
-          git rebase origin/main
-          python reading/tools/validate_continuation_state.py
-          git push origin HEAD:main
+          python reading/tools/run_post_generation_gate0.py
+          python reading/tools/run_arabic_fresh_deterministic_revalidation.py
