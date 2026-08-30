@@ -15,11 +15,20 @@ from pathlib import Path
 from typing import Any
 
 LANGUAGES = ("arabic", "french", "urdu")
-ALLOWED_LANGUAGE_HOLD_PROBLEMS = {
+ALLOWED_FIXED_LANGUAGE_HOLD_PROBLEMS = {
     "no_signoff_files",
     "no_current_candidate_signoff",
-    "latest_current_candidate_signoff_not_PASS",
 }
+ALLOWED_NONPASS_OUTCOMES = {"FAIL", "HOLD"}
+
+
+def allowed_language_hold_problem(text: str) -> bool:
+    if text in ALLOWED_FIXED_LANGUAGE_HOLD_PROBLEMS:
+        return True
+    prefix = "latest_current_candidate_outcome:"
+    if text.startswith(prefix):
+        return text[len(prefix) :] in ALLOWED_NONPASS_OUTCOMES
+    return False
 
 
 def validate(report: dict[str, Any]) -> list[str]:
@@ -28,9 +37,9 @@ def validate(report: dict[str, Any]) -> list[str]:
     if report.get("manifest_status") != "production_candidate":
         problems.append(f"manifest_status:{report.get('manifest_status')!r}")
 
-    gate = report.get("gate")
-    if gate not in {"HOLD", "PASS"}:
-        problems.append(f"unexpected_gate:{gate!r}")
+    report_gate = report.get("gate")
+    if report_gate not in {"HOLD", "PASS"}:
+        problems.append(f"unexpected_gate:{report_gate!r}")
 
     top = report.get("problems")
     if not isinstance(top, list):
@@ -58,7 +67,7 @@ def validate(report: dict[str, Any]) -> list[str]:
             lang_problems = []
         for item in lang_problems:
             text = str(item)
-            if text not in ALLOWED_LANGUAGE_HOLD_PROBLEMS:
+            if not allowed_language_hold_problem(text):
                 problems.append(f"{lang}:unexpected_hold_problem:{text}")
 
         latest = state.get("latest_current_candidate_signoff")
@@ -68,13 +77,13 @@ def validate(report: dict[str, Any]) -> list[str]:
             if not isinstance(latest_problems, list):
                 problems.append(f"{lang}:latest_problems_not_list")
                 latest_problems = []
-            # A current PASS claim must itself be fully valid. HOLD/FAIL records
-            # are legitimate human-review hold states and are not required to
-            # satisfy PASS-only scope/empty-defect rules.
-            if outcome == "PASS" and latest_problems:
+            if latest_problems:
                 problems.append(
-                    f"{lang}:invalid_current_PASS:" + ",".join(str(p) for p in latest_problems)
+                    f"{lang}:invalid_latest_current_candidate_signoff:"
+                    + ",".join(str(p) for p in latest_problems)
                 )
+            if outcome not in {"PASS", "FAIL", "HOLD"}:
+                problems.append(f"{lang}:invalid_latest_review_outcome:{outcome!r}")
 
     return problems
 
