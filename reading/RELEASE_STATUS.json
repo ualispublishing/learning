@@ -32,7 +32,8 @@
         "reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json",
         "reading/audit/arabic_nfc_repair_2026-08-30.json",
         "reading/audit/arabic_a1_u01_metalinguistic_repair_2026-08-30.json",
-        "reading/audit/arabic_a1_u02_metalinguistic_repair_2026-08-30.json"
+        "reading/audit/arabic_a1_u02_metalinguistic_repair_2026-08-30.json",
+        "reading/audit/arabic_a1_u03_u10_metalinguistic_repair_2026-08-30.json"
       ],
       "open_release_classes": [
         "substantive resolution of fresh deterministic release-evidence blockers (no bulk promotion)",
@@ -62,15 +63,17 @@
         "date": "2026-08-30"
       },
       "metalinguistic_review_progress": {
-        "status": "IN_PROGRESS",
+        "status": "A1_FORMAL_TYPE_CLASS_CLOSED_CONTINUING",
+        "a1_formal_type_scan_questions_checked": 600,
+        "a1_formal_label_questions_repaired_total": 63,
+        "a1_formal_question_types_remaining": 0,
         "completed_subbatches": [
           "A1 Unit 1",
-          "A1 Unit 2"
+          "A1 Unit 2",
+          "A1 Units 3-10"
         ],
-        "passages_in_completed_subbatches": 12,
-        "formal_label_questions_repaired": 15,
-        "remaining_scope": "A1 Units 3-10, A2, and higher-level CEFR/metalinguistic review as applicable",
-        "latest_artifact": "reading/audit/arabic_a1_u02_metalinguistic_repair_2026-08-30.json"
+        "remaining_scope": "Fresh A1 explicit prompt-pattern/CEFR review, all A2 low-level metalinguistic/CEFR review, and higher-level CEFR review as applicable",
+        "latest_artifact": "reading/audit/arabic_a1_u03_u10_metalinguistic_repair_2026-08-30.json"
       }
     },
     "french": {
@@ -148,7 +151,7 @@
     }
   },
   "global_release_blockers": [
-    "Arabic fresh deterministic release revalidation remains FAIL with 2496 open release-evidence findings; NFC defects are closed and A1 Units 1-2 low-level metalinguistic remediation is complete (15 formal-label items repaired), but corpus-wide substantive and independent review remains open.",
+    "Arabic fresh deterministic release revalidation remains FAIL with 2496 open release-evidence findings; NFC defects and the known A1 formal-question-type class are closed (63 items repaired, 0 formal types across 600 A1 questions), but A1 prompt-pattern/CEFR checks, A2+, naturalness, semantic, and independent review remain open.",
     "French post-repair deterministic Gate A remains failed with 2160 release-evidence findings requiring substantive revalidation.",
     "Urdu release evidence currently establishes only an A1 deterministic/integrity baseline; it is not a quality promotion or language-level educator release."
   ],

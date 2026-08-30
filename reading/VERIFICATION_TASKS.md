@@ -29,6 +29,8 @@ NFC repair evidence: `reading/audit/arabic_nfc_repair_2026-08-30.json`; the reru
 
 Open verification work:
 
+A1 Units 3–10 batch evidence: `reading/audit/arabic_a1_u03_u10_metalinguistic_repair_2026-08-30.json` — 48 current-corpus repairs; combined with Units 1–2, all 63 known A1 formal-type candidates are repaired and no formal metalinguistic question type remains across the 600 A1 questions. This does not close CEFR, naturalness, or independent educator review.
+
 A1 Unit 2 metalinguistic repair evidence: `reading/audit/arabic_a1_u02_metalinguistic_repair_2026-08-30.json` — 6 repaired questions, 0 formal metalinguistic question types remaining in Unit 2, all records outside Unit 2 byte-identical.
 
 A1 Unit 1 metalinguistic repair evidence: `reading/audit/arabic_a1_u01_metalinguistic_repair_2026-08-30.json` — 9 repaired questions, 0 formal metalinguistic question types remaining in Unit 1, records 7–60 byte-identical.
@@ -37,6 +39,7 @@ A1 Unit 1 metalinguistic repair evidence: `reading/audit/arabic_a1_u01_metalingu
 - [x] close the 10 fresh deterministic Unicode NFC findings with a byte-bounded normalization-only repair;
 - [ ] substantively resolve the fresh deterministic release-evidence blockers without bulk-promoting draft/pending metadata;
 - [ ] corpus-wide low-level metalinguistic/CEFR question audit and repair;
+- [x] Arabic A1 Units 3-10 batch: re-adjudicated and repaired the remaining 48 formal-label items; combined A1 total is 63 repairs and 0 formal question types across 600 questions;
 - [x] Arabic A1 Unit 2 sub-batch: re-adjudicated and replaced 6 formal-label items with operational A1 use/form tasks;
 - [x] Arabic A1 Unit 1 sub-batch: reviewed 6 passages / 60 questions and replaced 9 formal-label items with A1 reading/use tasks;
 - [ ] corpus-wide Arabic grammar-in-context naturalness audit;
