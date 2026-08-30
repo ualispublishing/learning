@@ -18,3 +18,18 @@ Complete independent full-content linguistic review for all three languages usin
 A PASS is valid only for the exact candidate identifiers recorded in the sign-off. If learner-facing content changes afterward, the superseded sign-off must not be carried forward automatically.
 
 The overall release remains `production_candidate` until Arabic, French, and Urdu each have a valid latest PASS record and `python scripts/workbook_final_human_promotion_gate.py` passes.
+
+## Final release authorization
+
+Passing the three-language human gate is necessary but not by itself the final release artifact. After all three genuine current-candidate PASS records exist, run:
+
+```bash
+python scripts/build_lang_wb_final_release_snapshot.py \
+  --output audit/language-workbooks/v1.0/FINAL_RELEASE_SNAPSHOT.json
+```
+
+or manually dispatch [`.github/workflows/language-workbook-final-release-snapshot.yml`](../../../.github/workflows/language-workbook-final-release-snapshot.yml).
+
+That final snapshot reruns the production and human gates, verifies that the final visual audit and source-locked integrity evidence still apply, requires clean tracked release/sign-off inputs, and binds the release to an exact Git commit plus file hashes. Because the repository's moving `main` branch is currently unprotected, release eligibility must be attached to the exact snapshot commit rather than to the phrase "latest main."
+
+Do not remove this hold or promote beyond `production_candidate` unless the final snapshot itself succeeds for the exact candidate being released. A later learner-facing PDF/CSV/manifest or source-locked curation change requires fresh applicable evidence and, where candidate bindings change, fresh human sign-off.
