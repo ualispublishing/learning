@@ -6,8 +6,16 @@ on:
     paths:
       - '.github/workflows/language-workbook-native-review-ledger-check.yml'
       - 'scripts/build_lang_wb_native_review_ledgers.py'
+      - 'scripts/build_lang_wb_reviewer_bundle.py'
+      - 'scripts/prepare_lang_wb_native_signoff_draft.py'
+      - 'scripts/validate_lang_wb_native_signoff.py'
       - 'scripts/validate_lang_wb_native_review_ledger.py'
       - 'scripts/extract_lang_wb_native_review_actions.py'
+      - 'audit/language-workbooks/v1.0/REVIEWER_ONBOARDING.md'
+      - 'audit/language-workbooks/v1.0/FINAL_NATIVE_REVIEW_PACKET.md'
+      - 'audit/language-workbooks/v1.0/CORRECTNESS_STANDARD.md'
+      - 'audit/language-workbooks/v1.0/native-signoffs/README.md'
+      - '.github/PULL_REQUEST_TEMPLATE/lang-wb-native-signoff.md'
       - 'completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json'
       - 'completed/languages/workbooks/v1.0/arabic/arabic_vocabulary_1000.csv'
       - 'completed/languages/workbooks/v1.0/arabic/arabic_sentence_bank_1000.csv'
@@ -172,4 +180,73 @@ jobs:
           if counts.get('action_items') != 1:
               raise SystemExit(f'expected one action item, got {data}')
           PY
+          done
+
+      - name: Build self-contained reviewer bundles and confirm they cannot self-certify
+        shell: bash
+        run: |
+          set -euo pipefail
+          out=/tmp/lang-wb-reviewer-bundle-ci
+          rm -rf "$out"
+          mkdir -p "$out"
+
+          for lang in arabic french urdu; do
+            python scripts/build_lang_wb_reviewer_bundle.py "$lang" --output-root "$out"
+            dir="$out/${lang}_lang_wb_v1.0_reviewer_bundle"
+            zip="$out/${lang}_lang_wb_v1.0_reviewer_bundle.zip"
+
+            test -s "$dir/MASTER_WORKBOOK.pdf"
+            test -f "$dir/${lang}_REVIEW_LEDGER.csv"
+            test -f "$dir/CANDIDATE_BINDING.json"
+            test -f "$dir/${lang}_SIGNOFF_DRAFT.json"
+            test -f "$dir/BUNDLE_MANIFEST.json"
+            test -f "$dir/CHECKSUMS.sha256"
+            test -s "$zip"
+
+            rows=$(($(wc -l < "$dir/${lang}_REVIEW_LEDGER.csv") - 1))
+            if [ "$rows" -ne 2000 ]; then
+              echo "$lang bundle ledger has $rows rows; expected 2000"
+              exit 1
+            fi
+
+            (
+              cd "$dir"
+              sha256sum -c CHECKSUMS.sha256
+            )
+
+            python - "$lang" "$dir/CANDIDATE_BINDING.json" "$dir/BUNDLE_MANIFEST.json" "$dir/${lang}_SIGNOFF_DRAFT.json" <<'PY'
+          import json, sys
+          lang, binding_path, manifest_path, draft_path = sys.argv[1:]
+          binding = json.load(open(binding_path, encoding='utf-8'))
+          manifest = json.load(open(manifest_path, encoding='utf-8'))
+          draft = json.load(open(draft_path, encoding='utf-8'))
+          if binding.get('language') != lang or binding.get('release_status') != 'production_candidate':
+              raise SystemExit(f'invalid bundle binding for {lang}: {binding}')
+          if binding.get('review_ledger_rows') != 2000 or binding.get('human_review_fields_prefilled') is not False:
+              raise SystemExit(f'unsafe bundle binding for {lang}: {binding}')
+          if manifest.get('language') != lang or manifest.get('human_certification_present') is not False:
+              raise SystemExit(f'unsafe bundle manifest for {lang}: {manifest}')
+          if manifest.get('human_review_fields_prefilled') is not False:
+              raise SystemExit(f'bundle claims prefilled human review for {lang}')
+          if draft.get('review_outcome') or draft.get('review_completed_utc'):
+              raise SystemExit(f'{lang} bundle draft unexpectedly contains a human outcome/time')
+          if any((draft.get('reviewer') or {}).values()):
+              raise SystemExit(f'{lang} bundle draft unexpectedly contains reviewer identity/qualification')
+          if any((draft.get('scope_attestation') or {}).values()):
+              raise SystemExit(f'{lang} bundle draft unexpectedly contains completed scope attestations')
+          PY
+
+            set +e
+            python scripts/validate_lang_wb_native_signoff.py "$dir/${lang}_SIGNOFF_DRAFT.json" >/tmp/${lang}-bundle-draft-validation.log 2>&1
+            code=$?
+            set -e
+            if [ "$code" -ne 1 ]; then
+              cat /tmp/${lang}-bundle-draft-validation.log
+              echo "$lang untouched bundle draft validator exit=$code; expected 1"
+              exit 1
+            fi
+
+            unzip -l "$zip" | grep -q "${lang}_lang_wb_v1.0_reviewer_bundle/MASTER_WORKBOOK.pdf"
+            unzip -l "$zip" | grep -q "${lang}_lang_wb_v1.0_reviewer_bundle/${lang}_REVIEW_LEDGER.csv"
+            unzip -l "$zip" | grep -q "${lang}_lang_wb_v1.0_reviewer_bundle/${lang}_SIGNOFF_DRAFT.json"
           done
