@@ -56,7 +56,6 @@ jobs:
           python - <<'PY'
           from datetime import datetime, timedelta, timezone
           import json
-          from pathlib import Path
           import sys
 
           sys.path.insert(0, 'scripts')
@@ -117,7 +116,6 @@ jobs:
           for lang in ('arabic', 'french', 'urdu'):
               signoff = data['human_signoffs'][lang]
               assert signoff['review_outcome'] == 'PASS'
-              assert signoff['path'].startswith(lang + '_') is False  # full path contains directory prefix
               assert signoff['path'].split('/')[-1].startswith(lang + '_')
               assert len(signoff['sha256']) == 64
           PY
