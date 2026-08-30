@@ -4,8 +4,20 @@ on:
   workflow_dispatch:
   push:
     paths:
+      - '.github/workflows/language-workbook-signoff-binding-status.yml'
       - 'audit/language-workbooks/v1.0/FINAL_NATIVE_SIGNOFF_TEMPLATE.json'
       - 'scripts/workbook_final_human_promotion_gate.py'
+      - 'scripts/validate_lang_wb_expected_human_hold.py'
+      - 'completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json'
+      - 'completed/languages/workbooks/v1.0/arabic/00_arabic_complete_master.pdf'
+      - 'completed/languages/workbooks/v1.0/french/00_french_complete_master.pdf'
+      - 'completed/languages/workbooks/v1.0/urdu/00_urdu_complete_master.pdf'
+  pull_request:
+    paths:
+      - '.github/workflows/language-workbook-signoff-binding-status.yml'
+      - 'audit/language-workbooks/v1.0/FINAL_NATIVE_SIGNOFF_TEMPLATE.json'
+      - 'scripts/workbook_final_human_promotion_gate.py'
+      - 'scripts/validate_lang_wb_expected_human_hold.py'
       - 'completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json'
       - 'completed/languages/workbooks/v1.0/arabic/00_arabic_complete_master.pdf'
       - 'completed/languages/workbooks/v1.0/french/00_french_complete_master.pdf'
@@ -33,11 +45,13 @@ jobs:
           python scripts/workbook_final_human_promotion_gate.py
           code=$?
           set -e
-          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+          if [ "$code" -eq 0 ]; then
+            echo "LANG-WB current-candidate human promotion state: PASS"
+          elif [ "$code" -eq 2 ]; then
+            python scripts/validate_lang_wb_expected_human_hold.py
+            echo "LANG-WB remains on a validated expected human-review HOLD for the current production candidate."
+          else
             exit "$code"
-          fi
-          if [ "$code" -eq 2 ]; then
-            echo "LANG-WB remains on expected human-review HOLD for the current production candidate."
           fi
 
       - name: Show binding-status report
