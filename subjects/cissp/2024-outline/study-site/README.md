@@ -2,19 +2,19 @@
 
 Unofficial, original study site mapped to the current public ISC2 CISSP exam outline (effective 2024-04-15).
 
-## Current release candidate — v1.25.0
+## Current verified release — v1.25.0
 
 - 8 CISSP domains; official weights total **100%**.
 - **62** numbered public objectives and **344** paraphrased subtopic checks.
 - **304/344** checks with explicit enriched-subtopic practice exposure.
 - **33** AI-security coverage areas and **140** layered retrieval cards.
-- **495 released standard scenario questions + 1 Bellringer = 496 released bank records** in the proposed v1.25 release state.
+- **495 released standard scenario questions + 1 Bellringer = 496 released bank records**.
 - Author-difficulty mix: **F41 / E345 / S109 / B1**.
 - **495/495** standard questions have four-option teaching rationales.
 - **636 learner-facing item IDs** in the combined semantic-audit ledger.
 - **20** primary/reference sources.
 
-`question-bank/RELEASED_BATCHES.json` is authoritative for promoted batches and `RELEASE_STATUS.json` for release/deployment state. Public v1.24.0 remains authoritative until the exact v1.25 release head is merged and exact-main plus live Pages verification pass.
+`question-bank/RELEASED_BATCHES.json` is authoritative for promoted batches and `RELEASE_STATUS.json` for release/deployment state. The verified public runtime is v1.25.0 at merge SHA `875a55d49800ab9485db3edadc4f08ba57e3a662`; exact-main audit 33280157209 and Pages verification 33280157196 both passed.
 
 ## Semantic-review boundary
 
@@ -28,9 +28,9 @@ Keyboard review flow: **Space toggles reveal/hide; ←/→ move cards while hidd
 
 ## Question-bank expansion
 
-The long-term target remains **800 records** with an authoring mix of 15% Foundation+, 60% Exam-calibrated, 20% Stretch, and 5% Bellringer. After Batch 027 promotion, remaining deficits are **F79 / E135 / S51 / B39**, or **304 records**. All 62 objectives have at least one standard-MCQ exposure. Explicit enriched-subtopic exposure remains **304/344**; this is authoring coverage, not learner mastery.
+The long-term target remains **800 records** with an authoring mix of 15% Foundation+, 60% Exam-calibrated, 20% Stretch, and 5% Bellringer. After Batch 027, remaining deficits are **F79 / E135 / S51 / B39**, or **304 records**. All 62 objectives have at least one standard-MCQ exposure. Explicit enriched-subtopic exposure remains **304/344**; this is authoring coverage, not learner mastery.
 
-Batch 028 remains blocked until v1.25 release PR validation, exact post-merge main audit, live Pages fingerprint, and final evidence closure pass. Its provisional E12/S4 slate is: `4.1, 2.6, 1.3, 2.5, 1.4, 1.5, 1.8, 8.3, 1.1, 3.6, 3.8, 3.9, 4.3, 5.6, 7.11, 7.12`.
+Batch 028 is unblocked. Its released-only planner basis is workflow **33280157209**, with E12/S4 across: `4.1, 2.6, 1.3, 2.5, 1.4, 1.5, 1.8, 8.3, 1.1, 3.6, 3.8, 3.9, 4.3, 5.6, 7.11, 7.12`. Batch 028 candidates must remain isolated from public Pages until the normal candidate, bookkeeping, and future release-promotion controls pass.
 
 ## Continuous audit
 
@@ -38,7 +38,7 @@ Batch 028 remains blocked until v1.25 release PR validation, exact post-merge ma
 
 ## Accuracy boundary
 
-The strongest warranted v1.25 release-candidate claim is: **no known material factual errors or incorrect keyed answers are recorded as remaining; 636 learner-facing item IDs have explicit semantic status, and the release records zero known keyed-answer reversals.** Standards and public scope can change, reviews can miss nuance, and ISC2's adaptive live item bank is not public.
+The strongest warranted v1.25 claim is: **no known material factual errors or incorrect keyed answers are recorded as remaining; 636 learner-facing item IDs have explicit semantic status, and the release records zero known keyed-answer reversals.** Standards and public scope can change, reviews can miss nuance, and ISC2's adaptive live item bank is not public.
 
 ## Run locally
 
