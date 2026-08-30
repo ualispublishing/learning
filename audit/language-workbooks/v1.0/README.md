@@ -34,16 +34,19 @@ A qualified Arabic, French, or Urdu reviewer should use:
 - [`native-signoffs/`](native-signoffs/) — submitted immutable human review records.
 - [issue #106](https://github.com/ualispublishing/learning/issues/106) — Arabic/French/Urdu human-review tracker.
 
-Relevant validation commands:
+Relevant preparation and validation commands:
 
 ```bash
 python scripts/build_lang_wb_native_review_ledgers.py
 python scripts/validate_lang_wb_native_review_ledger.py <language>
+python scripts/prepare_lang_wb_native_signoff_draft.py <language>
 python scripts/validate_lang_wb_native_signoff.py <signoff.json>
 python scripts/validate_lang_wb_signoff_diff.py <base-ref> <head-ref>
 python scripts/workbook_final_human_promotion_gate.py
 python scripts/validate_lang_wb_expected_human_hold.py
 ```
+
+`prepare_lang_wb_native_signoff_draft.py` fills only deterministic current-candidate bindings. Human outcome/time/qualification fields remain incomplete and all scope attestations remain false; an untouched generated draft is deliberately invalid as a human sign-off.
 
 The enforcement chain checks worksheet/sign-off structure, source and artifact binding, filename discoverability, timestamps, latest-review precedence, append-only sign-off history, all-language promotion conditions, and whether a release HOLD is genuinely the expected pending-human-review state. Relevant pull requests are checked before merge, and the same safeguards run again on pushes.
 
