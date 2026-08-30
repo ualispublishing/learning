@@ -20,6 +20,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install release-audit Python dependencies
+        run: python -m pip install --disable-pip-version-check pypdf weasyprint
+
       - name: Build commit-bound final-release snapshot
         shell: bash
         run: |
