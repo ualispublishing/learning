@@ -1,0 +1,385 @@
+name: CISSP v1.26 branch promotion
+on:
+  push:
+    branches:
+      - cissp-v1.26-release-20260830
+    paths:
+      - .github/workflows/cissp-v1.26-promote-branch.yml
+permissions:
+  contents: write
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: cissp-v1.26-release-20260830
+          fetch-depth: 1
+      - name: Promote Batch 028 into v1.26 release state
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, re
+          from collections import Counter
+          from pathlib import Path
+
+          ROOT=Path('subjects/cissp/2024-outline/study-site')
+          QB=ROOT/'question-bank'
+          TODAY='2026-08-30'
+          RELEASE='1.26.0'
+          RELEASE_LABEL='1.26'
+          BOOKKEEPING_HEAD='130dc27ea6d43f229a03efc52ec1f76f27492c2b'
+          BOOKKEEPING_MERGE='3bdd70a3147a786ee9c6fa286c8bbb019e138e9f'
+          CANDIDATE_HEAD='b9a80d6f5f8bf719af2077c2d86e043f2c204dd6'
+          CANDIDATE_MERGE='5c7d5bddb8c3cf8eee7ac11086e6309a7b46ad7f'
+
+          def loadj(p):
+              return json.loads(Path(p).read_text(encoding='utf-8'))
+          def savej(p,obj):
+              Path(p).write_text(json.dumps(obj,ensure_ascii=False,separators=(',',':'))+'\n',encoding='utf-8')
+
+          # Batch 028 review: close candidate bookkeeping and mark release-PR eligibility.
+          p=QB/'BATCH_028_REVIEW.json'; r=loadj(p)
+          r['schema_version']=7
+          r['status']='SEMANTIC_REVIEWED_RELEASE_PENDING_V1_26'
+          cv=r['candidate_validation']
+          cv.update({
+              'final_bookkeeping_pr_number':113,
+              'final_bookkeeping_pr_head_sha':BOOKKEEPING_HEAD,
+              'final_bookkeeping_pr_audit_workflow_run_id':33320094928,
+              'final_bookkeeping_pr_audit':'PASS',
+              'final_bookkeeping_merge_sha':BOOKKEEPING_MERGE,
+              'final_bookkeeping_exact_main_audit_workflow_run_id':33320319376,
+              'final_bookkeeping_exact_main_audit':'PASS',
+              'final_bookkeeping_pages_workflow_run_id':33320319374,
+              'final_bookkeeping_pages_isolation':'PASS',
+              'promotion_allowed':True,
+          })
+          r['release_promotion']={
+              'target_release':RELEASE,
+              'status':'PENDING_RELEASE_PR_VALIDATION',
+              'required_before_authoritative':[
+                  'Native v1.26 release PR CISSP audit PASS on the exact final head',
+                  'Merge the exact validated release head',
+                  'Post-merge exact-main CISSP audit PASS',
+                  'Pages live fingerprint PASS for v1.26.0 / 511 standard / 456 manifest released / 1 Bellringer / released_only=true',
+                  'Final release evidence bookkeeping',
+              ],
+          }
+          r['release_projection']={
+              'records':512,'standard_mcq':511,'bellringers':1,
+              'difficulty_distribution':{'F':41,'E':357,'S':113,'B':1},
+              'manifest_records':456,'semantic_items':652,
+              'explicit_enriched_subtopic_exposure':305,
+              'remaining_to_800':{'records':288,'F':79,'E':123,'S':47,'B':39},
+          }
+          r['notes']=[
+              'All 16 Batch 028 records are original from public CISSP scope and registered standards with no external question seeds.',
+              'Candidate PR #112, candidate exact-main, candidate Pages isolation, bookkeeping PR #113, bookkeeping exact-main, and bookkeeping Pages isolation all passed.',
+              'The public site remained v1.25.0 and released-only through the complete candidate/bookkeeping chain.',
+              'This review now records v1.26 promotion eligibility; v1.26 is not authoritative until the release PR, exact-main, and live Pages controls pass.',
+          ]
+          savej(p,r)
+
+          # Promote Batch 028 in the authoritative release manifest.
+          p=QB/'RELEASED_BATCHES.json'; m=loadj(p); m['updated']=TODAY
+          m['released_batches']=[b for b in m['released_batches'] if b.get('batch_id')!='BATCH-028']
+          m['released_batches'].append({
+              'batch_id':'BATCH-028','released_on':TODAY,'release_version':RELEASE,
+              'files':['question-bank/candidates/batch-028-a.jsonl','question-bank/candidates/batch-028-b.jsonl','question-bank/candidates/batch-028-c.jsonl','question-bank/candidates/batch-028-d.jsonl'],
+              'review_files':['question-bank/BATCH_028_REVIEW.json'],
+              'records':16,'standard_mcq':16,'bellringers':0,
+              'difficulty':{'F':0,'E':12,'S':4,'B':0},
+              'semantic_review':'PASS','originality_preflight':'PASS',
+              'quality_gate_evidence':{
+                  'evidence_type':'native-candidate-pr-plus-exact-main-plus-final-bookkeeping',
+                  'candidate_pr_number':112,'candidate_pr_workflow_run_id':33318893120,'candidate_pr_head_sha':CANDIDATE_HEAD,
+                  'candidate_post_merge_main_workflow_run_id':33319185923,'candidate_main_sha':CANDIDATE_MERGE,
+                  'candidate_pages_isolation_workflow_run_id':33319185936,
+                  'final_bookkeeping_pr_number':113,'final_bookkeeping_pr_workflow_run_id':33320094928,'final_bookkeeping_pr_head_sha':BOOKKEEPING_HEAD,
+                  'final_bookkeeping_main_workflow_run_id':33320319376,'final_bookkeeping_pages_workflow_run_id':33320319374,'final_bookkeeping_sha':BOOKKEEPING_MERGE,
+                  'warnings':0,'logical_batch_mix':'PASS','browser_smoke':'PASS','aggregate_gate':'PASS'
+              },
+              'coverage_effect':{'explicit_subtopic_tags_before':304,'explicit_subtopic_tags_after':305,'mapped_subtopics':344}
+          })
+          savej(p,m)
+
+          # Extend semantic release ledger with the 16 reviewed Batch 028 IDs.
+          p=ROOT/'SEMANTIC_RELEASE_ADDITIONS.json'; s=loadj(p)
+          s['release']=RELEASE; s['audit_date']=TODAY
+          if 'BATCH-028' not in s['source_batches']: s['source_batches'].append('BATCH-028')
+          s['quality_gate_evidence']=[e for e in s['quality_gate_evidence'] if e.get('batch')!='BATCH-028']
+          s['quality_gate_evidence'].append({
+              'batch':'BATCH-028','evidence_type':'native-candidate-pr-plus-exact-main-plus-final-bookkeeping',
+              'candidate_pr_number':112,'candidate_pr_workflow_run_id':33318893120,'candidate_pr_head_sha':CANDIDATE_HEAD,
+              'candidate_post_merge_main_workflow_run_id':33319185923,'candidate_main_sha':CANDIDATE_MERGE,
+              'candidate_pages_isolation_workflow_run_id':33319185936,
+              'final_bookkeeping_pr_number':113,'final_bookkeeping_pr_workflow_run_id':33320094928,'final_bookkeeping_pr_head_sha':BOOKKEEPING_HEAD,
+              'final_bookkeeping_main_workflow_run_id':33320319376,'final_bookkeeping_pages_workflow_run_id':33320319374,'final_bookkeeping_sha':BOOKKEEPING_MERGE,
+              'warnings':0
+          })
+          for n in range(440,456): s['items'][f'C-{n}']={'status':'VERIFIED'}
+          s['base_items']=300; s['added_items']=len(s['items']); s['total_items']=300+len(s['items'])
+          c=Counter(v.get('status') for v in s['items'].values())
+          s['summary']={
+              'verified':c['VERIFIED'],
+              'verified_after_correction':c['VERIFIED_AFTER_CORRECTION'],
+              'verified_with_source_scope_note':c['VERIFIED_WITH_SOURCE_SCOPE_NOTE'],
+              'answer_key_reversals':0,'material_factual_errors_remaining':0
+          }
+          savej(p,s)
+
+          # Runtime metadata.
+          p=ROOT/'data-meta.js'; raw=p.read_text(encoding='utf-8').strip(); pre='window.CISSP_META='; marker=';window.CISSP_CHUNKS=[];'
+          meta=json.loads(raw[len(pre):raw.index(marker)])
+          meta['meta'].update({'version':RELEASE,'audited_on':TODAY,'question_count':511,'bellringer_count':1,'question_bank_records':512,'semantic_items_reviewed':652})
+          p.write_text(pre+json.dumps(meta,ensure_ascii=False,separators=(',',':'))+marker+'\n',encoding='utf-8')
+
+          # Question-bank status.
+          p=QB/'STATUS.json'; st=loadj(p)
+          st['schema_version']=46; st['updated']=TODAY; st['release']=RELEASE
+          st['released'].update({'bank_records':512,'standard_mcq':511,'bellringer_cases':1,'manifest_released_records':456,'difficulty_distribution':{'F':41,'E':357,'S':113,'B':1}})
+          st['latest_released_batch']={
+              'batch_id':'028','status':'RELEASED_V1_26_0_PENDING_VERIFICATION','records':16,'standard_mcq':16,'bellringer':0,
+              'difficulty_distribution':{'F':0,'E':12,'S':4,'B':0},'primary_domain_distribution':{'1':5,'2':2,'3':3,'4':2,'5':1,'6':0,'7':2,'8':1},
+              'answer_position_distribution':{'0':4,'1':4,'2':4,'3':4},'review':'BATCH_028_REVIEW.json',
+              'candidate_pr_number':112,'candidate_pr_final_head_sha':CANDIDATE_HEAD,'candidate_pr_audit_workflow_run_id':33318893120,
+              'candidate_merge_commit_sha':CANDIDATE_MERGE,'candidate_post_merge_main_audit_workflow_run_id':33319185923,'candidate_pages_isolation_workflow_run_id':33319185936,
+              'candidate_final_bookkeeping_pr_number':113,'candidate_final_bookkeeping_pr_head_sha':BOOKKEEPING_HEAD,'candidate_final_bookkeeping_pr_audit_workflow_run_id':33320094928,
+              'candidate_final_bookkeeping_merge_sha':BOOKKEEPING_MERGE,'candidate_final_bookkeeping_main_audit_workflow_run_id':33320319376,'candidate_final_bookkeeping_pages_workflow_run_id':33320319374,
+              'quality_gate_warnings':0,'logical_batch_mix':'PASS','browser_smoke':'PASS','aggregate_gate':'PASS','explicit_subtopic_tags_after':305,
+              'release_pr_state':'PENDING_EXACT_HEAD_VALIDATION','public_runtime':'PENDING'
+          }
+          st['candidate_batches']={}
+          st['pending_candidate_summary']={'records':0,'standard_mcq':0,'bellringer_cases':0,'difficulty_distribution':{'F':0,'E':0,'S':0,'B':0}}
+          st['coverage']={
+              'numbered_objectives_with_standard_mcq_exposure':'62/62','mapped_subtopics':344,
+              'released_explicit_enriched_subtopic_exposure':305,'released_explicit_enriched_subtopic_unexposed':39,
+              'candidate_inclusive_explicit_enriched_subtopic_exposure':305,'candidate_inclusive_explicit_enriched_subtopic_unexposed':39,
+              'boundary':'305/344 is the v1.26 release-candidate authoring-metadata exposure after promoting Batch 028. This is not a learner-mastery claim.'
+          }
+          st['release_verification']={
+              'target_release':RELEASE,'status':'PENDING_RELEASE_PR_VALIDATION',
+              'previous_verified_public_release':'1.25.0','previous_release_merge_sha':'875a55d49800ab9485db3edadc4f08ba57e3a662',
+              'previous_exact_main_audit_workflow_run_id':33280157209,'previous_pages_workflow_run_id':33280157196,
+              'batch_028_candidate_pr_number':112,'batch_028_candidate_pr_audit_workflow_run_id':33318893120,
+              'batch_028_candidate_main_audit_workflow_run_id':33319185923,'batch_028_candidate_pages_isolation_workflow_run_id':33319185936,
+              'batch_028_bookkeeping_pr_number':113,'batch_028_bookkeeping_pr_audit_workflow_run_id':33320094928,
+              'batch_028_bookkeeping_main_audit_workflow_run_id':33320319376,'batch_028_bookkeeping_pages_workflow_run_id':33320319374,
+              'last_confirmed_public_release':'1.25.0','last_confirmed_public_standard_questions':495,'last_confirmed_public_manifest_released_records':440,'last_confirmed_public_bellringers':1,'last_confirmed_public_released_only':True,
+              'expected_v1_26_live_fingerprint':{'version':RELEASE,'standard_questions':511,'manifest_released_records':456,'bellringers':1,'released_only':True}
+          }
+          st['remaining_to_target_from_released']={'bank_records':288,'F':79,'E':123,'S':47,'B':39}
+          st['remaining_to_target_if_current_candidates_promote']={'bank_records':288,'F':79,'E':123,'S':47,'B':39}
+          st['provisional_next_planned_batch']={
+              'batch_id':'029','basis_workflow_run_id':33320319376,'basis_scope':'Batch-028-bookkeeping-main; equivalent content basis for v1.26',
+              'size':16,'difficulty_target':{'E':12,'S':4},'primary_domain_distribution':{'1':3,'2':2,'3':2,'4':1,'5':0,'6':2,'7':5,'8':1},
+              'objective_targets':['4.1','1.4','7.13','2.5','7.14','7.15','7.3','8.3','7.4','3.1','3.6','1.10','6.1','6.4','2.3','1.11'],
+              'boundary':'Provisional until v1.26 release verification closes; then it becomes the released-only Batch 029 planning slate.'
+          }
+          st['next_priority']=['Validate the exact final v1.26 release PR head.','Merge only that validated release head.','Require exact-main CISSP audit and live Pages fingerprint for v1.26.0, then close final release evidence.']
+          savej(p,st)
+
+          # Release ledger.
+          p=ROOT/'RELEASE_STATUS.json'; rs=loadj(p)
+          rs['release']=RELEASE; rs['status']='READY_FOR_STUDY'; rs['prepared_on']=TODAY; rs['last_semantic_audit']=TODAY
+          rs['scope'].update({
+              'explicit_enriched_subtopic_exposure':305,'explicit_enriched_subtopic_exposure_status':'RELEASE_CANDIDATE_305',
+              'standard_scenario_questions':511,'bellringers':1,'question_bank_records':512,
+              'released_difficulty_distribution':{'F':41,'E':357,'S':113,'B':1},'standard_questions_with_four_option_rationales':511,
+              'semantic_items_reviewed':652,'semantic_answer_key_reversals':0
+          })
+          rs['release_change']={
+              'from':'1.25.0','promoted_batch':'028','promoted_standard_questions':16,'promoted_difficulty_distribution':{'F':0,'E':12,'S':4,'B':0},
+              'primary_domain_distribution':{'1':5,'2':2,'3':3,'4':2,'5':1,'6':0,'7':2,'8':1},'semantic_review_status':'PASS','originality_duplicate_gate':'PASS',
+              'candidate_validation_pr':112,'candidate_pr_final_head_sha':CANDIDATE_HEAD,'candidate_pr_audit_workflow_run_id':33318893120,
+              'candidate_merge_commit_sha':CANDIDATE_MERGE,'candidate_post_merge_main_workflow_run_id':33319185923,'candidate_pages_isolation_workflow_run_id':33319185936,
+              'candidate_final_bookkeeping_pr_number':113,'candidate_final_bookkeeping_pr_head_sha':BOOKKEEPING_HEAD,'candidate_final_bookkeeping_pr_audit_workflow_run_id':33320094928,
+              'candidate_final_bookkeeping_merge_sha':BOOKKEEPING_MERGE,'candidate_final_bookkeeping_main_audit_workflow_run_id':33320319376,'candidate_final_bookkeeping_pages_workflow_run_id':33320319374,
+              'candidate_quality_gate_warnings':0,'logical_batch_mix':'PASS','browser_smoke':'PASS','aggregate_gate':'PASS',
+              'explicit_enriched_subtopic_exposure_before':304,'explicit_enriched_subtopic_exposure_after':305,
+              'objective_exposure':'62/62 numbered objectives have at least one standard MCQ exposure','release_pr_state':'PENDING_EXACT_HEAD_VALIDATION','public_pages_runtime':'PENDING'
+          }
+          rs['pending_candidate']=None
+          rs['validation']['v1_26_release_evidence']='subjects/cissp/2024-outline/study-site/question-bank/BATCH_028_REVIEW.json'
+          rs['question_bank_expansion_target'].update({
+              'current_released_records':512,'current_released_difficulty':{'F':41,'E':357,'S':113,'B':1},
+              'current_unreleased_candidates':0,'candidate_inclusive_records':512,'candidate_inclusive_difficulty':{'F':41,'E':357,'S':113,'B':1},
+              'remaining_from_released':{'records':288,'F':79,'E':123,'S':47,'B':39},'remaining_if_current_candidates_promote':{'records':288,'F':79,'E':123,'S':47,'B':39},
+              'next_bias':'Finish v1.26 release verification, then begin Batch 029 from the validated released-only planner state.',
+              'provisional_next_planner_basis_workflow_run_id':33320319376,'provisional_next_planner_scope':'Batch-028-bookkeeping-main; equivalent content basis for v1.26',
+              'provisional_next_planner_objectives':['4.1','1.4','7.13','2.5','7.14','7.15','7.3','8.3','7.4','3.1','3.6','1.10','6.1','6.4','2.3','1.11'],
+              'provisional_next_planner_primary_domain_distribution':{'1':3,'2':2,'3':2,'4':1,'5':0,'6':2,'7':5,'8':1},'provisional_next_planner_difficulty_distribution':{'E':12,'S':4}
+          })
+          dep=rs['deployment']
+          dep.update({
+              'repository_release_candidate':RELEASE,'last_confirmed_public_pages_release':'1.25.0','public_v1_26_verification_pending':True,'public_runtime_verified_for_v1_26':False,
+              'latest_candidate_isolation_evidence':{'pages_workflow_run_id':33320319374,'bookkeeping_merge_sha':BOOKKEEPING_MERGE,'version':'1.25.0','standard_questions':495,'manifest_released_records':440,'bellringers':1,'released_only':True},
+              'release_pr_exact_head_audit_workflow_run_id':None,
+              'activation_status':'v1.26.0 is a release candidate on the promotion branch. Public production remains the verified v1.25.0 release until the exact release head, post-merge main audit, and live Pages fingerprint all pass.'
+          })
+          rs['precision_boundary']='The v1.26 release candidate contains 511 standard scenario questions, 1 Bellringer, 512 release-manifest bank records, and 652 semantically reviewed learner-facing item IDs with zero known keyed-answer reversals and no known remaining material factual error within the documented review boundary. It is not authoritative public v1.26 until post-merge and live Pages verification pass, and it does not guarantee passing the live adaptive CISSP exam.'
+          savej(p,rs)
+
+          # Cross-project continuation router: mutate only CISSP scope.
+          p=Path('PROJECT_TRACKS.json'); tracks=loadj(p); cs=tracks['tracks']['CISSP-ATLAS']['current_scope']
+          cs.update({
+              'version':RELEASE,'last_semantic_audit':TODAY,'explicit_enriched_subtopic_exposure':305,'candidate_inclusive_explicit_enriched_subtopic_exposure':305,
+              'released_standard_questions':511,'released_bellringers':1,'released_bank_records':512,'released_question_difficulty':{'F':41,'E':357,'S':113,'B':1},
+              'standard_questions_with_four_option_rationales':511,'semantic_items_reviewed':652,'pending_candidate_records':0,'candidate_inclusive_bank_records':512,
+              'candidate_inclusive_question_difficulty':{'F':41,'E':357,'S':113,'B':1},'next_action':'Validate and merge the exact v1.26 release head, then require exact-main and live Pages verification before final release evidence closure.',
+              'next_batch':'029','next_batch_scope':'provisional-v1.26-released-only-after-verification','next_batch_basis_workflow_run_id':33320319376,
+              'public_release_verified':False,'latest_candidate_merge_sha':CANDIDATE_MERGE,'latest_candidate_pr_number':112,'latest_candidate_pr_audit_workflow_run_id':33318893120,
+              'latest_candidate_main_audit_workflow_run_id':33319185923,'latest_candidate_pages_isolation_workflow_run_id':33319185936,
+              'latest_candidate_bookkeeping_pr_number':113,'latest_candidate_bookkeeping_pr_audit_workflow_run_id':33320094928,'latest_candidate_bookkeeping_main_audit_workflow_run_id':33320319376,'latest_candidate_bookkeeping_pages_workflow_run_id':33320319374
+          })
+          savej(p,tracks)
+
+          # Learner-facing release-candidate documentation.
+          (ROOT/'README.md').write_text('''# CISSP Atlas — Current Outline Study Workflow
+
+Unofficial, original study site mapped to the current public ISC2 CISSP exam outline (effective 2024-04-15).
+
+## v1.26.0 release candidate
+
+- 8 CISSP domains; official weights total **100%**.
+- **62** numbered public objectives and **344** paraphrased subtopic checks.
+- **305/344** checks with explicit enriched-subtopic practice exposure.
+- **33** AI-security coverage areas and **140** layered retrieval cards.
+- **511 released standard scenario questions + 1 Bellringer = 512 released bank records** in the v1.26 release candidate.
+- Author-difficulty mix: **F41 / E357 / S113 / B1**.
+- **511/511** standard questions have four-option teaching rationales.
+- **652 learner-facing item IDs** in the combined semantic-audit ledger.
+- **20** primary/reference sources.
+
+Batch 028 completed candidate PR #112 and bookkeeping PR #113 with exact-head, exact-main, originality, logical-mix, browser, aggregate, and Pages-isolation controls passing. This branch promotes those 16 reviewed questions to v1.26.0. Public production remains the verified v1.25.0 release until this exact release head is validated, merged, and the live Pages fingerprint passes.
+
+## Semantic-review boundary
+
+The combined ledgers cover **652 learner-facing item IDs** after promotion: 300 base items plus 352 release-addition items. Batch 028 contributes 16 `VERIFIED` items. The release candidate records zero known keyed-answer reversals and zero known remaining material factual errors within the documented review boundary. This is an auditable quality claim, not an infallibility or exam-pass guarantee.
+
+## Study workflow
+
+Use **diagnose → retrieve → apply → repair → re-test later**. Run the diagnostic once for routing, retrieve before revealing, use Exam + Stretch for standard practice, commit confidence before answering, review all four rationales, repair high-confidence misses first, and use Bellringers separately as non-exam-representative integrative drills.
+
+Keyboard review flow: **Space toggles reveal/hide; ←/→ move cards while hidden and layers while revealed; 1–4 grades the revealed card.**
+
+## Question-bank expansion
+
+The long-term target remains **800 records** with an authoring mix of 15% Foundation+, 60% Exam-calibrated, 20% Stretch, and 5% Bellringer. After Batch 028 promotion, remaining deficits are **F79 / E123 / S47 / B39**, or **288 records**. All 62 objectives have at least one standard-MCQ exposure. Explicit enriched-subtopic exposure is **305/344**; this is authoring coverage, not learner mastery.
+
+Batch 029 is provisionally planned at E12/S4 across `4.1, 1.4, 7.13, 2.5, 7.14, 7.15, 7.3, 8.3, 7.4, 3.1, 3.6, 1.10, 6.1, 6.4, 2.3, 1.11`. Do not begin it as authoritative released-only work until v1.26 post-merge and public verification close.
+
+## Continuous audit
+
+`.github/workflows/cissp-study-site-audit.yml` enforces knowledge/schema consistency, semantic coverage, originality/duplicate controls, logical batch composition, planning, JavaScript syntax, rationales, static assets, interactive browser flows, and an aggregate gate. `.github/workflows/cissp-pages.yml` independently audits and assembles a released-only artifact and verifies the public runtime fingerprint.
+
+## Accuracy boundary
+
+The strongest warranted v1.26 release-candidate claim is: **no known material factual errors or incorrect keyed answers are recorded as remaining; 652 learner-facing item IDs have explicit semantic status, and the release records zero known keyed-answer reversals.** Standards and public scope can change, reviews can miss nuance, and ISC2's adaptive live item bank is not public.
+
+## Primary scope references
+
+- ISC2 CISSP Certification Exam Outline: https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline
+- ISC2 CISSP Exam Refresh FAQ: https://www.isc2.org/certifications/cissp/cissp-exam-refresh-faq
+- ISC2 Code of Ethics: https://www.isc2.org/ethics
+''',encoding='utf-8')
+
+          (ROOT/'TOMORROW_START.md').write_text('''# CISSP Atlas — Start Here
+
+Use this sequence the first time you open the current release candidate.
+
+1. Run the diagnostic once if you do not already have a baseline; treat it as routing, not an exam-readiness score.
+2. Retrieve before revealing in the weakest domain.
+3. Use the misconception layer on misses or hesitation.
+4. Run 10–20 standard scenarios with **Exam + Stretch** selected.
+5. Commit confidence before choosing an answer; repair high-confidence misses first.
+6. Read all four option rationales.
+7. Use a Bellringer only after a normal study block; it is non-exam-representative.
+8. Re-test later rather than repeating immediately to recognition.
+
+Keyboard: **Space toggles reveal/hide; ←/→ move cards when hidden and layers when revealed; 1–4 grades.**
+
+## Current v1.26.0 scope
+
+- 8 domains; official weights total 100%.
+- 62 numbered public objectives.
+- 344 mapped subtopic checks; 305/344 with explicit enriched-subtopic practice exposure.
+- 33 AI-security coverage areas.
+- 140 layered retrieval cards.
+- **511 released standard scenario questions + 1 Bellringer = 512 question-bank records**.
+- Difficulty mix: **F41 / E357 / S113 / B1**.
+- Four-option teaching rationales on **511/511** standard questions.
+- **652 semantically reviewed learner-facing item IDs**, with zero known keyed-answer reversals and no known remaining material factual error in the documented audit boundary.
+- 20 primary/reference sources.
+
+Batch 028 is promotion-eligible after candidate PR #112 and bookkeeping PR #113 both completed their exact-head, post-merge, and Pages-isolation controls. v1.26.0 still requires exact release-head validation, merge, exact-main validation, and the live Pages fingerprint before it is called the verified public release.
+
+## Next authoring step
+
+Batch 029 remains provisional until v1.26 verification closes. Its current E12/S4 target is `4.1, 1.4, 7.13, 2.5, 7.14, 7.15, 7.3, 8.3, 7.4, 3.1, 3.6, 1.10, 6.1, 6.4, 2.3, 1.11`.
+
+See `RELEASE_STATUS.json` for machine-readable evidence and `PRECISION_AUDIT.md` for the accuracy boundary. CISSP Atlas is unofficial and does not guarantee a pass on the live adaptive exam.
+''',encoding='utf-8')
+
+          (ROOT/'PRECISION_AUDIT.md').write_text('''# CISSP Atlas Precision Audit — v1.26 Release Candidate
+
+## Result
+
+**Published-scope mapping: PASS. Batch 028 semantic/originality validation and candidate/bookkeeping closure: PASS within the documented audit boundary. v1.26 exact release-head, post-merge, and public runtime verification remain required before public verification is claimed.**
+
+## v1.26.0 release-candidate scope
+
+- 8/8 domains; official weights total 100%.
+- 62/62 numbered public objectives.
+- 344 paraphrased public-outline subtopic checks; **305/344** explicitly exposed by enriched-subtopic practice metadata.
+- 33 AI-security coverage areas and 140 layered retrieval cards.
+- **511 released standard scenario questions** in the promotion manifest.
+- **1 released Bellringer**, explicitly non-exam-representative.
+- **512 total released question-bank records** in the promotion manifest.
+- 511/511 standard questions have four-option teaching rationales.
+- 20 primary/reference sources.
+- **652 learner-facing item IDs** in the combined semantic ledgers.
+- Author-difficulty distribution: **F41 / E357 / S113 / B1**.
+
+## Batch 028 validation closure
+
+Batch 028 contributes 16 original standard questions, E12/S4, balanced answer positions 4/4/4/4, and primary-domain distribution D1=5, D2=2, D3=3, D4=2, D5=1, D7=2, D8=1. The review records 0 answer-key conflicts, 0 remaining source/objective mapping conflicts, 0 known material factual errors remaining, and 0 external question seeds.
+
+Evidence chain:
+- Candidate PR #112 exact head `b9a80d6f5f8bf719af2077c2d86e043f2c204dd6`; audit **33318893120: PASS**.
+- Candidate merge `5c7d5bddb8c3cf8eee7ac11086e6309a7b46ad7f`; exact-main audit **33319185923: PASS**; Pages isolation **33319185936: PASS**.
+- Candidate-bookkeeping PR #113 exact head `130dc27ea6d43f229a03efc52ec1f76f27492c2b`; audit **33320094928: PASS**.
+- Candidate-bookkeeping merge `3bdd70a3147a786ee9c6fa286c8bbb019e138e9f`; exact-main audit **33320319376: PASS**; Pages isolation **33320319374: PASS**.
+
+The bookkeeping Pages run verified that public production remained **v1.25.0 / 495 standard / 440 manifest released / 1 Bellringer / released_only=true** before promotion.
+
+## Semantic audit
+
+The base semantic ledger contains 300 items; the release-additions ledger contains 352 after Batch 028 promotion, for **652 learner-facing item IDs**. Batch 028's 16 additions are `VERIFIED`. The release candidate records zero keyed-answer reversals and zero known material factual errors remaining after review within the documented boundary.
+
+## Next expansion state
+
+After v1.26 verification, the 800-record target leaves **F79 / E123 / S47 / B39**, or **288 records total**. Batch 029 is provisionally E12/S4 across `4.1, 1.4, 7.13, 2.5, 7.14, 7.15, 7.3, 8.3, 7.4, 3.1, 3.6, 1.10, 6.1, 6.4, 2.3, 1.11`.
+
+## Accuracy boundary
+
+The strongest warranted claim for the v1.26 documented audit boundary is: **No known material factual errors or incorrect keyed answers are recorded as remaining; 652 learner-facing item IDs have explicit semantic audit status, and the release candidate records zero known keyed-answer reversals.** This is not an absolute infallibility guarantee and does not guarantee passing the live adaptive CISSP exam.
+''',encoding='utf-8')
+
+          # Visible/runtime version labels and smoke assertion.
+          p=ROOT/'index.html'; x=p.read_text(encoding='utf-8'); x=x.replace('AUDITED 2026-08-29 · RELEASE v1.25','AUDITED 2026-08-30 · RELEASE v1.26').replace('v1.25 · local-first progress','v1.26 · local-first progress'); p.write_text(x,encoding='utf-8')
+          p=ROOT/'product-polish.js'; x=p.read_text(encoding='utf-8').replace("v1.25 · local progress","v1.26 · local progress"); p.write_text(x,encoding='utf-8')
+          p=ROOT/'browser-smoke.html'; x=p.read_text(encoding='utf-8').replace("includes('v1.25')","includes('v1.26')"); p.write_text(x,encoding='utf-8')
+
+          print('Prepared v1.26 release candidate:', RELEASE)
+          PY
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/cissp-v1.26-promote-branch.yml
+          git add PROJECT_TRACKS.json subjects/cissp/2024-outline/study-site
+          git diff --cached --check
+          git commit -m 'Promote CISSP Atlas Batch 028 to v1.26 release candidate'
+          git push origin HEAD:cissp-v1.26-release-20260830
