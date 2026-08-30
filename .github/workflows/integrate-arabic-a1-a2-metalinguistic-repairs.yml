@@ -1,0 +1,157 @@
+name: Integrate Arabic A1-A2 metalinguistic repairs
+
+on:
+  push:
+    paths:
+      - '.github/workflows/integrate-arabic-a1-a2-metalinguistic-repairs.yml'
+      - 'reading/tools/integrate_arabic_lowlevel_metalinguistic_repairs.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Preflight routed state
+        run: python reading/tools/validate_continuation_state.py
+
+      - name: Integrate all guarded A1-A2 unit repairs
+        run: python reading/tools/integrate_arabic_lowlevel_metalinguistic_repairs.py
+
+      - name: Regenerate exact-corpus Gate 0 evidence
+        run: python reading/tools/run_post_generation_gate0.py
+
+      - name: Rerun fresh Arabic deterministic evidence gate
+        run: python reading/tools/run_arabic_fresh_deterministic_revalidation.py
+
+      - name: Reconcile verification and release evidence state
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          repair_path = Path('reading/audit/arabic_a1_a2_metalinguistic_integrated_repair_2026-08-30.json')
+          post_path = Path('reading/audit/arabic_a1_a2_metalinguistic_postrepair_2026-08-30.json')
+          det_path = Path('reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json')
+          release_path = Path('reading/RELEASE_STATUS.json')
+          tasks_path = Path('reading/VERIFICATION_TASKS.md')
+
+          repair = json.loads(repair_path.read_text(encoding='utf-8'))
+          post = json.loads(post_path.read_text(encoding='utf-8'))
+          det = json.loads(det_path.read_text(encoding='utf-8'))
+
+          if repair.get('candidate_questions_changed') != 146:
+              raise SystemExit('Integrated repair did not change exactly 146 historical candidates')
+          if repair.get('unit_repairs_integrated') != 20:
+              raise SystemExit('Integrated repair did not validate all 20 unit branches')
+          if repair.get('passage_text_changed') is not False or repair.get('non_qa_metadata_changed') is not False:
+              raise SystemExit('Integrated repair exceeded the permitted Q/A-only scope')
+          if post.get('status') != 'PASS_DETERMINISTIC_A1_A2_METALINGUISTIC':
+              raise SystemExit(f"Unexpected postrepair status: {post.get('status')}")
+          if post.get('historical_candidates_revalidated') != 146:
+              raise SystemExit('Postrepair audit did not revalidate all 146 historical candidates')
+          if post.get('historical_candidates_remaining_unchanged') != 0:
+              raise SystemExit('Historical metalinguistic candidates remain unchanged')
+          if post.get('formal_metalinguistic_question_type_count') != 0:
+              raise SystemExit('Formal metalinguistic question types remain in A1/A2')
+          if det.get('structural_errors'):
+              raise SystemExit(f"Fresh Arabic deterministic gate has structural errors: {det['structural_errors']}")
+          if det.get('finding_classes', {}).get('unicode_not_nfc', 0) != 0:
+              raise SystemExit('Arabic NFC defect class reopened')
+          if det.get('open_findings') != 2496:
+              raise SystemExit(f"Unexpected deterministic evidence finding count after Q/A-only repair: {det.get('open_findings')} != 2496")
+
+          release = json.loads(release_path.read_text(encoding='utf-8'))
+          ar = release['languages']['arabic']
+          ar['release_state'] = 'REOPEN_REQUIRED'
+          ar['educator_release_ready'] = False
+          ar['latest_deterministic_gate'] = {
+              'status': det['status'],
+              'records': det['records'],
+              'questions': det['questions'],
+              'answers': det['answers'],
+              'open_findings': det['open_findings'],
+              'finding_classes': det['finding_classes'],
+              'artifact': 'reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json',
+              'date': det['date'],
+          }
+          evidence = ar.get('latest_release_evidence', [])
+          if isinstance(evidence, str):
+              evidence = [evidence]
+          for artifact in (
+              'reading/audit/arabic_a1_a2_metalinguistic_integrated_repair_2026-08-30.json',
+              'reading/audit/arabic_a1_a2_metalinguistic_postrepair_2026-08-30.json',
+              'reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json',
+          ):
+              if artifact not in evidence:
+                  evidence.append(artifact)
+          ar['latest_release_evidence'] = evidence
+          ar['open_release_classes'] = [
+              'substantive resolution of fresh deterministic release-evidence blockers (no bulk promotion)',
+              'fresh CEFR/progression review after A1/A2 formal-metalinguistic remediation',
+              'corpus-wide Arabic grammar-in-context naturalness audit',
+              'full semantic educator review',
+              'independent native/model-family recertification',
+              'blind post-repair human review',
+              'hash-bound release manifest',
+          ]
+          release['updated'] = '2026-08-30'
+          release_path.write_text(json.dumps(release, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          text = tasks_path.read_text(encoding='utf-8')
+          old = '- [ ] corpus-wide low-level metalinguistic/CEFR question audit and repair;'
+          replacement = (
+              '- [x] A1/A2 formal-metalinguistic candidate audit/repair integration: all 20 historical unit branches revalidated and all 146 candidate questions remediated without passage-prose changes;\n'
+              '- [ ] fresh CEFR/progression review against the current corpus and descriptors;'
+          )
+          if old in text:
+              text = text.replace(old, replacement, 1)
+          elif replacement not in text:
+              raise SystemExit('Could not locate Arabic metalinguistic/CEFR task for precise split')
+
+          note = (
+              'A1/A2 metalinguistic integration evidence: '
+              '`reading/audit/arabic_a1_a2_metalinguistic_integrated_repair_2026-08-30.json` and '
+              '`reading/audit/arabic_a1_a2_metalinguistic_postrepair_2026-08-30.json` — '
+              '**146/146** historical candidates changed across **20/20** unit branches, '
+              'zero formal-metalinguistic question types remain in A1/A2, passage prose unchanged. '
+              'This is deterministic/self-review evidence only.\n\n'
+          )
+          anchor = 'Open verification work:\n\n'
+          if note not in text:
+              text = text.replace(anchor, note + anchor, 1)
+          tasks_path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Refresh state manifest and validate final state
+        run: |
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+
+      - name: Commit integrated repairs and refreshed evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/arabic/a1/passages.jsonl \
+                  reading/arabic/a2/passages.jsonl \
+                  reading/audit/arabic_a1_a2_metalinguistic_integrated_repair_2026-08-30.json \
+                  reading/audit/arabic_a1_a2_metalinguistic_postrepair_2026-08-30.json \
+                  reading/audit/post_generation_gate0_2026-08-30.json \
+                  reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json \
+                  reading/RELEASE_STATUS.json \
+                  reading/VERIFICATION_TASKS.md \
+                  reading/STATE_MANIFEST.json
+          if git diff --cached --quiet; then
+            echo 'No integration/evidence changes required.'
+            exit 0
+          fi
+          git commit -m 'Integrate Arabic A1-A2 metalinguistic repairs'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
