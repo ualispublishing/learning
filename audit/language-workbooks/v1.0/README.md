@@ -52,6 +52,30 @@ The enforcement chain checks worksheet/sign-off structure, source and artifact b
 
 Synthetic CI self-tests verify these controls without adding synthetic human certification to repository history. Automation does not make the human linguistic judgment.
 
+## Exact-commit final release snapshot
+
+After Arabic, French, and Urdu all have valid latest current-candidate PASS sign-offs, create the final release attestation with:
+
+```bash
+python scripts/build_lang_wb_final_release_snapshot.py \
+  --output audit/language-workbooks/v1.0/FINAL_RELEASE_SNAPSHOT.json
+```
+
+The same gate can be run through [`.github/workflows/language-workbook-final-release-snapshot.yml`](../../../.github/workflows/language-workbook-final-release-snapshot.yml). It reruns the established production-candidate release audit and final-human gate, verifies source-locked integrity and final visual-audit applicability, requires clean tracked release/sign-off inputs, and hashes the complete tracked v1.0 release tree. The resulting attestation identifies the exact repository commit, master PDFs, release manifest, human sign-offs, gate evidence, and canonical release-tree SHA-256.
+
+The repository's moving `main` branch is currently not protected by required status checks. Therefore final release evidence must be interpreted against the **exact commit recorded in the snapshot**, not merely against whatever commit later becomes `main`. The snapshot is content-addressed specifically to remove that moving-branch ambiguity; it does not claim that `main` itself is immutable.
+
+Drift handling is deliberately scoped to learner-facing release integrity:
+
+- PDF changes after the recorded visual-audit production commit invalidate the visual-audit binding;
+- release CSV or `RELEASE_MANIFEST.json` changes after the source-locked production commit invalidate source/integrity evidence;
+- source-locked curation changes invalidate the integrity evidence;
+- documentation-only changes such as the workbook hub README do not falsely invalidate learner-facing output evidence.
+
+The snapshot implementation is exercised by [`.github/workflows/language-workbook-final-release-snapshot-selftest.yml`](../../../.github/workflows/language-workbook-final-release-snapshot-selftest.yml). Live run `33317311123` passed on 2026-08-30, demonstrating that an exact-commit snapshot succeeds with three synthetic current-candidate PASS fixtures, while learner CSV drift and a missing language PASS are rejected. The fixtures exist only in the runner workspace and are not human certification records.
+
+No `FINAL_RELEASE_SNAPSHOT.json` should be created or treated as release authorization while genuine independent human sign-offs are still missing.
+
 ## Editorial/source-locked audit evidence
 
 - [`AUDIT_SCOPE.md`](AUDIT_SCOPE.md) — learner-facing content covered by the audit program.
