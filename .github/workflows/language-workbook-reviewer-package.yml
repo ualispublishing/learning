@@ -5,13 +5,16 @@ on:
   push:
     paths:
       - '.github/workflows/language-workbook-reviewer-package.yml'
+      - 'scripts/build_lang_wb_reviewer_bundle.py'
       - 'scripts/build_lang_wb_native_review_ledgers.py'
       - 'scripts/prepare_lang_wb_native_signoff_draft.py'
+      - 'scripts/validate_lang_wb_native_signoff.py'
       - 'audit/language-workbooks/v1.0/REVIEWER_ONBOARDING.md'
       - 'audit/language-workbooks/v1.0/FINAL_NATIVE_REVIEW_PACKET.md'
       - 'audit/language-workbooks/v1.0/CORRECTNESS_STANDARD.md'
       - 'audit/language-workbooks/v1.0/FINAL_NATIVE_SIGNOFF_TEMPLATE.json'
       - 'audit/language-workbooks/v1.0/native-signoffs/README.md'
+      - '.github/PULL_REQUEST_TEMPLATE/lang-wb-native-signoff.md'
       - 'completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json'
       - 'completed/languages/workbooks/v1.0/**/*.pdf'
       - 'completed/languages/workbooks/v1.0/**/*.csv'
@@ -29,97 +32,61 @@ jobs:
     steps:
       - name: Check out exact candidate commit
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Generate current-candidate review materials
-        run: |
-          set -euo pipefail
-          python scripts/build_lang_wb_native_review_ledgers.py
-          python scripts/prepare_lang_wb_native_signoff_draft.py "${{ matrix.language }}" \
-            --output "$RUNNER_TEMP/${{ matrix.language }}_native_signoff_draft.json"
-
-      - name: Assemble reviewer package
+      - name: Build self-contained reviewer bundle
         shell: bash
         run: |
           set -euo pipefail
+          out="$RUNNER_TEMP/lang-wb-reviewer-packages"
+          python scripts/build_lang_wb_reviewer_bundle.py "${{ matrix.language }}" --output-root "$out"
+
           lang='${{ matrix.language }}'
-          package="$RUNNER_TEMP/lang-wb-v1.0-${lang}-reviewer-package"
-          mkdir -p "$package"
+          dir="$out/${lang}_lang_wb_v1.0_reviewer_bundle"
+          zip="$out/${lang}_lang_wb_v1.0_reviewer_bundle.zip"
 
-          master="completed/languages/workbooks/v1.0/${lang}/00_${lang}_complete_master.pdf"
-          vocab="completed/languages/workbooks/v1.0/${lang}/${lang}_vocabulary_1000.csv"
-          sentences="completed/languages/workbooks/v1.0/${lang}/${lang}_sentence_bank_1000.csv"
+          test -s "$dir/MASTER_WORKBOOK.pdf"
+          test -s "$dir/${lang}_vocabulary_1000.csv"
+          test -s "$dir/${lang}_sentence_bank_1000.csv"
+          test -f "$dir/${lang}_REVIEW_LEDGER.csv"
+          test -f "$dir/${lang}_SIGNOFF_DRAFT.json"
+          test -f "$dir/CANDIDATE_BINDING.json"
+          test -f "$dir/RELEASE_MANIFEST.json"
+          test -f "$dir/BUNDLE_MANIFEST.json"
+          test -f "$dir/CHECKSUMS.sha256"
+          test -s "$zip"
 
-          cp "$master" "$package/"
-          cp "$vocab" "$package/"
-          cp "$sentences" "$package/"
-          cp "audit/language-workbooks/v1.0/native-review-ledgers/${lang}_native_review_ledger.csv" "$package/"
-          cp audit/language-workbooks/v1.0/native-review-ledgers/CANDIDATE_BINDINGS.json "$package/"
-          cp "$RUNNER_TEMP/${lang}_native_signoff_draft.json" "$package/"
-          cp audit/language-workbooks/v1.0/REVIEWER_ONBOARDING.md "$package/"
-          cp audit/language-workbooks/v1.0/FINAL_NATIVE_REVIEW_PACKET.md "$package/"
-          cp audit/language-workbooks/v1.0/CORRECTNESS_STANDARD.md "$package/"
-          cp audit/language-workbooks/v1.0/FINAL_NATIVE_SIGNOFF_TEMPLATE.json "$package/"
-          cp audit/language-workbooks/v1.0/native-signoffs/README.md "$package/NATIVE_SIGNOFFS_README.md"
-          cp completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json "$package/"
-
-          issue=''
-          case "$lang" in
-            arabic) issue='114' ;;
-            french) issue='115' ;;
-            urdu) issue='116' ;;
-          esac
-
-          cat > "$package/START_HERE.md" <<EOF
-          # LANG-WB v1.0 — ${lang^} reviewer package
-
-          This package was generated from repository commit \`${GITHUB_SHA}\` for independent full-content human linguistic review.
-
-          Operational tracker: https://github.com/ualispublishing/learning/issues/${issue}
-          Parent release tracker: https://github.com/ualispublishing/learning/issues/106
-
-          ## Required review
-
-          1. Read \`REVIEWER_ONBOARDING.md\`, \`FINAL_NATIVE_REVIEW_PACKET.md\`, and \`CORRECTNESS_STANDARD.md\`.
-          2. Review every row in \`${lang}_native_review_ledger.csv\`; record PASS, FAIL, or HOLD yourself.
-          3. Review the complete rendered \`00_${lang}_complete_master.pdf\`, including Foundations, pronunciation, headings, instructions, and other learner-facing material not represented by worksheet rows.
-          4. Use \`${lang}_native_signoff_draft.json\` only after the full review. It is deliberately incomplete and does not certify anything by itself.
-          5. Submit the completed result as a new immutable \`${lang}_*.json\` record under \`audit/language-workbooks/v1.0/native-signoffs/\` in the repository.
-
-          The included \`CANDIDATE_BINDINGS.json\` and \`RELEASE_MANIFEST.json\` bind this package to the candidate. If learner-facing candidate content changes, generate a fresh package before signing off.
-
-          Automation does not make the linguistic judgment. A genuine PASS requires a qualified human reviewer to complete the stated full-content scope.
-          EOF
+          rows=$(($(wc -l < "$dir/${lang}_REVIEW_LEDGER.csv") - 1))
+          if [ "$rows" -ne 2000 ]; then
+            echo "$lang reviewer ledger has $rows rows; expected 2000"
+            exit 1
+          fi
 
           (
-            cd "$package"
-            sha256sum -- * > CHECKSUMS.sha256
+            cd "$dir"
+            sha256sum -c CHECKSUMS.sha256
           )
 
-          test -s "$package/00_${lang}_complete_master.pdf"
-          test "$(python - "$package/${lang}_native_review_ledger.csv" <<'PY'
-          import csv, sys
-          with open(sys.argv[1], encoding='utf-8-sig', newline='') as f:
-              print(sum(1 for _ in csv.DictReader(f)))
-          PY
-          )" = '2000'
+          set +e
+          python scripts/validate_lang_wb_native_signoff.py "$dir/${lang}_SIGNOFF_DRAFT.json" >/tmp/${lang}-bundle-signoff-validation.log 2>&1
+          code=$?
+          set -e
+          if [ "$code" -ne 1 ]; then
+            cat /tmp/${lang}-bundle-signoff-validation.log
+            echo "$lang untouched bundle sign-off draft exit=$code; expected 1"
+            exit 1
+          fi
 
-          python - "$package/${lang}_native_signoff_draft.json" <<'PY'
-          import json, sys
-          data = json.load(open(sys.argv[1], encoding='utf-8'))
-          assert data['review_outcome'] == ''
-          assert data['review_completed_utc'] == ''
-          assert all(value is False for value in data['scope_attestation'].values())
-          PY
-
-      - name: Upload reviewer package
+      - name: Upload reviewer bundle ZIP
         uses: actions/upload-artifact@v4
         with:
-          name: lang-wb-v1.0-${{ matrix.language }}-reviewer-package-${{ github.sha }}
-          path: ${{ runner.temp }}/lang-wb-v1.0-${{ matrix.language }}-reviewer-package
+          name: lang-wb-v1.0-${{ matrix.language }}-reviewer-bundle-${{ github.sha }}
+          path: ${{ runner.temp }}/lang-wb-reviewer-packages/${{ matrix.language }}_lang_wb_v1.0_reviewer_bundle.zip
           if-no-files-found: error
           retention-days: 30
