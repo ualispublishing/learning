@@ -1,0 +1,285 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "levels": [
+    "B1",
+    "B2",
+    "C1",
+    "C2"
+  ],
+  "date": "2026-08-30",
+  "source_artifact": "reading/audit/arabic_b1_c2_metalinguistic_cefr_triage_2026-08-30.json",
+  "canonical_bindings": {
+    "b1": {
+      "path": "reading/arabic/b1/passages.jsonl",
+      "sha256": "8f0fdaac2cf8f6941008b32971f328e45ff670bf790e1091e3dab9d773ab9ddc",
+      "git_blob": "a5cfc10ceb8d31c08af376dd0875c868b863fa02"
+    },
+    "b2": {
+      "path": "reading/arabic/b2/passages.jsonl",
+      "sha256": "5e387ff7eb730358c48fe2329b826d8effc5698079487e71f0f8f064e13b4907",
+      "git_blob": "b3aeaaaf788af3ef0391889bc658ebc0548f10da"
+    },
+    "c1": {
+      "path": "reading/arabic/c1/passages.jsonl",
+      "sha256": "2a8d71a25a8176a4383488b8d794151eb041e0e60e96b251f1c13e403d14b23e",
+      "git_blob": "3f68da825c50c3018f9e054cbeec27ba01b17be0"
+    },
+    "c2": {
+      "path": "reading/arabic/c2/passages.jsonl",
+      "sha256": "5894ce7e657297a8bfbf469850645a3742a69a2987fd3aa0c083d0c148b64b5a",
+      "git_blob": "a66338e882b82fc3cb38a717eb00b80460d36592"
+    }
+  },
+  "count": 11,
+  "items": [
+    {
+      "level": "B1",
+      "unit": 2,
+      "sequence": 7,
+      "passage_id": "ar-b1-u02-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «مع أن» في بيان أن التقرير احتوى كل الأجزاء مع أنه اعتمد على نسخة غير صحيحة؟",
+      "answer": "تقدم مفارقة أو تنازلًا: وجود الأجزاء لا يمنع أن النسخة المختارة كانت خاطئة.",
+      "grounding": {
+        "quoted": [
+          "مع أن"
+        ],
+        "matched_quotes": [],
+        "grounded": false,
+        "basis": "no_exact_quote_in_passage"
+      },
+      "decision": "MANUAL_REVIEW",
+      "review_reasons": [
+        "quoted_marker_or_context_not_found_in_passage"
+      ]
+    },
+    {
+      "level": "B1",
+      "unit": 3,
+      "sequence": 17,
+      "passage_id": "ar-b1-u03-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لا... بل» في وصف رد مريم على التصحيح الذي يغيّر المعنى؟",
+      "answer": "تنفي الاكتفاء برفض الاقتراح وتستبدله بمحاولة فهم سبب ظهور ذلك الاقتراح.",
+      "grounding": {
+        "quoted": [
+          "لا... بل"
+        ],
+        "matched_quotes": [],
+        "grounded": false,
+        "basis": "no_exact_quote_in_passage"
+      },
+      "decision": "MANUAL_REVIEW",
+      "review_reasons": [
+        "quoted_marker_or_context_not_found_in_passage"
+      ]
+    },
+    {
+      "level": "B2",
+      "unit": 8,
+      "sequence": 46,
+      "passage_id": "ar-b2-u08-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» الضمنية في تغير أهمية الطريق مع الموسم والغرض؟",
+      "answer": "تربط مركزية الطريق بظروف الاستخدام بدل معاملتها كخاصية جغرافية ثابتة في كل وقت.",
+      "grounding": {
+        "quoted": [
+          "إذا"
+        ],
+        "matched_quotes": [],
+        "grounded": false,
+        "basis": "no_exact_quote_in_passage"
+      },
+      "decision": "MANUAL_REVIEW",
+      "review_reasons": [
+        "implicit_marker_claim_requires_manual_grounding",
+        "quoted_marker_or_context_not_found_in_passage"
+      ]
+    },
+    {
+      "level": "B2",
+      "unit": 9,
+      "sequence": 51,
+      "passage_id": "ar-b2-u09-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في التحذير من إذن طارئ لم يصل في الوقت المناسب؟",
+      "answer": "تقدم حالة تكشف كلفة الاعتماد على قائمة منع آلية عندما لا تستطيع الإجراءات الإدارية مواكبة الاستثناء المشروع.",
+      "grounding": {
+        "quoted": [
+          "إذا"
+        ],
+        "matched_quotes": [],
+        "grounded": false,
+        "basis": "no_exact_quote_in_passage"
+      },
+      "decision": "MANUAL_REVIEW",
+      "review_reasons": [
+        "quoted_marker_or_context_not_found_in_passage"
+      ]
+    },
+    {
+      "level": "B2",
+      "unit": 9,
+      "sequence": 54,
+      "passage_id": "ar-b2-u09-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في سؤال ما الذي سيجعل نور تقترح تعديل القاعدة بدل تعديل التنفيذ؟",
+      "answer": "تجعل ظهور مؤشر محدد شرطًا يربط المراجعة بنوع المشكلة ويمنع تغيير المستوى الخطأ من النظام.",
+      "grounding": {
+        "quoted": [
+          "إذا"
+        ],
+        "matched_quotes": [],
+        "grounded": false,
+        "basis": "no_exact_quote_in_passage"
+      },
+      "decision": "MANUAL_REVIEW",
+      "review_reasons": [
+        "quoted_marker_or_context_not_found_in_passage"
+      ]
+    },
+    {
+      "level": "C1",
+      "unit": 1,
+      "sequence": 5,
+      "passage_id": "ar-c1-u01-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» الضمنية في فكرة أن قيمة الدراسة التالية تعتمد على قدرتها على تقليل عدم اليقين؟",
+      "answer": "تجعل اختيار التصميم تابعًا للجزء غير المحسوم من الحجة بدل تكرار أسهل نتيجة مؤيدة وإضافة عدد جديد فقط.",
+      "grounding": {
+        "quoted": [
+          "إذا"
+        ],
+        "matched_quotes": [],
+        "grounded": false,
+        "basis": "no_exact_quote_in_passage"
+      },
+      "decision": "MANUAL_REVIEW",
+      "review_reasons": [
+        "implicit_marker_claim_requires_manual_grounding",
+        "quoted_marker_or_context_not_found_in_passage"
+      ]
+    },
+    {
+      "level": "C1",
+      "unit": 5,
+      "sequence": 25,
+      "passage_id": "ar-c1-u05-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في ربط تغير صياغة التقرير بظهور شروط تحد النتيجة؟",
+      "answer": "تجعل الدليل الجديد شرطًا لتعديل نطاق الادعاء بدل حماية العبارة الأولى بعد اتساع الاختبار.",
+      "grounding": {
+        "quoted": [
+          "إذا"
+        ],
+        "matched_quotes": [],
+        "grounded": false,
+        "basis": "no_exact_quote_in_passage"
+      },
+      "decision": "MANUAL_REVIEW",
+      "review_reasons": [
+        "quoted_marker_or_context_not_found_in_passage"
+      ]
+    },
+    {
+      "level": "C1",
+      "unit": 5,
+      "sequence": 26,
+      "passage_id": "ar-c1-u05-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في سؤال ما إذا كان المسار سيبقى بعد موسم تشغيل مختلف؟",
+      "answer": "تجعل تغير الظروف شرطًا لاختبار ثبات العلاقة وتمنع تمديد الاتجاه خارج الفترة المدروسة تلقائيًا.",
+      "grounding": {
+        "quoted": [
+          "إذا"
+        ],
+        "matched_quotes": [],
+        "grounded": false,
+        "basis": "no_exact_quote_in_passage"
+      },
+      "decision": "MANUAL_REVIEW",
+      "review_reasons": [
+        "quoted_marker_or_context_not_found_in_passage"
+      ]
+    },
+    {
+      "level": "C1",
+      "unit": 9,
+      "sequence": 49,
+      "passage_id": "ar-c1-u09-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» الضمنية في سؤال ما الذي كان يمكن أن يحدث قبل معرفة الإغلاق؟",
+      "answer": "تفتح بدائل كانت ممكنة وقتها وتقاوم قراءة النتيجة إلى الخلف بوصفها نهاية حتمية لكل ما سبق.",
+      "grounding": {
+        "quoted": [
+          "إذا"
+        ],
+        "matched_quotes": [
+          "إذا"
+        ],
+        "grounded": true,
+        "basis": "at_least_one_exact_quote_in_passage"
+      },
+      "decision": "MANUAL_REVIEW",
+      "review_reasons": [
+        "implicit_marker_claim_requires_manual_grounding"
+      ]
+    },
+    {
+      "level": "C1",
+      "unit": 10,
+      "sequence": 60,
+      "passage_id": "ar-c1-u10-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «ليس... بل» في الجملة التي تميز الاستعداد للمستوى التالي عن حفظ مفردات أصعب؟",
+      "answer": "تنفي معيارًا سطحيًا للتقدم وتستبدله بقدرة على إدارة حجة طويلة مع وضوح العلاقات والتحديث.",
+      "grounding": {
+        "quoted": [
+          "ليس... بل"
+        ],
+        "matched_quotes": [],
+        "grounded": false,
+        "basis": "no_exact_quote_in_passage"
+      },
+      "decision": "MANUAL_REVIEW",
+      "review_reasons": [
+        "quoted_marker_or_context_not_found_in_passage"
+      ]
+    },
+    {
+      "level": "C2",
+      "unit": 1,
+      "sequence": 6,
+      "passage_id": "ar-c2-u01-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لا...ولا...» في نفي أن قيمة التحليل تأتي من كثرة الأسماء أو غرابة الأمثلة؟",
+      "answer": "تنفي معيارين سطحيين للتقدم ثم تمهد للمعيار الإيجابي: جعل الادعاء والاختبار ووظيفة الفروق أكثر قابلية للفحص.",
+      "grounding": {
+        "quoted": [
+          "لا...ولا..."
+        ],
+        "matched_quotes": [],
+        "grounded": false,
+        "basis": "no_exact_quote_in_passage"
+      },
+      "decision": "MANUAL_REVIEW",
+      "review_reasons": [
+        "quoted_marker_or_context_not_found_in_passage"
+      ]
+    }
+  ],
+  "release_claim": false
+}
