@@ -46,14 +46,12 @@ jobs:
             python reading/tools/validate_continuation_state.py
           fi
 
-      - name: Refresh Arabic A1-C2 candidate inventory
-        run: python reading/tools/audit_arabic_metalinguistic_cefr_candidates.py
-
-      - name: Triage all current B1-C2 candidates against exact Gate 0 corpus
-        run: python reading/tools/adjudicate_arabic_b1_c2_metalinguistic_cefr.py
-
-      - name: Extract compact 11-item manual review queue
-        run: python reading/tools/extract_arabic_b1_c2_manual_review_queue.py
+      - name: Refresh current triage artifacts
+        run: |
+          python reading/tools/audit_arabic_metalinguistic_cefr_candidates.py
+          python reading/tools/adjudicate_arabic_b1_c2_metalinguistic_cefr.py
+          python reading/tools/extract_arabic_b1_c2_manual_review_queue.py
+          python reading/tools/extract_arabic_c2_manual_review_item.py
 
       - name: Commit read-only audit evidence and any bounded manifest refresh
         shell: bash
@@ -63,10 +61,11 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json \
                   reading/audit/arabic_b1_c2_metalinguistic_cefr_triage_2026-08-30.json \
-                  reading/audit/arabic_b1_c2_metalinguistic_manual_queue_2026-08-30.json
+                  reading/audit/arabic_b1_c2_metalinguistic_manual_queue_2026-08-30.json \
+                  reading/audit/arabic_c2_metalinguistic_manual_item_2026-08-30.json
           if ! git diff --quiet -- reading/STATE_MANIFEST.json; then git add reading/STATE_MANIFEST.json; fi
           git diff --cached --quiet && exit 0
-          git commit -m 'Record Arabic B1-C2 manual review queue'
+          git commit -m 'Record lone Arabic C2 metalinguistic review item'
           git fetch origin main
           git rebase origin/main
           python reading/tools/validate_continuation_state.py
