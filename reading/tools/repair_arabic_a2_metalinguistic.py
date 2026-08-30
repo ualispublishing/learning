@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Fresh workflow trigger from current main on 2026-08-30; remediation logic unchanged.
 """Re-adjudicate and repair the historical Arabic A2 low-level metalinguistic set.
 
 The ten historical per-unit repair ledgers are candidate/reference evidence only.
