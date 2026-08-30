@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Inventory current Arabic metalinguistic/CEFR question candidates without editing content."""
-# Trigger the registered read-only inventory workflow from current main.
+# Execute the fresh 360-record / 3600-question read-only inventory.
 from __future__ import annotations
 import json
 import re
