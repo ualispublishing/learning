@@ -159,6 +159,14 @@ Prefer a focused pull request that **adds** the new immutable sign-off record an
 
 Use [`.github/PULL_REQUEST_TEMPLATE/lang-wb-native-signoff.md`](../../../.github/PULL_REQUEST_TEMPLATE/lang-wb-native-signoff.md) as the submission checklist.
 
+### If you do not use GitHub
+
+You may return the completed worksheet and your completed sign-off JSON to the project maintainer through an agreed transfer channel. Include the final sign-off file as you authored it and, when practical, its SHA-256 checksum so the maintainer can verify that the repository copy is unchanged.
+
+A maintainer may add that **reviewer-authored record unchanged** to `native-signoffs/` and run the same validators/CI. The GitHub account that commits the file is not the reviewer identity; the reviewer's `name_or_identifier`, qualification basis, outcome, timestamp, exact candidate binding, scope attestations, defects/holds, and attestation inside the JSON remain authoritative.
+
+The maintainer must **not** fill, reinterpret, upgrade, or convert any human-only field on the reviewer's behalf. In particular, a maintainer must never convert FAIL/HOLD/uncertainty into PASS. If the returned record is incomplete, malformed, stale, or fails validation, it must be returned for reviewer correction or retained as non-PASS rather than silently repaired into a certification.
+
 CI validates added sign-off records on pull requests before merge and again on pushes. A valid Arabic sign-off does **not** fail merely because French and Urdu are still pending. The overall release remains on HOLD until all three languages have valid latest PASS records bound to the same current candidate.
 
 You can validate your individual record locally with:
