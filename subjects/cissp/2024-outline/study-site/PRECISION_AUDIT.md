@@ -1,10 +1,12 @@
-# CISSP Atlas Precision Audit — v1.25 Release Candidate
+# CISSP Atlas Precision Audit — v1.25 Verified Release
 
 ## Result
 
-**Published-scope mapping: PASS. Batch 027 semantic/originality and candidate-bookkeeping validation: PASS within the documented audit boundary. v1.25 release PR and post-merge public verification are still required before v1.25 becomes authoritative.**
+**Published-scope mapping: PASS. Batch 027 semantic/originality validation: PASS within the documented audit boundary. v1.25 release validation, exact-main validation, and public runtime verification: PASS.**
 
-## v1.25.0 proposed released scope
+CISSP Atlas **v1.25.0 is the verified public release**.
+
+## v1.25.0 released scope
 
 - 8/8 domains; official weights total 100%.
 - 62/62 numbered public objectives.
@@ -22,25 +24,35 @@
 
 Batch 027 contributes 16 original standard questions, E12/S4, balanced answer positions 4/4/4/4, and primary-domain distribution D1=5, D2=3, D3=2, D4=1, D5=1, D6=1, D8=3. The review records 0 answer-key conflicts, 0 remaining source/objective mapping conflicts, 0 known material factual errors remaining, and 0 external question seeds. C-437's earlier FIPS 197 provenance mapping was removed before the authoritative candidate head; its answer, scenario, and rationale were unchanged.
 
-Evidence chain:
+Candidate and bookkeeping evidence:
 - Candidate PR #107 exact head `efae9fb1ebfb13092b9c590696cdc8ed1b3f3022`; audit **33274571412: PASS**.
 - Candidate merge `57faaf1edd9cb4ed7aba89722511f2e99be38c29`; exact-main audit **33274739859: PASS**; Pages isolation **33274739801: PASS**.
 - Candidate-bookkeeping PR #109 exact head `60444b65cb8ded6734e41022133b6a6f18ebed52`; audit **33279472975: PASS**.
 - Candidate-bookkeeping merge `61ec99d94bbbd592be1b391db41b88be6b5e91d1`; exact-main audit **33279600905: PASS**; Pages isolation **33279600874: PASS**.
 
-All required candidate and bookkeeping controls passed with zero originality warnings. Public v1.24.0 remained isolated at 479 standard / 424 manifest released / 1 Bellringer / released_only=true through the bookkeeping chain.
+## v1.25 public-release verification
+
+The complete release chain passed:
+- Release PR **#110** final head `ad78f2b7bf88c18cd0056189cdf231a29d2d42e1`.
+- Exact release-PR CISSP audit **33279991285: PASS**, including deterministic knowledge, originality/duplicate, logical mix, planner, JavaScript syntax, legacy rationales, static assets, interactive browser smoke, and aggregate enforcement.
+- Release merge `875a55d49800ab9485db3edadc4f08ba57e3a662`.
+- Exact post-merge main CISSP audit **33280157209: PASS**.
+- GitHub Pages/public runtime workflow **33280157196: PASS**.
+- Verified public fingerprint: **v1.25.0 / 495 standard / 440 manifest released records / 1 Bellringer / released_only=true**.
+
+The Pages workflow independently audited the released corpus, validated browser runtime, assembled only manifest-released question files, deployed the exact release merge SHA, and verified the live runtime fingerprint.
 
 ## Semantic audit
 
 The base semantic ledger contains 300 items; the release-additions ledger contains 336, for **636 learner-facing item IDs**. Batch 027's 16 additions are `VERIFIED`. The release records 0 keyed-answer reversals and 0 known material factual errors remaining after review within the documented boundary. Historical correction/source-scope statuses from earlier releases remain preserved.
 
-## Release controls still required
-
-The exact v1.25 release head must pass deterministic knowledge, originality/duplicate, logical mix, planning, JavaScript syntax, rationale, static, browser-smoke, and aggregate gates. After merge, the exact main SHA must pass again and Pages must prove **v1.25.0 / 495 standard / 440 manifest released records / 1 Bellringer / released_only=true**. Final release evidence is then closed before Batch 028 begins.
-
 ## Next expansion state
 
-The 800-record target would leave **F79 / E135 / S51 / B39**, or **304 records total**, after v1.25 promotion. Provisional Batch 028 slate: `4.1, 2.6, 1.3, 2.5, 1.4, 1.5, 1.8, 8.3, 1.1, 3.6, 3.8, 3.9, 4.3, 5.6, 7.11, 7.12`.
+There is no unreleased candidate batch. Batch 028 is now unblocked and should use released-only planner basis **33280157209**. The current E12/S4 slate is:
+
+`4.1, 2.6, 1.3, 2.5, 1.4, 1.5, 1.8, 8.3, 1.1, 3.6, 3.8, 3.9, 4.3, 5.6, 7.11, 7.12`
+
+The 800-record target leaves **F79 / E135 / S51 / B39**, or **304 records total**.
 
 ## Accuracy boundary
 
