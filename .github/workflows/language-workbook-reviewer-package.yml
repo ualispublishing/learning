@@ -46,7 +46,10 @@ jobs:
         run: |
           set -euo pipefail
           out="$RUNNER_TEMP/lang-wb-reviewer-packages"
-          python scripts/build_lang_wb_reviewer_bundle.py "${{ matrix.language }}" --output-root "$out"
+          python scripts/build_lang_wb_reviewer_bundle.py \
+            "${{ matrix.language }}" \
+            --repository-commit-sha "${{ github.sha }}" \
+            --output-root "$out"
 
           lang='${{ matrix.language }}'
           dir="$out/${lang}_lang_wb_v1.0_reviewer_bundle"
@@ -70,6 +73,14 @@ jobs:
             exit 1
           fi
 
+          python - "$dir/CANDIDATE_BINDING.json" "${{ github.sha }}" <<'PY'
+          import json, pathlib, sys
+          path = pathlib.Path(sys.argv[1])
+          expected = sys.argv[2]
+          payload = json.loads(path.read_text(encoding="utf-8"))
+          assert payload["repository_commit_sha"] == expected, payload["repository_commit_sha"]
+          PY
+
           (
             cd "$dir"
             sha256sum -c CHECKSUMS.sha256
@@ -84,6 +95,47 @@ jobs:
             echo "$lang untouched bundle sign-off draft exit=$code; expected 1"
             exit 1
           fi
+
+      - name: Verify source-archive mode fails closed and accepts exact commit
+        if: matrix.language == 'arabic'
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive_root="$RUNNER_TEMP/lang-wb-archive-like"
+          mkdir -p "$archive_root"
+          tar --exclude=.git -cf - . | tar -C "$archive_root" -xf -
+
+          set +e
+          (
+            cd "$archive_root"
+            python scripts/build_lang_wb_reviewer_bundle.py arabic \
+              --output-root "$RUNNER_TEMP/archive-missing-commit" \
+              --no-zip
+          ) >/tmp/lang-wb-archive-no-commit.log 2>&1
+          missing_code=$?
+          set -e
+          if [ "$missing_code" -ne 1 ]; then
+            cat /tmp/lang-wb-archive-no-commit.log
+            echo "archive-like build without explicit commit exit=$missing_code; expected 1"
+            exit 1
+          fi
+
+          (
+            cd "$archive_root"
+            python scripts/build_lang_wb_reviewer_bundle.py arabic \
+              --repository-commit-sha "${{ github.sha }}" \
+              --output-root "$RUNNER_TEMP/archive-with-commit" \
+              --no-zip
+          )
+
+          python - "$RUNNER_TEMP/archive-with-commit/arabic_lang_wb_v1.0_reviewer_bundle/CANDIDATE_BINDING.json" "${{ github.sha }}" <<'PY'
+          import json, pathlib, sys
+          path = pathlib.Path(sys.argv[1])
+          expected = sys.argv[2]
+          payload = json.loads(path.read_text(encoding="utf-8"))
+          assert payload["repository_commit_sha"] == expected, payload["repository_commit_sha"]
+          assert payload["review_ledger_rows"] == 2000, payload["review_ledger_rows"]
+          PY
 
       - name: Upload reviewer bundle ZIP
         uses: actions/upload-artifact@v4
