@@ -1,0 +1,4995 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "date": "2026-08-30",
+  "scope": "Fresh 100%-question inventory of legacy formal question types and configured explicit metalinguistic prompt patterns across Arabic A1-C2; read-only candidate detection, not semantic approval.",
+  "records": 360,
+  "questions": 3600,
+  "levels": {
+    "a1": {
+      "records": 60,
+      "questions": 600,
+      "question_type_counts": {
+        "cause_effect": 32,
+        "cloze_transfer": 100,
+        "contrast": 68,
+        "gist": 33,
+        "grammar_choice": 62,
+        "literal_detail": 89,
+        "reference_resolution": 12,
+        "sequence": 25,
+        "single_word_definition": 69,
+        "summary": 10,
+        "vocabulary_in_context": 100
+      },
+      "candidate_count": 0,
+      "needs_adjudication": 0,
+      "adjudicated_false_positives": 0
+    },
+    "a2": {
+      "records": 60,
+      "questions": 600,
+      "question_type_counts": {
+        "cause_effect": 36,
+        "cloze_transfer": 79,
+        "contrast": 50,
+        "gist": 58,
+        "grammar_choice": 71,
+        "grammar_function": 2,
+        "inference": 79,
+        "literal_detail": 68,
+        "reference_resolution": 24,
+        "sequence": 2,
+        "single_word_definition": 31,
+        "summary": 12,
+        "vocabulary_in_context": 88
+      },
+      "candidate_count": 3,
+      "needs_adjudication": 0,
+      "adjudicated_false_positives": 3
+    },
+    "b1": {
+      "records": 60,
+      "questions": 600,
+      "question_type_counts": {
+        "argument_relation": 2,
+        "cause_effect": 37,
+        "contrast": 58,
+        "gist": 60,
+        "grammar_function": 95,
+        "grammar_in_context": 2,
+        "inference": 71,
+        "literal_detail": 58,
+        "main_claim": 15,
+        "motive": 6,
+        "reference_resolution": 13,
+        "single_word_definition": 71,
+        "summary": 25,
+        "synthesis": 38,
+        "vocabulary_in_context": 49
+      },
+      "candidate_count": 96,
+      "needs_adjudication": 96,
+      "adjudicated_false_positives": 0
+    },
+    "b2": {
+      "records": 60,
+      "questions": 600,
+      "question_type_counts": {
+        "cause_effect": 60,
+        "contrast": 60,
+        "gist": 60,
+        "grammar_function": 104,
+        "inference": 60,
+        "literal_detail": 60,
+        "main_claim": 15,
+        "reference_resolution": 1,
+        "single_word_definition": 89,
+        "summary": 15,
+        "synthesis": 45,
+        "vocabulary_in_context": 31
+      },
+      "candidate_count": 104,
+      "needs_adjudication": 104,
+      "adjudicated_false_positives": 0
+    },
+    "c1": {
+      "records": 60,
+      "questions": 600,
+      "question_type_counts": {
+        "argument_relation": 60,
+        "contrast": 45,
+        "grammar_function": 75,
+        "inference": 120,
+        "literal_detail": 60,
+        "single_word_definition": 90,
+        "summary": 60,
+        "synthesis": 60,
+        "vocabulary_in_context": 30
+      },
+      "candidate_count": 75,
+      "needs_adjudication": 75,
+      "adjudicated_false_positives": 0
+    },
+    "c2": {
+      "records": 60,
+      "questions": 600,
+      "question_type_counts": {
+        "argument_relation": 60,
+        "contrast": 45,
+        "grammar_function": 69,
+        "inference": 126,
+        "literal_detail": 60,
+        "register_style": 12,
+        "single_word_definition": 90,
+        "summary": 60,
+        "synthesis": 60,
+        "vocabulary_in_context": 18
+      },
+      "candidate_count": 69,
+      "needs_adjudication": 69,
+      "adjudicated_false_positives": 0
+    }
+  },
+  "candidate_count": 347,
+  "needs_adjudication": 344,
+  "adjudicated_false_positives": 3,
+  "candidates": [
+    {
+      "level": "A2",
+      "unit": 1,
+      "sequence": 2,
+      "passage_id": "ar-a2-u01-p02",
+      "question_id": "q4",
+      "type": "vocabulary_in_context",
+      "prompt": "ما وظيفة «البنك» في النص؟",
+      "reasons": [
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "adjudicated_false_positive"
+    },
+    {
+      "level": "A2",
+      "unit": 9,
+      "sequence": 54,
+      "passage_id": "ar-a2-u09-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "لماذا يستخدم النص أسئلة «من؟ متى؟ لماذا؟» في النهاية؟",
+      "reasons": [
+        "formal_type:grammar_function"
+      ],
+      "status": "adjudicated_false_positive"
+    },
+    {
+      "level": "A2",
+      "unit": 10,
+      "sequence": 60,
+      "passage_id": "ar-a2-u10-p06",
+      "question_id": "q9",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة المقارنة بين «ما قيل أولًا» و«ما ظهر لاحقًا»؟",
+      "reasons": [
+        "formal_type:grammar_function"
+      ],
+      "status": "adjudicated_false_positive"
+    },
+    {
+      "level": "B1",
+      "unit": 1,
+      "sequence": 1,
+      "passage_id": "ar-b1-u01-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في «إذا كانت الأولوية واضحة، يصبح قول ليس الآن أسهل»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 1,
+      "sequence": 2,
+      "passage_id": "ar-b1-u01-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «قبل» في «قبل تغيير التقسيم، تحدثت المجموعة مع سامر»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 1,
+      "sequence": 3,
+      "passage_id": "ar-b1-u01-p03",
+      "question_id": "q7",
+      "type": "grammar_in_context",
+      "prompt": "ما وظيفة «حتى» في «لا تحتاج دائمًا إلى كتابة أمثلة طويلة حتى تكون واضحة»؟",
+      "reasons": [
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 1,
+      "sequence": 3,
+      "passage_id": "ar-b1-u01-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بدل» في «بدل أن يكتب كلمة عامة...» وفي الأمثلة التي بعدها؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 1,
+      "sequence": 4,
+      "passage_id": "ar-b1-u01-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «ليست بالضرورة» في قول نور إن الطريقة الأسهل ليست بالضرورة الأفضل للتذكر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 1,
+      "sequence": 5,
+      "passage_id": "ar-b1-u01-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في شرط هدى أن تعيد تقييم القرار بعد شهر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 1,
+      "sequence": 6,
+      "passage_id": "ar-b1-u01-p06",
+      "question_id": "q9",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في فكرة مراجعة القرار «إذا ظهرت خبرة جديدة»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 2,
+      "sequence": 7,
+      "passage_id": "ar-b1-u02-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «مع أن» في بيان أن التقرير احتوى كل الأجزاء مع أنه اعتمد على نسخة غير صحيحة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 2,
+      "sequence": 8,
+      "passage_id": "ar-b1-u02-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في فكرة أن جمع المعلومات يسمح باختيار تعديل أدق؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 2,
+      "sequence": 9,
+      "passage_id": "ar-b1-u02-p03",
+      "question_id": "q7",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في قول النص إن العبارتين صحيحتان لغويًا لكن مرجعهما مختلف؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 2,
+      "sequence": 10,
+      "passage_id": "ar-b1-u02-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لو» في الفكرة التي تتخيل اعتراض مريم قبل أن تسأل عن السبب؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 2,
+      "sequence": 11,
+      "passage_id": "ar-b1-u02-p05",
+      "question_id": "q7",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بدل» في انتقال النص من النقل المباشر إلى إعادة تصميم البرنامج؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 2,
+      "sequence": 12,
+      "passage_id": "ar-b1-u02-p06",
+      "question_id": "q7",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» المتكررة في الفقرة الأخيرة التي تميز أنواع المشكلات؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 3,
+      "sequence": 13,
+      "passage_id": "ar-b1-u03-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في انتقال النص من ظن نور أن العمل ازداد إلى ما أظهرته مراجعة يومها؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 3,
+      "sequence": 13,
+      "passage_id": "ar-b1-u03-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «أما» في المقارنة بين الرسائل العاجلة والتعديلات التي يمكن انتظارها؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 3,
+      "sequence": 14,
+      "passage_id": "ar-b1-u03-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكنه» في «لا يحتاج دائمًا إلى أن يكون طويلًا، لكنه يحتاج إلى إظهار الشروط»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 3,
+      "sequence": 14,
+      "passage_id": "ar-b1-u03-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في طريقة سامر لاختبار مثال جديد؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 3,
+      "sequence": 15,
+      "passage_id": "ar-b1-u03-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكنه» في قول النص إن ذكر التفاصيل لا يضمن صحة أول جواب لكنه يجعل المقارنة أسهل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 3,
+      "sequence": 15,
+      "passage_id": "ar-b1-u03-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بدلًا من» في وصف تغير طريقة هدى في طرح السؤال؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 3,
+      "sequence": 16,
+      "passage_id": "ar-b1-u03-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في المقارنة بين القرص الخارجي والمجلد المشترك؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 3,
+      "sequence": 16,
+      "passage_id": "ar-b1-u03-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في قاعدة تسجيل نقل ملف مهم مؤقتًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 3,
+      "sequence": 17,
+      "passage_id": "ar-b1-u03-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «عندما» في وصف ما تفعله مريم حين يقدم النظام تصحيحًا يغيّر المعنى؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 3,
+      "sequence": 17,
+      "passage_id": "ar-b1-u03-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لا... بل» في وصف رد مريم على التصحيح الذي يغيّر المعنى؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 3,
+      "sequence": 18,
+      "passage_id": "ar-b1-u03-p06",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في «وإذا كان العمل مشتركًا، تجعل مكان الملفات والقرارات واضحًا للآخرين»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 4,
+      "sequence": 19,
+      "passage_id": "ar-b1-u04-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في المقارنة بين الازدحام واستخدام الساحة في أوقات أخرى؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 4,
+      "sequence": 19,
+      "passage_id": "ar-b1-u04-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بدل» في عبارة «بدل تحويل حاجة واحدة إلى الصورة الكاملة»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 4,
+      "sequence": 20,
+      "passage_id": "ar-b1-u04-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكنه» في قول النص إن العمل أزال الموجود لكنه لم يغير أسباب عودة المخلفات؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 4,
+      "sequence": 20,
+      "passage_id": "ar-b1-u04-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في المقارنة بين النقاط التي قل فيها ما يجمعه الفريق والأماكن الأخرى؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 4,
+      "sequence": 21,
+      "passage_id": "ar-b1-u04-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكنه» في «المتوسط مفيد، لكنه لا يخبرنا أن كل بيت يشبه الرقم نفسه»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 4,
+      "sequence": 21,
+      "passage_id": "ar-b1-u04-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في مثال البيتين ذوي المتوسط المتقارب؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 4,
+      "sequence": 22,
+      "passage_id": "ar-b1-u04-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في ذكر أن متجرين في طرف الشارع تأثرا أكثر من غيرهما؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 4,
+      "sequence": 22,
+      "passage_id": "ar-b1-u04-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بدل» في سؤال المحلات عن المبيعات بدل استخدام عدد السيارات وحده؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 4,
+      "sequence": 23,
+      "passage_id": "ar-b1-u04-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في «لم يكن الهدف إثبات أن الشكوى صحيحة بأي ثمن، بل تحسين جودة المعلومات»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 4,
+      "sequence": 23,
+      "passage_id": "ar-b1-u04-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في شرح مشكلة تغيير طريقة القياس بعد التعديل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 4,
+      "sequence": 24,
+      "passage_id": "ar-b1-u04-p06",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في «لا يعني ذلك أن الفكرة الأولى كانت عديمة القيمة، بل قد يعني أن التعديل التالي يجب أن يكون أدق»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 5,
+      "sequence": 25,
+      "passage_id": "ar-b1-u05-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكنه» في القول إن التعب ارتفع أحيانًا رغم مدة نوم معتادة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 5,
+      "sequence": 25,
+      "passage_id": "ar-b1-u05-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بدل» في «يذكر الاستثناءات بدل حذفها»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 5,
+      "sequence": 26,
+      "passage_id": "ar-b1-u05-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لأن» في تفسير فحص حجم الحصة قبل مقارنة الرقمين؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 5,
+      "sequence": 26,
+      "passage_id": "ar-b1-u05-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن الرقم المحدد لا يكفي وحده للحكم على المنتج؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 5,
+      "sequence": 27,
+      "passage_id": "ar-b1-u05-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في المقارنة بين دور المتخصصين في المثال؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 5,
+      "sequence": 27,
+      "passage_id": "ar-b1-u05-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «مع ذلك» قبل الحاجة إلى قراءة المصدر الأصلي؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 5,
+      "sequence": 28,
+      "passage_id": "ar-b1-u05-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «أما» عند الانتقال من تغير عدة عوامل إلى تثبيت الشروط الأساسية؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 5,
+      "sequence": 28,
+      "passage_id": "ar-b1-u05-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكنه» في وصف أثر تكرار النتيجة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 5,
+      "sequence": 29,
+      "passage_id": "ar-b1-u05-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذن» في الصياغة الأولى التي ينتقدها الصف؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 5,
+      "sequence": 29,
+      "passage_id": "ar-b1-u05-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن الصيغتين تحترمان ترتيب الأحداث لكن الثانية لا تضيف يقينًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 5,
+      "sequence": 30,
+      "passage_id": "ar-b1-u05-p06",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في الصياغة الأكثر حذرًا: توجد ملاحظات، لكن الأثر والسبب يحتاجان إلى معلومات أقوى؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 6,
+      "sequence": 31,
+      "passage_id": "ar-b1-u06-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن السوق مفيد للزائر لكنه لا يشرح وحده الحياة اليومية؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 6,
+      "sequence": 31,
+      "passage_id": "ar-b1-u06-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «أما» في المقارنة بين أسئلة الزائر وأسئلة من يعيش في المكان؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 6,
+      "sequence": 32,
+      "passage_id": "ar-b1-u06-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في القول إنه لم يستخدم الزيارة الثانية لينفي الأولى بل كتب ملاحظتين؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 6,
+      "sequence": 32,
+      "passage_id": "ar-b1-u06-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «حتى» في القول إن الأساليب قد تختلف حتى داخل الأسرة الواحدة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 6,
+      "sequence": 33,
+      "passage_id": "ar-b1-u06-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في المقارنة بين خيارات الأداة واختيار الجملة المناسبة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 6,
+      "sequence": 33,
+      "passage_id": "ar-b1-u06-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكنها» في وصف الصياغة الرسمية بأنها مناسبة لموقف آخر لكنها أثقل هنا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 6,
+      "sequence": 34,
+      "passage_id": "ar-b1-u06-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في المقارنة بين الشاشة والموظف؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 6,
+      "sequence": 34,
+      "passage_id": "ar-b1-u06-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «قبل» في وصف ما يفعله سامر قبل الحركة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 6,
+      "sequence": 35,
+      "passage_id": "ar-b1-u06-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في وصف ما تفعله سلمى وما تفعله نور خلال الساعة المنفردة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 6,
+      "sequence": 35,
+      "passage_id": "ar-b1-u06-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لا» في «لا مجرد تقسيم اليوم»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 6,
+      "sequence": 36,
+      "passage_id": "ar-b1-u06-p06",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «قد» في عرض أكثر من تفسير ممكن لصمت المضيف؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 7,
+      "sequence": 37,
+      "passage_id": "ar-b1-u07-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكنها» في «لم تجعل الرسالة طويلة، لكنها أزالت التخمين حول النبرة والموعد»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 7,
+      "sequence": 37,
+      "passage_id": "ar-b1-u07-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «عندما» في وصف ما فعلته نور بعد أن لم ترد هدى سريعًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 7,
+      "sequence": 38,
+      "passage_id": "ar-b1-u07-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في «لم تتدخل سلمى فورًا، بل سألت إن كانت تريد اقتراحًا»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 7,
+      "sequence": 38,
+      "passage_id": "ar-b1-u07-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في الحديث عن تأخر الأخت في مهمة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 7,
+      "sequence": 39,
+      "passage_id": "ar-b1-u07-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في مقارنة التقييم المحدد بتقدير سامر لنفسه؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 7,
+      "sequence": 39,
+      "passage_id": "ar-b1-u07-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «قبل أن» في «كتب الملاحظتين كما هما قبل أن يفسرهما»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 7,
+      "sequence": 40,
+      "passage_id": "ar-b1-u07-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في عرض تفضيل نور للقاعة القريبة وتفضيل مريم للقاعة الأهدأ؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 7,
+      "sequence": 40,
+      "passage_id": "ar-b1-u07-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «من غير أن» في السؤال عن الوصول والهدوء في نهاية المثال؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 7,
+      "sequence": 41,
+      "passage_id": "ar-b1-u07-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «ما دام» في قاعدة القرار الذي لا يحتاج اجتماعًا كاملًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 7,
+      "sequence": 41,
+      "passage_id": "ar-b1-u07-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في المقارنة بين اختيار الأمثلة وتغيير الخط الرئيسي أو ترتيب الأقسام؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 7,
+      "sequence": 42,
+      "passage_id": "ar-b1-u07-p06",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في التفريق بين الخلاف الحقيقي والغموض أو الافتراض غير المختبر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 8,
+      "sequence": 43,
+      "passage_id": "ar-b1-u08-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن العنوانين البديلين أقل إثارة لكنهما يقللان سوء الفهم؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 8,
+      "sequence": 43,
+      "passage_id": "ar-b1-u08-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «قبل» في الحديث عن القصة التي يبنيها القارئ قبل فتح النص؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 8,
+      "sequence": 44,
+      "passage_id": "ar-b1-u08-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «حتى» في «حتى الوصول إلى مصدر أصلي لا يكفي إذا كان القارئ يعتمد نسخة قديمة»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 8,
+      "sequence": 44,
+      "passage_id": "ar-b1-u08-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في التحذير من الاعتماد على نسخة قديمة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 8,
+      "sequence": 45,
+      "passage_id": "ar-b1-u08-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «ومع ذلك» في الانتقال من اتفاق الوقائع إلى اختلاف الانطباع؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 8,
+      "sequence": 45,
+      "passage_id": "ar-b1-u08-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «عندما» في تحديد متى يصبح حذف معلومة مشكلة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 8,
+      "sequence": 46,
+      "passage_id": "ar-b1-u08-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «أما» في المقارنة بين الاتصال بالمنظم ومشاهدة الإعلان؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 8,
+      "sequence": 46,
+      "passage_id": "ar-b1-u08-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «مع ذلك» قبل استمرار السؤال عن نوع الاستقلال؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 8,
+      "sequence": 47,
+      "passage_id": "ar-b1-u08-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن الزيارات والاستعارات لم تتحركا بالطريقة نفسها دائمًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 8,
+      "sequence": 47,
+      "passage_id": "ar-b1-u08-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لأنه» في تفسير قوة التحليل الجديد؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 8,
+      "sequence": 48,
+      "passage_id": "ar-b1-u08-p06",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في قول النص إن نور لم تستنتج أن البرنامج لم يفد ولم تقبل السبب بوصفه مؤكدًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 9,
+      "sequence": 49,
+      "passage_id": "ar-b1-u09-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في المقارنة بين من وصل عبر المكتبة ومن شارك بالرسائل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 9,
+      "sequence": 49,
+      "passage_id": "ar-b1-u09-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في الحديث عن مراجعة القرار عند ظهور أصوات جديدة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 9,
+      "sequence": 50,
+      "passage_id": "ar-b1-u09-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في المقارنة بين سرعة قبول الطلب وطول مدة الإصلاح؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 9,
+      "sequence": 50,
+      "passage_id": "ar-b1-u09-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بدل» في الانتقال من اتهام عام إلى مشكلتين قابلتين للقياس؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 9,
+      "sequence": 51,
+      "passage_id": "ar-b1-u09-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «أما» في المقارنة بين التوزيع المتساوي والتوزيع بحسب عدد المتقدمين؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 9,
+      "sequence": 51,
+      "passage_id": "ar-b1-u09-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكنه» في القول إن الأساس النسبي لا يعالج غياب البدائل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 9,
+      "sequence": 52,
+      "passage_id": "ar-b1-u09-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن الاختبار لا يمثل كل السكان لكنه يكشف افتراضات خفية؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 9,
+      "sequence": 52,
+      "passage_id": "ar-b1-u09-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «ثم» في إعادة المهمة بعد إصلاح النقطتين؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 9,
+      "sequence": 53,
+      "passage_id": "ar-b1-u09-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في مقارنة المشاركين الذين استمروا مستقلين بمن نسي خطوة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 9,
+      "sequence": 53,
+      "passage_id": "ar-b1-u09-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بدل» في اختيار ورقة توجيه بدل زيادة مدة الورشة للجميع؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 9,
+      "sequence": 54,
+      "passage_id": "ar-b1-u09-p06",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكنها» في القول إن الأسئلة لا تعطي جوابًا واحدًا لكنها تمنع أنواعًا من الخلط؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 10,
+      "sequence": 55,
+      "passage_id": "ar-b1-u10-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن بعض النقاط صحيحة لكن ترتيبها أخفى خلافًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 10,
+      "sequence": 56,
+      "passage_id": "ar-b1-u10-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في وصف العنوان الثاني بأنه غير متشائم لكنه أكثر تحديدًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 10,
+      "sequence": 57,
+      "passage_id": "ar-b1-u10-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «أما» في المقارنة بين موعد المقهى وشراء التذاكر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 10,
+      "sequence": 58,
+      "passage_id": "ar-b1-u10-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في القول إن «ارتبط» ليست مجرد لغة أضعف بل وصف أنسب للدليل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 10,
+      "sequence": 59,
+      "passage_id": "ar-b1-u10-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن المساحة تعمل لكن الدراجة تضيق المرور؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B1",
+      "unit": 10,
+      "sequence": 60,
+      "passage_id": "ar-b1-u10-p06",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن الهدف ليس الوصول دائمًا إلى التصنيف نفسه بل تحديد موضع الخلاف؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 1,
+      "sequence": 1,
+      "passage_id": "ar-b2-u01-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في التحذير من زيادة تعقيد النموذج كلما ظهر استثناء؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 1,
+      "sequence": 1,
+      "passage_id": "ar-b2-u01-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في المثال الذي يستخدم فيه قرار المدرسة نموذجًا مبسطًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 1,
+      "sequence": 2,
+      "passage_id": "ar-b2-u01-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «أما» في المقارنة بين المجموعة المنظمة والمشاركة المفتوحة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 1,
+      "sequence": 2,
+      "passage_id": "ar-b2-u01-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «حتى إذا» في تسجيل المسار ولو لم ير المتطوع حشرة واحدة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 1,
+      "sequence": 3,
+      "passage_id": "ar-b2-u01-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «مع أن» في القول إن ترتيب بعض المقترحات تغير مع أن الأدلة عن جودتها لم تتغير؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 1,
+      "sequence": 3,
+      "passage_id": "ar-b2-u01-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في مقارنة تفسير مراجعين للدرجة نفسها؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 1,
+      "sequence": 4,
+      "passage_id": "ar-b2-u01-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في المقارنة بين إجراءات يمكن التراجع عنها وأخرى يصعب التراجع عنها؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 1,
+      "sequence": 4,
+      "passage_id": "ar-b2-u01-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في الحديث عن تغير الأدلة وإمكان التراجع عن بعض الإجراءات؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 1,
+      "sequence": 5,
+      "passage_id": "ar-b2-u01-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «أما» في الانتقال إلى النتيجة التي استقرت بعد المراجعة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 1,
+      "sequence": 6,
+      "passage_id": "ar-b2-u01-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «أما إذا» في التمييز بين مشكلة تحل بمعلومة إضافية وخلاف يستمر بعد الاتفاق على الوقائع؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 2,
+      "sequence": 7,
+      "passage_id": "ar-b2-u02-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن الخصم قد يجعل السعر أقل لكنه يشجع شراء كمية أكبر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 2,
+      "sequence": 7,
+      "passage_id": "ar-b2-u02-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختيار التوصيل مع رسوم مرتفعة عندما قد يفوت الخروج موعدًا أهم؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 2,
+      "sequence": 8,
+      "passage_id": "ar-b2-u02-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن للمرونة قيمة أيضًا بعد بيان قيمة استقرار القواعد؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 2,
+      "sequence": 8,
+      "passage_id": "ar-b2-u02-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في مقارنة المرونة بلا معيار بالثبات المطلق؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 2,
+      "sequence": 9,
+      "passage_id": "ar-b2-u02-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «حتى إذا» في القول إن الطرفين لا يستطيعان تغيير كل شرط ولو كان التغيير مناسبًا لهما؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 2,
+      "sequence": 9,
+      "passage_id": "ar-b2-u02-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن المنصة مفيدة جدًا مع بقاء الحاجة إلى سؤال عن التبعية؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 2,
+      "sequence": 10,
+      "passage_id": "ar-b2-u02-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «مع ذلك» قبل ذكر تجنب بعض الموظفين تسجيل الحالات المعادة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 2,
+      "sequence": 10,
+      "passage_id": "ar-b2-u02-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «حتى» في جعل جزء من المكافأة جماعيًا حتى يملك الموظفون سببًا لمساعدة زميل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 2,
+      "sequence": 11,
+      "passage_id": "ar-b2-u02-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «فإذا» في اختبار تغير الفائز عند تحريك وزن الوقت؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 2,
+      "sequence": 11,
+      "passage_id": "ar-b2-u02-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في الانتقال من ترتيب أبدي للخدمات إلى طريقة يعدلها القارئ؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 2,
+      "sequence": 12,
+      "passage_id": "ar-b2-u02-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن إذا» في المقارنة بين تنبيه موظف مرة وبقاء المكافأة التي تدفع الجميع إلى الاتجاه نفسه؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 3,
+      "sequence": 13,
+      "passage_id": "ar-b2-u03-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «أما» في الانتقال من الجائزة الأصلية إلى المكافأة الإضافية؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 3,
+      "sequence": 13,
+      "passage_id": "ar-b2-u03-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن تعديل القاعدة ممكن فيجب إعلان سببه ومن يشارك فيه؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 3,
+      "sequence": 14,
+      "passage_id": "ar-b2-u03-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في موافقة سامر على أن السيطرة ليست مطلقة ثم حديثه عن اتساع الجمهور؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 3,
+      "sequence": 14,
+      "passage_id": "ar-b2-u03-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «أما» في الانتقال إلى الاستخدام الأبعد عن السياق الأصلي؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 3,
+      "sequence": 15,
+      "passage_id": "ar-b2-u03-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن معظم الاعتراضات لم تغير النتيجة لكن مجموعة صغيرة كشفت نمطين؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 3,
+      "sequence": 15,
+      "passage_id": "ar-b2-u03-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في مثال قبول موظف سببًا يرفضه موظف آخر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 3,
+      "sequence": 16,
+      "passage_id": "ar-b2-u03-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» بعد اقتراح الإلغاء لجعل المسؤولية صفرًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 3,
+      "sequence": 16,
+      "passage_id": "ar-b2-u03-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة تكرار «إذا» في نقطتي القرار المتعلقتين بقوة الدليل؟",
+      "reasons": [
+        "formal_type:grammar_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 3,
+      "sequence": 17,
+      "passage_id": "ar-b2-u03-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في الانتقال من اقتراح أسئلة إضافية إلى التحذير من عبء الاستمارة الأطول؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 3,
+      "sequence": 17,
+      "passage_id": "ar-b2-u03-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن تكرر سبب الاستثناء يصبح دليلًا على حاجة القاعدة إلى تغيير؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 3,
+      "sequence": 18,
+      "passage_id": "ar-b2-u03-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في سلسلة الأسئلة عن تغير المساهمة وظهور الهوية وخطأ النظام الآلي؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 4,
+      "sequence": 19,
+      "passage_id": "ar-b2-u04-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «أما» في الانتقال من الميل التدريجي إلى خيار الدرج مع منحدر منفصل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 4,
+      "sequence": 19,
+      "passage_id": "ar-b2-u04-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في الحديث عن تراكم الماء أو الثلج؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 4,
+      "sequence": 20,
+      "passage_id": "ar-b2-u04-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في مقارنة طلب التجار بتمديد الساعات وطلب السكان نهاية أبكر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 4,
+      "sequence": 20,
+      "passage_id": "ar-b2-u04-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بدل» في تجربة جدول موسمي بدلاً من اختيار طرف بصورة دائمة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 4,
+      "sequence": 21,
+      "passage_id": "ar-b2-u04-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن إحدى المعدات قد تحتاج إلى إصلاح؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 4,
+      "sequence": 21,
+      "passage_id": "ar-b2-u04-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن المساحة المختارة أصغر مما تخيل السكان لكنها قابلة للاستخدام والصيانة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 4,
+      "sequence": 22,
+      "passage_id": "ar-b2-u04-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لأن» في القول إن أولوية العودة لا تكون حماية حقيقية إذا كان السعر خارج القدرة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 4,
+      "sequence": 22,
+      "passage_id": "ar-b2-u04-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في اعتراض المسؤولين على كلفة حماية الانتقال ثم طلب إظهار المفاضلة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 4,
+      "sequence": 23,
+      "passage_id": "ar-b2-u04-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «أما» في الانتقال من التصميم الثابت إلى التكوين الأكثر مرونة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 4,
+      "sequence": 23,
+      "passage_id": "ar-b2-u04-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في التحذير من اختيار أكثر الحلول مرونة دائمًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 4,
+      "sequence": 24,
+      "passage_id": "ar-b2-u04-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في سؤال ما الذي يجب أن يبقى قابلًا للتعديل إذا تغير الاستخدام بعد سنوات؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 5,
+      "sequence": 25,
+      "passage_id": "ar-b2-u05-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في مقارنة فترات قصيرة بالسجل الكامل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 5,
+      "sequence": 25,
+      "passage_id": "ar-b2-u05-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في سؤال ما يحدث إذا بدأ الرسم من سنة مرتفعة أو انتهى بسنة منخفضة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 5,
+      "sequence": 26,
+      "passage_id": "ar-b2-u05-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في مقارنة الإجراءات الرخيصة بالمعدات المتخصصة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 5,
+      "sequence": 26,
+      "passage_id": "ar-b2-u05-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن اتفاق المساعدة لا يفيد إذا تعطلت المنطقتان معًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 5,
+      "sequence": 27,
+      "passage_id": "ar-b2-u05-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في مقارنة النبات الذي تراجع عند انقطاع الري بالخيار الأبطأ نموًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 5,
+      "sequence": 27,
+      "passage_id": "ar-b2-u05-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في الحديث عن انتقال التجربة إلى مساحة أكبر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 5,
+      "sequence": 28,
+      "passage_id": "ar-b2-u05-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في مقارنة ما يتذكره قراء النسخة الأولى بما يفهمه قراء النسخة الثانية؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 5,
+      "sequence": 28,
+      "passage_id": "ar-b2-u05-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في مثال تغير سياسة استخدام الماء؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 5,
+      "sequence": 29,
+      "passage_id": "ar-b2-u05-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن الظل تحسن في أكثر من موقع لكن حجم المظلة واتجاهها احتاجا إلى تعديل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 5,
+      "sequence": 29,
+      "passage_id": "ar-b2-u05-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن تكرر الأثر في مواقع مختلفة يزيد الثقة في المبدأ؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 5,
+      "sequence": 30,
+      "passage_id": "ar-b2-u05-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن الفريق قد يملك خطة غير مرتبطة بالتعلم إذا لم يحدد ما سيغيرها؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 6,
+      "sequence": 31,
+      "passage_id": "ar-b2-u06-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن حذف الصورة يقلل الوصول المستقبلي لكنه لا يسترجع نسخة نُقلت؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 6,
+      "sequence": 31,
+      "passage_id": "ar-b2-u06-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن صديقًا قد يشارك مادة إذا ظنها غير حساسة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 6,
+      "sequence": 32,
+      "passage_id": "ar-b2-u06-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن كثرة الخيارات قد تربك المستخدم؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 6,
+      "sequence": 32,
+      "passage_id": "ar-b2-u06-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن الغرض تغير بصورة جوهرية فلا تغطيه موافقة قديمة تلقائيًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 6,
+      "sequence": 33,
+      "passage_id": "ar-b2-u06-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لو» في مناقشة احتفاظ الشركة بمفتاح احتياطي كامل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 6,
+      "sequence": 33,
+      "passage_id": "ar-b2-u06-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن النظام قد يفشل إذا كان معقدًا جدًا على المستخدم؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 6,
+      "sequence": 34,
+      "passage_id": "ar-b2-u06-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في مقارنة سهولة الربط في النسخة الأولى بانخفاضها بعد التجميع؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 6,
+      "sequence": 34,
+      "passage_id": "ar-b2-u06-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في الحديث عن معرفة المراجع للمجتمع المحلي؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 6,
+      "sequence": 35,
+      "passage_id": "ar-b2-u06-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بدلاً من» في رفض الاحتفاظ بالرابط احتياطًا لدراسة مستقبلية؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 6,
+      "sequence": 35,
+      "passage_id": "ar-b2-u06-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «حتى إذا» في فحص ما يمكن استنتاجه رغم غياب الاسم؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 6,
+      "sequence": 36,
+      "passage_id": "ar-b2-u06-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في السؤال عن تغير الغرض أو الجمهور أو مدة الاحتفاظ بمرور الوقت؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 7,
+      "sequence": 37,
+      "passage_id": "ar-b2-u07-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن سلطة المتحف في ترتيب اللقاء حقيقية لكنها لا تجعل البطاقة آخر كلمة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 7,
+      "sequence": 37,
+      "passage_id": "ar-b2-u07-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن القراءة تستطيع استخدام الإطار إذا ساعدها؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 7,
+      "sequence": 38,
+      "passage_id": "ar-b2-u07-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في مقارنة الخصائص التي ظهرت مبكرًا بالخصائص التي تطورت مع التدريب؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 7,
+      "sequence": 38,
+      "passage_id": "ar-b2-u07-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لو» في سؤال تغير المخرج أو زميل التمثيل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 7,
+      "sequence": 39,
+      "passage_id": "ar-b2-u07-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن الموسيقى لا تفرض معنى واحدًا لكنها تغير احتمالات القراءة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 7,
+      "sequence": 39,
+      "passage_id": "ar-b2-u07-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن الباحث إذا أراد إثبات القصد التاريخي احتاج إلى أدلة أخرى؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 7,
+      "sequence": 40,
+      "passage_id": "ar-b2-u07-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن الشخصية تراقب الباب لكنها تستخدم كلمات تهديد واثقة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 7,
+      "sequence": 40,
+      "passage_id": "ar-b2-u07-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في التحذير من تفسير يتغير بعد كل تفصيل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 7,
+      "sequence": 41,
+      "passage_id": "ar-b2-u07-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «أما» في الانتقال من نظرية البطل المثالي إلى النظرية المركبة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 7,
+      "sequence": 41,
+      "passage_id": "ar-b2-u07-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن النظرية تضعف إذا احتاجت إلى افتراض جديد لكل تفصيل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 7,
+      "sequence": 42,
+      "passage_id": "ar-b2-u07-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في توقع نور أنه إذا كان الخوف مركزيًا فيجب أن تتكرر إشارات الحذر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 8,
+      "sequence": 43,
+      "passage_id": "ar-b2-u08-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في مقارنة السجلات الرسمية بالمذكرات الشخصية؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 8,
+      "sequence": 43,
+      "passage_id": "ar-b2-u08-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «حتى إذا» في البحث عن إشارات إلى سجل فُقد أصله؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 8,
+      "sequence": 44,
+      "passage_id": "ar-b2-u08-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن بعض المناطق الأقل تأثرًا بالرسوم شاركت في الاحتجاج أيضًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 8,
+      "sequence": 44,
+      "passage_id": "ar-b2-u08-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لو» في سؤال ما إذا كانت الاحتجاجات ستختفي لو لم تتغير الرسوم؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 8,
+      "sequence": 45,
+      "passage_id": "ar-b2-u08-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن المجموعة الثانية احتاجت وقتًا أطول لكنها بنت صورة أقل اعتمادًا على التشابه؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 8,
+      "sequence": 45,
+      "passage_id": "ar-b2-u08-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في التحذير من فرض المفاهيم الحديثة بلا حذر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 8,
+      "sequence": 46,
+      "passage_id": "ar-b2-u08-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في مقارنة الخريطة الرسمية بالخريطة المحلية؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 8,
+      "sequence": 46,
+      "passage_id": "ar-b2-u08-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» الضمنية في تغير أهمية الطريق مع الموسم والغرض؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 8,
+      "sequence": 47,
+      "passage_id": "ar-b2-u08-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لو» في مقارنة اختيار بديل أغلى يحمي الباعة برفض بدائل أقل ضررًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 8,
+      "sequence": 47,
+      "passage_id": "ar-b2-u08-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن الضرر لم يكن مجهولًا لكن ذلك لا يحسم هل كان مقصودًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 8,
+      "sequence": 48,
+      "passage_id": "ar-b2-u08-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن اكتشاف ندرة نوع من الرسائل يخفض الثقة في استنتاج عن الدوافع؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 9,
+      "sequence": 49,
+      "passage_id": "ar-b2-u09-p01",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «أما» في الانتقال من التقرير والتوصية إلى مسودة اللائحة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 9,
+      "sequence": 49,
+      "passage_id": "ar-b2-u09-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن أثرًا غير متوقع يساعد السجل على تحديد المرحلة التي يجب مراجعتها؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 9,
+      "sequence": 50,
+      "passage_id": "ar-b2-u09-p02",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن الفروق انخفضت لكن بقي تأخير مشترك؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 9,
+      "sequence": 50,
+      "passage_id": "ar-b2-u09-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن عدد المستخدمين يرتفع فلا يكفي لوم المكتب بموارد ثابتة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 9,
+      "sequence": 51,
+      "passage_id": "ar-b2-u09-p03",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن الرصد خفض الاستخدام المتأخر لكنه ولد إنذارات خاطئة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 9,
+      "sequence": 51,
+      "passage_id": "ar-b2-u09-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في التحذير من إذن طارئ لم يصل في الوقت المناسب؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 9,
+      "sequence": 52,
+      "passage_id": "ar-b2-u09-p04",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن مركبة واحدة لا تزيد الخطر كثيرًا لكن عدة مركبات تعيد المشكلة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 9,
+      "sequence": 52,
+      "passage_id": "ar-b2-u09-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في وعد إعادة فتح التصميم إذا توسع التصريح بلا سبب مماثل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 9,
+      "sequence": 53,
+      "passage_id": "ar-b2-u09-p05",
+      "question_id": "q6",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن تدريبًا لم يؤد إلى ترقية مباشرة لكنه فتح نوعًا جديدًا من الوظائف؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 9,
+      "sequence": 53,
+      "passage_id": "ar-b2-u09-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن التدريب إذا أصبح شرطًا للدعم فقد لا تعكس الموافقة اختيارًا حقيقيًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 9,
+      "sequence": 54,
+      "passage_id": "ar-b2-u09-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في سؤال ما الذي سيجعل نور تقترح تعديل القاعدة بدل تعديل التنفيذ؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 10,
+      "sequence": 55,
+      "passage_id": "ar-b2-u10-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في ربط تنفيذ الخطوات الإضافية بظهور مؤشرات مبكرة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 10,
+      "sequence": 56,
+      "passage_id": "ar-b2-u10-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن القاعدة قد تفسد إذا تحسن المؤشر من دون تحسن الهدف؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 10,
+      "sequence": 57,
+      "passage_id": "ar-b2-u10-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في فكرة تعديل العناصر عندما يتغير الاستخدام أو تظهر ظروف جديدة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 10,
+      "sequence": 58,
+      "passage_id": "ar-b2-u10-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في إعادة فتح قرار جمع البيانات إذا تغير الغرض؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 10,
+      "sequence": 59,
+      "passage_id": "ar-b2-u10-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «عندما» في تغيير وصف التسجيل عندما لم يجد الفريق نصًا مباشرًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "B2",
+      "unit": 10,
+      "sequence": 60,
+      "passage_id": "ar-b2-u10-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في ربط مراجعة الحكم بظهور معلومة جديدة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 1,
+      "sequence": 1,
+      "passage_id": "ar-c1-u01-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في الانتقال من ضعف الربط بين المفهوم والملاحظة إلى أثر ذلك في قرار الدعم؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 1,
+      "sequence": 2,
+      "passage_id": "ar-c1-u01-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «حتى» في القول إن القائمة الأوسع لا تمنع اختلاف غير المستجيبين عمن يجيب؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 1,
+      "sequence": 3,
+      "passage_id": "ar-c1-u01-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» المتكررة في صياغة توقعات مختلفة لكل قصة سببية؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 1,
+      "sequence": 4,
+      "passage_id": "ar-c1-u01-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في التفريق بين شرط جوهري في النظرية وتفصيل لا يتوقع أن يؤثر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 1,
+      "sequence": 5,
+      "passage_id": "ar-c1-u01-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» الضمنية في فكرة أن قيمة الدراسة التالية تعتمد على قدرتها على تقليل عدم اليقين؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 1,
+      "sequence": 6,
+      "passage_id": "ar-c1-u01-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «أما» في التفريق بين عبارات يكفي تضييقها وعبارات تحتاج إلى تصميم جديد؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 1,
+      "sequence": 6,
+      "passage_id": "ar-c1-u01-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بدل» في قول النص «بدل تكرار نقاش عام لا يتغير»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 2,
+      "sequence": 7,
+      "passage_id": "ar-c1-u02-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لو» في قول النص «لو عالج سامر الجانب الذي يعرفه فقط»؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 2,
+      "sequence": 8,
+      "passage_id": "ar-c1-u02-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في ربط استمرار الأداء بإمكان الانتقال إلى مرحلة أوسع؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 2,
+      "sequence": 9,
+      "passage_id": "ar-c1-u02-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في سؤال ما الذي يحدث للترتيب إذا تغيرت الأوزان ضمن نطاق معقول؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 2,
+      "sequence": 10,
+      "passage_id": "ar-c1-u02-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في طلب كل فريق تعديلًا يقبل به إذا تدهور مؤشر خارج اختصاصه؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 2,
+      "sequence": 11,
+      "passage_id": "ar-c1-u02-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن السبب المتكرر ينبغي ألا يبقى استثناءً؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 2,
+      "sequence": 12,
+      "passage_id": "ar-c1-u02-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في مقارنة القرار الصغير داخل اختصاص واضح بالتزام طويل الأمد؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 2,
+      "sequence": 12,
+      "passage_id": "ar-c1-u02-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في قول النص إن قابلية التفسير لا تعني إقناع الجميع بل توجيه الخلاف إلى موضع محدد؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 3,
+      "sequence": 13,
+      "passage_id": "ar-c1-u03-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في التفريق بين تحسن الرقم مع الأداء الحقيقي وتحسن الرقم وحده؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 3,
+      "sequence": 14,
+      "passage_id": "ar-c1-u03-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في مقارنة إضافة الموارد بتعديل قواعد الحجز؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 3,
+      "sequence": 15,
+      "passage_id": "ar-c1-u03-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في التفريق بين تكرر الحاجة إلى الاستثناء وإعادة تشكيل المعاملة للوصول إليه؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 3,
+      "sequence": 16,
+      "passage_id": "ar-c1-u03-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «عندما» في الانتقال من ظهور أثر جديد إلى إعادة فتح سؤال محدد؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 3,
+      "sequence": 17,
+      "passage_id": "ar-c1-u03-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في ربط التمويل بحجم النشاط ثم توقع سلوك الموظفين؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 3,
+      "sequence": 18,
+      "passage_id": "ar-c1-u03-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بدلاً من» في الانتقال من معالجة المشكلات كحوادث منفصلة إلى رسم دائرة سببية؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 3,
+      "sequence": 18,
+      "passage_id": "ar-c1-u03-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في قول النص إن تعديلًا قد يحل سلوكًا حاليًا ويخلق سلوكًا آخر لاحقًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 4,
+      "sequence": 19,
+      "passage_id": "ar-c1-u04-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن الحدود التحليلية يمكن تعديلها إذا قاومتها البيانات؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 4,
+      "sequence": 20,
+      "passage_id": "ar-c1-u04-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في مقارنة فرض صيغة واحدة بترك كل شيء بلا إرشاد؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 4,
+      "sequence": 21,
+      "passage_id": "ar-c1-u04-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في التفريق بين سؤال أثر الرسمية وسؤال وصف الاستعمال عبر المجتمع؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 4,
+      "sequence": 22,
+      "passage_id": "ar-c1-u04-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في مقارنة حفظ تسلسل الأداء بشرح الفكرة للقارئ؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 4,
+      "sequence": 23,
+      "passage_id": "ar-c1-u04-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن الباحث ينبغي أن يعرف أي نسخة يقتبس منها؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 4,
+      "sequence": 24,
+      "passage_id": "ar-c1-u04-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لو» في سلسلة الأسئلة المعاكسة التي تطرحها ريم على النتائج؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 4,
+      "sequence": 24,
+      "passage_id": "ar-c1-u04-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في القول إن الحساسية الاجتماعية لا تعني تجنب الأنماط بل تجنب القفز إلى تعريف ثابت؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 5,
+      "sequence": 25,
+      "passage_id": "ar-c1-u05-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في ربط تغير صياغة التقرير بظهور شروط تحد النتيجة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 5,
+      "sequence": 26,
+      "passage_id": "ar-c1-u05-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في سؤال ما إذا كان المسار سيبقى بعد موسم تشغيل مختلف؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 5,
+      "sequence": 27,
+      "passage_id": "ar-c1-u05-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في التحذير من إضافة عنصر جديد بعد كل نتيجة مخالفة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 5,
+      "sequence": 28,
+      "passage_id": "ar-c1-u05-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختبار افتراض أن الفترات غير المرصودة أسوأ بدرجات مختلفة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 5,
+      "sequence": 29,
+      "passage_id": "ar-c1-u05-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في الانتقال من الإشارة المتكررة إلى وصف تغير مستمر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 5,
+      "sequence": 30,
+      "passage_id": "ar-c1-u05-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن كلفة الانتظار العالية وقابلية الرجوع قد تخفضان عتبة الفعل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 5,
+      "sequence": 30,
+      "passage_id": "ar-c1-u05-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن اختلاف عتبة الفعل لا يغير وصف قوة الدليل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 6,
+      "sequence": 31,
+      "passage_id": "ar-c1-u06-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في ربط صلاحية الوسيلة الجديدة بأدائها لوظائف المشاركة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 6,
+      "sequence": 32,
+      "passage_id": "ar-c1-u06-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن البديل قد يصبح مسارًا أبطأ دائمًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 6,
+      "sequence": 33,
+      "passage_id": "ar-c1-u06-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن تقييد الحكم بدرجة شديدة قد يمنع التعامل مع حالة جديدة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 6,
+      "sequence": 34,
+      "passage_id": "ar-c1-u06-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في سؤال ما إذا كان حذف جزء يغير عمل النظام كله؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 6,
+      "sequence": 35,
+      "passage_id": "ar-c1-u06-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن الوسيلة الأخف قد لا تكفي عند خطر كبير معروف؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 6,
+      "sequence": 36,
+      "passage_id": "ar-c1-u06-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «قد» في عرض الحالات التي يمكن أن تتعارض فيها طبقات التحليل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 6,
+      "sequence": 36,
+      "passage_id": "ar-c1-u06-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في القول إن التدريب لا يعلم قاعدة سحرية بل يميز أسئلة متعددة ثم يجمعها؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 7,
+      "sequence": 37,
+      "passage_id": "ar-c1-u07-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن ظهور استعمال خارج نمط الدخول والخروج يجب أن يخفض الثقة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 7,
+      "sequence": 38,
+      "passage_id": "ar-c1-u07-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لو» في ذكر الحالات التي كانت ستجبر الناقدة على مراجعة قراءتها؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 7,
+      "sequence": 39,
+      "passage_id": "ar-c1-u07-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن الخطأ التقني غير المقصود سيضعف بعض الحجة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 7,
+      "sequence": 40,
+      "passage_id": "ar-c1-u07-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن النسخة الافتراضية أكثر انسجامًا صوتيًا لكنها تفقد التوتر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 7,
+      "sequence": 41,
+      "passage_id": "ar-c1-u07-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بدل» في قول النص إن الناقد يدخل الاستثناء في حسابه بدل إخفائه؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 7,
+      "sequence": 42,
+      "passage_id": "ar-c1-u07-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «حتى إذا» في القول إن معرفة قصد معلن لا تلغي الحاجة إلى قراءة التفاصيل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 7,
+      "sequence": 42,
+      "passage_id": "ar-c1-u07-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بدل» في المقارنة بين حجج قابلة للمقارنة والذوق الشخصي؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 8,
+      "sequence": 43,
+      "passage_id": "ar-c1-u08-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في ربط خروج المؤشر عن المجال المتوقع بإعادة تقدير المصروفات؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 8,
+      "sequence": 44,
+      "passage_id": "ar-c1-u08-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في مقارنة قيمة تقسيم المساحة تحت طلب قوي وطلب ضعيف؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 8,
+      "sequence": 45,
+      "passage_id": "ar-c1-u08-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن التوسع الأسرع من قدرة النقد قد يحول النجاح إلى ضغط؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 8,
+      "sequence": 46,
+      "passage_id": "ar-c1-u08-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في نقطة الإنذار المرتبطة بحركة التكاليف أسرع من قدرة الدخل على التعديل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 8,
+      "sequence": 47,
+      "passage_id": "ar-c1-u08-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن الموردين قد لا يوفران حماية إذا اعتمدا على المصدر نفسه؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 8,
+      "sequence": 48,
+      "passage_id": "ar-c1-u08-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن تحسين تقدير متغير لا يستحق الأولوية إذا لم يغير الاختيار؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 8,
+      "sequence": 48,
+      "passage_id": "ar-c1-u08-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في القول إن المطلوب ليس معرفة المستقبل كاملًا بل معرفة اعتماد القرار على الجهل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 9,
+      "sequence": 49,
+      "passage_id": "ar-c1-u09-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» الضمنية في سؤال ما الذي كان يمكن أن يحدث قبل معرفة الإغلاق؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 9,
+      "sequence": 50,
+      "passage_id": "ar-c1-u09-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في التعهد بتعديل التعريفات إذا قاومتها المصادر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 9,
+      "sequence": 51,
+      "passage_id": "ar-c1-u09-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في مقارنة غياب موضع هامشي بغياب طريق رئيسي من مصدر مخصص للنقل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 9,
+      "sequence": 52,
+      "passage_id": "ar-c1-u09-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بينما» في مقارنة المحضر المؤسسي بالرسالة الخاصة من الفترة نفسها؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 9,
+      "sequence": 53,
+      "passage_id": "ar-c1-u09-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في الاحتفاظ بالصورة القوية مع تغيير موقعها ووظيفتها؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 9,
+      "sequence": 54,
+      "passage_id": "ar-c1-u09-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في سؤال ما إذا كان نوع الوثيقة المناسب موجودًا ليسجل حدثًا غائبًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 9,
+      "sequence": 54,
+      "passage_id": "ar-c1-u09-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إنه لا يوجد ماض كامل لكن توجد طرق أكثر انضباطًا لبناء الحجة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 10,
+      "sequence": 55,
+      "passage_id": "ar-c1-u10-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في ربط نجاح الاختبار وآثار الانتقال بالتوسع؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 10,
+      "sequence": 55,
+      "passage_id": "ar-c1-u10-p01",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في القول إن التقرير لا يطيل النص لمجرد التعقيد بل يكشف نقاط الانتقال؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 10,
+      "sequence": 56,
+      "passage_id": "ar-c1-u10-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن العلاقات بين المؤشر والشكاوى بدأت تتباعد؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 10,
+      "sequence": 56,
+      "passage_id": "ar-c1-u10-p02",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لذلك» في الانتقال من اختلاف الجمهور إلى السماح بصيغ بديلة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 10,
+      "sequence": 57,
+      "passage_id": "ar-c1-u10-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في ربط استمرار الإشارة أو تراجعها بتغيير نطاق الإجراء؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 10,
+      "sequence": 57,
+      "passage_id": "ar-c1-u10-p03",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في القول إن الإجراء القوي قد يحمي لكنه قد يوقف خدمة أساسية بلا حاجة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 10,
+      "sequence": 58,
+      "passage_id": "ar-c1-u10-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لو» في سؤال ما إذا كان القرار سيبقى جيدًا عند ربح أقل أو خسارة صغيرة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 10,
+      "sequence": 58,
+      "passage_id": "ar-c1-u10-p04",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في الانتقال من قاعدة «خاطر تربح» إلى درس أضيق عن المعلومات والبدائل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 10,
+      "sequence": 59,
+      "passage_id": "ar-c1-u10-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن الحوافز الحالية قد تجعل الماضي يبدو موجهًا دائمًا نحو رقم اليوم؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 10,
+      "sequence": 59,
+      "passage_id": "ar-c1-u10-p05",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لكن» في الجمع بين الحاجة إلى ماض يمكن نقده ومؤشرات تساعد على العمل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 10,
+      "sequence": 60,
+      "passage_id": "ar-c1-u10-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» المتكررة في اختبار العينة والتفسير والقرار والسرد؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C1",
+      "unit": 10,
+      "sequence": 60,
+      "passage_id": "ar-c1-u10-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «ليس... بل» في الجملة التي تميز الاستعداد للمستوى التالي عن حفظ مفردات أصعب؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 1,
+      "sequence": 1,
+      "passage_id": "ar-c2-u01-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في ربط نوع الحالة بنوع الادعاء الذي تسقطه؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 1,
+      "sequence": 2,
+      "passage_id": "ar-c2-u01-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في التحذير من إضافة استثناء خاص لكل مثال؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 1,
+      "sequence": 3,
+      "passage_id": "ar-c2-u01-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لو» في سؤال ما إذا كانت الطريقة ستتغير لو تغير الواقع قليلًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 1,
+      "sequence": 4,
+      "passage_id": "ar-c2-u01-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في مقارنة من حصل لاحقًا على فرصة آمنة للمراجعة بمن لم يحصل عليها؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 1,
+      "sequence": 5,
+      "passage_id": "ar-c2-u01-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختبار ما إذا كان السبب نفسه مقبولًا لأي شخص في الموقف ذاته؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 1,
+      "sequence": 6,
+      "passage_id": "ar-c2-u01-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن الحجة التي تبقى قوية بعد حذف فرق تكشف تعقيدًا زائدًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 1,
+      "sequence": 6,
+      "passage_id": "ar-c2-u01-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «لا...ولا...» في نفي أن قيمة التحليل تأتي من كثرة الأسماء أو غرابة الأمثلة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 2,
+      "sequence": 7,
+      "passage_id": "ar-c2-u02-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في مقارنة الحالات التي يتدرج فيها أثر التدخل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 2,
+      "sequence": 8,
+      "passage_id": "ar-c2-u02-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختبار بقاء الأولوية للجهة الأكبر رغم ضعف مؤشرات القدرة المباشرة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 2,
+      "sequence": 9,
+      "passage_id": "ar-c2-u02-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختبار ما إذا كان الخلاف جزءًا من الحساب النهائي أو التزامًا مستقلًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 2,
+      "sequence": 10,
+      "passage_id": "ar-c2-u02-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «كلما» في ربط خطورة الأثر بقوة الضمانات المطلوبة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 2,
+      "sequence": 11,
+      "passage_id": "ar-c2-u02-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «حتى إذا» في الفصل بين قصد الكاتب الكامل وبين قدرته على إلزام المؤسسة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 2,
+      "sequence": 12,
+      "passage_id": "ar-c2-u02-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في سلسلة الأسئلة التي تطابق نوع الادعاء بنوع الدليل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 2,
+      "sequence": 12,
+      "passage_id": "ar-c2-u02-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في نفي أن المقارنة المتقدمة تجعل النتائج العملية بديلًا عن المصدر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 3,
+      "sequence": 13,
+      "passage_id": "ar-c2-u03-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في ربط غياب الفرق بقدرة الجهاز على كشفه؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 3,
+      "sequence": 14,
+      "passage_id": "ar-c2-u03-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في التفريق بين تتبع التغير داخل العينة ومقارنة عينات مختلفة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 3,
+      "sequence": 15,
+      "passage_id": "ar-c2-u03-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في قاعدة التوقف عند ظهور انحراف متتابع؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 3,
+      "sequence": 16,
+      "passage_id": "ar-c2-u03-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في القول إن عدم وجود دليل مستقل على الجملة الآلية يفرض تحفظًا أكبر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 3,
+      "sequence": 17,
+      "passage_id": "ar-c2-u03-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختبار انقلاب الخلاصة عند تغيير قرار تحليلي معقول؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 3,
+      "sequence": 18,
+      "passage_id": "ar-c2-u03-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في تحويل فشل النموذج ضمن حالة جديدة إلى معلومة عن حدوده؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 3,
+      "sequence": 18,
+      "passage_id": "ar-c2-u03-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في نفي أن الفشل عكس التقدم؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 4,
+      "sequence": 19,
+      "passage_id": "ar-c2-u04-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في ربط قيمة المورد البديل بسبب الخطر الذي يزيله؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 4,
+      "sequence": 20,
+      "passage_id": "ar-c2-u04-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في تحويل تأخر دفعة العميل إلى حد زمني يحتاج إلى خطة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 4,
+      "sequence": 21,
+      "passage_id": "ar-c2-u04-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في مقارنة استجابة الشركات عندما تتوقع أن الصدمة مؤقتة أو طويلة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 4,
+      "sequence": 22,
+      "passage_id": "ar-c2-u04-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في سؤال ما إذا كانت الاستراتيجية تظل جيدة عندما يتبناها الجميع؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 4,
+      "sequence": 23,
+      "passage_id": "ar-c2-u04-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في حلقة انخفاض السعر ومتطلبات الضمان والبيع الاضطراري؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 4,
+      "sequence": 24,
+      "passage_id": "ar-c2-u04-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختبار حذف حلقة من النموذج ومعرفة هل يتغير المسار؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 4,
+      "sequence": 24,
+      "passage_id": "ar-c2-u04-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في نفي أن التعقيد يقاس بعدد الروابط المرسومة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 5,
+      "sequence": 25,
+      "passage_id": "ar-c2-u05-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في تحديد متى يصبح إخفاء الفاعل مؤثرًا في المسؤولية؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 5,
+      "sequence": 26,
+      "passage_id": "ar-c2-u05-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اشتراط أن يكون النمط متصلًا بتغير يمكن وصفه في الانتباه أو الزمن؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 5,
+      "sequence": 27,
+      "passage_id": "ar-c2-u05-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في جعل السياق السابق شرطًا لقوة بعض التأويلات؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 5,
+      "sequence": 28,
+      "passage_id": "ar-c2-u05-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في تقرير أن الشرط الذي يقلب الفعل المتوقع يجب ألا يعتمد على بحث ثانوي؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 5,
+      "sequence": 29,
+      "passage_id": "ar-c2-u05-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختبار ما إذا كان فعل أقوى مثل «أثبتنا» مبررًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 5,
+      "sequence": 30,
+      "passage_id": "ar-c2-u05-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في التفريق بين تغير جمالي وتغير حجاجي في الشكل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 5,
+      "sequence": 30,
+      "passage_id": "ar-c2-u05-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في نفي أن المباشرة في تعليمات الطوارئ تعني غياب الأسلوب؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 6,
+      "sequence": 31,
+      "passage_id": "ar-c2-u06-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في التفريق بين قيد لا يمكن تغييره الآن وقيد يمكن مراجعته لاحقًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 6,
+      "sequence": 32,
+      "passage_id": "ar-c2-u06-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختبار ما إذا كان المعيار الإجرائي يطبق عندما يخسر الخيار الذي يفضله صاحبه؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 6,
+      "sequence": 33,
+      "passage_id": "ar-c2-u06-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في جعل الحاجة إلى الرجوع مرتبطة بنوع القرار لا بكل معلومة جديدة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 6,
+      "sequence": 34,
+      "passage_id": "ar-c2-u06-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في سؤال ما إذا كان بديل أقل عبئًا يحقق جزءًا كبيرًا من الهدف؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 6,
+      "sequence": 35,
+      "passage_id": "ar-c2-u06-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في بيان أن تغيير مؤشر واحد قد يولد طريقة جديدة للتحايل؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 6,
+      "sequence": 36,
+      "passage_id": "ar-c2-u06-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختبار الانقلاب الذي يطلب من الفريق تسمية المعلومة التي ستغير حكمه؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 6,
+      "sequence": 36,
+      "passage_id": "ar-c2-u06-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في نفي أن قيدًا موروثًا يبرر نفسه إلى الأبد؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 7,
+      "sequence": 37,
+      "passage_id": "ar-c2-u07-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في تقرير متى يستحق عنصر ثقافي أن يبقى رغم احتمال صعوبته؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 7,
+      "sequence": 38,
+      "passage_id": "ar-c2-u07-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في تحديد متى يكون توافق عدة نسخ دليلًا ضعيفًا بسبب اعتمادها على مصدر وسيط واحد؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 7,
+      "sequence": 39,
+      "passage_id": "ar-c2-u07-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختبار ما إذا كانت قراءة ما ضيقة لأنها تترك تفاصيل مهمة بلا وظيفة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 7,
+      "sequence": 40,
+      "passage_id": "ar-c2-u07-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في قرار الإبقاء على جزء قديم يحتاج إلى شرح بدل حذفه كليًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 7,
+      "sequence": 41,
+      "passage_id": "ar-c2-u07-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في تغيير مقدار التعقيد الممكن بحسب قدرة المستخدم على الإيقاف والعودة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 7,
+      "sequence": 42,
+      "passage_id": "ar-c2-u07-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في تقرير أن الابتعاد عن الأصل يحتاج إلى حجة أقوى عندما يزداد مقدار الحرية؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 7,
+      "sequence": 42,
+      "passage_id": "ar-c2-u07-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في نفي أن الفرق بين الترجمة والتكييف هو وجود التفسير أو غيابه؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 8,
+      "sequence": 43,
+      "passage_id": "ar-c2-u08-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في تحديد متى يكون المصدر المتأخر قويًا أو ضعيفًا بحسب نوع الدعوى؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 8,
+      "sequence": 44,
+      "passage_id": "ar-c2-u08-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختبار دلالة ندرة أثر من نوع يصعب بقاؤه؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 8,
+      "sequence": 45,
+      "passage_id": "ar-c2-u08-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في تحديد متى يصبح التشابه البصري دليلًا ضعيفًا على وحدة الزمن؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 8,
+      "sequence": 46,
+      "passage_id": "ar-c2-u08-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في تحديد قوة الصمت بوصفه دليلًا على غياب الحدث؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 8,
+      "sequence": 47,
+      "passage_id": "ar-c2-u08-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختبار ما إذا كان الحدث خلق المسار أم سرعه ووحده؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 8,
+      "sequence": 48,
+      "passage_id": "ar-c2-u08-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في تحديد متى يصبح غياب الذكر قرينة أقوى؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 8,
+      "sequence": 48,
+      "passage_id": "ar-c2-u08-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في نفي أن المنهج المتقدم يحاول إزالة الوسائط للوصول مباشرة إلى الماضي؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 9,
+      "sequence": 49,
+      "passage_id": "ar-c2-u09-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختبار تغير الحكم الأخلاقي عندما ترتفع كلفة الخطأ أو يصعب التراجع؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 9,
+      "sequence": 50,
+      "passage_id": "ar-c2-u09-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في تحديد قيمة المرونة عندما يكون زمن بناء القدرة أطول من سرعة تغير الطلب؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 9,
+      "sequence": 51,
+      "passage_id": "ar-c2-u09-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في تقرير متى يحتاج القرار إلى أكثر من مراجع واحد أو مراجعات مستقلة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 9,
+      "sequence": 52,
+      "passage_id": "ar-c2-u09-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختبار ما إذا كان تحديث جزء واحد يغير افتراضًا يعتمد عليه جزء آخر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 9,
+      "sequence": 53,
+      "passage_id": "ar-c2-u09-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في جعل ظهور أثر عالي الضرر سببًا للتوقف رغم بقاء المتوسط جيدًا؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 9,
+      "sequence": 54,
+      "passage_id": "ar-c2-u09-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في السماح بتخفيف المراجعة بعد ثبوت الاستقرار في فئة منخفضة الخطر؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 9,
+      "sequence": 54,
+      "passage_id": "ar-c2-u09-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «بل» في نفي أن الأخلاق التقنية تهدف إلى مستقبل بلا أخطاء؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 10,
+      "sequence": 55,
+      "passage_id": "ar-c2-u10-p01",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في بيان كيف يمكن للسجل السابق أن يعيد إنتاج فرص سابقة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 10,
+      "sequence": 56,
+      "passage_id": "ar-c2-u10-p02",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في ربط قيمة سرعة التحديث بسرعة تغير البيئة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 10,
+      "sequence": 57,
+      "passage_id": "ar-c2-u10-p03",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في بيان أن رقمًا زمنيًا لا يحل الغموض ما لم يحدد الفعل الذي يبدأ وينتهي؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 10,
+      "sequence": 58,
+      "passage_id": "ar-c2-u10-p04",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في الحلقة التي تجعل خفض الموارد يؤدي إلى بيانات تبدو مؤيدة للخفض نفسه؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 10,
+      "sequence": 59,
+      "passage_id": "ar-c2-u10-p05",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختبار ما إذا كان ترتيب القصة والأرقام يغير فهم الادعاء المركزي؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    },
+    {
+      "level": "C2",
+      "unit": 10,
+      "sequence": 60,
+      "passage_id": "ar-c2-u10-p06",
+      "question_id": "q8",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة «إذا» في اختبار قابلية الحجة للمراجعة عند ظهور معلومة جديدة؟",
+      "reasons": [
+        "formal_type:grammar_function",
+        "prompt_pattern:explicit_word_function"
+      ],
+      "status": "needs_adjudication"
+    }
+  ],
+  "release_claim": false,
+  "interpretation": "Candidates require contextual adjudication. A type/pattern hit is not automatically a defect, especially at higher CEFR levels where discourse or grammatical analysis can be pedagogically legitimate."
+}
