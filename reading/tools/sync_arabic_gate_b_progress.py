@@ -2,8 +2,8 @@
 """Synchronize fresh Arabic Gate B decision artifacts into inventory/release evidence.
 
 Every counted decision must match the exact learner-facing hash in the current Gate B
-inventory. This script never promotes canonical quality metadata and never sets
-educator_release_ready.
+inventory. Current deterministic evidence must also match those canonical hashes.
+This script never promotes canonical quality metadata and never sets educator_release_ready.
 """
 from __future__ import annotations
 
@@ -14,17 +14,28 @@ ROOT = Path(__file__).resolve().parents[2]
 READING = ROOT / "reading"
 INVENTORY_PATH = READING / "audit/arabic_gate_b_naturalness_inventory_2026-08-30.json"
 DECISION_DIR = READING / "audit/arabic_gate_b_decisions_2026-08-30"
+DETERMINISTIC_PATH = READING / "audit/arabic_fresh_deterministic_revalidation_2026-08-30.json"
 RELEASE_PATH = READING / "RELEASE_STATUS.json"
 LEVELS = ("a1", "a2", "b1", "b2", "c1", "c2")
 
 
 def main() -> None:
     inventory = json.loads(INVENTORY_PATH.read_text(encoding="utf-8"))
+    deterministic = json.loads(DETERMINISTIC_PATH.read_text(encoding="utf-8"))
     release = json.loads(RELEASE_PATH.read_text(encoding="utf-8"))
     if inventory.get("project_id") != "LANG-A1C2" or inventory.get("language") != "arabic":
         raise SystemExit("unexpected Gate B inventory identity")
     if inventory.get("records") != 360:
         raise SystemExit("Gate B inventory must contain 360 Arabic records")
+    if deterministic.get("records") != 360 or deterministic.get("questions") != 3600 or deterministic.get("answers") != 3600:
+        raise SystemExit("current Arabic deterministic evidence has unexpected scope")
+    if deterministic.get("structural_errors"):
+        raise SystemExit("current Arabic deterministic evidence has structural errors")
+    for level in LEVELS:
+        inv_sha = inventory["levels"][level]["canonical_sha256"]
+        det_sha = deterministic["canonical_hashes"][level]["sha256"]
+        if inv_sha != det_sha:
+            raise SystemExit(f"{level}: Gate B inventory/deterministic canonical hash mismatch")
 
     seen = {}
     reviewed_by_level = {level: 0 for level in LEVELS}
@@ -88,6 +99,7 @@ def main() -> None:
     inventory["fresh_findings"] = total_findings
     inventory["status"] = "COMPLETE_INTERNAL_REVIEW" if total_reviewed == 360 else "IN_PROGRESS"
     inventory["decision_artifacts"] = evidence_paths
+    inventory["deterministic_binding"] = "reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json"
     inventory["quality_promotion"] = False
     inventory["release_claim"] = False
     inventory["next_step"] = (
@@ -100,6 +112,16 @@ def main() -> None:
     arabic = release["languages"]["arabic"]
     if arabic.get("educator_release_ready") is not False:
         raise SystemExit("refusing to sync Gate B while educator_release_ready is not explicitly false")
+    arabic["latest_deterministic_gate"] = {
+        "status": deterministic.get("status"),
+        "records": deterministic.get("records"),
+        "questions": deterministic.get("questions"),
+        "answers": deterministic.get("answers"),
+        "open_findings": deterministic.get("open_findings"),
+        "finding_classes": deterministic.get("finding_classes", {}),
+        "artifact": "reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json",
+        "date": deterministic.get("date"),
+    }
     progress = arabic.setdefault("naturalness_review_progress", {})
     progress.update(
         {
@@ -120,7 +142,7 @@ def main() -> None:
     evidence = arabic.setdefault("latest_release_evidence", [])
     if not isinstance(evidence, list):
         raise SystemExit("Arabic latest_release_evidence is not a list")
-    for path in evidence_paths:
+    for path in ["reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json", *evidence_paths]:
         if path not in evidence:
             evidence.append(path)
     arabic["educator_release_ready"] = False
@@ -133,6 +155,8 @@ def main() -> None:
                 "fresh_records_reviewed": total_reviewed,
                 "fresh_records_with_findings": total_with_findings,
                 "fresh_findings": total_findings,
+                "deterministic_status": deterministic.get("status"),
+                "deterministic_open_findings": deterministic.get("open_findings"),
                 "by_level": {
                     level.upper(): {
                         "reviewed": reviewed_by_level[level],
