@@ -1,0 +1,132 @@
+name: Repair Arabic A1 Units 3-10 metalinguistic items
+
+on:
+  push:
+    paths:
+      - '.github/workflows/repair-arabic-a1-u03-u10-metalinguistic.yml'
+      - 'reading/tools/repair_arabic_a1_u03_u10_metalinguistic.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  bounded-a1-closure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Preflight current routed state
+        run: python reading/tools/validate_continuation_state.py
+      - name: Fetch exact historical reference branches
+        shell: bash
+        run: |
+          set -euo pipefail
+          for u in 03 04 05 06 07 08 09 10; do
+            branch="repair/arabic-a1-u${u}-metalinguistic-2026-08-20"
+            git fetch origin "refs/heads/${branch}:refs/remotes/origin/${branch}"
+          done
+      - name: Apply current-corpus Units 3-10 remediation
+        run: python reading/tools/repair_arabic_a1_u03_u10_metalinguistic.py
+      - name: Regenerate exact-corpus Gate 0
+        run: python reading/tools/run_post_generation_gate0.py
+      - name: Rerun fresh Arabic deterministic release gate
+        run: python reading/tools/run_arabic_fresh_deterministic_revalidation.py
+      - name: Reconcile A1 formal-metalinguistic closure evidence
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          batch_path = Path('reading/audit/arabic_a1_u03_u10_metalinguistic_repair_2026-08-30.json')
+          u1_path = Path('reading/audit/arabic_a1_u01_metalinguistic_repair_2026-08-30.json')
+          u2_path = Path('reading/audit/arabic_a1_u02_metalinguistic_repair_2026-08-30.json')
+          gate_path = Path('reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json')
+          release_path = Path('reading/RELEASE_STATUS.json')
+          tasks_path = Path('reading/VERIFICATION_TASKS.md')
+
+          batch = json.loads(batch_path.read_text(encoding='utf-8'))
+          u1 = json.loads(u1_path.read_text(encoding='utf-8'))
+          u2 = json.loads(u2_path.read_text(encoding='utf-8'))
+          gate = json.loads(gate_path.read_text(encoding='utf-8'))
+
+          total_repairs = u1['questions_repaired'] + u2['questions_repaired'] + batch['repairs_applied']
+          if total_repairs != 63:
+              raise SystemExit(f'Expected 63 total A1 formal-label repairs, got {total_repairs}')
+          if batch['repairs_applied'] != 48 or batch['formal_question_types_after_full_a1'] != 0:
+              raise SystemExit('A1 Units 3-10 closure conditions not met')
+          if not batch['units_1_2_byte_identical'] or not batch['untargeted_records_byte_identical']:
+              raise SystemExit('Batch exceeded bounded record scope')
+          if gate['structural_errors']:
+              raise SystemExit(f"Arabic structural errors after A1 batch: {gate['structural_errors']}")
+          if gate['finding_classes'].get('unicode_not_nfc', 0) != 0:
+              raise SystemExit('Unicode NFC finding reappeared after A1 batch')
+          if gate['open_findings'] != 2496:
+              raise SystemExit(f"Unexpected deterministic evidence count after A1 batch: {gate['open_findings']}")
+
+          release = json.loads(release_path.read_text(encoding='utf-8'))
+          ar = release['languages']['arabic']
+          ar['release_state'] = 'REOPEN_REQUIRED'
+          ar['educator_release_ready'] = False
+          ar['latest_deterministic_gate'] = {
+              'status': gate['status'], 'records': gate['records'], 'questions': gate['questions'],
+              'answers': gate['answers'], 'open_findings': gate['open_findings'],
+              'finding_classes': gate['finding_classes'],
+              'artifact': 'reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json',
+              'date': gate['date'],
+          }
+          evidence = ar.get('latest_release_evidence', [])
+          if isinstance(evidence, str): evidence = [evidence]
+          artifact = 'reading/audit/arabic_a1_u03_u10_metalinguistic_repair_2026-08-30.json'
+          if artifact not in evidence: evidence.append(artifact)
+          ar['latest_release_evidence'] = evidence
+          ar['metalinguistic_review_progress'] = {
+              'status': 'A1_FORMAL_TYPE_CLASS_CLOSED_CONTINUING',
+              'a1_formal_type_scan_questions_checked': 600,
+              'a1_formal_label_questions_repaired_total': 63,
+              'a1_formal_question_types_remaining': 0,
+              'completed_subbatches': ['A1 Unit 1', 'A1 Unit 2', 'A1 Units 3-10'],
+              'remaining_scope': 'Fresh A1 explicit prompt-pattern/CEFR review, all A2 low-level metalinguistic/CEFR review, and higher-level CEFR review as applicable',
+              'latest_artifact': artifact,
+          }
+          blockers = [b for b in release.get('global_release_blockers', []) if not b.startswith('Arabic ')]
+          blockers.insert(0, 'Arabic fresh deterministic release revalidation remains FAIL with 2496 open release-evidence findings; NFC defects and the known A1 formal-question-type class are closed (63 items repaired, 0 formal types across 600 A1 questions), but A1 prompt-pattern/CEFR checks, A2+, naturalness, semantic, and independent review remain open.')
+          release['global_release_blockers'] = blockers
+          release['updated'] = '2026-08-30'
+          release_path.write_text(json.dumps(release, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          text = tasks_path.read_text(encoding='utf-8')
+          parent = '- [ ] corpus-wide low-level metalinguistic/CEFR question audit and repair;\n'
+          child = '- [x] Arabic A1 Units 3-10 batch: re-adjudicated and repaired the remaining 48 formal-label items; combined A1 total is 63 repairs and 0 formal question types across 600 questions;\n'
+          if child not in text:
+              text = text.replace(parent, parent + child, 1)
+          evidence_line = 'A1 Units 3–10 batch evidence: `reading/audit/arabic_a1_u03_u10_metalinguistic_repair_2026-08-30.json` — 48 current-corpus repairs; combined with Units 1–2, all 63 known A1 formal-type candidates are repaired and no formal metalinguistic question type remains across the 600 A1 questions. This does not close CEFR, naturalness, or independent educator review.\n\n'
+          anchor = 'Open verification work:\n\n'
+          if evidence_line not in text:
+              pos = text.find(anchor, text.find('## Arabic'))
+              if pos < 0: raise SystemExit('Arabic verification-work anchor not found')
+              pos += len(anchor)
+              text = text[:pos] + evidence_line + text[pos:]
+          tasks_path.write_text(text, encoding='utf-8')
+          PY
+      - name: Refresh state manifest and validate final bounded state
+        run: |
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+      - name: Commit A1 Units 3-10 repair and evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/arabic/a1/passages.jsonl \
+                  reading/audit/arabic_a1_u03_u10_metalinguistic_repair_2026-08-30.json \
+                  reading/audit/post_generation_gate0_2026-08-30.json \
+                  reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json \
+                  reading/RELEASE_STATUS.json \
+                  reading/VERIFICATION_TASKS.md \
+                  reading/STATE_MANIFEST.json
+          git diff --cached --quiet && { echo 'No A1 Units 3-10 changes required.'; exit 0; }
+          git commit -m 'Close Arabic A1 formal metalinguistic question class'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
