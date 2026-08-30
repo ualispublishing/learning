@@ -124,6 +124,23 @@ It independently recomputes current master-workbook Git blob hashes, reads curre
 
 The command exits non-zero until Arabic, French, and Urdu all have valid latest PASS records. Its logic is exercised by a CI-only synthetic self-test in [`.github/workflows/language-workbook-final-human-promotion-selftest.yml`](../../../.github/workflows/language-workbook-final-human-promotion-selftest.yml); synthetic fixtures exist only inside the runner workspace and are never human certification records.
 
+## Exact-commit release snapshot after human PASS
+
+After the three-language human gate passes, build the final content-addressed release evidence with:
+
+```bash
+python scripts/build_lang_wb_final_release_snapshot.py \
+  --output audit/language-workbooks/v1.0/FINAL_RELEASE_SNAPSHOT.json
+```
+
+The equivalent manual workflow is [`.github/workflows/language-workbook-final-release-snapshot.yml`](../../../.github/workflows/language-workbook-final-release-snapshot.yml).
+
+This final step reruns the established production-candidate release audit and human-promotion gate, verifies that source-locked integrity and rendered-output visual evidence still apply, requires clean tracked release/sign-off inputs, and records the exact repository commit together with the release-tree, master-workbook, manifest, evidence, and sign-off hashes.
+
+Because the repository's moving `main` branch is currently unprotected, the release must be identified by the **exact commit recorded in the successful snapshot**. A successful snapshot is not a claim that later `main` commits inherit release eligibility. Learner-facing PDF/CSV/manifest or source-locked curation drift fail-closes the snapshot; documentation-only drift does not falsely invalidate learner-facing evidence.
+
+The snapshot logic has a dedicated synthetic CI self-test at [`.github/workflows/language-workbook-final-release-snapshot-selftest.yml`](../../../.github/workflows/language-workbook-final-release-snapshot-selftest.yml). Live workflow run `33317311123` passed the success path and fail-closed tests for learner CSV drift and a missing language PASS. These synthetic fixtures are ephemeral test data only and do not satisfy any human-review requirement.
+
 ## Promotion rule
 
 LANG-WB v1.0 may be promoted beyond `production_candidate` only when:
@@ -133,5 +150,6 @@ LANG-WB v1.0 may be promoted beyond `production_candidate` only when:
 - Urdu has a completed PASS sign-off;
 - all three sign-offs bind to the current candidate artifacts/decision hashes;
 - no known learner-facing defect or unresolved hold remains;
-- `python scripts/workbook_final_human_promotion_gate.py` returns PASS; and
-- post-sign-off release/integrity checks still pass.
+- `python scripts/workbook_final_human_promotion_gate.py` returns PASS;
+- post-sign-off release/integrity checks still pass; and
+- `python scripts/build_lang_wb_final_release_snapshot.py` succeeds, binding the final release evidence to the exact commit being released.
