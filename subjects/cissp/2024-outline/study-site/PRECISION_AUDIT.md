@@ -1,59 +1,43 @@
-# CISSP Atlas Precision Audit — v1.25 Verified Release
+# CISSP Atlas Precision Audit — v1.26 Release Candidate
 
 ## Result
 
-**Published-scope mapping: PASS. Batch 027 semantic/originality validation: PASS within the documented audit boundary. v1.25 release validation, exact-main validation, and public runtime verification: PASS.**
+**Published-scope mapping: PASS. Batch 028 semantic/originality validation and candidate/bookkeeping closure: PASS within the documented audit boundary. v1.26 exact release-head, post-merge, and public runtime verification remain required before public verification is claimed.**
 
-CISSP Atlas **v1.25.0 is the verified public release**.
-
-## v1.25.0 released scope
+## v1.26.0 release-candidate scope
 
 - 8/8 domains; official weights total 100%.
 - 62/62 numbered public objectives.
-- 344 paraphrased public-outline subtopic checks; **304/344** explicitly exposed by enriched-subtopic practice metadata.
+- 344 paraphrased public-outline subtopic checks; **305/344** explicitly exposed by enriched-subtopic practice metadata.
 - 33 AI-security coverage areas and 140 layered retrieval cards.
-- **495 released standard scenario questions**.
+- **511 released standard scenario questions** in the promotion manifest.
 - **1 released Bellringer**, explicitly non-exam-representative.
-- **496 total released question-bank records**.
-- 495/495 standard questions have four-option teaching rationales.
+- **512 total released question-bank records** in the promotion manifest.
+- 511/511 standard questions have four-option teaching rationales.
 - 20 primary/reference sources.
-- **636 learner-facing item IDs** in the combined semantic ledgers.
-- Released author-difficulty distribution: **F41 / E345 / S109 / B1**.
+- **652 learner-facing item IDs** in the combined semantic ledgers.
+- Author-difficulty distribution: **F41 / E357 / S113 / B1**.
 
-## Batch 027 validation closure
+## Batch 028 validation closure
 
-Batch 027 contributes 16 original standard questions, E12/S4, balanced answer positions 4/4/4/4, and primary-domain distribution D1=5, D2=3, D3=2, D4=1, D5=1, D6=1, D8=3. The review records 0 answer-key conflicts, 0 remaining source/objective mapping conflicts, 0 known material factual errors remaining, and 0 external question seeds. C-437's earlier FIPS 197 provenance mapping was removed before the authoritative candidate head; its answer, scenario, and rationale were unchanged.
+Batch 028 contributes 16 original standard questions, E12/S4, balanced answer positions 4/4/4/4, and primary-domain distribution D1=5, D2=2, D3=3, D4=2, D5=1, D7=2, D8=1. The review records 0 answer-key conflicts, 0 remaining source/objective mapping conflicts, 0 known material factual errors remaining, and 0 external question seeds.
 
-Candidate and bookkeeping evidence:
-- Candidate PR #107 exact head `efae9fb1ebfb13092b9c590696cdc8ed1b3f3022`; audit **33274571412: PASS**.
-- Candidate merge `57faaf1edd9cb4ed7aba89722511f2e99be38c29`; exact-main audit **33274739859: PASS**; Pages isolation **33274739801: PASS**.
-- Candidate-bookkeeping PR #109 exact head `60444b65cb8ded6734e41022133b6a6f18ebed52`; audit **33279472975: PASS**.
-- Candidate-bookkeeping merge `61ec99d94bbbd592be1b391db41b88be6b5e91d1`; exact-main audit **33279600905: PASS**; Pages isolation **33279600874: PASS**.
+Evidence chain:
+- Candidate PR #112 exact head `b9a80d6f5f8bf719af2077c2d86e043f2c204dd6`; audit **33318893120: PASS**.
+- Candidate merge `5c7d5bddb8c3cf8eee7ac11086e6309a7b46ad7f`; exact-main audit **33319185923: PASS**; Pages isolation **33319185936: PASS**.
+- Candidate-bookkeeping PR #113 exact head `130dc27ea6d43f229a03efc52ec1f76f27492c2b`; audit **33320094928: PASS**.
+- Candidate-bookkeeping merge `3bdd70a3147a786ee9c6fa286c8bbb019e138e9f`; exact-main audit **33320319376: PASS**; Pages isolation **33320319374: PASS**.
 
-## v1.25 public-release verification
-
-The complete release chain passed:
-- Release PR **#110** final head `ad78f2b7bf88c18cd0056189cdf231a29d2d42e1`.
-- Exact release-PR CISSP audit **33279991285: PASS**, including deterministic knowledge, originality/duplicate, logical mix, planner, JavaScript syntax, legacy rationales, static assets, interactive browser smoke, and aggregate enforcement.
-- Release merge `875a55d49800ab9485db3edadc4f08ba57e3a662`.
-- Exact post-merge main CISSP audit **33280157209: PASS**.
-- GitHub Pages/public runtime workflow **33280157196: PASS**.
-- Verified public fingerprint: **v1.25.0 / 495 standard / 440 manifest released records / 1 Bellringer / released_only=true**.
-
-The Pages workflow independently audited the released corpus, validated browser runtime, assembled only manifest-released question files, deployed the exact release merge SHA, and verified the live runtime fingerprint.
+The bookkeeping Pages run verified that public production remained **v1.25.0 / 495 standard / 440 manifest released / 1 Bellringer / released_only=true** before promotion.
 
 ## Semantic audit
 
-The base semantic ledger contains 300 items; the release-additions ledger contains 336, for **636 learner-facing item IDs**. Batch 027's 16 additions are `VERIFIED`. The release records 0 keyed-answer reversals and 0 known material factual errors remaining after review within the documented boundary. Historical correction/source-scope statuses from earlier releases remain preserved.
+The base semantic ledger contains 300 items; the release-additions ledger contains 352 after Batch 028 promotion, for **652 learner-facing item IDs**. Batch 028's 16 additions are `VERIFIED`. The release candidate records zero keyed-answer reversals and zero known material factual errors remaining after review within the documented boundary.
 
 ## Next expansion state
 
-There is no unreleased candidate batch. Batch 028 is now unblocked and should use released-only planner basis **33280157209**. The current E12/S4 slate is:
-
-`4.1, 2.6, 1.3, 2.5, 1.4, 1.5, 1.8, 8.3, 1.1, 3.6, 3.8, 3.9, 4.3, 5.6, 7.11, 7.12`
-
-The 800-record target leaves **F79 / E135 / S51 / B39**, or **304 records total**.
+After v1.26 verification, the 800-record target leaves **F79 / E123 / S47 / B39**, or **288 records total**. Batch 029 is provisionally E12/S4 across `4.1, 1.4, 7.13, 2.5, 7.14, 7.15, 7.3, 8.3, 7.4, 3.1, 3.6, 1.10, 6.1, 6.4, 2.3, 1.11`.
 
 ## Accuracy boundary
 
-The strongest warranted claim for the v1.25 documented audit boundary is: **No known material factual errors or incorrect keyed answers are recorded as remaining; 636 learner-facing item IDs have explicit semantic audit status, and the release records zero known keyed-answer reversals.** This is not an absolute infallibility guarantee and does not guarantee passing the live adaptive CISSP exam.
+The strongest warranted claim for the v1.26 documented audit boundary is: **No known material factual errors or incorrect keyed answers are recorded as remaining; 652 learner-facing item IDs have explicit semantic audit status, and the release candidate records zero known keyed-answer reversals.** This is not an absolute infallibility guarantee and does not guarantee passing the live adaptive CISSP exam.
