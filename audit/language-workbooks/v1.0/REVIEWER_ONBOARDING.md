@@ -84,7 +84,9 @@ A reviewer is not required to implement the source repair personally.
 
 ## 7. Record your immutable sign-off
 
-When your review outcome is ready, copy [`FINAL_NATIVE_SIGNOFF_TEMPLATE.json`](FINAL_NATIVE_SIGNOFF_TEMPLATE.json) to a **new** file under [`native-signoffs/`](native-signoffs/), following the filename convention documented there.
+When your review outcome is ready, copy [`FINAL_NATIVE_SIGNOFF_TEMPLATE.json`](FINAL_NATIVE_SIGNOFF_TEMPLATE.json) to a **new** file under [`native-signoffs/`](native-signoffs/).
+
+The filename must begin with the language declared inside the JSON: `arabic_`, `french_`, or `urdu_`. The required convention is documented in [`native-signoffs/README.md`](native-signoffs/README.md), and CI rejects a filename/language mismatch.
 
 Use current candidate identifiers from the generated:
 
@@ -102,11 +104,21 @@ For PASS:
 
 FAIL/HOLD records are also useful review evidence and are retained rather than erased after later remediation.
 
+Once a sign-off record is committed, it is immutable. CI rejects later modification, rename, or deletion; a later review result must be stored as a new record.
+
 ## 8. Submit the sign-off without changing the candidate
 
-Prefer a focused pull request that adds the new immutable sign-off record and, when useful, reviewer-authored remediation evidence. Avoid changing the workbook candidate in that same PR.
+Prefer a focused pull request that **adds** the new immutable sign-off record and, when useful, reviewer-authored remediation evidence. Avoid changing the workbook candidate in that same PR.
 
-CI validates each newly submitted sign-off record independently. A valid Arabic sign-off does **not** fail merely because French and Urdu are still pending. The overall release remains on HOLD until all three languages have valid latest PASS records bound to the same current candidate.
+Use [`.github/PULL_REQUEST_TEMPLATE/lang-wb-native-signoff.md`](../../../.github/PULL_REQUEST_TEMPLATE/lang-wb-native-signoff.md) as the submission checklist.
+
+CI validates added sign-off records on pull requests before merge and again on pushes. A valid Arabic sign-off does **not** fail merely because French and Urdu are still pending. The overall release remains on HOLD until all three languages have valid latest PASS records bound to the same current candidate.
+
+You can validate your individual record locally with:
+
+```bash
+python scripts/validate_lang_wb_native_signoff.py audit/language-workbooks/v1.0/native-signoffs/<file>.json
+```
 
 The final all-language check is:
 
