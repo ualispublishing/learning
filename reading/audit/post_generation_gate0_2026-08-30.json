@@ -8,7 +8,7 @@
   "continuation_validator": {
     "command": "python reading/tools/validate_continuation_state.py",
     "returncode": 0,
-    "output": "LANG-A1C2 continuation validation: PASS\nstate bundle: 10 files, 47377 bytes, sha256 fdc341646edb607ee7b1a5fcd624e776a162e88d9671c17b3f999977aa304d8b\ncanonical passages: 1080 (Arabic 360, French 360, Urdu 360)\nactive frontier: None None\nrelease evidence is decoupled from live production counts\nUrdu A1 pinned integrity baseline: exact blob match; 0 hard errors; 0 warnings; quality_promotion=false"
+    "output": "LANG-A1C2 continuation validation: PASS\nstate bundle: 10 files, 48896 bytes, sha256 013bf3a444a58c701aab17160f808109efd82720694305be40d21a44bab6e08d\ncanonical passages: 1080 (Arabic 360, French 360, Urdu 360)\nactive frontier: None None\nrelease evidence is decoupled from live production counts\nUrdu A1 pinned integrity baseline: exact blob match; 0 hard errors; 0 warnings; quality_promotion=false"
   },
   "canonical_totals": {
     "project": 1080,
@@ -38,24 +38,24 @@
       "questions": 600,
       "answers": 600,
       "bytes": 480606,
-      "sha256": "f27ad06c372d316ca70346e19a10a72645577897de8db676e317d869d8945e1c",
-      "git_blob": "e4d5470d100e22f58e75cc2386860be8960f14f0"
+      "sha256": "f495f15291380487411724471db0efdaeb3ecf333f4c57e3c278a7bb14a11c59",
+      "git_blob": "d7962f440d5f8c5830848ca4c11f18e5ed14c926"
     },
     "reading/arabic/b1/passages.jsonl": {
       "passages": 60,
       "questions": 600,
       "answers": 600,
       "bytes": 583526,
-      "sha256": "c2968274d92dfdb4c0c35812d89a501aea751de54af6f725d6ac1f39e008600b",
-      "git_blob": "53f114cd16a15f5da144b5a86a240ab131271ec1"
+      "sha256": "8f0fdaac2cf8f6941008b32971f328e45ff670bf790e1091e3dab9d773ab9ddc",
+      "git_blob": "a5cfc10ceb8d31c08af376dd0875c868b863fa02"
     },
     "reading/arabic/b2/passages.jsonl": {
       "passages": 60,
       "questions": 600,
       "answers": 600,
       "bytes": 674213,
-      "sha256": "230d5a5b871795c6f46a584e8c54b0dca841f7126ff09b7d2d5194e105662762",
-      "git_blob": "a9486b2c38dc53661143e734c9797cd26fa1f742"
+      "sha256": "5e387ff7eb730358c48fe2329b826d8effc5698079487e71f0f8f064e13b4907",
+      "git_blob": "b3aeaaaf788af3ef0391889bc658ebc0548f10da"
     },
     "reading/arabic/c1/passages.jsonl": {
       "passages": 60,
@@ -70,8 +70,8 @@
       "questions": 600,
       "answers": 600,
       "bytes": 960203,
-      "sha256": "82c0ecec8824bda6c5c6d351571086d91a20b3640ba50c9f5e7825b468bf4909",
-      "git_blob": "eb4105692d37c2dc38dc5241cee0edcabcf64585"
+      "sha256": "5894ce7e657297a8bfbf469850645a3742a69a2987fd3aa0c083d0c148b64b5a",
+      "git_blob": "a66338e882b82fc3cb38a717eb00b80460d36592"
     },
     "reading/french/a1/passages.jsonl": {
       "passages": 60,
@@ -177,7 +177,7 @@
   },
   "release_state_snapshot": {
     "arabic": {
-      "release_state": "INTERNAL_LANGUAGE_PASS",
+      "release_state": "REOPEN_REQUIRED",
       "educator_release_ready": false
     },
     "french": {
