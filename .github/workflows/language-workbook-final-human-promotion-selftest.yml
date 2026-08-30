@@ -102,6 +102,24 @@ jobs:
               "audit/language-workbooks/v1.0/native-signoffs/${lang}_synthetic_base_pass.json"
           done
 
+      - name: Confirm wrong filename prefix cannot produce a discoverable-looking valid sign-off
+        shell: bash
+        run: |
+          cp audit/language-workbooks/v1.0/native-signoffs/arabic_synthetic_base_pass.json \
+             audit/language-workbooks/v1.0/native-signoffs/review_without_language_prefix.json
+          set +e
+          output=$(python scripts/validate_lang_wb_native_signoff.py \
+            audit/language-workbooks/v1.0/native-signoffs/review_without_language_prefix.json)
+          code=$?
+          set -e
+          if [ "$code" -ne 1 ]; then
+            echo "wrong-prefix validator exit=$code; expected 1"
+            echo "$output"
+            exit 1
+          fi
+          echo "$output" | grep -q 'filename_language_prefix'
+          rm audit/language-workbooks/v1.0/native-signoffs/review_without_language_prefix.json
+
       - name: Confirm three valid current-candidate PASS records pass
         run: python scripts/workbook_final_human_promotion_gate.py
 
