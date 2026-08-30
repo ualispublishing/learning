@@ -111,13 +111,13 @@ def main() -> int:
         "expected_distribution": {k.upper(): v for k, v in EXPECTED_AFFECTED.items()},
         "changed_records": changed_records,
         "files": file_results,
-        "semantic_change": false,
+        "semantic_change": False,
         "repair_scope": "Unicode NFC composition only; JSON serialization/order/content otherwise preserved.",
         "required_reruns": [
             "post-generation Gate 0 hashes/state integrity",
             "fresh Arabic deterministic release revalidation",
         ],
-        "release_claim": false,
+        "release_claim": False,
     }
     OUTPUT_AUDIT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False, indent=2))
