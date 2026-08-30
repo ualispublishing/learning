@@ -36,6 +36,7 @@ REQUIRED_SCOPE_FIELDS = (
     "pedagogical_and_progression_appropriateness_reviewed",
     "script_punctuation_or_diacritic_hygiene_reviewed",
 )
+ALLOWED_REVIEW_OUTCOMES = ("PASS", "FAIL", "HOLD")
 MAX_FUTURE_CLOCK_SKEW = timedelta(minutes=10)
 
 
@@ -100,6 +101,83 @@ def binding_problems(
     return problems
 
 
+def validate_signoff_record(
+    record: dict[str, Any],
+    *,
+    lang: str,
+    expected_master_path: str,
+    expected_master_blob: str,
+    expected_decision_sha: str,
+    expected_manifest_blob: str,
+    candidate_generated_at: datetime | None = None,
+    now_utc: datetime | None = None,
+) -> list[str]:
+    """Validate one current-candidate human record for its declared outcome."""
+    problems = binding_problems(
+        record,
+        lang=lang,
+        expected_master_path=expected_master_path,
+        expected_master_blob=expected_master_blob,
+        expected_decision_sha=expected_decision_sha,
+        expected_manifest_blob=expected_manifest_blob,
+    )
+
+    outcome = record.get("review_outcome")
+    if outcome not in ALLOWED_REVIEW_OUTCOMES:
+        problems.append("review_outcome")
+
+    try:
+        reviewed_at = parse_review_time(record.get("review_completed_utc"))
+        if candidate_generated_at is not None and reviewed_at < candidate_generated_at:
+            problems.append("review_before_candidate_generated")
+        if now_utc is not None and reviewed_at > now_utc + MAX_FUTURE_CLOCK_SKEW:
+            problems.append("review_timestamp_in_future")
+    except ValueError as exc:
+        problems.append(f"review_completed_utc:{exc}")
+
+    if not reviewer_complete(record):
+        problems.append("reviewer_qualification")
+
+    scope = record.get("scope_attestation")
+    if not isinstance(scope, dict):
+        problems.append("scope_attestation")
+        scope = {}
+    for field in REQUIRED_SCOPE_FIELDS:
+        if field not in scope or not isinstance(scope.get(field), bool):
+            problems.append(f"scope:{field}:missing_or_not_boolean")
+
+    defects = record.get("defects")
+    holds = record.get("holds")
+    if not isinstance(defects, list):
+        problems.append("defects_not_list")
+        defects = []
+    if not isinstance(holds, list):
+        problems.append("holds_not_list")
+        holds = []
+
+    if not str(record.get("attestation", "")).strip():
+        problems.append("attestation")
+
+    if outcome == "PASS":
+        for field in REQUIRED_SCOPE_FIELDS:
+            if scope.get(field) is not True:
+                problems.append(f"scope:{field}:PASS_requires_true")
+        if defects:
+            problems.append("PASS_defects_not_empty")
+        if holds:
+            problems.append("PASS_holds_not_empty")
+        if not str(record.get("pass_condition_acknowledged", "")).strip():
+            problems.append("pass_condition_acknowledged")
+    elif outcome == "FAIL":
+        if not defects:
+            problems.append("FAIL_requires_defects")
+    elif outcome == "HOLD":
+        if not holds:
+            problems.append("HOLD_requires_holds")
+
+    return problems
+
+
 def validate_pass_signoff(
     record: dict[str, Any],
     *,
@@ -109,7 +187,8 @@ def validate_pass_signoff(
     expected_decision_sha: str,
     expected_manifest_blob: str,
 ) -> list[str]:
-    problems = binding_problems(
+    """Backward-compatible PASS-specific wrapper used by external checks/tests."""
+    problems = validate_signoff_record(
         record,
         lang=lang,
         expected_master_path=expected_master_path,
@@ -117,28 +196,8 @@ def validate_pass_signoff(
         expected_decision_sha=expected_decision_sha,
         expected_manifest_blob=expected_manifest_blob,
     )
-    if record.get("review_outcome") != "PASS":
+    if record.get("review_outcome") != "PASS" and "review_outcome" not in problems:
         problems.append("review_outcome")
-    try:
-        parse_review_time(record.get("review_completed_utc"))
-    except ValueError as exc:
-        problems.append(f"review_completed_utc:{exc}")
-    if not reviewer_complete(record):
-        problems.append("reviewer_qualification")
-
-    scope = record.get("scope_attestation") or {}
-    for field in REQUIRED_SCOPE_FIELDS:
-        if scope.get(field) is not True:
-            problems.append(f"scope:{field}")
-
-    if record.get("defects") not in ([], None):
-        problems.append("defects_not_empty")
-    if record.get("holds") not in ([], None):
-        problems.append("holds_not_empty")
-    if not str(record.get("attestation", "")).strip():
-        problems.append("attestation")
-    if not str(record.get("pass_condition_acknowledged", "")).strip():
-        problems.append("pass_condition_acknowledged")
     return problems
 
 
@@ -169,7 +228,7 @@ def main() -> None:
         "release_manifest_git_blob_sha": manifest_blob,
         "languages": {},
         "problems": [],
-        "note": "PASS means all three independent full-content human sign-offs bind to the current production candidate. The latest unambiguous review for a current candidate controls; an older PASS cannot override a newer FAIL or HOLD.",
+        "note": "PASS means all three independent full-content human sign-offs bind to the current production candidate. The latest unambiguous structurally valid review for a current candidate controls; an older PASS cannot override a newer valid FAIL or HOLD.",
     }
 
     if manifest.get("status") != "production_candidate":
@@ -223,29 +282,32 @@ def main() -> None:
                 expected_manifest_blob=manifest_blob,
             )
             entry: dict[str, Any] = {"path": rel, "binding_problems": bind_problems}
-            if not bind_problems:
-                entry["current_candidate"] = True
-                try:
-                    reviewed_at = parse_review_time(record.get("review_completed_utc"))
-                    entry["review_completed_utc"] = record.get("review_completed_utc")
-                    entry["review_outcome"] = record.get("review_outcome")
-                    temporal_problems: list[str] = []
-                    if reviewed_at < candidate_generated_at:
-                        temporal_problems.append("review_before_candidate_generated")
-                    if reviewed_at > now_utc + MAX_FUTURE_CLOCK_SKEW:
-                        temporal_problems.append("review_timestamp_in_future")
-                    if temporal_problems:
-                        entry["problems"] = temporal_problems
-                        lang_result["problems"].append(
-                            f"invalid_current_candidate_timestamp:{rel}:" + ",".join(temporal_problems)
-                        )
-                    else:
-                        current_records.append((reviewed_at, path, record))
-                except ValueError as exc:
-                    entry["problems"] = [f"review_completed_utc:{exc}"]
-                    lang_result["problems"].append(f"ambiguous_current_candidate_timestamp:{rel}")
-            else:
+            if bind_problems:
                 entry["current_candidate"] = False
+                lang_result["checked_signoffs"].append(entry)
+                continue
+
+            entry["current_candidate"] = True
+            entry["review_completed_utc"] = record.get("review_completed_utc")
+            entry["review_outcome"] = record.get("review_outcome")
+            record_problems = validate_signoff_record(
+                record,
+                lang=lang,
+                expected_master_path=master_rel,
+                expected_master_blob=master_blob,
+                expected_decision_sha=expected_decision,
+                expected_manifest_blob=manifest_blob,
+                candidate_generated_at=candidate_generated_at,
+                now_utc=now_utc,
+            )
+            if record_problems:
+                entry["problems"] = record_problems
+                lang_result["problems"].append(
+                    f"invalid_current_candidate_signoff:{rel}:" + ",".join(record_problems)
+                )
+            else:
+                reviewed_at = parse_review_time(record.get("review_completed_utc"))
+                current_records.append((reviewed_at, path, record))
             lang_result["checked_signoffs"].append(entry)
 
         if malformed_files:
@@ -264,24 +326,17 @@ def main() -> None:
             else:
                 _, latest_path, latest_record = latest_records[0]
                 latest_rel = str(latest_path.relative_to(ROOT))
-                latest_problems = validate_pass_signoff(
-                    latest_record,
-                    lang=lang,
-                    expected_master_path=master_rel,
-                    expected_master_blob=master_blob,
-                    expected_decision_sha=expected_decision,
-                    expected_manifest_blob=manifest_blob,
-                )
+                outcome = latest_record.get("review_outcome")
                 lang_result["latest_current_candidate_signoff"] = {
                     "path": latest_rel,
                     "review_completed_utc": latest_record.get("review_completed_utc"),
-                    "review_outcome": latest_record.get("review_outcome"),
-                    "problems": latest_problems,
+                    "review_outcome": outcome,
+                    "problems": [],
                 }
-                if not latest_problems and not lang_result["problems"]:
+                if outcome == "PASS" and not lang_result["problems"]:
                     lang_result["gate"] = "PASS"
                 else:
-                    lang_result["problems"].append("latest_current_candidate_signoff_not_PASS")
+                    lang_result["problems"].append(f"latest_current_candidate_outcome:{outcome}")
         else:
             lang_result["problems"].append("no_current_candidate_signoff")
 
