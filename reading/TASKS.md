@@ -1,6 +1,6 @@
 # LANG-A1C2 Active Tasks
 
-Updated: 2026-08-29
+Updated: 2026-08-30
 
 This file is an **active queue only**. Completed timelines belong in Git history and `reading/audit/`. Current truth starts with `PROJECT_TRACKS.json`, `reading/CONTINUATION.json`, and live canonical data.
 
@@ -12,24 +12,16 @@ This file is an **active queue only**. Completed timelines belong in Git history
 - [ ] If canonical counts or the pinned Urdu A1 blob differ from continuation/status state, reconcile before writing new passages.
 - [ ] Keep production state and educator-release state separate; never infer release readiness from generation-complete or historical approval labels.
 
-## P1 — active production: Urdu C2
+## P1 — canonical generation complete
 
-Canonical production frontier: **Urdu C2, Unit 10, sequence 55**.
+There is **no active production frontier**. Arabic, French, and Urdu A1-C2 canonical generation is complete at **1080/1080**.
 
-- [ ] Read `reading/planning/ACTIVE_GENERATION_PLAN.json` and the exact C2 entry in `reading/planning/topic_genre_matrix.json`.
-- [ ] Generate Urdu C2 in guarded unit or large bounded batches under the generation-first policy.
-- [ ] Preserve 6 passages per unit and the active 10-question/10-answer contract unless a documented pedagogical exception is necessary.
-- [ ] Write independent natural contemporary Urdu; do not translate Arabic/French passage-by-passage.
-- [ ] Independently learner-check every deliberately taught lexical sense before assessing that sense in a question.
-- [ ] Fix obvious severe defects immediately, but do not interrupt ordinary generation with repeated whole-corpus release audits.
-- [ ] After each canonical batch, update the live production state files in the same work unit.
-
-Current production totals:
-
-- Arabic: 360/360 generated.
-- French: 360/360 generated.
-- Urdu: 354/360 generated; A1-C1 complete, C2 in progress.
-- Project: 1074/1080 generated.
+- [x] Arabic: 360/360 generated.
+- [x] French: 360/360 generated.
+- [x] Urdu: 360/360 generated; A1-C2 complete.
+- [x] Project: 1080/1080 generated.
+- [ ] Do not reopen canonical generation unless fresh evidence identifies a concrete defect requiring bounded repair.
+- [ ] Keep all educator/publication release claims under the independent release/verification workstreams below.
 
 ## P1 — release/verification workstreams
 
@@ -83,6 +75,6 @@ A work session ends with:
 - affected checks run and recorded;
 - no hidden source/hash drift;
 - blockers separated into content vs tooling/evidence problems;
-- exactly one current production frontier;
-- exactly one explicit next production action;
+- no active production frontier after generation completion;
+- exactly one explicit next verification/release action;
 - no historical `IMMEDIATE NEXT` sections left in this file.

@@ -69,7 +69,7 @@
     "project_passages": 1080
   },
   "production": {
-    "canonical_passages": 1074,
+    "canonical_passages": 1080,
     "arabic": {
       "state": "GENERATION_COMPLETE",
       "canonical_passages": 360,
@@ -97,16 +97,17 @@
       "next_generation_level": null
     },
     "urdu": {
-      "state": "C2_GENERATION_IN_PROGRESS",
-      "canonical_passages": 354,
+      "state": "GENERATION_COMPLETE",
+      "canonical_passages": 360,
       "complete_levels": [
         "A1",
         "A2",
         "B1",
         "B2",
-        "C1"
+        "C1",
+        "C2"
       ],
-      "next_generation_level": "C2",
+      "next_generation_level": null,
       "a1_canonical_path": "reading/urdu/a1/passages.jsonl",
       "a1_git_blob": "ec0970dc1916ce523dd3320d2f4dca4c7f8bc677",
       "a1_integrity_evidence": "reading/audit/urdu_a1_final_integrity_2026-08-23.json",
@@ -138,9 +139,9 @@
   },
   "active_frontier": {
     "production": {
-      "language": "urdu",
-      "level": "C2",
-      "action": "Continue generation-first production from Urdu C2 Unit 10 / sequence 55 using the canonical roadmap and ten-question contract."
+      "language": null,
+      "level": null,
+      "action": "Canonical generation complete at 1080/1080 across Arabic, French, and Urdu A1-C2. Proceed only with separate verification/release workstreams unless fresh evidence identifies a concrete production defect."
     },
     "verification_parallel": [
       "Keep Arabic educator-release remediation open under RELEASE_STATUS.json.",
@@ -156,8 +157,8 @@
     "Never infer educator readiness from historical APPROVED, SEALED, PASS, or generation-complete wording."
   ],
   "exact_next_actions": [
-    "Validate the routed state bundle and live canonical counts.",
-    "Use reading/planning/ACTIVE_GENERATION_PLAN.json to start guarded Urdu C2 Unit 10 capstone generation at sequence 55.",
-    "Keep release/educator verification separate from generation progress."
+    "Validate the routed state bundle and exact 1080/1080 canonical counts.",
+    "Continue the independent Arabic, French, and Urdu educator-release workstreams under reading/RELEASE_STATUS.json and reading/VERIFICATION_TASKS.md.",
+    "Use reading/planning/FINAL_REVIEW_EXECUTION_PROTOCOL.md for final review; do not infer release readiness from generation completion."
   ]
 }

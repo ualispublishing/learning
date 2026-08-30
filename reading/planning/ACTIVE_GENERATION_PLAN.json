@@ -1,29 +1,21 @@
 {
   "schema_version": 3,
   "project_id": "LANG-A1C2",
-  "state_type": "ACTIVE_PRODUCTION_FRONTIER",
+  "state_type": "GENERATION_COMPLETE",
   "source_continuation": "reading/CONTINUATION.json",
   "source_status": "reading/STATUS.json",
   "source_matrix": "reading/planning/topic_genre_matrix.json",
   "generation_policy": "reading/planning/GENERATION_FIRST_FINAL_AUDIT_POLICY.md",
-  "active_language": "urdu",
-  "active_level": "C2",
-  "active_unit": 10,
-  "start_sequence": 55,
-  "canonical_active_path": "reading/urdu/c2/passages.jsonl",
-  "existing_active_level_passages": 54,
-  "roadmap_lookup": "$.levels.C2",
-  "active_unit_roadmap": {
-    "unit": 10,
-    "theme": "C2 capstone",
-    "genres": [
-      "multi-source-style synthesis",
-      "complex paired texts",
-      "final checkpoint"
-    ]
-  },
-  "generation_first": true,
-  "formal_release_audits_deferred_during_ordinary_generation": true,
+  "active_language": null,
+  "active_level": null,
+  "active_unit": null,
+  "start_sequence": null,
+  "canonical_active_path": null,
+  "existing_active_level_passages": 60,
+  "roadmap_lookup": null,
+  "active_unit_roadmap": null,
+  "generation_first": false,
+  "formal_release_audits_deferred_during_ordinary_generation": false,
   "previous_level_anchor": {
     "level": "A1",
     "canonical_path": "reading/urdu/a1/passages.jsonl",
@@ -34,20 +26,25 @@
     "quality_promotion": false
   },
   "guardrails": [
-    "STATUS.json and CONTINUATION.json must agree on language and level before this plan is written.",
-    "Live canonical JSONL counts must agree with cached per-language production totals.",
-    "All levels before the active level must contain exactly 60 canonical passages.",
-    "The active level must contain fewer than 60 passages; otherwise the frontier must advance first.",
-    "Use the exact active-unit theme/genres from topic_genre_matrix.json; do not invent or rename the roadmap.",
-    "Generate in guarded unit or large bounded batches rather than one workflow per passage.",
-    "Preserve 6 passages per unit and the active 10-question/10-answer contract unless a documented pedagogical exception applies.",
-    "Write natural independent target-language passages rather than translating another language's corpus.",
-    "Fix obvious severe defects immediately; defer repeated formal release audits to the designated review phase.",
-    "Generation/integrity state must never be interpreted as educator/publication release approval."
+    "STATUS.json, CONTINUATION.json, and this plan must agree that there is no active generation language or level.",
+    "Live canonical JSONL must total exactly 1080 passages: 360 Arabic, 360 French, and 360 Urdu.",
+    "Generation completion must never be interpreted as educator/publication release approval.",
+    "Do not reopen canonical production unless fresh evidence identifies a concrete defect requiring bounded repair.",
+    "Release and educator verification are controlled by RELEASE_STATUS.json, VERIFICATION_TASKS.md, and the final review protocol."
   ],
   "on_frontier_change": [
-    "Update reading/CONTINUATION.json, reading/STATUS.json, and reading/TASKS.md together.",
-    "Regenerate this derived plan from current state instead of hand-editing its frontier.",
-    "Refresh reading/STATE_MANIFEST.json last after tracked live-state files are stable."
-  ]
+    "There is no next generation frontier after the completed 1080/1080 corpus.",
+    "If a concrete defect later changes canonical production, reconcile CONTINUATION.json, STATUS.json, this plan, TASKS.md, AGENT_HANDOFF_V2.md, and STATE_MANIFEST.json in the same bounded repair."
+  ],
+  "generation_complete": true,
+  "completion_summary": {
+    "canonical_passages": 1080,
+    "arabic": 360,
+    "french": 360,
+    "urdu": 360,
+    "remaining_generation_passages": 0,
+    "completed_level": "Urdu C2",
+    "final_sequence": 60,
+    "release_claim": false
+  }
 }
