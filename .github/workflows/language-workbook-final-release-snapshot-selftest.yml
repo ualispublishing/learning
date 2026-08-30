@@ -1,0 +1,181 @@
+name: LANG-WB final release snapshot self-test
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/language-workbook-final-release-snapshot-selftest.yml'
+      - '.github/workflows/language-workbook-final-release-snapshot.yml'
+      - 'scripts/build_lang_wb_final_release_snapshot.py'
+      - 'scripts/workbook_final_human_promotion_gate.py'
+      - 'scripts/validate_lang_wb_native_signoff.py'
+      - 'scripts/workbook_release_passes_v6.py'
+      - 'audit/language-workbooks/v1.0/final_visual_audit_20260829.json'
+      - 'audit/language-workbooks/v1.0/production_decision_alignment.json'
+      - 'audit/language-workbooks/v1.0/final_integrity_review_summary.json'
+      - 'audit/language-workbooks/v1.0/qa_summary.json'
+      - 'audit/language-workbooks/v1.0/pronunciation_qa.json'
+      - 'completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json'
+      - 'completed/languages/workbooks/v1.0/**/*.pdf'
+      - 'completed/languages/workbooks/v1.0/**/*.csv'
+      - 'curation/language-workbooks/v1.0/**'
+
+permissions:
+  contents: read
+
+jobs:
+  final-release-snapshot-selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository with production history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Configure ephemeral Git author
+        run: |
+          git config user.name 'LANG-WB synthetic CI'
+          git config user.email 'lang-wb-synthetic-ci@example.invalid'
+
+      - name: Build and commit three synthetic current-candidate PASS records
+        shell: bash
+        run: |
+          set -euo pipefail
+          find audit/language-workbooks/v1.0/native-signoffs -maxdepth 1 -type f -name '*.json' -delete
+
+          for lang in arabic french urdu; do
+            python scripts/prepare_lang_wb_native_signoff_draft.py "$lang" \
+              --output "audit/language-workbooks/v1.0/native-signoffs/${lang}_synthetic_snapshot_ci.json"
+          done
+
+          python - <<'PY'
+          from datetime import datetime, timedelta, timezone
+          import json
+          from pathlib import Path
+          import sys
+
+          sys.path.insert(0, 'scripts')
+          import workbook_final_human_promotion_gate as g
+
+          completed = (datetime.now(timezone.utc) - timedelta(minutes=5)).isoformat().replace('+00:00', 'Z')
+          for lang in g.LANGUAGES:
+              path = g.SIGNOFF_DIR / f'{lang}_synthetic_snapshot_ci.json'
+              data = json.loads(path.read_text(encoding='utf-8'))
+              data['review_outcome'] = 'PASS'
+              data['review_completed_utc'] = completed
+              data['reviewer'] = {
+                  'name_or_identifier': 'synthetic-snapshot-ci',
+                  'native_or_near_native_status': 'synthetic test only',
+                  'qualification_basis': 'ephemeral CI fixture; not human certification',
+                  'relevant_editing_teaching_or_linguistic_experience': '',
+                  'conflict_of_interest_or_relationship_to_project': 'synthetic CI fixture',
+              }
+              data['scope_attestation'] = {field: True for field in g.REQUIRED_SCOPE_FIELDS}
+              data['defects'] = []
+              data['holds'] = []
+              data['attestation'] = 'Synthetic ephemeral CI fixture exercising final snapshot controls only.'
+              data['pass_condition_acknowledged'] = 'Synthetic ephemeral CI fixture only.'
+              path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+
+          git add audit/language-workbooks/v1.0/native-signoffs
+          git commit -m 'Synthetic LANG-WB snapshot sign-offs [ephemeral CI]'
+          echo "SYNTHETIC_PASS_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: Confirm synthetic records are individually valid
+        run: |
+          for lang in arabic french urdu; do
+            python scripts/validate_lang_wb_native_signoff.py \
+              "audit/language-workbooks/v1.0/native-signoffs/${lang}_synthetic_snapshot_ci.json"
+          done
+
+      - name: Confirm exact-commit snapshot succeeds with all gates PASS
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/build_lang_wb_final_release_snapshot.py \
+            --output "$RUNNER_TEMP/final-release-snapshot.json"
+          python - <<'PY'
+          import json, os, subprocess
+          path = os.path.join(os.environ['RUNNER_TEMP'], 'final-release-snapshot.json')
+          data = json.load(open(path, encoding='utf-8'))
+          head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+          assert data['schema'] == 'lang-wb-final-release-snapshot-v1'
+          assert data['snapshot_status'] == 'ELIGIBLE_FOR_RELEASE'
+          assert data['repository']['commit_sha'] == head
+          assert data['gates']['production_candidate_release_audit']['gate'] == 'PASS'
+          assert data['gates']['final_human_promotion']['gate'] == 'PASS'
+          assert data['gates']['final_visual_audit']['gate'] == 'PASS'
+          assert data['gates']['source_locked_integrity']['current_production_data_stability'] == 'PASS'
+          assert len(data['release_tree']['canonical_tree_sha256']) == 64
+          assert data['release_tree']['file_count'] >= 43
+          for lang in ('arabic', 'french', 'urdu'):
+              signoff = data['human_signoffs'][lang]
+              assert signoff['review_outcome'] == 'PASS'
+              assert signoff['path'].startswith(lang + '_') is False  # full path contains directory prefix
+              assert signoff['path'].split('/')[-1].startswith(lang + '_')
+              assert len(signoff['sha256']) == 64
+          PY
+
+      - name: Confirm README-only release documentation change does not stale audited learner outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '\n<!-- synthetic snapshot README-only CI change -->\n' >> completed/languages/workbooks/v1.0/README.md
+          git add completed/languages/workbooks/v1.0/README.md
+          git commit -m 'Synthetic LANG-WB README-only drift [ephemeral CI]'
+          python scripts/build_lang_wb_final_release_snapshot.py \
+            --output "$RUNNER_TEMP/readme-only-snapshot.json"
+          git reset --hard "$SYNTHETIC_PASS_COMMIT"
+
+      - name: Confirm learner CSV drift is rejected even if older QA reports still say PASS
+        shell: bash
+        run: |
+          set -euo pipefail
+          csv=$(git ls-files 'completed/languages/workbooks/v1.0/arabic/*.csv' | head -n 1)
+          test -n "$csv"
+          printf '\n' >> "$csv"
+          git add "$csv"
+          git commit -m 'Synthetic LANG-WB CSV drift [ephemeral CI]'
+          set +e
+          output=$(python scripts/build_lang_wb_final_release_snapshot.py)
+          code=$?
+          set -e
+          if [ "$code" -ne 1 ]; then
+            echo "$output"
+            echo 'CSV drift unexpectedly produced an eligible release snapshot.'
+            exit 1
+          fi
+          echo "$output" | grep -q 'integrity_evidence_stale: learner-facing release data changed'
+          git reset --hard "$SYNTHETIC_PASS_COMMIT"
+
+      - name: Confirm missing one language human PASS is rejected
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rm audit/language-workbooks/v1.0/native-signoffs/urdu_synthetic_snapshot_ci.json
+          git commit -m 'Synthetic LANG-WB missing Urdu sign-off [ephemeral CI]'
+          set +e
+          output=$(python scripts/build_lang_wb_final_release_snapshot.py)
+          code=$?
+          set -e
+          if [ "$code" -ne 1 ]; then
+            echo "$output"
+            echo 'Missing Urdu human PASS unexpectedly produced an eligible release snapshot.'
+            exit 1
+          fi
+          echo "$output" | grep -q 'final_human_promotion_gate_not_PASS'
+
+      - name: Confirm repository baseline contains no synthetic certification
+        shell: bash
+        run: |
+          if git ls-tree -r --name-only "$GITHUB_SHA" -- audit/language-workbooks/v1.0/native-signoffs \
+            | grep 'synthetic_snapshot_ci\.json'; then
+            echo 'Synthetic snapshot sign-off leaked into repository baseline.'
+            exit 1
+          fi
