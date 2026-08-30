@@ -12,12 +12,29 @@ A reviewer does not need to assemble the workbook, worksheet, candidate hashes, 
 
 GitHub Actions provides [`LANG-WB reviewer packages`](../../../.github/workflows/language-workbook-reviewer-package.yml). Run the workflow to generate separate Arabic, French, and Urdu artifacts. Each artifact contains a self-contained ZIP for one language with the complete master PDF, exact vocabulary/sentence companion CSVs, blank 2,000-item review ledger, current candidate binding, release manifest, intentionally incomplete sign-off draft, canonical sign-off template, review documents, PR checklist, bundle manifest, and SHA-256 checksums.
 
-The same package can be built locally with one command:
+A normal Git checkout can build the same package locally with one command:
 
 ```bash
 python scripts/build_lang_wb_reviewer_bundle.py arabic --output-root ~/Desktop
 # or: french / urdu
 ```
+
+### If the Actions artifact is not available to you
+
+GitHub's browser artifact download can require a signed-in account with repository read access. The language-specific review issue provides an **exact public source-archive URL and exact commit SHA** for the currently verified reviewer package.
+
+Download that exact archive, extract it, open the extracted repository directory, and run:
+
+```bash
+python scripts/build_lang_wb_reviewer_bundle.py arabic \
+  --repository-commit-sha <EXACT_COMMIT_FROM_THE_LANGUAGE_ISSUE> \
+  --output-root ~/Desktop
+# or: french / urdu
+```
+
+A GitHub source archive does not contain `.git` metadata. The bundle builder therefore **fails closed** when neither Git metadata nor an explicit exact commit is available. If `.git` is present and you also supply `--repository-commit-sha`, the explicit value must match the checkout's actual HEAD. This prevents an archive-built bundle from carrying a missing or misleading repository-commit binding.
+
+Do not use a moving `main` source archive as a substitute for the exact verified commit in the language issue. If the candidate or reviewer-package inputs change, use the newly verified commit/package instead.
 
 The generated draft contains **no human outcome, reviewer identity/qualification, or completed scope attestations**. It is deliberately invalid as a sign-off until a qualified reviewer completes the required review and fills the human-only fields truthfully.
 
