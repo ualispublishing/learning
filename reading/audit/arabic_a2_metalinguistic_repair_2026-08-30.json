@@ -1,0 +1,962 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A2",
+  "date": "2026-08-30",
+  "status": "APPLIED_AND_REVIEWED_INTERNAL",
+  "scope": "Bounded current-corpus reconciliation of the original 83-item A2 low-level metalinguistic inventory.",
+  "source_sha256": "f495f15291380487411724471db0efdaeb3ecf333f4c57e3c278a7bb14a11c59",
+  "result_sha256": "3d4538b4017b3284f59db1814145f9095950f3b4d3081e23c80fa44d7046acf4",
+  "original_inventory": {
+    "artifact": "reading/audit/arabic_a2_formal_inventory_2026-08-21.json",
+    "ref": "origin/audit/arabic-a2-formal-inventory-2026-08-21",
+    "candidates": 83
+  },
+  "historical_reference_ledgers": [
+    {
+      "unit": 1,
+      "ref": "origin/repair/arabic-a2-u01-metalinguistic-2026-08-21",
+      "artifact": "reading/audit/arabic_a2_u01_metalinguistic_repair_2026-08-21.json",
+      "inventory": 11,
+      "repairs": 10,
+      "false_positives": 1
+    },
+    {
+      "unit": 2,
+      "ref": "origin/repair/arabic-a2-u02-metalinguistic-2026-08-21",
+      "artifact": "reading/audit/arabic_a2_u02_metalinguistic_repair_2026-08-21.json",
+      "inventory": 11,
+      "repairs": 11,
+      "false_positives": 0
+    },
+    {
+      "unit": 3,
+      "ref": "origin/repair/arabic-a2-u03-metalinguistic-2026-08-21",
+      "artifact": "reading/audit/arabic_a2_u03_metalinguistic_repair_2026-08-21.json",
+      "inventory": 9,
+      "repairs": 9,
+      "false_positives": 0
+    },
+    {
+      "unit": 4,
+      "ref": "origin/repair/arabic-a2-u04-metalinguistic-2026-08-21",
+      "artifact": "reading/audit/arabic_a2_u04_metalinguistic_repair_2026-08-21.json",
+      "inventory": 9,
+      "repairs": 9,
+      "false_positives": 0
+    },
+    {
+      "unit": 5,
+      "ref": "origin/repair/arabic-a2-u05-metalinguistic-2026-08-21",
+      "artifact": "reading/audit/arabic_a2_u05_metalinguistic_repair_2026-08-21.json",
+      "inventory": 10,
+      "repairs": 10,
+      "false_positives": 0
+    },
+    {
+      "unit": 6,
+      "ref": "origin/repair/arabic-a2-u06-metalinguistic-2026-08-21",
+      "artifact": "reading/audit/arabic_a2_u06_metalinguistic_repair_2026-08-21.json",
+      "inventory": 8,
+      "repairs": 8,
+      "false_positives": 0
+    },
+    {
+      "unit": 7,
+      "ref": "origin/repair/arabic-a2-u07-metalinguistic-2026-08-21",
+      "artifact": "reading/audit/arabic_a2_u07_metalinguistic_repair_2026-08-21.json",
+      "inventory": 7,
+      "repairs": 7,
+      "false_positives": 0
+    },
+    {
+      "unit": 8,
+      "ref": "origin/repair/arabic-a2-u08-metalinguistic-2026-08-21",
+      "artifact": "reading/audit/arabic_a2_u08_metalinguistic_repair_2026-08-21.json",
+      "inventory": 8,
+      "repairs": 8,
+      "false_positives": 0
+    },
+    {
+      "unit": 9,
+      "ref": "origin/repair/arabic-a2-u09-metalinguistic-2026-08-22",
+      "artifact": "reading/audit/arabic_a2_u09_metalinguistic_repair_2026-08-22.json",
+      "inventory": 4,
+      "repairs": 3,
+      "false_positives": 1
+    },
+    {
+      "unit": 10,
+      "ref": "origin/repair/arabic-a2-u10-manifest-2026-08-22",
+      "artifact": "reading/audit/arabic_a2_u10_metalinguistic_repair_2026-08-22.json",
+      "inventory": 6,
+      "repairs": 5,
+      "false_positives": 1
+    }
+  ],
+  "inventory_accounting": {
+    "candidates": 83,
+    "confirmed_repairs": 80,
+    "adjudicated_false_positives": 3,
+    "accounted": 83
+  },
+  "repairs_applied": 80,
+  "adjudicated_false_positive_count": 3,
+  "adjudicated_false_positives": [
+    {
+      "unit": 1,
+      "passage_id": "ar-a2-u01-p02",
+      "question_id": "q4",
+      "type": "vocabulary_in_context",
+      "prompt": "ما وظيفة «البنك» في النص؟",
+      "answer": "مؤسسة مالية يريد الأب زيارتها للحصول على خدمة.",
+      "reason": "Comprehension asks the real-world role of the bank in the passage; it is not a grammatical-function question."
+    },
+    {
+      "unit": 9,
+      "passage_id": "ar-a2-u09-p06",
+      "question_id": "q10",
+      "type": "grammar_function",
+      "prompt": "لماذا يستخدم النص أسئلة «من؟ متى؟ لماذا؟» في النهاية؟",
+      "answer": "لتقديم طريقة عملية لفحص العادة وسياقها قبل التعميم.",
+      "reason": "Discourse-comprehension question asks why the passage ends with a practical question set for examining a custom and its context; it does not require a grammatical label or form identification."
+    },
+    {
+      "unit": 10,
+      "passage_id": "ar-a2-u10-p06",
+      "question_id": "q9",
+      "type": "grammar_function",
+      "prompt": "ما وظيفة المقارنة بين «ما قيل أولًا» و«ما ظهر لاحقًا»؟",
+      "answer": "تساعد القارئ على فهم التغير والنتائج وتصحيح التوقع أو الفكرة الأولى.",
+      "reason": "Despite its legacy type label, the question asks about the reading/comprehension purpose of comparing earlier claims with later evidence; it does not require a grammatical category or form label."
+    }
+  ],
+  "changed_passages": 56,
+  "untargeted_records_byte_identical": true,
+  "a2_questions_checked": 600,
+  "a2_answers_checked": 600,
+  "formal_type_labels_remaining": 2,
+  "formal_type_labels_remaining_are_exact_adjudicated_false_positives": true,
+  "unadjudicated_formal_type_labels_remaining": 0,
+  "unadjudicated_explicit_formal_prompt_patterns_remaining": 0,
+  "question_type_counts_after": {
+    "cause_effect": 36,
+    "cloze_transfer": 79,
+    "contrast": 50,
+    "gist": 58,
+    "grammar_choice": 71,
+    "grammar_function": 2,
+    "inference": 79,
+    "literal_detail": 68,
+    "reference_resolution": 24,
+    "sequence": 2,
+    "single_word_definition": 31,
+    "summary": 12,
+    "vocabulary_in_context": 88
+  },
+  "repairs": [
+    {
+      "unit": 1,
+      "passage_id": "ar-a2-u01-p01",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «شارع» في هذا الاستعمال؟",
+      "new_prompt": "إذا وصفت الطريق الرئيسي في الحي، أي جملة أنسب: «هذا شارع رئيسي» أم «هذه شارع رئيسية»؟",
+      "new_answer": "هذا شارع رئيسي."
+    },
+    {
+      "unit": 1,
+      "passage_id": "ar-a2-u01-p01",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «خدمة» في هذا الاستعمال؟",
+      "new_prompt": "إذا وصفت مساعدة يقدمها المركز للسكان، أي جملة أنسب: «هذه خدمة مفيدة» أم «هذا خدمة مفيد»؟",
+      "new_answer": "هذه خدمة مفيدة."
+    },
+    {
+      "unit": 1,
+      "passage_id": "ar-a2-u01-p02",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «هاتف» في هذا الاستعمال؟",
+      "new_prompt": "إذا أشرت إلى الجهاز الذي اتصل به الأب، أي جملة أنسب: «هذا هاتف أبي» أم «هذه هاتف أبي»؟",
+      "new_answer": "هذا هاتف أبي."
+    },
+    {
+      "unit": 1,
+      "passage_id": "ar-a2-u01-p02",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «بنك» في هذا الاستعمال؟",
+      "new_prompt": "إذا وصفت المؤسسة المالية القريبة، أي جملة أنسب: «هذا بنك قريب» أم «هذه بنك قريبة»؟",
+      "new_answer": "هذا بنك قريب."
+    },
+    {
+      "unit": 1,
+      "passage_id": "ar-a2-u01-p03",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «إعلان» في هذا الاستعمال؟",
+      "new_prompt": "إذا كان النص المعلق عند المدخل مهمًا للسكان، أي جملة أنسب: «هذا إعلان مهم» أم «هذه إعلان مهمة»؟",
+      "new_answer": "هذا إعلان مهم."
+    },
+    {
+      "unit": 1,
+      "passage_id": "ar-a2-u01-p04",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «زيارة» في هذا الاستعمال؟",
+      "new_prompt": "إذا كانت المرة الأولى في المركز قصيرة، أي جملة أنسب: «هذه زيارة قصيرة» أم «هذا زيارة قصير»؟",
+      "new_answer": "هذه زيارة قصيرة."
+    },
+    {
+      "unit": 1,
+      "passage_id": "ar-a2-u01-p04",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «قسم» في هذا الاستعمال؟",
+      "new_prompt": "إذا أشرت إلى جزء المؤسسة المخصص للاستقبال، أي عبارة أنسب: «هذا قسم الاستقبال» أم «هذه قسم الاستقبال»؟",
+      "new_answer": "هذا قسم الاستقبال."
+    },
+    {
+      "unit": 1,
+      "passage_id": "ar-a2-u01-p05",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «قائمة» في هذا الاستعمال؟",
+      "new_prompt": "إذا كانت ورقة الأسعار محدثة، أي جملة أنسب: «هذه قائمة حديثة» أم «هذا قائمة حديث»؟",
+      "new_answer": "هذه قائمة حديثة."
+    },
+    {
+      "unit": 1,
+      "passage_id": "ar-a2-u01-p05",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «سعر» في هذا الاستعمال؟",
+      "new_prompt": "إذا أشرت إلى المبلغ المطلوب للمنتج، أي جملة أنسب: «هذا سعر جديد» أم «هذه سعر جديدة»؟",
+      "new_answer": "هذا سعر جديد."
+    },
+    {
+      "unit": 1,
+      "passage_id": "ar-a2-u01-p06",
+      "question_id": "q9",
+      "old_type": "grammar_function",
+      "new_type": "grammar_choice",
+      "old_prompt": "لماذا تستخدم «إذا» أكثر من مرة في النص؟",
+      "new_prompt": "أكمل بما يناسب لربط الحالة بالتصرف: «_____ كان البنك مغلقًا، أعود غدًا»: «إذا» أم «لأن»؟",
+      "new_answer": "إذا."
+    },
+    {
+      "unit": 2,
+      "passage_id": "ar-a2-u02-p01",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «موعد» في هذا الاستعمال؟",
+      "new_prompt": "إذا أردت تحديد وقت ثابت للقاء، أي جملة أنسب: «موعد اللقاء في الرابعة» أم «يلتقي الموعد في الرابعة»؟",
+      "new_answer": "موعد اللقاء في الرابعة."
+    },
+    {
+      "unit": 2,
+      "passage_id": "ar-a2-u02-p01",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «رد» في هذا الاستعمال؟",
+      "new_prompt": "إذا أجبت عن دعوة كتابةً، أي عبارة أنسب: «أرسلت ردًا واضحًا» أم «أرسلت موعدًا واضحًا»؟",
+      "new_answer": "أرسلت ردًا واضحًا."
+    },
+    {
+      "unit": 2,
+      "passage_id": "ar-a2-u02-p02",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «متأكد» في هذا الاستعمال؟",
+      "new_prompt": "إذا كانت نور واثقة من الموعد، أي جملة أنسب: «نور متأكدة من الموعد» أم «نور متأكد من الموعد»؟",
+      "new_answer": "نور متأكدة من الموعد."
+    },
+    {
+      "unit": 2,
+      "passage_id": "ar-a2-u02-p02",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «تالي» في هذا الاستعمال؟",
+      "new_prompt": "إذا كنت تقصد اليوم الذي يأتي بعد الخميس مباشرة، أي عبارة أنسب: «اليوم التالي» أم «اليوم التالية»؟",
+      "new_answer": "اليوم التالي."
+    },
+    {
+      "unit": 2,
+      "passage_id": "ar-a2-u02-p03",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «اتصل» في هذا الاستعمال؟",
+      "new_prompt": "إذا أخبرت عن سامر وما فعله أمس، أي جملة أنسب: «اتصل سامر بصديقه أمس» أم «يتصل سامر بصديقه أمس»؟",
+      "new_answer": "اتصل سامر بصديقه أمس."
+    },
+    {
+      "unit": 2,
+      "passage_id": "ar-a2-u02-p03",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «لاحق» في هذا الاستعمال؟",
+      "new_prompt": "إذا كان اللقاء في وقت يأتي بعد الوقت الأول، أي عبارة أنسب: «وقت لاحق» أم «وقت لاحقة»؟",
+      "new_answer": "وقت لاحق."
+    },
+    {
+      "unit": 2,
+      "passage_id": "ar-a2-u02-p04",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «اختيار» في هذا الاستعمال؟",
+      "new_prompt": "إذا كان البديل مناسبًا، أي جملة أنسب: «هذا اختيار مناسب» أم «هذه اختيار مناسبة»؟",
+      "new_answer": "هذا اختيار مناسب."
+    },
+    {
+      "unit": 2,
+      "passage_id": "ar-a2-u02-p04",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «حالي» في هذا الاستعمال؟",
+      "new_prompt": "إذا وصفت الخطة الموجودة الآن، أي عبارة أنسب: «الخطة الحالية» أم «الخطة الحالي»؟",
+      "new_answer": "الخطة الحالية."
+    },
+    {
+      "unit": 2,
+      "passage_id": "ar-a2-u02-p05",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «دورة» في هذا الاستعمال؟",
+      "new_prompt": "إذا كان البرنامج التعليمي قصيرًا، أي جملة أنسب: «هذه دورة قصيرة» أم «هذا دورة قصير»؟",
+      "new_answer": "هذه دورة قصيرة."
+    },
+    {
+      "unit": 2,
+      "passage_id": "ar-a2-u02-p05",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «تنظيم» في هذا الاستعمال؟",
+      "new_prompt": "إذا أردت وصف ترتيب المواعيد جيدًا، أي عبارة أنسب: «تنظيم الوقت مهم» أم «ينظم الوقت مهم»؟",
+      "new_answer": "تنظيم الوقت مهم."
+    },
+    {
+      "unit": 2,
+      "passage_id": "ar-a2-u02-p06",
+      "question_id": "q9",
+      "old_type": "grammar_function",
+      "new_type": "grammar_choice",
+      "old_prompt": "ماذا يصف «التالي» في «اليوم التالي»؟",
+      "new_prompt": "إذا كان النشاط بعد يوم الاثنين مباشرة، أي عبارة أنسب: «في اليوم التالي» أم «في اليوم السابق»؟",
+      "new_answer": "في اليوم التالي."
+    },
+    {
+      "unit": 3,
+      "passage_id": "ar-a2-u03-p01",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «مؤخرا» في هذا الاستعمال؟",
+      "new_prompt": "إذا حدثت الزيارة قبل أيام قليلة، أي جملة أنسب: «زرت المكان مؤخرًا» أم «سأزور المكان مؤخرًا غدًا»؟",
+      "new_answer": "زرت المكان مؤخرًا."
+    },
+    {
+      "unit": 3,
+      "passage_id": "ar-a2-u03-p01",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «مجددا» في هذا الاستعمال؟",
+      "new_prompt": "إذا لم أفهم الصورة أول مرة وأعدت النظر إليها، أي جملة أنسب: «نظرت إليها مجددًا» أم «نظرت إليها مؤخرًا فقط»؟",
+      "new_answer": "نظرت إليها مجددًا."
+    },
+    {
+      "unit": 3,
+      "passage_id": "ar-a2-u03-p02",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «تسجيل» في هذا الاستعمال؟",
+      "new_prompt": "إذا حفظ الهاتف ملفًا فيه أصوات، أي عبارة أنسب: «تسجيل صوتي» أم «نظرة صوتية»؟",
+      "new_answer": "تسجيل صوتي."
+    },
+    {
+      "unit": 3,
+      "passage_id": "ar-a2-u03-p02",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «نظرة» في هذا الاستعمال؟",
+      "new_prompt": "إذا أردت فحص الصور سريعًا، أي عبارة أنسب: «ألقيت نظرة على الصور» أم «ألقيت تسجيلًا على الصور»؟",
+      "new_answer": "ألقيت نظرة على الصور."
+    },
+    {
+      "unit": 3,
+      "passage_id": "ar-a2-u03-p03",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «حفل» في هذا الاستعمال؟",
+      "new_prompt": "إذا أشرت إلى مناسبة التخرج، أي جملة أنسب: «هذا حفل تخرج» أم «هذه حفل تخرج»؟",
+      "new_answer": "هذا حفل تخرج."
+    },
+    {
+      "unit": 3,
+      "passage_id": "ar-a2-u03-p04",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «معظم» في هذا الاستعمال؟",
+      "new_prompt": "إذا حضر أغلب الطلاب وغاب بعضهم، أي جملة أدق: «حضر معظم الطلاب» أم «حضر جميع الطلاب»؟",
+      "new_answer": "حضر معظم الطلاب."
+    },
+    {
+      "unit": 3,
+      "passage_id": "ar-a2-u03-p05",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «أثر» في هذا الاستعمال؟",
+      "new_prompt": "إذا بقيت علامة جميلة من الرحلة في الذاكرة، أي جملة أنسب: «تركت الرحلة أثرًا جميلًا» أم «تركت الرحلة فاز جميلًا»؟",
+      "new_answer": "تركت الرحلة أثرًا جميلًا."
+    },
+    {
+      "unit": 3,
+      "passage_id": "ar-a2-u03-p05",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «فاز» في هذا الاستعمال؟",
+      "new_prompt": "إذا كان الفوز حدث أمس، أي جملة أنسب: «فاز الفريق أمس» أم «يفوز الفريق أمس»؟",
+      "new_answer": "فاز الفريق أمس."
+    },
+    {
+      "unit": 3,
+      "passage_id": "ar-a2-u03-p06",
+      "question_id": "q9",
+      "old_type": "grammar_function",
+      "new_type": "grammar_choice",
+      "old_prompt": "ماذا تفعل «ثم» ضمنيًا في فكرة تغير رأي نور بعد دليل جديد؟",
+      "new_prompt": "إذا كان رأي نور تغير بعد ظهور دليل جديد، أي ربط أنسب: «ظنت شيئًا، ثم تغير رأيها» أم «ظنت شيئًا، لأن تغير رأيها»؟",
+      "new_answer": "ظنت شيئًا، ثم تغير رأيها."
+    },
+    {
+      "unit": 4,
+      "passage_id": "ar-a2-u04-p01",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «حجم» في هذا الاستعمال؟",
+      "new_prompt": "إذا كانت العبوة متوسطة وليست كبيرة، أي جملة أنسب: «هذا حجم مناسب» أم «هذه حجم مناسبة»؟",
+      "new_answer": "هذا حجم مناسب."
+    },
+    {
+      "unit": 4,
+      "passage_id": "ar-a2-u04-p02",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «ثمن» في هذا الاستعمال؟",
+      "new_prompt": "إذا أشرت إلى المبلغ المطلوب للحقيبة، أي جملة أنسب: «هذا ثمن الحقيبة» أم «هذه ثمن الحقيبة»؟",
+      "new_answer": "هذا ثمن الحقيبة."
+    },
+    {
+      "unit": 4,
+      "passage_id": "ar-a2-u04-p03",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «يستحق» في هذا الاستعمال؟",
+      "new_prompt": "إذا كان الكتاب مفيدًا بما يكفي لتبرير سعره، أي جملة أنسب: «الكتاب يستحق ثمنه» أم «الكتاب تستحق ثمنه»؟",
+      "new_answer": "الكتاب يستحق ثمنه."
+    },
+    {
+      "unit": 4,
+      "passage_id": "ar-a2-u04-p03",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «تطبيق» في هذا الاستعمال؟",
+      "new_prompt": "إذا أشرت إلى برنامج رقمي مفيد، أي جملة أنسب: «هذا تطبيق مفيد» أم «هذه تطبيق مفيدة»؟",
+      "new_answer": "هذا تطبيق مفيد."
+    },
+    {
+      "unit": 4,
+      "passage_id": "ar-a2-u04-p04",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «صالح» في هذا الاستعمال؟",
+      "new_prompt": "إذا كانت البطارية ما زالت قابلة للاستخدام، أي جملة أنسب: «البطارية صالحة للاستخدام» أم «البطارية صالح للاستخدام»؟",
+      "new_answer": "البطارية صالحة للاستخدام."
+    },
+    {
+      "unit": 4,
+      "passage_id": "ar-a2-u04-p04",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «بدل» في هذا الاستعمال؟",
+      "new_prompt": "إذا أخذت مصباحًا جديدًا مكان المصباح المعطل، أي عبارة أنسب: «أخذت مصباحًا جديدًا بدل المعطل» أم «أخذت مصباحًا جديدًا فاز المعطل»؟",
+      "new_answer": "أخذت مصباحًا جديدًا بدل المعطل."
+    },
+    {
+      "unit": 4,
+      "passage_id": "ar-a2-u04-p05",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «إصلاح» في هذا الاستعمال؟",
+      "new_prompt": "إذا كان الكرسي يحتاج إلى عمل يعيده إلى حالة جيدة، أي عبارة أنسب: «يحتاج الكرسي إلى إصلاح» أم «يحتاج الكرسي إلى صفقة»؟",
+      "new_answer": "يحتاج الكرسي إلى إصلاح."
+    },
+    {
+      "unit": 4,
+      "passage_id": "ar-a2-u04-p05",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «أسوأ» في هذا الاستعمال؟",
+      "new_prompt": "إذا تدهورت الحالة مقارنة بما قبل، أي جملة أنسب: «أصبحت الحالة أسوأ من قبل» أم «أصبحت الحالة أسوأ قبل»؟",
+      "new_answer": "أصبحت الحالة أسوأ من قبل."
+    },
+    {
+      "unit": 4,
+      "passage_id": "ar-a2-u04-p06",
+      "question_id": "q9",
+      "old_type": "grammar_function",
+      "new_type": "grammar_choice",
+      "old_prompt": "ماذا تعبر «أسوأ»؟",
+      "new_prompt": "إذا كان الوضع بعد المشكلة أكثر سوءًا من السابق، أي جملة أنسب: «الوضع أسوأ من قبل» أم «الوضع صالح من قبل»؟",
+      "new_answer": "الوضع أسوأ من قبل."
+    },
+    {
+      "unit": 5,
+      "passage_id": "ar-a2-u05-p01",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «تصوير» في هذا الاستعمال؟",
+      "new_prompt": "إذا كنت تتحدث عن هواية التقاط الصور، أي جملة أنسب: «أحب التصوير في المدينة» أم «أحب يصور في المدينة»؟",
+      "new_answer": "أحب التصوير في المدينة."
+    },
+    {
+      "unit": 5,
+      "passage_id": "ar-a2-u05-p01",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «مسابقة» في هذا الاستعمال؟",
+      "new_prompt": "إذا كانت المنافسة صغيرة، أي جملة أنسب: «هذه مسابقة صغيرة» أم «هذا مسابقة صغير»؟",
+      "new_answer": "هذه مسابقة صغيرة."
+    },
+    {
+      "unit": 5,
+      "passage_id": "ar-a2-u05-p02",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «تفكير» في هذا الاستعمال؟",
+      "new_prompt": "إذا كان القرار يحتاج إلى تأمل قبل الاختيار، أي عبارة أنسب: «يحتاج القرار إلى تفكير» أم «يحتاج القرار إلى يفكر»؟",
+      "new_answer": "يحتاج القرار إلى تفكير."
+    },
+    {
+      "unit": 5,
+      "passage_id": "ar-a2-u05-p02",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «متابعة» في هذا الاستعمال؟",
+      "new_prompt": "إذا أردت الرجوع إلى النتيجة الأسبوع القادم، أي عبارة أنسب: «نحتاج إلى متابعة النتيجة» أم «نحتاج إلى يتابع النتيجة»؟",
+      "new_answer": "نحتاج إلى متابعة النتيجة."
+    },
+    {
+      "unit": 5,
+      "passage_id": "ar-a2-u05-p03",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «خطوة» في هذا الاستعمال؟",
+      "new_prompt": "إذا كانت هذه أول مرحلة في المشروع، أي جملة أنسب: «هذه خطوة أولى» أم «هذا خطوة أول»؟",
+      "new_answer": "هذه خطوة أولى."
+    },
+    {
+      "unit": 5,
+      "passage_id": "ar-a2-u05-p03",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «مشاريع» في هذا الاستعمال؟",
+      "new_prompt": "إذا كان الطلاب يعملون على أكثر من مشروع، أي جملة أنسب: «هذه مشاريع صغيرة» أم «هذا مشاريع صغير»؟",
+      "new_answer": "هذه مشاريع صغيرة."
+    },
+    {
+      "unit": 5,
+      "passage_id": "ar-a2-u05-p04",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «عادة» في هذا الاستعمال؟",
+      "new_prompt": "إذا كان المشي بعد العشاء سلوكًا يتكرر يوميًا، أي جملة أنسب: «هذه عادة يومية» أم «هذا عادة يومي»؟",
+      "new_answer": "هذه عادة يومية."
+    },
+    {
+      "unit": 5,
+      "passage_id": "ar-a2-u05-p04",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «يتعرف» في هذا الاستعمال؟",
+      "new_prompt": "إذا كان الطفل الآن يبدأ معرفة زملائه، أي جملة أنسب: «الطفل يتعرف إلى زملائه» أم «الطفل تعرف إلى زملائه الآن»؟",
+      "new_answer": "الطفل يتعرف إلى زملائه."
+    },
+    {
+      "unit": 5,
+      "passage_id": "ar-a2-u05-p05",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «تدريب» في هذا الاستعمال؟",
+      "new_prompt": "إذا كانت المهارة تحتاج إلى ممارسة منظمة، أي عبارة أنسب: «تحتاج المهارة إلى تدريب منتظم» أم «تحتاج المهارة إلى يتدرب منتظم»؟",
+      "new_answer": "تحتاج المهارة إلى تدريب منتظم."
+    },
+    {
+      "unit": 5,
+      "passage_id": "ar-a2-u05-p06",
+      "question_id": "q9",
+      "old_type": "grammar_function",
+      "new_type": "grammar_choice",
+      "old_prompt": "ماذا يفعل «بدل أن» في النص؟",
+      "new_prompt": "إذا أرادت نور اختيار طريقة بديلة عن إنهاء المشروع كله دفعة واحدة، أي جملة أنسب: «تقسمه إلى خطوات بدل أن تنهيه كله دفعة واحدة» أم «تقسمه إلى خطوات لأن تنهيه كله دفعة واحدة»؟",
+      "new_answer": "تقسمه إلى خطوات بدل أن تنهيه كله دفعة واحدة."
+    },
+    {
+      "unit": 6,
+      "passage_id": "ar-a2-u06-p01",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «طائرة» في هذا الاستعمال؟",
+      "new_prompt": "إذا كانت وسيلة السفر الجوية كبيرة، أي جملة أنسب: «هذه طائرة كبيرة» أم «هذا طائرة كبير»؟",
+      "new_answer": "هذه طائرة كبيرة."
+    },
+    {
+      "unit": 6,
+      "passage_id": "ar-a2-u06-p01",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «مطار» في هذا الاستعمال؟",
+      "new_prompt": "إذا كان مكان السفر الجوي كبيرًا، أي جملة أنسب: «هذا مطار كبير» أم «هذه مطار كبيرة»؟",
+      "new_answer": "هذا مطار كبير."
+    },
+    {
+      "unit": 6,
+      "passage_id": "ar-a2-u06-p02",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «قطار» في هذا الاستعمال؟",
+      "new_prompt": "إذا كانت وسيلة النقل على السكة سريعة، أي جملة أنسب: «هذا قطار سريع» أم «هذه قطار سريعة»؟",
+      "new_answer": "هذا قطار سريع."
+    },
+    {
+      "unit": 6,
+      "passage_id": "ar-a2-u06-p03",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «نقل» في هذا الاستعمال؟",
+      "new_prompt": "إذا كنت تتحدث عن نظام الحافلات والقطارات في المدينة، أي عبارة أنسب: «النقل العام» أم «ينقل العام»؟",
+      "new_answer": "النقل العام."
+    },
+    {
+      "unit": 6,
+      "passage_id": "ar-a2-u06-p03",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «وسائل» في هذا الاستعمال؟",
+      "new_prompt": "إذا كانت هناك طرق نقل متعددة، أي جملة أنسب: «هذه وسائل نقل مختلفة» أم «هؤلاء وسائل نقل مختلفون»؟",
+      "new_answer": "هذه وسائل نقل مختلفة."
+    },
+    {
+      "unit": 6,
+      "passage_id": "ar-a2-u06-p04",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «يتوقف» في هذا الاستعمال؟",
+      "new_prompt": "إذا كان القطار يقف في هذه المحطة كل يوم، أي جملة أنسب: «القطار يتوقف هنا كل يوم» أم «القطار تتوقف هنا كل يوم»؟",
+      "new_answer": "القطار يتوقف هنا كل يوم."
+    },
+    {
+      "unit": 6,
+      "passage_id": "ar-a2-u06-p05",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «قرية» في هذا الاستعمال؟",
+      "new_prompt": "إذا كان المكان السكني صغيرًا، أي جملة أنسب: «هذه قرية صغيرة» أم «هذا قرية صغير»؟",
+      "new_answer": "هذه قرية صغيرة."
+    },
+    {
+      "unit": 6,
+      "passage_id": "ar-a2-u06-p06",
+      "question_id": "q9",
+      "old_type": "grammar_function",
+      "new_type": "grammar_choice",
+      "old_prompt": "ماذا يصف «مناسب» في سياق المحطة؟",
+      "new_prompt": "إذا كانت المحطة ملائمة للوصول إلى المكتبة، أي جملة أنسب: «هذه المحطة مناسبة للوصول إلى المكتبة» أم «هذه المحطة مناسب للوصول إلى المكتبة»؟",
+      "new_answer": "هذه المحطة مناسبة للوصول إلى المكتبة."
+    },
+    {
+      "unit": 7,
+      "passage_id": "ar-a2-u07-p01",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «مناسبة» في هذا الاستعمال؟",
+      "new_prompt": "إذا كنت تصف حدثًا ثقافيًا في الساحة، أي عبارة أنسب: «مناسبة ثقافية» أم «جمهور ثقافي»؟",
+      "new_answer": "مناسبة ثقافية."
+    },
+    {
+      "unit": 7,
+      "passage_id": "ar-a2-u07-p02",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «بيان» في هذا الاستعمال؟",
+      "new_prompt": "إذا أصدرت الإدارة نصًا رسميًا عن موعد الإغلاق، أي عبارة أنسب: «بيان من الإدارة» أم «صحافة من الإدارة»؟",
+      "new_answer": "بيان من الإدارة."
+    },
+    {
+      "unit": 7,
+      "passage_id": "ar-a2-u07-p03",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «تحقيق» في هذا الاستعمال؟",
+      "new_prompt": "إذا جمع الطلاب معلومات ليفهموا المشكلة، أي عبارة أنسب: «أجروا تحقيقًا بسيطًا» أم «صنعوا تحقيقًا بسيطًا»؟",
+      "new_answer": "أجروا تحقيقًا بسيطًا."
+    },
+    {
+      "unit": 7,
+      "passage_id": "ar-a2-u07-p03",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «تأثير» في هذا الاستعمال؟",
+      "new_prompt": "إذا تحدثت عن نتيجة الازدحام على المشاة، أي عبارة أنسب: «تأثير الازدحام على المشاة» أم «تأثير الازدحام بالمشاة»؟",
+      "new_answer": "تأثير الازدحام على المشاة."
+    },
+    {
+      "unit": 7,
+      "passage_id": "ar-a2-u07-p04",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «أعلن» في هذا الاستعمال؟",
+      "new_prompt": "لنقل قرار المركز، أي جملة أنسب: «أعلن المركز أنه سيضيف ساعتين» أم «أعلن المركز من ساعتين»؟",
+      "new_answer": "أعلن المركز أنه سيضيف ساعتين."
+    },
+    {
+      "unit": 7,
+      "passage_id": "ar-a2-u07-p05",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «رئيسية» في هذا الاستعمال؟",
+      "new_prompt": "لوصف ثلاث أفكار مهمة في الملخص، أي عبارة أنسب: «ثلاث أفكار رئيسية» أم «ثلاث أفكار رئيسي»؟",
+      "new_answer": "ثلاث أفكار رئيسية."
+    },
+    {
+      "unit": 7,
+      "passage_id": "ar-a2-u07-p06",
+      "question_id": "q9",
+      "old_type": "grammar_function",
+      "new_type": "contrast",
+      "old_prompt": "ماذا تصف «رئيسية»؟",
+      "new_prompt": "في ملخص قصير جدًا، أيهما تختار أولًا: المعلومات الرئيسية أم التفاصيل الثانوية؟",
+      "new_answer": "المعلومات الرئيسية."
+    },
+    {
+      "unit": 8,
+      "passage_id": "ar-a2-u08-p01",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «منطقة» في هذا الاستعمال؟",
+      "new_prompt": "للتحدث عن جزء محدد من الحديقة، أي عبارة أنسب: «منطقة قرب المقاعد» أم «مواد قرب المقاعد»؟",
+      "new_answer": "منطقة قرب المقاعد."
+    },
+    {
+      "unit": 8,
+      "passage_id": "ar-a2-u08-p01",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "contrast",
+      "old_prompt": "ما التصنيف النحوي لكلمة «مواد» في هذا الاستعمال؟",
+      "new_prompt": "إذا فصل الطلاب الورق والبلاستيك والمعدن، أي كلمة تجمع هذه الأنواع: «مواد» أم «منطقة»؟",
+      "new_answer": "مواد."
+    },
+    {
+      "unit": 8,
+      "passage_id": "ar-a2-u08-p02",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «استخدام» في هذا الاستعمال؟",
+      "new_prompt": "عند الحديث عن تقليل استهلاك الكهرباء، أي عبارة أنسب: «تقليل استخدام الكهرباء» أم «تقليل استخدم الكهرباء»؟",
+      "new_answer": "تقليل استخدام الكهرباء."
+    },
+    {
+      "unit": 8,
+      "passage_id": "ar-a2-u08-p02",
+      "question_id": "q7",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «طاقة» في هذا الاستعمال؟",
+      "new_prompt": "إذا كان الهدف تقليل الهدر الكهربائي، أي تعبير أنسب: «توفير الطاقة» أم «توفير المنطقة»؟",
+      "new_answer": "توفير الطاقة."
+    },
+    {
+      "unit": 8,
+      "passage_id": "ar-a2-u08-p03",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «نمو» في هذا الاستعمال؟",
+      "new_prompt": "أكمل بما يناسب: «نراقب _____ النبات كل أسبوع»: «نمو» أم «ينمو»؟",
+      "new_answer": "نمو."
+    },
+    {
+      "unit": 8,
+      "passage_id": "ar-a2-u08-p04",
+      "question_id": "q10",
+      "old_type": "grammar_function",
+      "new_type": "contrast",
+      "old_prompt": "ماذا تعبر «ربما» في تفسير نور؟",
+      "new_prompt": "أي جملة تدل على أن نور غير متأكدة من سبب انتقال الأشياء: «ربما نقلتها العاصفة» أم «نقلتها العاصفة بالتأكيد»؟",
+      "new_answer": "ربما نقلتها العاصفة."
+    },
+    {
+      "unit": 8,
+      "passage_id": "ar-a2-u08-p05",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «مجتمع» في هذا الاستعمال؟",
+      "new_prompt": "للتحدث عن حاجات السكان في المنطقة، أي عبارة أنسب: «احتياجات المجتمع» أم «احتياجات مجتمعًا»؟",
+      "new_answer": "احتياجات المجتمع."
+    },
+    {
+      "unit": 8,
+      "passage_id": "ar-a2-u08-p06",
+      "question_id": "q10",
+      "old_type": "grammar_function",
+      "new_type": "sequence",
+      "old_prompt": "ماذا تفعل «بعد ذلك» في ترتيب منهج نور؟",
+      "new_prompt": "بعد أن تجمع نور المعلومات وتقارن ما يحدث، ما الخطوة التالية في منهجها؟",
+      "new_answer": "تقترح تغييرًا محددًا يمكن متابعته."
+    },
+    {
+      "unit": 9,
+      "passage_id": "ar-a2-u09-p01",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «قصة» في هذا الاستعمال؟",
+      "new_prompt": "إذا وصفت الحكاية التي روتها الجدة، أي عبارة أنسب: «قصة عائلية» أم «قصة عائلي»؟",
+      "new_answer": "قصة عائلية."
+    },
+    {
+      "unit": 9,
+      "passage_id": "ar-a2-u09-p02",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «نسخة» في هذا الاستعمال؟",
+      "new_prompt": "إذا قارنت نور رواية الجد برواية الخالة، أي تعبير أنسب: «نسخة الجد من القصة» أم «نسخة الجد القصة»؟",
+      "new_answer": "نسخة الجد من القصة."
+    },
+    {
+      "unit": 9,
+      "passage_id": "ar-a2-u09-p03",
+      "question_id": "q6",
+      "old_type": "grammar_category",
+      "new_type": "grammar_choice",
+      "old_prompt": "ما التصنيف النحوي لكلمة «مطعم» في هذا الاستعمال؟",
+      "new_prompt": "للتحدث عن مكان العشاء، أي جملة أنسب: «ذهبنا إلى مطعم قريب» أم «ذهبنا مطعم قريب»؟",
+      "new_answer": "ذهبنا إلى مطعم قريب."
+    },
+    {
+      "unit": 10,
+      "passage_id": "ar-a2-u10-p01",
+      "question_id": "q10",
+      "old_type": "grammar_function",
+      "new_type": "contrast",
+      "old_prompt": "ماذا تفعل «بل» في «لم يكن... بل...»؟",
+      "new_prompt": "أي جملة تعبر بدقة عن سبب تنظيم يوم نور رغم تغير الخطط؟",
+      "new_answer": "لم يكن منظمًا لأن كل شيء سار كما أرادت، بل لأنها عرفت المعلومات الجديدة وعدلت الخطوات التالية."
+    },
+    {
+      "unit": 10,
+      "passage_id": "ar-a2-u10-p02",
+      "question_id": "q10",
+      "old_type": "grammar_function",
+      "new_type": "contrast",
+      "old_prompt": "ماذا تفعل «بينما» في مقارنة السوق؟",
+      "new_prompt": "أي وصف يلخص ما وجدته نور عند مقارنة السوق القديم بالحالي؟",
+      "new_answer": "بقيت بعض المباني، بينما تغيرت واجهات ومحلات كثيرة."
+    },
+    {
+      "unit": 10,
+      "passage_id": "ar-a2-u10-p03",
+      "question_id": "q10",
+      "old_type": "grammar_function",
+      "new_type": "cause_effect",
+      "old_prompt": "ماذا تعبر «إذا... فقد...» في النص؟",
+      "new_prompt": "إذا تأخر القطار الأرخص عشر دقائق، فما النتيجة المحتملة؟",
+      "new_answer": "قد يصبح الانتقال إلى الحافلة الأخيرة صعبًا."
+    },
+    {
+      "unit": 10,
+      "passage_id": "ar-a2-u10-p04",
+      "question_id": "q10",
+      "old_type": "grammar_function",
+      "new_type": "contrast",
+      "old_prompt": "ماذا تفعل «بينما» في وصف النتائج؟",
+      "new_prompt": "ما الفرق بين نتائج المباني بعد شهرين؟",
+      "new_answer": "انخفض الاستخدام في بعض المباني، بينما لم يتغير مبنى آخر كثيرًا."
+    },
+    {
+      "unit": 10,
+      "passage_id": "ar-a2-u10-p05",
+      "question_id": "q10",
+      "old_type": "grammar_function",
+      "new_type": "contrast",
+      "old_prompt": "ماذا تفعل «بينما» عند الحديث عن الطعام؟",
+      "new_prompt": "كيف اختلف ما أحضره الأقارب من طعام؟",
+      "new_answer": "أحضر بعض الأقارب أطباقًا معتادة، بينما جرب آخرون وصفات مختلفة."
+    }
+  ],
+  "quality_interpretation": "This closes only the historically inventoried A2 low-level candidate set. The two retained grammar_function labels are documented comprehension false positives, not unresolved grammar-label tasks. CEFR, naturalness, semantic educator, independent native/model-family, and blind review remain separate release requirements.",
+  "release_claim": false
+}
