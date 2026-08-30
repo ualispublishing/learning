@@ -24,6 +24,10 @@ Rules:
 6. `review_completed_utc` must be the real timezone-aware completion time of that review. A timestamp before the bound candidate was generated, a materially future-dated timestamp, or an ambiguous tie for the latest current-candidate review is rejected fail-closed.
 7. The latest **unambiguous** review record bound to the current candidate controls the final promotion gate; a newer FAIL/HOLD overrides an older PASS.
 8. The structured 2,000-row ledger is a review aid and preflight, not the certification itself. The complete rendered master workbook still must be reviewed as described in [`../FINAL_NATIVE_REVIEW_PACKET.md`](../FINAL_NATIVE_REVIEW_PACKET.md).
+9. A reviewer does not need a GitHub account to author a valid record. If a maintainer submits a reviewer-authored JSON on the reviewer's behalf, the maintainer must preserve the human-authored fields unchanged. The commit author's GitHub identity is not a substitute for the reviewer identity stored in `reviewer.name_or_identifier`.
+10. A maintainer must never fill, reinterpret, upgrade, or convert human-only fields on a reviewer's behalf. Incomplete/malformed/stale records must be returned for reviewer correction or remain non-PASS; uncertainty, FAIL, or HOLD must never be silently converted into PASS.
+
+For an off-GitHub return, the reviewer should provide the completed worksheet plus the final sign-off JSON through an agreed transfer channel and, when practical, the sign-off file's SHA-256 checksum. The maintainer may commit that reviewer-authored record unchanged and run the same validators/CI.
 
 Validate a completed structured worksheet first with:
 
