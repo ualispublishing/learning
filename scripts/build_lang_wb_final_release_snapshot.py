@@ -2,10 +2,11 @@
 """Build a commit-bound LANG-WB v1.0 final-release snapshot.
 
 This command is intentionally stricter than the production-candidate build. It
-reruns the established production release audit and the independent-human
-promotion gate, verifies that the recorded final visual audit still applies to
-the current workbook outputs, requires all release/sign-off inputs to be clean
-and tracked at HEAD, then emits a content-addressed attestation.
+reruns the established production release audit and independent-human promotion
+gate, verifies that the recorded integrity and visual evidence still applies to
+the current learner-facing workbook artifacts, requires all release/sign-off
+inputs to be clean and tracked at HEAD, then emits a content-addressed
+attestation.
 
 It never changes RELEASE_MANIFEST.json from production_candidate and never
 creates or infers human review evidence.
@@ -31,6 +32,10 @@ MANIFEST_PATH = RELEASE / "RELEASE_MANIFEST.json"
 PRODUCTION_GATE_PATH = AUDIT / "release_gate_v3.json"
 HUMAN_GATE_PATH = AUDIT / "final_human_promotion_gate.json"
 VISUAL_AUDIT_PATH = AUDIT / "final_visual_audit_20260829.json"
+ALIGNMENT_PATH = AUDIT / "production_decision_alignment.json"
+FINAL_INTEGRITY_PATH = AUDIT / "final_integrity_review_summary.json"
+QA_SUMMARY_PATH = AUDIT / "qa_summary.json"
+PRONUNCIATION_QA_PATH = AUDIT / "pronunciation_qa.json"
 REPOSITORY = "ualispublishing/learning"
 
 
@@ -73,6 +78,14 @@ def tracked_blob(path: Path) -> str:
     return head_blob
 
 
+def evidence_identity(path: Path) -> dict[str, Any]:
+    return {
+        "path": path.relative_to(ROOT).as_posix(),
+        "sha256": sha256(path),
+        "git_blob_sha": tracked_blob(path),
+    }
+
+
 def require_clean_inputs() -> None:
     paths = [
         "completed/languages/workbooks/v1.0",
@@ -94,6 +107,11 @@ def rerun_gates() -> None:
         raise ValueError("final_human_promotion_gate_not_PASS:\n" + human.stdout)
 
 
+def changed_since(production_commit: str, *pathspecs: str) -> list[str]:
+    output = git("diff", "--name-only", production_commit, "HEAD", "--", *pathspecs)
+    return [line for line in output.splitlines() if line.strip()]
+
+
 def verify_visual_audit() -> dict[str, Any]:
     if not VISUAL_AUDIT_PATH.exists():
         raise ValueError(f"missing final visual audit: {VISUAL_AUDIT_PATH.relative_to(ROOT)}")
@@ -111,21 +129,98 @@ def verify_visual_audit() -> dict[str, Any]:
     production_commit = str(visual.get("production_commit") or "").strip()
     if not production_commit:
         raise ValueError("final_visual_audit_missing_production_commit")
-    # A final visual audit is stale as soon as any published workbook output
-    # changes after the production commit it inspected.
-    changed = git(
-        "diff",
-        "--name-only",
-        production_commit,
-        "HEAD",
-        "--",
-        "completed/languages/workbooks/v1.0",
-    )
-    if changed:
+
+    # The visual audit concerns rendered PDFs. Repository documentation may
+    # evolve afterward without making the PDF inspection stale.
+    changed = changed_since(production_commit, "completed/languages/workbooks/v1.0")
+    changed_pdfs = [path for path in changed if path.lower().endswith(".pdf")]
+    if changed_pdfs:
         raise ValueError(
-            "final_visual_audit_stale: workbook outputs changed since production commit:\n" + changed
+            "final_visual_audit_stale: PDFs changed since audited production commit:\n"
+            + "\n".join(changed_pdfs)
         )
     return visual
+
+
+def verify_integrity_evidence(production_commit: str) -> dict[str, Any]:
+    for path in (ALIGNMENT_PATH, FINAL_INTEGRITY_PATH, QA_SUMMARY_PATH, PRONUNCIATION_QA_PATH):
+        if not path.exists():
+            raise ValueError(f"missing_integrity_evidence:{path.relative_to(ROOT)}")
+
+    alignment = load_json(ALIGNMENT_PATH)
+    if (
+        alignment.get("release") != "v1.0"
+        or alignment.get("gate") != "PASS"
+        or alignment.get("unresolved_editorial_rows") != 0
+        or alignment.get("production_rows_aligned_to_final_decisions") != 3000
+        or alignment.get("source_provenance_rows") != 3000
+        or alignment.get("pdf_count") != 42
+    ):
+        raise ValueError("production_decision_alignment_not_PASS")
+
+    integrity = load_json(FINAL_INTEGRITY_PATH)
+    if (
+        integrity.get("release") != "v1.0"
+        or integrity.get("gate") != "PASS"
+        or integrity.get("total_rows") != 3000
+        or integrity.get("unresolved_rows") != 0
+    ):
+        raise ValueError("final_integrity_review_not_PASS")
+
+    # The source-locked integrity evidence remains applicable only while the
+    # curation state and learner-facing CSV/manifest data are unchanged from the
+    # audited production commit. README/docs changes are deliberately excluded.
+    curation_changes = changed_since(production_commit, "curation/language-workbooks/v1.0")
+    if curation_changes:
+        raise ValueError(
+            "integrity_evidence_stale: curation changed since production commit:\n"
+            + "\n".join(curation_changes)
+        )
+
+    release_changes = changed_since(production_commit, "completed/languages/workbooks/v1.0")
+    learner_data_changes = [
+        path
+        for path in release_changes
+        if path.lower().endswith((".pdf", ".csv")) or path.endswith("/RELEASE_MANIFEST.json")
+    ]
+    if learner_data_changes:
+        raise ValueError(
+            "integrity_evidence_stale: learner-facing release data changed since production commit:\n"
+            + "\n".join(learner_data_changes)
+        )
+
+    critical_evidence_changes = changed_since(
+        production_commit,
+        ALIGNMENT_PATH.relative_to(ROOT).as_posix(),
+        FINAL_INTEGRITY_PATH.relative_to(ROOT).as_posix(),
+        QA_SUMMARY_PATH.relative_to(ROOT).as_posix(),
+        PRONUNCIATION_QA_PATH.relative_to(ROOT).as_posix(),
+    )
+    if critical_evidence_changes:
+        raise ValueError(
+            "integrity_evidence_changed_since_production_commit:\n"
+            + "\n".join(critical_evidence_changes)
+        )
+
+    return {
+        "production_decision_alignment": {
+            "gate": alignment.get("gate"),
+            "production_rows_aligned_to_final_decisions": alignment.get(
+                "production_rows_aligned_to_final_decisions"
+            ),
+            "source_provenance_rows": alignment.get("source_provenance_rows"),
+            **evidence_identity(ALIGNMENT_PATH),
+        },
+        "final_integrity_review": {
+            "gate": integrity.get("gate"),
+            "total_rows": integrity.get("total_rows"),
+            "unresolved_rows": integrity.get("unresolved_rows"),
+            **evidence_identity(FINAL_INTEGRITY_PATH),
+        },
+        "qa_summary": evidence_identity(QA_SUMMARY_PATH),
+        "pronunciation_qa": evidence_identity(PRONUNCIATION_QA_PATH),
+        "current_production_data_stability": "PASS",
+    }
 
 
 def release_tree() -> dict[str, Any]:
@@ -194,6 +289,8 @@ def build_snapshot() -> dict[str, Any]:
     production_gate = load_json(PRODUCTION_GATE_PATH)
     human_report = load_json(HUMAN_GATE_PATH)
     visual = verify_visual_audit()
+    production_commit = str(visual.get("production_commit"))
+    integrity_evidence = verify_integrity_evidence(production_commit)
 
     if manifest.get("release") != "v1.0" or manifest.get("status") != "production_candidate":
         raise ValueError(f"unexpected_manifest_state:{manifest.get('release')!r}:{manifest.get('status')!r}")
@@ -255,8 +352,9 @@ def build_snapshot() -> dict[str, Any]:
                 "production_commit": visual.get("production_commit"),
                 "workflow_run_id": visual.get("workflow_run_id"),
                 "artifact_digest": (visual.get("artifact") or {}).get("digest"),
-                "current_output_stability": "PASS",
+                "current_pdf_stability": "PASS",
             },
+            "source_locked_integrity": integrity_evidence,
         },
         "release_manifest": {
             "path": str(MANIFEST_PATH.relative_to(ROOT)),
@@ -269,9 +367,9 @@ def build_snapshot() -> dict[str, Any]:
         "human_signoffs": signoffs,
         "release_tree": tree,
         "quality_boundary": (
-            "ELIGIBLE_FOR_RELEASE means the exact commit passed the established automated, rendered-output, "
-            "and independent human sign-off gates. It is not an absolute or mathematical guarantee that no "
-            "error can ever exist."
+            "ELIGIBLE_FOR_RELEASE means the exact commit passed the established automated, source-locked, "
+            "rendered-output, and independent human sign-off gates. It is not an absolute or mathematical "
+            "guarantee that no error can ever exist."
         ),
     }
     return snapshot
