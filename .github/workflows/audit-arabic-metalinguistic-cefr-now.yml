@@ -1,0 +1,30 @@
+name: Run Arabic metalinguistic CEFR inventory now
+
+on:
+  push:
+
+permissions:
+  contents: write
+
+jobs:
+  inventory-now:
+    if: github.event.head_commit.message == 'Run Arabic metalinguistic CEFR inventory now'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate current state
+        run: python reading/tools/validate_continuation_state.py
+      - name: Build fresh Arabic candidate inventory
+        run: python reading/tools/audit_arabic_metalinguistic_cefr_candidates.py
+      - name: Commit read-only audit artifact
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'Record Arabic metalinguistic CEFR inventory'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
