@@ -106,6 +106,18 @@ def problem_list(record: dict[str, Any]) -> list[str]:
     return problems
 
 
+def filename_problems(path: Path, language: Any) -> list[str]:
+    """Ensure promotion discovery will see this record under its declared language."""
+    if language not in gate.LANGUAGES:
+        return []
+    problems: list[str] = []
+    if path.suffix.lower() != ".json":
+        problems.append("filename_extension")
+    if not path.name.startswith(f"{language}_"):
+        problems.append("filename_language_prefix")
+    return problems
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("signoff", help="Path to one native-signoff JSON record")
@@ -126,6 +138,7 @@ def main() -> int:
         report["language"] = record.get("language")
         report["review_outcome"] = record.get("review_outcome")
         report["problems"] = problem_list(record)
+        report["problems"].extend(filename_problems(path, record.get("language")))
     except Exception as exc:
         report["problems"] = [f"parse_error:{type(exc).__name__}:{exc}"]
 
