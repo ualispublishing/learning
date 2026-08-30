@@ -1,7 +1,7 @@
 {
   "schema_version": 3,
   "project_id": "LANG-A1C2",
-  "updated": "2026-08-29",
+  "updated": "2026-08-30",
   "purpose": "Compact live resume state for the Arabic/French/Urdu A1-C2 graded-reading project. This file contains the current frontier only; historical work belongs in Git history and reading/audit/.",
   "scope_guard": {
     "canonical_root": "reading/",
@@ -69,7 +69,7 @@
     "project_passages": 1080
   },
   "production": {
-    "canonical_passages": 1068,
+    "canonical_passages": 1074,
     "arabic": {
       "state": "GENERATION_COMPLETE",
       "canonical_passages": 360,
@@ -98,7 +98,7 @@
     },
     "urdu": {
       "state": "C2_GENERATION_IN_PROGRESS",
-      "canonical_passages": 348,
+      "canonical_passages": 354,
       "complete_levels": [
         "A1",
         "A2",
@@ -140,7 +140,7 @@
     "production": {
       "language": "urdu",
       "level": "C2",
-      "action": "Continue generation-first production from Urdu C2 Unit 9 / sequence 49 using the canonical roadmap and ten-question contract."
+      "action": "Continue generation-first production from Urdu C2 Unit 10 / sequence 55 using the canonical roadmap and ten-question contract."
     },
     "verification_parallel": [
       "Keep Arabic educator-release remediation open under RELEASE_STATUS.json.",
@@ -157,7 +157,7 @@
   ],
   "exact_next_actions": [
     "Validate the routed state bundle and live canonical counts.",
-    "Use reading/planning/ACTIVE_GENERATION_PLAN.json to start guarded Urdu C2 Unit 9 generation at sequence 49.",
+    "Use reading/planning/ACTIVE_GENERATION_PLAN.json to start guarded Urdu C2 Unit 10 capstone generation at sequence 55.",
     "Keep release/educator verification separate from generation progress."
   ]
 }
