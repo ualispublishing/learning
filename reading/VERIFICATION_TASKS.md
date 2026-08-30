@@ -29,6 +29,8 @@ NFC repair evidence: `reading/audit/arabic_nfc_repair_2026-08-30.json`; the reru
 
 Open verification work:
 
+Arabic A1-C2 low-level/metalinguistic closure evidence: `reading/audit/arabic_b1_c2_metalinguistic_cefr_adjudication_2026-08-30.json` — all 3,600 current Arabic questions scanned; B1-C2 initial 344 candidates adjudicated as 333 contextual retains, 9 repairs, and 2 detector false positives; post-repair manual queue 0. This does not close naturalness, semantic, educator, or independent review.
+
 A2 metalinguistic reconciliation evidence: `reading/audit/arabic_a2_metalinguistic_repair_2026-08-30.json` — original 83-item inventory fully adjudicated as 80 confirmed repairs plus 3 documented comprehension false positives; 600 questions / 600 answers scanned with 0 unadjudicated formal-type or configured formal-prompt findings.
 
 A1 Units 3–10 batch evidence: `reading/audit/arabic_a1_u03_u10_metalinguistic_repair_2026-08-30.json` — 48 current-corpus repairs; combined with Units 1–2, all 63 known A1 formal-type candidates are repaired and no formal metalinguistic question type remains across the 600 A1 questions. This does not close CEFR, naturalness, or independent educator review.

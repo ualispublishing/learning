@@ -77,10 +77,11 @@
       "records": 60,
       "questions": 600,
       "question_type_counts": {
+        "argument_relation": 3,
         "cause_effect": 60,
         "contrast": 60,
         "gist": 60,
-        "grammar_function": 104,
+        "grammar_function": 101,
         "inference": 60,
         "literal_detail": 60,
         "main_claim": 15,
@@ -90,17 +91,17 @@
         "synthesis": 45,
         "vocabulary_in_context": 31
       },
-      "candidate_count": 104,
-      "needs_adjudication": 104,
+      "candidate_count": 101,
+      "needs_adjudication": 101,
       "adjudicated_false_positives": 0
     },
     "c1": {
       "records": 60,
       "questions": 600,
       "question_type_counts": {
-        "argument_relation": 60,
+        "argument_relation": 64,
         "contrast": 45,
-        "grammar_function": 75,
+        "grammar_function": 71,
         "inference": 120,
         "literal_detail": 60,
         "single_word_definition": 90,
@@ -108,8 +109,8 @@
         "synthesis": 60,
         "vocabulary_in_context": 30
       },
-      "candidate_count": 75,
-      "needs_adjudication": 75,
+      "candidate_count": 71,
+      "needs_adjudication": 71,
       "adjudicated_false_positives": 0
     },
     "c2": {
@@ -132,8 +133,8 @@
       "adjudicated_false_positives": 0
     }
   },
-  "candidate_count": 347,
-  "needs_adjudication": 344,
+  "candidate_count": 340,
+  "needs_adjudication": 337,
   "adjudicated_false_positives": 3,
   "candidates": [
     {
@@ -279,7 +280,7 @@
       "passage_id": "ar-b1-u02-p01",
       "question_id": "q8",
       "type": "grammar_function",
-      "prompt": "ما وظيفة «مع أن» في بيان أن التقرير احتوى كل الأجزاء مع أنه اعتمد على نسخة غير صحيحة؟",
+      "prompt": "ما وظيفة «لكن» في القول إن لوم سامر كان سهلًا لكن ذلك لم يكن السبب الكامل؟",
       "reasons": [
         "formal_type:grammar_function",
         "prompt_pattern:explicit_word_function"
@@ -489,7 +490,7 @@
       "passage_id": "ar-b1-u03-p05",
       "question_id": "q8",
       "type": "grammar_function",
-      "prompt": "ما وظيفة «لا... بل» في وصف رد مريم على التصحيح الذي يغيّر المعنى؟",
+      "prompt": "ما وظيفة «بل» في «لم تكتف برفضه، بل حاولت فهم النمط الذي أدى إليه»؟",
       "reasons": [
         "formal_type:grammar_function",
         "prompt_pattern:explicit_word_function"
@@ -2682,20 +2683,6 @@
     {
       "level": "B2",
       "unit": 8,
-      "sequence": 46,
-      "passage_id": "ar-b2-u08-p04",
-      "question_id": "q8",
-      "type": "grammar_function",
-      "prompt": "ما وظيفة «إذا» الضمنية في تغير أهمية الطريق مع الموسم والغرض؟",
-      "reasons": [
-        "formal_type:grammar_function",
-        "prompt_pattern:explicit_word_function"
-      ],
-      "status": "needs_adjudication"
-    },
-    {
-      "level": "B2",
-      "unit": 8,
       "sequence": 47,
       "passage_id": "ar-b2-u08-p05",
       "question_id": "q6",
@@ -2808,20 +2795,6 @@
     {
       "level": "B2",
       "unit": 9,
-      "sequence": 51,
-      "passage_id": "ar-b2-u09-p03",
-      "question_id": "q8",
-      "type": "grammar_function",
-      "prompt": "ما وظيفة «إذا» في التحذير من إذن طارئ لم يصل في الوقت المناسب؟",
-      "reasons": [
-        "formal_type:grammar_function",
-        "prompt_pattern:explicit_word_function"
-      ],
-      "status": "needs_adjudication"
-    },
-    {
-      "level": "B2",
-      "unit": 9,
       "sequence": 52,
       "passage_id": "ar-b2-u09-p04",
       "question_id": "q6",
@@ -2869,20 +2842,6 @@
       "question_id": "q8",
       "type": "grammar_function",
       "prompt": "ما وظيفة «إذا» في القول إن التدريب إذا أصبح شرطًا للدعم فقد لا تعكس الموافقة اختيارًا حقيقيًا؟",
-      "reasons": [
-        "formal_type:grammar_function",
-        "prompt_pattern:explicit_word_function"
-      ],
-      "status": "needs_adjudication"
-    },
-    {
-      "level": "B2",
-      "unit": 9,
-      "sequence": 54,
-      "passage_id": "ar-b2-u09-p06",
-      "question_id": "q8",
-      "type": "grammar_function",
-      "prompt": "ما وظيفة «إذا» في سؤال ما الذي سيجعل نور تقترح تعديل القاعدة بدل تعديل التنفيذ؟",
       "reasons": [
         "formal_type:grammar_function",
         "prompt_pattern:explicit_word_function"
@@ -3023,20 +2982,6 @@
       "question_id": "q8",
       "type": "grammar_function",
       "prompt": "ما وظيفة «إذا» في التفريق بين شرط جوهري في النظرية وتفصيل لا يتوقع أن يؤثر؟",
-      "reasons": [
-        "formal_type:grammar_function",
-        "prompt_pattern:explicit_word_function"
-      ],
-      "status": "needs_adjudication"
-    },
-    {
-      "level": "C1",
-      "unit": 1,
-      "sequence": 5,
-      "passage_id": "ar-c1-u01-p05",
-      "question_id": "q8",
-      "type": "grammar_function",
-      "prompt": "ما وظيفة «إذا» الضمنية في فكرة أن قيمة الدراسة التالية تعتمد على قدرتها على تقليل عدم اليقين؟",
       "reasons": [
         "formal_type:grammar_function",
         "prompt_pattern:explicit_word_function"
@@ -3359,34 +3304,6 @@
       "question_id": "q10",
       "type": "grammar_function",
       "prompt": "ما وظيفة «بل» في القول إن الحساسية الاجتماعية لا تعني تجنب الأنماط بل تجنب القفز إلى تعريف ثابت؟",
-      "reasons": [
-        "formal_type:grammar_function",
-        "prompt_pattern:explicit_word_function"
-      ],
-      "status": "needs_adjudication"
-    },
-    {
-      "level": "C1",
-      "unit": 5,
-      "sequence": 25,
-      "passage_id": "ar-c1-u05-p01",
-      "question_id": "q8",
-      "type": "grammar_function",
-      "prompt": "ما وظيفة «إذا» في ربط تغير صياغة التقرير بظهور شروط تحد النتيجة؟",
-      "reasons": [
-        "formal_type:grammar_function",
-        "prompt_pattern:explicit_word_function"
-      ],
-      "status": "needs_adjudication"
-    },
-    {
-      "level": "C1",
-      "unit": 5,
-      "sequence": 26,
-      "passage_id": "ar-c1-u05-p02",
-      "question_id": "q8",
-      "type": "grammar_function",
-      "prompt": "ما وظيفة «إذا» في سؤال ما إذا كان المسار سيبقى بعد موسم تشغيل مختلف؟",
       "reasons": [
         "formal_type:grammar_function",
         "prompt_pattern:explicit_word_function"
@@ -3751,20 +3668,6 @@
       "question_id": "q10",
       "type": "grammar_function",
       "prompt": "ما وظيفة «بل» في القول إن المطلوب ليس معرفة المستقبل كاملًا بل معرفة اعتماد القرار على الجهل؟",
-      "reasons": [
-        "formal_type:grammar_function",
-        "prompt_pattern:explicit_word_function"
-      ],
-      "status": "needs_adjudication"
-    },
-    {
-      "level": "C1",
-      "unit": 9,
-      "sequence": 49,
-      "passage_id": "ar-c1-u09-p01",
-      "question_id": "q8",
-      "type": "grammar_function",
-      "prompt": "ما وظيفة «إذا» الضمنية في سؤال ما الذي كان يمكن أن يحدث قبل معرفة الإغلاق؟",
       "reasons": [
         "formal_type:grammar_function",
         "prompt_pattern:explicit_word_function"

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "project_id": "LANG-A1C2",
   "language": "arabic",
   "levels": [
@@ -9,22 +9,22 @@
     "C2"
   ],
   "date": "2026-08-30",
-  "scope": "Fresh hash-bound triage of all 344 current B1-C2 candidates from the A1-C2 metalinguistic/CEFR inventory; no canonical edits.",
+  "scope": "Fresh hash-bound triage of all current B1-C2 candidates from the A1-C2 metalinguistic/CEFR inventory; no canonical edits by this script.",
   "canonical_bindings": {
     "b1": {
       "path": "reading/arabic/b1/passages.jsonl",
-      "sha256": "8f0fdaac2cf8f6941008b32971f328e45ff670bf790e1091e3dab9d773ab9ddc",
-      "git_blob": "a5cfc10ceb8d31c08af376dd0875c868b863fa02"
+      "sha256": "319d55b99e1642b28d06fcd57271084f3a0a6df2d1b2a375ab65098f45b28ee5",
+      "git_blob": "d8887b1a4ec7bd33ab55f9b024042d3974923939"
     },
     "b2": {
       "path": "reading/arabic/b2/passages.jsonl",
-      "sha256": "5e387ff7eb730358c48fe2329b826d8effc5698079487e71f0f8f064e13b4907",
-      "git_blob": "b3aeaaaf788af3ef0391889bc658ebc0548f10da"
+      "sha256": "a52a5fc66a3509da50961c95df7b05eb4b4ec018aebd7bfbb88232b4f175ae73",
+      "git_blob": "e49f0c5ecffa080597f34f5c5cc4825e6170b8e1"
     },
     "c1": {
       "path": "reading/arabic/c1/passages.jsonl",
-      "sha256": "2a8d71a25a8176a4383488b8d794151eb041e0e60e96b251f1c13e403d14b23e",
-      "git_blob": "3f68da825c50c3018f9e054cbeec27ba01b17be0"
+      "sha256": "10eb468909610a8475c375952f6e9c1513482a3ef0f5af45b32ed67decf95430",
+      "git_blob": "eb6e6f0f7b2b77a4bf944373216a54e101957872"
     },
     "c2": {
       "path": "reading/arabic/c2/passages.jsonl",
@@ -32,34 +32,42 @@
       "git_blob": "a66338e882b82fc3cb38a717eb00b80460d36592"
     }
   },
-  "candidate_count": 344,
+  "candidate_count": 337,
   "decision_counts": {
-    "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS": 333,
-    "MANUAL_REVIEW": 11
+    "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS": 337
   },
   "by_level": {
     "b1": {
-      "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS": 94,
-      "MANUAL_REVIEW": 2
+      "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS": 96
     },
     "b2": {
-      "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS": 101,
-      "MANUAL_REVIEW": 3
+      "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS": 101
     },
     "c1": {
-      "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS": 70,
-      "MANUAL_REVIEW": 5
+      "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS": 71
     },
     "c2": {
-      "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS": 68,
-      "MANUAL_REVIEW": 1
+      "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS": 69
     }
   },
-  "manual_review_count": 11,
-  "retained_contextual_count": 333,
+  "manual_review_count": 0,
+  "retained_contextual_count": 337,
+  "adjudicated_ellipsis_shorthand_retain_count": 2,
+  "adjudicated_ellipsis_shorthand_retains": [
+    {
+      "passage_id": "ar-c1-u10-p06",
+      "question_id": "q10",
+      "required_passage_text": "ليس حفظ مفردات أصعب، بل القدرة"
+    },
+    {
+      "passage_id": "ar-c2-u01-p06",
+      "question_id": "q10",
+      "required_passage_text": "لا يكافأ بكثرة الأسماء ولا بغرابة الأمثلة"
+    }
+  ],
   "criteria": {
-    "retain": "Quoted cue/context is grounded in the exact passage (when quoted), answer is not a bare grammatical label, answer has contextual explanatory substance, and prompt makes no implicit-marker claim requiring human adjudication.",
-    "manual_review": "Any grounding failure, implicit-marker claim, bare grammatical-label answer, or too-short answer."
+    "retain": "Grounded contextual function/argument analysis with explanatory answer; two explicit human-adjudicated ellipsis shorthand forms are retained only while their exact underlying passage constructions remain present.",
+    "manual_review": "Any non-adjudicated grounding failure, implicit-marker claim, bare grammatical-label answer, or too-short answer."
   },
   "historical_evidence_policy": "2026-08-23 B1-C2 audits may guide review but cannot supply current approval because their corpus bindings differ from current Gate 0.",
   "results": [
@@ -84,6 +92,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -108,6 +117,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -131,6 +141,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -154,6 +165,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -176,6 +188,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -198,6 +211,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -222,6 +236,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -231,20 +246,21 @@
       "passage_id": "ar-b1-u02-p01",
       "question_id": "q8",
       "type": "grammar_function",
-      "prompt": "ما وظيفة «مع أن» في بيان أن التقرير احتوى كل الأجزاء مع أنه اعتمد على نسخة غير صحيحة؟",
-      "answer": "تقدم مفارقة أو تنازلًا: وجود الأجزاء لا يمنع أن النسخة المختارة كانت خاطئة.",
+      "prompt": "ما وظيفة «لكن» في القول إن لوم سامر كان سهلًا لكن ذلك لم يكن السبب الكامل؟",
+      "answer": "تستدرك على التفسير الظاهر وتفتح الطريق للسبب الأعمق المتعلق بالنسخ وطريقة العمل.",
       "grounding": {
         "quoted": [
-          "مع أن"
+          "لكن"
         ],
-        "matched_quotes": [],
-        "grounded": false,
-        "basis": "no_exact_quote_in_passage"
+        "matched_quotes": [
+          "لكن"
+        ],
+        "grounded": true,
+        "basis": "at_least_one_exact_quote_in_passage"
       },
-      "decision": "MANUAL_REVIEW",
-      "review_reasons": [
-        "quoted_marker_or_context_not_found_in_passage"
-      ]
+      "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
+      "review_reasons": []
     },
     {
       "level": "B1",
@@ -266,6 +282,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -288,6 +305,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -310,6 +328,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -332,6 +351,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -354,6 +374,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -376,6 +397,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -398,6 +420,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -422,6 +445,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -444,6 +468,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -466,6 +491,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -488,6 +514,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -510,6 +537,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -532,6 +560,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -554,6 +583,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -563,20 +593,23 @@
       "passage_id": "ar-b1-u03-p05",
       "question_id": "q8",
       "type": "grammar_function",
-      "prompt": "ما وظيفة «لا... بل» في وصف رد مريم على التصحيح الذي يغيّر المعنى؟",
-      "answer": "تنفي الاكتفاء برفض الاقتراح وتستبدله بمحاولة فهم سبب ظهور ذلك الاقتراح.",
+      "prompt": "ما وظيفة «بل» في «لم تكتف برفضه، بل حاولت فهم النمط الذي أدى إليه»؟",
+      "answer": "تنقل من مجرد رفض الاقتراح إلى خطوة أعمق هي فهم سبب ظهور ذلك الاقتراح.",
       "grounding": {
         "quoted": [
-          "لا... بل"
+          "بل",
+          "لم تكتف برفضه، بل حاولت فهم النمط الذي أدى إليه"
         ],
-        "matched_quotes": [],
-        "grounded": false,
-        "basis": "no_exact_quote_in_passage"
+        "matched_quotes": [
+          "بل",
+          "لم تكتف برفضه، بل حاولت فهم النمط الذي أدى إليه"
+        ],
+        "grounded": true,
+        "basis": "at_least_one_exact_quote_in_passage"
       },
-      "decision": "MANUAL_REVIEW",
-      "review_reasons": [
-        "quoted_marker_or_context_not_found_in_passage"
-      ]
+      "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
+      "review_reasons": []
     },
     {
       "level": "B1",
@@ -600,6 +633,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -622,6 +656,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -646,6 +681,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -668,6 +704,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -690,6 +727,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -714,6 +752,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -736,6 +775,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -758,6 +798,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -780,6 +821,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -804,6 +846,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -826,6 +869,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -850,6 +894,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -872,6 +917,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -896,6 +942,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -918,6 +965,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -940,6 +988,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -962,6 +1011,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -984,6 +1034,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1006,6 +1057,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1028,6 +1080,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1050,6 +1103,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1072,6 +1126,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1094,6 +1149,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1116,6 +1172,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1138,6 +1195,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1160,6 +1218,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1182,6 +1241,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1204,6 +1264,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1226,6 +1287,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1248,6 +1310,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1270,6 +1333,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1292,6 +1356,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1316,6 +1381,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1338,6 +1404,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1362,6 +1429,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1384,6 +1452,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1408,6 +1477,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1430,6 +1500,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1452,6 +1523,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1476,6 +1548,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1498,6 +1571,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1520,6 +1594,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1542,6 +1617,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1564,6 +1640,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1586,6 +1663,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1608,6 +1686,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1630,6 +1709,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1653,6 +1733,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1675,6 +1756,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1697,6 +1779,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1719,6 +1802,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1741,6 +1825,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1763,6 +1848,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1785,6 +1871,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1807,6 +1894,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1829,6 +1917,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1851,6 +1940,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1873,6 +1963,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1895,6 +1986,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1917,6 +2009,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1939,6 +2032,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1961,6 +2055,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -1983,6 +2078,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2005,6 +2101,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2027,6 +2124,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2049,6 +2147,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2071,6 +2170,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2093,6 +2193,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2115,6 +2216,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2137,6 +2239,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2161,6 +2264,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2183,6 +2287,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2205,6 +2310,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2227,6 +2333,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2249,6 +2356,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2271,6 +2379,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2293,6 +2402,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2315,6 +2425,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2337,6 +2448,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2359,6 +2471,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2381,6 +2494,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2403,6 +2517,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2425,6 +2540,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2447,6 +2563,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2469,6 +2586,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2491,6 +2609,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2513,6 +2632,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2535,6 +2655,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2557,6 +2678,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2579,6 +2701,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2601,6 +2724,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2623,6 +2747,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2645,6 +2770,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2667,6 +2793,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2689,6 +2816,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2711,6 +2839,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2733,6 +2862,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2755,6 +2885,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2777,6 +2908,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2799,6 +2931,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2821,6 +2954,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2843,6 +2977,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2865,6 +3000,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2887,6 +3023,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2909,6 +3046,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2931,6 +3069,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2953,6 +3092,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2975,6 +3115,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -2997,6 +3138,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3019,6 +3161,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3041,6 +3184,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3063,6 +3207,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3085,6 +3230,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3107,6 +3253,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3129,6 +3276,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3151,6 +3299,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3173,6 +3322,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3195,6 +3345,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3217,6 +3368,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3239,6 +3391,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3261,6 +3414,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3283,6 +3437,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3305,6 +3460,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3327,6 +3483,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3349,6 +3506,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3371,6 +3529,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3393,6 +3552,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3415,6 +3575,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3437,6 +3598,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3459,6 +3621,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3481,6 +3644,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3503,6 +3667,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3525,6 +3690,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3547,6 +3713,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3569,6 +3736,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3591,6 +3759,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3613,6 +3782,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3635,6 +3805,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3657,6 +3828,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3679,6 +3851,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3701,6 +3874,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3723,6 +3897,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3745,6 +3920,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3767,6 +3943,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3789,6 +3966,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3811,6 +3989,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3833,6 +4012,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3855,6 +4035,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3877,6 +4058,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3899,6 +4081,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3921,6 +4104,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3943,6 +4127,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3965,6 +4150,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -3987,6 +4173,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4009,6 +4196,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4031,30 +4219,8 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
-    },
-    {
-      "level": "B2",
-      "unit": 8,
-      "sequence": 46,
-      "passage_id": "ar-b2-u08-p04",
-      "question_id": "q8",
-      "type": "grammar_function",
-      "prompt": "ما وظيفة «إذا» الضمنية في تغير أهمية الطريق مع الموسم والغرض؟",
-      "answer": "تربط مركزية الطريق بظروف الاستخدام بدل معاملتها كخاصية جغرافية ثابتة في كل وقت.",
-      "grounding": {
-        "quoted": [
-          "إذا"
-        ],
-        "matched_quotes": [],
-        "grounded": false,
-        "basis": "no_exact_quote_in_passage"
-      },
-      "decision": "MANUAL_REVIEW",
-      "review_reasons": [
-        "implicit_marker_claim_requires_manual_grounding",
-        "quoted_marker_or_context_not_found_in_passage"
-      ]
     },
     {
       "level": "B2",
@@ -4076,6 +4242,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4098,6 +4265,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4120,6 +4288,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4142,6 +4311,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4164,6 +4334,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4186,6 +4357,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4208,6 +4380,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4230,29 +4403,8 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
-    },
-    {
-      "level": "B2",
-      "unit": 9,
-      "sequence": 51,
-      "passage_id": "ar-b2-u09-p03",
-      "question_id": "q8",
-      "type": "grammar_function",
-      "prompt": "ما وظيفة «إذا» في التحذير من إذن طارئ لم يصل في الوقت المناسب؟",
-      "answer": "تقدم حالة تكشف كلفة الاعتماد على قائمة منع آلية عندما لا تستطيع الإجراءات الإدارية مواكبة الاستثناء المشروع.",
-      "grounding": {
-        "quoted": [
-          "إذا"
-        ],
-        "matched_quotes": [],
-        "grounded": false,
-        "basis": "no_exact_quote_in_passage"
-      },
-      "decision": "MANUAL_REVIEW",
-      "review_reasons": [
-        "quoted_marker_or_context_not_found_in_passage"
-      ]
     },
     {
       "level": "B2",
@@ -4274,6 +4426,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4296,6 +4449,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4318,6 +4472,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4340,29 +4495,8 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
-    },
-    {
-      "level": "B2",
-      "unit": 9,
-      "sequence": 54,
-      "passage_id": "ar-b2-u09-p06",
-      "question_id": "q8",
-      "type": "grammar_function",
-      "prompt": "ما وظيفة «إذا» في سؤال ما الذي سيجعل نور تقترح تعديل القاعدة بدل تعديل التنفيذ؟",
-      "answer": "تجعل ظهور مؤشر محدد شرطًا يربط المراجعة بنوع المشكلة ويمنع تغيير المستوى الخطأ من النظام.",
-      "grounding": {
-        "quoted": [
-          "إذا"
-        ],
-        "matched_quotes": [],
-        "grounded": false,
-        "basis": "no_exact_quote_in_passage"
-      },
-      "decision": "MANUAL_REVIEW",
-      "review_reasons": [
-        "quoted_marker_or_context_not_found_in_passage"
-      ]
     },
     {
       "level": "B2",
@@ -4384,6 +4518,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4406,6 +4541,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4428,6 +4564,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4450,6 +4587,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4472,6 +4610,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4494,6 +4633,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4516,6 +4656,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4538,6 +4679,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4560,6 +4702,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4582,30 +4725,8 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
-    },
-    {
-      "level": "C1",
-      "unit": 1,
-      "sequence": 5,
-      "passage_id": "ar-c1-u01-p05",
-      "question_id": "q8",
-      "type": "grammar_function",
-      "prompt": "ما وظيفة «إذا» الضمنية في فكرة أن قيمة الدراسة التالية تعتمد على قدرتها على تقليل عدم اليقين؟",
-      "answer": "تجعل اختيار التصميم تابعًا للجزء غير المحسوم من الحجة بدل تكرار أسهل نتيجة مؤيدة وإضافة عدد جديد فقط.",
-      "grounding": {
-        "quoted": [
-          "إذا"
-        ],
-        "matched_quotes": [],
-        "grounded": false,
-        "basis": "no_exact_quote_in_passage"
-      },
-      "decision": "MANUAL_REVIEW",
-      "review_reasons": [
-        "implicit_marker_claim_requires_manual_grounding",
-        "quoted_marker_or_context_not_found_in_passage"
-      ]
     },
     {
       "level": "C1",
@@ -4627,6 +4748,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4651,6 +4773,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4675,6 +4798,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4697,6 +4821,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4719,6 +4844,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4741,6 +4867,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4763,6 +4890,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4785,6 +4913,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4807,6 +4936,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4829,6 +4959,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4851,6 +4982,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4873,6 +5005,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4895,6 +5028,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4917,6 +5051,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4939,6 +5074,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4961,6 +5097,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -4983,6 +5120,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5005,6 +5143,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5027,6 +5166,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5049,6 +5189,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5071,6 +5212,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5093,6 +5235,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5115,51 +5258,8 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
-    },
-    {
-      "level": "C1",
-      "unit": 5,
-      "sequence": 25,
-      "passage_id": "ar-c1-u05-p01",
-      "question_id": "q8",
-      "type": "grammar_function",
-      "prompt": "ما وظيفة «إذا» في ربط تغير صياغة التقرير بظهور شروط تحد النتيجة؟",
-      "answer": "تجعل الدليل الجديد شرطًا لتعديل نطاق الادعاء بدل حماية العبارة الأولى بعد اتساع الاختبار.",
-      "grounding": {
-        "quoted": [
-          "إذا"
-        ],
-        "matched_quotes": [],
-        "grounded": false,
-        "basis": "no_exact_quote_in_passage"
-      },
-      "decision": "MANUAL_REVIEW",
-      "review_reasons": [
-        "quoted_marker_or_context_not_found_in_passage"
-      ]
-    },
-    {
-      "level": "C1",
-      "unit": 5,
-      "sequence": 26,
-      "passage_id": "ar-c1-u05-p02",
-      "question_id": "q8",
-      "type": "grammar_function",
-      "prompt": "ما وظيفة «إذا» في سؤال ما إذا كان المسار سيبقى بعد موسم تشغيل مختلف؟",
-      "answer": "تجعل تغير الظروف شرطًا لاختبار ثبات العلاقة وتمنع تمديد الاتجاه خارج الفترة المدروسة تلقائيًا.",
-      "grounding": {
-        "quoted": [
-          "إذا"
-        ],
-        "matched_quotes": [],
-        "grounded": false,
-        "basis": "no_exact_quote_in_passage"
-      },
-      "decision": "MANUAL_REVIEW",
-      "review_reasons": [
-        "quoted_marker_or_context_not_found_in_passage"
-      ]
     },
     {
       "level": "C1",
@@ -5181,6 +5281,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5203,6 +5304,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5225,6 +5327,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5247,6 +5350,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5269,6 +5373,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5291,6 +5396,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5313,6 +5419,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5335,6 +5442,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5357,6 +5465,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5379,6 +5488,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5401,6 +5511,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5423,6 +5534,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5445,6 +5557,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5467,6 +5580,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5489,6 +5603,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5511,6 +5626,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5533,6 +5649,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5555,6 +5672,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5577,6 +5695,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5599,6 +5718,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5621,6 +5741,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5643,6 +5764,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5665,6 +5787,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5687,6 +5810,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5709,6 +5833,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5731,31 +5856,8 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
-    },
-    {
-      "level": "C1",
-      "unit": 9,
-      "sequence": 49,
-      "passage_id": "ar-c1-u09-p01",
-      "question_id": "q8",
-      "type": "grammar_function",
-      "prompt": "ما وظيفة «إذا» الضمنية في سؤال ما الذي كان يمكن أن يحدث قبل معرفة الإغلاق؟",
-      "answer": "تفتح بدائل كانت ممكنة وقتها وتقاوم قراءة النتيجة إلى الخلف بوصفها نهاية حتمية لكل ما سبق.",
-      "grounding": {
-        "quoted": [
-          "إذا"
-        ],
-        "matched_quotes": [
-          "إذا"
-        ],
-        "grounded": true,
-        "basis": "at_least_one_exact_quote_in_passage"
-      },
-      "decision": "MANUAL_REVIEW",
-      "review_reasons": [
-        "implicit_marker_claim_requires_manual_grounding"
-      ]
     },
     {
       "level": "C1",
@@ -5777,6 +5879,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5799,6 +5902,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5821,6 +5925,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5843,6 +5948,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5865,6 +5971,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5887,6 +5994,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5909,6 +6017,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5931,6 +6040,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5953,6 +6063,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5975,6 +6086,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -5997,6 +6109,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6019,6 +6132,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6041,6 +6155,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6065,6 +6180,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6087,6 +6203,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6109,6 +6226,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6131,6 +6249,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6150,10 +6269,9 @@
         "grounded": false,
         "basis": "no_exact_quote_in_passage"
       },
-      "decision": "MANUAL_REVIEW",
-      "review_reasons": [
-        "quoted_marker_or_context_not_found_in_passage"
-      ]
+      "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": "RETAIN_ELLIPSIS_SHORTHAND_EXACT_CONSTRUCTION_CONFIRMED",
+      "review_reasons": []
     },
     {
       "level": "C2",
@@ -6175,6 +6293,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6197,6 +6316,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6219,6 +6339,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6241,6 +6362,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6263,6 +6385,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6285,6 +6408,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6304,10 +6428,9 @@
         "grounded": false,
         "basis": "no_exact_quote_in_passage"
       },
-      "decision": "MANUAL_REVIEW",
-      "review_reasons": [
-        "quoted_marker_or_context_not_found_in_passage"
-      ]
+      "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": "RETAIN_ELLIPSIS_SHORTHAND_EXACT_CONSTRUCTION_CONFIRMED",
+      "review_reasons": []
     },
     {
       "level": "C2",
@@ -6329,6 +6452,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6351,6 +6475,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6373,6 +6498,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6395,6 +6521,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6417,6 +6544,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6439,6 +6567,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6461,6 +6590,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6483,6 +6613,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6505,6 +6636,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6527,6 +6659,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6549,6 +6682,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6571,6 +6705,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6593,6 +6728,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6615,6 +6751,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6637,6 +6774,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6659,6 +6797,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6681,6 +6820,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6703,6 +6843,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6725,6 +6866,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6747,6 +6889,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6769,6 +6912,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6791,6 +6935,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6813,6 +6958,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6835,6 +6981,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6857,6 +7004,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6881,6 +7029,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6903,6 +7052,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6925,6 +7075,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6947,6 +7098,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6969,6 +7121,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -6991,6 +7144,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7013,6 +7167,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7035,6 +7190,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7057,6 +7213,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7079,6 +7236,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7101,6 +7259,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7123,6 +7282,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7145,6 +7305,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7167,6 +7328,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7189,6 +7351,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7211,6 +7374,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7233,6 +7397,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7255,6 +7420,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7277,6 +7443,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7299,6 +7466,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7321,6 +7489,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7343,6 +7512,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7365,6 +7535,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7387,6 +7558,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7409,6 +7581,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7431,6 +7604,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7453,6 +7627,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7475,6 +7650,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7497,6 +7673,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7519,6 +7696,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7541,6 +7719,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7563,6 +7742,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7585,6 +7765,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7607,6 +7788,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7629,6 +7811,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7651,6 +7834,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     },
     {
@@ -7673,6 +7857,7 @@
         "basis": "at_least_one_exact_quote_in_passage"
       },
       "decision": "RETAIN_CONTEXTUAL_FUNCTION_ANALYSIS",
+      "manual_adjudication": null,
       "review_reasons": []
     }
   ],

@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "levels": [
+    "B1",
+    "B2",
+    "C1"
+  ],
+  "date": "2026-08-30",
+  "status": "APPLIED_INTERNAL_REVIEW",
+  "scope": "Nine hash-bound B1-C1 question/answer grounding repairs from the fresh 2026-08-30 B1-C2 metalinguistic manual queue.",
+  "pre_repair_sha256": {
+    "b1": "8f0fdaac2cf8f6941008b32971f328e45ff670bf790e1091e3dab9d773ab9ddc",
+    "b2": "5e387ff7eb730358c48fe2329b826d8effc5698079487e71f0f8f064e13b4907",
+    "c1": "2a8d71a25a8176a4383488b8d794151eb041e0e60e96b251f1c13e403d14b23e"
+  },
+  "repairs_applied": 9,
+  "changed_by_level": {
+    "b1": {
+      "passages": 2,
+      "result_sha256": "319d55b99e1642b28d06fcd57271084f3a0a6df2d1b2a375ab65098f45b28ee5"
+    },
+    "b2": {
+      "passages": 3,
+      "result_sha256": "a52a5fc66a3509da50961c95df7b05eb4b4ec018aebd7bfbb88232b4f175ae73"
+    },
+    "c1": {
+      "passages": 4,
+      "result_sha256": "10eb468909610a8475c375952f6e9c1513482a3ef0f5af45b32ed67decf95430"
+    }
+  },
+  "passage_prose_changed": false,
+  "lexical_targets_changed": false,
+  "untargeted_records_byte_identical": true,
+  "repairs": [
+    {
+      "level": "B1",
+      "passage_id": "ar-b1-u02-p01",
+      "question_id": "q8",
+      "before": {
+        "prompt": "ما وظيفة «مع أن» في بيان أن التقرير احتوى كل الأجزاء مع أنه اعتمد على نسخة غير صحيحة؟",
+        "type": "grammar_function"
+      },
+      "after": {
+        "prompt": "ما وظيفة «لكن» في القول إن لوم سامر كان سهلًا لكن ذلك لم يكن السبب الكامل؟",
+        "type": "grammar_function",
+        "answer": "تستدرك على التفسير الظاهر وتفتح الطريق للسبب الأعمق المتعلق بالنسخ وطريقة العمل."
+      }
+    },
+    {
+      "level": "B1",
+      "passage_id": "ar-b1-u03-p05",
+      "question_id": "q8",
+      "before": {
+        "prompt": "ما وظيفة «لا... بل» في وصف رد مريم على التصحيح الذي يغيّر المعنى؟",
+        "type": "grammar_function"
+      },
+      "after": {
+        "prompt": "ما وظيفة «بل» في «لم تكتف برفضه، بل حاولت فهم النمط الذي أدى إليه»؟",
+        "type": "grammar_function",
+        "answer": "تنقل من مجرد رفض الاقتراح إلى خطوة أعمق هي فهم سبب ظهور ذلك الاقتراح."
+      }
+    },
+    {
+      "level": "B2",
+      "passage_id": "ar-b2-u08-p04",
+      "question_id": "q8",
+      "before": {
+        "prompt": "ما وظيفة «إذا» الضمنية في تغير أهمية الطريق مع الموسم والغرض؟",
+        "type": "grammar_function"
+      },
+      "after": {
+        "prompt": "كيف تربط عبارة «أهمية الطريق قد تتغير مع الموسم والغرض» بين مركزية الطريق وظروف الاستخدام؟",
+        "type": "argument_relation",
+        "answer": "تربط مركزية الطريق بظروف الاستخدام بدل معاملتها كخاصية جغرافية ثابتة في كل وقت."
+      }
+    },
+    {
+      "level": "B2",
+      "passage_id": "ar-b2-u09-p03",
+      "question_id": "q8",
+      "before": {
+        "prompt": "ما وظيفة «إذا» في التحذير من إذن طارئ لم يصل في الوقت المناسب؟",
+        "type": "grammar_function"
+      },
+      "after": {
+        "prompt": "ما وظيفة السؤال عن إذن طارئ لم يصل في الوقت المناسب في نقد الإغلاق الآلي بالقائمة؟",
+        "type": "argument_relation",
+        "answer": "يقدم حالة تكشف كلفة الاعتماد على قائمة منع آلية عندما لا تستطيع الإجراءات الإدارية مواكبة الاستثناء المشروع."
+      }
+    },
+    {
+      "level": "B2",
+      "passage_id": "ar-b2-u09-p06",
+      "question_id": "q8",
+      "before": {
+        "prompt": "ما وظيفة «إذا» في سؤال ما الذي سيجعل نور تقترح تعديل القاعدة بدل تعديل التنفيذ؟",
+        "type": "grammar_function"
+      },
+      "after": {
+        "prompt": "ما وظيفة تسجيل ما الذي سيجعل نور تقترح تعديل القاعدة بدل تعديل التنفيذ مسبقًا؟",
+        "type": "argument_relation",
+        "answer": "يربط المراجعة بمؤشر محدد ونوع المشكلة، فيقل خطر تغيير المستوى الخطأ من النظام."
+      }
+    },
+    {
+      "level": "C1",
+      "passage_id": "ar-c1-u01-p05",
+      "question_id": "q8",
+      "before": {
+        "prompt": "ما وظيفة «إذا» الضمنية في فكرة أن قيمة الدراسة التالية تعتمد على قدرتها على تقليل عدم اليقين؟",
+        "type": "grammar_function"
+      },
+      "after": {
+        "prompt": "لماذا يربط النص اختيار الدراسة التالية بالجزء الأكثر قدرة على تقليل عدم اليقين؟",
+        "type": "argument_relation",
+        "answer": "يجعل اختيار التصميم تابعًا للجزء غير المحسوم من الحجة بدل تكرار أسهل نتيجة مؤيدة وإضافة عدد جديد فقط."
+      }
+    },
+    {
+      "level": "C1",
+      "passage_id": "ar-c1-u05-p01",
+      "question_id": "q8",
+      "before": {
+        "prompt": "ما وظيفة «إذا» في ربط تغير صياغة التقرير بظهور شروط تحد النتيجة؟",
+        "type": "grammar_function"
+      },
+      "after": {
+        "prompt": "كيف يربط النص ظهور شروط جديدة بتعديل نطاق الادعاء في التقرير؟",
+        "type": "argument_relation",
+        "answer": "يجعل الدليل الجديد سببًا لتعديل نطاق الادعاء بدل حماية العبارة الأولى بعد اتساع الاختبار."
+      }
+    },
+    {
+      "level": "C1",
+      "passage_id": "ar-c1-u05-p02",
+      "question_id": "q8",
+      "before": {
+        "prompt": "ما وظيفة «إذا» في سؤال ما إذا كان المسار سيبقى بعد موسم تشغيل مختلف؟",
+        "type": "grammar_function"
+      },
+      "after": {
+        "prompt": "ما وظيفة السؤال عن استمرار المسار بعد فترة أو موسم تشغيل مختلف؟",
+        "type": "argument_relation",
+        "answer": "يختبر ثبات العلاقة وحدود تعميمها ويمنع تمديد الاتجاه خارج الفترة المدروسة تلقائيًا."
+      }
+    },
+    {
+      "level": "C1",
+      "passage_id": "ar-c1-u09-p01",
+      "question_id": "q8",
+      "before": {
+        "prompt": "ما وظيفة «إذا» الضمنية في سؤال ما الذي كان يمكن أن يحدث قبل معرفة الإغلاق؟",
+        "type": "grammar_function"
+      },
+      "after": {
+        "prompt": "ما وظيفة السؤال عما كان يمكن أن يحدث قبل معرفة الإغلاق؟",
+        "type": "argument_relation",
+        "answer": "يفتح بدائل كانت ممكنة وقتها ويقاوم قراءة النتيجة إلى الخلف بوصفها نهاية حتمية لكل ما سبق."
+      }
+    }
+  ],
+  "retained_false_positive_items": [
+    {
+      "passage_id": "ar-c1-u10-p06",
+      "question_id": "q10",
+      "reason": "Passage explicitly says: ليس حفظ مفردات أصعب، بل القدرة...; ellipsis shorthand caused detector miss."
+    },
+    {
+      "passage_id": "ar-c2-u01-p06",
+      "question_id": "q10",
+      "reason": "Passage explicitly says: لا يكافأ بكثرة الأسماء ولا بغرابة الأمثلة; ellipsis shorthand caused detector miss."
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false
+}
