@@ -1,0 +1,117 @@
+name: Arabic fresh deterministic release revalidation
+
+on:
+  push:
+    paths:
+      - '.github/workflows/run-arabic-fresh-deterministic-revalidation.yml'
+      - 'reading/tools/run_arabic_fresh_deterministic_revalidation.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  revalidate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run 100-percent Arabic deterministic revalidation
+        run: python reading/tools/run_arabic_fresh_deterministic_revalidation.py
+      - name: Reconcile release evidence state from fresh audit
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          audit_path = Path('reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json')
+          release_path = Path('reading/RELEASE_STATUS.json')
+          cont_path = Path('reading/CONTINUATION.json')
+          tasks_path = Path('reading/VERIFICATION_TASKS.md')
+
+          audit = json.loads(audit_path.read_text(encoding='utf-8'))
+          release = json.loads(release_path.read_text(encoding='utf-8'))
+          cont = json.loads(cont_path.read_text(encoding='utf-8'))
+          if audit['records'] != 360 or audit['questions'] != 3600 or audit['answers'] != 3600:
+              raise SystemExit('Fresh Arabic audit did not cover the complete 360/3600/3600 corpus')
+          if audit['structural_errors']:
+              raise SystemExit(f"Structural errors make the release evidence invalid: {audit['structural_errors']}")
+
+          artifact = 'reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json'
+          ar = release['languages']['arabic']
+          old_evidence = ar.get('latest_release_evidence', [])
+          if isinstance(old_evidence, str):
+              old_evidence = [old_evidence]
+          ar['latest_release_evidence'] = [x for x in old_evidence if x != artifact] + [artifact]
+          ar['release_state'] = 'REOPEN_REQUIRED' if audit['status'] != 'PASS' else 'DETERMINISTIC_REVALIDATED'
+          ar['educator_release_ready'] = False
+          ar['latest_deterministic_gate'] = {
+              'status': audit['status'],
+              'records': audit['records'],
+              'questions': audit['questions'],
+              'answers': audit['answers'],
+              'open_findings': audit['open_findings'],
+              'finding_classes': audit['finding_classes'],
+              'artifact': artifact,
+              'date': audit['date'],
+          }
+          ar['open_release_classes'] = [
+              'substantive resolution of fresh deterministic release-evidence blockers (no bulk promotion)',
+              'corpus-wide low-level metalinguistic/CEFR audit and repair',
+              'corpus-wide Arabic grammar-in-context naturalness audit',
+              'full semantic educator review',
+              'independent native/model-family recertification',
+              'blind post-repair human review',
+              'hash-bound release manifest',
+          ]
+          release['updated'] = '2026-08-30'
+          blockers = release.get('global_release_blockers', [])
+          fresh = f"Arabic fresh deterministic release revalidation is {audit['status']} with {audit['open_findings']} open evidence findings requiring substantive resolution; educator release remains blocked."
+          blockers = [b for b in blockers if not b.startswith('Arabic ')]
+          release['global_release_blockers'] = [fresh] + blockers
+
+          cont['release']['arabic']['release_state'] = ar['release_state']
+          cont['release']['arabic']['educator_release_ready'] = False
+          cont['updated'] = '2026-08-30'
+
+          release_path.write_text(json.dumps(release, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          cont_path.write_text(json.dumps(cont, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          text = tasks_path.read_text(encoding='utf-8')
+          text = text.replace('Current release position: historical internal language pass exists, but educator/publication release is **not ready** under the current assurance profile.',
+              f"Current release position: fresh deterministic revalidation is **{audit['status']}** with **{audit['open_findings']}** open evidence findings; educator/publication release remains **not ready** under the current assurance profile.")
+          text = text.replace('- [ ] fresh deterministic educator-release revalidation;', '- [x] fresh deterministic educator-release revalidation;')
+          anchor = 'Open verification work:\n\n'
+          evidence_note = (
+              f"Fresh deterministic evidence: `{artifact}` — 360 records, 3,600 questions, 3,600 answers; "
+              f"status **{audit['status']}**; open findings **{audit['open_findings']}**. This is a release-evidence gate, not semantic approval.\n\n"
+          )
+          if evidence_note not in text:
+              text = text.replace(anchor, evidence_note + anchor, 1)
+          new_item = '- [ ] substantively resolve the fresh deterministic release-evidence blockers without bulk-promoting draft/pending metadata;\n'
+          if new_item not in text:
+              text = text.replace('- [x] fresh deterministic educator-release revalidation;\n', '- [x] fresh deterministic educator-release revalidation;\n' + new_item, 1)
+          tasks_path.write_text(text, encoding='utf-8')
+          PY
+      - name: Refresh state manifest and validate reconciled release state
+        run: |
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+      - name: Commit fresh Arabic deterministic evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json \
+                  reading/RELEASE_STATUS.json \
+                  reading/CONTINUATION.json \
+                  reading/VERIFICATION_TASKS.md \
+                  reading/STATE_MANIFEST.json
+          if git diff --cached --quiet; then
+            echo 'No evidence-state changes required.'
+            exit 0
+          fi
+          git commit -m 'Record fresh Arabic deterministic release revalidation'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
