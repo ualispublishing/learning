@@ -47,8 +47,8 @@
   {
     "rank": 107,
     "front": "جميع",
-    "meaning": "all; everyone; entire",
-    "part_of_speech": "noun",
+    "meaning": "all; entire; whole",
+    "part_of_speech": "noun / quantifier",
     "priority_flags": []
   },
   {
@@ -226,9 +226,11 @@
   {
     "rank": 129,
     "front": "خير",
-    "meaning": "good; goodness; better/best in some expressions",
-    "part_of_speech": "noun",
-    "priority_flags": []
+    "meaning": "good; goodness; better; best (depending on construction)",
+    "part_of_speech": "noun / irregular comparative-elative",
+    "priority_flags": [
+      "broad_or_multi_sense_meaning"
+    ]
   },
   {
     "rank": 130,
@@ -503,9 +505,11 @@
   {
     "rank": 165,
     "front": "حدث",
-    "meaning": "happened; occurred",
-    "part_of_speech": "perfect / past verb",
-    "priority_flags": []
+    "meaning": "event; happened; occurred (depending on vocalization/use)",
+    "part_of_speech": "noun / perfect-past verb",
+    "priority_flags": [
+      "undiacritized_homograph_attention"
+    ]
   },
   {
     "rank": 166,
@@ -1228,9 +1232,9 @@
   },
   {
     "rank": 257,
-    "front": "مازال",
-    "meaning": "still is or was; continues or continued to be",
-    "part_of_speech": "negative particle + defective verb (ma + zala), fixed continuative construction",
+    "front": "ما زال",
+    "meaning": "still is/was; continues/continued to be",
+    "part_of_speech": "negative particle + defective verb; fixed continuative construction",
     "priority_flags": []
   },
   {
@@ -1317,8 +1321,8 @@
   },
   {
     "rank": 269,
-    "front": "لابد",
-    "meaning": "must; necessarily; inevitably (لا بُدَّ)",
+    "front": "لا بد",
+    "meaning": "must; necessarily; inevitably",
     "part_of_speech": "fixed modal expression",
     "priority_flags": []
   },
@@ -1348,9 +1352,11 @@
   {
     "rank": 273,
     "front": "مشروع",
-    "meaning": "project; plan",
-    "part_of_speech": "noun",
-    "priority_flags": []
+    "meaning": "project; plan; lawful; legitimate",
+    "part_of_speech": "noun / adjective",
+    "priority_flags": [
+      "broad_or_multi_sense_meaning"
+    ]
   },
   {
     "rank": 274,
@@ -1418,14 +1424,14 @@
   {
     "rank": 282,
     "front": "بطولة",
-    "meaning": "championship; tournament",
+    "meaning": "championship; tournament; heroism",
     "part_of_speech": "noun",
     "priority_flags": []
   },
   {
     "rank": 283,
     "front": "هيئة",
-    "meaning": "body; authority; commission; organization",
+    "meaning": "form; appearance; body; authority; commission; organization",
     "part_of_speech": "noun",
     "priority_flags": [
       "broad_or_multi_sense_meaning"
@@ -1465,9 +1471,11 @@
   {
     "rank": 288,
     "front": "إذن",
-    "meaning": "then; therefore; in that case (إذن)",
-    "part_of_speech": "particle",
-    "priority_flags": []
+    "meaning": "then; therefore; in that case (إِذًا/إذن); permission; authorization (إِذْن)",
+    "part_of_speech": "particle / noun",
+    "priority_flags": [
+      "broad_or_multi_sense_meaning"
+    ]
   },
   {
     "rank": 289,
@@ -1493,12 +1501,9 @@
   {
     "rank": 292,
     "front": "ألا",
-    "meaning": "attention/emphasis particle; also unvocalized form of أَلَّا 'that not'",
-    "part_of_speech": "particle",
-    "priority_flags": [
-      "modern_corpus_review_signal"
-    ],
-    "corpus_signal": "Shouldn; Doesn; shouldn; remember; hope"
+    "meaning": "attention/emphasis particle; that not (أَلَّا); don't/doesn't/isn't... ? (أَ + لا)",
+    "part_of_speech": "particle / interrogative particle sequence",
+    "priority_flags": []
   },
   {
     "rank": 293,
@@ -1815,9 +1820,13 @@
   {
     "rank": 332,
     "front": "ذات",
-    "meaning": "self/same; possessing (in constructions such as ذات)",
-    "part_of_speech": "noun",
-    "priority_flags": []
+    "meaning": "self; essence; having; possessing (feminine form corresponding to ذو, depending on construction)",
+    "part_of_speech": "noun / possessive-relational form",
+    "priority_flags": [
+      "modern_corpus_review_signal",
+      "broad_or_multi_sense_meaning"
+    ],
+    "corpus_signal": "Once; One; woman; same; once"
   },
   {
     "rank": 333,
@@ -2023,10 +2032,10 @@
   {
     "rank": 358,
     "front": "تقدم",
-    "meaning": "progress; advance; advanced/progressed",
-    "part_of_speech": "noun / perfect / past verb",
+    "meaning": "progress; advance; advanced; came forward; applied (depending on use)",
+    "part_of_speech": "noun / perfect-past verb",
     "priority_flags": [
-      "multi_pos_attention"
+      "broad_or_multi_sense_meaning"
     ]
   },
   {
@@ -2039,10 +2048,12 @@
   {
     "rank": 360,
     "front": "عبر",
-    "meaning": "through; via; across; crossed or passed through; expressed",
-    "part_of_speech": "relational or adverbial noun / perfect-past verb",
+    "meaning": "through; via; across; lessons; morals; crossed/passed through; expressed (depending on vocalization/use)",
+    "part_of_speech": "relational/adverbial noun / plural noun / perfect-past verb",
     "priority_flags": [
-      "broad_or_multi_sense_meaning"
+      "undiacritized_homograph_attention",
+      "broad_or_multi_sense_meaning",
+      "multi_pos_attention"
     ]
   },
   {
@@ -2308,9 +2319,11 @@
   {
     "rank": 395,
     "front": "مالية",
-    "meaning": "financial; fiscal",
-    "part_of_speech": "adjective",
-    "priority_flags": []
+    "meaning": "financial; fiscal; finance; finances",
+    "part_of_speech": "adjective / noun",
+    "priority_flags": [
+      "broad_or_multi_sense_meaning"
+    ]
   },
   {
     "rank": 396,
@@ -2336,9 +2349,12 @@
   {
     "rank": 399,
     "front": "مستقبل",
-    "meaning": "future",
-    "part_of_speech": "noun",
-    "priority_flags": []
+    "meaning": "future; receiver; recipient; host (depending on vocalization/use)",
+    "part_of_speech": "noun / active participle",
+    "priority_flags": [
+      "undiacritized_homograph_attention",
+      "broad_or_multi_sense_meaning"
+    ]
   },
   {
     "rank": 400,
@@ -2861,9 +2877,12 @@
   {
     "rank": 467,
     "front": "دوري",
-    "meaning": "league; round/periodic competition; periodic (depending on use)",
+    "meaning": "league; periodic; my turn; my role (depending on vocalization/use)",
     "part_of_speech": "noun / adjective",
-    "priority_flags": []
+    "priority_flags": [
+      "undiacritized_homograph_attention",
+      "broad_or_multi_sense_meaning"
+    ]
   },
   {
     "rank": 468,
@@ -2965,9 +2984,12 @@
   {
     "rank": 481,
     "front": "وحدة",
-    "meaning": "unit; unity",
+    "meaning": "unit; unity; loneliness; solitude (depending on vocalization/use)",
     "part_of_speech": "noun",
-    "priority_flags": []
+    "priority_flags": [
+      "undiacritized_homograph_attention",
+      "broad_or_multi_sense_meaning"
+    ]
   },
   {
     "rank": 482,
