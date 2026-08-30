@@ -13,6 +13,7 @@ on:
       - 'audit/language-workbooks/v1.0/FINAL_NATIVE_REVIEW_PACKET.md'
       - 'audit/language-workbooks/v1.0/CORRECTNESS_STANDARD.md'
       - 'audit/language-workbooks/v1.0/FINAL_NATIVE_SIGNOFF_TEMPLATE.json'
+      - 'audit/language-workbooks/v1.0/native-review-ledgers/README.md'
       - 'audit/language-workbooks/v1.0/native-signoffs/README.md'
       - '.github/PULL_REQUEST_TEMPLATE/lang-wb-native-signoff.md'
       - 'completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json'
@@ -58,6 +59,7 @@ jobs:
           test -f "$dir/${lang}_SIGNOFF_DRAFT.json"
           test -f "$dir/CANDIDATE_BINDING.json"
           test -f "$dir/RELEASE_MANIFEST.json"
+          test -f "$dir/NATIVE_REVIEW_LEDGER_README.md"
           test -f "$dir/BUNDLE_MANIFEST.json"
           test -f "$dir/CHECKSUMS.sha256"
           test -s "$zip"
