@@ -86,5 +86,25 @@
     "Only update RELEASE_STATUS.json when release evidence itself changes.",
     "After all tracked live-state edits are complete, run python reading/tools/refresh_state_manifest.py.",
     "Do not append historical timelines here; use Git history and reading/audit/."
+  ],
+  "arabic": {
+    "canonical_passages": 360,
+    "levels": {
+      "a1": 60,
+      "a2": 60,
+      "b1": 60,
+      "b2": 60,
+      "c1": 60,
+      "c2": 60
+    },
+    "generation_state": "COMPLETE",
+    "questions_per_passage": 10,
+    "total_questions": 3600,
+    "total_answers": 3600,
+    "formal_final_approval": false
+  },
+  "phase": "Arabic A1-C2 generation is complete. Determine final-review state from fresh audit artifacts before setting next actions.",
+  "next_actions": [
+    "run the final-review status synchronizer against current audit artifacts"
   ]
 }
