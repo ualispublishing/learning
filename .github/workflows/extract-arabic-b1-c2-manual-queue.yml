@@ -1,0 +1,29 @@
+name: Extract Arabic B1-C2 manual queue
+
+on:
+  push:
+    paths:
+      - '.github/workflows/extract-arabic-b1-c2-manual-queue.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract exact current manual-review queue
+        run: python3 reading/tools/extract_arabic_b1_c2_manual_review_queue.py
+      - name: Commit queue artifact
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reading/audit/arabic_b1_c2_metalinguistic_manual_queue_2026-08-30.json
+          if git diff --cached --quiet; then
+            echo "No queue changes to commit"
+          else
+            git commit -m "Add Arabic B1-C2 manual-review queue evidence"
+            git push
+          fi
