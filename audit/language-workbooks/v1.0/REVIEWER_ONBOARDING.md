@@ -82,13 +82,20 @@ Use FAIL for a defect you can identify, or HOLD when an item needs further adjud
 
 A reviewer is not required to implement the source repair personally.
 
-## 7. Record your immutable sign-off
+## 7. Prepare and complete your immutable sign-off
 
-When your review outcome is ready, copy [`FINAL_NATIVE_SIGNOFF_TEMPLATE.json`](FINAL_NATIVE_SIGNOFF_TEMPLATE.json) to a **new** file under [`native-signoffs/`](native-signoffs/).
+The safest way to avoid copying candidate hashes by hand is to generate a draft bound to the exact current candidate:
 
-The filename must begin with the language declared inside the JSON: `arabic_`, `french_`, or `urdu_`. The required convention is documented in [`native-signoffs/README.md`](native-signoffs/README.md), and CI rejects a filename/language mismatch.
+```bash
+python scripts/prepare_lang_wb_native_signoff_draft.py arabic
+# or: french / urdu
+```
 
-Use current candidate identifiers from the generated:
+The draft is written under `native-review-ledgers/` by default. It fills only deterministic candidate bindings. Its review outcome and completion time are blank, reviewer qualification fields are blank, and every scope attestation is `false`; an untouched draft is therefore deliberately rejected by the human sign-off validator and cannot certify anything.
+
+After you complete the required review, use that draft or [`FINAL_NATIVE_SIGNOFF_TEMPLATE.json`](FINAL_NATIVE_SIGNOFF_TEMPLATE.json) to create a **new** file under [`native-signoffs/`](native-signoffs/). The filename must begin with the language declared inside the JSON: `arabic_`, `french_`, or `urdu_`. The required convention is documented in [`native-signoffs/README.md`](native-signoffs/README.md), and CI rejects a filename/language mismatch.
+
+If you prepare the record manually, use current candidate identifiers from the generated:
 
 `native-review-ledgers/CANDIDATE_BINDINGS.json`
 
