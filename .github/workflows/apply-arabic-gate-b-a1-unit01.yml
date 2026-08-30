@@ -43,7 +43,7 @@ jobs:
           fi
 
       - name: Apply exact-current A1 Unit 1 naturalness repairs
-        run: python reading/tools/apply_arabic_gate_b_a1_unit01.py
+        run: python reading/tools/apply_arabic_gate_b_a1_unit01_v2.py
 
       - name: Rebuild all hash-bound Arabic evidence
         shell: bash
