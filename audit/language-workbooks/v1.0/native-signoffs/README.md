@@ -2,9 +2,11 @@
 
 Store completed human linguistic review records here as immutable JSON files using the schema in [`../FINAL_NATIVE_SIGNOFF_TEMPLATE.json`](../FINAL_NATIVE_SIGNOFF_TEMPLATE.json).
 
-Recommended filename format:
+Required filename format:
 
 `<language>_<review-completed-UTC-date>_<reviewer-id>.json`
+
+The filename **must begin with the declared language plus an underscore** (`arabic_`, `french_`, or `urdu_`). Promotion discovers records by that prefix, and CI rejects a sign-off whose filename does not match its declared language.
 
 Examples:
 
@@ -14,7 +16,7 @@ Examples:
 
 Rules:
 
-1. Never overwrite or silently edit an earlier sign-off after the reviewed candidate changes; add a new immutable record instead.
+1. Add each review as a **new** JSON file. Once a sign-off is committed, CI rejects modification, rename, or deletion; later review outcomes must be new immutable records.
 2. Every record must bind to the exact master-workbook Git blob SHA, sentence-decision SHA-256, and release-manifest Git blob SHA reviewed.
 3. Do not copy candidate hashes from an older sign-off or an old template. Generate the current reviewer bindings with `python scripts/build_lang_wb_native_review_ledgers.py` and use `../native-review-ledgers/CANDIDATE_BINDINGS.json` as the current-candidate binding source.
 4. PASS is valid only after full learner-facing review with all scope attestations true and no defects or holds remaining.
@@ -29,11 +31,19 @@ Validate a completed structured worksheet first with:
 python scripts/validate_lang_wb_native_review_ledger.py <arabic|french|urdu>
 ```
 
+Validate the completed sign-off record itself with:
+
+```bash
+python scripts/validate_lang_wb_native_signoff.py audit/language-workbooks/v1.0/native-signoffs/<file>.json
+```
+
 If the reviewer recorded FAIL/HOLD items, project them without reinterpretation with:
 
 ```bash
 python scripts/extract_lang_wb_native_review_actions.py <arabic|french|urdu>
 ```
+
+Prefer submitting the new record in a focused pull request. The LANG-WB human sign-off workflow validates additions on pull requests and pushes. A valid one-language sign-off can pass CI while the overall release remains on HOLD for the other languages.
 
 After the full human review and immutable sign-off record are complete, validate the current release state with:
 
