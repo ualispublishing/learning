@@ -1,0 +1,66 @@
+name: LANG-WB final release snapshot
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-final-release-snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact candidate commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build commit-bound final-release snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/lang-wb-v1.0-final-release-snapshot"
+          mkdir -p "$out"
+          python scripts/build_lang_wb_final_release_snapshot.py \
+            --output "$out/FINAL_RELEASE_SNAPSHOT.json"
+
+          cp audit/language-workbooks/v1.0/final_human_promotion_gate.json \
+            "$out/final_human_promotion_gate.json"
+          cp audit/language-workbooks/v1.0/release_gate_v3.json \
+            "$out/release_gate_v3.json"
+          cp audit/language-workbooks/v1.0/final_visual_audit_20260829.json \
+            "$out/final_visual_audit_20260829.json"
+          cp audit/language-workbooks/v1.0/production_decision_alignment.json \
+            "$out/production_decision_alignment.json"
+          cp audit/language-workbooks/v1.0/final_integrity_review_summary.json \
+            "$out/final_integrity_review_summary.json"
+
+          (
+            cd "$out"
+            sha256sum FINAL_RELEASE_SNAPSHOT.json \
+              final_human_promotion_gate.json \
+              release_gate_v3.json \
+              final_visual_audit_20260829.json \
+              production_decision_alignment.json \
+              final_integrity_review_summary.json \
+              > CHECKSUMS.sha256
+          )
+
+      - name: Confirm release and sign-off inputs stayed unchanged
+        run: |
+          git diff --exit-code -- completed/languages/workbooks/v1.0
+          git diff --exit-code -- curation/language-workbooks/v1.0
+          git diff --exit-code -- audit/language-workbooks/v1.0/native-signoffs
+
+      - name: Upload exact-commit release evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: lang-wb-v1.0-final-release-snapshot-${{ github.sha }}
+          path: ${{ runner.temp }}/lang-wb-v1.0-final-release-snapshot
+          if-no-files-found: error
+          retention-days: 90
