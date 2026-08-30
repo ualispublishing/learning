@@ -10,7 +10,7 @@ You may review **one language only**. Arabic, French, and Urdu are certified ind
 
 A reviewer does not need to assemble the workbook, worksheet, candidate hashes, sign-off draft, and instructions manually.
 
-GitHub Actions provides [`LANG-WB reviewer bundles`](../../../.github/workflows/language-workbook-reviewer-bundles.yml). Run the workflow and choose `arabic`, `french`, `urdu`, or `all`; the resulting artifact contains a ZIP for each requested language. Each ZIP contains the complete master PDF, a blank 2,000-item review ledger, exact current candidate binding, intentionally incomplete sign-off draft, canonical review documents, PR checklist, bundle manifest, and SHA-256 checksums.
+GitHub Actions provides [`LANG-WB reviewer packages`](../../../.github/workflows/language-workbook-reviewer-package.yml). Run the workflow to generate separate Arabic, French, and Urdu artifacts. Each artifact contains a self-contained ZIP for one language with the complete master PDF, exact vocabulary/sentence companion CSVs, blank 2,000-item review ledger, current candidate binding, release manifest, intentionally incomplete sign-off draft, canonical sign-off template, review documents, PR checklist, bundle manifest, and SHA-256 checksums.
 
 The same package can be built locally with one command:
 
