@@ -1,0 +1,140 @@
+name: LANG-WB expected human hold self-test
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/language-workbook-expected-hold-selftest.yml'
+      - 'scripts/validate_lang_wb_expected_human_hold.py'
+      - 'scripts/workbook_final_human_promotion_gate.py'
+      - 'completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json'
+
+permissions:
+  contents: read
+
+jobs:
+  expected-hold-selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Confirm current repository state is valid PASS or expected HOLD
+        shell: bash
+        run: |
+          set +e
+          python scripts/workbook_final_human_promotion_gate.py
+          code=$?
+          set -e
+          if [ "$code" -eq 0 ]; then
+            echo 'Current LANG-WB human promotion gate is PASS.'
+          elif [ "$code" -eq 2 ]; then
+            python scripts/validate_lang_wb_expected_human_hold.py
+          else
+            exit "$code"
+          fi
+
+      - name: Build synthetic hold reports
+        run: |
+          python - <<'PY'
+          import copy, json
+          from pathlib import Path
+
+          base = {
+              'release': 'v1.0',
+              'gate': 'HOLD',
+              'manifest_status': 'production_candidate',
+              'problems': ['language_signoff_hold:arabic,french,urdu'],
+              'languages': {
+                  lang: {
+                      'gate': 'HOLD',
+                      'latest_current_candidate_signoff': None,
+                      'checked_signoffs': [],
+                      'problems': ['no_signoff_files', 'no_current_candidate_signoff'],
+                  }
+                  for lang in ('arabic', 'french', 'urdu')
+              },
+          }
+          out = Path('/tmp/lang-wb-hold-selftest')
+          out.mkdir(parents=True, exist_ok=True)
+          (out / 'expected.json').write_text(json.dumps(base), encoding='utf-8')
+
+          released = copy.deepcopy(base)
+          released['manifest_status'] = 'released'
+          released['problems'].insert(0, "expected production_candidate before promotion, got 'released'")
+          (out / 'released.json').write_text(json.dumps(released), encoding='utf-8')
+
+          missing = copy.deepcopy(base)
+          missing['languages']['arabic']['problems'] = ['missing_master:arabic']
+          (out / 'missing.json').write_text(json.dumps(missing), encoding='utf-8')
+
+          invalid_pass = copy.deepcopy(base)
+          invalid_pass['languages']['arabic']['latest_current_candidate_signoff'] = {
+              'path': 'audit/language-workbooks/v1.0/native-signoffs/arabic_example.json',
+              'review_completed_utc': '2026-08-29T20:00:00Z',
+              'review_outcome': 'PASS',
+              'problems': ['reviewer_qualification'],
+          }
+          invalid_pass['languages']['arabic']['problems'] = ['latest_current_candidate_signoff_not_PASS']
+          (out / 'invalid-pass.json').write_text(json.dumps(invalid_pass), encoding='utf-8')
+
+          valid_hold = copy.deepcopy(base)
+          valid_hold['languages']['arabic']['latest_current_candidate_signoff'] = {
+              'path': 'audit/language-workbooks/v1.0/native-signoffs/arabic_example.json',
+              'review_completed_utc': '2026-08-29T20:00:00Z',
+              'review_outcome': 'HOLD',
+              'problems': ['review_outcome', 'holds_not_empty'],
+          }
+          valid_hold['languages']['arabic']['problems'] = ['latest_current_candidate_signoff_not_PASS']
+          (out / 'valid-hold.json').write_text(json.dumps(valid_hold), encoding='utf-8')
+          PY
+
+      - name: Confirm expected no-signoff HOLD passes
+        run: python scripts/validate_lang_wb_expected_human_hold.py /tmp/lang-wb-hold-selftest/expected.json
+
+      - name: Confirm valid reviewer HOLD passes
+        run: python scripts/validate_lang_wb_expected_human_hold.py /tmp/lang-wb-hold-selftest/valid-hold.json
+
+      - name: Confirm fake released manifest is rejected
+        shell: bash
+        run: |
+          set +e
+          output=$(python scripts/validate_lang_wb_expected_human_hold.py /tmp/lang-wb-hold-selftest/released.json)
+          code=$?
+          set -e
+          if [ "$code" -ne 1 ]; then
+            echo "$output"
+            exit 1
+          fi
+          echo "$output" | grep -q 'manifest_status'
+
+      - name: Confirm missing release input is rejected
+        shell: bash
+        run: |
+          set +e
+          output=$(python scripts/validate_lang_wb_expected_human_hold.py /tmp/lang-wb-hold-selftest/missing.json)
+          code=$?
+          set -e
+          if [ "$code" -ne 1 ]; then
+            echo "$output"
+            exit 1
+          fi
+          echo "$output" | grep -q 'unexpected_hold_problem'
+
+      - name: Confirm invalid current PASS claim is rejected
+        shell: bash
+        run: |
+          set +e
+          output=$(python scripts/validate_lang_wb_expected_human_hold.py /tmp/lang-wb-hold-selftest/invalid-pass.json)
+          code=$?
+          set -e
+          if [ "$code" -ne 1 ]; then
+            echo "$output"
+            exit 1
+          fi
+          echo "$output" | grep -q 'invalid_current_PASS'
