@@ -1,0 +1,157 @@
+name: LANG-WB sign-off immutability self-test
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/language-workbook-signoff-diff-selftest.yml'
+      - 'scripts/validate_lang_wb_signoff_diff.py'
+      - 'scripts/validate_lang_wb_native_signoff.py'
+      - 'scripts/workbook_final_human_promotion_gate.py'
+      - 'audit/language-workbooks/v1.0/FINAL_NATIVE_SIGNOFF_TEMPLATE.json'
+      - 'completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json'
+      - 'completed/languages/workbooks/v1.0/arabic/00_arabic_complete_master.pdf'
+
+permissions:
+  contents: read
+
+jobs:
+  signoff-diff-selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Configure ephemeral Git author
+        run: |
+          git config user.name 'LANG-WB CI self-test'
+          git config user.email 'lang-wb-ci@example.invalid'
+
+      - name: Create and commit one synthetic valid Arabic PASS
+        shell: bash
+        run: |
+          echo "BASE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          python - <<'PY'
+          from datetime import datetime, timedelta, timezone
+          import json, sys
+          sys.path.insert(0, 'scripts')
+          import workbook_final_human_promotion_gate as g
+
+          manifest = g.load_json(g.MANIFEST_PATH)
+          manifest_blob = g.git_blob_sha(g.MANIFEST_PATH)
+          lang = 'arabic'
+          master_rel = f"completed/languages/workbooks/v1.0/{lang}/{g.MASTER_NAMES[lang]}"
+          master = g.ROOT / master_rel
+          reviewed = datetime.now(timezone.utc) - timedelta(minutes=1)
+          record = {
+              'schema': 'lang-wb-native-signoff-v1',
+              'release': 'v1.0',
+              'language': lang,
+              'review_outcome': 'PASS',
+              'review_completed_utc': reviewed.isoformat().replace('+00:00', 'Z'),
+              'reviewer': {
+                  'name_or_identifier': 'synthetic-diff-ci-reviewer',
+                  'native_or_near_native_status': 'synthetic test only',
+                  'qualification_basis': 'ephemeral CI fixture; not human certification',
+                  'relevant_editing_teaching_or_linguistic_experience': '',
+                  'conflict_of_interest_or_relationship_to_project': 'synthetic CI fixture'
+              },
+              'candidate_binding': {
+                  'master_workbook_path': master_rel,
+                  'master_workbook_git_blob_sha': g.git_blob_sha(master),
+                  'sentence_decision_sha256': manifest['sentence_curation']['languages'][lang]['decision_sha256'],
+                  'release_manifest_path': 'completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json',
+                  'release_manifest_git_blob_sha': manifest_blob,
+              },
+              'scope_attestation': {field: True for field in g.REQUIRED_SCOPE_FIELDS},
+              'defects': [],
+              'holds': [],
+              'attestation': 'Synthetic ephemeral CI fixture exercising immutable-diff validation only.',
+              'pass_condition_acknowledged': 'Synthetic ephemeral CI fixture only.'
+          }
+          path = g.SIGNOFF_DIR / 'arabic_synthetic_diff_pass.json'
+          path.write_text(json.dumps(record, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+          git add audit/language-workbooks/v1.0/native-signoffs/arabic_synthetic_diff_pass.json
+          git commit -m 'synthetic add sign-off'
+          echo "ADD_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: Confirm added valid sign-off passes diff validation
+        run: python scripts/validate_lang_wb_signoff_diff.py "$BASE_SHA" "$ADD_SHA"
+
+      - name: Confirm modification of committed sign-off is rejected
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          p = 'audit/language-workbooks/v1.0/native-signoffs/arabic_synthetic_diff_pass.json'
+          data = json.load(open(p, encoding='utf-8'))
+          data['reviewer']['qualification_basis'] += ' modified'
+          open(p, 'w', encoding='utf-8').write(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
+          PY
+          git add audit/language-workbooks/v1.0/native-signoffs/arabic_synthetic_diff_pass.json
+          git commit -m 'synthetic modify sign-off'
+          modify_sha=$(git rev-parse HEAD)
+          set +e
+          output=$(python scripts/validate_lang_wb_signoff_diff.py "$ADD_SHA" "$modify_sha")
+          code=$?
+          set -e
+          if [ "$code" -ne 1 ]; then
+            echo "modified sign-off exit=$code; expected 1"
+            echo "$output"
+            exit 1
+          fi
+          echo "$output" | grep -q 'immutable_signoff_change:M'
+          echo "MODIFY_SHA=$modify_sha" >> "$GITHUB_ENV"
+
+      - name: Confirm deletion of committed sign-off is rejected
+        shell: bash
+        run: |
+          git rm audit/language-workbooks/v1.0/native-signoffs/arabic_synthetic_diff_pass.json
+          git commit -m 'synthetic delete sign-off'
+          delete_sha=$(git rev-parse HEAD)
+          set +e
+          output=$(python scripts/validate_lang_wb_signoff_diff.py "$MODIFY_SHA" "$delete_sha")
+          code=$?
+          set -e
+          if [ "$code" -ne 1 ]; then
+            echo "deleted sign-off exit=$code; expected 1"
+            echo "$output"
+            exit 1
+          fi
+          echo "$output" | grep -q 'immutable_signoff_change:D'
+
+      - name: Confirm rename of committed sign-off is rejected
+        shell: bash
+        run: |
+          git reset --hard "$ADD_SHA"
+          git mv audit/language-workbooks/v1.0/native-signoffs/arabic_synthetic_diff_pass.json \
+                 audit/language-workbooks/v1.0/native-signoffs/arabic_synthetic_diff_pass_renamed.json
+          git commit -m 'synthetic rename sign-off'
+          rename_sha=$(git rev-parse HEAD)
+          set +e
+          output=$(python scripts/validate_lang_wb_signoff_diff.py "$ADD_SHA" "$rename_sha")
+          code=$?
+          set -e
+          if [ "$code" -ne 1 ]; then
+            echo "renamed sign-off exit=$code; expected 1"
+            echo "$output"
+            exit 1
+          fi
+          echo "$output" | grep -q 'immutable_signoff_change:R'
+
+      - name: Confirm no synthetic sign-off is tracked by repository baseline
+        shell: bash
+        run: |
+          git reset --hard "$BASE_SHA"
+          if git ls-files 'audit/language-workbooks/v1.0/native-signoffs/*synthetic*.json' | grep -q .; then
+            echo 'Synthetic sign-off unexpectedly exists in repository baseline.'
+            exit 1
+          fi
