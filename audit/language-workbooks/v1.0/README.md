@@ -40,10 +40,14 @@ Relevant validation commands:
 python scripts/build_lang_wb_native_review_ledgers.py
 python scripts/validate_lang_wb_native_review_ledger.py <language>
 python scripts/validate_lang_wb_native_signoff.py <signoff.json>
+python scripts/validate_lang_wb_signoff_diff.py <base-ref> <head-ref>
 python scripts/workbook_final_human_promotion_gate.py
+python scripts/validate_lang_wb_expected_human_hold.py
 ```
 
-Automation checks worksheet/sign-off structure, source and artifact binding, timestamps, precedence, and all-language promotion conditions. It does not make the human linguistic judgment.
+The enforcement chain checks worksheet/sign-off structure, source and artifact binding, filename discoverability, timestamps, latest-review precedence, append-only sign-off history, all-language promotion conditions, and whether a release HOLD is genuinely the expected pending-human-review state. Relevant pull requests are checked before merge, and the same safeguards run again on pushes.
+
+Synthetic CI self-tests verify these controls without adding synthetic human certification to repository history. Automation does not make the human linguistic judgment.
 
 ## Editorial/source-locked audit evidence
 
@@ -55,4 +59,4 @@ Automation checks worksheet/sign-off structure, source and artifact binding, tim
 
 Files with explicit earlier dates or build-trigger timestamps, such as `ACTIVE_AUDIT_NOTE_2026-08-23.md`, `PROGRESS_2026-08-23.md`, and `BUILD_TRIGGER.md`, are retained as historical audit/build evidence. They should not be treated as the current release-status source when they conflict with the current files listed above.
 
-For the released workbook materials themselves, use [`completed/languages/workbooks/v1.0/`](../../../completed/languages/workbooks/v1.0/).
+For the workbook materials themselves, use [`completed/languages/workbooks/v1.0/`](../../../completed/languages/workbooks/v1.0/).
