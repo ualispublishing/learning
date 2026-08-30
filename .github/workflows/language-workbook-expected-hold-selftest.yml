@@ -125,25 +125,32 @@ jobs:
           missing['languages']['arabic']['problems'] = ['missing_master:arabic']
           (out / 'missing.json').write_text(json.dumps(missing), encoding='utf-8')
 
-          invalid_pass = copy.deepcopy(base)
-          invalid_pass['languages']['arabic']['latest_current_candidate_signoff'] = {
-              'path': 'audit/language-workbooks/v1.0/native-signoffs/arabic_example.json',
-              'review_completed_utc': '2026-08-29T20:00:00Z',
-              'review_outcome': 'PASS',
-              'problems': ['reviewer_qualification'],
-          }
-          invalid_pass['languages']['arabic']['problems'] = ['latest_current_candidate_signoff_not_PASS']
-          (out / 'invalid-pass.json').write_text(json.dumps(invalid_pass), encoding='utf-8')
+          malformed = copy.deepcopy(base)
+          malformed['languages']['arabic']['problems'] = [
+              'invalid_current_candidate_signoff:audit/language-workbooks/v1.0/native-signoffs/arabic_bad.json:reviewer_qualification',
+              'no_current_candidate_signoff',
+          ]
+          (out / 'malformed.json').write_text(json.dumps(malformed), encoding='utf-8')
 
           valid_hold = copy.deepcopy(base)
           valid_hold['languages']['arabic']['latest_current_candidate_signoff'] = {
-              'path': 'audit/language-workbooks/v1.0/native-signoffs/arabic_example.json',
+              'path': 'audit/language-workbooks/v1.0/native-signoffs/arabic_example_hold.json',
               'review_completed_utc': '2026-08-29T20:00:00Z',
               'review_outcome': 'HOLD',
-              'problems': ['review_outcome', 'holds_not_empty'],
+              'problems': [],
           }
-          valid_hold['languages']['arabic']['problems'] = ['latest_current_candidate_signoff_not_PASS']
+          valid_hold['languages']['arabic']['problems'] = ['latest_current_candidate_outcome:HOLD']
           (out / 'valid-hold.json').write_text(json.dumps(valid_hold), encoding='utf-8')
+
+          valid_fail = copy.deepcopy(base)
+          valid_fail['languages']['french']['latest_current_candidate_signoff'] = {
+              'path': 'audit/language-workbooks/v1.0/native-signoffs/french_example_fail.json',
+              'review_completed_utc': '2026-08-29T20:01:00Z',
+              'review_outcome': 'FAIL',
+              'problems': [],
+          }
+          valid_fail['languages']['french']['problems'] = ['latest_current_candidate_outcome:FAIL']
+          (out / 'valid-fail.json').write_text(json.dumps(valid_fail), encoding='utf-8')
           PY
 
       - name: Confirm expected no-signoff HOLD passes
@@ -151,6 +158,9 @@ jobs:
 
       - name: Confirm valid reviewer HOLD passes
         run: python scripts/validate_lang_wb_expected_human_hold.py /tmp/lang-wb-hold-selftest/valid-hold.json
+
+      - name: Confirm valid reviewer FAIL passes as an expected release HOLD
+        run: python scripts/validate_lang_wb_expected_human_hold.py /tmp/lang-wb-hold-selftest/valid-fail.json
 
       - name: Confirm fake released manifest is rejected
         shell: bash
@@ -178,15 +188,15 @@ jobs:
           fi
           echo "$output" | grep -q 'unexpected_hold_problem'
 
-      - name: Confirm invalid current PASS claim is rejected
+      - name: Confirm malformed current review is rejected
         shell: bash
         run: |
           set +e
-          output=$(python scripts/validate_lang_wb_expected_human_hold.py /tmp/lang-wb-hold-selftest/invalid-pass.json)
+          output=$(python scripts/validate_lang_wb_expected_human_hold.py /tmp/lang-wb-hold-selftest/malformed.json)
           code=$?
           set -e
           if [ "$code" -ne 1 ]; then
             echo "$output"
             exit 1
           fi
-          echo "$output" | grep -q 'invalid_current_PASS'
+          echo "$output" | grep -q 'invalid_current_candidate_signoff'
