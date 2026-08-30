@@ -12,6 +12,7 @@ import argparse
 import csv
 import hashlib
 import json
+import re
 import shutil
 import subprocess
 import tempfile
@@ -27,11 +28,13 @@ RELEASE = ledgers.RELEASE
 AUDIT = ledgers.AUDIT
 DEFAULT_OUTPUT_ROOT = Path(tempfile.gettempdir()) / "lang-wb-reviewer-bundles"
 ISSUES = {"arabic": 114, "french": 115, "urdu": 116}
+REPO_WEB = "https://github.com/ualispublishing/learning"
 DOCS = {
     "REVIEWER_ONBOARDING.md": AUDIT / "REVIEWER_ONBOARDING.md",
     "FINAL_NATIVE_REVIEW_PACKET.md": AUDIT / "FINAL_NATIVE_REVIEW_PACKET.md",
     "CORRECTNESS_STANDARD.md": AUDIT / "CORRECTNESS_STANDARD.md",
     "FINAL_NATIVE_SIGNOFF_TEMPLATE.json": AUDIT / "FINAL_NATIVE_SIGNOFF_TEMPLATE.json",
+    "NATIVE_REVIEW_LEDGER_README.md": AUDIT / "native-review-ledgers" / "README.md",
     "NATIVE_SIGNOFF_README.md": AUDIT / "native-signoffs" / "README.md",
     "PR_CHECKLIST.md": ROOT / ".github" / "PULL_REQUEST_TEMPLATE" / "lang-wb-native-signoff.md",
 }
@@ -127,6 +130,71 @@ def write_ledger(path: Path, rows: list[dict[str, str]]) -> None:
         writer.writerows(rows)
 
 
+def rewrite_bundle_markdown(text: str, language: str) -> str:
+    """Make copied canonical docs navigable from the flat offline bundle root."""
+    replacements = {
+        "../FINAL_NATIVE_SIGNOFF_TEMPLATE.json": "FINAL_NATIVE_SIGNOFF_TEMPLATE.json",
+        "../FINAL_NATIVE_REVIEW_PACKET.md": "FINAL_NATIVE_REVIEW_PACKET.md",
+        "native-review-ledgers/README.md": "NATIVE_REVIEW_LEDGER_README.md",
+        "native-signoffs/README.md": "NATIVE_SIGNOFF_README.md",
+        "native-signoffs/": "NATIVE_SIGNOFF_README.md",
+        "../../../completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json": "RELEASE_MANIFEST.json",
+        "../../../.github/PULL_REQUEST_TEMPLATE/lang-wb-native-signoff.md": "PR_CHECKLIST.md",
+        "../../../.github/workflows/language-workbook-reviewer-package.yml": (
+            f"{REPO_WEB}/actions/workflows/language-workbook-reviewer-package.yml"
+        ),
+        "../../../.github/workflows/language-workbook-final-human-promotion.yml": (
+            f"{REPO_WEB}/actions/workflows/language-workbook-final-human-promotion.yml"
+        ),
+        "../../../.github/workflows/language-workbook-signoff-binding-status.yml": (
+            f"{REPO_WEB}/actions/workflows/language-workbook-signoff-binding-status.yml"
+        ),
+        "../../../.github/workflows/language-workbook-final-human-promotion-selftest.yml": (
+            f"{REPO_WEB}/actions/workflows/language-workbook-final-human-promotion-selftest.yml"
+        ),
+        "../../../.github/workflows/language-workbook-final-release-snapshot.yml": (
+            f"{REPO_WEB}/actions/workflows/language-workbook-final-release-snapshot.yml"
+        ),
+        "../../../.github/workflows/language-workbook-final-release-snapshot-selftest.yml": (
+            f"{REPO_WEB}/actions/workflows/language-workbook-final-release-snapshot-selftest.yml"
+        ),
+    }
+
+    for candidate_language, names in ledgers.LANGUAGES.items():
+        repo_relative = (
+            f"../../../completed/languages/workbooks/v1.0/{candidate_language}/{names['master']}"
+        )
+        if candidate_language == language:
+            replacements[repo_relative] = "MASTER_WORKBOOK.pdf"
+        else:
+            replacements[repo_relative] = (
+                f"{REPO_WEB}/blob/main/completed/languages/workbooks/v1.0/"
+                f"{candidate_language}/{names['master']}"
+            )
+
+    for old, new in replacements.items():
+        text = text.replace(f"]({old})", f"]({new})")
+    return text
+
+
+def validate_local_markdown_links(bundle_dir: Path) -> None:
+    """Fail closed if a copied Markdown link points at a missing local bundle file."""
+    link_pattern = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
+    for markdown in sorted(bundle_dir.glob("*.md")):
+        text = markdown.read_text(encoding="utf-8")
+        for raw_target in link_pattern.findall(text):
+            target = raw_target.strip()
+            if not target or target.startswith(("http://", "https://", "mailto:", "#")):
+                continue
+            local_target = target.split("#", 1)[0]
+            if not local_target:
+                continue
+            require(
+                (bundle_dir / local_target).exists(),
+                f"{markdown.name}: broken local Markdown link {target!r}",
+            )
+
+
 def reviewer_readme(language: str) -> str:
     issue = ISSUES[language]
     display = language.capitalize()
@@ -152,9 +220,12 @@ Parent release tracker: https://github.com/ualispublishing/learning/issues/106
 - `REVIEWER_ONBOARDING.md` — concise start-to-finish procedure.
 - `FINAL_NATIVE_REVIEW_PACKET.md` — canonical full-content review and sign-off rules.
 - `CORRECTNESS_STANDARD.md` — learner-facing correctness dimensions.
+- `NATIVE_REVIEW_LEDGER_README.md` — structured worksheet field, validation, and remediation rules.
 - `NATIVE_SIGNOFF_README.md` — immutable record and filename rules.
 - `PR_CHECKLIST.md` — focused sign-off pull-request checklist.
 - `BUNDLE_MANIFEST.json` and `CHECKSUMS.sha256` — transport/integrity evidence for this package.
+
+Copied Markdown documents are rewritten when packaged so links to included review files resolve locally from this bundle. Links to repository-only workflows or other-language masters are converted to absolute GitHub URLs.
 
 ## Required workflow
 
@@ -200,9 +271,17 @@ def build_bundle(language: str, output_root: Path, make_zip: bool = True) -> tup
 
     for output_name, source in DOCS.items():
         require(source.exists(), f"missing reviewer document: {source}")
-        shutil.copy2(source, bundle_dir / output_name)
+        destination = bundle_dir / output_name
+        if source.suffix.lower() == ".md":
+            destination.write_text(
+                rewrite_bundle_markdown(source.read_text(encoding="utf-8"), language),
+                encoding="utf-8",
+            )
+        else:
+            shutil.copy2(source, destination)
 
     (bundle_dir / "README.md").write_text(reviewer_readme(language), encoding="utf-8")
+    validate_local_markdown_links(bundle_dir)
 
     payload_files = sorted(
         p for p in bundle_dir.iterdir() if p.is_file() and p.name not in {"BUNDLE_MANIFEST.json", "CHECKSUMS.sha256"}
