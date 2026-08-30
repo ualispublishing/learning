@@ -30,6 +30,14 @@ def build_draft(language: str) -> dict[str, Any]:
         )
 
     template = gate.load_json(TEMPLATE_PATH)
+    if template.get("schema") != "lang-wb-native-signoff-v1":
+        raise ValueError(f"unexpected sign-off template schema: {template.get('schema')!r}")
+    if template.get("release") != "v1.0":
+        raise ValueError(f"unexpected sign-off template release: {template.get('release')!r}")
+    template_scope = template.get("scope_attestation")
+    if not isinstance(template_scope, dict) or set(template_scope) != set(gate.REQUIRED_SCOPE_FIELDS):
+        raise ValueError("sign-off template scope fields do not match promotion-gate requirements")
+
     master_rel = f"completed/languages/workbooks/v1.0/{language}/{gate.MASTER_NAMES[language]}"
     master_path = gate.ROOT / master_rel
     if not master_path.exists():
