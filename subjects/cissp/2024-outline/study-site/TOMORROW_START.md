@@ -1,6 +1,6 @@
 # CISSP Atlas — Start Here
 
-Use this sequence the first time you open the current release candidate.
+Use this sequence the first time you open the current verified release.
 
 1. Run the diagnostic once if you do not already have a baseline. Treat it as routing, not an exam-readiness score.
 2. Retrieve before revealing in the weakest domain.
@@ -26,10 +26,10 @@ Keyboard: **Space toggles reveal/hide; ←/→ move cards when hidden and layers
 - **652 semantically reviewed learner-facing item IDs**, with zero known keyed-answer reversals and no known remaining material factual error in the documented audit boundary.
 - 20 primary/reference sources.
 
-Batch 028 is promotion-eligible after candidate PR #112 and bookkeeping PR #113 both completed their exact-head, post-merge, and Pages-isolation controls. v1.26.0 still requires exact release-head validation, merge, exact-main validation, and the live Pages fingerprint before it is called the verified public release.
+The public v1.26.0 runtime is verified at merge SHA `25ff2935232687a573d1a60e9b9d5182af97294f`; release PR #123 exact-head audit **33326198903**, exact-main audit **33326374653**, and Pages verification **33326374656** passed. The verified public fingerprint is **v1.26.0 / 511 standard / 456 manifest released / 1 Bellringer / released_only=true**.
 
 ## Next authoring step
 
-Batch 029 remains provisional until v1.26 verification closes. Its current E12/S4 target is `4.1, 1.4, 7.13, 2.5, 7.14, 7.15, 7.3, 8.3, 7.4, 3.1, 3.6, 1.10, 6.1, 6.4, 2.3, 1.11`.
+Batch 029 is unblocked. Use released-only planner basis **33326374653** with E12/S4 across objectives `4.1, 1.4, 7.13, 2.5, 7.14, 7.15, 7.3, 8.3, 7.4, 3.1, 3.6, 1.10, 6.1, 6.4, 2.3, 1.11`. Keep future candidates isolated from public Pages until their own candidate validation, bookkeeping, and release-promotion gates pass.
 
 See `RELEASE_STATUS.json` for machine-readable evidence and `PRECISION_AUDIT.md` for the accuracy boundary. CISSP Atlas is unofficial and does not guarantee a pass on the live adaptive exam.
