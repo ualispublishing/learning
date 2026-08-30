@@ -3,11 +3,12 @@
 
 This is a deliberately bounded Q/A-only repair. It rewrites exactly nine questions
 that test formal grammatical labels into A1-appropriate use/comprehension tasks.
-Passage prose, lexical targets, IDs, ordering, and all other questions remain intact.
+Passage prose, lexical targets, IDs, ordering, and records 7-60 remain unchanged.
 """
 
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 from pathlib import Path
@@ -22,101 +23,65 @@ REPAIRS = {
     ("ar-a1-u01-p01", "q6"): {
         "old_type": "grammar_category",
         "old_prompt": "ما التصنيف النحوي الأدق لـ«هنا» في الاستعمال المكاني؟",
-        "new_question": {
-            "answer_id": "a6", "id": "q6",
-            "prompt": "إذا كانت ليلى في الغرفة والكتاب بجانبها، فأيهما أنسب: «الكتاب هنا» أم «الكتاب هناك»؟",
-            "target_ids": ["ar-r34"], "type": "contrast"
-        },
+        "new_question": {"answer_id": "a6", "id": "q6", "prompt": "إذا كانت ليلى في الغرفة والكتاب بجانبها، فأيهما أنسب: «الكتاب هنا» أم «الكتاب هناك»؟", "target_ids": ["ar-r34"], "type": "contrast"},
         "new_answer": "الكتاب هنا.",
-        "new_explanation": "«هنا» تدل في هذا السياق على المكان القريب من المتكلم."
+        "new_explanation": "«هنا» تدل في هذا السياق على المكان القريب من المتكلم.",
     },
     ("ar-a1-u01-p02", "q7"): {
         "old_type": "grammar_category",
         "old_prompt": "ما وظيفة «بعد» في «بعد قليل»؟",
-        "new_question": {
-            "answer_id": "a7", "id": "q7",
-            "prompt": "إذا قالت الأم «بعد قليل نذهب إلى المدرسة»، فهل الذهاب الآن أم لاحقًا؟",
-            "target_ids": ["ar-r37"], "type": "sequence"
-        },
+        "new_question": {"answer_id": "a7", "id": "q7", "prompt": "إذا قالت الأم «بعد قليل نذهب إلى المدرسة»، فهل الذهاب الآن أم لاحقًا؟", "target_ids": ["ar-r37"], "type": "sequence"},
         "new_answer": "لاحقًا، بعد قليل.",
-        "new_explanation": "«بعد قليل» تضع الذهاب في وقت يأتي بعد لحظة الكلام."
+        "new_explanation": "«بعد قليل» تضع الذهاب في وقت يأتي بعد لحظة الكلام.",
     },
     ("ar-a1-u01-p02", "q9"): {
         "old_type": "grammar_identification",
         "old_prompt": "ما الكلمة التي تنفي الفعل في «لم تأخذ كل الكتب»؟",
-        "new_question": {
-            "answer_id": "a9", "id": "q9",
-            "prompt": "اختر الجملة الصحيحة لنفي أخذ الكتب في الماضي: «لم تأخذ كل الكتب» أم «لا أخذت كل الكتب»؟",
-            "type": "grammar_choice"
-        },
+        "new_question": {"answer_id": "a9", "id": "q9", "prompt": "اختر الجملة الصحيحة لنفي أخذ الكتب في الماضي: «لم تأخذ كل الكتب» أم «لا أخذت كل الكتب»؟", "type": "grammar_choice"},
         "new_answer": "لم تأخذ كل الكتب.",
-        "new_explanation": "هذه هي الصيغة الصحيحة لنفي الفعل الماضي المقصود في هذا السياق."
+        "new_explanation": "هذه هي الصيغة الصحيحة لنفي الفعل الماضي المقصود في هذا السياق.",
     },
     ("ar-a1-u01-p03", "q6"): {
         "old_type": "grammar_category",
         "old_prompt": "ما التصنيف النحوي الأدق لـ«هناك» في الاستعمال المكاني؟",
-        "new_question": {
-            "answer_id": "a6", "id": "q6",
-            "prompt": "في «أريد أن أذهب إلى هناك مرة أخرى»، إلى أي مكان تشير «هناك»؟",
-            "target_ids": ["ar-r40"], "type": "reference_resolution"
-        },
+        "new_question": {"answer_id": "a6", "id": "q6", "prompt": "في «أريد أن أذهب إلى هناك مرة أخرى»، إلى أي مكان تشير «هناك»؟", "target_ids": ["ar-r40"], "type": "reference_resolution"},
         "new_answer": "إلى الحديقة.",
-        "new_explanation": "الحديقة هي المكان المذكور الذي تريد ليلى الذهاب إليه مرة أخرى."
+        "new_explanation": "الحديقة هي المكان المذكور الذي تريد ليلى الذهاب إليه مرة أخرى.",
     },
     ("ar-a1-u01-p03", "q10"): {
         "old_type": "person_form",
         "old_prompt": "في «أريد»، من صاحب الفعل؟",
-        "new_question": {
-            "answer_id": "a10", "id": "q10",
-            "prompt": "إذا قالت ليلى «أريد أن أعود الآن»، فمن الذي يريد العودة؟",
-            "type": "reference_resolution"
-        },
+        "new_question": {"answer_id": "a10", "id": "q10", "prompt": "إذا قالت ليلى «أريد أن أعود الآن»، فمن الذي يريد العودة؟", "type": "reference_resolution"},
         "new_answer": "ليلى.",
-        "new_explanation": "ليلى هي المتكلمة في الجملة، لذلك هي التي تريد العودة."
+        "new_explanation": "ليلى هي المتكلمة في الجملة، لذلك هي التي تريد العودة.",
     },
     ("ar-a1-u01-p05", "q7"): {
         "old_type": "grammar_function",
         "old_prompt": "ماذا تدل «حتى» في «حتى المساء»؟",
-        "new_question": {
-            "answer_id": "a7", "id": "q7",
-            "prompt": "إذا بقيت ليلى في المكتبة حتى المساء، متى انتهى بقاؤها هناك؟",
-            "target_ids": ["ar-r56"], "type": "sequence"
-        },
+        "new_question": {"answer_id": "a7", "id": "q7", "prompt": "إذا بقيت ليلى في المكتبة حتى المساء، متى انتهى بقاؤها هناك؟", "target_ids": ["ar-r56"], "type": "sequence"},
         "new_answer": "عند المساء، عندما جاء المساء.",
-        "new_explanation": "«حتى المساء» تحدد المساء بوصفه نهاية مدة البقاء."
+        "new_explanation": "«حتى المساء» تحدد المساء بوصفه نهاية مدة البقاء.",
     },
     ("ar-a1-u01-p05", "q9"): {
         "old_type": "grammar_identification",
         "old_prompt": "ما صيغة العدد في كلمة «كتابين»؟",
-        "new_question": {
-            "answer_id": "a9", "id": "q9",
-            "prompt": "اختر الصيغة الصحيحة: «أخذت ليلى كتابين» أم «أخذت ليلى كتابان»؟",
-            "type": "grammar_choice"
-        },
+        "new_question": {"answer_id": "a9", "id": "q9", "prompt": "اختر الصيغة الصحيحة: «أخذت ليلى كتابين» أم «أخذت ليلى كتابان»؟", "type": "grammar_choice"},
         "new_answer": "أخذت ليلى كتابين.",
-        "new_explanation": "هذه هي الصيغة الصحيحة في الجملة كما استعملها النص."
+        "new_explanation": "هذه هي الصيغة الصحيحة في الجملة كما استعملها النص.",
     },
     ("ar-a1-u01-p06", "q8"): {
         "old_type": "grammar_function",
         "old_prompt": "في «حتى المساء»، ماذا تحدد «حتى»؟",
-        "new_question": {
-            "answer_id": "a8", "id": "q8",
-            "prompt": "إذا قرأت ليلى حتى المساء، متى تنتهي القراءة؟",
-            "target_ids": ["ar-r56"], "type": "sequence"
-        },
+        "new_question": {"answer_id": "a8", "id": "q8", "prompt": "إذا قرأت ليلى حتى المساء، متى تنتهي القراءة؟", "target_ids": ["ar-r56"], "type": "sequence"},
         "new_answer": "عند المساء.",
-        "new_explanation": "المساء هو نهاية المدة في عبارة «حتى المساء»."
+        "new_explanation": "المساء هو نهاية المدة في عبارة «حتى المساء».",
     },
     ("ar-a1-u01-p06", "q10"): {
         "old_type": "grammar_function",
         "old_prompt": "ما وظيفة «أو» في «كتابًا واحدًا أو اثنين»؟",
-        "new_question": {
-            "answer_id": "a10", "id": "q10",
-            "prompt": "أي عبارة تدل على خيارين: «كتابًا واحدًا أو اثنين» أم «كتابًا واحدًا واثنين معًا»؟",
-            "type": "contrast"
-        },
+        "new_question": {"answer_id": "a10", "id": "q10", "prompt": "أي عبارة تدل على خيارين: «كتابًا واحدًا أو اثنين» أم «كتابًا واحدًا واثنين معًا»؟", "type": "contrast"},
         "new_answer": "كتابًا واحدًا أو اثنين.",
-        "new_explanation": "«أو» تعرض هنا بديلين ممكنين، لا جمع البديلين معًا."
+        "new_explanation": "«أو» تعرض هنا بديلين ممكنين، لا جمع البديلين معًا.",
     },
 }
 
@@ -125,17 +90,30 @@ def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def protected_snapshot(record: dict) -> dict:
+    snap = copy.deepcopy(record)
+    snap.pop("questions", None)
+    snap.pop("answer_key", None)
+    snap.pop("revision", None)
+    quality = snap.get("quality")
+    if isinstance(quality, dict):
+        quality.pop("notes", None)
+    return snap
+
+
 def main() -> int:
     before = PATH.read_bytes()
     if sha256(before) != EXPECTED_SHA256:
         raise SystemExit("Arabic A1 canonical hash drifted; refusing Unit 1 repair")
 
-    lines = PATH.read_text(encoding="utf-8").splitlines()
-    if len(lines) != 60:
-        raise SystemExit(f"Expected 60 A1 records, found {len(lines)}")
-    records = [json.loads(line) for line in lines]
+    raw_lines = PATH.read_text(encoding="utf-8").splitlines(keepends=True)
+    if len(raw_lines) != 60:
+        raise SystemExit(f"Expected 60 A1 records, found {len(raw_lines)}")
+    records = [json.loads(line) for line in raw_lines]
     if [r.get("sequence") for r in records] != list(range(1, 61)):
         raise SystemExit("Arabic A1 sequence drift")
+    untouched_tail = b"".join(line.encode("utf-8") for line in raw_lines[6:])
+    protected_before = {r["id"]: protected_snapshot(r) for r in records[:6]}
 
     changed = []
     for record in records[:6]:
@@ -150,27 +128,22 @@ def main() -> int:
             a = a_by_qid[qid]
             if q.get("type") != spec["old_type"] or q.get("prompt") != spec["old_prompt"]:
                 raise SystemExit(f"{rid}/{qid}: source question drifted; refusing repair")
-            record["questions"][record["questions"].index(q)] = spec["new_question"]
+            idx = record["questions"].index(q)
+            record["questions"][idx] = spec["new_question"]
             a["answer"] = spec["new_answer"]
             a["explanation"] = spec["new_explanation"]
-            changed.append({
-                "passage_id": rid,
-                "question_id": qid,
-                "old_type": spec["old_type"],
-                "new_type": spec["new_question"]["type"],
-                "new_prompt": spec["new_question"]["prompt"],
-                "new_answer": spec["new_answer"],
-            })
+            changed.append({"passage_id": rid, "question_id": qid, "old_type": spec["old_type"], "new_type": spec["new_question"]["type"], "new_prompt": spec["new_question"]["prompt"], "new_answer": spec["new_answer"]})
 
         note = "2026-08-30 A1 Unit 1 metalinguistic remediation: formal-label items rewritten as reading/use tasks; all 10 question-answer links re-reviewed."
         if note not in record["quality"].setdefault("notes", []):
             record["quality"]["notes"].append(note)
         record["revision"] = int(record.get("revision", 0)) + 1
+        if protected_snapshot(record) != protected_before[rid]:
+            raise SystemExit(f"{rid}: repair changed protected prose/target/metadata fields")
 
     if len(changed) != 9:
         raise SystemExit(f"Expected exactly 9 repaired questions, changed {len(changed)}")
 
-    # Post-repair Unit 1 invariants.
     for record in records[:6]:
         if len(record["questions"]) != 10 or len(record["answer_key"]) != 10:
             raise SystemExit(f"{record['id']}: question/answer count drift")
@@ -184,9 +157,15 @@ def main() -> int:
         if formal:
             raise SystemExit(f"{record['id']}: formal metalinguistic types remain: {formal}")
 
-    after_text = "\n".join(json.dumps(r, ensure_ascii=False, separators=(",", ":")) for r in records) + "\n"
+    out_lines = list(raw_lines)
+    for idx in range(6):
+        newline = "\n" if raw_lines[idx].endswith("\n") else ""
+        out_lines[idx] = json.dumps(records[idx], ensure_ascii=False) + newline
+    after_text = "".join(out_lines)
     PATH.write_text(after_text, encoding="utf-8")
     after = PATH.read_bytes()
+    if b"".join(PATH.read_bytes().splitlines(keepends=True)[6:]) != untouched_tail:
+        raise SystemExit("Records 7-60 changed bytewise; refusing repair")
 
     audit = {
         "schema_version": 1,
@@ -196,7 +175,7 @@ def main() -> int:
         "unit": 1,
         "date": "2026-08-30",
         "status": "APPLIED_AND_REVIEWED_INTERNAL",
-        "scope": "Question/answer-only remediation of nine low-level formal-label items across Arabic A1 Unit 1; passage prose and lexical inventory unchanged.",
+        "scope": "Question/answer-only remediation of nine low-level formal-label items across Arabic A1 Unit 1; passage prose, lexical inventory, and records 7-60 unchanged.",
         "source_sha256": EXPECTED_SHA256,
         "result_sha256": sha256(after),
         "passages_reviewed": 6,
@@ -205,6 +184,7 @@ def main() -> int:
         "questions_repaired": 9,
         "repairs": changed,
         "post_repair_formal_question_types_in_unit": 0,
+        "records_7_60_byte_identical": True,
         "quality_interpretation": "Internal substantive Q/A remediation only. It does not substitute for required independent native, educator, model-family, or blind post-repair review.",
         "release_claim": False,
     }
