@@ -1,0 +1,119 @@
+name: Repair Arabic NFC and rerun release gates
+
+on:
+  push:
+    paths:
+      - '.github/workflows/repair-arabic-nfc-and-rerun-gates.yml'
+      - 'reading/tools/repair_arabic_nfc.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair-and-rerun:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Preflight current state
+        run: python reading/tools/validate_continuation_state.py
+      - name: Apply bounded NFC repair
+        run: python reading/tools/repair_arabic_nfc.py
+      - name: Regenerate exact-corpus Gate 0 evidence
+        run: python reading/tools/run_post_generation_gate0.py
+      - name: Rerun fresh Arabic deterministic gate
+        run: python reading/tools/run_arabic_fresh_deterministic_revalidation.py
+      - name: Assert NFC class is closed and reconcile evidence state
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          audit_path = Path('reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json')
+          repair_path = Path('reading/audit/arabic_nfc_repair_2026-08-30.json')
+          release_path = Path('reading/RELEASE_STATUS.json')
+          tasks_path = Path('reading/VERIFICATION_TASKS.md')
+
+          audit = json.loads(audit_path.read_text(encoding='utf-8'))
+          repair = json.loads(repair_path.read_text(encoding='utf-8'))
+          if repair['affected_records'] != 10:
+              raise SystemExit('Expected exactly 10 NFC-normalized records')
+          if audit['finding_classes'].get('unicode_not_nfc', 0) != 0:
+              raise SystemExit('NFC findings remain after bounded repair')
+          if audit['open_findings'] != 2496:
+              raise SystemExit(f"Unexpected post-NFC open finding count: {audit['open_findings']} != 2496")
+          if audit['structural_errors']:
+              raise SystemExit(f"Structural errors after NFC repair: {audit['structural_errors']}")
+
+          release = json.loads(release_path.read_text(encoding='utf-8'))
+          ar = release['languages']['arabic']
+          ar['release_state'] = 'REOPEN_REQUIRED'
+          ar['educator_release_ready'] = False
+          ar['latest_deterministic_gate'] = {
+              'status': audit['status'],
+              'records': audit['records'],
+              'questions': audit['questions'],
+              'answers': audit['answers'],
+              'open_findings': audit['open_findings'],
+              'finding_classes': audit['finding_classes'],
+              'artifact': 'reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json',
+              'date': audit['date'],
+          }
+          evidence = ar.get('latest_release_evidence', [])
+          if isinstance(evidence, str):
+              evidence = [evidence]
+          for artifact in (
+              'reading/audit/arabic_nfc_repair_2026-08-30.json',
+              'reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json',
+          ):
+              if artifact not in evidence:
+                  evidence.append(artifact)
+          ar['latest_release_evidence'] = evidence
+          blockers = release.get('global_release_blockers', [])
+          fresh = f"Arabic fresh deterministic release revalidation remains {audit['status']} with {audit['open_findings']} open release-evidence findings after closing all 10 NFC-normalization findings; educator release remains blocked."
+          blockers = [b for b in blockers if not b.startswith('Arabic ')]
+          release['global_release_blockers'] = [fresh] + blockers
+          release['updated'] = '2026-08-30'
+          release_path.write_text(json.dumps(release, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          text = tasks_path.read_text(encoding='utf-8')
+          text = text.replace('open evidence findings **2506**', 'open evidence findings **2496**')
+          text = text.replace('open findings **2506**', 'open findings **2496**')
+          note = '- [x] close the 10 fresh deterministic Unicode NFC findings with a byte-bounded normalization-only repair;\n'
+          target = '- [x] fresh deterministic educator-release revalidation;\n'
+          if note not in text:
+              text = text.replace(target, target + note, 1)
+          evidence_note = 'NFC repair evidence: `reading/audit/arabic_nfc_repair_2026-08-30.json`; the rerun reduced open deterministic findings from **2,506** to **2,496** with the Unicode class at zero.\n\n'
+          anchor = 'Open verification work:\n\n'
+          if evidence_note not in text:
+              text = text.replace(anchor, evidence_note + anchor, 1)
+          tasks_path.write_text(text, encoding='utf-8')
+          PY
+      - name: Refresh state manifest and validate final bounded state
+        run: |
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+      - name: Commit NFC repair and refreshed evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/arabic/a2/passages.jsonl \
+                  reading/arabic/b1/passages.jsonl \
+                  reading/arabic/b2/passages.jsonl \
+                  reading/arabic/c2/passages.jsonl \
+                  reading/audit/arabic_nfc_repair_2026-08-30.json \
+                  reading/audit/post_generation_gate0_2026-08-30.json \
+                  reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json \
+                  reading/RELEASE_STATUS.json \
+                  reading/VERIFICATION_TASKS.md \
+                  reading/STATE_MANIFEST.json
+          if git diff --cached --quiet; then
+            echo 'No NFC/evidence changes required.'
+            exit 0
+          fi
+          git commit -m 'Normalize Arabic NFC findings and refresh release evidence'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
