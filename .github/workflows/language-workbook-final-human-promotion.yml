@@ -7,6 +7,14 @@ on:
       - '.github/workflows/language-workbook-final-human-promotion.yml'
       - 'audit/language-workbooks/v1.0/native-signoffs/*.json'
       - 'scripts/validate_lang_wb_native_signoff.py'
+      - 'scripts/validate_lang_wb_signoff_diff.py'
+      - 'scripts/workbook_final_human_promotion_gate.py'
+  pull_request:
+    paths:
+      - '.github/workflows/language-workbook-final-human-promotion.yml'
+      - 'audit/language-workbooks/v1.0/native-signoffs/*.json'
+      - 'scripts/validate_lang_wb_native_signoff.py'
+      - 'scripts/validate_lang_wb_signoff_diff.py'
       - 'scripts/workbook_final_human_promotion_gate.py'
 
 permissions:
@@ -26,24 +34,25 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Validate sign-off records submitted by this push
-        if: github.event_name == 'push'
+      - name: Validate sign-off changes in this push or pull request
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
         shell: bash
         env:
-          BEFORE_SHA: ${{ github.event.before }}
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BASE_SHA: ${{ github.event.before }}
           CURRENT_SHA: ${{ github.sha }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          mapfile -t files < <(git diff --name-only "$BEFORE_SHA" "$CURRENT_SHA" -- 'audit/language-workbooks/v1.0/native-signoffs/*.json')
-          if [ "${#files[@]}" -eq 0 ]; then
-            echo "No native-signoff JSON changed in this push; per-record validation not required."
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            base="$PR_BASE_SHA"
+            head="$PR_HEAD_SHA"
+          else
+            base="$PUSH_BASE_SHA"
+            head="$CURRENT_SHA"
           fi
-          for file in "${files[@]}"; do
-            if [ ! -f "$file" ]; then
-              echo "Sign-off records are immutable and must not be deleted: $file"
-              exit 1
-            fi
-            python scripts/validate_lang_wb_native_signoff.py "$file"
-          done
+          echo "Validating native-signoff diff: $base..$head"
+          python scripts/validate_lang_wb_signoff_diff.py "$base" "$head"
 
       - name: Evaluate overall three-language promotion status
         shell: bash
