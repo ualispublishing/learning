@@ -1,7 +1,7 @@
 {
   "schema_version": 3,
   "project_id": "LANG-A1C2",
-  "updated": "2026-08-23",
+  "updated": "2026-08-30",
   "state_type": "RELEASE_EVIDENCE_ONLY",
   "purpose": "Independent educator/publication release evidence and decisions. This file is not a live generation counter; consult reading/STATUS.json for current production counts and frontier.",
   "production_status_source": "reading/STATUS.json",
@@ -11,27 +11,54 @@
   "languages": {
     "arabic": {
       "historical_internal_audit_state": "PASS",
-      "release_state": "INTERNAL_LANGUAGE_PASS",
+      "release_state": "REOPEN_REQUIRED",
       "educator_release_ready": false,
       "target_assurance": "HIGHEST_ASSURANCE",
       "evidence_scope_at_latest_release_review": {
         "canonical_passages": 360,
-        "levels": ["A1", "A2", "B1", "B2", "C1", "C2"],
+        "levels": [
+          "A1",
+          "A2",
+          "B1",
+          "B2",
+          "C1",
+          "C2"
+        ],
         "note": "This is the corpus scope of the cited release evidence, not a live production counter."
       },
       "latest_release_evidence": [
         "reading/audit/independent_educator_deterministic_2026-08-19.summary.json",
-        "reading/audit/second_adversarial_educator_audit_2026-08-19.json"
+        "reading/audit/second_adversarial_educator_audit_2026-08-19.json",
+        "reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json"
       ],
       "open_release_classes": [
-        "fresh deterministic educator-release revalidation",
+        "substantive resolution of fresh deterministic release-evidence blockers (no bulk promotion)",
         "corpus-wide low-level metalinguistic/CEFR audit and repair",
         "corpus-wide Arabic grammar-in-context naturalness audit",
         "full semantic educator review",
         "independent native/model-family recertification",
         "blind post-repair human review",
         "hash-bound release manifest"
-      ]
+      ],
+      "latest_deterministic_gate": {
+        "status": "FAIL",
+        "records": 360,
+        "questions": 3600,
+        "answers": 3600,
+        "open_findings": 2506,
+        "finding_classes": {
+          "answer_key_not_pass": 354,
+          "coverage_missing_or_zero": 360,
+          "coverage_not_pass": 360,
+          "linguistic_not_pass": 354,
+          "not_approved": 360,
+          "pedagogical_not_pass": 354,
+          "schema_check_not_pass": 354,
+          "unicode_not_nfc": 10
+        },
+        "artifact": "reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json",
+        "date": "2026-08-30"
+      }
     },
     "french": {
       "historical_internal_audit_state": "PASS",
@@ -40,7 +67,14 @@
       "target_assurance": "HIGHEST_ASSURANCE",
       "evidence_scope_at_latest_release_review": {
         "canonical_passages": 360,
-        "levels": ["A1", "A2", "B1", "B2", "C1", "C2"],
+        "levels": [
+          "A1",
+          "A2",
+          "B1",
+          "B2",
+          "C1",
+          "C2"
+        ],
         "note": "This is the corpus scope of the cited release evidence, not a live production counter."
       },
       "latest_release_evidence": "reading/audit/french_postrepair_deterministic_gate_a_2026-08-19.json",
@@ -74,7 +108,9 @@
       "educator_release_ready": false,
       "target_assurance": "HIGHEST_ASSURANCE_AT_LANGUAGE_RELEASE",
       "evidence_scope_at_latest_release_review": {
-        "levels": ["A1"],
+        "levels": [
+          "A1"
+        ],
         "canonical_passages": 60,
         "bound_git_blob": "ec0970dc1916ce523dd3320d2f4dca4c7f8bc677",
         "note": "Current release evidence is scoped to the pinned A1 corpus. Consult reading/STATUS.json for live Urdu generation progress."
@@ -99,7 +135,7 @@
     }
   },
   "global_release_blockers": [
-    "Arabic educator-release revalidation and full semantic/independent review are incomplete.",
+    "Arabic fresh deterministic release revalidation is FAIL with 2506 open evidence findings requiring substantive resolution; educator release remains blocked.",
     "French post-repair deterministic Gate A remains failed with 2160 release-evidence findings requiring substantive revalidation.",
     "Urdu release evidence currently establishes only an A1 deterministic/integrity baseline; it is not a quality promotion or language-level educator release."
   ],

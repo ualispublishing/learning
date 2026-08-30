@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "gate": "fresh deterministic educator-release revalidation",
+  "date": "2026-08-30",
+  "status": "FAIL",
+  "scope": "100% of Arabic A1-C2 canonical records; deterministic structure, Q/A linkage, Unicode normalization, and recorded release-evidence metadata only.",
+  "preflight": {
+    "continuation_validator": "PASS",
+    "gate0_artifact": "reading/audit/post_generation_gate0_2026-08-30.json",
+    "gate0_status": "PASS"
+  },
+  "records": 360,
+  "questions": 3600,
+  "answers": 3600,
+  "open_findings": 2506,
+  "finding_classes": {
+    "answer_key_not_pass": 354,
+    "coverage_missing_or_zero": 360,
+    "coverage_not_pass": 360,
+    "linguistic_not_pass": 354,
+    "not_approved": 360,
+    "pedagogical_not_pass": 354,
+    "schema_check_not_pass": 354,
+    "unicode_not_nfc": 10
+  },
+  "quality_status_counts": {
+    "draft": 360
+  },
+  "coverage_check_counts": {
+    "pending": 360
+  },
+  "linguistic_review_counts": {
+    "pass": 6,
+    "pending": 354
+  },
+  "pedagogical_review_counts": {
+    "pass": 6,
+    "pending": 354
+  },
+  "answer_key_check_counts": {
+    "pass": 6,
+    "pending": 354
+  },
+  "schema_check_counts": {
+    "pass": 6,
+    "pending": 354
+  },
+  "levels": {
+    "a1": {
+      "records": 60,
+      "questions": 600,
+      "answers": 600,
+      "finding_classes": {
+        "answer_key_not_pass": 54,
+        "coverage_missing_or_zero": 60,
+        "coverage_not_pass": 60,
+        "linguistic_not_pass": 54,
+        "not_approved": 60,
+        "pedagogical_not_pass": 54,
+        "schema_check_not_pass": 54
+      }
+    },
+    "a2": {
+      "records": 60,
+      "questions": 600,
+      "answers": 600,
+      "finding_classes": {
+        "answer_key_not_pass": 60,
+        "coverage_missing_or_zero": 60,
+        "coverage_not_pass": 60,
+        "linguistic_not_pass": 60,
+        "not_approved": 60,
+        "pedagogical_not_pass": 60,
+        "schema_check_not_pass": 60,
+        "unicode_not_nfc": 1
+      }
+    },
+    "b1": {
+      "records": 60,
+      "questions": 600,
+      "answers": 600,
+      "finding_classes": {
+        "answer_key_not_pass": 60,
+        "coverage_missing_or_zero": 60,
+        "coverage_not_pass": 60,
+        "linguistic_not_pass": 60,
+        "not_approved": 60,
+        "pedagogical_not_pass": 60,
+        "schema_check_not_pass": 60,
+        "unicode_not_nfc": 3
+      }
+    },
+    "b2": {
+      "records": 60,
+      "questions": 600,
+      "answers": 600,
+      "finding_classes": {
+        "answer_key_not_pass": 60,
+        "coverage_missing_or_zero": 60,
+        "coverage_not_pass": 60,
+        "linguistic_not_pass": 60,
+        "not_approved": 60,
+        "pedagogical_not_pass": 60,
+        "schema_check_not_pass": 60,
+        "unicode_not_nfc": 2
+      }
+    },
+    "c1": {
+      "records": 60,
+      "questions": 600,
+      "answers": 600,
+      "finding_classes": {
+        "answer_key_not_pass": 60,
+        "coverage_missing_or_zero": 60,
+        "coverage_not_pass": 60,
+        "linguistic_not_pass": 60,
+        "not_approved": 60,
+        "pedagogical_not_pass": 60,
+        "schema_check_not_pass": 60
+      }
+    },
+    "c2": {
+      "records": 60,
+      "questions": 600,
+      "answers": 600,
+      "finding_classes": {
+        "answer_key_not_pass": 60,
+        "coverage_missing_or_zero": 60,
+        "coverage_not_pass": 60,
+        "linguistic_not_pass": 60,
+        "not_approved": 60,
+        "pedagogical_not_pass": 60,
+        "schema_check_not_pass": 60,
+        "unicode_not_nfc": 4
+      }
+    }
+  },
+  "canonical_hashes": {
+    "a1": {
+      "path": "reading/arabic/a1/passages.jsonl",
+      "bytes": 404041,
+      "sha256": "d6142ee56ec830c4a41cb7244fe99c65824cebbe59ff2e9b8f44d4640c9e228b",
+      "git_blob": "f1eef9fa9cf0afb0007d5a22d396e5c78b143f03"
+    },
+    "a2": {
+      "path": "reading/arabic/a2/passages.jsonl",
+      "bytes": 480606,
+      "sha256": "f27ad06c372d316ca70346e19a10a72645577897de8db676e317d869d8945e1c",
+      "git_blob": "e4d5470d100e22f58e75cc2386860be8960f14f0"
+    },
+    "b1": {
+      "path": "reading/arabic/b1/passages.jsonl",
+      "bytes": 583526,
+      "sha256": "c2968274d92dfdb4c0c35812d89a501aea751de54af6f725d6ac1f39e008600b",
+      "git_blob": "53f114cd16a15f5da144b5a86a240ab131271ec1"
+    },
+    "b2": {
+      "path": "reading/arabic/b2/passages.jsonl",
+      "bytes": 674213,
+      "sha256": "230d5a5b871795c6f46a584e8c54b0dca841f7126ff09b7d2d5194e105662762",
+      "git_blob": "a9486b2c38dc53661143e734c9797cd26fa1f742"
+    },
+    "c1": {
+      "path": "reading/arabic/c1/passages.jsonl",
+      "bytes": 797878,
+      "sha256": "2a8d71a25a8176a4383488b8d794151eb041e0e60e96b251f1c13e403d14b23e",
+      "git_blob": "3f68da825c50c3018f9e054cbeec27ba01b17be0"
+    },
+    "c2": {
+      "path": "reading/arabic/c2/passages.jsonl",
+      "bytes": 960203,
+      "sha256": "82c0ecec8824bda6c5c6d351571086d91a20b3640ba50c9f5e7825b468bf4909",
+      "git_blob": "eb4105692d37c2dc38dc5241cee0edcabcf64585"
+    }
+  },
+  "structural_errors": [],
+  "release_claim": false,
+  "interpretation": "A PASS here would establish only the deterministic/evidence-state prerequisite. A FAIL identifies unresolved release-evidence or structural blockers. Neither result substitutes for semantic/native/educator/blind review.",
+  "guard": "Do not bulk-promote draft/pending metadata to clear this gate; each quality field requires substantive supporting review evidence."
+}

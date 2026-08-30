@@ -21,11 +21,14 @@ Fresh Gate 0 evidence: `reading/audit/post_generation_gate0_2026-08-30.json` (ex
 
 Current generation: 360/360 complete.
 
-Current release position: historical internal language pass exists, but educator/publication release is **not ready** under the current assurance profile.
+Current release position: fresh deterministic revalidation is **FAIL** with **2506** open evidence findings; educator/publication release remains **not ready** under the current assurance profile.
+
+Fresh deterministic evidence: `reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json` — 360 records, 3,600 questions, 3,600 answers; status **FAIL**; open findings **2506**. This is a release-evidence gate, not semantic approval.
 
 Open verification work:
 
-- [ ] fresh deterministic educator-release revalidation;
+- [x] fresh deterministic educator-release revalidation;
+- [ ] substantively resolve the fresh deterministic release-evidence blockers without bulk-promoting draft/pending metadata;
 - [ ] corpus-wide low-level metalinguistic/CEFR question audit and repair;
 - [ ] corpus-wide Arabic grammar-in-context naturalness audit;
 - [ ] full passage language/question/answer semantic review;
