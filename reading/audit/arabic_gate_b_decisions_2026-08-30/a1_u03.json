@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A1",
+  "unit": 3,
+  "date": "2026-08-31",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/a1/passages.jsonl",
+  "canonical_sha256": "767ad84ec37e5cb074af91a3802e4b2a467f2c9d06f5a91d3fcf43a8b4ad3a35",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 9,
+  "decisions": [
+    {
+      "passage_id": "ar-a1-u03-p01",
+      "learner_facing_sha256": "3700402b6143b4979fc7817037958d369aab03b79c129a9e839d0c4fa28099a5",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u03-p01-gB-01",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace an abstract preference explanation with direct A1 wording."
+        },
+        {
+          "finding_id": "ar-a1-u03-p01-gB-02",
+          "field": "answer q7",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Simplify the definition of أفضل while preserving its contextual meaning."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u03-p02",
+      "learner_facing_sha256": "838e38a3b37d10890e64368760d0d6a50bbaeed280d89cf0b1dd79c6c11efca5",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u03-p02-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace translation-like له مكان في عشاء اليوم with a natural relation to the meal."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u03-p03",
+      "learner_facing_sha256": "dd134f963a00e141c8b1f3fcd71cd3dfcf0a65ac737b0a2d6ef7b16386a089f4",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u03-p03-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Replace unidiomatic عند من نسأل with a valid location use of عند at the service desk."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u03-p04",
+      "learner_facing_sha256": "b4dc7cbdd74ba97320671ec67dae4cfd573034ff34c21919664c0cf281fdf95b",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u03-p04-gB-01",
+          "field": "text",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "State concretely that the received food and drink match what was ordered."
+        },
+        {
+          "finding_id": "ar-a1-u03-p04-gB-02",
+          "field": "answer q7",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Explain شكرًا through a concrete A1 social use rather than abstract terminology."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u03-p05",
+      "learner_facing_sha256": "3d205239ca7cf963427d9c5f6861b33b609220fa2509de9e419ae6952a61b072",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u03-p05-gB-01",
+          "field": "text",
+          "dimension": "pragmatic_plausibility",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Establish an existing salad before asking whether another salad is needed."
+        },
+        {
+          "finding_id": "ar-a1-u03-p05-gB-02",
+          "field": "answer q7",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Remove an unnecessary grammatical-label clause from the A1 meaning answer."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u03-p06",
+      "learner_facing_sha256": "e440fbea2aeb84ded07f530715b777d6baa9d03b52029805778187eb0531f978",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u03-p06-gB-01",
+          "field": "text",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Keep the recap faithful to the cafe event: the worker asks about the water choice, not food generally."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+}
