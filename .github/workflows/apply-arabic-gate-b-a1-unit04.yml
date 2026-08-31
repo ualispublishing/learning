@@ -1,0 +1,127 @@
+name: Apply Arabic Gate B A1 Unit 4
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-arabic-gate-b-a1-unit04.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  review-and-repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fail closed or reconcile bounded state-manifest bookkeeping
+        shell: bash
+        run: |
+          set +e
+          output="$(python reading/tools/validate_continuation_state.py 2>&1)"; rc=$?
+          set -e
+          printf '%s\n' "$output"
+          if [ "$rc" -ne 0 ]; then
+            python - "$output" <<'PY'
+          import json, sys
+          from pathlib import Path
+          errors=[line[2:] for line in sys.argv[1].splitlines() if line.startswith('- ')]
+          allowed_prefixes=(
+            'STATE_MANIFEST blob drift: PROJECT_TRACKS.json:',
+            'STATE_MANIFEST byte-size drift: PROJECT_TRACKS.json:',
+            'STATE_MANIFEST blob drift: reading/STATUS.json:',
+            'STATE_MANIFEST byte-size drift: reading/STATUS.json:',
+            'STATE_MANIFEST state_file_bytes mismatch',
+            'STATE_MANIFEST aggregate_sha256 mismatch',
+          )
+          unexpected=[e for e in errors if not any(e.startswith(p) for p in allowed_prefixes)]
+          if not errors or unexpected:
+              raise SystemExit(f'Unexpected routed-state drift; refusing Gate B A1 Unit 4 write: {unexpected or errors}')
+          has_tracks=any(e.startswith('STATE_MANIFEST blob drift: PROJECT_TRACKS.json:') for e in errors)
+          has_status=any(e.startswith('STATE_MANIFEST blob drift: reading/STATUS.json:') for e in errors)
+          if not (has_tracks or has_status): raise SystemExit(f'No explicitly bounded blob drift present: {errors}')
+          if has_status:
+              s=json.loads(Path('reading/STATUS.json').read_text(encoding='utf-8'))
+              if s.get('updated')!='2026-08-31': raise SystemExit('STATUS drift is not the verified 2026-08-31 date sync')
+              cur=s.get('current',{})
+              if cur.get('canonical_passages')!=1080 or cur.get('remaining_generation_passages')!=0 or cur.get('active_language') is not None or cur.get('active_level') is not None or cur.get('active_generation_plan') is not None:
+                  raise SystemExit('STATUS production frontier/count drift is substantive; refusing repair')
+              for lang in ('arabic','french','urdu'):
+                  b=s.get('languages',{}).get(lang,{})
+                  if b.get('generation_state')!='COMPLETE' or b.get('canonical_passages')!=360 or b.get('remaining_generation_passages')!=0:
+                      raise SystemExit(f'STATUS {lang} production state drift is substantive; refusing repair')
+          PY
+            python reading/tools/refresh_state_manifest.py
+            python reading/tools/validate_continuation_state.py
+          fi
+
+      - name: Apply exact-current A1 Unit 4 naturalness repairs
+        run: python reading/tools/apply_arabic_gate_b_a1_unit04.py
+
+      - name: Rebuild and bind Arabic evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python reading/tools/run_post_generation_gate0.py
+          python reading/tools/run_arabic_fresh_deterministic_revalidation.py
+          python reading/tools/audit_arabic_metalinguistic_cefr_candidates.py
+          python reading/tools/adjudicate_arabic_b1_c2_metalinguistic_cefr.py
+          python reading/tools/build_arabic_gate_b_naturalness_review.py
+          python reading/tools/record_arabic_gate_b_a1_unit04_decisions.py
+          python reading/tools/sync_arabic_gate_b_progress.py
+          python reading/tools/sync_arabic_release_global_blocker.py
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+
+      - name: Commit bounded Unit 4 repair and evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            reading/arabic/a1/passages.jsonl \
+            reading/audit/arabic_gate_b_decisions_2026-08-30/a1_u04.json \
+            reading/audit/post_generation_gate0_2026-08-30.json \
+            reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json \
+            reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json \
+            reading/audit/arabic_b1_c2_metalinguistic_cefr_triage_2026-08-30.json \
+            reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json \
+            reading/audit/arabic_gate_b_packets_2026-08-30 \
+            reading/RELEASE_STATUS.json \
+            reading/STATE_MANIFEST.json
+          git commit -m 'Complete fresh Arabic Gate B A1 Unit 4 review'
+
+      - name: Rebase and regenerate evidence on exact push candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git rebase origin/main
+          python reading/tools/validate_continuation_state.py
+          python reading/tools/run_post_generation_gate0.py
+          python reading/tools/run_arabic_fresh_deterministic_revalidation.py
+          python reading/tools/audit_arabic_metalinguistic_cefr_candidates.py
+          python reading/tools/adjudicate_arabic_b1_c2_metalinguistic_cefr.py
+          python reading/tools/build_arabic_gate_b_naturalness_review.py
+          python reading/tools/record_arabic_gate_b_a1_unit04_decisions.py
+          python reading/tools/sync_arabic_gate_b_progress.py
+          python reading/tools/sync_arabic_release_global_blocker.py
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+          git add \
+            reading/audit/arabic_gate_b_decisions_2026-08-30/a1_u04.json \
+            reading/audit/post_generation_gate0_2026-08-30.json \
+            reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json \
+            reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json \
+            reading/audit/arabic_b1_c2_metalinguistic_cefr_triage_2026-08-30.json \
+            reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json \
+            reading/audit/arabic_gate_b_packets_2026-08-30 \
+            reading/RELEASE_STATUS.json \
+            reading/STATE_MANIFEST.json
+          if ! git diff --cached --quiet; then git commit --amend --no-edit; fi
+          python reading/tools/validate_continuation_state.py
+          git push origin HEAD:main
