@@ -54,6 +54,7 @@ jobs:
           python reading/tools/audit_arabic_metalinguistic_cefr_candidates.py
           python reading/tools/adjudicate_arabic_b1_c2_metalinguistic_cefr.py
           python reading/tools/build_arabic_gate_b_naturalness_review.py
+          python reading/tools/record_arabic_gate_b_a1_unit01_decisions.py
           python reading/tools/sync_arabic_gate_b_progress.py
           python reading/tools/refresh_state_manifest.py
           python reading/tools/validate_continuation_state.py
@@ -89,10 +90,12 @@ jobs:
           python reading/tools/audit_arabic_metalinguistic_cefr_candidates.py
           python reading/tools/adjudicate_arabic_b1_c2_metalinguistic_cefr.py
           python reading/tools/build_arabic_gate_b_naturalness_review.py
+          python reading/tools/record_arabic_gate_b_a1_unit01_decisions.py
           python reading/tools/sync_arabic_gate_b_progress.py
           python reading/tools/refresh_state_manifest.py
           python reading/tools/validate_continuation_state.py
           git add \
+            reading/audit/arabic_gate_b_decisions_2026-08-30/a1_u01.json \
             reading/audit/post_generation_gate0_2026-08-30.json \
             reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json \
             reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json \
