@@ -37,11 +37,29 @@
     "new_targets": 524,
     "ranked_targets": 524,
     "unique_new_target_ids": 524,
-    "hard_issues": 0,
+    "hard_issues": 1,
     "warnings": 3,
     "multi_id_normalized_surfaces": 0
   },
-  "hard_issues": [],
+  "hard_issues": [
+    {
+      "code": "part_of_speech_incompatible_with_source",
+      "level": "a2",
+      "passage_id": "ar-a2-u04-p05",
+      "target_id": "ar-r972",
+      "form": "أسوأ",
+      "lemma": "أسوأ",
+      "target_pos": "noun",
+      "target_pos_classes": [
+        "noun"
+      ],
+      "source_pos": "elative adjective / comparative-superlative",
+      "source_pos_classes": [
+        "adjective"
+      ],
+      "source_meaning": "worse; worst"
+    }
+  ],
   "warnings": [
     {
       "code": "canonical_source_pos_unparsed",
@@ -65,5 +83,5 @@
       "source_pos": "greeting expression"
     }
   ],
-  "status": "PASS"
+  "status": "FAIL"
 }
