@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A1",
+  "unit": 6,
+  "date": "2026-08-31",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/a1/passages.jsonl",
+  "canonical_sha256": "34a80a4536e11fc9c0f53ac1ca0421cb2658673855422cea3ec2873cdb0186a4",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 11,
+  "decisions": [
+    {
+      "passage_id": "ar-a1-u06-p01",
+      "learner_facing_sha256": "1af319eb2858c8c1087ba2d110b407c6f393cb599c4afa752f4671c47e108584",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u06-p01-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use الطريق الرئيسي for a main road rather than the literal-sounding الطريق الكبير."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u06-p02",
+      "learner_facing_sha256": "ab20dadf13a257667002d14a2883f40aec6793ef7da01d97995dee2cabb5b62f",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u06-p02-gB-01",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Explain سيارة concretely rather than as the formal المركبة التي يركبانها."
+        },
+        {
+          "finding_id": "ar-a1-u06-p02-gB-02",
+          "field": "answer q4",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Make the meaning of نصل a complete, direct learner-facing statement."
+        },
+        {
+          "finding_id": "ar-a1-u06-p02-gB-03",
+          "field": "answer q7",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace يبلغ المكان المقصود with simpler A1 arrival wording."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u06-p03",
+      "learner_facing_sha256": "c1e702105b8385827045caa5645d197ed49fe409ae1deae90ce48c486bce6a65",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u06-p03-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Replace لا نصعد إلى الجسر with the natural route contrast لا نمر فوق الجسر."
+        },
+        {
+          "finding_id": "ar-a1-u06-p03-gB-02",
+          "field": "answer q4",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Explain بعيد through direct distance/time language rather than an abstract larger-distance formulation."
+        },
+        {
+          "finding_id": "ar-a1-u06-p03-gB-03",
+          "field": "answer q7",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Remove the formal تفصله مسافة كبيرة نسبيًا definition in favor of A1 wording."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u06-p04",
+      "learner_facing_sha256": "19867db7e1d6d6daf6b02349fa4bb51458aa9119333f9c5c6411defa7cf31924",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u06-p04-gB-01",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Remove the formal انتقلي synonym from the A1 gloss of اذهبي."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u06-p05",
+      "learner_facing_sha256": "ad17db327f44a4be7e51da8d32aa68d2f84ac68fe0a2d2657c11f2019862e921",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u06-p05-gB-01",
+          "field": "answer q4",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace الجزء المركزي بين الجوانب with the direct A1 meaning منتصف الشيء."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u06-p06",
+      "learner_facing_sha256": "4f62eab28396c814da7c560da46940b075732cd770db4983e059e7de2d5b7b0e",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u06-p06-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace تبدأ الطريق with the natural تبدأ السير while preserving the route sequence."
+        },
+        {
+          "finding_id": "ar-a1-u06-p06-gB-02",
+          "field": "answer q6",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use the complete phrase في اتجاه for the meaning of نحو."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+}
