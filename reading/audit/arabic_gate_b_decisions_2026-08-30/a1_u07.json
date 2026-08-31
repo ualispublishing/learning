@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A1",
+  "unit": 7,
+  "date": "2026-08-31",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/a1/passages.jsonl",
+  "canonical_sha256": "811ec6d2ea83ecff7013caf03527bdb403a782bc7926ebe572e035f44ff75e80",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 10,
+  "decisions": [
+    {
+      "passage_id": "ar-a1-u07-p01",
+      "learner_facing_sha256": "9e5f6dfda4407514315ac7f2cc85c5259393caca53c0f0e58d88159ae2a22d14",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u07-p01-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use حسب حالة السماء rather than the compressed حسب السماء for a weather-based clothing choice."
+        },
+        {
+          "finding_id": "ar-a1-u07-p01-gB-02",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the cumbersome definition of السماء with a concrete A1 description."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u07-p02",
+      "learner_facing_sha256": "0018e786b4a6cd431bdcabfe3d08897a08aaffe0fc82e1d6ea49a70b4e8b838b",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u07-p02-gB-01",
+          "field": "answer q4",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Explain يبدو الجو أبرد through Leila’s perception rather than awkward يظهر أو يُشعر wording."
+        },
+        {
+          "finding_id": "ar-a1-u07-p02-gB-02",
+          "field": "answer q7",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Give يبدو a direct uncertainty-based A1 meaning instead of abstract impression language."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u07-p03",
+      "learner_facing_sha256": "c476e320e30c9e01838a9b9f875e2d37842168bb8f390b423a1a1897adf206d8",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u07-p03-gB-01",
+          "field": "explanation q6",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace grammatical-gender jargon with a direct meaning-based explanation of الأسبوع القادم."
+        },
+        {
+          "finding_id": "ar-a1-u07-p03-gB-02",
+          "field": "answer q7",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace على سبيل الاحتمال with the direct meaning may happen but is not certain."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u07-p04",
+      "learner_facing_sha256": "e92a22933f9f6cc24c41971409e8935cd022f09e501ccf90cddfda472caca452",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u07-p04-gB-01",
+          "field": "answer q7",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Answer the meaning of أيام directly instead of giving the grammatical label جمع يوم."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u07-p05",
+      "learner_facing_sha256": "63021348615578e41f6695e7ac66a86cf6f064a6b4aca1257361ef5b5a6462f0",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u07-p05-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace stiff ساعة الخروج المقترحة with a natural statement of the time she wants to leave."
+        },
+        {
+          "finding_id": "ar-a1-u07-p05-gB-02",
+          "field": "answer q4",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define أسبوع directly as seven consecutive days rather than tying the definition to Leila’s plan."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u07-p06",
+      "learner_facing_sha256": "46f85a2b35eee7075e15e884da93feed6d53d5a0f67e59e396910d67170fe45e",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u07-p06-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the awkward weather-controls-plans phrasing with a natural statement that Leila does not change every plan because of weather."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+}
