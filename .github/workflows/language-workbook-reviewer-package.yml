@@ -97,38 +97,41 @@ jobs:
           fi
 
       - name: Verify source-archive mode fails closed and accepts exact commit
-        if: matrix.language == 'arabic'
         shell: bash
         run: |
           set -euo pipefail
-          archive_root="$RUNNER_TEMP/lang-wb-archive-like"
+          lang='${{ matrix.language }}'
+          archive_root="$RUNNER_TEMP/lang-wb-archive-like-${lang}"
+          missing_out="$RUNNER_TEMP/archive-missing-commit-${lang}"
+          exact_out="$RUNNER_TEMP/archive-with-commit-${lang}"
+          log="/tmp/lang-wb-archive-no-commit-${lang}.log"
           mkdir -p "$archive_root"
           tar --exclude=.git -cf - . | tar -C "$archive_root" -xf -
 
           set +e
           (
             cd "$archive_root"
-            python scripts/build_lang_wb_reviewer_bundle.py arabic \
-              --output-root "$RUNNER_TEMP/archive-missing-commit" \
+            python scripts/build_lang_wb_reviewer_bundle.py "$lang" \
+              --output-root "$missing_out" \
               --no-zip
-          ) >/tmp/lang-wb-archive-no-commit.log 2>&1
+          ) >"$log" 2>&1
           missing_code=$?
           set -e
           if [ "$missing_code" -ne 1 ]; then
-            cat /tmp/lang-wb-archive-no-commit.log
-            echo "archive-like build without explicit commit exit=$missing_code; expected 1"
+            cat "$log"
+            echo "$lang archive-like build without explicit commit exit=$missing_code; expected 1"
             exit 1
           fi
 
           (
             cd "$archive_root"
-            python scripts/build_lang_wb_reviewer_bundle.py arabic \
+            python scripts/build_lang_wb_reviewer_bundle.py "$lang" \
               --repository-commit-sha "${{ github.sha }}" \
-              --output-root "$RUNNER_TEMP/archive-with-commit" \
+              --output-root "$exact_out" \
               --no-zip
           )
 
-          python - "$RUNNER_TEMP/archive-with-commit/arabic_lang_wb_v1.0_reviewer_bundle/CANDIDATE_BINDING.json" "${{ github.sha }}" <<'PY'
+          python - "$exact_out/${lang}_lang_wb_v1.0_reviewer_bundle/CANDIDATE_BINDING.json" "${{ github.sha }}" <<'PY'
           import json, pathlib, sys
           path = pathlib.Path(sys.argv[1])
           expected = sys.argv[2]
