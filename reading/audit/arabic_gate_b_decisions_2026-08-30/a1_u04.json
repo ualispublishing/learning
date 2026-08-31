@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A1",
+  "unit": 4,
+  "date": "2026-08-31",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/a1/passages.jsonl",
+  "canonical_sha256": "6fc4f6a502fd0c89a91d50102c6144cc1e40a6b7b3cde2c1d12fd45136dbf281",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 16,
+  "decisions": [
+    {
+      "passage_id": "ar-a1-u04-p01",
+      "learner_facing_sha256": "fad03007b5eedfc2f4a1d6a687ab5ff4619fea29b82bba74bd0426178cf05a11",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 4,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u04-p01-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Replace في مرة أخرى and the unidiomatic عندنا ناسًا construction with natural contemporary MSA."
+        },
+        {
+          "finding_id": "ar-a1-u04-p01-gB-02",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace قريبة لهم with the idiomatic kinship expression من أقاربهم."
+        },
+        {
+          "finding_id": "ar-a1-u04-p01-gB-03",
+          "field": "answer q4",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Remove an over-formal and awkward definition of ابن while preserving the passage relation."
+        },
+        {
+          "finding_id": "ar-a1-u04-p01-gB-04",
+          "field": "answer q7",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Simplify the standalone definition of ابن for an A1 learner."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u04-p02",
+      "learner_facing_sha256": "f24e17c93d2d25ec52e76cd797e14652234f89e5915651bf3b4b2ecf6072d7f8",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u04-p02-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Make the new-person description natural without removing the target شخص."
+        },
+        {
+          "finding_id": "ar-a1-u04-p02-gB-02",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace an abstract passive definition of اسم with direct A1 wording."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u04-p03",
+      "learner_facing_sha256": "b90880d4e9cf5460c2b9ca5fb08e4ff9264cc076888fb2afe6a0cc3c8fc686f1",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u04-p03-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace تجلس ... مع كتاب with a natural reading action."
+        },
+        {
+          "finding_id": "ar-a1-u04-p03-gB-02",
+          "field": "answer q4",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Simplify the explanation of يقول and remove awkward wording."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u04-p04",
+      "learner_facing_sha256": "9ba2a0ee057e272698d956e6c780da5c332aba783fd8a8b2dc1104e5bdddebb0",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u04-p04-gB-01",
+          "field": "question q9",
+          "dimension": "question_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Repair a cloze whose prefix plus keyed answer would incorrectly produce سأأخبر."
+        },
+        {
+          "finding_id": "ar-a1-u04-p04-gB-02",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace قالت لها خبرًا with a natural explanation of أخبرتني."
+        },
+        {
+          "finding_id": "ar-a1-u04-p04-gB-03",
+          "field": "answer q7",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use a direct A1 definition of ناس instead of a semicolon-heavy abstract gloss."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u04-p05",
+      "learner_facing_sha256": "b18d8a8d5efed737882b1e624aa186b64869dae84691e8000d315e1c35c17742",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u04-p05-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace قريب لنا with the idiomatic kinship expression من أقاربنا."
+        },
+        {
+          "finding_id": "ar-a1-u04-p05-gB-02",
+          "field": "answer q4",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Define أمام البيت as a front-side location rather than a vague direction."
+        },
+        {
+          "finding_id": "ar-a1-u04-p05-gB-03",
+          "field": "answer q7",
+          "dimension": "semantic_precision",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "Correct an answer that wrongly described أمام as opposite to the front."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u04-p06",
+      "learner_facing_sha256": "5bee7d2ac90cd1e1f2fa52ff6c15aaa822f5f3398248888a917ae5f7cf13a9fa",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u04-p06-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use تعيش مع for immediate family rather than the unnatural تعرف أباها listing."
+        },
+        {
+          "finding_id": "ar-a1-u04-p06-gB-02",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace تسمع ما يقول الناس في الحديث with idiomatic listening wording."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+}
