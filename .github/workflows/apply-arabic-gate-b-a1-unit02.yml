@@ -17,7 +17,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Fail closed or repair PROJECT_TRACKS manifest bookkeeping only
+      - name: Fail closed or reconcile bounded state-manifest bookkeeping
         shell: bash
         run: |
           set +e
@@ -26,17 +26,34 @@ jobs:
           printf '%s\n' "$output"
           if [ "$rc" -ne 0 ]; then
             python - "$output" <<'PY'
-          import sys
+          import json, sys
+          from pathlib import Path
           errors=[line[2:] for line in sys.argv[1].splitlines() if line.startswith('- ')]
-          allowed=(
+          allowed_prefixes=(
             'STATE_MANIFEST blob drift: PROJECT_TRACKS.json:',
             'STATE_MANIFEST byte-size drift: PROJECT_TRACKS.json:',
+            'STATE_MANIFEST blob drift: reading/STATUS.json:',
+            'STATE_MANIFEST byte-size drift: reading/STATUS.json:',
             'STATE_MANIFEST state_file_bytes mismatch',
             'STATE_MANIFEST aggregate_sha256 mismatch',
           )
-          unexpected=[e for e in errors if not any(e.startswith(p) for p in allowed)]
-          if not errors or unexpected or not any(e.startswith('STATE_MANIFEST blob drift: PROJECT_TRACKS.json:') for e in errors):
+          unexpected=[e for e in errors if not any(e.startswith(p) for p in allowed_prefixes)]
+          if not errors or unexpected:
               raise SystemExit(f'Unexpected routed-state drift; refusing Gate B A1 Unit 2 write: {unexpected or errors}')
+          has_tracks=any(e.startswith('STATE_MANIFEST blob drift: PROJECT_TRACKS.json:') for e in errors)
+          has_status=any(e.startswith('STATE_MANIFEST blob drift: reading/STATUS.json:') for e in errors)
+          if not (has_tracks or has_status):
+              raise SystemExit(f'No explicitly bounded blob drift present: {errors}')
+          if has_status:
+              s=json.loads(Path('reading/STATUS.json').read_text(encoding='utf-8'))
+              if s.get('updated')!='2026-08-31': raise SystemExit('STATUS drift is not the verified 2026-08-31 date sync')
+              cur=s.get('current',{})
+              if cur.get('canonical_passages')!=1080 or cur.get('remaining_generation_passages')!=0 or cur.get('active_language') is not None or cur.get('active_level') is not None or cur.get('active_generation_plan') is not None:
+                  raise SystemExit('STATUS production frontier/count drift is substantive; refusing repair')
+              for lang in ('arabic','french','urdu'):
+                  block=s.get('languages',{}).get(lang,{})
+                  if block.get('generation_state')!='COMPLETE' or block.get('canonical_passages')!=360 or block.get('remaining_generation_passages')!=0:
+                      raise SystemExit(f'STATUS {lang} production state drift is substantive; refusing repair')
           PY
             python reading/tools/refresh_state_manifest.py
             python reading/tools/validate_continuation_state.py
