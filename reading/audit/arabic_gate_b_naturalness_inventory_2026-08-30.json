@@ -12,12 +12,12 @@
   "levels": {
     "a1": {
       "canonical_path": "reading/arabic/a1/passages.jsonl",
-      "canonical_sha256": "bbc91220ddf54e0f26765570071bcd7b8e099613ddab0f8e5dba995e7569ed1c",
-      "canonical_git_blob": "422d10a319c93d4e4c04243274f25b7b3bdfc7a9",
+      "canonical_sha256": "56afae7c5cff90c15f81427fe5ea5bb0a69baf016525318932e11d4708fbf824",
+      "canonical_git_blob": "5d39700bba413376df321083bca06e13caa9da1d",
       "passages": 60,
       "questions": 600,
       "answers": 600,
-      "historical_naturalness_note_records": 35,
+      "historical_naturalness_note_records": 39,
       "fresh_review_status": "IN_PROGRESS",
       "packet_path": "reading/audit/arabic_gate_b_packets_2026-08-30/a1.jsonl",
       "record_learner_facing_sha256": {
@@ -27,12 +27,12 @@
         "ar-a1-u01-p04": "9f626a0e176e09696b84df528ffbd17dc3b78f035a0c63ba9d88df931d0896f3",
         "ar-a1-u01-p05": "d3b7cb444d9917395795941b60ec4ef8ae9450324d8f01dc72b90126200fd284",
         "ar-a1-u01-p06": "7cc0f20774fb9bd79e26e80fd3da63f1ba7db147228b3eefc1cf0a7919b7480f",
-        "ar-a1-u02-p01": "d50cc1c2a4eccc2ccf5da263e8fedab17ab7bcd36715381d3764b4b81404a8e8",
-        "ar-a1-u02-p02": "91dffdf4f35784530a5e241d81d1d42123153a9285b1c2a14149f8edc608d17e",
-        "ar-a1-u02-p03": "ea60f705a45656863d35223e3fc7307bdc7bd752d3d256c318793e1cbe360745",
-        "ar-a1-u02-p04": "240808a49bc8c09833f3e2243b3c62d64de926a3a2425d367ec2e1056504cd14",
-        "ar-a1-u02-p05": "4a16e97d60a3db935a099e15dfb4afd26ed07a43711b63c5f31daa94eeb3b74e",
-        "ar-a1-u02-p06": "63d653ef7a1342ba658a53e69f464957355fb16cecbdcf6d04d66686c06ea482",
+        "ar-a1-u02-p01": "ee818e3fed88d1b712409db5a3778c329abdea0ed92881f5bf505162156901f7",
+        "ar-a1-u02-p02": "66490225ea2e10231f1287b67d5efb06477f11813ea81e791d55714cfebd777d",
+        "ar-a1-u02-p03": "dbefbdd6fdba739d31566c6ac9a3e84b39695dc82dc78fbfa4e5f316989778f1",
+        "ar-a1-u02-p04": "251db0bfd0a1ad67980db2e8855e692290cae7468507b11d678e0689b1be40c8",
+        "ar-a1-u02-p05": "ca99c0dadb4db643a43c614a3e7bce56bd4844c7d93e18d82c684a2b09e2408b",
+        "ar-a1-u02-p06": "edb2ae3ad728da96369583a34f950aeb627da147052da00c66e0dd86709945e0",
         "ar-a1-u03-p01": "f8e9925147398fc650f04da836e88cefec206c131f167f69197ade1d9c31fbab",
         "ar-a1-u03-p02": "79dd25d96f5b8a288a701fb92a468603f01b197c39b79b637b73ff8fa4a36c70",
         "ar-a1-u03-p03": "145dbe48f68b575c6235329dc57cd7f2179cfe221d371eefe76bb0cdf7622073",
@@ -82,9 +82,9 @@
         "ar-a1-u10-p05": "f11a8e9c19aadea5d4c124da9c6340869806cc10a55e3d6d18d742989583031f",
         "ar-a1-u10-p06": "b86a969f3b240ebbb4f98f5eb34ad16a6a15aaf2be432c4c0bdc0c8d0259f2a6"
       },
-      "fresh_records_reviewed": 6,
-      "fresh_records_with_findings": 6,
-      "fresh_findings": 18
+      "fresh_records_reviewed": 12,
+      "fresh_records_with_findings": 12,
+      "fresh_findings": 30
     },
     "a2": {
       "canonical_path": "reading/arabic/a2/passages.jsonl",
@@ -483,14 +483,15 @@
     "question_wording",
     "answer_wording"
   ],
-  "fresh_records_reviewed": 6,
-  "fresh_records_with_findings": 6,
-  "fresh_findings": 18,
+  "fresh_records_reviewed": 12,
+  "fresh_records_with_findings": 12,
+  "fresh_findings": 30,
   "quality_promotion": false,
   "release_claim": false,
   "next_step": "Continue fresh hash-bound passage-by-passage Gate B review in order; repair only exact-current learner-facing defects.",
   "decision_artifacts": [
-    "reading/audit/arabic_gate_b_decisions_2026-08-30/a1_u01.json"
+    "reading/audit/arabic_gate_b_decisions_2026-08-30/a1_u01.json",
+    "reading/audit/arabic_gate_b_decisions_2026-08-30/a1_u02.json"
   ],
   "deterministic_binding": "reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json"
 }

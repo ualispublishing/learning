@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A1",
+  "unit": 2,
+  "date": "2026-08-31",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/a1/passages.jsonl",
+  "canonical_sha256": "56afae7c5cff90c15f81427fe5ea5bb0a69baf016525318932e11d4708fbf824",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 12,
+  "decisions": [
+    {
+      "passage_id": "ar-a1-u02-p01",
+      "learner_facing_sha256": "ee818e3fed88d1b712409db5a3778c329abdea0ed92881f5bf505162156901f7",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u02-p01-gB-01",
+          "field": "text",
+          "dimension": "cohesion",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Remove the post-departure chronology jump at the end of the morning routine."
+        },
+        {
+          "finding_id": "ar-a1-u02-p01-gB-02",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use a direct A1 explanation of وقت in the passage context."
+        },
+        {
+          "finding_id": "ar-a1-u02-p01-gB-03",
+          "field": "answer q6",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace an abstract dictionary-style definition with simpler learner-facing wording."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u02-p02",
+      "learner_facing_sha256": "66490225ea2e10231f1287b67d5efb06477f11813ea81e791d55714cfebd777d",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u02-p02-gB-01",
+          "field": "question q1",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Remove the ambiguous claim about which of two immediate entry actions is literally first."
+        },
+        {
+          "finding_id": "ar-a1-u02-p02-gB-02",
+          "field": "question q8",
+          "dimension": "question_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Ask what أول signifies rather than saying the word itself comes first."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u02-p03",
+      "learner_facing_sha256": "dbefbdd6fdba739d31566c6ac9a3e84b39695dc82dc78fbfa4e5f316989778f1",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u02-p03-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace translation-like عندما يتأخر الوقت with idiomatic temporal wording."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u02-p04",
+      "learner_facing_sha256": "251db0bfd0a1ad67980db2e8855e692290cae7468507b11d678e0689b1be40c8",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u02-p04-gB-01",
+          "field": "text/q4/a4",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Avoid treating the library as the first store while preserving the target آخر and its contrastive meaning."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u02-p05",
+      "learner_facing_sha256": "ca99c0dadb4db643a43c614a3e7bce56bd4844c7d93e18d82c684a2b09e2408b",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u02-p05-gB-01",
+          "field": "answer q6",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace formal grammatical-label wording with an A1-accessible meaning explanation."
+        },
+        {
+          "finding_id": "ar-a1-u02-p05-gB-02",
+          "field": "question q8",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Test نحن as speaker-plus-other person(s), not as multiple speakers."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u02-p06",
+      "learner_facing_sha256": "edb2ae3ad728da96369583a34f950aeb627da147052da00c66e0dd86709945e0",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u02-p06-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace لا تشعر بالعجلة with the idiomatic verb لا تستعجل."
+        },
+        {
+          "finding_id": "ar-a1-u02-p06-gB-02",
+          "field": "question/answer q3",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Repair a malformed when/condition question so the answer directly satisfies it and both targets remain grounded."
+        },
+        {
+          "finding_id": "ar-a1-u02-p06-gB-03",
+          "field": "answer q6",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Explain سوف directly without an abstract metalinguistic label."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+}
