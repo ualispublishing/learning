@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08111f">
+  <meta name="description" content="Keyboard-first SecurityX CAS-005 knowledge-grid prototype">
+  <title>SecX · Keyboard Knowledge Grid</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell" id="app" aria-live="polite">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">SECURITYX · CAS-005 · KEYBOARD-FIRST PROTOTYPE</div>
+        <div class="crumbs" id="crumbs">SecX</div>
+      </div>
+      <div class="status" id="status">Loading audited deck…</div>
+    </header>
+
+    <section class="workspace">
+      <div class="stage">
+        <div class="stage-head">
+          <div>
+            <span class="level-label" id="levelLabel">START</span>
+            <h1 id="levelTitle">SecX</h1>
+            <p id="levelIntro">Use the arrow keys to choose a direction.</p>
+          </div>
+          <div class="position" id="position"></div>
+        </div>
+        <div class="grid root-grid" id="grid" role="grid" aria-label="SecurityX knowledge grid"></div>
+      </div>
+
+      <aside class="detail" id="detail" aria-label="Selected concept details">
+        <div class="detail-kicker" id="detailKicker">SELECTED</div>
+        <h2 id="detailTitle">SecX</h2>
+        <div class="chips" id="chips"></div>
+        <div class="depth-meter" id="depthMeter"></div>
+        <div class="detail-body" id="detailBody"></div>
+      </aside>
+    </section>
+
+    <footer class="keybar" aria-label="Keyboard controls">
+      <span><kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd> move</span>
+      <span><kbd>Enter</kbd> descend</span>
+      <span><kbd>Esc</kbd> back</span>
+      <span><kbd>Space</kbd> deepen</span>
+      <span><kbd>Home</kbd> SecX</span>
+      <span><kbd>/</kbd> search</span>
+    </footer>
+  </main>
+
+  <dialog id="searchDialog" class="search-dialog">
+    <form method="dialog" class="search-shell" id="searchForm">
+      <div class="search-head">
+        <input id="searchInput" autocomplete="off" placeholder="Search a concept, objective, acronym, tool…" aria-label="Search SecurityX knowledge">
+        <button value="cancel" class="ghost">Esc</button>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+      <p class="search-hint">↑/↓ choose · Enter jump · Esc close</p>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
