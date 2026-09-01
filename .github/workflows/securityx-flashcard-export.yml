@@ -1,0 +1,32 @@
+name: SecurityX Flashcard CSV Export
+
+on:
+  push:
+    branches:
+      - securityx-csv-export-20260901
+    paths:
+      - 'subjects/securityx/cas-005/study-site/tools/export_flashcards_csv.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Export audited layered flashcards
+        run: python subjects/securityx/cas-005/study-site/tools/export_flashcards_csv.py
+      - name: Upload CSV
+        uses: actions/upload-artifact@v4
+        with:
+          name: securityx-cas-005-flashcards
+          path: |
+            subjects/securityx/cas-005/study-site/exports/securityx-cas-005-comprehensive-flashcards.csv
+            subjects/securityx/cas-005/study-site/exports/securityx-cas-005-comprehensive-flashcards-summary.json
+          if-no-files-found: error
+          retention-days: 7
