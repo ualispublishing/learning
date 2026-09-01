@@ -21,9 +21,9 @@ Fresh Gate 0 evidence: `reading/audit/post_generation_gate0_2026-08-30.json` (ex
 
 Current generation: 360/360 complete.
 
-Current release position: fresh deterministic revalidation is **FAIL** with **2016** open evidence findings; educator/publication release remains **not ready** under the current assurance profile.
+Current release position: fresh deterministic revalidation is **FAIL** with **1992** open evidence findings; educator/publication release remains **not ready** under the current assurance profile.
 
-Fresh deterministic evidence: `reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json` — 360 records, 3,600 questions, 3,600 answers; status **FAIL**; open findings **2016**. This is a release-evidence gate, not semantic approval.
+Fresh deterministic evidence: `reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json` — 360 records, 3,600 questions, 3,600 answers; status **FAIL**; open findings **1992**. This is a release-evidence gate, not semantic approval.
 
 NFC repair evidence: `reading/audit/arabic_nfc_repair_2026-08-30.json`; the rerun reduced open deterministic findings from **2,506** to **2,496** with the Unicode class at zero.
 

@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B1",
+  "unit": 2,
+  "date": "2026-09-01",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b1/passages.jsonl",
+  "canonical_sha256": "d142d6e7afe84297bf279c0006846da20e6b99cdf6938fc2db5dccde43d54ee4",
+  "records_reviewed": 6,
+  "records_with_findings": 5,
+  "fresh_findings": 9,
+  "decisions": [
+    {
+      "passage_id": "ar-b1-u02-p01",
+      "learner_facing_sha256": "cafd9cb4bbe4aaba95a3313b5cec171e922eb844df68a6293aabf20dfb3ad97a",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u02-p01-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Replace the awkward الشخص الذي يظهر عنده الخطأ with a natural formulation that says the error appears associated with the person."
+        },
+        {
+          "finding_id": "ar-b1-u02-p01-gB-02",
+          "field": "question q2",
+          "dimension": "assessment_grounding",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Ask directly since when the part had been written so the wording aligns with the passage and the answer منذ عصر السبت."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u02-p02",
+      "learner_facing_sha256": "62585fde94f00203bbea94a3e0c5f0aeae0d5cfa756938639426bedb1362e632",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u02-p02-gB-01",
+          "field": "question/answer q8",
+          "dimension": "assessment_grounding",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The original q8 analyzed an implicit conditional about information gathering that is not stated with إذا. Rebind it to the passage’s exact إذا clause about understanding حل as something that ends a problem immediately."
+        },
+        {
+          "finding_id": "ar-b1-u02-p02-gB-02",
+          "field": "question q10",
+          "dimension": "register",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace colloquial الزحمة with standard MSA الازدحام in the learner-facing question."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u02-p03",
+      "learner_facing_sha256": "11c45062f621518be307ee925b6640369a72f89e127b057ebcfe649eb77ecc16",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u02-p03-gB-01",
+          "field": "question/answer q7",
+          "dimension": "assessment_grounding",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The original q7 paraphrased a contrast not quoted in the passage. Rebind لكن to Noor’s exact sentence الكلمتان واضحتان، لكن المرجع ليس واضحًا."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u02-p04",
+      "learner_facing_sha256": "743c07371df9721dec467ec2102479d8d31b884161c88161b5be182abb40ea89",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u02-p04-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace تكتب في ذهنها with the idiomatic تضع في ذهنها for keeping alternative explanations in mind."
+        },
+        {
+          "finding_id": "ar-b1-u02-p04-gB-02",
+          "field": "question/answer q8",
+          "dimension": "assessment_grounding",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The original q8 analyzed لو although لو does not occur in the passage. Rebind the grammar-in-context task to the exact corrective بل construction."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u02-p05",
+      "learner_facing_sha256": "e35a0e237c5f965e1ca8b8b8dc50c4c5dce30679b0738072842f77d1a3a5decf",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u02-p05-gB-01",
+          "field": "text/question q6",
+          "dimension": "semantic_alignment",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The intended contrast is changing the event’s place versus redesigning it, not changing its title/address. Repair عنوانه/العنوان to مكانه/المكان."
+        },
+        {
+          "finding_id": "ar-b1-u02-p05-gB-02",
+          "field": "question/answer q7",
+          "dimension": "assessment_grounding",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Ground بدل in the exact phrase استخدام لوحة واحدة بدل لوحتين and explain its substitution function."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u02-p06",
+      "learner_facing_sha256": "3743799f4288c5daf6632b158e28ff065921ca053d6ae94e79991bb1be7617a9",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer; legitimate B1 grammar-in-context analysis is retained."
+}
