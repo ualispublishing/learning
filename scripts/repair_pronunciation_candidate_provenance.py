@@ -62,13 +62,6 @@ def read_rows(path: Path) -> list[dict]:
         return list(csv.DictReader(handle))
 
 
-def write_rows(path: Path, rows: list[dict], fields: list[str]) -> None:
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields)
-        writer.writeheader()
-        writer.writerows(rows)
-
-
 def main() -> None:
     for path in (STAGE, CANDIDATE, LEDGER):
         if not path.exists():
@@ -126,7 +119,7 @@ def main() -> None:
 
     # The ledger row itself was also written with unquoted commas in the issue text,
     # so DictReader can shift the final adjudication columns before this repair runs.
-    # Repair exactly rank 288's physical record first, then validate the parsed ledger.
+    # Repair exactly rank 288's physical record and do not rewrite neighboring legacy rows.
     ledger_raw = LEDGER.read_text(encoding="utf-8-sig").splitlines()
     ledger_line_index = (RANK - 251) + 1  # header is line 0; rank 251 is line 1.
     if len(ledger_raw) != 51:
@@ -148,44 +141,23 @@ def main() -> None:
     if len(ledger_rows) != 50 or [int(r["rank"]) for r in ledger_rows] != list(range(251, 301)):
         fail("French 251-300 pronunciation ledger shape changed")
     led = ledger_rows[RANK - 251]
-    if led.get("status") not in {"REPAIR", "HOLD"}:
-        fail(f"unexpected pre-repair ledger status: {led.get('status')!r}")
-    if led.get("proposed_ipa") not in {"", FINAL_IPA} or led.get("proposed_learner_hint") not in {"", FINAL_HINT}:
-        fail("rank 288 final adjudication unexpectedly differs")
-
-    before = dict(led)
-    led.update({
-        "status": "REPAIR",
-        "target": EXPECTED_TARGET,
-        "english": EXPECTED_ENGLISH,
-        "ipa_candidate": EXPECTED_IPA_CANDIDATE,
-        "learner_hint_candidate": EXPECTED_HINT_CANDIDATE,
-        "issue": ISSUE,
-        "proposed_ipa": FINAL_IPA,
-        "proposed_learner_hint": FINAL_HINT,
-    })
-    fields = [
-        "rank", "status", "target", "english", "ipa_candidate",
-        "learner_hint_candidate", "issue", "proposed_ipa", "proposed_learner_hint",
-    ]
-    write_rows(LEDGER, ledger_rows, fields)
-
-    ledger_check = read_rows(LEDGER)
-    row = ledger_check[RANK - 251]
-    if any(row[key] != value for key, value in {
-        "status": "REPAIR", "target": EXPECTED_TARGET, "english": EXPECTED_ENGLISH,
-        "ipa_candidate": EXPECTED_IPA_CANDIDATE,
-        "learner_hint_candidate": EXPECTED_HINT_CANDIDATE,
-        "proposed_ipa": FINAL_IPA, "proposed_learner_hint": FINAL_HINT,
-    }.items()):
-        fail("ledger verification failed after repair")
+    if led.get("status") != "REPAIR":
+        fail(f"unexpected repaired ledger status: {led.get('status')!r}")
+    if led.get("target") != EXPECTED_TARGET or led.get("english") != EXPECTED_ENGLISH:
+        fail("rank 288 repaired ledger target/English mismatch")
+    if led.get("ipa_candidate") != EXPECTED_IPA_CANDIDATE or led.get("learner_hint_candidate") != EXPECTED_HINT_CANDIDATE:
+        fail("rank 288 repaired candidate pronunciation mismatch")
+    if led.get("proposed_ipa") != FINAL_IPA or led.get("proposed_learner_hint") != FINAL_HINT:
+        fail("rank 288 repaired final adjudication mismatch")
+    if led.get(None):
+        fail("rank 288 repaired ledger still has overflow CSV fields")
 
     print(json.dumps({
         "gate": "PASS",
         "rank": RANK,
         "canonical_stage_sha256": source_hash,
         "candidate_changed": changed_candidate,
-        "ledger_changed": changed_ledger_line or before != led,
+        "ledger_changed": changed_ledger_line,
         "candidate_rows": len(candidate_rows),
         "ledger_rows": len(ledger_rows),
         "unresolved_rank_288": 0,
