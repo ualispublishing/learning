@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A2",
+  "unit": 10,
+  "date": "2026-09-01",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/a2/passages.jsonl",
+  "canonical_sha256": "fdee8e6d9f8ac1cca0b65bb79d82086c4ee703e81b09e940ba6bab7765e47cb1",
+  "records_reviewed": 6,
+  "records_with_findings": 3,
+  "fresh_findings": 3,
+  "decisions": [
+    {
+      "passage_id": "ar-a2-u10-p01",
+      "learner_facing_sha256": "35c4a8ea863ab554fcc7025a0782e23857474949ac9c32ae9e4e728c3051dc8d",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u10-p01-gB-01",
+          "field": "answer q7",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "الخطة الأولى in Noor’s final reflection refers to her original day plan, not separately to the original plan of every activity."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u10-p02",
+      "learner_facing_sha256": "d5469e921c354d110cbda2255b9a656e9693c1ac5a50cc6136fcb39b19579713",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a2-u10-p03",
+      "learner_facing_sha256": "f30e1ed6d55e4b2ef52ce9665b4ded7bb0e4d984613f8eef88c13665c5c2d1c9",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u10-p03-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace يحل المشكلة أفضل with the idiomatic يحل المشكلة على أفضل وجه."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u10-p04",
+      "learner_facing_sha256": "8209d0441299bbe3d7c7fe85345a70d80efb978ddddba4ba3c5cc68b2de4408e",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a2-u10-p05",
+      "learner_facing_sha256": "d85a0250e1510ac71d971bb3050c29322e8a30475c7cd84a00728d403ca42bfd",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u10-p05-gB-01",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Complete يرووا نسخة with من القصة so the object is explicit and natural in this storytelling context."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u10-p06",
+      "learner_facing_sha256": "379bba0e31beb4f0b03f5a952aebfaab451f67e358ad5f8c9bdfb640239347db",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+}
