@@ -18,7 +18,7 @@ TEXT_REPAIRS={
   ('لكن تفاصيل أخرى ظهرت عند طلاب قليلين فقط.', 'لكن تفاصيل أخرى ظهرت لدى عدد قليل من الطلاب فقط.'),
  ],
  'ar-a2-u03-p05':[
-  ('أجاب الأب: بعض الأحداث تترك أثرًا واضحًا، لكن تفاصيل الأثر قد تختفي ثم تعود عندما نرى شيئًا مرتبطًا بها.', 'أجاب الأب: بعض الأحداث تترك أثرًا واضحًا، لكن بعض تفاصيلها قد تختفي ثم تعود عندما نرى شيئًا مرتبطًا بها.'),
+  ('أجاب الأب: بعض الأحداث تترك أثرًا واضحًا، لكن تفاصيل الأثر قد تختفي ثم تعود عندما نرى شيئًا مرتبطًا بها.', 'أجاب الأب: بعض الأحداث تترك أثرًا واضحًا، لكن هذا الأثر قد يبقى حتى عندما تختفي بعض تفاصيل الحدث، ثم تعود تلك التفاصيل عندما نرى شيئًا مرتبطًا به.'),
  ],
  'ar-a2-u03-p06':[
   ('اكتشفت أن صورة واحدة قد تجعلها تنظر إلى يوم قديم مجددًا، وأن تسجيلًا صوتيًا يعيد أصواتًا لا تستطيع الصورة حفظها.', 'اكتشفت أن صورة واحدة قد تجعلها تنظر إلى يوم قديم مجددًا، وأن تسجيلًا صوتيًا يعيد إليها أصواتًا لا تستطيع الصورة حفظها.'),
@@ -69,7 +69,7 @@ FINDING_META={
   ('answer q4','answer_wording','minor','Explain كنت أظن directly as a past belief that later changed, rather than describing an abstract اعتقاد.'),
  ],
  'ar-a2-u03-p05':[
-  ('text','semantic_precision','moderate','Details belong to the event, not to the أثر itself; preserve أثر while making the reference precise.'),
+  ('text','semantic_precision','moderate','Clarify that the أثر can remain while event details fade, while preserving the required أثر target exposure count.'),
   ('answer q3','grammar_wording','moderate','Repair the case mismatch in علامة أو تأثيرًا and give a grammatically parallel definition of أثر.'),
  ],
  'ar-a2-u03-p06':[
