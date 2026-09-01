@@ -1,0 +1,118 @@
+name: LANG-WB free linguistic audit
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Optional first N ranks per kind; 0 = full 2,000 rows/language"
+        required: false
+        default: "0"
+  push:
+    paths:
+      - scripts/run_lang_wb_free_linguistic_audit.py
+      - .github/workflows/language-workbook-free-linguistic-audit.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lang-wb-free-linguistic-audit-v1
+  cancel-in-progress: false
+
+jobs:
+  audit-language:
+    name: audit-${{ matrix.language }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [arabic, french, urdu]
+    env:
+      CANDIDATE_COMMIT: aa9b5d465839edb2ce520133a01d78ed40634c96
+      HF_HOME: ${{ github.workspace }}/.hf-cache
+      TOKENIZERS_PARALLELISM: "false"
+    steps:
+      - name: Check out repository with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache Hugging Face models
+        uses: actions/cache@v4
+        with:
+          path: .hf-cache
+          key: lang-wb-hf-${{ runner.os }}-${{ matrix.language }}-v1
+
+      - name: Install CPU inference dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu torch
+          python -m pip install 'transformers<5' sentencepiece sacremoses safetensors
+
+      - name: Verify candidate commit and source rows exist
+        run: |
+          git cat-file -e "$CANDIDATE_COMMIT^{commit}"
+          git show "$CANDIDATE_COMMIT:completed/languages/workbooks/v1.0/${{ matrix.language }}/${{ matrix.language }}_vocabulary_1000.csv" >/dev/null
+          git show "$CANDIDATE_COMMIT:completed/languages/workbooks/v1.0/${{ matrix.language }}/${{ matrix.language }}_sentence_bank_1000.csv" >/dev/null
+
+      - name: Run independent translation + NLI audit
+        env:
+          AUDIT_LIMIT: ${{ github.event.inputs.limit || '0' }}
+        run: |
+          python scripts/run_lang_wb_free_linguistic_audit.py \
+            --language "${{ matrix.language }}" \
+            --candidate-commit "$CANDIDATE_COMMIT" \
+            --batch-size 24 \
+            --limit "$AUDIT_LIMIT" \
+            --output-dir "audit-out/${{ matrix.language }}"
+
+      - name: Upload language audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lang-wb-free-linguistic-audit-${{ matrix.language }}-${{ github.sha }}
+          path: audit-out/${{ matrix.language }}/
+          if-no-files-found: error
+          retention-days: 30
+
+  aggregate:
+    name: aggregate-audit
+    needs: audit-language
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Download all language audit artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: lang-wb-free-linguistic-audit-*-${{ github.sha }}
+          path: combined
+          merge-multiple: true
+
+      - name: Aggregate audit evidence
+        run: |
+          python scripts/run_lang_wb_free_linguistic_audit.py \
+            --aggregate-dir combined \
+            --aggregate-output combined/lang-wb-free-linguistic-audit-aggregate.json
+
+      - name: Upload aggregate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lang-wb-free-linguistic-audit-aggregate-${{ github.sha }}
+          path: combined/
+          if-no-files-found: error
+          retention-days: 30
