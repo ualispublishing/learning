@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A2",
+  "unit": 3,
+  "date": "2026-09-01",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/a2/passages.jsonl",
+  "canonical_sha256": "c1063e2c65c1dd70a228092bb9bd471cff6ad49bd1ced96221530476c781cebc",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 15,
+  "decisions": [
+    {
+      "passage_id": "ar-a2-u03-p01",
+      "learner_facing_sha256": "f6f1080b83c8d9a386879f3b8958fb450852b20ac8a0e76491e7430c6f8a1ade",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 4,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u03-p01-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the literal-sounding منحتها الصورة نظرة with the idiomatic أعطتها الصورة لمحة."
+        },
+        {
+          "finding_id": "ar-a2-u03-p01-gB-02",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the awkward التقطت لها نسخة description with a direct statement that a copy of the photo was saved on the phone."
+        },
+        {
+          "finding_id": "ar-a2-u03-p01-gB-03",
+          "field": "answer q3",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define مؤخرًا directly as something that happened a short time ago rather than vaguely near the present."
+        },
+        {
+          "finding_id": "ar-a2-u03-p01-gB-04",
+          "field": "answer q4",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use تنظر إليها rather than تراها to match the repeated act of looking at the photo."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u03-p02",
+      "learner_facing_sha256": "c411d2f5eea91e6a5f9a3207f1a814368f8efbe84c893e60b8c03e897f29b691",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u03-p02-gB-01",
+          "field": "text",
+          "dimension": "reference_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The antecedent of حدث incorrectly treats the recording itself as the event; refer to the occasion instead."
+        },
+        {
+          "finding_id": "ar-a2-u03-p02-gB-02",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Simplify the definition of تسجيل صوتي to a saved audio file from an earlier event."
+        },
+        {
+          "finding_id": "ar-a2-u03-p02-gB-03",
+          "field": "answer q4",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define نظرة with direct learner-facing wording instead of the abstract speed-or-care formulation."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u03-p03",
+      "learner_facing_sha256": "cb242eab4a7ea35a08752a11727e74ee3a1a7e9f031dae60e707341ebddd9ade",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u03-p03-gB-01",
+          "field": "answer q4",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the redundant فترة من الوقت في الماضي definition of زمن مضى with direct A2 wording."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u03-p04",
+      "learner_facing_sha256": "59ced338c2e94ffd148b6dc1eb39eef2266602044adc1cd1df0fa7e0031d58d8",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u03-p04-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use لدى عدد قليل من الطلاب rather than عند طلاب قليلين for details recalled by only a few students."
+        },
+        {
+          "finding_id": "ar-a2-u03-p04-gB-02",
+          "field": "answer q4",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Explain كنت أظن directly as a past belief that later changed, rather than describing an abstract اعتقاد."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u03-p05",
+      "learner_facing_sha256": "3eff5d85dd17af66ac414b1655de6499cd1694e634bb8b76bdeec5671665a258",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u03-p05-gB-01",
+          "field": "text",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Clarify that the أثر can remain while event details fade, while preserving the required أثر target exposure count."
+        },
+        {
+          "finding_id": "ar-a2-u03-p05-gB-02",
+          "field": "answer q3",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Repair the case mismatch in علامة أو تأثيرًا and give a grammatically parallel definition of أثر."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u03-p06",
+      "learner_facing_sha256": "988d470197f3f9cbb15f324bd8e4c0e2e70f4e4d83ce102c8f86716fb2f93a7e",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u03-p06-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Add the object pronoun in يعيد إليها أصواتًا so the recording naturally brings sounds back to Noor."
+        },
+        {
+          "finding_id": "ar-a2-u03-p06-gB-02",
+          "field": "question q8",
+          "dimension": "assessment_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "كل مصدر is not a referring pronoun; ask explicitly which sources the phrase denotes."
+        },
+        {
+          "finding_id": "ar-a2-u03-p06-gB-03",
+          "field": "question q10",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace حمل القصة كاملة with the natural question of whether one source is sufficient to reconstruct the whole story."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+}
