@@ -9,6 +9,7 @@ on:
 permissions:
   contents: write
 
+# Retrigger after workflow registration.
 jobs:
   review-and-repair:
     runs-on: ubuntu-latest
