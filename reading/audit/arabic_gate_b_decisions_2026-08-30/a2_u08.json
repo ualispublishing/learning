@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A2",
+  "unit": 8,
+  "date": "2026-09-01",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/a2/passages.jsonl",
+  "canonical_sha256": "d595c96f41e6db79c8af09be8634450b1e49c0738e08f39eec480067c68c13ea",
+  "records_reviewed": 6,
+  "records_with_findings": 5,
+  "fresh_findings": 10,
+  "decisions": [
+    {
+      "passage_id": "ar-a2-u08-p01",
+      "learner_facing_sha256": "7ef010028486b6c6c0a3b54148aac86ea9f39ddc45fbf55deb69d665360c4db8",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u08-p01-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the vague سلة واضحة with the intended concrete object سلة نفايات."
+        },
+        {
+          "finding_id": "ar-a2-u08-p01-gB-02",
+          "field": "text",
+          "dimension": "reference_clarity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the vague لماذا ظهر with an explicit reference to the environmental problem appearing in that location."
+        },
+        {
+          "finding_id": "ar-a2-u08-p01-gB-03",
+          "field": "answer q4",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define materials as what objects are made from, rather than as the types from which the objects were made."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u08-p02",
+      "learner_facing_sha256": "37a6fa53ac6bd42411e6fdc624f45398827c53fa098c1f416709ffbf5ac304ca",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u08-p02-gB-01",
+          "field": "answer q3",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Replace the mismatched الطريقة والقدر الذي...به with a grammatically direct A2 definition of electricity use."
+        },
+        {
+          "finding_id": "ar-a2-u08-p02-gB-02",
+          "field": "answer q4",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define energy through what lighting, heating, and electrical devices need to operate rather than as an abstract القدرة."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u08-p03",
+      "learner_facing_sha256": "ae86039b0fe04b3c4f0ec6ff0f3ff0b240560df52577f43516c12075e38fefa7",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a2-u08-p04",
+      "learner_facing_sha256": "58a9dad1fbecd192fb2e0706386f8f0b06d3aae2f8d41b9de67429c30cba2f2a",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u08-p04-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace ليلة كثيرة الرياح with the idiomatic ليلة شديدة الرياح."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u08-p05",
+      "learner_facing_sha256": "e3159a90b9e62a0b2c2ad715a83bd2e2bb27783d9f0e8af1e9a06505997ba937",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u08-p05-gB-01",
+          "field": "answer q1",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Avoid the redundant سكان المجتمع and identify the intended local users as سكان المنطقة."
+        },
+        {
+          "finding_id": "ar-a2-u08-p05-gB-02",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Remove the redundant مجموعة السكان والأشخاص and define المجتمع directly through people living in and using the area."
+        },
+        {
+          "finding_id": "ar-a2-u08-p05-gB-03",
+          "field": "question q7",
+          "dimension": "assessment_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Replace the vague الجملة الأخيرة تقريبًا locator with the exact quoted phrase containing معلوماتها."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u08-p06",
+      "learner_facing_sha256": "059ae26479b79fc43a660032a521039aa4fe62c65b6664bd1fd4cd1c9f8f3dd5",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u08-p06-gB-01",
+          "field": "answer q2",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "An استخدام does not itself يعمل; contrast necessary with unnecessary use directly."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+}
