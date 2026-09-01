@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A2",
+  "unit": 7,
+  "date": "2026-09-01",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/a2/passages.jsonl",
+  "canonical_sha256": "359a9dda9c2b530db62a3e4896214579410b65017931c1e518f8810b692cd65f",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 10,
+  "decisions": [
+    {
+      "passage_id": "ar-a2-u07-p01",
+      "learner_facing_sha256": "5c3cbeab314697af17d54f2388a75ffb634ba3c285d1c86fb5c0780b3f64c39a",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u07-p01-gB-01",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Repair the mixed agreement in أنشطة وجمهورًا مختلفين by giving each coordinated element a natural modifier."
+        },
+        {
+          "finding_id": "ar-a2-u07-p01-gB-02",
+          "field": "answer q4",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define الجمهور directly without the redundant phrasing المشاركة فيها كزوار."
+        },
+        {
+          "finding_id": "ar-a2-u07-p01-gB-03",
+          "field": "answer q5",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Explain the shift in Noor’s understanding through varied activities and visitor purposes rather than the abstract جماهير فرعية formulation."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u07-p02",
+      "learner_facing_sha256": "c70a30a796eed986600213a2a3d07146fdaf6038dfa952d3b7490a2e1d94a077",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u07-p02-gB-01",
+          "field": "answer q3",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define الصحافة المحلية as local media that publish area news and reports rather than as an ambiguous جهة أو عمل."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u07-p03",
+      "learner_facing_sha256": "e11430121fc09b49c1dbdd8b1b13b9cb0bbaf9f6c17551975a2cd51d74b1b397",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u07-p03-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the redundant على بعد مسافة قليلة with the idiomatic على مسافة قصيرة."
+        },
+        {
+          "finding_id": "ar-a2-u07-p03-gB-02",
+          "field": "answer q4",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Explain the cars’ impact directly on pedestrian movement and safety rather than on the ease of movement and its safety."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u07-p04",
+      "learner_facing_sha256": "90b6015c4ea9ce4f3330f302a39095e935b831c70e84e81915fa62f4b4e6eb02",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u07-p04-gB-01",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define أعلن with the direct communicative meaning أخبر الجمهور رسميًا and remove the incomplete نشر alternative."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u07-p05",
+      "learner_facing_sha256": "248af34dd10a65866f740b60bcf0336f3220e978acc2470e239e4772344db26e",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u07-p05-gB-01",
+          "field": "answer q4",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "A number itself cannot attend; make the predicted attendees explicit."
+        },
+        {
+          "finding_id": "ar-a2-u07-p05-gB-02",
+          "field": "answer q5",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Clarify that the number is only a weather-dependent forecast and the event has not yet occurred."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u07-p06",
+      "learner_facing_sha256": "aa2f8a9b004ceeb373377610d5fe074b2ebbf6f6a08fb805e9b4724d5e9a96db",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u07-p06-gB-01",
+          "field": "answer q4",
+          "dimension": "grammar_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use the idiomatic contrast preposition تميز ... عن rather than تميز ... من."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+}
