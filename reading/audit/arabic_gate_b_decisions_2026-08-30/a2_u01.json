@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A2",
+  "unit": 1,
+  "date": "2026-09-01",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/a2/passages.jsonl",
+  "canonical_sha256": "c66f53246eac52855735ac1329e938185eba52ca6356fbe0962ee1368eeaf292",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 11,
+  "decisions": [
+    {
+      "passage_id": "ar-a2-u01-p01",
+      "learner_facing_sha256": "2c717d9708753010eafc75d00ad1672974e1ba3ddbb00a763f5da3636807a528",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u01-p01-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Avoid coordinating الشارع directly with the relative-clause service phrase; repeat أعرف for a natural parallel structure."
+        },
+        {
+          "finding_id": "ar-a2-u01-p01-gB-02",
+          "field": "answer q4",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the abstract تلبية حاجة عملية service gloss with direct A2 learner-facing wording."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u01-p02",
+      "learner_facing_sha256": "c9744d7dbdfd7aced5e7b5ca84d78ff8fa9775d5dcfcfc798b27ca04e4342b77",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u01-p02-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Replace اتصل بالهاتف, which sounds like calling the phone itself, with استخدم الهاتف للاتصال."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u01-p03",
+      "learner_facing_sha256": "09b302371341fb67343660297dae933824adae9638e059c71e9c902fd222bac9",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u01-p03-gB-01",
+          "field": "answer q3",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use نص معلّق rather than the literal-sounding نص موضوع for a posted announcement."
+        },
+        {
+          "finding_id": "ar-a2-u01-p03-gB-02",
+          "field": "answer q4",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define رسالة قصيرة as written words sent directly, rather than as the information itself."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u01-p04",
+      "learner_facing_sha256": "14bba652c4616b6a0e3f038889a3e504c00767d9292f6a1f1d2b634a87ea5773",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u01-p04-gB-01",
+          "field": "text",
+          "dimension": "reference_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Name الموظفة explicitly as the subject who completes the transaction and gives the paper."
+        },
+        {
+          "finding_id": "ar-a2-u01-p04-gB-02",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Simplify the context definition of زيارة and avoid an unnecessarily narrow formal formulation."
+        },
+        {
+          "finding_id": "ar-a2-u01-p04-gB-03",
+          "field": "answer q8",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use انتقل بين الأقسام rather than تحرك الشخص for navigating departments."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u01-p05",
+      "learner_facing_sha256": "83248a90a0636e3ef2ff893f159bfe6fc89c6f6f320c25a337763448c197f536",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u01-p05-gB-01",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define قائمة الأسعار concretely as product names and their prices."
+        },
+        {
+          "finding_id": "ar-a2-u01-p05-gB-02",
+          "field": "answer q5",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Describe the list as غير محدّثة rather than قديمة, which is the actual problem in context."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u01-p06",
+      "learner_facing_sha256": "cf3335a3cb51eca6158e7c1955f34056cefc437a5f3b434d9a9f4693304ba595",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u01-p06-gB-01",
+          "field": "answer q5",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the abstract بفعالية summary with a direct statement that she knows how to use local institutions."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+}
