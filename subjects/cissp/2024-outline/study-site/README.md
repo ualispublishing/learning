@@ -2,46 +2,25 @@
 
 Unofficial, original study site mapped to the current public ISC2 CISSP exam outline (effective 2024-04-15).
 
-## Current verified release — v1.27.0
+## v1.28.0 release candidate
 
-- 8 CISSP domains; official weights total **100%**.
-- **62** numbered public objectives and **344** paraphrased subtopic checks.
+- 8 domains; official weights total **100%**.
+- **62** numbered objectives and **344** paraphrased subtopic checks.
 - **306/344** checks with explicit enriched-subtopic practice exposure.
 - **33** AI-security coverage areas and **140** layered retrieval cards.
-- **527 released standard scenario questions + 1 Bellringer = 528 released bank records**.
-- Author-difficulty mix: **F41 / E369 / S117 / B1**.
-- **527/527** standard questions have four-option teaching rationales.
-- **668 learner-facing item IDs** in the combined semantic-audit ledger.
+- **543 released standard scenario questions + 1 Bellringer = 544 released bank records** in the v1.28 release candidate.
+- Author-difficulty mix: **F41 / E381 / S121 / B1**.
+- **543/543** standard questions have four-option teaching rationales.
+- **684 learner-facing item IDs** in the combined semantic-audit ledger.
 - **20** primary/reference sources.
 
-Batch 029 completed its full candidate, bookkeeping, release-PR, exact-main, and live Pages verification chain. The verified public fingerprint is **v1.27.0 / 527 standard / 472 manifest released / 1 Bellringer / released_only=true**.
-
-## Semantic-review boundary
-
-The combined ledgers cover **668 learner-facing item IDs** after Batch 029 promotion. Batch 029 contributes 16 reviewed items. The release records zero known keyed-answer reversals and zero known remaining material factual errors within the documented review boundary. This is an auditable quality claim, not an infallibility or exam-pass guarantee.
+Batch 030 completed candidate PR #129 and bookkeeping PR #130 with exact-head, exact-main, originality, logical-mix, browser, aggregate, and Pages-isolation controls passing. This branch promotes those 16 reviewed questions to v1.28.0. Public production remains the verified v1.27.0 release until this exact release head is validated, merged, and the live Pages fingerprint passes.
 
 ## Study workflow
-
 Use **diagnose → retrieve → apply → repair → re-test later**. Run the diagnostic once for routing, retrieve before revealing, use Exam + Stretch for standard practice, commit confidence before answering, review all four rationales, repair high-confidence misses first, and use Bellringers separately as non-exam-representative integrative drills.
 
-Keyboard review flow: **Space toggles reveal/hide; ←/→ move cards while hidden and layers while revealed; 1–4 grades the revealed card.**
-
-## Question-bank expansion
-
-The long-term target remains **800 records** with an authoring mix of 15% Foundation+, 60% Exam-calibrated, 20% Stretch, and 5% Bellringer. Remaining deficits are **F79 / E111 / S43 / B39**, or **272 records**. All 62 objectives have at least one standard-MCQ exposure. Explicit enriched-subtopic exposure is **306/344**; this is authoring coverage, not learner mastery.
-
-Batch 030 is now unblocked from verified released-only planner basis **33338429753**, with E12/S4 across `7.5, 7.7, 7.8, 1.12, 7.9, 7.12, 8.4, 1.2, 1.6, 1.9, 1.7, 3.10, 3.2, 3.4, 3.5, 3.3`. Future candidates remain isolated from public Pages until their own candidate validation, bookkeeping, and promotion gates pass.
-
-## Continuous audit
-
-`.github/workflows/cissp-study-site-audit.yml` enforces knowledge/schema consistency, semantic coverage, originality/duplicate controls, logical batch composition, planning, JavaScript syntax, rationales, static assets, interactive browser flows, and an aggregate gate. `.github/workflows/cissp-pages.yml` independently audits and assembles a released-only artifact and verifies the public runtime fingerprint.
+## Expansion state
+After v1.28 verification, the 800-record target leaves **F79 / E99 / S39 / B39**, or **256 records**. Batch 031 remains provisional until the verified released-only v1.28 planner is regenerated.
 
 ## Accuracy boundary
-
-The strongest warranted v1.27 claim is: **no known material factual errors or incorrect keyed answers are recorded as remaining; 668 learner-facing item IDs have explicit semantic status, and the release records zero known keyed-answer reversals.** Standards and public scope can change, reviews can miss nuance, and ISC2's adaptive live item bank is not public.
-
-## Primary scope references
-
-- ISC2 CISSP Certification Exam Outline: https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline
-- ISC2 CISSP Exam Refresh FAQ: https://www.isc2.org/certifications/cissp/cissp-exam-refresh-faq
-- ISC2 Code of Ethics: https://www.isc2.org/ethics
+No known material factual errors or incorrect keyed answers are recorded as remaining within the documented review boundary; **684 learner-facing item IDs** have explicit semantic status. This is not an infallibility or exam-pass guarantee.
