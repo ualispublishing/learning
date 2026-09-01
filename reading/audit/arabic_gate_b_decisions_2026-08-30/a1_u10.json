@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A1",
+  "unit": 10,
+  "date": "2026-09-01",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/a1/passages.jsonl",
+  "canonical_sha256": "f9648c5443ce38c364976c61d57dcd32cc6d608bc126d774d3b60117bb21f9d0",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 12,
+  "decisions": [
+    {
+      "passage_id": "ar-a1-u10-p01",
+      "learner_facing_sha256": "06309f22b3e7d37e7112e78bd5ec3f6e638b0a4b9aef2998ff0d01dd6b20127c",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u10-p01-gB-01",
+          "field": "answer q3",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define دائمًا as every time rather than weakening it to almost every time."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u10-p02",
+      "learner_facing_sha256": "826dc0eef3ae85ffa8f4625bac727b1fe6bce1ac9b22e68e9e248ad51199ee79",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u10-p02-gB-01",
+          "field": "answer q7",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the awkward غير نفسه definition of مختلف with a direct A1 comparison meaning."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u10-p03",
+      "learner_facing_sha256": "3e2fb77851a982ad89e554b4772e3cae878d2b3e9ab3f2efc8e1d6779f54ea7d",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u10-p03-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use في نهاية الحديث rather than the less natural عند نهاية الحديث."
+        },
+        {
+          "finding_id": "ar-a1-u10-p03-gB-02",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace وقتًا صغيرًا with the idiomatic وقتًا قصيرًا for a short period of time."
+        },
+        {
+          "finding_id": "ar-a1-u10-p03-gB-03",
+          "field": "answer q7",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Simplify the definition of نهاية to a direct A1 meaning."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u10-p04",
+      "learner_facing_sha256": "bd4536493167713ee4c00dc355cfc34099a865278d8420ebe4e47d67545787db",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u10-p04-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use نلتقط الصورة for taking a photograph rather than the literal نأخذ الصورة."
+        },
+        {
+          "finding_id": "ar-a1-u10-p04-gB-02",
+          "field": "answer q4",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the abstract تمثيل مرئي definition of صورة with concrete A1 wording."
+        },
+        {
+          "finding_id": "ar-a1-u10-p04-gB-03",
+          "field": "answer q7",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace لقطة مرئية terminology with a concrete learner-facing definition of صورة."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u10-p05",
+      "learner_facing_sha256": "534fc8605ada428fb01d183db2235bbc0c18f3e13dc124519defd633708f16e4",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u10-p05-gB-01",
+          "field": "answer q3",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define صفحة as a part of a book rather than ambiguously as a sheet or side of a sheet."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u10-p06",
+      "learner_facing_sha256": "2f217fbbc82411744bf9157ba6a0aa3befde3c2ccd96edbccba79c7ddba7c8f1",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u10-p06-gB-01",
+          "field": "answer q1",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Remove the duplicated على مستوى المستوى phrase in the A1 cumulative gist answer."
+        },
+        {
+          "finding_id": "ar-a1-u10-p06-gB-02",
+          "field": "question q10",
+          "dimension": "assessment_clarity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Remove the awkward بالضرورة construction and ask the page-versus-image contrast directly."
+        },
+        {
+          "finding_id": "ar-a1-u10-p06-gB-03",
+          "field": "answer q10",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the technical جزء بنيوي wording with a direct A1 explanation of a page."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+}
