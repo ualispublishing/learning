@@ -25,64 +25,24 @@ TEXT_REPAIRS={
   ('لكن في هذه الحالة كان الإصلاح أقل ثمنًا ولم يجعل الشيء أسوأ، لذلك كان القرار أسهل.', 'لكن في هذه الحالة كان الإصلاح أقل ثمنًا ولم يجعل الكرسي أسوأ، لذلك كان القرار أسهل.'),
  ],
  'ar-a2-u04-p06':[
-  ('وفي الأشياء الرقمية، مثل اشتراك في تطبيق، تفكر هل الاستخدام المتوقع يستحق المبلغ.', 'وفي الأشياء الرقمية، مثل اشتراك في تطبيق، تفكر هل ستستخدم التطبيق بما يكفي ليستحق المبلغ.'),
+  ('في الأشياء الرقمية، مثل اشتراك في تطبيق، تفكر هل الاستخدام المتوقع يستحق المبلغ.', 'في الأشياء الرقمية، مثل اشتراك في تطبيق، تفكر هل ستستخدم التطبيق بما يكفي ليستحق المبلغ.'),
   ('وأحيانًا يكون الإصلاح أغلى أو يجعل النتيجة أسوأ على المدى القريب.', 'وأحيانًا يكون الإصلاح أغلى أو تكون النتيجة بعده أسوأ.'),
  ],
 }
 QA_REPAIRS={
- 'ar-a2-u04-p01':{'answers':{
-  'q3':('مقدار كبر أو صغر العبوة أو الشيء.','مقدار كبر الشيء أو صغره.'),
- }},
- 'ar-a2-u04-p02':{'answers':{
-  'q4':('شراء يعطي قيمة مناسبة أو فائدة جيدة مقارنة بما يدفعه الشخص ويحتاج إليه.','شراء مفيد بسعر مناسب لما يحتاج إليه الشخص.'),
-  'q7':('اتفاق أو عملية شراء، وقد توصف بالجيدة إذا كانت قيمتها مناسبة.','عملية شراء أو اتفاق، وهنا تعني عملية شراء.'),
- }},
- 'ar-a2-u04-p03':{'answers':{
-  'q3':('أن فائدته وقيمته تبرران المبلغ المدفوع.','أن فائدته مناسبة للمبلغ الذي ندفعه.'),
-  'q8':('حتى تعتمد على استعمالها الحقيقي في قرار الاشتراك.','حتى تعرف هل تستخدمها بما يكفي قبل أن تشترك.'),
- }},
- 'ar-a2-u04-p05':{'answers':{
-  'q3':('إعادة الشيء المعطل أو المتضرر إلى حالة تعمل جيدًا.','إعادة الشيء المعطل أو المتضرر إلى حالة جيدة ليعمل كما ينبغي.'),
- }},
- 'ar-a2-u04-p06':{
-  'questions':{
-   'q4':('لماذا لا تعني الصفقة دائمًا شراءً جيدًا؟','لماذا لا يعني العرض أو الخصم دائمًا صفقة جيدة؟'),
-  },
-  'answers':{
-   'q6':('تكون قيمته كافية لما يُدفع مقابله.','تكون فائدته مناسبة للثمن المدفوع.'),
-  },
- },
+ 'ar-a2-u04-p01':{'answers':{'q3':('مقدار كبر أو صغر العبوة أو الشيء.','مقدار كبر الشيء أو صغره.')}},
+ 'ar-a2-u04-p02':{'answers':{'q4':('شراء يعطي قيمة مناسبة أو فائدة جيدة مقارنة بما يدفعه الشخص ويحتاج إليه.','شراء مفيد بسعر مناسب لما يحتاج إليه الشخص.'),'q7':('اتفاق أو عملية شراء، وقد توصف بالجيدة إذا كانت قيمتها مناسبة.','عملية شراء أو اتفاق، وهنا تعني عملية شراء.')}},
+ 'ar-a2-u04-p03':{'answers':{'q3':('أن فائدته وقيمته تبرران المبلغ المدفوع.','أن فائدته مناسبة للمبلغ الذي ندفعه.'),'q8':('حتى تعتمد على استعمالها الحقيقي في قرار الاشتراك.','حتى تعرف هل تستخدمها بما يكفي قبل أن تشترك.')}},
+ 'ar-a2-u04-p05':{'answers':{'q3':('إعادة الشيء المعطل أو المتضرر إلى حالة تعمل جيدًا.','إعادة الشيء المعطل أو المتضرر إلى حالة جيدة ليعمل كما ينبغي.')}},
+ 'ar-a2-u04-p06':{'questions':{'q4':('لماذا لا تعني الصفقة دائمًا شراءً جيدًا؟','لماذا لا يعني العرض أو الخصم دائمًا صفقة جيدة؟')},'answers':{'q6':('تكون قيمته كافية لما يُدفع مقابله.','تكون فائدته مناسبة للثمن المدفوع.')}},
 }
 FINDING_META={
- 'ar-a2-u04-p01':[
-  ('text','naturalness_idiomaticity','moderate','Replace المقارنة ليست بين السعر فقط with a natural statement that comparison should not depend on price alone.'),
-  ('answer q3','answer_wording','minor','Define حجم with the direct phrase مقدار كبر الشيء أو صغره.'),
- ],
- 'ar-a2-u04-p02':[
-  ('text','naturalness_idiomaticity','minor','Use الصفقة الجيدة rather than the unnatural evaluative phrase الصفقة الحقيقية.'),
-  ('answer q4','answer_wording','minor','Replace the abstract value formulation with a direct A2 explanation of a good deal.'),
-  ('answer q7','semantic_precision','minor','Define صفقة as a purchase or agreement without implying that the word itself means a good-value purchase.'),
- ],
- 'ar-a2-u04-p03':[
-  ('text','naturalness_idiomaticity','minor','Repair الشيء المفيد لا يستحق الشراء تلقائيًا to the natural ليس كل شيء مفيد construction.'),
-  ('answer q3','answer_wording','minor','Explain يستحق الثمن directly as benefit being appropriate for the amount paid.'),
-  ('answer q8','answer_wording','minor','State the practical reason for tracking use: to know whether the new exercises are used enough before subscribing.'),
- ],
- 'ar-a2-u04-p04':[
-  ('text','naturalness_idiomaticity','minor','Replace عمل بصورة طبيعية with the idiomatic عمل كما ينبغي for a functioning lamp.'),
- ],
- 'ar-a2-u04-p05':[
-  ('text','naturalness_idiomaticity','moderate','Replace توقف الكرسي عن الثبات with the direct لم يعد الكرسي ثابتًا.'),
-  ('text','semantic_precision','minor','Specify قطعة غيار when describing a replacement part needed for a repair.'),
-  ('text','reference_clarity','minor','Refer to the chair directly rather than the vague الشيء in the repair conclusion.'),
-  ('answer q3','answer_wording','minor','Define إصلاح with a direct statement about returning a damaged object to good working condition.'),
- ],
- 'ar-a2-u04-p06':[
-  ('text','semantic_precision','moderate','Usage itself does not deserve a price; state whether Noor will use the app enough for it to be worth the amount.'),
-  ('text','naturalness_idiomaticity','minor','Replace يجعل النتيجة أسوأ على المدى القريب with a direct comparison of the post-repair result.'),
-  ('question q4','assessment_clarity','moderate','A صفقة is not inherently a good purchase; ask why an offer or discount does not always amount to a good deal.'),
-  ('answer q6','answer_wording','minor','Define يستحق with direct benefit-versus-price wording.'),
- ],
+ 'ar-a2-u04-p01':[('text','naturalness_idiomaticity','moderate','Replace المقارنة ليست بين السعر فقط with a natural statement that comparison should not depend on price alone.'),('answer q3','answer_wording','minor','Define حجم with the direct phrase مقدار كبر الشيء أو صغره.')],
+ 'ar-a2-u04-p02':[('text','naturalness_idiomaticity','minor','Use الصفقة الجيدة rather than the unnatural evaluative phrase الصفقة الحقيقية.'),('answer q4','answer_wording','minor','Replace the abstract value formulation with a direct A2 explanation of a good deal.'),('answer q7','semantic_precision','minor','Define صفقة as a purchase or agreement without implying that the word itself means a good-value purchase.')],
+ 'ar-a2-u04-p03':[('text','naturalness_idiomaticity','minor','Repair الشيء المفيد لا يستحق الشراء تلقائيًا to the natural ليس كل شيء مفيد construction.'),('answer q3','answer_wording','minor','Explain يستحق الثمن directly as benefit being appropriate for the amount paid.'),('answer q8','answer_wording','minor','State the practical reason for tracking use: to know whether the new exercises are used enough before subscribing.')],
+ 'ar-a2-u04-p04':[('text','naturalness_idiomaticity','minor','Replace عمل بصورة طبيعية with the idiomatic عمل كما ينبغي for a functioning lamp.')],
+ 'ar-a2-u04-p05':[('text','naturalness_idiomaticity','moderate','Replace توقف الكرسي عن الثبات with the direct لم يعد الكرسي ثابتًا.'),('text','semantic_precision','minor','Specify قطعة غيار when describing a replacement part needed for a repair.'),('text','reference_clarity','minor','Refer to the chair directly rather than the vague الشيء in the repair conclusion.'),('answer q3','answer_wording','minor','Define إصلاح with a direct statement about returning a damaged object to good working condition.')],
+ 'ar-a2-u04-p06':[('text','semantic_precision','moderate','Usage itself does not deserve a price; state whether Noor will use the app enough for it to be worth the amount.'),('text','naturalness_idiomaticity','minor','Replace يجعل النتيجة أسوأ على المدى القريب with a direct comparison of the post-repair result.'),('question q4','assessment_clarity','moderate','A صفقة is not inherently a good purchase; ask why an offer or discount does not always amount to a good deal.'),('answer q6','answer_wording','minor','Define يستحق with direct benefit-versus-price wording.')],
 }
 def sha(data:bytes)->str:return hashlib.sha256(data).hexdigest()
 def wc(text:str)->int:return len(TOKEN.findall(text))
