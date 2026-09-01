@@ -87,7 +87,7 @@ def main() -> None:
         fail("unexpected canonical English/level at rank 288")
     source_hash = sha256(STAGE)
 
-    # The malformed candidate row may not parse into seven logical fields.  Repair
+    # The malformed candidate row may not parse into seven logical fields. Repair
     # exactly its one physical CSV record, then reparse the complete file.
     raw = CANDIDATE.read_text(encoding="utf-8-sig").splitlines()
     matches = [i for i, line in enumerate(raw) if line.startswith(f"{RANK},")]
@@ -123,6 +123,26 @@ def main() -> None:
     for key, expected in expected_candidate.items():
         if cand.get(key) != expected:
             fail(f"candidate repair mismatch {key}: {cand.get(key)!r} != {expected!r}")
+
+    # The ledger row itself was also written with unquoted commas in the issue text,
+    # so DictReader can shift the final adjudication columns before this repair runs.
+    # Repair exactly rank 288's physical record first, then validate the parsed ledger.
+    ledger_raw = LEDGER.read_text(encoding="utf-8-sig").splitlines()
+    ledger_line_index = (RANK - 251) + 1  # header is line 0; rank 251 is line 1.
+    if len(ledger_raw) != 51:
+        fail(f"French 251-300 pronunciation ledger physical line count changed: {len(ledger_raw)}")
+    if not ledger_raw[ledger_line_index].startswith(f"{RANK},"):
+        fail("French rank-288 ledger physical-line invariant failed")
+    ledger_out = io.StringIO(newline="")
+    ledger_writer = csv.writer(ledger_out, lineterminator="")
+    ledger_writer.writerow([
+        str(RANK), "REPAIR", EXPECTED_TARGET, EXPECTED_ENGLISH,
+        EXPECTED_IPA_CANDIDATE, EXPECTED_HINT_CANDIDATE, ISSUE, FINAL_IPA, FINAL_HINT,
+    ])
+    repaired_ledger_line = ledger_out.getvalue()
+    changed_ledger_line = ledger_raw[ledger_line_index] != repaired_ledger_line
+    ledger_raw[ledger_line_index] = repaired_ledger_line
+    LEDGER.write_text("\n".join(ledger_raw) + "\n", encoding="utf-8")
 
     ledger_rows = read_rows(LEDGER)
     if len(ledger_rows) != 50 or [int(r["rank"]) for r in ledger_rows] != list(range(251, 301)):
@@ -165,7 +185,7 @@ def main() -> None:
         "rank": RANK,
         "canonical_stage_sha256": source_hash,
         "candidate_changed": changed_candidate,
-        "ledger_changed": before != led,
+        "ledger_changed": changed_ledger_line or before != led,
         "candidate_rows": len(candidate_rows),
         "ledger_rows": len(ledger_rows),
         "unresolved_rank_288": 0,
