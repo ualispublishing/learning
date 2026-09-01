@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B1",
+  "unit": 3,
+  "date": "2026-09-01",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b1/passages.jsonl",
+  "canonical_sha256": "f6431e6229d9440645c3c75880fe0f554c4548e62148b76569830ced45b8e538",
+  "records_reviewed": 6,
+  "records_with_findings": 4,
+  "fresh_findings": 6,
+  "decisions": [
+    {
+      "passage_id": "ar-b1-u03-p01",
+      "learner_facing_sha256": "50b6eeccc474c9e5bcd5a23c2bd4d717d1cd66a80e85f68d26a569ca14e8a4c4",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b1-u03-p02",
+      "learner_facing_sha256": "fb1d314c804aff39e5f340c7ccb04ba47dbf0b53e5e582e5057ef474634c4e60",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u03-p02-gB-01",
+          "field": "question q1",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the awkward لماذا لا يكفي الفيديو الأول سامرًا؟ with the natural MSA wording لماذا لا يكون الفيديو الأول كافيًا لسامر؟"
+        },
+        {
+          "finding_id": "ar-b1-u03-p02-gB-02",
+          "field": "text/question/answer q8",
+          "dimension": "naturalness_and_assessment_alignment",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Repair the malformed وإذا نجح المثال وحده to وإذا نجح في المثال وحده and bind the conditional question directly to that exact sentence."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u03-p03",
+      "learner_facing_sha256": "887cf2d9e22d8a7024a7d2dc82ace69395e2f64fe4ad2a060a60c4a8404a0ff2",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b1-u03-p04",
+      "learner_facing_sha256": "5b40cade89972bc8ad1c6c9db284b4bc9e541c1df5aec76c0612fb67fe379ae1",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u03-p04-gB-01",
+          "field": "question q5",
+          "dimension": "assessment_alignment",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The original question attributes both protection and access to the file-naming rule alone, while the answer describes the broader backup/shared-folder system. Ask about the system as a whole."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u03-p05",
+      "learner_facing_sha256": "9da990f6be1a5318a3cfa79cd395fb1cc93e28d854daddbeafd89257f9b8e2d4",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u03-p05-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the awkward nominal sequence اقتراحات تصحيح with the idiomatic اقتراحات للتصحيح."
+        },
+        {
+          "finding_id": "ar-b1-u03-p05-gB-02",
+          "field": "question q6",
+          "dimension": "assessment_grounding",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Ground the عندما grammar item in the exact passage sentence rather than an indirect paraphrase using حين."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u03-p06",
+      "learner_facing_sha256": "1776773878c8a54c36e67c8f7d48d852cc5705dfed07e46b28d6c5ccbfa8fc15",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u03-p06-gB-01",
+          "field": "text/question q5",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Replace the calqued أكثر قصدًا with the natural learner-facing أكثر وعيًا and align the comprehension question to the repaired phrase."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer; legitimate B1 grammar-in-context analysis is retained."
+}

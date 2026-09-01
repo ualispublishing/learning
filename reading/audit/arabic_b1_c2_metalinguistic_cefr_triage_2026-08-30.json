@@ -13,8 +13,8 @@
   "canonical_bindings": {
     "b1": {
       "path": "reading/arabic/b1/passages.jsonl",
-      "sha256": "d142d6e7afe84297bf279c0006846da20e6b99cdf6938fc2db5dccde43d54ee4",
-      "git_blob": "63e4dfd3aec638e2a4610fe2803ea8986ccca2cf"
+      "sha256": "f6431e6229d9440645c3c75880fe0f554c4548e62148b76569830ced45b8e538",
+      "git_blob": "8bae2288401bfeade91ff76f124177dbee3d7330"
     },
     "b2": {
       "path": "reading/arabic/b2/passages.jsonl",
@@ -466,14 +466,16 @@
       "passage_id": "ar-b1-u03-p02",
       "question_id": "q8",
       "type": "grammar_function",
-      "prompt": "ما وظيفة «إذا» في طريقة سامر لاختبار مثال جديد؟",
-      "answer": "تقدم حالة اختبار محتملة وتربطها بالخطوة التالية التي يستخدمها للتحقق من الفهم.",
+      "prompt": "ما وظيفة «إذا» في «وإذا نجح في المثال وحده، يبحث عن حالة مختلفة»؟",
+      "answer": "تجعل نجاح سامر في مثال واحد شرطًا للبحث عن حالة مختلفة حتى يختبر هل فهم القاعدة أم حفظ الخطوات فقط.",
       "grounding": {
         "quoted": [
-          "إذا"
+          "إذا",
+          "وإذا نجح في المثال وحده، يبحث عن حالة مختلفة"
         ],
         "matched_quotes": [
-          "إذا"
+          "إذا",
+          "وإذا نجح في المثال وحده، يبحث عن حالة مختلفة"
         ],
         "grounded": true,
         "basis": "at_least_one_exact_quote_in_passage"
@@ -581,14 +583,16 @@
       "passage_id": "ar-b1-u03-p05",
       "question_id": "q6",
       "type": "grammar_function",
-      "prompt": "ما وظيفة «عندما» في وصف ما تفعله مريم حين يقدم النظام تصحيحًا يغيّر المعنى؟",
+      "prompt": "ما وظيفة «عندما» في «عندما قدمت تصحيحًا يغيّر المعنى، لم تكتف برفضه»؟",
       "answer": "تربط ظهور نوع محدد من الاقتراحات بخطوة فحص وتحليل تقوم بها مريم.",
       "grounding": {
         "quoted": [
-          "عندما"
+          "عندما",
+          "عندما قدمت تصحيحًا يغيّر المعنى، لم تكتف برفضه"
         ],
         "matched_quotes": [
-          "عندما"
+          "عندما",
+          "عندما قدمت تصحيحًا يغيّر المعنى، لم تكتف برفضه"
         ],
         "grounded": true,
         "basis": "at_least_one_exact_quote_in_passage"
