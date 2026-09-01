@@ -2,11 +2,11 @@
 """Align finalized pronunciation sidecar display text to canonical v1.0 safely.
 
 Pronunciation candidates intentionally normalize Unicode whitespace for phonemizer
-stability.  Canonical French learner text can retain typographic narrow no-break
-spaces before punctuation.  After the fail-closed pronunciation finalizer has
-validated all 6,000 adjudications, this gate verifies normalized semantic identity
-and restores the *exact canonical v1.0 display fields* without changing IPA,
-learner hints, or audit status.
+stability. Canonical learner text can retain typographic display differences. After
+the fail-closed pronunciation finalizer validates all 6,000 adjudications, this gate
+first reports every normalized semantic drift across all datasets, then (only when
+that preflight is clean) restores exact canonical v1.0 display fields without
+changing IPA, learner hints, or audit status.
 """
 from __future__ import annotations
 
@@ -55,21 +55,63 @@ def exact_ranks(data: list[dict], label: str) -> None:
         fail(f"{label}: expected exactly ranks 1..1000")
 
 
-def align(lang: str, kind: str) -> dict:
+def paths_for(lang: str, kind: str) -> tuple[Path, Path, str, str, list[str]]:
     if kind == "vocab":
-        canonical_path = V1 / lang / f"{lang}_vocabulary_1000.csv"
-        final_path = FINAL / f"{lang}_vocab_pronunciation.csv"
-        extra_final = "pos"
-        extra_canon = "part_of_speech"
-        fields = ["rank", "target", "english", "pos", "ipa", "learner_hint", "audit_status"]
-    else:
-        canonical_path = V1 / lang / f"{lang}_sentence_bank_1000.csv"
-        final_path = FINAL / f"{lang}_sentences_pronunciation.csv"
-        extra_final = extra_canon = "level"
-        fields = ["rank", "target", "english", "level", "ipa", "learner_hint", "audit_status"]
+        return (
+            V1 / lang / f"{lang}_vocabulary_1000.csv",
+            FINAL / f"{lang}_vocab_pronunciation.csv",
+            "pos",
+            "part_of_speech",
+            ["rank", "target", "english", "pos", "ipa", "learner_hint", "audit_status"],
+        )
+    return (
+        V1 / lang / f"{lang}_sentence_bank_1000.csv",
+        FINAL / f"{lang}_sentences_pronunciation.csv",
+        "level",
+        "level",
+        ["rank", "target", "english", "level", "ipa", "learner_hint", "audit_status"],
+    )
 
-    if not canonical_path.exists() or not final_path.exists():
-        fail(f"missing canonical/final file for {lang}/{kind}")
+
+def collect_normalized_drifts() -> list[dict]:
+    drifts: list[dict] = []
+    for lang in LANGS:
+        for kind in ("vocab", "sentences"):
+            canonical_path, final_path, extra_final, extra_canon, _ = paths_for(lang, kind)
+            if not canonical_path.exists() or not final_path.exists():
+                fail(f"missing canonical/final file for {lang}/{kind}")
+            canonical = rows(canonical_path)
+            final = rows(final_path)
+            exact_ranks(canonical, f"canonical {lang}/{kind}")
+            exact_ranks(final, f"final {lang}/{kind}")
+            for c, f in zip(canonical, final):
+                rank = int(c["rank"])
+                if int(f["rank"]) != rank:
+                    drifts.append({"dataset": f"{lang}/{kind}", "rank": rank, "field": "rank", "canonical": c["rank"], "final": f["rank"]})
+                    continue
+                comparisons = (
+                    ("target", c.get("target", ""), f.get("target", "")),
+                    ("english", c.get("english", ""), f.get("english", "")),
+                    (extra_final, c.get(extra_canon, ""), f.get(extra_final, "")),
+                )
+                for field, cv, fv in comparisons:
+                    if normalized(cv) != normalized(fv):
+                        drifts.append({
+                            "dataset": f"{lang}/{kind}",
+                            "rank": rank,
+                            "field": field,
+                            "canonical": cv,
+                            "final": fv,
+                        })
+                if not f.get("ipa", "").strip() or not f.get("learner_hint", "").strip():
+                    drifts.append({"dataset": f"{lang}/{kind}", "rank": rank, "field": "pronunciation_blank", "canonical": "nonblank", "final": "blank"})
+                if f.get("audit_status", "") not in {"PASS", "REPAIR"}:
+                    drifts.append({"dataset": f"{lang}/{kind}", "rank": rank, "field": "audit_status", "canonical": "PASS|REPAIR", "final": f.get("audit_status", "")})
+    return drifts
+
+
+def align(lang: str, kind: str) -> dict:
+    canonical_path, final_path, extra_final, extra_canon, fields = paths_for(lang, kind)
     canonical = rows(canonical_path)
     final = rows(final_path)
     exact_ranks(canonical, f"canonical {lang}/{kind}")
@@ -77,20 +119,6 @@ def align(lang: str, kind: str) -> dict:
 
     display_changes = 0
     for c, f in zip(canonical, final):
-        rank = int(c["rank"])
-        if int(f["rank"]) != rank:
-            fail(f"rank drift {lang}/{kind} {rank}")
-        if normalized(c["target"]) != normalized(f["target"]):
-            fail(f"target drift {lang}/{kind} rank {rank}: {c['target']!r} vs {f['target']!r}")
-        if normalized(c["english"]) != normalized(f["english"]):
-            fail(f"English drift {lang}/{kind} rank {rank}")
-        if normalized(c.get(extra_canon, "")) != normalized(f.get(extra_final, "")):
-            fail(f"metadata drift {lang}/{kind} rank {rank}: {extra_final}")
-        if not f.get("ipa", "").strip() or not f.get("learner_hint", "").strip():
-            fail(f"blank pronunciation {lang}/{kind} rank {rank}")
-        if f.get("audit_status", "") not in {"PASS", "REPAIR"}:
-            fail(f"unresolved audit status {lang}/{kind} rank {rank}")
-
         canonical_extra = c.get(extra_canon, "")
         if f["target"] != c["target"] or f["english"] != c["english"] or f.get(extra_final, "") != canonical_extra:
             display_changes += 1
@@ -124,6 +152,16 @@ def main() -> None:
     expected = {f"{lang}_{kind}" for lang in LANGS for kind in ("vocab", "sentences")}
     if set(datasets) != expected:
         fail("final manifest does not contain exactly six pronunciation datasets")
+
+    drifts = collect_normalized_drifts()
+    if drifts:
+        print(json.dumps({
+            "gate": "FAIL",
+            "rows_scanned": 6000,
+            "normalized_drift_count": len(drifts),
+            "normalized_drifts": drifts,
+        }, ensure_ascii=False, indent=2))
+        fail(f"canonical v1 normalized display drifts: {len(drifts)}")
 
     results = {}
     for lang in LANGS:
