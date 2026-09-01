@@ -1,0 +1,19 @@
+name: Top-1000 workbook equivalence
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/compare_top1000_to_workbook_vocab.py
+      - .github/workflows/top1000-workbook-equivalence.yml
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compare exact learner-facing target and meaning
+        run: python scripts/compare_top1000_to_workbook_vocab.py
