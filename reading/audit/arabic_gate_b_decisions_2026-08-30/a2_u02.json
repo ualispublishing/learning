@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A2",
+  "unit": 2,
+  "date": "2026-09-01",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/a2/passages.jsonl",
+  "canonical_sha256": "8b94006be7ae80e8904d13de7ddc32929fdc4be838ef6b54a02276cba198bf34",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 12,
+  "decisions": [
+    {
+      "passage_id": "ar-a2-u02-p01",
+      "learner_facing_sha256": "f0ddd08048992da6aa1cae9d38fb7fbc757e9890ec0ea0574318e95f1fa25ab5",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u02-p01-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the unnatural statement الدعوة سهلة with a clear statement about accepting an invitation."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u02-p02",
+      "learner_facing_sha256": "8efd49493d72329080fa5cec08c82e8da17f19830932d6de9bf08959b55f2411",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u02-p02-gB-01",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Replace ورقة كتب عليها with the correctly formed passive description ورقة مكتوبًا عليها."
+        },
+        {
+          "finding_id": "ar-a2-u02-p02-gB-02",
+          "field": "answer q8",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the abstract دليلًا مستقلًا explanation with a direct statement that another source confirmed the time."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u02-p03",
+      "learner_facing_sha256": "376948ee333a7d7854ad501f0b37c91edd8762c21836504c43f86be70278c278",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u02-p03-gB-01",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Repair لا أريد أن أصلك متأخرة to the idiomatic motion construction لا أريد أن أصل إليك متأخرة."
+        },
+        {
+          "finding_id": "ar-a2-u02-p03-gB-02",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Explain اتصلت بسلمى directly as calling her rather than the formal تواصلت معها هاتفيًا."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u02-p04",
+      "learner_facing_sha256": "48a890d56c9a0e928b1757d0ba2bcc833f8ba95f065bb04be09dd853902431b3",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u02-p04-gB-01",
+          "field": "text",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Do not equate the current plan itself with الحديقة; state that the plan had been to go to the park."
+        },
+        {
+          "finding_id": "ar-a2-u02-p04-gB-02",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the redundant بديل مختلف definition of اختيار آخر with direct choice wording."
+        },
+        {
+          "finding_id": "ar-a2-u02-p04-gB-03",
+          "field": "answer q4",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the formal الموجودة والمعتمدة في الوقت الراهن definition with a direct explanation of the plan being followed now."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u02-p05",
+      "learner_facing_sha256": "5bda48414cb4b98289aa21bb1e687b37545a5dd3193910807d7bb6e9f111e232",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u02-p05-gB-01",
+          "field": "text",
+          "dimension": "reference_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The days themselves do not need changing; identify the appointments/times that the students need to adjust."
+        },
+        {
+          "finding_id": "ar-a2-u02-p05-gB-02",
+          "field": "answer q4",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Remove the contradictory بلا خطة phrase from the definition of organizing time."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u02-p06",
+      "learner_facing_sha256": "6c6358339134caa48f7f5b56c4375e5dbc1b3e90ba49b7bc2961e0771dfb16dc",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u02-p06-gB-01",
+          "field": "question q3",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Repair the ungrammatical إذا لن تصل construction and anchor the question clearly to Noor."
+        },
+        {
+          "finding_id": "ar-a2-u02-p06-gB-02",
+          "field": "question q8",
+          "dimension": "assessment_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The word البديل is not in the final sentence; point to the actual phrase in which it appears."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+}
