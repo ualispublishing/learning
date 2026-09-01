@@ -26,7 +26,7 @@ async function run(){
   assert(d.querySelector('script[src="keyboard-shortcuts.js?v=4"]'),'keyboard shortcut cache version v4');
   assert(d.querySelector('.shortcut-help')?.textContent.includes('Reveal / hide'),'keyboard help describes reveal toggle');
   assert(d.querySelector('.shortcut-help')?.textContent.includes('Cards hidden'),'keyboard help describes hidden-card arrows');
-  assert(d.querySelector('footer span:last-child')?.textContent.includes('v1.27'),'footer shows current production release');
+  assert(d.querySelector('footer span:last-child')?.textContent.includes('v1.28'),'footer shows current production release');
   assert(!d.querySelector('#startupIssue'),'no startup issue');
   assert(d.querySelector('#continueBtn')?.textContent.includes('diagnostic'),'first-run diagnostic CTA');
   assert(d.querySelector('link[data-workflow-clarity]'),'workflow clarity loaded');

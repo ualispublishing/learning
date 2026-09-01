@@ -35,7 +35,7 @@ setText('#progress .page-title p','See weak areas and what to study next.');
 setText('#sources .page-title h1','Sources');
 setText('#sources .page-title p','Scope and reference material.');
 
-const footerVersion=document.querySelector('footer span:last-child');if(footerVersion)footerVersion.textContent='v1.27 · local progress';
+const footerVersion=document.querySelector('footer span:last-child');if(footerVersion)footerVersion.textContent='v1.28 · local progress';
 
 // Accessibility metadata only. Keyboard behavior lives exclusively in keyboard-shortcuts.js.
 function decorateShortcuts(){
