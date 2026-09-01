@@ -1,0 +1,78 @@
+name: Build Language Workbooks V1
+
+on:
+  push:
+    branches: [workbooks-v1-production]
+    paths:
+      - 'in-progress/workbooks/**'
+      - 'arabic_top1000.csv'
+      - 'arabic_top3000.csv'
+      - 'urdu_top1000.csv'
+      - 'urdu_top3000.csv'
+      - 'french_top1000.csv'
+      - 'french_top3000.csv'
+      - '.github/workflows/workbooks-v1-build.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'in-progress/workbooks/**'
+      - 'arabic_top1000.csv'
+      - 'arabic_top3000.csv'
+      - 'urdu_top1000.csv'
+      - 'urdu_top3000.csv'
+      - 'french_top1000.csv'
+      - 'french_top3000.csv'
+      - '.github/workflows/workbooks-v1-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install system PDF and script fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils fonts-dejavu-core fonts-noto-core fonts-noto-extra
+          fc-cache -f
+      - name: Install Python dependencies
+        run: python -m pip install --upgrade pypdf weasyprint
+      - name: Build corpus and PDFs
+        run: python in-progress/workbooks/build_workbooks_v2.py
+      - name: Structural PDF QA
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=0
+          while IFS= read -r -d '' f; do
+            pdfinfo "$f" >/dev/null
+            pdffonts "$f" >/dev/null
+            pages=$(pdfinfo "$f" | awk '/^Pages:/ {print $2}')
+            test "$pages" -ge 2
+            count=$((count+1))
+          done < <(find in-progress/workbooks/build-output -name '*.pdf' -print0)
+          test "$count" -eq 24
+          echo "Validated $count PDFs"
+      - name: Render representative pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p in-progress/workbooks/build-output/previews
+          for lang in arabic urdu french; do
+            f="in-progress/workbooks/build-output/$lang/00_${lang}_complete_master.pdf"
+            pages=$(pdfinfo "$f" | awk '/^Pages:/ {print $2}')
+            for p in 1 3 $((pages/2)) "$pages"; do
+              pdftoppm -f "$p" -singlefile -r 110 -png "$f" "in-progress/workbooks/build-output/previews/${lang}_p${p}" >/dev/null 2>&1
+            done
+          done
+      - name: Upload production candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: language-workbooks-v1-production-candidate
+          path: in-progress/workbooks/build-output
+          if-no-files-found: error
+          retention-days: 14
