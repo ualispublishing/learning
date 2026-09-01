@@ -1,0 +1,114 @@
+{
+  "candidate_commit": "aa9b5d465839edb2ce520133a01d78ed40634c96",
+  "expected_full_rows": 6000,
+  "flagged_for_manual_or_llm_review": 2020,
+  "full_corpus_complete": true,
+  "language_summaries": {
+    "arabic": {
+      "candidate_commit": "aa9b5d465839edb2ce520133a01d78ed40634c96",
+      "expected_full_rows": 2000,
+      "flagged_for_manual_or_llm_review": 370,
+      "important_boundary": "This is full-corpus machine verification/triage, not native-speaker certification. Do not auto-edit candidate content solely from a model flag.",
+      "is_full_run": true,
+      "language": "arabic",
+      "models": {
+        "adjudicator": "cross-encoder/nli-MiniLM2-L6-H768",
+        "translator_1": "Helsinki-NLP/opus-mt-ar-en",
+        "translator_2": "facebook/m2m100_418M"
+      },
+      "outputs": {
+        "flags_csv": "arabic_flags.csv",
+        "jsonl": "arabic_free_linguistic_audit.jsonl"
+      },
+      "rows_checked": 2000,
+      "schema": "lang-wb-free-linguistic-audit-v1",
+      "source_sha256": {
+        "completed/languages/workbooks/v1.0/arabic/arabic_sentence_bank_1000.csv": "15170b7d4daa521c81ddc88e31430f35d4bb02b5bb175cd73444649709bf2d76",
+        "completed/languages/workbooks/v1.0/arabic/arabic_vocabulary_1000.csv": "3687acae7a8e7ce4fa28aef18cd094bcfab2cdda60b269500e5d4d5c8f8002a9"
+      },
+      "status_counts": {
+        "CONFIRMED_EQUIVALENT": 1546,
+        "MEANINGFUL_DIFFERENCE_LIKELY": 37,
+        "MINOR_OR_MODEL_VARIANCE": 84,
+        "MODEL_DISAGREEMENT": 242,
+        "NEEDS_ADJUDICATION": 91
+      }
+    },
+    "french": {
+      "candidate_commit": "aa9b5d465839edb2ce520133a01d78ed40634c96",
+      "expected_full_rows": 2000,
+      "flagged_for_manual_or_llm_review": 306,
+      "important_boundary": "This is full-corpus machine verification/triage, not native-speaker certification. Do not auto-edit candidate content solely from a model flag.",
+      "is_full_run": true,
+      "language": "french",
+      "models": {
+        "adjudicator": "cross-encoder/nli-MiniLM2-L6-H768",
+        "translator_1": "Helsinki-NLP/opus-mt-fr-en",
+        "translator_2": "facebook/m2m100_418M"
+      },
+      "outputs": {
+        "flags_csv": "french_flags.csv",
+        "jsonl": "french_free_linguistic_audit.jsonl"
+      },
+      "rows_checked": 2000,
+      "schema": "lang-wb-free-linguistic-audit-v1",
+      "source_sha256": {
+        "completed/languages/workbooks/v1.0/french/french_sentence_bank_1000.csv": "4a733622f2063b1d51930dab1ec79c900a21f8e62a6b60c5ccd883539be80d5e",
+        "completed/languages/workbooks/v1.0/french/french_vocabulary_1000.csv": "8d7e872b78282bf1e2096e2d45d2402639753d03b364c74ef123d2b24c8495fb"
+      },
+      "status_counts": {
+        "CONFIRMED_EQUIVALENT": 1631,
+        "MEANINGFUL_DIFFERENCE_LIKELY": 51,
+        "MINOR_OR_MODEL_VARIANCE": 63,
+        "MODEL_DISAGREEMENT": 146,
+        "NEEDS_ADJUDICATION": 109
+      }
+    },
+    "urdu": {
+      "candidate_commit": "aa9b5d465839edb2ce520133a01d78ed40634c96",
+      "expected_full_rows": 2000,
+      "flagged_for_manual_or_llm_review": 1344,
+      "important_boundary": "This is full-corpus machine verification/triage, not native-speaker certification. Do not auto-edit candidate content solely from a model flag.",
+      "is_full_run": true,
+      "language": "urdu",
+      "models": {
+        "adjudicator": "cross-encoder/nli-MiniLM2-L6-H768",
+        "translator_1": "Helsinki-NLP/opus-mt-ur-en",
+        "translator_2": "facebook/m2m100_418M"
+      },
+      "outputs": {
+        "flags_csv": "urdu_flags.csv",
+        "jsonl": "urdu_free_linguistic_audit.jsonl"
+      },
+      "rows_checked": 2000,
+      "schema": "lang-wb-free-linguistic-audit-v1",
+      "source_sha256": {
+        "completed/languages/workbooks/v1.0/urdu/urdu_sentence_bank_1000.csv": "4d90e427609d6b6a27f43951b745a0b4c993ad95c8f608cdcd76ddc9bce2784f",
+        "completed/languages/workbooks/v1.0/urdu/urdu_vocabulary_1000.csv": "6b1c099821879fb409abdca3f4e27e3c33ed2451c79a9df4d983dadeeba38764"
+      },
+      "status_counts": {
+        "CONFIRMED_EQUIVALENT": 600,
+        "MEANINGFUL_DIFFERENCE_LIKELY": 92,
+        "MINOR_OR_MODEL_VARIANCE": 56,
+        "MODEL_DISAGREEMENT": 1092,
+        "NEEDS_ADJUDICATION": 160
+      }
+    }
+  },
+  "languages_present": [
+    "arabic",
+    "french",
+    "urdu"
+  ],
+  "missing_languages": [],
+  "release_effect": "Evidence only. Does not create or imply human/native-speaker PASS.",
+  "rows_checked": 6000,
+  "schema": "lang-wb-free-linguistic-audit-aggregate-v1",
+  "status_counts": {
+    "CONFIRMED_EQUIVALENT": 3777,
+    "MEANINGFUL_DIFFERENCE_LIKELY": 180,
+    "MINOR_OR_MODEL_VARIANCE": 203,
+    "MODEL_DISAGREEMENT": 1480,
+    "NEEDS_ADJUDICATION": 360
+  }
+}
