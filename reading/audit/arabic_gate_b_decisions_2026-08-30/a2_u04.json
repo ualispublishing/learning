@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A2",
+  "unit": 4,
+  "date": "2026-09-01",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/a2/passages.jsonl",
+  "canonical_sha256": "64230423d9bc466c31f676983386a01c84be00571903352a40ce366adfd347ba",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 17,
+  "decisions": [
+    {
+      "passage_id": "ar-a2-u04-p01",
+      "learner_facing_sha256": "05670a5a41799e767650d5575c4d158f3be5fa307a49f32d8379ad6e484ca804",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u04-p01-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Replace المقارنة ليست بين السعر فقط with a natural statement that comparison should not depend on price alone."
+        },
+        {
+          "finding_id": "ar-a2-u04-p01-gB-02",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define حجم with the direct phrase مقدار كبر الشيء أو صغره."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u04-p02",
+      "learner_facing_sha256": "e6f4989c03c45d31687dca185a84d0917ddf68cf48df1346ae6ba75218ec52be",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u04-p02-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use الصفقة الجيدة rather than the unnatural evaluative phrase الصفقة الحقيقية."
+        },
+        {
+          "finding_id": "ar-a2-u04-p02-gB-02",
+          "field": "answer q4",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the abstract value formulation with a direct A2 explanation of a good deal."
+        },
+        {
+          "finding_id": "ar-a2-u04-p02-gB-03",
+          "field": "answer q7",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define صفقة as a purchase or agreement without implying that the word itself means a good-value purchase."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u04-p03",
+      "learner_facing_sha256": "75687e356faaa798ac04e4f798da31c9bd9fc942470c60521f39220f803c3d99",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u04-p03-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Repair الشيء المفيد لا يستحق الشراء تلقائيًا to the natural ليس كل شيء مفيد construction."
+        },
+        {
+          "finding_id": "ar-a2-u04-p03-gB-02",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Explain يستحق الثمن directly as benefit being appropriate for the amount paid."
+        },
+        {
+          "finding_id": "ar-a2-u04-p03-gB-03",
+          "field": "answer q8",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "State the practical reason for tracking use: to know whether the new exercises are used enough before subscribing."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u04-p04",
+      "learner_facing_sha256": "58d4315213c46e418849e961f8798dfd9d17283eb8e3d223d410829199397c3c",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u04-p04-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace عمل بصورة طبيعية with the idiomatic عمل كما ينبغي for a functioning lamp."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u04-p05",
+      "learner_facing_sha256": "c0b61c7d9be0d3df546f4858124b131bbf0f0c316af116d68c1fb1625adf32a7",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 4,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u04-p05-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Replace توقف الكرسي عن الثبات with the direct لم يعد الكرسي ثابتًا."
+        },
+        {
+          "finding_id": "ar-a2-u04-p05-gB-02",
+          "field": "text",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Specify قطعة غيار when describing a replacement part needed for a repair."
+        },
+        {
+          "finding_id": "ar-a2-u04-p05-gB-03",
+          "field": "text",
+          "dimension": "reference_clarity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Refer to the chair directly rather than the vague الشيء in the repair conclusion."
+        },
+        {
+          "finding_id": "ar-a2-u04-p05-gB-04",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define إصلاح with a direct statement about returning a damaged object to good working condition."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u04-p06",
+      "learner_facing_sha256": "98a4648aaa3a905b0cf83e33abebf4177d134a38082de102e8138da3b8de9b60",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 4,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u04-p06-gB-01",
+          "field": "text",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Usage itself does not deserve a price; state whether Noor will use the app enough for it to be worth the amount."
+        },
+        {
+          "finding_id": "ar-a2-u04-p06-gB-02",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace يجعل النتيجة أسوأ على المدى القريب with a direct comparison of the post-repair result."
+        },
+        {
+          "finding_id": "ar-a2-u04-p06-gB-03",
+          "field": "question q4",
+          "dimension": "assessment_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "A صفقة is not inherently a good purchase; ask why an offer or discount does not always amount to a good deal."
+        },
+        {
+          "finding_id": "ar-a2-u04-p06-gB-04",
+          "field": "answer q6",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define يستحق with direct benefit-versus-price wording."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+}
