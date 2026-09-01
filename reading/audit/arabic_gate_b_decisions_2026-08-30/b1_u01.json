@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B1",
+  "unit": 1,
+  "date": "2026-09-01",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b1/passages.jsonl",
+  "canonical_sha256": "2f9164d367ee263eb94cb803cc80d46a04884a18d522b80a995801901257c455",
+  "records_reviewed": 6,
+  "records_with_findings": 5,
+  "fresh_findings": 6,
+  "decisions": [
+    {
+      "passage_id": "ar-b1-u01-p01",
+      "learner_facing_sha256": "8bfe5e0f581f379b87e4d4365e0943e8f21a39c2043f0a2c05739afb403bc59e",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u01-p01-gB-01",
+          "field": "question/answer q7",
+          "dimension": "assessment_grounding",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The original q7 quoted حتى إن كانت الإجابة لا الآن, a phrase that does not occur in the passage. Rebind the grammar-in-context item to the actual concessive phrase مع ذلك."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u01-p02",
+      "learner_facing_sha256": "03a70c83181a6104046e0931616138cb3e2f5473ace5adf7737a1edfd8d028fa",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u01-p02-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace يأخذوا جزء سامر with the idiomatic task-allocation wording يتولوا جزء سامر من العمل."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u01-p03",
+      "learner_facing_sha256": "82dc234c1db29ee5a9f376167c1c9a8fe6b86457c690f29c6cdaf8217b25a7ec",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u01-p03-gB-01",
+          "field": "question/answer q7",
+          "dimension": "assessment_grounding",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The original q7 quoted a sentence about writing long examples that is absent from the passage. Rebind حتى to the actual sentence about a skill appearing without a formal job."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u01-p04",
+      "learner_facing_sha256": "baa1d917abe4cefb41f3e5a7f8ec7aa8031c7d3a885e437bb059eb33bd4661d3",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b1-u01-p05",
+      "learner_facing_sha256": "3d799aa498b10ef686e294c9101dd98ee5e04b7c65724037da790152720cf508",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u01-p05-gB-01",
+          "field": "answer q5",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use the unambiguous تكاليفه rather than the undiacritized كلفه in the learner-facing definition of خيار."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u01-p06",
+      "learner_facing_sha256": "5831fe026b3071f68db7fd5f4df550650ae340a36ab964ca956115541535fd75",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u01-p06-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Replace the non-idiomatic إذا ظهرت خبرة جديدة with إذا اكتسب الشخص خبرة جديدة."
+        },
+        {
+          "finding_id": "ar-b1-u01-p06-gB-02",
+          "field": "question/answer q5,q9",
+          "dimension": "assessment_alignment",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Align both assessment items and answers with the repaired phrase while preserving the intended vocabulary and conditional-in-context tasks."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer; legitimate B1 grammar-in-context analysis is retained."
+}
