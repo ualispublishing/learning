@@ -1,0 +1,90 @@
+name: LANG-WB free linguistic adjudication
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/adjudicate_lang_wb_free_linguistic_flags.py
+      - .github/workflows/language-workbook-free-linguistic-adjudication.yml
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: lang-wb-free-linguistic-adjudication-v1
+  cancel-in-progress: false
+
+jobs:
+  adjudicate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      SOURCE_RUN_ID: '33527565755'
+      SOURCE_HEAD: '9118793716d1b342fc6569ea5bb823bcda865c96'
+      HF_HOME: ${{ github.workspace }}/.hf-cache-qwen
+      TOKENIZERS_PARALLELISM: 'false'
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Download first-pass language evidence
+        uses: actions/download-artifact@v4
+        with:
+          pattern: lang-wb-free-linguistic-audit-*-${{ env.SOURCE_HEAD }}
+          path: first-pass
+          merge-multiple: true
+          run-id: ${{ env.SOURCE_RUN_ID }}
+          github-token: ${{ github.token }}
+
+      - name: Verify exact first-pass input set
+        run: |
+          test -f first-pass/arabic_flags.csv
+          test -f first-pass/french_flags.csv
+          test -f first-pass/urdu_flags.csv
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          total=0
+          expected={'arabic':37,'french':51,'urdu':92}
+          for lang,n in expected.items():
+              with (Path('first-pass')/f'{lang}_flags.csv').open(encoding='utf-8-sig') as f:
+                  count=sum(1 for r in csv.DictReader(f) if r['machine_status']=='MEANINGFUL_DIFFERENCE_LIKELY')
+              assert count==n,(lang,count,n)
+              total+=count
+          assert total==180,total
+          print('verified strongest flags:', total)
+          PY
+
+      - name: Cache Qwen adjudicator
+        uses: actions/cache@v4
+        with:
+          path: .hf-cache-qwen
+          key: lang-wb-qwen25-15b-v1
+
+      - name: Install CPU inference dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu torch
+          python -m pip install 'transformers<5' safetensors
+
+      - name: Adjudicate strongest first-pass flags
+        run: |
+          python scripts/adjudicate_lang_wb_free_linguistic_flags.py \
+            --first-pass-dir first-pass \
+            --output-dir adjudication-out \
+            --batch-size 6
+
+      - name: Upload adjudication evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lang-wb-free-linguistic-third-adjudication-${{ github.sha }}
+          path: adjudication-out/
+          if-no-files-found: error
+          retention-days: 30
