@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A2",
+  "unit": 6,
+  "date": "2026-09-01",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/a2/passages.jsonl",
+  "canonical_sha256": "82d22c06fea7f021834637387a549b02dd93e3b5102aa9c76e758adc287cee1f",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 14,
+  "decisions": [
+    {
+      "passage_id": "ar-a2-u06-p01",
+      "learner_facing_sha256": "66db0c4fd621d7d77d74f8ae2e3e8b7c9f4174ae7e45d3a94b15f529d2298e5c",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u06-p01-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the awkward movement between screens and the gate with reviewing the screens and then going to the gate."
+        },
+        {
+          "finding_id": "ar-a2-u06-p01-gB-02",
+          "field": "question q9",
+          "dimension": "assessment_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Remove the partial-word airplane cloze and ask for the complete lexical target after the preposition/article frame."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u06-p02",
+      "learner_facing_sha256": "97b735d3c817d27b316ff4cc94d4fa129e41c0c7645d331f33189ae4cee116df",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u06-p02-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace هل سيتغير الوقت أكثر with the direct travel-delay wording هل سيزداد التأخير."
+        },
+        {
+          "finding_id": "ar-a2-u06-p02-gB-02",
+          "field": "answer q1",
+          "dimension": "reference_clarity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Make explicit that the platform changes, rather than leaving عندما يتغير without a clear subject."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u06-p03",
+      "learner_facing_sha256": "0f7a222bf5d5bbdac527ad97d4fc4d9fc9eb7a76106818d848eef7d79c0ee5ad",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u06-p03-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace bureaucratic تم الانتقال with the direct active narrative انتقلت نور."
+        },
+        {
+          "finding_id": "ar-a2-u06-p03-gB-02",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace وقت كل جزء منفصلًا with the idiomatic وقت كل جزء على حدة."
+        },
+        {
+          "finding_id": "ar-a2-u06-p03-gB-03",
+          "field": "answer q3",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The original answer defines وسائل نقل rather than the target نقل; define transport as movement using a vehicle or mode."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u06-p04",
+      "learner_facing_sha256": "ba4bcc253739d7294d2e72ad8ad9acf97378759214a28c40283ebeacd4a9eff7",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u06-p04-gB-01",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define a bus stopping at a stop directly rather than as an abstract cessation of movement."
+        },
+        {
+          "finding_id": "ar-a2-u06-p04-gB-02",
+          "field": "answer q4",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace ملائمة وسهلة لاستخدام نور with direct suitability/access wording."
+        },
+        {
+          "finding_id": "ar-a2-u06-p04-gB-03",
+          "field": "answer q5",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace الطريق الحقيقي with the actual decision being explained: choosing the route."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u06-p05",
+      "learner_facing_sha256": "1c8fff4b092449aa407f350e88161b4efc8bfcae8ed6c1ec32bf7065a27c1f48",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u06-p05-gB-01",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Repair subject-verb agreement: الناس يعرفون بعضهم بعضًا."
+        },
+        {
+          "finding_id": "ar-a2-u06-p05-gB-02",
+          "field": "answer q3",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define قرية with direct A2 wording instead of أقل حجمًا وحركة."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u06-p06",
+      "learner_facing_sha256": "80d1c318085899eb3c37c4fc5bc8e33d282c4454c342d71d1725cb8b9e66036b",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u06-p06-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "A travel plan is planned rather than written; use كما كان مخططًا له."
+        },
+        {
+          "finding_id": "ar-a2-u06-p06-gB-02",
+          "field": "answer q1",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace ambiguous الاتصالات, which suggests communications, with أوقات الانتقال for travel connections/transfers."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+}
