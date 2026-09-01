@@ -1,0 +1,101 @@
+name: Language workbook pronunciation candidates
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/language-workbook-pronunciation-aids-v1
+    paths:
+      - ".github/workflows/language-workbook-pronunciation-candidates.yml"
+      - "scripts/generate_language_workbook_pronunciation_candidates.py"
+      - "scripts/apply_language_workbook_linguistic_repairs.py"
+      - "audit/language-workbooks/v1.0/row_by_row/**"
+      - "audit/language-workbooks/v1.0/row_by_row_vocab/**"
+      - "audit/language-workbooks/v1.0/staging_v3/**"
+      - "arabic_top1000.csv"
+      - "french_top1000.csv"
+      - "urdu_top1000.csv"
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pronunciation branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/language-workbook-pronunciation-aids-v1
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pronunciation engine
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y espeak-ng
+          python -m pip install --upgrade pip
+          python -m pip install phonemizer
+          espeak-ng --version
+          python - <<'PY'
+          from phonemizer.backend import EspeakBackend
+          print("phonemizer/espeak available")
+          for language in ("ar", "fr-fr", "ur"):
+              print(language, EspeakBackend.is_supported_language(language))
+          PY
+
+      - name: Materialize exact repaired corpus
+        run: python scripts/apply_language_workbook_linguistic_repairs.py --write
+
+      - name: Generate pronunciation candidates and pending ledgers
+        run: python scripts/generate_language_workbook_pronunciation_candidates.py
+
+      - name: Restore validated v1.0 source tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          git restore --source=HEAD -- \
+            arabic_top1000.csv \
+            french_top1000.csv \
+            urdu_top1000.csv \
+            audit/language-workbooks/v1.0/staging_v3
+          rm -f audit/language-workbooks/v1.0/ledger_repair_application.json
+
+      - name: Assert generation is isolated to v1.1 audit workspace
+        shell: bash
+        run: |
+          set -euo pipefail
+          unexpected="$(git status --porcelain --untracked-files=all | awk '{print $2}' | grep -v '^audit/language-workbooks/v1.1-pronunciation/' || true)"
+          if [[ -n "$unexpected" ]]; then
+            echo "::error::Unexpected repository changes remain after pronunciation generation:"
+            printf '%s\n' "$unexpected"
+            git status --short
+            exit 1
+          fi
+
+      - name: Commit isolated pronunciation audit artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add audit/language-workbooks/v1.1-pronunciation
+          if git diff --cached --quiet; then
+            echo "No pronunciation candidate changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Generate pronunciation candidates and pending audit ledgers"
+          git push origin HEAD:feature/language-workbook-pronunciation-aids-v1
+
+      - name: Upload pronunciation audit workspace
+        uses: actions/upload-artifact@v4
+        with:
+          name: language-workbook-pronunciation-candidates
+          path: audit/language-workbooks/v1.1-pronunciation
+          if-no-files-found: error

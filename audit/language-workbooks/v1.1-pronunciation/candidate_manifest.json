@@ -1,0 +1,61 @@
+{
+  "version": "v1.1-pronunciation-candidates",
+  "status": "NOT RELEASED — MACHINE CANDIDATES REQUIRE ROW-BY-ROW AUDIT",
+  "source_requirement": "6,000 repaired rows materialized by apply_language_workbook_linguistic_repairs.py --write",
+  "datasets": {
+    "arabic_vocab": {
+      "rows": 1000,
+      "source_path": "arabic_top1000.csv",
+      "source_sha256": "f097c2c3147298536d609809ead7d7d333892d8c95efbebcc59992cc803b3cce",
+      "candidate_path": "audit/language-workbooks/v1.1-pronunciation/candidates/arabic_vocab.csv",
+      "candidate_sha256": "ce53a6e20dcb09250a4ac34bc11e7826d73f8ed39a924a8068c6ff6c2622083c",
+      "espeak_language": "ar",
+      "new_ledger_files": 20
+    },
+    "arabic_sentences": {
+      "rows": 1000,
+      "source_path": "audit/language-workbooks/v1.0/staging_v3/arabic_sentences.csv",
+      "source_sha256": "8ddcd75ddf20aeebd5062dcd0a3fc3b888a9f6f26f708753015e7f095c88ad72",
+      "candidate_path": "audit/language-workbooks/v1.1-pronunciation/candidates/arabic_sentences.csv",
+      "candidate_sha256": "21c6d9ae3e87a119dd3763dbbd27ffeb9f46e279176ce183d67563c087a9494f",
+      "espeak_language": "ar",
+      "new_ledger_files": 20
+    },
+    "french_vocab": {
+      "rows": 1000,
+      "source_path": "french_top1000.csv",
+      "source_sha256": "1e3ad312933d28cdf2f46353cf47ec42f94fb53c840430dbb0a7056d39ae1385",
+      "candidate_path": "audit/language-workbooks/v1.1-pronunciation/candidates/french_vocab.csv",
+      "candidate_sha256": "551649ea6e467e73d93c3afc6720a5544455f500ba48b3c9c88e222d3789d646",
+      "espeak_language": "fr-fr",
+      "new_ledger_files": 20
+    },
+    "french_sentences": {
+      "rows": 1000,
+      "source_path": "audit/language-workbooks/v1.0/staging_v3/french_sentences.csv",
+      "source_sha256": "6df585d7ee39ae63093632e1a1c986836ddd7cdde6f609781198b7eb3f5e8b9c",
+      "candidate_path": "audit/language-workbooks/v1.1-pronunciation/candidates/french_sentences.csv",
+      "candidate_sha256": "2cf16a788b5802b23854e0619de58b4eac111c64e4d4966adc25e82823a64759",
+      "espeak_language": "fr-fr",
+      "new_ledger_files": 20
+    },
+    "urdu_vocab": {
+      "rows": 1000,
+      "source_path": "urdu_top1000.csv",
+      "source_sha256": "f6adda7e0c251276eb233728e09ebceab37b6db3e3e948bc32c3c353f3312918",
+      "candidate_path": "audit/language-workbooks/v1.1-pronunciation/candidates/urdu_vocab.csv",
+      "candidate_sha256": "7934e78691f7169d767c709ef31eed21100201e676de454aed93067361ff24e8",
+      "espeak_language": "ur",
+      "new_ledger_files": 20
+    },
+    "urdu_sentences": {
+      "rows": 1000,
+      "source_path": "audit/language-workbooks/v1.0/staging_v3/urdu_sentences.csv",
+      "source_sha256": "1a1be318809c84d0a8ed71fcd3fca3644ef71feeb29e9c2bd08eeebfc38a0514",
+      "candidate_path": "audit/language-workbooks/v1.1-pronunciation/candidates/urdu_sentences.csv",
+      "candidate_sha256": "0f289a2fee2c5d5286e6d2c884f9d80ec67bc6894b544fb607af4970975fed70",
+      "espeak_language": "ur",
+      "new_ledger_files": 20
+    }
+  }
+}

@@ -1,0 +1,230 @@
+name: Build language workbooks v1.1 pronunciation
+
+on:
+  push:
+    branches:
+      - feature/language-workbook-pronunciation-aids-v1
+    paths:
+      - 'audit/language-workbooks/v1.1-pronunciation/row_by_row/**'
+      - 'audit/language-workbooks/v1.1-pronunciation/candidates/**'
+      - 'scripts/repair_pronunciation_candidate_provenance.py'
+      - 'scripts/finalize_language_workbook_pronunciation.py'
+      - 'scripts/align_final_pronunciation_sidecars_to_v1.py'
+      - 'scripts/build_language_workbooks_v1_1_pronunciation.py'
+      - '.github/workflows/build-language-workbooks-v1-1-pronunciation.yml'
+  pull_request:
+    branches:
+      - release/language-workbooks-v1-final
+    paths:
+      - 'audit/language-workbooks/v1.1-pronunciation/row_by_row/**'
+      - 'audit/language-workbooks/v1.1-pronunciation/candidates/**'
+      - 'scripts/repair_pronunciation_candidate_provenance.py'
+      - 'scripts/finalize_language_workbook_pronunciation.py'
+      - 'scripts/align_final_pronunciation_sidecars_to_v1.py'
+      - 'scripts/build_language_workbooks_v1_1_pronunciation.py'
+      - '.github/workflows/build-language-workbooks-v1-1-pronunciation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - name: Sync branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          branch="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
+          git fetch origin "$branch"
+          git checkout "$branch"
+          git pull --ff-only origin "$branch"
+
+      - name: Install PDF and font dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qpdf poppler-utils fonts-dejavu-core fonts-noto-core fonts-noto-extra libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf-2.0-0 shared-mime-info
+          python -m pip install --upgrade pip
+          python -m pip install 'weasyprint>=66,<67' 'pypdf>=6,<7'
+
+      - name: Pass 1 — Python syntax preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/repair_pronunciation_candidate_provenance.py
+          python -m py_compile scripts/finalize_language_workbook_pronunciation.py
+          python -m py_compile scripts/align_final_pronunciation_sidecars_to_v1.py
+          python -m py_compile scripts/build_language_workbooks_v1_1_pronunciation.py
+
+      - name: Pass 1.5 — repair known French candidate provenance defect
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/repair_pronunciation_candidate_provenance.py | tee /tmp/pronunciation-provenance-repair.json
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          candidate = Path('audit/language-workbooks/v1.1-pronunciation/candidates/french_sentences.csv')
+          ledger = Path('audit/language-workbooks/v1.1-pronunciation/row_by_row/french_sentences_0251_0300.csv')
+          with candidate.open(encoding='utf-8-sig', newline='') as h:
+              rows = list(csv.DictReader(h))
+          assert len(rows) == 1000
+          assert [int(r['rank']) for r in rows] == list(range(1,1001))
+          assert rows[287]['target'] == "Pouvez-vous signer ici, s'il vous plaît ?"
+          assert rows[287]['english'] == 'Could you sign here, please?'
+          assert rows[287]['level'] == 'B'
+          with ledger.open(encoding='utf-8-sig', newline='') as h:
+              led = list(csv.DictReader(h))
+          assert len(led) == 50
+          r = led[37]
+          assert r['rank'] == '288' and r['status'] == 'REPAIR'
+          assert r['proposed_ipa'] == '/puve vu siɲe isi sil vu plɛ/'
+          assert r['proposed_learner_hint'] == 'poo-vay voo see-nyay ee-see seel voo pleh'
+          print('French rank 288 provenance repair gate: PASS')
+          PY
+
+      - name: Pass 2 — finalize 6,000 audited pronunciation rows fail-closed
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/finalize_language_workbook_pronunciation.py | tee /tmp/pronunciation-finalizer.json
+          test -f audit/language-workbooks/v1.1-pronunciation/final_manifest.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('audit/language-workbooks/v1.1-pronunciation/final_manifest.json')
+          data = json.loads(p.read_text(encoding='utf-8'))
+          ds = data.get('datasets', {})
+          assert len(ds) == 6, ds.keys()
+          assert sum(int(v['rows']) for v in ds.values()) == 6000
+          for name, v in ds.items():
+              assert int(v['rows']) == 1000, (name, v)
+              assert Path(v['output_path']).is_file(), (name, v['output_path'])
+          print('Final pronunciation gate: 6 datasets / 6,000 rows / 0 unresolved.')
+          PY
+
+      - name: Pass 2.5 — align exact v1.0 display text after semantic drift check
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/align_final_pronunciation_sidecars_to_v1.py | tee /tmp/pronunciation-canonical-alignment.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('audit/language-workbooks/v1.1-pronunciation/final_manifest.json')
+          data = json.loads(p.read_text(encoding='utf-8'))
+          gate = data.get('canonical_v1_display_alignment', {})
+          assert gate.get('gate') == 'PASS'
+          assert gate.get('rows') == 6000
+          assert gate.get('normalized_drift') == 0
+          assert len(gate.get('datasets', {})) == 6
+          print('Canonical display alignment: 6,000 rows / zero normalized drift.')
+          PY
+
+      - name: Pass 3 — build pronunciation-aided v1.1 workbook sets
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/build_language_workbooks_v1_1_pronunciation.py | tee /tmp/v1-1-build.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('completed/languages/workbooks/v1.1-pronunciation/RELEASE_MANIFEST.json')
+          data = json.loads(p.read_text(encoding='utf-8'))
+          assert data['pronunciation_rows'] == 6000
+          assert data['unresolved_pronunciation_rows'] == 0
+          assert data['pdf_count'] == 42
+          assert data['source_release_preserved'] is True
+          print('Build cross-gate: 6,000 pronunciation rows / 42 PDFs / v1.0 preserved.')
+          PY
+
+      - name: Pass 4 — structural and render preflight for all 42 v1.1 PDFs
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=0
+          while IFS= read -r -d '' pdf; do
+            qpdf --check "$pdf"
+            pdfinfo "$pdf" >/dev/null
+            stem=$(basename "$pdf" .pdf)
+            pdftoppm -f 1 -singlefile -png -r 110 "$pdf" "/tmp/${stem}" >/dev/null 2>&1
+            test -s "/tmp/${stem}.png"
+            pdffonts "$pdf" >/tmp/fonts.txt
+            grep -Eq 'Noto|DejaVu' /tmp/fonts.txt
+            count=$((count+1))
+          done < <(find completed/languages/workbooks/v1.1-pronunciation -name '*.pdf' -print0)
+          test "$count" -eq 42
+          echo "Verified $count PDFs with qpdf, pdfinfo, Poppler rendering, and embedded font presence."
+
+      - name: Pass 5 — enriched CSV and cross-version preservation gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          root = Path('completed/languages/workbooks')
+          assert (root / 'v1.0').is_dir(), 'v1.0 missing'
+          assert (root / 'v1.1-pronunciation').is_dir(), 'v1.1 missing'
+          for lang in ('arabic', 'french', 'urdu'):
+              for kind, fn in (
+                  ('vocab', f'{lang}_vocabulary_1000_with_pronunciation.csv'),
+                  ('sentences', f'{lang}_sentence_bank_1000_with_pronunciation.csv'),
+              ):
+                  path = root / 'v1.1-pronunciation' / lang / fn
+                  with path.open(encoding='utf-8-sig', newline='') as h:
+                      rows = list(csv.DictReader(h))
+                  assert len(rows) == 1000, (lang, kind, len(rows))
+                  assert [int(r['rank']) for r in rows] == list(range(1, 1001))
+                  assert all(r['ipa'].strip() and r['learner_hint'].strip() for r in rows)
+                  assert all(r['audit_status'].strip() in {'PASS', 'REPAIR'} for r in rows)
+          print('CSV gate: 6,000/6,000 rows contain final IPA + learner hint.')
+          PY
+
+      - name: Archive original and pronunciation-aided releases
+        uses: actions/upload-artifact@v4
+        with:
+          name: language-workbooks-v1.0-and-v1.1-pronunciation
+          retention-days: 30
+          if-no-files-found: error
+          path: |
+            completed/languages/workbooks/v1.0/
+            completed/languages/workbooks/v1.1-pronunciation/
+            audit/language-workbooks/v1.1-pronunciation/final/
+            audit/language-workbooks/v1.1-pronunciation/final_manifest.json
+            audit/language-workbooks/v1.1-pronunciation/release/
+
+      - name: Commit verified v1.1 outputs to branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          branch="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            audit/language-workbooks/v1.1-pronunciation/candidates/french_sentences.csv \
+            audit/language-workbooks/v1.1-pronunciation/row_by_row/french_sentences_0251_0300.csv \
+            completed/languages/workbooks/v1.1-pronunciation \
+            audit/language-workbooks/v1.1-pronunciation/final \
+            audit/language-workbooks/v1.1-pronunciation/final_manifest.json \
+            audit/language-workbooks/v1.1-pronunciation/release
+          if ! git diff --quiet; then
+            echo 'Unexpected unstaged tracked changes after v1.1 release staging:'
+            git status --short
+            exit 1
+          fi
+          if git diff --cached --quiet; then
+            echo 'No verified v1.1 output changes to commit.'
+            exit 0
+          fi
+          git commit -m 'release: pronunciation-aided language workbooks v1.1'
+          git pull --rebase origin "$branch"
+          git push origin "$branch"
