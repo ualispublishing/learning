@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A2",
+  "unit": 9,
+  "date": "2026-09-01",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/a2/passages.jsonl",
+  "canonical_sha256": "0555dbdd584315d8c442889a9f38c09ad88227b26169561d6371ef0b5d6f94d9",
+  "records_reviewed": 6,
+  "records_with_findings": 5,
+  "fresh_findings": 8,
+  "decisions": [
+    {
+      "passage_id": "ar-a2-u09-p01",
+      "learner_facing_sha256": "37ff23ebacdd4b3c2882710327045fefa8cc5a7b02c7ca31e819d6c330a4e608",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u09-p01-gB-01",
+          "field": "question/answer q8",
+          "dimension": "assessment_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The phrase التي وراءها is not itself a referent; ask directly what the pronoun ها refers to and answer العادة."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u09-p02",
+      "learner_facing_sha256": "47fc502d817836480effe720ac78bb49955f30a7beaf445487848f893dd46a26",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a2-u09-p03",
+      "learner_facing_sha256": "2eae1f541dff70796c7aef6a81edf68740e80651a8a55a38dc4f220e1557a86f",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u09-p03-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace بصورة منفصلة with the more natural على حدة for ordering each drink separately."
+        },
+        {
+          "finding_id": "ar-a2-u09-p03-gB-02",
+          "field": "answer q7",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the awkward ليسوا أمام اختبار للعادات with a direct statement that dinner is not a test of custom knowledge."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u09-p04",
+      "learner_facing_sha256": "a69e6488d8b14ccc7a13fc495b5d177e2cd7308534672a184665edea9e582eb6",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u09-p04-gB-01",
+          "field": "text",
+          "dimension": "reference_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The singular هذه العادة follows plural طقوسًا متكررة; retain the plural reference as هذه الطقوس."
+        },
+        {
+          "finding_id": "ar-a2-u09-p04-gB-02",
+          "field": "question/answer q7",
+          "dimension": "assessment_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Align the reference-resolution item with the repaired plural phrase and remove the erroneous الطقس answer wording."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u09-p05",
+      "learner_facing_sha256": "41e7cc291eb5af9abc30c2f6f0050de7fab0a25d5719fff11074d130835480d8",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u09-p05-gB-01",
+          "field": "answer q7",
+          "dimension": "grammar_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Remove the redundant مجموعة الناس والأسر and use a direct plural definition of community."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u09-p06",
+      "learner_facing_sha256": "766ab5de9d0504e48e79aee7723d295e14c8abd65045d48396ca0e8f35c172b5",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u09-p06-gB-01",
+          "field": "question q2",
+          "dimension": "assessment_clarity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Name Noor explicitly so the subject of تعلمت is not implicit in an isolated assessment item."
+        },
+        {
+          "finding_id": "ar-a2-u09-p06-gB-02",
+          "field": "answer q7",
+          "dimension": "grammar_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Repair the compressed coordination تشابه الهدف واختلف الشكل والتنظيم into a complete contrast sentence."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+}
