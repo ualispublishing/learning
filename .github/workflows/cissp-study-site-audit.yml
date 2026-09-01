@@ -24,7 +24,8 @@ jobs:
           set -euo pipefail
           python scripts/promote_cissp_v128.py
           rm scripts/promote_cissp_v128.py
-          git show origin/main:.github/workflows/cissp-study-site-audit.yml > .github/workflows/cissp-study-site-audit.yml
+          git fetch origin main --depth=1
+          git show FETCH_HEAD:.github/workflows/cissp-study-site-audit.yml > .github/workflows/cissp-study-site-audit.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
