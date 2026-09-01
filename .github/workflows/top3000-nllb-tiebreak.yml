@@ -1,0 +1,54 @@
+name: Top-3000 NLLB tiebreak
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/audit_top3000_nllb_tiebreak.py
+      - .github/workflows/top3000-nllb-tiebreak.yml
+
+permissions:
+  contents: read
+
+jobs:
+  nllb:
+    name: nllb-${{ matrix.language }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [arabic, french, urdu]
+    env:
+      HF_HOME: ${{ github.workspace }}/.hf-cache
+      TOKENIZERS_PARALLELISM: "false"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/cache@v4
+        with:
+          path: .hf-cache
+          key: top3000-nllb-${{ runner.os }}-v1
+      - name: Install CPU inference dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu torch
+          python -m pip install 'transformers<5' sentencepiece safetensors
+      - name: Run independent NLLB tiebreak
+        run: |
+          python scripts/audit_top3000_nllb_tiebreak.py \
+            --language "${{ matrix.language }}" \
+            --batch-size 20 \
+            --output-dir "audit-out/${{ matrix.language }}"
+      - name: Upload NLLB evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: top3000-nllb-${{ matrix.language }}-${{ github.sha }}
+          path: audit-out/${{ matrix.language }}/
+          if-no-files-found: error
+          retention-days: 30
