@@ -1,0 +1,124 @@
+name: Top-3000 strict multi-model audit
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Optional first N continuation rows per language; 0 = full 2,000"
+        required: false
+        default: "0"
+  push:
+    paths:
+      - scripts/audit_top3000_strict_multimodel.py
+      - .github/workflows/top3000-strict-multimodel-audit.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: top3000-strict-multimodel-audit-v1
+  cancel-in-progress: false
+
+jobs:
+  audit-language:
+    name: audit-${{ matrix.language }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [arabic, french, urdu]
+    env:
+      HF_HOME: ${{ github.workspace }}/.hf-cache
+      TOKENIZERS_PARALLELISM: "false"
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache Hugging Face models
+        uses: actions/cache@v4
+        with:
+          path: .hf-cache
+          key: top3000-strict-hf-${{ runner.os }}-${{ matrix.language }}-v1
+
+      - name: Install CPU inference dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu torch
+          python -m pip install 'transformers<5' sentencepiece sacremoses safetensors
+
+      - name: Verify exact legacy continuation input exists
+        run: |
+          test -f "${{ matrix.language }}_top3000.csv"
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          lang = "${{ matrix.language }}"
+          p = Path(f"{lang}_top3000.csv")
+          with p.open(encoding="utf-8-sig", newline="") as f:
+              rows = list(csv.DictReader(f))
+          assert len(rows) == 2000, (lang, len(rows))
+          print(lang, "rows", len(rows))
+          PY
+
+      - name: Run strict independent translation and semantic audit
+        env:
+          AUDIT_LIMIT: ${{ github.event.inputs.limit || '0' }}
+        run: |
+          python scripts/audit_top3000_strict_multimodel.py \
+            --language "${{ matrix.language }}" \
+            --batch-size 24 \
+            --limit "$AUDIT_LIMIT" \
+            --output-dir "audit-out/${{ matrix.language }}"
+
+      - name: Upload language evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: top3000-strict-${{ matrix.language }}-${{ github.sha }}
+          path: audit-out/${{ matrix.language }}/
+          if-no-files-found: error
+          retention-days: 30
+
+  aggregate:
+    name: aggregate-audit
+    needs: audit-language
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Download language evidence
+        uses: actions/download-artifact@v4
+        with:
+          pattern: top3000-strict-*-${{ github.sha }}
+          path: combined
+          merge-multiple: true
+
+      - name: Aggregate
+        run: |
+          python scripts/audit_top3000_strict_multimodel.py \
+            --aggregate-dir combined \
+            --aggregate-output combined/top3000-strict-multimodel-aggregate.json
+
+      - name: Upload aggregate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: top3000-strict-aggregate-${{ github.sha }}
+          path: combined/
+          if-no-files-found: error
+          retention-days: 30
