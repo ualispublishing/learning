@@ -54,6 +54,9 @@ OBJECTIVE_STATEMENTS = {
     "4.3": "Given a scenario, apply threat-hunting and threat intelligence concepts.",
     "4.4": "Given a scenario, analyze data and artifacts in support of incident response activities.",
 }
+ACRONYM_OBJECTIVE_STATEMENT = (
+    "Acronym knowledge supporting the CAS-005 objective set; CompTIA's public objectives include a complete acronym list candidates should recognize."
+)
 
 
 def clean_html(value: str) -> str:
@@ -99,10 +102,17 @@ if len(blueprint_entries) != 618:
     raise SystemExit(f"Expected 618 audited blueprint entries, got {len(blueprint_entries)}")
 if any(len(card.get("pages", [])) != 8 for card in cards):
     raise SystemExit("Every exported card must have exactly eight study layers")
-if set(OBJECTIVE_STATEMENTS) != {card["objective"] for card in cards}:
-    missing = set(OBJECTIVE_STATEMENTS) - {card["objective"] for card in cards}
-    extra = {card["objective"] for card in cards} - set(OBJECTIVE_STATEMENTS)
-    raise SystemExit(f"Objective coverage mismatch missing={sorted(missing)} extra={sorted(extra)}")
+
+observed_objectives = {card["objective"] for card in cards}
+missing_objectives = set(OBJECTIVE_STATEMENTS) - observed_objectives
+unexpected_objectives = observed_objectives - set(OBJECTIVE_STATEMENTS) - {"Acronyms"}
+if missing_objectives or unexpected_objectives:
+    raise SystemExit(
+        f"Objective coverage mismatch missing={sorted(missing_objectives)} extra={sorted(unexpected_objectives)}"
+    )
+acronym_cards = sum(1 for card in cards if card["objective"] == "Acronyms")
+if acronym_cards != 191:
+    raise SystemExit(f"Expected 191 audited acronym cards, got {acronym_cards}")
 
 card_ids = {card["id"] for card in cards}
 missing_bp_cards = [e for e in blueprint_entries if e["card_id"] not in card_ids]
@@ -191,6 +201,8 @@ with CSV_PATH.open("w", encoding="utf-8-sig", newline="") as fh:
             coverage_type = "direct-published-blueprint-map"
         elif inherited_bp:
             coverage_type = "concept-inherited-published-blueprint-map"
+        elif card["objective"] == "Acronyms":
+            coverage_type = "official-acronym-support"
         else:
             coverage_type = "supporting-knowledge"
 
@@ -220,6 +232,11 @@ with CSV_PATH.open("w", encoding="utf-8-sig", newline="") as fh:
         full_back = "\n\n".join(
             f"{card['pages'][i]['title']}\n{pages[i]}" for i in range(8)
         )
+        objective_statement = (
+            ACRONYM_OBJECTIVE_STATEMENT
+            if card["objective"] == "Acronyms"
+            else OBJECTIVE_STATEMENTS[card["objective"]]
+        )
         writer.writerow(
             {
                 "Front": card["front"],
@@ -230,9 +247,9 @@ with CSV_PATH.open("w", encoding="utf-8-sig", newline="") as fh:
                 "Exam_Version": EXAM_VERSION,
                 "Audit_Date": AUDIT_DATE,
                 "Domain": card["domain"],
-                "Domain_Weight_Percent": DOMAIN_WEIGHTS[card["domain"]],
+                "Domain_Weight_Percent": DOMAIN_WEIGHTS.get(card["domain"], ""),
                 "Objective": card["objective"],
-                "Objective_Statement": OBJECTIVE_STATEMENTS[card["objective"]],
+                "Objective_Statement": objective_statement,
                 "Subdomain": card.get("subdomain", ""),
                 "Topic": card.get("topic", ""),
                 "Card_Type": card.get("card_type", ""),
@@ -284,6 +301,8 @@ for card in cards:
         if direct_bp
         else "concept-inherited-published-blueprint-map"
         if inherited_bp
+        else "official-acronym-support"
+        if card["objective"] == "Acronyms"
         else "supporting-knowledge"
     ] += 1
 
@@ -293,7 +312,8 @@ summary = {
     "audit_date": AUDIT_DATE,
     "cards_exported": len(cards),
     "eight_layers_per_card": all(len(c.get("pages", [])) == 8 for c in cards),
-    "objective_sections": len(objective_counts),
+    "numbered_objective_sections": len([o for o in objective_counts if o != "Acronyms"]),
+    "acronym_cards": acronym_cards,
     "published_blueprint_topics": len(blueprint_entries),
     "published_blueprint_topics_with_existing_card": len(blueprint_entries) - len(missing_bp_cards),
     "duplicate_fronts": len(fronts) - len(set(fronts)),
@@ -311,6 +331,9 @@ summary = {
 }
 SUMMARY_PATH.write_text(json.dumps(summary, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
-print(f"PASS cards={len(cards)} objectives={len(objective_counts)} blueprint_topics={len(blueprint_entries)}")
+print(
+    f"PASS cards={len(cards)} numbered_objectives={summary['numbered_objective_sections']} "
+    f"acronym_cards={acronym_cards} blueprint_topics={len(blueprint_entries)}"
+)
 print(f"PASS output={CSV_PATH}")
 print(f"PASS summary={SUMMARY_PATH}")
