@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08111f">
-  <meta name="description" content="Keyboard-first SecurityX CAS-005 knowledge-grid prototype">
+  <meta name="description" content="Keyboard-first SecurityX CAS-005 knowledge-grid alternate study site">
   <title>SecX · Keyboard Knowledge Grid</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -12,10 +12,13 @@
   <main class="shell" id="app" aria-live="polite">
     <header class="topbar">
       <div>
-        <div class="eyebrow">SECURITYX · CAS-005 · KEYBOARD-FIRST PROTOTYPE</div>
+        <div class="eyebrow">SECURITYX · CAS-005 · ALTERNATE KEYBOARD SITE</div>
         <div class="crumbs" id="crumbs">SecX</div>
       </div>
-      <div class="status" id="status">Loading audited deck…</div>
+      <div class="top-status">
+        <div class="status" id="status">Loading audited deck…</div>
+        <div class="micro-status" id="progressSummary">Progress stored locally</div>
+      </div>
     </header>
 
     <section class="workspace">
@@ -34,6 +37,7 @@
       <aside class="detail" id="detail" aria-label="Selected concept details">
         <div class="detail-kicker" id="detailKicker">SELECTED</div>
         <h2 id="detailTitle">SecX</h2>
+        <div class="related-hint" id="relatedHint"></div>
         <div class="chips" id="chips"></div>
         <div class="depth-meter" id="depthMeter"></div>
         <div class="detail-body" id="detailBody"></div>
@@ -44,7 +48,10 @@
       <span><kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd> move</span>
       <span><kbd>Enter</kbd> descend</span>
       <span><kbd>Esc</kbd> back</span>
-      <span><kbd>Space</kbd> deepen</span>
+      <span><kbd>Space</kbd> deeper</span>
+      <span><kbd>Shift</kbd>+<kbd>Space</kbd> shallower</span>
+      <span><kbd>M</kbd> mastery</span>
+      <span><kbd>R</kbd> related</span>
       <span><kbd>Home</kbd> SecX</span>
       <span><kbd>/</kbd> search</span>
     </footer>
@@ -53,7 +60,7 @@
   <dialog id="searchDialog" class="search-dialog">
     <form method="dialog" class="search-shell" id="searchForm">
       <div class="search-head">
-        <input id="searchInput" autocomplete="off" placeholder="Search a concept, objective, acronym, tool…" aria-label="Search SecurityX knowledge">
+        <input id="searchInput" autocomplete="off" placeholder="Search a concept, objective, acronym, source, tag, tool…" aria-label="Search SecurityX knowledge">
         <button value="cancel" class="ghost">Esc</button>
       </div>
       <div class="search-results" id="searchResults"></div>
@@ -61,6 +68,6 @@
     </form>
   </dialog>
 
-  <script src="app.js"></script>
+  <script src="app-v2.js"></script>
 </body>
 </html>
