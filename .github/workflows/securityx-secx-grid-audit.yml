@@ -1,0 +1,52 @@
+name: SecurityX SecX Grid Audit
+
+on:
+  push:
+    branches:
+      - securityx-secx-grid-prototype-20260901
+    paths:
+      - 'subjects/securityx/cas-005/secx-grid-prototype/**'
+      - '.github/workflows/securityx-secx-grid-audit.yml'
+  pull_request:
+    paths:
+      - 'subjects/securityx/cas-005/secx-grid-prototype/**'
+      - '.github/workflows/securityx-secx-grid-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: JavaScript syntax
+        run: node --check subjects/securityx/cas-005/secx-grid-prototype/app-v2.js
+
+      - name: Deterministic hierarchy and content audit
+        run: python subjects/securityx/cas-005/secx-grid-prototype/tools/audit_grid.py
+
+      - name: Install browser runtime
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Browser smoke
+        run: |
+          python -m http.server 8008 --directory subjects/securityx/cas-005 >/tmp/secx-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid || true' EXIT
+          for i in {1..20}; do
+            if curl -fsS http://127.0.0.1:8008/secx-grid-prototype/ >/dev/null; then break; fi
+            sleep 0.5
+          done
+          SECX_URL=http://127.0.0.1:8008/secx-grid-prototype/ node subjects/securityx/cas-005/secx-grid-prototype/tools/browser_smoke.mjs
