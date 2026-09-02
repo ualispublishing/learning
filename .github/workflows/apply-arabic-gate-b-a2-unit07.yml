@@ -10,57 +10,20 @@ permissions:
   contents: write
 
 jobs:
-  b1-unit7-forward:
+  b1-unit7-nfc-reconcile:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Fail closed or reconcile bounded state-manifest bookkeeping
-        shell: bash
-        run: |
-          set +e
-          output="$(python reading/tools/validate_continuation_state.py 2>&1)"; rc=$?
-          set -e
-          printf '%s\n' "$output"
-          if [ "$rc" -ne 0 ]; then
-            python - "$output" <<'PY'
-          import json,sys
-          from pathlib import Path
-          errors=[line[2:] for line in sys.argv[1].splitlines() if line.startswith('- ')]
-          allowed=(
-            'STATE_MANIFEST blob drift: PROJECT_TRACKS.json:',
-            'STATE_MANIFEST byte-size drift: PROJECT_TRACKS.json:',
-            'STATE_MANIFEST blob drift: reading/STATUS.json:',
-            'STATE_MANIFEST byte-size drift: reading/STATUS.json:',
-            'STATE_MANIFEST state_file_bytes mismatch',
-            'STATE_MANIFEST aggregate_sha256 mismatch',
-          )
-          unexpected=[e for e in errors if not any(e.startswith(p) for p in allowed)]
-          if not errors or unexpected:
-              raise SystemExit(f'Unexpected routed-state drift; refusing Gate B B1 Unit 7 write: {unexpected or errors}')
-          has_tracks=any(e.startswith('STATE_MANIFEST blob drift: PROJECT_TRACKS.json:') for e in errors)
-          has_status=any(e.startswith('STATE_MANIFEST blob drift: reading/STATUS.json:') for e in errors)
-          if not (has_tracks or has_status):
-              raise SystemExit(f'No explicitly bounded blob drift present: {errors}')
-          if has_status:
-              s=json.loads(Path('reading/STATUS.json').read_text(encoding='utf-8')); cur=s.get('current',{})
-              if s.get('updated')!='2026-08-31' or cur.get('canonical_passages')!=1080 or cur.get('remaining_generation_passages')!=0 or cur.get('active_language') is not None or cur.get('active_level') is not None or cur.get('active_generation_plan') is not None:
-                  raise SystemExit('STATUS production/date drift is substantive; refusing repair')
-              for lang in ('arabic','french','urdu'):
-                  b=s.get('languages',{}).get(lang,{})
-                  if b.get('generation_state')!='COMPLETE' or b.get('canonical_passages')!=360 or b.get('remaining_generation_passages')!=0:
-                      raise SystemExit(f'STATUS {lang} production state drift is substantive; refusing repair')
-          PY
-            python reading/tools/refresh_state_manifest.py
-            python reading/tools/validate_continuation_state.py
-          fi
+      - name: Validate exact routed state before NFC reconciliation
+        run: python reading/tools/validate_continuation_state.py
 
-      - name: Apply exact-current B1 Unit 7 naturalness repairs
-        run: python reading/tools/apply_arabic_gate_b_b1_unit07.py
+      - name: Reconcile exact B1 Unit 7 NFC regression
+        run: python reading/tools/reconcile_arabic_gate_b_b1_unit07_nfc.py
 
-      - name: Rebuild and bind Arabic evidence
+      - name: Rebuild and rebind Arabic evidence without advancing review counts
         run: |
           python reading/tools/run_post_generation_gate0.py
           python reading/tools/run_arabic_fresh_deterministic_revalidation.py
@@ -74,7 +37,7 @@ jobs:
           python reading/tools/refresh_state_manifest.py
           python reading/tools/validate_continuation_state.py
 
-      - name: Commit bounded B1 Unit 7 repair and evidence
+      - name: Commit bounded Unit 7 NFC reconciliation and rebound evidence
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -87,7 +50,7 @@ jobs:
                   reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json \
                   reading/audit/arabic_gate_b_packets_2026-08-30 \
                   reading/RELEASE_STATUS.json reading/VERIFICATION_TASKS.md reading/STATE_MANIFEST.json
-          git commit -m 'Complete fresh Arabic Gate B B1 Unit 7 review'
+          git commit -m 'Reconcile Arabic Gate B B1 Unit 7 NFC evidence'
 
       - name: Rebase and regenerate evidence on exact push candidate
         run: |
