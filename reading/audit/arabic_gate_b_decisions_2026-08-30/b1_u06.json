@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B1",
+  "unit": 6,
+  "date": "2026-09-02",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b1/passages.jsonl",
+  "canonical_sha256": "adf3749092cb37740d68c766aaafd9714bb95f1e592f61da88d0d35a00a8af4a",
+  "records_reviewed": 6,
+  "records_with_findings": 5,
+  "fresh_findings": 5,
+  "decisions": [
+    {
+      "passage_id": "ar-b1-u06-p01",
+      "learner_facing_sha256": "ac8f4f579f76b38ec60b1a757aea3c0ba878b4d02256a2a0308653b5e4c1091c",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u06-p01-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the awkward لم تستبدل نور منظورًا بمنظور واحد جديد with the idiomatic contrast لم تستبدل نور منظورًا بآخر جديد."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u06-p02",
+      "learner_facing_sha256": "a6fd84eb0c263e0453880243e4fca5d3804343c5f18736e1fbfbb4771e94248a",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u06-p02-gB-01",
+          "field": "question q2",
+          "dimension": "assessment_alignment",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "The prompt asks only what the family offers, while the keyed answer also includes what it asks Samer to do. Expand the prompt so both keyed details are explicitly requested."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u06-p03",
+      "learner_facing_sha256": "a1a53da8c9f7534778b0b8b4f0a59b6cbb27da941d182bbfc395cb84b1c6ddfe",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u06-p03-gB-01",
+          "field": "text",
+          "dimension": "naturalness_comparative",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the malformed comparative بدت شديدة ومباشرة أكثر مما أرادت with the natural MSA بدت أشد لهجة وأكثر مباشرة مما أرادت."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u06-p04",
+      "learner_facing_sha256": "a27acab3c00167e534dbaeb774f76b143c7c907a470bdab2dc51ec2c1784e11d",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u06-p04-gB-01",
+          "field": "text/title/question q9",
+          "dimension": "lexical_naturalness_and_grounding",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Avoid the forced collocation إعلان جوي. Ground جوي naturally in السفر الجوي, retitle the passage as an airport announcement, and align q9 to the exact natural phrase."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u06-p05",
+      "learner_facing_sha256": "307b499394a18e971c02c885c09fdac1c6037096f8915f510d0b2dcd43ff768f",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b1-u06-p06",
+      "learner_facing_sha256": "52cfcb06583a015db3145ae41e8301eea420ef86f470a0686113b75686306dd6",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u06-p06-gB-01",
+          "field": "answer q5",
+          "dimension": "naturalness_grammar",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the unidiomatic سوء الفهم يُصلح أفضل with the standard passive construction يُعالَج سوء الفهم على نحو أفضل."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer; legitimate B1 grammar-in-context analysis is retained."
+}
