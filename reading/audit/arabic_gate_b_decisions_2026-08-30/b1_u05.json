@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B1",
+  "unit": 5,
+  "date": "2026-09-02",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b1/passages.jsonl",
+  "canonical_sha256": "2a073b462828f1085f1f7d6670b5abac1f027698104d2ceb3537a205657b25d0",
+  "records_reviewed": 6,
+  "records_with_findings": 1,
+  "fresh_findings": 2,
+  "decisions": [
+    {
+      "passage_id": "ar-b1-u05-p01",
+      "learner_facing_sha256": "26bd5d63a5e332bfaad0a58638a1b40ff642e2b3a242fbf688de4fa874cd9911",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u05-p01-gB-01",
+          "field": "question q3",
+          "dimension": "reference_and_grammar_alignment",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "The passage explicitly identifies معلمته, but q3 changes the referent to the masculine المعلم. Restore the feminine referent and verb agreement."
+        },
+        {
+          "finding_id": "ar-b1-u05-p01-gB-02",
+          "field": "text/answer q5",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Replace the calqued العوامل التي تتحرك مع التعب / عوامل أخرى تتحرك معه with the natural MSA relation wording العوامل التي ترتبط بالتعب / عوامل أخرى ترتبط به."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u05-p02",
+      "learner_facing_sha256": "69cee041bb52beb4f5ac0e173b596b5a4d08ea51e5bac7be15a43d2c9716e5a4",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b1-u05-p03",
+      "learner_facing_sha256": "3dfac523843eb1ca203b4f0d6436abd26c404e4175b5fa72478972780f7d2e17",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b1-u05-p04",
+      "learner_facing_sha256": "a6c1fb7977014771ccafa9d51c823f05b025b29c41783dbff9e430d1943dabe1",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b1-u05-p05",
+      "learner_facing_sha256": "334ca196806fc6debe7212b06d1b97d5676f00c71ef254ceb3fcfde729fcad1d",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b1-u05-p06",
+      "learner_facing_sha256": "cab2555aca270b7a3595ce498c39f62907a9865f8a1123d22d5bb92a436a758b",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer; legitimate B1 grammar-in-context analysis is retained."
+}
