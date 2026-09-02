@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B1",
+  "unit": 7,
+  "date": "2026-09-02",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b1/passages.jsonl",
+  "canonical_sha256": "69b142618b02e78b355c661b540a03ac47ea8365b80dc1109f53deaa97f888cc",
+  "records_reviewed": 6,
+  "records_with_findings": 4,
+  "fresh_findings": 5,
+  "decisions": [
+    {
+      "passage_id": "ar-b1-u07-p01",
+      "learner_facing_sha256": "ce54e686680cbb12928c87f6688abf2c2b8daba59b60ac1224cb94bd15d0a668",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u07-p01-gB-01",
+          "field": "question q4",
+          "dimension": "grammar_gender_agreement",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "The question refers to the two female participants نور وهدى but uses masculine dual يصلحان; restore feminine dual تصلحان."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u07-p02",
+      "learner_facing_sha256": "de7cfbc753ed97cdcb738100bfb3b5ac452f41218c4c08ad7c0d8cea76aae5ad",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b1-u07-p03",
+      "learner_facing_sha256": "33ba6acd4d9dba1c1fa221efcfa11bbfc87ac723ce9124c90c2b6ae7a6d754a2",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u07-p03-gB-01",
+          "field": "answer q9",
+          "dimension": "definition_grammar_and_naturalness",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Complete the first branch of the definition of تلقى by supplying its object and use the idiomatic وصله شيء in the second branch."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u07-p04",
+      "learner_facing_sha256": "5ed3a097aa300bea392947929b8794f8f2c0e3a52142a8f0b5c96ff2594b0cd7",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u07-p04-gB-01",
+          "field": "text",
+          "dimension": "reference_clarity_and_naturalness",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the ambiguous بأنهم سيحدّثون after the dual-feminine subject with an impersonal passive formulation that preserves the intended plan."
+        },
+        {
+          "finding_id": "ar-b1-u07-p04-gB-02",
+          "field": "text/answer q8",
+          "dimension": "lexical_naturalness",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the calqued أكبر قدر من الوصول / فائدة الوصول phrasing with natural wording around ease of access while preserving the tradeoff with quiet."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u07-p05",
+      "learner_facing_sha256": "de448c64299ea999efad4963b71438bad99ad7be3bfaf6e4090ec99c69d24ff1",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u07-p05-gB-01",
+          "field": "text",
+          "dimension": "naturalness_duration_construction",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the unidiomatic استغرقت الاجتماعات طويلًا with the standard duration construction استغرقت الاجتماعات وقتًا طويلًا."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u07-p06",
+      "learner_facing_sha256": "8cf3697120f13b1d6dc62a1d9706856cf8f3335cf0b6153a3bc253883ecbacbf",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer; legitimate B1 grammar-in-context analysis is retained."
+}
