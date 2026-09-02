@@ -16,6 +16,9 @@ if (await page.locator('.root-grid .tile').count() !== 5) throw new Error('root 
 
 await page.keyboard.press('ArrowUp');
 if (!(await selectedTitle()).includes('Governance')) throw new Error('ArrowUp from SecX must select GRC');
+await page.keyboard.press('ArrowLeft');
+if ((await selectedTitle()).trim() !== 'SecX') throw new Error('perpendicular root arrow must return to SecX instead of doing nothing');
+await page.keyboard.press('ArrowUp');
 await page.keyboard.press('Enter');
 await page.waitForFunction(() => document.querySelector('#levelLabel')?.textContent === 'DOMAIN');
 if (await page.locator('.tile').count() < 5) throw new Error('GRC objective grid not populated');
@@ -47,5 +50,5 @@ await page.waitForFunction(() => document.querySelector('#levelLabel')?.textCont
 if (await page.locator('.tile').count() < 1) throw new Error('related grid empty');
 
 if (consoleErrors.length) throw new Error(`browser console errors: ${consoleErrors.join(' | ')}`);
-console.log('PASS SecX browser smoke: root, arrows, parent restore, depth, search, progress, relationships');
+console.log('PASS SecX browser smoke: root-all-arrows, hierarchy, parent restore, depth, search, progress, relationships');
 await browser.close();
