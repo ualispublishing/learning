@@ -15,22 +15,34 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - name: Probe stable and preview routes
+      - name: Discover current Pages routes
         shell: bash
         run: |
           set -u
-          probe() {
-            local name="$1" url="$2" marker="$3"
-            local body="/tmp/${name}.html"
-            code="$(curl -L -sS --connect-timeout 10 --max-time 30 -o "$body" -w '%{http_code}' "$url" || true)"
-            marker_present=no
-            grep -Fq "$marker" "$body" 2>/dev/null && marker_present=yes
+          base='https://ualispublishing.github.io/learning'
+          paths=(
+            '/'
+            '/securityx/'
+            '/secx/'
+            '/subjects/securityx/'
+            '/subjects/securityx/cas-005/'
+            '/subjects/securityx/cas-005/study-site/'
+            '/subjects/securityx/cas-005/secx-grid-prototype/'
+            '/subjects/cissp/2024-outline/study-site/'
+            '/cissp/'
+            '/cissp-atlas/'
+          )
+          for path in "${paths[@]}"; do
+            body="/tmp/body.html"
+            code="$(curl -L -sS --connect-timeout 10 --max-time 30 -o "$body" -w '%{http_code}' "$base$path" || true)"
             title="$(grep -o '<title>[^<]*</title>' "$body" 2>/dev/null | head -1 || true)"
-            echo "PROBE name=$name status=$code marker_present=$marker_present title=$title url=$url"
-            echo "BODY_${name}_BEGIN"
-            head -c 500 "$body" 2>/dev/null || true
-            echo
-            echo "BODY_${name}_END"
-          }
-          probe stable 'https://ualispublishing.github.io/learning/subjects/securityx/cas-005/study-site/' 'SecurityX CAS-005 Layered Study Site'
-          probe preview 'https://ualispublishing.github.io/learning/subjects/securityx/cas-005/secx-grid-prototype/' 'ALTERNATE KEYBOARD SITE'
+            echo "ROUTE status=$code path=$path title=$title"
+          done
+          curl -L -sS --connect-timeout 10 --max-time 30 "$base/" -o /tmp/root.html || true
+          echo 'ROOT_LINKS_BEGIN'
+          grep -oE 'href="[^"]+"' /tmp/root.html | head -80 || true
+          echo 'ROOT_LINKS_END'
+          curl -L -sS --connect-timeout 10 --max-time 30 "$base/subjects/securityx/cas-005/study-site/" -o /tmp/notfound.html || true
+          echo 'NOTFOUND_ROUTE_HINTS_BEGIN'
+          grep -oE '(href|location\.href|location\.replace|window\.location)[^<;]+' /tmp/notfound.html | head -80 || true
+          echo 'NOTFOUND_ROUTE_HINTS_END'
