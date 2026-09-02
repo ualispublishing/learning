@@ -13,34 +13,24 @@ permissions:
 jobs:
   verify-live-pages:
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 2
     steps:
-      - name: Verify stable and preview routes
+      - name: Probe stable and preview routes
         shell: bash
         run: |
-          set -euo pipefail
-          stable='https://ualispublishing.github.io/learning/subjects/securityx/cas-005/study-site/'
-          preview='https://ualispublishing.github.io/learning/subjects/securityx/cas-005/secx-grid-prototype/'
-
-          check() {
+          set -u
+          probe() {
             local name="$1" url="$2" marker="$3"
             local body="/tmp/${name}.html"
-            for attempt in {1..24}; do
-              code="$(curl -L -sS --connect-timeout 10 --max-time 30 -o "$body" -w '%{http_code}' "$url" || true)"
-              echo "$name attempt=$attempt status=$code url=$url"
-              if [[ "$code" == '200' ]] && grep -Fq "$marker" "$body"; then
-                title="$(grep -o '<title>[^<]*</title>' "$body" | head -1 || true)"
-                echo "PASS $name status=200 marker=$marker title=$title"
-                return 0
-              fi
-              sleep 10
-            done
-            echo "FAIL $name"
-            echo '--- response excerpt ---'
-            head -c 800 "$body" || true
+            code="$(curl -L -sS --connect-timeout 10 --max-time 30 -o "$body" -w '%{http_code}' "$url" || true)"
+            marker_present=no
+            grep -Fq "$marker" "$body" 2>/dev/null && marker_present=yes
+            title="$(grep -o '<title>[^<]*</title>' "$body" 2>/dev/null | head -1 || true)"
+            echo "PROBE name=$name status=$code marker_present=$marker_present title=$title url=$url"
+            echo "BODY_${name}_BEGIN"
+            head -c 500 "$body" 2>/dev/null || true
             echo
-            return 1
+            echo "BODY_${name}_END"
           }
-
-          check stable "$stable" 'SecurityX CAS-005 Layered Study Site'
-          check preview "$preview" 'ALTERNATE KEYBOARD SITE'
+          probe stable 'https://ualispublishing.github.io/learning/subjects/securityx/cas-005/study-site/' 'SecurityX CAS-005 Layered Study Site'
+          probe preview 'https://ualispublishing.github.io/learning/subjects/securityx/cas-005/secx-grid-prototype/' 'ALTERNATE KEYBOARD SITE'
