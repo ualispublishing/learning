@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B1",
+  "unit": 4,
+  "date": "2026-09-02",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b1/passages.jsonl",
+  "canonical_sha256": "518a94b543a47fb4f6c5df5ea4c1186b1407896af931d5110841aea5afc3e7a2",
+  "records_reviewed": 6,
+  "records_with_findings": 3,
+  "fresh_findings": 4,
+  "decisions": [
+    {
+      "passage_id": "ar-b1-u04-p01",
+      "learner_facing_sha256": "e551a8502f68e13850ecfa893341170bcab4e7ca6107d220fe7ed89e5d3c73d6",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u04-p01-gB-01",
+          "field": "text/question q8",
+          "dimension": "naturalness_and_assessment_alignment",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Replace the inverted, unidiomatic phrase بدل تحويل حاجة واحدة إلى الصورة الكاملة with the natural MSA بدل اختزال الصورة الكاملة في حاجة واحدة and align the grammar question to the exact repaired phrase."
+        },
+        {
+          "finding_id": "ar-b1-u04-p01-gB-02",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Clarify قدمت اللجنة موعد التنظيم قليلًا as قدمت اللجنة موعد بدء التنظيم قليلًا so the object of تقديم is explicit and natural."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u04-p02",
+      "learner_facing_sha256": "46dd4a0f9a41f0966fd3037fa8252efc032ce3e29ed4f4a22128dcd0c30fe9c2",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b1-u04-p03",
+      "learner_facing_sha256": "0ac6e6dc183d67876f3d4376329e587f98a70c1d9f5ed6cb8cc2242f88ad9edb",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u04-p03-gB-01",
+          "field": "answer q9",
+          "dimension": "naturalness_grammar",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the incorrect nominal construction بقسم مجموعها على عددها with the standard مصدر construction بقسمة مجموعها على عددها."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u04-p04",
+      "learner_facing_sha256": "eee8cb16d4f12be503dc28562012d3e43b3b6e05343437f497061e26e64e54b6",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b1-u04-p05",
+      "learner_facing_sha256": "77199ae36bf00d9a60ed77d470200c650a6a85c3b36815dadde2675b4a234e46",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u04-p05-gB-01",
+          "field": "text",
+          "dimension": "semantic_precision_and_naturalness",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Replace تغير المقياس الذي نصفها به, which shifts from measurement method to the measuring scale/instrument, with تغيرت طريقة القياس التي نصفها بها to preserve the passage’s intended comparison."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u04-p06",
+      "learner_facing_sha256": "8a6e80418b2b698243bd8f05608c86d7807aa60dfe28af4dacd710a66ce28064",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer; legitimate B1 grammar-in-context analysis is retained."
+}
