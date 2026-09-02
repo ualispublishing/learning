@@ -1,0 +1,50 @@
+name: SecurityX SecX Pages Artifact Validate TEMP
+
+on:
+  push:
+    branches:
+      - securityx-secx-pages-route-validation-20260902
+    paths:
+      - '.github/workflows/securityx-secx-pages-artifact-validate-temp.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Parse deployment workflow and audit SecX source
+        run: |
+          ruby -e "require 'yaml'; YAML.load_file('.github/workflows/cissp-pages.yml'); puts 'PASS cissp-pages YAML parses'"
+          node --check subjects/securityx/cas-005/secx-grid-prototype/app-v2.js
+          python subjects/securityx/cas-005/secx-grid-prototype/tools/audit_grid.py
+      - name: Assemble and execute isolated preview payload
+        run: |
+          set -euo pipefail
+          SITE="$RUNNER_TEMP/site"
+          SECX="$GITHUB_WORKSPACE/subjects/securityx/cas-005/secx-grid-prototype"
+          SECX_DATA="$GITHUB_WORKSPACE/subjects/securityx/cas-005/study-site/data"
+          mkdir -p "$SITE/secx" "$SITE/study-site/data"
+          cp subjects/cissp/2024-outline/study-site/index.html "$SITE/index.html"
+          cp "$SECX/index.html" "$SECX/app-v2.js" "$SECX/root-nav-addon.js" "$SECX/styles.css" "$SITE/secx/"
+          cp "$SECX_DATA/meta.js" "$SECX_DATA/blueprint_index.json" "$SECX_DATA"/cards-*.js "$SITE/study-site/data/"
+          test "$(find "$SITE/study-site/data" -maxdepth 1 -name 'cards-*.js' | wc -l | tr -d ' ')" = '29'
+          python -m http.server 8009 --directory "$SITE" >/tmp/secx-pages-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid || true' EXIT
+          for i in {1..20}; do curl -fsS http://127.0.0.1:8009/secx/ >/dev/null && break; sleep 0.5; done
+          test "$(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8009/)" = '200'
+          test "$(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8009/secx/)" = '200'
+          curl -fsS http://127.0.0.1:8009/secx/ | grep -Fq 'ALTERNATE KEYBOARD SITE'
+          CHROME="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME"
+          "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=15000 --dump-dom http://127.0.0.1:8009/secx/ >/tmp/secx-dom.html 2>/dev/null || true
+          grep -Fq '1,156 audited cards' /tmp/secx-dom.html
+          grep -Fq 'id="grid"' /tmp/secx-dom.html
+          echo 'PASS isolated /secx/ artifact loads audited 1,156-card runtime'
