@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B1",
+  "unit": 8,
+  "date": "2026-09-02",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b1/passages.jsonl",
+  "canonical_sha256": "68c433c4892f1658a3a030a7c537c17be14e4b25a4e9de0d1185abe87388b28e",
+  "records_reviewed": 6,
+  "records_with_findings": 4,
+  "fresh_findings": 4,
+  "decisions": [
+    {
+      "passage_id": "ar-b1-u08-p01",
+      "learner_facing_sha256": "738667c4f74f08b3d04a889e50b6eb7ee58af1a637517859099fa69165dcdc4b",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b1-u08-p02",
+      "learner_facing_sha256": "48660c3485133fdb6836fb7f8545ce4342d3e461d0960bd2487307829d830dde",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u08-p02-gB-01",
+          "field": "question q6",
+          "dimension": "quoted_grammar_grounding",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Restore the omitted preposition على and pronoun منه so the quoted clause exactly matches the grammatical wording in the passage."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u08-p03",
+      "learner_facing_sha256": "3447ba799b0e81410dcc8097c3c0dcf124c73edfca62a27283ba7026a04482a2",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b1-u08-p04",
+      "learner_facing_sha256": "cf727d1873bd1ca7d214d76d12a67620eee5f1b22032b1c6e75c48e3d1f0c683",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u08-p04-gB-01",
+          "field": "answer q7",
+          "dimension": "verb_complement_grammar",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the invalid transitive تحققته construction with the standard تحققت منه complement."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u08-p05",
+      "learner_facing_sha256": "40a90cbc8544150ca6ceeb729ea60e7c44f98f65643889694f0fedb9628c31ad",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u08-p05-gB-01",
+          "field": "text",
+          "dimension": "purpose_clause_subject_alignment",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the dangling feminine-singular purpose clause ولكي تختبر الفرق before the plural subject الطلاب with the neutral purpose phrase ولاختبار الفرق."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u08-p06",
+      "learner_facing_sha256": "956d0cb86e0824657593e8ec3e5cc4ddb8758fee22b9f3d01e74286817a81db7",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u08-p06-gB-01",
+          "field": "question/answer q6",
+          "dimension": "grammar_grounding_and_answer_alignment",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "The question attributes لكن to a sentence that contains no لكن; bind the task to the repeated لم construction actually present and align the answer with the two negated extremes."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer; legitimate B1 grammar-in-context analysis is retained."
+}
