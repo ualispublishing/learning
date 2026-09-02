@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  b1-unit5-forward:
+  b1-unit6-forward:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,7 +39,7 @@ jobs:
           )
           unexpected=[e for e in errors if not any(e.startswith(p) for p in allowed)]
           if not errors or unexpected:
-              raise SystemExit(f'Unexpected routed-state drift; refusing Gate B B1 Unit 5 write: {unexpected or errors}')
+              raise SystemExit(f'Unexpected routed-state drift; refusing Gate B B1 Unit 6 write: {unexpected or errors}')
           has_tracks=any(e.startswith('STATE_MANIFEST blob drift: PROJECT_TRACKS.json:') for e in errors)
           has_status=any(e.startswith('STATE_MANIFEST blob drift: reading/STATUS.json:') for e in errors)
           if not (has_tracks or has_status):
@@ -57,8 +57,8 @@ jobs:
             python reading/tools/validate_continuation_state.py
           fi
 
-      - name: Apply exact-current B1 Unit 5 naturalness repairs
-        run: python reading/tools/apply_arabic_gate_b_b1_unit05.py
+      - name: Apply exact-current B1 Unit 6 naturalness repairs
+        run: python reading/tools/apply_arabic_gate_b_b1_unit06.py
 
       - name: Rebuild and bind Arabic evidence
         run: |
@@ -67,19 +67,19 @@ jobs:
           python reading/tools/audit_arabic_metalinguistic_cefr_candidates.py
           python reading/tools/adjudicate_arabic_b1_c2_metalinguistic_cefr.py
           python reading/tools/build_arabic_gate_b_naturalness_review.py
-          python reading/tools/record_arabic_gate_b_b1_unit05_decisions.py
+          python reading/tools/record_arabic_gate_b_b1_unit06_decisions.py
           python reading/tools/sync_arabic_gate_b_progress.py
           python reading/tools/sync_arabic_release_global_blocker.py
           python reading/tools/sync_verification_tasks_from_release.py
           python reading/tools/refresh_state_manifest.py
           python reading/tools/validate_continuation_state.py
 
-      - name: Commit bounded B1 Unit 5 repair and evidence
+      - name: Commit bounded B1 Unit 6 repair and evidence
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add reading/arabic/b1/passages.jsonl \
-                  reading/audit/arabic_gate_b_decisions_2026-08-30/b1_u05.json \
+                  reading/audit/arabic_gate_b_decisions_2026-08-30/b1_u06.json \
                   reading/audit/post_generation_gate0_2026-08-30.json \
                   reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json \
                   reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json \
@@ -87,7 +87,7 @@ jobs:
                   reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json \
                   reading/audit/arabic_gate_b_packets_2026-08-30 \
                   reading/RELEASE_STATUS.json reading/VERIFICATION_TASKS.md reading/STATE_MANIFEST.json
-          git commit -m 'Complete fresh Arabic Gate B B1 Unit 5 review'
+          git commit -m 'Complete fresh Arabic Gate B B1 Unit 6 review'
 
       - name: Rebase and regenerate evidence on exact push candidate
         run: |
@@ -99,13 +99,13 @@ jobs:
           python reading/tools/audit_arabic_metalinguistic_cefr_candidates.py
           python reading/tools/adjudicate_arabic_b1_c2_metalinguistic_cefr.py
           python reading/tools/build_arabic_gate_b_naturalness_review.py
-          python reading/tools/record_arabic_gate_b_b1_unit05_decisions.py
+          python reading/tools/record_arabic_gate_b_b1_unit06_decisions.py
           python reading/tools/sync_arabic_gate_b_progress.py
           python reading/tools/sync_arabic_release_global_blocker.py
           python reading/tools/sync_verification_tasks_from_release.py
           python reading/tools/refresh_state_manifest.py
           python reading/tools/validate_continuation_state.py
-          git add reading/audit/arabic_gate_b_decisions_2026-08-30/b1_u05.json \
+          git add reading/audit/arabic_gate_b_decisions_2026-08-30/b1_u06.json \
                   reading/audit/post_generation_gate0_2026-08-30.json \
                   reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json \
                   reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json \
