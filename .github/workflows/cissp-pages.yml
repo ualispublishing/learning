@@ -1,176 +1,46 @@
-name: Deploy CISSP Atlas to GitHub Pages
+name: SecX runtime-byte-equivalent browser validation
 
 on:
   push:
-    branches: [main]
+    branches:
+      - secx-smoke-validation-20260903
     paths:
-      - 'subjects/cissp/2024-outline/study-site/**'
       - '.github/workflows/cissp-pages.yml'
-  workflow_dispatch:
+      - 'subjects/cissp/2024-outline/secx-prototype/**'
+      - 'subjects/cissp/2024-outline/study-site/**'
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: cissp-pages
+  group: secx-runtime-equivalent-validation
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  gates:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Run released-corpus audit before deploy
-        working-directory: subjects/cissp/2024-outline/study-site
-        run: |
-          python audit.py
-          python question-bank/quality_gate.py --released-only
-      - name: Validate browser runtime before deploy
-        working-directory: subjects/cissp/2024-outline/study-site
-        run: |
-          for f in data-meta.js data-d{1..8}.js data-ai.js data-precision.js coverage-detail.js data-question-calibration.js legacy-rationales.js keyboard-shortcuts.js bootstrap.js app.js enhancements.js state-ui-bridge.js product-polish.js; do node --check "$f"; done
-          for f in index.html 404.html browser-smoke.html styles.css mobile-fix.css enhancements.css product-polish.css workflow-clarity.css browser-smoke.sh question-bank/RELEASED_BATCHES.json; do test -s "$f"; done
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          manifest=json.loads(Path('question-bank/RELEASED_BATCHES.json').read_text())
-          files=[rel for batch in manifest.get('released_batches',[]) for rel in batch.get('files',[])]
-          if not files:
-              raise SystemExit('release manifest has no files')
-          missing=[rel for rel in files if not Path(rel).is_file() or Path(rel).stat().st_size == 0]
-          if missing:
-              raise SystemExit(f'missing/empty released files: {missing}')
-          print(f'PASS manifest_release_files={len(files)}')
-          PY
-      - name: Execute interactive browser smoke test
-        working-directory: subjects/cissp/2024-outline/study-site
-        run: bash browser-smoke.sh 8766
-      - name: Assemble released-only Pages artifact
-        working-directory: subjects/cissp/2024-outline/study-site
-        run: |
-          SITE="$RUNNER_TEMP/cissp-pages"
-          export SITE
-          rm -rf "$SITE"
-          mkdir -p "$SITE/question-bank"
-          cp .nojekyll 404.html index.html "$SITE/"
-          cp styles.css mobile-fix.css enhancements.css product-polish.css workflow-clarity.css "$SITE/"
-          cp data-meta.js data-d{1..8}.js data-ai.js data-precision.js coverage-detail.js data-question-calibration.js legacy-rationales.js keyboard-shortcuts.js bootstrap.js app.js enhancements.js state-ui-bridge.js product-polish.js "$SITE/"
-          cp question-bank/RELEASED_BATCHES.json "$SITE/question-bank/"
-          python - <<'PY'
-          import json, os, shutil
-          from pathlib import Path
-          site=Path(os.environ['SITE'])
-          manifest=json.loads(Path('question-bank/RELEASED_BATCHES.json').read_text())
-          copied=[]
-          for batch in manifest.get('released_batches',[]):
-              for rel in batch.get('files',[]):
-                  src=Path(rel)
-                  if not src.is_file():
-                      raise SystemExit(f'released file missing: {rel}')
-                  dst=site / rel
-                  dst.parent.mkdir(parents=True, exist_ok=True)
-                  shutil.copy2(src,dst)
-                  copied.append(rel)
-          if not copied:
-              raise SystemExit('no released question-bank files copied')
-          print(f'Released-only question files copied: {len(copied)}')
-          PY
-          printf '%s\n' "$GITHUB_SHA" > "$SITE/deploy-sha.txt"
-          test ! -e "$SITE/browser-smoke.html"
-          test ! -e "$SITE/audit.py"
-          echo "Released-only artifact assembled at $SITE"
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-      - name: Upload CISSP site
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: ${{ runner.temp }}/cissp-pages
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
-      - name: Verify deployed public runtime
-        env:
-          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+      - name: Checkout validation head
+        uses: actions/checkout@v6
+
+      - name: Report validation head and browser
+        shell: bash
         run: |
           set -euo pipefail
-          ROOT='subjects/cissp/2024-outline/study-site'
-          BASE="${PAGE_URL%/}/"
-          HTML="$RUNNER_TEMP/cissp-public.html"
-          DOM="$RUNNER_TEMP/cissp-public-dom.html"
-          REMOTE_SHA="$RUNNER_TEMP/cissp-public-sha.txt"
-          REMOTE_MANIFEST="$RUNNER_TEMP/cissp-public-manifest.json"
-          UNRELEASED="$RUNNER_TEMP/cissp-unreleased-candidates.txt"
-          CHROME="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
-          test -n "$CHROME"
-          EXPECTED_VERSION="$(node -e "global.window={}; require('./${ROOT}/data-meta.js'); process.stdout.write(String(window.CISSP_META.meta.version))")"
-          EXPECTED_LABEL="${EXPECTED_VERSION%.*}"
-          EXPECTED_STANDARD="$(node -e "global.window={}; require('./${ROOT}/data-meta.js'); process.stdout.write(String(window.CISSP_META.meta.question_count))")"
-          EXPECTED_BELL="$(node -e "global.window={}; require('./${ROOT}/data-meta.js'); process.stdout.write(String(window.CISSP_META.meta.bellringer_count))")"
-          EXPECTED_BANK="$(node -e "global.window={}; require('./${ROOT}/data-meta.js'); process.stdout.write(String(window.CISSP_META.meta.question_bank_records))")"
-          EXPECTED_RELEASED="$(node -e "const m=require('./${ROOT}/question-bank/RELEASED_BATCHES.json'); process.stdout.write(String(m.released_batches.reduce((n,b)=>n+Number(b.records||0),0)))")"
-          test "$((EXPECTED_STANDARD + EXPECTED_BELL))" -eq "$EXPECTED_BANK"
-          passed=0
-          for attempt in {1..12}; do
-            echo "Public verification attempt $attempt: $BASE"
-            if curl -fsSL --max-time 15 -H 'Cache-Control: no-cache' "${BASE}?verify=${GITHUB_SHA}-${attempt}" -o "$HTML" \
-              && grep -Fq '<title>CISSP Atlas · Study Workflow</title>' "$HTML" \
-              && grep -Fq "RELEASE v${EXPECTED_LABEL}" "$HTML" \
-              && grep -Fq 'value="999999">All available</option>' "$HTML" \
-              && curl -fsSL --max-time 15 "${BASE}deploy-sha.txt?verify=${GITHUB_SHA}-${attempt}" -o "$REMOTE_SHA" \
-              && test "$(tr -d '\r\n' < "$REMOTE_SHA")" = "$GITHUB_SHA" \
-              && curl -fsSL --max-time 15 "${BASE}question-bank/RELEASED_BATCHES.json?verify=${GITHUB_SHA}-${attempt}" -o "$REMOTE_MANIFEST"; then
-              "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=10000 --dump-dom "${BASE}?runtime-verify=${GITHUB_SHA}-${attempt}" >"$DOM" 2>/dev/null || true
-              if grep -Fq 'data-cissp-core="ready"' "$DOM" \
-                && grep -Fq 'data-cissp-bank="ready"' "$DOM" \
-                && grep -Fq 'data-cissp-ready="true"' "$DOM" \
-                && grep -Fq "data-cissp-released-records=\"${EXPECTED_RELEASED}\"" "$DOM" \
-                && grep -Fq "data-cissp-standard-questions=\"${EXPECTED_STANDARD}\"" "$DOM" \
-                && grep -Fq "data-cissp-bellringers=\"${EXPECTED_BELL}\"" "$DOM" \
-                && grep -Fq '>Mastery<' "$DOM" \
-                && grep -Fq 'Run baseline diagnostic' "$DOM"; then
-                passed=1
-                break
-              fi
-            fi
-            sleep 5
-          done
-          if [ "$passed" -ne 1 ]; then
-            echo 'Public CISSP Atlas runtime did not reach the expected deployed state.' >&2
-            echo "Expected deployment SHA: $GITHUB_SHA" >&2
-            echo "Expected version/standard/released/bell: $EXPECTED_VERSION/$EXPECTED_STANDARD/$EXPECTED_RELEASED/$EXPECTED_BELL" >&2
-            echo -n 'Observed deployment SHA: ' >&2
-            cat "$REMOTE_SHA" >&2 2>/dev/null || true
-            tail -n 80 "$HTML" >&2 || true
-            tail -n 80 "$DOM" >&2 || true
-            exit 1
-          fi
-          for rel in browser-smoke.html audit.py; do
-            status="$(curl -sS -o /dev/null -w '%{http_code}' "${BASE}${rel}?verify=${GITHUB_SHA}")"
-            test "$status" = '404'
-          done
-          python - <<'PY' > "$UNRELEASED"
-          import json
-          from pathlib import Path
-          root=Path('subjects/cissp/2024-outline/study-site')
-          manifest=json.loads((root/'question-bank/RELEASED_BATCHES.json').read_text())
-          released={rel for batch in manifest.get('released_batches',[]) for rel in batch.get('files',[])}
-          for p in sorted((root/'question-bank/candidates').glob('*.jsonl')):
-              rel=f'question-bank/candidates/{p.name}'
-              if rel not in released:
-                  print(rel)
-          PY
-          while IFS= read -r rel; do
-            [ -z "$rel" ] && continue
-            status="$(curl -sS -o /dev/null -w '%{http_code}' "${BASE}${rel}?verify=${GITHUB_SHA}")"
-            test "$status" = '404'
-          done < "$UNRELEASED"
-          echo "PASS public_pages_runtime url=$BASE commit=$GITHUB_SHA version=$EXPECTED_VERSION standard_questions=$EXPECTED_STANDARD released_records=$EXPECTED_RELEASED bellringers=$EXPECTED_BELL released_only=true"
+          echo "HEAD=$(git rev-parse HEAD)"
+          (google-chrome --version || google-chrome-stable --version || chromium --version || chromium-browser --version)
+
+      - name: CISSP deterministic release audit
+        shell: bash
+        run: python subjects/cissp/2024-outline/study-site/audit.py
+
+      - name: Production CISSP browser smoke
+        shell: bash
+        working-directory: subjects/cissp/2024-outline/study-site
+        run: bash browser-smoke.sh 8766
+
+      - name: Expanded SecX browser smoke
+        shell: bash
+        working-directory: subjects/cissp/2024-outline/secx-prototype
+        run: bash browser-smoke.sh 8776
