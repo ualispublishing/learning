@@ -36,14 +36,17 @@ jobs:
         shell: bash
         run: python subjects/cissp/2024-outline/study-site/audit.py
 
-      - name: SecX deterministic graph audit
+      - name: SecX deterministic graph and learner-state audits
         shell: bash
         run: |
-          python -m py_compile subjects/cissp/2024-outline/secx-prototype/audit.py
+          python -m py_compile subjects/cissp/2024-outline/secx-prototype/audit.py subjects/cissp/2024-outline/secx-prototype/due-audit.py
+          node --check subjects/cissp/2024-outline/secx-prototype/learner-registry.js
           node --check subjects/cissp/2024-outline/secx-prototype/next-layer.js
           node --check subjects/cissp/2024-outline/secx-prototype/learner-state.js
+          node --check subjects/cissp/2024-outline/secx-prototype/due-review.js
           bash -n subjects/cissp/2024-outline/secx-prototype/browser-smoke.sh
           python subjects/cissp/2024-outline/secx-prototype/audit.py
+          python subjects/cissp/2024-outline/secx-prototype/due-audit.py
 
       - name: Preserve production CISSP browser smoke
         shell: bash
