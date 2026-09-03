@@ -7,21 +7,27 @@ This is an isolated review prototype. It does not replace or alter the verified 
 The landing state places **SecX** in the middle of the canvas with the eight CISSP domains arranged around it. The user navigates with arrow keys using spatial graph traversal rather than a traditional sidebar/menu.
 
 - Arrow: move to the connected node best aligned with that direction.
-- Enter: descend into a node's child cluster.
-- Escape: close the depth panel first, then ascend one hierarchy level while preserving the parent-domain selection.
-- Space: progressively reveal more depth while remaining on the same concept.
+- Enter: descend through `domain → objective → subtopic`.
+- Escape: close the depth panel first, then ascend one hierarchy level while preserving the parent selection.
+- Space: progressively reveal more depth while remaining on the same node.
+- `/`: open the keyboard search palette.
+- `Home`: return to the SecX root.
 
 Keyboard selection moves actual browser focus to the selected node, pointer/touch selection remains available, and the prototype respects `prefers-reduced-motion`.
 
 ## Current Atlas integration
 
-The prototype now loads the released Atlas metadata and all eight released domain chunks directly from the sibling `study-site/` directory. That gives the knowledge web all **62 current stable objective records** without duplicating or rewriting their IDs.
+The prototype loads the released Atlas metadata, all eight released domain chunks, and `coverage-detail.js` directly from the sibling `study-site/` directory. This gives the knowledge web the current **62 stable objective records** and **344 mapped enriched subtopics** without duplicating or rewriting the released curriculum.
 
-For each objective node the prototype consumes the released Atlas objective ID, label, summary/direct rule, misconception trap, and source IDs. Source IDs are resolved through the released Atlas source registry. If the released domain data cannot be loaded, the prototype fails visibly rather than inventing replacement objective content.
+For each objective node the prototype consumes the released Atlas objective ID, label, summary/direct rule, misconception trap, and source IDs. Source IDs are resolved through the released Atlas source registry. Each objective can then descend into the enriched subtopic labels already mapped to that objective in `coverage-detail.js`.
 
-The domain layer also uses the released Atlas domain names/weights and shows the number of objective nodes available in each domain. Large objective sets use two radial rings so the domain view does not collapse into a single crowded circle.
+The domain layer uses the released Atlas domain names/weights and shows the number of objective nodes available in each domain. Large objective and subtopic sets use two radial rings so local clusters remain readable rather than collapsing into one crowded circle.
 
-This is still an objective-level integration. Subtopics, retrieval cards, scenarios, learner state, typed concept relationships, and cross-domain links remain future graph layers rather than being silently inferred from incomplete mappings.
+The search palette indexes the released domain names, objective labels/summaries/traps, and all mapped subtopic labels. Selecting a result reconstructs the appropriate local graph and focuses the exact domain, objective, or subtopic node.
+
+If released Atlas data cannot be loaded, the prototype fails visibly rather than inventing replacement objective or subtopic content.
+
+This is now a subtopic-level integration. Retrieval cards, scenarios, learner state, typed concept relationships, and cross-domain links remain future graph layers rather than being silently inferred from incomplete mappings.
 
 ## Refined product concept
 
@@ -53,13 +59,13 @@ Each claim/card should expose compact chips for its most useful labels. Full lab
 
 ## Recommended production architecture
 
-1. Normalize the remaining Atlas content layers into a graph-oriented model while preserving the current released objective IDs already used by the prototype.
+1. Normalize the remaining Atlas content layers into a graph-oriented model while preserving the released objective IDs and current subtopic mappings already consumed by the prototype.
 2. Keep existing stable item IDs; add labels/relationships rather than rewriting content IDs.
 3. Build a migration/audit script that rejects unknown objective IDs, source IDs, relationship targets, or malformed label values.
 4. Generate deeper graph layers from the normalized model instead of hand-authoring a second curriculum.
 5. Keep current question-bank release isolation: unreleased candidates must not appear in the production graph.
 6. Store learner state separately from content: node visits, depth reached, retrieval grade, practice evidence, weak relationships, and spaced-review due dates.
-7. Add search/palette and breadcrumb/history after the spatial navigation is stable.
+7. Extend search with filters and typed relationship traversal only after those relationships are explicitly mapped and audited.
 8. Keep views local rather than rendering thousands of nodes simultaneously; mount only the current node, parents, siblings, children, and selected cross-links.
 
 ## Suggested visual behavior
