@@ -13,7 +13,7 @@ async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;whil
 function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
 function key(win,key,code=key){win.dispatchEvent(new win.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
 function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow}}
-async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),scope=x.d?.querySelector('#scope')?.textContent||'';return x.d&&x.w&&/\d+ released scenarios/.test(scope)&&!scope.includes('loading')&&!scope.includes('unavailable')&&x.d.querySelector('[data-sec-grade-help]')&&x.d.querySelector('#dueReviewBtn')?x:null},`${label} released Atlas graph + learner state + due review`)}
+async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),scope=x.d?.querySelector('#scope')?.textContent||'';return x.d&&x.w&&/\d+ released scenarios/.test(scope)&&!scope.includes('loading')&&!scope.includes('unavailable')&&x.d.querySelector('[data-sec-grade-help]')&&x.d.querySelector('#dueReviewBtn')&&x.d.querySelector('#studyQueueBtn')?x:null},`${label} released Atlas graph + learner state + due review + study lens`)}
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
 function clickId(d,id){const el=node(d,id);assert(el,`node ${id} exists`);el.click();return el}
 async function enter(win){key(win,'Enter','Enter');await sleep(80)}
@@ -27,6 +27,7 @@ async function run(){
   assert(scope.includes(`${meta.question_count} released scenarios`),'scope matches released standard-question count');
   assert(scope.includes('0 due cards'),'fresh smoke profile has zero due cards');
   assert(d.querySelector('#dueReviewBtn')?.textContent.includes('· 0'),'fresh due-review button has zero cards');
+  assert(d.querySelector('#studyQueueBtn')?.textContent.includes('· 0 due'),'fresh study button has zero due cards');
   assert(d.querySelector('#crumb')?.textContent==='SecX','root breadcrumb');
 
   clickId(d,'d1'); await enter(w);
@@ -49,6 +50,7 @@ async function run(){
   assert(cardProgress.due===todayISO(),'stage zero review is due today');
   await waitFor(()=>node(d,cardId)?.querySelector('.node-progress')?.textContent.includes('due'),'graded card renders due state');
   await waitFor(()=>d.querySelector('#dueReviewBtn')?.textContent.includes('· 1'),'due-review button updates after same-window grade');
+  await waitFor(()=>d.querySelector('#studyQueueBtn')?.textContent.includes('· 1 due'),'study button updates after same-window grade');
   assert(d.querySelector('#scope')?.textContent.includes('1 due cards'),'scope due count updates after grade');
   key(w,' ','Space');key(w,' ','Space');key(w,' ','Space');
   await waitFor(()=>d.querySelector('#detail')?.textContent.includes('Sources & relationships'),'card reaches depth four');
@@ -89,14 +91,30 @@ async function run(){
   key(w,'Escape','Escape');
   await waitFor(()=>d.querySelectorAll('.node.domain').length===8&&d.querySelector('#crumb')?.textContent==='SecX','Escape returns from due reviews to root');
 
+  const reviewCardCount=Array.isArray(w.SECX_RELEASED_CARDS)?w.SECX_RELEASED_CARDS.length:0;
+  assert(reviewCardCount===meta.card_count,'learner registry matches Atlas layered-card count');
+  key(w,'q','KeyQ');
+  await waitFor(()=>node(d,'study:queue')&&d.querySelectorAll('.node.study-facet').length===5&&d.querySelector('#crumb')?.textContent==='SecX › Study queue','Q opens five-facet study queue');
+  assert(node(d,'study:due')?.textContent.includes('1 scheduled now'),'study queue derives one due card from Atlas state');
+  assert(node(d,'study:new')?.textContent.includes(`${reviewCardCount-1} ungraded`),'study queue derives remaining new-card count from Atlas state');
+  assert(node(d,'study:weak')?.textContent.includes('D1'),'fresh/tied review score uses Atlas higher-weight tie-break');
+  clickId(d,'study:new'); await enter(w);
+  await waitFor(()=>node(d,'study:list:new')&&d.querySelector('.node.card')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue › New cards','New facet opens paged Atlas card queue');
+  assert(node(d,'study:list:new')?.textContent.includes(`${reviewCardCount-1} Atlas review cards`),'new queue count excludes the graded card');
+  key(w,'Escape','Escape');
+  await waitFor(()=>node(d,'study:queue')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue','Escape from study cards returns to study hub');
+  key(w,'Escape','Escape');
+  await waitFor(()=>d.querySelectorAll('.node.domain').length===8&&d.querySelector('#crumb')?.textContent==='SecX','Escape from study hub returns to root');
+
   const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mw=mobileApp.w;
   await waitFor(()=>md.querySelectorAll('.node.domain').length===8,'mobile domain nodes');
   assert(mw.getComputedStyle(md.querySelector('.legend')).display==='none','mobile keyboard legend hidden');
   assert(md.querySelector('#dueReviewBtn'),'mobile due-review control present');
+  assert(md.querySelector('#studyQueueBtn'),'mobile study-queue control present');
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile graph shell has no horizontal overflow');
 
   result.dataset.smoke='pass';
-  result.textContent=`PASS SecX expanded browser smoke: released-counts domains objective-hub cards Atlas-progress due-review graph-state scenarios answer-gate search Home mobile; sampled card ${cardId}; scenario ${scenarioId}`;
+  result.textContent=`PASS SecX expanded browser smoke: released-counts domains objective-hub cards Atlas-progress due-review study-lens graph-state scenarios answer-gate search Home mobile; sampled card ${cardId}; scenario ${scenarioId}`;
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
