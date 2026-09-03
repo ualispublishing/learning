@@ -23,7 +23,7 @@ ALLOWED_TYPES = {
 }
 ALLOWED_STATUS = {"candidate", "rejected", "approved"}
 APPROVAL_EVIDENCE = {"explicit-reviewed-statement", "manual-source-review"}
-FORBIDDEN_PREFIXES = ("sub:", "source:", "study:", "due:", "page:", "facet:")
+FORBIDDEN_PREFIXES = ("sub:", "source:", "study:", "due:", "coverage:", "page:", "facet:")
 
 
 def check(ok: bool, message: str) -> None:
@@ -79,7 +79,7 @@ try:
     next_html = read(ROOT / "next.html")
     runtime_text = "\n".join(read(ROOT / name) for name in (
         "index.html", "next-layer.js", "learner-registry.js", "learner-state.js",
-        "due-review.js", "study-lens.js", "source-lens.js"
+        "due-review.js", "study-lens.js", "source-lens.js", "coverage-lens.js"
     ))
 except (OSError, ValueError, RuntimeError) as exc:
     print("FAIL secx_relationship_audit")
