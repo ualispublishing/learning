@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SecX Source Lens Browser Smoke</title></head>
+<body>
+<pre id="result" data-smoke="running">RUNNING</pre>
+<iframe id="app" src="next.html?source-smoke=desktop" style="width:1280px;height:900px;border:0"></iframe>
+<iframe id="mobile" src="next.html?source-smoke=mobile" style="width:390px;height:844px;border:0"></iframe>
+<script>
+(()=>{'use strict';
+const result=document.querySelector('#result'),frame=document.querySelector('#app'),mobile=document.querySelector('#mobile');
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;while(Date.now()<end){try{const v=fn();if(v)return v}catch{}await sleep(50)}throw new Error(`Timed out waiting for ${label}`)}
+function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
+function key(win,key,code=key){win.dispatchEvent(new win.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
+function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow}}
+async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper);return x.d&&x.w&&x.d.querySelector('#sourceLensBtn')&&x.d.querySelector('#studyQueueBtn')&&x.d.querySelector('#dueReviewBtn')&&x.d.querySelectorAll('.node.domain').length===8?x:null},`${label} source lens runtime`)}
+function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
+function clickId(d,id){const el=node(d,id);assert(el,`node ${id} exists`);el.click();return el}
+async function enter(w){key(w,'Enter','Enter');await sleep(80)}
+async function run(){
+ const {d,w}=await ready(frame,'desktop'),meta=w.CISSP_META?.meta||{};
+ assert(d.querySelector('#sourceLensBtn')?.textContent.includes(`· ${meta.source_count}`),'source button matches Atlas source count');
+ key(w,'s','KeyS');
+ await waitFor(()=>node(d,'sources:root')&&d.querySelectorAll('.node.source-node').length===meta.source_count&&d.querySelector('#crumb')?.textContent==='SecX › Sources','S opens all released sources');
+ const isc2=node(d,'source:ISC2_OUTLINE');assert(isc2,'ISC2 outline source node exists');
+ isc2.click();await enter(w);
+ await waitFor(()=>node(d,'source:ISC2_OUTLINE:objectives')&&node(d,'source:ISC2_OUTLINE:cards')&&d.querySelectorAll('.node.source-facet').length===2,'source hub exposes explicit objectives and cards facets');
+ clickId(d,'source:ISC2_OUTLINE:objectives');await enter(w);
+ await waitFor(()=>node(d,'source:list:ISC2_OUTLINE:objectives')&&node(d,'source-item:objective:1.1'),'ISC2 source maps to released objective 1.1');
+ clickId(d,'source-item:objective:1.1');
+ await waitFor(()=>d.querySelector('#detail.open')?.textContent.includes('explicitly includes ISC2_OUTLINE'),'source item detail states exact source_ids provenance');
+ assert(d.querySelector('#detail')?.textContent.includes('Citation does not mean this source is the sole authority'),'source detail preserves scope boundary');
+ key(w,'Escape','Escape');await sleep(40);key(w,'Escape','Escape');
+ await waitFor(()=>node(d,'source:ISC2_OUTLINE')&&d.querySelectorAll('.node.source-facet').length===2,'Escape returns source items to source hub');
+ key(w,'Escape','Escape');
+ await waitFor(()=>node(d,'sources:root')&&node(d,'source:ISC2_OUTLINE'),'Escape returns source hub to sources');
+ key(w,'Escape','Escape');
+ await waitFor(()=>d.querySelectorAll('.node.domain').length===8&&d.querySelector('#crumb')?.textContent==='SecX','Escape returns sources to root');
+
+ const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mw=mobileApp.w;
+ assert(md.querySelector('#sourceLensBtn'),'mobile source control present');
+ key(mw,'s','KeyS');
+ await waitFor(()=>md.querySelectorAll('.node.source-node').length===meta.source_count,'mobile source hub renders all sources');
+ assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile source lens has no horizontal overflow');
+ result.dataset.smoke='pass';
+ result.textContent=`PASS SecX source lens browser smoke: sources=${meta.source_count} explicit-source_ids ISC2-objective routing Escape mobile`;
+}
+run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
+})();
+</script>
+</body>
+</html>
