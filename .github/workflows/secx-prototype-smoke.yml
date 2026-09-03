@@ -36,6 +36,13 @@ jobs:
         shell: bash
         run: python subjects/cissp/2024-outline/study-site/audit.py
 
+      - name: SecX deterministic graph audit
+        shell: bash
+        run: |
+          python -m py_compile subjects/cissp/2024-outline/secx-prototype/audit.py
+          node --check subjects/cissp/2024-outline/secx-prototype/next-layer.js
+          python subjects/cissp/2024-outline/secx-prototype/audit.py
+
       - name: Preserve production CISSP browser smoke
         shell: bash
         working-directory: subjects/cissp/2024-outline/study-site
