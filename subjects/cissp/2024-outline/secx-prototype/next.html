@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SecX · Expanded Knowledge Web Review</title>
+<style>html,body{margin:0;width:100%;height:100%;background:#07101d}iframe{display:block;width:100%;height:100%;border:0}</style>
+</head>
+<body>
+<iframe id="prototype" src="index.html" title="SecX expanded knowledge web"></iframe>
+<script>
+const frame=document.getElementById('prototype');
+frame.addEventListener('load',()=>{
+  const doc=frame.contentDocument;
+  const precision=doc.createElement('script');
+  precision.src='../study-site/data-precision.js';
+  precision.onload=()=>{
+    const layer=doc.createElement('script');
+    layer.src='next-layer.js';
+    doc.body.appendChild(layer);
+  };
+  doc.body.appendChild(precision);
+});
+</script>
+</body>
+</html>
