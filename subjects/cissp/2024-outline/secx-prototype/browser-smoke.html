@@ -13,10 +13,11 @@ async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;whil
 function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
 function key(win,key,code=key){win.dispatchEvent(new win.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
 function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow}}
-async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),scope=x.d?.querySelector('#scope')?.textContent||'';return x.d&&x.w&&/\d+ released scenarios/.test(scope)&&!scope.includes('loading')&&!scope.includes('unavailable')?x:null},`${label} released Atlas graph`)}
+async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),scope=x.d?.querySelector('#scope')?.textContent||'';return x.d&&x.w&&/\d+ released scenarios/.test(scope)&&!scope.includes('loading')&&!scope.includes('unavailable')&&x.d.querySelector('[data-sec-grade-help]')?x:null},`${label} released Atlas graph + learner state`)}
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
 function clickId(d,id){const el=node(d,id);assert(el,`node ${id} exists`);el.click();return el}
 async function enter(win){key(win,'Enter','Enter');await sleep(80)}
+function todayISO(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 async function run(){
   const {d,w}=await ready(frame,'desktop');
   const meta=w.CISSP_META?.meta||{},scope=d.querySelector('#scope')?.textContent||'';
@@ -24,6 +25,7 @@ async function run(){
   assert(d.querySelectorAll('.node').length===9,'root plus eight domains');
   assert(scope.includes(`${meta.card_count} cards`),'scope matches released retrieval-card count');
   assert(scope.includes(`${meta.question_count} released scenarios`),'scope matches released standard-question count');
+  assert(scope.includes('0 due cards'),'fresh smoke profile has zero due cards');
   assert(d.querySelector('#crumb')?.textContent==='SecX','root breadcrumb');
 
   clickId(d,'d1'); await enter(w);
@@ -36,11 +38,20 @@ async function run(){
 
   clickId(d,'facet:1.9:cards'); await enter(w);
   await waitFor(()=>d.querySelector('.node.card'),'reviewed retrieval-card branch');
-  const card=d.querySelector('.node.card');card.click();
-  await waitFor(()=>d.querySelector('#detail.open'),'card detail opens');
+  const card=d.querySelector('.node.card'),cardId=card.dataset.id;card.click();
+  await waitFor(()=>d.querySelector('#detail.open')&&d.querySelectorAll('[data-sec-grade]').length===4,'card detail and Atlas grade controls');
   assert(!d.querySelector('#detail').textContent.includes('Correct answer:'),'card detail does not expose scenario answer language');
+  d.querySelector('[data-sec-grade="0"]').click();
+  const cardProgress=await waitFor(()=>{try{return JSON.parse(w.localStorage.getItem('cissp_atlas_progress_v1')||'{}').cards?.[cardId]}catch{return null}},'shared Atlas card grade persisted');
+  assert(cardProgress.stage===0,'Wrong grade resets card stage to zero');
+  assert(cardProgress.reviews===1&&cardProgress.last_grade===0,'Wrong grade records one review and grade zero');
+  assert(cardProgress.due===todayISO(),'stage zero review is due today');
+  await waitFor(()=>node(d,cardId)?.querySelector('.node-progress')?.textContent.includes('due'),'graded card renders due state');
+  assert(d.querySelector('#scope')?.textContent.includes('1 due cards'),'scope due count updates after grade');
   key(w,' ','Space');key(w,' ','Space');key(w,' ','Space');
   await waitFor(()=>d.querySelector('#detail')?.textContent.includes('Sources & relationships'),'card reaches depth four');
+  const graphAfterCard=JSON.parse(w.localStorage.getItem('cissp_secx_graph_state_v1')||'{}');
+  assert((graphAfterCard.nodes?.[cardId]?.maxDepth||0)===4,'graph state records maximum card depth separately');
   key(w,'Escape','Escape');await sleep(40);key(w,'Escape','Escape');
   await waitFor(()=>node(d,'facet:1.9:cards'),'cards ascend to objective hub');
 
@@ -52,6 +63,10 @@ async function run(){
   assert(!d.querySelector('#detail').textContent.includes('Correct answer:'),'scenario answer hidden before depth four');
   key(w,' ','Space');key(w,' ','Space');key(w,' ','Space');
   await waitFor(()=>d.querySelector('#detail')?.textContent.includes('Correct answer:'),'scenario answer revealed only at depth four');
+  const scenarioEvidence=await waitFor(()=>{try{return JSON.parse(w.localStorage.getItem('cissp_secx_graph_state_v1')||'{}').scenarios?.[scenarioId]}catch{return null}},'scenario reveal evidence persisted');
+  assert(scenarioEvidence.reveals===1,'scenario answer reveal counted once');
+  assert(!('correct' in scenarioEvidence)&&!('mastery' in scenarioEvidence),'scenario reveal is not mislabeled as correctness or mastery');
+  assert(d.querySelector('#detail')?.textContent.includes('exposure only'),'scenario detail explicitly distinguishes reveal from mastery evidence');
 
   key(w,'/','Slash');
   await waitFor(()=>!d.querySelector('#search').hidden,'search palette opens');
@@ -64,6 +79,7 @@ async function run(){
   key(w,'Home','Home');
   await waitFor(()=>d.querySelectorAll('.node.domain').length===8&&d.querySelector('#crumb')?.textContent==='SecX','Home returns to root');
   assert(!d.querySelector('.node.scenario'),'Home unmounts deep local scenario cluster');
+  assert(d.querySelector('#scope')?.textContent.includes(`${meta.question_count} released scenarios`),'learner footer decorator preserves final released-bank count');
 
   const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mw=mobileApp.w;
   await waitFor(()=>md.querySelectorAll('.node.domain').length===8,'mobile domain nodes');
@@ -71,7 +87,7 @@ async function run(){
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile graph shell has no horizontal overflow');
 
   result.dataset.smoke='pass';
-  result.textContent=`PASS SecX expanded browser smoke: released-counts domains objective-hub cards scenarios answer-gate search Home mobile; sampled scenario ${scenarioId}`;
+  result.textContent=`PASS SecX expanded browser smoke: released-counts domains objective-hub cards Atlas-progress graph-state scenarios answer-gate search Home mobile; sampled card ${cardId}; scenario ${scenarioId}`;
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
