@@ -48,7 +48,7 @@ A normalized graph node may carry:
 
 Not every node needs every field. Unknown values should stay unknown rather than being inferred for visual completeness.
 
-Temporary navigation IDs such as `sub:<objective-id>:<index>`, pager IDs, study-lens IDs, due-review IDs, and source-lens IDs are local UI identities only. They are not durable curriculum IDs and cannot become endpoints in a released semantic-relationship registry.
+Temporary navigation IDs such as `sub:<objective-id>:<index>`, pager IDs, study-lens IDs, due-review IDs, source-lens IDs, and `coverage:*` IDs are local UI identities only. They are not durable curriculum IDs and cannot become endpoints in a released semantic-relationship registry.
 
 ## Relationship types
 
@@ -66,6 +66,8 @@ Potential typed semantic edges include:
 Only hierarchy and relationships already explicit in released Atlas data are currently publishable by the prototype. Search similarity is not relationship evidence.
 
 Explicit `source_ids` provenance can be shown as a source projection because the citation mapping already exists in Atlas. A shared citation does **not** imply that the two cited items depend on, contrast with, implement, mitigate, measure, or otherwise semantically relate to one another.
+
+Coverage counts and exact-tag practice-exposure counts are likewise projections over explicit released mappings. They do **not** create semantic relationships between objectives, cards, subtopics, scenarios, or domains.
 
 `RELATIONSHIP_REVIEW.json` is a separate reviewer-only draft registry for future semantic edges. It is intentionally not loaded by `next.html`. Item-level VERIFIED status does not approve a relationship between two verified items. Relationship approval requires its own rationale/evidence/reviewer gate, and even approved records remain draft-only until a separate released-relationship artifact exists.
 
@@ -90,6 +92,25 @@ It must not:
 - discover candidate question-bank files;
 - imply that one cited source is the sole authority unless Atlas explicitly says so.
 
+## Coverage projection
+
+The **Coverage** lens reports raw corpus/practice-exposure counts from explicit released mappings. It does not produce a synthetic coverage score.
+
+It may display, by domain/objective:
+
+- objective count;
+- enriched subtopic count;
+- Atlas review-card count;
+- supplemental reviewed-card count;
+- released scenario count;
+- source count;
+- enriched subtopics with at least one exact released scenario `subtopics` tag;
+- objectives with zero explicitly mapped released scenarios.
+
+A missing scenario mapping is a **practice-exposure gap**, not proof of curriculum omission. Coverage metrics are corpus properties and are not learner mastery/readiness measurements.
+
+The lens must load scenarios through `RELEASED_BATCHES.json`, must not discover candidate-only files, must not read/write learner state, and must not infer semantic edges from counts, tags, or shared sources.
+
 ## Progressive disclosure
 
 Each node supports four stable disclosure depths:
@@ -111,7 +132,8 @@ Do not render the entire knowledge base simultaneously. The view should mount a 
 - selected reviewed cross-links;
 - paged card/scenario records where necessary;
 - schedule-derived learner-state projections;
-- paged source-provenance projections.
+- paged source-provenance projections;
+- local domain/objective coverage projections.
 
 This preserves spatial legibility and keyboard traversal as the corpus grows.
 
@@ -163,7 +185,7 @@ Search may index released domains, objectives, subtopics, retrieval cards, and r
 
 Search similarity may support discovery but must not create semantic graph edges automatically.
 
-Future search filters can include node type, domain, objective, source, due-card state, and explicitly released relationship type.
+Future search filters can include node type, domain, objective, source, due-card state, coverage/exposure state, and explicitly released relationship type.
 
 ## Relationship review pipeline
 
@@ -185,6 +207,7 @@ Automatic approval is forbidden from:
 - fuzzy/string similarity;
 - embeddings or semantic-distance scores;
 - shared `source_ids`;
+- coverage co-occurrence/counts;
 - two endpoints independently being VERIFIED.
 
 ## Release isolation
@@ -194,6 +217,8 @@ Released scenarios must be loaded only through the released question-bank manife
 Released review-card learner-state views must derive from the Atlas-compatible 140-card registry, not repository file discovery.
 
 Source Provenance must derive from `CISSP_META.sources` plus exact released `source_ids` mappings.
+
+Coverage must derive from released objectives/subtopics/cards plus manifest-released standard scenarios and exact scenario subtopic tags.
 
 Reviewer-only semantic relationship data must not be loaded by learner runtime. A future learner-facing relationship layer requires a separate released artifact.
 
@@ -211,7 +236,9 @@ Before any graph surface becomes production-facing, deterministic validation mus
 - invalid learner-state/content coupling;
 - answer exposure before the required retrieval boundary;
 - due/study inputs that are not Atlas-compatible review cards/state;
-- source-provenance membership not backed by exact `source_ids`.
+- source-provenance membership not backed by exact `source_ids`;
+- coverage inputs not backed by released objective/subtopic/card/scenario mappings;
+- coverage code coupled to learner state or inferred relationship logic.
 
 ## Keyboard grammar
 
@@ -225,6 +252,7 @@ Before any graph surface becomes production-facing, deterministic validation mus
 - `R`: open the schedule-derived Due Reviews graph.
 - `Q`: open Study Queue.
 - `S`: open Source Provenance.
+- `C`: open Coverage.
 - Tab remains normal browser accessibility behavior.
 
 Pointer/touch remains supported; keyboard-first must not become keyboard-only.
