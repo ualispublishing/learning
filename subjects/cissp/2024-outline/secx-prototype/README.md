@@ -29,6 +29,10 @@ If released Atlas data cannot be loaded, the prototype fails visibly rather than
 
 This is now a subtopic-level integration. Retrieval cards, scenarios, learner state, typed concept relationships, and cross-domain links remain future graph layers rather than being silently inferred from incomplete mappings.
 
+## Relationship gate
+
+Typed semantic cross-links are deliberately **not** generated from word similarity alone. A repeated phrase such as `least privilege` can suggest a candidate relationship, but publishing `depends-on`, `contrasts-with`, `implemented-by`, `mitigates`, `measured-by`, or another semantic edge requires an explicit reviewed mapping. This prevents the graph from turning search similarity into unsupported curriculum claims.
+
 ## Refined product concept
 
 ### 1. The web is the curriculum
