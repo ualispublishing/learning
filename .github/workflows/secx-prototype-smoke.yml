@@ -41,6 +41,8 @@ jobs:
         run: |
           python -m py_compile subjects/cissp/2024-outline/secx-prototype/audit.py
           node --check subjects/cissp/2024-outline/secx-prototype/next-layer.js
+          node --check subjects/cissp/2024-outline/secx-prototype/learner-state.js
+          bash -n subjects/cissp/2024-outline/secx-prototype/browser-smoke.sh
           python subjects/cissp/2024-outline/secx-prototype/audit.py
 
       - name: Preserve production CISSP browser smoke
