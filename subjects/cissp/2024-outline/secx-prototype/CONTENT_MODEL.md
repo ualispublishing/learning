@@ -16,7 +16,9 @@ The current implemented review surfaces stop at explicit released mappings:
 - objective → subtopic;
 - objective → retrieval card;
 - objective → released scenario;
-- subtopic → released scenario only by exact explicit released subtopic tag.
+- subtopic → released scenario only by exact explicit released subtopic tag;
+- source → objective only by explicit objective `source_ids`;
+- source → review card only by explicit card `source_ids`.
 
 Concept-level or cross-domain semantic edges remain gated until reviewed mappings exist.
 
@@ -46,9 +48,11 @@ A normalized graph node may carry:
 
 Not every node needs every field. Unknown values should stay unknown rather than being inferred for visual completeness.
 
+Temporary navigation IDs such as `sub:<objective-id>:<index>`, pager IDs, study-lens IDs, due-review IDs, and source-lens IDs are local UI identities only. They are not durable curriculum IDs and cannot become endpoints in a released semantic-relationship registry.
+
 ## Relationship types
 
-Potential typed edges include:
+Potential typed semantic edges include:
 
 - `contains`
 - `depends-on`
@@ -59,9 +63,32 @@ Potential typed edges include:
 - `evidenced-by`
 - `practiced-by`
 
-Only `contains`-style hierarchy and explicitly represented Atlas mappings are currently publishable by the prototype. Other semantic relationship types require explicit reviewed mappings. Search similarity is not relationship evidence.
+Only hierarchy and relationships already explicit in released Atlas data are currently publishable by the prototype. Search similarity is not relationship evidence.
 
-Schedule-derived views such as **Due Reviews** are not relationship types. They are temporary learner-state projections over already released retrieval-card nodes and must never be serialized back into curriculum relationships.
+Explicit `source_ids` provenance can be shown as a source projection because the citation mapping already exists in Atlas. A shared citation does **not** imply that the two cited items depend on, contrast with, implement, mitigate, measure, or otherwise semantically relate to one another.
+
+`RELATIONSHIP_REVIEW.json` is a separate reviewer-only draft registry for future semantic edges. It is intentionally not loaded by `next.html`. Item-level VERIFIED status does not approve a relationship between two verified items. Relationship approval requires its own rationale/evidence/reviewer gate, and even approved records remain draft-only until a separate released-relationship artifact exists.
+
+Schedule-derived views such as **Due Reviews** and **Study Queue** are not relationship types. They are temporary learner-state projections over already released review-card nodes and must never be serialized back into curriculum relationships.
+
+## Provenance projection
+
+The **Source Provenance** lens uses the current Atlas source registry and exact `source_ids` arrays only.
+
+It may display:
+
+- all released Atlas source records;
+- objectives that explicitly cite a selected source;
+- production-compatible review cards that explicitly cite a selected source;
+- source title, role, and URL already present in Atlas metadata.
+
+It must not:
+
+- infer a source mapping from text similarity;
+- treat co-citation as a semantic concept edge;
+- read or write learner state;
+- discover candidate question-bank files;
+- imply that one cited source is the sole authority unless Atlas explicitly says so.
 
 ## Progressive disclosure
 
@@ -83,7 +110,8 @@ Do not render the entire knowledge base simultaneously. The view should mount a 
 - children;
 - selected reviewed cross-links;
 - paged card/scenario records where necessary;
-- schedule-derived learner-state projections such as the current due-card page.
+- schedule-derived learner-state projections;
+- paged source-provenance projections.
 
 This preserves spatial legibility and keyboard traversal as the corpus grows.
 
@@ -93,12 +121,22 @@ Learner history must remain outside curriculum records.
 
 The expanded prototype currently uses two state scopes:
 
-- Atlas-compatible retrieval-card progress: `cissp_atlas_progress_v1`.
+- Atlas-compatible review-card progress: `cissp_atlas_progress_v1`.
 - Graph-specific activity: `cissp_secx_graph_state_v1`.
 
-The shared card state intentionally uses Atlas's existing Wrong / Hard / Good / Easy stage schedule so the same released retrieval-card ID does not acquire two incompatible review histories.
+The shared card state intentionally uses Atlas's existing Wrong / Hard / Good / Easy stage schedule so the same released review-card ID does not acquire two incompatible review histories.
 
-The released-card learner registry is derived from already loaded `CISSP_CHUNKS[].high` data. Due Reviews filters those same released IDs using Atlas's existing `due` date. The due queue must not read scenario candidate files, create replacement card IDs, infer weakness, or create a second scheduling algorithm.
+The production-compatible review-card registry contains the same 140 Atlas review cards: generated `OBJ-<objective-id>` cards plus released high-yield/AI/precision cards from loaded `CISSP_CHUNKS`. Due Reviews and Study Queue filter these released IDs using the existing Atlas card state; they do not discover files or create replacement card IDs.
+
+Study Queue may derive:
+
+- due;
+- new;
+- learning;
+- mature;
+- lowest current review-stage-score domain.
+
+The lowest review-stage score uses the same objective/domain stage aggregation and higher-exam-weight tie-break as production Atlas. It is a study-priority signal only, not proof of weakness, mastery, or exam readiness.
 
 Graph-specific state may record:
 
@@ -125,13 +163,39 @@ Search may index released domains, objectives, subtopics, retrieval cards, and r
 
 Search similarity may support discovery but must not create semantic graph edges automatically.
 
-Future search filters can include node type, domain, objective, source, due-card state, and explicitly reviewed relationship type.
+Future search filters can include node type, domain, objective, source, due-card state, and explicitly released relationship type.
+
+## Relationship review pipeline
+
+Future semantic relationships are staged separately from learner runtime.
+
+Current draft stages are:
+
+1. candidate discovery/reviewer entry;
+2. relationship-specific semantic review;
+3. deterministic validation against stable released endpoint IDs and semantic item ledgers;
+4. separate release/promotion artifact;
+5. learner-runtime integration only after exact-head gates pass.
+
+`RELATIONSHIP_REVIEW.json` currently has no relationships. Candidate or approved-draft records in that file are not learner-facing.
+
+Automatic approval is forbidden from:
+
+- repeated words or labels;
+- fuzzy/string similarity;
+- embeddings or semantic-distance scores;
+- shared `source_ids`;
+- two endpoints independently being VERIFIED.
 
 ## Release isolation
 
 Released scenarios must be loaded only through the released question-bank manifest. Presence of a candidate file in the repository is not sufficient for learner-facing graph inclusion.
 
-Released retrieval-card learner-state views must derive from the released `CISSP_CHUNKS[].high` registry already used by Atlas rather than from repository file discovery.
+Released review-card learner-state views must derive from the Atlas-compatible 140-card registry, not repository file discovery.
+
+Source Provenance must derive from `CISSP_META.sources` plus exact released `source_ids` mappings.
+
+Reviewer-only semantic relationship data must not be loaded by learner runtime. A future learner-facing relationship layer requires a separate released artifact.
 
 Before any graph surface becomes production-facing, deterministic validation must reject:
 
@@ -140,10 +204,14 @@ Before any graph surface becomes production-facing, deterministic validation mus
 - duplicate stable IDs;
 - malformed release-manifest paths;
 - unreleased scenario leakage;
-- unsupported relationship targets;
+- unsupported relationship targets/types;
+- temporary navigation IDs used as semantic endpoints;
+- relationship approval without explicit relationship review evidence;
+- reviewer-only relationship data loaded by learner runtime;
 - invalid learner-state/content coupling;
 - answer exposure before the required retrieval boundary;
-- due-review inputs that are not released retrieval cards or Atlas-compatible card state.
+- due/study inputs that are not Atlas-compatible review cards/state;
+- source-provenance membership not backed by exact `source_ids`.
 
 ## Keyboard grammar
 
@@ -155,6 +223,8 @@ Before any graph surface becomes production-facing, deterministic validation mus
 - Home: root.
 - `1–4`: grade a retrieval card when card detail is open.
 - `R`: open the schedule-derived Due Reviews graph.
+- `Q`: open Study Queue.
+- `S`: open Source Provenance.
 - Tab remains normal browser accessibility behavior.
 
 Pointer/touch remains supported; keyboard-first must not become keyboard-only.
