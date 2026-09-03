@@ -36,7 +36,7 @@ jobs:
         shell: bash
         run: python subjects/cissp/2024-outline/study-site/audit.py
 
-      - name: SecX deterministic graph, learner-state, provenance, and relationship audits
+      - name: SecX deterministic graph, learner-state, provenance, coverage, and relationship audits
         shell: bash
         run: |
           python -m py_compile \
@@ -44,6 +44,7 @@ jobs:
             subjects/cissp/2024-outline/secx-prototype/due-audit.py \
             subjects/cissp/2024-outline/secx-prototype/study-audit.py \
             subjects/cissp/2024-outline/secx-prototype/source-audit.py \
+            subjects/cissp/2024-outline/secx-prototype/coverage-audit.py \
             subjects/cissp/2024-outline/secx-prototype/relationship-audit.py
           node --check subjects/cissp/2024-outline/secx-prototype/learner-registry.js
           node --check subjects/cissp/2024-outline/secx-prototype/next-layer.js
@@ -51,12 +52,15 @@ jobs:
           node --check subjects/cissp/2024-outline/secx-prototype/due-review.js
           node --check subjects/cissp/2024-outline/secx-prototype/study-lens.js
           node --check subjects/cissp/2024-outline/secx-prototype/source-lens.js
+          node --check subjects/cissp/2024-outline/secx-prototype/coverage-lens.js
           bash -n subjects/cissp/2024-outline/secx-prototype/browser-smoke.sh
           bash -n subjects/cissp/2024-outline/secx-prototype/source-browser-smoke.sh
+          bash -n subjects/cissp/2024-outline/secx-prototype/coverage-browser-smoke.sh
           python subjects/cissp/2024-outline/secx-prototype/audit.py
           python subjects/cissp/2024-outline/secx-prototype/due-audit.py
           python subjects/cissp/2024-outline/secx-prototype/study-audit.py
           python subjects/cissp/2024-outline/secx-prototype/source-audit.py
+          python subjects/cissp/2024-outline/secx-prototype/coverage-audit.py
           python subjects/cissp/2024-outline/secx-prototype/relationship-audit.py
 
       - name: Preserve production CISSP browser smoke
@@ -73,3 +77,8 @@ jobs:
         shell: bash
         working-directory: subjects/cissp/2024-outline/secx-prototype
         run: bash source-browser-smoke.sh 8786
+
+      - name: SecX explicit coverage browser smoke
+        shell: bash
+        working-directory: subjects/cissp/2024-outline/secx-prototype
+        run: bash coverage-browser-smoke.sh 8796
