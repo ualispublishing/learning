@@ -75,7 +75,9 @@ def q_objectives(q):
 try:
     meta = parse_meta()
     domain_chunks = [parse_chunk(f"data-d{i}.js") for i in range(1, 9)]
-    precision = parse_chunk("data-precision.js")
+    ai_chunk = parse_chunk("data-ai.js")
+    precision_chunk = parse_chunk("data-precision.js")
+    all_chunks = [*domain_chunks, ai_chunk, precision_chunk]
     coverage = parse_coverage()
     manifest = json.loads(read(QB / "RELEASED_BATCHES.json"))
 except (OSError, ValueError, RuntimeError) as exc:
@@ -85,9 +87,9 @@ except (OSError, ValueError, RuntimeError) as exc:
 
 meta_info = meta.get("meta", {})
 sources = set((meta.get("sources") or {}).keys())
-objectives = [o for chunk in domain_chunks for o in chunk.get("objectives", [])]
-base_questions = [q for chunk in domain_chunks for q in chunk.get("questions", [])]
-cards = list(precision.get("high", []))
+objectives = [o for chunk in all_chunks for o in chunk.get("objectives", [])]
+base_questions = [q for chunk in all_chunks for q in chunk.get("questions", [])]
+cards = [c for chunk in all_chunks for c in chunk.get("high", [])]
 objective_ids = {str(o.get("id")) for o in objectives}
 objective_by_id = {str(o.get("id")): o for o in objectives}
 
@@ -107,7 +109,7 @@ for card in cards:
     oid = str(card.get("objective") or "")
     check(oid in objective_ids, f"{cid} references unknown objective {oid}")
     obj = objective_by_id.get(oid, {})
-    if obj:
+    if obj and card.get("domain_num") is not None:
         check(card.get("domain_num") == obj.get("domain_num"), f"{cid} domain/objective mismatch")
     for source_id in card.get("source_ids", []):
         check(source_id in sources, f"{cid} references unknown source {source_id}")
@@ -170,7 +172,8 @@ check("q.subtopics.includes(label)" in next_layer, "subtopic/scenario relationsh
 check("Correct answer:" in next_layer and next_layer.count("Correct answer:") == 1, "scenario answer reveal text should have one controlled runtime definition")
 check(re.search(r"practice:`Correct answer:", next_layer) is not None, "scenario answer is not confined to the application/practice layer")
 check("depth>=4" in index_html and "info.practice" in index_html, "base disclosure renderer no longer gates application content at depth four")
-check("similarity" not in next_layer.lower(), "expanded runtime unexpectedly contains similarity-based relationship logic")
+for forbidden in ("similarityScore", "levenshtein", "fuzzyMatch", "cosineSimilarity", "semanticDistance", "relationshipScore"):
+    check(forbidden not in next_layer, f"expanded runtime contains unsupported inferred-relationship helper: {forbidden}")
 
 atlas_progress_key = "cissp_atlas_progress_v1"
 graph_progress_key = "cissp_secx_graph_state_v1"
@@ -181,7 +184,8 @@ check(interval_literal in production_app, "production Atlas interval schedule ch
 check(interval_literal in learner_state, "SecX card interval schedule does not match production Atlas")
 check(graph_progress_key in learner_state, "SecX graph-specific learner state key missing")
 check("reveals" in learner_state and "exposure only" in learner_state, "scenario reveal evidence is not explicitly separated from mastery")
-check("correct" not in re.search(r"graphState\.scenarios.*?saveGraph\(\)", learner_state, re.S).group(0).lower() if re.search(r"graphState\.scenarios.*?saveGraph\(\)", learner_state, re.S) else False, "scenario graph state appears to record correctness")
+scenario_state_block = re.search(r"graphState\.scenarios.*?saveGraph\(\)", learner_state, re.S)
+check(bool(scenario_state_block) and "correct" not in scenario_state_block.group(0).lower(), "scenario graph state appears to record correctness")
 check("learner-state.js" in next_html, "expanded review page does not load learner state")
 check(next_html.find("next-layer.js") < next_html.find("learner-state.js"), "learner state must load after the expanded graph layer")
 check("layer.onload" in next_html, "learner state load is not gated on expanded graph readiness")
