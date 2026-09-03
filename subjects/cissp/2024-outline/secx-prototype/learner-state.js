@@ -130,7 +130,7 @@ document.addEventListener('keydown',e=>{
 },true);
 
 addEventListener('storage',e=>{
-  if(e.key===ATLAS_PROGRESS_KEY){atlasState=safeParse(e.newValue,{cards:{},quiz:{attempts:0,correct:0,byDomain:{}});atlasState.cards=atlasState.cards||{};decorateNodes();decorateDetail();updateProgressScope()}
+  if(e.key===ATLAS_PROGRESS_KEY){atlasState=safeParse(e.newValue,{cards:{},quiz:{attempts:0,correct:0,byDomain:{}}});atlasState.cards=atlasState.cards||{};decorateNodes();decorateDetail();updateProgressScope()}
   if(e.key===GRAPH_STATE_KEY){graphState=safeParse(e.newValue,{nodes:{},scenarios:{}});graphState.nodes=graphState.nodes||{};graphState.scenarios=graphState.scenarios||{};decorateNodes();decorateDetail()}
 });
 
