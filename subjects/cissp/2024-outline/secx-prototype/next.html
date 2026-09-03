@@ -17,6 +17,11 @@ frame.addEventListener('load',()=>{
   precision.onload=()=>{
     const layer=doc.createElement('script');
     layer.src='next-layer.js';
+    layer.onload=()=>{
+      const learner=doc.createElement('script');
+      learner.src='learner-state.js';
+      doc.body.appendChild(learner);
+    };
     doc.body.appendChild(layer);
   };
   doc.body.appendChild(precision);
