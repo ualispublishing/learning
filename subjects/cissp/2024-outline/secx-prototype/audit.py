@@ -89,22 +89,25 @@ meta_info = meta.get("meta", {})
 sources = set((meta.get("sources") or {}).keys())
 objectives = [o for chunk in all_chunks for o in chunk.get("objectives", [])]
 base_questions = [q for chunk in all_chunks for q in chunk.get("questions", [])]
-cards = [c for chunk in all_chunks for c in chunk.get("high", [])]
+high_cards = [c for chunk in all_chunks for c in chunk.get("high", [])]
+layered_card_count = len(objectives) + len(high_cards)
 objective_ids = {str(o.get("id")) for o in objectives}
 objective_by_id = {str(o.get("id")): o for o in objectives}
 
 check(len(objectives) == meta_info.get("objective_count"), f"objective count drift: {len(objectives)} != {meta_info.get('objective_count')}")
 check(sum(len(v) for v in coverage.values()) == meta_info.get("subtopic_checks"), "subtopic mapping count drift")
-check(len(cards) == meta_info.get("card_count"), f"retrieval-card count drift: {len(cards)} != {meta_info.get('card_count')}")
+check(layered_card_count == meta_info.get("card_count"), f"layered-card count drift: {layered_card_count} != {meta_info.get('card_count')}")
 check(len(objective_ids) == len(objectives), "duplicate objective IDs")
-check(len({c.get('id') for c in cards}) == len(cards), "duplicate retrieval-card IDs")
+check(len({c.get('id') for c in high_cards}) == len(high_cards), "duplicate high-yield retrieval-card IDs")
+check(len({f"OBJ-{o['id']}" for o in objectives}) == len(objectives), "duplicate generated objective-card IDs")
+check(not ({f"OBJ-{o['id']}" for o in objectives} & {str(c.get('id')) for c in high_cards}), "objective-card IDs collide with high-yield card IDs")
 
 for objective_id, items in coverage.items():
     check(objective_id in objective_ids, f"coverage references unknown objective: {objective_id}")
     check(isinstance(items, list) and all(isinstance(x, str) and x.strip() for x in items), f"invalid subtopic list for {objective_id}")
     check(len(items) == len(set(items)), f"duplicate subtopic labels under {objective_id}")
 
-for card in cards:
+for card in high_cards:
     cid = card.get("id")
     oid = str(card.get("objective") or "")
     check(oid in objective_ids, f"{cid} references unknown objective {oid}")
@@ -159,6 +162,7 @@ for q in all_standard:
         questions_with_explicit_subtopic_edge += 1
 
 next_layer = read(ROOT / "next-layer.js")
+learner_registry = read(ROOT / "learner-registry.js")
 learner_state = read(ROOT / "learner-state.js")
 next_html = read(ROOT / "next.html")
 index_html = read(ROOT / "index.html")
@@ -174,6 +178,9 @@ check(re.search(r"practice:`Correct answer:", next_layer) is not None, "scenario
 check("depth>=4" in index_html and "info.practice" in index_html, "base disclosure renderer no longer gates application content at depth four")
 for forbidden in ("similarityScore", "levenshtein", "fuzzyMatch", "cosineSimilarity", "semanticDistance", "relationshipScore"):
     check(forbidden not in next_layer, f"expanded runtime contains unsupported inferred-relationship helper: {forbidden}")
+
+check("id:`OBJ-${o.id}`" in production_app and "id:`OBJ-${o.id}`" in learner_registry, "SecX learner registry no longer mirrors Atlas objective-card IDs")
+check("...secxHighCards" in learner_registry, "SecX learner registry no longer includes high-yield cards")
 
 atlas_progress_key = "cissp_atlas_progress_v1"
 graph_progress_key = "cissp_secx_graph_state_v1"
@@ -201,7 +208,8 @@ print(
     "PASS secx_graph_audit "
     f"objectives={len(objectives)} "
     f"subtopics={sum(len(v) for v in coverage.values())} "
-    f"cards={len(cards)} "
+    f"layered_cards={layered_card_count} "
+    f"high_yield_cards={len(high_cards)} "
     f"standard_questions={len(all_standard)} "
     f"bellringers={len(released_bellringers)} "
     f"manifest_files={len(seen_manifest_files)} "
