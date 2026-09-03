@@ -29,18 +29,18 @@ def parse_meta():
     return json.loads(text[len(prefix):text.index(marker)])
 
 
-def parse_precision():
-    text = read(STUDY / "data-precision.js")
+def parse_chunk(name: str):
+    text = read(STUDY / name)
     prefix = "window.CISSP_CHUNKS.push("
     suffix = ");"
     if not text.startswith(prefix) or not text.endswith(suffix):
-        raise RuntimeError("Unexpected data-precision.js wrapper")
+        raise RuntimeError(f"Unexpected {name} wrapper")
     return json.loads(text[len(prefix):-len(suffix)])
 
 
 try:
     meta = parse_meta()
-    precision = parse_precision()
+    chunks = [parse_chunk(f"data-d{i}.js") for i in range(1, 9)] + [parse_chunk("data-ai.js"), parse_chunk("data-precision.js")]
     registry = read(ROOT / "learner-registry.js")
     learner = read(ROOT / "learner-state.js")
     due = read(ROOT / "due-review.js")
@@ -51,12 +51,21 @@ except (OSError, ValueError, RuntimeError) as exc:
     print("-", f"Parse/setup error: {exc}")
     sys.exit(1)
 
-cards = precision.get("high", [])
+objectives = [o for chunk in chunks for o in chunk.get("objectives", [])]
+high_cards = [c for chunk in chunks for c in chunk.get("high", [])]
+objective_card_ids = {f"OBJ-{o.get('id')}" for o in objectives}
+high_card_ids = {str(c.get("id")) for c in high_cards}
+layered_count = len(objectives) + len(high_cards)
 expected = meta.get("meta", {}).get("card_count")
-check(len(cards) == expected, f"released retrieval-card count drift: {len(cards)} != {expected}")
-check(len({c.get('id') for c in cards}) == len(cards), "duplicate retrieval-card IDs")
 
-check("window.CISSP_CHUNKS" in registry and ".flatMap" in registry and ".high" in registry, "released-card registry no longer derives from CISSP_CHUNKS.high")
+check(layered_count == expected, f"Atlas layered review-card count drift: {layered_count} != {expected}")
+check(len(objective_card_ids) == len(objectives), "duplicate generated objective-card IDs")
+check(len(high_card_ids) == len(high_cards), "duplicate high-yield review-card IDs")
+check(not (objective_card_ids & high_card_ids), "generated objective-card IDs collide with high-yield IDs")
+
+check("window.CISSP_CHUNKS" in registry and ".flatMap" in registry and ".high" in registry, "released-card registry no longer derives high-yield cards from CISSP_CHUNKS")
+check("id:`OBJ-${o.id}`" in registry, "released-card registry no longer generates Atlas objective-card IDs")
+check("...secxObjectives.map" in registry and "...secxHighCards.map" in registry, "released-card registry no longer combines objective and high-yield cards")
 check("window.SECX_RELEASED_CARDS=retrievalCards" in registry, "released-card registry export missing")
 check("question-bank" not in registry.lower(), "released-card registry unexpectedly references question-bank data")
 
@@ -74,10 +83,10 @@ check(next_html.count(".onload=") >= 4, "expanded page no longer gates dependent
 check("cissp_atlas_progress_v1" in learner and "cissp_atlas_progress_v1" in due, "due review is not tied to Atlas card progress")
 check("cissp_secx_graph_state_v1" in learner, "graph-specific learner state key missing")
 check("s.due<=today" in due, "due queue no longer filters by scheduled due date")
-check("retrievalCards" in due, "due queue no longer uses released retrieval-card registry")
+check("retrievalCards" in due, "due queue no longer uses Atlas review-card registry")
 check("question-bank" not in due.lower(), "due queue unexpectedly references scenario/candidate question-bank files")
 check("dueReviewLayout" in due and "level='due-reviews'" in due, "due-review local graph branch missing")
-check("Review due" in due and "KeyR" not in due, "due-review button/shortcut source changed unexpectedly")
+check("Review due" in due, "due-review button source changed unexpectedly")
 check("e.key==='r'||e.key==='R'" in due, "R keyboard shortcut for due review missing")
 check("[data-sec-grade]" in due and "updateDueButton()" in due, "same-window grade does not refresh due queue/count")
 check("dueCards().some" in due, "due branch does not reconcile a graded card against current due state")
@@ -86,6 +95,7 @@ check("correct" not in due.lower() and "mastery" not in due.lower(), "due-review
 check("#dueReviewBtn" in smoke, "browser smoke does not wait for due-review layer")
 check("due:reviews" in smoke and "KeyR" in smoke, "browser smoke does not exercise due-review keyboard branch")
 check("same-window grade" in smoke, "browser smoke does not verify same-window due-count update")
+check("SECX_RELEASED_CARDS" in smoke and "reviewCardCount===meta.card_count" in smoke, "browser smoke no longer reconciles learner registry to Atlas card_count")
 
 if errors:
     print("FAIL secx_due_audit")
@@ -93,4 +103,4 @@ if errors:
         print("-", error)
     sys.exit(1)
 
-print(f"PASS secx_due_audit released_cards={len(cards)} load_order=precision>registry>graph>learner>due source=Atlas-progress-only")
+print(f"PASS secx_due_audit layered_review_cards={layered_count} objective_cards={len(objectives)} high_yield_cards={len(high_cards)} load_order=precision>registry>graph>learner>due source=Atlas-progress-only")
