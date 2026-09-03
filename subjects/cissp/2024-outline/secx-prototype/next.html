@@ -26,6 +26,11 @@ frame.addEventListener('load',()=>{
         learner.onload=()=>{
           const due=doc.createElement('script');
           due.src='due-review.js';
+          due.onload=()=>{
+            const study=doc.createElement('script');
+            study.src='study-lens.js';
+            doc.body.appendChild(study);
+          };
           doc.body.appendChild(due);
         };
         doc.body.appendChild(learner);
