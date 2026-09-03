@@ -4,139 +4,156 @@ This is an isolated review prototype. It does not replace or alter the verified 
 
 ## Review surfaces
 
-- `index.html` is the stable objective/subtopic prototype. It loads the released Atlas domain metadata and the 344 enriched subtopic mappings and remains the conservative comparison surface.
-- `next.html` is the expanded review surface. It embeds `index.html`, then loads the reviewed retrieval-card data, the Atlas-compatible learner registry, the card/scenario graph layer, learner state, Due Reviews, and the Study Queue in dependency order. It is intentionally not the default prototype entry point yet.
+- `index.html` is the conservative objective/subtopic prototype.
+- `next.html` is the expanded review surface. It embeds `index.html`, then loads the Atlas-compatible review-card registry, card/scenario graph layer, learner state, Due Reviews, Study Queue, and Source Provenance in dependency order.
 
-The expanded page reuses the production release boundary for scenarios: it loads only question files enumerated by `study-site/question-bank/RELEASED_BATCHES.json`. Candidate files that are not in that released manifest are excluded. Retrieval cards are linked by their explicit Atlas `objective` field. Released scenarios are linked by their explicit `objectives` array, and subtopic-to-scenario navigation is created only when a scenario contains the exact released subtopic tag.
+The expanded surface is still review-only and is not the default prototype entry point or production Atlas.
 
-The review surface uses local pagination for large card/scenario/study clusters. Scenario answers and explanations remain behind progressive disclosure layer 4 so the graph supports retrieval before reveal rather than turning into an answer browser.
+## Released-data boundaries
 
-## Core interaction
+The prototype reuses released Atlas data rather than creating a second curriculum:
 
-The landing state places **SecX** in the middle of the canvas with the eight CISSP domains arranged around it. The user navigates with arrow keys using spatial graph traversal rather than a traditional sidebar/menu.
+- **62** stable objectives from released domain chunks;
+- **344** enriched subtopic mappings from `coverage-detail.js`;
+- **140** Atlas-compatible review cards: generated `OBJ-<objective-id>` cards plus released high-yield/AI/precision cards;
+- released standard scenarios loaded only through `question-bank/RELEASED_BATCHES.json`;
+- **20** released source records from `CISSP_META.sources`.
 
-- Arrow: move to the connected node best aligned with that direction.
-- Enter: descend through the current graph branch.
-- Escape: close the depth panel first, then ascend one hierarchy level while preserving the parent selection.
-- Space: progressively reveal more depth while remaining on the same node.
-- `/`: open the keyboard search palette.
-- `Home`: return to the SecX root.
-- `1–4`: grade a retrieval card using the same Wrong / Hard / Good / Easy model as Atlas when a card detail is open.
-- `R`: open the local **Due Reviews** graph generated from Atlas's scheduled review-card state.
-- `Q`: open the **Study Queue** learner-state lens.
+Candidate scenario files that are not in the released manifest remain excluded.
 
-Keyboard selection moves actual browser focus to the selected node, pointer/touch selection remains available, and the prototype respects `prefers-reduced-motion`.
+Current explicit mappings are:
 
-## Current Atlas integration
+- domain → objective;
+- objective → subtopic;
+- objective → retrieval card;
+- objective → released scenario;
+- subtopic → released scenario only by exact explicit released subtopic tag;
+- source → objective/review card only by exact `source_ids` membership.
 
-The stable prototype loads the released Atlas metadata, all eight released domain chunks, and `coverage-detail.js` directly from the sibling `study-site/` directory. This gives the knowledge web the current **62 stable objective records** and **344 mapped enriched subtopics** without duplicating or rewriting the released curriculum.
+No concept-level cross-domain semantic relationship is inferred from text similarity or co-citation.
 
-For each objective node the prototype consumes the released Atlas objective ID, label, summary/direct rule, misconception trap, and source IDs. Source IDs are resolved through the released Atlas source registry. Each objective can then descend into the enriched subtopic labels already mapped to that objective in `coverage-detail.js`.
+## Keyboard grammar
 
-The expanded review surface additionally loads the released retrieval-card chunk from `data-precision.js` and the released scenario bank from the release manifest. Its objective hub exposes separate **Subtopics**, **Retrieval cards**, and **Released scenarios** branches so provenance is visible rather than flattening unlike relationship types into one cluster.
+- Arrow keys: spatial traversal.
+- Enter: descend.
+- Escape: close detail first, then ascend while preserving local context.
+- Space: cycle four disclosure depths.
+- `/`: search released domains/objectives/subtopics/cards/scenarios.
+- Home: return to SecX root.
+- `1–4`: grade an open review card using Atlas Wrong / Hard / Good / Easy semantics.
+- `R`: open **Due Reviews**.
+- `Q`: open **Study Queue**.
+- `S`: open **Source Provenance**.
 
-The learner registry mirrors Atlas's production review-card model: one generated `OBJ-<objective-id>` card for each released objective plus all released high-yield cards already present in `CISSP_CHUNKS[].high`. The resulting registry reconciles to Atlas `card_count` (140) and is exported as `SECX_RELEASED_CARDS`. It does not derive cards from scenario/candidate question-bank files.
+Pointer/touch remains supported, actual browser focus follows keyboard selection, and `prefers-reduced-motion` is respected.
 
-The **Due Reviews** branch filters that Atlas-compatible review-card registry only by the existing Atlas `due` date; it does not use scenario files, candidate data, lexical similarity, or a second scheduling model. Large due queues are paged locally.
+## Objective hub and released scenarios
 
-The domain layer uses the released Atlas domain names/weights and shows the number of objective nodes available in each domain. Large objective, subtopic, retrieval-card, scenario, due-review, and study queues are paged or locally mounted so the graph remains readable.
+The expanded objective hub exposes separate **Subtopics / Retrieval cards / Released scenarios** branches so unlike relationship types are not flattened together.
 
-The search palette indexes the released domain names, objective labels/summaries/traps, and mapped subtopic labels. The expanded review layer adds reviewed retrieval cards and released scenarios to the same palette. Selecting a result reconstructs the appropriate local graph and focuses the exact node.
+Released scenarios are linked through explicit objective metadata and exact subtopic tags only. Scenario stem/options are available before answer reveal; the keyed answer and explanation remain at disclosure layer 4 so the graph stays retrieval-first.
 
-If released Atlas data cannot be loaded, the prototype fails visibly rather than inventing replacement objective, subtopic, card, or scenario content.
+Large card/scenario branches are paged locally rather than mounting the full bank at once.
 
 ## Learner state
 
-Learner state is separate from curriculum content. Full behavior is documented in `LEARNER_STATE.md`.
+Learner state is separate from curriculum content. See `LEARNER_STATE.md`.
 
-Released review-card grading reuses Atlas's existing `cissp_atlas_progress_v1` state and its same stage schedule (`0, 1, 3, 7, 14, 30, 60, 120` days), so a card graded in the graph remains compatible with the production Atlas review workflow.
+Review-card grading reuses Atlas `cissp_atlas_progress_v1` and the same stage schedule:
 
-Graph-specific activity uses `cissp_secx_graph_state_v1` and records visits, maximum disclosure depth, and scenario answer-reveal exposure. Scenario reveal is explicitly **not** recorded as correctness, an attempt, mastery, or readiness.
+`0, 1, 3, 7, 14, 30, 60, 120` days.
 
-The graph can display card `new / learning / due / mature` state, prior disclosure depth, scenario reveal exposure, and the current number of due Atlas review cards without mutating the released content model. Grading a card updates Due Reviews and Study Queue counts in the same browser tab.
+Graph-specific activity uses `cissp_secx_graph_state_v1` for visits, maximum disclosure depth, and scenario answer-reveal exposure.
 
-### Study Queue learner-state lens
+A scenario answer reveal is exposure only. It is not correctness, an attempt result, mastery, readiness, or a spaced-review success grade.
 
-The `Q` shortcut or **Study · N due** button opens a local learner-state graph with five branches:
+### Due Reviews
 
-- **Due reviews** — cards whose Atlas schedule has `due <= today`.
-- **New cards** — review cards with no Atlas grade yet.
-- **Learning** — graded cards below maturity that are not currently due.
-- **Mature** — cards at Atlas stage 4 or above.
-- **Lowest review score** — the domain with the lowest current Atlas review-stage score, using the same objective/domain stage aggregation and higher-exam-weight tie-break as production Atlas.
+`R` or **Review due · N** opens a paged local graph of Atlas review cards whose existing `due <= today`.
 
-The review-score domain is a study-priority signal, not a claim that the learner has failed that domain or that the score predicts exam readiness. The Study Queue reads the shared Atlas card state but does not create a second progress store. Scenario reveal exposure is excluded from its review-stage calculations.
+The queue uses no scenario/candidate data and no second scheduling algorithm. Grading updates the due count in the same tab.
 
-## Relationship gate
+### Study Queue
 
-Typed semantic cross-links are deliberately **not** generated from word similarity alone. A repeated phrase such as `least privilege` can suggest a candidate relationship, but publishing `depends-on`, `contrasts-with`, `implemented-by`, `mitigates`, `measured-by`, or another semantic edge requires an explicit reviewed mapping. This prevents the graph from turning search similarity into unsupported curriculum claims.
+`Q` or **Study · N due** opens five learner-state branches:
 
-Current relationship rules are intentionally narrower:
+- Due reviews;
+- New cards;
+- Learning;
+- Mature;
+- Lowest review-stage-score domain.
 
-- domain → objective: released Atlas domain/objective record;
-- objective → subtopic: released `coverage-detail.js` mapping;
-- objective → retrieval card: explicit card `objective` field;
-- objective → released scenario: explicit scenario `objectives` field;
-- subtopic → released scenario: exact explicit scenario `subtopics` tag match.
+The lowest-domain calculation mirrors Atlas objective/domain stage aggregation and higher-exam-weight tie-break. It is a study-priority signal, not proof of weakness or exam readiness.
 
-Due Reviews and Study Queue are learner-state projections over released Atlas review cards, not semantic curriculum relationships.
+## Source Provenance
 
-No concept-level cross-domain relationship is published from lexical similarity alone.
+`S` or **Sources · 20** opens the released source registry. See `SOURCE_PROVENANCE.md`.
+
+For a selected source, the lens exposes:
+
+- objectives whose released `source_ids` contain the exact source ID;
+- Atlas-compatible review cards whose released `source_ids` contain the exact source ID.
+
+The lens does not read/write learner state, discover question-bank files, or infer source membership from wording.
+
+A shared citation is provenance evidence only. It does not create a semantic relationship between the cited items, and a citation does not imply the source is the sole authority unless Atlas explicitly says so.
+
+## Semantic relationship gate
+
+Future typed relationships such as `depends-on`, `contrasts-with`, `implemented-by`, `mitigates`, `measured-by`, `evidenced-by`, and `practiced-by` require relationship-specific review.
+
+`RELATIONSHIP_REVIEW.json` is a reviewer-only draft registry and currently contains **zero relationships**. `next.html` does not load it. See `RELATIONSHIP_REVIEW.md`.
+
+Two items independently marked VERIFIED in Atlas semantic ledgers do not automatically have a verified relationship. Shared labels, search similarity, embeddings, or shared `source_ids` may at most identify a review lead; they cannot auto-approve an edge.
+
+Relationship endpoints must use durable released IDs. Temporary UI IDs such as `sub:<objective>:<index>`, source/study/due nodes, pagers, and facets are forbidden as semantic endpoints.
 
 ## Progressive disclosure
 
-The same node should expose four progressively deeper layers.
+Each node exposes four depths:
 
-1. **Orient** — name, prompt/rule, and core labels.
-2. **Understand** — explanation, decision context, why it matters.
+1. **Orient** — identity, prompt/rule, labels.
+2. **Understand** — explanation and decision context.
 3. **Discriminate** — traps, misconceptions, contrasts, failure modes.
-4. **Apply / verify** — source traceability and application/practice.
+4. **Apply / verify** — sources and application/practice.
 
-For released scenarios, the keyed answer and explanation belong only to layer 4. The scenario stem/options must be visible before the answer so the graph remains retrieval-first.
+Space changes depth without losing graph position.
 
 ## Exact-head validation
 
-The draft includes dedicated deterministic audits and a browser harness:
+The draft now includes deterministic gates for each major layer:
 
-- `audit.py` validates counts, explicit objective/source mappings, released-manifest isolation, exact-tag subtopic relationships, answer disclosure, and learner-state compatibility/separation.
-- `due-audit.py` validates the complete 140-card Atlas-compatible review registry, dependency load order, Atlas-progress-only due filtering, same-window queue refresh, absence of question-bank/candidate dependencies, and browser coverage of Due Reviews.
-- `study-audit.py` validates Study Queue modes, Atlas-progress-only state, production-compatible stage scoring/tie-break behavior, absence of a second progress store, scenario-exposure separation, dependency load order, and browser coverage of the study lens.
-- `browser-smoke.html` exercises the expanded page in same-origin desktop and 390px mobile iframes.
-- `browser-smoke.sh` serves the whole `2024-outline` directory so the prototype can load the real sibling Atlas datasets and released question-bank files; it uses a fresh temporary browser profile so prior Atlas storage cannot contaminate the result.
-- `.github/workflows/secx-prototype-smoke.yml` is prepared to run the existing CISSP deterministic release audit, all SecX deterministic audits, JavaScript/shell syntax gates, the existing production CISSP browser smoke, and the expanded SecX browser smoke.
+- `audit.py` — released graph counts/mappings, manifest isolation, exact subtopic tags, answer boundary, learner-state compatibility;
+- `due-audit.py` — complete 140-card review registry and Due Reviews;
+- `study-audit.py` — Study Queue modes and production-compatible stage scoring;
+- `source-audit.py` — 20-source registry, exact `source_ids` mappings, provenance/state isolation;
+- `relationship-audit.py` — stable endpoints, relationship-specific review requirements, and proof that reviewer-only relationship data is not learner-loaded.
 
-The expanded smoke verifies released Atlas counts, domain/objective/facet traversal, reviewed retrieval cards, shared Atlas card-grade persistence, same-window Due Reviews/Study Queue count updates, `R` routing into the due-card graph, `Q` routing into the five-facet Study Queue, a paged New-card branch, separate graph-state persistence, released scenarios, the scenario answer-reveal boundary, search routing to an exact released item, `Home` return-to-root behavior, and the compact mobile shell.
+Browser harnesses:
 
-A smoke result counts as evidence only when it is attached to the exact candidate head being reviewed. Do not reuse an earlier run after the branch moves.
+- `browser-smoke.html` + `browser-smoke.sh` — expanded graph, cards, learner state, Due Reviews, Study Queue, scenarios, search, Home, mobile;
+- `source-browser-smoke.html` + `source-browser-smoke.sh` — source count, `S` routing, `ISC2_OUTLINE`, exact objective citation mapping, Escape hierarchy, mobile header/layout.
 
-## Recommended production architecture
+`.github/workflows/secx-prototype-smoke.yml` is prepared to run the production CISSP deterministic audit and browser smoke, all SecX deterministic/syntax gates, the expanded SecX smoke, and the Source Provenance smoke against one candidate head.
 
-1. Normalize remaining concept-level material only where explicit reviewed mappings exist; do not infer curriculum edges from lexical similarity.
-2. Keep existing stable item IDs; add labels/relationships rather than rewriting content IDs.
-3. Reject unknown objective IDs, source IDs, relationship targets, malformed label values, or links to unreleased question-bank records.
-4. Generate deeper graph layers from normalized reviewed mappings instead of hand-authoring a second curriculum.
-5. Keep current question-bank release isolation: unreleased candidates must not appear in the production graph.
-6. Keep learner state separate from content and preserve compatibility with Atlas card progress.
-7. Keep schedule/stage-derived views such as Due Reviews and Study Queue as learner-state filters rather than curriculum edges.
-8. Extend search with filters and typed relationship traversal only after those relationships are explicitly mapped and audited.
-9. Keep views local rather than rendering thousands of nodes simultaneously; mount or page only the current node, parents, siblings, children, and selected reviewed cross-links.
+A browser PASS counts only when the committed gate actually executes against the exact candidate head. Static syntax checks are preflight evidence, not browser evidence.
+
+## Production architecture rules
+
+1. Preserve stable released IDs and explicit source/release scope.
+2. Keep unreleased question candidates out of learner-facing runtime.
+3. Keep learner state separate from curriculum records.
+4. Treat Due Reviews and Study Queue as learner-state projections, not curriculum edges.
+5. Treat Source Provenance as an exact citation projection, not a semantic cross-link generator.
+6. Keep relationship candidate discovery, relationship review, release, and runtime publication as separate stages.
+7. Reject unknown IDs, invalid source references, temporary semantic endpoints, and reviewer-only relationship data in learner runtime.
+8. Keep local graph mounting/pagination rather than rendering the entire corpus at once.
+9. Require deterministic and browser gates before any production migration.
 
 ## Promotion boundary
 
-`next.html` is a review surface, not a production migration and not yet a replacement for `index.html`. Before promoting its card/scenario/learner-state/due-review/study-lens layers into the default prototype or production Atlas, require a successful exact-head deterministic audit plus both production and expanded browser smoke checks. Static syntax validation and code review are useful preflight evidence but are not browser PASS evidence.
+`next.html` remains review-only. Do not replace `index.html`, merge to production, or claim browser validation until the exact candidate head passes the committed gates through a browser-capable runner.
 
-## Suggested visual behavior
+## Naming note
 
-- Center node is visually dominant but not oversized.
-- Current node receives a clear focus halo.
-- Parent path remains visible with brighter edges.
-- Non-active distant nodes fade slightly.
-- Cross-domain links use a distinct but subtle line treatment from hierarchy edges.
-- A small breadcrumb remains visible at all times.
-- Learner-state controls such as Due Reviews and Study Queue should remain visually distinct from curriculum hierarchy nodes.
-- Animations should communicate topology changes, not add decorative motion.
-- Continue respecting `prefers-reduced-motion` as deeper transitions are added.
-
-## Important naming note
-
-The prototype uses the requested center label **SecX**. If this evolves into a public product name, trademark/branding review should be done separately from the interface implementation.
+The prototype uses the requested center label **SecX**. Public product naming/trademark review remains separate from interface implementation.
