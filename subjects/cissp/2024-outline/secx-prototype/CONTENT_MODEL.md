@@ -1,100 +1,149 @@
-# SecX content model — prototype
+# SecX content model
 
-## Goal
-Every learner-facing card, claim, objective, scenario, and concept should be addressable as a node in one knowledge graph. The visual web, search/filtering, source traceability, practice generation, and progress model should all use the same labels rather than separate ad-hoc taxonomies.
+## Purpose
 
-## Required labels per card/claim
-Each item should carry these labels where applicable:
+The SecX prototype is a graph view over the released CISSP Atlas curriculum, not a second curriculum. Stable Atlas IDs, source scope, release state, and explicit mappings remain authoritative.
 
-- `domain`: CISSP domain number and name.
-- `objective`: numbered ISC2 objective, e.g. `7.6`.
-- `subdomains`: one or more enriched subtopics under that objective.
-- `concepts`: normalized concept names, e.g. `containment`, `RTO`, `least privilege`.
-- `concept_type`: definition, principle, process, model, control, protocol, metric, role, attack, lifecycle, decision rule, etc.
-- `control_function`: preventive, detective, corrective, deterrent, compensating, recovery, directive, or `not-applicable`.
-- `security_properties`: CIA plus authenticity, accountability, nonrepudiation, privacy, safety, etc. when materially relevant.
-- `decision_context`: governance, architecture, operations, incident response, IAM, assessment, SDLC, BCP/DR, legal/privacy, third-party, etc.
-- `source_ids`: exact registered sources supporting the claim.
-- `source_scope`: direct-scope, primary technical authority, supporting context, or illustrative only.
-- `difficulty`: Foundation / Exam-calibrated / Stretch / Bellringer where applicable.
-- `relationships`: prerequisites, contrasts-with, part-of, implemented-by, measured-by, mitigates, depends-on, example-of.
-- `aliases`: useful alternate names/acronyms for search.
-- `review`: semantic-review state and date.
+## Hierarchy
 
-## Current implemented hierarchy
-The review prototype now consumes released Atlas data for the first three levels:
+Primary navigation remains:
 
-`SecX → Domain → Objective → Enriched subtopic`
+`SecX → domain → objective → subtopic → concept → claim/card → example/trap/source/practice`
 
-- Domain and objective records come from the released `data-meta.js` and `data-d1.js` … `data-d8.js` files.
-- Enriched subtopic labels come from the released `coverage-detail.js` mapping keyed by objective ID.
-- The prototype currently exposes 62 stable objective IDs and 344 enriched subtopic mappings.
-- Subtopic node IDs in the prototype are deterministic local navigation IDs of the form `sub:<objective-id>:<index>`; they are not yet canonical curriculum IDs and must not be treated as durable public identifiers until a graph migration assigns explicit stable IDs.
-- Objective summaries, direct rules, traps, and source IDs remain sourced from the released Atlas objective records rather than being rewritten in the graph layer.
+The current implemented review surfaces stop at explicit released mappings:
 
-No concept/card/scenario relationship is inferred merely from a matching word or label. Those deeper edges require explicit mapping and audit before they become part of the canonical graph.
+- domain → objective;
+- objective → subtopic;
+- objective → retrieval card;
+- objective → released scenario;
+- subtopic → released scenario only by exact explicit released subtopic tag.
 
-## Example
-```json
-{
-  "id": "PX-028",
-  "title": "Volatile evidence first",
-  "claim": "Volatile evidence can disappear rapidly, so authorized live collection normally prioritizes the most perishable relevant evidence while minimizing alteration.",
-  "labels": {
-    "domain": ["D7 Security Operations"],
-    "objective": ["7.1"],
-    "subdomains": ["evidence collection and handling", "digital forensics"],
-    "concepts": ["order of volatility", "volatile evidence", "forensic preservation"],
-    "concept_type": ["decision rule", "forensics principle"],
-    "control_function": ["not-applicable"],
-    "security_properties": ["integrity", "accountability"],
-    "decision_context": ["incident response", "investigation", "forensics"],
-    "source_ids": ["ISC2_OUTLINE", "NIST_800_86"],
-    "source_scope": ["direct-scope", "primary technical authority"],
-    "difficulty": ["Exam-calibrated"],
-    "aliases": ["order of volatility"],
-    "review": ["SEMANTIC_REVIEWED"]
-  },
-  "relationships": [
-    {"type":"part-of","target":"7.1"},
-    {"type":"depends-on","target":"chain-of-custody"},
-    {"type":"contrasts-with","target":"static-media-collection"}
-  ]
-}
-```
+Concept-level or cross-domain semantic edges remain gated until reviewed mappings exist.
 
-## Progressive depth layers
-The same node should expose four progressively deeper layers.
+## Node identity
 
-1. **Orient** — name, one-line rule, core labels.
-2. **Understand** — explanation, why it matters, key distinctions.
-3. **Discriminate** — traps, counterexamples, contrasts, common exam errors.
-4. **Apply / verify** — source traceability, related nodes, scenario prompt, practice links.
+Preserve existing stable IDs whenever Atlas already supplies them. Do not generate replacement IDs for objectives, retrieval cards, or released scenarios merely to fit a graph library.
 
-Space cycles these layers without losing the user's location in the graph.
+A normalized graph node may carry:
 
-## Navigation hierarchy
-The graph is hierarchical but not restricted to a tree:
+- `id`
+- `node_type`
+- `domain`
+- `objective`
+- `subtopic`
+- `concept`
+- `concept_type`
+- `control_function`
+- `security_properties`
+- `decision_context`
+- `source_ids`
+- `source_scope`
+- `difficulty`
+- `relationships`
+- `aliases`
+- `semantic_review_state`
+- `release_state`
 
-`SecX → Domain → Objective → Subtopic → Concept → Claim/Card → Example/Trap/Source/Practice`
+Not every node needs every field. Unknown values should stay unknown rather than being inferred for visual completeness.
 
-Cross-links may connect concepts across domains. Examples: `least privilege` connects governance, architecture, IAM, operations, and software security; `risk ownership` connects governance, third-party risk, vulnerability management, exceptions, and incident decisions.
+## Relationship types
 
-Typed cross-links must be explicitly mapped. Exact or fuzzy text similarity may be used to propose candidates for review, but it is not sufficient to publish a semantic relationship.
+Potential typed edges include:
 
-## Search model
-The implemented prototype search palette indexes released domain names, objective IDs/labels/summaries/traps, and enriched subtopic labels. Search results reconstruct the appropriate local graph and focus the selected node.
+- `contains`
+- `depends-on`
+- `contrasts-with`
+- `implemented-by`
+- `mitigates`
+- `measured-by`
+- `evidenced-by`
+- `practiced-by`
 
-Future concept/card/scenario search should use canonical IDs and aliases after those deeper graph layers are explicitly normalized.
+Only `contains`-style hierarchy and explicitly represented Atlas mappings are currently publishable by the prototype. Other semantic relationship types require explicit reviewed mappings. Search similarity is not relationship evidence.
+
+## Progressive disclosure
+
+Each node supports four stable disclosure depths:
+
+1. **Orient** — identity, compact rule/prompt, high-value labels.
+2. **Understand** — explanation, decision context, why it matters.
+3. **Discriminate** — traps, misconceptions, contrasts, failure modes.
+4. **Apply / verify** — source traceability and application/practice.
+
+For released scenarios, the keyed answer and explanation belong only to layer 4. The scenario stem/options must be visible before the answer so the graph remains retrieval-first.
+
+## Local graph mounting
+
+Do not render the entire knowledge base simultaneously. The view should mount a local cluster around the current node:
+
+- parent/path;
+- siblings;
+- children;
+- selected reviewed cross-links;
+- paged card/scenario records where necessary.
+
+This preserves spatial legibility and keyboard traversal as the corpus grows.
+
+## Learner state is not content
+
+Learner history must remain outside curriculum records.
+
+The expanded prototype currently uses two state scopes:
+
+- Atlas-compatible retrieval-card progress: `cissp_atlas_progress_v1`.
+- Graph-specific activity: `cissp_secx_graph_state_v1`.
+
+The shared card state intentionally uses Atlas's existing Wrong / Hard / Good / Easy stage schedule so the same released retrieval-card ID does not acquire two incompatible review histories.
+
+Graph-specific state may record:
+
+- visits;
+- maximum disclosure depth reached;
+- last-seen time;
+- scenario answer-reveal exposure.
+
+A scenario answer reveal is **not** correctness, an attempt result, mastery, readiness, or a spaced-repetition success grade. If scenario correctness is added later, it must be derived from an explicit committed answer attempt.
+
+Learner-state records must never rewrite:
+
+- objective/source mappings;
+- release state;
+- scenario answer keys;
+- semantic-review state;
+- curriculum relationships.
+
+## Search
+
+Search may index released domains, objectives, subtopics, retrieval cards, and released scenarios. Search results may route the learner to an exact local graph context.
+
+Search similarity may support discovery but must not create semantic graph edges automatically.
+
+Future search filters can include node type, domain, objective, source, due-card state, and explicitly reviewed relationship type.
+
+## Release isolation
+
+Released scenarios must be loaded only through the released question-bank manifest. Presence of a candidate file in the repository is not sufficient for learner-facing graph inclusion.
+
+Before any graph surface becomes production-facing, deterministic validation must reject:
+
+- unknown objective IDs;
+- unknown source IDs;
+- duplicate stable IDs;
+- malformed release-manifest paths;
+- unreleased scenario leakage;
+- unsupported relationship targets;
+- invalid learner-state/content coupling;
+- answer exposure before the required retrieval boundary.
 
 ## Keyboard grammar
-- Arrow keys: spatially select the connected node best aligned to the requested direction.
-- Enter: descend into the selected node's child cluster.
-- Escape: close detail depth first, then ascend one hierarchy level while preserving the parent selection.
-- Space: cycle depth 1→2→3→4→1.
-- `/`: open global search/palette.
-- `Home`: return to SecX root.
-- `Tab`: remain available for normal browser accessibility instead of being hijacked.
 
-## Design rule
-A user should always know three things without opening another page: **where they are, what this node means, and what directions are available next.**
+- Arrow keys: spatial move.
+- Enter: descend.
+- Escape: close detail first, then ascend one hierarchy level while preserving parent context.
+- Space: cycle disclosure depth.
+- `/`: search.
+- Home: root.
+- `1–4`: grade a retrieval card when card detail is open.
+- Tab remains normal browser accessibility behavior.
+
+Pointer/touch remains supported; keyboard-first must not become keyboard-only.
