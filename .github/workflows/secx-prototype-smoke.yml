@@ -1,0 +1,47 @@
+name: SecX Prototype Smoke
+
+on:
+  push:
+    branches:
+      - secx-web-prototype-20260901
+    paths:
+      - 'subjects/cissp/2024-outline/secx-prototype/**'
+      - 'subjects/cissp/2024-outline/study-site/**'
+      - '.github/workflows/secx-prototype-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: secx-prototype-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact candidate head
+        uses: actions/checkout@v4
+
+      - name: Report exact head and browser
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "HEAD=$(git rev-parse HEAD)"
+          (google-chrome --version || google-chrome-stable --version || chromium --version || chromium-browser --version)
+
+      - name: CISSP deterministic release audit
+        shell: bash
+        run: python subjects/cissp/2024-outline/study-site/audit.py
+
+      - name: Preserve production CISSP browser smoke
+        shell: bash
+        working-directory: subjects/cissp/2024-outline/study-site
+        run: bash browser-smoke.sh 8766
+
+      - name: SecX expanded browser smoke
+        shell: bash
+        working-directory: subjects/cissp/2024-outline/secx-prototype
+        run: bash browser-smoke.sh 8776
