@@ -12,6 +12,8 @@ const style=document.createElement('style');
 style.textContent='.node.facet{width:170px;min-height:86px}.node.card,.node.scenario{width:132px;min-height:62px;padding:9px 10px}.node.pager{width:124px;min-height:50px}@media(max-width:800px){.node.facet{width:128px}.node.card,.node.scenario{width:104px;min-height:54px}}';
 document.head.appendChild(style);
 const input=document.getElementById('searchInput'); if(input) input.placeholder='Search domains, objectives, subtopics, cards, or released scenarios…';
+const baseRender=render;
+window.render=function(focus=false){baseRender(focus);requestAnimationFrame(()=>{for(const n of nodes){const el=[...document.querySelectorAll('.node')].find(x=>x.dataset.id===n.id);if(el)el.classList.add(n.kind)}})};
 
 function qObjectives(q){return Array.isArray(q.objectives)?q.objectives:(q.objective?[q.objective]:[])}
 function qForObjective(id){return releasedQuestions.filter(q=>qObjectives(q).includes(id))}
