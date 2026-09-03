@@ -32,6 +32,11 @@ frame.addEventListener('load',()=>{
             study.onload=()=>{
               const sources=doc.createElement('script');
               sources.src='source-lens.js';
+              sources.onload=()=>{
+                const coverage=doc.createElement('script');
+                coverage.src='coverage-lens.js';
+                doc.body.appendChild(coverage);
+              };
               doc.body.appendChild(sources);
             };
             doc.body.appendChild(study);
