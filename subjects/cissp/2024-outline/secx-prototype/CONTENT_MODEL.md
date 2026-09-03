@@ -61,6 +61,8 @@ Potential typed edges include:
 
 Only `contains`-style hierarchy and explicitly represented Atlas mappings are currently publishable by the prototype. Other semantic relationship types require explicit reviewed mappings. Search similarity is not relationship evidence.
 
+Schedule-derived views such as **Due Reviews** are not relationship types. They are temporary learner-state projections over already released retrieval-card nodes and must never be serialized back into curriculum relationships.
+
 ## Progressive disclosure
 
 Each node supports four stable disclosure depths:
@@ -80,7 +82,8 @@ Do not render the entire knowledge base simultaneously. The view should mount a 
 - siblings;
 - children;
 - selected reviewed cross-links;
-- paged card/scenario records where necessary.
+- paged card/scenario records where necessary;
+- schedule-derived learner-state projections such as the current due-card page.
 
 This preserves spatial legibility and keyboard traversal as the corpus grows.
 
@@ -95,6 +98,8 @@ The expanded prototype currently uses two state scopes:
 
 The shared card state intentionally uses Atlas's existing Wrong / Hard / Good / Easy stage schedule so the same released retrieval-card ID does not acquire two incompatible review histories.
 
+The released-card learner registry is derived from already loaded `CISSP_CHUNKS[].high` data. Due Reviews filters those same released IDs using Atlas's existing `due` date. The due queue must not read scenario candidate files, create replacement card IDs, infer weakness, or create a second scheduling algorithm.
+
 Graph-specific state may record:
 
 - visits;
@@ -103,6 +108,8 @@ Graph-specific state may record:
 - scenario answer-reveal exposure.
 
 A scenario answer reveal is **not** correctness, an attempt result, mastery, readiness, or a spaced-repetition success grade. If scenario correctness is added later, it must be derived from an explicit committed answer attempt.
+
+A due date is likewise only a scheduling fact. It is **not** a semantic claim that the card, objective, or domain is weak or unmastered.
 
 Learner-state records must never rewrite:
 
@@ -124,6 +131,8 @@ Future search filters can include node type, domain, objective, source, due-card
 
 Released scenarios must be loaded only through the released question-bank manifest. Presence of a candidate file in the repository is not sufficient for learner-facing graph inclusion.
 
+Released retrieval-card learner-state views must derive from the released `CISSP_CHUNKS[].high` registry already used by Atlas rather than from repository file discovery.
+
 Before any graph surface becomes production-facing, deterministic validation must reject:
 
 - unknown objective IDs;
@@ -133,7 +142,8 @@ Before any graph surface becomes production-facing, deterministic validation mus
 - unreleased scenario leakage;
 - unsupported relationship targets;
 - invalid learner-state/content coupling;
-- answer exposure before the required retrieval boundary.
+- answer exposure before the required retrieval boundary;
+- due-review inputs that are not released retrieval cards or Atlas-compatible card state.
 
 ## Keyboard grammar
 
@@ -144,6 +154,7 @@ Before any graph surface becomes production-facing, deterministic validation mus
 - `/`: search.
 - Home: root.
 - `1–4`: grade a retrieval card when card detail is open.
+- `R`: open the schedule-derived Due Reviews graph.
 - Tab remains normal browser accessibility behavior.
 
 Pointer/touch remains supported; keyboard-first must not become keyboard-only.
