@@ -6,17 +6,19 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "$HERE/.." && pwd)"
 OUT="${TMPDIR:-/tmp}/secx-expanded-browser-smoke.html"
 LOG="${TMPDIR:-/tmp}/secx-expanded-browser-smoke-server.log"
+PROFILE="$(mktemp -d "${TMPDIR:-/tmp}/secx-chrome-profile.XXXXXX")"
 
 CHROME="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
 if [[ -z "$CHROME" ]]; then
   echo "FAIL secx_browser_smoke: Chrome/Chromium not found" >&2
+  rm -rf "$PROFILE"
   exit 1
 fi
 
 cd "$ROOT"
 python -m http.server "$PORT" >"$LOG" 2>&1 &
 SERVER_PID=$!
-trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+trap 'kill "$SERVER_PID" 2>/dev/null || true; rm -rf "$PROFILE"' EXIT
 sleep 1
 
 if ! timeout 70s "$CHROME" \
@@ -24,6 +26,7 @@ if ! timeout 70s "$CHROME" \
   --no-sandbox \
   --disable-gpu \
   --disable-dev-shm-usage \
+  --user-data-dir="$PROFILE" \
   --virtual-time-budget=50000 \
   --dump-dom \
   "http://127.0.0.1:${PORT}/secx-prototype/browser-smoke.html" >"$OUT"; then
