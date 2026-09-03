@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B2",
+  "unit": 1,
+  "date": "2026-09-03",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b2/passages.jsonl",
+  "canonical_sha256": "776092fad90199142aa5161c6ab8b1a4a485e536348b89b0760dba31e96a35fb",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 16,
+  "decisions": [
+    {
+      "passage_id": "ar-b2-u01-p01",
+      "learner_facing_sha256": "c323b78aab5651db7214ed8ee444c5dfdefcf8e8cdf818de5de5b3b2a679b8ea",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u01-p01-gB-01",
+          "field": "answer q6",
+          "dimension": "grammar_function_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the unnatural تقدم حدًا wording with an explicit, idiomatic description of لكن as introducing a constraint on the preceding claim."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u01-p02",
+      "learner_facing_sha256": "1c09743aeed32d424cfe4d0b452c16abe72824caae28fd7c166ba56035d1f5dc",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u01-p02-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "الحشرات ... جذبت التصوير is an unnatural collocation; state that the colorful insects prompted participants to photograph them more often."
+        },
+        {
+          "finding_id": "ar-b2-u01-p02-gB-02",
+          "field": "answer q5",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "معروفة الفرص والرصد is malformed; state directly that organized monitoring uses sites and times where observation opportunities are known."
+        },
+        {
+          "finding_id": "ar-b2-u01-p02-gB-03",
+          "field": "text + question q8",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The intended concessive meaning is ‘even if’; in this context حتى إن is appropriate, whereas حتى إذا normally introduces a when/until-when relation. Keep the assessment wording aligned with the repaired text."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u01-p03",
+      "learner_facing_sha256": "56cc389e9f2b85b18204ee175041d215c256208bdb9f169a29a06b67f28977a6",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u01-p03-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "أكبر نتيجة مباشرة is an awkward collocation for project impact; أكبر أثر مباشر expresses the intended comparison naturally."
+        },
+        {
+          "finding_id": "ar-b2-u01-p03-gB-02",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The intended concessive meaning is ‘even if the hypothesis does not succeed’; use حتى إن rather than حتى إذا."
+        },
+        {
+          "finding_id": "ar-b2-u01-p03-gB-03",
+          "field": "answer q6",
+          "dimension": "grammar_function_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "مع أن highlights a concession/contrast; تبرز مفارقة is idiomatic here, while تقيم مفارقة is not the natural collocation."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u01-p04",
+      "learner_facing_sha256": "19eb2d6d4ecb9aa5d8d459ea6f197c221c7d7d8a84ba1fc6c2d3b3c587055d1c",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u01-p04-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "إمكانية لنتيجة is incomplete in this context; إضافة وقوع yields the natural construction إمكانية لوقوع نتيجة كبيرة while preserving the lexical target."
+        },
+        {
+          "finding_id": "ar-b2-u01-p04-gB-02",
+          "field": "answer q4",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use the idiomatic في ظل احتمال غير مؤكد rather than تحت احتمال غير مؤكد."
+        },
+        {
+          "finding_id": "ar-b2-u01-p04-gB-03",
+          "field": "answer q6",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Recast اختلاف قابلية الرجوع عن القرارات as اختلاف القرارات في قابلية التراجع عنها for clearer standard MSA."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u01-p05",
+      "learner_facing_sha256": "4944ebb3d394625b3d822127ce14c5e14f1217e376cde43cfc67becbe777bdcc",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u01-p05-gB-01",
+          "field": "answer q1",
+          "dimension": "grammar_reference",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The old coordination leaves the feminine result as the apparent subject of ‘examines the errors’; make the team the explicit subject of both actions."
+        },
+        {
+          "finding_id": "ar-b2-u01-p05-gB-02",
+          "field": "question q8",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The referent المبدأ is masculine, so the reference-resolution question must use يشير, not تشير."
+        },
+        {
+          "finding_id": "ar-b2-u01-p05-gB-03",
+          "field": "text",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Data can contain sensitive information, but the risk to participants arises from publication/disclosure; state that publishing the data may pose the risk instead of saying the data ‘contain a risk.’"
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u01-p06",
+      "learner_facing_sha256": "c2c0c56eda4460209d3617e2371a6c96f5035d91c3a1ad44f9018e0cd22a3890",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u01-p06-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use the standard الجمع بين ... و... construction and clarify إمكانية وقوع الحدث while preserving the target concept."
+        },
+        {
+          "finding_id": "ar-b2-u01-p06-gB-02",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "أظهرت احتمال خطر is awkward; أشارت إلى احتمال وجود خطر is idiomatic and retains the intended evidential caution."
+        },
+        {
+          "finding_id": "ar-b2-u01-p06-gB-03",
+          "field": "question q10",
+          "dimension": "assessment_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "بداية الاختيار is ambiguous; ask about recognizing the point at which choice begins, which is the distinction developed in the passage."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate B2 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+}
