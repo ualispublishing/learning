@@ -108,9 +108,13 @@ function decorateDetail(){
 
 function updateProgressScope(){
   const scope=document.getElementById('scope');if(!scope)return;
-  const base=scope.dataset.secBase||scope.textContent.replace(/ · \d+ due cards$/,'');scope.dataset.secBase=base;
+  const current=scope.textContent;
+  if(scope.dataset.secRendered!==current)scope.dataset.secBase=current.replace(/ · \d+ due cards$/,'');
+  const base=scope.dataset.secBase||current.replace(/ · \d+ due cards$/,'');
   const dueCount=typeof retrievalCards!=='undefined'?retrievalCards.filter(c=>isDue(c.id)).length:0;
-  scope.textContent=`${base} · ${dueCount} due cards`;
+  const rendered=`${base} · ${dueCount} due cards`;
+  scope.textContent=rendered;
+  scope.dataset.secRendered=rendered;
 }
 
 const baseRender=render;
