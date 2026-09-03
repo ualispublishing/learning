@@ -63,6 +63,18 @@ The same node should expose four progressively deeper layers.
 
 Space cycles these layers without losing the user's location in the graph.
 
+## Exact-head validation
+
+The draft includes a dedicated browser harness and runner:
+
+- `browser-smoke.html` exercises the expanded page in same-origin desktop and 390px mobile iframes.
+- `browser-smoke.sh` serves the whole `2024-outline` directory so the prototype can load the real sibling Atlas datasets and released question-bank files.
+- `.github/workflows/secx-prototype-smoke.yml` runs on prototype/study-site pushes to the draft branch.
+
+The workflow is intentionally broader than a prototype-only visual check. It runs the existing CISSP deterministic release audit, preserves the existing production CISSP browser smoke, then runs the expanded SecX browser smoke. The expanded smoke verifies released Atlas counts, domain/objective/facet traversal, reviewed retrieval cards, released scenarios, the scenario answer-reveal boundary, search routing to an exact released item, `Home` return-to-root behavior, and the compact mobile shell.
+
+A smoke result counts as evidence only when it is attached to the exact candidate head being reviewed. Do not reuse an earlier run after the branch moves.
+
 ## Recommended production architecture
 
 1. Normalize the remaining Atlas content layers into a graph-oriented model while preserving released objective IDs and current explicit subtopic/card/scenario mappings.
@@ -76,7 +88,7 @@ Space cycles these layers without losing the user's location in the graph.
 
 ## Promotion boundary
 
-`next.html` is a review surface, not a production migration and not yet a replacement for `index.html`. Before promoting its card/scenario layer into the default prototype or production Atlas, run the established browser smoke/interaction checks plus deterministic release-isolation checks against the exact candidate head. Do not treat static syntax validation alone as browser evidence.
+`next.html` is a review surface, not a production migration and not yet a replacement for `index.html`. Before promoting its card/scenario layer into the default prototype or production Atlas, require a successful exact-head deterministic audit plus both production and expanded browser smoke checks. Do not treat static syntax validation alone as browser evidence.
 
 ## Suggested visual behavior
 
