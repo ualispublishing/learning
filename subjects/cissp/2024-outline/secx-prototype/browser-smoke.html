@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SecX Expanded Browser Smoke</title></head>
+<body>
+<pre id="result" data-smoke="running">RUNNING</pre>
+<iframe id="app" src="next.html?browser-smoke=desktop" style="width:1280px;height:900px;border:0"></iframe>
+<iframe id="mobile" src="next.html?browser-smoke=mobile" style="width:390px;height:844px;border:0"></iframe>
+<script>
+(()=>{'use strict';
+const result=document.querySelector('#result'),frame=document.querySelector('#app'),mobile=document.querySelector('#mobile');
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;while(Date.now()<end){try{const v=fn();if(v)return v}catch{}await sleep(50)}throw new Error(`Timed out waiting for ${label}`)}
+function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
+function key(win,key,code=key){win.dispatchEvent(new win.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
+function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow}}
+async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),scope=x.d?.querySelector('#scope')?.textContent||'';return x.d&&x.w&&/\d+ released scenarios/.test(scope)&&!scope.includes('loading')&&!scope.includes('unavailable')?x:null},`${label} released Atlas graph`)}
+function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
+function clickId(d,id){const el=node(d,id);assert(el,`node ${id} exists`);el.click();return el}
+async function enter(win){key(win,'Enter','Enter');await sleep(80)}
+async function run(){
+  const {d,w}=await ready(frame,'desktop');
+  const meta=w.CISSP_META?.meta||{},scope=d.querySelector('#scope')?.textContent||'';
+  await waitFor(()=>d.querySelectorAll('.node.domain').length===8,'eight domain nodes');
+  assert(d.querySelectorAll('.node').length===9,'root plus eight domains');
+  assert(scope.includes(`${meta.card_count} cards`),'scope matches released retrieval-card count');
+  assert(scope.includes(`${meta.question_count} released scenarios`),'scope matches released standard-question count');
+  assert(d.querySelector('#crumb')?.textContent==='SecX','root breadcrumb');
+
+  clickId(d,'d1'); await enter(w);
+  await waitFor(()=>node(d,'1.9')&&d.querySelector('#crumb')?.textContent.includes('Security and Risk Management'),'domain to objective traversal');
+  clickId(d,'1.9'); await enter(w);
+  await waitFor(()=>d.querySelectorAll('.node.facet').length===3,'objective hub facets');
+  assert(node(d,'facet:1.9:subtopics'),'Subtopics facet');
+  assert(node(d,'facet:1.9:cards'),'Retrieval cards facet');
+  assert(node(d,'facet:1.9:scenarios'),'Released scenarios facet');
+
+  clickId(d,'facet:1.9:cards'); await enter(w);
+  await waitFor(()=>d.querySelector('.node.card'),'reviewed retrieval-card branch');
+  const card=d.querySelector('.node.card');card.click();
+  await waitFor(()=>d.querySelector('#detail.open'),'card detail opens');
+  assert(!d.querySelector('#detail').textContent.includes('Correct answer:'),'card detail does not expose scenario answer language');
+  key(w,' ','Space');key(w,' ','Space');key(w,' ','Space');
+  await waitFor(()=>d.querySelector('#detail')?.textContent.includes('Sources & relationships'),'card reaches depth four');
+  key(w,'Escape','Escape');await sleep(40);key(w,'Escape','Escape');
+  await waitFor(()=>node(d,'facet:1.9:cards'),'cards ascend to objective hub');
+
+  clickId(d,'facet:1.9:scenarios'); await enter(w);
+  await waitFor(()=>d.querySelector('.node.scenario'),'released scenario branch');
+  const scenario=d.querySelector('.node.scenario'),scenarioId=scenario.dataset.id;scenario.click();
+  await waitFor(()=>d.querySelector('#detail.open'),'scenario detail opens');
+  assert(d.querySelector('#detail').textContent.includes('Options:'),'scenario options available before reveal');
+  assert(!d.querySelector('#detail').textContent.includes('Correct answer:'),'scenario answer hidden before depth four');
+  key(w,' ','Space');key(w,' ','Space');key(w,' ','Space');
+  await waitFor(()=>d.querySelector('#detail')?.textContent.includes('Correct answer:'),'scenario answer revealed only at depth four');
+
+  key(w,'/','Slash');
+  await waitFor(()=>!d.querySelector('#search').hidden,'search palette opens');
+  const input=d.querySelector('#searchInput');input.value='C-472';input.dispatchEvent(new w.Event('input',{bubbles:true}));
+  const hit=await waitFor(()=>[...d.querySelectorAll('.search-result')].find(x=>x.textContent.includes('C-472')),'released scenario search result');
+  hit.click();
+  await waitFor(()=>node(d,'C-472')?.classList.contains('active'),'search routes to exact released scenario');
+  assert(d.querySelector('#crumb')?.textContent.includes('Released scenarios'),'scenario search preserves graph context');
+
+  key(w,'Home','Home');
+  await waitFor(()=>d.querySelectorAll('.node.domain').length===8&&d.querySelector('#crumb')?.textContent==='SecX','Home returns to root');
+  assert(!d.querySelector('.node.scenario'),'Home unmounts deep local scenario cluster');
+
+  const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mw=mobileApp.w;
+  await waitFor(()=>md.querySelectorAll('.node.domain').length===8,'mobile domain nodes');
+  assert(mw.getComputedStyle(md.querySelector('.legend')).display==='none','mobile keyboard legend hidden');
+  assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile graph shell has no horizontal overflow');
+
+  result.dataset.smoke='pass';
+  result.textContent=`PASS SecX expanded browser smoke: released-counts domains objective-hub cards scenarios answer-gate search Home mobile; sampled scenario ${scenarioId}`;
+}
+run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
+})();
+</script>
+</body>
+</html>
