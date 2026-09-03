@@ -113,9 +113,12 @@ function updateProgressScope(){
   const base=scope.dataset.secBase||current.replace(/ · \d+ due cards$/,'');
   const dueCount=typeof retrievalCards!=='undefined'?retrievalCards.filter(c=>isDue(c.id)).length:0;
   const rendered=`${base} · ${dueCount} due cards`;
-  scope.textContent=rendered;
   scope.dataset.secRendered=rendered;
+  if(current!==rendered)scope.textContent=rendered;
 }
+
+const scopeNode=document.getElementById('scope');
+if(scopeNode)new MutationObserver(()=>requestAnimationFrame(updateProgressScope)).observe(scopeNode,{childList:true,characterData:true,subtree:true});
 
 const baseRender=render;
 window.render=function(focus=false){baseRender(focus);requestAnimationFrame(()=>{decorateNodes();updateProgressScope()})};
