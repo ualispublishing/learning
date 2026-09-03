@@ -5,7 +5,6 @@ from __future__ import annotations
 import json
 import re
 import sys
-from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -158,7 +157,12 @@ for q in all_standard:
         questions_with_explicit_subtopic_edge += 1
 
 next_layer = read(ROOT / "next-layer.js")
+learner_state = read(ROOT / "learner-state.js")
+next_html = read(ROOT / "next.html")
 index_html = read(ROOT / "index.html")
+production_app = read(STUDY / "app.js")
+smoke_shell = read(ROOT / "browser-smoke.sh")
+
 check("RELEASED_BATCHES.json" in next_layer, "expanded runtime does not reference released manifest")
 check("fetch(`../study-site/${p}`" in next_layer, "expanded runtime release-file loading no longer derives from manifest paths")
 check("question-bank/candidates/" not in next_layer, "expanded runtime hard-codes a candidate-file path instead of release manifest")
@@ -167,6 +171,21 @@ check("Correct answer:" in next_layer and next_layer.count("Correct answer:") ==
 check(re.search(r"practice:`Correct answer:", next_layer) is not None, "scenario answer is not confined to the application/practice layer")
 check("depth>=4" in index_html and "info.practice" in index_html, "base disclosure renderer no longer gates application content at depth four")
 check("similarity" not in next_layer.lower(), "expanded runtime unexpectedly contains similarity-based relationship logic")
+
+atlas_progress_key = "cissp_atlas_progress_v1"
+graph_progress_key = "cissp_secx_graph_state_v1"
+interval_literal = "INTERVALS=[0,1,3,7,14,30,60,120]"
+check(atlas_progress_key in production_app, "production Atlas progress key not found")
+check(atlas_progress_key in learner_state, "SecX learner state does not reuse Atlas card progress key")
+check(interval_literal in production_app, "production Atlas interval schedule changed")
+check(interval_literal in learner_state, "SecX card interval schedule does not match production Atlas")
+check(graph_progress_key in learner_state, "SecX graph-specific learner state key missing")
+check("reveals" in learner_state and "exposure only" in learner_state, "scenario reveal evidence is not explicitly separated from mastery")
+check("correct" not in re.search(r"graphState\.scenarios.*?saveGraph\(\)", learner_state, re.S).group(0).lower() if re.search(r"graphState\.scenarios.*?saveGraph\(\)", learner_state, re.S) else False, "scenario graph state appears to record correctness")
+check("learner-state.js" in next_html, "expanded review page does not load learner state")
+check(next_html.find("next-layer.js") < next_html.find("learner-state.js"), "learner state must load after the expanded graph layer")
+check("layer.onload" in next_html, "learner state load is not gated on expanded graph readiness")
+check("--user-data-dir=" in smoke_shell, "SecX browser smoke does not isolate browser storage")
 
 if errors:
     print("FAIL secx_graph_audit")
@@ -183,5 +202,6 @@ print(
     f"bellringers={len(released_bellringers)} "
     f"manifest_files={len(seen_manifest_files)} "
     f"explicit_subtopic_edges={explicit_subtopic_edges} "
-    f"questions_with_explicit_subtopic_edge={questions_with_explicit_subtopic_edge}"
+    f"questions_with_explicit_subtopic_edge={questions_with_explicit_subtopic_edge} "
+    "learner_state=atlas-compatible+graph-separated"
 )
