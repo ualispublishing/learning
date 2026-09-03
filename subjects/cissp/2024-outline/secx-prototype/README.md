@@ -8,10 +8,20 @@ The landing state places **SecX** in the middle of the canvas with the eight CIS
 
 - Arrow: move to the connected node best aligned with that direction.
 - Enter: descend into a node's child cluster.
-- Escape: ascend or close the depth panel.
+- Escape: close the depth panel first, then ascend one hierarchy level while preserving the parent-domain selection.
 - Space: progressively reveal more depth while remaining on the same concept.
 
-The prototype includes a few sample objective clusters for Domains 1, 3, 5, and 7; other domains show generic children to demonstrate the hierarchy.
+Keyboard selection moves actual browser focus to the selected node, pointer/touch selection remains available, and the prototype respects `prefers-reduced-motion`.
+
+## Current Atlas integration
+
+The prototype now loads the released Atlas metadata and all eight released domain chunks directly from the sibling `study-site/` directory. That gives the knowledge web all **62 current stable objective records** without duplicating or rewriting their IDs.
+
+For each objective node the prototype consumes the released Atlas objective ID, label, summary/direct rule, misconception trap, and source IDs. Source IDs are resolved through the released Atlas source registry. If the released domain data cannot be loaded, the prototype fails visibly rather than inventing replacement objective content.
+
+The domain layer also uses the released Atlas domain names/weights and shows the number of objective nodes available in each domain. Large objective sets use two radial rings so the domain view does not collapse into a single crowded circle.
+
+This is still an objective-level integration. Subtopics, retrieval cards, scenarios, learner state, typed concept relationships, and cross-domain links remain future graph layers rather than being silently inferred from incomplete mappings.
 
 ## Refined product concept
 
@@ -43,14 +53,14 @@ Each claim/card should expose compact chips for its most useful labels. Full lab
 
 ## Recommended production architecture
 
-1. Normalize current Atlas content into a graph-oriented JSON model.
+1. Normalize the remaining Atlas content layers into a graph-oriented model while preserving the current released objective IDs already used by the prototype.
 2. Keep existing stable item IDs; add labels/relationships rather than rewriting content IDs.
 3. Build a migration/audit script that rejects unknown objective IDs, source IDs, relationship targets, or malformed label values.
-4. Generate the graph UI from the normalized model.
+4. Generate deeper graph layers from the normalized model instead of hand-authoring a second curriculum.
 5. Keep current question-bank release isolation: unreleased candidates must not appear in the production graph.
 6. Store learner state separately from content: node visits, depth reached, retrieval grade, practice evidence, weak relationships, and spaced-review due dates.
 7. Add search/palette and breadcrumb/history after the spatial navigation is stable.
-8. Add zoomed local clusters instead of rendering thousands of nodes simultaneously; only the current node, parents, siblings, children, and selected cross-links need to be mounted.
+8. Keep views local rather than rendering thousands of nodes simultaneously; mount only the current node, parents, siblings, children, and selected cross-links.
 
 ## Suggested visual behavior
 
@@ -61,7 +71,7 @@ Each claim/card should expose compact chips for its most useful labels. Full lab
 - Cross-domain links use a distinct but subtle line treatment from hierarchy edges.
 - A small breadcrumb remains visible at all times.
 - Animations should communicate topology changes, not add decorative motion.
-- Respect `prefers-reduced-motion` in production.
+- Continue respecting `prefers-reduced-motion` as deeper transitions are added.
 
 ## Important naming note
 
