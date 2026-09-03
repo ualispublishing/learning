@@ -21,6 +21,19 @@ Each item should carry these labels where applicable:
 - `aliases`: useful alternate names/acronyms for search.
 - `review`: semantic-review state and date.
 
+## Current implemented hierarchy
+The review prototype now consumes released Atlas data for the first three levels:
+
+`SecX → Domain → Objective → Enriched subtopic`
+
+- Domain and objective records come from the released `data-meta.js` and `data-d1.js` … `data-d8.js` files.
+- Enriched subtopic labels come from the released `coverage-detail.js` mapping keyed by objective ID.
+- The prototype currently exposes 62 stable objective IDs and 344 enriched subtopic mappings.
+- Subtopic node IDs in the prototype are deterministic local navigation IDs of the form `sub:<objective-id>:<index>`; they are not yet canonical curriculum IDs and must not be treated as durable public identifiers until a graph migration assigns explicit stable IDs.
+- Objective summaries, direct rules, traps, and source IDs remain sourced from the released Atlas objective records rather than being rewritten in the graph layer.
+
+No concept/card/scenario relationship is inferred merely from a matching word or label. Those deeper edges require explicit mapping and audit before they become part of the canonical graph.
+
 ## Example
 ```json
 {
@@ -67,13 +80,20 @@ The graph is hierarchical but not restricted to a tree:
 
 Cross-links may connect concepts across domains. Examples: `least privilege` connects governance, architecture, IAM, operations, and software security; `risk ownership` connects governance, third-party risk, vulnerability management, exceptions, and incident decisions.
 
+Typed cross-links must be explicitly mapped. Exact or fuzzy text similarity may be used to propose candidates for review, but it is not sufficient to publish a semantic relationship.
+
+## Search model
+The implemented prototype search palette indexes released domain names, objective IDs/labels/summaries/traps, and enriched subtopic labels. Search results reconstruct the appropriate local graph and focus the selected node.
+
+Future concept/card/scenario search should use canonical IDs and aliases after those deeper graph layers are explicitly normalized.
+
 ## Keyboard grammar
 - Arrow keys: spatially select the connected node best aligned to the requested direction.
 - Enter: descend into the selected node's child cluster.
-- Escape: close detail depth first, then ascend one hierarchy level.
+- Escape: close detail depth first, then ascend one hierarchy level while preserving the parent selection.
 - Space: cycle depth 1→2→3→4→1.
-- `/`: future global search/palette.
-- `Home`: future return-to-SecX shortcut.
+- `/`: open global search/palette.
+- `Home`: return to SecX root.
 - `Tab`: remain available for normal browser accessibility instead of being hijacked.
 
 ## Design rule
