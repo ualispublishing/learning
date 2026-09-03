@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B1",
+  "unit": 9,
+  "date": "2026-09-03",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b1/passages.jsonl",
+  "canonical_sha256": "391ffa3262d1ce26f96971704fc38df04d94014037c45fd7ecef9bdae1e78ee3",
+  "records_reviewed": 6,
+  "records_with_findings": 3,
+  "fresh_findings": 5,
+  "decisions": [
+    {
+      "passage_id": "ar-b1-u09-p01",
+      "learner_facing_sha256": "33a3f2fc4a33cf5da4e2a08e946218ca823b8863c67fd054d4537fa8784318de",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b1-u09-p02",
+      "learner_facing_sha256": "7bfa281615359a47783e9b9714bed8ae3e7dbf2e0e5ed30232cafc5ab3650690",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u09-p02-gB-01",
+          "field": "text",
+          "dimension": "reference_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Make the institutional duty refer explicitly to carrying out the repair rather than ambiguously to repairing the task itself."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u09-p03",
+      "learner_facing_sha256": "a3a95a333c9982e038f087735a29fdb08245dbf4daead07b8df1e8f7e6bceafb",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u09-p03-gB-01",
+          "field": "answer q1",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Equal numerical allocation changes the opportunity to obtain a seat; it does not itself create different underlying needs."
+        },
+        {
+          "finding_id": "ar-b1-u09-p03-gB-02",
+          "field": "answer q4",
+          "dimension": "answer_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use the direct expression فرصة الحصول على مقعد rather than the awkward معدل فرصة المقعد."
+        },
+        {
+          "finding_id": "ar-b1-u09-p03-gB-03",
+          "field": "answer q10",
+          "dimension": "semantic_precision",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Define معدل as a ratio or measure relative to a total or time period rather than the vague مقدار بالنسبة إلى عدد أو فترة."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u09-p04",
+      "learner_facing_sha256": "b615f16f805fdb7a8c54e2c263d4c119d0292b9634edcd1c00d1733e8b635d58",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b1-u09-p04-gB-01",
+          "field": "question q3",
+          "dimension": "assessment_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The intended contrast is that increasing site speed would not solve the comprehension problem; asking why decreasing speed is not the solution makes the item trivial and reverses the design."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b1-u09-p05",
+      "learner_facing_sha256": "ace3795d1c13753746dc62c36bd9393b2a34155ea4aefe0255fd29ab0efc23ee",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b1-u09-p06",
+      "learner_facing_sha256": "978f66497e31dcbd94a35759b8626babad97d75debd99349cf7a2c77e841f8bf",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate B1 grammar-in-context/discourse analysis is retained rather than treated as low-level label memorization."
+}
