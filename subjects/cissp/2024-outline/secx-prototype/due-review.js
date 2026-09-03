@@ -74,9 +74,12 @@ document.addEventListener('keydown',e=>{
 },true);
 
 document.addEventListener('click',e=>{
-  const grade=e.target.closest?.('[data-sec-grade]');if(!grade||level!=='due-reviews')return;
-  const id=current()?.id;
-  setTimeout(()=>{const keep=id&&dueCards().some(c=>c.id===id)?id:null;dueReviewLayout(keep,true,duePage)},0);
+  const grade=e.target.closest?.('[data-sec-grade]');if(!grade)return;
+  const inDue=level==='due-reviews',id=inDue?current()?.id:null;
+  setTimeout(()=>{
+    updateDueButton();
+    if(inDue){const keep=id&&dueCards().some(c=>c.id===id)?id:null;dueReviewLayout(keep,true,duePage)}
+  },0);
 });
 
 addEventListener('storage',e=>{if(e.key==='cissp_atlas_progress_v1')updateDueButton()});
