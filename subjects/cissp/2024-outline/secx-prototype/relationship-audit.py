@@ -79,7 +79,8 @@ try:
     next_html = read(ROOT / "next.html")
     runtime_text = "\n".join(read(ROOT / name) for name in (
         "index.html", "next-layer.js", "learner-registry.js", "learner-state.js",
-        "due-review.js", "study-lens.js", "source-lens.js", "coverage-lens.js"
+        "due-review.js", "study-lens.js", "source-lens.js", "coverage-lens.js",
+        "projection-search.js"
     ))
 except (OSError, ValueError, RuntimeError) as exc:
     print("FAIL secx_relationship_audit")
