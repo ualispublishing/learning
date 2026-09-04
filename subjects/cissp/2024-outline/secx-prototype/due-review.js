@@ -70,6 +70,9 @@ window.ascend=function(){
 document.addEventListener('keydown',e=>{
   if(!document.getElementById('search')?.hidden)return;
   if(e.target.closest('input,textarea,select,[contenteditable="true"]'))return;
+  if(e.key==='Escape'&&level==='due-reviews'&&depth===0){
+    e.preventDefault();e.stopImmediatePropagation();domainLayout('root',true);return;
+  }
   if((e.key==='r'||e.key==='R')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();e.stopImmediatePropagation();dueReviewLayout(null,true,0)}
 },true);
 
