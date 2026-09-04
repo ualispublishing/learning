@@ -12,44 +12,49 @@
 const frame=document.getElementById('prototype');
 frame.addEventListener('load',()=>{
   const doc=frame.contentDocument;
-  const precision=doc.createElement('script');
-  precision.src='../study-site/data-precision.js';
-  precision.onload=()=>{
-    const registry=doc.createElement('script');
-    registry.src='learner-registry.js';
-    registry.onload=()=>{
-      const layer=doc.createElement('script');
-      layer.src='next-layer.js';
-      layer.onload=()=>{
-        const learner=doc.createElement('script');
-        learner.src='learner-state.js';
-        learner.onload=()=>{
-          const due=doc.createElement('script');
-          due.src='due-review.js';
-          due.onload=()=>{
-            const study=doc.createElement('script');
-            study.src='study-lens.js';
-            study.onload=()=>{
-              const sources=doc.createElement('script');
-              sources.src='source-lens.js';
-              sources.onload=()=>{
-                const coverage=doc.createElement('script');
-                coverage.src='coverage-lens.js';
-                doc.body.appendChild(coverage);
+  const ai=doc.createElement('script');
+  ai.src='../study-site/data-ai.js';
+  ai.onload=()=>{
+    const precision=doc.createElement('script');
+    precision.src='../study-site/data-precision.js';
+    precision.onload=()=>{
+      const registry=doc.createElement('script');
+      registry.src='learner-registry.js';
+      registry.onload=()=>{
+        const layer=doc.createElement('script');
+        layer.src='next-layer.js';
+        layer.onload=()=>{
+          const learner=doc.createElement('script');
+          learner.src='learner-state.js';
+          learner.onload=()=>{
+            const due=doc.createElement('script');
+            due.src='due-review.js';
+            due.onload=()=>{
+              const study=doc.createElement('script');
+              study.src='study-lens.js';
+              study.onload=()=>{
+                const sources=doc.createElement('script');
+                sources.src='source-lens.js';
+                sources.onload=()=>{
+                  const coverage=doc.createElement('script');
+                  coverage.src='coverage-lens.js';
+                  doc.body.appendChild(coverage);
+                };
+                doc.body.appendChild(sources);
               };
-              doc.body.appendChild(sources);
+              doc.body.appendChild(study);
             };
-            doc.body.appendChild(study);
+            doc.body.appendChild(due);
           };
-          doc.body.appendChild(due);
+          doc.body.appendChild(learner);
         };
-        doc.body.appendChild(learner);
+        doc.body.appendChild(layer);
       };
-      doc.body.appendChild(layer);
+      doc.body.appendChild(registry);
     };
-    doc.body.appendChild(registry);
+    doc.body.appendChild(precision);
   };
-  doc.body.appendChild(precision);
+  doc.body.appendChild(ai);
 });
 </script>
 </body>
