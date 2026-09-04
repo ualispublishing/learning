@@ -1,0 +1,140 @@
+#!/usr/bin/env python3
+"""Apply completed row-by-row workbook adjudications fail-closed.
+
+The authoritative evidence is 6,000 individually reviewed rows:
+3 x 1,000 sentence/translation rows and 3 x 1,000 vocabulary rows.
+
+Default mode is a dry-run. --write is all-or-nothing at the planning stage: every
+ledger/source/duplicate gate must pass in memory before any learner source is
+written. Corrected sentence translations are re-banded from their corrected
+English length; linguistic fidelity is never weakened merely to preserve a
+pre-repair selector bucket.
+"""
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import io
+import json
+import re
+import unicodedata
+from collections import defaultdict
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+AUDIT = ROOT / "audit" / "language-workbooks" / "v1.0"
+STAGE = AUDIT / "staging_v3"
+SENT_LEDGER_DIR = AUDIT / "row_by_row"
+VOCAB_LEDGER_DIR = AUDIT / "row_by_row_vocab"
+REPORT = AUDIT / "ledger_repair_application.json"
+VOCAB_INCREMENTAL_BASELINES = AUDIT / "vocab_incremental_repair_baselines.json"
+LANGS = ("arabic", "french", "urdu")
+SENT_FIELDS = ["rank", "level", "target", "english", "attribution", "words", "contributor"]
+DIAC_AR = re.compile(r"[\u0610-\u061a\u064b-\u065f\u0670\u06d6-\u06ed]")
+RANK_RE = re.compile(r"(?m)^Rank:\s*(\d+)\s*$")
+MEANING_RE = re.compile(r"(?m)^Meaning:[ \t]*(.*?)[ \t]*$")
+POS_RE = re.compile(r"(?m)^Part of speech:[ \t]*(.*?)[ \t]*$")
+
+# Exact Git blobs of the vocabulary decks that were reviewed row by row.
+VOCAB_BASELINE_BLOBS = {
+    "arabic": "a8dc009cc28c27624d69d517cd38479c5d418fbc",
+    "french": "419d96467a78c205996358caaf4ae9ba1ac3caa9",
+    "urdu": "f134225f117d94b40f66004bb09bd8c29e2b6560",
+}
+EXPECTED_VOCAB_DISTINCT = {"arabic": 999, "french": 1000, "urdu": 1000}
+
+
+def fail(message: str) -> None:
+    raise SystemExit(message)
+
+
+def norm(text: str) -> str:
+    text = unicodedata.normalize("NFKC", text or "").replace("ـ", "")
+    text = DIAC_AR.sub("", text)
+    return re.sub(r"\s+", " ", text).strip().casefold()
+
+
+def english_words(text: str) -> list[str]:
+    return re.findall(r"[A-Za-z']+", (text or "").casefold())
+
+
+def band(word_count: int) -> str:
+    return "A" if word_count <= 4 else "B" if word_count <= 8 else "C" if word_count <= 13 else "D"
+
+
+def git_blob_sha(raw: bytes) -> str:
+    return hashlib.sha1(f"blob {len(raw)}\0".encode("ascii") + raw).hexdigest()
+
+
+def prior_sentence_output_blob(lang: str) -> str | None:
+    if not REPORT.exists():
+        return None
+    try:
+        payload = json.loads(REPORT.read_text(encoding="utf-8"))
+        return payload.get("sources", {}).get("sentence", {}).get(lang, {}).get("output_git_blob")
+    except Exception:
+        return None
+
+
+def prior_vocab_output_blob(lang: str) -> str | None:
+    if not REPORT.exists():
+        return None
+    try:
+        payload = json.loads(REPORT.read_text(encoding="utf-8"))
+        return payload.get("sources", {}).get("vocab", {}).get(lang, {}).get("output_git_blob")
+    except Exception:
+        return None
+
+
+def incremental_vocab_round(lang: str) -> dict | None:
+    if not VOCAB_INCREMENTAL_BASELINES.exists():
+        return None
+    try:
+        payload = json.loads(VOCAB_INCREMENTAL_BASELINES.read_text(encoding="utf-8"))
+    except Exception as exc:
+        fail(f"vocab incremental baseline manifest is unreadable: {exc}")
+    if payload.get("schema_version") != 1:
+        fail("vocab incremental baseline manifest: unsupported schema_version")
+    entry = payload.get("vocab", {}).get(lang)
+    if entry is None:
+        return None
+    blob = (entry.get("input_git_blob") or "").strip()
+    if not re.fullmatch(r"[0-9a-f]{40}", blob):
+        fail(f"vocab/{lang}: incremental baseline has invalid input_git_blob {blob!r}")
+    ranks = entry.get("allowed_new_repair_ranks")
+    if (
+        not isinstance(ranks, list)
+        or not ranks
+        or any(not isinstance(rank, int) or rank < 1 or rank > 1000 for rank in ranks)
+        or len(set(ranks)) != len(ranks)
+    ):
+        fail(f"vocab/{lang}: incremental baseline has invalid allowed_new_repair_ranks")
+    expected_count = entry.get("expected_new_repair_count")
+    if expected_count != len(ranks):
+        fail(
+            f"vocab/{lang}: incremental baseline expected_new_repair_count "
+            f"{expected_count!r} does not equal rank count {len(ranks)}"
+        )
+    return {"input_git_blob": blob, "allowed_new_repair_ranks": set(ranks)}
+
+
+def ledger_pattern(lang: str) -> re.Pattern[str]:
+    return re.compile(rf"^{re.escape(lang)}(?:_rows)?_(\d{{4}})_(\d{{4}})\.csv$")
+
+
+def load_ledgers(directory: Path, lang: str, kind: str) -> list[dict]:
+    pattern = ledger_pattern(lang)
+    files: list[tuple[int, int, Path]] = []
+    for path in directory.glob("*.csv"):
+        match = pattern.match(path.name)
+        if match:
+            files.append((int(match.group(1)), int(match.group(2)), path))
+    files.sort()
+    if not files:
+        fail(f"{kind}/{lang}: no row ledgers found")
+
+    merged: dict[int, dict] = {}
+    expected_start = 1
+    for start, end, path in files:
+        if start != expected_start or end < start:
