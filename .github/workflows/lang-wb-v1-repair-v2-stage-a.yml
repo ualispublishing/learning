@@ -1,0 +1,61 @@
+name: LANG-WB v1 repair v2 stage A
+
+on:
+  push:
+    branches:
+      - lang-wb-v1-repair-v2-20260904
+    paths:
+      - '.github/lang-wb-v2/trigger.txt'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lang-wb-v1-repair-v2-stage-a
+  cancel-in-progress: false
+
+jobs:
+  stage-a:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repair branch
+        uses: actions/checkout@v4
+        with:
+          ref: lang-wb-v1-repair-v2-20260904
+          fetch-depth: 0
+
+      - name: Check live trigger
+        id: gate
+        shell: bash
+        run: |
+          if [ -f .github/lang-wb-v2/trigger.txt ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Trigger removed; cleanup push only."
+          fi
+
+      - name: Apply exact locked Stage A repair set
+        if: steps.gate.outputs.run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python .github/lang-wb-v2/stage_a.py
+          git diff --check
+          test "$(git diff --name-only | grep -Ec '^audit/language-workbooks/v1.0/row_by_row_vocab/|^audit/language-workbooks/v1.0/vocab_incremental_repair_baselines.json$|^scripts/apply_language_workbook_linguistic_repairs.py$')" -eq 32
+          test "$(git diff --name-only | wc -l | tr -d ' ')" -eq 32
+
+      - name: Commit Stage A atomically
+        if: steps.gate.outputs.run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/language-workbooks/v1.0/row_by_row_vocab \
+                  audit/language-workbooks/v1.0/vocab_incremental_repair_baselines.json \
+                  scripts/apply_language_workbook_linguistic_repairs.py
+          git diff --cached --check
+          test "$(git diff --cached --name-only | wc -l | tr -d ' ')" -eq 32
+          git commit -m 'repair: stage LANG-WB v1 linguistic repair v2'
+          git push origin HEAD:lang-wb-v1-repair-v2-20260904
