@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B2",
+  "unit": 4,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b2/passages.jsonl",
+  "canonical_sha256": "018389553756bfbe6453f0cfbe1f0f20df1bfcca00b50bdaec3a0ab1d7a356d3",
+  "records_reviewed": 6,
+  "records_with_findings": 4,
+  "fresh_findings": 6,
+  "decisions": [
+    {
+      "passage_id": "ar-b2-u04-p01",
+      "learner_facing_sha256": "e5d01d3250db8a1537a880b5a1248855271035779224681c555a4e114d13aaeb",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b2-u04-p02",
+      "learner_facing_sha256": "718075ce1449763d221375a019dbc63fcb65253a062785afe2a4767c2f67499b",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b2-u04-p03",
+      "learner_facing_sha256": "afd9e3b0e57f7a2b65218df2825d247490e9ca41393c6185e20b5c0c216f9ce1",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u04-p03-gB-01",
+          "field": "answer q8",
+          "dimension": "assessment_alignment",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "قابلية للعمل is a vague calque and does not match the passage contrast; answer directly with usability and maintainability."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u04-p04",
+      "learner_facing_sha256": "abe0a32b2a25d91c78c2ebb53309aa997b9c6845d73d8caab258fb85d396bc1b",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u04-p04-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "The standard collocation is مؤشر على استمرار النشاط, not مؤشر عن استمرار النشاط."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u04-p05",
+      "learner_facing_sha256": "6fae56e4da8579dcd8686d18823baaf901c207cedc2d7395383b963f3b4776d9",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u04-p05-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "A configuration does not naturally دفع كلفة; state that the more flexible configuration required an additional upfront cost."
+        },
+        {
+          "finding_id": "ar-b2-u04-p05-gB-02",
+          "field": "answer q6",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The old answer contrasts cost distribution with an ability, unlike dimensions; state the actual tradeoff between higher initial cost and greater later adaptability."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u04-p06",
+      "learner_facing_sha256": "23d8c084a5cfd70d511b827157fadc7e5671eadb97d6e1f5975875417151dab8",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u04-p06-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "وزنًا أكبر ... منه لمن is an awkward comparative chain; use مقارنةً بمن for the resident comparison."
+        },
+        {
+          "finding_id": "ar-b2-u04-p06-gB-02",
+          "field": "answer q1",
+          "dimension": "reference_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "ما يجعله سهلًا أو صعبًا has an unclear object pronoun; name the actions that the design makes easier or harder."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate B2 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+}
