@@ -67,6 +67,7 @@ style.textContent=`
 .node-progress{display:inline-flex;align-items:center;gap:4px;margin-top:5px;padding:2px 6px;border:1px solid #35526d;border-radius:999px;font-size:9px;color:#c8d9e8;background:#0b1d2d}
 .node-progress[data-state="due"]{border-style:dashed}.node-progress[data-state="mature"]{font-weight:700}
 .sec-progress{display:grid;gap:8px}.sec-progress-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center}.sec-grade{border:1px solid #456784;border-radius:9px;background:#10263a;color:inherit;padding:7px 9px;cursor:pointer}.sec-grade:hover,.sec-grade:focus-visible{border-color:var(--focus);outline:none}.sec-progress small{color:var(--muted)}
+.sec-detail-close{position:sticky;top:0;z-index:3;display:block;margin:0 0 8px auto;border:1px solid #456784;border-radius:10px;background:#10263a;color:var(--text);padding:7px 10px;font:inherit;font-size:11px;cursor:pointer}.sec-detail-close:hover,.sec-detail-close:focus-visible{border-color:var(--focus);outline:none}@media(max-width:800px){.sec-detail-close{font-size:10px;padding:7px 9px}}
 `;
 document.head.appendChild(style);
 const legend=document.querySelector('.legend');
@@ -87,8 +88,12 @@ function decorateNodes(){
 function decorateDetail(){
   const panel=document.getElementById('detail'),n=current();
   panel?.querySelector('[data-sec-progress]')?.remove();
+  panel?.querySelector('[data-sec-detail-close]')?.remove();
   if(!panel?.classList.contains('open')||!n||depth<=0){noteDetail(null);return}
   noteDetail(n);
+  const close=document.createElement('button');
+  close.type='button';close.className='sec-detail-close';close.dataset.secDetailClose='true';close.textContent='Close';close.setAttribute('aria-label','Close detail panel');close.setAttribute('aria-controls','detail');close.addEventListener('click',()=>ascend());
+  panel.prepend(close);
   const section=document.createElement('div');section.className='section sec-progress';section.dataset.secProgress='true';
   if(n.kind==='card'){
     const s=cardState(n.id),status=cardStatus(n.id),due=s?.due||'not scheduled';
