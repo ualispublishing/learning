@@ -67,11 +67,31 @@ style.textContent=`
 .node-progress{display:inline-flex;align-items:center;gap:4px;margin-top:5px;padding:2px 6px;border:1px solid #35526d;border-radius:999px;font-size:9px;color:#c8d9e8;background:#0b1d2d}
 .node-progress[data-state="due"]{border-style:dashed}.node-progress[data-state="mature"]{font-weight:700}
 .sec-progress{display:grid;gap:8px}.sec-progress-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center}.sec-grade{border:1px solid #456784;border-radius:9px;background:#10263a;color:inherit;padding:7px 9px;cursor:pointer}.sec-grade:hover,.sec-grade:focus-visible{border-color:var(--focus);outline:none}.sec-progress small{color:var(--muted)}
-.sec-detail-actions{position:sticky;top:0;z-index:3;display:flex;justify-content:flex-end;gap:7px;margin:0 0 8px;padding:2px 0;background:linear-gradient(180deg,#081522 72%,transparent)}.sec-detail-action{border:1px solid #456784;border-radius:10px;background:#10263a;color:var(--text);padding:7px 10px;font:inherit;font-size:11px;cursor:pointer}.sec-detail-action:hover,.sec-detail-action:focus-visible{border-color:var(--focus);outline:none}@media(max-width:800px){.sec-detail-action{font-size:10px;padding:7px 9px}}
+#detail.open{padding-top:64px}.sec-detail-actions{position:absolute;right:30px;top:28px;z-index:11;display:flex;justify-content:flex-end;gap:7px}.sec-detail-action{border:1px solid #456784;border-radius:10px;background:#10263af2;color:var(--text);padding:7px 10px;font:inherit;font-size:11px;cursor:pointer;box-shadow:0 4px 16px #0006}.sec-detail-action:hover,.sec-detail-action:focus-visible{border-color:var(--focus);outline:none}.sec-detail-actions[hidden]{display:none!important}@media(max-width:800px){#detail.open{padding-top:60px}.sec-detail-actions{right:20px;top:20px;max-width:calc(100% - 40px);gap:5px}.sec-detail-action{font-size:10px;padding:7px 9px}}
 `;
 document.head.appendChild(style);
 const legend=document.querySelector('.legend');
 if(legend&&!legend.querySelector('[data-sec-grade-help]'))legend.insertAdjacentHTML('beforeend','<span data-sec-grade-help><kbd>1–4</kbd> grade card</span>');
+
+const main=document.querySelector('main');
+const detailActions=document.createElement('div');detailActions.className='sec-detail-actions';detailActions.dataset.secDetailActions='true';detailActions.hidden=true;detailActions.setAttribute('aria-label','Detail actions');
+const detailClose=document.createElement('button');detailClose.type='button';detailClose.className='sec-detail-action';detailClose.dataset.secDetailClose='true';detailClose.textContent='Close';detailClose.setAttribute('aria-label','Close detail panel (Escape action)');detailClose.setAttribute('aria-controls','detail');
+const detailOpen=document.createElement('button');detailOpen.type='button';detailOpen.className='sec-detail-action';detailOpen.dataset.secDetailOpen='true';detailOpen.textContent='Open';detailOpen.setAttribute('aria-label','Open selected node (Enter action)');
+const detailMore=document.createElement('button');detailMore.type='button';detailMore.className='sec-detail-action';detailMore.dataset.secDetailMore='true';
+detailActions.append(detailClose,detailOpen,detailMore);if(main)main.appendChild(detailActions);
+
+function updateDetailActions(){
+  const panel=document.getElementById('detail'),n=current(),visible=!!(panel?.classList.contains('open')&&n&&depth>0);
+  detailActions.hidden=!visible;
+  if(!visible)return;
+  detailOpen.hidden=n.id==='root';
+  const nextDepth=depth%4+1;
+  detailMore.textContent=`Depth ${nextDepth}/4`;
+  detailMore.setAttribute('aria-label',`Show detail depth ${nextDepth} of 4 (Space action)`);
+}
+detailClose.addEventListener('click',()=>window.ascend());
+detailOpen.addEventListener('click',()=>{const beforeLevel=level,beforeId=current()?.id;window.descend();updateDetailActions();if(level===beforeLevel&&current()?.id===beforeId&&document.querySelector('#detail.open'))detailOpen.focus()});
+detailMore.addEventListener('click',()=>{depth=depth%4+1;window.showDetail();updateDetailActions();detailMore.focus()});
 
 function decorateNodes(){
   document.querySelectorAll('.node').forEach(el=>{
@@ -88,19 +108,9 @@ function decorateNodes(){
 function decorateDetail(){
   const panel=document.getElementById('detail'),n=current();
   panel?.querySelector('[data-sec-progress]')?.remove();
-  panel?.querySelector('[data-sec-detail-actions]')?.remove();
+  updateDetailActions();
   if(!panel?.classList.contains('open')||!n||depth<=0){noteDetail(null);return}
   noteDetail(n);
-  const actions=document.createElement('div');actions.className='sec-detail-actions';actions.dataset.secDetailActions='true';
-  const close=document.createElement('button');
-  close.type='button';close.className='sec-detail-action';close.dataset.secDetailClose='true';close.textContent='Close';close.setAttribute('aria-label','Close detail panel (Escape action)');close.setAttribute('aria-controls','detail');close.addEventListener('click',()=>window.ascend());
-  actions.appendChild(close);
-  if(n.id!=='root'){
-    const open=document.createElement('button');open.type='button';open.className='sec-detail-action';open.dataset.secDetailOpen='true';open.textContent='Open';open.setAttribute('aria-label','Open selected node (Enter action)');open.addEventListener('click',()=>{const beforeLevel=level,beforeId=current()?.id;window.descend();requestAnimationFrame(()=>{if(level===beforeLevel&&current()?.id===beforeId&&document.querySelector('#detail.open'))document.querySelector('[data-sec-detail-open]')?.focus()})});actions.appendChild(open);
-  }
-  const nextDepth=depth%4+1;
-  const more=document.createElement('button');more.type='button';more.className='sec-detail-action';more.dataset.secDetailMore='true';more.textContent=`Depth ${nextDepth}/4`;more.setAttribute('aria-label',`Show detail depth ${nextDepth} of 4 (Space action)`);more.addEventListener('click',()=>{depth=depth%4+1;window.showDetail();document.querySelector('[data-sec-detail-more]')?.focus()});actions.appendChild(more);
-  panel.prepend(actions);
   const section=document.createElement('div');section.className='section sec-progress';section.dataset.secProgress='true';
   if(n.kind==='card'){
     const s=cardState(n.id),status=cardStatus(n.id),due=s?.due||'not scheduled';
@@ -133,11 +143,11 @@ const scopeNode=document.getElementById('scope');
 if(scopeNode)new MutationObserver(()=>requestAnimationFrame(updateProgressScope)).observe(scopeNode,{childList:true,characterData:true,subtree:true});
 
 const baseRender=render;
-window.render=function(focus=false){baseRender(focus);requestAnimationFrame(()=>{decorateNodes();updateProgressScope()})};
+window.render=function(focus=false){baseRender(focus);requestAnimationFrame(()=>{decorateNodes();updateProgressScope();updateDetailActions()})};
 const baseShowDetail=showDetail;
 window.showDetail=function(force=true){baseShowDetail(force);decorateDetail()};
 const baseAscend=ascend;
-window.ascend=function(){baseAscend();if(depth===0){openNodeId=null;scenarioRevealSession=null}requestAnimationFrame(()=>{decorateNodes();updateProgressScope()})};
+window.ascend=function(){baseAscend();if(depth===0){openNodeId=null;scenarioRevealSession=null}updateDetailActions();requestAnimationFrame(()=>{decorateNodes();updateProgressScope();updateDetailActions()})};
 
 document.addEventListener('keydown',e=>{
   if(!document.getElementById('search')?.hidden)return;
@@ -153,5 +163,5 @@ addEventListener('storage',e=>{
   if(e.key===GRAPH_STATE_KEY){graphState=safeParse(e.newValue,{nodes:{},scenarios:{}});graphState.nodes=graphState.nodes||{};graphState.scenarios=graphState.scenarios||{};decorateNodes();decorateDetail()}
 });
 
-requestAnimationFrame(()=>{decorateNodes();decorateDetail();updateProgressScope()});
+requestAnimationFrame(()=>{decorateNodes();decorateDetail();updateProgressScope();updateDetailActions()});
 })();
