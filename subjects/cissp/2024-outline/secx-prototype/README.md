@@ -124,7 +124,7 @@ Future typed relationships such as `depends-on`, `contrasts-with`, `implemented-
 
 Two items independently marked VERIFIED in Atlas semantic ledgers do not automatically have a verified relationship. Shared labels, search similarity, embeddings, shared `source_ids`, or coverage co-occurrence may at most identify a review lead; they cannot auto-approve an edge.
 
-Relationship endpoints must use durable released IDs. Temporary UI IDs such as `sub:<objective>:<index>`, source/study/due/coverage nodes, pagers, and facets are forbidden as semantic endpoints.
+Relationship endpoints must use durable released IDs. Temporary UI/projection IDs such as `sub:<objective>:<index>`, `source:*`, `source-item:*`, `study:*`, `due:*`, `coverage:*`, pagers, and facets are forbidden as semantic endpoints. A provenance node such as `source-item:scenario:C-472` refers to a stable scenario for navigation only; a reviewed semantic edge would target `C-472` itself.
 
 ## Progressive disclosure
 
