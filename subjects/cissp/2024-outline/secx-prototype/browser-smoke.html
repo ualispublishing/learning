@@ -22,7 +22,7 @@ async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),s
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
 function hasDomains(d){return Array.from({length:8},(_,i)=>`d${i+1}`).every(id=>node(d,id))}
 function qObjectives(q){return Array.isArray(q.objectives)?q.objectives:(q.objective?[q.objective]:[])}
-function releasedCardForObjective(w,oid){return (Array.isArray(w.SECX_RELEASED_CARDS)?w.SECX_RELEASED_CARDS:[]).find(c=>c.objective===oid)||null}
+function releasedCardForObjective(w,oid){return (Array.isArray(w.SECX_HIGH_CARDS)?w.SECX_HIGH_CARDS:[]).find(c=>c.objective===oid)||null}
 function releasedScenarioForObjective(w,oid){return (Array.isArray(w.SECX_RELEASED_QUESTIONS)?w.SECX_RELEASED_QUESTIONS:[]).find(q=>qObjectives(q).includes(oid))||null}
 function anyRenderedReleasedScenario(w,d){return (Array.isArray(w.SECX_RELEASED_QUESTIONS)?w.SECX_RELEASED_QUESTIONS:[]).some(q=>node(d,q.id))}
 function anyRenderedReleasedCard(w,d,exclude=null){return (Array.isArray(w.SECX_RELEASED_CARDS)?w.SECX_RELEASED_CARDS:[]).some(c=>c.id!==exclude&&node(d,c.id))}
