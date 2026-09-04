@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+"""Deterministic audit for SecX Source/Coverage projection search."""
+from pathlib import Path
+import sys
+
+ROOT=Path(__file__).resolve().parent
+errors=[]
+
+def check(ok,msg):
+    if not ok: errors.append(msg)
+
+def read(name):
+    return (ROOT/name).read_text(encoding='utf-8')
+
+try:
+    js=read('projection-search.js')
+    html=read('next.html')
+except OSError as exc:
+    print('FAIL secx_projection_search_audit')
+    print('-',exc)
+    sys.exit(1)
+
+check("kind:'source-projection'" in js,'missing source projection search entries')
+check("kind:'coverage-domain-projection'" in js,'missing coverage domain search entries')
+check("kind:'coverage-objective-projection'" in js,'missing coverage objective search entries')
+check("sourceHubLayout(item.sourceId" in js,'source search does not route through existing source lens')
+check("coverageDomainLayout(item.domainNum" in js,'coverage search does not route through existing coverage lens')
+check("coverage:objective:${item.objectiveId}" in js,'coverage objective routing does not use explicit objective id')
+check("searchIndex.push(item)" in js,'projection entries are not added to existing search index')
+check("priorNavigate(item)" in js,'projection search does not preserve existing search routing')
+check("localStorage" not in js,'projection search must not read/write learner state')
+check("RELATIONSHIP_REVIEW" not in js,'projection search must not access reviewer relationship data')
+for token in ('similarityScore','levenshtein','fuzzyMatch','cosineSimilarity','semanticDistance','relationshipScore'):
+    check(token not in js,f'projection search contains inferred relationship helper: {token}')
+check("projection-search.js" in html,'expanded page does not load projection search')
+check(html.find("coverage-lens.js") < html.find("projection-search.js"),'projection search must load after coverage lens')
+check("coverage.onload" in html,'projection search load is not gated on coverage-lens completion')
+
+if errors:
+    print('FAIL secx_projection_search_audit')
+    for e in errors: print('-',e)
+    sys.exit(1)
+print('PASS secx_projection_search_audit source+coverage navigation=explicit existing-search-index-only')
