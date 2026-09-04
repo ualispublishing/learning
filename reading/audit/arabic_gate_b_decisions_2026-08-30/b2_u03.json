@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B2",
+  "unit": 3,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b2/passages.jsonl",
+  "canonical_sha256": "3e3b62a5b327176d1fad56eea8e958de20ed9ed384f2c3b949381c9b45232574",
+  "records_reviewed": 6,
+  "records_with_findings": 5,
+  "fresh_findings": 15,
+  "decisions": [
+    {
+      "passage_id": "ar-b2-u03-p01",
+      "learner_facing_sha256": "c7e9bcaef7d0e0a066bc941da30d5ca2620a43e1add9567d92eeac19ee85b4b9",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u03-p01-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "كتب ساعات is not idiomatic for logged/worked hours; use سجّل ساعات."
+        },
+        {
+          "finding_id": "ar-b2-u03-p01-gB-02",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "أولًا قبل is redundant sequencing; use أولًا، ثم for a clear ordered procedure."
+        },
+        {
+          "finding_id": "ar-b2-u03-p01-gB-03",
+          "field": "answer q3",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "عن ساعة آخر leaves آخر without its required noun; use ساعة شخص آخر."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u03-p02",
+      "learner_facing_sha256": "e164d560b90b114c62103d31c9432a26e3424ad7ce7aea6f30d56871536c188a",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b2-u03-p03",
+      "learner_facing_sha256": "d181904c78607c0be77629cc80d62cba99936b8335404730c286e805c0b1d80f",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u03-p03-gB-01",
+          "field": "answer q1",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "أضرتها خطأ is malformed; state that the tool/access conditions harmed the cases unintentionally."
+        },
+        {
+          "finding_id": "ar-b2-u03-p03-gB-02",
+          "field": "answer q3",
+          "dimension": "grammar_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use ما إذا كانت ... أم نمطًا for the indirect alternative question and correct case."
+        },
+        {
+          "finding_id": "ar-b2-u03-p03-gB-03",
+          "field": "answer q6",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The old wording makes a majority literally hide a minority; state that numerous unchanged appeals should not obscure a diagnostically valuable minority."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u03-p04",
+      "learner_facing_sha256": "03dc8b49ecad455c5272be6fa0b36d752ed4d97d2da89b877681cc2bc466b511",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u03-p04-gB-01",
+          "field": "text",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "رسائل cannot themselves be encouraged; identify the senders as the agents who may be encouraged to attempt later disruption."
+        },
+        {
+          "finding_id": "ar-b2-u03-p04-gB-02",
+          "field": "answer q1",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "خطوات أقل نهائية is a calque; use less decisive, reversible measures."
+        },
+        {
+          "finding_id": "ar-b2-u03-p04-gB-03",
+          "field": "answer q5",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "إلغاء أقوى is not idiomatic; the escalation point is full cancellation."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u03-p05",
+      "learner_facing_sha256": "2c3c971e7724ab97761e39ca1d5f10657264e6d4f32915567e686c3f96a4622b",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u03-p05-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "A fund does not يذهب إلى حالات; its funds can go to cases beyond the target."
+        },
+        {
+          "finding_id": "ar-b2-u03-p05-gB-02",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تستهلك المورد على is a faulty collocation; use تستهلك المورد في دعم."
+        },
+        {
+          "finding_id": "ar-b2-u03-p05-gB-03",
+          "field": "answer q9",
+          "dimension": "grammar_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "The definition needs an impersonal relative construction: لما يُراد تمثيله."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u03-p06",
+      "learner_facing_sha256": "5693e0fa028c1ebb636e5ad74e300b61f9a12f3f2a1d7abfe42cc8affdcf0596",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u03-p06-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "The idiomatic collocation is صور لأعمالهم, not صور عن أعمالهم."
+        },
+        {
+          "finding_id": "ar-b2-u03-p06-gB-02",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "ظهرت هوية شخص is awkward; preserve the target noun while stating that the person's identity is visible in the publication material."
+        },
+        {
+          "finding_id": "ar-b2-u03-p06-gB-03",
+          "field": "answer q6",
+          "dimension": "grammar_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Coordinate the definition cleanly by linking error reduction with مع rather than leaving an unintegrated verbal noun phrase."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate B2 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+}
