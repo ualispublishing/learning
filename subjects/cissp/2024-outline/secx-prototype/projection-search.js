@@ -64,11 +64,31 @@ window.navigateSearch=function(item){
 };
 
 const input=document.getElementById('searchInput');
+const search=document.getElementById('search');
+const results=document.getElementById('searchResults');
+function syncSearchA11y(){
+  if(!input||!search||!results)return;
+  input.setAttribute('role','combobox');
+  input.setAttribute('aria-autocomplete','list');
+  input.setAttribute('aria-haspopup','listbox');
+  input.setAttribute('aria-controls','searchResults');
+  input.setAttribute('aria-expanded',String(!search.hidden));
+  const options=[...results.querySelectorAll('.search-result')];
+  options.forEach((option,i)=>{option.id=`secx-search-option-${i}`});
+  const selected=options.find(option=>option.classList.contains('active')||option.getAttribute('aria-selected')==='true');
+  if(selected)input.setAttribute('aria-activedescendant',selected.id);
+  else input.removeAttribute('aria-activedescendant');
+}
 if(input){
   input.placeholder='Search curriculum, scenarios, sources, or coverage…';
   input.setAttribute('aria-label','Search curriculum, scenarios, sources, or coverage');
 }
+if(search&&results){
+  new MutationObserver(syncSearchA11y).observe(search,{attributes:true,attributeFilter:['hidden']});
+  new MutationObserver(syncSearchA11y).observe(results,{childList:true,subtree:true});
+}
 
 rebuildProjectionSearch();
+syncSearchA11y();
 addEventListener('secx:released-bank',rebuildProjectionSearch);
 })();
