@@ -21,7 +21,11 @@ function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySe
 async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),scope=x.d?.querySelector('#scope')?.textContent||'';return x.d&&x.w&&/\d+ released scenarios/.test(scope)&&!scope.includes('loading')&&!scope.includes('unavailable')&&x.d.querySelector('[data-sec-grade-help]')&&x.d.querySelector('#dueReviewBtn')&&x.d.querySelector('#studyQueueBtn')?x:null},`${label} released Atlas graph + learner controls`)}
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
 function hasDomains(d){return Array.from({length:8},(_,i)=>`d${i+1}`).every(id=>node(d,id))}
-function modelNode(w,kind){return Array.isArray(w.nodes)?w.nodes.find(n=>n.kind===kind):null}
+function qObjectives(q){return Array.isArray(q.objectives)?q.objectives:(q.objective?[q.objective]:[])}
+function releasedCardForObjective(w,oid){return (Array.isArray(w.SECX_RELEASED_CARDS)?w.SECX_RELEASED_CARDS:[]).find(c=>c.objective===oid)||null}
+function releasedScenarioForObjective(w,oid){return (Array.isArray(w.SECX_RELEASED_QUESTIONS)?w.SECX_RELEASED_QUESTIONS:[]).find(q=>qObjectives(q).includes(oid))||null}
+function anyRenderedReleasedScenario(w,d){return (Array.isArray(w.SECX_RELEASED_QUESTIONS)?w.SECX_RELEASED_QUESTIONS:[]).some(q=>node(d,q.id))}
+function anyRenderedReleasedCard(w,d,exclude=null){return (Array.isArray(w.SECX_RELEASED_CARDS)?w.SECX_RELEASED_CARDS:[]).some(c=>c.id!==exclude&&node(d,c.id))}
 function clickId(d,id){const el=node(d,id);assert(el,`node ${id} exists`);el.click();return el}
 async function enter(win){key(win,'Enter','Enter');await sleep(80)}
 async function selectThenEnter(d,w,id,label){clickId(d,id);await waitFor(()=>node(d,id)?.classList.contains('active')&&w.current?.()?.id===id,`${label} selected`);await enter(w)}
@@ -46,8 +50,8 @@ async function run(){
 
   await selectThenEnter(d,w,'facet:1.9:cards','retrieval-card facet');
   let cardModel;
-  try{cardModel=await waitFor(()=>modelNode(w,'card'),'reviewed retrieval-card branch')}catch(err){throw new Error(`Retrieval-card branch did not open after Enter; ${graphDebug(w,d)}`)}
-  const card=node(d,cardModel.id);assert(card,`card ${cardModel.id} renders`);const cardId=cardModel.id;card.click();
+  try{cardModel=await waitFor(()=>{const c=releasedCardForObjective(w,'1.9');return c&&node(d,c.id)?c:null},'reviewed retrieval-card branch')}catch(err){throw new Error(`Retrieval-card branch did not open after Enter; ${graphDebug(w,d)}`)}
+  const card=node(d,cardModel.id);const cardId=cardModel.id;card.click();
   await waitFor(()=>d.querySelector('#detail.open')&&d.querySelectorAll('[data-sec-grade]').length===4,'card detail and Atlas grade controls');
   assert(!d.querySelector('#detail').textContent.includes('Correct answer:'),'card detail does not expose scenario answer language');
   d.querySelector('[data-sec-grade="0"]').click();
@@ -68,8 +72,8 @@ async function run(){
 
   await selectThenEnter(d,w,'facet:1.9:scenarios','released-scenarios facet');
   let scenarioModel;
-  try{scenarioModel=await waitFor(()=>modelNode(w,'scenario'),'released scenario branch')}catch(err){throw new Error(`Released scenario branch did not open after Enter; ${graphDebug(w,d)}`)}
-  const scenario=node(d,scenarioModel.id);assert(scenario,`scenario ${scenarioModel.id} renders`);const scenarioId=scenarioModel.id;scenario.click();
+  try{scenarioModel=await waitFor(()=>{const q=releasedScenarioForObjective(w,'1.9');return q&&node(d,q.id)?q:null},'released scenario branch')}catch(err){throw new Error(`Released scenario branch did not open after Enter; ${graphDebug(w,d)}`)}
+  const scenario=node(d,scenarioModel.id);const scenarioId=scenarioModel.id;scenario.click();
   await waitFor(()=>d.querySelector('#detail.open'),'scenario detail opens');
   assert(d.querySelector('#detail').textContent.includes('Options:'),'scenario options available before reveal');
   assert(!d.querySelector('#detail').textContent.includes('Correct answer:'),'scenario answer hidden before depth four');
@@ -90,7 +94,7 @@ async function run(){
 
   key(w,'Home','Home');
   await waitFor(()=>hasDomains(d)&&d.querySelector('#crumb')?.textContent==='SecX','Home returns to root');
-  assert(!modelNode(w,'scenario'),'Home unmounts deep local scenario cluster');
+  assert(!anyRenderedReleasedScenario(w,d),'Home unmounts deep local scenario cluster');
   assert(d.querySelector('#scope')?.textContent.includes(`${meta.question_count} released scenarios`),'learner footer decorator preserves final released-bank count');
 
   key(w,'r','KeyR');
@@ -107,7 +111,7 @@ async function run(){
   assert(node(d,'study:new')?.textContent.includes(`${reviewCardCount-1} ungraded`),'study queue derives remaining new-card count from Atlas state');
   assert(node(d,'study:weak')?.textContent.includes('D1'),'fresh/tied review score uses Atlas higher-weight tie-break');
   await selectThenEnter(d,w,'study:new','new-card study facet');
-  await waitFor(()=>node(d,'study:list:new')&&modelNode(w,'card')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue › New cards','New facet opens paged Atlas card queue');
+  await waitFor(()=>node(d,'study:list:new')&&anyRenderedReleasedCard(w,d,cardId)&&d.querySelector('#crumb')?.textContent==='SecX › Study queue › New cards','New facet opens paged Atlas card queue');
   assert(node(d,'study:list:new')?.textContent.includes(`${reviewCardCount-1} Atlas review cards`),'new queue count excludes the graded card');
   key(w,'Escape','Escape');
   await waitFor(()=>node(d,'study:queue')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue','Escape from study cards returns to study hub');
