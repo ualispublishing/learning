@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>SecX Projection Search Smoke</title></head><body>
+<pre id="result" data-smoke="running">RUNNING</pre>
+<iframe id="app" src="next.html?projection-search-smoke=desktop" style="width:1280px;height:900px;border:0"></iframe>
+<iframe id="mobile" src="next.html?projection-search-smoke=mobile" style="width:390px;height:844px;border:0"></iframe>
+<script>
+(()=>{'use strict';
+const result=document.querySelector('#result'),frame=document.querySelector('#app'),mobile=document.querySelector('#mobile');
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;while(Date.now()<end){try{const v=fn();if(v)return v}catch{}await sleep(50)}throw new Error(`Timed out waiting for ${label}`)}
+function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
+function key(w,key,code=key){w.dispatchEvent(new w.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
+function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow}}
+async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),input=x.d?.querySelector('#searchInput');return x.d&&x.w&&input?.placeholder.includes('sources')&&x.d.querySelector('#sourceLensBtn')&&x.d.querySelector('#coverageLensBtn')?x:null},`${label} projection search runtime`)}
+function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
+async function search(d,w,q,predicate){key(w,'/','Slash');await waitFor(()=>!d.querySelector('#search').hidden,'search opens');const input=d.querySelector('#searchInput');input.value=q;input.dispatchEvent(new w.Event('input',{bubbles:true}));const hit=await waitFor(()=>[...d.querySelectorAll('.search-result')].find(predicate),`search hit ${q}`);hit.click();await sleep(100)}
+async function run(){
+ const {d,w}=await ready(frame,'desktop');
+ await search(d,w,'ISC2_OUTLINE',x=>x.textContent.includes('ISC2_OUTLINE')&&x.textContent.includes('Source Provenance'));
+ await waitFor(()=>node(d,'source:ISC2_OUTLINE')&&d.querySelectorAll('.node.source-facet').length===3&&d.querySelector('#crumb')?.textContent.includes('Sources'),'source projection search routes to source hub');
+ key(w,'Escape','Escape');await waitFor(()=>node(d,'sources:root'),'source hub Escape returns sources');key(w,'Escape','Escape');await waitFor(()=>d.querySelector('#crumb')?.textContent==='SecX','sources Escape returns root');
+ await search(d,w,'coverage objective 1.1',x=>x.textContent.includes('1.1')&&x.textContent.includes('Coverage'));
+ await waitFor(()=>node(d,'coverage:objective:1.1')?.classList.contains('active')&&d.querySelector('#crumb')?.textContent==='SecX › Coverage › D1','coverage objective search reconstructs D1 coverage and focuses 1.1');
+ assert(!d.querySelector('#search')||d.querySelector('#search').hidden,'search closes after projection routing');
+ const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mw=mobileApp.w;
+ assert(md.querySelector('#searchInput')?.placeholder.includes('coverage'),'mobile search advertises projection scope');
+ key(mw,'/','Slash');await waitFor(()=>!md.querySelector('#search').hidden,'mobile search opens');
+ assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile projection search has no horizontal overflow');
+ result.dataset.smoke='pass';result.textContent='PASS SecX projection search smoke: source routing coverage-objective routing existing palette mobile';
+}
+run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
+})();
+</script></body></html>
