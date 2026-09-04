@@ -92,8 +92,8 @@ async function run(){
   assert(d.querySelector('#scope')?.textContent.includes(`${meta.question_count} released scenarios`),'learner footer decorator preserves final released-bank count');
 
   key(w,'r','KeyR');
-  await waitFor(()=>node(d,'due:reviews')&&node(d,cardId)&&d.querySelector('#crumb')?.textContent==='SecX › Due reviews','R opens due-review graph with the due released card');
-  await waitFor(()=>node(d,cardId)?.querySelector('.node-progress')?.textContent.includes('due'),'due branch preserves Atlas card due state');
+  await waitFor(()=>node(d,'due:reviews')&&node(d,cardId)&&d.querySelector('#crumb')?.textContent==='SecX › Due reviews','R opens due-review graph with the persisted due card');
+  assert(cardProgress.due===todayISO(),'due queue membership is backed by persisted Atlas due date');
   key(w,'Escape','Escape');
   await waitFor(()=>d.querySelectorAll('.node.domain').length===8&&d.querySelector('#crumb')?.textContent==='SecX','Escape returns from due reviews to root');
 
