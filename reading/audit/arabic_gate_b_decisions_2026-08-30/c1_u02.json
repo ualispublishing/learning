@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "C1",
+  "unit": 2,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/c1/passages.jsonl",
+  "canonical_sha256": "ebdd67f7197a29f4e2a1e3ced2aad8e6adfed76b426927113e26ac019fb116f8",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 8,
+  "decisions": [
+    {
+      "passage_id": "ar-c1-u02-p01",
+      "learner_facing_sha256": "7efaa3976115d03e8351b7755bc585fa151b23dbc79e0938f8c8991bbb421a5e",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u02-p01-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "أكثر أعضاء الفريق لياقة من حيث الخبرة leaves the deliberate target لياقة without an idiomatic complement; specify suitability for the task while preserving the target."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u02-p02",
+      "learner_facing_sha256": "5de587117a89acb1048eb3c41bba1bc7167c42585e02cad6127f2f8ef26eeaee",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u02-p02-gB-01",
+          "field": "answer q6",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "الاختبار المحدود فيتخذ قرارًا assigns the act of taking a decision to the test itself; describe the bounded test as the temporary evidence-generating decision."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u02-p03",
+      "learner_facing_sha256": "7c4c77dc5c7d0da8ead1ef8b32c7f324730762b33d14963888d5a0ee91dd6809",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u02-p03-gB-01",
+          "field": "text",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "مقدار ما تمنحه المؤسسة للأتمتة omits what is being assigned; the trade-off concerns the weight assigned to automation."
+        },
+        {
+          "finding_id": "ar-c1-u02-p03-gB-02",
+          "field": "answer q5",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "وتعيد الحساب مستقلاً leaves the adverbial agreement/reference awkward after a feminine committee subject; use بصورة مستقلة."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u02-p04",
+      "learner_facing_sha256": "d26c6cfa32247930774ee23bd4da284f49d3690f0880e62fd9f578e8f8480337",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u02-p04-gB-01",
+          "field": "answer q1",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "الأقسام تقيس نجاحًا مختلفًا suggests different successes rather than different dimensions of success; state the latter explicitly."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u02-p05",
+      "learner_facing_sha256": "6e01025bf8466197928a15d5cb5c6df6bfd3d4a6162e54d8958e03d3a5358020",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u02-p05-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تجعل التعلم ... قادرًا على تغيير القاعدة is an awkward agency construction; state that the channel enables learning from hard cases to change the rule."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u02-p06",
+      "learner_facing_sha256": "fa9da21ce59474859274b587cdd8a072038ffc853405ddfa4c192f28a3130b7f",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u02-p06-gB-01",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تجعل الحالة خيارًا آخر أمثل reverses the predicate relation; the intended claim is that another option is clearly optimal in that case."
+        },
+        {
+          "finding_id": "ar-c1-u02-p06-gB-02",
+          "field": "answer q8",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تقابل حالتين is awkward for the discourse function of بينما here; it compares two cases."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate C1 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+}
