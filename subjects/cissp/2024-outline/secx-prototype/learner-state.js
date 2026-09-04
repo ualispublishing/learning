@@ -99,7 +99,7 @@ function decorateDetail(){
     const open=document.createElement('button');open.type='button';open.className='sec-detail-action';open.dataset.secDetailOpen='true';open.textContent='Open';open.setAttribute('aria-label','Open selected node (Enter action)');open.addEventListener('click',()=>{const beforeLevel=level,beforeId=current()?.id;window.descend();requestAnimationFrame(()=>{if(level===beforeLevel&&current()?.id===beforeId&&document.querySelector('#detail.open'))document.querySelector('[data-sec-detail-open]')?.focus()})});actions.appendChild(open);
   }
   const nextDepth=depth%4+1;
-  const more=document.createElement('button');more.type='button';more.className='sec-detail-action';more.dataset.secDetailMore='true';more.textContent=`Depth ${nextDepth}/4`;more.setAttribute('aria-label',`Show detail depth ${nextDepth} of 4 (Space action)`);more.addEventListener('click',()=>{depth=depth%4+1;window.showDetail();requestAnimationFrame(()=>document.querySelector('[data-sec-detail-more]')?.focus())});actions.appendChild(more);
+  const more=document.createElement('button');more.type='button';more.className='sec-detail-action';more.dataset.secDetailMore='true';more.textContent=`Depth ${nextDepth}/4`;more.setAttribute('aria-label',`Show detail depth ${nextDepth} of 4 (Space action)`);more.addEventListener('click',()=>{depth=depth%4+1;window.showDetail();document.querySelector('[data-sec-detail-more]')?.focus()});actions.appendChild(more);
   panel.prepend(actions);
   const section=document.createElement('div');section.className='section sec-progress';section.dataset.secProgress='true';
   if(n.kind==='card'){
