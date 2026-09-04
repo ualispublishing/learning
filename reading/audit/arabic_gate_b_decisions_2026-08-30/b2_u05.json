@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B2",
+  "unit": 5,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b2/passages.jsonl",
+  "canonical_sha256": "06790ee20acd8e45e63f5d997973ddff57f856bf99ab0d698100d3f9d5e705ca",
+  "records_reviewed": 6,
+  "records_with_findings": 4,
+  "fresh_findings": 12,
+  "decisions": [
+    {
+      "passage_id": "ar-b2-u05-p01",
+      "learner_facing_sha256": "39ed333b90e79a7ff247df6bb9cdb58671e608fa7864d55298964ded628b6f28",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b2-u05-p02",
+      "learner_facing_sha256": "8c4cc3a883e51741755fb58e9ce35196a16e49cbf0361adf652c4a8d0578be6e",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b2-u05-p03",
+      "learner_facing_sha256": "0311c89f543f6a31bb7ab26296ceb3f04d0cc86f9c5098641e47078ce8446919",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 4,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u05-p03-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "في منطقة صحراء is not idiomatic MSA; place the garden at the edge of a desert while preserving the lexical target."
+        },
+        {
+          "finding_id": "ar-b2-u05-p03-gB-02",
+          "field": "question q1",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "يعلن الطلاب نباتًا واحدًا الأفضل is malformed; announce a clause with أن ... هو الأفضل."
+        },
+        {
+          "finding_id": "ar-b2-u05-p03-gB-03",
+          "field": "answer q3",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "احتاج requires إلى here, and استمرارها cannot cleanly refer to mixed resources/work; use resources or effort that cannot be provided continuously."
+        },
+        {
+          "finding_id": "ar-b2-u05-p03-gB-04",
+          "field": "answer q7",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "دليل البداية and الظروف التي اختبرت are awkward; contrast preliminary evidence with a general guarantee beyond the original experimental conditions."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u05-p04",
+      "learner_facing_sha256": "6810bc661e537187b107123522bd8950fc08b8b28f9f218ab2904d7033b3a221",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u05-p04-gB-01",
+          "field": "question q1",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The object phrase الرقم ذي المنزلتين has the wrong case form for ذو; recast the question as عرض رقم بمنزلتين عشريتين."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u05-p05",
+      "learner_facing_sha256": "675e9a33b7cc17dbea8127a36a3013c12644d865c5347a38fa641e07f9699a46",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u05-p05-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "توسيع ... إلى كل الشارع is a faulty collocation; use تعميم ... على امتداد الشارع."
+        },
+        {
+          "finding_id": "ar-b2-u05-p05-gB-02",
+          "field": "question q1",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "في كل الشارع is awkward for distribution along a street; use على امتداد الشارع كله."
+        },
+        {
+          "finding_id": "ar-b2-u05-p05-gB-03",
+          "field": "answer q6",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تثبت قابلية انتقال overclaims what repeated local tests show; state that the general function may transfer while engineering details still require contextual limits."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u05-p06",
+      "learner_facing_sha256": "241e3505dc949e1af837311d7db6801834eda104fff19ae50d903af600e72667",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 4,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u05-p06-gB-01",
+          "field": "text",
+          "dimension": "reference_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The decision itself should not be the agent that reviews assumptions; keep assumptions explicitly reviewable when the decision is made."
+        },
+        {
+          "finding_id": "ar-b2-u05-p06-gB-02",
+          "field": "answer q5",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "يمكن الفعل is an awkward calque; state directly that a decision can be taken while limits remain visible."
+        },
+        {
+          "finding_id": "ar-b2-u05-p06-gB-03",
+          "field": "answer q8",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "تقدم غياب معيار المراجعة كشرط is a calque; state directly what absence of a review criterion reveals."
+        },
+        {
+          "finding_id": "ar-b2-u05-p06-gB-04",
+          "field": "answer q10",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تصميم فعل مرن is not an idiomatic collocation; use تصميم استجابة مرنة."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate B2 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+}
