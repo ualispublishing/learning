@@ -35,7 +35,7 @@ async function run(){
  assert(mobileInput.getAttribute('role')==='combobox'&&mobileInput.getAttribute('aria-controls')==='searchResults','mobile search exposes combobox/listbox relationship');
  mobileButton.click();
  await waitFor(()=>!md.querySelector('#search').hidden&&mobileInput.getAttribute('aria-expanded')==='true'&&mobileButton.getAttribute('aria-expanded')==='true','mobile visible Search control opens palette');
- assert(md.activeElement===mobileInput,'mobile Search control transfers focus to search input');
+ await waitFor(()=>md.activeElement===mobileInput,'mobile Search control transfers focus to search input');
  mobileClose.click();
  await waitFor(()=>md.querySelector('#search').hidden&&mobileInput.getAttribute('aria-expanded')==='false'&&mobileButton.getAttribute('aria-expanded')==='false','mobile visible Close control closes palette');
  mobileButton.click();await waitFor(()=>!md.querySelector('#search').hidden,'mobile Search control reopens palette');
