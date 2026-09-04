@@ -1,4 +1,4 @@
-name: Refresh LANG-A1C2 state after B2 Unit 3
+name: Refresh LANG-A1C2 state after B2 Unit 2
 
 on:
   push:
@@ -31,7 +31,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add reading/STATE_MANIFEST.json
-          git commit -m 'Refresh LANG-A1C2 state manifest after B2 Unit 3'
+          git commit -m 'Refresh LANG-A1C2 state manifest after B2 Unit 2'
 
       - name: Rebase and validate exact push candidate
         shell: bash
