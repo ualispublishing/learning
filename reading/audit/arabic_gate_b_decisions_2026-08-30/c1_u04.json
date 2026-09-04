@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "C1",
+  "unit": 4,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/c1/passages.jsonl",
+  "canonical_sha256": "b5e2dfc3ba1b5f665af1cb92356bddc3faf3b7f5cff6be44096e570b7c4ff743",
+  "records_reviewed": 6,
+  "records_with_findings": 4,
+  "fresh_findings": 6,
+  "decisions": [
+    {
+      "passage_id": "ar-c1-u04-p01",
+      "learner_facing_sha256": "fbd5e12c72b8185358aa11348888653f909bacc962a27453ad9621c151d220c8",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-c1-u04-p02",
+      "learner_facing_sha256": "e9ee985ae35373dbdb8edfa6df543edb5e1f73e52f15b8afc485a59387cb846b",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-c1-u04-p03",
+      "learner_facing_sha256": "0ccc7313299e0b6621e2c91493be453fdaa8e5a58a4e2801095508789de5c90f",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u04-p03-gB-01",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "أن قد يؤدي قبول التسجيل is malformed clause structure; place the nominal subject directly after أن and the modal verb after it."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u04-p04",
+      "learner_facing_sha256": "729c4c3bc01b4ea92ecca76b27cd2a2428875494012e9fc61c8a0b25606f438e",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u04-p04-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The keyed answer gives only a causal contrast although q1 asks for a one-sentence statement of the central issue; state the transcription-versus-readability trade-off directly."
+        },
+        {
+          "finding_id": "ar-c1-u04-p04-gB-02",
+          "field": "answer q5",
+          "dimension": "reference_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "ما الذي نقل leaves the agent/reference ambiguous; distinguish what was transferred from what the editor interpreted using a passive form for the source material."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u04-p05",
+      "learner_facing_sha256": "74eea1cebe6cccb13ef0fce7e183f7b1fe2e92a9d252508973b045a92fa7f195",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u04-p05-gB-01",
+          "field": "answer q6",
+          "dimension": "reference_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "اختيار الكاتب ومعناه أو زمنه has unclear pronoun reference; specify that lexical replacement can alter the writer's word choice and its semantic or temporal signal."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u04-p06",
+      "learner_facing_sha256": "1de35eacec638b97c2ce5c2097a5ec6a5944cb914fa9f23294afa6248f7c35c0",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u04-p06-gB-01",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "في أي غرض is the wrong preposition for asking purpose; use لأي غرض, matching standard MSA and the keyed answer."
+        },
+        {
+          "finding_id": "ar-c1-u04-p06-gB-02",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "عن ما يحذف should contract to عمّا and the passive form clarifies that the editorial decision concerns what is omitted."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate C1 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+}
