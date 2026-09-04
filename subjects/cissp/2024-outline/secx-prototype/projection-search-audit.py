@@ -28,6 +28,11 @@ check("coverageDomainLayout(item.domainNum" in js,'coverage search does not rout
 check("coverage:objective:${item.objectiveId}" in js,'coverage objective routing does not use explicit objective id')
 check("searchIndex.push(item)" in js,'projection entries are not added to existing search index')
 check("priorNavigate(item)" in js,'projection search does not preserve existing search routing')
+check("setAttribute('role','combobox')" in js,'projection search input does not expose combobox role')
+check("setAttribute('aria-controls','searchResults')" in js,'projection search input does not identify its result listbox')
+check("setAttribute('aria-expanded'" in js,'projection search input does not expose palette expanded state')
+check("aria-activedescendant" in js,'projection search does not expose active result to assistive technology')
+check("MutationObserver" in js,'projection search accessibility state is not synchronized with palette/result mutations')
 check("localStorage" not in js,'projection search must not read/write learner state')
 check("RELATIONSHIP_REVIEW" not in js,'projection search must not access reviewer relationship data')
 for token in ('similarityScore','levenshtein','fuzzyMatch','cosineSimilarity','semanticDistance','relationshipScore'):
@@ -40,4 +45,4 @@ if errors:
     print('FAIL secx_projection_search_audit')
     for e in errors: print('-',e)
     sys.exit(1)
-print('PASS secx_projection_search_audit source+coverage navigation=explicit existing-search-index-only')
+print('PASS secx_projection_search_audit source+coverage navigation=explicit existing-search-index-only combobox-a11y=enabled')
