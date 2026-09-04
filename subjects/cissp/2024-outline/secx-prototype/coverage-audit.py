@@ -128,6 +128,13 @@ for q in all_standard:
 objective_without_scenarios = sum(1 for oid in objective_ids if scenario_counts[oid] == 0)
 subtopics_with_exact_tag = sum(len(v) for v in tagged_subtopics.values())
 subtopics_total = sum(len(v) for v in coverage.values())
+practice_exposure_gaps = subtopics_total - subtopics_with_exact_tag
+expected_gap_ids = {
+    f"coverage:gap:{oid}:{index}"
+    for oid, labels in coverage.items()
+    for index, label in enumerate(labels)
+    if label not in tagged_subtopics.get(oid, set())
+}
 
 check("RELEASED_BATCHES.json" in next_layer, "central released-bank loader does not use release manifest")
 check("fetch(`../study-site/${p}`" in next_layer, "central released-bank loader no longer loads manifest-listed files")
@@ -141,10 +148,20 @@ check("fetch(" not in lens, "coverage lens performs an independent network fetch
 check("question-bank/candidates/" not in lens, "coverage lens hard-codes candidate paths")
 check("q.subtopics.includes(label)" in lens, "coverage lens exact scenario-tag coverage logic missing")
 check("SECX_COVERAGE_SNAPSHOT" in lens, "coverage lens does not expose deterministic count snapshot")
+check("practice_exposure_gaps" in lens, "coverage snapshot does not expose exact-tag practice gap count")
+check("function gapRecords()" in lens, "coverage lens has no exact-tag gap registry")
+check("coverage:gap:${record.objective}:${record.index}" in lens, "coverage gap nodes do not use stable projection ids derived from objective/index")
+check("window.coverageGapLayout" in lens and "level='coverage-gaps'" in lens, "coverage lens has no paged practice exposure gap view")
+check("n?.id==='coverage:root'" in lens and "coverageGapLayout(null,true,0)" in lens, "coverage root Enter does not open practice exposure gaps")
+check("SecX › Coverage › Practice exposure gaps" in lens, "coverage gap breadcrumb missing")
+check("level==='coverage-gaps'" in lens and "coverageLayout('coverage:root',true)" in lens, "coverage gap Escape hierarchy missing")
 check("Practice exposure counts do not measure learner mastery" in lens, "coverage lens lost mastery-boundary warning")
-check("practice-exposure gap" in lens, "coverage lens does not label missing scenarios as exposure gap")
+check("exact-tag practice-exposure gap" in lens, "coverage gap detail does not preserve exact-tag exposure terminology")
+check("not evidence that the subtopic is missing from the curriculum" in lens, "coverage gap detail lost curriculum-omission boundary")
+check("not learner weakness" in lens, "coverage gap detail lost learner-state boundary")
 check("localStorage" not in lens, "coverage lens should not read or write learner state")
 check("cissp_atlas_progress_v1" not in lens and "cissp_secx_graph_state_v1" not in lens, "coverage lens is coupled to learner state")
+check("RELATIONSHIP_REVIEW" not in lens, "coverage lens accesses reviewer semantic relationships")
 for forbidden in ("similarityScore", "levenshtein", "fuzzyMatch", "cosineSimilarity", "semanticDistance", "relationshipScore"):
     check(forbidden not in lens, f"coverage lens contains inferred-relationship helper: {forbidden}")
 check("coverage-lens.js" in next_html, "expanded page does not load coverage lens")
@@ -153,6 +170,8 @@ check("sources.onload" in next_html, "coverage lens load is not gated on source-
 check("RELATIONSHIP_REVIEW.json" not in next_html, "reviewer relationship registry is learner-loaded")
 check("coverageLensBtn" in smoke and "KeyC" in smoke, "coverage browser smoke does not exercise coverage control/shortcut")
 check("coverage:d1" in smoke and "coverage:objective:1.1" in smoke, "coverage browser smoke does not verify domain/objective traversal")
+check("coverage:gaps" in smoke and "coverage-gap" in smoke, "coverage browser smoke does not verify practice exposure gap traversal")
+check("practice_exposure_gaps" in smoke, "coverage browser smoke does not validate deterministic gap total")
 check("SECX_RELEASED_BANK_STATE" in smoke, "coverage browser smoke does not wait for shared released-bank readiness")
 check("--user-data-dir=" in smoke_shell, "coverage browser smoke does not isolate browser storage")
 
@@ -169,6 +188,8 @@ print(
     f"review_cards={len(review_cards)} "
     f"standard_questions={len(all_standard)} "
     f"subtopics_with_exact_scenario_tag={subtopics_with_exact_tag} "
+    f"practice_exposure_gaps={practice_exposure_gaps} "
+    f"gap_projection_ids={len(expected_gap_ids)} "
     f"objectives_without_scenarios={objective_without_scenarios} "
-    "mapping=explicit-counts-only shared_bank=single-release-boundary"
+    "mapping=explicit-counts-and-gaps-only shared_bank=single-release-boundary"
 )
