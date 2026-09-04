@@ -38,6 +38,11 @@ frame.addEventListener('load',()=>{
                 sources.onload=()=>{
                   const coverage=doc.createElement('script');
                   coverage.src='coverage-lens.js';
+                  coverage.onload=()=>{
+                    const projectionSearch=doc.createElement('script');
+                    projectionSearch.src='projection-search.js';
+                    doc.body.appendChild(projectionSearch);
+                  };
                   doc.body.appendChild(coverage);
                 };
                 doc.body.appendChild(sources);
