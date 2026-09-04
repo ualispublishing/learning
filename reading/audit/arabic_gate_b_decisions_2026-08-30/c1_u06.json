@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "C1",
+  "unit": 6,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/c1/passages.jsonl",
+  "canonical_sha256": "88d0150069f93ccf42f5a84c9bf1c88dc1da7f4ccc86599c3f94c49658d1e580",
+  "records_reviewed": 6,
+  "records_with_findings": 5,
+  "fresh_findings": 5,
+  "decisions": [
+    {
+      "passage_id": "ar-c1-u06-p01",
+      "learner_facing_sha256": "8f0789f0139d3bf01a8af1c5e2515f3915e7b3fd0475da298254139a333fff2b",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u06-p01-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The keyed summary is phrased as a bare question rather than a one-sentence summary of the central interpretive issue; convert it to a declarative summary."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u06-p02",
+      "learner_facing_sha256": "abcccdd47243ce207353c2d056ee790327722e33ecc206abdffb5ab871d90f72",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u06-p02-gB-01",
+          "field": "answer q7",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "لأن ليس كل فرق is awkward clause ordering; state directly that not every outcome difference necessarily arises from a relevant modifiable institutional barrier."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u06-p03",
+      "learner_facing_sha256": "9f333c90786997ab2f9b681cf56889698f6491ac28cb937b40b395d154de3aa2",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-c1-u06-p04",
+      "learner_facing_sha256": "cc6c4f3c2db55b388316205a44a6d37a4c23f38fd10e1bce82ecb7060da78783",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u06-p04-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The keyed response begins with لأن despite q1 asking for a one-sentence central summary; state the hierarchy issue directly and use الجهة الأدنى for the lower-level body."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u06-p05",
+      "learner_facing_sha256": "a681dcb148eeb50f4085507afb4ec5dbab63f19b9f36be65ea3ce44aaa8ae60f",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u06-p05-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The keyed response begins as a causal explanation rather than a summary; state the proportionality issue directly as evaluation of scope, effectiveness, alternatives, and burden."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u06-p06",
+      "learner_facing_sha256": "8d4a09b87e525dc22b30da77c38c1af409c71480ad26cb1589494739476c1e46",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u06-p06-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The keyed answer is a noun-list fragment rather than a one-sentence summary; express the integration of meaning, authority, and procedure as a complete sentence."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate C1 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+}
