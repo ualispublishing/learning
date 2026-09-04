@@ -14,7 +14,7 @@ function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
 function graphTarget(win){const active=[...win.document.querySelectorAll('.node.active')].find(el=>el.isConnected);return active||win.document.body||win.document.documentElement}
 function key(win,key,code=key){const graphKey=['Enter','Escape',' ','Home'].includes(key);const target=graphKey?graphTarget(win):(win.document.body||win.document.documentElement);target.dispatchEvent(new win.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
 function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow}}
-async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),snap=x.w?.SECX_COVERAGE_SNAPSHOT,bank=x.w?.SECX_RELEASED_BANK_STATE,meta=x.w?.CISSP_META?.meta||{};return x.d&&x.w&&x.d.querySelector('#coverageLensBtn')&&bank?.ready&&bank.count===meta.question_count&&Array.isArray(x.w.SECX_RELEASED_QUESTIONS)&&x.w.SECX_RELEASED_QUESTIONS.length===meta.question_count&&snap?.bankReady&&snap.standardQuestions===meta.question_count&&Array.from({length:8},(_,i)=>node(x.d,`d${i+1}`)).every(Boolean)?x:null},`${label} shared released-bank coverage runtime`)}
+async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),snap=x.w?.SECX_COVERAGE_SNAPSHOT,bank=x.w?.SECX_RELEASED_BANK_STATE,meta=x.w?.CISSP_META?.meta||{};return x.d&&x.w&&x.d.querySelector('#coverageLensBtn')&&bank?.ready&&bank.count===meta.question_count&&Array.isArray(x.w.SECX_RELEASED_QUESTIONS)&&x.w.SECX_RELEASED_QUESTIONS.length===meta.question_count&&snap?.bankReady&&snap.standardQuestions===meta.question_count&&Number.isInteger(snap.totals?.practice_exposure_gaps)&&Array.from({length:8},(_,i)=>node(x.d,`d${i+1}`)).every(Boolean)?x:null},`${label} shared released-bank coverage runtime`)}
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
 function clickId(d,id){const el=node(d,id);assert(el,`node ${id} exists`);el.click();return el}
 async function enter(w){key(w,'Enter','Enter');await sleep(80)}
@@ -26,15 +26,32 @@ async function run(){
   assert(snap.totals.review_cards===meta.card_count,'coverage snapshot review-card count matches Atlas');
   assert(snap.totals.scenarios===meta.question_count,'coverage snapshot scenario count matches shared released bank');
   assert(w.SECX_RELEASED_BANK_STATE.count===snap.totals.scenarios,'coverage and main graph use one released scenario count');
+  const gapCount=snap.totals.subtopics-snap.totals.subtopics_with_exact_scenario_tag;
+  assert(snap.totals.practice_exposure_gaps===gapCount,'coverage gap total equals subtopics minus exact-tagged subtopics');
+  assert(Array.isArray(snap.gaps)&&snap.gaps.length===gapCount,'coverage snapshot exposes every exact-tag gap record');
   assert(d.querySelector('#coverageLensBtn')?.textContent.includes(`· ${meta.question_count}`),'coverage button shows released scenario count');
 
   key(w,'c','KeyC');
   await waitFor(()=>node(d,'coverage:root')&&d.querySelectorAll('.node.coverage-domain').length===8&&d.querySelector('#crumb')?.textContent==='SecX › Coverage','C opens eight-domain coverage map');
+  assert(node(d,'coverage:root')?.textContent.includes(`${gapCount} exact-tag gaps`),'coverage center advertises deterministic exact-tag gap count');
+  await enter(w);
+  await waitFor(()=>node(d,'coverage:gaps')&&d.querySelectorAll('.node.coverage-gap').length>0&&d.querySelector('#crumb')?.textContent==='SecX › Coverage › Practice exposure gaps','Coverage center Enter opens paged exact-tag gap view');
+  assert(node(d,'coverage:gaps')?.textContent.includes(`${gapCount} enriched subtopics`),'gap center reports deterministic gap count');
+  const firstGap=d.querySelector('.node.coverage-gap');assert(firstGap,'at least one exact-tag gap renders');
+  const firstGapId=firstGap.dataset.id,firstGapRecord=snap.gaps.find(x=>`coverage:gap:${x.objective}:${x.index}`===firstGapId);assert(firstGapRecord,'rendered gap id maps to released coverage record');
+  await selectThenEnter(d,w,firstGapId,'first practice exposure gap');
+  await waitFor(()=>d.querySelector('#detail.open')?.textContent.includes(`objective ${firstGapRecord.objective}`)&&d.querySelector('#detail')?.textContent.includes('no manifest-released standard scenario carries this exact subtopic tag'),'gap depth-two detail explains exact released-tag absence');
+  key(w,' ','Space');
+  await waitFor(()=>d.querySelector('#detail')?.textContent.includes('not evidence that the subtopic is missing from the curriculum')&&d.querySelector('#detail')?.textContent.includes('not learner weakness'),'gap depth-three detail preserves curriculum and learner-state boundaries');
+  key(w,'Escape','Escape');await sleep(40);key(w,'Escape','Escape');
+  await waitFor(()=>node(d,'coverage:root')&&d.querySelectorAll('.node.coverage-domain').length===8&&d.querySelector('#crumb')?.textContent==='SecX › Coverage','gap detail and gap view Escape return to Coverage root');
+
   const d1=snap.domains.find(x=>x.domain_num===1);assert(d1,'D1 coverage snapshot exists');
   const d1node=node(d,'coverage:d1');assert(d1node,'D1 coverage node exists');
   assert(d1node.textContent.includes(`${d1.objectives} objectives`),'D1 objective count rendered from explicit snapshot');
   assert(d1node.textContent.includes(`${d1.subtopics} subtopics`),'D1 subtopic count rendered from explicit snapshot');
   assert(d1node.textContent.includes(`${d1.scenarios} scenarios`),'D1 scenario count rendered from shared released bank');
+  assert(d1node.textContent.includes(`${d1.practice_exposure_gaps} exact-tag gaps`),'D1 exact-tag gap count rendered from explicit snapshot');
 
   await selectThenEnter(d,w,'coverage:d1','D1 coverage domain');
   const o11=snap.objectives.find(x=>x.objective==='1.1');assert(o11,'1.1 coverage snapshot exists');
@@ -43,6 +60,7 @@ async function run(){
   assert(o11node.textContent.includes(`${o11.subtopics} subtopics`),'1.1 subtopic count rendered');
   assert(o11node.textContent.includes(`${o11.scenarios} scenarios`),'1.1 released scenario count rendered');
   assert(o11node.textContent.includes(`${o11.subtopics_with_exact_scenario_tag}/${o11.subtopics} subtopics tagged`),'1.1 exact-tag exposure rendered');
+  assert(o11node.textContent.includes(`${o11.practice_exposure_gaps} exact-tag gaps`),'1.1 exact-tag gap count rendered');
   await selectThenEnter(d,w,'coverage:objective:1.1','coverage objective 1.1');
   await waitFor(()=>d.querySelector('#detail.open')?.textContent.includes(`Explicit Atlas mappings: ${o11.subtopics} enriched subtopics`),'1.1 depth-two detail reports explicit mappings');
   assert(d.querySelector('#detail')?.textContent.includes(`${o11.subtopics_with_exact_scenario_tag}/${o11.subtopics} subtopics have at least one exact released scenario tag`),'coverage detail reports exact-tag fraction');
@@ -57,9 +75,11 @@ async function run(){
   assert(md.querySelector('#coverageLensBtn'),'mobile coverage control present');
   key(mw,'c','KeyC');
   await waitFor(()=>md.querySelectorAll('.node.coverage-domain').length===8,'mobile coverage map renders eight domains');
-  assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile coverage lens has no horizontal overflow');
+  await enter(mw);
+  await waitFor(()=>node(md,'coverage:gaps')&&md.querySelectorAll('.node.coverage-gap').length>0,'mobile Coverage center opens exact-tag gaps');
+  assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile coverage gap lens has no horizontal overflow');
   result.dataset.smoke='pass';
-  result.textContent=`PASS SecX coverage lens browser smoke: shared-bank=${meta.question_count} objectives=${meta.objective_count} subtopics=${meta.subtopic_checks} exact-counts D1 objective-1.1 depth-gates Escape mobile`;
+  result.textContent=`PASS SecX coverage lens browser smoke: shared-bank=${meta.question_count} objectives=${meta.objective_count} subtopics=${meta.subtopic_checks} exact-tag-gaps=${gapCount} gap-detail D1 objective-1.1 depth-gates Escape mobile`;
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
