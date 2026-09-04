@@ -49,7 +49,7 @@ A normalized graph node may carry:
 
 Not every node needs every field. Unknown values should stay unknown rather than being inferred for visual completeness.
 
-Temporary navigation IDs such as `sub:<objective-id>:<index>`, pager IDs, study-lens IDs, due-review IDs, source-lens IDs, and `coverage:*` IDs are local UI identities only. They are not durable curriculum IDs and cannot become endpoints in a released semantic-relationship registry.
+Temporary navigation IDs such as `sub:<objective-id>:<index>`, pager IDs, study-lens IDs, due-review IDs, source-lens IDs, and `coverage:*` IDs are local UI identities only. This includes `coverage:gap:<objective-id>:<coverage-index>` records. They are not durable curriculum IDs and cannot become endpoints in a released semantic-relationship registry.
 
 ## Relationship types
 
@@ -68,7 +68,7 @@ Only hierarchy and relationships already explicit in released Atlas data are cur
 
 Explicit `source_ids` provenance can be shown as a source projection because the citation mapping already exists in Atlas. A shared citation does **not** imply that the two cited items depend on, contrast with, implement, mitigate, measure, or otherwise semantically relate to one another.
 
-Coverage counts and exact-tag practice-exposure counts are likewise projections over explicit released mappings. They do **not** create semantic relationships between objectives, cards, subtopics, scenarios, or domains.
+Coverage counts and exact-tag practice-exposure counts/gaps are likewise projections over explicit released mappings. They do **not** create semantic relationships between objectives, cards, subtopics, scenarios, or domains.
 
 `RELATIONSHIP_REVIEW.json` is a separate reviewer-only draft registry for future semantic edges. It is intentionally not loaded by `next.html`. Item-level VERIFIED status does not approve a relationship between two verified items. Relationship approval requires its own rationale/evidence/reviewer gate, and even approved records remain draft-only until a separate released-relationship artifact exists.
 
@@ -119,11 +119,16 @@ It may display, by domain/objective:
 - released scenario count;
 - source count;
 - enriched subtopics with at least one exact released scenario `subtopics` tag;
+- exact-tag practice-exposure gaps;
 - objectives with zero explicitly mapped released scenarios.
 
-A missing scenario mapping is a **practice-exposure gap**, not proof of curriculum omission. Coverage metrics are corpus properties and are not learner mastery/readiness measurements.
+A practice-exposure gap is defined only when an enriched subtopic mapped to objective O has no exact equal label in the `subtopics` array of any manifest-released scenario mapped to O. With the current released bank, **305/344** enriched subtopics have at least one exact released scenario tag and **39** are exact-tag gaps.
 
-Coverage consumes the shared released-scenario registry, must not independently load the manifest or discover candidate-only files, must not read/write learner state, and must not infer semantic edges from counts, tags, or shared sources.
+The Coverage center may open a paged local gap projection. Gap IDs use `coverage:gap:<objective-id>:<coverage-index>` and retain the original released coverage label plus parent objective. They are temporary projection identities only.
+
+A missing scenario/tag mapping is a **practice-exposure gap**, not proof of curriculum omission or factual deficiency. Coverage metrics are corpus properties and are not learner mastery/readiness/weakness measurements. A subtopic can be taught by objective/card/broader scenario material even when no released scenario carries its exact subtopic label.
+
+Coverage consumes the shared released-scenario registry, must not independently load the manifest or discover candidate-only files, must not read/write learner state, and must not infer semantic edges from counts, tags, gaps, or shared sources.
 
 ## Progressive disclosure
 
@@ -147,7 +152,8 @@ Do not render the entire knowledge base simultaneously. The view should mount a 
 - paged card/scenario records where necessary;
 - schedule-derived learner-state projections;
 - paged source-provenance projections;
-- local domain/objective coverage projections.
+- local domain/objective coverage projections;
+- paged exact-tag coverage-gap projections.
 
 This preserves spatial legibility and keyboard traversal as the corpus grows.
 
@@ -193,11 +199,15 @@ Learner-state records must never rewrite:
 - semantic-review state;
 - curriculum relationships.
 
-## Search
+## Search and accessibility projections
 
-Search may index released domains, objectives, subtopics, retrieval cards, and released scenarios. Search results may route the learner to an exact local graph context.
+Search may index released domains, objectives, subtopics, retrieval cards, released scenarios, sources, and Coverage domain/objective projections. Search results may route the learner to an exact local graph context.
 
 Search similarity may support discovery but must not create semantic graph edges automatically.
+
+The expanded search palette follows a combobox/listbox interaction model. Search result options are controlled through active-descendant state rather than the Tab order; Tab and Shift+Tab are contained between the input and visible Close control. The visible Search control focuses the input when opened, dismissal restores focus to the opener when appropriate, and result navigation preserves routed graph focus.
+
+Expanded detail panels provide touch-accessible Close/Depth/Open controls that delegate to the same ascend, disclosure-depth, and descend semantics as Escape, Space, and Enter. These accessibility controls must not create alternate content or state models.
 
 Future search filters can include node type, domain, objective, source, due-card state, coverage/exposure state, and explicitly released relationship type.
 
@@ -221,7 +231,7 @@ Automatic approval is forbidden from:
 - fuzzy/string similarity;
 - embeddings or semantic-distance scores;
 - shared `source_ids`;
-- coverage co-occurrence/counts;
+- coverage co-occurrence/counts/gaps;
 - two endpoints independently being VERIFIED.
 
 ## Release isolation
@@ -232,7 +242,7 @@ Released review-card learner-state views must derive from the Atlas-compatible 1
 
 Source Provenance must derive from `CISSP_META.sources`, exact released `source_ids`, and the shared released-scenario registry.
 
-Coverage must derive from released objectives/subtopics/cards plus the shared released-scenario registry and exact scenario subtopic tags.
+Coverage must derive from released objectives/subtopics/cards plus the shared released-scenario registry and exact scenario subtopic tags. Exact-tag gaps are the complement of those explicit tag matches and must not incorporate fuzzy matching or learner data.
 
 Reviewer-only semantic relationship data must not be loaded by learner runtime. A future learner-facing relationship layer requires a separate released artifact.
 
@@ -253,7 +263,7 @@ Before any graph surface becomes production-facing, deterministic validation mus
 - source-provenance scenario nodes that expose answers or record false answer-reveal evidence;
 - due/study inputs that are not Atlas-compatible review cards/state;
 - source-provenance membership not backed by exact `source_ids`;
-- coverage inputs not backed by released objective/subtopic/card/scenario mappings;
+- coverage inputs/gaps not backed by released objective/subtopic/card/scenario mappings and exact tag comparisons;
 - coverage code coupled to learner state or inferred relationship logic.
 
 ## Keyboard grammar
@@ -269,6 +279,6 @@ Before any graph surface becomes production-facing, deterministic validation mus
 - `Q`: open Study Queue.
 - `S`: open Source Provenance.
 - `C`: open Coverage.
-- Tab remains normal browser accessibility behavior.
+- Tab remains normal browser accessibility behavior outside the open search modal; inside search, Tab/Shift+Tab are contained within the dialog controls.
 
 Pointer/touch remains supported; keyboard-first must not become keyboard-only.
