@@ -5,7 +5,7 @@ The Coverage lens is a read-only projection over released CISSP Atlas mappings. 
 ## Entry points
 
 - `C` opens the Coverage map.
-- The **Coverage · N** button displays the number of standard released scenarios currently loaded through the released question-bank manifest.
+- The **Coverage · N** button displays the number of standard released scenarios in the shared released-bank registry.
 
 ## Data sources
 
@@ -15,9 +15,15 @@ Coverage is computed only from released Atlas data:
 - enriched objective → subtopic mappings from `coverage-detail.js`;
 - the Atlas-compatible review-card registry;
 - supplemental released high-yield / AI / precision cards;
-- standard scenarios loaded only from files enumerated by `question-bank/RELEASED_BATCHES.json`.
+- standard released scenarios from the shared `SECX_RELEASED_QUESTIONS` registry.
 
-Candidate-only question files are never discovered by directory scanning and are never included simply because they exist in the repository.
+`next-layer.js` is the single scenario release boundary. It loads only files enumerated by `question-bank/RELEASED_BATCHES.json`, then publishes:
+
+- `SECX_RELEASED_QUESTIONS`;
+- `SECX_RELEASED_BANK_STATE`;
+- the `secx:released-bank` readiness event.
+
+Coverage consumes those records directly and performs no independent fetch. Candidate-only question files are never discovered by directory scanning and are never included simply because they exist in the repository.
 
 ## Metrics
 
@@ -34,7 +40,7 @@ At domain/objective level it may show:
 - enriched subtopics that have at least one **exact** released scenario `subtopics` tag;
 - objectives with zero explicitly mapped released scenarios.
 
-The exported `SECX_COVERAGE_SNAPSHOT` exists so deterministic/browser checks can reconcile rendered counts to Atlas metadata and release data.
+The exported `SECX_COVERAGE_SNAPSHOT` exists so deterministic/browser checks can reconcile rendered counts to Atlas metadata and the shared released-bank state.
 
 ## Interpretation boundary
 
@@ -66,7 +72,9 @@ The general graph learner-state decorator may still record ordinary graph visits
 
 - Atlas objective/subtopic/review-card totals;
 - released standard-scenario total;
-- release-manifest-only scenario loading;
+- central release-manifest enforcement in `next-layer.js`;
+- use of the shared released-scenario registry/event by Coverage;
+- absence of a second Coverage fetch or manifest loader;
 - exact subtopic-tag exposure logic;
 - no candidate path hard-coding;
 - no learner-state dependency;
@@ -74,4 +82,4 @@ The general graph learner-state decorator may still record ordinary graph visits
 - correct runtime load order;
 - continued isolation of `RELATIONSHIP_REVIEW.json`.
 
-`coverage-browser-smoke.html` / `coverage-browser-smoke.sh` verify the desktop and 390px mobile interaction path, including D1 and objective `1.1`, Escape hierarchy, and Atlas-count reconciliation.
+`coverage-browser-smoke.html` / `coverage-browser-smoke.sh` verify the desktop and 390px mobile interaction path, including shared-bank readiness/count equality, D1 and objective `1.1`, Escape hierarchy, and Atlas-count reconciliation.
