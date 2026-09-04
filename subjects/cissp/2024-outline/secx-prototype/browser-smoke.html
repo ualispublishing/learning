@@ -30,8 +30,10 @@ async function run(){
   assert(d.querySelector('#studyQueueBtn')?.textContent.includes('· 0 due'),'fresh study button has zero due cards');
   assert(d.querySelector('#crumb')?.textContent==='SecX','root breadcrumb');
 
-  clickId(d,'d1'); await enter(w);
-  await waitFor(()=>node(d,'1.9')&&d.querySelector('#crumb')?.textContent.includes('Security and Risk Management'),'domain to objective traversal');
+  key(w,'ArrowUp','ArrowUp');
+  await waitFor(()=>node(d,'d1')?.classList.contains('active'),'ArrowUp selects D1 from root');
+  await enter(w);
+  await waitFor(()=>node(d,'1.9')&&d.querySelector('#crumb')?.textContent.includes('Security and Risk Management'),'keyboard D1 to objective traversal');
   clickId(d,'1.9'); await enter(w);
   await waitFor(()=>d.querySelectorAll('.node.facet').length===3,'objective hub facets');
   assert(node(d,'facet:1.9:subtopics'),'Subtopics facet');
@@ -114,7 +116,7 @@ async function run(){
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile graph shell has no horizontal overflow');
 
   result.dataset.smoke='pass';
-  result.textContent=`PASS SecX expanded browser smoke: released-counts domains objective-hub cards Atlas-progress due-review study-lens graph-state scenarios answer-gate search Home mobile; sampled card ${cardId}; scenario ${scenarioId}`;
+  result.textContent=`PASS SecX expanded browser smoke: released-counts keyboard-navigation objective-hub cards Atlas-progress due-review study-lens graph-state scenarios answer-gate search Home mobile; sampled card ${cardId}; scenario ${scenarioId}`;
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
