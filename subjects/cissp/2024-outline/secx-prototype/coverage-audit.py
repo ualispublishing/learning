@@ -74,6 +74,7 @@ try:
     coverage = parse_coverage()
     manifest = json.loads(read(QB / "RELEASED_BATCHES.json"))
     lens = read(ROOT / "coverage-lens.js")
+    next_layer = read(ROOT / "next-layer.js")
     next_html = read(ROOT / "next.html")
     smoke = read(ROOT / "coverage-browser-smoke.html")
     smoke_shell = read(ROOT / "coverage-browser-smoke.sh")
@@ -128,8 +129,15 @@ objective_without_scenarios = sum(1 for oid in objective_ids if scenario_counts[
 subtopics_with_exact_tag = sum(len(v) for v in tagged_subtopics.values())
 subtopics_total = sum(len(v) for v in coverage.values())
 
-check("RELEASED_BATCHES.json" in lens, "coverage lens does not use released scenario manifest")
-check("fetch(`../study-site/${p}`" in lens, "coverage lens no longer loads only manifest-listed files")
+check("RELEASED_BATCHES.json" in next_layer, "central released-bank loader does not use release manifest")
+check("fetch(`../study-site/${p}`" in next_layer, "central released-bank loader no longer loads manifest-listed files")
+check("window.SECX_RELEASED_QUESTIONS" in next_layer and "window.SECX_RELEASED_BANK_STATE" in next_layer, "central released-scenario registry export missing")
+check("secx:released-bank" in next_layer, "central released-bank readiness event missing")
+check("SECX_RELEASED_QUESTIONS" in lens and "SECX_RELEASED_BANK_STATE" in lens, "coverage lens does not consume shared released-scenario registry")
+check("coverageQuestions=window.SECX_RELEASED_QUESTIONS" in lens, "coverage lens does not use shared released scenario records directly")
+check("secx:released-bank" in lens, "coverage lens does not refresh from shared bank readiness event")
+check("RELEASED_BATCHES.json" not in lens, "coverage lens duplicates release-manifest loading")
+check("fetch(" not in lens, "coverage lens performs an independent network fetch")
 check("question-bank/candidates/" not in lens, "coverage lens hard-codes candidate paths")
 check("q.subtopics.includes(label)" in lens, "coverage lens exact scenario-tag coverage logic missing")
 check("SECX_COVERAGE_SNAPSHOT" in lens, "coverage lens does not expose deterministic count snapshot")
@@ -145,6 +153,7 @@ check("sources.onload" in next_html, "coverage lens load is not gated on source-
 check("RELATIONSHIP_REVIEW.json" not in next_html, "reviewer relationship registry is learner-loaded")
 check("coverageLensBtn" in smoke and "KeyC" in smoke, "coverage browser smoke does not exercise coverage control/shortcut")
 check("coverage:d1" in smoke and "coverage:objective:1.1" in smoke, "coverage browser smoke does not verify domain/objective traversal")
+check("SECX_RELEASED_BANK_STATE" in smoke, "coverage browser smoke does not wait for shared released-bank readiness")
 check("--user-data-dir=" in smoke_shell, "coverage browser smoke does not isolate browser storage")
 
 if errors:
@@ -161,5 +170,5 @@ print(
     f"standard_questions={len(all_standard)} "
     f"subtopics_with_exact_scenario_tag={subtopics_with_exact_tag} "
     f"objectives_without_scenarios={objective_without_scenarios} "
-    "mapping=explicit-counts-only"
+    "mapping=explicit-counts-only shared_bank=single-release-boundary"
 )
