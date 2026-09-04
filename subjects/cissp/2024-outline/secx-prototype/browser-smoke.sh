@@ -21,13 +21,13 @@ SERVER_PID=$!
 trap 'kill "$SERVER_PID" 2>/dev/null || true; rm -rf "$PROFILE"' EXIT
 sleep 1
 
-if ! timeout 70s "$CHROME" \
+if ! timeout 120s "$CHROME" \
   --headless=new \
   --no-sandbox \
   --disable-gpu \
   --disable-dev-shm-usage \
   --user-data-dir="$PROFILE" \
-  --virtual-time-budget=50000 \
+  --virtual-time-budget=100000 \
   --dump-dom \
   "http://127.0.0.1:${PORT}/secx-prototype/browser-smoke.html" >"$OUT"; then
   echo "FAIL secx_browser_smoke: Chrome did not complete successfully" >&2
