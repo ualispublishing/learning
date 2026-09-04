@@ -67,7 +67,7 @@ if(searchHead)searchHead.appendChild(closeButton);
 function restoreSearchFocus(){
   const opener=searchOpener;
   searchOpener=null;
-  requestAnimationFrame(()=>{if(opener?.isConnected)opener.focus({preventScroll:true})});
+  if(opener?.isConnected)opener.focus({preventScroll:true});
 }
 function closeSearchToOpener(){closeSearch();restoreSearchFocus()}
 searchButton.addEventListener('click',()=>{searchOpener=searchButton;openSearch()});
