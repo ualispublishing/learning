@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B2",
+  "unit": 2,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b2/passages.jsonl",
+  "canonical_sha256": "7ea1bfc52218d80e1c68b0d311ba33f9aec795d65df6f3e46fc7409abdcc55d7",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 17,
+  "decisions": [
+    {
+      "passage_id": "ar-b2-u02-p01",
+      "learner_facing_sha256": "4144aa83593e4d4e642068885cca010a0774882aefe5bf72dc66bf831cbca745",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u02-p01-gB-01",
+          "field": "answer q7",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "فحصًا واختيارًا مباشرًا أكبر is awkward; state that the store permits direct inspection of products and a wider choice."
+        },
+        {
+          "finding_id": "ar-b2-u02-p01-gB-02",
+          "field": "question q8",
+          "dimension": "assessment_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "Align the grammar-function question with the actual conditional sentence in the passage; the old wording makes الخروج the agent of an unclear يفوت construction."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u02-p02",
+      "learner_facing_sha256": "f960ba8d75021e4012d319aeb7bd07fe02febe7cdb7f9026562c35ec7c425b49",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u02-p02-gB-01",
+          "field": "answer q4",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The flexible portion is what gets transferred; use يتم نقل rather than a form that makes it appear to be the agent of ينقل."
+        },
+        {
+          "finding_id": "ar-b2-u02-p02-gB-02",
+          "field": "answer q5",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "يمكن التخطيط عليه is an awkward collocation for a budget floor; state that each facility can plan on the basis of that minimum."
+        },
+        {
+          "finding_id": "ar-b2-u02-p02-gB-03",
+          "field": "answer q9",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Replace the awkward يحدد مسبقًا على مقدار واحد with a clear definition using مستقر or محدد مسبقًا بمقدار واحد."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u02-p03",
+      "learner_facing_sha256": "f2f837a08a8b0437b5e8012e0442940c512210be2e4f13cae8c6730570fb65eb",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u02-p03-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "سؤال الإرجاع is not the idiomatic noun phrase for handling a return issue; use مسألة الإرجاع."
+        },
+        {
+          "finding_id": "ar-b2-u02-p03-gB-02",
+          "field": "text + question q6",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The intended concessive meaning is ‘even if’; use حتى إن rather than حتى إذا and keep the assessment wording aligned with the repaired text."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u02-p04",
+      "learner_facing_sha256": "aa5c951880ab6a06a86d05a2e9a6c948bb6e135e82b830eb8e82717a8cf1638a",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 4,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u02-p04-gB-01",
+          "field": "text",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "فصل جزءًا من المكافأة الجماعية عن الفردية does not express the intended incentive redesign; state that part of the reward was made collective instead of all of it being individual."
+        },
+        {
+          "finding_id": "ar-b2-u02-p04-gB-02",
+          "field": "answer q1",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "تشجع الموظفين على الحالات القصيرة is incomplete; the incentive encourages employees to choose the short cases."
+        },
+        {
+          "finding_id": "ar-b2-u02-p04-gB-03",
+          "field": "answer q4",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "معدل الإنجاز البسيط is unclear; identify the measure as the request-completion rate."
+        },
+        {
+          "finding_id": "ar-b2-u02-p04-gB-04",
+          "field": "answer q7",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "سرعة العدد is not a meaningful measure; the metric concerns the speed of completing requests."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u02-p05",
+      "learner_facing_sha256": "7c6a7f155eec6d48c6b9a33f0766af615d73b80c64dfa74084f3801e53bd6b19",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u02-p05-gB-01",
+          "field": "text",
+          "dimension": "reference_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The comparison concerns two plans, so عرض الخطة should be عرض الخطتين."
+        },
+        {
+          "finding_id": "ar-b2-u02-p05-gB-02",
+          "field": "answer q6",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "تضع تغير الوزن شرطًا is awkward; describe changing the weight as a test of recommendation stability and sensitivity."
+        },
+        {
+          "finding_id": "ar-b2-u02-p05-gB-03",
+          "field": "question q4",
+          "dimension": "assessment_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "Use الناتج النهائي for the group's final output rather than المنتج النهائي, which reads as a commercial product in this context."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u02-p06",
+      "learner_facing_sha256": "e2d9f47acb8e7df1b53bdc7601f84caf1094802a1d8b5132f3fa29ba6b2aa315",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u02-p06-gB-01",
+          "field": "text",
+          "dimension": "grammar_agreement",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The coordinated antecedent has three items, but اللذان is dual; recast the list in the plural with التي to restore agreement and clarity."
+        },
+        {
+          "finding_id": "ar-b2-u02-p06-gB-02",
+          "field": "answer q7",
+          "dimension": "semantic_precision",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "الظاهرة is a semantic error: the question contrasts visible cost with opportunity cost, so the answer must say التكلفة الظاهرة."
+        },
+        {
+          "finding_id": "ar-b2-u02-p06-gB-03",
+          "field": "answer q8",
+          "dimension": "grammar_function_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "تقدم شرطًا is awkward as an explanation of لكن إذا; describe it as introducing a conditional case that shows why individual treatment can be insufficient."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate B2 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+}
