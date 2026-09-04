@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "C1",
+  "unit": 3,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/c1/passages.jsonl",
+  "canonical_sha256": "61ab2c2624a1429ab76aebd1ac264646b93d562d9d46420d7515b3f2b059153e",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 10,
+  "decisions": [
+    {
+      "passage_id": "ar-c1-u03-p01",
+      "learner_facing_sha256": "a7031caff06ea98b6721eded19555eea1ff28ee23e2a50391908e0488a396f59",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u03-p01-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "حافظ المؤشر على وتيرة عالية assigns pace directly to the indicator in an awkward way; retain the lexical target وتيرة while making it the head of the construction."
+        },
+        {
+          "finding_id": "ar-c1-u03-p01-gB-02",
+          "field": "answer q5",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "الحل والعودة وجودة العينة compresses three distinct checks into ambiguous nouns; name solution time, case reopening, and review-sample quality explicitly."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u03-p02",
+      "learner_facing_sha256": "cd0e29538eda1e759acdcbbfd4c1e83ac3dc077114fee15d3791911e2073d428",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u03-p02-gB-01",
+          "field": "answer q5",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "الطلب بعد اكتمال الملفات والإلغاء والانتظار uses mismatched abstract nouns; use parallel references to completed files, cancellations, and waiting times."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u03-p03",
+      "learner_facing_sha256": "628a6022bb461830d97b03152ae8713c2be8fa436e5802c105a04986bf4f6530",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u03-p03-gB-01",
+          "field": "answer q4",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "الأنماط النظامية is ambiguous here; the report is meant to reveal recurring patterns across exceptions."
+        },
+        {
+          "finding_id": "ar-c1-u03-p03-gB-02",
+          "field": "answer q5",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "وتناسب التدقيق مع الأثر is malformed; make the audit level explicitly proportional to impact."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u03-p04",
+      "learner_facing_sha256": "401554356633bc5d42585436e15de450ee689ceb37ae8f788353eb49110030b6",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u03-p04-gB-01",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "نافعت ... صعبت الوصول على is non-idiomatic institutional MSA; state that the rule benefited regular users while making access harder for intermittent groups."
+        },
+        {
+          "finding_id": "ar-c1-u03-p04-gB-02",
+          "field": "answer q5",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "وتنوي قنوات الوصول is a malformed verb form; the intended action is to diversify access channels."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u03-p05",
+      "learner_facing_sha256": "a3c100bffd967abea72d531cd4fe5980209703fe603ba0a69ec9f63315f4d522",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u03-p05-gB-01",
+          "field": "answer q1",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "أكثر جاذبية من النتيجة الأصلية compares recorded activity with an unclear 'original result'; the contrast is with achieving the institution's original purpose."
+        },
+        {
+          "finding_id": "ar-c1-u03-p05-gB-02",
+          "field": "answer q5",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "يعيد تاريخ كل مقياس omits the construction required for reconstructing a metric's history; use يعيد بناء تاريخ."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u03-p06",
+      "learner_facing_sha256": "42720f126e2761d2af00663b3eb5554a528678bae97dbb6147a3c4d3939d372a",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u03-p06-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "وتيرة العمل حول الرقم is awkward; preserve the lexical target while expressing that work pace changes in response to the target number."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate C1 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+}
