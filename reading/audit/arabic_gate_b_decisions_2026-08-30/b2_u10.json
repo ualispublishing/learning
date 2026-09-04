@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B2",
+  "unit": 10,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b2/passages.jsonl",
+  "canonical_sha256": "cf562e08a99a1a109c4635cfc31af873b3865d1a6b3d1fa02cf4a36467886c97",
+  "records_reviewed": 6,
+  "records_with_findings": 5,
+  "fresh_findings": 12,
+  "decisions": [
+    {
+      "passage_id": "ar-b2-u10-p01",
+      "learner_facing_sha256": "1c13741cbfae257e0a4773ccd0a2375546af50a4439bcddecf101a73dbd3e688",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b2-u10-p02",
+      "learner_facing_sha256": "3481315960142620fb8c7c911f8e85ff1ca06605c917950cc2b210361c4ad1c2",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 4,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u10-p02-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تلتقط الهدف أفضل is a calque-like comparative; state that multiple criteria may represent the goal more faithfully."
+        },
+        {
+          "finding_id": "ar-b2-u10-p02-gB-02",
+          "field": "text",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "دقة القياس لا تتحول إلى اختلاف بين الأشخاص; the actual risk is hidden reviewer variation becoming a source of measurement error."
+        },
+        {
+          "finding_id": "ar-b2-u10-p02-gB-03",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "آلية حافز is an awkward policy collocation; use آلية للحوافز."
+        },
+        {
+          "finding_id": "ar-b2-u10-p02-gB-04",
+          "field": "answer q1",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "لا تزيد ... جودة أو معنى المشاركة has faulty valency/coordination; use لا تحسن ... جودة المشاركة أو معناها."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u10-p03",
+      "learner_facing_sha256": "91ed5f318070b4f5bb6c81ba40f632bfd69def29faebcbecbebf696749daa7ba",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u10-p03-gB-01",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "يكون بعض التنبؤ خطأ is malformed; express that some expectations may turn out to be wrong."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u10-p04",
+      "learner_facing_sha256": "c4dab22e4906d4fb46c04800143797390d213dfec378024cc704af48305b1d7c",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u10-p04-gB-01",
+          "field": "answer q2",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "توسيع دقة الموقع reverses the privacy operation described in the passage; broadening the location reduces precision."
+        },
+        {
+          "finding_id": "ar-b2-u10-p04-gB-02",
+          "field": "answer q5",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "أقل قدر من التفصيل والمدة اللازمة incorrectly coordinates detail and duration under one quantity phrase; state minimum necessary detail and shortest necessary retention separately."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u10-p05",
+      "learner_facing_sha256": "5278963679f9d1affe59bc8a1d4702b3dbe04b0f3c29ffdd5994e88e4fba9897",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 4,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u10-p05-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "سجلات بعض الفئات أقل بقاء is not idiomatic for archival survival probability; use أقل احتمالًا للبقاء."
+        },
+        {
+          "finding_id": "ar-b2-u10-p05-gB-02",
+          "field": "text",
+          "dimension": "reference_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "يسأل من لم يكتب التاريخ reads as asking a person; the intended meaning is wondering who did not get to write history."
+        },
+        {
+          "finding_id": "ar-b2-u10-p05-gB-03",
+          "field": "answer q1",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "أصواتهم لا تترك سجلات literally; state that insufficient historical records of those voices are available."
+        },
+        {
+          "finding_id": "ar-b2-u10-p05-gB-04",
+          "field": "answer q6",
+          "dimension": "reference_clarity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "حدود منشئها is ambiguous between creator and creation; specify limits imposed by how the source was created and preserved."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u10-p06",
+      "learner_facing_sha256": "7336e796894a44ec2ae68fe5572c01956e31ba08e41d83150e2020063d88871f",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u10-p06-gB-01",
+          "field": "answer q5",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تعليق حكم مبرر can mean suspending an already justified judgment; the intended claim is that agreement, objection, or suspension of judgment should itself be justified."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate B2 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+}
