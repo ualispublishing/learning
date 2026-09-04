@@ -1,14 +1,12 @@
 # SecX relationship review gate
 
-This draft file defines how future typed semantic relationships can be reviewed without turning search similarity, shared vocabulary, shared citations, coverage counts, or item-level correctness review into learner-facing curriculum claims.
+This draft file defines how future typed semantic relationships can be reviewed without turning search similarity, shared vocabulary, shared citations, coverage co-occurrence, or item-level correctness review into learner-facing curriculum claims.
 
 ## Current state
 
 `RELATIONSHIP_REVIEW.json` is reviewer-only and currently contains **zero** candidate, approved, or released relationships. The learner-facing review surface (`next.html`) does not load it.
 
 The current graph may display only relationships already explicit in released Atlas data, including hierarchy, objective/card mappings, objective/scenario mappings, exact released subtopic tags, and source provenance from `source_ids`.
-
-Coverage and practice-exposure counts are projections over those explicit mappings. They do not create semantic edges.
 
 ## What item verification does not mean
 
@@ -22,9 +20,9 @@ A future candidate may be proposed from a review lead such as:
 
 - an explicit statement inside a reviewed Atlas item;
 - a reviewer-identified relationship supported by named source evidence;
-- an exact repeated term or shared citation used only to surface a review lead.
+- an exact repeated term, shared citation, or coverage co-occurrence used only to surface a review lead.
 
-Exact shared wording, co-citation, search similarity, embeddings, fuzzy matching, coverage co-occurrence, or another heuristic may help identify candidates, but none of those may set `status: approved` automatically.
+Exact shared wording, co-citation, coverage counts/tags, search similarity, embeddings, fuzzy matching, or another heuristic may help identify candidates, but none of those may set `status: approved` automatically.
 
 ## Durable endpoints
 
@@ -34,7 +32,16 @@ Relationship endpoints must use stable released IDs:
 - released review-card IDs such as `OBJ-1.9`, `HY-014`, `AI-005`, or `PX-020`;
 - released standard-scenario IDs such as `Q-001` or `C-472`.
 
-Temporary navigation IDs such as `sub:<objective-id>:<index>`, pager IDs, learner-state lens IDs, source-lens IDs, `coverage:*` IDs, and search-result positions are not durable curriculum IDs and cannot be relationship endpoints.
+Temporary navigation/projection IDs are not durable curriculum IDs and cannot be relationship endpoints. This includes:
+
+- `sub:<objective-id>:<index>`;
+- `source:*` and `source-item:*` provenance nodes;
+- `study:*` learner-state nodes;
+- `due:*` schedule nodes;
+- `coverage:*` corpus-exposure nodes;
+- pager/facet/search-result positions.
+
+A provenance-only `source-item:scenario:<id>` is therefore not a semantic endpoint even though it refers to a stable released scenario underneath. A future semantic relationship must target the stable scenario ID itself.
 
 ## Allowed semantic types
 
