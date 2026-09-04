@@ -20,15 +20,18 @@ function key(win,key,code=key){const graphKey=['Enter','Escape',' ','ArrowLeft',
 function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow}}
 async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),scope=x.d?.querySelector('#scope')?.textContent||'';return x.d&&x.w&&/\d+ released scenarios/.test(scope)&&!scope.includes('loading')&&!scope.includes('unavailable')&&x.d.querySelector('[data-sec-grade-help]')&&x.d.querySelector('#dueReviewBtn')&&x.d.querySelector('#studyQueueBtn')?x:null},`${label} released Atlas graph + learner controls`)}
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
+function hasDomains(d){return Array.from({length:8},(_,i)=>`d${i+1}`).every(id=>node(d,id))}
+function modelNode(w,kind){return Array.isArray(w.nodes)?w.nodes.find(n=>n.kind===kind):null}
 function clickId(d,id){const el=node(d,id);assert(el,`node ${id} exists`);el.click();return el}
 async function enter(win){key(win,'Enter','Enter');await sleep(80)}
 async function selectThenEnter(d,w,id,label){clickId(d,id);await waitFor(()=>node(d,id)?.classList.contains('active')&&w.current?.()?.id===id,`${label} selected`);await enter(w)}
 function todayISO(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function graphDebug(w,d){const c=typeof w.current==='function'?w.current():null;return`crumb=${JSON.stringify(d.querySelector('#crumb')?.textContent||'')} current=${JSON.stringify(c?{id:c.id,kind:c.kind,facet:c.facet||null}:null)} active=${JSON.stringify([...d.querySelectorAll('.node.active')].map(x=>x.dataset.id))}`}
+function overflowDebug(d){const root=d.documentElement,vw=root.clientWidth;const offenders=[...d.querySelectorAll('body *')].map(el=>{const r=el.getBoundingClientRect();return{tag:el.tagName,id:el.id||'',cls:el.className||'',left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width)}}).filter(x=>x.width>0&&(x.left<-2||x.right>vw+2)).slice(0,10);return`doc=${root.scrollWidth}/${vw} body=${d.body.scrollWidth}/${d.body.clientWidth} offenders=${JSON.stringify(offenders)}`}
 async function run(){
   const {d,w}=await ready(frame,'desktop');
   const meta=w.CISSP_META?.meta||{},initialScope=d.querySelector('#scope')?.textContent||'',registryCount=Array.isArray(w.SECX_RELEASED_CARDS)?w.SECX_RELEASED_CARDS.length:null;
-  await waitFor(()=>d.querySelectorAll('.node.domain').length===8,'eight domain nodes');
+  await waitFor(()=>hasDomains(d),'eight domain nodes');
   assert(d.querySelectorAll('.node').length===9,'root plus eight domains');
   assert(initialScope.includes(`${meta.card_count} cards`),`scope matches released retrieval-card count; scope=${JSON.stringify(initialScope)} meta.card_count=${meta.card_count} registry=${registryCount}`);
   assert(initialScope.includes(`${meta.question_count} released scenarios`),'scope matches released standard-question count');
@@ -39,14 +42,12 @@ async function run(){
   await enter(w);
   await waitFor(()=>node(d,'1.9')&&d.querySelector('#crumb')?.textContent.includes('Security and Risk Management'),'keyboard D1 to objective traversal');
   await selectThenEnter(d,w,'1.9','objective 1.9');
-  await waitFor(()=>d.querySelectorAll('.node.facet').length===3,'objective hub facets');
-  assert(node(d,'facet:1.9:subtopics'),'Subtopics facet');
-  assert(node(d,'facet:1.9:cards'),'Retrieval cards facet');
-  assert(node(d,'facet:1.9:scenarios'),'Released scenarios facet');
+  await waitFor(()=>['facet:1.9:subtopics','facet:1.9:cards','facet:1.9:scenarios'].every(id=>node(d,id)),'objective hub facets');
 
   await selectThenEnter(d,w,'facet:1.9:cards','retrieval-card facet');
-  try{await waitFor(()=>d.querySelector('.node.card'),'reviewed retrieval-card branch')}catch(err){throw new Error(`Retrieval-card branch did not open after Enter; ${graphDebug(w,d)}`)}
-  const card=d.querySelector('.node.card'),cardId=card.dataset.id;card.click();
+  let cardModel;
+  try{cardModel=await waitFor(()=>modelNode(w,'card'),'reviewed retrieval-card branch')}catch(err){throw new Error(`Retrieval-card branch did not open after Enter; ${graphDebug(w,d)}`)}
+  const card=node(d,cardModel.id);assert(card,`card ${cardModel.id} renders`);const cardId=cardModel.id;card.click();
   await waitFor(()=>d.querySelector('#detail.open')&&d.querySelectorAll('[data-sec-grade]').length===4,'card detail and Atlas grade controls');
   assert(!d.querySelector('#detail').textContent.includes('Correct answer:'),'card detail does not expose scenario answer language');
   d.querySelector('[data-sec-grade="0"]').click();
@@ -66,8 +67,9 @@ async function run(){
   await waitFor(()=>node(d,'facet:1.9:cards'),'cards ascend to objective hub');
 
   await selectThenEnter(d,w,'facet:1.9:scenarios','released-scenarios facet');
-  try{await waitFor(()=>d.querySelector('.node.scenario'),'released scenario branch')}catch(err){throw new Error(`Released scenario branch did not open after Enter; ${graphDebug(w,d)}`)}
-  const scenario=d.querySelector('.node.scenario'),scenarioId=scenario.dataset.id;scenario.click();
+  let scenarioModel;
+  try{scenarioModel=await waitFor(()=>modelNode(w,'scenario'),'released scenario branch')}catch(err){throw new Error(`Released scenario branch did not open after Enter; ${graphDebug(w,d)}`)}
+  const scenario=node(d,scenarioModel.id);assert(scenario,`scenario ${scenarioModel.id} renders`);const scenarioId=scenarioModel.id;scenario.click();
   await waitFor(()=>d.querySelector('#detail.open'),'scenario detail opens');
   assert(d.querySelector('#detail').textContent.includes('Options:'),'scenario options available before reveal');
   assert(!d.querySelector('#detail').textContent.includes('Correct answer:'),'scenario answer hidden before depth four');
@@ -87,15 +89,15 @@ async function run(){
   assert(d.querySelector('#crumb')?.textContent.includes('Released scenarios'),'scenario search preserves graph context');
 
   key(w,'Home','Home');
-  await waitFor(()=>d.querySelectorAll('.node.domain').length===8&&d.querySelector('#crumb')?.textContent==='SecX','Home returns to root');
-  assert(!d.querySelector('.node.scenario'),'Home unmounts deep local scenario cluster');
+  await waitFor(()=>hasDomains(d)&&d.querySelector('#crumb')?.textContent==='SecX','Home returns to root');
+  assert(!modelNode(w,'scenario'),'Home unmounts deep local scenario cluster');
   assert(d.querySelector('#scope')?.textContent.includes(`${meta.question_count} released scenarios`),'learner footer decorator preserves final released-bank count');
 
   key(w,'r','KeyR');
   await waitFor(()=>node(d,'due:reviews')&&node(d,cardId)&&d.querySelector('#crumb')?.textContent==='SecX › Due reviews','R opens due-review graph with the persisted due card');
   assert(cardProgress.due===todayISO(),'due queue membership is backed by persisted Atlas due date');
   key(w,'Escape','Escape');
-  await waitFor(()=>d.querySelectorAll('.node.domain').length===8&&d.querySelector('#crumb')?.textContent==='SecX','Escape returns from due reviews to root');
+  await waitFor(()=>hasDomains(d)&&d.querySelector('#crumb')?.textContent==='SecX','Escape returns from due reviews to root');
 
   const reviewCardCount=Array.isArray(w.SECX_RELEASED_CARDS)?w.SECX_RELEASED_CARDS.length:0;
   assert(reviewCardCount===meta.card_count,'learner registry matches Atlas layered-card count');
@@ -105,19 +107,20 @@ async function run(){
   assert(node(d,'study:new')?.textContent.includes(`${reviewCardCount-1} ungraded`),'study queue derives remaining new-card count from Atlas state');
   assert(node(d,'study:weak')?.textContent.includes('D1'),'fresh/tied review score uses Atlas higher-weight tie-break');
   await selectThenEnter(d,w,'study:new','new-card study facet');
-  await waitFor(()=>node(d,'study:list:new')&&d.querySelector('.node.card')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue › New cards','New facet opens paged Atlas card queue');
+  await waitFor(()=>node(d,'study:list:new')&&modelNode(w,'card')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue › New cards','New facet opens paged Atlas card queue');
   assert(node(d,'study:list:new')?.textContent.includes(`${reviewCardCount-1} Atlas review cards`),'new queue count excludes the graded card');
   key(w,'Escape','Escape');
   await waitFor(()=>node(d,'study:queue')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue','Escape from study cards returns to study hub');
   key(w,'Escape','Escape');
-  await waitFor(()=>d.querySelectorAll('.node.domain').length===8&&d.querySelector('#crumb')?.textContent==='SecX','Escape from study hub returns to root');
+  await waitFor(()=>hasDomains(d)&&d.querySelector('#crumb')?.textContent==='SecX','Escape from study hub returns to root');
 
   const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mw=mobileApp.w;
-  await waitFor(()=>md.querySelectorAll('.node.domain').length===8,'mobile domain nodes');
+  await waitFor(()=>hasDomains(md),'mobile domain nodes');
   assert(mw.getComputedStyle(md.querySelector('.legend')).display==='none','mobile keyboard legend hidden');
   assert(md.querySelector('#dueReviewBtn'),'mobile due-review control present');
   assert(md.querySelector('#studyQueueBtn'),'mobile study-queue control present');
-  assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile graph shell has no horizontal overflow');
+  const noOverflow=md.documentElement.scrollWidth<=md.documentElement.clientWidth+2;
+  assert(noOverflow,`mobile graph shell has no horizontal overflow; ${overflowDebug(md)}`);
 
   result.dataset.smoke='pass';
   result.textContent=`PASS SecX expanded browser smoke: released-counts keyboard-navigation objective-hub cards Atlas-progress due-review study-lens graph-state scenarios answer-gate search Home mobile; sampled card ${cardId}; scenario ${scenarioId}`;
