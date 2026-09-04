@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "C1",
+  "unit": 1,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/c1/passages.jsonl",
+  "canonical_sha256": "d34db47e07638bed8d244d5b32faf3029f7062130b5ada1b5cb4543b6773a203",
+  "records_reviewed": 6,
+  "records_with_findings": 5,
+  "fresh_findings": 10,
+  "decisions": [
+    {
+      "passage_id": "ar-c1-u01-p01",
+      "learner_facing_sha256": "be3ffc538dc1337f1dd9373acb545b8b5797950286bb6b9fc33ae411759d4c4c",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u01-p01-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "دقيقة جدًا حول شيء is a calque-like measurement formulation; make the contrast explicit between precise calculations and measuring the wrong thing."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u01-p02",
+      "learner_facing_sha256": "4e2d31876f95e1a973be27ac301c2a410b46b234ed77d0c86ddf8eeae3798fef",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 4,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u01-p02-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "مهتمون بالقراءة أكثر من المتوسط is awkward because المتوسط does not directly modify people; express degree of interest instead."
+        },
+        {
+          "finding_id": "ar-c1-u01-p02-gB-02",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "لا يصلح ... انحياز uses the wrong verb; sample size does not automatically correct selection bias."
+        },
+        {
+          "finding_id": "ar-c1-u01-p02-gB-03",
+          "field": "question q8",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "اختلاف غير المستجيبين عمن يجيب has malformed comparison/reference; contrast nonrespondents with respondents directly."
+        },
+        {
+          "finding_id": "ar-c1-u01-p02-gB-04",
+          "field": "answer q5",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "حساسية النتائج لغير المستجيبين is imprecise; the sensitivity analysis concerns assumptions about nonrespondents."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u01-p03",
+      "learner_facing_sha256": "d0512b1e9b103a894740b4171a751fd306acf2d908feba4138c1c9ff63a255ca",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u01-p03-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "الانتقال ... أسرع من الأدلة is an incomplete comparison; use أسرع مما تسمح به الأدلة."
+        },
+        {
+          "finding_id": "ar-c1-u01-p03-gB-02",
+          "field": "answer q1",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "عوامل أخرى أو اتجاه السببية قد يفسرانها mismatches a plural/disjunctive subject with a dual verb and blurs the reverse-causality alternative."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u01-p04",
+      "learner_facing_sha256": "88c51b43e16e9428394a60e439c2785c02a0936d8fb702fdfbd70506b4cd8146",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u01-p04-gB-01",
+          "field": "answer q2",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "بعض ترتيب الخطوات is malformed; the passage changes the task, group, and ordering of steps."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u01-p05",
+      "learner_facing_sha256": "adf01dfbe89b6393d4f9b40f9f2457766d692ae8574112b87ba692c42c774d7f",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-c1-u01-p06",
+      "learner_facing_sha256": "0ffbb8d26dffdb1ca4f3af2e29a82f1a58cc8e484d0f9e1afba91ba7379d1aed",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u01-p06-gB-01",
+          "field": "text",
+          "dimension": "reference_clarity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "توقعًا يختلف بينها leaves the comparison referent unclear; specify that the prediction differs from one causal explanation to another."
+        },
+        {
+          "finding_id": "ar-c1-u01-p06-gB-02",
+          "field": "answer q8",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تقابل مشكلة ... بمشكلة is awkward for the contrast introduced by أما; state that the construction compares a scope-wording problem with an evidence problem."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate C1 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+}
