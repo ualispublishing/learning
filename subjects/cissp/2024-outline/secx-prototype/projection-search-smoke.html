@@ -42,12 +42,21 @@ async function run(){
  mobileClose.click();await waitFor(()=>md.querySelector('#search').hidden,'mobile Search control closes before detail test');
  const mobileD1=node(md,'d1');assert(mobileD1,'mobile D1 node available for detail test');mobileD1.click();
  const detailClose=await waitFor(()=>md.querySelector('#detail.open [data-sec-detail-close]'),'mobile detail exposes visible Close control');
+ const detailMore=md.querySelector('#detail.open [data-sec-detail-more]'),detailOpen=md.querySelector('#detail.open [data-sec-detail-open]');
+ assert(detailMore&&detailOpen,'mobile detail exposes touch depth and descend controls');
  assert(detailClose.getAttribute('aria-controls')==='detail','detail Close identifies controlled panel');
- detailClose.click();
+ detailMore.click();
+ await waitFor(()=>md.querySelector('#detail.open')?.textContent.includes('Why it matters'),'mobile Depth control reveals depth two without Space');
+ await waitFor(()=>md.activeElement===md.querySelector('[data-sec-detail-more]'),'mobile Depth control retains focus after detail rerender');
+ md.querySelector('[data-sec-detail-close]').click();
  await waitFor(()=>!md.querySelector('#detail').classList.contains('open')&&node(md,'d1')?.classList.contains('active'),'mobile detail Close dismisses panel and preserves selected node');
  await waitFor(()=>md.activeElement===node(md,'d1'),'mobile detail Close returns focus to selected node');
- assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile projection search/detail controls have no horizontal overflow');
- result.dataset.smoke='pass';result.textContent='PASS SecX projection search smoke: source routing coverage-objective routing combobox-active-descendant visible Search/Close controls mobile detail-close focus-return';
+ node(md,'d1').click();
+ const openAgain=await waitFor(()=>md.querySelector('#detail.open [data-sec-detail-open]'),'mobile detail reopens with Open control');
+ openAgain.click();
+ await waitFor(()=>node(md,'1.1')&&md.querySelector('#crumb')?.textContent.includes('Security and Risk Management'),'mobile Open control descends from domain to objectives without Enter');
+ assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile touch controls/objective layout have no horizontal overflow');
+ result.dataset.smoke='pass';result.textContent='PASS SecX projection search smoke: source routing coverage-objective routing combobox-active-descendant visible Search/Close controls mobile detail-close depth-open focus-return';
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
