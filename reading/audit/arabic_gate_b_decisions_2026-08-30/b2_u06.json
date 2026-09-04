@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B2",
+  "unit": 6,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b2/passages.jsonl",
+  "canonical_sha256": "11d0f9d41539a5cd98453d6fd0e7fa2c7c8ea120084e587a973fc4b50925735c",
+  "records_reviewed": 6,
+  "records_with_findings": 5,
+  "fresh_findings": 16,
+  "decisions": [
+    {
+      "passage_id": "ar-b2-u06-p01",
+      "learner_facing_sha256": "668b702cc199c7402772b4d2b0b84cc59f0001a0d601b8ecdf843940f53f55bb",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u06-p01-gB-01",
+          "field": "text",
+          "dimension": "semantic_precision",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "طلب اجتماعي لإعادة الاستخدام reverses the intended privacy request; it must be a request not to reuse/reshare the material."
+        },
+        {
+          "finding_id": "ar-b2-u06-p01-gB-02",
+          "field": "answer q5",
+          "dimension": "assessment_alignment",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "توضح توقع إعادة الاستخدام conflicts with the passage's stated expectation of non-resharing; make the expectation explicit."
+        },
+        {
+          "finding_id": "ar-b2-u06-p01-gB-03",
+          "field": "answer q10",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "قابل أو أعطى موافقة is an unclear definition of موافق; define the consenting/agreeing person directly."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u06-p02",
+      "learner_facing_sha256": "b0f5823fc8920ad3d91a91efda02addcbafb404ff5d88559c00819c5b18fff66",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b2-u06-p03",
+      "learner_facing_sha256": "87b1a024f1ae2ee0e08e9a85d3db008c909e1d96259a653439db6987c76f033d",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 4,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u06-p03-gB-01",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The counterfactual begins with لو but shifts to a simple future سيخلق; keep both consequences in the counterfactual frame."
+        },
+        {
+          "finding_id": "ar-b2-u06-p03-gB-02",
+          "field": "answer q1",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تصميم الخدمة لا يجعلها تحتفظ is an awkward causative construction; state that the design does not include company retention of the key."
+        },
+        {
+          "finding_id": "ar-b2-u06-p03-gB-03",
+          "field": "answer q4",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "السرية تحمي المحتوى من مقدم الخدمة overstates the relation; it prevents the provider from opening the content."
+        },
+        {
+          "finding_id": "ar-b2-u06-p03-gB-04",
+          "field": "answer q8",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تجعل التعقيد شرطًا يربط is a calque that obscures the operational point; state directly that complexity can make a theoretically strong design hard to apply or maintain."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u06-p04",
+      "learner_facing_sha256": "291e6ab79563f47cac8abd442fe5d25e9e837f36c0af76c783301b9d7588e2b4",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 4,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u06-p04-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تمثيل الفئات يتكون من شخص أو شخصين is not idiomatic; representation can be limited to one or two people."
+        },
+        {
+          "finding_id": "ar-b2-u06-p04-gB-02",
+          "field": "answer q1",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "مجموع الخصائص suggests arithmetic addition; the risk arises from the combination of attributes within small groups."
+        },
+        {
+          "finding_id": "ar-b2-u06-p04-gB-03",
+          "field": "answer q7",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "الأول حذف معرفًا مباشرًا is malformed; define the first concept with يعني حذف معرّف مباشر."
+        },
+        {
+          "finding_id": "ar-b2-u06-p04-gB-04",
+          "field": "answer q8",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تقدم معرفة خارجية كشرط يزيد قدرة التعرف is a calque; state directly that outside knowledge can increase the possibility of identification."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u06-p05",
+      "learner_facing_sha256": "04280aef23fa7e077b44e6a8c060fe7e477b63513faf19fd9569530a573bcefe",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u06-p05-gB-01",
+          "field": "answer q2",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "احتفاظ طويل omits what is retained and makes the three-option list structurally uneven; name retention of the link for a longer period."
+        },
+        {
+          "finding_id": "ar-b2-u06-p05-gB-02",
+          "field": "answer q6",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تستبدل تخزينًا مفتوح الغرض is an awkward construction; state that the policy rejects open-ended link retention and requires a new decision for a later research question."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u06-p06",
+      "learner_facing_sha256": "f772734ad6fb470bc75c095d7d8fc14d0cd995d4056d08433271bb9f84e213ae",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u06-p06-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "مشاركة تقدم الطالب مع معلمه is an awkward collocation; the service shares information about the student's progress with the teacher."
+        },
+        {
+          "finding_id": "ar-b2-u06-p06-gB-02",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "قد يكون استخدام مقبولًا اليوم أوسع غدًا is malformed comparative wording; state that an accepted use may become broader in scope later."
+        },
+        {
+          "finding_id": "ar-b2-u06-p06-gB-03",
+          "field": "answer q5",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "حدود متغيرة على تدفق المعلومات is incomplete/awkward; define privacy as changing boundaries that regulate information flow, use, and inference."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate B2 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+}
