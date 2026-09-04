@@ -28,3 +28,88 @@ jobs:
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
+
+  arabic-b2-unit03-gate-b:
+    if: github.event.head_commit.message == 'Run Arabic Gate B B2 Unit 3 now'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate routed state before B2 Unit 3 repair
+        run: python reading/tools/validate_continuation_state.py
+
+      - name: Refuse duplicate Unit 3 decision frontier
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e reading/audit/arabic_gate_b_decisions_2026-08-30/b2_u03.json
+
+      - name: Apply exact-current B2 Unit 3 naturalness repairs
+        run: python reading/tools/apply_arabic_gate_b_b2_unit03.py
+
+      - name: Rebuild and bind Arabic evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python reading/tools/run_post_generation_gate0.py
+          python reading/tools/run_arabic_fresh_deterministic_revalidation.py
+          python reading/tools/audit_arabic_metalinguistic_cefr_candidates.py
+          python reading/tools/adjudicate_arabic_b1_c2_metalinguistic_cefr.py
+          python reading/tools/build_arabic_gate_b_naturalness_review.py
+          python reading/tools/record_arabic_gate_b_b2_unit03_decisions.py
+          python reading/tools/sync_arabic_gate_b_progress.py
+          python reading/tools/sync_arabic_release_global_blocker.py
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+
+      - name: Commit bounded B2 Unit 3 repair and evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            reading/arabic/b2/passages.jsonl \
+            reading/audit/arabic_gate_b_decisions_2026-08-30/b2_u03.json \
+            reading/audit/post_generation_gate0_2026-08-30.json \
+            reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json \
+            reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json \
+            reading/audit/arabic_b1_c2_metalinguistic_cefr_triage_2026-08-30.json \
+            reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json \
+            reading/audit/arabic_gate_b_packets_2026-08-30 \
+            reading/RELEASE_STATUS.json \
+            reading/STATE_MANIFEST.json
+          git commit -m 'Complete fresh Arabic Gate B B2 Unit 3 review'
+
+      - name: Rebase and regenerate evidence on exact push candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git rebase origin/main
+          python reading/tools/validate_continuation_state.py
+          python reading/tools/run_post_generation_gate0.py
+          python reading/tools/run_arabic_fresh_deterministic_revalidation.py
+          python reading/tools/audit_arabic_metalinguistic_cefr_candidates.py
+          python reading/tools/adjudicate_arabic_b1_c2_metalinguistic_cefr.py
+          python reading/tools/build_arabic_gate_b_naturalness_review.py
+          python reading/tools/record_arabic_gate_b_b2_unit03_decisions.py
+          python reading/tools/sync_arabic_gate_b_progress.py
+          python reading/tools/sync_arabic_release_global_blocker.py
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+          git add \
+            reading/audit/arabic_gate_b_decisions_2026-08-30/b2_u03.json \
+            reading/audit/post_generation_gate0_2026-08-30.json \
+            reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json \
+            reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json \
+            reading/audit/arabic_b1_c2_metalinguistic_cefr_triage_2026-08-30.json \
+            reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json \
+            reading/audit/arabic_gate_b_packets_2026-08-30 \
+            reading/RELEASE_STATUS.json \
+            reading/STATE_MANIFEST.json
+          if ! git diff --cached --quiet; then git commit --amend --no-edit; fi
+          python reading/tools/validate_continuation_state.py
+          git push origin HEAD:main
