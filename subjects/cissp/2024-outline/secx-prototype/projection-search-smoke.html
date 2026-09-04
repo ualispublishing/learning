@@ -9,7 +9,7 @@ const result=document.querySelector('#result'),frame=document.querySelector('#ap
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;while(Date.now()<end){try{const v=fn();if(v)return v}catch{}await sleep(50)}throw new Error(`Timed out waiting for ${label}`)}
 function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
-function key(w,key,code=key){w.dispatchEvent(new w.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
+function key(w,key,code=key){const target=w.document.activeElement||w.document.body;target.dispatchEvent(new w.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
 function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow}}
 async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),input=x.d?.querySelector('#searchInput');return x.d&&x.w&&input?.placeholder.includes('sources')&&x.d.querySelector('#sourceLensBtn')&&x.d.querySelector('#coverageLensBtn')?x:null},`${label} projection search runtime`)}
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
