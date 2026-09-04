@@ -1,0 +1,87 @@
+                )
+        elif source_state != "baseline":
+            fail(
+                f"DRIFT: vocab/{lang} rank {rank} differs from its proposal inside "
+                f"source state {source_state!r}"
+            )
+
+        row["Front"] = proposed_target
+        if current_meaning != proposed_meaning:
+            row["Back"] = replace_one(MEANING_RE, row["Back"], "Meaning", proposed_meaning, lang, rank)
+        if current_pos != proposed_pos:
+            row["Back"] = replace_one(POS_RE, row["Back"], "Part of speech", proposed_pos, lang, rank)
+        applied.append(rank)
+
+    if source_state == "incremental_baseline":
+        incremental = incremental_vocab_round(lang)
+        expected_applied = incremental["allowed_new_repair_ranks"] if incremental else set()
+        actual_applied = set(applied)
+        if actual_applied != expected_applied:
+            fail(
+                f"vocab/{lang}: incremental round must apply exactly "
+                f"{sorted(expected_applied)}, got {sorted(actual_applied)}"
+            )
+
+    distinct, homographs, blocking = vocab_duplicate_audit(lang, rows)
+    if blocking:
+        fail(f"vocab/{lang}: blocking duplicate groups: {json.dumps(blocking[:10], ensure_ascii=False)}")
+    if distinct != EXPECTED_VOCAB_DISTINCT[lang]:
+        fail(f"vocab/{lang}: expected {EXPECTED_VOCAB_DISTINCT[lang]} normalized fronts, got {distinct}")
+    if lang == "arabic":
+        if len(homographs) != 1 or homographs[0]["normalized_front"] != norm("ما"):
+            fail(f"vocab/arabic: expected sole intentional homograph ما, got {json.dumps(homographs, ensure_ascii=False)}")
+    elif homographs:
+        fail(f"vocab/{lang}: unexpected homograph groups: {json.dumps(homographs[:10], ensure_ascii=False)}")
+
+    output_raw = csv_bytes(rows, ["Front", "Back"], raw)
+    return {
+        "path": path,
+        "raw": output_raw,
+        "input_git_blob": input_blob,
+        "output_git_blob": git_blob_sha(output_raw),
+        "source_state": source_state,
+        "repairs_declared": sum(1 for item in ledger if item["status"] == "REPAIR"),
+        "applied": applied,
+        "already_applied": already,
+        "distinct_normalized_fronts": distinct,
+        "intentional_homographs": homographs,
+        "blocking_duplicate_groups": 0,
+    }
+
+
+def public_result(plan: dict) -> dict:
+    return {key: value for key, value in plan.items() if key not in {"path", "raw"}}
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--write", action="store_true")
+    args = parser.parse_args()
+
+    ledgers = {
+        "sentence": {lang: load_ledgers(SENT_LEDGER_DIR, lang, "sentence") for lang in LANGS},
+        "vocab": {lang: load_ledgers(VOCAB_LEDGER_DIR, lang, "vocab") for lang in LANGS},
+    }
+    plans = {
+        "sentence": {lang: plan_sentences(lang, ledgers["sentence"][lang]) for lang in LANGS},
+        "vocab": {lang: plan_vocab(lang, ledgers["vocab"][lang]) for lang in LANGS},
+    }
+    result = {
+        "gate": "PASS_WRITE" if args.write else "PASS_DRY_RUN",
+        "coverage": {"sentence_rows": 3000, "vocab_rows": 3000, "total_rows": 6000, "unresolved_holds": 0},
+        "sources": {
+            kind: {lang: public_result(plans[kind][lang]) for lang in LANGS}
+            for kind in ("sentence", "vocab")
+        },
+    }
+
+    if args.write:
+        for kind in ("sentence", "vocab"):
+            for lang in LANGS:
+                plans[kind][lang]["path"].write_bytes(plans[kind][lang]["raw"])
+        REPORT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+
+
+if __name__ == "__main__":
+    main()
