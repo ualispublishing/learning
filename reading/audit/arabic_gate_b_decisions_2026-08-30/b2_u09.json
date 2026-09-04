@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B2",
+  "unit": 9,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b2/passages.jsonl",
+  "canonical_sha256": "08907f72c03b9ba868e59cbb531f435ab08acffc236e39ef4cff571cc9ab026b",
+  "records_reviewed": 6,
+  "records_with_findings": 5,
+  "fresh_findings": 14,
+  "decisions": [
+    {
+      "passage_id": "ar-b2-u09-p01",
+      "learner_facing_sha256": "1c502709ca54dfc6c299828c0f64c25e91590f9ea3326b8c2c67b6038a8a3425",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u09-p01-gB-01",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "وعقوبته makes the provision itself the object of punishment; use إنفاذه for the binding-rule stage."
+        },
+        {
+          "finding_id": "ar-b2-u09-p01-gB-02",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "ترجمة بين لغة مختلفة has the wrong prepositional relation; each stage is a translation into a different language/register."
+        },
+        {
+          "finding_id": "ar-b2-u09-p01-gB-03",
+          "field": "answer q8",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "تقدم ظهور الأثر كشرط is a calque-like formulation; state directly that إذا makes appearance of the effect a condition for reopening the relevant stage."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u09-p02",
+      "learner_facing_sha256": "c38a8515066710ff8c9d153f8b3dbe2d9568a78b2bb304f9e729cc433cb491dc",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u09-p02-gB-01",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "كان معظم الطلبات يعالج has broken agreement; use كانت معظم الطلبات تُعالج."
+        },
+        {
+          "finding_id": "ar-b2-u09-p02-gB-02",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "أصبح من المعقول سؤال هل is malformed; use أصبح من المعقول أن نسأل هل."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u09-p03",
+      "learner_facing_sha256": "4c3853837b798c87666c03bc879edc588ab8219a08d7e50ad75636404b2da5f8",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b2-u09-p04",
+      "learner_facing_sha256": "8307f52b8e30dd65113400132f60d3308298da930229725fcaff7dcd9621dc82",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u09-p04-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "يحقق تقليل العبء needs the governed masdar construction تقليلًا للعبء."
+        },
+        {
+          "finding_id": "ar-b2-u09-p04-gB-02",
+          "field": "text",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تنظيم صغير تدفعه المدينة is unclear and makes the city 'pay' an organization; state that the side entrance requires a small modification whose cost the city bears."
+        },
+        {
+          "finding_id": "ar-b2-u09-p04-gB-03",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "نوعًا من تعويض موزع is an awkward indefinite construction; use نوعًا من التعويض الموزع."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u09-p05",
+      "learner_facing_sha256": "d0f4da4d26e16c8ca36f3ca96d92d1fdf107b41392100d70f329312caf31a01b",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 5,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u09-p05-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "خيارات أطول is not idiomatic for durable future options; use خيارات طويلة الأمد."
+        },
+        {
+          "finding_id": "ar-b2-u09-p05-gB-02",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "الاستقرار القصير is an awkward duration label; use الاستقرار قصير المدى."
+        },
+        {
+          "finding_id": "ar-b2-u09-p05-gB-03",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "خيارات أبعد عن المسار الموحد is spatially calqued; use خيارات تبتعد عن المسار الموحد."
+        },
+        {
+          "finding_id": "ar-b2-u09-p05-gB-04",
+          "field": "answer q2",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "The answer repeats الاستقرار القصير; use الاستقرار قصير المدى."
+        },
+        {
+          "finding_id": "ar-b2-u09-p05-gB-05",
+          "field": "answer q5",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "يميز الاختيار من عوائق الوصول has the wrong coordination; use يميز بين الاختيار وعوائق الوصول."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u09-p06",
+      "learner_facing_sha256": "06f20cf755937eb5d81e8a95c14dd58d8cfda01c016cfe51bbfb66208749502a",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u09-p06-gB-01",
+          "field": "question q8",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "ما وظيفة تسجيل ما الذي سيجعل... is syntactically heavy and unclear; ask directly about the benefit of recording the revision trigger in advance."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate B2 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+}
