@@ -66,13 +66,35 @@ window.navigateSearch=function(item){
 const input=document.getElementById('searchInput');
 const search=document.getElementById('search');
 const results=document.getElementById('searchResults');
+const searchHead=document.querySelector('.search-head');
+const top=document.querySelector('.top');
+const coverageButton=document.getElementById('coverageLensBtn');
+const sourceButton=document.getElementById('sourceLensBtn');
+const studyButton=document.getElementById('studyQueueBtn');
+const dueButton=document.getElementById('dueReviewBtn');
+const style=document.createElement('style');
+style.textContent=`
+.sec-search-button,.sec-search-close{border:1px solid #456784;background:#10263a;color:var(--text);font:inherit;cursor:pointer}.sec-search-button{border-radius:999px;padding:7px 11px;font-size:11px;white-space:nowrap}.sec-search-close{border-radius:10px;padding:7px 10px}.sec-search-button:hover,.sec-search-button:focus-visible,.sec-search-close:hover,.sec-search-close:focus-visible{border-color:var(--focus);outline:none}.search-head{display:flex;gap:8px;align-items:center}.search-input{min-width:0;flex:1}@media(max-width:800px){.sec-search-button,.sec-search-close{font-size:8px;padding:5px 6px}}
+`;
+document.head.appendChild(style);
+const searchButton=document.createElement('button');
+searchButton.id='searchPaletteBtn';searchButton.className='sec-search-button';searchButton.type='button';searchButton.textContent='Search';searchButton.setAttribute('aria-label','Open search palette');searchButton.setAttribute('aria-controls','search');
+if(top)top.insertBefore(searchButton,coverageButton||sourceButton||studyButton||dueButton||document.querySelector('.legend')||null);
+const closeButton=document.createElement('button');
+closeButton.id='searchCloseBtn';closeButton.className='sec-search-close';closeButton.type='button';closeButton.textContent='Close';closeButton.setAttribute('aria-label','Close search palette');
+if(searchHead)searchHead.appendChild(closeButton);
+searchButton.addEventListener('click',()=>openSearch());
+closeButton.addEventListener('click',()=>closeSearch());
+
 function syncSearchA11y(){
   if(!input||!search||!results)return;
+  const expanded=String(!search.hidden);
   input.setAttribute('role','combobox');
   input.setAttribute('aria-autocomplete','list');
   input.setAttribute('aria-haspopup','listbox');
   input.setAttribute('aria-controls','searchResults');
-  input.setAttribute('aria-expanded',String(!search.hidden));
+  input.setAttribute('aria-expanded',expanded);
+  searchButton.setAttribute('aria-expanded',expanded);
   const options=[...results.querySelectorAll('.search-result')];
   options.forEach((option,i)=>{option.id=`secx-search-option-${i}`});
   const selected=options.find(option=>option.classList.contains('active')||option.getAttribute('aria-selected')==='true');
