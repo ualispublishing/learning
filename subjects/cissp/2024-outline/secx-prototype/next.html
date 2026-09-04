@@ -12,6 +12,15 @@
 const frame=document.getElementById('prototype');
 frame.addEventListener('load',()=>{
   const doc=frame.contentDocument;
+  const reviewStyle=doc.createElement('style');
+  reviewStyle.textContent=`
+    .detail:not(.open){transform:none;visibility:hidden;opacity:0;pointer-events:none}
+    .detail.open{visibility:visible;opacity:1;pointer-events:auto;animation:secxDetailIn .22s ease}
+    .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;left:auto}
+    @keyframes secxDetailIn{from{transform:translateX(28px);opacity:0}to{transform:none;opacity:1}}
+    @media(prefers-reduced-motion:reduce){.detail.open{animation:none}}
+  `;
+  doc.head.appendChild(reviewStyle);
   const ai=doc.createElement('script');
   ai.src='../study-site/data-ai.js';
   ai.onload=()=>{
