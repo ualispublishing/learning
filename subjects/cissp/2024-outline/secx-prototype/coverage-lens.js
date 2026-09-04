@@ -84,7 +84,7 @@ function updateCoverageButton(){
 
 window.coverageLayout=function(returnTo=null,focus=false){
   rebuildSnapshot();
-  const snap=window.SECX_COVERAGE_SNAPSHOT,center={id:'coverage:root',title:'Coverage Map',summary:`${snap.totals.objectives} objectives · ${snap.totals.subtopics} subtopics · ${coverageBankReady?`${snap.totals.scenarios} released scenarios`:'released scenarios loading'}.`,kind:'coverage-root',x:.5,y:.5,labels:['explicit mappings','practice exposure'],details:{rule:'Inspect explicit curriculum and practice mappings without converting counts into mastery or semantic-edge claims.',why:'Counts come from released objectives, enriched subtopics, Atlas review cards, and manifest-released scenarios.',traps:['Coverage counts are corpus properties, not learner-performance scores.','Shared tags or sources do not create cross-domain semantic relationships.'],sources:['CISSP Atlas released data and RELEASED_BATCHES.json'],practice:'Choose a domain, then inspect objective-level practice exposure and exact scenario-tag coverage.'}};
+  const snap=window.SECX_COVERAGE_SNAPSHOT,center={id:'coverage:root',title:'Coverage Map',summary:`${snap.totals.objectives} objectives · ${snap.totals.subtopics} subtopics · ${coverageBankReady?`${snap.totals.scenarios} released scenarios`:'released scenarios loading'}.`,kind:'coverage-root',x:.5,y:.5,labels:['explicit mappings','practice exposure'],details:{rule:'Inspect explicit curriculum and practice mappings without converting counts into mastery or semantic-edge claims.',why:'Counts come from released objectives, enriched subtopics, Atlas review cards, and the shared manifest-released scenario registry.',traps:['Coverage counts are corpus properties, not learner-performance scores.','Shared tags or sources do not create cross-domain semantic relationships.'],sources:['CISSP Atlas released data'],practice:'Choose a domain, then inspect objective-level practice exposure and exact scenario-tag coverage.'}};
   nodes=[center];links=[];
   domains.forEach((d,i)=>{const m=domainMetrics(d),p=radialPosition(i,domains.length,.4,.24);nodes.push({id:`coverage:d${d.num}`,domainNum:d.num,title:`D${d.num} · ${d.title||d.name}`,summary:`${m.objectives} objectives · ${m.subtopics} subtopics · ${m.scenarios} scenarios`,kind:'coverage-domain',x:p.x,y:p.y,labels:[`${d.weight}% exam weight`,`${m.subtopics_with_exact_scenario_tag}/${m.subtopics} subtopics tagged`,`${m.objectives_without_released_scenarios} objectives with 0 scenarios`],details:{rule:`Domain ${d.num} explicit coverage summary.`,why:`${m.objectives} objectives, ${m.subtopics} enriched subtopics, ${m.supplemental_cards} supplemental reviewed cards, and ${m.scenarios} released scenarios are explicitly mapped here.`,traps:['Exam weight is blueprint scope, not a learner score.','Scenario count is practice exposure, not proof of completeness.'],sources:['Released Atlas mappings'],practice:'Enter to inspect objective-level counts.'}});links.push([center.id,`coverage:d${d.num}`])});
   level='coverage';coverageMode='root';coverageDomain=null;coveragePage=0;parentDomain=null;parentObjective=null;active=returnTo&&nodes.some(n=>n.id===returnTo)?returnTo:'coverage:root';depth=0;render(focus);updateCoverageButton();
@@ -118,20 +118,22 @@ const priorAscend=ascend;
 window.ascend=function(){if(depth===0&&level==='coverage-domain')return coverageLayout(`coverage:d${coverageDomain}`,true);if(depth===0&&level==='coverage')return domainLayout('root',true);return priorAscend()};
 document.addEventListener('keydown',e=>{if(!document.getElementById('search')?.hidden)return;if(e.target.closest('input,textarea,select,[contenteditable="true"]'))return;if((e.key==='c'||e.key==='C')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();e.stopImmediatePropagation();coverageLayout(null,true)}},true);
 
-async function loadCoverageBank(){
-  try{
-    const manifest=await fetch('../study-site/question-bank/RELEASED_BATCHES.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(`release manifest ${r.status}`);return r.json()});
-    const files=manifest.released_batches.flatMap(b=>b.files||[]);
-    const texts=await Promise.all(files.map(p=>fetch(`../study-site/${p}`,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(`${p} ${r.status}`);return r.text()})));
-    coverageQuestions=texts.flatMap(t=>t.split(/\r?\n/).filter(Boolean).map(line=>JSON.parse(line))).filter(q=>q.format==='mcq');
-    const base=(window.CISSP_CHUNKS||[]).flatMap(ch=>Array.isArray(ch.questions)?ch.questions:[]);
-    coverageQuestions=[...base,...coverageQuestions];
-    coverageBankReady=true;coverageBankError=null;rebuildSnapshot();updateCoverageButton();
-    if(level==='coverage')coverageLayout(active,false);
-    else if(level==='coverage-domain')coverageDomainLayout(coverageDomain,active,false,coveragePage);
-  }catch(err){
-    coverageBankReady=false;coverageBankError=String(err);rebuildSnapshot();updateCoverageButton();console.error('SecX coverage bank load failed',err);
+function syncCoverageBank(){
+  const state=window.SECX_RELEASED_BANK_STATE||{};
+  if(state.ready&&Array.isArray(window.SECX_RELEASED_QUESTIONS)){
+    coverageQuestions=window.SECX_RELEASED_QUESTIONS;
+    coverageBankReady=true;
+    coverageBankError=null;
+  }else{
+    coverageQuestions=[];
+    coverageBankReady=false;
+    coverageBankError=state.error||null;
   }
+  rebuildSnapshot();
+  updateCoverageButton();
+  if(level==='coverage')coverageLayout(active,false);
+  else if(level==='coverage-domain')coverageDomainLayout(coverageDomain,active,false,coveragePage);
 }
-rebuildSnapshot();updateCoverageButton();loadCoverageBank();
+addEventListener('secx:released-bank',syncCoverageBank);
+syncCoverageBank();
 })();
