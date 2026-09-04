@@ -22,6 +22,7 @@ async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),s
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
 function clickId(d,id){const el=node(d,id);assert(el,`node ${id} exists`);el.click();return el}
 async function enter(win){key(win,'Enter','Enter');await sleep(80)}
+async function selectThenEnter(d,w,id,label){clickId(d,id);await waitFor(()=>node(d,id)?.classList.contains('active')&&w.current?.()?.id===id,`${label} selected`);await enter(w)}
 function todayISO(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function graphDebug(w,d){const c=typeof w.current==='function'?w.current():null;return`crumb=${JSON.stringify(d.querySelector('#crumb')?.textContent||'')} current=${JSON.stringify(c?{id:c.id,kind:c.kind,facet:c.facet||null}:null)} active=${JSON.stringify([...d.querySelectorAll('.node.active')].map(x=>x.dataset.id))}`}
 async function run(){
@@ -37,14 +38,14 @@ async function run(){
   await waitFor(()=>node(d,'d1')?.classList.contains('active'),'ArrowUp selects D1 from root');
   await enter(w);
   await waitFor(()=>node(d,'1.9')&&d.querySelector('#crumb')?.textContent.includes('Security and Risk Management'),'keyboard D1 to objective traversal');
-  clickId(d,'1.9'); await enter(w);
+  await selectThenEnter(d,w,'1.9','objective 1.9');
   await waitFor(()=>d.querySelectorAll('.node.facet').length===3,'objective hub facets');
   assert(node(d,'facet:1.9:subtopics'),'Subtopics facet');
   assert(node(d,'facet:1.9:cards'),'Retrieval cards facet');
   assert(node(d,'facet:1.9:scenarios'),'Released scenarios facet');
 
-  clickId(d,'facet:1.9:cards'); await enter(w);
-  await waitFor(()=>d.querySelector('.node.card'),'reviewed retrieval-card branch');
+  await selectThenEnter(d,w,'facet:1.9:cards','retrieval-card facet');
+  try{await waitFor(()=>d.querySelector('.node.card'),'reviewed retrieval-card branch')}catch(err){throw new Error(`Retrieval-card branch did not open after Enter; ${graphDebug(w,d)}`)}
   const card=d.querySelector('.node.card'),cardId=card.dataset.id;card.click();
   await waitFor(()=>d.querySelector('#detail.open')&&d.querySelectorAll('[data-sec-grade]').length===4,'card detail and Atlas grade controls');
   assert(!d.querySelector('#detail').textContent.includes('Correct answer:'),'card detail does not expose scenario answer language');
@@ -64,9 +65,7 @@ async function run(){
   key(w,'Escape','Escape');await sleep(40);key(w,'Escape','Escape');
   await waitFor(()=>node(d,'facet:1.9:cards'),'cards ascend to objective hub');
 
-  clickId(d,'facet:1.9:scenarios');
-  await waitFor(()=>node(d,'facet:1.9:scenarios')?.classList.contains('active')&&w.current?.()?.facet==='scenarios','released-scenarios facet selection');
-  await enter(w);
+  await selectThenEnter(d,w,'facet:1.9:scenarios','released-scenarios facet');
   try{await waitFor(()=>d.querySelector('.node.scenario'),'released scenario branch')}catch(err){throw new Error(`Released scenario branch did not open after Enter; ${graphDebug(w,d)}`)}
   const scenario=d.querySelector('.node.scenario'),scenarioId=scenario.dataset.id;scenario.click();
   await waitFor(()=>d.querySelector('#detail.open'),'scenario detail opens');
@@ -105,7 +104,7 @@ async function run(){
   assert(node(d,'study:due')?.textContent.includes('1 scheduled now'),'study queue derives one due card from Atlas state');
   assert(node(d,'study:new')?.textContent.includes(`${reviewCardCount-1} ungraded`),'study queue derives remaining new-card count from Atlas state');
   assert(node(d,'study:weak')?.textContent.includes('D1'),'fresh/tied review score uses Atlas higher-weight tie-break');
-  clickId(d,'study:new'); await enter(w);
+  await selectThenEnter(d,w,'study:new','new-card study facet');
   await waitFor(()=>node(d,'study:list:new')&&d.querySelector('.node.card')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue › New cards','New facet opens paged Atlas card queue');
   assert(node(d,'study:list:new')?.textContent.includes(`${reviewCardCount-1} Atlas review cards`),'new queue count excludes the graded card');
   key(w,'Escape','Escape');
