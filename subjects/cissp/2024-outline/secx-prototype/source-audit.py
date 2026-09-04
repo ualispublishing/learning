@@ -121,7 +121,8 @@ check("source co-citation does not create a cross-card semantic edge" in source_
 check("question-bank" not in source_lens.lower(), "source lens unexpectedly discovers question-bank files")
 check("fetch(" not in source_lens, "source lens unexpectedly fetches a second released bank")
 check("localStorage" not in source_lens, "source lens should not read or write learner state")
-check("similarity" not in source_lens.lower(), "source lens unexpectedly uses similarity logic")
+for forbidden in ("similarityScore", "levenshtein", "fuzzyMatch", "cosineSimilarity", "semanticDistance", "relationshipScore"):
+    check(forbidden not in source_lens, f"source lens contains inferred-relationship helper: {forbidden}")
 check("n.kind==='scenario'" in learner_state, "learner-state scenario evidence gate changed unexpectedly")
 check("source-lens.js" in next_html, "expanded review page does not load source lens")
 check(next_html.find("study-lens.js") < next_html.find("source-lens.js"), "source lens must load after learner/study runtime layers")
