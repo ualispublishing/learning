@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parents[2]
 TMP = ROOT / ".github" / "lang-wb-v2"
 PAYLOAD = json.loads((TMP / "payload.json").read_text(encoding="utf-8"))
 FIELDS = ["rank","status","note","proposed_target","proposed_english","proposed_pos"]
+EXPECTED_PROPOSED_RUNNER_BLOB = "edee3e7e7178954822ac3dffbf3116bfe0ecaaff"
 
 def blob_sha(raw: bytes) -> str:
     return hashlib.sha1(f"blob {len(raw)}\0".encode("ascii") + raw).hexdigest()
@@ -61,7 +62,15 @@ if blob_sha(runner_raw) != PAYLOAD["expected_runner_blob"]:
     raise SystemExit(
         f"RUNNER DRIFT expected {PAYLOAD['expected_runner_blob']} got {blob_sha(runner_raw)}"
     )
-shutil.copyfile(TMP / "runner.proposed.py", runner_dst)
+runner_parts = [TMP / f"runner.part{i}.txt" for i in range(1, 5)]
+if not all(part.exists() for part in runner_parts):
+    raise SystemExit("proposed runner parts are incomplete")
+proposed_runner = b"".join(part.read_bytes() for part in runner_parts)
+if blob_sha(proposed_runner) != EXPECTED_PROPOSED_RUNNER_BLOB:
+    raise SystemExit(
+        f"PROPOSED RUNNER CORRUPTION expected {EXPECTED_PROPOSED_RUNNER_BLOB} got {blob_sha(proposed_runner)}"
+    )
+runner_dst.write_bytes(proposed_runner)
 
 baseline_dst = ROOT / "audit" / "language-workbooks" / "v1.0" / "vocab_incremental_repair_baselines.json"
 if baseline_dst.exists():
