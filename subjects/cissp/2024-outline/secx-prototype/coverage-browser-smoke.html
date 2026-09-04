@@ -11,14 +11,14 @@ const result=document.querySelector('#result'),frame=document.querySelector('#ap
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;while(Date.now()<end){try{const v=fn();if(v)return v}catch{}await sleep(50)}throw new Error(`Timed out waiting for ${label}`)}
 function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
-function graphTarget(win){const active=[...win.document.querySelectorAll('.node.active')].find(el=>el.isConnected);return active||win.document.body||win.document.documentElement}
+function graphTarget(win){const currentId=win.current?.()?.id;const currentNode=currentId?[...win.document.querySelectorAll('.node')].find(el=>el.isConnected&&el.dataset.id===currentId):null;return currentNode||win.document.body||win.document.documentElement}
 function key(win,key,code=key){const graphKey=['Enter','Escape',' ','Home'].includes(key);const target=graphKey?graphTarget(win):(win.document.body||win.document.documentElement);target.dispatchEvent(new win.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
 function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow}}
 async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),snap=x.w?.SECX_COVERAGE_SNAPSHOT,bank=x.w?.SECX_RELEASED_BANK_STATE,meta=x.w?.CISSP_META?.meta||{};return x.d&&x.w&&x.d.querySelector('#coverageLensBtn')&&x.d.querySelector('#searchPaletteBtn')&&bank?.ready&&bank.count===meta.question_count&&Array.isArray(x.w.SECX_RELEASED_QUESTIONS)&&x.w.SECX_RELEASED_QUESTIONS.length===meta.question_count&&snap?.bankReady&&snap.standardQuestions===meta.question_count&&Number.isInteger(snap.totals?.practice_exposure_gaps)&&Array.from({length:8},(_,i)=>node(x.d,`d${i+1}`)).every(Boolean)?x:null},`${label} fully-loaded shared-bank coverage runtime`)}
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
 function clickId(d,id){const el=node(d,id);assert(el,`node ${id} exists`);el.click();return el}
-async function enter(w){key(w,'Enter','Enter');await sleep(80)}
-async function selectThenEnter(d,w,id,label){clickId(d,id);await waitFor(()=>node(d,id)?.classList.contains('active')&&w.current?.()?.id===id,`${label} selected`);await enter(w)}
+async function enter(d,w,label='node'){await waitFor(()=>{const id=w.current?.()?.id;return id&&node(d,id)?.classList.contains('active')},`${label} current active node`);key(w,'Enter','Enter');await sleep(80)}
+async function selectThenEnter(d,w,id,label){clickId(d,id);await waitFor(()=>node(d,id)?.classList.contains('active')&&w.current?.()?.id===id,`${label} selected`);await enter(d,w,label)}
 async function run(){
   const {d,w}=await ready(frame,'desktop'),meta=w.CISSP_META?.meta||{},snap=w.SECX_COVERAGE_SNAPSHOT;
   assert(snap.totals.objectives===meta.objective_count,'coverage snapshot objective count matches Atlas');
@@ -29,12 +29,13 @@ async function run(){
   const gapCount=snap.totals.subtopics-snap.totals.subtopics_with_exact_scenario_tag;
   assert(snap.totals.practice_exposure_gaps===gapCount,'coverage gap total equals subtopics minus exact-tagged subtopics');
   assert(Array.isArray(snap.gaps)&&snap.gaps.length===gapCount,'coverage snapshot exposes every exact-tag gap record');
-  assert(d.querySelector('#coverageLensBtn')?.textContent.includes(`· ${meta.question_count}`),'coverage button shows released scenario count');
+  const coverageButton=d.querySelector('#coverageLensBtn');
+  assert(coverageButton?.textContent.includes(`· ${meta.question_count}`),'coverage button shows released scenario count');
 
-  key(w,'c','KeyC');
-  await waitFor(()=>node(d,'coverage:root')&&d.querySelectorAll('.node.coverage-domain').length===8&&d.querySelector('#crumb')?.textContent==='SecX › Coverage','C opens eight-domain coverage map');
+  coverageButton.click();
+  await waitFor(()=>node(d,'coverage:root')&&d.querySelectorAll('.node.coverage-domain').length===8&&d.querySelector('#crumb')?.textContent==='SecX › Coverage','visible Coverage control opens eight-domain coverage map');
   assert(node(d,'coverage:root')?.textContent.includes(`${gapCount} exact-tag gaps`),'coverage center advertises deterministic exact-tag gap count');
-  await enter(w);
+  await selectThenEnter(d,w,'coverage:root','Coverage center');
   await waitFor(()=>node(d,'coverage:gaps')&&d.querySelectorAll('.node.coverage-gap').length>0&&d.querySelector('#crumb')?.textContent==='SecX › Coverage › Practice exposure gaps','Coverage center Enter opens paged exact-tag gap view');
   assert(node(d,'coverage:gaps')?.textContent.includes(`${gapCount} enriched subtopics`),'gap center reports deterministic gap count');
   const firstGap=d.querySelector('.node.coverage-gap');assert(firstGap,'at least one exact-tag gap renders');
@@ -71,15 +72,20 @@ async function run(){
   key(w,'Escape','Escape');
   await waitFor(()=>Array.from({length:8},(_,i)=>node(d,`d${i+1}`)).every(Boolean)&&d.querySelector('#crumb')?.textContent==='SecX','Escape returns coverage to root');
 
+  key(w,'c','KeyC');
+  await waitFor(()=>node(d,'coverage:root')&&d.querySelector('#crumb')?.textContent==='SecX › Coverage','C shortcut opens Coverage after full runtime load');
+  key(w,'Escape','Escape');
+  await waitFor(()=>d.querySelector('#crumb')?.textContent==='SecX','Escape returns from shortcut-opened Coverage to root');
+
   const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mw=mobileApp.w;
-  assert(md.querySelector('#coverageLensBtn'),'mobile coverage control present');
-  key(mw,'c','KeyC');
-  await waitFor(()=>md.querySelectorAll('.node.coverage-domain').length===8,'mobile coverage map renders eight domains');
-  await enter(mw);
+  const mobileCoverageButton=md.querySelector('#coverageLensBtn');assert(mobileCoverageButton,'mobile coverage control present');
+  mobileCoverageButton.click();
+  await waitFor(()=>md.querySelectorAll('.node.coverage-domain').length===8&&node(md,'coverage:root'),'mobile visible Coverage control opens eight-domain map');
+  await selectThenEnter(md,mw,'coverage:root','mobile Coverage center');
   await waitFor(()=>node(md,'coverage:gaps')&&md.querySelectorAll('.node.coverage-gap').length>0,'mobile Coverage center opens exact-tag gaps');
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile coverage gap lens has no horizontal overflow');
   result.dataset.smoke='pass';
-  result.textContent=`PASS SecX coverage lens browser smoke: shared-bank=${meta.question_count} objectives=${meta.objective_count} subtopics=${meta.subtopic_checks} exact-tag-gaps=${gapCount} gap-detail D1 objective-1.1 depth-gates Escape mobile`;
+  result.textContent=`PASS SecX coverage lens browser smoke: shared-bank=${meta.question_count} objectives=${meta.objective_count} subtopics=${meta.subtopic_checks} exact-tag-gaps=${gapCount} gap-detail D1 objective-1.1 button+keyboard depth-gates Escape mobile`;
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
