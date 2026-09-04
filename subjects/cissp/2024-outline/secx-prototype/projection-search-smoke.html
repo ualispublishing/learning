@@ -11,22 +11,31 @@ async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;whil
 function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
 function key(w,key,code=key){const target=w.document.activeElement||w.document.body;target.dispatchEvent(new w.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
 function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow}}
-async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),input=x.d?.querySelector('#searchInput');return x.d&&x.w&&input?.placeholder.includes('sources')&&x.d.querySelector('#sourceLensBtn')&&x.d.querySelector('#coverageLensBtn')?x:null},`${label} projection search runtime`)}
+async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),input=x.d?.querySelector('#searchInput');return x.d&&x.w&&input?.placeholder.includes('sources')&&input.getAttribute('role')==='combobox'&&input.getAttribute('aria-controls')==='searchResults'&&x.d.querySelector('#sourceLensBtn')&&x.d.querySelector('#coverageLensBtn')?x:null},`${label} projection search runtime`)}
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
-async function search(d,w,q,predicate){key(w,'/','Slash');await waitFor(()=>!d.querySelector('#search').hidden,'search opens');const input=d.querySelector('#searchInput');input.value=q;input.dispatchEvent(new w.Event('input',{bubbles:true}));const hit=await waitFor(()=>[...d.querySelectorAll('.search-result')].find(predicate),`search hit ${q}`);hit.click();await sleep(100)}
+async function search(d,w,q,predicate){key(w,'/','Slash');await waitFor(()=>!d.querySelector('#search').hidden,'search opens');const input=d.querySelector('#searchInput');await waitFor(()=>input.getAttribute('aria-expanded')==='true','combobox expanded state');input.value=q;input.dispatchEvent(new w.Event('input',{bubbles:true}));const hit=await waitFor(()=>[...d.querySelectorAll('.search-result')].find(predicate),`search hit ${q}`);await waitFor(()=>{const id=input.getAttribute('aria-activedescendant'),selected=d.querySelector('.search-result.active');return id&&selected&&selected.id===id},'combobox active descendant follows selected result');hit.click();await sleep(100)}
 async function run(){
  const {d,w}=await ready(frame,'desktop');
+ const desktopInput=d.querySelector('#searchInput');
+ assert(desktopInput.getAttribute('aria-autocomplete')==='list','desktop search exposes list autocomplete');
+ assert(desktopInput.getAttribute('aria-haspopup')==='listbox','desktop search exposes listbox popup');
+ assert(desktopInput.getAttribute('aria-expanded')==='false','desktop search starts collapsed');
  await search(d,w,'ISC2_OUTLINE',x=>x.textContent.includes('ISC2_OUTLINE')&&x.textContent.includes('Source Provenance'));
  await waitFor(()=>node(d,'source:ISC2_OUTLINE')&&d.querySelectorAll('.node.source-facet').length===3&&d.querySelector('#crumb')?.textContent.includes('Sources'),'source projection search routes to source hub');
+ assert(desktopInput.getAttribute('aria-expanded')==='false','combobox collapses after source routing');
  key(w,'Escape','Escape');await waitFor(()=>node(d,'sources:root'),'source hub Escape returns sources');key(w,'Escape','Escape');await waitFor(()=>d.querySelector('#crumb')?.textContent==='SecX','sources Escape returns root');
  await search(d,w,'coverage objective 1.1',x=>x.textContent.includes('1.1')&&x.textContent.includes('Coverage'));
  await waitFor(()=>node(d,'coverage:objective:1.1')?.classList.contains('active')&&d.querySelector('#crumb')?.textContent==='SecX › Coverage › D1','coverage objective search reconstructs D1 coverage and focuses 1.1');
  assert(!d.querySelector('#search')||d.querySelector('#search').hidden,'search closes after projection routing');
+ assert(desktopInput.getAttribute('aria-expanded')==='false','combobox collapses after coverage routing');
  const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mw=mobileApp.w;
- assert(md.querySelector('#searchInput')?.placeholder.includes('coverage'),'mobile search advertises projection scope');
+ const mobileInput=md.querySelector('#searchInput');
+ assert(mobileInput?.placeholder.includes('coverage'),'mobile search advertises projection scope');
+ assert(mobileInput.getAttribute('role')==='combobox'&&mobileInput.getAttribute('aria-controls')==='searchResults','mobile search exposes combobox/listbox relationship');
  key(mw,'/','Slash');await waitFor(()=>!md.querySelector('#search').hidden,'mobile search opens');
+ await waitFor(()=>mobileInput.getAttribute('aria-expanded')==='true','mobile combobox expanded state');
  assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile projection search has no horizontal overflow');
- result.dataset.smoke='pass';result.textContent='PASS SecX projection search smoke: source routing coverage-objective routing existing palette mobile';
+ result.dataset.smoke='pass';result.textContent='PASS SecX projection search smoke: source routing coverage-objective routing combobox-active-descendant existing palette mobile';
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
