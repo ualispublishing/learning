@@ -11,11 +11,14 @@ const result=document.querySelector('#result'),frame=document.querySelector('#ap
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;while(Date.now()<end){try{const v=fn();if(v)return v}catch{}await sleep(50)}throw new Error(`Timed out waiting for ${label}`)}
 function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
-function key(win,key,code=key){const target=win.document.activeElement||win.document.body;target.dispatchEvent(new win.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
+function graphTarget(win){const active=[...win.document.querySelectorAll('.node.active')].find(el=>el.isConnected);return active||win.document.body||win.document.documentElement}
+function key(win,key,code=key){const graphKey=['Enter','Escape',' ','Home'].includes(key);const target=graphKey?graphTarget(win):(win.document.body||win.document.documentElement);target.dispatchEvent(new win.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
 function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow}}
-async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),snap=x.w?.SECX_COVERAGE_SNAPSHOT,bank=x.w?.SECX_RELEASED_BANK_STATE,meta=x.w?.CISSP_META?.meta||{};return x.d&&x.w&&x.d.querySelector('#coverageLensBtn')&&bank?.ready&&bank.count===meta.question_count&&Array.isArray(x.w.SECX_RELEASED_QUESTIONS)&&x.w.SECX_RELEASED_QUESTIONS.length===meta.question_count&&snap?.bankReady&&snap.standardQuestions===meta.question_count&&x.d.querySelectorAll('.node.domain').length===8?x:null},`${label} shared released-bank coverage runtime`)}
+async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),snap=x.w?.SECX_COVERAGE_SNAPSHOT,bank=x.w?.SECX_RELEASED_BANK_STATE,meta=x.w?.CISSP_META?.meta||{};return x.d&&x.w&&x.d.querySelector('#coverageLensBtn')&&bank?.ready&&bank.count===meta.question_count&&Array.isArray(x.w.SECX_RELEASED_QUESTIONS)&&x.w.SECX_RELEASED_QUESTIONS.length===meta.question_count&&snap?.bankReady&&snap.standardQuestions===meta.question_count&&Array.from({length:8},(_,i)=>node(x.d,`d${i+1}`)).every(Boolean)?x:null},`${label} shared released-bank coverage runtime`)}
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
+function clickId(d,id){const el=node(d,id);assert(el,`node ${id} exists`);el.click();return el}
 async function enter(w){key(w,'Enter','Enter');await sleep(80)}
+async function selectThenEnter(d,w,id,label){clickId(d,id);await waitFor(()=>node(d,id)?.classList.contains('active')&&w.current?.()?.id===id,`${label} selected`);await enter(w)}
 async function run(){
   const {d,w}=await ready(frame,'desktop'),meta=w.CISSP_META?.meta||{},snap=w.SECX_COVERAGE_SNAPSHOT;
   assert(snap.totals.objectives===meta.objective_count,'coverage snapshot objective count matches Atlas');
@@ -33,21 +36,22 @@ async function run(){
   assert(d1node.textContent.includes(`${d1.subtopics} subtopics`),'D1 subtopic count rendered from explicit snapshot');
   assert(d1node.textContent.includes(`${d1.scenarios} scenarios`),'D1 scenario count rendered from shared released bank');
 
-  d1node.click();await enter(w);
+  await selectThenEnter(d,w,'coverage:d1','D1 coverage domain');
   const o11=snap.objectives.find(x=>x.objective==='1.1');assert(o11,'1.1 coverage snapshot exists');
   await waitFor(()=>node(d,'coverage:domain:1')&&node(d,'coverage:objective:1.1')&&d.querySelector('#crumb')?.textContent==='SecX › Coverage › D1','D1 coverage opens objective list');
   const o11node=node(d,'coverage:objective:1.1');
   assert(o11node.textContent.includes(`${o11.subtopics} subtopics`),'1.1 subtopic count rendered');
   assert(o11node.textContent.includes(`${o11.scenarios} scenarios`),'1.1 released scenario count rendered');
   assert(o11node.textContent.includes(`${o11.subtopics_with_exact_scenario_tag}/${o11.subtopics} subtopics tagged`),'1.1 exact-tag exposure rendered');
-  o11node.click();
-  await waitFor(()=>d.querySelector('#detail.open')?.textContent.includes(`Explicit Atlas mappings: ${o11.subtopics} enriched subtopics`),'1.1 detail reports explicit mappings');
-  assert(d.querySelector('#detail')?.textContent.includes('Practice exposure counts do not measure learner mastery'),'coverage detail preserves mastery boundary');
+  await selectThenEnter(d,w,'coverage:objective:1.1','coverage objective 1.1');
+  await waitFor(()=>d.querySelector('#detail.open')?.textContent.includes(`Explicit Atlas mappings: ${o11.subtopics} enriched subtopics`),'1.1 depth-two detail reports explicit mappings');
   assert(d.querySelector('#detail')?.textContent.includes(`${o11.subtopics_with_exact_scenario_tag}/${o11.subtopics} subtopics have at least one exact released scenario tag`),'coverage detail reports exact-tag fraction');
+  key(w,' ','Space');
+  await waitFor(()=>d.querySelector('#detail')?.textContent.includes('Practice exposure counts do not measure learner mastery'),'coverage depth-three detail preserves mastery boundary');
   key(w,'Escape','Escape');await sleep(40);key(w,'Escape','Escape');
   await waitFor(()=>node(d,'coverage:root')&&node(d,'coverage:d1')&&d.querySelector('#crumb')?.textContent==='SecX › Coverage','Escape returns domain coverage to coverage root');
   key(w,'Escape','Escape');
-  await waitFor(()=>d.querySelectorAll('.node.domain').length===8&&d.querySelector('#crumb')?.textContent==='SecX','Escape returns coverage to root');
+  await waitFor(()=>Array.from({length:8},(_,i)=>node(d,`d${i+1}`)).every(Boolean)&&d.querySelector('#crumb')?.textContent==='SecX','Escape returns coverage to root');
 
   const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mw=mobileApp.w;
   assert(md.querySelector('#coverageLensBtn'),'mobile coverage control present');
@@ -55,7 +59,7 @@ async function run(){
   await waitFor(()=>md.querySelectorAll('.node.coverage-domain').length===8,'mobile coverage map renders eight domains');
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile coverage lens has no horizontal overflow');
   result.dataset.smoke='pass';
-  result.textContent=`PASS SecX coverage lens browser smoke: shared-bank=${meta.question_count} objectives=${meta.objective_count} subtopics=${meta.subtopic_checks} exact-counts D1 objective-1.1 Escape mobile`;
+  result.textContent=`PASS SecX coverage lens browser smoke: shared-bank=${meta.question_count} objectives=${meta.objective_count} subtopics=${meta.subtopic_checks} exact-counts D1 objective-1.1 depth-gates Escape mobile`;
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
