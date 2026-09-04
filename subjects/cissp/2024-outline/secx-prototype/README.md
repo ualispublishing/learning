@@ -5,7 +5,7 @@ This is an isolated review prototype. It does not replace or alter the verified 
 ## Review surfaces
 
 - `index.html` is the conservative objective/subtopic prototype.
-- `next.html` is the expanded review surface. It embeds `index.html`, then loads the Atlas-compatible review-card registry, card/scenario graph layer, learner state, Due Reviews, Study Queue, Source Provenance, and Coverage in dependency order.
+- `next.html` is the expanded review surface. It embeds `index.html`, then loads the Atlas-compatible review-card registry, card/scenario graph layer, learner state, Due Reviews, Study Queue, Source Provenance, Coverage, and Projection Search in dependency order.
 
 The expanded surface is still review-only and is not the default prototype entry point or production Atlas.
 
@@ -44,7 +44,7 @@ No concept-level cross-domain semantic relationship is inferred from text simila
 - Enter: descend.
 - Escape: close detail first, then ascend while preserving local context.
 - Space: cycle four disclosure depths.
-- `/`: search released domains/objectives/subtopics/cards/scenarios.
+- `/`: search released domains/objectives/subtopics/cards/scenarios/sources/coverage projections.
 - Home: return to SecX root.
 - `1–4`: grade an open review card using Atlas Wrong / Hard / Good / Easy semantics.
 - `R`: open **Due Reviews**.
@@ -52,7 +52,7 @@ No concept-level cross-domain semantic relationship is inferred from text simila
 - `S`: open **Source Provenance**.
 - `C`: open **Coverage**.
 
-Pointer/touch remains supported, actual browser focus follows keyboard selection, and `prefers-reduced-motion` is respected.
+Pointer/touch remains supported, actual browser focus follows keyboard selection, and `prefers-reduced-motion` is respected. The expanded review surface also provides visible Search/Close controls and persistent detail Close/Depth/Open controls so keyboard-first does not become keyboard-only.
 
 ## Objective hub and released scenarios
 
@@ -112,9 +112,27 @@ A shared citation is provenance evidence only. It does not create a semantic rel
 
 `C` or **Coverage · N** opens a read-only corpus/practice-exposure projection. See `COVERAGE_LENS.md`.
 
-Coverage consumes the same shared released-scenario registry as the main graph and reports raw explicit counts by domain/objective, including enriched subtopics, review/supplemental cards, released scenarios, sources, exact scenario-tagged subtopics, and objectives with zero mapped released scenarios.
+Coverage consumes the same shared released-scenario registry as the main graph and reports raw explicit counts by domain/objective, including enriched subtopics, review/supplemental cards, released scenarios, sources, exact scenario-tagged subtopics, and exact-tag practice-exposure gaps.
 
-Zero mapped scenarios are labeled a **practice-exposure gap**, not a curriculum omission or learner weakness. Coverage performs no independent network fetch and does not read learner progress.
+Enter on the Coverage center opens a paged **Practice Exposure Gaps** view. A gap exists only when an enriched subtopic has no exact matching released scenario `subtopics` tag under its mapped objective. With the current released bank, **305/344** enriched subtopics have at least one exact released scenario tag and **39** are exact-tag gaps.
+
+Those 39 records are corpus-exposure observations only. They are not curriculum omissions, factual deficiencies, learner weakness, mastery/readiness signals, or semantic relationships. Coverage performs no independent network fetch and does not read learner progress.
+
+## Projection Search
+
+Projection Search extends the existing `/` palette with exact Source Provenance, Coverage-domain, and Coverage-objective navigation entries. It routes into existing projection functions; it does not create curriculum edges or learner-state evidence.
+
+The expanded search UI uses a combobox/listbox pattern with active-descendant state. Result options stay out of the Tab order; Tab/Shift+Tab remain contained between the search input and visible Close button while the palette is open. The visible Search button synchronously transfers focus into the input, and dismissing by Close or Escape restores focus to the opener when it still exists. Navigation through a selected search result clears the opener state so routed graph focus is preserved.
+
+## Touch detail actions
+
+Expanded detail panels provide persistent **Close / Depth / Open** controls:
+
+- **Close** delegates to the same ascend/cleanup path as Escape and returns focus to the selected graph node;
+- **Depth** cycles the same four disclosure layers as Space and preserves control focus across detail rerenders;
+- **Open** delegates to the same descend path as Enter when the selected node has a deeper graph context.
+
+These controls are review-layer affordances and do not change content relationships or learner-state semantics.
 
 ## Semantic relationship gate
 
@@ -124,7 +142,7 @@ Future typed relationships such as `depends-on`, `contrasts-with`, `implemented-
 
 Two items independently marked VERIFIED in Atlas semantic ledgers do not automatically have a verified relationship. Shared labels, search similarity, embeddings, shared `source_ids`, or coverage co-occurrence may at most identify a review lead; they cannot auto-approve an edge.
 
-Relationship endpoints must use durable released IDs. Temporary UI/projection IDs such as `sub:<objective>:<index>`, `source:*`, `source-item:*`, `study:*`, `due:*`, `coverage:*`, pagers, and facets are forbidden as semantic endpoints. A provenance node such as `source-item:scenario:C-472` refers to a stable scenario for navigation only; a reviewed semantic edge would target `C-472` itself.
+Relationship endpoints must use durable released IDs. Temporary UI/projection IDs such as `sub:<objective>:<index>`, `source:*`, `source-item:*`, `study:*`, `due:*`, `coverage:*`, pagers, and facets are forbidden as semantic endpoints. This includes `coverage:gap:<objective>:<index>` projection IDs. A provenance node such as `source-item:scenario:C-472` refers to a stable scenario for navigation only; a reviewed semantic edge would target `C-472` itself.
 
 ## Progressive disclosure
 
@@ -145,16 +163,18 @@ The draft includes deterministic gates for each major layer:
 - `due-audit.py` — complete 140-card review registry and Due Reviews;
 - `study-audit.py` — Study Queue modes and production-compatible stage scoring;
 - `source-audit.py` — 20-source registry, exact objective/card/scenario `source_ids`, shared-bank use, provenance/state/answer isolation;
-- `coverage-audit.py` — Atlas count reconciliation, shared released-bank use, exact-tag exposure, learner-state/semantic isolation;
+- `coverage-audit.py` — Atlas count reconciliation, shared released-bank use, exact-tag exposure/gap recomputation, learner-state/semantic isolation;
+- `projection-search-audit.py` — explicit projection routing, combobox/listbox semantics, touch controls, focus containment/restoration, no learner-state/semantic coupling;
 - `relationship-audit.py` — stable endpoints, relationship-specific review requirements, and proof that reviewer-only relationship data is not learner-loaded.
 
 Browser harnesses:
 
 - `browser-smoke.html` + `browser-smoke.sh` — expanded graph, cards, learner state, Due Reviews, Study Queue, scenarios, search, Home, mobile;
 - `source-browser-smoke.html` + `source-browser-smoke.sh` — source count, `S`, exact objective citation mapping, released-scenario provenance, answer-reveal isolation, Home, mobile;
-- `coverage-browser-smoke.html` + `coverage-browser-smoke.sh` — shared-bank count equality, `C`, eight-domain coverage, D1/objective `1.1`, Escape hierarchy, mobile.
+- `coverage-browser-smoke.html` + `coverage-browser-smoke.sh` — shared-bank count equality, visible Coverage control, `C`, 39-gap traversal/detail boundaries, eight-domain coverage, D1/objective `1.1`, Escape hierarchy, mobile;
+- `projection-search-smoke.html` + `projection-search-smoke.sh` — source/coverage projection routing, combobox state, modal focus containment/restoration, visible Search/Close, and persistent mobile detail controls.
 
-`.github/workflows/secx-prototype-smoke.yml` is prepared to run the production CISSP deterministic audit and browser smoke, all SecX deterministic/syntax gates, and all three prototype browser harnesses against one candidate head.
+`.github/workflows/secx-prototype-smoke.yml` runs the production CISSP deterministic audit/browser smoke, all SecX deterministic/syntax gates, and all prototype browser harnesses against one exact candidate head.
 
 A browser PASS counts only when the committed gate actually executes against the exact candidate head. Static syntax checks are preflight evidence, not browser evidence.
 
@@ -166,7 +186,7 @@ A browser PASS counts only when the committed gate actually executes against the
 4. Keep learner state separate from curriculum records.
 5. Treat Due Reviews and Study Queue as learner-state projections, not curriculum edges.
 6. Treat Source Provenance as an exact citation projection, not a semantic cross-link generator.
-7. Treat Coverage as a corpus/practice-exposure projection, not a learner score or semantic edge generator.
+7. Treat Coverage counts and exact-tag gaps as corpus/practice-exposure projections, not learner scores, curriculum-deficiency claims, or semantic edge generators.
 8. Keep relationship candidate discovery, relationship review, release, and runtime publication as separate stages.
 9. Reject unknown IDs, invalid source references, temporary semantic endpoints, and reviewer-only relationship data in learner runtime.
 10. Keep local graph mounting/pagination rather than rendering the entire corpus at once.
