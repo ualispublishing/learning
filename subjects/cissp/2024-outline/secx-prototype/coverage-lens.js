@@ -71,7 +71,7 @@ const style=document.createElement('style');
 style.textContent=`
 .sec-coverage-button{border:1px solid #456784;border-radius:999px;background:#10263a;color:var(--text);padding:7px 11px;font:inherit;font-size:11px;cursor:pointer;white-space:nowrap}.sec-coverage-button:hover,.sec-coverage-button:focus-visible{border-color:var(--focus);outline:none}
 .node.coverage-root{width:190px;min-height:96px}.node.coverage-domain{width:154px;min-height:76px}.node.coverage-objective{width:142px;min-height:68px}
-@media(max-width:800px){.top{gap:5px;padding:7px 9px}.sec-coverage-button,.sec-source-button,.sec-study-button,.sec-due-button{font-size:8px;padding:5px 6px}.node.coverage-root,.node.coverage-domain,.node.coverage-objective{width:116px;min-height:56px}}
+@media(max-width:800px){.top{gap:5px;padding:7px 9px;flex-wrap:wrap;justify-content:flex-start}.top .brand{flex:0 0 100%}.sec-coverage-button,.sec-source-button,.sec-study-button,.sec-due-button{font-size:8px;padding:5px 6px}.node.coverage-root,.node.coverage-domain,.node.coverage-objective{width:116px;min-height:56px}}
 `;
 document.head.appendChild(style);
 const top=document.querySelector('.top'),sourceButton=document.getElementById('sourceLensBtn'),studyButton=document.getElementById('studyQueueBtn'),dueButton=document.getElementById('dueReviewBtn');
