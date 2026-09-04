@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B2",
+  "unit": 7,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/b2/passages.jsonl",
+  "canonical_sha256": "ec8a3c884fb5c31d96b035182b62417ac5c82becae2f6c4ae3c5a689e922b199",
+  "records_reviewed": 6,
+  "records_with_findings": 3,
+  "fresh_findings": 5,
+  "decisions": [
+    {
+      "passage_id": "ar-b2-u07-p01",
+      "learner_facing_sha256": "3db2260a2060697b8b58b7616263d7505b7f5735539c9ccf6743972775841ca7",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u07-p01-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "لم يتخيل القراءة ... التي خطرت لها is awkward for an interpretation that did not occur to the other viewer; use لم تخطر له."
+        },
+        {
+          "finding_id": "ar-b2-u07-p01-gB-02",
+          "field": "answer q6",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تضع حدًا لها بإعادة سلطة الاختبار is a calque; state that the museum frame has real force but its authority is limited by testing the reading against the work itself."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u07-p02",
+      "learner_facing_sha256": "da6607e8abf3b2dedd440f36db302da0c8928ff0a02a7da775e6b4f29662d92f",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b2-u07-p03",
+      "learner_facing_sha256": "a711bde683b126dfe9697d077c6d95dacb532bf26062440ad9a2758a54d40cce",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u07-p03-gB-01",
+          "field": "answer q1",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "يغيرون incorrectly treats coordinated nonhuman factors as human plural agents; recast with اختلاف as the singular causal subject."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u07-p04",
+      "learner_facing_sha256": "81e67c8501d9f29e8deeb267cb340dd74d80bd9e95235b800ea4012d3495bf80",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-b2-u07-p04-gB-01",
+          "field": "text",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "The idiomatic manner phrase is يقولها بهمْس/بهمس, not في همس."
+        },
+        {
+          "finding_id": "ar-b2-u07-p04-gB-02",
+          "field": "answer q2",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "minor",
+          "status": "REPAIRED",
+          "rationale": "The answer repeats the non-idiomatic في همس; use بهمْس/بهمس."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-b2-u07-p05",
+      "learner_facing_sha256": "76547dcfb8dc22301a983d62598faed0181c1da16f6850874ca556eae7e70a6d",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-b2-u07-p06",
+      "learner_facing_sha256": "730919001583999ea4efb5089470a289b0586a75b26d7aa9bb44ccbdcfbb74f4",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate B2 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+}
