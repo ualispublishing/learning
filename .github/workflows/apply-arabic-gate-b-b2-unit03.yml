@@ -87,3 +87,5 @@ jobs:
           if ! git diff --cached --quiet; then git commit --amend --no-edit; fi
           python reading/tools/validate_continuation_state.py
           git push origin HEAD:main
+
+# Retrigger after the workflow definition is present on main.
