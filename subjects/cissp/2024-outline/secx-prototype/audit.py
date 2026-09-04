@@ -193,6 +193,10 @@ check(graph_progress_key in learner_state, "SecX graph-specific learner state ke
 check("reveals" in learner_state and "exposure only" in learner_state, "scenario reveal evidence is not explicitly separated from mastery")
 scenario_state_block = re.search(r"graphState\.scenarios.*?saveGraph\(\)", learner_state, re.S)
 check(bool(scenario_state_block) and "correct" not in scenario_state_block.group(0).lower(), "scenario graph state appears to record correctness")
+check("data.secDetailClose='true'" in learner_state and "window.ascend()" in learner_state, "touch Close control no longer maps to existing Escape/ascend behavior")
+check("data.secDetailOpen='true'" in learner_state and "window.descend()" in learner_state, "touch Open control no longer maps to existing Enter/descend behavior")
+check("data.secDetailMore='true'" in learner_state and "depth=depth%4+1;window.showDetail()" in learner_state, "touch Depth control no longer mirrors Space disclosure cycling")
+check("Escape action" in learner_state and "Enter action" in learner_state and "Space action" in learner_state, "touch controls do not expose their keyboard-equivalent semantics")
 check("learner-state.js" in next_html, "expanded review page does not load learner state")
 check(next_html.find("next-layer.js") < next_html.find("learner-state.js"), "learner state must load after the expanded graph layer")
 check("layer.onload" in next_html, "learner state load is not gated on expanded graph readiness")
@@ -215,5 +219,5 @@ print(
     f"manifest_files={len(seen_manifest_files)} "
     f"explicit_subtopic_edges={explicit_subtopic_edges} "
     f"questions_with_explicit_subtopic_edge={questions_with_explicit_subtopic_edge} "
-    "learner_state=atlas-compatible+graph-separated"
+    "learner_state=atlas-compatible+graph-separated+touch-controls"
 )
