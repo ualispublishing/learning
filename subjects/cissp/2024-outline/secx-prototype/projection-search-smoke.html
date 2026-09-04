@@ -41,13 +41,13 @@ async function run(){
  key(mw,'Tab','Tab');await waitFor(()=>md.activeElement===mobileClose,'Tab moves from search input to Close inside modal');
  key(mw,'Tab','Tab');await waitFor(()=>md.activeElement===mobileInput,'Tab wraps from Close back to search input');
  key(mw,'Tab','Tab',{shiftKey:true});await waitFor(()=>md.activeElement===mobileClose,'Shift+Tab wraps from search input back to Close');
- key(mw,'Escape','Escape');
- await waitFor(()=>md.querySelector('#search').hidden&&mobileInput.getAttribute('aria-expanded')==='false'&&mobileButton.getAttribute('aria-expanded')==='false'&&md.activeElement===mobileButton,'Escape closes modal and restores focus to visible Search opener');
- mobileButton.click();await waitFor(()=>!md.querySelector('#search').hidden&&md.activeElement===mobileInput,'mobile Search control reopens palette after Escape dismissal');
  mobileClose.click();
  await waitFor(()=>md.querySelector('#search').hidden&&mobileInput.getAttribute('aria-expanded')==='false'&&mobileButton.getAttribute('aria-expanded')==='false'&&md.activeElement===mobileButton,'visible Close dismisses modal and restores Search-button focus');
- mobileButton.click();await waitFor(()=>!md.querySelector('#search').hidden,'mobile Search control reopens palette');
- mobileClose.click();await waitFor(()=>md.querySelector('#search').hidden,'mobile Search control closes before detail test');
+ mobileButton.click();
+ await waitFor(()=>!md.querySelector('#search').hidden&&mobileInput.getAttribute('aria-expanded')==='true','mobile Search control reopens palette after visible Close');
+ await waitFor(()=>md.activeElement===mobileInput,'reopened mobile Search transfers focus to input');
+ key(mw,'Escape','Escape');
+ await waitFor(()=>md.querySelector('#search').hidden&&mobileInput.getAttribute('aria-expanded')==='false'&&mobileButton.getAttribute('aria-expanded')==='false'&&md.activeElement===mobileButton,'Escape closes reopened modal and restores focus to visible Search opener');
  const mobileD1=node(md,'d1');assert(mobileD1,'mobile D1 node available for detail test');mobileD1.click();
  const detailClose=await waitFor(()=>{const el=md.querySelector('[data-sec-detail-close]');return md.querySelector('#detail.open')&&el&&!el.closest('[hidden]')?el:null},'mobile detail exposes persistent visible Close control');
  const detailMore=md.querySelector('[data-sec-detail-more]'),detailOpen=md.querySelector('[data-sec-detail-open]'),actionBar=md.querySelector('[data-sec-detail-actions]');
@@ -66,7 +66,7 @@ async function run(){
  openAgain.click();
  await waitFor(()=>node(md,'1.1')&&md.querySelector('#crumb')?.textContent.includes('Security and Risk Management'),'mobile Open control descends from domain to objectives without Enter');
  assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile touch controls/objective layout have no horizontal overflow');
- result.dataset.smoke='pass';result.textContent='PASS SecX projection search smoke: source routing coverage-objective routing combobox-active-descendant visible Search/Close modal-focus containment opener-focus-restore persistent mobile detail Close/Depth/Open';
+ result.dataset.smoke='pass';result.textContent='PASS SecX projection search smoke: source routing coverage-objective routing combobox-active-descendant visible Search/Close modal-focus containment one-reopen Escape/Close opener-focus-restore persistent mobile detail Close/Depth/Open';
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
