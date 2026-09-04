@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "round_id": "langwb-v1.0-lexical-qa-v5-2026-09-03",
+  "mode": "incremental_vocab_repair_input_lock",
+  "repository": "ualispublishing/learning",
+  "expected_main_commit_at_preparation": "eec842eab9bb1f339e8b75d736c0d78f0be18189",
+  "runner_blob_at_preparation": "57185c9cdb8cdf6b109bb1b98ae41266ddb39dac",
+  "ledger_patch_manifest_sha256": "976c5a5fc1343a4e114ad39dc9b907bcc540bbe3f649bc484ea5cdead61ce673",
+  "vocab": {
+    "arabic": {
+      "input_git_blob": "1ecf4e0de6f039895162a2a307d62a951c968812",
+      "historical_audited_baseline_git_blob": "a8dc009cc28c27624d69d517cd38479c5d418fbc",
+      "prior_repair_report_output_git_blob": "828182f41cc9f2fec05df4cdb1074f41afbef2a8",
+      "allowed_new_repair_ranks": [
+        202,
+        220,
+        496,
+        501,
+        503,
+        666,
+        676,
+        678,
+        871,
+        875,
+        884,
+        894,
+        912
+      ],
+      "expected_new_repair_count": 13
+    },
+    "french": {
+      "input_git_blob": "bee21fb1d123e93b4aada6b26f12d8239ac5818b",
+      "historical_audited_baseline_git_blob": "419d96467a78c205996358caaf4ae9ba1ac3caa9",
+      "prior_repair_report_output_git_blob": "bee21fb1d123e93b4aada6b26f12d8239ac5818b",
+      "allowed_new_repair_ranks": [
+        85,
+        137,
+        207,
+        267,
+        330,
+        351,
+        353,
+        399,
+        612,
+        644,
+        728,
+        761,
+        973
+      ],
+      "expected_new_repair_count": 13
+    },
+    "urdu": {
+      "input_git_blob": "d427697f5525b0496be82073d25e928858c1dd5b",
+      "historical_audited_baseline_git_blob": "f134225f117d94b40f66004bb09bd8c29e2b6560",
+      "prior_repair_report_output_git_blob": "d427697f5525b0496be82073d25e928858c1dd5b",
+      "allowed_new_repair_ranks": [
+        55,
+        163,
+        185,
+        222,
+        226,
+        265,
+        266,
+        274,
+        355,
+        463,
+        523,
+        538,
+        640,
+        642,
+        657,
+        659,
+        709,
+        818,
+        828,
+        861,
+        871,
+        904
+      ],
+      "expected_new_repair_count": 22
+    }
+  },
+  "notes": {
+    "arabic": "Current Arabic source intentionally advanced after the prior ledger repair report. Commit 5df7384c9306631decbc1b1b1906cdf9e2b924d5 changed the source from 828182f41cc9f2fec05df4cdb1074f41afbef2a8 to 1ecf4e0de6f039895162a2a307d62a951c968812.",
+    "french": "Current source equals the prior repaired output, but is explicitly promoted to this round exact input baseline.",
+    "urdu": "Current source equals the prior repaired output, but is explicitly promoted to this round exact input baseline."
+  },
+  "validated_snapshot_commit": "f792dc756ba6537070bec142cb0ec8dad03f3381",
+  "current_main_delta_validation": {
+    "base": "f792dc756ba6537070bec142cb0ec8dad03f3381",
+    "head": "eec842eab9bb1f339e8b75d736c0d78f0be18189",
+    "ahead_by": 9,
+    "langwb_files_changed": 0,
+    "only_paths": [
+      ".github/workflows/**",
+      "reading/**"
+    ]
+  }
+}

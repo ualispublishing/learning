@@ -28,6 +28,7 @@ STAGE = AUDIT / "staging_v3"
 SENT_LEDGER_DIR = AUDIT / "row_by_row"
 VOCAB_LEDGER_DIR = AUDIT / "row_by_row_vocab"
 REPORT = AUDIT / "ledger_repair_application.json"
+VOCAB_INCREMENTAL_BASELINES = AUDIT / "vocab_incremental_repair_baselines.json"
 LANGS = ("arabic", "french", "urdu")
 SENT_FIELDS = ["rank", "level", "target", "english", "attribution", "words", "contributor"]
 DIAC_AR = re.compile(r"[\u0610-\u061a\u064b-\u065f\u0670\u06d6-\u06ed]")
@@ -66,6 +67,16 @@ def git_blob_sha(raw: bytes) -> str:
     return hashlib.sha1(f"blob {len(raw)}\0".encode("ascii") + raw).hexdigest()
 
 
+def prior_sentence_output_blob(lang: str) -> str | None:
+    if not REPORT.exists():
+        return None
+    try:
+        payload = json.loads(REPORT.read_text(encoding="utf-8"))
+        return payload.get("sources", {}).get("sentence", {}).get(lang, {}).get("output_git_blob")
+    except Exception:
+        return None
+
+
 def prior_vocab_output_blob(lang: str) -> str | None:
     if not REPORT.exists():
         return None
@@ -74,6 +85,38 @@ def prior_vocab_output_blob(lang: str) -> str | None:
         return payload.get("sources", {}).get("vocab", {}).get(lang, {}).get("output_git_blob")
     except Exception:
         return None
+
+
+def incremental_vocab_round(lang: str) -> dict | None:
+    if not VOCAB_INCREMENTAL_BASELINES.exists():
+        return None
+    try:
+        payload = json.loads(VOCAB_INCREMENTAL_BASELINES.read_text(encoding="utf-8"))
+    except Exception as exc:
+        fail(f"vocab incremental baseline manifest is unreadable: {exc}")
+    if payload.get("schema_version") != 1:
+        fail("vocab incremental baseline manifest: unsupported schema_version")
+    entry = payload.get("vocab", {}).get(lang)
+    if entry is None:
+        return None
+    blob = (entry.get("input_git_blob") or "").strip()
+    if not re.fullmatch(r"[0-9a-f]{40}", blob):
+        fail(f"vocab/{lang}: incremental baseline has invalid input_git_blob {blob!r}")
+    ranks = entry.get("allowed_new_repair_ranks")
+    if (
+        not isinstance(ranks, list)
+        or not ranks
+        or any(not isinstance(rank, int) or rank < 1 or rank > 1000 for rank in ranks)
+        or len(set(ranks)) != len(ranks)
+    ):
+        fail(f"vocab/{lang}: incremental baseline has invalid allowed_new_repair_ranks")
+    expected_count = entry.get("expected_new_repair_count")
+    if expected_count != len(ranks):
+        fail(
+            f"vocab/{lang}: incremental baseline expected_new_repair_count "
+            f"{expected_count!r} does not equal rank count {len(ranks)}"
+        )
+    return {"input_git_blob": blob, "allowed_new_repair_ranks": set(ranks)}
 
 
 def ledger_pattern(lang: str) -> re.Pattern[str]:
@@ -137,28 +180,35 @@ def sentence_source_guard(lang: str, raw: bytes) -> tuple[str, str]:
         fail(f"sentence/{lang}: missing corpus-selection manifest")
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     expected = manifest.get("csv_sha256")
-    current = hashlib.sha256(raw).hexdigest()
-    if not expected or current != expected:
-        fail(
-            f"DRIFT: sentence/{lang} staged sha256 {current} does not match "
-            f"fresh corpus-selection sha256 {expected!r}"
-        )
-    return git_blob_sha(raw), "fresh_selected_baseline"
+    current_sha256 = hashlib.sha256(raw).hexdigest()
+    current_blob = git_blob_sha(raw)
+    if expected and current_sha256 == expected:
+        return current_blob, "fresh_selected_baseline"
+    previous = prior_sentence_output_blob(lang)
+    if previous and current_blob == previous:
+        return current_blob, "prior_repaired"
+    fail(
+        f"DRIFT: sentence/{lang} staged sha256 {current_sha256} / blob {current_blob} "
+        f"matches neither fresh corpus-selection sha256 {expected!r} nor prior repaired output {previous!r}"
+    )
 
 
 def vocab_source_guard(lang: str, raw: bytes) -> tuple[str, str]:
     current = git_blob_sha(raw)
     baseline = VOCAB_BASELINE_BLOBS[lang]
+    incremental = incremental_vocab_round(lang)
     previous = prior_vocab_output_blob(lang)
-    allowed = {baseline}
-    if previous:
-        allowed.add(previous)
-    if current not in allowed:
-        fail(
-            f"DRIFT: vocab/{lang} source blob {current} is neither audited baseline "
-            f"{baseline} nor prior repaired output {previous!r}"
-        )
-    return current, "baseline" if current == baseline else "prior_repaired"
+    if current == baseline:
+        return current, "baseline"
+    if incremental and current == incremental["input_git_blob"]:
+        return current, "incremental_baseline"
+    if previous and current == previous:
+        return current, "prior_repaired"
+    expected_incremental = incremental["input_git_blob"] if incremental else None
+    fail(
+        f"DRIFT: vocab/{lang} source blob {current} is not audited baseline {baseline}, "
+        f"incremental round baseline {expected_incremental!r}, or prior repaired output {previous!r}"
+    )
 
 
 def adapted_attribution(old: str) -> str:
@@ -361,8 +411,19 @@ def plan_vocab(lang: str, ledger: list[dict]) -> dict:
         if current == proposed:
             already.append(rank)
             continue
-        if source_state != "baseline":
-            fail(f"DRIFT: vocab/{lang} rank {rank} differs from its proposal inside prior repaired source")
+        if source_state == "incremental_baseline":
+            incremental = incremental_vocab_round(lang)
+            allowed = incremental["allowed_new_repair_ranks"] if incremental else set()
+            if rank not in allowed:
+                fail(
+                    f"DRIFT: vocab/{lang} rank {rank} differs from its proposal but is not "
+                    f"authorized by the exact incremental-round rank lock"
+                )
+        elif source_state != "baseline":
+            fail(
+                f"DRIFT: vocab/{lang} rank {rank} differs from its proposal inside "
+                f"source state {source_state!r}"
+            )
 
         row["Front"] = proposed_target
         if current_meaning != proposed_meaning:
@@ -370,6 +431,16 @@ def plan_vocab(lang: str, ledger: list[dict]) -> dict:
         if current_pos != proposed_pos:
             row["Back"] = replace_one(POS_RE, row["Back"], "Part of speech", proposed_pos, lang, rank)
         applied.append(rank)
+
+    if source_state == "incremental_baseline":
+        incremental = incremental_vocab_round(lang)
+        expected_applied = incremental["allowed_new_repair_ranks"] if incremental else set()
+        actual_applied = set(applied)
+        if actual_applied != expected_applied:
+            fail(
+                f"vocab/{lang}: incremental round must apply exactly "
+                f"{sorted(expected_applied)}, got {sorted(actual_applied)}"
+            )
 
     distinct, homographs, blocking = vocab_duplicate_audit(lang, rows)
     if blocking:
