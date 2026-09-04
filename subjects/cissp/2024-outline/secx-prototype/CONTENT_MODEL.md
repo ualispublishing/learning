@@ -18,7 +18,8 @@ The current implemented review surfaces stop at explicit released mappings:
 - objective → released scenario;
 - subtopic → released scenario only by exact explicit released subtopic tag;
 - source → objective only by explicit objective `source_ids`;
-- source → review card only by explicit card `source_ids`.
+- source → review card only by explicit card `source_ids`;
+- source → released scenario only by explicit scenario `source_ids`.
 
 Concept-level or cross-domain semantic edges remain gated until reviewed mappings exist.
 
@@ -73,6 +74,16 @@ Coverage counts and exact-tag practice-exposure counts are likewise projections 
 
 Schedule-derived views such as **Due Reviews** and **Study Queue** are not relationship types. They are temporary learner-state projections over already released review-card nodes and must never be serialized back into curriculum relationships.
 
+## Shared released-scenario registry
+
+`next-layer.js` is the single learner-runtime release boundary for standard scenarios. It loads only paths listed by `question-bank/RELEASED_BATCHES.json` and publishes:
+
+- `SECX_RELEASED_QUESTIONS` — the current manifest-released standard scenario snapshot;
+- `SECX_RELEASED_BANK_STATE` — readiness/error/count state;
+- `secx:released-bank` — readiness/change event.
+
+Read-only projections such as Source Provenance and Coverage consume this shared registry. They must not independently reload the manifest or discover question-bank files. This keeps scenario release inclusion consistent across the graph and prevents two projections from observing different bank states.
+
 ## Provenance projection
 
 The **Source Provenance** lens uses the current Atlas source registry and exact `source_ids` arrays only.
@@ -82,14 +93,17 @@ It may display:
 - all released Atlas source records;
 - objectives that explicitly cite a selected source;
 - production-compatible review cards that explicitly cite a selected source;
+- manifest-released standard scenarios that explicitly cite a selected source;
 - source title, role, and URL already present in Atlas metadata.
 
-It must not:
+Scenario citation nodes in Source Provenance use a distinct `source-scenario` node kind. They may expose the released prompt/options and provenance, but they must not expose the keyed answer/explanation or record scenario-answer-reveal evidence. Answer/reveal behavior belongs only to the real released-scenario practice branch.
+
+Source Provenance must not:
 
 - infer a source mapping from text similarity;
 - treat co-citation as a semantic concept edge;
-- read or write learner state;
-- discover candidate question-bank files;
+- independently fetch/discover question-bank files;
+- infer learner correctness/mastery/readiness from source traversal;
 - imply that one cited source is the sole authority unless Atlas explicitly says so.
 
 ## Coverage projection
@@ -109,7 +123,7 @@ It may display, by domain/objective:
 
 A missing scenario mapping is a **practice-exposure gap**, not proof of curriculum omission. Coverage metrics are corpus properties and are not learner mastery/readiness measurements.
 
-The lens must load scenarios through `RELEASED_BATCHES.json`, must not discover candidate-only files, must not read/write learner state, and must not infer semantic edges from counts, tags, or shared sources.
+Coverage consumes the shared released-scenario registry, must not independently load the manifest or discover candidate-only files, must not read/write learner state, and must not infer semantic edges from counts, tags, or shared sources.
 
 ## Progressive disclosure
 
@@ -120,7 +134,7 @@ Each node supports four stable disclosure depths:
 3. **Discriminate** — traps, misconceptions, contrasts, failure modes.
 4. **Apply / verify** — source traceability and application/practice.
 
-For released scenarios, the keyed answer and explanation belong only to layer 4. The scenario stem/options must be visible before the answer so the graph remains retrieval-first.
+For released scenarios in the real practice branch, the keyed answer and explanation belong only to layer 4. The scenario stem/options must be visible before the answer so the graph remains retrieval-first.
 
 ## Local graph mounting
 
@@ -212,13 +226,13 @@ Automatic approval is forbidden from:
 
 ## Release isolation
 
-Released scenarios must be loaded only through the released question-bank manifest. Presence of a candidate file in the repository is not sufficient for learner-facing graph inclusion.
+Released scenarios must be loaded only through the released question-bank manifest by the central `next-layer.js` loader. Presence of a candidate file in the repository is not sufficient for learner-facing graph inclusion.
 
 Released review-card learner-state views must derive from the Atlas-compatible 140-card registry, not repository file discovery.
 
-Source Provenance must derive from `CISSP_META.sources` plus exact released `source_ids` mappings.
+Source Provenance must derive from `CISSP_META.sources`, exact released `source_ids`, and the shared released-scenario registry.
 
-Coverage must derive from released objectives/subtopics/cards plus manifest-released standard scenarios and exact scenario subtopic tags.
+Coverage must derive from released objectives/subtopics/cards plus the shared released-scenario registry and exact scenario subtopic tags.
 
 Reviewer-only semantic relationship data must not be loaded by learner runtime. A future learner-facing relationship layer requires a separate released artifact.
 
@@ -229,12 +243,14 @@ Before any graph surface becomes production-facing, deterministic validation mus
 - duplicate stable IDs;
 - malformed release-manifest paths;
 - unreleased scenario leakage;
+- independent projection-specific scenario loaders that bypass the shared released bank;
 - unsupported relationship targets/types;
 - temporary navigation IDs used as semantic endpoints;
 - relationship approval without explicit relationship review evidence;
 - reviewer-only relationship data loaded by learner runtime;
 - invalid learner-state/content coupling;
 - answer exposure before the required retrieval boundary;
+- source-provenance scenario nodes that expose answers or record false answer-reveal evidence;
 - due/study inputs that are not Atlas-compatible review cards/state;
 - source-provenance membership not backed by exact `source_ids`;
 - coverage inputs not backed by released objective/subtopic/card/scenario mappings;
