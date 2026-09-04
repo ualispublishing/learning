@@ -36,19 +36,15 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - name: Validate routed state before B2 Unit 4 repair
         run: python reading/tools/validate_continuation_state.py
-
       - name: Refuse duplicate Unit 4 decision frontier
         shell: bash
         run: |
           set -euo pipefail
           test ! -e reading/audit/arabic_gate_b_decisions_2026-08-30/b2_u04.json
-
       - name: Apply exact-current B2 Unit 4 naturalness repairs
         run: python reading/tools/apply_arabic_gate_b_b2_unit04.py
-
       - name: Rebuild and bind Arabic evidence
         shell: bash
         run: |
@@ -63,26 +59,14 @@ jobs:
           python reading/tools/sync_arabic_release_global_blocker.py
           python reading/tools/refresh_state_manifest.py
           python reading/tools/validate_continuation_state.py
-
       - name: Commit bounded B2 Unit 4 repair and evidence
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add \
-            reading/arabic/b2/passages.jsonl \
-            reading/audit/arabic_gate_b_decisions_2026-08-30/b2_u04.json \
-            reading/audit/post_generation_gate0_2026-08-30.json \
-            reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json \
-            reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json \
-            reading/audit/arabic_b1_c2_metalinguistic_cefr_triage_2026-08-30.json \
-            reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json \
-            reading/audit/arabic_gate_b_packets_2026-08-30 \
-            reading/RELEASE_STATUS.json \
-            reading/STATE_MANIFEST.json
+          git add reading/arabic/b2/passages.jsonl reading/audit/arabic_gate_b_decisions_2026-08-30/b2_u04.json reading/audit/post_generation_gate0_2026-08-30.json reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json reading/audit/arabic_b1_c2_metalinguistic_cefr_triage_2026-08-30.json reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json reading/audit/arabic_gate_b_packets_2026-08-30 reading/RELEASE_STATUS.json reading/STATE_MANIFEST.json
           git commit -m 'Complete fresh Arabic Gate B B2 Unit 4 review'
-
       - name: Rebase and regenerate evidence on exact push candidate
         shell: bash
         run: |
@@ -100,16 +84,67 @@ jobs:
           python reading/tools/sync_arabic_release_global_blocker.py
           python reading/tools/refresh_state_manifest.py
           python reading/tools/validate_continuation_state.py
-          git add \
-            reading/audit/arabic_gate_b_decisions_2026-08-30/b2_u04.json \
-            reading/audit/post_generation_gate0_2026-08-30.json \
-            reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json \
-            reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json \
-            reading/audit/arabic_b1_c2_metalinguistic_cefr_triage_2026-08-30.json \
-            reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json \
-            reading/audit/arabic_gate_b_packets_2026-08-30 \
-            reading/RELEASE_STATUS.json \
-            reading/STATE_MANIFEST.json
+          git add reading/audit/arabic_gate_b_decisions_2026-08-30/b2_u04.json reading/audit/post_generation_gate0_2026-08-30.json reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json reading/audit/arabic_b1_c2_metalinguistic_cefr_triage_2026-08-30.json reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json reading/audit/arabic_gate_b_packets_2026-08-30 reading/RELEASE_STATUS.json reading/STATE_MANIFEST.json
+          if ! git diff --cached --quiet; then git commit --amend --no-edit; fi
+          python reading/tools/validate_continuation_state.py
+          git push origin HEAD:main
+
+  arabic-b2-unit04-state-sync:
+    if: github.event.head_commit.message == 'Sync Arabic Gate B B2 Unit 4 state now'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate Unit 4 evidence and synchronize verification queue
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r = json.loads(Path('reading/RELEASE_STATUS.json').read_text(encoding='utf-8'))
+          a = r['languages']['arabic']
+          g = a['naturalness_review_progress']
+          d = a['latest_deterministic_gate']
+          assert (g['fresh_records_reviewed'], g['fresh_records_with_findings'], g['fresh_findings']) == (204, 175, 351)
+          assert d['open_findings'] == 1704
+          artifact = Path('reading/audit/arabic_gate_b_decisions_2026-08-30/b2_u04.json')
+          doc = json.loads(artifact.read_text(encoding='utf-8'))
+          assert (doc['records_reviewed'], doc['records_with_findings'], doc['fresh_findings']) == (6, 4, 6)
+          assert doc['quality_promotion'] is False and doc['release_claim'] is False
+
+          p = Path('reading/VERIFICATION_TASKS.md')
+          text = p.read_text(encoding='utf-8')
+          old1 = 'Current release position: fresh deterministic revalidation is **FAIL** with **1728** open evidence findings; educator/publication release remains **not ready** under the current assurance profile.'
+          new1 = 'Current release position: fresh deterministic revalidation is **FAIL** with **1704** open evidence findings; educator/publication release remains **not ready** under the current assurance profile.'
+          old2 = 'Fresh deterministic evidence: `reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json` — 360 records, 3,600 questions, 3,600 answers; status **FAIL**; open findings **1728**. This is a release-evidence gate, not semantic approval.'
+          new2 = 'Fresh deterministic evidence: `reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json` — 360 records, 3,600 questions, 3,600 answers; status **FAIL**; open findings **1704**. This is a release-evidence gate, not semantic approval.'
+          anchor = 'B2 Unit 3 Gate B evidence: `reading/audit/arabic_gate_b_decisions_2026-08-30/b2_u03.json` — 6 current-corpus records reviewed, 5 repaired and 1 clean PASS, with 15 fresh high-confidence grammar/naturalness/semantic findings closed. Fresh Gate B progress is now 198/360 records; B2 remains in progress and this is not an educator/publication release claim.'
+          addition = anchor + '\n\nB2 Unit 4 Gate B evidence: `reading/audit/arabic_gate_b_decisions_2026-08-30/b2_u04.json` — 6 current-corpus records reviewed, 4 repaired and 2 clean PASS records, with 6 fresh high-confidence naturalness/assessment/semantic/reference findings closed. Fresh Gate B progress is now 204/360 records; B2 remains in progress and this is not an educator/publication release claim.'
+          checklist_anchor = '- [x] Arabic B2 Unit 3 Gate B batch: reviewed 6 passages / 60 questions / 60 answers; closed 15 fresh learner-facing findings across 5 records and recorded 1 clean PASS with hash-bound decision evidence;'
+          checklist_add = checklist_anchor + '\n- [x] Arabic B2 Unit 4 Gate B batch: reviewed 6 passages / 60 questions / 60 answers; closed 6 fresh learner-facing findings across 4 records and recorded 2 clean PASS records with hash-bound decision evidence;'
+          for old, new in ((old1,new1),(old2,new2),(anchor,addition),(checklist_anchor,checklist_add)):
+              if text.count(old) != 1:
+                  raise SystemExit(f'verification queue anchor drift: {old[:80]!r}')
+              text = text.replace(old,new,1)
+          p.write_text(text,encoding='utf-8')
+          PY
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+      - name: Commit synchronized queue and exact-byte state lock
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/VERIFICATION_TASKS.md reading/STATE_MANIFEST.json
+          git commit -m 'Sync Arabic Gate B B2 Unit 4 verification state'
+          git fetch origin main
+          git rebase origin/main
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+          git add reading/STATE_MANIFEST.json
           if ! git diff --cached --quiet; then git commit --amend --no-edit; fi
           python reading/tools/validate_continuation_state.py
           git push origin HEAD:main
