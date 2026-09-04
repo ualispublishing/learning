@@ -3,7 +3,7 @@ name: Apply Arabic Gate B B2 Unit 3 after active workflow completion
 on:
   workflow_run:
     workflows:
-      - .github/workflows/urdu-a1-promote-units03-04.yml
+      - .github/workflows/urdu-a1-promote-units03-04-on-pr.yml
     types:
       - completed
 
