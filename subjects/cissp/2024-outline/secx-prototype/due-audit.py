@@ -70,15 +70,17 @@ check("window.SECX_RELEASED_CARDS=retrievalCards" in registry, "released-card re
 check("question-bank" not in registry.lower(), "released-card registry unexpectedly references question-bank data")
 
 order = [
+    next_html.find("data-ai.js"),
     next_html.find("data-precision.js"),
     next_html.find("learner-registry.js"),
     next_html.find("next-layer.js"),
     next_html.find("learner-state.js"),
     next_html.find("due-review.js"),
 ]
-check(all(i >= 0 for i in order), "expanded page is missing a required runtime layer")
+check(all(i >= 0 for i in order), "expanded page is missing a required released/runtime layer")
 check(order == sorted(order) and len(set(order)) == len(order), "expanded page runtime load order is invalid")
-check(next_html.count(".onload=") >= 4, "expanded page no longer gates dependent layers by load completion")
+check(next_html.count(".onload=") >= 5, "expanded page no longer gates dependent layers by load completion")
+check("ai.onload" in next_html and "precision.onload" in next_html, "AI/Precision released chunks are not load-gated before the learner registry")
 
 check("cissp_atlas_progress_v1" in learner and "cissp_atlas_progress_v1" in due, "due review is not tied to Atlas card progress")
 check("cissp_secx_graph_state_v1" in learner, "graph-specific learner state key missing")
@@ -103,4 +105,4 @@ if errors:
         print("-", error)
     sys.exit(1)
 
-print(f"PASS secx_due_audit layered_review_cards={layered_count} objective_cards={len(objectives)} high_yield_cards={len(high_cards)} load_order=precision>registry>graph>learner>due source=Atlas-progress-only")
+print(f"PASS secx_due_audit layered_review_cards={layered_count} objective_cards={len(objectives)} high_yield_cards={len(high_cards)} load_order=ai>precision>registry>graph>learner>due source=Atlas-progress-only")
