@@ -42,8 +42,23 @@ jobs:
           set -euo pipefail
           python .github/lang-wb-v2/stage_a.py
           git diff --check
-          test "$(git diff --name-only | grep -Ec '^audit/language-workbooks/v1.0/row_by_row_vocab/|^audit/language-workbooks/v1.0/vocab_incremental_repair_baselines.json$|^scripts/apply_language_workbook_linguistic_repairs.py$')" -eq 32
-          test "$(git diff --name-only | wc -l | tr -d ' ')" -eq 32
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          payload=json.loads(Path('.github/lang-wb-v2/payload.json').read_text(encoding='utf-8'))
+          expected={item['path'] for item in payload['patches']}
+          expected |= {
+              'audit/language-workbooks/v1.0/vocab_incremental_repair_baselines.json',
+              'scripts/apply_language_workbook_linguistic_repairs.py',
+          }
+          actual=set(subprocess.check_output(['git','diff','--name-only'], text=True).splitlines())
+          print('Expected changed paths:', len(expected))
+          print('Actual changed paths:', len(actual))
+          if actual != expected:
+              print('Missing:', sorted(expected-actual))
+              print('Unexpected:', sorted(actual-expected))
+              raise SystemExit('Stage A changed-path set mismatch')
+          PY
 
       - name: Commit Stage A atomically
         if: steps.gate.outputs.run == 'true'
@@ -56,6 +71,20 @@ jobs:
                   audit/language-workbooks/v1.0/vocab_incremental_repair_baselines.json \
                   scripts/apply_language_workbook_linguistic_repairs.py
           git diff --cached --check
-          test "$(git diff --cached --name-only | wc -l | tr -d ' ')" -eq 32
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          payload=json.loads(Path('.github/lang-wb-v2/payload.json').read_text(encoding='utf-8'))
+          expected={item['path'] for item in payload['patches']}
+          expected |= {
+              'audit/language-workbooks/v1.0/vocab_incremental_repair_baselines.json',
+              'scripts/apply_language_workbook_linguistic_repairs.py',
+          }
+          actual=set(subprocess.check_output(['git','diff','--cached','--name-only'], text=True).splitlines())
+          if actual != expected:
+              print('Missing staged:', sorted(expected-actual))
+              print('Unexpected staged:', sorted(actual-expected))
+              raise SystemExit('Stage A staged-path set mismatch')
+          PY
           git commit -m 'repair: stage LANG-WB v1 linguistic repair v2'
           git push origin HEAD:lang-wb-v1-repair-v2-20260904
