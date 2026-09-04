@@ -20,10 +20,10 @@ async function enter(win){key(win,'Enter','Enter');await sleep(80)}
 function todayISO(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 async function run(){
   const {d,w}=await ready(frame,'desktop');
-  const meta=w.CISSP_META?.meta||{},scope=d.querySelector('#scope')?.textContent||'';
+  const meta=w.CISSP_META?.meta||{},scope=d.querySelector('#scope')?.textContent||'',registryCount=Array.isArray(w.SECX_RELEASED_CARDS)?w.SECX_RELEASED_CARDS.length:null;
   await waitFor(()=>d.querySelectorAll('.node.domain').length===8,'eight domain nodes');
   assert(d.querySelectorAll('.node').length===9,'root plus eight domains');
-  assert(scope.includes(`${meta.card_count} cards`),'scope matches released retrieval-card count');
+  assert(scope.includes(`${meta.card_count} cards`),`scope matches released retrieval-card count; scope=${JSON.stringify(scope)} meta.card_count=${meta.card_count} registry=${registryCount}`);
   assert(scope.includes(`${meta.question_count} released scenarios`),'scope matches released standard-question count');
   assert(scope.includes('0 due cards'),'fresh smoke profile has zero due cards');
   assert(d.querySelector('#dueReviewBtn')?.textContent.includes('· 0'),'fresh due-review button has zero cards');
