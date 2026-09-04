@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "C1",
+  "unit": 5,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/c1/passages.jsonl",
+  "canonical_sha256": "f6e6d59b272fe1b33ee9cfbbbee8a2afc23c7a913547d758a281df76be39e333",
+  "records_reviewed": 6,
+  "records_with_findings": 3,
+  "fresh_findings": 5,
+  "decisions": [
+    {
+      "passage_id": "ar-c1-u05-p01",
+      "learner_facing_sha256": "d82ec92e01ba3cfa1264d3dafc72a01657699e37492a23a4e79ad04bbf2bcffd",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-c1-u05-p02",
+      "learner_facing_sha256": "00899a97ed13ff3fe06b1de5751ebe8856ec501811c2dd35f3f3880b5eae642c",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u05-p02-gB-01",
+          "field": "text",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "بما يكفي ليهم is malformed/ambiguous without the intended predicative construction; state explicitly that the small stable effect can be important over a long period."
+        },
+        {
+          "finding_id": "ar-c1-u05-p02-gB-02",
+          "field": "answer q2",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "الأول الأسابيع منفردة lacks a verb and does not form a complete answer to what the two graphs show; restore parallel verbal clauses."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u05-p03",
+      "learner_facing_sha256": "9b9bdc945858300bb48a2d7294f53770c7a797c05c00c1b9a9f726deb0d59c6d",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-c1-u05-p04",
+      "learner_facing_sha256": "2fa0a4e80c2347cbcb44b38a6935245ceb93c00d86acbc74972681a1704351a5",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-c1-u05-p05",
+      "learner_facing_sha256": "843d255c43dad5ddbf4661fe2aad92d8590a5200ecb082b1cf1a3c67bb66a21a",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u05-p05-gB-01",
+          "field": "answer q10",
+          "dimension": "grammar_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "ظهور شيء أو أصبح واضحًا coordinates a noun phrase with a finite verb; use the parallel verbal noun اتضاحه."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u05-p06",
+      "learner_facing_sha256": "112313e16f9476e4c69a39ea5042ff363dda0ba46fe9966b0488c258846f4c63",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u05-p06-gB-01",
+          "field": "text",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تدفق البيانات ... يفقد الحالات assigns omission directly to the flow in an awkward way; state that relevant cases may be absent from the abundant stream while preserving the lexical targets."
+        },
+        {
+          "finding_id": "ar-c1-u05-p06-gB-02",
+          "field": "answer q10",
+          "dimension": "naturalness_idiomaticity",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "تقابل قرار ... بحكم is awkward for the discourse function of لكن; the passage separates action thresholds from epistemic confidence rather than pairing one decision with another."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate C1 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+}
