@@ -16,7 +16,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;while(Date.now()<end){try{const v=fn();if(v)return v}catch{}await sleep(50)}throw new Error(`Timed out waiting for ${label}`)}
 function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
 function graphTarget(win){const active=[...win.document.querySelectorAll('.node.active')].find(el=>el.isConnected);return active||win.document.body||win.document.documentElement}
-function key(win,key,code=key){graphTarget(win).dispatchEvent(new win.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
+function key(win,key,code=key){const graphKey=['Enter','Escape',' ','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home'].includes(key);const target=graphKey?graphTarget(win):(win.document.body||win.document.documentElement);target.dispatchEvent(new win.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
 function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow}}
 async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),scope=x.d?.querySelector('#scope')?.textContent||'';return x.d&&x.w&&/\d+ released scenarios/.test(scope)&&!scope.includes('loading')&&!scope.includes('unavailable')&&x.d.querySelector('[data-sec-grade-help]')&&x.d.querySelector('#dueReviewBtn')&&x.d.querySelector('#studyQueueBtn')?x:null},`${label} released Atlas graph + learner controls`)}
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
@@ -101,7 +101,7 @@ async function run(){
   const reviewCardCount=Array.isArray(w.SECX_RELEASED_CARDS)?w.SECX_RELEASED_CARDS.length:0;
   assert(reviewCardCount===meta.card_count,'learner registry matches Atlas layered-card count');
   key(w,'q','KeyQ');
-  await waitFor(()=>node(d,'study:queue')&&d.querySelectorAll('.node.study-facet').length===5&&d.querySelector('#crumb')?.textContent==='SecX › Study queue','Q opens five-facet study queue');
+  try{await waitFor(()=>node(d,'study:queue')&&d.querySelectorAll('.node.study-facet').length===5&&d.querySelector('#crumb')?.textContent==='SecX › Study queue','Q opens five-facet study queue')}catch(err){throw new Error(`Study queue did not open after Q shortcut; ${graphDebug(w,d)} studyButton=${JSON.stringify(d.querySelector('#studyQueueBtn')?.textContent||'')}`)}
   assert(node(d,'study:due')?.textContent.includes('1 scheduled now'),'study queue derives one due card from Atlas state');
   assert(node(d,'study:new')?.textContent.includes(`${reviewCardCount-1} ungraded`),'study queue derives remaining new-card count from Atlas state');
   assert(node(d,'study:weak')?.textContent.includes('D1'),'fresh/tied review score uses Atlas higher-weight tie-break');
