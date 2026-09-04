@@ -17,19 +17,20 @@ async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;whil
 function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
 function key(win,key,code=key){const target=win.document.activeElement||win.document.body;target.dispatchEvent(new win.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
 function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow}}
-async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),scope=x.d?.querySelector('#scope')?.textContent||'';return x.d&&x.w&&/\d+ released scenarios/.test(scope)&&!scope.includes('loading')&&!scope.includes('unavailable')&&x.d.querySelector('[data-sec-grade-help]')&&x.d.querySelector('#dueReviewBtn')&&x.d.querySelector('#studyQueueBtn')?x:null},`${label} released Atlas graph + learner state + due review + study lens`)}
+async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),scope=x.d?.querySelector('#scope')?.textContent||'';return x.d&&x.w&&/\d+ released scenarios/.test(scope)&&/\d+ due cards/.test(scope)&&!scope.includes('loading')&&!scope.includes('unavailable')&&x.d.querySelector('[data-sec-grade-help]')&&x.d.querySelector('#dueReviewBtn')&&x.d.querySelector('#studyQueueBtn')?x:null},`${label} released Atlas graph + learner footer + due review + study lens`)}
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
 function clickId(d,id){const el=node(d,id);assert(el,`node ${id} exists`);el.click();return el}
 async function enter(win){key(win,'Enter','Enter');await sleep(80)}
 function todayISO(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 async function run(){
   const {d,w}=await ready(frame,'desktop');
-  const meta=w.CISSP_META?.meta||{},scope=d.querySelector('#scope')?.textContent||'',registryCount=Array.isArray(w.SECX_RELEASED_CARDS)?w.SECX_RELEASED_CARDS.length:null;
+  const meta=w.CISSP_META?.meta||{},registryCount=Array.isArray(w.SECX_RELEASED_CARDS)?w.SECX_RELEASED_CARDS.length:null;
   await waitFor(()=>d.querySelectorAll('.node.domain').length===8,'eight domain nodes');
+  const initialScope=d.querySelector('#scope')?.textContent||'';
   assert(d.querySelectorAll('.node').length===9,'root plus eight domains');
-  assert(scope.includes(`${meta.card_count} cards`),`scope matches released retrieval-card count; scope=${JSON.stringify(scope)} meta.card_count=${meta.card_count} registry=${registryCount}`);
-  assert(scope.includes(`${meta.question_count} released scenarios`),'scope matches released standard-question count');
-  assert(scope.includes('0 due cards'),'deterministic smoke baseline has zero due cards');
+  assert(initialScope.includes(`${meta.card_count} cards`),`scope matches released retrieval-card count; scope=${JSON.stringify(initialScope)} meta.card_count=${meta.card_count} registry=${registryCount}`);
+  assert(initialScope.includes(`${meta.question_count} released scenarios`),'scope matches released standard-question count');
+  assert(initialScope.includes('0 due cards'),'deterministic smoke baseline has zero due cards');
   assert(d.querySelector('#dueReviewBtn')?.textContent.includes('· 0'),'baseline due-review button has zero cards');
   assert(d.querySelector('#studyQueueBtn')?.textContent.includes('· 0 due'),'baseline study button has zero due cards');
   assert(d.querySelector('#crumb')?.textContent==='SecX','root breadcrumb');
