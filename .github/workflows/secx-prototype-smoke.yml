@@ -8,6 +8,14 @@ on:
       - 'subjects/cissp/2024-outline/secx-prototype/**'
       - 'subjects/cissp/2024-outline/study-site/**'
       - '.github/workflows/secx-prototype-smoke.yml'
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - 'subjects/cissp/2024-outline/secx-prototype/**'
+      - 'subjects/cissp/2024-outline/study-site/**'
+      - '.github/workflows/secx-prototype-smoke.yml'
   workflow_dispatch:
 
 permissions:
