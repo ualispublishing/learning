@@ -32,12 +32,19 @@ jobs:
     steps:
       - name: Checkout exact candidate head
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
-      - name: Report exact head and browser
+      - name: Assert exact head and report browser
         shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           set -euo pipefail
-          echo "HEAD=$(git rev-parse HEAD)"
+          ACTUAL_HEAD="$(git rev-parse HEAD)"
+          echo "HEAD=$ACTUAL_HEAD"
+          echo "EXPECTED_HEAD=$EXPECTED_HEAD"
+          test "$ACTUAL_HEAD" = "$EXPECTED_HEAD"
           (google-chrome --version || google-chrome-stable --version || chromium --version || chromium-browser --version)
 
       - name: CISSP deterministic release audit
