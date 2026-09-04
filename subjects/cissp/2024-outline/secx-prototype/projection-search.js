@@ -70,7 +70,7 @@ function restoreSearchFocus(){
   if(opener?.isConnected)opener.focus({preventScroll:true});
 }
 function closeSearchToOpener(){closeSearch();restoreSearchFocus()}
-searchButton.addEventListener('click',()=>{searchOpener=searchButton;openSearch()});
+searchButton.addEventListener('click',()=>{searchOpener=searchButton;openSearch();input?.focus({preventScroll:true})});
 closeButton.addEventListener('click',closeSearchToOpener);
 
 document.addEventListener('keydown',e=>{
