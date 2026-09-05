@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A1",
+  "unit": 7,
+  "date": "2026-09-05",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/a1/passages.jsonl",
+  "canonical_sha256": "51c141deac95efde393f5d7b55746a0a8cd583137a8c3f06d1241210fbb70eb2",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 5,
+  "fresh_findings": 9,
+  "decisions": [
+    {
+      "passage_id": "ar-a1-u07-p01",
+      "learner_facing_sha256": "63424ed03b0d27da49ab59cf024c4edff8656ce178e7ca25b3888c53a848036a",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u07-p01-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original weather cloze allowed multiple location nouns such as الجو. Constrain it to the reviewed السماء/الموسم contrast."
+        },
+        {
+          "finding_id": "ar-a1-u07-p01-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original winter cloze allowed other period nouns such as فصل. Constrain it to a simple موسم/صباح choice."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u07-p02",
+      "learner_facing_sha256": "2445f220f421be256aa34a181f4ec02901b2bd34a42103ba657e8eac3dec1a23",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u07-p02-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original temperature cloze did not explicitly identify the measurement unit. Constrain it to the reviewed درجة/موسم contrast."
+        },
+        {
+          "finding_id": "ar-a1-u07-p02-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original inference cloze admits other verbs such as يظهر. Constrain it to the يبدو/يجب contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u07-p03",
+      "learner_facing_sha256": "020d0ee458406a99c028dd19c9d9b4b4b1d338eafa7cdc1d6d3384f56770ccde",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u07-p03-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original future-week cloze allows القادم, المقبل, and التالي. Constrain it to the القادم/الماضي contrast."
+        },
+        {
+          "finding_id": "ar-a1-u07-p03-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original possibility cloze also admits قد. Constrain it to the reviewed ربما/يجب contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u07-p04",
+      "learner_facing_sha256": "67960632f39d8a5475578ff0a4e6de8058d326cc4a57a83d6c505937eaae03b7",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u07-p04-gC-01",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original duration cloze allows many time units. Supply a Monday-to-Wednesday interval so أيام is uniquely grounded."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u07-p05",
+      "learner_facing_sha256": "89f45665ce183ad383cb2021e003d00ad4e92b7d4d935f02504bde40146d38e8",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u07-p05-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original duration cloze allows several feminine time units. Specify sixty minutes so ساعة is uniquely grounded."
+        },
+        {
+          "finding_id": "ar-a1-u07-p05-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original school-days cloze can plausibly take الشهر. Constrain it to the الأسبوع/الساعة contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u07-p06",
+      "learner_facing_sha256": "46f85a2b35eee7075e15e884da93feed6d53d5a0f67e59e396910d67170fe45e",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions bind by authoritative per-record Gate B packet hashes; the level SHA records the review-time snapshot."
+}

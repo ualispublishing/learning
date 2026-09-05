@@ -7,14 +7,14 @@
   "date": "2026-08-31",
   "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
   "canonical_path": "reading/arabic/a1/passages.jsonl",
-  "canonical_sha256": "811ec6d2ea83ecff7013caf03527bdb403a782bc7926ebe572e035f44ff75e80",
+  "canonical_sha256": "51c141deac95efde393f5d7b55746a0a8cd583137a8c3f06d1241210fbb70eb2",
   "records_reviewed": 6,
   "records_with_findings": 6,
   "fresh_findings": 10,
   "decisions": [
     {
       "passage_id": "ar-a1-u07-p01",
-      "learner_facing_sha256": "9e5f6dfda4407514315ac7f2cc85c5259393caca53c0f0e58d88159ae2a22d14",
+      "learner_facing_sha256": "63424ed03b0d27da49ab59cf024c4edff8656ce178e7ca25b3888c53a848036a",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 2,
       "findings": [
@@ -38,7 +38,7 @@
     },
     {
       "passage_id": "ar-a1-u07-p02",
-      "learner_facing_sha256": "0018e786b4a6cd431bdcabfe3d08897a08aaffe0fc82e1d6ea49a70b4e8b838b",
+      "learner_facing_sha256": "2445f220f421be256aa34a181f4ec02901b2bd34a42103ba657e8eac3dec1a23",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 2,
       "findings": [
@@ -62,7 +62,7 @@
     },
     {
       "passage_id": "ar-a1-u07-p03",
-      "learner_facing_sha256": "c476e320e30c9e01838a9b9f875e2d37842168bb8f390b423a1a1897adf206d8",
+      "learner_facing_sha256": "020d0ee458406a99c028dd19c9d9b4b4b1d338eafa7cdc1d6d3384f56770ccde",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 2,
       "findings": [
@@ -86,7 +86,7 @@
     },
     {
       "passage_id": "ar-a1-u07-p04",
-      "learner_facing_sha256": "e92a22933f9f6cc24c41971409e8935cd022f09e501ccf90cddfda472caca452",
+      "learner_facing_sha256": "67960632f39d8a5475578ff0a4e6de8058d326cc4a57a83d6c505937eaae03b7",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 1,
       "findings": [
@@ -102,7 +102,7 @@
     },
     {
       "passage_id": "ar-a1-u07-p05",
-      "learner_facing_sha256": "63021348615578e41f6695e7ac66a86cf6f064a6b4aca1257361ef5b5a6462f0",
+      "learner_facing_sha256": "89f45665ce183ad383cb2021e003d00ad4e92b7d4d935f02504bde40146d38e8",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 2,
       "findings": [
@@ -143,5 +143,25 @@
   ],
   "quality_promotion": false,
   "release_claim": false,
-  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer.",
+  "post_gate_c_revalidations": [
+    {
+      "date": "2026-09-05",
+      "gate_c_artifact": "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u07.json",
+      "scope": [
+        "ar-a1-u07-p01 question q9",
+        "ar-a1-u07-p01 question q10",
+        "ar-a1-u07-p02 question q9",
+        "ar-a1-u07-p02 question q10",
+        "ar-a1-u07-p03 question q9",
+        "ar-a1-u07-p03 question q10",
+        "ar-a1-u07-p04 question q10",
+        "ar-a1-u07-p05 question q9",
+        "ar-a1-u07-p05 question q10"
+      ],
+      "gate_b_language_recheck": "PASS",
+      "reason": "Gate C constrained nine underdetermined weather/time transfer items across A1 Unit 7 so the intended sky, season, temperature, seeming, coming, possibility, days, hour, and week answers are uniquely defensible; replacements were rechecked for A1 MSA wording and Gate B was rebound to exact-current learner-facing content.",
+      "release_claim": false
+    }
+  ]
 }
