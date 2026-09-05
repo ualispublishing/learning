@@ -1,0 +1,64 @@
+name: Apply Arabic Gate B C2 Unit 7
+
+on:
+  push:
+
+permissions:
+  contents: write
+
+jobs:
+  arabic-c2-unit07-gate-b:
+    if: github.event.head_commit.message == 'Run Arabic Gate B C2 Unit 7 now'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate routed state before C2 Unit 7 repair
+        run: python reading/tools/validate_continuation_state.py
+      - name: Refuse duplicate C2 Unit 7 decision frontier
+        run: test ! -e reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u07.json
+      - name: Apply exact-current C2 Unit 7 repairs
+        run: python reading/tools/apply_arabic_gate_b_c2_unit07.py
+      - name: Rebuild, bind, and synchronize Arabic evidence
+        run: |
+          set -euo pipefail
+          python reading/tools/run_post_generation_gate0.py
+          python reading/tools/run_arabic_fresh_deterministic_revalidation.py
+          python reading/tools/audit_arabic_metalinguistic_cefr_candidates.py
+          python reading/tools/adjudicate_arabic_b1_c2_metalinguistic_cefr.py
+          python reading/tools/build_arabic_gate_b_naturalness_review.py
+          python reading/tools/record_arabic_gate_b_c2_unit07_decisions.py
+          python reading/tools/sync_arabic_gate_b_progress.py
+          python reading/tools/sync_arabic_release_global_blocker.py
+          python reading/tools/sync_verification_tasks_arabic_c2_unit07.py
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+      - name: Commit bounded C2 Unit 7 repair and exact state
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/arabic/c2/passages.jsonl reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u07.json reading/audit/post_generation_gate0_2026-08-30.json reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json reading/audit/arabic_b1_c2_metalinguistic_cefr_triage_2026-08-30.json reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json reading/audit/arabic_gate_b_packets_2026-08-30 reading/RELEASE_STATUS.json reading/VERIFICATION_TASKS.md reading/STATE_MANIFEST.json
+          git commit -m 'Complete fresh Arabic Gate B C2 Unit 7 review'
+      - name: Rebase and regenerate exact push candidate
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git rebase origin/main
+          python reading/tools/validate_continuation_state.py
+          python reading/tools/run_post_generation_gate0.py
+          python reading/tools/run_arabic_fresh_deterministic_revalidation.py
+          python reading/tools/audit_arabic_metalinguistic_cefr_candidates.py
+          python reading/tools/adjudicate_arabic_b1_c2_metalinguistic_cefr.py
+          python reading/tools/build_arabic_gate_b_naturalness_review.py
+          python reading/tools/record_arabic_gate_b_c2_unit07_decisions.py
+          python reading/tools/sync_arabic_gate_b_progress.py
+          python reading/tools/sync_arabic_release_global_blocker.py
+          python reading/tools/sync_verification_tasks_arabic_c2_unit07.py
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+          git add reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u07.json reading/audit/post_generation_gate0_2026-08-30.json reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json reading/audit/arabic_metalinguistic_cefr_candidate_inventory_2026-08-30.json reading/audit/arabic_b1_c2_metalinguistic_cefr_triage_2026-08-30.json reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json reading/audit/arabic_gate_b_packets_2026-08-30 reading/RELEASE_STATUS.json reading/VERIFICATION_TASKS.md reading/STATE_MANIFEST.json
+          if ! git diff --cached --quiet; then git commit --amend --no-edit; fi
+          python reading/tools/validate_continuation_state.py
+          git push origin HEAD:main
