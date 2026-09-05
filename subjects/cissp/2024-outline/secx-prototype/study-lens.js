@@ -31,6 +31,17 @@ function cardsForMode(mode){
   }
   return [];
 }
+function continuePlan(){
+  const due=cardsForMode('due');
+  if(due.length)return{mode:'due',label:'Due',card:due[0]};
+  const learning=cardsForMode('learning');
+  if(learning.length)return{mode:'learning',label:'Learning',card:learning[0]};
+  const weak=weakestDomain(),fresh=cardsForMode('new'),weakNew=fresh.filter(c=>c.domain_num===weak.num);
+  if(weakNew.length)return{mode:'new',label:`New D${weak.num}`,card:weakNew[0]};
+  if(fresh.length)return{mode:'new',label:'New',card:fresh[0]};
+  return{mode:'root',label:'Study',card:null};
+}
+function pageForCard(mode,id){const records=cardsForMode(mode),index=records.findIndex(c=>c.id===id);return index<0?0:Math.floor(index/STUDY_PAGE_SIZE)}
 function modeTitle(mode){return({due:'Due reviews',new:'New cards',learning:'Learning cards',mature:'Mature cards',weak:'Lowest review-score domain'})[mode]||'Study queue'}
 function cardDetails(c){return{rule:c.front,why:c.direct||'Retrieve the answer before revealing this layer.',traps:[c.trap||'Distinguish the nearest confusable concept.'],sources:(c.source_ids||[]).map(sourceTitle),practice:'Retrieve first, then grade the first retrieval using the Atlas schedule.'}}
 function addPager(centerId,page,totalPages){
@@ -45,11 +56,14 @@ style.textContent=`
 `;
 document.head.appendChild(style);
 const top=document.querySelector('.top'),dueButton=document.getElementById('dueReviewBtn');
+const continueButton=document.createElement('button');continueButton.id='continueStudyBtn';continueButton.className='sec-study-button';continueButton.type='button';
 const studyButton=document.createElement('button');studyButton.id='studyQueueBtn';studyButton.className='sec-study-button';studyButton.type='button';
-if(top)top.insertBefore(studyButton,dueButton||document.querySelector('.legend')||null);
+if(top){top.insertBefore(continueButton,dueButton||document.querySelector('.legend')||null);top.insertBefore(studyButton,dueButton||document.querySelector('.legend')||null)}
 
 function counts(){const cards=allReviewCards();return{due:cardsForMode('due').length,new:cards.filter(c=>!progressState(c.id)).length,learning:cards.filter(c=>statusOf(c.id)==='learning').length,mature:cards.filter(c=>statusOf(c.id)==='mature').length}}
 function updateStudyButton(){const c=counts();studyButton.textContent=`Study · ${c.due} due`;studyButton.setAttribute('aria-label',`Open study queue: ${c.due} due, ${c.new} new, ${c.learning} learning, ${c.mature} mature cards`)}
+function updateContinueButton(){const plan=continuePlan();continueButton.textContent=`Continue · ${plan.label}`;continueButton.setAttribute('aria-label',plan.mode==='root'?'Open Study Queue; no due, learning, or new review cards remain':`Continue with ${plan.label.toLowerCase()} review work`)}
+function refreshStudyControls(){updateStudyButton();updateContinueButton()}
 
 window.studyQueueLayout=function(focus=false){
   const c=counts(),weak=weakestDomain();
@@ -63,7 +77,7 @@ window.studyQueueLayout=function(focus=false){
     {id:'study:weak',mode:'weak',title:'Lowest review score',summary:`D${weak.num} · ${Math.round((weak.score||0)*100)}% review-stage score`,x:.82,y:.43}
   ];
   for(const f of facets){nodes.push({...f,kind:'study-facet',labels:[f.mode==='weak'?`D${weak.num}`:'Atlas card state','study lens']});links.push([center.id,f.id])}
-  level='study-queue';parentDomain=null;parentObjective=null;studyMode='root';studyPage=0;active='study:queue';depth=0;render(focus);updateStudyButton();
+  level='study-queue';parentDomain=null;parentObjective=null;studyMode='root';studyPage=0;active='study:queue';depth=0;render(focus);refreshStudyControls();
 };
 
 window.studyCardLayout=function(mode,returnTo=null,focus=false,page=null){
@@ -74,9 +88,11 @@ window.studyCardLayout=function(mode,returnTo=null,focus=false,page=null){
   nodes=[center];links=[];
   if(slice.length){for(const [i,c] of slice.entries()){const pos=radialPosition(i,slice.length,.39,.24),s=progressState(c.id),st=statusOf(c.id);nodes.push({id:c.id,title:`${c.id} · ${c.topic}`,summary:c.front,kind:'card',x:pos.x,y:pos.y,labels:[c.objective,st,s?.due?`due ${s.due}`:'not yet graded'],details:cardDetails(c)});links.push([centerId,c.id])}addPager(centerId,studyPage,pages)}
   else {nodes.push({id:`study:empty:${mode}`,title:'Queue empty',summary:`No Atlas review cards currently match ${modeTitle(mode).toLowerCase()}.`,kind:'due-empty',x:.5,y:.24,labels:['learner state'],details:{rule:'There is no work in this queue right now.',why:'The queue is calculated from current Atlas learner state.',traps:['Do not manufacture state changes just to populate a queue.'],sources:['CISSP Atlas learner progress'],practice:'Choose another queue or return to the curriculum graph.'}});links.push([centerId,`study:empty:${mode}`])}
-  level='study-cards';parentDomain=null;parentObjective=null;active=returnTo&&nodes.some(n=>n.id===returnTo)?returnTo:centerId;depth=0;render(focus);updateStudyButton();
+  level='study-cards';parentDomain=null;parentObjective=null;active=returnTo&&nodes.some(n=>n.id===returnTo)?returnTo:centerId;depth=0;render(focus);refreshStudyControls();
 };
 
+function runContinue(){const plan=continuePlan();if(plan.mode==='root')return studyQueueLayout(true);return studyCardLayout(plan.mode,plan.card?.id||null,true,pageForCard(plan.mode,plan.card?.id))}
+continueButton.addEventListener('click',runContinue);
 studyButton.addEventListener('click',()=>studyQueueLayout(true));
 const priorCrumb=crumbText;
 window.crumbText=function(){if(level==='study-queue')return'SecX › Study queue';if(level==='study-cards')return`SecX › Study queue › ${modeTitle(studyMode)}`;return priorCrumb()};
@@ -100,7 +116,7 @@ document.addEventListener('keydown',e=>{
   if((e.key==='q'||e.key==='Q')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();e.stopImmediatePropagation();studyQueueLayout(true)}
 },true);
 
-document.addEventListener('click',e=>{if(!e.target.closest?.('[data-sec-grade]'))return;setTimeout(()=>{updateStudyButton();if(level==='study-cards'){const id=current()?.id,keep=id&&cardsForMode(studyMode).some(c=>c.id===id)?id:null;studyCardLayout(studyMode,keep,true,studyPage)}},0)});
-addEventListener('storage',e=>{if(e.key==='cissp_atlas_progress_v1')updateStudyButton()});
-updateStudyButton();
+document.addEventListener('click',e=>{if(!e.target.closest?.('[data-sec-grade]'))return;setTimeout(()=>{refreshStudyControls();if(level==='study-cards'){const id=current()?.id,keep=id&&cardsForMode(studyMode).some(c=>c.id===id)?id:null;studyCardLayout(studyMode,keep,true,studyPage)}},0)});
+addEventListener('storage',e=>{if(e.key==='cissp_atlas_progress_v1')refreshStudyControls()});
+refreshStudyControls();
 })();
