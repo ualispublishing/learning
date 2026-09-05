@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "C2",
+  "unit": 3,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/c2/passages.jsonl",
+  "canonical_sha256": "53c03b57ddfd465ff8b52920e74593ffbff4bcc3576875e8735448103ed9cfba",
+  "records_reviewed": 6,
+  "records_with_findings": 4,
+  "fresh_findings": 4,
+  "decisions": [
+    {
+      "passage_id": "ar-c2-u03-p01",
+      "learner_facing_sha256": "519748b1cfba7e07e19a43d99245332f691fbb91f9354253027db2d604f18ee6",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u03-p01-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is a causal fragment inherited from the earlier task shape; replace it with a complete declarative summary of the passage’s organizing issue."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u03-p02",
+      "learner_facing_sha256": "ddf3d5c69779144bd4a4d84a10bccfb441d46422a65b5b74a7f7dfef62ab098b",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-c2-u03-p03",
+      "learner_facing_sha256": "e1ac6abd12d9fa093f5f8add1ddb1753076076c3179e876499eb9881cc0a2797",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u03-p03-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is a causal fragment inherited from the earlier task shape; replace it with a complete declarative summary of the passage’s organizing issue."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u03-p04",
+      "learner_facing_sha256": "99275412028a96a2b526f69a9f3937977b4e989f58a4cbde15d2ff3b93c347b4",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u03-p04-gB-01",
+          "field": "answer q1",
+          "dimension": "reference_alignment",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current q1 key begins with the context-dependent pronoun «نجاحها», leaving the subject unclear in a standalone summary and obscuring the passage’s model/idealization distinction; name the simplified model explicitly and state the bounded inference."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u03-p05",
+      "learner_facing_sha256": "5727cdf6d47c87b08486177127943eaabecbf16bdf60a8db5c55458d8acc289b",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u03-p05-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is a causal fragment inherited from the earlier task shape; replace it with a complete declarative summary of the passage’s organizing issue."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u03-p06",
+      "learner_facing_sha256": "a50c58031dd2d80670a9d2b7a02e0bb15419adc265bee2316a378fc06a23fb9f",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. C2 internal Gate B evidence does not constitute educator/publication release approval."
+}
