@@ -51,11 +51,12 @@ jobs:
         shell: bash
         run: python subjects/cissp/2024-outline/study-site/audit.py
 
-      - name: SecX deterministic graph, learner-state, provenance, coverage, search, and relationship audits
+      - name: SecX deterministic graph, learner-state, browser-fixture, provenance, coverage, search, and relationship audits
         shell: bash
         run: |
           python -m py_compile \
             subjects/cissp/2024-outline/secx-prototype/audit.py \
+            subjects/cissp/2024-outline/secx-prototype/browser-fixtures-audit.py \
             subjects/cissp/2024-outline/secx-prototype/due-audit.py \
             subjects/cissp/2024-outline/secx-prototype/study-audit.py \
             subjects/cissp/2024-outline/secx-prototype/source-audit.py \
@@ -76,6 +77,7 @@ jobs:
           bash -n subjects/cissp/2024-outline/secx-prototype/coverage-browser-smoke.sh
           bash -n subjects/cissp/2024-outline/secx-prototype/projection-search-smoke.sh
           python subjects/cissp/2024-outline/secx-prototype/audit.py
+          python subjects/cissp/2024-outline/secx-prototype/browser-fixtures-audit.py
           python subjects/cissp/2024-outline/secx-prototype/due-audit.py
           python subjects/cissp/2024-outline/secx-prototype/study-audit.py
           python subjects/cissp/2024-outline/secx-prototype/source-audit.py
