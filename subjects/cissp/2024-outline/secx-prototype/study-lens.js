@@ -4,12 +4,11 @@
 const STUDY_PAGE_SIZE=16;
 let studyMode='root';
 let studyPage=0;
+const learner=window.SECX_LEARNER;
+if(!learner)throw new Error('SecX learner API unavailable before Study Queue');
 
-function progressState(id){
-  try{return JSON.parse(localStorage.getItem('cissp_atlas_progress_v1')||'{}').cards?.[id]||null}catch{return null}
-}
-function todayISO(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
-function statusOf(id){const s=progressState(id);if(!s)return'new';if((s.stage||0)>=4)return'mature';return s.due<=todayISO()?'due':'learning'}
+function progressState(id){return learner.cardState(id)}
+function statusOf(id){return learner.cardStatus(id)}
 function allReviewCards(){return Array.isArray(window.SECX_RELEASED_CARDS)?window.SECX_RELEASED_CARDS:[]}
 function objectiveCards(oid){return allReviewCards().filter(c=>c.objective===oid)}
 function objectiveScore(oid){const cards=objectiveCards(oid);if(!cards.length)return 0;return cards.reduce((sum,c)=>sum+Math.min(4,progressState(c.id)?.stage||0),0)/(cards.length*4)}
@@ -20,8 +19,8 @@ function weakestDomain(){
   return domains.map(d=>{const ids=byDomain.get(d.num)||[];const score=ids.length?ids.reduce((sum,id)=>sum+objectiveScore(id),0)/ids.length:0;return{...d,score}}).sort((a,b)=>a.score-b.score||b.weight-a.weight||a.num-b.num)[0]||domains[0];
 }
 function cardsForMode(mode){
-  const cards=allReviewCards(),today=todayISO();
-  if(mode==='due')return cards.filter(c=>{const s=progressState(c.id);return !!s&&s.due<=today}).sort((a,b)=>(progressState(a.id)?.due||'').localeCompare(progressState(b.id)?.due||'')||String(a.id).localeCompare(String(b.id)));
+  const cards=allReviewCards();
+  if(mode==='due')return cards.filter(c=>learner.isDue(c.id)).sort((a,b)=>(progressState(a.id)?.due||'').localeCompare(progressState(b.id)?.due||'')||String(a.id).localeCompare(String(b.id)));
   if(mode==='new')return cards.filter(c=>!progressState(c.id)).sort((a,b)=>(a.domain_num||0)-(b.domain_num||0)||String(a.objective).localeCompare(String(b.objective))||String(a.id).localeCompare(String(b.id)));
   if(mode==='learning')return cards.filter(c=>statusOf(c.id)==='learning').sort((a,b)=>(progressState(a.id)?.stage||0)-(progressState(b.id)?.stage||0)||String(a.id).localeCompare(String(b.id)));
   if(mode==='mature')return cards.filter(c=>statusOf(c.id)==='mature').sort((a,b)=>(progressState(a.id)?.last_review||'').localeCompare(progressState(b.id)?.last_review||'')||String(a.id).localeCompare(String(b.id)));
@@ -117,6 +116,6 @@ document.addEventListener('keydown',e=>{
 },true);
 
 document.addEventListener('click',e=>{if(!e.target.closest?.('[data-sec-grade]'))return;setTimeout(()=>{refreshStudyControls();if(level==='study-cards'){const id=current()?.id,keep=id&&cardsForMode(studyMode).some(c=>c.id===id)?id:null;studyCardLayout(studyMode,keep,true,studyPage)}},0)});
-addEventListener('storage',e=>{if(e.key==='cissp_atlas_progress_v1')refreshStudyControls()});
+addEventListener('storage',e=>{if(e.key===learner.progressKey)refreshStudyControls()});
 refreshStudyControls();
 })();
