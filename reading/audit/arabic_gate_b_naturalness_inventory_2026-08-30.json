@@ -4,7 +4,7 @@
   "language": "arabic",
   "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
   "date": "2026-08-30",
-  "status": "IN_PROGRESS",
+  "status": "COMPLETE_INTERNAL_REVIEW",
   "scope": "100% of current Arabic A1-C2 canonical records. Packets contain passage text plus all 10 question/answer pairs per passage. Historical naturalness notes are inventory context only and do not count as fresh approval.",
   "records": 360,
   "questions": 3600,
@@ -392,13 +392,13 @@
     },
     "c2": {
       "canonical_path": "reading/arabic/c2/passages.jsonl",
-      "canonical_sha256": "2d089f62538955e0c454f31799032115842608c386c9c8442dee45834f4044fc",
-      "canonical_git_blob": "1885eb4f3a2e772039474a7a42666bc9c78d9921",
+      "canonical_sha256": "92d8ced306b21164d546aa038d0a0f09c681d4bcd97bb034d87735867abb4731",
+      "canonical_git_blob": "839032063f974c8dae40957d8f6bc70eccd25ae7",
       "passages": 60,
       "questions": 600,
       "answers": 600,
-      "historical_naturalness_note_records": 58,
-      "fresh_review_status": "IN_PROGRESS",
+      "historical_naturalness_note_records": 60,
+      "fresh_review_status": "COMPLETE",
       "packet_path": "reading/audit/arabic_gate_b_packets_2026-08-30/c2.jsonl",
       "record_learner_facing_sha256": {
         "ar-c2-u01-p01": "bbde957130344bffc69fd8eba0d46904d29d3eabdd217b82411328e616f4a157",
@@ -455,16 +455,16 @@
         "ar-c2-u09-p04": "46c6b942399aa9988614a5605e097a78874a56469d3df6cdf5668365f500e85b",
         "ar-c2-u09-p05": "da8f3b1cb8757f82bed57b41f9d70c7c955a1ca3abba25caad037a011546737c",
         "ar-c2-u09-p06": "b552e06e5df1f0a0d681f58800742497c150dae9eebb464da98995e3bdbce12a",
-        "ar-c2-u10-p01": "a517b7496d115458bfd06840a01eb3b4757ee888a4033d2b20d44acd95e09dd6",
-        "ar-c2-u10-p02": "384f480f1eba077323d8efc505c915895e7824f6005fc6495d4cd96cbcb9f4cd",
-        "ar-c2-u10-p03": "d11edc69710911b45433071802851198c8a39667c751e2ea5a9cc69528df559c",
-        "ar-c2-u10-p04": "6ff7d163f089eac6a31735c652ec62f2e3862fb6edd46d64cfd671ca120d3151",
-        "ar-c2-u10-p05": "3ea0985b4fc19b5f1c267bccc90ebd1bd4641a1e11fd0f1f282e5de74876df8c",
-        "ar-c2-u10-p06": "7b656653e73b3d0862ee2878bb26ba9260b3fab707ff5789e80c6b0afc47a835"
+        "ar-c2-u10-p01": "db317f683d04955b9137a624eb4944c44b08c4b7609f8558c6ab873da3632e60",
+        "ar-c2-u10-p02": "6147a1b64a57c5a8ee4e897b3d1bf895f299b40d0bc95dba2ded4dcab098c32a",
+        "ar-c2-u10-p03": "58a919ce5c1088c0707bc85873f6b0fc76266d22762c9d42f6f25a18819b801c",
+        "ar-c2-u10-p04": "4ee927ab8b60e67301d59ca570f44e8985a1cf35897ab9e913302b20f71a1861",
+        "ar-c2-u10-p05": "c00928d2bba587d17aaa9dde4bc60fc8633d9273a10a20e56a33dadfd52e2132",
+        "ar-c2-u10-p06": "2541b9f81c9318db619f35e843610435535ee22c46a8b6f7b8df32b3493fe443"
       },
-      "fresh_records_reviewed": 54,
-      "fresh_records_with_findings": 49,
-      "fresh_findings": 59
+      "fresh_records_reviewed": 60,
+      "fresh_records_with_findings": 55,
+      "fresh_findings": 78
     }
   },
   "review_dimensions": [
@@ -483,12 +483,12 @@
     "question_wording",
     "answer_wording"
   ],
-  "fresh_records_reviewed": 354,
-  "fresh_records_with_findings": 302,
-  "fresh_findings": 541,
+  "fresh_records_reviewed": 360,
+  "fresh_records_with_findings": 308,
+  "fresh_findings": 560,
   "quality_promotion": false,
   "release_claim": false,
-  "next_step": "Continue fresh hash-bound passage-by-passage Gate B review in order; repair only exact-current learner-facing defects.",
+  "next_step": "Gate B internal review complete; proceed to separate semantic educator/native/blind review gates.",
   "decision_artifacts": [
     "reading/audit/arabic_gate_b_decisions_2026-08-30/a1_u01.json",
     "reading/audit/arabic_gate_b_decisions_2026-08-30/a1_u02.json",
@@ -548,7 +548,8 @@
     "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u06.json",
     "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u07.json",
     "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u08.json",
-    "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u09.json"
+    "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u09.json",
+    "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u10.json"
   ],
   "deterministic_binding": "reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json"
 }

@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "C2",
+  "unit": 10,
+  "date": "2026-09-05",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/c2/passages.jsonl",
+  "canonical_sha256": "92d8ced306b21164d546aa038d0a0f09c681d4bcd97bb034d87735867abb4731",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 19,
+  "decisions": [
+    {
+      "passage_id": "ar-c2-u10-p01",
+      "learner_facing_sha256": "db317f683d04955b9137a624eb4944c44b08c4b7609f8558c6ab873da3632e60",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u10-p01-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q1 prompt requires a standalone one-sentence summary, but the keyed response is the same generic أن-fragment reused across all six distinct capstone passages; replace it with a complete passage-specific summary."
+        },
+        {
+          "finding_id": "ar-c2-u10-p01-gB-02",
+          "field": "answer q2",
+          "dimension": "assessment_alignment",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q2 prompt asks for two evidence types or layers compared in this passage, but the keyed response is a generic placeholder that names several possible categories “depending on the text”; replace it with the two passage-specific layers."
+        },
+        {
+          "finding_id": "ar-c2-u10-p01-gB-03",
+          "field": "text",
+          "dimension": "grammar",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The plural non-human subject «الفرق» is already resumed by feminine-singular pronouns «سجلها/فرصتها»; the verb should agree consistently as «عرفت الفرق»."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u10-p02",
+      "learner_facing_sha256": "6147a1b64a57c5a8ee4e897b3d1bf895f299b40d0bc95dba2ded4dcab098c32a",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 4,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u10-p02-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q1 prompt requires a standalone one-sentence summary, but the keyed response is the same generic أن-fragment reused across all six distinct capstone passages; replace it with a complete passage-specific summary."
+        },
+        {
+          "finding_id": "ar-c2-u10-p02-gB-02",
+          "field": "answer q2",
+          "dimension": "assessment_alignment",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q2 prompt asks for two evidence types or layers compared in this passage, but the keyed response is a generic placeholder that names several possible categories “depending on the text”; replace it with the two passage-specific layers."
+        },
+        {
+          "finding_id": "ar-c2-u10-p02-gB-03",
+          "field": "text",
+          "dimension": "naturalness",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The phrase «قارنت القرارين تحت خطأين مختلفين» is a calque-like collocation in MSA; compare the two models «في ضوء نوعين مختلفين من الخطأ»."
+        },
+        {
+          "finding_id": "ar-c2-u10-p02-gB-04",
+          "field": "text",
+          "dimension": "naturalness",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The phrase «نجاح شديد على البيانات القديمة» is not idiomatic technical MSA for high historical performance; use «أداء مرتفع جدا على البيانات القديمة»."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u10-p03",
+      "learner_facing_sha256": "58a919ce5c1088c0707bc85873f6b0fc76266d22762c9d42f6f25a18819b801c",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u10-p03-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q1 prompt requires a standalone one-sentence summary, but the keyed response is the same generic أن-fragment reused across all six distinct capstone passages; replace it with a complete passage-specific summary."
+        },
+        {
+          "finding_id": "ar-c2-u10-p03-gB-02",
+          "field": "answer q2",
+          "dimension": "assessment_alignment",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q2 prompt asks for two evidence types or layers compared in this passage, but the keyed response is a generic placeholder that names several possible categories “depending on the text”; replace it with the two passage-specific layers."
+        },
+        {
+          "finding_id": "ar-c2-u10-p03-gB-03",
+          "field": "text",
+          "dimension": "grammar",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The sequence «اختبار هل الصياغة...» is awkward in this nominal construction; use the standard «اختبار ما إذا كانت الصياغة...»."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u10-p04",
+      "learner_facing_sha256": "4ee927ab8b60e67301d59ca570f44e8985a1cf35897ab9e913302b20f71a1861",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 4,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u10-p04-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q1 prompt requires a standalone one-sentence summary, but the keyed response is the same generic أن-fragment reused across all six distinct capstone passages; replace it with a complete passage-specific summary."
+        },
+        {
+          "finding_id": "ar-c2-u10-p04-gB-02",
+          "field": "answer q2",
+          "dimension": "assessment_alignment",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q2 prompt asks for two evidence types or layers compared in this passage, but the keyed response is a generic placeholder that names several possible categories “depending on the text”; replace it with the two passage-specific layers."
+        },
+        {
+          "finding_id": "ar-c2-u10-p04-gB-03",
+          "field": "text",
+          "dimension": "naturalness",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The collocation «ضيق الثقة» is unnatural in MSA; express the intended calibration as reducing the level of confidence."
+        },
+        {
+          "finding_id": "ar-c2-u10-p04-gB-04",
+          "field": "answer q6",
+          "dimension": "grammar",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "After contrastive «أما», the second member requires the linking fa; use «أما الثاني فيبين...»."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u10-p05",
+      "learner_facing_sha256": "c00928d2bba587d17aaa9dde4bc60fc8633d9273a10a20e56a33dadfd52e2132",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u10-p05-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q1 prompt requires a standalone one-sentence summary, but the keyed response is the same generic أن-fragment reused across all six distinct capstone passages; replace it with a complete passage-specific summary."
+        },
+        {
+          "finding_id": "ar-c2-u10-p05-gB-02",
+          "field": "answer q2",
+          "dimension": "assessment_alignment",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q2 prompt asks for two evidence types or layers compared in this passage, but the keyed response is a generic placeholder that names several possible categories “depending on the text”; replace it with the two passage-specific layers."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u10-p06",
+      "learner_facing_sha256": "2541b9f81c9318db619f35e843610435535ee22c46a8b6f7b8df32b3493fe443",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u10-p06-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q1 prompt requires a standalone one-sentence summary, but the keyed response is the same generic أن-fragment reused across all six distinct capstone passages; replace it with a complete passage-specific summary."
+        },
+        {
+          "finding_id": "ar-c2-u10-p06-gB-02",
+          "field": "answer q2",
+          "dimension": "assessment_alignment",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q2 prompt asks for two evidence types or layers compared in this passage, but the keyed response is a generic placeholder that names several possible categories “depending on the text”; replace it with the two passage-specific layers."
+        },
+        {
+          "finding_id": "ar-c2-u10-p06-gB-03",
+          "field": "answer q6",
+          "dimension": "grammar",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "After contrastive «أما», the second member requires the linking fa; use «أما الثاني فيحدد...»."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Completion of corpus-wide fresh Gate B internal review does not constitute educator/publication release approval."
+}
