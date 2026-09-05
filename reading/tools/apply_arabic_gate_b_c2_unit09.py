@@ -18,7 +18,7 @@ SUMMARIES={
 }
 TEXT_REPAIRS={
 'ar-c2-u09-p01':[('قاسوا ليس السرعة فقط، بل نسبة التعديل، ووقت فهم سبب الاقتراح، والفرق بين الموظفين الذين يملكون خبرة بالنظام ومن لا يملكونها.','لم يقيسوا السرعة فقط، بل قاسوا نسبة التعديل، ووقت فهم سبب الاقتراح، والفرق بين الموظفين الذين يملكون خبرة بالنظام ومن لا يملكونها.')],
-'ar-c2-u09-p02':[('إذا استخدم الفريق المتوسطات منفصلة، فإنه يقلل من تقدير خطر اجتماعها.','إذا تعامل الفريق مع المتوسطات كلًّا على حدة، فإنه يقلل من تقدير خطر اجتماعها.')],
+'ar-c2-u09-p02':[('إذا استخدم الفريق المتوسطات منفصلة، فإنه يقلل من تقدير خطر اجتماعها.','إذا تعامل الفريق مع المتوسطات على نحو منفصل، فإنه يقلل من تقدير خطر اجتماعها.')],
 'ar-c2-u09-p03':[('وفي حالات أخرى يزيد عدد المراجعين المسؤولية الموزعة ويجعل كل شخص يتوقع أن غيره سيلتقط المشكلة.','وفي حالات أخرى يزيد عدد المراجعين من تشتت المسؤولية ويجعل كل شخص يتوقع أن غيره سيلتقط المشكلة.'),('اقترحت الباحثة اختبارات دورية تدخل حالات معروفة الخطأ وتقيس هل يلتقطها المراجعون.','اقترحت الباحثة اختبارات دورية تتضمن حالات معروفة الخطأ وتقيس ما إذا كان المراجعون يلتقطونها.')],
 'ar-c2-u09-p04':[('إذا كوفئت السرعات منفصلة، قد يزيد الخطر الكلي.','إذا كوفئ كل فريق على سرعته منفردًا، قد يزيد الخطر الكلي.')],
 'ar-c2-u09-p05':[('قالت اللجنة إن التوقف الذي يكشف مشكلة قبل التوسع نجاح لوظيفة التجربة.','قالت اللجنة إن التوقف الذي يكشف مشكلة قبل التوسع نجاح للتجربة في أداء وظيفتها.')],
@@ -26,7 +26,7 @@ TEXT_REPAIRS={
 }
 META={pid:[('answer q1','assessment_wording','moderate','The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is the same nominal phrase reused across six distinct passages; replace it with a complete passage-specific declarative summary of the organizing issue.')] for pid in IDS}
 META['ar-c2-u09-p01'].append(('text','naturalness','moderate','The coordination «قاسوا ليس ... فقط، بل ...» is a calque-like negation pattern in MSA; use the idiomatic «لم يقيسوا ... فقط، بل قاسوا ...».'))
-META['ar-c2-u09-p02'].append(('text','naturalness','moderate','The adverbial phrase «استخدم الفريق المتوسطات منفصلة» is awkward because the averages are being considered separately; use the idiomatic «تعامل ... مع المتوسطات كلًّا على حدة».'))
+META['ar-c2-u09-p02'].append(('text','naturalness','moderate','The adverbial phrase «استخدم الفريق المتوسطات منفصلة» is awkward because the averages are being considered separately; use an idiomatic construction such as «تعامل ... مع المتوسطات على نحو منفصل».'))
 META['ar-c2-u09-p03'].extend([('text','naturalness','moderate','The phrase «يزيد عدد المراجعين المسؤولية الموزعة» is semantically and collocationally awkward; express diffusion explicitly as «يزيد ... من تشتت المسؤولية».'),('text','naturalness','moderate','The sequence «اختبارات دورية تدخل حالات ... وتقيس هل» is not idiomatic MSA; tests «تتضمن حالات» and measure «ما إذا» reviewers detect them.')])
 META['ar-c2-u09-p04'].append(('text','naturalness','moderate','The phrase «كوفئت السرعات منفصلة» treats speeds themselves as reward recipients and uses an awkward adverbial; state that each team is rewarded separately for speed.'))
 META['ar-c2-u09-p05'].append(('text','naturalness','moderate','The phrase «نجاح لوظيفة التجربة» is an unnatural relation in MSA; state that stopping can be a success for the experiment in performing its function.'))
