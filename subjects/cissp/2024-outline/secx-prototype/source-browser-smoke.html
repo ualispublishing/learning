@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SecX Source Lens Browser Smoke</title></head>
+<body>
+<pre id="result" data-smoke="running">RUNNING</pre>
+<iframe id="app" src="next.html?source-smoke=desktop" style="width:1280px;height:900px;border:0"></iframe>
+<iframe id="mobile" src="next.html?source-smoke=mobile" style="width:390px;height:844px;border:0"></iframe>
+<script>
+(()=>{'use strict';
+const result=document.querySelector('#result'),frame=document.querySelector('#app'),mobile=document.querySelector('#mobile');
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;while(Date.now()<end){try{const v=fn();if(v)return v}catch{}await sleep(50)}throw new Error(`Timed out waiting for ${label}`)}
+function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
+function graphTarget(win){const active=[...win.document.querySelectorAll('.node.active')].find(el=>el.isConnected);return active||win.document.body||win.document.documentElement}
+function key(win,key,code=key){const graphKey=['Enter','Escape',' ','Home'].includes(key);const target=graphKey?graphTarget(win):(win.document.body||win.document.documentElement);target.dispatchEvent(new win.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
+function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow}}
+async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),meta=x.w?.CISSP_META?.meta||{},bank=x.w?.SECX_RELEASED_BANK_STATE;return x.d&&x.w&&x.d.querySelector('#sourceLensBtn')&&x.d.querySelector('#studyQueueBtn')&&x.d.querySelector('#dueReviewBtn')&&bank?.ready&&bank.count===meta.question_count&&Array.isArray(x.w.SECX_RELEASED_QUESTIONS)&&x.w.SECX_RELEASED_QUESTIONS.length===meta.question_count&&Array.from({length:8},(_,i)=>node(x.d,`d${i+1}`)).every(Boolean)?x:null},`${label} source lens + shared released-bank runtime`)}
+function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
+function sourceIds(w){return Object.keys(w.CISSP_META?.sources||{})}
+function allSourcesRendered(w,d){return sourceIds(w).every(id=>node(d,`source:${id}`))}
+function clickId(d,id){const el=node(d,id);assert(el,`node ${id} exists`);el.click();return el}
+async function enter(w){key(w,'Enter','Enter');await sleep(80)}
+async function selectThenEnter(d,w,id,label){clickId(d,id);await waitFor(()=>node(d,id)?.classList.contains('active')&&w.current?.()?.id===id,`${label} selected`);await enter(w)}
+async function run(){
+ const {d,w}=await ready(frame,'desktop'),meta=w.CISSP_META?.meta||{};
+ assert(d.querySelector('#sourceLensBtn')?.textContent.includes(`· ${meta.source_count}`),'source button matches Atlas source count');
+ key(w,'s','KeyS');
+ await waitFor(()=>node(d,'sources:root')&&allSourcesRendered(w,d)&&d.querySelector('#crumb')?.textContent==='SecX › Sources','S opens all released sources');
+ assert(sourceIds(w).length===meta.source_count,'source registry count matches metadata');
+ await selectThenEnter(d,w,'source:ISC2_OUTLINE','ISC2 outline source');
+ await waitFor(()=>['source:ISC2_OUTLINE:objectives','source:ISC2_OUTLINE:cards','source:ISC2_OUTLINE:scenarios'].every(id=>node(d,id)),'source hub exposes objectives cards and released-scenarios facets');
+ await selectThenEnter(d,w,'source:ISC2_OUTLINE:objectives','ISC2 objectives facet');
+ await waitFor(()=>node(d,'source:list:ISC2_OUTLINE:objectives')&&node(d,'source-item:objective:1.1'),'ISC2 source maps to released objective 1.1');
+ await selectThenEnter(d,w,'source-item:objective:1.1','ISC2 objective 1.1 provenance item');
+ await waitFor(()=>d.querySelector('#detail.open')?.textContent.includes('explicitly includes ISC2_OUTLINE'),'source item detail states exact source_ids provenance');
+ key(w,' ','Space');
+ await waitFor(()=>d.querySelector('#detail')?.textContent.includes('Citation does not mean this source is the sole authority'),'source detail reaches depth three scope boundary');
+ key(w,'Escape','Escape');await sleep(40);key(w,'Escape','Escape');
+ await waitFor(()=>node(d,'source:ISC2_OUTLINE')&&['source:ISC2_OUTLINE:objectives','source:ISC2_OUTLINE:cards','source:ISC2_OUTLINE:scenarios'].every(id=>node(d,id)),'Escape returns source items to source hub');
+ key(w,'Escape','Escape');
+ await waitFor(()=>node(d,'sources:root')&&node(d,'source:ISC2_OUTLINE'),'Escape returns source hub to sources');
+
+ const citedScenario=(w.SECX_RELEASED_QUESTIONS||[]).find(q=>Array.isArray(q.source_ids)&&q.source_ids.some(sid=>w.CISSP_META?.sources?.[sid]));
+ assert(citedScenario,'at least one released scenario has a known source citation');
+ const scenarioSource=citedScenario.source_ids.find(sid=>w.CISSP_META?.sources?.[sid]);
+ await selectThenEnter(d,w,`source:${scenarioSource}`,'cited scenario source');
+ await waitFor(()=>[`source:${scenarioSource}:objectives`,`source:${scenarioSource}:cards`,`source:${scenarioSource}:scenarios`].every(id=>node(d,id)),'cited scenario source exposes scenario facet');
+ await selectThenEnter(d,w,`source:${scenarioSource}:scenarios`,'cited source scenario facet');
+ await waitFor(()=>node(d,`source:list:${scenarioSource}:scenarios`)&&node(d,`source-item:scenario:${citedScenario.id}`),'source scenario facet contains exact released scenario citation');
+ await selectThenEnter(d,w,`source-item:scenario:${citedScenario.id}`,'source scenario provenance item');
+ await waitFor(()=>d.querySelector('#detail.open')?.textContent.includes(`Released scenario ${citedScenario.id} explicitly includes ${scenarioSource}`),'scenario provenance detail states exact source_ids membership');
+ assert(!d.querySelector('#detail')?.textContent.includes('Correct answer:'),'source scenario provenance does not expose keyed answer');
+ key(w,' ','Space');key(w,' ','Space');
+ await waitFor(()=>d.querySelector('#detail')?.textContent.includes('Application'),'source scenario reaches deepest disclosure');
+ assert(!d.querySelector('#detail')?.textContent.includes('Correct answer:'),'source scenario remains answer-free at deepest disclosure');
+ const graphState=JSON.parse(w.localStorage.getItem('cissp_secx_graph_state_v1')||'{}');
+ assert(!graphState.scenarios?.[citedScenario.id],'source-only scenario provenance does not record an answer reveal');
+ key(w,'Home','Home');
+ await waitFor(()=>Array.from({length:8},(_,i)=>node(d,`d${i+1}`)).every(Boolean)&&d.querySelector('#crumb')?.textContent==='SecX','Home returns source provenance to root');
+
+ const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mw=mobileApp.w;
+ assert(md.querySelector('#sourceLensBtn'),'mobile source control present');
+ key(mw,'s','KeyS');
+ await waitFor(()=>allSourcesRendered(mw,md),'mobile source hub renders all sources');
+ assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile source lens has no horizontal overflow');
+ result.dataset.smoke='pass';
+ result.textContent=`PASS SecX source lens browser smoke: sources=${meta.source_count} shared-bank scenarios exact-source_ids ISC2-objective answer-reveal-isolation Home mobile; sampled scenario ${citedScenario.id}`;
+}
+run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
+})();
+</script>
+</body>
+</html>

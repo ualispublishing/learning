@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SecX · Expanded Knowledge Web Review</title>
+<style>html,body{margin:0;width:100%;height:100%;background:#07101d}iframe{display:block;width:100%;height:100%;border:0}</style>
+</head>
+<body>
+<iframe id="prototype" src="index.html" title="SecX expanded knowledge web"></iframe>
+<script>
+const frame=document.getElementById('prototype');
+frame.addEventListener('load',()=>{
+  const doc=frame.contentDocument;
+  const win=frame.contentWindow;
+  frame.dataset.secxExpandedState='loading';
+  const reviewStyle=doc.createElement('style');
+  reviewStyle.textContent=`
+    .detail:not(.open){transform:none;visibility:hidden;opacity:0;pointer-events:none}
+    .detail.open{visibility:visible;opacity:1;pointer-events:auto;animation:secxDetailIn .22s ease}
+    .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;left:auto}
+    .secx-expanded-status{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:30;max-width:min(680px,calc(100vw - 28px));padding:9px 12px;border:1px solid #bb8450;border-radius:10px;background:#291b12;color:#fff4e8;font:600 12px/1.4 system-ui,sans-serif;box-shadow:0 8px 30px #0008}
+    @keyframes secxDetailIn{from{transform:translateX(28px);opacity:0}to{transform:none;opacity:1}}
+    @media(prefers-reduced-motion:reduce){.detail.open{animation:none}}
+  `;
+  doc.head.appendChild(reviewStyle);
+  const loadStatus=doc.createElement('div');
+  loadStatus.id='secxExpandedStatus';
+  loadStatus.className='sr';
+  loadStatus.setAttribute('role','status');
+  loadStatus.setAttribute('aria-live','polite');
+  loadStatus.textContent='Loading expanded review layer.';
+  doc.body.appendChild(loadStatus);
+  const failureLabel=target=>{
+    const src=target?.getAttribute?.('src')||target?.src||'';
+    if(!src)return'expanded runtime';
+    try{return new URL(src,doc.baseURI).pathname.split('/').filter(Boolean).pop()||'expanded runtime'}catch{return'expanded runtime'}
+  };
+  const failExpanded=label=>{
+    if(frame.dataset.secxExpandedState==='error')return;
+    frame.dataset.secxExpandedState='error';
+    loadStatus.className='secx-expanded-status';
+    loadStatus.setAttribute('role','alert');
+    loadStatus.setAttribute('aria-live','assertive');
+    loadStatus.textContent=`Expanded review layer unavailable (${label||'runtime error'}). The conservative knowledge web remains available.`;
+  };
+  const readyExpanded=()=>{
+    if(frame.dataset.secxExpandedState==='error')return;
+    frame.dataset.secxExpandedState='ready';
+    loadStatus.className='sr';
+    loadStatus.setAttribute('role','status');
+    loadStatus.setAttribute('aria-live','polite');
+    loadStatus.textContent='Expanded review layer ready.';
+  };
+  doc.addEventListener('error',event=>{
+    if(event.target?.tagName==='SCRIPT')failExpanded(failureLabel(event.target));
+  },true);
+  win.addEventListener('error',event=>{
+    if(frame.dataset.secxExpandedState==='loading')failExpanded(event.filename?failureLabel({src:event.filename}):'runtime error');
+  });
+  const ai=doc.createElement('script');
+  ai.src='../study-site/data-ai.js';
+  ai.onload=()=>{
+    const precision=doc.createElement('script');
+    precision.src='../study-site/data-precision.js';
+    precision.onload=()=>{
+      const registry=doc.createElement('script');
+      registry.src='learner-registry.js';
+      registry.onload=()=>{
+        const layer=doc.createElement('script');
+        layer.src='next-layer.js';
+        layer.onload=()=>{
+          const learner=doc.createElement('script');
+          learner.src='learner-state.js';
+          learner.onload=()=>{
+            const due=doc.createElement('script');
+            due.src='due-review.js';
+            due.onload=()=>{
+              const study=doc.createElement('script');
+              study.src='study-lens.js';
+              study.onload=()=>{
+                const sources=doc.createElement('script');
+                sources.src='source-lens.js';
+                sources.onload=()=>{
+                  const coverage=doc.createElement('script');
+                  coverage.src='coverage-lens.js';
+                  coverage.onload=()=>{
+                    const projectionSearch=doc.createElement('script');
+                    projectionSearch.src='projection-search.js';
+                    projectionSearch.onload=readyExpanded;
+                    doc.body.appendChild(projectionSearch);
+                  };
+                  doc.body.appendChild(coverage);
+                };
+                doc.body.appendChild(sources);
+              };
+              doc.body.appendChild(study);
+            };
+            doc.body.appendChild(due);
+          };
+          doc.body.appendChild(learner);
+        };
+        doc.body.appendChild(layer);
+      };
+      doc.body.appendChild(registry);
+    };
+    doc.body.appendChild(precision);
+  };
+  doc.body.appendChild(ai);
+});
+</script>
+</body>
+</html>

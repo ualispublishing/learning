@@ -1,0 +1,135 @@
+name: SecX Prototype Smoke
+
+on:
+  push:
+    branches:
+      - secx-web-prototype-20260901
+    paths:
+      - 'subjects/cissp/2024-outline/secx-prototype/**'
+      - 'subjects/cissp/2024-outline/study-site/**'
+      - '.github/workflows/secx-prototype-smoke.yml'
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - 'subjects/cissp/2024-outline/secx-prototype/**'
+      - 'subjects/cissp/2024-outline/study-site/**'
+      - '.github/workflows/secx-prototype-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: secx-prototype-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact candidate head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - name: Assert exact head and report browser
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          ACTUAL_HEAD="$(git rev-parse HEAD)"
+          echo "HEAD=$ACTUAL_HEAD"
+          echo "EXPECTED_HEAD=$EXPECTED_HEAD"
+          test "$ACTUAL_HEAD" = "$EXPECTED_HEAD"
+          (google-chrome --version || google-chrome-stable --version || chromium --version || chromium-browser --version)
+
+      - name: SecX release boundary audit
+        shell: bash
+        run: |
+          python -m py_compile subjects/cissp/2024-outline/secx-prototype/release-boundary-audit.py
+          python subjects/cissp/2024-outline/secx-prototype/release-boundary-audit.py
+
+      - name: SecX candidate hygiene audit
+        shell: bash
+        run: |
+          python -m py_compile subjects/cissp/2024-outline/secx-prototype/candidate-hygiene-audit.py
+          python subjects/cissp/2024-outline/secx-prototype/candidate-hygiene-audit.py
+
+      - name: SecX candidate completeness audit
+        shell: bash
+        run: |
+          python -m py_compile subjects/cissp/2024-outline/secx-prototype/candidate-completeness-audit.py
+          python subjects/cissp/2024-outline/secx-prototype/candidate-completeness-audit.py
+
+      - name: CISSP deterministic release audit
+        shell: bash
+        run: python subjects/cissp/2024-outline/study-site/audit.py
+
+      - name: SecX deterministic graph, learner-state, browser-fixture, provenance, coverage, search, and relationship audits
+        shell: bash
+        run: |
+          python -m py_compile \
+            subjects/cissp/2024-outline/secx-prototype/audit.py \
+            subjects/cissp/2024-outline/secx-prototype/browser-fixtures-audit.py \
+            subjects/cissp/2024-outline/secx-prototype/due-audit.py \
+            subjects/cissp/2024-outline/secx-prototype/study-audit.py \
+            subjects/cissp/2024-outline/secx-prototype/source-audit.py \
+            subjects/cissp/2024-outline/secx-prototype/coverage-audit.py \
+            subjects/cissp/2024-outline/secx-prototype/projection-search-audit.py \
+            subjects/cissp/2024-outline/secx-prototype/relationship-audit.py
+          node --check subjects/cissp/2024-outline/secx-prototype/learner-registry.js
+          node --check subjects/cissp/2024-outline/secx-prototype/next-layer.js
+          node --check subjects/cissp/2024-outline/secx-prototype/learner-state.js
+          node --check subjects/cissp/2024-outline/secx-prototype/due-review.js
+          node --check subjects/cissp/2024-outline/secx-prototype/study-lens.js
+          node --check subjects/cissp/2024-outline/secx-prototype/source-lens.js
+          node --check subjects/cissp/2024-outline/secx-prototype/coverage-lens.js
+          node --check subjects/cissp/2024-outline/secx-prototype/projection-search.js
+          bash -n subjects/cissp/2024-outline/secx-prototype/browser-smoke.sh
+          bash -n subjects/cissp/2024-outline/secx-prototype/continue-browser-smoke.sh
+          bash -n subjects/cissp/2024-outline/secx-prototype/source-browser-smoke.sh
+          bash -n subjects/cissp/2024-outline/secx-prototype/coverage-browser-smoke.sh
+          bash -n subjects/cissp/2024-outline/secx-prototype/projection-search-smoke.sh
+          python subjects/cissp/2024-outline/secx-prototype/audit.py
+          python subjects/cissp/2024-outline/secx-prototype/browser-fixtures-audit.py
+          python subjects/cissp/2024-outline/secx-prototype/due-audit.py
+          python subjects/cissp/2024-outline/secx-prototype/study-audit.py
+          python subjects/cissp/2024-outline/secx-prototype/source-audit.py
+          python subjects/cissp/2024-outline/secx-prototype/coverage-audit.py
+          python subjects/cissp/2024-outline/secx-prototype/projection-search-audit.py
+          python subjects/cissp/2024-outline/secx-prototype/relationship-audit.py
+
+      - name: Preserve production CISSP browser smoke
+        shell: bash
+        working-directory: subjects/cissp/2024-outline/study-site
+        run: bash browser-smoke.sh 8766
+
+      - name: SecX expanded browser smoke
+        shell: bash
+        working-directory: subjects/cissp/2024-outline/secx-prototype
+        run: bash browser-smoke.sh 8776
+
+      - name: SecX Continue learner routing browser smoke
+        shell: bash
+        working-directory: subjects/cissp/2024-outline/secx-prototype
+        run: bash continue-browser-smoke.sh 8816
+
+      - name: SecX source provenance browser smoke
+        shell: bash
+        working-directory: subjects/cissp/2024-outline/secx-prototype
+        run: bash source-browser-smoke.sh 8786
+
+      - name: SecX explicit coverage browser smoke
+        shell: bash
+        working-directory: subjects/cissp/2024-outline/secx-prototype
+        run: bash coverage-browser-smoke.sh 8796
+
+      - name: SecX projection search browser smoke
+        shell: bash
+        working-directory: subjects/cissp/2024-outline/secx-prototype
+        run: bash projection-search-smoke.sh 8806
