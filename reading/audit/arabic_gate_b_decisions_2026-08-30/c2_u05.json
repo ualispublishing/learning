@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "C2",
+  "unit": 5,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/c2/passages.jsonl",
+  "canonical_sha256": "54fd0c42596b81f43c1b8254e50174c7b6b9bb023f93b2d208802a3523434ddf",
+  "records_reviewed": 6,
+  "records_with_findings": 5,
+  "fresh_findings": 5,
+  "decisions": [
+    {
+      "passage_id": "ar-c2-u05-p01",
+      "learner_facing_sha256": "23e9a79b8cf1ea6cdf24fc59210e52ec933d0f87077e10ea22ab26ca527ecf28",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u05-p01-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is a nominal or causal fragment inherited from the earlier task shape; replace it with a complete declarative summary of the passage’s organizing issue."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u05-p02",
+      "learner_facing_sha256": "90ccbac2ef97335ec8d7de5553951e8c9d245ce9c90aae1cb73014de8050dd58",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u05-p02-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is a nominal or causal fragment inherited from the earlier task shape; replace it with a complete declarative summary of the passage’s organizing issue."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u05-p03",
+      "learner_facing_sha256": "6b86f8fda54f0ff5cc6a6a0d0df749c7854a67d93546cbbb80ee88b5b596d686",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u05-p03-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is a nominal or causal fragment inherited from the earlier task shape; replace it with a complete declarative summary of the passage’s organizing issue."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u05-p04",
+      "learner_facing_sha256": "e6a10c8ac95c015d8666d03c145c4eba9bfc10e37766c6a4683b6d8713abf292",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u05-p04-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is a nominal or causal fragment inherited from the earlier task shape; replace it with a complete declarative summary of the passage’s organizing issue."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u05-p05",
+      "learner_facing_sha256": "b2c556e1261dd8732e2be4b47b5c7bbde25c176407ac8f8905982a43e698db7f",
+      "decision": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-c2-u05-p06",
+      "learner_facing_sha256": "28afdaf962e4baa3036bcfef437dfc9d37519d66be6d84b2451316f1cde86560",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u05-p06-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is a nominal or causal fragment inherited from the earlier task shape; replace it with a complete declarative summary of the passage’s organizing issue."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. C2 internal Gate B evidence does not constitute educator/publication release approval."
+}
