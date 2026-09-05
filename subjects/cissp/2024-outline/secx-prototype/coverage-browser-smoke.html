@@ -19,6 +19,7 @@ function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id
 function clickId(d,id){const el=node(d,id);assert(el,`node ${id} exists`);el.click();return el}
 async function enter(d,w,label='node'){await waitFor(()=>{const id=w.current?.()?.id;return id&&node(d,id)?.classList.contains('active')},`${label} current active node`);key(w,'Enter','Enter');await sleep(80)}
 async function selectThenEnter(d,w,id,label){clickId(d,id);await waitFor(()=>node(d,id)?.classList.contains('active')&&w.current?.()?.id===id,`${label} selected`);await enter(d,w,label)}
+async function closeDetailThenAscend(d,w,closedLabel,ascendedLabel,predicate){key(w,'Escape','Escape');await waitFor(()=>!d.querySelector('#detail')?.classList.contains('open'),closedLabel);key(w,'Escape','Escape');await waitFor(predicate,ascendedLabel)}
 async function run(){
   const {d,w}=await ready(frame,'desktop'),meta=w.CISSP_META?.meta||{},snap=w.SECX_COVERAGE_SNAPSHOT;
   assert(snap.totals.objectives===meta.objective_count,'coverage snapshot objective count matches Atlas');
@@ -44,8 +45,7 @@ async function run(){
   await waitFor(()=>d.querySelector('#detail.open')?.textContent.includes(`objective ${firstGapRecord.objective}`)&&d.querySelector('#detail')?.textContent.includes('no manifest-released standard scenario carries this exact subtopic tag'),'gap depth-two detail explains exact released-tag absence');
   key(w,' ','Space');
   await waitFor(()=>d.querySelector('#detail')?.textContent.includes('not evidence that the subtopic is missing from the curriculum')&&d.querySelector('#detail')?.textContent.includes('not learner weakness'),'gap depth-three detail preserves curriculum and learner-state boundaries');
-  key(w,'Escape','Escape');await sleep(40);key(w,'Escape','Escape');
-  await waitFor(()=>node(d,'coverage:root')&&d.querySelectorAll('.node.coverage-domain').length===8&&d.querySelector('#crumb')?.textContent==='SecX › Coverage','gap detail and gap view Escape return to Coverage root');
+  await closeDetailThenAscend(d,w,'gap detail closes before gap-view ascent','gap detail and gap view Escape return to Coverage root',()=>node(d,'coverage:root')&&d.querySelectorAll('.node.coverage-domain').length===8&&d.querySelector('#crumb')?.textContent==='SecX › Coverage');
 
   const d1=snap.domains.find(x=>x.domain_num===1);assert(d1,'D1 coverage snapshot exists');
   const d1node=node(d,'coverage:d1');assert(d1node,'D1 coverage node exists');
@@ -67,8 +67,7 @@ async function run(){
   assert(d.querySelector('#detail')?.textContent.includes(`${o11.subtopics_with_exact_scenario_tag}/${o11.subtopics} subtopics have at least one exact released scenario tag`),'coverage detail reports exact-tag fraction');
   key(w,' ','Space');
   await waitFor(()=>d.querySelector('#detail')?.textContent.includes('Practice exposure counts do not measure learner mastery'),'coverage depth-three detail preserves mastery boundary');
-  key(w,'Escape','Escape');await sleep(40);key(w,'Escape','Escape');
-  await waitFor(()=>node(d,'coverage:root')&&node(d,'coverage:d1')&&d.querySelector('#crumb')?.textContent==='SecX › Coverage','Escape returns domain coverage to coverage root');
+  await closeDetailThenAscend(d,w,'objective detail closes before domain ascent','Escape returns domain coverage to coverage root',()=>node(d,'coverage:root')&&node(d,'coverage:d1')&&d.querySelector('#crumb')?.textContent==='SecX › Coverage');
   key(w,'Escape','Escape');
   await waitFor(()=>Array.from({length:8},(_,i)=>node(d,`d${i+1}`)).every(Boolean)&&d.querySelector('#crumb')?.textContent==='SecX','Escape returns coverage to root');
 
