@@ -19,6 +19,7 @@ function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id
 function clickId(d,id){const el=node(d,id);assert(el,`node ${id} exists`);el.click();return el}
 async function enter(d,w,label='node'){await waitFor(()=>{const id=w.current?.()?.id;return id&&node(d,id)?.classList.contains('active')},`${label} current active node`);key(w,'Enter','Enter');await sleep(80)}
 async function selectThenEnter(d,w,id,label){clickId(d,id);await waitFor(()=>node(d,id)?.classList.contains('active')&&w.current?.()?.id===id,`${label} selected`);await enter(d,w,label)}
+async function selectThenDescend(d,w,id,label){clickId(d,id);await waitFor(()=>node(d,id)?.classList.contains('active')&&w.current?.()?.id===id,`${label} selected`);w.descend();await sleep(80)}
 async function closeDetailThenAscend(d,w,closedLabel,ascendedLabel,predicate){key(w,'Escape','Escape');await waitFor(()=>!d.querySelector('#detail')?.classList.contains('open'),closedLabel);key(w,'Escape','Escape');await waitFor(predicate,ascendedLabel)}
 async function run(){
   const {d,w}=await ready(frame,'desktop'),meta=w.CISSP_META?.meta||{},snap=w.SECX_COVERAGE_SNAPSHOT;
@@ -80,7 +81,7 @@ async function run(){
   const mobileCoverageButton=md.querySelector('#coverageLensBtn');assert(mobileCoverageButton,'mobile coverage control present');
   mobileCoverageButton.click();
   await waitFor(()=>md.querySelectorAll('.node.coverage-domain').length===8&&node(md,'coverage:root'),'mobile visible Coverage control opens eight-domain map');
-  await selectThenEnter(md,mw,'coverage:root','mobile Coverage center');
+  await selectThenDescend(md,mw,'coverage:root','mobile Coverage center');
   await waitFor(()=>node(md,'coverage:gaps')&&md.querySelectorAll('.node.coverage-gap').length>0,'mobile Coverage center opens exact-tag gaps');
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile coverage gap lens has no horizontal overflow');
   result.dataset.smoke='pass';
