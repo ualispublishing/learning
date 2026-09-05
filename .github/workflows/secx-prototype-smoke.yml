@@ -34,6 +34,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
 
       - name: Assert exact head and report browser
         shell: bash
@@ -46,6 +47,12 @@ jobs:
           echo "EXPECTED_HEAD=$EXPECTED_HEAD"
           test "$ACTUAL_HEAD" = "$EXPECTED_HEAD"
           (google-chrome --version || google-chrome-stable --version || chromium --version || chromium-browser --version)
+
+      - name: SecX release boundary audit
+        shell: bash
+        run: |
+          python -m py_compile subjects/cissp/2024-outline/secx-prototype/release-boundary-audit.py
+          python subjects/cissp/2024-outline/secx-prototype/release-boundary-audit.py
 
       - name: CISSP deterministic release audit
         shell: bash
