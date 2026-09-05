@@ -41,6 +41,24 @@ A card is included only when its existing Atlas card state has `due <= today`. T
 
 Due Reviews is a learner-state filter, not a new curriculum relationship. A card being due does not imply that the objective is weak or unmastered.
 
+## Continue routing
+
+The visible **Continue** control is a navigation helper over the same released-card registry and Atlas progress state. It does not maintain its own scheduler or score.
+
+Its priority is deterministic:
+
+1. a currently due card;
+2. otherwise a card in the **Learning** state;
+3. otherwise a new card in the current lowest-review-score domain;
+4. otherwise any remaining new card;
+5. otherwise the Study Queue root.
+
+For card choices, Continue reuses the existing Study Queue ordering and routes to the page containing the selected released card. It selects the card but does not reveal its answer or grade it.
+
+The lowest-review-score domain is used only as a tie-breaking study-priority hint after due and learning work are absent. It remains a stage-based scheduling signal, not a diagnosis of learner weakness or exam readiness.
+
+If all released cards are mature and scheduled in the future, Continue falls back to the Study Queue rather than manufacturing extra work. The control refreshes after same-window grades and Atlas progress-storage changes, and it never writes `cissp_atlas_progress_v1` itself.
+
 ## Graph-specific activity
 
 Graph navigation and scenario exposure use a separate key:
@@ -76,6 +94,8 @@ Likewise, due status is a scheduling fact only. It must not be promoted into a s
 - Card details expose the same four Atlas retrieval grades.
 - The Due Reviews control shows the current released-card due count.
 - `R` opens a local graph containing only currently due released retrieval cards.
+- **Continue** routes due → learning → lowest-review-score-domain new → any new → Study Queue using Atlas state only.
+- Continue selects an existing review card but never auto-reveals or auto-grades it.
 - Graph nodes may show the deepest disclosure layer previously reached.
 - Scenario nodes may show answer-reveal exposure, labeled as exposure rather than performance.
 - The footer may show the number of currently due released retrieval cards.
@@ -87,7 +107,11 @@ Before the learner-state/due-review layer can replace the conservative prototype
 1. production CISSP deterministic audit;
 2. SecX graph/learner-state deterministic audit;
 3. SecX due-review deterministic audit;
-4. production CISSP browser smoke;
-5. expanded SecX browser smoke.
+4. SecX Study/Continue deterministic audit;
+5. production CISSP browser smoke;
+6. expanded SecX browser smoke;
+7. dedicated Continue routing browser smoke.
 
 The expanded smoke must verify card-grade persistence, same-window due-count refresh, `R` routing into the due-card branch, the separate graph-state key, the depth-4 scenario answer gate, and the rule that answer reveal does not create correctness or mastery evidence.
+
+The Continue smoke must verify fresh-state weakest-domain new routing, Learning fallback, Due priority over simultaneous Learning work, caught-up fallback to Study Queue, and mobile layout without introducing a second learner-state store.
