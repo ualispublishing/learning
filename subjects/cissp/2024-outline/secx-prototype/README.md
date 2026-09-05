@@ -52,7 +52,7 @@ No concept-level cross-domain semantic relationship is inferred from text simila
 - `S`: open **Source Provenance**.
 - `C`: open **Coverage**.
 
-Pointer/touch remains supported, actual browser focus follows keyboard selection, and `prefers-reduced-motion` is respected. The expanded review surface also provides visible Search/Close controls and persistent detail Close/Depth/Open controls so keyboard-first does not become keyboard-only.
+Pointer/touch remains supported, actual browser focus follows keyboard selection, and `prefers-reduced-motion` is respected. The expanded review surface also provides visible Continue, Search/Close, and persistent detail Close/Depth/Open controls so keyboard-first does not become keyboard-only.
 
 ## Objective hub and released scenarios
 
@@ -91,6 +91,18 @@ The queue uses no scenario/candidate data and no second scheduling algorithm. Gr
 - Lowest review-stage-score domain.
 
 The lowest-domain calculation mirrors Atlas objective/domain stage aggregation and higher-exam-weight tie-break. It is a study-priority signal, not proof of weakness or exam readiness.
+
+### Continue
+
+The visible **Continue · …** control is a scheduling/navigation convenience over the same Atlas review-card state. It chooses work in this order:
+
+1. currently due review card;
+2. Learning card;
+3. new card in the current lowest-review-score domain;
+4. any remaining new card;
+5. Study Queue root when no due, learning, or new cards remain.
+
+For a selected card, Continue reuses the existing Study Queue ordering, opens the page containing that card, and leaves the card selected. It never auto-reveals an answer, auto-grades a card, writes a second learner-state record, or converts review stage into a mastery/readiness claim. An all-mature/future-due state falls back to Study Queue rather than manufacturing extra review work.
 
 ## Source Provenance
 
@@ -161,7 +173,7 @@ The draft includes deterministic gates for each major layer:
 
 - `audit.py` — released graph counts/mappings, manifest isolation, exact subtopic tags, answer boundary, learner-state compatibility;
 - `due-audit.py` — complete 140-card review registry and Due Reviews;
-- `study-audit.py` — Study Queue modes and production-compatible stage scoring;
+- `study-audit.py` — Study Queue modes, production-compatible stage scoring, and Continue priority/routing contract;
 - `source-audit.py` — 20-source registry, exact objective/card/scenario `source_ids`, shared-bank use, provenance/state/answer isolation;
 - `coverage-audit.py` — Atlas count reconciliation, shared released-bank use, exact-tag exposure/gap recomputation, learner-state/semantic isolation;
 - `projection-search-audit.py` — explicit projection routing, combobox/listbox semantics, touch controls, focus containment/restoration, no learner-state/semantic coupling;
@@ -170,6 +182,7 @@ The draft includes deterministic gates for each major layer:
 Browser harnesses:
 
 - `browser-smoke.html` + `browser-smoke.sh` — expanded graph, cards, learner state, Due Reviews, Study Queue, scenarios, search, Home, mobile;
+- `continue-browser-smoke.html` + `continue-browser-smoke.sh` — deterministic Continue routing for fresh weakest-domain new, Learning, Due-over-Learning, caught-up Study Queue fallback, and mobile layout;
 - `source-browser-smoke.html` + `source-browser-smoke.sh` — source count, `S`, exact objective citation mapping, released-scenario provenance, answer-reveal isolation, Home, mobile;
 - `coverage-browser-smoke.html` + `coverage-browser-smoke.sh` — shared-bank count equality, visible Coverage control, `C`, 39-gap traversal/detail boundaries, eight-domain coverage, D1/objective `1.1`, Escape hierarchy, mobile;
 - `projection-search-smoke.html` + `projection-search-smoke.sh` — source/coverage projection routing, combobox state, modal focus containment/restoration, visible Search/Close, and persistent mobile detail controls.
@@ -184,7 +197,7 @@ A browser PASS counts only when the committed gate actually executes against the
 2. Keep one manifest-enforced released-scenario loader and let read-only projections consume its shared runtime registry.
 3. Keep unreleased question candidates out of learner-facing runtime.
 4. Keep learner state separate from curriculum records.
-5. Treat Due Reviews and Study Queue as learner-state projections, not curriculum edges.
+5. Treat Due Reviews, Study Queue, and Continue routing as learner-state projections/navigation, not curriculum edges or mastery claims.
 6. Treat Source Provenance as an exact citation projection, not a semantic cross-link generator.
 7. Treat Coverage counts and exact-tag gaps as corpus/practice-exposure projections, not learner scores, curriculum-deficiency claims, or semantic edge generators.
 8. Keep relationship candidate discovery, relationship review, release, and runtime publication as separate stages.
