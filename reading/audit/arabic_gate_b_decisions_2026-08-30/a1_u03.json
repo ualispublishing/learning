@@ -7,7 +7,7 @@
   "date": "2026-08-31",
   "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
   "canonical_path": "reading/arabic/a1/passages.jsonl",
-  "canonical_sha256": "767ad84ec37e5cb074af91a3802e4b2a467f2c9d06f5a91d3fcf43a8b4ad3a35",
+  "canonical_sha256": "04eae2c4a4442b903e8deabb89f26d96f3da67eed5200b854dbb58d44093bbd5",
   "records_reviewed": 6,
   "records_with_findings": 6,
   "fresh_findings": 9,
@@ -94,7 +94,7 @@
     },
     {
       "passage_id": "ar-a1-u03-p05",
-      "learner_facing_sha256": "3d205239ca7cf963427d9c5f6861b33b609220fa2509de9e419ae6952a61b072",
+      "learner_facing_sha256": "2d34eb33488d081e8f265410a0aaee84ee2eeb7cef97b91343faab0477a9975c",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 2,
       "findings": [
@@ -135,5 +135,17 @@
   ],
   "quality_promotion": false,
   "release_claim": false,
-  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer.",
+  "post_gate_c_revalidations": [
+    {
+      "date": "2026-09-05",
+      "gate_c_artifact": "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u03.json",
+      "scope": [
+        "ar-a1-u03-p05 question q10"
+      ],
+      "gate_b_language_recheck": "PASS",
+      "reason": "Gate C constrained an open cloze so أخرى is the uniquely intended additional-item answer; the replacement was rechecked for A1 MSA wording and Gate B was rebound to exact-current learner-facing content.",
+      "release_claim": false
+    }
+  ]
 }

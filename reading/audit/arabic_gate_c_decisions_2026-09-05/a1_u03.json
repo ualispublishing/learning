@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A1",
+  "unit": 3,
+  "date": "2026-09-05",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/a1/passages.jsonl",
+  "canonical_sha256": "04eae2c4a4442b903e8deabb89f26d96f3da67eed5200b854dbb58d44093bbd5",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 1,
+  "fresh_findings": 1,
+  "decisions": [
+    {
+      "passage_id": "ar-a1-u03-p01",
+      "learner_facing_sha256": "3700402b6143b4979fc7817037958d369aab03b79c129a9e839d0c4fa28099a5",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a1-u03-p02",
+      "learner_facing_sha256": "838e38a3b37d10890e64368760d0d6a50bbaeed280d89cf0b1dd79c6c11efca5",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a1-u03-p03",
+      "learner_facing_sha256": "dd134f963a00e141c8b1f3fcd71cd3dfcf0a65ac737b0a2d6ef7b16386a089f4",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a1-u03-p04",
+      "learner_facing_sha256": "b4dc7cbdd74ba97320671ec67dae4cfd573034ff34c21919664c0cf281fdf95b",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a1-u03-p05",
+      "learner_facing_sha256": "2d34eb33488d081e8f265410a0aaee84ee2eeb7cef97b91343faab0477a9975c",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u03-p05-gC-01",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original cloze «هذه تفاحة صغيرة؛ أريد تفاحة ___» allows many plausible adjectives, so أخرى was not uniquely defensible. Constrain the task to the meaning “one additional” while preserving the target and keyed answer."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u03-p06",
+      "learner_facing_sha256": "e440fbea2aeb84ded07f530715b777d6baa9d03b52029805778187eb0531f978",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions bind by authoritative per-record Gate B packet hashes; the level SHA records the review-time snapshot."
+}
