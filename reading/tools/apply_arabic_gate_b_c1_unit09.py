@@ -14,7 +14,16 @@ REPAIRS={
 'ar-c1-u09-p05':[('answer q1','قد توحي بأن الرحيل حدث موحد في لحظة واحدة رغم أنه كان ممتدًا ومتعدد المسارات.','القضية هي أن ترتيب المواد الوثائقية قد يضغط تجربة تاريخية ممتدة في سرد موحد، حتى عندما تكون كل لقطة صحيحة منفردة.','assessment_wording')],
 'ar-c1-u09-p06':[('answer q1','إنها بناء حجة ورواية مقيدة بما تسمح به المصادر وحدودها وليست نسخة مباشرة من الماضي.','القضية هي أن الرواية التاريخية حجة مبنية من مصادر ناقصة ومحدودة، ويجب أن تعلن اختياراتها وحدود أدلتها ودرجات الثقة بدل أن تدعي نسخ الماضي مباشرة.','assessment_wording')],
 }
-META={pid:[(f,d,'moderate',('The q1 prompt explicitly asks for a one-sentence summary, while the keyed response retains an older fragment or context-dependent formulation; replace it with a complete standalone summary aligned to the current prompt.' if d=='assessment_wording' else 'The answer conflates clearly inaccurate information with lying by saying false information may be presented deliberately “or clearly”; lying requires a deception/knowledge condition, whereas source viewpoint merely constrains what the source sees and records.'))) for f,_,__,d in reps] for pid,reps in REPAIRS.items()}
+META={}
+for pid,reps in REPAIRS.items():
+ items=[]
+ for field,_old,_new,dimension in reps:
+  if dimension=='assessment_wording':
+   rationale='The q1 prompt explicitly asks for a one-sentence summary, while the keyed response retains an older fragment or context-dependent formulation; replace it with a complete standalone summary aligned to the current prompt.'
+  else:
+   rationale='The answer conflates clearly inaccurate information with lying by saying false information may be presented deliberately “or clearly”; lying requires a deception/knowledge condition, whereas source viewpoint merely constrains what the source sees and records.'
+  items.append((field,dimension,'moderate',rationale))
+ META[pid]=items
 def sha(b): return hashlib.sha256(b).hexdigest()
 def wc(t): return len(TOKEN.findall(t))
 def targets(r):
