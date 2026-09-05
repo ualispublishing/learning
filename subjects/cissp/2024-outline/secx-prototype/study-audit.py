@@ -27,6 +27,7 @@ try:
     lens = read(ROOT / "study-lens.js")
     next_html = read(ROOT / "next.html")
     smoke = read(ROOT / "browser-smoke.html")
+    continue_smoke = read(ROOT / "continue-browser-smoke.html")
 except OSError as exc:
     print("FAIL secx_study_lens_audit")
     print("-", f"Parse/setup error: {exc}")
@@ -51,6 +52,26 @@ check("a.score-b.score||b.weight-a.weight" in lens, "lowest-domain tie-break no 
 check("Math.min(4,(cardState(c.id)?.stage||0))" in production, "production Atlas objective-score stage cap changed")
 check("sort((a,b)=>a.score-b.score||b.weight-a.weight)" in production, "production Atlas weakest-domain tie-break changed")
 
+check("continueStudyBtn" in lens, "study lens is missing the visible Continue control")
+check("function continuePlan()" in lens, "study lens is missing deterministic Continue planning")
+continue_tokens = [
+    "const due=cardsForMode('due')",
+    "if(due.length)return{mode:'due'",
+    "const learning=cardsForMode('learning')",
+    "if(learning.length)return{mode:'learning'",
+    "weakNew=fresh.filter(c=>c.domain_num===weak.num)",
+    "if(weakNew.length)return{mode:'new'",
+    "if(fresh.length)return{mode:'new'",
+    "return{mode:'root',label:'Study',card:null}",
+]
+for token in continue_tokens:
+    check(token in lens, f"Continue priority contract drifted: missing {token}")
+check("pageForCard(plan.mode,plan.card?.id)" in lens, "Continue does not route to the page containing its selected review card")
+check("studyCardLayout(plan.mode,plan.card?.id||null,true" in lens, "Continue does not reuse the existing Study card layout")
+check("studyQueueLayout(true)" in lens, "Continue has no caught-up fallback to the existing Study Queue root")
+check("continueButton.addEventListener('click',runContinue)" in lens, "Continue button does not invoke the learner-state routing helper")
+check("refreshStudyControls()" in lens and "addEventListener('storage'" in lens, "Continue label does not refresh with current Atlas state")
+
 check("review-stage score" in lens and "not proof of knowledge" in lens, "study lens no longer states the review-score evidence boundary")
 check("Scenario answer exposure is not counted as retrieval mastery" in lens, "study lens no longer protects the scenario-exposure/mastery boundary")
 check("localStorage.setItem" not in lens, "study lens should read learner state and delegate grading, not maintain a second progress store")
@@ -70,6 +91,11 @@ check("due.onload" in next_html, "study lens is not gated on due-review readines
 check("#studyQueueBtn" in smoke, "browser smoke does not wait for study-lens readiness")
 check("study:queue" in smoke and "KeyQ" in smoke, "browser smoke does not exercise the Q study-queue shortcut")
 check("study:new" in smoke and "study:weak" in smoke, "browser smoke does not verify study queue facets")
+check("continueStudyBtn" in continue_smoke, "Continue browser smoke does not wait for the visible Continue control")
+check("study:list:due" in continue_smoke and "Continue · Due" in continue_smoke, "Continue browser smoke does not prove due-first routing")
+check("study:list:learning" in continue_smoke and "Continue · Learning" in continue_smoke, "Continue browser smoke does not prove learning fallback")
+check("Continue · New D1" in continue_smoke and "study:list:new" in continue_smoke, "Continue browser smoke does not prove weakest-domain new-card fallback")
+check("Continue · Study" in continue_smoke and "study:queue" in continue_smoke, "Continue browser smoke does not prove caught-up Study Queue fallback")
 
 if errors:
     print("FAIL secx_study_lens_audit")
@@ -77,4 +103,4 @@ if errors:
         print("-", error)
     sys.exit(1)
 
-print("PASS secx_study_lens_audit queues=due,new,learning,mature,weak scoring=Atlas-stage-compatible state=read-only-from-Atlas")
+print("PASS secx_study_lens_audit queues=due,new,learning,mature,weak continue=due>learning>weak-new>new>study-root scoring=Atlas-stage-compatible state=read-only-from-Atlas")
