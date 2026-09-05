@@ -10,7 +10,8 @@ function safeParse(raw,fallback){try{return raw?JSON.parse(raw):fallback}catch{r
 function dayISO(d=new Date()){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function addDays(n){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+n);return dayISO(d)}
 
-let atlasState=safeParse(localStorage.getItem(ATLAS_PROGRESS_KEY),{cards:{},quiz:{attempts:0,correct:0,byDomain:{}}});
+let atlasRaw=localStorage.getItem(ATLAS_PROGRESS_KEY)||'';
+let atlasState=safeParse(atlasRaw,{cards:{},quiz:{attempts:0,correct:0,byDomain:{}}});
 if(!atlasState.cards||typeof atlasState.cards!=='object')atlasState.cards={};
 if(!atlasState.quiz||typeof atlasState.quiz!=='object')atlasState.quiz={attempts:0,correct:0,byDomain:{}};
 let graphState=safeParse(localStorage.getItem(GRAPH_STATE_KEY),{nodes:{},scenarios:{}});
@@ -19,13 +20,34 @@ if(!graphState.scenarios||typeof graphState.scenarios!=='object')graphState.scen
 let openNodeId=null;
 let scenarioRevealSession=null;
 
-function saveAtlas(){localStorage.setItem(ATLAS_PROGRESS_KEY,JSON.stringify(atlasState))}
+function normalizeAtlas(){
+  if(!atlasState||typeof atlasState!=='object')atlasState={};
+  if(!atlasState.cards||typeof atlasState.cards!=='object')atlasState.cards={};
+  if(!atlasState.quiz||typeof atlasState.quiz!=='object')atlasState.quiz={attempts:0,correct:0,byDomain:{}};
+}
+function syncAtlas(){
+  const raw=localStorage.getItem(ATLAS_PROGRESS_KEY)||'';
+  if(raw!==atlasRaw){atlasRaw=raw;atlasState=safeParse(raw,{cards:{},quiz:{attempts:0,correct:0,byDomain:{}}});normalizeAtlas()}
+  return atlasState;
+}
+function saveAtlas(){atlasRaw=JSON.stringify(atlasState);localStorage.setItem(ATLAS_PROGRESS_KEY,atlasRaw)}
 function saveGraph(){localStorage.setItem(GRAPH_STATE_KEY,JSON.stringify(graphState))}
-function cardState(id){return atlasState.cards[id]||null}
+function cardState(id){syncAtlas();return atlasState.cards[id]||null}
 function isDue(id){const s=cardState(id);return !!s&&s.due<=dayISO()}
 function isMature(id){const s=cardState(id);return !!s&&(s.stage||0)>=4}
 function cardStatus(id){const s=cardState(id);if(!s)return'new';if(isMature(id))return'mature';return isDue(id)?'due':'learning'}
 function graphNodeState(id){return graphState.nodes[id]||null}
+
+const learnerApi=Object.freeze({
+  progressKey:ATLAS_PROGRESS_KEY,
+  cardState(id){const s=cardState(id);return s?Object.freeze({...s}):null},
+  cardStatus,
+  isDue,
+  isMature,
+  todayISO:()=>dayISO(),
+  intervalDays:Object.freeze([...INTERVALS])
+});
+Object.defineProperty(window,'SECX_LEARNER',{value:learnerApi,writable:false,configurable:false,enumerable:true});
 
 function gradeCard(id,g){
   if(!Number.isInteger(g)||g<0||g>3)return;
@@ -159,7 +181,7 @@ document.addEventListener('keydown',e=>{
 },true);
 
 addEventListener('storage',e=>{
-  if(e.key===ATLAS_PROGRESS_KEY){atlasState=safeParse(e.newValue,{cards:{},quiz:{attempts:0,correct:0,byDomain:{}}});atlasState.cards=atlasState.cards||{};decorateNodes();decorateDetail();updateProgressScope()}
+  if(e.key===ATLAS_PROGRESS_KEY){atlasRaw='__stale__';syncAtlas();decorateNodes();decorateDetail();updateProgressScope()}
   if(e.key===GRAPH_STATE_KEY){graphState=safeParse(e.newValue,{nodes:{},scenarios:{}});graphState.nodes=graphState.nodes||{};graphState.scenarios=graphState.scenarios||{};decorateNodes();decorateDetail()}
 });
 
