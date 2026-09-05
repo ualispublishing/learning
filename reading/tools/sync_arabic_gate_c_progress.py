@@ -2,8 +2,10 @@
 """Synchronize fresh Arabic Gate C comprehension/answer-grounding evidence.
 
 Every counted decision must match the exact current learner-facing hash using the
-same packet-hash definition as Gate B. This tool records internal semantic-review
-progress only; it never promotes quality metadata, release state, or educator readiness.
+same packet-hash definition as Gate B. Unit artifacts retain the level canonical
+SHA at their review moment; later units may change the same level file, so current
+validity is established by exact per-record hashes rather than a stale whole-level
+SHA. This tool never promotes quality metadata, release state, or educator readiness.
 """
 from __future__ import annotations
 
@@ -18,6 +20,7 @@ DECISION_DIR = READING / "audit/arabic_gate_c_decisions_2026-09-05"
 RELEASE_PATH = READING / "RELEASE_STATUS.json"
 LEVELS = ("a1", "a2", "b1", "b2", "c1", "c2")
 NAME_RE = re.compile(r"^(a1|a2|b1|b2|c1|c2)_u(\d{2})\.json$")
+HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -56,14 +59,11 @@ def learner_hash(record: dict) -> str:
     return sha256_bytes(raw)
 
 
-def load_current() -> tuple[dict[str, dict], dict[str, str]]:
+def load_current() -> dict[str, dict]:
     records: dict[str, dict] = {}
-    canonical_shas: dict[str, str] = {}
     for level in LEVELS:
         path = READING / f"arabic/{level}/passages.jsonl"
-        raw = path.read_bytes()
-        canonical_shas[level] = sha256_bytes(raw)
-        rows = [json.loads(line) for line in raw.decode("utf-8").splitlines() if line.strip()]
+        rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
         if len(rows) != 60 or [r.get("sequence") for r in rows] != list(range(1, 61)):
             raise SystemExit(f"{level}: unexpected canonical layout")
         for record in rows:
@@ -73,7 +73,7 @@ def load_current() -> tuple[dict[str, dict], dict[str, str]]:
             records[pid] = record
     if len(records) != 360:
         raise SystemExit("Arabic Gate C current corpus must contain 360 records")
-    return records, canonical_shas
+    return records
 
 
 def main() -> None:
@@ -85,7 +85,7 @@ def main() -> None:
     if natural.get("status") != "FRESH_GATE_B_INTERNAL_REVIEW_COMPLETE" or natural.get("fresh_records_reviewed") != 360:
         raise SystemExit("Gate B exact-current completion is required before Gate C progress")
 
-    current, canonical_shas = load_current()
+    current = load_current()
     seen: dict[str, str] = {}
     reviewed_by_level = {level: 0 for level in LEVELS}
     qa_by_level = {level: 0 for level in LEVELS}
@@ -109,8 +109,10 @@ def main() -> None:
                 raise SystemExit(f"{path}: wrong project/language")
             if doc.get("quality_promotion") is not False or doc.get("release_claim") is not False:
                 raise SystemExit(f"{path}: Gate C evidence must explicitly deny promotion/release claim")
-            if doc.get("canonical_sha256") != canonical_shas[level]:
-                raise SystemExit(f"{path}: stale level canonical hash")
+            if doc.get("canonical_path") != f"reading/arabic/{level}/passages.jsonl":
+                raise SystemExit(f"{path}: canonical path mismatch")
+            if not HEX64_RE.fullmatch(str(doc.get("canonical_sha256", ""))):
+                raise SystemExit(f"{path}: missing/invalid review-time canonical SHA")
             decisions = doc.get("decisions", [])
             if doc.get("records_reviewed") != len(decisions):
                 raise SystemExit(f"{path}: records_reviewed mismatch")
@@ -181,7 +183,7 @@ def main() -> None:
         "review_order": ["A1", "A2", "B1", "B2", "C1", "C2"],
         "levels_completed": [level.upper() for level in LEVELS if reviewed_by_level[level] == 60],
         "decision_artifacts": evidence_paths,
-        "guard": "Gate C is a fresh internal comprehension/answer-grounding audit using the authoritative Gate B packet learner-facing hash definition; it does not substitute for independent educator/native/blind release gates.",
+        "guard": "Gate C is a fresh internal comprehension/answer-grounding audit; current validity is bound by exact per-record Gate B packet learner-facing hashes, while each unit artifact retains its review-time level SHA.",
         "next_step": (
             "Gate C internal review complete; continue only with separate CEFR/pedagogy and independent release gates."
             if total_reviewed == 360
