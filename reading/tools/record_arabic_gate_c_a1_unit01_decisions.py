@@ -4,6 +4,8 @@
 The Gate C repair changes one learner-facing answer. This recorder therefore also
 revalidates the affected wording for Gate B and refreshes the existing A1 Unit 1
 Gate B hashes so both evidence streams bind to the same exact-current corpus.
+It is intentionally idempotent so a rebase/regeneration pass can verify the exact
+same evidence without creating duplicate decisions or revalidation entries.
 """
 from __future__ import annotations
 
@@ -26,6 +28,14 @@ OLD_GATE_B_HASHES = {
     "ar-a1-u01-p06": "7cc0f20774fb9bd79e26e80fd3da63f1ba7db147228b3eefc1cf0a7919b7480f",
 }
 EXPECTED_NEW_ANSWER = "أن ليلى تطلب الإذن لأخذ كتاب."
+REVALIDATION = {
+    "date": "2026-09-05",
+    "gate_c_artifact": "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u01.json",
+    "scope": ["ar-a1-u01-p04 answer q3"],
+    "gate_b_language_recheck": "PASS",
+    "reason": "Gate C repaired one contextual-sense answer; the replacement was rechecked for MSA grammar/naturalness and the Gate B learner-facing hash was rebound to exact-current content.",
+    "release_claim": False,
+}
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -61,9 +71,21 @@ def learner_hash(record: dict) -> str:
     return sha256_bytes(raw)
 
 
+def verify_current_gate_b(gate_b: dict, canon_sha: str, current_hashes: dict[str, str], expected_ids: list[str]) -> None:
+    if gate_b.get("canonical_sha256") != canon_sha:
+        raise SystemExit("Gate B current canonical binding does not match Gate C repaired corpus")
+    bdec = {d.get("passage_id"): d for d in gate_b.get("decisions", [])}
+    if set(bdec) != set(expected_ids):
+        raise SystemExit("unexpected A1 Unit 1 Gate B decision scope")
+    for pid in expected_ids:
+        if bdec[pid].get("learner_facing_sha256") != current_hashes[pid]:
+            raise SystemExit(f"{pid}: Gate B current learner-facing hash mismatch")
+    revals = gate_b.get("post_gate_c_revalidations", [])
+    if revals.count(REVALIDATION) != 1:
+        raise SystemExit("Gate B must contain exactly one matching post-Gate-C revalidation")
+
+
 def main() -> None:
-    if OUT.exists():
-        raise SystemExit("refusing to overwrite existing Gate C A1 Unit 1 evidence")
     raw = CANON.read_bytes()
     canon_sha = sha256_bytes(raw)
     if canon_sha == OLD_CANON_SHA:
@@ -131,6 +153,26 @@ def main() -> None:
         "release_claim": False,
         "guard": "Fresh Gate C decisions bind to exact-current learner-facing hashes; this internal comprehension audit does not constitute educator/publication release approval.",
     }
+
+    if OUT.exists():
+        existing = json.loads(OUT.read_text(encoding="utf-8"))
+        if existing != doc:
+            raise SystemExit("existing Gate C A1 Unit 1 evidence differs from exact-current regenerated evidence")
+        verify_current_gate_b(json.loads(GATE_B.read_text(encoding="utf-8")), canon_sha, current_hashes, expected_ids)
+        print(json.dumps({
+            "gate_c_artifact": str(OUT.relative_to(ROOT)),
+            "records_reviewed": 6,
+            "qa_pairs_reviewed": 60,
+            "records_with_findings": 1,
+            "fresh_findings": 1,
+            "gate_b_rebound": True,
+            "canonical_sha256": canon_sha,
+            "idempotent_verification": True,
+            "quality_promotion": False,
+            "release_claim": False,
+        }, ensure_ascii=False, indent=2))
+        return
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
@@ -146,14 +188,10 @@ def main() -> None:
     gate_b["canonical_sha256"] = canon_sha
     for pid in expected_ids:
         bdec[pid]["learner_facing_sha256"] = current_hashes[pid]
-    gate_b.setdefault("post_gate_c_revalidations", []).append({
-        "date": "2026-09-05",
-        "gate_c_artifact": "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u01.json",
-        "scope": ["ar-a1-u01-p04 answer q3"],
-        "gate_b_language_recheck": "PASS",
-        "reason": "Gate C repaired one contextual-sense answer; the replacement was rechecked for MSA grammar/naturalness and the Gate B learner-facing hash was rebound to exact-current content.",
-        "release_claim": False,
-    })
+    revals = gate_b.setdefault("post_gate_c_revalidations", [])
+    if REVALIDATION in revals:
+        raise SystemExit("unexpected duplicate Gate B post-Gate-C revalidation before first Gate C record")
+    revals.append(REVALIDATION)
     GATE_B.write_text(json.dumps(gate_b, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     print(json.dumps({
@@ -164,6 +202,7 @@ def main() -> None:
         "fresh_findings": 1,
         "gate_b_rebound": True,
         "canonical_sha256": canon_sha,
+        "idempotent_verification": False,
         "quality_promotion": False,
         "release_claim": False,
     }, ensure_ascii=False, indent=2))
