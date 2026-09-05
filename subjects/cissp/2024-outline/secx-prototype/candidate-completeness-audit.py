@@ -41,6 +41,19 @@ REVIEW_ONLY_MARKERS = (
     "BROWSER_FIXTURES.md",
     "RELEASE_BOUNDARY.md",
 )
+RESILIENCE_MARKERS = (
+    "frame.dataset.secxExpandedState='loading'",
+    "frame.dataset.secxExpandedState='error'",
+    "frame.dataset.secxExpandedState='ready'",
+    "loadStatus.id='secxExpandedStatus'",
+    "loadStatus.setAttribute('role','alert')",
+    "The conservative knowledge web remains available.",
+    "doc.addEventListener('error'",
+    "win.addEventListener('error'",
+    "projectionSearch.onload=readyExpanded",
+    "if(frame.dataset.secxExpandedState==='error')return;",
+    "Expanded review layer ready.",
+)
 
 
 def fail(message: str) -> None:
@@ -84,6 +97,9 @@ def main() -> None:
         require(next_html.count(dependency) == 1, f"runtime dependency must appear exactly once in next.html: {dependency}")
         positions.append(next_html.index(dependency))
     require(positions == sorted(positions) and len(set(positions)) == len(positions), "expanded runtime dependency order drifted")
+
+    for marker in RESILIENCE_MARKERS:
+        require(marker in next_html, f"expanded runtime fail-visible readiness contract is missing: {marker}")
 
     for marker in REVIEW_ONLY_MARKERS:
         require(marker not in next_html, f"review-only artifact is learner-loaded or referenced by next.html: {marker}")
@@ -133,7 +149,7 @@ def main() -> None:
         "PASS secx_candidate_completeness_audit "
         f"runtime_dependencies={len(EXPECTED_RUNTIME)} local_runtime_js={len(LOCAL_RUNTIME)} "
         f"candidate_audits={len(audit_paths)} browser_smokes={len(smoke_shells)} "
-        "entrypoint=ordered+single-load reviewer_only=isolated workflow=fully-wired"
+        "entrypoint=ordered+single-load+fail-visible reviewer_only=isolated workflow=fully-wired"
     )
 
 
