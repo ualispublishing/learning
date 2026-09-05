@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A1",
+  "unit": 8,
+  "date": "2026-09-05",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/a1/passages.jsonl",
+  "canonical_sha256": "41f4c10a7d7f99d12f33113849b0c0e7d10269485830bc97c6ac7af15200c5b8",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 5,
+  "fresh_findings": 10,
+  "decisions": [
+    {
+      "passage_id": "ar-a1-u08-p01",
+      "learner_facing_sha256": "24a5c7fabedb78e47b1e5161405d6067ce68df98520bf9223b76b91f26363d1d",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u08-p01-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original feeling cloze also admits يحس and similar verbs. Constrain it to the reviewed يشعر/يصل contrast."
+        },
+        {
+          "finding_id": "ar-a1-u08-p01-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original missing-book cloze admits several nouns for a difficulty or need. Constrain it to the مشكلة/مساعدة contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u08-p02",
+      "learner_facing_sha256": "6e00cc4f31e08de2785d0892bc6002f545255f0e336da60f3b7a1383caf8b158",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u08-p02-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original need cloze admits ضرورة and similar nouns. Constrain it to the حاجة/مساعدة contrast."
+        },
+        {
+          "finding_id": "ar-a1-u08-p02-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original request cloze can take many requested objects. Constrain it to the مساعدة/حاجة contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u08-p03",
+      "learner_facing_sha256": "264391018e592b7e98046e66231a2f67cbae98c6677cb0cf0abfd490dc93f822",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u08-p03-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original hand cloze allows other body parts or instruments. Constrain it to the يدي/رأسي contrast."
+        },
+        {
+          "finding_id": "ar-a1-u08-p03-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original hat cloze allows other locations. Constrain it to the رأسي/يدي contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u08-p04",
+      "learner_facing_sha256": "65dc3c62992870397bb3d98cc9e74838ce85c7e00b2a93d6571a29d789ac9fdf",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u08-p04-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original pulse cloze can refer to several body locations. Constrain it to the قلبي/يدي contrast."
+        },
+        {
+          "finding_id": "ar-a1-u08-p04-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original state cloze admits synonyms such as سليمًا. Constrain it to the سالمًا/متعبًا contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u08-p05",
+      "learner_facing_sha256": "1113e26cd1f0d6f1b56b18184d95b1e1e0f6bb81c04dd48d6fe683674f701d18",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u08-p05-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original attempt cloze admits أريد, أستطيع, and other verbs. Constrain it to the سأحاول/سأرفض contrast."
+        },
+        {
+          "finding_id": "ar-a1-u08-p05-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original post-sleep cloze admits طاقة and other nouns. Constrain it to the قوة/مشكلة contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u08-p06",
+      "learner_facing_sha256": "cc5388925d4738353962fecfdb221f20fd546b62ff3a6fdff8df2a629cc95ac8",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions bind by authoritative per-record Gate B packet hashes; the level SHA records the review-time snapshot."
+}
