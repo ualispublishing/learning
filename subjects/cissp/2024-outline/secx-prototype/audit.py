@@ -191,8 +191,22 @@ check(interval_literal in production_app, "production Atlas interval schedule ch
 check(interval_literal in learner_state, "SecX card interval schedule does not match production Atlas")
 check(graph_progress_key in learner_state, "SecX graph-specific learner state key missing")
 check("reveals" in learner_state and "exposure only" in learner_state, "scenario reveal evidence is not explicitly separated from mastery")
-scenario_state_block = re.search(r"graphState\.scenarios.*?saveGraph\(\)", learner_state, re.S)
-check(bool(scenario_state_block) and "correct" not in scenario_state_block.group(0).lower(), "scenario graph state appears to record correctness")
+scenario_state_block = re.search(r"if\(n\.kind==='scenario'&&depth>=4.*?\n  \}", learner_state, re.S)
+check(bool(scenario_state_block), "scenario reveal mutation block not found")
+if scenario_state_block:
+    scenario_text = scenario_state_block.group(0).lower()
+    check("graphstate.scenarios" in scenario_text and "reveals" in scenario_text, "scenario reveal block no longer records exposure")
+    check("correct" not in scenario_text and "mastery" not in scenario_text, "scenario reveal mutation appears to record correctness/mastery")
+api_block = re.search(r"const learnerApi=Object\.freeze\(\{(.*?)\}\);", learner_state, re.S)
+check(bool(api_block), "SecX learner state no longer exports a frozen read-only API")
+if api_block:
+    api_text = api_block.group(1)
+    for token in ("progressKey:ATLAS_PROGRESS_KEY", "cardState", "cardStatus", "isDue", "isMature", "todayISO"):
+        check(token in api_text, f"learner API missing read contract: {token}")
+    for forbidden in ("gradeCard", "saveAtlas", "saveGraph", "setItem"):
+        check(forbidden not in api_text, f"learner API exposes mutation capability: {forbidden}")
+check("Object.defineProperty(window,'SECX_LEARNER'" in learner_state, "SECX_LEARNER export missing")
+check("syncAtlas()" in learner_state and "atlasRaw" in learner_state, "learner API no longer resynchronizes underlying Atlas storage")
 check("dataset.secDetailClose='true'" in learner_state and "window.ascend()" in learner_state, "touch Close control no longer maps to existing Escape/ascend behavior")
 check("dataset.secDetailOpen='true'" in learner_state and "window.descend()" in learner_state, "touch Open control no longer maps to existing Enter/descend behavior")
 check("dataset.secDetailMore='true'" in learner_state and "depth=depth%4+1;window.showDetail()" in learner_state, "touch Depth control no longer mirrors Space disclosure cycling")
@@ -219,5 +233,5 @@ print(
     f"manifest_files={len(seen_manifest_files)} "
     f"explicit_subtopic_edges={explicit_subtopic_edges} "
     f"questions_with_explicit_subtopic_edge={questions_with_explicit_subtopic_edge} "
-    "learner_state=atlas-compatible+graph-separated+touch-controls"
+    "learner_state=atlas-compatible+graph-separated+read-only-api+touch-controls"
 )
