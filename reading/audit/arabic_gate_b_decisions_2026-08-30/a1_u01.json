@@ -7,7 +7,7 @@
   "date": "2026-08-30",
   "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
   "canonical_path": "reading/arabic/a1/passages.jsonl",
-  "canonical_sha256": "bbc91220ddf54e0f26765570071bcd7b8e099613ddab0f8e5dba995e7569ed1c",
+  "canonical_sha256": "a5aabb5a8441119ee190dfa412b3f44979cb7c7a864a938197219b66ea5a3b93",
   "records_reviewed": 6,
   "records_with_findings": 6,
   "fresh_findings": 18,
@@ -86,7 +86,7 @@
     },
     {
       "passage_id": "ar-a1-u01-p04",
-      "learner_facing_sha256": "9f626a0e176e09696b84df528ffbd17dc3b78f035a0c63ba9d88df931d0896f3",
+      "learner_facing_sha256": "fdd88af7323f8da4f414fe47f195b25ab73c0a5a822a3a6c99ac8f960a3f273d",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 4,
       "findings": [
@@ -207,5 +207,17 @@
   ],
   "quality_promotion": false,
   "release_claim": false,
-  "guard": "Learner-facing hashes are copied from the freshly rebuilt authoritative Gate B inventory and revalidated by sync_arabic_gate_b_progress.py."
+  "guard": "Learner-facing hashes are copied from the freshly rebuilt authoritative Gate B inventory and revalidated by sync_arabic_gate_b_progress.py.",
+  "post_gate_c_revalidations": [
+    {
+      "date": "2026-09-05",
+      "gate_c_artifact": "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u01.json",
+      "scope": [
+        "ar-a1-u01-p04 answer q3"
+      ],
+      "gate_b_language_recheck": "PASS",
+      "reason": "Gate C repaired one contextual-sense answer; the replacement was rechecked for MSA grammar/naturalness and the Gate B learner-facing hash was rebound to exact-current content.",
+      "release_claim": false
+    }
+  ]
 }

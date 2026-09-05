@@ -1,7 +1,7 @@
 {
   "schema_version": 3,
   "project_id": "LANG-A1C2",
-  "updated": "2026-08-31",
+  "updated": "2026-09-05",
   "state_type": "RELEASE_EVIDENCE_ONLY",
   "purpose": "Independent educator/publication release evidence and decisions. This file is not a live generation counter; consult reading/STATUS.json for current production counts and frontier.",
   "production_status_source": "reading/STATUS.json",
@@ -99,7 +99,8 @@
         "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u07.json",
         "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u08.json",
         "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u09.json",
-        "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u10.json"
+        "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u10.json",
+        "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u01.json"
       ],
       "open_release_classes": [
         "substantive resolution of fresh deterministic release-evidence blockers (no bulk promotion)",
@@ -227,6 +228,29 @@
           "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u09.json",
           "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u10.json"
         ]
+      },
+      "comprehension_review_progress": {
+        "status": "FRESH_GATE_C_INTERNAL_REVIEW_IN_PROGRESS",
+        "records_in_scope": 360,
+        "qa_pairs_in_scope": 3600,
+        "fresh_records_reviewed": 6,
+        "fresh_qa_pairs_reviewed": 60,
+        "fresh_records_with_findings": 1,
+        "fresh_findings": 1,
+        "review_order": [
+          "A1",
+          "A2",
+          "B1",
+          "B2",
+          "C1",
+          "C2"
+        ],
+        "levels_completed": [],
+        "decision_artifacts": [
+          "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u01.json"
+        ],
+        "guard": "Gate C is a fresh internal comprehension/answer-grounding audit using the authoritative Gate B packet learner-facing hash definition; it does not substitute for independent educator/native/blind release gates.",
+        "next_step": "Continue ordered fresh Gate C review unit by unit; repair only exact-current answerability, grounding, ambiguity, reference, inference, summary, and contextual-sense defects."
       }
     },
     "french": {

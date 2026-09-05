@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A1",
+  "unit": 1,
+  "date": "2026-09-05",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/a1/passages.jsonl",
+  "canonical_sha256": "a5aabb5a8441119ee190dfa412b3f44979cb7c7a864a938197219b66ea5a3b93",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 1,
+  "fresh_findings": 1,
+  "decisions": [
+    {
+      "passage_id": "ar-a1-u01-p01",
+      "learner_facing_sha256": "47bb8383fa776fef52b074fbee12d3d17ba32b93618683b8486e351735b8c5c7",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a1-u01-p02",
+      "learner_facing_sha256": "8f372fe648ebc29a3ee291aef03b51140f0c171a9e4dff74d24e0a0b3bbcd56c",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a1-u01-p03",
+      "learner_facing_sha256": "db8b249d70d529c34a7a2db24b7b291c3240be89dece568bb32c4dccb693866c",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a1-u01-p04",
+      "learner_facing_sha256": "fdd88af7323f8da4f414fe47f195b25ab73c0a5a822a3a6c99ac8f960a3f273d",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u01-p04-gC-01",
+          "field": "answer q3",
+          "dimension": "vocabulary_sense_grounding",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The question asks for the contextual meaning of «يمكن» in a permission request («هل يمكن أن آخذ كتابا؟»), but the key gave only generic possibility; repair the key to state that Leila is asking permission to take a book."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u01-p05",
+      "learner_facing_sha256": "d3b7cb444d9917395795941b60ec4ef8ae9450324d8f01dc72b90126200fd284",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a1-u01-p06",
+      "learner_facing_sha256": "7cc0f20774fb9bd79e26e80fd3da63f1ba7db147228b3eefc1cf0a7919b7480f",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions use the authoritative Gate B packet learner-facing hash definition and bind to exact-current content; this internal comprehension audit does not constitute educator/publication release approval."
+}

@@ -1,6 +1,6 @@
 # LANG-A1C2 Active Verification Queue
 
-Updated: 2026-09-04
+Updated: 2026-09-05
 
 This is the live verification queue only. Completed audit waves and detailed evidence remain in `reading/audit/` and Git history. Release claims are controlled by `reading/RELEASE_STATUS.json`.
 
@@ -99,6 +99,8 @@ C2 Unit 9 Gate B evidence: `reading/audit/arabic_gate_b_decisions_2026-08-30/c2_
 
 C2 Unit 10 Gate B evidence: `reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u10.json` — 6 current-corpus records reviewed and repaired, with 19 fresh high-confidence summary/detail assessment-alignment/naturalness/grammar findings closed. Fresh Gate B progress is now 360/360 records; C2 Gate B and the corpus-wide fresh Gate B internal review are complete; this is not an educator/publication release claim.
 
+A1 Unit 1 Gate C evidence: `reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u01.json` — 6 exact-current records / 60 question-answer pairs reviewed; 1 contextual-sense answer-key defect in `ar-a1-u01-p04/q3` repaired and 5 records recorded as clean PASS. Fresh Gate C progress is 6/360 records and 60/3,600 Q/A pairs; this is an internal comprehension/answer-grounding audit, not an educator/publication release claim.
+
 - [x] fresh deterministic educator-release revalidation;
 - [x] close the 10 fresh deterministic Unicode NFC findings with a byte-bounded normalization-only repair;
 - [ ] substantively resolve the fresh deterministic release-evidence blockers without bulk-promoting draft/pending metadata;
@@ -137,6 +139,7 @@ C2 Unit 10 Gate B evidence: `reading/audit/arabic_gate_b_decisions_2026-08-30/c2
 - [x] Arabic C2 Unit 8 Gate B batch: reviewed 6 passages / 60 questions / 60 answers; closed 6 fresh summary-answer assessment-alignment findings across all 6 records with hash-bound decision evidence;
 - [x] Arabic C2 Unit 9 Gate B batch: reviewed 6 passages / 60 questions / 60 answers; closed 12 fresh summary-answer assessment-alignment/naturalness findings across all 6 records with hash-bound decision evidence;
 - [x] Arabic C2 Unit 10 Gate B batch: reviewed 6 passages / 60 questions / 60 answers; closed 19 fresh summary/detail assessment-alignment/naturalness/grammar findings across all 6 records with hash-bound decision evidence; C2 and corpus-wide fresh Gate B internal review are complete;
+- [x] Arabic A1 Unit 1 Gate C batch: reviewed 6 passages / 60 question-answer pairs; repaired 1 contextual-sense answer-key defect in `ar-a1-u01-p04/q3`, recorded 5 clean PASS records, and rebound affected Gate B evidence to exact-current learner-facing hashes; Gate C is 6/360 records and remains internal-only;
 - [x] corpus-wide Arabic grammar-in-context naturalness audit (fresh Gate B internal review complete; separate semantic/educator/native/blind release gates remain open);
 - [ ] full passage language/question/answer semantic review;
 - [ ] independent professional/native and model-family disagreement passes;
