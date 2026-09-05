@@ -7,14 +7,14 @@
   "date": "2026-08-31",
   "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
   "canonical_path": "reading/arabic/a1/passages.jsonl",
-  "canonical_sha256": "6fc4f6a502fd0c89a91d50102c6144cc1e40a6b7b3cde2c1d12fd45136dbf281",
+  "canonical_sha256": "340c685c05d8a596fcc3f333341b39b6df90a46b9e391c42ec975dafe985dc4d",
   "records_reviewed": 6,
   "records_with_findings": 6,
   "fresh_findings": 16,
   "decisions": [
     {
       "passage_id": "ar-a1-u04-p01",
-      "learner_facing_sha256": "fad03007b5eedfc2f4a1d6a687ab5ff4619fea29b82bba74bd0426178cf05a11",
+      "learner_facing_sha256": "37cb71138d8d9dfded1af6079bbfc4c81f868dbf50160dfc856418bd160aa067",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 4,
       "findings": [
@@ -134,7 +134,7 @@
     },
     {
       "passage_id": "ar-a1-u04-p05",
-      "learner_facing_sha256": "b18d8a8d5efed737882b1e624aa186b64869dae84691e8000d315e1c35c17742",
+      "learner_facing_sha256": "0b3ad72ed1f34f4ae5f0fd68138d56ebc185a03a01e3b0acde800ddac0f4e1a4",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 3,
       "findings": [
@@ -191,5 +191,18 @@
   ],
   "quality_promotion": false,
   "release_claim": false,
-  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer.",
+  "post_gate_c_revalidations": [
+    {
+      "date": "2026-09-05",
+      "gate_c_artifact": "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u04.json",
+      "scope": [
+        "ar-a1-u04-p01 question q10",
+        "ar-a1-u04-p05 question q9"
+      ],
+      "gate_b_language_recheck": "PASS",
+      "reason": "Gate C constrained two open clozes so the intended kinship and spatial answers are uniquely defensible; replacements were rechecked for A1 MSA wording and Gate B was rebound to exact-current learner-facing content.",
+      "release_claim": false
+    }
+  ]
 }

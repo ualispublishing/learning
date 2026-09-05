@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A1",
+  "unit": 4,
+  "date": "2026-09-05",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/a1/passages.jsonl",
+  "canonical_sha256": "340c685c05d8a596fcc3f333341b39b6df90a46b9e391c42ec975dafe985dc4d",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 2,
+  "fresh_findings": 2,
+  "decisions": [
+    {
+      "passage_id": "ar-a1-u04-p01",
+      "learner_facing_sha256": "37cb71138d8d9dfded1af6079bbfc4c81f868dbf50160dfc856418bd160aa067",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u04-p01-gC-01",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original cloze «هذا والدي؛ هو ___ي» admits both أب and والد as valid kinship completions, so the keyed أب was not unique. Constrain the item to a choice between أب and ابن while preserving the keyed target."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u04-p02",
+      "learner_facing_sha256": "f24e17c93d2d25ec52e76cd797e14652234f89e5915651bf3b4b2ecf6072d7f8",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a1-u04-p03",
+      "learner_facing_sha256": "b90880d4e9cf5460c2b9ca5fb08e4ff9264cc076888fb2afe6a0cc3c8fc686f1",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a1-u04-p04",
+      "learner_facing_sha256": "9ba2a0ee057e272698d956e6c780da5c332aba783fd8a8b2dc1104e5bdddebb0",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a1-u04-p05",
+      "learner_facing_sha256": "0b3ad72ed1f34f4ae5f0fd68138d56ebc185a03a01e3b0acde800ddac0f4e1a4",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u04-p05-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original cloze «يقف الطالب ___ المعلم» admits several plausible spatial relations. Add the explicit condition that the teacher is behind the student so أمام is uniquely grounded."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u04-p06",
+      "learner_facing_sha256": "5bee7d2ac90cd1e1f2fa52ff6c15aaa822f5f3398248888a917ae5f7cf13a9fa",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions bind by authoritative per-record Gate B packet hashes; the level SHA records the review-time snapshot."
+}
