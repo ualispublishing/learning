@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "C2",
+  "unit": 9,
+  "date": "2026-09-05",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/c2/passages.jsonl",
+  "canonical_sha256": "2d089f62538955e0c454f31799032115842608c386c9c8442dee45834f4044fc",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 12,
+  "decisions": [
+    {
+      "passage_id": "ar-c2-u09-p01",
+      "learner_facing_sha256": "85c3547c91b4ebec0aad2ed918cdbf7cfebd4b8220cfec858934f27aea802ff4",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u09-p01-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is the same nominal phrase reused across six distinct passages; replace it with a complete passage-specific declarative summary of the organizing issue."
+        },
+        {
+          "finding_id": "ar-c2-u09-p01-gB-02",
+          "field": "text",
+          "dimension": "naturalness",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The coordination «قاسوا ليس ... فقط، بل ...» is a calque-like negation pattern in MSA; use the idiomatic «لم يقيسوا ... فقط، بل قاسوا ...»."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u09-p02",
+      "learner_facing_sha256": "db54fc44622354e9f36bf8d12519a8d7f4482bfdcc7bcb978f07570d5498c7e8",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u09-p02-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is the same nominal phrase reused across six distinct passages; replace it with a complete passage-specific declarative summary of the organizing issue."
+        },
+        {
+          "finding_id": "ar-c2-u09-p02-gB-02",
+          "field": "text",
+          "dimension": "naturalness",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The adverbial phrase «استخدم الفريق المتوسطات منفصلة» is awkward because the averages are being considered separately; use an idiomatic construction such as «تعامل ... مع المتوسطات على نحو منفصل»."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u09-p03",
+      "learner_facing_sha256": "4f14e05cfcbf7cbdfb0846f25785b7cfecdb85539a0edbf67601474b060d031f",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 3,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u09-p03-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is the same nominal phrase reused across six distinct passages; replace it with a complete passage-specific declarative summary of the organizing issue."
+        },
+        {
+          "finding_id": "ar-c2-u09-p03-gB-02",
+          "field": "text",
+          "dimension": "naturalness",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The phrase «يزيد عدد المراجعين المسؤولية الموزعة» is semantically and collocationally awkward; express diffusion explicitly as «يزيد ... من تشتت المسؤولية»."
+        },
+        {
+          "finding_id": "ar-c2-u09-p03-gB-03",
+          "field": "text",
+          "dimension": "naturalness",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The sequence «اختبارات دورية تدخل حالات ... وتقيس هل» is not idiomatic MSA; tests «تتضمن حالات» and measure «ما إذا» reviewers detect them."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u09-p04",
+      "learner_facing_sha256": "46c6b942399aa9988614a5605e097a78874a56469d3df6cdf5668365f500e85b",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u09-p04-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is the same nominal phrase reused across six distinct passages; replace it with a complete passage-specific declarative summary of the organizing issue."
+        },
+        {
+          "finding_id": "ar-c2-u09-p04-gB-02",
+          "field": "text",
+          "dimension": "naturalness",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The phrase «كوفئت السرعات منفصلة» treats speeds themselves as reward recipients and uses an awkward adverbial; state that each team is rewarded separately for speed."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u09-p05",
+      "learner_facing_sha256": "da8f3b1cb8757f82bed57b41f9d70c7c955a1ca3abba25caad037a011546737c",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u09-p05-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is the same nominal phrase reused across six distinct passages; replace it with a complete passage-specific declarative summary of the organizing issue."
+        },
+        {
+          "finding_id": "ar-c2-u09-p05-gB-02",
+          "field": "text",
+          "dimension": "naturalness",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The phrase «نجاح لوظيفة التجربة» is an unnatural relation in MSA; state that stopping can be a success for the experiment in performing its function."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u09-p06",
+      "learner_facing_sha256": "b552e06e5df1f0a0d681f58800742497c150dae9eebb464da98995e3bdbce12a",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u09-p06-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is the same nominal phrase reused across six distinct passages; replace it with a complete passage-specific declarative summary of the organizing issue."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. C2 internal Gate B evidence does not constitute educator/publication release approval."
+}
