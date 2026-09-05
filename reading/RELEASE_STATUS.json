@@ -100,7 +100,8 @@
         "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u08.json",
         "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u09.json",
         "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u10.json",
-        "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u01.json"
+        "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u01.json",
+        "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u02.json"
       ],
       "open_release_classes": [
         "substantive resolution of fresh deterministic release-evidence blockers (no bulk promotion)",
@@ -233,10 +234,10 @@
         "status": "FRESH_GATE_C_INTERNAL_REVIEW_IN_PROGRESS",
         "records_in_scope": 360,
         "qa_pairs_in_scope": 3600,
-        "fresh_records_reviewed": 6,
-        "fresh_qa_pairs_reviewed": 60,
-        "fresh_records_with_findings": 1,
-        "fresh_findings": 1,
+        "fresh_records_reviewed": 12,
+        "fresh_qa_pairs_reviewed": 120,
+        "fresh_records_with_findings": 2,
+        "fresh_findings": 2,
         "review_order": [
           "A1",
           "A2",
@@ -247,9 +248,10 @@
         ],
         "levels_completed": [],
         "decision_artifacts": [
-          "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u01.json"
+          "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u01.json",
+          "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u02.json"
         ],
-        "guard": "Gate C is a fresh internal comprehension/answer-grounding audit using the authoritative Gate B packet learner-facing hash definition; it does not substitute for independent educator/native/blind release gates.",
+        "guard": "Gate C is a fresh internal comprehension/answer-grounding audit; current validity is bound by exact per-record Gate B packet learner-facing hashes, while each unit artifact retains its review-time level SHA.",
         "next_step": "Continue ordered fresh Gate C review unit by unit; repair only exact-current answerability, grounding, ambiguity, reference, inference, summary, and contextual-sense defects."
       }
     },

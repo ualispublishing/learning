@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A1",
+  "unit": 2,
+  "date": "2026-09-05",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/a1/passages.jsonl",
+  "canonical_sha256": "5a200a6299efb097e578e5b61477e99d7d8f51274402c148305f8d603708b7c6",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 1,
+  "fresh_findings": 1,
+  "decisions": [
+    {
+      "passage_id": "ar-a1-u02-p01",
+      "learner_facing_sha256": "eebdf2033a2935560fe19bffeab13564c82ea2a8610e613a284db3242345d83a",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u02-p01-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original cloze «أغسل يدي _____ الطعام» admits both قبل and بعد as grammatical, plausible answers, so the keyed قبل was not unique. Constrain the prompt to the earlier-time relation while preserving the target and keyed answer."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u02-p02",
+      "learner_facing_sha256": "66490225ea2e10231f1287b67d5efb06477f11813ea81e791d55714cfebd777d",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a1-u02-p03",
+      "learner_facing_sha256": "dbefbdd6fdba739d31566c6ac9a3e84b39695dc82dc78fbfa4e5f316989778f1",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a1-u02-p04",
+      "learner_facing_sha256": "251db0bfd0a1ad67980db2e8855e692290cae7468507b11d678e0689b1be40c8",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a1-u02-p05",
+      "learner_facing_sha256": "ca99c0dadb4db643a43c614a3e7bce56bd4844c7d93e18d82c684a2b09e2408b",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "passage_id": "ar-a1-u02-p06",
+      "learner_facing_sha256": "edb2ae3ad728da96369583a34f950aeb627da147052da00c66e0dd86709945e0",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions bind by authoritative per-record Gate B packet hashes; the level SHA records the review-time snapshot and does not replace exact-current record validation."
+}

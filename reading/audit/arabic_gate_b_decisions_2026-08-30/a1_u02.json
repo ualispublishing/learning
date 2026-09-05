@@ -7,14 +7,14 @@
   "date": "2026-08-31",
   "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
   "canonical_path": "reading/arabic/a1/passages.jsonl",
-  "canonical_sha256": "56afae7c5cff90c15f81427fe5ea5bb0a69baf016525318932e11d4708fbf824",
+  "canonical_sha256": "5a200a6299efb097e578e5b61477e99d7d8f51274402c148305f8d603708b7c6",
   "records_reviewed": 6,
   "records_with_findings": 6,
   "fresh_findings": 12,
   "decisions": [
     {
       "passage_id": "ar-a1-u02-p01",
-      "learner_facing_sha256": "ee818e3fed88d1b712409db5a3778c329abdea0ed92881f5bf505162156901f7",
+      "learner_facing_sha256": "eebdf2033a2935560fe19bffeab13564c82ea2a8610e613a284db3242345d83a",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 3,
       "findings": [
@@ -159,5 +159,17 @@
   ],
   "quality_promotion": false,
   "release_claim": false,
-  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer.",
+  "post_gate_c_revalidations": [
+    {
+      "date": "2026-09-05",
+      "gate_c_artifact": "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u02.json",
+      "scope": [
+        "ar-a1-u02-p01 question q9"
+      ],
+      "gate_b_language_recheck": "PASS",
+      "reason": "Gate C constrained one ambiguous transfer prompt so the keyed قبل is uniquely defensible; the replacement was rechecked for A1 MSA wording and Gate B was rebound to exact-current learner-facing content.",
+      "release_claim": false
+    }
+  ]
 }
