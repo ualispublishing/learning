@@ -3,15 +3,14 @@
 
 const DUE_PAGE_SIZE=16;
 let duePage=0;
+const learner=window.SECX_LEARNER;
+if(!learner)throw new Error('SecX learner API unavailable before Due Reviews');
 
-function progressState(id){
-  try{return JSON.parse(localStorage.getItem('cissp_atlas_progress_v1')||'{}').cards?.[id]||null}catch{return null}
-}
-function todayISO(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function progressState(id){return learner.cardState(id)}
+function todayISO(){return learner.todayISO()}
 function dueCards(){
-  const today=todayISO();
   return (typeof retrievalCards!=='undefined'?retrievalCards:[])
-    .filter(c=>{const s=progressState(c.id);return !!s&&s.due<=today})
+    .filter(c=>learner.isDue(c.id))
     .sort((a,b)=>(progressState(a.id)?.due||'').localeCompare(progressState(b.id)?.due||'')||String(a.id).localeCompare(String(b.id)));
 }
 function cardDetails(c){return{rule:c.front,why:c.direct||'Retrieve the answer before revealing this layer.',traps:[c.trap||'Distinguish the nearest confusable concept.'],sources:(c.source_ids||[]).map(sourceTitle),practice:'Explain the answer without notes, then state one limitation, tradeoff, or confusable alternative.'}}
@@ -22,8 +21,7 @@ style.textContent=`
 `;
 document.head.appendChild(style);
 const top=document.querySelector('.top'),legend=document.querySelector('.legend');
-const dueButton=document.createElement('button');
-dueButton.id='dueReviewBtn';dueButton.className='sec-due-button';dueButton.type='button';
+const dueButton=document.createElement('button');dueButton.id='dueReviewBtn';dueButton.className='sec-due-button';dueButton.type='button';
 if(top)top.insertBefore(dueButton,legend||null);
 
 function updateDueButton(){const count=dueCards().length;dueButton.textContent=`Review due · ${count}`;dueButton.setAttribute('aria-label',`Review ${count} due retrieval cards`)}
@@ -85,6 +83,6 @@ document.addEventListener('click',e=>{
   },0);
 });
 
-addEventListener('storage',e=>{if(e.key==='cissp_atlas_progress_v1')updateDueButton()});
+addEventListener('storage',e=>{if(e.key===learner.progressKey)updateDueButton()});
 updateDueButton();
 })();
