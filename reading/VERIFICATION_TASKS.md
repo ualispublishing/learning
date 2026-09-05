@@ -21,9 +21,9 @@ Fresh Gate 0 evidence: `reading/audit/post_generation_gate0_2026-08-30.json` (ex
 
 Current generation: 360/360 complete.
 
-Current release position: fresh deterministic revalidation is **FAIL** with **1344** open evidence findings; educator/publication release remains **not ready** under the current assurance profile.
+Current release position: fresh deterministic revalidation is **FAIL** with **1320** open evidence findings; educator/publication release remains **not ready** under the current assurance profile.
 
-Fresh deterministic evidence: `reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json` — 360 records, 3,600 questions, 3,600 answers; status **FAIL**; open findings **1344**. This is a release-evidence gate, not semantic approval.
+Fresh deterministic evidence: `reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json` — 360 records, 3,600 questions, 3,600 answers; status **FAIL**; open findings **1320**. This is a release-evidence gate, not semantic approval.
 
 NFC repair evidence: `reading/audit/arabic_nfc_repair_2026-08-30.json`; the rerun reduced open deterministic findings from **2,506** to **2,496** with the Unicode class at zero.
 
@@ -77,6 +77,8 @@ C1 Unit 8 Gate B evidence: `reading/audit/arabic_gate_b_decisions_2026-08-30/c1_
 
 C1 Unit 9 Gate B evidence: `reading/audit/arabic_gate_b_decisions_2026-08-30/c1_u09.json` — 6 current-corpus records reviewed and repaired, with 7 fresh high-confidence assessment-alignment and semantic findings closed. Fresh Gate B progress is now 294/360 records; C1 remains in progress and this is not an educator/publication release claim.
 
+C1 Unit 10 Gate B evidence: `reading/audit/arabic_gate_b_decisions_2026-08-30/c1_u10.json` — 6 current-corpus records reviewed and repaired, with 6 fresh high-confidence assessment-alignment/naturalness findings closed. Fresh Gate B progress is now 300/360 records; C1 Gate B is complete, the next ordered frontier is C2 Unit 1, and this is not an educator/publication release claim.
+
 - [x] fresh deterministic educator-release revalidation;
 - [x] close the 10 fresh deterministic Unicode NFC findings with a byte-bounded normalization-only repair;
 - [ ] substantively resolve the fresh deterministic release-evidence blockers without bulk-promoting draft/pending metadata;
@@ -104,6 +106,7 @@ C1 Unit 9 Gate B evidence: `reading/audit/arabic_gate_b_decisions_2026-08-30/c1_
 - [x] Arabic C1 Unit 7 Gate B batch: reviewed 6 passages / 60 questions / 60 answers; closed 6 fresh summary-answer alignment findings across all 6 records with hash-bound decision evidence;
 - [x] Arabic C1 Unit 8 Gate B batch: reviewed 6 passages / 60 questions / 60 answers; closed 6 fresh summary-answer alignment findings across all 6 records with hash-bound decision evidence;
 - [x] Arabic C1 Unit 9 Gate B batch: reviewed 6 passages / 60 questions / 60 answers; closed 7 fresh findings across all 6 records with hash-bound decision evidence;
+- [x] Arabic C1 Unit 10 Gate B batch: reviewed 6 passages / 60 questions / 60 answers; closed 6 fresh findings across all 6 records with hash-bound decision evidence; C1 Gate B is complete and C2 Unit 1 is next;
 - [ ] corpus-wide Arabic grammar-in-context naturalness audit;
 - [ ] full passage language/question/answer semantic review;
 - [ ] independent professional/native and model-family disagreement passes;
