@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A1",
+  "unit": 5,
+  "date": "2026-09-05",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/a1/passages.jsonl",
+  "canonical_sha256": "61ff9d70be2fbf233db42c694edfe88961210f3e26b2882d1014bd4ffc17bc4a",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 5,
+  "fresh_findings": 10,
+  "decisions": [
+    {
+      "passage_id": "ar-a1-u05-p01",
+      "learner_facing_sha256": "89f1e7b52cbb199420b054e60a75ee093204a180031de5d0ce3a30b71f74bb58",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u05-p01-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original cloze could take both بدأ and يبدأ because no time frame was supplied. Constrain it to a past event and explicit choice."
+        },
+        {
+          "finding_id": "ar-a1-u05-p01-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original arrival cloze could reasonably take يأتي or يعود. Constrain the first-arrival context and provide the contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u05-p02",
+      "learner_facing_sha256": "20cc9dba574c1052d08eb9855f10ea3d7df9ce00b14874627a777280e3287c7b",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u05-p02-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original existential cloze allowed several ways to state presence. Constrain the prompt to the target existence meaning."
+        },
+        {
+          "finding_id": "ar-a1-u05-p02-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original school-role cloze allowed several people who could speak with teachers. Constrain it to the person responsible for the school."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u05-p03",
+      "learner_facing_sha256": "9795568035369a283e050f44f24bef1d7567f96b39249d35a3c3e3ddc4491844",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u05-p03-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original role cloze admitted synonymous task nouns. Constrain it to the reviewed دور/داخل contrast."
+        },
+        {
+          "finding_id": "ar-a1-u05-p03-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original location cloze allowed داخل, خارج, or other location words. Constrain it with an explicit inside/outside contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u05-p04",
+      "learner_facing_sha256": "c3828a585c3a4b8c8bfb845b9883ed36c9e04ea06b11c654349150e2276bc653",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u05-p04-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original verb cloze allowed several actions about a book. Constrain it to the speaking meaning tested by يتحدث."
+        },
+        {
+          "finding_id": "ar-a1-u05-p04-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original office cloze allowed many plausible actions. Constrain it to doing one’s work so يعمل is uniquely intended."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u05-p05",
+      "learner_facing_sha256": "be66cc9c69389afbfdf55cc3d68c38b01c7a343c9a558d6d71012ec403955ee9",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u05-p05-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original future-month cloze allowed المقبل, القادم, التالي and similar answers. Constrain it to the المقبل/الماضي contrast."
+        },
+        {
+          "finding_id": "ar-a1-u05-p05-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original homeward cloze allowed several motion verbs. Constrain it to the يأتي/يعود contrast and explicit return sense."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u05-p06",
+      "learner_facing_sha256": "b0ea75b6d7e67d0bb840873011220b7c4bf7e044801c455d66439aad756b28a6",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions bind by authoritative per-record Gate B packet hashes; the level SHA records the review-time snapshot."
+}

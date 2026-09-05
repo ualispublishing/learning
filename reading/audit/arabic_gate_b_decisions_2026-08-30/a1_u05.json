@@ -7,14 +7,14 @@
   "date": "2026-08-31",
   "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
   "canonical_path": "reading/arabic/a1/passages.jsonl",
-  "canonical_sha256": "1abc3122f5ed396b4e54b78ce5f2493d4212c30a33f57f5e43b1ec52b4af0e26",
+  "canonical_sha256": "61ff9d70be2fbf233db42c694edfe88961210f3e26b2882d1014bd4ffc17bc4a",
   "records_reviewed": 6,
   "records_with_findings": 6,
   "fresh_findings": 13,
   "decisions": [
     {
       "passage_id": "ar-a1-u05-p01",
-      "learner_facing_sha256": "799ba2283396e61a881753a07d0baa1d32ab36d87c897a5408951df29f3e2c05",
+      "learner_facing_sha256": "89f1e7b52cbb199420b054e60a75ee093204a180031de5d0ce3a30b71f74bb58",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 2,
       "findings": [
@@ -38,7 +38,7 @@
     },
     {
       "passage_id": "ar-a1-u05-p02",
-      "learner_facing_sha256": "07dfd7d1112bc6acd0b9b053e01d8af31632dabfe508f1651136f2f17c8324d6",
+      "learner_facing_sha256": "20cc9dba574c1052d08eb9855f10ea3d7df9ce00b14874627a777280e3287c7b",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 2,
       "findings": [
@@ -62,7 +62,7 @@
     },
     {
       "passage_id": "ar-a1-u05-p03",
-      "learner_facing_sha256": "2ad9179c4514ace468dc98ad983abd395478a5ca5c9865e9a08e736f298063e0",
+      "learner_facing_sha256": "9795568035369a283e050f44f24bef1d7567f96b39249d35a3c3e3ddc4491844",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 2,
       "findings": [
@@ -86,7 +86,7 @@
     },
     {
       "passage_id": "ar-a1-u05-p04",
-      "learner_facing_sha256": "af0811be7cf6419fed3a6e92eb4f77d578fb790e387b811c14b2cae01169a404",
+      "learner_facing_sha256": "c3828a585c3a4b8c8bfb845b9883ed36c9e04ea06b11c654349150e2276bc653",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 2,
       "findings": [
@@ -110,7 +110,7 @@
     },
     {
       "passage_id": "ar-a1-u05-p05",
-      "learner_facing_sha256": "62373f6759d36f1c21ba9c6de9f6e5b76c0686781d1055bab2459e1d91a64257",
+      "learner_facing_sha256": "be66cc9c69389afbfdf55cc3d68c38b01c7a343c9a558d6d71012ec403955ee9",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 2,
       "findings": [
@@ -167,5 +167,26 @@
   ],
   "quality_promotion": false,
   "release_claim": false,
-  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer.",
+  "post_gate_c_revalidations": [
+    {
+      "date": "2026-09-05",
+      "gate_c_artifact": "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u05.json",
+      "scope": [
+        "ar-a1-u05-p01 question q9",
+        "ar-a1-u05-p01 question q10",
+        "ar-a1-u05-p02 question q9",
+        "ar-a1-u05-p02 question q10",
+        "ar-a1-u05-p03 question q9",
+        "ar-a1-u05-p03 question q10",
+        "ar-a1-u05-p04 question q9",
+        "ar-a1-u05-p04 question q10",
+        "ar-a1-u05-p05 question q9",
+        "ar-a1-u05-p05 question q10"
+      ],
+      "gate_b_language_recheck": "PASS",
+      "reason": "Gate C constrained ten underdetermined transfer clozes across A1 Unit 5 so each keyed target is uniquely defensible; replacements were rechecked for A1 MSA wording and Gate B was rebound to exact-current learner-facing content.",
+      "release_claim": false
+    }
+  ]
 }
