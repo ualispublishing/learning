@@ -43,6 +43,7 @@ def sha256_bytes(data: bytes) -> str:
 
 
 def learner_payload(record: dict) -> dict:
+    """Match build_arabic_gate_b_naturalness_review.py exactly."""
     answers = {a.get("question_id"): a for a in record.get("answer_key", [])}
     qa = []
     for q in record.get("questions", []):
@@ -54,6 +55,8 @@ def learner_payload(record: dict) -> dict:
             "answer": a.get("answer"),
             "explanation": a.get("explanation", ""),
         })
+    notes = "\n".join(record.get("quality", {}).get("notes", []))
+    has_hist = "naturalness review" in notes.lower() or "naturalness" in notes.lower()
     return {
         "passage_id": record.get("id"),
         "unit": record.get("unit"),
@@ -63,6 +66,7 @@ def learner_payload(record: dict) -> dict:
         "genre": record.get("genre"),
         "text": record.get("text"),
         "qa": qa,
+        "historical_naturalness_note_present": has_hist,
     }
 
 
@@ -151,7 +155,7 @@ def main() -> None:
         "decisions": decisions,
         "quality_promotion": False,
         "release_claim": False,
-        "guard": "Fresh Gate C decisions bind to exact-current learner-facing hashes; this internal comprehension audit does not constitute educator/publication release approval.",
+        "guard": "Fresh Gate C decisions use the authoritative Gate B packet learner-facing hash definition and bind to exact-current content; this internal comprehension audit does not constitute educator/publication release approval.",
     }
 
     if OUT.exists():
