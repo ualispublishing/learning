@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SecX Continue Routing Smoke</title></head>
+<body>
+<pre id="result" data-smoke="running">RUNNING</pre>
+<script>
+localStorage.removeItem('cissp_atlas_progress_v1');
+localStorage.removeItem('cissp_secx_graph_state_v1');
+</script>
+<iframe id="app" src="next.html?continue-smoke=desktop" style="width:1280px;height:900px;border:0"></iframe>
+<iframe id="mobile" src="next.html?continue-smoke=mobile" style="width:390px;height:844px;border:0"></iframe>
+<script>
+(()=>{'use strict';
+const result=document.querySelector('#result'),frame=document.querySelector('#app'),mobile=document.querySelector('#mobile');
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;while(Date.now()<end){try{const v=fn();if(v)return v}catch{}await sleep(50)}throw new Error(`Timed out waiting for ${label}`)}
+function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
+function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow}}
+async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),cards=x.w?.SECX_RELEASED_CARDS;return x.d&&x.w&&Array.isArray(cards)&&cards.length===x.w.CISSP_META?.meta?.card_count&&x.d.querySelector('#continueStudyBtn')&&x.d.querySelector('#studyQueueBtn')&&x.d.querySelector('#dueReviewBtn')?x:null},`${label} Continue learner runtime`)}
+function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
+function graphTarget(w){return [...w.document.querySelectorAll('.node.active')].find(el=>el.isConnected)||w.document.body||w.document.documentElement}
+function key(w,key,code=key){graphTarget(w).dispatchEvent(new w.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
+async function backToRoot(d,w){if(d.querySelector('#crumb')?.textContent==='SecX')return;key(w,'Escape','Escape');await sleep(60);if(d.querySelector('#crumb')?.textContent!=='SecX'){key(w,'Escape','Escape');await waitFor(()=>d.querySelector('#crumb')?.textContent==='SecX','return to SecX root')}}
+function isoOffset(days){const d=new Date();d.setDate(d.getDate()+days);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function writeCards(w,cards){w.localStorage.setItem('cissp_atlas_progress_v1',JSON.stringify({cards}));w.dispatchEvent(new w.StorageEvent('storage',{key:'cissp_atlas_progress_v1'}))}
+async function run(){
+  const {d,w}=await ready(frame,'desktop'),cards=w.SECX_RELEASED_CARDS,continueButton=d.querySelector('#continueStudyBtn');
+  const d1Fresh=cards.filter(c=>c.domain_num===1).sort((a,b)=>String(a.objective).localeCompare(String(b.objective))||String(a.id).localeCompare(String(b.id)))[0];
+  assert(d1Fresh,'fresh D1 card exists');
+  await waitFor(()=>continueButton.textContent==='Continue · New D1','fresh state prioritizes new card in lowest-score D1');
+  continueButton.click();
+  await waitFor(()=>node(d,'study:list:new')&&node(d,d1Fresh.id)?.classList.contains('active')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue › New cards','Continue routes fresh state to selected weakest-domain new card');
+  await backToRoot(d,w);
+
+  const learningCard=cards.find(c=>c.domain_num===2&&c.id!==d1Fresh.id)||cards.find(c=>c.id!==d1Fresh.id);assert(learningCard,'learning fixture card exists');
+  const learningState={[learningCard.id]:{stage:1,due:isoOffset(3),reviews:1,last_grade:2,last_review:isoOffset(0)}};
+  writeCards(w,learningState);
+  await waitFor(()=>continueButton.textContent==='Continue · Learning','learning state overrides new-card fallback');
+  continueButton.click();
+  await waitFor(()=>node(d,'study:list:learning')&&node(d,learningCard.id)?.classList.contains('active')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue › Learning cards','Continue routes to selected learning card');
+  await backToRoot(d,w);
+
+  const dueCard=cards.find(c=>c.domain_num===3&&c.id!==learningCard.id)||cards.find(c=>c.id!==learningCard.id);assert(dueCard,'due fixture card exists');
+  const dueAndLearning={...learningState,[dueCard.id]:{stage:0,due:isoOffset(0),reviews:1,last_grade:0,last_review:isoOffset(0)}};
+  writeCards(w,dueAndLearning);
+  await waitFor(()=>continueButton.textContent==='Continue · Due','due state overrides simultaneous learning work');
+  continueButton.click();
+  await waitFor(()=>node(d,'study:list:due')&&node(d,dueCard.id)?.classList.contains('active')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue › Due reviews','Continue routes due-first to selected due card');
+  await backToRoot(d,w);
+
+  const mature={};for(const c of cards)mature[c.id]={stage:4,due:isoOffset(30),reviews:4,last_grade:3,last_review:isoOffset(0)};
+  writeCards(w,mature);
+  await waitFor(()=>continueButton.textContent==='Continue · Study','caught-up state does not manufacture extra due/learning/new work');
+  continueButton.click();
+  await waitFor(()=>node(d,'study:queue')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue','caught-up Continue falls back to Study Queue root');
+
+  const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d;
+  await waitFor(()=>md.querySelector('#continueStudyBtn')?.textContent==='Continue · Study','mobile Continue reflects shared caught-up Atlas state');
+  assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile Continue control has no horizontal overflow');
+
+  result.dataset.smoke='pass';
+  result.textContent=`PASS SecX Continue routing smoke: fresh=New-D1 learning=${learningCard.id} due=${dueCard.id} caught-up=Study-Queue state=Atlas-only`;
+}
+run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
+})();
+</script>
+</body>
+</html>
