@@ -7,14 +7,14 @@
   "date": "2026-08-31",
   "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
   "canonical_path": "reading/arabic/a1/passages.jsonl",
-  "canonical_sha256": "34a80a4536e11fc9c0f53ac1ca0421cb2658673855422cea3ec2873cdb0186a4",
+  "canonical_sha256": "88ab1910dba06c0fb0084f149ff59004b668cb90f2e9169363bc5622cf0b3c6f",
   "records_reviewed": 6,
   "records_with_findings": 6,
   "fresh_findings": 11,
   "decisions": [
     {
       "passage_id": "ar-a1-u06-p01",
-      "learner_facing_sha256": "1af319eb2858c8c1087ba2d110b407c6f393cb599c4afa752f4671c47e108584",
+      "learner_facing_sha256": "9f5c74336b5953251270fdb6e28df9d72b05bfa512b5293e094753ed600df8ad",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 1,
       "findings": [
@@ -30,7 +30,7 @@
     },
     {
       "passage_id": "ar-a1-u06-p02",
-      "learner_facing_sha256": "ab20dadf13a257667002d14a2883f40aec6793ef7da01d97995dee2cabb5b62f",
+      "learner_facing_sha256": "2ad795446b50495c52db6edbf04662bc4a31451411c40d69ddf5e2120dd77649",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 3,
       "findings": [
@@ -62,7 +62,7 @@
     },
     {
       "passage_id": "ar-a1-u06-p03",
-      "learner_facing_sha256": "c1e702105b8385827045caa5645d197ed49fe409ae1deae90ce48c486bce6a65",
+      "learner_facing_sha256": "eafc00f6842f6895b302f372e3cbb4626f3843602ff70f4c71f7692b7e66401f",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 3,
       "findings": [
@@ -94,7 +94,7 @@
     },
     {
       "passage_id": "ar-a1-u06-p04",
-      "learner_facing_sha256": "19867db7e1d6d6daf6b02349fa4bb51458aa9119333f9c5c6411defa7cf31924",
+      "learner_facing_sha256": "6e002deaf33fcf57696a6a30ad2e6fa570007a92df84c4d125a5215feec14fc3",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 1,
       "findings": [
@@ -110,7 +110,7 @@
     },
     {
       "passage_id": "ar-a1-u06-p05",
-      "learner_facing_sha256": "ad17db327f44a4be7e51da8d32aa68d2f84ac68fe0a2d2657c11f2019862e921",
+      "learner_facing_sha256": "7e53a43f04969cd93523c970378b767ba8bb0833af24232550fa750b300bef4a",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 1,
       "findings": [
@@ -151,5 +151,25 @@
   ],
   "quality_promotion": false,
   "release_claim": false,
-  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer.",
+  "post_gate_c_revalidations": [
+    {
+      "date": "2026-09-05",
+      "gate_c_artifact": "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u06.json",
+      "scope": [
+        "ar-a1-u06-p01 question q9",
+        "ar-a1-u06-p01 question q10",
+        "ar-a1-u06-p02 question q9",
+        "ar-a1-u06-p02 question q10",
+        "ar-a1-u06-p03 question q9",
+        "ar-a1-u06-p04 question q9",
+        "ar-a1-u06-p04 question q10",
+        "ar-a1-u06-p05 question q9",
+        "ar-a1-u06-p05 question q10"
+      ],
+      "gate_b_language_recheck": "PASS",
+      "reason": "Gate C constrained nine underdetermined transfer items across A1 Unit 6 so the intended route, direction, transport, arrival, spatial, imperative, waiting, map-location, and center answers are uniquely defensible; replacements were rechecked for A1 MSA wording and Gate B was rebound to exact-current learner-facing content.",
+      "release_claim": false
+    }
+  ]
 }

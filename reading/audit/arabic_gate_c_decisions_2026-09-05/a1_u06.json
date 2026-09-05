@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A1",
+  "unit": 6,
+  "date": "2026-09-05",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/a1/passages.jsonl",
+  "canonical_sha256": "88ab1910dba06c0fb0084f149ff59004b668cb90f2e9169363bc5622cf0b3c6f",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 5,
+  "fresh_findings": 9,
+  "decisions": [
+    {
+      "passage_id": "ar-a1-u06-p01",
+      "learner_facing_sha256": "9f5c74336b5953251270fdb6e28df9d72b05bfa512b5293e094753ed600df8ad",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u06-p01-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original route cloze also admits مسار and similar nouns. Constrain it to the reviewed طريق/موقع contrast."
+        },
+        {
+          "finding_id": "ar-a1-u06-p01-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original motion cloze admits إلى and other direction expressions. Constrain it to the reviewed نحو/تحت contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u06-p02",
+      "learner_facing_sha256": "2ad795446b50495c52db6edbf04662bc4a31451411c40d69ddf5e2120dd77649",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u06-p02-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original object cloze allows سيارة, سيارته and other vehicles. Constrain it to the reviewed السيارة/الطريق choice."
+        },
+        {
+          "finding_id": "ar-a1-u06-p02-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original train cloze allows several motion verbs. Constrain it to the يصل/يبدأ contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u06-p03",
+      "learner_facing_sha256": "eafc00f6842f6895b302f372e3cbb4626f3843602ff70f4c71f7692b7e66401f",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u06-p03-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original location cloze allows multiple spatial relations. Add the explicit below relation so تحت is uniquely grounded."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u06-p04",
+      "learner_facing_sha256": "6e002deaf33fcf57696a6a30ad2e6fa570007a92df84c4d125a5215feec14fc3",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u06-p04-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original imperative cloze does not identify the addressee, so gender/number forms compete. Name Samer so اذهب is uniquely appropriate."
+        },
+        {
+          "finding_id": "ar-a1-u06-p04-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original bus cloze admits several plausible actions. Constrain it to the waiting meaning tested by ينتظر."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u06-p05",
+      "learner_facing_sha256": "7e53a43f04969cd93523c970378b767ba8bb0833af24232550fa750b300bef4a",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u06-p05-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original map cloze can take مكان, عنوان and other location nouns. Constrain it to the موقع/وسط contrast."
+        },
+        {
+          "finding_id": "ar-a1-u06-p05-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original garden cloze admits several location words. Add the explicit middle relation so وسط is uniquely grounded."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u06-p06",
+      "learner_facing_sha256": "4f62eab28396c814da7c560da46940b075732cd770db4983e059e7de2d5b7b0e",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions bind by authoritative per-record Gate B packet hashes; the level SHA records the review-time snapshot."
+}
