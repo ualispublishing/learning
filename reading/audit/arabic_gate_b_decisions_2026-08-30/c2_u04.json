@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "C2",
+  "unit": 4,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/c2/passages.jsonl",
+  "canonical_sha256": "588120d6a7f9a4eac7c13af7a53aff2d572171b1da139284a9b92400073771fa",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 8,
+  "decisions": [
+    {
+      "passage_id": "ar-c2-u04-p01",
+      "learner_facing_sha256": "00562d156f56b328f9a81c5066075a2f9d0a81bd3fabc5e79c97bae9ca33c274",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u04-p01-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is a causal, temporal, or nominal fragment inherited from the earlier task shape; replace it with a complete declarative summary of the passage’s organizing issue."
+        },
+        {
+          "finding_id": "ar-c2-u04-p01-gB-02",
+          "field": "answer q8",
+          "dimension": "naturalness",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The phrase «شارك المصدر نفسه للبنية الحرجة» is not idiomatic for two suppliers sharing a critical dependency; express the intended relationship as sharing the same critical infrastructure."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u04-p02",
+      "learner_facing_sha256": "7938c2d90e48c19457bf49a7e161e9422c598bfdb050b04e083302ee24355b20",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u04-p02-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is a causal, temporal, or nominal fragment inherited from the earlier task shape; replace it with a complete declarative summary of the passage’s organizing issue."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u04-p03",
+      "learner_facing_sha256": "f11a8200918100b6d19a54c52e1a4df23f437c11c4d407196333cbc7da34ad5f",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u04-p03-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is a causal, temporal, or nominal fragment inherited from the earlier task shape; replace it with a complete declarative summary of the passage’s organizing issue."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u04-p04",
+      "learner_facing_sha256": "eb92429b2d17feb807c16ba810641ac73b2c5c430e02f0a12248a11976b44ef9",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u04-p04-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is a causal, temporal, or nominal fragment inherited from the earlier task shape; replace it with a complete declarative summary of the passage’s organizing issue."
+        },
+        {
+          "finding_id": "ar-c2-u04-p04-gB-02",
+          "field": "answer q3",
+          "dimension": "semantic_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The answer says the large factory monopolizes «جزءًا من المورد», but the passage concerns reserved production capacity; name the supplier’s capacity explicitly to preserve the intended system relation."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u04-p05",
+      "learner_facing_sha256": "6e17d4236056b60415fd2c037c7e308b61e252310326b71fe60e2f8b3a20652f",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u04-p05-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is a causal, temporal, or nominal fragment inherited from the earlier task shape; replace it with a complete declarative summary of the passage’s organizing issue."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u04-p06",
+      "learner_facing_sha256": "a3e1aa5dac038943d760527d3d865ac31ed8f8076fee44f9442e386266ed34bd",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u04-p06-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt requires a standalone one-sentence summary, but the keyed response is a causal, temporal, or nominal fragment inherited from the earlier task shape; replace it with a complete declarative summary of the passage’s organizing issue."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. C2 internal Gate B evidence does not constitute educator/publication release approval."
+}
