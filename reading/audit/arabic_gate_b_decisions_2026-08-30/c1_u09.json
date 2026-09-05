@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "C1",
+  "unit": 9,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/c1/passages.jsonl",
+  "canonical_sha256": "3570058bc949ecc0213779a04cae231d0a5124ae82312119e6a05ede79e6704e",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 7,
+  "decisions": [
+    {
+      "passage_id": "ar-c1-u09-p01",
+      "learner_facing_sha256": "93f4be09d7b0d67fe3fe1cfbe335571a7f460c347372307e966c964f36114043",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u09-p01-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q1 prompt explicitly asks for a one-sentence summary, while the keyed response retains an older fragment or context-dependent formulation; replace it with a complete standalone summary aligned to the current prompt."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u09-p02",
+      "learner_facing_sha256": "ec76fbfab81a5722ba6baab892da10086bb7007b6eed403509fb22ff3ec39bb4",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u09-p02-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q1 prompt explicitly asks for a one-sentence summary, while the keyed response retains an older fragment or context-dependent formulation; replace it with a complete standalone summary aligned to the current prompt."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u09-p03",
+      "learner_facing_sha256": "49dbe9d57848b65c26103de8cf5beb33029250ff2894a6edc63410c80f9b360e",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u09-p03-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q1 prompt explicitly asks for a one-sentence summary, while the keyed response retains an older fragment or context-dependent formulation; replace it with a complete standalone summary aligned to the current prompt."
+        },
+        {
+          "finding_id": "ar-c1-u09-p03-gB-02",
+          "field": "answer q6",
+          "dimension": "semantic_precision",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The answer conflates clearly inaccurate information with lying by saying false information may be presented deliberately “or clearly”; lying requires a deception/knowledge condition, whereas source viewpoint merely constrains what the source sees and records."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u09-p04",
+      "learner_facing_sha256": "14eb90c613b08415ce3bf0778088e463bd88d5e6aff6367af5a72313aa58224a",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u09-p04-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q1 prompt explicitly asks for a one-sentence summary, while the keyed response retains an older fragment or context-dependent formulation; replace it with a complete standalone summary aligned to the current prompt."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u09-p05",
+      "learner_facing_sha256": "5c7a98812e09994722afc960995cc2b8d867e34c27382504a215424ea6f183ca",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u09-p05-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q1 prompt explicitly asks for a one-sentence summary, while the keyed response retains an older fragment or context-dependent formulation; replace it with a complete standalone summary aligned to the current prompt."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c1-u09-p06",
+      "learner_facing_sha256": "777bacd83124d929f6c66b106fa323d10e3bfe880e9d596704df53b3391b2dbb",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c1-u09-p06-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The q1 prompt explicitly asks for a one-sentence summary, while the keyed response retains an older fragment or context-dependent formulation; replace it with a complete standalone summary aligned to the current prompt."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate C1 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+}
