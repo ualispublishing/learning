@@ -15,7 +15,7 @@ READING = ROOT / "reading"
 PATH = READING / "arabic/a1/passages.jsonl"
 RELEASE = READING / "RELEASE_STATUS.json"
 DECISION = READING / "audit/arabic_gate_c_decisions_2026-09-05/a1_u01.json"
-EXPECTED_SHA256 = "bbc91220ddf54e0f26765570071bcd7b8e099613ddab0f8e5dba995e7569ed1c"
+EXPECTED_GIT_BLOB = "913a49b4adbe93932561fcfba276494def4fee6b"
 EXPECTED_MANIFEST_SHA256 = "f442199c624f688418c9be651e166de8d1ccf7f582582616202b0d8e26ad2312"
 NOTE = (
     "2026-09-05 fresh Gate C comprehension/answer-grounding review (A1 Unit 1): "
@@ -27,8 +27,8 @@ NEW_ANSWER = "أن ليلى تطلب الإذن لأخذ كتاب."
 PROMPT = "ماذا تعني «يمكن» في قول ليلى: «هل يمكن أن آخذ كتابا؟»"
 
 
-def sha256(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
+def git_blob_sha(data: bytes) -> str:
+    return hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + b"\0" + data).hexdigest()
 
 
 def main() -> None:
@@ -58,8 +58,8 @@ def main() -> None:
         raise SystemExit("Gate C progress already exists; expected fresh frontier")
 
     raw = PATH.read_bytes()
-    if sha256(raw) != EXPECTED_SHA256:
-        raise SystemExit("Arabic A1 canonical drift; re-review before writing")
+    if git_blob_sha(raw) != EXPECTED_GIT_BLOB:
+        raise SystemExit("Arabic A1 canonical blob drift; re-review before writing")
     rows = [json.loads(line) for line in raw.decode("utf-8").splitlines() if line.strip()]
     if len(rows) != 60 or [r.get("sequence") for r in rows] != list(range(1, 61)):
         raise SystemExit("Arabic A1 canonical layout drift")
@@ -114,6 +114,7 @@ def main() -> None:
         "records_repaired": 1,
         "fresh_findings": 1,
         "repaired": "ar-a1-u01-p04/answer q3",
+        "pre_repair_git_blob": EXPECTED_GIT_BLOB,
         "quality_promotion": False,
         "release_claim": False,
     }, ensure_ascii=False, indent=2))
