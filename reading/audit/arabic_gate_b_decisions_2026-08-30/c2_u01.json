@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "C2",
+  "unit": 1,
+  "date": "2026-09-04",
+  "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
+  "canonical_path": "reading/arabic/c2/passages.jsonl",
+  "canonical_sha256": "a644ba3477eab68468ac6b66c711a3b07ad4be04dee47a3910c5d53f54e25cc7",
+  "records_reviewed": 6,
+  "records_with_findings": 6,
+  "fresh_findings": 6,
+  "decisions": [
+    {
+      "passage_id": "ar-c2-u01-p01",
+      "learner_facing_sha256": "bbde957130344bffc69fd8eba0d46904d29d3eabdd217b82411328e616f4a157",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u01-p01-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt explicitly requires a one-sentence summary, but the keyed response remains a noun, causal, or subordinate fragment inherited from the earlier task shape; replace it with a complete standalone summary while preserving the passage interpretation."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u01-p02",
+      "learner_facing_sha256": "9174c7da8f00fb5974a92847b09677e0613076841cc4635f8877fbb3d40ed397",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u01-p02-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt explicitly requires a one-sentence summary, but the keyed response remains a noun, causal, or subordinate fragment inherited from the earlier task shape; replace it with a complete standalone summary while preserving the passage interpretation."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u01-p03",
+      "learner_facing_sha256": "3523e75bcb91771598bc8769a9e17e133cb690d52b268af3a074d76573c96720",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u01-p03-gB-01",
+          "field": "answer q1",
+          "dimension": "naturalness",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "In this epistemic-luck context, «ناتجة من مصادفة» is an awkward collocation; standard MSA expresses the causal/source relation as «ناتجة عن المصادفة»."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u01-p04",
+      "learner_facing_sha256": "3076ff4b53ee55776d62bd82aec6bfc8b7e7412dd551daf2f2b7353c2760e4df",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u01-p04-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt explicitly requires a one-sentence summary, but the keyed response remains a noun, causal, or subordinate fragment inherited from the earlier task shape; replace it with a complete standalone summary while preserving the passage interpretation."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u01-p05",
+      "learner_facing_sha256": "c41aae2add22d391cf83f383e173117c3b65dcedad2b5722065d097f2d460671",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u01-p05-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt explicitly requires a one-sentence summary, but the keyed response remains a noun, causal, or subordinate fragment inherited from the earlier task shape; replace it with a complete standalone summary while preserving the passage interpretation."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-c2-u01-p06",
+      "learner_facing_sha256": "377f0ab67f595b5d78116dc3dc73d9351300fd329c3e14d818fd98aa7816c43c",
+      "decision": "PASS_AFTER_REPAIR",
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "ar-c2-u01-p06-gB-01",
+          "field": "answer q1",
+          "dimension": "assessment_wording",
+          "severity": "moderate",
+          "status": "REPAIRED",
+          "rationale": "The current C2 q1 prompt explicitly requires a one-sentence summary, but the keyed response remains a noun, causal, or subordinate fragment inherited from the earlier task shape; replace it with a complete standalone summary while preserving the passage interpretation."
+        }
+      ]
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. C2 internal Gate B evidence does not constitute educator/publication release approval."
+}
