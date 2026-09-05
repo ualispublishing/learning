@@ -71,6 +71,7 @@ jobs:
           node --check subjects/cissp/2024-outline/secx-prototype/coverage-lens.js
           node --check subjects/cissp/2024-outline/secx-prototype/projection-search.js
           bash -n subjects/cissp/2024-outline/secx-prototype/browser-smoke.sh
+          bash -n subjects/cissp/2024-outline/secx-prototype/continue-browser-smoke.sh
           bash -n subjects/cissp/2024-outline/secx-prototype/source-browser-smoke.sh
           bash -n subjects/cissp/2024-outline/secx-prototype/coverage-browser-smoke.sh
           bash -n subjects/cissp/2024-outline/secx-prototype/projection-search-smoke.sh
@@ -91,6 +92,11 @@ jobs:
         shell: bash
         working-directory: subjects/cissp/2024-outline/secx-prototype
         run: bash browser-smoke.sh 8776
+
+      - name: SecX Continue learner routing browser smoke
+        shell: bash
+        working-directory: subjects/cissp/2024-outline/secx-prototype
+        run: bash continue-browser-smoke.sh 8816
 
       - name: SecX source provenance browser smoke
         shell: bash
