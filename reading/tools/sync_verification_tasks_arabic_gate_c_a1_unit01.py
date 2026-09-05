@@ -17,8 +17,13 @@ def main() -> None:
     text = PATH.read_text(encoding="utf-8")
     if "Current release position: fresh deterministic revalidation is **FAIL** with **1080** open evidence findings" not in text:
         raise SystemExit("verification queue blocker frontier drift")
-    if EVIDENCE in text or CHECK in text:
-        raise SystemExit("Gate C A1 Unit 1 verification evidence already present")
+    has_evidence = EVIDENCE in text
+    has_check = CHECK in text
+    if has_evidence != has_check:
+        raise SystemExit("partial Gate C A1 Unit 1 verification evidence detected")
+    if has_evidence and has_check:
+        print("Arabic Gate C A1 Unit 1 verification evidence already synchronized and exact")
+        return
     if EVIDENCE_MARKER not in text or CHECK_MARKER not in text:
         raise SystemExit("verification queue insertion anchors missing")
     text = text.replace(EVIDENCE_MARKER, EVIDENCE_MARKER + "\n\n" + EVIDENCE, 1)
