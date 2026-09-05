@@ -2,7 +2,7 @@
 
 `candidate-completeness-audit.py` is a deterministic wiring audit for the review prototype.
 
-It exists to catch a different class of release-candidate defect from syntax, content, browser, and hygiene checks: files that exist but are not actually reachable, duplicated runtime loads, runtime-order drift, or validation artifacts that were added but never wired into the exact-head workflow.
+It exists to catch a different class of release-candidate defect from syntax, content, browser, and hygiene checks: files that exist but are not actually reachable, duplicated runtime loads, runtime-order drift, validation artifacts that were added but never wired into the exact-head workflow, or a partially initialized expanded surface that fails silently.
 
 ## What the gate proves
 
@@ -20,6 +20,9 @@ On PASS, the current candidate demonstrates all of the following:
   8. `source-lens.js`
   9. `coverage-lens.js`
   10. `projection-search.js`
+- The expanded loader exposes an explicit `loading → ready/error` state on the embedded prototype frame.
+- Script-resource failures and JavaScript execution failures during expanded initialization are wired to an accessible `role="alert"` status while leaving the conservative knowledge web available.
+- The final `projection-search.js` load marks the expanded chain ready, and an earlier error cannot be overwritten by a later ready callback.
 - Every candidate-local JavaScript file in the PR is part of that reviewed runtime set; an extra orphan runtime file fails the gate.
 - Reviewer-only relationship data and release/audit documentation are not referenced by the learner entrypoint.
 - Every candidate Python audit in the PR is referenced by the dedicated exact-head GitHub Actions workflow.
@@ -31,12 +34,15 @@ On PASS, the current candidate demonstrates all of the following:
 A completeness PASS is not evidence that:
 
 - JavaScript is syntactically valid;
-- browser behavior is correct;
+- a real failed network request was browser-simulated in CI;
+- browser behavior is otherwise correct;
 - learner-state calculations are correct;
 - content mappings, answers, sources, or coverage counts are correct;
 - accessibility behavior passes in a browser;
 - semantic relationships are approved;
 - the prototype is production-ready or should replace the default surface.
+
+The fail-visible checks are deterministic wiring evidence. Browser success-path behavior remains owned by the existing smoke suites, while real deployment/network failure behavior would require separate environment-level testing if this review surface were ever promoted.
 
 Those claims remain owned by the existing syntax, deterministic domain audits, browser smokes, relationship review boundary, and release-boundary checks.
 
