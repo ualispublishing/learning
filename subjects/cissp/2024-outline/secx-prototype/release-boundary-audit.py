@@ -66,6 +66,7 @@ def main() -> None:
     require("test \"$ACTUAL_HEAD\" = \"$EXPECTED_HEAD\"" in workflow, "exact-head assertion missing")
     require("fetch-depth: 0" in workflow, "full history is required for merge-base release-boundary audit")
     require("release-boundary-audit.py" in workflow, "release-boundary audit is not wired into exact-head workflow")
+    require("candidate-hygiene-audit.py" in workflow, "candidate hygiene audit is not wired into exact-head workflow")
 
     forbidden_publish_markers = [
         "actions/deploy-pages",
@@ -87,7 +88,7 @@ def main() -> None:
         "PASS secx_release_boundary_audit "
         f"head={head[:12]} merge_base={merge_base[:12]} changed_files={len(changed)} "
         "scope=prototype+dedicated-workflow production_study_site=UNCHANGED "
-        "next=review-only relationships=reviewer-only workflow=read-only+no-deploy"
+        "next=review-only relationships=reviewer-only workflow=read-only+no-deploy+hygiene-gated"
     )
 
 
