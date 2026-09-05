@@ -24,11 +24,31 @@ This means a grade applied to a released retrieval card in the expanded graph is
 
 The registry exists so learner-state views use the same released card objects and stable IDs as Atlas rather than reconstructing a second list.
 
+## Read-only learner API
+
+`learner-state.js` is the learner-state owner. It keeps grading/persistence private and publishes a frozen read-only facade as `window.SECX_LEARNER` for downstream learner projections.
+
+The facade exposes only:
+
+- the shared Atlas progress-key identifier;
+- `cardState(id)` as a frozen snapshot;
+- `cardStatus(id)`;
+- `isDue(id)`;
+- `isMature(id)`;
+- `todayISO()`;
+- a frozen copy of the Atlas interval schedule.
+
+It does **not** expose grading, saving, `localStorage.setItem`, graph-state mutation, or any curriculum mutation method.
+
+The API keeps a cached Atlas progress object but compares the underlying storage string before reads. If another same-window tool/test writes the Atlas key directly, the next read resynchronizes automatically. Cross-tab `storage` events also invalidate/resynchronize the cache. This preserves current same-window behavior without forcing every projection to parse storage independently.
+
+`due-review.js` and `study-lens.js` consume `SECX_LEARNER` and do not parse or write local storage themselves. This keeps `new` / `learning` / `due` / `mature` semantics in one runtime owner rather than allowing each projection to drift.
+
 ## Due Reviews
 
 `due-review.js` creates a schedule-derived **Due Reviews** branch over the released-card registry.
 
-A card is included only when its existing Atlas card state has `due <= today`. The queue:
+A card is included only when the shared learner API reports its existing Atlas card state as due. The queue:
 
 - uses the production Atlas scheduling state rather than a second scheduler;
 - contains released retrieval cards only;
@@ -112,6 +132,8 @@ Before the learner-state/due-review layer can replace the conservative prototype
 6. expanded SecX browser smoke;
 7. dedicated Continue routing browser smoke.
 
+The deterministic learner audits must verify that `SECX_LEARNER` is frozen/read-only, that Due/Study consumers do not directly parse/write local storage, and that shared status helpers remain the source for due/learning/mature classification.
+
 The expanded smoke must verify card-grade persistence, same-window due-count refresh, `R` routing into the due-card branch, the separate graph-state key, the depth-4 scenario answer gate, and the rule that answer reveal does not create correctness or mastery evidence.
 
-The Continue smoke must verify fresh-state weakest-domain new routing, Learning fallback, Due priority over simultaneous Learning work, caught-up fallback to Study Queue, and mobile layout without introducing a second learner-state store.
+The Continue smoke must additionally verify the frozen API surface, absence of mutation methods, frozen card snapshots, same-window storage resynchronization, fresh-state weakest-domain new routing, Learning fallback, Due priority over simultaneous Learning work, caught-up fallback to Study Queue, and mobile layout without introducing a second learner-state store.
