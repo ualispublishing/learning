@@ -54,6 +54,12 @@ jobs:
           python -m py_compile subjects/cissp/2024-outline/secx-prototype/release-boundary-audit.py
           python subjects/cissp/2024-outline/secx-prototype/release-boundary-audit.py
 
+      - name: SecX candidate hygiene audit
+        shell: bash
+        run: |
+          python -m py_compile subjects/cissp/2024-outline/secx-prototype/candidate-hygiene-audit.py
+          python subjects/cissp/2024-outline/secx-prototype/candidate-hygiene-audit.py
+
       - name: CISSP deterministic release audit
         shell: bash
         run: python subjects/cissp/2024-outline/study-site/audit.py
