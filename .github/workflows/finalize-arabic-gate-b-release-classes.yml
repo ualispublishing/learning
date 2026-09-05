@@ -1,0 +1,44 @@
+name: Finalize Arabic Gate B completion state
+
+on:
+  push:
+
+permissions:
+  contents: write
+
+jobs:
+  arabic-gate-b-completion-state:
+    if: github.event.head_commit.message == 'Finalize Arabic Gate B release classes now'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate exact state before completion sync
+        run: python reading/tools/validate_continuation_state.py
+      - name: Synchronize completed Gate B release class
+        run: |
+          set -euo pipefail
+          python reading/tools/sync_arabic_post_gate_b_release_classes.py
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+      - name: Commit exact completion state
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/RELEASE_STATUS.json reading/STATE_MANIFEST.json
+          git commit -m 'Finalize Arabic fresh Gate B completion state'
+      - name: Rebase and regenerate exact push candidate
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git rebase origin/main
+          python reading/tools/validate_continuation_state.py
+          python reading/tools/sync_arabic_post_gate_b_release_classes.py
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+          git add reading/RELEASE_STATUS.json reading/STATE_MANIFEST.json
+          if ! git diff --cached --quiet; then git commit --amend --no-edit; fi
+          python reading/tools/validate_continuation_state.py
+          git push origin HEAD:main
