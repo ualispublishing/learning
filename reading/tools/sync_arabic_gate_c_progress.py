@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Synchronize fresh Arabic Gate C comprehension/answer-grounding evidence.
 
-Every counted decision must match the exact current learner-facing hash. This tool
-records internal semantic-review progress only; it never promotes quality metadata,
-release state, or educator readiness.
+Every counted decision must match the exact current learner-facing hash using the
+same packet-hash definition as Gate B. This tool records internal semantic-review
+progress only; it never promotes quality metadata, release state, or educator readiness.
 """
 from __future__ import annotations
 
@@ -25,7 +25,10 @@ def sha256_bytes(data: bytes) -> str:
 
 
 def learner_payload(record: dict) -> dict:
+    """Match build_arabic_gate_b_naturalness_review.py exactly."""
     answers = {a.get("question_id"): a for a in record.get("answer_key", [])}
+    notes = "\n".join(record.get("quality", {}).get("notes", []))
+    has_hist = "naturalness review" in notes.lower() or "naturalness" in notes.lower()
     return {
         "passage_id": record.get("id"),
         "unit": record.get("unit"),
@@ -44,6 +47,7 @@ def learner_payload(record: dict) -> dict:
             }
             for q in record.get("questions", [])
         ],
+        "historical_naturalness_note_present": has_hist,
     }
 
 
@@ -177,7 +181,7 @@ def main() -> None:
         "review_order": ["A1", "A2", "B1", "B2", "C1", "C2"],
         "levels_completed": [level.upper() for level in LEVELS if reviewed_by_level[level] == 60],
         "decision_artifacts": evidence_paths,
-        "guard": "Gate C is a fresh internal comprehension/answer-grounding audit bound to exact-current learner-facing hashes; it does not substitute for independent educator/native/blind release gates.",
+        "guard": "Gate C is a fresh internal comprehension/answer-grounding audit using the authoritative Gate B packet learner-facing hash definition; it does not substitute for independent educator/native/blind release gates.",
         "next_step": (
             "Gate C internal review complete; continue only with separate CEFR/pedagogy and independent release gates."
             if total_reviewed == 360
