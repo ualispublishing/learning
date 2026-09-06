@@ -29,20 +29,32 @@ On PASS, the current candidate demonstrates all of the following:
 - Every browser-smoke shell runner in the PR is referenced by the workflow and has a paired HTML fixture that it actually invokes.
 - Every browser-smoke HTML fixture has a paired shell runner.
 
+## Browser evidence for loader success
+
+`loader-ready-smoke.html` / `loader-ready-smoke.sh` is a dedicated browser gate for the successful outer-shell transition. On desktop and a 390px mobile shell it requires:
+
+- `data-secx-expanded-state="ready"` on the embedded conservative frame;
+- the conservative `index.html` frame and domain graph to remain mounted;
+- the success status to return to the visually hidden `sr` state with `role="status"` / `aria-live="polite"`;
+- exact ready text;
+- no visible `role="alert"` loader error on the successful path.
+
+The completeness audit requires this runner/fixture pair to remain wired just like every other browser smoke.
+
 ## What the gate does not prove
 
 A completeness PASS is not evidence that:
 
 - JavaScript is syntactically valid;
 - a real failed network request was browser-simulated in CI;
-- browser behavior is otherwise correct;
+- browser behavior outside the dedicated smoke assertions is correct;
 - learner-state calculations are correct;
 - content mappings, answers, sources, or coverage counts are correct;
-- accessibility behavior passes in a browser;
+- accessibility behavior outside the tested contracts passes in a browser;
 - semantic relationships are approved;
 - the prototype is production-ready or should replace the default surface.
 
-The fail-visible checks are deterministic wiring evidence. Browser success-path behavior remains owned by the existing smoke suites, while real deployment/network failure behavior would require separate environment-level testing if this review surface were ever promoted.
+The fail-visible failure checks remain deterministic wiring evidence. The dedicated loader-ready smoke adds real browser evidence for the normal successful `ready` transition only; real deployment/network failure behavior would still require separate environment-level testing if this review surface were ever promoted.
 
 Those claims remain owned by the existing syntax, deterministic domain audits, browser smokes, relationship review boundary, and release-boundary checks.
 
