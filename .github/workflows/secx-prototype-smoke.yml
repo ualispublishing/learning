@@ -144,4 +144,8 @@ jobs:
       - name: SecX loader failure fallback browser smoke
         shell: bash
         working-directory: subjects/cissp/2024-outline/secx-prototype
-        run: bash loader-failure-smoke.sh 8836
+        run: |
+          bash loader-failure-smoke.sh 8836
+          test -f projection-search.js
+          test ! -e projection-search.js.__secx_failure_smoke
+          git diff --exit-code -- projection-search.js
