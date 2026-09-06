@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A1",
+  "unit": 10,
+  "date": "2026-09-05",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/a1/passages.jsonl",
+  "canonical_sha256": "a9aa6a0332652199f5501a3ad3ec7f0858bdb3d71a0c969de28a238c8e9bd41b",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 5,
+  "fresh_findings": 10,
+  "decisions": [
+    {
+      "passage_id": "ar-a1-u10-p01",
+      "learner_facing_sha256": "54ed518f7e7fda935fe237c8bd373aace14f5dcdf54afdeec47b284d0b1f9c21",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u10-p01-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original routine cloze admits عادةً and other frequency expressions. Constrain it to the دائمًا/أحيانًا contrast."
+        },
+        {
+          "finding_id": "ar-a1-u10-p01-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original remaining-water cloze admits بعض and other quantity expressions. Constrain it to the قليل/كثير contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u10-p02",
+      "learner_facing_sha256": "83a9e90569e355125bc91e96d369a8dc92ecd3bad9c01c86e3ac2aaed974cae2",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u10-p02-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original learning-method cloze admits وسيلة and other method nouns. Constrain it to the طريقة/نهاية contrast."
+        },
+        {
+          "finding_id": "ar-a1-u10-p02-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original route-description cloze admits جديدًا and other adjectives. Constrain it to the مختلفًا/قليلًا contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u10-p03",
+      "learner_facing_sha256": "77e35302e4689f99bd11ff138fe92babe57af3828025b4b9e113a6840cbcdec5",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u10-p03-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original student-group cloze admits فريق and other collective nouns. Constrain it to the مجموعة/نهاية contrast."
+        },
+        {
+          "finding_id": "ar-a1-u10-p03-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original lesson-time cloze admits آخر and other end expressions. Constrain it to the نهاية/مجموعة contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u10-p04",
+      "learner_facing_sha256": "e185d2011a05da474db017f161ce57614472b2c70d549971c115463d914a7248",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u10-p04-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original waiting cloze admits دقيقة and other short time units. Add an explicit very-short-time cue and contrast لحظة with صورة."
+        },
+        {
+          "finding_id": "ar-a1-u10-p04-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original camera cloze admits لقطة and other image nouns. Constrain it to the صورة/صفحة contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u10-p05",
+      "learner_facing_sha256": "d57cfbb637596a02e127087ccceab208651e56803875447eeb2462e65decc646",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a1-u10-p05-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original book-reading cloze admits فقرة and other book-part nouns. Constrain it to the الصفحة/النادي contrast."
+        },
+        {
+          "finding_id": "ar-a1-u10-p05-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original text-query cloze admits استفسار and other request nouns. Add an answer-seeking cue and contrast سؤال with نهاية."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a1-u10-p06",
+      "learner_facing_sha256": "2f217fbbc82411744bf9157ba6a0aa3befde3c2ccd96edbccba79c7ddba7c8f1",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions bind by authoritative per-record Gate B packet hashes; the level SHA records the review-time snapshot."
+}
