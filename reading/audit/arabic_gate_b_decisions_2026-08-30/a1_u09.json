@@ -7,14 +7,14 @@
   "date": "2026-09-01",
   "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
   "canonical_path": "reading/arabic/a1/passages.jsonl",
-  "canonical_sha256": "ce323f03fa375291484645859848c00a85b6d83d8bf17ac7f498adf62300d1d3",
+  "canonical_sha256": "8c2a4bd6c2c9d0f46a228f2f6ebf20e48cc8587e97083f120a4389dc062e7461",
   "records_reviewed": 6,
   "records_with_findings": 6,
   "fresh_findings": 15,
   "decisions": [
     {
       "passage_id": "ar-a1-u09-p01",
-      "learner_facing_sha256": "4335ca0e480027ddd8a68b127e55a6293a43a0db7c375cbad826b60ebaaaa9e6",
+      "learner_facing_sha256": "0b33e9c06bfa3e41c0e1f59f2d78608f160d11b2d6517ed615a147d42aefeab2",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 1,
       "findings": [
@@ -30,7 +30,7 @@
     },
     {
       "passage_id": "ar-a1-u09-p02",
-      "learner_facing_sha256": "3ca192ced46a6ab9bc36e32edc14233fb85c7a7bb2b48db5dffd95931625a60b",
+      "learner_facing_sha256": "b08305abce25b9e724d5b65ba73c458930c2f2ac0882f70efb5b47b85b34562b",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 1,
       "findings": [
@@ -46,7 +46,7 @@
     },
     {
       "passage_id": "ar-a1-u09-p03",
-      "learner_facing_sha256": "a5d59239d40f551545e702ffceb73ca45766807cc27e09f0f5e576a3e64c3b9f",
+      "learner_facing_sha256": "9aa401c0c856a4ab112ef5c388c1225f43aceff7d6fe45a4e08bfdcb745644ca",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 1,
       "findings": [
@@ -62,7 +62,7 @@
     },
     {
       "passage_id": "ar-a1-u09-p04",
-      "learner_facing_sha256": "fd6b7b0d0d7fd880018c3cbec003c2948c02aef8fde6d4841b617182ea855079",
+      "learner_facing_sha256": "42b4328ef0e08e4047ce21599e7500336ece263a856e3c934638e8a93a6a7d46",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 4,
       "findings": [
@@ -102,7 +102,7 @@
     },
     {
       "passage_id": "ar-a1-u09-p05",
-      "learner_facing_sha256": "8ba35c3a4f28fde518ff37693830e39eaaece6e3a378047c69be9540bfb11a96",
+      "learner_facing_sha256": "0dcb383219c71a4bdd55b3584e11605c0960dea8cdfca9e9053f5bbdc6f99575",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 4,
       "findings": [
@@ -183,5 +183,26 @@
   ],
   "quality_promotion": false,
   "release_claim": false,
-  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer.",
+  "post_gate_c_revalidations": [
+    {
+      "date": "2026-09-05",
+      "gate_c_artifact": "reading/audit/arabic_gate_c_decisions_2026-09-05/a1_u09.json",
+      "scope": [
+        "ar-a1-u09-p01 question q9",
+        "ar-a1-u09-p01 question q10",
+        "ar-a1-u09-p02 question q9",
+        "ar-a1-u09-p02 question q10",
+        "ar-a1-u09-p03 question q9",
+        "ar-a1-u09-p03 question q10",
+        "ar-a1-u09-p04 question q9",
+        "ar-a1-u09-p04 question q10",
+        "ar-a1-u09-p05 question q9",
+        "ar-a1-u09-p05 question q10"
+      ],
+      "gate_b_language_recheck": "PASS",
+      "reason": "Gate C constrained ten underdetermined leisure transfer items across A1 Unit 9 so the intended ball, player, match, club, friends, happy, opportunity, participation, goal, and win answers are uniquely defensible; replacements were rechecked for A1 MSA wording and Gate B was rebound to exact-current learner-facing content.",
+      "release_claim": false
+    }
+  ]
 }
