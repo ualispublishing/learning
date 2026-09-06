@@ -39,14 +39,28 @@ On PASS, the current candidate demonstrates all of the following:
 - exact ready text;
 - no visible `role="alert"` loader error on the successful path.
 
-The completeness audit requires this runner/fixture pair to remain wired just like every other browser smoke.
+## Browser evidence for loader failure
+
+`loader-failure-smoke.html` / `loader-failure-smoke.sh` tests the fail-visible path without adding any test-only learner-runtime switch. The shell runner temporarily moves `projection-search.js` out of the served tree, starts the same local HTTP server used by the other browser smokes, and restores the file through an EXIT trap.
+
+That produces a real HTTP 404 for the final expanded dependency. On desktop and a 390px mobile shell the fixture requires:
+
+- `data-secx-expanded-state="error"` rather than `ready`;
+- a visible `role="alert"` / `aria-live="assertive"` status;
+- the alert to name `projection-search.js` as the failed dependency;
+- the alert to state that the conservative knowledge web remains available;
+- the conservative eight-domain graph to remain mounted;
+- no later ready callback to overwrite the error state;
+- the mobile fallback alert and document to remain within the 390px viewport without horizontal overflow.
+
+The failure smoke runs after all normal success-path browser suites, and its EXIT trap restores the deliberately removed dependency even if the smoke fails. The completeness audit requires both loader runner/fixture pairs to remain wired just like every other browser smoke.
 
 ## What the gate does not prove
 
 A completeness PASS is not evidence that:
 
 - JavaScript is syntactically valid;
-- a real failed network request was browser-simulated in CI;
+- every possible CDN, proxy, DNS, partial-response, cache, or deployment-network failure mode has been reproduced;
 - browser behavior outside the dedicated smoke assertions is correct;
 - learner-state calculations are correct;
 - content mappings, answers, sources, or coverage counts are correct;
@@ -54,7 +68,7 @@ A completeness PASS is not evidence that:
 - semantic relationships are approved;
 - the prototype is production-ready or should replace the default surface.
 
-The fail-visible failure checks remain deterministic wiring evidence. The dedicated loader-ready smoke adds real browser evidence for the normal successful `ready` transition only; real deployment/network failure behavior would still require separate environment-level testing if this review surface were ever promoted.
+The deterministic completeness checks prove wiring and isolation. The two loader smokes add real Chromium evidence for both the successful `ready` transition and one concrete missing-resource failure path (HTTP 404 on the final expanded dependency). Broader deployment/network resilience would still require environment-level testing if this review surface were ever promoted.
 
 Those claims remain owned by the existing syntax, deterministic domain audits, browser smokes, relationship review boundary, and release-boundary checks.
 
