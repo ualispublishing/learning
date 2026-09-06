@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A2",
+  "unit": 1,
+  "date": "2026-09-06",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/a2/passages.jsonl",
+  "canonical_sha256": "3701649c9930b7a67fd75e70a5d3c9f0ae42218ff9ee802872c27242b4a1b613",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 5,
+  "fresh_findings": 10,
+  "decisions": [
+    {
+      "passage_id": "ar-a2-u01-p01",
+      "learner_facing_sha256": "922744bb4a056190334254c0b102d38c875a144754d8007b517d319e9bc4a692",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u01-p01-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original location cloze admits طريق and other location nouns. Constrain it to the reviewed الشارع/الخدمة contrast."
+        },
+        {
+          "finding_id": "ar-a2-u01-p01-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original office-output cloze admits مساعدة, معلومات and other service nouns. Constrain it to the خدمة/شارع contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u01-p02",
+      "learner_facing_sha256": "608cdac3cace02dca7fb4b8b0bd946f9a5c0903ef95b9199c36068aa8b6aa9c1",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u01-p02-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original contact-channel cloze admits الإنترنت and other channels. Constrain it to the الهاتف/البنك contrast."
+        },
+        {
+          "finding_id": "ar-a2-u01-p02-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original financial-transaction cloze admits مصرف and other financial institutions. Constrain it to the البنك/الهاتف contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u01-p03",
+      "learner_facing_sha256": "908bdd4fdb2f443e707643a40e161ae69545f9f0ca4432ef44be1e15a861cca7",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u01-p03-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original posted-change cloze admits إشعارًا and other public notices. Constrain it to the إعلانًا/رسالة contrast."
+        },
+        {
+          "finding_id": "ar-a2-u01-p03-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original direct communication cloze admits بريدًا and other message forms. Constrain it to the رسالة/إعلانًا contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u01-p04",
+      "learner_facing_sha256": "5f4f0d2286b56c73e491a7cdd5bd5deb7200c398d700d660169ae945ea5beadf",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u01-p04-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original first-time cloze admits مرة and other visit expressions. Constrain it to the زيارة/قسم contrast."
+        },
+        {
+          "finding_id": "ar-a2-u01-p04-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original reception-location cloze admits مكتب and other institutional place nouns. Constrain it to the قسم/زيارة contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u01-p05",
+      "learner_facing_sha256": "6935685d00849eb2488de42ac84aa63f51b3ca60539427ccabff198b47b80392",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u01-p05-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original food-reading cloze admits قائمة الطعام, المنيو and other menu expressions. Constrain it to the قائمة/سعر contrast."
+        },
+        {
+          "finding_id": "ar-a2-u01-p05-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original book-cost cloze admits ثمن and other price nouns. Constrain it to the سعر/قائمة contrast."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u01-p06",
+      "learner_facing_sha256": "cf3335a3cb51eca6158e7c1955f34056cefc437a5f3b434d9a9f4693304ba595",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions bind by authoritative per-record Gate B packet hashes; the level SHA records the review-time snapshot."
+}
