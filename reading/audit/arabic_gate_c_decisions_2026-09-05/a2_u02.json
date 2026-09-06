@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A2",
+  "unit": 2,
+  "date": "2026-09-06",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/a2/passages.jsonl",
+  "canonical_sha256": "46e376a19cca5d84faca33b227296f020a901f13f71e1788fe1f4bf528f6a26c",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 5,
+  "fresh_findings": 10,
+  "decisions": [
+    {
+      "passage_id": "ar-a2-u02-p01",
+      "learner_facing_sha256": "214bf761c958130e02ec44b463fc1730c907bce88b7336736cf2233c1c19d14c",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u02-p01-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original appointment cloze admits حجز and related scheduling nouns. Constrain it to موعد/رد."
+        },
+        {
+          "finding_id": "ar-a2-u02-p01-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original waiting-for-a-response cloze admits جوابه and other response nouns. Constrain it to رده/موعده."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u02-p02",
+      "learner_facing_sha256": "6c75dbe0fe326c2bbf123279cf22a079e0ae14a41db3c570f32d575a0393f958",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u02-p02-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original certainty cloze admits واثقًا and similar adjectives. Constrain it to متأكدًا/بعيدًا."
+        },
+        {
+          "finding_id": "ar-a2-u02-p02-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original following-lesson cloze admits القادم. Constrain it to التالي/السابق."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u02-p03",
+      "learner_facing_sha256": "0f7131c3f98cb81ba7d6df476cabeb1bb7be5843d57985930e3ef1e279a192ac",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u02-p03-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original change-notification cloze admits كلمت and other contact verbs. Constrain it to اتصلت/انتظرت."
+        },
+        {
+          "finding_id": "ar-a2-u02-p03-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original later-time cloze admits آخر and other temporal adjectives. Constrain it to لاحق/سابق."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u02-p04",
+      "learner_facing_sha256": "6dfe73e316a8393904ae52dbab8da3643fdb2a97a17a22bfce73208acac4936b",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u02-p04-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original alternatives cloze admits طريق and خيار. Constrain it to اختيار/موعد."
+        },
+        {
+          "finding_id": "ar-a2-u02-p04-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original current-address cloze admits الجديد. Constrain it to الحالي/التالي."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u02-p05",
+      "learner_facing_sha256": "f8418acd2ba49122446a2c7940a747d3ed8382f9406c8e119b0efeacb6aad71d",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u02-p05-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original learning-program cloze admits ورشة and برنامج. Constrain it to دورة/زيارة."
+        },
+        {
+          "finding_id": "ar-a2-u02-p05-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original travel-planning cloze admits تخطيط. Constrain it to تنظيم/سعر."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u02-p06",
+      "learner_facing_sha256": "6c6358339134caa48f7f5b56c4375e5dbc1b3e90ba49b7bc2961e0771dfb16dc",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions bind by authoritative per-record Gate B packet hashes; the level SHA records the review-time snapshot."
+}
