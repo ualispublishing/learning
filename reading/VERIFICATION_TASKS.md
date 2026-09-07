@@ -137,6 +137,8 @@ A2 Unit 8 Gate C evidence: `reading/audit/arabic_gate_c_decisions_2026-09-05/a2_
 
 A2 Unit 9 Gate C evidence: `reading/audit/arabic_gate_c_decisions_2026-09-05/a2_u09.json` — 6 exact-current records / 60 question-answer pairs reviewed; 3 competing-answer ambiguities across story, version/copy, and restaurant transfer items were repaired in `ar-a2-u09-p01` through `p03`; `p04` through `p06` are clean PASSes. Fresh Gate C progress is 114/360 records and 1,140/3,600 Q/A pairs; A1 remains the only completed Gate C level and this is not an educator/publication release claim.
 
+A2 Unit 10 Gate C evidence: `reading/audit/arabic_gate_c_decisions_2026-09-05/a2_u10.json` — 6 exact-current records / 60 question-answer pairs reviewed as clean PASSes with no fresh Gate C findings and no learner-facing mutation. Fresh Gate C progress is 120/360 records and 1,200/3,600 Q/A pairs; A1 and A2 are now completed Gate C levels, while the review remains internal-only and this is not an educator/publication release claim.
+
 - [x] fresh deterministic educator-release revalidation;
 - [x] close the 10 fresh deterministic Unicode NFC findings with a byte-bounded normalization-only repair;
 - [ ] substantively resolve the fresh deterministic release-evidence blockers without bulk-promoting draft/pending metadata;
@@ -194,6 +196,7 @@ A2 Unit 9 Gate C evidence: `reading/audit/arabic_gate_c_decisions_2026-09-05/a2_
 - [x] Arabic A2 Unit 7 Gate C batch: reviewed 6 passages / 60 question-answer pairs; repaired 10 competing-answer ambiguities across `ar-a2-u07-p01` through `p05`, recorded `p06` as a clean PASS, and rebound affected Gate B evidence to exact-current learner-facing hashes; Gate C is 102/360 records and remains internal-only;
 - [x] Arabic A2 Unit 8 Gate C batch: reviewed 6 passages / 60 question-answer pairs; repaired 6 competing-answer ambiguities across `ar-a2-u08-p01`, `p02`, `p03`, and `p05`, recorded `p04` and `p06` as clean PASSes, and rebound affected Gate B evidence to exact-current learner-facing hashes; Gate C is 108/360 records and remains internal-only;
 - [x] Arabic A2 Unit 9 Gate C batch: reviewed 6 passages / 60 question-answer pairs; repaired 3 competing-answer ambiguities across `ar-a2-u09-p01` through `p03`, recorded `p04` through `p06` as clean PASSes, and rebound affected Gate B evidence to exact-current learner-facing hashes; Gate C is 114/360 records and remains internal-only;
+- [x] Arabic A2 Unit 10 Gate C batch: reviewed 6 passages / 60 question-answer pairs as six clean PASSes with no fresh findings or learner-facing mutation; A2 Gate C is complete, Gate C is 120/360 records overall, and A1/A2 are the completed levels; review remains internal-only;
 - [x] corpus-wide Arabic grammar-in-context naturalness audit (fresh Gate B internal review complete; separate semantic/educator/native/blind release gates remain open);
 - [ ] full passage language/question/answer semantic review;
 - [ ] independent professional/native and model-family disagreement passes;
