@@ -77,6 +77,8 @@ For card choices, Continue reuses the existing Study Queue ordering and routes t
 
 When Continue is activated from its visible button, focus follows the navigation result: card routes transfer DOM focus from the button to the selected card node, and the caught-up fallback transfers focus to the Study Queue root. This keeps the graph's active selection and browser focus aligned so keyboard navigation can continue immediately after the route; the same contract applies at the 390px mobile layout.
 
+Focus continuity also applies while ascending with Escape. From a Study card view, the first Escape returns to and focuses the Study Queue root; the next Escape returns to and focuses the SecX root. From the caught-up Study Queue fallback, one Escape returns focus to SecX. Browser evidence covers these ascent paths on desktop and the visible 390px mobile fallback.
+
 The lowest-review-score domain is used only as a tie-breaking study-priority hint after due and learning work are absent. It remains a stage-based scheduling signal, not a diagnosis of learner weakness or exam readiness.
 
 If all released cards are mature and scheduled in the future, Continue falls back to the Study Queue rather than manufacturing extra work. The control refreshes after same-window grades and Atlas progress-storage changes, and it never writes `cissp_atlas_progress_v1` itself.
@@ -119,6 +121,7 @@ Likewise, due status is a scheduling fact only. It must not be promoted into a s
 - **Continue** routes due → learning → lowest-review-score-domain new → any new → Study Queue using Atlas state only.
 - Continue selects an existing review card but never auto-reveals or auto-grades it.
 - Continue transfers DOM focus from its visible control to the routed active card or Study Queue root, including the mobile layout.
+- Escape preserves focus continuity upward: Study card → Study Queue root → SecX root, or Study Queue root → SecX root.
 - Graph nodes may show the deepest disclosure layer previously reached.
 - Scenario nodes may show answer-reveal exposure, labeled as exposure rather than performance.
 - The footer may show the number of currently due released retrieval cards.
@@ -139,4 +142,4 @@ The deterministic learner audits must verify that `SECX_LEARNER` is frozen/read-
 
 The expanded smoke must verify card-grade persistence, same-window due-count refresh, `R` routing into the due-card branch, the separate graph-state key, the depth-4 scenario answer gate, and the rule that answer reveal does not create correctness or mastery evidence.
 
-The Continue smoke must additionally verify the frozen API surface, absence of mutation methods, frozen card snapshots, same-window storage resynchronization, fresh-state weakest-domain new routing, Learning fallback, Due priority over simultaneous Learning work, caught-up fallback to Study Queue, visible-button-to-routed-node DOM focus transfer on desktop and mobile, and mobile layout without introducing a second learner-state store.
+The Continue smoke must additionally verify the frozen API surface, absence of mutation methods, frozen card snapshots, same-window storage resynchronization, fresh-state weakest-domain new routing, Learning fallback, Due priority over simultaneous Learning work, caught-up fallback to Study Queue, visible-button-to-routed-node DOM focus transfer, Escape ascent focus continuity through Study Queue to SecX, desktop/mobile coverage, and mobile layout without introducing a second learner-state store.
