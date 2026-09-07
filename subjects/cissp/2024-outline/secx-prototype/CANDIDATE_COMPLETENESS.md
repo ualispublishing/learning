@@ -28,6 +28,7 @@ On PASS, the current candidate demonstrates all of the following:
 - Every candidate Python audit in the PR is referenced by the dedicated exact-head GitHub Actions workflow.
 - Every browser-smoke shell runner in the PR is referenced by the workflow and has a paired HTML fixture that it actually invokes.
 - Every browser-smoke HTML fixture has a paired shell runner.
+- The current candidate has eight paired/wired browser smoke suites, including separate loader success, resource-failure, and execution-failure evidence.
 
 ## Browser evidence for loader success
 
@@ -39,9 +40,9 @@ On PASS, the current candidate demonstrates all of the following:
 - exact ready text;
 - no visible `role="alert"` loader error on the successful path.
 
-## Browser evidence for loader failure
+## Browser evidence for missing-resource failure
 
-`loader-failure-smoke.html` / `loader-failure-smoke.sh` tests the fail-visible path without adding any test-only learner-runtime switch. The shell runner temporarily moves `projection-search.js` out of the served tree, starts the same local HTTP server used by the other browser smokes, and restores the file through an EXIT trap.
+`loader-failure-smoke.html` / `loader-failure-smoke.sh` tests the fail-visible resource path without adding any test-only learner-runtime switch. The shell runner temporarily moves `projection-search.js` out of the served tree, starts the same local HTTP server used by the other browser smokes, and restores the file through an EXIT trap.
 
 That produces a real HTTP 404 for the final expanded dependency. On desktop and a 390px mobile shell the fixture requires:
 
@@ -53,14 +54,27 @@ That produces a real HTTP 404 for the final expanded dependency. On desktop and 
 - no later ready callback to overwrite the error state;
 - the mobile fallback alert and document to remain within the 390px viewport without horizontal overflow.
 
-The failure smoke runs after all normal success-path browser suites, and its EXIT trap restores the deliberately removed dependency even if the smoke fails. The completeness audit requires both loader runner/fixture pairs to remain wired just like every other browser smoke.
+## Browser evidence for JavaScript execution failure
+
+`loader-execution-smoke.html` / `loader-execution-smoke.sh` exercises the distinct execution-error path. The shell runner first moves the real `projection-search.js` to a temporary backup, then places a syntactically valid replacement at the same URL whose only behavior is to throw an `Error` immediately. The HTTP request therefore succeeds, but script execution fails inside the expanded initialization chain.
+
+On desktop and a 390px mobile shell the fixture requires the same fail-visible guarantees as the resource-failure smoke:
+
+- `data-secx-expanded-state="error"` rather than `ready`;
+- visible assertive alert semantics;
+- the alert to identify `projection-search.js`;
+- the conservative eight-domain graph to remain mounted;
+- the error state not to be overwritten by the script element's later load callback;
+- no mobile horizontal overflow.
+
+Both fault-injection runners execute only after all normal success-path browser suites. Each uses an EXIT trap to restore the original dependency even if Chromium or an assertion fails. The workflow then independently verifies that the original file is present, the temporary backup is absent, and `git diff --exit-code -- projection-search.js` reports no checkout mutation.
 
 ## What the gate does not prove
 
 A completeness PASS is not evidence that:
 
-- JavaScript is syntactically valid;
-- every possible CDN, proxy, DNS, partial-response, cache, or deployment-network failure mode has been reproduced;
+- JavaScript is syntactically valid beyond the separate syntax gates;
+- every possible CDN, proxy, DNS, partial-response, cache, CSP, browser-extension, or deployment-network/runtime failure mode has been reproduced;
 - browser behavior outside the dedicated smoke assertions is correct;
 - learner-state calculations are correct;
 - content mappings, answers, sources, or coverage counts are correct;
@@ -68,7 +82,7 @@ A completeness PASS is not evidence that:
 - semantic relationships are approved;
 - the prototype is production-ready or should replace the default surface.
 
-The deterministic completeness checks prove wiring and isolation. The two loader smokes add real Chromium evidence for both the successful `ready` transition and one concrete missing-resource failure path (HTTP 404 on the final expanded dependency). Broader deployment/network resilience would still require environment-level testing if this review surface were ever promoted.
+The deterministic completeness checks prove wiring and isolation. The three loader smokes add real Chromium evidence for the successful `ready` transition, one concrete missing-resource path (HTTP 404 on the final expanded dependency), and one concrete JavaScript execution-error path (successful HTTP response followed by an immediate throw). Broader deployment/runtime resilience would still require environment-level testing if this review surface were ever promoted.
 
 Those claims remain owned by the existing syntax, deterministic domain audits, browser smokes, relationship review boundary, and release-boundary checks.
 
