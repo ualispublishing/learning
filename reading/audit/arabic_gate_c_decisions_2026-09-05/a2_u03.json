@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A2",
+  "unit": 3,
+  "date": "2026-09-06",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/a2/passages.jsonl",
+  "canonical_sha256": "fe1e830099c6428b2d501e70dba0dc5d6dad5b7e3db481909a4ed22ab7b274f4",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 5,
+  "fresh_findings": 10,
+  "decisions": [
+    {
+      "passage_id": "ar-a2-u03-p01",
+      "learner_facing_sha256": "dc1debad96669b016d44e3b0c514c272dfa2552c45d0d78a2bd7aaf5fe379007",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u03-p01-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original recent-time cloze admits حديثًا and similar recent-time expressions. Constrain it to مؤخرًا/مجددًا."
+        },
+        {
+          "finding_id": "ar-a2-u03-p01-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original rereading cloze admits ثانية and مرة أخرى. Constrain it to مجددا/مؤخرا."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u03-p02",
+      "learner_facing_sha256": "65df622ea4c913a4650ab5de5f2bff53bf116e0632c136e0d9e3c23527c0f04a",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u03-p02-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original lecture-audio cloze admits تسجيلًا صوتيًا and ملفًا. Constrain it to تسجيل/نظرة."
+        },
+        {
+          "finding_id": "ar-a2-u03-p02-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original map-glance cloze admits نظرة سريعة and similar phrases. Constrain it to نظرة/تسجيل."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u03-p03",
+      "learner_facing_sha256": "64ad2f028403f31988e3da16bede7cbb8aafe66a90a99d70751dfbb4de0f7ca5",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u03-p03-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original graduation-event cloze admits حفلة and مناسبة. Constrain it to حفل/زمن."
+        },
+        {
+          "finding_id": "ar-a2-u03-p03-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original passage-of-time cloze admits الوقت and السنوات. Constrain it to الزمن/الحفل."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u03-p04",
+      "learner_facing_sha256": "8b48f838d8ae607763252321e81f9ab7bd46d0dfd72fdf4651d3656e2891c9dc",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u03-p04-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original majority cloze admits أغلب. Constrain it to معظم/جميع."
+        },
+        {
+          "finding_id": "ar-a2-u03-p04-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original mistaken-belief cloze admits اعتقدت and حسبت. Constrain it to ظننت/علمت."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u03-p05",
+      "learner_facing_sha256": "9cea6630bb9f0d35dd10ea265fdb7c57fa052fc5203c10ebd193e3e6a19091fe",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u03-p05-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original lasting-impression cloze admits تأثيرًا and similar nouns. Constrain it to أثرًا/فوزًا."
+        },
+        {
+          "finding_id": "ar-a2-u03-p05-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original match-result cloze admits انتصر. Constrain it to فاز/خسر."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u03-p06",
+      "learner_facing_sha256": "988d470197f3f9cbb15f324bd8e4c0e2e70f4e4d83ce102c8f86716fb2f93a7e",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions bind by authoritative per-record Gate B packet hashes; the level SHA records the review-time snapshot."
+}
