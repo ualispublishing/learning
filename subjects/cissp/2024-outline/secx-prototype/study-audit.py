@@ -81,8 +81,9 @@ continue_tokens = [
 for token in continue_tokens:
     check(token in lens, f"Continue priority contract drifted: missing {token}")
 check("pageForCard(plan.mode,plan.card?.id)" in lens, "Continue does not route to the page containing its selected review card")
-check("studyCardLayout(plan.mode,plan.card?.id||null,true" in lens, "Continue does not reuse the existing Study card layout with focus enabled")
-check("studyQueueLayout(true)" in lens, "Continue has no caught-up fallback to the existing Study Queue root with focus enabled")
+check("if(plan.mode==='root'){studyQueueLayout(false);focusActive();return}" in lens, "Continue caught-up fallback no longer renders and focuses Study Queue synchronously")
+check("studyCardLayout(plan.mode,plan.card?.id||null,false,pageForCard(plan.mode,plan.card?.id));focusActive();" in lens, "Continue card routing no longer renders and focuses the selected Study card synchronously")
+check("studyCardLayout(plan.mode,plan.card?.id||null,true" not in lens, "Continue must not regress to animation-frame card focus")
 check("continueButton.addEventListener('click',runContinue)" in lens, "Continue button does not invoke the learner-state routing helper")
 check("refreshStudyControls()" in lens and "learner.progressKey" in lens, "Continue label does not refresh from the shared learner API")
 check("level==='study-cards'){studyQueueLayout(false);focusActive();return}" in lens, "Study-card Escape no longer renders the Study Queue and focuses it synchronously")
@@ -139,4 +140,4 @@ if errors:
         print("-", error)
     sys.exit(1)
 
-print("PASS secx_study_lens_audit queues=due,new,learning,mature,weak continue=due>learning>weak-new>new>study-root scoring=Atlas-stage-compatible state=shared-read-only-learner-api focus=browser-activeElement+sync-escape-ascent")
+print("PASS secx_study_lens_audit queues=due,new,learning,mature,weak continue=due>learning>weak-new>new>study-root scoring=Atlas-stage-compatible state=shared-read-only-learner-api focus=sync-route+sync-escape-ascent+browser-activeElement")
