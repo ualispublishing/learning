@@ -45,6 +45,8 @@ window.dueReviewLayout=function(returnTo=null,focus=false,page=null){
   level='due-reviews';parentDomain=null;parentObjective=null;active=returnTo&&nodes.some(n=>n.id===returnTo)?returnTo:'due:reviews';depth=0;render(focus);updateDueButton();
 };
 
+function returnToRootFocused(){domainLayout('root',false);focusActive()}
+
 dueButton.addEventListener('click',()=>dueReviewLayout(null,true,0));
 
 const graphCrumbText=crumbText;
@@ -61,7 +63,7 @@ window.descend=function(){
 };
 const graphAscend=ascend;
 window.ascend=function(){
-  if(depth===0&&level==='due-reviews')return domainLayout('root',true);
+  if(depth===0&&level==='due-reviews'){returnToRootFocused();return}
   return graphAscend();
 };
 
@@ -69,7 +71,7 @@ document.addEventListener('keydown',e=>{
   if(!document.getElementById('search')?.hidden)return;
   if(e.target.closest('input,textarea,select,[contenteditable="true"]'))return;
   if(e.key==='Escape'&&level==='due-reviews'&&depth===0){
-    e.preventDefault();e.stopImmediatePropagation();domainLayout('root',true);return;
+    e.preventDefault();e.stopImmediatePropagation();returnToRootFocused();return;
   }
   if((e.key==='r'||e.key==='R')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();e.stopImmediatePropagation();dueReviewLayout(null,true,0)}
 },true);
