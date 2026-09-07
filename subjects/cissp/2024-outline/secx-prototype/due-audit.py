@@ -46,6 +46,7 @@ try:
     due = read(ROOT / "due-review.js")
     next_html = read(ROOT / "next.html")
     smoke = read(ROOT / "browser-smoke.html")
+    continue_smoke = read(ROOT / "continue-browser-smoke.html")
 except (OSError, ValueError, RuntimeError) as exc:
     print("FAIL secx_due_audit")
     print("-", f"Parse/setup error: {exc}")
@@ -103,6 +104,11 @@ check("#dueReviewBtn" in smoke, "browser smoke does not wait for due-review laye
 check("due:reviews" in smoke and "KeyR" in smoke, "browser smoke does not exercise due-review keyboard branch")
 check("same-window grade" in smoke, "browser smoke does not verify same-window due-count update")
 check("SECX_RELEASED_CARDS" in smoke and "reviewCardCount===meta.card_count" in smoke, "browser smoke no longer reconciles learner registry to Atlas card_count")
+check("activateButton(d,dueButton,'desktop Due Reviews')" in continue_smoke, "dedicated browser smoke does not activate the visible desktop Due Reviews control")
+check("routedFocus(d,'due:reviews')" in continue_smoke, "dedicated browser smoke does not require desktop Due Reviews DOM focus")
+check("activateButton(md,mobileDue,'mobile Due Reviews')" in continue_smoke, "dedicated browser smoke does not activate the visible mobile Due Reviews control")
+check("routedFocus(md,'due:reviews')" in continue_smoke, "dedicated browser smoke does not require mobile Due Reviews DOM focus")
+check("ascendQueueToRoot(d,w,'desktop Due Reviews')" in continue_smoke and "ascendQueueToRoot(md,mobileApp.w,'mobile Due Reviews')" in continue_smoke, "dedicated browser smoke does not require Due Reviews Escape focus return on desktop and mobile")
 
 if errors:
     print("FAIL secx_due_audit")
@@ -110,4 +116,4 @@ if errors:
         print("-", error)
     sys.exit(1)
 
-print(f"PASS secx_due_audit layered_review_cards={layered_count} objective_cards={len(objectives)} high_yield_cards={len(high_cards)} load_order=ai>precision>registry>graph>learner>due source=shared-read-only-learner-api")
+print(f"PASS secx_due_audit layered_review_cards={layered_count} objective_cards={len(objectives)} high_yield_cards={len(high_cards)} load_order=ai>precision>registry>graph>learner>due source=shared-read-only-learner-api focus=visible-button+escape-root")
