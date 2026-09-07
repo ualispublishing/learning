@@ -81,8 +81,8 @@ continue_tokens = [
 for token in continue_tokens:
     check(token in lens, f"Continue priority contract drifted: missing {token}")
 check("pageForCard(plan.mode,plan.card?.id)" in lens, "Continue does not route to the page containing its selected review card")
-check("studyCardLayout(plan.mode,plan.card?.id||null,true" in lens, "Continue does not reuse the existing Study card layout")
-check("studyQueueLayout(true)" in lens, "Continue has no caught-up fallback to the existing Study Queue root")
+check("studyCardLayout(plan.mode,plan.card?.id||null,true" in lens, "Continue does not reuse the existing Study card layout with focus enabled")
+check("studyQueueLayout(true)" in lens, "Continue has no caught-up fallback to the existing Study Queue root with focus enabled")
 check("continueButton.addEventListener('click',runContinue)" in lens, "Continue button does not invoke the learner-state routing helper")
 check("refreshStudyControls()" in lens and "learner.progressKey" in lens, "Continue label does not refresh from the shared learner API")
 
@@ -110,6 +110,16 @@ check("study:list:learning" in continue_smoke and "Continue · Learning" in cont
 check("Continue · New D1" in continue_smoke and "study:list:new" in continue_smoke, "Continue browser smoke does not prove weakest-domain new-card fallback")
 check("Continue · Study" in continue_smoke and "study:queue" in continue_smoke, "Continue browser smoke does not prove caught-up Study Queue fallback")
 check("SECX_LEARNER" in continue_smoke and "Object.isFrozen" in continue_smoke, "Continue browser smoke does not verify the read-only learner API")
+check("function activateContinue" in continue_smoke and "d.activeElement===button" in continue_smoke, "Continue browser smoke does not prove the visible control can receive focus before activation")
+check("function routedFocus" in continue_smoke and "d.activeElement===target" in continue_smoke, "Continue browser smoke does not verify routed DOM focus follows the selected graph node")
+for token in (
+    "routedFocus(d,d1Fresh.id)",
+    "routedFocus(d,learningCard.id)",
+    "routedFocus(d,dueCard.id)",
+    "routedFocus(d,'study:queue')",
+    "routedFocus(md,'study:queue')",
+):
+    check(token in continue_smoke, f"Continue browser focus evidence missing: {token}")
 
 if errors:
     print("FAIL secx_study_lens_audit")
@@ -117,4 +127,4 @@ if errors:
         print("-", error)
     sys.exit(1)
 
-print("PASS secx_study_lens_audit queues=due,new,learning,mature,weak continue=due>learning>weak-new>new>study-root scoring=Atlas-stage-compatible state=shared-read-only-learner-api")
+print("PASS secx_study_lens_audit queues=due,new,learning,mature,weak continue=due>learning>weak-new>new>study-root scoring=Atlas-stage-compatible state=shared-read-only-learner-api focus=browser-activeElement")
