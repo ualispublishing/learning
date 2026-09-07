@@ -107,7 +107,11 @@ window.descend=function(){
   return priorDescend();
 };
 const priorAscend=ascend;
-window.ascend=function(){if(depth===0&&level==='study-cards')return studyQueueLayout(true);if(depth===0&&level==='study-queue')return domainLayout('root',true);return priorAscend()};
+window.ascend=function(){
+  if(depth===0&&level==='study-cards'){studyQueueLayout(false);focusActive();return}
+  if(depth===0&&level==='study-queue'){domainLayout('root',false);focusActive();return}
+  return priorAscend();
+};
 
 document.addEventListener('keydown',e=>{
   if(!document.getElementById('search')?.hidden)return;
