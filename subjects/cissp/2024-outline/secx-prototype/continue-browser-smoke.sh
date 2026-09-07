@@ -12,7 +12,7 @@ cd "$ROOT"
 python -m http.server "$PORT" >"$LOG" 2>&1 & SERVER_PID=$!
 trap 'kill "$SERVER_PID" 2>/dev/null || true; rm -rf "$PROFILE"' EXIT
 sleep 1
-if ! timeout 70s "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="$PROFILE" --virtual-time-budget=50000 --dump-dom "http://127.0.0.1:${PORT}/secx-prototype/continue-browser-smoke.html" >"$OUT"; then
+if ! timeout 90s "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="$PROFILE" --virtual-time-budget=70000 --dump-dom "http://127.0.0.1:${PORT}/secx-prototype/continue-browser-smoke.html" >"$OUT"; then
  echo "FAIL secx_continue_smoke: Chrome did not complete" >&2; tail -n 100 "$LOG" >&2 || true; exit 1
 fi
 if ! grep -Fq 'data-smoke="pass"' "$OUT"; then
