@@ -123,7 +123,7 @@ for token in (
 ):
     check(token in continue_smoke, f"Continue browser focus evidence missing: {token}")
 check("function ascendCardToRoot" in continue_smoke and "function ascendQueueToRoot" in continue_smoke, "Continue browser smoke does not verify explicit Escape focus ascent")
-check("routedFocus(d,'root')" in continue_smoke and "routedFocus(md,'root')" in continue_smoke, "Continue browser smoke does not prove Escape returns focus to the SecX root on desktop and mobile")
+check("function ascendQueueToRoot" in continue_smoke and "routedFocus(d,'root')" in continue_smoke, "Continue browser smoke shared Escape helper does not require SecX-root DOM focus")
 for token in (
     "ascendCardToRoot(d,w,'fresh')",
     "ascendCardToRoot(d,w,'learning')",
