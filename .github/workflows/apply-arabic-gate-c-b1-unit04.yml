@@ -1,0 +1,81 @@
+name: Apply Arabic Gate C B1 Unit 4
+on:
+  push:
+permissions:
+  contents: write
+jobs:
+  arabic-gate-c-b1-unit04:
+    if: github.event.head_commit.message == 'Run Arabic Gate C B1 Unit 4 now'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate exact pre-B1-Unit-4 Gate C state
+        run: |
+          set -euo pipefail
+          python reading/tools/validate_continuation_state.py
+          test -e reading/audit/arabic_gate_c_decisions_2026-09-05/b1_u03.json
+          test ! -e reading/audit/arabic_gate_c_decisions_2026-09-05/b1_u04.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('reading/RELEASE_STATUS.json').read_text())['languages']['arabic'];m=json.loads(Path('reading/STATE_MANIFEST.json').read_text());b=r['naturalness_review_progress'];c=r['comprehension_review_progress'];d=r['latest_deterministic_gate']
+          assert m['aggregate_sha256']=='53b42b03d084091bfd9435fae2d834421309b3d2517706e6f31578ec2d8894dc'
+          assert r['release_state']=='REOPEN_REQUIRED' and r['educator_release_ready'] is False
+          assert (b['fresh_records_reviewed'],b['fresh_records_with_findings'],b['fresh_findings'])==(360,308,560)
+          assert (c['fresh_records_reviewed'],c['fresh_qa_pairs_reviewed'],c['fresh_records_with_findings'],c['fresh_findings'])==(138,1380,77,142) and c['levels_completed']==['A1','A2']
+          assert d['open_findings']==1080 and d['finding_classes']=={'coverage_missing_or_zero':360,'coverage_not_pass':360,'not_approved':360}
+          PY
+      - name: Record exact-current clean B1 Unit 4 Gate C decisions
+        run: python reading/tools/record_arabic_gate_c_b1_unit04_decisions.py
+      - name: Synchronize Gate C evidence and exact state
+        run: |
+          set -euo pipefail
+          python reading/tools/sync_arabic_gate_c_progress.py
+          python reading/tools/sync_verification_tasks_arabic_gate_c_b1_unit04.py
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+      - name: Assert exact post-B1-Unit-4 state
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('reading/RELEASE_STATUS.json').read_text())['languages']['arabic'];b=r['naturalness_review_progress'];c=r['comprehension_review_progress'];d=r['latest_deterministic_gate']
+          assert r['release_state']=='REOPEN_REQUIRED' and r['educator_release_ready'] is False
+          assert (b['fresh_records_reviewed'],b['fresh_records_with_findings'],b['fresh_findings'])==(360,308,560)
+          assert (c['fresh_records_reviewed'],c['fresh_qa_pairs_reviewed'],c['fresh_records_with_findings'],c['fresh_findings'])==(144,1440,77,142) and c['levels_completed']==['A1','A2']
+          g=json.loads(Path('reading/audit/arabic_gate_c_decisions_2026-09-05/b1_u04.json').read_text());assert (g['records_reviewed'],g['qa_pairs_reviewed'],g['records_with_findings'],g['fresh_findings'])==(6,60,0,0)
+          assert all(x['decision']=='PASS' and x['finding_count']==0 for x in g['decisions'])
+          assert g['quality_promotion'] is False and g['release_claim'] is False
+          assert d['open_findings']==1080 and d['finding_classes']=={'coverage_missing_or_zero':360,'coverage_not_pass':360,'not_approved':360}
+          PY
+      - name: Commit bounded Gate C B1 Unit 4 evidence and exact state
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/audit/arabic_gate_c_decisions_2026-09-05/b1_u04.json reading/RELEASE_STATUS.json reading/VERIFICATION_TASKS.md reading/STATE_MANIFEST.json
+          git commit -m 'Complete Arabic Gate C B1 Unit 4 review'
+      - name: Rebase and regenerate exact push candidate
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git rebase origin/main
+          python reading/tools/validate_continuation_state.py
+          python reading/tools/record_arabic_gate_c_b1_unit04_decisions.py
+          python reading/tools/sync_arabic_gate_c_progress.py
+          python reading/tools/sync_verification_tasks_arabic_gate_c_b1_unit04.py
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+          git add reading/audit/arabic_gate_c_decisions_2026-09-05/b1_u04.json reading/RELEASE_STATUS.json reading/VERIFICATION_TASKS.md reading/STATE_MANIFEST.json
+          if ! git diff --cached --quiet; then git commit --amend --no-edit; fi
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('reading/RELEASE_STATUS.json').read_text())['languages']['arabic'];c=r['comprehension_review_progress'];d=r['latest_deterministic_gate']
+          assert r['release_state']=='REOPEN_REQUIRED' and r['educator_release_ready'] is False
+          assert (c['fresh_records_reviewed'],c['fresh_qa_pairs_reviewed'],c['fresh_records_with_findings'],c['fresh_findings'])==(144,1440,77,142) and c['levels_completed']==['A1','A2']
+          assert d['open_findings']==1080
+          PY
+          git push origin HEAD:main
