@@ -85,8 +85,8 @@ check("studyCardLayout(plan.mode,plan.card?.id||null,true" in lens, "Continue do
 check("studyQueueLayout(true)" in lens, "Continue has no caught-up fallback to the existing Study Queue root with focus enabled")
 check("continueButton.addEventListener('click',runContinue)" in lens, "Continue button does not invoke the learner-state routing helper")
 check("refreshStudyControls()" in lens and "learner.progressKey" in lens, "Continue label does not refresh from the shared learner API")
-check("level==='study-cards')return studyQueueLayout(true)" in lens, "Study-card Escape no longer returns to the Study Queue with focus enabled")
-check("level==='study-queue')return domainLayout('root',true)" in lens, "Study Queue Escape no longer returns to the SecX root with focus enabled")
+check("level==='study-cards'){studyQueueLayout(false);focusActive();return}" in lens, "Study-card Escape no longer renders the Study Queue and focuses it synchronously")
+check("level==='study-queue'){domainLayout('root',false);focusActive();return}" in lens, "Study Queue Escape no longer renders the SecX root and focuses it synchronously")
 
 check("review-stage score" in lens and "not proof of knowledge" in lens, "study lens no longer states the review-score evidence boundary")
 check("Scenario answer exposure is not counted as retrieval mastery" in lens, "study lens no longer protects the scenario-exposure/mastery boundary")
@@ -139,4 +139,4 @@ if errors:
         print("-", error)
     sys.exit(1)
 
-print("PASS secx_study_lens_audit queues=due,new,learning,mature,weak continue=due>learning>weak-new>new>study-root scoring=Atlas-stage-compatible state=shared-read-only-learner-api focus=browser-activeElement+escape-ascent")
+print("PASS secx_study_lens_audit queues=due,new,learning,mature,weak continue=due>learning>weak-new>new>study-root scoring=Atlas-stage-compatible state=shared-read-only-learner-api focus=browser-activeElement+sync-escape-ascent")
