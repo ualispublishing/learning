@@ -7,14 +7,14 @@
   "date": "2026-09-01",
   "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
   "canonical_path": "reading/arabic/a2/passages.jsonl",
-  "canonical_sha256": "d595c96f41e6db79c8af09be8634450b1e49c0738e08f39eec480067c68c13ea",
+  "canonical_sha256": "e8da4976184a3916baad6cc6d70a495ba1e5ceb232006dd7eaa3ea65a0436483",
   "records_reviewed": 6,
   "records_with_findings": 5,
   "fresh_findings": 10,
   "decisions": [
     {
       "passage_id": "ar-a2-u08-p01",
-      "learner_facing_sha256": "7ef010028486b6c6c0a3b54148aac86ea9f39ddc45fbf55deb69d665360c4db8",
+      "learner_facing_sha256": "993d8c0a854522d6600daef9c6876ef6df3a0deabfe0adf0e2ed1427c05fbd91",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 3,
       "findings": [
@@ -46,7 +46,7 @@
     },
     {
       "passage_id": "ar-a2-u08-p02",
-      "learner_facing_sha256": "37a6fa53ac6bd42411e6fdc624f45398827c53fa098c1f416709ffbf5ac304ca",
+      "learner_facing_sha256": "8a31e0fcda5ab085def767ee37657c1a110973b2be27c28e18b923b8f588fc1c",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 2,
       "findings": [
@@ -70,7 +70,7 @@
     },
     {
       "passage_id": "ar-a2-u08-p03",
-      "learner_facing_sha256": "ae86039b0fe04b3c4f0ec6ff0f3ff0b240560df52577f43516c12075e38fefa7",
+      "learner_facing_sha256": "12204ba415e8682bea7a0c665713d8806b9db407bbd4642a895f3b68dc802bec",
       "decision": "PASS",
       "finding_count": 0,
       "findings": []
@@ -93,7 +93,7 @@
     },
     {
       "passage_id": "ar-a2-u08-p05",
-      "learner_facing_sha256": "e3159a90b9e62a0b2c2ad715a83bd2e2bb27783d9f0e8af1e9a06505997ba937",
+      "learner_facing_sha256": "1f44879dc80735a46aeefd7ba989220fe45b9a2b44190c3386dd51129240bc59",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 3,
       "findings": [
@@ -142,5 +142,22 @@
   ],
   "quality_promotion": false,
   "release_claim": false,
-  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer.",
+  "post_gate_c_revalidations": [
+    {
+      "date": "2026-09-07",
+      "gate_c_artifact": "reading/audit/arabic_gate_c_decisions_2026-09-05/a2_u08.json",
+      "scope": [
+        "ar-a2-u08-p01 question q9",
+        "ar-a2-u08-p01 question q10",
+        "ar-a2-u08-p02 question q9",
+        "ar-a2-u08-p02 question q10",
+        "ar-a2-u08-p03 question q9",
+        "ar-a2-u08-p05 question q9"
+      ],
+      "gate_b_language_recheck": "PASS",
+      "reason": "Gate C constrained six underdetermined A2 Unit 8 environmental transfer items covering area, materials, usage, energy, growth, and community; keyed answers were preserved and Gate B was rebound to exact-current learner-facing content.",
+      "release_claim": false
+    }
+  ]
 }
