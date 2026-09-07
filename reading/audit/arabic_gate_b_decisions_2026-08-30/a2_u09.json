@@ -7,14 +7,14 @@
   "date": "2026-09-01",
   "gate": "Gate B — passage-by-passage linguistic/naturalness audit",
   "canonical_path": "reading/arabic/a2/passages.jsonl",
-  "canonical_sha256": "0555dbdd584315d8c442889a9f38c09ad88227b26169561d6371ef0b5d6f94d9",
+  "canonical_sha256": "f49823373c2fc0abc479a65840952b0fb78b53c51beace29f45f69624f493934",
   "records_reviewed": 6,
   "records_with_findings": 5,
   "fresh_findings": 8,
   "decisions": [
     {
       "passage_id": "ar-a2-u09-p01",
-      "learner_facing_sha256": "37ff23ebacdd4b3c2882710327045fefa8cc5a7b02c7ca31e819d6c330a4e608",
+      "learner_facing_sha256": "6dd2ab09690fd6495215d296cd6b2182c122bac3f0f1d0de668c9a0084b7853d",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 1,
       "findings": [
@@ -30,14 +30,14 @@
     },
     {
       "passage_id": "ar-a2-u09-p02",
-      "learner_facing_sha256": "47fc502d817836480effe720ac78bb49955f30a7beaf445487848f893dd46a26",
+      "learner_facing_sha256": "c3930dff8a5708ae8a8f9a3d38d63da3a0a6723cd8af0628582a48ef55f61c48",
       "decision": "PASS",
       "finding_count": 0,
       "findings": []
     },
     {
       "passage_id": "ar-a2-u09-p03",
-      "learner_facing_sha256": "2eae1f541dff70796c7aef6a81edf68740e80651a8a55a38dc4f220e1557a86f",
+      "learner_facing_sha256": "5727719f07a79c0165cdad9070a0fa6cdcf5108eba1b5331e7121d10a5b10d0d",
       "decision": "PASS_AFTER_REPAIR",
       "finding_count": 2,
       "findings": [
@@ -126,5 +126,19 @@
   ],
   "quality_promotion": false,
   "release_claim": false,
-  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer."
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer.",
+  "post_gate_c_revalidations": [
+    {
+      "date": "2026-09-07",
+      "gate_c_artifact": "reading/audit/arabic_gate_c_decisions_2026-09-05/a2_u09.json",
+      "scope": [
+        "ar-a2-u09-p01 question q9",
+        "ar-a2-u09-p02 question q9",
+        "ar-a2-u09-p03 question q9"
+      ],
+      "gate_b_language_recheck": "PASS",
+      "reason": "Gate C constrained three underdetermined A2 Unit 9 transfer items covering story, version/copy, and restaurant; keyed answers were preserved and Gate B was rebound to exact-current learner-facing content.",
+      "release_claim": false
+    }
+  ]
 }
