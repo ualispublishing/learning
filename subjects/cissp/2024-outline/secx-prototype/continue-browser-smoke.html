@@ -33,7 +33,8 @@ async function ascendQueueToRoot(d,w,label){
 }
 function isoOffset(days){const d=new Date();d.setDate(d.getDate()+days);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function writeCards(w,cards){w.localStorage.setItem('cissp_atlas_progress_v1',JSON.stringify({cards}));w.dispatchEvent(new w.StorageEvent('storage',{key:'cissp_atlas_progress_v1'}))}
-function activateContinue(d,button,label){button.focus();assert(d.activeElement===button,`${label} Continue button receives focus before activation`);button.click()}
+function activateButton(d,button,label){button.focus();assert(d.activeElement===button,`${label} button receives focus before activation`);button.click()}
+function activateContinue(d,button,label){activateButton(d,button,`${label} Continue`)}
 async function run(){
   const {d,w}=await ready(frame,'desktop'),cards=w.SECX_RELEASED_CARDS,continueButton=d.querySelector('#continueStudyBtn'),learner=w.SECX_LEARNER;
   assert(Object.isFrozen(learner),'learner API object is frozen');
@@ -76,6 +77,11 @@ async function run(){
   await waitFor(()=>routedFocus(d,'study:queue')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue','caught-up Continue falls back to and focuses Study Queue root');
   await ascendQueueToRoot(d,w,'caught-up');
 
+  const dueButton=d.querySelector('#dueReviewBtn');
+  activateButton(d,dueButton,'desktop Due Reviews');
+  await waitFor(()=>routedFocus(d,'due:reviews')&&d.querySelector('#crumb')?.textContent==='SecX › Due reviews','visible desktop Due Reviews button focuses Due Reviews root');
+  await ascendQueueToRoot(d,w,'desktop Due Reviews');
+
   frame.style.display='none';
   mobile.style.position='fixed';mobile.style.left='0';mobile.style.top='0';mobile.style.zIndex='9999';mobile.style.background='#000';
   await sleep(120);
@@ -85,10 +91,14 @@ async function run(){
   activateContinue(md,mobileContinue,'mobile caught-up');
   await waitFor(()=>routedFocus(md,'study:queue')&&md.querySelector('#crumb')?.textContent==='SecX › Study queue','visible mobile Continue focuses caught-up Study Queue root');
   await ascendQueueToRoot(md,mobileApp.w,'mobile caught-up');
-  assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile Continue control has no horizontal overflow');
+  const mobileDue=md.querySelector('#dueReviewBtn');
+  activateButton(md,mobileDue,'mobile Due Reviews');
+  await waitFor(()=>routedFocus(md,'due:reviews')&&md.querySelector('#crumb')?.textContent==='SecX › Due reviews','visible mobile Due Reviews button focuses Due Reviews root');
+  await ascendQueueToRoot(md,mobileApp.w,'mobile Due Reviews');
+  assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile Continue/Due controls have no horizontal overflow');
 
   result.dataset.smoke='pass';
-  result.textContent=`PASS SecX Continue routing smoke: learner-api=frozen-read-only+same-window-resync focus-transfer+escape-ascent=desktop+visible-mobile fresh=New-D1 learning=${learningCard.id} due=${dueCard.id} caught-up=Study-Queue state=Atlas-only`;
+  result.textContent=`PASS SecX Continue routing smoke: learner-api=frozen-read-only+same-window-resync focus-transfer+escape-ascent=desktop+visible-mobile due-focus=desktop+visible-mobile fresh=New-D1 learning=${learningCard.id} due=${dueCard.id} caught-up=Study-Queue state=Atlas-only`;
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
