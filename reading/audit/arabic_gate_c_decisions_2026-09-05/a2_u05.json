@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A2",
+  "unit": 5,
+  "date": "2026-09-06",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/a2/passages.jsonl",
+  "canonical_sha256": "41075e3ea77c28c09b2a76fe7dff67074920c9c03036d9846fa6c466a4c9c015",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 5,
+  "fresh_findings": 10,
+  "decisions": [
+    {
+      "passage_id": "ar-a2-u05-p01",
+      "learner_facing_sha256": "26979fe3b221545b29e4d4491601b454778c07b406d1397258ed6ca2a41b8497",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u05-p01-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original photography cloze admits زيارة and other activities. Constrain it to تصوير/مسابقة."
+        },
+        {
+          "finding_id": "ar-a2-u05-p01-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original school-reading event cloze admits فعالية and نشاط. Constrain it to مسابقة/تصوير."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u05-p02",
+      "learner_facing_sha256": "34a33957e46dce8432b3ffe048784cb890a65cd4809862131f7d02f4d5eea9d1",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u05-p02-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original decision-reflection cloze admits دراسة and تأنٍ. Constrain it to تفكير/تصوير."
+        },
+        {
+          "finding_id": "ar-a2-u05-p02-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original follow-up cloze admits مراجعة and فحص. Constrain it to متابعة/مسابقة."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u05-p03",
+      "learner_facing_sha256": "68d1475cfcd2d046c7522370ac04879ccd04ba4cd8bf7ed005d6191a6bff57fa",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u05-p03-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original first-stage cloze admits مرحلة. Constrain it to خطوة/مشاريع."
+        },
+        {
+          "finding_id": "ar-a2-u05-p03-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original science-project cloze can take singular or other work nouns. Add عدة and constrain it to مشاريع/مشروع."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u05-p04",
+      "learner_facing_sha256": "af1444a327a427545e3c2a236ee95d9517490c32ed4b090cab134eafa5e8bd21",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u05-p04-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original daily-habit cloze admits ممارسة and رياضة. Constrain it to عادة/مسابقة."
+        },
+        {
+          "finding_id": "ar-a2-u05-p04-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original getting-acquainted cloze admits يتقرب and similar verbs. Constrain it to يتعرف/ينسى while preserving the complete-word cloze."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u05-p05",
+      "learner_facing_sha256": "58c954fa5abae1b899b63f6263d079580675e8c176efdb0def15736d443edcbb",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u05-p05-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original regular-practice cloze admits تمرين. Constrain it to تدريب/مسابقة."
+        },
+        {
+          "finding_id": "ar-a2-u05-p05-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original work-experience cloze admits تجربة in some readings. Constrain it to خبرة/خطوة."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u05-p06",
+      "learner_facing_sha256": "a5dbc9b2447d8321c81eb51c7828a788fe974bbfb68e0ee4bb0c7f370b6f935e",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions bind by authoritative per-record Gate B packet hashes; the level SHA records the review-time snapshot."
+}
