@@ -66,14 +66,18 @@ async function run(){
   activateContinue(d,continueButton,'caught-up');
   await waitFor(()=>routedFocus(d,'study:queue')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue','caught-up Continue falls back to and focuses Study Queue root');
 
+  frame.style.display='none';
+  mobile.style.position='fixed';mobile.style.left='0';mobile.style.top='0';mobile.style.zIndex='9999';mobile.style.background='#000';
+  await sleep(120);
+  assert(mobile.getBoundingClientRect().top>=-2,'mobile focus fixture is visible before activation');
   const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mobileContinue=md.querySelector('#continueStudyBtn');
   await waitFor(()=>mobileContinue?.textContent==='Continue · Study','mobile Continue reflects shared caught-up Atlas state');
   activateContinue(md,mobileContinue,'mobile caught-up');
-  await waitFor(()=>routedFocus(md,'study:queue')&&md.querySelector('#crumb')?.textContent==='SecX › Study queue','mobile Continue focuses caught-up Study Queue root');
+  await waitFor(()=>routedFocus(md,'study:queue')&&md.querySelector('#crumb')?.textContent==='SecX › Study queue','visible mobile Continue focuses caught-up Study Queue root');
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile Continue control has no horizontal overflow');
 
   result.dataset.smoke='pass';
-  result.textContent=`PASS SecX Continue routing smoke: learner-api=frozen-read-only+same-window-resync focus-transfer=desktop+mobile fresh=New-D1 learning=${learningCard.id} due=${dueCard.id} caught-up=Study-Queue state=Atlas-only`;
+  result.textContent=`PASS SecX Continue routing smoke: learner-api=frozen-read-only+same-window-resync focus-transfer=desktop+visible-mobile fresh=New-D1 learning=${learningCard.id} due=${dueCard.id} caught-up=Study-Queue state=Atlas-only`;
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
