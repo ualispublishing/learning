@@ -90,7 +90,11 @@ window.studyCardLayout=function(mode,returnTo=null,focus=false,page=null){
   level='study-cards';parentDomain=null;parentObjective=null;active=returnTo&&nodes.some(n=>n.id===returnTo)?returnTo:centerId;depth=0;render(focus);refreshStudyControls();
 };
 
-function runContinue(){const plan=continuePlan();if(plan.mode==='root')return studyQueueLayout(true);return studyCardLayout(plan.mode,plan.card?.id||null,true,pageForCard(plan.mode,plan.card?.id))}
+function runContinue(){
+  const plan=continuePlan();
+  if(plan.mode==='root'){studyQueueLayout(false);focusActive();return}
+  studyCardLayout(plan.mode,plan.card?.id||null,false,pageForCard(plan.mode,plan.card?.id));focusActive();
+}
 continueButton.addEventListener('click',runContinue);
 studyButton.addEventListener('click',()=>studyQueueLayout(true));
 const priorCrumb=crumbText;
