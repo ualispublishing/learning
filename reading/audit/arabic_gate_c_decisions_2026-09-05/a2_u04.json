@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A2",
+  "unit": 4,
+  "date": "2026-09-06",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/a2/passages.jsonl",
+  "canonical_sha256": "b93dc95d66f390ae8e6e389d83a2ae5e918ca7be4d95bcbe50f40b437f35c100",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 5,
+  "fresh_findings": 10,
+  "decisions": [
+    {
+      "passage_id": "ar-a2-u04-p01",
+      "learner_facing_sha256": "0de0aa953dc71bbf5bdf8babc80256c8772399ff5a5554e3da12b66002bd4b8e",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u04-p01-gC-01",
+          "field": "question q9",
+          "dimension": "answer_grounding_and_wording",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original shirt cloze both admitted the natural answer مقاس and made keyed حجم awkward in context. Move the target to the natural phrase صندوقًا ذا حجم أكبر and constrain it against قطع."
+        },
+        {
+          "finding_id": "ar-a2-u04-p01-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The biscuit-piece cloze admits حبات and similar count nouns. Constrain it to قطع/حجم."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u04-p02",
+      "learner_facing_sha256": "55f2126ed0fb761f369feaba6ca3e71aa72ed7adf0f0ad9c2688dc97b46a4b01",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u04-p02-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The phone-price cloze admits سعر. Constrain it to ثمن/صفقة."
+        },
+        {
+          "finding_id": "ar-a2-u04-p02-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The good-purchase cloze admits several evaluative purchase nouns. Constrain it to صفقة/ثمن."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u04-p03",
+      "learner_facing_sha256": "8bc76ab94a5783f2da752b6832b2bdc44ed072c4539be7102a3119fbf18415a7",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u04-p03-gC-01",
+          "field": "question q9",
+          "dimension": "assessment_wording",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The stem وي_____ combined with keyed يستحق would literally duplicate the initial ي; it also admits other verbs. Remove the prefixed ي and constrain يستحق against يستخدم."
+        },
+        {
+          "finding_id": "ar-a2-u04-p03-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The downloaded-program cloze admits برنامجًا and similar nouns. Constrain it to تطبيقًا/اشتراكًا."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u04-p04",
+      "learner_facing_sha256": "207be86fc2c7ce6f7c184aa6eeea1558eb8172fa3da62216c15fa7a3da520381",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u04-p04-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The food-usability cloze admits مناسبًا and similar adjectives. Constrain it to صالحًا/فاسدًا."
+        },
+        {
+          "finding_id": "ar-a2-u04-p04-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The substitution cloze admits مكان and عوض. Constrain it to بدل/مع."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u04-p05",
+      "learner_facing_sha256": "28af36f8c215bf3da730eb27415812ffa610484f8f1e00e8454815424173babf",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u04-p05-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The phone-service cloze admits صيانة and other repair nouns. Constrain it to إصلاح/صفقة."
+        },
+        {
+          "finding_id": "ar-a2-u04-p05-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The post-problem comparison admits أصعب and other negative comparatives. Add an explicit worsening cue and constrain it to أسوأ/أفضل."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u04-p06",
+      "learner_facing_sha256": "98a4648aaa3a905b0cf83e33abebf4177d134a38082de102e8138da3b8de9b60",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions bind by authoritative per-record Gate B packet hashes; the level SHA records the review-time snapshot."
+}
