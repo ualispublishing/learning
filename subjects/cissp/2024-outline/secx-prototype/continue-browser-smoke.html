@@ -23,6 +23,8 @@ function key(w,key,code=key){graphTarget(w).dispatchEvent(new w.KeyboardEvent('k
 async function backToRoot(d,w){if(d.querySelector('#crumb')?.textContent==='SecX')return;key(w,'Escape','Escape');await sleep(60);if(d.querySelector('#crumb')?.textContent!=='SecX'){key(w,'Escape','Escape');await waitFor(()=>d.querySelector('#crumb')?.textContent==='SecX','return to SecX root')}}
 function isoOffset(days){const d=new Date();d.setDate(d.getDate()+days);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function writeCards(w,cards){w.localStorage.setItem('cissp_atlas_progress_v1',JSON.stringify({cards}));w.dispatchEvent(new w.StorageEvent('storage',{key:'cissp_atlas_progress_v1'}))}
+function activateContinue(d,button,label){button.focus();assert(d.activeElement===button,`${label} Continue button receives focus before activation`);button.click()}
+function routedFocus(d,id){const target=node(d,id);return target?.classList.contains('active')&&d.activeElement===target}
 async function run(){
   const {d,w}=await ready(frame,'desktop'),cards=w.SECX_RELEASED_CARDS,continueButton=d.querySelector('#continueStudyBtn'),learner=w.SECX_LEARNER;
   assert(Object.isFrozen(learner),'learner API object is frozen');
@@ -33,8 +35,8 @@ async function run(){
   assert(d1Fresh,'fresh D1 card exists');
   assert(learner.cardState(d1Fresh.id)===null&&learner.cardStatus(d1Fresh.id)==='new','fresh card state comes from shared learner API');
   await waitFor(()=>continueButton.textContent==='Continue · New D1','fresh state prioritizes new card in lowest-score D1');
-  continueButton.click();
-  await waitFor(()=>node(d,'study:list:new')&&node(d,d1Fresh.id)?.classList.contains('active')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue › New cards','Continue routes fresh state to selected weakest-domain new card');
+  activateContinue(d,continueButton,'fresh');
+  await waitFor(()=>node(d,'study:list:new')&&routedFocus(d,d1Fresh.id)&&d.querySelector('#crumb')?.textContent==='SecX › Study queue › New cards','Continue routes fresh state and focuses selected weakest-domain new card');
   await backToRoot(d,w);
 
   const learningCard=cards.find(c=>c.domain_num===2&&c.id!==d1Fresh.id)||cards.find(c=>c.id!==d1Fresh.id);assert(learningCard,'learning fixture card exists');
@@ -44,8 +46,8 @@ async function run(){
   assert(Object.isFrozen(learningSnapshot),'learner API returns frozen card-state snapshots');
   assert(learner.cardStatus(learningCard.id)==='learning'&&!learner.isDue(learningCard.id),'shared learner API classifies future-due stage-one card as learning');
   await waitFor(()=>continueButton.textContent==='Continue · Learning','learning state overrides new-card fallback');
-  continueButton.click();
-  await waitFor(()=>node(d,'study:list:learning')&&node(d,learningCard.id)?.classList.contains('active')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue › Learning cards','Continue routes to selected learning card');
+  activateContinue(d,continueButton,'learning');
+  await waitFor(()=>node(d,'study:list:learning')&&routedFocus(d,learningCard.id)&&d.querySelector('#crumb')?.textContent==='SecX › Study queue › Learning cards','Continue routes and focuses selected learning card');
   await backToRoot(d,w);
 
   const dueCard=cards.find(c=>c.domain_num===3&&c.id!==learningCard.id)||cards.find(c=>c.id!==learningCard.id);assert(dueCard,'due fixture card exists');
@@ -53,23 +55,25 @@ async function run(){
   writeCards(w,dueAndLearning);
   await waitFor(()=>learner.isDue(dueCard.id)&&learner.cardStatus(dueCard.id)==='due','shared learner API classifies due fixture');
   await waitFor(()=>continueButton.textContent==='Continue · Due','due state overrides simultaneous learning work');
-  continueButton.click();
-  await waitFor(()=>node(d,'study:list:due')&&node(d,dueCard.id)?.classList.contains('active')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue › Due reviews','Continue routes due-first to selected due card');
+  activateContinue(d,continueButton,'due');
+  await waitFor(()=>node(d,'study:list:due')&&routedFocus(d,dueCard.id)&&d.querySelector('#crumb')?.textContent==='SecX › Study queue › Due reviews','Continue routes due-first and focuses selected due card');
   await backToRoot(d,w);
 
   const mature={};for(const c of cards)mature[c.id]={stage:4,due:isoOffset(30),reviews:4,last_grade:3,last_review:isoOffset(0)};
   writeCards(w,mature);
   await waitFor(()=>learner.isMature(cards[0].id)&&learner.cardStatus(cards[0].id)==='mature','shared learner API classifies mature caught-up state');
   await waitFor(()=>continueButton.textContent==='Continue · Study','caught-up state does not manufacture extra due/learning/new work');
-  continueButton.click();
-  await waitFor(()=>node(d,'study:queue')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue','caught-up Continue falls back to Study Queue root');
+  activateContinue(d,continueButton,'caught-up');
+  await waitFor(()=>routedFocus(d,'study:queue')&&d.querySelector('#crumb')?.textContent==='SecX › Study queue','caught-up Continue falls back to and focuses Study Queue root');
 
-  const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d;
-  await waitFor(()=>md.querySelector('#continueStudyBtn')?.textContent==='Continue · Study','mobile Continue reflects shared caught-up Atlas state');
+  const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mobileContinue=md.querySelector('#continueStudyBtn');
+  await waitFor(()=>mobileContinue?.textContent==='Continue · Study','mobile Continue reflects shared caught-up Atlas state');
+  activateContinue(md,mobileContinue,'mobile caught-up');
+  await waitFor(()=>routedFocus(md,'study:queue')&&md.querySelector('#crumb')?.textContent==='SecX › Study queue','mobile Continue focuses caught-up Study Queue root');
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile Continue control has no horizontal overflow');
 
   result.dataset.smoke='pass';
-  result.textContent=`PASS SecX Continue routing smoke: learner-api=frozen-read-only+same-window-resync fresh=New-D1 learning=${learningCard.id} due=${dueCard.id} caught-up=Study-Queue state=Atlas-only`;
+  result.textContent=`PASS SecX Continue routing smoke: learner-api=frozen-read-only+same-window-resync focus-transfer=desktop+mobile fresh=New-D1 learning=${learningCard.id} due=${dueCard.id} caught-up=Study-Queue state=Atlas-only`;
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
