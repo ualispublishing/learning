@@ -99,6 +99,9 @@ check("[data-sec-grade]" in due and "updateDueButton()" in due, "same-window gra
 check("dueCards().some" in due, "due branch does not reconcile a graded card against current due state")
 check("learner.progressKey" in due, "due storage refresh is no longer keyed through the shared learner API")
 check("correct" not in due.lower() and "mastery" not in due.lower(), "due-review view should not write or infer correctness/mastery")
+check("function returnToRootFocused(){domainLayout('root',false);focusActive()}" in due, "Due Reviews Escape no longer renders and focuses the SecX root synchronously")
+check(due.count("returnToRootFocused()") >= 3, "both Due Reviews Escape paths must reuse the synchronous root-focus helper")
+check("domainLayout('root',true)" not in due, "Due Reviews must not regress to animation-frame root focus on Escape")
 
 check("#dueReviewBtn" in smoke, "browser smoke does not wait for due-review layer")
 check("due:reviews" in smoke and "KeyR" in smoke, "browser smoke does not exercise due-review keyboard branch")
@@ -116,4 +119,4 @@ if errors:
         print("-", error)
     sys.exit(1)
 
-print(f"PASS secx_due_audit layered_review_cards={layered_count} objective_cards={len(objectives)} high_yield_cards={len(high_cards)} load_order=ai>precision>registry>graph>learner>due source=shared-read-only-learner-api focus=visible-button+escape-root")
+print(f"PASS secx_due_audit layered_review_cards={layered_count} objective_cards={len(objectives)} high_yield_cards={len(high_cards)} load_order=ai>precision>registry>graph>learner>due source=shared-read-only-learner-api focus=visible-button+sync-escape-root")
