@@ -85,6 +85,8 @@ check("studyCardLayout(plan.mode,plan.card?.id||null,true" in lens, "Continue do
 check("studyQueueLayout(true)" in lens, "Continue has no caught-up fallback to the existing Study Queue root with focus enabled")
 check("continueButton.addEventListener('click',runContinue)" in lens, "Continue button does not invoke the learner-state routing helper")
 check("refreshStudyControls()" in lens and "learner.progressKey" in lens, "Continue label does not refresh from the shared learner API")
+check("level==='study-cards')return studyQueueLayout(true)" in lens, "Study-card Escape no longer returns to the Study Queue with focus enabled")
+check("level==='study-queue')return domainLayout('root',true)" in lens, "Study Queue Escape no longer returns to the SecX root with focus enabled")
 
 check("review-stage score" in lens and "not proof of knowledge" in lens, "study lens no longer states the review-score evidence boundary")
 check("Scenario answer exposure is not counted as retrieval mastery" in lens, "study lens no longer protects the scenario-exposure/mastery boundary")
@@ -120,6 +122,16 @@ for token in (
     "routedFocus(md,'study:queue')",
 ):
     check(token in continue_smoke, f"Continue browser focus evidence missing: {token}")
+check("function ascendCardToRoot" in continue_smoke and "function ascendQueueToRoot" in continue_smoke, "Continue browser smoke does not verify explicit Escape focus ascent")
+check("routedFocus(d,'root')" in continue_smoke and "routedFocus(md,'root')" in continue_smoke, "Continue browser smoke does not prove Escape returns focus to the SecX root on desktop and mobile")
+for token in (
+    "ascendCardToRoot(d,w,'fresh')",
+    "ascendCardToRoot(d,w,'learning')",
+    "ascendCardToRoot(d,w,'due')",
+    "ascendQueueToRoot(d,w,'caught-up')",
+    "ascendQueueToRoot(md,mobileApp.w,'mobile caught-up')",
+):
+    check(token in continue_smoke, f"Continue browser Escape-ascent evidence missing: {token}")
 
 if errors:
     print("FAIL secx_study_lens_audit")
@@ -127,4 +139,4 @@ if errors:
         print("-", error)
     sys.exit(1)
 
-print("PASS secx_study_lens_audit queues=due,new,learning,mature,weak continue=due>learning>weak-new>new>study-root scoring=Atlas-stage-compatible state=shared-read-only-learner-api focus=browser-activeElement")
+print("PASS secx_study_lens_audit queues=due,new,learning,mature,weak continue=due>learning>weak-new>new>study-root scoring=Atlas-stage-compatible state=shared-read-only-learner-api focus=browser-activeElement+escape-ascent")
