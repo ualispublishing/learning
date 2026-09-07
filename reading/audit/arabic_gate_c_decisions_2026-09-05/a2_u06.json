@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "A2",
+  "unit": 6,
+  "date": "2026-09-06",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/a2/passages.jsonl",
+  "canonical_sha256": "ead32115952dadf8536d379fd31bd2c105e4393aa2d7ef614d4d2831856b0049",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 5,
+  "fresh_findings": 10,
+  "decisions": [
+    {
+      "passage_id": "ar-a2-u06-p01",
+      "learner_facing_sha256": "0fd7f7e8e0a28da53a8a450382cfefc9abbc22aacc60dc9edcadca34dc8f9750",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u06-p01-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original travel-mode cloze admits train, car, and other modes. Add an air-travel cue and constrain it to airplane/train."
+        },
+        {
+          "finding_id": "ar-a2-u06-p01-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original pre-trip location cloze admits station and other places. Anchor it to pre-flight procedures and constrain airport/village."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u06-p02",
+      "learner_facing_sha256": "8dfe68f9590a1be3a48c46f8f1b2064d7d7b7f8c045792e750f0e42ccd577997",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u06-p02-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original station-to-city cloze admits bus and other modes. Add a rail cue and constrain train/airplane."
+        },
+        {
+          "finding_id": "ar-a2-u06-p02-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The original duration cloze admits delay. Constrain waiting/arrival."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u06-p03",
+      "learner_facing_sha256": "51a506a4bd6e51f64543eef7800c212a2f130c7280c20b5c5f94a66bf25a9410",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u06-p03-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The transport-category cloze admits مواصلات and other category nouns. Constrain transport/waiting."
+        },
+        {
+          "finding_id": "ar-a2-u06-p03-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The transport-means cloze admits طرق and أنواع. Constrain وسائل/قرى."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u06-p04",
+      "learner_facing_sha256": "f0d6755969bcbe1a97c80d05601502fe13104741dbd935e8ad0f67a277043023",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u06-p04-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The station-action cloze admits يبقى and ينتظر. Constrain stops/flies."
+        },
+        {
+          "finding_id": "ar-a2-u06-p04-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The suitable-time cloze admits ملائم. Constrain suitable/worse."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u06-p05",
+      "learner_facing_sha256": "7f14be9f0d4fc65e7e0a424931c03a0669f4dd63dcd559309b5c3760db6e0426",
+      "decision": "PASS_AFTER_REPAIR",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 2,
+      "findings": [
+        {
+          "finding_id": "ar-a2-u06-p05-gC-01",
+          "field": "question q9",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The small-settlement cloze admits بلدة. Constrain village/sea."
+        },
+        {
+          "finding_id": "ar-a2-u06-p05-gC-02",
+          "field": "question q10",
+          "dimension": "competing_answer_ambiguity",
+          "severity": "major",
+          "status": "REPAIRED",
+          "rationale": "The beach-nearby cloze admits water or village in some contexts. Replace it with a sea-navigation transfer and constrain sea/village."
+        }
+      ]
+    },
+    {
+      "passage_id": "ar-a2-u06-p06",
+      "learner_facing_sha256": "80d1c318085899eb3c37c4fc5bc8e33d282c4454c342d71d1725cb8b9e66036b",
+      "decision": "PASS",
+      "qa_pairs_reviewed": 10,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions bind by authoritative per-record Gate B packet hashes; the level SHA records the review-time snapshot."
+}
