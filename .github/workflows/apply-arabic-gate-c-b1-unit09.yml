@@ -21,7 +21,7 @@ jobs:
           import json
           from pathlib import Path
           r=json.loads(Path('reading/RELEASE_STATUS.json').read_text())['languages']['arabic'];m=json.loads(Path('reading/STATE_MANIFEST.json').read_text());b=r['naturalness_review_progress'];c=r['comprehension_review_progress'];d=r['latest_deterministic_gate']
-          assert m['aggregate_sha256']=='0860756693345131704fae1c26cadc6e71993afa5ad55a68e172c37f9d5f530b'
+          assert m['aggregate_sha256']=='af7697e8935064886c7b522b1875b10c1c839103da722010bfce353ed1ca6959'
           assert r['release_state']=='REOPEN_REQUIRED' and r['educator_release_ready'] is False
           assert (b['fresh_records_reviewed'],b['fresh_records_with_findings'],b['fresh_findings'])==(360,308,560)
           assert (c['fresh_records_reviewed'],c['fresh_qa_pairs_reviewed'],c['fresh_records_with_findings'],c['fresh_findings'])==(168,1680,77,142) and c['levels_completed']==['A1','A2']
