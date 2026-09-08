@@ -19,6 +19,7 @@ function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id
 function routedFocus(d,id){const target=node(d,id);return target?.classList.contains('active')&&d.activeElement===target}
 function clickId(d,id){const el=node(d,id);assert(el,`node ${id} exists`);el.click();return el}
 function activateButton(d,button,label){button.focus();assert(d.activeElement===button,`${label} button receives focus before activation`);button.click()}
+function activateFrameButton(wrapper,d,w,button,label){wrapper.focus();assert(document.activeElement===wrapper,`${label} iframe receives outer-document focus`);w.focus();button.focus();assert(d.activeElement===button,`${label} button receives inner-document focus before activation`);button.click()}
 async function enter(d,w,label='node'){await waitFor(()=>{const id=w.current?.()?.id;return id&&node(d,id)?.classList.contains('active')},`${label} current active node`);key(w,'Enter','Enter');await sleep(80)}
 async function selectThenEnter(d,w,id,label){clickId(d,id);await waitFor(()=>node(d,id)?.classList.contains('active')&&w.current?.()?.id===id,`${label} selected`);await enter(d,w,label)}
 async function selectThenDescend(d,w,id,label){clickId(d,id);await waitFor(()=>node(d,id)?.classList.contains('active')&&w.current?.()?.id===id,`${label} selected`);w.descend();await sleep(80)}
@@ -86,13 +87,13 @@ async function run(){
 
   const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mw=mobileApp.w;
   const mobileCoverageButton=md.querySelector('#coverageLensBtn');assert(mobileCoverageButton,'mobile coverage control present');
-  activateButton(md,mobileCoverageButton,'mobile Coverage');
+  activateFrameButton(mobile,md,mw,mobileCoverageButton,'mobile Coverage');
   await waitFor(()=>routedFocus(md,'coverage:root')&&md.querySelectorAll('.node.coverage-domain').length===8,'mobile visible Coverage control opens and focuses eight-domain map');
   await selectThenDescend(md,mw,'coverage:root','mobile Coverage center');
   await waitFor(()=>routedFocus(md,'coverage:gaps')&&md.querySelectorAll('.node.coverage-gap').length>0,'mobile Coverage center opens and focuses exact-tag gaps');
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile coverage gap lens has no horizontal overflow');
   result.dataset.smoke='pass';
-  result.textContent=`PASS SecX coverage lens browser smoke: shared-bank=${meta.question_count} objectives=${meta.objective_count} subtopics=${meta.subtopic_checks} exact-tag-gaps=${gapCount} pager=next+prev+focused-center gap-detail D1 objective-1.1 focus=visible-button+shortcut+escape-ascent+mobile depth-gates`;
+  result.textContent=`PASS SecX coverage lens browser smoke: shared-bank=${meta.question_count} objectives=${meta.objective_count} subtopics=${meta.subtopic_checks} exact-tag-gaps=${gapCount} pager=next+prev+focused-center gap-detail D1 objective-1.1 focus=visible-button+shortcut+escape-ascent+frame-handoff+mobile depth-gates`;
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
