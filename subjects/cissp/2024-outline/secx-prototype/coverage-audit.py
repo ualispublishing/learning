@@ -184,7 +184,8 @@ check("practice_exposure_gaps" in smoke, "coverage browser smoke does not valida
 check("SECX_RELEASED_BANK_STATE" in smoke, "coverage browser smoke does not wait for shared released-bank readiness")
 check("function routedFocus" in smoke and "d.activeElement===target" in smoke, "coverage browser smoke does not require routed DOM focus")
 check("activateButton(d,coverageButton,'desktop Coverage')" in smoke, "coverage browser smoke does not activate the visible desktop Coverage control from DOM focus")
-check("activateButton(md,mobileCoverageButton,'mobile Coverage')" in smoke, "coverage browser smoke does not activate the visible mobile Coverage control from DOM focus")
+check("function activateFrameButton" in smoke and "document.activeElement===wrapper" in smoke, "coverage browser smoke does not require explicit outer-document iframe focus handoff")
+check("activateFrameButton(mobile,md,mw,mobileCoverageButton,'mobile Coverage')" in smoke, "coverage browser smoke does not activate the mobile Coverage control after explicit iframe focus handoff")
 check("routedFocus(d,'coverage:gaps')" in smoke and "routedFocus(d,'coverage:domain:1')" in smoke, "coverage browser smoke does not require focused gap/domain descent targets")
 check("routedFocus(d,'coverage:d1')" in smoke and "routedFocus(d,'root')" in smoke, "coverage browser smoke does not require focused hierarchy Escape return")
 check("routedFocus(d,'coverage:root')" in smoke and "KeyC" in smoke, "coverage browser smoke does not require focused C-shortcut routing")
@@ -207,5 +208,5 @@ print(
     f"practice_exposure_gaps={practice_exposure_gaps} "
     f"gap_projection_ids={len(expected_gap_ids)} "
     f"objectives_without_scenarios={objective_without_scenarios} "
-    "mapping=explicit-counts-and-gaps-only shared_bank=single-release-boundary focus=sync-entry+sync-route+sync-pager+sync-escape-ascent+browser-activeElement"
+    "mapping=explicit-counts-and-gaps-only shared_bank=single-release-boundary focus=sync-entry+sync-route+sync-pager+sync-escape-ascent+frame-handoff+browser-activeElement"
 )
