@@ -85,6 +85,9 @@ async function run(){
   key(w,'Escape','Escape');
   await waitFor(()=>routedFocus(d,'root')&&d.querySelector('#crumb')?.textContent==='SecX','Escape returns focus from shortcut-opened Coverage to root');
 
+  frame.remove();
+  assert(!frame.isConnected,'desktop iframe is removed before mobile focus phase');
+  await sleep(0);
   const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mw=mobileApp.w;
   const mobileCoverageButton=md.querySelector('#coverageLensBtn');assert(mobileCoverageButton,'mobile coverage control present');
   activateFrameButton(mobile,md,mw,mobileCoverageButton,'mobile Coverage');
@@ -93,7 +96,7 @@ async function run(){
   await waitFor(()=>routedFocus(md,'coverage:gaps')&&md.querySelectorAll('.node.coverage-gap').length>0,'mobile Coverage center opens and focuses exact-tag gaps');
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile coverage gap lens has no horizontal overflow');
   result.dataset.smoke='pass';
-  result.textContent=`PASS SecX coverage lens browser smoke: shared-bank=${meta.question_count} objectives=${meta.objective_count} subtopics=${meta.subtopic_checks} exact-tag-gaps=${gapCount} pager=next+prev+focused-center gap-detail D1 objective-1.1 focus=visible-button+shortcut+escape-ascent+frame-handoff+mobile depth-gates`;
+  result.textContent=`PASS SecX coverage lens browser smoke: shared-bank=${meta.question_count} objectives=${meta.objective_count} subtopics=${meta.subtopic_checks} exact-tag-gaps=${gapCount} pager=next+prev+focused-center gap-detail D1 objective-1.1 focus=visible-button+shortcut+escape-ascent+viewport-isolated-frame-handoff+mobile depth-gates`;
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
