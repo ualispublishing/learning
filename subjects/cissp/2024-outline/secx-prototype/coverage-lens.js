@@ -149,12 +149,12 @@ window.descend=function(){
     return;
   }
   if(level==='coverage-gaps'){
-    if(n?.kind==='pager')return coverageGapLayout(null,true,coveragePage+(n.action==='next'?1:-1));
+    if(n?.kind==='pager'){coverageGapLayout(null,false,coveragePage+(n.action==='next'?1:-1));focusActive();return}
     if(n?.kind==='coverage-gap'){depth=Math.max(depth,2);return showDetail()}
     return;
   }
   if(level==='coverage-domain'){
-    if(n?.kind==='pager')return coverageDomainLayout(coverageDomain,null,true,coveragePage+(n.action==='next'?1:-1));
+    if(n?.kind==='pager'){coverageDomainLayout(coverageDomain,null,false,coveragePage+(n.action==='next'?1:-1));focusActive();return}
     if(n?.kind==='coverage-objective'){depth=Math.max(depth,2);return showDetail()}
     return;
   }
