@@ -127,10 +127,22 @@ check("n.kind==='scenario'" in learner_state, "learner-state scenario evidence g
 check("source-lens.js" in next_html, "expanded review page does not load source lens")
 check(next_html.find("study-lens.js") < next_html.find("source-lens.js"), "source lens must load after learner/study runtime layers")
 check("study.onload" in next_html, "source lens load is not gated on study-lens completion")
+
+check("level==='source-items'){sourceHubLayout(sourceId,null,false);focusActive();return}" in source_lens, "Source items Escape no longer renders the Source hub and focuses it synchronously")
+check("level==='source-hub'){sourcesLayout(`source:${sourceId}`,false);focusActive();return}" in source_lens, "Source hub Escape no longer renders Sources and focuses the returning source synchronously")
+check("level==='sources'){domainLayout('root',false);focusActive();return}" in source_lens, "Sources Escape no longer renders and focuses the SecX root synchronously")
+
 check("sourceLensBtn" in smoke and "KeyS" in smoke, "source browser smoke does not exercise source-lens control/shortcut")
 check("source:ISC2_OUTLINE" in smoke and "source-item:objective:1.1" in smoke, "source browser smoke does not verify an exact objective source_ids mapping")
 check("source-item:scenario:" in smoke and "SECX_RELEASED_QUESTIONS" in smoke, "source browser smoke does not verify released scenario provenance")
 check("cissp_secx_graph_state_v1" in smoke and "answer reveal" in smoke, "source browser smoke does not protect scenario-reveal evidence boundary")
+check("function routedFocus" in smoke and "d.activeElement===target" in smoke, "source browser smoke does not require routed DOM focus")
+check("activateButton(d,sourceButton,'desktop Sources')" in smoke, "source browser smoke does not activate the visible desktop Sources control from DOM focus")
+check("activateButton(md,mobileSource,'mobile Sources')" in smoke, "source browser smoke does not activate the visible mobile Sources control from DOM focus")
+check("ascendFocused(d,w,'source:ISC2_OUTLINE'" in smoke and "ascendFocused(d,w,'root','SecX','Source root Escape')" in smoke, "source browser smoke does not require desktop Source hierarchy Escape focus ascent")
+check("ascendFocused(md,mw,'root','SecX','mobile Source root Escape')" in smoke, "source browser smoke does not require mobile Source Escape focus return")
+check("Home returns source provenance to focused root" in smoke and "routedFocus(d,'root')" in smoke, "source browser smoke does not require focused SecX root after Home")
+check("CISSP_META?.sources?.ISC2_OUTLINE?.title" in smoke, "source browser smoke hard-codes the ISC2 source title instead of using released source metadata")
 check("--user-data-dir=" in smoke_shell, "source browser smoke does not isolate browser storage")
 
 if errors:
@@ -145,5 +157,6 @@ scenario_citations = sum(len(q.get("source_ids", [])) for q in all_standard)
 print(
     f"PASS secx_source_audit sources={len(source_ids)} objectives={len(objectives)} review_cards={len(review_cards)} "
     f"released_scenarios={len(all_standard)} objective_source_refs={objective_citations} card_source_refs={card_citations} "
-    f"scenario_source_refs={scenario_citations} mapping=explicit-source_ids-only shared_bank=single-release-boundary"
+    f"scenario_source_refs={scenario_citations} mapping=explicit-source_ids-only shared_bank=single-release-boundary "
+    f"focus=sync-escape-ascent+browser-activeElement"
 )
