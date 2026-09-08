@@ -1,6 +1,6 @@
 # LANG-WB post-audit reference checks — 2026-09-08
 
-This note records follow-up machine/reference checks against a small subset of rows left `UNRESOLVED` by the preserved 2026-09-01 machine audit.
+This note records follow-up machine/reference checks against a subset of rows left `UNRESOLVED` by the preserved 2026-09-01 machine audit.
 
 ## Boundary
 
@@ -9,70 +9,87 @@ This note records follow-up machine/reference checks against a small subset of r
 - This is **not** native-speaker certification and does not satisfy or weaken the independent full-content human review gate.
 - The original `strongest_flags_compact.csv` is intentionally left unchanged as a historical record of the original machine adjudication.
 - No learner-facing workbook row was changed by these checks.
+- A row is included below only when the candidate sense/form is directly supported by a reputable dictionary/academy reference or by transparent morphology supported by the cited reference. Borderline rows remain unresolved.
 
-## Confirmed valid lexical senses
+## Reference-confirmed rows
 
-### French vocabulary rank 77 — `laisser`
+### French — 19 rows
 
-Candidate gloss: `to let, to allow; to leave with, to give; to forget, to leave alone`
+| Rank | Target | Candidate sense checked | Follow-up result | Reference |
+|---:|---|---|---|---|
+| 9 | `tu` | you, informal singular | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9T2602 |
+| 38 | `mon` | my, masculine singular; before vowel/h-muet feminine nouns | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9M2580 |
+| 45 | `ils` | they, masculine or mixed group | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9I0115 |
+| 77 | `laisser` | let/allow; leave; leave with; forget/leave behind | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9L0132 |
+| 91 | `temps` | time; grammatical tense; weather | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9T0658 |
+| 99 | `quelque` | some / a certain / some amount, singular | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9Q0170 |
+| 191 | `gars` | lad/guy; familiar male person | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9G0299 |
+| 228 | `elles` | they, feminine | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9E0794 |
+| 464 | `bizarre` | bizarre/odd/strange/peculiar | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9B1286 |
+| 471 | `seconde` | second, time unit; feminine form of ordinal `second` | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9S0977 and https://www.dictionnaire-academie.fr/article/A9S0974 |
+| 519 | `revoir` | see again; review/reconsider | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9R2442 |
+| 631 | `est` | is, form of `être`; east | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9E2986 and https://www.dictionnaire-academie.fr/article/A9E2694 |
+| 643 | `ressentir` | feel; experience/suffer effects | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9R2121 |
+| 691 | `surveiller` | watch/monitor/supervise | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9S3736 |
+| 755 | `contrôle` | checking/verification/control; supervised test | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9C4056 |
+| 758 | `bar` | bar/counter/establishment; fish homograph | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9B0355 and https://www.dictionnaire-academie.fr/article/DNP0582 |
+| 835 | `parfaire` | finish/complete; complete a payment | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9P0635 |
+| 870 | `environ` | about/approximately; surrounding area (`les environs`) | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9E2047 |
+| 919 | `laisse` | leash/lead; specialized foreshore sense; transparent forms of `laisser` | `CONFIRMED_VALID_LEXICAL_SENSE` | Académie française: https://www.dictionnaire-academie.fr/article/A9L0129 and https://www.dictionnaire-academie.fr/article/A8L0078; verb family already checked under `laisser` |
 
-Follow-up result: **CONFIRMED_VALID_LEXICAL_SENSE**.
+### Arabic — 6 rows
 
-Evidence: the Académie française entry covers leaving something or someone behind, forgetting an object, entrusting/leaving something with someone, and the semi-auxiliary sense “not prevent; tolerate; permit.”
+| Rank | Target | Candidate sense checked | Follow-up result | Reference |
+|---:|---|---|---|---|
+| 20 | `هل` | yes/no interrogative particle | `CONFIRMED_VALID_LEXICAL_SENSE` | Cairo Arabic Language Academy: https://www.arabicacademy.gov.eg/ar/محرك-البحث/معجم/dic-19/هل |
+| 230 | `كي` | so that / in order that; purpose/causal particle | `CONFIRMED_VALID_LEXICAL_SENSE` | Cairo Arabic Language Academy: https://www.arabicacademy.gov.eg/ar/محرك-البحث/معجم/dic-19/كي-كن |
+| 271 | `منتخب` | selected/elected; team representing a state | `CONFIRMED_VALID_LEXICAL_SENSE` | Cairo Arabic Language Academy: https://www.arabicacademy.gov.eg/ar/محرك-البحث/معجم/dic-19/المنتخب |
+| 547 | `ضرورة` | necessity / need | `CONFIRMED_VALID_LEXICAL_SENSE` | Cairo Arabic Language Academy: https://www.arabicacademy.gov.eg/ar/محرك-البحث/معجم/dic-19/الضرورة+الشعرية |
+| 598 | `حقوق` | rights | `CONFIRMED_VALID_LEXICAL_SENSE` | Cairo Arabic Language Academy: https://www.arabicacademy.gov.eg/ar/محرك-البحث/حقوقُ-الإنسانِ?exact_search=true |
+| 643 | `بأس` | hardship/severity; strength/might in the root family | `CONFIRMED_VALID_LEXICAL_SENSE` | Cairo Arabic Language Academy: https://www.arabicacademy.gov.eg/ar/محرك-البحث/معنى%20البأس and https://www.arabicacademy.gov.eg/ar/search_engine/roots/بئس |
 
-- https://www.dictionnaire-academie.fr/article/A9L0132
+### Urdu — 18 rows
 
-### French vocabulary rank 91 — `temps`
+| Rank | Target | Candidate sense checked | Follow-up result | Reference |
+|---:|---|---|---|---|
+| 44 | `کوئی` | someone/anyone/some/any | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://rekhtadictionary.com/meaning-of-koii |
+| 50 | `تھی` | was, feminine singular form | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://rekhtadictionary.com/meaning-of-thii |
+| 95 | `دور` | far/distant; period/era under alternate vocalization | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://www.rekhtadictionary.com/meaning-of-duur and https://www.rekhtadictionary.com/meaning-of-daur |
+| 163 | `موقع` | chance/opportunity | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://rekhtadictionary.com/meaning-of-mauqa |
+| 203 | `بعض` | some/certain/few/several | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://www.rekhtadictionary.com/meaning-of-baaz |
+| 231 | `چند` | a few/some/several | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://www.rekhtadictionary.com/meaning-of-chand |
+| 340 | `تم` | you, familiar/informal second person | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://www.rekhtadictionary.com/meaning-of-tum |
+| 352 | `کتاب` | book/written volume | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://www.rekhtadictionary.com/meaning-of-kitaab |
+| 450 | `صحیح` | right/correct/accurate | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://www.rekhtadictionary.com/meaning-of-sahiih |
+| 501 | `درست` | correct/accurate/proper | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://www.rekhtadictionary.com/meaning-of-durust |
+| 533 | `ہاتھوں` | hands, inflected/plural form | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://www.rekhtadictionary.com/meaning-of-haathon |
+| 539 | `سپر` | shield | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://www.rekhtadictionary.com/meaning-of-sipar |
+| 547 | `مثال` | example/instance/model/precedent | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://www.rekhtadictionary.com/meaning-of-misaal |
+| 572 | `محکمہ` | department/office/bureau | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://www.rekhtadictionary.com/meaning-of-mahkama |
+| 630 | `جھوٹ` | lie/falsehood/fabrication | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://www.rekhtadictionary.com/meaning-of-jhuut |
+| 751 | `منصوبہ` | plan/design/scheme/project | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://rekhtadictionary.com/meaning-of-mansuuba |
+| 828 | `آمد` | arrival/coming | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://www.rekhtadictionary.com/meaning-of-aamad |
+| 970 | `عموما` | generally/usually | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://www.rekhtadictionary.com/meaning-of-umuuman |
 
-Candidate gloss: `tense; weather; time (in general)`
+## Rows deliberately left unresolved in this pass
 
-Follow-up result: **CONFIRMED_VALID_LEXICAL_SENSE**.
+The following examples illustrate the conservative boundary used here; they were **not** promoted to reference-confirmed status:
 
-Evidence: the Académie française entry for `temps` explicitly covers time generally, grammatical tense, and atmospheric/weather use.
-
-- https://www.dictionnaire-academie.fr/article/A9T0658
-
-### French vocabulary rank 631 — `est`
-
-Candidate gloss: `is (form of être); east; eastern`
-
-Follow-up result: **CONFIRMED_VALID_LEXICAL_SENSE**.
-
-Evidence: the Académie française gives `est` as the third-person singular present form of `être` (`il, elle est`) and separately defines the noun `est` as the east cardinal direction.
-
-- https://www.dictionnaire-academie.fr/article/A9E2986
-- https://www.dictionnaire-academie.fr/article/A9E2694
-
-### French vocabulary rank 643 — `ressentir`
-
-Candidate gloss: `to suffer from the effects of; to feel (an emotion, usually strongly)`
-
-Follow-up result: **CONFIRMED_VALID_LEXICAL_SENSE**.
-
-Evidence: the Académie française defines `ressentir` as experiencing a sensation, feeling, emotion, or the effects of a phenomenon, and also as being affected by a painful or adverse event.
-
-- https://www.dictionnaire-academie.fr/article/A9R2121
-
-### French vocabulary rank 691 — `surveiller`
-
-Candidate gloss: `to monitor, to survey, to watch`
-
-Follow-up result: **CONFIRMED_VALID_LEXICAL_SENSE**.
-
-Evidence: the Académie française defines `surveiller` as observing attentively, controlling or watching a person or thing, and following the evolution or proper progress of something.
-
-- https://www.dictionnaire-academie.fr/article/A9S3736
-
-### French vocabulary rank 835 — `parfaire`
-
-Candidate gloss: `to finish, to complete; to make a supplementary payment`
-
-Follow-up result: **CONFIRMED_VALID_LEXICAL_SENSE**.
-
-Evidence: the Académie française defines `parfaire` as bringing something to completion and records the financial sense `parfaire un paiement` as completing what has already been paid to reach the amount due (marked vieill./older usage).
-
-- https://www.dictionnaire-academie.fr/article/A9P0635
+- French `bosser` (#837): informal “to work” is clear, but the candidate's secondary `emboss/dent` wording is broader than the strongest modern dictionary support found. Keep for human review.
+- French `salle` (#517): room/hall is clear, but standalone `gym` is contextual (`salle de sport`) and should remain human-reviewable.
+- French `situation` (#608): candidate wording `situation (all meanings)` is too broad to certify usefully from a lexical reference alone.
+- Arabic demonstratives `هذا`, `هذه`, `ذلك`, `تلك`: the candidate forms look coherent, but this pass did not add them because the chosen academy lookup did not directly bind all English/gender annotations in one reference entry.
+- Arabic `جاري` (#842): the neighbor reading is transparent (`جار` + possessive suffix), while the current/ongoing reading needs a cleaner exact-entry reference before formal clearing.
+- Urdu `تھے` (#37): ordinary auxiliary use is clear in context, but the retrieved exact dictionary page was polluted by a historical homograph, so it remains unresolved here.
+- Urdu cross-signal morphology rows such as `لئے`, `سی`, `پہلی`, `رن`, `تیسرے`: prior candidate checks found no obvious defect, but this longer pass did not add a sufficiently clean new authority citation for formal reference-confirmed status.
 
 ## Result
 
-Six additional strongest-flag rows are strongly supported as valid lexical entries. They should be deprioritized for defect hunting while remaining visible to the eventual full-content human reviewer. No production content change is warranted from these checks.
+This post-audit note now formally reference-confirms **43** rows that had remained `UNRESOLVED` in the preserved strongest-flag machine audit:
+
+- French: **19**
+- Arabic: **6**
+- Urdu: **18**
+- Total: **43**
+
+These rows should be deprioritized for defect hunting while remaining visible to the eventual full-content human reviewer. The original machine audit remains unchanged, no production workbook row was modified, and the required independent full-content Arabic/French/Urdu human review gate remains in force.
