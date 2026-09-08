@@ -173,6 +173,13 @@ check("coverage:d1" in smoke and "coverage:objective:1.1" in smoke, "coverage br
 check("coverage:gaps" in smoke and "coverage-gap" in smoke, "coverage browser smoke does not verify practice exposure gap traversal")
 check("practice_exposure_gaps" in smoke, "coverage browser smoke does not validate deterministic gap total")
 check("SECX_RELEASED_BANK_STATE" in smoke, "coverage browser smoke does not wait for shared released-bank readiness")
+check("function routedFocus" in smoke and "d.activeElement===target" in smoke, "coverage browser smoke does not require routed DOM focus")
+check("activateButton(d,coverageButton,'desktop Coverage')" in smoke, "coverage browser smoke does not activate the visible desktop Coverage control from DOM focus")
+check("activateButton(md,mobileCoverageButton,'mobile Coverage')" in smoke, "coverage browser smoke does not activate the visible mobile Coverage control from DOM focus")
+check("routedFocus(d,'coverage:gaps')" in smoke and "routedFocus(d,'coverage:domain:1')" in smoke, "coverage browser smoke does not require focused gap/domain descent targets")
+check("routedFocus(d,'coverage:d1')" in smoke and "routedFocus(d,'root')" in smoke, "coverage browser smoke does not require focused hierarchy Escape return")
+check("routedFocus(d,'coverage:root')" in smoke and "KeyC" in smoke, "coverage browser smoke does not require focused C-shortcut routing")
+check("routedFocus(md,'coverage:root')" in smoke and "routedFocus(md,'coverage:gaps')" in smoke, "coverage browser smoke does not require visible mobile routed focus")
 check("--user-data-dir=" in smoke_shell, "coverage browser smoke does not isolate browser storage")
 
 if errors:
@@ -191,5 +198,5 @@ print(
     f"practice_exposure_gaps={practice_exposure_gaps} "
     f"gap_projection_ids={len(expected_gap_ids)} "
     f"objectives_without_scenarios={objective_without_scenarios} "
-    "mapping=explicit-counts-and-gaps-only shared_bank=single-release-boundary"
+    "mapping=explicit-counts-and-gaps-only shared_bank=single-release-boundary focus=browser-activeElement"
 )
