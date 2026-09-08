@@ -137,15 +137,15 @@ window.coverageDomainLayout=function(domainNum,returnTo=null,focus=false,page=nu
   level='coverage-domain';parentDomain=null;parentObjective=null;active=returnTo&&nodes.some(n=>n.id===returnTo)?returnTo:centerId;depth=0;render(focus);
 };
 
-coverageButton.addEventListener('click',()=>coverageLayout(null,true));
+coverageButton.addEventListener('click',()=>{coverageLayout(null,false);focusActive()});
 const priorCrumb=crumbText;
 window.crumbText=function(){if(level==='coverage')return'SecX › Coverage';if(level==='coverage-gaps')return'SecX › Coverage › Practice exposure gaps';if(level==='coverage-domain')return`SecX › Coverage › D${coverageDomain}`;return priorCrumb()};
 const priorDescend=descend;
 window.descend=function(){
   const n=current();
   if(level==='coverage'){
-    if(n?.id==='coverage:root')return coverageGapLayout(null,true,0);
-    if(n?.kind==='coverage-domain')return coverageDomainLayout(n.domainNum,null,true,0);
+    if(n?.id==='coverage:root'){coverageGapLayout(null,false,0);focusActive();return}
+    if(n?.kind==='coverage-domain'){coverageDomainLayout(n.domainNum,null,false,0);focusActive();return}
     return;
   }
   if(level==='coverage-gaps'){
@@ -161,8 +161,8 @@ window.descend=function(){
   return priorDescend();
 };
 const priorAscend=ascend;
-window.ascend=function(){if(depth===0&&level==='coverage-gaps')return coverageLayout('coverage:root',true);if(depth===0&&level==='coverage-domain')return coverageLayout(`coverage:d${coverageDomain}`,true);if(depth===0&&level==='coverage')return domainLayout('root',true);return priorAscend()};
-document.addEventListener('keydown',e=>{if(!document.getElementById('search')?.hidden)return;if(e.target.closest('input,textarea,select,[contenteditable="true"]'))return;if((e.key==='c'||e.key==='C')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();e.stopImmediatePropagation();coverageLayout(null,true)}},true);
+window.ascend=function(){if(depth===0&&level==='coverage-gaps'){coverageLayout('coverage:root',false);focusActive();return}if(depth===0&&level==='coverage-domain'){coverageLayout(`coverage:d${coverageDomain}`,false);focusActive();return}if(depth===0&&level==='coverage'){domainLayout('root',false);focusActive();return}return priorAscend()};
+document.addEventListener('keydown',e=>{if(!document.getElementById('search')?.hidden)return;if(e.target.closest('input,textarea,select,[contenteditable="true"]'))return;if((e.key==='c'||e.key==='C')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();e.stopImmediatePropagation();coverageLayout(null,false);focusActive()}},true);
 
 function syncCoverageBank(){
   const state=window.SECX_RELEASED_BANK_STATE||{};
