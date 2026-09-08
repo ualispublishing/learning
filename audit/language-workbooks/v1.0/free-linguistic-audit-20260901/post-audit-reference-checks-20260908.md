@@ -11,7 +11,7 @@ This note records follow-up machine/reference checks against a subset of rows le
 - No learner-facing workbook row was changed by these checks.
 - A row is included below only when the candidate sense/form is directly supported by a reputable dictionary/academy reference or by transparent morphology supported by the cited reference. Borderline rows remain unresolved.
 
-## Reference-confirmed rows
+## Reference-confirmed vocabulary rows
 
 ### French — 19 rows
 
@@ -71,6 +71,37 @@ This note records follow-up machine/reference checks against a subset of rows le
 | 828 | `آمد` | arrival/coming | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://www.rekhtadictionary.com/meaning-of-aamad |
 | 970 | `عموما` | generally/usually | `CONFIRMED_VALID_LEXICAL_SENSE` | Rekhta Dictionary: https://www.rekhtadictionary.com/meaning-of-umuuman |
 
+## Urdu sentence structural false-positive cluster — 32 rows
+
+The strongest-flag audit contained a large Urdu sentence cluster where the apparent difference is the English definite article `the`, while the Urdu noun phrase has no corresponding article morpheme. A reference grammar explicitly states that Urdu has no article comparable to English `a/an` and no article comparable to English `the`; definiteness is instead inferred or expressed through other devices and context.
+
+Reference:
+- *Urdu Reference Grammar: Phonology, Morphology, Syntax*, section 2.1.1.3 (Definiteness/Referentiality), accessible at https://studylib.net/doc/27540423/a-reference-grammar-of-urdu
+
+Candidate rows were checked directly against the exact bound sentence bank. In each row below, the Urdu noun phrase and predicate preserve the substantive meaning; absence of an overt Urdu equivalent of English `the` is not evidence of a translation defect.
+
+Follow-up classification: `STRUCTURAL_FALSE_POSITIVE_ARTICLE_ALIGNMENT`.
+
+Flagged ranks:
+- notebook pattern: `31, 32, 33, 34, 35, 36, 39`
+- ticket: `66`
+- ID card: `84`
+- camera: `131`
+- watch pattern: `141, 144, 145, 146, 148, 149`
+- wallet: `174`
+- pillow: `224`
+- cup: `276`
+- coffee pattern: `341, 342, 343, 344, 345, 346, 349`
+- hotel: `410`
+- bus station: `428, 429`
+- airport: `440`
+- shopping mall: `537`
+- light: `583`
+
+Exact candidate evidence was inspected in `completed/languages/workbooks/v1.0/urdu/urdu_sentence_bank_1000.csv` at candidate commit `aa9b5d465839edb2ce520133a01d78ed40634c96`.
+
+This classification is deliberately narrow: it says the article alignment is not a defect. It does not waive independent review of vocabulary choice, register, or context in the complete workbook.
+
 ## Rows deliberately left unresolved in this pass
 
 The following examples illustrate the conservative boundary used here; they were **not** promoted to reference-confirmed status:
@@ -85,11 +116,13 @@ The following examples illustrate the conservative boundary used here; they were
 
 ## Result
 
-This post-audit note now formally reference-confirms **43** rows that had remained `UNRESOLVED` in the preserved strongest-flag machine audit:
+This post-audit follow-up now deprioritizes **75** original strongest-flag rows on documented grounds while preserving the original machine audit unchanged:
 
-- French: **19**
-- Arabic: **6**
-- Urdu: **18**
-- Total: **43**
+- reference-confirmed vocabulary rows: **43**
+  - French: **19**
+  - Arabic: **6**
+  - Urdu: **18**
+- Urdu structural article-alignment sentence false positives: **32**
+- total documented low-priority / false-positive rows: **75**
 
-These rows should be deprioritized for defect hunting while remaining visible to the eventual full-content human reviewer. The original machine audit remains unchanged, no production workbook row was modified, and the required independent full-content Arabic/French/Urdu human review gate remains in force.
+These classifications are reviewer aids, not human certification. No production workbook row was modified, and the required independent full-content Arabic/French/Urdu human review gate remains in force.
