@@ -34,7 +34,11 @@ async function run(){
  await selectThenEnter(d,w,'source:ISC2_OUTLINE','ISC2 outline source');
  await waitFor(()=>['source:ISC2_OUTLINE:objectives','source:ISC2_OUTLINE:cards','source:ISC2_OUTLINE:scenarios'].every(id=>node(d,id)),'source hub exposes objectives cards and released-scenarios facets');
  await selectThenEnter(d,w,'source:ISC2_OUTLINE:objectives','ISC2 objectives facet');
- await waitFor(()=>node(d,'source:list:ISC2_OUTLINE:objectives')&&node(d,'source-item:objective:1.1'),'ISC2 source maps to released objective 1.1');
+ await waitFor(()=>node(d,'source:list:ISC2_OUTLINE:objectives')&&node(d,'source-item:objective:1.1')&&node(d,'source:next'),'ISC2 source objective page 1 exposes objective 1.1 and next pager');
+ await selectThenEnter(d,w,'source:next','ISC2 objectives next page');
+ await waitFor(()=>routedFocus(d,'source:list:ISC2_OUTLINE:objectives')&&node(d,'source:prev')&&!node(d,'source-item:objective:1.1'),'Source next pager focuses page-2 center and replaces page-1 records');
+ await selectThenEnter(d,w,'source:prev','ISC2 objectives previous page');
+ await waitFor(()=>routedFocus(d,'source:list:ISC2_OUTLINE:objectives')&&node(d,'source:next')&&node(d,'source-item:objective:1.1'),'Source previous pager focuses page-1 center and restores objective 1.1');
  await selectThenEnter(d,w,'source-item:objective:1.1','ISC2 objective 1.1 provenance item');
  await waitFor(()=>d.querySelector('#detail.open')?.textContent.includes('explicitly includes ISC2_OUTLINE'),'source item detail states exact source_ids provenance');
  key(w,' ','Space');
@@ -71,7 +75,7 @@ async function run(){
  await ascendFocused(md,mw,'root','SecX','mobile Source root Escape');
  assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile source lens has no horizontal overflow');
  result.dataset.smoke='pass';
- result.textContent=`PASS SecX source lens browser smoke: sources=${meta.source_count} shared-bank scenarios exact-source_ids ISC2-objective answer-reveal-isolation focus=visible-button+escape-ascent+Home desktop+mobile; sampled scenario ${citedScenario.id}`;
+ result.textContent=`PASS SecX source lens browser smoke: sources=${meta.source_count} shared-bank scenarios exact-source_ids ISC2-objective pager=next+prev+focused-center answer-reveal-isolation focus=visible-button+escape-ascent+Home desktop+mobile; sampled scenario ${citedScenario.id}`;
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
