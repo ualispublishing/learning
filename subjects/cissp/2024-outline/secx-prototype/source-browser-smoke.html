@@ -26,7 +26,7 @@ async function selectThenEnter(d,w,id,label){clickId(d,id);await waitFor(()=>nod
 async function closeDetail(d,w,label){key(w,'Escape','Escape');await waitFor(()=>!d.querySelector('#detail')?.classList.contains('open'),`${label} detail closes`)}
 async function ascendFocused(d,w,id,crumb,label){key(w,'Escape','Escape');await waitFor(()=>routedFocus(d,id)&&d.querySelector('#crumb')?.textContent===crumb,`${label} focuses ${id}`)}
 async function run(){
- const {d,w}=await ready(frame,'desktop'),meta=w.CISSP_META?.meta||{},sourceButton=d.querySelector('#sourceLensBtn');
+ const {d,w}=await ready(frame,'desktop'),meta=w.CISSP_META?.meta||{},sourceButton=d.querySelector('#sourceLensBtn'),isc2Title=w.CISSP_META?.sources?.ISC2_OUTLINE?.title||'ISC2_OUTLINE';
  assert(sourceButton?.textContent.includes(`· ${meta.source_count}`),'source button matches Atlas source count');
  activateButton(d,sourceButton,'desktop Sources');
  await waitFor(()=>routedFocus(d,'sources:root')&&allSourcesRendered(w,d)&&d.querySelector('#crumb')?.textContent==='SecX › Sources','visible desktop Sources button focuses Source Provenance root');
@@ -40,7 +40,7 @@ async function run(){
  key(w,' ','Space');
  await waitFor(()=>d.querySelector('#detail')?.textContent.includes('Citation does not mean this source is the sole authority'),'source detail reaches depth three scope boundary');
  await closeDetail(d,w,'ISC2 objective detail');
- await ascendFocused(d,w,'source:ISC2_OUTLINE','SecX › Sources › (ISC)² CISSP Exam Outline','Source items Escape');
+ await ascendFocused(d,w,'source:ISC2_OUTLINE',`SecX › Sources › ${isc2Title}`,'Source items Escape');
  await ascendFocused(d,w,'source:ISC2_OUTLINE','SecX › Sources','Source hub Escape');
  await ascendFocused(d,w,'root','SecX','Source root Escape');
  key(w,'s','KeyS');
