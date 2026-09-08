@@ -128,6 +128,8 @@ check("source-lens.js" in next_html, "expanded review page does not load source 
 check(next_html.find("study-lens.js") < next_html.find("source-lens.js"), "source lens must load after learner/study runtime layers")
 check("study.onload" in next_html, "source lens load is not gated on study-lens completion")
 
+check("sourceButton.addEventListener('click',()=>{sourcesLayout(null,false);focusActive()})" in source_lens, "visible Sources control no longer renders and focuses the Source root synchronously")
+check("e.stopImmediatePropagation();sourcesLayout(null,false);focusActive()" in source_lens, "S shortcut no longer renders and focuses the Source root synchronously")
 check("level==='source-items'){sourceHubLayout(sourceId,null,false);focusActive();return}" in source_lens, "Source items Escape no longer renders the Source hub and focuses it synchronously")
 check("level==='source-hub'){sourcesLayout(`source:${sourceId}`,false);focusActive();return}" in source_lens, "Source hub Escape no longer renders Sources and focuses the returning source synchronously")
 check("level==='sources'){domainLayout('root',false);focusActive();return}" in source_lens, "Sources Escape no longer renders and focuses the SecX root synchronously")
@@ -158,5 +160,5 @@ print(
     f"PASS secx_source_audit sources={len(source_ids)} objectives={len(objectives)} review_cards={len(review_cards)} "
     f"released_scenarios={len(all_standard)} objective_source_refs={objective_citations} card_source_refs={card_citations} "
     f"scenario_source_refs={scenario_citations} mapping=explicit-source_ids-only shared_bank=single-release-boundary "
-    f"focus=sync-escape-ascent+browser-activeElement"
+    f"focus=sync-entry+sync-escape-ascent+browser-activeElement"
 )
