@@ -76,6 +76,7 @@ review_cards = [
     for o in objectives
 ] + high_cards
 source_ids = set(sources)
+isc2_objective_count = sum(1 for o in objectives if "ISC2_OUTLINE" in (o.get("source_ids") or []))
 
 released_rows = []
 for batch in manifest.get("released_batches", []):
@@ -95,6 +96,7 @@ check(len(review_cards) == meta_info.get("card_count"), f"review-card count drif
 check(len(all_standard) == meta_info.get("question_count"), f"released scenario count drift: {len(all_standard)} != {meta_info.get('question_count')}")
 check(all((sources[sid].get("title") or "").strip() for sid in source_ids), "source registry contains blank title")
 check(all((sources[sid].get("role") or "").strip() for sid in source_ids), "source registry contains blank role")
+check(isc2_objective_count > 16, f"ISC2_OUTLINE objective fixture no longer spans multiple 16-item pages: {isc2_objective_count}")
 
 for item in objectives:
     for sid in item.get("source_ids", []):
@@ -130,12 +132,15 @@ check("study.onload" in next_html, "source lens load is not gated on study-lens 
 
 check("sourceButton.addEventListener('click',()=>{sourcesLayout(null,false);focusActive()})" in source_lens, "visible Sources control no longer renders and focuses the Source root synchronously")
 check("e.stopImmediatePropagation();sourcesLayout(null,false);focusActive()" in source_lens, "S shortcut no longer renders and focuses the Source root synchronously")
+check("n?.kind==='pager'){sourceItemsLayout(sourceId,sourceMode,null,false,sourcePage+(n.action==='next'?1:-1));focusActive();return}" in source_lens, "Source pager no longer renders and focuses the new page center synchronously")
 check("level==='source-items'){sourceHubLayout(sourceId,null,false);focusActive();return}" in source_lens, "Source items Escape no longer renders the Source hub and focuses it synchronously")
 check("level==='source-hub'){sourcesLayout(`source:${sourceId}`,false);focusActive();return}" in source_lens, "Source hub Escape no longer renders Sources and focuses the returning source synchronously")
 check("level==='sources'){domainLayout('root',false);focusActive();return}" in source_lens, "Sources Escape no longer renders and focuses the SecX root synchronously")
 
 check("sourceLensBtn" in smoke and "KeyS" in smoke, "source browser smoke does not exercise source-lens control/shortcut")
 check("source:ISC2_OUTLINE" in smoke and "source-item:objective:1.1" in smoke, "source browser smoke does not verify an exact objective source_ids mapping")
+check("source:next" in smoke and "source:prev" in smoke, "source browser smoke does not exercise pager round trip")
+check("Source next pager focuses page-2 center" in smoke and "Source previous pager focuses page-1 center" in smoke, "source browser smoke does not require focused pager destinations")
 check("source-item:scenario:" in smoke and "SECX_RELEASED_QUESTIONS" in smoke, "source browser smoke does not verify released scenario provenance")
 check("cissp_secx_graph_state_v1" in smoke and "answer reveal" in smoke, "source browser smoke does not protect scenario-reveal evidence boundary")
 check("function routedFocus" in smoke and "d.activeElement===target" in smoke, "source browser smoke does not require routed DOM focus")
@@ -159,6 +164,7 @@ scenario_citations = sum(len(q.get("source_ids", [])) for q in all_standard)
 print(
     f"PASS secx_source_audit sources={len(source_ids)} objectives={len(objectives)} review_cards={len(review_cards)} "
     f"released_scenarios={len(all_standard)} objective_source_refs={objective_citations} card_source_refs={card_citations} "
-    f"scenario_source_refs={scenario_citations} mapping=explicit-source_ids-only shared_bank=single-release-boundary "
-    f"focus=sync-entry+sync-escape-ascent+browser-activeElement"
+    f"scenario_source_refs={scenario_citations} isc2_objectives={isc2_objective_count} "
+    f"mapping=explicit-source_ids-only shared_bank=single-release-boundary "
+    f"focus=sync-entry+sync-pager+sync-escape-ascent+browser-activeElement"
 )
