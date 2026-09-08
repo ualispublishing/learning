@@ -75,7 +75,7 @@ window.sourceItemsLayout=function(id,mode,returnTo=null,focus=false,page=null){
   level='source-items';parentDomain=null;parentObjective=null;active=returnTo&&nodes.some(n=>n.id===returnTo)?returnTo:centerId;depth=0;render(focus);
 };
 
-sourceButton.addEventListener('click',()=>sourcesLayout(null,true));
+sourceButton.addEventListener('click',()=>{sourcesLayout(null,false);focusActive()});
 const priorCrumb=crumbText;
 window.crumbText=function(){if(level==='sources')return'SecX › Sources';if(level==='source-hub')return`SecX › Sources › ${sourceTitle(sourceId)}`;if(level==='source-items')return`SecX › Sources › ${sourceTitle(sourceId)} › ${modeTitle(sourceMode)}`;return priorCrumb()};
 const priorDescend=descend;
@@ -83,7 +83,7 @@ window.descend=function(){const n=current();if(level==='sources'&&n?.kind==='sou
 const priorAscend=ascend;
 window.ascend=function(){if(depth===0&&level==='source-items'){sourceHubLayout(sourceId,null,false);focusActive();return}if(depth===0&&level==='source-hub'){sourcesLayout(`source:${sourceId}`,false);focusActive();return}if(depth===0&&level==='sources'){domainLayout('root',false);focusActive();return}return priorAscend()};
 
-document.addEventListener('keydown',e=>{if(!document.getElementById('search')?.hidden)return;if(e.target.closest('input,textarea,select,[contenteditable="true"]'))return;if((e.key==='s'||e.key==='S')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();e.stopImmediatePropagation();sourcesLayout(null,true)}},true);
+document.addEventListener('keydown',e=>{if(!document.getElementById('search')?.hidden)return;if(e.target.closest('input,textarea,select,[contenteditable="true"]'))return;if((e.key==='s'||e.key==='S')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();e.stopImmediatePropagation();sourcesLayout(null,false);focusActive()}},true);
 addEventListener('secx:released-bank',()=>{if(level==='sources')sourcesLayout(active,false);else if(level==='source-hub')sourceHubLayout(sourceId,active,false);else if(level==='source-items'&&sourceMode==='scenarios')sourceItemsLayout(sourceId,sourceMode,active,false,sourcePage)});
 updateSourceButton();
 })();
