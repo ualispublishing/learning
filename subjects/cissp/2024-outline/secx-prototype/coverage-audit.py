@@ -154,6 +154,8 @@ check("coverage:gap:${record.objective}:${record.index}" in lens, "coverage gap 
 check("window.coverageGapLayout" in lens and "level='coverage-gaps'" in lens, "coverage lens has no paged practice exposure gap view")
 check("n?.id==='coverage:root'" in lens and "coverageGapLayout(null,false,0);focusActive()" in lens, "coverage root Enter no longer opens and focuses practice exposure gaps synchronously")
 check("n?.kind==='coverage-domain'" in lens and "coverageDomainLayout(n.domainNum,null,false,0);focusActive()" in lens, "coverage domain Enter no longer opens and focuses the domain view synchronously")
+check("level==='coverage-gaps'" in lens and "coverageGapLayout(null,false,coveragePage+(n.action==='next'?1:-1));focusActive();return" in lens, "coverage gap pager no longer renders and focuses the new page center synchronously")
+check("level==='coverage-domain'" in lens and "coverageDomainLayout(coverageDomain,null,false,coveragePage+(n.action==='next'?1:-1));focusActive();return" in lens, "coverage domain pager no longer renders and focuses the new page center synchronously")
 check("SecX › Coverage › Practice exposure gaps" in lens, "coverage gap breadcrumb missing")
 check("coverageButton.addEventListener('click',()=>{coverageLayout(null,false);focusActive()})" in lens, "visible Coverage control no longer renders and focuses Coverage synchronously")
 check("level==='coverage-gaps'){coverageLayout('coverage:root',false);focusActive();return}" in lens, "coverage gap Escape no longer renders and focuses Coverage root synchronously")
@@ -176,6 +178,8 @@ check("RELATIONSHIP_REVIEW.json" not in next_html, "reviewer relationship regist
 check("coverageLensBtn" in smoke and "KeyC" in smoke, "coverage browser smoke does not exercise coverage control/shortcut")
 check("coverage:d1" in smoke and "coverage:objective:1.1" in smoke, "coverage browser smoke does not verify domain/objective traversal")
 check("coverage:gaps" in smoke and "coverage-gap" in smoke, "coverage browser smoke does not verify practice exposure gap traversal")
+check("coverage:gap:next" in smoke and "coverage:gap:prev" in smoke, "coverage browser smoke does not exercise gap pager round trip")
+check("Coverage next pager focuses page-2 center" in smoke and "Coverage previous pager focuses page-1 center" in smoke, "coverage browser smoke does not require focused pager destinations")
 check("practice_exposure_gaps" in smoke, "coverage browser smoke does not validate deterministic gap total")
 check("SECX_RELEASED_BANK_STATE" in smoke, "coverage browser smoke does not wait for shared released-bank readiness")
 check("function routedFocus" in smoke and "d.activeElement===target" in smoke, "coverage browser smoke does not require routed DOM focus")
@@ -203,5 +207,5 @@ print(
     f"practice_exposure_gaps={practice_exposure_gaps} "
     f"gap_projection_ids={len(expected_gap_ids)} "
     f"objectives_without_scenarios={objective_without_scenarios} "
-    "mapping=explicit-counts-and-gaps-only shared_bank=single-release-boundary focus=sync-entry+sync-route+sync-escape-ascent+browser-activeElement"
+    "mapping=explicit-counts-and-gaps-only shared_bank=single-release-boundary focus=sync-entry+sync-route+sync-pager+sync-escape-ascent+browser-activeElement"
 )
