@@ -152,9 +152,14 @@ check("practice_exposure_gaps" in lens, "coverage snapshot does not expose exact
 check("function gapRecords()" in lens, "coverage lens has no exact-tag gap registry")
 check("coverage:gap:${record.objective}:${record.index}" in lens, "coverage gap nodes do not use stable projection ids derived from objective/index")
 check("window.coverageGapLayout" in lens and "level='coverage-gaps'" in lens, "coverage lens has no paged practice exposure gap view")
-check("n?.id==='coverage:root'" in lens and "coverageGapLayout(null,true,0)" in lens, "coverage root Enter does not open practice exposure gaps")
+check("n?.id==='coverage:root'" in lens and "coverageGapLayout(null,false,0);focusActive()" in lens, "coverage root Enter no longer opens and focuses practice exposure gaps synchronously")
+check("n?.kind==='coverage-domain'" in lens and "coverageDomainLayout(n.domainNum,null,false,0);focusActive()" in lens, "coverage domain Enter no longer opens and focuses the domain view synchronously")
 check("SecX › Coverage › Practice exposure gaps" in lens, "coverage gap breadcrumb missing")
-check("level==='coverage-gaps'" in lens and "coverageLayout('coverage:root',true)" in lens, "coverage gap Escape hierarchy missing")
+check("coverageButton.addEventListener('click',()=>{coverageLayout(null,false);focusActive()})" in lens, "visible Coverage control no longer renders and focuses Coverage synchronously")
+check("level==='coverage-gaps'){coverageLayout('coverage:root',false);focusActive();return}" in lens, "coverage gap Escape no longer renders and focuses Coverage root synchronously")
+check("level==='coverage-domain'){coverageLayout(`coverage:d${coverageDomain}`,false);focusActive();return}" in lens, "coverage domain Escape no longer renders and focuses the returning domain synchronously")
+check("level==='coverage'){domainLayout('root',false);focusActive();return}" in lens, "Coverage root Escape no longer renders and focuses SecX root synchronously")
+check("e.stopImmediatePropagation();coverageLayout(null,false);focusActive()" in lens, "C shortcut no longer renders and focuses Coverage synchronously")
 check("Practice exposure counts do not measure learner mastery" in lens, "coverage lens lost mastery-boundary warning")
 check("exact-tag practice-exposure gap" in lens, "coverage gap detail does not preserve exact-tag exposure terminology")
 check("not evidence that the subtopic is missing from the curriculum" in lens, "coverage gap detail lost curriculum-omission boundary")
@@ -198,5 +203,5 @@ print(
     f"practice_exposure_gaps={practice_exposure_gaps} "
     f"gap_projection_ids={len(expected_gap_ids)} "
     f"objectives_without_scenarios={objective_without_scenarios} "
-    "mapping=explicit-counts-and-gaps-only shared_bank=single-release-boundary focus=browser-activeElement"
+    "mapping=explicit-counts-and-gaps-only shared_bank=single-release-boundary focus=sync-entry+sync-route+sync-escape-ascent+browser-activeElement"
 )
