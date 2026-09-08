@@ -44,6 +44,11 @@ async function run(){
   assert(node(d,'coverage:gaps')?.textContent.includes(`${gapCount} enriched subtopics`),'gap center reports deterministic gap count');
   const firstGap=d.querySelector('.node.coverage-gap');assert(firstGap,'at least one exact-tag gap renders');
   const firstGapId=firstGap.dataset.id,firstGapRecord=snap.gaps.find(x=>`coverage:gap:${x.objective}:${x.index}`===firstGapId);assert(firstGapRecord,'rendered gap id maps to released coverage record');
+  assert(node(d,'coverage:gap:next'),'coverage gap page 1 exposes next pager');
+  await selectThenEnter(d,w,'coverage:gap:next','coverage gaps next page');
+  await waitFor(()=>routedFocus(d,'coverage:gaps')&&node(d,'coverage:gap:prev')&&!node(d,firstGapId),'Coverage next pager focuses page-2 center and replaces page-1 gaps');
+  await selectThenEnter(d,w,'coverage:gap:prev','coverage gaps previous page');
+  await waitFor(()=>routedFocus(d,'coverage:gaps')&&node(d,'coverage:gap:next')&&node(d,firstGapId),'Coverage previous pager focuses page-1 center and restores first gap');
   await selectThenEnter(d,w,firstGapId,'first practice exposure gap');
   await waitFor(()=>d.querySelector('#detail.open')?.textContent.includes(`objective ${firstGapRecord.objective}`)&&d.querySelector('#detail')?.textContent.includes('no manifest-released standard scenario carries this exact subtopic tag'),'gap depth-two detail explains exact released-tag absence');
   key(w,' ','Space');
@@ -87,7 +92,7 @@ async function run(){
   await waitFor(()=>routedFocus(md,'coverage:gaps')&&md.querySelectorAll('.node.coverage-gap').length>0,'mobile Coverage center opens and focuses exact-tag gaps');
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile coverage gap lens has no horizontal overflow');
   result.dataset.smoke='pass';
-  result.textContent=`PASS SecX coverage lens browser smoke: shared-bank=${meta.question_count} objectives=${meta.objective_count} subtopics=${meta.subtopic_checks} exact-tag-gaps=${gapCount} gap-detail D1 objective-1.1 focus=visible-button+shortcut+escape-ascent+mobile depth-gates`;
+  result.textContent=`PASS SecX coverage lens browser smoke: shared-bank=${meta.question_count} objectives=${meta.objective_count} subtopics=${meta.subtopic_checks} exact-tag-gaps=${gapCount} pager=next+prev+focused-center gap-detail D1 objective-1.1 focus=visible-button+shortcut+escape-ascent+mobile depth-gates`;
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
