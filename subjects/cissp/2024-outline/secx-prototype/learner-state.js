@@ -9,14 +9,18 @@ const GRADES=['Wrong','Hard','Good','Easy'];
 function safeParse(raw,fallback){try{return raw?JSON.parse(raw):fallback}catch{return fallback}}
 function dayISO(d=new Date()){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function addDays(n){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+n);return dayISO(d)}
+function normalizeGraph(value){
+  if(!value||typeof value!=='object'||Array.isArray(value))value={};
+  if(!value.nodes||typeof value.nodes!=='object'||Array.isArray(value.nodes))value.nodes={};
+  if(!value.scenarios||typeof value.scenarios!=='object'||Array.isArray(value.scenarios))value.scenarios={};
+  return value;
+}
 
 let atlasRaw=localStorage.getItem(ATLAS_PROGRESS_KEY)||'';
 let atlasState=safeParse(atlasRaw,{cards:{},quiz:{attempts:0,correct:0,byDomain:{}}});
 if(!atlasState.cards||typeof atlasState.cards!=='object')atlasState.cards={};
 if(!atlasState.quiz||typeof atlasState.quiz!=='object')atlasState.quiz={attempts:0,correct:0,byDomain:{}};
-let graphState=safeParse(localStorage.getItem(GRAPH_STATE_KEY),{nodes:{},scenarios:{}});
-if(!graphState.nodes||typeof graphState.nodes!=='object')graphState.nodes={};
-if(!graphState.scenarios||typeof graphState.scenarios!=='object')graphState.scenarios={};
+let graphState=normalizeGraph(safeParse(localStorage.getItem(GRAPH_STATE_KEY),{}));
 let openNodeId=null;
 let scenarioRevealSession=null;
 
@@ -182,7 +186,7 @@ document.addEventListener('keydown',e=>{
 
 addEventListener('storage',e=>{
   if(e.key===ATLAS_PROGRESS_KEY){atlasRaw='__stale__';syncAtlas();decorateNodes();decorateDetail();updateProgressScope()}
-  if(e.key===GRAPH_STATE_KEY){graphState=safeParse(e.newValue,{nodes:{},scenarios:{}});graphState.nodes=graphState.nodes||{};graphState.scenarios=graphState.scenarios||{};decorateNodes();decorateDetail()}
+  if(e.key===GRAPH_STATE_KEY){graphState=normalizeGraph(safeParse(e.newValue,{}));decorateNodes();decorateDetail()}
 });
 
 requestAnimationFrame(()=>{decorateNodes();decorateDetail();updateProgressScope();updateDetailActions()});
