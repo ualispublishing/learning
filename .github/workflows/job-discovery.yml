@@ -1,0 +1,50 @@
+name: Scheduled Job Discovery
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+      timezone: "America/Toronto"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/job-discovery.yml"
+      - "job-automation/discover_jobs.py"
+      - "job-automation/discovery_sources.json"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: job-discovery
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Discover public jobs
+        run: python job-automation/discover_jobs.py
+
+      - name: Commit refreshed discovery data
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add job-automation/discovered.json job-automation/discovery_status.json
+          if git diff --cached --quiet; then
+            echo "No discovery changes to commit."
+            exit 0
+          fi
+          git commit -m "job discovery: scheduled refresh"
+          git push
