@@ -190,6 +190,10 @@ check(atlas_progress_key in learner_state, "SecX learner state does not reuse At
 check(interval_literal in production_app, "production Atlas interval schedule changed")
 check(interval_literal in learner_state, "SecX card interval schedule does not match production Atlas")
 check(graph_progress_key in learner_state, "SecX graph-specific learner state key missing")
+check("function normalizeGraph(value)" in learner_state, "SecX graph state no longer has defensive shape normalization")
+check("Array.isArray(value)" in learner_state and "Array.isArray(value.nodes)" in learner_state and "Array.isArray(value.scenarios)" in learner_state, "graph-state normalization no longer rejects array-shaped state/children")
+check("let graphState=normalizeGraph(safeParse(localStorage.getItem(GRAPH_STATE_KEY),{}))" in learner_state, "graph-state startup no longer normalizes persisted local storage")
+check("graphState=normalizeGraph(safeParse(e.newValue,{}))" in learner_state, "graph-state storage-event refresh no longer normalizes external values")
 check("reveals" in learner_state and "exposure only" in learner_state, "scenario reveal evidence is not explicitly separated from mastery")
 scenario_state_block = re.search(r"if\(n\.kind==='scenario'&&depth>=4.*?\n  \}", learner_state, re.S)
 check(bool(scenario_state_block), "scenario reveal mutation block not found")
@@ -233,5 +237,5 @@ print(
     f"manifest_files={len(seen_manifest_files)} "
     f"explicit_subtopic_edges={explicit_subtopic_edges} "
     f"questions_with_explicit_subtopic_edge={questions_with_explicit_subtopic_edge} "
-    "learner_state=atlas-compatible+graph-separated+read-only-api+touch-controls"
+    "learner_state=atlas-compatible+graph-separated+graph-normalized+read-only-api+touch-controls"
 )
