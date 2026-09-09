@@ -109,7 +109,8 @@ check("same-window grade" in smoke, "browser smoke does not verify same-window d
 check("SECX_RELEASED_CARDS" in smoke and "reviewCardCount===meta.card_count" in smoke, "browser smoke no longer reconciles learner registry to Atlas card_count")
 check("activateButton(d,dueButton,'desktop Due Reviews')" in continue_smoke, "dedicated browser smoke does not activate the visible desktop Due Reviews control")
 check("routedFocus(d,'due:reviews')" in continue_smoke, "dedicated browser smoke does not require desktop Due Reviews DOM focus")
-check("activateButton(md,mobileDue,'mobile Due Reviews')" in continue_smoke, "dedicated browser smoke does not activate the visible mobile Due Reviews control")
+check("function activateFrameButton" in continue_smoke and "document.activeElement===wrapper" in continue_smoke, "dedicated browser smoke does not require explicit mobile iframe focus handoff")
+check("activateFrameButton(mobile,md,mobileApp.w,mobileDue,'mobile Due Reviews')" in continue_smoke, "dedicated browser smoke does not activate the visible mobile Due Reviews control after explicit iframe focus handoff")
 check("routedFocus(md,'due:reviews')" in continue_smoke, "dedicated browser smoke does not require mobile Due Reviews DOM focus")
 check("ascendQueueToRoot(d,w,'desktop Due Reviews')" in continue_smoke and "ascendQueueToRoot(md,mobileApp.w,'mobile Due Reviews')" in continue_smoke, "dedicated browser smoke does not require Due Reviews Escape focus return on desktop and mobile")
 
@@ -119,4 +120,4 @@ if errors:
         print("-", error)
     sys.exit(1)
 
-print(f"PASS secx_due_audit layered_review_cards={layered_count} objective_cards={len(objectives)} high_yield_cards={len(high_cards)} load_order=ai>precision>registry>graph>learner>due source=shared-read-only-learner-api focus=visible-button+sync-escape-root")
+print(f"PASS secx_due_audit layered_review_cards={layered_count} objective_cards={len(objectives)} high_yield_cards={len(high_cards)} load_order=ai>precision>registry>graph>learner>due source=shared-read-only-learner-api focus=visible-button+mobile-frame-handoff+sync-escape-root")
