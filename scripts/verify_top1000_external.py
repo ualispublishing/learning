@@ -49,6 +49,7 @@ STOP = {
 }
 TOKEN_RE = re.compile(r"[a-z][a-z'-]*", re.I)
 AR_DIAC = re.compile(r"[\u0610-\u061a\u064b-\u065f\u0670\u06d6-\u06ed]")
+LEXIQUE_NUMBER_PREFIX = re.compile(r"^\s*\d+\s*[_./:\-\s]*")
 
 
 def norm_unicode(s: str, language: str | None = None) -> str:
@@ -91,7 +92,9 @@ def token_set(text: str) -> set[str]:
 
 def load_kaikki(path: Path, targets: set[str], language: str) -> dict[str, dict]:
     """Stream a Kaikki JSONL extract and retain only target words and compact evidence."""
-    evidence: dict[str, dict] = {t: {"exists": False, "poses": set(), "gloss_tokens": set()} for t in targets}
+    evidence: dict[str, dict] = {
+        t: {"exists": False, "poses": set(), "gloss_tokens": set()} for t in targets
+    }
     opener = gzip.open if path.suffix == ".gz" else open
     with opener(path, "rt", encoding="utf-8", errors="replace") as f:
         for line in f:
@@ -145,15 +148,52 @@ def load_camel_support() -> set[str]:
     return out
 
 
+def fold_header(text: str) -> str:
+    """Normalize a data-source header while preserving only alphanumeric identity."""
+    return re.sub(r"[^a-z0-9]+", "", (text or "").casefold().strip())
+
+
+def header_keys(text: str) -> set[str]:
+    """Return comparable keys, including a Lexique-style numeric-prefix-stripped key."""
+    raw = (text or "").strip()
+    stripped = LEXIQUE_NUMBER_PREFIX.sub("", raw)
+    return {key for key in (fold_header(raw), fold_header(stripped)) if key}
+
+
 def find_column(headers: list[str], candidates: tuple[str, ...]) -> str | None:
-    folded = {h.casefold().strip(): h for h in headers if h}
+    """Find a source column by normalized aliases, including numbered Lexique4 headers."""
+    folded: dict[str, str] = {}
+    for header in headers:
+        if not header:
+            continue
+        for key in header_keys(header):
+            folded.setdefault(key, header)
     for candidate in candidates:
-        if candidate.casefold() in folded:
-            return folded[candidate.casefold()]
+        for key in header_keys(candidate):
+            if key in folded:
+                return folded[key]
     return None
 
 
-def load_lexique4(path: Path | None, targets: set[str]) -> tuple[set[str], dict[str, set[str]], str | None]:
+def check_lexique4_header_compatibility() -> None:
+    """Fail closed if the real numbered Lexique4 header family stops resolving."""
+    headers = [
+        "1_Mot", "2_Phono", "3_Phono_IPA", "4_Lemme", "5_Cgram",
+        "6_CgramOrtho", "10_FreqMot", "11_FreqOrtho", "12_FreqLemme",
+    ]
+    expected = {
+        "form": find_column(headers, ("mot", "ortho", "orthography", "word", "forme", "form", "graphie")),
+        "lemma": find_column(headers, ("lemme", "lemma")),
+        "pos": find_column(headers, ("cgram", "grammatical_category", "pos", "categorie", "catgram")),
+    }
+    wanted = {"form": "1_Mot", "lemma": "4_Lemme", "pos": "5_Cgram"}
+    if expected != wanted:
+        raise RuntimeError(f"Lexique4 numbered-header compatibility regression: {expected!r} != {wanted!r}")
+
+
+def load_lexique4(
+    path: Path | None, targets: set[str]
+) -> tuple[set[str], dict[str, set[str]], str | None]:
     if not path or not path.exists():
         return set(), {}, None
     forms: set[str] = set()
@@ -161,10 +201,16 @@ def load_lexique4(path: Path | None, targets: set[str]) -> tuple[set[str], dict[
     with path.open(encoding="utf-8-sig", errors="replace", newline="") as f:
         reader = csv.DictReader(f, delimiter="\t")
         headers = reader.fieldnames or []
-        form_col = find_column(headers, ("ortho", "orthography", "word", "forme", "form", "graphie"))
-        pos_col = find_column(headers, ("cgram", "grammatical_category", "pos", "categorie", "catgram"))
+        form_col = find_column(
+            headers, ("mot", "ortho", "orthography", "word", "forme", "form", "graphie")
+        )
+        pos_col = find_column(
+            headers, ("cgram", "grammatical_category", "pos", "categorie", "catgram")
+        )
         if not form_col:
-            return set(), {}, "No recognized surface-form column in Lexique4: " + ",".join(headers[:30])
+            return set(), {}, (
+                "No recognized surface-form column in Lexique4: " + ",".join(headers[:30])
+            )
         for row in reader:
             form = norm_unicode(row.get(form_col, ""), "french")
             if form not in targets:
@@ -200,6 +246,8 @@ def load_urdu_ud(path: Path | None, targets: set[str]) -> tuple[set[str], dict[s
 
 
 def main() -> None:
+    check_lexique4_header_compatibility()
+
     ap = argparse.ArgumentParser()
     ap.add_argument("--language", choices=sorted(LANGS), required=True)
     ap.add_argument("--input", required=True)
@@ -222,10 +270,22 @@ def main() -> None:
     normalized_fronts = [norm_unicode(r.get("Front", ""), language) for r in rows]
     targets = {f for f in normalized_fronts if f}
     kaikki = load_kaikki(Path(args.kaikki_jsonl), targets, language)
-    awn = load_arabic_wordnet(Path(args.arabic_wordnet)) if language == "arabic" and args.arabic_wordnet else set()
+    awn = (
+        load_arabic_wordnet(Path(args.arabic_wordnet))
+        if language == "arabic" and args.arabic_wordnet
+        else set()
+    )
     camel = load_camel_support() if language == "arabic" else set()
-    lexique_forms, lexique_pos, lexique_problem = load_lexique4(Path(args.lexique_tsv), targets) if language == "french" and args.lexique_tsv else (set(), {}, None)
-    urdu_ud_forms, urdu_ud_pos = load_urdu_ud(Path(args.urdu_ud_dir), targets) if language == "urdu" and args.urdu_ud_dir else (set(), {})
+    lexique_forms, lexique_pos, lexique_problem = (
+        load_lexique4(Path(args.lexique_tsv), targets)
+        if language == "french" and args.lexique_tsv
+        else (set(), {}, None)
+    )
+    urdu_ud_forms, urdu_ud_pos = (
+        load_urdu_ud(Path(args.urdu_ud_dir), targets)
+        if language == "urdu" and args.urdu_ud_dir
+        else (set(), {})
+    )
 
     results: list[dict] = []
     for rank, row in enumerate(rows, 1):
@@ -293,27 +353,34 @@ def main() -> None:
         })
 
     fields = list(results[0]) if results else [
-        "rank", "front", "expected_english", "kaikki_entry", "kaikki_pos", "kaikki_has_english_gloss",
-        "semantic_overlap", "semantic_overlap_terms", "wordfreq_attested", "wordfreq_zipf", "arabic_wordnet_entry",
-        "camel_analysis", "lexique4_entry", "lexique4_pos", "urdu_ud_entry", "urdu_ud_pos", "support_count", "confidence"
+        "rank", "front", "expected_english", "kaikki_entry", "kaikki_pos",
+        "kaikki_has_english_gloss", "semantic_overlap", "semantic_overlap_terms",
+        "wordfreq_attested", "wordfreq_zipf", "arabic_wordnet_entry",
+        "camel_analysis", "lexique4_entry", "lexique4_pos", "urdu_ud_entry",
+        "urdu_ud_pos", "support_count", "confidence"
     ]
     out_csv = AUDIT / f"{language}_top1000_external_verification.csv"
     with out_csv.open("w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fields)
-        w.writeheader(); w.writerows(results)
+        w.writeheader()
+        w.writerows(results)
 
     review_classes = {"semantic_review", "form_only", "weak"}
     review = [r for r in results if r["confidence"] in review_classes]
     review_csv = AUDIT / f"{language}_top1000_external_review_queue.csv"
     with review_csv.open("w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fields)
-        w.writeheader(); w.writerows(review)
+        w.writeheader()
+        w.writerows(review)
 
     counts: dict[str, int] = {}
     for r in results:
         counts[r["confidence"]] = counts.get(r["confidence"], 0) + 1
 
-    duplicates = sorted({front for front in normalized_fronts if front and normalized_fronts.count(front) > 1})
+    duplicates = sorted({
+        front for front in normalized_fronts
+        if front and normalized_fronts.count(front) > 1
+    })
     summary = {
         "language": language,
         "input": args.input,
@@ -324,7 +391,9 @@ def main() -> None:
         "duplicate_front_spellings": duplicates,
         "confidence_counts": counts,
         "kaikki_coverage": sum(bool(r["kaikki_entry"]) for r in results),
-        "kaikki_rows_with_english_gloss": sum(bool(r["kaikki_has_english_gloss"]) for r in results),
+        "kaikki_rows_with_english_gloss": sum(
+            bool(r["kaikki_has_english_gloss"]) for r in results
+        ),
         "wordfreq_attested": sum(bool(r["wordfreq_attested"]) for r in results),
         "arabic_wordnet_coverage": sum(bool(r["arabic_wordnet_entry"]) for r in results),
         "camel_analysis_coverage": sum(bool(r["camel_analysis"]) for r in results),
@@ -343,7 +412,10 @@ def main() -> None:
         ]
     }
     summary_path = AUDIT / f"{language}_top1000_external_verification_summary.json"
-    summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    summary_path.write_text(
+        json.dumps(summary, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
     print(json.dumps(summary, ensure_ascii=False, indent=2))
 
 
