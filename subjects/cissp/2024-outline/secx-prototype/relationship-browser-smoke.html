@@ -9,7 +9,8 @@
 (()=>{'use strict';
 const result=document.querySelector('#result'),frame=document.querySelector('#app'),mobile=document.querySelector('#mobile');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;while(Date.now()<end){try{const v=fn();if(v)return v}catch{}await sleep(50)}throw new Error(`Timed out waiting for ${label}`)}
+async function waitFor(fn,label,timeout=5000){const end=Date.now()+timeout;while(Date.now()<end){try{const v=fn();if(v)return v}catch{}await sleep(50)}throw new Error(`Timed out waiting for ${label}`)}
+function stage(label){result.dataset.stage=label;result.textContent=`STAGE ${label}`}
 function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
 function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow,proto}}
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
@@ -20,41 +21,53 @@ function activateButton(d,button,label){button.focus();assert(d.activeElement===
 function activateFrameButton(wrapper,d,w,button,label){wrapper.focus();assert(document.activeElement===wrapper,`${label} iframe receives outer focus`);w.focus();button.focus();assert(d.activeElement===button,`${label} button receives inner focus`);button.click()}
 function atlasProgress(w){return w.localStorage.getItem('cissp_atlas_progress_v1')||''}
 function graphState(w){try{return JSON.parse(w.localStorage.getItem('cissp_secx_graph_state_v1')||'{}')}catch{return{}}}
-async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),rels=x.w?.SECX_RELEASED_RELATIONSHIPS,meta=x.w?.CISSP_META?.meta||{},bank=x.w?.SECX_RELEASED_BANK_STATE;return x.d&&x.w&&x.proto?.dataset.secxExpandedState==='ready'&&x.d.querySelector('#relationshipLensBtn')&&Array.isArray(rels)&&rels.length===3&&bank?.ready&&bank.count===meta.question_count?x:null},`${label} relationship runtime + shared released bank ready`)}
+async function ready(wrapper,label){stage(`${label}-ready`);return waitFor(()=>{const x=inner(wrapper),rels=x.w?.SECX_RELEASED_RELATIONSHIPS,meta=x.w?.CISSP_META?.meta||{},bank=x.w?.SECX_RELEASED_BANK_STATE;return x.d&&x.w&&x.proto?.dataset.secxExpandedState==='ready'&&x.d.querySelector('#relationshipLensBtn')&&Array.isArray(rels)&&rels.length===3&&bank?.ready&&bank.count===meta.question_count?x:null},`${label} relationship runtime + shared released bank ready`,30000)}
 async function run(){
   const {d,w}=await ready(frame,'desktop');
+  stage('desktop-data');
   const rels=w.SECX_RELEASED_RELATIONSHIPS;
   assert(Object.isFrozen(rels),'released relationship runtime array is frozen');
   assert(rels.map(r=>r.id).join(',')==='REL-001,REL-002,REL-003','exact reviewed relationship IDs are loaded');
   assert(!w.performance.getEntriesByType('resource').some(e=>e.name.includes('RELATIONSHIP_REVIEW.json')),'reviewer-only relationship registry is never fetched');
   const atlasBefore=atlasProgress(w),button=d.querySelector('#relationshipLensBtn');
   assert(button.textContent.includes('Links · 3'),'visible relationship button reports three links');
+  stage('desktop-button');
   activateButton(d,button,'desktop Links');
   await waitFor(()=>routedFocus(d,'relationships:root')&&d.querySelectorAll('.node.relationship-node').length===3&&d.querySelector('#crumb')?.textContent==='SecX › Reviewed Links','button opens focused relationship root');
+  stage('relationship-detail');
   const rel1=node(d,'relationship:REL-001');assert(rel1,'REL-001 node exists');rel1.click();
   await waitFor(()=>d.querySelector('#detail.open')?.textContent.includes('5.1 depends-on 1.8')&&d.querySelector('#detail')?.textContent.includes('personnel-lifecycle'),'REL-001 detail exposes reviewed rationale');
+  stage('relationship-hub');
   key(w,'Enter','Enter');
   await waitFor(()=>routedFocus(d,'relationship:REL-001')&&node(d,'relationship:endpoint:REL-001:from')&&node(d,'relationship:endpoint:REL-001:to')&&d.querySelector('#crumb')?.textContent==='SecX › Reviewed Links › REL-001','Enter opens two stable endpoints');
+  stage('endpoint-route');
   const to=node(d,'relationship:endpoint:REL-001:to');to.click();key(w,'Enter','Enter');
   await waitFor(()=>routedFocus(d,'1.8')&&d.querySelector('#crumb')?.textContent.includes('Security and Risk Management'),'relationship endpoint returns to normal objective 1.8 context');
+  stage('home-route');
   key(w,'Home','Home');
   await waitFor(()=>routedFocus(d,'root')&&d.querySelector('#crumb')?.textContent==='SecX','Home returns to SecX root');
+  stage('shortcut-L');
   key(w,'l','KeyL');
   await waitFor(()=>routedFocus(d,'relationships:root')&&d.querySelectorAll('.node.relationship-node').length===3,'L shortcut opens reviewed relationships');
+  stage('escape-root');
   key(w,'Escape','Escape');
   await waitFor(()=>routedFocus(d,'root')&&d.querySelector('#crumb')?.textContent==='SecX','Escape returns relationship root to SecX root');
+  stage('state-isolation');
   assert(atlasProgress(w)===atlasBefore,'relationship traversal never mutates Atlas mastery/progress state');
   assert((graphState(w).nodes?.['relationship:REL-001']?.visits||0)>=1,'relationship detail visit is recorded only as separate graph evidence');
 
   frame.remove();await sleep(0);
   const m=await ready(mobile,'mobile'),md=m.d,mw=m.w,mb=md.querySelector('#relationshipLensBtn');
+  stage('mobile-button');
   activateFrameButton(mobile,md,mw,mb,'mobile Links');
   await waitFor(()=>routedFocus(md,'relationships:root')&&md.querySelectorAll('.node.relationship-node').length===3,'mobile button opens focused relationship root');
+  stage('mobile-viewport');
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile relationship lens has no horizontal overflow');
   result.dataset.smoke='pass';
+  result.dataset.stage='complete';
   result.textContent='PASS SecX relationship lens browser smoke: 3 released reviewed links reviewer-registry-not-fetched shared-bank-ready button+L routing stable-endpoint-return Atlas-progress-read-only graph-evidence-separated mobile-focus+viewport';
 }
-run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
+run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL stage=${result.dataset.stage||'unknown'} ${err.stack||err}`;console.error(err)});
 })();
 </script>
 </body>
