@@ -80,7 +80,7 @@ try:
     runtime_text = "\n".join(read(ROOT / name) for name in (
         "index.html", "next-layer.js", "learner-registry.js", "learner-state.js",
         "due-review.js", "study-lens.js", "source-lens.js", "coverage-lens.js",
-        "projection-search.js"
+        "projection-search.js", "released-relationships.js", "relationship-lens.js"
     ))
 except (OSError, ValueError, RuntimeError) as exc:
     print("FAIL secx_relationship_audit")
@@ -167,7 +167,8 @@ for idx, rel in enumerate(relationships):
 
 check("RELATIONSHIP_REVIEW.json" not in next_html, "learner review page must not load reviewer-only relationship registry")
 check("RELATIONSHIP_REVIEW.json" not in runtime_text, "learner runtime references reviewer-only relationship registry")
-check("RELEASED_RELATIONSHIPS" not in runtime_text, "learner runtime unexpectedly contains an unaudited released-relationship channel")
+check("window.SECX_RELEASED_RELATIONSHIPS=Object.freeze(" in runtime_text, "audited released relationship runtime channel is missing")
+check("relationshipLensBtn" in runtime_text, "learner relationship lens is missing")
 
 candidate_count = sum(1 for r in relationships if isinstance(r, dict) and r.get("status") == "candidate")
 approved_count = sum(1 for r in relationships if isinstance(r, dict) and r.get("status") == "approved")
@@ -182,5 +183,5 @@ if errors:
 print(
     "PASS secx_relationship_audit "
     f"stable_endpoints={len(endpoint_ids)} candidates={candidate_count} approved_draft={approved_count} rejected={rejected_count} "
-    "learner_runtime_relationship_registry=NOT_LOADED"
+    "reviewer_registry=NOT_LOADED released_runtime_channel=AUDITED"
 )
