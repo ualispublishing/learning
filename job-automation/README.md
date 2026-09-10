@@ -1,23 +1,36 @@
 # Job Application Automation
 
-Current runtime: **GitHub Actions scheduled public-job discovery + GitHub Pages manual application queue**.
+Current runtime: **GitHub Actions scheduled public-job discovery + graduated-candidate filtering + prioritized review queue + GitHub Pages manual application queue**.
 
 ## Scheduled discovery backend
 
-The repository now has a plugin-free discovery worker:
+The repository has a plugin-free discovery worker:
 
 - Workflow: `.github/workflows/job-discovery.yml`
 - Worker: `job-automation/discover_jobs.py`
+- Graduated/Canada filter: `job-automation/filter_graduated_jobs.py`
+- Priority worker: `job-automation/prioritize_jobs.py`
 - Public ATS source list: `job-automation/discovery_sources.json`
-- Current output: `job-automation/discovered.json`
+- Raw filtered output: `job-automation/discovered.json`
+- Prioritized output: `job-automation/actionable.json`
 - Health/status output: `job-automation/discovery_status.json`
 - Schedule: every six hours at minute 17 in `America/Toronto`, plus manual `workflow_dispatch` and relevant code/config pushes.
 - Providers currently supported: public Greenhouse, Lever and Ashby job-board APIs.
+- Current source set: 37 employer boards, including established Canadian and Canada-hiring technology employers.
+- Candidate mode: `graduated_2026_new_grad_junior`.
 - Scope: public Canada/remote-Canada technology opportunity discovery and first-pass early-career triage only.
 
-The discovery backend contains **no candidate profile, email address, résumé, cover letter, credentials, application answers, private tracker export, or other candidate PII**. It commits only public job metadata and discovery health data.
+The discovery backend contains **no candidate profile, email address, résumé, cover letter, credentials, application answers, private tracker export, or other candidate PII**. It commits only public job metadata, prioritization metadata and discovery health data.
 
-A discovery match is a lead for private review, not proof of candidate fit and not authorization to submit. Before any application, re-check the current posting, candidate truth, employer AI restrictions, duplicate state and all application fields under the private job-application workflow.
+The graduated filter removes student-only internship/co-op roles and rejects obvious foreign-location false positives where Canada appears only in job text. The priority worker ranks explicit junior/new-grad/associate/entry-level technical roles above merely fresh roles, penalizes senior and level II/III/IV titles, and prevents freshness alone from putting a role into the high-priority band.
+
+`actionable.json` is a triage queue, **not application authorization**. Before any application, re-check the current posting, candidate truth, employer AI restrictions, duplicate state and all application fields under the private job-application workflow.
+
+## Verified runtime state
+
+The expanded 37-source configuration and the tightened priority model have both completed successful GitHub Actions runs. The expanded validation run reached 37/37 public sources with zero source failures. The priority-model validation also completed successfully after the level/seniority penalties were added.
+
+Runtime counts are intentionally read from `discovery_status.json` and `actionable.json` rather than hard-coded here because they change each scheduled run.
 
 ## Existing private application queue
 
@@ -49,6 +62,7 @@ Do not change this project to claim cross-origin autofill or unattended ATS subm
 ## Safety / quality rules
 
 - Tech-focused discovery/application scope: software, QA, security, IT/support, data/AI, implementation, or genuinely technical systems/operations roles.
+- Current candidate mode is graduated/new-grad, not enrolled/student-only.
 - No CAPTCHA/anti-bot bypass.
 - No invented candidate answers or qualifications.
 - No guessed legal/privacy/compensation/relocation/travel/demographic/security-clearance answers.
@@ -62,7 +76,7 @@ Do not change this project to claim cross-origin autofill or unattended ATS subm
 
 Active zero-plugin automation is intentionally split into two layers:
 
-1. **GitHub Actions** — unattended public discovery, source health checks and deduplicated job metadata refreshes.
+1. **GitHub Actions** — unattended public discovery, source health checks, graduated/Canada filtering, deduplicated metadata refreshes and priority-queue generation.
 2. **GitHub Pages** — privacy-minimized manual queue/navigation UI.
 
 Application submission remains gated unless a separately authorized, authenticated and truthful write-capable route is available. Historical extension, Vercel, Playwright and other browser/backend artifacts remain legacy unless deliberately reactivated under current workflow rules.
