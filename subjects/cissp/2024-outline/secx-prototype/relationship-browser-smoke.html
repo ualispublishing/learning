@@ -20,7 +20,7 @@ function activateButton(d,button,label){button.focus();assert(d.activeElement===
 function activateFrameButton(wrapper,d,w,button,label){wrapper.focus();assert(document.activeElement===wrapper,`${label} iframe receives outer focus`);w.focus();button.focus();assert(d.activeElement===button,`${label} button receives inner focus`);button.click()}
 function atlasProgress(w){return w.localStorage.getItem('cissp_atlas_progress_v1')||''}
 function graphState(w){try{return JSON.parse(w.localStorage.getItem('cissp_secx_graph_state_v1')||'{}')}catch{return{}}}
-async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),rels=x.w?.SECX_RELEASED_RELATIONSHIPS;return x.d&&x.w&&x.proto?.dataset.secxExpandedState==='ready'&&x.d.querySelector('#relationshipLensBtn')&&Array.isArray(rels)&&rels.length===3?x:null},`${label} relationship runtime ready`)}
+async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),rels=x.w?.SECX_RELEASED_RELATIONSHIPS,meta=x.w?.CISSP_META?.meta||{},bank=x.w?.SECX_RELEASED_BANK_STATE;return x.d&&x.w&&x.proto?.dataset.secxExpandedState==='ready'&&x.d.querySelector('#relationshipLensBtn')&&Array.isArray(rels)&&rels.length===3&&bank?.ready&&bank.count===meta.question_count?x:null},`${label} relationship runtime + shared released bank ready`)}
 async function run(){
   const {d,w}=await ready(frame,'desktop');
   const rels=w.SECX_RELEASED_RELATIONSHIPS;
@@ -52,7 +52,7 @@ async function run(){
   await waitFor(()=>routedFocus(md,'relationships:root')&&md.querySelectorAll('.node.relationship-node').length===3,'mobile button opens focused relationship root');
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile relationship lens has no horizontal overflow');
   result.dataset.smoke='pass';
-  result.textContent='PASS SecX relationship lens browser smoke: 3 released reviewed links reviewer-registry-not-fetched button+L routing stable-endpoint-return Atlas-progress-read-only graph-evidence-separated mobile-focus+viewport';
+  result.textContent='PASS SecX relationship lens browser smoke: 3 released reviewed links reviewer-registry-not-fetched shared-bank-ready button+L routing stable-endpoint-return Atlas-progress-read-only graph-evidence-separated mobile-focus+viewport';
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
