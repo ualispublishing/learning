@@ -10,6 +10,7 @@ on:
     paths:
       - ".github/workflows/job-discovery.yml"
       - "job-automation/discover_jobs.py"
+      - "job-automation/filter_graduated_jobs.py"
       - "job-automation/discovery_sources.json"
 
 permissions:
@@ -34,6 +35,9 @@ jobs:
 
       - name: Discover public jobs
         run: python job-automation/discover_jobs.py
+
+      - name: Filter for graduated/new-grad candidate
+        run: python job-automation/filter_graduated_jobs.py
 
       - name: Commit refreshed discovery data
         shell: bash
