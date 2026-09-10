@@ -91,6 +91,8 @@ jobs:
           node --check subjects/cissp/2024-outline/secx-prototype/source-lens.js
           node --check subjects/cissp/2024-outline/secx-prototype/coverage-lens.js
           node --check subjects/cissp/2024-outline/secx-prototype/projection-search.js
+          node --check subjects/cissp/2024-outline/secx-prototype/released-relationships.js
+          node --check subjects/cissp/2024-outline/secx-prototype/relationship-lens.js
           bash -n subjects/cissp/2024-outline/secx-prototype/browser-smoke.sh
           bash -n subjects/cissp/2024-outline/secx-prototype/loader-ready-smoke.sh
           bash -n subjects/cissp/2024-outline/secx-prototype/loader-failure-smoke.sh
@@ -99,6 +101,7 @@ jobs:
           bash -n subjects/cissp/2024-outline/secx-prototype/source-browser-smoke.sh
           bash -n subjects/cissp/2024-outline/secx-prototype/coverage-browser-smoke.sh
           bash -n subjects/cissp/2024-outline/secx-prototype/projection-search-smoke.sh
+          bash -n subjects/cissp/2024-outline/secx-prototype/relationship-browser-smoke.sh
           python subjects/cissp/2024-outline/secx-prototype/audit.py
           python subjects/cissp/2024-outline/secx-prototype/browser-fixtures-audit.py
           python subjects/cissp/2024-outline/secx-prototype/due-audit.py
@@ -143,6 +146,11 @@ jobs:
         shell: bash
         working-directory: subjects/cissp/2024-outline/secx-prototype
         run: bash projection-search-smoke.sh 8806
+
+      - name: SecX reviewed relationship browser smoke
+        shell: bash
+        working-directory: subjects/cissp/2024-outline/secx-prototype
+        run: bash relationship-browser-smoke.sh 8856
 
       - name: SecX loader failure fallback browser smoke
         shell: bash
