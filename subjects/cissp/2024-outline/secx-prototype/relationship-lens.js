@@ -5,6 +5,8 @@ let relationshipId=null;
 
 function relationshipRecords(){return Array.isArray(window.SECX_RELEASED_RELATIONSHIPS)?window.SECX_RELEASED_RELATIONSHIPS:[]}
 function relationshipById(id){return relationshipRecords().find(r=>r.id===id)||null}
+function relationshipIdFromNode(n){if(n?.relationshipId)return n.relationshipId;const id=String(n?.id||''),prefix='relationship:';return id.startsWith(prefix)&&!id.startsWith('relationship:endpoint:')?id.slice(prefix.length):null}
+function endpointTargetFromNode(n){if(n?.itemId)return n.itemId;const parts=String(n?.id||'').split(':');if(parts.length!==4||parts[0]!=='relationship'||parts[1]!=='endpoint')return null;const r=relationshipById(parts[2]);return parts[3]==='from'?r?.from_id:parts[3]==='to'?r?.to_id:null}
 function endpointObjective(id){return objectiveById[id]||null}
 function endpointTitle(id){const o=endpointObjective(id);return o?`${o.id} · ${o.label}`:id}
 function relationTitle(r){return`${r.from_id} ${r.type} ${r.to_id}`}
@@ -53,7 +55,7 @@ window.relationshipsLayout=function(returnTo=null,focus=false){
 };
 
 window.relationshipHubLayout=function(id,returnTo=null,focus=false){
-  const r=relationshipById(id);if(!r)return relationshipsLayout(null,focus);
+  const r=relationshipById(id);if(!r)return window.relationshipsLayout(null,focus);
   const centerId=`relationship:${r.id}`;
   nodes=[{id:centerId,relationshipId:r.id,title:relationTitle(r),summary:r.rationale,kind:'relationship-node',x:.5,y:.5,labels:[r.id,r.type,'reviewed'],details:relationDetails(r)}];links=[];
   const endpoints=[{role:'from',id:r.from_id,x:.22,y:.66},{role:'to',id:r.to_id,x:.78,y:.66}];
@@ -61,15 +63,18 @@ window.relationshipHubLayout=function(id,returnTo=null,focus=false){
   level='relationship-hub';relationshipId=r.id;parentDomain=null;parentObjective=null;active=returnTo&&nodes.some(n=>n.id===returnTo)?returnTo:centerId;depth=0;render(focus);
 };
 
-relationshipButton.addEventListener('click',()=>{relationshipsLayout(null,false);focusActive()});
+relationshipButton.addEventListener('click',()=>{window.relationshipsLayout(null,false);focusActive()});
 const priorCrumb=crumbText;
 window.crumbText=function(){if(level==='relationships')return'SecX › Reviewed Links';if(level==='relationship-hub')return`SecX › Reviewed Links › ${relationshipId}`;return priorCrumb()};
 const priorDescend=descend;
 window.descend=function(){
   const n=current();
-  if(level==='relationships'&&n?.kind==='relationship-node'){relationshipHubLayout(n.relationshipId,null,true);return}
+  if(level==='relationships'&&n?.kind==='relationship-node'){
+    const id=relationshipIdFromNode(n);
+    if(id){window.relationshipHubLayout(id,null,true);return}
+  }
   if(level==='relationship-hub'&&n?.kind==='relationship-endpoint'){
-    const o=endpointObjective(n.itemId);
+    const targetId=endpointTargetFromNode(n),o=endpointObjective(targetId);
     if(o){objectiveLayout(`d${o.domain_num}`,o.id,false);focusActive();return}
     depth=Math.max(depth,2);showDetail();return;
   }
@@ -78,11 +83,11 @@ window.descend=function(){
 };
 const priorAscend=ascend;
 window.ascend=function(){
-  if(depth===0&&level==='relationship-hub'){relationshipsLayout(`relationship:${relationshipId}`,false);focusActive();return}
+  if(depth===0&&level==='relationship-hub'){window.relationshipsLayout(`relationship:${relationshipId}`,false);focusActive();return}
   if(depth===0&&level==='relationships'){domainLayout('root',false);focusActive();return}
   return priorAscend();
 };
 
-document.addEventListener('keydown',e=>{if(!document.getElementById('search')?.hidden)return;if(e.target.closest('input,textarea,select,[contenteditable="true"]'))return;if((e.key==='l'||e.key==='L')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();e.stopImmediatePropagation();relationshipsLayout(null,false);focusActive()}},true);
+document.addEventListener('keydown',e=>{if(!document.getElementById('search')?.hidden)return;if(e.target.closest('input,textarea,select,[contenteditable="true"]'))return;if((e.key==='l'||e.key==='L')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();e.stopImmediatePropagation();window.relationshipsLayout(null,false);focusActive()}},true);
 updateRelationshipButton();
 })();
