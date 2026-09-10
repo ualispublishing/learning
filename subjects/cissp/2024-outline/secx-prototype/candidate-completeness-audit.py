@@ -22,6 +22,8 @@ EXPECTED_RUNTIME = [
     "source-lens.js",
     "coverage-lens.js",
     "projection-search.js",
+    "released-relationships.js",
+    "relationship-lens.js",
 ]
 LOCAL_RUNTIME = {
     "learner-registry.js",
@@ -32,6 +34,8 @@ LOCAL_RUNTIME = {
     "source-lens.js",
     "coverage-lens.js",
     "projection-search.js",
+    "released-relationships.js",
+    "relationship-lens.js",
 }
 REVIEW_ONLY_MARKERS = (
     "RELATIONSHIP_REVIEW.json",
@@ -50,7 +54,7 @@ RESILIENCE_MARKERS = (
     "The conservative knowledge web remains available.",
     "doc.addEventListener('error'",
     "win.addEventListener('error'",
-    "projectionSearch.onload=readyExpanded",
+    "relationships.onload=readyExpanded",
     "if(frame.dataset.secxExpandedState==='error')return;",
     "Expanded review layer ready.",
 )
