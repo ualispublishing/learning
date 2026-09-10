@@ -18,7 +18,8 @@ function graphTarget(w){const id=w.current?.()?.id;return(id&&node(w.document,id
 function key(w,key,code=key){graphTarget(w).dispatchEvent(new w.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
 function activateButton(d,button,label){button.focus();assert(d.activeElement===button,`${label} button receives focus`);button.click()}
 function activateFrameButton(wrapper,d,w,button,label){wrapper.focus();assert(document.activeElement===wrapper,`${label} iframe receives outer focus`);w.focus();button.focus();assert(d.activeElement===button,`${label} button receives inner focus`);button.click()}
-function storageSnapshot(w){return JSON.stringify(Object.keys(w.localStorage).sort().map(k=>[k,w.localStorage.getItem(k)]))}
+function atlasProgress(w){return w.localStorage.getItem('cissp_atlas_progress_v1')||''}
+function graphState(w){try{return JSON.parse(w.localStorage.getItem('cissp_secx_graph_state_v1')||'{}')}catch{return{}}}
 async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),rels=x.w?.SECX_RELEASED_RELATIONSHIPS;return x.d&&x.w&&x.proto?.dataset.secxExpandedState==='ready'&&x.d.querySelector('#relationshipLensBtn')&&Array.isArray(rels)&&rels.length===3?x:null},`${label} relationship runtime ready`)}
 async function run(){
   const {d,w}=await ready(frame,'desktop');
@@ -26,7 +27,7 @@ async function run(){
   assert(Object.isFrozen(rels),'released relationship runtime array is frozen');
   assert(rels.map(r=>r.id).join(',')==='REL-001,REL-002,REL-003','exact reviewed relationship IDs are loaded');
   assert(!w.performance.getEntriesByType('resource').some(e=>e.name.includes('RELATIONSHIP_REVIEW.json')),'reviewer-only relationship registry is never fetched');
-  const before=storageSnapshot(w),button=d.querySelector('#relationshipLensBtn');
+  const atlasBefore=atlasProgress(w),button=d.querySelector('#relationshipLensBtn');
   assert(button.textContent.includes('Links · 3'),'visible relationship button reports three links');
   activateButton(d,button,'desktop Links');
   await waitFor(()=>routedFocus(d,'relationships:root')&&d.querySelectorAll('.node.relationship-node').length===3&&d.querySelector('#crumb')?.textContent==='SecX › Reviewed Links','button opens focused relationship root');
@@ -42,7 +43,8 @@ async function run(){
   await waitFor(()=>routedFocus(d,'relationships:root')&&d.querySelectorAll('.node.relationship-node').length===3,'L shortcut opens reviewed relationships');
   key(w,'Escape','Escape');
   await waitFor(()=>routedFocus(d,'root')&&d.querySelector('#crumb')?.textContent==='SecX','Escape returns relationship root to SecX root');
-  assert(storageSnapshot(w)===before,'relationship navigation does not mutate learner or graph localStorage');
+  assert(atlasProgress(w)===atlasBefore,'relationship traversal never mutates Atlas mastery/progress state');
+  assert((graphState(w).nodes?.['relationship:REL-001']?.visits||0)>=1,'relationship detail visit is recorded only as separate graph evidence');
 
   frame.remove();await sleep(0);
   const m=await ready(mobile,'mobile'),md=m.d,mw=m.w,mb=md.querySelector('#relationshipLensBtn');
@@ -50,7 +52,7 @@ async function run(){
   await waitFor(()=>routedFocus(md,'relationships:root')&&md.querySelectorAll('.node.relationship-node').length===3,'mobile button opens focused relationship root');
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile relationship lens has no horizontal overflow');
   result.dataset.smoke='pass';
-  result.textContent='PASS SecX relationship lens browser smoke: 3 released reviewed links reviewer-registry-not-fetched button+L routing stable-endpoint-return localStorage-read-only mobile-focus+viewport';
+  result.textContent='PASS SecX relationship lens browser smoke: 3 released reviewed links reviewer-registry-not-fetched button+L routing stable-endpoint-return Atlas-progress-read-only graph-evidence-separated mobile-focus+viewport';
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
