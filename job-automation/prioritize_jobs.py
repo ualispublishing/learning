@@ -9,6 +9,7 @@ submission logic. The output is triage data for the private application workflow
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -31,10 +32,24 @@ SENIOR_TITLE = (
     "director", "architect", "head of", "vp ", "vice president",
 )
 
+MID_LEVEL_TITLE = (
+    "intermediate", "level 2", "level ii", "engineer ii", "developer ii",
+    "analyst ii", "specialist ii", "sdet ii",
+)
+
+ADVANCED_LEVEL_TITLE = (
+    "level 3", "level iii", "engineer iii", "developer iii", "analyst iii",
+    "specialist iii", "sdet iii", "engineer iv", "developer iv", "sdet iv",
+)
+
 GOOD_LOCATION = (
     "toronto", "markham", "mississauga", "brampton", "vaughan",
     "richmond hill", "oakville", "burlington", "ontario", "remote",
 )
+
+
+def has_level_token(title: str, roman: str) -> bool:
+    return bool(re.search(rf"\b{roman}\b", title, flags=re.IGNORECASE))
 
 
 def score_job(job: dict) -> tuple[int, list[str]]:
@@ -43,17 +58,19 @@ def score_job(job: dict) -> tuple[int, list[str]]:
     reasons: list[str] = []
     score = 50
 
+    # Freshness helps ordering, but cannot by itself make a role high priority.
     if job.get("new_this_run"):
-        score += 25
+        score += 10
         reasons.append("new_this_run")
 
-    if any(term in title for term in STRONG_EARLY):
+    explicit_early = any(term in title for term in STRONG_EARLY)
+    if explicit_early:
         score += 25
         reasons.append("explicit_early_career_title")
 
     role_hits = [term.strip() for term in GOOD_ROLE if term in title]
     if role_hits:
-        score += min(20, 6 + (len(role_hits) * 3))
+        score += min(15, 5 + (len(set(role_hits)) * 2))
         reasons.append("technical_role_family")
 
     if any(term in location for term in GOOD_LOCATION):
@@ -64,9 +81,28 @@ def score_job(job: dict) -> tuple[int, list[str]]:
         score -= 60
         reasons.append("senior_title_penalty")
 
+    if any(term in title for term in ADVANCED_LEVEL_TITLE) or (
+        any(k in title for k in ("engineer", "developer", "analyst", "sdet", "specialist"))
+        and (has_level_token(title, "iii") or has_level_token(title, "iv"))
+    ):
+        score -= 35
+        reasons.append("advanced_level_title_penalty")
+    elif any(term in title for term in MID_LEVEL_TITLE) or (
+        any(k in title for k in ("engineer", "developer", "analyst", "sdet", "specialist"))
+        and has_level_token(title, "ii")
+    ):
+        score -= 20
+        reasons.append("mid_level_title_penalty")
+
     if "intern" in title or "co-op" in title or "co op" in title:
         score -= 50
         reasons.append("student_role_penalty")
+
+    # High means the title itself gives affirmative early-career evidence.
+    # Fresh non-senior technical roles remain medium until private screening.
+    if not explicit_early and score >= 85:
+        score = 84
+        reasons.append("high_band_capped_without_early_career_evidence")
 
     return max(0, min(100, score)), reasons
 
@@ -82,7 +118,7 @@ def main() -> int:
         item["priority_score"] = score
         item["priority_reasons"] = reasons
         item["review_band"] = (
-            "high" if score >= 80 else "medium" if score >= 60 else "low"
+            "high" if score >= 85 else "medium" if score >= 60 else "low"
         )
         ranked.append(item)
 
@@ -97,7 +133,7 @@ def main() -> int:
 
     actionable = [j for j in ranked if j["review_band"] != "low"]
     output = {
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_at": payload.get("generated_at"),
         "privacy": "Public job metadata only. No candidate data, credentials, or application answers.",
         "purpose": "Prioritized review queue only; not submission authorization.",
