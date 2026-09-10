@@ -17,6 +17,7 @@ function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id
 function routedFocus(d,id){const target=node(d,id);return target?.classList.contains('active')&&d.activeElement===target}
 function graphTarget(w){const active=[...w.document.querySelectorAll('.node.active')].find(el=>el.isConnected);return active||w.document.body||w.document.documentElement}
 function key(w,key,code=key){const graphKey=['Enter','Escape',' ','Home'].includes(key);const target=graphKey?graphTarget(w):(w.document.body||w.document.documentElement);target.dispatchEvent(new w.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
+async function enter(w){key(w,'Enter','Enter');await sleep(80)}
 function activateButton(d,button,label){button.focus();assert(d.activeElement===button,`${label} button receives focus`);button.click()}
 function activateFrameButton(wrapper,d,w,button,label){wrapper.focus();assert(document.activeElement===wrapper,`${label} iframe receives outer focus`);w.focus();button.focus();assert(d.activeElement===button,`${label} button receives inner focus`);button.click()}
 function atlasProgress(w){return w.localStorage.getItem('cissp_atlas_progress_v1')||''}
@@ -36,12 +37,14 @@ async function run(){
   await waitFor(()=>routedFocus(d,'relationships:root')&&d.querySelectorAll('.node.relationship-node').length===3&&d.querySelector('#crumb')?.textContent==='SecX › Reviewed Links','button opens focused relationship root');
   stage('relationship-detail');
   const rel1=node(d,'relationship:REL-001');assert(rel1,'REL-001 node exists');rel1.click();
-  await waitFor(()=>d.querySelector('#detail.open')?.textContent.includes('5.1 depends-on 1.8')&&d.querySelector('#detail')?.textContent.includes('personnel-lifecycle'),'REL-001 detail exposes reviewed rationale');
+  await waitFor(()=>node(d,'relationship:REL-001')?.classList.contains('active')&&w.current?.()?.id==='relationship:REL-001'&&d.querySelector('#detail.open')?.textContent.includes('5.1 depends-on 1.8')&&d.querySelector('#detail')?.textContent.includes('personnel-lifecycle'),'REL-001 selected with reviewed rationale');
   stage('relationship-hub');
-  key(w,'Enter','Enter');
+  await enter(w);
   await waitFor(()=>routedFocus(d,'relationship:REL-001')&&node(d,'relationship:endpoint:REL-001:from')&&node(d,'relationship:endpoint:REL-001:to')&&d.querySelector('#crumb')?.textContent==='SecX › Reviewed Links › REL-001','Enter opens two stable endpoints');
   stage('endpoint-route');
-  const to=node(d,'relationship:endpoint:REL-001:to');to.click();key(w,'Enter','Enter');
+  const to=node(d,'relationship:endpoint:REL-001:to');to.click();
+  await waitFor(()=>node(d,'relationship:endpoint:REL-001:to')?.classList.contains('active')&&w.current?.()?.id==='relationship:endpoint:REL-001:to','REL-001 to endpoint selected');
+  await enter(w);
   await waitFor(()=>routedFocus(d,'1.8')&&d.querySelector('#crumb')?.textContent.includes('Security and Risk Management'),'relationship endpoint returns to normal objective 1.8 context');
   stage('home-route');
   key(w,'Home','Home');
