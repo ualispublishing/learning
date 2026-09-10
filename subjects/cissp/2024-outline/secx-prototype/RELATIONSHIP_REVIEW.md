@@ -4,9 +4,19 @@ This draft file defines how future typed semantic relationships can be reviewed 
 
 ## Current state
 
-`RELATIONSHIP_REVIEW.json` is reviewer-only and currently contains **zero** candidate, approved, or released relationships. The learner-facing review surface (`next.html`) does not load it.
+`RELATIONSHIP_REVIEW.json` is reviewer-only and currently contains **three approved draft relationships**. The learner-facing review surface (`next.html`) does not load it, and none of these relationships is published or learner-facing.
 
 The current graph may display only relationships already explicit in released Atlas data, including hierarchy, objective/card mappings, objective/scenario mappings, exact released subtopic tags, and source provenance from `source_ids`.
+
+### First reviewed draft set
+
+The first relationship-specific review pass on 2026-09-10 approved these records for the reviewer queue only:
+
+- `REL-001`: objective `5.1` **depends-on** objective `1.8` for personnel-lifecycle-driven access changes. Evidence: current ISC2 objectives 1.8/5.1 and NIST SP 800-53 Rev. 5 personnel termination/transfer controls.
+- `REL-002`: objective `7.6` is **evidenced-by** objective `7.2` because logging and monitoring provide operational evidence used across incident detection, response, mitigation, recovery, and lessons learned. Evidence: current ISC2 objectives 7.2/7.6 and NIST SP 800-61 Rev. 3.
+- `REL-003`: objective `7.10` **depends-on** objective `1.7` because recovery strategy selection should follow business-continuity requirements and BIA-derived disruption impacts/allowable downtime. Evidence: current ISC2 objectives 1.7/7.10 and NIST SP 800-34 Rev. 1 section 3.4.1.
+
+Approval here means only that the relationship itself received an explicit source-backed semantic review. Every record remains `release_state: draft`. A separate released relationship artifact, promotion gate, runtime implementation, and exact-head browser validation are still required before any relationship may appear in the learner surface.
 
 ## What item verification does not mean
 
