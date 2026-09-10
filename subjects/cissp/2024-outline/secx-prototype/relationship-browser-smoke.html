@@ -14,8 +14,8 @@ function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
 function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow,proto}}
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
 function routedFocus(d,id){const target=node(d,id);return target?.classList.contains('active')&&d.activeElement===target}
-function graphTarget(w){const id=w.current?.()?.id;return(id&&node(w.document,id))||w.document.body||w.document.documentElement}
-function key(w,key,code=key){graphTarget(w).dispatchEvent(new w.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
+function graphTarget(w){const active=[...w.document.querySelectorAll('.node.active')].find(el=>el.isConnected);return active||w.document.body||w.document.documentElement}
+function key(w,key,code=key){const graphKey=['Enter','Escape',' ','Home'].includes(key);const target=graphKey?graphTarget(w):(w.document.body||w.document.documentElement);target.dispatchEvent(new w.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
 function activateButton(d,button,label){button.focus();assert(d.activeElement===button,`${label} button receives focus`);button.click()}
 function activateFrameButton(wrapper,d,w,button,label){wrapper.focus();assert(document.activeElement===wrapper,`${label} iframe receives outer focus`);w.focus();button.focus();assert(d.activeElement===button,`${label} button receives inner focus`);button.click()}
 function atlasProgress(w){return w.localStorage.getItem('cissp_atlas_progress_v1')||''}
