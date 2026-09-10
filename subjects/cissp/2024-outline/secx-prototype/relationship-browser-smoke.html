@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SecX Relationship Lens Browser Smoke</title></head>
+<body>
+<pre id="result" data-smoke="running">RUNNING</pre>
+<iframe id="app" src="next.html?relationship-smoke=desktop" style="width:1280px;height:900px;border:0"></iframe>
+<iframe id="mobile" src="next.html?relationship-smoke=mobile" style="width:390px;height:844px;border:0"></iframe>
+<script>
+(()=>{'use strict';
+const result=document.querySelector('#result'),frame=document.querySelector('#app'),mobile=document.querySelector('#mobile');
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;while(Date.now()<end){try{const v=fn();if(v)return v}catch{}await sleep(50)}throw new Error(`Timed out waiting for ${label}`)}
+function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
+function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow,proto}}
+function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
+function routedFocus(d,id){const target=node(d,id);return target?.classList.contains('active')&&d.activeElement===target}
+function graphTarget(w){const id=w.current?.()?.id;return(id&&node(w.document,id))||w.document.body||w.document.documentElement}
+function key(w,key,code=key){graphTarget(w).dispatchEvent(new w.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
+function activateButton(d,button,label){button.focus();assert(d.activeElement===button,`${label} button receives focus`);button.click()}
+function activateFrameButton(wrapper,d,w,button,label){wrapper.focus();assert(document.activeElement===wrapper,`${label} iframe receives outer focus`);w.focus();button.focus();assert(d.activeElement===button,`${label} button receives inner focus`);button.click()}
+function storageSnapshot(w){return JSON.stringify(Object.keys(w.localStorage).sort().map(k=>[k,w.localStorage.getItem(k)]))}
+async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),rels=x.w?.SECX_RELEASED_RELATIONSHIPS;return x.d&&x.w&&x.proto?.dataset.secxExpandedState==='ready'&&x.d.querySelector('#relationshipLensBtn')&&Array.isArray(rels)&&rels.length===3?x:null},`${label} relationship runtime ready`)}
+async function run(){
+  const {d,w}=await ready(frame,'desktop');
+  const rels=w.SECX_RELEASED_RELATIONSHIPS;
+  assert(Object.isFrozen(rels),'released relationship runtime array is frozen');
+  assert(rels.map(r=>r.id).join(',')==='REL-001,REL-002,REL-003','exact reviewed relationship IDs are loaded');
+  assert(!w.performance.getEntriesByType('resource').some(e=>e.name.includes('RELATIONSHIP_REVIEW.json')),'reviewer-only relationship registry is never fetched');
+  const before=storageSnapshot(w),button=d.querySelector('#relationshipLensBtn');
+  assert(button.textContent.includes('Links · 3'),'visible relationship button reports three links');
+  activateButton(d,button,'desktop Links');
+  await waitFor(()=>routedFocus(d,'relationships:root')&&d.querySelectorAll('.node.relationship-node').length===3&&d.querySelector('#crumb')?.textContent==='SecX › Reviewed Links','button opens focused relationship root');
+  const rel1=node(d,'relationship:REL-001');assert(rel1,'REL-001 node exists');rel1.click();
+  await waitFor(()=>d.querySelector('#detail.open')?.textContent.includes('5.1 depends-on 1.8')&&d.querySelector('#detail')?.textContent.includes('personnel-lifecycle'),'REL-001 detail exposes reviewed rationale');
+  key(w,'Enter','Enter');
+  await waitFor(()=>routedFocus(d,'relationship:REL-001')&&node(d,'relationship:endpoint:REL-001:from')&&node(d,'relationship:endpoint:REL-001:to')&&d.querySelector('#crumb')?.textContent==='SecX › Reviewed Links › REL-001','Enter opens two stable endpoints');
+  const to=node(d,'relationship:endpoint:REL-001:to');to.click();key(w,'Enter','Enter');
+  await waitFor(()=>routedFocus(d,'1.8')&&d.querySelector('#crumb')?.textContent.includes('Security and Risk Management'),'relationship endpoint returns to normal objective 1.8 context');
+  key(w,'Home','Home');
+  await waitFor(()=>routedFocus(d,'root')&&d.querySelector('#crumb')?.textContent==='SecX','Home returns to SecX root');
+  key(w,'l','KeyL');
+  await waitFor(()=>routedFocus(d,'relationships:root')&&d.querySelectorAll('.node.relationship-node').length===3,'L shortcut opens reviewed relationships');
+  key(w,'Escape','Escape');
+  await waitFor(()=>routedFocus(d,'root')&&d.querySelector('#crumb')?.textContent==='SecX','Escape returns relationship root to SecX root');
+  assert(storageSnapshot(w)===before,'relationship navigation does not mutate learner or graph localStorage');
+
+  frame.remove();await sleep(0);
+  const m=await ready(mobile,'mobile'),md=m.d,mw=m.w,mb=md.querySelector('#relationshipLensBtn');
+  activateFrameButton(mobile,md,mw,mb,'mobile Links');
+  await waitFor(()=>routedFocus(md,'relationships:root')&&md.querySelectorAll('.node.relationship-node').length===3,'mobile button opens focused relationship root');
+  assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile relationship lens has no horizontal overflow');
+  result.dataset.smoke='pass';
+  result.textContent='PASS SecX relationship lens browser smoke: 3 released reviewed links reviewer-registry-not-fetched button+L routing stable-endpoint-return localStorage-read-only mobile-focus+viewport';
+}
+run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
+})();
+</script>
+</body>
+</html>
