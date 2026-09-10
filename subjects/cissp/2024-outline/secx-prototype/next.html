@@ -87,7 +87,17 @@ frame.addEventListener('load',()=>{
                   coverage.onload=()=>{
                     const projectionSearch=doc.createElement('script');
                     projectionSearch.src='projection-search.js';
-                    projectionSearch.onload=readyExpanded;
+                    projectionSearch.onload=()=>{
+                      const releasedRelationships=doc.createElement('script');
+                      releasedRelationships.src='released-relationships.js';
+                      releasedRelationships.onload=()=>{
+                        const relationships=doc.createElement('script');
+                        relationships.src='relationship-lens.js';
+                        relationships.onload=readyExpanded;
+                        doc.body.appendChild(relationships);
+                      };
+                      doc.body.appendChild(releasedRelationships);
+                    };
                     doc.body.appendChild(projectionSearch);
                   };
                   doc.body.appendChild(coverage);
