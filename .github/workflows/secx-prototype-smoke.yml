@@ -81,7 +81,8 @@ jobs:
             subjects/cissp/2024-outline/secx-prototype/source-audit.py \
             subjects/cissp/2024-outline/secx-prototype/coverage-audit.py \
             subjects/cissp/2024-outline/secx-prototype/projection-search-audit.py \
-            subjects/cissp/2024-outline/secx-prototype/relationship-audit.py
+            subjects/cissp/2024-outline/secx-prototype/relationship-audit.py \
+            subjects/cissp/2024-outline/secx-prototype/relationship-release-audit.py
           node --check subjects/cissp/2024-outline/secx-prototype/learner-registry.js
           node --check subjects/cissp/2024-outline/secx-prototype/next-layer.js
           node --check subjects/cissp/2024-outline/secx-prototype/learner-state.js
@@ -106,6 +107,7 @@ jobs:
           python subjects/cissp/2024-outline/secx-prototype/coverage-audit.py
           python subjects/cissp/2024-outline/secx-prototype/projection-search-audit.py
           python subjects/cissp/2024-outline/secx-prototype/relationship-audit.py
+          python subjects/cissp/2024-outline/secx-prototype/relationship-release-audit.py
 
       - name: Preserve production CISSP browser smoke
         shell: bash
