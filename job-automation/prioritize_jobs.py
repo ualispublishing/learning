@@ -65,6 +65,25 @@ def has_level_token(title: str, roman: str) -> bool:
     return bool(re.search(rf"\b{roman}\b", title, flags=re.IGNORECASE))
 
 
+def normalized_role_key(job: dict) -> tuple[str, str, str]:
+    """Collapse duplicate requisitions for the same employer/title/location.
+
+    Staffing/recruiting boards often publish multiple Greenhouse requisitions for
+    the same practical opportunity. We keep the highest-ranked/newest copy so the
+    review queue does not encourage duplicate applications.
+    """
+    def clean(value: object) -> str:
+        text = str(value or "").lower()
+        text = re.sub(r"[^a-z0-9]+", " ", text)
+        return re.sub(r"\s+", " ", text).strip()
+
+    return (
+        clean(job.get("source_slug") or job.get("source")),
+        clean(job.get("title")),
+        clean(job.get("location")),
+    )
+
+
 def score_job(job: dict) -> tuple[int, list[str]]:
     title = str(job.get("title") or "").lower()
     location = str(job.get("location") or "").lower()
@@ -149,24 +168,38 @@ def main() -> int:
         reverse=True,
     )
 
-    actionable = [j for j in ranked if j["review_band"] != "low"]
+    # Keep only the best/newest requisition for an equivalent source/title/location.
+    unique_ranked = []
+    seen_role_keys: set[tuple[str, str, str]] = set()
+    for job in ranked:
+        key = normalized_role_key(job)
+        if key in seen_role_keys:
+            continue
+        seen_role_keys.add(key)
+        unique_ranked.append(job)
+
+    actionable = [j for j in unique_ranked if j["review_band"] != "low"]
+    duplicate_count = len(ranked) - len(unique_ranked)
     output = {
-        "schema_version": 2,
+        "schema_version": 3,
         "generated_at": payload.get("generated_at"),
         "privacy": "Public job metadata only. No candidate data, credentials, or application answers.",
         "purpose": "Prioritized review queue only; not submission authorization.",
         "candidate_mode": payload.get("candidate_mode", "graduated_2026_new_grad_junior"),
         "source_job_count": len(jobs),
+        "unique_role_count": len(unique_ranked),
+        "duplicate_role_postings_suppressed": duplicate_count,
         "actionable_job_count": len(actionable),
         "high_priority_count": sum(1 for j in actionable if j["review_band"] == "high"),
         "medium_priority_count": sum(1 for j in actionable if j["review_band"] == "medium"),
-        "suppressed_low_priority_count": len(jobs) - len(actionable),
+        "suppressed_low_priority_count": sum(1 for j in unique_ranked if j["review_band"] == "low"),
         "jobs": actionable,
     }
     OUTPUT.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     print(
-        f"priority queue: {len(actionable)} actionable from {len(jobs)} jobs; "
+        f"priority queue: {len(actionable)} actionable from {len(unique_ranked)} unique roles "
+        f"({duplicate_count} duplicate requisitions suppressed); "
         f"{output['high_priority_count']} high, {output['medium_priority_count']} medium, "
         f"{output['suppressed_low_priority_count']} low suppressed"
     )
