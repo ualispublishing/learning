@@ -37,6 +37,14 @@ CANADA_TERMS = (
     "new brunswick", "fredericton", "newfoundland", "st. john's",
 )
 
+# When an ATS supplies an explicit location, trust that field over incidental
+# country names in the description. Only fall back to body text for genuinely
+# generic location labels such as Remote, North America, or Americas.
+GENERIC_LOCATION_TERMS = (
+    "remote", "anywhere", "global", "worldwide", "north america", "americas",
+    "multiple locations", "various locations", "distributed",
+)
+
 TECH_TITLE_TERMS = (
     "software", "developer", "engineer", "data", "analytics", "analyst",
     "machine learning", "artificial intelligence", " ai ", "ai ", "qa",
@@ -99,10 +107,21 @@ def text_has_any(text: str, terms: tuple[str, ...]) -> list[str]:
 
 
 def is_canada_eligible(location: str, body: str) -> tuple[bool, list[str]]:
-    combined = f"{location} {body[:8000]}".lower()
-    signals = [term for term in CANADA_TERMS if term in combined]
-    if signals:
-        return True, signals[:5]
+    location_low = (location or "").strip().lower()
+    location_signals = [term for term in CANADA_TERMS if term in location_low]
+    if location_signals:
+        return True, location_signals[:5]
+
+    # An explicit non-generic location such as "Remote (United Kingdom)" or
+    # "New York, NY" is not made Canadian just because the description happens
+    # to mention Canada in a policy, benefits, or equal-opportunity paragraph.
+    if location_low and not any(term in location_low for term in GENERIC_LOCATION_TERMS):
+        return False, []
+
+    body_low = body[:8000].lower()
+    body_signals = [term for term in CANADA_TERMS if term in body_low]
+    if body_signals:
+        return True, body_signals[:5]
     return False, []
 
 
