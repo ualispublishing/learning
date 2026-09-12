@@ -2,8 +2,11 @@
 """Fail closed when a LANG-WB adjudication CSV row changes column shape.
 
 This protects the repair pipeline from malformed quoting around comma-containing
-proposals. A row that parses to more or fewer columns than its header must never
-reach the linguistic repair applicator.
+proposals. A row that parses to more or fewer columns than its own header must
+never reach the linguistic repair applicator. Header semantics are validated by
+the repair runner; this gate deliberately accepts the repository's sentence and
+vocabulary ledger schema variants while enforcing rank/status identity and exact
+row shape.
 """
 from __future__ import annotations
 
@@ -26,8 +29,8 @@ def validate_file(path: Path) -> list[str]:
                 return [f"{path}: empty CSV"]
             if not header or len(set(header)) != len(header):
                 errors.append(f"{path}: invalid or duplicate header fields: {header!r}")
-            if header[:3] != ["rank", "status", "note"]:
-                errors.append(f"{path}: unexpected leading header fields: {header!r}")
+            if header[:2] != ["rank", "status"]:
+                errors.append(f"{path}: expected leading rank,status fields: {header!r}")
             expected = len(header)
             for row in reader:
                 if not row or all(not cell.strip() for cell in row):
