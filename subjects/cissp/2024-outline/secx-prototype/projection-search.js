@@ -39,7 +39,18 @@ function coverageEntries(){
   return [...domainEntries,...objectiveEntries];
 }
 
-function rebuildProjectionSearch(){addProjectionEntries([...sourceEntries(),...coverageEntries()])}
+function relationshipEntries(){
+  const records=Array.isArray(window.SECX_RELEASED_RELATIONSHIPS)?window.SECX_RELEASED_RELATIONSHIPS:[];
+  return records.map(r=>({
+    kind:'relationship-projection',
+    title:`${r.id} · ${r.from_id} ${r.type} ${r.to_id}`,
+    path:'Reviewed Links',
+    text:`reviewed link ${r.id} ${r.from_id} ${r.type} ${r.to_id} ${r.rationale||''}`,
+    relationshipId:r.id
+  }));
+}
+
+function rebuildProjectionSearch(){addProjectionEntries([...sourceEntries(),...coverageEntries(),...relationshipEntries()])}
 
 const input=document.getElementById('searchInput');
 const search=document.getElementById('search');
@@ -118,8 +129,8 @@ function syncSearchA11y(){
   else input.removeAttribute('aria-activedescendant');
 }
 if(input){
-  input.placeholder='Search curriculum, scenarios, sources, or coverage…';
-  input.setAttribute('aria-label','Search curriculum, scenarios, sources, or coverage');
+  input.placeholder='Search curriculum, scenarios, sources, coverage, or reviewed links…';
+  input.setAttribute('aria-label','Search curriculum, scenarios, sources, coverage, or reviewed links');
 }
 if(search&&results){
   new MutationObserver(syncSearchA11y).observe(search,{attributes:true,attributeFilter:['hidden']});
@@ -146,10 +157,15 @@ window.navigateSearch=function(item){
     if(target){active=`coverage:objective:${item.objectiveId}`;render(true)}
     return;
   }
+  if(item.kind==='relationship-projection'){
+    closeSearch();
+    return typeof relationshipHubLayout==='function'?relationshipHubLayout(item.relationshipId,null,true):priorNavigate(item);
+  }
   return priorNavigate(item);
 };
 
 rebuildProjectionSearch();
 syncSearchA11y();
 addEventListener('secx:released-bank',rebuildProjectionSearch);
+addEventListener('secx:relationships-ready',rebuildProjectionSearch);
 })();
