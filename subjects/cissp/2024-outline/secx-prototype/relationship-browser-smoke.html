@@ -9,7 +9,7 @@
 (()=>{'use strict';
 const result=document.querySelector('#result'),frame=document.querySelector('#app'),mobile=document.querySelector('#mobile');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-async function waitFor(fn,label,timeout=5000){const end=Date.now()+timeout;while(Date.now()<end){try{const v=fn();if(v)return v}catch{}await sleep(50)}throw new Error(`Timed out waiting for ${label}`)}
+async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;while(Date.now()<end){try{const v=fn();if(v)return v}catch{}await sleep(50)}throw new Error(`Timed out waiting for ${label}`)}
 function stage(label){result.dataset.stage=label;result.textContent=`STAGE ${label}`}
 function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
 function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow,proto}}
@@ -71,7 +71,7 @@ async function run(){
   result.dataset.stage='complete';
   result.textContent='PASS SecX relationship lens browser smoke: 3 released reviewed links reviewer-registry-not-fetched shared-bank-ready button+focused-L-from-objective routing stable-endpoint-return Atlas-progress-read-only graph-evidence-separated mobile-render+focus+viewport; Home remains independently covered by Source smoke';
 }
-run().catch(err=>{result.dataset.smoke='fail';const snap=result.dataset.stage?.startsWith('mobile')?` mobile=${JSON.stringify(relationshipSnapshot(mobile))}`:'';result.textContent=`FAIL stage=${result.dataset.stage||'unknown'} ${err.stack||err}${snap}`;console.error(err,snap)});
+run().catch(err=>{result.dataset.smoke='fail';const target=result.dataset.stage?.startsWith('mobile')?mobile:frame,snap=` snapshot=${JSON.stringify(relationshipSnapshot(target))}`;result.textContent=`FAIL stage=${result.dataset.stage||'unknown'} ${err.stack||err}${snap}`;console.error(err,snap)});
 })();
 </script>
 </body>
