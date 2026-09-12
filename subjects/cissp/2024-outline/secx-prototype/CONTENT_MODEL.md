@@ -165,9 +165,11 @@ Learner-state records must never rewrite objective/source mappings, release stat
 
 ## Search and accessibility projections
 
-Search may index released domains, objectives, subtopics, retrieval cards, released scenarios, sources, and Coverage domain/objective projections. Search results may route the learner to an exact local graph context.
+Search may index released domains, objectives, subtopics, retrieval cards, released scenarios, sources, Coverage domain/objective projections, and the exact IDs/content of prototype-released semantic relationships from `window.SECX_RELEASED_RELATIONSHIPS`. Search results may route the learner to an exact local graph context.
 
-Search similarity may support discovery but must not create semantic graph edges automatically. Future search support for semantic relationships must route only to explicitly prototype-released relationship IDs.
+Reviewed-link search is a navigation projection only. It is populated only after the released relationship runtime signals readiness and routes by stable `REL-*` ID into the existing relationship hub. It never reads `RELATIONSHIP_REVIEW.json` or raw `RELEASED_RELATIONSHIPS.json`, never discovers candidate relationships, and never promotes search similarity into a semantic edge.
+
+Search similarity may support discovery of already indexed content, but it must not create semantic graph edges automatically. Only explicitly prototype-released relationship IDs may appear as relationship search results.
 
 The expanded search palette follows a combobox/listbox interaction model. Search result options use active-descendant state; Tab and Shift+Tab are contained within the dialog controls. Visible Search/Close and detail Close/Depth/Open controls preserve equivalent pointer/touch access without creating alternate content or state models.
 
@@ -195,7 +197,7 @@ Released review-card learner-state views derive from the Atlas-compatible 140-ca
 
 Source Provenance derives from `CISSP_META.sources`, exact released `source_ids`, and the shared released-scenario registry. Coverage derives from released objectives/subtopics/cards plus the shared scenario registry and exact scenario subtopic tags.
 
-Reviewer-only semantic relationship data must never be loaded by learner runtime. Learner-facing prototype relationships must come only from the separate audited released artifact/runtime copy.
+Reviewer-only semantic relationship data must never be loaded by learner runtime. Learner-facing prototype relationships and their search projection must come only from the separate audited released artifact/runtime copy.
 
 Before any graph surface becomes production-facing, deterministic validation must reject unknown IDs, malformed release inputs, unreleased scenario leakage, unsupported relationship targets/types, temporary UI IDs used as semantic endpoints, relationship approval without explicit evidence, reviewer-registry loading, released-relationship/runtime-copy drift, invalid learner-state/content coupling, premature answer exposure, provenance answer leakage, and projection logic that invents semantic edges.
 
