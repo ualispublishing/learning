@@ -89,6 +89,11 @@ MID_CAREER_BODY_PATTERNS = (
     re.compile(r"\b5\+\s*years?\b", re.I),
     re.compile(r"\bminimum of 3 years?\b", re.I),
     re.compile(r"\bat least 3 years?\b", re.I),
+    re.compile(r"\bthree\s*(?:\(\s*3\s*\))?\s*\+\s*years?\b", re.I),
+    re.compile(r"\bfour\s*(?:\(\s*4\s*\))?\s*\+\s*years?\b", re.I),
+    re.compile(r"\bfive\s*(?:\(\s*5\s*\))?\s*\+\s*years?\b", re.I),
+    re.compile(r"\bthree\s*(?:\(\s*3\s*\))?\s+or more\s+years?\b", re.I),
+    re.compile(r"\b(?:minimum of|at least)\s+three(?:\s*\(\s*3\s*\))?\s+years?\b", re.I),
 )
 
 
