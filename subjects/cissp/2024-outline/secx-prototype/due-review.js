@@ -46,8 +46,10 @@ window.dueReviewLayout=function(returnTo=null,focus=false,page=null){
 };
 
 function returnToRootFocused(){domainLayout('root',false);focusActive()}
+function settleDueFocus(){focusActive();requestAnimationFrame(focusActive)}
+function openDueReviews(){dueReviewLayout(null,false,0);settleDueFocus()}
 
-dueButton.addEventListener('click',()=>dueReviewLayout(null,true,0));
+dueButton.addEventListener('click',openDueReviews);
 
 const graphCrumbText=crumbText;
 window.crumbText=function(){if(level==='due-reviews')return'SecX › Due reviews';return graphCrumbText()};
@@ -73,7 +75,7 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&level==='due-reviews'&&depth===0){
     e.preventDefault();e.stopImmediatePropagation();returnToRootFocused();return;
   }
-  if((e.key==='r'||e.key==='R')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();e.stopImmediatePropagation();dueReviewLayout(null,true,0)}
+  if((e.key==='r'||e.key==='R')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();e.stopImmediatePropagation();openDueReviews()}
 },true);
 
 document.addEventListener('click',e=>{
