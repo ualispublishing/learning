@@ -87,7 +87,7 @@ A scenario answer reveal is exposure only. It is not correctness, an attempt res
 
 ### Due Reviews
 
-`R` or **Review due · N** opens a paged local graph of Atlas review cards whose existing `due <= today`. The queue uses no scenario/candidate data and no second scheduling algorithm.
+`R` or **Review due · N** opens a paged local graph of Atlas review cards whose existing `due <= today`. The queue uses no scenario/candidate data and no second scheduling algorithm. Visible-button and `R` entry share the same settled focus handoff so desktop and nested 390px mobile navigation land on the Due Reviews root without changing learner state.
 
 ### Study Queue
 
@@ -127,7 +127,9 @@ Those gaps are corpus-exposure observations only. They are not curriculum omissi
 
 ## Projection Search
 
-Projection Search extends `/` with exact Source Provenance, Coverage-domain, and Coverage-objective navigation entries. It routes into existing projection functions and does not create curriculum edges or learner-state evidence.
+Projection Search extends `/` with exact Source Provenance, Coverage-domain, Coverage-objective, and prototype-released Reviewed Link navigation entries. Relationship search indexes only `window.SECX_RELEASED_RELATIONSHIPS` after the relationship runtime signals readiness and routes by stable `REL-*` ID into the existing Links hub.
+
+Projection Search never loads `RELATIONSHIP_REVIEW.json` or raw `RELEASED_RELATIONSHIPS.json`, never discovers relationship candidates, and never turns wording similarity or search proximity into a semantic edge. The browser gate explicitly searches `REL-001`, routes to its reviewed hub, verifies both stable endpoints, and rechecks reviewer-registry isolation.
 
 The search UI uses a combobox/listbox pattern with active-descendant state, modal focus containment, visible Search/Close controls, and opener-focus restoration.
 
@@ -143,7 +145,7 @@ The current prototype-released set is:
 
 The relationship lens displays the source-reviewed rationale, then exposes the two stable released endpoints. Opening an endpoint returns to that objective's normal Atlas graph context rather than creating a duplicate curriculum node.
 
-`RELATIONSHIP_REVIEW.json` remains reviewer-only even though those three relationships have been separately promoted. New relationships cannot appear in the Links lens merely because their endpoints are VERIFIED or share sources/terminology.
+`RELATIONSHIP_REVIEW.json` remains reviewer-only even though those three relationships have been separately promoted. New relationships cannot appear in the Links lens or relationship search merely because their endpoints are VERIFIED or share sources/terminology.
 
 See `RELATIONSHIP_REVIEW.md` and `CONTENT_MODEL.md`.
 
@@ -177,11 +179,11 @@ The draft includes deterministic gates for each major layer:
 
 - `audit.py` — released graph counts/mappings, manifest isolation, exact subtopic tags, answer boundary, learner-state compatibility;
 - `browser-fixtures-audit.py` — deterministic smoke fixtures;
-- `due-audit.py` — complete 140-card review registry and Due Reviews;
+- `due-audit.py` — complete 140-card review registry and settled desktop/mobile Due Reviews entry focus;
 - `study-audit.py` — Study Queue and Continue priority/routing contract;
 - `source-audit.py` — exact Source Provenance mappings and answer/state isolation;
 - `coverage-audit.py` — count reconciliation and exact-tag exposure/gaps;
-- `projection-search-audit.py` — explicit projection routing/accessibility behavior;
+- `projection-search-audit.py` — explicit Source/Coverage/released-Link routing, reviewer-registry isolation, and accessibility behavior;
 - `relationship-audit.py` — stable endpoints and relationship-specific review requirements;
 - `relationship-release-audit.py` — exact reviewer/promotion/runtime-copy integrity and reviewer-registry isolation;
 - release-boundary, hygiene, and completeness gates.
@@ -190,17 +192,17 @@ Browser suites verify:
 
 - expanded graph/cards/scenarios/learner state;
 - loader readiness;
-- Continue routing;
+- Continue routing and mobile Due focus handoff;
 - Source Provenance;
 - Coverage;
-- Projection Search;
+- Projection Search including exact `REL-001` routing;
 - Reviewed Links on desktop and 390px mobile;
 - loader HTTP-404 fallback;
 - loader JavaScript execution-error fallback.
 
 `.github/workflows/secx-prototype-smoke.yml` runs production CISSP preservation checks plus all SecX deterministic/syntax/browser gates against one exact candidate head.
 
-The last verified relationship-stage head before subsequent documentation-only cleanup was `e95ca2bcc60cb259201b1b4eaf565c5a7aa1b9f6`; **SecX Prototype Smoke #459 (`34699383500`) passed every required gate** on that exact SHA. Any later documentation head must pass the same exact-head workflow before being treated as current evidence.
+The last runtime head before this documentation-only update was `55bce7817125dd653b9be303c7e48f98578b25c5`; **SecX Prototype Smoke #485 (`34700013413`) passed every required gate** on that exact SHA, including production preservation, settled mobile Due Reviews focus, released-`REL-001` Projection Search routing, Reviewed Links, and both loader fault-injection regressions. This documentation head must pass the same exact-head workflow before it becomes current evidence.
 
 ## Production architecture rules
 
@@ -211,7 +213,7 @@ The last verified relationship-stage head before subsequent documentation-only c
 5. Treat Due Reviews, Study Queue, and Continue as learner-state projections/navigation, not curriculum edges or mastery claims.
 6. Treat Source Provenance as an exact citation projection, not a semantic cross-link generator.
 7. Treat Coverage counts/gaps as corpus/practice-exposure projections, not learner scores or semantic edge generators.
-8. Keep relationship candidate discovery, relationship review, prototype promotion, runtime publication, and any production migration as separate stages.
+8. Keep relationship candidate discovery, relationship review, prototype promotion, runtime publication/search projection, and any production migration as separate stages.
 9. Reject unknown IDs, invalid source references, temporary semantic endpoints, reviewer-registry loading, and review/release/runtime drift.
 10. Keep local graph mounting/pagination rather than rendering the entire corpus at once.
 11. Require deterministic and browser gates before any production migration.
