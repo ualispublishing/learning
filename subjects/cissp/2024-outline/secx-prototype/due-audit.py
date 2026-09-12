@@ -102,6 +102,10 @@ check("correct" not in due.lower() and "mastery" not in due.lower(), "due-review
 check("function returnToRootFocused(){domainLayout('root',false);focusActive()}" in due, "Due Reviews Escape no longer renders and focuses the SecX root synchronously")
 check(due.count("returnToRootFocused()") >= 3, "both Due Reviews Escape paths must reuse the synchronous root-focus helper")
 check("domainLayout('root',true)" not in due, "Due Reviews must not regress to animation-frame root focus on Escape")
+check("function settleDueFocus(){focusActive();requestAnimationFrame(focusActive)}" in due, "Due Reviews entry no longer confirms focus immediately and on the next animation frame")
+check("function openDueReviews(){dueReviewLayout(null,false,0);settleDueFocus()}" in due, "Due Reviews visible/keyboard entry no longer shares the stable focus handoff")
+check("dueButton.addEventListener('click',openDueReviews)" in due, "visible Due Reviews button bypasses stable entry focus handoff")
+check("stopImmediatePropagation();openDueReviews()" in due, "R shortcut bypasses stable entry focus handoff")
 
 check("#dueReviewBtn" in smoke, "browser smoke does not wait for due-review layer")
 check("due:reviews" in smoke and "KeyR" in smoke, "browser smoke does not exercise due-review keyboard branch")
@@ -120,4 +124,4 @@ if errors:
         print("-", error)
     sys.exit(1)
 
-print(f"PASS secx_due_audit layered_review_cards={layered_count} objective_cards={len(objectives)} high_yield_cards={len(high_cards)} load_order=ai>precision>registry>graph>learner>due source=shared-read-only-learner-api focus=visible-button+mobile-frame-handoff+sync-escape-root")
+print(f"PASS secx_due_audit layered_review_cards={layered_count} objective_cards={len(objectives)} high_yield_cards={len(high_cards)} load_order=ai>precision>registry>graph>learner>due source=shared-read-only-learner-api focus=visible-button+keyboard+mobile-frame-handoff+settled-entry+sync-escape-root")
