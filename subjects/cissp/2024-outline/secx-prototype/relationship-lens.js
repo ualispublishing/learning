@@ -71,7 +71,7 @@ window.descend=function(){
   const n=current();
   if(level==='relationships'&&n?.kind==='relationship-node'){
     const id=relationshipIdFromNode(n);
-    if(id){window.relationshipHubLayout(id,null,true);return}
+    if(id){window.relationshipHubLayout(id,null,false);focusActive();return}
   }
   if(level==='relationship-hub'&&n?.kind==='relationship-endpoint'){
     const targetId=endpointTargetFromNode(n),o=endpointObjective(targetId);
