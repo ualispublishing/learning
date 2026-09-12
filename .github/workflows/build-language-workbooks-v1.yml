@@ -167,7 +167,7 @@ jobs:
             urdu_top1000.csv
 
       - name: Commit verified outputs to release branch
-        if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref_name == 'release/language-workbooks-v1-final')
+        if: github.event_name == 'pull_request' || (github.event_name == 'push' && (github.ref_name == 'release/language-workbooks-v1-final' || github.ref_name == 'lang-wb/french-post-audit-repairs-20260910'))
         shell: bash
         run: |
           set -euo pipefail
