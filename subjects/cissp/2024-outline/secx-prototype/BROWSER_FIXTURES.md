@@ -29,3 +29,5 @@ The numeric answer keys are contextual: an open scenario uses `1…N` to commit 
 If any of those assumptions changes intentionally, update the browser smoke and this preflight in the same candidate head.
 
 The GitHub Actions exact-head workflow compiles and runs this audit before launching browser smoke. A PASS from this audit is **static fixture evidence only**; promotion still requires the real browser gates on the same exact SHA.
+
+The runtime keyboard-attempt head `6e6e80f0f64c5996739d387a67a5b13da5f2c9f3` passed the complete SecX Prototype Smoke #509 (`34701176946`) on an unchanged rerun. The documentation-aligned head is validated separately by the PR's current exact-head evidence; this file does not self-authorize promotion.
