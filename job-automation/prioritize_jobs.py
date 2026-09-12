@@ -22,9 +22,22 @@ STRONG_EARLY = (
 )
 
 GOOD_ROLE = (
-    "software", "developer", "engineer", "data", "analyst", "support",
-    "quality", "qa", "security", "cyber", "implementation", "technical",
-    "automation", "ai", "machine learning", "systems", "it ",
+    "software", "developer", "engineer", "data", "data analyst",
+    "systems analyst", "system analyst", "security analyst", "cybersecurity analyst",
+    "technical analyst", "it analyst", "support analyst", "qa analyst",
+    "quality analyst", "support", "quality", "qa", "security", "cyber",
+    "implementation", "technical", "automation", "ai", "machine learning",
+    "systems", "it ",
+)
+
+# Keep generic business/finance/sales roles out of the tech review queue even when
+# an ATS title contains broad words such as "analyst" or "operations".
+NON_TECH_ROLE = (
+    "deal desk", "financial analyst", "finance analyst", "fp&a", "accounting",
+    "commercial finance", "corporate finance", "sales analyst", "sales operations",
+    "marketing analyst", "marketing operations", "revenue operations",
+    "business development", "account executive", "recruiter", "recruiting",
+    "talent acquisition", "human resources", "people operations", "legal analyst",
 )
 
 SENIOR_TITLE = (
@@ -57,6 +70,11 @@ def score_job(job: dict) -> tuple[int, list[str]]:
     location = str(job.get("location") or "").lower()
     reasons: list[str] = []
     score = 50
+
+    # Obvious non-tech business roles should never become actionable merely because
+    # their titles use a broad token that appears in technical job families.
+    if any(term in title for term in NON_TECH_ROLE):
+        return 0, ["non_tech_role_penalty"]
 
     # Freshness helps ordering, but cannot by itself make a role high priority.
     if job.get("new_this_run"):
