@@ -110,12 +110,15 @@ Scenario correctness is recorded only through an explicit learner commitment, no
 For a released MCQ scenario:
 
 1. the stem and options are visible before the keyed answer;
-2. the learner selects one option and activates **Commit answer**;
-3. the committed choice is locked and stored only in `cissp_secx_graph_state_v1` as a pending attempt;
-4. commitment increments the attempt count but does **not** record correctness;
-5. the pending attempt is scored only when the learner deliberately reaches disclosure layer 4, where the keyed answer/explanation is already permitted to appear;
-6. scoring clears that one pending commitment and records a scenario-level `correct`/`incorrect` outcome;
-7. closing and reopening the scenario creates the opportunity for a later independent commitment.
+2. the learner either selects one option and activates **Commit answer**, or presses contextual `1…N` while the scenario detail is open before reveal to commit that numbered option directly;
+3. both interaction paths reuse the same commitment mutator, so pointer/Tab and keyboard input create the same pending-attempt state;
+4. the committed choice is locked and stored only in `cissp_secx_graph_state_v1` as a pending attempt;
+5. commitment increments the attempt count but does **not** record correctness;
+6. the pending attempt is scored only when the learner deliberately reaches disclosure layer 4, where the keyed answer/explanation is already permitted to appear;
+7. scoring clears that one pending commitment and records a scenario-level `correct`/`incorrect` outcome;
+8. closing and reopening the scenario creates the opportunity for a later independent commitment.
+
+The numeric keys are contextual rather than global answer aliases. On an open retrieval card, `1–4` retains the existing Atlas Wrong / Hard / Good / Easy grading behavior. On an open pre-reveal scenario, `1…N` means commit the corresponding scenario option. Numeric commitment is disabled after the answer has been exposed in that detail session and cannot overwrite an already pending commitment.
 
 A layer-4 reveal with no pending commitment still increments reveal exposure but does not create, score, or modify an attempt.
 
@@ -138,8 +141,9 @@ Likewise, due status is a scheduling fact only. It must not be promoted into a s
 ## UI behavior
 
 - Card nodes show `new`, `learning`, `due`, or `mature` from the shared Atlas card state.
-- Card details expose the same four Atlas retrieval grades.
+- Card details expose the same four Atlas retrieval grades; card `1–4` keyboard grading is unchanged.
 - Scenario details expose an explicit option-selection + **Commit answer** control before layer 4.
+- On an open pre-reveal scenario, contextual `1…N` commits that numbered option directly through the same commitment logic as the visible control.
 - A committed scenario choice is locked until it is scored at layer 4.
 - Scenario-node badges may show attempt and reveal counts, but these are practice/activity evidence rather than mastery labels.
 - The Due Reviews control shows the current released-card due count.
@@ -166,6 +170,8 @@ Before the learner-state/due-review layer can replace the conservative prototype
 
 The deterministic learner audits must verify that `SECX_LEARNER` is frozen/read-only, that Due/Study consumers do not directly parse/write local storage, that shared status helpers remain the source for due/learning/mature classification, and that scenario attempt mutation methods are not exposed through the learner API.
 
-The expanded smoke must verify card-grade persistence, same-window due-count refresh, `R` routing into the due-card branch, the separate graph-state key, the depth-4 scenario answer gate, and the explicit-attempt boundary. In particular, it must prove that a committed choice is stored unscored before layer 4, is scored exactly once at layer 4, does not mutate Atlas progress, and that a later reveal without a new commitment increases exposure without increasing the scored-attempt count.
+The browser-fixture preflight additionally verifies that the sampled scenario has 2–9 keyboard-routable options, that the runtime still maps numeric scenario keys through the explicit commitment mutator, and that the browser smoke contains the numeric-choice assertions it is meant to execute.
+
+The expanded smoke must verify card-grade persistence, same-window due-count refresh, `R` routing into the due-card branch, the separate graph-state key, the depth-4 scenario answer gate, and the explicit-attempt boundary. In particular, it must commit a deterministic scenario choice through the contextual numeric shortcut, prove that the choice is stored unscored before layer 4, prove it is scored exactly once at layer 4, prove Atlas progress is unchanged, and prove that a later reveal without a new commitment increases exposure without increasing the scored-attempt count.
 
 The Continue smoke must additionally verify the frozen API surface, absence of mutation methods, frozen card snapshots, same-window storage resynchronization, fresh-state weakest-domain new routing, Learning fallback, Due priority over simultaneous Learning work, caught-up fallback to Study Queue, visible-button-to-routed-node DOM focus transfer, Escape ascent focus continuity through Study Queue to SecX, desktop/mobile coverage, and mobile layout without introducing a second learner-state store.
