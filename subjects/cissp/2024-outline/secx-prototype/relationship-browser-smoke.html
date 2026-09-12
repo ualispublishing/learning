@@ -16,7 +16,7 @@ function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySe
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
 function routedFocus(d,id){const target=node(d,id);return target?.classList.contains('active')&&d.activeElement===target}
 function graphTarget(w){const active=[...w.document.querySelectorAll('.node.active')].find(el=>el.isConnected);return active||w.document.body||w.document.documentElement}
-function key(w,key,code=key){const graphKey=['Enter','Escape',' '].includes(key);const target=graphKey?graphTarget(w):(w.document.body||w.document.documentElement);target.dispatchEvent(new w.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
+function key(w,key,code=key){const d=w.document,focused=d.activeElement&&d.activeElement.isConnected&&d.activeElement!==d.body?d.activeElement:null,target=focused||graphTarget(w);target.dispatchEvent(new w.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true}))}
 async function enter(w){key(w,'Enter','Enter');await sleep(80)}
 function activateButton(d,button,label){button.focus();assert(d.activeElement===button,`${label} button receives focus`);button.click()}
 function activateFrameButton(wrapper,d,w,button,label){wrapper.focus();assert(document.activeElement===wrapper,`${label} iframe receives outer focus`);w.focus();button.focus();assert(d.activeElement===button,`${label} button receives inner focus`);button.click()}
@@ -65,7 +65,7 @@ async function run(){
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile relationship lens has no horizontal overflow');
   result.dataset.smoke='pass';
   result.dataset.stage='complete';
-  result.textContent='PASS SecX relationship lens browser smoke: 3 released reviewed links reviewer-registry-not-fetched shared-bank-ready button+L-from-objective routing stable-endpoint-return Atlas-progress-read-only graph-evidence-separated mobile-focus+viewport; Home remains independently covered by Source smoke';
+  result.textContent='PASS SecX relationship lens browser smoke: 3 released reviewed links reviewer-registry-not-fetched shared-bank-ready button+focused-L-from-objective routing stable-endpoint-return Atlas-progress-read-only graph-evidence-separated mobile-focus+viewport; Home remains independently covered by Source smoke';
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL stage=${result.dataset.stage||'unknown'} ${err.stack||err}`;console.error(err)});
 })();
