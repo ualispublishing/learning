@@ -38,7 +38,7 @@ The facade exposes only:
 - `todayISO()`;
 - a frozen copy of the Atlas interval schedule.
 
-It does **not** expose grading, saving, `localStorage.setItem`, graph-state mutation, or any curriculum mutation method.
+It does **not** expose retrieval-card grading, scenario-attempt commitment/scoring, saving, `localStorage.setItem`, graph-state mutation, or any curriculum mutation method.
 
 The API keeps a cached Atlas progress object but compares the underlying storage string before reads. If another same-window tool/test writes the Atlas key directly, the next read resynchronizes automatically. Cross-tab `storage` events also invalidate/resynchronize the cache. This preserves current same-window behavior without forcing every projection to parse storage independently.
 
@@ -85,22 +85,45 @@ If all released cards are mature and scheduled in the future, Continue falls bac
 
 ## Graph-specific activity
 
-Graph navigation and scenario exposure use a separate key:
+Graph navigation, scenario exposure, and explicit scenario attempts use a separate key:
 
 - `cissp_secx_graph_state_v1`
 
-This store records only graph-specific evidence such as:
+This store may record graph-specific evidence such as:
 
 - node visits;
 - maximum disclosure depth reached;
 - last-seen timestamp;
-- scenario answer-reveal count and timestamp.
+- scenario answer-reveal count and timestamp;
+- explicit scenario answer commitments;
+- committed-attempt count;
+- scored-attempt count;
+- correct-attempt count;
+- last committed choice and last scored outcome.
 
-It does **not** write curriculum content, source mappings, objective relationships, answer keys, correctness, or mastery claims.
+It does **not** write curriculum content, source mappings, objective relationships, answer keys, Atlas retrieval-card stage, or mastery/readiness claims.
+
+## Explicit scenario attempts
+
+Scenario correctness is recorded only through an explicit learner commitment, not by opening or revealing a scenario.
+
+For a released MCQ scenario:
+
+1. the stem and options are visible before the keyed answer;
+2. the learner selects one option and activates **Commit answer**;
+3. the committed choice is locked and stored only in `cissp_secx_graph_state_v1` as a pending attempt;
+4. commitment increments the attempt count but does **not** record correctness;
+5. the pending attempt is scored only when the learner deliberately reaches disclosure layer 4, where the keyed answer/explanation is already permitted to appear;
+6. scoring clears that one pending commitment and records a scenario-level `correct`/`incorrect` outcome;
+7. closing and reopening the scenario creates the opportunity for a later independent commitment.
+
+A layer-4 reveal with no pending commitment still increments reveal exposure but does not create, score, or modify an attempt.
+
+Scenario attempts never write `cissp_atlas_progress_v1`, never grade a retrieval card, and never alter Due/Study/Continue scheduling. The scenario result is practice-attempt evidence only.
 
 ## Evidence boundary
 
-A scenario answer reveal is exposure only. It must never be interpreted as:
+An answer reveal by itself is exposure only. It must never be interpreted as:
 
 - a correct answer;
 - a completed attempt;
@@ -108,7 +131,7 @@ A scenario answer reveal is exposure only. It must never be interpreted as:
 - readiness;
 - a spaced-repetition success grade.
 
-If scenario-level correctness is added later, it must come from an explicit answer commitment/attempt workflow and remain distinguishable from simply opening layer 4.
+A committed scenario attempt may record whether that committed choice was correct or incorrect after layer 4 is deliberately revealed. That correctness applies only to the explicit scenario attempt. It is **not** automatically promoted into objective mastery, domain readiness, certification readiness, or Atlas spaced-review success.
 
 Likewise, due status is a scheduling fact only. It must not be promoted into a semantic claim that the card, objective, or domain is weak.
 
@@ -116,6 +139,9 @@ Likewise, due status is a scheduling fact only. It must not be promoted into a s
 
 - Card nodes show `new`, `learning`, `due`, or `mature` from the shared Atlas card state.
 - Card details expose the same four Atlas retrieval grades.
+- Scenario details expose an explicit option-selection + **Commit answer** control before layer 4.
+- A committed scenario choice is locked until it is scored at layer 4.
+- Scenario-node badges may show attempt and reveal counts, but these are practice/activity evidence rather than mastery labels.
 - The Due Reviews control shows the current released-card due count.
 - `R` opens a local graph containing only currently due released retrieval cards.
 - **Continue** routes due → learning → lowest-review-score-domain new → any new → Study Queue using Atlas state only.
@@ -123,7 +149,7 @@ Likewise, due status is a scheduling fact only. It must not be promoted into a s
 - Continue transfers DOM focus from its visible control to the routed active card or Study Queue root, including the mobile layout.
 - Escape preserves focus continuity upward: Study card → Study Queue root → SecX root, or Study Queue root → SecX root.
 - Graph nodes may show the deepest disclosure layer previously reached.
-- Scenario nodes may show answer-reveal exposure, labeled as exposure rather than performance.
+- Scenario nodes may show answer-reveal exposure and explicit-attempt counts, with exposure and scored outcomes kept distinct.
 - The footer may show the number of currently due released retrieval cards.
 
 ## Validation requirements
@@ -138,8 +164,8 @@ Before the learner-state/due-review layer can replace the conservative prototype
 6. expanded SecX browser smoke;
 7. dedicated Continue routing browser smoke.
 
-The deterministic learner audits must verify that `SECX_LEARNER` is frozen/read-only, that Due/Study consumers do not directly parse/write local storage, and that shared status helpers remain the source for due/learning/mature classification.
+The deterministic learner audits must verify that `SECX_LEARNER` is frozen/read-only, that Due/Study consumers do not directly parse/write local storage, that shared status helpers remain the source for due/learning/mature classification, and that scenario attempt mutation methods are not exposed through the learner API.
 
-The expanded smoke must verify card-grade persistence, same-window due-count refresh, `R` routing into the due-card branch, the separate graph-state key, the depth-4 scenario answer gate, and the rule that answer reveal does not create correctness or mastery evidence.
+The expanded smoke must verify card-grade persistence, same-window due-count refresh, `R` routing into the due-card branch, the separate graph-state key, the depth-4 scenario answer gate, and the explicit-attempt boundary. In particular, it must prove that a committed choice is stored unscored before layer 4, is scored exactly once at layer 4, does not mutate Atlas progress, and that a later reveal without a new commitment increases exposure without increasing the scored-attempt count.
 
 The Continue smoke must additionally verify the frozen API surface, absence of mutation methods, frozen card snapshots, same-window storage resynchronization, fresh-state weakest-domain new routing, Learning fallback, Due priority over simultaneous Learning work, caught-up fallback to Study Queue, visible-button-to-routed-node DOM focus transfer, Escape ascent focus continuity through Study Queue to SecX, desktop/mobile coverage, and mobile layout without introducing a second learner-state store.
