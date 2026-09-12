@@ -63,13 +63,15 @@ No semantic relationship is inferred from text similarity, co-citation, embeddin
 - `C`: open **Coverage**.
 - `L`: open **Reviewed Links**.
 
-Pointer/touch remains supported, browser focus follows routed graph selection, and `prefers-reduced-motion` is respected. The expanded surface also provides visible Continue, Search/Close, and persistent detail Close/Depth/Open controls so keyboard-first does not become keyboard-only.
+Pointer/touch remains supported, browser focus follows routed graph selection, and `prefers-reduced-motion` is respected. The expanded surface also provides visible Continue, Search/Close, persistent detail Close/Depth/Open controls, and scenario option + **Commit answer** controls so keyboard-first does not become keyboard-only.
 
 ## Objective hubs and released scenarios
 
 Expanded objective hubs expose separate **Subtopics / Retrieval cards / Released scenarios** branches so unlike relationship types are not flattened together.
 
 Released scenarios are linked through explicit objective metadata and exact subtopic tags only. Scenario stem/options are available before answer reveal; the keyed answer and explanation remain at disclosure layer 4 so the graph stays retrieval-first.
+
+A scenario can now record correctness only through an explicit commitment workflow: select one option, activate **Commit answer**, then deliberately reveal layer 4. Commitment stores the selected option as an unscored pending attempt; layer 4 scores that pending choice once. A reveal with no pending commitment remains exposure only and does not create a scored attempt.
 
 Large card/scenario branches are paged locally rather than mounting the full bank at once.
 
@@ -81,9 +83,9 @@ Review-card grading reuses Atlas `cissp_atlas_progress_v1` and the same stage sc
 
 `0, 1, 3, 7, 14, 30, 60, 120` days.
 
-Graph-specific activity uses `cissp_secx_graph_state_v1` for visits, maximum disclosure depth, and scenario answer-reveal exposure. Relationship traversal may record separate graph visit/depth evidence, but it does not mutate Atlas mastery/progress state.
+Graph-specific activity uses `cissp_secx_graph_state_v1` for visits, maximum disclosure depth, scenario answer-reveal exposure, and explicit scenario-attempt evidence. Relationship traversal may record separate graph visit/depth evidence, but it does not mutate Atlas mastery/progress state.
 
-A scenario answer reveal is exposure only. It is not correctness, an attempt result, mastery, readiness, or a spaced-review success grade.
+A scenario answer reveal by itself is exposure only. A committed choice may be scored correct/incorrect at layer 4, but that outcome is scenario-attempt evidence only: it does not alter Atlas card stage, objective mastery, domain readiness, or certification readiness.
 
 ### Due Reviews
 
@@ -113,7 +115,7 @@ Continue never auto-reveals an answer, auto-grades a card, creates a second lear
 
 For a selected source, the lens exposes exact `source_ids` membership for released objectives, review cards, and manifest-released standard scenarios.
 
-Source scenario nodes are provenance-only. They can show the scenario prompt/options and citation mapping but never the keyed answer/explanation, and deepest Source disclosure must not record a scenario answer reveal.
+Source scenario nodes are provenance-only. They can show the scenario prompt/options and citation mapping but never the keyed answer/explanation, and deepest Source disclosure must not record a scenario answer reveal or scenario attempt.
 
 A shared citation is provenance evidence only. It does not create a semantic relationship.
 
@@ -158,7 +160,7 @@ Each node exposes four depths:
 3. **Discriminate** — traps, misconceptions, contrasts, failure modes.
 4. **Apply / verify** — sources and application/practice.
 
-Space changes depth without losing graph position.
+Space changes depth without losing graph position. For scenarios, explicit answer commitment can happen before layer 4; correctness is finalized only at layer 4, preserving the keyed-answer boundary.
 
 ## Loader and failure behavior
 
@@ -177,7 +179,7 @@ Dedicated browser smokes verify successful desktop/mobile readiness, a real HTTP
 
 The draft includes deterministic gates for each major layer:
 
-- `audit.py` — released graph counts/mappings, manifest isolation, exact subtopic tags, answer boundary, learner-state compatibility;
+- `audit.py` — released graph counts/mappings, manifest isolation, exact subtopic tags, answer boundary, learner-state compatibility, and explicit scenario-attempt commit/score isolation;
 - `browser-fixtures-audit.py` — deterministic smoke fixtures;
 - `due-audit.py` — complete 140-card review registry and settled desktop/mobile Due Reviews entry focus;
 - `study-audit.py` — Study Queue and Continue priority/routing contract;
@@ -190,7 +192,7 @@ The draft includes deterministic gates for each major layer:
 
 Browser suites verify:
 
-- expanded graph/cards/scenarios/learner state;
+- expanded graph/cards/scenarios/learner state, including explicit scenario commitment, depth-4 scoring, reveal-without-commit no-score behavior, and Atlas-progress isolation;
 - loader readiness;
 - Continue routing and mobile Due focus handoff;
 - Source Provenance;
@@ -202,7 +204,7 @@ Browser suites verify:
 
 `.github/workflows/secx-prototype-smoke.yml` runs production CISSP preservation checks plus all SecX deterministic/syntax/browser gates against one exact candidate head.
 
-The last runtime head before this documentation-only update was `55bce7817125dd653b9be303c7e48f98578b25c5`; **SecX Prototype Smoke #485 (`34700013413`) passed every required gate** on that exact SHA, including production preservation, settled mobile Due Reviews focus, released-`REL-001` Projection Search routing, Reviewed Links, and both loader fault-injection regressions. This documentation head must pass the same exact-head workflow before it becomes current evidence.
+The runtime attempt-workflow head `c5f055e9fbb32122f794c1b47a5a8a77b149b401` passed **SecX Prototype Smoke #497 (`34700688066`)** through every required gate, including production preservation, the explicit commit → depth-4 score boundary, reveal-without-commit no-score behavior, Source/Coverage/Search/Links regressions, and both loader fault-injection paths. Any later documentation head must pass the same exact-head workflow before being treated as current evidence.
 
 ## Production architecture rules
 
@@ -211,12 +213,13 @@ The last runtime head before this documentation-only update was `55bce7817125dd6
 3. Keep unreleased question candidates out of learner-facing runtime.
 4. Keep learner state separate from curriculum records.
 5. Treat Due Reviews, Study Queue, and Continue as learner-state projections/navigation, not curriculum edges or mastery claims.
-6. Treat Source Provenance as an exact citation projection, not a semantic cross-link generator.
-7. Treat Coverage counts/gaps as corpus/practice-exposure projections, not learner scores or semantic edge generators.
-8. Keep relationship candidate discovery, relationship review, prototype promotion, runtime publication/search projection, and any production migration as separate stages.
-9. Reject unknown IDs, invalid source references, temporary semantic endpoints, reviewer-registry loading, and review/release/runtime drift.
-10. Keep local graph mounting/pagination rather than rendering the entire corpus at once.
-11. Require deterministic and browser gates before any production migration.
+6. Keep scenario reveal exposure separate from explicit committed-attempt correctness, and keep both separate from Atlas spaced-review/mastery semantics.
+7. Treat Source Provenance as an exact citation projection, not a semantic cross-link generator.
+8. Treat Coverage counts/gaps as corpus/practice-exposure projections, not learner scores or semantic edge generators.
+9. Keep relationship candidate discovery, relationship review, prototype promotion, runtime publication/search projection, and any production migration as separate stages.
+10. Reject unknown IDs, invalid source references, temporary semantic endpoints, reviewer-registry loading, and review/release/runtime drift.
+11. Keep local graph mounting/pagination rather than rendering the entire corpus at once.
+12. Require deterministic and browser gates before any production migration.
 
 ## Promotion boundary
 
