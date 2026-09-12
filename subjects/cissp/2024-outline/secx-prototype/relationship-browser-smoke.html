@@ -22,6 +22,7 @@ function activateButton(d,button,label){button.focus();assert(d.activeElement===
 function activateFrameButton(wrapper,d,w,button,label){wrapper.focus();assert(document.activeElement===wrapper,`${label} iframe receives outer focus`);w.focus();button.focus();assert(d.activeElement===button,`${label} button receives inner focus`);button.click()}
 function atlasProgress(w){return w.localStorage.getItem('cissp_atlas_progress_v1')||''}
 function graphState(w){try{return JSON.parse(w.localStorage.getItem('cissp_secx_graph_state_v1')||'{}')}catch{return{}}}
+function relationshipSnapshot(wrapper){const x=inner(wrapper),d=x.d,w=x.w;return{outerFocus:document.activeElement?.id||document.activeElement?.tagName||'none',current:w?.current?.()?.id||'none',activeElement:d?.activeElement?.dataset?.id||d?.activeElement?.id||d?.activeElement?.tagName||'none',root:!!(d&&node(d,'relationships:root')),relationshipNodes:d?.querySelectorAll('.node.relationship-node').length??-1,crumb:d?.querySelector('#crumb')?.textContent||'none',expandedState:x.proto?.dataset.secxExpandedState||'none'}}
 async function ready(wrapper,label){stage(`${label}-ready`);return waitFor(()=>{const x=inner(wrapper),rels=x.w?.SECX_RELEASED_RELATIONSHIPS,meta=x.w?.CISSP_META?.meta||{},bank=x.w?.SECX_RELEASED_BANK_STATE;return x.d&&x.w&&x.proto?.dataset.secxExpandedState==='ready'&&x.d.querySelector('#relationshipLensBtn')&&Array.isArray(rels)&&rels.length===3&&bank?.ready&&bank.count===meta.question_count?x:null},`${label} relationship runtime + shared released bank ready`,30000)}
 async function run(){
   const {d,w}=await ready(frame,'desktop');
@@ -60,14 +61,17 @@ async function run(){
   const m=await ready(mobile,'mobile'),md=m.d,mw=m.w,mb=md.querySelector('#relationshipLensBtn');
   stage('mobile-button');
   activateFrameButton(mobile,md,mw,mb,'mobile Links');
-  await waitFor(()=>routedFocus(md,'relationships:root')&&md.querySelectorAll('.node.relationship-node').length===3,'mobile button opens focused relationship root');
+  stage('mobile-render');
+  await waitFor(()=>node(md,'relationships:root')&&md.querySelectorAll('.node.relationship-node').length===3&&md.querySelector('#crumb')?.textContent==='SecX › Reviewed Links','mobile button renders relationship root and three links');
+  stage('mobile-focus');
+  await waitFor(()=>routedFocus(md,'relationships:root'),'mobile relationship root receives routed focus');
   stage('mobile-viewport');
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile relationship lens has no horizontal overflow');
   result.dataset.smoke='pass';
   result.dataset.stage='complete';
-  result.textContent='PASS SecX relationship lens browser smoke: 3 released reviewed links reviewer-registry-not-fetched shared-bank-ready button+focused-L-from-objective routing stable-endpoint-return Atlas-progress-read-only graph-evidence-separated mobile-focus+viewport; Home remains independently covered by Source smoke';
+  result.textContent='PASS SecX relationship lens browser smoke: 3 released reviewed links reviewer-registry-not-fetched shared-bank-ready button+focused-L-from-objective routing stable-endpoint-return Atlas-progress-read-only graph-evidence-separated mobile-render+focus+viewport; Home remains independently covered by Source smoke';
 }
-run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL stage=${result.dataset.stage||'unknown'} ${err.stack||err}`;console.error(err)});
+run().catch(err=>{result.dataset.smoke='fail';const snap=result.dataset.stage?.startsWith('mobile')?` mobile=${JSON.stringify(relationshipSnapshot(mobile))}`:'';result.textContent=`FAIL stage=${result.dataset.stage||'unknown'} ${err.stack||err}${snap}`;console.error(err,snap)});
 })();
 </script>
 </body>
