@@ -91,4 +91,5 @@ window.ascend=function(){
 
 document.addEventListener('keydown',e=>{if(!document.getElementById('search')?.hidden)return;if(e.target.closest('input,textarea,select,[contenteditable="true"]'))return;if((e.key==='l'||e.key==='L')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();e.stopImmediatePropagation();window.relationshipsLayout(null,false);settleRelationshipFocus()}},true);
 updateRelationshipButton();
+window.dispatchEvent(new CustomEvent('secx:relationships-ready',{detail:{count:relationshipRecords().length}}));
 })();
