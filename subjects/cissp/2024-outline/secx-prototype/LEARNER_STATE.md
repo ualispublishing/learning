@@ -1,0 +1,177 @@
+# SecX learner-state contract
+
+The expanded SecX review surface keeps curriculum content immutable and stores learner activity separately.
+
+## Shared Atlas retrieval-card progress
+
+Retrieval-card grades intentionally reuse the production Atlas local-storage key:
+
+- `cissp_atlas_progress_v1`
+
+The graph uses the same four grades and stage schedule already used by Atlas:
+
+- 1 · Wrong
+- 2 · Hard
+- 3 · Good
+- 4 · Easy
+- intervals: `0, 1, 3, 7, 14, 30, 60, 120` days
+
+This means a grade applied to a released retrieval card in the expanded graph is visible to the existing Atlas study workflow instead of creating a second incompatible card-history system.
+
+## Released-card registry
+
+`learner-registry.js` derives the learner-facing retrieval-card registry from the already loaded released `CISSP_CHUNKS[].high` data after `data-precision.js` loads. It does not read the scenario question bank or candidate files.
+
+The registry exists so learner-state views use the same released card objects and stable IDs as Atlas rather than reconstructing a second list.
+
+## Read-only learner API
+
+`learner-state.js` is the learner-state owner. It keeps grading/persistence private and publishes a frozen read-only facade as `window.SECX_LEARNER` for downstream learner projections.
+
+The facade exposes only:
+
+- the shared Atlas progress-key identifier;
+- `cardState(id)` as a frozen snapshot;
+- `cardStatus(id)`;
+- `isDue(id)`;
+- `isMature(id)`;
+- `todayISO()`;
+- a frozen copy of the Atlas interval schedule.
+
+It does **not** expose retrieval-card grading, scenario-attempt commitment/scoring, saving, `localStorage.setItem`, graph-state mutation, or any curriculum mutation method.
+
+The API keeps a cached Atlas progress object but compares the underlying storage string before reads. If another same-window tool/test writes the Atlas key directly, the next read resynchronizes automatically. Cross-tab `storage` events also invalidate/resynchronize the cache. This preserves current same-window behavior without forcing every projection to parse storage independently.
+
+`due-review.js` and `study-lens.js` consume `SECX_LEARNER` and do not parse or write local storage themselves. This keeps `new` / `learning` / `due` / `mature` semantics in one runtime owner rather than allowing each projection to drift.
+
+## Due Reviews
+
+`due-review.js` creates a schedule-derived **Due Reviews** branch over the released-card registry.
+
+A card is included only when the shared learner API reports its existing Atlas card state as due. The queue:
+
+- uses the production Atlas scheduling state rather than a second scheduler;
+- contains released retrieval cards only;
+- does not use candidate question files or released scenario records;
+- can be opened from the Due Reviews control or with `R`;
+- pages large queues locally;
+- updates its count immediately after a card grade in the same browser tab;
+- removes a card from the due queue when a new grade schedules it into the future;
+- may continue to show a card graded Wrong when its next due date remains today.
+
+Due Reviews is a learner-state filter, not a new curriculum relationship. A card being due does not imply that the objective is weak or unmastered.
+
+## Continue routing
+
+The visible **Continue** control is a navigation helper over the same released-card registry and Atlas progress state. It does not maintain its own scheduler or score.
+
+Its priority is deterministic:
+
+1. a currently due card;
+2. otherwise a card in the **Learning** state;
+3. otherwise a new card in the current lowest-review-score domain;
+4. otherwise any remaining new card;
+5. otherwise the Study Queue root.
+
+For card choices, Continue reuses the existing Study Queue ordering and routes to the page containing the selected released card. It selects the card but does not reveal its answer or grade it.
+
+When Continue is activated from its visible button, focus follows the navigation result: card routes transfer DOM focus from the button to the selected card node, and the caught-up fallback transfers focus to the Study Queue root. This keeps the graph's active selection and browser focus aligned so keyboard navigation can continue immediately after the route; the same contract applies at the 390px mobile layout.
+
+Focus continuity also applies while ascending with Escape. From a Study card view, the first Escape returns to and focuses the Study Queue root; the next Escape returns to and focuses the SecX root. From the caught-up Study Queue fallback, one Escape returns focus to SecX. Browser evidence covers these ascent paths on desktop and the visible 390px mobile fallback.
+
+The lowest-review-score domain is used only as a tie-breaking study-priority hint after due and learning work are absent. It remains a stage-based scheduling signal, not a diagnosis of learner weakness or exam readiness.
+
+If all released cards are mature and scheduled in the future, Continue falls back to the Study Queue rather than manufacturing extra work. The control refreshes after same-window grades and Atlas progress-storage changes, and it never writes `cissp_atlas_progress_v1` itself.
+
+## Graph-specific activity
+
+Graph navigation, scenario exposure, and explicit scenario attempts use a separate key:
+
+- `cissp_secx_graph_state_v1`
+
+This store may record graph-specific evidence such as:
+
+- node visits;
+- maximum disclosure depth reached;
+- last-seen timestamp;
+- scenario answer-reveal count and timestamp;
+- explicit scenario answer commitments;
+- committed-attempt count;
+- scored-attempt count;
+- correct-attempt count;
+- last committed choice and last scored outcome.
+
+It does **not** write curriculum content, source mappings, objective relationships, answer keys, Atlas retrieval-card stage, or mastery/readiness claims.
+
+## Explicit scenario attempts
+
+Scenario correctness is recorded only through an explicit learner commitment, not by opening or revealing a scenario.
+
+For a released MCQ scenario:
+
+1. the stem and options are visible before the keyed answer;
+2. the learner either selects one option and activates **Commit answer**, or presses contextual `1…N` while the scenario detail is open before reveal to commit that numbered option directly;
+3. both interaction paths reuse the same commitment mutator, so pointer/Tab and keyboard input create the same pending-attempt state;
+4. the committed choice is locked and stored only in `cissp_secx_graph_state_v1` as a pending attempt;
+5. commitment increments the attempt count but does **not** record correctness;
+6. the pending attempt is scored only when the learner deliberately reaches disclosure layer 4, where the keyed answer/explanation is already permitted to appear;
+7. scoring clears that one pending commitment and records a scenario-level `correct`/`incorrect` outcome;
+8. closing and reopening the scenario creates the opportunity for a later independent commitment.
+
+The numeric keys are contextual rather than global answer aliases. On an open retrieval card, `1–4` retains the existing Atlas Wrong / Hard / Good / Easy grading behavior. On an open pre-reveal scenario, `1…N` means commit the corresponding scenario option. Numeric commitment is disabled after the answer has been exposed in that detail session and cannot overwrite an already pending commitment.
+
+A layer-4 reveal with no pending commitment still increments reveal exposure but does not create, score, or modify an attempt.
+
+Scenario attempts never write `cissp_atlas_progress_v1`, never grade a retrieval card, and never alter Due/Study/Continue scheduling. The scenario result is practice-attempt evidence only.
+
+## Evidence boundary
+
+An answer reveal by itself is exposure only. It must never be interpreted as:
+
+- a correct answer;
+- a completed attempt;
+- mastery;
+- readiness;
+- a spaced-repetition success grade.
+
+A committed scenario attempt may record whether that committed choice was correct or incorrect after layer 4 is deliberately revealed. That correctness applies only to the explicit scenario attempt. It is **not** automatically promoted into objective mastery, domain readiness, certification readiness, or Atlas spaced-review success.
+
+Likewise, due status is a scheduling fact only. It must not be promoted into a semantic claim that the card, objective, or domain is weak.
+
+## UI behavior
+
+- Card nodes show `new`, `learning`, `due`, or `mature` from the shared Atlas card state.
+- Card details expose the same four Atlas retrieval grades; card `1–4` keyboard grading is unchanged.
+- Scenario details expose an explicit option-selection + **Commit answer** control before layer 4.
+- On an open pre-reveal scenario, contextual `1…N` commits that numbered option directly through the same commitment logic as the visible control.
+- A committed scenario choice is locked until it is scored at layer 4.
+- Scenario-node badges may show attempt and reveal counts, but these are practice/activity evidence rather than mastery labels.
+- The Due Reviews control shows the current released-card due count.
+- `R` opens a local graph containing only currently due released retrieval cards.
+- **Continue** routes due → learning → lowest-review-score-domain new → any new → Study Queue using Atlas state only.
+- Continue selects an existing review card but never auto-reveals or auto-grades it.
+- Continue transfers DOM focus from its visible control to the routed active card or Study Queue root, including the mobile layout.
+- Escape preserves focus continuity upward: Study card → Study Queue root → SecX root, or Study Queue root → SecX root.
+- Graph nodes may show the deepest disclosure layer previously reached.
+- Scenario nodes may show answer-reveal exposure and explicit-attempt counts, with exposure and scored outcomes kept distinct.
+- The footer may show the number of currently due released retrieval cards.
+
+## Validation requirements
+
+Before the learner-state/due-review layer can replace the conservative prototype surface, the exact candidate head must pass:
+
+1. production CISSP deterministic audit;
+2. SecX graph/learner-state deterministic audit;
+3. SecX due-review deterministic audit;
+4. SecX Study/Continue deterministic audit;
+5. production CISSP browser smoke;
+6. expanded SecX browser smoke;
+7. dedicated Continue routing browser smoke.
+
+The deterministic learner audits must verify that `SECX_LEARNER` is frozen/read-only, that Due/Study consumers do not directly parse/write local storage, that shared status helpers remain the source for due/learning/mature classification, and that scenario attempt mutation methods are not exposed through the learner API.
+
+The browser-fixture preflight additionally verifies that the sampled scenario has 2–9 keyboard-routable options, that the runtime still maps numeric scenario keys through the explicit commitment mutator, and that the browser smoke contains the numeric-choice assertions it is meant to execute.
+
+The expanded smoke must verify card-grade persistence, same-window due-count refresh, `R` routing into the due-card branch, the separate graph-state key, the depth-4 scenario answer gate, and the explicit-attempt boundary. In particular, it must commit a deterministic scenario choice through the contextual numeric shortcut, prove that the choice is stored unscored before layer 4, prove it is scored exactly once at layer 4, prove Atlas progress is unchanged, and prove that a later reveal without a new commitment increases exposure without increasing the scored-attempt count.
+
+The Continue smoke must additionally verify the frozen API surface, absence of mutation methods, frozen card snapshots, same-window storage resynchronization, fresh-state weakest-domain new routing, Learning fallback, Due priority over simultaneous Learning work, caught-up fallback to Study Queue, visible-button-to-routed-node DOM focus transfer, Escape ascent focus continuity through Study Queue to SecX, desktop/mobile coverage, and mobile layout without introducing a second learner-state store.
