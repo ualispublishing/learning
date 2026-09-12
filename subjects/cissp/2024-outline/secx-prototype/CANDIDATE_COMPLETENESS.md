@@ -2,7 +2,7 @@
 
 `candidate-completeness-audit.py` is a deterministic wiring audit for the review prototype.
 
-It exists to catch a different class of release-candidate defect from syntax, content, browser, and hygiene checks: files that exist but are not actually reachable, duplicated runtime loads, runtime-order drift, validation artifacts that were added but never wired into the exact-head workflow, or a partially initialized expanded surface that fails silently.
+It exists to catch a different class of release-candidate defect from syntax, content, browser, and hygiene checks: files that exist but are not actually reachable, duplicated runtime loads, runtime-order drift, validation artifacts that were added but never wired into the exact-head workflow, reviewer-only data accidentally entering learner runtime, or a partially initialized expanded surface that fails silently.
 
 ## What the gate proves
 
@@ -20,15 +20,34 @@ On PASS, the current candidate demonstrates all of the following:
   8. `source-lens.js`
   9. `coverage-lens.js`
   10. `projection-search.js`
+  11. `released-relationships.js`
+  12. `relationship-lens.js`
 - The expanded loader exposes an explicit `loading → ready/error` state on the embedded prototype frame.
 - Script-resource failures and JavaScript execution failures during expanded initialization are wired to an accessible `role="alert"` status while leaving the conservative knowledge web available.
-- The final `projection-search.js` load marks the expanded chain ready, and an earlier error cannot be overwritten by a later ready callback.
-- Every candidate-local JavaScript file in the PR is part of that reviewed runtime set; an extra orphan runtime file fails the gate.
-- Reviewer-only relationship data and release/audit documentation are not referenced by the learner entrypoint.
-- Every candidate Python audit in the PR is referenced by the dedicated exact-head GitHub Actions workflow.
+- The final `relationship-lens.js` load marks the expanded chain ready, and an earlier error cannot be overwritten by a later ready callback.
+- Every candidate-local learner-runtime JavaScript file in the PR is part of the reviewed runtime set; an extra orphan runtime file fails the gate.
+- `RELATIONSHIP_REVIEW.json` remains reviewer-only and is not referenced by the learner entrypoint.
+- The learner relationship layer receives only the separately promoted `released-relationships.js` runtime artifact.
+- Every candidate Python audit in the PR is referenced by the dedicated exact-head GitHub Actions workflow, including `relationship-audit.py` and `relationship-release-audit.py`.
 - Every browser-smoke shell runner in the PR is referenced by the workflow and has a paired HTML fixture that it actually invokes.
 - Every browser-smoke HTML fixture has a paired shell runner.
-- The current candidate has eight paired/wired browser smoke suites, including separate loader success, resource-failure, and execution-failure evidence.
+- The current candidate has **nine** paired/wired browser smoke suites, including dedicated relationship behavior and separate loader success, resource-failure, and execution-failure evidence.
+
+## Browser evidence for normal success
+
+The browser suite validates the current expanded surface through dedicated fixtures for:
+
+- general expanded graph/card/scenario behavior;
+- loader readiness;
+- Continue learner routing;
+- Source Provenance;
+- Coverage;
+- Projection Search;
+- reviewed semantic relationships;
+- missing-resource fallback;
+- JavaScript execution-error fallback.
+
+`relationship-browser-smoke.html` / `.sh` additionally requires the promoted three-link runtime to remain separate from the reviewer registry and validates desktop relationship traversal plus 390px mobile render, focus, and viewport behavior.
 
 ## Browser evidence for loader success
 
@@ -40,18 +59,20 @@ On PASS, the current candidate demonstrates all of the following:
 - exact ready text;
 - no visible `role="alert"` loader error on the successful path.
 
+Because the relationship release/runtime scripts are now the final reviewed dependencies, readiness is not reached until both `released-relationships.js` and `relationship-lens.js` load successfully.
+
 ## Browser evidence for missing-resource failure
 
 `loader-failure-smoke.html` / `loader-failure-smoke.sh` tests the fail-visible resource path without adding any test-only learner-runtime switch. The shell runner temporarily moves `projection-search.js` out of the served tree, starts the same local HTTP server used by the other browser smokes, and restores the file through an EXIT trap.
 
-That produces a real HTTP 404 for the final expanded dependency. On desktop and a 390px mobile shell the fixture requires:
+That produces a real HTTP 404 in the expanded dependency chain. On desktop and a 390px mobile shell the fixture requires:
 
 - `data-secx-expanded-state="error"` rather than `ready`;
 - a visible `role="alert"` / `aria-live="assertive"` status;
 - the alert to name `projection-search.js` as the failed dependency;
 - the alert to state that the conservative knowledge web remains available;
 - the conservative eight-domain graph to remain mounted;
-- no later ready callback to overwrite the error state;
+- no later relationship-script load or ready callback to overwrite the error state;
 - the mobile fallback alert and document to remain within the 390px viewport without horizontal overflow.
 
 ## Browser evidence for JavaScript execution failure
@@ -64,10 +85,10 @@ On desktop and a 390px mobile shell the fixture requires the same fail-visible g
 - visible assertive alert semantics;
 - the alert to identify `projection-search.js`;
 - the conservative eight-domain graph to remain mounted;
-- the error state not to be overwritten by the script element's later load callback;
+- the error state not to be overwritten by the script element's later load callback or downstream relationship dependencies;
 - no mobile horizontal overflow.
 
-Both fault-injection runners execute only after all normal success-path browser suites. Each uses an EXIT trap to restore the original dependency even if Chromium or an assertion fails. The workflow then independently verifies that the original file is present, the temporary backup is absent, and `git diff --exit-code -- projection-search.js` reports no checkout mutation.
+Both fault-injection runners execute only after all normal success-path browser suites, including the relationship browser smoke. Each uses an EXIT trap to restore the original dependency even if Chromium or an assertion fails. The workflow then independently verifies that the original file is present, the temporary backup is absent, and `git diff --exit-code -- projection-search.js` reports no checkout mutation.
 
 ## What the gate does not prove
 
@@ -79,15 +100,15 @@ A completeness PASS is not evidence that:
 - learner-state calculations are correct;
 - content mappings, answers, sources, or coverage counts are correct;
 - accessibility behavior outside the tested contracts passes in a browser;
-- semantic relationships are approved;
+- an arbitrary new semantic relationship is approved merely because the relationship runtime exists;
 - the prototype is production-ready or should replace the default surface.
 
-The deterministic completeness checks prove wiring and isolation. The three loader smokes add real Chromium evidence for the successful `ready` transition, one concrete missing-resource path (HTTP 404 on the final expanded dependency), and one concrete JavaScript execution-error path (successful HTTP response followed by an immediate throw). Broader deployment/runtime resilience would still require environment-level testing if this review surface were ever promoted.
+The deterministic completeness checks prove wiring and isolation. The browser smokes add real Chromium evidence for the current success path, the reviewed relationship path, one concrete missing-resource path, and one concrete JavaScript execution-error path. Broader deployment/runtime resilience would still require environment-level testing if this review surface were ever promoted.
 
-Those claims remain owned by the existing syntax, deterministic domain audits, browser smokes, relationship review boundary, and release-boundary checks.
+Relationship semantic correctness remains owned by `relationship-audit.py`; exact promotion/runtime-copy integrity remains owned by `relationship-release-audit.py`; interactive traversal remains owned by the relationship browser smoke.
 
 ## Release use
 
 The exact-head workflow runs this audit immediately after candidate hygiene and before the production/content/browser gates. `release-boundary-audit.py` also requires the completeness gate to remain wired, so a workflow edit cannot silently remove it while preserving the outer release-boundary PASS.
 
-This remains a review-prototype validation mechanism only. It does not merge, publish, deploy, migrate learner state, or alter production `study-site/` files.
+This remains a review-prototype validation mechanism only. It does not merge, publish to production, deploy, migrate learner state, or alter production `study-site/` files.
