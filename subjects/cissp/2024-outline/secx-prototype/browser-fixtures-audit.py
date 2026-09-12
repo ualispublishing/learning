@@ -66,6 +66,7 @@ try:
         parse_chunk("data-precision.js"),
     ]
     manifest = json.loads(read(QB / "RELEASED_BATCHES.json"))
+    learner_state = read(ROOT / "learner-state.js")
     smoke = read(ROOT / "browser-smoke.html")
 except (OSError, ValueError, RuntimeError) as exc:
     print("FAIL secx_browser_fixtures_audit")
@@ -133,7 +134,7 @@ if first_scenario:
     answer = first_scenario.get("answer")
     check(bool(str(first_scenario.get("id") or "").strip()), "first objective 1.9 scenario has no stable ID")
     check(bool(str(first_scenario.get("stem") or "").strip()), "first objective 1.9 scenario has no stem")
-    check(isinstance(options, list) and len(options) >= 2, "first objective 1.9 scenario lacks browser-testable options")
+    check(isinstance(options, list) and 2 <= len(options) <= 9, "first objective 1.9 scenario lacks keyboard-routable options")
     check(isinstance(answer, int) and 0 <= answer < len(options), "first objective 1.9 scenario lacks a valid keyed answer")
 
 # Search smoke relies on C-472 being in the same released runtime registry and
@@ -154,6 +155,10 @@ check(len(runtime_questions) == meta_info.get("question_count"), f"runtime stand
 check(len(registry_ids) == meta_info.get("card_count"), f"layered review registry count drift: {len(registry_ids)} != {meta_info.get('card_count')}")
 check(len(registry_ids) == len(set(registry_ids)), "layered review registry IDs are not unique")
 
+check("n?.kind==='scenario'" in learner_state and "/^[1-9]$/" in learner_state, "learner runtime no longer exposes contextual numeric scenario commitment")
+check("Keyboard: press 1–" in learner_state, "scenario detail no longer advertises its numeric commitment shortcut")
+check("commitScenarioAttempt(n.id,choice)" in learner_state, "numeric scenario shortcut no longer reuses the explicit commitment mutator")
+
 smoke_tokens = [
     "'1.9'",
     "'facet:1.9:cards'",
@@ -161,6 +166,8 @@ smoke_tokens = [
     "'C-472'",
     "'study:weak'",
     "reviewCardCount===meta.card_count",
+    "keyboard scenario answer commitment persisted",
+    "numeric shortcut commits the exact corresponding option",
 ]
 for token in smoke_tokens:
     check(token in smoke, f"browser smoke fixture contract changed without updating preflight: missing {token}")
@@ -177,5 +184,5 @@ print(
     f"high_cards_1.9={len(cards_19)} first_card={first_card.get('id') if first_card else 'none'} "
     f"scenarios_1.9={len(scenarios_19)} first_scenario={first_scenario.get('id') if first_scenario else 'none'} "
     f"search=C-472 objective={c472_objectives[0] if c472_objectives else 'none'} "
-    f"review_registry={len(registry_ids)} runtime_questions={len(runtime_questions)} weak_tie=D1"
+    f"review_registry={len(registry_ids)} runtime_questions={len(runtime_questions)} weak_tie=D1 scenario_keyboard=1..N"
 )
