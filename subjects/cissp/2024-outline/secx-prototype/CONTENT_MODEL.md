@@ -126,7 +126,7 @@ Each node supports four stable disclosure depths:
 
 For released scenarios in the real practice branch, the keyed answer and explanation belong only to layer 4. The scenario stem/options must be visible before the answer so the graph remains retrieval-first.
 
-A scenario choice may be explicitly committed before layer 4, but commitment stores only the selected option and attempt timestamp. Correctness is finalized only when layer 4 is deliberately revealed. Revealing layer 4 without a pending commitment records exposure only and does not create a scored attempt.
+A scenario choice may be explicitly committed before layer 4 through either the visible option/Commit controls or contextual `1…N` keyboard input while the scenario detail is open. Both paths use the same commitment mutator and store only the selected option and attempt timestamp. Correctness is finalized only when layer 4 is deliberately revealed. Revealing layer 4 without a pending commitment records exposure only and does not create a scored attempt.
 
 For released semantic relationships, detail explains the reviewed relationship rationale and evidence, while endpoint traversal returns to the normal released objective/card/scenario context rather than duplicating curriculum nodes.
 
@@ -173,7 +173,7 @@ Reviewed-link search is a navigation projection only. It is populated only after
 
 Search similarity may support discovery of already indexed content, but it must not create semantic graph edges automatically. Only explicitly prototype-released relationship IDs may appear as relationship search results.
 
-The expanded search palette follows a combobox/listbox interaction model. Search result options use active-descendant state; Tab and Shift+Tab are contained within the dialog controls. Visible Search/Close, detail Close/Depth/Open, and scenario option/Commit controls preserve equivalent pointer/touch access without creating alternate content or state models.
+The expanded search palette follows a combobox/listbox interaction model. Search result options use active-descendant state; Tab and Shift+Tab are contained within the dialog controls. Visible Search/Close, detail Close/Depth/Open, and scenario option/Commit controls preserve equivalent pointer/touch access without creating alternate content or state models. Contextual scenario `1…N` is an additional keyboard route to that same explicit commitment state rather than a separate answer model.
 
 ## Relationship review and promotion pipeline
 
@@ -212,11 +212,14 @@ Before any graph surface becomes production-facing, deterministic validation mus
 - `/`: search.
 - Home: root.
 - `1–4`: grade a retrieval card when card detail is open.
+- `1…N`: when scenario detail is open before answer reveal, commit that numbered scenario option through the same explicit attempt path as the visible Commit control.
 - `R`: open Due Reviews.
 - `Q`: open Study Queue.
 - `S`: open Source Provenance.
 - `C`: open Coverage.
 - `L`: open reviewed/prototype-released semantic Links.
 - Tab remains normal browser accessibility behavior outside the open search modal; inside search, Tab/Shift+Tab are contained within the dialog controls.
+
+Numeric keys are contextual: card `1–4` grading remains unchanged, while scenario `1…N` commitment applies only to an open pre-reveal scenario and cannot overwrite a pending commitment or create correctness before layer 4.
 
 Pointer/touch remains supported; keyboard-first must not become keyboard-only.
