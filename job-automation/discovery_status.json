@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "started_at": "2026-09-12T18:55:44+00:00",
-  "completed_at": "2026-09-12T18:56:01+00:00",
-  "source_count": 42,
-  "successful_sources": 42,
-  "failed_sources": 0,
-  "job_count": 55,
-  "new_job_count": 0,
+  "started_at": "2026-09-12T18:59:07+00:00",
+  "completed_at": "2026-09-12T18:59:47+00:00",
+  "source_count": 44,
+  "successful_sources": 43,
+  "failed_sources": 1,
+  "job_count": 58,
+  "new_job_count": 3,
   "sources": [
     {
       "provider": "greenhouse",
@@ -301,6 +301,21 @@
       "slug": "koho",
       "status": "ok",
       "jobs": 0
+    },
+    {
+      "provider": "ashby",
+      "source": "EvenUp",
+      "slug": "evenup",
+      "status": "error",
+      "jobs": 0,
+      "error": "HTTPError: HTTP Error 404: Not Found"
+    },
+    {
+      "provider": "ashby",
+      "source": "Cerebras Systems",
+      "slug": "cerebras",
+      "status": "ok",
+      "jobs": 3
     }
   ],
   "candidate_mode": "graduated_2026_new_grad_junior",
