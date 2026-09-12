@@ -77,21 +77,22 @@ async function run(){
   await waitFor(()=>d.querySelector('#detail.open'),'scenario detail opens');
   assert(d.querySelector('#detail').textContent.includes('Options:'),'scenario options available before reveal');
   assert(!d.querySelector('#detail').textContent.includes('Correct answer:'),'scenario answer hidden before depth four');
-  const attemptCommit=await waitFor(()=>d.querySelector('[data-sec-scenario-commit]'),'scenario exposes explicit answer-commit control before reveal');
-  assert(Array.isArray(scenarioModel.options)&&scenarioModel.options.length>=2&&Number.isInteger(scenarioModel.answer),'scenario fixture has a valid keyed MCQ answer');
+  await waitFor(()=>d.querySelector('[data-sec-scenario-commit]'),'scenario exposes explicit answer-commit control before reveal');
+  assert(Array.isArray(scenarioModel.options)&&scenarioModel.options.length>=2&&scenarioModel.options.length<=9&&Number.isInteger(scenarioModel.answer),'scenario fixture has a keyboard-routable keyed MCQ answer');
+  assert(d.querySelector('#detail').textContent.includes(`Keyboard: press 1–${scenarioModel.options.length}`),'scenario detail advertises contextual numeric commitment');
   const committedChoice=(scenarioModel.answer+1)%scenarioModel.options.length;
-  const choice=d.querySelector(`input[name="secx-scenario-choice"][value="${committedChoice}"]`);assert(choice,'deterministic wrong-choice radio exists');choice.click();attemptCommit.click();
-  const pendingEvidence=await waitFor(()=>{try{const p=JSON.parse(w.localStorage.getItem('cissp_secx_graph_state_v1')||'{}').scenarios?.[scenarioId];return p?.pendingAttempt?p:null}catch{return null}},'explicit scenario answer commitment persisted');
-  assert(pendingEvidence.attempts===1&&pendingEvidence.scored===0&&pendingEvidence.correct===0,'commit records one unscored attempt and no correctness result');
-  assert(pendingEvidence.pendingAttempt.choice===committedChoice,'committed attempt stores the exact selected option');
-  assert(d.querySelector('#detail')?.textContent.includes('This choice is locked'),'committed choice is locked before reveal');
-  assert(!d.querySelector('#detail').textContent.includes('Correct answer:'),'committing an answer does not bypass depth-four answer gate');
+  key(w,String(committedChoice+1),`Digit${committedChoice+1}`);
+  const pendingEvidence=await waitFor(()=>{try{const p=JSON.parse(w.localStorage.getItem('cissp_secx_graph_state_v1')||'{}').scenarios?.[scenarioId];return p?.pendingAttempt?p:null}catch{return null}},'keyboard scenario answer commitment persisted');
+  assert(pendingEvidence.attempts===1&&pendingEvidence.scored===0&&pendingEvidence.correct===0,'keyboard commit records one unscored attempt and no correctness result');
+  assert(pendingEvidence.pendingAttempt.choice===committedChoice,'numeric shortcut commits the exact corresponding option');
+  assert(d.querySelector('#detail')?.textContent.includes('This choice is locked'),'keyboard-committed choice is locked before reveal');
+  assert(!d.querySelector('#detail').textContent.includes('Correct answer:'),'keyboard commitment does not bypass depth-four answer gate');
   const atlasBeforeScenario=w.localStorage.getItem('cissp_atlas_progress_v1')||'';
   key(w,' ','Space');key(w,' ','Space');key(w,' ','Space');
   await waitFor(()=>d.querySelector('#detail')?.textContent.includes('Correct answer:'),'scenario answer revealed only at depth four');
   const scenarioEvidence=await waitFor(()=>{try{const p=JSON.parse(w.localStorage.getItem('cissp_secx_graph_state_v1')||'{}').scenarios?.[scenarioId];return p?.scored===1?p:null}catch{return null}},'committed scenario attempt scored at answer reveal');
   assert(scenarioEvidence.reveals===1,'scenario answer reveal counted once');
-  assert(scenarioEvidence.attempts===1&&scenarioEvidence.scored===1&&scenarioEvidence.correct===0,'deterministic wrong commitment scores incorrect exactly once');
+  assert(scenarioEvidence.attempts===1&&scenarioEvidence.scored===1&&scenarioEvidence.correct===0,'deterministic wrong keyboard commitment scores incorrect exactly once');
   assert(scenarioEvidence.lastOutcome==='incorrect'&&!scenarioEvidence.pendingAttempt,'scored attempt clears pending commitment and records explicit incorrect outcome');
   assert(w.localStorage.getItem('cissp_atlas_progress_v1')===atlasBeforeScenario,'scenario attempt and reveal do not mutate Atlas card progress');
   assert(d.querySelector('#detail')?.textContent.includes('Last scored attempt: Incorrect'),'scenario detail distinguishes committed-attempt result from exposure');
@@ -150,7 +151,7 @@ async function run(){
   assert(noOverflow,`mobile graph shell has no horizontal overflow; ${overflowDebug(md)}`);
 
   result.dataset.smoke='pass';
-  result.textContent=`PASS SecX expanded browser smoke: released-counts keyboard-navigation objective-hub cards Atlas-progress due-review study-lens graph-state scenarios explicit-answer-commit depth4-score reveal-only-no-score search Home mobile; sampled card ${cardId}; scenario ${scenarioId}`;
+  result.textContent=`PASS SecX expanded browser smoke: released-counts keyboard-navigation objective-hub cards Atlas-progress due-review study-lens graph-state scenarios keyboard-answer-commit depth4-score reveal-only-no-score search Home mobile; sampled card ${cardId}; scenario ${scenarioId}`;
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
