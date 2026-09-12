@@ -188,7 +188,8 @@ function scenarioAttemptMarkup(n,p,q){
     const choice=q.options[pending.choice]||'';
     controls=`<div class="sec-attempt" data-sec-attempt><strong>Committed ${String.fromCharCode(65+pending.choice)}. ${esc(choice)}</strong><small>This choice is locked. Reveal depth 4 to score the committed attempt.</small></div>`;
   }else if(answer!==null&&depth<4&&scenarioRevealSession!==n.id){
-    controls=`<div class="sec-attempt" data-sec-attempt><strong>Commit an answer before reveal</strong><div class="sec-attempt-options">${q.options.map((option,i)=>`<label class="sec-attempt-choice"><input type="radio" name="secx-scenario-choice" value="${i}"><span>${String.fromCharCode(65+i)}. ${esc(option)}</span></label>`).join('')}</div><button type="button" class="sec-attempt-commit" data-sec-scenario-commit>Commit answer</button><small>Commitment records the selected option only. Correctness is not recorded until layer 4 is deliberately revealed.</small></div>`;
+    const shortcutMax=Math.min(q.options.length,9);
+    controls=`<div class="sec-attempt" data-sec-attempt><strong>Commit an answer before reveal</strong><div class="sec-attempt-options">${q.options.map((option,i)=>`<label class="sec-attempt-choice"><input type="radio" name="secx-scenario-choice" value="${i}"><span>${String.fromCharCode(65+i)}. ${esc(option)}</span></label>`).join('')}</div><button type="button" class="sec-attempt-commit" data-sec-scenario-commit>Commit answer</button><small>Commitment records the selected option only. Correctness is not recorded until layer 4 is deliberately revealed.</small><small>Keyboard: press 1–${shortcutMax} to commit that option directly while the scenario detail is open.</small></div>`;
   }else if(answer!==null){
     controls='<small>The answer has been exposed in this detail session. Close and reopen the scenario before committing another scored attempt.</small>';
   }
@@ -251,7 +252,14 @@ document.addEventListener('keydown',e=>{
   if(e.target.closest('input,textarea,select,[contenteditable="true"]'))return;
   const n=current();
   if(n?.kind==='card'&&depth>0&&['1','2','3','4'].includes(e.key)){
-    e.preventDefault();e.stopImmediatePropagation();gradeCard(n.id,Number(e.key)-1);
+    e.preventDefault();e.stopImmediatePropagation();gradeCard(n.id,Number(e.key)-1);return;
+  }
+  if(n?.kind==='scenario'&&depth>0&&depth<4&&scenarioRevealSession!==n.id&&/^[1-9]$/.test(e.key)){
+    const q=scenarioQuestion(n.id),choice=Number(e.key)-1;
+    if(q&&choice<q.options.length){
+      e.preventDefault();e.stopImmediatePropagation();
+      if(commitScenarioAttempt(n.id,choice)){decorateDetail();requestAnimationFrame(()=>detailMore.focus())}
+    }
   }
 },true);
 
