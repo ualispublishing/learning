@@ -31,6 +31,7 @@ function endpointDetails(id,r,role){const o=endpointObjective(id);return{
   practice:o?`Press Enter to open objective ${o.id} in its normal domain context.`:'This endpoint is stable but does not currently have an objective-layout route.'
 }}
 function relationshipRadialPosition(i,count,outer=.37,inner=.23){const mobile=window.innerWidth<=800;return radialPosition(i,count,mobile?Math.min(outer,.29):outer,mobile?Math.min(inner,.20):inner)}
+function settleRelationshipFocus(){focusActive();requestAnimationFrame(focusActive)}
 
 const style=document.createElement('style');
 style.textContent=`
@@ -63,7 +64,7 @@ window.relationshipHubLayout=function(id,returnTo=null,focus=false){
   level='relationship-hub';relationshipId=r.id;parentDomain=null;parentObjective=null;active=returnTo&&nodes.some(n=>n.id===returnTo)?returnTo:centerId;depth=0;render(focus);
 };
 
-relationshipButton.addEventListener('click',()=>{window.relationshipsLayout(null,false);focusActive()});
+relationshipButton.addEventListener('click',()=>{window.relationshipsLayout(null,false);settleRelationshipFocus()});
 const priorCrumb=crumbText;
 window.crumbText=function(){if(level==='relationships')return'SecX › Reviewed Links';if(level==='relationship-hub')return`SecX › Reviewed Links › ${relationshipId}`;return priorCrumb()};
 const priorDescend=descend;
@@ -88,6 +89,6 @@ window.ascend=function(){
   return priorAscend();
 };
 
-document.addEventListener('keydown',e=>{if(!document.getElementById('search')?.hidden)return;if(e.target.closest('input,textarea,select,[contenteditable="true"]'))return;if((e.key==='l'||e.key==='L')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();e.stopImmediatePropagation();window.relationshipsLayout(null,false);focusActive()}},true);
+document.addEventListener('keydown',e=>{if(!document.getElementById('search')?.hidden)return;if(e.target.closest('input,textarea,select,[contenteditable="true"]'))return;if((e.key==='l'||e.key==='L')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();e.stopImmediatePropagation();window.relationshipsLayout(null,false);settleRelationshipFocus()}},true);
 updateRelationshipButton();
 })();
