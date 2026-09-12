@@ -147,6 +147,10 @@ for q in all_standard:
     qid = q.get("id")
     objectives_for_q = q_objectives(q)
     check(bool(objectives_for_q), f"{qid} has no objective mapping")
+    options = q.get("options")
+    answer = q.get("answer")
+    check(isinstance(options, list) and len(options) >= 2 and all(isinstance(x, str) and x.strip() for x in options), f"{qid} has invalid MCQ options for explicit attempt workflow")
+    check(isinstance(answer, int) and isinstance(options, list) and 0 <= answer < len(options), f"{qid} has invalid keyed answer for explicit attempt workflow")
     for oid in objectives_for_q:
         check(oid in objective_ids, f"{qid} references unknown objective {oid}")
     for source_id in q.get("source_ids", []):
@@ -168,6 +172,7 @@ next_html = read(ROOT / "next.html")
 index_html = read(ROOT / "index.html")
 production_app = read(STUDY / "app.js")
 smoke_shell = read(ROOT / "browser-smoke.sh")
+browser_smoke = read(ROOT / "browser-smoke.html")
 
 check("RELEASED_BATCHES.json" in next_layer, "expanded runtime does not reference released manifest")
 check("fetch(`../study-site/${p}`" in next_layer, "expanded runtime release-file loading no longer derives from manifest paths")
@@ -195,19 +200,29 @@ check("Array.isArray(value)" in learner_state and "Array.isArray(value.nodes)" i
 check("let graphState=normalizeGraph(safeParse(localStorage.getItem(GRAPH_STATE_KEY),{}))" in learner_state, "graph-state startup no longer normalizes persisted local storage")
 check("graphState=normalizeGraph(safeParse(e.newValue,{}))" in learner_state, "graph-state storage-event refresh no longer normalizes external values")
 check("reveals" in learner_state and "exposure only" in learner_state, "scenario reveal evidence is not explicitly separated from mastery")
-scenario_state_block = re.search(r"if\(n\.kind==='scenario'&&depth>=4.*?\n  \}", learner_state, re.S)
+scenario_state_block = re.search(r"if\(n\.kind==='scenario'&&depth>=4&&scenarioRevealSession!==n\.id\).*?\n  \}", learner_state, re.S)
 check(bool(scenario_state_block), "scenario reveal mutation block not found")
 if scenario_state_block:
     scenario_text = scenario_state_block.group(0).lower()
-    check("graphstate.scenarios" in scenario_text and "reveals" in scenario_text, "scenario reveal block no longer records exposure")
-    check("correct" not in scenario_text and "mastery" not in scenario_text, "scenario reveal mutation appears to record correctness/mastery")
+    check("scenariostate" in scenario_text and "reveals" in scenario_text, "scenario reveal block no longer records exposure")
+    check("correct" not in scenario_text and "mastery" not in scenario_text, "scenario reveal mutation appears to record correctness/mastery directly")
+check("function commitScenarioAttempt(id,choice)" in learner_state, "explicit scenario answer-commit function missing")
+check("p.pendingAttempt={choice,committedAt:now}" in learner_state and "p.attempts+=1" in learner_state, "scenario commitment no longer records an explicit locked choice before scoring")
+check("function finalizeScenarioAttempt(id)" in learner_state, "scenario attempt finalizer missing")
+check("if(!pending||answer===null" in learner_state, "scenario correctness can be finalized without a prior explicit commitment")
+check("if(n.kind==='scenario'&&depth>=4)finalizeScenarioAttempt(n.id)" in learner_state, "scenario attempt is not scored at the depth-four reveal boundary")
+check("p.scored+=1" in learner_state and "if(correct)p.correct+=1" in learner_state and "delete p.pendingAttempt" in learner_state, "scenario scoring does not finalize exactly one pending commitment")
+check("Scenario evidence remains separate from Atlas progress" in learner_state, "scenario scoring UI no longer states Atlas-progress isolation")
+check("data-sec-scenario-commit" in learner_state and "secx-scenario-choice" in learner_state, "explicit scenario answer controls missing")
+check("Correctness is not recorded until layer 4" in learner_state, "scenario commitment UI no longer states delayed correctness boundary")
+check("reveal alone never creates correctness or mastery evidence" in learner_state, "scenario detail no longer states reveal-only evidence boundary")
 api_block = re.search(r"const learnerApi=Object\.freeze\(\{(.*?)\}\);", learner_state, re.S)
 check(bool(api_block), "SecX learner state no longer exports a frozen read-only API")
 if api_block:
     api_text = api_block.group(1)
     for token in ("progressKey:ATLAS_PROGRESS_KEY", "cardState", "cardStatus", "isDue", "isMature", "todayISO"):
         check(token in api_text, f"learner API missing read contract: {token}")
-    for forbidden in ("gradeCard", "saveAtlas", "saveGraph", "setItem"):
+    for forbidden in ("gradeCard", "saveAtlas", "saveGraph", "setItem", "commitScenarioAttempt", "finalizeScenarioAttempt"):
         check(forbidden not in api_text, f"learner API exposes mutation capability: {forbidden}")
 check("Object.defineProperty(window,'SECX_LEARNER'" in learner_state, "SECX_LEARNER export missing")
 check("syncAtlas()" in learner_state and "atlasRaw" in learner_state, "learner API no longer resynchronizes underlying Atlas storage")
@@ -219,6 +234,9 @@ check("learner-state.js" in next_html, "expanded review page does not load learn
 check(next_html.find("next-layer.js") < next_html.find("learner-state.js"), "learner state must load after the expanded graph layer")
 check("layer.onload" in next_html, "learner state load is not gated on expanded graph readiness")
 check("--user-data-dir=" in smoke_shell, "SecX browser smoke does not isolate browser storage")
+check("data-sec-scenario-commit" in browser_smoke and "pendingAttempt.choice" in browser_smoke, "expanded browser smoke does not commit and verify an explicit scenario answer")
+check("reveal without a new commitment does not create or score another attempt" in browser_smoke, "expanded browser smoke does not prove reveal-only exposure leaves scored-attempt count unchanged")
+check("scenario attempt and reveal do not mutate Atlas card progress" in browser_smoke, "expanded browser smoke does not prove scenario-attempt Atlas isolation")
 
 if errors:
     print("FAIL secx_graph_audit")
@@ -237,5 +255,5 @@ print(
     f"manifest_files={len(seen_manifest_files)} "
     f"explicit_subtopic_edges={explicit_subtopic_edges} "
     f"questions_with_explicit_subtopic_edge={questions_with_explicit_subtopic_edge} "
-    "learner_state=atlas-compatible+graph-separated+graph-normalized+read-only-api+touch-controls"
+    "learner_state=atlas-compatible+graph-separated+graph-normalized+read-only-api+touch-controls+explicit-scenario-attempts"
 )
