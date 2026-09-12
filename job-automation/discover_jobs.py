@@ -41,8 +41,9 @@ CANADA_TERMS = (
 # country names in the description. Only fall back to body text for genuinely
 # generic location labels such as Remote, North America, or Americas.
 GENERIC_LOCATION_TERMS = (
-    "remote", "anywhere", "global", "worldwide", "north america", "americas",
-    "multiple locations", "various locations", "distributed",
+    "remote", "hybrid", "on-site", "onsite", "anywhere", "global", "worldwide",
+    "north america", "americas", "multiple locations", "various locations",
+    "distributed",
 )
 
 TECH_TITLE_TERMS = (
@@ -126,10 +127,14 @@ def is_canada_eligible(location: str, body: str) -> tuple[bool, list[str]]:
     if location_signals:
         return True, location_signals[:5]
 
-    # An explicit non-generic location such as "Remote (United Kingdom)" or
-    # "New York, NY" is not made Canadian just because the description happens
-    # to mention Canada in a policy, benefits, or equal-opportunity paragraph.
-    if location_low and not any(term in location_low for term in GENERIC_LOCATION_TERMS):
+    # Strip work-mode/generic geography labels. If alphabetic location text is
+    # still present, it is an explicit non-Canada place (e.g. "Remote (United
+    # Kingdom)") and description boilerplate must not override it.
+    remainder = location_low
+    for term in GENERIC_LOCATION_TERMS:
+        remainder = remainder.replace(term, " ")
+    remainder = re.sub(r"[^a-z]+", " ", remainder).strip()
+    if location_low and remainder:
         return False, []
 
     body_low = body[:8000].lower()
