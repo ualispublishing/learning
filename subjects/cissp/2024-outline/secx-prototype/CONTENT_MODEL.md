@@ -101,7 +101,7 @@ Read-only projections such as Source Provenance and Coverage consume this shared
 
 The **Source Provenance** lens uses the current Atlas source registry and exact `source_ids` arrays only.
 
-It may display released sources and the objectives, review cards, and manifest-released standard scenarios that explicitly cite them. Scenario citation nodes are provenance-only and may show prompt/options but must not expose keyed answers or record scenario-answer-reveal evidence.
+It may display released sources and the objectives, review cards, and manifest-released standard scenarios that explicitly cite them. Scenario citation nodes are provenance-only and may show prompt/options but must not expose keyed answers or record scenario-answer-reveal or scenario-attempt evidence.
 
 Source Provenance must not infer source membership from wording, treat co-citation as a semantic relationship, independently fetch question-bank candidates, or infer learner mastery/readiness.
 
@@ -125,6 +125,8 @@ Each node supports four stable disclosure depths:
 4. **Apply / verify** — source traceability and application/practice.
 
 For released scenarios in the real practice branch, the keyed answer and explanation belong only to layer 4. The scenario stem/options must be visible before the answer so the graph remains retrieval-first.
+
+A scenario choice may be explicitly committed before layer 4, but commitment stores only the selected option and attempt timestamp. Correctness is finalized only when layer 4 is deliberately revealed. Revealing layer 4 without a pending commitment records exposure only and does not create a scored attempt.
 
 For released semantic relationships, detail explains the reviewed relationship rationale and evidence, while endpoint traversal returns to the normal released objective/card/scenario context rather than duplicating curriculum nodes.
 
@@ -157,9 +159,9 @@ The shared card state uses Atlas's existing Wrong / Hard / Good / Easy stage sch
 
 The production-compatible review-card registry contains the same 140 Atlas review cards. Due Reviews and Study Queue filter those released IDs using existing Atlas card state; they do not discover files or create replacement card IDs.
 
-Graph-specific state may record visits, maximum disclosure depth, last-seen time, and scenario answer-reveal exposure. Relationship traversal may record graph visit/depth evidence only; it must not mutate Atlas mastery/progress state.
+Graph-specific state may record visits, maximum disclosure depth, last-seen time, scenario answer-reveal exposure, explicit scenario commitments, scored-attempt counts, correct-attempt counts, and the last scenario outcome. Relationship traversal may record graph visit/depth evidence only; it must not mutate Atlas mastery/progress state.
 
-A scenario answer reveal is not correctness, an attempt result, mastery, readiness, or a spaced-repetition success grade. A due date is likewise only a scheduling fact.
+A scenario answer reveal by itself is not correctness, an attempt result, mastery, readiness, or a spaced-repetition success grade. A committed scenario choice may be scored correct/incorrect at layer 4, but that outcome is scoped only to that explicit scenario attempt and must not be promoted automatically into objective/domain/certification mastery or Atlas card scheduling. A due date is likewise only a scheduling fact.
 
 Learner-state records must never rewrite objective/source mappings, release state, scenario answer keys, semantic-review state, or curriculum relationships.
 
@@ -171,7 +173,7 @@ Reviewed-link search is a navigation projection only. It is populated only after
 
 Search similarity may support discovery of already indexed content, but it must not create semantic graph edges automatically. Only explicitly prototype-released relationship IDs may appear as relationship search results.
 
-The expanded search palette follows a combobox/listbox interaction model. Search result options use active-descendant state; Tab and Shift+Tab are contained within the dialog controls. Visible Search/Close and detail Close/Depth/Open controls preserve equivalent pointer/touch access without creating alternate content or state models.
+The expanded search palette follows a combobox/listbox interaction model. Search result options use active-descendant state; Tab and Shift+Tab are contained within the dialog controls. Visible Search/Close, detail Close/Depth/Open, and scenario option/Commit controls preserve equivalent pointer/touch access without creating alternate content or state models.
 
 ## Relationship review and promotion pipeline
 
@@ -199,7 +201,7 @@ Source Provenance derives from `CISSP_META.sources`, exact released `source_ids`
 
 Reviewer-only semantic relationship data must never be loaded by learner runtime. Learner-facing prototype relationships and their search projection must come only from the separate audited released artifact/runtime copy.
 
-Before any graph surface becomes production-facing, deterministic validation must reject unknown IDs, malformed release inputs, unreleased scenario leakage, unsupported relationship targets/types, temporary UI IDs used as semantic endpoints, relationship approval without explicit evidence, reviewer-registry loading, released-relationship/runtime-copy drift, invalid learner-state/content coupling, premature answer exposure, provenance answer leakage, and projection logic that invents semantic edges.
+Before any graph surface becomes production-facing, deterministic validation must reject unknown IDs, malformed release inputs, unreleased scenario leakage, invalid scenario answer keys/options, scenario correctness without prior explicit commitment, unsupported relationship targets/types, temporary UI IDs used as semantic endpoints, relationship approval without explicit evidence, reviewer-registry loading, released-relationship/runtime-copy drift, invalid learner-state/content coupling, premature answer exposure, provenance answer leakage, and projection logic that invents semantic edges.
 
 ## Keyboard grammar
 
