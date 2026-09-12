@@ -41,6 +41,17 @@ function isDue(id){const s=cardState(id);return !!s&&s.due<=dayISO()}
 function isMature(id){const s=cardState(id);return !!s&&(s.stage||0)>=4}
 function cardStatus(id){const s=cardState(id);if(!s)return'new';if(isMature(id))return'mature';return isDue(id)?'due':'learning'}
 function graphNodeState(id){return graphState.nodes[id]||null}
+function scenarioQuestion(id){return (Array.isArray(window.SECX_RELEASED_QUESTIONS)?window.SECX_RELEASED_QUESTIONS:[]).find(q=>q.id===id)||null}
+function scenarioAnswerIndex(q){return Number.isInteger(q?.answer)&&Array.isArray(q.options)&&q.answer>=0&&q.answer<q.options.length?q.answer:null}
+function scenarioState(id){
+  let p=graphState.scenarios[id];
+  if(!p||typeof p!=='object'||Array.isArray(p))p=graphState.scenarios[id]={};
+  for(const key of ['reveals','attempts','scored','correct'])if(!Number.isInteger(p[key])||p[key]<0)p[key]=0;
+  if(p.correct>p.scored)p.correct=p.scored;
+  if(p.scored>p.attempts)p.scored=p.attempts;
+  if(p.pendingAttempt&&(!Number.isInteger(p.pendingAttempt.choice)||typeof p.pendingAttempt.committedAt!=='string'))delete p.pendingAttempt;
+  return p;
+}
 
 const learnerApi=Object.freeze({
   progressKey:ATLAS_PROGRESS_KEY,
@@ -75,6 +86,38 @@ function gradeCard(id,g){
   if(status)status.textContent=`Graded ${id}: ${GRADES[g]}. Next review ${s.due}.`;
 }
 
+function commitScenarioAttempt(id,choice){
+  const q=scenarioQuestion(id),answer=scenarioAnswerIndex(q);
+  if(!q||answer===null||!Number.isInteger(choice)||choice<0||choice>=q.options.length)return false;
+  const p=scenarioState(id);
+  if(p.pendingAttempt)return false;
+  const now=new Date().toISOString();
+  p.attempts+=1;
+  p.pendingAttempt={choice,committedAt:now};
+  p.lastChoice=choice;
+  p.lastCommit=now;
+  saveGraph();
+  const status=document.getElementById('status');
+  if(status)status.textContent=`Committed answer ${String.fromCharCode(65+choice)} for ${id}. Reveal depth 4 to score this attempt.`;
+  return true;
+}
+
+function finalizeScenarioAttempt(id){
+  const q=scenarioQuestion(id),answer=scenarioAnswerIndex(q),p=scenarioState(id),pending=p.pendingAttempt;
+  if(!pending||answer===null||pending.choice<0||pending.choice>=q.options.length)return null;
+  const correct=pending.choice===answer,now=new Date().toISOString();
+  p.scored+=1;
+  if(correct)p.correct+=1;
+  p.lastChoice=pending.choice;
+  p.lastOutcome=correct?'correct':'incorrect';
+  p.lastScoredAt=now;
+  delete p.pendingAttempt;
+  saveGraph();
+  const status=document.getElementById('status');
+  if(status)status.textContent=`Scored committed ${id} attempt: ${correct?'Correct':'Incorrect'}. Scenario evidence remains separate from Atlas progress.`;
+  return correct;
+}
+
 function noteDetail(n){
   if(!n||depth<=0){openNodeId=null;scenarioRevealSession=null;return}
   const now=new Date().toISOString();
@@ -82,9 +125,11 @@ function noteDetail(n){
   if(openNodeId!==n.id){s.visits=(s.visits||0)+1;s.lastSeen=now;openNodeId=n.id;scenarioRevealSession=null}
   if(depth>(s.maxDepth||0)){s.maxDepth=depth;s.lastSeen=now}
   if(n.kind==='scenario'&&depth>=4&&scenarioRevealSession!==n.id){
-    const p=graphState.scenarios[n.id]||(graphState.scenarios[n.id]={reveals:0});
-    p.reveals=(p.reveals||0)+1;p.lastReveal=now;scenarioRevealSession=n.id;
+    const p=scenarioState(n.id);
+    p.reveals+=1;p.lastReveal=now;scenarioRevealSession=n.id;
+    saveGraph();
   }
+  if(n.kind==='scenario'&&depth>=4)finalizeScenarioAttempt(n.id);
   saveGraph();
 }
 
@@ -92,7 +137,7 @@ const style=document.createElement('style');
 style.textContent=`
 .node-progress{display:inline-flex;align-items:center;gap:4px;margin-top:5px;padding:2px 6px;border:1px solid #35526d;border-radius:999px;font-size:9px;color:#c8d9e8;background:#0b1d2d}
 .node-progress[data-state="due"]{border-style:dashed}.node-progress[data-state="mature"]{font-weight:700}
-.sec-progress{display:grid;gap:8px}.sec-progress-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center}.sec-grade{border:1px solid #456784;border-radius:9px;background:#10263a;color:inherit;padding:7px 9px;cursor:pointer}.sec-grade:hover,.sec-grade:focus-visible{border-color:var(--focus);outline:none}.sec-progress small{color:var(--muted)}
+.sec-progress{display:grid;gap:8px}.sec-progress-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center}.sec-grade,.sec-attempt-commit{border:1px solid #456784;border-radius:9px;background:#10263a;color:inherit;padding:7px 9px;cursor:pointer}.sec-grade:hover,.sec-grade:focus-visible,.sec-attempt-commit:hover,.sec-attempt-commit:focus-visible{border-color:var(--focus);outline:none}.sec-progress small{color:var(--muted)}.sec-attempt{display:grid;gap:7px;padding:9px;border:1px solid #35526d;border-radius:10px;background:#0b1d2d}.sec-attempt-options{display:grid;gap:5px}.sec-attempt-choice{display:flex;gap:7px;align-items:flex-start;cursor:pointer}.sec-attempt-choice input{margin-top:3px}
 #detail.open{padding-top:64px}.sec-detail-actions{position:absolute;right:30px;top:28px;z-index:11;display:flex;justify-content:flex-end;gap:7px}.sec-detail-action{border:1px solid #456784;border-radius:10px;background:#10263af2;color:var(--text);padding:7px 10px;font:inherit;font-size:11px;cursor:pointer;box-shadow:0 4px 16px #0006}.sec-detail-action:hover,.sec-detail-action:focus-visible{border-color:var(--focus);outline:none}.sec-detail-actions[hidden]{display:none!important}@media(max-width:800px){#detail.open{padding-top:60px}.sec-detail-actions{right:20px;top:20px;max-width:calc(100% - 40px);gap:5px}.sec-detail-action{font-size:10px;padding:7px 9px}}
 `;
 document.head.appendChild(style);
@@ -125,10 +170,30 @@ function decorateNodes(){
     const id=el.dataset.id,n=nodes.find(x=>x.id===id);if(!n)return;
     let text='',state='';
     if(n.kind==='card'){state=cardStatus(id);const s=cardState(id);text=s?`${state} · stage ${s.stage||0}`:'new'}
-    else if(n.kind==='scenario'){const p=graphState.scenarios[id];if(p?.reveals){state='seen';text=`${p.reveals} answer reveal${p.reveals===1?'':'s'}`}}
+    else if(n.kind==='scenario'){
+      const p=graphState.scenarios[id];
+      if(p?.attempts){state='attempted';text=`${p.attempts} attempt${p.attempts===1?'':'s'} · ${p.reveals||0} reveal${p.reveals===1?'':'s'}`}
+      else if(p?.reveals){state='seen';text=`${p.reveals} answer reveal${p.reveals===1?'':'s'}`}
+    }
     else {const p=graphNodeState(id);if(p?.maxDepth){state='seen';text=`depth ${p.maxDepth}/4`}}
     if(text){const badge=document.createElement('span');badge.className='node-progress';badge.dataset.state=state;badge.textContent=text;el.appendChild(badge)}
   });
+}
+
+function scenarioAttemptMarkup(n,p,q){
+  const answer=scenarioAnswerIndex(q),pending=p.pendingAttempt,attempts=p.attempts||0,scored=p.scored||0,correct=p.correct||0;
+  const summary=`${attempts} committed attempt${attempts===1?'':'s'} · ${scored} scored · ${correct} correct`;
+  let controls='';
+  if(answer!==null&&pending){
+    const choice=q.options[pending.choice]||'';
+    controls=`<div class="sec-attempt" data-sec-attempt><strong>Committed ${String.fromCharCode(65+pending.choice)}. ${esc(choice)}</strong><small>This choice is locked. Reveal depth 4 to score the committed attempt.</small></div>`;
+  }else if(answer!==null&&depth<4&&scenarioRevealSession!==n.id){
+    controls=`<div class="sec-attempt" data-sec-attempt><strong>Commit an answer before reveal</strong><div class="sec-attempt-options">${q.options.map((option,i)=>`<label class="sec-attempt-choice"><input type="radio" name="secx-scenario-choice" value="${i}"><span>${String.fromCharCode(65+i)}. ${esc(option)}</span></label>`).join('')}</div><button type="button" class="sec-attempt-commit" data-sec-scenario-commit>Commit answer</button><small>Commitment records the selected option only. Correctness is not recorded until layer 4 is deliberately revealed.</small></div>`;
+  }else if(answer!==null){
+    controls='<small>The answer has been exposed in this detail session. Close and reopen the scenario before committing another scored attempt.</small>';
+  }
+  const last=p.lastOutcome?`<small>Last scored attempt: <strong>${p.lastOutcome==='correct'?'Correct':'Incorrect'}</strong>. This result is scenario-attempt evidence only and does not alter Atlas review stage or mastery.</small>`:'';
+  return `<div class="sec-progress-row"><strong>${summary}</strong><small>${p.reveals||0} answer reveal${p.reveals===1?'':'s'} recorded separately.</small></div>${last}${controls}`;
 }
 
 function decorateDetail(){
@@ -143,8 +208,14 @@ function decorateDetail(){
     section.innerHTML=`<h3>Atlas spaced review</h3><div class="sec-progress-row"><strong>${esc(status)}</strong><small>${s?`stage ${s.stage||0} · ${s.reviews||0} reviews · due ${esc(due)}`:'No retrieval grade yet.'}</small></div><div class="sec-progress-row">${GRADES.map((label,i)=>`<button class="sec-grade" data-sec-grade="${i}" title="Grade ${i+1}: ${label}">${i+1} · ${label}</button>`).join('')}</div><small>Uses the same progress key and review intervals as CISSP Atlas, so grading here carries into the production study view.</small>`;
     section.querySelectorAll('[data-sec-grade]').forEach(btn=>btn.addEventListener('click',()=>gradeCard(n.id,Number(btn.dataset.secGrade))));
   }else if(n.kind==='scenario'){
-    const p=graphState.scenarios[n.id]||{},visits=graphNodeState(n.id)?.visits||0;
-    section.innerHTML=`<h3>Practice evidence</h3><div class="sec-progress-row"><strong>${visits} visit${visits===1?'':'s'}</strong><small>${p.reveals||0} answer reveal${p.reveals===1?'':'s'} recorded locally.</small></div><small>An answer reveal is recorded as exposure only; it is not treated as a correct attempt or mastery evidence.</small>`;
+    const p=scenarioState(n.id),visits=graphNodeState(n.id)?.visits||0,q=scenarioQuestion(n.id);
+    section.innerHTML=`<h3>Practice evidence</h3><div class="sec-progress-row"><strong>${visits} visit${visits===1?'':'s'}</strong><small>${p.reveals||0} answer reveal${p.reveals===1?'':'s'} recorded locally.</small></div><small>An answer reveal is exposure only unless a choice was explicitly committed first; reveal alone never creates correctness or mastery evidence.</small>${q?scenarioAttemptMarkup(n,p,q):'<small>Released scenario data is unavailable for answer commitment.</small>'}`;
+    const commit=section.querySelector('[data-sec-scenario-commit]');
+    if(commit)commit.addEventListener('click',()=>{
+      const selected=section.querySelector('input[name="secx-scenario-choice"]:checked'),status=document.getElementById('status');
+      if(!selected){if(status)status.textContent=`Choose an option before committing ${n.id}.`;return}
+      if(commitScenarioAttempt(n.id,Number(selected.value))){decorateDetail();requestAnimationFrame(()=>detailMore.focus())}
+    });
   }else{
     const p=graphNodeState(n.id)||{};
     section.innerHTML=`<h3>Graph progress</h3><div class="sec-progress-row"><strong>Depth ${p.maxDepth||depth}/4</strong><small>${p.visits||1} visit${(p.visits||1)===1?'':'s'} · learner state stored separately from curriculum content.</small></div>`;
