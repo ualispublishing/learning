@@ -11,8 +11,9 @@ async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;whil
 function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
 function key(w,key,code=key,extra={}){const target=w.document.activeElement||w.document.body;target.dispatchEvent(new w.KeyboardEvent('keydown',{key,code,bubbles:true,cancelable:true,...extra}))}
 function inner(wrapper){const outer=wrapper.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow}}
-async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),input=x.d?.querySelector('#searchInput');return x.d&&x.w&&x.w.SECX_RELEASED_BANK_STATE?.ready&&input?.placeholder.includes('sources')&&input.getAttribute('role')==='combobox'&&input.getAttribute('aria-controls')==='searchResults'&&x.d.querySelector('#searchPaletteBtn')&&x.d.querySelector('#searchCloseBtn')&&x.d.querySelector('#sourceLensBtn')&&x.d.querySelector('#coverageLensBtn')?x:null},`${label} released projection search runtime`)}
+async function ready(wrapper,label){return waitFor(()=>{const x=inner(wrapper),input=x.d?.querySelector('#searchInput'),rels=x.w?.SECX_RELEASED_RELATIONSHIPS;return x.d&&x.w&&x.w.SECX_RELEASED_BANK_STATE?.ready&&Array.isArray(rels)&&rels.length===3&&input?.placeholder.includes('sources')&&input.placeholder.includes('reviewed links')&&input.getAttribute('role')==='combobox'&&input.getAttribute('aria-controls')==='searchResults'&&x.d.querySelector('#searchPaletteBtn')&&x.d.querySelector('#searchCloseBtn')&&x.d.querySelector('#sourceLensBtn')&&x.d.querySelector('#coverageLensBtn')&&x.d.querySelector('#relationshipLensBtn')?x:null},`${label} released projection search runtime`)}
 function node(d,id){return [...d.querySelectorAll('.node')].find(x=>x.dataset.id===id)}
+function routedFocus(d,id){const target=node(d,id);return target?.classList.contains('active')&&d.activeElement===target}
 async function search(d,w,q,predicate){key(w,'/','Slash');await waitFor(()=>!d.querySelector('#search').hidden,'search opens');const input=d.querySelector('#searchInput');await waitFor(()=>input.getAttribute('aria-expanded')==='true','combobox expanded state');input.value=q;input.dispatchEvent(new w.Event('input',{bubbles:true}));await waitFor(()=>[...d.querySelectorAll('.search-result')].find(predicate),`search hit ${q}`);await waitFor(()=>{const id=input.getAttribute('aria-activedescendant'),selected=d.querySelector('.search-result.active');return id&&selected&&selected.id===id},'combobox active descendant follows selected result');const liveHit=[...d.querySelectorAll('.search-result')].find(predicate);assert(liveHit,`live search hit ${q}`);liveHit.click();await waitFor(()=>d.querySelector('#search').hidden,`search closes after ${q} route`)}
 async function run(){
  const {d,w}=await ready(frame,'desktop');
@@ -21,6 +22,7 @@ async function run(){
  assert(desktopInput.getAttribute('aria-haspopup')==='listbox','desktop search exposes listbox popup');
  assert(desktopInput.getAttribute('aria-expanded')==='false','desktop search starts collapsed');
  assert(desktopButton.getAttribute('aria-controls')==='search'&&desktopButton.getAttribute('aria-expanded')==='false','desktop Search button exposes controlled collapsed palette');
+ assert(!w.performance.getEntriesByType('resource').some(e=>e.name.includes('RELATIONSHIP_REVIEW.json')),'projection search never fetches reviewer relationship registry');
  await search(d,w,'ISC2_OUTLINE',x=>x.textContent.includes('ISC2_OUTLINE')&&x.textContent.includes('Source Provenance'));
  await waitFor(()=>node(d,'source:ISC2_OUTLINE')&&node(d,'source:ISC2_OUTLINE:objectives')&&node(d,'source:ISC2_OUTLINE:cards')&&node(d,'source:ISC2_OUTLINE:scenarios')&&d.querySelector('#crumb')?.textContent.includes('Sources'),'source projection search routes to exact source hub facets');
  assert(desktopInput.getAttribute('aria-expanded')==='false'&&desktopButton.getAttribute('aria-expanded')==='false','search controls collapse after source routing');
@@ -29,9 +31,13 @@ async function run(){
  await waitFor(()=>node(d,'coverage:objective:1.1')?.classList.contains('active')&&d.querySelector('#crumb')?.textContent==='SecX › Coverage › D1','coverage objective search reconstructs D1 coverage and focuses 1.1');
  assert(!d.querySelector('#search')||d.querySelector('#search').hidden,'search closes after projection routing');
  assert(desktopInput.getAttribute('aria-expanded')==='false','combobox collapses after coverage routing');
+ await search(d,w,'REL-001',x=>x.textContent.includes('REL-001')&&x.textContent.includes('Reviewed Links'));
+ await waitFor(()=>routedFocus(d,'relationship:REL-001')&&node(d,'relationship:endpoint:REL-001:from')&&node(d,'relationship:endpoint:REL-001:to')&&d.querySelector('#crumb')?.textContent==='SecX › Reviewed Links › REL-001','released relationship projection search routes to exact REL-001 hub and stable endpoints');
+ assert((w.SECX_RELEASED_RELATIONSHIPS||[]).some(r=>r.id==='REL-001'),'REL-001 search result comes from released relationship runtime');
+ assert(!w.performance.getEntriesByType('resource').some(e=>e.name.includes('RELATIONSHIP_REVIEW.json')),'relationship search route still never fetches reviewer registry');
  const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mw=mobileApp.w;
  const mobileInput=md.querySelector('#searchInput'),mobileButton=md.querySelector('#searchPaletteBtn'),mobileClose=md.querySelector('#searchCloseBtn');
- assert(mobileInput?.placeholder.includes('coverage'),'mobile search advertises projection scope');
+ assert(mobileInput?.placeholder.includes('coverage')&&mobileInput.placeholder.includes('reviewed links'),'mobile search advertises explicit projection and reviewed-link scope');
  assert(mobileInput.getAttribute('role')==='combobox'&&mobileInput.getAttribute('aria-controls')==='searchResults','mobile search exposes combobox/listbox relationship');
  mobileButton.click();
  await waitFor(()=>!md.querySelector('#search').hidden&&mobileInput.getAttribute('aria-expanded')==='true'&&mobileButton.getAttribute('aria-expanded')==='true','mobile visible Search control opens palette');
@@ -66,7 +72,7 @@ async function run(){
  openAgain.click();
  await waitFor(()=>node(md,'1.1')&&md.querySelector('#crumb')?.textContent.includes('Security and Risk Management'),'mobile Open control descends from domain to objectives without Enter');
  assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile touch controls/objective layout have no horizontal overflow');
- result.dataset.smoke='pass';result.textContent='PASS SecX projection search smoke: source routing coverage-objective routing combobox-active-descendant visible Search/Close modal-focus containment one-reopen Escape/Close opener-focus-restore persistent mobile detail Close/Depth/Open';
+ result.dataset.smoke='pass';result.textContent='PASS SecX projection search smoke: source routing coverage-objective routing released-REL-001 routing reviewer-registry-isolated combobox-active-descendant visible Search/Close modal-focus containment one-reopen Escape/Close opener-focus-restore persistent mobile detail Close/Depth/Open';
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
