@@ -1,13 +1,13 @@
 # SecX keyboard knowledge-web prototype
 
-This is an isolated review prototype. It does not replace or alter the verified CISSP Atlas v1.28 production site.
+This is an isolated **review prototype**. It does not replace or alter the verified CISSP Atlas v1.28 production site.
 
 ## Review surfaces
 
-- `index.html` is the conservative objective/subtopic prototype.
-- `next.html` is the expanded review surface. It embeds `index.html`, then loads the Atlas-compatible review-card registry, card/scenario graph layer, learner state, Due Reviews, Study Queue, Source Provenance, Coverage, and Projection Search in dependency order.
+- `index.html` is the conservative objective/subtopic comparison surface.
+- `next.html` is the expanded review surface. It embeds `index.html`, then loads the Atlas-compatible review-card registry, released scenario layer, learner state, Due Reviews, Study Queue, Source Provenance, Coverage, Projection Search, and the separately promoted reviewed-relationship runtime in a fixed dependency order.
 
-The expanded surface is still review-only and is not the default prototype entry point or production Atlas.
+The expanded surface remains review-only. It is not the production Atlas surface and PR #133 remains draft/unmerged.
 
 ## Released-data boundaries
 
@@ -15,28 +15,38 @@ The prototype reuses released Atlas data rather than creating a second curriculu
 
 - **62** stable objectives from released domain chunks;
 - **344** enriched subtopic mappings from `coverage-detail.js`;
-- **140** Atlas-compatible review cards: generated `OBJ-<objective-id>` cards plus released high-yield/AI/precision cards;
-- released standard scenarios loaded only through `question-bank/RELEASED_BATCHES.json`;
-- **20** released source records from `CISSP_META.sources`.
+- **140** Atlas-compatible review cards;
+- **543** released standard scenarios loaded only through `question-bank/RELEASED_BATCHES.json`;
+- **20** released source records from `CISSP_META.sources`;
+- **3** relationship-specific, source-reviewed links promoted into the separate SecX review-prototype relationship artifact.
 
-`next-layer.js` is the single scenario release boundary. After loading only manifest-listed standard scenarios, it publishes a shared read-only-by-convention runtime snapshot:
+`next-layer.js` remains the single standard-scenario release boundary. It publishes:
 
 - `SECX_RELEASED_QUESTIONS`;
 - `SECX_RELEASED_BANK_STATE`;
-- `secx:released-bank` readiness event.
+- `secx:released-bank`.
 
-Source Provenance and Coverage consume that shared registry rather than fetching the question bank again. Candidate scenario files that are not in the released manifest remain excluded.
+Source Provenance and Coverage consume that shared scenario registry rather than reloading or discovering question-bank files.
 
-Current explicit mappings are:
+Semantic relationships use a separate boundary:
+
+- `RELATIONSHIP_REVIEW.json` — reviewer-only semantic-review registry; never learner-loaded;
+- `RELEASED_RELATIONSHIPS.json` — dedicated prototype promotion artifact;
+- `released-relationships.js` — frozen learner-runtime representation;
+- `relationship-release-audit.py` — exact review/promotion/runtime integrity gate;
+- `relationship-lens.js` — learner-facing review-prototype projection over only the released copy.
+
+Current explicit mappings are therefore:
 
 - domain → objective;
 - objective → subtopic;
 - objective → retrieval card;
 - objective → released scenario;
 - subtopic → released scenario only by exact explicit released subtopic tag;
-- source → objective/review card/released scenario only by exact `source_ids` membership.
+- source → objective/review card/released scenario only by exact `source_ids` membership;
+- relationship → stable released endpoint only after relationship-specific review and prototype promotion.
 
-No concept-level cross-domain semantic relationship is inferred from text similarity or co-citation.
+No semantic relationship is inferred from text similarity, co-citation, embeddings, shared labels, or Coverage proximity.
 
 ## Keyboard grammar
 
@@ -44,19 +54,20 @@ No concept-level cross-domain semantic relationship is inferred from text simila
 - Enter: descend.
 - Escape: close detail first, then ascend while preserving local context.
 - Space: cycle four disclosure depths.
-- `/`: search released domains/objectives/subtopics/cards/scenarios/sources/coverage projections.
+- `/`: search released curriculum/projections.
 - Home: return to SecX root.
 - `1–4`: grade an open review card using Atlas Wrong / Hard / Good / Easy semantics.
 - `R`: open **Due Reviews**.
 - `Q`: open **Study Queue**.
 - `S`: open **Source Provenance**.
 - `C`: open **Coverage**.
+- `L`: open **Reviewed Links**.
 
-Pointer/touch remains supported, actual browser focus follows keyboard selection, and `prefers-reduced-motion` is respected. The expanded review surface also provides visible Continue, Search/Close, and persistent detail Close/Depth/Open controls so keyboard-first does not become keyboard-only.
+Pointer/touch remains supported, browser focus follows routed graph selection, and `prefers-reduced-motion` is respected. The expanded surface also provides visible Continue, Search/Close, and persistent detail Close/Depth/Open controls so keyboard-first does not become keyboard-only.
 
-## Objective hub and released scenarios
+## Objective hubs and released scenarios
 
-The expanded objective hub exposes separate **Subtopics / Retrieval cards / Released scenarios** branches so unlike relationship types are not flattened together.
+Expanded objective hubs expose separate **Subtopics / Retrieval cards / Released scenarios** branches so unlike relationship types are not flattened together.
 
 Released scenarios are linked through explicit objective metadata and exact subtopic tags only. Scenario stem/options are available before answer reveal; the keyed answer and explanation remain at disclosure layer 4 so the graph stays retrieval-first.
 
@@ -70,31 +81,23 @@ Review-card grading reuses Atlas `cissp_atlas_progress_v1` and the same stage sc
 
 `0, 1, 3, 7, 14, 30, 60, 120` days.
 
-Graph-specific activity uses `cissp_secx_graph_state_v1` for visits, maximum disclosure depth, and scenario answer-reveal exposure.
+Graph-specific activity uses `cissp_secx_graph_state_v1` for visits, maximum disclosure depth, and scenario answer-reveal exposure. Relationship traversal may record separate graph visit/depth evidence, but it does not mutate Atlas mastery/progress state.
 
 A scenario answer reveal is exposure only. It is not correctness, an attempt result, mastery, readiness, or a spaced-review success grade.
 
 ### Due Reviews
 
-`R` or **Review due · N** opens a paged local graph of Atlas review cards whose existing `due <= today`.
-
-The queue uses no scenario/candidate data and no second scheduling algorithm. Grading updates the due count in the same tab.
+`R` or **Review due · N** opens a paged local graph of Atlas review cards whose existing `due <= today`. The queue uses no scenario/candidate data and no second scheduling algorithm.
 
 ### Study Queue
 
-`Q` or **Study · N due** opens five learner-state branches:
+`Q` or **Study · N due** opens five learner-state branches: Due reviews, New cards, Learning, Mature, and Lowest review-stage-score domain.
 
-- Due reviews;
-- New cards;
-- Learning;
-- Mature;
-- Lowest review-stage-score domain.
-
-The lowest-domain calculation mirrors Atlas objective/domain stage aggregation and higher-exam-weight tie-break. It is a study-priority signal, not proof of weakness or exam readiness.
+The lowest-domain calculation mirrors Atlas objective/domain stage aggregation and the higher-exam-weight tie-break. It is a study-priority signal, not proof of weakness or exam readiness.
 
 ### Continue
 
-The visible **Continue · …** control is a scheduling/navigation convenience over the same Atlas review-card state. It chooses work in this order:
+The visible **Continue · …** control chooses work in this order:
 
 1. currently due review card;
 2. Learning card;
@@ -102,59 +105,47 @@ The visible **Continue · …** control is a scheduling/navigation convenience o
 4. any remaining new card;
 5. Study Queue root when no due, learning, or new cards remain.
 
-For a selected card, Continue reuses the existing Study Queue ordering, opens the page containing that card, and leaves the card selected. It never auto-reveals an answer, auto-grades a card, writes a second learner-state record, or converts review stage into a mastery/readiness claim. An all-mature/future-due state falls back to Study Queue rather than manufacturing extra review work.
+Continue never auto-reveals an answer, auto-grades a card, creates a second learner-state record, or converts review stage into a mastery/readiness claim.
 
 ## Source Provenance
 
 `S` or **Sources · 20** opens the released source registry. See `SOURCE_PROVENANCE.md`.
 
-For a selected source, the lens exposes exact `source_ids` membership for:
+For a selected source, the lens exposes exact `source_ids` membership for released objectives, review cards, and manifest-released standard scenarios.
 
-- released objectives;
-- Atlas-compatible review cards;
-- manifest-released standard scenarios from the shared released-bank registry.
+Source scenario nodes are provenance-only. They can show the scenario prompt/options and citation mapping but never the keyed answer/explanation, and deepest Source disclosure must not record a scenario answer reveal.
 
-Source scenario nodes are provenance-only (`source-scenario`). They can show the scenario prompt/options and citation mapping but never the keyed answer/explanation, and deepest Source disclosure must not record a scenario answer reveal. To attempt/reveal a scenario, use its real objective → Released scenarios practice branch.
-
-The lens does not independently discover/fetch question-bank files or infer source membership from wording.
-
-A shared citation is provenance evidence only. It does not create a semantic relationship between the cited items, and a citation does not imply the source is the sole authority unless Atlas explicitly says so.
+A shared citation is provenance evidence only. It does not create a semantic relationship.
 
 ## Coverage
 
 `C` or **Coverage · N** opens a read-only corpus/practice-exposure projection. See `COVERAGE_LENS.md`.
 
-Coverage consumes the same shared released-scenario registry as the main graph and reports raw explicit counts by domain/objective, including enriched subtopics, review/supplemental cards, released scenarios, sources, exact scenario-tagged subtopics, and exact-tag practice-exposure gaps.
+Coverage reports explicit released counts by domain/objective. With the current released bank, **305/344** enriched subtopics have at least one exact released scenario tag and **39** are exact-tag practice-exposure gaps.
 
-Enter on the Coverage center opens a paged **Practice Exposure Gaps** view. A gap exists only when an enriched subtopic has no exact matching released scenario `subtopics` tag under its mapped objective. With the current released bank, **305/344** enriched subtopics have at least one exact released scenario tag and **39** are exact-tag gaps.
-
-Those 39 records are corpus-exposure observations only. They are not curriculum omissions, factual deficiencies, learner weakness, mastery/readiness signals, or semantic relationships. Coverage performs no independent network fetch and does not read learner progress.
+Those gaps are corpus-exposure observations only. They are not curriculum omissions, factual deficiencies, learner weakness, mastery/readiness signals, or semantic relationships.
 
 ## Projection Search
 
-Projection Search extends the existing `/` palette with exact Source Provenance, Coverage-domain, and Coverage-objective navigation entries. It routes into existing projection functions; it does not create curriculum edges or learner-state evidence.
+Projection Search extends `/` with exact Source Provenance, Coverage-domain, and Coverage-objective navigation entries. It routes into existing projection functions and does not create curriculum edges or learner-state evidence.
 
-The expanded search UI uses a combobox/listbox pattern with active-descendant state. Result options stay out of the Tab order; Tab/Shift+Tab remain contained between the search input and visible Close button while the palette is open. The visible Search button synchronously transfers focus into the input, and dismissing by Close or Escape restores focus to the opener when it still exists. Navigation through a selected search result clears the opener state so routed graph focus is preserved.
+The search UI uses a combobox/listbox pattern with active-descendant state, modal focus containment, visible Search/Close controls, and opener-focus restoration.
 
-## Touch detail actions
+## Reviewed semantic Links
 
-Expanded detail panels provide persistent **Close / Depth / Open** controls:
+`L` or **Links · 3** opens only relationships that passed the separate review + promotion pipeline.
 
-- **Close** delegates to the same ascend/cleanup path as Escape and returns focus to the selected graph node;
-- **Depth** cycles the same four disclosure layers as Space and preserves control focus across detail rerenders;
-- **Open** delegates to the same descend path as Enter when the selected node has a deeper graph context.
+The current prototype-released set is:
 
-These controls are review-layer affordances and do not change content relationships or learner-state semantics.
+- `REL-001`: `5.1 depends-on 1.8` — access control depends on personnel lifecycle signals for onboarding, transfer, and termination changes;
+- `REL-002`: `7.6 evidenced-by 7.2` — incident-management decisions use evidence from operational logging and monitoring;
+- `REL-003`: `7.10 depends-on 1.7` — recovery strategy depends on BIA/business-continuity requirements.
 
-## Semantic relationship gate
+The relationship lens displays the source-reviewed rationale, then exposes the two stable released endpoints. Opening an endpoint returns to that objective's normal Atlas graph context rather than creating a duplicate curriculum node.
 
-Future typed relationships such as `depends-on`, `contrasts-with`, `implemented-by`, `mitigates`, `measured-by`, `evidenced-by`, and `practiced-by` require relationship-specific review.
+`RELATIONSHIP_REVIEW.json` remains reviewer-only even though those three relationships have been separately promoted. New relationships cannot appear in the Links lens merely because their endpoints are VERIFIED or share sources/terminology.
 
-`RELATIONSHIP_REVIEW.json` is a reviewer-only draft registry and currently contains **zero relationships**. `next.html` does not load it. See `RELATIONSHIP_REVIEW.md`.
-
-Two items independently marked VERIFIED in Atlas semantic ledgers do not automatically have a verified relationship. Shared labels, search similarity, embeddings, shared `source_ids`, or coverage co-occurrence may at most identify a review lead; they cannot auto-approve an edge.
-
-Relationship endpoints must use durable released IDs. Temporary UI/projection IDs such as `sub:<objective>:<index>`, `source:*`, `source-item:*`, `study:*`, `due:*`, `coverage:*`, pagers, and facets are forbidden as semantic endpoints. This includes `coverage:gap:<objective>:<index>` projection IDs. A provenance node such as `source-item:scenario:C-472` refers to a stable scenario for navigation only; a reviewed semantic edge would target `C-472` itself.
+See `RELATIONSHIP_REVIEW.md` and `CONTENT_MODEL.md`.
 
 ## Progressive disclosure
 
@@ -167,29 +158,49 @@ Each node exposes four depths:
 
 Space changes depth without losing graph position.
 
+## Loader and failure behavior
+
+The expanded loader exposes `loading → ready/error` on the embedded conservative frame. The reviewed dependency chain now ends with:
+
+1. `projection-search.js`;
+2. `released-relationships.js`;
+3. `relationship-lens.js`;
+4. then `ready`.
+
+A resource failure or JavaScript execution failure produces an accessible assertive error while leaving the conservative knowledge web available. A later load callback cannot overwrite an earlier error.
+
+Dedicated browser smokes verify successful desktop/mobile readiness, a real HTTP-404 dependency failure, and a served-JavaScript execution failure. Fault-injection runners restore the original dependency and CI verifies a clean checkout afterward.
+
 ## Exact-head validation
 
 The draft includes deterministic gates for each major layer:
 
 - `audit.py` — released graph counts/mappings, manifest isolation, exact subtopic tags, answer boundary, learner-state compatibility;
+- `browser-fixtures-audit.py` — deterministic smoke fixtures;
 - `due-audit.py` — complete 140-card review registry and Due Reviews;
-- `study-audit.py` — Study Queue modes, production-compatible stage scoring, and Continue priority/routing contract;
-- `source-audit.py` — 20-source registry, exact objective/card/scenario `source_ids`, shared-bank use, provenance/state/answer isolation;
-- `coverage-audit.py` — Atlas count reconciliation, shared released-bank use, exact-tag exposure/gap recomputation, learner-state/semantic isolation;
-- `projection-search-audit.py` — explicit projection routing, combobox/listbox semantics, touch controls, focus containment/restoration, no learner-state/semantic coupling;
-- `relationship-audit.py` — stable endpoints, relationship-specific review requirements, and proof that reviewer-only relationship data is not learner-loaded.
+- `study-audit.py` — Study Queue and Continue priority/routing contract;
+- `source-audit.py` — exact Source Provenance mappings and answer/state isolation;
+- `coverage-audit.py` — count reconciliation and exact-tag exposure/gaps;
+- `projection-search-audit.py` — explicit projection routing/accessibility behavior;
+- `relationship-audit.py` — stable endpoints and relationship-specific review requirements;
+- `relationship-release-audit.py` — exact reviewer/promotion/runtime-copy integrity and reviewer-registry isolation;
+- release-boundary, hygiene, and completeness gates.
 
-Browser harnesses:
+Browser suites verify:
 
-- `browser-smoke.html` + `browser-smoke.sh` — expanded graph, cards, learner state, Due Reviews, Study Queue, scenarios, search, Home, mobile;
-- `continue-browser-smoke.html` + `continue-browser-smoke.sh` — deterministic Continue routing for fresh weakest-domain new, Learning, Due-over-Learning, caught-up Study Queue fallback, and mobile layout;
-- `source-browser-smoke.html` + `source-browser-smoke.sh` — source count, `S`, exact objective citation mapping, released-scenario provenance, answer-reveal isolation, Home, mobile;
-- `coverage-browser-smoke.html` + `coverage-browser-smoke.sh` — shared-bank count equality, visible Coverage control, `C`, 39-gap traversal/detail boundaries, eight-domain coverage, D1/objective `1.1`, Escape hierarchy, mobile;
-- `projection-search-smoke.html` + `projection-search-smoke.sh` — source/coverage projection routing, combobox state, modal focus containment/restoration, visible Search/Close, and persistent mobile detail controls.
+- expanded graph/cards/scenarios/learner state;
+- loader readiness;
+- Continue routing;
+- Source Provenance;
+- Coverage;
+- Projection Search;
+- Reviewed Links on desktop and 390px mobile;
+- loader HTTP-404 fallback;
+- loader JavaScript execution-error fallback.
 
-`.github/workflows/secx-prototype-smoke.yml` runs the production CISSP deterministic audit/browser smoke, all SecX deterministic/syntax gates, and all prototype browser harnesses against one exact candidate head.
+`.github/workflows/secx-prototype-smoke.yml` runs production CISSP preservation checks plus all SecX deterministic/syntax/browser gates against one exact candidate head.
 
-A browser PASS counts only when the committed gate actually executes against the exact candidate head. Static syntax checks are preflight evidence, not browser evidence.
+The last verified relationship-stage head before subsequent documentation-only cleanup was `e95ca2bcc60cb259201b1b4eaf565c5a7aa1b9f6`; **SecX Prototype Smoke #459 (`34699383500`) passed every required gate** on that exact SHA. Any later documentation head must pass the same exact-head workflow before being treated as current evidence.
 
 ## Production architecture rules
 
@@ -197,17 +208,17 @@ A browser PASS counts only when the committed gate actually executes against the
 2. Keep one manifest-enforced released-scenario loader and let read-only projections consume its shared runtime registry.
 3. Keep unreleased question candidates out of learner-facing runtime.
 4. Keep learner state separate from curriculum records.
-5. Treat Due Reviews, Study Queue, and Continue routing as learner-state projections/navigation, not curriculum edges or mastery claims.
+5. Treat Due Reviews, Study Queue, and Continue as learner-state projections/navigation, not curriculum edges or mastery claims.
 6. Treat Source Provenance as an exact citation projection, not a semantic cross-link generator.
-7. Treat Coverage counts and exact-tag gaps as corpus/practice-exposure projections, not learner scores, curriculum-deficiency claims, or semantic edge generators.
-8. Keep relationship candidate discovery, relationship review, release, and runtime publication as separate stages.
-9. Reject unknown IDs, invalid source references, temporary semantic endpoints, and reviewer-only relationship data in learner runtime.
+7. Treat Coverage counts/gaps as corpus/practice-exposure projections, not learner scores or semantic edge generators.
+8. Keep relationship candidate discovery, relationship review, prototype promotion, runtime publication, and any production migration as separate stages.
+9. Reject unknown IDs, invalid source references, temporary semantic endpoints, reviewer-registry loading, and review/release/runtime drift.
 10. Keep local graph mounting/pagination rather than rendering the entire corpus at once.
 11. Require deterministic and browser gates before any production migration.
 
 ## Promotion boundary
 
-`next.html` remains review-only. Do not replace `index.html`, merge to production, or claim browser validation until the exact candidate head passes the committed gates through a browser-capable runner.
+`next.html` remains review-only. Do not replace `index.html`, merge to production, mark the PR ready, or deploy merely because the review prototype gates pass. Production migration is a separate decision and validation boundary.
 
 ## Naming note
 
