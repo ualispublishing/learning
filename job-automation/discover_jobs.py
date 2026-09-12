@@ -76,6 +76,20 @@ EARLY_BODY_PATTERNS = (
     re.compile(r"\bentry[- ]level\b", re.I),
 )
 
+# A generic non-senior title (for example "Support Engineer") should not enter
+# the early-career queue when the posting itself clearly requires established
+# mid-career tenure. Explicit junior/new-grad/associate titles still take
+# precedence because some employers write aspirational experience ranges.
+MID_CAREER_BODY_PATTERNS = (
+    re.compile(r"\b3\s*[-–]\s*5\s+years?\b", re.I),
+    re.compile(r"\b3\s*[-–]\s*4\s+years?\b", re.I),
+    re.compile(r"\b3\+\s*years?\b", re.I),
+    re.compile(r"\b4\+\s*years?\b", re.I),
+    re.compile(r"\b5\+\s*years?\b", re.I),
+    re.compile(r"\bminimum of 3 years?\b", re.I),
+    re.compile(r"\bat least 3 years?\b", re.I),
+)
+
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
@@ -136,9 +150,18 @@ def is_early_career(title: str, body: str, employment_type: str = "") -> tuple[b
     if senior:
         return False, [f"seniority:{x.strip()}" for x in senior[:3]]
 
-    signals = text_has_any(title, EARLY_TITLE_TERMS)
+    title_signals = text_has_any(title, EARLY_TITLE_TERMS)
+    explicit_early_title = bool(title_signals)
+    signals = list(title_signals)
     if employment_type.lower() == "intern":
         signals.append("employment:intern")
+        explicit_early_title = True
+
+    if not explicit_early_title:
+        for pattern in MID_CAREER_BODY_PATTERNS:
+            match = pattern.search(body[:12000])
+            if match:
+                return False, [f"mid_career_requirement:{match.group(0)}"]
 
     for pattern in EARLY_BODY_PATTERNS:
         match = pattern.search(body[:12000])
