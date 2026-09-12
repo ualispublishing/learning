@@ -11,6 +11,7 @@ on:
       - 'scripts/workbook_release_passes_v6.py'
       - 'scripts/workbook_render_pass.py'
       - 'scripts/apply_language_workbook_linguistic_repairs.py'
+      - 'scripts/validate_language_workbook_ledger_csv.py'
       - 'audit/language-workbooks/v1.0/row_by_row/**'
       - 'audit/language-workbooks/v1.0/row_by_row_vocab/**'
       - '.github/workflows/build-language-workbooks-v1.yml'
@@ -27,6 +28,7 @@ on:
       - 'scripts/workbook_release_passes_v6.py'
       - 'scripts/workbook_render_pass.py'
       - 'scripts/apply_language_workbook_linguistic_repairs.py'
+      - 'scripts/validate_language_workbook_ledger_csv.py'
       - 'audit/language-workbooks/v1.0/row_by_row/**'
       - 'audit/language-workbooks/v1.0/row_by_row_vocab/**'
       - '.github/workflows/build-language-workbooks-v1.yml'
@@ -80,6 +82,10 @@ jobs:
       - name: Pass 2 — select 3,000 sentence corpus (max 5 min)
         shell: bash
         run: timeout --signal=TERM 300s python scripts/workbook_release_passes_v6.py corpus-select
+
+      - name: Pass 2.4 — adjudication ledger CSV shape integrity (max 1 min)
+        shell: bash
+        run: timeout --signal=TERM 60s python scripts/validate_language_workbook_ledger_csv.py
 
       - name: Pass 2.5 — validate and apply 6,000-row adjudications fail-closed (max 2 min)
         shell: bash
