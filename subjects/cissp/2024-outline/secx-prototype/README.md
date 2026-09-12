@@ -57,13 +57,14 @@ No semantic relationship is inferred from text similarity, co-citation, embeddin
 - `/`: search released curriculum/projections.
 - Home: return to SecX root.
 - `1–4`: grade an open review card using Atlas Wrong / Hard / Good / Easy semantics.
+- `1…N`: when an open scenario is still pre-reveal, commit that numbered answer option directly; this is contextual and does not change card grading semantics.
 - `R`: open **Due Reviews**.
 - `Q`: open **Study Queue**.
 - `S`: open **Source Provenance**.
 - `C`: open **Coverage**.
 - `L`: open **Reviewed Links**.
 
-Pointer/touch remains supported, browser focus follows routed graph selection, and `prefers-reduced-motion` is respected. The expanded surface also provides visible Continue, Search/Close, persistent detail Close/Depth/Open controls, and scenario option + **Commit answer** controls so keyboard-first does not become keyboard-only.
+Pointer/touch remains supported, browser focus follows routed graph selection, and `prefers-reduced-motion` is respected. The expanded surface also provides visible Continue, Search/Close, persistent detail Close/Depth/Open controls, and scenario radio-option + **Commit answer** controls so keyboard-first does not become keyboard-only.
 
 ## Objective hubs and released scenarios
 
@@ -71,7 +72,7 @@ Expanded objective hubs expose separate **Subtopics / Retrieval cards / Released
 
 Released scenarios are linked through explicit objective metadata and exact subtopic tags only. Scenario stem/options are available before answer reveal; the keyed answer and explanation remain at disclosure layer 4 so the graph stays retrieval-first.
 
-A scenario can now record correctness only through an explicit commitment workflow: select one option, activate **Commit answer**, then deliberately reveal layer 4. Commitment stores the selected option as an unscored pending attempt; layer 4 scores that pending choice once. A reveal with no pending commitment remains exposure only and does not create a scored attempt.
+A scenario can record correctness only through an explicit commitment workflow. The learner may select a radio option and activate **Commit answer**, or press contextual `1…N` while the scenario detail is open before reveal. Both paths call the same commitment logic: the selected option becomes one locked, unscored pending attempt; layer 4 scores that pending choice once. A reveal with no pending commitment remains exposure only and does not create a scored attempt.
 
 Large card/scenario branches are paged locally rather than mounting the full bank at once.
 
@@ -160,7 +161,7 @@ Each node exposes four depths:
 3. **Discriminate** — traps, misconceptions, contrasts, failure modes.
 4. **Apply / verify** — sources and application/practice.
 
-Space changes depth without losing graph position. For scenarios, explicit answer commitment can happen before layer 4; correctness is finalized only at layer 4, preserving the keyed-answer boundary.
+Space changes depth without losing graph position. For scenarios, explicit answer commitment can happen before layer 4 through either visible form controls or contextual numeric keys; correctness is finalized only at layer 4, preserving the keyed-answer boundary.
 
 ## Loader and failure behavior
 
@@ -180,7 +181,7 @@ Dedicated browser smokes verify successful desktop/mobile readiness, a real HTTP
 The draft includes deterministic gates for each major layer:
 
 - `audit.py` — released graph counts/mappings, manifest isolation, exact subtopic tags, answer boundary, learner-state compatibility, and explicit scenario-attempt commit/score isolation;
-- `browser-fixtures-audit.py` — deterministic smoke fixtures;
+- `browser-fixtures-audit.py` — deterministic smoke fixtures plus the contextual numeric scenario-commit contract;
 - `due-audit.py` — complete 140-card review registry and settled desktop/mobile Due Reviews entry focus;
 - `study-audit.py` — Study Queue and Continue priority/routing contract;
 - `source-audit.py` — exact Source Provenance mappings and answer/state isolation;
@@ -192,7 +193,7 @@ The draft includes deterministic gates for each major layer:
 
 Browser suites verify:
 
-- expanded graph/cards/scenarios/learner state, including explicit scenario commitment, depth-4 scoring, reveal-without-commit no-score behavior, and Atlas-progress isolation;
+- expanded graph/cards/scenarios/learner state, including numeric keyboard scenario commitment, depth-4 scoring, reveal-without-commit no-score behavior, and Atlas-progress isolation;
 - loader readiness;
 - Continue routing and mobile Due focus handoff;
 - Source Provenance;
@@ -204,7 +205,7 @@ Browser suites verify:
 
 `.github/workflows/secx-prototype-smoke.yml` runs production CISSP preservation checks plus all SecX deterministic/syntax/browser gates against one exact candidate head.
 
-The runtime attempt-workflow head `c5f055e9fbb32122f794c1b47a5a8a77b149b401` passed **SecX Prototype Smoke #497 (`34700688066`)** through every required gate, including production preservation, the explicit commit → depth-4 score boundary, reveal-without-commit no-score behavior, Source/Coverage/Search/Links regressions, and both loader fault-injection paths. Any later documentation head must pass the same exact-head workflow before being treated as current evidence.
+The runtime keyboard-attempt head `6e6e80f0f64c5996739d387a67a5b13da5f2c9f3` passed **SecX Prototype Smoke #509 (`34701176946`)** on an unchanged rerun through every required gate, including production preservation, contextual `1…N` scenario commitment, explicit commit → depth-4 score, reveal-without-commit no-score behavior, Source/Coverage/Search/Links regressions, and both loader fault-injection paths. The first run attempt ended while Coverage was still `RUNNING`; the unchanged rerun cleared Coverage and the full suite, so no Coverage assertion or harness requirement was weakened. Any later documentation head must pass the same exact-head workflow before being treated as current evidence.
 
 ## Production architecture rules
 
