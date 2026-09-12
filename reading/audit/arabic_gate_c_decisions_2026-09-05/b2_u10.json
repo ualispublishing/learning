@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "B2",
+  "unit": 10,
+  "date": "2026-09-12",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/b2/passages.jsonl",
+  "canonical_sha256": "cf562e08a99a1a109c4635cfc31af873b3865d1a6b3d1fa02cf4a36467886c97",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 0,
+  "fresh_findings": 0,
+  "decisions": [
+    {"passage_id":"ar-b2-u10-p01","learner_facing_sha256":"1c13741cbfae257e0a4773ccd0a2375546af50a4439bcddecf101a73dbd3e688","decision":"PASS","qa_pairs_reviewed":10,"finding_count":0,"findings":[]},
+    {"passage_id":"ar-b2-u10-p02","learner_facing_sha256":"3481315960142620fb8c7c911f8e85ff1ca06605c917950cc2b210361c4ad1c2","decision":"PASS","qa_pairs_reviewed":10,"finding_count":0,"findings":[]},
+    {"passage_id":"ar-b2-u10-p03","learner_facing_sha256":"91ed5f318070b4f5bb6c81ba40f632bfd69def29faebcbecbebf696749daa7ba","decision":"PASS","qa_pairs_reviewed":10,"finding_count":0,"findings":[]},
+    {"passage_id":"ar-b2-u10-p04","learner_facing_sha256":"c4dab22e4906d4fb46c04800143797390d213dfec378024cc704af48305b1d7c","decision":"PASS","qa_pairs_reviewed":10,"finding_count":0,"findings":[]},
+    {"passage_id":"ar-b2-u10-p05","learner_facing_sha256":"5278963679f9d1affe59bc8a1d4702b3dbe04b0f3c29ffdd5994e88e4fba9897","decision":"PASS","qa_pairs_reviewed":10,"finding_count":0,"findings":[]},
+    {"passage_id":"ar-b2-u10-p06","learner_facing_sha256":"7336e796894a44ec2ae68fe5572c01956e31ba08e41d83150e2020063d88871f","decision":"PASS","qa_pairs_reviewed":10,"finding_count":0,"findings":[]}
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions bind by the authoritative exact-current Gate B inventory hashes and current B2 Git blob. All six B2 Unit 10 records passed comprehension and answer-grounding review without learner-facing mutation. Unit 10 passage 4 asks for three data controls while its stored key lists five, and passage 6 asks for five capstone skills while its stored key lists six; every listed item is text-grounded, so both over-complete reference keys remain unambiguous and pedagogically valid under the current assessment standard."
+}
