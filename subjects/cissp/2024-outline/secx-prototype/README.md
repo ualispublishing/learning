@@ -132,7 +132,9 @@ Those gaps are corpus-exposure observations only. They are not curriculum omissi
 
 Projection Search extends `/` with exact Source Provenance, Coverage-domain, Coverage-objective, and prototype-released Reviewed Link navigation entries. Relationship search indexes only `window.SECX_RELEASED_RELATIONSHIPS` after the relationship runtime signals readiness and routes by stable `REL-*` ID into the existing Links hub.
 
-Projection Search never loads `RELATIONSHIP_REVIEW.json` or raw `RELEASED_RELATIONSHIPS.json`, never discovers relationship candidates, and never turns wording similarity or search proximity into a semantic edge. The browser gate explicitly searches `REL-001`, routes to its reviewed hub, verifies both stable endpoints, and rechecks reviewer-registry isolation.
+For Reviewed Links, endpoint IDs are additionally resolved against the already loaded released objective registry and their human-readable objective labels are included as search/display text when available. Stable IDs remain the routing authority. For example, searching **Personnel security** can surface the already released `REL-001` entry while still routing by `REL-001`; the label does not create or approve a relationship.
+
+Projection Search never loads `RELATIONSHIP_REVIEW.json` or raw `RELEASED_RELATIONSHIPS.json`, never discovers relationship candidates, and never turns wording similarity or search proximity into a semantic edge. The browser gate explicitly searches `Personnel security`, requires `REL-001` plus both released endpoint labels in the rendered result, routes to its reviewed hub, verifies both stable endpoints, and rechecks reviewer-registry isolation.
 
 The search UI uses a combobox/listbox pattern with active-descendant state, modal focus containment, visible Search/Close controls, and opener-focus restoration.
 
@@ -186,7 +188,7 @@ The draft includes deterministic gates for each major layer:
 - `study-audit.py` — Study Queue and Continue priority/routing contract;
 - `source-audit.py` — exact Source Provenance mappings and answer/state isolation;
 - `coverage-audit.py` — count reconciliation and exact-tag exposure/gaps;
-- `projection-search-audit.py` — explicit Source/Coverage/released-Link routing, reviewer-registry isolation, and accessibility behavior;
+- `projection-search-audit.py` — explicit Source/Coverage/released-Link routing, released-objective endpoint-label lookup, reviewer-registry isolation, and accessibility behavior;
 - `relationship-audit.py` — stable endpoints and relationship-specific review requirements;
 - `relationship-release-audit.py` — exact reviewer/promotion/runtime-copy integrity and reviewer-registry isolation;
 - release-boundary, hygiene, and completeness gates.
@@ -198,14 +200,14 @@ Browser suites verify:
 - Continue routing and mobile Due focus handoff;
 - Source Provenance;
 - Coverage;
-- Projection Search including exact `REL-001` routing;
+- Projection Search including human-readable endpoint-label discovery of exact released `REL-001` routing;
 - Reviewed Links on desktop and 390px mobile;
 - loader HTTP-404 fallback;
 - loader JavaScript execution-error fallback.
 
 `.github/workflows/secx-prototype-smoke.yml` runs production CISSP preservation checks plus all SecX deterministic/syntax/browser gates against one exact candidate head.
 
-The runtime keyboard-attempt head `6e6e80f0f64c5996739d387a67a5b13da5f2c9f3` passed **SecX Prototype Smoke #509 (`34701176946`)** on an unchanged rerun through every required gate, including production preservation, contextual `1…N` scenario commitment, explicit commit → depth-4 score, reveal-without-commit no-score behavior, Source/Coverage/Search/Links regressions, and both loader fault-injection paths. The first run attempt ended while Coverage was still `RUNNING`; the unchanged rerun cleared Coverage and the full suite, so no Coverage assertion or harness requirement was weakened. Any later documentation head must pass the same exact-head workflow before being treated as current evidence.
+Exact-head candidate `7bded1f99ca589a1bb10ec26139fdaf4a16267ea` passed **SecX Prototype Smoke #527 (`34762043774`)** through every required gate, including production preservation, contextual `1…N` scenario commitment, human-readable Reviewed Link endpoint-label search, Source/Coverage/Search/Links regressions, and both loader fault-injection paths.
 
 ## Production architecture rules
 
