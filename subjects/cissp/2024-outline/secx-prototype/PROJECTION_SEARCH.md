@@ -15,6 +15,8 @@ Existing curriculum/card/scenario search remains owned by the base graph and `ne
 
 Relationship projection entries are not built from reviewer data or repository discovery. `projection-search.js` loads before the relationship runtime, listens for the `secx:relationships-ready` event emitted after the reviewed relationship lens is initialized, then adds only the already prototype-released relationship IDs/content from the frozen runtime copy.
 
+For learner-facing discoverability, a released relationship entry also resolves each endpoint ID against the already loaded released objective registry and includes the objective label when that endpoint is a released objective. Stable IDs remain the routing authority; labels are search/display text only. A non-objective endpoint therefore remains searchable by its stable ID/runtime content rather than receiving an invented label.
+
 ## Routing
 
 Selecting a projection search result reconstructs an existing lens rather than creating a new graph relationship:
@@ -26,7 +28,7 @@ Selecting a projection search result reconstructs an existing lens rather than c
 
 The search layer preserves the previous `navigateSearch` handler for all existing curriculum/card/scenario result kinds.
 
-For example, searching `REL-001` routes to `relationship:REL-001` and its two stable released endpoints. Search does not create a second relationship record or duplicate either endpoint.
+For example, `REL-001` is still routed by its released relationship ID, but its search result also exposes the released endpoint labels **Physical and logical access control** and **Personnel security**. Searching a human-readable endpoint concept such as `Personnel security` can therefore discover that already released Reviewed Link without creating or inferring a new relationship.
 
 ## Semantic boundary
 
@@ -39,11 +41,12 @@ Projection search must not:
 - directly read/fetch raw `RELEASED_RELATIONSHIPS.json`;
 - discover candidate relationships;
 - read or write learner progress/state;
+- invent endpoint labels that are absent from released runtime/registry data;
 - invent source membership;
 - invent objective/domain mappings;
 - use fuzzy/similarity scores, co-citation, coverage proximity, or shared wording as relationship evidence.
 
-Source and Coverage content continue to be populated by their existing explicit released-data rules. Relationship search content comes only from the separate audited prototype release/runtime channel.
+Source and Coverage content continue to be populated by their existing explicit released-data rules. Relationship search content comes only from the separate audited prototype release/runtime channel plus released objective labels already loaded by the base Atlas graph.
 
 ## Accessibility and focus
 
@@ -58,14 +61,14 @@ Projection Search keeps the existing combobox/listbox behavior:
 
 ## Validation
 
-`projection-search-audit.py` checks explicit Source/Coverage/Reviewed-Link target kinds, existing-lens routing, released-relationship-runtime provenance, relationship-runtime readiness signaling, load order, preservation of prior search routing, learner-state isolation, reviewer-registry isolation, raw-release-JSON isolation, and the prohibition on inferred relationship helpers.
+`projection-search-audit.py` checks explicit Source/Coverage/Reviewed-Link target kinds, existing-lens routing, released-relationship-runtime provenance, released-objective endpoint-label lookup, relationship-runtime readiness signaling, load order, preservation of prior search routing, learner-state isolation, reviewer-registry isolation, raw-release-JSON isolation, and the prohibition on inferred relationship helpers.
 
 `projection-search-smoke.html` / `projection-search-smoke.sh` exercise:
 
 - `/` search for `ISC2_OUTLINE` into its Source Provenance hub;
 - Escape back to root;
 - `/` search for Coverage objective `1.1` into D1 Coverage with that exact objective focused;
-- `/` search for prototype-released `REL-001` into its existing Reviewed Links hub with both stable endpoints present;
+- `/` search for the human-readable endpoint label `Personnel security`, requiring the displayed result to identify `REL-001` plus both released endpoint labels before routing into its existing Reviewed Links hub with both stable endpoints present;
 - confirmation that the reviewer registry is never fetched before or after relationship search routing;
 - combobox/listbox focus behavior and persistent pointer/touch controls on the 390px mobile shell.
 
