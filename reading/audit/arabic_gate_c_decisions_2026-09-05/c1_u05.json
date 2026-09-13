@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "project_id": "LANG-A1C2",
+  "language": "arabic",
+  "level": "C1",
+  "unit": 5,
+  "date": "2026-09-13",
+  "gate": "Gate C — comprehension and answer-grounding audit",
+  "canonical_path": "reading/arabic/c1/passages.jsonl",
+  "canonical_sha256": "59bb35d810ee046a14bf6b45fe3481a70f41bf48c8d831735ebdb54f3405ed27",
+  "records_reviewed": 6,
+  "qa_pairs_reviewed": 60,
+  "records_with_findings": 0,
+  "fresh_findings": 0,
+  "decisions": [
+    {"passage_id":"ar-c1-u05-p01","learner_facing_sha256":"d82ec92e01ba3cfa1264d3dafc72a01657699e37492a23a4e79ad04bbf2bcffd","decision":"PASS","qa_pairs_reviewed":10,"finding_count":0,"findings":[]},
+    {"passage_id":"ar-c1-u05-p02","learner_facing_sha256":"00899a97ed13ff3fe06b1de5751ebe8856ec501811c2dd35f3f3880b5eae642c","decision":"PASS","qa_pairs_reviewed":10,"finding_count":0,"findings":[]},
+    {"passage_id":"ar-c1-u05-p03","learner_facing_sha256":"9b9bdc945858300bb48a2d7294f53770c7a797c05c00c1b9a9f726deb0d59c6d","decision":"PASS","qa_pairs_reviewed":10,"finding_count":0,"findings":[]},
+    {"passage_id":"ar-c1-u05-p04","learner_facing_sha256":"2fa0a4e80c2347cbcb44b38a6935245ceb93c00d86acbc74972681a1704351a5","decision":"PASS","qa_pairs_reviewed":10,"finding_count":0,"findings":[]},
+    {"passage_id":"ar-c1-u05-p05","learner_facing_sha256":"843d255c43dad5ddbf4661fe2aad92d8590a5200ecb082b1cf1a3c67bb66a21a","decision":"PASS","qa_pairs_reviewed":10,"finding_count":0,"findings":[]},
+    {"passage_id":"ar-c1-u05-p06","learner_facing_sha256":"112313e16f9476e4c69a39ea5042ff363dda0ba46fe9966b0488c258846f4c63","decision":"PASS","qa_pairs_reviewed":10,"finding_count":0,"findings":[]}
+  ],
+  "quality_promotion": false,
+  "release_claim": false,
+  "guard": "Fresh Gate C decisions bind by the authoritative exact-current Gate B inventory hashes and current C1 Git blob. All six C1 Unit 5 records passed comprehension and answer-grounding review without learner-facing mutation. The historical Unit 5 Gate B packet records an older whole-file canonical SHA, while its exact learner-facing record hashes match the authoritative current inventory; Gate C therefore binds to current C1 SHA-256 59bb35d810ee046a14bf6b45fe3481a70f41bf48c8d831735ebdb54f3405ed27 and Git blob 3a683721e0d75f9132ae6544a9f35398c171a5cd. Questions and stored reference answers remain text-grounded across preliminary evidence, gradual effects, causal-model discrimination, streaming-data missingness, emerging signals, and cumulative uncertainty communication; no count-sensitive key mismatch required special adjudication in this unit."
+}
