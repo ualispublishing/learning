@@ -31,8 +31,8 @@ async function run(){
  await waitFor(()=>node(d,'coverage:objective:1.1')?.classList.contains('active')&&d.querySelector('#crumb')?.textContent==='SecX › Coverage › D1','coverage objective search reconstructs D1 coverage and focuses 1.1');
  assert(!d.querySelector('#search')||d.querySelector('#search').hidden,'search closes after projection routing');
  assert(desktopInput.getAttribute('aria-expanded')==='false','combobox collapses after coverage routing');
- await search(d,w,'REL-001',x=>x.textContent.includes('REL-001')&&x.textContent.includes('Reviewed Links'));
- await waitFor(()=>routedFocus(d,'relationship:REL-001')&&node(d,'relationship:endpoint:REL-001:from')&&node(d,'relationship:endpoint:REL-001:to')&&d.querySelector('#crumb')?.textContent==='SecX › Reviewed Links › REL-001','released relationship projection search routes to exact REL-001 hub and stable endpoints');
+ await search(d,w,'Personnel security',x=>x.textContent.includes('REL-001')&&x.textContent.includes('Physical and logical access control')&&x.textContent.includes('Personnel security')&&x.textContent.includes('Reviewed Links'));
+ await waitFor(()=>routedFocus(d,'relationship:REL-001')&&node(d,'relationship:endpoint:REL-001:from')&&node(d,'relationship:endpoint:REL-001:to')&&d.querySelector('#crumb')?.textContent==='SecX › Reviewed Links › REL-001','human-readable endpoint-label search routes to exact REL-001 hub and stable endpoints');
  assert((w.SECX_RELEASED_RELATIONSHIPS||[]).some(r=>r.id==='REL-001'),'REL-001 search result comes from released relationship runtime');
  assert(!w.performance.getEntriesByType('resource').some(e=>e.name.includes('RELATIONSHIP_REVIEW.json')),'relationship search route still never fetches reviewer registry');
  const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mw=mobileApp.w;
@@ -72,7 +72,7 @@ async function run(){
  openAgain.click();
  await waitFor(()=>node(md,'1.1')&&md.querySelector('#crumb')?.textContent.includes('Security and Risk Management'),'mobile Open control descends from domain to objectives without Enter');
  assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,'mobile touch controls/objective layout have no horizontal overflow');
- result.dataset.smoke='pass';result.textContent='PASS SecX projection search smoke: source routing coverage-objective routing released-REL-001 routing reviewer-registry-isolated combobox-active-descendant visible Search/Close modal-focus containment one-reopen Escape/Close opener-focus-restore persistent mobile detail Close/Depth/Open';
+ result.dataset.smoke='pass';result.textContent='PASS SecX projection search smoke: source routing coverage-objective routing released-REL-001-human-label routing reviewer-registry-isolated combobox-active-descendant visible Search/Close modal-focus containment one-reopen Escape/Close opener-focus-restore persistent mobile detail Close/Depth/Open';
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
