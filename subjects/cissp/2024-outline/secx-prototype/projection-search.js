@@ -39,15 +39,22 @@ function coverageEntries(){
   return [...domainEntries,...objectiveEntries];
 }
 
+function relationshipEndpointLabel(id){
+  const objective=typeof objectiveById==='object'&&objectiveById?objectiveById[id]:null;
+  return objective?.label||'';
+}
 function relationshipEntries(){
   const records=Array.isArray(window.SECX_RELEASED_RELATIONSHIPS)?window.SECX_RELEASED_RELATIONSHIPS:[];
-  return records.map(r=>({
-    kind:'relationship-projection',
-    title:`${r.id} · ${r.from_id} ${r.type} ${r.to_id}`,
-    path:'Reviewed Links',
-    text:`reviewed link ${r.id} ${r.from_id} ${r.type} ${r.to_id} ${r.rationale||''}`,
-    relationshipId:r.id
-  }));
+  return records.map(r=>{
+    const fromLabel=relationshipEndpointLabel(r.from_id),toLabel=relationshipEndpointLabel(r.to_id);
+    return{
+      kind:'relationship-projection',
+      title:`${r.id} · ${r.from_id}${fromLabel?` ${fromLabel}`:''} ${r.type} ${r.to_id}${toLabel?` ${toLabel}`:''}`,
+      path:'Reviewed Links',
+      text:`reviewed link ${r.id} ${r.from_id} ${fromLabel} ${r.type} ${r.to_id} ${toLabel} ${r.rationale||''}`,
+      relationshipId:r.id
+    };
+  });
 }
 
 function rebuildProjectionSearch(){addProjectionEntries([...sourceEntries(),...coverageEntries(),...relationshipEntries()])}
