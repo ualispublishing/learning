@@ -39,7 +39,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: language-workbooks-v1-${{ github.event.pull_request.head.ref || github.ref_name }}
+  group: language-workbooks-v1-${{ github.event_name }}-${{ github.event.pull_request.head.ref || github.ref_name }}
   cancel-in-progress: true
 
 permissions:
@@ -173,7 +173,7 @@ jobs:
             urdu_top1000.csv
 
       - name: Commit verified outputs to release branch
-        if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref_name == 'release/language-workbooks-v1-final')
+        if: github.event_name == 'pull_request' || (github.event_name == 'push' && (github.ref_name == 'release/language-workbooks-v1-final' || github.ref_name == 'lang-wb/french-post-audit-repairs-20260910'))
         shell: bash
         run: |
           set -euo pipefail
