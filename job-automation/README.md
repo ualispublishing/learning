@@ -16,7 +16,7 @@ The repository has a plugin-free discovery worker:
 - Health/status output: `job-automation/discovery_status.json`
 - Schedule: every six hours at minute 17 in `America/Toronto`, plus manual `workflow_dispatch` and relevant code/config pushes.
 - Providers currently supported: public Greenhouse, Lever and Ashby job-board APIs.
-- Current source set: 37 employer boards, including established Canadian and Canada-hiring technology employers.
+- Current source set: 45 employer boards, including established Canadian and Canada-hiring technology employers.
 - Candidate mode: `graduated_2026_new_grad_junior`.
 - Scope: public Canada/remote-Canada technology opportunity discovery and first-pass early-career triage only.
 
@@ -28,7 +28,7 @@ The graduated filter removes student-only internship/co-op roles and rejects obv
 
 ## Verified runtime state
 
-The expanded 37-source configuration and the tightened priority model have both completed successful GitHub Actions runs. The expanded validation run reached 37/37 public sources with zero source failures. The priority-model validation also completed successfully after the level/seniority penalties were added.
+The scheduled discovery configuration is intentionally expanded over time with stable official ATS boards from legitimate employers. The current 45-source configuration includes Rival Technologies and Quora in addition to the previously validated source set. Runtime health and exact source-success counts must be read from `discovery_status.json`; do not assume a source is healthy merely because it is listed in configuration.
 
 Runtime counts are intentionally read from `discovery_status.json` and `actionable.json` rather than hard-coded here because they change each scheduled run.
 
