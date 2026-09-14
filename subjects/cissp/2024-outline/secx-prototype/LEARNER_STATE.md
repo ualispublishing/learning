@@ -146,7 +146,7 @@ Likewise, due status is a scheduling fact only. It must not be promoted into a s
 - Scenario details expose an explicit option-selection + **Commit answer** control before layer 4.
 - On an open pre-reveal scenario, contextual `1…N` commits that numbered option directly through the same commitment logic as the visible control.
 - A committed scenario choice is locked until it is scored at layer 4; if the page reloads first, reopening that scenario must restore the same locked pending choice without exposing a second Commit control.
-- Scenario-node badges may show attempt and reveal counts, but these are practice/activity evidence rather than mastery labels.
+- A scenario node with a locked unscored commitment shows a distinct `pending` badge with committed/scored counts. That pending label must survive reload while the commitment remains unscored and disappear only after the pending attempt is scored; ordinary attempted badges continue to show committed/scored/reveal evidence without implying mastery.
 - The Due Reviews control shows the current released-card due count.
 - `R` opens a local graph containing only currently due released retrieval cards.
 - **Continue** routes due → learning → lowest-review-score-domain new → any new → Study Queue using Atlas state only.
@@ -154,7 +154,7 @@ Likewise, due status is a scheduling fact only. It must not be promoted into a s
 - Continue transfers DOM focus from its visible control to the routed active card or Study Queue root, including the mobile layout.
 - Escape preserves focus continuity upward: Study card → Study Queue root → SecX root, or Study Queue root → SecX root.
 - Graph nodes may show the deepest disclosure layer previously reached.
-- Scenario nodes may show answer-reveal exposure and explicit-attempt counts, with exposure and scored outcomes kept distinct.
+- Scenario badges and details may show answer-reveal exposure and explicit-attempt counts, with pending, exposure, and scored outcomes kept distinct.
 - The footer may show the number of currently due released retrieval cards.
 
 ## Validation requirements
@@ -171,10 +171,10 @@ Before the learner-state/due-review layer can replace the conservative prototype
 
 The deterministic learner audits must verify that `SECX_LEARNER` is frozen/read-only, that Due/Study consumers do not directly parse/write local storage, that shared status helpers remain the source for due/learning/mature classification, and that scenario attempt mutation methods are not exposed through the learner API.
 
-The browser-fixture preflight additionally verifies that the sampled scenario has 2–9 keyboard-routable options, that the runtime still maps numeric scenario keys through the explicit commitment mutator, that the visible mobile Commit path remains present, and that the browser smoke still performs the pending-commitment full-reload persistence proof before layer-4 scoring.
+The browser-fixture preflight additionally verifies that the sampled scenario has 2–9 keyboard-routable options, that the runtime still maps numeric scenario keys through the explicit commitment mutator, that the visible mobile Commit path remains present, that scenario nodes distinguish pending from completed attempt evidence, and that the browser smoke still performs the pending-commitment full-reload persistence proof before layer-4 scoring.
 
 The expanded smoke must verify card-grade persistence, same-window due-count refresh, `R` routing into the due-card branch, the separate graph-state key, the depth-4 scenario answer gate, and the explicit-attempt boundary. It must commit a deterministic desktop scenario choice through the contextual numeric shortcut, prove that choice is stored unscored before layer 4, prove it is scored exactly once at layer 4, prove Atlas progress is unchanged, and prove that a later reveal without a new commitment increases exposure without increasing the scored-attempt count.
 
-The expanded smoke must also exercise the pointer/touch-equivalent 390px path through visible controls: select a radio answer, activate **Commit answer**, prove the pending choice is locked/unscored and focus moves to **Depth**, reload the mobile review surface before reveal, prove the same choice and commit timestamp survive with no new attempt/correctness/Atlas mutation, reopen the scenario and prove the persisted choice is still locked and answer-hidden, then reach layer 4 through visible **Depth** and score that one original commitment exactly once without horizontal overflow.
+The expanded smoke must also exercise the pointer/touch-equivalent 390px path through visible controls: select a radio answer, activate **Commit answer**, prove the pending choice is locked/unscored, prove the scenario node visibly reports `pending`, and prove focus moves to **Depth**. It must then reload the mobile review surface before reveal, prove the same choice and commit timestamp survive with no new attempt/correctness/Atlas mutation, navigate back to the scenario branch and prove the node still reports `pending`, reopen the scenario and prove the persisted choice is still locked and answer-hidden, then reach layer 4 through visible **Depth**, score that one original commitment exactly once, and prove the scenario badge clears `pending` while retaining ordinary scored-attempt evidence, all without horizontal overflow.
 
 The Continue smoke must additionally verify the frozen API surface, absence of mutation methods, frozen card snapshots, same-window storage resynchronization, fresh-state weakest-domain new routing, Learning fallback, Due priority over simultaneous Learning work, caught-up fallback to Study Queue, visible-button-to-routed-node DOM focus transfer, Escape ascent focus continuity through Study Queue to SecX, desktop/mobile coverage, and mobile layout without introducing a second learner-state store.
