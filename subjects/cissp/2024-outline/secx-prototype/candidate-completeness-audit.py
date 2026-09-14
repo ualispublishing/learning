@@ -10,6 +10,8 @@ ROOT = Path(__file__).resolve().parents[4]
 PROTO = ROOT / "subjects/cissp/2024-outline/secx-prototype"
 WORKFLOW = ROOT / ".github/workflows/secx-prototype-smoke.yml"
 NEXT = PROTO / "next.html"
+PREVIEW = PROTO / "serve-preview.py"
+MANUAL_TESTING = PROTO / "MANUAL_TESTING.md"
 
 EXPECTED_RUNTIME = [
     "../study-site/data-ai.js",
@@ -93,6 +95,8 @@ def main() -> None:
     prefix = "subjects/cissp/2024-outline/secx-prototype/"
     workflow = WORKFLOW.read_text(encoding="utf-8")
     next_html = NEXT.read_text(encoding="utf-8")
+    preview = PREVIEW.read_text(encoding="utf-8")
+    manual_testing = MANUAL_TESTING.read_text(encoding="utf-8")
 
     require(next_html.count('src="index.html"') == 1, "next.html must embed conservative index.html exactly once")
 
@@ -117,6 +121,17 @@ def main() -> None:
     require(changed_js == LOCAL_RUNTIME, f"local runtime JS set drifted or contains an orphan: expected={sorted(LOCAL_RUNTIME)} actual={sorted(changed_js)}")
     for name in LOCAL_RUNTIME:
         require((PROTO / name).is_file(), f"local runtime dependency is missing: {name}")
+
+    require('SERVE_ROOT = PROTO.parent' in preview, "manual preview must serve from the 2024-outline root")
+    require('("127.0.0.1", args.port)' in preview, "manual preview must bind to localhost only")
+    require('0.0.0.0' not in preview, "manual preview must not expose a wildcard network bind")
+    require('/secx-prototype/next.html' in preview, "manual preview must open the expanded review surface")
+    require('webbrowser.open(url)' in preview, "manual preview must expose its exact test URL to the local browser")
+    require('serve-preview.py' in workflow and 'python -m py_compile subjects/cissp/2024-outline/secx-prototype/serve-preview.py' in workflow, "manual preview launcher is not syntax-gated in exact-head CI")
+    require('SecX manual preview launcher smoke' in workflow and 'http://127.0.0.1:8866/secx-prototype/next.html' in workflow, "manual preview launcher is not HTTP-smoke-gated in exact-head CI")
+    require('python3 subjects/cissp/2024-outline/secx-prototype/serve-preview.py' in manual_testing, "manual testing doc is missing the one-command preview launcher")
+    require('http://127.0.0.1:8000/secx-prototype/next.html' in manual_testing, "manual testing doc is missing the default localhost URL")
+    require('file://' in manual_testing, "manual testing doc must warn against direct file loading")
 
     audit_paths = [
         path
@@ -153,7 +168,8 @@ def main() -> None:
         "PASS secx_candidate_completeness_audit "
         f"runtime_dependencies={len(EXPECTED_RUNTIME)} local_runtime_js={len(LOCAL_RUNTIME)} "
         f"candidate_audits={len(audit_paths)} browser_smokes={len(smoke_shells)} "
-        "entrypoint=ordered+single-load+fail-visible reviewer_only=isolated workflow=fully-wired"
+        "entrypoint=ordered+single-load+fail-visible reviewer_only=isolated "
+        "manual_preview=localhost-only+syntax-gated+http-smoked workflow=fully-wired"
     )
 
 
