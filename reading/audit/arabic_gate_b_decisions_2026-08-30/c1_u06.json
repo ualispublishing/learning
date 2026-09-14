@@ -46,7 +46,7 @@
     },
     {
       "passage_id": "ar-c1-u06-p03",
-      "learner_facing_sha256": "9f333c90786997ab2f9b681cf56889698f6491ac28cb937b40b395d154de3aa2",
+      "learner_facing_sha256": "1cc8d190381ecf7152d745351d5c89c3027bc68350f909666c3910ca8c83cc40",
       "decision": "PASS",
       "finding_count": 0,
       "findings": []
@@ -102,5 +102,17 @@
   ],
   "quality_promotion": false,
   "release_claim": false,
-  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate C1 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval."
+  "guard": "Learner-facing hashes come only from the freshly rebuilt authoritative Gate B inventory and are independently revalidated by the progress synchronizer. Legitimate C1 grammar-in-context/discourse analysis is retained; this internal Gate B pass does not constitute educator/publication release approval.",
+  "post_gate_c_revalidations": [
+    {
+      "date": "2026-09-14",
+      "gate_c_artifact": "reading/audit/arabic_gate_c_decisions_2026-09-05/c1_u06.json",
+      "scope": [
+        "ar-c1-u06-p03 answer q1"
+      ],
+      "gate_b_language_recheck": "PASS",
+      "reason": "Gate C replaced one text-grounded but wrong-form causal answer with a direct declarative one-sentence summary of the central bounded-discretion issue; passage text and question prompt were preserved and Gate B was rebound to exact-current learner-facing content.",
+      "release_claim": false
+    }
+  ]
 }

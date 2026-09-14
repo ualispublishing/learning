@@ -316,8 +316,8 @@
     },
     "c1": {
       "canonical_path": "reading/arabic/c1/passages.jsonl",
-      "canonical_sha256": "59bb35d810ee046a14bf6b45fe3481a70f41bf48c8d831735ebdb54f3405ed27",
-      "canonical_git_blob": "3a683721e0d75f9132ae6544a9f35398c171a5cd",
+      "canonical_sha256": "7308b771f16775c08bce758cd6afe450404f26f8e18ad2f97d168e890f781857",
+      "canonical_git_blob": "2a7993e6d498b86eb9acf5cffc8eb06e019d463b",
       "passages": 60,
       "questions": 600,
       "answers": 600,
@@ -357,7 +357,7 @@
         "ar-c1-u05-p06": "112313e16f9476e4c69a39ea5042ff363dda0ba46fe9966b0488c258846f4c63",
         "ar-c1-u06-p01": "8f0789f0139d3bf01a8af1c5e2515f3915e7b3fd0475da298254139a333fff2b",
         "ar-c1-u06-p02": "abcccdd47243ce207353c2d056ee790327722e33ecc206abdffb5ab871d90f72",
-        "ar-c1-u06-p03": "9f333c90786997ab2f9b681cf56889698f6491ac28cb937b40b395d154de3aa2",
+        "ar-c1-u06-p03": "1cc8d190381ecf7152d745351d5c89c3027bc68350f909666c3910ca8c83cc40",
         "ar-c1-u06-p04": "cc6c4f3c2db55b388316205a44a6d37a4c23f38fd10e1bce82ecb7060da78783",
         "ar-c1-u06-p05": "a681dcb148eeb50f4085507afb4ec5dbab63f19b9f36be65ea3ce44aaa8ae60f",
         "ar-c1-u06-p06": "8d4a09b87e525dc22b30da77c38c1af409c71480ad26cb1589494739476c1e46",
@@ -551,5 +551,17 @@
     "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u09.json",
     "reading/audit/arabic_gate_b_decisions_2026-08-30/c2_u10.json"
   ],
-  "deterministic_binding": "reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json"
+  "deterministic_binding": "reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json",
+  "post_gate_c_revalidations": [
+    {
+      "date": "2026-09-14",
+      "gate_c_artifact": "reading/audit/arabic_gate_c_decisions_2026-09-05/c1_u06.json",
+      "scope": [
+        "ar-c1-u06-p03 answer q1"
+      ],
+      "gate_b_language_recheck": "PASS",
+      "reason": "Gate C replaced one text-grounded but wrong-form causal answer with a direct declarative one-sentence summary of the central bounded-discretion issue; passage text and question prompt were preserved and Gate B was rebound to exact-current learner-facing content.",
+      "release_claim": false
+    }
+  ]
 }
