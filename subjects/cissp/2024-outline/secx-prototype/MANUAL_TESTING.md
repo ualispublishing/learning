@@ -16,6 +16,8 @@ The launcher binds only to `127.0.0.1`, serves from `subjects/cissp/2024-outline
 http://127.0.0.1:8000/secx-prototype/next.html
 ```
 
+At startup the terminal also prints the Git branch, full commit SHA, and whether the checkout is clean. A detached exact-SHA checkout is valid. If a different named branch is active, the launcher prints a warning; if the working tree has uncommitted or untracked changes, it prints a **DIRTY** warning so manual observations are not accidentally attributed to the reviewed candidate.
+
 Use `--port 8001` (or another free port) if 8000 is occupied. Use `--no-browser` to suppress automatic browser opening. Stop the server with Ctrl-C.
 
 Do not open `next.html` directly with `file://`; the prototype expects normal same-origin HTTP loading for its embedded surface, runtime scripts, local-storage behavior, and reload tests.
