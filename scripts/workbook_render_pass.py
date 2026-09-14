@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 
 import build_language_workbooks_v1 as base
 import build_language_workbooks_v1_quality as quality
+import lang_wb_candidate_decisions as candidate_decisions
 import language_workbook_pronunciation as pronunciation
 import workbook_release_passes as passes
 
@@ -101,6 +102,64 @@ def synchronize_release_docs():
     report_path.write_text(report.replace(anchor, addition, 1), encoding="utf-8")
 
 
+def enrich_candidate_bindings(decisions: dict[str, dict]) -> None:
+    manifest_path = base.OUT / "RELEASE_MANIFEST.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["build_basis"] = "candidate-specific resolved row-by-row sentence adjudication snapshots"
+    manifest["sentence_curation"] = {
+        "binding_semantics": (
+            "Current-candidate decision SHA-256 values bind deterministic resolved-adjudication snapshots. "
+            "Older curation JSON files are retained as historical provenance only."
+        ),
+        "total_rows": 3000,
+        "unresolved_rows": 0,
+        "languages": {
+            lang: {
+                "rows": meta["rows"],
+                "unresolved_rows": meta["unresolved_holds"],
+                "status_counts": meta["status_counts"],
+                "decision_path": meta["path"],
+                "decision_schema": meta["schema"],
+                "decision_sha256": meta["sha256"],
+                "sentence_csv_sha256": meta["sentence_csv_sha256"],
+                "sentence_csv_git_blob_sha": meta["sentence_csv_git_blob_sha"],
+                "provenance_mode": meta["mode"],
+                "provenance_rows": meta["provenance_rows"],
+                "licensed_external_attribution_rows": meta["licensed_external_attribution_rows"],
+                "ualis_controlled_original_rows": meta["ualis_controlled_original_rows"],
+                "historical_curation": meta["historical_curation"],
+            }
+            for lang, meta in decisions.items()
+        },
+    }
+    manifest["source_policy"] = (
+        "All final sentence rows retain explicit source provenance. Arabic and French retain "
+        "Tatoeba/CC-BY attribution; Urdu v1.0 is a UALIS Publishing controlled-original corpus. "
+        "Approved row-by-row repairs remain represented in the current candidate decision snapshots."
+    )
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    summary_path = base.AUDIT / "qa_summary.json"
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    for lang, meta in decisions.items():
+        qa_path = base.AUDIT / f"{lang}_qa.json"
+        q = json.loads(qa_path.read_text(encoding="utf-8"))
+        binding_fields = {
+            "sentence_decision_basis": "candidate-specific resolved row-by-row adjudication snapshot",
+            "candidate_sentence_decision_path": meta["path"],
+            "candidate_sentence_decision_schema": meta["schema"],
+            "candidate_sentence_decision_sha256": meta["sha256"],
+            "sentence_adjudication_status_counts": meta["status_counts"],
+            "sentence_adjudication_unresolved_rows": meta["unresolved_holds"],
+        }
+        q.update(binding_fields)
+        qa_path.write_text(json.dumps(q, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        if lang not in summary:
+            raise SystemExit(f"{lang}: missing qa_summary entry during candidate binding enrichment")
+        summary[lang].update(binding_fields)
+    summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
 def finalize():
     configure()
     pronunciation_qa = pronunciation.audit_payload()
@@ -138,9 +197,14 @@ def finalize():
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     quality.post_process()
+    decisions = candidate_decisions.build_all(write=True)
+    enrich_candidate_bindings(decisions)
     pronunciation.write_qa()
     synchronize_release_docs()
-    print("Aggregated three rendered workbooks, applied corpus-quality gates, and synchronized pronunciation QA/references/docs.")
+    print(
+        "Aggregated three rendered workbooks, applied corpus-quality gates, "
+        "bound current resolved sentence decisions, and synchronized pronunciation QA/references/docs."
+    )
 
 
 def main():
