@@ -31,10 +31,20 @@ def git_value(*args: str) -> str | None:
     return result.stdout.strip() if result.returncode == 0 else None
 
 
+def meaningful_status(status: str) -> list[str]:
+    lines: list[str] = []
+    for line in status.splitlines():
+        path = line[3:].strip() if len(line) >= 4 else line.strip()
+        if "__pycache__/" in path or path.endswith(".pyc"):
+            continue
+        lines.append(line)
+    return lines
+
+
 def print_checkout_provenance() -> None:
     branch = git_value("rev-parse", "--abbrev-ref", "HEAD")
     head = git_value("rev-parse", "HEAD")
-    status = git_value("status", "--porcelain")
+    status = git_value("status", "--porcelain", "--untracked-files=all")
 
     if head:
         print(f"Checkout: branch={branch or 'unknown'} head={head}", flush=True)
@@ -42,7 +52,7 @@ def print_checkout_provenance() -> None:
         print("Checkout: Git metadata unavailable — confirm the branch/SHA manually.", flush=True)
 
     if status is not None:
-        if status:
+        if meaningful_status(status):
             print("Status:   DIRTY — preview includes uncommitted or untracked changes.", flush=True)
         else:
             print("Status:   clean", flush=True)
