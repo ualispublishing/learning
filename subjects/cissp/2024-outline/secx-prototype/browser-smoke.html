@@ -182,22 +182,53 @@ async function run(){
   assert(mobilePending.attempts===baselineMobileEvidence.attempts+1&&mobilePending.scored===baselineMobileEvidence.scored&&mobilePending.correct===baselineMobileEvidence.correct,'mobile visible Commit records one unscored pending attempt');
   assert(mobilePending.pendingAttempt.choice===scenarioModel.answer,'mobile radio Commit stores the exact selected keyed answer');
   assert(md.querySelector('#detail')?.textContent.includes('This choice is locked'),'mobile committed choice is locked before reveal');
-  assert(!md.querySelector('#detail')?.textContent.includes('Correct answer:'),'mobile Commit does not bypass depth-four answer gate');
+  assert(!md.querySelector('#detail').textContent.includes('Correct answer:'),'mobile Commit does not bypass depth-four answer gate');
   const mobileDepth=await waitFor(()=>{const el=md.querySelector('[data-sec-detail-more]');return md.activeElement===el?el:null},'mobile Commit hands focus to visible Depth control');
   assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,`mobile committed attempt has no horizontal overflow; ${overflowDebug(md)}`);
-  mobileDepth.click();await waitFor(()=>mobileDepth.textContent==='Depth 3/4','mobile visible Depth reaches layer two');
-  mobileDepth.click();await waitFor(()=>mobileDepth.textContent==='Depth 4/4','mobile visible Depth reaches layer three');
-  mobileDepth.click();
-  await waitFor(()=>md.querySelector('#detail')?.textContent.includes('Correct answer:'),'mobile visible Depth reaches layer four and reveals keyed answer');
-  const mobileScored=await waitFor(()=>{try{const p=JSON.parse(mw.localStorage.getItem('cissp_secx_graph_state_v1')||'{}').scenarios?.[scenarioId];return p?.scored===baselineMobileEvidence.scored+1?p:null}catch{return null}},'mobile committed attempt scores at layer four');
-  assert(mobileScored.attempts===baselineMobileEvidence.attempts+1&&mobileScored.correct===baselineMobileEvidence.correct+1&&mobileScored.reveals===baselineMobileEvidence.reveals+1,'mobile visible Commit + Depth scores the correct attempt exactly once');
-  assert(mobileScored.lastOutcome==='correct'&&!mobileScored.pendingAttempt,'mobile layer-four scoring clears pending commitment and records correct outcome');
-  assert(mw.localStorage.getItem('cissp_atlas_progress_v1')===mobileAtlasBefore,'mobile scenario attempt remains isolated from Atlas progress');
-  assert(md.querySelector('#detail')?.textContent.includes('Last scored attempt: Correct'),'mobile detail reports scenario-attempt result without mastery claim');
-  assert(md.documentElement.scrollWidth<=md.documentElement.clientWidth+2,`mobile layer-four scenario detail has no horizontal overflow; ${overflowDebug(md)}`);
+  const pendingCommittedAt=mobilePending.pendingAttempt.committedAt;
+  assert(typeof pendingCommittedAt==='string'&&pendingCommittedAt,'mobile pending attempt records a durable commit timestamp');
+
+  mobile.contentWindow.location.reload();
+  const mobileReload=await ready(mobile,'mobile reload'),rmd=mobileReload.d,rmw=mobileReload.w;
+  await waitFor(()=>hasDomains(rmd),'reloaded mobile domain nodes');
+  const reloadedStored=await waitFor(()=>{try{const p=JSON.parse(rmw.localStorage.getItem('cissp_secx_graph_state_v1')||'{}').scenarios?.[scenarioId];return p?.pendingAttempt?p:null}catch{return null}},'mobile pending commitment survives full iframe reload');
+  assert(reloadedStored.attempts===mobilePending.attempts&&reloadedStored.scored===mobilePending.scored&&reloadedStored.correct===mobilePending.correct&&reloadedStored.pendingAttempt.choice===scenarioModel.answer&&reloadedStored.pendingAttempt.committedAt===pendingCommittedAt,'reloaded pending commitment remains unscored before reveal');
+  assert(rmw.localStorage.getItem('cissp_atlas_progress_v1')===mobileAtlasBefore,'mobile reload preserves Atlas progress isolation');
+
+  clickId(rmd,'d1');
+  await waitFor(()=>rmd.querySelector('#detail.open')&&rmw.current?.()?.id==='d1'&&rmd.querySelector('[data-sec-detail-open]'),'reloaded mobile D1 exposes visible Open control');
+  rmd.querySelector('[data-sec-detail-open]').click();
+  await waitFor(()=>node(rmd,'1.9')&&rmd.querySelector('#crumb')?.textContent.includes('Security and Risk Management'),'reloaded mobile descends D1 to objectives');
+  clickId(rmd,'1.9');
+  await waitFor(()=>rmd.querySelector('#detail.open')&&rmw.current?.()?.id==='1.9'&&rmd.querySelector('[data-sec-detail-open]'),'reloaded mobile objective exposes visible Open control');
+  rmd.querySelector('[data-sec-detail-open]').click();
+  await waitFor(()=>['facet:1.9:subtopics','facet:1.9:cards','facet:1.9:scenarios'].every(id=>node(rmd,id)),'reloaded mobile reaches objective hub facets');
+  clickId(rmd,'facet:1.9:scenarios');
+  await waitFor(()=>rmd.querySelector('#detail.open')&&rmw.current?.()?.id==='facet:1.9:scenarios'&&rmd.querySelector('[data-sec-detail-open]'),'reloaded mobile scenario facet exposes visible Open control');
+  rmd.querySelector('[data-sec-detail-open]').click();
+  await waitFor(()=>node(rmd,scenarioId),'reloaded mobile reaches released scenario branch');
+  node(rmd,scenarioId).click();
+  await waitFor(()=>rmd.querySelector('#detail.open')&&rmd.querySelector('[data-sec-attempt]'),'reloaded mobile scenario opens persisted pending attempt');
+  assert(rmd.querySelector('#detail')?.textContent.includes('This choice is locked'),'reloaded mobile scenario restores locked pending choice');
+  assert(!rmd.querySelector('[data-sec-scenario-commit]'),'reloaded pending scenario does not expose a duplicate Commit control');
+  assert(!rmd.querySelector('#detail').textContent.includes('Correct answer:'),'reloaded pending commitment does not bypass depth-four answer gate');
+  const reloadedDepth=rmd.querySelector('[data-sec-detail-more]');
+  assert(reloadedDepth,'reloaded pending scenario exposes visible Depth control');
+  assert(rmd.documentElement.scrollWidth<=rmd.documentElement.clientWidth+2,`reloaded mobile pending attempt has no horizontal overflow; ${overflowDebug(rmd)}`);
+
+  reloadedDepth.click();await waitFor(()=>reloadedDepth.textContent==='Depth 3/4','reloaded mobile visible Depth reaches layer two');
+  reloadedDepth.click();await waitFor(()=>reloadedDepth.textContent==='Depth 4/4','reloaded mobile visible Depth reaches layer three');
+  reloadedDepth.click();
+  await waitFor(()=>rmd.querySelector('#detail')?.textContent.includes('Correct answer:'),'reloaded mobile visible Depth reaches layer four and reveals keyed answer');
+  const mobileScored=await waitFor(()=>{try{const p=JSON.parse(rmw.localStorage.getItem('cissp_secx_graph_state_v1')||'{}').scenarios?.[scenarioId];return p?.scored===baselineMobileEvidence.scored+1?p:null}catch{return null}},'reloaded mobile committed attempt scores at layer four');
+  assert(mobileScored.attempts===baselineMobileEvidence.attempts+1&&mobileScored.correct===baselineMobileEvidence.correct+1&&mobileScored.reveals===baselineMobileEvidence.reveals+1,'mobile visible Commit + reload + Depth scores the correct attempt exactly once');
+  assert(mobileScored.lastOutcome==='correct'&&!mobileScored.pendingAttempt,'mobile layer-four scoring clears reloaded pending commitment and records correct outcome');
+  assert(rmw.localStorage.getItem('cissp_atlas_progress_v1')===mobileAtlasBefore,'mobile scenario attempt remains isolated from Atlas progress');
+  assert(rmd.querySelector('#detail')?.textContent.includes('Last scored attempt: Correct'),'mobile detail reports scenario-attempt result without mastery claim');
+  assert(rmd.documentElement.scrollWidth<=rmd.documentElement.clientWidth+2,`mobile layer-four scenario detail has no horizontal overflow; ${overflowDebug(rmd)}`);
 
   result.dataset.smoke='pass';
-  result.textContent=`PASS SecX expanded browser smoke: released-counts keyboard-navigation objective-hub cards Atlas-progress due-review study-lens graph-state scenarios keyboard-answer-commit depth4-score reveal-only-no-score mobile-radio-commit mobile-depth4-score mobile-viewport search Home; sampled card ${cardId}; scenario ${scenarioId}`;
+  result.textContent=`PASS SecX expanded browser smoke: released-counts keyboard-navigation objective-hub cards Atlas-progress due-review study-lens graph-state scenarios keyboard-answer-commit depth4-score reveal-only-no-score mobile-radio-commit mobile-reload-pending mobile-depth4-score mobile-viewport search Home; sampled card ${cardId}; scenario ${scenarioId}`;
 }
 run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
 })();
