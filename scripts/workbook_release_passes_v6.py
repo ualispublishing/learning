@@ -6,14 +6,14 @@ linguistic audit, however, corrected English can legitimately cross the selector
 original word-count buckets. The release gate therefore validates the corrected
 corpus itself: exact row/uniqueness invariants, recomputed word-count/level
 consistency, strong progression coverage, source diversity, register checks,
-pronunciation-foundation integrity, and review samples. It does not force a
-correct translation back into an obsolete pre-repair quota.
+pronunciation-foundation integrity, candidate decision binding, and review samples.
 """
 from collections import Counter
 import csv
 import json
 import re
 
+import lang_wb_candidate_decisions as candidate_decisions
 import workbook_release_passes as p
 import workbook_release_passes_v5 as v5
 
@@ -45,8 +45,6 @@ def corpus_audit_v6():
         if not 250 <= questions <= 350:
             problems.append("question_balance")
 
-        # Every corrected sentence must carry metadata derived from its corrected
-        # English, not stale selector metadata.
         word_mismatches = []
         level_mismatches = []
         for r in rows:
@@ -70,13 +68,11 @@ def corpus_audit_v6():
                 if bands[b] < minimum:
                     problems.append(f"postrepair_band_{b}_below_{minimum}")
 
-            # Preserve clear beginner -> intermediate progression after repairs,
-            # even though a handful of corrected rows cross adjacent bands.
             early_ab = sum(r["level"] in {"A", "B"} for r in rows[:250])
             late_cd = sum(r["level"] in {"C", "D"} for r in rows[-250:])
-            if early_ab < 237:  # >=94.8% of the opening quarter remains short/simple.
+            if early_ab < 237:
                 problems.append(f"weak_early_progression:{early_ab}/250_A_or_B")
-            if late_cd < 225:  # >=90% of the closing quarter remains longer/advanced.
+            if late_cd < 225:
                 problems.append(f"weak_late_progression:{late_cd}/250_C_or_D")
 
             sel = json.loads((p.STAGE / f"{lang}_selection.json").read_text(encoding="utf-8"))
@@ -143,6 +139,23 @@ def release_audit_v6():
 
     if len(pdfs) != 42:
         problems.append(f"pdf_count={len(pdfs)}")
+    if manifest.get("release") != "v1.0" or manifest.get("status") != "production_candidate":
+        problems.append("manifest_release_or_status")
+
+    curation = manifest.get("sentence_curation")
+    if not isinstance(curation, dict):
+        problems.append("manifest_sentence_curation_missing")
+        curation = {}
+    if curation.get("total_rows") != 3000:
+        problems.append("manifest_sentence_curation_total_rows")
+    if curation.get("unresolved_rows") != 0:
+        problems.append("manifest_sentence_curation_unresolved_rows")
+    manifest_langs = curation.get("languages")
+    if not isinstance(manifest_langs, dict):
+        problems.append("manifest_sentence_curation_languages")
+        manifest_langs = {}
+
+    decision_hashes = {}
     for lang in ("arabic", "french", "urdu"):
         z = qa.get(lang, {})
         if z.get("corpus_quality_gate") != "PASS":
@@ -151,6 +164,27 @@ def release_audit_v6():
             problems.append(f"{lang}_row_count")
         if z.get("sentence_target_unique") != 1000 or z.get("sentence_english_unique") != 1000:
             problems.append(f"{lang}_uniqueness")
+
+        entry = manifest_langs.get(lang)
+        if not isinstance(entry, dict):
+            problems.append(f"{lang}_manifest_decision_entry")
+            continue
+        try:
+            decision_meta = candidate_decisions.validate_snapshot(lang, entry)
+        except Exception as exc:
+            problems.append(f"{lang}_candidate_decision_binding:{type(exc).__name__}:{exc}")
+            continue
+        decision_hashes[lang] = decision_meta["sha256"]
+        if z.get("candidate_sentence_decision_sha256") != decision_meta["sha256"]:
+            problems.append(f"{lang}_qa_decision_hash_mismatch")
+        if z.get("candidate_sentence_decision_path") != decision_meta["path"]:
+            problems.append(f"{lang}_qa_decision_path_mismatch")
+        if z.get("candidate_sentence_decision_schema") != decision_meta["schema"]:
+            problems.append(f"{lang}_qa_decision_schema_mismatch")
+        if z.get("sentence_adjudication_status_counts") != decision_meta["status_counts"]:
+            problems.append(f"{lang}_qa_decision_status_counts_mismatch")
+        if z.get("sentence_adjudication_unresolved_rows") != 0:
+            problems.append(f"{lang}_qa_unresolved_decisions")
 
     if pronunciation.get("status") != "PASS":
         problems.append("pronunciation_gate")
@@ -180,9 +214,15 @@ def release_audit_v6():
         "gate": "PASS",
         "pdf_count": len(pdfs),
         "languages": ["arabic", "french", "urdu"],
+        "sentence_rows": 3000,
+        "unresolved_editorial_rows": 0,
+        "candidate_sentence_decisions": decision_hashes,
         "pronunciation_gate": "PASS",
         "pronunciation_guide_sha256": pronunciation["guide_sha256"],
-        "note": "Automated production-candidate release gates passed; independent native-speaker certification remains separate.",
+        "note": (
+            "Automated production-candidate release gates passed, including exact current-candidate "
+            "sentence-adjudication bindings; independent native-speaker certification remains separate."
+        ),
     }
     (p.base.AUDIT / "release_gate_v3.json").write_text(
         json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
