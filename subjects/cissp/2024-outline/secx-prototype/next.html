@@ -21,6 +21,8 @@ frame.addEventListener('load',()=>{
     .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;left:auto}
     .secx-expanded-status{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:30;max-width:min(680px,calc(100vw - 28px));padding:9px 12px;border:1px solid #bb8450;border-radius:10px;background:#291b12;color:#fff4e8;font:600 12px/1.4 system-ui,sans-serif;box-shadow:0 8px 30px #0008}
     @keyframes secxDetailIn{from{transform:translateX(28px);opacity:0}to{transform:none;opacity:1}}
+    @keyframes secxDetailInMobile{from{opacity:0}to{opacity:1}}
+    @media(max-width:800px){.detail.open{animation:secxDetailInMobile .18s ease}}
     @media(prefers-reduced-motion:reduce){.detail.open{animation:none}}
   `;
   doc.head.appendChild(reviewStyle);
