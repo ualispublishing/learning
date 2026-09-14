@@ -5,13 +5,53 @@ from __future__ import annotations
 import argparse
 import functools
 import http.server
+import subprocess
 import threading
 import webbrowser
 from pathlib import Path
 
 PROTO = Path(__file__).resolve().parent
 SERVE_ROOT = PROTO.parent
+REPO_ROOT = PROTO.parents[3]
 DEFAULT_PORT = 8000
+EXPECTED_BRANCH = "secx-web-prototype-20260901"
+
+
+def git_value(*args: str) -> str | None:
+    try:
+        result = subprocess.run(
+            ["git", *args],
+            cwd=REPO_ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+    except OSError:
+        return None
+    return result.stdout.strip() if result.returncode == 0 else None
+
+
+def print_checkout_provenance() -> None:
+    branch = git_value("rev-parse", "--abbrev-ref", "HEAD")
+    head = git_value("rev-parse", "HEAD")
+    status = git_value("status", "--porcelain")
+
+    if head:
+        print(f"Checkout: branch={branch or 'unknown'} head={head}", flush=True)
+    else:
+        print("Checkout: Git metadata unavailable — confirm the branch/SHA manually.", flush=True)
+
+    if status is not None:
+        if status:
+            print("Status:   DIRTY — preview includes uncommitted or untracked changes.", flush=True)
+        else:
+            print("Status:   clean", flush=True)
+
+    if branch and branch not in {EXPECTED_BRANCH, "HEAD"}:
+        print(
+            f"Warning: expected {EXPECTED_BRANCH} or a detached exact SHA; testing branch {branch}.",
+            flush=True,
+        )
 
 
 def main() -> None:
@@ -28,6 +68,7 @@ def main() -> None:
     url = f"http://127.0.0.1:{args.port}/secx-prototype/next.html"
 
     print("SecX review prototype — localhost preview only", flush=True)
+    print_checkout_provenance()
     print(f"Serving: {SERVE_ROOT}", flush=True)
     print(f"Open:    {url}", flush=True)
     print("Stop:    Ctrl-C", flush=True)
