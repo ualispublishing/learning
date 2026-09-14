@@ -188,7 +188,9 @@ async function run(){
   const pendingCommittedAt=mobilePending.pendingAttempt.committedAt;
   assert(typeof pendingCommittedAt==='string'&&pendingCommittedAt,'mobile pending attempt records a durable commit timestamp');
 
+  const mobileReloadComplete=new Promise(resolve=>mobile.addEventListener('load',resolve,{once:true}));
   mobile.contentWindow.location.reload();
+  await mobileReloadComplete;
   const mobileReload=await ready(mobile,'mobile reload'),rmd=mobileReload.d,rmw=mobileReload.w;
   await waitFor(()=>hasDomains(rmd),'reloaded mobile domain nodes');
   const reloadedStored=await waitFor(()=>{try{const p=JSON.parse(rmw.localStorage.getItem('cissp_secx_graph_state_v1')||'{}').scenarios?.[scenarioId];return p?.pendingAttempt?p:null}catch{return null}},'mobile pending commitment survives full iframe reload');
