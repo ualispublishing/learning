@@ -162,9 +162,11 @@ check("Keyboard: press 1–" in learner_state, "scenario detail no longer advert
 check("commitScenarioAttempt(n.id,choice)" in learner_state, "numeric scenario shortcut no longer reuses the explicit commitment mutator")
 check("input[name=\"secx-scenario-choice\"]:checked" in learner_state, "visible scenario Commit path no longer reads the selected radio option")
 check("requestAnimationFrame(()=>detailMore.focus())" in learner_state, "scenario commitment no longer hands focus to the visible Depth control")
+check("state='pending'" in learner_state and "scored · pending" in learner_state, "scenario nodes no longer distinguish a locked unscored pending commitment")
+check("state='attempted'" in learner_state and "scored · ${p.reveals||0} reveal" in learner_state, "scored scenario badges no longer clear the pending label")
 check("function branchRadialPosition" in next_layer and "mobile?.34:.39" in next_layer, "card/scenario branches do not use the reviewed tighter mobile radial radius")
 check(next_layer.count("branchRadialPosition(i,slice.length)") >= 2, "both card and scenario branches must use the mobile-safe radial helper")
-check("@keyframes secxDetailInMobile" in next_html and "@media(max-width:800px){.detail.open{animation:secxDetailInMobile .18s ease}}" in next_html, "mobile expanded detail must use the in-place fade rather than the horizontal slide animation")
+check("@keyframes secxDetailInMobile" in next_html and "@media(max-width:800px){.detail,.detail.open{transform:none!important}.detail.open{animation:secxDetailInMobile .18s ease}}" in next_html, "mobile expanded detail must force transform-free closed/open states and use the in-place fade")
 check("mobile.contentWindow.location.reload()" in smoke, "mobile scenario smoke no longer performs a full iframe reload with a pending commitment")
 
 smoke_tokens = [
@@ -178,11 +180,14 @@ smoke_tokens = [
     "numeric shortcut commits the exact corresponding option",
     "mobile scenario radio options match released MCQ",
     "mobile visible Commit records one unscored pending attempt",
+    "mobile scenario node badge surfaces pending unscored attempt",
     "mobile Commit hands focus to visible Depth control",
     "mobile pending commitment survives full iframe reload",
+    "reloaded mobile scenario badge restores pending state before detail opens",
     "reloaded mobile scenario restores locked pending choice",
     "reloaded pending commitment remains unscored before reveal",
     "mobile visible Commit + reload + Depth scores the correct attempt exactly once",
+    "mobile scenario node badge clears pending state after scoring",
     "mobile scenario attempt remains isolated from Atlas progress",
     "mobile layer-four scenario detail has no horizontal overflow",
 ]
@@ -201,5 +206,5 @@ print(
     f"high_cards_1.9={len(cards_19)} first_card={first_card.get('id') if first_card else 'none'} "
     f"scenarios_1.9={len(scenarios_19)} first_scenario={first_scenario.get('id') if first_scenario else 'none'} "
     f"search=C-472 objective={c472_objectives[0] if c472_objectives else 'none'} "
-    f"review_registry={len(registry_ids)} runtime_questions={len(runtime_questions)} weak_tie=D1 scenario_keyboard=1..N scenario_mobile=radio+commit+reload+depth4+contained"
+    f"review_registry={len(registry_ids)} runtime_questions={len(runtime_questions)} weak_tie=D1 scenario_keyboard=1..N scenario_mobile=radio+commit+reload+depth4+contained scenario_badge=pending>attempted"
 )
