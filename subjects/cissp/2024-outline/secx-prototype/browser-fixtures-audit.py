@@ -158,6 +158,8 @@ check(len(registry_ids) == len(set(registry_ids)), "layered review registry IDs 
 check("n?.kind==='scenario'" in learner_state and "/^[1-9]$/" in learner_state, "learner runtime no longer exposes contextual numeric scenario commitment")
 check("Keyboard: press 1–" in learner_state, "scenario detail no longer advertises its numeric commitment shortcut")
 check("commitScenarioAttempt(n.id,choice)" in learner_state, "numeric scenario shortcut no longer reuses the explicit commitment mutator")
+check("input[name=\"secx-scenario-choice\"]:checked" in learner_state, "visible scenario Commit path no longer reads the selected radio option")
+check("requestAnimationFrame(()=>detailMore.focus())" in learner_state, "scenario commitment no longer hands focus to the visible Depth control")
 
 smoke_tokens = [
     "'1.9'",
@@ -168,6 +170,12 @@ smoke_tokens = [
     "reviewCardCount===meta.card_count",
     "keyboard scenario answer commitment persisted",
     "numeric shortcut commits the exact corresponding option",
+    "mobile scenario radio options match released MCQ",
+    "mobile visible Commit records one unscored pending attempt",
+    "mobile Commit hands focus to visible Depth control",
+    "mobile visible Commit + Depth scores the correct attempt exactly once",
+    "mobile scenario attempt remains isolated from Atlas progress",
+    "mobile layer-four scenario detail has no horizontal overflow",
 ]
 for token in smoke_tokens:
     check(token in smoke, f"browser smoke fixture contract changed without updating preflight: missing {token}")
@@ -184,5 +192,5 @@ print(
     f"high_cards_1.9={len(cards_19)} first_card={first_card.get('id') if first_card else 'none'} "
     f"scenarios_1.9={len(scenarios_19)} first_scenario={first_scenario.get('id') if first_scenario else 'none'} "
     f"search=C-472 objective={c472_objectives[0] if c472_objectives else 'none'} "
-    f"review_registry={len(registry_ids)} runtime_questions={len(runtime_questions)} weak_tie=D1 scenario_keyboard=1..N"
+    f"review_registry={len(registry_ids)} runtime_questions={len(runtime_questions)} weak_tie=D1 scenario_keyboard=1..N scenario_mobile=radio+commit+depth4"
 )
