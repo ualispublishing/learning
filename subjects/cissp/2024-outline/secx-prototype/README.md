@@ -9,6 +9,16 @@ This is an isolated **review prototype**. It does not replace or alter the verif
 
 The expanded surface remains review-only. It is not the production Atlas surface and PR #133 remains draft/unmerged.
 
+## Manual testing
+
+For an exact-branch localhost preview, run from the repository root:
+
+```bash
+python3 subjects/cissp/2024-outline/secx-prototype/serve-preview.py
+```
+
+The launcher binds only to `127.0.0.1`, serves from `subjects/cissp/2024-outline/`, and opens `http://127.0.0.1:8000/secx-prototype/next.html`. See `MANUAL_TESTING.md` for the focused review checklist and reset guidance. The exact-head workflow syntax-checks and HTTP-smokes this launcher before browser gates.
+
 ## Released-data boundaries
 
 The prototype reuses released Atlas data rather than creating a second curriculum:
@@ -180,34 +190,7 @@ Dedicated browser smokes verify successful desktop/mobile readiness, a real HTTP
 
 ## Exact-head validation
 
-The draft includes deterministic gates for each major layer:
-
-- `audit.py` — released graph counts/mappings, manifest isolation, exact subtopic tags, answer boundary, learner-state compatibility, and explicit scenario-attempt commit/score isolation;
-- `browser-fixtures-audit.py` — deterministic smoke fixtures plus the contextual numeric scenario-commit contract;
-- `due-audit.py` — complete 140-card review registry and settled desktop/mobile Due Reviews entry focus;
-- `study-audit.py` — Study Queue and Continue priority/routing contract;
-- `source-audit.py` — exact Source Provenance mappings and answer/state isolation;
-- `coverage-audit.py` — count reconciliation and exact-tag exposure/gaps;
-- `projection-search-audit.py` — explicit Source/Coverage/released-Link routing, released-objective endpoint-label lookup, reviewer-registry isolation, and accessibility behavior;
-- `relationship-audit.py` — stable endpoints and relationship-specific review requirements;
-- `relationship-release-audit.py` — exact reviewer/promotion/runtime-copy integrity and reviewer-registry isolation;
-- release-boundary, hygiene, and completeness gates.
-
-Browser suites verify:
-
-- expanded graph/cards/scenarios/learner state, including numeric keyboard scenario commitment, depth-4 scoring, reveal-without-commit no-score behavior, and Atlas-progress isolation;
-- loader readiness;
-- Continue routing and mobile Due focus handoff;
-- Source Provenance;
-- Coverage;
-- Projection Search including human-readable endpoint-label discovery of exact released `REL-001` routing;
-- Reviewed Links on desktop and 390px mobile;
-- loader HTTP-404 fallback;
-- loader JavaScript execution-error fallback.
-
-`.github/workflows/secx-prototype-smoke.yml` runs production CISSP preservation checks plus all SecX deterministic/syntax/browser gates against one exact candidate head.
-
-Exact-head candidate `7bded1f99ca589a1bb10ec26139fdaf4a16267ea` passed **SecX Prototype Smoke #527 (`34762043774`)** through every required gate, including production preservation, contextual `1…N` scenario commitment, human-readable Reviewed Link endpoint-label search, Source/Coverage/Search/Links regressions, and both loader fault-injection paths.
+The draft includes deterministic gates for each major layer plus a localhost-only manual-preview launcher smoke. `.github/workflows/secx-prototype-smoke.yml` runs production CISSP preservation checks plus all SecX deterministic/syntax/browser/manual-preview gates against one exact candidate head.
 
 ## Production architecture rules
 
