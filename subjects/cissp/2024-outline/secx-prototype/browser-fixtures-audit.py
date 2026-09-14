@@ -166,7 +166,9 @@ check("state='pending'" in learner_state and "scored · pending" in learner_stat
 check("state='attempted'" in learner_state and "scored · ${p.reveals||0} reveal" in learner_state, "scored scenario badges no longer clear the pending label")
 check("function branchRadialPosition" in next_layer and "mobile?.34:.39" in next_layer, "card/scenario branches do not use the reviewed tighter mobile radial radius")
 check(next_layer.count("branchRadialPosition(i,slice.length)") >= 2, "both card and scenario branches must use the mobile-safe radial helper")
-check("@keyframes secxDetailInMobile" in next_html and "@media(max-width:800px){.detail,.detail.open{transform:none!important}.detail.open{animation:secxDetailInMobile .18s ease}}" in next_html, "mobile expanded detail must force transform-free closed/open states and use the in-place fade")
+check("@keyframes secxDetailInMobile" in next_html, "mobile expanded detail is missing the opacity-only keyframes")
+check("@media(max-width:800px){.detail,.detail:not(.open),.detail.open{transform:none!important;transition-property:opacity}}" in next_html, "mobile expanded detail must force transform-free closed/open states and restrict transition to opacity")
+check("@media(max-width:800px){.detail.open{animation:secxDetailInMobile .18s ease}}" in next_html, "mobile expanded detail must use the in-place fade animation")
 check("mobile.contentWindow.location.reload()" in smoke, "mobile scenario smoke no longer performs a full iframe reload with a pending commitment")
 
 smoke_tokens = [
