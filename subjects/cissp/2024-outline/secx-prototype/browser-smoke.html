@@ -173,7 +173,9 @@ async function run(){
   const mobileAtlasBefore=mw.localStorage.getItem('cissp_atlas_progress_v1')||'';
   mobileRadios[scenarioModel.answer].click();
   assert(mobileRadios[scenarioModel.answer].checked,'mobile keyed radio answer can be selected');
-  mobileCommit.focus();assert(md.activeElement===mobileCommit,'mobile visible Commit receives focus before activation');mobileCommit.click();
+  mobile.focus();mw.focus();mobileCommit.focus();
+  await waitFor(()=>md.activeElement===mobileCommit,'mobile visible Commit receives focus before activation');
+  mobileCommit.click();
   const mobilePending=await waitFor(()=>{try{const p=JSON.parse(mw.localStorage.getItem('cissp_secx_graph_state_v1')||'{}').scenarios?.[scenarioId];return p?.pendingAttempt?p:null}catch{return null}},'mobile visible Commit persists pending scenario attempt');
   assert(mobilePending.attempts===baselineMobileEvidence.attempts+1&&mobilePending.scored===baselineMobileEvidence.scored&&mobilePending.correct===baselineMobileEvidence.correct,'mobile visible Commit records one unscored pending attempt');
   assert(mobilePending.pendingAttempt.choice===scenarioModel.answer,'mobile radio Commit stores the exact selected keyed answer');
