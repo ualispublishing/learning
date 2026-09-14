@@ -64,6 +64,7 @@ jobs:
         shell: bash
         run: |
           python -m py_compile subjects/cissp/2024-outline/secx-prototype/candidate-completeness-audit.py
+          python -m py_compile subjects/cissp/2024-outline/secx-prototype/serve-preview.py
           python subjects/cissp/2024-outline/secx-prototype/candidate-completeness-audit.py
 
       - name: CISSP deterministic release audit
@@ -111,6 +112,28 @@ jobs:
           python subjects/cissp/2024-outline/secx-prototype/projection-search-audit.py
           python subjects/cissp/2024-outline/secx-prototype/relationship-audit.py
           python subjects/cissp/2024-outline/secx-prototype/relationship-release-audit.py
+
+      - name: SecX manual preview launcher smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          python subjects/cissp/2024-outline/secx-prototype/serve-preview.py --port 8866 --no-browser > /tmp/secx-preview.log 2>&1 &
+          PREVIEW_PID=$!
+          cleanup() {
+            kill "$PREVIEW_PID" 2>/dev/null || true
+            wait "$PREVIEW_PID" 2>/dev/null || true
+          }
+          trap cleanup EXIT
+          for _ in $(seq 1 50); do
+            if curl -fsS http://127.0.0.1:8866/secx-prototype/next.html >/tmp/secx-next.html; then
+              break
+            fi
+            sleep 0.1
+          done
+          grep -q 'SecX · Expanded Knowledge Web Review' /tmp/secx-next.html
+          curl -fsS http://127.0.0.1:8866/study-site/data-ai.js >/tmp/secx-data-ai.js
+          grep -q 'CISSP_CHUNKS' /tmp/secx-data-ai.js
+          grep -q '127.0.0.1:8866/secx-prototype/next.html' /tmp/secx-preview.log
 
       - name: Preserve production CISSP browser smoke
         shell: bash
