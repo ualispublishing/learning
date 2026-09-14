@@ -136,7 +136,7 @@ function noteDetail(n){
 const style=document.createElement('style');
 style.textContent=`
 .node-progress{display:inline-flex;align-items:center;gap:4px;margin-top:5px;padding:2px 6px;border:1px solid #35526d;border-radius:999px;font-size:9px;color:#c8d9e8;background:#0b1d2d}
-.node-progress[data-state="due"]{border-style:dashed}.node-progress[data-state="mature"]{font-weight:700}
+.node-progress[data-state="due"]{border-style:dashed}.node-progress[data-state="mature"],.node-progress[data-state="pending"]{font-weight:700}
 .sec-progress{display:grid;gap:8px}.sec-progress-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center}.sec-grade,.sec-attempt-commit{border:1px solid #456784;border-radius:9px;background:#10263a;color:inherit;padding:7px 9px;cursor:pointer}.sec-grade:hover,.sec-grade:focus-visible,.sec-attempt-commit:hover,.sec-attempt-commit:focus-visible{border-color:var(--focus);outline:none}.sec-progress small{color:var(--muted)}.sec-attempt{display:grid;gap:7px;padding:9px;border:1px solid #35526d;border-radius:10px;background:#0b1d2d}.sec-attempt-options{display:grid;gap:5px}.sec-attempt-choice{display:flex;gap:7px;align-items:flex-start;cursor:pointer}.sec-attempt-choice input{margin-top:3px}
 #detail.open{padding-top:64px}.sec-detail-actions{position:absolute;right:30px;top:28px;z-index:11;display:flex;justify-content:flex-end;gap:7px}.sec-detail-action{border:1px solid #456784;border-radius:10px;background:#10263af2;color:var(--text);padding:7px 10px;font:inherit;font-size:11px;cursor:pointer;box-shadow:0 4px 16px #0006}.sec-detail-action:hover,.sec-detail-action:focus-visible{border-color:var(--focus);outline:none}.sec-detail-actions[hidden]{display:none!important}@media(max-width:800px){#detail.open{padding-top:60px}.sec-detail-actions{right:20px;top:20px;max-width:calc(100% - 40px);gap:5px}.sec-detail-action{font-size:10px;padding:7px 9px}}
 `;
@@ -172,7 +172,10 @@ function decorateNodes(){
     if(n.kind==='card'){state=cardStatus(id);const s=cardState(id);text=s?`${state} · stage ${s.stage||0}`:'new'}
     else if(n.kind==='scenario'){
       const p=graphState.scenarios[id];
-      if(p?.attempts){state='attempted';text=`${p.attempts} attempt${p.attempts===1?'':'s'} · ${p.reveals||0} reveal${p.reveals===1?'':'s'}`}
+      if(p?.attempts){
+        if(p.pendingAttempt){state='pending';text=`${p.attempts} committed · ${p.scored||0} scored · pending`}
+        else{state='attempted';text=`${p.attempts} committed · ${p.scored||0} scored · ${p.reveals||0} reveal${p.reveals===1?'':'s'}`}
+      }
       else if(p?.reveals){state='seen';text=`${p.reveals} answer reveal${p.reveals===1?'':'s'}`}
     }
     else {const p=graphNodeState(id);if(p?.maxDepth){state='seen';text=`depth ${p.maxDepth}/4`}}
