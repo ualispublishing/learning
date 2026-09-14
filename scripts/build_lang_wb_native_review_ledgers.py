@@ -14,6 +14,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+import lang_wb_candidate_decisions as candidate_decisions
+
 ROOT = Path(__file__).resolve().parents[1]
 RELEASE = ROOT / "completed" / "languages" / "workbooks" / "v1.0"
 AUDIT = ROOT / "audit" / "language-workbooks" / "v1.0"
@@ -137,6 +139,9 @@ def main() -> None:
     manifest: dict[str, Any] = json.loads(MANIFEST.read_text(encoding="utf-8"))
     require(manifest.get("release") == "v1.0", "unexpected release manifest")
     require(manifest.get("status") == "production_candidate", "ledger generator expects production_candidate status")
+    curation = manifest.get("sentence_curation") or {}
+    require(curation.get("total_rows") == 3000, "release manifest sentence_curation total_rows must be 3000")
+    require(curation.get("unresolved_rows") == 0, "release manifest has unresolved sentence decisions")
 
     OUT.mkdir(parents=True, exist_ok=True)
     bindings: dict[str, Any] = {
@@ -153,7 +158,8 @@ def main() -> None:
         ),
     }
 
-    manifest_langs = manifest.get("sentence_curation", {}).get("languages", {})
+    manifest_langs = curation.get("languages", {})
+    require(isinstance(manifest_langs, dict), "release manifest sentence_curation languages must be an object")
     for lang, names in LANGUAGES.items():
         base = RELEASE / lang
         master = base / names["master"]
@@ -169,8 +175,13 @@ def main() -> None:
         ledger_path = OUT / f"{lang}_native_review_ledger.csv"
         write_ledger(ledger_path, rows)
 
-        decision_sha = (manifest_langs.get(lang) or {}).get("decision_sha256")
-        require(bool(decision_sha), f"{lang}: release manifest missing decision_sha256")
+        entry = manifest_langs.get(lang)
+        require(isinstance(entry, dict), f"{lang}: release manifest missing sentence decision entry")
+        try:
+            decision = candidate_decisions.validate_snapshot(lang, entry)
+        except Exception as exc:
+            raise SystemExit(f"{lang}: current candidate sentence decision binding invalid: {exc}") from exc
+
         bindings["languages"][lang] = {
             "ledger_path": str(ledger_path.relative_to(ROOT)),
             "ledger_rows": len(rows),
@@ -182,7 +193,10 @@ def main() -> None:
             "vocabulary_csv_git_blob_sha": git_blob_sha(vocabulary_path),
             "sentence_csv_path": str(sentence_path.relative_to(ROOT)),
             "sentence_csv_git_blob_sha": git_blob_sha(sentence_path),
-            "sentence_decision_sha256": decision_sha,
+            "sentence_decision_path": decision["path"],
+            "sentence_decision_schema": decision["schema"],
+            "sentence_decision_sha256": decision["sha256"],
+            "sentence_decision_status_counts": decision["status_counts"],
         }
 
     binding_path = OUT / "CANDIDATE_BINDINGS.json"
