@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SecX Loader Failure Browser Smoke</title></head>
+<body>
+<pre id="result" data-smoke="running">RUNNING</pre>
+<iframe id="desktop" src="next.html" style="width:1280px;height:900px;border:0"></iframe>
+<iframe id="mobile" src="next.html" style="width:390px;height:844px;border:0"></iframe>
+<script>
+(()=>{'use strict';
+const result=document.querySelector('#result');
+const desktop=document.querySelector('#desktop');
+const mobile=document.querySelector('#mobile');
+const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;while(Date.now()<end){try{const value=fn();if(value)return value}catch{}await sleep(50)}throw new Error(`Timed out waiting for ${label}`)}
+function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
+function shellState(wrapper){
+  const outer=wrapper.contentDocument;
+  const prototype=outer?.querySelector('#prototype');
+  const doc=prototype?.contentDocument;
+  return{outer,prototype,doc};
+}
+function hasConservativeGraph(doc){return !!doc?.querySelector('#scope')&&Array.from({length:8},(_,i)=>`d${i+1}`).every(id=>doc.querySelector(`[data-id="${id}"]`));}
+async function failed(wrapper,label){return waitFor(()=>{const state=shellState(wrapper);return state.prototype?.dataset?.secxExpandedState==='error'&&hasConservativeGraph(state.doc)?state:null},`${label} expanded loader error + conservative graph`)}
+function assertFailureState(state,label){
+  const {prototype,doc}=state;
+  const status=doc.querySelector('#secxExpandedStatus');
+  assert(prototype.dataset.secxExpandedState==='error',`${label} remains in error state`);
+  assert(status,`${label} status exists`);
+  assert(status.getAttribute('role')==='alert',`${label} status becomes alert`);
+  assert(status.getAttribute('aria-live')==='assertive',`${label} failure announcement is assertive`);
+  assert(status.classList.contains('secx-expanded-status'),`${label} failure status is visible`);
+  assert(status.textContent.includes('projection-search.js'),`${label} alert names failed dependency`);
+  assert(status.textContent.includes('conservative knowledge web remains available'),`${label} alert explains fallback`);
+  assert(hasConservativeGraph(doc),`${label} conservative eight-domain graph remains mounted`);
+  assert(!status.textContent.includes('Expanded review layer ready.'),`${label} failure is not overwritten by ready`);
+}
+async function run(){
+  const desktopState=await failed(desktop,'desktop');
+  assertFailureState(desktopState,'desktop');
+  const mobileState=await failed(mobile,'mobile');
+  assertFailureState(mobileState,'mobile');
+  const mobileDoc=mobileState.doc;
+  assert(mobileDoc.documentElement.scrollWidth<=mobileDoc.documentElement.clientWidth+2,'mobile failure fallback has no horizontal overflow');
+  const statusRect=mobileDoc.querySelector('#secxExpandedStatus').getBoundingClientRect();
+  assert(statusRect.left>=-2&&statusRect.right<=mobileDoc.documentElement.clientWidth+2,'mobile visible failure alert stays within viewport');
+  result.dataset.smoke='pass';
+  result.textContent='PASS SecX loader failure smoke: real-404 projection-search.js desktop+mobile error-alert conservative-fallback no-ready-overwrite';
+}
+run().catch(error=>{result.dataset.smoke='fail';result.textContent=`FAIL ${error.stack||error}`;console.error(error)});
+})();
+</script>
+</body>
+</html>
