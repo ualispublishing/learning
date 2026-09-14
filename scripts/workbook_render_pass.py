@@ -121,6 +121,9 @@ def enrich_candidate_bindings(decisions: dict[str, dict]) -> None:
                 "decision_path": meta["path"],
                 "decision_schema": meta["schema"],
                 "decision_sha256": meta["sha256"],
+                "post_adjudication_stage_path": meta["post_adjudication_stage_path"],
+                "post_adjudication_stage_sha256": meta["post_adjudication_stage_sha256"],
+                "post_adjudication_stage_git_blob_sha": meta["post_adjudication_stage_git_blob_sha"],
                 "sentence_csv_sha256": meta["sentence_csv_sha256"],
                 "sentence_csv_git_blob_sha": meta["sentence_csv_git_blob_sha"],
                 "provenance_mode": meta["mode"],
@@ -151,6 +154,11 @@ def enrich_candidate_bindings(decisions: dict[str, dict]) -> None:
             "candidate_sentence_decision_sha256": meta["sha256"],
             "sentence_adjudication_status_counts": meta["status_counts"],
             "sentence_adjudication_unresolved_rows": meta["unresolved_holds"],
+            "post_adjudication_stage_path": meta["post_adjudication_stage_path"],
+            "post_adjudication_stage_sha256": meta["post_adjudication_stage_sha256"],
+            "post_adjudication_stage_git_blob_sha": meta["post_adjudication_stage_git_blob_sha"],
+            "sentence_csv_sha256": meta["sentence_csv_sha256"],
+            "sentence_csv_git_blob_sha": meta["sentence_csv_git_blob_sha"],
         }
         q.update(binding_fields)
         qa_path.write_text(json.dumps(q, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
