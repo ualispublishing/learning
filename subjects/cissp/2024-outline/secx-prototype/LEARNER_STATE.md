@@ -114,9 +114,10 @@ For a released MCQ scenario:
 3. both interaction paths reuse the same commitment mutator, so pointer/Tab and keyboard input create the same pending-attempt state;
 4. the committed choice is locked and stored only in `cissp_secx_graph_state_v1` as a pending attempt;
 5. commitment increments the attempt count but does **not** record correctness;
-6. the pending attempt is scored only when the learner deliberately reaches disclosure layer 4, where the keyed answer/explanation is already permitted to appear;
-7. scoring clears that one pending commitment and records a scenario-level `correct`/`incorrect` outcome;
-8. closing and reopening the scenario creates the opportunity for a later independent commitment.
+6. a pending commitment is durable across a normal same-origin page/iframe reload: the runtime reconstructs the locked pending choice from `cissp_secx_graph_state_v1` without creating another attempt, exposing the keyed answer, or recording correctness;
+7. the pending attempt is scored only when the learner deliberately reaches disclosure layer 4, where the keyed answer/explanation is already permitted to appear;
+8. scoring clears that one pending commitment and records a scenario-level `correct`/`incorrect` outcome;
+9. closing and reopening the scenario after scoring creates the opportunity for a later independent commitment.
 
 The numeric keys are contextual rather than global answer aliases. On an open retrieval card, `1–4` retains the existing Atlas Wrong / Hard / Good / Easy grading behavior. On an open pre-reveal scenario, `1…N` means commit the corresponding scenario option. Numeric commitment is disabled after the answer has been exposed in that detail session and cannot overwrite an already pending commitment.
 
@@ -144,7 +145,7 @@ Likewise, due status is a scheduling fact only. It must not be promoted into a s
 - Card details expose the same four Atlas retrieval grades; card `1–4` keyboard grading is unchanged.
 - Scenario details expose an explicit option-selection + **Commit answer** control before layer 4.
 - On an open pre-reveal scenario, contextual `1…N` commits that numbered option directly through the same commitment logic as the visible control.
-- A committed scenario choice is locked until it is scored at layer 4.
+- A committed scenario choice is locked until it is scored at layer 4; if the page reloads first, reopening that scenario must restore the same locked pending choice without exposing a second Commit control.
 - Scenario-node badges may show attempt and reveal counts, but these are practice/activity evidence rather than mastery labels.
 - The Due Reviews control shows the current released-card due count.
 - `R` opens a local graph containing only currently due released retrieval cards.
@@ -170,8 +171,10 @@ Before the learner-state/due-review layer can replace the conservative prototype
 
 The deterministic learner audits must verify that `SECX_LEARNER` is frozen/read-only, that Due/Study consumers do not directly parse/write local storage, that shared status helpers remain the source for due/learning/mature classification, and that scenario attempt mutation methods are not exposed through the learner API.
 
-The browser-fixture preflight additionally verifies that the sampled scenario has 2–9 keyboard-routable options, that the runtime still maps numeric scenario keys through the explicit commitment mutator, and that the browser smoke contains the numeric-choice assertions it is meant to execute.
+The browser-fixture preflight additionally verifies that the sampled scenario has 2–9 keyboard-routable options, that the runtime still maps numeric scenario keys through the explicit commitment mutator, that the visible mobile Commit path remains present, and that the browser smoke still performs the pending-commitment full-reload persistence proof before layer-4 scoring.
 
-The expanded smoke must verify card-grade persistence, same-window due-count refresh, `R` routing into the due-card branch, the separate graph-state key, the depth-4 scenario answer gate, and the explicit-attempt boundary. In particular, it must commit a deterministic scenario choice through the contextual numeric shortcut, prove that the choice is stored unscored before layer 4, prove it is scored exactly once at layer 4, prove Atlas progress is unchanged, and prove that a later reveal without a new commitment increases exposure without increasing the scored-attempt count.
+The expanded smoke must verify card-grade persistence, same-window due-count refresh, `R` routing into the due-card branch, the separate graph-state key, the depth-4 scenario answer gate, and the explicit-attempt boundary. It must commit a deterministic desktop scenario choice through the contextual numeric shortcut, prove that choice is stored unscored before layer 4, prove it is scored exactly once at layer 4, prove Atlas progress is unchanged, and prove that a later reveal without a new commitment increases exposure without increasing the scored-attempt count.
+
+The expanded smoke must also exercise the pointer/touch-equivalent 390px path through visible controls: select a radio answer, activate **Commit answer**, prove the pending choice is locked/unscored and focus moves to **Depth**, reload the mobile review surface before reveal, prove the same choice and commit timestamp survive with no new attempt/correctness/Atlas mutation, reopen the scenario and prove the persisted choice is still locked and answer-hidden, then reach layer 4 through visible **Depth** and score that one original commitment exactly once without horizontal overflow.
 
 The Continue smoke must additionally verify the frozen API surface, absence of mutation methods, frozen card snapshots, same-window storage resynchronization, fresh-state weakest-domain new routing, Learning fallback, Due priority over simultaneous Learning work, caught-up fallback to Study Queue, visible-button-to-routed-node DOM focus transfer, Escape ascent focus continuity through Study Queue to SecX, desktop/mobile coverage, and mobile layout without introducing a second learner-state store.
