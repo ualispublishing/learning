@@ -27,10 +27,10 @@ def main() -> None:
     server = http.server.ThreadingHTTPServer(("127.0.0.1", args.port), handler)
     url = f"http://127.0.0.1:{args.port}/secx-prototype/next.html"
 
-    print("SecX review prototype — localhost preview only")
-    print(f"Serving: {SERVE_ROOT}")
-    print(f"Open:    {url}")
-    print("Stop:    Ctrl-C")
+    print("SecX review prototype — localhost preview only", flush=True)
+    print(f"Serving: {SERVE_ROOT}", flush=True)
+    print(f"Open:    {url}", flush=True)
+    print("Stop:    Ctrl-C", flush=True)
 
     if not args.no_browser:
         threading.Timer(0.35, lambda: webbrowser.open(url)).start()
@@ -38,7 +38,7 @@ def main() -> None:
     try:
         server.serve_forever()
     except KeyboardInterrupt:
-        print("\nPreview stopped.")
+        print("\nPreview stopped.", flush=True)
     finally:
         server.server_close()
 
