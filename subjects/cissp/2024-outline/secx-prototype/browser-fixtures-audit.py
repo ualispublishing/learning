@@ -67,6 +67,8 @@ try:
     ]
     manifest = json.loads(read(QB / "RELEASED_BATCHES.json"))
     learner_state = read(ROOT / "learner-state.js")
+    next_layer = read(ROOT / "next-layer.js")
+    next_html = read(ROOT / "next.html")
     smoke = read(ROOT / "browser-smoke.html")
 except (OSError, ValueError, RuntimeError) as exc:
     print("FAIL secx_browser_fixtures_audit")
@@ -160,6 +162,9 @@ check("Keyboard: press 1–" in learner_state, "scenario detail no longer advert
 check("commitScenarioAttempt(n.id,choice)" in learner_state, "numeric scenario shortcut no longer reuses the explicit commitment mutator")
 check("input[name=\"secx-scenario-choice\"]:checked" in learner_state, "visible scenario Commit path no longer reads the selected radio option")
 check("requestAnimationFrame(()=>detailMore.focus())" in learner_state, "scenario commitment no longer hands focus to the visible Depth control")
+check("function branchRadialPosition" in next_layer and "mobile?.34:.39" in next_layer, "card/scenario branches do not use the reviewed tighter mobile radial radius")
+check(next_layer.count("branchRadialPosition(i,slice.length)") >= 2, "both card and scenario branches must use the mobile-safe radial helper")
+check("@keyframes secxDetailInMobile" in next_html and "@media(max-width:800px){.detail.open{animation:secxDetailInMobile .18s ease}}" in next_html, "mobile expanded detail must use the in-place fade rather than the horizontal slide animation")
 
 smoke_tokens = [
     "'1.9'",
@@ -192,5 +197,5 @@ print(
     f"high_cards_1.9={len(cards_19)} first_card={first_card.get('id') if first_card else 'none'} "
     f"scenarios_1.9={len(scenarios_19)} first_scenario={first_scenario.get('id') if first_scenario else 'none'} "
     f"search=C-472 objective={c472_objectives[0] if c472_objectives else 'none'} "
-    f"review_registry={len(registry_ids)} runtime_questions={len(runtime_questions)} weak_tie=D1 scenario_keyboard=1..N scenario_mobile=radio+commit+depth4"
+    f"review_registry={len(registry_ids)} runtime_questions={len(runtime_questions)} weak_tie=D1 scenario_keyboard=1..N scenario_mobile=radio+commit+depth4+contained"
 )
