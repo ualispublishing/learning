@@ -142,6 +142,9 @@ async function run(){
   key(w,'Escape','Escape');
   await waitFor(()=>hasDomains(d)&&d.querySelector('#crumb')?.textContent==='SecX','Escape from study hub returns to root');
 
+  frame.remove();
+  assert(!frame.isConnected,'desktop iframe is removed before mobile scenario focus phase');
+  await sleep(0);
   const mobileApp=await ready(mobile,'mobile'),md=mobileApp.d,mw=mobileApp.w;
   await waitFor(()=>hasDomains(md),'mobile domain nodes');
   assert(mw.getComputedStyle(md.querySelector('.legend')).display==='none','mobile keyboard legend hidden');
@@ -173,7 +176,13 @@ async function run(){
   const mobileAtlasBefore=mw.localStorage.getItem('cissp_atlas_progress_v1')||'';
   mobileRadios[scenarioModel.answer].click();
   assert(mobileRadios[scenarioModel.answer].checked,'mobile keyed radio answer can be selected');
-  mobile.focus();mw.focus();mobileCommit.focus();
+  const mobileOuter=mobile.contentDocument,mobileProto=mobileOuter?.querySelector('#prototype');
+  assert(mobileProto,'mobile outer shell contains nested prototype iframe');
+  mobile.focus();
+  await waitFor(()=>document.activeElement===mobile,'mobile outer iframe receives focus before scenario Commit');
+  mobileProto.focus();
+  await waitFor(()=>mobileOuter.activeElement===mobileProto,'mobile nested prototype iframe receives focus before scenario Commit');
+  mw.focus();mobileCommit.focus();
   await waitFor(()=>md.activeElement===mobileCommit,'mobile visible Commit receives focus before activation');
   mobileCommit.click();
   const mobilePending=await waitFor(()=>{try{const p=JSON.parse(mw.localStorage.getItem('cissp_secx_graph_state_v1')||'{}').scenarios?.[scenarioId];return p?.pendingAttempt?p:null}catch{return null}},'mobile visible Commit persists pending scenario attempt');
