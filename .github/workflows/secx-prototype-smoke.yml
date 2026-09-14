@@ -134,6 +134,10 @@ jobs:
           curl -fsS http://127.0.0.1:8866/study-site/data-ai.js >/tmp/secx-data-ai.js
           grep -q 'CISSP_CHUNKS' /tmp/secx-data-ai.js
           grep -q '127.0.0.1:8866/secx-prototype/next.html' /tmp/secx-preview.log
+          ACTUAL_HEAD="$(git rev-parse HEAD)"
+          grep -Fq "head=$ACTUAL_HEAD" /tmp/secx-preview.log
+          grep -Eq 'Checkout: branch=(HEAD|secx-web-prototype-20260901) head=[0-9a-f]{40}' /tmp/secx-preview.log
+          grep -Fq 'Status:   clean' /tmp/secx-preview.log
 
       - name: Preserve production CISSP browser smoke
         shell: bash
