@@ -64,14 +64,22 @@ def validate_source_binding(lang: str, rows: list[dict[str, str]]) -> dict[str, 
                 fail(f"source_drift row={index} field={field!r}")
 
     manifest = json.loads(ledgers.MANIFEST.read_text(encoding="utf-8"))
-    decision_sha = (
-        manifest.get("sentence_curation", {})
-        .get("languages", {})
-        .get(lang, {})
-        .get("decision_sha256")
-    )
-    if not decision_sha:
-        fail("release manifest missing sentence decision SHA-256")
+    curation = manifest.get("sentence_curation")
+    if not isinstance(curation, dict):
+        fail("release manifest missing sentence_curation")
+    if curation.get("total_rows") != 3000 or curation.get("unresolved_rows") != 0:
+        fail("release manifest sentence_curation row/hold invariant failed")
+    manifest_langs = curation.get("languages")
+    if not isinstance(manifest_langs, dict):
+        fail("release manifest sentence_curation languages must be an object")
+    entry = manifest_langs.get(lang)
+    if not isinstance(entry, dict):
+        fail(f"release manifest missing {lang} sentence decision entry")
+
+    try:
+        decision = ledgers.candidate_decisions.validate_snapshot(lang, entry)
+    except Exception as exc:
+        fail(f"candidate sentence decision binding invalid: {exc}")
 
     return {
         "master_workbook_path": str(master_path.relative_to(ledgers.ROOT)),
@@ -80,7 +88,10 @@ def validate_source_binding(lang: str, rows: list[dict[str, str]]) -> dict[str, 
         "vocabulary_csv_git_blob_sha": ledgers.git_blob_sha(vocabulary_path),
         "sentence_csv_path": str(sentence_path.relative_to(ledgers.ROOT)),
         "sentence_csv_git_blob_sha": ledgers.git_blob_sha(sentence_path),
-        "sentence_decision_sha256": decision_sha,
+        "sentence_decision_path": decision["path"],
+        "sentence_decision_schema": decision["schema"],
+        "sentence_decision_sha256": decision["sha256"],
+        "sentence_decision_status_counts": decision["status_counts"],
         "release_manifest_path": str(ledgers.MANIFEST.relative_to(ledgers.ROOT)),
         "release_manifest_git_blob_sha": ledgers.git_blob_sha(ledgers.MANIFEST),
     }
