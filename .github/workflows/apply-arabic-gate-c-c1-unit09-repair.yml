@@ -1,0 +1,195 @@
+name: Apply Arabic Gate C C1 Unit 9 Repair
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-arabic-gate-c-c1-unit09-repair.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair-and-rebind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate routed state before repair
+        run: python reading/tools/validate_continuation_state.py
+
+      - name: Apply bounded Unit 9 Q2 repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('reading/arabic/c1/passages.jsonl')
+          pid = 'ar-c1-u09-p01'
+          old_prompt = 'ما المصادر التي تستخدمها سلمى؟'
+          old_answer = 'سجل الشحنات ورسائل الورشة وسجلات أخرى مؤرخة بعد توحيد التقويم.'
+          new_prompt = 'ما المصدران اللذان تقارن بينهما سلمى عند توسيع الجدول بعد توحيد التواريخ؟'
+          new_answer = 'سجل الشحنات ورسائل الورشة.'
+
+          lines = path.read_text(encoding='utf-8').splitlines()
+          hits = 0
+          out = []
+          for line in lines:
+              rec = json.loads(line)
+              if rec.get('id') == pid:
+                  hits += 1
+                  qs = {q.get('id'): q for q in rec.get('questions', [])}
+                  ans = {a.get('question_id'): a for a in rec.get('answer_key', [])}
+                  if qs.get('q2', {}).get('prompt') != old_prompt:
+                      raise SystemExit(f'{pid}: q2 prompt drift; refusing repair')
+                  if ans.get('q2', {}).get('answer') != old_answer:
+                      raise SystemExit(f'{pid}: q2 answer drift; refusing repair')
+                  qs['q2']['prompt'] = new_prompt
+                  ans['q2']['answer'] = new_answer
+                  rec['revision'] = int(rec.get('revision', 0)) + 1
+                  note = '2026-09-16 fresh Gate C comprehension/answer-grounding repair (C1 Unit 9): narrowed q2 from an unbounded all-sources question to the initial two-source table comparison and aligned the key to those two sources; passage text unchanged; no educator/publication release claim.'
+                  notes = rec.setdefault('quality', {}).setdefault('notes', [])
+                  if note not in notes:
+                      notes.append(note)
+                  line = json.dumps(rec, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+              out.append(line)
+          if hits != 1:
+              raise SystemExit(f'expected exactly one {pid} record; found {hits}')
+          path.write_text('\n'.join(out) + '\n', encoding='utf-8')
+          PY
+
+      - name: Rebuild affected hash-bound evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python reading/tools/run_post_generation_gate0.py
+          python reading/tools/run_arabic_fresh_deterministic_revalidation.py
+          python reading/tools/build_arabic_gate_b_naturalness_review.py
+
+      - name: Rebind Gate B Unit 9 decision
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          pid = 'ar-c1-u09-p01'
+          inv_path = Path('reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json')
+          dec_path = Path('reading/audit/arabic_gate_b_decisions_2026-08-30/c1_u09.json')
+          inv = json.loads(inv_path.read_text(encoding='utf-8'))
+          new_hash = inv['levels']['c1']['record_learner_facing_sha256'][pid]
+          dec = json.loads(dec_path.read_text(encoding='utf-8'))
+          target = next((d for d in dec.get('decisions', []) if d.get('passage_id') == pid), None)
+          if target is None:
+              raise SystemExit('Gate B Unit 9 decision missing target passage')
+          if target.get('learner_facing_sha256') == new_hash:
+              raise SystemExit('learner-facing hash unexpectedly unchanged after q2 repair')
+          target['learner_facing_sha256'] = new_hash
+          entry = {
+              'date': '2026-09-16',
+              'gate_c_artifact': 'reading/audit/arabic_gate_c_decisions_2026-09-05/c1_u09.json',
+              'scope': ['ar-c1-u09-p01 question q2', 'ar-c1-u09-p01 answer q2'],
+              'gate_b_language_recheck': 'PASS',
+              'reason': 'Gate C narrowed one ambiguous literal-detail prompt to the initial two-source comparison and aligned its answer to exactly those two text-grounded sources; passage prose was unchanged and Gate B was rebound to exact-current learner-facing content.',
+              'release_claim': False,
+          }
+          rows = dec.setdefault('post_gate_c_revalidations', [])
+          rows[:] = [x for x in rows if x.get('gate_c_artifact') != entry['gate_c_artifact'] or x.get('scope') != entry['scope']]
+          rows.append(entry)
+          dec_path.write_text(json.dumps(dec, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+          python reading/tools/sync_arabic_gate_b_progress.py
+
+      - name: Record completed Gate C Unit 9 audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          inv_path = Path('reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json')
+          out = Path('reading/audit/arabic_gate_c_decisions_2026-09-05/c1_u09.json')
+          if out.exists():
+              raise SystemExit('Gate C Unit 9 artifact appeared concurrently; refusing overwrite')
+          inv = json.loads(inv_path.read_text(encoding='utf-8'))
+          level = inv['levels']['c1']
+          h = level['record_learner_facing_sha256']
+          ids = [f'ar-c1-u09-p0{i}' for i in range(1, 7)]
+          decisions = []
+          for pid in ids:
+              if pid not in h:
+                  raise SystemExit(f'missing current learner-facing hash for {pid}')
+              if pid == 'ar-c1-u09-p01':
+                  decisions.append({
+                      'passage_id': pid,
+                      'learner_facing_sha256': h[pid],
+                      'decision': 'PASS_AFTER_REPAIR',
+                      'qa_pairs_reviewed': 10,
+                      'finding_count': 1,
+                      'findings': [{
+                          'finding_id': 'ar-c1-u09-p01-gC-01',
+                          'field': 'question q2 / answer q2',
+                          'dimension': 'assessment_scope_ambiguity',
+                          'severity': 'moderate',
+                          'status': 'REPAIRED',
+                          'rationale': 'The original q2 broadly asked which sources Salma uses even though the passage later introduces additional source types, while the stored key referred only to the initial comparison. The prompt was narrowed to the two sources compared when the table is expanded after date normalization, and the key was aligned to exactly those two sources: the shipping record and workshop letters.'
+                      }]
+                  })
+              else:
+                  decisions.append({'passage_id': pid, 'learner_facing_sha256': h[pid], 'decision': 'PASS', 'qa_pairs_reviewed': 10, 'finding_count': 0, 'findings': []})
+
+          doc = {
+              'schema_version': 1,
+              'project_id': 'LANG-A1C2',
+              'language': 'arabic',
+              'level': 'C1',
+              'unit': 9,
+              'date': '2026-09-16',
+              'gate': 'Gate C — comprehension and answer-grounding audit',
+              'canonical_path': 'reading/arabic/c1/passages.jsonl',
+              'canonical_sha256': level['canonical_sha256'],
+              'records_reviewed': 6,
+              'qa_pairs_reviewed': 60,
+              'records_with_findings': 1,
+              'fresh_findings': 1,
+              'decisions': decisions,
+              'quality_promotion': False,
+              'release_claim': False,
+              'guard': 'Fresh Gate C review independently examined all 6 C1 Unit 9 records and all 60 linked question/answer pairs. One assessment-scope ambiguity was found in ar-c1-u09-p01 q2 and repaired by narrowing the literal-detail prompt to the initial two-source table comparison and aligning the answer to those two sources; passage prose was unchanged. Gate B was rebuilt/rebound to the exact-current learner-facing hash and the changed question/answer received a targeted language recheck PASS. All six Unit 9 records now pass Gate C, with p01 PASS_AFTER_REPAIR. This remains internal review evidence only: quality_promotion=false and release_claim=false.'
+          }
+          out.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+
+      - name: Refresh state manifest and validate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python reading/tools/refresh_state_manifest.py
+          python reading/tools/validate_continuation_state.py
+
+      - name: Commit bounded repair and evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/apply-arabic-gate-c-c1-unit09-repair.yml
+          git add \
+            reading/arabic/c1/passages.jsonl \
+            reading/audit/post_generation_gate0_2026-08-30.json \
+            reading/audit/arabic_fresh_deterministic_revalidation_2026-08-30.json \
+            reading/audit/arabic_gate_b_naturalness_inventory_2026-08-30.json \
+            reading/audit/arabic_gate_b_packets_2026-08-30/c1.jsonl \
+            reading/audit/arabic_gate_b_decisions_2026-08-30/c1_u09.json \
+            reading/audit/arabic_gate_c_decisions_2026-09-05/c1_u09.json \
+            reading/RELEASE_STATUS.json \
+            reading/STATE_MANIFEST.json
+          test -n "$(git status --porcelain)"
+          git commit -m 'Repair Arabic C1 Unit 9 Gate C source-scope question'
+          git push origin HEAD:main
