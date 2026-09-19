@@ -78,6 +78,8 @@ check("relationships.onload=readyExpanded" in next_html, "expanded ready state m
 check("RELATIONSHIP_REVIEW.json" not in next_html, "reviewer relationship registry must never be learner-loaded")
 check("RELATIONSHIP_REVIEW.json" not in lens, "relationship lens must not reference reviewer relationship registry")
 check("SECX_RELEASED_RELATIONSHIPS" in lens, "relationship lens must consume only the released runtime relationship channel")
+check("const releasedRelationships=Array.isArray(window.SECX_RELEASED_RELATIONSHIPS)?window.SECX_RELEASED_RELATIONSHIPS:Object.freeze([]);" in lens, "relationship lens must snapshot the audited released relationship array once at initialization")
+check("function relationshipRecords(){return releasedRelationships}" in lens, "relationship lens layouts must read the stable initialization snapshot")
 check("localStorage.setItem" not in lens, "relationship lens must not write learner or graph localStorage")
 check("relationshipLensBtn" in lens and "relationshipsLayout" in lens, "relationship lens navigation surface is incomplete")
 
@@ -90,5 +92,5 @@ if errors:
 print(
     "PASS secx_relationship_release_audit "
     f"approved={len(approved)} prototype_released={len(released)} learner_runtime_loaded=true "
-    "review_copy=exact runtime_copy=exact reviewer_registry=NOT_LOADED"
+    "review_copy=exact runtime_copy=exact runtime_snapshot=stable-init reviewer_registry=NOT_LOADED"
 )
