@@ -2,8 +2,9 @@
 'use strict';
 
 let relationshipId=null;
+const releasedRelationships=Array.isArray(window.SECX_RELEASED_RELATIONSHIPS)?window.SECX_RELEASED_RELATIONSHIPS:Object.freeze([]);
 
-function relationshipRecords(){return Array.isArray(window.SECX_RELEASED_RELATIONSHIPS)?window.SECX_RELEASED_RELATIONSHIPS:[]}
+function relationshipRecords(){return releasedRelationships}
 function relationshipById(id){return relationshipRecords().find(r=>r.id===id)||null}
 function relationshipIdFromNode(n){if(n?.relationshipId)return n.relationshipId;const id=String(n?.id||''),prefix='relationship:';return id.startsWith(prefix)&&!id.startsWith('relationship:endpoint:')?id.slice(prefix.length):null}
 function endpointTargetFromNode(n){if(n?.itemId)return n.itemId;const parts=String(n?.id||'').split(':');if(parts.length!==4||parts[0]!=='relationship'||parts[1]!=='endpoint')return null;const r=relationshipById(parts[2]);return parts[3]==='from'?r?.from_id:parts[3]==='to'?r?.to_id:null}
