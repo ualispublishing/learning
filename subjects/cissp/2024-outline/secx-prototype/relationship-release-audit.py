@@ -80,6 +80,9 @@ check("RELATIONSHIP_REVIEW.json" not in lens, "relationship lens must not refere
 check("SECX_RELEASED_RELATIONSHIPS" in lens, "relationship lens must consume only the released runtime relationship channel")
 check("const releasedRelationships=Array.isArray(window.SECX_RELEASED_RELATIONSHIPS)?window.SECX_RELEASED_RELATIONSHIPS:Object.freeze([]);" in lens, "relationship lens must snapshot the audited released relationship array once at initialization")
 check("function relationshipRecords(){return releasedRelationships}" in lens, "relationship lens layouts must read the stable initialization snapshot")
+check("function decorateRelationshipKinds()" in lens and "el.classList.add(n.kind)" in lens, "relationship lens must synchronously decorate reviewed-link node kinds")
+check("function renderRelationshipLayout(focus=false){render(focus);decorateRelationshipKinds();requestAnimationFrame(decorateRelationshipKinds)}" in lens, "relationship layout must apply node-kind classes synchronously and retain a next-frame safety pass")
+check("renderRelationshipLayout(focus)" in lens, "relationship layouts must use the synchronous relationship render boundary")
 check("localStorage.setItem" not in lens, "relationship lens must not write learner or graph localStorage")
 check("relationshipLensBtn" in lens and "relationshipsLayout" in lens, "relationship lens navigation surface is incomplete")
 
@@ -92,5 +95,5 @@ if errors:
 print(
     "PASS secx_relationship_release_audit "
     f"approved={len(approved)} prototype_released={len(released)} learner_runtime_loaded=true "
-    "review_copy=exact runtime_copy=exact runtime_snapshot=stable-init reviewer_registry=NOT_LOADED"
+    "review_copy=exact runtime_copy=exact runtime_snapshot=stable-init kind_classes=sync+raf reviewer_registry=NOT_LOADED"
 )
