@@ -33,6 +33,14 @@ function endpointDetails(id,r,role){const o=endpointObjective(id);return{
 }}
 function relationshipRadialPosition(i,count,outer=.37,inner=.23){const mobile=window.innerWidth<=800;return radialPosition(i,count,mobile?Math.min(outer,.29):outer,mobile?Math.min(inner,.20):inner)}
 function settleRelationshipFocus(){focusActive();requestAnimationFrame(focusActive)}
+function decorateRelationshipKinds(){
+  for(const n of nodes){
+    if(!String(n?.kind||'').startsWith('relationship-'))continue;
+    const el=[...document.querySelectorAll('.node')].find(x=>x.dataset.id===n.id);
+    if(el)el.classList.add(n.kind);
+  }
+}
+function renderRelationshipLayout(focus=false){render(focus);decorateRelationshipKinds();requestAnimationFrame(decorateRelationshipKinds)}
 
 const style=document.createElement('style');
 style.textContent=`
@@ -53,7 +61,7 @@ window.relationshipsLayout=function(returnTo=null,focus=false){
   const center={id:'relationships:root',title:'Reviewed Links',summary:`${records.length} relationship-specific, prototype-released semantic links.`,kind:'relationship-root',x:.5,y:.5,labels:['reviewed relationships','released prototype'],details:{rule:'Traverse only semantic relationships that have explicit relationship-level review and prototype release evidence.',why:'The relationship lens consumes the dedicated released relationship runtime artifact. It never loads the reviewer queue or infers edges from similarity, shared sources, or coverage counts.',traps:['These links supplement rather than replace the released Atlas hierarchy.','No relationship should appear here unless it exists in the released relationship artifact.'],sources:['SecX RELEASED_RELATIONSHIPS.json promotion artifact'],practice:'Choose a link to inspect its stable released endpoints and source-backed rationale.'}};
   nodes=[center];links=[];
   records.forEach((r,i)=>{const p=relationshipRadialPosition(i,records.length,.37,.23);nodes.push({id:`relationship:${r.id}`,relationshipId:r.id,title:relationTitle(r),summary:r.rationale,kind:'relationship-node',x:p.x,y:p.y,labels:[r.id,r.type,'reviewed'],details:relationDetails(r)});links.push([center.id,`relationship:${r.id}`])});
-  level='relationships';relationshipId=null;parentDomain=null;parentObjective=null;active=returnTo&&nodes.some(n=>n.id===returnTo)?returnTo:'relationships:root';depth=0;render(focus);updateRelationshipButton();
+  level='relationships';relationshipId=null;parentDomain=null;parentObjective=null;active=returnTo&&nodes.some(n=>n.id===returnTo)?returnTo:'relationships:root';depth=0;renderRelationshipLayout(focus);updateRelationshipButton();
 };
 
 window.relationshipHubLayout=function(id,returnTo=null,focus=false){
@@ -62,7 +70,7 @@ window.relationshipHubLayout=function(id,returnTo=null,focus=false){
   nodes=[{id:centerId,relationshipId:r.id,title:relationTitle(r),summary:r.rationale,kind:'relationship-node',x:.5,y:.5,labels:[r.id,r.type,'reviewed'],details:relationDetails(r)}];links=[];
   const endpoints=[{role:'from',id:r.from_id,x:.22,y:.66},{role:'to',id:r.to_id,x:.78,y:.66}];
   endpoints.forEach(e=>{const o=endpointObjective(e.id),nodeId=`relationship:endpoint:${r.id}:${e.role}`;nodes.push({id:nodeId,itemId:e.id,relationshipId:r.id,endpointRole:e.role,title:endpointTitle(e.id),summary:o?.summary||`${e.role} endpoint`,kind:'relationship-endpoint',x:e.x,y:e.y,labels:[e.role,r.type,e.id],details:endpointDetails(e.id,r,e.role)});links.push([centerId,nodeId])});
-  level='relationship-hub';relationshipId=r.id;parentDomain=null;parentObjective=null;active=returnTo&&nodes.some(n=>n.id===returnTo)?returnTo:centerId;depth=0;render(focus);
+  level='relationship-hub';relationshipId=r.id;parentDomain=null;parentObjective=null;active=returnTo&&nodes.some(n=>n.id===returnTo)?returnTo:centerId;depth=0;renderRelationshipLayout(focus);
 };
 
 relationshipButton.addEventListener('click',()=>{window.relationshipsLayout(null,false);settleRelationshipFocus()});
