@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[4]
 PROTO = ROOT / "subjects/cissp/2024-outline/secx-prototype"
 WORKFLOW = ROOT / ".github/workflows/secx-prototype-smoke.yml"
+INDEX = PROTO / "index.html"
 NEXT = PROTO / "next.html"
 PREVIEW = PROTO / "serve-preview.py"
 MANUAL_TESTING = PROTO / "MANUAL_TESTING.md"
@@ -94,11 +95,14 @@ def main() -> None:
     changed = changed_files()
     prefix = "subjects/cissp/2024-outline/secx-prototype/"
     workflow = WORKFLOW.read_text(encoding="utf-8")
+    index_html = INDEX.read_text(encoding="utf-8")
     next_html = NEXT.read_text(encoding="utf-8")
     preview = PREVIEW.read_text(encoding="utf-8")
     manual_testing = MANUAL_TESTING.read_text(encoding="utf-8")
 
     require(next_html.count('src="index.html"') == 1, "next.html must embed conservative index.html exactly once")
+    require("future stable junction for retrieval cards, scenarios, and typed relationships" not in index_html, "conservative subtopic copy reverted to stale future-junction wording")
+    require("Retrieval cards and released scenarios are reached from the expanded objective hub; reviewed semantic links currently connect released objectives, not subtopics." in index_html, "conservative subtopic copy must describe current objective-hub practice routing and objective-level reviewed links")
 
     positions: list[int] = []
     for dependency in EXPECTED_RUNTIME:
@@ -169,7 +173,7 @@ def main() -> None:
         f"runtime_dependencies={len(EXPECTED_RUNTIME)} local_runtime_js={len(LOCAL_RUNTIME)} "
         f"candidate_audits={len(audit_paths)} browser_smokes={len(smoke_shells)} "
         "entrypoint=ordered+single-load+fail-visible reviewer_only=isolated "
-        "manual_preview=localhost-only+syntax-gated+http-smoked workflow=fully-wired"
+        "conservative_copy=current-scope manual_preview=localhost-only+syntax-gated+http-smoked workflow=fully-wired"
     )
 
 
