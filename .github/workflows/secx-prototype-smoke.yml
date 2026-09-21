@@ -103,6 +103,7 @@ jobs:
           bash -n subjects/cissp/2024-outline/secx-prototype/coverage-browser-smoke.sh
           bash -n subjects/cissp/2024-outline/secx-prototype/projection-search-smoke.sh
           bash -n subjects/cissp/2024-outline/secx-prototype/relationship-browser-smoke.sh
+          bash -n subjects/cissp/2024-outline/secx-prototype/hierarchy-mobile-smoke.sh
           python subjects/cissp/2024-outline/secx-prototype/audit.py
           python subjects/cissp/2024-outline/secx-prototype/browser-fixtures-audit.py
           python subjects/cissp/2024-outline/secx-prototype/due-audit.py
@@ -148,6 +149,11 @@ jobs:
         shell: bash
         working-directory: subjects/cissp/2024-outline/secx-prototype
         run: bash browser-smoke.sh 8776
+
+      - name: SecX 390px hierarchy containment browser smoke
+        shell: bash
+        working-directory: subjects/cissp/2024-outline/secx-prototype
+        run: bash hierarchy-mobile-smoke.sh 8876
 
       - name: SecX loader readiness browser smoke
         shell: bash
