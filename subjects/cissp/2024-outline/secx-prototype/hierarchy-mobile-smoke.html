@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SecX 390px Hierarchy Containment Smoke</title></head>
+<body>
+<pre id="result" data-smoke="running">RUNNING</pre>
+<iframe id="mobile" src="next.html?hierarchy-mobile-smoke=1" style="width:390px;height:844px;border:0"></iframe>
+<script>
+(()=>{'use strict';
+const result=document.querySelector('#result'),mobile=document.querySelector('#mobile');
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function waitFor(fn,label,timeout=30000){const end=Date.now()+timeout;while(Date.now()<end){try{const value=fn();if(value)return value}catch{}await sleep(50)}throw new Error(`Timed out waiting for ${label}`)}
+function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
+function inner(){const outer=mobile.contentDocument,proto=outer?.querySelector('#prototype');return{d:proto?.contentDocument,w:proto?.contentWindow,proto}}
+function node(d,id){return [...d.querySelectorAll('.node')].find(el=>el.dataset.id===id)}
+function bounds(d){const vw=d.documentElement.clientWidth;return[...d.querySelectorAll('.node')].map(el=>{const r=el.getBoundingClientRect();return{id:el.dataset.id||'',left:Math.round(r.left),right:Math.round(r.right),top:Math.round(r.top),bottom:Math.round(r.bottom),width:Math.round(r.width)}}).filter(x=>x.width>0&&(x.left<-2||x.right>vw+2))}
+function assertContained(d,label){const offenders=bounds(d);assert(d.documentElement.scrollWidth<=d.documentElement.clientWidth+2,`${label} document has no horizontal overflow; scroll=${d.documentElement.scrollWidth}/${d.documentElement.clientWidth}`);assert(offenders.length===0,`${label} nodes stay inside 390px viewport; offenders=${JSON.stringify(offenders)}`)}
+function clickId(d,id){const el=node(d,id);assert(el,`${id} exists`);el.click();return el}
+async function ready(){return waitFor(()=>{const x=inner(),scope=x.d?.querySelector('#scope')?.textContent||'';return x.d&&x.w&&x.proto?.dataset.secxExpandedState==='ready'&&/\d+ released scenarios/.test(scope)&&x.d.querySelector('[data-sec-detail-open]')?x:null},'expanded 390px hierarchy runtime ready')}
+async function openSelected(d,w,id,label){clickId(d,id);await waitFor(()=>d.querySelector('#detail.open')&&w.current?.()?.id===id&&d.querySelector('[data-sec-detail-open]'),`${label} exposes visible Open control`);d.querySelector('[data-sec-detail-open]').click()}
+async function run(){
+  const {d,w}=await ready();
+  await waitFor(()=>Array.from({length:8},(_,i)=>node(d,`d${i+1}`)).every(Boolean),'eight mobile domain nodes');
+  assert(d.documentElement.clientWidth===390,`inner prototype viewport is exactly 390px; got ${d.documentElement.clientWidth}`);
+  assertContained(d,'root/domain cluster');
+
+  await openSelected(d,w,'d1','D1');
+  await waitFor(()=>node(d,'1.9')&&d.querySelector('#crumb')?.textContent.includes('Security and Risk Management'),'D1 opens objective cluster');
+  await sleep(80);
+  assertContained(d,'D1 objective cluster');
+
+  await openSelected(d,w,'1.9','objective 1.9');
+  await waitFor(()=>['facet:1.9:subtopics','facet:1.9:cards','facet:1.9:scenarios'].every(id=>node(d,id)),'objective 1.9 hub facets');
+  await sleep(80);
+  assertContained(d,'objective 1.9 hub');
+
+  await openSelected(d,w,'facet:1.9:subtopics','subtopic facet');
+  await waitFor(()=>d.querySelectorAll('.node.subtopic').length>0&&d.querySelector('#crumb')?.textContent.includes('Subtopics'),'objective 1.9 subtopic branch');
+  await sleep(80);
+  assertContained(d,'objective 1.9 subtopic cluster');
+
+  const first=d.querySelector('.node.subtopic');first.click();
+  await waitFor(()=>d.querySelector('#detail.open')&&w.current?.()?.kind==='subtopic','subtopic detail opens');
+  const detail=d.querySelector('#detail').getBoundingClientRect();
+  assert(detail.left>=-2&&detail.right<=d.documentElement.clientWidth+2,`subtopic detail stays inside 390px viewport; rect=${JSON.stringify({left:Math.round(detail.left),right:Math.round(detail.right),width:Math.round(detail.width)})}`);
+
+  result.dataset.smoke='pass';
+  result.textContent='PASS SecX 390px hierarchy containment smoke: root domains D1-objectives objective-hub subtopics subtopic-detail';
+}
+run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
+})();
+</script>
+</body>
+</html>
