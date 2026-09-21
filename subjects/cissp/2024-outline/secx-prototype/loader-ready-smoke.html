@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SecX Loader Readiness Smoke</title></head>
+<body>
+<pre id="result" data-smoke="running">RUNNING</pre>
+<iframe id="desktop" src="next.html?loader-ready-smoke=desktop" style="width:1280px;height:900px;border:0"></iframe>
+<iframe id="mobile" src="next.html?loader-ready-smoke=mobile" style="width:390px;height:844px;border:0"></iframe>
+<script>
+(()=>{'use strict';
+const result=document.querySelector('#result');
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+function assert(ok,label){if(!ok)throw new Error(`Assertion failed: ${label}`)}
+async function waitReady(wrapper,label,timeout=30000){
+  const end=Date.now()+timeout;
+  while(Date.now()<end){
+    const shell=wrapper.contentDocument;
+    const proto=shell?.querySelector('#prototype');
+    const state=proto?.dataset?.secxExpandedState||'';
+    const inner=proto?.contentDocument;
+    const status=inner?.querySelector('#secxExpandedStatus');
+    if(state==='error')throw new Error(`${label} expanded loader entered error: ${status?.textContent||'no status text'}`);
+    if(state==='ready'&&inner&&status)return{shell,proto,inner,status};
+    await sleep(50);
+  }
+  throw new Error(`Timed out waiting for ${label} expanded loader ready state`);
+}
+function verify(app,label){
+  const{proto,inner,status}=app;
+  assert(proto.getAttribute('src')==='index.html',`${label} keeps conservative index.html iframe source`);
+  assert(proto.dataset.secxExpandedState==='ready',`${label} outer loader state is ready`);
+  assert(status.getAttribute('role')==='status',`${label} ready status uses non-alert role`);
+  assert(status.getAttribute('aria-live')==='polite',`${label} ready status uses polite live region`);
+  assert(status.classList.contains('sr'),`${label} ready status is visually hidden`);
+  assert(status.textContent==='Expanded review layer ready.',`${label} ready status text is exact`);
+  assert(!inner.querySelector('.secx-expanded-status[role="alert"]'),`${label} exposes no visible loader error alert on success`);
+  assert(inner.querySelector('#crumb')?.textContent==='SecX',`${label} conservative graph remains mounted`);
+  assert(inner.querySelector('[data-id="d1"]'),`${label} conservative domain graph remains available`);
+}
+async function run(){
+  const desktop=await waitReady(document.querySelector('#desktop'),'desktop');
+  const mobile=await waitReady(document.querySelector('#mobile'),'mobile');
+  verify(desktop,'desktop');
+  verify(mobile,'mobile');
+  result.dataset.smoke='pass';
+  result.textContent='PASS SecX loader readiness smoke: desktop+mobile ready status-hidden conservative-fallback-preserved';
+}
+run().catch(err=>{result.dataset.smoke='fail';result.textContent=`FAIL ${err.stack||err}`;console.error(err)});
+})();
+</script>
+</body>
+</html>
