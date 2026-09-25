@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "started_at": "2026-09-25T15:15:04+00:00",
-  "completed_at": "2026-09-25T15:15:33+00:00",
+  "started_at": "2026-09-25T20:00:47+00:00",
+  "completed_at": "2026-09-25T20:02:06+00:00",
   "source_count": 45,
-  "successful_sources": 45,
-  "failed_sources": 0,
-  "job_count": 64,
-  "new_job_count": 0,
+  "successful_sources": 43,
+  "failed_sources": 2,
+  "job_count": 38,
+  "new_job_count": 1,
   "sources": [
     {
       "provider": "greenhouse",
@@ -131,8 +131,9 @@
       "provider": "greenhouse",
       "source": "mthree Recruiting Portal",
       "slug": "mthreerecruitingportal",
-      "status": "ok",
-      "jobs": 26
+      "status": "error",
+      "jobs": 0,
+      "error": "TimeoutError: The read operation timed out"
     },
     {
       "provider": "greenhouse",
@@ -167,7 +168,7 @@
       "source": "PointClickCare",
       "slug": "pointclickcare",
       "status": "ok",
-      "jobs": 5
+      "jobs": 6
     },
     {
       "provider": "lever",
@@ -187,8 +188,9 @@
       "provider": "lever",
       "source": "Veeva",
       "slug": "veeva",
-      "status": "ok",
-      "jobs": 1
+      "status": "error",
+      "jobs": 0,
+      "error": "HTTPError: HTTP Error 502: Bad Gateway"
     },
     {
       "provider": "lever",
@@ -314,7 +316,7 @@
       "source": "Cerebras Systems",
       "slug": "cerebras",
       "status": "ok",
-      "jobs": 3
+      "jobs": 2
     },
     {
       "provider": "ashby",
@@ -325,6 +327,6 @@
     }
   ],
   "candidate_mode": "graduated_2026_new_grad_junior",
-  "student_only_jobs_excluded": 19,
+  "student_only_jobs_excluded": 18,
   "non_canada_location_jobs_excluded": 0
 }
