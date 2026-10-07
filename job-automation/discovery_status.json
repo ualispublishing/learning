@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "started_at": "2026-10-07T11:03:17+00:00",
-  "completed_at": "2026-10-07T11:03:34+00:00",
+  "started_at": "2026-10-07T21:17:22+00:00",
+  "completed_at": "2026-10-07T21:18:06+00:00",
   "source_count": 45,
-  "successful_sources": 45,
-  "failed_sources": 0,
-  "job_count": 56,
-  "new_job_count": 0,
+  "successful_sources": 44,
+  "failed_sources": 1,
+  "job_count": 54,
+  "new_job_count": 1,
   "sources": [
     {
       "provider": "greenhouse",
@@ -132,7 +132,7 @@
       "source": "mthree Recruiting Portal",
       "slug": "mthreerecruitingportal",
       "status": "ok",
-      "jobs": 22
+      "jobs": 21
     },
     {
       "provider": "greenhouse",
@@ -180,8 +180,9 @@
       "provider": "lever",
       "source": "Fullscript",
       "slug": "fullscript",
-      "status": "ok",
-      "jobs": 1
+      "status": "error",
+      "jobs": 0,
+      "error": "TimeoutError: The read operation timed out"
     },
     {
       "provider": "lever",
@@ -195,7 +196,7 @@
       "source": "BIS Safety Software",
       "slug": "bis",
       "status": "ok",
-      "jobs": 3
+      "jobs": 2
     },
     {
       "provider": "lever",
@@ -216,7 +217,7 @@
       "source": "Emburse",
       "slug": "emburse",
       "status": "ok",
-      "jobs": 2
+      "jobs": 3
     },
     {
       "provider": "lever",
@@ -279,7 +280,7 @@
       "source": "Solink",
       "slug": "solink",
       "status": "ok",
-      "jobs": 2
+      "jobs": 0
     },
     {
       "provider": "ashby",
@@ -293,7 +294,7 @@
       "source": "Docebo",
       "slug": "docebo",
       "status": "ok",
-      "jobs": 2
+      "jobs": 1
     },
     {
       "provider": "ashby",
@@ -325,6 +326,6 @@
     }
   ],
   "candidate_mode": "graduated_2026_new_grad_junior",
-  "student_only_jobs_excluded": 18,
+  "student_only_jobs_excluded": 15,
   "non_canada_location_jobs_excluded": 0
 }
