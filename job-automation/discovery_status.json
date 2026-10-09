@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "started_at": "2026-10-09T11:18:26+00:00",
-  "completed_at": "2026-10-09T11:19:05+00:00",
+  "started_at": "2026-10-09T20:52:34+00:00",
+  "completed_at": "2026-10-09T20:53:00+00:00",
   "source_count": 45,
-  "successful_sources": 45,
-  "failed_sources": 0,
-  "job_count": 51,
-  "new_job_count": 0,
+  "successful_sources": 44,
+  "failed_sources": 1,
+  "job_count": 53,
+  "new_job_count": 2,
   "sources": [
     {
       "provider": "greenhouse",
@@ -19,8 +19,9 @@
       "provider": "greenhouse",
       "source": "7shifts",
       "slug": "7shifts",
-      "status": "ok",
-      "jobs": 0
+      "status": "error",
+      "jobs": 0,
+      "error": "HTTPError: HTTP Error 404: Not Found"
     },
     {
       "provider": "greenhouse",
@@ -167,7 +168,7 @@
       "source": "PointClickCare",
       "slug": "pointclickcare",
       "status": "ok",
-      "jobs": 5
+      "jobs": 7
     },
     {
       "provider": "lever",
