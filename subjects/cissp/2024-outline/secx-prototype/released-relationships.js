@@ -1,0 +1,50 @@
+window.SECX_RELEASED_RELATIONSHIPS=Object.freeze([
+  {
+    "id": "REL-001",
+    "from_id": "5.1",
+    "to_id": "1.8",
+    "type": "depends-on",
+    "rationale": "Controlling physical and logical access depends on personnel-lifecycle signals such as onboarding, transfer, and termination so access can be granted, changed, or revoked at the right time. NIST SP 800-53 Rev. 5 Personnel Termination and Personnel Transfer explicitly connect personnel events to disabling, revoking, reviewing, and changing system or facility access.",
+    "evidence": {
+      "kind": "manual-source-review",
+      "references": [
+        "ISC2_OUTLINE: objectives 1.8 and 5.1",
+        "NIST_800_53: PS-4 Personnel Termination; PS-5 Personnel Transfer; related access-control actions"
+      ]
+    },
+    "reviewed_by": "OpenAI GPT-5.6 Sol source review",
+    "reviewed_on": "2026-09-10"
+  },
+  {
+    "id": "REL-002",
+    "from_id": "7.6",
+    "to_id": "7.2",
+    "type": "evidenced-by",
+    "rationale": "Incident management activities such as detection, response, mitigation, recovery, and lessons learned are informed by operational evidence from logging and monitoring. The CISSP outline explicitly places logging and monitoring in objective 7.2 and detection through recovery in 7.6; NIST SP 800-61 Rev. 3 likewise treats effective incident detection, response, and recovery as integrated cybersecurity-risk-management activities.",
+    "evidence": {
+      "kind": "manual-source-review",
+      "references": [
+        "ISC2_OUTLINE: objectives 7.2 and 7.6",
+        "NIST_800_61_3: incident detection, response, and recovery recommendations"
+      ]
+    },
+    "reviewed_by": "OpenAI GPT-5.6 Sol source review",
+    "reviewed_on": "2026-09-10"
+  },
+  {
+    "id": "REL-003",
+    "from_id": "7.10",
+    "to_id": "1.7",
+    "type": "depends-on",
+    "rationale": "Recovery strategies should be selected from business-continuity requirements and impact analysis rather than chosen in isolation. NIST SP 800-34 Rev. 1 states that backup and recovery methods should address disruption impacts and allowable downtimes identified in the BIA, directly linking recovery design to the business-impact analysis represented in CISSP objective 1.7.",
+    "evidence": {
+      "kind": "manual-source-review",
+      "references": [
+        "ISC2_OUTLINE: objectives 1.7 and 7.10",
+        "NIST_800_34: Rev. 1 section 3.4.1 Backup and Recovery; BIA-driven recovery strategy"
+      ]
+    },
+    "reviewed_by": "OpenAI GPT-5.6 Sol source review",
+    "reviewed_on": "2026-09-10"
+  }
+]);
