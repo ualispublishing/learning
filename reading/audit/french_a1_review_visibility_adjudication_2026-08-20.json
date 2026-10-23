@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-20",
+  "language": "fr",
+  "level": "A1",
+  "status": "ADJUDICATED_REPAIR_LEDGER",
+  "bound_canonical_hash": "1cdb31ecb8b987c50051bb6f8fa5b2f7fda812cb3004c81ab8697f832fceacba",
+  "inputs": [
+    "reading/audit/french_exact_review_visibility_audit_2026-08-19.json",
+    "reading/audit/french_review_target_visibility_audit_2026-08-19.json",
+    "reading/audit/french_a1_review_visibility_reconciliation_2026-08-19.json",
+    "reading/schema/passage.schema.json",
+    "docs/SPACED_REINFORCEMENT_STANDARD.md"
+  ],
+  "adjudication": {
+    "exact_form_candidates": 34,
+    "lemma_confirmed_true_phantom_reviews": 18,
+    "inflection_or_surface_realization_false_positives": 16,
+    "rule": "A review declaration is a true phantom only when the target is absent under normalized surface+lemma matching and no targeted question/task supplies the declared review. Exact-form mismatch alone is insufficient because passage.schema.json does not define reviewLexicalTarget.form as an exact surface-token requirement."
+  },
+  "true_phantom_review_repairs": [
+    {"passage_id":"fr-a1-u01-p02","target_id":"fr-rank-0048","form":"ici","stage":"R1","representation":"running_text","action":"REMOVE_REVIEW_DECLARATION_UNLESS_LEARNER_FACING_REVIEW_IS_INTENTIONALLY_ADDED"},
+    {"passage_id":"fr-a1-u01-p02","target_id":"fr-rank-0047","form":"venir","stage":"R1","representation":"running_text","action":"REMOVE_REVIEW_DECLARATION_UNLESS_LEARNER_FACING_REVIEW_IS_INTENTIONALLY_ADDED"},
+    {"passage_id":"fr-a1-u01-p03","target_id":"fr-rank-0048","form":"ici","stage":"R2","representation":"running_text","action":"REMOVE_REVIEW_DECLARATION_UNLESS_LEARNER_FACING_REVIEW_IS_INTENTIONALLY_ADDED"},
+    {"passage_id":"fr-a1-u01-p03","target_id":"fr-rank-0047","form":"venir","stage":"R2","representation":"running_text","action":"REMOVE_REVIEW_DECLARATION_UNLESS_LEARNER_FACING_REVIEW_IS_INTENTIONALLY_ADDED"},
+    {"passage_id":"fr-a1-u01-p03","target_id":"fr-rank-0061","form":"quand","stage":"R1","representation":"running_text","action":"REMOVE_REVIEW_DECLARATION_UNLESS_LEARNER_FACING_REVIEW_IS_INTENTIONALLY_ADDED"},
+    {"passage_id":"fr-a1-u01-p03","target_id":"fr-rank-0063","form":"alors","stage":"R1","representation":"running_text","action":"REMOVE_REVIEW_DECLARATION_UNLESS_LEARNER_FACING_REVIEW_IS_INTENTIONALLY_ADDED"},
+    {"passage_id":"fr-a1-u01-p04","target_id":"fr-rank-0023","form":"vouloir","stage":"R1","representation":"running_text","action":"REMOVE_REVIEW_DECLARATION_UNLESS_LEARNER_FACING_REVIEW_IS_INTENTIONALLY_ADDED"},
+    {"passage_id":"fr-a1-u01-p05","target_id":"fr-rank-0048","form":"ici","stage":"R3","representation":"running_text","action":"REMOVE_REVIEW_DECLARATION"},
+    {"passage_id":"fr-a1-u01-p05","target_id":"fr-rank-0047","form":"venir","stage":"R3","representation":"running_text","action":"REMOVE_REVIEW_DECLARATION"},
+    {"passage_id":"fr-a1-u01-p05","target_id":"fr-rank-0061","form":"quand","stage":"R2","representation":"running_text","action":"REMOVE_REVIEW_DECLARATION"},
+    {"passage_id":"fr-a1-u01-p05","target_id":"fr-rank-0063","form":"alors","stage":"R2","representation":"running_text","action":"REMOVE_REVIEW_DECLARATION"},
+    {"passage_id":"fr-a1-u01-p05","target_id":"fr-rank-0023","form":"vouloir","stage":"R2","representation":"running_text","action":"REMOVE_REVIEW_DECLARATION"},
+    {"passage_id":"fr-a1-u01-p05","target_id":"fr-rank-0035","form":"avec","stage":"R2","representation":"running_text","action":"REMOVE_REVIEW_DECLARATION"},
+    {"passage_id":"fr-a1-u01-p05","target_id":"fr-rank-0021","form":"pouvoir","stage":"R1","representation":"running_text","action":"REMOVE_REVIEW_DECLARATION"},
+    {"passage_id":"fr-a1-u01-p06","target_id":"fr-rank-0063","form":"alors","stage":"R3","representation":"running_text","action":"REMOVE_REVIEW_DECLARATION"},
+    {"passage_id":"fr-a1-u03-p01","target_id":"fr-rank-0013","form":"aller","stage":"R2","representation":"production","action":"REMOVE_REVIEW_DECLARATION_OR_ADD_REAL_TARGETED_PRODUCTION_TASK"},
+    {"passage_id":"fr-a1-u03-p04","target_id":"fr-rank-0038","form":"mon","stage":"R2","representation":"contrast","action":"REMOVE_REVIEW_DECLARATION_OR_ADD_REAL_TARGETED_CONTRAST_TASK"},
+    {"passage_id":"fr-a1-u05-p02","target_id":"fr-rank-0091","form":"temps","stage":"R2","representation":"running_text","action":"REMOVE_REVIEW_DECLARATION_UNLESS_TEXT_IS_INTENTIONALLY_REVISED"}
+  ],
+  "preserve_without_deletion": {
+    "count": 16,
+    "reason": "Lemma-aware audit found actual inflected/surface realizations. The schema does not require reviewLexicalTarget.form to equal an exact surface token. These are not phantom exposures and must not be removed merely to satisfy an exact-string detector."
+  },
+  "release_effect": {
+    "french_release_state": "REOPEN_REQUIRED",
+    "why": "18 confirmed phantom review declarations invalidate affected planned-contact histories until repaired and the exposure/coverage audits are regenerated.",
+    "bulk_quality_promotion_allowed": false
+  },
+  "required_next_steps": [
+    "apply only the 18 confirmed phantom-review repairs on a bounded repair branch",
+    "rerun schema/linkage and review-target visibility audits",
+    "rebuild French exposure ledger from repaired canonical data",
+    "recompute six-contact curriculum proxy and chronology findings",
+    "then resume lexical-support adjudication against the new hashes"
+  ]
+}
