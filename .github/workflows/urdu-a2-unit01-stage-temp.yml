@@ -1,0 +1,235 @@
+name: TEMP Urdu A2 Unit 01 staging
+
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+    paths:
+      - .github/workflows/urdu-a2-unit01-stage-temp.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temp-urdu-a2-unit01-stage
+  cancel-in-progress: false
+
+jobs:
+  stage:
+    if: github.event.pull_request.head.ref == 'plan/urdu-a2-unit01-2026-08-23'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: plan/urdu-a2-unit01-2026-08-23
+      - name: Generate and validate staged Unit 01
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from collections import Counter
+          import json,hashlib,re,unicodedata
+
+          A1=Path('reading/urdu/a1/passages.jsonl')
+          LEX=Path('reading/lexicons/urdu.jsonl')
+          FRONT=Path('reading/audit/urdu_a2_unit01_target_frontier_2026-08-23.json')
+          a1_sha=hashlib.sha256(A1.read_bytes()).hexdigest()
+          frontier=json.loads(FRONT.read_text(encoding='utf-8'))
+          if frontier['a1_frontier']['sha256']!=a1_sha: raise SystemExit('FAIL CLOSED A1 frontier drift')
+          a1=[json.loads(x) for x in A1.read_text(encoding='utf-8').splitlines() if x.strip()]
+          lex={x['id']:x for x in (json.loads(line) for line in LEX.read_text(encoding='utf-8').splitlines() if line.strip())}
+          used_ids={t['id'] for r in a1 for k in ('new_lexical_targets','review_lexical_targets') for t in r.get(k,[]) if t.get('id')}
+          a1_by_form={t['form']:t for r in a1 for t in r.get('new_lexical_targets',[]) if t.get('form')}
+
+          selected=[
+            ('ur-rank-0506','خدمت'),('ur-rank-0596','دفتر'),('ur-rank-0560','رابطہ'),('ur-rank-0572','محکمہ'),
+            ('ur-rank-0656','تفصیلات'),('ur-rank-0738','مرکز'),('ur-rank-0687','اسپتال'),('ur-rank-0575','مریض'),
+            ('ur-rank-0901','اطلاع'),('ur-rank-0754','راستہ')
+          ]
+          for tid,form in selected:
+            x=lex.get(tid)
+            if not x or x.get('form')!=form or x.get('planning_band')!='A2_core_candidate' or tid in used_ids:
+              raise SystemExit(f'FAIL CLOSED invalid selected target {tid} {form}')
+
+          def toks(s):
+            out=[];cur=[]
+            for ch in str(s or ''):
+              cat=unicodedata.category(ch)
+              if cat.startswith('L') or cat.startswith('M'): cur.append(ch)
+              else:
+                if cur: out.append(''.join(cur));cur=[]
+            if cur: out.append(''.join(cur))
+            return out
+          def count(text,form):
+            tt=toks(text); ft=toks(form); n=len(ft)
+            return sum(1 for i in range(len(tt)-n+1) if tt[i:i+n]==ft) if n else 0
+          def target_obj(tid,text):
+            x=lex[tid]; form=x['form']; c=count(text,form)
+            if c<1: raise SystemExit(f'FAIL target invisible {tid} {form}')
+            return {
+              'id':tid,'form':form,'lemma':form,'source_rank':x['rank'],'source_lexicon':x['source_file'],
+              'intended_sense':x.get('meaning_en_source'),'part_of_speech':x.get('part_of_speech_source'),
+              'register':'contemporary standard','variety':'contemporary standard Urdu','first_introduced':True,
+              'beyond_base':False,'context_strategy':['scenario_resolution'],'exposures_in_text':c
+            }
+          def review_obj(form,stage,text):
+            t=a1_by_form.get(form)
+            if not t: raise SystemExit(f'FAIL missing A1 review form {form}')
+            if count(text,form)<1: raise SystemExit(f'FAIL invisible A1 review {form}')
+            return {'id':t['id'],'form':form,'representation':'running_text','review_stage':stage,'expected_exposure_number':None}
+          def qa(prompts,answers,types,targets):
+            return ([{'id':f'q{i+1}','answer_id':f'a{i+1}','prompt':prompts[i],'type':types[i],**({'target_ids':targets[i]} if targets[i] else {})} for i in range(10)],
+                    [{'id':f'a{i+1}','question_id':f'q{i+1}','answer':answers[i],'explanation':''} for i in range(10)])
+
+          specs=[]
+          def add(title,text,ptype,genre,newids,bridge,topics,prompts,answers,types,qtargets,grammar,discourse):
+            specs.append(dict(title=title,text=text,ptype=ptype,genre=genre,newids=newids,bridge=bridge,topics=topics,prompts=prompts,answers=answers,types=types,qtargets=qtargets,grammar=grammar,discourse=discourse))
+
+          add('محلے کا نیا دفتر',
+          'عائشہ کا خاندان حال ہی میں ایک نئے محلے میں آیا ہے۔ پہلے ہفتے میں انہیں معلوم ہوا کہ بجلی کے بل کے بارے میں ایک سوال حل کرنا ہے۔ پڑوس کی ایک خاتون نے بتایا کہ قریب ہی ایک چھوٹا دفتر ہے جہاں رہنے والوں کو مختلف کاموں میں مدد ملتی ہے۔ عائشہ اپنی والدہ کے ساتھ دفتر گئی۔ دروازے پر اوقات لکھے تھے اور اندر دو میزیں تھیں۔ ایک ملازم نے پوچھا کہ انہیں کس خدمت کی ضرورت ہے۔ والدہ نے بل دکھایا اور کہا کہ پتے کی ایک سطر درست کرانی ہے۔ ملازم نے کاغذ دیکھا، پھر آسان الفاظ میں بتایا کہ یہ خدمت اسی دفتر میں مل سکتی ہے۔ اس نے ایک مختصر درخواست دی اور کہا کہ نام اور گھر کا پتہ صاف لکھیں۔ عائشہ نے فارم پڑھ کر والدہ کی مدد کی۔ کام ختم ہونے کے بعد دونوں نے دفتر کے اوقات بھی نوٹ کر لیے۔ عائشہ نے سوچا کہ نئے محلے میں ایسی خدمت کا علم ہونا روزمرہ کے کام آسان بنا دیتا ہے۔',
+          'instructional','story',['ur-rank-0506','ur-rank-0596'],['گھر','بجلی'],['neighborhood','services','office'],
+          ['عائشہ اور اس کی والدہ دفتر کیوں جاتی ہیں؟','ملازم سب سے پہلے کیا پوچھتا ہے؟','متن میں «خدمت» سے کیا مراد ہے؟','«دفتر» یہاں کس جگہ کو کہتے ہیں؟','عائشہ والدہ کی کس کام میں مدد کرتی ہے؟','اگر کسی جگہ لوگوں کے روزمرہ کام حل کیے جائیں تو اسے کس قسم کی خدمت کہیں گے؟','والدہ کو پتے کے بارے میں کیا درست کرانا ہے؟','عائشہ دفتر کے اوقات کیوں نوٹ کرتی ہے؟','خالی جگہ پُر کریں: اس عمارت میں شہریوں کے لیے ایک اہم _____ ملتی ہے۔','خالی جگہ پُر کریں: درخواست جمع کرانے کے لیے میں قریبی _____ گیا۔'],
+          ['بجلی کے بل پر پتے کی سطر درست کرانے کے لیے۔','وہ پوچھتا ہے کہ انہیں کس خدمت کی ضرورت ہے۔','لوگوں کے عملی کام میں دی جانے والی مدد۔','وہ جگہ جہاں متعلقہ ملازم یہ کام کرتے ہیں۔','وہ فارم پڑھنے اور معلومات لکھنے میں مدد کرتی ہے۔','روزمرہ یا شہری خدمت۔','پتے کی ایک سطر۔','تاکہ ضرورت پڑنے پر دوبارہ آنے کا وقت معلوم ہو۔','خدمت','دفتر'],
+          ['gist','literal_detail','vocabulary_in_context','vocabulary_in_context','literal_detail','transfer','literal_detail','inference','cloze_transfer','cloze_transfer'],
+          [[],[],['ur-rank-0506'],['ur-rank-0596'],[],['ur-rank-0506'],[],[],['ur-rank-0506'],['ur-rank-0596']],
+          [{'id':'ur-a2-service-request','description':'make a simple service request and state a practical need','role':'new'}],[{'id':'ur-a2-problem-service-resolution','description':'follow a practical need through a local service interaction','role':'new'}])
+
+          add('پانی کے مسئلے پر رابطہ',
+          'اگلی صبح عائشہ کے گھر میں پانی بہت کم آ رہا تھا۔ والد نے پہلے عمارت کے نگراں سے بات کی، لیکن مسئلہ صرف ان کے گھر تک محدود نہیں تھا۔ نگراں نے کہا کہ محلے کے متعلقہ محکمہ سے رابطہ کرنا بہتر ہوگا۔ عائشہ نے والد کے ساتھ پرانی رسید دیکھی جس پر فون نمبر لکھا تھا۔ والد نے محکمہ کو فون کیا اور اپنا نام، گلی کا نام اور مسئلہ بتایا۔ فون سننے والی خاتون نے کہا کہ دوسرے گھروں سے بھی اسی بارے میں رابطہ ہوا ہے۔ اس نے بتایا کہ ایک ٹیم دوپہر تک علاقے کا جائزہ لے گی۔ عائشہ نے گفتگو کے دوران اہم باتیں لکھ لیں تاکہ بعد میں سوال ہو تو جواب مل سکے۔ کچھ دیر بعد پانی بہتر ہونے لگا۔ والد نے دوبارہ رابطہ کرکے بتایا کہ حالت بدل رہی ہے۔ عائشہ کو سمجھ آیا کہ صحیح محکمہ تک واضح رابطہ پہنچ جائے تو مشترک مسئلے کی جانچ جلد شروع ہوسکتی ہے۔',
+          'reinforcement','service information',['ur-rank-0560','ur-rank-0572'],['گھر','سوال'],['water','contact','department'],
+          ['گھر میں کیا مسئلہ ہے؟','نگراں والد کو کیا مشورہ دیتا ہے؟','یہاں «رابطہ» کرنے کا کیا مطلب ہے؟','«محکمہ» سے کس ادارے کی طرف اشارہ ہے؟','عائشہ گفتگو کے دوران کیا کرتی ہے؟','خاتون ٹیم کے بارے میں کیا کہتی ہے؟','والد دوبارہ رابطہ کیوں کرتے ہیں؟','اس واقعے سے عائشہ کیا سیکھتی ہے؟','خالی جگہ پُر کریں: مسئلے کی خبر دینے کے لیے متعلقہ _____ سے بات کریں۔','خالی جگہ پُر کریں: فون یا پیغام کے ذریعے _____ کیا جا سکتا ہے۔'],
+          ['پانی بہت کم آ رہا ہے۔','متعلقہ محکمہ سے رابطہ کرنے کا۔','فون کرکے مسئلے کی بات متعلقہ لوگوں تک پہنچانا۔','وہ سرکاری یا انتظامی حصہ جو اس مسئلے کو دیکھتا ہے۔','وہ اہم باتیں لکھتی ہے۔','وہ دوپہر تک علاقے کا جائزہ لے گی۔','حالت بہتر ہونے کی خبر دینے کے لیے۔','واضح رابطہ صحیح محکمہ تک پہنچے تو جانچ جلد شروع ہوسکتی ہے۔','محکمہ','رابطہ'],
+          ['gist','literal_detail','vocabulary_in_context','vocabulary_in_context','literal_detail','literal_detail','cause_effect','inference','cloze_transfer','cloze_transfer'],
+          [[],[],['ur-rank-0560'],['ur-rank-0572'],[],[],['ur-rank-0560'],[],['ur-rank-0572'],['ur-rank-0560']],
+          [{'id':'ur-a2-reported-information','description':'report what a service representative says','role':'new'}],[{'id':'ur-a2-contact-followup','description':'track initial contact, response, and follow-up','role':'new'}])
+
+          add('کمیونٹی مرکز کی تفصیلات',
+          'ہفتے کے آخر میں عائشہ نے عمارت کے نوٹس بورڈ پر ایک پیغام دیکھا۔ اس میں لکھا تھا کہ محلے کا کمیونٹی مرکز بچوں اور بڑوں کے لیے نئی سرگرمیاں شروع کر رہا ہے۔ عائشہ نے اپنی خالہ سے گفتگو کی اور پھر مرکز جانے کا فیصلہ کیا۔ استقبالیہ پر ایک کارکن نے اسے پروگرام کی تفصیلات والا کاغذ دیا۔ اس میں دن، وقت، عمر کی حد اور ضروری سامان کی تفصیلات الگ الگ لکھی تھیں۔ عائشہ نے پوچھا کہ کیا خاندان کے دو افراد ایک ساتھ آ سکتے ہیں۔ کارکن نے کہا کہ زیادہ تر سرگرمیوں میں یہ ممکن ہے، لیکن کچھ نشستوں کے لیے پہلے نام لکھوانا پڑتا ہے۔ عائشہ نے مرکز کے فون کے اوقات بھی نوٹ کیے۔ گھر واپس آ کر اس نے اپنی خالہ کو تمام تفصیلات بتائیں اور دو سرگرمیوں کے نام نشان زد کیے۔ اسے اچھا لگا کہ مرکز کی معلومات ایک ہی جگہ مل گئیں اور فیصلہ کرنا آسان ہوگیا۔',
+          'interleaved','message',['ur-rank-0656','ur-rank-0738'],['خاندان','گفتگو'],['community','information','activities'],
+          ['عائشہ نوٹس بورڈ پر کیا دیکھتی ہے؟','وہ مرکز کیوں جاتی ہے؟','«تفصیلات» سے کیا مراد ہے؟','«مرکز» یہاں کیسی جگہ ہے؟','کاغذ میں کون سی معلومات لکھی ہیں؟','کچھ نشستوں کے لیے کیا کرنا پڑتا ہے؟','عائشہ فون کے اوقات کیوں نوٹ کرتی ہے؟','گھر جا کر وہ خالہ کو کیا بتاتی ہے؟','خالی جگہ پُر کریں: پروگرام کی مکمل _____ کاغذ پر موجود ہیں۔','خالی جگہ پُر کریں: محلے کا کمیونٹی _____ کئی سرگرمیاں چلاتا ہے۔'],
+          ['نئی سرگرمیوں کا پیغام۔','سرگرمیوں کے بارے میں معلومات لینے کے لیے۔','کسی پروگرام کے بارے میں الگ الگ ضروری معلومات۔','محلے کی ایسی جگہ جہاں مختلف سرگرمیاں اور سہولتیں ملتی ہیں۔','دن، وقت، عمر کی حد اور ضروری سامان۔','پہلے نام لکھوانا پڑتا ہے۔','تاکہ بعد میں سوال ہو تو وقت معلوم ہو۔','وہ تمام تفصیلات اور دو پسند کی سرگرمیوں کے نام بتاتی ہے۔','تفصیلات','مرکز'],
+          ['gist','cause_effect','vocabulary_in_context','vocabulary_in_context','literal_detail','literal_detail','inference','literal_detail','cloze_transfer','cloze_transfer'],
+          [[],[],['ur-rank-0656'],['ur-rank-0738'],[],[],[],['ur-rank-0656'],['ur-rank-0656'],['ur-rank-0738']],
+          [{'id':'ur-a2-information-list','description':'extract several practical details from service information','role':'new'}],[{'id':'ur-a2-service-information-integration','description':'combine notice information with an in-person clarification','role':'new'}])
+
+          add('اسپتال میں ایک مریض کی مدد',
+          'ایک شام عائشہ اپنی خالہ کے ساتھ بازار سے واپس آ رہی تھی۔ قریب کی گلی میں ایک بوڑھے آدمی کو چکر آیا اور وہ دیوار کے پاس بیٹھ گیا۔ ایک دکاندار نے پانی دیا اور پوچھا کہ کیا وہ ٹھیک ہیں۔ آدمی نے کہا کہ وہ پہلے بھی بیمار رہے ہیں اور آج کمزوری زیادہ محسوس ہو رہی ہے۔ خالہ نے فیصلہ کیا کہ انہیں قریب کے اسپتال لے جانا چاہیے۔ اسپتال پہنچ کر استقبالیہ پر بتایا گیا کہ مریض کو پہلے ایک نرس دیکھے گی۔ عائشہ نے مریض کے گھر والوں کے لیے فون نمبر لکھنے میں مدد کی۔ نرس نے چند بنیادی سوال پوچھے اور پھر مریض کو انتظار کی جگہ پر بٹھایا۔ کچھ دیر بعد اس کے بیٹے بھی پہنچ گئے۔ انہوں نے خالہ اور عائشہ کا شکریہ ادا کیا۔ واپس آتے ہوئے عائشہ نے کہا کہ محلے میں اسپتال کا مقام معلوم ہونا اہم ہے، کیونکہ اچانک کسی مریض کو فوری مدد کی ضرورت پڑ سکتی ہے۔',
+          'transfer','story',['ur-rank-0687','ur-rank-0575'],['جسم','ہدایت'],['health service','hospital','help'],
+          ['بوڑھے آدمی کے ساتھ کیا ہوتا ہے؟','خالہ کیا فیصلہ کرتی ہیں؟','متن میں «اسپتال» کس جگہ کو کہتے ہیں؟','«مریض» کون ہے؟','استقبالیہ پر کیا بتایا جاتا ہے؟','عائشہ کس کام میں مدد کرتی ہے؟','نرس مریض سے پہلے کیا کرتی ہے؟','آخر میں عائشہ کیا نتیجہ نکالتی ہے؟','خالی جگہ پُر کریں: شدید کمزوری ہو تو قریبی _____ جانا پڑ سکتا ہے۔','خالی جگہ پُر کریں: نرس نے _____ سے چند سوال پوچھے۔'],
+          ['اسے چکر آتا ہے اور وہ بیٹھ جاتا ہے۔','اسے قریب کے اسپتال لے جانے کا۔','وہ جگہ جہاں بیمار لوگوں کی طبی دیکھ بھال ہوتی ہے۔','وہ شخص جس کی طبی دیکھ بھال کی جا رہی ہو۔','مریض کو پہلے ایک نرس دیکھے گی۔','گھر والوں کے لیے فون نمبر لکھنے میں۔','وہ چند بنیادی سوال پوچھتی ہے۔','اسپتال کا مقام معلوم ہونا اچانک ضرورت میں اہم ہے۔','اسپتال','مریض'],
+          ['gist','literal_detail','vocabulary_in_context','vocabulary_in_context','literal_detail','literal_detail','sequence','inference','cloze_transfer','cloze_transfer'],
+          [[],[],['ur-rank-0687'],['ur-rank-0575'],[],[],['ur-rank-0575'],[],['ur-rank-0687'],['ur-rank-0575']],
+          [{'id':'ur-a2-need-should','description':'express a practical need and a reasonable response','role':'new'}],[{'id':'ur-a2-service-emergency-sequence','description':'follow a short sequence from problem to service response','role':'new'}])
+
+          add('بس کے بدلے ہوئے راستے کی اطلاع',
+          'پیر کی صبح عائشہ اسکول جانے کے لیے معمول کے وقت گھر سے نکلی۔ بس اسٹاپ پر ایک نئی اطلاع لگی ہوئی تھی۔ اس میں لکھا تھا کہ سڑک پر مرمت کے کام کی وجہ سے آج بس کا راستہ بدل دیا گیا ہے۔ عائشہ نے اطلاع پوری پڑھی کیونکہ اسے یہ جاننا تھا کہ بس اب کہاں سے گزرے گی۔ کاغذ میں بتایا گیا تھا کہ پرانا اسٹاپ بند رہے گا اور مسافر اگلی گلی والے اسٹاپ سے بس لیں۔ عائشہ نے وقت دیکھا اور سمجھا کہ نئے راستے تک پہنچنے کے لیے اسے پانچ منٹ پہلے چلنا ہوگا۔ اس نے ایک ہم جماعت کو بھی پیغام بھیجا تاکہ وہ غلط جگہ انتظار نہ کرے۔ دونوں نئے اسٹاپ پر ملے اور وقت پر بس میں بیٹھ گئے۔ شام کو واپسی پر پرانا راستہ دوبارہ کھل چکا تھا۔ عائشہ نے کہا کہ ایسی اطلاع کو غور سے پڑھنا ضروری ہے، کیونکہ ایک چھوٹی تبدیلی پورے سفر کے راستے کو بدل سکتی ہے۔',
+          'integration','service information',['ur-rank-0901','ur-rank-0754'],['وقت','صبح'],['transport','notice','route'],
+          ['بس اسٹاپ پر کیا لگا ہے؟','بس کا راستہ کیوں بدلا ہے؟','متن میں «اطلاع» کیا ہے؟','«راستہ» سے کیا مراد ہے؟','مسافروں کو کہاں جانا ہے؟','عائشہ پانچ منٹ پہلے کیوں چلتی ہے؟','وہ ہم جماعت کو پیغام کیوں بھیجتی ہے؟','شام کو کیا بدل جاتا ہے؟','خالی جگہ پُر کریں: تبدیلی کے بارے میں نئی _____ پڑھیں۔','خالی جگہ پُر کریں: مرمت کی وجہ سے بس کا _____ بدل گیا۔'],
+          ['ایک نئی اطلاع۔','سڑک پر مرمت کے کام کی وجہ سے۔','لوگوں کو تبدیلی بتانے والا نوٹس یا پیغام۔','وہ سمت یا طریقہ جس سے بس سفر کرتی ہے۔','اگلی گلی والے اسٹاپ پر۔','نئے اسٹاپ تک وقت پر پہنچنے کے لیے۔','تاکہ وہ غلط جگہ انتظار نہ کرے۔','پرانا راستہ دوبارہ کھل جاتا ہے۔','اطلاع','راستہ'],
+          ['gist','cause_effect','vocabulary_in_context','vocabulary_in_context','literal_detail','cause_effect','cause_effect','literal_detail','cloze_transfer','cloze_transfer'],
+          [[],[],['ur-rank-0901'],['ur-rank-0754'],[],[],[],['ur-rank-0754'],['ur-rank-0901'],['ur-rank-0754']],
+          [{'id':'ur-a2-change-because','description':'understand a changed plan and its stated reason','role':'new'}],[{'id':'ur-a2-notice-route-action','description':'connect a service notice to a practical route change','role':'new'}])
+
+          add('محلے کی خدمات کا ایک دن',
+          'ہفتے کی صبح عائشہ نے گھر کے چند کام ایک ساتھ مکمل کرنے کا منصوبہ بنایا۔ پہلے وہ والدہ کے ساتھ دفتر گئی جہاں ایک ملازم نے ان کی درخواست دیکھی اور مناسب خدمت کے بارے میں بتایا۔ وہاں سے نکل کر والدہ نے پانی کے محکمہ سے رابطہ کیا تاکہ پچھلے سوال کی حالت معلوم ہو سکے۔ ملازم نے مختصر تفصیلات بتائیں اور کہا کہ نئی اطلاع دوپہر تک بھیج دی جائے گی۔ اس کے بعد دونوں کمیونٹی مرکز گئیں، جہاں عائشہ نے اگلے ہفتے کی سرگرمی کا وقت لکھا۔ واپسی میں وہ اسپتال کے سامنے سے گزریں۔ عائشہ نے خالہ کی مدد والا واقعہ یاد کیا اور سوچا کہ مریض کے لیے قریب کی جگہ جاننا کتنا مفید ہوتا ہے۔ آخر میں بس اسٹاپ پر راستہ بدلنے کی ایک اطلاع دیکھی، لیکن اس بار تبدیلی شام سے شروع ہونی تھی۔ عائشہ نے تمام باتیں ایک کاغذ پر لکھ لیں۔ اسے محسوس ہوا کہ محلے کی خدمت، دفتر، رابطہ، محکمہ، تفصیلات، مرکز، اسپتال، مریض، اطلاع اور راستہ—سب الگ چیزیں ہیں، مگر روزمرہ زندگی میں ایک دوسرے سے جڑ سکتی ہیں۔',
+          'fluency_checkpoint','checkpoint',[],['خاندان','وقت'],['cumulative neighborhood services'],
+          ['عائشہ دن کے آغاز میں کہاں جاتی ہے؟','والدہ محکمہ سے کیوں رابطہ کرتی ہیں؟','دفتر میں کس چیز کے بارے میں بتایا جاتا ہے؟','محکمہ کیا بھیجنے کا وعدہ کرتا ہے؟','مرکز میں عائشہ کیا لکھتی ہے؟','اسپتال کے سامنے سے گزرتے ہوئے وہ کیا یاد کرتی ہے؟','بس اسٹاپ کی اطلاع میں کیا تبدیلی ہے؟','عائشہ سب باتیں کہاں لکھتی ہے؟','اس دن مختلف خدمات کے درمیان کیا مشترک بات ہے؟','متن میں آئے دس نئے الفاظ میں سے دو ایسی جگہوں کے نام بتائیں جہاں لوگ کام یا مدد کے لیے جاتے ہیں۔'],
+          ['دفتر۔','پچھلے سوال کی حالت معلوم کرنے کے لیے۔','مناسب خدمت کے بارے میں۔','نئی اطلاع۔','اگلے ہفتے کی سرگرمی کا وقت۔','وہ مریض کی مدد والا واقعہ یاد کرتی ہے۔','راستہ شام سے بدلے گا۔','ایک کاغذ پر۔','سب روزمرہ ضرورتوں کو حل کرنے میں مدد دیتی ہیں۔','دفتر اور اسپتال۔'],
+          ['gist','cause_effect','literal_detail','literal_detail','literal_detail','reference_resolution','literal_detail','literal_detail','inference','cumulative_recall'],
+          [[],['ur-rank-0560','ur-rank-0572'],['ur-rank-0596','ur-rank-0506'],['ur-rank-0572','ur-rank-0901'],['ur-rank-0738'],['ur-rank-0687','ur-rank-0575'],['ur-rank-0754','ur-rank-0901'],[],[],['ur-rank-0596','ur-rank-0687']],
+          [{'id':'ur-a2-integrated-service-language','description':'reuse service vocabulary across connected practical situations','role':'review'}],[{'id':'ur-a2-unit01-cumulative','description':'integrate location, service need, information, and action across the unit','role':'review'}])
+
+          outdir=Path('reading/urdu/a2/staging/unit01'); outdir.mkdir(parents=True,exist_ok=True)
+          target_pairs=[selected[0:2],selected[2:4],selected[4:6],selected[6:8],selected[8:10],[]]
+          review_stages=['R5','R5','R5','R5','R5','R5']
+          records=[]
+          for i,s in enumerate(specs,1):
+            pid=f'ur-a2-u01-p{i:02d}'
+            text=s['text']; wc=len(text.split())
+            q,a=qa(s['prompts'],s['answers'],s['types'],s['qtargets'])
+            new=[target_obj(tid,text) for tid in s['newids']]
+            if i<6:
+              review=[review_obj(f,review_stages[i-1],text) for f in s['bridge']]
+            else:
+              review=[]
+              for tid,form in selected:
+                if count(text,form)<1: raise SystemExit(f'FAIL checkpoint missing unit target {form}')
+                review.append({'id':tid,'form':form,'representation':'running_text','review_stage':'UNIT_CHECKPOINT','expected_exposure_number':None})
+              review += [review_obj(f,'R5',text) for f in s['bridge']]
+            rec={
+              'id':pid,'language':'ur','cefr':'A2','unit':1,'sequence':i,'title':s['title'],'text':text,'word_count':wc,
+              'sentence_count':len([z for z in re.split(r'[۔؟!]+',text) if z.strip()]),'genre':s['genre'],'passage_type':s['ptype'],
+              'topics':s['topics'],'domains':['public','personal'],'new_lexical_targets':new,'review_lexical_targets':review,
+              'grammar_targets':s['grammar'],'discourse_targets':s['discourse'],'questions':q,'answer_key':a,
+              'difficulty_notes_internal':'Urdu A2 Unit 01 generation-stage draft: 140-220 words, connected service situations, reasons, reference chains, and practical transfer.',
+              'prerequisites':['Urdu A1 generated corpus, sequences 1-60'],'paired_text_group':None,'estimated_known_token_coverage':0,
+              'reader_tags':['unit_role:'+s['ptype'],'generation_batch','urdu_a2_u01'],
+              'speed_training':{'benchmark_eligible':False,'comprehension_gate':0.8,'new_word_policy':'controlled','timed':False,'notes':'Generation-stage Urdu A2 Unit 01; independent final audit deferred.'},
+              'quality':{'status':'draft','schema_check':'pending','linguistic_review':'pending','pedagogical_review':'pending','coverage_check':'pending','answer_key_check':'pending','fact_check':'not_required','notes':['Guarded Urdu A2 Unit 01 staging; no independent/native/educator approval.']},
+              'revision':1
+            }
+            records.append(rec)
+            (outdir/f'{pid}.json').write_text(json.dumps(rec,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          # Strict staging validation.
+          problems=[]
+          for i,r in enumerate(records,1):
+            if not 140<=r['word_count']<=220: problems.append({'id':r['id'],'kind':'word_band','value':r['word_count']})
+            if len(r['questions'])!=10 or len(r['answer_key'])!=10: problems.append({'id':r['id'],'kind':'qa_count'})
+            amap={a['id']:a for a in r['answer_key']}
+            for q in r['questions']:
+              if q['answer_id'] not in amap or amap[q['answer_id']]['question_id']!=q['id']: problems.append({'id':r['id'],'kind':'qa_link','q':q['id']})
+            declared={t['id'] for k in ('new_lexical_targets','review_lexical_targets','grammar_targets','discourse_targets') for t in r.get(k,[])}
+            for q in r['questions']:
+              if any(t not in declared for t in q.get('target_ids',[])): problems.append({'id':r['id'],'kind':'nonlocal_target','q':q['id']})
+            if i<=5 and len(r['new_lexical_targets'])!=2: problems.append({'id':r['id'],'kind':'new_count'})
+            if i==6 and r['new_lexical_targets']: problems.append({'id':r['id'],'kind':'checkpoint_new'})
+            if len({q['prompt'] for q in r['questions']})!=10: problems.append({'id':r['id'],'kind':'duplicate_prompt'})
+            for field,text in [('title',r['title']),('text',r['text'])]+[(q['id'],q['prompt']) for q in r['questions']]+[(a['id'],a['answer']) for a in r['answer_key']]:
+              if re.search(r'[A-Za-z]',str(text)): problems.append({'id':r['id'],'kind':'roman_script','field':field})
+            if any(q['type'] in ('grammar_category','grammar_function') for q in r['questions']): problems.append({'id':r['id'],'kind':'lowlevel_metalinguistic'})
+          # no future target before its introduction in staged unit
+          intro={tid:(idx+1,form) for idx,pair in enumerate(target_pairs[:5]) for tid,form in pair}
+          for tid,(intro_p,form) in intro.items():
+            for r in records[:intro_p-1]:
+              if count(r['text'],form)>0: problems.append({'id':r['id'],'kind':'premature_future_target','target':tid,'form':form})
+          p6_ids={t['id'] for t in records[5]['review_lexical_targets']}
+          missing=[tid for tid,_ in selected if tid not in p6_ids]
+          if missing: problems.append({'id':records[5]['id'],'kind':'checkpoint_missing_unit_targets','missing':missing})
+          # source identity and A1 collision
+          for r in records[:5]:
+            for t in r['new_lexical_targets']:
+              x=lex[t['id']]
+              if t['id'] in used_ids or t['form'] in {u.get('form') for rr in a1 for u in rr.get('new_lexical_targets',[])}: problems.append({'id':r['id'],'kind':'a1_collision','target':t['id']})
+              if t['source_rank']!=x['rank'] or t['source_lexicon']!=x['source_file']: problems.append({'id':r['id'],'kind':'source_identity','target':t['id']})
+              if t['exposures_in_text']!=count(r['text'],t['form']): problems.append({'id':r['id'],'kind':'exposure_count','target':t['id']})
+          if problems:
+            print(json.dumps({'status':'FAIL','problems':problems},ensure_ascii=False,indent=2))
+            raise SystemExit('staging validation failed')
+
+          evidence={
+            'schema_version':1,'date':'2026-08-23','language':'ur','level':'A2','unit':1,
+            'theme':'neighborhood and services','genres':['story','service information','message'],'a1_frontier_sha256':a1_sha,
+            'target_frontier':'reading/audit/urdu_a2_unit01_target_frontier_2026-08-23.json',
+            'selected_targets':[{'id':tid,'form':form,'rank':lex[tid]['rank'],'meaning_en_source':lex[tid].get('meaning_en_source'),'source_file':lex[tid]['source_file']} for tid,form in selected],
+            'counts':{'passages':6,'questions':60,'answers':60,'new_lexical_targets':10},
+            'word_counts':[r['word_count'] for r in records],
+            'checks':{'a2_140_220_word_band':True,'ten_q_ten_a_linkage':True,'question_targets_local':True,'p01_p05_two_new':True,'p06_zero_new_all_unit_review':True,'a1_target_collisions_zero':True,'source_rank_form_identity':True,'new_target_visibility_and_exposure_counts':True,'premature_future_target_exposure_zero':True,'learner_facing_roman_script_zero':True,'lowlevel_grammar_category_function_tasks_zero':True,'duplicate_prompts_zero':True},
+            'status':'PASS_URDU_A2_UNIT01_STAGING_NEEDS_INDEPENDENT_REVIEW',
+            'release_effect':'NONE: staging/generation only; not canonical promotion or educator release approval.'
+          }
+          Path('reading/audit/urdu_a2_unit01_staging_result_2026-08-23.json').write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'status':evidence['status'],'word_counts':evidence['word_counts'],'targets':[(x['form'],x['rank']) for x in evidence['selected_targets']]},ensure_ascii=False))
+          PY
+      - name: Commit staging and self-remove
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reading/urdu/a2/staging/unit01 reading/audit/urdu_a2_unit01_staging_result_2026-08-23.json
+          git rm -f .github/workflows/urdu-a2-unit01-stage-temp.yml
+          git commit -m 'Stage Urdu A2 Unit 01 [skip ci]'
+          git push origin HEAD:plan/urdu-a2-unit01-2026-08-23
