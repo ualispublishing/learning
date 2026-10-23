@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'subjects/cissp/2024-outline/study-site/**'
+      - 'subjects/securityx/cas-005/secx-grid-prototype/**'
+      - 'subjects/securityx/cas-005/study-site/data/**'
       - '.github/workflows/cissp-pages.yml'
   workflow_dispatch:
 
@@ -51,6 +53,10 @@ jobs:
               raise SystemExit(f'missing/empty released files: {missing}')
           print(f'PASS manifest_release_files={len(files)}')
           PY
+      - name: Validate isolated SecurityX SecX preview
+        run: |
+          node --check subjects/securityx/cas-005/secx-grid-prototype/app-v2.js
+          python subjects/securityx/cas-005/secx-grid-prototype/tools/audit_grid.py
       - name: Execute interactive browser smoke test
         working-directory: subjects/cissp/2024-outline/study-site
         run: bash browser-smoke.sh 8766
@@ -60,7 +66,7 @@ jobs:
           SITE="$RUNNER_TEMP/cissp-pages"
           export SITE
           rm -rf "$SITE"
-          mkdir -p "$SITE/question-bank"
+          mkdir -p "$SITE/question-bank" "$SITE/secx" "$SITE/study-site/data"
           cp .nojekyll 404.html index.html "$SITE/"
           cp styles.css mobile-fix.css enhancements.css product-polish.css workflow-clarity.css "$SITE/"
           cp data-meta.js data-d{1..8}.js data-ai.js data-precision.js coverage-detail.js data-question-calibration.js legacy-rationales.js keyboard-shortcuts.js bootstrap.js app.js enhancements.js state-ui-bridge.js product-polish.js "$SITE/"
@@ -84,10 +90,19 @@ jobs:
               raise SystemExit('no released question-bank files copied')
           print(f'Released-only question files copied: {len(copied)}')
           PY
+          SECX="$GITHUB_WORKSPACE/subjects/securityx/cas-005/secx-grid-prototype"
+          SECX_DATA="$GITHUB_WORKSPACE/subjects/securityx/cas-005/study-site/data"
+          cp "$SECX/index.html" "$SECX/app-v2.js" "$SECX/root-nav-addon.js" "$SECX/styles.css" "$SITE/secx/"
+          cp "$SECX_DATA/meta.js" "$SECX_DATA/blueprint_index.json" "$SECX_DATA"/cards-*.js "$SITE/study-site/data/"
+          test "$(find "$SITE/study-site/data" -maxdepth 1 -name 'cards-*.js' | wc -l | tr -d ' ')" = '29'
+          test -s "$SITE/study-site/data/meta.js"
+          test -s "$SITE/study-site/data/blueprint_index.json"
           printf '%s\n' "$GITHUB_SHA" > "$SITE/deploy-sha.txt"
           test ! -e "$SITE/browser-smoke.html"
           test ! -e "$SITE/audit.py"
-          echo "Released-only artifact assembled at $SITE"
+          test ! -e "$SITE/secx/README.md"
+          test ! -e "$SITE/secx/tools"
+          echo "Released-only CISSP artifact plus isolated SecX preview assembled at $SITE"
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload CISSP site
@@ -109,6 +124,8 @@ jobs:
           REMOTE_SHA="$RUNNER_TEMP/cissp-public-sha.txt"
           REMOTE_MANIFEST="$RUNNER_TEMP/cissp-public-manifest.json"
           UNRELEASED="$RUNNER_TEMP/cissp-unreleased-candidates.txt"
+          SECX_HTML="$RUNNER_TEMP/secx-public.html"
+          SECX_DOM="$RUNNER_TEMP/secx-public-dom.html"
           CHROME="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
           test -n "$CHROME"
           EXPECTED_VERSION="$(node -e "global.window={}; require('./${ROOT}/data-meta.js'); process.stdout.write(String(window.CISSP_META.meta.version))")"
@@ -173,4 +190,31 @@ jobs:
             status="$(curl -sS -o /dev/null -w '%{http_code}' "${BASE}${rel}?verify=${GITHUB_SHA}")"
             test "$status" = '404'
           done < "$UNRELEASED"
+          secx_passed=0
+          for attempt in {1..12}; do
+            echo "SecX public verification attempt $attempt: ${BASE}secx/"
+            if curl -fsSL --max-time 15 -H 'Cache-Control: no-cache' "${BASE}secx/?verify=${GITHUB_SHA}-${attempt}" -o "$SECX_HTML" \
+              && grep -Fq '<title>SecX · Keyboard Knowledge Grid</title>' "$SECX_HTML" \
+              && grep -Fq 'ALTERNATE KEYBOARD SITE' "$SECX_HTML"; then
+              "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=15000 --dump-dom "${BASE}secx/?runtime-verify=${GITHUB_SHA}-${attempt}" >"$SECX_DOM" 2>/dev/null || true
+              if grep -Fq '1,156 audited cards' "$SECX_DOM" \
+                && grep -Fq 'id="grid"' "$SECX_DOM" \
+                && grep -Fq '>SecX<' "$SECX_DOM"; then
+                secx_passed=1
+                break
+              fi
+            fi
+            sleep 5
+          done
+          if [ "$secx_passed" -ne 1 ]; then
+            echo 'Public SecX preview did not reach the expected deployed state.' >&2
+            tail -n 80 "$SECX_HTML" >&2 || true
+            tail -n 80 "$SECX_DOM" >&2 || true
+            exit 1
+          fi
+          for rel in secx/README.md secx/tools/browser_smoke.mjs; do
+            status="$(curl -sS -o /dev/null -w '%{http_code}' "${BASE}${rel}?verify=${GITHUB_SHA}")"
+            test "$status" = '404'
+          done
           echo "PASS public_pages_runtime url=$BASE commit=$GITHUB_SHA version=$EXPECTED_VERSION standard_questions=$EXPECTED_STANDARD released_records=$EXPECTED_RELEASED bellringers=$EXPECTED_BELL released_only=true"
+          echo "PASS public_secx_runtime url=${BASE}secx/ commit=$GITHUB_SHA cards=1156 isolated_preview=true"
