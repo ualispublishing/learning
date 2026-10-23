@@ -2,47 +2,49 @@
 
 ## Purpose
 
-This packet defines the final human linguistic certification step for the Arabic, French, and Urdu v1.0 production-candidate workbooks.
+This packet defines the final independent linguistic certification step for the Arabic, French, and Urdu v1.0 production-candidate workbooks.
 
-All automated, structural, provenance, pronunciation, rendering, reproducibility, and source-locked row-decision gates are already separate evidence. This review must not be treated as a spot check or as a substitute for those gates. Its purpose is full learner-facing linguistic review by a qualified native or near-native expert.
+Automated, structural, provenance, pronunciation, rendering, reproducibility, and row-adjudication gates are separate evidence. They do not replace full learner-facing review by a qualified native or near-native expert.
 
 For a concise participation walkthrough, see [`REVIEWER_ONBOARDING.md`](REVIEWER_ONBOARDING.md).
 
 ## Exact candidate being reviewed
 
-Reviewers must review the exact current master workbook for their language and record the bound identifiers below in the sign-off record.
+Review the exact current master workbook for the assigned language:
 
-| Language | Master workbook | Git blob SHA | Sentence decision SHA-256 |
-|---|---|---|---|
-| Arabic | [`completed/languages/workbooks/v1.0/arabic/00_arabic_complete_master.pdf`](../../../completed/languages/workbooks/v1.0/arabic/00_arabic_complete_master.pdf) | `3f7b761bdb5e5740274656c6fab83207ebe08cbf` | `3bf795fdf6c8c53536f8f2d3b6cfc9351d0e337c84cf7b9caf0891ff350d8c89` |
-| French | [`completed/languages/workbooks/v1.0/french/00_french_complete_master.pdf`](../../../completed/languages/workbooks/v1.0/french/00_french_complete_master.pdf) | `a1188f892af1cd2775f8fa38342ead69db8e7cc7` | `951f73421c348fba098f8acc1e973055e57a0c5c0e0f1dff90a897a509560506` |
-| Urdu | [`completed/languages/workbooks/v1.0/urdu/00_urdu_complete_master.pdf`](../../../completed/languages/workbooks/v1.0/urdu/00_urdu_complete_master.pdf) | `90f9765a028c85d296871c829d25d534b5c29101` | `3dcf44c6c4a6dfdf682565c5e2e6b2df18825ada7628561eb7461872891640d5` |
+- Arabic: [`completed/languages/workbooks/v1.0/arabic/00_arabic_complete_master.pdf`](../../../completed/languages/workbooks/v1.0/arabic/00_arabic_complete_master.pdf)
+- French: [`completed/languages/workbooks/v1.0/french/00_french_complete_master.pdf`](../../../completed/languages/workbooks/v1.0/french/00_french_complete_master.pdf)
+- Urdu: [`completed/languages/workbooks/v1.0/urdu/00_urdu_complete_master.pdf`](../../../completed/languages/workbooks/v1.0/urdu/00_urdu_complete_master.pdf)
 
 Release manifest: [`completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json`](../../../completed/languages/workbooks/v1.0/RELEASE_MANIFEST.json).
 
-The table above identifies the current candidate, but reviewers should use freshly generated `CANDIDATE_BINDINGS.json` values when filling a sign-off so stale hashes are never copied from documentation or an older review.
+**Do not copy candidate hashes from this document or from an older review.** Candidate-specific hashes intentionally are not hardcoded here. Generate or use the current [`native-review-ledgers/CANDIDATE_BINDINGS.json`](native-review-ledgers/CANDIDATE_BINDINGS.json) and copy the exact master-workbook Git blob SHA, release-manifest Git blob SHA, and sentence-decision SHA-256 from that file into the sign-off record.
+
+The current sentence-decision SHA-256 binds a deterministic `*_resolved_sentence_decisions.json` snapshot generated from the exact 1,000-row row-by-row sentence adjudications and the exact current learner-facing sentence companion CSV. The older `curation/language-workbooks/v1.0/*_sentence_row_decisions.json` files remain historical provenance; they are **not** the authority for a changed current candidate.
+
+The production build must fail closed if the resolved adjudications, learner-facing sentence CSV, generated decision snapshot, QA metadata, or manifest binding disagree.
 
 ## Structured reviewer worksheets
 
-For faster systematic review of the vocabulary and sentence banks, generate the current-candidate worksheets with:
+Generate current-candidate worksheets with:
 
 ```bash
 python scripts/build_lang_wb_native_review_ledgers.py
 ```
 
-Instructions are in [`native-review-ledgers/README.md`](native-review-ledgers/README.md). The generator creates one 2,000-item ledger per language: 1,000 vocabulary rows plus 1,000 sentence rows. It also creates `CANDIDATE_BINDINGS.json`, binding the worksheets to the current master-workbook, release-manifest, companion-CSV, and sentence-decision identifiers.
+Instructions are in [`native-review-ledgers/README.md`](native-review-ledgers/README.md). The generator creates one 2,000-item worksheet per language: 1,000 vocabulary rows plus 1,000 sentence rows. It also creates `CANDIDATE_BINDINGS.json`.
 
-All reviewer fields are intentionally blank. The generator performs no linguistic adjudication and cannot create a PASS. The worksheets cover the structured vocabulary/sentence items only; the reviewer must still inspect the complete rendered master PDF for Foundations, pronunciation guidance, headings, instructions, and every other learner-facing element.
+The generator performs no linguistic adjudication and cannot create a PASS. It first validates the current candidate decision snapshot against the exact row-by-row adjudications and learner-facing sentence bank. All reviewer fields remain blank.
 
-Validate a completed structured worksheet with:
+Validate a completed worksheet with:
 
 ```bash
 python scripts/validate_lang_wb_native_review_ledger.py <arabic|french|urdu>
 ```
 
-The validator rejects source drift and malformed review metadata; it returns success only when all 2,000 structured items are explicitly PASS. This is a structured-row preflight, not final certification.
+The validator rejects source/binding drift and malformed review metadata; it returns success only when all 2,000 structured items are explicitly PASS. This remains a structured-row preflight, not final certification.
 
-If the human reviewer records FAIL/HOLD items, project only those explicit decisions into a compact remediation queue with:
+If the reviewer records FAIL/HOLD items, project only those explicit decisions into a remediation queue with:
 
 ```bash
 python scripts/extract_lang_wb_native_review_actions.py <arabic|french|urdu>
@@ -69,50 +71,49 @@ At minimum, adjudicate the correctness dimensions in [`CORRECTNESS_STANDARD.md`]
 
 ## Review outcome rules
 
-- **PASS** means the reviewer completed a full-content review of the exact bound candidate and found no known learner-facing linguistic defects remaining.
-- **FAIL** means one or more defects remain. Record each defect precisely enough to reproduce it: language, workbook section, page or item/rank, current text, defect type, explanation, and proposed correction where possible.
-- **HOLD** means the reviewer cannot confidently adjudicate one or more items. Those items must remain explicit holds; uncertainty must not be converted into approval.
-- Sampling, automated language-model review, deterministic checks, or previous editorial passes are supporting evidence only and do not satisfy this final human gate.
+- **PASS**: full-content review of the exact bound candidate is complete and no known learner-facing linguistic defect or unresolved hold remains.
+- **FAIL**: one or more defects remain. Record language, section/page or rank, current text, defect type, explanation, and a proposed correction where possible.
+- **HOLD**: one or more items cannot be confidently adjudicated. Keep the uncertainty explicit; do not convert it to approval.
+- Sampling, automated/model review, deterministic checks, or previous editorial passes are supporting evidence only and do not satisfy this final human gate.
 
 ## Reviewer qualifications
 
-Record the reviewer's language competence and relevant editing/teaching/linguistic experience. Native-speaker status is preferred; near-native expert review is acceptable only when the reviewer explicitly states the basis for competence. A reviewer should not certify a language they cannot independently judge for grammar, idiom, register, and pedagogical naturalness.
+Record the reviewer's language competence and relevant editing, teaching, or linguistic experience. Native-speaker status is preferred. Near-native expert review is acceptable only when the reviewer explicitly states the basis for competence. A reviewer must be able to judge grammar, idiom, register, and pedagogical naturalness independently.
 
 ## Defect loop
 
-If a reviewer reports any defect:
+If a reviewer reports a defect:
 
 1. record it in a versioned correction record;
-2. update the source-locked decision/curation data rather than patching only the PDF;
-3. rebuild the affected workbook;
-4. rerun the automated and rendered-output gates;
-5. produce new artifact identifiers/hashes;
-6. invalidate any sign-off bound to the superseded artifact;
-7. repeat full human review as necessary for the changed candidate.
+2. update the current authoritative source/adjudication data rather than patching only a PDF;
+3. preserve older curation/review records as immutable history rather than rewriting prior approvals;
+4. rebuild the affected workbook;
+5. rerun automated, rendered-output, and candidate-decision-binding gates;
+6. generate new decision snapshots, manifest bindings, and artifact identifiers;
+7. invalidate any sign-off bound to a superseded candidate; and
+8. repeat human review as required for the changed candidate.
 
 ## Recording sign-offs
 
-Use [`FINAL_NATIVE_SIGNOFF_TEMPLATE.json`](FINAL_NATIVE_SIGNOFF_TEMPLATE.json) as the canonical schema and store completed records under [`native-signoffs/`](native-signoffs/). Sign-offs are immutable historical records: if a candidate changes or a later reviewer reaches a different outcome, add a new record rather than rewriting the old one.
+Use [`FINAL_NATIVE_SIGNOFF_TEMPLATE.json`](FINAL_NATIVE_SIGNOFF_TEMPLATE.json) as the canonical schema and store completed records under [`native-signoffs/`](native-signoffs/). Sign-offs are immutable historical records: if the candidate changes or a later reviewer reaches a different outcome, add a new record rather than rewriting the old one.
 
-Use current candidate values from `native-review-ledgers/CANDIDATE_BINDINGS.json`; the canonical template intentionally uses placeholders instead of embedding a candidate-specific hash that could later become stale.
+Use exact current values from `native-review-ledgers/CANDIDATE_BINDINGS.json`. The template intentionally uses placeholders so candidate-specific hashes cannot become stale in the template.
 
-`review_completed_utc` must be the real timezone-aware completion time. Reviews dated before the current candidate existed, materially future-dated timestamps, and ambiguous ties for the latest current-candidate review are rejected fail-closed.
+`review_completed_utc` must be the real timezone-aware completion time. Reviews dated before the candidate existed, materially future-dated timestamps, and ambiguous ties for the latest current-candidate review are rejected fail-closed.
 
-The latest **unambiguous** review bound to the current candidate controls. A newer FAIL or HOLD therefore overrides an older PASS for the same candidate. A newer record bound to a superseded/stale candidate does not override a current-candidate review.
+The latest **unambiguous** structurally valid review bound to the current candidate controls. A newer FAIL or HOLD therefore overrides an older PASS for that same candidate. A record bound to a superseded candidate does not control the current candidate.
 
-## Sign-off submission validation versus final promotion
+## Sign-off validation versus final promotion
 
-Each newly submitted human record is validated independently with:
+Validate each newly submitted human record independently with:
 
 ```bash
 python scripts/validate_lang_wb_native_signoff.py path/to/signoff.json
 ```
 
-That per-record validator confirms the current-candidate binding, timestamp, reviewer qualification fields, outcome rules, scope-field shape, and PASS/FAIL/HOLD requirements. A valid Arabic record can therefore be accepted while French and Urdu are still pending.
+GitHub Actions also checks sign-off submissions through [`.github/workflows/language-workbook-final-human-promotion.yml`](../../../.github/workflows/language-workbook-final-human-promotion.yml).
 
-GitHub Actions runs this per-record check on sign-off submissions via [`.github/workflows/language-workbook-final-human-promotion.yml`](../../../.github/workflows/language-workbook-final-human-promotion.yml). That workflow also evaluates the overall promotion state, but an expected partial-review HOLD does **not** turn a valid single-language submission red.
-
-Candidate/master/manifest changes are evaluated separately by [`.github/workflows/language-workbook-signoff-binding-status.yml`](../../../.github/workflows/language-workbook-signoff-binding-status.yml), where an expected human-review HOLD is likewise reported without treating an otherwise valid production candidate as a failed build.
+Candidate/master/manifest binding status is evaluated separately by [`.github/workflows/language-workbook-signoff-binding-status.yml`](../../../.github/workflows/language-workbook-signoff-binding-status.yml). A binding mismatch is a real hold and must not be bypassed merely because older automated or human evidence passed.
 
 The final all-language gate remains:
 
@@ -120,9 +121,9 @@ The final all-language gate remains:
 python scripts/workbook_final_human_promotion_gate.py
 ```
 
-It independently recomputes current master-workbook Git blob hashes, reads current sentence-decision hashes from the release manifest, verifies release-manifest binding, checks reviewer qualifications and PASS scope attestations, enforces timestamp precedence, requires no PASS defects/holds, and selects the latest unambiguous current-candidate review for each language.
+It recomputes current master-workbook Git blob hashes, reads the current candidate decision hashes from the release manifest, verifies manifest binding, checks reviewer qualification/scope/outcome/timestamps, and selects the latest unambiguous current-candidate review for each language.
 
-The command exits non-zero until Arabic, French, and Urdu all have valid latest PASS records. Its logic is exercised by a CI-only synthetic self-test in [`.github/workflows/language-workbook-final-human-promotion-selftest.yml`](../../../.github/workflows/language-workbook-final-human-promotion-selftest.yml); synthetic fixtures exist only inside the runner workspace and are never human certification records.
+The command exits non-zero until Arabic, French, and Urdu all have valid latest PASS records. Synthetic CI fixtures are test evidence only and never constitute human certification.
 
 ## Exact-commit release snapshot after human PASS
 
@@ -135,21 +136,20 @@ python scripts/build_lang_wb_final_release_snapshot.py \
 
 The equivalent manual workflow is [`.github/workflows/language-workbook-final-release-snapshot.yml`](../../../.github/workflows/language-workbook-final-release-snapshot.yml).
 
-This final step reruns the established production-candidate release audit and human-promotion gate, verifies that source-locked integrity and rendered-output visual evidence still apply, requires clean tracked release/sign-off inputs, and records the exact repository commit together with the release-tree, master-workbook, manifest, evidence, and sign-off hashes.
+This step reruns production-candidate and human-promotion gates and records the exact repository commit together with release-tree, master-workbook, manifest, evidence, decision, and sign-off bindings.
 
-Because the repository's moving `main` branch is currently unprotected, the release must be identified by the **exact commit recorded in the successful snapshot**. A successful snapshot is not a claim that later `main` commits inherit release eligibility. Learner-facing PDF/CSV/manifest or source-locked curation drift fail-closes the snapshot; documentation-only drift does not falsely invalidate learner-facing evidence.
-
-The snapshot logic has a dedicated synthetic CI self-test at [`.github/workflows/language-workbook-final-release-snapshot-selftest.yml`](../../../.github/workflows/language-workbook-final-release-snapshot-selftest.yml). Live workflow run `33317311123` passed the success path and fail-closed tests for learner CSV drift and a missing language PASS. These synthetic fixtures are ephemeral test data only and do not satisfy any human-review requirement.
+A successful snapshot applies only to the exact recorded commit. Later commits do not inherit release eligibility automatically.
 
 ## Promotion rule
 
 LANG-WB v1.0 may be promoted beyond `production_candidate` only when:
 
-- Arabic has a completed PASS sign-off;
-- French has a completed PASS sign-off;
-- Urdu has a completed PASS sign-off;
-- all three sign-offs bind to the current candidate artifacts/decision hashes;
+- Arabic, French, and Urdu each have a completed latest PASS sign-off;
+- all three sign-offs bind to the exact current master, current candidate sentence-decision snapshot, and current release manifest;
 - no known learner-facing defect or unresolved hold remains;
+- the current candidate decision snapshots validate against all 3,000 resolved row-by-row adjudications and learner-facing sentence rows;
 - `python scripts/workbook_final_human_promotion_gate.py` returns PASS;
 - post-sign-off release/integrity checks still pass; and
-- `python scripts/build_lang_wb_final_release_snapshot.py` succeeds, binding the final release evidence to the exact commit being released.
+- `python scripts/build_lang_wb_final_release_snapshot.py` succeeds for the exact commit being released.
+
+Until then, the release remains `production_candidate`.

@@ -1,6 +1,6 @@
 {
   "release": "v1.0",
-  "generated_utc": "2026-08-29T19:40:10.435816+00:00",
+  "generated_utc": "2026-09-14T21:21:00.341316+00:00",
   "status": "production_candidate",
   "languages": [
     "arabic",
@@ -8,57 +8,95 @@
     "urdu"
   ],
   "qa_path": "audit/language-workbooks/v1.0",
-  "source_policy": "All final sentence rows retain explicit source provenance. Arabic and French retain Tatoeba/CC-BY attribution; Urdu v1.0 is a UALIS Publishing controlled-original corpus. Approved editorial adaptations remain marked without changing source ownership.",
-  "build_basis": "source-locked final-integrity v1.0 row-decision ledgers",
-  "sentence_curation": {
-    "total_rows": 3000,
-    "unresolved_rows": 0,
-    "languages": {
-      "arabic": {
-        "rows": 1000,
-        "status_counts": {
-          "CORRECT_APPROVED": 65,
-          "KEEP": 935
-        },
-        "decision_sha256": "3bf795fdf6c8c53536f8f2d3b6cfc9351d0e337c84cf7b9caf0891ff350d8c89",
-        "source_zip_sha256": "b72f70d3b724c3060da55f74ea1753da249d8eb38a6dbdea3dcc28798d077914",
-        "provenance_mode": "external_tatoeba_cc_by_2_0_france",
-        "provenance_rows": 1000,
-        "licensed_external_attribution_rows": 1000,
-        "ualis_controlled_original_rows": 0
-      },
-      "french": {
-        "rows": 1000,
-        "status_counts": {
-          "CORRECT_APPROVED": 10,
-          "KEEP": 990
-        },
-        "decision_sha256": "951f73421c348fba098f8acc1e973055e57a0c5c0e0f1dff90a897a509560506",
-        "source_zip_sha256": "9e35994767f7307dc1fa9d5efcc36681f3756a1bdaaa02c1381b3eb11461261e",
-        "provenance_mode": "external_tatoeba_cc_by_2_0_france",
-        "provenance_rows": 1000,
-        "licensed_external_attribution_rows": 1000,
-        "ualis_controlled_original_rows": 0
-      },
-      "urdu": {
-        "rows": 1000,
-        "status_counts": {
-          "CORRECT_APPROVED": 5,
-          "KEEP": 995
-        },
-        "decision_sha256": "3dcf44c6c4a6dfdf682565c5e2e6b2df18825ada7628561eb7461872891640d5",
-        "source_zip_sha256": "d55d3b4f95a6957093d7b46ddb244fd3a6530367dfc9fefd9baced598c9234a5",
-        "provenance_mode": "ualis_controlled_original",
-        "provenance_rows": 1000,
-        "licensed_external_attribution_rows": 0,
-        "ualis_controlled_original_rows": 1000
-      }
-    }
-  },
   "pronunciation_foundations": {
     "status": "PASS",
     "guide_sha256": "abe0a42afc92073505c8ef6f847ca3d7fe5657e86ea58a7d53c5454dde0f1035",
     "scope": "beginner pronunciation foundations",
     "references_rendered": true
+  },
+  "source_policy": "All final sentence rows retain explicit source provenance. Arabic and French retain Tatoeba/CC-BY attribution; Urdu v1.0 is a UALIS Publishing controlled-original corpus. Approved row-by-row repairs remain represented in the current candidate decision snapshots.",
+  "corpus_quality": "v2_balanced_external_ar_fr_controlled_original_ur",
+  "build_basis": "candidate-specific resolved row-by-row sentence adjudication snapshots",
+  "sentence_curation": {
+    "binding_semantics": "Current-candidate decision SHA-256 values bind deterministic resolved-adjudication snapshots. Older curation JSON files are retained as historical provenance only.",
+    "total_rows": 3000,
+    "unresolved_rows": 0,
+    "languages": {
+      "arabic": {
+        "rows": 1000,
+        "unresolved_rows": 0,
+        "status_counts": {
+          "PASS": 630,
+          "REPAIR": 370
+        },
+        "decision_path": "audit/language-workbooks/v1.0/native-review-ledgers/arabic_resolved_sentence_decisions.json",
+        "decision_schema": "lang-wb-resolved-sentence-decisions-v1",
+        "decision_sha256": "f98afc2081be748f41fd15ec49ee2b86811b5df4319e15f0db40d3eeec65d2c5",
+        "post_adjudication_stage_path": "audit/language-workbooks/v1.0/staging_v3/arabic_sentences.csv",
+        "post_adjudication_stage_sha256": "8ddcd75ddf20aeebd5062dcd0a3fc3b888a9f6f26f708753015e7f095c88ad72",
+        "post_adjudication_stage_git_blob_sha": "8884e10d6182d7c9d6b0ce8fb53258605ecc9066",
+        "sentence_csv_sha256": "d24291b35fcb3162058366a9edcca12fc7ed93022e965148fd10379b88fcb496",
+        "sentence_csv_git_blob_sha": "97dae1006f9a505181f30d3648a53c77871c6683",
+        "provenance_mode": "external_tatoeba_cc_by_2_0_france",
+        "provenance_rows": 1000,
+        "licensed_external_attribution_rows": 1000,
+        "ualis_controlled_original_rows": 0,
+        "historical_curation": {
+          "path": "curation/language-workbooks/v1.0/arabic_sentence_row_decisions.json",
+          "sha256": "ef3a28cbf30160984550f9cdf90fbd1d9979ff387939de2aa17b59b09ced8167",
+          "binding_role": "historical_provenance_only_not_current_candidate_authority"
+        }
+      },
+      "french": {
+        "rows": 1000,
+        "unresolved_rows": 0,
+        "status_counts": {
+          "PASS": 815,
+          "REPAIR": 185
+        },
+        "decision_path": "audit/language-workbooks/v1.0/native-review-ledgers/french_resolved_sentence_decisions.json",
+        "decision_schema": "lang-wb-resolved-sentence-decisions-v1",
+        "decision_sha256": "657ae6bfa3bd0c9efefab68be0d56011e227180ff38649440e7b88e741f1f3a0",
+        "post_adjudication_stage_path": "audit/language-workbooks/v1.0/staging_v3/french_sentences.csv",
+        "post_adjudication_stage_sha256": "aaca0b34bdbe0bf1b1fee5b3d4a9bc1c088623f6fb4b1403befe1e26e7023c42",
+        "post_adjudication_stage_git_blob_sha": "e01fe9349129d61f97430121c5ca99d93d8b5c46",
+        "sentence_csv_sha256": "7beea76eb6341fb2330493d372e2f4fe180d7b48e0fbc387ee2adde87877f4fd",
+        "sentence_csv_git_blob_sha": "98c3db709b82b865e222d064cd85f4a5d6f36dab",
+        "provenance_mode": "external_tatoeba_cc_by_2_0_france",
+        "provenance_rows": 1000,
+        "licensed_external_attribution_rows": 1000,
+        "ualis_controlled_original_rows": 0,
+        "historical_curation": {
+          "path": "curation/language-workbooks/v1.0/french_sentence_row_decisions.json",
+          "sha256": "001c4eb0d41e77358d87a77789536e58546b513ee6d836323b78712fc147790c",
+          "binding_role": "historical_provenance_only_not_current_candidate_authority"
+        }
+      },
+      "urdu": {
+        "rows": 1000,
+        "unresolved_rows": 0,
+        "status_counts": {
+          "PASS": 994,
+          "REPAIR": 6
+        },
+        "decision_path": "audit/language-workbooks/v1.0/native-review-ledgers/urdu_resolved_sentence_decisions.json",
+        "decision_schema": "lang-wb-resolved-sentence-decisions-v1",
+        "decision_sha256": "4bdba360ac58299413a12fd200bdc73934cd303828f594065fa6e8e103aee4a6",
+        "post_adjudication_stage_path": "audit/language-workbooks/v1.0/staging_v3/urdu_sentences.csv",
+        "post_adjudication_stage_sha256": "1a1be318809c84d0a8ed71fcd3fca3644ef71feeb29e9c2bd08eeebfc38a0514",
+        "post_adjudication_stage_git_blob_sha": "28f3b5e9db6a7c3959081a326451829fdf74be48",
+        "sentence_csv_sha256": "7e82a787c44e59b0b06b1d180091e46ac05b8433c2adaef5cd13b3bed4c2ae46",
+        "sentence_csv_git_blob_sha": "c4b6080831c9d731aea9015d086914bcd6faa18d",
+        "provenance_mode": "ualis_controlled_original",
+        "provenance_rows": 1000,
+        "licensed_external_attribution_rows": 0,
+        "ualis_controlled_original_rows": 1000,
+        "historical_curation": {
+          "path": "curation/language-workbooks/v1.0/urdu_sentence_row_decisions.json",
+          "sha256": "2bfb23f6478bf7c6caf6af5fdc2ee4a71a43ec1ee3ccfe3839c3bd89fe174920",
+          "binding_role": "historical_provenance_only_not_current_candidate_authority"
+        }
+      }
+    }
   }
 }
