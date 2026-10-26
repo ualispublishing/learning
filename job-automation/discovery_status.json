@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "started_at": "2026-10-26T10:05:05+00:00",
-  "completed_at": "2026-10-26T10:05:28+00:00",
+  "started_at": "2026-10-26T16:47:02+00:00",
+  "completed_at": "2026-10-26T16:48:02+00:00",
   "source_count": 45,
-  "successful_sources": 44,
-  "failed_sources": 1,
+  "successful_sources": 43,
+  "failed_sources": 2,
   "job_count": 54,
   "new_job_count": 0,
   "sources": [
@@ -91,7 +91,7 @@
       "source": "Robinhood",
       "slug": "robinhood",
       "status": "ok",
-      "jobs": 1
+      "jobs": 0
     },
     {
       "provider": "greenhouse",
@@ -160,8 +160,9 @@
       "provider": "lever",
       "source": "Caseware",
       "slug": "caseware",
-      "status": "ok",
-      "jobs": 0
+      "status": "error",
+      "jobs": 0,
+      "error": "TimeoutError: The read operation timed out"
     },
     {
       "provider": "lever",
@@ -231,7 +232,7 @@
       "source": "1Password",
       "slug": "1password",
       "status": "ok",
-      "jobs": 12
+      "jobs": 11
     },
     {
       "provider": "ashby",
@@ -326,6 +327,6 @@
     }
   ],
   "candidate_mode": "graduated_2026_new_grad_junior",
-  "student_only_jobs_excluded": 27,
+  "student_only_jobs_excluded": 25,
   "non_canada_location_jobs_excluded": 0
 }
