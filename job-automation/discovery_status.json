@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "started_at": "2026-11-22T13:19:02+00:00",
-  "completed_at": "2026-11-22T13:19:23+00:00",
+  "started_at": "2026-11-22T22:27:39+00:00",
+  "completed_at": "2026-11-22T22:28:11+00:00",
   "source_count": 45,
-  "successful_sources": 44,
-  "failed_sources": 1,
-  "job_count": 58,
+  "successful_sources": 43,
+  "failed_sources": 2,
+  "job_count": 56,
   "new_job_count": 0,
   "sources": [
     {
@@ -153,8 +153,9 @@
       "provider": "lever",
       "source": "ShyftLabs",
       "slug": "shyftlabs",
-      "status": "ok",
-      "jobs": 3
+      "status": "error",
+      "jobs": 0,
+      "error": "HTTPError: HTTP Error 502: Bad Gateway"
     },
     {
       "provider": "lever",
@@ -326,6 +327,6 @@
     }
   ],
   "candidate_mode": "graduated_2026_new_grad_junior",
-  "student_only_jobs_excluded": 13,
+  "student_only_jobs_excluded": 12,
   "non_canada_location_jobs_excluded": 0
 }
